@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:27+0000\n"
 "Last-Translator: Gregers K-Hansen <gregers86@me.com>, 2021\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/widelands/widelands/language/nb/)\n"
@@ -32,11 +32,11 @@ msgid "15 minutes"
 msgstr "15 minutter"
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:101
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:102
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:212
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:213
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
 msgid "Rules"
 msgstr "Regler"

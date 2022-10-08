@@ -306,6 +306,9 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			return get_parent()->handle_key(true, code);
 
 		case SDLK_RETURN:
+			if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+				return false;
+			}
 			// Save history if active and text is not empty
 			if (history_active_) {
 				if (!m_->text.empty()) {

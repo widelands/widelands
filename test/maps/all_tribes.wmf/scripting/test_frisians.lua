@@ -90,7 +90,11 @@ local function init_shipconstruction(player, sf, total_previous_buildings)
    assert_not_nil(flag)
    connected_road("busy", player, flag, "bl,bl,bl,bl")
 
-   return count_buildings(player, total_previous_buildings, 4)
+   -- Diking
+   building = place_safe_building(player, "frisians_dikers_house", sf, 20, 1)
+   connected_road("normal", player, building.flag, "l,l,l")
+
+   return count_buildings(player, total_previous_buildings, 5)
 end
 
 local function init_buildingmaterials(player, sf, total_previous_buildings)
@@ -412,7 +416,7 @@ end
 -- Run the tests
 run(function()
    local playernumber = 4
-   local expected_number_of_buildings = 122
+   local expected_number_of_buildings = 123
 
    print("Placing buildings for Player 4")
    init_frisians(game.players[playernumber])

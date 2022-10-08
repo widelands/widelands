@@ -378,6 +378,7 @@ public:
 		kSeafaringStats,
 		kMessages,
 		kObjectives,
+		kDiplomacy,
 		kMinimap,
 		kEncyclopedia,
 		kShipWindow,

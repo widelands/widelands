@@ -14,6 +14,7 @@ push_textdomain("mp_scenario_smugglers.wmf")
 
 game = wl.Game()
 map = game.map
+game.allow_diplomacy = false
 
 points_to_win = 2000
 

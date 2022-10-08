@@ -1,6 +1,6 @@
 # Widelands C++ Source Code
 
-Here's a brief ovewview of what each directory contains:
+Here's a brief overview of what each directory contains:
 
 | Directory | Contents |
 | --- | --- |
@@ -14,7 +14,7 @@ Here's a brief ovewview of what each directory contains:
 | io | Filesystem functions and file formats |
 | logic | The main Game logic (map, player, tribes, world, ...) |
 | map_io | Map saveloading |
-| network | Networking bakcned for multiplayer games |
+| network | Networking backend for multiplayer games |
 | notifications | Notification system for decoupling code (Observer pattern) |
 | random | Random number generator |
 | scripting | Lua scripting interface |

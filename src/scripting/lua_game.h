@@ -67,6 +67,7 @@ public:
 	int get_allowed_buildings(lua_State* L);
 	int get_objectives(lua_State* L);
 	int get_defeated(lua_State* L);
+	int get_resigned(lua_State* L);
 	int get_messages(lua_State* L);
 	int get_inbox(lua_State* L);
 	int get_color(lua_State* L);

@@ -23,6 +23,7 @@
 #include <csignal>
 #endif
 #include <cstdlib>
+#include <cstring>
 #include <iostream>
 #include <memory>
 #include <regex>
@@ -354,7 +355,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
      faking_middle_mouse_button_(false),
      mouse_position_(Vector2i::zero()),
      mouse_locked_(false),
-     mouse_compensate_warp_(Vector2i::zero()),
      handle_key_enabled_(true),
      should_die_(false),
 #ifdef _WIN32
@@ -409,6 +409,30 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		// too frequent failures
 		log_err("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
 		exit(2);
+	}
+
+	// Try to detect configurations with inverted horizontal scroll
+	const char* sdl_video = SDL_GetCurrentVideoDriver();
+	assert(sdl_video != nullptr);
+	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
+	SDL_GetVersion(&sdl_ver);
+	// Keep cursor in window while dragging
+	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
+	bool sdl_scroll_x_bug = false;
+
+	// SDL version < 2.0 is not supported, >= 2.1 will have the changes
+	if (sdl_ver.major == 2 && sdl_ver.minor == 0) {
+		if (std::strcmp(sdl_video, "x11") == 0) {
+			sdl_scroll_x_bug = sdl_ver.patch < 18;
+		} else if (std::strcmp(sdl_video, "wayland") == 0) {
+			sdl_scroll_x_bug = sdl_ver.patch < 20;
+		}
+	}
+	if (sdl_scroll_x_bug) {
+		log_info("Inverting horizontal mousewheel scrolling for SDL %d.%d.%d with %s\n",
+		         sdl_ver.major, sdl_ver.minor, sdl_ver.patch, sdl_video);
+		set_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected, true);
+		update_mousewheel_settings();
 	}
 
 	g_gr = new Graphic();
@@ -829,7 +853,7 @@ void WLApplication::run() {
  *
  * \return true if an event was returned inside ev, false otherwise
  */
-bool WLApplication::poll_event(SDL_Event& ev) {
+bool WLApplication::poll_event(SDL_Event& ev) const {
 	if (SDL_PollEvent(&ev) == 0) {
 		return false;
 	}
@@ -839,13 +863,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	// settings are invisible to the rest of the code
 	switch (ev.type) {
 	case SDL_MOUSEMOTION:
-		ev.motion.xrel += mouse_compensate_warp_.x;
-		ev.motion.yrel += mouse_compensate_warp_.y;
-		mouse_compensate_warp_ = Vector2i::zero();
-
 		if (mouse_locked_) {
-			warp_mouse(mouse_position_);
-
 			ev.motion.x = mouse_position_.x;
 			ev.motion.y = mouse_position_.y;
 		}
@@ -1050,23 +1068,23 @@ void WLApplication::handle_mousebutton(SDL_Event& ev, InputCallback const* cb) {
 	}
 }
 
-/// Instantaneously move the mouse cursor without creating a motion event.
-///
-/// SDL_WarpMouseInWindow() *will* create a mousemotion event, which we do not want.
-/// As a workaround, we store the delta in mouse_compensate_warp_ and use that to
-/// eliminate the motion event in poll_event()
+/// Instantaneously move the mouse cursor.
 ///
 /// \param position The new mouse position
 void WLApplication::warp_mouse(const Vector2i position) {
 	mouse_position_ = position;
-
 	Vector2i cur_position = Vector2i::zero();
 	SDL_GetMouseState(&cur_position.x, &cur_position.y);
+
 	if (cur_position != position) {
-		mouse_compensate_warp_ += cur_position - position;
 		SDL_Window* sdl_window = g_gr->get_sdlwindow();
 		if (sdl_window != nullptr) {
-			SDL_WarpMouseInWindow(sdl_window, position.x, position.y);
+			if (!mouse_locked_) {
+				SDL_PumpEvents();
+				SDL_FlushEvent(SDL_MOUSEMOTION);
+				SDL_WarpMouseInWindow(sdl_window, position.x, position.y);
+				return;
+			}
 		}
 	}
 }
@@ -1099,9 +1117,15 @@ void WLApplication::set_input_grab(bool grab) {
 
 void WLApplication::set_mouse_lock(const bool locked) {
 	mouse_locked_ = locked;
+	if (mouse_locked_) {
+		SDL_SetRelativeMouseMode(SDL_TRUE);
+	} else {
+		SDL_SetRelativeMouseMode(SDL_FALSE);
+		warp_mouse(mouse_position_);  // Restore to where we started dragging
+	}
 
-	// If we use the SDL cursor then it needs to be hidden when locked
-	// otherwise it'll jerk around which looks ugly
+	// SDL automatically hides the cursor when in relative mode. This will hide
+	// the selection marker as well.
 	if (g_mouse_cursor->is_using_sdl()) {
 		g_mouse_cursor->set_visible(!mouse_locked_);
 	}
@@ -1130,6 +1154,8 @@ bool WLApplication::init_settings() {
 	init_shortcuts();
 
 	// Mousewheel options
+	// we store this in the config for reference, but need to reset it for the detection to work
+	set_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected, false);
 	update_mousewheel_settings();
 
 	int64_t last_start = get_config_int("last_start", 0);
@@ -1603,9 +1629,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 	if (ask_for_bug_report) {
 		log_err("  Please report this problem to help us improve Widelands.\n"
 		        "  You will find related messages in the standard output (stdout.txt on Windows).\n"
-		        "  You are using build %s (%s).\n"
+		        "  You are using version %s.\n"
 		        "  Please add this information to your report.\n",
-		        build_id().c_str(), build_type().c_str());
+		        build_ver_details().c_str());
 	}
 	log_err("  If desired, Widelands attempts to create an emergency savegame.\n"
 	        "  It is often – though not always – possible to load it and continue playing.\n"
@@ -1619,9 +1645,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		   format(
 		      _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
 		        "this problem to help us improve Widelands. You will find related messages in the "
-		        "standard output (stdout.txt on Windows). You are using build %2$s "
-		        "(%3$s).\nPlease add this information to your report."),
-		      error, build_id(), build_type()),
+		        "standard output (stdout.txt on Windows). You are using version %2$s.\n"
+		        "Please add this information to your report."),
+		      error, build_ver_details()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 		return;
@@ -1635,12 +1661,12 @@ void WLApplication::emergency_save(UI::Panel* panel,
             format(
 		         _("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
 		           "this problem to help us improve Widelands. You will find related messages in the "
-		           "standard output (stdout.txt on Windows). You are using build %2$s "
-		           "(%3$s).\n\nPlease add this information to your report.\n\nWould you like "
+		           "standard output (stdout.txt on Windows). You are using version %2$s.\n\n"
+		           "Please add this information to your report.\n\nWould you like "
 		           "Widelands "
 		           "to attempt to create an emergency savegame? It is often – though not always – "
 		           "possible to load it and continue playing."),
-		         error, build_id(), build_type()) :
+		         error, build_ver_details()) :
             format(
 		         _("The game ended unexpectedly for the following reason:\n\n%s\n\nWould you like "
 		           "Widelands to attempt to create an emergency savegame? It is often – though not "

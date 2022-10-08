@@ -55,7 +55,7 @@
 namespace Widelands {
 
 // Overall package version
-constexpr uint16_t kCurrentPacketVersion = 8;
+constexpr uint16_t kCurrentPacketVersion = 9;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
@@ -207,6 +207,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							         building.get_position().y);
 						}
 					}
+
+					// TODO(Nordfriese): Savegame compatibility v1.0
+					building.is_destruction_blocked_ = (packet_version >= 9) && (fr.unsigned_8() != 0);
 
 					//  Set economy now, some stuff below will count on this.
 					building.set_economy(building.flag_->get_economy(wwWARE), wwWARE);
@@ -1030,6 +1033,7 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 				}
 				fw.unsigned_8(static_cast<uint8_t>(is_stopped));
 			}
+			fw.unsigned_8(static_cast<uint8_t>(building->is_destruction_blocked_));
 
 			Game& game = dynamic_cast<Game&>(egbase);
 

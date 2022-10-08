@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-31 02:58+0000\n"
+"POT-Creation-Date: 2022-05-16 03:13+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: ks k, 2017,2020-2021\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -448,12 +448,12 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:256
+#: ../../src/wlapplication_messages.cc:254
 #, c-format
-msgid "This is Widelands Version %s"
-msgstr "이것은 와이드랜드 버전 %s 입니다"
+msgid "This is Widelands version %s"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:315
+#: ../../src/wlapplication_messages.cc:312
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

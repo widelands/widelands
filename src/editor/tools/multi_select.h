@@ -19,10 +19,9 @@
 #ifndef WL_EDITOR_TOOLS_MULTI_SELECT_H
 #define WL_EDITOR_TOOLS_MULTI_SELECT_H
 
-#include <cassert>
 #include <cstdint>
 #include <cstdlib>
-#include <vector>
+#include <set>
 
 /**
  * This class allows for selection of more than just one
@@ -31,48 +30,55 @@
  * This is a helper class, no Editor Tool (might be usable in game too)
  */
 struct MultiSelect {
-	MultiSelect() : nr_enabled_(0) {
+	MultiSelect() {
 	}
 	~MultiSelect() {
 	}
 
 	void enable(int32_t n, bool t) {
-		if (static_cast<int32_t>(enabled_.size()) < n + 1)
-			enabled_.resize(n + 1, false);
-
-		if (enabled_[n] == t)
-			return;
-		enabled_[n] = t;
-		if (t)
-			++nr_enabled_;
-		else
-			--nr_enabled_;
-		assert(0 <= nr_enabled_);
-	}
-	bool is_enabled(int32_t n) const {
-		if (static_cast<int32_t>(enabled_.size()) < n + 1)
-			return false;
-		return enabled_[n];
-	}
-	int32_t get_nr_enabled() const {
-		return nr_enabled_;
-	}
-	int32_t get_random_enabled() const {
-		const int32_t rand_value =
-		   static_cast<int32_t>(static_cast<double>(get_nr_enabled()) * rand() / (RAND_MAX + 1.0));
-		int32_t i = 0;
-		int32_t j = rand_value + 1;
-		while (j) {
-			if (is_enabled(i))
-				--j;
-			++i;
+		if (t) {
+			enabled_.insert(n);
+		} else {
+			enabled_.erase(n);
 		}
-		return i - 1;
+	}
+
+	bool is_enabled(int32_t n) const {
+		return enabled_.find(n) != enabled_.end();
+	}
+
+	int32_t get_nr_enabled() const {
+		return enabled_.size();
+	}
+
+	int32_t get_random_enabled() const {
+		int32_t rand_value =
+		   static_cast<int32_t>(static_cast<double>(get_nr_enabled()) * rand() / (RAND_MAX + 1.0));
+
+		for (int32_t item : enabled_) {
+			if (rand_value == 0) {
+				return item;
+			}
+			--rand_value;
+		}
+
+		return -1;
+	}
+
+	void disable_all() {
+		enabled_.clear();
+	}
+
+	int32_t count() const {
+		return enabled_.size();
+	}
+
+	const std::set<int32_t>& get_enabled() const {
+		return enabled_;
 	}
 
 private:
-	int32_t nr_enabled_;
-	std::vector<bool> enabled_;
+	std::set<int32_t> enabled_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_MULTI_SELECT_H

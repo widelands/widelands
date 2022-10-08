@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-31 02:58+0000\n"
+"POT-Creation-Date: 2022-05-16 03:13+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2016-2018\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
@@ -444,12 +444,12 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:256
+#: ../../src/wlapplication_messages.cc:254
 #, c-format
-msgid "This is Widelands Version %s"
+msgid "This is Widelands version %s"
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:315
+#: ../../src/wlapplication_messages.cc:312
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

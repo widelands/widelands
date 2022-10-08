@@ -111,7 +111,12 @@ struct MousewheelHandlerOptions {
 	void update_settings() {
 		current_keymod_ = get_mousewheel_keymod(keymod_id_);
 		if (get_mousewheel_option_bool(use_x_)) {
-			current_sign_x_ = default_sign_x_ * (get_mousewheel_option_bool(invert_x_) ? -1 : 1);
+			current_sign_x_ =
+			   default_sign_x_ * (get_mousewheel_option_bool(invert_x_) ? -1 : 1) *
+			   (get_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected) !=
+			          get_mousewheel_option_bool(MousewheelOptionID::kOverrideInvertedX) ?
+                -1 :
+                1);
 		} else {
 			current_sign_x_ = 0;
 		}
@@ -175,18 +180,23 @@ static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options =
    {MousewheelOptionID::kDisabled, MousewheelOption::create_bool("", false)},
    {MousewheelOptionID::kNoMod, MousewheelOption::create_mod("", KMOD_NONE)},
 
+   {MousewheelOptionID::kInvertedXDetected,  //
+    MousewheelOption::create_bool("last_autoinvert_x", false)},
+   {MousewheelOptionID::kOverrideInvertedX,  //
+    MousewheelOption::create_bool("override_inverted_x_detection", false)},
 };
 
 // Default signs
-constexpr int32_t kSignIncreaseRight = -1;
+constexpr int32_t kSignIncreaseRight = 1;
 constexpr int32_t kSignIncreaseUp = 1;
-constexpr int32_t kSignNextRight = -1;
+constexpr int32_t kSignNextRight = 1;
 constexpr int32_t kSignNextDown = -1;
-constexpr int32_t kSignScroll = -1;
+constexpr int32_t kSignScrollX = 1;
+constexpr int32_t kSignScrollY = -1;
 
 static const Sign2D kDefaultSignValue(kSignIncreaseRight, kSignIncreaseUp);
 static const Sign2D kDefaultSignMove(kSignNextRight, kSignNextDown);
-static const Sign2D kDefaultSignScroll(kSignScroll, kSignScroll);
+static const Sign2D kDefaultSignScroll(kSignScrollX, kSignScrollY);
 
 static std::map<MousewheelHandlerConfigID, MousewheelHandlerOptions> mousewheel_handlers = {
    {MousewheelHandlerConfigID::kChangeValue,

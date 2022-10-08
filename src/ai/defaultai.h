@@ -147,6 +147,7 @@ private:
 	static constexpr Duration kManagementUpdateInterval{10 * 60 * 1000};
 	static constexpr Duration kStatUpdateInterval{60 * 1000};
 	static constexpr Duration kFlagWarehouseUpdInterval{15 * 1000};
+	static constexpr Duration kDiplomacyInterval{30 * 1000};
 
 	// common for defaultai.cc and defaultai_seafaring.cc
 	static constexpr Duration kExpeditionMinDuration{60 * 60 * 1000};
@@ -186,7 +187,6 @@ private:
 	check_building_necessity(BuildingObserver& bo, PerfEvaluation purpose, const Time&);
 	BuildingNecessity check_warehouse_necessity(BuildingObserver&, const Time& gametime);
 	void sort_task_pool();
-	// void sort_by_priority(); NOCOM
 	void set_taskpool_task_time(const Time&, SchedulerTaskId);
 	const Time& get_taskpool_task_time(SchedulerTaskId);
 	std::chrono::high_resolution_clock::time_point time_point;
@@ -209,6 +209,7 @@ private:
 	void collect_nearflags(std::map<uint32_t, NearFlag>&, const Widelands::Flag&, const uint16_t);
 	// calculating distances from local warehouse to flags
 	void check_flag_distances(const Time&);
+	void diplomacy_actions(const Time&);
 	FlagWarehouseDistances flag_warehouse_distance;
 
 	bool check_economies();

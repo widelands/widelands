@@ -91,8 +91,16 @@ public:
 	            std::shared_ptr<AddOns::AddOnInfo>,
 	            AddOns::NetAddons::AdminAction);
 	void think() override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
+	void ok();
+
+	AddOnsCtrl& parent_;
+	RemoteInteractionWindow& riw_;
+	std::shared_ptr<AddOns::AddOnInfo> info_;
+	AddOns::NetAddons::AdminAction action_;
+
 	UI::Box main_box_, buttons_box_;
 	UI::Button ok_, cancel_;
 	UI::Listselect<std::string>* list_;

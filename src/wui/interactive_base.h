@@ -138,7 +138,7 @@ public:
 	void set_sel_freeze(const bool yes) {
 		sel_.freeze = yes;
 	}
-	void set_sel_radius(uint32_t);
+	virtual void set_sel_radius(uint32_t);
 
 	//  display flags
 	uint32_t get_display_flags() const;

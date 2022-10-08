@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# Кловн, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Кловн, 2022\n"
 "Language-Team: Ukrainian (http://www.transifex.com/widelands/widelands/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,11 +20,11 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:22
 msgid "Build two ranger’s huts"
-msgstr ""
+msgstr "Збудуйте дві хатини лісоруба"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "Збудуйте хітини лісоруба біля кожної лісопильні"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid ""
@@ -33,33 +34,33 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Розширюйтесь на північний схід і побудуйте кар’єр"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr "Розширюйтесь на північний схід до скель"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr ""
+msgstr "Будуйте військові будівлі (наприклад, сторожі або бар’єри), щоб розширити свою територію."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "Доберіться до скель на північний схід від вас і побудуйте там кар'єр."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Почніть будувати шахти на горі"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Збудуйте вугільні та залізні шахти"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Побудуйте вугільну і залізну шахту."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:43
 msgid ""
@@ -69,72 +70,72 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "Для цього розмістіть прапор на схилі гори на схід (але на гірській місцевості, а не на лузі). Натиснувши на новий прапор, можна відправити туди геологів. Оскільки прапор стоїть на горі, геологи будуть шукати руди; інакше вони шукали б воду. Потім побудуйте шахту для обох видів ресурсів, які вони знайдуть, вибравши відповідну шахту для будівництва:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "трохи вугілля"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
-msgstr ""
+msgstr "багато вугілля"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "троха заліза"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
-msgstr ""
+msgstr "багато заліза"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "трохи золота"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
-msgstr ""
+msgstr "багато золота"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "трохи граніту"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
-msgstr ""
+msgstr "багато граніту"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:52
 msgid "water"
-msgstr ""
+msgstr "вода"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:53
 msgid "nothing was found here"
-msgstr ""
+msgstr "тут нічого не знайшли"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:54
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr ""
+msgstr "Шахти можна будувати тільки на гірській місцевості. Відповідні місця для шахт відображаються у вигляді помаранчевих символів шахти."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Забезпечте своїх шахтарів їжею"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr ""
+msgstr "Побудуйте хатину мисливця, хатку єгеря та таверну"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "Щоб працювати, вашим шахтарам потрібна їжа."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr ""
+msgstr "Мисливець може полювати на тварин, а єгер запобігає їх вимирання. Потім м’ясо переробляється в таверні на обід для ваших шахтарів."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
@@ -144,11 +145,11 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
-msgstr ""
+msgstr "Спечіть хліб"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Побудуйте криницю, ферму та пекарню"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
@@ -157,29 +158,29 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Інші способи виробництва їжі – різні види їжі – це рибалки та ферми. Пшеницю на фермах потрібно обробляти водою в пекарні, перш ніж вона стане їстівною. Отримати воду можна, побудувавши колодязь. Для найкращої продуктивності побудуйте його на місці, де ваші геологи знайшли джерело води."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Удосконалюйте свої видобуті ресурси"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Побудувати плавильний завод"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr ""
+msgstr "Залізна руда, яку викопують ваші шахтарі, поки не придатна для використання – її потрібно спочатку переплавити в залізо."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Покращуйте будівлі та побудуйте мікро-пивоварню"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "Поліпшити шахту та таверну та побудувати мікро-пивоварню."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:87
 msgid ""

@@ -347,6 +347,7 @@ void AttackWindow::act_attack() {
 	if (building != nullptr) {
 		iplayer_.game().send_player_enemyflagaction(
 		   building->base_flag(), iplayer_.player_number(), soldiers(), get_allow_conquer());
+		iplayer_.map_view()->mouse_to_field(building->get_position(), MapView::Transition::Jump);
 	}
 	die();
 }

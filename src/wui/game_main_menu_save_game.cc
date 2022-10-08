@@ -143,6 +143,9 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	layout();
 
 	initialization_complete();
+
+	do_run();  // Modal main loop, blocks until the user closes the window.
+	die();
 }
 
 void GameMainMenuSaveGame::layout() {
@@ -204,6 +207,7 @@ void GameMainMenuSaveGame::ok() {
 		case Type::kLoad: {
 			if (load_or_save_.has_selection()) {
 				igbase().game().set_next_game_to_load(load_or_save_.entry_selected()->filename);
+				end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 				igbase().end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 			}
 		} break;

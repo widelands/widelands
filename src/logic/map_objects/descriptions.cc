@@ -397,9 +397,8 @@ TribeDescr* Descriptions::get_mutable_tribe_descr(DescriptionIndex index) const 
 void Descriptions::register_scenario_tribes(FileSystem* filesystem) {
 	// If the map is a scenario with custom tribe entites, load them.
 	if (filesystem->file_exists("scripting/tribes")) {
-		scenario_tribes_.reset(nullptr);
 		description_manager_->clear_scenario_descriptions();
-		if (filesystem->file_exists("scripting/tribes/init.lua")) {
+		if (scenario_tribes_ == nullptr && filesystem->file_exists("scripting/tribes/init.lua")) {
 			scenario_tribes_ = lua_->run_script("map:scripting/tribes/init.lua");
 		}
 		description_manager_->register_directory(
@@ -656,12 +655,17 @@ void Descriptions::set_old_world_name(const std::string& name) {
 	}
 }
 
+void Descriptions::finalize_loading() {
+	postload_immovable_relations();
+	scenario_tribes_.reset();
+}
+
 void Descriptions::add_immovable_relation(const std::string& a, const std::string& b) {
 	immovable_relations_.emplace_back(a, b);
 }
 void Descriptions::postload_immovable_relations() {
 	for (const auto& pair : immovable_relations_) {
-		get_mutable_immovable_descr(load_immovable(pair.second))->add_became_from(pair.first);
+		get_mutable_immovable_descr(load_immovable(pair.second))->add_became_from(*this, pair.first);
 	}
 	immovable_relations_.clear();
 }

@@ -245,16 +245,13 @@ bool is_parameter(const std::string& name) {
 /**
  * Print usage information
  */
-void show_usage(const std::string& build_id,
-                const std::string& build_type,
-                CmdLineVerbosity verbosity) {
+void show_usage(const std::string& build_ver_details, CmdLineVerbosity verbosity) {
 	i18n::Textdomain textdomain("widelands_console");
 
 	std::cout << std::string(kIndent + kTextWidth, '=')
 	          << std::endl
 	          /** TRANSLATORS: %s = version information */
-	          << format(_("This is Widelands Version %s"), format("%s(%s)", build_id, build_type))
-	          << std::endl;
+	          << format(_("This is Widelands version %s"), build_ver_details) << std::endl;
 
 	if (verbosity != CmdLineVerbosity::None) {
 		std::string indent_string = std::string(kIndent, ' ');

@@ -164,7 +164,7 @@ endif()
 
 # Search for the SDL2_mixer library
 find_library(SDL2_MIXER_LIBRARY
-  NAMES SDL2_mixer
+  NAMES SDL2_mixer SDL2_mixer-static
   HINTS
     ENV SDL2MIXERDIR
     ENV SDL2DIR

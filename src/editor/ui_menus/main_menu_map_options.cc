@@ -562,6 +562,14 @@ void MainMenuMapOptions::clicked_cancel() {
 	registry_.destroy();
 }
 
+bool MainMenuMapOptions::handle_key(bool down, SDL_Keysym code) {
+	if (down && code.sym == SDLK_RETURN) {
+		clicked_ok();
+		return true;
+	}
+	return UI::UniqueWindow::handle_key(down, code);
+}
+
 /*
  * Add a tag to the checkboxes
  */

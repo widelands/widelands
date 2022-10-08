@@ -10,7 +10,7 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2022
 # Tino Miegel <tino.miegel@gmail.com>, 2016
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2014
@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Tino Miegel <tino.miegel@gmail.com>, 2016\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,6 +38,16 @@ msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr "Nach der Landung auf einer mysteriösen Insel nahe Atlantis versuchen die verbleibenden Atlanter, eine neue Heimat zu gründen."
+
+#: ../../data/campaigns/atl02.wmf/elemental:8
+msgid "Struggling For a New Home Again"
+msgstr "Erneuter Kampf um eine neue Heimat"
+
+#: ../../data/campaigns/atl02.wmf/elemental:10
+msgid ""
+"After the quick escape from the drowning island, the Atlanteans around "
+"Jundlina are faced with new challenges."
+msgstr "Nach der schnellen Flucht von der versinkenden Insel müssen sich die Atlanter um Jundlina neuen Herausforderungen stellen."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -153,32 +163,32 @@ msgid ""
 msgstr "Als ihr Gott sein Vertrauen in die Atlanter verlor und ihre Insel in den Fluten versenkte, wurde der Kampf einer Frau um Gerechtigkeit und eine zweite Chance für ihr Volk zur Legende. Indem sie die verbleibenden Atlanter in eine neue Zukunft in einem neuen Teil der Welt führte, wurde Jundlina zum mächtigsten Menschen ihrer Zeit – doch zu einem hohen Preis: ihrer Menschlichkeit und ihrer Seele."
 
 #. TRANSLATORS: The name of a Frisian campaign
-#: ../../data/campaigns/campaigns.lua:107
+#: ../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
 msgstr "Von Wasser zu Eis"
 
 #. TRANSLATORS: A short description of a campaign
-#: ../../data/campaigns/campaigns.lua:110
+#: ../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
 msgstr "Führt die Friesen ein."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
-#: ../../data/campaigns/campaigns.lua:115
+#: ../../data/campaigns/campaigns.lua:116
 msgid "Sailor (Tricky)"
 msgstr "Seemann (Verzwickt)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
-#: ../../data/campaigns/campaigns.lua:117
+#: ../../data/campaigns/campaigns.lua:118
 msgid "Steersman (Very Hard)"
 msgstr "Steuermann (Sehr Schwer)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
-#: ../../data/campaigns/campaigns.lua:119
+#: ../../data/campaigns/campaigns.lua:120
 msgid "Captain (Unreasonable)"
 msgstr "Kapitän (Unzumutbar)"
 
 #. TRANSLATORS: A long description of a campaign
-#: ../../data/campaigns/campaigns.lua:124
+#: ../../data/campaigns/campaigns.lua:125
 msgid ""
 "Living off the ocean is a constant struggle, and even more so for the "
 "inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
@@ -284,7 +294,17 @@ msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr "Reebaud und sein Stamm leben glücklich im Norden. In der Zwischenzeit waren die Lande die sie zurückließen alles andere als friedlich, und ein alter Freund braucht dringend ihre Hilfe…"
+msgstr "Reebaud und sein Stamm leben glücklich im Norden. In der Zwischenzeit waren die Lande die sie zurückließen alles andere als friedlich, und ein alter Freund braucht dringend ihre Hilfe …"
+
+#: ../../data/campaigns/fri04.wmf/elemental:8
+msgid "Two Friends Reunited"
+msgstr "Wiedervereinigung zweier Freunde"
+
+#: ../../data/campaigns/fri04.wmf/elemental:10
+msgid ""
+"Claus and Henneke Lembeck have reached the North at last. But will they be "
+"able to convince Reebaud to send them aid?"
+msgstr "Claus und Hennecke Lembeck haben endlich den Norden erreicht. Aber werden sie in der Lage sein, Reebaud zu überzeugen ihnen zu helfen?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -463,7 +483,7 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr "In den Bergen gibt es ebene Flächen im Überfluss. Unglücklicherweise sind die meisten davon senkrecht – nutze den wenigen zur Verfügung stehenden Platz weise. Eine Festung am Beginn eines engen Bergpasses kann ein formidables Hindernis für eine gegenerische  Armee sein – nutze das Gelände zu deinem Vorteil. Fälle alle Bäume und expandiere wo immer du kannst – das ist der einzige Weg alle kostbaren Bauernhofplätze zu finden."
+msgstr "In den Bergen gibt es ebene Flächen im Überfluss. Unglücklicherweise sind die meisten davon senkrecht – nutze den wenigen zur Verfügung stehenden Platz weise. Eine Festung am Beginn eines engen Bergpasses kann ein formidables Hindernis für eine gegenerische Armee sein – nutze das Gelände zu deinem Vorteil. Fälle alle Bäume und expandiere wo immer du kannst – das ist der einzige Weg alle kostbaren Bauernhofplätze zu finden."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -481,7 +501,7 @@ msgstr "Escher_Gänse_Fische"
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
-msgstr "Identische Startbedingungen für 3 Spieler. "
+msgstr "Identische Startbedingungen für 3 Spieler."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
@@ -769,7 +789,7 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr "Nur ein kleiner Hügel im Zentrum der Karte verbindet die vier konkurrierenden Stämme miteinander. Führe deine Armee direkt dorthin und baue eine gigantische Festung zum Zeichen deiner Überlegenheit."
+msgstr "Nur ein kleiner Hügel im Zentrum der Karte verbindet die vier konkurrierenden Stämme miteinander. Führe deine Armee direkt dorthin und baue eine gigantische Festung zum Zeichen deiner Überlegenheit!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
@@ -836,7 +856,7 @@ msgid ""
 "Four tribes struggle with their nearest neighbor to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
-msgstr "Vier Stämme  kämpfen jeweils mit ihrem nächstgelegenen Nachbarn, um als erstes den Goldberg, der unglaublichen Reichtum verspricht, zu erreichen. Aber können die zwei verbliebenen schließlich die Rohstoffe klug genug aufteilen, um nicht auch noch übereinander herzufallen?"
+msgstr "Vier Stämme kämpfen jeweils mit ihrem nächstgelegenen Nachbarn, um als erstes den Goldberg, der unglaublichen Reichtum verspricht, zu erreichen. Aber können die zwei verbliebenen schließlich die Rohstoffe klug genug aufteilen, um nicht auch noch übereinander herzufallen?"
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"

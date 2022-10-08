@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-31 02:58+0000\n"
+"POT-Creation-Date: 2022-05-16 03:13+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Boese Kaiser, 2022\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid "Usage:"
@@ -39,7 +39,7 @@ msgstr "widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "widelands <save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "widelands <save.wgf>/<replay.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:56
@@ -69,7 +69,7 @@ msgstr "Utilisez le Dossier spécifié pour les fichiers locaux de Widelands."
 
 #: ../../src/wlapplication_messages.cc:66
 msgid "Use the specified locale."
-msgstr ""
+msgstr "Utiliser les paramètres régionaux spécifiés"
 
 #. * TRANSLATORS: The … is not used on purpose to increase readability on
 #. monospaced terminals
@@ -81,7 +81,7 @@ msgstr ""
 msgid ""
 "Do not check whether the data directory to use is compatible with this "
 "Widelands version."
-msgstr ""
+msgstr " Ne vérifie pas si le dossier de données à utiliser est compatible avec cette version de Widelands "
 
 #: ../../src/wlapplication_messages.cc:72
 #: ../../src/wlapplication_messages.cc:77
@@ -96,7 +96,7 @@ msgstr "NOMDEFICHIER"
 msgid ""
 "Create a new game directly with the settings configured in the given file. "
 "An example can be found in `%s`."
-msgstr ""
+msgstr "Cree une nouvelle partie avec les paramètres configurés dans le fichier indiqué.  Un exemple peut être trouvé dans '%s'"
 
 #: ../../src/wlapplication_messages.cc:78
 msgid "Start the map `FILENAME` directly as a singleplayer scenario."
@@ -114,13 +114,13 @@ msgstr "Charge la rediffusion `NOMDEFICHIER` directement."
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor."
-msgstr ""
+msgstr "Lance le Script Lua indiqué après initiallisation. Ne fonctionne qu'avec --scenario, --loadgame, ou --editor"
 
 #: ../../src/wlapplication_messages.cc:86
 msgid ""
 "Start the Widelands map editor directly. You can add `=FILENAME` to directly"
 " load the map `FILENAME` in the editor."
-msgstr ""
+msgstr "Lance directement l'editeur de cartes de Widelands. Ajouter '=NOMDUFICHIER' permet de charger une carte directement dans l'editeur."
 
 #: ../../src/wlapplication_messages.cc:90
 msgid "Start the game with sound disabled."
@@ -140,7 +140,7 @@ msgstr "Active le mode entrainement de l'IA. Voir https://www.widelands.org/wiki
 msgid ""
 "Constantly adjust the game speed automatically depending on AI delay. Only "
 "to be used for AI testing or training (in conjunction with --ai_training)."
-msgstr ""
+msgstr "ajuste la vitesse de jeu en permanence et automatiquepent en fonction du délai de l'IA. N'est cecnsé être utilisé pour tester ou entrainer l'IA (avec --ai_training)."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid "Game options:"
@@ -169,7 +169,7 @@ msgstr "Enregistrez automatiquement toutes les `n` minutes."
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:110
 msgid "Use `n` files for rolling autosaves."
-msgstr ""
+msgstr "Utiliser 'n' fichiers pour la rotation des sauvegardes automatiques."
 
 #: ../../src/wlapplication_messages.cc:111
 msgid "Do not save files as binary zip archives."
@@ -291,7 +291,7 @@ msgstr "URI"
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:159
 msgid "Port number `n` of the metaserver for internet gaming."
-msgstr ""
+msgstr "Port numéro 'n' du métaserveur pour jouer en ligne."
 
 #: ../../src/wlapplication_messages.cc:160
 msgid "The name of the last hosted game."
@@ -335,7 +335,7 @@ msgstr "Options graphiques :"
 
 #: ../../src/wlapplication_messages.cc:174
 msgid "Whether to use the whole display for the game screen."
-msgstr ""
+msgstr "Utiliser l'écran entier pour afficher le jeu"
 
 #: ../../src/wlapplication_messages.cc:175
 msgid "Whether to start the game in a maximized window."
@@ -429,7 +429,7 @@ msgstr "Autres :"
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
-msgstr ""
+msgstr "écrire toutes les chaines de caractères quand elles sont traduites. Ceci aide à identifier les problèmes avec l'internationalisation."
 
 #: ../../src/wlapplication_messages.cc:223
 msgid "Only print version and exit."
@@ -455,12 +455,12 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:256
+#: ../../src/wlapplication_messages.cc:254
 #, c-format
-msgid "This is Widelands Version %s"
-msgstr "Voici Widelands version %s"
+msgid "This is Widelands version %s"
+msgstr "Ceci est la version%sde Widelands"
 
-#: ../../src/wlapplication_messages.cc:315
+#: ../../src/wlapplication_messages.cc:312
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

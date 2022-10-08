@@ -62,7 +62,7 @@ wl.Descriptions():new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _("No Flowers"),
       heading = _("Out of Flowers"),
-      message = pgettext ("frisians_building", "The beekeeper working at this beekeepers’s house can’t find any flowering fields or bushes in his work area. You should consider building another farm or berry farm nearby, or dismantling or destroying this building."),
+      message = pgettext ("frisians_building", "The beekeeper working at this beekeeper’s house can’t find any flowering fields or bushes in his work area. You should consider building another farm or berry farm nearby, or dismantling or destroying this building."),
       productivity_threshold = 8
    },
 }

@@ -52,6 +52,8 @@ wl_library(ui_fsmenu
     menu.cc
     mousewheel_options.cc
     mousewheel_options.h
+    mousewheel_report.cc
+    mousewheel_report.h
     multiplayersetupgroup.cc
     multiplayersetupgroup.h
     netsetup_lan.cc
@@ -68,6 +70,8 @@ wl_library(ui_fsmenu
     singleplayerdropdown.h
     singleplayersetupbox.cc
     singleplayersetupbox.h
+    tech_info.cc
+    tech_info.h
     training_wheel_options.cc
     training_wheel_options.h
   DEPENDS

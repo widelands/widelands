@@ -47,6 +47,7 @@ wl_library(scripting_coroutine
     lua_coroutine.cc
     lua_coroutine.h
   DEPENDS
+    base
     io_fileread
     logic_exceptions
     scripting_base

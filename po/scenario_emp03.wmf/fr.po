@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:45
 msgid "Build your first outpost"
@@ -1312,6 +1312,7 @@ msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
 msgstr[0] "Il nous reste à découvrir %d pièce de notre autel."
 msgstr[1] "Il nous reste à découvrir %d pièces de notre temple."
+msgstr[2] "Il nous reste à découvrir %d pièces de notre temple."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648

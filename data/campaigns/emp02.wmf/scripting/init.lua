@@ -15,6 +15,7 @@ include "scripting/ui.lua"
 game = wl.Game()
 p1 = game.players[1]
 p2 = game.players[2]
+game.allow_diplomacy = false
 
 include "map:scripting/starting_conditions.lua"
 include "map:scripting/texts.lua"

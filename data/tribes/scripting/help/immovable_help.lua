@@ -30,15 +30,16 @@ include "tribes/scripting/help/format_help.lua"
 function immovable_help_string(tribe, immovable_description)
    local helptexts = immovable_description:helptexts(tribe.name)
    local result = ""
-   local purpose = helptexts["purpose"]
    local image = immovable_description.icon_name
-   if purpose ~= nil then
+   if helptexts.purpose ~= nil then
       result = h2(_("Purpose")) ..
-         li_object(immovable_description.name, purpose)
+         li_object(immovable_description.name, helptexts.purpose)
    elseif image ~= "" then
       result = p(vspace(14) .. img(immovable_description.icon_name))
-   else
-      result = result
+   end
+
+   if helptexts.note ~= nil then
+      result = result .. h2(_("Note")) .. p(helptexts.note)
    end
 
    -- Build cost

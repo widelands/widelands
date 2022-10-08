@@ -92,8 +92,16 @@ function build_training()
    msg_boxes(training_story_end)
 end
 
+function toolsmith_hint()
+   while not check_for_buildings(p1, {
+      atlanteans_toolsmithy = 1,
+   }) do sleep(3478) end
+   msg_boxes(hint_for_toolsmith)
+end
+
 function build_heavy_industrys_and_mining()
    msg_boxes(heavy_industry_story)
+   run(toolsmith_hint)
 
    local o = add_campaign_objective(obj_make_heavy_industry_and_mining)
    while not check_for_buildings(p1, {

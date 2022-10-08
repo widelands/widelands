@@ -32,15 +32,15 @@ wl.Descriptions():new_warehouse_type {
       idle = {
          fps = 10,
          frames = 20,
-         rows = 5,
-         columns = 4,
-         hotspot = { 74, 70 }
+         columns = 10,
+         rows = 2,
+         hotspot = { 98, 98 }
       },
       build = {
          frames = 4,
-         rows = 2,
-         columns = 2,
-         hotspot = { 74, 70 }
+         columns = 4,
+         rows = 1,
+         hotspot = { 98, 98 }
       },
    },
 

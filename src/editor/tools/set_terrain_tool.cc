@@ -18,13 +18,15 @@
 
 #include "editor/tools/set_terrain_tool.h"
 
+#include <sstream>
+
 #include "editor/editorinteractive.h"
+#include "logic/map_objects/world/terrain_description.h"
 #include "logic/maptriangleregion.h"
 
 using Widelands::TCoords;
 
 int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                EditorInteractive& eia,
                                                 EditorActionArgs* args,
                                                 Widelands::Map* map) {
 	assert(center.triangle.t == Widelands::TriangleIndex::D ||
@@ -54,7 +56,7 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::NodeAndTriangle
 		            radius));
 		std::list<Widelands::DescriptionIndex>::iterator i = args->terrain_type.begin();
 		do {
-			max = std::max(max, map->change_terrain(eia.egbase(), mr.location(), *i));
+			max = std::max(max, map->change_terrain(parent_.egbase(), mr.location(), *i));
 			++i;
 		} while (mr.advance(*map));
 	}
@@ -63,7 +65,6 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::NodeAndTriangle
 
 int32_t
 EditorSetTerrainTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                       EditorInteractive& eia,
                                        EditorActionArgs* args,
                                        Widelands::Map* map) {
 	assert(center.triangle.t == Widelands::TriangleIndex::D ||
@@ -79,7 +80,7 @@ EditorSetTerrainTool::handle_undo_impl(const Widelands::NodeAndTriangle<Wideland
 
 		std::list<Widelands::DescriptionIndex>::iterator i = args->original_terrain_type.begin();
 		do {
-			max = std::max(max, map->change_terrain(eia.egbase(), mr.location(), *i));
+			max = std::max(max, map->change_terrain(parent_.egbase(), mr.location(), *i));
 			++i;
 		} while (mr.advance(*map));
 		return radius + max;
@@ -87,6 +88,41 @@ EditorSetTerrainTool::handle_undo_impl(const Widelands::NodeAndTriangle<Wideland
 	return radius;
 }
 
-EditorActionArgs EditorSetTerrainTool::format_args_impl(EditorInteractive& parent) {
-	return EditorTool::format_args_impl(parent);
+EditorActionArgs EditorSetTerrainTool::format_args_impl() {
+	return EditorTool::format_args_impl();
+}
+
+std::string EditorSetTerrainTool::format_conf_description_impl(const ToolConf& conf) {
+	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
+	const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrain_descriptions =
+	   descriptions.terrains();
+
+	std::string mapobj_names;
+
+	for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+		if (!mapobj_names.empty()) {
+			mapobj_names += " | ";
+		}
+		mapobj_names += terrain_descriptions.get(idx).descname();
+	}
+
+	/** TRANSLATORS: An entry in the tool history list. */
+	return format(_("Terrain: %1$s"), mapobj_names);
+}
+
+bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
+	if (0 == get_nr_enabled()) {
+		return false;
+	}
+
+	conf.map_obj_types.insert(get_enabled().begin(), get_enabled().end());
+
+	return true;
+}
+
+void EditorSetTerrainTool::load_configuration(const ToolConf& conf) {
+	disable_all();
+	for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+		enable(idx, true);
+	}
 }

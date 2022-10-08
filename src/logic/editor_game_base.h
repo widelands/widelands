@@ -112,7 +112,7 @@ public:
 	void load_all_tribes();
 	void allocate_player_maps();
 	virtual void postload();
-	void postload_addons(bool also_postload_tribes);
+	void postload_addons();
 	void postload_tribes();
 	virtual void cleanup_for_load();
 	virtual void full_cleanup();

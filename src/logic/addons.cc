@@ -74,11 +74,11 @@ static const AddOnInfo* find_addon(const std::string& name) {
 	return nullptr;
 }
 
-i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon) {
+i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon, const std::string& dflt) {
 	if (const AddOnInfo* a = find_addon(addon)) {
 		return new i18n::AddOnTextdomain(addon, a->i18n_version);
 	}
-	return nullptr;
+	return dflt.empty() ? nullptr : new i18n::Textdomain(dflt);
 }
 
 i18n::GenericTextdomain* create_textdomain_for_map(std::string mapfilename) {

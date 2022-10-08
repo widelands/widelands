@@ -11,6 +11,7 @@
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016,2021
+# Log Merger, 2022
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
 # Stron Zios <danielekeb@gmail.com>, 2021
@@ -20,13 +21,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2016,2021\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:25
 msgid "Build up a wood economy"
@@ -78,18 +79,18 @@ msgstr "Espanditi ad est, per avviare l'estrazione del marmo dalla montagna."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:61
 msgid "Build a stonemason’s house and mining infrastructure"
-msgstr "Costruisci un tagliapietre e le infrastrutture di estrazione"
+msgstr "Costruisci una casa dello scalpellino ed infrastrutture minerarie"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
 msgid "Stonemason’s house and Mining Infrastructure"
-msgstr "Costruisci un tagliapietre e le infrastrutture di estrazione"
+msgstr "Una casa dello scalpellino e le infrastrutture di estrazione"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr "Costruisci la casa di un tagliapietra e poi una completa infrastruttura di produzione mineraria ( miniera di carbone e/o carbonaia, miniera di ferro, fucina di strumenti , fucina di armi, fucina armature e fonderia) ."
+msgstr "Costruisci la casa di uno scalpellino e poi un'infrastruttura  completa (mineraria e di produzione): miniera di carbone e/o carbonaia, miniera di ferro, fucina di strumenti, fucina di armi, fucina di armature e fonderia."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
@@ -252,7 +253,7 @@ msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
-msgstr "Ancora una volta, mi sentivo come se fossi in paradiso, quando ho notato che alcune pietre tipo marmo erano tra le rocce. Sembra che presto saremo in grado di costruire forti, edifici di lusso, come quelli a qui siamo stati abituati in Fremil."
+msgstr "Ancora una volta, mi sono sentito come se fossi in paradiso, quando ho notato che tra le rocce vi erano alcune pietre simili al marmo. Sembra che presto saremo in grado di costruire forti, lussuoso edifici come quelli a cui eravamo abituati a Fremil."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Wood for the Colony"
@@ -361,7 +362,7 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr "Tuttavia: per tutti questi edifici più grandi, abbiamo bisogno di materiali da costruzione migliori e più eleganti. Quindi, devi costruire una casa per il tagliapietre, che taglierà le colonne dal marmo."
+msgstr "Tuttavia: per tutti questi edifici più grandi, abbiamo bisogno di materiali da costruzione migliori e più eleganti. Quindi, devi costruire una casa per lo scalpellino, che scolpirà colonne dal marmo."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:204

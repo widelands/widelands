@@ -19,6 +19,7 @@ p3 = game.players[3] -- Kru-Gu’Lhar – determined enemy
 map = game.map
 p1_start = map.player_slots[1].starting_field
 difficulty = wl.Game().scenario_difficulty
+wl.Game().allow_diplomacy = false
 
 total_soldiers = {40, 25, 10}
 total_soldiers = total_soldiers[difficulty]

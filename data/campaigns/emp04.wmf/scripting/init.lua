@@ -15,6 +15,7 @@ include "scripting/ui.lua"
 
 include "map:scripting/helper_functions.lua"
 
+wl.Game().allow_diplomacy = false
 p1 = wl.Game().players[1]
 p2 = wl.Game().players[2]
 p3 = wl.Game().players[3]

@@ -26,7 +26,7 @@ wl.Descriptions():new_militarysite_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 33, 41 },
+         hotspot = { 40, 47 },
       }
    },
 

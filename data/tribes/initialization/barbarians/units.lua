@@ -9,7 +9,6 @@ include "tribes/scripting/help/time_strings.lua"
 
 wl.Descriptions():new_tribe {
    name = "barbarians",
-   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {1, 19} },
@@ -1817,6 +1816,26 @@ wl.Descriptions():new_tribe {
    productionsite_workers_missing = pgettext("barbarians", "Workers missing"),
    -- TRANSLATORS: Productivity label on a barbarian building if there is more than 1 worker coming. If you need plural forms here, please let us know.
    productionsite_workers_coming = pgettext("barbarians", "Workers are coming"),
+
+   -- Soldier strings to be used in Military Status strings
+
+   soldier_context = "barbarians_soldier",
+   soldier_0_sg = "%1% soldier (+%2%)",
+   soldier_0_pl = "%1% soldiers (+%2%)",
+   soldier_1_sg = "%1% soldier",
+   soldier_1_pl = "%1% soldiers",
+   soldier_2_sg = "%1%(+%2%) soldier (+%3%)",
+   soldier_2_pl = "%1%(+%2%) soldiers (+%3%)",
+   soldier_3_sg = "%1%(+%2%) soldier",
+   soldier_3_pl = "%1%(+%2%) soldiers",
+   -- TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to. %2% is the maximum number of soldier slots in the building.
+   UNUSED_soldier_0 = npgettext("barbarians_soldier", "%1% soldier (+%2%)", "%1% soldiers (+%2%)", 0),
+   -- TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
+   UNUSED_soldier_1 = npgettext("barbarians_soldier", "%1% soldier", "%1% soldiers", 0),
+   -- TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building
+   UNUSED_soldier_2 = npgettext("barbarians_soldier", "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", 0),
+   -- TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to. %2% are currently open soldier slots in the building.
+   UNUSED_soldier_3 = npgettext("barbarians_soldier", "%1%(+%2%) soldier", "%1%(+%2%) soldiers", 0),
 
    -- Special types
    builder = "barbarians_builder",

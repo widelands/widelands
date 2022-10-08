@@ -6,12 +6,12 @@ dirname = path.dirname(__file__)
 push_textdomain("tribes")
 
 local r = {
-   -- Basic information for the Atlantean tribe
+   -- Basic information for the Amazon tribe
    name = "amazons",
    author = _("The Widelands Development Team"),
    -- TRANSLATORS: This is a tribe name
-   descname = _("Amazons (experimental)"),
-   tooltip = _("The people of the amazonian jungle. This tribe is still under development."),
+   descname = _("Amazons"),
+   tooltip = _("The people of the amazonian jungle."),
    icon = dirname .. "images/icon.png",
    script = dirname .. "units.lua",
 

@@ -303,6 +303,7 @@ public:
 	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);
 	void send_player_toggle_mute(const Building&, bool all);
+	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
 
 	InteractivePlayer* get_ipl();
 
@@ -363,6 +364,29 @@ public:
 	int propose_trade(const Trade& trade);
 	void accept_trade(int trade_id);
 	void cancel_trade(int trade_id);
+
+	struct PendingDiplomacyAction {
+		const PlayerNumber sender;     ///< The player who initiated the action.
+		const DiplomacyAction action;  ///< The action to perform.
+		const PlayerNumber other;      ///< The other player affected, if any.
+
+		PendingDiplomacyAction(PlayerNumber p1, DiplomacyAction a, PlayerNumber p2)
+		   : sender(p1), action(a), other(p2) {
+		}
+	};
+	const std::list<PendingDiplomacyAction>& pending_diplomacy_actions() const {
+		return pending_diplomacy_actions_;
+	}
+	std::list<PendingDiplomacyAction>& pending_diplomacy_actions() {
+		return pending_diplomacy_actions_;
+	}
+
+	bool diplomacy_allowed() const {
+		return diplomacy_allowed_;
+	}
+	void set_diplomacy_allowed(bool d) {
+		diplomacy_allowed_ = d;
+	}
 
 private:
 	bool did_postload_addons_before_loading_;
@@ -449,6 +473,9 @@ private:
 	int next_trade_agreement_id_ = 1;
 	// Maps from trade agreement id to the agreement.
 	std::map<int, TradeAgreement> trade_agreements_;
+
+	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
+	bool diplomacy_allowed_;
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;

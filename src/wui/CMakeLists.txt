@@ -225,6 +225,8 @@ wl_library(wui
     game_client_disconnected.h
     game_debug_ui.cc
     game_debug_ui.h
+    game_diplomacy_menu.cc
+    game_diplomacy_menu.h
     game_exit_confirm_box.cc
     game_exit_confirm_box.h
     game_main_menu_save_game.cc

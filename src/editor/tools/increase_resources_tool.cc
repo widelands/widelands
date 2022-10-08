@@ -26,10 +26,9 @@
 #include "logic/mapregion.h"
 
 int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                       EditorInteractive& eia,
                                                        EditorActionArgs* args,
                                                        Widelands::Map* map) {
-	const Widelands::Descriptions& descriptions = eia.egbase().descriptions();
+	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
@@ -61,15 +60,23 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndT
 
 int32_t EditorIncreaseResourcesTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
    EditorActionArgs* args,
    Widelands::Map* map) {
-	return set_tool_.handle_undo_impl(center, parent, args, map);
+	return set_tool_.handle_undo_impl(center, args, map);
 }
 
-EditorActionArgs EditorIncreaseResourcesTool::format_args_impl(EditorInteractive& parent) {
-	EditorActionArgs a(parent);
+EditorActionArgs EditorIncreaseResourcesTool::format_args_impl() {
+	EditorActionArgs a(parent_);
 	a.change_by = change_by_;
 	a.current_resource = cur_res_;
 	return a;
+}
+
+std::string EditorIncreaseResourcesTool::format_conf_description_impl(const ToolConf& conf) {
+	std::string resource = parent_.egbase().descriptions().get_resource_descr(cur_res_)->descname();
+
+	/** TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for increase and
+	 * decrease. */
+	return format(_("%1$s: inc./dec. %2$d, set to %3$d"), resource, conf.change_by,
+	              static_cast<int>(conf.set_to));
 }

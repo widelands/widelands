@@ -82,8 +82,7 @@ public:
 		std::cout.rdbuf(stdout_.rdbuf());
 		std::cerr.rdbuf(stderr_.rdbuf());
 		// Repeat version info so that we'll have it available in the log file too
-		std::cout << "This is Widelands Version " << build_id() << " (" << build_type() << ")"
-		          << std::endl;
+		std::cout << "This is Widelands version " << build_ver_details() << std::endl;
 		stdout_.flush();
 	}
 
@@ -178,7 +177,7 @@ void do_log(const LogType type, const Time& gametime, const char* const fmt, ...
 	assert(logger != nullptr);
 
 	// message type and timestamp
-	char buffer_prefix[32];
+	char buffer_prefix[256];
 	{
 		uint32_t t = gametime.is_valid() ? gametime.get() : SDL_GetTicks();
 		const uint32_t hours = t / (1000 * 60 * 60);

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-07 03:05+0000\n"
+"POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -304,6 +304,10 @@ msgid "Packagers"
 msgstr "Csomagkészítők"
 
 #: ../../data/txts/developers.lua:3
+msgid "Scripting"
+msgstr "Parancsfájlok"
+
+#: ../../data/txts/developers.lua:3
 msgid "Sound"
 msgstr "Hang"
 
@@ -333,7 +337,7 @@ msgstr "és nagyon sokan mások (köszönünk minden segítséget)"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
-msgstr "nincs munkás"
+msgstr "betöltetlen pozíció"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"

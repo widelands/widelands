@@ -14,6 +14,7 @@ push_textdomain("mp_scenario_island_hopping.wmf")
 
 game = wl.Game()
 map = game.map
+game.allow_diplomacy = false
 
 _nplayers_finished_island = {0, 0}
 _start_fields = {

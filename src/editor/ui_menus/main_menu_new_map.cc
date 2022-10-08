@@ -122,6 +122,14 @@ void MainMenuNewMap::clicked_cancel() {
 	die();
 }
 
+bool MainMenuNewMap::handle_key(bool down, SDL_Keysym code) {
+	if (down && code.sym == SDLK_RETURN) {
+		clicked_create_map();
+		return true;
+	}
+	return UI::UniqueWindow::handle_key(down, code);
+}
+
 /*
  * fill the terrain list
  */

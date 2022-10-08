@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Language-Team: Karelian (https://www.transifex.com/widelands/teams/35159/krl/)\n"
 "MIME-Version: 1.0\n"
@@ -27,17 +27,17 @@ msgstr[1] ""
 msgid "Transport"
 msgstr ""
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
 msgstr ""
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid "Shovels"
 msgstr ""
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."

@@ -453,6 +453,10 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
                 0,
                 0,
                 info->descname()),
+     parent_(parent),
+     riw_(riw),
+     info_(info),
+     action_(a),
      main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
@@ -514,6 +518,7 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
 
 		list_->set_desired_size(300, list_->get_lineheight() * (list_->size() + 1));
 		main_box_.add(list_, UI::Box::Resizing::kExpandBoth);
+		list_->focus();
 		break;
 	}
 	}
@@ -525,38 +530,40 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
 	cancel_.sigclicked.connect([this]() { die(); });
-	ok_.sigclicked.connect([this, info, a, &parent, &riw]() {
-		try {
-			switch (a) {
-			case AddOns::NetAddons::AdminAction::kDelete:
-				parent.net().admin_action(a, *info, text_->get_text());
-				riw.die();
-				parent.erase_remote(info);
-				break;
-
-			case AddOns::NetAddons::AdminAction::kSetupTx:
-				parent.net().admin_action(a, *info, txsettings_->make_data());
-				break;
-
-			default:
-				parent.net().admin_action(a, *info, list_->get_selected());
-				*info = parent.net().fetch_one_remote(info->internal_name);
-				riw.update_data();
-				break;
-			}
-
-			parent.rebuild(false);
-			die();
-		} catch (const std::exception& e) {
-			UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-			                   e.what(), UI::WLMessageBox::MBoxType::kOk);
-			m.run<UI::Panel::Returncodes>();
-		}
-	});
+	ok_.sigclicked.connect([this]() { ok(); });
 
 	set_center_panel(&main_box_);
 	center_to_parent();
 	initialization_complete();
+}
+
+void AdminDialog::ok() {
+	try {
+		switch (action_) {
+		case AddOns::NetAddons::AdminAction::kDelete:
+			parent_.net().admin_action(action_, *info_, text_->get_text());
+			riw_.die();
+			parent_.erase_remote(info_);
+			break;
+
+		case AddOns::NetAddons::AdminAction::kSetupTx:
+			parent_.net().admin_action(action_, *info_, txsettings_->make_data());
+			break;
+
+		default:
+			parent_.net().admin_action(action_, *info_, list_->get_selected());
+			*info_ = parent_.net().fetch_one_remote(info_->internal_name);
+			riw_.update_data();
+			break;
+		}
+
+		parent_.rebuild(false);
+		die();
+	} catch (const std::exception& e) {
+		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), e.what(),
+		                   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+	}
 }
 
 void AdminDialog::think() {
@@ -566,6 +573,22 @@ void AdminDialog::think() {
 	} else if (txsettings_ != nullptr) {
 		ok_.set_enabled(txsettings_->ok_enabled());
 	}
+}
+
+bool AdminDialog::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_RETURN:
+			ok();
+			return true;
+		case SDLK_ESCAPE:
+			die();
+			return true;
+		default:
+			break;
+		}
+	}
+	return UI::Window::handle_key(down, code);
 }
 
 /* RemoteInteractionWindow implementation */

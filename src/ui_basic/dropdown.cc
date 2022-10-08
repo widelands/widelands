@@ -19,6 +19,7 @@
 #include "ui_basic/dropdown.h"
 
 #include "base/i18n.h"
+#include "base/utf8.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -150,7 +151,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	button_box_.set_size(w, get_h());
 	list_->clicked.connect([this]() {
 		set_value();
-		close();
 		clear_filter();
 	});
 
@@ -440,12 +440,13 @@ void BaseDropdown::set_value() {
 		current_selection_ = list_->selection_index();
 		save_selected_entry(current_selection_);
 		update();
+		close();
 		selected();
 	}
 }
 
 void BaseDropdown::toggle() {
-	set_list_visibility(!list_->is_visible());
+	set_list_visibility(!list_->is_visible(), is_mouse_away());
 }
 
 void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
@@ -501,7 +502,7 @@ bool BaseDropdown::is_mouse_away() const {
 }
 
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
-	if (down) {
+	if (down && (SDL_GetModState() & KMOD_CTRL) == 0) {
 		switch (code.sym) {
 		case SDLK_RETURN:
 			if (list_->is_visible()) {
@@ -511,8 +512,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 					toggle_list();
 				}
 			} else {
-				// Handle Enter only if the list is open
-				return false;
+				set_list_visibility(true);
 			}
 			return true;
 		case SDLK_ESCAPE:
@@ -522,12 +522,6 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 				} else {
 					set_list_visibility(false);
 				}
-				return true;
-			}
-			break;
-		case SDLK_SPACE:
-			if (!is_expanded()) {
-				set_list_visibility(true);
 				return true;
 			}
 			break;
@@ -542,7 +536,12 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 }
 void BaseDropdown::delete_last_of_filter() {
 	if (is_filtered()) {
-		current_filter_.pop_back();
+		size_t pos = current_filter_.size() - 1;
+		while (pos > 0 && Utf8::is_utf8_extended(current_filter_.at(pos))) {
+			pos--;
+		}
+
+		current_filter_.erase(pos);
 		apply_filter();
 	}
 }
@@ -556,6 +555,10 @@ void BaseDropdown::disable_textinput() {
 
 void BaseDropdown::enable_textinput() {
 	set_handle_textinput(true);
+}
+
+std::string BaseDropdown::get_filter_text() {
+	return current_filter_;
 }
 
 }  // namespace UI

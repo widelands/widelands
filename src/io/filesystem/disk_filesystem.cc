@@ -415,8 +415,13 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
 		}
 		static_cast<int8_t*>(data)[size] = 0;
 
-		fclose(file);
-		file = nullptr;
+		try {
+			fclose(file);
+			file = nullptr;
+		} catch (...) {
+			file = nullptr;
+			throw;
+		}
 
 		length = size;
 	} catch (...) {

@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-31 02:58+0000\n"
+"POT-Creation-Date: 2022-05-16 03:13+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Pawel <pawcio980@gmail.com>, 2022\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
@@ -451,12 +451,12 @@ msgid ""
 msgstr "Załaduj bezpośrednio otrzymane zapisy gry lub powtórki. Użyteczne dla .wgf/.wrpl zrzeszenia rozszerzeń. Nie działa z innymi opcjami. Zobacz także --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:256
+#: ../../src/wlapplication_messages.cc:254
 #, c-format
-msgid "This is Widelands Version %s"
-msgstr "To jest Widelands wersja %s"
+msgid "This is Widelands version %s"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:315
+#: ../../src/wlapplication_messages.cc:312
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

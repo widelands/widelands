@@ -91,7 +91,7 @@ wl_set_if_unset(WL_INSTALL_DATADIR "./data")
 # Example: to have the bin installed to "/usr/games", just use '-DCMAKE_INSTALL_PREFIX=/usr'
 # and don't specify '-DWL_INSTALL_BINDIR' when configuring.
 # Note: 'CMAKE_INSTALL_PREFIX' defaults to /usr/local on UNIX and c:/Program Files/${PROJECT_NAME} on Windows
-set(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games" CACHE PATH "Destination of executable files (if installing)")
+wl_set_if_unset(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
@@ -372,16 +372,27 @@ else()
 endif()
 
 if(NOT MSVC)
-  # Turn some warnings into errors.
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0))
-    # Silence some false positives on older g++
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
-  endif()
-  if (APPLE)  # Our Mac CI needs these
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=disabled-macro-expansion")
+  if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    message(STATUS "Compiler warnings will be ignored.")
+  elseif(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND 
+         (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)) AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.2))
+    # Skip this on g++12.0 and 12.1 because of false-positives from system headers.
+    message(WARNING "This compiler is known to cause false-positive warnings.")
+  else()
+    # Turn some warnings into errors.
+    message(STATUS "Warnings will be treated as errors.")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
+    if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0))
+      # Silence some false positives on older g++
+      message(STATUS "Disabling known false-positive warnings for this compiler.")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
+    endif()
+    if (APPLE)  # Our Mac CI needs these
+      message(STATUS "Disabling known false-positive warnings for this environment.")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=disabled-macro-expansion")
+    endif()
   endif()
 
   wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")
@@ -437,7 +448,7 @@ IF (WIN32)
     set(BROTLI brotlidec brotlicommon brotlienc)
     set(SDL_MIXER_EXTRA_LIBS ssp)
     set(SDL_EXTRA_LIBS mingw32 dxerr8)
-    set(SDL_IMG_EXTRA_LIBS jbig deflate Lerc)
+    set(SDL_IMG_EXTRA_LIBS jbig deflate Lerc jxl hwy)
     add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -D__USE_MINGW_ANSI_STDIO)
     if (CMAKE_SIZEOF_VOID_P EQUAL 4)
       set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)

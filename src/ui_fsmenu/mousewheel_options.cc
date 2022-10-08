@@ -31,6 +31,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/menu.h"
+#include "ui_fsmenu/mousewheel_report.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 
@@ -87,6 +88,7 @@ void MousewheelConfigSettings::read() {
 	value_invert_ = READ_DIR(kUIChangeValueInvert);
 	tab_invert_ = READ_DIR(kUITabInvert);
 	zoom_invert_ = READ_DIR(kMapZoomInvert);
+	inverted_x_ = get_mousewheel_option_bool(MousewheelOptionID::kOverrideInvertedX);
 }
 
 #undef READ_MOD
@@ -115,6 +117,7 @@ void MousewheelConfigSettings::apply() const {
 	APPLY_DIR(kUIChangeValueInvert, value_invert_)
 	APPLY_DIR(kUITabInvert, tab_invert_)
 	APPLY_DIR(kMapZoomInvert, zoom_invert_)
+	set_mousewheel_option_bool(MousewheelOptionID::kOverrideInvertedX, inverted_x_);
 
 	update_mousewheel_settings();
 }
@@ -423,7 +426,41 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
         /** TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease: Vertical" */
         _("Invert scroll direction for increase/decrease:"),
         &(settings_.value_invert_)),
+     horiz_override_box_(
+        this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
+     inverted_x_checkbox_(
+        &horiz_override_box_,
+        UI::PanelStyle::kFsMenu,
+        Vector2i::zero(),
+        _("Fix inverted horizontal scrolling"),
+        _("An SDL bug in some configurations causes horizontal scroll to be inverted. "
+          "We try to detect them, but if we got it wrong, you can fix it here. "
+          "Please report if you need to turn this on, so that we can improve the detection."),
+        0),
+     feedback_button_(&horiz_override_box_,
+                      std::string(),
+                      0,
+                      0,
+                      0,
+                      0,
+                      UI::ButtonStyle::kFsMenuSecondary,
+                      _("Send feedback"),
+                      ""),
      button_box_(this) {
+	inverted_x_checkbox_.set_state(settings_.inverted_x_, false);
+	inverted_x_checkbox_.changed.connect([this]() {
+		settings_.inverted_x_ = inverted_x_checkbox_.get_state();
+		feedback_button_.set_enabled(settings_.inverted_x_);
+	});
+	feedback_button_.set_enabled(settings_.inverted_x_);
+	feedback_button_.sigclicked.connect([this]() {
+		InvertedScrollFeedbackWindow feedback_window(&(get_topmost_forefather()));
+		feedback_window.run<UI::Panel::Returncodes>();
+	});
+	horiz_override_box_.add(&inverted_x_checkbox_);
+	horiz_override_box_.add_inf_space();
+	horiz_override_box_.add(&feedback_button_);
+
 	add(&zoom_box_);
 	add(&mapscroll_box_);
 	add(&speed_box_);
@@ -432,6 +469,8 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	add(&zoom_invert_box_);
 	add(&tab_invert_box_);
 	add(&value_invert_box_);
+	add_space(kDividerSpace);
+	add(&horiz_override_box_);
 	add_space(kDividerSpace);
 	add(&button_box_);
 }
@@ -446,6 +485,7 @@ void MousewheelOptionsDialog::update_settings() {
 	zoom_invert_box_.update_sel();
 	tab_invert_box_.update_sel();
 	value_invert_box_.update_sel();
+	inverted_x_checkbox_.set_state(settings_.inverted_x_);
 }
 void MousewheelOptionsDialog::apply_settings() {
 	settings_.apply();
@@ -513,6 +553,7 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 		zoom_invert_box_.set_width(w_hbox);
 		tab_invert_box_.set_width(w_hbox);
 		value_invert_box_.set_width(w_hbox);
+		horiz_override_box_.set_desired_size(w_hbox, kButtonSize);
 		button_box_.set_size(w_hbox, kButtonSize);
 	}
 }

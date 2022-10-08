@@ -118,7 +118,7 @@ private:
 
 // TODO(sirver): Once c++14 is supported, make this a templated lambda inside
 // 'plan_map_transition'. For now it is a particularly ugly stand alone
-// function, but it allows us to parametrize over 'zoom_t' withouth a heap
+// function, but it allows us to parametrize over 'zoom_t' without a heap
 // allocation.
 template <typename T>
 void do_plan_map_transition(uint32_t start_time,
@@ -482,7 +482,7 @@ const MapView::View& MapView::view() const {
 }
 
 void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
-	if (is_animating()) {
+	if (is_animating() || map_.get_width() == 0 || map_.get_height() == 0) {
 		return;
 	}
 	set_view({view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, transition);

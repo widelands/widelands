@@ -15,6 +15,8 @@ include "scripting/richtext_scenarios.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
 
+wl.Game().allow_diplomacy = false
+
 -- Constants
 sf = map.player_slots[1].starting_field
 first_lumberjack_field = map:get_field(16, 10)

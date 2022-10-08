@@ -201,6 +201,7 @@ public:
 
 	void add_immovable_relation(const std::string&, const std::string&);
 	void postload_immovable_relations();
+	void finalize_loading();
 
 private:
 	AllTribes all_tribes_;

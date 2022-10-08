@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -127,29 +127,29 @@ msgstr "Saat pisteitä arvokkaista tuotteista varastoissasi. Se peljaaja, jolla 
 msgid "Points"
 msgstr "Pisteet"
 
-#: ../../data/scripting/win_conditions/collectors.lua:65
+#: ../../data/scripting/win_conditions/collectors.lua:68
 #, lua-format
 msgid "Status for %s"
 msgstr "Tila %s:lle"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:77
+#: ../../data/scripting/win_conditions/collectors.lua:80
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
-#: ../../data/scripting/win_conditions/collectors.lua:81
+#: ../../data/scripting/win_conditions/collectors.lua:84
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Yhteensä: %i piste"
 msgstr[1] "Yhteensä: %i pistettä"
 
-#: ../../data/scripting/win_conditions/collectors.lua:104
+#: ../../data/scripting/win_conditions/collectors.lua:107
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Joukkueen %d:n tila"
 
-#: ../../data/scripting/win_conditions/collectors.lua:106
+#: ../../data/scripting/win_conditions/collectors.lua:109
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -261,7 +261,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first. If the peaceful mode is selected, the game ends if "
 "one player has more land than any other player could gain."
-msgstr "Kukin pelaaja tai joukkue pyrkii hallitsemaan yli puolta kartan maapinta-alasta. Pelaaja tai joukkue, jopa pitää enintä osaa hallussan 20 minuutin ajan, voittaa. Jos pelataan rauhallisessa pelitilassa, peli päättyy kun jollakin pelaajalla on hallussaan enemmän maata kuin mitä kukaan muu pystyy valtaamaan. Jos kukaan ei onnistu tähän 4 tunnissa, eniten maata hallussaan pitävä voittaa."
+msgstr "Kukin pelaaja tai joukkue pyrkii hallitsemaan yli puolta kartan maapinta-alasta. Pelaaja tai joukkue, joka pitää enintä osaa hallussan 20 minuutin ajan, voittaa. Jos pelataan rauhallisessa pelitilassa, peli päättyy kun jollakin pelaajalla on hallussaan enemmän maata kuin mitä kukaan muu pystyy valtaamaan. Jos kukaan ei onnistu tähän 4 tunnissa, eniten maata hallussaan pitävä voittaa."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

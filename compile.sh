@@ -37,6 +37,8 @@ print_help () {
     echo "-h or --help          Print this help."
     echo "-q or --quiet         Suppress most of compile.sh's output."
     echo "-v or --verbose       Make compile.sh's output verbose."
+    echo "-n or --dry-run       Only print commands, do NOT run cmake nor compile"
+    echo "                      anything."
     echo " "
     echo "Omission options and their overrides:"
     echo " "
@@ -132,6 +134,7 @@ USE_XDG="ON"
 EXTRA_OPTS=""
 # Option for this script itself
 QUIET=0
+RUN=""
 
 if [ -z "$COMPILE_DEFAULTS" ]; then
   COMPILE_DEFAULTS=.compile_defaults
@@ -200,7 +203,7 @@ do
     ;;
     -j|--cores)
       case $2 in
-        *[^0-9]*|'')
+        *[!0-9]*|'')
           echo "Call -j/--cores with a number, e.g. '-j $MAXCORES'"
           exit 1
         ;;
@@ -270,6 +273,10 @@ do
     ;;
     -v|--verbose)
       QUIET=0
+    shift
+    ;;
+    -n|--dry-run)
+      RUN=echo
     shift
     ;;
     --gcc)
@@ -342,6 +349,18 @@ if [ $QUIET -eq 0 ]; then
     echo "Command line options:"
     echo "   $OLD_CLI_ARGS"
     echo " "
+  fi
+fi
+
+if [ -n "$RUN" ]; then
+  if [ $QUIET -eq 0 ]; then
+    echo " "
+    echo "#################################################################"
+    echo "#  Dry run: Nothing will be changed, commands will be printed.  #"
+    echo "#################################################################"
+    echo " "
+  else
+    echo "###  Dry run: Nothing will be changed, commands will be printed."
   fi
 fi
 
@@ -520,35 +539,43 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   # Check if directories / links already exists and create / update them if needed.
   prepare_directories_and_links () {
-    test -d build/locale || mkdir -p build/locale
-    test -e data/locale || ln -s ../build/locale data/locale
+    test -d build/locale || $RUN mkdir -p build/locale
+    test -e data/locale || $RUN ln -s ../build/locale data/locale
     return 0
   }
 
   # Compile Widelands
   compile_widelands () {
-    cmake $GENERATOR .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DOPTION_TSAN=$USE_TSAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
+    $RUN cmake $GENERATOR .. $EXTRA_OPTS                       \
+               -DCMAKE_BUILD_TYPE=$BUILD_TYPE                  \
+               -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE     \
+               -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS \
+               -DOPTION_BUILD_TESTS=$BUILD_TESTS               \
+               -DOPTION_ASAN=$USE_ASAN                         \
+               -DOPTION_TSAN=$USE_TSAN                         \
+               -DUSE_XDG=$USE_XDG                              \
+               -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
 
-    $buildtool -j $CORES
+    $RUN $buildtool -j $CORES
 
     return 0
   }
 
   # Remove old and move newly compiled files
   move_built_files () {
-    rm  -f ../VERSION || true
-    rm  -f ../widelands || true
+    $RUN rm  -f ../VERSION || true
+    $RUN rm  -f ../widelands || true
 
-    rm  -f ../wl_map_object_info || true
-    rm  -f ../wl_map_info || true
+    $RUN rm  -f ../wl_map_object_info || true
+    $RUN rm  -f ../wl_map_info || true
 
-    cp VERSION ../VERSION
-    mv src/widelands ../widelands
+    $RUN cp VERSION ../VERSION
+    $RUN mv src/widelands ../widelands
 
     if [ $BUILD_WEBSITE = "ON" ]; then
-        mv ../build/src/website/wl_create_spritesheet ../wl_create_spritesheet
-        mv ../build/src/website/wl_map_object_info ../wl_map_object_info
-        mv ../build/src/website/wl_map_info ../wl_map_info
+      $RUN mv ../build/src/website/wl_create_spritesheet ../wl_create_spritesheet
+      $RUN mv ../build/src/website/wl_map_object_info ../wl_map_object_info
+      $RUN mv ../build/src/website/wl_map_info ../wl_map_info
     fi
     return 0
   }
@@ -557,14 +584,16 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     # First check if this is an git checkout at all - only in that case,
     # creation of a script makes any sense.
     if [ -n "$(git status -s)" ]; then
-      echo "You don't appear to be using Git, or your working tree is not clean. An update script will not be created."
+      echo "You don't appear to be using Git, or your working tree is not clean."
+      echo "An update script will not be created."
       if [ $QUIET -eq 0 ]; then
         git status
       fi
       return 0
     fi
-      rm -f update.sh || true
-      cat > update.sh << END_SCRIPT
+      $RUN rm -f update.sh || true
+      if [ -z "$RUN" ]; then
+        cat > update.sh << END_SCRIPT
 #!/bin/sh
 echo "################################################"
 echo "#            Widelands update script.          #"
@@ -590,8 +619,17 @@ echo "#      Widelands was updated successfully.     #"
 echo "# You should be able to run it via ./widelands #"
 echo "################################################"
 END_SCRIPT
-      chmod +x ./update.sh
-      if [ $QUIET -eq 0 ]; then
+
+      else  # dry run
+        echo 'cat > update.sh <<END_SCRIPT'
+        echo "   # ..."
+        echo "   $COMMANDLINE"
+        echo "   # ..."
+        echo "END_SCRIPT"
+      fi
+
+      $RUN chmod +x ./update.sh
+      if [ $QUIET -eq 0 -a -z "$RUN" ]; then
         echo "The update script has successfully been created."
       fi
   }
@@ -609,21 +647,25 @@ prepare_directories_and_links
 
 # Dependency check doesn't work with ninja, so we do it manually here
 if [ $BUILD_TYPE = "Debug" -a \( $buildtool = "ninja" -o $buildtool = "ninja-build" \) ]; then
-  utils/build_deps.py
+  $RUN utils/build_deps.py
 fi
 
-mkdir -p build
-cd build
+$RUN mkdir -p build
+$RUN cd build
 compile_widelands
 move_built_files
-cd ..
+$RUN cd ..
 create_update_script
 
 if [ $QUIET -eq 0 ]; then  # Start of verbose output section
 
 echo " "
 echo "###########################################################"
-echo "# Congratulations! Widelands has been built successfully  #"
+if [ -z "$RUN" ]; then
+  echo "# Congratulations! Widelands has been built successfully  #"
+else
+  echo "# Widelands would have been built                         #"
+fi
 echo "# with the following settings:                            #"
 echo "#                                                         #"
 if [ $BUILD_TYPE = "Release" ]; then
@@ -653,15 +695,19 @@ if [ $BUILD_WEBSITE = "ON" ]; then
 else
   echo "# - No website-related executables                        #"
 fi
-echo "#                                                         #"
-echo "# You should now be able to run Widelands via             #"
-echo "# typing ./widelands + ENTER in your terminal             #"
-echo "#                                                         #"
-echo "# You can update Widelands via running ./update.sh        #"
-echo "# in the same directory that you ran this script in.      #"
+if [ -z "$RUN" ]; then
+  echo "#                                                         #"
+  echo "# You should now be able to run Widelands via             #"
+  echo "# typing ./widelands + ENTER in your terminal             #"
+  echo "#                                                         #"
+  echo "# You can update Widelands via running ./update.sh        #"
+  echo "# in the same directory that you ran this script in.      #"
+fi
 echo "###########################################################"
 
-else
+elif [ -z "$RUN" ]; then
   echo "Widelands has been built successfully."
+else
+  echo "###  Dry run of compile.sh has completed successfully."
 fi  # End of verbose output section
 ######################################

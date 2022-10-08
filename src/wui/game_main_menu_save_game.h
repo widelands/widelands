@@ -19,6 +19,8 @@
 #ifndef WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
 #define WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -32,7 +34,10 @@ class InteractiveGameBase;
 /// Displays a warning if the filename to be saved to already esists
 struct SaveWarnMessageBox;
 
-/// A window that lets the user save the current game and delete savegames.
+/**
+ * A window that lets the user save the current game and delete savegames.
+ * Note that this window is always modal.
+ */
 struct GameMainMenuSaveGame : public UI::UniqueWindow {
 	enum class Type { kSave, kLoad };
 

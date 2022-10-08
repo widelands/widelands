@@ -940,6 +940,30 @@ private:
 	bool mark_;
 };
 
+struct CmdDiplomacy : PlayerCommand {
+	CmdDiplomacy(const Time& t, PlayerNumber p, DiplomacyAction a, PlayerNumber o)
+	   : PlayerCommand(t, p), action_(a), other_player_(o) {
+	}
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kDiplomacy;
+	}
+
+	void execute(Game& game) override;
+
+	explicit CmdDiplomacy(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	CmdDiplomacy() : PlayerCommand(), action_(DiplomacyAction::kResign), other_player_(0) {
+	}
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	DiplomacyAction action_;
+	PlayerNumber other_player_;  // Ignored for kLeaveTeam and kResign
+};
+
 struct CmdPickCustomStartingPosition : PlayerCommand {
 	CmdPickCustomStartingPosition(const Time& t, PlayerNumber p, const Coords& c)
 	   : PlayerCommand(t, p), coords_(c) {

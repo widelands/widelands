@@ -20,16 +20,16 @@ wl.Descriptions():new_productionsite_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 41, 44 },
+         hotspot = { 44, 49 },
       },
    },
 
    spritesheets = {
       build = {
          frames = 3,
-         rows = 3,
-         columns = 1,
-         hotspot = { 40, 44 }
+         columns = 3,
+         rows = 1,
+         hotspot = { 44, 49 },
       },
    },
 

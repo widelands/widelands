@@ -26,7 +26,7 @@ wl.Descriptions():new_warehouse_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 58, 62 }
+         hotspot = { 63, 68 }
       }
    },
 

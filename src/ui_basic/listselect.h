@@ -126,6 +126,7 @@ private:
 	static const int32_t ms_darken_value = -20;
 
 	void set_scrollpos(int32_t);
+	Recti get_highlight_rect(const std::string& text, int x, int y);
 
 	struct EntryRecord {
 		explicit EntryRecord(const std::string& init_name,

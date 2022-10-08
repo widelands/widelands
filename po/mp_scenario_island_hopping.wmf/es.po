@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:27+0000\n"
 "Last-Translator: GunChleoc, 2016\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
@@ -35,11 +35,11 @@ msgid "15 minutes"
 msgstr "15 minutos"
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:101
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:102
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:212
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:213
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
 msgid "Rules"
 msgstr "Reglas"

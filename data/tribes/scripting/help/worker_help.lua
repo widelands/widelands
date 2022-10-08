@@ -139,12 +139,15 @@ function worker_help_string(tribe, worker_description)
    else
       result = img(worker_description.icon_name)
    end
+   if helptexts["note"] ~= nil then
+      result = result .. h2(_("Note")) .. p(helptexts["note"])
+   end
 
    if (worker_description.buildable) then
       -- Get the tools for the workers.
       local toolnames = {}
       for j, buildcost in ipairs(worker_description.buildcost) do
-         if (buildcost ~= nil and tribe:has_ware(buildcost)) then
+         if (buildcost ~= nil and (tribe:has_ware(buildcost) or (tribe:has_worker(buildcost) and buildcost ~= tribe.carriers[1]))) then
             toolnames[#toolnames + 1] = buildcost
          end
       end

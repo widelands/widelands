@@ -4,6 +4,7 @@
 # 
 # Translators:
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2019
+# Niklas Nordgren, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: efef6ec5b435a041fce803c7f8af77d2_2341d43, 2019\n"
+"Last-Translator: Niklas Nordgren, 2022\n"
 "Language-Team: Swedish (https://www.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,35 +22,39 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:45
 msgid "Build your first outpost"
-msgstr ""
+msgstr "Bygg din första utpost"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:47
 msgid "First Outpost"
-msgstr ""
+msgstr "Första Utpost"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
+"Bygg en utpost över den gula hussymbolen öster om dina provisoriska "
+"högkvarter."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:54
 msgid "Build a quarry"
-msgstr ""
+msgstr "Bygg ett stenbrott"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:56
 msgid "Quarry"
-msgstr ""
+msgstr "Stenbrott"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
+"Bygg ett stenbrott vid de rikliga mängderna stenar för att avtäcka fler "
+"byggnadsytor och få några värdefulla resurser."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr ""
+msgstr "Bygg en skogshuggarbostad, ett sågverk, och ett stenhuggeri"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
@@ -61,25 +66,32 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
+"Bygg en skogshuggarbostad,ett sågverk och ett stenhuggeri så fort det finns "
+"tillräckligt med plats för dem. Detta kommer att färdigställa den "
+"grundläggande försörjningskedjan av byggnadsmaterial."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
-msgstr ""
+msgstr "Sänk efterfrågan efter marmorpelare till 4"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower Demand for Marble Columns"
-msgstr ""
+msgstr "Sänk Efterfrågan efter Marmorpelare"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:75
 msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
+"Sänk efterfrågan efter marmorpelare i ekonomiinställningarna till fyra. "
+"Detta kommer att hjälpa till att spara marmor åt byggnader."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
+"Minns att du kan komma åt ekonomiinställningarna genom att klicka på valfri "
+"flagga."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:82
 msgid "Find a port space on the small island"
@@ -87,15 +99,15 @@ msgstr "Hitta ett hamnutrymme på den lilla ön"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:84
 msgid "Port Space"
-msgstr ""
+msgstr "Hamnutrymme"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Search for a port space in order to regain access to the sea."
-msgstr ""
+msgstr "Leta efter ett hamnutrymme för att återfå havstillgång."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:91
 msgid "Build a port and a shipyard on the Island"
-msgstr ""
+msgstr "Bygg en hamn och ett skeppsvarv på Ön"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Ship Industry"
@@ -103,11 +115,11 @@ msgstr "Fartygsindustrin"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Build a port to set sail from this island."
-msgstr ""
+msgstr "Bygg en hamn för att ta till sjöss ifrån den här ön."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Build a shipyard to produce the ships to sail on."
-msgstr ""
+msgstr "Bygg ett skeppsvarv för att tillverka skepp att segla med."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:100
 msgid "Produce wheat"
@@ -115,86 +127,94 @@ msgstr "Producera vete"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Wheat Production"
-msgstr ""
+msgstr "Veteproduktion"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
 msgstr ""
+"Producera åtminstone 50 kärvar vete för att få igång din ullproduktion."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:109
 msgid "Produce cloth for building our first ship"
-msgstr ""
+msgstr "Producera tyg för att bygga vårt första skepp."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Cloth Production"
-msgstr ""
+msgstr "Tygproduktion"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
 "Now turn all the wheat into at least 50 bales of wool and then use the wool "
 "to weave cloth in order to build a ship."
 msgstr ""
+"Gör nu allt vete till åtminstone 50 ullbalar och använd ullen till att väva "
+"tyg att kunna bygga ett skepp med."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
-msgstr ""
+msgstr "Bygg 2 hamnar på avlägsna öar"
 
 #. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:121
 msgid "Build two Expedition Ports"
-msgstr ""
+msgstr "Bygg två Expeditionshamnar"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
 "Explore the island in the south. Use an expedition to build a port there. "
 "Afterwards, try to find some mining resources."
 msgstr ""
+"Utforska öarna i södern. Använd en expedition för att bygga en hamn där. "
+"Efter det, försök att hitta några gruvresurser."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
+"Skicka ett skepp norrut för samla in information om Barbarerna. Försök att "
+"bygga en hamn på ön och grunda en utpost."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:129
 msgid "Produce gold to send out expeditions"
-msgstr ""
+msgstr "Producera guld för att utsända expeditioner"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Gold Production"
-msgstr ""
+msgstr "Guldproduktion"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr ""
+"Producera åtminstone 6 gulddtackor för att kunna kolonisera ditt närområde."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:138
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Besegra Barbarerna"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Besegra Fienden"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Avbryt Barbarernas fortlevnad i denna del av världen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:147
 msgid "Explore further and build ports"
-msgstr ""
+msgstr "Utforska vidare och bygg hamnar"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr ""
+msgstr "Utforska Fler Öar och Leta efter Hamnutrymmen"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:150
 msgid ""
 "Discover more land in your vicinity and build as many ports as you can."
-msgstr ""
+msgstr "Upptäck mer land i din närhet och bygg så många hamnar du kan."
 
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:157

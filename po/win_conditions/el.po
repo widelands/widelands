@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: erimitis, 2018\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
@@ -121,29 +121,29 @@ msgstr "Παίρνετε βαθμούς για πολύτιμα υλικά στ�
 msgid "Points"
 msgstr "Βαθμοί"
 
-#: ../../data/scripting/win_conditions/collectors.lua:65
+#: ../../data/scripting/win_conditions/collectors.lua:68
 #, lua-format
 msgid "Status for %s"
 msgstr "Κατάσταση του %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:77
+#: ../../data/scripting/win_conditions/collectors.lua:80
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i Π) x %3$i = %4$i Π"
 
-#: ../../data/scripting/win_conditions/collectors.lua:81
+#: ../../data/scripting/win_conditions/collectors.lua:84
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Σύνολο: %i πόντος"
 msgstr[1] "Σύνολο: %i βαθμοί"
 
-#: ../../data/scripting/win_conditions/collectors.lua:104
+#: ../../data/scripting/win_conditions/collectors.lua:107
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Κατάσταση Ομάδας %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:106
+#: ../../data/scripting/win_conditions/collectors.lua:109
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
@@ -422,15 +422,16 @@ msgstr "ロフトモールとシドラスの到着"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:227
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:273
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:289
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:315
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:325
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:346
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:356
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:365
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:425
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:437
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:457
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:471
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:321
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:361
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:371
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:380
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:440
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:452
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:472
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
 msgid "Jundlina"
 msgstr "ジュンドゥリナ"
 
@@ -475,7 +476,7 @@ msgstr "ジュンドゥリナ、あなたにもサテュールのご加護があ
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:214
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:254
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:339
 msgid "Jundlina is Satisfied"
 msgstr "ジュンドゥリナは満足しています"
 
@@ -506,9 +507,9 @@ msgstr "あなたにサテュールの暖かなご加護を、ジュンドゥリ
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:272
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:304
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:345
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:436
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:456
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:360
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:451
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:471
 msgid "Jundlina Replies"
 msgstr "ジュンドゥリナが答えます"
 
@@ -656,11 +657,35 @@ msgid ""
 msgstr "シドラス、私もそう思っていたわ。そろそろ頃合いね、優先課題としましょう。すぐに設備は整うでしょう！"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
+msgid "Loftomor Reports"
+msgstr ""
+
+#. TRANSLATORS: Loftomor
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
+msgid ""
+"May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
+"toolsmiths will produce new tools in an instant."
+msgstr ""
+
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
+msgid "Jundlina Reminds"
+msgstr ""
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
+msgid ""
+"May Satul warm you as well, Loftomor. That is good news to hear. However "
+"please remember that our toolsmiths need to be equipped with a saw. Making "
+"tools is an art for us, requiring a precise tool like a saw, not a brutal "
+"hammer like for the other tribes."
+msgstr ""
+
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
 msgstr "ジュンドゥリナは手紙を書いています"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:332
 msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
@@ -668,22 +693,22 @@ msgid ""
 msgstr "採掘に関する体制が整ったという連絡がありました。武器の製造も始まっています。兵舎を作り、兵士の募集を始める準備が整ったとシドラスに知らせてあげましょう。"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:342
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
 msgstr "今日、新しい兵舎に最初の新兵達が向かっていく様子を見ました。うまくいっていれば、彼らもすぐに訓練を受けられるでしょう。"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:333
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:348
 msgid "Jundlina Summons Sidolus"
 msgstr "ジュンドゥリナはシドラスを呼び出しました"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:334
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:349
 msgid "Jundlina is Angry"
 msgstr "ジュンドゥリナは怒っています"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:351
 msgid ""
 "What is this I hear, Sidolus? I received words about your soldiers "
 "misbehaving and bullying the common folk. What is this nonsense all about? "
@@ -691,12 +716,12 @@ msgid ""
 " is inexcusable! Explain this, if you will!"
 msgstr "シドラス、どういうことです？兵士達が威張り散らし、人々に暴力を振るっているという連絡がありましたよ。なんでこんなことになっているのかしら？兵士は人々を守るための存在で、人々に力を振るうことは禁止されているはずですよね。これは絶対に許されません！何か言い訳があるというなら、言ってみなさい！"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:339
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:354
 msgid "Sidolus Seems Contrite"
 msgstr "シドラスは渋い表情です"
 
 #. TRANSLATORS: Sidolus
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:342
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:357
 msgid ""
 "I agree with you and I have punished the troublemakers severely. But it is "
 "very difficult to keep my men quiet: they are bored and have nothing to do. "
@@ -707,7 +732,7 @@ msgid ""
 msgstr "まさにその通りだ。問題を起こした連中には私が厳しい処罰を与えた。しかし、連中をおとなしくさせておくのは難しいのだ。あいつらは、何もすることが無くて、暇を持て余している。私としては連中の訓練時間を増やしたい。やることを与えておけば、他のことをする余裕もなくなるだろう。そこで、ダンジョンと迷宮を１つずつ作って欲しい。設計は既にできている。ただ、だいぶコストがかかってしまいそうではあるが……"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:348
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:363
 msgid ""
 "I do not fear the cost and labor as long as it keeps your people at bay. You"
 " shall get your buildings. But note that I will not tolerate any rogue "
@@ -715,12 +740,12 @@ msgid ""
 "them. Dismissed."
 msgstr "それで何とかなるというなら多少のコストは構いません。それらを建てましょう。ただし、今回のようなことは絶対に許せません。もし、もう一度同じようなことが起こったら、あなたにも責任を取ってもらいましょう。では、出て行きなさい。"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:355
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:370
 msgid "Jundlina Received a Letter"
 msgstr "ジュンドゥリナに手紙が届きました"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:358
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:373
 msgid ""
 "I received an invitation from Sidolus. The first day of training in the "
 "newly finished labyrinth will be tomorrow. The dungeon is done as well and "
@@ -729,12 +754,12 @@ msgid ""
 "workload will keep them from bullying the civilian population."
 msgstr "シドラスから招待の手紙が届きました。新しく作られた迷宮での最初の訓練が明日行われるようです。ダンジョンも完成していて、すぐに活動を開始するようです。明日が楽しみです、兵士がどのように訓練しているか興味がありますから。これで市民への無作法も無くなればいいのですが。"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:364
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:379
 msgid "Jundlina Considers the Economy"
 msgstr "ジュンドゥリナは経済のことを考えています"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:367
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:382
 msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
@@ -742,24 +767,24 @@ msgid ""
 msgstr "道が混んで、輸送が遅くなっていると人々が不平を言っている。運び手達に補助をつける必要があるでしょう。ならば、１件の馬牧場を建てましょう。馬に重い物資を運ぶのを助けさせるのです。"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:370
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
 msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
 msgstr "物資の流通量を減らすには、倉庫を建てるのも良さそうです。現在は山も領土に入っていて、物資の輸送のために坂の登り下りが発生していますが、倉庫を山の平らのなところに建ててあげれば、輸送の負荷も減るでしょう。"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:382
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:397
 msgid "A Dangerous Discovery"
 msgstr "危険な発見"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:383
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:398
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:426
 msgid "Jundlina is in Thought"
 msgstr "ジュンドゥリナは考えこんでいます"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:400
 msgid ""
 "We found an old building, destroyed and burned by flames. I am very worried "
 "about this discovery. The building is not of any kind I’ve ever seen. It is "
@@ -770,7 +795,7 @@ msgid ""
 msgstr "破壊され、焼け落ちた、古い建物が見つかりました。この発見を私をとても不安にさせました。この建物は私が見たことのない様式のものです。アトランティスの建築者がこのようなデザインをしたことなど、聞いたこともありません。建物は粗末で、組み立て方も雑です。しかし、その建材は非常に頑丈です。建築資材とする前に木に特殊な方法で火をいれたように見えます ── その固さは石に匹敵します。"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:388
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:403
 msgid ""
 "The implications frighten me. Are there others on this island? Where are "
 "they then? They work with fire, are they praying to Satul too? Are they "
@@ -779,23 +804,23 @@ msgid ""
 msgstr "その事実が私の恐れを呼びます。彼らはこの島にいるのでしょうか？だとしたら一体どこに？彼らは火を使うようだけど、私たちと同じくサテュールに祈りを捧げるのか？彼らは敵なのか？そしてこの建物はなぜ焼け落ちているのか？この島で戦争があったのか？もしかしたら、戦争はまだ続いているのでは？"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:391
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:406
 msgid ""
 "We must improve our military capabilities. If there are foes on the island, "
 "we have to be prepared when we meet them. We should also enforce the "
 "fortification of our borders."
 msgstr "軍事力を増強しなければなりません。もしこの島に敵がいるのなら、今のうちに備えなければ。それと、国境の守りも固めなければ。"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:399
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:414
 msgid "Another Building"
 msgstr "別の建物"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:400
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:415
 msgid "Jundlina is Worried"
 msgstr "ジュンドゥリナは心配しています"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:402
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:417
 msgid ""
 "We found one more building of this strange making. We have yet to see any of"
 " its builders. But obviously there has been a community on this island "
@@ -804,12 +829,12 @@ msgid ""
 "us unprepared."
 msgstr "またこの奇妙な作りの建物が見つかりました。建てた者達の姿は未だ目撃されていません。しかし、以前にここに何らかの集団が居て、軍事力を保持していた、それは確実です。現在の軍事力の状態を将軍達と一緒に検証しなければ。何の備えもないまま、敵かもしれない相手と遭遇するのは何としても避けないと。"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:410
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:425
 msgid "One More Building"
 msgstr "もう一つの建物"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:428
 msgid ""
 "And yet another of these buildings. We know now that the tribe that built "
 "them once had complete control over the island. But I am no longer so scared"
@@ -819,12 +844,12 @@ msgid ""
 " without obvious dangers, I am feeling very much at home here already."
 msgstr "また、同様の建物が見つかりました。かつてここにいた部族は島全体を手中に収めていたのでしょう。しかし、もうこの潜在的な敵を恐れる必要はほとんど無いでしょう。私たちも島の全容を把握しつつありますが、彼らの経済の痕跡は発見できていませんから。私もだんだん安心できるようになってきましたが、島の探索を続ける限りは完全に気を抜くわけにはいきません。しかし、明確な脅威が無いと思うと、ここに住むのも良いものだと思えてきます。"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:424
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:439
 msgid "The Water is Rising!"
 msgstr "水位の上昇！"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:427
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:442
 msgid ""
 "May Satul save us! Lutas is still trying to get to us. A scout informed me "
 "that the ocean is rising quickly. We have to reach higher ground and "
@@ -832,12 +857,12 @@ msgid ""
 "mountains. How can we escape?"
 msgstr "サテュールよ私たちを救いたまえ！ルータスはまだ諦めていなかった。巡視の報告によると、海の水位が急激に上昇しているという。私たちも高い場所に避難し、物資も可能な限り本拠地から山の上に移動させなければ。しかし、それから私たちはどうやって逃げればいいのでしょう？"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:430
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:445
 msgid "A Young Man Approaches"
 msgstr "若い男が近づいてきます"
 
 #. TRANSLATORS: Ostur
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:433
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:448
 msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have"
 " invented a new kind of ship: smaller than those we are used to, but much "
@@ -846,19 +871,19 @@ msgid ""
 msgstr "ジュンドゥリナ、サテュールのご加護がありますよう。私はオストゥル、船大工です。私は新しい型の船を考案しました。これまでのものより小型ですが、ずっと頑丈です。きちんと作れさえすれば、確実に相当の距離を進むことができます。ルータスの影響からも逃れられるかもしれません。"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:439
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:454
 msgid ""
 "Ostur, we have no time. The water rises too fast, and if we build the ships "
 "on the shore they will vanish in the sea before they can float. I fear we "
 "are doomed!"
 msgstr "オストゥル、時間がありません。水位は急激に上がっていますし、浜で船を作っても、浮かぶようになるまで保たないでしょう。これでは船は建造できないでしょう！"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:444
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:459
 msgid "Ostur Seems Confident"
 msgstr "オストゥルは自信がありそうです"
 
 #. TRANSLATORS: Ostur
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:453
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:468
 msgid ""
 "A friend of mine explored the island on his own and he told me of a big lake"
 " at the top of the mountain. I suggest we build the ships in this lake and "
@@ -867,14 +892,14 @@ msgid ""
 msgstr "自らの足で島を探索した私の友人によると、山の頂上に大きな湖があったそうです。そこで船を建造し、島が海に飲み込まれるのを待ってはいかがでしょうか？そうすれば出航することができます。だいぶ無茶な計画ではありますが、うまくいくと思います。"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:459
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:474
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your plan. Our survival lies in your hands now, Ostur."
 msgstr "あなたの赤い髪は火神からのお告げなのかもしれませんね。あなたの案に賭けましょう、できる限りの支援をします。我々の命は今やあなたの手にかかっています、よろしくお願いします、オストゥル。"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:462
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
 msgid ""
 "Swift now, we need a house for Ostur next to the lake, and we need planks, "
 "logs and spidercloth for the construction there. Forget about everything "
@@ -882,12 +907,12 @@ msgid ""
 "all swallowed by the sea."
 msgstr "まず、オストゥルの家を湖の隣に作ってあげねばなりません。そして船の建材となる板材、丸太、蜘蛛布を運びこみましょう。他の全てを忘れて構いません、全ての倉庫が海に飲まれる前に必要な物資を山の上に送るのです！"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:470
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:485
 msgid "Jundlina is Relieved"
 msgstr "ジュンドゥリナはほっとしています"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:473
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:488
 msgid ""
 "Praise Satul! Ostur, the young ship builder did it. We have three ships – "
 "never have I seen sturdier ones – with enough room to carry all of us and "
@@ -897,29 +922,29 @@ msgid ""
 msgstr "サテュールに祈りを！オストゥル、若い船大工がやってくれました。三隻の船が無事作られました ── それも今まで見たことがないほど頑丈なものが。そして、私たち人間に加えてある程度の物資を運ぶ余裕もあります。避難もギリギリのタイミングで間に合いました。水位の上昇速度がさらに増し、島が完全にルータスに飲み込まれるところでしたから。しかし、何とか脱出には成功しました。そして、これからどこか遠い場所でまたやり直さなければなりません……"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:476
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:491
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
 msgstr "長い旅になるでしょう。しかしいつかサテュールの守る島が見つけてみせます。それが皆に、そして自分に約束したことですから。"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:492
 msgid "Congratulations"
 msgstr "おめでとうございます"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:478
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:493
 msgid ""
-"You have won this mission. Continue with the next one or keep playing for as"
-" long as you like."
-msgstr "あなたはミッションを達成しました。このままプレイすることもできますが、次のミッションに移っても良いでしょう。"
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:501
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "建物消失！"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:502
 msgid "We lost a building to the ocean!"
 msgstr "建物は海に飲まれました！"

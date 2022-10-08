@@ -836,7 +836,7 @@ bool InternetGaming::update_for_games() {
 	return temp;
 }
 
-/// \returns the tables in the room, if no error occured, or nullptr in case of error
+/// \returns the tables in the room, if no error occurred, or nullptr in case of error
 const std::vector<InternetGame>* InternetGaming::games() {
 	return error() ? nullptr : &gamelist_;
 }
@@ -849,7 +849,7 @@ bool InternetGaming::update_for_clients() {
 	return temp;
 }
 
-/// \returns the players in the room, if no error occured, or nullptr in case of error
+/// \returns the players in the room, if no error occurred, or nullptr in case of error
 const std::vector<InternetClient>* InternetGaming::clients() {
 	return error() ? nullptr : &clientlist_;
 }

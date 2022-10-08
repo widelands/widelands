@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -31,18 +31,18 @@ msgstr[1] "%1% Delen %2% sünd to dienem »%3%«-Huus brocht worden."
 msgid "Transport"
 msgstr "Transporteren"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
 msgstr ""
 "Veer Schüppen, um de Broken wegtodoon, sünd in de Kraamhuus sammelt worden."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid "Shovels"
 msgstr "Schüppen"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."

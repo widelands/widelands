@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2021
+# Benedikt Straub <benedikt-straub@web.de>, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2022\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,8 +32,7 @@ msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
-"Riet all unnützen lütten Husen platt, um Materialien för neje Husen to "
-"kriegen."
+"Riet all unnützen lütten Husen platt, um Kraam för neje Husen to kriegen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid ""
@@ -113,7 +112,7 @@ msgid ""
 "building material supply chain."
 msgstr ""
 "Bau tominnst dree Boomhauereen un twee Flintslagerhusen, um de Versörgung "
-"mit Baumaterialien weer torechttomaken."
+"mit Baukraam weer torechttomaken."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid "Produce fish and rations"
@@ -578,12 +577,11 @@ msgid ""
 "of the lumberjacks’ houses and the wells seem also to be inefficient or worn"
 " out."
 msgstr ""
-"Toeerst bruken wi also een paar Baumaterialien, um de Fehlers vun deesem "
-"lepen Macker oftohelpen. Laat uns unnütze lütte Husen plattrieten, um een "
-"paar Baumaterialien torüggtokriegen un se in uns’ Raadhuus to sammeln. Ick "
-"seh, dat de Fisker-Husen un Flintslagerhusen keene Mineraale in de "
-"Naberskupp hebben. All de Boomhauer-Husen un Wellen sünd ok langsaam of "
-"leeg."
+"Toeerst bruken wi also een paar Baukraam, um de Fehlers vun deesem lepen "
+"Macker oftohelpen. Laat uns unnütze lütte Husen plattrieten, um een paar "
+"Baukraam torüggtokriegen un se in uns’ Raadhuus to sammeln. Ick seh, dat de "
+"Fisker-Husen un Flintslagerhusen keene Mineraale in de Naberskupp hebben. "
+"All de Boomhauer-Husen un Wellen sünd ok langsaam of leeg."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:320
@@ -604,8 +602,8 @@ msgid ""
 "production in all bigger buildings and get the workers some rest until we "
 "have produced some of their input wares."
 msgstr ""
-"Blot, för de Husen, wat Baumaterialien bruken, sallen wi dat Lager daarför "
-"beter up null setten. Of dat Produzeren in all grotern Husen anhollen un de "
+"Blot, för de Husen, wat Baukraam bruken, sallen wi dat Lager daarför beter "
+"up null setten. Of dat Produzeren in all grotern Husen anhollen un de "
 "Arbeiders ruhen laten, bit wi de Waren, wat se bruken, produzeert hebben."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:330
@@ -670,8 +668,8 @@ msgid ""
 "Lutius, now we are getting somewhere. As we have gained some construction "
 "materials, we can start to rebuild our economy."
 msgstr ""
-"Lutjus, wi kummen wieder. Wi hebben nu een paar Baumaterialien un könen uns’"
-" Weertskupp weer upbauen."
+"Lutjus, wi kummen wieder. Wi hebben nu wat Baukraam un könen uns’ Weertskupp"
+" weer upbauen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:355
@@ -680,9 +678,9 @@ msgid ""
 "least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
 " all of the unproductive buildings though."
 msgstr ""
-"Toeerst bruken wi mehr Baumaterialien. Also sallen wi tominnst dree "
-"Boomhauer-Husen un twee Flintslagerhusen bauen. Pass up, dat to daarvör all "
-"de unnützen Husen plattrieten hest."
+"Toeerst bruken wi mehr Baukraam. Also sallen wi tominnst dree Boomhauer-"
+"Husen un twee Flintslagerhusen bauen. Pass up, dat to daarvör all de "
+"unnützen Husen plattrieten hest."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:358
@@ -743,8 +741,8 @@ msgid ""
 "Lutius, well done so far. I just got the news that we have finished the "
 "basic buildings to obtain some construction materials."
 msgstr ""
-"Lutjus, gode Arbeid bit nu. All de Husen, wat wi för eenfache Baumaterialien"
-" bruken, sünd nu beschickt."
+"Lutjus, gode Arbeid bit nu. All de Husen, wat wi för eenfach Baukraam "
+"bruken, sünd nu beschickt."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:386
@@ -1179,8 +1177,8 @@ msgid ""
 "dismantling the ineffective buildings."
 msgstr ""
 "Daarum hebb ick mi verlöövt, uns’ List vun Husen tum Bauen up nix as de "
-"Boomhaueree to minnern, bit wi genoog Baumaterialien sammelt hebben, indeem "
-"wi de unnützen Husen plattrieten."
+"Boomhaueree to minnern, bit wi genoog Baukraam sammelt hebben, indeem wi de "
+"unnützen Husen plattrieten."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:571
 msgid "Amalea Reminds to Clear Road Network"

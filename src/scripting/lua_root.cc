@@ -89,7 +89,8 @@ const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
    PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
    PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
-   PROP_RO(LuaGame, win_condition),      {nullptr, nullptr, nullptr},
+   PROP_RW(LuaGame, allow_diplomacy),    PROP_RO(LuaGame, win_condition),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -240,6 +241,22 @@ int LuaGame::get_scenario_difficulty(lua_State* L) {
 	}
 	lua_pushuint32(L, d);
 	return 1;
+}
+
+/* RST
+   .. attribute:: allow_diplomacy
+
+      .. versionadded:: 1.1
+
+      (RW) Whether players are allowed to change teams and resign.
+*/
+int LuaGame::get_allow_diplomacy(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get_game(L).diplomacy_allowed()));
+	return 1;
+}
+int LuaGame::set_allow_diplomacy(lua_State* L) {
+	get_game(L).set_diplomacy_allowed(luaL_checkboolean(L, -1));
+	return 0;
 }
 
 /*
