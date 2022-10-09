@@ -1,6 +1,6 @@
 [TOC]
 
-## post-1.0 until [git b1c9ca4](https://github.com/widelands/widelands/commit/b1c9ca4d95767cb85427ce235448f6e4cde3d9d1)
+## Release 1.1
 
 ### Animations, Icons and Overlays
 
@@ -123,6 +123,7 @@
 - Cleanup player end statuses on loading (#5070)
 - Fix `DescriptionManager` Stacking (#5386)
 - Saveload `destruction_blocked` Property (#5450)
+- Relax Invalid Assumption in AttackWindow Saveloading (#5597)
 
 
 ### AI
@@ -184,6 +185,7 @@
 - Diplomacy (#5091)
 - Made diking part of the official tribe (#5104)
 - Fix Segfault on Building Dismantle (#5482)
+- Do not delete units during random game loading (#5590)
 
 
 ### User Interface
@@ -248,6 +250,9 @@
 - Warp mouse to target when launching attack (#5497)
 - Richtext-Escape Hotkey Strings (#5499)
 - Consistent UI Keyboard Selection (#5495)
+- Misc Replay Fixes (#5554)
+    - Use default display flags in replays
+    - Skip version mismatch message on Ctrl+click
 
 
 ### Internationalization
@@ -271,6 +276,7 @@
 - Skip installing locales when translations are disabled (#5302)
 - Tut01 String Fix (#5327)
 - Military capacity string refactor (#5476)
+- Sort xgettext inputs in translations update
 
 
 ### Help and Documentation
@@ -323,6 +329,8 @@
 - Thread safe destructor for Texture `shared_ptr` (#5436)
 - Use SDL Relative Mouse Mode (#5494)
 - Set SDL hint for relative mouse mode (#5504)
+- Support Non-Indexed Terrain Textures (#5545)
+- Use old style name for SDL pixelformat (#5547)
 
 
 ### Networking
@@ -330,7 +338,7 @@
 - Break mutex deadlock in GameClient (#4948)
 - Fix game client deletion crash (#4970)
 - Keep GameController pointer alive for template game (#5128)
-- Replace Boost::Asio → Asio (#5164)
+- Replace Boost::Asio → Asio (#5164, #5532)
 - Fix Description Index Misordering from UI Code (#5288)
 - Fix sync report requesting during game startup (#5382)
 
@@ -353,7 +361,7 @@
 - Fix compiling error introduced by boost 1.77 (#5063)
 - Honour `--(no|with)-asan`-option regardless of ARGV-order (#5078)
 - Fix Brotli Windows CI Error (#5079)
-- Build System Update (#5085)
+- Build System Update (#5085, #5539)
     - Silence an undesired naming scheme warning in the SDL2 finding module
     - Add a customized copy of CMake's deprecated Documentation module as recommended
     - Update latest g++/clang versions in the CI
