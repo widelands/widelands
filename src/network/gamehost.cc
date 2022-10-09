@@ -1950,13 +1950,14 @@ void GameHost::update_network_speed() {
 		// No pause was forced - normal speed calculation
 		std::vector<uint32_t> speeds;
 
-		speeds.push_back(d->localdesiredspeed);
 		for (const Client& client : d->clients) {
 			if (client.playernum <= UserSettings::highest_playernum()) {
 				speeds.push_back(client.desiredspeed);
 			}
 		}
-		assert(!speeds.empty());
+		if (d->settings.playernum <= UserSettings::highest_playernum() || speeds.empty()) {
+			speeds.push_back(d->localdesiredspeed);
+		}
 
 		std::sort(speeds.begin(), speeds.end());
 
