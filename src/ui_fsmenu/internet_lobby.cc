@@ -125,6 +125,14 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
 	right_column_content_box_.add(&servername_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(0);
 	right_column_content_box_.add(&hostgame_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(0);
+	right_column_content_box_.add(new UI::MultilineTextarea(
+			&right_column_content_box_, 0, 0, 0, 0,
+			UI::PanelStyle::kFsMenu,
+			AddOns::list_game_relevant_addons(),
+			UI::Align::kLeft,
+			UI::MultilineTextarea::ScrollMode::kNoScrolling
+		), UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 
 	joingame_.sigclicked.connect([this]() { clicked_joingame(); });
