@@ -27,13 +27,16 @@ function place_flags(eco, plr)
 end
 
 function place_roads(eco, plr)
-   for i = 1, #eco.roads do
-      local command = string.format("road = plr:place_road(map:get_field(%i,%i).immovable, %s ,true)", eco.roads[i].x, eco.roads[i].y, eco.roads[i].dirs)
+   -- Second carrier can't be placed currently, so we just fake a carrier
+   -- (otherwise rd.workers could be passed directly to set_workers())
+   worker = plr.tribe.carriers[1]
+   for i, rd in ipairs(eco.roads) do
+      -- Road type is not dumped, so we load all roads as "normal"
+      -- Waterways are not dumped currently
+      local command = string.format("road = plr:place_road(\"normal\", map:get_field(%i,%i).immovable, %s, true)", rd.x, rd.y, rd.dirs)
       local f = assert (load (command))
       f()
-      -- Second carrier can't be placed currently, so we just fake a carrier 
-      worker = (plr.tribe_name.."_carrier")
-      road:set_workers(worker,1)
+      road:set_workers(worker, 1)
    end
 end
 
@@ -85,6 +88,9 @@ function load_eco(plrno, tribe, folder)
    local eco = game:read_campaign_data(folder, file)
    -- hq = (tribe.."_headquarters")
    -- plr:place_building(hq, map.player_slots[plrno].starting_field, false, true)
+
+   assert(plr.tribe.name == eco.details[1].tribe,
+          "Player and saved tribe mismatch: " .. plr.tribe.name .. " != " .. eco.details[1].tribe)
 
    place_flags(eco, plr)
    place_roads(eco, plr)

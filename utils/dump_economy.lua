@@ -14,7 +14,7 @@
 --    the name of the file will be e.g. ecodump_player1_tribename.wcd
 
 --
--- Note that constructionsites will be completely ignored.
+-- Note that constructionsites and waterways will be completely ignored.
 --
 -- The HQ flag of a player will be the base for the graph traversal used. Therefore if he has more
 -- than one economy, this script will only dump one of it.
@@ -23,14 +23,16 @@ include "scripting/set.lua"
 
 local game = wl.Game()
 local map = game.map
-local rv = {
-   details = {},
-   flags = {},
-   roads = {},
-   buildings = {}
-}
+local rv
 
 function traverse_economy(plr, flag)
+
+   rv = {
+      details = {},
+      flags = {},
+      roads = {},
+      buildings = {}
+   }
 
    rv.details[1] = {playerno = plr.number, tribe = plr.tribe_name}
    local roads_done = Set:new{}
@@ -124,10 +126,15 @@ function traverse_economy(plr, flag)
             elseif n.immovable.descr.type_name == "constructionsite" or n.immovable.descr.type_name == "dismantlesite" then
                print(("IGNORING constructionsite/dismantlesite at %s"):format(tostring(n)))
             elseif n.immovable.descr.type_name:sub(-4) == "site" or n.immovable.descr.type_name == "warehouse" then
-               _discover_building(n.immovable)
+               if n.immovable.descr.name == "amazons_treetop_sentry" then
+                  -- Can't be placed by lua
+                  -- Must be by name because built_over_immovable property isn't exposed to lua
+                  print("IGNORING treetop sentry")
+               else
+                  _discover_building(n.immovable)
+               end
             else
-               print("UNKNOWN immovable type: ", n.immovable.type)
-               assert(nil)
+               print("IGNORING immovable type: ", n.immovable.descr.type_name)
             end
          end
       end
