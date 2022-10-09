@@ -45,24 +45,25 @@ const std::unordered_map<std::string, std::string> kDifficultyIcons = {
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kNone,
     AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false}},
-   {AddOnCategory::kTribes, AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
-                                              "images/wui/stats/menu_tab_wares_warehouse.png", true}},
+   {AddOnCategory::kTribes,
+    AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
+                      "images/wui/stats/menu_tab_wares_warehouse.png", true}},
    {AddOnCategory::kWorld, AddOnCategoryInfo{"world", []() { return _("World"); },
                                              "images/wui/menus/toggle_immovables.png", true}},
-   {AddOnCategory::kScript,
-    AddOnCategoryInfo{"script", []() { return _("Script"); }, "images/logos/WL-Editor-32.png", true}},
+   {AddOnCategory::kScript, AddOnCategoryInfo{"script", []() { return _("Script"); },
+                                              "images/logos/WL-Editor-32.png", true}},
    {AddOnCategory::kMaps, AddOnCategoryInfo{"maps", []() { return _("Map Set"); },
                                             "images/wui/menus/toggle_minimap.png", true}},
    {AddOnCategory::kCampaign, AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
                                                 "images/wui/messages/messages_warfare.png", false}},
    {AddOnCategory::kWinCondition,
-    AddOnCategoryInfo{
-       "win_condition", []() { return _("Win Condition"); }, "images/wui/menus/objectives.png", true}},
+    AddOnCategoryInfo{"win_condition", []() { return _("Win Condition"); },
+                      "images/wui/menus/objectives.png", true}},
    {AddOnCategory::kStartingCondition,
     AddOnCategoryInfo{"starting_condition", []() { return _("Starting Condition"); },
                       "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", true}},
-   {AddOnCategory::kTheme,
-    AddOnCategoryInfo{"theme", []() { return _("Theme"); }, "images/wui/menus/main_menu.png", false}}};
+   {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
+                                             "images/wui/menus/main_menu.png", false}}};
 
 std::vector<AddOnState> g_addons;
 
@@ -264,11 +265,14 @@ std::string list_game_relevant_addons() {
 	}
 
 	if (addons.empty()) {
-		return as_richtext(g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(_("No game-relevant add-ons in use.")));
+		return as_richtext(g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		                      .as_font_tag(_("No game-relevant add-ons in use.")));
 	}
 
-	std::string addons_text = g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(
-			format(ngettext("%u add-on in use:", "%u add-ons in use:", addons.size()), addons.size()));
+	std::string addons_text =
+	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+	      .as_font_tag(format(
+	         ngettext("%u add-on in use:", "%u add-ons in use:", addons.size()), addons.size()));
 	for (const std::string& a : addons) {
 		addons_text += as_listitem(a, UI::FontStyle::kFsMenuInfoPanelParagraph);
 	}
