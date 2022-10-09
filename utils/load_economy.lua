@@ -27,16 +27,22 @@ function place_flags(eco, plr)
 end
 
 function place_roads(eco, plr)
-   -- Second carrier can't be placed currently, so we just fake a carrier
-   -- (otherwise rd.workers could be passed directly to set_workers())
-   worker = plr.tribe.carriers[1]
+   carrier2 = plr.tribe.carriers[2]
    for i, rd in ipairs(eco.roads) do
-      -- Road type is not dumped, so we load all roads as "normal"
+      -- Road type is not dumped
       -- Waterways are not dumped currently
-      local command = string.format("road = plr:place_road(\"normal\", map:get_field(%i,%i).immovable, %s, true)", rd.x, rd.y, rd.dirs)
+      if rd.workers[carrier2] then
+         road_type = "busy"
+      else
+         road_type = "normal"
+      end
+      local command = string.format("road = plr:place_road([[%s]], map:get_field(%i,%i).immovable, %s, true)", road_type, rd.x, rd.y, rd.dirs)
       local f = assert (load (command))
       f()
-      road:set_workers(worker, 1)
+      -- Sometimes more than the allowed number of carriers is dumped, which gives errors if we use
+      -- rd.workers directly. To keep it simple, we just set workers to maximum, even if the road
+      -- was not fully occupied originally.
+      road:set_workers(road.valid_workers)
    end
 end
 
