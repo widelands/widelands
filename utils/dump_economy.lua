@@ -14,7 +14,7 @@
 --    the name of the file will be e.g. ecodump_player1_tribename.wcd
 
 --
--- Note that constructionsites and waterways will be completely ignored.
+-- Note that constructionsites will be completely ignored.
 --
 -- The HQ flag of a player will be the base for the graph traversal used. Therefore if he has more
 -- than one economy, this script will only dump one of it.
@@ -73,7 +73,9 @@ function traverse_economy(plr, flag)
 
    local _discover_road = function (r)
       if roads_done:contains(r) then return end
-      rv.roads[#rv.roads + 1] = {x = r.start_flag.fields[1].x, y = r.start_flag.fields[1].y, dirs = table.concat(_find_directions(r), ','), workers = r:get_workers("all")}
+      rv.roads[#rv.roads + 1] = {x = r.start_flag.fields[1].x, y = r.start_flag.fields[1].y,
+         dirs = table.concat(_find_directions(r), ','), workers = r:get_workers("all"),
+         road_type = r.road_type}
       roads_done:add(r)
    end
 
@@ -114,7 +116,7 @@ function traverse_economy(plr, flag)
 
       for idx,n in ipairs{f.rn, f.brn, f.bln, f.ln, f.tln, f.trn} do
          if n.immovable and n.immovable.owner == plr then
-            if n.immovable.descr.type_name == "road" then
+            if n.immovable.descr.type_name == "road" or n.immovable.descr.type_name == "waterway" then
                local r = n.immovable
                if r.start_flag == flag then
                   _handle_flag(r.end_flag)

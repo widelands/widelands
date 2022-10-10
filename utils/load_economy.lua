@@ -27,16 +27,8 @@ function place_flags(eco, plr)
 end
 
 function place_roads(eco, plr)
-   carrier2 = plr.tribe.carriers[2]
    for i, rd in ipairs(eco.roads) do
-      -- Road type is not dumped
-      -- Waterways are not dumped currently
-      if rd.workers[carrier2] then
-         road_type = "busy"
-      else
-         road_type = "normal"
-      end
-      local command = string.format("road = plr:place_road([[%s]], map:get_field(%i,%i).immovable, %s, true)", road_type, rd.x, rd.y, rd.dirs)
+      local command = string.format("road = plr:place_road([[%s]], map:get_field(%i,%i).immovable, %s, true)", rd.road_type, rd.x, rd.y, rd.dirs)
       local f = assert (load (command))
       f()
       -- Sometimes more than the allowed number of carriers is dumped, which gives errors if we use
