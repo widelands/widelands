@@ -80,18 +80,25 @@ function place_buildings(eco, plr)
 
 end
 
-function load_eco(plrno, tribe, folder)
+function load_eco(plrno, folder)
    plr = game.players[plrno]
+   if plr == nil then
+      print("ERROR: There is no player "..plrno)
+      return
+   end
+   tribe = plr.tribe.name
    local file = ("ecodump_player"..plrno.."-"..tribe)
    local eco = game:read_campaign_data(folder, file)
-   -- hq = (tribe.."_headquarters")
-   -- plr:place_building(hq, map.player_slots[plrno].starting_field, false, true)
 
-   assert(plr.tribe.name == eco.details[1].tribe,
-          "Player and saved tribe mismatch: " .. plr.tribe.name .. " != " .. eco.details[1].tribe)
+   if eco then
+      -- hq = (tribe.."_headquarters")
+      -- plr:place_building(hq, map.player_slots[plrno].starting_field, false, true)
 
-   place_flags(eco, plr)
-   place_roads(eco, plr)
-   place_buildings(eco, plr)
+      place_flags(eco, plr)
+      place_roads(eco, plr)
+      place_buildings(eco, plr)
+   else
+      print("ERROR: Could not load economy from file "..file)
+   end
 
 end
