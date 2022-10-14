@@ -69,6 +69,7 @@
 - Clean up `descriptions` vs `wl.Descriptions()` in init.lua files (#5296)
 - Restore global descriptions for savegame compatibility (#5393)
 - Fix Lua Scripting Multithreading (#5475)
+- Fixes in dump- and load economy scripts (#5601)
 
 
 ### Maps
