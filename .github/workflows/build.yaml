@@ -204,7 +204,7 @@ jobs:
 
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
         config: [Debug, Release]
@@ -267,7 +267,7 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   windows:
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
         config: [Debug, Release]
@@ -320,7 +320,7 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-mingw-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   macos:
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
         config: [debug, release]
@@ -355,8 +355,8 @@ jobs:
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
 
   appimage:
-    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' }}
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    # if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' }}
+    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
         config: [Debug, Release]
