@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # Thadah D. Denyse <juchuf@gmail.com>, 2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Thadah D. Denyse <juchuf@gmail.com>, 2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -430,7 +430,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:218
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:224
 msgid "The North"
-msgstr ""
+msgstr "El Norte"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:219
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:225
@@ -578,6 +578,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Has completado esta misión. Puedes continuar jugando si quieres, de otro "
+"modo avanza a la siguiente misión."
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:306
