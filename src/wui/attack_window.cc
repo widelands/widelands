@@ -550,8 +550,14 @@ UI::Window& AttackWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::Map
 			}
 			for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 				const Widelands::Soldier* s = &mol.get<Widelands::Soldier>(fr.unsigned_32());
-				a->remaining_soldiers_->remove(s);
-				a->attacking_soldiers_->add(s);
+				if (a->remaining_soldiers_->contains(s)) {
+					a->remaining_soldiers_->remove(s);
+					a->attacking_soldiers_->add(s);
+				}
+				/* Since the attack window only updates a soldier list every 500 ms, it is
+				 * possible for the saved list of soldiers to send to contain a soldier
+				 * who is no longer available. Skip this situation silently.
+				 */
 			}
 
 			return *a;
