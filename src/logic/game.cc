@@ -330,9 +330,13 @@ void Game::init_newgame(const GameSettings& settings) {
 		maploader = mutable_map()->get_correct_loader(settings.mapfilename);
 		assert(maploader);
 		maploader->preload_map(settings.scenario, &enabled_addons());
+		postload_addons_before_loading();
+	} else {
+		// TODO(matthiakl): Once random games support world Add-Ons, call
+		// postload_addons_before_loading() here as well
+		postload_addons();
+		did_postload_addons_before_loading_ = true;
 	}
-
-	postload_addons_before_loading();
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;

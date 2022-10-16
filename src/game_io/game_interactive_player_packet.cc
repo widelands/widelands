@@ -73,14 +73,14 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 			InteractivePlayer* ipl = game.get_ipl();
 			if (InteractiveBase* const ibase = game.get_ibase()) {
 				ibase->map_view()->scroll_to_map_pixel(center_map_pixel, MapView::Transition::Jump);
+			}
+			if (ipl != nullptr) {  // Not in replays
 #ifndef NDEBUG
 				display_flags |= InteractiveBase::dfDebug;
 #else
 				display_flags &= ~InteractiveBase::dfDebug;
 #endif
-				ibase->set_display_flags(display_flags);
-			}
-			if (ipl != nullptr) {
+				ipl->set_display_flags(display_flags);
 				ipl->set_player_number(player_number);
 			}
 
