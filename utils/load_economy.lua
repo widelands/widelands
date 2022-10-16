@@ -27,13 +27,14 @@ function place_flags(eco, plr)
 end
 
 function place_roads(eco, plr)
-   for i = 1, #eco.roads do
-      local command = string.format("road = plr:place_road(map:get_field(%i,%i).immovable, %s ,true)", eco.roads[i].x, eco.roads[i].y, eco.roads[i].dirs)
+   for i, rd in ipairs(eco.roads) do
+      local command = string.format("road = plr:place_road([[%s]], map:get_field(%i,%i).immovable, %s, true)", rd.road_type, rd.x, rd.y, rd.dirs)
       local f = assert (load (command))
       f()
-      -- Second carrier can't be placed currently, so we just fake a carrier 
-      worker = (plr.tribe_name.."_carrier")
-      road:set_workers(worker,1)
+      -- Sometimes more than the allowed number of carriers is dumped, which gives errors if we use
+      -- rd.workers directly. To keep it simple, we just set workers to maximum, even if the road
+      -- was not fully occupied originally.
+      road:set_workers(road.valid_workers)
    end
 end
 
@@ -79,15 +80,25 @@ function place_buildings(eco, plr)
 
 end
 
-function load_eco(plrno, tribe, folder)
+function load_eco(plrno, folder)
    plr = game.players[plrno]
+   if plr == nil then
+      print("ERROR: There is no player "..plrno)
+      return
+   end
+   tribe = plr.tribe.name
    local file = ("ecodump_player"..plrno.."-"..tribe)
    local eco = game:read_campaign_data(folder, file)
-   -- hq = (tribe.."_headquarters")
-   -- plr:place_building(hq, map.player_slots[plrno].starting_field, false, true)
 
-   place_flags(eco, plr)
-   place_roads(eco, plr)
-   place_buildings(eco, plr)
+   if eco then
+      -- hq = (tribe.."_headquarters")
+      -- plr:place_building(hq, map.player_slots[plrno].starting_field, false, true)
+
+      place_flags(eco, plr)
+      place_roads(eco, plr)
+      place_buildings(eco, plr)
+   else
+      print("ERROR: Could not load economy from file "..file)
+   end
 
 end
