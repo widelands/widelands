@@ -7,7 +7,7 @@
 # Gastón <gastbr@gmail.com>, 2016
 # Thadah D. Denyse <juchuf@gmail.com>, 2018
 # Madkat Here, 2015,2020
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
 # X Bello <xbello@gmail.com>, 2020
 msgid ""
 msgstr ""
@@ -15,13 +15,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-05-16 03:13+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Franco Mercado <francomercado724@outlook.com>, 2021\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid "Usage:"
@@ -213,7 +213,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:163
 #: ../../src/wlapplication_messages.cc:166
 msgid "[...]"
-msgstr ""
+msgstr "[...]"
 
 #: ../../src/wlapplication_messages.cc:135
 msgid "Scroll when the mouse cursor is near the screen edge."
@@ -338,7 +338,7 @@ msgstr ""
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:179
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #. * TRANSLATORS: `x` references a window width placeholder
 #: ../../src/wlapplication_messages.cc:181
@@ -348,7 +348,7 @@ msgstr ""
 #. * TRANSLATORS: A placeholder for window height
 #: ../../src/wlapplication_messages.cc:184
 msgid "y"
-msgstr ""
+msgstr "y"
 
 #. * TRANSLATORS: `y` references a window height placeholder
 #: ../../src/wlapplication_messages.cc:186
@@ -452,7 +452,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:254
 #, c-format
 msgid "This is Widelands version %s"
-msgstr ""
+msgstr "Este es Widelands Versión %s"
 
 #: ../../src/wlapplication_messages.cc:312
 msgid ""

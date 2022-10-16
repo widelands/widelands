@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-09-07 04:42+0000\n"
+"POT-Creation-Date: 2022-10-10 04:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: tamanegi, 2018-2019\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
@@ -763,8 +763,8 @@ msgstr "鉱山"
 msgid "port"
 msgstr "港"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1060,9 +1060,9 @@ msgstr ""
 msgid "Waterway length limit:"
 msgstr ""
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1800,39 +1800,39 @@ msgid "Not set"
 msgstr "設定なし"
 
 #: ../../src/logic/game.cc:282 ../../src/logic/game.cc:326
-#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
+#: ../../src/logic/game.cc:428 ../../src/logic/game.cc:482
 msgid "Preloading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:378
+#: ../../src/logic/game.cc:382
 msgid "Initializing game…"
 msgstr "ゲームを初期化中……"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:621
+#: ../../src/logic/game.cc:625
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:642 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr "開始位置が見つかりません"
 
-#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:643 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "プレイヤー %u の開始位置が存在しないため、Widelandsはゲームを開始できませんでした。\nWidelandsエディタ上で手動で開始位置を追加すれば、問題を解決できます。"
 
-#: ../../src/logic/game.cc:739
+#: ../../src/logic/game.cc:743
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1189
+#: ../../src/logic/game.cc:1193
 msgid "Trade Offer"
 msgstr "トレードの提案"
 
-#: ../../src/logic/game.cc:1191
+#: ../../src/logic/game.cc:1195
 msgid "This market has received a new trade offer."
 msgstr "このマーケットは新たなトレードの提案を受け取りました。"
 
@@ -5190,11 +5190,11 @@ msgstr "シングルプレイメニューに戻る"
 msgid "Load this game"
 msgstr "このゲームを読み込む"
 
-#: ../../src/ui_fsmenu/loadgame.cc:162
+#: ../../src/ui_fsmenu/loadgame.cc:163
 msgid "Version Mismatch"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:163
+#: ../../src/ui_fsmenu/loadgame.cc:164
 msgid ""
 "This replay was created with a different Widelands version. It might be compatible, but will more likely desync or even fail to load.\n"
 "\n"
@@ -6122,18 +6122,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr ""
@@ -7271,9 +7271,9 @@ msgstr "港"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7661,8 +7661,8 @@ msgstr "切断されたプレイヤーを選択した AI に置き換えてプ�
 msgid "AI for the disconnected player"
 msgstr "代わりの AI"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -8303,8 +8303,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "統計"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:315 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "航海"

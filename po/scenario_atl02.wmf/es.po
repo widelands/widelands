@@ -33,7 +33,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:687
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:735
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: To be used in placeholders for switching texts according to
 #. current leader
@@ -51,7 +51,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:568
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:637
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:49
 msgid "Find a place to build a port"
@@ -75,7 +75,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:58
 msgid "Ensure the supply of construction materials"
-msgstr ""
+msgstr "Asegura el suministro de materiales de construcción"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:60
 msgid "Establish Basic Production Chain"
@@ -111,7 +111,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:76
 msgid "Build Mines"
-msgstr ""
+msgstr "Construir Minas"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:77
 msgid ""
@@ -122,11 +122,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:82
 msgid "Explore the surroundings"
-msgstr ""
+msgstr "Explora los alrededores"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:84
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Explora Tus Alrededores"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:85
 msgid ""
@@ -137,11 +137,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
-msgstr ""
+msgstr "Expande tu territorio"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:92
 msgid "Expand Territory"
-msgstr ""
+msgstr "Expande Territorio"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:93
 msgid ""
@@ -152,11 +152,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Construye una granja de arañas y un telar"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Producción de tela de araña"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:101
 msgid ""
@@ -243,7 +243,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:141
 msgid "Defeat Maletus"
-msgstr ""
+msgstr "Derrota a Maletus"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:143
 msgid "Defeat Imperial Leader Maletus"
@@ -290,7 +290,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:166
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:168
 msgid "Defeat Kalitath"
-msgstr ""
+msgstr "Derrota a Kalitath"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:169
 msgid ""
@@ -301,7 +301,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:178
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:740
 msgid "Defeated!"
-msgstr ""
+msgstr "¡Derrotado!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:179
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:741
@@ -321,7 +321,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:744
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:755
 msgid "You Have Lost"
-msgstr ""
+msgstr "Has Perdido"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:745
@@ -333,7 +333,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:191
 msgid "The Princess’s Memoir"
-msgstr ""
+msgstr "Memorias de la princesa"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:192
 msgid "Jundlina writes her diary"
@@ -1221,13 +1221,13 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Casa del Explorador"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:76
 msgid "scouting"
-msgstr ""
+msgstr "explorando"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:8
@@ -1311,7 +1311,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:20
 msgctxt "building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Explora territorio desconocido."
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Temple of
 #. Satul
