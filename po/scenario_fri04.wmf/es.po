@@ -57,7 +57,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
-msgstr ""
+msgstr "Derrota al Imperio"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:49
 msgid "Defeat the Imperial Legate"
@@ -526,7 +526,7 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:295
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:304
 msgid "Victory"
-msgstr ""
+msgstr "Victoria"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:278
 msgid "Intruders defeated"

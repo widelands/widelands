@@ -242,7 +242,7 @@ def run_xgettext(infiles, outfile, opts):
     xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" %
                                 (opts, outfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
     try:
-        for fname in infiles:
+        for fname in sorted(infiles):
             xgettext.stdin.write(os.path.normpath(fname) + '\n')
         xgettext.stdin.close()
     except IOError as err_msg:

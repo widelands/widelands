@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-09-04 04:26+0000\n"
+"POT-Creation-Date: 2022-10-10 04:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Jiawei Sun, 2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -768,10 +768,10 @@ msgstr "矿"
 msgid "port"
 msgstr "港口"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
-#: ../../src/logic/map_objects/world/terrain_description.cc:75
+#: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
 msgstr "可行走的"
 
@@ -1065,9 +1065,9 @@ msgstr "（没有）"
 msgid "Waterway length limit:"
 msgstr "水路长度限制："
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1490,8 +1490,8 @@ msgid ""
 "location."
 msgstr "选择新的地图尺寸，然后点击地图将其拆分到所期望位置。增加地图的尺寸时，新的列/行将插入到选定点的东/南。缩小地图尺寸时，所期望的列/行数将从拆分位置的东/南移除。"
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1805,39 +1805,39 @@ msgid "Not set"
 msgstr "未设定"
 
 #: ../../src/logic/game.cc:282 ../../src/logic/game.cc:326
-#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
+#: ../../src/logic/game.cc:428 ../../src/logic/game.cc:482
 msgid "Preloading map…"
 msgstr "预加载地图…"
 
-#: ../../src/logic/game.cc:378
+#: ../../src/logic/game.cc:382
 msgid "Initializing game…"
 msgstr "初始化游戏"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:621
+#: ../../src/logic/game.cc:625
 msgid "Creating player infrastructure…"
 msgstr "创建玩家基础设施…"
 
-#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:642 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr "缺少起始位置"
 
-#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:643 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands不能开始游戏，因为玩家%u缺少起始位置。\n你可以用Widelands编辑器手动添加一个开始位置来解决这个问题。"
 
-#: ../../src/logic/game.cc:739
+#: ../../src/logic/game.cc:743
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1189
+#: ../../src/logic/game.cc:1193
 msgid "Trade Offer"
 msgstr "交易报价"
 
-#: ../../src/logic/game.cc:1191
+#: ../../src/logic/game.cc:1195
 msgid "This market has received a new trade offer."
 msgstr "这个市场收到了新的交易报价。"
 
@@ -2362,27 +2362,27 @@ msgid "Worker got lost!"
 msgstr "工人迷路了！"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:70
+#: ../../src/logic/map_objects/world/terrain_description.cc:71
 msgid "arable"
 msgstr "适于耕种的"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:80
+#: ../../src/logic/map_objects/world/terrain_description.cc:81
 msgid "navigable"
 msgstr "适于通航的"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:85
+#: ../../src/logic/map_objects/world/terrain_description.cc:86
 msgid "unreachable"
 msgstr "不能达到的"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:90
+#: ../../src/logic/map_objects/world/terrain_description.cc:91
 msgid "mineable"
 msgstr "可开采的"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:95
+#: ../../src/logic/map_objects/world/terrain_description.cc:96
 msgid "unwalkable"
 msgstr "不可行走的"
 
@@ -5195,11 +5195,11 @@ msgstr "返回单人游戏菜单"
 msgid "Load this game"
 msgstr "载入游戏"
 
-#: ../../src/ui_fsmenu/loadgame.cc:162
+#: ../../src/ui_fsmenu/loadgame.cc:163
 msgid "Version Mismatch"
 msgstr "版本不匹配"
 
-#: ../../src/ui_fsmenu/loadgame.cc:163
+#: ../../src/ui_fsmenu/loadgame.cc:164
 msgid ""
 "This replay was created with a different Widelands version. It might be compatible, but will more likely desync or even fail to load.\n"
 "\n"
