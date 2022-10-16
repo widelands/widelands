@@ -268,6 +268,7 @@ void GameClient::do_run(RecvPacket& packet) {
 
 	Widelands::Game game;
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
+	game.logic_rand_seed(packet.unsigned_32());
 
 	game.enabled_addons().clear();
 	for (size_t i = packet.unsigned_32(); i != 0u; --i) {
