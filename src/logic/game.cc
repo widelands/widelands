@@ -1316,21 +1316,26 @@ void Game::sample_statistics() {
 
 		// Now, walk the bobs
 		for (Bob const* b = fc.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
-			if (upcast(Soldier const, s, b)) {
-				miltary_strength[s->owner().player_number() - 1] +=
-				   s->get_level(TrainingAttribute::kTotal) + 1;  //  So that level 0 also counts.
+			if (b->descr().type() != MapObjectType::SOLDIER) {
+				continue;
 			}
+
+			constexpr int kHeroValue = 20;
+			upcast(Soldier const, soldier, b);
+			assert(soldier != nullptr);
+			miltary_strength[soldier->owner().player_number() - 1] +=
+			   soldier->get_level(TrainingAttribute::kTotal) * kHeroValue / std::max(soldier->descr().get_max_total_level(), 1u)
+			   + 1;  //  So that level 0 also counts.
 		}
 	}
 
 	//  Number of workers / wares / casualties / kills.
 	iterate_players_existing(p, nr_plrs, *this, plr) {
+		const TribeDescr& tribe = plr->tribe();
 		uint32_t wostock = 0;
 		uint32_t wastock = 0;
 
 		for (const auto& economy : plr->economies()) {
-			const TribeDescr& tribe = plr->tribe();
-
 			switch (economy.second->type()) {
 			case wwWARE:
 				for (const DescriptionIndex& ware_index : tribe.wares()) {
@@ -1339,9 +1344,14 @@ void Game::sample_statistics() {
 				break;
 			case wwWORKER:
 				for (const DescriptionIndex& worker_index : tribe.workers()) {
-					if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
-						wostock += economy.second->stock_ware_or_worker(worker_index);
+					if (worker_index == tribe.soldier()) {
+						continue;  // Ignore soldiers.
 					}
+					const WorkerDescr& d = *tribe.get_worker_descr(worker_index);
+					if (d.is_buildable() && d.buildcost().empty()) {
+						continue;  // Don't count free workers.
+					}
+					wostock += economy.second->stock_ware_or_worker(worker_index);
 				}
 				break;
 			}
