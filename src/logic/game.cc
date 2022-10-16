@@ -1324,8 +1324,9 @@ void Game::sample_statistics() {
 			upcast(Soldier const, soldier, b);
 			assert(soldier != nullptr);
 			miltary_strength[soldier->owner().player_number() - 1] +=
-			   soldier->get_level(TrainingAttribute::kTotal) * kHeroValue / std::max(soldier->descr().get_max_total_level(), 1u)
-			   + 1;  //  So that level 0 also counts.
+			   soldier->get_level(TrainingAttribute::kTotal) * kHeroValue /
+			      std::max(soldier->descr().get_max_total_level(), 1u) +
+			   1;  //  So that level 0 also counts.
 		}
 	}
 
