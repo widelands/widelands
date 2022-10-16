@@ -65,8 +65,8 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol *
 				 * with the given name, e.g. "barbarians" or "frisians_well".
 				 * Takes care of legacy lookup and skipping already loaded units.
 				 */
-				Notifications::publish(NoteMapObjectDescription(
-				   fr.string(), NoteMapObjectDescription::LoadType::kObject));
+				Notifications::publish(
+				   NoteMapObjectDescription(fr.string(), NoteMapObjectDescription::LoadType::kObject));
 			}
 
 			game.diplomacy_allowed_ = (fr.unsigned_8() > 0);
