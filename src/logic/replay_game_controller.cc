@@ -23,6 +23,7 @@
 #include <SDL_timer.h>
 
 #include "logic/game.h"
+#include "logic/playersmanager.h"
 #include "logic/replay.h"
 #include "ui_basic/messagebox.h"
 #include "wui/interactive_base.h"
@@ -102,7 +103,7 @@ void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 
 	// Need to pull this out into a variable to make the includes script happy
 	InteractiveBase* i = game.get_ibase();
-	assert(i);
+	assert(i != nullptr);
 	UI::WLMessageBox mmb(i, UI::WindowStyle::kWui, _("End of Replay"),
 	                     _("The end of the replay has been reached and the game has "
 	                       "been paused. You may unpause the game and continue watching "
@@ -113,4 +114,17 @@ void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 
 Widelands::QueueCommandTypes ReplayGameController::CmdReplayEnd::id() const {
 	return Widelands::QueueCommandTypes::kReplayEnd;
+}
+
+void ReplayGameController::report_result(uint8_t p_nr,
+                                         Widelands::PlayerEndResult result,
+                                         const std::string& info) {
+	Widelands::PlayerEndStatus pes;
+	Widelands::Player* player = game_.get_player(p_nr);
+	assert(player != nullptr);
+	pes.player = player->player_number();
+	pes.time = game_.get_gametime();
+	pes.result = result;
+	pes.info = info;
+	game_.player_manager()->add_player_end_status(pes);
 }

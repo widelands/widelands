@@ -124,7 +124,6 @@ private:
 
 public:
 	UI::UniqueWindow::Registry objectives_;
-	UI::UniqueWindow::Registry diplomacy_;
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;
 
