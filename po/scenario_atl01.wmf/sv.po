@@ -7,13 +7,14 @@
 # Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021
 # GunChleoc, 2014
 # GunChleoc, 2014
+# Niklas Nordgren, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021\n"
+"Last-Translator: Niklas Nordgren, 2022\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -662,18 +663,18 @@ msgstr "Jag har övervägt detta, Sidolus. Jag tror det är dags. Vi kommer att 
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "Loftomor Rapporterar"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "Må Satul värma dig, Jundina! Vi har färdigställt en verktygsmedja och våra verktygsmeder kommer tillverka nya verktyg omgående."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "Jundina Påminner"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -682,7 +683,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "Må Satul värma dig också, Loftomor. Det är gott att höra. Men kom ihåg att våra vertygsmeder behöver utrustas med en såg. Att tillverka verktyg är en konstform för oss, vilket kräver ett precisionsverktyg som en såg, snarare än en brutal hammare som de andra stammarna använder."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -940,7 +941,7 @@ msgstr "Gratulerar!"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Du har slutfört det här uppdraget. Du kan fortsätta att spela om du vill, gå annars vidare till nästa uppdrag."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
