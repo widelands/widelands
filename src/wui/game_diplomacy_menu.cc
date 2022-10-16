@@ -167,14 +167,15 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 			   new UI::Box(&vbox_action_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 			if (p != iplayer_->player_number()) {
 				b1 = new UI::Button(buttonsbox, "leave", 0, 0, kButtonWidth, kRowSize,
-					                UI::ButtonStyle::kWuiSecondary, _("Leave"),
-					                _("Leave your current team and become teamless"));
+				                    UI::ButtonStyle::kWuiSecondary, _("Leave"),
+				                    _("Leave your current team and become teamless"));
 				b2 = new UI::Button(buttonsbox, "resign", 0, 0, kButtonWidth, kRowSize,
-					                UI::ButtonStyle::kWuiSecondary, _("Resign"),
-					                _("Give up and become a spectator"));
+				                    UI::ButtonStyle::kWuiSecondary, _("Resign"),
+				                    _("Give up and become a spectator"));
 				b1->sigclicked.connect([this]() {
-					iplayer_->game().send_player_diplomacy(
-					   iplayer_->player_number(), Widelands::DiplomacyAction::kLeaveTeam, 0 /* ignored */);
+					iplayer_->game().send_player_diplomacy(iplayer_->player_number(),
+					                                       Widelands::DiplomacyAction::kLeaveTeam,
+					                                       0 /* ignored */);
 				});
 				b2->sigclicked.connect([this]() {
 					iplayer_->game().send_player_diplomacy(
@@ -182,11 +183,11 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 				});
 			} else {
 				b1 = new UI::Button(buttonsbox, "join", 0, 0, kButtonWidth, kRowSize,
-					                UI::ButtonStyle::kWuiSecondary, _("Join"),
-					                _("Request to join this player’s team"));
+				                    UI::ButtonStyle::kWuiSecondary, _("Join"),
+				                    _("Request to join this player’s team"));
 				b2 = new UI::Button(buttonsbox, "invite", 0, 0, kButtonWidth, kRowSize,
-					                UI::ButtonStyle::kWuiSecondary, _("Invite"),
-					                _("Invite this player to join your team"));
+				                    UI::ButtonStyle::kWuiSecondary, _("Invite"),
+				                    _("Invite this player to join your team"));
 				b1->sigclicked.connect([this, p]() {
 					iplayer_->game().send_player_diplomacy(
 					   iplayer_->player_number(), Widelands::DiplomacyAction::kJoin, p);
@@ -207,8 +208,10 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 
 		vbox_name_.add_space(kSpacing);
 		vbox_status_.add_space(kSpacing);
-		vbox_name_.add(txt_name, UI::Box::Resizing::kFillSpace, UI::mirror_alignment(UI::Align::kLeft, rtl));
-		vbox_status_.add(txt_status, UI::Box::Resizing::kFillSpace, UI::mirror_alignment(UI::Align::kLeft, rtl));
+		vbox_name_.add(
+		   txt_name, UI::Box::Resizing::kFillSpace, UI::mirror_alignment(UI::Align::kLeft, rtl));
+		vbox_status_.add(
+		   txt_status, UI::Box::Resizing::kFillSpace, UI::mirror_alignment(UI::Align::kLeft, rtl));
 		vbox_team_.add(icon_team, UI::Box::Resizing::kExpandBoth);
 		vbox_flag_.add(icon_flag, UI::Box::Resizing::kExpandBoth);
 
@@ -280,8 +283,10 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 		pair.second->set_text(str);
 	}
 
-	const unsigned own_team = iplayer_ == nullptr ? 0 : iplayer_->egbase().player(iplayer_->player_number()).team_number();
-	const bool has_result = iplayer_ != nullptr && players_with_result.count(iplayer_->player_number()) > 0;
+	const unsigned own_team =
+	   iplayer_ == nullptr ? 0 : iplayer_->egbase().player(iplayer_->player_number()).team_number();
+	const bool has_result =
+	   iplayer_ != nullptr && players_with_result.count(iplayer_->player_number()) > 0;
 	for (auto& pair : diplomacy_buttons_) {
 		if (has_result || players_with_result.count(pair.first) > 0) {
 			// Ignore players who are no longer playing
