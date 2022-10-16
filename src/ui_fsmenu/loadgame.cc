@@ -158,7 +158,8 @@ void LoadGame::clicked_ok() {
 				return;
 			}
 
-			if (is_replay_ && gamedata->version != build_id()) {
+			if (is_replay_ && (SDL_GetModState() & KMOD_CTRL) == 0 &&
+			    gamedata->version != build_id()) {
 				UI::WLMessageBox w(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Version Mismatch"),
 				                   _("This replay was created with a different Widelands version. It "
 				                     "might be compatible, but will more likely desync or even fail to "

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-09-04 04:26+0000\n"
+"POT-Creation-Date: 2022-10-10 04:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -764,10 +764,10 @@ msgstr "mina"
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
-#: ../../src/logic/map_objects/world/terrain_description.cc:75
+#: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
 msgstr "transitable"
 
@@ -1061,9 +1061,9 @@ msgstr "(cap)"
 msgid "Waterway length limit:"
 msgstr "Límit de la llargada de les vies d’aigua:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1487,8 +1487,8 @@ msgid ""
 "location."
 msgstr "Seleccioneu la mida del mapa. Després feu clic en el mapa per tallar-lo en el lloc desitjat. Quan augmenteu la mida del mapa, s’inseriran noves columnes/files a l’est/sud del lloc escollit. Quan disminuïu la mida del mapa, s’eliminaran les columnes/files de l’est/sud del punt de tall definit."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1806,39 +1806,39 @@ msgid "Not set"
 msgstr "Sense establir"
 
 #: ../../src/logic/game.cc:282 ../../src/logic/game.cc:326
-#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
+#: ../../src/logic/game.cc:428 ../../src/logic/game.cc:482
 msgid "Preloading map…"
 msgstr "Es precarrega un mapa…"
 
-#: ../../src/logic/game.cc:378
+#: ../../src/logic/game.cc:382
 msgid "Initializing game…"
 msgstr "S’inicialitza el joc…"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:621
+#: ../../src/logic/game.cc:625
 msgid "Creating player infrastructure…"
 msgstr "Es crea la infraestructura del jugador…"
 
-#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:642 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr "No s’ha trobat la posició inicial"
 
-#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:643 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "El Widelands no ha pogut iniciar la partida perquè el jugador %u no té posició inicial.\nPodeu afegir una posició inicial manualment amb l’editor del Widelands per arreglar-ho."
 
-#: ../../src/logic/game.cc:739
+#: ../../src/logic/game.cc:743
 msgid "Initializing…"
 msgstr "S’inicialitza…"
 
-#: ../../src/logic/game.cc:1189
+#: ../../src/logic/game.cc:1193
 msgid "Trade Offer"
 msgstr "Oferta de canvi"
 
-#: ../../src/logic/game.cc:1191
+#: ../../src/logic/game.cc:1195
 msgid "This market has received a new trade offer."
 msgstr "Aquest mercat ha rebut una oferta de canvi nova."
 
@@ -2366,27 +2366,27 @@ msgid "Worker got lost!"
 msgstr "El treballador s’ha perdut!"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:70
+#: ../../src/logic/map_objects/world/terrain_description.cc:71
 msgid "arable"
 msgstr "cultivable"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:80
+#: ../../src/logic/map_objects/world/terrain_description.cc:81
 msgid "navigable"
 msgstr "navegable"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:85
+#: ../../src/logic/map_objects/world/terrain_description.cc:86
 msgid "unreachable"
 msgstr "inabastable"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:90
+#: ../../src/logic/map_objects/world/terrain_description.cc:91
 msgid "mineable"
 msgstr "zona per mines"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:95
+#: ../../src/logic/map_objects/world/terrain_description.cc:96
 msgid "unwalkable"
 msgstr "no transitable"
 
@@ -5217,11 +5217,11 @@ msgstr "Torna al menú d’un jugador"
 msgid "Load this game"
 msgstr "Carrega aquesta partida"
 
-#: ../../src/ui_fsmenu/loadgame.cc:162
+#: ../../src/ui_fsmenu/loadgame.cc:163
 msgid "Version Mismatch"
 msgstr "Versió incompatible"
 
-#: ../../src/ui_fsmenu/loadgame.cc:163
+#: ../../src/ui_fsmenu/loadgame.cc:164
 msgid ""
 "This replay was created with a different Widelands version. It might be compatible, but will more likely desync or even fail to load.\n"
 "\n"
