@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +33,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:687
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:735
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: To be used in placeholders for switching texts according to
 #. current leader
@@ -47,7 +51,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:568
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:637
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:49
 msgid "Find a place to build a port"
@@ -927,13 +931,15 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr ""
+msgstr "Félicitations"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Vous avez terminé cette mission. Vous pouvez continuer à jouer si vous le "
+"souhaitez, sinon passez à la mission suivante."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:598
 msgid "Tribute Demand"
@@ -1215,7 +1221,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Maison d'éclaireur"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65

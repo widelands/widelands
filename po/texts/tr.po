@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# Emil Stoyanov <emil.stynv@gmail.com>, 2022
 # Erdoğan Şahin, 2017
 # Erdoğan Şahin, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Erdoğan Şahin, 2017\n"
+"Last-Translator: Emil Stoyanov <emil.stynv@gmail.com>, 2022\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,36 +49,36 @@ msgstr "Wideland için Lisans Bilgilendirmesi"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr ""
+msgstr "Telif hakki 2002 - %1% Widelands Gelistirme Ekibi."
 
 #: ../../data/txts/LICENSE.lua:11
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr ""
+msgstr "Bu oyun Ozgur ve Acik Kaynak (FOSS), GNU Genel kamuya acik lisans kapsamindadir (GPL V2.0)."
 
 #: ../../data/txts/LICENSE.lua:13
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "FOSS ve GPL hakkinda daha fazla bilgi icin: %s"
 
 #: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr ""
+msgstr "Lisansin tum metnini, ayrica felsefesi ve kanuni yaptirimlari ile ilgili ayrintilari bulabilirsiniz."
 
 #: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+msgstr "Widelands ile birlikte, GPL'i metin dokumani olarak gonderiyoruz. "
 
 #: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "Linux'ta, COPYING adli dokumani kok kaynakta veya bagimsiz binari paketinde veya yukleme dosyasinda( ‘%1%’ , gibi)."
 
 #: ../../data/txts/LICENSE.lua:19
 msgid ""
