@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-09-19 04:38+0000\n"
+"POT-Creation-Date: 2022-10-10 04:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ThonyVezbe <a.guechoum@gmail.com>, 2020\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
@@ -1819,39 +1819,39 @@ msgid "Not set"
 msgstr ""
 
 #: ../../src/logic/game.cc:282 ../../src/logic/game.cc:326
-#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
+#: ../../src/logic/game.cc:428 ../../src/logic/game.cc:482
 msgid "Preloading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:378
+#: ../../src/logic/game.cc:382
 msgid "Initializing game…"
 msgstr ""
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:621
+#: ../../src/logic/game.cc:625
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:642 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:643 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:739
+#: ../../src/logic/game.cc:743
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1189
+#: ../../src/logic/game.cc:1193
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1191
+#: ../../src/logic/game.cc:1195
 msgid "This market has received a new trade offer."
 msgstr ""
 
