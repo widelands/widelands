@@ -103,35 +103,6 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 	const size_t n_fmt_arg = format_arguments_count(msg_translated);
 	assert(n_fmt_arg <= 3);
 
-	/****************************/
-	// TODO(tothxa): remove checks after testing? (before even merging the PR?)
-	if (n_fmt_arg != format_arguments_count(ngmessages.at(code))) {
-		log_err(
-		   "NetworkGamingMessages::get_message: Translation for message code %s does not have the "
-		   "correct number of placeholders:\nEnglish: %s\nTranslated: %s",
-		   code.c_str(), ngmessages.at(code).c_str(), msg_translated.c_str());
-		return (
-		   format("%s, %s, %s, %s", code, get_message(arg1), get_message(arg2), get_message(arg3)));
-	}
-
-	// for easier handling
-	const std::string* args[] = {&arg1, &arg2, &arg3};
-
-	for (uint8_t i = 0; i < n_fmt_arg; ++i) {
-		if (args[i]->empty()) {
-			log_warn(
-			   "NetworkGamingMessages::get_message: %s: missing argument %d", code.c_str(), i + 1);
-		}
-	}
-	for (uint8_t i = n_fmt_arg; i < 3; ++i) {
-		if (!args[i]->empty()) {
-			log_warn("NetworkGamingMessages::get_message: %s: unexpected argument %d: %s",
-			         code.c_str(), i + 1, args[i]->c_str());
-		}
-	}
-	// End of (debugging?) checks
-	/****************************/
-
 	switch (n_fmt_arg) {
 	case 0:
 		return msg_translated;
