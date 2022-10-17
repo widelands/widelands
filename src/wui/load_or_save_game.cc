@@ -41,8 +41,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      game_details_(
         parent,
         style,
-        filetype == FileType::kReplay ? GameDetails::Mode::kReplay : GameDetails::Mode::kSavegame,
-        g),
+        filetype == FileType::kReplay ? GameDetails::Mode::kReplay : GameDetails::Mode::kSavegame),
      delete_(new UI::Button(
         delete_button_parent != nullptr ? delete_button_parent : game_details()->button_box(),
         "delete",

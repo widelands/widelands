@@ -35,8 +35,7 @@
 
 GameDetails::GameDetails(Panel* parent,
                          UI::PanelStyle style,
-                         Mode mode,
-                         Widelands::EditorGameBase& egbase)
+                         Mode mode)
    : UI::Panel(parent, style, 0, 0, 0, 0),
      mode_(mode),
      padding_(4),
@@ -62,8 +61,7 @@ GameDetails::GameDetails(Panel* parent,
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
-     button_box_(new UI::Box(&main_box_, style, 0, 0, UI::Box::Vertical)),
-     egbase_(egbase) {
+     button_box_(new UI::Box(&main_box_, style, 0, 0, UI::Box::Vertical)) {
 	descr_.set_handle_mouse(false);
 	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);
 	descr_box_.add_space(padding_);
