@@ -423,7 +423,7 @@ enum : uint8_t {
 	 * This is sent by the server to generate a clientsided translated system
 	 * chat message. Payload is:
 	 *
-	 * \li string:    Message code \see NetworkGamingMessages::fill_map()
+	 * \li string:    Message code \see src/network/network_gaming_messages.cc
 	 * \li string:    First attached string
 	 * \li string:    Second attached string
 	 * \li string:    Third attached string

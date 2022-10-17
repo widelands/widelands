@@ -299,9 +299,15 @@ void BufferedConnection::start_receiving() {
 			   start_receiving();
 		   } else {
 			   if (socket_.is_open()) {
-				   log_err("[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
-				           ec.value(), ec.message().c_str());
-				   log_err("[BufferedConnection] Closing socket\n");
+				   if (ec == asio::error::eof) {
+					   log_info("[BufferedConnection] End of file when receiving data from host, "
+					            "closing socket\n");
+				   } else {
+					   log_err(
+					      "[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
+					      ec.value(), ec.message().c_str());
+					   log_info("[BufferedConnection] Closing socket\n");
+				   }
 				   socket_.shutdown(asio::ip::tcp::socket::shutdown_both, ec);
 				   socket_.close();
 			   }
