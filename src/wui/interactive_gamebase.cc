@@ -149,9 +149,17 @@ void InteractiveGameBase::rebuild_main_menu() {
 	              g_image_cache->get("images/wui/menus/save_game.png"), false, "",
 	              shortcut_string_for(KeyboardShortcut::kInGameSave, false));
 
-	if (!is_multiplayer() && !game().is_replay()) {
+	if (game().is_replay()) {
 		menu_windows_.loadgame.open_window = [this] {
-			new GameMainMenuSaveGame(*this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoad);
+			new GameMainMenuSaveGame(*this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoadReplay);
+		};
+		/** TRANSLATORS: An entry in the game's main menu */
+		mainmenu_.add(_("Load Replay"), MainMenuEntry::kLoadMap,
+		              g_image_cache->get("images/wui/menus/load_game.png"), false, "",
+		              shortcut_string_for(KeyboardShortcut::kInGameLoad, false));
+	} else if (!is_multiplayer()) {
+		menu_windows_.loadgame.open_window = [this] {
+			new GameMainMenuSaveGame(*this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoadSavegame);
 		};
 		/** TRANSLATORS: An entry in the game's main menu */
 		mainmenu_.add(_("Load Game"), MainMenuEntry::kLoadMap,
@@ -196,7 +204,7 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 		}
 	} break;
 	case MainMenuEntry::kLoadMap:
-		if (!is_multiplayer() && !game().is_replay()) {
+		if (!is_multiplayer()) {
 			menu_windows_.loadgame.toggle();
 		}
 		break;
@@ -468,9 +476,10 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		new GameMainMenuSaveGame(*this, menu_windows_.savegame, GameMainMenuSaveGame::Type::kSave);
 		return true;
 	}
-	if (!is_multiplayer() && !game().is_replay() &&
+	if (!is_multiplayer() &&
 	    matches_shortcut(KeyboardShortcut::kInGameLoad, code)) {
-		new GameMainMenuSaveGame(*this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoad);
+		new GameMainMenuSaveGame(*this, menu_windows_.loadgame,
+			game().is_replay() ? GameMainMenuSaveGame::Type::kLoadReplay : GameMainMenuSaveGame::Type::kLoadSavegame);
 		return true;
 	}
 	if ((chat_provider_ != nullptr) && matches_shortcut(KeyboardShortcut::kInGameChat, code)) {

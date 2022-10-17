@@ -62,6 +62,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
+#include "logic/replay_game_controller.h"
 #include "logic/single_player_game_controller.h"
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #include "logic/training_wheels.h"
@@ -72,6 +73,7 @@
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
+#include "wui/interactive_spectator.h"
 
 namespace Widelands {
 
@@ -784,9 +786,13 @@ bool Game::run(StartGameType const start_game_type,
 		return true;
 	}
 
-	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
 	const std::string load = next_game_to_load_;  // Pass-by-reference does have its disadvantages…
+
+	if (FileSystem::filename_ext(load) == kReplayExtension) {
+		return run_replay(load, script_to_run);
+	}
 	if (FileSystem::filename_ext(load) == kSavegameExtension) {
+		create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
 		return run_load_game(load, script_to_run);
 	}
 
@@ -799,6 +805,19 @@ bool Game::run(StartGameType const start_game_type,
 		assert(list.front() == load);
 	}
 	return run_splayer_scenario_direct(list, script_to_run);
+}
+
+bool Game::run_replay(const std::string& filename, const std::string& script_to_run) {
+	full_cleanup();
+
+	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
+	set_ibase(new InteractiveSpectator(*this, get_config_section()));
+
+	set_write_replay(false);
+	new ReplayGameController(*this, filename);
+	save_handler().set_allow_saving(false);
+
+	return run(Widelands::Game::StartGameType::kSaveGame, script_to_run, true, "replay");
 }
 
 void Game::set_next_game_to_load(const std::string& file) {

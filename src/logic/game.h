@@ -202,6 +202,8 @@ public:
 	// Returns the result of run().
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
 
+	bool run_replay(const std::string& filename, const std::string& script_to_run);
+
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	bool acquire_training_wheel_lock(const std::string& objective);
 	void release_training_wheel_lock();
