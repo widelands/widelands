@@ -45,11 +45,15 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                                            const Type type)
    : UI::UniqueWindow(&parent,
                       UI::WindowStyle::kWui,
-                      type == Type::kSave ? "save_game" : type == Type::kLoadReplay ? "load_replay" : "load_game",
+                      type == Type::kSave       ? "save_game" :
+                      type == Type::kLoadReplay ? "load_replay" :
+                                                  "load_game",
                       &registry,
                       parent.get_inner_w() - 40,
                       parent.get_inner_h() - 40,
-                      type == Type::kSave ? _("Save Game") : type == Type::kLoadReplay ? _("Load Replay") : _("Load Game")),
+                      type == Type::kSave       ? _("Save Game") :
+                      type == Type::kLoadReplay ? _("Load Replay") :
+                                                  _("Load Game")),
      // Values for alignment and size
      padding_(4),
      type_(type),
@@ -60,8 +64,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      load_or_save_(&info_box_,
                    igbase().game(),
                    type == Type::kLoadReplay ? LoadOrSaveGame::FileType::kReplay :
-                   type == Type::kSave ? LoadOrSaveGame::FileType::kShowAll :
-                                         LoadOrSaveGame::FileType::kGameSinglePlayer,
+                   type == Type::kSave       ? LoadOrSaveGame::FileType::kShowAll :
+                                               LoadOrSaveGame::FileType::kGameSinglePlayer,
                    UI::PanelStyle::kWui,
                    UI::WindowStyle::kWui,
                    false),

@@ -133,8 +133,8 @@ bool LoadOrSaveGame::compare_map_name(uint32_t rowa, uint32_t rowb) const {
 }
 
 bool LoadOrSaveGame::check_replay_compatibility(const SavegameData& sd) {
-	if (filetype_ != FileType::kReplay || sd.is_directory() || !sd.errormessage.empty()
-			|| (SDL_GetModState() & KMOD_CTRL) != 0 || sd.version == build_id()) {
+	if (filetype_ != FileType::kReplay || sd.is_directory() || !sd.errormessage.empty() ||
+	    (SDL_GetModState() & KMOD_CTRL) != 0 || sd.version == build_id()) {
 		return true;
 	}
 

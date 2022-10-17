@@ -151,7 +151,8 @@ void InteractiveGameBase::rebuild_main_menu() {
 
 	if (game().is_replay()) {
 		menu_windows_.loadgame.open_window = [this] {
-			new GameMainMenuSaveGame(*this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoadReplay);
+			new GameMainMenuSaveGame(
+			   *this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoadReplay);
 		};
 		/** TRANSLATORS: An entry in the game's main menu */
 		mainmenu_.add(_("Load Replay"), MainMenuEntry::kLoadMap,
@@ -159,7 +160,8 @@ void InteractiveGameBase::rebuild_main_menu() {
 		              shortcut_string_for(KeyboardShortcut::kInGameLoad, false));
 	} else if (!is_multiplayer()) {
 		menu_windows_.loadgame.open_window = [this] {
-			new GameMainMenuSaveGame(*this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoadSavegame);
+			new GameMainMenuSaveGame(
+			   *this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoadSavegame);
 		};
 		/** TRANSLATORS: An entry in the game's main menu */
 		mainmenu_.add(_("Load Game"), MainMenuEntry::kLoadMap,
@@ -476,10 +478,10 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		new GameMainMenuSaveGame(*this, menu_windows_.savegame, GameMainMenuSaveGame::Type::kSave);
 		return true;
 	}
-	if (!is_multiplayer() &&
-	    matches_shortcut(KeyboardShortcut::kInGameLoad, code)) {
+	if (!is_multiplayer() && matches_shortcut(KeyboardShortcut::kInGameLoad, code)) {
 		new GameMainMenuSaveGame(*this, menu_windows_.loadgame,
-			game().is_replay() ? GameMainMenuSaveGame::Type::kLoadReplay : GameMainMenuSaveGame::Type::kLoadSavegame);
+		                         game().is_replay() ? GameMainMenuSaveGame::Type::kLoadReplay :
+                                                    GameMainMenuSaveGame::Type::kLoadSavegame);
 		return true;
 	}
 	if ((chat_provider_ != nullptr) && matches_shortcut(KeyboardShortcut::kInGameChat, code)) {

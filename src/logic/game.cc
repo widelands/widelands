@@ -792,7 +792,8 @@ bool Game::run(StartGameType const start_game_type,
 		return run_replay(load, script_to_run);
 	}
 	if (FileSystem::filename_ext(load) == kSavegameExtension) {
-		create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
+		create_loader_ui(
+		   {"general_game"}, false, map().get_background_theme(), map().get_background());
 		return run_load_game(load, script_to_run);
 	}
 

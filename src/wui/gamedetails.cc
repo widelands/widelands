@@ -230,7 +230,8 @@ std::string GameDetails::show_minimap(const SavegameData& gamedata) {
 				filename.append(kSavegameExtension);
 				std::unique_ptr<Widelands::MapLoader> ml(
 				   game_for_render.mutable_map()->get_correct_loader(filename));
-				if (ml != nullptr && 0 == ml->load_map_for_render(game_for_render, &game_for_render.enabled_addons())) {
+				if (ml != nullptr &&
+				    0 == ml->load_map_for_render(game_for_render, &game_for_render.enabled_addons())) {
 					minimap_cache_[last_game_] =
 					   draw_minimap(game_for_render, nullptr, Rectf(), MiniMapType::kStaticMap,
 					                MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
