@@ -33,9 +33,7 @@
 #include "logic/filesystem_constants.h"
 #include "map_io/map_loader.h"
 
-GameDetails::GameDetails(Panel* parent,
-                         UI::PanelStyle style,
-                         Mode mode)
+GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
    : UI::Panel(parent, style, 0, 0, 0, 0),
      mode_(mode),
      padding_(4),
