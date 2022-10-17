@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "graphic/texture.h"
-#include "logic/editor_game_base.h"
 #include "logic/game_controller.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
