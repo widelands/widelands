@@ -22,7 +22,6 @@
 #include <map>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/string.h"
 
 // Table assigning printable messages to message codes
