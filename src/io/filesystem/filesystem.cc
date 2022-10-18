@@ -59,6 +59,10 @@
 #define PATH_MAX MAX_PATH
 #endif
 
+#ifndef PATH_MAX
+#define PATH_MAX 0x1000000
+#endif
+
 namespace {
 /// A class that makes iteration over filename_?.* templates easy. It is much faster than using
 /// regex.
