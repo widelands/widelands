@@ -107,13 +107,15 @@ EOF
    ASANPATH=`dirname $ASANLIB`
 
    echo "Copying and fixing dynamic libraries... "
+   # Workaround for #5610: ignore errors as it still works as intendend
    dylibbundler --create-dir --bundle-deps \
 	--fix-file $DESTINATION/Widelands.app/Contents/MacOS/widelands \
 	--dest-dir $DESTINATION/Widelands.app/Contents/libs \
-	--search-path $ASANPATH 
+	--search-path $ASANPATH 					|| true
 
-   echo "Re-sign libraries with an 'ad-hoc signing' see man codesign"
-   codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
+   # already done by code above, left here as a reference
+   # echo "Re-sign libraries with an 'ad-hoc signing' see man codesign" 
+   # codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
 
    echo "Stripping binary ..."
    strip -u -r $DESTINATION/Widelands.app/Contents/MacOS/widelands
