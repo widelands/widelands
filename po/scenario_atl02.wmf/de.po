@@ -68,7 +68,7 @@ msgid ""
 msgstr ""
 "Um unseren Fuß auf die Insel zu setzen, müssen wir zuerst einen Bauplatz "
 "finden, auf dem ein Hafen gebaut werden kann. Erkunde die nahegelegene Küste"
-" um einen solchen Bauplatz zu finden. "
+" um einen solchen Bauplatz zu finden."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:53
 msgid ""
@@ -118,7 +118,7 @@ msgstr ""
 "Pflichten zu erfüllen. Zum Glück haben wir noch etwas Eisenerz und "
 "massenhaft Kohle. Baue eine Werkzeugmacherei, da sie eine Grundbedingung für"
 " den Erfolg auf dieser Insel ist. Vergiss nicht auch einen Hochofen zu "
-"bauen. "
+"bauen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
@@ -174,7 +174,7 @@ msgid ""
 msgstr ""
 "Nachdem unsere Siedlung wächst, brauchen wir mehr Platz für alle Gebäude. "
 "Erweitere unser Gebiet durch den Bau von Militärgebäuden. Baue einige "
-"Wachhäuser und mindestens einen Turm wegen seiner größeren Sichtweite. "
+"Wachhäuser und mindestens einen Turm wegen seiner größeren Sichtweite."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
@@ -308,7 +308,7 @@ msgid ""
 msgstr ""
 "Wir müssen einen Tempel für Satul bauen und wir müssen ihn inbrünstig "
 "anbeten. Auf diese Art könnte er diesen Barbaren seine Macht demonstrieren "
-"und unsere Prinzessin könnte wieder zu Sinnen kommen. "
+"und unsere Prinzessin könnte wieder zu Sinnen kommen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:153
 msgid ""
@@ -316,7 +316,7 @@ msgid ""
 " the Barbarians’ territory."
 msgstr ""
 "Außerdem brauchen wir ein Kundschafterhaus, um nicht zu verpassen, was im "
-"Gebiet der Barbaren vor sich geht. "
+"Gebiet der Barbaren vor sich geht."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:158
 msgid "Worship Satul and consecrate priestesses"
@@ -330,7 +330,7 @@ msgstr "Bete Satul an"
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:161
 msgid "Now we need to worship Satul and consecrate at least two priestesses."
 msgstr ""
-"Nun müssen wir Satul anbeten und mindestens zwei Priesterinnen weihen. "
+"Nun müssen wir Satul anbeten und mindestens zwei Priesterinnen weihen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:166
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:168
@@ -354,7 +354,7 @@ msgstr "Besiegt!"
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:741
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:752
 msgid "Sidolus has bad news…"
-msgstr "Sidolus hat schlechte Neuigkeiten…"
+msgstr "Sidolus hat schlechte Neuigkeiten …"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:181
@@ -403,7 +403,7 @@ msgstr ""
 "Wir sind nur mit Mühe und Not der verfluchten Insel entkommen: Wir konnten "
 "drei Schiffe beladen und die Flucht beginnen, aber die Strömungen der "
 "versinkenden Insel stellten unsere neuen Schiffe und ihre Bauweise auf die "
-"Probe. "
+"Probe."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:197
@@ -454,7 +454,7 @@ msgid ""
 msgstr ""
 "Viele Wochen vergingen und wir sahen nur kleine Inseln, die nicht zur "
 "Besiedlung geeignet und ohne ein Zeichen der Segnung durch Satul, den "
-"Feuergott, waren. "
+"Feuergott, waren."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:213
@@ -509,7 +509,7 @@ msgstr ""
 "unsere ganzen Werkzeuge und die meisten unserer Baumaterialien mit dem "
 "dritten Schiff verloren. Wir können es uns nicht leisten noch weiter zu "
 "segeln und wir müssen versuchen auf dieser Insel so nah wie möglich zu "
-"unserer gegenwärtigen Position zu siedeln. "
+"unserer gegenwärtigen Position zu siedeln."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:234
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:242
@@ -602,7 +602,7 @@ msgstr ""
 "Möge Satul Euch wärmen, %s. Als höchster Weber der Gilde habe ich schlechte "
 "Nachrichten für euch. Ich habe gerade festgestellt, dass uns der Spinenstoff"
 " ausgeht. Das ist ein sehr gefährlicher Fall, da, wie ihr wisst, "
-"Spinnenstoff zum Bau vieler Gebäude benötigt wird. "
+"Spinnenstoff zum Bau vieler Gebäude benötigt wird."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:276
@@ -772,7 +772,7 @@ msgstr ""
 "Sidolus, da wir jeden Verbündeten brauchen können den wir bekommen können, "
 "sollten wir ihnen helfen. Lasst uns schauen was wir für sie tun können. In "
 "jedem Fall sollten wir aber unsere eigene miltitärische Stärke verbessern, "
-"um unabhängig von anderen zu werden. "
+"um unabhängig von anderen zu werden."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:383
 msgid "Building Material Ensured"
@@ -909,7 +909,7 @@ msgid ""
 "the north. Now we expect our princess to return home."
 msgstr ""
 "Möge Satul Euch wärmen, Kalitath! Wir haben die Truppen des Imperiums im "
-"Norden besiegt. Nun erwarten wir die Rückkehr unserer Prinzessin,"
+"Norden besiegt. Nun erwarten wir die Rückkehr unserer Prinzessin."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:478
@@ -979,7 +979,7 @@ msgstr ""
 "könnten wir entscheiden das wir für unsere gemeinsame Zukunft etwas von dem "
 "Land benötigen, dass Ihr erobert habt. Deshalb werden wir einfach eure "
 "Militärgebäude mit unserer Streitmacht übernehmen. Natürlich habt ihr, zum "
-"Wohle Eurer Prinzessin,  nicht das Recht, das Gleiche zu tun."
+"Wohle Eurer Prinzessin, nicht das Recht, das Gleiche zu tun."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:514
 msgid "Heretics!"
@@ -1019,7 +1019,7 @@ msgstr ""
 "gebrauchen. Deshalb schlage ich vor, einen Tempel zu bauen und Satul mit "
 "exquisiten Opfern zu huldigen. Auf diese Weise könnten wir einige "
 "Priesterinnen weihen, die Satul darum bitten könnten, seine Macht gegenüber "
-"den Barbaren und unserer Prinzessin  zu demonstrieren."
+"den Barbaren und unserer Prinzessin zu demonstrieren."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:526
 msgid "Build Temple"
@@ -1069,7 +1069,7 @@ msgstr ""
 "Tempels. Nun müssem wir Speisen und unsere wertvollsten Waren zum Tempel "
 "bringen um befriedigende Opfergaben vorzubereiten. Und vergesst nicht, dass "
 "Eingeweihte, die Satul dienen um seine Priesterinnen zu werden, goldene "
-"Wappenröcke und Diamanten brauchen.  "
+"Wappenröcke und Diamanten brauchen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:552
 msgid "May Satul Warm Us"
@@ -1084,7 +1084,7 @@ msgid ""
 msgstr ""
 "Unsere Priesterinnen wurden geweiht, und wir opferten unsere feinsten Waren "
 "zu Satuls Vergnügen. Möge er uns wärmen, und unserer Prinzessin und diesem "
-"barbarischen Stamm seine Macht zeigen. "
+"barbarischen Stamm seine Macht zeigen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:561
 msgid "Jundlina Arrives"
@@ -1119,7 +1119,7 @@ msgstr ""
 "Möge Satul Euch wärmen, Jundlina. Ich bin froh, dass Ihr wieder hier seid. "
 "Ich hoffe wir können Euch vertrauen, in der gleichen Weise wie Ihr Satul "
 "vertraut und an ihn glaubt. Wie kommt es, dass die Barbaren Euch gehen "
-"ließen. "
+"ließen."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:576
@@ -1315,7 +1315,7 @@ msgstr ""
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:657
 msgid "I am sure you do not want to break our alliance… do you?"
-msgstr "Ich bin sicher ihr wollt unsere Allianz nicht brechen…  nicht wahr?"
+msgstr "Ich bin sicher ihr wollt unsere Allianz nicht brechen … nicht wahr?"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:660
 msgid "Blackmail!"
@@ -1627,7 +1627,6 @@ msgid ""
 "A big and expensive temple to worship Satul and consecrate priestesses."
 msgstr ""
 "Ein großer und teurer Tempel um Satul anzubeten und Priesterinnen zu weihen."
-" "
 
 #. TRANSLATORS: Purpose helptext for an atlantean worker: Trader
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:36

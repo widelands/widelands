@@ -86,8 +86,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      ok_(&buttons_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 
      curdir_(kSaveDir),
-     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()),
-     modal_(new UI::Panel::ModalGuard(*this)) {
+     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()) {
 	filename_box_.set_visible(type_ == Type::kSave);
 
 	layout();
@@ -144,6 +143,9 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	layout();
 
 	initialization_complete();
+
+	do_run();  // Modal main loop, blocks until the user closes the window.
+	die();
 }
 
 void GameMainMenuSaveGame::layout() {
@@ -205,7 +207,7 @@ void GameMainMenuSaveGame::ok() {
 		case Type::kLoad: {
 			if (load_or_save_.has_selection()) {
 				igbase().game().set_next_game_to_load(load_or_save_.entry_selected()->filename);
-				modal_.reset();
+				end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 				igbase().end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 			}
 		} break;

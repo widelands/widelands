@@ -167,6 +167,10 @@ public:
 		return buffer_;
 	}
 
+	inline unsigned get_nodes_count() const {
+		return format_nodes_count_;
+	}
+
 private:
 	static AbstractNode::Argument arg_;
 	inline void format_do_impl_run(char** out,
@@ -317,6 +321,10 @@ std::string format(const bool localize, const std::string& format_string, Args..
 		log_err("String: %s", format_string.c_str());
 		throw;
 	}
+}
+
+inline unsigned format_arguments_count(const std::string& format_string) {
+	return format_impl::Tree::get(format_string).get_nodes_count();
 }
 
 }  // namespace format_impl

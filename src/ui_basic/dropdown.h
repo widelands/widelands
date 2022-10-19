@@ -409,7 +409,7 @@ private:
 			if (" " == input_text) {
 				SDL_Keycode c = SDLK_SPACE;
 				const std::string localized_space =
-				   to_lower(shortcut_string_for(SDL_Keysym{SDL_GetScancodeFromKey(c), c, 0, 0}));
+				   to_lower(shortcut_string_for(SDL_Keysym{SDL_GetScancodeFromKey(c), c, 0, 0}, false));
 				if (trigger_hotkey_on_match(localized_space, x)) {
 					return true;
 				}

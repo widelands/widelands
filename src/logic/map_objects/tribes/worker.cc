@@ -584,6 +584,14 @@ private:
 	bool landbased_;
 };
 
+/** Accepts a node if and only if a ferry can reach it or depart from there. */
+struct FindNodeFerry {
+	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
+		CheckStepFerry csf(egbase);
+		return csf.reachable_dest(egbase.map(), coords);
+	}
+};
+
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	std::vector<Coords> list;
 	const Map& map = game.map();
@@ -607,8 +615,11 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	if (action.iparam5 > -1) {
 		functor.add(FindNodeImmovableAttribute(action.iparam5), true);
 	}
-	if ((action.iparam3 & 1) != 0) {
+	if ((action.iparam3 & (1 << 0)) != 0) {
 		functor.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
+	}
+	if ((action.iparam3 & (1 << 2)) != 0) {
+		functor.add(FindNodeFerry());
 	}
 	for (const std::string& terraform : action.sparamv) {
 		functor.add(FindNodeTerraform(terraform));
@@ -631,8 +642,11 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			if (action.iparam5 > -1) {
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
 			}
-			if ((action.iparam3 & 1) != 0) {
+			if ((action.iparam3 & (1 << 0)) != 0) {
 				functorAnyFull.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
+			}
+			if ((action.iparam3 & (1 << 2)) != 0) {
+				functorAnyFull.add(FindNodeFerry());
 			}
 			// If there are fields full of fish, we change the type of notification
 			if (map.find_reachable_fields(game, area, &list, cstep, functorAnyFull) != 0u) {
@@ -647,7 +661,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			molog(game.get_gametime(), "  no space found\n");
 		}
 
-		if ((action.iparam3 & 2) == 0) {
+		if ((action.iparam3 & (1 << 1)) == 0) {
 			if (upcast(ProductionSite, productionsite, get_location(game))) {
 				productionsite->notify_player(game, 30, fail_notification_type);
 			}
@@ -2387,7 +2401,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 		if (location == nullptr) {
 			// this can happen if the flag (and the building) is destroyed while
 			// the worker leaves the building.
-			molog(game.get_gametime(), "[fetchfromflag]: flag dissappeared - become fugitive");
+			molog(game.get_gametime(), "[fetchfromflag]: flag disappeared - become fugitive");
 			return pop_task(game);
 		}
 
@@ -2417,7 +2431,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 		// enemy player, or it got destroyed through rising water (atlantean
 		// scenario)
 		molog(game.get_gametime(),
-		      "[fetchfromflag]: building dissappeared - searching for alternative\n");
+		      "[fetchfromflag]: building disappeared - searching for alternative\n");
 		return pop_task(game);
 	}
 

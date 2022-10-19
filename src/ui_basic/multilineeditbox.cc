@@ -615,6 +615,9 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_RETURN:
+			if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+				return false;
+			}
 			d_->insert(d_->cursor_pos, "\n");
 			d_->update();
 			d_->reset_selection();

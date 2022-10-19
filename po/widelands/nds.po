@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-01 04:22+0000\n"
+"POT-Creation-Date: 2022-10-10 04:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -285,8 +285,8 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Dez."
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -300,12 +300,12 @@ msgstr "Höövdmenü"
 msgid "Tools"
 msgstr "Warktügen"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -320,78 +320,78 @@ msgstr "Warktüüg-Grött"
 msgid "Undo"
 msgstr "Torüggnehmen"
 
-#: ../../src/editor/editorinteractive.cc:159
+#: ../../src/editor/editorinteractive.cc:160
 #: ../../src/wlapplication_options.cc:407
 msgid "Redo"
 msgstr "Wedderhalen"
 
-#: ../../src/editor/editorinteractive.cc:170
-#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:235
+#: ../../src/editor/editorinteractive.cc:172
+#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:237
 msgid "Help"
 msgstr "Hülp"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:199
+#: ../../src/editor/editorinteractive.cc:202
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
 #: ../../src/ui_fsmenu/main.cc:394
 msgid "New Map"
 msgstr "Neje Kaart"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:207
+#: ../../src/editor/editorinteractive.cc:210
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
 msgid "New Random Map"
 msgstr "Neje tofällig Kaart"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:214
+#: ../../src/editor/editorinteractive.cc:217
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
 #: ../../src/ui_fsmenu/main.cc:399 ../../src/wlapplication_options.cc:399
 msgid "Load Map"
 msgstr "Lade Kaart"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:222
+#: ../../src/editor/editorinteractive.cc:225
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:53
 #: ../../src/wlapplication_options.cc:395
 msgid "Save Map"
 msgstr "Kaart sekern"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:230
+#: ../../src/editor/editorinteractive.cc:233
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:62
 msgid "Map Options"
 msgstr "Kaart-Instellens"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:234
+#: ../../src/editor/editorinteractive.cc:237
 msgid "Exit Editor"
 msgstr "Bewarker verlaten"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:270
+#: ../../src/editor/editorinteractive.cc:273
 msgid "Change height"
 msgstr "Ännere de Höcht"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
-#: ../../src/editor/editorinteractive.cc:273
+#: ../../src/editor/editorinteractive.cc:276
 msgid "Change the terrain height"
 msgstr "De Landskupp-Höcht ännern"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:279
+#: ../../src/editor/editorinteractive.cc:282
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Random height"
 msgstr "Tofällige Höcht"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
-#: ../../src/editor/editorinteractive.cc:282
+#: ../../src/editor/editorinteractive.cc:285
 msgid "Set the terrain height to random values"
 msgstr "De Landskupp-Höcht tofällig ännern"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:288
+#: ../../src/editor/editorinteractive.cc:291
 #: ../../src/editor/ui_menus/field_info_window.cc:139
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
 #: ../../src/wui/minimap.cc:155
@@ -399,126 +399,126 @@ msgid "Terrain"
 msgstr "Landskupp"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
-#: ../../src/editor/editorinteractive.cc:291
+#: ../../src/editor/editorinteractive.cc:294
 msgid "Change the map’s terrain"
 msgstr "De Kaart-Landskupp ännern"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:298
+#: ../../src/editor/editorinteractive.cc:301
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:61
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Faste Dingen"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
-#: ../../src/editor/editorinteractive.cc:301
+#: ../../src/editor/editorinteractive.cc:304
 msgid "Add or remove immovables"
 msgstr "Faste Dingen hentofögen of wegdoon"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:307
+#: ../../src/editor/editorinteractive.cc:310
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:46
 msgid "Animals"
 msgstr "Deerten"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
-#: ../../src/editor/editorinteractive.cc:310
+#: ../../src/editor/editorinteractive.cc:313
 msgid "Add or remove animals"
 msgstr "Deerten hentofögen of wegdoon"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:317
+#: ../../src/editor/editorinteractive.cc:320
 #: ../../src/editor/ui_menus/field_info_window.cc:220
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:96
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
 #: ../../src/map_io/map_saver.cc:155
-#: ../../src/map_io/widelands_map_loader.cc:261
+#: ../../src/map_io/widelands_map_loader.cc:268
 msgid "Resources"
 msgstr "Mineraale"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
-#: ../../src/editor/editorinteractive.cc:320
+#: ../../src/editor/editorinteractive.cc:323
 msgid "Set or change resources"
 msgstr "Mineraale setten of ännern"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:323
+#: ../../src/editor/editorinteractive.cc:326
 msgid "Port spaces"
 msgstr "Rüümte för Muden"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
-#: ../../src/editor/editorinteractive.cc:326
+#: ../../src/editor/editorinteractive.cc:329
 msgid "Add or remove port spaces"
 msgstr "Rüümte för Muden hentofögen of wegdoon"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:333
+#: ../../src/editor/editorinteractive.cc:336
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:677
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:149
 msgid "Players"
 msgstr "Spelers"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:336
+#: ../../src/editor/editorinteractive.cc:339
 msgid "Set number of players and their names, tribes and starting positions"
 msgstr "De Tahl vun Spelers un hör Namen, Völkers un Anfangs-Steden setten"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:340
+#: ../../src/editor/editorinteractive.cc:343
 msgid "Map origin"
 msgstr "Kaart-Quell"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
-#: ../../src/editor/editorinteractive.cc:343
+#: ../../src/editor/editorinteractive.cc:346
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "Maak de Stee fast, dat de Stee (0|0) ween sall. Dat is de linke boven Eck vun de lütte Kaart."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:350
+#: ../../src/editor/editorinteractive.cc:353
 msgid "Map size"
 msgstr "Kaart-Grött"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:353
+#: ../../src/editor/editorinteractive.cc:356
 msgid "Change the map’s size"
 msgstr "Kaarten-Grött ännern"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:356
+#: ../../src/editor/editorinteractive.cc:359
 msgid "Information"
 msgstr "Informatioon"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
-#: ../../src/editor/editorinteractive.cc:359
+#: ../../src/editor/editorinteractive.cc:362
 msgid "Click on a field to show information about it"
 msgstr "Klick up een Feld, um Informationen daaröver to wiesen"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:363
+#: ../../src/editor/editorinteractive.cc:366
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:424
 msgid "Tool History"
 msgstr "Warktüüg-Histoorje"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
-#: ../../src/editor/editorinteractive.cc:366
+#: ../../src/editor/editorinteractive.cc:369
 msgid "Restore previous tool settings"
 msgstr "Olle Warktüüg-Instellens weerbruken"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-#. building spaces are
-#. * shown
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../src/editor/editorinteractive.cc:435
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. building spaces are
+#. * shown
+#: ../../src/editor/editorinteractive.cc:438
 #: ../../src/wui/interactive_gamebase.cc:227
 msgid "Hide Building Spaces"
 msgstr "Rüümte tum Bauen verbargen"
 
-#: ../../src/editor/editorinteractive.cc:435
+#: ../../src/editor/editorinteractive.cc:438
 #: ../../src/ui_fsmenu/options.cc:243
 #: ../../src/wui/interactive_gamebase.cc:227
 msgid "Show Building Spaces"
@@ -528,15 +528,15 @@ msgstr "Rüümte tum Bauen wiesen"
 #. show maximum
 #. * building spaces that will be available if all immovables (trees, rocks,
 #. etc.) are removed
-#: ../../src/editor/editorinteractive.cc:442
+#: ../../src/editor/editorinteractive.cc:445
 msgid "Hide Maximum Building Spaces"
 msgstr "Gröttste Rüümte tum Bauen verbargen"
 
-#: ../../src/editor/editorinteractive.cc:443
+#: ../../src/editor/editorinteractive.cc:446
 msgid "Show Maximum Building Spaces"
 msgstr "Gröttste Rüümte tum Bauen wiesen"
 
-#: ../../src/editor/editorinteractive.cc:446
+#: ../../src/editor/editorinteractive.cc:449
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
@@ -544,65 +544,65 @@ msgstr "Of the gröttste Rüümte tum Bauen, wat verföögbaar worden, wenn man 
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../src/editor/editorinteractive.cc:452
+#: ../../src/editor/editorinteractive.cc:455
 msgid "Hide Grid"
 msgstr "Gadder verbargen"
 
-#: ../../src/editor/editorinteractive.cc:452
+#: ../../src/editor/editorinteractive.cc:455
 msgid "Show Grid"
 msgstr "Gadder wiesen"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
-#: ../../src/editor/editorinteractive.cc:460
+#: ../../src/editor/editorinteractive.cc:463
 msgid "Hide Immovables"
 msgstr "Faste Dingen verbargen"
 
-#: ../../src/editor/editorinteractive.cc:460
+#: ../../src/editor/editorinteractive.cc:463
 msgid "Show Immovables"
 msgstr "Faste Dingen wiesen"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../src/editor/editorinteractive.cc:465
+#: ../../src/editor/editorinteractive.cc:468
 msgid "Hide Animals"
 msgstr "Deerten verbargen"
 
-#: ../../src/editor/editorinteractive.cc:465
+#: ../../src/editor/editorinteractive.cc:468
 msgid "Show Animals"
 msgstr "Deerten wiesen"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../src/editor/editorinteractive.cc:471
+#: ../../src/editor/editorinteractive.cc:474
 msgid "Hide Resources"
 msgstr "Mineraale verbargen"
 
-#: ../../src/editor/editorinteractive.cc:471
+#: ../../src/editor/editorinteractive.cc:474
 msgid "Show Resources"
 msgstr "Mineraale wiesen"
 
-#: ../../src/editor/editorinteractive.cc:514
+#: ../../src/editor/editorinteractive.cc:517
 msgid "Unsupported Format"
 msgstr "Formaat word nich unnerstütt"
 
-#: ../../src/editor/editorinteractive.cc:515 ../../src/wlapplication.cc:801
+#: ../../src/editor/editorinteractive.cc:518 ../../src/wlapplication.cc:802
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Widelands kunn de Datei »%s« nich laden. Dat Formaat is openbaar nich verdragelk."
 
-#: ../../src/editor/editorinteractive.cc:589
+#: ../../src/editor/editorinteractive.cc:592
 msgid "Unsaved Map"
 msgstr "Nich sekert Kaart"
 
-#: ../../src/editor/editorinteractive.cc:590
+#: ../../src/editor/editorinteractive.cc:593
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "De Kaart is nich sekert worden. Willst du würrelk ofbreken?"
 
-#: ../../src/editor/editorinteractive.cc:1041 ../../src/logic/addons.cc:46
+#: ../../src/editor/editorinteractive.cc:1044 ../../src/logic/addons.cc:46
 #: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1367
@@ -613,17 +613,17 @@ msgstr "De Kaart is nich sekert worden. Willst du würrelk ofbreken?"
 #: ../../src/ui_fsmenu/addons/manager.cc:1622
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:551
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:683
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:563
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:706
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:455
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:461
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/main.cc:234
-#: ../../src/wlapplication.cc:1641
+#: ../../src/wlapplication.cc:1644
 msgid "Error"
 msgstr "Fehler"
 
-#: ../../src/editor/editorinteractive.cc:1043 ../../src/wlapplication.cc:1643
+#: ../../src/editor/editorinteractive.cc:1046 ../../src/wlapplication.cc:1646
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -634,13 +634,13 @@ msgid ""
 "Please add this information to your report."
 msgstr "Een Fehler is uptreden. De Fehler-Naricht is:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst mehr Narichten över dat Probleem in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s.\nBidde föög deese Informatioon to de Fehler-Mellen hento."
 
-#: ../../src/editor/editorinteractive.cc:1077
+#: ../../src/editor/editorinteractive.cc:1080
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Lade Kaart »%s« …"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1101
+#: ../../src/editor/editorinteractive.cc:1102
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:110
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:537
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
@@ -649,7 +649,7 @@ msgid "No Name"
 msgstr "Keen Naam"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1104
+#: ../../src/editor/editorinteractive.cc:1105
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
 #: ../../src/logic/map.h:233 ../../src/ui_fsmenu/addons/packager.cc:369
@@ -657,7 +657,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Nüms"
 
-#: ../../src/editor/editorinteractive.cc:1128
+#: ../../src/editor/editorinteractive.cc:1129
 msgid "Loading world…"
 msgstr "Lade de Welt …"
 
@@ -769,7 +769,7 @@ msgstr "Muu"
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
-#: ../../src/logic/map_objects/world/terrain_description.cc:75
+#: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
 msgstr "Tum Lopen"
 
@@ -944,8 +944,8 @@ msgstr "Wiesen"
 #: ../../src/ui_fsmenu/addons/manager.cc:258
 #: ../../src/ui_fsmenu/addons/packager.cc:110
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:175
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:458
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:657
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:462
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:680
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
 #: ../../src/ui_fsmenu/keyboard_options.cc:230 ../../src/ui_fsmenu/menu.cc:143
@@ -966,7 +966,7 @@ msgstr "Jau"
 #: ../../src/ui_fsmenu/addons/contact.cc:56
 #: ../../src/ui_fsmenu/addons/login_box.cc:61
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:191
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:466
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:470
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:63
 #: ../../src/ui_fsmenu/keyboard_options.cc:63
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:90
@@ -997,7 +997,7 @@ msgid "Click player to remove"
 msgstr "Speler tum wegdoon anklicken"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../src/ui_fsmenu/addons/packager_box.cc:437
+#: ../../src/ui_fsmenu/addons/packager_box.cc:424
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:66
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:89
 #: ../../src/wui/economy_options_window.cc:680
@@ -1291,7 +1291,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Kunn dat Verteeknis »%s« nich maken."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:269
+#: ../../src/wui/game_main_menu_save_game.cc:271
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Eene Datei mit de Naam »%s« gifft ’t al. Överschrieven?"
@@ -1376,7 +1376,7 @@ msgstr "Speler %u"
 
 #. * TRANSLATORS: Header for campaign tribe
 #: ../../src/editor/ui_menus/player_menu.cc:184
-#: ../../src/ui_fsmenu/addons/packager_box.cc:478
+#: ../../src/ui_fsmenu/addons/packager_box.cc:465
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 #: ../../src/ui_fsmenu/campaigndetails.cc:55
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:204
@@ -1422,13 +1422,13 @@ msgstr "Sette de Höcht fast to:"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr "Klicke de Kaart tum Verhogen an; drücke daar de Umschalt-Tast bi tum lütter maken."
+msgstr "Klick de Kaart tum Verhogen an; drücke daar de Umschalt-Tast bi tum lütter maken."
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:63
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:79
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr "Klicke de Kaart an un drücke daar de Strg-Tast bi tum Fastsetten vun de Höcht."
+msgstr "Klick de Kaart an un drücke daar de Strg-Tast bi tum Fastsetten vun de Höcht."
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
 msgid "Increase/Decrease amount by:"
@@ -1443,14 +1443,14 @@ msgstr "Sette de Mass fast to:"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr " Klicke de Kaart tum Verhogen, of drücke daar de Umschalt-Tast bi tum lütter maken, vun de Mass vun de utköört Mineraal."
+msgstr "Klick de Kaart tum Verhogen, of drücke daar de Umschalt-Tast bi tum lütter maken, vun de Mass vun de utköört Mineraal."
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:78
 msgid ""
 "Ctrl + Click on the map to set the amount of the selected resource. This "
 "will replace already set resources."
-msgstr "Klicke de Kaart tum an un drücke daar de Strg-Tast bi tum Fastsetten vun de Mass vun de utköört Mineraal. Daar wesen Mineraale warrn utwesselt."
+msgstr "Klick de Kaart tum an un drücke daar de Strg-Tast bi tum Fastsetten vun de Mass vun de utköört Mineraal. Daar wesen Mineraale warrn utwesselt."
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:32
 msgid "Random Height Options"
@@ -1489,8 +1489,8 @@ msgid ""
 "location."
 msgstr "Köör de neje Kaart-Grött ut, dann klick de Kaart an, um se an de wünsket Stee oftodelen. Wenn de Kaart-Grött verhoogt word, worden neje Striepen of Riegen in de Oost/Süden vun de utköört Stee inföögt. Wenn de Kaart-Grött minnert word, worden Striepen of Riegen, wat to vööl sünd, in de Oost/Süden vun de utköört Stee wegnohmen."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1520,7 +1520,7 @@ msgstr "Lade dat Speel: %1$s (%2$u/%3$d)"
 
 #: ../../src/game_io/game_loader.cc:71 ../../src/game_io/game_saver.cc:57
 #: ../../src/map_io/map_saver.cc:101
-#: ../../src/map_io/widelands_map_loader.cc:198
+#: ../../src/map_io/widelands_map_loader.cc:205
 msgid "Elemental data"
 msgstr "Eerste Dingen"
 
@@ -1537,10 +1537,10 @@ msgid "Command queue"
 msgstr "Speelbefehlen"
 
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:147
-#: ../../src/map_io/widelands_map_loader.cc:387
+#: ../../src/map_io/widelands_map_loader.cc:394
 #: ../../src/wlapplication_options.cc:538
-#: ../../src/wui/interactive_player.cc:226
-#: ../../src/wui/interactive_player.cc:463
+#: ../../src/wui/interactive_player.cc:227
+#: ../../src/wui/interactive_player.cc:466
 msgid "Messages"
 msgstr "Narichten"
 
@@ -1786,19 +1786,19 @@ msgstr "%1$s<br>· %2$s (Versioon %3$s)"
 msgid "Creating player %d…"
 msgstr "Maakt Speler %d …"
 
-#: ../../src/logic/editor_game_base.cc:319
+#: ../../src/logic/editor_game_base.cc:322
 msgid "Postloading world and tribes…"
 msgstr "Maak Welt un Völker klaar …"
 
-#: ../../src/logic/editor_game_base.cc:580
+#: ../../src/logic/editor_game_base.cc:579
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr "Tum Laden uprümen: Kaart-Dingen (1/3)"
 
-#: ../../src/logic/editor_game_base.cc:586
+#: ../../src/logic/editor_game_base.cc:585
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr "Tum Laden uprümen: Spelers (2/3)"
 
-#: ../../src/logic/editor_game_base.cc:589
+#: ../../src/logic/editor_game_base.cc:588
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr "Tum Laden uprümen: Kaart (3/3)"
 
@@ -1808,39 +1808,39 @@ msgid "Not set"
 msgstr "Nich fastleggt"
 
 #: ../../src/logic/game.cc:282 ../../src/logic/game.cc:326
-#: ../../src/logic/game.cc:425 ../../src/logic/game.cc:479
+#: ../../src/logic/game.cc:428 ../../src/logic/game.cc:482
 msgid "Preloading map…"
 msgstr "Lade de Kaart vör …"
 
-#: ../../src/logic/game.cc:379
+#: ../../src/logic/game.cc:382
 msgid "Initializing game…"
 msgstr "Speel word vörbereidt …"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:622
+#: ../../src/logic/game.cc:625
 msgid "Creating player infrastructure…"
 msgstr "Maak de Kraam för de Spelers …"
 
-#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:642 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr "Do fehlt eene Anfangs-Stee"
 
-#: ../../src/logic/game.cc:640 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:643 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands kunn dat Speel nich laden, wiel Speler %u keene Anfangs-Stee hett.\nDu kannst tum Ofhelpen eene Anfangs-Stee mit de Widelands-Bewarker daartodoon."
 
-#: ../../src/logic/game.cc:740
+#: ../../src/logic/game.cc:743
 msgid "Initializing…"
 msgstr "Vörbereiden …"
 
-#: ../../src/logic/game.cc:1190
+#: ../../src/logic/game.cc:1193
 msgid "Trade Offer"
 msgstr "Hannel-Anbott"
 
-#: ../../src/logic/game.cc:1192
+#: ../../src/logic/game.cc:1195
 msgid "This market has received a new trade offer."
 msgstr "Deese Markt hett een nejes Hannel-Anbott bekomen."
 
@@ -1921,7 +1921,7 @@ msgstr "Wüüst"
 msgid "No description defined"
 msgstr "Nich beschrieven"
 
-#: ../../src/logic/map_objects/immovable.cc:503
+#: ../../src/logic/map_objects/immovable.cc:513
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:174
 #, c-format
 msgid "%i%% built"
@@ -2205,7 +2205,7 @@ msgstr "Een Schipp up Söke wacht för dien Gebodd."
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
 #: ../../src/logic/map_objects/tribes/ship.cc:1017
-#: ../../src/wui/seafaring_statistics_menu.cc:238
+#: ../../src/wui/seafaring_statistics_menu.cc:239
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Up Schipperee"
@@ -2214,7 +2214,7 @@ msgstr "Up Schipperee"
 #. but has
 #. * nothing to do.
 #: ../../src/logic/map_objects/tribes/ship.cc:1020
-#: ../../src/wui/seafaring_statistics_menu.cc:236
+#: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Empty"
 msgstr "Leeg"
@@ -2222,7 +2222,7 @@ msgstr "Leeg"
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
 #: ../../src/logic/map_objects/tribes/ship.cc:1024
-#: ../../src/wui/seafaring_statistics_menu.cc:240
+#: ../../src/wui/seafaring_statistics_menu.cc:241
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Wachten"
@@ -2230,14 +2230,14 @@ msgstr "Wachten"
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
 #: ../../src/logic/map_objects/tribes/ship.cc:1028
-#: ../../src/wui/seafaring_statistics_menu.cc:242
+#: ../../src/wui/seafaring_statistics_menu.cc:243
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Söcht"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../src/logic/map_objects/tribes/ship.cc:1032
-#: ../../src/wui/seafaring_statistics_menu.cc:244
+#: ../../src/wui/seafaring_statistics_menu.cc:245
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Rüüme för Muden funnen"
@@ -2269,7 +2269,7 @@ msgstr "Schippen"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:153
-#: ../../src/wui/interactive_player.cc:333
+#: ../../src/wui/interactive_player.cc:336
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
 msgid "Wares"
@@ -2289,9 +2289,9 @@ msgstr "Arbeiders"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:220
-#: ../../src/map_io/widelands_map_loader.cc:322
+#: ../../src/map_io/widelands_map_loader.cc:329
 #: ../../src/wui/general_statistics_menu.cc:149
-#: ../../src/wui/interactive_player.cc:328 ../../src/wui/minimap.cc:199
+#: ../../src/wui/interactive_player.cc:331 ../../src/wui/minimap.cc:199
 msgid "Buildings"
 msgstr "Husen"
 
@@ -2347,48 +2347,48 @@ msgstr "Priel verneelt"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Een Priel is verneelt worden, daarmit diene neje Muu baut worden kunn."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1114
+#: ../../src/logic/map_objects/tribes/worker.cc:1128
 msgid "A geologist found resources."
 msgstr "Een Schattsöker hett Mineraale funnen."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2068
+#: ../../src/logic/map_objects/tribes/worker.cc:2082
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "Dien %s kann keenen Weg na Huus finnen un word wull doodgahn."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2073
+#: ../../src/logic/map_objects/tribes/worker.cc:2087
 #: ../../src/wui/productionsitewindow.cc:108
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgstr "Arbeider"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2088
 msgid "Worker got lost!"
 msgstr "Fehlgahner Arbeider!"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:70
+#: ../../src/logic/map_objects/world/terrain_description.cc:71
 msgid "arable"
 msgstr "tum Bauen"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:80
+#: ../../src/logic/map_objects/world/terrain_description.cc:81
 msgid "navigable"
 msgstr "Tum Seilen"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:85
+#: ../../src/logic/map_objects/world/terrain_description.cc:86
 msgid "unreachable"
 msgstr "Nich to överkomen"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:90
+#: ../../src/logic/map_objects/world/terrain_description.cc:91
 msgid "mineable"
 msgstr "För Bargwarken"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:95
+#: ../../src/logic/map_objects/world/terrain_description.cc:96
 msgid "unwalkable"
 msgstr "Nich to henkomen"
 
@@ -2413,7 +2413,7 @@ msgstr "Schipp %d"
 #: ../../src/wlapplication_options.cc:534
 #: ../../src/wui/game_diplomacy_menu.cc:37
 #: ../../src/wui/game_diplomacy_menu.cc:114
-#: ../../src/wui/interactive_player.cc:218
+#: ../../src/wui/interactive_player.cc:219
 msgid "Diplomacy"
 msgstr "Betreckens"
 
@@ -2512,12 +2512,12 @@ msgid "Saving game…"
 msgstr "Sekere dat Speel …"
 
 #: ../../src/logic/save_handler.cc:174
-#: ../../src/wui/game_main_menu_save_game.cc:321
+#: ../../src/wui/game_main_menu_save_game.cc:323
 msgid "Saving failed!"
 msgstr "Sekern is fehlslaan!"
 
 #: ../../src/logic/save_handler.cc:188
-#: ../../src/wui/game_main_menu_save_game.cc:304
+#: ../../src/wui/game_main_menu_save_game.cc:306
 msgid "Game saved"
 msgstr "Dat Speel is sekert worden!"
 
@@ -2531,47 +2531,47 @@ msgid "Autosaving map…"
 msgstr "Sekere de Kaart …"
 
 #: ../../src/map_io/map_saver.cc:121
-#: ../../src/map_io/widelands_map_loader.cc:223
+#: ../../src/map_io/widelands_map_loader.cc:230
 msgid "Heights"
 msgstr "Höchten"
 
 #: ../../src/map_io/map_saver.cc:128
-#: ../../src/map_io/widelands_map_loader.cc:230
+#: ../../src/map_io/widelands_map_loader.cc:237
 msgid "Terrains"
 msgstr "Landskuppen"
 
 #: ../../src/map_io/map_saver.cc:135
-#: ../../src/map_io/widelands_map_loader.cc:243
+#: ../../src/map_io/widelands_map_loader.cc:250
 msgid "Starting positions"
 msgstr "Anfangs-Steden"
 
 #: ../../src/map_io/map_saver.cc:163
-#: ../../src/map_io/widelands_map_loader.cc:271
+#: ../../src/map_io/widelands_map_loader.cc:278
 msgid "Map version"
 msgstr "Kaart-Versioon"
 
 #: ../../src/map_io/map_saver.cc:175
-#: ../../src/map_io/widelands_map_loader.cc:277
+#: ../../src/map_io/widelands_map_loader.cc:284
 msgid "Building restrictions"
 msgstr "Bau-Verlöövnissen"
 
 #: ../../src/map_io/map_saver.cc:200
-#: ../../src/map_io/widelands_map_loader.cc:302 ../../src/wui/minimap.cc:177
+#: ../../src/map_io/widelands_map_loader.cc:309 ../../src/wui/minimap.cc:177
 msgid "Flags"
 msgstr "Fahnen"
 
 #: ../../src/map_io/map_saver.cc:207
-#: ../../src/map_io/widelands_map_loader.cc:309
+#: ../../src/map_io/widelands_map_loader.cc:316
 msgid "Roads and waterways"
 msgstr "Straten un Prielen"
 
 #: ../../src/map_io/map_saver.cc:229
-#: ../../src/map_io/widelands_map_loader.cc:239
+#: ../../src/map_io/widelands_map_loader.cc:246
 msgid "Map objects"
 msgstr "Kaart-Dingen"
 
 #: ../../src/map_io/map_saver.cc:238
-#: ../../src/map_io/widelands_map_loader.cc:395
+#: ../../src/map_io/widelands_map_loader.cc:402
 msgid "Win condition"
 msgstr "Upgaav tum Winnen"
 
@@ -2592,17 +2592,17 @@ msgid "Territory"
 msgstr "Gewesten"
 
 #: ../../src/map_io/map_saver.cc:288
-#: ../../src/map_io/widelands_map_loader.cc:377
+#: ../../src/map_io/widelands_map_loader.cc:384
 msgid "Vision"
 msgstr "Utsicht"
 
 #: ../../src/map_io/map_saver.cc:297
-#: ../../src/map_io/widelands_map_loader.cc:412
+#: ../../src/map_io/widelands_map_loader.cc:419
 msgid "Scripting"
 msgstr "Schrievens"
 
 #: ../../src/map_io/map_saver.cc:304
-#: ../../src/map_io/widelands_map_loader.cc:405
+#: ../../src/map_io/widelands_map_loader.cc:412
 #: ../../src/wlapplication_options.cc:529
 #: ../../src/wui/game_objectives_menu.cc:30
 #: ../../src/wui/interactive_player.cc:211
@@ -2610,7 +2610,7 @@ msgid "Objectives"
 msgstr "Upgaven"
 
 #: ../../src/map_io/map_saver.cc:308
-#: ../../src/map_io/widelands_map_loader.cc:419
+#: ../../src/map_io/widelands_map_loader.cc:426
 msgid "Images"
 msgstr "Billers"
 
@@ -2625,7 +2625,7 @@ msgid ""
 "are sorry, but this savegame seems to be broken beyond repair."
 msgstr "Dat Speel hett een SIGABRT-Signaal kregen, wat wull vun eenem kaputten sekert Speel komen is. Deeser Fehler kunn noch nich ofholpen worden. Leider is deeses sekert Speel wull so kaputt, dat dat nich mehr to bruken is."
 
-#: ../../src/map_io/s2map.cc:428 ../../src/map_io/widelands_map_loader.cc:182
+#: ../../src/map_io/s2map.cc:428 ../../src/map_io/widelands_map_loader.cc:189
 msgid "Loading map…"
 msgstr "Lade de Kaart …"
 
@@ -2633,37 +2633,37 @@ msgstr "Lade de Kaart …"
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Siedler II Kaart. Nich beschrieven!"
 
-#: ../../src/map_io/widelands_map_loader.cc:195
+#: ../../src/map_io/widelands_map_loader.cc:202
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
 msgstr "Lade de Kaart: %1$s (%2$u/%3$d)"
 
-#: ../../src/map_io/widelands_map_loader.cc:290
+#: ../../src/map_io/widelands_map_loader.cc:297
 msgid "Territories"
 msgstr "Gewesten"
 
-#: ../../src/map_io/widelands_map_loader.cc:330
+#: ../../src/map_io/widelands_map_loader.cc:337
 msgid "Initializing flags"
 msgstr "Fahnen klaarmaken"
 
-#: ../../src/map_io/widelands_map_loader.cc:337
+#: ../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing roads and waterways"
 msgstr "Straten un Prielen klaarmaken"
 
-#: ../../src/map_io/widelands_map_loader.cc:350
+#: ../../src/map_io/widelands_map_loader.cc:357
 msgid "Initializing buildings"
 msgstr "Husen klaarmaken"
 
-#: ../../src/map_io/widelands_map_loader.cc:357
+#: ../../src/map_io/widelands_map_loader.cc:364
 msgid "Initializing map objects"
 msgstr "Kaart-Dingen klaarmaken"
 
-#: ../../src/map_io/widelands_map_loader.cc:422
+#: ../../src/map_io/widelands_map_loader.cc:429
 msgid "Checking map"
 msgstr "Kaart nakieken"
 
 #: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
-#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:749
+#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:750
 msgid "Preparing game…"
 msgstr "Speel word torechtmaakt …"
 
@@ -2911,8 +2911,8 @@ msgstr "ACHTUNG: Hebb een %s-Befehl kregen ofschoonst wi nich in’n CONNECTING-
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
-msgstr[0] "Server-Tiet is %d Sekünn verschuven."
-msgstr[1] "Server-Tiet is %d Sekünnen verschuven."
+msgstr[0] "Server-Tied is %d Sekünn verschuven."
+msgstr[1] "Server-Tied is %d Sekünnen verschuven."
 
 #: ../../src/network/internet_gaming.cc:517
 #, c-format
@@ -2992,7 +2992,7 @@ msgstr "/warn <Naam> <Naricht> – Schickt de geven Bruker eene persöönlike Sy
 
 #: ../../src/network/internet_gaming.cc:918
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
-msgstr "/kick  – Lösket de geven Bruker of dat geven Speel vun de Metaserver"
+msgstr "/kick – Lösket de geven Bruker of dat geven Speel vun de Metaserver"
 
 #: ../../src/network/internet_gaming.cc:920
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
@@ -3088,7 +3088,7 @@ msgstr "De Server is ofstört un hett drock sekert."
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client and host have become desynchronized."
-msgstr "De Tiet vun de Gast un de Weert is verschoven worden."
+msgstr "De Tied vun de Gast un de Weert is verschuven worden."
 
 #: ../../src/network/network_gaming_messages.cc:124
 #, c-format
@@ -3154,7 +3154,7 @@ msgstr "De Gast nimmt mehr Tied tum Speelen as de Weert verlöövt."
 
 #: ../../src/network/network_gaming_messages.cc:145
 msgid "Client did not submit sync report in time."
-msgstr "De Gast hett nich bi Tied seggt, wat de Tied verschoven is."
+msgstr "De Gast hett nich bi Tied mellt, dat dat Speel nich verschuven is."
 
 #: ../../src/network/network_gaming_messages.cc:146
 msgid "The game has already started."
@@ -3299,11 +3299,11 @@ msgstr "Nich utköort"
 msgid "No matches"
 msgstr "Nix funnen"
 
-#: ../../src/ui_basic/panel.cc:298
+#: ../../src/ui_basic/panel.cc:302
 msgid "Please wait…"
 msgstr "Bidde wachten …"
 
-#: ../../src/ui_basic/panel.cc:428
+#: ../../src/ui_basic/panel.cc:432
 msgid "Game ending – please wait…"
 msgstr "Speel ennt – bidde wachten …"
 
@@ -3610,7 +3610,7 @@ msgstr "De interaktiv Verwiederns-Packer verlöövt di, Verwiederns to maken, to
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
-msgstr "För mehr Informationen, wo du diene eegenen Verwiederns entwickelst un packst, besöök bidde %s. "
+msgstr "För mehr Informationen, wo du diene eegenen Verwiederns entwickelst un packst, besöök bidde %s."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:362
 #: ../../src/ui_fsmenu/mousewheel_report.cc:41
@@ -4013,7 +4013,7 @@ msgid "–"
 msgstr "–"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:86
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:772
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:795
 msgid "Delete this add-on"
 msgstr "Deeses Verwiedern wegdoon"
 
@@ -4061,14 +4061,14 @@ msgstr "Deel"
 #: ../../src/ui_fsmenu/addons/packager.cc:337
 #: ../../src/ui_fsmenu/addons/packager.cc:353
 #: ../../src/ui_fsmenu/addons/packager.cc:358
-#: ../../src/ui_fsmenu/addons/packager_box.cc:401
-#: ../../src/ui_fsmenu/addons/packager_box.cc:417
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:388
+#: ../../src/ui_fsmenu/addons/packager_box.cc:404
+#: ../../src/ui_fsmenu/addons/packager_box.cc:410
 msgid "Invalid Name"
 msgstr "Ungültig Naam"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:338
-#: ../../src/ui_fsmenu/addons/packager_box.cc:403
+#: ../../src/ui_fsmenu/addons/packager_box.cc:390
 #, c-format
 msgid ""
 "This name is invalid. Reason: %s\n"
@@ -4267,27 +4267,15 @@ msgstr "Spelers: %s"
 msgid "Top-level directory"
 msgstr "Boverst Verteeknis"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:372
-msgid "Zipped Map"
-msgstr "Spaarsam sekert Kaart"
-
-#: ../../src/ui_fsmenu/addons/packager_box.cc:373
-#, c-format
-msgid ""
-"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress Widelands data files’ option in the options menu and resaving the map in the editor.\n"
-"\n"
-"Do you want to add this map anyway?"
-msgstr "De Kaart »%s« is keen Verteeknis. Bidde överlegg di, of du de Instellen »Dateien mit Widelands-Daten spaarsam sekern« in de Instellungen-Menü utknipst un de Kaart im Bewarker neei sekerst.\n\nWillst du de Kaart doch hentofögen?"
-
-#: ../../src/ui_fsmenu/addons/packager_box.cc:389
+#: ../../src/ui_fsmenu/addons/packager_box.cc:376
 msgid "New Directory"
 msgstr "Nejes Verteeknis"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:390
+#: ../../src/ui_fsmenu/addons/packager_box.cc:377
 msgid "Enter the name for the new directory."
 msgstr "Giff de Naam för dat neje Verteeknis in."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:410
+#: ../../src/ui_fsmenu/addons/packager_box.cc:397
 #, c-format
 msgid ""
 "Directories may not use the extension ‘%s’.\n"
@@ -4295,37 +4283,37 @@ msgid ""
 "Please choose a different name."
 msgstr "Verteeknissen düren nich mit »%s« ennen.\n\nBidde köör een anner Naam."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:410
 msgid "A directory with this name already exists."
 msgstr "Een Verteeknis mit deesem Naam gifft ’t al."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:439
+#: ../../src/ui_fsmenu/addons/packager_box.cc:426
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
 msgstr "Willst du dat Verteeknis »%s« un all wat daar drin is würrelk wegdoon?"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:441
+#: ../../src/ui_fsmenu/addons/packager_box.cc:428
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
 msgstr "Willst du de Kaart »%s« würrelk wegdoon?"
 
 #. * TRANSLATORS: Header for campaign difficulty
-#: ../../src/ui_fsmenu/addons/packager_box.cc:489
+#: ../../src/ui_fsmenu/addons/packager_box.cc:476
 #: ../../src/ui_fsmenu/campaign_select.cc:47
 #: ../../src/ui_fsmenu/campaigndetails.cc:59
 #: ../../src/ui_fsmenu/scenario_select.cc:68
 msgid "Difficulty"
 msgstr "Swierigkeid"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:498
+#: ../../src/ui_fsmenu/addons/packager_box.cc:485
 msgid "Difficulty:"
 msgstr "Swierigkeid:"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:523
+#: ../../src/ui_fsmenu/addons/packager_box.cc:510
 msgid "The campaigns difficulty. One word."
 msgstr "De Swierigkeid vun de Rutfödderungs-Riege. Een Word."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:524
+#: ../../src/ui_fsmenu/addons/packager_box.cc:511
 msgid "Short description, which will be appended to the difficulty."
 msgstr "Körte Beschrieven, wat an de Swierigkeid hentoföögt word."
 
@@ -4502,95 +4490,95 @@ msgctxt "priority"
 msgid "High"
 msgstr "Hoog"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:477
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:481
 msgid "Please explain why you are deleting this add-on."
 msgstr "Bidde verklaar, um wat du deeses Verwiedern löskest."
 
 #. * TRANSLATORS: This add-on has not yet been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:494
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:498
 msgid "Unchecked"
 msgstr "Nich nakiekt"
 
 #. * TRANSLATORS: This add-on has been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:496
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:394
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:419
 msgid "Verified"
 msgstr "Verifizeert"
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:504
 msgid "Desyncs"
 msgstr "Verschuuvt"
 
 #. * TRANSLATORS: This add-on will not cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:506
 msgid "Sync-safe"
 msgstr "Seker vör Verschuvens"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:615
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:638
 msgid "Your vote"
 msgstr "Dien Beweerten"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:639
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:662
 msgid "Next screenshot"
 msgstr "Anner Billschirmfoto"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:648
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:671
 msgid "Previous screenshot"
 msgstr "Vörig Billschirmfoto"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:656
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:679
 msgid "Write a comment…"
 msgstr "Kommentaar schrieven …"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:666
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:689
 msgid "Administrator actions"
 msgstr "Chef-Befehlen"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:673
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:696
 msgid "Not voted"
 msgstr "Nich beweert"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:684
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:707
 #, c-format
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
 msgstr "De Beweerten kunn nich ofschickt worden.\nFehler-Naricht: %s"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:744
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:767
 #, c-format
 msgid "Screenshots (%u)"
 msgstr "Billschirmfotos (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:767
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:790
 msgid "Change verification status"
 msgstr "Verifizeren-Tostand ännern"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:768
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:791
 msgid "Change quality rating"
 msgstr "Qualität-Beweerten ännern"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:769
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:792
 msgid "Change sync-safety status"
 msgstr "Verschuvens-Sekerheid-Tostand ännern"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:771
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:794
 msgid "Configure Transifex integration"
 msgstr "Transifex-Integratioon inrichten"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:822
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:845
 #, c-format
 msgid "Comments (%u)"
 msgstr "Kommentaren (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:823
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:846
 #, c-format
 msgid "Votes (%u)"
 msgstr "Beweertens (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:827
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:850
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:473
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
@@ -4598,51 +4586,51 @@ msgid_plural "Average rating: %1$.3f (%2$u votes)"
 msgstr[0] "Beweerten dör de Bank: %1$.3f (%2$u Beweerten)"
 msgstr[1] "Beweerten dör de Bank: %1$.3f (%2$u Beweertens)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:830
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:853
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:476
 msgid "No votes yet"
 msgstr "Noch nich beweert"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:848
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:871
 msgid "No comments yet."
 msgstr "Noch keene Kommentaren."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:849
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:872
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
 msgstr[0] "%u Kommentaar:"
 msgstr[1] "%u Kommentaren:"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:860
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:883
 #, c-format
 msgid "%1$s (edited on %2$s)"
 msgstr "%1$s (bewarkt: %2$s)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:866
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:889
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
 msgstr "%1$s (vun »%2$s« bewarkt: %3$s)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:872
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:895
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr "»%1$s« hett över Versioon %2$s kommenteert:"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:898
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:921
 #, c-format
 msgid "%1$u / %2$u"
 msgstr "%1$u / %2$u"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:934
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:957
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "Deeses Billschirmfoto kunn um een Fehler nich vum Server haalt worden."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:952
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:975
 msgid "Please log in to comment"
 msgstr "Bidde anmellen, um Kommentaren to schrieven"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:954
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:977
 msgid "Please log in to vote"
 msgstr "Bidde anmellen, um to beweerten"
 
@@ -5038,7 +5026,7 @@ msgstr "De utköört Handigtast (»%1$s«) word all för dat hier bruukt: »%2$s
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:292
-#: ../../src/wui/interactive_player.cc:338
+#: ../../src/wui/interactive_player.cc:341
 msgid "General"
 msgstr "Allgemeen"
 
@@ -5231,11 +5219,11 @@ msgstr "Torügg to de Speel-Instellens för eenen Speler"
 msgid "Load this game"
 msgstr "Deeses sekert Speel laden"
 
-#: ../../src/ui_fsmenu/loadgame.cc:162
+#: ../../src/ui_fsmenu/loadgame.cc:163
 msgid "Version Mismatch"
 msgstr "Falsk Versioon"
 
-#: ../../src/ui_fsmenu/loadgame.cc:163
+#: ../../src/ui_fsmenu/loadgame.cc:164
 msgid ""
 "This replay was created with a different Widelands version. It might be compatible, but will more likely desync or even fail to load.\n"
 "\n"
@@ -5265,7 +5253,7 @@ msgstr "Spitznaam:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:676
+#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:677
 msgid "nobody"
 msgstr "unbekannt"
 
@@ -5470,7 +5458,7 @@ msgstr "Versioon %1$s"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
-msgstr "(C) %1%-%2% vun de Widelands Entwickeln-Klottje · Vergünnt unner de GNU General Public License V2.0 "
+msgstr "(C) %1%-%2% vun de Widelands Entwickeln-Klottje · Vergünnt unner de GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/main.cc:812
 msgid "Desyncing Add-On Found"
@@ -5935,7 +5923,7 @@ msgstr "Ofstand dat Fensters an anner Rannen binnen"
 
 #: ../../src/ui_fsmenu/options.cc:187
 msgid "Distance for windows to snap to borders:"
-msgstr " Ofstand dat Fensters an de Rand binnen"
+msgstr "Ofstand dat Fensters an de Rand binnen"
 
 #: ../../src/ui_fsmenu/options.cc:197
 msgid "Edit keyboard and mouse actions…"
@@ -5980,7 +5968,7 @@ msgstr "Husen wiesen"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:383
+#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:386
 msgid "Show Workarea Overlaps"
 msgstr "Arbeidsgewest-Övernannerliggen wiesen"
 
@@ -6163,18 +6151,18 @@ msgstr "De Datei-Padd »%s« in de campaigns.lua för Inföhrens is ungültig."
 msgid "Tutorial"
 msgstr "Inföhren"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Schriever"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Schrievers"
@@ -6291,59 +6279,59 @@ msgid "Unmark All"
 msgstr "Nix utkören"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:804 ../../src/wlapplication.cc:808
-#: ../../src/wlapplication.cc:813 ../../src/wui/savegameloader.cc:123
+#: ../../src/wlapplication.cc:805 ../../src/wlapplication.cc:809
+#: ../../src/wlapplication.cc:814 ../../src/wui/savegameloader.cc:123
 msgid "Error message:"
 msgstr "Fehler-Naricht:"
 
-#: ../../src/wlapplication.cc:805 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:806 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "Fehler mit de Speel-Daten"
 
-#: ../../src/wlapplication.cc:807
+#: ../../src/wlapplication.cc:808
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Widelands kunn de Datei »%s« nich finnen."
 
-#: ../../src/wlapplication.cc:809
+#: ../../src/wlapplication.cc:810
 msgid "File system error"
 msgstr "Dateisysteem-Fehler"
 
-#: ../../src/wlapplication.cc:1305
+#: ../../src/wlapplication.cc:1308
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Oorderreeg-Angaav för »%s« is leeg"
 
-#: ../../src/wlapplication.cc:1310
+#: ../../src/wlapplication.cc:1313
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "»%s« kann nich tosamen mit anner Dingen bruukt worden"
 
-#: ../../src/wlapplication.cc:1465
+#: ../../src/wlapplication.cc:1468
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Oorderreeg-Befehl »%s« is unbekannt.\nVillicht föhlt een »=«?"
 
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1589
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized un --fullscreen könen nich tosamen bruukt worden"
 
-#: ../../src/wlapplication.cc:1604
+#: ../../src/wlapplication.cc:1607
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Oorderreeg-Befehl »%s« is unbekannt"
 
-#: ../../src/wlapplication.cc:1656
+#: ../../src/wlapplication.cc:1659
 msgid "Game ended unexpectedly"
 msgstr "Speel ennt unverwacht"
 
-#: ../../src/wlapplication.cc:1656
+#: ../../src/wlapplication.cc:1659
 msgid "Unexpected error during the game"
 msgstr "Unverwachter Fehler bi’m Spölen"
 
-#: ../../src/wlapplication.cc:1659
+#: ../../src/wlapplication.cc:1662
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6357,7 +6345,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Bi’m Spölen is een Fehler uptreden. De Fehler seggt:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst wichtige Mellungen in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s.\n\nBidde föög deese Informatioon to de Fehler-Mellen hento.\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
 
-#: ../../src/wlapplication.cc:1668
+#: ../../src/wlapplication.cc:1671
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6367,11 +6355,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Dat Speel hett um dat unverwacht ennt:\n\n%s\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
 
-#: ../../src/wlapplication.cc:1694
+#: ../../src/wlapplication.cc:1697
 msgid "Emergency save failed"
 msgstr "Noodfall-Sekern fehlslaan"
 
-#: ../../src/wlapplication.cc:1695
+#: ../../src/wlapplication.cc:1698
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6433,15 +6421,15 @@ msgstr "Flintslagerhuus"
 
 #: ../../src/wlapplication_options.cc:176
 msgid "Primary Building Materials Industry"
-msgstr "Eerstes Baumaterialien-Produzeren"
+msgstr "Eerstes Baukraam-Produzeren"
 
 #: ../../src/wlapplication_options.cc:177
 msgid "Secondary Building Materials Industry"
-msgstr "Twedes Baumaterialien-Produzeren"
+msgstr "Twedes Baukraam-Produzeren"
 
 #: ../../src/wlapplication_options.cc:178
 msgid "Tertiary Building Materials Industry"
-msgstr "Dardes Baumaterialien-Produzeren"
+msgstr "Dardes Baukraam-Produzeren"
 
 #: ../../src/wlapplication_options.cc:179
 msgid "Fishing"
@@ -7249,7 +7237,7 @@ msgid "Center view on this"
 msgstr "Hierher springen"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/attack_window.cc:442 ../../src/wui/soldierlist.cc:418
+#: ../../src/wui/attack_window.cc:443 ../../src/wui/soldierlist.cc:418
 #: ../../src/wui/soldierlist.cc:480
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
@@ -7313,9 +7301,9 @@ msgstr "Muden"
 msgid "Low productivity:"
 msgstr "Lege Wöörde:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7379,27 +7367,27 @@ msgstr "Gifft torügg:"
 msgid "Watch the scout"
 msgstr "De Bespejer beluren"
 
-#: ../../src/wui/buildingwindow.cc:636
+#: ../../src/wui/buildingwindow.cc:640
 msgid "Hide work area"
 msgstr "Arbeidsgewest verbargen"
 
-#: ../../src/wui/buildingwindow.cc:639
+#: ../../src/wui/buildingwindow.cc:643
 msgid "Show work area"
 msgstr "Arbeidsgewest wiesen"
 
-#: ../../src/wui/buildingwindow.cc:664
+#: ../../src/wui/buildingwindow.cc:668
 #: ../../src/wui/constructionsitewindow.cc:336
 msgid "Start an expedition"
 msgstr "Söke anfangen"
 
-#: ../../src/wui/buildingwindow.cc:668
+#: ../../src/wui/buildingwindow.cc:672
 msgid "Cancel the expedition"
 msgstr "Söke ofbreken"
 
 #: ../../src/wui/constructionsitewindow.cc:154
 #: ../../src/wui/dismantlesitewindow.cc:64
 msgid "Building materials"
-msgstr "Baumaterialien"
+msgstr "Baukraam"
 
 #: ../../src/wui/constructionsitewindow.cc:225
 msgid "Stop this building’s work after completion"
@@ -7703,8 +7691,8 @@ msgstr "De Speler, de nich mehr verbunnen is, mit de utköörten künstelk Spele
 msgid "AI for the disconnected player"
 msgstr "Künstelker Speler för de Speler, de nich mehr verbunnen is"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -7747,7 +7735,7 @@ msgstr "Verlaten"
 
 #: ../../src/wui/game_diplomacy_menu.cc:168
 msgid "Leave your current team and become teamless"
-msgstr "Dien stedenwies Klottje verlaten uns in keener mehr wesen."
+msgstr "Dien stedenwies Klottje verlaten uns in keener mehr wesen"
 
 #: ../../src/wui/game_diplomacy_menu.cc:170
 msgid "Resign"
@@ -7810,13 +7798,13 @@ msgstr "Speel würrelk verlaten?"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Willst du deeses Speel würrelk verlaten?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:271
-#: ../../src/wui/game_main_menu_save_game.cc:311
+#: ../../src/wui/game_main_menu_save_game.cc:273
+#: ../../src/wui/game_main_menu_save_game.cc:313
 msgid "Error Saving Game!"
 msgstr "Fehler bi’m Sekern vum Speel!"
 
 #: ../../src/wui/game_message_menu.cc:53
-#: ../../src/wui/game_message_menu.cc:602
+#: ../../src/wui/game_message_menu.cc:607
 msgid "Messages: Inbox"
 msgstr "Inkomen Narichten"
 
@@ -7841,7 +7829,7 @@ msgid "Sent"
 msgstr "Tied"
 
 #: ../../src/wui/game_message_menu.cc:114
-#: ../../src/wui/game_message_menu.cc:605
+#: ../../src/wui/game_message_menu.cc:610
 msgid "Show Archive"
 msgstr "Wies olle Narichten"
 
@@ -7856,35 +7844,35 @@ msgid "Show all messages"
 msgstr "Alle Narichten wiesen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/game_message_menu.cc:541
 msgid "Show geologists’ messages only"
 msgstr "Blot Narichten vun Schattsökers wiesen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:545
+#: ../../src/wui/game_message_menu.cc:546
 msgid "Show economy messages only"
 msgstr "Blot Weertskupp-Narichten wiesen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:551
 msgid "Show seafaring messages only"
 msgstr "Blot Seefahrt-Narichten wiesen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:553
+#: ../../src/wui/game_message_menu.cc:556
 msgid "Show warfare messages only"
 msgstr "Blot Soldateree-Narichten wiesen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:557
+#: ../../src/wui/game_message_menu.cc:561
 msgid "Show scenario messages only"
 msgstr "Blot Rutfödderungs-Narichten wiesen"
 
-#: ../../src/wui/game_message_menu.cc:595
+#: ../../src/wui/game_message_menu.cc:600
 msgid "Messages: Archive"
 msgstr "Olle Narichten"
 
-#: ../../src/wui/game_message_menu.cc:598
+#: ../../src/wui/game_message_menu.cc:603
 msgid "Show Inbox"
 msgstr "Wies inkomen Narichten"
 
@@ -7892,7 +7880,7 @@ msgstr "Wies inkomen Narichten"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:628
+#: ../../src/wui/game_message_menu.cc:633
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -7900,7 +7888,7 @@ msgstr[0] "De utköörte %d Naricht torügghalen"
 msgstr[1] "De utköörten %d Narichten torügghalen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:633
+#: ../../src/wui/game_message_menu.cc:638
 msgid "Restore selected message"
 msgstr "Utköörte Naricht torügghalen"
 
@@ -7908,7 +7896,7 @@ msgstr "Utköörte Naricht torügghalen"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:643
+#: ../../src/wui/game_message_menu.cc:648
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -7916,7 +7904,7 @@ msgstr[0] "De utköörte %d Naricht wegdoon"
 msgstr[1] "De utköörten %d Narichten wegdoon"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:648
+#: ../../src/wui/game_message_menu.cc:653
 msgid "Archive selected message"
 msgstr "Utköörte Naricht wegdoon"
 
@@ -8351,18 +8339,18 @@ msgstr "Tahlen över alls"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
+#: ../../src/wui/interactive_player.cc:315 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Seefahrt"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:318
+#: ../../src/wui/interactive_player.cc:321
 #: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:287
 msgid "Soldiers"
 msgstr "Soldaten"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:323 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:326 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Bestand"
@@ -8370,17 +8358,17 @@ msgstr "Bestand"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:380
+#: ../../src/wui/interactive_player.cc:383
 msgid "Hide Workarea Overlaps"
 msgstr "Arbeidsgewest-Övernannerliggen verbargen"
 
-#: ../../src/wui/interactive_player.cc:386
+#: ../../src/wui/interactive_player.cc:389
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "Of Arbeidsgewesten, wat övernanner liggen, wiest worden sallen, wenn du eene Baustee baust"
 
-#: ../../src/wui/interactive_player.cc:468
+#: ../../src/wui/interactive_player.cc:471
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -8684,7 +8672,7 @@ msgstr "Dat Speel kunn nich wegdaan worden."
 msgid "%d game could not be deleted."
 msgid_plural "%d games could not be deleted."
 msgstr[0] "%d Speel kunn nich wegdaan worden."
-msgstr[1] "%dSpeelen kunnen nich wegdaan worden. "
+msgstr[1] "%d Speelen kunnen nich wegdaan worden."
 
 #: ../../src/wui/savegamedeleter.cc:124
 msgid "Do you really want to delete this replay?"
@@ -8900,47 +8888,47 @@ msgid "Go to the selected ship and open its window"
 msgstr "To deese Schipp springen un sien Fenster wiesen"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:158
+#: ../../src/wui/seafaring_statistics_menu.cc:159
 msgid "Center the map on the selected ship"
 msgstr "To deese Schipp springen"
 
-#: ../../src/wui/seafaring_statistics_menu.cc:201
+#: ../../src/wui/seafaring_statistics_menu.cc:202
 msgctxt "ship"
 msgid "Name"
 msgstr "Naam"
 
-#: ../../src/wui/seafaring_statistics_menu.cc:202
+#: ../../src/wui/seafaring_statistics_menu.cc:203
 msgctxt "ship"
 msgid "Status"
 msgstr "Tostand"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:500
+#: ../../src/wui/seafaring_statistics_menu.cc:501
 msgid "Show all ships"
 msgstr "All Schippen wiesen"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:509
+#: ../../src/wui/seafaring_statistics_menu.cc:511
 msgid "Show empty ships"
 msgstr "Lege Schippen wiesen"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:513
+#: ../../src/wui/seafaring_statistics_menu.cc:516
 msgid "Show ships shipping wares and workers"
 msgstr "Schippen mit Waren un Arbeiders wiesen"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:518
+#: ../../src/wui/seafaring_statistics_menu.cc:521
 msgid "Show waiting expeditions"
 msgstr "Söken bi’m Wachten wiesen"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:523
+#: ../../src/wui/seafaring_statistics_menu.cc:526
 msgid "Show scouting expeditions"
 msgstr "Söken bi’m Utförsken wiesen"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:528
+#: ../../src/wui/seafaring_statistics_menu.cc:531
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr "Wies Söken wat Rüümte för Muden funnen hebben of een Dörp upsetten"
 

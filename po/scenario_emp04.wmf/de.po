@@ -6,8 +6,8 @@
 # Raymond Vetter, 2017
 # Jonas Richardsen <jonas.richardsen@isdas.de>, 2017
 # Elisabeth Jäger, 2018
-# Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # Wuzzy <Wuzzy@disroot.org>, 2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # 
 msgid ""
 msgstr ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Wuzzy <Wuzzy@disroot.org>, 2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -116,7 +116,7 @@ msgid ""
 "building material supply chain."
 msgstr ""
 "Baue mindestens drei Holzfäller und zwei Steinbrüche, um deine "
-"Versorgungskette für Baumaterial zu erneuern"
+"Versorgungskette für Baumaterial zu erneuern."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid "Produce fish and rations"
@@ -230,7 +230,8 @@ msgstr "Werkzeugproduktion"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:145
 msgid "Produce at least ten tools to improve your economy."
-msgstr "Stelle mindestens 10 Werkzeuge her, um deine Wirtschaft zu verbessern"
+msgstr ""
+"Stelle mindestens 10 Werkzeuge her, um deine Wirtschaft zu verbessern."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid ""
@@ -1315,7 +1316,7 @@ msgstr "Amalea in Eile"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:610
 msgid "Amalea is very busy…"
-msgstr "Amalea ist sehr beschäftigt…"
+msgstr "Amalea ist sehr beschäftigt …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:612

@@ -576,13 +576,9 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return UI::Panel::handle_key(down, code);
 		case SDLK_ESCAPE:
-			if (linked_dropdown != nullptr) {
-				if (linked_dropdown->is_filtered()) {
-					linked_dropdown->clear_filter();
-				} else {
-					linked_dropdown->set_list_visibility(false);
-				}
-				return true;
+		case SDLK_RETURN:
+			if (linked_dropdown != nullptr && (SDL_GetModState() & KMOD_CTRL) == 0) {
+				return linked_dropdown->handle_key(down, code);
 			}
 			return UI::Panel::handle_key(down, code);
 		default:

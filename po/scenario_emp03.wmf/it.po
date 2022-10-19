@@ -6,11 +6,11 @@
 # Airina Santonocito <airina.santonocito@gmail.com>, 2017
 # Mat V <enthusedquill6@gmail.com>, 2017
 # Filippo Montano, 2020
-# Samuele Battarra, 2020
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Leonardo Fontana <scuola.rovato@gmail.com>, 2021
 # Alen Ciga, 2021
 # Guybrush88 <erpizzo@alice.it>, 2021
+# Log Merger, 2022
 # 
 msgid ""
 msgstr ""
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2021\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,12 +61,11 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
 msgstr ""
-"Costruisci una casa del taglialegna, una segheria e una casa del "
-"tagliapietre"
+"Costruisci una casa del boscaiolo, una segheria e una casa dello scalpellino"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr "Taglialegna, segheria e tagliapietre"
+msgstr "Boscaiolo, segheria e scalpellino"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid ""
@@ -74,9 +73,9 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
-"Costruisci una segheria, una casa del taglialegna e una del tagliapietre "
-"appena c'è abbastanza spazio, così la catena di approvvigionamento di "
-"materiale di base da costruzione sarà completa."
+"Costruisci una casa del boscaiolo, una segheria e una casa dello scalpellino"
+" non appena ci sarà abbastanza spazio, così la catena di approvvigionamento "
+"di materiale da costruzione di base sarà completa."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
@@ -544,8 +543,8 @@ msgid ""
 "I noticed that our stonemason has started his work, finally. He will cut the"
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
-"Ho visto che il nostro tagliapietre ha finalmente iniziato a lavorare. "
-"Taglierà le colonne di marmo di cui abbiamo bisogno per la nostra economia "
+"Ho visto che il nostro scalpellino ha finalmente iniziato a lavorare. "
+"Scolpirà le colonne di marmo di cui abbiamo bisogno per la nostra economia "
 "di base."
 
 #. TRANSLATORS: Amalea
@@ -707,8 +706,8 @@ msgstr ""
 "Quando avremo abbastanza grano, potremo smantellare la fattoria e "
 "sostituirla con un allevamento di pecore. Appena l'allevamento inizierà a "
 "produrre lana, troveremo uno spazio per un edificio di medie dimensioni e "
-"costruiremo un mulino di tessitura, così da usare la lana per tessere. Per "
-"adesso però preoccupiamoci di produrre abbastanza grano!"
+"costruiremo uno stabilimento tessile, così da usare la lana per tessere. Per"
+" adesso però preoccupiamoci di produrre abbastanza grano!"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -1072,9 +1071,9 @@ msgid ""
 "taking to the sea again. However, I thought it would be helpful to remind "
 "you that ship production is not the only industry that needs cloth."
 msgstr ""
-"Salve Lutius. Abbiamo appena completato il mulino di tessitura. Stiamo per "
-"tornare nuovamente in mare; tuttavia, ho pensato fosse utile ricordarti che "
-"l'industria navale non è l'unica che necessita tessuto."
+"Salve Lutius. Abbiamo appena completato lo stabilimento tessile. Stiamo per "
+"prendere di nuovo il mare; ho tuttavia creduto utile ricordarti che "
+"l'industria navale non è l'unica ad aver bisogno di tessuti."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:541
 msgid ""
@@ -1231,8 +1230,8 @@ msgid ""
 msgstr ""
 "Mio signore, tutti gli edifici sono pronti per l'addestramento dei soldati, "
 "ma sarebbe opportuno aumentare i nostri sforzi per far raggiungere loro il "
-"massimo del proprio potenziale, e aumentare il numero di soldati addestrati "
-"stesso."
+"massimo del proprio potenziale, e aumentare il numero stesso di soldati "
+"addestrati."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:602
 msgid ""
@@ -1336,4 +1335,4 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"
-msgstr "Trovato un manufatto"
+msgstr "Trovato un manufatto prezioso"

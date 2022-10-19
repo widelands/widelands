@@ -33,7 +33,7 @@ msgstr ""
 "Es scheint, dass du die vorherige Mission nicht abgeschlossen hast. Du "
 "kannst dieses Szenario trotzdem spielen, aber du wirst einen Nachteil davon "
 "haben. Es ist besser, erst das vorhergehende Szenario abzuschließen und dann"
-" diese Mission neu zu starten. "
+" diese Mission neu zu starten."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:33
@@ -225,7 +225,7 @@ msgstr ""
 #. TRANSLATORS: Henneke Lembeck – Amazons 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:118
 msgid "Not the friendliest of people…"
-msgstr "Nicht gerade die freundlichsten Leute…"
+msgstr "Nicht gerade die freundlichsten Leute …"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:123
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:129
@@ -331,7 +331,7 @@ msgstr ""
 " dauerte. Die kurze und bittere Wahrheit ist, dass ich besiegt wurde und "
 "gezwungen war zu fliehen. Ich hatte keine Hoffnung, dass meine Freunde vom "
 "Festland mir helfen könnten, da Atterdags Armeen so unglaublich zahlreich "
-"sind, dass ich wusste sie würden keine Chance haben. "
+"sind, dass ich wusste sie würden keine Chance haben."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 6
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:159
@@ -344,7 +344,7 @@ msgstr ""
 "Nur Ihr habt den Ruf der erstaunlichsten Kriegsheldentaten. Ihr seid "
 "wahrscheinlich der einzig lebende Mensch der den bösen Dänen überwinden "
 "kann. Ich bitte Euch mit mir nach Süden zu kommen und Föhr zu befreien, oder"
-" mir mindestens eine Truppe Eurer weithin berühmten Krieger zu senden.  "
+" mir mindestens eine Truppe Eurer weithin berühmten Krieger zu senden."
 
 #. TRANSLATORS: Reebaud – Reebaud 7
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:165
@@ -394,7 +394,7 @@ msgstr ""
 "Zweifel geben, dass wir sie am Ende schlagen werden. Aber ich fürchte es "
 "wird einige Zeit dauern, bis sie besiegt sind, und es sicher für mich ist "
 "mit euch nach Süden zu kommen. Während der Zeit, sollt Ihr natürlich all die"
-" Gastfreundschaft und Großzügigkeit erfahren, die wir anbieten können. "
+" Gastfreundschaft und Großzügigkeit erfahren, die wir anbieten können."
 
 #. TRANSLATORS: Reebaud – Reebaud 8b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:177
@@ -423,7 +423,7 @@ msgstr ""
 "und verwundet von den schweren Kämpfen, und sie werden einige Zeit brauchen,"
 " um sich zu erholen, bevor wir sie wieder in den Kampf schicken können. "
 "Während der Zeit, sollt Ihr natürlich all die Gastfreundschaft und "
-"Großzügigkeit erfahren, die wir anbieten können. "
+"Großzügigkeit erfahren, die wir anbieten können."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:183
@@ -437,7 +437,7 @@ msgstr ""
 "nicht geziemen, herumzusitzen und Becher mit Met zu genießen, während Ihr um"
 " euer Leben kämpft. Im Geist unserer Freundschaft und zu Ehren der guten "
 "Männer die Ihr verloren habt, werden wir an eurer Seite die Eindringlinge "
-"bekämpfen."
+"bekämpfen!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -551,7 +551,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:228
 msgid "Something is going on…"
-msgstr "Es geht etwas vor sich…"
+msgstr "Es geht etwas vor sich …"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:230
@@ -655,7 +655,7 @@ msgstr ""
 "zerstört. Vielleicht war ich närrisch anzunehmen ich könnte Atterdag "
 "besiegen, wenn ich nicht mal gegen diese unbedeutenden Fremden bestehen "
 "konnte. Gott missbilligt diese meine Hybris, und Er, nicht eine hergelaufene"
-" Horde Fremder, hat unser trauriges Schicksal beendet. "
+" Horde Fremder, hat unser trauriges Schicksal beendet."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:267
 msgid "Expansion"
@@ -686,7 +686,7 @@ msgstr ""
 "Wir sollten die Geschwindigkeit unserer eigenen Ausbreitung beschleunigen. "
 "Ohne zu wissen in welche Richtung wir gehen müssen, schlage ich vor zunächst"
 " nach Westen zu schreiten ehe Marcus Caius Iniucundus uns an dieser Grenze "
-"blockieren kann. "
+"blockieren kann."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:277
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:283

@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015
+# Juanjo, 2015,2022
 # Juanjo, 2015
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:28+0000\n"
-"Last-Translator: Juanjo, 2015\n"
+"Last-Translator: Juanjo, 2015,2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +61,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr "Per establir una ruta de contraban, necessiteu construir un magatzem en un lloc d'enviament/entrega mentre que el vostre company d'equip n'ha de construir un altre en el corresponent lloc d'entrega/enviament. Es transporta un bé cada 10 segons."
+msgstr "Per establir una ruta de contraban, necessiteu construir un magatzem en un lloc d’enviament/entrega mentre que el vostre company d’equip n’ha de construir un altre en el corresponent lloc d’entrega/enviament. Es transporta un bé cada 10 segons."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
@@ -73,7 +73,7 @@ msgstr "Per les rutes de contraban més difícils de defensar, aconseguireu 2 o 
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
-msgstr "Un lloc d'enviament"
+msgstr "Un lloc d’enviament"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:14
 msgid "A receiving spot"
@@ -88,13 +88,13 @@ msgid ""
 "Remember that the map has rotational symmetry. For example, when you have "
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
-msgstr "Recordeu que el mapa té simetria central. És a dir, quan trobeu un túnel a la part superior esquerra del vostre quarter general, l'extrem corresponent estarà a la part inferior dreta del quarter general del vostre company d'equip."
+msgstr "Recordeu que el mapa té simetria central. És a dir, quan trobeu un túnel a la part superior esquerra del vostre quarter general, l’extrem corresponent estarà a la part inferior dreta del quarter general del vostre company d’equip."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid ""
 "You can see the number of wares traded at any time in the general statistics"
 " menu. Good luck!"
-msgstr "Podeu veure el nombre de béns intercanviats en qualsevol moment en el menú general d'estadístiques. Bona sort!"
+msgstr "Podeu veure el nombre de béns intercanviats en qualsevol moment en el menú general d’estadístiques. Bona sort!"
 
 #. TRANSLATORS: the first 2 parameters are player names, the last parameter is
 #. '<number> points'
@@ -102,7 +102,7 @@ msgstr "Podeu veure el nombre de béns intercanviats en qualsevol moment en el m
 msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
-msgstr "S'ha establit una nova ruta de contraban des de %1$s fins a %2$s! Cada bé que  passeu de contraban val %3$s."
+msgstr "S’ha establit una nova ruta de contraban des de %1$s fins a %2$s! Cada bé que  passeu de contraban val %3$s."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:26
@@ -110,7 +110,7 @@ msgstr "S'ha establit una nova ruta de contraban des de %1$s fins a %2$s! Cada b
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
 "warehouse. Every ware smuggled here is worth %s."
-msgstr "El teu equip ha establit una nova ruta de contraban. Tens el magatzem d'enviament. Cada bé que hi passeu de contraban en aquesta ruta val %s."
+msgstr "El teu equip ha establit una nova ruta de contraban. Tens el magatzem d’enviament. Cada bé que hi passeu de contraban en aquesta ruta val %s."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:30
@@ -124,11 +124,11 @@ msgstr "El teu equip ha establit una nova ruta de contraban. Tens el magatzem de
 #. parameters are player names
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:34
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
-msgstr "La ruta de contraban valorada en %1$s des de %2$s a %3$s s'ha trencat!"
+msgstr "La ruta de contraban valorada en %1$s des de %2$s a %3$s s’ha trencat!"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
 msgid "Game over!"
-msgstr "S'ha acabat la partida!"
+msgstr "S’ha acabat la partida!"
 
 #. TRANSLATORS: the first 4 parameters are player names, the last parameter is
 #. '<number> points'
@@ -136,4 +136,4 @@ msgstr "S'ha acabat la partida!"
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."
-msgstr "S'ha acabat la partida! %1$s i %2$s han guanyat! %3$s i %4$s només han aconseguit %5$s."
+msgstr "S’ha acabat la partida! %1$s i %2$s han guanyat! %3$s i %4$s només han aconseguit %5$s."

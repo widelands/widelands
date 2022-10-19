@@ -467,6 +467,11 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 			try {
 				DescriptionIndex workerindex = descriptions.load_worker(workername);
 				if (has_worker(workerindex)) {
+					if (workername == "frisians_diker") {
+						// TODO(Nordfriese): Ugly v1.0 savegame compatibility hack, remove after v1.1
+						continue;
+					}
+
 					throw GameDataError("Duplicate definition of worker");
 				}
 
@@ -540,6 +545,11 @@ void TribeDescr::load_buildings(const LuaTable& table, Descriptions& description
 		try {
 			DescriptionIndex index = descriptions.load_building(buildingname);
 			if (has_building(index)) {
+				if (buildingname == "frisians_dikers_house") {
+					// TODO(Nordfriese): Ugly v1.0 savegame compatibility hack, remove after v1.1
+					continue;
+				}
+
 				throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 			}
 			buildings_.insert(index);

@@ -1049,7 +1049,7 @@ static int L_get_user_input_allowed(lua_State* L) {
 static int L_get_shortcut(lua_State* L) {
 	const std::string name = luaL_checkstring(L, -1);
 	try {
-		lua_pushstring(L, shortcut_string_for(shortcut_from_string(name), false).c_str());
+		lua_pushstring(L, shortcut_string_for(shortcut_from_string(name), true).c_str());
 	} catch (const WException& e) {
 		report_error(L, "Unable to query shortcut for '%s': %s", name.c_str(), e.what());
 	}

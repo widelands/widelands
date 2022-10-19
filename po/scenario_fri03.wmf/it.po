@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Samuele Battarra, 2021
+# Log Merger, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Samuele Battarra, 2021\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -158,6 +159,12 @@ msgid ""
 "son Henneke and a few of my closest followers while Atterdag now calls Föhr "
 "another piece of his growing empire."
 msgstr ""
+"Devo ammetterlo amaramente – ha vinto. La battaglia è durata trentacinque "
+"giorni, ed ogni mattina, ogni sera arrivava un'altra nave dalla Danimarca a "
+"portare nuove truppe. Come potevo sperare di tener testa a tale svantaggio? "
+"Alla fine non ho avuto altra scelta che scappare con mio figlio Henneke ed "
+"alcuni dei miei più fedeli seguaci, mentre Atterdag reclama ora per Föhr "
+"un'altra parte del suo rampante impero."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:106
@@ -253,6 +260,11 @@ msgid ""
 " too much time perfecting our economy – all that matters is that we get to "
 "the North soon."
 msgstr ""
+"I miei soldati segnalano di aver trovato un luogo adatto ad un porto! Ora "
+"dobbiamo costruire un porto ed avviare una spedizione. Prima dobbiamo "
+"naturalmente costruire un'intera economia marittima, con un cantiere navale "
+"ed uno stabilimento tessile. Ma non perdiamo troppo tempo nel perfezionare "
+"la nostra economia – tutto ciò che importa è raggiungere presto il Nord."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:144
 msgid "A Strange Island"
@@ -577,6 +589,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Hai completato questa missione. Puoi continuare a giocare, se lo desideri, "
+"altrimenti passa alla prossima missione."
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:306

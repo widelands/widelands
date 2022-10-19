@@ -120,7 +120,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	   as_tooltip_text_with_hotkey(
 	      /** TRANSLATORS: Tooltip in the messages window */
 	      _("Center main mapview on location"),
-	      shortcut_string_for(KeyboardShortcut::kInGameMessagesGoto), UI::PanelStyle::kWui));
+	      shortcut_string_for(KeyboardShortcut::kInGameMessagesGoto, true), UI::PanelStyle::kWui));
 	centerviewbtn_->set_enabled(false);
 
 	if (get_usedefaultpos()) {
@@ -526,7 +526,8 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip(as_tooltip_text_with_hotkey(
 		   /** TRANSLATORS: Tooltip in the messages window */
-		   _("Show all messages"), shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterAll),
+		   _("Show all messages"),
+		   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterAll, true),
 		   UI::PanelStyle::kWui));
 	}
 }
@@ -538,24 +539,28 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 	geologistsbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
 	   _("Show geologists’ messages only"),
-	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterGeologists),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterGeologists, true),
 	   UI::PanelStyle::kWui));
 	economybtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
 	   _("Show economy messages only"),
-	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterEconomy), UI::PanelStyle::kWui));
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterEconomy, true),
+	   UI::PanelStyle::kWui));
 	seafaringbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
 	   _("Show seafaring messages only"),
-	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterSeafaring), UI::PanelStyle::kWui));
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterSeafaring, true),
+	   UI::PanelStyle::kWui));
 	warfarebtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
 	   _("Show warfare messages only"),
-	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterWarfare), UI::PanelStyle::kWui));
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterWarfare, true),
+	   UI::PanelStyle::kWui));
 	scenariobtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
 	   _("Show scenario messages only"),
-	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterScenario), UI::PanelStyle::kWui));
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterScenario, true),
+	   UI::PanelStyle::kWui));
 }
 
 /**
@@ -650,7 +655,7 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		break;
 	}
 	archivebtn_->set_tooltip(as_tooltip_text_with_hotkey(
-	   button_tooltip, shortcut_string_for(KeyboardShortcut::kCommonDeleteItem),
+	   button_tooltip, shortcut_string_for(KeyboardShortcut::kCommonDeleteItem, true),
 	   UI::PanelStyle::kWui));
 }
 

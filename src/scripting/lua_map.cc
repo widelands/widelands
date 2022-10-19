@@ -522,16 +522,17 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 SoldiersMap parse_set_soldiers_arguments(lua_State* L,
                                          const Widelands::SoldierDescr& soldier_descr) {
 	SoldiersMap rv;
+	constexpr Widelands::Quantity max_count = 10000;
 	if (lua_gettop(L) > 2) {
 		// STACK: cls, descr, count
-		const Widelands::Quantity count = luaL_checkuint32(L, 3);
+		const Widelands::Quantity count = std::min(luaL_checkuint32(L, 3), max_count);
 		const SoldierMapDescr d = unbox_lua_soldier_description(L, 2, soldier_descr);
 		rv.insert(SoldierAmount(d, count));
 	} else {
 		lua_pushnil(L);
 		while (lua_next(L, 2) != 0) {
 			const SoldierMapDescr d = unbox_lua_soldier_description(L, 3, soldier_descr);
-			const Widelands::Quantity count = luaL_checkuint32(L, -1);
+			const Widelands::Quantity count = std::min(luaL_checkuint32(L, -1), max_count);
 			rv.insert(SoldierAmount(d, count));
 			lua_pop(L, 1);
 		}

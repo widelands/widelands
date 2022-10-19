@@ -7,7 +7,7 @@
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2018,2020
-# LINUX SAUNA, 2022
+# LINUX-SAUNA, 2022
 # Oi Suomi On! <oisuomion@protonmail.com>, 2022
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: LINUX SAUNA, 2022\n"
+"Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -295,13 +295,13 @@ msgstr "Reebaud heimoineen asuu tyytyväisinä pohjolassa. Sillä välin taakse 
 
 #: ../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
-msgstr ""
+msgstr "Kahden ystävän uudelleentapaaminen"
 
 #: ../../data/campaigns/fri04.wmf/elemental:10
 msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
-msgstr ""
+msgstr "Claus ja Henneke Lembeck ovat saavuttaneet Pohjolan nyt viimeinkin. Mutta kykenevätkö he vakuuttamaan Reebaud:in lähettämään heille apuja?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"

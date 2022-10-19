@@ -169,6 +169,10 @@ void Panel::free_children() {
 }
 
 Panel::ModalGuard::ModalGuard(Panel& p) : bottom_panel_(Panel::modal_), top_panel_(p) {
+	if (Panel::modal_ != nullptr) {
+		/* Clean up stale notes first. */
+		Panel::modal_.load()->handle_notes();
+	}
 	Panel::modal_ = &top_panel_;
 }
 Panel::ModalGuard::~ModalGuard() {
@@ -243,7 +247,7 @@ void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
 	                                       Panel::ui_mousemove,  Panel::ui_key,
 	                                       Panel::ui_textinput,  Panel::ui_mousewheel};
-	if (handle_input) {
+	if (handle_input && message.empty()) {
 		app->handle_input(&input_callback);
 	}
 
@@ -1575,8 +1579,7 @@ bool Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
  */
-bool Panel::ui_mousemove(
-   uint8_t const state, int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff) {
+bool Panel::ui_mousemove(uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	if (!allow_user_input_) {
 		return true;
 	}
@@ -1590,7 +1593,16 @@ bool Panel::ui_mousemove(
 		return false;
 	}
 
-	return p->do_mousemove(state, x, y, xdiff, ydiff);
+	int factor = 1;
+	if (WLApplication::get()->is_mouse_locked()) {
+		if (matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
+			factor = 4;
+		} else if (!matches_keymod(SDL_GetModState(), KMOD_SHIFT)) {
+			factor = 2;
+		}
+	}
+
+	return p->do_mousemove(state, x, y, xdiff * factor, ydiff * factor);
 }
 
 /**

@@ -5,13 +5,14 @@
 # fenris <fenris@folksprak.org>, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# Ximena Delgado, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-02-13 02:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: fenris <fenris@folksprak.org>, 2015-2016\n"
+"Last-Translator: Ximena Delgado, 2022\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +58,7 @@ msgstr "Marteso"
 
 #: ../../data/world/critters/moose/init.lua:7
 msgid "Moose"
-msgstr ""
+msgstr "Alko"
 
 #: ../../data/world/critters/reindeer/init.lua:7
 msgid "Reindeer"
@@ -123,7 +124,7 @@ msgstr "Ŝtoneto"
 #: ../../data/world/immovables/miscellaneous/ruin4/init.lua:7
 #: ../../data/world/immovables/miscellaneous/ruin5/init.lua:7
 msgid "Tombstone"
-msgstr ""
+msgstr "Tomboŝtono "
 
 #: ../../data/world/immovables/miscellaneous/skeleton1/init.lua:7
 #: ../../data/world/immovables/miscellaneous/skeleton3/init.lua:7
@@ -348,7 +349,7 @@ msgstr "Morta arbo"
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:7
 msgid "Felled Tree"
-msgstr ""
+msgstr "Dehaki arbo"
 
 #: ../../data/world/immovables/trees/larch/mature/init.lua:9
 msgid "Larch (Mature)"
@@ -728,17 +729,17 @@ msgstr "Ombrel-arbo ruĝa eta"
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:121
 msgid "Herbivores"
-msgstr ""
+msgstr "Herbovoruloj"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:139
 msgid "Carnivores"
-msgstr ""
+msgstr "Karnvoruloj"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:154
 msgid "Aquatic"
-msgstr ""
+msgstr "Akvaj"
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../data/world/init.lua:168
@@ -1012,19 +1013,19 @@ msgstr "Plateso glacia 2"
 
 #: ../../data/world/terrains/winter/taiga1/init.lua:5
 msgid "Taiga 1"
-msgstr ""
+msgstr "Tajgo 1"
 
 #: ../../data/world/terrains/winter/taiga2/init.lua:5
 msgid "Taiga 2"
-msgstr ""
+msgstr "Tajgo 2"
 
 #: ../../data/world/terrains/winter/taiga3/init.lua:5
 msgid "Taiga 3"
-msgstr ""
+msgstr "Tajgo 3"
 
 #: ../../data/world/terrains/winter/tundra/init.lua:5
 msgid "Tundra"
-msgstr ""
+msgstr "Tundro"
 
 #: ../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"

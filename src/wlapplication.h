@@ -178,6 +178,9 @@ struct WLApplication {
 
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
 	void set_mouse_lock(bool locked);
+	bool is_mouse_locked() const {
+		return mouse_locked_;
+	}
 	// @}
 
 	const std::string& get_datadir() const {
@@ -204,7 +207,7 @@ struct WLApplication {
 private:
 	WLApplication(int argc, char const* const* argv);
 
-	bool poll_event(SDL_Event&);
+	bool poll_event(SDL_Event&) const;
 
 	bool init_settings();
 	void init_language();
@@ -254,10 +257,6 @@ private:
 	/// If true, the mouse cursor will \e not move with a mousemotion event:
 	/// instead, the map will be scrolled
 	bool mouse_locked_;
-
-	/// If the mouse needs to be moved in warp_mouse(), this Vector2i is
-	/// used to cancel the resulting SDL_MouseMotionEvent.
-	Vector2i mouse_compensate_warp_;
 
 	/// Makes it possible to disable the fullscreen and screenshot shortcuts
 	bool handle_key_enabled_;

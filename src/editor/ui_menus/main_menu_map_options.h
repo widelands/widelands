@@ -44,6 +44,7 @@ struct MainMenuMapOptions : public UI::UniqueWindow {
 	MainMenuMapOptions(EditorInteractive&, UI::UniqueWindow::Registry& registry);
 
 	void delete_suggested_team(SuggestedTeamsEntry*);
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	EditorInteractive& eia();

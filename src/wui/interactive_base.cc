@@ -287,22 +287,22 @@ void InteractiveBase::rebuild_mapview_menu() {
 	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
 	                 MapviewMenuEntry::kMinimap,
 	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonMinimap));
+	                 shortcut_string_for(KeyboardShortcut::kCommonMinimap, false));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonZoomIn));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomIn, false));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_reset.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset, false));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom –"), MapviewMenuEntry::kDecreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut, false));
 
 	mapviewmenu_.select(last_selection);
 }

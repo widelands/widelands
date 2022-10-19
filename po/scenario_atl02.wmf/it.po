@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Log Merger, 2022
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -148,7 +152,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Costruisci un allevamento di ragni ed uno stabilimento tessile."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
@@ -168,6 +172,9 @@ msgid ""
 "spidercloth to be built. Additionally, we need a spider farm and a weaving "
 "mill."
 msgstr ""
+"Più avanti dovremo comunque costruire una fattoria; dato che per la sua "
+"costruzione è necessaria della stoffa di ragno, avremo anche bisogno di un "
+"allevamento di ragni e di uno stabilimento tessile."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:107
 msgid "Build a trading post"
@@ -472,6 +479,9 @@ msgid ""
 "When we no longer need a building, we will dismantle it instead of burning "
 "it down."
 msgstr ""
+"Ma dovremo essere cauti nell'utilizzo di pietre ed altri materiali preziosi."
+" Quando non avremo più bisogno di un edificio, lo smantelleremo anziché "
+"abbatterlo."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:259
@@ -495,6 +505,10 @@ msgid ""
 "most perilous case, for as you know, spidercloth is needed for many "
 "buildings."
 msgstr ""
+"Possa Satul riscaldarti, %s. Come sommo tessitore della gilda, devo darti "
+"cattive notizie. Mi sono appena reso conto che stiamo esaurendo le scorte di"
+" stoffa di ragno: ciò è estremamente pericoloso in quanto, come ben sai, la "
+"stoffa di ragno è necessaria per la costruzione di numerosi edifici."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:276
@@ -559,6 +573,11 @@ msgid ""
 " finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
 " later on to make better tabards as well."
 msgstr ""
+"%s, possa Satul riscaldarti! Lo stabilmento tessile e l'allevamento di ragni"
+" sono completi, e la gilda dei tessitori può ricominciare a lavorare. "
+"Prometto che presto consegneremo stoffa delle migliori, ed alcuni tabarri. "
+"Più avanti potremmo costruire anche uno stabilimento di filatura dell'oro "
+"per produrre migliori tabarri."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -858,6 +877,11 @@ msgid ""
 "for satisfying sacrifices. And don’t forget that the initiates who will "
 "serve Satul to become his priestesses need golden tabards and diamonds."
 msgstr ""
+"Possa Satul riscaldarti, Loftomor. Ti ringrazio di aver costruito un tempio "
+"così grandioso. Ora vi dobbiamo portare cibo e le nostre più preziose merci,"
+" così da fare soddisfacenti sacrifici. Senza dimenticare che le iniziate, "
+"volendo servire Satul diventando sue sacerdotesse, avranno bisogno di "
+"tabarri dorati e diamanti."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:552
 msgid "May Satul Warm Us"
@@ -934,6 +958,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Hai completato questa missione. Puoi continuare a giocare, se lo desideri, "
+"altrimenti passa alla prossima missione."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:598
 msgid "Tribute Demand"
