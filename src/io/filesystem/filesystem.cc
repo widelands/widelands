@@ -59,6 +59,15 @@
 #define PATH_MAX MAX_PATH
 #endif
 
+/* Quickfix for bug https://github.com/widelands/widelands/issues/5614:
+ * Most systems specify PATH_MAX to be the maximum number of characters in a file path.
+ * Systems without a limit (or which don't care about standards) may neglect to define this symbol.
+ * On such systems, simply use an arbitrary value that is high enough for some very long paths.
+ */
+#ifndef PATH_MAX
+#define PATH_MAX 0x10000
+#endif
+
 namespace {
 /// A class that makes iteration over filename_?.* templates easy. It is much faster than using
 /// regex.
