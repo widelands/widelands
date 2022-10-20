@@ -83,13 +83,13 @@ msgstr "Feinde griepen diene Schanz an."
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:65
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "De Feinde hebben diene Soldatsken in eene Schanz manntjet."
+msgstr "De Feinde hebben diene Soldatsken in eener Schanz manntjet."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:67
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Diene Soldatsken hebben de Feinde in eene Schanz manntjet."
+msgstr "Diene Soldatsken hebben de Feinde in eener Schanz manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:8
@@ -371,13 +371,13 @@ msgstr "Feinde griepen diene Wahrders-Stuuv an."
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:46
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr "De Feinde hebben diene Soldaten in een Wahrders-Stuuv manntjet."
+msgstr "De Feinde hebben diene Soldaten in eener Wahrders-Stuuv manntjet."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:48
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr "Diene Soldaten hebben de Feinde in een Wahrders-Stuuv manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eener Wahrders-Stuuv manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:8
@@ -479,13 +479,13 @@ msgstr "Feinde griepen dien Toorntje an."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:47
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr "De Feinde hebben diene Soldaten in een Toorntje manntjet."
+msgstr "De Feinde hebben diene Soldaten in eenem Toorntje manntjet."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:49
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr "Diene Soldaten hebben de Feinde in een Toorntje manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eenem Toorntje manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:8
@@ -509,19 +509,19 @@ msgstr "Diene Uppass hett Feinde to sehn kregen."
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:56
 msgctxt "barbarians_building"
 msgid "Your barrier is under attack."
-msgstr "Feinde griepen diene Uppass an."
+msgstr "Feinde griepen dienen Uppass an."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:58
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr "De Feinde hebben diene Soldaten in een Uppass manntjet."
+msgstr "De Feinde hebben diene Soldaten in eenem Uppass manntjet."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:60
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr "Diene Soldaten hebben de Feinde in een Uppass manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eenem Uppass manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:8
@@ -587,13 +587,13 @@ msgstr "Feinde griepen diene Schanz an."
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:83
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "De Feinde hebben diene Soldatsken in eene Schanz manntjet."
+msgstr "De Feinde hebben diene Soldatsken in eener Schanz manntjet."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:85
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Diene Soldatsken hebben de Feinde in eene Schanz manntjet."
+msgstr "Diene Soldatsken hebben de Feinde in eener Schanz manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:8
@@ -623,13 +623,13 @@ msgstr "Feinde griepen diene Wachters-Kamer an."
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:60
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr "De Feinde hebben diene Soldaten in een Wachters-Kamer manntjet."
+msgstr "De Feinde hebben diene Soldaten in eener Wachters-Kamer manntjet."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:62
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr "Diene Soldaten hebben de Feinde in een Wachters-Kamer manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eener Wachters-Kamer manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:8
@@ -689,19 +689,19 @@ msgstr "Diene Uppass hett Feinde to sehn kregen."
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:49
 msgctxt "empire_building"
 msgid "Your barrier is under attack."
-msgstr "Feinde griepen diene Uppass an."
+msgstr "Feinde griepen dienen Uppass an."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:51
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr "De Feinde hebben diene Soldaten in een Uppass manntjet."
+msgstr "De Feinde hebben diene Soldaten in eenem Uppass manntjet."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr "Diene Soldaten hebben de Feinde in een Uppass manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eenem Uppass manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:8
@@ -803,13 +803,13 @@ msgstr "Feinde griepen diene Schanz an."
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:79
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "De Feinde hebben diene Soldatsken in eene Schanz manntjet."
+msgstr "De Feinde hebben diene Soldatsken in eener Schanz manntjet."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:81
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Diene Soldatsken hebben de Feinde in eene Schanz manntjet."
+msgstr "Diene Soldatsken hebben de Feinde in eener Schanz manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:8
@@ -839,13 +839,13 @@ msgstr "Feinde griepen diene Butenstee an."
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:65
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr "De Feinde hebben diene Soldaten in eene Butenstee manntjet."
+msgstr "De Feinde hebben diene Soldaten in eener Butenstee manntjet."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:67
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr "Diene Soldaten hebben de Feinde in eene Butenstee manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eener Butenstee manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:8
@@ -875,13 +875,13 @@ msgstr "Feinde griepen diene Wachters-Kamer an."
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:51
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr "De Feinde hebben diene Soldaten in een Wachters-Kamer manntjet."
+msgstr "De Feinde hebben diene Soldaten in eener Wachters-Kamer manntjet."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr "Diene Soldaten hebben de Feinde in een Wachters-Kamer manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eener Wachters-Kamer manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:8
@@ -947,13 +947,13 @@ msgstr "Feinde griepen diene Schanz an."
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:64
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "De Feinde hebben diene Soldatsken in eene Schanz manntjet."
+msgstr "De Feinde hebben diene Soldatsken in eener Schanz manntjet."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:66
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Diene Soldatsken hebben de Feinde in eene Schanz manntjet."
+msgstr "Diene Soldatsken hebben de Feinde in eener Schanz manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:8
@@ -983,13 +983,13 @@ msgstr "Feinde griepen diene Butenstee an."
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:62
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr "De Feinde hebben diene Soldaten in eene Butenstee manntjet."
+msgstr "De Feinde hebben diene Soldaten in eener Butenstee manntjet."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:64
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr "Diene Soldaten hebben de Feinde in eene Butenstee manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eener Butenstee manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:8
