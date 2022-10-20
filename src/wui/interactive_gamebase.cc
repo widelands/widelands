@@ -18,6 +18,7 @@
 
 #include "wui/interactive_gamebase.h"
 
+#include <cstdlib>
 #include <memory>
 
 #include "base/macros.h"
@@ -522,16 +523,26 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 	// Display the gamespeed.
 	if (game_controller != nullptr) {
 		std::string game_speed;
-		uint32_t const real = game_controller->real_speed();
-		uint32_t const desired = game_controller->desired_speed();
-		if (real == desired) {
-			if (real != 1000) {
-				game_speed = speed_string(real);
+		const int32_t computed_target = game_controller->real_speed();
+		const int32_t desired = game_controller->desired_speed();
+		int32_t actual = average_real_gamespeed();
+		constexpr int32_t kFluctuationTolerance = 1000;  // Arbitrary value.
+		if (abs(actual - computed_target) < kFluctuationTolerance) {
+			actual = computed_target;  // Ignore minor fluctuations.
+		}
+
+		if (desired == computed_target && actual == computed_target) {
+			if (actual != 1000) {
+				game_speed = speed_string(actual);
 			}
-		} else {
+		} else if (desired == computed_target || actual == computed_target) {
 			game_speed = format
 			   /** TRANSLATORS: actual_speed (desired_speed) */
-			   (_("%1$s (%2$s)"), speed_string(real), speed_string(desired));
+			   (_("%1$s (%2$s)"), speed_string(actual), speed_string(desired));
+		} else {
+			game_speed = format
+			   /** TRANSLATORS: actual_speed (target_speed) (desired_speed) */
+			   (_("%1$s (%2$s) (%3$s)"), speed_string(actual), speed_string(computed_target), speed_string(desired));
 		}
 
 		info_panel_.set_speed_string(game_speed);

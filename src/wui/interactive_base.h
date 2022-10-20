@@ -104,6 +104,7 @@ public:
 	void game_logic_think() override;
 	void think() override;
 	double average_fps() const;
+	uint32_t average_real_gamespeed() const;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
 
@@ -420,6 +421,7 @@ private:
 	// For measuring actual game speed and how smoothly the game logic runs
 	uint32_t last_frame_realtime_, previous_frame_realtime_;
 	Time last_frame_gametime_, previous_frame_gametime_;
+	uint32_t avg_actual_gamespeed_;  // in microseconds
 
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 

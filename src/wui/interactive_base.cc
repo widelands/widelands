@@ -149,6 +149,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
      previous_frame_realtime_(0),
      last_frame_gametime_(0),
      previous_frame_gametime_(0),
+     avg_actual_gamespeed_(0),
      road_building_mode_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()),
      cheat_mode_enabled_(false),
@@ -721,6 +722,10 @@ void InteractiveBase::game_logic_think() {
 	last_frame_realtime_ = SDL_GetTicks();
 	last_frame_gametime_ = egbase().get_gametime();
 
+	double cur_speed = 1000.0 * (last_frame_gametime_ - previous_frame_gametime_).get();
+	cur_speed /= std::max(last_frame_realtime_ - previous_frame_realtime_, 1u);
+	avg_actual_gamespeed_ = ((avg_actual_gamespeed_ * 15) + (cur_speed * 1000)) / 16;
+
 	egbase().think();  // Call game logic here. The game advances.
 }
 
@@ -738,6 +743,10 @@ void InteractiveBase::think() {
 
 double InteractiveBase::average_fps() const {
 	return 1000.0 * 1000.0 / avg_usframetime_;
+}
+
+uint32_t InteractiveBase::average_real_gamespeed() const {
+	return avg_actual_gamespeed_ / 1000;
 }
 
 /*
