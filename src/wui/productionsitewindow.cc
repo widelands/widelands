@@ -262,16 +262,18 @@ void ProductionSiteWindow::evict_worker() {
 		return;
 	}
 
-	if (worker_table_->has_selection()) {
-		Widelands::Worker* worker = production_site->working_positions()
-		                               ->at(worker_table_->get_selected())
-		                               .worker.get(ibase()->egbase());
-		if (worker != nullptr) {
-			if (game_ != nullptr) {
-				game_->send_player_evict_worker(*worker);
-			} else {
-				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
-			}
+	if (!worker_table_->has_selection()) {
+		worker_table_->select(0);
+	}
+
+	Widelands::Worker* worker = production_site->working_positions()
+	                               ->at(worker_table_->get_selected())
+	                               .worker.get(ibase()->egbase());
+	if (worker != nullptr) {
+		if (game_ != nullptr) {
+			game_->send_player_evict_worker(*worker);
+		} else {
+			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 		}
 	}
 }

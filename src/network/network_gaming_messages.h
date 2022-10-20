@@ -23,14 +23,11 @@
 
 struct NetworkGamingMessages {
 public:
-	// Before calling this function the first time, keep in mind to first fill_map()
 	static const std::string get_message(const std::string& code);
 	static const std::string get_message(const std::string& code,
 	                                     const std::string& arg1,
 	                                     const std::string& arg2 = "",
 	                                     const std::string& arg3 = "");
-
-	static void fill_map();
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_GAMING_MESSAGES_H
