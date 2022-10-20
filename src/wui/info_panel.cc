@@ -277,8 +277,7 @@ inline bool InfoPanel::is_mouse_over_panel(int32_t x, int32_t y) const {
 		break;
 	}
 	return x >= 0 && x <= get_w() &&
-	       (on_top_ ? (y >= 0 && y <= h) :
-                     (y <= get_h() && y >= get_h() - h));
+	       (on_top_ ? (y >= 0 && y <= h) : (y <= get_h() && y >= get_h() - h));
 }
 
 void InfoPanel::set_textareas_visibility(bool v) {
@@ -337,8 +336,8 @@ bool InfoPanel::check_handles_mouse(int32_t x, int32_t y) {
 	}
 
 	for (Panel* p = get_first_child(); p != nullptr; p = p->get_next_sibling()) {
-		if (x >= p->get_x() && y >= p->get_y() && x < p->get_x() + p->get_w() && y < p->get_y() + p->get_h() &&
-				p->check_handles_mouse(x - p->get_x(), y - p->get_y())) {
+		if (x >= p->get_x() && y >= p->get_y() && x < p->get_x() + p->get_w() &&
+		    y < p->get_y() + p->get_h() && p->check_handles_mouse(x - p->get_x(), y - p->get_y())) {
 			return true;
 		}
 	}

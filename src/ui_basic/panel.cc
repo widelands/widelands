@@ -1187,9 +1187,8 @@ void Panel::find_all_children_at(const int16_t x,
 inline Panel* Panel::child_at_mouse_cursor(int32_t const x, int32_t const y, Panel* child) {
 
 	for (; child != nullptr; child = child->next_) {
-		if (!child->is_visible() ||
-			x >= child->x_ + static_cast<int32_t>(child->w_) || x < child->x_ ||
-		    y >= child->y_ + static_cast<int32_t>(child->h_) || y < child->y_ ||
+		if (!child->is_visible() || x >= child->x_ + static_cast<int32_t>(child->w_) ||
+		    x < child->x_ || y >= child->y_ + static_cast<int32_t>(child->h_) || y < child->y_ ||
 		    !child->check_handles_mouse(x - child->x_, y - child->y_)) {
 			continue;
 		}
