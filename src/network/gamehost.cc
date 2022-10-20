@@ -487,16 +487,12 @@ void GameHost::init_computer_players() {
 
 void GameHost::run() {
 	game_.reset(new Widelands::Game());
-	// Fill the list of possible system messages
-	NetworkGamingMessages::fill_map();
 	new FsMenu::LaunchMPG(
 	   *capsule_, d->hp, *this, d->chat, *game_, internet_, [this]() { run_callback(); });
 }
 
 void GameHost::run_direct() {
 	game_.reset(new Widelands::Game());
-	// Fill the list of possible system messages
-	NetworkGamingMessages::fill_map();
 	run_callback();
 }
 
