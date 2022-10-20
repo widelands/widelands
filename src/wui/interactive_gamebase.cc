@@ -542,7 +542,8 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		} else {
 			game_speed = format
 			   /** TRANSLATORS: actual_speed (target_speed) (desired_speed) */
-			   (_("%1$s (%2$s) (%3$s)"), speed_string(actual), speed_string(computed_target), speed_string(desired));
+			   (_("%1$s (%2$s) (%3$s)"), speed_string(actual), speed_string(computed_target),
+			    speed_string(desired));
 		}
 
 		info_panel_.set_speed_string(game_speed);
