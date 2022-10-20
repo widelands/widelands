@@ -479,12 +479,13 @@ protected:
 	void do_redraw_now(bool handle_input = true,
 	                   const std::string& message_to_display = std::string());
 
-private:
-	bool initialized_;
-
-	bool handles_mouse() const {
+public:
+	virtual bool check_handles_mouse(int32_t /* x */, int32_t /* y */) {
 		return get_flag(pf_handle_mouse);
 	}
+
+private:
+	bool initialized_;
 
 	bool handles_keypresses() const {
 		if (get_parent() != nullptr && !get_parent()->handles_keypresses()) {

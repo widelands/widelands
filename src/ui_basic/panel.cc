@@ -1078,7 +1078,7 @@ void Panel::check_child_death() {
 		Panel* p = next;
 		next = p->next_;
 
-		if (get_flag(pf_die)) {
+		if (p->get_flag(pf_die)) {
 			p->do_delete();
 			p = nullptr;
 		} else if (p->get_flag(pf_child_die)) {
@@ -1187,13 +1187,13 @@ void Panel::find_all_children_at(const int16_t x,
 inline Panel* Panel::child_at_mouse_cursor(int32_t const x, int32_t const y, Panel* child) {
 
 	for (; child != nullptr; child = child->next_) {
-		if (!child->handles_mouse() || !child->is_visible()) {
+		if (!child->is_visible() ||
+			x >= child->x_ + static_cast<int32_t>(child->w_) || x < child->x_ ||
+		    y >= child->y_ + static_cast<int32_t>(child->h_) || y < child->y_ ||
+		    !child->check_handles_mouse(x - child->x_, y - child->y_)) {
 			continue;
 		}
-		if (x < child->x_ + static_cast<int32_t>(child->w_) && x >= child->x_ &&
-		    y < child->y_ + static_cast<int32_t>(child->h_) && y >= child->y_) {
-			break;
-		}
+		break;
 	}
 
 	if ((mousein_child_ != nullptr) && mousein_child_ != child) {
@@ -1272,13 +1272,11 @@ bool Panel::do_mousewheel(int32_t x, int32_t y, uint16_t modstate, Vector2i rel_
 
 	// Check if a child-panel is beneath the mouse and processes the event
 	for (Panel* child = first_child_; child != nullptr; child = child->next_) {
-		if (!child->handles_mouse() || !child->is_visible()) {
-			continue;
-		}
-		if (rel_mouse_pos.x >= child->x_ + static_cast<int32_t>(child->w_) ||
+		if (!child->is_visible() || rel_mouse_pos.x >= child->x_ + static_cast<int32_t>(child->w_) ||
 		    rel_mouse_pos.x < child->x_ ||
 		    rel_mouse_pos.y >= child->y_ + static_cast<int32_t>(child->h_) ||
-		    rel_mouse_pos.y < child->y_) {
+		    rel_mouse_pos.y < child->y_ ||
+		    !child->check_handles_mouse(x - child->x_, y - child->y_)) {
 			continue;
 		}
 		// Found a child at the position

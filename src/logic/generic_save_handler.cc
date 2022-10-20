@@ -124,6 +124,7 @@ void GenericSaveHandler::save_file() {
 }
 
 GenericSaveHandler::Error GenericSaveHandler::save() {
+	MutexLock m(MutexLock::ID::kLua);
 	try {  // everything additionally in one big try block
 		    // to catch any unexpected errors
 		clear();

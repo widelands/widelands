@@ -264,7 +264,7 @@ void InfoPanel::set_toolbar(MainToolbar& t) {
 	layout();
 }
 
-inline bool InfoPanel::is_mouse_over_panel() const {
+inline bool InfoPanel::is_mouse_over_panel(int32_t x, int32_t y) const {
 	uint8_t h;
 	switch (display_mode_) {
 	case DisplayMode::kMinimized:
@@ -276,9 +276,9 @@ inline bool InfoPanel::is_mouse_over_panel() const {
 		h = MainToolbar::kButtonSize;
 		break;
 	}
-	return last_mouse_pos_.x >= 0 && last_mouse_pos_.x <= get_w() &&
-	       (on_top_ ? (last_mouse_pos_.y >= 0 && last_mouse_pos_.y <= h) :
-                     (last_mouse_pos_.y <= get_h() && last_mouse_pos_.y >= get_h() - h));
+	return x >= 0 && x <= get_w() &&
+	       (on_top_ ? (y >= 0 && y <= h) :
+                     (y <= get_h() && y >= get_h() - h));
 }
 
 void InfoPanel::set_textareas_visibility(bool v) {
@@ -328,6 +328,22 @@ bool InfoPanel::handle_mousepress(uint8_t /*btn*/, int32_t x, int32_t y) {
 bool InfoPanel::handle_mouserelease(uint8_t /*btn*/, int32_t x, int32_t y) {
 	last_mouse_pos_ = Vector2i(x, y);
 	return is_mouse_over_panel();
+}
+
+bool InfoPanel::check_handles_mouse(int32_t x, int32_t y) {
+	last_mouse_pos_ = Vector2i(x, y);
+	if (is_mouse_over_panel() || display_mode_ == DisplayMode::kOnMouse_Visible) {
+		return true;
+	}
+
+	for (Panel* p = get_first_child(); p != nullptr; p = p->get_next_sibling()) {
+		if (x >= p->get_x() && y >= p->get_y() && x < p->get_x() + p->get_w() && y < p->get_y() + p->get_h() &&
+				p->check_handles_mouse(x - p->get_x(), y - p->get_y())) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 size_t InfoPanel::index_of(const MessagePreview* mp) const {
