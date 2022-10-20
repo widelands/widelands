@@ -18,17 +18,68 @@
 
 #include "network/network_gaming_messages.h"
 
+#include <cassert>
 #include <map>
 
 #include "base/i18n.h"
 #include "base/string.h"
 
-static std::map<std::string, std::string> ngmessages;
+// Table assigning printable messages to message codes
+static const std::map<std::string, std::string> ngmessages = {
+   // Messages from metaserver to client
+   {"CLIENT_LEFT_GAME", gettext_noop("Client has left the game.")},
+   {"CLIENT_CRASHED", gettext_noop("Client crashed and performed an emergency save.")},
+   {"CONNECTION_LOST", gettext_noop("Connection was lost.")},
+   {"SERVER_LEFT", gettext_noop("Server has left the game.")},
+   {"GAME_STARTED_AT_CONNECT",
+    gettext_noop("The game has started just after you tried to connect.")},
+   {"SERVER_CRASHED", gettext_noop("Server has crashed and performed an emergency save.")},
+   {"CLIENT_DESYNCED", gettext_noop("Client and host have become desynchronized.")},
+   {"KICKED", gettext_noop("Kicked by the host: %s")},
+   {"MALFORMED_COMMANDS", gettext_noop("Client sent malformed commands: %s")},
+   {"SOMETHING_WRONG", gettext_noop("Something went wrong: %s")},
+   {"CLIENT_X_LEFT_GAME", gettext_noop("%1$s has left the game (%2$s)")},
+   {"CLIENT_X_REPLACED_WITH", gettext_noop("%1$s has been replaced with %2$s")},
+   {"UNKNOWN_LEFT_GAME", gettext_noop("Unknown user has left the game (%s)")},
+   {"SYNCREQUEST_WO_GAME",
+    gettext_noop("Server sent a SYNCREQUEST even though no game is running.")},
+   {"PLAYERCMD_WO_GAME", gettext_noop("Received a PLAYERCOMMAND even though no game is running.")},
+   {"UNEXPECTED_LAUNCH", gettext_noop("Unexpectedly received LAUNCH command from server.")},
+   {"PLAYER_UPDATE_FOR_N_E_P",
+    gettext_noop("Server sent a player update for a player that does not exist.")},
+   {"USER_UPDATE_FOR_N_E_U",
+    gettext_noop("Server sent a user update for a user that does not exist.")},
+   {"DIFFERENT_PROTOCOL_VERS", gettext_noop("Server uses a different protocol version")},
+   {"PROTOCOL_EXCEPTION",
+    gettext_noop("Received command number %s, which is not allowed in this state.")},
+   {"BACKWARDS_RUNNING_TIME",
+    gettext_noop("Client reports time to host that is running backwards.")},
+   {"SIMULATING_BEYOND_TIME",
+    gettext_noop("Client simulates beyond the game time allowed by the host.")},
+   {"CLIENT_SYNC_REP_TIMEOUT", gettext_noop("Client did not submit sync report in time.")},
+   {"GAME_ALREADY_STARTED", gettext_noop("The game has already started.")},
+   {"NO_ACCESS_TO_PLAYER", gettext_noop("Client has no access to other player’s settings.")},
+   {"NO_ACCESS_TO_SERVER", gettext_noop("Client has no access to server settings.")},
+   {"TIME_SENT_NOT_READY",
+    gettext_noop("Client sent TIME command even though game is not running.")},
+   {"PLAYERCMD_FOR_OTHER", gettext_noop("Client sent a PLAYERCOMMAND for another player.")},
+   {"UNEXPECTED_SYNC_REP", gettext_noop("Client sent unexpected synchronization report.")},
+   {"REQUEST_OF_N_E_FILE",
+    gettext_noop("Client requests file although none is available to send.")},
+   {"SENT_PLAYER_TO_LOBBY", gettext_noop("Host sent player %s to the lobby!")},
+   {"DIFFERENT_WL_VERSION",
+    gettext_noop("WARNING: %1$s uses version: %2$s, while Host uses version: %3$s")},
+   {"CLIENT_HAS_JOINED_GAME", gettext_noop("%s has joined the game")},
+   {"STARTED_SENDING_FILE", gettext_noop("Started to send file %1$s to %2$s!")},
+   {"COMPLETED_FILE_TRANSFER", gettext_noop("Completed transfer of file %1$s to %2$s")},
+   {"PLAYER_DEFEATED", gettext_noop("The player ‘%s’ was defeated and became a spectator.")},
+   {"CLIENT_HUNG", gettext_noop("Client %1$s did not answer for more than %2$s.")},
+   {"CHEAT", gettext_noop("Client %s is cheating!")}};
 
 /// Returns a translated message fitting to the message code \arg code
 const std::string NetworkGamingMessages::get_message(const std::string& code) {
 	if (ngmessages.find(code) != ngmessages.end()) {
-		return ngmessages[code];
+		return _(ngmessages.at(code));
 	}
 	// if no message for code was found, just return code
 	return code;
@@ -39,126 +90,28 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
                                                      const std::string& arg1,
                                                      const std::string& arg2,
                                                      const std::string& arg3) {
+
 	if (ngmessages.find(code) == ngmessages.end()) {
 		return (
 		   format("%s, %s, %s, %s", code, get_message(arg1), get_message(arg2), get_message(arg3)));
 	}
 
-	// push code and all arguments - if existing - in a vector for easier handling
-	std::vector<std::string> strings;
-	strings.push_back(get_message(code));
-	if (!arg1.empty()) {
-		strings.push_back(get_message(arg1));
-		if (!arg2.empty()) {
-			strings.push_back(get_message(arg2));
-			if (!arg3.empty()) {
-				strings.push_back(get_message(arg3));
-			}
-		}
+	// clang-tidy says this shouldn't be const because it may be returned directly in case 0 below
+	std::string msg_translated = _(ngmessages.at(code));
+
+	const size_t n_fmt_arg = format_arguments_count(msg_translated);
+	assert(n_fmt_arg <= 3);
+
+	switch (n_fmt_arg) {
+	case 0:
+		return msg_translated;
+	case 1:
+		return format(msg_translated, arg1);
+	case 2:
+		return format(msg_translated, arg1, arg2);
+	case 3:
+		return format(msg_translated, arg1, arg2, arg3);
+	default:
+		NEVER_HERE();
 	}
-
-	uint8_t last = strings.size() + 1;
-	// Try merging the strings
-	while (strings.size() > 1 && last > strings.size()) {
-		last = strings.size();
-
-		// try to merge the strings from back to front
-		try {
-			// try to merge last two strings
-			std::string temp = format(strings.at(strings.size() - 2), strings.at(strings.size() - 1));
-			strings.resize(strings.size() - 2);
-			strings.push_back(temp);
-		} catch (...) {
-			if (last < 3) {
-				break;  // no way to merge the two strings;
-			}
-			try {
-				// try to merge last three strings
-				std::string temp =
-				   format(strings.at(strings.size() - 3), strings.at(strings.size() - 2),
-				          strings.at(strings.size() - 1));
-				strings.resize(strings.size() - 3);
-				strings.push_back(temp);
-			} catch (...) {
-				if (last < 4) {
-					break;  // no way to merge the three strings;
-				}
-				try {
-					// try to merge all four strings
-					std::string temp =
-					   format(strings.at(strings.size() - 4), strings.at(strings.size() - 3),
-					          strings.at(strings.size() - 2), strings.at(strings.size() - 1));
-					strings.resize(strings.size() - 4);
-					strings.push_back(temp);
-				} catch (...) {
-					break;  // no way to merge all four strings
-				}
-			}
-		}
-	}
-
-	// Check if merging succeded
-	if (strings.size() == 1) {
-		return strings.at(0);
-	}
-
-	// No, it did not
-	return (format("%s, %s, %s, %s", get_message(code), get_message(arg1), get_message(arg2),
-	               get_message(arg3)));
-}
-
-/// Fills the map.
-/// This function should be called *before* the first call of "get_message", but only after the
-/// locales
-/// are loaded.
-void NetworkGamingMessages::fill_map() {
-	// messages from metaserver to client
-	ngmessages["CLIENT_LEFT_GAME"] = _("Client has left the game.");
-	ngmessages["CLIENT_CRASHED"] = _("Client crashed and performed an emergency save.");
-	ngmessages["CONNECTION_LOST"] = _("Connection was lost.");
-	ngmessages["SERVER_LEFT"] = _("Server has left the game.");
-	ngmessages["GAME_STARTED_AT_CONNECT"] =
-	   _("The game has started just after you tried to connect.");
-	ngmessages["SERVER_CRASHED"] = _("Server has crashed and performed an emergency save.");
-	ngmessages["CLIENT_DESYNCED"] = _("Client and host have become desynchronized.");
-	ngmessages["KICKED"] = _("Kicked by the host: %s");
-	ngmessages["MALFORMED_COMMANDS"] = _("Client sent malformed commands: %s");
-	ngmessages["SOMETHING_WRONG"] = _("Something went wrong: %s");
-	ngmessages["CLIENT_X_LEFT_GAME"] = _("%1$s has left the game (%2$s)");
-	ngmessages["CLIENT_X_REPLACED_WITH"] = _("%1$s has been replaced with %2$s");
-	ngmessages["UNKNOWN_LEFT_GAME"] = _("Unknown user has left the game (%s)");
-	ngmessages["SYNCREQUEST_WO_GAME"] =
-	   _("Server sent a SYNCREQUEST even though no game is running.");
-	ngmessages["PLAYERCMD_WO_GAME"] = _("Received a PLAYERCOMMAND even though no game is running.");
-	ngmessages["UNEXPECTED_LAUNCH"] = _("Unexpectedly received LAUNCH command from server.");
-	ngmessages["PLAYER_UPDATE_FOR_N_E_P"] =
-	   _("Server sent a player update for a player that does not exist.");
-	ngmessages["USER_UPDATE_FOR_N_E_U"] =
-	   _("Server sent a user update for a user that does not exist.");
-	ngmessages["DIFFERENT_PROTOCOL_VERS"] = _("Server uses a different protocol version");
-	ngmessages["PROTOCOL_EXCEPTION"] = _("Received command number %s,"
-	                                     " which is not allowed in this state.");
-	ngmessages["BACKWARDS_RUNNING_TIME"] =
-	   _("Client reports time to host that is running backwards.");
-	ngmessages["SIMULATING_BEYOND_TIME"] =
-	   _("Client simulates beyond the game time allowed by the host.");
-	ngmessages["CLIENT_SYNC_REP_TIMEOUT"] = _("Client did not submit sync report in time.");
-	ngmessages["GAME_ALREADY_STARTED"] = _("The game has already started.");
-	ngmessages["NO_ACCESS_TO_PLAYER"] = _("Client has no access to other player’s settings.");
-	ngmessages["NO_ACCESS_TO_SERVER"] = _("Client has no access to server settings.");
-	ngmessages["TIME_SENT_NOT_READY"] =
-	   _("Client sent TIME command even though game is not running.");
-	ngmessages["PLAYERCMD_FOR_OTHER"] = _("Client sent a PLAYERCOMMAND for another player.");
-	ngmessages["UNEXPECTED_SYNC_REP"] = _("Client sent unexpected synchronization report.");
-	ngmessages["REQUEST_OF_N_E_FILE"] =
-	   _("Client requests file although none is available to send.");
-	ngmessages["SENT_PLAYER_TO_LOBBY"] = _("Host sent player %s to the lobby!");
-	ngmessages["DIFFERENT_WL_VERSION"] =
-	   _("WARNING: %1$s uses version: %2$s, while Host uses version: %3$s");
-	ngmessages["CLIENT_HAS_JOINED_GAME"] = _("%s has joined the game");
-	ngmessages["STARTED_SENDING_FILE"] = _("Started to send file %1$s to %2$s!");
-	ngmessages["COMPLETED_FILE_TRANSFER"] = _("Completed transfer of file %1$s to %2$s");
-	ngmessages["PLAYER_DEFEATED"] = _("The player ‘%s’ was defeated and became a spectator.");
-	ngmessages["CLIENT_HUNG"] = _("Client %1$s did not answer for more than %2$s.");
-	ngmessages["CHEAT"] = _("Client %s is cheating!");
 }

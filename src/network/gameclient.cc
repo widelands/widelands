@@ -247,11 +247,8 @@ GameClient::~GameClient() {
 void GameClient::run() {
 	d->send_hello();
 	d->settings.multiplayer = true;
-
-	// Fill the list of possible system messages
-	NetworkGamingMessages::fill_map();
-
 	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, d->internet_);
+
 	// The main menu's think() loop creates a mutex lock that would permanently block the Game
 	// from locking this mutex. So when the game starts we'll need to break the lock by force.
 	for (UI::Panel* p = d->modal; p != nullptr; p = p->get_parent()) {

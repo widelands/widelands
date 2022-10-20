@@ -138,4 +138,13 @@ inline std::string format_l(const std::string& format_string, Args... args) {
 	return format_impl::format(true, format_string, args...);
 }
 
+/**
+ * Count the required arguments to a format string.
+ * @param format_string String to analyze.
+ * @return Number of formatting placeholders.
+ */
+inline unsigned format_arguments_count(const std::string& format_string) {
+	return format_impl::format_arguments_count(format_string);
+}
+
 #endif  // end of include guard: WL_BASE_STRING_H
