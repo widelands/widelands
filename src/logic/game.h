@@ -181,9 +181,7 @@ public:
 
 	enum class StartGameType { kMap, kSinglePlayerScenario, kMultiPlayerScenario, kSaveGame };
 
-	bool run(StartGameType,
-	         const std::string& script_to_run,
-	         const std::string& prefix_for_replays);
+	bool run(StartGameType, const std::string& script_to_run, const std::string& prefix_for_replays);
 
 	// Returns the upcasted lua interface.
 	LuaGameInterface& lua() override;

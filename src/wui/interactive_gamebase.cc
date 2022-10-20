@@ -206,7 +206,8 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 		} else {
 			GameExitConfirmBox* gecb =
 			   new GameExitConfirmBox(*this, *this, r ? _("Restart Replay") : _("Restart Scenario"),
-			                          r ? _("Are you sure you wish to restart this replay?") : _("Are you sure you wish to restart this scenario?"));
+			                          r ? _("Are you sure you wish to restart this replay?") :
+                                       _("Are you sure you wish to restart this scenario?"));
 			gecb->ok.connect([this, next] { game().set_next_game_to_load(next); });
 		}
 	} break;

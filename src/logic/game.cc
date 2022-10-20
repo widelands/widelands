@@ -157,7 +157,7 @@ Game::Game()
      ,
      training_wheels_wanted_(false)
 #endif
-     {
+{
 	Economy::initialize_serial();
 }
 
@@ -310,8 +310,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 
 	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, 1));
 	try {
-		bool const result =
-		   run(StartGameType::kSinglePlayerScenario, script_to_run, "single_player");
+		bool const result = run(StartGameType::kSinglePlayerScenario, script_to_run, "single_player");
 		ctrl_.reset();
 		return result;
 	} catch (...) {
