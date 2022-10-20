@@ -22,37 +22,33 @@
 
 #include "base/i18n.h"
 
-static std::map<std::string, std::string> igmessages;
+static const std::map<std::string, std::string> igmessages = {
+   // Messages from the metaserver (https://github.com/widelands/widelands_metaserver) to the
+   // clients.
+   {"NO_SUCH_USER", gettext_noop("There is no user with this name logged in.")},
+   {"NO_SUCH_GAME", gettext_noop("The game no longer exists, maybe it has just been closed.")},
+   {"WRONG_PASSWORD", gettext_noop("Wrong password, please try again.")},
+   {"BANNED", gettext_noop("You have been temporarily banned from online gaming.")},
+   {"UNSUPPORTED_PROTOCOL", gettext_noop("The protocol version you are using is not supported!")},
+   {"ALREADY_LOGGED_IN", gettext_noop("You are already logged in!")},
+   {"DEFICIENT_PERMISSION",
+    gettext_noop(
+       "You got disconnected, as you sent a superuser command without superuser permission. "
+       "This incident will be logged and reported to the administrator.")},
+
+   // Messages from the clients to the metaserver
+   {"CONNECTION_CLOSED", gettext_noop("Connection was closed by the client normally.")},
+   {"CONNECTION_LOST", gettext_noop("The connection to the metaserver was lost.")},
+   {"NO_ANSWER", gettext_noop("Metaserver did not answer")},
+   {"CLIENT_TIMEOUT",
+    gettext_noop(
+       "You got disconnected from the metaserver, as you did not answer a PING request in time.")}};
 
 /// Returns a translated message fitting to the message code \arg code
-const std::string& InternetGamingMessages::get_message(const std::string& code) {
+const std::string InternetGamingMessages::get_message(const std::string& code) {
 	if (igmessages.find(code) != igmessages.end()) {
-		return igmessages[code];
+		return _(igmessages.at(code));
 	}
 	// if no message for code was found, just return code
 	return code;
-}
-
-/// Fills the map.
-/// This function should be called *before* the first call of "get_message", but only after the
-/// locales
-/// are loaded.
-void InternetGamingMessages::fill_map() {
-	// Messages from the metaserver (https://github.com/widelands/widelands_metaserver) to the
-	// clients.
-	igmessages["NO_SUCH_USER"] = _("There is no user with this name logged in.");
-	igmessages["NO_SUCH_GAME"] = _("The game no longer exists, maybe it has just been closed.");
-	igmessages["WRONG_PASSWORD"] = _("Wrong password, please try again.");
-	igmessages["BANNED"] = _("You have been temporarily banned from online gaming.");
-	igmessages["UNSUPPORTED_PROTOCOL"] = _("The protocol version you are using is not supported!");
-	igmessages["ALREADY_LOGGED_IN"] = _("You are already logged in!");
-	igmessages["DEFICIENT_PERMISSION"] =
-	   _("You got disconnected, as you sent a superuser command without superuser permission. "
-	     "This incident will be logged and reported to the administrator.");
-	// Messages from the clients to the metaserver
-	igmessages["CONNECTION_CLOSED"] = _("Connection was closed by the client normally.");
-	igmessages["CONNECTION_LOST"] = _("The connection to the metaserver was lost.");
-	igmessages["NO_ANSWER"] = _("Metaserver did not answer");
-	igmessages["CLIENT_TIMEOUT"] =
-	   _("You got disconnected from the metaserver, as you did not answer a PING request in time.");
 }
