@@ -126,7 +126,7 @@ void SavegameTable::create_directory_entry(UI::Table<const uintptr_t>::EntryReco
 		               format("<%s>", _("parent")));
 	} else if (savegame.is_sub_directory()) {
 		te.set_picture(last_column_index, g_image_cache->get("images/ui_basic/ls_dir.png"),
-		               FileSystem::filename_without_ext(savegame.filename.c_str()));
+		               FileSystem::fs_filename(savegame.filename.c_str()));
 	}
 }
 
@@ -223,7 +223,7 @@ void SavegameTableReplay::create_valid_entry(UI::Table<uintptr_t const>::EntryRe
 void SavegameTableReplay::set_show_filenames(bool show_filenames) {
 	show_filenames_ = show_filenames;
 	set_column_tooltip(2, show_filenames ? _("Filename: Map name (start of replay)") :
-                                          _("Map name (start of replay)"));
+	                                       _("Map name (start of replay)"));
 }
 
 SavegameTableMultiplayer::SavegameTableMultiplayer(UI::Panel* parent,
