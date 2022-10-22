@@ -45,7 +45,7 @@ build_script:
   - cmd: md build
   - cmd: cd build
   # detect version
-  - cmd: set WIDELANDS_SETUP_NAME=Widelands-%PLATFORM%-1.1~rc1
+  - cmd: set WIDELANDS_SETUP_NAME=Widelands-%PLATFORM%-1.1
   # finally start the build
   - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_BUILD_WINSTATIC=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%"
   - cmd: "cmake --build ."
