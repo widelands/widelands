@@ -47,6 +47,50 @@ function check_trade()
    end
 end
 
+function check_objective_wood()
+   local o = add_campaign_objective(obj_wood)
+   while not check_for_buildings(p1, {frisians_woodcutters_house = 3, frisians_foresters_house = 4}) do
+      sleep(4273)
+   end
+   set_objective_done(o)
+   campaign_message_box(secured_wood)
+end
+
+function check_objective_block()
+   local o = add_campaign_objective(obj_block)
+   while true do
+      sleep(4916)
+      local sites = 0
+      for x = 84, 94 do
+         for y = 114, 122 do
+            local f = map:get_field(x, y)
+            if f.immovable ~= nil and f.immovable.descr.type_name == "militarysite" and f.immovable.fields[0] == f and f.owner == p1 then
+               sites = sites + 1
+               if sites >= 3 then
+                  set_objective_done(o)
+                  campaign_message_box(secured_block)
+                  return
+               end
+            end
+         end
+      end
+   end
+end
+
+function check_objective_uplands()
+   local o = add_campaign_objective(obj_uplands)
+   while true do
+      sleep(4471)
+      for _,wh in ipairs(p1:get_buildings("frisians_warehouse")) do
+         if wh.fields[0].height > 40 then
+            set_objective_done(o)
+            campaign_message_box(secured_uplands)
+            return
+         end
+      end
+   end
+end
+
 function mission_thread()
    include "map:scripting/init_p2.lua"
    run(check_fish)
@@ -114,15 +158,18 @@ function mission_thread()
    scroll_to_field(map:get_field(78, 141))
    sleep(2500)
    campaign_message_box(getting_started_1)
+   run(check_objective_uplands)
    sleep(2500)
    scroll_to_field(map:get_field(86, 116))
    sleep(2500)
    campaign_message_box(getting_started_2)
+   run(check_objective_block)
 
    sleep(5000)
    scroll_to_field(map:get_field(90, 185))
    sleep(5000)
    campaign_message_box(getting_started_3)
+   run(check_objective_wood)
    sleep(2500)
    scroll_to_field(map:get_field(79, 139))
    sleep(2500)
@@ -156,6 +203,8 @@ function mission_thread()
    campaign_message_box(victory_3)
    campaign_message_box(victory_4)
    campaign_message_box(victory_5)
+   campaign_message_box(victory_6)
+   campaign_message_box(victory_7)
 
    local data = {}
    for x = 0, map.width - 1 do

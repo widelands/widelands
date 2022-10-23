@@ -51,10 +51,38 @@ obj_trade = {
 
 obj_fight = {
    name = "fight",
-   title =_("Defeat the Invaders"),
+   title =_("Defeat the invaders"),
    number = 1,
    body = objective_text(_("Defeat Atterdag’s Forces."),
       li(_([[Destroy all the enemy’s buildings.]]))
+   ),
+}
+
+obj_block = {
+   name = "block",
+   title =_("Block the bottleneck"),
+   number = 1,
+   body = objective_text(_("Block the Bottleneck."),
+      li(_([[Secure the narrow passage to the east of the Uplands with several large military buildings, so the enemy cannot get past before you’re ready for the attack.]]))
+   ),
+}
+
+obj_wood = {
+   name = "wood",
+   title =_("Wood production"),
+   number = 1,
+   body = objective_text(_("Secure your Wood Production."),
+      li(_([[Build at least three woodcutter’s houses.]])) ..
+      li(_([[Build at least four forester’s houses.]]))
+   ),
+}
+
+obj_uplands = {
+   name = "uplands",
+   title =_("The Uplands"),
+   number = 1,
+   body = objective_text(_("Use the Uplands Wisely."),
+      li(_([[Relocate your industry to the Uplands.]]))
    ),
 }
 
@@ -180,30 +208,33 @@ getting_started_1 = {
       _([[First things first. This town has an excellent defensive position, but it is woefully unguarded. We must plan ahead tactically, because I agree that this battle will not be won quickly.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Getting Started 1
-      _([[The uplands have only one entrance: this ramp right here next to the town center. Let’s build all our important infrastructure up there. A few fortresses placed closely together right at its southern tip will make this vast plateau nearly impossible to conquer. Even if the enemy should manage to take the entire lower island, we could conceivably hold out for years there, provided we stock enough supplies in warehouses on the uplands in advance. Of course we’d be cut off from the ports and the trade routes, so we should try to avoid getting to this point.]]))
+      _([[The Uplands have only one entrance: this ramp right here next to the town center. Let’s build all our important infrastructure up there. A few fortresses placed closely together right at its southern tip will make this vast plateau nearly impossible to conquer. Even if the enemy should manage to take the entire lower island, we could conceivably hold out for years there, provided we stock enough supplies in warehouses on the Uplands in advance. Of course we’d be cut off from the ports and the trade routes, so we should try to avoid getting to this point.]]))
+      .. new_objectives(obj_uplands),
 }
 
 getting_started_2 = {
    title = _("Planning the War"),
    body=reebaud(_("Fortify the chokepoint"),
       -- TRANSLATORS: Reebaud – Getting Started 2
-      _([[Our most urgent concern, however, should be to secure this pass near our northernmost port. Our enemy must pass through this chokepoint to reach us, but the same is also true in reverse. If we are careful, we can hold the enemy at this point for a long time until we are ready to launch our countercharge. However, the passage is too narrow to be fortified as easily as the uplands. We must construct as many fortresses tightly together here as possible in order to prevent the enemy from gaining any land. It would be unwise to build anything at all north of the pass, as it would be dangerously exposed.]])
+      _([[Our most urgent concern, however, should be to secure this pass near our northernmost port. Our enemy must pass through this chokepoint to reach us, but the same is also true in reverse. If we are careful, we can hold the enemy at this point for a long time until we are ready to launch our countercharge. However, the passage is too narrow to be fortified as easily as the Uplands. We must construct as many fortresses tightly together here as possible in order to prevent the enemy from gaining any land. It would be unwise to build anything at all north of the pass, as it would be dangerously exposed.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Getting Started 2
       _([[Depending on how many building materials we can spare, it might be wise to demolish some of the other buildings here to make room for even more fortifications. In any case, all civil buildings in this area will be in constant danger of being burnt down during a Danish incursion.]]))
+      .. new_objectives(obj_block),
 }
 
 getting_started_3 = {
    title = _("Planning the War"),
    body=henneke(_("Wood supply"),
       -- TRANSLATORS: Henneke Lembeck – Getting Started 3
-      _([[As Reebaud points out correctly, the uplands are the best position for new buildings. Besides their strategic value they offer lots of space for construction, of which the lower island is somewhat short.]])
+      _([[As Reebaud points out correctly, the Uplands are the best position for new buildings. Besides their strategic value they offer lots of space for construction, of which the lower island is somewhat short.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Henneke Lembeck – Getting Started 3
       _([[As for what we will build, I disagree. More military sites are important, but even more so is the ability to construct buildings in the first place. There are no woodcutters anywhere on the island, and we can’t rely on trade for wood, so we must secure our wood production at once before all our wood has used up by the smokeries and charcoal burners!]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Henneke Lembeck – Getting Started 3
-      _([[The land looks fairly barren, so we will need to reserve more space for foresting than I’m comfortable with. The lowlands seem to be slightly more fertile, so it might be wise to build the forest infrastructure down here and relocate some of the farms to the uplands. Farms, reed farms, and berry farms do not depend on fertile land as much as trees do.]]))
+      _([[The land looks fairly barren, so we will need to reserve more space for foresting than I’m comfortable with. The Lowlands seem to be slightly more fertile, so it might be wise to build the forest infrastructure down here and relocate some of the farms to the Uplands. Farms, reed farms, and berry farms do not depend on fertile land as much as trees do.]]))
+      .. new_objectives(obj_wood),
 }
 
 getting_started_4 = {
@@ -231,6 +262,27 @@ getting_started_6 = {
    body=ketelsen(_("Good luck!"),
       -- TRANSLATORS: Ocke Ketelsen – Getting Started 6
       _([[I am heartened by your forwardness. Let us all hasten to our separate tasks, and may fortune smile on us!]]))
+}
+
+secured_wood = {
+   title = _("Wood Supply"),
+   body=henneke(_("Wood supply is ensured"),
+      -- TRANSLATORS: Henneke Lembeck – Wood Supply
+      _([[Our foresters and woodcutters have taken up their work. It will take some time before we have a steady supply of logs, but the immediate problem has been averted.]]))
+}
+
+secured_block = {
+   title = _("Pass Secured"),
+   body=claus(_("The pass is under guard"),
+      -- TRANSLATORS: Claus Lembeck – Pass Secured
+      _([[Our soldiers have fortified the pass. Surely no enemy will get past them before we are ready.]]))
+}
+
+secured_uplands = {
+   title = _("Uplands Colonized"),
+   body=reebaud(_("The Uplands have been settled"),
+      -- TRANSLATORS: Reebaud – Uplands Secured
+      _([[The Uplands are being converted to a true center of our economy. We must not forget to always keep a close eye on the ware exchange between Lowlands and Uplands and keep it to a minimum so as to avoid jams on the roads.]]))
 }
 
 victory_1 = {
@@ -279,8 +331,25 @@ victory_4 = {
 victory_5 = {
    title = _("Victory"),
    body=reebaud(_("Victory!"),
-      -- TRANSLATORS: Reebaud – Victory 4
+      -- TRANSLATORS: Reebaud – Victory 5
       _([[And if we can block it, they will lose their most important trade route! We must try it. We will sail to the Kattegat at once to conquer the strait, and then we’ll raise the people of Föhr and all the other islands in joint rebellion against the invader!]]))
+}
+
+victory_6 = {
+   title = _("Victory"),
+   body=ketelsen(_("Know your enemy"),
+      -- TRANSLATORS: Ocke Ketelsen – Victory 6
+      _([[I would like to make one more request. A request and an offer. My two sons, Harke Ockesen and Eschel Ockesen, are training as soldiers and commanders. I would much appreciate if if you would let them accompany you on your campaign to the Kattegat to gain some practical experience, and return them to me afterwards. In the meantime, we will use the industry you built for us to train more soldiers who shall aid you in your subsequent endeavours.]]))
+}
+
+victory_7 = {
+   title = _("Victory"),
+   body=reebaud(_("Victory!"),
+      -- TRANSLATORS: Reebaud – Victory 7
+      _([[We will be very glad to have them with us and I promise we will take good care of them. You certainly have a knack for assigning your sons the best teachers.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Reebaud – Victory 7
+      _([[And thus we part, to meet again soon. Farewell, and may lasting peace bless all of Helgoland!]]))
       .. objective_text(_("Congratulations"),
       _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
    allow_next_scenario = true,
