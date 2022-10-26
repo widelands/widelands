@@ -181,7 +181,9 @@ elif [ "$DISTRO" = "msys64" ]; then
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
-   # TODO(matthiakl): minizip package of brew fails to link dynamically
+   # TODO(k.halfmann): minizip package of brew fails to link dynamically, See also #5620
+   # TODO(k.halfmann): Testing on this branch only
+   brew uninstall --force libpng
    brew install $@ asio git cmake doxygen gettext glew graphviz icu4c jpeg \
     libogg libpng libvorbis ninja python sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
 
