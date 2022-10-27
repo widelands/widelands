@@ -11,13 +11,14 @@
 # Zlopez <michal.konecny@psmail.xyz>, 2021-2022
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
+# Václav Černý <vaclav.vatoz.cerny@gmail.com>, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-10-19 04:44+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Matej Svrcek <mmatej@yahoo.com>, 2015,2022\n"
+"Last-Translator: Václav Černý <vaclav.vatoz.cerny@gmail.com>, 2022\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -503,12 +504,12 @@ msgstr "Kliknutím na pole mapy se zobrazí jeho popis"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:424
 msgid "Tool History"
-msgstr ""
+msgstr "Historie nástroje"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../src/editor/editorinteractive.cc:369
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "Obnoví předchozí nastavení nástroje"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -635,7 +636,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr ""
+msgstr "Došlo k chybě. Chybové hlášení je:\n\n%1$s\n\nPomožte nám vylepšit Widelands tím, že chybu nahlásíte. Ve standartním výstupu  (na Windows je to stdout.txt) najdete propojené zprrávy.Používáte verzi %2$s.\nPřidejte prosím tuto informaci do vaší zprávy."
 
 #: ../../src/editor/editorinteractive.cc:1080
 #, c-format
@@ -674,7 +675,7 @@ msgstr "Náhodný hráč"
 #: ../../src/editor/tools/increase_height_tool.cc:62
 #, c-format
 msgid "Height: inc./dec. %1$d, set to %2$d"
-msgstr ""
+msgstr "Výška: změněno o %1$d, nastaveno na  %2$d"
 
 #. * TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for
 #. increase and
@@ -682,7 +683,7 @@ msgstr ""
 #: ../../src/editor/tools/increase_resources_tool.cc:80
 #, c-format
 msgid "%1$s: inc./dec. %2$d, set to %3$d"
-msgstr ""
+msgstr "%1$s: změnněno o %2$d, nastaveno na %3$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/noise_height_tool.cc:73
