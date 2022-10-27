@@ -113,7 +113,6 @@ std::string EditorToolhistoryOptionsMenu::make_tooltip(const ToolConf& conf,
 void EditorToolhistoryOptionsMenu::update() {
 	list_.clear();
 
-	int count = 0;
 	for (const auto& it : history_tool_) {
 		const ToolConf* conf = history_tool_.get_configuration_for(it.key);
 		std::string tooltip = make_tooltip(*conf, it.title);
@@ -123,7 +122,5 @@ void EditorToolhistoryOptionsMenu::update() {
 		} else {
 			list_.add(it.title, it.key, nullptr, false, tooltip);
 		}
-
-		count++;
 	}
 }
