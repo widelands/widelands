@@ -131,6 +131,13 @@ bool LoadOrSaveGame::compare_map_name(uint32_t rowa, uint32_t rowb) const {
 	return get_savegame(rowa).compare_map_name(get_savegame(rowb));
 }
 
+/**
+ * Check whether the given file is a replay that is potentially incompatible with the
+ * current Widelands version. If so, show a message box to ask the user how to proceed.
+ * @param sd File data to investigate.
+ * @return \c false if the user has aborted loading the incompatible replay; \c true if it is not
+ * a replay at all or the replay is compatible or the user wishes to ignore the incompatibility.
+ */
 bool LoadOrSaveGame::check_replay_compatibility(const SavegameData& sd) {
 	if (filetype_ != FileType::kReplay || sd.is_directory() || !sd.errormessage.empty() ||
 	    (SDL_GetModState() & KMOD_CTRL) != 0 || sd.version == build_id()) {
