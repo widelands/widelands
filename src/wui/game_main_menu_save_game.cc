@@ -42,10 +42,12 @@ struct TypeInfo {
 	LoadOrSaveGame::FileType file_type;
 };
 static const std::map<GameMainMenuSaveGame::Type, TypeInfo> kTypes = {
-	{GameMainMenuSaveGame::Type::kLoadReplay, {"load_replay", gettext_noop("Load Replay"), LoadOrSaveGame::FileType::kReplay}},
-	{GameMainMenuSaveGame::Type::kLoadSavegame, {"load_game", gettext_noop("Load Game"), LoadOrSaveGame::FileType::kGameSinglePlayer}},
-	{GameMainMenuSaveGame::Type::kSave, {"save_game", gettext_noop("Save Game"), LoadOrSaveGame::FileType::kShowAll}}
-};
+   {GameMainMenuSaveGame::Type::kLoadReplay,
+    {"load_replay", gettext_noop("Load Replay"), LoadOrSaveGame::FileType::kReplay}},
+   {GameMainMenuSaveGame::Type::kLoadSavegame,
+    {"load_game", gettext_noop("Load Game"), LoadOrSaveGame::FileType::kGameSinglePlayer}},
+   {GameMainMenuSaveGame::Type::kSave,
+    {"save_game", gettext_noop("Save Game"), LoadOrSaveGame::FileType::kShowAll}}};
 
 InteractiveGameBase& GameMainMenuSaveGame::igbase() {
 	return dynamic_cast<InteractiveGameBase&>(*get_parent());
