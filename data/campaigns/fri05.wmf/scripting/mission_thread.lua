@@ -64,7 +64,7 @@ function check_objective_block()
       for x = 84, 94 do
          for y = 114, 122 do
             local f = map:get_field(x, y)
-            if f.immovable ~= nil and f.immovable.descr.type_name == "militarysite" and f.immovable.fields[0] == f and f.owner == p1 then
+            if f.immovable ~= nil and f.immovable.descr.type_name == "militarysite" and f.immovable.fields[1] == f and f.owner == p1 then
                sites = sites + 1
                if sites >= 3 then
                   set_objective_done(o)
@@ -82,7 +82,7 @@ function check_objective_uplands()
    while true do
       sleep(4471)
       for _,wh in ipairs(p1:get_buildings("frisians_warehouse")) do
-         if wh.fields[0].height > 40 then
+         if wh.fields[1].height > 40 then
             set_objective_done(o)
             campaign_message_box(secured_uplands)
             return
