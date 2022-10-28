@@ -64,7 +64,6 @@
 #include "logic/game_settings.h"
 #include "logic/map.h"
 #include "logic/replay.h"
-#include "logic/replay_game_controller.h"
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
@@ -754,7 +753,7 @@ void WLApplication::init_and_run_game_from_template() {
 	game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 	game.init_newgame(settings->settings());
 	try {
-		game.run(Widelands::Game::StartGameType::kMap, script_to_run_, false, "single_player");
+		game.run(Widelands::Game::StartGameType::kMap, script_to_run_, "single_player");
 	} catch (const Widelands::GameDataError& e) {
 		log_err("Game not started: Game data error: %s\n", e.what());
 	} catch (const std::exception& e) {
@@ -786,14 +785,7 @@ void WLApplication::run() {
 		std::string message;
 		try {
 			if (game_type_ == GameType::kReplay) {
-				std::string map_theme;
-				std::string map_bg;
-				game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
-				game.set_ibase(new InteractiveSpectator(game, get_config_section()));
-				game.set_write_replay(false);
-				new ReplayGameController(game, filename_);
-				game.save_handler().set_allow_saving(false);
-				game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
+				game.run_replay(filename_, "");
 			} else {
 				game.set_ai_training_mode(get_config_bool("ai_training", false));
 				game.run_load_game(filename_, script_to_run_);
