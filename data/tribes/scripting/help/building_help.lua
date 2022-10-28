@@ -152,21 +152,21 @@ function dependencies_collects(tribe, building_description)
    local result = ""
    local collected_items = {}
    for i, bob in ipairs(building_description.collected_bobs) do
-      table.insert(collected_items, bob)
+      table.insert(collected_items, {bob, true})
       result = result .. item_image(bob)
    end
    for i, immovable in ipairs(building_description.collected_immovables) do
-      table.insert(collected_items, immovable)
+      table.insert(collected_items, {immovable, true})
       result = result .. item_image(immovable)
    end
    for i, resource in ipairs(building_description.collected_resources) do
-      table.insert(collected_items, resource.resource)
+      table.insert(collected_items, {resource.resource, false})
       result = result .. item_image(find_resource_indicator(tribe, resource.resource))
    end
    result = result .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
-   result = result .. " " .. linkify_encyclopedia_object(collected_items[1])
-   for k,mapobject in ipairs({table.unpack(collected_items,2)}) do
-      result = result .. " • " .. linkify_encyclopedia_object(mapobject)
+   for k,mapobject in ipairs(collected_items) do
+      if k > 1 then result = result .. " • " end
+      result = result .. (mapobject[2] and linkify_encyclopedia_object(mapobject[1]) or mapobject[1].descname)
    end
    return p(result)
 end
