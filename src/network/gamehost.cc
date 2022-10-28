@@ -584,7 +584,7 @@ void GameHost::run_callback() {
 		game_->run(d->settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
 		           d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
                                         Widelands::Game::StartGameType::kMap,
-		           script_to_run_, false, "nethost");
+		           script_to_run_, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_) {
