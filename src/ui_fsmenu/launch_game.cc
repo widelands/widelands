@@ -78,16 +78,16 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
      win_condition_duration_(&right_column_content_box_,
                              0,
                              0,
-                             300,
+                             200,
                              200,
                              Widelands::kDefaultWinConditionDuration,
                              15,        // 15 minutes minimum gametime
                              512 * 60,  // 512 hours maximum gametime (arbitrary limit)
                              UI::PanelStyle::kFsMenu,
-                             _("Playing time"),
+                             "",
                              UI::SpinBox::Units::kMinutes,
-                             UI::SpinBox::Type::kExponential,
-                             2),
+                             UI::SpinBox::Type::kBig,
+                             5, 60),
      peaceful_(
         &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
      custom_starting_positions_(&right_column_content_box_,
@@ -119,6 +119,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
      settings_(settings),
      ctrl_(ctrl),
      peaceful_mode_forbidden_(false) {
+	win_condition_duration_.set_tooltip(_("Playing time"));
 	warn_desyncing_addon_.set_visible(false);
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	win_condition_duration_.changed.connect([this]() { win_condition_duration_changed(); });
@@ -155,7 +156,7 @@ void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&configure_game_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(3 * kPadding);
+	right_column_content_box_.add_space(1 * kPadding);
 	right_column_content_box_.add(&win_condition_duration_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&peaceful_, UI::Box::Resizing::kFullSize);
@@ -178,6 +179,9 @@ void LaunchGame::add_behaviour_to_widgets() {
 void LaunchGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
+
+	win_condition_duration_.set_unit_width(win_condition_dropdown_.get_w());
+	win_condition_duration_.set_size(win_condition_dropdown_.get_w(), win_condition_duration_.get_h());
 
 	map_details_.set_max_size(0, right_column_box_.get_h() / 3);
 	map_details_.force_new_dimensions(right_column_width_, standard_height_);

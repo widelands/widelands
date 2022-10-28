@@ -33,10 +33,9 @@ struct SpinBoxImpl;
 class SpinBox : public Panel {
 public:
 	enum class Type {
-		kSmall,        // Displays buttons for small steps
-		kBig,          // Displays buttons for small and big steps
-		kValueList,    // Uses the values that are set by set_value_list().
-		kExponential,  // Increase/decrease by a factor instead of a fixed step size
+		kSmall,     // Displays buttons for small steps
+		kBig,       // Displays buttons for small and big steps
+		kValueList  // Uses the values that are set by set_value_list().
 	};
 
 	enum class Units { kNone, kPixels, kMinutes, kPercent, kFields };
