@@ -56,6 +56,8 @@ public:
 	/// Update gamedetails and tooltips and return information about the current selection
 	std::unique_ptr<SavegameData> entry_selected();
 
+	bool check_replay_compatibility(const SavegameData& sd);
+
 	/// Whether the table has a selection
 	bool has_selection() const;
 
@@ -96,6 +98,7 @@ private:
 	bool compare_save_time(uint32_t, uint32_t) const;
 	bool compare_map_name(uint32_t, uint32_t) const;
 
+	UI::WindowStyle window_style_;
 	UI::Box* table_box_;
 	FileType filetype_;
 

@@ -33,10 +33,7 @@
 #include "logic/filesystem_constants.h"
 #include "map_io/map_loader.h"
 
-GameDetails::GameDetails(Panel* parent,
-                         UI::PanelStyle style,
-                         Mode mode,
-                         Widelands::EditorGameBase& egbase)
+GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
    : UI::Panel(parent, style, 0, 0, 0, 0),
      mode_(mode),
      padding_(4),
@@ -62,8 +59,7 @@ GameDetails::GameDetails(Panel* parent,
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
-     button_box_(new UI::Box(&main_box_, style, 0, 0, UI::Box::Vertical)),
-     egbase_(egbase) {
+     button_box_(new UI::Box(&main_box_, style, 0, 0, UI::Box::Vertical)) {
 	descr_.set_handle_mouse(false);
 	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);
 	descr_box_.add_space(padding_);
@@ -225,14 +221,15 @@ std::string GameDetails::show_minimap(const SavegameData& gamedata) {
 			minimap_icon_.set_visible(true);
 		} else {
 			try {
-				egbase_.cleanup_for_load();
+				Widelands::Game game_for_render;
 				std::string filename(last_game_);
 				filename.append(kSavegameExtension);
 				std::unique_ptr<Widelands::MapLoader> ml(
-				   egbase_.mutable_map()->get_correct_loader(filename));
-				if (ml != nullptr && 0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
+				   game_for_render.mutable_map()->get_correct_loader(filename));
+				if (ml != nullptr &&
+				    0 == ml->load_map_for_render(game_for_render, &game_for_render.enabled_addons())) {
 					minimap_cache_[last_game_] =
-					   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
+					   draw_minimap(game_for_render, nullptr, Rectf(), MiniMapType::kStaticMap,
 					                MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
 					minimap_icon_.set_icon(minimap_cache_.at(last_game_).get());
 					minimap_icon_.set_visible(true);

@@ -1816,6 +1816,10 @@ wl.Descriptions():new_tribe {
    productionsite_workers_missing = pgettext("barbarians", "Workers missing"),
    -- TRANSLATORS: Productivity label on a barbarian building if there is more than 1 worker coming. If you need plural forms here, please let us know.
    productionsite_workers_coming = pgettext("barbarians", "Workers are coming"),
+   -- TRANSLATORS: Productivity label on a barbarian building if there is 1 experienced worker missing
+   productionsite_experienced_worker_missing = pgettext("barbarians", "Expert missing"),
+   -- TRANSLATORS: Productivity label on a barbarian building if there is more than 1 experienced worker missing. If you need plural forms here, please let us know.
+   productionsite_experienced_workers_missing = pgettext("barbarians", "Experts missing"),
 
    -- Soldier strings to be used in Military Status strings
 
