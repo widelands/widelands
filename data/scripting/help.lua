@@ -105,7 +105,7 @@ function terrain_affinity_help(immovable_description)
    for k,v in ipairs(terrain_list) do
       if (k <= 10 or v.probability > 0.25) then
          result = result .. li_image(v.terrain.representative_image,
-               linkify_encyclopedia_object(v.terrain) .. "<br>" ..
+               (wl.Editor ~= nil and linkify_encyclopedia_object(v.terrain) or v.terrain.descname) .. "<br>" ..
                -- TRANSLATORS: Help text - Probability to grow for an immovable
                (_("%2.1f%%")):bformat(100 * v.probability)
             ) .. vspace(6)
