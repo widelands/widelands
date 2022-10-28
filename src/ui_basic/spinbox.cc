@@ -132,12 +132,12 @@ SpinBox::SpinBox(Panel* const parent,
 	   new Button(box_, "-", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_left.png" :
                                              "images/ui_basic/scrollbar_down.png"),
-		              format(_("Decrease the value by %s"), unit_text(sbi_->step_size)));
+	              format(_("Decrease the value by %s"), unit_text(sbi_->step_size)));
 	sbi_->button_plus =
 	   new Button(box_, "+", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_right.png" :
                                              "images/ui_basic/scrollbar_up.png"),
-		              format(_("Increase the value by %s"), unit_text(sbi_->step_size)));
+	              format(_("Increase the value by %s"), unit_text(sbi_->step_size)));
 	sbi_->button_minus->set_can_focus(false);
 	sbi_->button_plus->set_can_focus(false);
 
@@ -421,12 +421,12 @@ const std::string SpinBox::unit_text(int32_t value) const {
 		const int32_t hours = value / 60;
 		value %= 60;
 		return format(
-			/** TRANSLATORS: X hours and Y minutes */
-			_("%1$s and %2$s"),
-				/** TRANSLATORS: A spinbox unit */
-			format(ngettext("%d hour", "%d hours", hours), hours),
-			/** TRANSLATORS: A spinbox unit */
-			format(ngettext("%d minute", "%d minutes", value), value));
+		   /** TRANSLATORS: X hours and Y minutes */
+		   _("%1$s and %2$s"),
+		   /** TRANSLATORS: A spinbox unit */
+		   format(ngettext("%d hour", "%d hours", hours), hours),
+		   /** TRANSLATORS: A spinbox unit */
+		   format(ngettext("%d minute", "%d minutes", value), value));
 	}
 
 	case (Units::kPixels):

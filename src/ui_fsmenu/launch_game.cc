@@ -87,7 +87,8 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                              "",
                              UI::SpinBox::Units::kMinutes,
                              UI::SpinBox::Type::kBig,
-                             5, 60),
+                             5,
+                             60),
      peaceful_(
         &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
      custom_starting_positions_(&right_column_content_box_,
@@ -181,7 +182,8 @@ void LaunchGame::layout() {
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
 	win_condition_duration_.set_unit_width(win_condition_dropdown_.get_w());
-	win_condition_duration_.set_size(win_condition_dropdown_.get_w(), win_condition_duration_.get_h());
+	win_condition_duration_.set_size(
+	   win_condition_dropdown_.get_w(), win_condition_duration_.get_h());
 
 	map_details_.set_max_size(0, right_column_box_.get_h() / 3);
 	map_details_.force_new_dimensions(right_column_width_, standard_height_);
