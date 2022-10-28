@@ -9,7 +9,7 @@
 # Benedikt Straub <benedikt-straub@web.de>, 2021
 # Boese Kaiser, 2022
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
-# C138, 2020
+# C138, 2020,2022
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
 # David D, 2017-2018,2021
 # GunChleoc, 2016,2018
@@ -30,7 +30,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-10-19 04:44+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022\n"
+"Last-Translator: C138, 2020,2022\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3667,7 +3667,7 @@ msgid ""
 " spam. By uploading an add-on, you assert that the add-on is of your own "
 "creation or you have the add-on’s author(s) permission to submit it in their"
 " stead."
-msgstr ""
+msgstr "Il est interdit de télécharger des add-ons contenant du contenu nuisible ou malveillant ou du spam. En téléchargeant un module complémentaire, vous affirmez que le module complémentaire est de votre propre création ou que vous avez la permission de l'auteur ou des auteurs du module complémentaire de le soumettre à sa place."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:400
 msgid ""
@@ -3675,7 +3675,7 @@ msgid ""
 " further above before submitting content. Since the documentation is subject"
 " to frequent changes, ensure that you have read it recently and that you "
 "followed all guidelines stated there."
-msgstr ""
+msgstr "Vous devez avoir lu la documentation des modules complémentaires sous le lien ci-dessus avant de soumettre du contenu. Étant donné que la documentation est sujette à des modifications fréquentes, assurez-vous de l'avoir lue récemment et d'avoir suivi toutes les directives qui y sont énoncées."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:406
 msgid ""
@@ -3683,7 +3683,7 @@ msgid ""
 " In case they have further inquiries, they will contact you via a PM on the "
 "Widelands website; therefore please check the inbox of your online user "
 "profile page frequently."
-msgstr ""
+msgstr "L'équipe de développement de Widelands examinera votre module complémentaire peu de temps après le téléchargement. S'ils ont d'autres questions, ils vous contacteront via un MP sur le site Web de Widelands ; veuillez donc vérifier fréquemment la boîte de réception de votre page de profil d'utilisateur en ligne."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:436
 #, c-format
@@ -3703,7 +3703,7 @@ msgid ""
 "use this way of communication only if there is a reason why your concern is "
 "not for everyone’s ears. You’ll receive our reply via a PM on your Widelands"
 " website user profile page."
-msgstr ""
+msgstr "Alternativement, vous pouvez également envoyer un message à l'équipe de développement de Widelands et nous essaierons de vous aider pour votre demande dès que possible. Seuls les administrateurs du serveur peuvent lire les messages envoyés de cette manière. Étant donné que d'autres concepteurs de modules complémentaires peuvent généralement bénéficier des questions et réponses des autres, veuillez utiliser ce moyen de communication uniquement s'il y a une raison pour laquelle votre préoccupation n'est pas pour les oreilles de tout le monde. Vous recevrez notre réponse via un MP sur la page de profil utilisateur de votre site Web Widelands."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:490
 msgid "Development"
@@ -4489,7 +4489,7 @@ msgstr "Prévisualisation :"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:337
 msgid "The comment contains invalid richtext markup:"
-msgstr ""
+msgstr "Le commentaire contient un balisage richtext non valide :"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:382
 msgctxt "tx"
