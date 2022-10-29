@@ -131,7 +131,7 @@ USE_ASAN_DEFAULT="ON"
 USE_TSAN="OFF"
 COMPILER="default"
 USE_XDG="ON"
-EXTRA_OPTS="-DCMAKE_FIND_DEBUG_MODE=ON"
+EXTRA_OPTS=""
 # Option for this script itself
 QUIET=0
 RUN=""
@@ -233,11 +233,6 @@ do
       if [ "${USE_ASAN}" = "default" ] && [ "${USE_TSAN}" = "OFF" ]; then
         USE_ASAN="ON"
       fi
-    shift
-    ;;
-    -r|--release-with-debug-info)
-      BUILD_TYPE="RelWithDebInfo"
-      USE_ASAN="OFF"
     shift
     ;;
     -t|--no-translations)
@@ -559,9 +554,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
                -DOPTION_ASAN=$USE_ASAN                         \
                -DOPTION_TSAN=$USE_TSAN                         \
                -DUSE_XDG=$USE_XDG                              \
-               -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}             \
-               -DCMAKE_JOB_POOLS="linking=1"                   \
-               -DCMAKE_JOB_POOL_LINK=linking
+               -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
 
     $RUN $buildtool -j $CORES
 

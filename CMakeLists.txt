@@ -16,8 +16,6 @@ option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
 option(OPTION_FORCE_EMBEDDED_MINIZIP "Use embedded minizip sources" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
-set(CMAKE_FIND_FRAMEWORK LAST)
-
 # Absolute path reference for submodules
 set(WL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 
