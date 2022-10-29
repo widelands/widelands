@@ -40,13 +40,13 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_fsmenu/addons/contact.h"
-#include "ui_fsmenu/addons/login_box.h"
 #include "ui_fsmenu/addons/packager.h"
 #include "ui_fsmenu/addons/progress.h"
 #include "ui_fsmenu/addons/rows_ui.h"
 #include "ui_fsmenu/addons/screenshot_upload.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
+#include "wui/addons_login_box.h"
 
 namespace FsMenu {
 namespace AddOnsUI {
@@ -747,7 +747,7 @@ AddOnsCtrl::~AddOnsCtrl() {
 void AddOnsCtrl::login_button_clicked() {
 	if (username_.empty()) {
 		UI::UniqueWindow::Registry r;
-		AddOnsLoginBox b(*this);
+		AddOnsLoginBox b(get_topmost_forefather(), UI::WindowStyle::kFsMenu);
 		if (b.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
 		}

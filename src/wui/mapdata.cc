@@ -181,10 +181,10 @@ MapData MapData::create_directory(const std::string& directory) {
 	} else if (directory == "maps/SP_Scenarios") {
 		/** TRANSLATORS: Directory name for SP Scenarios in map selection */
 		localized_name = _("Singleplayer Scenarios");
-	} else if (directory == "maps/My_Maps") {
+	} else if (directory == kMapsDir + "/" + kMyMapsDir) {
 		/** TRANSLATORS: Directory name for user maps in map selection */
 		localized_name = _("My Maps");
-	} else if (directory == "maps/Downloaded") {
+	} else if (directory == kMapsDir + "/" + kDownloadedMapsDir) {
 		/** TRANSLATORS: Directory name for downloaded maps in map selection */
 		localized_name = _("Downloaded Maps");
 	} else if (directory.compare(0, kAddOnDir.size(), kAddOnDir) == 0) {

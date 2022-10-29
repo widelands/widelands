@@ -16,22 +16,21 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_ADDONS_LOGIN_BOX_H
-#define WL_UI_FSMENU_ADDONS_LOGIN_BOX_H
+#ifndef WL_WUI_ADDONS_LOGIN_BOX_H
+#define WL_WUI_ADDONS_LOGIN_BOX_H
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/window.h"
 
-namespace FsMenu {
 namespace AddOnsUI {
 
 class AddOnsCtrl;
 
 class AddOnsLoginBox : public UI::Window {
 public:
-	explicit AddOnsLoginBox(AddOnsCtrl& ctrl);
+	explicit AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style);
 
 	const std::string& get_username() const;
 	std::string get_password() const;
@@ -51,6 +50,5 @@ private:
 };
 
 }  // namespace AddOnsUI
-}  // namespace FsMenu
 
-#endif  // end of include guard: WL_UI_FSMENU_ADDONS_LOGIN_BOX_H
+#endif  // end of include guard: WL_WUI_ADDONS_LOGIN_BOX_H

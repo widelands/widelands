@@ -16,19 +16,17 @@
  *
  */
 
-#include "ui_fsmenu/addons/login_box.h"
+#include "wui/addons_login_box.h"
 
 #include "base/string.h"
 #include "third_party/sha1/sha1.h"
-#include "ui_fsmenu/addons/manager.h"
 #include "wlapplication_options.h"
 
-namespace FsMenu {
 namespace AddOnsUI {
 
-AddOnsLoginBox::AddOnsLoginBox(AddOnsCtrl& ctrl)
-   : UI::Window(&ctrl.get_topmost_forefather(),
-                UI::WindowStyle::kFsMenu,
+AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
+   : UI::Window(&parent,
+                style,
                 "login",
                 0,
                 0,
@@ -36,20 +34,20 @@ AddOnsLoginBox::AddOnsLoginBox(AddOnsCtrl& ctrl)
                 100,
                 _("Login")),
      password_sha1_(get_config_string("password_sha1", "")),
-     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     left_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     right_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     username_(&right_box_, 0, 0, 400, UI::PanelStyle::kFsMenu),
-     password_(&right_box_, 0, 0, 400, UI::PanelStyle::kFsMenu),
+     box_(this, panel_style, 0, 0, UI::Box::Vertical),
+     hbox_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
+     left_box_(&hbox_, panel_style_, 0, 0, UI::Box::Vertical),
+     right_box_(&hbox_, panel_style_, 0, 0, UI::Box::Vertical),
+     buttons_box_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
+     username_(&right_box_, 0, 0, 400, panel_style_),
+     password_(&right_box_, 0, 0, 400, panel_style_),
      ok_(&buttons_box_,
          "ok",
          0,
          0,
          kRowButtonSize,
          kRowButtonSize,
-         UI::ButtonStyle::kFsMenuPrimary,
+         style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuPrimary : UI::ButtonStyle::kWuiPrimary,
          _("OK")),
      cancel_(&buttons_box_,
              "cancel",
@@ -57,7 +55,7 @@ AddOnsLoginBox::AddOnsLoginBox(AddOnsCtrl& ctrl)
              0,
              kRowButtonSize,
              kRowButtonSize,
-             UI::ButtonStyle::kFsMenuSecondary,
+             style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
      reset_(&buttons_box_,
             "reset",
@@ -65,12 +63,12 @@ AddOnsLoginBox::AddOnsLoginBox(AddOnsCtrl& ctrl)
             0,
             kRowButtonSize,
             kRowButtonSize,
-            UI::ButtonStyle::kFsMenuSecondary,
+            style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary,
             _("Reset")) {
 	UI::MultilineTextarea* m =
-	   new UI::MultilineTextarea(&box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "",
+	   new UI::MultilineTextarea(&box_, 0, 0, 100, 100, panel_style_, "",
 	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
-	m->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
+	m->set_style(style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph : UI::FontStyle::kWuiInfoPanelParagraph);
 	m->set_text(format(
 	   _("In order to use a registered account, you need an account on the Widelands website. "
 	     "Please log in at %s and set an online gaming password on your profile page."),
@@ -78,12 +76,12 @@ AddOnsLoginBox::AddOnsLoginBox(AddOnsCtrl& ctrl)
 
 	left_box_.add_inf_space();
 	left_box_.add(
-	   new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	   new UI::Textarea(&left_box_, panel_style_, style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading : UI::FontStyle::kWuiInfoPanelHeading,
 	                    _("Username:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	left_box_.add_inf_space();
 	left_box_.add(
-	   new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	   new UI::Textarea(&left_box_, panel_style_, style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading : UI::FontStyle::kWuiInfoPanelHeading,
 	                    _("Password:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	left_box_.add_inf_space();
@@ -178,4 +176,3 @@ void AddOnsLoginBox::reset() {
 }
 
 }  // namespace AddOnsUI
-}  // namespace FsMenu
