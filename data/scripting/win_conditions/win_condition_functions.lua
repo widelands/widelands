@@ -352,42 +352,23 @@ function format_remaining_raw_time(remaining_time)
    local d = math.floor(remaining_time / (60 * 24))
    remaining_time = remaining_time - (d * 60 * 24)
    local h = math.floor(remaining_time / 60)
-   remaining_time = remaining_time - (h * 60)
+   local m = remaining_time - (h * 60)
+
+   local timestring_d = (ngettext("%1% day", "%1% days", d)):bformat(d)
+   local timestring_h = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
+   local timestring_m = (ngettext("%1% minute", "%1% minutes", m)):bformat(m)
 
    if d > 0 then
-      if ((h > 0) and (remaining_time > 0)) then
-         -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-         local time_m = (ngettext("%i minute", "%i minutes", remaining_time)):bformat(remaining_time)
-         -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-         time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
-         -- TRANSLATORS: Context: 'The game will end in 2 days, 1 hour, and 30 minutes.'
-         time = (ngettext("%1% day, %2%, and %3%", "%1% days, %2%, and %3%", d)):bformat(d, time, time_m)
-      elseif h > 0 then
-         -- TRANSLATORS: Context: 'The game will end in 2 days and 3 hours.'
-         time = (ngettext("%i hour", "%i hours", h)):bformat(h)
-         -- TRANSLATORS: Context: 'The game will end in 2 days and 3 hours.'
-         time = (ngettext("%1% day and %2%", "%1% days and %2%", d)):bformat(d, time)
-      elseif remaining_time > 0 then
-         -- TRANSLATORS: Context: 'The game will end in 2 days and 30 minutes.'
-         time = (ngettext("%i minute", "%i minutes", remaining_time)):bformat(remaining_time)
-         -- TRANSLATORS: Context: 'The game will end in 2 days and 30 minutes.'
-         time = (ngettext("%1% day and %2%", "%1% days and %2%", d)):bformat(d, time)
+      if h > 0 and m > 0 then
+         time = _("%1$s, %2$s, and %3$s"):bformat(timestring_d, timestring_h, timestring_m)
       else
-         -- TRANSLATORS: Context: 'The game will end in 2 days.'
-         time = (ngettext("%1% day", "%1% days", d)):bformat(d)
+         time = _("%1$s and %2$s"):bformat(timestring_d, (h > 0) and timestring_h or timestring_m)
       end
    else
-      if ((h > 0) and (remaining_time > 0)) then
-         -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-         time = (ngettext("%i minute", "%i minutes", remaining_time)):bformat(remaining_time)
-         -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-         time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h)):bformat(h, time)
-      elseif remaining_time > 0 then
-         -- TRANSLATORS: Context: 'The game will end in 30 minutes.'
-         time = (ngettext("%i minute", "%i minutes", remaining_time)):bformat(remaining_time)
+      if h > 0 and m > 0 then
+         time = _("%1$s and %2$s"):bformat(timestring_h, timestring_m)
       else
-         -- TRANSLATORS: Context: 'The game will end in 2 hours.'
-         time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
+         time = (h > 0) and timestring_h or timestring_m
       end
    end
 

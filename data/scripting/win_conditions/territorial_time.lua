@@ -20,14 +20,6 @@ local wc_name = "Territorial Time"
 -- will be used as the key to fetch the translation in C++
 local wc_descname = _("Territorial Time")
 local wc_version = 1
-local wc_desc = _ (
-   "Each player or team tries to obtain more than half of the map’s " ..
-   "area. The winner will be the player or the team that is able to keep " ..
-   "that area for at least 20 minutes, or the one with the most territory " ..
-   "after the configured time limit, whichever comes first. " ..
-   "If the peaceful mode is selected, the game ends if one player has more " ..
-   "land than any other player could gain."
-)
 local wc_desc_placeholder = _(
    "Each player or team tries to obtain more than half of the map’s " ..
    "area. The winner will be the player or the team that is able to keep " ..
@@ -36,6 +28,8 @@ local wc_desc_placeholder = _(
    "If the peaceful mode is selected, the game ends if one player has more " ..
    "land than any other player could gain."
 )
+-- TRANSLATORS: Will be inserted into "The winner will be the player […] with the most territory after %s"
+local wc_desc = wc_desc_placeholder:bformat(_("the configured time limit"))
 
 local r = {
    name = wc_name,
