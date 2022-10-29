@@ -22,7 +22,7 @@ include "scripting/richtext.lua"
 --    :arg descr: The unit description to linkify.
 --    :returns: Richtext markup for the hyperlink.
 function linkify_encyclopedia_object(descr)
-   return a(descr.species or descr.descname, "ui", "encyclopedia", descr.name)
+   return a(descr.species ~= "" and descr.species or descr.descname, "ui", "encyclopedia", descr.name)
 end
 
 -- RST
