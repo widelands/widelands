@@ -65,7 +65,8 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
                           " To do so, please report at %s that horizontal scroll direction is"
                           " wrong with your configuration. Please include the below technical"
                           " information."),
-                        g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(as_url_hyperlink(kReportURL))))),
+                        g_style_manager->font_style(UI::FontStyle::kFsTooltip)
+                           .as_font_tag(as_url_hyperlink(kReportURL))))),
         UI::Align::kLeft,
         UI::MultilineTextarea::ScrollMode::kNoScrolling),
      infobox_(&content_, TechInfoBox::Type::kMousewheelReport),
