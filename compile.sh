@@ -131,7 +131,7 @@ USE_ASAN_DEFAULT="ON"
 USE_TSAN="OFF"
 COMPILER="default"
 USE_XDG="ON"
-EXTRA_OPTS=""
+EXTRA_OPTS="-DCMAKE_FIND_DEBUG_MODE=ON"
 # Option for this script itself
 QUIET=0
 RUN=""
