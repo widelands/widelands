@@ -50,11 +50,7 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 
-#if SDL_VERSION_ATLEAST(2, 0, 14)
-const bool g_can_open_url(true);
-#else
-const bool g_can_open_url(false);
-#endif
+#define CAN_OPEN_HYPERLINK (SDL_VERSION_ATLEAST(2, 0, 14))
 
 namespace {
 /**
@@ -1414,7 +1410,7 @@ public:
 			Notifications::publish(NoteHyperlink(target_, action_));
 			return true;
 		case Type::kURL:
-#if SDL_VERSION_ATLEAST(2, 0, 14)
+#if CAN_OPEN_HYPERLINK
 			SDL_OpenURL(target_.c_str());
 #else
 			SDL_SetClipboardText(target_.c_str());
@@ -1425,6 +1421,13 @@ public:
 	}
 
 	const std::string* get_tooltip(int32_t /* x */, int32_t /* y */) const override {
+#if !CAN_OPEN_HYPERLINK
+		if (type_ == Type::kURL) {
+			static std::string cant_open_link;
+			cant_open_link = _("Copy link to clipboard");
+			return &cant_open_link;
+		}
+#endif
 		return &mouseover_;
 	}
 

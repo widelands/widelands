@@ -33,12 +33,9 @@ struct InvertedScrollFeedbackWindow : public UI::Window {
 private:
 	UI::Box content_;
 	UI::MultilineTextarea header_;
-	UI::Button url_button_;
 	TechInfoBox infobox_;
 	UI::Button close_;
 };
-
-void url_button_action();
 
 }  // namespace FsMenu
 

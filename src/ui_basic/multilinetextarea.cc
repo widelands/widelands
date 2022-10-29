@@ -191,7 +191,9 @@ bool MultilineTextarea::handle_mousemove(
 		const std::string* tt = rendered_text_->get_tooltip(
 		   x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
 		if (tt != nullptr) {
-			tooltip_before_hyperlink_tooltip_ = tooltip();
+			if (*tt != tooltip()) {
+				tooltip_before_hyperlink_tooltip_ = tooltip();
+			}
 			set_tooltip(*tt);
 			return true;
 		}

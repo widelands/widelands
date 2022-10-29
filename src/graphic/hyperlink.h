@@ -38,7 +38,4 @@ struct TextClickTarget {
 	virtual const std::string* get_tooltip(int32_t x, int32_t y) const = 0;
 };
 
-/** Whether the SDL version supports opening hyperlinks in the browser. */
-extern const bool g_can_open_url;
-
 #endif  // end of include guard: WL_GRAPHIC_HYPERLINK_H
