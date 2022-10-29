@@ -62,7 +62,7 @@ tips = {
       seconds = 4
    },
    {
-      text = _("An economy consists of all buildings and flags connected by roads. The supplies and demands of buildings are handled in its economy."),
+      text = _("An economy consists of all buildings and flags connected by roads, ferries or ship lines. The supplies and demands of buildings are handled in its economy."),
       seconds = 8
    },
    {
