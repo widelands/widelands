@@ -40,3 +40,9 @@ gmon.out
 # Validation checks
 po_validation
 clang-tidy.log
+
+/callgrind.*
+/comp.sh
+/comp_*.sh
+/*.log
+
