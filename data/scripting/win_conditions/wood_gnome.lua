@@ -15,14 +15,13 @@ local wc_name = "Wood Gnome"
 -- will be used as the key to fetch the translation in C++
 local wc_descname = _("Wood Gnome")
 local wc_version = 2
-local wc_desc = _(
-[[As wood gnome you like big forests, so your task is to have more trees on ]] ..
-[[your territory than any other player. The game will end after configured time limit. ]] ..
-[[The one with the most trees at that point will win the game.]])
 local wc_desc_placeholder = _(
 [[As wood gnome you like big forests, so your task is to have more trees on ]] ..
 [[your territory than any other player. The game will end after %s. ]] ..
 [[The one with the most trees at that point will win the game.]])
+-- TRANSLATORS: Will be inserted into "The game will end after %s."
+local wc_desc = wc_desc_placeholder:bformat(_("the configured time limit"))
+
 local wc_trees_owned = "Trees owned"
 -- This needs to be exactly like wc_trees_owned, but localized, because wc_trees_owned
 -- will be used as the key to fetch the translation in C++

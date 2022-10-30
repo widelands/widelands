@@ -360,8 +360,10 @@ function format_remaining_raw_time(remaining_time)
 
    if d > 0 then
       if h > 0 and m > 0 then
+         -- TRANSLATORS: 1 day, 12 hours, and 30 minutes
          time = _("%1$s, %2$s, and %3$s"):bformat(timestring_d, timestring_h, timestring_m)
       else
+         -- TRANSLATORS: 2 hours and 30 minutes
          time = _("%1$s and %2$s"):bformat(timestring_d, (h > 0) and timestring_h or timestring_m)
       end
    else
