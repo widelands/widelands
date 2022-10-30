@@ -739,12 +739,14 @@ void InteractiveBase::game_logic_think() {
 		prev_avg_weight = 0;
 	} else if (last_frame_realtime_ - gamespeed_last_change_time_ < kFilterTime) {
 		// Allow faster convergence after changing speed
-		prev_avg_weight = abs(avg_actual_gamespeed_ - cur_speed) > abs(last_target_gamespeed_ - cur_speed) ? 0 : 1;
+		prev_avg_weight =
+		   abs(avg_actual_gamespeed_ - cur_speed) > abs(last_target_gamespeed_ - cur_speed) ? 0 : 1;
 	} else {
 		prev_avg_weight = kFilterTime / realtime_step;
 	}
 
-	avg_actual_gamespeed_ = ((avg_actual_gamespeed_ * prev_avg_weight) + (cur_speed * 1000)) / (prev_avg_weight + 1);
+	avg_actual_gamespeed_ =
+	   ((avg_actual_gamespeed_ * prev_avg_weight) + (cur_speed * 1000)) / (prev_avg_weight + 1);
 
 	if (egbase().is_game()) {
 		const uint64_t new_target = game().game_controller()->real_speed();
