@@ -78,8 +78,8 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
      win_condition_duration_(&right_column_content_box_,
                              0,
                              0,
-                             300,
-                             200,
+                             360,
+                             240,
                              Widelands::kDefaultWinConditionDuration,
                              15,        // 15 minutes minimum gametime
                              512 * 60,  // 512 hours maximum gametime (arbitrary limit)
