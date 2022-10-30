@@ -45,7 +45,10 @@ struct IProgressVisualization {
 
 /// Manages a progress window on the screen.
 struct ProgressWindow : public UI::Panel {
-	explicit ProgressWindow(UI::Panel*, const std::string& theme, const std::string& background, bool crop = true);
+	explicit ProgressWindow(UI::Panel*,
+	                        const std::string& theme,
+	                        const std::string& background,
+	                        bool crop = true);
 	~ProgressWindow() override;
 
 	/// Register additional visualization (tips/hints, animation, etc)

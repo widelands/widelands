@@ -363,7 +363,7 @@ UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::stri
                                                      bool show_game_tips,
                                                      const std::string& theme,
                                                      const std::string& background,
-													 bool crop,
+                                                     bool crop,
                                                      UI::Panel* parent) {
 	assert(!has_loader_ui());
 	loader_ui_.reset(new UI::ProgressWindow(parent, theme, background, crop));
