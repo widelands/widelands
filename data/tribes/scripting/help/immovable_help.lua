@@ -82,11 +82,11 @@ function immovable_help_string(tribe, immovable_description)
          end
          if (target_description ~= nil) then
             local icon = target_description.icon_name
+            local target_rt = immovable_description:has_attribute("tree") and target_description.descname or linkify_encyclopedia_object(target_description)
             if (icon ~= "") then
-               result = result ..
-                  li_image(icon, target_description.descname)
+               result = result .. li_image(icon, target_rt)
             else
-               result = result .. li(target_description.descname)
+               result = result .. li(target_rt)
             end
          end
       end

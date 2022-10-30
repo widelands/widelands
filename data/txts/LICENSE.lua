@@ -10,7 +10,7 @@ local r = {
 
       h2(_("This game is Free and Open Source (FOSS), licensed under the GNU General Public License (GPL) V2.0.")) ..
 
-      p(vspace(6) .. _("You can find more information on FOSS and the GPL by visiting the following webpage: %s")):bformat(a("https://www.gnu.org/licenses/old-licenses/gpl-2.0.html")) ..
+      p(vspace(6) .. _("You can find more information on FOSS and the GPL by visiting the following webpage: %s")):bformat(a("https://www.gnu.org/licenses/old-licenses/gpl-2.0.html", "url", "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html")) ..
 
       p(vspace(6) .. _("You can find the full text of the license there as well as further information about its philosophy and the legal implications.")) ..
 
@@ -22,9 +22,9 @@ local r = {
       h2(_("This game comes as-is and without any warranty.")) ..
       p(_("For more information and support you can find us at %1% (Website, Wiki, Forum for questions or general support), %2% (Bugtracker), and %3% (Translations).")):
          bformat(
-            a("widelands.org"),
-            a("widelands.org/wiki/ReportingBugs"),
-            a("widelands.org/wiki/TranslatingWidelands"))
+            a("widelands.org", "url", "https://www.widelands.org"),
+            a("widelands.org/wiki/ReportingBugs", "url", "https://www.widelands.org/wiki/ReportingBugs"),
+            a("widelands.org/wiki/TranslatingWidelands", "url", "https://www.widelands.org/wiki/TranslatingWidelands"))
    ))
 }
 pop_textdomain()

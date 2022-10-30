@@ -27,6 +27,8 @@
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 
+struct TextClickTarget;
+
 namespace UI {
 
 /// A rectangle that contains blitting information for rendered text.
@@ -45,35 +47,41 @@ private:
 	             bool visited,
 	             const RGBColor& color,
 	             bool is_background_color_set,
-	             DrawMode init_mode);
+	             DrawMode init_mode,
+	             const TextClickTarget* click_target);
 	// The image is managed by a pernament cache
 	RenderedRect(const Recti& init_rect,
 	             const Image* init_image,
 	             bool visited,
 	             const RGBColor& color,
 	             bool is_background_color_set,
-	             DrawMode init_mode);
+	             DrawMode init_mode,
+	             const TextClickTarget* click_target);
 
 public:
 	/// RenderedRect will contain a background image that should be tiled
-	explicit RenderedRect(const Recti& init_rect, const Image* init_image);
+	explicit RenderedRect(const Recti& init_rect,
+	                      const Image* init_image,
+	                      const TextClickTarget* click_target);
 
 	/// RenderedRect will contain a background color that should be tiled
-	explicit RenderedRect(const Recti& init_rect, const RGBColor& color);
+	explicit RenderedRect(const Recti& init_rect,
+	                      const RGBColor& color,
+	                      const TextClickTarget* click_target);
 
 	/// RenderedRect will contain a normal image that is managed by a transient cache.
 	/// Use this if the image is managed by an instance of TextureCache.
-	explicit RenderedRect(const std::shared_ptr<const Image>& init_image);
+	explicit RenderedRect(const std::shared_ptr<const Image>& init_image,
+	                      const TextClickTarget* click_target);
 
 	/// RenderedRect will contain a normal image that is managed by a permanent cache.
 	/// Use this if the image is managed by g_image_cache.
-	explicit RenderedRect(const Image* init_image);
-	~RenderedRect() {
-	}
+	explicit RenderedRect(const Image* init_image, const TextClickTarget* click_target);
 
 	/// An image to be blitted. Can be nullptr.
 	const Image* image() const;
 
+	const Recti& rect() const;
 	/// The x position of the rectangle
 	int x() const;
 	/// The y position of the rectangle
@@ -100,6 +108,9 @@ public:
 	/// Whether the RenderedRect's image should be blitted once or tiled
 	DrawMode mode() const;
 
+	bool handle_mousepress(int32_t x, int32_t y) const;
+	const std::string* get_tooltip(int32_t x, int32_t y) const;
+
 private:
 	Recti rect_;
 	// We have 2 image objects depending on the caching situation - only use one of them at the same
@@ -110,16 +121,25 @@ private:
 	const RGBColor background_color_;
 	const bool is_background_color_set_;
 	const DrawMode mode_;
+	const TextClickTarget* click_target_;
 };
 
 struct RenderedText {
+	RenderedText();
+	~RenderedText();
+
 	/// RenderedRects that can be drawn on screen
 	std::vector<std::unique_ptr<RenderedRect>> rects;
+
+	void set_memory_tree_root(TextClickTarget* t);
 
 	/// The width occupied  by all rects in pixels.
 	int width() const;
 	/// The height occupied  by all rects in pixels.
 	int height() const;
+
+	bool handle_mousepress(int32_t x, int32_t y) const;
+	const std::string* get_tooltip(int32_t x, int32_t y) const;
 
 	enum class CropMode {
 		// The RenderTarget will handle all cropping. Use this for scrollable elements or when you
@@ -165,6 +185,8 @@ private:
 	                  const RenderedRect& rect,
 	                  const Recti& region,
 	                  Align align) const;
+
+	TextClickTarget* memory_tree_root_;
 };
 
 }  // namespace UI
