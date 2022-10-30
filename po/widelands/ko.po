@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-10-10 04:27+0000\n"
+"POT-Creation-Date: 2022-10-19 04:44+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -1246,7 +1246,7 @@ msgid ""
 msgstr "이 지도는 와이드랜드 아무런 지도 생성기에 의해 자동으로 생성되었습니다."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:621
-#: ../../src/network/gamehost.cc:1631
+#: ../../src/network/gamehost.cc:1627
 #, c-format
 msgid "Computer %u"
 msgstr "컴퓨터 %u"
@@ -2656,13 +2656,13 @@ msgstr "지도 객체를 초기화하고 있음"
 msgid "Checking map"
 msgstr "지도를 검사하고 있음"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
+#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:538
 #: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:750
 msgid "Preparing game…"
 msgstr "놀이를 준비하고 있음…"
 
 #: ../../src/network/gameclient.cc:212
-#: ../../src/network/internet_gaming.cc:112
+#: ../../src/network/internet_gaming.cc:109
 msgid "Could not establish connection to host"
 msgstr "호스트에 연결할 수 없습니다"
 
@@ -2673,41 +2673,41 @@ msgid ""
 " you tried to connect."
 msgstr "와이드랜드가 주어진 주소에 연결할 수 없습니다. 가정된 포트에서 와이드랜드 서버가 실행 중이지 않거나 연결할 때 서버가 종료되었을것입니다."
 
-#: ../../src/network/gameclient.cc:756
+#: ../../src/network/gameclient.cc:753
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u 개의 추가 기능 불일치가 감지됨:\n"
 
-#: ../../src/network/gameclient.cc:758
+#: ../../src/network/gameclient.cc:755
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr "번역확인-> %1$s\n· ‘%2$s’ 호스트에 필요한 것 찾을 수 없습니다"
 
-#: ../../src/network/gameclient.cc:761
+#: ../../src/network/gameclient.cc:758
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n· ‘%2$s’ 에 설치된 버전 %3$s 그러나 호스트는 버전 %4$s 을 사용함"
 
-#: ../../src/network/gameclient.cc:932
+#: ../../src/network/gameclient.cc:929
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me 나의 파일이 md5 체크섬에 실패했습니다."
 
-#: ../../src/network/gameclient.cc:974
+#: ../../src/network/gameclient.cc:971
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me 확보한 파일을 체크했습니다. 비록 md5 체크섬이 성공했을지라도 파일을 다룰 수 없습니다."
 
-#: ../../src/network/gameclient.cc:1281
+#: ../../src/network/gameclient.cc:1278
 msgid "Disconnected"
 msgstr "연결 끊김"
 
-#: ../../src/network/gameclient.cc:1282
+#: ../../src/network/gameclient.cc:1279
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2828,389 +2828,389 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "와이드랜드는 서버를 시작할 수 없습니다.\n아마도 우리 포트에서 다른 프로세스가 서버를 기동하고 있습니다."
 
-#: ../../src/network/gamehost.cc:1880
+#: ../../src/network/gamehost.cc:1876
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
 msgstr[0] "%li 초"
 
-#: ../../src/network/internet_gaming.cc:113
+#: ../../src/network/internet_gaming.cc:110
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr "와이드랜드는 주어진 주소에 연결을 수립할 수 없습니다.\n해당 포트에 운영되는 메타서버가 없거나\n당신의 네트워크 설정이 깨져서입니다."
 
-#: ../../src/network/internet_gaming.cc:176
+#: ../../src/network/internet_gaming.cc:173
 msgid "Users marked with IRC will possibly not react to messages."
 msgstr "IRC로 표시된 사용자는 메시지에 응답하지 않을 수 있습니다."
 
-#: ../../src/network/internet_gaming.cc:214
+#: ../../src/network/internet_gaming.cc:211
 msgid "Successfully reconnected to the metaserver!"
 msgstr "성공적으로 메타서버와 다시 연결되었습니다!"
 
-#: ../../src/network/internet_gaming.cc:337
-#: ../../src/network/network_gaming_messages.cc:126
+#: ../../src/network/internet_gaming.cc:334
+#: ../../src/network/network_gaming_messages.cc:40
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "무언가가 잘못됐음: %s"
 
-#: ../../src/network/internet_gaming.cc:429
+#: ../../src/network/internet_gaming.cc:426
 msgid "Welcome to the Widelands Metaserver!"
 msgstr "와이드랜드 메타서버에 온 것을 환영합니다!"
 
-#: ../../src/network/internet_gaming.cc:433
+#: ../../src/network/internet_gaming.cc:430
 #, c-format
 msgid ""
 "You have been logged in as ‘%s’ since your requested name is already in use "
 "or reserved."
 msgstr "요청한 이름이 이미 사용 중이거나 예약되어 있기 때문에 ‘%s’ 로 로그인했습니다."
 
-#: ../../src/network/internet_gaming.cc:445
+#: ../../src/network/internet_gaming.cc:442
 msgid "Our forums can be found at:"
 msgstr "우리의 게시판은 다음에서 찾을 수 있습니다:"
 
-#: ../../src/network/internet_gaming.cc:447
+#: ../../src/network/internet_gaming.cc:444
 msgid "For reporting bugs, visit:"
 msgstr "버그를 신고하려면 다음 누리집을 방문하십시오:"
 
-#: ../../src/network/internet_gaming.cc:470
+#: ../../src/network/internet_gaming.cc:467
 msgid "Mixed up"
 msgstr "혼성"
 
-#: ../../src/network/internet_gaming.cc:470
+#: ../../src/network/internet_gaming.cc:467
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "메타서버가 연결 도중에 이상한 오류를 전송했습니다"
 
-#: ../../src/network/internet_gaming.cc:484
+#: ../../src/network/internet_gaming.cc:481
 msgid "Unexpected packet"
 msgstr "예상치못한 패킷"
 
-#: ../../src/network/internet_gaming.cc:485
+#: ../../src/network/internet_gaming.cc:482
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr "메타 서버에서 예기치 않은 네트워크 패킷을 받았습니다. 메타 서버가 다른 프로토콜 버전을 사용하고 있을 수 있습니다. 오류가 계속되면 게임을 판올림 해 보십시오."
 
-#: ../../src/network/internet_gaming.cc:495
+#: ../../src/network/internet_gaming.cc:492
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "경고: 비록 우리가 연결된 상태가 아니어도 명령 %s를 수신함."
 
-#: ../../src/network/internet_gaming.cc:503
+#: ../../src/network/internet_gaming.cc:500
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "서버 시간 오프셋은 %d 초입니다."
 
-#: ../../src/network/internet_gaming.cc:517
+#: ../../src/network/internet_gaming.cc:514
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "잘못된 대화 메시지 유형 \"%s\" 입니다."
 
-#: ../../src/network/internet_gaming.cc:517
+#: ../../src/network/internet_gaming.cc:514
 msgid "Invalid message type"
 msgstr "잘못된 메시지 유형"
 
-#: ../../src/network/internet_gaming.cc:557
+#: ../../src/network/internet_gaming.cc:554
 #, c-format
 msgid "The game %s is now available"
 msgstr "게임 %s 는 지금 이용가능함"
 
-#: ../../src/network/internet_gaming.cc:567
+#: ../../src/network/internet_gaming.cc:564
 #, c-format
 msgid "The game %s has been closed"
 msgstr "게임 %s 는 닫혔음"
 
-#: ../../src/network/internet_gaming.cc:606
+#: ../../src/network/internet_gaming.cc:603
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s 가 앞마당에 들어왔음"
 
-#: ../../src/network/internet_gaming.cc:617
+#: ../../src/network/internet_gaming.cc:614
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s 가 앞마당을 떠났음"
 
-#: ../../src/network/internet_gaming.cc:674
+#: ../../src/network/internet_gaming.cc:671
 msgid "Chat message could not be sent."
 msgstr "채팅 메시지가 전송되지 않습니다."
 
-#: ../../src/network/internet_gaming.cc:682
+#: ../../src/network/internet_gaming.cc:679
 msgid "Command could not be executed."
 msgstr "사용자쪽 명령을 실행할 수 없습니다."
 
-#: ../../src/network/internet_gaming.cc:700
+#: ../../src/network/internet_gaming.cc:697
 #, c-format
 msgid "ERROR: %s"
 msgstr "오류: %s"
 
-#: ../../src/network/internet_gaming.cc:703
+#: ../../src/network/internet_gaming.cc:700
 msgid "An unexpected error message has been received about command %1%: %2%"
 msgstr "사용자쪽 명령 %1%:%2%에 대한 예기치 않은 오류 메시지가 수신되었습니다"
 
-#: ../../src/network/internet_gaming.cc:714
+#: ../../src/network/internet_gaming.cc:711
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "메타서버에서 알 수 없는 명령을 수신함: %s"
 
-#: ../../src/network/internet_gaming.cc:867
+#: ../../src/network/internet_gaming.cc:864
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "메시지가 전송되지 않습니다: 메타서버에 연결되지 않았습니다!"
 
-#: ../../src/network/internet_gaming.cc:887
-#: ../../src/network/internet_gaming.cc:895
+#: ../../src/network/internet_gaming.cc:884
+#: ../../src/network/internet_gaming.cc:892
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "메시지가 전송되지 않습니다. 개인 메시지인가요?"
 
-#: ../../src/network/internet_gaming.cc:910
+#: ../../src/network/internet_gaming.cc:907
 msgid "Supported admin commands:"
 msgstr "지원되는 관리 사용자쪽 명령:"
 
-#: ../../src/network/internet_gaming.cc:911
+#: ../../src/network/internet_gaming.cc:908
 msgid "/motd <msg> - Set a permanent greeting message"
 msgstr "/motd <msg> - 영구적인 인사말을 설정"
 
-#: ../../src/network/internet_gaming.cc:912
+#: ../../src/network/internet_gaming.cc:909
 msgid "/announce <msg> - Send a one time system message"
 msgstr "/announce <msg> - 한번 시스템 메시지 보냄"
 
-#: ../../src/network/internet_gaming.cc:915
+#: ../../src/network/internet_gaming.cc:912
 msgid "/warn <user> <msg> - Send a private system message to the given user"
 msgstr "/warn <user> <msg> - 지정된 사용자에게 개인 시스템 메시지를 보냄"
 
-#: ../../src/network/internet_gaming.cc:918
+#: ../../src/network/internet_gaming.cc:915
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
 msgstr "/kick <user|game> - 메타 서버에서 지정된 사용자나 놀이를 제거함"
 
-#: ../../src/network/internet_gaming.cc:920
+#: ../../src/network/internet_gaming.cc:917
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
 msgstr "/ban <user> - 메타 서버에서 24시간 동안 사용자를 접근금지함"
 
-#: ../../src/network/internet_gaming.cc:999
+#: ../../src/network/internet_gaming.cc:996
 msgid "Conversion error"
 msgstr "전환 오류"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:1002
+#: ../../src/network/internet_gaming.cc:999
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "\"%s\"의 참값을 얻지 못함"
 
-#: ../../src/network/internet_gaming.cc:1026
+#: ../../src/network/internet_gaming.cc:1023
 msgctxt "chat_sender"
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../../src/network/internet_gaming_messages.cc:43
+#: ../../src/network/internet_gaming_messages.cc:28
 msgid "There is no user with this name logged in."
 msgstr "이 이름의 사용자는 로그인하지 않았습니다."
 
-#: ../../src/network/internet_gaming_messages.cc:44
+#: ../../src/network/internet_gaming_messages.cc:29
 msgid "The game no longer exists, maybe it has just been closed."
 msgstr "게임이 더 이상 존재하지 않습니다. 아마도 방금 닫아진것 같습니다."
 
-#: ../../src/network/internet_gaming_messages.cc:45
+#: ../../src/network/internet_gaming_messages.cc:30
 msgid "Wrong password, please try again."
 msgstr "암호가 틀렸습니다. 다시 시도하십시오."
 
-#: ../../src/network/internet_gaming_messages.cc:46
+#: ../../src/network/internet_gaming_messages.cc:31
 msgid "You have been temporarily banned from online gaming."
 msgstr "통신 놀이가 일시적으로 접근 금지되었습니다."
 
-#: ../../src/network/internet_gaming_messages.cc:47
+#: ../../src/network/internet_gaming_messages.cc:32
 msgid "The protocol version you are using is not supported!"
 msgstr "사용하는 프로토콜 버전이 지원되지 않습니다!"
 
-#: ../../src/network/internet_gaming_messages.cc:48
+#: ../../src/network/internet_gaming_messages.cc:33
 msgid "You are already logged in!"
 msgstr "이미 로그인되어 있습니다!"
 
-#: ../../src/network/internet_gaming_messages.cc:50
+#: ../../src/network/internet_gaming_messages.cc:36
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr "슈퍼유저 권한 없이 슈퍼유저 명령을 전송해서 연결이 해제되었습니다. 이 사건은 관리자에게 연결되어 전송될 예정입니다."
 
-#: ../../src/network/internet_gaming_messages.cc:53
+#: ../../src/network/internet_gaming_messages.cc:40
 msgid "Connection was closed by the client normally."
 msgstr "연결이 일반적으로 클라이언트에 의해 종료되었습니다."
 
-#: ../../src/network/internet_gaming_messages.cc:54
+#: ../../src/network/internet_gaming_messages.cc:41
 msgid "The connection to the metaserver was lost."
 msgstr "메타서버 연결이 끊어졌습니다."
 
-#: ../../src/network/internet_gaming_messages.cc:55
+#: ../../src/network/internet_gaming_messages.cc:42
 msgid "Metaserver did not answer"
 msgstr "메타서버가 응답하지 않습니다"
 
-#: ../../src/network/internet_gaming_messages.cc:57
+#: ../../src/network/internet_gaming_messages.cc:45
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr "시간 내에 핑 요청에 응답하지 않아서 메타서버로부터 연결이 끊어졌습니다."
 
-#: ../../src/network/network_gaming_messages.cc:116
+#: ../../src/network/network_gaming_messages.cc:30
 msgid "Client has left the game."
 msgstr "클라이언트가 게임을 떠났습니다."
 
-#: ../../src/network/network_gaming_messages.cc:117
+#: ../../src/network/network_gaming_messages.cc:31
 msgid "Client crashed and performed an emergency save."
 msgstr "클라이언트가 충돌했고 비상 세이브를 실행했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:118
+#: ../../src/network/network_gaming_messages.cc:32
 msgid "Connection was lost."
 msgstr "연결이 끊어졌습니다."
 
-#: ../../src/network/network_gaming_messages.cc:119
+#: ../../src/network/network_gaming_messages.cc:33
 msgid "Server has left the game."
 msgstr "서버가 게임을 떠났습니다."
 
-#: ../../src/network/network_gaming_messages.cc:121
+#: ../../src/network/network_gaming_messages.cc:35
 msgid "The game has started just after you tried to connect."
 msgstr "당신이 연결을 시도한 직후에 게임이 시작했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:122
+#: ../../src/network/network_gaming_messages.cc:36
 msgid "Server has crashed and performed an emergency save."
 msgstr "서버가 충돌했고 비상 세이브를 실행했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:123
+#: ../../src/network/network_gaming_messages.cc:37
 msgid "Client and host have become desynchronized."
 msgstr "클라이언트와 호스트가 비동기화했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:124
+#: ../../src/network/network_gaming_messages.cc:38
 #, c-format
 msgid "Kicked by the host: %s"
 msgstr "호스트에서 쫓겨남: %s"
 
-#: ../../src/network/network_gaming_messages.cc:125
+#: ../../src/network/network_gaming_messages.cc:39
 #, c-format
 msgid "Client sent malformed commands: %s"
 msgstr "클라이언트가 잘못된 명령을 송신했습니다: %s"
 
-#: ../../src/network/network_gaming_messages.cc:127
+#: ../../src/network/network_gaming_messages.cc:41
 #, c-format
 msgid "%1$s has left the game (%2$s)"
 msgstr "%1$s 가 게임을 떠났습니다 (%2$s)"
 
-#: ../../src/network/network_gaming_messages.cc:128
+#: ../../src/network/network_gaming_messages.cc:42
 #, c-format
 msgid "%1$s has been replaced with %2$s"
 msgstr "%1$s 이(가) %2$s (으)로 바뀝니다"
 
-#: ../../src/network/network_gaming_messages.cc:129
+#: ../../src/network/network_gaming_messages.cc:43
 #, c-format
 msgid "Unknown user has left the game (%s)"
 msgstr "알 수 없는 유저가 게임을 떠났습니다 (%s)"
 
-#: ../../src/network/network_gaming_messages.cc:131
+#: ../../src/network/network_gaming_messages.cc:45
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "운영되는 게임이 없음에도 서버가 SYNCREQUEST를 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:132
+#: ../../src/network/network_gaming_messages.cc:46
 msgid "Received a PLAYERCOMMAND even though no game is running."
 msgstr "운영되는 게임이 없음에도 PLAYERCOMMAND를 수신했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:133
+#: ../../src/network/network_gaming_messages.cc:47
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "기대치 않게 서버로부터 LAUNCH 커맨드를 수신했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:135
+#: ../../src/network/network_gaming_messages.cc:49
 msgid "Server sent a player update for a player that does not exist."
 msgstr "서버가 존재하지 않는 선수의 갱신 내용을 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:137
+#: ../../src/network/network_gaming_messages.cc:51
 msgid "Server sent a user update for a user that does not exist."
 msgstr "서버가 존재하지 않는 유저의 갱신 내용을 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:138
+#: ../../src/network/network_gaming_messages.cc:52
 msgid "Server uses a different protocol version"
 msgstr "서버가 다른 프로토콜 버전을 사용합니다"
 
-#: ../../src/network/network_gaming_messages.cc:139
+#: ../../src/network/network_gaming_messages.cc:54
 #, c-format
 msgid "Received command number %s, which is not allowed in this state."
 msgstr "지금 상태에서 허용되지 않는 명령 숫자 %s 를 수신했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:142
+#: ../../src/network/network_gaming_messages.cc:56
 msgid "Client reports time to host that is running backwards."
 msgstr "클라이언트가 호스트에게 이전에 운영된 시간을 보고합니다."
 
-#: ../../src/network/network_gaming_messages.cc:144
+#: ../../src/network/network_gaming_messages.cc:58
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "클라이언트가 호스트에게 허용된 게임 시간을 초과한 것을 지적합니다."
 
-#: ../../src/network/network_gaming_messages.cc:145
+#: ../../src/network/network_gaming_messages.cc:59
 msgid "Client did not submit sync report in time."
 msgstr "클라이언트가 제 시간에 동기화 보고서를 제출하지 않았습니다."
 
-#: ../../src/network/network_gaming_messages.cc:146
+#: ../../src/network/network_gaming_messages.cc:60
 msgid "The game has already started."
 msgstr "게임이 이미 시작되었습니다."
 
-#: ../../src/network/network_gaming_messages.cc:147
+#: ../../src/network/network_gaming_messages.cc:61
 msgid "Client has no access to other player’s settings."
 msgstr "클라이언트는 다른 선수의 세팅에 대한 권한이 없습니다."
 
-#: ../../src/network/network_gaming_messages.cc:148
+#: ../../src/network/network_gaming_messages.cc:62
 msgid "Client has no access to server settings."
 msgstr "클라이언트는 서버 설정에 대한 권한이 없습니다."
 
-#: ../../src/network/network_gaming_messages.cc:150
+#: ../../src/network/network_gaming_messages.cc:64
 msgid "Client sent TIME command even though game is not running."
 msgstr "게임이 운영되지 않음에도 클라이언트가 TIME 커맨드를 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:151
+#: ../../src/network/network_gaming_messages.cc:65
 msgid "Client sent a PLAYERCOMMAND for another player."
 msgstr "클라이언트가 다른 선수에게 PLAYERCOMMAND를 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:152
+#: ../../src/network/network_gaming_messages.cc:66
 msgid "Client sent unexpected synchronization report."
 msgstr "클라이언트가 예상치 못한 동기화 보고서를 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:154
+#: ../../src/network/network_gaming_messages.cc:68
 msgid "Client requests file although none is available to send."
 msgstr "클라이언트가 아무도 전송이 불가능한 파일을 요청합니다."
 
-#: ../../src/network/network_gaming_messages.cc:155
+#: ../../src/network/network_gaming_messages.cc:69
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "호스트가 %s 선수를 앞마당으로 보냈습니다!"
 
-#: ../../src/network/network_gaming_messages.cc:157
+#: ../../src/network/network_gaming_messages.cc:71
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
 msgstr "경고: %1$s 가 사용하는 버전: %2$s, 호스트가 사용하는 버전: %3$s"
 
-#: ../../src/network/network_gaming_messages.cc:158
+#: ../../src/network/network_gaming_messages.cc:72
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s 가 게임에 참여했습니다"
 
-#: ../../src/network/network_gaming_messages.cc:159
+#: ../../src/network/network_gaming_messages.cc:73
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
 msgstr "%1$s 가 %2$s 에게 파일을 전송하기 시작했습니다!"
 
-#: ../../src/network/network_gaming_messages.cc:160
+#: ../../src/network/network_gaming_messages.cc:74
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
 msgstr "%1$s 가 %2$s 에게 파일 전송을 완료했습니다"
 
-#: ../../src/network/network_gaming_messages.cc:161
+#: ../../src/network/network_gaming_messages.cc:75
 #, c-format
 msgid "The player ‘%s’ was defeated and became a spectator."
 msgstr "선수 ‘%s’ 가 패배했고 관전자가 되었습니다."
 
-#: ../../src/network/network_gaming_messages.cc:162
+#: ../../src/network/network_gaming_messages.cc:76
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
 msgstr "클라이언트 %1$s 는 %2$s 이상으로 대응하지 못합니다."
 
-#: ../../src/network/network_gaming_messages.cc:163
+#: ../../src/network/network_gaming_messages.cc:77
 #, c-format
 msgid "Client %s is cheating!"
 msgstr "클라이언트 %s 이(가) 치트를 쓰고 있습니다!"
@@ -8594,7 +8594,7 @@ msgid "(coming)"
 msgstr "(오는 중)"
 
 #: ../../src/wui/productionsitewindow.cc:246
-#: ../../src/wui/productionsitewindow.cc:308
+#: ../../src/wui/productionsitewindow.cc:310
 msgid "(vacant)"
 msgstr "(공석)"
 

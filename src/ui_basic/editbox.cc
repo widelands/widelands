@@ -473,13 +473,13 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				}
 			}
 			return true;
-
 		default:
 			break;
 		}
+		return true;
 	}
 
-	return false;
+	return Panel::handle_key(down, code);
 }
 void EditBox::copy_selected_text() {
 	uint32_t start;
