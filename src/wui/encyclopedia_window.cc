@@ -48,13 +48,14 @@ EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent,
                                        LuaInterface* const lua)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
+     parent_(parent),
      lua_(lua),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
 }
 
 static const std::string kTabNamePrefix = "encyclopedia_";
 
-void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable> table) {
+void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
 	const int contents_width = WINDOW_WIDTH / 2.f - 1.5f * kPadding;
@@ -125,7 +126,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 				}
 
 				EncyclopediaEntry entry(
-				   entry_script,
+				   entry_name, entry_script,
 				   entry_table->get_table("script_parameters")->array_entries<std::string>());
 
 				if (entry_icon.empty()) {
@@ -139,10 +140,10 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			}
 		}
 	} catch (WException& err) {
-		log_err_time(parent.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
+		log_err_time(parent_.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
 		             err.what());
-		UI::WLMessageBox wmb(&parent, UI::WindowStyle::kWui, _("Error!"),
-		                     format("Error loading script for encyclopedia:\n%s", err.what()),
+		UI::WLMessageBox wmb(&parent_, UI::WindowStyle::kWui, _("Error!"),
+		                     format_l(_("Error loading script for encyclopedia:\n%s"), err.what()),
 		                     UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}
@@ -178,6 +179,57 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 		contents_.at(tab_name)->set_text(err.what());
 	}
 	contents_.at(tab_name)->scroll_to_top();
+}
+
+void EncyclopediaWindow::handle_hyperlink(const std::string& action) {
+	auto try_select_as = [this, action](std::string tab) {
+		if (lists_.count(tab) == 0) {
+			return false;
+		}
+
+		auto& list = *lists_.at(tab);
+		for (size_t i = 0; i < list.size(); ++i) {
+			if (list[i].name == action) {
+				tabs_.activate(kTabNamePrefix + tab);
+				list.select(i);
+				return true;
+			}
+		}
+
+		return false;
+	};
+
+	if (parent_.egbase().descriptions().ware_exists(action) && try_select_as("wares")) {
+		return;
+	}
+	if (parent_.egbase().descriptions().building_exists(action) && try_select_as("buildings")) {
+		return;
+	}
+	if (parent_.egbase().descriptions().worker_exists(action) && try_select_as("workers")) {
+		return;
+	}
+
+	if (parent_.egbase().descriptions().terrain_exists(action) && try_select_as("terrains")) {
+		return;
+	}
+	if (try_select_as("trees") /* Trees are indexed by species, so no existence check. */) {
+		return;
+	}
+
+	if (parent_.egbase().descriptions().immovable_exists(action)) {
+		if (try_select_as("immovables_tribe")) {
+			return;
+		}
+		if (try_select_as("immovables_world")) {
+			return;
+		}
+	}
+
+	log_err_time(parent_.egbase().get_gametime(), "Encyclopedia: Invalid hyperlink target '%s'",
+	             action.c_str());
+	UI::WLMessageBox m(&parent_, UI::WindowStyle::kWui, _("Broken Link"),
+	                   _("This hyperlink seems to be broken."), UI::WLMessageBox::MBoxType::kOk);
+	m.run<UI::Panel::Returncodes>();
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;

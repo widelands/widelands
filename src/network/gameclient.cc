@@ -174,7 +174,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	game->run(settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
 	          settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
                                  Widelands::Game::StartGameType::kMap,
-	          "", false, format("netclient_%d", static_cast<int>(settings.usernum)));
+	          "", format("netclient_%d", static_cast<int>(settings.usernum)));
 
 	// if this is an internet game, tell the metaserver that the game is done.
 	if (internet_) {

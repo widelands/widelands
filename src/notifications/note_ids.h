@@ -48,8 +48,9 @@ enum class NoteId : uint32_t {
 	ThreadSafeFunction,
 	ThreadSafeFunctionHandled,
 	Panel,
-	PlayerDetailsEvent,
-	kQuicknavChangedEvent,
+	QuicknavChangedEvent,
+	Hyperlink,
+	PlayerDetailsEvent
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

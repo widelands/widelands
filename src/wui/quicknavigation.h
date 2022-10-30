@@ -31,7 +31,7 @@ class InteractiveBase;
 constexpr uint16_t kQuicknavSlots = 9;
 
 struct NoteQuicknavChangedEvent {
-	CAN_BE_SENT_AS_NOTE(NoteId::kQuicknavChangedEvent)
+	CAN_BE_SENT_AS_NOTE(NoteId::QuicknavChangedEvent)
 };
 
 /** Provide quick navigation shortcuts and landmarks. */
