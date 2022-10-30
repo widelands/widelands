@@ -492,6 +492,9 @@ void EditBox::copy_selected_text() {
 }
 
 bool EditBox::handle_textinput(const std::string& input_text) {
+	if (m_->mode == EditBoxImpl::Mode::kSelection) {
+		delete_selected_text();
+	}
 	if ((m_->text.size() + input_text.length()) < m_->maxLength) {
 		m_->text.insert(m_->caret, input_text);
 		m_->caret += input_text.length();
@@ -623,7 +626,7 @@ void EditBox::draw_caret(RenderTarget& dst, const Vector2i& point, const uint16_
 
 	const Image* caret_image =
 	   g_image_cache->get(panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
-                                                            "images/ui_basic/caret_fs.png");
+	                                                         "images/ui_basic/caret_fs.png");
 	Vector2i caretpt = Vector2i::zero();
 	caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 	caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
