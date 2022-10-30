@@ -421,7 +421,8 @@ private:
 	// For measuring actual game speed and how smoothly the game logic runs
 	uint32_t last_frame_realtime_, previous_frame_realtime_;
 	Time last_frame_gametime_, previous_frame_gametime_;
-	uint32_t avg_actual_gamespeed_;  // in microseconds
+	uint32_t avg_actual_gamespeed_;  // in microseconds gametime per second realtime
+	uint32_t last_target_gamespeed_;
 
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
