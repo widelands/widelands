@@ -540,10 +540,10 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 	// Display the gamespeed.
 	if (game_controller != nullptr) {
 		std::string game_speed;
-		const int32_t computed_target = game_controller->real_speed();
-		const int32_t desired = game_controller->desired_speed();
-		int32_t actual = average_real_gamespeed();
-		constexpr int32_t kFluctuationTolerance = 1000;  // Arbitrary value.
+		const int64_t computed_target = game_controller->real_speed();
+		const int64_t desired = game_controller->desired_speed();
+		int64_t actual = average_real_gamespeed();
+		constexpr int64_t kFluctuationTolerance = 1000;  // Arbitrary value.
 		if (abs(actual - computed_target) < kFluctuationTolerance) {
 			actual = computed_target;  // Ignore minor fluctuations.
 		}

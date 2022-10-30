@@ -18,6 +18,7 @@
 
 #include "wui/interactive_base.h"
 
+#include <cstdlib>
 #include <memory>
 
 #include <SDL_timer.h>
@@ -151,6 +152,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
      previous_frame_gametime_(0),
      avg_actual_gamespeed_(0),
      last_target_gamespeed_(0),
+     gamespeed_last_change_time_(0),
      road_building_mode_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()),
      cheat_mode_enabled_(false),
@@ -718,21 +720,37 @@ void InteractiveBase::info_panel_fast_forward_message_queue() {
 // controller's and the AI's `think()` functions) are called.
 // Also updates the stats about the logic FPS and real gamespeed.
 void InteractiveBase::game_logic_think() {
+	static constexpr uint64_t kFilterTime = 1000;  // milliseconds for averaging
+
 	previous_frame_realtime_ = last_frame_realtime_;
 	previous_frame_gametime_ = last_frame_gametime_;
 	last_frame_realtime_ = SDL_GetTicks();
 	last_frame_gametime_ = egbase().get_gametime();
 
+	const uint64_t realtime_step = std::max(last_frame_realtime_ - previous_frame_realtime_, 1LU);
+
 	double cur_speed = 1000.0 * (last_frame_gametime_ - previous_frame_gametime_).get();
-	cur_speed /= std::max(last_frame_realtime_ - previous_frame_realtime_, 1u);
-	avg_actual_gamespeed_ = ((avg_actual_gamespeed_ * 15) + (cur_speed * 1000)) / 16;
+	cur_speed /= realtime_step;
+
+	uint64_t prev_avg_weight;
+
+	if (realtime_step > kFilterTime) {
+		// No need for filtering when updates are slow
+		prev_avg_weight = 0;
+	} else if (last_frame_realtime_ - gamespeed_last_change_time_ < kFilterTime) {
+		// Allow faster convergence after changing speed
+		prev_avg_weight = abs(avg_actual_gamespeed_ - cur_speed) > abs(last_target_gamespeed_ - cur_speed) ? 0 : 1;
+	} else {
+		prev_avg_weight = kFilterTime / realtime_step;
+	}
+
+	avg_actual_gamespeed_ = ((avg_actual_gamespeed_ * prev_avg_weight) + (cur_speed * 1000)) / (prev_avg_weight + 1);
 
 	if (egbase().is_game()) {
-		const uint32_t new_target = game().game_controller()->real_speed();
+		const uint64_t new_target = game().game_controller()->real_speed();
 		if (last_target_gamespeed_ != new_target) {
-			/* Prevent incorrect delays after changing speed. */
-			avg_actual_gamespeed_ = new_target * 1000;
 			last_target_gamespeed_ = new_target;
+			gamespeed_last_change_time_ = last_frame_realtime_;
 		}
 	}
 
@@ -755,7 +773,7 @@ double InteractiveBase::average_fps() const {
 	return 1000.0 * 1000.0 / avg_usframetime_;
 }
 
-uint32_t InteractiveBase::average_real_gamespeed() const {
+uint64_t InteractiveBase::average_real_gamespeed() const {
 	return avg_actual_gamespeed_ / 1000;
 }
 
