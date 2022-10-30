@@ -49,7 +49,7 @@ function ware_help_producers_string(tribe, ware_description)
       if (tribe:has_building(building.name)) then
          -- TRANSLATORS: Ware Encyclopedia: A building producing a ware
          result = result .. h2(_("Producer"))
-         result = result .. dependencies({building, ware_description}, building.descname)
+         result = result .. dependencies({building, ware_description}, linkify_encyclopedia_object(building))
          producing_programs, produced_wares_counters, produced_wares_strings = programs_wares_count(tribe, building, ware_description)
          -- Now collect the consumed wares for each filtered program and print the program info
          for j, program_name in ipairs(producing_programs) do
@@ -89,7 +89,7 @@ function ware_help_consumers_string(tribe, ware_description)
 
    for i, building in ipairs(ware_description:consumers(tribe.name)) do
       if (tribe:has_building(building.name)) then
-         consumers_string = consumers_string .. dependencies({ware_description, building}, building.descname)
+         consumers_string = consumers_string .. dependencies({ware_description, building}, linkify_encyclopedia_object(building))
          consumers_amount = consumers_amount + 1
       end
    end
@@ -98,7 +98,7 @@ function ware_help_consumers_string(tribe, ware_description)
    if (ware_description:is_construction_material(tribe.name)) then
       local constructionsite_description = wl.Game():get_building_description("constructionsite")
       consumers_string = consumers_string
-         .. dependencies({ware_description, constructionsite_description}, constructionsite_description.descname)
+         .. dependencies({ware_description, constructionsite_description}, linkify_encyclopedia_object(constructionsite_description))
       consumers_amount = consumers_amount + 1
    end
 
@@ -114,7 +114,7 @@ function ware_help_consumers_string(tribe, ware_description)
          end
       end
       if(add_this_worker) then
-         workers_string = workers_string .. image_line(worker.icon_name, 1, p(worker.descname))
+         workers_string = workers_string .. image_line(worker.icon_name, 1, p(linkify_encyclopedia_object(worker)))
       end
    end
 

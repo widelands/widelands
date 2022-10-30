@@ -25,7 +25,7 @@ tips = {
    },
    {
       -- TRANSLATORS: %s = URL to the Widelands website
-      text = (_("Any further questions? Our FAQ, the wiki and of course our community forums can be found online at %s.")):bformat(u("widelands.org")),
+      text = (_("Any further questions? Our FAQ, the wiki and of course our community forums can be found online at %s.")):bformat(a("widelands.org", "url", "https://www.widelands.org")),
       seconds = 6
    },
    {

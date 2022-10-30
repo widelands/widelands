@@ -155,6 +155,13 @@ std::string as_message(const std::string& heading, const std::string& body) {
 	          g_style_manager->font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(body)))));
 }
 
+std::string
+as_url_hyperlink(const std::string& url, const std::string& text, const std::string& mouseover) {
+	return format(
+	   "<link type=url target=%1$s mouseover=\"%2$s\"><font underline=1>%3$s</font></link>", url,
+	   mouseover, text);
+}
+
 std::shared_ptr<const UI::RenderedText>
 autofit_text(const std::string& text, const UI::FontStyleInfo& font_info, int width) {
 	std::shared_ptr<const UI::RenderedText> rendered_text =

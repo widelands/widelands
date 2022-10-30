@@ -24,7 +24,7 @@
 namespace Widelands {
 
 struct NotePinnedNoteMoved {
-	CAN_BE_SENT_AS_NOTE(NoteId::kPinnedNoteMoved)
+	CAN_BE_SENT_AS_NOTE(NoteId::PinnedNoteMoved)
 
 	PlayerNumber player;
 	FCoords old_pos;
