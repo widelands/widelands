@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_WUI_ADDONS_LOGIN_BOX_H
-#define WL_WUI_ADDONS_LOGIN_BOX_H
+#ifndef WL_UI_FSMENU_ADDONS_LOGIN_BOX_H
+#define WL_UI_FSMENU_ADDONS_LOGIN_BOX_H
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -49,4 +49,4 @@ private:
 
 }  // namespace AddOnsUI
 
-#endif  // end of include guard: WL_WUI_ADDONS_LOGIN_BOX_H
+#endif  // end of include guard: WL_UI_FSMENU_ADDONS_LOGIN_BOX_H

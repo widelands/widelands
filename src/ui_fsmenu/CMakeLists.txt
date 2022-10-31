@@ -1,23 +1,9 @@
+add_subdirectory(addons)
+
 wl_library(ui_fsmenu
   SRCS
     about.cc
     about.h
-    addons/contact.cc
-    addons/contact.h
-    addons/manager.cc
-    addons/manager.h
-    addons/packager.cc
-    addons/packager.h
-    addons/packager_box.cc
-    addons/packager_box.h
-    addons/progress.cc
-    addons/progress.h
-    addons/remote_interaction.cc
-    addons/remote_interaction.h
-    addons/rows_ui.cc
-    addons/rows_ui.h
-    addons/screenshot_upload.cc
-    addons/screenshot_upload.h
     campaigndetails.cc
     campaigndetails.h
     campaigns.cc
@@ -88,7 +74,6 @@ wl_library(ui_fsmenu
     graphic_text
     graphic_text_layout
     io_filesystem
-    io_filesystem_illegal_filename_check
     io_profile
     logic
     logic_addons
@@ -108,10 +93,10 @@ wl_library(ui_fsmenu
     ui_basic
     sound
     third_party_sha1
+    ui_addons
     widelands_ball_of_mud
     widelands_options
     wui
-    wui_addons
     wui_chat_ui
     wui_common_mapdetails
     wui_common_gamedetails

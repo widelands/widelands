@@ -73,9 +73,10 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+#include "ui_fsmenu/addons/login_box.h"
+#include "ui_fsmenu/addons/progress.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
-#include "wui/addons_login_box.h"
 #include "wui/interactive_base.h"
 #include "wui/toolbar.h"
 
@@ -1339,7 +1340,7 @@ void EditorInteractive::publish_map() {
 	}
 
 	/* Ask for confirmation. */
-	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+	if ((SDL_GetModState() & KMOD_CTRL) == 0) {
 		UI::WLMessageBox w(this, UI::WindowStyle::kWui, _("Publish Map"),
 			format(
 				_("Are you certain that you want to publish this map online?\n\n"
@@ -1375,7 +1376,8 @@ void EditorInteractive::publish_map() {
 		return;
 	}
 
-	// NOCOM show progress...
+	AddOnsUI::ProgressIndicatorWindow progress(this, UI::WindowStyle::kWui, _("Uploading Add-On…"));
+	progress.set_message_1(_("Saving map…"));
 
 	/* Save the map to a temp file. */
 	const std::string temp_file = kTempFileDir + FileSystem::file_separator() + sanitized_name + kTempFileExtension;
@@ -1388,8 +1390,8 @@ void EditorInteractive::publish_map() {
 	   temp_file, FileSystem::ZIP);
 	GenericSaveHandler::Error error = gsh.save();
 
-	if (error != GenericSaveHandler::Error::kSuccess &&
-	    error != GenericSaveHandler::Error::kDeletingBackupFailed) {
+	if (error != GenericSaveHandler::Error::kSuccess && error != GenericSaveHandler::Error::kDeletingBackupFailed) {
+	    progress.set_visible(false);
 		std::string msg = gsh.localized_formatted_result_message();
 		UI::WLMessageBox mbox(
 		   this, UI::WindowStyle::kWui, _("Error Saving Map!"), msg, UI::WLMessageBox::MBoxType::kOk);
@@ -1398,6 +1400,7 @@ void EditorInteractive::publish_map() {
     }
 
 	/* Create the add-on directory, overwriting a previous add-on installation. */
+	progress.set_message_1(_("Packaging add-on…"));
 	const std::string addon_name = sanitized_name + kAddOnExtension;
 	const std::string addon_dir = kAddOnDir + FileSystem::file_separator() + addon_name;
 	const std::string map_dir = addon_dir + FileSystem::file_separator() + kDownloadedMapsDir;
@@ -1435,6 +1438,7 @@ void EditorInteractive::publish_map() {
 	AddOns::MapsAddon mutable_addon(info);
 	mutable_addon.set_callbacks(fnm, fnm);
 	if (!mutable_addon.write_to_disk()) {
+	    progress.set_visible(false);
 		UI::WLMessageBox mbox(
 		   this, UI::WindowStyle::kWui, _("Add-On Generation Error"), _("The add-on could not be written to the disk."), UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
@@ -1442,9 +1446,11 @@ void EditorInteractive::publish_map() {
 	}
 
 	/* Upload to the server. */
+	progress.set_message_1(_("Uploading…"));
 	try {
 		net.upload_addon(addon_name, fnn, fnn);
 	} catch (const std::exception& e) {
+	    progress.set_visible(false);
 		UI::WLMessageBox mbox(
 		   this, UI::WindowStyle::kWui, _("Upload Error"), e.what(), UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
@@ -1452,6 +1458,7 @@ void EditorInteractive::publish_map() {
 	}
 
 	/* Finally, reload the local add-on. */
+	progress.set_message_1("");
 	{
 		bool found = false;
 		for (auto& pair : AddOns::g_addons) {
@@ -1466,6 +1473,7 @@ void EditorInteractive::publish_map() {
 		}
 	}
 
+    progress.set_visible(false);
 	UI::WLMessageBox mbox(
 	   this, UI::WindowStyle::kWui, _("Success"), _("The add-on was uploaded successfully."), UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();

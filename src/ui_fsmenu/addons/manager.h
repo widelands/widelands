@@ -36,7 +36,6 @@
 #include "ui_basic/window.h"
 #include "ui_fsmenu/main.h"
 
-namespace FsMenu {
 namespace AddOnsUI {
 
 class RemoteAddOnRow;
@@ -62,7 +61,7 @@ private:
 
 class AddOnsCtrl : public UI::UniqueWindow {
 public:
-	AddOnsCtrl(MainMenu&, UI::UniqueWindow::Registry&);
+	AddOnsCtrl(FsMenu::MainMenu&, UI::UniqueWindow::Registry&);
 	~AddOnsCtrl() override;
 
 	void rebuild(bool need_to_update_dependency_errors);
@@ -108,7 +107,7 @@ private:
 		kNewest
 	};
 
-	MainMenu& fsmm_;
+	FsMenu::MainMenu& fsmm_;
 	UI::Box main_box_, buttons_box_;
 	UI::MultilineTextarea warn_requirements_;
 	UI::Panel tabs_placeholder_;
@@ -148,6 +147,5 @@ private:
 };
 
 }  // namespace AddOnsUI
-}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_MANAGER_H

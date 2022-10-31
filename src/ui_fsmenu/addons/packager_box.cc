@@ -30,7 +30,6 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/main.h"
 
-namespace FsMenu {
 namespace AddOnsUI {
 
 constexpr int16_t kButtonSize = 32;
@@ -124,13 +123,13 @@ void make_valid_addon_filename(std::string& name,
 	assert(FileSystemHelper::is_legal_filename(name));
 }
 
-AddOnsPackagerBox::AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent, uint32_t orientation)
+AddOnsPackagerBox::AddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent, uint32_t orientation)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, orientation),
      header_align_(0),
      main_menu_(mainmenu) {
 }
 
-MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
+MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent)
    : AddOnsPackagerBox(mainmenu, parent, UI::Box::Horizontal),
      box_dirstruct_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      last_category_(AddOns::AddOnCategory::kNone),
@@ -217,7 +216,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
 	add_space(kSpacing);
 	add(&box_maps_list_, UI::Box::Resizing::kExpandBoth);
 
-	MainMenu::find_maps("maps/My_Maps", maps_list_);
+	FsMenu::MainMenu::find_maps("maps/My_Maps", maps_list_);
 
 	my_maps_.selected.connect(
 	   [this](uint32_t /* value */) { map_add_.set_enabled(dirstruct_.selection_index() > 0); });
@@ -259,7 +258,7 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 	if (a->get_category() != last_category_) {
 		last_category_ = a->get_category();
 		my_maps_.clear();
-		for (const MainMenu::MapEntry& entry : maps_list_) {
+		for (const FsMenu::MainMenu::MapEntry& entry : maps_list_) {
 			if (entry.first.maptype == MapData::MapType::kNormal &&
 			    last_category_ == AddOns::AddOnCategory::kCampaign) {
 				// Only include scenarios for campaigns
@@ -451,7 +450,7 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 	rebuild_dirstruct(selected_, select);
 }
 
-CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
+CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent)
    : AddOnsPackagerBox(mainmenu, parent, UI::Box::Vertical),
      maps_box_(mainmenu, this),
      difficulty_hbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
@@ -599,4 +598,3 @@ void CampaignAddOnsPackagerBox::layout() {
 }
 
 }  // namespace AddOnsUI
-}  // namespace FsMenu

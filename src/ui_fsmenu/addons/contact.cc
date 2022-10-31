@@ -22,7 +22,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/addons/manager.h"
 
-namespace FsMenu {
 namespace AddOnsUI {
 
 ContactForm::ContactForm(AddOnsCtrl& ctrl)
@@ -112,4 +111,3 @@ bool ContactForm::check_ok_button_enabled() {
 }
 
 }  // namespace AddOnsUI
-}  // namespace FsMenu

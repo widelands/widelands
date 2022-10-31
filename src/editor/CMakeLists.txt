@@ -131,9 +131,9 @@ wl_library(editor
     scripting_lua_interface
     scripting_lua_table
     sound
+    ui_addons
     ui_basic
     widelands_options
     wui
-    wui_addons
     wui_common_mapdetails
 )

@@ -16,7 +16,7 @@
  *
  */
 
-#include "wui/addons_login_box.h"
+#include "ui_fsmenu/addons/login_box.h"
 
 #include "base/string.h"
 #include "graphic/style_manager.h"

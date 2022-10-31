@@ -20,12 +20,11 @@
 
 #include "ui_fsmenu/addons/manager.h"
 
-namespace FsMenu {
 namespace AddOnsUI {
 
-ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::string& title)
+ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, UI::WindowStyle style, const std::string& title)
    : UI::Window(parent,
-                UI::WindowStyle::kFsMenu,
+                style,
                 "progress",
                 0,
                 0,
@@ -33,25 +32,25 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::s
                 2 * kRowButtonSize,
                 title),
      modal_(*this),
-     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, get_inner_w()),
-     hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     box_(this, panel_style_, 0, 0, UI::Box::Vertical, get_inner_w()),
+     hbox_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
      txt1_(&box_,
-           UI::PanelStyle::kFsMenu,
-           UI::FontStyle::kFsMenuInfoPanelHeading,
+           panel_style_,
+           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph : UI::FontStyle::kWuiInfoPanelParagraph,
            "",
            UI::Align::kCenter),
      txt2_(&hbox_,
-           UI::PanelStyle::kFsMenu,
-           UI::FontStyle::kFsMenuInfoPanelParagraph,
+           panel_style_,
+           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph : UI::FontStyle::kWuiInfoPanelParagraph,
            "",
            UI::Align::kLeft),
      txt3_(&hbox_,
-           UI::PanelStyle::kFsMenu,
-           UI::FontStyle::kFsMenuInfoPanelParagraph,
+           panel_style_,
+           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph : UI::FontStyle::kWuiInfoPanelParagraph,
            "",
            UI::Align::kRight),
      progress_(&box_,
-               UI::PanelStyle::kFsMenu,
+               panel_style_,
                0,
                0,
                get_w(),
@@ -73,4 +72,3 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::s
 }
 
 }  // namespace AddOnsUI
-}  // namespace FsMenu

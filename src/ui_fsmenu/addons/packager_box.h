@@ -27,7 +27,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_fsmenu/main.h"
 
-namespace FsMenu {
 namespace AddOnsUI {
 
 /** Check whether the filename is valid. Returns the reason why it's invalid, or "" if valid. */
@@ -38,7 +37,7 @@ void make_valid_addon_filename(std::string&,
 
 class AddOnsPackagerBox : public UI::Box {
 public:
-	AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent, uint32_t orientation);
+	AddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent, uint32_t orientation);
 
 	void set_header_align(int32_t x) {
 		header_align_ = x;
@@ -56,12 +55,12 @@ protected:
 	// Used to align addon specific with general UI elements
 	int32_t header_align_;
 	std::function<void()> modified_;
-	MainMenu& main_menu_;
+	FsMenu::MainMenu& main_menu_;
 };
 
 class MapsAddOnsPackagerBox : public AddOnsPackagerBox {
 public:
-	MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent);
+	MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent);
 	void load_addon(AddOns::MutableAddOn*) override;
 
 protected:
@@ -83,7 +82,7 @@ private:
 	// To keep track of which selection index in `dirstruct_`
 	// refers to which point of the file system hierarchy:
 	std::vector<std::vector<std::string>> dirstruct_to_tree_map_;
-	std::vector<MainMenu::MapEntry> maps_list_;
+	std::vector<FsMenu::MainMenu::MapEntry> maps_list_;
 	AddOns::AddOnCategory last_category_;
 
 	UI::Box box_maps_list_, box_buttonsbox_, box_dirstruct_displayname_;
@@ -96,7 +95,7 @@ private:
 
 class CampaignAddOnsPackagerBox : public AddOnsPackagerBox {
 public:
-	CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent);
+	CampaignAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent);
 	void load_addon(AddOns::MutableAddOn*) override;
 	void layout() override;
 
@@ -115,6 +114,5 @@ private:
 };
 
 }  // namespace AddOnsUI
-}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_PACKAGER_BOX_H
