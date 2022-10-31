@@ -30,7 +30,7 @@ EditorHelp::EditorHelp(EditorInteractive& parent,
                        LuaInterface* const lua)
    : EncyclopediaWindow(parent, registry, lua) {
 	try {
-		init(parent, lua_->run_script("scripting/editor/editor_help.lua"));
+		init(lua_->run_script("scripting/editor/editor_help.lua"));
 	} catch (LuaError& err) {
 		log_err("Error loading script for editor help:\n%s\n", err.what());
 		UI::WLMessageBox wmb(&parent, UI::WindowStyle::kWui, _("Error!"),

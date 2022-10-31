@@ -7,6 +7,7 @@
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Boese Kaiser, 2022
+# C138, 2022
 # charly ghislain, 2022
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
 # David D, 2018
@@ -29,7 +30,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-09-19 04:38+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022\n"
+"Last-Translator: C138, 2022\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -524,7 +525,7 @@ msgid ""
 "This is a hardened spear with a stone tip. It is produced in a stone "
 "workshop and used in a warriors’ gathering – together with food – to train "
 "soldiers from attack level 1 to level 2."
-msgstr ""
+msgstr "C'est une lance durcie avec une pointe en pierre. Il est produit dans un atelier de pierre et utilisé dans un rassemblement de guerriers - avec de la nourriture - pour entraîner les soldats du niveau d'attaque 1 au niveau 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Armor
 #: ../../data/tribes/initialization/amazons/units.lua:447
@@ -583,7 +584,7 @@ msgid ""
 "Sturdy boots are excellent footwear for soldiers to be quicker on their "
 "feet. They are produced by the dressmaker and used to train soldiers’ evade "
 "from level 0 to level 1."
-msgstr ""
+msgstr "Les bottes robustes sont d'excellentes chaussures pour que les soldats soient plus rapides sur leurs pieds. Ils sont fabriqués par la couturière et utilisés pour former les soldats à l'évasion du niveau 0 au niveau 1."
 
 #. TRANSLATORS: Helptext for an amazon ware: Swift Boots
 #: ../../data/tribes/initialization/amazons/units.lua:524
@@ -592,7 +593,7 @@ msgid ""
 "Swift boots are light and durable footwear for soldiers to be quicker on "
 "their feet. They are produced by the dressmaker and used to train soldiers’ "
 "evade from level 1 to level 2."
-msgstr ""
+msgstr "Les bottes Swift sont des chaussures légères et durables permettant aux soldats d'être plus rapides sur leurs pieds. Ils sont fabriqués par la couturière et utilisés pour former les soldats à l'évasion du niveau 1 au niveau 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Hero Boots
 #: ../../data/tribes/initialization/amazons/units.lua:535
@@ -970,7 +971,7 @@ msgstr "Ce champ a été récolté."
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Sapling
 #: ../../data/tribes/initialization/amazons/units.lua:1149
 msgid "This cocoa tree has just been planted."
-msgstr ""
+msgstr "This cocoa tree has just been planted."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Pole
 #: ../../data/tribes/initialization/amazons/units.lua:1156
@@ -980,12 +981,12 @@ msgstr "Ce cacaoyer pousse."
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Mature
 #: ../../data/tribes/initialization/amazons/units.lua:1163
 msgid "This cocoa tree is fully grown."
-msgstr ""
+msgstr "Ce cacaoyer est arrivé à maturité."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Old
 #: ../../data/tribes/initialization/amazons/units.lua:1170
 msgid "The beans on this cocoa tree are ready for harvesting."
-msgstr ""
+msgstr "The beans on this cocoa tree are ready for harvesting."
 
 #. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
@@ -1006,7 +1007,7 @@ msgstr "Il n'y a pas de ressources dans le sol ici."
 msgid ""
 "Gold veins contain gold ore that can be washed from the gravel at gold "
 "digger dwellings."
-msgstr ""
+msgstr "Les filons d'or contiennent du minerai d'or qui peut être lavés du gravier dans les habitations des chercheurs d'or."
 
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
@@ -1294,7 +1295,7 @@ msgctxt "amazons_building"
 msgid ""
 "The water gatherer’s hut needs open water within the work area. Your workers"
 " cannot dig up water from the ground!"
-msgstr ""
+msgstr "La cabane du collecteur d'eau a besoin d'eau libre dans la zone de travail. Vos travailleurs ne peuvent pas extraire l'eau du sol !"
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1303,7 +1304,7 @@ msgctxt "amazons_building"
 msgid ""
 "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and "
 "rubber."
-msgstr ""
+msgstr "Récolte des arbres rares dans les environs. Fournit du bois de fer, du balsa et du caoutchouc."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Wilderness
 #. Keeper's Tent
@@ -1463,14 +1464,14 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1419
 msgctxt "amazons_building"
 msgid "Bakes bread from cassava root."
-msgstr ""
+msgstr "Cuit du pain à partir de racine de manioc."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Chocolate
 #. Brewery
 #: ../../data/tribes/initialization/amazons/units.lua:1426
 msgctxt "amazons_building"
 msgid "Brews chocolate for soldier training."
-msgstr ""
+msgstr "Brasse du chocolat pour l'entraînement des soldats."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Chocolate
 #. Brewery
@@ -1487,7 +1488,7 @@ msgctxt "amazons_building"
 msgid ""
 "Prepares rations to feed the scouts and the workers digging for gold dust "
 "and granite."
-msgstr ""
+msgstr "Prépare des rations pour nourrir les éclaireurs et les ouvriers qui recherchent de la poussière d'or et du granit."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Food
 #. Preserver
@@ -1554,13 +1555,13 @@ msgstr "Semez et récoltez du manioc."
 msgctxt "amazons_building"
 msgid ""
 "The cassava plantation needs free space within the work area to plant seeds."
-msgstr ""
+msgstr "La plantation de manioc a besoin d'espace libre dans la zone de travail pour planter des graines."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Cocoa Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1482
 msgctxt "amazons_building"
 msgid "Cultivates cocoa that is needed to brew chocolate drinks."
-msgstr ""
+msgstr "Cultive le cacao nécessaire pour brasser des boissons chocolatées."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Cocoa Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1484
@@ -1605,7 +1606,7 @@ msgstr "Entraine les soldates en attaque jusqu'au niveau 2. Procure aux soldates
 #: ../../data/tribes/initialization/amazons/units.lua:1522
 msgctxt "amazons_building"
 msgid "Amazon soldiers need chocolate to train properly."
-msgstr ""
+msgstr "Les soldats amazoniens ont besoin de chocolat pour s'entraîner correctement."
 
 #. TRANSLATORS: Purpose helptext for an amazon training site: Training Glade
 #: ../../data/tribes/initialization/amazons/units.lua:1520
@@ -1613,7 +1614,7 @@ msgctxt "amazons_building"
 msgid ""
 "Trains soldiers in Evade, Defense and Health. Equips the soldiers with all "
 "necessary equipment and armor parts."
-msgstr ""
+msgstr "Entraîne les soldats à l'évasion, à la défense et à la santé. Équipe les soldats de tout l'équipement et des pièces d'armure nécessaires."
 
 #. TRANSLATORS: Purpose helptext for an amazon military site: Patrol Post
 #. TRANSLATORS: Purpose helptext for an amazon military site: Treetop Sentry
@@ -1652,7 +1653,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send her away."
-msgstr ""
+msgstr "Si vous manquez de soldats pour occuper de nouveaux sites militaires, utilisez le bouton fléché vers le bas pour réduire la capacité. Vous pouvez également cliquer sur un soldat pour le renvoyer."
 
 #. TRANSLATORS: Note helptext for an amazon military site: Treetop Sentry
 #: ../../data/tribes/initialization/amazons/units.lua:1542
@@ -2700,7 +2701,7 @@ msgstr "Il y a beaucoup de pierres-précieuses ici."
 #: ../../data/tribes/initialization/frisians/units.lua:1516
 msgid ""
 "This tree is only planted by the amazon tribe but can be harvested for logs."
-msgstr ""
+msgstr "Cet arbre n'est planté que par la tribu amazonienne mais peut être récolté pour les bûches."
 
 #. TRANSLATORS: Purpose helptext for an atlantean warehouse: Headquarters
 #: ../../data/tribes/initialization/atlanteans/units.lua:1418
@@ -5244,7 +5245,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Don’t ask what your tribe can do for you, ask what you can do for your "
 "tribe!’"
-msgstr ""
+msgstr "‘Ne demande pas ce que ta tribu peut faire pour toi, demande ce que tu peux faire pour ta tribu !’"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Barracks
 #: ../../data/tribes/initialization/barbarians/units.lua:1449
@@ -8017,7 +8018,7 @@ msgid ""
 "Reed is grown in a reed farm. Nothing is better suited to make roofs "
 "waterproof. It is also used to make baskets and fishing nets as well as "
 "cloth."
-msgstr ""
+msgstr "Le roseau est cultivé dans une ferme de roseaux. Rien de mieux pour rendre les toitures étanches. Il est également utilisé pour fabriquer des paniers et des filets de pêche ainsi que du tissu."
 
 #. TRANSLATORS: Helptext for a frisian ware: Fur
 #: ../../data/tribes/initialization/frisians/units.lua:149
@@ -8152,7 +8153,7 @@ msgctxt "ware"
 msgid ""
 "Coal is mined in coal mines or produced out of logs by a charcoal burner in "
 "a charcoal kiln or charcoal burner’s house."
-msgstr ""
+msgstr "Le charbon est extrait dans des mines de charbon ou produit à partir de bûches par un charbonnier dans un four à charbon ou une maison de charbonnier."
 
 #. TRANSLATORS: Helptext for a frisian ware: Coal, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:309
@@ -8660,35 +8661,35 @@ msgid ""
 "When claydiggers dig up earth, they leave holes in the ground. These holes "
 "vanish after a while. Aqua farms can use them as ponds to grow fish in them,"
 " whereas charcoal burners erect their charcoal stacks in them."
-msgstr ""
+msgstr "Lorsque les creuseurs d'argile creusent la terre, ils laissent des trous dans le sol. Ces trous disparaissent après un certain temps. Les fermes aquatiques peuvent les utiliser comme étangs pour y élever des poissons, tandis que les charbonniers y érigent leurs piles de charbon de bois."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1212
 msgid ""
 "Fish are maturing in this pond. A fisher working from an aqua farm will be "
 "able to catch them when they are bigger."
-msgstr ""
+msgstr "Les poissons grandissent dans cet étang. Un pêcheur travaillant dans une ferme aquacole pourra les attraper lorsqu'ils seront plus gros."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1219
 msgid ""
 "Fish are living in this pond. A fisher working from an aqua farm can catch "
 "them as food."
-msgstr ""
+msgstr "Les poissons vivent dans cet étang. Un pêcheur travaillant dans une ferme aquacole peut les attraper comme nourriture."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1226
 msgid ""
 "A charcoal stack is burning in this earthen hole. When it has burnt down, a "
 "charcoal burner will be able to gather coal from it."
-msgstr ""
+msgstr "Une pile de charbon de bois brûle dans ce trou de terre. Lorsqu'il aura brûlé, un charbonnier pourra en tirer du charbon."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1233
 msgid ""
 "A charcoal stack, which had been erected in this earthen hole, is ready for "
 "a charcoal burner to gather coal from it."
-msgstr ""
+msgstr "Une pile de charbon de bois, qui avait été érigée dans ce trou de terre, est prête pour qu'un charbonnier en recueille le charbon."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Dike
 #: ../../data/tribes/initialization/frisians/units.lua:1240
@@ -8917,7 +8918,7 @@ msgid ""
 "Reed is the traditional material for roofing. It is also needed to produce "
 "baskets and fishing nets, and it is woven – together with reindeer fur – "
 "into the cloth used for ships’ sails."
-msgstr ""
+msgstr "Le roseau est le matériau traditionnel des toitures. Il est également nécessaire pour produire des paniers et des filets de pêche, et il est tissé - avec de la fourrure de renne - dans le tissu utilisé pour les voiles des navires."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Well
 #: ../../data/tribes/initialization/frisians/units.lua:1637
@@ -8987,7 +8988,7 @@ msgctxt "building"
 msgid ""
 "The charcoal burner’s house needs holes in the ground that were dug by a "
 "clay pit’s worker nearby to erect charcoal stacks in them."
-msgstr ""
+msgstr "La maison du charbonnier a besoin de trous dans le sol qui ont été creusés par un ouvrier d'une carrière d'argile à proximité pour y ériger des piles de charbon de bois."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Charcoal
 #. Burner's House

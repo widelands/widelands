@@ -143,7 +143,7 @@ function dependencies_collects(tribe, building_description)
          for k,mapobject in ipairs(find_created_collected_matches(productionsite, building_description)) do
             row = row .. item_image(mapobject)
          end
-         row = row .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name) .. " " .. productionsite.descname
+         row = row .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name) .. " " .. linkify_encyclopedia_object(productionsite)
          result = result .. p(row)
       end
       return result
@@ -152,21 +152,21 @@ function dependencies_collects(tribe, building_description)
    local result = ""
    local collected_items = {}
    for i, bob in ipairs(building_description.collected_bobs) do
-      table.insert(collected_items, bob)
+      table.insert(collected_items, {bob, true})
       result = result .. item_image(bob)
    end
    for i, immovable in ipairs(building_description.collected_immovables) do
-      table.insert(collected_items, immovable)
+      table.insert(collected_items, {immovable, true})
       result = result .. item_image(immovable)
    end
    for i, resource in ipairs(building_description.collected_resources) do
-      table.insert(collected_items, resource.resource)
+      table.insert(collected_items, {resource.resource, false})
       result = result .. item_image(find_resource_indicator(tribe, resource.resource))
    end
    result = result .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
-   result = result .. " " .. collected_items[1].descname
-   for k,mapobject in ipairs({table.unpack(collected_items,2)}) do
-      result = result .. " • " .. mapobject.descname
+   for k,mapobject in ipairs(collected_items) do
+      if k > 1 then result = result .. " • " end
+      result = result .. (mapobject[2] and linkify_encyclopedia_object(mapobject[1]) or mapobject[1].descname)
    end
    return p(result)
 end
@@ -190,7 +190,7 @@ function dependencies_creates(tribe, building_description)
          for k,mapobject in ipairs(find_created_collected_matches(building_description, productionsite)) do
             row = row .. item_image(mapobject)
          end
-         row = row .. img("images/richtext/arrow-right.png") .. item_image(productionsite) .. " " .. productionsite.descname
+         row = row .. img("images/richtext/arrow-right.png") .. item_image(productionsite) .. " " .. linkify_encyclopedia_object(productionsite)
          result = result .. p(row)
       end
       return result
@@ -210,9 +210,9 @@ function dependencies_creates(tribe, building_description)
       table.insert(created_items, resource)
       result = result .. item_image(find_resource_indicator(tribe, resource))
    end
-   result = result .. " " .. created_items[1].descname
+   result = result .. " " .. linkify_encyclopedia_object(created_items[1])
    for k,mapobject in ipairs({table.unpack(created_items,2)}) do
-      result = result .. " • " .. mapobject.descname
+      result = result .. " • " .. linkify_encyclopedia_object(mapobject)
    end
    return p(result)
 end
@@ -234,7 +234,7 @@ function dependencies_training_food(foods)
       local food_images = {}
       for countfood, food in pairs(foodlist) do
          local ware_description = wl.Game():get_ware_description(food)
-         food_warenames[countfood] = ware_description.descname
+         food_warenames[countfood] = linkify_encyclopedia_object(ware_description)
          food_images[countfood] = ware_description.icon_name
       end
       local text = localize_list(food_warenames, "or")
@@ -300,7 +300,7 @@ function dependencies_training_weapons(weapons, tribename)
       result = result ..
          dependencies_basic(
             weaponslist,
-            weaponsstring .. " " .. producer_description.descname
+            weaponsstring .. " " .. linkify_encyclopedia_object(producer_description)
          )
    end
    if (result ~= "") then
@@ -483,7 +483,7 @@ function building_help_dependencies_production(tribe, building_description)
       for j, producer in ipairs(ware_description:producers(tribe.name)) do
          inputs = inputs .. dependencies(
             {producer, ware_description},
-            _("%1$s from: %2$s"):bformat(ware_description.descname, producer.descname)
+            _("%1$s from: %2$s"):bformat(linkify_encyclopedia_object(ware_description), linkify_encyclopedia_object(producer))
          )
       end
    end
@@ -517,7 +517,7 @@ function building_help_dependencies_production(tribe, building_description)
    if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
       for i, worker_description in ipairs(building_description.output_worker_types) do
          outgoing = outgoing ..
-            dependencies({building_description, worker_description}, worker_description.descname)
+            dependencies({building_description, worker_description}, linkify_encyclopedia_object(worker_description))
       end
    end
    -- Consumers
@@ -528,13 +528,13 @@ function building_help_dependencies_production(tribe, building_description)
          local constructionsite_description =
             wl.Game():get_building_description("constructionsite")
          outgoing = outgoing .. dependencies({ware_description, constructionsite_description},
-                                              constructionsite_description.descname)
+                                              linkify_encyclopedia_object(constructionsite_description))
       end
 
       -- Normal buildings
       for j, consumer in ipairs(ware_description:consumers(tribe.name)) do
          if (tribe:has_building(consumer.name)) then
-            outgoing = outgoing .. dependencies({ware_description, consumer}, consumer.descname)
+            outgoing = outgoing .. dependencies({ware_description, consumer}, linkify_encyclopedia_object(consumer))
          end
       end
 
@@ -544,7 +544,7 @@ function building_help_dependencies_production(tribe, building_description)
          if (buildcost == ware) then
             for k, building in ipairs(tribe.buildings) do
                if (building.type_name == "warehouse") then
-                  outgoing = outgoing .. dependencies({ware, building, soldier}, soldier.descname)
+                  outgoing = outgoing .. dependencies({ware, building, soldier}, linkify_encyclopedia_object(soldier))
                end
             end
          end
@@ -670,9 +670,9 @@ function building_help_building_section(building_description)
       if (building_description.enhanced) then
          former_building = building_description.enhanced_from
             if (building_description.buildable) then
-               result = result .. inline_header(_("Or enhanced from:"), former_building.descname)
+               result = result .. inline_header(_("Or enhanced from:"), linkify_encyclopedia_object(former_building))
             else
-               result = result .. inline_header(_("Enhanced from:"), former_building.descname)
+               result = result .. inline_header(_("Enhanced from:"), linkify_encyclopedia_object(former_building))
             end
 
          for ware, amount in pairs(building_description.enhancement_cost) do
@@ -789,7 +789,7 @@ function building_help_building_section(building_description)
 
       -- Can be enhanced to
       if (building_description.enhancement) then
-         result = result .. inline_header(_("Can be enhanced to:"), building_description.enhancement.descname)
+         result = result .. inline_header(_("Can be enhanced to:"), linkify_encyclopedia_object(building_description.enhancement))
          for ware, amount in pairs(building_description.enhancement.enhancement_cost) do
             local ware_description = wl.Game():get_ware_description(ware)
             result = result .. help_ware_amount_line(ware_description, amount)
@@ -841,10 +841,10 @@ function building_help_crew_section(tribe, building_description)
          if(becomes_description) then
             result = result .. image_line(worker_description.icon_name, 1,
                -- TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-               p(_("%s or better"):bformat(worker_description.descname)))
+               p(_("%s or better"):bformat(linkify_encyclopedia_object(worker_description))))
          else
             result = result .. image_line(worker_description.icon_name, 1,
-               p(worker_description.descname))
+               p(linkify_encyclopedia_object(worker_description)))
          end
       end
 

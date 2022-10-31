@@ -20,18 +20,21 @@ local wc_name = "Territorial Time"
 -- will be used as the key to fetch the translation in C++
 local wc_descname = _("Territorial Time")
 local wc_version = 1
-local wc_desc = _ (
+local wc_desc_placeholder = _(
    "Each player or team tries to obtain more than half of the map’s " ..
    "area. The winner will be the player or the team that is able to keep " ..
    "that area for at least 20 minutes, or the one with the most territory " ..
-   "after 4 hours, whichever comes first. " ..
+   "after %s, whichever comes first. " ..
    "If the peaceful mode is selected, the game ends if one player has more " ..
    "land than any other player could gain."
 )
+-- TRANSLATORS: Will be inserted into "The winner will be the player […] with the most territory after %s"
+local wc_desc = wc_desc_placeholder:bformat(_("the configured time limit"))
 
 local r = {
    name = wc_name,
    description = wc_desc,
+   configurable_time = true,
    peaceful_mode_allowed = true,
    init = function()
       fields = wl.Game().map:count_conquerable_fields()
@@ -40,11 +43,11 @@ local r = {
       local game = wl.Game()
       local plrs = wl.Game().players
 
-      -- set the objective with the game type for all players
-      broadcast_objective("win_condition", wc_descname, wc_desc)
-
       -- variables to track the maximum 4 hours of gametime
-      local max_time = 4 * 60
+      local max_time = game.win_condition_duration
+
+      -- set the objective with the game type for all players
+      broadcast_objective("win_condition", wc_descname, wc_desc_placeholder:bformat(format_remaining_raw_time(max_time)))
 
       local function _send_state(remaining_time, plrs, show_popup)
          push_textdomain("win_conditions")
