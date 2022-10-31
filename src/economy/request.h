@@ -57,6 +57,7 @@ public:
 	friend class RequestList;
 
 	using CallbackFn = void (*)(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+	using TransferList = std::vector<Transfer*>;
 
 	Request(PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
 	~Request() override;
@@ -94,6 +95,9 @@ public:
 	uint32_t get_num_transfers() const {
 		return transfers_.size();
 	}
+	const TransferList& get_transfers() const {
+		return transfers_;
+	}
 
 	Flag& target_flag() const;
 
@@ -129,8 +133,6 @@ private:
 	Time get_base_required_time(const EditorGameBase&, uint32_t nr) const;
 	void remove_transfer(uint32_t idx);
 	uint32_t find_transfer(Transfer&);
-
-	using TransferList = std::vector<Transfer*>;
 
 	WareWorker type_;
 
