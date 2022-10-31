@@ -8,7 +8,7 @@ function help_online_help()
    push_textdomain("texts")
    local r =
       h2(_([[Online Help]])) ..
-      p(_([[If you need more documentation or help for Widelands or the Widelands Editor, be sure to visit our homepage at %s. You can find online help in our wiki there.]])):bformat(a("widelands.org"))
+      p(_([[If you need more documentation or help for Widelands or the Widelands Editor, be sure to visit our homepage at %s. You can find online help in our wiki there.]])):bformat(a("widelands.org", "url", "https://www.widelands.org"))
    pop_textdomain()
    return r
 end

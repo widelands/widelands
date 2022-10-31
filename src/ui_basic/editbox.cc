@@ -492,6 +492,9 @@ void EditBox::copy_selected_text() {
 }
 
 bool EditBox::handle_textinput(const std::string& input_text) {
+	if (m_->mode == EditBoxImpl::Mode::kSelection) {
+		delete_selected_text();
+	}
 	if ((m_->text.size() + input_text.length()) < m_->maxLength) {
 		m_->text.insert(m_->caret, input_text);
 		m_->caret += input_text.length();
