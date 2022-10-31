@@ -15,10 +15,13 @@ local wc_name = "Wood Gnome"
 -- will be used as the key to fetch the translation in C++
 local wc_descname = _("Wood Gnome")
 local wc_version = 2
-local wc_desc = _(
+local wc_desc_placeholder = _(
 [[As wood gnome you like big forests, so your task is to have more trees on ]] ..
-[[your territory than any other player. The game will end after 4 hours of ]] ..
-[[playing. The one with the most trees at that point will win the game.]])
+[[your territory than any other player. The game will end after %s. ]] ..
+[[The one with the most trees at that point will win the game.]])
+-- TRANSLATORS: Will be inserted into "The game will end after %s."
+local wc_desc = wc_desc_placeholder:bformat(_("the configured time limit"))
+
 local wc_trees_owned = "Trees owned"
 -- This needs to be exactly like wc_trees_owned, but localized, because wc_trees_owned
 -- will be used as the key to fetch the translation in C++
@@ -27,6 +30,7 @@ local wc_trees_owned_i18n = _("Trees owned")
 local r = {
    name = wc_name,
    description = wc_desc,
+   configurable_time = true,
    peaceful_mode_allowed = true,
    init = function()
       -- Calculate valuable fields
@@ -37,10 +41,10 @@ local r = {
    local game = wl.Game()
 
    -- set the maximum game time of 4 hours
-   local max_time = 4 * 60
+   local max_time = game.win_condition_duration
 
    -- set the objective with the game type for all players
-   broadcast_objective("win_condition", wc_descname, wc_desc)
+   broadcast_objective("win_condition", wc_descname, wc_desc_placeholder:bformat(format_remaining_raw_time(max_time)))
 
    -- The function to calculate the current points.
    local _last_time_calculated = -100000

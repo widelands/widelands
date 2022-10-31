@@ -89,8 +89,8 @@ const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
    PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
    PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
-   PROP_RW(LuaGame, allow_diplomacy),    PROP_RO(LuaGame, win_condition),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaGame, win_condition),      PROP_RO(LuaGame, win_condition_duration),
+   PROP_RW(LuaGame, allow_diplomacy),    {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -224,6 +224,19 @@ int LuaGame::get_type(lua_State* L) {
 */
 int LuaGame::get_win_condition(lua_State* L) {
 	lua_pushstring(L, get_game(L).get_win_condition_displayname().c_str());
+	return 1;
+}
+
+/* RST
+   .. attribute:: win_condition_duration
+
+      .. versionadded:: 1.2
+
+      (RO) The time limit configured for the game's win condition, in minutes.
+      Only valid if the selected win condition allows configuring the time limit.
+*/
+int LuaGame::get_win_condition_duration(lua_State* L) {
+	lua_pushint32(L, get_game(L).get_win_condition_duration());
 	return 1;
 }
 

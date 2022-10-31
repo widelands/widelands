@@ -30,7 +30,7 @@ class ReplayReader;
 
 class ReplayGameController : public GameController {
 public:
-	ReplayGameController(Widelands::Game& game, const std::string& filename);
+	explicit ReplayGameController(Widelands::Game& game);
 
 	void think() override;
 
