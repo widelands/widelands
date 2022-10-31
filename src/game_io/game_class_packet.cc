@@ -26,56 +26,56 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 8;
+/**
+ * Changelog:
+ * 8: v1.1
+ * 9: Added RNG state
+ */
+constexpr uint16_t kCurrentPacketVersion = 9;
 
 void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 8) {
 			game.gametime_ = Time(fr);
+			// TODO(Nordfriese): Savegame compatibility v1.1
+			if (packet_version >= 9) {
+				game.rng().read_state(fr);
+			}
 			game.scenario_difficulty_ = fr.unsigned_32();
-			// TODO(Nordfriese): Savegame compatibility
-			if (packet_version >= 5 && fr.unsigned_8() == 0) {
+			if (fr.unsigned_8() == 0) {
 				game.set_write_replay(false);
 			}
 
 			game.list_of_scenarios_.clear();
-			if (packet_version >= 6) {
-				for (size_t i = fr.unsigned_32(); i > 0; --i) {
-					game.list_of_scenarios_.push_back(fr.string());
-				}
+			for (size_t i = fr.unsigned_32(); i > 0; --i) {
+				game.list_of_scenarios_.push_back(fr.string());
 			}
 
-			if (packet_version >= 7) {
-				/* This design is the fix for bug #4786. The order in which units are loaded is
-				 * stored in the savegame to allow recreating it exactly during loading without
-				 * having to always load all tribes. Otherwise, we'd get desyncs because the
-				 * dynamic load order is different during loading from starting a new game.
+			/* This design is the fix for bug #4786. The order in which units are loaded is
+			 * stored in the savegame to allow recreating it exactly during loading without
+			 * having to always load all tribes. Otherwise, we'd get desyncs because the
+			 * dynamic load order is different during loading from starting a new game.
+			 */
+			game.postload_addons_before_loading();
+			for (size_t i = fr.unsigned_32(); i > 0; --i) {
+				/* This tells the descriptions manager to actually load the description
+				 * with the given name, e.g. "barbarians" or "frisians_well".
+				 * Takes care of legacy lookup and skipping already loaded units.
 				 */
-				game.postload_addons_before_loading();
-				for (size_t i = fr.unsigned_32(); i > 0; --i) {
-					/* This tells the descriptions manager to actually load the description
-					 * with the given name, e.g. "barbarians" or "frisians_well".
-					 * Takes care of legacy lookup and skipping already loaded units.
-					 */
-					Notifications::publish(NoteMapObjectDescription(
-					   fr.string(), NoteMapObjectDescription::LoadType::kObject));
-				}
-			} else {
-				game.check_legacy_addons_desync_magic();
+				Notifications::publish(
+				   NoteMapObjectDescription(fr.string(), NoteMapObjectDescription::LoadType::kObject));
 			}
 
-			game.diplomacy_allowed_ = (packet_version < 8 || fr.unsigned_8() > 0);
+			game.diplomacy_allowed_ = (fr.unsigned_8() > 0);
 			game.pending_diplomacy_actions_.clear();
-			if (packet_version >= 8) {
-				for (size_t i = fr.unsigned_32(); i > 0; --i) {
-					const PlayerNumber p1 = fr.unsigned_8();
-					const DiplomacyAction a = static_cast<DiplomacyAction>(fr.unsigned_8());
-					const PlayerNumber p2 = fr.unsigned_8();
-					game.pending_diplomacy_actions_.emplace_back(p1, a, p2);
-				}
+			for (size_t i = fr.unsigned_32(); i > 0; --i) {
+				const PlayerNumber p1 = fr.unsigned_8();
+				const DiplomacyAction a = static_cast<DiplomacyAction>(fr.unsigned_8());
+				const PlayerNumber p2 = fr.unsigned_8();
+				game.pending_diplomacy_actions_.emplace_back(p1, a, p2);
 			}
 		} else {
 			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
@@ -102,6 +102,7 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /*
 	// EDITOR GAME CLASS
 	// Write gametime
 	game.gametime_.save(fw);
+	game.rng().write_state(fw);
 
 	fw.unsigned_32(game.scenario_difficulty_);
 	fw.unsigned_8((game.writereplay_ || game.is_replay()) ? 1 : 0);

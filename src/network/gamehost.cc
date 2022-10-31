@@ -513,14 +513,17 @@ void GameHost::run_callback() {
 		}
 	}
 
+	const uint32_t rng_seed = RNG::static_rand();
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_LAUNCH);
+	packet.unsigned_32(rng_seed);
 	packet.unsigned_32(game_->enabled_addons().size());
 	for (const auto& a : game_->enabled_addons()) {
 		packet.string(a->internal_name);
 	}
 	broadcast(packet);
 
+	game_->logic_rand_seed(rng_seed);
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
 	game_->set_auto_speed(get_config_bool("auto_speed", false));
 	game_->set_write_syncstream(get_config_bool("write_syncstreams", true));

@@ -52,6 +52,7 @@ RandomGame::RandomGame(MenuCapsule& m)
 		die();
 		return;
 	}
+	game_->logic_rand_seed(RNG::static_rand());
 	m.set_visible(true);
 
 	left_column_box_.add_inf_space();
