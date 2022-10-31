@@ -727,7 +727,7 @@ void InteractiveBase::game_logic_think() {
 	last_frame_realtime_ = SDL_GetTicks();
 	last_frame_gametime_ = egbase().get_gametime();
 
-	const uint64_t realtime_step = std::max(last_frame_realtime_ - previous_frame_realtime_, 1LU);
+	const uint64_t realtime_step = std::max<uint64_t>(last_frame_realtime_ - previous_frame_realtime_, 1);
 
 	double cur_speed = 1000.0 * (last_frame_gametime_ - previous_frame_gametime_).get();
 	cur_speed /= realtime_step;
