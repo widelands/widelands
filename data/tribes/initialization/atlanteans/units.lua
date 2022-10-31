@@ -195,6 +195,10 @@
 --
 --    **productionsite_workers_coming**: The string to display over this tribe's productionsites when more than 1 worker is coming.
 --
+--    **productionsite_experienced_worker_missing**: The string to display over this tribe's productionsites when 1 experienced worker is missing.
+--
+--    **productionsite_experienced_workers_missing**: The string to display over this tribe's productionsites when more than 1 experienced worker is missing.
+--
 --    **soldier_context**, **soldier_0_sg**, **soldier_0_pl**, **soldier_1_sg**, **soldier_1_pl**, **soldier_2_sg**, **soldier_2_pl**,
 --    **soldier_3_sg**, **soldier_3_pl**: The pgettext context for militarysites' soldier strings, and the corresponding **unlocalized**
 --    singular and plural strings. Additionally, it is necessary to specify an ``npgettext`` call for all four types of soldier strings
@@ -2027,6 +2031,10 @@ wl.Descriptions():new_tribe {
    productionsite_workers_missing = pgettext("atlanteans", "Workers missing"),
    -- TRANSLATORS: Productivity label on an atlantean building if there is more than 1 worker coming. If you need plural forms here, please let us know.
    productionsite_workers_coming = pgettext("atlanteans", "Workers are coming"),
+   -- TRANSLATORS: Productivity label on an atlantean building if there is 1 experienced worker missing
+   productionsite_experienced_worker_missing = pgettext("atlanteans", "Expert missing"),
+   -- TRANSLATORS: Productivity label on an atlantean building if there is more than 1 experienced worker missing. If you need plural forms here, please let us know.
+   productionsite_experienced_workers_missing = pgettext("atlanteans", "Experts missing"),
 
    -- Soldier strings to be used in Military Status strings
 

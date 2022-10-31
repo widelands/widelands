@@ -62,6 +62,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
+#include "logic/replay_game_controller.h"
 #include "logic/single_player_game_controller.h"
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #include "logic/training_wheels.h"
@@ -72,6 +73,7 @@
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
+#include "wui/interactive_spectator.h"
 
 namespace Widelands {
 
@@ -151,10 +153,12 @@ Game::Game()
      diplomacy_allowed_(true),
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
+     win_condition_duration_(kDefaultWinConditionDuration)
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
-     training_wheels_wanted_(false),
+     ,
+     training_wheels_wanted_(false)
 #endif
-     replay_(false) {
+{
 	Economy::initialize_serial();
 }
 
@@ -307,8 +311,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 
 	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, 1));
 	try {
-		bool const result =
-		   run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
+		bool const result = run(StartGameType::kSinglePlayerScenario, script_to_run, "single_player");
 		ctrl_.reset();
 		return result;
 	} catch (...) {
@@ -402,6 +405,7 @@ void Game::init_newgame(const GameSettings& settings) {
 			}
 		}
 
+		win_condition_duration_ = settings.win_condition_duration;
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
@@ -433,6 +437,7 @@ void Game::init_savegame(const GameSettings& settings) {
 		gl.preload_game(gpdp);
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		win_condition_duration_ = gpdp.get_win_condition_duration();
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		training_wheels_wanted_ =
@@ -482,6 +487,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		win_condition_duration_ = gpdp.get_win_condition_duration();
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		training_wheels_wanted_ =
 		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
@@ -511,7 +517,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, player_nr));
 	try {
-		bool const result = run(StartGameType::kSaveGame, script_to_run, false, "single_player");
+		bool const result = run(StartGameType::kSaveGame, script_to_run, "single_player");
 		ctrl_.reset();
 		return result;
 	} catch (...) {
@@ -588,11 +594,9 @@ void Game::postload() {
  */
 bool Game::run(StartGameType const start_game_type,
                const std::string& script_to_run,
-               bool replay,
                const std::string& prefix_for_replays) {
 	assert(has_loader_ui());
 
-	replay_ = replay;
 	postload();
 
 	InteractivePlayer* ipl = get_ipl();
@@ -784,9 +788,14 @@ bool Game::run(StartGameType const start_game_type,
 		return true;
 	}
 
-	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
 	const std::string load = next_game_to_load_;  // Pass-by-reference does have its disadvantages…
+
+	if (FileSystem::filename_ext(load) == kReplayExtension) {
+		return run_replay(load, script_to_run);
+	}
 	if (FileSystem::filename_ext(load) == kSavegameExtension) {
+		create_loader_ui(
+		   {"general_game"}, false, map().get_background_theme(), map().get_background());
 		return run_load_game(load, script_to_run);
 	}
 
@@ -799,6 +808,20 @@ bool Game::run(StartGameType const start_game_type,
 		assert(list.front() == load);
 	}
 	return run_splayer_scenario_direct(list, script_to_run);
+}
+
+bool Game::run_replay(const std::string& filename, const std::string& script_to_run) {
+	full_cleanup();
+	replay_filename_ = filename;
+
+	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
+	set_ibase(new InteractiveSpectator(*this, get_config_section()));
+
+	set_write_replay(false);
+	new ReplayGameController(*this);
+	save_handler().set_allow_saving(false);
+
+	return run(Widelands::Game::StartGameType::kSaveGame, script_to_run, "replay");
 }
 
 void Game::set_next_game_to_load(const std::string& file) {
@@ -878,6 +901,7 @@ void Game::full_cleanup() {
 	writereplay_ = true;  // Not using `set_write_replay()` on purpose.
 	next_game_to_load_.clear();
 	list_of_scenarios_.clear();
+	replay_filename_.clear();
 	Economy::initialize_serial();
 
 	if (has_loader_ui()) {
@@ -1260,6 +1284,9 @@ const std::string& Game::get_win_condition_displayname() const {
 }
 void Game::set_win_condition_displayname(const std::string& name) {
 	win_condition_displayname_ = name;
+}
+int32_t Game::get_win_condition_duration() const {
+	return win_condition_duration_;
 }
 
 /**
