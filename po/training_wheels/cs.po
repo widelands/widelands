@@ -4,6 +4,7 @@
 # 
 # Translators:
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
+# Tomáš Mráz, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-31 02:58+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333, 2021\n"
+"Last-Translator: Tomáš Mráz, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -216,8 +217,8 @@ msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
 msgstr ""
-"Toto okno lze otvírat a zavírat kliknutím na tlačítko \"Úkoly\" v nabídce na"
-" spodní straně obrazovky."
+" Toto okno lze otvírat a zavírat kliknutím na tlačítko \"Úkoly\" v nabídce "
+"na spodní straně obrazovky."
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""

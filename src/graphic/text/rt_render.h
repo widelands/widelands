@@ -32,6 +32,7 @@ namespace RT {
 class FontCache;
 class Parser;
 class RenderNode;
+class TagHandler;
 
 struct RendererStyle {
 	RendererStyle(const std::string& font_face_,
@@ -67,7 +68,7 @@ public:
 	render(const std::string&, uint16_t width, bool is_rtl, const TagSet& allowed_tags = TagSet());
 
 private:
-	std::shared_ptr<RenderNode>
+	std::pair<RenderNode*, TagHandler*>
 	layout(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags);
 
 	std::unique_ptr<FontCache> font_cache_;

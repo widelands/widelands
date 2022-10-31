@@ -51,6 +51,11 @@ public:
 	virtual std::vector<Soldier*> stationed_soldiers() const = 0;
 
 	/**
+	 * \return a list of soldiers that are currently stationed in or coming to the building.
+	 */
+	virtual std::vector<Soldier*> associated_soldiers() const = 0;
+
+	/**
 	 * \return the minimum number of soldiers that this building can be
 	 * configured to hold.
 	 */

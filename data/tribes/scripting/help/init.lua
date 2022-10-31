@@ -1,5 +1,6 @@
--- Returns definitions for encyclopedia tabs and their contents for the
--- Tribal Encyclopedia
+-- Returns definitions for encyclopedia tabs and their contents for the Tribal Encyclopedia
+
+include "scripting/help.lua"
 
 -- Comparison function used to sort map objects alphabetically
 function compare_by_title(a, b)

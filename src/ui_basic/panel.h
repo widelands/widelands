@@ -33,6 +33,7 @@
 #include "base/rect.h"
 #include "base/vector.h"
 #include "base/wexception.h"
+#include "graphic/hyperlink.h"
 #include "graphic/styles/panel_styles.h"
 #include "notifications/signal.h"
 #include "sound/constants.h"
@@ -592,16 +593,18 @@ struct NamedPanel : public Panel {
 	           int32_t const ny,
 	           int const nw,
 	           int const nh,
-	           const std::string& tooltip_text = std::string())
-	   : Panel(nparent, s, nx, ny, nw, nh, tooltip_text), name_(name) {
-	}
+	           const std::string& tooltip_text = std::string());
 
 	const std::string& get_name() const {
 		return name_;
 	}
 
+protected:
+	virtual void handle_hyperlink(const std::string& action);
+
 private:
 	std::string name_;
+	std::unique_ptr<Notifications::Subscriber<NoteHyperlink>> hyperlink_subscriber_;
 };
 }  // namespace UI
 
