@@ -4,8 +4,6 @@ wl_library(ui_fsmenu
     about.h
     addons/contact.cc
     addons/contact.h
-    addons/login_box.cc
-    addons/login_box.h
     addons/manager.cc
     addons/manager.h
     addons/packager.cc
@@ -113,6 +111,7 @@ wl_library(ui_fsmenu
     widelands_ball_of_mud
     widelands_options
     wui
+    wui_addons
     wui_chat_ui
     wui_common_mapdetails
     wui_common_gamedetails

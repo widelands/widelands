@@ -721,7 +721,7 @@ AddOnsCtrl::~AddOnsCtrl() {
 void AddOnsCtrl::login_button_clicked() {
 	if (username_.empty()) {
 		UI::UniqueWindow::Registry r;
-		AddOnsLoginBox b(get_topmost_forefather(), UI::WindowStyle::kFsMenu);
+		::AddOnsUI::AddOnsLoginBox b(get_topmost_forefather(), UI::WindowStyle::kFsMenu);
 		if (b.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
 		}

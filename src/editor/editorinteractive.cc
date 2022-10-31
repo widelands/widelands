@@ -55,15 +55,19 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/addons.h"
+#include "logic/generic_save_handler.h"
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
+#include "logic/mutable_addon.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
+#include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
+#include "network/net_addons.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -1315,9 +1319,10 @@ void EditorInteractive::set_sel_radius(const uint32_t n) {
 }
 
 void EditorInteractive::publish_map() {
-	/** Create the add-on name. */
+	/* Create the add-on name. */
 	const std::string& map_name = egbase().map().get_name();
-	std::string sanitized_name(map_name.size());
+	std::string sanitized_name;
+	sanitized_name.resize(map_name.size());
 	{
 		size_t i = 0;
 		for (const char* c = map_name.c_str(); *c != '\0'; ++c, ++i) {
@@ -1333,7 +1338,7 @@ void EditorInteractive::publish_map() {
 		}
 	}
 
-	/** Ask for confirmation. */
+	/* Ask for confirmation. */
 	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 		UI::WLMessageBox w(this, UI::WindowStyle::kWui, _("Publish Map"),
 			format(
@@ -1355,14 +1360,14 @@ void EditorInteractive::publish_map() {
 		}
 	}
 
-	/** Ask the user to log in. */
-	NetAddons net;
+	/* Ask the user to log in. */
+	AddOns::NetAddons net;
 	AddOnsUI::AddOnsLoginBox login(*this, UI::WindowStyle::kWui);
 	if (login.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 		return;
 	}
 	try {
-		net.set_login(login.get_username(), login.get_password(), true);
+		net.set_login(login.get_username(), login.get_password());
 	} catch (const std::exception& e) {
 		UI::WLMessageBox mbox(
 		   this, UI::WindowStyle::kWui, _("Login Error"), e.what(), UI::WLMessageBox::MBoxType::kOk);
@@ -1370,7 +1375,9 @@ void EditorInteractive::publish_map() {
 		return;
 	}
 
-	/** Save the map to a temp file. */
+	// NOCOM show progress...
+
+	/* Save the map to a temp file. */
 	const std::string temp_file = kTempFileDir + FileSystem::file_separator() + sanitized_name + kTempFileExtension;
 	g_fs->ensure_directory_exists(kTempFileDir);
 	GenericSaveHandler gsh(
@@ -1390,14 +1397,18 @@ void EditorInteractive::publish_map() {
 		return;
     }
 
-	// NOCOM show progress
-
-	/** Create the add-on directory, overwriting a previous add-on installation. */
-	const std::string addon_dir = kAddOnDir + FileSystem::file_separator() + sanitized_name + kAddOnExtension;
+	/* Create the add-on directory, overwriting a previous add-on installation. */
+	const std::string addon_name = sanitized_name + kAddOnExtension;
+	const std::string addon_dir = kAddOnDir + FileSystem::file_separator() + addon_name;
 	const std::string map_dir = addon_dir + FileSystem::file_separator() + kDownloadedMapsDir;
-	AddOnsVersion version;
+	const AddOns::AddOnInfo* existing = AddOns::find_addon(addon_name);
+
+	AddOns::AddOnVersion version;
+	if (existing != nullptr) {
+		version = existing->version;
+	}
+
 	if (g_fs->is_directory(addon_dir)) {
-		version = NOCOM;
 		g_fs->fs_unlink(addon_dir);
 		assert(!g_fs->is_directory(addon_dir));
 	}
@@ -1410,30 +1421,52 @@ void EditorInteractive::publish_map() {
 		version = {version.at(0) + 1};
 	}
 
-	{
-		Profile p;
-		p.create_section("global").set_translated_string(kDownloadedMapsDir, kDownloadedMapsDir);
-		p.write(addon_dir + FileSystem::file_separator() + "dirnames");
-	}
-	{
-		Profile p;
-		Section& s = p.create_section("global");
-		s.set_translated_string("name", map_name);
-		s.set_translated_string("description", egbase().map().get_description());
-		s.set_string("author", egbase().map().get_author());
-		s.set_string("version", AddOns::version_to_string(version, false));
-		s.set_string("category", AddOns::kAddOnCategories.at(kMaps).internal_name);
-		s.set_string("requires", NOCOM requirements);
-		s.set_string("min_wl_version", NOCOM min_wl_version_);
-		s.set_string("max_wl_version", NOCOM max_wl_version_);
-		p.write(addon_dir + FileSystem::file_separator() + kAddOnMainFile);
+	AddOns::AddOnInfo info;
+	info.internal_name = addon_name;
+	info.unlocalized_descname = map_name;
+	info.unlocalized_description = egbase().map().get_description();
+	info.unlocalized_author = egbase().map().get_author();
+	info.version = version;
+	info.category = AddOns::AddOnCategory::kMaps;
+
+	AddOns::NetAddons::CallbackFn fnn = [](const std::string&, int64_t) { };
+	AddOns::MutableAddOn::ProgressFunction fnm = [](size_t) { };
+
+	AddOns::MapsAddon mutable_addon(info);
+	mutable_addon.set_callbacks(fnm, fnm);
+	if (!mutable_addon.write_to_disk()) {
+		UI::WLMessageBox mbox(
+		   this, UI::WindowStyle::kWui, _("Add-On Generation Error"), _("The add-on could not be written to the disk."), UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+		return;
 	}
 
+	/* Upload to the server. */
 	try {
-		net.upload_addon(sanitized_name + kAddOnExtension, [](){}, [](){});
+		net.upload_addon(addon_name, fnn, fnn);
 	} catch (const std::exception& e) {
 		UI::WLMessageBox mbox(
 		   this, UI::WindowStyle::kWui, _("Upload Error"), e.what(), UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
+		return;
 	}
+
+	/* Finally, reload the local add-on. */
+	{
+		bool found = false;
+		for (auto& pair : AddOns::g_addons) {
+			if (pair.first->internal_name == addon_name) {
+				pair.first = AddOns::preload_addon(addon_name);
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			AddOns::g_addons.emplace_back(AddOns::preload_addon(addon_name), true);
+		}
+	}
+
+	UI::WLMessageBox mbox(
+	   this, UI::WindowStyle::kWui, _("Success"), _("The add-on was uploaded successfully."), UI::WLMessageBox::MBoxType::kOk);
+	mbox.run<UI::Panel::Returncodes>();
 }

@@ -19,10 +19,19 @@
 #include "wui/addons_login_box.h"
 
 #include "base/string.h"
+#include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "third_party/sha1/sha1.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 
 namespace AddOnsUI {
+
+constexpr int16_t kRowButtonSize = 32;
+constexpr int16_t kRowButtonSpacing = 4;
+
+constexpr const char* const kRegisterURL = "https://widelands.org/accounts/register/";
 
 AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
    : UI::Window(&parent,
@@ -34,7 +43,7 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
                 100,
                 _("Login")),
      password_sha1_(get_config_string("password_sha1", "")),
-     box_(this, panel_style, 0, 0, UI::Box::Vertical),
+     box_(this, panel_style_, 0, 0, UI::Box::Vertical),
      hbox_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
      left_box_(&hbox_, panel_style_, 0, 0, UI::Box::Vertical),
      right_box_(&hbox_, panel_style_, 0, 0, UI::Box::Vertical),
@@ -68,11 +77,12 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
 	UI::MultilineTextarea* m =
 	   new UI::MultilineTextarea(&box_, 0, 0, 100, 100, panel_style_, "",
 	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
-	m->set_style(style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph : UI::FontStyle::kWuiInfoPanelParagraph);
-	m->set_text(format(
+	m->set_text(as_richtext(g_style_manager->font_style(style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph : UI::FontStyle::kWuiInfoPanelParagraph)
+	                          .as_font_tag(format(
 	   _("In order to use a registered account, you need an account on the Widelands website. "
 	     "Please log in at %s and set an online gaming password on your profile page."),
-	   "\n\nhttps://widelands.org/accounts/register/\n\n"));
+	   g_style_manager->font_style(style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsTooltip : UI::FontStyle::kWuiTooltip)
+	                                .as_font_tag(as_url_hyperlink(kRegisterURL))))));
 
 	left_box_.add_inf_space();
 	left_box_.add(

@@ -26,8 +26,6 @@
 
 namespace AddOnsUI {
 
-class AddOnsCtrl;
-
 class AddOnsLoginBox : public UI::Window {
 public:
 	explicit AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style);

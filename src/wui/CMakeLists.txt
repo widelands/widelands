@@ -66,6 +66,19 @@ wl_library(wui_common_suggested_teams
     ui_basic
 )
 
+wl_library(wui_addons
+  SRCS
+    addons_login_box.cc
+    addons_login_box.h
+  DEPENDS
+    base
+    graphic
+    graphic_text_layout
+    ui_basic
+    third_party_sha1
+    widelands_options
+)
+
 wl_library(wui_common_gamedetails
   SRCS
     gamedetails.cc
