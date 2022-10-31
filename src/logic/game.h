@@ -181,10 +181,7 @@ public:
 
 	enum class StartGameType { kMap, kSinglePlayerScenario, kMultiPlayerScenario, kSaveGame };
 
-	bool run(StartGameType,
-	         const std::string& script_to_run,
-	         bool replay,
-	         const std::string& prefix_for_replays);
+	bool run(StartGameType, const std::string& script_to_run, const std::string& prefix_for_replays);
 
 	// Returns the upcasted lua interface.
 	LuaGameInterface& lua() override;
@@ -201,6 +198,8 @@ public:
 	// run the 'script_to_run' directly after the game was loaded.
 	// Returns the result of run().
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
+
+	bool run_replay(const std::string& filename, const std::string& script_to_run);
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	bool acquire_training_wheel_lock(const std::string& objective);
@@ -332,9 +331,14 @@ public:
 
 	const std::string& get_win_condition_displayname() const;
 	void set_win_condition_displayname(const std::string& name);
+	int32_t get_win_condition_duration() const;
 
 	bool is_replay() const {
-		return replay_;
+		return !replay_filename_.empty();
+	}
+	const std::string& replay_filename() const {
+		assert(is_replay());
+		return replay_filename_;
 	}
 
 	bool is_ai_training_mode() const {
@@ -480,12 +484,15 @@ private:
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
 
+	int32_t win_condition_duration_;
+
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	std::unique_ptr<TrainingWheels> training_wheels_;
 	bool training_wheels_wanted_;
 #endif
 
-	bool replay_;
+	/** Filename of the replay represented by this game, or empty if this is not a replay. */
+	std::string replay_filename_;
 
 	std::string next_game_to_load_;
 	std::list<std::string> list_of_scenarios_;

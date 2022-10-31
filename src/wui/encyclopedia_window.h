@@ -44,16 +44,22 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 	static UI::Window& load(FileRead&, InteractiveBase&);
 
 protected:
-	void init(InteractiveBase& parent, std::unique_ptr<LuaTable> table);
+	void init(std::unique_ptr<LuaTable> table);
+	void handle_hyperlink(const std::string& action) override;
 
+	InteractiveBase& parent_;
 	LuaInterface* const lua_;
 
 private:
 	struct EncyclopediaEntry {
-		EncyclopediaEntry(const std::string& init_script_path,
+		EncyclopediaEntry(const std::string& init_name,
+		                  const std::string& init_script_path,
 		                  const std::vector<std::string>& init_script_parameters)
-		   : script_path(init_script_path), script_parameters(init_script_parameters) {
+		   : name(init_name),
+		     script_path(init_script_path),
+		     script_parameters(init_script_parameters) {
 		}
+		const std::string name;
 		const std::string script_path;
 		const std::vector<std::string> script_parameters;
 	};

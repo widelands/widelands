@@ -16,27 +16,26 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_MOUSEWHEEL_REPORT_H
-#define WL_UI_FSMENU_MOUSEWHEEL_REPORT_H
+#ifndef WL_GRAPHIC_HYPERLINK_H
+#define WL_GRAPHIC_HYPERLINK_H
 
-#include "ui_basic/box.h"
-#include "ui_basic/button.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/window.h"
-#include "ui_fsmenu/tech_info.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 
-namespace FsMenu {
+struct NoteHyperlink {
+	CAN_BE_SENT_AS_NOTE(NoteId::Hyperlink)
 
-struct InvertedScrollFeedbackWindow : public UI::Window {
-	explicit InvertedScrollFeedbackWindow(UI::Panel* parent);
+	const std::string target;
+	const std::string action;
 
-private:
-	UI::Box content_;
-	UI::MultilineTextarea header_;
-	TechInfoBox infobox_;
-	UI::Button close_;
+	explicit NoteHyperlink(const std::string& t, const std::string& a) : target(t), action(a) {
+	}
 };
 
-}  // namespace FsMenu
+struct TextClickTarget {
+	virtual ~TextClickTarget() = default;
+	virtual bool handle_mousepress(int32_t x, int32_t y) const = 0;
+	virtual const std::string* get_tooltip(int32_t x, int32_t y) const = 0;
+};
 
-#endif  // end of include guard: WL_UI_FSMENU_MOUSEWHEEL_REPORT_H
+#endif  // end of include guard: WL_GRAPHIC_HYPERLINK_H
