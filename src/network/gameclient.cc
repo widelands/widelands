@@ -288,8 +288,8 @@ void GameClient::do_run(RecvPacket& packet) {
 		if (has_players_tribe()) {
 			tipstexts.push_back(get_players_tribe());
 		}
-		UI::ProgressWindow& loader_ui =
-		   game.create_loader_ui(tipstexts, true, d->settings.map_theme, d->settings.map_background);
+		UI::ProgressWindow& loader_ui = game.create_loader_ui(
+		   tipstexts, true, d->settings.map_theme, d->settings.map_background, true);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
