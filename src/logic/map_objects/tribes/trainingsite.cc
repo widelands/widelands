@@ -315,6 +315,17 @@ Quantity TrainingSite::SoldierControl::soldier_capacity() const {
 	return training_site_->capacity_;
 }
 
+std::vector<Soldier*> TrainingSite::SoldierControl::associated_soldiers() const {
+	std::vector<Soldier*> soldiers = stationed_soldiers();
+	if (training_site_->soldier_request_ != nullptr) {
+		for (const Transfer* t : training_site_->soldier_request_->get_transfers()) {
+			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
+			soldiers.push_back(&s);
+		}
+	}
+	return soldiers;
+}
+
 void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity) {
 	assert(min_soldier_capacity() <= capacity);
 	assert(capacity <= max_soldier_capacity());

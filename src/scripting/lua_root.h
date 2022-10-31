@@ -67,6 +67,7 @@ public:
 	int set_allow_diplomacy(lua_State*);
 	int get_interactive_player(lua_State*);
 	int get_win_condition(lua_State*);
+	int get_win_condition_duration(lua_State*);
 
 	/*
 	 * Lua methods
