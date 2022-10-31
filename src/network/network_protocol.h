@@ -27,7 +27,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 28,
+	NETWORK_PROTOCOL_VERSION = 29,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -456,6 +456,14 @@ enum : uint8_t {
 	 * \li unsigned_8: b
 	 */
 	NETCMD_SETTING_CHANGECOLOR = 35,
+
+	/**
+	 * Sent by the host to change the win condition duration.
+	 *
+	 * Attached data is:
+	 * \li signed_32: win condition duration in minutes
+	 */
+	NETCMD_WIN_CONDITION_DURATION = 36,
 
 	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability

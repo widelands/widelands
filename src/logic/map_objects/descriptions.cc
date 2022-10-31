@@ -195,6 +195,9 @@ bool Descriptions::building_exists(const std::string& buildingname) const {
 bool Descriptions::building_exists(DescriptionIndex index) const {
 	return buildings_->get_mutable(index) != nullptr;
 }
+bool Descriptions::immovable_exists(const std::string& immoname) const {
+	return immovables_->exists(immoname) != nullptr;
+}
 bool Descriptions::immovable_exists(DescriptionIndex index) const {
 	return immovables_->get_mutable(index) != nullptr;
 }
@@ -206,6 +209,12 @@ bool Descriptions::tribe_exists(const std::string& tribename) const {
 }
 bool Descriptions::tribe_exists(DescriptionIndex index) const {
 	return tribes_->get_mutable(index) != nullptr;
+}
+bool Descriptions::terrain_exists(const std::string& terrainname) const {
+	return terrains_->exists(terrainname) != nullptr;
+}
+bool Descriptions::terrain_exists(DescriptionIndex index) const {
+	return terrains_->get_mutable(index) != nullptr;
 }
 
 DescriptionIndex Descriptions::safe_building_index(const std::string& buildingname) const {

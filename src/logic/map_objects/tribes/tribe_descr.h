@@ -180,6 +180,12 @@ public:
 	const std::string& get_productionsite_workers_coming_string() const {
 		return productionsite_workers_coming_;
 	}
+	const std::string& get_productionsite_experienced_worker_missing_string() const {
+		return productionsite_experienced_worker_missing_;
+	}
+	const std::string& get_productionsite_experienced_workers_missing_string() const {
+		return productionsite_experienced_workers_missing_;
+	}
 
 	const std::string& get_soldier_context_string() const {
 		return soldier_context_;
@@ -273,6 +279,8 @@ private:
 	std::string productionsite_workers_missing_;
 	std::string productionsite_worker_coming_;
 	std::string productionsite_workers_coming_;
+	std::string productionsite_experienced_worker_missing_;
+	std::string productionsite_experienced_workers_missing_;
 
 	std::string soldier_context_;
 	std::string soldier_capacity_strings_sg_[4];

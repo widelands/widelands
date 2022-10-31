@@ -1,19 +1,19 @@
 #!/usr/bin/env python
 #
-#===- run-clang-tidy.py - Parallel clang-tidy runner ---------*- python -*--===#
+# ===- run-clang-tidy.py - Parallel clang-tidy runner ---------*- python -*--===#
 #
 # Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
 # See https://llvm.org/LICENSE.txt for license information.
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 #
-#===------------------------------------------------------------------------===#
+# ===------------------------------------------------------------------------===#
 # FIXME: Integrate with clang-tidy-diff.py
-#===------------------------------------------------------------------------===#
+# ===------------------------------------------------------------------------===#
 #
 # Downloaded from https://github.com/llvm-mirror/clang-tools-extra/blob/master/clang-tidy/tool/run-clang-tidy.py
 # Version 1c8cadde7ea4ca20a449edcffe10d23b612fe5d6
 #
-#===------------------------------------------------------------------------===#
+# ===------------------------------------------------------------------------===#
 # HOW TO RUN THIS TOOL
 #
 # 1. Install the needed libraries. On Ubuntu, this is:
@@ -49,7 +49,7 @@
 #
 #        http://clang.llvm.org/extra/clang-tidy/
 #
-#===------------------------------------------------------------------------===#
+# ===------------------------------------------------------------------------===#
 #
 
 

@@ -20,7 +20,9 @@
 
 #include <memory>
 
+#include "build_info.h"
 #include "logic/filesystem_constants.h"
+#include "ui_basic/messagebox.h"
 
 LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                Widelands::Game& g,
@@ -30,7 +32,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                bool localize_autosave,
                                UI::Panel* table_parent,
                                UI::Panel* delete_button_parent)
-   : table_box_(new UI::Box(
+   : window_style_(ws),
+     table_box_(new UI::Box(
         table_parent != nullptr ? table_parent : parent, style, 0, 0, UI::Box::Vertical)),
      filetype_(filetype),
 
@@ -38,8 +41,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      game_details_(
         parent,
         style,
-        filetype == FileType::kReplay ? GameDetails::Mode::kReplay : GameDetails::Mode::kSavegame,
-        g),
+        filetype == FileType::kReplay ? GameDetails::Mode::kReplay : GameDetails::Mode::kSavegame),
      delete_(new UI::Button(
         delete_button_parent != nullptr ? delete_button_parent : game_details()->button_box(),
         "delete",
@@ -127,6 +129,28 @@ bool LoadOrSaveGame::compare_save_time(uint32_t rowa, uint32_t rowb) const {
 
 bool LoadOrSaveGame::compare_map_name(uint32_t rowa, uint32_t rowb) const {
 	return get_savegame(rowa).compare_map_name(get_savegame(rowb));
+}
+
+/**
+ * Check whether the given file is a replay that is potentially incompatible with the
+ * current Widelands version. If so, show a message box to ask the user how to proceed.
+ * @param sd File data to investigate.
+ * @return \c false if the user has aborted loading the incompatible replay; \c true if it is not
+ * a replay at all or the replay is compatible or the user wishes to ignore the incompatibility.
+ */
+bool LoadOrSaveGame::check_replay_compatibility(const SavegameData& sd) {
+	if (filetype_ != FileType::kReplay || sd.is_directory() || !sd.errormessage.empty() ||
+	    (SDL_GetModState() & KMOD_CTRL) != 0 || sd.version == build_id()) {
+		return true;
+	}
+
+	UI::WLMessageBox w(&game_details_.get_topmost_forefather(), window_style_, _("Version Mismatch"),
+	                   _("This replay was created with a different Widelands version. It "
+	                     "might be compatible, but will more likely desync or even fail to "
+	                     "load.\n\nPlease do not report any bugs that occur while watching "
+	                     "this replay.\n\nDo you want to load the replay anyway?"),
+	                   UI::WLMessageBox::MBoxType::kOkCancel);
+	return w.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
 }
 
 std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
