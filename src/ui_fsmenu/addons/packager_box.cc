@@ -123,7 +123,9 @@ void make_valid_addon_filename(std::string& name,
 	assert(FileSystemHelper::is_legal_filename(name));
 }
 
-AddOnsPackagerBox::AddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent, uint32_t orientation)
+AddOnsPackagerBox::AddOnsPackagerBox(FsMenu::MainMenu& mainmenu,
+                                     Panel* parent,
+                                     uint32_t orientation)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, orientation),
      header_align_(0),
      main_menu_(mainmenu) {

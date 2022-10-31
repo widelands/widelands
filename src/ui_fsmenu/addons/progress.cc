@@ -22,7 +22,9 @@
 
 namespace AddOnsUI {
 
-ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, UI::WindowStyle style, const std::string& title)
+ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent,
+                                                 UI::WindowStyle style,
+                                                 const std::string& title)
    : UI::Window(parent,
                 style,
                 "progress",
@@ -36,26 +38,23 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, UI::WindowSt
      hbox_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
      txt1_(&box_,
            panel_style_,
-           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph : UI::FontStyle::kWuiInfoPanelParagraph,
+           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
+                                               UI::FontStyle::kWuiInfoPanelParagraph,
            "",
            UI::Align::kCenter),
      txt2_(&hbox_,
            panel_style_,
-           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph : UI::FontStyle::kWuiInfoPanelParagraph,
+           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
+                                               UI::FontStyle::kWuiInfoPanelParagraph,
            "",
            UI::Align::kLeft),
      txt3_(&hbox_,
            panel_style_,
-           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph : UI::FontStyle::kWuiInfoPanelParagraph,
+           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
+                                               UI::FontStyle::kWuiInfoPanelParagraph,
            "",
            UI::Align::kRight),
-     progress_(&box_,
-               panel_style_,
-               0,
-               0,
-               get_w(),
-               kRowButtonSize,
-               UI::ProgressBar::Horizontal) {
+     progress_(&box_, panel_style_, 0, 0, get_w(), kRowButtonSize, UI::ProgressBar::Horizontal) {
 
 	hbox_.add(&txt2_, UI::Box::Resizing::kExpandBoth);
 	hbox_.add(&txt3_, UI::Box::Resizing::kExpandBoth);

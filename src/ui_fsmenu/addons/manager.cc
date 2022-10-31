@@ -1369,7 +1369,8 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		}
 	}
 
-	ProgressIndicatorWindow w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, addon->descname());
+	ProgressIndicatorWindow w(
+	   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, addon->descname());
 	w.set_message_1(format(_("Uploading ‘%s’…"), addon->descname()));
 	try {
 		int64_t nr_files = 0;
@@ -1410,7 +1411,8 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 // requirements
 void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
                                     const bool only_translations) {
-	ProgressIndicatorWindow w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, remote->descname());
+	ProgressIndicatorWindow w(
+	   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, remote->descname());
 	w.set_message_1(format(_("Downloading ‘%s’…"), remote->descname()));
 
 	std::string temp_dir =

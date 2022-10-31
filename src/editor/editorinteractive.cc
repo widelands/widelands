@@ -1327,11 +1327,8 @@ void EditorInteractive::publish_map() {
 	{
 		size_t i = 0;
 		for (const char* c = map_name.c_str(); *c != '\0'; ++c, ++i) {
-			if (
-					(*c >= 'a' && *c <= 'z') ||
-					(*c >= 'A' && *c <= 'Z') ||
-					(*c >= '0' && *c <= '9') ||
-					*c == '-' || *c == '_') {
+			if ((*c >= 'a' && *c <= 'z') || (*c >= 'A' && *c <= 'Z') || (*c >= '0' && *c <= '9') ||
+			    *c == '-' || *c == '_') {
 				sanitized_name[i] = *c;
 			} else {
 				sanitized_name[i] = '_';
@@ -1341,21 +1338,17 @@ void EditorInteractive::publish_map() {
 
 	/* Ask for confirmation. */
 	if ((SDL_GetModState() & KMOD_CTRL) == 0) {
-		UI::WLMessageBox w(this, UI::WindowStyle::kWui, _("Publish Map"),
-			format(
-				_("Are you certain that you want to publish this map online?\n\n"
-				"Name: %1$s\n"
-				"Internal name: %2$s\n"
-				"Author: %3$s\n"
-				"Description: %4$s\n"
-				"Hint: %5$s\n"
-				)
-				, map_name
-				, sanitized_name + kAddOnExtension
-				, egbase().map().get_author()
-				, egbase().map().get_description()
-				, egbase().map().get_hint()
-			), UI::WLMessageBox::MBoxType::kOkCancel);
+		UI::WLMessageBox w(
+		   this, UI::WindowStyle::kWui, _("Publish Map"),
+		   format(_("Are you certain that you want to publish this map online?\n\n"
+		            "Name: %1$s\n"
+		            "Internal name: %2$s\n"
+		            "Author: %3$s\n"
+		            "Description: %4$s\n"
+		            "Hint: %5$s\n"),
+		          map_name, sanitized_name + kAddOnExtension, egbase().map().get_author(),
+		          egbase().map().get_description(), egbase().map().get_hint()),
+		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
 		}
@@ -1380,7 +1373,8 @@ void EditorInteractive::publish_map() {
 	progress.set_message_1(_("Saving map…"));
 
 	/* Save the map to a temp file. */
-	const std::string temp_file = kTempFileDir + FileSystem::file_separator() + sanitized_name + kTempFileExtension;
+	const std::string temp_file =
+	   kTempFileDir + FileSystem::file_separator() + sanitized_name + kTempFileExtension;
 	g_fs->ensure_directory_exists(kTempFileDir);
 	GenericSaveHandler gsh(
 	   [this](FileSystem& fs) {
@@ -1390,14 +1384,15 @@ void EditorInteractive::publish_map() {
 	   temp_file, FileSystem::ZIP);
 	GenericSaveHandler::Error error = gsh.save();
 
-	if (error != GenericSaveHandler::Error::kSuccess && error != GenericSaveHandler::Error::kDeletingBackupFailed) {
-	    progress.set_visible(false);
+	if (error != GenericSaveHandler::Error::kSuccess &&
+	    error != GenericSaveHandler::Error::kDeletingBackupFailed) {
+		progress.set_visible(false);
 		std::string msg = gsh.localized_formatted_result_message();
 		UI::WLMessageBox mbox(
 		   this, UI::WindowStyle::kWui, _("Error Saving Map!"), msg, UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 		return;
-    }
+	}
 
 	/* Create the add-on directory, overwriting a previous add-on installation. */
 	progress.set_message_1(_("Packaging add-on…"));
@@ -1416,7 +1411,8 @@ void EditorInteractive::publish_map() {
 		assert(!g_fs->is_directory(addon_dir));
 	}
 	g_fs->ensure_directory_exists(map_dir);
-	g_fs->fs_rename(temp_file, map_dir + FileSystem::file_separator() + sanitized_name + kWidelandsMapExtension);
+	g_fs->fs_rename(
+	   temp_file, map_dir + FileSystem::file_separator() + sanitized_name + kWidelandsMapExtension);
 
 	if (version.empty()) {
 		version = {1};
@@ -1438,9 +1434,10 @@ void EditorInteractive::publish_map() {
 	AddOns::MapsAddon mutable_addon(info);
 	mutable_addon.set_callbacks(fnm, fnm);
 	if (!mutable_addon.write_to_disk()) {
-	    progress.set_visible(false);
-		UI::WLMessageBox mbox(
-		   this, UI::WindowStyle::kWui, _("Add-On Generation Error"), _("The add-on could not be written to the disk."), UI::WLMessageBox::MBoxType::kOk);
+		progress.set_visible(false);
+		UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Add-On Generation Error"),
+		                      _("The add-on could not be written to the disk."),
+		                      UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 		return;
 	}
@@ -1450,7 +1447,7 @@ void EditorInteractive::publish_map() {
 	try {
 		net.upload_addon(addon_name, fnn, fnn);
 	} catch (const std::exception& e) {
-	    progress.set_visible(false);
+		progress.set_visible(false);
 		UI::WLMessageBox mbox(
 		   this, UI::WindowStyle::kWui, _("Upload Error"), e.what(), UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
@@ -1473,8 +1470,9 @@ void EditorInteractive::publish_map() {
 		}
 	}
 
-    progress.set_visible(false);
-	UI::WLMessageBox mbox(
-	   this, UI::WindowStyle::kWui, _("Success"), _("The add-on was uploaded successfully."), UI::WLMessageBox::MBoxType::kOk);
+	progress.set_visible(false);
+	UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Success"),
+	                      _("The add-on was uploaded successfully."),
+	                      UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
 }
