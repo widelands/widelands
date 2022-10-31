@@ -292,3 +292,11 @@ std::string SinglePlayerGameSettingsProvider::get_win_condition_script() {
 void SinglePlayerGameSettingsProvider::set_win_condition_script(const std::string& wc) {
 	s.win_condition_script = wc;
 }
+
+int32_t SinglePlayerGameSettingsProvider::get_win_condition_duration() {
+	return s.win_condition_duration;
+}
+
+void SinglePlayerGameSettingsProvider::set_win_condition_duration(const int32_t duration) {
+	s.win_condition_duration = duration;
+}

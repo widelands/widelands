@@ -663,6 +663,9 @@ void MultilineEditbox::delete_selected_text() const {
 }
 
 bool MultilineEditbox::handle_textinput(const std::string& input_text) {
+	if (d_->mode == Data::Mode::kSelection) {
+		delete_selected_text();
+	}
 	if (d_->text.size() + input_text.size() <= d_->maxbytes) {
 		d_->insert(d_->cursor_pos, input_text);
 		d_->reset_selection();
