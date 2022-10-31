@@ -528,20 +528,30 @@ end
 -- Links
 -- ^^^^^
 --
--- This section covers functions for including links. We can't do real links yet,
--- so we only highlight the text for now.
+-- This section covers functions for including hyperlinks.
 
 -- RST
--- .. function:: a(link)
+-- .. function:: a(linktext, linktype, target[, action=nil][, mouseover=target|linktext])
 --
---    This function imitates a HTML link. We can't do real links yet, so the text just gets underlines.
+--    This function creates a hyperlink.
 --
---    :arg link: the text to format
+--    :arg linktext: The text to display.
+--    :type linktext: :class:`string`
+--    :arg linktype: Type of the link. Use ``"ui"`` for internal links and ``"url"`` for external (browser) links.
+--    :type linktype: :class:`string`
+--    :arg target: The name of the UI element to notify or the URL to open.
+--    :type target: :class:`string`
+--    :arg action: Only valid for UI links. The action the UI element should perform.
+--    :type action: :class:`string` or :class:`nil`
+--    :arg mouseover: The text to show on mouse hovering. This defaults to the target for URLs or the linktext for other links; use ``""`` to disable.
+--    :type mouseover: :class:`string`
 --
---    :returns: a font tag containing the underlined text
+--    :returns: The linkified and underlined text.
 
-function a(link)
-   return font("underline=1", link)
+function a(linktext, linktype, target, action, mouseover)
+   local str = "<link type=" .. linktype .. " target=\"" .. target .. "\""
+   if action ~= nil then str = str .. " action=\"" .. action .. "\"" end
+   return str .. "mouseover=\"" .. (mouseover or ((linktype == "url") and target or linktext)) .. "\">" .. font("underline=1", linktext) .. "</link>"
 end
 
 -- RST

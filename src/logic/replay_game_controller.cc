@@ -27,14 +27,14 @@
 #include "ui_basic/messagebox.h"
 #include "wui/interactive_base.h"
 
-ReplayGameController::ReplayGameController(Widelands::Game& game, const std::string& filename)
+ReplayGameController::ReplayGameController(Widelands::Game& game)
    : game_(game),
      lastframe_(SDL_GetTicks()),
      time_(game_.get_gametime()),
      speed_(1000),
      paused_(false) {
 	game_.set_game_controller(std::shared_ptr<ReplayGameController>(this));
-	replayreader_.reset(new Widelands::ReplayReader(game_, filename));
+	replayreader_.reset(new Widelands::ReplayReader(game_, game_.replay_filename()));
 }
 
 void ReplayGameController::think() {

@@ -473,13 +473,13 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				}
 			}
 			return true;
-
 		default:
 			break;
 		}
+		return true;
 	}
 
-	return false;
+	return Panel::handle_key(down, code);
 }
 void EditBox::copy_selected_text() {
 	uint32_t start;
@@ -492,6 +492,9 @@ void EditBox::copy_selected_text() {
 }
 
 bool EditBox::handle_textinput(const std::string& input_text) {
+	if (m_->mode == EditBoxImpl::Mode::kSelection) {
+		delete_selected_text();
+	}
 	if ((m_->text.size() + input_text.length()) < m_->maxLength) {
 		m_->text.insert(m_->caret, input_text);
 		m_->caret += input_text.length();
