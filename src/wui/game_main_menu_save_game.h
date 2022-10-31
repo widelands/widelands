@@ -39,7 +39,7 @@ struct SaveWarnMessageBox;
  * Note that this window is always modal.
  */
 struct GameMainMenuSaveGame : public UI::UniqueWindow {
-	enum class Type { kSave, kLoad };
+	enum class Type { kSave, kLoadSavegame, kLoadReplay };
 
 	friend struct SaveWarnMessageBox;
 	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry, Type);

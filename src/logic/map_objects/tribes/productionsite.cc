@@ -308,21 +308,55 @@ void ProductionSite::load_finish(EditorGameBase& egbase) {
  * Display whether we're occupied.
  */
 void ProductionSite::update_statistics_string(std::string* s) {
+	uint32_t nr_xp_requests = 0;
 	uint32_t nr_requests = 0;
 	uint32_t nr_coming = 0;
+
+	auto worker_descr_it = descr().working_positions().begin();
+	uint32_t worker_descr_it_counter = worker_descr_it->second;
+
 	for (uint32_t i = 0; i < descr().nr_working_positions(); ++i) {
 		const Widelands::Request* request = working_positions_.at(i).worker_request;
 		// Check whether a request is being fulfilled or not
+		bool vacant = false;
 		if (request != nullptr) {
 			if (request->is_open()) {
-				++nr_requests;
+				vacant = true;
 			} else {
 				++nr_coming;
 			}
 		} else if (working_positions_.at(i).worker == nullptr) {
 			// We might have no request, but no worker either
-			++nr_requests;
+			vacant = true;
 		}
+
+		if (vacant) {
+			// Check if this worker can be built directly
+			const WorkerDescr& d =
+			   *owner().egbase().descriptions().get_worker_descr(worker_descr_it->first);
+			if (d.is_buildable() || d.has_demand_check()) {
+				++nr_requests;
+			} else {
+				++nr_xp_requests;
+			}
+		}
+
+		--worker_descr_it_counter;
+		if (worker_descr_it_counter == 0) {
+			++worker_descr_it;
+			if (worker_descr_it != descr().working_positions().end()) {
+				worker_descr_it_counter = worker_descr_it->second;
+			}
+		}
+	}
+
+	if (nr_xp_requests > 0) {
+		*s = StyleManager::color_tag(
+		   (nr_xp_requests == 1 ?
+             owner().tribe().get_productionsite_experienced_worker_missing_string() :
+             owner().tribe().get_productionsite_experienced_workers_missing_string()),
+		   g_style_manager->building_statistics_style().low_color());
+		return;
 	}
 
 	if (nr_requests > 0) {

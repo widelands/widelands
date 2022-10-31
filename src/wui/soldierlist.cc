@@ -92,6 +92,7 @@ private:
 		/*@{*/
 		uint32_t cache_level = 0;
 		uint32_t cache_health = 0;
+		bool cache_is_present = false;
 		/*@}*/
 	};
 
@@ -140,7 +141,7 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 	// Initialize the icons
 	uint32_t row = 0;
 	uint32_t col = 0;
-	for (Soldier* soldier : building.soldier_control()->present_soldiers()) {
+	for (Soldier* soldier : building.soldier_control()->associated_soldiers()) {
 		Icon icon;
 		icon.soldier = soldier;
 		icon.row = row;
@@ -148,6 +149,7 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 		icon.pos = calc_pos(row, col);
 		icon.cache_health = 0;
 		icon.cache_level = 0;
+		icon.cache_is_present = building.is_present(*soldier);
 		icons_.push_back(icon);
 
 		if (++col >= cols_) {
@@ -181,7 +183,7 @@ void SoldierPanel::think() {
 	uint32_t capacity = b->soldier_control()->soldier_capacity();
 
 	// Update soldier list and target row/col:
-	std::vector<Soldier*> soldierlist = b->soldier_control()->present_soldiers();
+	std::vector<Soldier*> soldierlist = b->soldier_control()->associated_soldiers();
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(rows_);
 
@@ -272,10 +274,13 @@ void SoldierPanel::think() {
 		level = level * (soldier->descr().get_max_health_level() + 1) + soldier->get_health_level();
 
 		uint32_t health = soldier->get_current_health();
+		bool present = b->is_present(*soldier);
 
-		if (health != icon.cache_health || level != icon.cache_level) {
+		if (health != icon.cache_health || level != icon.cache_level ||
+		    present != icon.cache_is_present) {
 			icon.cache_level = level;
 			icon.cache_health = health;
+			icon.cache_is_present = present;
 			changes = true;
 		}
 	}
@@ -315,6 +320,12 @@ void SoldierPanel::draw(RenderTarget& dst) {
 		constexpr float kNoZoom = 1.f;
 		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom,
 		                        Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
+
+		if (!icon.cache_is_present) {
+			// Since the background is black, darkening the icon has the same effect
+			// as drawing it with partial transparency but is easier to achieve.
+			dst.brighten_rect(Recti(icon.pos, icon_width_, icon_height_), -128);
+		}
 	}
 }
 

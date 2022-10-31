@@ -22,6 +22,7 @@
 
 #include "base/i18n.h"
 #include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
@@ -36,18 +37,6 @@ static constexpr int kReportWindowHeight = 500;
 constexpr int16_t kSpacing = 8;
 
 constexpr const char* const kReportURL = "https://github.com/widelands/widelands/discussions/5367";
-
-#if SDL_VERSION_ATLEAST(2, 0, 14)
-const std::string url_button_text = gettext_noop("Open Link");
-void url_button_action() {
-	SDL_OpenURL(kReportURL);
-}
-#else
-const std::string url_button_text = gettext_noop("Copy Link");
-void url_button_action() {
-	SDL_SetClipboardText(kReportURL);
-}
-#endif
 
 // Help users give feedback when inverted horizontal scrolling detection is wrong
 InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
@@ -76,22 +65,18 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
                           " To do so, please report at %s that horizontal scroll direction is"
                           " wrong with your configuration. Please include the below technical"
                           " information."),
-                        format("<font underline=true>%s</font>", kReportURL)))),
+                        g_style_manager->font_style(UI::FontStyle::kFsTooltip)
+                           .as_font_tag(as_url_hyperlink(kReportURL))))),
         UI::Align::kLeft,
         UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     url_button_(
-        &content_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _(url_button_text)),
      infobox_(&content_, TechInfoBox::Type::kMousewheelReport),
      close_(&content_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
 	do_not_layout_on_resolution_change();
 
-	url_button_.sigclicked.connect(url_button_action);
 	close_.sigclicked.connect([this]() { die(); });
 
 	content_.add_space(3 * kSpacing);
 	content_.add(&header_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	content_.add_space(3 * kSpacing);
-	content_.add(&url_button_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	content_.add_inf_space();
 	content_.add(&infobox_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	content_.add_inf_space();
@@ -104,10 +89,6 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
 	}
 	content_.set_size(get_inner_w(), get_inner_h());
 	header_.set_size(content_.get_inner_w(), 0);
-	Vector2i ub_pos = url_button_.get_pos();
-	ub_pos.x = (content_.get_inner_w() - url_button_.get_w()) / 3;
-	url_button_.set_pos(ub_pos);
-	url_button_.set_size(content_.get_inner_w() - 2 * ub_pos.x, url_button_.get_h());
 	infobox_.set_size(content_.get_inner_w(), infobox_.get_h());
 	layout();
 	center_to_parent();
