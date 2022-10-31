@@ -67,6 +67,23 @@ std::vector<Soldier*> MilitarySite::SoldierControl::stationed_soldiers() const {
 	return soldiers;
 }
 
+std::vector<Soldier*> MilitarySite::SoldierControl::associated_soldiers() const {
+	std::vector<Soldier*> soldiers = stationed_soldiers();
+	if (military_site_->normal_soldier_request_ != nullptr) {
+		for (const Transfer* t : military_site_->normal_soldier_request_->get_transfers()) {
+			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
+			soldiers.push_back(&s);
+		}
+	}
+	if (military_site_->upgrade_soldier_request_ != nullptr) {
+		for (const Transfer* t : military_site_->upgrade_soldier_request_->get_transfers()) {
+			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
+			soldiers.push_back(&s);
+		}
+	}
+	return soldiers;
+}
+
 Quantity MilitarySite::SoldierControl::min_soldier_capacity() const {
 	return 1;
 }
@@ -851,15 +868,6 @@ bool MilitarySite::get_building_work(Game& game, Worker& worker, bool /*success*
 	}
 
 	return false;
-}
-
-/**
- * \return \c true if the soldier is currently present and idle in the building.
- */
-bool MilitarySite::is_present(Soldier& soldier) const {
-	return soldier.get_location(get_owner()->egbase()) == this &&
-	       soldier.get_state() == soldier.get_state(Worker::taskBuildingwork) &&
-	       soldier.get_position() == get_position();
 }
 
 void MilitarySite::conquer_area(EditorGameBase& egbase) {

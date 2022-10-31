@@ -104,6 +104,7 @@ public:
 	void game_logic_think() override;
 	void think() override;
 	double average_fps() const;
+	uint64_t average_real_gamespeed() const;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
 
@@ -413,13 +414,16 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
-	uint32_t lastframe_;        //  system time (milliseconds)
-	uint32_t frametime_;        //  in millseconds
-	uint32_t avg_usframetime_;  //  in microseconds!
+	uint64_t lastframe_;        //  system time (milliseconds)
+	uint64_t frametime_;        //  in millseconds
+	uint64_t avg_usframetime_;  //  in microseconds!
 
 	// For measuring actual game speed and how smoothly the game logic runs
-	uint32_t last_frame_realtime_, previous_frame_realtime_;
+	uint64_t last_frame_realtime_, previous_frame_realtime_;
 	Time last_frame_gametime_, previous_frame_gametime_;
+	uint64_t avg_actual_gamespeed_;  // in microseconds gametime per second realtime
+	uint64_t last_target_gamespeed_;
+	uint64_t gamespeed_last_change_time_;
 
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 

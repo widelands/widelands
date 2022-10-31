@@ -462,6 +462,14 @@ enum : uint8_t {
 	NETCMD_SETTING_CHANGECOLOR = 35,
 
 	/**
+	 * Sent by the host to change the win condition duration.
+	 *
+	 * Attached data is:
+	 * \li signed_32: win condition duration in minutes
+	 */
+	NETCMD_WIN_CONDITION_DURATION = 36,
+
+	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability
 	 */
 	NETCMD_METASERVER_PING = 64

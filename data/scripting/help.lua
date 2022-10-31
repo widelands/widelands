@@ -13,6 +13,17 @@
 include "scripting/richtext.lua"
 
 
+-- RST
+-- .. function:: linkify_encyclopedia_object(descr)
+--
+--    Return the localized name of the given unit description
+--    as a hyperlink pointing to its encyclopedia entry.
+--
+--    :arg descr: The unit description to linkify.
+--    :returns: Richtext markup for the hyperlink.
+function linkify_encyclopedia_object(descr)
+   return a(descr.species ~= "" and descr.species or descr.descname, "ui", "encyclopedia", descr.name)
+end
 
 -- RST
 -- .. function:: tree_affinity_list(terrain_description)
@@ -94,8 +105,7 @@ function terrain_affinity_help(immovable_description)
    for k,v in ipairs(terrain_list) do
       if (k <= 10 or v.probability > 0.25) then
          result = result .. li_image(v.terrain.representative_image,
-               -- TRANSLATORS: Terrain name (Climate)
-               v.terrain.descname .. "<br>" ..
+               (wl.Editor ~= nil and linkify_encyclopedia_object(v.terrain) or v.terrain.descname) .. "<br>" ..
                -- TRANSLATORS: Help text - Probability to grow for an immovable
                (_("%2.1f%%")):bformat(100 * v.probability)
             ) .. vspace(6)

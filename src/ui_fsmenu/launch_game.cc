@@ -75,6 +75,20 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
+     win_condition_duration_(&right_column_content_box_,
+                             0,
+                             0,
+                             360,
+                             240,
+                             Widelands::kDefaultWinConditionDuration,
+                             15,        // 15 minutes minimum gametime
+                             512 * 60,  // 512 hours maximum gametime (arbitrary limit)
+                             UI::PanelStyle::kFsMenu,
+                             _("Playing time"),
+                             UI::SpinBox::Units::kMinutes,
+                             UI::SpinBox::Type::kBig,
+                             5,
+                             60),
      peaceful_(
         &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
      custom_starting_positions_(&right_column_content_box_,
@@ -108,6 +122,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
      peaceful_mode_forbidden_(false) {
 	warn_desyncing_addon_.set_visible(false);
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
+	win_condition_duration_.changed.connect([this]() { win_condition_duration_changed(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
 	if (choose_map_ != nullptr) {
@@ -141,6 +156,8 @@ void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&configure_game_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add(&win_condition_duration_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&peaceful_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
@@ -233,6 +250,7 @@ void LaunchGame::update_custom_starting_positions() {
 }
 
 bool LaunchGame::init_win_condition_label() {
+	win_condition_duration_.set_visible(false);
 	if (settings_.settings().scenario) {
 		win_condition_dropdown_.set_enabled(false);
 		win_condition_dropdown_.set_label(_("Scenario"));
@@ -351,6 +369,10 @@ LaunchGame::win_condition_if_valid(const std::string& win_condition_script,
 		t.reset(nullptr);
 	}
 	return t;
+}
+
+void LaunchGame::win_condition_duration_changed() {
+	settings_.set_win_condition_duration(win_condition_duration_.get_value());
 }
 
 void LaunchGame::toggle_peaceful() {

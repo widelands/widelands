@@ -1,6 +1,7 @@
 -- Returns definitions for encyclopedia tabs and their contents for the
 -- Editor Help
 
+include "scripting/help.lua"
 
 -- Comparison function used to sort map objects alphabetically
 function compare_by_title(a, b)

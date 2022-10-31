@@ -5,6 +5,7 @@
 # Translators:
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Zlopez <michal.konecny@psmail.xyz>, 2021
+# Tomáš Mráz, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021\n"
+"Last-Translator: Tomáš Mráz, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -779,7 +780,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:321
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:329
 msgid "Stuck"
-msgstr ""
+msgstr "Zaseklý"
 
 #. TRANSLATORS: M. C. Iniucundus – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:323
@@ -790,6 +791,11 @@ msgid ""
 "remain on this island for such a long time that you will never accomplish "
 "the objective of your futile journey. Despair in your triumph!"
 msgstr ""
+"Teď se podívej, kam nás tvoje hloupost dovedla. Bouře ustala ale od té doby,"
+" co jsi vypálil náš přístav, jsme tu všichni uvízli. Bohové jsou spravedliví"
+" – i když se zdáte v boji mocnější než my, nutí vás zůstat na tomto ostrově "
+"tak dlouho, že nikdy nesplníte cíl své marné cesty. Zoufalství ve svém "
+"triumfu!"
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:331
@@ -797,6 +803,8 @@ msgid ""
 "This is a disaster! We have reached another shore, but another tribe has "
 "already settled there. They won’t allow us to land on their coast."
 msgstr ""
+"To je katastrofa! Dostali jsme se k dalšímu břehu, ale už je obydlený jiným "
+"kmenem. Nedovolí nám přistát na pobřeží."
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:334
@@ -804,6 +812,8 @@ msgid ""
 "We were too slow. We dawdled and dallied and this is the result. There is no"
 " way forward. None of us will ever see our home again!"
 msgstr ""
+"Byli jsme příliš pomalí. Jen jsme se flákali a tohle je výsledek. Není jiné "
+"cesty. Nikdo z nás už nikdy neuvidí svůj domov!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8

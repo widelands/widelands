@@ -9,6 +9,7 @@
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2020
 # LINUX-SAUNA, 2022
+# LINUX-SAUNA, 2022
 # Markus <markus@hallfors.com>, 2015
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -1793,16 +1794,16 @@ msgstr "Työläiset ovat matkalla"
 msgctxt "amazons_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilaat (+%2%)"
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/amazons/units.lua:1659
 msgctxt "amazons_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilaat"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -1811,8 +1812,8 @@ msgstr[1] ""
 msgctxt "amazons_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas (+%3%)"
+msgstr[1] "%1%(+%2%) sotilaat (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -1820,8 +1821,8 @@ msgstr[1] ""
 msgctxt "amazons_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilaat"
 
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:419
@@ -3863,16 +3864,16 @@ msgstr "Työläiset ovat matkalla"
 msgctxt "atlanteans_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilaat (+%2%)"
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/atlanteans/units.lua:2045
 msgctxt "atlanteans_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilaat"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -3881,8 +3882,8 @@ msgstr[1] ""
 msgctxt "atlanteans_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas (+%3%)"
+msgstr[1] "%1%(+%2%) sotilaat (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -3890,8 +3891,8 @@ msgstr[1] ""
 msgctxt "atlanteans_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilaat"
 
 #. TRANSLATORS: Helptext for a barbarian ware: Granite, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:101
@@ -5791,16 +5792,16 @@ msgstr "Työläiset ovat matkalla"
 msgctxt "barbarians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilaat (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/barbarians/units.lua:1834
 msgctxt "barbarians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilaat"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5809,8 +5810,8 @@ msgstr[1] ""
 msgctxt "barbarians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas (+%3%)"
+msgstr[1] "%1%(+%2%) sotilaat (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5818,8 +5819,8 @@ msgstr[1] ""
 msgctxt "barbarians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilaat"
 
 #. TRANSLATORS: Format string for a latin quote and its translation
 #: ../../data/tribes/initialization/empire/units.lua:12
@@ -7919,16 +7920,16 @@ msgstr "Työläiset ovat matkalla"
 msgctxt "empire_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilaat (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/units.lua:2305
 msgctxt "empire_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilaat"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -7937,8 +7938,8 @@ msgstr[1] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas (+%3%)"
+msgstr[1] "%1%(+%2%) sotilaat (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -7946,8 +7947,8 @@ msgstr[1] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilaat"
 
 #. TRANSLATORS: Helptext for a frisian ware: Log, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:100
@@ -8426,7 +8427,7 @@ msgstr "Työskentelee telakalla, rakentaa uusia aluksia."
 #: ../../data/tribes/initialization/frisians/units.lua:728
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "Rakentaa aallonmurtajan saavuttaaksemme uusia maa-alueita mereltä."
 
 #. TRANSLATORS: Helptext for a frisian worker: Fisher
 #: ../../data/tribes/initialization/frisians/units.lua:738
@@ -8666,7 +8667,7 @@ msgstr "Hiilikasa, joka on pystytetty tähän maakuoppaan, on valmis hiilenpoltt
 #. TRANSLATORS: Helptext for a frisian immovable: Dike
 #: ../../data/tribes/initialization/frisians/units.lua:1240
 msgid "A breakwater erected by a diker to gain new land from the sea."
-msgstr ""
+msgstr "Patoaja on luonut aallonmurtajan jotta voimme saavuttaa uusia maa-alueita mereltä."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Diker's House
 #: ../../data/tribes/initialization/frisians/units.lua:1242
@@ -8674,7 +8675,7 @@ msgid ""
 "You can manually remove the dike when the land is sufficiently secured to "
 "prevent wasting resources. To do so, build a flag, road, or building in its "
 "place."
-msgstr ""
+msgstr "Voit poistaa padon käsin kun maata on tarpeeksi saavutettu estääksemme käyttövarojemme tuhlaamisen. Tehdäksesi niin, rakenna lippu, tie, tai rakenna vain sen paikalle."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/frisians/units.lua:1263
@@ -9605,7 +9606,7 @@ msgstr "Maanviljelijä tarvitsee työskentelyalueella vapaata maata siemenien is
 #: ../../data/tribes/initialization/frisians/units.lua:1983
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
-msgstr ""
+msgstr "Rakentaa allonmurtajia lähistölle uusien maa-alueiden saavuttamiseksi mereltä."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Diker's House
 #: ../../data/tribes/initialization/frisians/units.lua:1985
@@ -9615,7 +9616,7 @@ msgid ""
 "times. You can manually remove breakwaters when the land is sufficiently "
 "secured to prevent wasting resources; to do so, build a flag, road, or "
 "building in the dike’s place."
-msgstr ""
+msgstr "Patoaja muokkaa maata jokaisen aallonmurtajan ympärillä jotka hän rakentaa useaankin kertaan. Voit poistaa aallonmurtajat käsin kun maata on saavutettu tarpeeksi jotta käyttävarojamme ei tuhlaantuisi; tehdäksesi niin, rakenna lippu, tie, tai rakenne patoajan paikan päälle."
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Rock Mine
@@ -9875,16 +9876,16 @@ msgstr "Työläiset ovat matkalla"
 msgctxt "frisians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilaat (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/units.lua:2232
 msgctxt "frisians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilaat"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -9893,8 +9894,8 @@ msgstr[1] ""
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas (+%3%)"
+msgstr[1] "%1%(+%2%) sotilaat (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -9902,8 +9903,8 @@ msgstr[1] ""
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilaat"
 
 #: ../../data/tribes/scripting/help/building_help.lua:242
 #: ../../data/tribes/scripting/help/format_help.lua:250

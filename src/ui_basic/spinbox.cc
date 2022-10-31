@@ -59,6 +59,7 @@ struct SpinBoxImpl {
 	/// The UI parts
 	UI::Button* text = nullptr;
 	UI::MultilineTextarea* label = nullptr;
+	UI::Panel* label_padding = nullptr;
 	Button* button_plus = nullptr;
 	Button* button_minus = nullptr;
 	Button* button_ten_plus = nullptr;
@@ -109,10 +110,11 @@ SpinBox::SpinBox(Panel* const parent,
 
 	box_ = new UI::Box(this, style, 0, 0, UI::Box::Horizontal);
 
+	sbi_->label_padding = new UI::Panel(box_, style, 0, 0, padding_, padding_);
 	sbi_->label = new UI::MultilineTextarea(box_, 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
 	                                        UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(sbi_->label);
-	box_->add_space(padding_);
+	box_->add(sbi_->label_padding);
 
 	sbi_->text = new UI::Button(box_, "value", 0, 0, 0, button_height_,
 	                            style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
@@ -130,12 +132,12 @@ SpinBox::SpinBox(Panel* const parent,
 	   new Button(box_, "-", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_left.png" :
                                              "images/ui_basic/scrollbar_down.png"),
-	              _("Decrease the value"));
+	              format(_("Decrease the value by %s"), unit_text(sbi_->step_size)));
 	sbi_->button_plus =
 	   new Button(box_, "+", 0, 0, button_height_, button_height_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_right.png" :
                                              "images/ui_basic/scrollbar_up.png"),
-	              _("Increase the value"));
+	              format(_("Increase the value by %s"), unit_text(sbi_->step_size)));
 	sbi_->button_minus->set_can_focus(false);
 	sbi_->button_plus->set_can_focus(false);
 
@@ -143,11 +145,11 @@ SpinBox::SpinBox(Panel* const parent,
 		sbi_->button_ten_minus =
 		   new Button(box_, "--", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
 		              g_image_cache->get("images/ui_basic/scrollbar_left_fast.png"),
-		              _("Decrease the value by 10"));
+		              format(_("Decrease the value by %s"), unit_text(sbi_->big_step_size)));
 		sbi_->button_ten_plus =
 		   new Button(box_, "++", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
 		              g_image_cache->get("images/ui_basic/scrollbar_right_fast.png"),
-		              _("Increase the value by 10"));
+		              format(_("Increase the value by %s"), unit_text(sbi_->big_step_size)));
 		sbi_->button_ten_minus->set_can_focus(false);
 		sbi_->button_ten_plus->set_can_focus(false);
 
@@ -278,10 +280,12 @@ void SpinBox::layout() {
 	if (get_w() >= static_cast<int32_t>(unit_width_ + padding_)) {
 		// 10 is arbitrary, the actual height will be set by the Multilinetextarea itself
 		sbi_->label->set_visible(true);
+		sbi_->label_padding->set_visible(true);
 		sbi_->label->set_size(get_w() - unit_width_ - padding_, 10);
 	} else {
 		// There is no space for the label
 		sbi_->label->set_visible(false);
+		sbi_->label_padding->set_visible(false);
 	}
 
 	if (type_ == SpinBox::Type::kBig) {
@@ -402,9 +406,29 @@ void SpinBox::add_replacement(int32_t value, const std::string& text) {
 
 const std::string SpinBox::unit_text(int32_t value) const {
 	switch (sbi_->unit) {
-	case (Units::kMinutes):
-		/** TRANSLATORS: A spinbox unit */
-		return format(ngettext("%d minute", "%d minutes", value), value);
+	case (Units::kMinutes): {
+		if (value < 60) {
+			/** TRANSLATORS: A spinbox unit */
+			return format(ngettext("%d minute", "%d minutes", value), value);
+		}
+
+		if (value % 60 == 0) {
+			value /= 60;
+			/** TRANSLATORS: A spinbox unit */
+			return format(ngettext("%d hour", "%d hours", value), value);
+		}
+
+		const int32_t hours = value / 60;
+		value %= 60;
+		return format(
+		   /** TRANSLATORS: X hours and Y minutes */
+		   _("%1$s and %2$s"),
+		   /** TRANSLATORS: A spinbox unit */
+		   format(ngettext("%d hour", "%d hours", hours), hours),
+		   /** TRANSLATORS: A spinbox unit */
+		   format(ngettext("%d minute", "%d minutes", value), value));
+	}
+
 	case (Units::kPixels):
 		/** TRANSLATORS: A spinbox unit */
 		return format(ngettext("%d pixel", "%d pixels", value), value);
