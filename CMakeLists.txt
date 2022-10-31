@@ -16,6 +16,8 @@ option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
 option(OPTION_FORCE_EMBEDDED_MINIZIP "Use embedded minizip sources" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
+set(CMAKE_FIND_FRAMEWORK LAST)
+
 # Absolute path reference for submodules
 set(WL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 
@@ -152,7 +154,7 @@ find_package (PythonInterp REQUIRED)
 
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
-find_package(PNG REQUIRED)
+find_package(PNG 1.6 REQUIRED)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)

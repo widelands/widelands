@@ -883,6 +883,15 @@ void Building::set_soldier_control(SoldierControl* new_soldier_control) {
 }
 
 /**
+ * \return \c true if the worker is currently present and idle in the building.
+ */
+bool Building::is_present(Worker& worker) const {
+	return worker.get_location(get_owner()->egbase()) == this &&
+	       worker.get_state() == worker.get_state(Worker::taskBuildingwork) &&
+	       worker.get_position() == get_position();
+}
+
+/**
  * Change whether this building sees its vision range based on workers
  * inside the building.
  *

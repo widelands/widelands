@@ -24,14 +24,13 @@
 #include <ostream>
 #include <sstream>
 
-#include <SDL.h>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/warning.h"
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
@@ -57,13 +56,6 @@ constexpr const char* const kForumURL = "https://www.widelands.org/forum/forum/1
 // UI::Box by defaults limits its size to the window resolution. We use scrollbars,
 // so we can and need to allow somewhat larger dimensions.
 constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
-
-std::string underline_tag(const std::string& text) {
-	std::string str = "<font underline=true>";
-	str += text;
-	str += "</font>";
-	return str;
-}
 
 std::string filesize_string(const uint32_t bytes) {
 	if (bytes > 1000 * 1000 * 1000) {
@@ -352,29 +344,11 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	                          .as_font_tag(format(
 	                             _("For more information regarding how to develop and package your "
 	                               "own add-ons, please visit %s."),
-	                             underline_tag(kDocumentationURL)))),
+	                             g_style_manager->font_style(UI::FontStyle::kFsTooltip)
+	                                .as_font_tag(as_url_hyperlink(kDocumentationURL))))),
 	                UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	             UI::Box::Resizing::kFullSize);
-	auto add_button = [this](const std::string& url) {
-		UI::Button* b =
-		   new UI::Button(&dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
-#if SDL_VERSION_ATLEAST(2, 0, 14)
-		                  _("Open Link")
-#else
-		                  _("Copy Link")
-#endif
-		   );
-		b->sigclicked.connect([url]() {
-#if SDL_VERSION_ATLEAST(2, 0, 14)
-			SDL_OpenURL(url.c_str());
-#else
-			SDL_SetClipboardText(url.c_str());
-#endif
-		});
-		dev_box_.add(b);
-	};
 	dev_box_.add_space(kRowButtonSpacing);
-	add_button(kDocumentationURL);
 
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
@@ -437,11 +411,11 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	                            "as deletion of an add-on or collaborating with another add-on "
 	                            "designer? Please visit our forums at %s, explain your needs, and "
 	                            "the Widelands Development Team will be happy to help."),
-	                          underline_tag(kForumURL)))),
+	                          g_style_manager->font_style(UI::FontStyle::kFsTooltip)
+	                             .as_font_tag(as_url_hyperlink(kForumURL))))),
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 	dev_box_.add_space(kRowButtonSpacing);
-	add_button(kForumURL);
 
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
