@@ -123,7 +123,6 @@ protected:
 private:
 	void update_statistics_string(std::string*) override;
 
-	bool is_present(Soldier&) const;
 	static void
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
@@ -170,6 +169,7 @@ private:
 
 		std::vector<Soldier*> present_soldiers() const override;
 		std::vector<Soldier*> stationed_soldiers() const override;
+		std::vector<Soldier*> associated_soldiers() const override;
 		Quantity min_soldier_capacity() const override;
 		Quantity max_soldier_capacity() const override;
 		Quantity soldier_capacity() const override;
