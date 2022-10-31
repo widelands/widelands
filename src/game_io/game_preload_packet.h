@@ -50,6 +50,9 @@ struct GamePreloadPacket : public GameDataPacket {
 		return win_condition_;
 	}
 	std::string get_localized_win_condition() const;
+	int32_t get_win_condition_duration() const {
+		return win_condition_duration_;
+	}
 	const Time& get_gametime() const {
 		return gametime_;
 	}
@@ -107,6 +110,7 @@ private:
 	std::string background_;
 	std::string background_theme_;
 	std::string win_condition_;
+	int32_t win_condition_duration_;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	std::string active_training_wheel_;
 	// Initializing everything to make cppcheck happy.
