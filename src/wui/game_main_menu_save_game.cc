@@ -204,7 +204,7 @@ void GameMainMenuSaveGame::ok() {
 
 	if (load_or_save_.has_selection()) {
 		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
-		if (gamedata.get() != nullptr && gamedata->is_directory()) {
+		if (gamedata->is_directory()) {
 			load_or_save_.change_directory_to(gamedata->filename);
 			curdir_ = gamedata->filename;
 			filename_editbox_.focus();
