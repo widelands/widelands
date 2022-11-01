@@ -294,7 +294,7 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	Widelands::Game& game = igbase().game();
 
 	game.create_loader_ui(
-	   {"general_game"}, true, game.map().get_background_theme(), game.map().get_background());
+	   {"general_game"}, true, game.map().get_background_theme(), game.map().get_background(), true);
 
 	GenericSaveHandler gsh(
 	   [&game](FileSystem& fs) {
