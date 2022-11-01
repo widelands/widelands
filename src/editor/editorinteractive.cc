@@ -1428,8 +1428,9 @@ void EditorInteractive::publish_map() {
 	info.version = version;
 	info.category = AddOns::AddOnCategory::kMaps;
 
-	AddOns::NetAddons::CallbackFn fnn =
-	   [this](const std::string& /* f */, int64_t /* l */) { do_redraw_now(); };
+	AddOns::NetAddons::CallbackFn fnn = [this](const std::string& /* f */, int64_t /* l */) {
+		do_redraw_now();
+	};
 	AddOns::MutableAddOn::ProgressFunction fnm = [this](size_t /* p */) { do_redraw_now(); };
 
 	AddOns::MapsAddon mutable_addon(info);
