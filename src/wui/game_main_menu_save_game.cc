@@ -198,32 +198,33 @@ void GameMainMenuSaveGame::reset_editbox_or_die(const std::string& current_filen
 }
 
 void GameMainMenuSaveGame::ok() {
-	if (!ok_.enabled() || !load_or_save_.has_selection()) {
+	if (!ok_.enabled()) {
 		return;
 	}
-	std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
-	if (gamedata->is_directory()) {
-		load_or_save_.change_directory_to(gamedata->filename);
-		curdir_ = gamedata->filename;
-		filename_editbox_.focus();
-	} else {
-		switch (type_) {
-		case Type::kSave: {
-			std::string filename = filename_editbox_.text();
-			if (save_game(filename, !get_config_bool("nozip", false))) {
-				die();
-			} else {
-				load_or_save_.table().focus();
-			}
-		} break;
-		case Type::kLoadReplay:
-		case Type::kLoadSavegame: {
+
+	if (load_or_save_.has_selection()) {
+		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
+		if (gamedata.get() != nullptr && gamedata->is_directory()) {
+			load_or_save_.change_directory_to(gamedata->filename);
+			curdir_ = gamedata->filename;
+			filename_editbox_.focus();
+			return;
+		}
+		if (type_ == Type::kLoadSavegame || type_ == Type::kLoadReplay) {
 			if (load_or_save_.check_replay_compatibility(*gamedata)) {
 				igbase().game().set_next_game_to_load(gamedata->filename);
 				end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 				igbase().end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 			}
-		} break;
+			return;
+		}
+	}
+	if (type_ == Type::kSave) {
+		std::string filename = filename_editbox_.text();
+		if (save_game(filename, !get_config_bool("nozip", false))) {
+			die();
+		} else {
+			load_or_save_.table().focus();
 		}
 	}
 }
