@@ -360,6 +360,8 @@ public:
 		return soldier_control_;
 	}
 
+	virtual bool is_present(Worker& worker) const;
+
 	void send_message(Game& game,
 	                  const Message::Type msgtype,
 	                  const std::string& title,

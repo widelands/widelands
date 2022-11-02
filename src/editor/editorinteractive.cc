@@ -1073,7 +1073,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 		}
 	}
 
-	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
+	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image(), false);
 	EditorInteractive::load_world_units(&eia, egbase);
 
 	if (init == EditorInteractive::Init::kLoadMapDirectly) {

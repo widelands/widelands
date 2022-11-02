@@ -49,7 +49,8 @@ std::vector<SDL_Event> ProgressWindow::event_buffer_ = {};
 
 ProgressWindow::ProgressWindow(UI::Panel* parent,
                                const std::string& theme,
-                               const std::string& background)
+                               const std::string& background,
+                               bool crop)
    : UI::Panel(parent,
                PanelStyle::kFsMenu /* unused */,
                0,
@@ -57,7 +58,8 @@ ProgressWindow::ProgressWindow(UI::Panel* parent,
                parent != nullptr ? parent->get_inner_w() : g_gr->get_xres(),
                parent != nullptr ? parent->get_inner_h() : g_gr->get_yres()),
      label_center_(Vector2i::zero()),
-     theme_(theme) {
+     theme_(theme),
+     crop_(crop) {
 	// As long as this window exists and is visible, no tooltips will be drawn.
 	set_hide_all_overlays();
 
@@ -94,8 +96,8 @@ void ProgressWindow::draw(RenderTarget& rt) {
 		const Image& bg = *g_image_cache->get(background_);
 		const float w = bg.width();
 		const float h = bg.height();
-		rt.blitrect_scale(
-		   fit_image(w, h, get_w(), get_h(), true), &bg, Recti(0, 0, w, h), 1.f, BlendMode::UseAlpha);
+		rt.blitrect_scale(fit_image(w, h, get_w(), get_h(), crop_), &bg, Recti(0, 0, w, h), 1.f,
+		                  BlendMode::UseAlpha);
 	}
 
 	// No float division to avoid Texture subsampling.

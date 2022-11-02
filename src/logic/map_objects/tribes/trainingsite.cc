@@ -315,6 +315,17 @@ Quantity TrainingSite::SoldierControl::soldier_capacity() const {
 	return training_site_->capacity_;
 }
 
+std::vector<Soldier*> TrainingSite::SoldierControl::associated_soldiers() const {
+	std::vector<Soldier*> soldiers = stationed_soldiers();
+	if (training_site_->soldier_request_ != nullptr) {
+		for (const Transfer* t : training_site_->soldier_request_->get_transfers()) {
+			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
+			soldiers.push_back(&s);
+		}
+	}
+	return soldiers;
+}
+
 void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity) {
 	assert(min_soldier_capacity() <= capacity);
 	assert(capacity <= max_soldier_capacity());
@@ -537,6 +548,16 @@ void TrainingSite::remove_worker(Worker& w) {
 	}
 
 	ProductionSite::remove_worker(w);
+}
+
+bool TrainingSite::is_present(Worker& worker) const {
+	if (worker.descr().type() != MapObjectType::SOLDIER) {
+		return Building::is_present(worker);
+	}
+	/* Unlike other workers or soldiers in militarysites,
+	 * soldiers in trainingsites don't have a buildingwork task. */
+	return worker.get_location(get_owner()->egbase()) == this &&
+	       worker.get_position() == get_position();
 }
 
 /**

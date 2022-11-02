@@ -513,14 +513,17 @@ void GameHost::run_callback() {
 		}
 	}
 
+	const uint32_t rng_seed = RNG::static_rand();
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_LAUNCH);
+	packet.unsigned_32(rng_seed);
 	packet.unsigned_32(game_->enabled_addons().size());
 	for (const auto& a : game_->enabled_addons()) {
 		packet.string(a->internal_name);
 	}
 	broadcast(packet);
 
+	game_->logic_rand_seed(rng_seed);
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
 	game_->set_auto_speed(get_config_bool("auto_speed", false));
 	game_->set_write_syncstream(get_config_bool("write_syncstreams", true));
@@ -534,7 +537,8 @@ void GameHost::run_callback() {
 		if (d->hp.has_players_tribe()) {
 			tipstexts.push_back(d->hp.get_players_tribe());
 		}
-		game_->create_loader_ui(tipstexts, true, d->settings.map_theme, d->settings.map_background);
+		game_->create_loader_ui(
+		   tipstexts, true, d->settings.map_theme, d->settings.map_background, true);
 		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 		d->game = game_.get();
@@ -1395,6 +1399,16 @@ void GameHost::set_win_condition_script(const std::string& wc) {
 	broadcast(packet);
 }
 
+void GameHost::set_win_condition_duration(const int32_t duration) {
+	d->settings.win_condition_duration = duration;
+
+	// Broadcast changes
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_WIN_CONDITION_DURATION);
+	packet.signed_32(duration);
+	broadcast(packet);
+}
+
 void GameHost::set_peaceful_mode(bool peace) {
 	d->settings.peaceful = peace;
 
@@ -1773,6 +1787,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.reset();
 	packet.unsigned_8(NETCMD_WIN_CONDITION);
 	packet.string(d->settings.win_condition_script);
+	d->net->send(client.sock_id, packet);
+
+	packet.reset();
+	packet.unsigned_8(NETCMD_WIN_CONDITION_DURATION);
+	packet.signed_32(d->settings.win_condition_duration);
 	d->net->send(client.sock_id, packet);
 
 	packet.reset();
@@ -2389,6 +2408,7 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	case NETCMD_SETTING_MAP:
 	case NETCMD_SETTING_PLAYER:
 	case NETCMD_WIN_CONDITION:
+	case NETCMD_WIN_CONDITION_DURATION:
 	case NETCMD_PEACEFUL_MODE:
 	case NETCMD_CUSTOM_STARTING_POSITIONS:
 	case NETCMD_LAUNCH:
