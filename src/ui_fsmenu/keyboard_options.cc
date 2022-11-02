@@ -308,7 +308,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	tabs_.sigclicked.connect([this, all_keyboard_buttons, generate_title, fastplace_tab_index]() {
 		if (tabs_.active() == fastplace_tab_index && game_ == nullptr) {
 			game_.reset(new Widelands::Game());
-			game_->create_loader_ui({}, false, "", "", this);
+			game_->create_loader_ui({}, false, "", "", true, this);
 			game_->load_all_tribes();
 			game_->postload_addons();
 

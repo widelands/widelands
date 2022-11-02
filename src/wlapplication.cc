@@ -747,7 +747,7 @@ void WLApplication::init_and_run_game_from_template() {
 		tipstexts.push_back(settings->get_players_tribe());
 	}
 	game.create_loader_ui(
-	   tipstexts, true, settings->settings().map_theme, settings->settings().map_background);
+	   tipstexts, true, settings->settings().map_theme, settings->settings().map_background, true);
 	Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 	game.set_ibase(new InteractivePlayer(game, get_config_section(), playernumber, false));
