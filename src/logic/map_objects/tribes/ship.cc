@@ -60,8 +60,9 @@ bool can_support_port(const PlayerNumber player_number, const FCoords& coord) {
 		return false;
 	}
 	Immovable* baim = dynamic_cast<Immovable*>(coord.field->get_immovable());
-	
-	return (baim == nullptr || baim->get_size() < BaseImmovable::SMALL || baim->descr().has_terrain_affinity());
+
+	return (baim == nullptr || baim->get_size() < BaseImmovable::SMALL ||
+	        baim->descr().has_terrain_affinity());
 }
 
 /// Returns true if a ship owned by 'player_number' can land and erect a port at 'coord'.
