@@ -22,7 +22,6 @@
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/filesystem_constants.h"
 #include "logic/replay.h"
 
 SavegameLoader::SavegameLoader(Widelands::Game& game) : game_(game) {

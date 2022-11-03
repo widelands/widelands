@@ -30,7 +30,6 @@
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/addons.h"
-#include "logic/filesystem_constants.h"
 #include "logic/replay.h"
 #include "map_io/map_loader.h"
 

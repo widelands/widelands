@@ -233,11 +233,10 @@ void LaunchMPG::clicked_ok() {
 }
 
 void LaunchMPG::think() {
-	assert(ctrl_ != nullptr);  // NOCOM
-	if (ctrl_ != nullptr) {
-		ctrl_->set_write_replay(should_write_replay());
-		ctrl_->think();
-	}
+	assert(ctrl_ != nullptr);
+	ctrl_->set_write_replay(should_write_replay());
+	ctrl_->think();
+
 	refresh();
 
 	// unfocus chat window when other UI element has focus
