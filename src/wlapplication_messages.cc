@@ -89,6 +89,7 @@ void fill_parameter_vector() {
 	  /// Misc
 	  {"", "nosound", "", _("Start the game with sound disabled."), false},
 	  {"", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs."), false},
+	  {"", "replay_lifetime", _("n"), _("Delete replays automatically after `n` weeks."), true},
 	  {"", "ai_training", "",
 		_("Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ for a full "
 		  "description of the AI training logic."),
