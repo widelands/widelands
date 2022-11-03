@@ -22,6 +22,7 @@
 #include <string>
 #include <vector>
 
+#include "base/string.h"
 #include "game_io/game_preload_packet.h"
 #include "wui/savegamedata.h"
 
@@ -34,7 +35,6 @@ public:
 
 private:
 	virtual bool is_valid_gametype(const SavegameData& gamedata) const = 0;
-	virtual std::string get_savename(const std::string& gamefilename) const;
 
 	void add_general_information(SavegameData& gamedata,
 	                             const Widelands::GamePreloadPacket& gpdp) const;
@@ -46,6 +46,9 @@ private:
 	void load_savegame_from_file(const std::string& gamefilename,
 	                             std::vector<SavegameData>& loaded_games) const;
 	void load(const std::string& to_be_loaded, std::vector<SavegameData>& loaded_games) const;
+	virtual bool is_valid_savegame(const std::string& filename) const {
+		return ends_with(filename, kSavegameExtension);
+	}
 
 	Widelands::Game& game_;
 };
@@ -55,8 +58,11 @@ public:
 	explicit ReplayLoader(Widelands::Game& game);
 
 private:
+	bool is_valid_savegame(const std::string& filename) const override {
+		return ends_with(filename, kReplayExtension);
+	}
+
 	bool is_valid_gametype(const SavegameData& gamedata) const override;
-	std::string get_savename(const std::string& gamefilename) const override;
 };
 
 class MultiPlayerLoader : public SavegameLoader {
@@ -80,6 +86,10 @@ public:
 	explicit EverythingLoader(Widelands::Game& game);
 
 private:
+	bool is_valid_savegame(const std::string& filename) const override {
+		return ends_with(filename, kSavegameExtension) || ends_with(filename, kReplayExtension);
+	}
+
 	bool is_valid_gametype(const SavegameData& gamedata) const override;
 };
 

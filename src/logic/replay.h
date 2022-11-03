@@ -74,6 +74,21 @@ private:
 	StreamWrite* cmdlog_;
 	std::string filename_;
 };
+
+/** Extract the savegame from a replay to a temporary file. */
+struct ReplayPreloader {
+	explicit ReplayPreloader(const std::string& gamefilename);
+	~ReplayPreloader();
+
+	inline const std::string& file() const {
+		return temp_file_.empty() ? source_file_ : temp_file_;
+	}
+
+private:
+	const std::string& source_file_;
+	std::string temp_file_;
+};
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_REPLAY_H

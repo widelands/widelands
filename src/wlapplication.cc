@@ -1702,7 +1702,7 @@ void WLApplication::emergency_save(UI::Panel* panel,
  * Delete old replay files on startup
  */
 void WLApplication::cleanup_replays() {
-	const int32_t nr_seconds = get_config_section().get_int("replay_lifetime", 0) * 7 * 24 * 60;
+	const int32_t nr_seconds = get_config_section().get_int("replay_lifetime", 0) * 7 * 24 * 60 * 60;
 	if (nr_seconds <= 0) {
 		return;
 	}

@@ -19,11 +19,11 @@
 #include "wui/savegameloader.h"
 
 #include "base/i18n.h"
-#include "base/string.h"
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
+#include "logic/replay.h"
 
 SavegameLoader::SavegameLoader(Widelands::Game& game) : game_(game) {
 }
@@ -37,31 +37,33 @@ std::vector<SavegameData> SavegameLoader::load_files(const std::string& director
 	return loaded_games;
 }
 
-std::string SavegameLoader::get_savename(const std::string& gamefilename) const {
-	return gamefilename;
-}
-
 void SavegameLoader::load(const std::string& to_be_loaded,
                           std::vector<SavegameData>& loaded_games) const {
 	if (g_fs->is_directory(to_be_loaded)) {
-		try {
-			load_savegame_from_directory(to_be_loaded, loaded_games);
-		} catch (const std::exception&) {
+		bool success = false;
+		if (is_valid_savegame(to_be_loaded)) {
+			try {
+				load_savegame_from_directory(to_be_loaded, loaded_games);
+				success = true;
+			} catch (...) {
+			}
+		}
+		if (!success) {
 			// loading failed, so this is actually a normal directory
 			add_sub_dir(to_be_loaded, loaded_games);
 		}
-	} else {
+	} else if (is_valid_savegame(to_be_loaded)) {
 		load_savegame_from_file(to_be_loaded, loaded_games);
 	}
 }
 
 void SavegameLoader::load_savegame_from_directory(const std::string& gamefilename,
-                                                  std::vector<SavegameData>& loaded_games) const {
-
+                                   std::vector<SavegameData>& loaded_games) const {
+	Widelands::ReplayPreloader converter(gamefilename);
 	Widelands::GamePreloadPacket gpdp;
 	SavegameData gamedata(gamefilename);
 
-	Widelands::GameLoader gl(gamefilename, game_);
+	Widelands::GameLoader gl(converter.file(), game_);
 	gl.preload_game(gpdp);
 	gamedata.gametype = gpdp.get_gametype();
 	if (!is_valid_gametype(gamedata)) {
@@ -75,16 +77,11 @@ void SavegameLoader::load_savegame_from_directory(const std::string& gamefilenam
 
 void SavegameLoader::load_savegame_from_file(const std::string& gamefilename,
                                              std::vector<SavegameData>& loaded_games) const {
-	std::string savename = get_savename(gamefilename);
-
-	if (!g_fs->file_exists(savename) || !ends_with(savename, kSavegameExtension)) {
-		return;
-	}
-
 	Widelands::GamePreloadPacket gpdp;
 	SavegameData gamedata(gamefilename);
 	try {
-		Widelands::GameLoader gl(savename, game_);
+		Widelands::ReplayPreloader converter(gamefilename);
+		Widelands::GameLoader gl(converter.file(), game_);
 		gl.preload_game(gpdp);
 		gamedata.gametype = gpdp.get_gametype();
 		if (!is_valid_gametype(gamedata)) {
@@ -206,12 +203,6 @@ bool ReplayLoader::is_valid_gametype(const SavegameData& /*gamedata*/) const {
 	return true;  // TODO(jmoerschbach): why?? what is the purpose of
 	              // GameController::GameType::kReplay? return gamedata.is_replay(); <-- should be
 	              // this, right?!
-}
-
-std::string ReplayLoader::get_savename(const std::string& gamefilename) const {
-	std::string savename = gamefilename;
-	savename += kSavegameExtension;
-	return savename;
 }
 
 MultiPlayerLoader::MultiPlayerLoader(Widelands::Game& game) : SavegameLoader(game) {

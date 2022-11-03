@@ -51,7 +51,7 @@ constexpr double kTempBackupsKeepAroundTime = 24 * 60 * 60;
 
 /// Filesystem names and timeouts for replays
 const std::string kReplayDir = "replays";
-const std::string kReplayExtension = ".wrpl";  // NOCOM
+const std::string kReplayExtension = ".wry";
 const std::string kSyncstreamExtension = ".wss";
 const std::string kSyncstreamExcerptExtension = ".wse";
 

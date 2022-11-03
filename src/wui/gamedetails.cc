@@ -31,6 +31,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/addons.h"
 #include "logic/filesystem_constants.h"
+#include "logic/replay.h"
 #include "map_io/map_loader.h"
 
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
@@ -221,11 +222,10 @@ std::string GameDetails::show_minimap(const SavegameData& gamedata) {
 			minimap_icon_.set_visible(true);
 		} else {
 			try {
+				Widelands::ReplayPreloader converter(last_game_);
 				Widelands::Game game_for_render;
-				std::string filename(last_game_);
-				filename.append(kSavegameExtension);
 				std::unique_ptr<Widelands::MapLoader> ml(
-				   game_for_render.mutable_map()->get_correct_loader(filename));
+				   game_for_render.mutable_map()->get_correct_loader(converter.file()));
 				if (ml != nullptr &&
 				    0 == ml->load_map_for_render(game_for_render, &game_for_render.enabled_addons())) {
 					minimap_cache_[last_game_] =
