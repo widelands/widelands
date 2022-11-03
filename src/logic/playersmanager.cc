@@ -115,4 +115,13 @@ void PlayersManager::set_player_end_status(const PlayerEndStatus& status) {
 	players_end_status_.push_back(status);
 }
 
+const PlayerEndStatus* PlayersManager::get_player_end_status(const PlayerNumber player) const {
+	for (const PlayerEndStatus& pes : players_end_status_) {
+		if (pes.player == player) {
+			return &pes;
+		}
+	}
+	return nullptr;
+}
+
 }  // namespace Widelands

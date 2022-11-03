@@ -100,6 +100,8 @@ public:
 	 */
 	void set_player_end_status(const PlayerEndStatus& status);
 
+	const PlayerEndStatus* get_player_end_status(PlayerNumber player) const;
+
 private:
 	Player* players_[kMaxPlayers];
 	EditorGameBase& egbase_;

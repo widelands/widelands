@@ -1934,6 +1934,14 @@ void GameHost::broadcast_real_speed(uint32_t const speed) {
 	broadcast(packet);
 }
 
+bool GameHost::client_may_change_speed(uint8_t playernum) const {
+	if (playernum > UserSettings::highest_playernum()) {
+		return false;
+	}
+	const Widelands::PlayerEndStatus* pes = d->game->player_manager()->get_player_end_status(playernum + 1);
+	return pes == nullptr || (pes->result != Widelands::PlayerEndResult::kLost && pes->result != Widelands::PlayerEndResult::kResigned);
+}
+
 /**
  * This is the algorithm that decides upon the effective network speed,
  * given the desired speed of all clients.
@@ -1966,11 +1974,11 @@ void GameHost::update_network_speed() {
 		std::vector<uint32_t> speeds;
 
 		for (const Client& client : d->clients) {
-			if (client.playernum <= UserSettings::highest_playernum()) {
+			if (client_may_change_speed(client.playernum)) {
 				speeds.push_back(client.desiredspeed);
 			}
 		}
-		if (d->settings.playernum <= UserSettings::highest_playernum() || speeds.empty()) {
+		if (speeds.empty() || client_may_change_speed(d->settings.playernum)) {
 			speeds.push_back(d->localdesiredspeed);
 		}
 
