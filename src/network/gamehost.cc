@@ -1938,8 +1938,10 @@ bool GameHost::client_may_change_speed(uint8_t playernum) const {
 	if (playernum > UserSettings::highest_playernum()) {
 		return false;
 	}
-	const Widelands::PlayerEndStatus* pes = d->game->player_manager()->get_player_end_status(playernum + 1);
-	return pes == nullptr || (pes->result != Widelands::PlayerEndResult::kLost && pes->result != Widelands::PlayerEndResult::kResigned);
+	const Widelands::PlayerEndStatus* pes =
+	   d->game->player_manager()->get_player_end_status(playernum + 1);
+	return pes == nullptr || (pes->result != Widelands::PlayerEndResult::kLost &&
+	                          pes->result != Widelands::PlayerEndResult::kResigned);
 }
 
 /**
