@@ -226,6 +226,19 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::SpinBox::Units::kNone,
                           UI::SpinBox::Type::kBig),
 
+     sb_replay_lifetime_(&box_saving_,
+                          0,
+                          0,
+                          0,
+                          0,
+                          opt.replay_lifetime,
+                          0,
+                          365,
+                          UI::PanelStyle::kFsMenu,
+                          _("Delete replays after:"),
+                          UI::SpinBox::Units::kWeeks,
+                          UI::SpinBox::Type::kBig),
+
      zip_(&box_saving_,
           UI::PanelStyle::kFsMenu,
           Vector2i::zero(),
@@ -351,6 +364,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	// Saving
 	box_saving_.add(&sb_autosave_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&sb_rolling_autosave_, UI::Box::Resizing::kFullSize);
+	box_saving_.add(&sb_replay_lifetime_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&zip_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&write_syncstreams_, UI::Box::Resizing::kFullSize);
 
@@ -418,6 +432,8 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
 	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));
+	/** TRANSLATORS: Options: Delete replays after: */
+	sb_replay_lifetime_.add_replacement(0, _("Never"));
 
 	// Fill in data
 	// Interface options
@@ -468,10 +484,10 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 	ScreenResolution current_res = {g_gr->get_window_mode_xres(), g_gr->get_window_mode_yres()};
 
 	resolution_dropdown_.add(
-	   /** TRANSLATORS: Entry in the window size dropdown*/
+	   /** TRANSLATORS: Entry in the window size dropdown */
 	   _("Fullscreen"), {kDropdownFullscreen, kDropdownFullscreen}, nullptr, opt.fullscreen);
 #ifdef RESIZABLE_WINDOW
-	/** TRANSLATORS: Entry in the window size dropdown*/
+	/** TRANSLATORS: Entry in the window size dropdown */
 	resolution_dropdown_.add(_("Maximized"), {kDropdownMaximized, kDropdownMaximized}, nullptr,
 	                         !resolution_dropdown_.has_selection() && opt.maximized);
 #endif
@@ -487,7 +503,7 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 				previous = this_res;
 				const bool selected = !resolution_dropdown_.has_selection() && this_res == current_res;
 				resolution_dropdown_.add(
-				   /** TRANSLATORS: Screen resolution, e.g. 800 × 600*/
+				   /** TRANSLATORS: Screen resolution, e.g. 800 × 600 */
 				   format(_("%1% × %2%"), this_res.xres, this_res.yres), this_res, nullptr, selected);
 			}
 		}
@@ -495,7 +511,7 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 
 	if (!resolution_dropdown_.has_selection()) {
 		resolution_dropdown_.add(
-		   /** TRANSLATORS: Screen resolution, e.g. 800 × 600*/
+		   /** TRANSLATORS: Screen resolution, e.g. 800 × 600 */
 		   format(_("%1% × %2%"), current_res.xres, current_res.yres), current_res, nullptr, true);
 	}
 }
@@ -504,6 +520,7 @@ void Options::layout() {
 	if (!is_minimal()) {
 		const int16_t butw = get_inner_w() / 5;
 		const int16_t buth = get_inner_h() / 16;
+		const int16_t spinbox_w = get_inner_w() / 2;
 
 		// Buttons
 		cancel_.set_desired_size(butw, buth);
@@ -533,10 +550,12 @@ void Options::layout() {
 		sb_dis_border_.set_desired_size(tab_panel_width, sb_dis_border_.get_h());
 
 		// Saving options
-		sb_autosave_.set_unit_width(250);
+		sb_autosave_.set_unit_width(spinbox_w);
 		sb_autosave_.set_desired_size(tab_panel_width, sb_autosave_.get_h());
-		sb_rolling_autosave_.set_unit_width(250);
+		sb_rolling_autosave_.set_unit_width(spinbox_w);
 		sb_rolling_autosave_.set_desired_size(tab_panel_width, sb_rolling_autosave_.get_h());
+		sb_replay_lifetime_.set_unit_width(spinbox_w);
+		sb_replay_lifetime_.set_desired_size(tab_panel_width, sb_replay_lifetime_.get_h());
 	}
 	UI::Window::layout();
 }
@@ -737,6 +756,7 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	// Saving options
 	os_.autosave = sb_autosave_.get_value();
 	os_.rolling_autosave = sb_rolling_autosave_.get_value();
+	os_.replay_lifetime = sb_replay_lifetime_.get_value();
 	os_.zip = zip_.get_state();
 	os_.write_syncstreams = write_syncstreams_.get_state();
 
@@ -818,6 +838,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	// Saving options
 	opt.autosave = opt_section_.get_int("autosave", kDefaultAutosaveInterval * 60);
 	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
+	opt.replay_lifetime = opt_section_.get_int("replay_lifetime", 0);
 	opt.zip = !opt_section_.get_bool("nozip", false);
 	opt.write_syncstreams = opt_section_.get_bool("write_syncstreams", true);
 
@@ -867,6 +888,7 @@ void OptionsCtrl::save_options() {
 	// Saving options
 	opt_section_.set_int("autosave", opt.autosave * 60);
 	opt_section_.set_int("rolling_autosave", opt.rolling_autosave);
+	opt_section_.set_int("replay_lifetime", opt.replay_lifetime);
 	opt_section_.set_bool("nozip", !opt.zip);
 	opt_section_.set_bool("write_syncstreams", opt.write_syncstreams);
 

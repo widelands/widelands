@@ -38,6 +38,9 @@ public:
 	void set_paused(bool paused) override;
 	void
 	report_result(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string& info) override;
+	void set_write_replay(bool /* replay */) override {
+		NEVER_HERE();
+	}
 
 private:
 	Widelands::Game& game_;

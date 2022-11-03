@@ -42,6 +42,9 @@ public:
 	void set_desired_speed(uint32_t const speed) override;
 	bool is_paused() override;
 	void set_paused(bool const paused) override;
+	void set_write_replay(bool /* replay */) override {
+		NEVER_HERE();
+	}
 
 private:
 	struct CmdReplayEnd : public Widelands::Command {

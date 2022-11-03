@@ -48,7 +48,6 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                      GameSettingsProvider& settings,
                      GameController& ctrl,
                      ChatProvider& chat,
-                     Widelands::Game& g,
                      bool game_done_on_cancel,
                      const std::function<void()>& c)
    : LaunchGame(fsmm, settings, &ctrl, false, true),
@@ -66,8 +65,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
      help_(nullptr),
 
      mpsg_(this, &left_column_box_, 0, 0, 0, 0, &settings, scale_factor * standard_height_),
-     chat_(new GameChatPanel(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu)),
-     game_(g) {
+     chat_(new GameChatPanel(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu)) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
 	chat_->aborted.connect([this]() { die(); });
@@ -235,7 +233,9 @@ void LaunchMPG::clicked_ok() {
 }
 
 void LaunchMPG::think() {
+	assert(ctrl_ != nullptr);  // NOCOM
 	if (ctrl_ != nullptr) {
+		ctrl_->set_write_replay(should_write_replay());
 		ctrl_->think();
 	}
 	refresh();

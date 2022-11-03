@@ -65,6 +65,7 @@ public:
 	void send_player_command(Widelands::PlayerCommand*) override;
 	Duration get_frametime() override;
 	GameController::GameType get_game_type() override;
+	void set_write_replay(bool replay) override;
 
 	uint32_t real_speed() override;
 	uint32_t desired_speed() override;

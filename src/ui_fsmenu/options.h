@@ -62,6 +62,7 @@ public:
 		// Saving options
 		int32_t autosave;          // autosave interval in minutes
 		int32_t rolling_autosave;  // number of file to use for rolling autosave
+		int32_t replay_lifetime;   // number of days to keep replays around
 		bool zip;
 		bool write_syncstreams;
 
@@ -175,6 +176,7 @@ private:
 	// Saving options
 	UI::SpinBox sb_autosave_;
 	UI::SpinBox sb_rolling_autosave_;
+	UI::SpinBox sb_replay_lifetime_;
 	UI::Checkbox zip_;
 	UI::Checkbox write_syncstreams_;
 

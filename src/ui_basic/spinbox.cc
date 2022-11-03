@@ -429,6 +429,9 @@ const std::string SpinBox::unit_text(int32_t value) const {
 		   format(ngettext("%d minute", "%d minutes", value), value));
 	}
 
+	case (Units::kWeeks):
+		/** TRANSLATORS: A spinbox unit */
+		return format(ngettext("%d week", "%d weeks", value), value);
 	case (Units::kPixels):
 		/** TRANSLATORS: A spinbox unit */
 		return format(ngettext("%d pixel", "%d pixels", value), value);
