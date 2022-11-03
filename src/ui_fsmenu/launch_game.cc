@@ -51,7 +51,8 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                      0,
                      _("Configure this game"),
                      UI::Align::kCenter),
-     write_replay_(&right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Write Replay")),
+     write_replay_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Write Replay")),
      warn_desyncing_addon_(
         &right_column_content_box_,
         0,

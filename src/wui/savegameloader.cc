@@ -57,7 +57,7 @@ void SavegameLoader::load(const std::string& to_be_loaded,
 }
 
 void SavegameLoader::load_savegame_from_directory(const std::string& gamefilename,
-                                   std::vector<SavegameData>& loaded_games) const {
+                                                  std::vector<SavegameData>& loaded_games) const {
 	Widelands::ReplayPreloader converter(gamefilename);
 	Widelands::GamePreloadPacket gpdp;
 	SavegameData gamedata(gamefilename);

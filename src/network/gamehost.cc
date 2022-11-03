@@ -487,8 +487,7 @@ void GameHost::init_computer_players() {
 
 void GameHost::run() {
 	game_.reset(new Widelands::Game());
-	new FsMenu::LaunchMPG(
-	   *capsule_, d->hp, *this, d->chat, internet_, [this]() { run_callback(); });
+	new FsMenu::LaunchMPG(*capsule_, d->hp, *this, d->chat, internet_, [this]() { run_callback(); });
 }
 
 void GameHost::run_direct() {
