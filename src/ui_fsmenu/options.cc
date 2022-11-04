@@ -334,11 +334,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	tabs_.add("options_newgame", _("New Games"), &box_newgame_, "");
 	tabs_.add("options_ingame", _("In-Game"), &box_ingame_, "");
 
-	// We want the last active tab when "Apply" was clicked.
-	if (os_.active_tab < tabs_.tabs().size()) {
-		tabs_.activate(os_.active_tab);
-	}
-
 	// Interface
 	box_interface_vbox_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_vbox_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
@@ -478,6 +473,10 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	update_language_stats();
 	layout();
 
+	// We want the last active tab when "Apply" was clicked.
+	if (os_.active_tab < tabs_.tabs().size()) {
+		tabs_.activate(os_.active_tab);
+	}
 	initialization_complete();
 }
 void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
