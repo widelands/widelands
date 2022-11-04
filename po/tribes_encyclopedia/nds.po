@@ -1784,7 +1784,7 @@ msgstr "Arbeidersken kummen"
 #: ../../data/tribes/initialization/amazons/units.lua:1645
 msgctxt "amazons"
 msgid "Expert missing"
-msgstr ""
+msgstr "Meisterske föhlt"
 
 #. TRANSLATORS: Productivity label on an amazon building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -1792,7 +1792,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1647
 msgctxt "amazons"
 msgid "Experts missing"
-msgstr ""
+msgstr "Meistersken föhlen"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -3869,7 +3869,7 @@ msgstr "Arbeiders kummen"
 #: ../../data/tribes/initialization/atlanteans/units.lua:2035
 msgctxt "atlanteans"
 msgid "Expert missing"
-msgstr ""
+msgstr "Meister föhlt"
 
 #. TRANSLATORS: Productivity label on an atlantean building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -3877,7 +3877,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2037
 msgctxt "atlanteans"
 msgid "Experts missing"
-msgstr ""
+msgstr "Meisters föhlen"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -5812,7 +5812,7 @@ msgstr "Arbeiders kummen"
 #: ../../data/tribes/initialization/barbarians/units.lua:1820
 msgctxt "barbarians"
 msgid "Expert missing"
-msgstr ""
+msgstr "Meister föhlt"
 
 #. TRANSLATORS: Productivity label on a barbarian building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -5820,7 +5820,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1822
 msgctxt "barbarians"
 msgid "Experts missing"
-msgstr ""
+msgstr "Meisters föhlen"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -7955,7 +7955,7 @@ msgstr "Arbeiders kummen"
 #: ../../data/tribes/initialization/empire/units.lua:2291
 msgctxt "empire"
 msgid "Expert missing"
-msgstr ""
+msgstr "Meister föhlt"
 
 #. TRANSLATORS: Productivity label on an empire building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -7963,7 +7963,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2293
 msgctxt "empire"
 msgid "Experts missing"
-msgstr ""
+msgstr "Meisters föhlen"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -9926,7 +9926,7 @@ msgstr "Arbeiders kummen"
 #: ../../data/tribes/initialization/frisians/units.lua:2218
 msgctxt "frisians"
 msgid "Expert missing"
-msgstr ""
+msgstr "Meister föhlt"
 
 #. TRANSLATORS: Productivity label on a frisian building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -9934,7 +9934,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2220
 msgctxt "frisians"
 msgid "Experts missing"
-msgstr ""
+msgstr "Meisters föhlen"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
