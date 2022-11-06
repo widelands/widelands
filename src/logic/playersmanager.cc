@@ -87,8 +87,10 @@ Player* PlayersManager::add_player(PlayerNumber const player_number,
 }
 
 const PlayerEndStatus* PlayersManager::get_player_end_status(PlayerNumber player) const {
-	return (player == 0 || player - 1u >= players_end_status_.size() || players_end_status_.at(player - 1).player != player)
-			? nullptr : &players_end_status_.at(player - 1);
+	return (player == 0 || player - 1u >= players_end_status_.size() ||
+	        players_end_status_.at(player - 1).player != player) ?
+             nullptr :
+             &players_end_status_.at(player - 1);
 }
 
 void PlayersManager::add_player_end_status(const PlayerEndStatus& status, bool change_existing) {

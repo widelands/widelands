@@ -252,7 +252,8 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 
 	std::set<Widelands::PlayerNumber> players_with_result;
 	for (auto& pair : diplomacy_status_) {
-		const Widelands::PlayerEndStatus* p = iplayer_.egbase().player_manager()->get_player_end_status(pair.first);
+		const Widelands::PlayerEndStatus* p =
+		   iplayer_.egbase().player_manager()->get_player_end_status(pair.first);
 		if (p == nullptr) {
 			continue;
 		}
