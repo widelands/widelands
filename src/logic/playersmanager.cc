@@ -99,11 +99,13 @@ void PlayersManager::add_player_end_status(const PlayerEndStatus& status, bool c
 		players_end_status_.resize(number_of_players_);
 	}
 
-	PlayerEndStatus& s = players_end_status_.at(status.player - 1);
-	if (!change_existing && s.player != 0) {
-		throw wexception("Player end status for player %d already reported", status.player);
+	{
+		PlayerEndStatus& s = players_end_status_.at(status.player - 1);
+		if (!change_existing && s.player != 0) {
+			throw wexception("Player end status for player %d already reported", status.player);
+		}
+		s = status;
 	}
-	s = status;
 
 	/* If all results have been gathered, show the summary screen. */
 	if (change_existing || egbase_.get_igbase() == nullptr) {
