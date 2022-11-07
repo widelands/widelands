@@ -77,12 +77,12 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 	map.get_ln(coord, &c[0]);
 	map.get_tln(coord, &c[1]);
 	map.get_trn(coord, &c[2]);
-	map.get_brn(coord, &c[3]); // this is the flag
+	map.get_brn(coord, &c[3]);  // this is the flag
 	for (const Widelands::FCoords& fc : c) {
-		if (!can_support_port(fc)) { // check for blocking immovables
+		if (!can_support_port(fc)) {  // check for blocking immovables
 			return false;
 		}
-		MapRegion<Area<FCoords>> area(map, Area<FCoords>(fc, 1)); // radius 1 for owner check
+		MapRegion<Area<FCoords>> area(map, Area<FCoords>(fc, 1));  // radius 1 for owner check
 		do {
 			const PlayerNumber owner = coord.field->get_owned_by();
 			if (owner != neutral() && owner != player_number) {
@@ -893,7 +893,7 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 	                           FindImmovableType(MapObjectType::IMMOVABLE));
 	for (auto& immo : all_immos) {
 		if (immo.object->descr().has_attribute(MapObjectDescr::get_attribute_id("rocks")) ||
-		   dynamic_cast<Immovable*>(immo.object)->descr().has_terrain_affinity()) {
+		    dynamic_cast<Immovable*>(immo.object)->descr().has_terrain_affinity()) {
 			immo.object->remove(game);
 		}
 	}
