@@ -54,11 +54,7 @@ namespace {
 
 /// Returns true if 'coord' is not occupied or owned by 'player_number' and
 /// nothing stands there.
-bool can_support_port(const PlayerNumber player_number, const FCoords& coord) {
-	const PlayerNumber owner = coord.field->get_owned_by();
-	if (owner != neutral() && owner != player_number) {
-		return false;
-	}
+bool can_support_port(const FCoords& coord) {
 	BaseImmovable* baim = coord.field->get_immovable();
 	Immovable* imo = dynamic_cast<Immovable*>(baim);
 	if (imo == nullptr && baim != nullptr) {
@@ -70,36 +66,30 @@ bool can_support_port(const PlayerNumber player_number, const FCoords& coord) {
 
 /// Returns true if a ship owned by 'player_number' can land and erect a port at 'coord'.
 bool can_build_port_here(const PlayerNumber player_number, const Map& map, const FCoords& coord) {
-	if (!can_support_port(player_number, coord)) {
+	if (!can_support_port(coord)) {
 		return false;
 	}
 
 	// All fields of the port + their neighboring fields (for the border) must
 	// be conquerable without military influence.
-	Widelands::FCoords c[4];  //  Big buildings occupy 4 locations.
-	c[0] = coord;
-	map.get_ln(coord, &c[1]);
-	map.get_tln(coord, &c[2]);
-	map.get_trn(coord, &c[3]);
+	Widelands::FCoords c[4];  // Big buildings occupy 4 locations plus the flag.
+	// no need to check the main coords again. They are checked above and included in all areas
+	map.get_ln(coord, &c[0]);
+	map.get_tln(coord, &c[1]);
+	map.get_trn(coord, &c[2]);
+	map.get_brn(coord, &c[3]); // this is the flag
 	for (const Widelands::FCoords& fc : c) {
-		MapRegion<Area<FCoords>> area(map, Area<FCoords>(fc, 1));
+		if (!can_support_port(fc)) { // check for blocking immovables
+			return false;
+		}
+		MapRegion<Area<FCoords>> area(map, Area<FCoords>(fc, 1)); // radius 1 for owner check
 		do {
-			if (!can_support_port(player_number, area.location())) {
+			const PlayerNumber owner = coord.field->get_owned_by();
+			if (owner != neutral() && owner != player_number) {
 				return false;
 			}
 		} while (area.advance(map));
 	}
-
-	// Also all areas around the flag must be conquerable and must not contain
-	// another flag already.
-	FCoords flag_position;
-	map.get_brn(coord, &flag_position);
-	MapRegion<Area<FCoords>> area(map, Area<FCoords>(flag_position, 1));
-	do {
-		if (!can_support_port(player_number, area.location())) {
-			return false;
-		}
-	} while (area.advance(map));
 	return true;
 }
 
