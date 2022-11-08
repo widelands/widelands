@@ -1398,7 +1398,7 @@ void EditorInteractive::publish_map() {
 	progress.set_message_1(_("Packaging add-on…"));
 	const std::string addon_name = sanitized_name + kAddOnExtension;
 	const std::string addon_dir = kAddOnDir + FileSystem::file_separator() + addon_name;
-	const std::string map_dir = addon_dir + FileSystem::file_separator() + kDownloadedMapsDir;
+	const std::string map_dir = addon_dir + FileSystem::file_separator() + kAddOnMapsDir;
 	const std::string map_file =
 	   map_dir + FileSystem::file_separator() + sanitized_name + kWidelandsMapExtension;
 	const AddOns::AddOnInfo* existing = AddOns::find_addon(addon_name);
@@ -1435,6 +1435,7 @@ void EditorInteractive::publish_map() {
 	AddOns::MutableAddOn::ProgressFunction fnm = [this](size_t /* p */) { do_redraw_now(); };
 
 	AddOns::MapsAddon mutable_addon(info);
+	mutable_addon.set_dirname(kAddOnMapsDir, "Add-On Maps");
 	{
 		std::unique_ptr<FileSystem> map_fs(g_fs->make_sub_file_system(map_file));
 		mutable_addon.set_force_sync_safe(!map_fs->is_directory("scripting") ||
