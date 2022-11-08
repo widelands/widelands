@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-01 04:33+0000\n"
+"POT-Creation-Date: 2022-11-04 03:58+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
@@ -1242,7 +1242,7 @@ msgid ""
 msgstr "Chaidh am mapa seo a ghintinn gu fèin-obrachail le Gineadair mhapaichean Widelands."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:621
-#: ../../src/network/gamehost.cc:1640
+#: ../../src/network/gamehost.cc:1641
 #, c-format
 msgid "Computer %u"
 msgstr "Coimpiutair %u"
@@ -1288,7 +1288,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Thachair mearachd nuair a bha sinn a’ cruthachadh a’ phasgain “%s”."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:284
+#: ../../src/wui/game_main_menu_save_game.cc:285
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Tha faidhle air a bheil “%s” ann mar-thà. A bheil thu airson sgrìobhadh thairis air?"
@@ -1799,15 +1799,15 @@ msgstr "A’ cruthachadh cluicheadair %d…"
 msgid "Postloading world and tribes…"
 msgstr "Ag iar-luchdadh an t-saoghail ’s nan treubhan…"
 
-#: ../../src/logic/editor_game_base.cc:579
+#: ../../src/logic/editor_game_base.cc:580
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr "’Ga sgioblachadh a chùm luchdaidh: Nithean a’ mhapa (1/3)"
 
-#: ../../src/logic/editor_game_base.cc:585
+#: ../../src/logic/editor_game_base.cc:586
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr "’Ga sgioblachadh a chùm luchdaidh: Cluicheadairean (2/3)"
 
-#: ../../src/logic/editor_game_base.cc:588
+#: ../../src/logic/editor_game_base.cc:589
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr "’Ga sgioblachadh a chùm luchdaidh: Am mapa (3/3)"
 
@@ -1845,11 +1845,11 @@ msgstr "Cha b’ urrainn do Widelands an geama a thòiseachadh air sgàth ’s n
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1217
+#: ../../src/logic/game.cc:1218
 msgid "Trade Offer"
 msgstr "Tairgse-mhalairt"
 
-#: ../../src/logic/game.cc:1219
+#: ../../src/logic/game.cc:1220
 msgid "This market has received a new trade offer."
 msgstr "Fhuair a’ mhargaid seo tairgse airson malart ùr."
 
@@ -2162,64 +2162,64 @@ msgstr "Chaidh raon airson port a lorg"
 msgid "An expedition ship found a new port build space."
 msgstr "Lorg triall luinge raon ùr gus port a thogail."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:558
+#: ../../src/logic/map_objects/tribes/ship.cc:560
 msgid "Island Circumnavigated"
 msgstr "Tha eilean air iom-sheòladh"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:558
+#: ../../src/logic/map_objects/tribes/ship.cc:560
 msgctxt "ship"
 msgid "Waiting"
 msgstr "A’ feitheamh"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:559
+#: ../../src/logic/map_objects/tribes/ship.cc:561
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Sheòl triall luinge timcheall air eilean gun tachartas sam bith."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:622
+#: ../../src/logic/map_objects/tribes/ship.cc:624
 msgid "Coast Reached"
 msgstr "Chaidh oirthir a ruigsinn"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:622
+#: ../../src/logic/map_objects/tribes/ship.cc:624
 msgid "Land Ahoy!"
 msgstr "Tìr air fàire!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:623
+#: ../../src/logic/map_objects/tribes/ship.cc:625
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Ràinig triall luinge oirthir is e a’ feitheamh air òrduighean ùra."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:674
+#: ../../src/logic/map_objects/tribes/ship.cc:676
 msgid "New port construction site is gone"
 msgstr "Chailleadh làrach togail puirt ùr"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:674
+#: ../../src/logic/map_objects/tribes/ship.cc:676
 msgid "Port Lost!"
 msgstr "Port air a chall!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:675
+#: ../../src/logic/map_objects/tribes/ship.cc:677
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Chaidh sgur dhen triall on a dh’fhàillig le dì-luchdadh a’ bhathair."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:856
+#: ../../src/logic/map_objects/tribes/ship.cc:858
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Triall"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:856
+#: ../../src/logic/map_objects/tribes/ship.cc:858
 msgid "Expedition Ready"
 msgstr "Tha triall deiseil"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:857
+#: ../../src/logic/map_objects/tribes/ship.cc:859
 msgid "An expedition ship is waiting for your commands."
 msgstr "Tha triall luinge a’ feitheamh air d’ òrduighean."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1017
+#: ../../src/logic/map_objects/tribes/ship.cc:1019
 #: ../../src/wui/seafaring_statistics_menu.cc:239
 msgctxt "ship_state"
 msgid "Shipping"
@@ -2228,7 +2228,7 @@ msgstr "Ag aiseag"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1020
+#: ../../src/logic/map_objects/tribes/ship.cc:1022
 #: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Empty"
@@ -2236,7 +2236,7 @@ msgstr "Falamh"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1024
+#: ../../src/logic/map_objects/tribes/ship.cc:1026
 #: ../../src/wui/seafaring_statistics_menu.cc:241
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2244,14 +2244,14 @@ msgstr "A’ feitheamh"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1028
+#: ../../src/logic/map_objects/tribes/ship.cc:1030
 #: ../../src/wui/seafaring_statistics_menu.cc:243
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "A’ rùrachadh"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1032
+#: ../../src/logic/map_objects/tribes/ship.cc:1034
 #: ../../src/wui/seafaring_statistics_menu.cc:245
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2260,7 +2260,7 @@ msgstr "Air raon puirt a lorg"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1037
+#: ../../src/logic/map_objects/tribes/ship.cc:1039
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "A’ tuineachadh"
@@ -2540,12 +2540,12 @@ msgid "Saving game…"
 msgstr "A’ sàbhaladh a’ gheama…"
 
 #: ../../src/logic/save_handler.cc:174
-#: ../../src/wui/game_main_menu_save_game.cc:336
+#: ../../src/wui/game_main_menu_save_game.cc:337
 msgid "Saving failed!"
 msgstr "Dh’fhàillig leis an t-sàbhaladh!"
 
 #: ../../src/logic/save_handler.cc:188
-#: ../../src/wui/game_main_menu_save_game.cc:319
+#: ../../src/wui/game_main_menu_save_game.cc:320
 msgid "Game saved"
 msgstr "Chaidh an geama a shàbhaladh"
 
@@ -2690,7 +2690,7 @@ msgstr "A’ suidheachadh nithean a’ mhapa"
 msgid "Checking map"
 msgstr "A’ dearbhadh a’ mhapa"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:541
+#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
 #: ../../src/ui_fsmenu/launch_spg.cc:168 ../../src/wlapplication.cc:751
 msgid "Preparing game…"
 msgstr "Ag ullachadh a’ gheama…"
@@ -2865,7 +2865,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Cha b’ urrainn dha Widelands frithealaiche a cur gu dol.\n’S dòcha gu bheil pròiseas eile a’ ruith frithealaiche air a’ phort againn mar-thà."
 
-#: ../../src/network/gamehost.cc:1894
+#: ../../src/network/gamehost.cc:1895
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3341,7 +3341,7 @@ msgstr "Fuirich greiseag…"
 msgid "Game ending – please wait…"
 msgstr "Tha an geama a’ tighinn gu crìoch – fuirich greiseag…"
 
-#: ../../src/ui_basic/progresswindow.cc:75
+#: ../../src/ui_basic/progresswindow.cc:77
 msgid "Loading…"
 msgstr "’Ga luchdadh…"
 
@@ -7870,8 +7870,8 @@ msgstr "A bheil thu cinnteach gu bheil thu airson an geama seo fhàgail?"
 msgid "Load Replay"
 msgstr ""
 
-#: ../../src/wui/game_main_menu_save_game.cc:286
-#: ../../src/wui/game_main_menu_save_game.cc:326
+#: ../../src/wui/game_main_menu_save_game.cc:287
+#: ../../src/wui/game_main_menu_save_game.cc:327
 msgid "Error Saving Game!"
 msgstr "Mearachd le sàbhaladh a’ gheama!"
 

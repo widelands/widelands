@@ -5,8 +5,8 @@
 # Translators:
 # Viktor S <awsswa59@gmail.com>, 2018
 # Евгений Кривошеев <euja@yandex.ru>, 2019
-# Kapitoshka NA <ghost@email.ua>, 2020
 # nskdmitry, 2021
+# Yuriy Sokolov <lention@mail.ru>, 2022
 # 
 msgid ""
 msgstr ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: nskdmitry, 2021\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,9 +40,8 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
-"Постройте как минимум одну хижину дровосека и две хижины лесничего, чтобы "
-"начать производить древесины, а так же тростниковый двор, чтобы выращивать "
-"тростник."
+"Постройте как минимум один домик лесоруба и да домика лесника, чтобы начать "
+"производство брёвен, а так же тростниковую ферму, чтобы выращивать тростник."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"

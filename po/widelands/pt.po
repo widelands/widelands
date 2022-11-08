@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-01 04:33+0000\n"
+"POT-Creation-Date: 2022-11-04 03:58+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Francisco Fernandes <franciscof09@gmail.com>, 2021\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
@@ -1241,7 +1241,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:621
-#: ../../src/network/gamehost.cc:1640
+#: ../../src/network/gamehost.cc:1641
 #, c-format
 msgid "Computer %u"
 msgstr "Computador %u"
@@ -1287,7 +1287,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Erro ao criar a pasta ‘%s’."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:284
+#: ../../src/wui/game_main_menu_save_game.cc:285
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Já existe um ficheiro com o nome «&nbsp;%s&nbsp;». Substituí-lo?"
@@ -1794,15 +1794,15 @@ msgstr ""
 msgid "Postloading world and tribes…"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:579
+#: ../../src/logic/editor_game_base.cc:580
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:585
+#: ../../src/logic/editor_game_base.cc:586
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:588
+#: ../../src/logic/editor_game_base.cc:589
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr ""
 
@@ -1840,11 +1840,11 @@ msgstr "Widelands não conseguiu começar o jogo, porque o jogador %u não tem n
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1217
+#: ../../src/logic/game.cc:1218
 msgid "Trade Offer"
 msgstr "Oferta de Troca"
 
-#: ../../src/logic/game.cc:1219
+#: ../../src/logic/game.cc:1220
 msgid "This market has received a new trade offer."
 msgstr "Este mercado recebeu uma nova oferta de troca."
 
@@ -2154,64 +2154,64 @@ msgstr "Encontrámos local para um porto"
 msgid "An expedition ship found a new port build space."
 msgstr "Um navio de expedição encontrou um bom local para construir um novo porto."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:558
+#: ../../src/logic/map_objects/tribes/ship.cc:560
 msgid "Island Circumnavigated"
 msgstr "Ilha circum-navegada"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:558
+#: ../../src/logic/map_objects/tribes/ship.cc:560
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Esperando"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:559
+#: ../../src/logic/map_objects/tribes/ship.cc:561
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Um navio de expedição circum-navegou uma ilha sem eventos."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:622
+#: ../../src/logic/map_objects/tribes/ship.cc:624
 msgid "Coast Reached"
 msgstr "Chegamos à costa"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:622
+#: ../../src/logic/map_objects/tribes/ship.cc:624
 msgid "Land Ahoy!"
 msgstr "Terra!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:623
+#: ../../src/logic/map_objects/tribes/ship.cc:625
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Um navio de expedição chegou à costa e esta a espera das tuas ordens seguintes."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:674
+#: ../../src/logic/map_objects/tribes/ship.cc:676
 msgid "New port construction site is gone"
 msgstr "Perdemos a construção do porto novo"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:674
+#: ../../src/logic/map_objects/tribes/ship.cc:676
 msgid "Port Lost!"
 msgstr "Porto perdido!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:675
+#: ../../src/logic/map_objects/tribes/ship.cc:677
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Não pudemos descarregar as mercadorias, cancelamos a expedição."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:856
+#: ../../src/logic/map_objects/tribes/ship.cc:858
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedição"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:856
+#: ../../src/logic/map_objects/tribes/ship.cc:858
 msgid "Expedition Ready"
 msgstr "Expedição pronta"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:857
+#: ../../src/logic/map_objects/tribes/ship.cc:859
 msgid "An expedition ship is waiting for your commands."
 msgstr "Um novo navio de expedição está a espera das tuas ordens."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1017
+#: ../../src/logic/map_objects/tribes/ship.cc:1019
 #: ../../src/wui/seafaring_statistics_menu.cc:239
 msgctxt "ship_state"
 msgid "Shipping"
@@ -2220,7 +2220,7 @@ msgstr "Despachando"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1020
+#: ../../src/logic/map_objects/tribes/ship.cc:1022
 #: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Empty"
@@ -2228,7 +2228,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1024
+#: ../../src/logic/map_objects/tribes/ship.cc:1026
 #: ../../src/wui/seafaring_statistics_menu.cc:241
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2236,14 +2236,14 @@ msgstr "Esperando"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1028
+#: ../../src/logic/map_objects/tribes/ship.cc:1030
 #: ../../src/wui/seafaring_statistics_menu.cc:243
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Explorando"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1032
+#: ../../src/logic/map_objects/tribes/ship.cc:1034
 #: ../../src/wui/seafaring_statistics_menu.cc:245
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2252,7 +2252,7 @@ msgstr "Encontrámos local para um porto"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1037
+#: ../../src/logic/map_objects/tribes/ship.cc:1039
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "A fundir colonia"
@@ -2532,12 +2532,12 @@ msgid "Saving game…"
 msgstr ""
 
 #: ../../src/logic/save_handler.cc:174
-#: ../../src/wui/game_main_menu_save_game.cc:336
+#: ../../src/wui/game_main_menu_save_game.cc:337
 msgid "Saving failed!"
 msgstr "Falha ao salvar!"
 
 #: ../../src/logic/save_handler.cc:188
-#: ../../src/wui/game_main_menu_save_game.cc:319
+#: ../../src/wui/game_main_menu_save_game.cc:320
 msgid "Game saved"
 msgstr "O jogo foi salvo"
 
@@ -2682,7 +2682,7 @@ msgstr ""
 msgid "Checking map"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:541
+#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
 #: ../../src/ui_fsmenu/launch_spg.cc:168 ../../src/wlapplication.cc:751
 msgid "Preparing game…"
 msgstr ""
@@ -2856,7 +2856,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands não conseguiu iniciar um servidor.\nProvavelmente já outro programa está a utilizar a mesma porta."
 
-#: ../../src/network/gamehost.cc:1894
+#: ../../src/network/gamehost.cc:1895
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3330,7 +3330,7 @@ msgstr ""
 msgid "Game ending – please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/progresswindow.cc:75
+#: ../../src/ui_basic/progresswindow.cc:77
 msgid "Loading…"
 msgstr "A carregar …"
 
@@ -7842,8 +7842,8 @@ msgstr "Queres mesmo sair deste jogo?"
 msgid "Load Replay"
 msgstr ""
 
-#: ../../src/wui/game_main_menu_save_game.cc:286
-#: ../../src/wui/game_main_menu_save_game.cc:326
+#: ../../src/wui/game_main_menu_save_game.cc:287
+#: ../../src/wui/game_main_menu_save_game.cc:327
 msgid "Error Saving Game!"
 msgstr "Erro ao guardar o jogo!"
 

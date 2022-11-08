@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-01 04:33+0000\n"
+"POT-Creation-Date: 2022-11-04 03:58+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -1241,7 +1241,7 @@ msgid ""
 msgstr "Deese Kaart is vum Widelands-Tofallskaarten-Maker automatisk maakt worden."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:621
-#: ../../src/network/gamehost.cc:1640
+#: ../../src/network/gamehost.cc:1641
 #, c-format
 msgid "Computer %u"
 msgstr "Reekner %u"
@@ -1287,7 +1287,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Kunn dat Verteeknis »%s« nich maken."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:284
+#: ../../src/wui/game_main_menu_save_game.cc:285
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Eene Datei mit de Naam »%s« gifft ’t al. Överschrieven?"
@@ -1790,15 +1790,15 @@ msgstr "Maakt Speler %d …"
 msgid "Postloading world and tribes…"
 msgstr "Maak Welt un Völker klaar …"
 
-#: ../../src/logic/editor_game_base.cc:579
+#: ../../src/logic/editor_game_base.cc:580
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr "Tum Laden uprümen: Kaart-Dingen (1/3)"
 
-#: ../../src/logic/editor_game_base.cc:585
+#: ../../src/logic/editor_game_base.cc:586
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr "Tum Laden uprümen: Spelers (2/3)"
 
-#: ../../src/logic/editor_game_base.cc:588
+#: ../../src/logic/editor_game_base.cc:589
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr "Tum Laden uprümen: Kaart (3/3)"
 
@@ -1836,11 +1836,11 @@ msgstr "Widelands kunn dat Speel nich laden, wiel Speler %u keene Anfangs-Stee h
 msgid "Initializing…"
 msgstr "Vörbereiden …"
 
-#: ../../src/logic/game.cc:1217
+#: ../../src/logic/game.cc:1218
 msgid "Trade Offer"
 msgstr "Hannel-Anbott"
 
-#: ../../src/logic/game.cc:1219
+#: ../../src/logic/game.cc:1220
 msgid "This market has received a new trade offer."
 msgstr "Deese Markt hett een nejes Hannel-Anbott bekomen."
 
@@ -2147,64 +2147,64 @@ msgstr "Rüümte för Muden funnen"
 msgid "An expedition ship found a new port build space."
 msgstr "Een Schipp up Söke hett nejen Rüümte för een Muu funnen."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:558
+#: ../../src/logic/map_objects/tribes/ship.cc:560
 msgid "Island Circumnavigated"
 msgstr "Insel umlopen"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:558
+#: ../../src/logic/map_objects/tribes/ship.cc:560
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Wachten"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:559
+#: ../../src/logic/map_objects/tribes/ship.cc:561
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Een Schipp up Söke hett sien Insel umlopen ohne dat wat passeert is."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:622
+#: ../../src/logic/map_objects/tribes/ship.cc:624
 msgid "Coast Reached"
 msgstr "Küst funnen"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:622
+#: ../../src/logic/map_objects/tribes/ship.cc:624
 msgid "Land Ahoy!"
 msgstr "Küst to sehn kregen"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:623
+#: ../../src/logic/map_objects/tribes/ship.cc:625
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Een Schiüü up Söke hett een Küst funnen un wacht för dien Gebodd."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:674
+#: ../../src/logic/map_objects/tribes/ship.cc:676
 msgid "New port construction site is gone"
 msgstr "Neje Rüümte för Muden is verswunnen"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:674
+#: ../../src/logic/map_objects/tribes/ship.cc:676
 msgid "Port Lost!"
 msgstr "Muu quietworden!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:675
+#: ../../src/logic/map_objects/tribes/ship.cc:677
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "De Waren kunnen nich utladen worden; de Söök is nu ofbroken worden."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:856
+#: ../../src/logic/map_objects/tribes/ship.cc:858
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Söök"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:856
+#: ../../src/logic/map_objects/tribes/ship.cc:858
 msgid "Expedition Ready"
 msgstr "Söke torecht"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:857
+#: ../../src/logic/map_objects/tribes/ship.cc:859
 msgid "An expedition ship is waiting for your commands."
 msgstr "Een Schipp up Söke wacht för dien Gebodd."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1017
+#: ../../src/logic/map_objects/tribes/ship.cc:1019
 #: ../../src/wui/seafaring_statistics_menu.cc:239
 msgctxt "ship_state"
 msgid "Shipping"
@@ -2213,7 +2213,7 @@ msgstr "Up Schipperee"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1020
+#: ../../src/logic/map_objects/tribes/ship.cc:1022
 #: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Empty"
@@ -2221,7 +2221,7 @@ msgstr "Leeg"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1024
+#: ../../src/logic/map_objects/tribes/ship.cc:1026
 #: ../../src/wui/seafaring_statistics_menu.cc:241
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2229,14 +2229,14 @@ msgstr "Wachten"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1028
+#: ../../src/logic/map_objects/tribes/ship.cc:1030
 #: ../../src/wui/seafaring_statistics_menu.cc:243
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Söcht"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1032
+#: ../../src/logic/map_objects/tribes/ship.cc:1034
 #: ../../src/wui/seafaring_statistics_menu.cc:245
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2245,7 +2245,7 @@ msgstr "Rüüme för Muden funnen"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1037
+#: ../../src/logic/map_objects/tribes/ship.cc:1039
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Sett een nejes Dörp up"
@@ -2525,12 +2525,12 @@ msgid "Saving game…"
 msgstr "Sekere dat Speel …"
 
 #: ../../src/logic/save_handler.cc:174
-#: ../../src/wui/game_main_menu_save_game.cc:336
+#: ../../src/wui/game_main_menu_save_game.cc:337
 msgid "Saving failed!"
 msgstr "Sekern is fehlslaan!"
 
 #: ../../src/logic/save_handler.cc:188
-#: ../../src/wui/game_main_menu_save_game.cc:319
+#: ../../src/wui/game_main_menu_save_game.cc:320
 msgid "Game saved"
 msgstr "Dat Speel is sekert worden!"
 
@@ -2675,7 +2675,7 @@ msgstr "Kaart-Dingen klaarmaken"
 msgid "Checking map"
 msgstr "Kaart nakieken"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:541
+#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
 #: ../../src/ui_fsmenu/launch_spg.cc:168 ../../src/wlapplication.cc:751
 msgid "Preparing game…"
 msgstr "Speel word torechtmaakt …"
@@ -2848,7 +2848,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands kunn eenen Server nich anschalten.\nWahrschienelk bedrifft een anner Prozess al eenen Server up uns’ Port."
 
-#: ../../src/network/gamehost.cc:1894
+#: ../../src/network/gamehost.cc:1895
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3320,7 +3320,7 @@ msgstr "Bidde wachten …"
 msgid "Game ending – please wait…"
 msgstr "Speel ennt – bidde wachten …"
 
-#: ../../src/ui_basic/progresswindow.cc:75
+#: ../../src/ui_basic/progresswindow.cc:77
 msgid "Loading…"
 msgstr "Lade …"
 
@@ -7815,8 +7815,8 @@ msgstr "Willst du deeses Speel würrelk verlaten?"
 msgid "Load Replay"
 msgstr "Upteken laden"
 
-#: ../../src/wui/game_main_menu_save_game.cc:286
-#: ../../src/wui/game_main_menu_save_game.cc:326
+#: ../../src/wui/game_main_menu_save_game.cc:287
+#: ../../src/wui/game_main_menu_save_game.cc:327
 msgid "Error Saving Game!"
 msgstr "Fehler bi’m Sekern vum Speel!"
 
