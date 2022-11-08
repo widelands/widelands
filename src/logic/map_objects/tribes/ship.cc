@@ -84,7 +84,7 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 		}
 		MapRegion<Area<FCoords>> area(map, Area<FCoords>(fc, 1));  // radius 1 for owner check
 		do {
-			const PlayerNumber owner = coord.field->get_owned_by();
+			const PlayerNumber owner = area.location().field->get_owned_by();
 			if (owner != neutral() && owner != player_number) {
 				return false;
 			}
