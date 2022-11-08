@@ -2152,11 +2152,9 @@ void CmdDiplomacy::execute(Game& game) {
 
 	switch (action_) {
 	case DiplomacyAction::kResign:
-		for (const auto& status : game.player_manager()->get_players_end_status()) {
-			if (status.player == sender()) {
-				// Ignore if the player lost a moment ago
-				return;
-			}
+		if (game.player_manager()->get_player_end_status(sender()) != nullptr) {
+			// Ignore if the player lost a moment ago
+			return;
 		}
 		broadcast_message(_("Player Resigned"), format(_("%s has resigned and is now a spectator."),
 		                                               sending_player.get_name()));
