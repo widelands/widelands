@@ -69,11 +69,20 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 	if (!can_support_port(coord)) {
 		return false;
 	}
-
 	// All fields of the port + their neighboring fields (for the border) must
-	// be conquerable without military influence.
+	// be conquerable without military influence. Check radius 2 around
+	// the main spot to cover radius 1 around each of the 4 fields and the flag
+	MapRegion<Area<FCoords>> area(map, Area<FCoords>(coord, 2));
+	do {
+		const PlayerNumber owner = area.location().field->get_owned_by();
+		if (owner != neutral() && owner != player_number) {
+			return false;
+		}
+	} while (area.advance(map));
+
+	// All fields of the port must be free of blocking immovables
 	Widelands::FCoords c[4];  // Big buildings occupy 4 locations plus the flag.
-	// no need to check the main coords again. They are checked above and included in all areas
+	// no need to check the main coords again. They are checked above
 	map.get_ln(coord, &c[0]);
 	map.get_tln(coord, &c[1]);
 	map.get_trn(coord, &c[2]);
@@ -82,13 +91,6 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 		if (!can_support_port(fc)) {  // check for blocking immovables
 			return false;
 		}
-		MapRegion<Area<FCoords>> area(map, Area<FCoords>(fc, 1));  // radius 1 for owner check
-		do {
-			const PlayerNumber owner = area.location().field->get_owned_by();
-			if (owner != neutral() && owner != player_number) {
-				return false;
-			}
-		} while (area.advance(map));
 	}
 	return true;
 }
@@ -878,6 +880,19 @@ WalkingDir Ship::get_scouting_direction() const {
 /// @note only called via player command
 void Ship::exp_construct_port(Game& game, const Coords& c) {
 	assert(expedition_);
+	// recheck ownership before setting the csite
+	Map* map = game.mutable_map();
+	MapRegion<Area<FCoords>> area(*map, Area<FCoords>(map->get_fcoords(c), 2));
+	do {
+		const PlayerNumber owner = area.location().field->get_owned_by();
+		if (owner != neutral() && owner != get_owner()->player_number()) {
+			// enemy player was faster conquering the spot
+			set_ship_state_and_notify(
+			   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
+			return;
+		}
+	} while (area.advance(*map));
+
 	const MapObject* mo = game.map().get_fcoords(c).field->get_immovable();
 	if ((mo != nullptr) && mo->descr().type() >= MapObjectType::BUILDING) {
 		// Another expedition ship (or an enemy player) was a second faster
