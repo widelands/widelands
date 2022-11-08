@@ -147,11 +147,11 @@ bool GameSummaryScreen::compare_status(const uint32_t index1, const uint32_t ind
 	const uintptr_t a = (*players_table_)[index1];
 	const uintptr_t b = (*players_table_)[index2];
 
-	assert(a < game_.player_manager()->get_number_of_players());
-	assert(b < game_.player_manager()->get_number_of_players());
+	assert(a > 0 && a <= game_.player_manager()->get_number_of_players());
+	assert(b > 0 && b <= game_.player_manager()->get_number_of_players());
 
-	const Widelands::PlayerEndStatus* p1 = game_.player_manager()->get_player_end_status(a + 1);
-	const Widelands::PlayerEndStatus* p2 = game_.player_manager()->get_player_end_status(b + 1);
+	const Widelands::PlayerEndStatus* p1 = game_.player_manager()->get_player_end_status(a);
+	const Widelands::PlayerEndStatus* p2 = game_.player_manager()->get_player_end_status(b);
 
 	if (p1->result == p2->result) {
 		// We want to use the time as tie-breaker: The first player to lose sorts last
@@ -185,15 +185,15 @@ void GameSummaryScreen::fill_data() {
 	// if not then the first line
 	uint32_t current_player_position = 0;
 
-	for (uintptr_t i = 0; i < game_.player_manager()->get_number_of_players(); ++i) {
-		const Widelands::PlayerEndStatus* pes = game_.player_manager()->get_player_end_status(i + 1);
+	for (uintptr_t i = 1; i <= game_.player_manager()->get_number_of_players(); ++i) {
+		const Widelands::PlayerEndStatus* pes = game_.player_manager()->get_player_end_status(i);
 		if (pes == nullptr) {
 			continue;
 		}
 		if ((ipl != nullptr) && pes->player == ipl->player_number()) {
 			local_in_game = true;
 			local_won = pes->result == Widelands::PlayerEndResult::kWon;
-			current_player_position = i;
+			current_player_position = i - 1;
 		}
 		Widelands::Player* p = game_.get_player(pes->player);
 		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(i);
@@ -268,7 +268,7 @@ void GameSummaryScreen::stop_clicked() {
 void GameSummaryScreen::player_selected(uint32_t entry_index) {
 	const uintptr_t selected_player_index = (*players_table_)[entry_index];
 	const Widelands::PlayerEndStatus* player_status =
-	   game_.player_manager()->get_player_end_status(selected_player_index + 1);
+	   game_.player_manager()->get_player_end_status(selected_player_index);
 
 	std::string info_str = parse_player_info(player_status->info);
 	info_area_->set_text(info_str);
