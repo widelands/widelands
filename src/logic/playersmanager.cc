@@ -86,33 +86,37 @@ Player* PlayersManager::add_player(PlayerNumber const player_number,
 	return p;
 }
 
-void PlayersManager::add_player_end_status(const PlayerEndStatus& status) {
-	// Ensure we don't have a status for it yet
-	for (const auto& pes : players_end_status_) {
-		if (pes.player == status.player) {
-			throw wexception("Player End status for player %d already reported", pes.player);
-		}
-	}
-	players_end_status_.push_back(status);
-
-	// If all results have been gathered, save game and show summary screen
-	if (players_end_status_.size() < number_of_players_) {
-		return;
-	}
-
-	if (egbase_.get_igbase() != nullptr) {
-		egbase_.get_igbase()->show_game_summary();
-	}
+const PlayerEndStatus* PlayersManager::get_player_end_status(PlayerNumber player) const {
+	return (player == 0 || player - 1u >= players_end_status_.size() ||
+	        players_end_status_.at(player - 1).player != player) ?
+             nullptr :
+             &players_end_status_.at(player - 1);
 }
 
-void PlayersManager::set_player_end_status(const PlayerEndStatus& status) {
-	for (auto& pes : players_end_status_) {
-		if (pes.player == status.player) {
-			pes = status;
+void PlayersManager::add_player_end_status(const PlayerEndStatus& status, bool change_existing) {
+	assert(status.player > 0 && status.player <= number_of_players_);
+	if (players_end_status_.size() < number_of_players_) {
+		players_end_status_.resize(number_of_players_);
+	}
+
+	{
+		PlayerEndStatus& s = players_end_status_.at(status.player - 1);
+		if (!change_existing && s.player != 0) {
+			throw wexception("Player end status for player %d already reported", status.player);
+		}
+		s = status;
+	}
+
+	/* If all results have been gathered, show the summary screen. */
+	if (change_existing || egbase_.get_igbase() == nullptr) {
+		return;
+	}
+	for (const PlayerEndStatus& s : players_end_status_) {
+		if (s.player == 0) {
 			return;
 		}
 	}
-	players_end_status_.push_back(status);
+	egbase_.get_igbase()->show_game_summary();
 }
 
 }  // namespace Widelands

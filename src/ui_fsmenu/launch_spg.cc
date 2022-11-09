@@ -148,6 +148,7 @@ void LaunchSPG::clicked_ok() {
 	upcast(SinglePlayerGameSettingsProvider, sp, &settings_);
 	assert(sp);
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
+	game_->logic_rand_seed(RNG::static_rand());
 	try {
 		if (sp->settings().scenario) {  // scenario
 			game_->run_splayer_scenario_direct({sp->get_map()}, "");
@@ -162,7 +163,7 @@ void LaunchSPG::clicked_ok() {
 				tipstexts.push_back(sp->get_players_tribe());
 			}
 			game_->create_loader_ui(
-			   tipstexts, true, sp->settings().map_theme, sp->settings().map_background);
+			   tipstexts, true, sp->settings().map_theme, sp->settings().map_background, true);
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 

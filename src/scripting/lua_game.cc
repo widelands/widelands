@@ -202,13 +202,9 @@ int LuaPlayer::get_defeated(lua_State* L) {
       (RO) :const:`true` if this player has resigned, :const:`false` otherwise
 */
 int LuaPlayer::get_resigned(lua_State* L) {
-	for (const auto& s : get_egbase(L).player_manager()->get_players_end_status()) {
-		if (s.player == player_number() && s.result == Widelands::PlayerEndResult::kResigned) {
-			lua_pushboolean(L, 1);
-			return 1;
-		}
-	}
-	lua_pushboolean(L, 0);
+	const Widelands::PlayerEndStatus* p =
+	   get_egbase(L).player_manager()->get_player_end_status(player_number());
+	lua_pushboolean(L, p != nullptr && p->result == Widelands::PlayerEndResult::kResigned ? 1 : 0);
 	return 1;
 }
 

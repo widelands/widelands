@@ -121,7 +121,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 				status.result = static_cast<PlayerEndResult>(fr.unsigned_8());
 				status.time = Time(fr);
 				status.info = fr.c_string();
-				manager->set_player_end_status(status);
+				manager->add_player_end_status(status, true);
 			}
 
 			game.read_statistics(fr);
@@ -191,14 +191,19 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver* /* 
 	}
 
 	// Result screen
-	const std::vector<PlayerEndStatus>& end_status_list =
-	   game.player_manager()->get_players_end_status();
+	std::vector<const Widelands::PlayerEndStatus*> end_status_list;
+	for (uint8_t pn = 1; pn <= game.player_manager()->get_number_of_players(); ++pn) {
+		const Widelands::PlayerEndStatus* pes = game.player_manager()->get_player_end_status(pn);
+		if (pes != nullptr) {
+			end_status_list.push_back(pes);
+		}
+	}
 	fw.unsigned_8(end_status_list.size());
-	for (const PlayerEndStatus& status : end_status_list) {
-		fw.unsigned_8(status.player);
-		fw.unsigned_8(static_cast<uint8_t>(status.result));
-		status.time.save(fw);
-		fw.c_string(status.info.c_str());
+	for (const PlayerEndStatus* status : end_status_list) {
+		fw.unsigned_8(status->player);
+		fw.unsigned_8(static_cast<uint8_t>(status->result));
+		status->time.save(fw);
+		fw.c_string(status->info.c_str());
 	}
 
 	game.write_statistics(fw);

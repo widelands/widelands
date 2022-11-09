@@ -60,7 +60,7 @@ void MainMenuLoadMap::clicked_ok() {
 		egbase_.delete_world_and_tribes();
 
 		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
-		eia.egbase().create_loader_ui({"editor"}, true, "", editor_splash_image());
+		eia.egbase().create_loader_ui({"editor"}, true, "", editor_splash_image(), false);
 		eia.load(mapdata.filename);
 		// load() will delete us.
 		eia.egbase().remove_loader_ui();
