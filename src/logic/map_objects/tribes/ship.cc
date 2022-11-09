@@ -52,11 +52,15 @@ namespace Widelands {
 
 namespace {
 
-/// Returns true if 'coord' is not occupied or owned by 'player_number' and
-/// nothing stands there.
-bool can_support_port(const FCoords& coord) {
+/// Returns true if 'coord' is not blocked by immovables
+bool can_support_port(const FCoords& coord, bool flag) {
 	BaseImmovable* baim = coord.field->get_immovable();
 	Immovable* imo = dynamic_cast<Immovable*>(baim);
+	// if we are checking the flag field and we have a flag already we are fine
+	if (flag && baim != nullptr && baim->descr().type() == MapObjectType::FLAG) {
+		return true;
+	}
+	// we have a player immovable
 	if (imo == nullptr && baim != nullptr) {
 		return false;
 	}
@@ -66,7 +70,7 @@ bool can_support_port(const FCoords& coord) {
 
 /// Returns true if a ship owned by 'player_number' can land and erect a port at 'coord'.
 bool can_build_port_here(const PlayerNumber player_number, const Map& map, const FCoords& coord) {
-	if (!can_support_port(coord)) {
+	if (!can_support_port(coord, false)) {
 		return false;
 	}
 	// All fields of the port + their neighboring fields (for the border) must
@@ -81,16 +85,21 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 	} while (area.advance(map));
 
 	// All fields of the port must be free of blocking immovables
-	Widelands::FCoords c[4];  // Big buildings occupy 4 locations plus the flag.
-	// no need to check the main coords again. They are checked above
+	// Big buildings occupy 4 locations, but no need to check the main coords again.
+	// They are checked above
+	Widelands::FCoords c[3];
 	map.get_ln(coord, &c[0]);
 	map.get_tln(coord, &c[1]);
 	map.get_trn(coord, &c[2]);
-	map.get_brn(coord, &c[3]);  // this is the flag
 	for (const Widelands::FCoords& fc : c) {
-		if (!can_support_port(fc)) {  // check for blocking immovables
+		if (!can_support_port(fc, false)) {  // check for blocking immovables
 			return false;
 		}
+	}
+	Widelands::FCoords cflag;
+	map.get_brn(coord, &cflag);
+	if (!can_support_port(cflag, true)) {  // check flag
+		return false;
 	}
 	return true;
 }
