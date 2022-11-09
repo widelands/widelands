@@ -284,7 +284,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 	maploader->preload_map(true, &enabled_addons());
 
 	create_loader_ui({"general_game"}, false /* no game tips in scenarios */,
-	                 map().get_background_theme(), map().get_background());
+	                 map().get_background_theme(), map().get_background(), true);
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
@@ -486,7 +486,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		gl.preload_game(gpdp);
 
 		create_loader_ui({"general_game", "singleplayer"}, true, gpdp.get_background_theme(),
-		                 gpdp.get_background());
+		                 gpdp.get_background(), true);
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
@@ -798,7 +798,7 @@ bool Game::run(StartGameType const start_game_type,
 	}
 	if (FileSystem::filename_ext(load) == kSavegameExtension) {
 		create_loader_ui(
-		   {"general_game"}, false, map().get_background_theme(), map().get_background());
+		   {"general_game"}, false, map().get_background_theme(), map().get_background(), true);
 		return run_load_game(load, script_to_run);
 	}
 
@@ -817,7 +817,8 @@ bool Game::run_replay(const std::string& filename, const std::string& script_to_
 	full_cleanup();
 	replay_filename_ = filename;
 
-	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
+	create_loader_ui(
+	   {"general_game"}, false, map().get_background_theme(), map().get_background(), true);
 	set_ibase(new InteractiveSpectator(*this, get_config_section()));
 
 	set_write_replay(false);

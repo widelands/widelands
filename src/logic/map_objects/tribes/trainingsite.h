@@ -195,6 +195,7 @@ public:
 
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
+	bool is_present(Worker& worker) const override;
 
 	bool get_build_heroes() {
 		return build_heroes_;

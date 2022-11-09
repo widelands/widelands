@@ -513,14 +513,17 @@ void GameHost::run_callback() {
 		}
 	}
 
+	const uint32_t rng_seed = RNG::static_rand();
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_LAUNCH);
+	packet.unsigned_32(rng_seed);
 	packet.unsigned_32(game_->enabled_addons().size());
 	for (const auto& a : game_->enabled_addons()) {
 		packet.string(a->internal_name);
 	}
 	broadcast(packet);
 
+	game_->logic_rand_seed(rng_seed);
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
 	game_->set_auto_speed(get_config_bool("auto_speed", false));
 	game_->set_write_syncstream(get_config_bool("write_syncstreams", true));
@@ -534,7 +537,8 @@ void GameHost::run_callback() {
 		if (d->hp.has_players_tribe()) {
 			tipstexts.push_back(d->hp.get_players_tribe());
 		}
-		game_->create_loader_ui(tipstexts, true, d->settings.map_theme, d->settings.map_background);
+		game_->create_loader_ui(
+		   tipstexts, true, d->settings.map_theme, d->settings.map_background, true);
 		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 		d->game = game_.get();
@@ -1930,6 +1934,16 @@ void GameHost::broadcast_real_speed(uint32_t const speed) {
 	broadcast(packet);
 }
 
+bool GameHost::client_may_change_speed(uint8_t playernum) const {
+	if (playernum > UserSettings::highest_playernum()) {
+		return false;
+	}
+	const Widelands::PlayerEndStatus* pes =
+	   d->game->player_manager()->get_player_end_status(playernum + 1);
+	return pes == nullptr || (pes->result != Widelands::PlayerEndResult::kLost &&
+	                          pes->result != Widelands::PlayerEndResult::kResigned);
+}
+
 /**
  * This is the algorithm that decides upon the effective network speed,
  * given the desired speed of all clients.
@@ -1961,13 +1975,14 @@ void GameHost::update_network_speed() {
 		// No pause was forced - normal speed calculation
 		std::vector<uint32_t> speeds;
 
-		speeds.push_back(d->localdesiredspeed);
 		for (const Client& client : d->clients) {
-			if (client.playernum <= UserSettings::highest_playernum()) {
+			if (client_may_change_speed(client.playernum)) {
 				speeds.push_back(client.desiredspeed);
 			}
 		}
-		assert(!speeds.empty());
+		if (speeds.empty() || client_may_change_speed(d->settings.playernum)) {
+			speeds.push_back(d->localdesiredspeed);
+		}
 
 		std::sort(speeds.begin(), speeds.end());
 
