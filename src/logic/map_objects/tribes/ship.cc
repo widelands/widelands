@@ -540,7 +540,9 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					expedition_->scouting_direction = WALK_SE;
 					for (uint8_t secure = 0; exp_dir_swimmable(expedition_->scouting_direction);
 					     ++secure) {
-						assert(secure < 6);
+						if (secure >= 6) {
+							throw wexception("Scouting ship on land");
+						}
 						expedition_->scouting_direction =
 						   get_cw_neighbour(expedition_->scouting_direction);
 					}
