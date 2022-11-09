@@ -109,7 +109,7 @@ obj_produce_cloth = {
    title=_("Produce cloth for building our first ship"),
    number = 1,
    body = objective_text(_("Cloth Production"),
-      li(_([[Now turn all the wheat into at least 50 bales of wool and then use the wool to weave cloth in order to build a ship.]]))
+      li(_([[Now build a sheep farm and turn all the wheat into at least 50 bales of wool. Afterwards use the wool to weave cloth in order to build a ship.]]))
    ),
 }
 
@@ -119,7 +119,7 @@ obj_build_expedition_ports = {
    number = 1,
    -- TRANSLATORS: Objective - create 2 expeditions and found new colonies with them
    body = objective_text(_("Build two Expedition Ports"),
-      li(_([[Explore the island in the south. Use an expedition to build a port there. Afterwards, try to find some mining resources.]])) ..
+      li(_([[Explore the island in the south. Send an expedition from our port to build a port there. Afterwards, try to find some mining resources.]])) ..
       li(_([[Send a ship northwards to gather some intelligence about the Barbarians. Try to build a port on the island and found an outpost.]]))
    ),
 }

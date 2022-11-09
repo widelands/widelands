@@ -6451,7 +6451,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		// increase mines counter
 		// (used when testing possible port location)
 		if ((f->nodecaps() & Widelands::BUILDCAPS_MINE) != 0) {
-			++mineable_fields_count;
+			++(*mineable_fields_count);
 		}
 
 		// add neighbours to a queue (duplicates are no problem)

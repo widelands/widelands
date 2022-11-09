@@ -252,25 +252,26 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 
 	std::set<Widelands::PlayerNumber> players_with_result;
 	for (auto& pair : diplomacy_status_) {
+		const Widelands::PlayerEndStatus* p =
+		   iplayer_.egbase().player_manager()->get_player_end_status(pair.first);
+		if (p == nullptr) {
+			continue;
+		}
+
+		players_with_result.insert(p->player);
 		std::string str;
-		for (const auto& s : iplayer_.egbase().player_manager()->get_players_end_status()) {
-			if (s.player == pair.first) {
-				players_with_result.insert(s.player);
-				switch (s.result) {
-				case Widelands::PlayerEndResult::kWon:
-					str = format(_("Won at %s"), gametimestring(s.time.get()));
-					break;
-				case Widelands::PlayerEndResult::kLost:
-					str = format(_("Lost at %s"), gametimestring(s.time.get()));
-					break;
-				case Widelands::PlayerEndResult::kResigned:
-					str = format(_("Resigned at %s"), gametimestring(s.time.get()));
-					break;
-				default:
-					break;
-				}
-				break;
-			}
+		switch (p->result) {
+		case Widelands::PlayerEndResult::kWon:
+			str = format(_("Won at %s"), gametimestring(p->time.get()));
+			break;
+		case Widelands::PlayerEndResult::kLost:
+			str = format(_("Lost at %s"), gametimestring(p->time.get()));
+			break;
+		case Widelands::PlayerEndResult::kResigned:
+			str = format(_("Resigned at %s"), gametimestring(p->time.get()));
+			break;
+		default:
+			break;
 		}
 		pair.second->set_text(str);
 	}
