@@ -213,6 +213,10 @@ enum : uint8_t {
 
 	/**
 	 * Sent by the host during game setup to indicate that the game starts.
+	 * The payload is:
+	 * \li unsigned_32 Random number generator seed
+	 * \li unsigned_32 Number of enabled add-ons
+	 * \li Each enabled add-on's internal name
 	 *
 	 * The client must load the map and setup the game. As soon as the game
 	 * is fully loaded, it must behave as if a \ref NETCMD_WAIT command had

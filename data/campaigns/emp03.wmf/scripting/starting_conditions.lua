@@ -47,7 +47,7 @@ hq = prefilled_buildings(p1,
          water = 12,
          wheat = 6,
          wine = 8,
-         wool = 4,
+         wool = 2,
       },
       workers = {
          empire_armorsmith = 1,
