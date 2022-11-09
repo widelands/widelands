@@ -265,6 +265,7 @@ void GameClient::do_run(RecvPacket& packet) {
 
 	Widelands::Game game;
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
+	game.logic_rand_seed(packet.unsigned_32());
 
 	game.enabled_addons().clear();
 	for (size_t i = packet.unsigned_32(); i != 0u; --i) {
@@ -288,8 +289,8 @@ void GameClient::do_run(RecvPacket& packet) {
 		if (has_players_tribe()) {
 			tipstexts.push_back(get_players_tribe());
 		}
-		UI::ProgressWindow& loader_ui =
-		   game.create_loader_ui(tipstexts, true, d->settings.map_theme, d->settings.map_background);
+		UI::ProgressWindow& loader_ui = game.create_loader_ui(
+		   tipstexts, true, d->settings.map_theme, d->settings.map_background, true);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
