@@ -550,6 +550,16 @@ void TrainingSite::remove_worker(Worker& w) {
 	ProductionSite::remove_worker(w);
 }
 
+bool TrainingSite::is_present(Worker& worker) const {
+	if (worker.descr().type() != MapObjectType::SOLDIER) {
+		return Building::is_present(worker);
+	}
+	/* Unlike other workers or soldiers in militarysites,
+	 * soldiers in trainingsites don't have a buildingwork task. */
+	return worker.get_location(get_owner()->egbase()) == this &&
+	       worker.get_position() == get_position();
+}
+
 /**
  * Request soldiers up to capacity, or let go of surplus soldiers.
  *

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-10-31 04:13+0000\n"
 "PO-Revision-Date: 2016-03-24 07:33+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Basque (http://www.transifex.com/widelands/widelands/language/eu/)\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/scripting/editor/editor_controls.lua:11
-#: ../../data/scripting/editor/editor_help.lua:65
+#: ../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
 msgstr ""
 
@@ -122,29 +122,29 @@ msgstr ""
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:49
+#: ../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:54
+#: ../../data/scripting/editor/editor_help.lua:55
 msgid "General"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:59
+#: ../../data/scripting/editor/editor_help.lua:60
 #: ../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:71
+#: ../../data/scripting/editor/editor_help.lua:72
 #: ../../data/scripting/editor/tips.lua:15
 msgid "Tips"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:81
+#: ../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:88
+#: ../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
 msgstr ""
 
