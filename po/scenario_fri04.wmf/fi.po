@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# LINUX-SAUNA, 2022
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
+"Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri04.wmf/scripting/init.lua:28
 msgid "Note"
-msgstr ""
+msgstr "Huomautus"
 
 #: ../../data/campaigns/fri04.wmf/scripting/init.lua:29
 msgid ""
@@ -26,69 +30,76 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Et ole nähtävästi suorittanut edellistä tehtävää. Voit siltikin pelata tämän"
+" näyttämön, mutta tulet aloittamaan epäsuotuisassa asemassa. Suosittelen, "
+"että läpäiset edeltävän tehtävän ensin ja aloitat tämän kyseisen tehtävän "
+"sitten uudelleen."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:33
 msgid "Find Reebaud"
-msgstr ""
+msgstr "Etsi Reebaud"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:34
 msgid "Expand your territory until you meet your old friend Reebaud."
-msgstr ""
+msgstr "Laajenna alueitasi kunnes kohtaat vanhan ystäväsi, Reebaud:in kanssa."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:39
 msgid "Defeat the strangers"
-msgstr ""
+msgstr "Kukista muukalaiset"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:41
 msgid "Defeat the Strangers"
-msgstr ""
+msgstr "Kukista Muukalaiset"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:42
 msgid "Defeat the hostile tribe."
-msgstr ""
+msgstr "Kukista vihollismielinen heimo."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
-msgstr ""
+msgstr "Kukista Imperiumi"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:49
 msgid "Defeat the Imperial Legate"
-msgstr ""
+msgstr "Kukista Keisarillinen Legaatti"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:50
 msgid "Defeat Marcus Caius Iniucundus."
-msgstr ""
+msgstr "Kukista Marcus Caius Iniucundus."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:55
 msgid "Recruit & train"
-msgstr ""
+msgstr "Värvää & kouluta"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:57
 msgid "Recruit And Train Your Soldiers"
-msgstr ""
+msgstr "Värvää ja kouluta sotilaasi"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:58
 msgid ""
 "Train your soldiers while you are waiting for Reebaud to proclaim his "
 "soldiers battle-ready."
 msgstr ""
+"Kouluta sotilaitasi sillä välin kun odotat Reebaud:in julkistusta "
+"sotilaidensa taisteluvalmiudesta."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:59
 msgid "You have one hour to train as many soldiers as you can."
 msgstr ""
+"Sinulla on yksi tunti aikaa kouluttaa niin monta sotilasta kuin kykenet."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:68
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:77
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:83
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Tervetuloa takaisin!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:69
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:78
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:84
 msgid "Arrived at last"
-msgstr ""
+msgstr "Viimeinkin on saavuttu"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:71
@@ -97,6 +108,10 @@ msgid ""
 "just in time; it caught us while we were on sea and we were all certain our "
 "ship was about to split and sink, and none of us would see our home again."
 msgstr ""
+"Marcus Caius Iniucundus ei ollut valehdellut myrskystä. Poistuimme juuri "
+"hyvän sään aikana; myrsky tosin tavoitti meidät merellä ja olimme varmoja "
+"että laivamme halkeaa pian kahtia upoten, ja että kukaan meistä ei näkisi "
+"enää kotiansa."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:74
@@ -106,6 +121,10 @@ msgid ""
 "could continue sailing. Finally, we arrived as far North as it is possible "
 "to go by ship."
 msgstr ""
+"Jumalan armosta runsaiden rukoustemme siivittämänä Hän säästi meidät. Meidän"
+" oli rantauduttava karulle, asumattomalle rannalle korjaamaan laivaa jotta "
+"voisimme jatkaa purjehtimista. Lopulta, saavuimmekin kaukaiseen Pohjolaan "
+"johon on mahdollista laivalla päästä. "
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:80
@@ -118,6 +137,14 @@ msgid ""
 "not regret that I will probably not be seeing him again. He set up his camp "
 "some distance away from mine so that we will not hinder each other."
 msgstr ""
+"Legaatilla ja minulla ei ole enää mitään asioita hoidettavana keskenämme. "
+"Olen alkanut kavahtamaan hänen ylemmyydentunnosta kumpuavaa asennettaan "
+"matkan aikana, ja varsinkaan en pidä siitä halveksuvasta tavasta miten hän "
+"kohtelee kaleeriorjiansa. Hän ei näytä ymmärtävän, että he ovat "
+"ihmisolentoja kuten hän ja minä olemme; tai vaikka ymmärsikin, hän "
+"käyttäytyi kuten hänen huono onnensa olisi heidän syytään. Eipä liene "
+"menetys olla näkemättä häntä ehkäpä enää koskaan. Hän kokosi leirinsä pitkän"
+" välimatkan päähän omaani nähden jotta emme olisi haitaksi toisillemme."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:86
@@ -127,6 +154,10 @@ msgid ""
 "I have seen no signs of human habitation around here yet, I have no doubt "
 "that we will find him soon."
 msgstr ""
+"Mutta nyt, kun olemme päässeet niin lähelle, olen liian kärsimätön "
+"istuakseni aloillani mennyttä miettien. Nopeasti nyt! Lähdetäänpä katsomaan "
+"ystävääni. Vaikkakaan en ole nähnyt vielä merkkiäkään ihmisasutuksesta "
+"näillä tienoilla, en epäile ettemmekö löytäisi häntä pian. "
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:97
@@ -136,12 +167,12 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:227
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:237
 msgid "Strangers"
-msgstr ""
+msgstr "Muukalaiset"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:92
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:98
 msgid "Who are they?"
-msgstr ""
+msgstr "Keitä he ovat?"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 1a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:94
@@ -149,6 +180,8 @@ msgid ""
 "Our soldiers have sighted strangers – the first natives in this bleak "
 "countryside. Perhaps they know where Reebaud can be found?"
 msgstr ""
+"Sotilaamme ovat havainneet muukalaisia – ensimmäiset paikalliset tällä "
+"karulla maaseudulla. Ehkäpä he tietävät mistä Reebaud löytyy?"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:100
@@ -157,11 +190,14 @@ msgid ""
 "Henneke. We come in search of my friend Reebaud. May I ask if you know where"
 " we may find him?"
 msgstr ""
+"Rauhaa ja tervehdys, hyvät ihmiset! Olen Claus Lembeck, ja tämä on poikani "
+"Henneke. Etsimme ystävääni Reebaud:ia. Saanko kysyä mistä voisimme hänet "
+"löytää?"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:104
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:116
 msgid "Enemies"
-msgstr ""
+msgstr "Viholliset"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1c
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:106
@@ -169,10 +205,12 @@ msgid ""
 "Our soldiers have sighted strangers. These must be the intruders Reebaud "
 "mentioned."
 msgstr ""
+"Sotilaamme ovat havainneet muukalaisia. Nämä ovat varmastikin juuri niitä "
+"tunkeilijoita jotka Reebaud mainitsi."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:110
 msgid "Trespassers"
-msgstr ""
+msgstr "Luvattomat tunkeilijat"
 
 #. TRANSLATORS: Linthesilea – Amazons 2. She does not speak this language
 #. well, but she does manage to convey her meaning.
@@ -181,11 +219,13 @@ msgid ""
 "We – Amazons. You – strangers. Land – here – own – we. You – trespassers. "
 "You – enemies. We – you – all – make – dead!"
 msgstr ""
+"Me – Amatsoonit. Te – muukalaiset. Maa – täällä – me – omistamme. Te – "
+"tunkeilijat. Te – viholliset. Me – teidät – kaikki – kuolleiksi – teemme!"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:118
 msgid "Not the friendliest of people…"
-msgstr ""
+msgstr "Eivät väkeä mukavimmasta päästä..."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:123
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:129
@@ -200,7 +240,7 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:186
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:193
 msgid "An Old Friend"
-msgstr ""
+msgstr "Vanha ystävä"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:124
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:130
@@ -215,13 +255,15 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:187
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:194
 msgid "Met up at last"
-msgstr ""
+msgstr "Jälleentapaaminen viimeinkin"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:126
 msgid ""
 "At last! These people’s buildings look familiar. It must be Reebaud’s tribe."
 msgstr ""
+"Vihdoinkin! Näiden ihmisten rakennukset näyttävät tutuilta. Heidän on pakko "
+"olla Reebaud:in heimo."
 
 #. TRANSLATORS: Reebaud – Reebaud 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:132
@@ -229,6 +271,9 @@ msgid ""
 "Do my eyes deceive me, or is a spirit playing tricks on me? Surely it cannot"
 " be my old friend Claus who meets me so far away from home!"
 msgstr ""
+"Pettävätkö silmäni minut, vai kepposteleeko jokin henki kustannuksellani? "
+"Eihän siinä voi mitenkään olla vanha ystäväni Claus joka kohtaa minut niin "
+"kaukana kotoa! "
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:138
@@ -237,6 +282,9 @@ msgid ""
 "and I journeyed this far to seek you out. I cannot say how glad I am to have"
 " found you at last."
 msgstr ""
+"Eipä ole kepponen eikä petos, minähän tässä todella olen, Claus Lembeck! "
+"Poikani Henneke ja minä matkasimme näin kauas sinua etsimään. En pysty "
+"sanoilla kuvailemaan kuinka iloinen olen löytäessäni sinun viimeinkin."
 
 #. TRANSLATORS: Reebaud – Reebaud 4
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:144
@@ -246,6 +294,11 @@ msgid ""
 " Just as you once helped me fend off a Holstein invasion, I will now help my"
 " friend if I can."
 msgstr ""
+"Sydäntälämmittävää huomata että näit moisen vaivan vain minun "
+"tapaamisekseni. Mutta et tokikaan tehnyt sitä vain minulle puhuaksesi. Mikä "
+"painaakaan mieltäsi? Aivan kuten kerran muinoin autoit minua torjumaan "
+"Holsteinin valtaamisyrityksen, autan minä nyt puolestani ystävääni mikäli "
+"niikseen tulee."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:150
@@ -256,6 +309,12 @@ msgid ""
 "you directly; but I have made an arch-enemy of him by frequently aiding "
 "those he sought to conquer."
 msgstr ""
+"Kyllä vain, saavuin tänne pyytämään apuasi. Muistat varmasti Atterdag:in, "
+"tanskalaisten kuninkaan, joka aiheutti meille friisiläisille suuria "
+"koettelemuksia useita kertoja. Et koskaan taistellut häntä vastaan itse, "
+"hänen ollessaan varovainen maineesi kautta hyökätäkseen suoraan sinua "
+"kohtaan; mutta hän on muodostunut periviholliseksi alati auttaessaan heitä "
+"jotka pyrkivät meidät valloittamaan."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:153
@@ -267,6 +326,12 @@ msgid ""
 "friends on the mainland could help me, for Atterdag’s armies are so "
 "incredibly numerous that I knew they wouldn’t have stood a chance."
 msgstr ""
+"Noin kolme tai neljä kuukautta sitten – menetin ajantajun pitkällä matkalla "
+"– hän rantautui sotilaidensa kanssa minun saarelleni nimeltä Föhr. Säästän "
+"sinut taistelun kertaamiselta, joka kesti viisi viikkoa eikä päivääkään "
+"vähempää. Lyhyt ja katkera totuus on se, että minut kukistettiin ja jouduin "
+"pakenemaan. Toivoa ystävieni avusta sisämaassa ei olllut, koska Atterdag:in "
+"armeijat ovat niin valtavat että tiesin heiltä uupuvan mahdollisuudenkaan."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 6
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:159
@@ -276,6 +341,11 @@ msgid ""
 "come South with me and liberate Föhr, or at least to send with me a troop of"
 " your far-famed soldiers."
 msgstr ""
+"Vain sinulla on moinen ihmeenomainen maine aseiden käyttövoimaan. Olet "
+"ilmeisestikin ainoa elossa oleva ihminen joka voi kukistaa tämän ilkeän "
+"tanskalaisen. Anelen sinua lähtemään kanssani etelään vapauttamaan Föhr:iä, "
+"tai vähintäänkin lähettämään minulle joukko-osaston kauaskuuluisia "
+"sotilaitasi."
 
 #. TRANSLATORS: Reebaud – Reebaud 7
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:165
@@ -289,6 +359,15 @@ msgid ""
 "We defeated them all, and believed to have found peace at last. And for four"
 " long years, life was peaceful indeed."
 msgstr ""
+"Mikäli olisit saapunut viikkoa aiemmin, olisin suostunut pyyntöösi "
+"välittömästi. Nyt, kuitenkin, harmillisuuksia on ilmestynyt taivaanrantaan. "
+"Tarkoitan tätä kirjaimellisesti; ulkomaalaisia on saapunut kaukaa ja "
+"tarkoituksenaan on ajaa meidät pois ja ottaa maamme haltuunsa, kuten itsekin"
+" teimme, tarpeen sanelemana, asiaan liittyivät vihamieliset asuttajat "
+"täällä. Sodanhimoiset barbaarit, ja keisarillinen pahanilmanlintu Murilius "
+"joka esitti pöyristyttäviä vaatimuksia. Päihitimme heidät kaikki, ja "
+"uskoimme rauhan viimeinkin laskeutuneen. Ja neljä vuotta näin olikin, elämä "
+"oli kerrassaan rauhallista."
 
 #. TRANSLATORS: Reebaud – Reebaud 8a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:171
@@ -305,6 +384,18 @@ msgid ""
 " South with you. For this period, you shall of course receive all the "
 "hospitality and courtesy we can offer."
 msgstr ""
+"Mutta nyt, kuten sanottua, lyhyen kesän saavuttua, jonka tiimoilla lumi "
+"sulaa joistakin paikoista ja matkaaminen kaukaisiin kohteisiin on "
+"mahdollista, muukalaiset ilmestyivät ja aloittivat hyökkäyksen meitä kohti. "
+"He saivat yllätyshyökkäyksen, elämä ilman taistelua oli tehnyt meidät "
+"välinpitämättömiksi. Moni hyvä sotilas kaatui heidän keihäisiinsä, heidän "
+"mukanaan Hauke, paras ystäväni ja tärkein neuvonantajani, sekä Fiete, ainoa "
+"poikani ja perijäni. Heidän ovelat taisteluliikkeensä olivat meille jotakin "
+"aivan uutta, ja nyt tiedämme mikä meitä vastassa on, en epäile ettemmekö "
+"voisi voittaa heitä lopulta. Pelkäänpä vain että tämä vie kosolti aikaa "
+"kunnes heidät olisi kukistettu ja olisi turvallista matkata etelään "
+"kanssasi. Kaiken tämän ajan, saisit tietenkin kaiken vieraanvaraisuuden ja "
+"kohteliaisuuden mitä tarjota voimme."
 
 #. TRANSLATORS: Reebaud – Reebaud 8b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:177
@@ -321,6 +412,19 @@ msgid ""
 "recuperate before we can send them into battle again. For this period, you "
 "shall of course receive all the hospitality and courtesy we can offer."
 msgstr ""
+"Mutta nyt, kuten sanottua, lyhyen kesän saavuttua, jonka tiimoilla lumi "
+"sulaa joistakin paikoista ja matkaaminen kaukaisiin kohteisiin on "
+"mahdollista, muukalaiset ilmestyivät ja aloittivat hyökkäyksen meitä kohti. "
+"He saivat yllätyshyökkäyksen, elämä ilman taistelua oli tehnyt meidät "
+"välinpitämättömiksi. Moni hyvä sotilas kaatui heidän keihäisiinsä, heidän "
+"mukanaan Hauke, paras ystäväni ja tärkein neuvonantajani, sekä Fiete, ainoa "
+"poikani ja perijäni. Heidän ovelat taisteluliikkeensä olivat meille jotakin "
+"aivan uutta, ja nyt tiedämme mikä meitä vastassa on, en epäile ettemmekö "
+"voisi voittaa heitä lopulta. Kuitenkin, kaikki sotilaamme ovat edelleen "
+"hellänä ja haavoittuneita kovien taistelujen jäljiltä, ja he tarvitsevat "
+"aikaa toipuakseen ennen kuin voimme lähettää heidät uudelleen taisteluun "
+"Kaiken tämän ajan, saisit tietenkin kaiken vieraanvaraisuuden ja "
+"kohteliaisuuden mitä vain tarjota voimme."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:183
@@ -330,6 +434,10 @@ msgid ""
 "spirit of our friendship, and in honour of the good men you lost, we will "
 "fight the invaders alongside you!"
 msgstr ""
+"Uskon että olemme jo kohdanneet nämä tunkeilijat. Ei olisi oikeanmukaista "
+"istuskella simamukit kourassa sillä aikaa kun te taistelette elämästänne. "
+"Ystävyytemme hengessä, sekä hyvien menettämiesti miesten kunniaksi, lähdemme"
+" taisteluun tunkeilijoita vastaan kanssasi rinta rinnan! "
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -339,6 +447,10 @@ msgid ""
 "honour of the good men you lost, we shall seek out those invaders and fight "
 "them alongside you!"
 msgstr ""
+"Todella; ei olisi oikeanmukaista istuskella simamukit kourassa sillä aikaa "
+"kun te taistelette elämästänne. Ystävyytemme hengessä, sekä hyvien "
+"menettämiesti miesten kunniaksi, lähdemme taisteluun tunkeilijoita vastaan "
+"kanssasi rinta rinnan! "
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud 9c
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:196
@@ -351,18 +463,25 @@ msgid ""
 " for our own soldiers, so that they may learn from yours and become as "
 "strong as possible before we return to our homeland."
 msgstr ""
+"Olen lähes pettynyt siitä että maineesi ei ylitä tosiasioita, kun miten "
+"kuvailet tunkeilijoita, odotin kovasti taistellakseni heitä vastaan "
+"vierelläsi. Olen pahoillani menetyksistäsi, ja erityisesti siitä että en "
+"tule enää milloinkaan tapaamaan arvostettua Hauke:a, jonka nimi tulee "
+"elämään kuuluna. Sillä välin kun sotilaasi palautuvat, otan ohjat käsiini "
+"kouluttaakseni omia sotilaitamme, joitta he oppivat omistasi tullakseen niin"
+" väkeväksi kuin mahdollista ennen paluutamme kotimaahan. "
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:213
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:219
 msgid "An Old Enemy"
-msgstr ""
+msgstr "Vanha vihollinen"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:214
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:220
 msgid "Treason"
-msgstr ""
+msgstr "Petos"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:204
@@ -370,6 +489,8 @@ msgid ""
 "Wait a minute, you two. What was this you said? You assaulted and murdered "
 "Murilius, a Proconsule of the Empire?"
 msgstr ""
+"Odottakaahan hetki, te kaksi. Mitä tuo olikaan mitä sanoitte? Hyökkäsitte "
+"Murilius:ta vastaan ja murhasitte hänet, Imperiumin prokonsulin?"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:207
@@ -379,6 +500,11 @@ msgid ""
 "neglected to pay his taxes from need or greed, and that I now discovered "
 "that he and all his men were foully murdered by arrogant invaders!"
 msgstr ""
+"Tätä ei voida mitenkään hyväksyä. Olen Marcus Caius Iniucundus, Imperiumin "
+"Legaatti. Ajatellakseni, että minut lähetettiin tutkimaan josko Murilius ei "
+"ollut suostunut maksamaan verojaan pakon sanelemana vaiko ahneudesta, sekä "
+"huomaan että hän ja hänen miehensä on murhattu törkeästi ylimielisten "
+"tunkeutujien toimesta!"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:210
@@ -389,6 +515,12 @@ msgid ""
 "have participated in the fighting then, whom I will keep alive to replace "
 "the handful of galley slaves who did not survive the latest journey."
 msgstr ""
+"Toimiesi johdosta, olet langettanut päällesi Imperiumin vihan, ja vannon "
+"Jupiter Optimus Maximuksen kautta että en lepää ennen kuin sinä ja miehesi "
+"makaatte omassa verilammikossanne. Tulen olemaan armollinen vain heitä "
+"kohtaan, jotka ovat liian nuoria taistellakseen, jotka pidän elossa "
+"vaihtaakseni kourallisen kaleeriorjia jotka eivät selviytyneet edellisestä "
+"matkasta."
 
 #. TRANSLATORS: Reebaud – Reebaud 11
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:216
@@ -397,6 +529,9 @@ msgid ""
 "appointed a representative of the Empire? Claus, what did you bring that "
 "deplorable jester with you for?"
 msgstr ""
+"Oi, nyt olenkin peloissani. Kerrohan, hyvä miekkonen, onko typeryys "
+"vaatimuksena tulla nimitetyksi Imperiumin edustajaksi? Claus, mistä kumman "
+"syystä otit mukaasi tuon säälittävän narrin mukaasi?"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 12
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:222
@@ -406,10 +541,15 @@ msgid ""
 "that it is I who brought this trouble to you, the least I can do is to take "
 "responsibility for ridding you of him."
 msgstr ""
+"Olen pahoillani. Hän tarjoutui antamaan meille kuljetuksen laivassaan, "
+"minulla ei ollut mitään tietoa tai syytä olettaa että hän alkaisi haastaa "
+"riitaa kanssasi. Mutta kuten huomataan, se olen minä joka tämän harmin on "
+"sinulle saanut aikaan, vähintä mitä voin tehdä, on ottaa velvollisuudekseni "
+"saattaa hänet eroon sinusta."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:228
 msgid "Something is going on…"
-msgstr ""
+msgstr "Jotakin on meneillään..."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:230
@@ -419,15 +559,20 @@ msgid ""
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
+"Tapasimme tänään haavoittuneen sotilaan lähellä luoteista rajaamme. Hän "
+"korisi jotakin hyökkäyksestä heimoaan vastaan ilkeämielisten muukalaisten "
+"toimesta, mutta hänestä lähti henki ennen kuin hän kerkisi kertoa enempää. "
+"Hänen haarniskansa ja aseensa olivat häkellyttävän tuttuja. Ounastelen "
+"voisiko Reebaud:in heimo olla vaarassa?  "
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:233
 msgid "We must hurry."
-msgstr ""
+msgstr "Meidän on kiirehdittävä."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:238
 msgid "We are too late"
-msgstr ""
+msgstr "Olemme liian myöhässä"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:240
@@ -436,6 +581,9 @@ msgid ""
 "something about his tribe being attacked and vanquished by vicous strangers."
 " With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
+"Tapasimme tänään haavoittuneen sotilaan lähellä luoteista rajaamme. Hän "
+"korisi jotakin hyökkäyksestä heimoaan vastaan ilkeämielisten muukalaisten "
+"toimesta. Viime henkäyksellään hän sai sanottua johtajansa nimen: Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:243
@@ -444,12 +592,15 @@ msgid ""
 "hours before we could meet him. There is no hope in this world for any of "
 "us."
 msgstr ""
+"Olemme saapuneet liian myöhään. Reebaud oli jo ulottuvissamme, ja hänet "
+"kukistettiin joitakin tunteja ennen kuin olisimme voineet tavata hänet. "
+"Tässä maailmassa ei ole meille kenellekään toivoa."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:244
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:253
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:262
 msgid "You Have Lost"
-msgstr ""
+msgstr "Sinä hävisit"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:245
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:254
@@ -458,16 +609,19 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Olet kärsinyt tappion etkä täten voi jatkaa pelaamista. Olkoon onnesi "
+"suotuisampi ensi kerralla kun koetat tätä asetelmaa. Napsauta OK palataksesi"
+" päävalikkon."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:249
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:258
 msgid "Defeat"
-msgstr ""
+msgstr "Tappio"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:250
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:259
 msgid "We have lost"
-msgstr ""
+msgstr "Olemme hävinneet"
 
 #. TRANSLATORS: Reebaud – Reebaud defeated 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:252
@@ -478,6 +632,11 @@ msgid ""
 "Claus in his predicament. May the gods take pity on him, but I fear that all"
 " hope is lost."
 msgstr ""
+"Vihollisemme ovat tuhonneet viimeisenkin varastomme. Yksikään heimo ei voi "
+"selvitä näissä puitteissa, ja kaikki mitä voimme tehdä on kohdata kohtalomme"
+" pää pystyssä. Ainoa asia mikä todella syö minua, on että en kykene "
+"auttamaan vanhaa ystävääni Claus:ia ahdingossaan. Olkoon jumalat hänelle "
+"armollisia, mutta pelkäämpä, että kaikki toivo on menetetty."
 
 #. TRANSLATORS: Claus Lembeck – Player defeated
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:261
@@ -488,14 +647,19 @@ msgid ""
 " this my hubris, and He, not some random gaggle of strangers, has finalized "
 "our sad destiny."
 msgstr ""
+"Olimme niin lähellä, mutta nyt vihollisemme ovat tuhonneet viimeisen "
+"varastorakennuksemme. Ehkäpä oli typerää olettaa voittoon kykenemistä "
+"Atterdag:ista jos en kerran ollut vastus edes näille mitättömille "
+"ulkomaalaisille. Jumala ei hyväksy tätä ylimielisyyttäni, ja Hän, ei mikään "
+"satunnainen muukalaissakki, on vahvistanut surullisen kohtalomme.  "
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:267
 msgid "Expansion"
-msgstr ""
+msgstr "Laajentuma"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:268
 msgid "We are being cut off"
-msgstr ""
+msgstr "Jatkuvuutemme on katkaistu"
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:270
@@ -504,6 +668,9 @@ msgid ""
 "perfectly within his rights to do so, I am worried that we might be cut off "
 "from Reebaud’s land if we don’t watch out."
 msgstr ""
+"Marcus Caius Iniucundus laajentaa alueitaan nopeasti. Vaikkakin hän toimii "
+"oikeuden rajoissa näin tehdäkseen, minua huolettaa; meiltä voidaan katkaista"
+" yhteys Reebaud:in maahan ellemme pidä varaamme."
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:273
@@ -512,6 +679,10 @@ msgid ""
 "direction we need to head, I’d advise to focus on spreading westwards for "
 "now before Marcus Caius Iniucundus blocks us out on this frontier."
 msgstr ""
+"Omaa laajentumistahtiamme tulisi korottaa. Ilman tietoa, mihin suuntaan "
+"meidän tulee edetä, neuvoisin keskittymään länteen levittäytymiseen siksi "
+"aikaa kunnes Marcus Caius Iniucundus torppaa meidät maarajojensa "
+"ulkopuolelle."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:277
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:283
@@ -519,11 +690,11 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:295
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:304
 msgid "Victory"
-msgstr ""
+msgstr "Voitto"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:278
 msgid "Intruders defeated"
-msgstr ""
+msgstr "Tunkeutujat kukistettu"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:280
@@ -531,10 +702,12 @@ msgid ""
 "These intruders were not as strong as they thought. They will trouble you no"
 " more."
 msgstr ""
+"Nämä tunkeutujat eivät olleetkaan niin väkeviä kuin oletimme. He eivät tule "
+"sinua enää vaivaamaan."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:284
 msgid "Strangers defeated"
-msgstr ""
+msgstr "Muukalaiset kukistettu"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:286
@@ -542,21 +715,25 @@ msgid ""
 "These strangers were not as strong as they thought. Whoever they were, they "
 "will trouble us no more."
 msgstr ""
+"Nämä muukalaiset eivät olleetkaan niin väkeviä kuin oletimme. Ketä sitten "
+"olivatkaan, he eivät tule sinua enää vaivaamaan."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:290
 msgid "Legate defeated"
-msgstr ""
+msgstr "Legaatti kukistettu"
 
 #. TRANSLATORS: Reebaud – Victory over Empire
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:292
 msgid ""
 "Attempting to take me on is the last mistake you ever made, foolish legate."
 msgstr ""
+"Yrityksesi ottaa mittaa minusta on viimeinen virheesi minkä koskaan tulet "
+"tekemään, typerä legaatti."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:305
 msgid "We have won"
-msgstr ""
+msgstr "Voitimme"
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:298
@@ -565,11 +742,14 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"Viholliset on kukistettu. Lähden nyt siis etelään yhdessä kanssasi kaikkien "
+"sotilaitteni kera, poislukien pieni varuskunta joka suojaa maitani, ja "
+"tulemme valloittamaan saaresi sinulle takaisin! "
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:299
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:308
 msgid "Congratulations"
-msgstr ""
+msgstr "Onneksi olkoon"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:309
@@ -577,6 +757,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Olet suorittanut tämän tehtävän loppuunsa. Voit jatkaa halutessasi "
+"pelaamista, muutoin siirry seuraavaan tehtävään."
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:307
@@ -586,12 +768,16 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"Sotilaamme ovat elpyneet, ja olet käyttänyt aikaa viisaasti nostaaksesi "
+"armeijasi voimia. Lähden nyt etelään yhdessä kanssasi, poislukien pieni "
+"varuskunta joka suojaa maitani, ja tulemme valloittamaan saaresi sinulle "
+"takaisin!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri04.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Satama"
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/campaigns/fri04.wmf/scripting/tribes/init.lua:9
@@ -600,3 +786,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Palvelee tukikohtana ylimerellisten asuttamisen ja kaupankäynnin suhteen. "
+"Lisäksi siellä säilytetään sotilaitasi, tarvikkeita ja työkaluja."

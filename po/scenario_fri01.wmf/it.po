@@ -6,6 +6,7 @@
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Stron Zios <danielekeb@gmail.com>, 2021
 # Guybrush88 <erpizzo@alice.it>, 2022
+# Log Merger, 2022
 # 
 msgid ""
 msgstr ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2022\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,9 +40,9 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
-"Costruisci almento una casa del taglialegna e due guardia forestale per "
-"iniziare a produrre tronchi, e una fattoria per le canne per cominciare a "
-"coltivare canne."
+"Costruisci almento una casa del taglialegna e due delle guardie forestali "
+"per iniziare a produrre tronchi, ed una fattoria per le canne per cominciare"
+" a coltivare canne."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
@@ -230,8 +231,8 @@ msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
-"Costruisci un porto, un mulino di tessitura e un cantiere navale, poi inizia"
-" una spedizione per fuggire prima che l'inondazione della tempesta sommerga "
+"Costruisci un porto, uno stabilimento tessile ed un cantiere navale, poi "
+"avvia una spedizione per fuggire prima che l'onda di tempesta sommerga "
 "l'isola."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
@@ -343,7 +344,7 @@ msgid ""
 msgstr ""
 "Dovremmo iniziare occupandoci della produzione del legno. Gli alberi non "
 "sembrano crescere bene su quest'isola; meglio costruire almeno due case per "
-"le guardie forestali e una per taglialegna."
+"le guardie forestali e una per il taglialegna."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:156
@@ -373,12 +374,12 @@ msgid ""
 "rocks, but I don’t see any here. Perhaps these hills contain enough stones "
 "to mine some granite."
 msgstr ""
-"La scorta di legno e canne è assicurata. Ora, dobbiamo occuparti della "
-"scorta di mattoni. I mattoni vengono cotti all'interno di una fornace di "
-"mattoni partendo dal granito e dall'argilla, per cui dobbiamo prima produrre"
-" queste ultime. Sulla terraferma, eravamo soliti estrarre il granito dalla "
-"pietra, ma qui non ne vedo. Forse queste colline contengono abbastanza "
-"pietre da poter estrarre del granito."
+"Le nostra fornitura di legno e canne è assicurata. Ora, dobbiamo occuparci "
+"della fornitura di mattoni. I mattoni vengono cotti all'interno di una "
+"fornace di mattoni partendo dal granito e dall'argilla, per cui dobbiamo "
+"prima produrre queste ultime. Sul continente eravamo soliti estrarre il "
+"granito dalla pietra, ma qui non ne vedo. Forse queste colline contengono "
+"abbastanza pietre da poterne estrarre del granito."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
@@ -491,6 +492,10 @@ msgid ""
 "need to build a ship, or the mines cannot provide us with enough coal, we "
 "will need more clay, so the shortage must be resolved."
 msgstr ""
+"L'argilla è utilizzata anche nelle costruzioni navali e per migliorare le "
+"carbonaie. Se mai dovessimo costruire una nave, o se le miniere non "
+"potessero fornirci abbastanza carbone, avremmo bisogno di più argilla quindi"
+" la sua carenza dev'essere eliminata."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
@@ -498,7 +503,7 @@ msgstr "Carenze di mattoni"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
-msgstr ""
+msgstr "Costruisci un'altra fornace di mattoni"
 
 #. TRANSLATORS: Hauke – no bricks
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:203
@@ -509,12 +514,19 @@ msgid ""
 "in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
+"Ho notato che stiamo esaurendo i mattoni. Ciò rallenta molto la costruzione "
+"dei nostri edifici, visto che necessitiamo di così tanti mattoni. Dovremmo "
+"veramente iniziare la costruzione di un'altra fornace di mattoni, assegnando"
+" a questi la massima priorità nella finestra del sito di costruzione così da"
+" risolverne al più presto la scarsità."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
 msgstr ""
+"Nella finestra del sito di costruzione della nuova fornace di mattoni "
+"dovresti assegnare ai mattoni la massima priorità."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
@@ -533,6 +545,12 @@ msgid ""
 "construction materials in the easternmost one. Our headquarters is too far "
 "in the west to be useful for long-time ware storage."
 msgstr ""
+"Stiamo espandendo il nostro territorio sempre più verso est e le merci "
+"devono essere trasportate per lunghe distanze. Dovremmo costruire dei "
+"magazzini in prossimità del nostro confine orientale, ad una certa distanza "
+"tra loro, depositando i materiali da costruzione nel più ad est. Il nostro "
+"quartier generale verso ovest è troppo lontano per essere utile "
+"nell'mmagazzinamento a lungo termine delle merci."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
@@ -549,6 +567,9 @@ msgid ""
 "they have no time to prepare their own food. They demand to be supplied with"
 " it."
 msgstr ""
+"Comandante Reebaud! Porto cattive notizie. I minatori lavorano così "
+"duramente che non hanno il tempo di preparare il proprio cibo. Esigono che "
+"glielo si fornisca."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:220
@@ -558,6 +579,12 @@ msgid ""
 "smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
 " a fruit collector’s house so the bushes will be harvested."
 msgstr ""
+"Dobbiamo costruire una taverna per preparare delle razioni. Per procurarci "
+"il cibo da cucinare, dobbiamo costruire una casa del pescatore e, dato che "
+"nessuno apprezza il pesce crudo, una casa dell'affumicatore per affumicarlo."
+" In più, costruiremo una fattoria di bacche in cui piantare arbusti di "
+"bacche ed una casa del raccoglitore di frutta così da poter fare il raccolto"
+" dei frutti degli arbusti."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:223
@@ -565,6 +592,9 @@ msgid ""
 "We should start expanding our territory faster in order to have enough space"
 " for many berry farms, and a longer coastline for fishing."
 msgstr ""
+"Dovremmo iniziare ad espandere il nostro territorio più rapidamente così da "
+"avere abbastanza spazio per molte fattorie di bacche ed una più lunga linea "
+"di costa per la pesca."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
@@ -587,6 +617,10 @@ msgid ""
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
+"Quando però le miniere dovranno essere potenziate, i minatori non saranno "
+"felici delle razioni. Meglio prendere preacuzioni – costruisci una seconda "
+"tavena, quindi considera la possibilità di potenziarne una a sala "
+"dell'idromele."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:236
@@ -829,6 +863,9 @@ msgid ""
 "I recommend to train at least one soldier to the highest level in health, "
 "defense and attack. Until then, the enemy is just too strong for us."
 msgstr ""
+"Raccomando di addestrare almeno un soldato ai massimi livelli di salute, "
+"difesa ed attacco. Fino ad allora il nemico sarà decisamente troppo forte "
+"per noi."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
@@ -960,6 +997,11 @@ msgid ""
 "sails. Then we can launch an expedition from the port. Pray to the gods and "
 "make haste!"
 msgstr ""
+"L'onda di tempesta sembra provenire da ovest. Se ci affrettiamo, ce la "
+"faremo appena! Dobbiamo soltanto costruire un porto ed un cantiere navale – "
+"oh, e uno stabilimento di tessitura per produrre stoffe durevoli, fatte di "
+"canne e pelliccia, per le vele. Potremo finalmente avviare una spedizione "
+"dal porto. Prega gli dei e sbrigati!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
@@ -1024,3 +1066,6 @@ msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""
+"Hai completato questa missione. Ora puoi passare al prossimo scenario ed "
+"aiutarci a costruire una nuova dimora, lontana dalla vendicativa portata di "
+"un falso dio."

@@ -136,9 +136,9 @@ msgid ""
 "some distance away from mine so that we will not hinder each other."
 msgstr ""
 "De Legaat un ick hebben nu nix mehr miteenanner to doon. Ick hebb up de "
-"Fahrt  eene Piek tegen siene inbildsk Maneer kregen, un vör allem tegen de "
-"verachten Aard, wo he siene Galleeren-Slaven behannelt. ’t kummt hüm nich in"
-" de Sinn, dat dat Minsken as he un ick sünd; of wenn doch, dann doot he, as "
+"Fahrt eene Piek tegen siene inbildsk Maneer kregen, un vör allem tegen de "
+"verachten Aard, wo he siene Galeeren-Slaven behannelt. ’t kummt hüm nich in "
+"de Sinn, dat dat Minsken as he un ick sünd; of wenn doch, dann doot he, as "
 "of se sülven Schuld an hör slimmen Loos sünd. ’t is mi nich Leid, dat ick "
 "hüm wull nich mehr to sehn kriegen word. He hett sien Lager een Deeltje von "
 "mienem weg upsett, daarmit wi eenanner nich in de Queer komen."
@@ -304,6 +304,11 @@ msgid ""
 "you directly; but I have made an arch-enemy of him by frequently aiding "
 "those he sought to conquer."
 msgstr ""
+"Ick bün würrelk komen, um di um Hülp to bidden. Du kennst wiss noch Atterdag"
+" de Däänenkönig, well uns Fresen faaktiedens slimme Noord geven hett. Du "
+"sülven hest nienich tegen hüm kämpt, denn hüm weer vör dienem Roop so bang "
+"dat he di nich stracks angriepen will; aver ick hebb hüm tum Argfeind "
+"wunnen, indeem ick faak deesen Lüü hülpt hebb, well he manntjen wull."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:153
@@ -315,6 +320,13 @@ msgid ""
 "friends on the mainland could help me, for Atterdag’s armies are so "
 "incredibly numerous that I knew they wouldn’t have stood a chance."
 msgstr ""
+"Vör wat dree of veer Maanten – ick hebb up de lange Fahrt de Tied ut de "
+"Oogen verloren – sünd siene Soldaten up mien Insel Föhr lannt. Ick verschoon"
+" di de Bericht över de Slacht, wat fiev Weken un nich eenen Dag minner düürt"
+" hett. De körte un slimme Wahrheid is, dat ick manntjet wurr un utnaihen "
+"mutt. Ick kunn nich hopen, dat miene Fründen up de Fastland mi hülpen könen,"
+" denn Atterdag sien Soldateree is so unbannig machtig an Tahl, dat ick weet,"
+" dat se keene Kans hebben."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 6
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:159
@@ -324,6 +336,10 @@ msgid ""
 "come South with me and liberate Föhr, or at least to send with me a troop of"
 " your far-famed soldiers."
 msgstr ""
+"Nüms as du hett eenen Roop för de allerwunnerliksten Daden im Kamp. Du büst "
+"wull de eenzigst Keerl in de Welt, well de naren Däänen manntjen kann. Ick "
+"bidd di, kumm na Süden mit mi un giff Föhr sien Freeiheid weer, of schick "
+"tominnst mit mi eene Klottje vun dienen wied bekennten Soldaten."
 
 #. TRANSLATORS: Reebaud – Reebaud 7
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:165
@@ -337,6 +353,14 @@ msgid ""
 "We defeated them all, and believed to have found peace at last. And for four"
 " long years, life was peaceful indeed."
 msgstr ""
+"Wenn du vör eener Week komen wärst, würr ick diener Beed stracks tostimmen. "
+"Nu aver hett is een Fleck vun Verdreet över de Kimm komen. Dat meen ick "
+"jüüst so; Frömde sünd vun wied weg ankomen un wullen uns ut deesen Lannen "
+"verdrieven un se för sik sülven nehmen, jüüst as wi se ut maller Nood vun de"
+" feindelk Lüü nohmen hebben, wat hier leevt hebben. Striedske Wille, un een "
+"Rieks-Prüllker wat Murilius heet un de allerunverschaamtsten Förderungen "
+"daan hett. Wi hebben se all manntjet un gloovt, uplest Free funnen to "
+"hebben. Un veer lang Jahr lang weer dat Leven würrelk freedsaam."
 
 #. TRANSLATORS: Reebaud – Reebaud 8a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:171
@@ -353,6 +377,17 @@ msgid ""
 " South with you. For this period, you shall of course receive all the "
 "hospitality and courtesy we can offer."
 msgstr ""
+"Aver nu, as ick seggt hebb, in de körte Sömmertied, wenn de Sneei an een "
+"paar Steden smelt un man do frömden Oorten reisen kann, sünd de Frömden "
+"ankomen un hebben tegen uns kämpt. Se hebben uns överrascht, denn dat Leven "
+"sünner Slachten hett uns sörglos maakt. Bannig völe gode Soldaten sünd unner"
+" hör Pieken fallen, unner hör Hauke, mien beste Fründ un allerwieseste "
+"Raadgever, un Fiete, mien enzigst Söhn un Arve. Hör fileinig Slachtknepens "
+"weren wat neeis för uns, man nu, dat wi weten, tegen wat för Lüü wi kämpen, "
+"gifft ’t keen Twiefel, dat wi se uplest manntjen worden. Aver dat düürt wull"
+" noch wat Tied, bit wi wunnen hebben un ’t för mi seker is, mit di na Süden "
+"to reisen. Bit daarhen kriggt jo natürelk all de Gastfründskupp un "
+"Vörkomenheid, wat wi blots geven könen."
 
 #. TRANSLATORS: Reebaud – Reebaud 8b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:177
@@ -369,6 +404,17 @@ msgid ""
 "recuperate before we can send them into battle again. For this period, you "
 "shall of course receive all the hospitality and courtesy we can offer."
 msgstr ""
+"Aver nu, as ick seggt hebb, in de körte Sömmertied, wenn de Sneei an een "
+"paar Steden smelt un man do frömden Oorten reisen kann, sünd de Frömden "
+"ankomen un hebben tegen uns kämpt. Se hebben uns överrascht, denn dat Leven "
+"sünner Slachten hett uns sörglos maakt. Bannig völe gode Soldaten sünd unner"
+" hör Pieken fallen, unner hör Hauke, mien beste Fründ un allerwieseste "
+"Raadgever, un Fiete, mien enzigst Söhn un Arve. Hör fileinig Slachtknepens "
+"weren wat neeis för uns, man nu, dat wi weten, tegen wat för Lüü wi kämpen, "
+"hebben wi se uplest manntjet. Aver all mien Soldaten sünd noch wund un slapp"
+" vun de haarten Krieg, un se bruken wat Tied, um sik to verhalen, ehr wi se "
+"weer in de Kamp schicken könen. Bit daarhen kriggt jo natürelk all de "
+"Gastfründskupp un Vörkomenheid, wat wi blots geven könen."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:183
@@ -378,6 +424,10 @@ msgid ""
 "spirit of our friendship, and in honour of the good men you lost, we will "
 "fight the invaders alongside you!"
 msgstr ""
+"Ick gloov, wi hebben deese Indringers al truffen. Dat is nich recht, wenn wi"
+" hier rumsitten un Tassen mit Hönnigbeer geneten as jo um jo Levens kämpt. "
+"För uns’ Fründskupp un in Ehr vun de goden Lüü, wat jo verloren hebbt, "
+"sallen wi mit jo tegen de Indringers kämpen!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -387,6 +437,10 @@ msgid ""
 "honour of the good men you lost, we shall seek out those invaders and fight "
 "them alongside you!"
 msgstr ""
+"Dat is nich recht, wenn wi hier rumsitten un Tassen mit Hönnigbeer geneten "
+"as jo um jo Levens kämpt. För uns’ Fründskupp un in Ehr vun de goden Lüü, "
+"wat jo verloren hebbt, sallen wi deese Indringers söken un mit jo tegen se "
+"kämpen!"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud 9c
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:196
@@ -399,6 +453,13 @@ msgid ""
 " for our own soldiers, so that they may learn from yours and become as "
 "strong as possible before we return to our homeland."
 msgstr ""
+"Ick bün haast bedröövt, dat dien Roop nich groter is as verdeent, denn as du"
+" över de Indringers snackt hest, hebb ick mi daarup freiht, mit jo tegen se "
+"to kämpen. Um dien Verlüüs is mi naar, un vör allem bün ick drurig, dat ick "
+"nienich de bekennten Hauke treffen sall, hüm sien Naam in Ehr wiederleven "
+"word. As diene Soldaten sik verhalen word ick mi um dat Utbilden vun uns’s "
+"eegenen Soldaten kümmern, dat se vun dienen lehren könen un so machtig as "
+"dat gaht worden, ehr wi weer na Huus fahren."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:213
@@ -418,6 +479,8 @@ msgid ""
 "Wait a minute, you two. What was this you said? You assaulted and murdered "
 "Murilius, a Proconsule of the Empire?"
 msgstr ""
+"Nu wacht een Moment, jo twee. Wat hebbt jo daar seggt? Jo hebbt Murilius "
+"angrepen un vermoordet, eenen Prokonsul vum Riek?"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:207
@@ -427,6 +490,10 @@ msgid ""
 "neglected to pay his taxes from need or greed, and that I now discovered "
 "that he and all his men were foully murdered by arrogant invaders!"
 msgstr ""
+"Dat kann nu unbannig nich so angahn. Ick bün Marcus Caius Injucundus, een "
+"Legaat vum Riek. Dat ick heerschickt wurr, um uttofinnen, of Murilius siene "
+"Stüren ut Nood of Gier unnerslagen hett, un ick nu utfinn, dat he un siene "
+"Lüü vun heersken Indringers naar vermoordet wurren!"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:210
@@ -437,6 +504,11 @@ msgid ""
 "have participated in the fighting then, whom I will keep alive to replace "
 "the handful of galley slaves who did not survive the latest journey."
 msgstr ""
+"Dör jo Daad hebbt jo jo sülven de Haat vun de Riek verdeent, un ick swöör bi"
+" Jupiter Optimus Maximus, dat ick keene Ruh geven sall, bit jo un jo Lüü in "
+"hör eegen Blood liggen. Gnaad sall ick blots de Lüü geven, wat to jung sünd,"
+" um dann in de Slacht kämpt to hebben, un ick sall se levig laten, um de "
+"paar Galeer-Slaven uttowesseln, wat de leste Fahrt nich överleevt hebben."
 
 #. TRANSLATORS: Reebaud – Reebaud 11
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:216
@@ -445,6 +517,9 @@ msgid ""
 "appointed a representative of the Empire? Claus, what did you bring that "
 "deplorable jester with you for?"
 msgstr ""
+"Ach, nu bün ick aver bang. Segg mi, nüter Keerl, mutt man vun Nood dösig "
+"wesen, um vum Riek tum Legaat beropen to worden? Claus, um wat hest du "
+"deesen bedröövten Spaaßmaker mit di brocht?"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 12
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:222
@@ -454,6 +529,10 @@ msgid ""
 "that it is I who brought this trouble to you, the least I can do is to take "
 "responsibility for ridding you of him."
 msgstr ""
+"Dat doot mi Leid. He hett uns eene Fahrt up sienem Schipp anboden, un ick "
+"hebb nich weten könen un ok keen Ursaak tum Annehmen hebbt, dat he mit di "
+"Stried söken word. Aver um dat, dat ick di deeses Argernis brocht hebb, nehm"
+" ick as allerminnst de Verantwoorden up mi, di vun hüm freei to maken."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:228
 msgid "Something is going on…"
@@ -467,6 +546,10 @@ msgid ""
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
+"Wi hebben vandag bi uns’ noordwestelk Grenz eenen verwundt Soldaten troffen."
+" He hett wat daaröver japst, dat sien Volk vun naren Frömden angriepen word."
+" He weer dood, ehr he uns mehr vertellen kunn. Sien Wapen un Kluften hebben "
+"unverwacht bekannt utsehn. Ick fraag mi, of Reebaud sien Volk in Gefahr is?"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:233
@@ -484,6 +567,10 @@ msgid ""
 "something about his tribe being attacked and vanquished by vicous strangers."
 " With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
+"Wi hebben vandag bi uns’ noordwestelk Grenz eenen verwundt Soldaten troffen."
+" He hett wat daaröver japst, dat sien Volk vun naren Frömden angriepen un "
+"manntjet worden is. Mit sien leste Tog hett he uns de Naam vun sien Anföhrer"
+" vertellt: Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:243
@@ -492,6 +579,9 @@ msgid ""
 "hours before we could meet him. There is no hope in this world for any of "
 "us."
 msgstr ""
+"Wi sünd to laat. Reebaud weer so dicht bi, un he is blots een paar Stünnen, "
+"ehr wi hüm treffen kunnen, manntjet worden. In deeser Welt gifft ’t för keen"
+" vun uns mehr Hoop."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:244
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:253
@@ -529,6 +619,11 @@ msgid ""
 "Claus in his predicament. May the gods take pity on him, but I fear that all"
 " hope is lost."
 msgstr ""
+"De Feinden hebben uns’ lestes Kraamhuus verneelt. So kann keen Volk bestahn,"
+" un all wat wi nu noch könen, is, uns’ wiss Schicksaal mit hogem Kopp "
+"totogahn. Ich bedüür blot, dat ick mien ollen Fründ Claus in siener Nood nu "
+"nich hülpen kann. De Gotten sallen sik um hüm verbarmen, aver ick bün bang, "
+"dat ’t keen Hoop mehr gifft."
 
 #. TRANSLATORS: Claus Lembeck – Player defeated
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:261
@@ -539,6 +634,11 @@ msgid ""
 " this my hubris, and He, not some random gaggle of strangers, has finalized "
 "our sad destiny."
 msgstr ""
+"Wi weren so dicht dran, aver nu hebben de Feinden uns’ lestes Kraamhuus "
+"verneelt. Dat weer villicht dösig vun mi, to glöven, dat ick Atterdag "
+"manntjen kann, wenn sülvst deese unbedüdend Frömden to machtig för mi sünd. "
+"Gott finnt mienen Övermood nicht good, un He, nich wat nettgliek Schar vun "
+"Frömden, hett uns’ drurig Schicksaal besegelt."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:267
 msgid "Expansion"
@@ -555,6 +655,9 @@ msgid ""
 "perfectly within his rights to do so, I am worried that we might be cut off "
 "from Reebaud’s land if we don’t watch out."
 msgstr ""
+"Marcus Caius Injucundus verwiedert sien Gewest bannig fell. Twaar hett he "
+"elkeen Recht, dat to doon, man ick bün bang, dat wi vun Reebaud sien Land "
+"ofsnieden worden, wenn wi nich uppassen."
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:273
@@ -563,6 +666,9 @@ msgid ""
 "direction we need to head, I’d advise to focus on spreading westwards for "
 "now before Marcus Caius Iniucundus blocks us out on this frontier."
 msgstr ""
+"Wi mutten mit uns’ eegen Verwiedern futtmaken. As wi nich weten, in welke "
+"Richt wi gahn mutten, meen ick, dat wi toeerst na Westen verwiedern sallen, "
+"ehr Marcus Caius Injucundus uns an deeser Grenz kumpleet hinnert."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:277
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:283
@@ -622,6 +728,9 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"De Feinden sünd manntjet. Nu word ick mit jo na Süden komen un all mien "
+"Soldaten brengen bit up eene lütte Mannskupp, um miene Lannen to bewaken, un"
+" wi worden diene Insel torüggwinnen!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:299
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:308
@@ -645,6 +754,10 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"Uns’ Soldaten hebben sik verpuust, un du hest de Tied klook daarmit "
+"verbrocht, de Fors vun diener Soldateree to verhogen. Nu word ick mit jo na "
+"Süden komen un all mien Soldaten brengen bit up eene lütte Mannskupp, um "
+"miene Lannen to bewaken, un wi worden diene Insel torüggwinnen!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri04.wmf/scripting/tribes/empire_port_large/init.lua:8

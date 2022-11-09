@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Markus <markus@hallfors.com>, 2021
-# LINUX SAUNA, 2022
+# LINUX-SAUNA, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: LINUX SAUNA, 2022\n"
+"Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -792,7 +792,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:321
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:329
 msgid "Stuck"
-msgstr ""
+msgstr "Jumissa"
 
 #. TRANSLATORS: M. C. Iniucundus – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:323
@@ -803,6 +803,11 @@ msgid ""
 "remain on this island for such a long time that you will never accomplish "
 "the objective of your futile journey. Despair in your triumph!"
 msgstr ""
+"Katso nyt mihin typeryytesi on meidän johtanut. Myrsky on puhjennut ja "
+"olemme täällä täysin jumissa koska poltit satamamme poroksi. Jumalat ovat "
+"oikeudenmukaisia – vaikkakin näytät olevan meitä voimakkaampi taistelussa, "
+"he pakottavat sinut pysymään tällä saarella niin pitkään että et tule "
+"koskaan saavuttamaan turhan matkasi tavoitetta. Hajoa siihen!  "
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:331
@@ -810,6 +815,8 @@ msgid ""
 "This is a disaster! We have reached another shore, but another tribe has "
 "already settled there. They won’t allow us to land on their coast."
 msgstr ""
+"Tämä on onnettomuuden huipentuma! Olemme saavuttaneet toisen rannikon, mutta"
+" jokin muu heimo asuu jo siellä. He eivät tule päästämään meitä rannoilleen."
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:334
@@ -817,6 +824,8 @@ msgid ""
 "We were too slow. We dawdled and dallied and this is the result. There is no"
 " way forward. None of us will ever see our home again!"
 msgstr ""
+"Olimme liian hitaita. Nutasimme ja nysväsimme ja tässä tulos. Eteenpäin ei "
+"ole menemistä. Kukaan meistä ei enää tule kotiamme näkemään!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8

@@ -1,6 +1,6 @@
 [TOC]
 
-## post-1.0 until [git 99ccb31](https://github.com/widelands/widelands/commit/99ccb319debb0490c1b22ae2e6175a5117cb5d17)
+## Release 1.1
 
 ### Animations, Icons and Overlays
 
@@ -14,6 +14,7 @@
 - Fix pause and jump in empire mill animation (#5270)
 - Add high resolution images for Empire buildings (#5376)
 - Add high resolution images for Atlantean buildings (#5384)
+- Add some new main menu background images (#5606)
 
 
 ### Sounds and Music
@@ -68,11 +69,13 @@
 - Clean up `descriptions` vs `wl.Descriptions()` in init.lua files (#5296)
 - Restore global descriptions for savegame compatibility (#5393)
 - Fix Lua Scripting Multithreading (#5475)
+- Fixes in dump- and load economy scripts (#5601)
 
 
 ### Maps
 
-
+- Fix map preview heights rendering (#5488)
+- Optimized height calculation for map preview (#5492)
 
 
 
@@ -104,6 +107,8 @@
 - Refactor Add-Ons Postloading (#5286)
 - Fix tribes postloading again and add regression test (#5323)
 - v1.0 backwards compatibility for world/tribe add-ons (#5353)
+- Fix too-early add-on descriptions registries & legacy scenario units loading (#5480)
+- Remove outdated info that add-on maps should not be zipped (#5538)
 
 
 ### Saveloading
@@ -121,6 +126,8 @@
 - Cleanup player end statuses on loading (#5070)
 - Fix `DescriptionManager` Stacking (#5386)
 - Saveload `destruction_blocked` Property (#5450)
+- Relax Invalid Assumption in AttackWindow Saveloading (#5597)
+- Fix fri03 v1.0 Saveloading Compatibility (#5510)
 
 
 ### AI
@@ -181,6 +188,9 @@
 - Unmark Amazons as Experimental (#5442)
 - Diplomacy (#5091)
 - Made diking part of the official tribe (#5104)
+- Fix Segfault on Building Dismantle (#5482)
+- Do not delete units during random game loading (#5590)
+- Prevent shipwright from building ferries where no ferry can live (#5534)
 
 
 ### User Interface
@@ -235,9 +245,20 @@
 - Fix infinite loop at startup map panning (#5429)
 - Add highlighting of filter text in dropdown list (#5443)
 - Fix save dialog and debug window text input bug (#5421)
-- Workaround for inverted horizontal scrolling bug in SDL (#5394)
+- Workaround for inverted horizontal scrolling bug in SDL (#5394, #5543)
 - Fix fake-modal in-game load dialog releasing modal grab (#5454)
 - Make space available as dropdown hotkey & only trigger hotkey when not filtered (#5441)
+- Add-Ons Admin Dialog Accessibility (#5452)
+    - Enable Enter/Escape keys
+    - Focus list initially
+- Make Save/Load Game Dialog Truly Modal (#5491)
+- Warp mouse to target when launching attack (#5497)
+- Richtext-Escape Hotkey Strings (#5499)
+- Consistent UI Keyboard Selection (#5495)
+- Misc Replay Fixes (#5554)
+    - Use default display flags in replays
+    - Skip version mismatch message on Ctrl+click
+- Don't warp mouse to dropdown if it's already there (#5536)
 
 
 ### Internationalization
@@ -261,6 +282,7 @@
 - Skip installing locales when translations are disabled (#5302)
 - Tut01 String Fix (#5327)
 - Military capacity string refactor (#5476)
+- Sort xgettext inputs in translations update
 
 
 ### Help and Documentation
@@ -301,6 +323,7 @@
 - Editor: Add toggle maximum building spaces option (#5220)
     - Convert all show/hide toggles to use display flags
 - Editor: History of last tool settings (#5365)
+- Enable Enter in Editor Map Options Window (#5503)
 
 
 ### Graphics Engine
@@ -310,6 +333,10 @@
 - Fix linking the OpenGL library (#5299)
 - Calculate max battle animation height (#5381)
 - Thread safe destructor for Texture `shared_ptr` (#5436)
+- Use SDL Relative Mouse Mode (#5494)
+- Set SDL hint for relative mouse mode (#5504)
+- Support Non-Indexed Terrain Textures (#5545)
+- Use old style name for SDL pixelformat (#5547)
 
 
 ### Networking
@@ -317,7 +344,7 @@
 - Break mutex deadlock in GameClient (#4948)
 - Fix game client deletion crash (#4970)
 - Keep GameController pointer alive for template game (#5128)
-- Replace Boost::Asio → Asio (#5164)
+- Replace Boost::Asio → Asio (#5164, #5532)
 - Fix Description Index Misordering from UI Code (#5288)
 - Fix sync report requesting during game startup (#5382)
 
@@ -340,11 +367,11 @@
 - Fix compiling error introduced by boost 1.77 (#5063)
 - Honour `--(no|with)-asan`-option regardless of ARGV-order (#5078)
 - Fix Brotli Windows CI Error (#5079)
-- Build System Update (#5085)
+- Build System Update (#5085, #5513, #5539)
     - Silence an undesired naming scheme warning in the SDL2 finding module
     - Add a customized copy of CMake's deprecated Documentation module as recommended
     - Update latest g++/clang versions in the CI
-    - Treat enabled compiler warnings as errors
+    - Treat enabled compiler warnings as errors in debug builds
     - Allow silencing compile.sh status messages with `-q`
 - Fix Clang 13 Warnings (#5088)
 - Handle undefined `__WORDSIZE32_SIZE_ULONG` (#5098)
@@ -369,7 +396,7 @@
 - Resolve MSVC warnings (#5157)
 - Fix older g++ optimization segfaults (#5176)
 - Fix -O3/-O2 typos (#5187)
-- Dependencies: Asio include handling & Solus support (#5182)
+- Dependencies: Asio include handling, Solus support, installation script coverage (#5182, #5524)
 - Don't require Homebrew to be installed at `/usr/local` (#5208)
 - CMakeLists.txt: Use a list for many build flags (#5328)
 - Only use embedded minizip if not installed (#5360, #5392)
@@ -386,6 +413,8 @@
     - Add `--dry-run`
     - Break up the CMake command line for readibility
 - Added new SDL2-image dependencies to static linking (#5472)
+- Added static SDL2 targets for transitioning (#5484)
+- Update screenshots in `appdata.xml` (#5598)
 
 
 ### Other Issues
@@ -405,6 +434,8 @@
 - Integrate AppImage building into CI (#5377)
 - Readme Typo Fixes (#5461)
 - Fix race in use of `logic_thread_locked` (#5419)
+- Disable logging in notifications test (#5490)
+- Fix non-i18n Spelling Issues Reported by Lintian (#5502, #5512)
 
 
 

@@ -25,7 +25,7 @@ class trans_string:
 
 def is_multiline(str):
     l = str.find('""')
-    if(l == -1):
+    if (l == -1):
         return False
     return True
 
@@ -33,7 +33,7 @@ def is_multiline(str):
 def firstl(str, what):
     for c in what:
         index = str.find(c)
-        if(index != -1):
+        if (index != -1):
             return index
     return -1
 
@@ -41,7 +41,7 @@ def firstl(str, what):
 def firstr(str, what):
     for c in what:
         index = str.rfind(c)
-        if(index != -1):
+        if (index != -1):
             return index
     return -1
 
@@ -120,7 +120,7 @@ class Conf_GetText(object):
                         continue
 
                 index = line.find('=_')
-                if(index > 0):
+                if (index > 0):
                     curstr = trans_string()
                     curstr.occurences.append(occurences(file, linenr))
                     restline = line[index + 2:]
@@ -136,7 +136,7 @@ class Conf_GetText(object):
                     # If there are ' or " its easy
                     l = firstl(restline, '\"')
                     r = firstr(restline[l + 1:], '\"')
-                    if(l != -1 and r != -1):
+                    if (l != -1 and r != -1):
                         restline = restline[l + 1:]
                         restline = restline[:r]
                     else:

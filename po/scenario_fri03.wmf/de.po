@@ -45,7 +45,7 @@ msgid ""
 "under Angadthur’s Headquarters."
 msgstr ""
 "Baue einen Hafen an der nördlichen Küste der Insel. Der Hafenbauplatz "
-"befindet sich unter dem Hauptquartier von  Angadthur."
+"befindet sich unter dem Hauptquartier von Angadthur."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:51
 msgid "Pay or Fight"
@@ -127,8 +127,8 @@ msgid ""
 msgstr ""
 "Ich will meinen alten Freund Reebaud so schnell finden wie ich kann. Jede "
 "Minute Untätigkeit verursacht mir Schmerzen, weil ich mir vorstelle wie "
-"Atterdag mit seinen hinterhältigen Füßen  fröhlich in den grünen Marschen "
-"meiner Föhr herumtrampelt… Lasst uns eilen."
+"Atterdag mit seinen hinterhältigen Füßen fröhlich in den grünen Marschen "
+"meiner Föhr herumtrampelt … Lasst uns eilen."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:85
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:94
@@ -150,7 +150,7 @@ msgid ""
 " conqueror."
 msgstr ""
 "Aber verzeiht mir. Ich habe mich ja noch gar nicht vorgestellt. Ich bin "
-"Claus Lembeck, der Ritter, der die Insel Föhr regiert… oder regierte, bis "
+"Claus Lembeck, der Ritter, der die Insel Föhr regiert … oder regierte, bis "
 "ich von dem Eroberer gezwungen wurde zu gehen."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
@@ -195,7 +195,7 @@ msgstr ""
 "hoffen gegen solche Unterschiede zu bestehen? Am Ende hatte ich keine Wahl "
 "als mit meinem Sohn Henneke und einigen meiner treuesten Anhänger zu "
 "entkommen, während Atterdag nun Föhr zu einem weiteren Teil seines "
-"wachsenden Reichs zählt. "
+"wachsenden Reichs zählt."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:106
@@ -299,7 +299,7 @@ msgstr ""
 "Diese Insel ist ein wenig zu klein und beengt für meinen Geschmack. Aber es "
 "gibt einen erfahrenen Deichbauer unter meinen Leuten und er hat "
 "vorgeschlagen einige Stämme zu verwenden, um Dämme zu bauen, die es uns "
-"erlauben etwas zusätliches Land aus dem Meer zu gewinnen. Es wird ein  "
+"erlauben etwas zusätliches Land aus dem Meer zu gewinnen. Es wird ein "
 "langsames und teures Geschäft sein, und ich hoffe wir werden nicht lange auf"
 " der Insel bleiben, aber zumindestens sollten wir es in Erwägung ziehen."
 
@@ -396,7 +396,7 @@ msgid ""
 "a descendant of the legendary King Ajanthul the First of Atlantis himself. "
 "Be welcome to me, if you will be our friends!"
 msgstr ""
-"Seid gegrüßt, Fremde! Ich bin  Angadthur, der König dieses wundersamen "
+"Seid gegrüßt, Fremde! Ich bin Angadthur, der König dieses wundersamen "
 "Eilands, ein echter Nachkomme des legendären Königs Ajanthul des Ersten von "
 "Atlantis. Seid willkommen, wenn ihr unsere Freunde sein wollt!"
 
@@ -417,7 +417,7 @@ msgstr ""
 "Henneke. Wir suchen nach unserem alten Freund Reebaud, der unser Land einige"
 " Jahre zuvor verlassen hat, um im fernen Norden eine neue Heimat zu finden. "
 "Darf ich fragen, ob ihr zuvor von ihm gehört habt, und ob ihr uns sagen "
-"könnt wo er zu finden ist? "
+"könnt wo er zu finden ist?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:170
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:182
@@ -474,7 +474,7 @@ msgstr ""
 " haben. Lasst uns einen Wettstreit der Waffen austragen, was sagt ihr? Ihr "
 "mögt eure Soldaten schicken um zu versuchen meinen Palast zu zerstören. Ich "
 "bin sicher, dass Ihr es nicht schaffen werdet und verspreche deshalb zu den "
-"Göttern zu beten Eure Reise zu segnen solltet Ihr doch erfolgreich sein. "
+"Göttern zu beten Eure Reise zu segnen solltet Ihr doch erfolgreich sein."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:191
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:298
@@ -714,7 +714,7 @@ msgid ""
 msgstr ""
 "Er scheint ganz zufrieden uns eine Überfahrt anbieten zu können, aber der "
 "Preis ist exorbitant hoch. Wir könnten auch einfach seinen Hafen zerstören "
-"und unseren eigenen bauen. Ich frage mich was besser wäre…"
+"und unseren eigenen bauen. Ich frage mich was besser wäre …"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:294
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303

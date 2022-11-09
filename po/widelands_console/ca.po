@@ -69,7 +69,7 @@ msgstr "[de_DE|sv_SE|...]"
 msgid ""
 "Do not check whether the data directory to use is compatible with this "
 "Widelands version."
-msgstr "No comprovis si la carpeta de dades que s'usarà és compatible amb aquesta versió del Widelands."
+msgstr "No comprovis si la carpeta de dades que s’usarà és compatible amb aquesta versió del Widelands."
 
 #: ../../src/wlapplication_messages.cc:72
 #: ../../src/wlapplication_messages.cc:77
@@ -88,7 +88,7 @@ msgstr "Crea una partida nova directament amb la configuració establerta al fit
 
 #: ../../src/wlapplication_messages.cc:78
 msgid "Start the map `FILENAME` directly as a singleplayer scenario."
-msgstr "Comença directament el mapa «NOMFITXER» com a escenari d'un sol jugador."
+msgstr "Comença directament el mapa «NOMFITXER» com a escenari d’un sol jugador."
 
 #: ../../src/wlapplication_messages.cc:79
 msgid "Load the savegame `FILENAME` directly."
@@ -102,13 +102,13 @@ msgstr "Carrega directament la repetició «NOMFITXER»."
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor."
-msgstr "Executa l'script Lua donat després de l'inici. Només vàlid amb --scenario, --loadgame o --editor."
+msgstr "Executa l’script Lua donat després de l’inici. Només vàlid amb --scenario, --loadgame o --editor."
 
 #: ../../src/wlapplication_messages.cc:86
 msgid ""
 "Start the Widelands map editor directly. You can add `=FILENAME` to directly"
 " load the map `FILENAME` in the editor."
-msgstr "Inicia el Widelands directament a l'editor de mapes. Podeu afegir «=NOMFITXER» per carregar automàticament el mapa «NOMFITXER»."
+msgstr "Inicia el Widelands directament a l’editor de mapes. Podeu afegir «=NOMFITXER» per carregar automàticament el mapa «NOMFITXER»."
 
 #: ../../src/wlapplication_messages.cc:90
 msgid "Start the game with sound disabled."
@@ -122,13 +122,13 @@ msgstr "Força una fallada del Widelands quan hi hagi un error Lua."
 msgid ""
 "Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic."
-msgstr "Activa el mode entrenament de la IA. Vegeu https://www.widelands.org/wiki/Ai%20Training/ per una explicació completa de la lògica d'entrenament de la IA."
+msgstr "Activa el mode entrenament de la IA. Vegeu https://www.widelands.org/wiki/Ai%20Training/ per una explicació completa de la lògica d’entrenament de la IA."
 
 #: ../../src/wlapplication_messages.cc:97
 msgid ""
 "Constantly adjust the game speed automatically depending on AI delay. Only "
 "to be used for AI testing or training (in conjunction with --ai_training)."
-msgstr "Ajusta la velocitat de la partida automàticament depenent de l'endarreriment de la IA. Només s'ha d'usar per provar les IA o per entrenament (conjuntament amb --ai_training)."
+msgstr "Ajusta la velocitat de la partida automàticament depenent de l’endarreriment de la IA. Només s’ha d’usar per provar les IA o per entrenament (conjuntament amb --ai_training)."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid "Game options:"
@@ -136,7 +136,7 @@ msgstr "Opcions de la partida:"
 
 #: ../../src/wlapplication_messages.cc:101
 msgid "Note: New values will be written to the config file."
-msgstr "Nota: Els valors nous s'escriuran al fitxer de configuració."
+msgstr "Nota: Els valors nous s’escriuran al fitxer de configuració."
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../src/wlapplication_messages.cc:105
@@ -186,7 +186,7 @@ msgstr "[true*|false]"
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players."
-msgstr "Estableix si s'ha de mostrar un avís a l'editor si hi ha massa jugadors."
+msgstr "Estableix si s’ha de mostrar un avís a l’editor si hi ha massa jugadors."
 
 #: ../../src/wlapplication_messages.cc:118
 msgid "Start building a road after placing a flag."
@@ -242,7 +242,7 @@ msgstr "Permet el moviment en diagonal amb el teclat numèric."
 
 #: ../../src/wlapplication_messages.cc:140
 msgid "Display system time in the info panel."
-msgstr "Mostra l'hora del sistema al panell d'informació."
+msgstr "Mostra l’hora del sistema al panell d’informació."
 
 #: ../../src/wlapplication_messages.cc:141
 msgid "Use single watchwindow mode."
@@ -254,7 +254,7 @@ msgstr "Mostra el xat de partida amb fons transparent."
 
 #: ../../src/wlapplication_messages.cc:144
 msgid "Bitmask to set the toolbar location and mode."
-msgstr "Màscara de bits per establir la posició de la barra d'eines i el mode."
+msgstr "Màscara de bits per establir la posició de la barra d’eines i el mode."
 
 #: ../../src/wlapplication_messages.cc:146
 msgid "Networking:"
@@ -283,23 +283,23 @@ msgstr "Port número «n» del metaservidor per jugar per Internet"
 
 #: ../../src/wlapplication_messages.cc:160
 msgid "The name of the last hosted game."
-msgstr "Nom de l'última partida com a hoste"
+msgstr "Nom de l’última partida com a hoste"
 
 #: ../../src/wlapplication_messages.cc:161
 msgid "The nickname used for LAN and online games."
-msgstr "L'àlies usat per a partides LAN i en línia"
+msgstr "L’àlies usat per a partides LAN i en línia"
 
 #: ../../src/wlapplication_messages.cc:162
 msgid "Name of map author."
-msgstr "Nom de l'autor del mapa"
+msgstr "Nom de l’autor del mapa"
 
 #: ../../src/wlapplication_messages.cc:163
 msgid "The last host connected to."
-msgstr "Últim hoste al que s'ha connectat"
+msgstr "Últim hoste al que s’ha connectat"
 
 #: ../../src/wlapplication_messages.cc:165
 msgid "Whether the used metaserver login is for a registered user."
-msgstr "Indica si el nom d'usuari usat és d'un usuari registrat del metaservidor."
+msgstr "Indica si el nom d’usuari usat és d’un usuari registrat del metaservidor."
 
 #: ../../src/wlapplication_messages.cc:166
 msgid "The hashed password for online logins."
@@ -323,11 +323,11 @@ msgstr "Opcions gràfiques:"
 
 #: ../../src/wlapplication_messages.cc:174
 msgid "Whether to use the whole display for the game screen."
-msgstr "Determina si s'ha d'usar tota la pantalla per al joc."
+msgstr "Determina si s’ha d’usar tota la pantalla per al joc."
 
 #: ../../src/wlapplication_messages.cc:175
 msgid "Whether to start the game in a maximized window."
-msgstr "Determina si s'ha d'iniciar el joc en una finestra maximitzada."
+msgstr "Determina si s’ha d’iniciar el joc en una finestra maximitzada."
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:179
@@ -351,11 +351,11 @@ msgstr "Alçada «y» de la finestra en píxels."
 
 #: ../../src/wlapplication_messages.cc:187
 msgid "Whether to grab the mouse input."
-msgstr "Determina si cal retenir l'entrada del ratolí."
+msgstr "Determina si cal retenir l’entrada del ratolí."
 
 #: ../../src/wlapplication_messages.cc:188
 msgid "Whether to use the mouse cursor provided by SDL."
-msgstr "Determina si usar el cursor del ratolí proveït per l'SDL."
+msgstr "Determina si usar el cursor del ratolí proveït per l’SDL."
 
 #: ../../src/wlapplication_messages.cc:190
 msgid "Whether to use sticky tooltips."
@@ -377,7 +377,7 @@ msgstr "Opcions per al gestor de finestres intern:"
 
 #: ../../src/wlapplication_messages.cc:199
 msgid "Whether automatic map movements should be animated."
-msgstr "Determina si els moviments automàtics del mapa s'han d'animar."
+msgstr "Determina si els moviments automàtics del mapa s’han d’animar."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:202
@@ -390,14 +390,14 @@ msgstr "Mou una finestra a la vora de la pantalla quan la vora estigui a una dis
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen."
-msgstr "Habilita/deshabilita l'acoblament a la vora de la pantalla quan la vora d'alguna finestra estigui a prop de la vora de la pantalla."
+msgstr "Habilita/deshabilita l’acoblament a la vora de la pantalla quan la vora d’alguna finestra estigui a prop de la vora de la pantalla."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:211
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel."
-msgstr "Mou una finestra a la vora del panell quan la vora estigui a una distància «n» del costat d'un panell."
+msgstr "Mou una finestra a la vora del panell quan la vora estigui a una distància «n» del costat d’un panell."
 
 #: ../../src/wlapplication_messages.cc:215
 msgid ""
@@ -417,7 +417,7 @@ msgstr "Altres:"
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
-msgstr "Mostra una llista de com s'han traduït totes les cadenes. Això ajuda a buscar errors en les traduccions."
+msgstr "Mostra una llista de com s’han traduït totes les cadenes. Això ajuda a buscar errors en les traduccions."
 
 #: ../../src/wlapplication_messages.cc:223
 msgid "Only print version and exit."
@@ -440,7 +440,7 @@ msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay."
-msgstr " Carrega directament la desada o repetició. Útil per l'associació de fitxers amb extensions .wgf/.wrpl. No funciona amb altres opcions. Vegeu també --loadgame/--replay."
+msgstr " Carrega directament la desada o repetició. Útil per l’associació de fitxers amb extensions .wgf/.wrpl. No funciona amb altres opcions. Vegeu també --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:254
@@ -454,4 +454,4 @@ msgid ""
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Informes d'errors? Suggeriments? Visiteu el lloc web del projecte:\n https://www.widelands.org/\nEsperem que us agradi aquest joc!"
+msgstr "Informes d’errors? Suggeriments? Visiteu el lloc web del projecte:\n https://www.widelands.org/\nEsperem que us agradi aquest joc!"

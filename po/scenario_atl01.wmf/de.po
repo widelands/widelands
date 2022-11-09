@@ -63,7 +63,7 @@ msgstr "Vergrößere dein Gebiet und erkunde"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "Expand and Explore"
-msgstr "Expandiere und erkunde die Umgebung."
+msgstr "Expandiere und Erkunde"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:45
 msgid ""
@@ -302,7 +302,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr "Auf der einst versteckt gelegenen und nun verlorenen Insel Atlantis lebte seit langer Zeit ein stolzer Stamm. Regiert von der Blutlinie des Königs Ajanthul – der als erster Mensch vom Meeresgott Lutas die Macht bekam, oberhalb der Meereslinie zu atmen – und den Priestern, die die Verbindung zu Lutas schlossen, wuchs das Volk und wurde eine eigene Zivilisation."
+msgstr "Auf der einst versteckt gelegenen und nun verlorenen Insel Atlantis lebte seit langer Zeit ein stolzer Stamm. Regiert von der Blutlinie des Königs Ajanthul – der als erster Mensch vom Meeresgott Lutas die Macht bekam, oberhalb der Meereslinie zu atmen – und den Priestern, welche die Verbindung zu Lutas schlossen, wuchs das Volk und wurde eine eigene Zivilisation."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:148

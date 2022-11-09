@@ -24,6 +24,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/warning.h"
 #include "graphic/animation/animation.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
@@ -180,18 +181,40 @@ void TerrainDescription::replace_textures(const LuaTable& table) {
 		frame_length_ = 1000 / get_positive_int(table, "fps");
 	}
 
-	for (size_t j = 0; j < texture_paths().size(); ++j) {
-		// Set the minimap color on the first loaded image.
-		if (j == 0) {
-			SDL_Surface* sdl_surface = load_image_as_sdl_surface(texture_paths()[j]);
-			uint8_t top_left_pixel = static_cast<uint8_t*>(sdl_surface->pixels)[0];
-			const SDL_Color top_left_pixel_color =
-			   sdl_surface->format->palette->colors[top_left_pixel];
-			set_minimap_color(
-			   RGBColor(top_left_pixel_color.r, top_left_pixel_color.g, top_left_pixel_color.b));
-			SDL_FreeSurface(sdl_surface);
+	// Set the minimap color on the first loaded image.
+	try {
+		SDL_Surface* sdl_surface = load_image_as_sdl_surface(texture_paths()[0]);
+		if (sdl_surface == nullptr) {
+			throw WLWarning("", "Could not load texture");
 		}
-		add_texture(g_image_cache->get(texture_paths()[j]));
+		// 8 and 16 bit pixels could also be read by pointer type casting, but SDL_GetRGB() needs
+		// uint32, so let's not risk endianness issues, when 24 bits would be better off with
+		// conversion anyway
+		if (sdl_surface->format->BitsPerPixel != 32) {
+			SDL_Surface* converted =
+			   SDL_ConvertSurfaceFormat(sdl_surface, SDL_PIXELFORMAT_RGBA8888, 0);
+			SDL_FreeSurface(sdl_surface);
+			if (converted == nullptr) {
+				throw WLWarning("", "Could not convert texture to 32bit RGB");
+			}
+			sdl_surface = converted;
+		}
+		uint8_t red;
+		uint8_t green;
+		uint8_t blue;
+		SDL_GetRGB(
+		   static_cast<uint32_t*>(sdl_surface->pixels)[0], sdl_surface->format, &red, &green, &blue);
+		set_minimap_color(RGBColor(red, green, blue));
+		SDL_FreeSurface(sdl_surface);
+	} catch (const WLWarning& e) {
+		log_warn("Could not determine minimap color for texture %s: %s", texture_paths()[0].c_str(),
+		         e.what());
+		static constexpr uint8_t kTone = 128;
+		set_minimap_color(RGBColor(kTone, kTone, kTone));
+	}
+
+	for (const auto& tp : texture_paths()) {
+		add_texture(g_image_cache->get(tp));
 	}
 }
 

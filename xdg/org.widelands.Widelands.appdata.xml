@@ -9,7 +9,7 @@
   <summary>A real-time build-up strategy game</summary>
   <summary xml:lang="ar">لعبة بناء إستراتيجية في الوقت الحقيقي</summary>
   <summary xml:lang="bg">Стратегическа игра за изграждане на цивилизация в реално време</summary>
-  <summary xml:lang="ca">Un joc d'estratègia i construcció a temps real</summary>
+  <summary xml:lang="ca">Un joc d’estratègia i construcció a temps real</summary>
   <summary xml:lang="cs">Real-time budovatelská strategická hra</summary>
   <summary xml:lang="da">Et realtids opbygningsstrategispil</summary>
   <summary xml:lang="de">Echtzeitbasiertes Aufbau-Strategiespiel</summary>
@@ -63,10 +63,10 @@
       Widelands предлага режим на самостоятелна игра, с кампании, разказващи историите на племената и тяхната борба в света на Widelands. Истинското заселване започва когато се обедините с приятелите си по Интернет или локалната мрежа, за да създавате нови империи заедно, или да се побеждавате взаимно. Widelands предлага и изкуствен интелект, срещу който може да играете.
     </p>
     <p xml:lang="ca">
-      Sou el cap d'una petita tribu. La vostra tasca és construir un assentament i expandir-lo. Cada membre de la vostra tribu farà la seva feina per produir més i més recursos per ajudar-vos.
+      Sou el cap d’una petita tribu. La vostra tasca és construir un assentament i expandir-lo. Cada membre de la vostra tribu farà la seva feina per produir més i més recursos per ajudar-vos.
     </p>
     <p xml:lang="ca">
-      El Widelands ofereix un mode d'un sol jugador amb campanyes que narren les històries de les tribus i la seva lluita en l'univers del Widelands. A banda, els modes multijugador, a través d'Internet o xarxa LAN, són més interessants: permeten construir imperis junts o enfrontar-vos fins que només quedi pols. El Widelands també disposa d'una intel·ligència artificial que fa les partides més interessants.
+      El Widelands ofereix un mode d’un sol jugador amb campanyes que narren les històries de les tribus i la seva lluita en l’univers del Widelands. A banda, els modes multijugador, a través d’Internet o xarxa LAN, són més interessants: permeten construir imperis junts o enfrontar-vos fins que només quedi pols. El Widelands també disposa d’una intel·ligència artificial que fa les partides més interessants.
     </p>
     <p xml:lang="cs">
       Jsi vladařem malého kmene. Tvým úkolem je vybudovat fungující a prosperující osídlení. Každý člen tvého kmene má podíl na výrobě surovin, které podpoří další růst.
@@ -231,7 +231,7 @@
       Widelands ofera un mod single-player cu campanii care spun povești ale triburilor și lupta lor în universul Widelands. Cu toate acestea, stabilirea începe într-adevăr atunci când te întâlneşti cu prietenii pe Internet sau LAN pentru a construi noi imperii împreună - sau pentru a vă zdrobi reciproc în prafurile războiului. Widelands oferă, de asemenea, o inteligență artificială pentru a vă provoca.
     </p>
     <p xml:lang="ru">
-      Вы представитель правления небольшого клана. Ваша задача строить постоянно растущее поселение. Каждый участник клана развивает его или его часть, чтобы производить дополнительные ресурсы для дальнейшего роста.
+      Вы правитель небольшого клана. Ваша задача - строить постоянно растущее поселение. Каждый участник клана будет вносить свой вклад в производство ресурсов, необходимых для дальнейшего роста.
     </p>
     <p xml:lang="ru">
       Widelands предлагает режим одного игрока с кампаниями, которые повествуют о племенах и их борьбе во вселенной Widelands. И всё-таки, самое интересное действительно начинается, когда вы объединяетесь с друзьями через Интернет или локальную сеть для совместного создания новых империй или чтобы втоптать друг друга в пыль войны. Также Widelands предлагает вам искусственный интеллект, способный бросить вызов вам.
@@ -288,24 +288,32 @@ Widelands ayrıca size yapay zeka ile meydan okur.
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Build%2020/Four_Tribes_2.jpeg</image>
-      <caption>Seafaring of the Four Tribes</caption>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Widelands%201.1/Main_Menu.jpg</image>
+      <caption>Main Menu</caption>
     </screenshot>
     <screenshot>
-      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Build%2019/Dolomites.png</image>
-      <caption>Dolomites Map</caption>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Widelands%201.1/Five_Tribes_2.png</image>
+      <caption>The Five Official Tribes of Widelands</caption>
     </screenshot>
     <screenshot>
-      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Build%2019/Last%20Survivors.png</image>
-      <caption>Last Survivors Map</caption>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Widelands%201.0/Soldier_Statistics.jpg</image>
+      <caption>Amazon Tribe and Military Strength Evaluation</caption>
     </screenshot>
     <screenshot>
-      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Build%2019/Editor%20Help.png</image>
-      <caption>Editor Help</caption>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Widelands%201.1/High-Res_1.jpg</image>
+      <caption>Atlantean Tribe Close-Up</caption>
     </screenshot>
     <screenshot>
-      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Build%2019/Map%20Selection%20Screen.png</image>
-      <caption>Map Selection Screen</caption>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Widelands%201.0/Info_Panel.jpg</image>
+      <caption>Barbarian Tribe Searching for Mining Resources</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Widelands%201.1/High-Res_2.jpg</image>
+      <caption>Empire Tribe Close-Up</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Widelands%201.0/Player_Colours_2.jpg</image>
+      <caption>Frisian Tribe Sailing Around Custom Map of Borneo</caption>
     </screenshot>
   </screenshots>
   <update_contact>widelands-public_at_lists.sourceforge.net</update_contact>
@@ -317,6 +325,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
   </provides>
   <launchable type="desktop-id">org.widelands.Widelands.desktop</launchable>
   <releases>
+    <release date="2022-10-23" version="1.1"/>
     <release date="2021-06-15" version="1.0"/>
     <release date="2020-07-18" version="~Build 21"/>
     <release date="2019-05-02" version="~Build 20"/>

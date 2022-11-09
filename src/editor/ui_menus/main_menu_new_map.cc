@@ -98,7 +98,7 @@ void MainMenuNewMap::clicked_create_map() {
 	EditorInteractive& parent = eia();
 	Widelands::EditorGameBase& egbase = parent.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
+	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image(), false);
 	Notifications::publish(UI::NoteLoadingMessage(_("Creating empty map…")));
 
 	parent.cleanup_for_load();
@@ -120,6 +120,14 @@ void MainMenuNewMap::clicked_create_map() {
 
 void MainMenuNewMap::clicked_cancel() {
 	die();
+}
+
+bool MainMenuNewMap::handle_key(bool down, SDL_Keysym code) {
+	if (down && code.sym == SDLK_RETURN) {
+		clicked_create_map();
+		return true;
+	}
+	return UI::UniqueWindow::handle_key(down, code);
 }
 
 /*

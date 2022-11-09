@@ -242,6 +242,7 @@ void BaseListselect::select(const uint32_t i) {
 		entry_records_[i]->pic = check_pic_;
 	}
 	selection_ = i;
+	scroll_to_selection();
 
 	selected(selection_);
 }
@@ -576,13 +577,9 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return UI::Panel::handle_key(down, code);
 		case SDLK_ESCAPE:
-			if (linked_dropdown != nullptr) {
-				if (linked_dropdown->is_filtered()) {
-					linked_dropdown->clear_filter();
-				} else {
-					linked_dropdown->set_list_visibility(false);
-				}
-				return true;
+		case SDLK_RETURN:
+			if (linked_dropdown != nullptr && (SDL_GetModState() & KMOD_CTRL) == 0) {
+				return linked_dropdown->handle_key(down, code);
 			}
 			return UI::Panel::handle_key(down, code);
 		default:
@@ -628,18 +625,24 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 		assert((selected_idx <= max) ^ (selected_idx == no_selection_index()));
 		if (handle) {
 			select(selected_idx);
-			if (selection_index() * get_lineheight() < scrollpos_) {
-				scrollpos_ = selection_index() * get_lineheight();
-				scrollbar_.set_scrollpos(scrollpos_);
-			} else if ((selected_idx + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
-				int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
-				scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
-				scrollbar_.set_scrollpos(scrollpos_);
-			}
 			return true;
 		}
 	}
 	return UI::Panel::handle_key(down, code);
+}
+
+void BaseListselect::scroll_to_selection() {
+	if (!has_selection()) {
+		return;
+	}
+	if (selection_index() * get_lineheight() < scrollpos_) {
+		scrollpos_ = selection_index() * get_lineheight();
+		scrollbar_.set_scrollpos(scrollpos_);
+	} else if ((selection_index() + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
+		int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
+		scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
+		scrollbar_.set_scrollpos(scrollpos_);
+	}
 }
 
 /**

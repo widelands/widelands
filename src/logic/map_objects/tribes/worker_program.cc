@@ -380,8 +380,8 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 findspace
 ^^^^^^^^^
 .. function:: findspace=size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>]
-   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space] [terraform:\<category\>]
-   [no_notify]
+   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space] [ferry]
+   [terraform:\<category\>] [no_notify]
 
    :arg string size: The size or building plot type of the free space.
       The possible values are:
@@ -412,6 +412,8 @@ findspace
    :arg empty space: Find only fields that are walkable in such a way that all
       neighbors are also walkable (an exception is made if one of the neighboring
       fields is owned by this worker's location).
+
+   :arg empty ferry: Find only fields reachable by a ferry.
 
    :arg string terraform: Find only nodes where at least one adjacent triangle has
       terrain that can be enhanced.
@@ -454,7 +456,7 @@ findspace
 /**
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
- * iparam3 = 1st bit: whether the "space" flag is set; 2nd bit: whether the no_notify flag is set.
+ * iparam3 = Bitset of "space" (1st bit), "no_notify" (2nd bit), and "ferry" (3rd bit).
  * iparam4 = whether the "breed" flag is set
  * iparam5 = Immovable attribute id
  * iparam6 = Forester retries
@@ -501,9 +503,11 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			} else if (item.first == "resource") {
 				act->sparam1 = item.second;
 			} else if (item.first == "space") {
-				act->iparam3 |= 1;
+				act->iparam3 |= 1 << 0;
 			} else if (item.first == "no_notify") {
-				act->iparam3 |= 2;
+				act->iparam3 |= 1 << 1;
+			} else if (item.first == "ferry") {
+				act->iparam3 |= 1 << 2;
 			} else if (item.first == "avoid") {
 				act->iparam5 = MapObjectDescr::get_attribute_id(item.second);
 			} else if (item.first == "saplingsearches") {

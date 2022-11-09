@@ -31,8 +31,8 @@ msgid ""
 "complete the previous scenario first and then restart this mission."
 msgstr ""
 "No pareix que haguéssiu completat la missió anterior. Encara podeu jugar "
-"l'escenari, però estareu en desavantatge. Us recomano que completeu "
-"l'escenari anterior abans i que torneu a començar aquesta missió."
+"l’escenari, però estareu en desavantatge. Us recomano que completeu "
+"l’escenari anterior abans i que torneu a començar aquesta missió."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:33
@@ -58,7 +58,7 @@ msgstr "Derroteu el clan hostil."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
-msgstr "Derroteu l'Imperi"
+msgstr "Derroteu l’Imperi"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:49
 msgid "Defeat the Imperial Legate"
@@ -107,6 +107,10 @@ msgid ""
 "just in time; it caught us while we were on sea and we were all certain our "
 "ship was about to split and sink, and none of us would see our home again."
 msgstr ""
+"Marcus Caius Iniucundus no mentia amb això de la tempesta. Hem sortit just a"
+" temps; ens ha agafat quan estavem a la mar i veiem amb impotència com el "
+"nostre vaixell estava a prop de partir-se i enfonsar-se i temíem que no "
+"veuríem més la nostra llar."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:74
@@ -116,6 +120,10 @@ msgid ""
 "could continue sailing. Finally, we arrived as far North as it is possible "
 "to go by ship."
 msgstr ""
+"Però Déu es va apiadar de nosaltres quan va escoltar les nostres pregàries. "
+"Vam haver de parar en una costa inhabitada i vam reparar el vaixell abans de"
+" continuar. Al final, vam arribar al punt més al nord al que es pot arribar "
+"amb vaixell."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:80
@@ -128,8 +136,8 @@ msgid ""
 "not regret that I will probably not be seeing him again. He set up his camp "
 "some distance away from mine so that we will not hinder each other."
 msgstr ""
-"El delegat i jo no tenim res més a negociar. No m'ha agradat la seva actitud"
-" de superioritat durant el viatge ni tampoc l'actitud amb la que ha tractat "
+"El delegat i jo no tenim res més a negociar. No m’ha agradat la seva actitud"
+" de superioritat durant el viatge ni tampoc l’actitud amb la que ha tractat "
 "als esclaus de la seva galera. No sembla que se li hagi ocorregut que són "
 "éssers humans; o si hi ha pensat, els culpa de la mala sort que té. No em "
 "sap greu que probablement mai més el vegi. Ha fet el seu campament a "
@@ -143,6 +151,9 @@ msgid ""
 "I have seen no signs of human habitation around here yet, I have no doubt "
 "that we will find him soon."
 msgstr ""
+"Però ara que estem tan a prop, estic molt impacient per poder asseure’m i "
+"pensar en el passat. De pressa! Anem a buscar al meu amic! Encara que no he "
+"vist senyals humans per aquí, no tinc cap dubte que el trobarem aviat."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:97
@@ -165,6 +176,8 @@ msgid ""
 "Our soldiers have sighted strangers – the first natives in this bleak "
 "countryside. Perhaps they know where Reebaud can be found?"
 msgstr ""
+"Els nostres soldats han vist forasters – els primers nadius d’aquestes "
+"terres lúgubres. Potser saben on és en Reebaud?"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:100
@@ -173,6 +186,9 @@ msgid ""
 "Henneke. We come in search of my friend Reebaud. May I ask if you know where"
 " we may find him?"
 msgstr ""
+"Pau i salutacions, bona gent! Sóc en Claus Lembeck i aquest és el meu fill "
+"Henneke. Estem buscant el meu amic, en Reebaud. Us puc preguntar si sabeu on"
+" trobar-lo?"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:104
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:116
@@ -243,8 +259,8 @@ msgstr "Per fi ens trobem"
 msgid ""
 "At last! These people’s buildings look familiar. It must be Reebaud’s tribe."
 msgstr ""
-"Per fi! Els edificis d'aquesta gent em semblen familiars. Deu ser la tribu "
-"d'en Reebaud."
+"Per fi! Els edificis d’aquesta gent em semblen familiars. Deu ser la tribu "
+"d’en Reebaud."
 
 #. TRANSLATORS: Reebaud – Reebaud 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:132
@@ -252,8 +268,8 @@ msgid ""
 "Do my eyes deceive me, or is a spirit playing tricks on me? Surely it cannot"
 " be my old friend Claus who meets me so far away from home!"
 msgstr ""
-"M'enganyen els ulls, o algun esperit m'està gastant bromes? No pot pas ser "
-"el vell amic meu Claus qui ve a veure'm tan lluny de casa seva!"
+"M’enganyen els ulls, o algun esperit m’està gastant bromes? No pot pas ser "
+"el vell amic meu Claus qui ve a veure’m tan lluny de casa seva!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:138
@@ -274,6 +290,10 @@ msgid ""
 " Just as you once helped me fend off a Holstein invasion, I will now help my"
 " friend if I can."
 msgstr ""
+"Estic orgullós de saber que per voler trobar-vos amb mi heu acceptat passar "
+"per tantes penúries. Però no ho heu fet només per parlar, oi? Què us "
+"preocupa? Així com vós em vau ajudar a defensar-me de la invasió dels "
+"Holstein, ara us ajudaré jo si puc."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:150
@@ -284,6 +304,11 @@ msgid ""
 "you directly; but I have made an arch-enemy of him by frequently aiding "
 "those he sought to conquer."
 msgstr ""
+"He vingut a buscar la vostra ajuda. Segur que recordeu en Atterdag, el rei "
+"dels danesos, que va causar molts problemes als frisons. Mai us hi vau "
+"enfrontar, ja que estava molt preocupat per si després l’atacàveu vós; però "
+"jo m’he buscat ser el seu arxienemic, ja que he ajudat moltes vegades les "
+"tribus que volia conquerir."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:153
@@ -295,6 +320,12 @@ msgid ""
 "friends on the mainland could help me, for Atterdag’s armies are so "
 "incredibly numerous that I knew they wouldn’t have stood a chance."
 msgstr ""
+"Farà uns tres o quatre mesos –ja no sé ni a quin dia som pel llarg viatge "
+"que hem fet– va arribar a l’illa de Föhr amb els seus soldats. Us estalvio "
+"els detalls de la batalla, que va durar cinc setmanes. La trista veritat és "
+"que ens van derrotar i vam haver de fugir. No tenia esperances que els meus "
+"amics em poguessin ajudar, ja que els exèrcits de l’Atterdag eren tan "
+"numerosos que tampoc hi haguessin pogut fer res."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 6
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:159
@@ -304,6 +335,10 @@ msgid ""
 "come South with me and liberate Föhr, or at least to send with me a troop of"
 " your far-famed soldiers."
 msgstr ""
+"Només vós teniu una reputació prou gran. Potser sou l’única persona viva que"
+" pugui derrotar el danès malvat. Us demano que vingueu al sud amb mi i "
+"allibereu Föhr o, al menys, envieu-hi amb mi una tropa dels vostres soldats "
+"famosos."
 
 #. TRANSLATORS: Reebaud – Reebaud 7
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:165
@@ -317,6 +352,14 @@ msgid ""
 "We defeated them all, and believed to have found peace at last. And for four"
 " long years, life was peaceful indeed."
 msgstr ""
+"Si haguéssiu arribat una setmana abans, hagués acceptat la vostra demanda "
+"immediatament. Ara, però, ha aparegut una molèstia a l’horitzó. Tal qual. "
+"Han arribat forasters per fer-nos fora de les terres tal com nosaltres vam "
+"fer, per necessitat, amb les tribus que hi havia abans que nosaltres "
+"–bàrbars amants de la guerra i Murilius, un malvat imperial, que ens van fer"
+" unes exigències vergonyoses–. Els vam derrotar a tots i vam pensar que "
+"havíem trobat pau per fi. Durant quatre anys, la vida ha estat tranquil·la "
+"de veritat."
 
 #. TRANSLATORS: Reebaud – Reebaud 8a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:171
@@ -333,6 +376,17 @@ msgid ""
 " South with you. For this period, you shall of course receive all the "
 "hospitality and courtesy we can offer."
 msgstr ""
+"Però ara, com us estava dient, amb l’arribada del curt període de l’estiu, "
+"durant el qual es fon la neu en alguns llocs i és possible viatjar a llocs "
+"llunyans, els forasters han aparegut i volen lluitar. Ens han agafat per "
+"sorpresa: amb la vida tranquil·la ens hem descuidat. Molts soldats bons han "
+"caigut per les seves llances, incloent en Hauke, el meu millor amic i més "
+"venerat conseller, i en Fiete, el meu fill únic i hereu. Els seus moviments "
+"ràpids durant la batalla ens eren nous. Ara que sabem a què ens enfrontem, "
+"no hi ha dubte que els acabarem guanyant. Però temo que ens ocuparà un bon "
+"temps fins que els derrotem i sigui segur viatjar al sud amb vós. Durant "
+"aquest període, heu de rebre tota l’hospitalitat i cortesia que us puguem "
+"oferir."
 
 #. TRANSLATORS: Reebaud – Reebaud 8b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:177
@@ -349,6 +403,18 @@ msgid ""
 "recuperate before we can send them into battle again. For this period, you "
 "shall of course receive all the hospitality and courtesy we can offer."
 msgstr ""
+"Però ara, com us estava dient, amb l’arribada del curt període de l’estiu, "
+"durant el qual es fon la neu en alguns llocs i és possible viatjar a llocs "
+"llunyans, els forasters han aparegut i volen lluitar. Ens han agafat per "
+"sorpresa: amb la vida tranquil·la ens hem descuidat. Molts soldats bons han "
+"caigut per les seves llances, incloent en Hauke, el meu millor amic i més "
+"venerat conseller, i en Fiete, el meu fill únic i hereu. Els seus moviments "
+"ràpids durant la batalla ens eren nous. Quan vam entendre a què ens "
+"enfrontàvem, vam acabar guanyant-los. No obstant, tots els nostres soldats "
+"encara estan recuperant-se de les ferides de les dures batalles i "
+"necessitaran temps per recuperar-se abans que els puguem enviar a lluitar de"
+" nou. Durant aquest temps, heu de rebre tota l’hospitalitat i cortesia que "
+"us puguem oferir."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:183
@@ -358,6 +424,10 @@ msgid ""
 "spirit of our friendship, and in honour of the good men you lost, we will "
 "fight the invaders alongside you!"
 msgstr ""
+"Crec que ja ens hem trobat amb aquests intrusos. Seria impropi de nosaltres "
+"seure i beure gerres d’aiguamel mentre vosaltres lluiteu per nosaltres. Per "
+"la nostra amistat i l’honor dels bons homes que heu perdut, lluitarem amb "
+"vosaltres contra els invasors!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -367,6 +437,10 @@ msgid ""
 "honour of the good men you lost, we shall seek out those invaders and fight "
 "them alongside you!"
 msgstr ""
+"Certament, seria impropi de nosaltres seure i beure gerres d’aiguamel mentre"
+" vosaltres lluiteu per nosaltres. Per la nostra amistat i l’honor dels bons "
+"homes que heu perdut, buscarem aquests invasors i lluitarem contra ells al "
+"vostre costat!"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud 9c
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:196
@@ -379,6 +453,13 @@ msgid ""
 " for our own soldiers, so that they may learn from yours and become as "
 "strong as possible before we return to our homeland."
 msgstr ""
+"Estic decebut que la vostra reputació no superi els fets, perquè mentre "
+"descrivíeu als invasors, jo ja estava pensant en lluitar contra ells al "
+"vostre costat. Em sap greu que hagueu perdut tant, sobretot pel famós Hauke,"
+" el nom del qual serà recordat molt temps. Mentre els vostres soldats es "
+"recuperen, jo me n’encarregaré de preparar sessions d’entrenament pels "
+"nostres soldats, de manera que ens podreu ensenyar i ens prepararem per a la"
+" guerra tant bé com puguem abans de tornar a les nostres terres."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:213
@@ -399,7 +480,7 @@ msgid ""
 "Murilius, a Proconsule of the Empire?"
 msgstr ""
 "Vosaltres dos, espereu un minut. Què acabeu de dir? Vau assaltar i "
-"assassinar en Murilius, el procònsol de l'Imperi?"
+"assassinar en Murilius, el procònsol de l’Imperi?"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:207
@@ -409,9 +490,9 @@ msgid ""
 "neglected to pay his taxes from need or greed, and that I now discovered "
 "that he and all his men were foully murdered by arrogant invaders!"
 msgstr ""
-"No ho puc acceptar. Sóc en Marcus Caius Iniucundus, delegat de l'imperi. Em "
+"No ho puc acceptar. Sóc en Marcus Caius Iniucundus, delegat de l’imperi. Em "
 "van enviar per investigar per què en Murilius no pagava els seus impostos i "
-"si se'ls quedava per necessitat o per avarícia i he acabat descobrint que "
+"si se’ls quedava per necessitat o per avarícia i he acabat descobrint que "
 "ell i tots els seus homes van ser assassinats per invasors arrogants!"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
@@ -423,6 +504,12 @@ msgid ""
 "have participated in the fighting then, whom I will keep alive to replace "
 "the handful of galley slaves who did not survive the latest journey."
 msgstr ""
+"Pels vostres actes, us heu guanyat a pols la ira de l’Imperi i juro per "
+"Jupiter Optimus Maximus que no descansaré fins que vós i tots els vostres "
+"homes s’ofeguin amb la seva pròpia sang. Tindré pietat només amb els que "
+"siguin massa joves per participar en la batalla i els mantindré vius per "
+"reemplaçar la galera plena d’esclaus que no va sobreviure al nostre últim "
+"viatge!"
 
 #. TRANSLATORS: Reebaud – Reebaud 11
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:216
@@ -431,6 +518,9 @@ msgid ""
 "appointed a representative of the Empire? Claus, what did you bring that "
 "deplorable jester with you for?"
 msgstr ""
+"Ah! Estic espantat. Digueu-me, bon home, és una demanda molt boja que us "
+"escolleixin representant de l’Imperi? Claus, què us ha fet portar amb vós "
+"aquest patètic pallasso?"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 12
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:222
@@ -440,6 +530,9 @@ msgid ""
 "that it is I who brought this trouble to you, the least I can do is to take "
 "responsibility for ridding you of him."
 msgstr ""
+"Ho sento. Ens va oferir passatge al seu vaixell i no hi havia cap manera de "
+"saber que buscaria brega amb vós. Però veient que sóc jo qui us ha portat el"
+" problema, almenys deixeu-me enfrontar-m’hi"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:228
 msgid "Something is going on…"
@@ -453,11 +546,15 @@ msgid ""
 "before he could tell us more. His armour and weaponry looked startlingly "
 "familiar. I wonder if Reebaud’s tribe is in danger?"
 msgstr ""
+"Hem trobat un soldat ferit prop de la frontera nord-oest. Ens ha dit alguna "
+"cosa sobre un atac a la seva tribu per part d’uns forasters viciosos, però "
+"ha mort abans que ens pogués dir res més. La seva armadura i armes semblaven"
+" familiars. Em pregunto si la tribu d’en Reebaud està en perill."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:233
 msgid "We must hurry."
-msgstr "Ens hem d'afanyar."
+msgstr "Ens hem d’afanyar."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:238
 msgid "We are too late"
@@ -470,6 +567,9 @@ msgid ""
 "something about his tribe being attacked and vanquished by vicous strangers."
 " With his last breath he told us his leader’s name: Reebaud."
 msgstr ""
+"Hem trobat un soldat ferit prop de la frontera nord-oest. Deia que la seva "
+"tribu havia estat atacada per uns estrangers. Amb el seu últim alè ens ha "
+"dit el nom del seu líder: Reebaud."
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:243
@@ -478,6 +578,9 @@ msgid ""
 "hours before we could meet him. There is no hope in this world for any of "
 "us."
 msgstr ""
+"Hem arribat tard. En Reebaud estava a prop nostre i l’han derrotat només "
+"unes hores abans que ens poguéssim trobar. No hi ha esperança en aquest món "
+"per cap de nosaltres."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:244
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:253
@@ -492,6 +595,9 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Heu perdut i no podeu continuar jugant. Potser tindreu més sort quan torneu "
+"a provar l’escenari. Feu clic al botó «D’acord» per tornar al menú "
+"principal."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:249
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:258
@@ -512,6 +618,11 @@ msgid ""
 "Claus in his predicament. May the gods take pity on him, but I fear that all"
 " hope is lost."
 msgstr ""
+"Els enemics han destruït el nostre últim magatzem. Cap tribu pot sobreviure "
+"contra tals desgràcies i tot el que podem fer és enfrontar-nos a un destí "
+"amb el cap ben alçat. L’únic del que em penedeixo és que no he pogut ajudar "
+"el meu vell amic, en Claus. Espero que els déus s’apiadin d’ell, però em "
+"temo que tota esperança està perduda."
 
 #. TRANSLATORS: Claus Lembeck – Player defeated
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:261
@@ -522,6 +633,11 @@ msgid ""
 " this my hubris, and He, not some random gaggle of strangers, has finalized "
 "our sad destiny."
 msgstr ""
+"Estàvem tan a prop! Però els enemics han destruït el nostre últim magatzem. "
+"Potser va ser una bogeria pensar que podríem derrotar el gran Atterdag si ni"
+" tan sols hem estat a l’altura d’aquests forasters insignificants. Déu no "
+"m’ha fet costat i ell, no una colla de forasters, ha volgut el nostre trist "
+"final."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:267
 msgid "Expansion"
@@ -540,7 +656,7 @@ msgid ""
 msgstr ""
 "Marcus Caius Iniucundus està expandint de pressa el seu territori. Mentre "
 "ell està en el seu dret de fer-ho, estic preocupat que ens quedarem aïllats "
-"de la terra d'en Reebaud si no vigilem."
+"de la terra d’en Reebaud si no vigilem."
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:273
@@ -549,8 +665,8 @@ msgid ""
 "direction we need to head, I’d advise to focus on spreading westwards for "
 "now before Marcus Caius Iniucundus blocks us out on this frontier."
 msgstr ""
-"Hem d'incrementar el ritme de la nostra expansió. Sense saber en quina "
-"direcció hem d'anar, us aconsello que ho feu cap a l'oest, abans que en "
+"Hem d’incrementar el ritme de la nostra expansió. Sense saber en quina "
+"direcció hem d’anar, us aconsello que ho feu cap a l’oest, abans que en "
 "Marcus Caius Iniucundus ens talli el pas amb la seva frontera."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:277
@@ -563,7 +679,7 @@ msgstr "Victòria"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:278
 msgid "Intruders defeated"
-msgstr "S'ha vençut als intrusos!"
+msgstr "S’ha vençut als intrusos!"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:280
@@ -574,7 +690,7 @@ msgstr "Aquests intrusos no eren tan forts com pensaven. No molestaran més."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:284
 msgid "Strangers defeated"
-msgstr "S'ha derrotat als estrangers!"
+msgstr "S’ha derrotat als estrangers!"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:286
@@ -587,13 +703,13 @@ msgstr ""
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:290
 msgid "Legate defeated"
-msgstr "S'ha vençut al delegat"
+msgstr "S’ha vençut al delegat"
 
 #. TRANSLATORS: Reebaud – Victory over Empire
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:292
 msgid ""
 "Attempting to take me on is the last mistake you ever made, foolish legate."
-msgstr "Competir amb mi serà l'últim error que cometreu, estúpid!"
+msgstr "Competir amb mi serà l’últim error que cometreu, estúpid!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:305
@@ -633,7 +749,7 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
-"Els nostres soldats s'han recuperat i heu emprat bé el temps augmentant la "
+"Els nostres soldats s’han recuperat i heu emprat bé el temps augmentant la "
 "força del vostre exèrcit. Ara vindré amb vosaltres al sud i tots els meus "
 "soldats –excepte una petita guarnició que es quedarà per vigilar les meves "
 "terres– i reconquerirem la vostra illa!"

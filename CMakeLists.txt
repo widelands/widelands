@@ -16,6 +16,8 @@ option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
 option(OPTION_FORCE_EMBEDDED_MINIZIP "Use embedded minizip sources" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
+set(CMAKE_FIND_FRAMEWORK LAST)
+
 # Absolute path reference for submodules
 set(WL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 
@@ -152,7 +154,7 @@ find_package (PythonInterp REQUIRED)
 
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
-find_package(PNG REQUIRED)
+find_package(PNG 1.6 REQUIRED)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
@@ -222,23 +224,23 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     endif()
   endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.2))
-    message(STATUS "GCC >6.2.0 breaks -O3, setting -O2")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 7.5))
+    message(STATUS "GCC >7.5.0 breaks -O3, setting -O2")
     set(WL_OPTIMIZE_FLAGS "-O2")
   elseif(MSVC)
     set(WL_OPTIMIZE_FLAGS "/O2")
   else()
     set(WL_OPTIMIZE_FLAGS "-O3")
   endif ()
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.0))
-    message(WARNING "GCC <7.0.0 is known to cause segfaults in release builds. Please consider upgrading to GCC version 7 or newer or using Clang. Adding selected overrides to suppress reporting of known bugs.")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.6))
+    message(WARNING "GCC <7.6.0 is known to cause segfaults in release builds. Please consider upgrading to GCC version 7.6 or newer or using Clang. Adding selected overrides to suppress reporting of known bugs.")
     wl_add_flag(WL_OPTIMIZE_FLAGS "--param asan-stack=0")
   endif()
   set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
   option(OPTION_ASAN "Build with AddressSanitizer" OFF)
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.2))
-    message(STATUS "GCC >6.2.0 breaks -O3, setting -O2")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 7.5))
+    message(STATUS "GCC >7.5.0 breaks -O3, setting -O2")
     set(WL_OPTIMIZE_FLAGS "-O2")
   elseif(MSVC)
     set(WL_OPTIMIZE_FLAGS "/O2")
@@ -372,22 +374,27 @@ else()
 endif()
 
 if(NOT MSVC)
-  # Turn some warnings into errors.
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)))
+  if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    message(STATUS "Compiler warnings will be ignored.")
+  elseif(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND 
+         (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)) AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.2))
     # Skip this on g++12.0 and 12.1 because of false-positives from system headers.
-    # TODO(Nordfriese): As soon as a new g++ version fixes the bug, reenable -Werror for the working version.
     message(WARNING "This compiler is known to cause false-positive warnings.")
   else()
+    # Turn some warnings into errors.
+    message(STATUS "Warnings will be treated as errors.")
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
-  endif()
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0))
-    # Silence some false positives on older g++
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
-  endif()
-  if (APPLE)  # Our Mac CI needs these
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=disabled-macro-expansion")
+    if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0))
+      # Silence some false positives on older g++
+      message(STATUS "Disabling known false-positive warnings for this compiler.")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
+    endif()
+    if (APPLE)  # Our Mac CI needs these
+      message(STATUS "Disabling known false-positive warnings for this environment.")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=disabled-macro-expansion")
+    endif()
   endif()
 
   wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")

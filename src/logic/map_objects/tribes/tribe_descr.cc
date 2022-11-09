@@ -242,6 +242,16 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		   /** TRANSLATORS: Productivity label on a building if there is more than 1 worker coming. If
 		      you need plural forms here, please let us know. */
 		   _("Workers are coming"));
+		load_productionsite_string(productionsite_experienced_worker_missing_,
+		                           "productionsite_experienced_worker_missing",
+		                           /** TRANSLATORS: Productivity label on a building if there is 1
+		                              experienced worker missing. */
+		                           _("Expert missing"));
+		load_productionsite_string(
+		   productionsite_experienced_workers_missing_, "productionsite_experienced_workers_missing",
+		   /** TRANSLATORS: Productivity label on a building if there is more than 1 experienced
+		      worker missing. If you need plural forms here, please let us know. */
+		   _("Experts missing"));
 
 		auto load_soldier_string = [this, &table](std::string& target, const std::string& key,
 		                                          const std::string& default_value) {
@@ -467,6 +477,11 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 			try {
 				DescriptionIndex workerindex = descriptions.load_worker(workername);
 				if (has_worker(workerindex)) {
+					if (workername == "frisians_diker") {
+						// TODO(Nordfriese): Ugly v1.0 savegame compatibility hack, remove after v1.1
+						continue;
+					}
+
 					throw GameDataError("Duplicate definition of worker");
 				}
 
@@ -540,6 +555,11 @@ void TribeDescr::load_buildings(const LuaTable& table, Descriptions& description
 		try {
 			DescriptionIndex index = descriptions.load_building(buildingname);
 			if (has_building(index)) {
+				if (buildingname == "frisians_dikers_house") {
+					// TODO(Nordfriese): Ugly v1.0 savegame compatibility hack, remove after v1.1
+					continue;
+				}
+
 				throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 			}
 			buildings_.insert(index);

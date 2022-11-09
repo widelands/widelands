@@ -118,6 +118,9 @@ struct BaseListselect : public Panel {
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 
+	/* Ensure the selected entry is visible in the list. */
+	void scroll_to_selection();
+
 	void set_linked_dropdown(UI::BaseDropdown* d) {
 		linked_dropdown = d;
 	}

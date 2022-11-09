@@ -3,14 +3,16 @@
 # 
 # Translators:
 # fenris <fenris@folksprak.org>, 2015-2016
+# Fredy Ivan  Sucari-Callohuanca, 2022
 # Peter Garami <petro.garami@gmail.com>, 2021
+# Ximena Delgado, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Peter Garami <petro.garami@gmail.com>, 2021\n"
+"Last-Translator: Ximena Delgado, 2022\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +22,7 @@ msgstr ""
 
 #: ../../data/txts/ABOUT.lua:7
 msgid "Readme"
-msgstr "Legumin"
+msgstr "Legu min"
 
 #: ../../data/txts/ABOUT.lua:11
 msgid "License"
@@ -45,7 +47,7 @@ msgstr "Permesil-informoj pri Widelands"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr ""
+msgstr "Voĉdonrajto 2002 - %1% de la Widelands programista teamo"
 
 #: ../../data/txts/LICENSE.lua:11
 msgid ""
@@ -128,7 +130,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:15
 msgid "Widelands Help"
-msgstr ""
+msgstr "Widelands Helpo"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../data/txts/README.lua:17
@@ -204,15 +206,15 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantidoj"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbaroj"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
-msgstr ""
+msgstr "Kampanjo Rakonto"
 
 #: ../../data/txts/developers.lua:3
 msgid "Chieftains"
@@ -220,7 +222,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
-msgstr ""
+msgstr "Programistoj"
 
 #: ../../data/txts/developers.lua:3
 msgid "Debian Linux"
@@ -264,7 +266,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphics"
-msgstr ""
+msgstr "Grafikoj"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage"
@@ -272,7 +274,7 @@ msgstr "Retpaĝo"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Hejmpaĝo Programistoj"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
@@ -284,7 +286,7 @@ msgstr "Mandriva Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Mapoj kaj Misioj"
 
 #: ../../data/txts/developers.lua:3
 msgid "Musicians"
@@ -292,7 +294,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Other"
-msgstr ""
+msgstr "Alia"
 
 #: ../../data/txts/developers.lua:3
 msgid "Packagers"
@@ -304,11 +306,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"
-msgstr ""
+msgstr "Sono"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound Effects"
-msgstr ""
+msgstr "Sonefektoj"
 
 #: ../../data/txts/developers.lua:3
 msgid "Tongues"
@@ -332,11 +334,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
-msgstr ""
+msgstr "Vaka"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
-msgstr ""
+msgstr "Reta Helpo"
 
 #: ../../data/txts/help/common_helptexts.lua:11
 #, lua-format
@@ -369,7 +371,7 @@ msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
-msgstr ""
+msgstr "Ripetoj"
 
 #: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
@@ -420,7 +422,7 @@ msgstr ""
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
-msgstr ""
+msgstr "Baskuli mini mapo"
 
 #: ../../data/txts/help/common_helptexts.lua:75
 #: ../../data/txts/help/common_helptexts.lua:84
@@ -819,12 +821,12 @@ msgstr ""
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Sagoklavoj"
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + Sagoklavoj"
 
 #: ../../data/txts/tips/general_game.lua:94
 msgid ""

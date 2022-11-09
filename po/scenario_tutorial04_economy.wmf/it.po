@@ -359,7 +359,7 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr ""
+msgstr "Hai chiuso la finestra delle scorte prima che avssi finito di dirti  tutto su di essa. Se pensi di sapere già tutto, sei libero di lasciare questo tutorial quando preferisci."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
@@ -553,7 +553,7 @@ msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "Hai chiuso la finestra dell'encicolopedia prima di aver trovato le informazioni che cerchiamo. Se pensi di sapere già tutto, sei libero di lasciare questo tutorial quando preferisci."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
@@ -614,7 +614,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "Nel nostro caso, potresti volerfar lavorare i forni il più rapidamente possibile, perchè riforniscono le nostre taverne, quindi dovresti indicare la priorità massima per l'acqua nei forni. Gli altri edifici (per esempio l'allevamento di asini) riceverebbero meno acqua, ma il forno potrebbe lavorare più in fretta."
+msgstr "Nel nostro caso, potresti voler far lavorare i forni il più rapidamente possibile, perchè riforniscono le nostre taverne, quindi dovresti indicare la priorità massima per l'acqua nei forni. Gli altri edifici (per esempio l'allevamento di asini) riceverebbero meno acqua, ma il forno potrebbe lavorare più in fretta."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
@@ -739,7 +739,7 @@ msgid ""
 "You closed the ware statistics window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
-msgstr ""
+msgstr "Hai chiuso la finestra delle statistiche sulle merci prima che avssi finito di dirti tutto su di essa. Se pensi di sapere già tutto, sei libero di lasciare questo tutorial quando preferisci."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
@@ -838,7 +838,7 @@ msgstr "Per essere pronti a nuove fortificazioni, devi produrre 20 colonne di ma
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
-msgstr "Il tuo Tagliapietre non produrrà Colonne di marmo se non sono necessarie. Devi incrementare la quantità prefissata."
+msgstr "Il tuo scalpellino non produrrà colonne di marmo se non sono necessarie. Devi incrementare la quantità prefissata."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
@@ -946,7 +946,7 @@ msgid ""
 "understood a few concepts, you mustn’t give up. Try them out in some games, "
 "become familiar with them and experience the possibilities. Then, return to "
 "this tutorial and learn the rest!"
-msgstr ""
+msgstr "Spero di essere riuscito ad insegnarti come gestire l'economia in Widelands. Ci sono molte opzioni che inizialmente possono confondere. Anche se ti sono chiari soltanto alcuni dei concetti esposti, non devi arrenderti. Provali in alcuni giochi, familiarizza con loro e fai esperienza con le diverse possibilità. Poi, torna a questo tutorial ed impara il resto!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:551
 msgid ""
@@ -955,4 +955,4 @@ msgid ""
 " know about. I will now search for a quiet place to spend my sunset years. "
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
-msgstr ""
+msgstr "Questo è l'ultimo tutoria che avevo preparato per te. Ora ti ho insegnato tutto quanto potevo. Ci sono ancora segreti nascosti in questo mondo, che neanch'io conosco. Ora sono alla ricerca di un posto tranquillo dove passare i miei anni del tramonto. Se hai ancora dubbi, la comunità di Widelands certamente ti aiuterà. Puoi trovarla su:"

@@ -616,7 +616,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:295
 msgid "Opol Makes A Point"
-msgstr ""
+msgstr "Opol figyelmeztet"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:298
@@ -627,13 +627,17 @@ msgid ""
 "needing spidercloth for completion, not completing one in time will result "
 "in a crisis that can never be resolved."
 msgstr ""
+"%s! Úgy tűnik, van még egy ennél is sürgősebb probléma. Attól tartok, nem "
+"építettünk még földbirtokot, így nem lesz mivel etetni a pókokat. Mivel ez "
+"az egyik épület, amihez szükség van pókszövetre, ha nem építünk egyet "
+"időben, akkor olyan krízis áll elő, amiből nincs kiút."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:302
 #, lua-format
 msgid "%s Acknowledges"
-msgstr ""
+msgstr "%s nyugtázza"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:305
@@ -641,12 +645,14 @@ msgid ""
 "I see the risk, Opol. Thank you for reporting. We will build a farm "
 "immediately."
 msgstr ""
+"Látom a veszélyt, Opol. Köszönöm, hogy jelentetted. Azonnal építünk egy "
+"földbirtokot."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:317
 msgid "Opol Reports Success"
-msgstr ""
+msgstr "Opol sikert jelent"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:320
@@ -657,6 +663,10 @@ msgid ""
 " finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
 " later on to make better tabards as well."
 msgstr ""
+"Satul melegítsen, %s! Elkészült a szövőmalom és a póktenyészet, így a "
+"takácsok céhe újra munkához láthat. Ígérem, hamarosan leszállítjuk a legjobb"
+" szöveteket és néhány köntöst is. Ha később építhetünk egy aranyszálfonó "
+"malmot is, akkor még jobb köntösöket tudunk majd készíteni."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -672,11 +682,13 @@ msgid ""
 "This is good news indeed, Opol. You may go back to your work now, and may "
 "Satul warm you and the weavers’ guild!"
 msgstr ""
+"Ez valóban jó hír, Opol. Visszatérhetsz a munkádhoz. Satul melegítsen téged "
+"és a takácsok céhét!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:336
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:351
 msgid "Sidolus Reports Foreign Inhabitants"
-msgstr ""
+msgstr "Sidolus idegenekről jelent"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:339
@@ -686,11 +698,14 @@ msgid ""
 "land governed by foreigners, but we do not yet know what to expect from "
 "them."
 msgstr ""
+"Satul melegítsen, Jundlina! Aggasztó híreim vannak. Idegenek által "
+"ellenőrzött területet láttunk, de még nem tudjuk, hogy mire számítsunk "
+"tőlük."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:342
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:357
 msgid "Jundlina Is Concerned"
-msgstr ""
+msgstr "Jundlina aggódik"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:345
@@ -698,6 +713,8 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. "
 "Hopefully our scout will get us some information soon."
 msgstr ""
+"Egyetértek, Sidolus, ez valóban nagyon aggasztó. Többet kell kiderítenünk. "
+"Remélem, a felderítőnk hamarosan további információkat hoz nekünk."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:360
@@ -705,10 +722,13 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. We "
 "definitely need to send out a scout to gather some information."
 msgstr ""
+"Egyetértek, Sidolus, ez valóban nagyon aggasztó. Többet kell kiderítenünk. "
+"Mindenképpen ki kell küldenünk egy felderítőt, hogy további információkat "
+"hozzon nekünk."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:366
 msgid "Allies?"
-msgstr ""
+msgstr "Szövetségesek?"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:369
@@ -717,6 +737,9 @@ msgid ""
 " are in big trouble as they are at war with a mighty tribe in the north. "
 "They ask us for support."
 msgstr ""
+"Satul melegítsen, Jundlina! Kapcsolatba léptünk az idegenekkel. Nagy bajban "
+"vannak, mert hadban állnak egy nagy hatalmú törzzsel északon. A "
+"segítségünket kérik."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:372
 msgid "Jundlina Is Cautious"
@@ -729,17 +752,20 @@ msgid ""
 "see what we can do for them. However we should improve our own military "
 "strength to become independent of others."
 msgstr ""
+"Sidolus, mivel minden szövetségesre szükségünk lehet, segítsünk nekik! "
+"Lássuk, mit tehetünk értük! De közben fejlesszük a saját haderőnket is, hogy"
+" ne függjünk másoktól!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:383
 msgid "Building Material Ensured"
-msgstr ""
+msgstr "Építőanyagok biztosítva"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:386
 #, lua-format
 msgid ""
 "May Satul warm you, %s! We have finished our supply of building materials."
-msgstr ""
+msgstr "Satul melegítsen, %s! Készen van az építőanyag ellátásunk."
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:393
@@ -748,10 +774,13 @@ msgid ""
 "sophisticated buildings to enlarge our economy. Please advise whenever you "
 "feel we are missing necessary buildings."
 msgstr ""
+"Ez valóban jó hír, Loftomor. Most már gondolhatunk fejlettebb épületekre is "
+"a gazdaságunk bővítésére. Kérlek, nyugodtan jelentsd bármikor, ha úgy érzed,"
+" hiányzik valamilyen szükséges épület!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:404
 msgid "Tool Supply Ensured"
-msgstr ""
+msgstr "Szerszámellátás biztosítva"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:407
@@ -760,13 +789,14 @@ msgid ""
 "%s, may Satul warm you! We have made some progress in building up our tool "
 "industry."
 msgstr ""
+"Satul melegítsen, %s! Előrelépést értünk el a szerszámkészítés kiépítésében."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:411
 #, lua-format
 msgid "%s Enchanted"
-msgstr ""
+msgstr "%s elégedett"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:414
@@ -775,10 +805,13 @@ msgid ""
 "buildings we are going to build in our new home. But now we should really "
 "look to get some resources from the mountains."
 msgstr ""
+"Ez valóban jó hír, Loftomor. Így használni tudjuk az összes épületet, amit "
+"építünk az új otthonunk számára. Most viszont már mindenképpen "
+"nyersanyagokat kell keresnünk a hegyekben."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:426
 msgid "Mining Established"
-msgstr ""
+msgstr "Bányászat kiépítve"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:429
@@ -787,13 +820,15 @@ msgid ""
 "%s, may Satul warm you! Another issue solved. We have found some resources "
 "and built a mine of each type."
 msgstr ""
+"Satul melegítsen, %s! Újabb akadályt küzdöttünk le. Találtunk "
+"nyersanyagokat, és építettünk minden fajta bányát."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:433
 #, lua-format
 msgid "%s Is Excited"
-msgstr ""
+msgstr "%s izgatott"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:436
@@ -802,11 +837,14 @@ msgid ""
 "But now we need to ensure we can feed them. We need to build up bakeries and"
 " smokeries and all buildings to supply them."
 msgstr ""
+"Nagyon jó, Loftomor, nagyon jó. Satul melegítse erős és bátor bányászainkat!"
+" Most viszont gondoskodnunk kell az élelmezésükről. Pékségeket, füstölőket "
+"és az őket ellátó épületeket kell építenünk."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:445
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:484
 msgid "Tribute Delivered"
-msgstr ""
+msgstr "Adó megfizetve"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:448
@@ -815,11 +853,13 @@ msgid ""
 "May Satul warm you, Kalitath! We have delivered all the wares you demanded. "
 "Now we expect our princess to return home."
 msgstr ""
+"Satul melegítsen, Kalitath! Leszállítottuk az összes árut, amit kértél. "
+"Reméljük, most már visszatérhet hozzánk a hercegnőnk."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:451
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:475
 msgid "Kalitath Appreciates Efforts"
-msgstr ""
+msgstr "Kalitath értékeli az erőfeszítéseket"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:454
@@ -828,11 +868,14 @@ msgid ""
 "However don’t forget to help us defeat the troops of Maletus. Afterwards we "
 "might talk about your princess."
 msgstr ""
+"Sidolus, ez nagyon jó hír. Értékelem, amit a néped tett. De ne felejtsd el, "
+"hogy segítenetek kell legyőznünk Maletus seregeit. Utána beszélhetünk a "
+"hercegnőtökről."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:460
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:469
 msgid "Empire Defeated"
-msgstr ""
+msgstr "A Birodalom legyőzve"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:463
@@ -841,6 +884,8 @@ msgid ""
 "May Satul warm you, Kalitath! We have defeated the troops of the Empire in "
 "the north. Now we expect our princess to return home."
 msgstr ""
+"Satul melegítsen, Kalitath! Legyőztük északon a Birodalom seregeit. "
+"Reméljük, most már visszatérhet hozzánk a hercegnőnk."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:478
@@ -849,10 +894,13 @@ msgid ""
 "However don’t forget to fulfill your tribute within time. Afterwards we "
 "might talk about your princess."
 msgstr ""
+"Sidolus, ez nagyon jó hír. Értékelem, amit a néped tett. De ne felejtsétek "
+"el időben leszállítani a hozzájárulásotokat a költségeinkhez. Utána "
+"beszélhetünk a hercegnőtökről."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:493
 msgid "Kalitath Acknowledges"
-msgstr ""
+msgstr "Kalitath nyugtázza"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:496
@@ -860,11 +908,13 @@ msgid ""
 "Sidolus, we appreciate this. But your princess and I already made plans for "
 "our common future on this island. She will explain it to you."
 msgstr ""
+"Sidolus, ennek igazán örülünk. Azonban időközben a hercegnőtökkel közös "
+"jövőt terveztünk el ezen a szigeten. Majd ő elmagyarázza neked."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:499
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:573
 msgid "Jundlina Explains"
-msgstr ""
+msgstr "Jundlina magyaráz"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:502
@@ -878,10 +928,18 @@ msgid ""
 "Barbarians. This includes learning about their gods and preparing to worship"
 " them."
 msgstr ""
+"Sidolus! A barbároknál töltött idő alatt sokat tanultam a "
+"vendégszeretetükről és a bátorságukról. Teljesen lenyűgözött harcosaik és "
+"isteneik ereje a Birodalom elleni harcban. Vezetőjük, Kalitath, különösen jó"
+" házigazdának bizonyult, én pedig arra gondoltam, hogy egyesíthetnénk "
+"törzseinket, és így biztosíthatnánk a békés jövőt ezen a szigeten. Ezért azt"
+" kívánom, hogy készítsd fel a népünket az esküvőre és a barbárokkal való "
+"békés együttélésre. Ez azt is jelenti, hogy tanuljatok az isteneikről, és "
+"készüljetek fel az imádatukra."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:505
 msgid "Kalitath Demands"
-msgstr ""
+msgstr "Kalitath követel"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:508
@@ -891,14 +949,18 @@ msgid ""
 "So we will simply take your military buildings with our forces. Naturally "
 "you won’t have the right to do the same, for the sake of your princess."
 msgstr ""
+"Sidolus! Kövesd hát a hercegnőd utasításait! Közben lehet, hogy úgy döntünk,"
+" hogy szükségünk lesz az általatok elfoglalt terület egy részére a közös "
+"jövőnkhöz. Ehhez majd a katonáink átveszik a katonai épületeiteket. "
+"Természetesen ti nem tehetitek ezt meg velünk. Gondoljatok a hercegnőtökre!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:514
 msgid "Heretics!"
-msgstr ""
+msgstr "Eretnekek!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:515
 msgid "Sidolus is very sad"
-msgstr ""
+msgstr "Sidolus elkeseredett"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:517
@@ -907,10 +969,13 @@ msgid ""
 " this Barbarian. But I will never worship any Barbarian god. I can’t imagine"
 " how we could change her mind though."
 msgstr ""
+"Satul melegítsen minket! A hercegnőnk megzavarodott a barbárok fogságában. "
+"De én soha nem fogok semmilyen barbár istent imádni! Bár tudnám, hogyan "
+"téríthetnénk észhez a hercegnőt!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:520
 msgid "Attracting Satul’s Help"
-msgstr ""
+msgstr "Segítségkérés Satultól"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:523
@@ -921,10 +986,15 @@ msgid ""
 "some priestesses, who might beg Satul to show his powers to the Barbarians "
 "and our princess."
 msgstr ""
+"Sidolus, egyetértek, hogy nem hajolhatunk meg Satulon kívül más isten előtt."
+" De lehet, hogy az istenünk segítségét kell kérjük ebben a helyzetben. Ezért"
+" azt javaslom, hogy építsünk templomot, és különleges áldozatokkal imádjuk "
+"Satult. Így papnőket avathatunk, akik közbenjárhatnak Satulnál, hogy mutassa"
+" meg erejét a barbároknak és a hercegnőnknek."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:526
 msgid "Build Temple"
-msgstr ""
+msgstr "Építs templomot!"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:529
@@ -936,10 +1006,16 @@ msgid ""
 "Barbarian any more, I want you to ensure we have a scout out there to gather"
 " information."
 msgstr ""
+"Satul melegítsen, Loftomor! Ez valóban nagyszerű ötlet! Megbízlak hát, hogy "
+"építs egy templomot, ami méltó az istenünkhöz. Addig is, amíg készen nem "
+"állunk Satul segítségét kérni, tartsuk szemmel a hercegnőnket és ezt a "
+"barbárt! Mivel a kereskedőnket le kell állítanunk, hogy ne vesztegessünk "
+"több árut erre a barbárra, helyette gondoskodj róla, hogy egy felderítő "
+"menjen ki információt gyűjteni."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:536
 msgid "Temple Completed"
-msgstr ""
+msgstr "A templom elkészült"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:539
@@ -947,6 +1023,8 @@ msgid ""
 "May Satul warm you, Sidolus! My builders just completed the temple for "
 "Satul. Now we can start worshipping him and consecrating our priestesses."
 msgstr ""
+"Satul melegítsen, Sidolus! Az építőmunkásaim most készültek el Satul "
+"templomával. Most már imádkozhatunk hozzá és avathatunk papnőket."
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:545
@@ -964,7 +1042,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:552
 msgid "May Satul Warm Us"
-msgstr ""
+msgstr "Satul melegítsen minket!"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:555
@@ -973,10 +1051,13 @@ msgid ""
 "for Satul’s pleasure. May he warm us and show his might to our princess and "
 "this barbaric tribe."
 msgstr ""
+"Vannak felszentelt papnőink, és a legpompásabb árukat áldoztuk Satulnak. "
+"Melegítsen mindannyiunkat, és mutassa meg hatalmát a hercegnőnknek és ennek "
+"a barbár törzsnek!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:561
 msgid "Jundlina Arrives"
-msgstr ""
+msgstr "Jundlina megérkezik"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:564
@@ -987,10 +1068,15 @@ msgid ""
 "would have meant servitude forever. And this is not what Atlanteans are made"
 " for."
 msgstr ""
+"Satul melegítsen, Sidolus! Nekem pedig bocsássa meg eretnek "
+"eltévelyedésemet! Hatalmának megmutatkozása és a barbárok rémülete hirtelen "
+"újra megvilágosította az elmémet. Tévedtem a békével és együttéléssel "
+"kapcsolatban. Ezek csak örök szolgaságot jelentettek volna számunkra. Az "
+"atlantisziak ennél többet érdemelnek!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:567
 msgid "Sidolus Relieved"
-msgstr ""
+msgstr "Sidolus megkönnyebbült"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:570
@@ -999,6 +1085,9 @@ msgid ""
 "trust you, as much as you will trust and be faithful to Satul. How come the "
 "Barbarians let you go?"
 msgstr ""
+"Satul melegítsen, Jundlina! Örülök, hogy visszatértél. Remélem, hogy "
+"megbízhatunk benned, ahogy abban is, hogy te is megbízol Satulban és hű "
+"leszel hozzá. Hogyhogy elengedtek a barbárok?"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:576
@@ -1009,10 +1098,15 @@ msgid ""
 "issue now and forever on this island. There is no other way to live here in "
 "peace than to defeat them."
 msgstr ""
+"Nem engedtek el, Sidolus. Találkoztam a felderítőnkkel, és ő segített "
+"megszöknöm, miután rájöttem, hogy még mindig túszként kezelnek, mert "
+"kifejeztem a korábbi megállapodásunkat illető aggályaimat. El kell "
+"rendeznünk a barbárok kérdését a szigeten, most és mindörökké. Nem élhetünk "
+"itt békében, amíg le nem győztük őket."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:584
 msgid "Jundlina Is Relieved"
-msgstr ""
+msgstr "Jundlina megkönnyebbült"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:587
@@ -1020,6 +1114,9 @@ msgid ""
 "Praise Satul, we have founded a new home. I deeply regret I was weak in my "
 "belief. May Satul guide me better in the future."
 msgstr ""
+"Satulnak hála, új otthont alapítottunk. Nagyon szégyellem, hogy a hitem "
+"gyengének bizonyult. Remélem a jövőben jobban tudom követni Satul "
+"útmutatását."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:590
@@ -1027,6 +1124,9 @@ msgid ""
 "Now it is time to celebrate but I expect we can’t relax long. We need to "
 "build up our society and our capability to explore the seas again."
 msgstr ""
+"Most ünnepelhetünk, de nem számítok arra, hogy pihenésünk hosszú lesz. Fel "
+"kell építeni a társadalmunkat és képessé kell válnunk újra a tengereket "
+"járni."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
@@ -1042,7 +1142,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:598
 msgid "Tribute Demand"
-msgstr ""
+msgstr "Hűbérkövetelés"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:601
@@ -1051,6 +1151,8 @@ msgid ""
 "really on our side, you should send us some gold and a couple of other wares"
 " on a regular basis."
 msgstr ""
+"Idegenek! Meg kell győződnünk a jó szándékotokról. Ha tényleg velünk "
+"vagytok, akkor aranyat és más árukat kell küldenetek rendszeresen."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:604
@@ -1059,6 +1161,10 @@ msgid ""
 "real weapons like our axes, and not the sort of toothpicks you use. So feel "
 "free to send us 25 logs, 16 lumps of coal, 9 iron ingots and 4 gold bars."
 msgstr ""
+"Csak olyan árukra van szükségünk, amik a fegyverek kovácsolásához kellenek. "
+"Igazi fegyverekre gondolok, mint a mi fejszéink, nem a ti fogpiszkálóitokra."
+" Küldhettek nekünk 25 farönköt, 16 darab szenet, 9 vastömböt és 4 "
+"aranyrudat."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:607
@@ -1066,14 +1172,16 @@ msgid ""
 "Oh, and I almost forgot this one. We demand to have your princess in our "
 "headquarters as well to coordinate our war plannings."
 msgstr ""
+"Oh, és majdnem elfelejtettem még valamit. Parancsoljuk, hogy a hercegnőtök "
+"maradjon a főhadiszállásunkon, hogy egyeztethessük a haditerveinket."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:611
 msgid "Pitfall!"
-msgstr ""
+msgstr "Csapda!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:612
 msgid "Sidolus is upset"
-msgstr ""
+msgstr "Sidolus dühös"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:614
@@ -1082,10 +1190,13 @@ msgid ""
 "is a trap to keep you as a hostage. And the demand itself is really an "
 "insult. I strongly recommend to decline this unsubstantiated claim."
 msgstr ""
+"Satul melegítsen, Jundlina! Micsoda barbár stílus ez! Attól tartok, ez "
+"csapda, és túszként tartanak majd fogva. A követelésük is felháborító. Azt "
+"tanácsolom, hogy utasítsuk el ezeket az alaptalan követeléseket."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:617
 msgid "Jundlina Concedes"
-msgstr ""
+msgstr "Jundlina megadja magát"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:620
@@ -1094,6 +1205,9 @@ msgid ""
 "obey this demand. It is your obligation now to run our small people until I "
 "come back."
 msgstr ""
+"Egyetértek, Sidolus. Ennek ellenére úgy vélem, nincs más választásunk, ezért"
+" engedelmeskednünk kell a követeléseinek. A te feladatod, hogy vezesd "
+"maroknyi népünket, amíg visszatérek."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:623
@@ -1101,10 +1215,12 @@ msgid ""
 "First you need to upgrade our scout’s house to a trading post. Then you need"
 " to send the demanded tributes of gold, iron, coal, and logs."
 msgstr ""
+"Először is fel kell fejlesztened a felderítőházunkat kereskedő állomássá. "
+"Ezután el kell küldened az adóként követelt aranyat, vasat, szenet és fát."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:630
 msgid "Trading Post Built"
-msgstr ""
+msgstr "Kereskedő állomás megépítve"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:633
@@ -1112,6 +1228,8 @@ msgid ""
 "Sidolus, may Satul warm you! We have finished the new trading post. I hope "
 "this will allow Jundlina to return to us soon."
 msgstr ""
+"Satul melegítsen, Sidolus! Elkészült az új kereskedő állomás. Remélem, "
+"Jundlina így hamarosan visszatérhet hozzánk."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:636
 msgid "Sidolus Agrees"
@@ -1123,6 +1241,8 @@ msgid ""
 "Well done, Loftomor, well done. May Satul warm our princess and our whole "
 "people. Now we need to begin sending goods to this Barbarian."
 msgstr ""
+"Nagyon jó, Loftomor, nagyon jó. Satul melegítse hercegnőnket és egész "
+"népünket! Kezdjük hát el az áruszállítást ennek a barbárnak!"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:642
@@ -1130,10 +1250,12 @@ msgid ""
 "I think we should start with the deliveries we could afford the easiest. But"
 " we need to find more metals for sure."
 msgstr ""
+"Úgy vélem, azzal kezdjünk, amit leginkább nélkülözni tudunk. De előbb-utóbb "
+"mindenképpen több fémet kell találnunk."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:648
 msgid "Urgent Tribute Demand"
-msgstr ""
+msgstr "Sürgős hűbérkövetelés"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:651
@@ -1141,6 +1263,8 @@ msgid ""
 "Strangers, we haven’t received any help yet. If you are really on our side, "
 "you should start sending some wares urgently."
 msgstr ""
+"Idegenek! Még mindig nem kaptunk semmilyen segítséget tőletek. Ha tényleg "
+"velünk vagytok, akkor sürgősen kezdjétek meg a szállítást."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:654
@@ -1148,19 +1272,21 @@ msgid ""
 "As we are facing great losses due to your laziness, you shall now send us "
 "twice the previous amount of each ware."
 msgstr ""
+"Mivel a lustaságotok miatt nagyok a veszteségeink, most már mindenből a "
+"korábbi mennyiség kétszeresét küldjétek!"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:657
 msgid "I am sure you do not want to break our alliance… do you?"
-msgstr ""
+msgstr "Gondolom nem akarjátok felbontani a szövetséget velünk… Igaz?"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:660
 msgid "Blackmail!"
-msgstr ""
+msgstr "Zsarolás!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:661
 msgid "Sidolus is concerned"
-msgstr ""
+msgstr "Sidolus aggódik"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:663
@@ -1168,6 +1294,8 @@ msgid ""
 "May Satul warm us all. Our so-called ally is blackmailing us, and we can’t "
 "punish him for his insult as he has our princess at his hands."
 msgstr ""
+"Satul melegítse mindannyiunkat! Az állítólagos szövetségesünk zsarol minket,"
+" és mi nem büntethetjük meg, mert túszul tartja a hercegnőnket."
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:666
@@ -1175,10 +1303,12 @@ msgid ""
 "Our only chance is to double our efforts and start delivering something "
 "soon."
 msgstr ""
+"Az egyetlen esélyünk, ha megkettőzzük az erőfeszítéseinket, hogy hamarosan "
+"szállítani tudjunk valamit."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:673
 msgid "Tribute Started"
-msgstr ""
+msgstr "Adófizetés elkezdve"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:676
@@ -1186,6 +1316,8 @@ msgid ""
 "Strangers, we have received the first batch of wares. So we may finally "
 "trust you."
 msgstr ""
+"Idegenek! Megkaptuk az első áruszállítmányt. Végre kezdhetünk bízni "
+"bennetek."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:679
@@ -1194,6 +1326,9 @@ msgid ""
 "significant help from your side we might lose the war despite any help in "
 "terms of wares you might provide."
 msgstr ""
+"De az északi ellenségünk nagyon erős. Attól tartok, hogy komolyabb "
+"segítségetek nélkül elveszthetjük a háborút a tőletek kapott szállítmányok "
+"ellenére is."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:682
@@ -1201,10 +1336,12 @@ msgid ""
 "They name themselves an Empire, and their leader is called Maletus. I want "
 "you to train your soldiers and help us defeat his lousy Empire."
 msgstr ""
+"Az ellenség Birodalomnak hívja magát, a vezérük Maletus. Azt akarom, hogy "
+"képezzetek katonákat, és segítsetek legyőzni az ostoba birodalmát."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:686
 msgid "Be Vigilant!"
-msgstr ""
+msgstr "Légy óvatos!"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:689
@@ -1212,6 +1349,8 @@ msgid ""
 "May Satul warm you, Sidolus. Our ally now trusts us to some extent, but we "
 "shouldn’t trust them too much."
 msgstr ""
+"Satul melegítsen, Sidolus! A szövetségesünk végre megbízik bennünk "
+"valamennyire, de mi ne bízzunk meg bennük túlságosan!"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:692
@@ -1219,22 +1358,26 @@ msgid ""
 "So I want you to defeat this Empire, but ensure that we will become and "
 "remain strong enough to enforce the respect we deserve."
 msgstr ""
+"Ezért azt kívánom, hogy győzzétek le a Birodalmat, de figyeljetek oda, hogy "
+"megerősödjünk és elég erősek maradjunk a harcok után is ahhoz, hogy "
+"fegyverrel vívhassuk ki a minket megillető tiszteletet."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:695
 msgid "Keep Delivering"
-msgstr ""
+msgstr "Folytasd a szállítást!"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:698
 msgid ""
 "Strangers, I almost forgot to mention, but it should have been clear anyway."
-msgstr ""
+msgstr "Idegenek! Majdnem elfelejtettem, de úgyis magától értetődik."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:701
 msgid ""
 "We are in urgent need of your supply, so hurry up with your deliveries."
 msgstr ""
+"Sürgősen szükségünk van a szállítmányaitokra, úgyhogy siessetek velük!"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:704
@@ -1243,6 +1386,9 @@ msgid ""
 "assume you are just playing along with us. So keep an eye on the time as we "
 "will not give any further warning."
 msgstr ""
+"Ha nem érkezik meg minden három és fél órán belül, akkor kénytelenek leszünk"
+" azt gondolni, hogy csak játszotok velünk. Figyeljétek az időt, mert nem "
+"fogunk újra figyelmeztetni titeket!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:710
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:722

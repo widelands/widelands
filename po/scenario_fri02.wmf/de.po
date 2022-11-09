@@ -8,7 +8,7 @@
 # Elisabeth Jäger, 2018
 # Simon S. <sim.sta@icloud.com>, 2019
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
-# Stephan Lutz <stephan-lutz@gmx.de>, 2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # 
 msgid ""
 msgstr ""
@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgstr ""
 "Es scheint, dass du die vorherige Mission nicht abgeschlossen hast. Du "
 "kannst dieses Szenario trotzdem spielen, aber du wirst einen Nachteil davon "
 "haben. Es ist besser, erst das vorhergehende Szenario abzuschließen und dann"
-" diese Mission neu zu starten. "
+" diese Mission neu zu starten."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
@@ -529,7 +529,7 @@ msgstr ""
 "Genau das werden wir tun müssen. Wir werden unsere Waffen benutzen, um "
 "Krieger auszubilden, dann schmelzen wir das Altmetall in Eisen und Gold ein."
 " Und dann können unsere Schmiede Spitzhacken herstellen, um die Bergleute "
-"damit auszustatten. Ich werde mich sofort darum kümmern."
+"damit auszustatten. Ich werde mich sofort darum kümmern!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:210
@@ -668,7 +668,7 @@ msgstr ""
 "Ausbildung der Krieger konzentrieren. Wir können es uns jetzt leisten, "
 "Metall für die Waffen-, Helm- und Gewandproduktion zu verwenden. Ich schlage"
 " vor, Rüstungsschmieden, eine Kaserne, eine Ausbildungsarena und eine "
-"Schneiderei zu bauen. "
+"Schneiderei zu bauen."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:252
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:259
@@ -731,7 +731,7 @@ msgid ""
 msgstr ""
 "Fremde! Ich, Murilius, Prokonsul der nördlichen Länder, einer Provinz des "
 "Imperiums, fordere euch auf, mir mitzuteilen wer ihr seid und was ihr in "
-"diesen Landen zu schaffen habt! "
+"diesen Landen zu schaffen habt!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
 #. frisian greeting, nothing more.
@@ -870,7 +870,7 @@ msgid ""
 msgstr ""
 "Und wegen der Gebietserweiterung – ich frage mich, wie penibel er überhaupt "
 "unser Gebiet kontrollieren kann. Vielleicht sollten wir einen Kundschafter "
-"aussenden, um ihn ein wenig auszuspionieren…"
+"aussenden, um ihn ein wenig auszuspionieren …"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:328
 msgid "The Scout Discovered Something"

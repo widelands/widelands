@@ -27,7 +27,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 28,
+	NETWORK_PROTOCOL_VERSION = 29,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -213,6 +213,10 @@ enum : uint8_t {
 
 	/**
 	 * Sent by the host during game setup to indicate that the game starts.
+	 * The payload is:
+	 * \li unsigned_32 Random number generator seed
+	 * \li unsigned_32 Number of enabled add-ons
+	 * \li Each enabled add-on's internal name
 	 *
 	 * The client must load the map and setup the game. As soon as the game
 	 * is fully loaded, it must behave as if a \ref NETCMD_WAIT command had
@@ -423,7 +427,7 @@ enum : uint8_t {
 	 * This is sent by the server to generate a clientsided translated system
 	 * chat message. Payload is:
 	 *
-	 * \li string:    Message code \see NetworkGamingMessages::fill_map()
+	 * \li string:    Message code \see src/network/network_gaming_messages.cc
 	 * \li string:    First attached string
 	 * \li string:    Second attached string
 	 * \li string:    Third attached string
@@ -456,6 +460,14 @@ enum : uint8_t {
 	 * \li unsigned_8: b
 	 */
 	NETCMD_SETTING_CHANGECOLOR = 35,
+
+	/**
+	 * Sent by the host to change the win condition duration.
+	 *
+	 * Attached data is:
+	 * \li signed_32: win condition duration in minutes
+	 */
+	NETCMD_WIN_CONDITION_DURATION = 36,
 
 	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability

@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2016-2017,2019-2020
+# Juanjo, 2016-2017,2019-2020,2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-10-31 04:13+0000\n"
 "PO-Revision-Date: 2016-03-24 07:33+0000\n"
-"Last-Translator: Juanjo, 2016-2017,2019-2020\n"
+"Last-Translator: Juanjo, 2016-2017,2019-2020,2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/scripting/editor/editor_controls.lua:11
-#: ../../data/scripting/editor/editor_help.lua:65
+#: ../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
 msgstr "Controls"
 
@@ -40,7 +40,7 @@ msgstr "Commuta el menú principal"
 #. TRANSLATORS: This is an access key combination. The hotkey is 't'
 #: ../../data/scripting/editor/editor_controls.lua:20
 msgid "Toggle tools menu"
-msgstr "Commuta el menú d'eines"
+msgstr "Commuta el menú d’eines"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
 #: ../../data/scripting/editor/editor_controls.lua:24
@@ -62,7 +62,7 @@ msgstr "Refés"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
 #: ../../data/scripting/editor/editor_controls.lua:30
 msgid "Activate information tool"
-msgstr "Activa l'eina d'informació"
+msgstr "Activa l’eina d’informació"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -84,7 +84,7 @@ msgstr "Eines"
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:41
 msgid "Change tool size"
-msgstr "Canvia la mida d'eina"
+msgstr "Canvia la mida d’eina"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -97,7 +97,7 @@ msgstr "Clic"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr "Situa elements nous al mapa o n'incrementa directament el nombre amb «Incrementa/Redueix el valor»"
+msgstr "Situa elements nous al mapa o n’incrementa directament el nombre amb «Incrementa/Redueix el valor»"
 
 #: ../../data/scripting/editor/editor_controls.lua:45
 msgid ""
@@ -123,47 +123,47 @@ msgstr "Ctrl+Clic"
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr "Establiu els elements del mapa al valor desitjat amb «Estableix el valor»"
 
-#: ../../data/scripting/editor/editor_help.lua:49
+#: ../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
-msgstr "Ajuda de l'editor"
+msgstr "Ajuda de l’editor"
 
-#: ../../data/scripting/editor/editor_help.lua:54
+#: ../../data/scripting/editor/editor_help.lua:55
 msgid "General"
 msgstr "General"
 
-#: ../../data/scripting/editor/editor_help.lua:59
+#: ../../data/scripting/editor/editor_help.lua:60
 #: ../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
 msgstr "Introducció"
 
-#: ../../data/scripting/editor/editor_help.lua:71
+#: ../../data/scripting/editor/editor_help.lua:72
 #: ../../data/scripting/editor/tips.lua:15
 msgid "Tips"
 msgstr "Consells"
 
-#: ../../data/scripting/editor/editor_help.lua:81
+#: ../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
 msgstr "Terrenys"
 
-#: ../../data/scripting/editor/editor_help.lua:88
+#: ../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
 msgstr "Arbres"
 
 #: ../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
-msgstr "L'editor del Widelands"
+msgstr "L’editor del Widelands"
 
 #: ../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr "L'editor és per als jugadors que volen dissenyar els seus propis mapes per a jugar al Widelands."
+msgstr "L’editor és per als jugadors que volen dissenyar els seus propis mapes per a jugar al Widelands."
 
 #: ../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr "Tal com podeu veure, l'editor està encara en procés de construcció. A mesura que millori l'editor, aquests textos també s'aniran completant."
+msgstr "Tal com podeu veure, l’editor està encara en procés de construcció. A mesura que millori l’editor, aquests textos també s’aniran completant."
 
 #: ../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
@@ -197,7 +197,7 @@ msgstr "%1%x %2%"
 #: ../../data/scripting/editor/terrain_help.lua:55
 #: ../../data/scripting/editor/terrain_tooltip.lua:35
 msgid "Probability of trees growing"
-msgstr "Probabilitat de creixement d'arbres"
+msgstr "Probabilitat de creixement d’arbres"
 
 #: ../../data/scripting/editor/terrain_help.lua:60
 #: ../../data/scripting/editor/terrain_tooltip.lua:37

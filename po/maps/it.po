@@ -9,6 +9,7 @@
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2017,2021
+# Log Merger, 2022
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 msgid ""
 msgstr ""
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2017,2021\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -320,7 +321,7 @@ msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr ""
+msgstr "In questo tutorial ti saranno svelati i segreti dellarte bellica: come reclutare soldati, come addestrarli e come guidarli in battaglia. Sarà tratatta anche l'esplorazione."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -330,7 +331,7 @@ msgstr "Viaggiare in mare"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "In questo tutorial conoscerai i viaggi in mare, cioè come gestire navi e porti, e come usare traghetti e vie d'acqua."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -478,7 +479,7 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "Le montagne hanno abbondanza di terreno pianeggiante – sfortunatamente la maggior parte di esso è verticale! Utilizza saggiamente il poco terreno edificabile cha hai disponibile. Una fortezza all'ingresso di uno stretto passo di montagna può rappresentare un formidabile ostacolo per un'armata nemica – usa il territorio a tuo vantaggio. Taglia tutti gli alberi ed espanditi ovunque possibile – è l'unico modo per trovare tutti i preziosi spazi per le fattorie."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -678,7 +679,7 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr ""
+msgstr "I capricciosi dei non risposero alle nostre preghiere. Invece, la crescente insolazione riscaldò la terra mille volte di più, fuse i ghiacciai e sommerse la gente negli abissi. Ma ora – su nelle maestose montagne, sull'ultimo frammento di terra – trovano rifugio due tribù sopravvissute. Benché gli dei mostrarono pietà ed il clima rinfrescò nuovamente, l'acqua sta ancora salendo e salendo. Nell'ultimo posto sicuro – sulla catena montuosa più alta dove le risorse di oro e spazio vitale sono appena sufficienti per una sola tribù – soltanto due strade, opposte, si possono percorrere. Ma attenzione, ricorda... quest'ultimo spazio vitale è anche un minuscolo e duro posto in cui vivere."
 
 #: ../../data/maps/Last_Bastion.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
@@ -886,7 +887,7 @@ msgid ""
 " grew and grew. Until one day, when the whole fire mountain exploded. "
 "Nowadays only this ring is left from that mighty fire mountain. Do you think"
 " that it is big enough for more than one tribe?"
-msgstr "Una volta quest'isola uscì dalle terre più profonde del mare. In quei giorni, il fuoco uscì dal mare salato e portò cenere, pietre e terra, alla luce del giorno. E il fuoco giunse sempre più vicino al sole, mentre la montagna cresceva e cresceva. Finché un giorno, l'intera montagna di fuoco esplose. Oggi della possente montagna di fuoco è rimasto solo questo anello. Pensi che sia abbastanza grande per più di una tribù?"
+msgstr "Un tempo quest'isola uscì dai più profondi abissi del mare. In quei giorni, il fuoco si levò dallle salate acque marine e portò in superficie cenere, sassi e terra, alla luce del giorno. E il fuoco giunse sempre più vicino al sole, mentre la montagna cresceva e cresceva. Finché un giorno, l'intera montagna di fuoco esplose. Oggi della possente montagna di fuoco è rimasto soltanto questo anello. Pensi che sia grande abbastanza, per più di una tribù?"
 
 #: ../../data/maps/The_Far_North.wmf/elemental:8
 msgid "The Far North"

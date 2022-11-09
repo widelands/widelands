@@ -206,35 +206,38 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	add_statistics_menu();
 
-	add_toolbar_button("wui/menus/objectives", "objectives",
-	                   as_tooltip_text_with_hotkey(
-	                      _("Objectives"), shortcut_string_for(KeyboardShortcut::kInGameObjectives),
-	                      UI::PanelStyle::kWui),
-	                   &objectives_, true);
+	add_toolbar_button(
+	   "wui/menus/objectives", "objectives",
+	   as_tooltip_text_with_hotkey(_("Objectives"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameObjectives, true),
+	                               UI::PanelStyle::kWui),
+	   &objectives_, true);
 	objectives_.open_window = [this] { new GameObjectivesMenu(*this, objectives_); };
 
-	add_toolbar_button("wui/menus/diplomacy", "diplomacy",
-	                   as_tooltip_text_with_hotkey(
-	                      _("Diplomacy"), shortcut_string_for(KeyboardShortcut::kInGameDiplomacy),
-	                      UI::PanelStyle::kWui),
-	                   &diplomacy_, true);
+	add_toolbar_button(
+	   "wui/menus/diplomacy", "diplomacy",
+	   as_tooltip_text_with_hotkey(_("Diplomacy"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameDiplomacy, true),
+	                               UI::PanelStyle::kWui),
+	   &diplomacy_, true);
 	diplomacy_.open_window = [this] { new GameDiplomacyMenu(*this, diplomacy_); };
 
-	toggle_message_menu_ =
-	   add_toolbar_button("wui/menus/message_old", "messages",
-	                      as_tooltip_text_with_hotkey(
-	                         _("Messages"), shortcut_string_for(KeyboardShortcut::kInGameMessages),
-	                         UI::PanelStyle::kWui),
-	                      &message_menu_, true);
+	toggle_message_menu_ = add_toolbar_button(
+	   "wui/menus/message_old", "messages",
+	   as_tooltip_text_with_hotkey(_("Messages"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameMessages, true),
+	                               UI::PanelStyle::kWui),
+	   &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button("ui_basic/menu_help", "help",
-	                   as_tooltip_text_with_hotkey(
-	                      _("Help"), shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia),
-	                      UI::PanelStyle::kWui),
-	                   &encyclopedia_, true);
+	add_toolbar_button(
+	   "ui_basic/menu_help", "help",
+	   as_tooltip_text_with_hotkey(_("Help"),
+	                               shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia, true),
+	                               UI::PanelStyle::kWui),
+	   &encyclopedia_, true);
 	encyclopedia_.open_window = [this] {
 		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
 	};
@@ -311,33 +314,33 @@ void InteractivePlayer::rebuild_statistics_menu() {
 		/** TRANSLATORS: An entry in the game's statistics menu */
 		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
 		                    g_image_cache->get("images/wui/menus/statistics_seafaring.png"), false,
-		                    "", shortcut_string_for(KeyboardShortcut::kInGameStatsSeafaring));
+		                    "", shortcut_string_for(KeyboardShortcut::kInGameStatsSeafaring, false));
 	}
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Soldiers"), StatisticsMenuEntry::kSoldiers,
 	                    g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
-	                    shortcut_string_for(KeyboardShortcut::kInGameStatsSoldiers));
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsSoldiers, false));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
 	                    g_image_cache->get("images/wui/menus/statistics_stock.png"), false, "",
-	                    shortcut_string_for(KeyboardShortcut::kInGameStatsStock));
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsStock, false));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
 	                    g_image_cache->get("images/wui/menus/statistics_buildings.png"), false, "",
-	                    shortcut_string_for(KeyboardShortcut::kInGameStatsBuildings));
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsBuildings, false));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare,
 	                    g_image_cache->get("images/wui/menus/statistics_wares.png"), false, "",
-	                    shortcut_string_for(KeyboardShortcut::kInGameStatsWares));
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsWares, false));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral,
 	                    g_image_cache->get("images/wui/menus/statistics_general.png"), false, "",
-	                    shortcut_string_for(KeyboardShortcut::kInGameStatsGeneral));
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsGeneral, false));
 
 	statisticsmenu_.select(last_selection);
 }
@@ -384,7 +387,7 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"),
-	   shortcut_string_for(KeyboardShortcut::kInGameShowhideWorkareas));
+	   shortcut_string_for(KeyboardShortcut::kInGameShowhideWorkareas, false));
 
 	showhidemenu_.select(last_selection);
 }
@@ -469,7 +472,7 @@ void InteractivePlayer::think() {
 		}
 		toggle_message_menu_->set_pic(g_image_cache->get(msg_icon));
 		toggle_message_menu_->set_tooltip(as_tooltip_text_with_hotkey(
-		   msg_tooltip, shortcut_string_for(KeyboardShortcut::kInGameMessages),
+		   msg_tooltip, shortcut_string_for(KeyboardShortcut::kInGameMessages, true),
 		   UI::PanelStyle::kWui));
 	}
 

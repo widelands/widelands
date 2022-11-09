@@ -93,7 +93,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the main menu button in the editor */
                   _("Main Menu"),
-                  shortcut_string_for(KeyboardShortcut::kEditorMenu),
+                  shortcut_string_for(KeyboardShortcut::kEditorMenu, true),
                   UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
@@ -108,7 +108,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the tool menu button in the editor */
                   _("Tools"),
-                  shortcut_string_for(KeyboardShortcut::kEditorTools),
+                  shortcut_string_for(KeyboardShortcut::kEditorTools, true),
                   UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
@@ -149,14 +149,16 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar()->add_space(15);
 
-	undo_ = add_toolbar_button(
-	   "wui/editor/menus/undo", "undo",
-	   as_tooltip_text_with_hotkey(
-	      _("Undo"), shortcut_string_for(KeyboardShortcut::kEditorUndo), UI::PanelStyle::kWui));
-	redo_ = add_toolbar_button(
-	   "wui/editor/menus/redo", "redo",
-	   as_tooltip_text_with_hotkey(
-	      _("Redo"), shortcut_string_for(KeyboardShortcut::kEditorRedo), UI::PanelStyle::kWui));
+	undo_ =
+	   add_toolbar_button("wui/editor/menus/undo", "undo",
+	                      as_tooltip_text_with_hotkey(
+	                         _("Undo"), shortcut_string_for(KeyboardShortcut::kEditorUndo, true),
+	                         UI::PanelStyle::kWui));
+	redo_ =
+	   add_toolbar_button("wui/editor/menus/redo", "redo",
+	                      as_tooltip_text_with_hotkey(
+	                         _("Redo"), shortcut_string_for(KeyboardShortcut::kEditorRedo, true),
+	                         UI::PanelStyle::kWui));
 
 	history_.reset(new EditorHistory(*this, *undo_, *redo_));
 
@@ -165,11 +167,12 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button("ui_basic/menu_help", "help",
-	                   as_tooltip_text_with_hotkey(
-	                      _("Help"), shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia),
-	                      UI::PanelStyle::kWui),
-	                   &menu_windows_.help, true);
+	add_toolbar_button(
+	   "ui_basic/menu_help", "help",
+	   as_tooltip_text_with_hotkey(_("Help"),
+	                               shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia, true),
+	                               UI::PanelStyle::kWui),
+	   &menu_windows_.help, true);
 	menu_windows_.help.open_window = [this] {
 		new EditorHelp(*this, menu_windows_.help, &egbase().lua());
 	};
@@ -213,7 +216,7 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap,
 	              g_image_cache->get("images/wui/editor/menus/load_map.png"), false, "",
-	              shortcut_string_for(KeyboardShortcut::kEditorLoad));
+	              shortcut_string_for(KeyboardShortcut::kEditorLoad, false));
 
 	menu_windows_.savemap.open_window = [this] {
 		new MainMenuSaveMap(*this, menu_windows_.savemap, menu_windows_.mapoptions);
@@ -221,7 +224,7 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap,
 	              g_image_cache->get("images/wui/editor/menus/save_map.png"), false, "",
-	              shortcut_string_for(KeyboardShortcut::kEditorSave));
+	              shortcut_string_for(KeyboardShortcut::kEditorSave, false));
 
 	menu_windows_.mapoptions.open_window = [this] {
 		new MainMenuMapOptions(*this, menu_windows_.mapoptions);
@@ -334,7 +337,7 @@ void EditorInteractive::add_tool_menu() {
 	              g_image_cache->get("images/wui/editor/tools/players.png"), false,
 	              /** TRANSLATORS: Tooltip for the map size tool in the editor */
 	              _("Set number of players and their names, tribes and starting positions"),
-	              shortcut_string_for(KeyboardShortcut::kEditorPlayers));
+	              shortcut_string_for(KeyboardShortcut::kEditorPlayers, false));
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
@@ -357,14 +360,14 @@ void EditorInteractive::add_tool_menu() {
 	              g_image_cache->get("images/wui/editor/fsel_editor_info.png"), false,
 	              /** TRANSLATORS: Tooltip for the map information tool in the editor */
 	              _("Click on a field to show information about it"),
-	              shortcut_string_for(KeyboardShortcut::kEditorInfo));
+	              shortcut_string_for(KeyboardShortcut::kEditorInfo, false));
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Tool History"), ToolMenuEntry::kToolHistory,
 	              g_image_cache->get("images/wui/editor/fsel_editor_toolhistory.png"), false,
 	              /** TRANSLATORS: Tooltip for the tool history tool in the editor */
 	              _("Restore previous tool settings"),
-	              shortcut_string_for(KeyboardShortcut::kEditorToolHistory));
+	              shortcut_string_for(KeyboardShortcut::kEditorToolHistory, false));
 	tool_windows_.toolhistory.open_window = [this] {
 		new EditorToolhistoryOptionsMenu(*this, tools()->tool_history, tool_windows_.toolhistory);
 	};
@@ -435,7 +438,7 @@ void EditorInteractive::rebuild_showhide_menu() {
 	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
 	                  ShowHideEntry::kBuildingSpaces,
 	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp));
+	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp, false));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to show maximum
 	 * building spaces that will be available if all immovables (trees, rocks, etc.) are removed */
@@ -445,33 +448,33 @@ void EditorInteractive::rebuild_showhide_menu() {
 	                  g_image_cache->get("images/wui/menus/toggle_maxbuild.png"), false,
 	                  _("Toggle whether to show maximum building spaces that will be available if "
 	                    "all immovables (trees, rocks, etc.) are removed"),
-	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideMaximumBuildhelp));
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideMaximumBuildhelp, false));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 	 */
 	showhidemenu_.add(get_display_flag(dfShowGrid) ? _("Hide Grid") : _("Show Grid"),
 	                  ShowHideEntry::kGrid,
 	                  g_image_cache->get("images/wui/menus/menu_toggle_grid.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideGrid));
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideGrid, false));
 
 	showhidemenu_.add(
 	   /** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables
 	    *  (trees, rocks etc.) are shown */
 	   get_display_flag(dfShowImmovables) ? _("Hide Immovables") : _("Show Immovables"),
 	   ShowHideEntry::kImmovables, g_image_cache->get("images/wui/menus/toggle_immovables.png"),
-	   false, "", shortcut_string_for(KeyboardShortcut::kEditorShowhideImmovables));
+	   false, "", shortcut_string_for(KeyboardShortcut::kEditorShowhideImmovables, false));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether animals are shown */
 	showhidemenu_.add(get_display_flag(dfShowBobs) ? _("Hide Animals") : _("Show Animals"),
 	                  ShowHideEntry::kAnimals,
 	                  g_image_cache->get("images/wui/menus/toggle_bobs.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideCritters));
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideCritters, false));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether resources are shown */
 	showhidemenu_.add(get_display_flag(dfShowResources) ? _("Hide Resources") : _("Show Resources"),
 	                  ShowHideEntry::kResources,
 	                  g_image_cache->get("images/wui/menus/toggle_resources.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideResources));
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideResources, false));
 
 	showhidemenu_.select(last_selection);
 }
@@ -1066,7 +1069,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 		}
 	}
 
-	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
+	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image(), false);
 	EditorInteractive::load_world_units(&eia, egbase);
 
 	if (init == EditorInteractive::Init::kLoadMapDirectly) {

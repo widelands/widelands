@@ -11,6 +11,7 @@
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2018,2021
 # ilmaren, 2018
+# Log Merger, 2022
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Samuele Battarra, 2018,2020
@@ -18,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-01 04:22+0000\n"
+"POT-Creation-Date: 2022-10-31 04:13+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2021\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +45,7 @@ msgstr "I tuoi combattenti hanno occupato la fortificazione."
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:34
 msgctxt "amazons_building"
 msgid "Your fortification discovered an aggressor."
-msgstr "La tua fortificazione ha scoperto un aggressore."
+msgstr "Nella tua fortificazione è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:36
@@ -80,7 +81,7 @@ msgstr "I tuoi combattenti hanno occupato la tua fortezza."
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:61
 msgctxt "amazons_building"
 msgid "Your fortress discovered an aggressor."
-msgstr "La tua fortezza ha scoperto un aggressore."
+msgstr "Nella tua fortezza è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:63
@@ -116,7 +117,7 @@ msgstr "I tuoi combattenti hanno occupato la torre di avvistamento."
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:32
 msgctxt "amazons_building"
 msgid "Your observation tower discovered an aggressor."
-msgstr "La tua torre di avvistamento ha scoperto un aggressore."
+msgstr "Nella tua torre di avvistamento è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:34
@@ -140,37 +141,37 @@ msgstr "I tuoi combattenti hanno sconfitto il nemico alla torre di avvistamento.
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:8
 msgctxt "amazons_building"
 msgid "Patrol Post"
-msgstr "Distretto di controllo"
+msgstr "Posto di pattuglia"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:39
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your patrol post."
-msgstr "I tuoi combattenti hanno occupato il tuo distretto di controllo."
+msgstr "I tuoi combattenti hanno occupato il tuo posto di pattuglia."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:41
 msgctxt "amazons_building"
 msgid "Your patrol post discovered an aggressor."
-msgstr "Il tuo distretto di controllo ha scoperto un aggressore."
+msgstr "Nel tuo posto di pattuglia è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:43
 msgctxt "amazons_building"
 msgid "Your patrol post is under attack."
-msgstr "Il tuo distretto di controllo è sotto attacco."
+msgstr "Il tuo posto di pattuglia è sotto attacco."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:45
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the patrol post."
-msgstr "Il nemico ha sconfitto i tuoi combattenti nel distretto di controllo."
+msgstr "Il nemico ha sconfitto i tuoi combattenti nel posto di pattuglia."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:47
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the patrol post."
-msgstr "I tuoi combattenti hanno sconfitto il nemico nel distretto di controllo."
+msgstr "I tuoi combattenti hanno sconfitto il nemico nel posto di pattuglia."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:8
@@ -188,7 +189,7 @@ msgstr "I tuoi combattenti hanno occupato la tua torre."
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:60
 msgctxt "amazons_building"
 msgid "Your tower discovered an aggressor."
-msgstr "La tua torre ha scoperto un aggressore."
+msgstr "Nella tua torre è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:62
@@ -224,7 +225,7 @@ msgstr "I tuoi combattenti hanno occupato la tua guardiola sull'albero."
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
 msgctxt "amazons_building"
 msgid "Your treetop sentry discovered an aggressor."
-msgstr "La tua guardiola sull'albero ha scoperto un aggressore."
+msgstr "Nella tua guardiola sull'albero è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:45
@@ -260,7 +261,7 @@ msgstr "I tuoi combattenti hanno occupato la tua dimora del guerriero."
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:44
 msgctxt "amazons_building"
 msgid "Your warriors’ dwelling discovered an aggressor."
-msgstr "La tua dimora del guerriero ha scoperto un aggressore."
+msgstr "Nella tua dimora del guerriero è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:46
@@ -296,7 +297,7 @@ msgstr "I tuoi soldati hanno occupato il tuo castello."
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:155
 msgctxt "atlanteans_building"
 msgid "Your castle discovered an aggressor."
-msgstr "Il tuo castello ha scoperto un aggressore."
+msgstr "Nel tuo castello è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:157
@@ -320,43 +321,43 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nel castello."
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Guardhall"
-msgstr "Posto di guardia"
+msgstr "Corpo di guardia"
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhall."
-msgstr "I tuoi soldati hanno occupato il tuo posto di guardia."
+msgstr "I tuoi soldati hanno occupato il tuo corpo di guardia."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:44
 msgctxt "atlanteans_building"
 msgid "Your guardhall discovered an aggressor."
-msgstr "Il tuo posto di guardia ha scoperto un aggressore."
+msgstr "Nel tuo corpo di guardia è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:46
 msgctxt "atlanteans_building"
 msgid "Your guardhall is under attack."
-msgstr "Il tuo posto di guardia è sotto attacco."
+msgstr "Il tuo corpo di guardia è sotto attacco."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:48
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr "Il nemico ha sconfitto i tuoi soldati nel posto di guardia."
+msgstr "Il nemico ha sconfitto i tuoi soldati nel corpo di guardia."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:50
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr "I tuoi soldati hanno sconfitto il nemico nel posto di guardia."
+msgstr "I tuoi soldati hanno sconfitto il nemico nel corpo di guardia."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Guardhouse"
-msgstr "Guardina"
+msgstr "Posto di guardia"
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
@@ -368,7 +369,7 @@ msgstr "I tuoi soldati hanno occupato il tuo posto di guardia."
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your guardhouse discovered an aggressor."
-msgstr "Il tuo posto di guardia ha scoperto un aggressore."
+msgstr "Nel tuo posto di guardia è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:44
@@ -404,7 +405,7 @@ msgstr "I tuoi soldati hanno occupato la tua torre."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:59
 msgctxt "atlanteans_building"
 msgid "Your tower discovered an aggressor."
-msgstr "La tua torre ha scoperto un aggressore."
+msgstr "Nella tua torre è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:61
@@ -440,7 +441,7 @@ msgstr "I tuoi soldati hanno occupato la tua torre alta."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:31
 msgctxt "atlanteans_building"
 msgid "Your high tower discovered an aggressor."
-msgstr "La tua torre alta ha scoperto un aggressore."
+msgstr "Nela tua torre alta è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:33
@@ -476,7 +477,7 @@ msgstr "I tuoi soldati hanno occupato la tua torre piccola."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:43
 msgctxt "atlanteans_building"
 msgid "Your small tower discovered an aggressor."
-msgstr "La tua torre piccola ha scoperto un aggressore."
+msgstr "Nella tua torre piccola è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:45
@@ -512,7 +513,7 @@ msgstr "I tuoi soldati hanno occupato il tuo fortino."
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:54
 msgctxt "barbarians_building"
 msgid "Your barrier discovered an aggressor."
-msgstr "Il tuo fortino ha scoperto un aggressore."
+msgstr "Nel tuo fortino è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:56
@@ -548,7 +549,7 @@ msgstr "I tuoi soldati hanno occupato la tua cittadella"
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:45
 msgctxt "barbarians_building"
 msgid "Your citadel discovered an aggressor."
-msgstr "La tua cittadella ha scoperto un aggressore."
+msgstr "Nella tua cittadella è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:47
@@ -584,7 +585,7 @@ msgstr "I tuoi soldati hanno occupato la tua fortezza."
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:79
 msgctxt "barbarians_building"
 msgid "Your fortress discovered an aggressor."
-msgstr "La tua fortezza ha scoperto un aggressore."
+msgstr "Nella tua fortezza è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:81
@@ -620,7 +621,7 @@ msgstr "I tuoi soldati hanno occupato la tua guardiola."
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:56
 msgctxt "barbarians_building"
 msgid "Your sentry discovered an aggressor."
-msgstr "La tua guardiola ha scoperto un aggressore."
+msgstr "Nella tua guardiola è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:58
@@ -656,7 +657,7 @@ msgstr "I tuoi soldati hanno occupato la tua torre."
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:61
 msgctxt "barbarians_building"
 msgid "Your tower discovered an aggressor."
-msgstr "La tua torre ha scoperto un aggressore."
+msgstr "Nella tua torre è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:63
@@ -692,7 +693,7 @@ msgstr "I tuoi soldati hanno occupato il tuo fortino."
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:47
 msgctxt "empire_building"
 msgid "Your barrier discovered an aggressor."
-msgstr "Il tuo fortino ha scoperto un aggressore."
+msgstr "Nel tuo fortino è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:49
@@ -728,7 +729,7 @@ msgstr "I tuoi soldati hanno occupato il tuo posto di guardia."
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:52
 msgctxt "empire_building"
 msgid "Your blockhouse discovered an aggressor."
-msgstr "Il tuo posto di guardia ha scoperto un aggressore."
+msgstr "Nel tuo posto di guardia è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:54
@@ -764,7 +765,7 @@ msgstr "I tuoi soldati hanno occupato il tuo castello."
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:33
 msgctxt "empire_building"
 msgid "Your castle discovered an aggressor."
-msgstr "Il tuo castello ha scoperto un aggressore."
+msgstr "Nel tuo castello è stato scoperto un aggressore"
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:35
@@ -800,7 +801,7 @@ msgstr "I tuoi soldati hanno occupato la tua fortezza."
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:75
 msgctxt "empire_building"
 msgid "Your fortress discovered an aggressor."
-msgstr "La tua fortezza ha scoperto un aggressore."
+msgstr "Nella tua fortezza è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:77
@@ -836,7 +837,7 @@ msgstr "I tuoi soldati hanno occupato il tuo avamposto."
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:61
 msgctxt "empire_building"
 msgid "Your outpost discovered an aggressor."
-msgstr "Il tuo avamposto ha scoperto un aggressore."
+msgstr "Nel tuo avamposto è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:63
@@ -872,7 +873,7 @@ msgstr "I tuoi soldati hanno occupato la tua guardiola."
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:47
 msgctxt "empire_building"
 msgid "Your sentry discovered an aggressor."
-msgstr "La tua guardiola ha scoperto un aggressore."
+msgstr "Nella tua guardiola è stato scoperto un aggressore"
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:49
@@ -908,7 +909,7 @@ msgstr "I tuoi soldati hanno occupato la tua torre."
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:55
 msgctxt "empire_building"
 msgid "Your tower discovered an aggressor."
-msgstr "La tua torre ha scoperto un aggressore."
+msgstr "Nella tua torre è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:57
@@ -944,7 +945,7 @@ msgstr "I tuoi soldati hanno occupato la tua fortezza."
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:60
 msgctxt "frisians_building"
 msgid "Your fortress discovered an aggressor."
-msgstr "La tua fortezza ha scoperto un aggressore."
+msgstr "Nella tua fortezza è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:62
@@ -980,7 +981,7 @@ msgstr "I tuoi soldati hanno occupato il tuo avamposto."
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:58
 msgctxt "frisians_building"
 msgid "Your outpost discovered an aggressor."
-msgstr "Il tuo avamposto ha scoperto un aggressore."
+msgstr "Nel tuo avamposto è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:60
@@ -1004,37 +1005,37 @@ msgstr "I tuoi soldati hanno sconfitto il nemico all'avamposto."
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:8
 msgctxt "frisians_building"
 msgid "Sentinel"
-msgstr "Posto di guardia"
+msgstr "Posto di sentinella"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:54
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your sentinel."
-msgstr ""
+msgstr "I tuoi soldati hanno occupato il tuo  posto di sentinella."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:56
 msgctxt "frisians_building"
 msgid "Your sentinel discovered an aggressor."
-msgstr ""
+msgstr "Nel tuo posto di sentinella è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:58
 msgctxt "frisians_building"
 msgid "Your sentinel is under attack."
-msgstr ""
+msgstr "Il tuo posto di sentinella è sotto attacco."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:60
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the sentinel."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati al posto di sentinella."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:62
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the sentinel."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico al posto di sentinella."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:8
@@ -1052,7 +1053,7 @@ msgstr "I tuoi soldati hanno occupato la tua torre."
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:61
 msgctxt "frisians_building"
 msgid "Your tower discovered an aggressor."
-msgstr "La tua torre ha scoperto un aggressore."
+msgstr "Nella tua torre è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:63
@@ -1088,7 +1089,7 @@ msgstr "I tuoi soldati hanno occupato la tua torre di legno."
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:65
 msgctxt "frisians_building"
 msgid "Your wooden tower discovered an aggressor."
-msgstr "La tua torre di legno ha scoperto un aggressore."
+msgstr "Nella tua torre di legno è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:67
@@ -1124,7 +1125,7 @@ msgstr "I tuoi soldati hanno occupato la tua torre di legno alta."
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:45
 msgctxt "frisians_building"
 msgid "Your high wooden tower discovered an aggressor."
-msgstr "La tua torre di legno alta ha scoperto un aggressore."
+msgstr "Nella tua torre di legno alta è stato scoperto un aggressore."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:47
@@ -1162,7 +1163,7 @@ msgstr "Smantella il sito"
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Plantation"
-msgstr ""
+msgstr "Piantagione di manioca"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
@@ -1248,12 +1249,12 @@ msgstr "sta lavorando"
 #. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
 msgid "planting cassava"
-msgstr ""
+msgstr "piantare manioca"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
 msgid "harvesting cassava"
-msgstr ""
+msgstr "raccogliendo manioca"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
@@ -1266,7 +1267,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:100
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:81
 msgid "No Fields"
-msgstr "Nessuno spazio libero"
+msgstr "Nessun terreno libero"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:73
@@ -1279,22 +1280,21 @@ msgstr "Nessuno spazio libero"
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:101
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
 msgid "Out of Fields"
-msgstr "Campi esauriti"
+msgstr "Terreni esauriti"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:68
 msgctxt "amazons_building"
 msgid ""
 "The farmer working at this cassava plantation has no cleared soil to plant "
 "her seeds."
-msgstr ""
+msgstr "Il contadino che lavoro in questa piantagione di manioca non ha terreno libero dove piantare i suoi semi."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
-msgstr ""
+msgstr "Cucina di radici di manioca"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1711,7 +1711,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1746,8 +1745,6 @@ msgstr "sta producendo un piccone"
 msgid "making a machete"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1758,7 +1755,6 @@ msgstr ""
 msgid "making kitchen tools"
 msgstr "sta producendo degli utensili da cucina"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1774,11 +1770,11 @@ msgstr "sta producendo un martello"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:149
 msgid "making a chisel"
-msgstr ""
+msgstr "produzione di uno scalpello"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1932,7 +1928,6 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
@@ -2241,7 +2236,7 @@ msgstr "Casa della guardia forestale"
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Gold Spinning Mill"
-msgstr "Mulino di tessitura dell'oro"
+msgstr "Stabilimento di filatura dell'oro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:48
@@ -2574,7 +2569,7 @@ msgstr "sta forgiando un tridente doppio pesante"
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Weaving Mill"
-msgstr "Mulino di tessitura"
+msgstr "Stabilimento tessile"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because
 #. ...
@@ -2616,7 +2611,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Il boscaiolo che lavora in questa capanna non riesce trovare nessun albero nella sua area di lavoro. Dovresti considerare la possibilità di smantellare o distruggere l'edificio o costruire una capanna per la guardia forestale."
+msgstr "Il taglialegna che lavora in questa capanna non riesce a trovare nessun albero nella sua area di lavoro. Dovresti considerare la possibilità di smantellare o distruggere l'edificio o costruire una capanna per la guardia forestale."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -2994,7 +2989,7 @@ msgstr "Cava"
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Il tagliapietre al lavoro in questa cava non ha nessuna pietra nella sua area di lavoro"
+msgstr "Lo scalpellino al lavoro in questa cava non ha nessuna pietra nella sua area di lavoro"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
@@ -3079,7 +3074,7 @@ msgstr "sta forgiando un'ascia da guerriero"
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:8
 msgctxt "barbarians_building"
 msgid "Weaving Mill"
-msgstr "Mulino di tessitura"
+msgstr "Stabilimento tessile"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:52
@@ -3417,7 +3412,7 @@ msgstr "sta estraendo del marmo"
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Il tagliapietre al lavoro in questa cava non ha nessuna pietra nella sua area di lavoro"
+msgstr "Lo scalpellino al lavoro in questa cava non ha nessuna pietra nella sua area di lavoro"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:8
@@ -3458,7 +3453,7 @@ msgstr "Fonderia"
 #: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:8
 msgctxt "empire_building"
 msgid "Stonemason’s House"
-msgstr "Casa del tagliapietre"
+msgstr "Casa dello scalpellino"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
@@ -3548,7 +3543,7 @@ msgstr "sta forgiando una lancia da guerra"
 #: ../../data/tribes/buildings/productionsites/empire/weaving_mill/init.lua:8
 msgctxt "empire_building"
 msgid "Weaving Mill"
-msgstr "Mulino di tessitura"
+msgstr "Stabilimento tessile"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:8
@@ -3693,7 +3688,7 @@ msgstr "piantare dei cespugli"
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:8
 msgctxt "frisians_building"
 msgid "Blacksmithy"
-msgstr "Fucina"
+msgstr "Bottega del fabbro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
@@ -4017,7 +4012,7 @@ msgstr "Cava"
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Il tagliapietre al lavoro in questa cava non ha nessuna pietra nella sua area di lavoro"
+msgstr "Lo scalpellino che lavora in questa cava non trova alcuna pietra nella sua area di lavoro"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:8
@@ -4171,7 +4166,7 @@ msgstr "la preparazione di razioni"
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:8
 msgctxt "frisians_building"
 msgid "Weaving Mill"
-msgstr "Mulino di tessitura"
+msgstr "Stabilmento tessile"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:70
@@ -4201,7 +4196,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "Il taglialegna che lavora in questa capanna non riesce a trovare nessun albero nella sua area di lavoro. Dovresti considerare la possibilità di smantellare o distruggere l'edificio o costruire una capanna per la guardia forestale."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
@@ -5288,6 +5283,7 @@ msgstr ""
 msgid "Balsa Tree (Pole)"
 msgstr ""
 
+#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5719,43 +5715,43 @@ msgstr "Frisoni"
 msgid "The inhabitants of the rough North Sea shore."
 msgstr ""
 
-#: ../../data/tribes/scripting/help/init.lua:84
+#: ../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
 msgstr "Enciclopedia tribale"
 
-#: ../../data/tribes/scripting/help/init.lua:89
+#: ../../data/tribes/scripting/help/init.lua:90
 msgid "General"
 msgstr "Generale"
 
-#: ../../data/tribes/scripting/help/init.lua:94
+#: ../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
 msgstr "Introduzione"
 
-#: ../../data/tribes/scripting/help/init.lua:100
+#: ../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
 msgstr "Controlli"
 
-#: ../../data/tribes/scripting/help/init.lua:106
+#: ../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
 msgstr "Suggerimenti"
 
-#: ../../data/tribes/scripting/help/init.lua:115
+#: ../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
 msgstr "Merci"
 
-#: ../../data/tribes/scripting/help/init.lua:122
+#: ../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
 msgstr "Lavoratori"
 
-#: ../../data/tribes/scripting/help/init.lua:129
+#: ../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
 msgstr "Edifici"
 
-#: ../../data/tribes/scripting/help/init.lua:136
+#: ../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/init.lua:143
+#: ../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
 msgstr ""
 
@@ -8799,7 +8795,7 @@ msgstr "Soldato"
 #: ../../data/tribes/workers/amazons/stone_carver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stone Carver"
-msgstr ""
+msgstr "Intagliatore"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stonecutter/init.lua:8
@@ -8841,7 +8837,7 @@ msgstr "Taglialegna"
 #: ../../data/tribes/workers/amazons/woodcutter_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Master Woodcutter"
-msgstr ""
+msgstr "Mastro taglialegna"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #. descname = pgettext("empire_worker", "Fisher"),
@@ -9267,7 +9263,7 @@ msgstr "Soldato"
 #: ../../data/tribes/workers/barbarians/stonemason/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Stonemason"
-msgstr "Tagliapietre"
+msgstr "Scalpellino"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/trainer/init.lua:8
@@ -9447,7 +9443,7 @@ msgstr "Soldato"
 #: ../../data/tribes/workers/empire/stonemason/init.lua:8
 msgctxt "empire_worker"
 msgid "Stonemason"
-msgstr "Tagliapietre"
+msgstr "Scalpellino"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/toolsmith/init.lua:8
@@ -9693,7 +9689,7 @@ msgstr "Soldato"
 #: ../../data/tribes/workers/frisians/stonemason/init.lua:8
 msgctxt "frisians_worker"
 msgid "Stonemason"
-msgstr "Tagliapietre"
+msgstr "Scalpellino"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/trainer/init.lua:8

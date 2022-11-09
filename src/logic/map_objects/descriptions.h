@@ -66,6 +66,7 @@ public:
 
 	bool building_exists(const std::string& buildingname) const;
 	bool building_exists(DescriptionIndex index) const;
+	bool immovable_exists(const std::string& immoname) const;
 	bool immovable_exists(DescriptionIndex index) const;
 	bool ship_exists(DescriptionIndex index) const;
 	bool tribe_exists(const std::string& tribename) const;
@@ -74,6 +75,8 @@ public:
 	bool ware_exists(DescriptionIndex index) const;
 	bool worker_exists(const std::string& workername) const;
 	bool worker_exists(DescriptionIndex index) const;
+	bool terrain_exists(const std::string& terrainname) const;
+	bool terrain_exists(DescriptionIndex index) const;
 
 	/// Returns the index for 'buildingname' and throws an exception if the building can't be found.
 	/// This function is safe for map/savegame compatibility.

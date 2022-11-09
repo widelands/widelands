@@ -5,6 +5,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # Elisabeth Jäger, 2015
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Elisabeth Jäger, 2015\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,7 +94,7 @@ msgid ""
 "not discovered our movements yet. Perhaps we have a chance of conquering "
 "that mighty building without a bigger fight! However, it is essential that "
 "we capture it. It will be the key to our reign over this island!"
-msgstr "̣Lasst uns hoffen, dass Lanissa – die Herrin dieser Burg – uns nicht entdeckt hat. Vielleicht haben wir so die Chance, das mächtige Gebäude ohne einen größeren Kampf zu erobern! Trotz allem, es ist höchst wichtig, dass wir sie bekommen. Sie wird der Schlüssel zur Macht über diese Insel sein!"
+msgstr "Lasst uns hoffen, dass Lanissa – die Herrin dieser Burg – uns nicht entdeckt hat. Vielleicht haben wir so die Chance, das mächtige Gebäude ohne einen größeren Kampf zu erobern! Trotz allem, es ist höchst wichtig, dass wir sie bekommen. Sie wird der Schlüssel zur Macht über diese Insel sein!"
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
 msgid "Ancient Castle Captured"

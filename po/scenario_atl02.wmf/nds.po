@@ -79,11 +79,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:58
 msgid "Ensure the supply of construction materials"
-msgstr "Seker de Versörgung mit Baumaterialien"
+msgstr "Seker de Versörgung mit Baukraam"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:60
 msgid "Establish Basic Production Chain"
-msgstr "Baumaterialien-Produzerens-Ketten inrichten"
+msgstr "Baukraam-Produzerens-Ketten inrichten"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:61
 msgid ""
@@ -496,9 +496,9 @@ msgid ""
 "possible to our current position."
 msgstr ""
 "Wi hebben nich mehr vööl Water över; uns’ Eten word knapp; wi hebben all "
-"uns’ Warktüüg un dat Meest vun uns’ Baumaterialien mit de darden Schipp "
-"verloren. Wi könen eenfach nich wieder sailen un mutten vun Nood up deeser "
-"Insel lannen – so dicht bi uns’ aktuelle Stee as wi könen."
+"uns’ Warktüüg un dat Meest vun uns’ Baukraam mit de darden Schipp verloren. "
+"Wi könen eenfach nich wieder sailen un mutten vun Nood up deeser Insel "
+"lannen – so dicht bi uns’ aktuelle Stee as wi könen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:234
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:242
@@ -532,8 +532,8 @@ msgid ""
 "of trees, we might not even need foresters. But we need stone, that much is "
 "certain!"
 msgstr ""
-"Aver wi mutten uns um Baumaterialien kümmern: De Insel is vull vun Bomen, so"
-" dat wi villicht nich eenmaal Försters bruken. Aver wi bruken Steen, dat is "
+"Aver wi mutten uns um Baukraam kümmern: De Insel is vull vun Bomen, so dat "
+"wi villicht nich eenmaal Försters bruken. Aver wi bruken Steen, dat is "
 "klaar!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:251
@@ -558,7 +558,7 @@ msgid ""
 "When we no longer need a building, we will dismantle it instead of burning "
 "it down."
 msgstr ""
-"Aver wi mutten vörsichtig wesen, wo wi de Stenen un anner düres Material "
+"Aver wi mutten vörsichtig wesen, wo wi de Stenen un anner düür Baukraam "
 "bruken. Wenn wi een Huus nich mehr bruken, worden wi ’t plattrieten un nich "
 "ofbrannen."
 
@@ -568,8 +568,8 @@ msgid ""
 "This will take more time, but we can reuse some of its materials. Also, I "
 "want a scout deployed and exploring at all times."
 msgstr ""
-"Dat düürt langer, aver wi könen eenige vun sienen Materialien weer bruken. "
-"Un ick will ok, dat een Bespejer to all Tieden de Kuntrei utförsket."
+"Dat düürt langer, aver wi könen eenigs vun sienem Kraam weer bruken. Un ick "
+"will ok, dat een Bespejer to all Tieden de Kuntrei utförsket."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -756,15 +756,14 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:383
 msgid "Building Material Ensured"
-msgstr "Baumaterialien sekert"
+msgstr "Baukraam sekert"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:386
 #, lua-format
 msgid ""
 "May Satul warm you, %s! We have finished our supply of building materials."
-msgstr ""
-"%s, Satuul sall Jo warmen! Uns’ Versörgung mit Baumaterialien is kumpleet."
+msgstr "%s, Satuul sall Jo warmen! Uns’ Versörgung mit Baukraam is kumpleet."
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:393

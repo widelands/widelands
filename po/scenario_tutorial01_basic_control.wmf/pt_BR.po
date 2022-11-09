@@ -459,21 +459,21 @@ msgstr "Como construir uma pedreira"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:323
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr ""
+msgstr "Construa uma pedreira ao lado dessas rochas aqui.  Lembra como eu fiz isso antes?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:324
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr ""
+msgstr "Certifique-se de que você está mostrando os espaços do edifício, então basta clicar no espaço onde você deseja que o edifício esteja, escolha-o na janela que aparece e ele é colocado."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:325
 msgid ""
 "You can build four things on fields in Widelands: flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
-msgstr ""
+msgstr "Você pode construir quatro coisas em campos em Widelands: bandeiras, casas pequenas, casas médias e casas grandes.  Mas nem todos os campos podem conter tudo.  Os símbolos do espaço de construção facilitam o reconhecimento:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:326
 msgid "Everything can be built on the green house symbol."
@@ -490,7 +490,7 @@ msgstr "Símbolos de edifícios vermelhos podem apenas permitir a construção d
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:329
 msgid "And finally, the yellow flag symbol only allows for flags."
-msgstr ""
+msgstr "E, finalmente, o símbolo da bandeira amarela só permite bandeiras."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:330
 msgid ""
@@ -503,7 +503,7 @@ msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting the"
 " abort symbol."
-msgstr ""
+msgstr "Se você decidir que não deseja construir uma estrada neste momento, você pode cancelar a construção da estrada clicando na bandeira inicial da estrada e selecionando o símbolo de abortar."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:339
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
@@ -517,13 +517,13 @@ msgid ""
 "Excellent! Directly after placing the building, you have been switched into "
 "road building mode. The new road will start at the flag in front of your "
 "newly placed construction site."
-msgstr ""
+msgstr "Excelente!  Imediatamente após a colocação do edifício, você passou para o modo de construção de estradas.  A nova estrada começará na bandeira em frente ao seu local de construção recém-instalado."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid ""
 "You can enter road building mode for any flag by left-clicking on a flag and"
 " selecting the road building symbol."
-msgstr ""
+msgstr "Você pode entrar no modo de construção de estrada para qualquer bandeira clicando com o botão esquerdo em uma bandeira e selecionando o símbolo de construção de estrada."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:344
 msgid ""
@@ -531,25 +531,25 @@ msgid ""
 "you just ordered the quarry. You can either make it longer by one field at a"
 " time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
-msgstr ""
+msgstr "Agora, sobre esta estrada.  Lembre-se: já estamos no modo de construção de estradas desde que você acabou de encomendar a pedreira.  Você pode aumentá-lo por um campo de cada vez clicando com o botão esquerdo várias vezes nos campos vizinhos para obter um controle perfeito sobre a rota que a estrada toma, assim:pedreira"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:355
 msgid ""
 "Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select the road building symbol."
-msgstr ""
+msgstr "Excelente!  Para entrar no modo de construção de estrada para qualquer bandeira, clique com o botão esquerdo em uma bandeira e selecione o símbolo de construção de estrada."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:357
 msgid ""
 "Now, about this road. I’ll enter the road building mode and then make it "
 "longer by one field at a time by left-clicking multiple times on neighboring"
 " fields for perfect control over the route the road takes, like so:"
-msgstr ""
+msgstr "Agora, sobre esta estrada.  Vou entrar no modo de construção de estradas e, em seguida, torná-lo mais longo em um campo de cada vez clicando com o botão esquerdo várias vezes nos campos vizinhos para controle perfeito sobre a rota que a estrada toma, assim:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:367
 msgid ""
 "Or, you can directly click the flag where the road should end, like so:"
-msgstr ""
+msgstr "Ou você pode clicar diretamente na bandeira onde a estrada deve terminar, assim:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:374
 msgid "Connect the quarry to the headquarters"
@@ -562,7 +562,7 @@ msgstr "Conecte seu canteiro de obras"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Conecte seu canteiro de obras à sua sede com uma estrada."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:378
 msgid ""
@@ -575,7 +575,7 @@ msgstr "Para construir uma estrada completamente nova basta clicar na bandeira e
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "Se você segurar Ctrl ou Shift+Ctrl enquanto termina a estrada, as bandeiras são colocadas automaticamente."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:386
 msgid ""
@@ -605,29 +605,29 @@ msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr ""
+msgstr "Lembre-se das encostas ao colocar as estradas e use-as a seu favor.  Além disso, tente manter as estradas o mais curtas possível e lembre-se sempre de colocar o máximo de bandeiras que puder nos segmentos da estrada para compartilhar melhor a carga."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:396
 msgid "Quarry not Connected"
-msgstr ""
+msgstr "A pedreira não está conectada "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "Seus trabalhadores não gostam de atravessar o país.  Você tem que construir uma estrada da sua sede até o canteiro de obras para que os transportadores possam transportar mercadorias."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 msgid "You Destroyed the Construction Site!"
-msgstr ""
+msgstr "Você destruiu o canteiro de obras!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:407
 msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
 "build. Luckily, we still have enough logs left this time, so you can simply "
 "build another one."
-msgstr ""
+msgstr "Parece que você destruiu um canteiro de obras para uma pedreira que queríamos construir.  Felizmente, ainda temos madeira suficiente desta vez, então você pode simplesmente construir outro."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid ""
@@ -635,46 +635,46 @@ msgid ""
 "created from time to time. To do so, you will have to go back to the main "
 "menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more "
 "careful next time."
-msgstr ""
+msgstr "Você também pode recarregar o jogo apartir de um jogo salvo anteriormente.  Felizmente, eles são criados de tempos em tempos.  Para fazer isso, você terá que voltar ao menu principal e escolher ‘Um jogador' → ‘Carregar jogo’.  E, por favor, seja um pouco mais cuidadoso da próxima vez."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:418
 msgid "Build another quarry"
-msgstr ""
+msgstr "Construir outra pedreira"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:419
 msgid ""
 "Build a second quarry near the rocks and connect it to your road network."
-msgstr ""
+msgstr "Construa uma segunda pedreira perto das rochedos e conecte-a à sua rede estradas."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:420
 msgid ""
 "You can connect the new road to any flag of your existing road network. You "
 "can create junctions everywhere, not only in front of buildings."
-msgstr ""
+msgstr "Você pode conectar a nova estrada a qualquer bandeira da sua rede estradas existente.  Você pode criar cruzamentos em todos os lugares, não apenas na frente de prédios."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:425
 msgid "Build a second quarry"
-msgstr ""
+msgstr "Construir uma segunda pedreira"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:427
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr ""
+msgstr "Quando há muitas rochas, você pode considerar a construção de outra pedreira.  Isso tornará a produção de granito mais rápida."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid "Census and Status"
-msgstr ""
+msgstr "Censo e Estatisticas"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "Enquanto esperamos, mostrarei rapidamente outro recurso útil.  Às vezes é difícil distinguir todos os edifícios.  Widelands oferece um recurso para mostrar textos de etiquetas chamado 'censo' sobre os edifícios."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #, lua-format
@@ -682,16 +682,16 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Para mostrar ou ocultar os rótulos do censo de construção, você pode selecionar a entrada 'Mostrar Censo' / 'Ocultar Censo' no menu 'Mostrar/Ocultar' na parte inferior ou pressionar a tecla ‘%s’  no teclado."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
-msgstr ""
+msgstr "Deixe-me habilitar o censo para você."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
 msgid "Show the building status"
-msgstr ""
+msgstr "Mostrar o estado do edifício"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format

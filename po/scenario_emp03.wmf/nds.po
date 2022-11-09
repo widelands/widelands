@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2021
+# Benedikt Straub <benedikt-straub@web.de>, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2022\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,8 +66,7 @@ msgid ""
 "material supply chain."
 msgstr ""
 "Bau eene Boomhaueree, eene Saagmöhlen un een Steenbickerhuus, sobold daar "
-"genoog Rüümte för daar is. Dann is de Versörgung mit eenfachen "
-"Baumaterialien seker."
+"genoog Rüümte för daar is. Dann is de Versörgung mit eenfach Baukraam seker."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
@@ -341,8 +340,8 @@ msgid ""
 "trees. I fear we won’t find the resources we need to build a new ship."
 msgstr ""
 "Un ’t is noch slimmer: All dat Land, wat wi sehn könen, is mit Stenen un "
-"Bomen dichtmüürt. Ick bün bang, dat wi de nödigen Materialien, de wi bruken,"
-" um een nejes Schipp to bauen, nich finnen könen."
+"Bomen dichtmüürt. Ick bün bang, dat wi de nödigen Kraam, de wi bruken, um "
+"een nejes Schipp to bauen, nich finnen könen."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:221
@@ -388,9 +387,8 @@ msgid ""
 "restrictive in spending them. Even for military buildings, we should be very"
 " careful."
 msgstr ""
-"Wi weten nich, wo völe Materialien wi kriegen könen, also sallen wi blot "
-"nich to vööle verklüngeln. Ok för Soldateree-Boen mutten wi leep good "
-"uppassen."
+"Wi weten nich, wo vööl Kraam wi kriegen könen, also sallen wi blot nich to "
+"vööl verklüngeln. Ok för Soldateree-Boen mutten wi leep good uppassen."
 
 #. TRANSLATORS: Message header - Saledus is advising to save resources
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:246
@@ -408,8 +406,8 @@ msgid ""
 "should only build an outpost as this is the most effective military "
 "building."
 msgstr ""
-"Mienheer, Amalee’ hett Recht över de Materialien. Ick änner mienen Raad. Wi "
-"sallen blot eene Butenstee bauen, wat de goodkopenste Soldateree-Boo is."
+"Mienheer, Amalee’ hett Recht över de Kraam. Ick änner mienen Raad. Wi sallen"
+" blot eene Butenstee bauen, wat de goodkopenste Soldateree-Boo is."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:257
 msgid "Rocks, Nothing but Rocks"
@@ -502,7 +500,7 @@ msgid ""
 "then build up a basic construction material industry."
 msgstr ""
 "Villicht is ’t eene gode Idee, to wachten, bit ’t wat Rüümte freei maakt "
-"hett, un dann eene eenfache Weertskupp för Baumaterialien uptobauen."
+"hett, un dann eene eenfache Weertskupp för Baukraam uptobauen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:300
 msgid "Amalea’s Recommendations"
@@ -764,8 +762,8 @@ msgid ""
 "Now that we have all resources ready for building a ship, we should explore "
 "the surrounding islands."
 msgstr ""
-"Nu dat wi alle Materialien paraat hebben, um een Schipp to bauen, sallen wi "
-"de Inseln umto utförsken."
+"Nu dat wi all de Kraam paraat hebben, um een Schipp to bauen, sallen wi de "
+"Inseln umto utförsken."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:418
@@ -931,7 +929,7 @@ msgid ""
 "in the economy settings is reached."
 msgstr ""
 "Hunnert bit hier. Nu produzeren wi nich mehr Marmelpielers as wi bruken. Ick"
-" gloov, wi  bruken deese Weertskupp-Instellens würrelk mennigmaal, um uns’ "
+" gloov, wi bruken deese Weertskupp-Instellens würrelk mennigmaal, um uns’ "
 "Weertskupp beter to maken. Vergeet nich, uns’ Husen arbeiden blot bit de "
 "End-Tahl in uns’ Weertskupp-Instellens wunnen is."
 

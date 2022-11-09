@@ -41,11 +41,11 @@ msgstr "Us donem la benvinguda al Widelands!"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr "El Widelands és un joc d'estratègia de ritme lent que posa l'èmfasi en la construcció en lloc de la destrucció."
+msgstr "El Widelands és un joc d’estratègia de ritme lent que posa l’èmfasi en la construcció en lloc de la destrucció."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "You will be guided through this tutorial by objectives."
-msgstr "En aquest tutorial, se us guiarà a través d'objectius."
+msgstr "En aquest tutorial, se us guiarà a través d’objectius."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Objectives and how to handle them"
@@ -59,7 +59,7 @@ msgstr "Ús de a finestra «Objectius»"
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr "Podeu obrir i tancar la finestra «Objectius» fent clic en el botó «Objectius» de la barra d'eines de la part inferior de la pantalla."
+msgstr "Podeu obrir i tancar la finestra «Objectius» fent clic en el botó «Objectius» de la barra d’eines de la part inferior de la pantalla."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
@@ -108,7 +108,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have different "
 "economies, strengths, and weaknesses, but the general gameplay is the same "
 "for all. We will play the Barbarians for now."
-msgstr "Hi ha cinc cultures diferents en el Widelands: els bàrbars, l'imperi, els atlants, els frisons i les amazones. Cada cultura té uns determinats punts forts i punts fluixos, així com economies productives diferents. Però el joc és en general igual per a tots. De moment, escollim jugar amb els bàrbars."
+msgstr "Hi ha cinc cultures diferents en el Widelands: els bàrbars, l’imperi, els atlants, els frisons i les amazones. Cada cultura té uns determinats punts forts i punts fluixos, així com economies productives diferents. Però el joc és en general igual per a tots. De moment, escollim jugar amb els bàrbars."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
@@ -120,7 +120,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr "Generalment, cada jugador comença la partida amb un quarter general. És l'edifici gran amb la bandera blava al davant. El quarter general guarda els béns, els treballadors i els soldats que no s'empren. Alguns béns són necessaris per construir cases o altres béns derivats. És obvi que els béns inicials no duraran per sempre: cal reposar-los. Els béns o mercaderies més importants al principi de la partida són els relacionats amb la construcció: troncs i granit. És molt important no que no ens quedéssim sense troncs. Per això, necessitem un llenyataire i una cabana per viure-hi."
+msgstr "Generalment, cada jugador comença la partida amb un quarter general. És l’edifici gran amb la bandera blava al davant. El quarter general guarda els béns, els treballadors i els soldats que no s’empren. Alguns béns són necessaris per construir cases o altres béns derivats. És obvi que els béns inicials no duraran per sempre: cal reposar-los. Els béns o mercaderies més importants al principi de la partida són els relacionats amb la construcció: troncs i granit. És molt important no que no ens quedéssim sense troncs. Per això, necessitem un llenyataire i una cabana per viure-hi."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -138,7 +138,7 @@ msgstr "Us ensenyaré on està el menú i com es mostren i amaguen els espais de
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr "Ara que us he mostrat des d'on podeu mostrar i amagar els espais de construcció, mostreu-los per tal de construir un edifici."
+msgstr "Ara que us he mostrat des d’on podeu mostrar i amagar els espais de construcció, mostreu-los per tal de construir un edifici."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:86
 msgid "Lumberjack’s Spot"
@@ -150,7 +150,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr "Ja ho teniu. Ara deixeu-me mostrar-vos com fer una cabana de llenyataire i com connectar-la amb un camí. Hi ha una àrea lliure al costat d'aquests arbres per talar. Descriuré els passos a realitzar i després us ho mostraré."
+msgstr "Ja ho teniu. Ara deixeu-me mostrar-vos com fer una cabana de llenyataire i com connectar-la amb un camí. Hi ha una àrea lliure al costat d’aquests arbres per talar. Descriuré els passos a realitzar i després us ho mostraré."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
@@ -166,7 +166,7 @@ msgstr "Primer, faré clic esquerre en el símbol on vull que es construeixi la 
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr "La cabana del llenyataire és un edifici petit, així que buscaré la pestanya dels edificis petits i escolliré l'edifici corresponent."
+msgstr "La cabana del llenyataire és un edifici petit, així que buscaré la pestanya dels edificis petits i escolliré l’edifici corresponent."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:121
@@ -179,7 +179,7 @@ msgid ""
 "of my road network. After ordering the construction site, I was "
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
-msgstr "Això encara no és suficient. Encara necessito connectar la cabana del llenyataire amb la meva xarxa de camins. Després d'ordenar la construcció de l'obra, automàticament es va seleccionar el mode de construcció de camins, de manera que tot el que he de fer és clicar en la bandera blava del davant del quarter general."
+msgstr "Això encara no és suficient. Encara necessito connectar la cabana del llenyataire amb la meva xarxa de camins. Després d’ordenar la construcció de l’obra, automàticament es va seleccionar el mode de construcció de camins, de manera que tot el que he de fer és clicar en la bandera blava del davant del quarter general."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:125
 msgid ""
@@ -189,20 +189,20 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr "Això encara no és suficient. Encara necessito connectar la cabana del llenyataire amb la meva xarxa de camins. Heu desactivat l'opció de «Comença a construir camins després de plantar una bandera» (per canviar-ho, escolliu «Opcions» en el menú principal del Widelands). Per tant, he entrat al mode de construcció de camins manualment. Us diré després com fer-ho. Per construir el camí, tot el que he de fer ara és clicar la bandera blava del davant del quarter general."
+msgstr "Això encara no és suficient. Encara necessito connectar la cabana del llenyataire amb la meva xarxa de camins. Heu desactivat l’opció de «Comença a construir camins després de plantar una bandera» (per canviar-ho, escolliu «Opcions» en el menú principal del Widelands). Per tant, he entrat al mode de construcció de camins manualment. Us diré després com fer-ho. Per construir el camí, tot el que he de fer ara és clicar la bandera blava del davant del quarter general."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:133
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:212
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr "Esperant que s'acabi de construir la cabana del llenyataire"
+msgstr "Esperant que s’acabi de construir la cabana del llenyataire"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:137
 msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr "Ara mireu més a prop mentre el constructor surt del quarter general i va cap a l'obra en construcció. A més a més, un transportista se situarà entre les dues banderes blaves i portarà béns d'una bandera a l'altra."
+msgstr "Ara mireu més a prop mentre el constructor surt del quarter general i va cap a l’obra en construcció. A més a més, un transportista se situarà entre les dues banderes blaves i portarà béns d’una bandera a l’altra."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Build a flag to divide the road to the lumberjack"
@@ -217,7 +217,7 @@ msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr "Com més curts siguin els segments, més ràpidament es transportaran els béns. Per tant, hauríeu d'assegurar-vos que els camins tinguin tantes banderes com sigui possible."
+msgstr "Com més curts siguin els segments, més ràpidament es transportaran els béns. Per tant, hauríeu d’assegurar-vos que els camins tinguin tantes banderes com sigui possible."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:149
 msgid ""
@@ -240,7 +240,7 @@ msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road. You try it this time."
-msgstr "Estan treballant bé, oi? Però el pobre transportista té un llarg camí per fer. Podem fer-li'l més fàcil (i més eficient per a nosaltres) ubicant una altra bandera blava en el camí. Proveu-ho."
+msgstr "Estan treballant bé, oi? Però el pobre transportista té un llarg camí per fer. Podem fer-li’l més fàcil (i més eficient per a nosaltres) ubicant una altra bandera blava en el camí. Proveu-ho."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:171
 msgid ""
@@ -253,7 +253,7 @@ msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr "Ara s'ha dividit el camí en dues parts amb un transportista a cada tros. Això significa menys treball per a ells i una millor eficiència per a nosaltres. A partir d'ara, hauries de plantar tantes banderes als teus camins com et sigui possible."
+msgstr "Ara s’ha dividit el camí en dues parts amb un transportista a cada tros. Això significa menys treball per a ells i una millor eficiència per a nosaltres. A partir d’ara, hauries de plantar tantes banderes als teus camins com et sigui possible."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
@@ -263,34 +263,34 @@ msgstr "Vegem-ne el progrés"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:183
 msgid "Click on the construction site to have a look at it."
-msgstr "Feu clic al lloc de construcció per veure'l."
+msgstr "Feu clic al lloc de construcció per veure’l."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:200
 msgid "The Construction Site"
-msgstr "L'obra en construcció"
+msgstr "L’obra en construcció"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:193
 msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr "Si feu clic a l'obra en construcció, s'obre una finestra. Hi podreu veure els recursos que encara falten amb un to grisós. També podreu veure el progrés d'aquesta obra."
+msgstr "Si feu clic a l’obra en construcció, s’obre una finestra. Hi podreu veure els recursos que encara falten amb un to grisós. També podreu veure el progrés d’aquesta obra."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:204
 msgid ""
 "This button toggles showing the building’s work area. When the lumberjack "
 "leaves the building to look for trees to fell, he will only look for them "
 "within this area. Let me show you how perfect this spot is."
-msgstr "El botó mostra o amaga l'àrea de treball de l'edifici. Quan el llenyataire surt de l'edifici per buscar arbres que talar, només buscarà dins d'aquesta àrea. Deixeu-me mostrar-vos perquè aquest lloc és ideal."
+msgstr "El botó mostra o amaga l’àrea de treball de l’edifici. Quan el llenyataire surt de l’edifici per buscar arbres que talar, només buscarà dins d’aquesta àrea. Deixeu-me mostrar-vos perquè aquest lloc és ideal."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
 msgid "Close the construction site window when you have seen enough."
-msgstr "Tanqueu la finestra del lloc de construcció quan ja n'hagueu observat la informació."
+msgstr "Tanqueu la finestra del lloc de construcció quan ja n’hagueu observat la informació."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:215
 msgid "Well done! Let’s wait till the hut is finished."
-msgstr "Ben fet! Esperem fins que s'acabi de construir la cabana."
+msgstr "Ben fet! Esperem fins que s’acabi de construir la cabana."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:217
 msgid ""
@@ -311,7 +311,7 @@ msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the granite."
-msgstr "Excel·lent! La cabana del llenyataire ja està feta. Un llenyataire s'hi posarà a viure i començarà a talar arbres, de manera que el subministrament de troncs està assegurat per ara. Ara, aconseguirem granit."
+msgstr "Excel·lent! La cabana del llenyataire ja està feta. Un llenyataire s’hi posarà a viure i començarà a talar arbres, de manera que el subministrament de troncs està assegurat per ara. Ara, aconseguirem granit."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid "Moving the View"
@@ -346,7 +346,7 @@ msgstr "La tercera és emprar el minimapa. És especialment útil per desplaçar
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid "Some Rocks Were Found"
-msgstr "S'han trobat algunes roques"
+msgstr "S’han trobat algunes roques"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:252
 msgid "Getting a Quarry Up"
@@ -358,7 +358,7 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "El granit pot extraure's de les mines de granit, però la forma més fàcil és construir una pedrera on hi hagi roques al voltant. Resulta que n'hi ha una bona pila a l'oest (cap a l'esquerra) del quarter general. Us ensenyaré ara com moure la vista cap allí."
+msgstr "El granit pot extraure’s de les mines de granit, però la forma més fàcil és construir una pedrera on hi hagi roques al voltant. Resulta que n’hi ha una bona pila a l’oest (cap a l’esquerra) del quarter general. Us ensenyaré ara com moure la vista cap allí."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:261
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
@@ -400,11 +400,11 @@ msgstr "Molt bé. Ara parlem del minimapa."
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr "Podeu obrir la finestra seleccionant l'entrada «Mostra el minimapa» del menú «Vista del mapa» de la part inferior de la pantalla o simplement usant la drecera de teclat «%s»."
+msgstr "Podeu obrir la finestra seleccionant l’entrada «Mostra el minimapa» del menú «Vista del mapa» de la part inferior de la pantalla o simplement usant la drecera de teclat «%s»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid "I will open it for you."
-msgstr "L'obriré jo."
+msgstr "L’obriré jo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:289
 msgid ""
@@ -433,7 +433,7 @@ msgstr "Construïu una pedrera"
 msgid ""
 "There are some rocks to the west of your headquarters. Build a quarry right "
 "next to them."
-msgstr "Hi ha algunes roques a l'oest del vostre quarter general. Construïu una pedrera al costat."
+msgstr "Hi ha algunes roques a l’oest del vostre quarter general. Construïu una pedrera al costat."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:313
 #, lua-format
@@ -447,7 +447,7 @@ msgstr "La pedrera és un edifici petit com la cabana del llenyataire. Es pot co
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr "Feu clic en qualsevol símbol de casa al costat de les roques, seleccioneu la pestanya d'edificis petits en la finestra emergent i, finalment, cliqueu la icona de la pedrera."
+msgstr "Feu clic en qualsevol símbol de casa al costat de les roques, seleccioneu la pestanya d’edificis petits en la finestra emergent i, finalment, cliqueu la icona de la pedrera."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "How to Build a Quarry"
@@ -456,34 +456,34 @@ msgstr "Com construir una pedrera"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:323
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr "Construïu una pedrera aquí, al costat d'aquelles roques. Recordeu com ho he fet abans?"
+msgstr "Construïu una pedrera aquí, al costat d’aquelles roques. Recordeu com ho he fet abans?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:324
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr "Assegureu-vos que s'estan mostrant els espais per construir. Llavors cliqueu en el lloc on construir l'edifici. Després, escolliu el tipus d'edifici a la finestra que apareix. Ja està!"
+msgstr "Assegureu-vos que es mostren els espais per construir. Llavors cliqueu en el lloc on construir l’edifici. Després, escolliu el tipus d’edifici a la finestra que apareix. Ja està!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:325
 msgid ""
 "You can build four things on fields in Widelands: flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
-msgstr "Podeu construir cinc coses a les parcel·les: camins, banderes i cases petites, mitjanes o grans. Però, en algunes parcel·les hi ha algunes restriccions a l'hora de construir. Els símbols de les zones de construcció us indiquen aquesta informació:"
+msgstr "Podeu construir cinc coses a les parcel·les: camins, banderes i cases petites, mitjanes o grans. Però, en algunes parcel·les hi ha algunes restriccions a l’hora de construir. Els símbols de les zones de construcció us indiquen aquesta informació:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:326
 msgid "Everything can be built on the green house symbol."
-msgstr "Els símbols de casa verda indiquen que s'hi pot construir qualsevol element: edificis grans, mitjans o petits i també banderes."
+msgstr "Els símbols de casa verda indiquen que s’hi pot construir qualsevol element: edificis grans, mitjans o petits i també banderes."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:327
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
-msgstr "Els símbols de casa groga indiquen que només s'hi poden construir edificis mitjans o petits i banderes."
+msgstr "Els símbols de casa groga indiquen que només s’hi poden construir edificis mitjans o petits i banderes."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
 msgid "Red building symbols can only hold small buildings and flags."
-msgstr "Els símbols de cases vermelles indiquen que només s'hi poden construir edificis petits i banderes."
+msgstr "Els símbols de cases vermelles indiquen que només s’hi poden construir edificis petits i banderes."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:329
 msgid "And finally, the yellow flag symbol only allows for flags."
@@ -500,7 +500,7 @@ msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting the"
 " abort symbol."
-msgstr "Si decidiu no construir el camí en aquest moment, se'n pot cancel·lar la construcció clicant la bandera on comença el camí i seleccionant el símbol de cancel·lació."
+msgstr "Si decidiu no construir el camí en aquest moment, se’n pot cancel·lar la construcció clicant la bandera on comença el camí i seleccionant el símbol de cancel·lació."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:339
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
@@ -514,7 +514,7 @@ msgid ""
 "Excellent! Directly after placing the building, you have been switched into "
 "road building mode. The new road will start at the flag in front of your "
 "newly placed construction site."
-msgstr "Excel·lent! Després d'haver situat l'edifici, haurà canviat el mode a construcció de camins. La nova carretera començarà a la bandera del davant de l'obra en construcció."
+msgstr "Excel·lent! Després d’haver situat l’edifici, haurà canviat el mode a construcció de camins. La nova carretera començarà a la bandera del davant de l’obra en construcció."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid ""
@@ -528,7 +528,7 @@ msgid ""
 "you just ordered the quarry. You can either make it longer by one field at a"
 " time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
-msgstr "Ara, a fer el camí. Recordeu que ja estem en mode de construcció de camins, ja que acabeu d'ordenar la construcció de la pedrera. Podeu fer el camí pas a pas per controlar exactament la ruta, com ara:"
+msgstr "Ara, a fer el camí. Recordeu que ja estem en mode de construcció de camins, ja que acabeu d’ordenar la construcció de la pedrera. Podeu fer el camí pas a pas per controlar exactament la ruta, com ara:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:355
 msgid ""
@@ -546,7 +546,7 @@ msgstr "Ara accediré al mode de construcció de camins i el faré més llarg pa
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:367
 msgid ""
 "Or, you can directly click the flag where the road should end, like so:"
-msgstr "O es pot fer clic en la bandera on ha d'acabar el camí, com ara:"
+msgstr "O es pot fer clic en la bandera on ha d’acabar el camí, com ara:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:374
 msgid "Connect the quarry to the headquarters"
@@ -554,7 +554,7 @@ msgstr "Connecteu la pedrera amb el quarter general"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:376
 msgid "Connect Your Construction Site"
-msgstr "Connecta l'obra en construcció"
+msgstr "Connecta l’obra en construcció"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 msgid ""
@@ -566,7 +566,7 @@ msgid ""
 "To build a completely new road, just click on the flag in front of your "
 "construction site, click on the build road icon and then click on the flag "
 "in front of your headquarters. Wait for the completion of the quarry."
-msgstr "Per a construir un camí nou, cliqueu la bandera del davant l'obra en construcció, cliqueu la icona de construcció de camins i llavors cliqueu la bandera del davant del quarter general. Després, un cop haguéssiu construït el camí de la pedrera al quarter, espereu que s'acabi de construir la pedrera."
+msgstr "Per a construir un camí nou, cliqueu la bandera del davant l’obra en construcció, cliqueu la icona de construcció de camins i llavors cliqueu la bandera del davant del quarter general. Després, un cop haguéssiu construït el camí de la pedrera al quarter, espereu que s’acabi de construir la pedrera."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:379
 msgid ""
@@ -578,7 +578,7 @@ msgstr "Si premeu Ctrl o Maj+Ctrl quan acabeu el camí, les banderes es planten 
 msgid ""
 "One more thing: around the field where your road would end, you can see "
 "different markers. They have the following meaning:"
-msgstr "Una cosa més: al voltant del punt on hauria d'acabar el camí, podreu veure diferents marques. Les marques tenen el següent significat:"
+msgstr "Una cosa més: al voltant del punt on hauria d’acabar el camí, podreu veure diferents marques. Les marques tenen el següent significat:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:387
 msgid ""
@@ -595,14 +595,14 @@ msgstr "Hi ha un petit pendent a pujar per arribar fins aquí. Això significa q
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
-msgstr "La connexió entre els dos extrems és molt empinada. L'increment de velocitat en una direcció és enorme, mentre que l'alentiment en l'altra també és molt important."
+msgstr "La connexió entre els dos extrems és molt empinada. L’increment de velocitat en una direcció és enorme, mentre que l’alentiment en l’altra també és molt important."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:390
 msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr "Heu de tenir en compte els pendents quan féssiu camins i aprofitar-los. També heu d'intentar mantenir els camins curts i plantar-hi banderes per fer els segments dels camins com més curts millor. Això permetrà als transportistes mantenir una càrrega de treball més elevada."
+msgstr "Heu de tenir en compte els pendents quan féssiu camins i aprofitar-los. També heu d’intentar mantenir els camins curts i plantar-hi banderes per fer els segments dels camins com més curts millor. Això permetrà als transportistes mantenir una càrrega de treball més elevada."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:396
 msgid "Quarry not Connected"
@@ -613,11 +613,11 @@ msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr "Als vostres treballadors no els agrada transportar i caminar pels prats. Haureu de construir un camí del quarter a l'obra en construcció perquè els transportistes portin els béns allí on es necessiten."
+msgstr "Als vostres treballadors no els agrada transportar i caminar pels prats. Haureu de construir un camí del quarter a l’obra en construcció perquè els transportistes portin els béns allí on es necessiten."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 msgid "You Destroyed the Construction Site!"
-msgstr "Heu destruït l'obra en construcció!"
+msgstr "Heu destruït l’obra en construcció!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:407
 msgid ""
@@ -632,7 +632,7 @@ msgid ""
 "created from time to time. To do so, you will have to go back to the main "
 "menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more "
 "careful next time."
-msgstr "Podeu recarregar la partida des d'alguna desada anterior. Afortunadament, es creen desades automàtiques cada cert interval de temps. Per fer-ho, torneu al menú principal i escolliu «Un jugador» → «Carrega una partida». I sigueu una mica més curós el proper cop."
+msgstr "Podeu recarregar la partida des d’alguna desada anterior. Afortunadament, es creen desades automàtiques cada cert interval de temps. Per fer-ho, torneu al menú principal i escolliu «Un jugador» → «Carrega una partida». I sigueu una mica més curós el proper cop."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:418
@@ -679,7 +679,7 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr "Per tal de mostrar o amagar les etiquetes dels noms dels edificis de construcció, podeu seleccionar l'entrada «Mostra/Amaga els noms dels edificis» del menú «Mostra/Amaga» que hi ha a la part inferior de la pantalla. També podeu prémer la tecla «%s»."
+msgstr "Per tal de mostrar o amagar les etiquetes dels noms dels edificis de construcció, podeu seleccionar l’entrada «Mostra/Amaga els noms dels edificis» del menú «Mostra/Amaga» que hi ha a la part inferior de la pantalla. També podeu prémer la tecla «%s»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
@@ -688,7 +688,7 @@ msgstr "Deixeu-me mostrar-vos els noms dels edificis."
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
 msgid "Show the building status"
-msgstr "Mostra l'estat dels edificis"
+msgstr "Mostra l’estat dels edificis"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format
@@ -696,42 +696,42 @@ msgid ""
 "In order to show or hide the building status labels, you can select the "
 "‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
 "‘%s’ key on the keyboard."
-msgstr "Per tal de mostrar o amagar les etiquetes d'estat de construcció, podeu seleccionar l'entrada «Mostra estat» del menú «Mostra amaga» que hi ha a la part inferior de la pantalla. També podeu prémer la tecla «%s»."
+msgstr "Per tal de mostrar o amagar les etiquetes d’estat de construcció, podeu seleccionar l’entrada «Mostra estat» del menú «Mostra amaga» que hi ha a la part inferior de la pantalla. També podeu prémer la tecla «%s»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
 "Now, wouldn’t it be nice to check on our quarries’ progress without having "
 "to open their windows?"
-msgstr "I ara, no seria fantàstic poder comprovar el progrés de les pedreres sense haver-ne d'obrir les finestres?"
+msgstr "I ara, no seria fantàstic poder comprovar el progrés de les pedreres sense haver-ne d’obrir les finestres?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:461
 msgid ""
 "In addition to the buildings’ census, you can also activate status labels on"
 " them. This will display information about the productivity of buildings or "
 "the progress of construction sites."
-msgstr "A més a més dels noms dels edificis, també podeu activar les etiquetes d'estat. Mostren informació de la productivitat dels edificis o del progrés de construcció."
+msgstr "A més a més dels noms dels edificis, també podeu activar les etiquetes d’estat. Mostren informació de la productivitat dels edificis o del progrés de construcció."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
-msgstr "Ara sabem què està passant. Esperem que s'acabin les pedreres."
+msgstr "Ara sabem què està passant. Esperem que s’acabin les pedreres."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid "Archive all messages in your inbox"
-msgstr "Arxiveu tots els missatges de la bústia d'entrada"
+msgstr "Arxiveu tots els missatges de la bústia d’entrada"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:486
 msgid "Archive Your Inbox Messages"
-msgstr "Arxivar els missatges de la bústia d'entrada"
+msgstr "Arxivar els missatges de la bústia d’entrada"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
 msgid "Archive all your messages in your inbox now."
-msgstr "Arxiveu tots els missatges de la bústia d'entrada."
+msgstr "Arxiveu tots els missatges de la bústia d’entrada."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:488
 msgid ""
 "Keep clicking the ‘Archive selected message’ button until all messages have "
 "been archived and the list is empty."
-msgstr "Continueu fent clic al botó «Arxiva el missatge seleccionat» fins que tots els missatges s'hagin arxivat i la llista quedi buida."
+msgstr "Continueu fent clic al botó «Arxiva el missatge seleccionat» fins que tots els missatges s’hagin arxivat i la llista quedi buida."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 #, lua-format
@@ -753,7 +753,7 @@ msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr "La finestra de missatges és important per controlar el destí del vostre clan. No obstant això, en una partida real rebreu molts missatges. Per poder trobar els més importants, hauríeu de mantenir la bústia d'entrada el més endreçada possible."
+msgstr "La finestra de missatges és important per controlar el destí del vostre clan. No obstant això, en una partida real rebreu molts missatges. Per poder trobar els més importants, hauríeu de mantenir la bústia d’entrada el més endreçada possible."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:496
 msgid "Messages"
@@ -776,7 +776,7 @@ msgid ""
 " bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "La finestra de missatges es pot obrir i tancar amb el segon botó des de la dreta de la part de baix de la pantalla. Quan arriba un missatge nou, sona una campana d'avís i l'aspecte de la icona del botó de missatges canvia."
+msgstr "La finestra de missatges es pot obrir i tancar amb el segon botó des de la dreta de la part de baix de la pantalla. Quan arriba un missatge nou, sona una campana d’avís i l’aspecte de la icona del botó de missatges canvia."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:501
 msgid ""
@@ -798,7 +798,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr "Totes les finestres del Widelands (excepte els missatges d'història que mostren un botó d'«OK») es poden tancar amb un clic dret de ratolí. Algunes finestres poden ser obertes o tancades amb els botons i menús de la part inferior de la pantalla."
+msgstr "Totes les finestres del Widelands (excepte els missatges d’història que mostren un botó d'«OK») es poden tancar amb un clic dret de ratolí. Algunes finestres poden ser obertes o tancades amb els botons i menús de la part inferior de la pantalla."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."
@@ -819,7 +819,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "Ben fet! Vegem com funcionen els missatges en una partida real. Per a fer-ho, treure totes les roques de prop de les pedreres. Llavors, els pedrers hauran d'enviar un missatge dient que no poden trobar pedres a les seves àrees de treball quan hagin de treballar de nou."
+msgstr "Ben fet! Vegem com funcionen els missatges en una partida real. Per a fer-ho, treure totes les roques de prop de les pedreres. Llavors, els pedrers hauran d’enviar un missatge dient que no poden trobar pedres a les seves àrees de treball quan hagin de treballar de nou."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:539
 msgid "Destroy the two quarries"
@@ -833,7 +833,7 @@ msgstr "Destruïu les pedreres"
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
-msgstr "Ja que ara les nostres pedreres són inútils, les podem destruir i reutilitzar l'espai més endavant."
+msgstr "Ja que ara les nostres pedreres són inútils, les podem destruir i reutilitzar l’espai més endavant."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:543
 msgid ""
@@ -845,14 +845,14 @@ msgstr "Hi ha dues formes diferents de destruir un edifici: cremar-lo o desmante
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr "Cremar la pedrera: és la forma més ràpida d'alliberar l'espai. Mentre el treballador abandona l'edifici, es crema l'edifici i tot el material emprat per fer-lo es perd."
+msgstr "Cremar la pedrera: és la forma més ràpida d’alliberar l’espai. Mentre el treballador abandona l’edifici, es crema l’edifici i tot el material emprat per fer-lo es perd."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:545
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr "Desmantellar la pedrera: un constructor vingut d'algun magatzem desmantellarà la pedrera peça a peça. Recuperareu part dels béns emprats quan vau construir l'edifici, però el procés és més lent que cremar-la."
+msgstr "Desmantellar la pedrera: un constructor vingut d’algun magatzem desmantellarà la pedrera peça a peça. Recuperareu part dels béns emprats quan vau construir l’edifici, però el procés és més lent que cremar-la."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:550
 msgid "Messages Arrived!"
@@ -862,7 +862,7 @@ msgstr "Han arribat missatges!"
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr "Heu rebut alguns missatges. El botó de la part de baix ha canviat d'aparença perquè hi ha missatges nous que encara no heu llegit."
+msgstr "Heu rebut alguns missatges. El botó de la part de baix ha canviat d’aparença perquè hi ha missatges nous que encara no heu llegit."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
 msgid "Expand your territory"
@@ -882,7 +882,7 @@ msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build a bigger "
 "military building."
-msgstr "La guarda sentinella és l'únic edifici militar que cap en una parcel·la d'edifici petit. Si el vostre llenyataire ha tallat prou arbres, podreu construir-hi ja un edifici militar més gran."
+msgstr "La guarda sentinella és l’únic edifici militar que cap en una parcel·la d’edifici petit. Si el vostre llenyataire ha tallat prou arbres, podreu construir-hi ja un edifici militar més gran."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid ""
@@ -890,7 +890,7 @@ msgid ""
 "medium (yellow) building plots, but buildings can be built on a building "
 "plot that provides more space than they need. You should always keep that in"
 " mind when you search for a suitable place."
-msgstr "Recordeu que els edificis grans (símbol verd) no es poden construir on hi ha els símbols de casa roja o groga, però sí que es poden construir en els llocs on hi ha espai més que suficient. Haureu de recordar-ho quan planifiqueu la construcció d'edificis."
+msgstr "Recordeu que els edificis grans (símbol verd) no es poden construir on hi ha els símbols de casa roja o groga, però sí que es poden construir en els llocs on hi ha espai més que suficient. Haureu de recordar-ho quan planifiqueu la construcció d’edificis."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:573
 msgid "Expanding Your Territory!"
@@ -903,7 +903,7 @@ msgid ""
 " a basic building infrastructure, and we do not have access to mountains, "
 "which we need to mine minerals and coal. So, we have to expand our "
 "territory."
-msgstr "Hi ha una altra cosa que m'agradaria ensenyar-vos: com expandir el territori. El territori del qual disposem ara mateix no és suficient per a tots els edificis que necessitem i, a més a més, també necessitem arribar a les muntanyes, que contenen minerals i carbó. Per això, hem d'expandir-lo."
+msgstr "Hi ha una altra cosa que m’agradaria ensenyar-vos: com expandir el territori. El territori del qual disposem ara mateix no és suficient per a tots els edificis que necessitem i, a més a més, també necessitem arribar a les muntanyes, que contenen minerals i carbó. Per això, hem d’expandir-lo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:577
 msgid ""
@@ -924,7 +924,7 @@ msgstr "Tan aviat com un edifici militar es guarneixi de personal, estendrà el 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:583
 msgid "Military Site Occupied"
-msgstr "S'ha ocupat un edifici militar"
+msgstr "S’ha ocupat un edifici militar"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:585
 msgid "Your territory has just grown!"
@@ -946,7 +946,7 @@ msgid ""
 "This concludes the first tutorial. In order to learn more about the game, I "
 "suggest to play one of the other tutorials. Each of them covers a different "
 "topic."
-msgstr "Això finalitza el primer tutorial. Per aprendre més del funcionament del joc, és recomanable jugar els altres tutorials. Cadascun d'ells cobreix una àrea diferent."
+msgstr "Això finalitza el primer tutorial. Per aprendre més del funcionament del joc, és recomanable jugar els altres tutorials. Cadascun d’ells cobreix una àrea diferent."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:603
 msgid ""
@@ -962,7 +962,7 @@ msgstr "Per abandonar aquesta partida i retornar al menú principal:"
 msgid ""
 "Click on the ‘Main Menu’ button on the very left at the bottom of the "
 "screen."
-msgstr "Feu clic al botó «Menú principal» a l'extrem esquerre de la part inferior de la pantalla."
+msgstr "Feu clic al botó «Menú principal» a l’extrem esquerre de la part inferior de la pantalla."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:606
 msgid "Then click on the ‘Exit Game’ entry."
