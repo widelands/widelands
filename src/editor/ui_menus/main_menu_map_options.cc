@@ -396,9 +396,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	UI::Textarea* ww_text =
 	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_,
-	   labelh_, _("Ferry range:"));
+	                    labelh_, _("Ferry range:"));
 	std::string ww_tooltip = _("Enable ferries, waterways, and ferry yards on this map by setting"
-	   " maximum length of waterways for ferries.");
+	                           " maximum length of waterways for ferries.");
 	ww_text->set_tooltip(ww_tooltip);
 	ww_text->set_handle_mouse(true);
 	tags_box_.add(ww_text);
