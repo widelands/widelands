@@ -400,7 +400,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    {KeyboardShortcut::kEditorMapOptions,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_o, kDefaultCtrlModifier),
-                         "editor_load",
+                         "editor_mapoptions",
                          []() { return _("Map Options"); })},
    {KeyboardShortcut::kEditorUndo, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                         keysym(SDLK_z, kDefaultCtrlModifier),
