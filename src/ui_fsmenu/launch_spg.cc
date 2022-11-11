@@ -113,7 +113,10 @@ void LaunchSPG::win_condition_selected() {
 
 		std::unique_ptr<LuaTable> t = lua_->run_script(last_win_condition_);
 		t->do_not_warn_about_unaccessed_keys();
-		peaceful_mode_forbidden_ = !t->get_bool("peaceful_mode_allowed");
+		win_condition_duration_.set_visible(t->has_key("configurable_time") &&
+		                                    t->get_bool("configurable_time"));
+		peaceful_mode_forbidden_ =
+		   t->has_key("peaceful_mode_allowed") && !t->get_bool("peaceful_mode_allowed");
 		update_peaceful_mode();
 		player_setup_.update();
 	}
@@ -145,6 +148,7 @@ void LaunchSPG::clicked_ok() {
 	upcast(SinglePlayerGameSettingsProvider, sp, &settings_);
 	assert(sp);
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
+	game_->logic_rand_seed(RNG::static_rand());
 	try {
 		if (sp->settings().scenario) {  // scenario
 			game_->run_splayer_scenario_direct({sp->get_map()}, "");
@@ -159,14 +163,14 @@ void LaunchSPG::clicked_ok() {
 				tipstexts.push_back(sp->get_players_tribe());
 			}
 			game_->create_loader_ui(
-			   tipstexts, true, sp->settings().map_theme, sp->settings().map_background);
+			   tipstexts, true, sp->settings().map_theme, sp->settings().map_background, true);
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 			game_->set_game_controller(
 			   std::make_shared<SinglePlayerGameController>(*game_, true, playernumber));
 			game_->init_newgame(sp->settings());
-			game_->run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+			game_->run(Widelands::Game::StartGameType::kMap, "", "single_player");
 		}
 	} catch (const std::exception& e) {
 		WLApplication::emergency_save(&capsule_.menu(), *game_, e.what(), playernumber);

@@ -336,40 +336,62 @@ function rank_players(all_player_points, plrs)
 end
 
 -- RST
+-- .. function:: format_remaining_raw_time(remaining_time)
+--
+--    Return a localized message that contains only the remaining game time
+--    to be used when sending messages with a duration in them.
+--
+--    :arg remaining_time: The remaining game time in minutes.
+--    :type remaining_time: :class:`integer`
+--
+
+function format_remaining_raw_time(remaining_time)
+   local time = ""
+   push_textdomain("win_conditions")
+
+   local d = math.floor(remaining_time / (60 * 24))
+   remaining_time = remaining_time - (d * 60 * 24)
+   local h = math.floor(remaining_time / 60)
+   local m = remaining_time - (h * 60)
+
+   local timestring_d = (ngettext("%1% day", "%1% days", d)):bformat(d)
+   local timestring_h = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
+   local timestring_m = (ngettext("%1% minute", "%1% minutes", m)):bformat(m)
+
+   if d > 0 then
+      if h > 0 and m > 0 then
+         -- TRANSLATORS: 1 day, 12 hours, and 30 minutes
+         time = _("%1$s, %2$s, and %3$s"):bformat(timestring_d, timestring_h, timestring_m)
+      else
+         -- TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days and 30 minutes"
+         time = _("%1$s and %2$s"):bformat(timestring_d, (h > 0) and timestring_h or timestring_m)
+      end
+   else
+      if h > 0 and m > 0 then
+         time = _("%1$s and %2$s"):bformat(timestring_h, timestring_m)
+      else
+         time = (h > 0) and timestring_h or timestring_m
+      end
+   end
+
+   pop_textdomain()
+   return time
+end
+
+-- RST
 -- .. function:: format_remaining_time(remaining_time)
 --
 --    Return a localized message that contains the remaining game time
---    to be used when sending status meassages.
+--    to be used when sending status messages about the remaining game time.
 --
 --    :arg remaining_time: The remaining game time in minutes.
 --    :type remaining_time: :class:`integer`
 --
 
 function format_remaining_time(remaining_time)
-   local h = 0
-   local m = 60
-   local time = ""
    push_textdomain("win_conditions")
-
-   if (remaining_time ~= 60) then
-      h = math.floor(remaining_time / 60)
-      m = remaining_time % 60
-   end
-
-   if ((h > 0) and (m > 0)) then
-      -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-      time = (ngettext("%i minute", "%i minutes", h, m)):bformat(m)
-      -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-      time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h, m)):bformat(h, time)
-   elseif m > 0 then
-      -- TRANSLATORS: Context: 'The game will end in 30 minutes.'
-      time = (ngettext("%i minute", "%i minutes", m)):bformat(m)
-   else
-      -- TRANSLATORS: Context: 'The game will end in 2 hours.'
-      time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
-   end
    -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-   local result = p(_("The game will end in %s.")):bformat(time)
+   local result = p(_("The game will end in %s.")):bformat(format_remaining_raw_time(remaining_time))
    pop_textdomain()
    return result
 end

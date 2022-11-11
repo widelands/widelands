@@ -21,7 +21,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "build_info.h"
 #include "logic/replay.h"
 #include "logic/replay_game_controller.h"
 #include "ui_basic/messagebox.h"
@@ -158,33 +157,15 @@ void LoadGame::clicked_ok() {
 				return;
 			}
 
-			if (is_replay_ && gamedata->version != build_id()) {
-				UI::WLMessageBox w(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Version Mismatch"),
-				                   _("This replay was created with a different Widelands version. It "
-				                     "might be compatible, but will more likely desync or even fail to "
-				                     "load.\n\nPlease do not report any bugs that occur while watching "
-				                     "this replay.\n\nDo you want to load the replay anyway?"),
-				                   UI::WLMessageBox::MBoxType::kOkCancel);
-				if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-					return;
-				}
+			if (!load_or_save_.check_replay_compatibility(*gamedata)) {
+				return;
 			}
 
 			capsule_.set_visible(false);
 
 			try {
 				if (is_replay_) {
-					game_.create_loader_ui({"general_game"}, true, settings_.settings().map_theme,
-					                       settings_.settings().map_background);
-
-					game_.set_ibase(new InteractiveSpectator(game_, get_config_section()));
-					game_.set_write_replay(false);
-
-					new ReplayGameController(game_, gamedata->filename);
-					game_.save_handler().set_allow_saving(false);
-
-					game_.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
-
+					game_.run_replay(gamedata->filename, "");
 				} else {
 					game_.run_load_game(gamedata->filename, "");
 				}

@@ -66,7 +66,7 @@ msgid ""
 "To set foot on this island, we must first find a building space where a port"
 " can be built. Explore the nearby coast line to find such a building plot."
 msgstr ""
-"Per posar el peu a l'illa, necessitem trobar un espai de construcció per a "
+"Per posar el peu a l’illa, necessitem trobar un espai de construcció per a "
 "un port. Exploreu la línia de costa per trobar aquest lloc."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:53
@@ -74,7 +74,7 @@ msgid ""
 "After the port is built we should cancel the other ship’s expedition, to "
 "unload its wares as well."
 msgstr ""
-"Després de construir el port, haurem de cancel·lar l'expedició de l'altre "
+"Després de construir el port, haurem de cancel·lar l’expedició de l’altre "
 "vaixell per descarregar-ne els béns."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:58
@@ -93,7 +93,7 @@ msgid ""
 msgstr ""
 "Necessitarem almenys una pedrera, uns quants llenyataires i una serradora. "
 "Un guarda forestal potser també ens aniria bé, depenent de com de ràpid "
-"creixen els arbres de l'entorn. Trobeu el punt d'equilibri."
+"creixen els arbres de l’entorn. Trobeu el punt d’equilibri."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:66
 msgid "Build tools quickly"
@@ -111,11 +111,11 @@ msgid ""
 "prerequisite for success on the island. Don’t forget to build a smelting "
 "works as well."
 msgstr ""
-"La majoria de les nostres eines s'han perdut en la tragèdia del vaixell. El "
+"La majoria de les nostres eines s’han perdut en la tragèdia del vaixell. El "
 "nostre poble no podrà tornar a la seva feina sense eines adequades. "
 "Afortunadament, encara tenim una mica de mineral de ferro i molt carbó. "
-"Construïu un taller d'eines, ja que és necessari per poder tenir èxit a "
-"l'illa. No us oblideu construir també un forn de metalls."
+"Construïu un taller d’eines, ja que és necessari per poder tenir èxit a "
+"l’illa. No us oblideu construir també un forn de metalls."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
@@ -149,9 +149,9 @@ msgid ""
 "the others on this island are friends or foes, so we need to tread "
 "carefully. Explore the island by building at least one house for a scout."
 msgstr ""
-"Estem bastant segurs que no estem sols a l'illa. No sabem si els altres "
-"habitants de l'illa són amics o no, així que hem de planificar bé. Exploreu "
-"l'illa construint almenys una casa de l'explorador."
+"Estem bastant segurs que no estem sols a l’illa. No sabem si els altres "
+"habitants de l’illa són amics o no, així que hem de planificar bé. Exploreu "
+"l’illa construint almenys una casa de l’explorador."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
@@ -167,18 +167,18 @@ msgid ""
 "Expand our territory by building military buildings. Build some guardhouses "
 "and at least one tower for its larger view range."
 msgstr ""
-"A mesura que l'assentament creixi, necessitarem més espai per tots els "
+"A mesura que l’assentament creixi, necessitarem més espai per tots els "
 "edificis. Expandiu el territori construint edificis militars. Construïu "
 "algunes cases del guaita i almenys una torre per fer ús del seu llarg abast "
 "de visió."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr "Construïu una granja d'aranyes i un taller de teixir"
+msgstr "Construïu una granja d’aranyes i un taller de teixir"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
-msgstr "Producció de tela de seda d'aranya"
+msgstr "Producció de tela de seda d’aranya"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:101
 msgid ""
@@ -187,9 +187,9 @@ msgid ""
 "all buildings that consume spidercloth, not forgetting the construction "
 "sites."
 msgstr ""
-"Necessitem tela de seda d'aranya urgentment ja que ens en queda poca. Per "
+"Necessitem tela de seda d’aranya urgentment ja que ens en queda poca. Per "
 "tant, és essencial no malgastar la que ens queda. Reduïu la demanda de tots "
-"els edificis que consumeixin tela de seda d'aranya, sense oblidar els llocs "
+"els edificis que consumeixin tela de seda d’aranya, sense oblidar els llocs "
 "de construcció."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:102
@@ -199,8 +199,8 @@ msgid ""
 "mill."
 msgstr ""
 "Després, necessitarem construir una granja sigui com sigui, ja que necessita"
-" tela de seda d'aranya per poder-la construir. A més a més, necessitarem una"
-" granja d'aranyes i un taller de teixir."
+" tela de seda d’aranya per poder-la construir. A més a més, necessitarem una"
+" granja d’aranyes i un taller de teixir."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:107
 msgid "Build a trading post"
@@ -208,7 +208,7 @@ msgstr "Construïu un post de mercaderies"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:109
 msgid "Upgrade Scout’s House To Trading Post"
-msgstr "Milloreu la casa de l'explorador a post de mercaderies"
+msgstr "Milloreu la casa de l’explorador a post de mercaderies"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:110
 msgid ""
@@ -216,7 +216,7 @@ msgid ""
 "Jundlina, we need to enhance our scout’s house to a trading post."
 msgstr ""
 "Per poder pagar els tributs al Kalitath i mantenir el contacte amb la "
-"Jundlina, necessitem millorar la casa de l'explorador a post de mercaderies."
+"Jundlina, necessitem millorar la casa de l’explorador a post de mercaderies."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:115
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:128
@@ -240,7 +240,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:132
 msgid "The following batches need to be delivered:"
-msgstr "S'han d'enviar aquests paquets:"
+msgstr "S’han d’enviar aquests paquets:"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:120
 msgid "Five batches of five logs each."
@@ -256,7 +256,7 @@ msgstr "Tres paquets, cadascun amb tres lingots de ferro."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:123
 msgid "Two batches of two gold bars each."
-msgstr "Dos paquets, cadascun amb dos lingots d'or."
+msgstr "Dos paquets, cadascun amb dos lingots d’or."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:133
 msgid "Ten batches of five logs each."
@@ -272,7 +272,7 @@ msgstr "Sis paquets, cadascun amb tres lingots de ferro."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:136
 msgid "Four batches of two gold bars each."
-msgstr "Quatre paquets, cadascun amb dues barres d'or."
+msgstr "Quatre paquets, cadascun amb dues barres d’or."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:141
 msgid "Defeat Maletus"
@@ -284,7 +284,7 @@ msgstr "Derroteu el líder imperial Maletus."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:144
 msgid "We need to finish the Empire off to have a chance to build a new home."
-msgstr "Hem d'acabar amb l'Imperi si volem construir una nova llar."
+msgstr "Hem d’acabar amb l’Imperi si volem construir una nova llar."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:149
 msgid "Build a temple to worship Satul"
@@ -309,7 +309,7 @@ msgid ""
 "And we need to have a scout’s house to not lose track of what is going on at"
 " the Barbarians’ territory."
 msgstr ""
-"Necessitem una casa de l'explorador per saber què passa al territori bàrbar."
+"Necessitem una casa de l’explorador per saber què passa al territori bàrbar."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:158
 msgid "Worship Satul and consecrate priestesses"
@@ -322,7 +322,7 @@ msgstr "Adoreu en Satul"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:161
 msgid "Now we need to worship Satul and consecrate at least two priestesses."
-msgstr "Ara hem d'adorar en Satul i consagrar almenys dues sacerdotesses."
+msgstr "Ara hem d’adorar en Satul i consagrar almenys dues sacerdotesses."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:166
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:168
@@ -333,7 +333,7 @@ msgstr "Derroteu en Kalitath"
 msgid ""
 "Now it’s time to finish off this annoying Barbarian. He has molested us far "
 "too long now."
-msgstr "És hora d'acabar amb els molestos bàrbars. Ja han destorbat prou."
+msgstr "És hora d’acabar amb els molestos bàrbars. Ja han destorbat prou."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:178
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:740
@@ -354,7 +354,7 @@ msgid ""
 "Thus we have lost this battle and our people is doomed!"
 msgstr ""
 "Ah! Jundlina! No sé com ha pogut passar, però en Satul no ens ha pogut "
-"protegir de l'enemic. Han destruït el nostre últim magatzem. Així hem perdut"
+"protegir de l’enemic. Han destruït el nostre últim magatzem. Així hem perdut"
 " la batalla i la nostra gent està condemnada!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:182
@@ -371,7 +371,7 @@ msgid ""
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
 "Heu perdut i no podeu continuar jugant. Potser tindreu més sort quan torneu "
-"a provar l'escenari. Feu clic al botó «D'acord» per tornar al menú "
+"a provar l’escenari. Feu clic al botó «D’acord» per tornar al menú "
 "principal."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:191
@@ -389,8 +389,8 @@ msgid ""
 "ships and make our escape, but the currents of the sinking island tested our"
 " new ships and their design."
 msgstr ""
-"L'escapada de l'illa ha anat justa: hem aconseguit carregar tres vaixells i "
-"fugir, però les aigües de l'illa que s'afonava ha posat a prova els vaixells"
+"L’escapada de l’illa ha anat justa: hem aconseguit carregar tres vaixells i "
+"fugir, però les aigües de l’illa que s’afonava ha posat a prova els vaixells"
 " i el seu disseny."
 
 #. TRANSLATORS: Jundlina - Diary
@@ -400,7 +400,7 @@ msgid ""
 "without much planning and so one of our ships ended up carrying most of the "
 "heavy wares in our possession."
 msgstr ""
-"I un ha fallat la prova: els últims dies de càrrega s'havia fet amb caos i "
+"I un ha fallat la prova: els últims dies de càrrega s’havia fet amb caos i "
 "sense molta planificació i una nau va carregar la majoria de béns que "
 "pesaven més."
 
@@ -412,7 +412,7 @@ msgid ""
 " wares it carried."
 msgstr ""
 "El vaixell no va suportar tota la massa del que portava a dins i les aigües "
-"turbulentes que el colpejaven. Les forces d'en Lutas van endur-se'l al fons "
+"turbulentes que el colpejaven. Les forces d’en Lutas van endur-se’l al fons "
 "del mar i vam perdre molts homes i els béns que portava."
 
 #. TRANSLATORS: Jundlina - Diary
@@ -423,7 +423,7 @@ msgid ""
 " to other coasts."
 msgstr ""
 "Tothom estava amb molta por. Esperàvem que els altres vaixells també "
-"s'enfonsarien, però van aguantar. Vam escapar de l'illa i així continuà un "
+"s’enfonsarien, però van aguantar. Vam escapar de l’illa i així continuà un "
 "viatge més tranquil a altres costes."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:207
@@ -441,7 +441,7 @@ msgid ""
 "habitation and without any sign of being blessed by Satul, the fire god."
 msgstr ""
 "Moltes setmanes després només veiem illes petites, on no hi podíem viure, i "
-"sense cap signe d'en Satul, el déu del foc."
+"sense cap signe d’en Satul, el déu del foc."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:213
@@ -450,8 +450,8 @@ msgid ""
 "The black comes from the fiery mountain in the north of the island, the grey"
 " however comes from settlers."
 msgstr ""
-"L'última nit, no obstant, hem vist una illa nova. Hi hem vist fum. El fum "
-"negre ve de la feroç muntanya del nord de l'illa, i el fum gris ve dels seus"
+"L’última nit, no obstant, hem vist una illa nova. Hi hem vist fum. El fum "
+"negre ve de la feroç muntanya del nord de l’illa, i el fum gris ve dels seus"
 " habitants."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:217
@@ -469,7 +469,7 @@ msgid ""
 "do not know if the people there are friends or foes. We do not even know "
 "what tribe they might be from."
 msgstr ""
-"Almenys a la banda de l'est l'illa està habitada. No sabem si la seva gent "
+"Almenys a la banda de l’est l’illa està habitada. No sabem si la seva gent "
 "és hostil o no. Ni tan sols sabem de quina tribu es tracta."
 
 #. TRANSLATORS: Jundlina - Diary
@@ -479,7 +479,7 @@ msgid ""
 "ship of ours has sailed as far as we did for centuries. I can only hope they"
 " are friendly."
 msgstr ""
-"L'única cosa que sabem segur és que no poden ser atlants, perquè cap de les "
+"L’única cosa que sabem segur és que no poden ser atlants, perquè cap de les "
 "nostres naus ha navegat tan lluny durant segles. Espero que siguin "
 "amistosos."
 
@@ -493,8 +493,8 @@ msgid ""
 msgstr ""
 "No ens queda massa aigua; cada vegada ens queda menys menjar; hem perdut "
 "quasi totes les eines i materials de construcció amb el vaixell enfonsat. No"
-" podem continuar navegant i hem d'establir-nos a l'illa el més a prop "
-"possible des d'on estem."
+" podem continuar navegant i hem d’establir-nos a l’illa el més a prop "
+"possible des d’on estem."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:234
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:242
@@ -513,8 +513,8 @@ msgid ""
 "plenty of iron ore, so a toolsmithy and a smelting works will quickly "
 "provide us with good tools."
 msgstr ""
-"Com hi hem fundat un port, ara podem planificar l'assentament. Tenim molt "
-"mineral de ferro; així que un taller d'eines i un forn de metalls ens "
+"Com hi hem fundat un port, ara podem planificar l’assentament. Tenim molt "
+"mineral de ferro; així que un taller d’eines i un forn de metalls ens "
 "serviran per aconseguir bones eines."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:243
@@ -528,8 +528,8 @@ msgid ""
 "of trees, we might not even need foresters. But we need stone, that much is "
 "certain!"
 msgstr ""
-"A banda, hem de vigilar amb els materials de construcció: l'illa està plena "
-"d'arbres i potser ni tan sols necessitem guardes forestals. Necessitem "
+"A banda, hem de vigilar amb els materials de construcció: l’illa està plena "
+"d’arbres i potser ni tan sols necessitem guardes forestals. Necessitem "
 "pedra, això sí!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:251
@@ -543,7 +543,7 @@ msgid ""
 "careful. We should build at least one tower so that we can see potential "
 "enemies before they see us."
 msgstr ""
-"Explorem l'illa i expandim el territori. Però cal anar amb compte. Hem de "
+"Explorem l’illa i expandim el territori. Però cal anar amb compte. Hem de "
 "construir almenys una torre per poder veure els enemics potencials abans que"
 " ens vegin a nosaltres."
 
@@ -554,7 +554,7 @@ msgid ""
 "When we no longer need a building, we will dismantle it instead of burning "
 "it down."
 msgstr ""
-"Però hem d'anar en compte usant les pedres i altres materials valuosos. Si "
+"Però hem d’anar en compte usant les pedres i altres materials valuosos. Si "
 "no necessitem més un edifici, el desmantellem en lloc de cremar-lo."
 
 #. TRANSLATORS: Jundlina
@@ -570,7 +570,7 @@ msgstr ""
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:270
 msgid "Opol Reports Serious Shortages"
-msgstr "L'Opol informa d'escassedats de béns"
+msgstr "L’Opol informa d’escassedats de béns"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:273
@@ -582,14 +582,14 @@ msgid ""
 "buildings."
 msgstr ""
 "Que en Satul us abrigui, %s. Com al teixidor en cap del gremi, us porto "
-"males notícies. M'he adonat que ens estem quedant sense tela de seda "
-"d'aranya. És una situació perillosa, ja que se'n necessita per molts "
+"males notícies. M’he adonat que ens estem quedant sense tela de seda "
+"d’aranya. És una situació perillosa, ja que se’n necessita per molts "
 "edificis."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:276
 msgid "We should build up a spidercloth production urgently."
-msgstr "Hem de posar fil a l'agulla i començar a produir teles ja."
+msgstr "Hem de posar fil a l’agulla i començar a produir teles ja."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -606,12 +606,12 @@ msgid ""
 "production instantly."
 msgstr ""
 "Que en Satul també us abrigui, Opol. Volia endarrerir la producció de teles,"
-" però entenc la situació. Hem d'iniciar la producció de seda d'aranya ara "
+" però entenc la situació. Hem d’iniciar la producció de seda d’aranya ara "
 "mateix."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:295
 msgid "Opol Makes A Point"
-msgstr "L'Opol diu una cosa important"
+msgstr "L’Opol diu una cosa important"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:298
@@ -623,7 +623,7 @@ msgid ""
 "in a crisis that can never be resolved."
 msgstr ""
 "%s! Sembla que hi ha un altre problema més urgent. Tinc por perquè encara no"
-" hem construït una granja d'aranyes. Com és un dels edificis necessaris per "
+" hem construït una granja d’aranyes. Com és un dels edificis necessaris per "
 "completar la producció de teles, si no en completem una aviat, mai podrem "
 "assolir els objectius."
 
@@ -647,7 +647,7 @@ msgstr ""
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:317
 msgid "Opol Reports Success"
-msgstr "L'Opol informa d'un èxit"
+msgstr "L’Opol informa d’un èxit"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:320
@@ -658,10 +658,10 @@ msgid ""
 " finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
 " later on to make better tabards as well."
 msgstr ""
-"%s, que en Satul us abrigui! El taller de teixir i la granja d'aranyes s'han"
+"%s, que en Satul us abrigui! El taller de teixir i la granja d’aranyes s’han"
 " construït i el gremi de teixidors ja pot tornar a treballar. Us prometo que"
 " aviat us portarem les millors teles i alguns tabards. Potser més endavant "
-"podem construir una filadora d'or per poder fabricar millors tabards."
+"podem construir una filadora d’or per poder fabricar millors tabards."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -683,7 +683,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:336
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:351
 msgid "Sidolus Reports Foreign Inhabitants"
-msgstr "En Sidolus informa d'habitants forasters"
+msgstr "En Sidolus informa d’habitants forasters"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:339
@@ -694,7 +694,7 @@ msgid ""
 "them."
 msgstr ""
 "Que en Satul us abrigui, Jundlina! Porto notícies que fan presagiar "
-"problemes. Hem vist territori sota domini d'estrangers, però encara no sabem"
+"problemes. Hem vist territori sota domini d’estrangers, però encara no sabem"
 " com reaccionaran quan ens coneguin."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:342
@@ -708,8 +708,8 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. "
 "Hopefully our scout will get us some information soon."
 msgstr ""
-"Sidolus, és molt preocupant. Hem d'esbrinar més d'aquests forasters. Esperem"
-" que l'explorador ens porti informació aviat."
+"Sidolus, és molt preocupant. Hem d’esbrinar més d’aquests forasters. Esperem"
+" que l’explorador ens porti informació aviat."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:360
@@ -717,8 +717,8 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. We "
 "definitely need to send out a scout to gather some information."
 msgstr ""
-"Sidolus, és molt preocupant. Hem d'esbrinar més d'aquests forasters. Hem "
-"d'enviar un explorador perquè reculli informació."
+"Sidolus, és molt preocupant. Hem d’esbrinar més d’aquests forasters. Hem "
+"d’enviar un explorador perquè reculli informació."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:366
 msgid "Allies?"
@@ -746,13 +746,13 @@ msgid ""
 "see what we can do for them. However we should improve our own military "
 "strength to become independent of others."
 msgstr ""
-"Sidolus, com necessitem qualsevol aliat que puguem, els hauríem d'ajudar. "
+"Sidolus, com necessitem qualsevol aliat que puguem, els hauríem d’ajudar. "
 "Vejam que podem fer per ells. No obstant, caldrà que millorem la nostra "
-"força militar per tal que els altres clans de l'illa no ens acabin atacant."
+"força militar per tal que els altres clans de l’illa no ens acabin atacant."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:383
 msgid "Building Material Ensured"
-msgstr "S'han assegurat els materials de construcció"
+msgstr "S’han assegurat els materials de construcció"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:386
@@ -771,12 +771,12 @@ msgid ""
 "feel we are missing necessary buildings."
 msgstr ""
 "Són bones notícies, Loftomor. Ara podem construir edificis més sofisticats "
-"per expandir l'economia. Aconselleu si veieu que ens falten edificis "
+"per expandir l’economia. Aconselleu si veieu que ens falten edificis "
 "necessaris."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:404
 msgid "Tool Supply Ensured"
-msgstr "S'ha assegurat el subministrament d'eines"
+msgstr "S’ha assegurat el subministrament d’eines"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:407
@@ -785,8 +785,8 @@ msgid ""
 "%s, may Satul warm you! We have made some progress in building up our tool "
 "industry."
 msgstr ""
-"%s, que en Satul us abrigui! Hem fet via quant a l'establiment de la "
-"indústria d'eines."
+"%s, que en Satul us abrigui! Hem fet via quant a l’establiment de la "
+"indústria d’eines."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -808,7 +808,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:426
 msgid "Mining Established"
-msgstr "S'ha establert la mineria"
+msgstr "S’ha establert la mineria"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:429
@@ -835,13 +835,13 @@ msgid ""
 " smokeries and all buildings to supply them."
 msgstr ""
 "Ben fet, Loftomor! Ben fet! Que en Satul abrigui els nostres valents i forts"
-" miners. Ara hem d'assegurar-nos que els podem alimentar. Hem de construir "
+" miners. Ara hem d’assegurar-nos que els podem alimentar. Hem de construir "
 "fleques, fumadors i els edificis per donar-los subministraments."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:445
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:484
 msgid "Tribute Delivered"
-msgstr "S'ha entregat un tribut"
+msgstr "S’ha entregat un tribut"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:448
@@ -866,13 +866,13 @@ msgid ""
 "might talk about your princess."
 msgstr ""
 "Sidolus, són bones notícies. Aprecio el que ha fet el vostre poble. No "
-"obstant, no us oblideu d'ajudar-nos a derrotar les tropes d'en Maletus. "
+"obstant, no us oblideu d’ajudar-nos a derrotar les tropes d’en Maletus. "
 "Després, podrem parlar de la vostra princesa."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:460
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:469
 msgid "Empire Defeated"
-msgstr "L'Imperi ha estat derrotat"
+msgstr "L’Imperi ha estat derrotat"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:463
@@ -881,7 +881,7 @@ msgid ""
 "May Satul warm you, Kalitath! We have defeated the troops of the Empire in "
 "the north. Now we expect our princess to return home."
 msgstr ""
-"Que en Satul us abrigui, Kalitath! Hem derrotat les tropes de l'Imperi del "
+"Que en Satul us abrigui, Kalitath! Hem derrotat les tropes de l’Imperi del "
 "nord. Esperem que la nostra princesa torni a casa."
 
 #. TRANSLATORS: Kalitath
@@ -906,7 +906,7 @@ msgid ""
 "our common future on this island. She will explain it to you."
 msgstr ""
 "Sidolus, ho apreciem. Però la vostra princesa i jo ja hem fet plans pel "
-"futur comú de l'illa. Ella mateixa us ho explicarà."
+"futur comú de l’illa. Ella mateixa us ho explicarà."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:499
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:573
@@ -926,10 +926,10 @@ msgid ""
 " them."
 msgstr ""
 "Sidolus, durant la meva estada amb els bàrbars he après molt de la seva "
-"hospitalitat i valentia. M'han impressionat molt i els seus guerrers i déus "
-"semblen molt forts per lluitar contra l'Imperi. Especialment, el seu líder, "
+"hospitalitat i valentia. M’han impressionat molt i els seus guerrers i déus "
+"semblen molt forts per lluitar contra l’Imperi. Especialment, el seu líder, "
 "en Kalitath, ha sigut un bon hoste i començo a pensar que els nostres clans "
-"s'haurien d'unir per tenir un futur pacífic a l'illa. Per això vull que "
+"s’haurien d’unir per tenir un futur pacífic a l’illa. Per això vull que "
 "prepareu el poble per a un matrimoni i una coexistència pacífica amb els "
 "bàrbars. Això inclou aprendre dels seus déus i preparar-nos per adorar-los."
 
@@ -966,12 +966,12 @@ msgid ""
 " how we could change her mind though."
 msgstr ""
 "Que en Satul ens abrigui. La nostra princesa està confosa per "
-"l'empresonament dels bàrbars. Mai adoraré un déu bàrbar. Però no sé com "
+"l’empresonament dels bàrbars. Mai adoraré un déu bàrbar. Però no sé com "
 "podem recuperar la princesa."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:520
 msgid "Attracting Satul’s Help"
-msgstr "Esperant atreure l'ajuda d'en Satul"
+msgstr "Esperant atreure l’ajuda d’en Satul"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:523
@@ -982,8 +982,8 @@ msgid ""
 "some priestesses, who might beg Satul to show his powers to the Barbarians "
 "and our princess."
 msgstr ""
-"Sidolus, estic d'acord que no ens hem d'agenollar davant de cap altre déu "
-"que no sigui en Satul. Però en aquest cas necessitarem l'ajuda de déu. Us "
+"Sidolus, estic d’acord que no ens hem d’agenollar davant de cap altre déu "
+"que no sigui en Satul. Però en aquest cas necessitarem l’ajuda de déu. Us "
 "recomano que construïm un temple i adorem en Satul amb sacrificis exquisits."
 " Així aconseguirem sacerdotesses, que podran implorar a en Satul que els "
 "mostri la seva força als bàrbars i a la princesa."
@@ -1011,7 +1011,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:536
 msgid "Temple Completed"
-msgstr "El temple s'ha completat"
+msgstr "El temple s’ha completat"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:539
@@ -1020,7 +1020,7 @@ msgid ""
 "Satul. Now we can start worshipping him and consecrating our priestesses."
 msgstr ""
 "Que en Satul us abrigui, Sidolus! Els constructors han completat el temple "
-"d'en Satul. Ara podem adorar-lo i consagrar-li sacerdotesses."
+"d’en Satul. Ara podem adorar-lo i consagrar-li sacerdotesses."
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:545
@@ -1033,7 +1033,7 @@ msgstr ""
 "Que en Satul us abrigui, Loftomor. Gràcies per construir aquest temple gros."
 " Ara necessitem que hi arribi menjar i béns preuats per fer sacrificis. I no"
 " oblideu que les iniciades que serveixen en Satul es converteixen en "
-"sacerdotesses si disposen de tabards d'or i diamants."
+"sacerdotesses si disposen de tabards d’or i diamants."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:552
 msgid "May Satul Warm Us"
@@ -1046,7 +1046,7 @@ msgid ""
 "for Satul’s pleasure. May he warm us and show his might to our princess and "
 "this barbaric tribe."
 msgstr ""
-"Les sacerdotesses s'han consagrat i hem sacrificat els nostres millors béns "
+"Les sacerdotesses s’han consagrat i hem sacrificat els nostres millors béns "
 "per en Satul. Que ens abrigui i mostri el seu poder a la princesa i la tribu"
 " bàrbara."
 
@@ -1092,10 +1092,10 @@ msgid ""
 "issue now and forever on this island. There is no other way to live here in "
 "peace than to defeat them."
 msgstr ""
-"Sidolus, no m'han deixat marxar. Vaig trobar l'explorador i vaig poder fugir"
+"Sidolus, no m’han deixat marxar. Vaig trobar l’explorador i vaig poder fugir"
 " amb ell quan vaig adonar-me que era la seva hostatge i els vaig exposar els"
-" meus dubtes sobre l'acord que teníem. Així que cal que acabem amb el "
-"problema bàrbar de l'illa per sempre. No hi ha altra manera de viure en pau "
+" meus dubtes sobre l’acord que teníem. Així que cal que acabem amb el "
+"problema bàrbar de l’illa per sempre. No hi ha altra manera de viure en pau "
 "si no és derrotant-los."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:584
@@ -1118,7 +1118,7 @@ msgid ""
 "build up our society and our capability to explore the seas again."
 msgstr ""
 "Ara és hora de celebrar però crec que no ens podrem relaxar gaire. Hem de "
-"millorar les condicions de la gent i recuperar la capacitat d'explorar les "
+"millorar les condicions de la gent i recuperar la capacitat d’explorar les "
 "mars de nou."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:591
@@ -1145,7 +1145,7 @@ msgid ""
 " on a regular basis."
 msgstr ""
 "Estrangers, necessitem rebre senyals de les vostres bones intencions. Si "
-"esteu de veritat al nostre costat, ens hauríeu d'enviar or i altres béns "
+"esteu de veritat al nostre costat, ens hauríeu d’enviar or i altres béns "
 "regularment."
 
 #. TRANSLATORS: Kalitath
@@ -1158,7 +1158,7 @@ msgstr ""
 "Només estem interessats en els béns que es puguin usar per forjar armes. I "
 "vull dir armes reals com ara destrals, no els escuradents que useu. Així que"
 " ja podeu planificar enviar-nos 25 troncs, 16 unitats de carbó, 9 lingots de"
-" ferro i 4 lingots d'or."
+" ferro i 4 lingots d’or."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:607
@@ -1166,7 +1166,7 @@ msgid ""
 "Oh, and I almost forgot this one. We demand to have your princess in our "
 "headquarters as well to coordinate our war plannings."
 msgstr ""
-"Oh! Quasi me n'oblido. Us demanem que la vostra princesa vingui a viure al "
+"Oh! Quasi me n’oblido. Us demanem que la vostra princesa vingui a viure al "
 "nostre quarter general per coordinar els plans de guerra."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:611
@@ -1199,7 +1199,7 @@ msgid ""
 "obey this demand. It is your obligation now to run our small people until I "
 "come back."
 msgstr ""
-"Sidolus, estic d'acord. No obstant, crec que no tenim altra opció i haurem "
+"Sidolus, estic d’acord. No obstant, crec que no tenim altra opció i haurem "
 "de complir el que demanen. És obligació vostra dirigir el poble fins que "
 "torni."
 
@@ -1209,12 +1209,12 @@ msgid ""
 "First you need to upgrade our scout’s house to a trading post. Then you need"
 " to send the demanded tributes of gold, iron, coal, and logs."
 msgstr ""
-"Primer heu de millorar la vostra casa de l'explorador a post de mercaderies."
-" Llavors, cal que envieu els tributs demanats d'or, ferro, carbó i troncs."
+"Primer heu de millorar la vostra casa de l’explorador a post de mercaderies."
+" Llavors, cal que envieu els tributs demanats d’or, ferro, carbó i troncs."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:630
 msgid "Trading Post Built"
-msgstr "S'ha construït el post de mercaderies."
+msgstr "S’ha construït el post de mercaderies."
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:633
@@ -1227,7 +1227,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:636
 msgid "Sidolus Agrees"
-msgstr "En Sidolus està d'acord"
+msgstr "En Sidolus està d’acord"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:639
@@ -1236,7 +1236,7 @@ msgid ""
 "people. Now we need to begin sending goods to this Barbarian."
 msgstr ""
 "Ben fet, Loftomor! Ben fet! Que en Satul abrigui la nostra princesa i la "
-"nostra gent. Ara hem d'enviar els béns als bàrbars."
+"nostra gent. Ara hem d’enviar els béns als bàrbars."
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:642
@@ -1244,7 +1244,7 @@ msgid ""
 "I think we should start with the deliveries we could afford the easiest. But"
 " we need to find more metals for sure."
 msgstr ""
-"Crec que hauríem de començar amb els enviaments que puguem permetre'ns més "
+"Crec que hauríem de començar amb els enviaments que puguem permetre’ns més "
 "fàcilment. Però segur que necessitem trobar més metalls."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:648
@@ -1266,13 +1266,13 @@ msgid ""
 "As we are facing great losses due to your laziness, you shall now send us "
 "twice the previous amount of each ware."
 msgstr ""
-"Com tenim moltes pèrdues per la vostra droperia, ens haureu d'enviar el "
+"Com tenim moltes pèrdues per la vostra droperia, ens haureu d’enviar el "
 "doble de les quantitats que us havíem demanat."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:657
 msgid "I am sure you do not want to break our alliance… do you?"
-msgstr "Estic segur que no voleu trencar l'aliança, oi?"
+msgstr "Estic segur que no voleu trencar l’aliança, oi?"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:660
 msgid "Blackmail!"
@@ -1297,7 +1297,7 @@ msgid ""
 "Our only chance is to double our efforts and start delivering something "
 "soon."
 msgstr ""
-"L'única oportunitat que tenim és esforçar-nos més i començar a enviar-hi "
+"L’única oportunitat que tenim és esforçar-nos més i començar a enviar-hi "
 "alguna cosa."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:673
@@ -1329,8 +1329,8 @@ msgid ""
 "They name themselves an Empire, and their leader is called Maletus. I want "
 "you to train your soldiers and help us defeat his lousy Empire."
 msgstr ""
-"S'anomenen l'Imperi i el seu líder es diu Maletus. Vull que entreneu els "
-"vostres soldats i ens ajudeu a derrotar l'Imperi."
+"S’anomenen l’Imperi i el seu líder es diu Maletus. Vull que entreneu els "
+"vostres soldats i ens ajudeu a derrotar l’Imperi."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:686
 msgid "Be Vigilant!"
@@ -1351,18 +1351,18 @@ msgid ""
 "So I want you to defeat this Empire, but ensure that we will become and "
 "remain strong enough to enforce the respect we deserve."
 msgstr ""
-"Així que vull derrotar l'Imperi, però també ens hem d'assegurar que som prou"
+"Així que vull derrotar l’Imperi, però també ens hem d’assegurar que som prou"
 " forts perquè ens respectin."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:695
 msgid "Keep Delivering"
-msgstr "Continua l'enviament"
+msgstr "Continua l’enviament"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:698
 msgid ""
 "Strangers, I almost forgot to mention, but it should have been clear anyway."
-msgstr "Forasters, quasi se m'oblida, però ja hauria d'estar clar."
+msgstr "Forasters, quasi se m’oblida, però ja hauria d’estar clar."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:701
@@ -1403,7 +1403,7 @@ msgid ""
 "battle with our enemy."
 msgstr ""
 "Almenys la vostra princesa serà una esclava raonable, si sobrevivim a la "
-"batalla contra l'enemic."
+"batalla contra l’enemic."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:725
@@ -1411,7 +1411,7 @@ msgid ""
 "Strangers, you did not deliver the help we needed in time. We are deeply "
 "insulted by your treachery."
 msgstr ""
-"Estrangers, no ens heu entregat l'ajuda a temps. Ens heu insultat i traït."
+"Estrangers, no ens heu entregat l’ajuda a temps. Ens heu insultat i traït."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:734
 msgid "Jundlina’s Suicide"
@@ -1424,7 +1424,7 @@ msgid ""
 "have prepared myself for this eventuality and will rather die from the "
 "poison I carry with me than be your slave. May Satul avenge my sacrifice."
 msgstr ""
-"Bàrbar, sóc la princesa atlant i mai acceptaré ser una esclava. M'he "
+"Bàrbar, sóc la princesa atlant i mai acceptaré ser una esclava. M’he "
 "preparat i prefereixo morir del verí que porto amb mi que ser la vostra "
 "esclava. Que en Satul vengi el meu sacrifici."
 
@@ -1436,7 +1436,7 @@ msgid ""
 "lost this battle and our people is doomed!"
 msgstr ""
 "Ah! No sé com pot haver passat, però en Satul no ens ha pogut protegir de "
-"l'enemic. Hem perdut la nostra princesa. Així que hem perdut la batalla i el"
+"l’enemic. Hem perdut la nostra princesa. Així que hem perdut la batalla i el"
 " nostre poble està condemnat."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:751
@@ -1459,7 +1459,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_initiate/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Satul’s Initiate"
-msgstr "L'iniciada d'en Satul"
+msgstr "L’iniciada d’en Satul"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_priestess/init.lua:8
@@ -1471,7 +1471,7 @@ msgstr "Sacerdotessa"
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr "Casa de l'explorador"
+msgstr "Casa de l’explorador"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65
@@ -1483,7 +1483,7 @@ msgstr "explorar"
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Temple of Satul"
-msgstr "Temple d'en Satul"
+msgstr "Temple d’en Satul"
 
 #. TRANSLATORS: Completed/Skipped/Did not start consecrating priestess because
 #. ...
@@ -1529,7 +1529,7 @@ msgstr "Moneda de coure"
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/coin_gold/init.lua:8
 msgctxt "ware"
 msgid "Gold Coin"
-msgstr "Moneda d'or"
+msgstr "Moneda d’or"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/coin_silver/init.lua:8
@@ -1555,7 +1555,7 @@ msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
 msgstr ""
-"Heu de connectar aquesta bandera a una casa de l'explorador abans de poder-"
+"Heu de connectar aquesta bandera a una casa de l’explorador abans de poder-"
 "hi enviar un explorador."
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
@@ -1590,7 +1590,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:43
 msgctxt "atlanteans_worker"
 msgid "Takes care of the Temple of Satul."
-msgstr "Vigila el temple d'en Satul."
+msgstr "Vigila el temple d’en Satul."
 
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:44
 msgctxt "atlanteans_worker"
@@ -1598,7 +1598,7 @@ msgid ""
 "Initiates take care of the Temple of Satul while they are learning to become"
 " priestesses."
 msgstr ""
-"Les iniciades cuiden el temple d'en Satul mentre aprenen els arts de les "
+"Les iniciades cuiden el temple d’en Satul mentre aprenen els arts de les "
 "sacerdotesses."
 
 #. TRANSLATORS: Purpose helptext for an atlantean worker: Priestess
@@ -1637,4 +1637,4 @@ msgstr "Una moneda de plata, rebuda per enviar tres lingots de ferro."
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:91
 msgctxt "atlanteans_building"
 msgid "A golden coin, received as reward for delivering two bars of gold."
-msgstr "Una moneda d'or, rebuda com a recompensa per enviar dues barres d'or."
+msgstr "Una moneda d’or, rebuda com a recompensa per enviar dues barres d’or."

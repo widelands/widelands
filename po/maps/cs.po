@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-13 03:43+0000\n"
+"POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021-2022\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
@@ -288,6 +288,16 @@ msgid ""
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
 msgstr "Rýbaud a jeho kmen vedou šťastný život v severních končinách. Ale život v zemích, které opustili, je všechno, jen ne pokojný a starý přítel zoufale potřebuje jeho pomoc…"
+
+#: ../../data/campaigns/fri04.wmf/elemental:8
+msgid "Two Friends Reunited"
+msgstr ""
+
+#: ../../data/campaigns/fri04.wmf/elemental:10
+msgid ""
+"Claus and Henneke Lembeck have reached the North at last. But will they be "
+"able to convince Reebaud to send them aid?"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"

@@ -36,6 +36,19 @@
 #include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 
+struct TypeInfo {
+	std::string window_name;
+	std::string window_title;
+	LoadOrSaveGame::FileType file_type;
+};
+static const std::map<GameMainMenuSaveGame::Type, TypeInfo> kTypes = {
+   {GameMainMenuSaveGame::Type::kLoadReplay,
+    {"load_replay", gettext_noop("Load Replay"), LoadOrSaveGame::FileType::kReplay}},
+   {GameMainMenuSaveGame::Type::kLoadSavegame,
+    {"load_game", gettext_noop("Load Game"), LoadOrSaveGame::FileType::kGameSinglePlayer}},
+   {GameMainMenuSaveGame::Type::kSave,
+    {"save_game", gettext_noop("Save Game"), LoadOrSaveGame::FileType::kShowAll}}};
+
 InteractiveGameBase& GameMainMenuSaveGame::igbase() {
 	return dynamic_cast<InteractiveGameBase&>(*get_parent());
 }
@@ -45,11 +58,11 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                                            const Type type)
    : UI::UniqueWindow(&parent,
                       UI::WindowStyle::kWui,
-                      type == Type::kSave ? "save_game" : "load_game",
+                      kTypes.at(type).window_name,
                       &registry,
                       parent.get_inner_w() - 40,
                       parent.get_inner_h() - 40,
-                      type == Type::kSave ? _("Save Game") : _("Load Game")),
+                      _(kTypes.at(type).window_title)),
      // Values for alignment and size
      padding_(4),
      type_(type),
@@ -59,8 +72,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
      load_or_save_(&info_box_,
                    igbase().game(),
-                   type == Type::kSave ? LoadOrSaveGame::FileType::kShowAll :
-                                         LoadOrSaveGame::FileType::kGameSinglePlayer,
+                   kTypes.at(type).file_type,
                    UI::PanelStyle::kWui,
                    UI::WindowStyle::kWui,
                    false),
@@ -86,8 +98,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      ok_(&buttons_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 
      curdir_(kSaveDir),
-     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()),
-     modal_(new UI::Panel::ModalGuard(*this)) {
+     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()) {
 	filename_box_.set_visible(type_ == Type::kSave);
 
 	layout();
@@ -144,6 +155,9 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	layout();
 
 	initialization_complete();
+
+	do_run();  // Modal main loop, blocks until the user closes the window.
+	die();
 }
 
 void GameMainMenuSaveGame::layout() {
@@ -187,28 +201,30 @@ void GameMainMenuSaveGame::ok() {
 	if (!ok_.enabled()) {
 		return;
 	}
-	if (load_or_save_.has_selection() && load_or_save_.entry_selected()->is_directory()) {
+
+	if (load_or_save_.has_selection()) {
 		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
-		load_or_save_.change_directory_to(gamedata->filename);
-		curdir_ = gamedata->filename;
-		filename_editbox_.focus();
-	} else {
-		switch (type_) {
-		case Type::kSave: {
-			std::string filename = filename_editbox_.text();
-			if (save_game(filename, !get_config_bool("nozip", false))) {
-				die();
-			} else {
-				load_or_save_.table().focus();
-			}
-		} break;
-		case Type::kLoad: {
-			if (load_or_save_.has_selection()) {
-				igbase().game().set_next_game_to_load(load_or_save_.entry_selected()->filename);
-				modal_.reset();
+		if (gamedata->is_directory()) {
+			load_or_save_.change_directory_to(gamedata->filename);
+			curdir_ = gamedata->filename;
+			filename_editbox_.focus();
+			return;
+		}
+		if (type_ == Type::kLoadSavegame || type_ == Type::kLoadReplay) {
+			if (load_or_save_.check_replay_compatibility(*gamedata)) {
+				igbase().game().set_next_game_to_load(gamedata->filename);
+				end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 				igbase().end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 			}
-		} break;
+			return;
+		}
+	}
+	if (type_ == Type::kSave) {
+		std::string filename = filename_editbox_.text();
+		if (save_game(filename, !get_config_bool("nozip", false))) {
+			die();
+		} else {
+			load_or_save_.table().focus();
 		}
 	}
 }
@@ -279,7 +295,7 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	Widelands::Game& game = igbase().game();
 
 	game.create_loader_ui(
-	   {"general_game"}, true, game.map().get_background_theme(), game.map().get_background());
+	   {"general_game"}, true, game.map().get_background_theme(), game.map().get_background(), true);
 
 	GenericSaveHandler gsh(
 	   [&game](FileSystem& fs) {

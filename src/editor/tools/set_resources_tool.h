@@ -27,23 +27,22 @@ Widelands::NodeCaps resource_tools_nodecaps(const Widelands::FCoords& fcoords,
 
 ///  Decreases the resources of a node by a value.
 struct EditorSetResourcesTool : public EditorTool {
-	EditorSetResourcesTool() : EditorTool(*this, *this), cur_res_(0), set_to_(0) {
+	EditorSetResourcesTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this), cur_res_(0), set_to_(0) {
 	}
 
 	/**
 	 * Sets the resources of the current to a fixed value
 	 */
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& eia,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	EditorActionArgs format_args_impl() override;
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_set_resources.png");
@@ -65,6 +64,20 @@ struct EditorSetResourcesTool : public EditorTool {
 	}
 	void set_cur_res(Widelands::DescriptionIndex const res) {
 		cur_res_ = res;
+	}
+
+	WindowID get_window_id() override {
+		return WindowID::ChangeResources;
+	}
+
+	bool save_configuration_impl(ToolConf& conf) override {
+		conf.resource = cur_res_;
+		conf.set_to = set_to_;
+		return true;
+	}
+	void load_configuration(const ToolConf& conf) override {
+		cur_res_ = conf.resource;
+		set_to_ = conf.set_to;
 	}
 
 private:

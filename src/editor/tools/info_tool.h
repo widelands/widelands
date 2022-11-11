@@ -25,11 +25,11 @@
 
 /// A simple tool to show information about the clicked node.
 struct EditorInfoTool : public EditorTool {
-	EditorInfoTool() : EditorTool(*this, *this, false), number_of_open_windows_(0) {
+	EditorInfoTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this, false), number_of_open_windows_(0) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 

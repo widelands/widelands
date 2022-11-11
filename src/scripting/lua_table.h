@@ -23,6 +23,7 @@
 #include <memory>
 #include <set>
 
+#include "base/multithreading.h"
 #include "base/string.h"
 #include "base/vector.h"
 #include "scripting/lua.h"
@@ -222,6 +223,7 @@ private:
 	// Get a lua value of the specific type. See template specializations.
 	template <typename T> T get_value() const;
 
+	MutexLock mutex_lock_;
 	lua_State* L_;
 	mutable std::set<std::string> accessed_keys_;
 	bool warn_about_unaccessed_keys_;

@@ -24,18 +24,18 @@
 constexpr int kOffset = 30;
 /// Show a window with information about the pointed at node and triangle.
 int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                          EditorInteractive& parent,
                                           EditorActionArgs* /* args */,
                                           Widelands::Map* map) {
 
-	parent.stop_painting();
+	parent_.stop_painting();
 
 	Widelands::Field& f = (*map)[center.node];
 	Widelands::Field& tf = (*map)[center.triangle.node];
 	const Widelands::Coords& coords = center.node;
+	EditorInteractive& parent = parent_;
 
 	UI::UniqueWindow::Registry& registry =
-	   parent.unique_windows().get_registry(format("fieldinfo_%d_%d", coords.x, coords.y));
+	   parent_.unique_windows().get_registry(format("fieldinfo_%d_%d", coords.x, coords.y));
 
 	registry.open_window = [this, &parent, &registry, &center, &f, &tf, map]() {
 		// if window reaches bottom right corner, start from top left corner again

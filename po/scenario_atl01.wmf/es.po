@@ -8,6 +8,7 @@
 # Juanjo Cb <jjcabrejas@gmail.com>, 2019
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
 # Walter Benkel <tromaster@gmail.com>, 2020
 # Walter Benkel <tromaster@gmail.com>, 2020
@@ -17,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Walter Benkel <tromaster@gmail.com>, 2020\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -944,7 +945,7 @@ msgstr "Enhorabuena"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Has completado esta misión. Puedes continuar jugando si quieres, o continúa con la siguiente misión."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.

@@ -52,9 +52,6 @@ InternetGaming::InternetGaming()
      time_offset_(0),
      waittimeout_(std::numeric_limits<int32_t>::max()),
      lastping_(time(nullptr)) {
-	// Fill the list of possible messages from the server
-	InternetGamingMessages::fill_map();
-
 	// Set connection tracking variables to 0
 	lastbrokensocket_[0] = 0;
 	lastbrokensocket_[1] = 0;
@@ -228,7 +225,7 @@ void InternetGaming::logout(const std::string& msgcode) {
 		net->send(s);
 	}
 
-	const std::string& msg = InternetGamingMessages::get_message(msgcode);
+	const std::string msg = InternetGamingMessages::get_message(msgcode);
 	verb_log_info("InternetGaming: logout(%s)", msg.c_str());
 	format_and_add_chat("", "", true, msg);
 
@@ -288,7 +285,7 @@ bool InternetGaming::check_password(const std::string& nick,
  */
 void InternetGaming::handle_failed_read() {
 	set_error();
-	const std::string& msg = InternetGamingMessages::get_message("CONNECTION_LOST");
+	const std::string msg = InternetGamingMessages::get_message("CONNECTION_LOST");
 	log_err("InternetGaming: Error: %s\n", msg.c_str());
 	format_and_add_chat("", "", true, msg);
 
@@ -836,7 +833,7 @@ bool InternetGaming::update_for_games() {
 	return temp;
 }
 
-/// \returns the tables in the room, if no error occured, or nullptr in case of error
+/// \returns the tables in the room, if no error occurred, or nullptr in case of error
 const std::vector<InternetGame>* InternetGaming::games() {
 	return error() ? nullptr : &gamelist_;
 }
@@ -849,7 +846,7 @@ bool InternetGaming::update_for_clients() {
 	return temp;
 }
 
-/// \returns the players in the room, if no error occured, or nullptr in case of error
+/// \returns the players in the room, if no error occurred, or nullptr in case of error
 const std::vector<InternetClient>* InternetGaming::clients() {
 	return error() ? nullptr : &clientlist_;
 }

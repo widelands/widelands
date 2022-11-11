@@ -64,7 +64,6 @@
 #include "logic/game_settings.h"
 #include "logic/map.h"
 #include "logic/replay.h"
-#include "logic/replay_game_controller.h"
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
@@ -355,7 +354,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
      faking_middle_mouse_button_(false),
      mouse_position_(Vector2i::zero()),
      mouse_locked_(false),
-     mouse_compensate_warp_(Vector2i::zero()),
      handle_key_enabled_(true),
      should_die_(false),
 #ifdef _WIN32
@@ -417,6 +415,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	assert(sdl_video != nullptr);
 	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
 	SDL_GetVersion(&sdl_ver);
+	// Keep cursor in window while dragging
+	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 	bool sdl_scroll_x_bug = false;
 
 	// SDL version < 2.0 is not supported, >= 2.1 will have the changes
@@ -699,6 +699,8 @@ void WLApplication::init_and_run_game_from_template() {
 			script += wc_name;
 		}
 		settings->set_win_condition_script(script);
+		settings->set_win_condition_duration(
+		   section.get_int("win_condition_duration", Widelands::kDefaultWinConditionDuration));
 	}
 
 	{
@@ -745,7 +747,7 @@ void WLApplication::init_and_run_game_from_template() {
 		tipstexts.push_back(settings->get_players_tribe());
 	}
 	game.create_loader_ui(
-	   tipstexts, true, settings->settings().map_theme, settings->settings().map_background);
+	   tipstexts, true, settings->settings().map_theme, settings->settings().map_background, true);
 	Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 	game.set_ibase(new InteractivePlayer(game, get_config_section(), playernumber, false));
@@ -753,7 +755,7 @@ void WLApplication::init_and_run_game_from_template() {
 	game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 	game.init_newgame(settings->settings());
 	try {
-		game.run(Widelands::Game::StartGameType::kMap, script_to_run_, false, "single_player");
+		game.run(Widelands::Game::StartGameType::kMap, script_to_run_, "single_player");
 	} catch (const Widelands::GameDataError& e) {
 		log_err("Game not started: Game data error: %s\n", e.what());
 	} catch (const std::exception& e) {
@@ -785,14 +787,7 @@ void WLApplication::run() {
 		std::string message;
 		try {
 			if (game_type_ == GameType::kReplay) {
-				std::string map_theme;
-				std::string map_bg;
-				game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
-				game.set_ibase(new InteractiveSpectator(game, get_config_section()));
-				game.set_write_replay(false);
-				new ReplayGameController(game, filename_);
-				game.save_handler().set_allow_saving(false);
-				game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
+				game.run_replay(filename_, "");
 			} else {
 				game.set_ai_training_mode(get_config_bool("ai_training", false));
 				game.run_load_game(filename_, script_to_run_);
@@ -852,7 +847,7 @@ void WLApplication::run() {
  *
  * \return true if an event was returned inside ev, false otherwise
  */
-bool WLApplication::poll_event(SDL_Event& ev) {
+bool WLApplication::poll_event(SDL_Event& ev) const {
 	if (SDL_PollEvent(&ev) == 0) {
 		return false;
 	}
@@ -862,13 +857,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	// settings are invisible to the rest of the code
 	switch (ev.type) {
 	case SDL_MOUSEMOTION:
-		ev.motion.xrel += mouse_compensate_warp_.x;
-		ev.motion.yrel += mouse_compensate_warp_.y;
-		mouse_compensate_warp_ = Vector2i::zero();
-
 		if (mouse_locked_) {
-			warp_mouse(mouse_position_);
-
 			ev.motion.x = mouse_position_.x;
 			ev.motion.y = mouse_position_.y;
 		}
@@ -1073,23 +1062,23 @@ void WLApplication::handle_mousebutton(SDL_Event& ev, InputCallback const* cb) {
 	}
 }
 
-/// Instantaneously move the mouse cursor without creating a motion event.
-///
-/// SDL_WarpMouseInWindow() *will* create a mousemotion event, which we do not want.
-/// As a workaround, we store the delta in mouse_compensate_warp_ and use that to
-/// eliminate the motion event in poll_event()
+/// Instantaneously move the mouse cursor.
 ///
 /// \param position The new mouse position
 void WLApplication::warp_mouse(const Vector2i position) {
 	mouse_position_ = position;
-
 	Vector2i cur_position = Vector2i::zero();
 	SDL_GetMouseState(&cur_position.x, &cur_position.y);
+
 	if (cur_position != position) {
-		mouse_compensate_warp_ += cur_position - position;
 		SDL_Window* sdl_window = g_gr->get_sdlwindow();
 		if (sdl_window != nullptr) {
-			SDL_WarpMouseInWindow(sdl_window, position.x, position.y);
+			if (!mouse_locked_) {
+				SDL_PumpEvents();
+				SDL_FlushEvent(SDL_MOUSEMOTION);
+				SDL_WarpMouseInWindow(sdl_window, position.x, position.y);
+				return;
+			}
 		}
 	}
 }
@@ -1122,9 +1111,15 @@ void WLApplication::set_input_grab(bool grab) {
 
 void WLApplication::set_mouse_lock(const bool locked) {
 	mouse_locked_ = locked;
+	if (mouse_locked_) {
+		SDL_SetRelativeMouseMode(SDL_TRUE);
+	} else {
+		SDL_SetRelativeMouseMode(SDL_FALSE);
+		warp_mouse(mouse_position_);  // Restore to where we started dragging
+	}
 
-	// If we use the SDL cursor then it needs to be hidden when locked
-	// otherwise it'll jerk around which looks ugly
+	// SDL automatically hides the cursor when in relative mode. This will hide
+	// the selection marker as well.
 	if (g_mouse_cursor->is_using_sdl()) {
 		g_mouse_cursor->set_visible(!mouse_locked_);
 	}
@@ -1153,6 +1148,8 @@ bool WLApplication::init_settings() {
 	init_shortcuts();
 
 	// Mousewheel options
+	// we store this in the config for reference, but need to reset it for the detection to work
+	set_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected, false);
 	update_mousewheel_settings();
 
 	int64_t last_start = get_config_int("last_start", 0);

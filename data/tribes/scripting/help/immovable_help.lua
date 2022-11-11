@@ -30,15 +30,16 @@ include "tribes/scripting/help/format_help.lua"
 function immovable_help_string(tribe, immovable_description)
    local helptexts = immovable_description:helptexts(tribe.name)
    local result = ""
-   local purpose = helptexts["purpose"]
    local image = immovable_description.icon_name
-   if purpose ~= nil then
+   if helptexts.purpose ~= nil then
       result = h2(_("Purpose")) ..
-         li_object(immovable_description.name, purpose)
+         li_object(immovable_description.name, helptexts.purpose)
    elseif image ~= "" then
       result = p(vspace(14) .. img(immovable_description.icon_name))
-   else
-      result = result
+   end
+
+   if helptexts.note ~= nil then
+      result = result .. h2(_("Note")) .. p(helptexts.note)
    end
 
    -- Build cost
@@ -81,11 +82,11 @@ function immovable_help_string(tribe, immovable_description)
          end
          if (target_description ~= nil) then
             local icon = target_description.icon_name
+            local target_rt = immovable_description:has_attribute("tree") and target_description.descname or linkify_encyclopedia_object(target_description)
             if (icon ~= "") then
-               result = result ..
-                  li_image(icon, target_description.descname)
+               result = result .. li_image(icon, target_rt)
             else
-               result = result .. li(target_description.descname)
+               result = result .. li(target_rt)
             end
          end
       end

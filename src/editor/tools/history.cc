@@ -67,7 +67,7 @@ uint32_t EditorHistory::undo_action() {
 	redo_button_.set_enabled(true);
 
 	return uac.tool.handle_undo(
-	   static_cast<EditorTool::ToolIndex>(uac.i), uac.center, uac.parent, uac.args, &(uac.map));
+	   static_cast<EditorTool::ToolIndex>(uac.i), uac.center, uac.args, &(uac.map));
 }
 
 uint32_t EditorHistory::redo_action() {
@@ -83,22 +83,21 @@ uint32_t EditorHistory::redo_action() {
 	redo_button_.set_enabled(!redo_stack_.empty());
 
 	return rac.tool.handle_click(
-	   static_cast<EditorTool::ToolIndex>(rac.i), rac.center, rac.parent, rac.args, &(rac.map));
+	   static_cast<EditorTool::ToolIndex>(rac.i), rac.center, rac.args, &(rac.map));
 }
 
 uint32_t EditorHistory::do_action(EditorTool& tool,
                                   EditorTool::ToolIndex ind,
                                   Widelands::Map& map,
                                   const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                  EditorInteractive& parent,
                                   bool draw) {
 	EditorToolAction ac(
-	   tool, static_cast<uint32_t>(ind), map, center, parent, tool.format_args(ind, parent));
+	   tool, static_cast<uint32_t>(ind), map, center, parent_, tool.format_args(ind));
 	if (draw && tool.is_undoable()) {
 		if (undo_stack_.empty() ||
 		    undo_stack_.front().tool.get_sel_impl() != draw_tool_.get_sel_impl()) {
-			EditorToolAction da(draw_tool_, EditorTool::First, map, center, parent,
-			                    draw_tool_.format_args(EditorTool::First, parent));
+			EditorToolAction da(draw_tool_, EditorTool::First, map, center, parent_,
+			                    draw_tool_.format_args(EditorTool::First));
 
 			if (!undo_stack_.empty()) {
 				draw_tool_.add_action(undo_stack_.front(), *da.args);
@@ -123,5 +122,5 @@ uint32_t EditorHistory::do_action(EditorTool& tool,
 			}
 		}
 	}
-	return tool.handle_click(ind, center, parent, ac.args, &map);
+	return tool.handle_click(ind, center, ac.args, &map);
 }

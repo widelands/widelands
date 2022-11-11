@@ -27,15 +27,13 @@
 /// Unsets a buildspace for ports.
 class EditorUnsetPortSpaceTool : public EditorTool {
 public:
-	explicit EditorUnsetPortSpaceTool();
+	explicit EditorUnsetPortSpaceTool(EditorInteractive& parent);
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
@@ -49,15 +47,13 @@ public:
 /// Sets a buildspace for ports.
 class EditorSetPortSpaceTool : public EditorTool {
 public:
-	explicit EditorSetPortSpaceTool(EditorUnsetPortSpaceTool&);
+	explicit EditorSetPortSpaceTool(EditorInteractive& parent, EditorUnsetPortSpaceTool&);
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 

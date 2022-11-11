@@ -20,6 +20,7 @@
 #define WL_EDITOR_UI_MENUS_TOOL_OPTIONS_MENU_H
 
 #include "editor/editorinteractive.h"
+#include "editor/tools/tool.h"
 #include "ui_basic/unique_window.h"
 
 struct EditorToolOptionsMenu : public UI::UniqueWindow {
@@ -50,6 +51,12 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	}
 	uint32_t vmargin() const {
 		return spacing();
+	}
+
+	/**
+	 * Update window options to match tool settings
+	 */
+	virtual void update_window() {
 	}
 
 private:

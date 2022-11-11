@@ -3,6 +3,7 @@
 # 
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2016
+# C138, 2022
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
@@ -10,13 +11,14 @@
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Renaud Bouchard, 2015
 # Renaud Bouchard, 2015-2017,2019
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Renaud Bouchard, 2015-2017,2019\n"
+"Last-Translator: C138, 2022\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -665,18 +667,18 @@ msgstr "J'y ai pensé, Sidolus. Je crois qu'il est temps. Nous allons en faire u
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "Rapports Loftomor"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "Que Satul te réchauffe, Jundlina ! Nous avons terminé une forge d'outils et maintenant nos forgerons produiront de nouveaux outils en un instant."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "Les souvenirs de Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -685,7 +687,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "Puisse Satul vous réchauffer également, Loftomor. C'est une bonne nouvelle à entendre. Cependant, n'oubliez pas que nos forgerons doivent être équipés d'une scie. Fabriquer des outils est un art pour nous, nécessitant un outil précis comme une scie, pas un marteau brutal comme pour les autres tribus."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -943,7 +945,7 @@ msgstr "Félicitations"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Vous avez terminé cette mission. Vous pouvez continuer à jouer si vous le souhaitez, sinon passez à la mission suivante."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.

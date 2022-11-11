@@ -34,9 +34,12 @@ class InteractiveGameBase;
 /// Displays a warning if the filename to be saved to already esists
 struct SaveWarnMessageBox;
 
-/// A window that lets the user save the current game and delete savegames.
+/**
+ * A window that lets the user save the current game and delete savegames.
+ * Note that this window is always modal.
+ */
 struct GameMainMenuSaveGame : public UI::UniqueWindow {
-	enum class Type { kSave, kLoad };
+	enum class Type { kSave, kLoadSavegame, kLoadReplay };
 
 	friend struct SaveWarnMessageBox;
 	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry, Type);
@@ -87,7 +90,6 @@ private:
 
 	std::string curdir_;
 	const std::string illegal_filename_tooltip_;
-	std::unique_ptr<UI::Panel::ModalGuard> modal_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H

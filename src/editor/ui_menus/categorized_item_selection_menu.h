@@ -48,6 +48,9 @@ public:
 	   const std::function<void()> select_correct_tool,
 	   ToolType* const tool);
 
+	// Updates selection to match the tool settings
+	void update_selection();
+
 private:
 	// Called when an item was selected.
 	void selected(int32_t, bool);
@@ -180,6 +183,20 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 		buf = format(_("Current: %s"), buf);
 	}
 	current_selection_names_.set_text(buf);
+}
+
+template <typename DescriptionType, typename ToolType>
+void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_selection() {
+	protect_against_recursive_select_ = true;
+
+	const int32_t size = checkboxes_.size();
+	for (int32_t i = 0; i < size; i++) {
+		checkboxes_[i]->set_state(tool_->is_enabled(i));
+	}
+
+	update_label();
+
+	protect_against_recursive_select_ = false;
 }
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H

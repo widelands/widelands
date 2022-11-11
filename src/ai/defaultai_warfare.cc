@@ -29,11 +29,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 
 	const Widelands::Map& map = game().map();
 
-	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
-	uint32_t plr_in_game = 0;
 	Widelands::PlayerNumber const pn = player_number();
-
-	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 
 	update_player_stat(gametime);
 	// defining treshold ratio of own_strength/enemy's strength

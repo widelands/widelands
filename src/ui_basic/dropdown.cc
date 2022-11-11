@@ -446,7 +446,7 @@ void BaseDropdown::set_value() {
 }
 
 void BaseDropdown::toggle() {
-	set_list_visibility(!list_->is_visible());
+	set_list_visibility(!list_->is_visible(), is_mouse_away());
 }
 
 void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
@@ -502,7 +502,7 @@ bool BaseDropdown::is_mouse_away() const {
 }
 
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
-	if (down) {
+	if (down && (SDL_GetModState() & KMOD_CTRL) == 0) {
 		switch (code.sym) {
 		case SDLK_RETURN:
 			if (list_->is_visible()) {
@@ -512,8 +512,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 					toggle_list();
 				}
 			} else {
-				// Handle Enter only if the list is open
-				return false;
+				set_list_visibility(true);
 			}
 			return true;
 		case SDLK_ESCAPE:
@@ -523,12 +522,6 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 				} else {
 					set_list_visibility(false);
 				}
-				return true;
-			}
-			break;
-		case SDLK_SPACE:
-			if (!is_expanded()) {
-				set_list_visibility(true);
 				return true;
 			}
 			break;

@@ -24,20 +24,19 @@
 
 ///  Decreases the resources of a node by a value.
 struct EditorDecreaseResourcesTool : public EditorTool {
-	EditorDecreaseResourcesTool() : EditorTool(*this, *this), cur_res_(0), change_by_(1) {
+	EditorDecreaseResourcesTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this), cur_res_(0), change_by_(1) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	EditorActionArgs format_args_impl() override;
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_decrease_resources.png");
@@ -59,6 +58,20 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 	}
 	void set_cur_res(Widelands::DescriptionIndex const res) {
 		cur_res_ = res;
+	}
+
+	WindowID get_window_id() override {
+		return WindowID::ChangeResources;
+	}
+
+	bool save_configuration_impl(ToolConf& conf) override {
+		conf.resource = cur_res_;
+		conf.change_by = change_by_;
+		return true;
+	}
+	void load_configuration(const ToolConf& conf) override {
+		cur_res_ = conf.resource;
+		change_by_ = conf.change_by;
 	}
 
 private:

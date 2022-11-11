@@ -308,9 +308,12 @@ void EditorGameBase::allocate_player_maps() {
 void EditorGameBase::postload() {
 	create_tempfile_and_save_mapdata(FileSystem::ZIP);
 	assert(descriptions_);
+
+	postload_addons();
+	postload_tribes();
 }
 
-void EditorGameBase::postload_addons(bool also_postload_tribes) {
+void EditorGameBase::postload_addons() {
 	if (did_postload_addons_) {
 		return;
 	}
@@ -341,10 +344,6 @@ void EditorGameBase::postload_addons(bool also_postload_tribes) {
 			}
 		}
 	}
-
-	if (also_postload_tribes) {
-		postload_tribes();
-	}
 }
 
 void EditorGameBase::postload_tribes() {
@@ -357,15 +356,17 @@ void EditorGameBase::postload_tribes() {
 	for (DescriptionIndex i = 0; i < descriptions_->nr_tribes(); ++i) {
 		descriptions_->get_mutable_tribe_descr(i)->finalize_loading(*descriptions_);
 	}
+	descriptions_->finalize_loading();
 }
 
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
                                                      bool show_game_tips,
                                                      const std::string& theme,
                                                      const std::string& background,
+                                                     bool crop,
                                                      UI::Panel* parent) {
 	assert(!has_loader_ui());
-	loader_ui_.reset(new UI::ProgressWindow(parent, theme, background));
+	loader_ui_.reset(new UI::ProgressWindow(parent, theme, background, crop));
 	registered_game_tips_ = tipstexts;
 	if (show_game_tips) {
 		game_tips_.reset(registered_game_tips_.empty() ?

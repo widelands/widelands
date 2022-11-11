@@ -24,22 +24,23 @@
 /// Set the height of a node to a random value within a defined interval.
 struct EditorNoiseHeightTool : public EditorTool {
 	explicit EditorNoiseHeightTool(
+	   EditorInteractive& parent,
 	   EditorSetHeightTool& the_set_tool,
 	   const Widelands::HeightInterval& the_interval = Widelands::HeightInterval(10, 14))
-	   : EditorTool(the_set_tool, the_set_tool), set_tool_(the_set_tool), interval_(the_interval) {
+	   : EditorTool(parent, the_set_tool, the_set_tool),
+	     set_tool_(the_set_tool),
+	     interval_(the_interval) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	EditorActionArgs format_args_impl() override;
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_noise_height.png");
@@ -55,6 +56,19 @@ struct EditorNoiseHeightTool : public EditorTool {
 	EditorSetHeightTool& set_tool() const {
 		return set_tool_;
 	}
+
+	WindowID get_window_id() override {
+		return WindowID::NoiseHeight;
+	}
+
+	bool save_configuration_impl(ToolConf& conf) override {
+		conf.interval = interval_;
+		return true;
+	}
+	void load_configuration(const ToolConf& conf) override {
+		interval_ = conf.interval;
+	}
+	std::string format_conf_description_impl(const ToolConf& conf) override;
 
 private:
 	EditorSetHeightTool& set_tool_;

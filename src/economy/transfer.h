@@ -64,6 +64,13 @@ struct Transfer {
 	void has_finished();
 	void has_failed();
 
+	WareInstance* get_ware() const {
+		return ware_;
+	}
+	Worker* get_worker() const {
+		return worker_;
+	}
+
 	struct ReadData {
 		uint32_t destination;
 

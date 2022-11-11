@@ -12,7 +12,7 @@
 # CupIvan <mail@cupivan.ru>, 2015
 # Sergey Trofimov <sarg@sarg.org.ru>, 2021
 # Viktor S <awsswa59@gmail.com>, 2018
-# Yuriy Sokolov <lention@mail.ru>, 2015
+# Yuriy Sokolov <lention@mail.ru>, 2015,2022
 # Владимир Шевцов, 2022
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018
@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-13 03:52+0000\n"
+"POT-Creation-Date: 2022-10-31 04:13+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Владимир Шевцов, 2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1228,6 +1228,7 @@ msgstr "Плантация маниоки"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:59
@@ -1431,7 +1432,7 @@ msgstr "готовит паёк"
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:8
 msgctxt "amazons_building"
 msgid "Furnace"
-msgstr "Печь"
+msgstr "Горн"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:59
@@ -1928,8 +1929,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Палатка дикосея"
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -2172,7 +2173,7 @@ msgstr "паромная переправа"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Fish Breeder’s House"
-msgstr "Домик рыбовода"
+msgstr "Дом рыбовода"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:52
@@ -2197,7 +2198,7 @@ msgid ""
 "water where he can breed fish in his work area. Remember that you can only "
 "regenerate your fish resources if there ever were some fish in the vicinity "
 "in the first place."
-msgstr "Рыбовод из этого домика не может найти водоём в своей рабочей области для разведения рыбы. Помните, они нужны для восстановления рыбных ресурсов в случае исчерпания их в диких водоёмах."
+msgstr "Рыбовод из этого дома не может найти водоём в своей рабочей области для разведения рыбы. Помните, они нужны для восстановления рыбных ресурсов в случае исчерпания их в диких водоёмах."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -2207,7 +2208,7 @@ msgstr "Рыбные угодья заполнены"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Fisher’s House"
-msgstr "Домик рыболова"
+msgstr "Дом рыболова"
 
 #. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:42
@@ -2224,13 +2225,13 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr "Рыболов не может найти рыбу в своей рабочей области вокруг этого домика рыболова. Помните, что поголовье рыбы можно увеличить, если построить домик рыбовода."
+msgstr "Рыболов не может найти рыбу в своей рабочей области вокруг этого дома рыболова. Помните, что поголовье рыбы можно увеличить, если построить дом рыбовода."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Forester’s House"
-msgstr "Домик лесника"
+msgstr "Дом лесника"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:8
@@ -2303,7 +2304,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Охотник, работающий здесь, не может найти дичь в рабочей области вокруг своего Домика охотника."
+msgstr "Охотник, работающий здесь, не может найти дичь в рабочей области вокруг своего Дома охотника."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:8
@@ -2411,7 +2412,7 @@ msgstr "пилит бревна"
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr "Домик разведчика"
+msgstr "Дом разведчика"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:8
@@ -2603,7 +2604,7 @@ msgstr "Носильщик, работающий у этого колодца, �
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Woodcutter’s House"
-msgstr "Домик лесоруба"
+msgstr "Дом лесоруба"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:48
 msgctxt "atlanteans_building"
@@ -2611,7 +2612,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Дровосек не может найти деревьев в рабочей области вокруг этого домика дровосека. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом домик лесника."
+msgstr "Дровосек не может найти деревьев в рабочей области вокруг этого дома дровосека. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом дом лесника."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -3225,14 +3226,14 @@ msgstr "Паромная переправа"
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:8
 msgctxt "empire_building"
 msgid "Fisher’s House"
-msgstr "Домик рыболова"
+msgstr "Дом рыболова"
 
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
 msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "Рыболов, работающий в этом Домике рыболова не может найти рыбу в своей рабочей области."
+msgstr "Рыболов, работающий в этом Доме рыболова не может найти рыбу в своей рабочей области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:8
@@ -3279,7 +3280,7 @@ msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Охотник, работающий в Домике охотника, не может найти дичь в своей рабочей области."
+msgstr "Охотник, работающий в Доме охотника, не может найти дичь в своей рабочей области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:8
@@ -3318,7 +3319,7 @@ msgstr "Главная жила этого железного рудника и�
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:8
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr "Домик дровосека"
+msgstr "Дом дровосека"
 
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:51
 msgctxt "empire_building"
@@ -3326,7 +3327,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Дровосек не может найти деревьев в рабочей области вокруг этого домика дровосека. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом домик лесника."
+msgstr "Дровосек не может найти деревьев в рабочей области вокруг этого дома дровосека. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом дом лесника."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
@@ -3424,7 +3425,7 @@ msgstr "Лесопилка"
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:8
 msgctxt "empire_building"
 msgid "Scout’s House"
-msgstr "Домик разведчика"
+msgstr "Дом разведчика"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:8
@@ -3453,7 +3454,7 @@ msgstr "Литейная"
 #: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:8
 msgctxt "empire_building"
 msgid "Stonemason’s House"
-msgstr "Домик камнетеса"
+msgstr "Дом камнетеса"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
@@ -3655,7 +3656,7 @@ msgstr "вербует солдат"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Beekeeper’s House"
-msgstr "Домик пчеловода"
+msgstr "Дом пчеловода"
 
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:63
 msgid "No Flowers"
@@ -3677,7 +3678,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Berry Farm"
-msgstr "Ягодная ферма"
+msgstr "Ягодник"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:53
@@ -3722,7 +3723,7 @@ msgstr "обжигает кирпич"
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Charcoal Burner’s House"
-msgstr "Домик углежога"
+msgstr "Дом углежога"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
@@ -3746,7 +3747,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr "Углежог из этого домика не может найти не вычерпанные глинистые пруды в своей рабочей области. Рассмотрите вопрос о выкапывании рядом глиняного карьера для обеспечения этого углежога всем необходимым, либо разобрать или разрушить это строение."
+msgstr "Углежог из этого дома не может найти не вычерпанные глинистые пруды в своей рабочей области. Рассмотрите вопрос о выкапывании рядом глиняного карьера для обеспечения этого углежога всем необходимым, либо разобрать или разрушить это строение."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:8
@@ -3813,7 +3814,7 @@ msgstr "Главная жила этой угольной шахты истощ�
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Fruit Collector’s House"
-msgstr "Домик сборщика фруктов"
+msgstr "Дом сборщика фруктов"
 
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:53
@@ -3834,7 +3835,22 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "Сборщик ягод, работающий в этом домике сборщика ягод, не может найти ягодные кусты в своей рабочей области. Рассмотрите вопрос строительства другой ягодной фермы, либо разобрать или разрушить это здание"
+msgstr "Сборщик ягод, работающий в этом доме сборщика ягод, не может найти ягодные кусты в своей рабочей области. Рассмотрите вопрос строительства другого ягодника, либо разобрать или разрушить это здание"
+
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
+msgctxt "frisians_building"
+msgid "Diker’s House"
+msgstr ""
+
+#. TRANSLATORS: Completed/Skipped/Did not start diking because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
+msgid "diking"
+msgstr ""
+
+#. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
+msgid "building a dike"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -3874,26 +3890,26 @@ msgstr "Паромная переправа"
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Fisher’s House"
-msgstr "Домик рыболова"
+msgstr "Дом рыболова"
 
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:64
 msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr "Рыболов, работающий в этом Домике рыболова, не может найти рыбу в своей рабочей области."
+msgstr "Рыболов, работающий в этом Доме рыболова, не может найти рыбу в своей рабочей области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Forester’s House"
-msgstr "Домик лесника"
+msgstr "Дом лесника"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:8
 msgctxt "frisians_building"
 msgid "Furnace"
-msgstr "Печь"
+msgstr "Литейная"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:8
@@ -3946,7 +3962,7 @@ msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr "Охотник, работающий здесь, не может найти дичь в рабочей области вокруг своего Домика охотника."
+msgstr "Охотник, работающий здесь, не может найти дичь в рабочей области вокруг своего Дома охотника."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:8
@@ -4087,7 +4103,7 @@ msgstr "Главная жила этой каменоломни истощила
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Scout’s House"
-msgstr "Домик разведчика"
+msgstr "Дом разведчика"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:8
@@ -4173,7 +4189,7 @@ msgstr "Носильщик, работающий у этого колодца, �
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Woodcutter’s House"
-msgstr "Домик лесоруба"
+msgstr "Дом лесоруба"
 
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:61
 msgctxt "frisians_building"
@@ -4181,7 +4197,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Лесоруб не может найти деревьев в рабочей области вокруг этого домика лесоруба. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом домик лесника."
+msgstr "Лесоруб не может найти деревьев в рабочей области вокруг этого дома лесоруба. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом дом лесника."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
@@ -4277,13 +4293,13 @@ msgstr "Место сбора войск"
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "повысить атаку солдата с 0 до 1"
+msgstr "повысить урон солдата с 0 до 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:102
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "повысить атаку солдата с 1 до 2"
+msgstr "повысить урон солдата с 1 до 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:205
@@ -4295,25 +4311,25 @@ msgstr "Темница"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:279
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "повышает атаку солдата с 0 до 1 уровня"
+msgstr "повышает урон солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:293
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "повышает атаку солдата с 1 до 2 уровня"
+msgstr "повышает урон солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:307
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "повышает атаку солдата с 2 до 3 уровня"
+msgstr "повышает урон солдата с 2 до 3 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:321
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "повышает атаку солдата с 3 до 4 уровня"
+msgstr "повышает урон солдата с 3 до 4 уровня"
 
 #. TRANSLATORS: Atlantean training site tooltip when it has no soldiers
 #. assigned
@@ -4411,31 +4427,31 @@ msgstr "Тренировочный лагерь"
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:109
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "повышает атаку солдата с 0 до 1 уровня"
+msgstr "повышает урон солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:123
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "повышает атаку солдата с 1 до 2 уровня"
+msgstr "повышает урон солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:137
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "повышает атаку солдата с 2 до 3 уровня"
+msgstr "повышает урон солдата с 2 до 3 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:151
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "повышает атаку солдата с 3 до 4 уровня"
+msgstr "повышает урон солдата с 3 до 4 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr "повышает атаку солдата с 4 до 5 уровня"
+msgstr "повышает урон солдата с 4 до 5 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:179
@@ -4507,25 +4523,25 @@ msgstr "Тренировочный лагерь"
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:99
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "повышает атаку солдата с 0 до 1 уровня"
+msgstr "повышает урон солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:113
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "повышает атаку солдата с 1 до 2 уровня"
+msgstr "повышает урон солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:127
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "повышает атаку солдата с 2 до 3 уровня"
+msgstr "повышает урон солдата с 2 до 3 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "повышает атаку солдата с 3 до 4 уровня"
+msgstr "повышает урон солдата с 3 до 4 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:155
@@ -4561,19 +4577,19 @@ msgstr "Тренировочная арена"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "повышает атаку солдата с 3 до 4 уровня"
+msgstr "повышает урон солдата с 3 до 4 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:135
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr "повышает атаку солдата с 4 до 5 уровня"
+msgstr "повышает урон солдата с 4 до 5 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:151
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
-msgstr "повышает атаку солдата с 5 до 6 уровня"
+msgstr "повышает урон солдата с 5 до 6 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:168
@@ -4612,19 +4628,19 @@ msgstr "Тренировочный лагерь"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:119
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "повышает атаку солдата с 0 до 1 уровня"
+msgstr "повышает урон солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:134
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "повышает атаку солдата с 1 до 2 уровня"
+msgstr "повышает урон солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:150
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "повышает атаку солдата с 2 до 3 уровня"
+msgstr "повышает урон солдата с 2 до 3 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166
@@ -5028,6 +5044,12 @@ msgid "Destroyed building"
 msgstr "Разрушенное здание"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/dike/init.lua:8
+msgctxt "immovable"
+msgid "Dike"
+msgstr ""
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine/medium/init.lua:8
 msgctxt "immovable"
 msgid "Grapevine (medium)"
@@ -5262,6 +5284,7 @@ msgstr "Бальзамовое дерево"
 msgid "Balsa Tree (Pole)"
 msgstr "Бальзамовое дерево (средневозрастное)"
 
+#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5422,50 +5445,6 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid "The people of the amazonian jungle."
 msgstr ""
-
-#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
-#. is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:8
-msgctxt "amazons_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% солдат (+%2%)"
-msgstr[1] "%1% солдата (+%2%)"
-msgstr[2] "%1% солдат (+%2%)"
-msgstr[3] "%1% солдат (+%2%)"
-
-#. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:11
-msgctxt "amazons_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% солдат"
-msgstr[1] "%1% солдата"
-msgstr[2] "%1% солдатов"
-msgstr[3] "%1% солдат"
-
-#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building. %3% is the maximum number
-#. of soldier slots in the building
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:16
-msgctxt "amazons_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) солдат (+%3%)"
-msgstr[1] "%1%(+%2%) солдата (+%3%)"
-msgstr[2] "%1%(+%2%) солдат (+%3%)"
-msgstr[3] "%1%(+%2%) солдат (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:19
-msgctxt "amazons_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) солдат"
-msgstr[1] "%1%(+%2%) солдата"
-msgstr[2] "%1%(+%2%) солдат"
-msgstr[3] "%1%(+%2%) солдатов"
 
 #. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
@@ -5701,50 +5680,6 @@ msgid ""
 "Atlantis."
 msgstr "Это племя известно из древнейших легенд. Сыновья и дочери Атлантиды."
 
-#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
-#. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:18
-msgctxt "atlanteans_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% солдат (+%2%)"
-msgstr[1] "%1% солдата (+%2%)"
-msgstr[2] "%1% солдат (+%2%)"
-msgstr[3] "%1% солдатов (+%2%)"
-
-#. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
-msgctxt "atlanteans_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% воин"
-msgstr[1] "%1% воина"
-msgstr[2] "%1% воинов"
-msgstr[3] "%1% воина"
-
-#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building. %3% is the maximum
-#. number of soldier slots in the building
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:26
-msgctxt "atlanteans_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) солдат (+%3%)"
-msgstr[1] "%1%(+%2%) солдатов (+%3%)"
-msgstr[2] "%1%(+%2%) солдат (+%3%)"
-msgstr[3] "%1%(+%2%) солдатов (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:29
-msgctxt "atlanteans_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) солдат"
-msgstr[1] "%1% (+%2%) солдата"
-msgstr[2] "%1% (+%2%) солдат "
-msgstr[3] "%1% (+%2%) солдатов"
-
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
@@ -5763,50 +5698,6 @@ msgstr "Варвары"
 msgid "The mighty tribes of the east-lands."
 msgstr "Могучие племена восточных земель."
 
-#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
-#. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:8
-msgctxt "barbarians_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% солдат (из %2%)"
-msgstr[1] "%1% солдата (из %2%)"
-msgstr[2] "%1% солдат (из %2%)"
-msgstr[3] "%1% солдата (из %2%)"
-
-#. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
-msgctxt "barbarians_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% солдат"
-msgstr[1] "%1% солдата"
-msgstr[2] "%1% солдат"
-msgstr[3] "%1% солдатов"
-
-#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building. %3% is the maximum
-#. number of soldier slots in the building
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:16
-msgctxt "barbarians_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1% солдат (+ %2%/%3% (мест))"
-msgstr[1] "%1% солдата (+ %2%/%3% (мест))"
-msgstr[2] "%1% солдат (+ %2%/%3% (мест))"
-msgstr[3] "%1% солдатов (+ %2%/%3% (мест))"
-
-#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:19
-msgctxt "barbarians_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1% солдат (+%2% )"
-msgstr[1] "%1% солдата (+%2%)"
-msgstr[2] "%1% солдат (+%2%)"
-msgstr[3] "%1% солдатов (+%2%)"
-
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
 msgid "Empire"
@@ -5815,50 +5706,6 @@ msgstr "Империя"
 #: ../../data/tribes/initialization/empire/init.lua:13
 msgid "This is the culture of the Roman Empire."
 msgstr "Это культура римской империи."
-
-#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
-#. is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/empire/military_capacity.lua:8
-msgctxt "empire_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% солдат (из %2%)"
-msgstr[1] "%1% солдата (из %2%)"
-msgstr[2] "%1% солдат (из %2%)"
-msgstr[3] "%1% солдатов (из %2%)"
-
-#. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/empire/military_capacity.lua:11
-msgctxt "empire_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% солдат"
-msgstr[1] "%1% солдата"
-msgstr[2] "%1% солдат"
-msgstr[3] "%1% солдатов"
-
-#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building. %3% is the maximum number
-#. of soldier slots in the building
-#: ../../data/tribes/initialization/empire/military_capacity.lua:16
-msgctxt "empire_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1% солдат (+%2%/%3% (мест))"
-msgstr[1] "%1% солдата (+ %2%/%3% (мест))"
-msgstr[2] "%1% солдат (+ %2%/%3% (мест))"
-msgstr[3] "%1% солдатов (+ %2%/%3% (мест))"
-
-#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/empire/military_capacity.lua:19
-msgctxt "empire_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1% солдат (+%2%)"
-msgstr[1] "%1% солдата (+%2%)"
-msgstr[2] "%1% солдат (+%2%)"
-msgstr[3] "%1% солдатов (+%2%)"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
@@ -5869,87 +5716,43 @@ msgstr "Фризы"
 msgid "The inhabitants of the rough North Sea shore."
 msgstr "Жители сурового побережья Северного моря."
 
-#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
-#. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:8
-msgctxt "frisians_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% солдат (из %2%)"
-msgstr[1] "%1% солдата (из %2%)"
-msgstr[2] "%1% солдат (из %2%)"
-msgstr[3] "%1% солдатов (из %2%)"
-
-#. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:11
-msgctxt "frisians_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% солдат"
-msgstr[1] "%1% солдата"
-msgstr[2] "%1% солдат"
-msgstr[3] "%1% солдатов"
-
-#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building. %3% is the maximum
-#. number of soldier slots in the building
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:16
-msgctxt "frisians_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1% солдат (+%2%/%3% (мест))"
-msgstr[1] "%1% солдата (+ %2%/%3% (мест))"
-msgstr[2] "%1% солдат (+ %2%/%3% (мест))"
-msgstr[3] "%1% солдатов (+ %2%/%3% (мест))"
-
-#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:19
-msgctxt "frisians_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1% солдат (+%2%)"
-msgstr[1] "%1% солдата (+ %2%)"
-msgstr[2] "%1% солдат (+%2%)"
-msgstr[3] "%1% солдатов (+ %2%)"
-
-#: ../../data/tribes/scripting/help/init.lua:84
+#: ../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
 msgstr "Энциклопедия племён"
 
-#: ../../data/tribes/scripting/help/init.lua:89
+#: ../../data/tribes/scripting/help/init.lua:90
 msgid "General"
 msgstr "Главное"
 
-#: ../../data/tribes/scripting/help/init.lua:94
+#: ../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
 msgstr "Введение"
 
-#: ../../data/tribes/scripting/help/init.lua:100
+#: ../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
 msgstr "Управление"
 
-#: ../../data/tribes/scripting/help/init.lua:106
+#: ../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
 msgstr "Подсказки"
 
-#: ../../data/tribes/scripting/help/init.lua:115
+#: ../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
 msgstr "Товары"
 
-#: ../../data/tribes/scripting/help/init.lua:122
+#: ../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
 msgstr "Работники"
 
-#: ../../data/tribes/scripting/help/init.lua:129
+#: ../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
 msgstr "Здания"
 
-#: ../../data/tribes/scripting/help/init.lua:136
+#: ../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
 msgstr "Неподвижные объекты (племя)"
 
-#: ../../data/tribes/scripting/help/init.lua:143
+#: ../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
 msgstr "Неподвижные объекты(Мир)"
 
@@ -9756,6 +9559,12 @@ msgstr "Углежог"
 msgctxt "frisians_worker"
 msgid "Clay Digger"
 msgstr "Глина Копатель"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/frisians/diker/init.lua:8
+msgctxt "frisians_worker"
+msgid "Diker"
+msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:8

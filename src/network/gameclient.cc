@@ -174,7 +174,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	game->run(settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
 	          settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
                                  Widelands::Game::StartGameType::kMap,
-	          "", false, format("netclient_%d", static_cast<int>(settings.usernum)));
+	          "", format("netclient_%d", static_cast<int>(settings.usernum)));
 
 	// if this is an internet game, tell the metaserver that the game is done.
 	if (internet_) {
@@ -247,11 +247,8 @@ GameClient::~GameClient() {
 void GameClient::run() {
 	d->send_hello();
 	d->settings.multiplayer = true;
-
-	// Fill the list of possible system messages
-	NetworkGamingMessages::fill_map();
-
 	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, d->internet_);
+
 	// The main menu's think() loop creates a mutex lock that would permanently block the Game
 	// from locking this mutex. So when the game starts we'll need to break the lock by force.
 	for (UI::Panel* p = d->modal; p != nullptr; p = p->get_parent()) {
@@ -268,6 +265,7 @@ void GameClient::do_run(RecvPacket& packet) {
 
 	Widelands::Game game;
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
+	game.logic_rand_seed(packet.unsigned_32());
 
 	game.enabled_addons().clear();
 	for (size_t i = packet.unsigned_32(); i != 0u; --i) {
@@ -291,8 +289,8 @@ void GameClient::do_run(RecvPacket& packet) {
 		if (has_players_tribe()) {
 			tipstexts.push_back(get_players_tribe());
 		}
-		UI::ProgressWindow& loader_ui =
-		   game.create_loader_ui(tipstexts, true, d->settings.map_theme, d->settings.map_background);
+		UI::ProgressWindow& loader_ui = game.create_loader_ui(
+		   tipstexts, true, d->settings.map_theme, d->settings.map_background, true);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
@@ -562,7 +560,16 @@ std::string GameClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
 
-void GameClient::set_win_condition_script(const std::string& /*wc*/) {
+int32_t GameClient::get_win_condition_duration() {
+	return d->settings.win_condition_duration;
+}
+
+void GameClient::set_win_condition_script(const std::string& /* wc */) {
+	// Clients are not allowed to change this
+	NEVER_HERE();
+}
+
+void GameClient::set_win_condition_duration(const int32_t /* duration */) {
 	// Clients are not allowed to change this
 	NEVER_HERE();
 }
@@ -1164,6 +1171,9 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	} break;
 	case NETCMD_WIN_CONDITION:
 		d->settings.win_condition_script = g_fs->FileSystem::fix_cross_file(packet.string());
+		break;
+	case NETCMD_WIN_CONDITION_DURATION:
+		d->settings.win_condition_duration = packet.signed_32();
 		break;
 	case NETCMD_PEACEFUL_MODE:
 		d->settings.peaceful = (packet.unsigned_8() != 0u);

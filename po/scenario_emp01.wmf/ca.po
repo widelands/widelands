@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015-2017,2019-2020
+# Juanjo, 2015-2017,2019-2020,2022
 # Juanjo, 2015
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
-"Last-Translator: Juanjo, 2015-2017,2019-2020\n"
+"Last-Translator: Juanjo, 2015-2017,2019-2020,2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,7 +71,7 @@ msgstr "Casa del guarda forestal"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr "Construïu una casa de guarda forestal per mantenir els recursos forestals de l'illa."
+msgstr "Construïu una casa de guarda forestal per mantenir els recursos forestals de l’illa."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
@@ -99,7 +99,7 @@ msgstr "Un cavaller fosc"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:109
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:222
 msgid "Diary of Lutius"
-msgstr "Agenda d'en Lutius"
+msgstr "Agenda d’en Lutius"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:78
@@ -117,7 +117,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr "Amb un exèrcit de 150 homes, se'm va assignar la patrulla en la frontera nord, prop de les muntanyes Galdin en un gran, preciós i antic bosc. Aviat vam trobar una tribu bàrbara, que primer era amistosa. Uns quants dels meus homes fins i tot van comerciar-hi. Els seus infants se'ns apropaven i admiraven els nostres nets i pulcres uniformes i armes."
+msgstr "Amb un exèrcit de 150 homes, se’m va assignar la patrulla en la frontera nord, prop de les muntanyes Galdin en un gran, preciós i antic bosc. Aviat vam trobar una tribu bàrbara, que primer era amistosa. Uns quants dels meus homes fins i tot van comerciar-hi. Els seus infants se’ns apropaven i admiraven els nostres nets i pulcres uniformes i armes."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -128,7 +128,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr "Però durant la cinquena nit en aquella regió, ens van atacar sense motiu. Vaig perdre-hi dotzenes d'homes i em van portar empresonat davant el seu cap. Em va escopir, se'n va burlar de mi i després em va ordenar d'abandonar aquelles terres per sempre. No volia noves terres, però em va deixar clar que el bosc era la seva terra i que seria seva fins que els esperits s'enduguin l'últim dels seus homes."
+msgstr "Però durant la cinquena nit en aquella regió, ens van atacar sense motiu. Vaig perdre-hi dotzenes d’homes i em van portar empresonat davant el seu cap. Em va escopir, se’n va burlar de mi i després em va ordenar d’abandonar aquelles terres per sempre. No volia noves terres, però em va deixar clar que el bosc era la seva terra i que seria seva fins que els esperits s’enduguin l’últim dels seus homes."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:87
@@ -146,7 +146,7 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr "Tot i això, no veig la manera d'esborrar la vergonya que sento sense lluitar contra aquests bàrbars. Per això, he sortit de Fremil en vaixell per trobar un nou món i una nova vida més cap al sud. Navego pel golf de la Perla amb la meva família, algun dels meus amics i alguns dels meus millors guerrers."
+msgstr "Tot i això, no veig la manera d’esborrar la vergonya que sento sense lluitar contra aquests bàrbars. Per això, he sortit de Fremil en vaixell per trobar un nou món i una nova vida més cap al sud. Navego pel golf de la Perla amb la meva família, algun dels meus amics i alguns dels meus millors guerrers."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:96
 msgid "The Rough Sea"
@@ -159,7 +159,7 @@ msgid ""
 "Nature was against us and drove us into a dark, wild storm. I really don’t "
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
-msgstr "Sembla que navegar pel golf de la Perla ha estat un error. La natura estava en contra nostra i ens ha portat a una fosca i ferotge tempesta. No sé quantes hores han passat des que les onades s'alçaven més altes que el nostre vaixell, però encara és un suïcidi sortir a fora."
+msgstr "Sembla que navegar pel golf de la Perla ha estat un error. La natura estava en contra nostra i ens ha portat a una fosca i ferotge tempesta. No sé quantes hores han passat des que les onades s’alçaven més altes que el nostre vaixell, però encara és un suïcidi sortir a fora."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:102
@@ -183,7 +183,7 @@ msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr "Hem arribat a una costa desconeguda i hem trobat descans baix de les palmeres que creixen a la costa. Però això és tot el que ens hem trobat de bo. La veritat és que quan m'he aixecat aquest matí, pel voltant no he vist res a banda de sorra."
+msgstr "Hem arribat a una costa desconeguda i hem trobat descans baix de les palmeres que creixen a la costa. Però això és tot el que ens hem trobat de bo. La veritat és que quan m’he aixecat aquest matí, pel voltant no he vist res a banda de sorra."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:117
@@ -191,7 +191,7 @@ msgid ""
 "It really seems as if we have landed under the only palm trees existing in "
 "this far-away sandy desert. I fear we won’t find the help we need to get our"
 " ship repaired in good time."
-msgstr "Sembla que hem arribat justament baix de l'única palmera que hi ha en aquest extens desert. Em temo que no trobarem l'ajuda necessària per reparar la nau en poc temps."
+msgstr "Sembla que hem arribat justament baix de l’única palmera que hi ha en aquest extens desert. Em temo que no trobarem l’ajuda necessària per reparar la nau en poc temps."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:123
 msgid "A Foreboding"
@@ -223,7 +223,7 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr "Hauríem de construir un barracó a la part oriental del bosc. Llavors, algun dels meus homes podrà vigilar en la foscor i mantenir-nos fora de perill d'aquestes criatures."
+msgstr "Hauríem de construir un barracó a la part oriental del bosc. Llavors, algun dels meus homes podrà vigilar en la foscor i mantenir-nos fora de perill d’aquestes criatures."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:139
 msgid "Safe For Now"
@@ -255,7 +255,7 @@ msgstr "La jove Amalea"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Amalea smiles…"
-msgstr "L'Amalea somriu…"
+msgstr "L’Amalea somriu…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:153
@@ -267,7 +267,7 @@ msgstr "Us saludo, Lutius! Acabo de parlar amb en Saledus a fora."
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr "M'ha parlat dels barracons. Bé, no crec que en necessitem més: jo em concentraria en altres coses ara per ara."
+msgstr "M’ha parlat dels barracons. Bé, no crec que en necessitem més: jo em concentraria en altres coses ara per ara."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:159
@@ -275,11 +275,11 @@ msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr "Sembla clar com l'aigua que necessitem fusta per reparar el vaixell. Així que he buscat un lloc adequat per a la casa del llenyataire i n'he trobat un just al sud del nostre quarter general provisional."
+msgstr "Sembla clar com l’aigua que necessitem fusta per reparar el vaixell. Així que he buscat un lloc adequat per a la casa del llenyataire i n’he trobat un just al sud del nostre quarter general provisional."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:166
 msgid "Amalea recommends…"
-msgstr "L'Amalea ens recomana…"
+msgstr "L’Amalea ens recomana…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:168
@@ -288,7 +288,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr "M'han informat que el llenyataire acaba de començar a treballar. Potser seria una bona idea esperar que aclareixi prou espai per construir-hi dues cases més de llenyataires i així aconseguir troncs més ràpidament."
+msgstr "M’han informat que el llenyataire acaba de començar a treballar. Potser seria una bona idea esperar que aclareixi prou espai per construir-hi dues cases més de llenyataires i així aconseguir troncs més ràpidament."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:171
@@ -301,7 +301,7 @@ msgstr "Desafortunadament els troncs no serveixen per reparar la nau. Necessitem
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Amalea comes in…"
-msgstr "Entra n'Amalea…"
+msgstr "Entra n’Amalea…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:180
@@ -313,14 +313,14 @@ msgstr "Tinc dues coses importants a dir-vos. Primer, les bones notícies:"
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into planks."
-msgstr "He vist que s'ha acabat de construir la serradora. Ja podem refinar els troncs que talen els llenyataires i fer-ne taulons."
+msgstr "He vist que s’ha acabat de construir la serradora. Ja podem refinar els troncs que talen els llenyataires i fer-ne taulons."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr "Però la mala notícia és que els nostres llenyataires treballen molt de pressa: ja quasi no queden arbres a l'illa."
+msgstr "Però la mala notícia és que els nostres llenyataires treballen molt de pressa: ja quasi no queden arbres a l’illa."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -328,12 +328,12 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr "Aquests arbres ens proveeixen refugi de les tempestes de sorra que escombren l'illa, donen ombra els dies calorosos i són la llar de tants gentils animals. No hauríem de deixar que aquesta illa es converteixi en un complet desert."
+msgstr "Aquests arbres ens proveeixen refugi de les tempestes de sorra que escombren l’illa, donen ombra els dies calorosos i són la llar de tants gentils animals. No hauríem de deixar que aquesta illa es converteixi en un complet desert."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:192
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr "Lutius, si us plau, trobeu algú que s'encarregui de plantar arbres."
+msgstr "Lutius, si us plau, trobeu algú que s’encarregui de plantar arbres."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:198
 msgid "Thinking About the Future"
@@ -348,7 +348,7 @@ msgstr "En Saledus afegeix…"
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
-msgstr "Senyor, estava pensant que potser aquelles roques de la costa sud de l'illa ens podrien servir per tallar peces de granit i també de preciós marbre."
+msgstr "Senyor, estava pensant que potser aquelles roques de la costa sud de l’illa ens podrien servir per tallar peces de granit i també de preciós marbre."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:204
@@ -388,14 +388,14 @@ msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
-msgstr "Avui m'ha arribat un missatge dient que la nostra nau està completament reparada. Ara mateix, la meva gent està carregant-ho tot en la nostra nova nau, esperant que serveixi el seu propòsit millor que l'anterior."
+msgstr "Avui m’ha arribat un missatge dient que la nostra nau està completament reparada. Ara mateix, la meva gent està carregant-ho tot en la nostra nova nau, esperant que serveixi el seu propòsit millor que l’anterior."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:227
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
-msgstr "Aquesta nit serà l'última en aquesta illa. Demà al matí partirem, buscant un nou lloc per al nostre exili."
+msgstr "Aquesta nit serà l’última en aquesta illa. Demà al matí partirem, buscant un nou lloc per al nostre exili."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:230
@@ -425,4 +425,4 @@ msgstr "En Saledus parla:"
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr "Senyor, heu fet d'aquesta península un lloc molt segur. És hora de continuar!"
+msgstr "Senyor, heu fet d’aquesta península un lloc molt segur. És hora de continuar!"

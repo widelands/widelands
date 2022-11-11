@@ -195,6 +195,7 @@ public:
 
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
+	bool is_present(Worker& worker) const override;
 
 	bool get_build_heroes() {
 		return build_heroes_;
@@ -228,6 +229,7 @@ private:
 
 		std::vector<Soldier*> present_soldiers() const override;
 		std::vector<Soldier*> stationed_soldiers() const override;
+		std::vector<Soldier*> associated_soldiers() const override;
 		Quantity min_soldier_capacity() const override;
 		Quantity max_soldier_capacity() const override;
 		Quantity soldier_capacity() const override;

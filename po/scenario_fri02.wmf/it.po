@@ -5,6 +5,7 @@
 # Translators:
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Guybrush88 <erpizzo@alice.it>, 2021
+# Log Merger, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2021\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,6 +32,9 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Sembra che tu non abbia completato la precedente missione. Puoi sempre "
+"giocare questo scenario, ma avrai degli svantaggi. Ti suggerisco prima di "
+"completare lo scenario precedente, poi di reiniziare questa missione."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
@@ -45,6 +49,9 @@ msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
+"Costruisci una cava, una fattoria per le canne, una cava di argilla, un "
+"pozzo, una carbonaia, una fornace di mattoni e le case per il taglialegna e "
+"la guardia forestale."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:33
 msgid "Expand to the south"
@@ -275,6 +282,12 @@ msgid ""
 "to steady the ship, feeling as though it were a squalid sacrifice to the "
 "gods to give us hope to live a few hours longer."
 msgstr ""
+"Le tempeste mantennero fieramente il loro artiglio sulla nave durante tutto "
+"il nostro viaggio. Non ci fu quasi giorno in cui non ci chiedemmo se non "
+"sarebbe stato l'ultimo. Per stabilizzare la nave fummo costretti a gettare "
+"fuori bordo i metalli preziosi che avevamo portato con noi, con la "
+"sensazione che fosse uno squallido sacrificio agli dei per darci la speranza"
+" di vivere ancora qualche ora."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:132
@@ -411,6 +424,9 @@ msgid ""
 "possible to smelt them back into metal? But that seems like a waste of the "
 "precious swords…"
 msgstr ""
+"Ho visto alcune armi avanzate nei nostri magazzini. Sarebbe forse possibile "
+"fonderli nuovamente nei metalli di cui sono composte? Anche se potrebbe "
+"sembrare uno spreco delle preziose spade…"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 msgid "New metal"
@@ -655,6 +671,11 @@ msgid ""
 "expand your territory from this moment on until you have given us your gift."
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
+"Se mancherete di consegnare questi beni, l'Impero dovrà trattarvi come "
+"nemici. Ed in modo da prevenire che dilapidiate i vostri preziosi metalli, "
+"vi proibisco di espandervi da questo momento in poi, finché non ci avrete "
+"consegnato il vostro omaggio. Mancate di obbedire, e l'Impero vi tratterà "
+"come nemici."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:310
@@ -747,6 +768,8 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "basely wasting your precious resources on expansion!"
 msgstr ""
+"Barbari! Avete sgraziatamente rifiutato la mia offerta di amicizia e "
+"sprecato ignobilmente le vostre preziose risorse per espandervi!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:370
 msgid "Two Enemies"
@@ -876,6 +899,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Hai completato questa missione. Puoi continuare a giocare, se lo desideri, "
+"altrimenti passa alla prossima missione."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13

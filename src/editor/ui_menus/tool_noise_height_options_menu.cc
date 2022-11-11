@@ -144,3 +144,8 @@ void EditorToolNoiseHeightOptionsMenu::update_set_to() {
 	noise_tool_.set_tool().set_interval(Widelands::HeightInterval(set_to, set_to));
 	select_correct_tool();
 }
+
+void EditorToolNoiseHeightOptionsMenu::update_window() {
+	lower_.set_value(noise_tool_.get_interval().min);
+	upper_.set_value(noise_tool_.get_interval().max);
+}

@@ -53,12 +53,12 @@ Widelands::NodeCaps set_starting_pos_tool_nodecaps(const Widelands::FCoords& c,
 
 }  // namespace
 
-EditorSetStartingPosTool::EditorSetStartingPosTool() : EditorTool(*this, *this, false) {
+EditorSetStartingPosTool::EditorSetStartingPosTool(EditorInteractive& parent)
+   : EditorTool(parent, *this, *this, false) {
 	current_player_ = 1;
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                    EditorInteractive& /* eia */,
                                                     EditorActionArgs* /* args */,
                                                     Widelands::Map* map) {
 	assert(0 <= center.node.x);

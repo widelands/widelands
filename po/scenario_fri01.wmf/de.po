@@ -4,11 +4,10 @@
 # 
 # Translators:
 # SevyRide, 2018
-# Wuzzy <almikes@aol.com>, 2018
+# Wuzzy <Wuzzy@disroot.org>, 2018
 # Elisabeth Jäger, 2018
 # Markus M <mayer.markus@gmx.at>, 2019
-# Lennard Hofmann <lennard.hofmann@web.de>, 2021
-# Stephan Lutz <stephan-lutz@gmx.de>, 2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # 
 msgid ""
 msgstr ""
@@ -16,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -203,7 +202,7 @@ msgstr ""
 "Bilde einen Krieger auf die höchstmögliche Stufe aus. Krieger werden in "
 "Ausbildungslagern und -arenen ausgebildet. Wir werden eine Goldmine, eine "
 "Schneiderei für robustere Gewänder und eine große Rüstungsschmiede für "
-"bessere Waffen und Helme benötigen. "
+"bessere Waffen und Helme benötigen."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
@@ -518,7 +517,7 @@ msgstr ""
 "unserer Gebäude erheblich, da wir so viele Ziegel brauchen. Wir sollten "
 "wirklich eine weitere Ziegelei errichten und ihr die höchstmögliche "
 "Priorität für Ziegel im Baustellenfenster zuweisen, um den Mangel so schnell"
-" wie möglich zu beheben. "
+" wie möglich zu beheben."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
@@ -877,7 +876,7 @@ msgstr ""
 "mit Gold verziert und alle bestehen aus Eisen. Fortgeschrittene Krieger "
 "lernen, mit zwei Schwertern gleichzeitig umzugehen. Sie behalten ihr erstes "
 "zweischneidiges Schwert und bekommen jeweils die anderen Schwerttypen, um "
-"sie in ihrer zweiten Hand zu führen.  Damit gibt es sechs Stufen bei der "
+"sie in ihrer zweiten Hand zu führen. Damit gibt es sechs Stufen bei der "
 "Angriffsausbildung."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
@@ -910,7 +909,7 @@ msgstr ""
 "bessere Waffen und Helme schmieden zu können, und eine neue kleine bauen, "
 "damit neue Krieger weiterhin die Grundausstattung erhalten können. Wir "
 "brauchen nun mindestens eine Goldmine, denn die besten Waffen und Rüstungen "
-"werden mit Gold geschmückt. "
+"werden mit Gold geschmückt."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:336
@@ -1023,9 +1022,9 @@ msgid ""
 "fortress right at the border."
 msgstr ""
 "Die Kundschafter erzählten mir, dass der Feind keine Türme bauen kann. Wir "
-"könnten eine Festung errichten, die die Grenze auf einen Schlag sehr weit "
-"gen Osten erweitert. Der Feind kann sie nur sehen, wenn er selbst eine "
-"Festung direkt an der Grenze hat. "
+"könnten eine Festung errichten, weil sie das Gebäude ist, das die Grenze auf"
+" einen Schlag sehr weit gen Osten erweitert. Der Feind kann sie nur sehen, "
+"wenn er selbst eine Festung direkt an der Grenze hat."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:377
@@ -1168,7 +1167,7 @@ msgid ""
 " the soldiers in the port will be carried over to the next scenario."
 msgstr ""
 "Alle Waren und Arbeiter, die auf das Expeditionsschiff geladen wurden, sowie"
-" einige der Soldaten im Hafen werden in das nächste Szenario übernommen. "
+" einige der Soldaten im Hafen werden in das nächste Szenario übernommen."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"

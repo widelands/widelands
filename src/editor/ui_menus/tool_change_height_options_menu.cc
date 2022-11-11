@@ -90,3 +90,8 @@ void EditorToolChangeHeightOptionsMenu::update_set_to() {
 	increase_tool_.set_tool().set_interval(Widelands::HeightInterval(set_to, set_to));
 	select_correct_tool();
 }
+
+void EditorToolChangeHeightOptionsMenu::update_window() {
+	change_by_.set_value(increase_tool_.get_change_by());
+	set_to_.set_value(increase_tool_.set_tool().get_interval().min);
+}

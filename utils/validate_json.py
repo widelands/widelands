@@ -11,7 +11,6 @@ import sys
 
 
 def validate_files_in_path(source_path):
-
     if (not os.path.isdir(source_path)):
         print('Error: Path ' + source_path + ' not found.')
         sys.exit(1)

@@ -62,6 +62,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
+#include "logic/replay_game_controller.h"
 #include "logic/single_player_game_controller.h"
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #include "logic/training_wheels.h"
@@ -72,6 +73,7 @@
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
+#include "wui/interactive_spectator.h"
 
 namespace Widelands {
 
@@ -151,10 +153,12 @@ Game::Game()
      diplomacy_allowed_(true),
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
+     win_condition_duration_(kDefaultWinConditionDuration)
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
-     training_wheels_wanted_(false),
+     ,
+     training_wheels_wanted_(false)
 #endif
-     replay_(false) {
+{
 	Economy::initialize_serial();
 }
 
@@ -225,7 +229,7 @@ void Game::postload_addons_before_loading() {
 	did_postload_addons_before_loading_ = true;
 	delete_world_and_tribes();
 	mutable_descriptions()->ensure_tribes_are_registered();
-	postload_addons(false);
+	postload_addons();
 }
 
 // TODO(Nordfriese): Needed for v1.0 savegame compatibility, remove after v1.1
@@ -239,7 +243,7 @@ void Game::check_legacy_addons_desync_magic() {
 		}
 	}
 	if (!needed) {
-		postload_addons(true);
+		postload_addons();
 		return;
 	}
 
@@ -253,7 +257,7 @@ void Game::check_legacy_addons_desync_magic() {
 	EditorInteractive::load_world_units(nullptr, *this);
 	load_all_tribes();
 
-	postload_addons(true);
+	postload_addons();
 }
 
 bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
@@ -277,7 +281,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 	maploader->preload_map(true, &enabled_addons());
 
 	create_loader_ui({"general_game"}, false /* no game tips in scenarios */,
-	                 map().get_background_theme(), map().get_background());
+	                 map().get_background_theme(), map().get_background(), true);
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
@@ -307,8 +311,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 
 	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, 1));
 	try {
-		bool const result =
-		   run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
+		bool const result = run(StartGameType::kSinglePlayerScenario, script_to_run, "single_player");
 		ctrl_.reset();
 		return result;
 	} catch (...) {
@@ -330,10 +333,13 @@ void Game::init_newgame(const GameSettings& settings) {
 		maploader = mutable_map()->get_correct_loader(settings.mapfilename);
 		assert(maploader);
 		maploader->preload_map(settings.scenario, &enabled_addons());
+		postload_addons_before_loading();
+	} else {
+		// TODO(matthiakl): Once random games support world Add-Ons, call
+		// postload_addons_before_loading() here as well
+		postload_addons();
+		did_postload_addons_before_loading_ = true;
 	}
-
-	postload_addons(false);
-	did_postload_addons_before_loading_ = true;
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
@@ -399,6 +405,7 @@ void Game::init_newgame(const GameSettings& settings) {
 			}
 		}
 
+		win_condition_duration_ = settings.win_condition_duration;
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
@@ -430,6 +437,7 @@ void Game::init_savegame(const GameSettings& settings) {
 		gl.preload_game(gpdp);
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		win_condition_duration_ = gpdp.get_win_condition_duration();
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		training_wheels_wanted_ =
@@ -449,7 +457,7 @@ void Game::init_savegame(const GameSettings& settings) {
 
 		// Discover the links between resources and geologist flags,
 		// dependencies of productionsites etc.
-		postload_addons(true);
+		postload_addons();
 
 		// Players might have selected a different AI type
 		for (uint8_t i = 0; i < settings.players.size(); ++i) {
@@ -475,10 +483,11 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		gl.preload_game(gpdp);
 
 		create_loader_ui({"general_game", "singleplayer"}, true, gpdp.get_background_theme(),
-		                 gpdp.get_background());
+		                 gpdp.get_background(), true);
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		win_condition_duration_ = gpdp.get_win_condition_duration();
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		training_wheels_wanted_ =
 		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
@@ -498,7 +507,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		set_ibase(ipl);
 
 		gl.load_game();
-		postload_addons(true);
+		postload_addons();
 
 		ipl->info_panel_fast_forward_message_queue();
 	}
@@ -508,7 +517,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, player_nr));
 	try {
-		bool const result = run(StartGameType::kSaveGame, script_to_run, false, "single_player");
+		bool const result = run(StartGameType::kSaveGame, script_to_run, "single_player");
 		ctrl_.reset();
 		return result;
 	} catch (...) {
@@ -585,11 +594,9 @@ void Game::postload() {
  */
 bool Game::run(StartGameType const start_game_type,
                const std::string& script_to_run,
-               bool replay,
                const std::string& prefix_for_replays) {
 	assert(has_loader_ui());
 
-	replay_ = replay;
 	postload();
 
 	InteractivePlayer* ipl = get_ipl();
@@ -734,7 +741,7 @@ bool Game::run(StartGameType const start_game_type,
 		}
 	}
 
-	postload_addons(true);
+	postload_addons();
 
 	sync_reset();
 	Notifications::publish(UI::NoteLoadingMessage(_("Initializing…")));
@@ -781,9 +788,14 @@ bool Game::run(StartGameType const start_game_type,
 		return true;
 	}
 
-	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
 	const std::string load = next_game_to_load_;  // Pass-by-reference does have its disadvantages…
+
+	if (FileSystem::filename_ext(load) == kReplayExtension) {
+		return run_replay(load, script_to_run);
+	}
 	if (FileSystem::filename_ext(load) == kSavegameExtension) {
+		create_loader_ui(
+		   {"general_game"}, false, map().get_background_theme(), map().get_background(), true);
 		return run_load_game(load, script_to_run);
 	}
 
@@ -796,6 +808,21 @@ bool Game::run(StartGameType const start_game_type,
 		assert(list.front() == load);
 	}
 	return run_splayer_scenario_direct(list, script_to_run);
+}
+
+bool Game::run_replay(const std::string& filename, const std::string& script_to_run) {
+	full_cleanup();
+	replay_filename_ = filename;
+
+	create_loader_ui(
+	   {"general_game"}, false, map().get_background_theme(), map().get_background(), true);
+	set_ibase(new InteractiveSpectator(*this, get_config_section()));
+
+	set_write_replay(false);
+	new ReplayGameController(*this);
+	save_handler().set_allow_saving(false);
+
+	return run(Widelands::Game::StartGameType::kSaveGame, script_to_run, "replay");
 }
 
 void Game::set_next_game_to_load(const std::string& file) {
@@ -875,6 +902,7 @@ void Game::full_cleanup() {
 	writereplay_ = true;  // Not using `set_write_replay()` on purpose.
 	next_game_to_load_.clear();
 	list_of_scenarios_.clear();
+	replay_filename_.clear();
 	Economy::initialize_serial();
 
 	if (has_loader_ui()) {
@@ -1252,6 +1280,9 @@ const std::string& Game::get_win_condition_displayname() const {
 }
 void Game::set_win_condition_displayname(const std::string& name) {
 	win_condition_displayname_ = name;
+}
+int32_t Game::get_win_condition_duration() const {
+	return win_condition_duration_;
 }
 
 /**

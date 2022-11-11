@@ -129,17 +129,17 @@ jobs:
         compiler: [clang-14, clang-13, g++-12, g++-11]
         include:
           # Some compilers need an older ubuntu version to run correctly
-          - compiler: g++-5
-            os: ubuntu-18.04
+          - compiler: g++-7
+            os: ubuntu-20.04
             config: Debug
-          - compiler: g++-5
-            os: ubuntu-18.04
+          - compiler: g++-7
+            os: ubuntu-20.04
             config: Release
-          - compiler: g++-6
-            os: ubuntu-18.04
+          - compiler: g++-8
+            os: ubuntu-20.04
             config: Debug
-          - compiler: g++-6
-            os: ubuntu-18.04
+          - compiler: g++-8
+            os: ubuntu-20.04
             config: Release
           - compiler: clang-6.0
             os: ubuntu-20.04
@@ -272,36 +272,31 @@ jobs:
       matrix:
         config: [Debug, Release]
         arch: [x64, x86]
+        include:
+          - arch: x64
+            bits: 64
+          - arch: x86
+            bits: 32
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MinGW)
     runs-on: windows-2022
     steps:
-    - name: Installing dependencies
-      run: |
-        $env:Path += ";C:\msys64\usr\bin"
-        pacman.exe --noconfirm -Syyuu --ignore ca-certificates
-        pacman.exe --noconfirm -Syyuu --ignore ca-certificates
-        if ("${{ matrix.arch }}" -Match "x64") {
-          $env:archname = "x86_64"
-        } else {
-          $env:archname = "i686"
-        }
-        pacman.exe --noconfirm -S mingw-w64-$env:archname-gcc mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-asio mingw-w64-$env:archname-icu
-        # pacman.exe --noconfirm -U https://repo.msys2.org/mingw/$env:archname/mingw-w64-$env:archname-libtiff-4.3.0-3-any.pkg.tar.zst
-        choco install innosetup
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 1
+    - name: Installing dependencies
+      run: |
+        $env:Path = "C:\msys64\usr\bin;$env:Path"
+        pacman.exe --noconfirm -Syyuu --ignore ca-certificates
+        pacman.exe --noconfirm -Syyuu --ignore ca-certificates
+        bash.exe -c "./install-dependencies.sh msys${{ matrix.bits }} --noconfirm"
+        # pacman.exe --noconfirm -U https://repo.msys2.org/mingw/$env:archname/mingw-w64-$env:archname-libtiff-4.3.0-3-any.pkg.tar.zst
+        choco install innosetup
     - name: Compiler
       run: |
-        if ("${{ matrix.arch }}" -Match "x64") {
-          $env:bits = "64"
-        } else {
-          $env:bits = "32"
-        }
-        $env:Path = "C:/msys64/mingw$env:bits/include;C:/msys64/mingw$env:bits/lib;C:/msys64/mingw$env:bits/bin;C:/msys64/usr/bin;$env:Path"
-        $env:CC = "C:/msys64/mingw$env:bits/bin/gcc.exe"
-        $env:CXX = "C:/msys64/mingw$env:bits/bin/g++.exe"
+        $env:Path = "C:/msys64/mingw${{ matrix.bits }}/include;C:/msys64/mingw${{ matrix.bits }}/lib;C:/msys64/mingw${{ matrix.bits }}/bin;C:/msys64/usr/bin;$env:Path"
+        $env:CC = "C:/msys64/mingw${{ matrix.bits }}/bin/gcc.exe"
+        $env:CXX = "C:/msys64/mingw${{ matrix.bits }}/bin/g++.exe"
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
         cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DCMAKE_JOB_POOLS="linking=1" -DCMAKE_JOB_POOL_LINK=linking -DOPTION_BUILD_WINSTATIC=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
@@ -311,13 +306,8 @@ jobs:
       run: |
         cd $env:GITHUB_WORKSPACE
         # Environment variables needed by our InnoSetup script
-        if ("${{ matrix.arch }}" -Match "x64") {
-          $env:PLATFORM = "x64"
-          $env:MINGWPATH = "C:\msys64\mingw64\bin"
-        } else {
-          $env:PLATFORM = "x86"
-          $env:MINGWPATH = "C:\msys64\mingw32\bin"
-        }
+        $env:PLATFORM = "${{ matrix.arch }}"
+        $env:MINGWPATH = "C:\msys64\mingw${{ matrix.bits }}\bin"
         $env:CONFIGURATION = "${{ matrix.config }}"
         $env:APPVEYOR_BUILD_FOLDER = $env:GITHUB_WORKSPACE
         $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
@@ -338,15 +328,15 @@ jobs:
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
     runs-on: macos-11
     steps:
-    - name: Installing dependencies
-      run: |
-        export ICU_ROOT="$(brew --prefix icu4c)" && \
-        export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install asio ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf dylibbundler
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 1
+    - name: Installing dependencies
+      run: |
+        export ICU_ROOT="$(brew --prefix icu4c)" && \
+        export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
+        ./install-dependencies.sh homebrew ccache dylibbundler
     - name: Building
       run: |
         mkdir build_wl
@@ -372,7 +362,7 @@ jobs:
         config: [Debug, Release]
         compiler: [clang-10]
     # Must run on the oldest still-supported Ubuntu LTS release
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     env:
       VERSION: "${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}"
       CXX: '${{ matrix.compiler }}'

@@ -6,7 +6,7 @@
 # Arnaud Arnaud <arnaudgay@hotmail.com>, 2020
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Boese Kaiser, 2022
-# C138, 2021
+# C138, 2021-2022
 # David D, 2018,2021
 # GunChleoc, 2016
 # GunChleoc, 2014
@@ -19,16 +19,16 @@
 # Renaud Bouchard, 2015
 # Renaud Bouchard, 2015-2022
 # Stanislas Dolcini <stan@wildfiregames.com>, 2021
-# Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022
 # Tubuntu, 2015
 # zecas <jjorge@free.fr>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-13 03:52+0000\n"
+"POT-Creation-Date: 2022-10-31 04:13+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Boese Kaiser, 2022\n"
+"Last-Translator: C138, 2021-2022\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1234,6 +1234,7 @@ msgstr "Plantation de Manioc"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:59
@@ -1934,8 +1935,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Tente de garde-champêtre"
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -3677,7 +3678,7 @@ msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr ""
+msgstr "L'apiculteur qui travaille dans cette cabane ne peut plus trouver de champs fleuris dans son périmètre de travail. Vous devriez envisager de construire une ferme à proximité, ou démanteler ou détruire le bâtiment."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -3841,6 +3842,21 @@ msgid ""
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
 msgstr "L'arboriculteur qui travaille dans cette cabane ne peut plus trouver de buissons de baies dans son périmètre de travail. Vous devriez envisager de construire une autre ferme à baies, ou démanteler ou détruire le bâtiment."
+
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
+msgctxt "frisians_building"
+msgid "Diker’s House"
+msgstr "Maison de l'endigueur"
+
+#. TRANSLATORS: Completed/Skipped/Did not start diking because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
+msgid "diking"
+msgstr "Endigue"
+
+#. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
+msgid "building a dike"
+msgstr "construire une digue"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -5034,6 +5050,12 @@ msgid "Destroyed building"
 msgstr "Bâtiment détruit"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/dike/init.lua:8
+msgctxt "immovable"
+msgid "Dike"
+msgstr "Digue"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine/medium/init.lua:8
 msgctxt "immovable"
 msgid "Grapevine (medium)"
@@ -5268,6 +5290,7 @@ msgstr "Arbre de balsa"
 msgid "Balsa Tree (Pole)"
 msgstr "Balsa (Arbuste)"
 
+#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5423,51 +5446,11 @@ msgstr "L'équipe de développement de Widelands"
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
 msgid "Amazons"
-msgstr ""
+msgstr "Amazones"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid "The people of the amazonian jungle."
-msgstr ""
-
-#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
-#. is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:8
-msgctxt "amazons_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% soldat (+%2%)"
-msgstr[1] "%1% soldats (+%2%)"
-msgstr[2] "%1% soldats (+%2%)"
-
-#. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:11
-msgctxt "amazons_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% soldat"
-msgstr[1] "%1% soldats"
-msgstr[2] "%1% soldats"
-
-#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building. %3% is the maximum number
-#. of soldier slots in the building
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:16
-msgctxt "amazons_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) soldat (+%3%)"
-msgstr[1] "%1%(+%2%) soldats (+%3%)"
-msgstr[2] "%1%(+%2%) soldats (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:19
-msgctxt "amazons_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) soldat"
-msgstr[1] "%1%(+%2%) soldats"
-msgstr[2] "%1%(+%2%) soldats"
+msgstr "Les habitants de la jungle amazonienne."
 
 #. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
@@ -5703,46 +5686,6 @@ msgid ""
 "Atlantis."
 msgstr "Cette tribu est connue par les plus vieux récits. Les fils et les filles d'Altlantis."
 
-#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
-#. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:18
-msgctxt "atlanteans_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% soldats (+%2%)"
-msgstr[1] "%1% soldats (+%2%)"
-msgstr[2] "%1% soldats (+%2%)"
-
-#. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
-msgctxt "atlanteans_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% soldat"
-msgstr[1] "%1% soldats"
-msgstr[2] "%1% soldats"
-
-#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building. %3% is the maximum
-#. number of soldier slots in the building
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:26
-msgctxt "atlanteans_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) soldats (+%3%)"
-msgstr[1] "%1%(+%2%) soldats (+%3%)"
-msgstr[2] "%1%(+%2%) soldats (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:29
-msgctxt "atlanteans_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) soldat"
-msgstr[1] "%1%(+%2%) soldats"
-msgstr[2] "%1%(+%2%) soldats"
-
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
@@ -5761,46 +5704,6 @@ msgstr "Les Barbares"
 msgid "The mighty tribes of the east-lands."
 msgstr "Les puissantes tribus des terres de l'est."
 
-#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
-#. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:8
-msgctxt "barbarians_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% soldat (+%2%)"
-msgstr[1] "%1% soldats (+%2%)"
-msgstr[2] "%1% soldats (+%2%)"
-
-#. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
-msgctxt "barbarians_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% soldat"
-msgstr[1] "%1% soldats"
-msgstr[2] "%1% soldats"
-
-#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building. %3% is the maximum
-#. number of soldier slots in the building
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:16
-msgctxt "barbarians_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) soldat (+%3%)"
-msgstr[1] "%1%(+%2%) soldats (+%3%)"
-msgstr[2] "%1%(+%2%) soldats (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:19
-msgctxt "barbarians_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) soldat"
-msgstr[1] "%1%(+%2%) soldats"
-msgstr[2] "%1%(+%2%) soldats"
-
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
 msgid "Empire"
@@ -5809,46 +5712,6 @@ msgstr "L'Empire"
 #: ../../data/tribes/initialization/empire/init.lua:13
 msgid "This is the culture of the Roman Empire."
 msgstr "Voici la culture de l'Empire Romain."
-
-#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
-#. is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/empire/military_capacity.lua:8
-msgctxt "empire_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% soldat (+%2%)"
-msgstr[1] "%1% soldats (+%2%)"
-msgstr[2] "%1% soldats (+%2%)"
-
-#. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/empire/military_capacity.lua:11
-msgctxt "empire_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% soldat"
-msgstr[1] "%1% soldats"
-msgstr[2] "%1% soldats"
-
-#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building. %3% is the maximum number
-#. of soldier slots in the building
-#: ../../data/tribes/initialization/empire/military_capacity.lua:16
-msgctxt "empire_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) soldat (+%3%)"
-msgstr[1] "%1%(+%2%) soldats (+%3%)"
-msgstr[2] "%1%(+%2%) soldats (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/empire/military_capacity.lua:19
-msgctxt "empire_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) soldat"
-msgstr[1] "%1%(+%2%) soldats"
-msgstr[2] "%1%(+%2%) soldats"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
@@ -5859,83 +5722,43 @@ msgstr "Les Frisons"
 msgid "The inhabitants of the rough North Sea shore."
 msgstr "Les habitants des rudes rivages de la Mer du Nord."
 
-#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
-#. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:8
-msgctxt "frisians_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% soldat (+%2%)"
-msgstr[1] "%1% soldats (+%2%)"
-msgstr[2] "%1% soldats (+%2%)"
-
-#. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:11
-msgctxt "frisians_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% soldat"
-msgstr[1] "%1% soldat"
-msgstr[2] "%1% soldat"
-
-#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building. %3% is the maximum
-#. number of soldier slots in the building
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:16
-msgctxt "frisians_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) soldat (+%3%)"
-msgstr[1] "%1%(+%2%) soldats (+%3%)"
-msgstr[2] "%1%(+%2%) soldats (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:19
-msgctxt "frisians_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) soldat"
-msgstr[1] "%1%(+%2%) soldats"
-msgstr[2] "%1%(+%2%) soldats"
-
-#: ../../data/tribes/scripting/help/init.lua:84
+#: ../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
 msgstr "Encyclopédie Tribale"
 
-#: ../../data/tribes/scripting/help/init.lua:89
+#: ../../data/tribes/scripting/help/init.lua:90
 msgid "General"
 msgstr "Général"
 
-#: ../../data/tribes/scripting/help/init.lua:94
+#: ../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
 msgstr "Introduction"
 
-#: ../../data/tribes/scripting/help/init.lua:100
+#: ../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
 msgstr "Contrôles"
 
-#: ../../data/tribes/scripting/help/init.lua:106
+#: ../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
 msgstr "Astuces"
 
-#: ../../data/tribes/scripting/help/init.lua:115
+#: ../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
 msgstr "Marchandises"
 
-#: ../../data/tribes/scripting/help/init.lua:122
+#: ../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
 msgstr "Ouvriers"
 
-#: ../../data/tribes/scripting/help/init.lua:129
+#: ../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
 msgstr "Bâtiments"
 
-#: ../../data/tribes/scripting/help/init.lua:136
+#: ../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
 msgstr "Inamovibles des tribus"
 
-#: ../../data/tribes/scripting/help/init.lua:143
+#: ../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
 msgstr "Inamovibles du monde"
 
@@ -9742,6 +9565,12 @@ msgstr "Charbonnier"
 msgctxt "frisians_worker"
 msgid "Clay Digger"
 msgstr "Creuseur d'argile"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/frisians/diker/init.lua:8
+msgctxt "frisians_worker"
+msgid "Diker"
+msgstr "Endigueur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:8

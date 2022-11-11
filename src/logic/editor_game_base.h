@@ -112,7 +112,7 @@ public:
 	void load_all_tribes();
 	void allocate_player_maps();
 	virtual void postload();
-	void postload_addons(bool also_postload_tribes);
+	void postload_addons();
 	void postload_tribes();
 	virtual void cleanup_for_load();
 	virtual void full_cleanup();
@@ -127,6 +127,7 @@ public:
 	                                     bool show_game_tips,
 	                                     const std::string& theme,
 	                                     const std::string& background,
+	                                     bool crop,
 	                                     UI::Panel* parent = nullptr);
 
 	/// Set step text for the current loader UI if it's not nullptr.

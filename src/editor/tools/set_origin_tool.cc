@@ -21,18 +21,16 @@
 #include "editor/editorinteractive.h"
 
 int32_t EditorSetOriginTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                               EditorInteractive& eia,
                                                EditorActionArgs* /* args */,
                                                Widelands::Map* map) {
 	map->set_origin(center.node);
-	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
-	eia.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
+	parent_.map_changed(EditorInteractive::MapWas::kGloballyMutated);
+	parent_.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
 	return 0;
 }
 
 int32_t
 EditorSetOriginTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                      EditorInteractive& eia,
                                       EditorActionArgs* /* args */,
                                       Widelands::Map* map) {
 	Widelands::Coords nc(map->get_width() - center.node.x, map->get_height() - center.node.y);
@@ -45,11 +43,11 @@ EditorSetOriginTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands
 	}
 	map->normalize_coords(nc);
 	map->set_origin(nc);
-	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
-	eia.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
+	parent_.map_changed(EditorInteractive::MapWas::kGloballyMutated);
+	parent_.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
 	return 0;
 }
 
-EditorActionArgs EditorSetOriginTool::format_args_impl(EditorInteractive& eia) {
-	return EditorTool::format_args_impl(eia);
+EditorActionArgs EditorSetOriginTool::format_args_impl() {
+	return EditorTool::format_args_impl();
 }
