@@ -394,10 +394,16 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	tags_box_.add_space(labelh_);
 
-	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
-	                               max_w_, labelh_, _("Waterway length limit:")));
+	UI::Textarea* ww_text =
+	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_,
+	   labelh_, _("Ferry range:"));
+	std::string ww_tooltip = _("Set maximum length of waterways for ferries. If ferry range is set "
+	   "to 0, then the map will not allow building ferry yards and waterways (ferry routes).");
+	ww_text->set_tooltip(ww_tooltip);
+	tags_box_.add(ww_text);
 	UI::Box* ww_box =
 	   new UI::Box(&tags_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_);
+	ww_box->set_tooltip(ww_tooltip);
 	waterway_length_warning_ =
 	   new UI::Icon(ww_box, UI::PanelStyle::kWui, g_image_cache->get("images/ui_basic/stop.png"));
 	waterway_length_warning_->set_handle_mouse(true);
