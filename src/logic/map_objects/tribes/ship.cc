@@ -68,7 +68,7 @@ bool can_support_port(const FCoords& coord) {
 bool can_build_port_here(const PlayerNumber player_number, const Map& map, const FCoords& coord) {
 	// first check whether we can build a port like if reached from land
 	if ((coord.field->nodecaps() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG &&
-	       !map.find_portdock(coord, false).empty()) {
+	    !map.find_portdock(coord, false).empty()) {
 		return true;
 	}
 	// now check if we are allowed to build one although some conditions not met
@@ -458,9 +458,10 @@ void Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
 				set_ship_state_and_notify(
 				   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
-				send_message(game, _("Port Space"), _("Port Space Lost"),
-			             _("A discovered port build space is not available for building a port anymore."),
-			             "images/wui/editor/fsel_editor_set_port_space.png");
+				send_message(
+				   game, _("Port Space"), _("Port Space Lost"),
+				   _("A discovered port build space is not available for building a port anymore."),
+				   "images/wui/editor/fsel_editor_set_port_space.png");
 				expedition_->seen_port_buildspaces.clear();
 			}
 		}
@@ -915,9 +916,10 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 		if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
 			set_ship_state_and_notify(
 			   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
-			send_message(game, _("Port Space"), _("Port Space Lost"),
-					 _("A discovered port build space is not available for building a port anymore."),
-					 "images/wui/editor/fsel_editor_set_port_space.png");
+			send_message(
+			   game, _("Port Space"), _("Port Space Lost"),
+			   _("A discovered port build space is not available for building a port anymore."),
+			   "images/wui/editor/fsel_editor_set_port_space.png");
 			expedition_->seen_port_buildspaces.clear();
 			return;
 		}
