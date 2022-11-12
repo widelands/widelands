@@ -25,7 +25,7 @@
 #include "logic/map_objects/pinned_note.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/multilineeditbox.h"
+#include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
 
 ///  Shows the current teams lineup and allows the player to perform diplomatic actions.
@@ -35,23 +35,25 @@ public:
 	                 UI::UniqueWindow::Registry& r,
 	                 Widelands::FCoords pos,
 	                 const std::string& text,
-	                 const RGBColor& rgb);
+	                 const RGBColor& rgb,
+	                 bool is_new);
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	InteractivePlayer& iplayer_;
 	Widelands::FCoords pos_;
-	std::string initial_text_;
 	RGBColor initial_color_, current_color_;
+	bool delete_on_cancel_;
 
 	void ok();
-	void reset();
+	void die() override;
+	void send_delete();
 	void update_color_preview();
 
 	UI::Box box_, buttons_box_;
-	UI::Button ok_, delete_, reset_, cancel_, color_;
-	UI::MultilineEditbox* text_;
+	UI::Button ok_, delete_, cancel_, color_;
+	UI::EditBox* text_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NotePinnedNoteMoved>> subscriber_;
 };

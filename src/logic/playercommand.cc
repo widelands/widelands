@@ -2304,7 +2304,9 @@ void CmdPinnedNote::execute(Game& game) {
 		}
 	}
 
-	PinnedNote::create(game, *game.get_player(sender()), pos_, text_, rgb_);
+	if (!delete_) {
+		PinnedNote::create(game, *game.get_player(sender()), pos_, text_, rgb_);
+	}
 }
 
 CmdPinnedNote::CmdPinnedNote(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {

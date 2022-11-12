@@ -758,7 +758,9 @@ void FieldActionWindow::act_pinned_note() {
 
 	UI::UniqueWindow::Registry& r =
 	   ipl->unique_windows().get_registry(format("pinned_note_%d_%d", node_.x, node_.y));
-	r.open_window = [this, ipl, &r, text, rgb] { new PinnedNoteEditor(*ipl, r, node_, text, *rgb); };
+	r.open_window = [this, ipl, &r, text, rgb, exists] {
+		new PinnedNoteEditor(*ipl, r, node_, text, *rgb, !exists);
+	};
 	r.create();
 
 	if (!exists) {  // Already create the note if it did not exist yet.
