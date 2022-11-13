@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-04 03:58+0000\n"
+"POT-Creation-Date: 2022-11-10 03:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2022\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -2435,68 +2435,68 @@ msgstr "%d. hajó"
 msgid "Diplomacy"
 msgstr "Diplomácia"
 
-#: ../../src/logic/playercommand.cc:2161
+#: ../../src/logic/playercommand.cc:2159
 #, c-format
 msgid "%s has resigned and is now a spectator."
 msgstr "%s feladta, és néző lett belőle."
 
-#: ../../src/logic/playercommand.cc:2161
+#: ../../src/logic/playercommand.cc:2159
 msgid "Player Resigned"
 msgstr "Egy játékos feladta"
 
-#: ../../src/logic/playercommand.cc:2173
+#: ../../src/logic/playercommand.cc:2171
 msgid "Player Leaves Team"
 msgstr "Egy játékos kilépett a csapatból"
 
-#: ../../src/logic/playercommand.cc:2174
+#: ../../src/logic/playercommand.cc:2172
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
 msgstr "%1$s kilépett a %2$u. csapatból, és egyedül folytatja."
 
-#: ../../src/logic/playercommand.cc:2182
+#: ../../src/logic/playercommand.cc:2180
 msgid "Team Joining Request"
 msgstr "Csatlakozási kérelem egy csapathoz"
 
-#: ../../src/logic/playercommand.cc:2183
+#: ../../src/logic/playercommand.cc:2181
 msgid "Team Joining Invitation"
 msgstr "Meghívás a csapatba"
 
-#: ../../src/logic/playercommand.cc:2185
-#: ../../src/wui/game_diplomacy_menu.cc:309
+#: ../../src/logic/playercommand.cc:2183
+#: ../../src/wui/game_diplomacy_menu.cc:310
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
 msgstr "%1$s szeretne csatlakozni %2$s csapatához."
 
-#: ../../src/logic/playercommand.cc:2186
-#: ../../src/wui/game_diplomacy_menu.cc:314
+#: ../../src/logic/playercommand.cc:2184
+#: ../../src/wui/game_diplomacy_menu.cc:315
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
 msgstr "%1$s meghívta %2$s-t, hogy csatlakozzon a csapatához."
 
-#: ../../src/logic/playercommand.cc:2211
+#: ../../src/logic/playercommand.cc:2209
 msgid "Team Change Accepted"
 msgstr "Csapatváltás elfogadva"
 
-#: ../../src/logic/playercommand.cc:2211
+#: ../../src/logic/playercommand.cc:2209
 msgid "Team Change Rejected"
 msgstr "Csapatváltás elutasítva"
 
-#: ../../src/logic/playercommand.cc:2213
+#: ../../src/logic/playercommand.cc:2211
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
 msgstr "%1$s befogadta %2$s-t a csapatába."
 
-#: ../../src/logic/playercommand.cc:2214
+#: ../../src/logic/playercommand.cc:2212
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
 msgstr "%1$s elfogadta a meghívást %2$s csapatába."
 
-#: ../../src/logic/playercommand.cc:2216
+#: ../../src/logic/playercommand.cc:2214
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
 msgstr "%1$s elutasította %2$s csatlakozását a csapatához."
 
-#: ../../src/logic/playercommand.cc:2217
+#: ../../src/logic/playercommand.cc:2215
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
 msgstr "%1$s elutasította a meghívást %2$s csapatába."
@@ -3256,7 +3256,7 @@ msgstr "A Widelands nem tudta a helyi hálózatot használni. Lehet hogy már fu
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1350
+#: ../../src/scripting/lua_game.cc:1346
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -7786,22 +7786,22 @@ msgstr "Nincs csapat"
 msgid "Team %u"
 msgstr "%u. csapat"
 
-#: ../../src/wui/game_diplomacy_menu.cc:261
+#: ../../src/wui/game_diplomacy_menu.cc:265
 #, c-format
 msgid "Won at %s"
 msgstr "Győzött %s-kor"
 
-#: ../../src/wui/game_diplomacy_menu.cc:264
+#: ../../src/wui/game_diplomacy_menu.cc:268
 #, c-format
 msgid "Lost at %s"
 msgstr "Vesztett %s-kor"
 
-#: ../../src/wui/game_diplomacy_menu.cc:267
+#: ../../src/wui/game_diplomacy_menu.cc:271
 #, c-format
 msgid "Resigned at %s"
 msgstr "Feladta %s-kor"
 
-#: ../../src/wui/game_diplomacy_menu.cc:302
+#: ../../src/wui/game_diplomacy_menu.cc:303
 msgid "Pending Diplomacy Actions"
 msgstr "Függő diplomáciai kérések"
 
@@ -7958,52 +7958,52 @@ msgstr "Idő"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:216
+#: ../../src/wui/game_summary.cc:214
 msgid "Lost"
 msgstr "Vesztett"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:220
+#: ../../src/wui/game_summary.cc:218
 msgid "Won"
 msgstr "Nyert"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:229
+#: ../../src/wui/game_summary.cc:227
 msgid "Resigned"
 msgstr "Feladta"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:234
+#: ../../src/wui/game_summary.cc:232
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/wui/game_summary.cc:244
+#: ../../src/wui/game_summary.cc:242
 msgid "You won!"
 msgstr "Nyertél!"
 
-#: ../../src/wui/game_summary.cc:246
+#: ../../src/wui/game_summary.cc:244
 msgid "You lost."
 msgstr "Vesztettél."
 
-#: ../../src/wui/game_summary.cc:250
+#: ../../src/wui/game_summary.cc:248
 #, c-format
 msgid "%s won!"
 msgstr "%s nyert!"
 
-#: ../../src/wui/game_summary.cc:252
+#: ../../src/wui/game_summary.cc:250
 #, c-format
 msgid "Team %u won!"
 msgstr "A(z) %u csapat nyert!"
 
-#: ../../src/wui/game_summary.cc:310
+#: ../../src/wui/game_summary.cc:308
 msgid "Score"
 msgstr "Pontszám"
 
-#: ../../src/wui/game_summary.cc:312
+#: ../../src/wui/game_summary.cc:310
 msgid "Team Score"
 msgstr "Csapat pontszám"
 

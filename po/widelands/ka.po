@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-04 03:58+0000\n"
+"POT-Creation-Date: 2022-11-10 03:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2014\n"
 "Language-Team: Georgian (http://www.transifex.com/widelands/widelands/language/ka/)\n"
@@ -2425,68 +2425,68 @@ msgstr ""
 msgid "Diplomacy"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2161
+#: ../../src/logic/playercommand.cc:2159
 #, c-format
 msgid "%s has resigned and is now a spectator."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2161
+#: ../../src/logic/playercommand.cc:2159
 msgid "Player Resigned"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2173
+#: ../../src/logic/playercommand.cc:2171
 msgid "Player Leaves Team"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2174
+#: ../../src/logic/playercommand.cc:2172
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2182
+#: ../../src/logic/playercommand.cc:2180
 msgid "Team Joining Request"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2183
+#: ../../src/logic/playercommand.cc:2181
 msgid "Team Joining Invitation"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2185
-#: ../../src/wui/game_diplomacy_menu.cc:309
+#: ../../src/logic/playercommand.cc:2183
+#: ../../src/wui/game_diplomacy_menu.cc:310
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2186
-#: ../../src/wui/game_diplomacy_menu.cc:314
+#: ../../src/logic/playercommand.cc:2184
+#: ../../src/wui/game_diplomacy_menu.cc:315
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2211
+#: ../../src/logic/playercommand.cc:2209
 msgid "Team Change Accepted"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2211
+#: ../../src/logic/playercommand.cc:2209
 msgid "Team Change Rejected"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2213
+#: ../../src/logic/playercommand.cc:2211
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2214
+#: ../../src/logic/playercommand.cc:2212
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2216
+#: ../../src/logic/playercommand.cc:2214
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2217
+#: ../../src/logic/playercommand.cc:2215
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
 msgstr ""
@@ -3246,7 +3246,7 @@ msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1350
+#: ../../src/scripting/lua_game.cc:1346
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -7776,22 +7776,22 @@ msgstr ""
 msgid "Team %u"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:261
+#: ../../src/wui/game_diplomacy_menu.cc:265
 #, c-format
 msgid "Won at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:264
+#: ../../src/wui/game_diplomacy_menu.cc:268
 #, c-format
 msgid "Lost at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:267
+#: ../../src/wui/game_diplomacy_menu.cc:271
 #, c-format
 msgid "Resigned at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:302
+#: ../../src/wui/game_diplomacy_menu.cc:303
 msgid "Pending Diplomacy Actions"
 msgstr ""
 
@@ -7948,52 +7948,52 @@ msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:216
+#: ../../src/wui/game_summary.cc:214
 msgid "Lost"
 msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:220
+#: ../../src/wui/game_summary.cc:218
 msgid "Won"
 msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:229
+#: ../../src/wui/game_summary.cc:227
 msgid "Resigned"
 msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:234
+#: ../../src/wui/game_summary.cc:232
 msgctxt "player_won"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:244
+#: ../../src/wui/game_summary.cc:242
 msgid "You won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:246
+#: ../../src/wui/game_summary.cc:244
 msgid "You lost."
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:250
+#: ../../src/wui/game_summary.cc:248
 #, c-format
 msgid "%s won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:252
+#: ../../src/wui/game_summary.cc:250
 #, c-format
 msgid "Team %u won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:310
+#: ../../src/wui/game_summary.cc:308
 msgid "Score"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:312
+#: ../../src/wui/game_summary.cc:310
 msgid "Team Score"
 msgstr ""
 
