@@ -464,6 +464,8 @@ void Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 				   "images/wui/editor/fsel_editor_set_port_space.png");
 				expedition_->seen_port_buildspaces.clear();
 			}
+		} else {
+			log_warn_time(game.get_gametime(), "Expedition list of seem üport spaces is unexpectedly empty!\n");
 		}
 	}
 }
@@ -923,6 +925,8 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 			expedition_->seen_port_buildspaces.clear();
 			return;
 		}
+	} else {
+		log_warn_time(game.get_gametime(), "Expedition list of seem üport spaces is unexpectedly empty!\n");
 	}
 	get_owner()->force_csite(c, get_owner()->tribe().port()).set_destruction_blocked(true);
 
