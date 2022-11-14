@@ -53,6 +53,7 @@ namespace Widelands {
 namespace {
 
 /// Returns true if 'coord' is not blocked by immovables
+/// Trees are allowed, because we don't want spreading forests to block portspaces from expeditions
 bool can_support_port(const FCoords& coord) {
 	BaseImmovable* baim = coord.field->get_immovable();
 	Immovable* imo = dynamic_cast<Immovable*>(baim);
