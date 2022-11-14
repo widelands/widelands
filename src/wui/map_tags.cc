@@ -113,7 +113,7 @@ const TagTexts localize_tag(const std::string& tag) {
 	return {tag, ""};
 }
 
-void add_tag_to_dropdown(UI::Dropdown<std::string>* dropdown, const std::string tag) {
+void add_tag_to_dropdown(UI::Dropdown<std::string>* dropdown, const std::string& tag) {
 	const TagTexts l = localize_tag(tag);
 	dropdown->add(l.displayname, tag, nullptr, false, l.tooltip);
 }

@@ -39,6 +39,6 @@ struct TagTexts {
 const TagTexts localize_tag(const std::string& tag);
 
 /// Add an entry to 'dropdown' for 'tag' with the localized name and tooltip
-void add_tag_to_dropdown(UI::Dropdown<std::string>* dropdown, const std::string tag);
+void add_tag_to_dropdown(UI::Dropdown<std::string>* dropdown, const std::string& tag);
 
 #endif  // end of include guard: WL_WUI_MAP_TAGS_H
