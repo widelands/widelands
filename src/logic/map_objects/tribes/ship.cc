@@ -67,15 +67,7 @@ bool can_support_port(const FCoords& coord) {
 
 /// Returns true if a ship owned by 'player_number' can land and erect a port at 'coord'.
 bool can_build_port_here(const PlayerNumber player_number, const Map& map, const FCoords& coord) {
-	// first check whether we can build a port like if reached from land
-	if ((coord.field->nodecaps() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG &&
-	    !map.find_portdock(coord, false).empty()) {
-		return true;
-	}
-	// now check if we are allowed to build one although some conditions not met
-	if (!can_support_port(coord)) {
-		return false;
-	}
+	// First check ownership of the port space
 	// All fields of the port + their neighboring fields (for the border) must
 	// be conquerable without military influence. Check radius 2 around
 	// the main spot to cover radius 1 around each of the 4 fields and the flag
@@ -87,22 +79,29 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 		}
 	} while (area.advance(map));
 
+	// then check whether we can build a port like if reached from land
+	if ((coord.field->nodecaps() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG &&
+	    !map.find_portdock(coord, false).empty()) {
+		return true;
+	}
+	// now check if we are allowed to build one although some conditions not met
 	// All fields of the port and some neighbouring fields must be free of
-	// blocking immovables. Main field not checked here as already checked
-	Widelands::FCoords c[13];
-	map.get_ln(coord, &c[0]);
-	map.get_tln(coord, &c[1]);
-	map.get_trn(coord, &c[2]);
-	map.get_rn(coord, &c[3]);
-	map.get_brn(coord, &c[4]);
-	map.get_bln(coord, &c[5]);
-	map.get_bln(c[0], &c[6]);
-	map.get_ln(c[0], &c[7]);
-	map.get_tln(c[0], &c[8]);
-	map.get_tln(c[1], &c[9]);
-	map.get_trn(c[1], &c[10]);
-	map.get_trn(c[2], &c[11]);
-	map.get_rn(c[2], &c[12]);
+	// blocking immovables.
+	Widelands::FCoords c[14];
+	c[0] = coord;
+	map.get_ln(coord, &c[1]);
+	map.get_tln(coord, &c[2]);
+	map.get_trn(coord, &c[3]);
+	map.get_rn(coord, &c[4]);
+	map.get_brn(coord, &c[5]);
+	map.get_bln(coord, &c[6]);
+	map.get_bln(c[0], &c[7]);
+	map.get_ln(c[0], &c[8]);
+	map.get_tln(c[0], &c[9]);
+	map.get_tln(c[1], &c[10]);
+	map.get_trn(c[1], &c[11]);
+	map.get_trn(c[2], &c[12]);
+	map.get_rn(c[2], &c[13]);
 
 	for (const Widelands::FCoords& fc : c) {
 		if (!can_support_port(fc)) {  // check for blocking immovables
