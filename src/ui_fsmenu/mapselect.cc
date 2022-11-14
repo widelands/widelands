@@ -99,8 +99,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	official_tags_dropdown_->set_autoexpand_display_button();
 	official_tags_dropdown_->add(_("Official & Unofficial"), "");
-	official_tags_dropdown_->add(localize_tag("official"), "official");
-	official_tags_dropdown_->add(localize_tag("unofficial"), "unofficial");
+	add_tag_to_dropdown(official_tags_dropdown_, "official");
+	add_tag_to_dropdown(official_tags_dropdown_, "unofficial");
 
 	hbox->add(official_tags_dropdown_, UI::Box::Resizing::kFullSize);
 
@@ -113,11 +113,11 @@ MapSelect::MapSelect(MenuCapsule& m,
 	/** TRANSLATORS: Filter entry in map selection. Other entries are "Free for all"", "Teams of 2"
 	 * etc. */
 	team_tags_dropdown_->add(_("Any Teams"), "");
-	team_tags_dropdown_->add(localize_tag("ffa"), "ffa");
-	team_tags_dropdown_->add(localize_tag("1v1"), "1v1");
-	team_tags_dropdown_->add(localize_tag("2teams"), "2teams");
-	team_tags_dropdown_->add(localize_tag("3teams"), "3teams");
-	team_tags_dropdown_->add(localize_tag("4teams"), "4teams");
+	add_tag_to_dropdown(team_tags_dropdown_, "ffa");
+	add_tag_to_dropdown(team_tags_dropdown_, "1v1");
+	add_tag_to_dropdown(team_tags_dropdown_, "2teams");
+	add_tag_to_dropdown(team_tags_dropdown_, "3teams");
+	add_tag_to_dropdown(team_tags_dropdown_, "4teams");
 
 	hbox->add(team_tags_dropdown_, UI::Box::Resizing::kFullSize);
 
@@ -137,10 +137,10 @@ MapSelect::MapSelect(MenuCapsule& m,
 
 	hbox = new UI::Box(
 	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
-	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
-	add_tag_checkbox(hbox, "ferries", localize_tag("ferries"));
-	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));
-	add_tag_checkbox(hbox, "scenario", localize_tag("scenario"));
+	add_tag_checkbox(hbox, "seafaring");
+	add_tag_checkbox(hbox, "ferries");
+	add_tag_checkbox(hbox, "artifacts");
+	add_tag_checkbox(hbox, "scenario");
 	hbox->add_inf_space();
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
@@ -419,10 +419,12 @@ void MapSelect::fill_table() {
  * Add a tag to the checkboxes
  */
 UI::Checkbox*
-MapSelect::add_tag_checkbox(UI::Box* box, const std::string& tag, const std::string& displ_name) {
+MapSelect::add_tag_checkbox(UI::Box* box, const std::string& tag) {
 	tags_ordered_.push_back(tag);
 
-	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), displ_name);
+	const LocalizedTag l = localize_tag(tag);
+	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), l.displayname);
+	cb->set_tooltip(l.tooltip);
 
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);
@@ -461,8 +463,8 @@ void MapSelect::rebuild_balancing_dropdown() {
 	   balancing_tags_dropdown_->has_selection() ? balancing_tags_dropdown_->get_selected() : "";
 	balancing_tags_dropdown_->clear();
 	balancing_tags_dropdown_->add(_("Balanced & Unbalanced"), "");
-	balancing_tags_dropdown_->add(localize_tag("balanced"), "balanced");
-	balancing_tags_dropdown_->add(localize_tag("unbalanced"), "unbalanced");
+	add_tag_to_dropdown(balancing_tags_dropdown_, "balanced");
+	add_tag_to_dropdown(balancing_tags_dropdown_, "unbalanced");
 	if (unspecified_balancing_found_) {
 		// Backwards compatibility with old maps
 		balancing_tags_dropdown_->add(pgettext("balancing", "Unspecified"), "unspecified");

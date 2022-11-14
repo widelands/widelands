@@ -24,33 +24,84 @@
 
 namespace {
 
-const std::map<std::string, std::string> kMapTags = {
-   /** TRANSLATORS: This is a map tag */
-   {"official", _("Official")},
-   /** TRANSLATORS: This is a map tag */
-   {"unofficial", _("Unofficial")},
-   /** TRANSLATORS: This is a map tag */
-   {"balanced", _("Balanced")},
-   /** TRANSLATORS: This is a map tag */
-   {"unbalanced", _("Unbalanced")},
-   /** TRANSLATORS: This is a map tag */
-   {"seafaring", _("Seafaring")},
-   /** TRANSLATORS: This is a map tag */
-   {"ferries", _("Ferries")},
-   /** TRANSLATORS: This is a map tag */
-   {"artifacts", _("Artifacts")},
-   /** TRANSLATORS: This is a map tag */
-   {"scenario", _("Scenario")},
-   /** TRANSLATORS: This is a map tag */
-   {"ffa", _("Free for all")},
-   /** TRANSLATORS: This is a map tag. One versus one. */
-   {"1v1", _("1v1")},
-   /** TRANSLATORS: This is a map tag */
-   {"2teams", _("Teams of 2")},
-   /** TRANSLATORS: This is a map tag */
-   {"3teams", _("Teams of 3")},
-   /** TRANSLATORS: This is a map tag */
-   {"4teams", _("Teams of 4")},
+const std::map<std::string, LocalizedTag> kMapTags = {
+   {"official",
+    {
+     /** TRANSLATORS: This is a map tag */
+     _("Official"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("The map is provided by the official Widelands release")}},
+   {"unofficial",
+    {
+     /** TRANSLATORS: This is a map tag */
+     _("Unofficial"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("Custom or add-on map")}},
+   {"balanced",
+    {
+     /** TRANSLATORS: This is a map tag */
+     _("Balanced"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("Player starting positions were designed to provide equal conditions for all players")}},
+   {"unbalanced",
+    {
+     /** TRANSLATORS: This is a map tag */
+     _("Unbalanced"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("No efforts were made to provide equal conditions for the players")}},
+   {"seafaring",
+    {
+     /** TRANSLATORS: This is a map tag */
+     _("Seafaring"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("The map allows building ports and ships")}},
+   {"ferries",
+    {
+     /** TRANSLATORS: This is a map tag */
+     _("Ferries"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("The map allows building ferries, ferry yards and waterways")}},
+   {"artifacts",
+    {
+     /** TRANSLATORS: This is a map tag */
+     _("Artifacts"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("The map contains artifacts for the Artifacts win condition")}},
+   {"scenario",
+    {
+     /** TRANSLATORS: This is a map tag */
+     _("Scenario"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("The map contains a story line or other custom scripting")}},
+   {"ffa",
+    {
+     /** TRANSLATORS: This is a map tag */
+     _("Free for all"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("Every player fights against all other players")}},
+   {"1v1",
+    {
+     /** TRANSLATORS: This is a map tag. One versus one. */
+     _("1v1"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("Two players fighting against each other")}},
+   {"2teams",
+    {
+     /** TRANSLATORS: This is a map tag */
+     _("Teams of 2"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("Players form teams of two players each")}},
+   {"3teams",
+    {
+     /** TRANSLATORS: This is a map tag */
+     _("Teams of 3"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("Players form teams of three players each")}},
+   {"4teams",
+    {
+     _("Teams of 4"),
+     /** TRANSLATORS: This is a tool tip for a map tag */
+     _("Players form teams of four players each")}},
 };
 
 }  // namespace
@@ -59,9 +110,14 @@ bool tag_exists(const std::string& tag) {
 	return kMapTags.count(tag) == 1;
 }
 
-const std::string localize_tag(const std::string& tag) {
+const LocalizedTag localize_tag(const std::string& tag) {
 	if (tag_exists(tag)) {
-		return _((*kMapTags.find(tag)).second);
+		return ((*kMapTags.find(tag)).second);
 	}
-	return tag;
+	return {tag, ""};
+}
+
+void add_tag_to_dropdown(UI::Dropdown<std::string>* dropdown, const std::string tag) {
+	const LocalizedTag l = localize_tag(tag);
+	dropdown->add(l.displayname, tag, nullptr, false, l.tooltip);
 }

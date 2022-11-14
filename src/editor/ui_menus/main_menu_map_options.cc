@@ -375,14 +375,15 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
 	                               max_w_, labelh_, _("Tags:")));
-	add_tag_checkbox(&tags_box_, "ffa", localize_tag("ffa"));
-	add_tag_checkbox(&tags_box_, "1v1", localize_tag("1v1"));
-	add_tag_checkbox(&tags_box_, "2teams", localize_tag("2teams"));
-	add_tag_checkbox(&tags_box_, "3teams", localize_tag("3teams"));
-	add_tag_checkbox(&tags_box_, "4teams", localize_tag("4teams"));
+	add_tag_checkbox(&tags_box_, "ffa");
+	add_tag_checkbox(&tags_box_, "1v1");
+	add_tag_checkbox(&tags_box_, "2teams");
+	add_tag_checkbox(&tags_box_, "3teams");
+	add_tag_checkbox(&tags_box_, "4teams");
 
-	balancing_dropdown_.add(localize_tag("balanced"), "balanced");
-	balancing_dropdown_.add(localize_tag("unbalanced"), "unbalanced");
+	add_tag_to_dropdown(&balancing_dropdown_, "balanced");
+	add_tag_to_dropdown(&balancing_dropdown_, "unbalanced");
+	balancing_dropdown_.set_tooltip(_("Mark whether the starting positions provide equal conditions for each player"));
 	tags_box_.add(&balancing_dropdown_, UI::Box::Resizing::kFullSize);
 	tags_box_.add_space(padding_);
 
@@ -390,6 +391,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	for (const Widelands::Map::OldWorldInfo& owi : Widelands::Map::kOldWorldNames) {
 		theme_dropdown_.add(owi.descname(), owi.name);
 	}
+	theme_dropdown_.set_tooltip(_("Set the theme for the game loadscreens"));
 	tags_box_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
 
 	tags_box_.add_space(labelh_);
@@ -398,7 +400,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_,
 	                    labelh_, _("Ferry range:"));
 	std::string ww_tooltip = _("Enable ferries, waterways, and ferry yards on this map by setting"
-	                           " the maximum length of waterways for ferries.");
+	                           " the maximum length of waterways for ferries");
 	ww_text->set_tooltip(ww_tooltip);
 	ww_text->set_handle_mouse(true);
 	tags_box_.add(ww_text);
@@ -580,12 +582,13 @@ bool MainMenuMapOptions::handle_key(bool down, SDL_Keysym code) {
 /*
  * Add a tag to the checkboxes
  */
-void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
-                                          const std::string& tag,
-                                          const std::string& displ_name) {
+void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent, const std::string& tag) {
+	LocalizedTag localized = localize_tag(tag);
 	UI::Box* box = new UI::Box(
 	   parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kWui, Vector2i::zero(), displ_name);
+	UI::Checkbox* cb =
+	   new UI::Checkbox(box, UI::PanelStyle::kWui, Vector2i::zero(), localized.displayname);
+	cb->set_tooltip(localized.tooltip);
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);
 	parent->add(box);
