@@ -386,6 +386,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	UI::Textarea* team_tags_label =
 	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_,
+	                    /** TRANSLATORS: Header for suitable team line-up tags, like "Free for all",
+	                     * "Teams of 2", etc. */
 	                    labelh_, _("This map is suitable for:"));
 	team_tags_label->set_tooltip(
 	   _("Please add suggested team line-ups in the next tab for all selected options"));

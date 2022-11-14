@@ -113,9 +113,9 @@ MapSelect::MapSelect(MenuCapsule& m,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	team_tags_dropdown_->set_autoexpand_display_button();
 	team_tags_dropdown_->set_tooltip(_("Filter by desired line-up"));
-	/** TRANSLATORS: Filter entry in map selection. Other entries are "Free for all"", "Teams of 2"
-	 * etc. */
 	team_tags_dropdown_->add(
+	   /** TRANSLATORS: Filter entry in map selection. Other entries are "Free for all"",
+	    * "Teams of 2" etc. */
 	   _("Any Teams"), "", nullptr, false, _("Do not filter by line-up suggestions"));
 	add_tag_to_dropdown(team_tags_dropdown_, "ffa");
 	add_tag_to_dropdown(team_tags_dropdown_, "1v1");
