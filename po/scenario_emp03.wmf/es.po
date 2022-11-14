@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-11-10 03:40+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Juano Lemos, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
@@ -148,11 +148,9 @@ msgstr "Producción de Telas"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
-"Now turn all the wheat into at least 50 bales of wool and then use the wool "
-"to weave cloth in order to build a ship."
+"Now build a sheep farm and turn all the wheat into at least 50 bales of "
+"wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
-"Ahora convierte todo el trigo en al menos 50 fardos de lana y luego usar la "
-"lana para tejer tela para construir un barco."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -166,11 +164,9 @@ msgstr "Construye dos Puertos de Expedición"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
-"Explore the island in the south. Use an expedition to build a port there. "
-"Afterwards, try to find some mining resources."
+"Explore the island in the south. Send an expedition from our port to build a"
+" port there. Afterwards, try to find some mining resources."
 msgstr ""
-"Explora la isla al sur. Utiliza una expedición para construir un puerto "
-"allí. Después, intenta encontrar algunos recursos mineros."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""
