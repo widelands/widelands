@@ -26,80 +26,68 @@ namespace {
 
 const std::map<std::string, TagTexts> kMapTags = {
    {"official",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Official"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("The map is provided by the official Widelands release")}},
    {"unofficial",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Unofficial"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("Custom or add-on map")}},
    {"balanced",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Balanced"),
      /** TRANSLATORS: This is a tool tip for a map tag */
-     gettext_noop("Player starting positions were designed to provide equal conditions for all players")}},
+     gettext_noop(
+        "Player starting positions were designed to provide equal conditions for all players")}},
    {"unbalanced",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Unbalanced"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("No efforts were made to provide equal conditions for the players")}},
    {"seafaring",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Seafaring"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("The map allows building ports and ships")}},
    {"ferries",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Ferries"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("The map allows building ferries, ferry yards and waterways")}},
    {"artifacts",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Artifacts"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("The map contains artifacts for the Artifacts win condition")}},
    {"scenario",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Scenario"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("The map contains a story line or other custom scripting")}},
    {"ffa",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Free for all"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("Every player fights against all other players")}},
    {"1v1",
-    {
-     /** TRANSLATORS: This is a map tag. One versus one. */
+    {/** TRANSLATORS: This is a map tag. One versus one. */
      gettext_noop("1v1"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("Two players fighting against each other")}},
    {"2teams",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Teams of 2"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("Players form teams of two players each")}},
    {"3teams",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Teams of 3"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("Players form teams of three players each")}},
    {"4teams",
-    {
-     /** TRANSLATORS: This is a map tag */
+    {/** TRANSLATORS: This is a map tag */
      gettext_noop("Teams of 4"),
      /** TRANSLATORS: This is a tool tip for a map tag */
      gettext_noop("Players form teams of four players each")}},

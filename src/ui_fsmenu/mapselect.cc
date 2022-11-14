@@ -421,12 +421,12 @@ void MapSelect::fill_table() {
 /*
  * Add a tag to the checkboxes
  */
-UI::Checkbox*
-MapSelect::add_tag_checkbox(UI::Box* box, const std::string& tag) {
+UI::Checkbox* MapSelect::add_tag_checkbox(UI::Box* box, const std::string& tag) {
 	tags_ordered_.push_back(tag);
 
 	const TagTexts l = localize_tag(tag);
-	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), l.displayname);
+	UI::Checkbox* cb =
+	   new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), l.displayname);
 	cb->set_tooltip(l.tooltip);
 
 	box->add(cb, UI::Box::Resizing::kFullSize);

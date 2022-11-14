@@ -383,7 +383,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	add_tag_to_dropdown(&balancing_dropdown_, "balanced");
 	add_tag_to_dropdown(&balancing_dropdown_, "unbalanced");
-	balancing_dropdown_.set_tooltip(_("Mark whether the starting positions provide equal conditions for each player"));
+	balancing_dropdown_.set_tooltip(
+	   _("Mark whether the starting positions provide equal conditions for each player"));
 	tags_box_.add(&balancing_dropdown_, UI::Box::Resizing::kFullSize);
 	tags_box_.add_space(padding_);
 
@@ -586,8 +587,7 @@ void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent, const std::string& ta
 	UI::Box* box = new UI::Box(
 	   parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
 	TagTexts l = localize_tag(tag);
-	UI::Checkbox* cb =
-	   new UI::Checkbox(box, UI::PanelStyle::kWui, Vector2i::zero(), l.displayname);
+	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kWui, Vector2i::zero(), l.displayname);
 	cb->set_tooltip(l.tooltip);
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);
