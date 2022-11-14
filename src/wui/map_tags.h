@@ -21,9 +21,7 @@
 
 #include <string>
 
-#include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/panel.h"
 
 /// Functions for localizing the known map tags.
 
@@ -31,14 +29,14 @@
 bool tag_exists(const std::string& tag);
 
 /// Contains the localized name and tooltip for a map tag
-struct LocalizedTag {
+struct TagTexts {
 	std::string displayname;
 	std::string tooltip;
 };
 
-/// If tag_exists, returns the localized tag.
+/// If tag_exists, returns the localized name and tooltip for it.
 /// Otherwise, returns 'tag' for 'displayname' and empty string for 'tooltip'
-const LocalizedTag localize_tag(const std::string& tag);
+const TagTexts localize_tag(const std::string& tag);
 
 /// Add an entry to 'dropdown' for 'tag' with the localized name and tooltip
 void add_tag_to_dropdown(UI::Dropdown<std::string>* dropdown, const std::string tag);

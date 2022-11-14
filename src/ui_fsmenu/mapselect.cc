@@ -101,6 +101,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	official_tags_dropdown_->add(_("Official & Unofficial"), "");
 	add_tag_to_dropdown(official_tags_dropdown_, "official");
 	add_tag_to_dropdown(official_tags_dropdown_, "unofficial");
+	official_tags_dropdown_->set_tooltip(_("Filter by official status"));
 
 	hbox->add(official_tags_dropdown_, UI::Box::Resizing::kFullSize);
 
@@ -118,6 +119,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	add_tag_to_dropdown(team_tags_dropdown_, "2teams");
 	add_tag_to_dropdown(team_tags_dropdown_, "3teams");
 	add_tag_to_dropdown(team_tags_dropdown_, "4teams");
+	team_tags_dropdown_->set_tooltip(_("Filter by desired line-up"));
 
 	hbox->add(team_tags_dropdown_, UI::Box::Resizing::kFullSize);
 
@@ -127,6 +129,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	   hbox, "dropdown_balancing", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	balancing_tags_dropdown_->set_autoexpand_display_button();
+	balancing_tags_dropdown_->set_tooltip(_("Filter by balancing status"));
 	rebuild_balancing_dropdown();
 
 	hbox->add(balancing_tags_dropdown_, UI::Box::Resizing::kFullSize);
@@ -422,7 +425,7 @@ UI::Checkbox*
 MapSelect::add_tag_checkbox(UI::Box* box, const std::string& tag) {
 	tags_ordered_.push_back(tag);
 
-	const LocalizedTag l = localize_tag(tag);
+	const TagTexts l = localize_tag(tag);
 	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), l.displayname);
 	cb->set_tooltip(l.tooltip);
 

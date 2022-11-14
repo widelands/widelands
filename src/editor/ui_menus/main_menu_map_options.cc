@@ -583,12 +583,12 @@ bool MainMenuMapOptions::handle_key(bool down, SDL_Keysym code) {
  * Add a tag to the checkboxes
  */
 void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent, const std::string& tag) {
-	LocalizedTag localized = localize_tag(tag);
 	UI::Box* box = new UI::Box(
 	   parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
+	TagTexts l = localize_tag(tag);
 	UI::Checkbox* cb =
-	   new UI::Checkbox(box, UI::PanelStyle::kWui, Vector2i::zero(), localized.displayname);
-	cb->set_tooltip(localized.tooltip);
+	   new UI::Checkbox(box, UI::PanelStyle::kWui, Vector2i::zero(), l.displayname);
+	cb->set_tooltip(l.tooltip);
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);
 	parent->add(box);
