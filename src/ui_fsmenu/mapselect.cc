@@ -99,7 +99,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	official_tags_dropdown_->set_autoexpand_display_button();
 	official_tags_dropdown_->set_tooltip(_("Filter by official status"));
-	official_tags_dropdown_->add(_("Official & Unofficial"), "", nullptr, false, _("Show both official and unofficial maps"));
+	official_tags_dropdown_->add(
+	   _("Official & Unofficial"), "", nullptr, false, _("Show both official and unofficial maps"));
 	add_tag_to_dropdown(official_tags_dropdown_, "official");
 	add_tag_to_dropdown(official_tags_dropdown_, "unofficial");
 
@@ -114,7 +115,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 	team_tags_dropdown_->set_tooltip(_("Filter by desired line-up"));
 	/** TRANSLATORS: Filter entry in map selection. Other entries are "Free for all"", "Teams of 2"
 	 * etc. */
-	team_tags_dropdown_->add(_("Any Teams"), "", nullptr, false, _("Do not filter by line-up suggestions"));
+	team_tags_dropdown_->add(
+	   _("Any Teams"), "", nullptr, false, _("Do not filter by line-up suggestions"));
 	add_tag_to_dropdown(team_tags_dropdown_, "ffa");
 	add_tag_to_dropdown(team_tags_dropdown_, "1v1");
 	add_tag_to_dropdown(team_tags_dropdown_, "2teams");
@@ -465,12 +467,14 @@ void MapSelect::rebuild_balancing_dropdown() {
 	const std::string selected =
 	   balancing_tags_dropdown_->has_selection() ? balancing_tags_dropdown_->get_selected() : "";
 	balancing_tags_dropdown_->clear();
-	balancing_tags_dropdown_->add(_("Balanced & Unbalanced"), "", nullptr, false, _("Show both balanced and unbalanced maps"));
+	balancing_tags_dropdown_->add(
+	   _("Balanced & Unbalanced"), "", nullptr, false, _("Show both balanced and unbalanced maps"));
 	add_tag_to_dropdown(balancing_tags_dropdown_, "balanced");
 	add_tag_to_dropdown(balancing_tags_dropdown_, "unbalanced");
 	if (unspecified_balancing_found_) {
 		// Backwards compatibility with old maps
-		balancing_tags_dropdown_->add(pgettext("balancing", "Unspecified"), "unspecified", nullptr, false, _("The map does not specify whether it is balanced"));
+		balancing_tags_dropdown_->add(pgettext("balancing", "Unspecified"), "unspecified", nullptr,
+		                              false, _("The map does not specify whether it is balanced"));
 		balancing_tags_dropdown_->select(selected);
 	} else {
 		balancing_tags_dropdown_->select(selected == "unspecified" ? "" : selected);

@@ -378,15 +378,17 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	// ### Tags tab ###
 
-	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelHeading, 0, 0,
-	                               max_w_, labelh_, _("Tags:")));
+	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui,
+	                               UI::FontStyle::kWuiInfoPanelHeading, 0, 0, max_w_, labelh_,
+	                               _("Tags:")));
 
 	tags_box_.add_space(padding_);
 
 	UI::Textarea* team_tags_label =
 	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_,
 	                    labelh_, _("This map is suitable for:"));
-	team_tags_label->set_tooltip(_("Please add suggested team line-ups in the next tab for all selected options"));
+	team_tags_label->set_tooltip(
+	   _("Please add suggested team line-ups in the next tab for all selected options"));
 	team_tags_label->set_handle_mouse(true);
 	tags_box_.add(team_tags_label);
 	tags_box_.add_space(padding_);
