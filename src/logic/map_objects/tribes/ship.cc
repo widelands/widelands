@@ -926,7 +926,7 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 	}
 	get_owner()->force_csite(c, get_owner()->tribe().port()).set_destruction_blocked(true);
 
-	// Make sure that we have space to squeeze in a lumberjack
+	// Make sure that we have space to squeeze in a lumberjack or a quarry
 	std::vector<ImmovableFound> all_immos;
 	game.map().find_immovables(game, Area<FCoords>(game.map().get_fcoords(c), 3), &all_immos,
 	                           FindImmovableType(MapObjectType::IMMOVABLE));
