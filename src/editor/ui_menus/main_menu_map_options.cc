@@ -226,6 +226,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                       parent.get_inner_h() - 80,
                       _("Map Options")),
      padding_(4),
+     separator_(8),
      indent_(10),
      labelh_(text_height(UI::FontStyle::kWuiLabel) + 4),
      checkbox_space_(25),
@@ -340,6 +341,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tags_box_.set_size(max_w_, tabs_.get_inner_h() - 35);
 	teams_box_.set_size(max_w_, tabs_.get_inner_h() - 35);
 
+	// ### Main tab ###
+
 	// Calculate the overall remaining space for MultilineEditboxes.
 	uint32_t remaining_space = main_box_.get_inner_h() - 7 * labelh_ - 5 * indent_;
 
@@ -373,29 +376,46 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	main_box_.add(&size_);
 	main_box_.add_space(indent_);
 
-	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	// ### Tags tab ###
+
+	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelHeading, 0, 0,
 	                               max_w_, labelh_, _("Tags:")));
+
+	tags_box_.add_space(padding_);
+
+	UI::Textarea* team_tags_label =
+	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_,
+	                    labelh_, _("This map is suitable for:"));
+	team_tags_label->set_tooltip(_("Please add suggested team line-ups in the next tab for all selected options"));
+	team_tags_label->set_handle_mouse(true);
+	tags_box_.add(team_tags_label);
+	tags_box_.add_space(padding_);
+
 	add_tag_checkbox(&tags_box_, "ffa");
 	add_tag_checkbox(&tags_box_, "1v1");
 	add_tag_checkbox(&tags_box_, "2teams");
 	add_tag_checkbox(&tags_box_, "3teams");
 	add_tag_checkbox(&tags_box_, "4teams");
 
+	tags_box_.add_space(separator_);
+
 	add_tag_to_dropdown(&balancing_dropdown_, "balanced");
 	add_tag_to_dropdown(&balancing_dropdown_, "unbalanced");
 	balancing_dropdown_.set_tooltip(
 	   _("Mark whether the starting positions provide equal conditions for each player"));
 	tags_box_.add(&balancing_dropdown_, UI::Box::Resizing::kFullSize);
-	tags_box_.add_space(padding_);
 
-	theme_dropdown_.add(pgettext("map_theme", "(none)"), "");
+	tags_box_.add_space(separator_);
+
+	const std::string theme_tooltip = _("Set the theme for the game loadscreens");
+	theme_dropdown_.add(pgettext("map_theme", "(none)"), "", nullptr, false, theme_tooltip);
 	for (const Widelands::Map::OldWorldInfo& owi : Widelands::Map::kOldWorldNames) {
-		theme_dropdown_.add(owi.descname(), owi.name);
+		theme_dropdown_.add(owi.descname(), owi.name, nullptr, false, theme_tooltip);
 	}
-	theme_dropdown_.set_tooltip(_("Set the theme for the game loadscreens"));
+	theme_dropdown_.set_tooltip(theme_tooltip);
 	tags_box_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
 
-	tags_box_.add_space(labelh_);
+	tags_box_.add_space(separator_);
 
 	UI::Textarea* ww_text =
 	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_,
@@ -424,6 +444,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tags_box_.add(ww_box, UI::Box::Resizing::kFullSize);
 	tags_box_.add_space(padding_);
 
+	// ### Teams tab ###
+
 	inner_teams_box_.set_force_scrolling(true);
 	for (const Widelands::SuggestedTeamLineup& team : parent.egbase().map().get_suggested_teams()) {
 		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(
@@ -451,6 +473,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 		inner_teams_box_.add(ste);
 		suggested_teams_entries_.push_back(ste);
 	});
+
+	// ### End of tab content definitions ###
 
 	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Box::Resizing::kFullSize);
 	buttons_box_.add_space(4);

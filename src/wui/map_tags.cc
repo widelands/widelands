@@ -45,7 +45,7 @@ const std::map<std::string, TagTexts> kMapTags = {
     {/** TRANSLATORS: This is a map tag */
      gettext_noop("Unbalanced"),
      /** TRANSLATORS: This is a tool tip for a map tag */
-     gettext_noop("No efforts were made to provide equal conditions for the players")}},
+     gettext_noop("Players face different conditions or balancing is not checked")}},
    {"seafaring",
     {/** TRANSLATORS: This is a map tag */
      gettext_noop("Seafaring"),
@@ -75,7 +75,7 @@ const std::map<std::string, TagTexts> kMapTags = {
     {/** TRANSLATORS: This is a map tag. One versus one. */
      gettext_noop("1v1"),
      /** TRANSLATORS: This is a tool tip for a map tag */
-     gettext_noop("Two players fighting against each other")}},
+     gettext_noop("Two players fight against each other")}},
    {"2teams",
     {/** TRANSLATORS: This is a map tag */
      gettext_noop("Teams of 2"),
