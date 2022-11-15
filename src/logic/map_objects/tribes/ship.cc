@@ -453,21 +453,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			             "images/wui/editor/fsel_editor_set_port_space.png");
 		}
 	} else if (ship_state_ == ShipStates::kExpeditionPortspaceFound) {
-		if (!expedition_->seen_port_buildspaces.empty()) {
-			const FCoords fc = map->get_fcoords(expedition_->seen_port_buildspaces.front());
-			if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
-				set_ship_state_and_notify(
-				   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
-				send_message(
-				   game, _("Port Space"), _("Port Space Lost"),
-				   _("A discovered port build space is not available for building a port anymore."),
-				   "images/wui/editor/fsel_editor_set_port_space.png");
-				expedition_->seen_port_buildspaces.clear();
-			}
-		} else {
-			log_warn_time(
-			   game.get_gametime(), "Expedition list of seem üport spaces is unexpectedly empty!\n");
-		}
+		check_port_space_still_available(game);
 	}
 }
 
@@ -746,6 +732,30 @@ void Ship::set_ship_state_and_notify(ShipStates state, NoteShip::Action action) 
 	}
 }
 
+bool Ship::check_port_space_still_available(Game& game) {
+	assert(expedition_);
+	// recheck ownership before setting the csite
+	Map* map = game.mutable_map();
+	if (!expedition_->seen_port_buildspaces.empty()) {
+		const FCoords fc = map->get_fcoords(expedition_->seen_port_buildspaces.front());
+		if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
+			set_ship_state_and_notify(
+			   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
+			send_message(
+			   game, _("Port Space"), _("Port Space Lost"),
+			   _("A discovered port build space is not available for building a port anymore."),
+			   "images/wui/editor/fsel_editor_set_port_space.png");
+			expedition_->seen_port_buildspaces.clear();
+			return false;
+		}
+		return true;
+	} else {
+		log_warn_time(
+		   game.get_gametime(), "Expedition list of seen port spaces is unexpectedly empty!\n");
+		return false;
+	}
+}
+
 void Ship::set_economy(const Game& game, Economy* e, WareWorker type) {
 	// Do not check here that the economy actually changed, because on loading
 	// we rely that wares really get reassigned our economy.
@@ -913,22 +923,9 @@ WalkingDir Ship::get_scouting_direction() const {
 void Ship::exp_construct_port(Game& game, const Coords& c) {
 	assert(expedition_);
 	// recheck ownership before setting the csite
-	Map* map = game.mutable_map();
-	if (!expedition_->seen_port_buildspaces.empty()) {
-		const FCoords fc = map->get_fcoords(expedition_->seen_port_buildspaces.front());
-		if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
-			set_ship_state_and_notify(
-			   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
-			send_message(
-			   game, _("Port Space"), _("Port Space Lost"),
-			   _("A discovered port build space is not available for building a port anymore."),
-			   "images/wui/editor/fsel_editor_set_port_space.png");
-			expedition_->seen_port_buildspaces.clear();
-			return;
-		}
-	} else {
-		log_warn_time(
-		   game.get_gametime(), "Expedition list of seen port spaces is unexpectedly empty!\n");
+	//Map* map = game.mutable_map();
+	if (!check_port_space_still_available(game)) {
+		return;
 	}
 	get_owner()->force_csite(c, get_owner()->tribe().port()).set_destruction_blocked(true);
 
