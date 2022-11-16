@@ -746,7 +746,7 @@ bool Ship::check_port_space_still_available(Game& game) {
 		set_ship_state_and_notify(
 		   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
 		send_message(
-		   game, _("Port Space"), _("Port Space Lost"),
+		   game, _("Port Space Lost!"), _("No Port Can Be Build"),
 		   _("A discovered port build space is not available for building a port anymore."),
 		   "images/wui/editor/fsel_editor_set_port_space.png");
 		expedition_->seen_port_buildspaces.clear();
