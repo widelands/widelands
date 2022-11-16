@@ -748,12 +748,12 @@ bool Ship::check_port_space_still_available(Game& game) {
 			expedition_->seen_port_buildspaces.clear();
 			return false;
 		}
-		return true;
 	} else {
 		log_warn_time(
 		   game.get_gametime(), "Expedition list of seen port spaces is unexpectedly empty!\n");
 		return false;
 	}
+	return true;
 }
 
 void Ship::set_economy(const Game& game, Economy* e, WareWorker type) {
