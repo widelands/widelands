@@ -920,8 +920,7 @@ WalkingDir Ship::get_scouting_direction() const {
 /// @note only called via player command
 void Ship::exp_construct_port(Game& game, const Coords& c) {
 	assert(expedition_);
-	// recheck ownership before setting the csite
-	// Map* map = game.mutable_map();
+	// recheck ownership and availability before setting the csite
 	if (!check_port_space_still_available(game)) {
 		return;
 	}
