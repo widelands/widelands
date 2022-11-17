@@ -95,13 +95,13 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 	map.get_rn(coord, &c[4]);
 	map.get_brn(coord, &c[5]);
 	map.get_bln(coord, &c[6]);
-	map.get_bln(c[0], &c[7]);
-	map.get_ln(c[0], &c[8]);
-	map.get_tln(c[0], &c[9]);
-	map.get_tln(c[1], &c[10]);
-	map.get_trn(c[1], &c[11]);
-	map.get_trn(c[2], &c[12]);
-	map.get_rn(c[2], &c[13]);
+	map.get_bln(c[1], &c[7]);
+	map.get_ln(c[1], &c[8]);
+	map.get_tln(c[1], &c[9]);
+	map.get_tln(c[2], &c[10]);
+	map.get_trn(c[2], &c[11]);
+	map.get_trn(c[3], &c[12]);
+	map.get_rn(c[3], &c[13]);
 
 	for (const Widelands::FCoords& fc : c) {
 		if (!can_support_port(fc)) {  // check for blocking immovables
