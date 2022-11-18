@@ -175,7 +175,7 @@ msgstr "prawda"
 #: ../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
-msgstr ""
+msgstr "."
 
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
@@ -507,12 +507,12 @@ msgstr "Kliknij pole, by pokazać informacje o nim"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:424
 msgid "Tool History"
-msgstr ""
+msgstr "Historia narzędzi"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../src/editor/editorinteractive.cc:369
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "Przywróć poprzednie ustawienia narzędzi"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -1520,7 +1520,7 @@ msgstr "Wielkość narzędzia"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:45
 msgid "Current Size:"
-msgstr ""
+msgstr "Bieżący rozmiar:"
 
 #: ../../src/game_io/game_loader.cc:69
 #, c-format
@@ -1632,7 +1632,7 @@ msgstr "Język cienowania"
 
 #: ../../src/graphic/text/rt_render.cc:1427
 msgid "Copy link to clipboard"
-msgstr ""
+msgstr "Skopiuj link do schowka"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces the
@@ -1855,7 +1855,7 @@ msgstr "Widelands nie mógł rozpocząć gry, gdyż gracz %u nie ma pozycji star
 
 #: ../../src/logic/game.cc:747
 msgid "Initializing…"
-msgstr ""
+msgstr "Inicjowanie..."
 
 #: ../../src/logic/game.cc:1218
 msgid "Trade Offer"
@@ -2455,7 +2455,7 @@ msgstr "Statek %d"
 #: ../../src/wui/game_diplomacy_menu.cc:114
 #: ../../src/wui/interactive_player.cc:219
 msgid "Diplomacy"
-msgstr ""
+msgstr "Dyplomacja"
 
 #: ../../src/logic/playercommand.cc:2159
 #, c-format
@@ -3347,11 +3347,11 @@ msgstr ""
 
 #: ../../src/ui_basic/panel.cc:302
 msgid "Please wait…"
-msgstr ""
+msgstr "Proszę czekać..."
 
 #: ../../src/ui_basic/panel.cc:432
 msgid "Game ending – please wait…"
-msgstr ""
+msgstr "Trwa kończenie gry – proszę czekać..."
 
 #: ../../src/ui_basic/progresswindow.cc:77
 msgid "Loading…"
@@ -3360,12 +3360,12 @@ msgstr "Wczytywanie..."
 #: ../../src/ui_basic/spinbox.cc:135 ../../src/ui_basic/spinbox.cc:148
 #, c-format
 msgid "Decrease the value by %s"
-msgstr ""
+msgstr "Zmniejsz wartość o %s"
 
 #: ../../src/ui_basic/spinbox.cc:140 ../../src/ui_basic/spinbox.cc:152
 #, c-format
 msgid "Increase the value by %s"
-msgstr ""
+msgstr "Zwiększ wartość o %s"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:412 ../../src/ui_basic/spinbox.cc:429
@@ -3438,7 +3438,7 @@ msgstr "Błąd skryptu Lua"
 
 #: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:122
 msgid "Technical Info"
-msgstr ""
+msgstr "Informacje techniczne"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:36
 msgid "Contact Form"
@@ -3446,15 +3446,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/contact.cc:48
 msgid "Send message"
-msgstr ""
+msgstr "Wyślij wiadomość"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:72
 msgid "Send Message"
-msgstr ""
+msgstr "Wyślij wiadomość"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:73
 msgid "Send this message now?"
-msgstr ""
+msgstr "Czy wysłać wiadomość?"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:83
 #, c-format
@@ -3466,7 +3466,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/contact.cc:91
 msgid "Sent"
-msgstr ""
+msgstr "Wysłano"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:92
 msgid ""
@@ -3477,7 +3477,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
-msgstr ""
+msgstr "Logowanie"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:69
 #: ../../src/ui_fsmenu/addons/manager.cc:224
@@ -3497,7 +3497,7 @@ msgstr "Aby użyć zarejestrowanego konta, potrzebne jest konto na stronie inter
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:82
 msgid "Username:"
-msgstr ""
+msgstr "Nazwa użytkownika:"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:87
 #: ../../src/ui_fsmenu/login_box.cc:52
@@ -3528,7 +3528,7 @@ msgstr "%u bajtów"
 #: ../../src/ui_fsmenu/addons/manager.cc:89
 msgctxt "quality"
 msgid "Any"
-msgstr ""
+msgstr "Brak"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:89
 msgid "Quality not yet evaluated"
@@ -3538,17 +3538,17 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:95
 msgctxt "quality"
 msgid "Poor"
-msgstr ""
+msgstr "Słaba"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:96
 msgid "This add-on may cause major glitches and errors."
-msgstr ""
+msgstr "Ten dodatek może powodować poważne usterki i błędy."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:102
 msgctxt "quality"
 msgid "Good"
-msgstr ""
+msgstr "Dobra"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:102
 msgid "This add-on works as advertised."
@@ -3558,7 +3558,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:107
 msgctxt "quality"
 msgid "Excellent"
-msgstr ""
+msgstr "Świetna"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:108
 msgid "This add-on has been decorated for its remarkably high quality."
@@ -3590,7 +3590,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:207
 msgid "Upload a screenshot…"
-msgstr ""
+msgstr "Prześlij zrzut ekranu..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:214
 msgid "Understood and confirmed"
@@ -3738,12 +3738,12 @@ msgstr "Nazwa (malejąco)"
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:471
 msgid "Most popular"
-msgstr ""
+msgstr "Najbardziej popularne"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:473
 msgid "Least popular"
-msgstr ""
+msgstr "Najmniej popularne"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons/manager.cc:475
@@ -3806,7 +3806,7 @@ msgstr "Zaktualizuj wszytko"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:740
 msgid "Not logged in"
-msgstr ""
+msgstr "Nie zalogowany"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:741
 msgid ""
@@ -3829,16 +3829,16 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:754
 #, c-format
 msgid "Logged in as %s"
-msgstr ""
+msgstr "Zalogowano jako %s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:754
 #, c-format
 msgid "Logged in as %s (admin)"
-msgstr ""
+msgstr "Zalogowano jako %s (admin)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:755
 msgid "Click to log out"
-msgstr ""
+msgstr "Kliknij, by wylogować"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:760
 msgid "Please tick the confirmation checkbox to upload add-ons"
@@ -3850,7 +3850,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:790
 msgid "Server Error"
-msgstr ""
+msgstr "Błąd serwera"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:791
 #, c-format
@@ -3862,7 +3862,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:799
 msgid "Wrong Password"
-msgstr ""
+msgstr "Błędne hasło"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:800
 #, c-format
