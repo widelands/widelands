@@ -54,14 +54,14 @@ namespace {
 
 /// Returns true if 'coord' is not blocked by immovables
 /// Trees are allowed, because we don't want spreading forests to block portspaces from expeditions
-bool can_support_port(const FCoords& coord) {
+bool can_support_port(const FCoords& coord, BaseImmovable::Size max_immo_size) {
 	BaseImmovable* baim = coord.field->get_immovable();
 	Immovable* imo = dynamic_cast<Immovable*>(baim);
 	// we have a player immovable
 	if (imo == nullptr && baim != nullptr) {
 		return false;
 	}
-	return (baim == nullptr || baim->get_size() < BaseImmovable::SMALL ||
+	return (baim == nullptr || baim->get_size() <= max_immo_size ||
 	        imo->descr().has_terrain_affinity());
 }
 
@@ -84,10 +84,14 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 	    !map.find_portdock(coord, false).empty()) {
 		return true;
 	}
+
 	// now check if we are allowed to build one although some conditions not met
 	// All fields of the port and some neighbouring fields must be free of
 	// blocking immovables.
-	Widelands::FCoords c[14];
+
+	// Immediate neighbours must not have immovables, except for trees, which can
+	// spread, but will be cleared by exp_construct_port()
+	Widelands::FCoords c[7];
 	c[0] = coord;
 	map.get_ln(coord, &c[1]);
 	map.get_tln(coord, &c[2]);
@@ -95,19 +99,27 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 	map.get_rn(coord, &c[4]);
 	map.get_brn(coord, &c[5]);
 	map.get_bln(coord, &c[6]);
-	map.get_bln(c[1], &c[7]);
-	map.get_ln(c[1], &c[8]);
-	map.get_tln(c[1], &c[9]);
-	map.get_tln(c[2], &c[10]);
-	map.get_trn(c[2], &c[11]);
-	map.get_trn(c[3], &c[12]);
-	map.get_rn(c[3], &c[13]);
-
 	for (const Widelands::FCoords& fc : c) {
-		if (!can_support_port(fc)) {  // check for blocking immovables
+		if (!can_support_port(fc, BaseImmovable::NONE)) {  // check for blocking immovables
 			return false;
 		}
 	}
+
+	// Next neighbours to the North and the West may have size = small immovables
+	Widelands::FCoords cn[7];
+	map.get_bln(c[1], &cn[0]);
+	map.get_ln(c[1], &cn[1]);
+	map.get_tln(c[1], &cn[2]);
+	map.get_tln(c[2], &cn[3]);
+	map.get_trn(c[2], &cn[4]);
+	map.get_trn(c[3], &cn[5]);
+	map.get_rn(c[3], &cn[6]);
+	for (const Widelands::FCoords& fc : cn) {
+		if (!can_support_port(fc, BaseImmovable::SMALL)) {  // check for blocking immovables
+			return false;
+		}
+	}
+
 	return true;
 }
 
