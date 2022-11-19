@@ -18,8 +18,6 @@ run(function()
    -- Look for the other port space which is surrounded by closest allowed rocks
    -- and artifacts
    print("Checking detection of port space with closest possible blocking immovables")
-   -- portdock can't be on border
-   p1:conquer(map:get_field(12,7), 5)
    ship.scouting_direction = "ne"
    wait_for_message("Port Space")
 
