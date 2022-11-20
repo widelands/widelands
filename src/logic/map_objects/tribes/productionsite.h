@@ -347,7 +347,7 @@ public:
 	}
 
 	virtual bool has_workers(DescriptionIndex targetSite, Game& game);
-	uint8_t get_statistics_percent() {
+	uint8_t get_statistics_percent() const {
 		return last_stat_percent_ / 10;
 	}
 

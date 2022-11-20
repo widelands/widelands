@@ -1329,15 +1329,19 @@ void Game::sample_statistics() {
 		}
 
 		// Get the immovable
-		if (upcast(Building, building, fc.field->get_immovable())) {
+		if (fc.field->get_immovable() != nullptr &&
+		   fc.field->get_immovable()->descr().type() >= MapObjectType::BUILDING) {
+			upcast(Building, building, fc.field->get_immovable());
 			if (building->get_position() == fc) {  // only count main location
 				uint8_t const player_index = building->owner().player_number() - 1;
 				++nr_buildings[player_index];
 
 				//  If it is a productionsite, add its productivity.
-				if (upcast(ProductionSite, productionsite, building)) {
+				if (building->descr().type() == MapObjectType::PRODUCTIONSITE ||
+				   building->descr().type() == MapObjectType::TRAININGSITE) {
 					++nr_production_sites[player_index];
-					productivity[player_index] += productionsite->get_statistics_percent();
+					productivity[player_index] +=
+					   dynamic_cast<const ProductionSite&>(*building).get_statistics_percent();
 				}
 			}
 		}
@@ -1348,13 +1352,13 @@ void Game::sample_statistics() {
 				continue;
 			}
 
-			constexpr int kHeroValue = 20;
+			constexpr int kHeroValue = 19;
 			upcast(Soldier const, soldier, b);
 			assert(soldier != nullptr);
+			const float total_level = soldier->get_level(TrainingAttribute::kTotal);
+			const float max_level = std::max<float>(soldier->descr().get_max_total_level(), 1);
 			miltary_strength[soldier->owner().player_number() - 1] +=
-			   soldier->get_level(TrainingAttribute::kTotal) * kHeroValue /
-			      std::max<float>(soldier->descr().get_max_total_level(), 1) +
-			   1.f;  //  So that level 0 also counts.
+			   (total_level * total_level * kHeroValue) / (max_level * max_level) + 1.f;
 		}
 	}
 
