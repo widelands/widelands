@@ -1330,7 +1330,7 @@ void Game::sample_statistics() {
 
 		// Get the immovable
 		if (fc.field->get_immovable() != nullptr &&
-		   fc.field->get_immovable()->descr().type() >= MapObjectType::BUILDING) {
+		    fc.field->get_immovable()->descr().type() >= MapObjectType::BUILDING) {
 			upcast(Building, building, fc.field->get_immovable());
 			if (building->get_position() == fc) {  // only count main location
 				uint8_t const player_index = building->owner().player_number() - 1;
@@ -1338,7 +1338,7 @@ void Game::sample_statistics() {
 
 				//  If it is a productionsite, add its productivity.
 				if (building->descr().type() == MapObjectType::PRODUCTIONSITE ||
-				   building->descr().type() == MapObjectType::TRAININGSITE) {
+				    building->descr().type() == MapObjectType::TRAININGSITE) {
 					++nr_production_sites[player_index];
 					productivity[player_index] +=
 					   dynamic_cast<const ProductionSite&>(*building).get_statistics_percent();
@@ -1435,7 +1435,6 @@ void Game::sample_statistics() {
 		general_stats_[i].nr_wares.push_back(nr_wares[i]);
 		general_stats_[i].productivity.push_back(productivity[i]);
 		general_stats_[i].custom_statistic.push_back(custom_statistic[i]);
-
 	}
 
 	// Calculate statistics for the players
