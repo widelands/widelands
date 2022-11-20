@@ -268,6 +268,7 @@ private:
 	void ship_update_idle(Game&, State&);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
+	bool check_port_space_still_available(Game&);
 
 	bool init_fleet(EditorGameBase&);
 	void set_fleet(ShipFleet* fleet);
