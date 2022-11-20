@@ -988,6 +988,12 @@ void Soldier::attack_update(Game& game, State& state) {
 
 	// Count remaining defenders
 	if (enemy != nullptr) {
+		if (!owner().is_hostile(enemy->owner())) {
+			/* The players agreed on a truce. */
+			molog(game.get_gametime(), "[attack] opponent is an ally, cancel attack");
+			return pop_task(game);
+		}
+
 		if (enemy->soldier_control() != nullptr) {
 			defenders = enemy->soldier_control()->present_soldiers().size();
 		}
@@ -1440,6 +1446,11 @@ void Soldier::battle_update(Game& game, State& /* state */) {
 
 	const Map& map = game.map();
 	Soldier& opponent = *battle_->opponent(*this);
+	if (!owner().is_hostile(opponent.owner())) {
+		/* The players agreed on a truce. */
+		molog(game.get_gametime(), "[battle] opponent is an ally, cancel battle");
+		return pop_task(game);
+	}
 	if (opponent.get_position() != get_position()) {
 		const MapObject* mo = map[get_position()].get_immovable();
 		if ((mo != nullptr) && mo->descr().type() >= MapObjectType::BUILDING) {
