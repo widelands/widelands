@@ -991,6 +991,7 @@ void Soldier::attack_update(Game& game, State& state) {
 		if (!owner().is_hostile(enemy->owner())) {
 			/* The players agreed on a truce. */
 			molog(game.get_gametime(), "[attack] opponent is an ally, cancel attack");
+			combat_walking_ = CD_NONE;
 			return pop_task(game);
 		}
 
@@ -1449,6 +1450,7 @@ void Soldier::battle_update(Game& game, State& /* state */) {
 	if (!owner().is_hostile(opponent.owner())) {
 		/* The players agreed on a truce. */
 		molog(game.get_gametime(), "[battle] opponent is an ally, cancel battle");
+		combat_walking_ = CD_NONE;
 		return pop_task(game);
 	}
 	if (opponent.get_position() != get_position()) {
