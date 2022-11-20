@@ -1299,7 +1299,7 @@ void Game::sample_statistics() {
 	std::vector<uint32_t> nr_msites_defeated;
 	std::vector<uint32_t> nr_civil_blds_lost;
 	std::vector<uint32_t> nr_civil_blds_defeated;
-	std::vector<uint32_t> miltary_strength;
+	std::vector<float> miltary_strength;
 	std::vector<uint32_t> nr_workers;
 	std::vector<uint32_t> nr_wares;
 	std::vector<uint32_t> productivity;
@@ -1353,8 +1353,8 @@ void Game::sample_statistics() {
 			assert(soldier != nullptr);
 			miltary_strength[soldier->owner().player_number() - 1] +=
 			   soldier->get_level(TrainingAttribute::kTotal) * kHeroValue /
-			      std::max(soldier->descr().get_max_total_level(), 1u) +
-			   1;  //  So that level 0 also counts.
+			      std::max<float>(soldier->descr().get_max_total_level(), 1) +
+			   1.f;  //  So that level 0 also counts.
 		}
 	}
 
@@ -1426,11 +1426,12 @@ void Game::sample_statistics() {
 		general_stats_[i].nr_msites_defeated.push_back(nr_msites_defeated[i]);
 		general_stats_[i].nr_civil_blds_lost.push_back(nr_civil_blds_lost[i]);
 		general_stats_[i].nr_civil_blds_defeated.push_back(nr_civil_blds_defeated[i]);
-		general_stats_[i].miltary_strength.push_back(miltary_strength[i]);
+		general_stats_[i].miltary_strength.push_back(lroundf(miltary_strength[i]));
 		general_stats_[i].nr_workers.push_back(nr_workers[i]);
 		general_stats_[i].nr_wares.push_back(nr_wares[i]);
 		general_stats_[i].productivity.push_back(productivity[i]);
 		general_stats_[i].custom_statistic.push_back(custom_statistic[i]);
+
 	}
 
 	// Calculate statistics for the players
