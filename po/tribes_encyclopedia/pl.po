@@ -594,13 +594,13 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:552
 msgctxt "amazons_worker"
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Nosi przedmioty po twoich drogach."
 
 #. TRANSLATORS: Helptext for an amazon worker: Ferry
 #: ../../data/tribes/initialization/amazons/units.lua:559
 msgctxt "amazons_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Przewozi towary przez wąskie rzeki."
 
 #. TRANSLATORS: Helptext for an amazon worker: Tapir
 #: ../../data/tribes/initialization/amazons/units.lua:568
@@ -626,7 +626,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:592
 msgctxt "amazons_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Ścina drzewa."
 
 #. TRANSLATORS: Helptext for an amazon worker: Master Woodcutter
 #: ../../data/tribes/initialization/amazons/units.lua:599
