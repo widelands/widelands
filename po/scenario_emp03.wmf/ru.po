@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-11-10 03:40+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
@@ -148,11 +148,12 @@ msgstr "Производство сукна"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
-"Now turn all the wheat into at least 50 bales of wool and then use the wool "
-"to weave cloth in order to build a ship."
+"Now build a sheep farm and turn all the wheat into at least 50 bales of "
+"wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
-"Теперь используем всю пшеницу, чтобы получить не менее 50 тюков шерсти, а "
-"потом сплетём из неё сукно, которое используем для строительства корабля."
+"Теперь постройте овцеферму и переработайте всю пшеницу в 50 тюков шерсти. "
+"После этого используйте шерсть, чтобы соткать сукно, которое пойдёт на "
+"постройку корабля."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -166,11 +167,11 @@ msgstr "Постройте два порта экспедициями"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
-"Explore the island in the south. Use an expedition to build a port there. "
-"Afterwards, try to find some mining resources."
+"Explore the island in the south. Send an expedition from our port to build a"
+" port there. Afterwards, try to find some mining resources."
 msgstr ""
-"Исследуйте остров на юге. Используйте экспедицию, чтобы построить там порт. "
-"После этого попробуйте найти немного полезных ископаемых для добычи."
+"Исследуйте остров на юге. Отправьте экспедицию из нашего порта, чтобы "
+"построить там порт. После этого попробуйте найти полезне ископаемые."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""

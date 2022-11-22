@@ -33,8 +33,8 @@
 #include "ui_basic/slider.h"
 #include "wui/interactive_player.h"
 
-#define PLOT_HEIGHT 145
-#define NR_BASE_DATASETS 11
+constexpr int kPlotHeight = 145;
+constexpr int kNrBaseDatasets = 12;
 
 GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
                                              GeneralStatisticsMenu::Registry& registry)
@@ -52,7 +52,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
            0,
            0,
            430,
-           PLOT_HEIGHT,
+           kPlotHeight,
            Widelands::kStatisticsSampleTime.get(),
            WuiPlotArea::Plotmode::kAbsolute),
      selected_information_(0),
@@ -83,7 +83,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	}
 
 	// Is there a hook dataset?
-	ndatasets_ = NR_BASE_DATASETS;
+	ndatasets_ = kNrBaseDatasets;
 	std::unique_ptr<LuaTable> hook = game_.lua().get_hook("custom_statistic");
 	std::string cs_name;
 	std::string cs_pic;
@@ -111,9 +111,10 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		plot_.register_plot_data(i * ndatasets_ + 7, &genstats[i].nr_msites_lost, color);
 		plot_.register_plot_data(i * ndatasets_ + 8, &genstats[i].nr_msites_defeated, color);
 		plot_.register_plot_data(i * ndatasets_ + 9, &genstats[i].nr_civil_blds_lost, color);
-		plot_.register_plot_data(i * ndatasets_ + 10, &genstats[i].miltary_strength, color);
+		plot_.register_plot_data(i * ndatasets_ + 10, &genstats[i].nr_civil_blds_defeated, color);
+		plot_.register_plot_data(i * ndatasets_ + 11, &genstats[i].miltary_strength, color);
 		if (hook) {
-			plot_.register_plot_data(i * ndatasets_ + 11, &genstats[i].custom_statistic, color);
+			plot_.register_plot_data(i * ndatasets_ + 12, &genstats[i].custom_statistic, color);
 		}
 		if (game_.get_player(i + 1) != nullptr) {  // Show area plot
 			plot_.show_plot(i * ndatasets_ + selected_information_, my_registry_->selected_players[i]);
@@ -182,6 +183,11 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
 	                       g_image_cache->get("images/wui/stats/genstats_civil_blds_lost.png"),
 	                       _("Civilian buildings lost"), &btn);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
+
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_civil_blds_defeated.png"),
+	                       _("Civilian buildings destroyed"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,

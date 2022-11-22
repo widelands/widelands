@@ -5,6 +5,7 @@
 -- Functions used in the ingame help windows for formatting the text and pictures.
 
 include "scripting/richtext.lua"
+include "scripting/help.lua"
 
 --  =======================================================
 --  *************** Basic helper functions ****************
