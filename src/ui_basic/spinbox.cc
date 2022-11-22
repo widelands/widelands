@@ -344,21 +344,36 @@ void SpinBox::set_unit_width(uint32_t width) {
  * private function called by spinbox buttons to in-/decrease the value
  */
 void SpinBox::change_value(int32_t const value) {
-	set_value(value + sbi_->value);
-	changed();
+	if (value == 0) {
+		return;
+	}
+	// Avoid integer overflows
+	int64_t new_value = static_cast<int64_t>(sbi_->value) + static_cast<int64_t>(value);
+	if (new_value > sbi_->max) {
+		set_value(sbi_->max);
+	} else if (new_value < sbi_->min) {
+		set_value(sbi_->min);
+	} else {
+		set_value(new_value);
+	}
 }
 
 /**
  * manually sets the used value to a given value
  */
 void SpinBox::set_value(int32_t const value) {
-	sbi_->value = value;
-	if (sbi_->value > sbi_->max) {
+	if (sbi_->value == value) {
+		return;
+	}
+	if (value > sbi_->max) {
 		sbi_->value = sbi_->max;
-	} else if (sbi_->value < sbi_->min) {
+	} else if (value < sbi_->min) {
 		sbi_->value = sbi_->min;
+	} else {
+		sbi_->value = value;
 	}
 	update();
+	changed();
 }
 
 void SpinBox::set_value_list(const std::vector<int32_t>& values) {
