@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-10-31 04:13+0000\n"
+"POT-Creation-Date: 2022-11-19 03:23+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: GunChleoc, 2016\n"
 "Language-Team: Basque (http://www.transifex.com/widelands/widelands/language/eu/)\n"
@@ -9970,7 +9970,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: ../../data/tribes/scripting/help/building_help.lua:242
-#: ../../data/tribes/scripting/help/format_help.lua:249
+#: ../../data/tribes/scripting/help/format_help.lua:250
 #, lua-format
 msgid "%s and"
 msgstr ""
@@ -10664,79 +10664,79 @@ msgid "Watch the selected ship"
 msgstr ""
 
 #. TRANSLATORS: Size of a map immovablee
-#: ../../data/tribes/scripting/help/format_help.lua:55
+#: ../../data/tribes/scripting/help/format_help.lua:56
 msgid "Small"
 msgstr ""
 
 #. TRANSLATORS: Size of a map immovable
-#: ../../data/tribes/scripting/help/format_help.lua:58
+#: ../../data/tribes/scripting/help/format_help.lua:59
 msgid "Medium"
 msgstr ""
 
 #. TRANSLATORS: Size of a map immovable
-#: ../../data/tribes/scripting/help/format_help.lua:61
+#: ../../data/tribes/scripting/help/format_help.lua:62
 msgid "Big"
 msgstr ""
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:71
+#: ../../data/tribes/scripting/help/format_help.lua:72
 msgid "Mine plot"
 msgstr ""
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:75
+#: ../../data/tribes/scripting/help/format_help.lua:76
 msgid "Port plot"
 msgstr ""
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:79
+#: ../../data/tribes/scripting/help/format_help.lua:80
 msgid "Small plot"
 msgstr ""
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:83
+#: ../../data/tribes/scripting/help/format_help.lua:84
 msgid "Medium plot"
 msgstr ""
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:87
+#: ../../data/tribes/scripting/help/format_help.lua:88
 msgid "Big plot"
 msgstr ""
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:93
+#: ../../data/tribes/scripting/help/format_help.lua:94
 msgid "Space required:"
 msgstr ""
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-#: ../../data/tribes/scripting/help/format_help.lua:147
-#: ../../data/tribes/scripting/help/format_help.lua:241
+#: ../../data/tribes/scripting/help/format_help.lua:148
+#: ../../data/tribes/scripting/help/format_help.lua:242
 msgid "%1$dx %2$s"
 msgstr ""
 
 #. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/format_help.lua:163
-#: ../../data/tribes/scripting/help/format_help.lua:173
+#: ../../data/tribes/scripting/help/format_help.lua:164
+#: ../../data/tribes/scripting/help/format_help.lua:174
 #, lua-format
 msgid "%s to %s (%s EP)"
 msgstr ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by
 #. a productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:276
+#: ../../data/tribes/scripting/help/format_help.lua:277
 msgid "Wares and workers consumed:"
 msgstr ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:279
+#: ../../data/tribes/scripting/help/format_help.lua:280
 msgid "Workers consumed:"
 msgstr ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:283
+#: ../../data/tribes/scripting/help/format_help.lua:284
 msgid "Wares consumed:"
 msgstr ""
 

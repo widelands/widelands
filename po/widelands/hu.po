@@ -909,13 +909,13 @@ msgstr "Az én térképeim"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:80
 #: ../../src/wui/mapdata.cc:180
 msgid "Multiplayer Scenarios"
-msgstr "Többjátékos küldetések"
+msgstr "Többszemélyes küldetések"
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:82
 #: ../../src/wui/mapdata.cc:183
 msgid "Singleplayer Scenarios"
-msgstr "Egyjátékos küldetések"
+msgstr "Egyszemélyes küldetések"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:84
@@ -3332,44 +3332,44 @@ msgstr "Betöltés…"
 #: ../../src/ui_basic/spinbox.cc:135 ../../src/ui_basic/spinbox.cc:148
 #, c-format
 msgid "Decrease the value by %s"
-msgstr "Érték csökkentése ennyivel: %s"
+msgstr "Érték csökkentése %s"
 
 #: ../../src/ui_basic/spinbox.cc:140 ../../src/ui_basic/spinbox.cc:152
 #, c-format
 msgid "Increase the value by %s"
-msgstr "Érték növelése ennyivel: %s"
+msgstr "Érték növelése %s"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:412 ../../src/ui_basic/spinbox.cc:429
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] "%d perc"
-msgstr[1] "%d perc"
+msgstr[0] "%d perccel"
+msgstr[1] "%d perccel"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:418 ../../src/ui_basic/spinbox.cc:427
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] "%d óra"
-msgstr[1] "%d óra"
+msgstr[0] "%d órával"
+msgstr[1] "%d órával"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:434
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
-msgstr[0] "%d képpont"
-msgstr[1] "%d képpont"
+msgstr[0] "%d képponttal"
+msgstr[1] "%d képponttal"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:437
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
-msgstr[0] "%d mező"
-msgstr[1] "%d mező"
+msgstr[0] "%d mezővel"
+msgstr[1] "%d mezővel"
 
 #: ../../src/ui_basic/window.cc:107 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/mousewheel_report.cc:73 ../../src/wui/watchwindow.cc:76
