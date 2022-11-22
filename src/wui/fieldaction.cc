@@ -43,8 +43,6 @@
 #include "wui/economy_options_window.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
-#include "wui/pinned_note.h"
-#include "wui/unique_window_handler.h"
 #include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
@@ -739,34 +737,7 @@ Open the notes editor for the given field and delete self.
 ===============
 */
 void FieldActionWindow::act_pinned_note() {
-	upcast(InteractivePlayer, ipl, &ibase());
-
-	std::string text;
-	const RGBColor* rgb = &ipl->player().get_playercolor();
-	bool exists = false;
-
-	for (Widelands::Bob* b = node_.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
-		if (b->descr().type() == Widelands::MapObjectType::PINNED_NOTE &&
-		    b->owner().player_number() == ipl->player_number()) {
-			exists = true;
-			const Widelands::PinnedNote& pn = dynamic_cast<Widelands::PinnedNote&>(*b);
-			text = pn.get_text();
-			rgb = &pn.get_rgb();
-			break;
-		}
-	}
-
-	UI::UniqueWindow::Registry& r =
-	   ipl->unique_windows().get_registry(format("pinned_note_%d_%d", node_.x, node_.y));
-	r.open_window = [this, ipl, &r, text, rgb, exists] {
-		new PinnedNoteEditor(*ipl, r, node_, text, *rgb, !exists);
-	};
-	r.create();
-
-	if (!exists) {  // Already create the note if it did not exist yet.
-		ipl->game().send_player_pinned_note(ipl->player_number(), node_, text, *rgb, false);
-	}
-
+	dynamic_cast<InteractivePlayer&>(ibase()).edit_pinned_note(node_);
 	reset_mouse_and_die();
 }
 
