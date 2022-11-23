@@ -231,7 +231,8 @@ void EditorInteractive::add_main_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions,
-	              g_image_cache->get("images/wui/editor/menus/map_options.png"));
+	              g_image_cache->get("images/wui/editor/menus/map_options.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kEditorMapOptions, false));
 
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor,
@@ -882,6 +883,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			menu_windows_.loadmap.toggle();
 			return true;
 		}
+		if (matches_shortcut(KeyboardShortcut::kEditorMapOptions, code)) {
+			menu_windows_.mapoptions.toggle();
+			return true;
+		}
 		if (matches_shortcut(KeyboardShortcut::kEditorTools, code)) {
 			toolmenu_.toggle();
 			return true;
@@ -1069,7 +1074,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 		}
 	}
 
-	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
+	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image(), false);
 	EditorInteractive::load_world_units(&eia, egbase);
 
 	if (init == EditorInteractive::Init::kLoadMapDirectly) {

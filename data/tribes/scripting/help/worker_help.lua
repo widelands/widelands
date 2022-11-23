@@ -38,7 +38,7 @@ function worker_help_producers_string(tribe, worker_description)
          if (recruits_this) then
             -- TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
             result = result .. h2(_("Producer"))
-            result = result .. dependencies({building, worker_description}, building.descname)
+            result = result .. dependencies({building, worker_description}, linkify_encyclopedia_object(building))
 
             -- -- Find out which programs in the building recruit this worker if any
 
@@ -90,13 +90,13 @@ function worker_help_employers_string(worker_description)
          result = result .. h2(pgettext("workerhelp_multiple_buildings", "Works at"))
       end
       for i, building in ipairs(worker_description.employers) do
-         result = result .. dependencies({worker_description, building}, building.descname)
-         normal[building.descname] = true
+         result = result .. dependencies({worker_description, building}, linkify_encyclopedia_object(building))
+         normal[building.name] = true
       end
       building = worker_description.employers[1]
          if #building.working_positions > 1 and worker_description.name ~= building.working_positions[1].name then
             for i, build in ipairs(building.working_positions[1].employers) do
-               if not normal[build.descname] then
+               if not normal[build.name] then
                   table.insert(additional, build)
                end
             end
@@ -110,7 +110,7 @@ function worker_help_employers_string(worker_description)
                result = result .. h2(pgettext("workerhelp_multiple_buildings", "Can also work at"))
             end
             for i, build in ipairs(additional) do
-               result = result .. dependencies({worker_description, build}, build.descname)
+               result = result .. dependencies({worker_description, build}, linkify_encyclopedia_object(build))
             end
          end
    end

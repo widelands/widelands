@@ -180,14 +180,15 @@ void Tag::parse(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags)
 The Richtext Tags
 =================
 
-- :ref:`rt_tags_rt`
-- :ref:`rt_tags_div`
-- :ref:`rt_tags_br`
-- :ref:`rt_tags_space`
-- :ref:`rt_tags_vspace`
-- :ref:`rt_tags_p`
-- :ref:`rt_tags_font`
-- :ref:`rt_tags_img`
+* :ref:`rt_tags_rt`
+* :ref:`rt_tags_div`
+* :ref:`rt_tags_br`
+* :ref:`rt_tags_space`
+* :ref:`rt_tags_vspace`
+* :ref:`rt_tags_p`
+* :ref:`rt_tags_font`
+* :ref:`rt_tags_img`
+* :ref:`rt_tags_link`
 
 For an introduction to our richtext system including a code example, see :ref:`wlrichtext`.
 
@@ -231,6 +232,7 @@ Sub-tags
 * :ref:`rt_tags_font`
 * :ref:`rt_tags_p`
 * :ref:`rt_tags_vspace`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -248,6 +250,7 @@ Sub-tags
 		tc.allowed_children.insert("vspace");
 		tc.allowed_children.insert("font");
 		tc.allowed_children.insert("div");
+		tc.allowed_children.insert("link");
 		tc.text_allowed = false;
 		tc.has_closing_tag = true;
 		tag_constraints_["rt"] = tc;
@@ -282,6 +285,7 @@ Sub-tags
 * :ref:`rt_tags_font`
 * :ref:`rt_tags_p`
 * :ref:`rt_tags_vspace`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -301,6 +305,7 @@ Sub-tags
 		tc.allowed_children.insert("vspace");
 		tc.allowed_children.insert("font");
 		tc.allowed_children.insert("div");
+		tc.allowed_children.insert("link");
 
 		tc.text_allowed = false;
 		tc.has_closing_tag = true;
@@ -397,6 +402,7 @@ Sub-tags
 * :ref:`rt_tags_img`
 * :ref:`rt_tags_space`
 * :ref:`rt_tags_vspace`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -412,6 +418,7 @@ Sub-tags
 		tc.allowed_children.insert("br");
 		tc.allowed_children.insert("img");
 		tc.allowed_children.insert("div");
+		tc.allowed_children.insert("link");
 		tc.text_allowed = true;
 		tc.has_closing_tag = true;
 		tag_constraints_["p"] = tc;
@@ -447,6 +454,7 @@ Sub-tags
 * :ref:`rt_tags_p`
 * :ref:`rt_tags_space`
 * :ref:`rt_tags_vspace`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -466,10 +474,60 @@ Sub-tags
 		tc.allowed_children.insert("p");
 		tc.allowed_children.insert("font");
 		tc.allowed_children.insert("div");
+		tc.allowed_children.insert("link");
 		tc.allowed_children.insert("img");
 		tc.text_allowed = true;
 		tc.has_closing_tag = true;
 		tag_constraints_["font"] = tc;
+	}
+	{
+		/* RST
+.. _rt_tags_link:
+
+Link -- <link>
+--------------
+
+This tag defines a clickable hyperlink.
+
+Attributes
+^^^^^^^^^^
+
+* **type**: Mandatory. What kind of link. Can be "url" or "ui".
+* **target**: Mandatory. The URL to open or the UI widget to reference.
+* **action**: Mandatory for UI links: the action to perform. Not allowed for URLs.
+* **mouseover**: Optional. The mouseover text to show.
+
+Sub-tags
+^^^^^^^^
+
+* :ref:`rt_tags_br`
+* :ref:`rt_tags_div`
+* :ref:`rt_tags_font`
+* :ref:`rt_tags_img`
+* :ref:`rt_tags_p`
+* :ref:`rt_tags_space`
+* :ref:`rt_tags_vspace`
+* :ref:`rt_tags_link`
+
+:ref:`Return to tag index<rt_tags>`
+		*/
+		TagConstraint tc;
+		tc.allowed_attrs.insert("type");
+		tc.allowed_attrs.insert("target");
+		tc.allowed_attrs.insert("action");
+		tc.allowed_attrs.insert("mouseover");
+
+		tc.allowed_children.insert("br");
+		tc.allowed_children.insert("space");
+		tc.allowed_children.insert("vspace");
+		tc.allowed_children.insert("p");
+		tc.allowed_children.insert("font");
+		tc.allowed_children.insert("div");
+		tc.allowed_children.insert("link");
+		tc.allowed_children.insert("img");
+		tc.text_allowed = true;
+		tc.has_closing_tag = true;
+		tag_constraints_["link"] = tc;
 	}
 	{
 		/* RST

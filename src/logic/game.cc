@@ -152,7 +152,8 @@ Game::Game()
      scenario_difficulty_(kScenarioDifficultyNotSet),
      diplomacy_allowed_(true),
      /** TRANSLATORS: Win condition for this game has not been set. */
-     win_condition_displayname_(_("Not set"))
+     win_condition_displayname_(_("Not set")),
+     win_condition_duration_(kDefaultWinConditionDuration)
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      ,
      training_wheels_wanted_(false)
@@ -280,7 +281,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 	maploader->preload_map(true, &enabled_addons());
 
 	create_loader_ui({"general_game"}, false /* no game tips in scenarios */,
-	                 map().get_background_theme(), map().get_background());
+	                 map().get_background_theme(), map().get_background(), true);
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
@@ -404,6 +405,7 @@ void Game::init_newgame(const GameSettings& settings) {
 			}
 		}
 
+		win_condition_duration_ = settings.win_condition_duration;
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
@@ -435,6 +437,7 @@ void Game::init_savegame(const GameSettings& settings) {
 		gl.preload_game(gpdp);
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		win_condition_duration_ = gpdp.get_win_condition_duration();
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		training_wheels_wanted_ =
@@ -480,10 +483,11 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		gl.preload_game(gpdp);
 
 		create_loader_ui({"general_game", "singleplayer"}, true, gpdp.get_background_theme(),
-		                 gpdp.get_background());
+		                 gpdp.get_background(), true);
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		win_condition_duration_ = gpdp.get_win_condition_duration();
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		training_wheels_wanted_ =
 		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
@@ -791,7 +795,7 @@ bool Game::run(StartGameType const start_game_type,
 	}
 	if (FileSystem::filename_ext(load) == kSavegameExtension) {
 		create_loader_ui(
-		   {"general_game"}, false, map().get_background_theme(), map().get_background());
+		   {"general_game"}, false, map().get_background_theme(), map().get_background(), true);
 		return run_load_game(load, script_to_run);
 	}
 
@@ -810,7 +814,8 @@ bool Game::run_replay(const std::string& filename, const std::string& script_to_
 	full_cleanup();
 	replay_filename_ = filename;
 
-	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
+	create_loader_ui(
+	   {"general_game"}, false, map().get_background_theme(), map().get_background(), true);
 	set_ibase(new InteractiveSpectator(*this, get_config_section()));
 
 	set_write_replay(false);
@@ -1276,6 +1281,9 @@ const std::string& Game::get_win_condition_displayname() const {
 void Game::set_win_condition_displayname(const std::string& name) {
 	win_condition_displayname_ = name;
 }
+int32_t Game::get_win_condition_duration() const {
+	return win_condition_duration_;
+}
 
 /**
  * Sample global statistics for the game.
@@ -1291,7 +1299,7 @@ void Game::sample_statistics() {
 	std::vector<uint32_t> nr_msites_defeated;
 	std::vector<uint32_t> nr_civil_blds_lost;
 	std::vector<uint32_t> nr_civil_blds_defeated;
-	std::vector<uint32_t> miltary_strength;
+	std::vector<float> miltary_strength;
 	std::vector<uint32_t> nr_workers;
 	std::vector<uint32_t> nr_wares;
 	std::vector<uint32_t> productivity;
@@ -1321,36 +1329,46 @@ void Game::sample_statistics() {
 		}
 
 		// Get the immovable
-		if (upcast(Building, building, fc.field->get_immovable())) {
+		if (fc.field->get_immovable() != nullptr &&
+		    fc.field->get_immovable()->descr().type() >= MapObjectType::BUILDING) {
+			upcast(Building, building, fc.field->get_immovable());
 			if (building->get_position() == fc) {  // only count main location
 				uint8_t const player_index = building->owner().player_number() - 1;
 				++nr_buildings[player_index];
 
 				//  If it is a productionsite, add its productivity.
-				if (upcast(ProductionSite, productionsite, building)) {
+				if (building->descr().type() == MapObjectType::PRODUCTIONSITE ||
+				    building->descr().type() == MapObjectType::TRAININGSITE) {
 					++nr_production_sites[player_index];
-					productivity[player_index] += productionsite->get_statistics_percent();
+					productivity[player_index] +=
+					   dynamic_cast<const ProductionSite&>(*building).get_statistics_percent();
 				}
 			}
 		}
 
 		// Now, walk the bobs
 		for (Bob const* b = fc.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
-			if (upcast(Soldier const, s, b)) {
-				miltary_strength[s->owner().player_number() - 1] +=
-				   s->get_level(TrainingAttribute::kTotal) + 1;  //  So that level 0 also counts.
+			if (b->descr().type() != MapObjectType::SOLDIER) {
+				continue;
 			}
+
+			constexpr int kHeroValue = 19;
+			upcast(Soldier const, soldier, b);
+			assert(soldier != nullptr);
+			const float total_level = soldier->get_level(TrainingAttribute::kTotal);
+			const float max_level = std::max<float>(soldier->descr().get_max_total_level(), 1);
+			miltary_strength[soldier->owner().player_number() - 1] +=
+			   (total_level * total_level * kHeroValue) / (max_level * max_level) + 1.f;
 		}
 	}
 
 	//  Number of workers / wares / casualties / kills.
 	iterate_players_existing(p, nr_plrs, *this, plr) {
+		const TribeDescr& tribe = plr->tribe();
 		uint32_t wostock = 0;
 		uint32_t wastock = 0;
 
 		for (const auto& economy : plr->economies()) {
-			const TribeDescr& tribe = plr->tribe();
-
 			switch (economy.second->type()) {
 			case wwWARE:
 				for (const DescriptionIndex& ware_index : tribe.wares()) {
@@ -1359,9 +1377,14 @@ void Game::sample_statistics() {
 				break;
 			case wwWORKER:
 				for (const DescriptionIndex& worker_index : tribe.workers()) {
-					if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
-						wostock += economy.second->stock_ware_or_worker(worker_index);
+					if (worker_index == tribe.soldier()) {
+						continue;  // Ignore soldiers.
 					}
+					const WorkerDescr& d = *tribe.get_worker_descr(worker_index);
+					if (d.is_buildable() && d.buildcost().empty()) {
+						continue;  // Don't count free workers.
+					}
+					wostock += economy.second->stock_ware_or_worker(worker_index);
 				}
 				break;
 			}
@@ -1407,7 +1430,7 @@ void Game::sample_statistics() {
 		general_stats_[i].nr_msites_defeated.push_back(nr_msites_defeated[i]);
 		general_stats_[i].nr_civil_blds_lost.push_back(nr_civil_blds_lost[i]);
 		general_stats_[i].nr_civil_blds_defeated.push_back(nr_civil_blds_defeated[i]);
-		general_stats_[i].miltary_strength.push_back(miltary_strength[i]);
+		general_stats_[i].miltary_strength.push_back(lroundf(miltary_strength[i]));
 		general_stats_[i].nr_workers.push_back(nr_workers[i]);
 		general_stats_[i].nr_wares.push_back(nr_wares[i]);
 		general_stats_[i].productivity.push_back(productivity[i]);
