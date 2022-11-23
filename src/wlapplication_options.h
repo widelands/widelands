@@ -131,6 +131,7 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorMenu = kEditor_Begin,
 	kEditorSave,
 	kEditorLoad,
+	kEditorMapOptions,
 	kEditorUndo,
 	kEditorRedo,
 	kEditorTools,

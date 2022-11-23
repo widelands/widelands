@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-11-10 03:40+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
@@ -132,9 +132,9 @@ msgstr "布の生産"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
-"Now turn all the wheat into at least 50 bales of wool and then use the wool "
-"to weave cloth in order to build a ship."
-msgstr "全ての小麦を羊毛の生産に使い、最低でも 50 の羊毛を生産しましょう。そして、船の建造するため、その羊毛を織って布を作りましょう。"
+"Now build a sheep farm and turn all the wheat into at least 50 bales of "
+"wool. Afterwards use the wool to weave cloth in order to build a ship."
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -148,9 +148,9 @@ msgstr "探検して２つの港を建設しましょう"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
-"Explore the island in the south. Use an expedition to build a port there. "
-"Afterwards, try to find some mining resources."
-msgstr "南の島を船で探検し、港をそこに建設しましょう。その後、鉱物資源を調査しましょう。"
+"Explore the island in the south. Send an expedition from our port to build a"
+" port there. Afterwards, try to find some mining resources."
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""

@@ -1,16 +1,20 @@
-# Automatically created by Widelands bzr7801[trunk] (Debug)
+# Automatically created by Widelands 1.2~git25960 (9a75e82@HEAD) Release
 
 [global]
 packet_version="2"
 
 [player_1]
-name="Player 1"
+name=
 tribe="barbarians"
 ai="very_weak"
 closeable="false"
+team="0"
+random="false"
 
 [player_2]
-name="Player 2"
+name=
 tribe="barbarians"
 ai="very_weak"
 closeable="false"
+team="0"
+random="false"

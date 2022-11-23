@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-11-10 03:40+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: ks k, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -134,9 +134,9 @@ msgstr "천 생산"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
-"Now turn all the wheat into at least 50 bales of wool and then use the wool "
-"to weave cloth in order to build a ship."
-msgstr "이제 모든 밀을 적어도 50 개의  양털로 만든 다음 배를 만들기 위해 천을 짜는데 사용하십시오."
+"Now build a sheep farm and turn all the wheat into at least 50 bales of "
+"wool. Afterwards use the wool to weave cloth in order to build a ship."
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -150,9 +150,9 @@ msgstr "두 개의 탐험 항구를 짓습니다"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
-"Explore the island in the south. Use an expedition to build a port there. "
-"Afterwards, try to find some mining resources."
-msgstr "남쪽에 있는 섬을 탐험하십시오. 탐험대를 이용해 그곳에 항구를 지으십시오. 그다음에, 몇 가지 광산 자원을 찾으십시오."
+"Explore the island in the south. Send an expedition from our port to build a"
+" port there. Afterwards, try to find some mining resources."
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""
