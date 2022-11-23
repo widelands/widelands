@@ -72,7 +72,7 @@ public:
 	void set_fps_string(bool show, bool cheating, double fps, double average);
 	void set_coords_string(const std::string&);
 
-	void log_message(const std::string& msg, const std::string& tooltip = std::string());
+	void log_message(const std::string& message, const std::string& tooltip = std::string());
 
 	void think() override;
 	void layout() override;
