@@ -452,10 +452,8 @@ void ShipCancelExpeditionConfirm::ok() {
  * Create the panels for confirmation.
  */
 ResignConfirm::ResignConfirm(InteractivePlayer& parent)
-   : ActionConfirm(parent,
-                   _("Resign?"),
-                   _("Do you really want to give up and become a spectator?"),
-                   nullptr) {
+   : ActionConfirm(
+        parent, _("Resign?"), _("Do you really want to give up and become a spectator?"), nullptr) {
 	// Nothing special to do
 }
 
@@ -463,7 +461,8 @@ ResignConfirm::ResignConfirm(InteractivePlayer& parent)
  * Make sure the player is still in the game.
  */
 void ResignConfirm::think() {
-	if (iaplayer().egbase().player_manager()->get_player_end_status(iaplayer().player_number()) != nullptr) {
+	if (iaplayer().egbase().player_manager()->get_player_end_status(iaplayer().player_number()) !=
+	    nullptr) {
 		die();
 	}
 }

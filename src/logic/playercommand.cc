@@ -2204,7 +2204,8 @@ void CmdDiplomacy::execute(Game& game) {
 			/* Retracting is treated just like rejection but with a different message. */
 			std::swap(other_player_, cmd_sender);
 			retract = true;
-			action_ = (action_ == DiplomacyAction::kRetractJoin) ? DiplomacyAction::kRefuseJoin : DiplomacyAction::kRefuseInvite;
+			action_ = (action_ == DiplomacyAction::kRetractJoin) ? DiplomacyAction::kRefuseJoin :
+                                                                DiplomacyAction::kRefuseInvite;
 		}
 		assert(other_player_ != cmd_sender);
 
@@ -2222,13 +2223,17 @@ void CmdDiplomacy::execute(Game& game) {
 				   action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kAcceptInvite;
 				broadcast_message(
 				   accept ? _("Team Change Accepted") : _("Team Change Rejected"),
-				   format(accept ? original_action == DiplomacyAction::kJoin ?
-                               _("%1$s has accepted %2$s into their team.") :
-                               _("%1$s has accepted the invitation to join the team of %2$s.") :
+				   format(accept ?
+                         original_action == DiplomacyAction::kJoin ?
+                         _("%1$s has accepted %2$s into their team.") :
+                         _("%1$s has accepted the invitation to join the team of %2$s.") :
 				          original_action == DiplomacyAction::kJoin ?
-                               retract ? _("%1$s has retracted the request to join the team of %2$s.") : _("%1$s has denied %2$s membership in their team.") :
-                               retract ? _("%1$s has retracted the invitation to %2$s to join their team.") : _("%1$s has rejected the invitation to join the team of %2$s."),
-				          sending_player.get_name(), game.get_safe_player(retract ? cmd_sender : other_player_)->get_name()));
+                         retract ? _("%1$s has retracted the request to join the team of %2$s.") :
+                                   _("%1$s has denied %2$s membership in their team.") :
+				          retract ? _("%1$s has retracted the invitation to %2$s to join their team.") :
+                                _("%1$s has rejected the invitation to join the team of %2$s."),
+				          sending_player.get_name(),
+				          game.get_safe_player(retract ? cmd_sender : other_player_)->get_name()));
 
 				if (accept) {
 					Player* joiner = game.get_safe_player(
