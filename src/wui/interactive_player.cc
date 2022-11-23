@@ -214,13 +214,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	   &objectives_, true);
 	objectives_.open_window = [this] { new GameObjectivesMenu(*this, objectives_); };
 
-	add_toolbar_button(
-	   "wui/menus/diplomacy", "diplomacy",
-	   as_tooltip_text_with_hotkey(_("Diplomacy"),
-	                               shortcut_string_for(KeyboardShortcut::kInGameDiplomacy, true),
-	                               UI::PanelStyle::kWui),
-	   &diplomacy_, true);
-	diplomacy_.open_window = [this] { new GameDiplomacyMenu(*this, diplomacy_); };
+	add_diplomacy_menu();
 
 	toggle_message_menu_ = add_toolbar_button(
 	   "wui/menus/message_old", "messages",
@@ -810,10 +804,6 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameObjectives, code)) {
 			objectives_.toggle();
-			return true;
-		}
-		if (matches_shortcut(KeyboardShortcut::kInGameDiplomacy, code)) {
-			diplomacy_.toggle();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameStatsBuildings, code)) {

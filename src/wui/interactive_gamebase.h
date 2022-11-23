@@ -83,6 +83,7 @@ protected:
 	// Adds the gamespeedmenu_ to the toolbar
 	void add_gamespeed_menu();
 
+	void add_diplomacy_menu();
 	// Adds a chat toolbar button and registers the chat console window
 	void add_chat_ui();
 
@@ -107,6 +108,8 @@ public:
 
 		UI::UniqueWindow::Registry help;
 	} menu_windows_;
+
+	UI::UniqueWindow::Registry diplomacy_;
 
 protected:
 	UI::UniqueWindow::Registry chat_;

@@ -37,6 +37,7 @@
 #include "wlapplication_options.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
+#include "wui/game_diplomacy_menu.h"
 #include "wui/game_exit_confirm_box.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
@@ -225,6 +226,16 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 		}
 	} break;
 	}
+}
+
+void InteractiveGameBase::add_diplomacy_menu() {
+	add_toolbar_button(
+	   "wui/menus/diplomacy", "diplomacy",
+	   as_tooltip_text_with_hotkey(_("Diplomacy"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameDiplomacy, true),
+	                               UI::PanelStyle::kWui),
+	   &diplomacy_, true);
+	diplomacy_.open_window = [this] { new GameDiplomacyMenu(*this, diplomacy_); };
 }
 
 void InteractiveGameBase::add_showhide_menu() {
@@ -479,6 +490,10 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	}
 	if (matches_shortcut(KeyboardShortcut::kInGameStatsGeneral, code)) {
 		menu_windows_.stats_general.toggle();
+		return true;
+	}
+	if (matches_shortcut(KeyboardShortcut::kInGameDiplomacy, code)) {
+		diplomacy_.toggle();
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kInGameSave, code)) {
