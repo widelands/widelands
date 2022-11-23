@@ -165,7 +165,7 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 			UI::Button* b2 = nullptr;
 			UI::Box* buttonsbox =
 			   new UI::Box(&vbox_action_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-			if (p != iplayer_->player_number()) {
+			if (p == iplayer_->player_number()) {
 				b1 = new UI::Button(buttonsbox, "leave", 0, 0, kButtonWidth, kRowSize,
 				                    UI::ButtonStyle::kWuiSecondary, _("Leave"),
 				                    _("Leave your current team and become teamless"));

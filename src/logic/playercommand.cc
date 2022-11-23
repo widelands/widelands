@@ -39,6 +39,7 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+#include "wui/interactive_spectator.h"
 
 namespace Widelands {
 
@@ -2147,6 +2148,9 @@ void CmdDiplomacy::execute(Game& game) {
 			player->add_message(game, std::unique_ptr<Message>(new Message(
 			                             Message::Type::kScenario, game.get_gametime(), _("Diplomacy"),
 			                             "images/players/team.png", heading, text)));
+		}
+		if (upcast(InteractiveSpectator, is, game.get_ibase())) {
+			is->log_message(heading, text);
 		}
 	};
 
