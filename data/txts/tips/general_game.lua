@@ -62,7 +62,7 @@ tips = {
       seconds = 4
    },
    {
-      text = _("An economy consists of all buildings and flags connected by roads, ferries or ship lines. The supplies and demands of buildings are handled in its economy."),
+      text = _("An economy consists of all buildings and flags connected by roads, ferries or ships. The supplies and demands of buildings are handled in its economy. A player may have more than one economies, if those are not connected by any of these means. This is why the configure economy menu can only be accessed from flags and warehouses, not the player’s main menu."),
       seconds = 8
    },
    {
