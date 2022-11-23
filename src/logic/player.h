@@ -142,6 +142,7 @@ public:
 		name_ = name;
 	}
 	void set_team_number(TeamNumber team);
+	bool may_approve_request(DiplomacyAction action, PlayerNumber from, PlayerNumber to) const;
 
 	void create_default_infrastructure();
 

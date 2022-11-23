@@ -24,6 +24,7 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
@@ -34,7 +35,7 @@ struct ActionConfirm : public UI::Window {
 	ActionConfirm(InteractivePlayer& parent,
 	              const std::string& windowtitle,
 	              const std::string& message,
-	              Widelands::MapObject& map_object,
+	              Widelands::MapObject* map_object,
 	              // May be "", in which case no checkbox will be added
 	              const std::string& checkbox = "");
 
@@ -123,14 +124,24 @@ struct ShipCancelExpeditionConfirm : public ActionConfirm {
 	void ok() override;
 };
 
+/**
+ * Confirmation dialog box for giving up.
+ */
+struct ResignConfirm : public ActionConfirm {
+	ResignConfirm(InteractivePlayer& parent);
+
+	void think() override;
+	void ok() override;
+};
+
 ActionConfirm::ActionConfirm(InteractivePlayer& parent,
                              const std::string& windowtitle,
                              const std::string& message,
-                             Widelands::MapObject& map_object,
+                             Widelands::MapObject* map_object,
                              const std::string& checkbox)
    : UI::Window(
         &parent, UI::WindowStyle::kWui, "building_action_confirm", 0, 0, 200, 120, windowtitle),
-     object_(&map_object),
+     object_(map_object),
      checkbox_(nullptr) {
 	const int padding = 6;
 	UI::Box* main_box = new UI::Box(this, UI::PanelStyle::kWui, padding, padding, UI::Box::Vertical);
@@ -186,7 +197,7 @@ BulldozeConfirm::BulldozeConfirm(InteractivePlayer& parent,
    : ActionConfirm(parent,
                    _("Destroy building?"),
                    _("Do you really want to destroy this building?"),
-                   building),
+                   &building),
      todestroy_(todestroy != nullptr ? todestroy : &building) {
 	// Nothing special to do
 }
@@ -247,7 +258,7 @@ DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Buildin
    : ActionConfirm(parent,
                    _("Dismantle building?"),
                    _("Do you really want to dismantle this building?"),
-                   building,
+                   &building,
                    should_allow_preserving_wares(building.descr()) ? _("Preserve wares") : "") {
 	if (checkbox_ != nullptr) {
 		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
@@ -307,7 +318,7 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
               /** TRANSLATORS: Warning message when player wants to enhance a military building */
               _("Be careful if the enemy is near!")) :
            _("Do you really want to enhance this building?"),
-        building,
+        &building,
         should_allow_preserving_wares(building.descr()) ? _("Preserve wares") : ""),
      id_(id),
      still_under_construction_(still_under_construction) {
@@ -366,7 +377,7 @@ ShipSinkConfirm::ShipSinkConfirm(InteractivePlayer& parent, Widelands::Ship& shi
                    _("Sink the ship?"),
                    /** TRANSLATORS: %s is a ship name */
                    format(_("Do you really want to sink %s?"), ship.get_shipname()),
-                   ship) {
+                   &ship) {
 	// Nothing special to do
 }
 
@@ -404,7 +415,7 @@ ShipCancelExpeditionConfirm::ShipCancelExpeditionConfirm(InteractivePlayer& pare
    : ActionConfirm(parent,
                    _("Cancel expedition?"),
                    _("Do you really want to cancel the active expedition?"),
-                   ship) {
+                   &ship) {
 	// Nothing special to do
 }
 
@@ -434,6 +445,35 @@ void ShipCancelExpeditionConfirm::ok() {
 		game.send_player_cancel_expedition_ship(*ship);
 	}
 
+	die();
+}
+
+/**
+ * Create the panels for confirmation.
+ */
+ResignConfirm::ResignConfirm(InteractivePlayer& parent)
+   : ActionConfirm(parent,
+                   _("Resign?"),
+                   _("Do you really want to give up and become a spectator?"),
+                   nullptr) {
+	// Nothing special to do
+}
+
+/**
+ * Make sure the player is still in the game.
+ */
+void ResignConfirm::think() {
+	if (iaplayer().egbase().player_manager()->get_player_end_status(iaplayer().player_number()) != nullptr) {
+		die();
+	}
+}
+
+/**
+ * The "Ok" button was clicked, so issue the command for resigning.
+ */
+void ResignConfirm::ok() {
+	iaplayer().game().send_player_diplomacy(
+	   iaplayer().player_number(), Widelands::DiplomacyAction::kResign, 0 /* ignored */);
 	die();
 }
 
@@ -500,4 +540,8 @@ void show_ship_sink_confirm(InteractivePlayer& player, Widelands::Ship& ship) {
  */
 void show_ship_cancel_expedition_confirm(InteractivePlayer& player, Widelands::Ship& ship) {
 	new ShipCancelExpeditionConfirm(player, ship);
+}
+
+void show_resign_confirm(InteractivePlayer& player) {
+	new ResignConfirm(player);
 }
