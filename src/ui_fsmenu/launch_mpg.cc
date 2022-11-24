@@ -66,10 +66,20 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
      help_(nullptr),
 
      mpsg_(this, &left_column_box_, 0, 0, 0, 0, &settings, scale_factor * standard_height_),
-     chat_(new GameChatPanel(&left_column_box_, [&settings](int player_number) {
-     	const GameSettings& s = settings.settings();
- 		return (player_number > 0 && player_number <= static_cast<int>(s.players.size())) ? &s.players.at(player_number - 1).color : nullptr;
-     }, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu)),
+     chat_(new GameChatPanel(
+        &left_column_box_,
+        [&settings](int player_number) {
+	        const GameSettings& s = settings.settings();
+	        return (player_number > 0 && player_number <= static_cast<int>(s.players.size())) ?
+                     &s.players.at(player_number - 1).color :
+                     nullptr;
+        },
+        0,
+        0,
+        0,
+        0,
+        chat,
+        UI::PanelStyle::kFsMenu)),
      game_(g) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });

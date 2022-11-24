@@ -30,7 +30,8 @@
  * \see GameChatPanel, GameChatMenu
  */
 struct ChatOverlay : public UI::Panel {
-	ChatOverlay(UI::Panel* parent, ChatColorForPlayer fn, int32_t x, int32_t y, int32_t w, int32_t h);
+	ChatOverlay(
+	   UI::Panel* parent, ChatColorForPlayer fn, int32_t x, int32_t y, int32_t w, int32_t h);
 	~ChatOverlay() override = default;
 
 	void set_chat_provider(ChatProvider&);

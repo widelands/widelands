@@ -1564,7 +1564,10 @@ UI::UniqueWindow& InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 
 ChatColorForPlayer InteractiveBase::color_functor() const {
 	return [this](int player_number) {
-		return (player_number > 0 && player_number <= egbase().player_manager()->get_number_of_players()) ? &egbase().player(player_number).get_playercolor() : nullptr;
+		return (player_number > 0 &&
+		        player_number <= egbase().player_manager()->get_number_of_players()) ?
+                &egbase().player(player_number).get_playercolor() :
+                nullptr;
 	};
 }
 

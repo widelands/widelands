@@ -25,10 +25,14 @@
 namespace {
 
 // Returns a player name font tag with player color.
-std::string as_playercolor(const ChatColorForPlayer& fn, const int16_t playern, const std::string& text) {
+std::string
+as_playercolor(const ChatColorForPlayer& fn, const int16_t playern, const std::string& text) {
 	const RGBColor* playercolor = fn(playern + 1);
 	return g_style_manager->font_style(UI::FontStyle::kChatPlayername)
-	   .as_font_tag(StyleManager::color_tag(text, playercolor != nullptr ? *playercolor : g_style_manager->font_style(UI::FontStyle::kChatServer).color()));
+	   .as_font_tag(StyleManager::color_tag(
+	      text, playercolor != nullptr ?
+                  *playercolor :
+                  g_style_manager->font_style(UI::FontStyle::kChatServer).color()));
 }
 
 std::string sanitize_message(const std::string& given_text) {
@@ -51,8 +55,8 @@ std::string format_as_richtext(const ChatMessage& chat_message, const ChatColorF
 	if (!chat_message.recipient.empty() && !chat_message.sender.empty()) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me") != 0) {
-			message = as_playercolor(fn,
-			             chat_message.playern, format("%s @%s: ", sender_escaped, recipient_escaped)) +
+			message = as_playercolor(fn, chat_message.playern,
+			                         format("%s @%s: ", sender_escaped, recipient_escaped)) +
 			          g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(sanitized);
 		} else {
 			message = as_playercolor(fn, chat_message.playern,

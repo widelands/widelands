@@ -190,7 +190,8 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	switch (entry) {
 #ifndef NDEBUG  //  only in debug builds
 	case MainMenuEntry::kScriptConsole: {
-		GameChatMenu::create_script_console(this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
+		GameChatMenu::create_script_console(
+		   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
 	} break;
 #endif
 	case MainMenuEntry::kOptions: {

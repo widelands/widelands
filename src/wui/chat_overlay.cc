@@ -69,8 +69,12 @@ private:
 	}
 };
 
-ChatOverlay::ChatOverlay(
-   UI::Panel* const parent, ChatColorForPlayer fn, int32_t const x, int32_t const y, int32_t const w, int32_t const h)
+ChatOverlay::ChatOverlay(UI::Panel* const parent,
+                         ChatColorForPlayer fn,
+                         int32_t const x,
+                         int32_t const y,
+                         int32_t const w,
+                         int32_t const h)
    : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h), m(new Impl(fn)) {
 	m->transparent_ = get_config_bool("transparent_chat", true);
 
@@ -113,7 +117,8 @@ void ChatOverlay::Impl::recompute() {
 		// Chat message is more recent
 		oldest_ = chat_->get_messages()[chat_idx].time;
 		if (now - oldest_ < kChatDisplayTime) {
-			richtext = format_as_richtext(chat_->get_messages()[chat_idx], color_functor_).append(richtext);
+			richtext =
+			   format_as_richtext(chat_->get_messages()[chat_idx], color_functor_).append(richtext);
 		}
 		if (!chat_->sound_off() && sound_played_ < oldest_) {
 			g_sh->play_fx(SoundType::kChat, new_message_);

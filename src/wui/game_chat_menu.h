@@ -31,14 +31,19 @@ struct GameChatMenu : public UI::UniqueWindow {
 	/**
 	 * Creates a default chat window for multiplayer games
 	 */
-	static GameChatMenu* create_chat_console(UI::Panel*, ChatColorForPlayer fn, UI::UniqueWindow::Registry&, ChatProvider&);
+	static GameChatMenu* create_chat_console(UI::Panel*,
+	                                         ChatColorForPlayer fn,
+	                                         UI::UniqueWindow::Registry&,
+	                                         ChatProvider&);
 
 #ifndef NDEBUG  //  only in debug builds
 	             /**
 	              * Creates a chat window only for scripting in debug mode
 	              */
-	static GameChatMenu*
-	create_script_console(UI::Panel*, ChatColorForPlayer fn, UI::UniqueWindow::Registry&, ChatProvider&);
+	static GameChatMenu* create_script_console(UI::Panel*,
+	                                           ChatColorForPlayer fn,
+	                                           UI::UniqueWindow::Registry&,
+	                                           ChatProvider&);
 #endif
 
 	/**
@@ -49,7 +54,11 @@ struct GameChatMenu : public UI::UniqueWindow {
 	bool enter_chat_message(bool close_on_send = true);
 
 private:
-	GameChatMenu(UI::Panel*, ChatColorForPlayer fn, UI::UniqueWindow::Registry&, ChatProvider&, const std::string& title);
+	GameChatMenu(UI::Panel*,
+	             ChatColorForPlayer fn,
+	             UI::UniqueWindow::Registry&,
+	             ChatProvider&,
+	             const std::string& title);
 
 	void restore() override;
 	void minimize() override;

@@ -63,7 +63,17 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
                            0,
                            _("Clients online:")),
      clientsonline_table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     chat_(&left_column_box_, [](int /* unused */) { return nullptr; /* No ongoing game while still in the lobby. */ }, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kFsMenu),
+     chat_(
+        &left_column_box_,
+        [](int /* unused */) {
+	        return nullptr; /* No ongoing game while still in the lobby. */
+        },
+        0,
+        0,
+        0,
+        0,
+        InternetGaming::ref(),
+        UI::PanelStyle::kFsMenu),
 
      // Right column content
      label_opengames_(&right_column_content_box_,
