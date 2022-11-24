@@ -47,6 +47,7 @@
 #include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h"
 #include "logic/widelands_geometry.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
@@ -120,7 +121,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
      info_panel_(*new InfoPanel(*this)),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoverlay before the toolbar so it is below
-     chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
+     chat_overlay_(new ChatOverlay(this, color_functor(), 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(*new MainToolbar(info_panel_)),
      mapviewmenu_(toolbar(),
                   "dropdown_menu_mapview",
@@ -1561,6 +1562,12 @@ UI::UniqueWindow& InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 	return *registry.window;
 }
 
+ChatColorForPlayer InteractiveBase::color_functor() const {
+	return [this](int player_number) {
+		return (player_number > 0 && player_number <= egbase().player_manager()->get_number_of_players()) ? &egbase().player(player_number).get_playercolor() : nullptr;
+	};
+}
+
 void InteractiveBase::broadcast_cheating_message() const {
 	if (get_game() == nullptr) {
 		return;  // Editor
@@ -1607,7 +1614,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_SPACE:
 			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
 				GameChatMenu::create_script_console(
-				   this, debugconsole_, *DebugConsole::get_chat_provider());
+				   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
 				return true;
 			}
 			break;

@@ -21,9 +21,8 @@
 
 #include <memory>
 
+#include "chat/chat.h"
 #include "ui_basic/panel.h"
-
-struct ChatProvider;
 
 /**
  * The overlay that displays all new chat messages for some timeout on the main window.
@@ -31,7 +30,7 @@ struct ChatProvider;
  * \see GameChatPanel, GameChatMenu
  */
 struct ChatOverlay : public UI::Panel {
-	ChatOverlay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h);
+	ChatOverlay(UI::Panel* parent, ChatColorForPlayer fn, int32_t x, int32_t y, int32_t w, int32_t h);
 	~ChatOverlay() override = default;
 
 	void set_chat_provider(ChatProvider&);

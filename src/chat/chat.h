@@ -20,6 +20,7 @@
 #define WL_CHAT_CHAT_H
 
 #include <ctime>
+#include <functional>
 #include <string>
 
 #include "logic/widelands.h"
@@ -27,6 +28,7 @@
 #include "notifications/notifications.h"
 
 class ParticipantList;
+struct RGBColor;
 
 // A chat message as received in game.
 struct ChatMessage {
@@ -92,5 +94,11 @@ struct ChatProvider {
 	// The last recipient a message has been send to
 	std::string last_recipient_;
 };
+
+/**
+ * A function that looks up the player colour belonging to a given 1-based player number.
+ * May return \c nullptr to use a default server colour.
+ */
+using ChatColorForPlayer = std::function<const RGBColor*(int)>;
 
 #endif  // end of include guard:
