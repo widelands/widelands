@@ -128,7 +128,7 @@ struct ShipCancelExpeditionConfirm : public ActionConfirm {
  * Confirmation dialog box for giving up.
  */
 struct ResignConfirm : public ActionConfirm {
-	ResignConfirm(InteractivePlayer& parent);
+	explicit ResignConfirm(InteractivePlayer& parent);
 
 	void think() override;
 	void ok() override;

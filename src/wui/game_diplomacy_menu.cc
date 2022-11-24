@@ -256,7 +256,9 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 			actions_vbox_yes_.add_space(kSpacing);
 		}
 
-		std::string descr, approve_string, deny_string;
+		std::string descr;
+		std::string approve_string;
+		std::string deny_string;
 		switch (pda.action) {
 		case Widelands::DiplomacyAction::kJoin:
 			descr = format(_("%1$s has requested to join the team of %2$s."),
