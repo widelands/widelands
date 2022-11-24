@@ -334,7 +334,7 @@ wl.Descriptions():new_tribe {
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {6, 18} },
-      pinned_note = { hotspot = {13, 63} },
+      pinned_note = { hotspot = {18, 67} },
       bridge_normal_e = { hotspot = {-2, 11} },
       bridge_busy_e = { hotspot = {-2, 11} },
       bridge_normal_se = { hotspot = {5, 2} },
