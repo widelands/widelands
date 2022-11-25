@@ -987,6 +987,37 @@ private:
 	PlayerNumber other_player_;  // Ignored for kLeaveTeam and kResign
 };
 
+struct CmdPinnedNote : PlayerCommand {
+	CmdPinnedNote(const Time& t,
+	              PlayerNumber p,
+	              const std::string& text,
+	              Coords pos,
+	              const RGBColor& rgb,
+	              bool del)
+	   : PlayerCommand(t, p), text_(text), pos_(pos), rgb_(rgb), delete_(del) {
+	}
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kPinnedNote;
+	}
+
+	void execute(Game& game) override;
+
+	explicit CmdPinnedNote(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	CmdPinnedNote() : PlayerCommand() {
+	}
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	std::string text_;
+	Coords pos_;
+	RGBColor rgb_;
+	bool delete_;
+};
+
 struct CmdPickCustomStartingPosition : PlayerCommand {
 	CmdPickCustomStartingPosition(const Time& t, PlayerNumber p, const Coords& c)
 	   : PlayerCommand(t, p), coords_(c) {

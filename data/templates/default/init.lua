@@ -266,7 +266,7 @@ return {
                color = wui_brown,
             },
             font = {
-               color = fs_font_color,
+               color = wui_font_color,
                face = "condensed",
                size = 11,
                bold = true,
@@ -280,7 +280,7 @@ return {
                color = wui_green,
             },
             font = {
-               color = fs_font_color,
+               color = wui_font_color,
                face = "condensed",
                size = 11,
                bold = true,
