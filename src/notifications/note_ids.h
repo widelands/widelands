@@ -48,6 +48,7 @@ enum class NoteId : uint32_t {
 	ThreadSafeFunction,
 	ThreadSafeFunctionHandled,
 	Panel,
+	PinnedNoteMoved,
 	QuicknavChangedEvent,
 	Hyperlink,
 	PlayerDetailsEvent

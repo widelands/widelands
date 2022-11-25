@@ -253,6 +253,8 @@ wl_library(wui
     militarysitewindow.h
     minimap.cc
     minimap.h
+    pinned_note.cc
+    pinned_note.h
     plot_area.cc
     plot_area.h
     portdockwaresdisplay.cc

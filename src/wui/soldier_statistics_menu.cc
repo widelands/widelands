@@ -132,7 +132,7 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
      player_(parent.player()),
      tabs_(this, UI::TabPanelStyle::kWuiDark) {
 
-	tabs_.add("all", _("Overview"),
+	tabs_.add("all", "",
 	          new SoldierStatisticsPanel(
 	             tabs_, player_, [this](uint32_t h, uint32_t a, uint32_t d, uint32_t e) {
 		             return player_.count_soldiers(h, a, d, e);
@@ -231,6 +231,7 @@ void SoldierStatisticsMenu::think() {
 }
 
 void SoldierStatisticsMenu::update() {
+	tabs_.tabs()[0]->set_title(format(_("Overview (%u)"), player_.count_soldiers()));
 	unsigned index = 0;
 	for (unsigned h = 0; h <= max_health_; ++h) {
 		const uint32_t nr = player_.count_soldiers_h(h);
