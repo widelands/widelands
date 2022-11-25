@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-11-10 03:40+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -150,11 +150,11 @@ msgstr "Stoffproduktion"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
-"Now turn all the wheat into at least 50 bales of wool and then use the wool "
-"to weave cloth in order to build a ship."
+"Now build a sheep farm and turn all the wheat into at least 50 bales of "
+"wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
-"Nun mache aus dem ganzen Weizen mindestens 50 Ballen Wolle. Daraus webe dann"
-" Stoff für ein Schiff."
+"Nun baue eine Schäferei und mache aus dem ganzen Weizen mindestens 50 Ballen"
+" Wolle. Daraus webe dann Stoff für ein Schiff."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -168,11 +168,11 @@ msgstr "Baue 2 Expeditionshäfen"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
-"Explore the island in the south. Use an expedition to build a port there. "
-"Afterwards, try to find some mining resources."
+"Explore the island in the south. Send an expedition from our port to build a"
+" port there. Afterwards, try to find some mining resources."
 msgstr ""
-"Erkunde die Insel im Süden. Sende eine Expedition, um einen Hafen dort zu "
-"bauen. Versuche dann, Rohstoffe zum Abbau zu finden."
+"Erkunde die Insel im Süden. Sende eine Expedition von unserem Hafen, um dort"
+" einen neuen Hafen zu bauen. Versuche dann, Rohstoffe zum Abbau zu finden."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""

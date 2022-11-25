@@ -65,6 +65,8 @@ wl_library(logic_map_objects
     map_object.h
     map_object_program.cc
     map_object_program.h
+    pinned_note.cc
+    pinned_note.h
     terrain_affinity.cc
     terrain_affinity.h
     tribes/attack_target.h
@@ -177,6 +179,7 @@ wl_library(logic_map_objects
     sound_constants
     sound
     ui_basic_loading_message
+    wui
     wui_mapview_pixelconstants
 )
 

@@ -181,6 +181,9 @@ void Game::sync_reset() {
 InteractivePlayer* Game::get_ipl() {
 	return dynamic_cast<InteractivePlayer*>(get_ibase());
 }
+const InteractivePlayer* Game::get_ipl() const {
+	return dynamic_cast<const InteractivePlayer*>(get_ibase());
+}
 
 void Game::set_game_controller(std::shared_ptr<GameController> c) {
 	ctrl_ = c;
@@ -1198,6 +1201,11 @@ void Game::send_player_mark_object_for_removal(PlayerNumber p, Immovable& mo, bo
 	send_player_command(new CmdMarkMapObjectForRemoval(get_gametime(), p, mo, mark));
 }
 
+void Game::send_player_pinned_note(
+   PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del) {
+	send_player_command(new CmdPinnedNote(get_gametime(), p, text, pos, rgb, del));
+}
+
 int Game::propose_trade(const Trade& trade) {
 	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
 	// path between the two markets);
@@ -1299,7 +1307,7 @@ void Game::sample_statistics() {
 	std::vector<uint32_t> nr_msites_defeated;
 	std::vector<uint32_t> nr_civil_blds_lost;
 	std::vector<uint32_t> nr_civil_blds_defeated;
-	std::vector<uint32_t> miltary_strength;
+	std::vector<float> miltary_strength;
 	std::vector<uint32_t> nr_workers;
 	std::vector<uint32_t> nr_wares;
 	std::vector<uint32_t> productivity;
@@ -1329,36 +1337,46 @@ void Game::sample_statistics() {
 		}
 
 		// Get the immovable
-		if (upcast(Building, building, fc.field->get_immovable())) {
+		if (fc.field->get_immovable() != nullptr &&
+		    fc.field->get_immovable()->descr().type() >= MapObjectType::BUILDING) {
+			upcast(Building, building, fc.field->get_immovable());
 			if (building->get_position() == fc) {  // only count main location
 				uint8_t const player_index = building->owner().player_number() - 1;
 				++nr_buildings[player_index];
 
 				//  If it is a productionsite, add its productivity.
-				if (upcast(ProductionSite, productionsite, building)) {
+				if (building->descr().type() == MapObjectType::PRODUCTIONSITE ||
+				    building->descr().type() == MapObjectType::TRAININGSITE) {
 					++nr_production_sites[player_index];
-					productivity[player_index] += productionsite->get_statistics_percent();
+					productivity[player_index] +=
+					   dynamic_cast<const ProductionSite&>(*building).get_statistics_percent();
 				}
 			}
 		}
 
 		// Now, walk the bobs
 		for (Bob const* b = fc.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
-			if (upcast(Soldier const, s, b)) {
-				miltary_strength[s->owner().player_number() - 1] +=
-				   s->get_level(TrainingAttribute::kTotal) + 1;  //  So that level 0 also counts.
+			if (b->descr().type() != MapObjectType::SOLDIER) {
+				continue;
 			}
+
+			constexpr int kHeroValue = 19;
+			upcast(Soldier const, soldier, b);
+			assert(soldier != nullptr);
+			const float total_level = soldier->get_level(TrainingAttribute::kTotal);
+			const float max_level = std::max<float>(soldier->descr().get_max_total_level(), 1);
+			miltary_strength[soldier->owner().player_number() - 1] +=
+			   (total_level * total_level * kHeroValue) / (max_level * max_level) + 1.f;
 		}
 	}
 
 	//  Number of workers / wares / casualties / kills.
 	iterate_players_existing(p, nr_plrs, *this, plr) {
+		const TribeDescr& tribe = plr->tribe();
 		uint32_t wostock = 0;
 		uint32_t wastock = 0;
 
 		for (const auto& economy : plr->economies()) {
-			const TribeDescr& tribe = plr->tribe();
-
 			switch (economy.second->type()) {
 			case wwWARE:
 				for (const DescriptionIndex& ware_index : tribe.wares()) {
@@ -1367,9 +1385,14 @@ void Game::sample_statistics() {
 				break;
 			case wwWORKER:
 				for (const DescriptionIndex& worker_index : tribe.workers()) {
-					if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
-						wostock += economy.second->stock_ware_or_worker(worker_index);
+					if (worker_index == tribe.soldier()) {
+						continue;  // Ignore soldiers.
 					}
+					const WorkerDescr& d = *tribe.get_worker_descr(worker_index);
+					if (d.is_buildable() && d.buildcost().empty()) {
+						continue;  // Don't count free workers.
+					}
+					wostock += economy.second->stock_ware_or_worker(worker_index);
 				}
 				break;
 			}
@@ -1415,7 +1438,7 @@ void Game::sample_statistics() {
 		general_stats_[i].nr_msites_defeated.push_back(nr_msites_defeated[i]);
 		general_stats_[i].nr_civil_blds_lost.push_back(nr_civil_blds_lost[i]);
 		general_stats_[i].nr_civil_blds_defeated.push_back(nr_civil_blds_defeated[i]);
-		general_stats_[i].miltary_strength.push_back(miltary_strength[i]);
+		general_stats_[i].miltary_strength.push_back(lroundf(miltary_strength[i]));
 		general_stats_[i].nr_workers.push_back(nr_workers[i]);
 		general_stats_[i].nr_wares.push_back(nr_wares[i]);
 		general_stats_[i].productivity.push_back(productivity[i]);

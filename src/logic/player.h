@@ -620,6 +620,7 @@ public:
 
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
+	uint32_t count_soldiers() const;
 	uint32_t count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const;
 	uint32_t count_soldiers_h(unsigned) const;
 	uint32_t count_soldiers_a(unsigned) const;
