@@ -16,6 +16,7 @@
 # Sebastian Janus <sebek89@gmail.com>, 2015
 # Sylwia Studzińska <sanuspg@gmail.com>, 2019
 # Szymon Gackowski <szymon.gackowski@gmail.com>, 2016
+# Tomasz Kozłowski, 2022
 # tombox <wptom@wp.pl>, 2015-2016,2018
 # tombox <wptom@wp.pl>, 2015
 # tombox <wptom@wp.pl>, 2020
@@ -23,9 +24,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-10 03:40+0000\n"
+"POT-Creation-Date: 2022-11-22 03:30+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022\n"
+"Last-Translator: Tomasz Kozłowski, 2022\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2162,76 +2163,89 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "Nie można znaleźć więcej surowców!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:438
+#: ../../src/logic/map_objects/tribes/ship.cc:463
 msgid "Port Space"
 msgstr "Miejsce na port"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:438
+#: ../../src/logic/map_objects/tribes/ship.cc:463
 msgid "Port Space Found"
 msgstr "Znaleziono miejsce na port"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:439
+#: ../../src/logic/map_objects/tribes/ship.cc:464
 msgid "An expedition ship found a new port build space."
 msgstr "Ekspedycja znalazła miejsce zdatne do budowy portu."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:560
+#: ../../src/logic/map_objects/tribes/ship.cc:587
 msgid "Island Circumnavigated"
 msgstr "Opłynięto wyspę"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:560
+#: ../../src/logic/map_objects/tribes/ship.cc:587
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Czeka"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:561
+#: ../../src/logic/map_objects/tribes/ship.cc:588
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Ekspedycja opłynęła wyspę nie znalazłszy niczego godnego uwagi."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:624
+#: ../../src/logic/map_objects/tribes/ship.cc:651
 msgid "Coast Reached"
 msgstr "Dotarto do brzegu"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:624
+#: ../../src/logic/map_objects/tribes/ship.cc:651
 msgid "Land Ahoy!"
 msgstr "Nowy ląd!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:625
+#: ../../src/logic/map_objects/tribes/ship.cc:652
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Ekspedycja dotarła do brzegu i oczekuje dalszych rozkazów."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:676
+#: ../../src/logic/map_objects/tribes/ship.cc:703
 msgid "New port construction site is gone"
 msgstr "Nowy plac budowy portu zniknął"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:676
+#: ../../src/logic/map_objects/tribes/ship.cc:703
 msgid "Port Lost!"
 msgstr "Utracono port!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:677
+#: ../../src/logic/map_objects/tribes/ship.cc:704
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Nie udało się wyładować towarów, anulowano ekspedycję."
 
+#: ../../src/logic/map_objects/tribes/ship.cc:760
+msgid "No Port Can Be Built"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:760
+msgid "Port Space Lost!"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:761
+msgid ""
+"A discovered port build space is not available for building a port anymore."
+msgstr ""
+
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:858
+#: ../../src/logic/map_objects/tribes/ship.cc:907
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Ekspedycja"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:858
+#: ../../src/logic/map_objects/tribes/ship.cc:907
 msgid "Expedition Ready"
 msgstr "Ekspedycja gotowa"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:859
+#: ../../src/logic/map_objects/tribes/ship.cc:908
 msgid "An expedition ship is waiting for your commands."
 msgstr "Statek ekspedycyjny czeka na twoje rozkazy."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1019
+#: ../../src/logic/map_objects/tribes/ship.cc:1066
 #: ../../src/wui/seafaring_statistics_menu.cc:239
 msgctxt "ship_state"
 msgid "Shipping"
@@ -2240,7 +2254,7 @@ msgstr "Transportuje"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1022
+#: ../../src/logic/map_objects/tribes/ship.cc:1069
 #: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Empty"
@@ -2248,7 +2262,7 @@ msgstr "Pusty"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1026
+#: ../../src/logic/map_objects/tribes/ship.cc:1073
 #: ../../src/wui/seafaring_statistics_menu.cc:241
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2256,14 +2270,14 @@ msgstr "Czeka"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1030
+#: ../../src/logic/map_objects/tribes/ship.cc:1077
 #: ../../src/wui/seafaring_statistics_menu.cc:243
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Prowadzi zwiad"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1034
+#: ../../src/logic/map_objects/tribes/ship.cc:1081
 #: ../../src/wui/seafaring_statistics_menu.cc:245
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2272,7 +2286,7 @@ msgstr "Znaleziono miejsce na port"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1039
+#: ../../src/logic/map_objects/tribes/ship.cc:1086
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Zakłada kolonię"
@@ -2295,7 +2309,7 @@ msgstr "Statki"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
-#: ../../src/wui/general_statistics_menu.cc:153
+#: ../../src/wui/general_statistics_menu.cc:154
 #: ../../src/wui/interactive_player.cc:336
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
@@ -2307,7 +2321,7 @@ msgstr "Towary"
 #. need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:180
 #: ../../src/wui/economy_options_window.cc:77
-#: ../../src/wui/general_statistics_menu.cc:144
+#: ../../src/wui/general_statistics_menu.cc:145
 #: ../../src/wui/productionsitewindow.cc:111
 #: ../../src/wui/warehousewindow.cc:268
 msgid "Workers"
@@ -2317,7 +2331,7 @@ msgstr "Pracownicy"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:329
-#: ../../src/wui/general_statistics_menu.cc:149
+#: ../../src/wui/general_statistics_menu.cc:150
 #: ../../src/wui/interactive_player.cc:331 ../../src/wui/minimap.cc:199
 msgid "Buildings"
 msgstr "Budynki"
@@ -2443,7 +2457,7 @@ msgstr "Plik mapy jest nieprawidłowy:\n%s"
 msgid "This objective has no description."
 msgstr "Ten cel nie ma opisu."
 
-#: ../../src/logic/player.cc:1938
+#: ../../src/logic/player.cc:1945
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2464,11 +2478,11 @@ msgstr ""
 
 #: ../../src/logic/playercommand.cc:2159
 msgid "Player Resigned"
-msgstr ""
+msgstr "Gracz zrezygnował"
 
 #: ../../src/logic/playercommand.cc:2171
 msgid "Player Leaves Team"
-msgstr ""
+msgstr "Gracz opuścił zespół"
 
 #: ../../src/logic/playercommand.cc:2172
 #, c-format
@@ -2497,11 +2511,11 @@ msgstr ""
 
 #: ../../src/logic/playercommand.cc:2209
 msgid "Team Change Accepted"
-msgstr ""
+msgstr "Zmiana drużyny zaakceptowana"
 
 #: ../../src/logic/playercommand.cc:2209
 msgid "Team Change Rejected"
-msgstr ""
+msgstr "Zmiana drużyny odrzucona"
 
 #: ../../src/logic/playercommand.cc:2211
 #, c-format
@@ -3343,7 +3357,7 @@ msgstr "Nie wybrano"
 
 #: ../../src/ui_basic/dropdown.h:466
 msgid "No matches"
-msgstr ""
+msgstr "Brak dopasowania"
 
 #: ../../src/ui_basic/panel.cc:302
 msgid "Please wait…"
@@ -3442,7 +3456,7 @@ msgstr "Informacje techniczne"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:36
 msgid "Contact Form"
-msgstr ""
+msgstr "Formularz Kontaktowy"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:48
 msgid "Send message"
@@ -3574,7 +3588,7 @@ msgstr "Tylko zweryfikowane"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:166
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "Pokaż tylko zweryfikowane dodatki"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:174
 msgid "Sort by"
@@ -3582,7 +3596,7 @@ msgstr "Sortuj"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:185
 msgid "Minimum quality"
-msgstr ""
+msgstr "Minimalna jakość"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:196
 msgid "Choose add-on to upload…"
@@ -3820,7 +3834,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:747
 msgid "Please log in to upload content"
-msgstr ""
+msgstr "Zaloguj się żeby wgrać zawartość"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:749
 msgid "Please log in to send an enquiry"
@@ -3878,7 +3892,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:900
 msgid "Connecting to the server…"
-msgstr ""
+msgstr "Łaczenie z serwerem.."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:923
 msgid "Server Connection Error"
@@ -4250,11 +4264,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:56
 msgid "Invalid filename"
-msgstr ""
+msgstr "Niewłaściwa nazwa pliku"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:59
 msgid "Name too long"
-msgstr ""
+msgstr "Nazwa za długa"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:64
 #, c-format
@@ -4394,11 +4408,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:160
 msgid "Edit Comment"
-msgstr ""
+msgstr "Edytuj Komentarz"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:160
 msgid "Write Comment"
-msgstr ""
+msgstr "Napisz Komentarz"
 
 #. * TRANSLATORS: Short for Bold text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:213
@@ -4408,7 +4422,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:213
 msgid "Bold"
-msgstr ""
+msgstr "Pogrubione"
 
 #. * TRANSLATORS: Short for Italic text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:217
@@ -4418,11 +4432,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:217
 msgid "Italic"
-msgstr ""
+msgstr "Kursywa"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:221
 msgid "Underline"
-msgstr ""
+msgstr "Podkreślenie"
 
 #. * TRANSLATORS: Short for Underline text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:221
@@ -4438,7 +4452,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:225
 msgid "Shadow"
-msgstr ""
+msgstr "Cień"
 
 #. * TRANSLATORS: Short for Color text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:231
@@ -4448,53 +4462,53 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:231
 msgid "Color…"
-msgstr ""
+msgstr "Kolor..,"
 
 #. * TRANSLATORS: Short for Tiny text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:247
 msgctxt "markup"
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:247
 msgid "Tiny"
-msgstr ""
+msgstr "Malutki"
 
 #. * TRANSLATORS: Short for Small text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:251
 msgctxt "markup"
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:251
 msgid "Small"
-msgstr ""
+msgstr "Mały"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:255
 msgctxt "markup"
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. * TRANSLATORS: Short for Large text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:259
 msgctxt "markup"
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:259
 msgid "Large"
-msgstr ""
+msgstr "Duży"
 
 #. * TRANSLATORS: Short for Huge text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:263
 msgctxt "markup"
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:263
 msgid "Huge"
-msgstr ""
+msgstr "Ogromny"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:294
 #, c-format
@@ -4507,7 +4521,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:312
 msgid "Preview:"
-msgstr ""
+msgstr "Podgląd:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:337
 msgid "The comment contains invalid richtext markup:"
@@ -4516,7 +4530,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:382
 msgctxt "tx"
 msgid "Priority:"
-msgstr ""
+msgstr "Priorytet:"
 
 #. * TRANSLATORS: "Resource" here refers to the name of a translation unit
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:390
@@ -4531,22 +4545,22 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:403
 msgid "This may take several minutes. Please be patient."
-msgstr ""
+msgstr "To może zająć kilka minut. Bądź cierpliwy,"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:408
 msgctxt "priority"
 msgid "Low"
-msgstr ""
+msgstr "Niski"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:409
 msgctxt "priority"
 msgid "Normal"
-msgstr ""
+msgstr "Średni"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:410
 msgctxt "priority"
 msgid "High"
-msgstr ""
+msgstr "Wysoki"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:481
 msgid "Please explain why you are deleting this add-on."
@@ -4690,11 +4704,11 @@ msgstr "Zrzut ekranu nie mógł być pobrany z serwera z powodu błędu."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:975
 msgid "Please log in to comment"
-msgstr ""
+msgstr "Zaloguj się, żeby skomentować"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:977
 msgid "Please log in to vote"
-msgstr ""
+msgstr "Zaloguj się, żeby zagłosować"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:45
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:140
@@ -5128,7 +5142,7 @@ msgstr "Włączony dodatek może powodować desynchronizację. Żadna powtórka 
 
 #: ../../src/ui_fsmenu/launch_game.cc:87
 msgid "Playing time"
-msgstr ""
+msgstr "Czas gry"
 
 #: ../../src/ui_fsmenu/launch_game.cc:93
 msgid "Peaceful mode"
@@ -8133,35 +8147,39 @@ msgstr "Dodatki:"
 msgid "Game data error:"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:138
+#: ../../src/wui/general_statistics_menu.cc:139
 msgid "Land"
 msgstr "Ziemia"
 
-#: ../../src/wui/general_statistics_menu.cc:159
+#: ../../src/wui/general_statistics_menu.cc:160
 msgid "Productivity"
 msgstr "Produktywność"
 
-#: ../../src/wui/general_statistics_menu.cc:164
+#: ../../src/wui/general_statistics_menu.cc:165
 msgid "Casualties"
 msgstr "Straty"
 
-#: ../../src/wui/general_statistics_menu.cc:168
+#: ../../src/wui/general_statistics_menu.cc:169
 msgid "Kills"
 msgstr "Zabici"
 
-#: ../../src/wui/general_statistics_menu.cc:174
+#: ../../src/wui/general_statistics_menu.cc:175
 msgid "Military buildings lost"
 msgstr "Stracone budynki wojskowe"
 
-#: ../../src/wui/general_statistics_menu.cc:179
+#: ../../src/wui/general_statistics_menu.cc:180
 msgid "Military buildings defeated"
 msgstr "Zniszczone budynki wojskowe"
 
-#: ../../src/wui/general_statistics_menu.cc:184
+#: ../../src/wui/general_statistics_menu.cc:185
 msgid "Civilian buildings lost"
 msgstr "Stracone budynki cywilne"
 
-#: ../../src/wui/general_statistics_menu.cc:189
+#: ../../src/wui/general_statistics_menu.cc:190
+msgid "Civilian buildings destroyed"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:195
 msgid "Military"
 msgstr "Wojsko"
 
@@ -9160,18 +9178,19 @@ msgstr "Obrona: %u"
 msgid "Evade: %u"
 msgstr "Unik: %u"
 
-#: ../../src/wui/soldier_statistics_menu.cc:135
-msgid "Overview"
-msgstr "Przegląd"
-
 #: ../../src/wui/soldier_statistics_menu.cc:220
 msgid "By Attribute"
 msgstr ""
 
-#: ../../src/wui/soldier_statistics_menu.cc:238
-#: ../../src/wui/soldier_statistics_menu.cc:244
-#: ../../src/wui/soldier_statistics_menu.cc:250
-#: ../../src/wui/soldier_statistics_menu.cc:256
+#: ../../src/wui/soldier_statistics_menu.cc:234
+#, c-format
+msgid "Overview (%u)"
+msgstr ""
+
+#: ../../src/wui/soldier_statistics_menu.cc:239
+#: ../../src/wui/soldier_statistics_menu.cc:245
+#: ../../src/wui/soldier_statistics_menu.cc:251
+#: ../../src/wui/soldier_statistics_menu.cc:257
 #, c-format
 msgid "×%u"
 msgstr "×%u"

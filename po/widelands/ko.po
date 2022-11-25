@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-10 03:40+0000\n"
+"POT-Creation-Date: 2022-11-22 03:30+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -2129,76 +2129,89 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "더 이상 자원이 없어요!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:438
+#: ../../src/logic/map_objects/tribes/ship.cc:463
 msgid "Port Space"
 msgstr "항구 공간"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:438
+#: ../../src/logic/map_objects/tribes/ship.cc:463
 msgid "Port Space Found"
 msgstr "항구 공간을 발견"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:439
+#: ../../src/logic/map_objects/tribes/ship.cc:464
 msgid "An expedition ship found a new port build space."
 msgstr "탐험선이 새로운 항구 건설 공간을 발견했습니다."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:560
+#: ../../src/logic/map_objects/tribes/ship.cc:587
 msgid "Island Circumnavigated"
 msgstr "섬 일주 완료"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:560
+#: ../../src/logic/map_objects/tribes/ship.cc:587
 msgctxt "ship"
 msgid "Waiting"
 msgstr "기다리는 중"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:561
+#: ../../src/logic/map_objects/tribes/ship.cc:588
 msgid "An expedition ship sailed around its island without any events."
 msgstr "탐험선이 별 일 없이 섬을 일주했습니다."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:624
+#: ../../src/logic/map_objects/tribes/ship.cc:651
 msgid "Coast Reached"
 msgstr "해안 도착"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:624
+#: ../../src/logic/map_objects/tribes/ship.cc:651
 msgid "Land Ahoy!"
 msgstr "육지 발견!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:625
+#: ../../src/logic/map_objects/tribes/ship.cc:652
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "탐헌선이 해안에 도착해서 향후 명령을 기다리는 중입니다."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:676
+#: ../../src/logic/map_objects/tribes/ship.cc:703
 msgid "New port construction site is gone"
 msgstr "새로운 항구 건설 위치가 사라졌습니다"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:676
+#: ../../src/logic/map_objects/tribes/ship.cc:703
 msgid "Port Lost!"
 msgstr "항구 손실!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:677
+#: ../../src/logic/map_objects/tribes/ship.cc:704
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "물품을 하적하는데 실패해서 탐험을 취소합니다."
 
+#: ../../src/logic/map_objects/tribes/ship.cc:760
+msgid "No Port Can Be Built"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:760
+msgid "Port Space Lost!"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:761
+msgid ""
+"A discovered port build space is not available for building a port anymore."
+msgstr ""
+
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:858
+#: ../../src/logic/map_objects/tribes/ship.cc:907
 msgctxt "ship"
 msgid "Expedition"
 msgstr "탐험"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:858
+#: ../../src/logic/map_objects/tribes/ship.cc:907
 msgid "Expedition Ready"
 msgstr "탐험 준비 완료"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:859
+#: ../../src/logic/map_objects/tribes/ship.cc:908
 msgid "An expedition ship is waiting for your commands."
 msgstr "탐험선이 당신의 명령을 기다리고 있습니다."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1019
+#: ../../src/logic/map_objects/tribes/ship.cc:1066
 #: ../../src/wui/seafaring_statistics_menu.cc:239
 msgctxt "ship_state"
 msgid "Shipping"
@@ -2207,7 +2220,7 @@ msgstr "선적하고 있음"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1022
+#: ../../src/logic/map_objects/tribes/ship.cc:1069
 #: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Empty"
@@ -2215,7 +2228,7 @@ msgstr "비어있음"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1026
+#: ../../src/logic/map_objects/tribes/ship.cc:1073
 #: ../../src/wui/seafaring_statistics_menu.cc:241
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2223,14 +2236,14 @@ msgstr "대기하고 있음"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1030
+#: ../../src/logic/map_objects/tribes/ship.cc:1077
 #: ../../src/wui/seafaring_statistics_menu.cc:243
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "정찰하고 있음"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1034
+#: ../../src/logic/map_objects/tribes/ship.cc:1081
 #: ../../src/wui/seafaring_statistics_menu.cc:245
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2239,7 +2252,7 @@ msgstr "항구 공간 발견"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1039
+#: ../../src/logic/map_objects/tribes/ship.cc:1086
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "식민지를 짓고 있음"
@@ -2262,7 +2275,7 @@ msgstr "배들"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
-#: ../../src/wui/general_statistics_menu.cc:153
+#: ../../src/wui/general_statistics_menu.cc:154
 #: ../../src/wui/interactive_player.cc:336
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
@@ -2274,7 +2287,7 @@ msgstr "물품"
 #. need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:180
 #: ../../src/wui/economy_options_window.cc:77
-#: ../../src/wui/general_statistics_menu.cc:144
+#: ../../src/wui/general_statistics_menu.cc:145
 #: ../../src/wui/productionsitewindow.cc:111
 #: ../../src/wui/warehousewindow.cc:268
 msgid "Workers"
@@ -2284,7 +2297,7 @@ msgstr "일꾼들"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:329
-#: ../../src/wui/general_statistics_menu.cc:149
+#: ../../src/wui/general_statistics_menu.cc:150
 #: ../../src/wui/interactive_player.cc:331 ../../src/wui/minimap.cc:199
 msgid "Buildings"
 msgstr "건물"
@@ -2410,7 +2423,7 @@ msgstr "지도 파일이 잘못되었습니다:\n%s"
 msgid "This objective has no description."
 msgstr "이 목표는 설명이 없습니다."
 
-#: ../../src/logic/player.cc:1938
+#: ../../src/logic/player.cc:1945
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -8028,35 +8041,39 @@ msgstr "추가 기능:"
 msgid "Game data error:"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:138
+#: ../../src/wui/general_statistics_menu.cc:139
 msgid "Land"
 msgstr "땅"
 
-#: ../../src/wui/general_statistics_menu.cc:159
+#: ../../src/wui/general_statistics_menu.cc:160
 msgid "Productivity"
 msgstr "생산성"
 
-#: ../../src/wui/general_statistics_menu.cc:164
+#: ../../src/wui/general_statistics_menu.cc:165
 msgid "Casualties"
 msgstr "피해"
 
-#: ../../src/wui/general_statistics_menu.cc:168
+#: ../../src/wui/general_statistics_menu.cc:169
 msgid "Kills"
 msgstr "살해"
 
-#: ../../src/wui/general_statistics_menu.cc:174
+#: ../../src/wui/general_statistics_menu.cc:175
 msgid "Military buildings lost"
 msgstr "군사 건물 잃음"
 
-#: ../../src/wui/general_statistics_menu.cc:179
+#: ../../src/wui/general_statistics_menu.cc:180
 msgid "Military buildings defeated"
 msgstr "군사 건물 파괴"
 
-#: ../../src/wui/general_statistics_menu.cc:184
+#: ../../src/wui/general_statistics_menu.cc:185
 msgid "Civilian buildings lost"
 msgstr "민간 건물 잃음"
 
-#: ../../src/wui/general_statistics_menu.cc:189
+#: ../../src/wui/general_statistics_menu.cc:190
+msgid "Civilian buildings destroyed"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:195
 msgid "Military"
 msgstr "군사"
 
@@ -9031,18 +9048,19 @@ msgstr "방어력: %u"
 msgid "Evade: %u"
 msgstr "회피력: %u"
 
-#: ../../src/wui/soldier_statistics_menu.cc:135
-msgid "Overview"
-msgstr "개요"
-
 #: ../../src/wui/soldier_statistics_menu.cc:220
 msgid "By Attribute"
 msgstr "속성별"
 
-#: ../../src/wui/soldier_statistics_menu.cc:238
-#: ../../src/wui/soldier_statistics_menu.cc:244
-#: ../../src/wui/soldier_statistics_menu.cc:250
-#: ../../src/wui/soldier_statistics_menu.cc:256
+#: ../../src/wui/soldier_statistics_menu.cc:234
+#, c-format
+msgid "Overview (%u)"
+msgstr ""
+
+#: ../../src/wui/soldier_statistics_menu.cc:239
+#: ../../src/wui/soldier_statistics_menu.cc:245
+#: ../../src/wui/soldier_statistics_menu.cc:251
+#: ../../src/wui/soldier_statistics_menu.cc:257
 #, c-format
 msgid "×%u"
 msgstr "×%u"
