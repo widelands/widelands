@@ -42,8 +42,8 @@ class Player;
  * \e resign_reason : The reason for resigning (forfeit, disconnection, ..) (string)
  */
 struct PlayerEndStatus {
-	PlayerNumber player;
-	PlayerEndResult result;
+	PlayerNumber player = 0;
+	PlayerEndResult result = PlayerEndResult::kUndefined;
 	Time time;
 	std::string info;
 };
@@ -86,19 +86,12 @@ public:
 		return number_of_players_;
 	}
 
-	const std::vector<PlayerEndStatus>& get_players_end_status() {
-		return players_end_status_;
-	}
-
 	/**
-	 * Adds a new player status for a player that left the game.
+	 * Adds or sets the player status for a player that left the game.
 	 */
-	void add_player_end_status(const PlayerEndStatus& status);
+	void add_player_end_status(const PlayerEndStatus& status, bool change_existing = false);
 
-	/**
-	 * Changes an already existing player end status
-	 */
-	void set_player_end_status(const PlayerEndStatus& status);
+	const PlayerEndStatus* get_player_end_status(PlayerNumber player) const;
 
 private:
 	Player* players_[kMaxPlayers];

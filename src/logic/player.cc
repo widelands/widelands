@@ -1873,6 +1873,13 @@ uint32_t Player::count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) 
 	   std::find(soldier_stats_.begin(), soldier_stats_.end(), SoldierStatistics(h, a, d, e));
 	return it == soldier_stats_.end() ? 0 : it->total;
 }
+uint32_t Player::count_soldiers() const {
+	uint32_t s = 0;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		s += ss.total;
+	}
+	return s;
+}
 uint32_t Player::count_soldiers_h(unsigned value) const {
 	uint32_t s = 0;
 	for (const SoldierStatistics& ss : soldier_stats_) {

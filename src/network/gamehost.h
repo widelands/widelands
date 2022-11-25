@@ -185,6 +185,7 @@ private:
 	void check_hung_clients();
 	void broadcast_real_speed(uint32_t speed);
 	void update_network_speed();
+	bool client_may_change_speed(uint8_t playernum) const;
 
 	std::string get_computer_player_name(uint8_t playernum);
 	bool has_user_name(const std::string& name, uint8_t ignoreplayer = UserSettings::none());

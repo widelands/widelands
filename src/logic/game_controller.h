@@ -101,8 +101,7 @@ public:
 	 */
 	virtual void report_result(uint8_t /* player */,
 	                           Widelands::PlayerEndResult /*result*/,
-	                           const std::string& /* info */) {
-	}
+	                           const std::string& /* info */) = 0;
 
 	/** Callback when the game setup UI is closed before a game was started. */
 	virtual void game_setup_aborted() {

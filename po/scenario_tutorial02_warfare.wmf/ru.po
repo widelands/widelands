@@ -8,6 +8,7 @@
 # GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Viktor S <awsswa59@gmail.com>, 2019
+# Yuriy Sokolov <lention@mail.ru>, 2022
 # 6da4f49c4b78e697e34b24b2a66289f5, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # 66c17387c1d6640720971b8ab706da27_0feead1, 2015
@@ -17,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: nskdmitry, 2021\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,7 +77,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr "Если солдат варваров полностью натренирован, то он имеет уровень здоровья %1%, атаки %2%, защиты %3% и уклонения %4%. И это только один страшный воин! Индивидуальные навыки означают следующее:"
+msgstr "Если солдат варваров полностью натренирован, то он имеет уровень здоровья %1%, урона %2%, защиты %3% и уклонения %4%. И это только один страшный воин! Индивидуальные навыки означают следующее:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
 msgid "Health:"
@@ -91,7 +92,7 @@ msgstr "Общая жизнь солдата. Варварский солдат 
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid "Attack:"
-msgstr "Атака:"
+msgstr "Урон:"
 
 #. TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:48
@@ -239,7 +240,7 @@ msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr "Второй тренировочный центр - тренировочный лагерь. Это также большое строение, в котором, в дополнение к боевой арене, тренируется атака и здоровье (помните, солдаты Варваров не могут быть обучены защите)."
+msgstr "Второй тренировочный центр - тренировочный лагерь. Это также большое строение, в котором, в дополнение к боевой арене, тренируется урон и здоровье (помните, солдаты Варваров не могут быть обучены защите)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:104
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:114
@@ -259,7 +260,7 @@ msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr "На арене поединков тренируется только Уклонение. Чтобы получить максимально сильного солдата, вы также должны построить тренировочный лагерь, который обучит их атаке и здоровью."
+msgstr "На арене поединков тренируется только Уклонение. Чтобы получить максимально сильного солдата, вы также должны построить тренировочный лагерь, который обучит их урону и здоровью."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:122
 msgid ""
@@ -272,7 +273,7 @@ msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr "Обучаясь в тренировочном лагере ваши солдаты, как и на арене поединков потребляют пищу, но не не потребляют крепкое пиво. Вместо этого им требуется различные топоры - для тренировки атаки и шлемы - для тренировки здоровья."
+msgstr "Обучаясь в тренировочном лагере ваши солдаты, как и на арене поединков потребляют пищу, но не не потребляют крепкое пиво. Вместо этого им требуется различные топоры - для тренировки урона и шлемы - для тренировки здоровья."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:124
 msgid ""
@@ -288,7 +289,7 @@ msgid ""
 "ability levels cannot be compared: an Imperial soldier has a base attack of "
 "%1% at level 0, while a Barbarian soldier at the same level only has a base "
 "attack of %2%."
-msgstr "Вы должны также иметь в виду, что каждое из трех племен в Widelands имеет свой собственный способ тренировки, поэтому здания и товары также различны. Кроме того, уровни способностей также несравнимы: имперских солдат имеет базовую атаку %1% на уровне 0, а варварский солдат на том же уровне, только %2%."
+msgstr "Вы должны также иметь в виду, что каждое из трех племен в Widelands имеет свой собственный способ тренировки, поэтому здания и товары также различны. Кроме того, уровни способностей также несравнимы: имперский солдат имеет базовый урон %1% на уровне 0, а варварский солдат на том же уровне, только %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143

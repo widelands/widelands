@@ -42,6 +42,8 @@ public:
 	void set_desired_speed(uint32_t const speed) override;
 	bool is_paused() override;
 	void set_paused(bool const paused) override;
+	void
+	report_result(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string& info) override;
 	void set_write_replay(bool /* replay */) override {
 		NEVER_HERE();
 	}

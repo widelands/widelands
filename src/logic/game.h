@@ -303,8 +303,11 @@ public:
 	void send_player_propose_trade(const Trade& trade);
 	void send_player_toggle_mute(const Building&, bool all);
 	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
+	void send_player_pinned_note(
+	   PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del);
 
 	InteractivePlayer* get_ipl();
+	const InteractivePlayer* get_ipl() const;
 
 	SaveHandler& save_handler() {
 		return savehandler_;

@@ -9,7 +9,7 @@
 # Максим Дронь <dronmax@gmail.com>, 2015
 # CupIvan <mail@cupivan.ru>, 2015
 # Viktor S <awsswa59@gmail.com>, 2018-2020
-# Yuriy Sokolov <lention@mail.ru>, 2015,2018
+# Yuriy Sokolov <lention@mail.ru>, 2015,2018,2022
 # 6da4f49c4b78e697e34b24b2a66289f5, 2016
 # Владимир Шевцов, 2022
 # bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Владимир Шевцов, 2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2018,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -595,13 +595,13 @@ msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr "Присматривайте за вашими рыболовами и постройте домик рыбовода. После того, как ресурсы рыбы будут исчерпаны в их рабочей области, поставки рыбы не смогут быть восстановлены."
+msgstr "Присматривайте за вашими рыболовами и постройте дом рыбовода. После того, как ресурсы рыбы будут исчерпаны в их рабочей области, поставки рыбы не смогут быть восстановлены."
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr "Всегда стройте домик лесника и домик лесоруба, чтобы не остаться без бревен."
+msgstr "Всегда стройте дом лесника и дом лесоруба, чтобы не остаться без бревен."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
@@ -700,7 +700,7 @@ msgstr "Вы можете расположить большие здания н�
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr "Если не хотите остаться без брёвен, всегда стройте домик лесника."
+msgstr "Если не хотите остаться без брёвен, всегда стройте дом лесника."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
@@ -715,7 +715,7 @@ msgstr "Для производства кирпичей вам необходи
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr "Если не хотите остаться без брёвен, всегда стройте домик лесника."
+msgstr "Если не хотите остаться без брёвен, всегда стройте дом лесника."
 
 #: ../../data/txts/tips/general_game.lua:7
 msgid ""
