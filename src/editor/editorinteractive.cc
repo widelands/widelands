@@ -237,7 +237,8 @@ void EditorInteractive::add_main_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions,
-	              g_image_cache->get("images/wui/editor/menus/map_options.png"));
+	              g_image_cache->get("images/wui/editor/menus/map_options.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kEditorMapOptions, false));
 
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Publish Map Online…"), MainMenuEntry::kUploadAsAddOn,
@@ -893,6 +894,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorLoad, code)) {
 			menu_windows_.loadmap.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorMapOptions, code)) {
+			menu_windows_.mapoptions.toggle();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorTools, code)) {

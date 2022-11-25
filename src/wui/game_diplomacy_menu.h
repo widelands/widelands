@@ -32,7 +32,7 @@ class InteractiveBase;
 ///  Shows the current teams lineup and allows the player to perform diplomatic actions.
 class GameDiplomacyMenu : public UI::UniqueWindow {
 public:
-	GameDiplomacyMenu(InteractivePlayer& parent, UI::UniqueWindow::Registry&);
+	GameDiplomacyMenu(InteractiveGameBase& parent, UI::UniqueWindow::Registry&);
 	void think() override;
 	void draw(RenderTarget&) override;
 
@@ -43,7 +43,8 @@ public:
 	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
-	InteractivePlayer& iplayer_;
+	InteractiveGameBase& igbase_;
+	InteractivePlayer* iplayer_;
 	void update_diplomacy_details();
 
 	UI::Box diplomacy_box_;
