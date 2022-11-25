@@ -9,7 +9,7 @@
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2022
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
 # Elisabeth Jäger, 2015
 # wl-zocker, 2015
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-11-01 04:33+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Klaus Halfmann <klaus.halfmann@arcor.de>, 2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,7 +124,7 @@ msgstr "Sammler"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares after %s wins the game."
-msgstr ""
+msgstr "Du erhältst Punkte für alle wertvollen Waren, die in deinen Lagerhäusern eingelagert sind. Der Spieler, der nach %s die höchste Punktzahl erreicht hat, gewinnt das Spiel."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest number of
 #. wares after %s wins the game."
@@ -135,7 +135,7 @@ msgstr ""
 #: ../../data/scripting/win_conditions/territorial_time.lua:32
 #: ../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "the configured time limit"
-msgstr ""
+msgstr "der eingestellten Spielzeit"
 
 #: ../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
@@ -276,13 +276,13 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr ""
+msgstr "Jeder Spieler bzw. jedes Team versucht, mehr als die Hälfte der Kartenfläche zu beherrschen. Sieger ist, wer dieses Gebiet für 20 Minuten am Stück halten kann oder wer nach Ablauf %s das größte Gebiet besitzt, je nachdem, was zuerst eintritt. Wenn der Friedensmodus gewählt wird, endet das Spiel, wenn ein Spieler mehr Land hat, als ein anderer Spieler gewinnen könnte."
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
 msgid_plural "%1% days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Tag"
+msgstr[1] "%1% Tage"
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:358
 msgid "%1% hour"
@@ -293,20 +293,20 @@ msgstr[1] "%1% Stunden"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% Minute"
+msgstr[1] "%1% Minuten"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:364
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s, und %3$s"
 
 #. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
 #. and 30 minutes"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:367
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:371
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s und %2$s"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:394
@@ -367,7 +367,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr ""
+msgstr "Als Waldschrat magst du große Wälder. Deine Aufgabe ist also, mehr Bäume in deinem Gebiet zu haben als alle anderen Spieler. Das Spiel endet nach %s. Der Spieler, der dann die meisten Bäume hat, gewinnt."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"

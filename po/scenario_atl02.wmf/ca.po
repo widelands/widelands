@@ -226,7 +226,7 @@ msgstr "Pagueu tots els tributs a en Kalitath"
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:117
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:130
 msgid "Send Trader To Kalitath"
-msgstr "Envieu un comercial amb Kalitath"
+msgstr "Envieu un comerciant amb Kalitath"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:118
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:131
@@ -1123,7 +1123,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr "Felicitats!"
+msgstr "Enhorabona!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""
