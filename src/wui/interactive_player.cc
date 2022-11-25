@@ -46,6 +46,7 @@
 #include "wui/game_message_menu.h"
 #include "wui/game_objectives_menu.h"
 #include "wui/general_statistics_menu.h"
+#include "wui/pinned_note.h"
 #include "wui/seafaring_statistics_menu.h"
 #include "wui/soldier_statistics_menu.h"
 #include "wui/stock_menu.h"
@@ -842,6 +843,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			   game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
 			return true;
 		}
+		if (matches_shortcut(KeyboardShortcut::kInGamePinnedNote, code)) {
+			edit_pinned_note(egbase().map().get_fcoords(get_sel_pos().node));
+			return true;
+		}
 
 		const Widelands::DescriptionIndex fastplace = egbase().descriptions().building_index(
 		   matching_fastplace_shortcut(code, player().tribe().name()));
@@ -852,6 +857,34 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 	}
 
 	return InteractiveGameBase::handle_key(down, code);
+}
+
+void InteractivePlayer::edit_pinned_note(const Widelands::FCoords& c) {
+	std::string text;
+	const RGBColor* rgb = &player().get_playercolor();
+	bool exists = false;
+
+	for (Widelands::Bob* b = c.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
+		if (b->descr().type() == Widelands::MapObjectType::PINNED_NOTE &&
+		    b->owner().player_number() == player_number()) {
+			exists = true;
+			const Widelands::PinnedNote& pn = dynamic_cast<Widelands::PinnedNote&>(*b);
+			text = pn.get_text();
+			rgb = &pn.get_rgb();
+			break;
+		}
+	}
+
+	UI::UniqueWindow::Registry& r =
+	   unique_windows().get_registry(format("pinned_note_%d_%d", c.x, c.y));
+	r.open_window = [this, c, &r, text, rgb, exists] {
+		new PinnedNoteEditor(*this, r, c, text, *rgb, !exists);
+	};
+	r.create();
+
+	if (!exists) {  // Already create the note if it did not exist yet.
+		game().send_player_pinned_note(player_number(), c, text, *rgb, false);
+	}
 }
 
 /**
