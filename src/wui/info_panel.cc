@@ -359,7 +359,7 @@ size_t InfoPanel::index_of(const MessagePreview* mp) const {
 	return 0;
 }
 
-void InfoPanel::log_message(const std::string& message) {
+void InfoPanel::log_message(const std::string& message, const std::string& tooltip) {
 	// There is never more than 1 system message visible
 	for (MessagePreview* m : messages_) {
 		if (m->is_system_message()) {
@@ -368,7 +368,7 @@ void InfoPanel::log_message(const std::string& message) {
 		}
 	}
 
-	push_message(new MessagePreview(this, message, ""));
+	push_message(new MessagePreview(this, message, tooltip));
 }
 
 void InfoPanel::pop_message(MessagePreview* m) {

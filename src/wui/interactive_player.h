@@ -86,6 +86,8 @@ public:
 	/** Open an attack box for the building at the given position, if applicable. */
 	UI::Window* show_attack_window(const Widelands::Coords&, bool fastclick);
 
+	void edit_pinned_note(const Widelands::FCoords& c);
+
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// Indicate the given screen pixel to the player by painting an arrow. Use this for pointing the
 	// payer to a UI::Panel. Set to Vector2i::invalid() to switch it off.
@@ -124,7 +126,6 @@ private:
 
 public:
 	UI::UniqueWindow::Registry objectives_;
-	UI::UniqueWindow::Registry diplomacy_;
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;
 
