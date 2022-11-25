@@ -5,7 +5,7 @@
 # Translators:
 # tombox <wptom@wp.pl>, 2018
 # Marcin S <dzidek1003@o2.pl>, 2021
-# Antoni Szpikowski <szantek2004@gmail.com>, 2021
+# Antoni Szpikowski <szantek2004@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
+"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2022\n"
 "Language-Team: Polish (https://www.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,6 +34,8 @@ msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
+"Rozbierz wszystkie nieproduktywne małe budynki, by zdobyć surowce na nowe "
+"budynki."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid ""
@@ -109,7 +111,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid "Produce fish and rations"
-msgstr ""
+msgstr "Produkuj ryby i racje żywnościowe"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:96
 msgid "Food Production"
@@ -118,6 +120,8 @@ msgstr "Produkcja żywności"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:97
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
 msgstr ""
+"Znajdź i złap trochę ryb. Następnie produkuj racje żywnościowe dla swoich "
+"górników."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:103
 msgid "Replace the old and ineffective forester’s houses"
@@ -152,7 +156,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:123
 msgid "Diplomacy: Trade or War"
-msgstr ""
+msgstr "Dyplomacja: handel lub wojna"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:124
 msgid ""
@@ -162,11 +166,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:130
 msgid "Train at least 3 heroes"
-msgstr ""
+msgstr "Wyszkol co najmniej 3 bohaterów"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:132
 msgid "Hero Training"
-msgstr ""
+msgstr "Szkolenie bohatera"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:133
 msgid ""
@@ -194,20 +198,22 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:142
 msgid "Produce at least 10 tools"
-msgstr ""
+msgstr "Wyprodukuj co najmniej 10 narzędzi"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:144
 msgid "Tool Production"
-msgstr ""
+msgstr "Produkcja narzędzi"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:145
 msgid "Produce at least ten tools to improve your economy."
-msgstr ""
+msgstr "Wyprodukuj co najmniej dziesięć narzędzi, by ulepszyć swoją ekonomię."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid ""
 "Remember that you can control the production amount in the economy settings."
 msgstr ""
+"Pamiętaj, że możesz kontrolować wielkość produkcji w ustawieniach "
+"gospodarki."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:152
 msgid "Recruit new soldiers"
@@ -227,7 +233,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:163
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Pokonaj wroga"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:164
 msgid "End the Barbarian intrusion into your very own part of the world."
@@ -279,14 +285,14 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:204
 msgid "Home, Sweet Home"
-msgstr ""
+msgstr "Nie ma jak w domu"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:205
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:216
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:224
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:232
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Dziennik Lucjusza"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:207
@@ -303,7 +309,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:215
 msgid "Tools, Tools, Tools"
-msgstr ""
+msgstr "Narzędzia, narzędzia, narzędzia"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:218
@@ -316,7 +322,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:622
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:668
 msgid "Military Strength"
-msgstr ""
+msgstr "Siła wojska"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:226
@@ -347,10 +353,12 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Ukończyłeś tę misję. Jeśli chcesz, możesz kontynuować grę, w przeciwnym "
+"razie możesz przejść do następnej misji."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:245
 msgid "Chaos"
-msgstr ""
+msgstr "Chaos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:246
 msgid "Lutius is disappointed"
@@ -379,11 +387,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:261
 msgid "Difficult Times"
-msgstr ""
+msgstr "Ciężkie czasy"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:262
 msgid "Lutius accepts the challenge"
-msgstr ""
+msgstr "Lucjusz akceptuje wyzwanie"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:264

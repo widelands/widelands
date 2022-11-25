@@ -222,6 +222,7 @@ wl_library(logic_commands
     scripting_coroutine
     scripting_logic # TODO(GunChleoc): Circular dependency
     scripting_lua_table
+    wui
 )
 
 

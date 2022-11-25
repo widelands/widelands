@@ -81,6 +81,10 @@ public:
 	uint32_t get_max_evade_level() const {
 		return evade_.max_level;
 	}
+	uint32_t get_max_total_level() const {
+		return get_max_health_level() + get_max_attack_level() + get_max_defense_level() +
+		       get_max_evade_level();
+	}
 
 	uint32_t get_base_health() const {
 		return health_.base;

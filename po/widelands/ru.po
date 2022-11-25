@@ -12,7 +12,7 @@
 # GunChleoc, 2016,2018
 # George Matsune <georg29387878@gmail.com>, 2017
 # Viktor S <awsswa59@gmail.com>, 2018-2020
-# Yuriy Sokolov <lention@mail.ru>, 2015,2017
+# Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # Владимир Шевцов, 2022
 # bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
@@ -24,9 +24,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-04 03:58+0000\n"
+"POT-Creation-Date: 2022-11-22 03:30+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Владимир Шевцов, 2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2163,76 +2163,89 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "Больше не можем найти ресурсов!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:438
+#: ../../src/logic/map_objects/tribes/ship.cc:463
 msgid "Port Space"
 msgstr "Место порта"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:438
+#: ../../src/logic/map_objects/tribes/ship.cc:463
 msgid "Port Space Found"
 msgstr "Найдено место для порта"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:439
+#: ../../src/logic/map_objects/tribes/ship.cc:464
 msgid "An expedition ship found a new port build space."
 msgstr "Экспедиционный корабль нашёл место для строительства нового порта."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:560
+#: ../../src/logic/map_objects/tribes/ship.cc:587
 msgid "Island Circumnavigated"
 msgstr "Исследование побережья острова завершено"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:560
+#: ../../src/logic/map_objects/tribes/ship.cc:587
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Ожидаю приказов"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:561
+#: ../../src/logic/map_objects/tribes/ship.cc:588
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Корабль экспедиции обогнул остров без происшествий."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:624
+#: ../../src/logic/map_objects/tribes/ship.cc:651
 msgid "Coast Reached"
 msgstr "Берег достигнут"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:624
+#: ../../src/logic/map_objects/tribes/ship.cc:651
 msgid "Land Ahoy!"
 msgstr "Земля!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:625
+#: ../../src/logic/map_objects/tribes/ship.cc:652
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Экспедиционный корабль достиг побережья и ждёт дальнейших указаний."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:676
+#: ../../src/logic/map_objects/tribes/ship.cc:703
 msgid "New port construction site is gone"
 msgstr "Новое место для строительства порта потеряно"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:676
+#: ../../src/logic/map_objects/tribes/ship.cc:703
 msgid "Port Lost!"
 msgstr "Порт потерян!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:677
+#: ../../src/logic/map_objects/tribes/ship.cc:704
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Разгрузка товаров не удалась, экспедиция отменяется."
 
+#: ../../src/logic/map_objects/tribes/ship.cc:760
+msgid "No Port Can Be Built"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:760
+msgid "Port Space Lost!"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:761
+msgid ""
+"A discovered port build space is not available for building a port anymore."
+msgstr ""
+
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:858
+#: ../../src/logic/map_objects/tribes/ship.cc:907
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Экспедиция"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:858
+#: ../../src/logic/map_objects/tribes/ship.cc:907
 msgid "Expedition Ready"
 msgstr "Экспедиция готова"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:859
+#: ../../src/logic/map_objects/tribes/ship.cc:908
 msgid "An expedition ship is waiting for your commands."
 msgstr "Экспедиционный корабль ждёт ваших указаний."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1019
+#: ../../src/logic/map_objects/tribes/ship.cc:1066
 #: ../../src/wui/seafaring_statistics_menu.cc:239
 msgctxt "ship_state"
 msgid "Shipping"
@@ -2241,7 +2254,7 @@ msgstr "Транспортировка"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1022
+#: ../../src/logic/map_objects/tribes/ship.cc:1069
 #: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Empty"
@@ -2249,7 +2262,7 @@ msgstr "Порожняком"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1026
+#: ../../src/logic/map_objects/tribes/ship.cc:1073
 #: ../../src/wui/seafaring_statistics_menu.cc:241
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2257,14 +2270,14 @@ msgstr "Ожидает"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1030
+#: ../../src/logic/map_objects/tribes/ship.cc:1077
 #: ../../src/wui/seafaring_statistics_menu.cc:243
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Разведывает"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1034
+#: ../../src/logic/map_objects/tribes/ship.cc:1081
 #: ../../src/wui/seafaring_statistics_menu.cc:245
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2273,7 +2286,7 @@ msgstr "Нашел место для постройки порта"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1039
+#: ../../src/logic/map_objects/tribes/ship.cc:1086
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Основывает колонию"
@@ -2296,7 +2309,7 @@ msgstr "Корабли"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
-#: ../../src/wui/general_statistics_menu.cc:153
+#: ../../src/wui/general_statistics_menu.cc:154
 #: ../../src/wui/interactive_player.cc:336
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
@@ -2308,7 +2321,7 @@ msgstr "Товары"
 #. need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:180
 #: ../../src/wui/economy_options_window.cc:77
-#: ../../src/wui/general_statistics_menu.cc:144
+#: ../../src/wui/general_statistics_menu.cc:145
 #: ../../src/wui/productionsitewindow.cc:111
 #: ../../src/wui/warehousewindow.cc:268
 msgid "Workers"
@@ -2318,7 +2331,7 @@ msgstr "Работники"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:329
-#: ../../src/wui/general_statistics_menu.cc:149
+#: ../../src/wui/general_statistics_menu.cc:150
 #: ../../src/wui/interactive_player.cc:331 ../../src/wui/minimap.cc:199
 msgid "Buildings"
 msgstr "Строения"
@@ -2444,7 +2457,7 @@ msgstr "Файл карты забракован по причине:\n%s"
 msgid "This objective has no description."
 msgstr "Эта задача без описания."
 
-#: ../../src/logic/player.cc:1938
+#: ../../src/logic/player.cc:1945
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2458,68 +2471,68 @@ msgstr "Корабль %d"
 msgid "Diplomacy"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2161
+#: ../../src/logic/playercommand.cc:2159
 #, c-format
 msgid "%s has resigned and is now a spectator."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2161
+#: ../../src/logic/playercommand.cc:2159
 msgid "Player Resigned"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2173
+#: ../../src/logic/playercommand.cc:2171
 msgid "Player Leaves Team"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2174
+#: ../../src/logic/playercommand.cc:2172
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2182
+#: ../../src/logic/playercommand.cc:2180
 msgid "Team Joining Request"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2183
+#: ../../src/logic/playercommand.cc:2181
 msgid "Team Joining Invitation"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2185
-#: ../../src/wui/game_diplomacy_menu.cc:309
+#: ../../src/logic/playercommand.cc:2183
+#: ../../src/wui/game_diplomacy_menu.cc:310
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2186
-#: ../../src/wui/game_diplomacy_menu.cc:314
+#: ../../src/logic/playercommand.cc:2184
+#: ../../src/wui/game_diplomacy_menu.cc:315
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2211
+#: ../../src/logic/playercommand.cc:2209
 msgid "Team Change Accepted"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2211
+#: ../../src/logic/playercommand.cc:2209
 msgid "Team Change Rejected"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2213
+#: ../../src/logic/playercommand.cc:2211
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2214
+#: ../../src/logic/playercommand.cc:2212
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2216
+#: ../../src/logic/playercommand.cc:2214
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2217
+#: ../../src/logic/playercommand.cc:2215
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
 msgstr ""
@@ -3285,7 +3298,7 @@ msgstr "Widelands не удалось использовать локальну�
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1350
+#: ../../src/scripting/lua_game.cc:1346
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -6471,11 +6484,11 @@ msgstr "Крепость"
 
 #: ../../src/wlapplication_options.cc:173
 msgid "Woodcutter’s House"
-msgstr "Домик лесоруба"
+msgstr "Дом лесоруба"
 
 #: ../../src/wlapplication_options.cc:174
 msgid "Forester’s House"
-msgstr "Домик лесника"
+msgstr "Дом лесника"
 
 #: ../../src/wlapplication_options.cc:175
 msgid "Quarry"
@@ -7849,22 +7862,22 @@ msgstr ""
 msgid "Team %u"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:261
+#: ../../src/wui/game_diplomacy_menu.cc:265
 #, c-format
 msgid "Won at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:264
+#: ../../src/wui/game_diplomacy_menu.cc:268
 #, c-format
 msgid "Lost at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:267
+#: ../../src/wui/game_diplomacy_menu.cc:271
 #, c-format
 msgid "Resigned at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:302
+#: ../../src/wui/game_diplomacy_menu.cc:303
 msgid "Pending Diplomacy Actions"
 msgstr ""
 
@@ -8025,52 +8038,52 @@ msgstr "Время"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:216
+#: ../../src/wui/game_summary.cc:214
 msgid "Lost"
 msgstr "Поражение"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:220
+#: ../../src/wui/game_summary.cc:218
 msgid "Won"
 msgstr "Победа"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:229
+#: ../../src/wui/game_summary.cc:227
 msgid "Resigned"
 msgstr "Покорено"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:234
+#: ../../src/wui/game_summary.cc:232
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Игра закончена"
 
-#: ../../src/wui/game_summary.cc:244
+#: ../../src/wui/game_summary.cc:242
 msgid "You won!"
 msgstr "Вы победили!"
 
-#: ../../src/wui/game_summary.cc:246
+#: ../../src/wui/game_summary.cc:244
 msgid "You lost."
 msgstr "Вы проиграли."
 
-#: ../../src/wui/game_summary.cc:250
+#: ../../src/wui/game_summary.cc:248
 #, c-format
 msgid "%s won!"
 msgstr "%s победил!"
 
-#: ../../src/wui/game_summary.cc:252
+#: ../../src/wui/game_summary.cc:250
 #, c-format
 msgid "Team %u won!"
 msgstr "Победила команда %u !"
 
-#: ../../src/wui/game_summary.cc:310
+#: ../../src/wui/game_summary.cc:308
 msgid "Score"
 msgstr "Счет"
 
-#: ../../src/wui/game_summary.cc:312
+#: ../../src/wui/game_summary.cc:310
 msgid "Team Score"
 msgstr "Командный счёт"
 
@@ -8134,35 +8147,39 @@ msgstr "Дополнения: "
 msgid "Game data error:"
 msgstr "Ошибка в данных игры:"
 
-#: ../../src/wui/general_statistics_menu.cc:138
+#: ../../src/wui/general_statistics_menu.cc:139
 msgid "Land"
 msgstr "Территория"
 
-#: ../../src/wui/general_statistics_menu.cc:159
+#: ../../src/wui/general_statistics_menu.cc:160
 msgid "Productivity"
 msgstr "Производительность"
 
-#: ../../src/wui/general_statistics_menu.cc:164
+#: ../../src/wui/general_statistics_menu.cc:165
 msgid "Casualties"
 msgstr "Потери солдат"
 
-#: ../../src/wui/general_statistics_menu.cc:168
+#: ../../src/wui/general_statistics_menu.cc:169
 msgid "Kills"
 msgstr "Убито"
 
-#: ../../src/wui/general_statistics_menu.cc:174
+#: ../../src/wui/general_statistics_menu.cc:175
 msgid "Military buildings lost"
 msgstr "Потеряно военных строений"
 
-#: ../../src/wui/general_statistics_menu.cc:179
+#: ../../src/wui/general_statistics_menu.cc:180
 msgid "Military buildings defeated"
 msgstr "Захвачено военных строений"
 
-#: ../../src/wui/general_statistics_menu.cc:184
+#: ../../src/wui/general_statistics_menu.cc:185
 msgid "Civilian buildings lost"
 msgstr "Потеряно гражданских строений"
 
-#: ../../src/wui/general_statistics_menu.cc:189
+#: ../../src/wui/general_statistics_menu.cc:190
+msgid "Civilian buildings destroyed"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:195
 msgid "Military"
 msgstr "Войска"
 
@@ -9147,7 +9164,7 @@ msgstr "Здоровье: %u"
 #: ../../src/wui/soldier_statistics_menu.cc:179
 #, c-format
 msgid "Attack: %u"
-msgstr "Оружие: %u"
+msgstr "Урон: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:74
 #: ../../src/wui/soldier_statistics_menu.cc:194
@@ -9161,18 +9178,19 @@ msgstr "Доспехи: %u"
 msgid "Evade: %u"
 msgstr "Проворство: %u"
 
-#: ../../src/wui/soldier_statistics_menu.cc:135
-msgid "Overview"
-msgstr "Обзор"
-
 #: ../../src/wui/soldier_statistics_menu.cc:220
 msgid "By Attribute"
 msgstr "По свойству"
 
-#: ../../src/wui/soldier_statistics_menu.cc:238
-#: ../../src/wui/soldier_statistics_menu.cc:244
-#: ../../src/wui/soldier_statistics_menu.cc:250
-#: ../../src/wui/soldier_statistics_menu.cc:256
+#: ../../src/wui/soldier_statistics_menu.cc:234
+#, c-format
+msgid "Overview (%u)"
+msgstr ""
+
+#: ../../src/wui/soldier_statistics_menu.cc:239
+#: ../../src/wui/soldier_statistics_menu.cc:245
+#: ../../src/wui/soldier_statistics_menu.cc:251
+#: ../../src/wui/soldier_statistics_menu.cc:257
 #, c-format
 msgid "×%u"
 msgstr "×%u"

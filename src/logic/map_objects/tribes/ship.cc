@@ -52,49 +52,74 @@ namespace Widelands {
 
 namespace {
 
-/// Returns true if 'coord' is not occupied or owned by 'player_number' and
-/// nothing stands there.
-bool can_support_port(const PlayerNumber player_number, const FCoords& coord) {
-	const PlayerNumber owner = coord.field->get_owned_by();
-	if (owner != neutral() && owner != player_number) {
+/// Returns true if 'coord' is not blocked by immovables
+/// Trees are allowed, because we don't want spreading forests to block portspaces from expeditions
+bool can_support_port(const FCoords& coord, BaseImmovable::Size max_immo_size) {
+	BaseImmovable* baim = coord.field->get_immovable();
+	Immovable* imo = dynamic_cast<Immovable*>(baim);
+	// we have a player immovable
+	if (imo == nullptr && baim != nullptr) {
 		return false;
 	}
-	BaseImmovable* baim = coord.field->get_immovable();
-	return (baim == nullptr || baim->descr().type() < MapObjectType::FLAG);
+	return (baim == nullptr || baim->get_size() <= max_immo_size ||
+	        imo->descr().has_terrain_affinity());
 }
 
 /// Returns true if a ship owned by 'player_number' can land and erect a port at 'coord'.
 bool can_build_port_here(const PlayerNumber player_number, const Map& map, const FCoords& coord) {
-	if (!can_support_port(player_number, coord)) {
-		return false;
+	// First check ownership of the port space
+	// All fields of the port + their neighboring fields (for the border) must
+	// be conquerable without military influence. Check radius 2 around
+	// the main spot to cover radius 1 around each of the 4 fields and the flag
+	MapRegion<Area<FCoords>> area(map, Area<FCoords>(coord, 2));
+	do {
+		const PlayerNumber owner = area.location().field->get_owned_by();
+		if (owner != neutral() && owner != player_number) {
+			return false;
+		}
+	} while (area.advance(map));
+
+	// then check whether we can build a port like if reached from land
+	if ((coord.field->nodecaps() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG &&
+	    !map.find_portdock(coord, false).empty()) {
+		return true;
 	}
 
-	// All fields of the port + their neighboring fields (for the border) must
-	// be conquerable without military influence.
-	Widelands::FCoords c[4];  //  Big buildings occupy 4 locations.
+	// now check if we are allowed to build one although some conditions not met
+	// All fields of the port and some neighbouring fields must be free of
+	// blocking immovables.
+
+	// Immediate neighbours must not have immovables, except for trees, which can
+	// spread, but will be cleared by exp_construct_port()
+	Widelands::FCoords c[7];
 	c[0] = coord;
 	map.get_ln(coord, &c[1]);
 	map.get_tln(coord, &c[2]);
 	map.get_trn(coord, &c[3]);
+	map.get_rn(coord, &c[4]);
+	map.get_brn(coord, &c[5]);
+	map.get_bln(coord, &c[6]);
 	for (const Widelands::FCoords& fc : c) {
-		MapRegion<Area<FCoords>> area(map, Area<FCoords>(fc, 1));
-		do {
-			if (!can_support_port(player_number, area.location())) {
-				return false;
-			}
-		} while (area.advance(map));
-	}
-
-	// Also all areas around the flag must be conquerable and must not contain
-	// another flag already.
-	FCoords flag_position;
-	map.get_brn(coord, &flag_position);
-	MapRegion<Area<FCoords>> area(map, Area<FCoords>(flag_position, 1));
-	do {
-		if (!can_support_port(player_number, area.location())) {
+		if (!can_support_port(fc, BaseImmovable::NONE)) {  // check for blocking immovables
 			return false;
 		}
-	} while (area.advance(map));
+	}
+
+	// Next neighbours to the North and the West may have size = small immovables
+	Widelands::FCoords cn[7];
+	map.get_bln(c[1], &cn[0]);
+	map.get_ln(c[1], &cn[1]);
+	map.get_tln(c[1], &cn[2]);
+	map.get_tln(c[2], &cn[3]);
+	map.get_trn(c[2], &cn[4]);
+	map.get_trn(c[3], &cn[5]);
+	map.get_rn(c[3], &cn[6]);
+	for (const Widelands::FCoords& fc : cn) {
+		if (!can_support_port(fc, BaseImmovable::SMALL)) {  // check for blocking immovables
+			return false;
+		}
+	}
+
 	return true;
 }
 
@@ -412,7 +437,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			// Check whether the maximum theoretical possible NodeCap of the field
 			// is of the size big and whether it can theoretically be a port space
 			if ((map->get_max_nodecaps(game, fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
-			    map->find_portdock(fc, false).empty()) {
+			    map->find_portdock(fc, true).empty()) {
 				continue;
 			}
 
@@ -439,6 +464,8 @@ void Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			             _("An expedition ship found a new port build space."),
 			             "images/wui/editor/fsel_editor_set_port_space.png");
 		}
+	} else if (ship_state_ == ShipStates::kExpeditionPortspaceFound) {
+		check_port_space_still_available(game);
 	}
 }
 
@@ -717,6 +744,28 @@ void Ship::set_ship_state_and_notify(ShipStates state, NoteShip::Action action) 
 	}
 }
 
+bool Ship::check_port_space_still_available(Game& game) {
+	assert(expedition_);
+	// recheck ownership before setting the csite
+	Map* map = game.mutable_map();
+	if (expedition_->seen_port_buildspaces.empty()) {
+		log_warn_time(
+		   game.get_gametime(), "Expedition list of seen port spaces is unexpectedly empty!\n");
+		return false;
+	}
+	const FCoords fc = map->get_fcoords(expedition_->seen_port_buildspaces.front());
+	if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
+		set_ship_state_and_notify(
+		   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
+		send_message(game, _("Port Space Lost!"), _("No Port Can Be Built"),
+		             _("A discovered port build space is not available for building a port anymore."),
+		             "images/wui/editor/fsel_editor_set_port_space.png");
+		expedition_->seen_port_buildspaces.clear();
+		return false;
+	}
+	return true;
+}
+
 void Ship::set_economy(const Game& game, Economy* e, WareWorker type) {
 	// Do not check here that the economy actually changed, because on loading
 	// we rely that wares really get reassigned our economy.
@@ -883,23 +932,21 @@ WalkingDir Ship::get_scouting_direction() const {
 /// @note only called via player command
 void Ship::exp_construct_port(Game& game, const Coords& c) {
 	assert(expedition_);
-	const MapObject* mo = game.map().get_fcoords(c).field->get_immovable();
-	if ((mo != nullptr) && mo->descr().type() >= MapObjectType::BUILDING) {
-		// Another expedition ship (or an enemy player) was a second faster
-		set_ship_state_and_notify(
-		   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
+	// recheck ownership and availability before setting the csite
+	if (!check_port_space_still_available(game)) {
 		return;
 	}
 	get_owner()->force_csite(c, get_owner()->tribe().port()).set_destruction_blocked(true);
 
-	// Make sure that we have space to squeeze in a lumberjack
-	std::vector<ImmovableFound> trees_rocks;
-	game.map().find_immovables(game, Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
-	                           FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
-	game.map().find_immovables(game, Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
-	                           FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
-	for (auto& immo : trees_rocks) {
-		immo.object->remove(game);
+	// Make sure that we have space to squeeze in a lumberjack or a quarry
+	std::vector<ImmovableFound> all_immos;
+	game.map().find_immovables(game, Area<FCoords>(game.map().get_fcoords(c), 3), &all_immos,
+	                           FindImmovableType(MapObjectType::IMMOVABLE));
+	for (auto& immo : all_immos) {
+		if (immo.object->descr().has_attribute(MapObjectDescr::get_attribute_id("rocks")) ||
+		    dynamic_cast<Immovable*>(immo.object)->descr().has_terrain_affinity()) {
+			immo.object->remove(game);
+		}
 	}
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionColonizing, NoteShip::Action::kDestinationChanged);

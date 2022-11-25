@@ -48,8 +48,10 @@ Coords parse_coords(const std::string& name, const char* const coords, const Ext
 }  // namespace
 
 void set_coords(const std::string& name, const Coords& value, Section* section) {
-	char buffer[sizeof("-32769 -32769")];
-	sprintf(buffer, "%i %i", value.x, value.y);
+	constexpr int size = sizeof("-32769 -32769");
+	char buffer[size];
+	// No need to check result as result should always fit
+	snprintf(buffer, size, "%i %i", value.x, value.y);
 	section->set_string(name.c_str(), buffer);
 }
 

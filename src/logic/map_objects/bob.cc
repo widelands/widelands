@@ -60,6 +60,15 @@ BobDescr::BobDescr(const std::string& init_descname,
 	}
 }
 
+BobDescr::BobDescr(const std::string& init_name,
+                   const std::string& init_descname,
+                   const MapObjectType init_type,
+                   MapObjectDescr::OwnerType owner_type)
+   : MapObjectDescr(init_type, init_name, init_descname),
+     owner_type_(owner_type),
+     vision_range_(0) {
+}
+
 /**
  * Only tribe bobs (workers, ships) have a vision range, since it would be irrelevant
  * for world bobs (critters).
