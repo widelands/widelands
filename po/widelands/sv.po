@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-10 03:40+0000\n"
+"POT-Creation-Date: 2022-11-22 03:30+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Niklas Nordgren, 2022\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
@@ -2137,76 +2137,89 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "Kan inte hitta mer resurser."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:438
+#: ../../src/logic/map_objects/tribes/ship.cc:463
 msgid "Port Space"
 msgstr "Hamnplats"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:438
+#: ../../src/logic/map_objects/tribes/ship.cc:463
 msgid "Port Space Found"
 msgstr "Hamnplats hittad"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:439
+#: ../../src/logic/map_objects/tribes/ship.cc:464
 msgid "An expedition ship found a new port build space."
 msgstr "Ett expeditionsskepp hittade en ny plats för att bygga en hamn."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:560
+#: ../../src/logic/map_objects/tribes/ship.cc:587
 msgid "Island Circumnavigated"
 msgstr "Ön runtseglad"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:560
+#: ../../src/logic/map_objects/tribes/ship.cc:587
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Väntar"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:561
+#: ../../src/logic/map_objects/tribes/ship.cc:588
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Ett expeditionsskepp seglade runt sin ö utan några händelser."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:624
+#: ../../src/logic/map_objects/tribes/ship.cc:651
 msgid "Coast Reached"
 msgstr "Kust nådd"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:624
+#: ../../src/logic/map_objects/tribes/ship.cc:651
 msgid "Land Ahoy!"
 msgstr "Land i sikte!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:625
+#: ../../src/logic/map_objects/tribes/ship.cc:652
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Ett expeditionsskepp nådde en kust och väntar på order."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:676
+#: ../../src/logic/map_objects/tribes/ship.cc:703
 msgid "New port construction site is gone"
 msgstr "Plats för hamnbygge har försvunnit"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:676
+#: ../../src/logic/map_objects/tribes/ship.cc:703
 msgid "Port Lost!"
 msgstr "Hamn förlorad!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:677
+#: ../../src/logic/map_objects/tribes/ship.cc:704
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Avlastning av varor misslyckades, expeditionen är avbruten."
 
+#: ../../src/logic/map_objects/tribes/ship.cc:760
+msgid "No Port Can Be Built"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:760
+msgid "Port Space Lost!"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:761
+msgid ""
+"A discovered port build space is not available for building a port anymore."
+msgstr ""
+
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:858
+#: ../../src/logic/map_objects/tribes/ship.cc:907
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedition"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:858
+#: ../../src/logic/map_objects/tribes/ship.cc:907
 msgid "Expedition Ready"
 msgstr "Expedition klar"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:859
+#: ../../src/logic/map_objects/tribes/ship.cc:908
 msgid "An expedition ship is waiting for your commands."
 msgstr "Ett expeditionsskepp väntar på dina order."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1019
+#: ../../src/logic/map_objects/tribes/ship.cc:1066
 #: ../../src/wui/seafaring_statistics_menu.cc:239
 msgctxt "ship_state"
 msgid "Shipping"
@@ -2215,7 +2228,7 @@ msgstr "Fraktar"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1022
+#: ../../src/logic/map_objects/tribes/ship.cc:1069
 #: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Empty"
@@ -2223,7 +2236,7 @@ msgstr "Tomt"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1026
+#: ../../src/logic/map_objects/tribes/ship.cc:1073
 #: ../../src/wui/seafaring_statistics_menu.cc:241
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2231,14 +2244,14 @@ msgstr "Väntar"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1030
+#: ../../src/logic/map_objects/tribes/ship.cc:1077
 #: ../../src/wui/seafaring_statistics_menu.cc:243
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Rekognocerar"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1034
+#: ../../src/logic/map_objects/tribes/ship.cc:1081
 #: ../../src/wui/seafaring_statistics_menu.cc:245
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2247,7 +2260,7 @@ msgstr "Hamnplats hittad"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1039
+#: ../../src/logic/map_objects/tribes/ship.cc:1086
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Grundar koloni"
@@ -2270,7 +2283,7 @@ msgstr "Skepp"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
-#: ../../src/wui/general_statistics_menu.cc:153
+#: ../../src/wui/general_statistics_menu.cc:154
 #: ../../src/wui/interactive_player.cc:336
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
@@ -2282,7 +2295,7 @@ msgstr "Varor"
 #. need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:180
 #: ../../src/wui/economy_options_window.cc:77
-#: ../../src/wui/general_statistics_menu.cc:144
+#: ../../src/wui/general_statistics_menu.cc:145
 #: ../../src/wui/productionsitewindow.cc:111
 #: ../../src/wui/warehousewindow.cc:268
 msgid "Workers"
@@ -2292,7 +2305,7 @@ msgstr "Arbetare"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:329
-#: ../../src/wui/general_statistics_menu.cc:149
+#: ../../src/wui/general_statistics_menu.cc:150
 #: ../../src/wui/interactive_player.cc:331 ../../src/wui/minimap.cc:199
 msgid "Buildings"
 msgstr "Byggnader"
@@ -2418,7 +2431,7 @@ msgstr "En kartfil är ogiltig:\n%s"
 msgid "This objective has no description."
 msgstr "Detta objektiv har ingen beskrivning"
 
-#: ../../src/logic/player.cc:1938
+#: ../../src/logic/player.cc:1945
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -8060,35 +8073,39 @@ msgstr "Tillägg:"
 msgid "Game data error:"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:138
+#: ../../src/wui/general_statistics_menu.cc:139
 msgid "Land"
 msgstr "Mark"
 
-#: ../../src/wui/general_statistics_menu.cc:159
+#: ../../src/wui/general_statistics_menu.cc:160
 msgid "Productivity"
 msgstr "Produktivitet"
 
-#: ../../src/wui/general_statistics_menu.cc:164
+#: ../../src/wui/general_statistics_menu.cc:165
 msgid "Casualties"
 msgstr "Stupade"
 
-#: ../../src/wui/general_statistics_menu.cc:168
+#: ../../src/wui/general_statistics_menu.cc:169
 msgid "Kills"
 msgstr "Antal dödade"
 
-#: ../../src/wui/general_statistics_menu.cc:174
+#: ../../src/wui/general_statistics_menu.cc:175
 msgid "Military buildings lost"
 msgstr "Förlorade militära byggnader"
 
-#: ../../src/wui/general_statistics_menu.cc:179
+#: ../../src/wui/general_statistics_menu.cc:180
 msgid "Military buildings defeated"
 msgstr "Besegrade militära byggnader"
 
-#: ../../src/wui/general_statistics_menu.cc:184
+#: ../../src/wui/general_statistics_menu.cc:185
 msgid "Civilian buildings lost"
 msgstr "Förlorade civila byggnader"
 
-#: ../../src/wui/general_statistics_menu.cc:189
+#: ../../src/wui/general_statistics_menu.cc:190
+msgid "Civilian buildings destroyed"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:195
 msgid "Military"
 msgstr "Militär"
 
@@ -9071,18 +9088,19 @@ msgstr "Försvar: %u"
 msgid "Evade: %u"
 msgstr "Hoppa undan: %u"
 
-#: ../../src/wui/soldier_statistics_menu.cc:135
-msgid "Overview"
-msgstr "Översikt"
-
 #: ../../src/wui/soldier_statistics_menu.cc:220
 msgid "By Attribute"
 msgstr "Efter attribut"
 
-#: ../../src/wui/soldier_statistics_menu.cc:238
-#: ../../src/wui/soldier_statistics_menu.cc:244
-#: ../../src/wui/soldier_statistics_menu.cc:250
-#: ../../src/wui/soldier_statistics_menu.cc:256
+#: ../../src/wui/soldier_statistics_menu.cc:234
+#, c-format
+msgid "Overview (%u)"
+msgstr ""
+
+#: ../../src/wui/soldier_statistics_menu.cc:239
+#: ../../src/wui/soldier_statistics_menu.cc:245
+#: ../../src/wui/soldier_statistics_menu.cc:251
+#: ../../src/wui/soldier_statistics_menu.cc:257
 #, c-format
 msgid "×%u"
 msgstr "×%u"

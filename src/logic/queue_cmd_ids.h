@@ -99,12 +99,13 @@ enum class QueueCommandTypes : uint8_t {
 	kCalculateStatistics,
 	kExpeditionConfig,
 	kPickCustomStartingPosition,  // 135
-	kCallEconomyBalance = 200,
 
+	kCallEconomyBalance = 200,
 	kDeleteMessage,
 	kToggleMuteMessages,
 	kMarkMapObjectForRemoval,
-	kDiplomacy,  // 204
+	kDiplomacy,
+	kPinnedNote,  // 205
 
 	kNetCheckSync = 250,
 	kReplaySyncWrite,

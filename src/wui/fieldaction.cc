@@ -27,6 +27,7 @@
 #include "graphic/style_manager.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -180,6 +181,7 @@ public:
 	void act_scout();
 	void act_mark_removal();
 	void act_unmark_removal();
+	void act_pinned_note();
 
 private:
 	uint32_t add_tab(const std::string& name,
@@ -240,6 +242,7 @@ constexpr const char* const kImgButtonScout = "images/wui/menus/watch_follow.png
 constexpr const char* const kImgButtonMarkRemoval = "images/wui/fieldaction/menu_mark_removal.png";
 constexpr const char* const kImgButtonUnmarkRemoval =
    "images/wui/fieldaction/menu_unmark_removal.png";
+constexpr const char* const kImgButtonPinnedNote = "images/wui/fieldaction/pinned_note.png";
 
 constexpr const char* const kImgTabTarget = "images/wui/fieldaction/menu_tab_target.png";
 
@@ -368,8 +371,9 @@ void FieldActionWindow::add_buttons_auto() {
 	UI::Box& watchbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	upcast(InteractiveGameBase, igbase, &ibase());
+	upcast(InteractivePlayer, ipl, igbase);
 
-	if (upcast(InteractivePlayer, ipl, igbase)) {
+	if (ipl != nullptr) {
 		// Target immovables for removal by workers
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
 			if (mo->is_marked_for_removal(ipl->player_number())) {
@@ -494,9 +498,14 @@ void FieldActionWindow::add_buttons_auto() {
 		           _("Watch field in a separate window"));
 	}
 
+	if (ipl != nullptr) {
+		add_button(&watchbox, "pinned_note", kImgButtonPinnedNote,
+		           &FieldActionWindow::act_pinned_note, _("Pinned note"));
+	}
+
 	if (ibase().get_display_flag(InteractiveBase::dfDebug)) {
 		add_button(
-		   &watchbox, "debug", kImgDebug, &FieldActionWindow::act_debug, _("Show Debug Window"));
+		   &watchbox, "debug", kImgDebug, &FieldActionWindow::act_debug, _("Show debug window"));
 	}
 
 	// Add tabs
@@ -719,6 +728,16 @@ Open a watch window for the given field and delete self.
 void FieldActionWindow::act_watch() {
 	upcast(InteractiveGameBase, igbase, &ibase());
 	show_watch_window(*igbase, node_);
+	reset_mouse_and_die();
+}
+
+/*
+===============
+Open the notes editor for the given field and delete self.
+===============
+*/
+void FieldActionWindow::act_pinned_note() {
+	dynamic_cast<InteractivePlayer&>(ibase()).edit_pinned_note(node_);
 	reset_mouse_and_die();
 }
 
