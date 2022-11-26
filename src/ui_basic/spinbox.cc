@@ -35,7 +35,7 @@
 namespace UI {
 
 struct SpinBoxImpl {
-	/// Value hold by the spinbox
+	/// Value held by the spinbox
 	int32_t value = 0;
 
 	/// Minimum and maximum that \ref value may reach
@@ -94,7 +94,9 @@ SpinBox::SpinBox(Panel* const parent,
      type_(type),
      sbi_(new SpinBoxImpl),
      unit_width_(unit_w),
-     button_height_(20),
+     button_size_(20),
+     bigstep_button_width_(32),
+     buttons_width_(0),
      padding_(2),
      number_of_paddings_(type_ == SpinBox::Type::kBig ? 2 : 0) {
 	if (type_ == SpinBox::Type::kValueList) {
@@ -123,25 +125,32 @@ SpinBox::SpinBox(Panel* const parent,
 	box_->add(sbi_->label);
 	box_->add(sbi_->label_padding);
 
-	sbi_->text = new UI::Button(box_, "value", 0, 0, 0, button_height_,
+	sbi_->text = new UI::Button(box_, "value", 0, 0, 0, button_size_,
 	                            style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                                               UI::ButtonStyle::kWuiSecondary,
 	                            "");
 	sbi_->text->set_disable_style(UI::ButtonDisableStyle::kPermpressed);
 	sbi_->text->set_enabled(false);
 
-	bool is_big = type_ == SpinBox::Type::kBig;
-
 	sbi_->step_size = step_size;
-	sbi_->big_step_size = big_step_size;
+
+	bool is_big = type_ == SpinBox::Type::kBig;
+	if (is_big) {
+		sbi_->big_step_size = big_step_size;
+	} else {
+		// Step size for PgUp/PgDn
+		assert(step_size > 0);
+		assert(sbi_->max >= sbi_->min);
+		sbi_->big_step_size = step_size * (((sbi_->max - sbi_->min) / step_size) <= 20 ? 5 : 10);
+	}
 
 	sbi_->button_minus =
-	   new Button(box_, "-", 0, 0, button_height_, button_height_, sbi_->button_style,
+	   new Button(box_, "-", 0, 0, button_size_, button_size_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_left.png" :
                                              "images/ui_basic/scrollbar_down.png"),
 	              format(_("Decrease the value by %s"), unit_text(sbi_->step_size)));
 	sbi_->button_plus =
-	   new Button(box_, "+", 0, 0, button_height_, button_height_, sbi_->button_style,
+	   new Button(box_, "+", 0, 0, button_size_, button_size_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_right.png" :
                                              "images/ui_basic/scrollbar_up.png"),
 	              format(_("Increase the value by %s"), unit_text(sbi_->step_size)));
@@ -150,11 +159,11 @@ SpinBox::SpinBox(Panel* const parent,
 
 	if (is_big) {
 		sbi_->button_ten_minus =
-		   new Button(box_, "--", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
+		   new Button(box_, "--", 0, 0, bigstep_button_width_, button_size_, sbi_->button_style,
 		              g_image_cache->get("images/ui_basic/scrollbar_left_fast.png"),
 		              format(_("Decrease the value by %s"), unit_text(sbi_->big_step_size)));
 		sbi_->button_ten_plus =
-		   new Button(box_, "++", 0, 0, 2 * button_height_, button_height_, sbi_->button_style,
+		   new Button(box_, "++", 0, 0, bigstep_button_width_, button_size_, sbi_->button_style,
 		              g_image_cache->get("images/ui_basic/scrollbar_right_fast.png"),
 		              format(_("Increase the value by %s"), unit_text(sbi_->big_step_size)));
 		sbi_->button_ten_minus->set_can_focus(false);
@@ -211,6 +220,8 @@ SpinBox::SpinBox(Panel* const parent,
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
 
+	buttons_width_ = 2 * button_size_ + (is_big ? 2 * bigstep_button_width_ : 0);
+
 	set_can_focus(true);
 	layout();
 	update();
@@ -223,7 +234,7 @@ SpinBox::~SpinBox() {
 
 bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
-		switch (get_keyboard_change(code, type_ == SpinBox::Type::kBig)) {
+		switch (get_keyboard_change(code, true)) {
 		case ChangeType::kNone:
 			break;
 		case ChangeType::kPlus:
@@ -251,16 +262,17 @@ bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 
 bool SpinBox::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
-	if (change == 0) {
-		return false;
-	}
-	if ((change > 0) && ((sbi_->button_plus) != nullptr)) {
+	if (change != 0) {
 		change_value(change * sbi_->step_size);
+		return true;
 	}
-	if ((change < 0) && ((sbi_->button_minus) != nullptr)) {
-		change_value(change * sbi_->step_size);
+	// Try big step
+	change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValueBig, x, y, modstate);
+	if (change != 0) {
+		change_value(change * sbi_->big_step_size);
+		return true;
 	}
-	return true;
+	return false;
 }
 
 void SpinBox::layout() {
@@ -276,12 +288,12 @@ void SpinBox::layout() {
 		                 get_w(), unit_width_, padding_);
 	}
 
-	if (unit_width_ < (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_)) {
+	const uint32_t unit_text_min_width = button_size_;
+	if (unit_width_ < unit_text_min_width + buttons_width_) {
 		log_warn("Not enough space to draw spinbox \"%s\".\n"
 		         "Width %d is smaller than required width %d."
 		         "Please report as a bug.\n",
-		         sbi_->label->get_text().c_str(), unit_width_,
-		         (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_));
+		         sbi_->label->get_text().c_str(), unit_width_, unit_text_min_width + buttons_width_);
 	}
 
 	if (get_w() >= static_cast<int32_t>(unit_width_ + padding_)) {
@@ -295,18 +307,10 @@ void SpinBox::layout() {
 		sbi_->label_padding->set_visible(false);
 	}
 
-	if (type_ == SpinBox::Type::kBig) {
-		sbi_->text->set_desired_size(unit_width_ - 2 * sbi_->button_ten_plus->get_w() -
-		                                2 * sbi_->button_minus->get_w() -
-		                                number_of_paddings_ * padding_,
-		                             button_height_);
-	} else {
-		sbi_->text->set_desired_size(
-		   unit_width_ - 2 * sbi_->button_minus->get_w() - number_of_paddings_ * padding_,
-		   button_height_);
-	}
+	sbi_->text->set_desired_size(
+	   unit_width_ - buttons_width_ - number_of_paddings_ * padding_, button_size_);
 
-	uint32_t box_height = std::max(sbi_->label->get_h(), static_cast<int32_t>(button_height_));
+	uint32_t box_height = std::max(sbi_->label->get_h(), static_cast<int32_t>(button_size_));
 	box_->set_size(get_w(), box_height);
 	set_desired_size(get_w(), box_height);
 	set_size(get_w(), box_height);
@@ -364,8 +368,14 @@ void SpinBox::set_value(int32_t const value) {
 		return;
 	}
 	if (value > sbi_->max) {
+		if (sbi_->value == sbi_->max) {
+			return;
+		}
 		sbi_->value = sbi_->max;
 	} else if (value < sbi_->min) {
+		if (sbi_->value == sbi_->min) {
+			return;
+		}
 		sbi_->value = sbi_->min;
 	} else {
 		sbi_->value = value;

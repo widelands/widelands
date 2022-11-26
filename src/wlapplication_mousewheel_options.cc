@@ -179,6 +179,7 @@ static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options =
    {MousewheelOptionID::kAlwaysOn, MousewheelOption::create_bool("", true)},
    {MousewheelOptionID::kDisabled, MousewheelOption::create_bool("", false)},
    {MousewheelOptionID::kNoMod, MousewheelOption::create_mod("", KMOD_NONE)},
+   {MousewheelOptionID::kModBigStep, MousewheelOption::create_mod("", KMOD_CTRL)},
 
    {MousewheelOptionID::kInvertedXDetected,  //
     MousewheelOption::create_bool("last_autoinvert_x", false)},
@@ -201,6 +202,13 @@ static const Sign2D kDefaultSignScroll(kSignScrollX, kSignScrollY);
 static std::map<MousewheelHandlerConfigID, MousewheelHandlerOptions> mousewheel_handlers = {
    {MousewheelHandlerConfigID::kChangeValue,
     MousewheelHandlerOptions(MousewheelOptionID::kNoMod,
+                             MousewheelOptionID::kAlwaysOn,
+                             MousewheelOptionID::kUIChangeValueInvertX,
+                             MousewheelOptionID::kAlwaysOn,
+                             MousewheelOptionID::kUIChangeValueInvertY,
+                             kDefaultSignValue)},
+   {MousewheelHandlerConfigID::kChangeValueBig,
+    MousewheelHandlerOptions(MousewheelOptionID::kModBigStep,
                              MousewheelOptionID::kAlwaysOn,
                              MousewheelOptionID::kUIChangeValueInvertX,
                              MousewheelOptionID::kAlwaysOn,
