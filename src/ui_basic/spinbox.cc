@@ -18,6 +18,7 @@
 
 #include "ui_basic/spinbox.h"
 
+#include <cassert>
 #include <SDL_mouse.h>
 
 #include "base/i18n.h"
@@ -102,6 +103,12 @@ SpinBox::SpinBox(Panel* const parent,
 	} else {
 		sbi_->min = minval;
 		sbi_->max = maxval;
+#ifndef NDEBUG
+		// Prevent integer overflows
+		const int32_t max_step = std::max(abs(step_size), abs(big_step_size));
+		assert(maxval < std::numeric_limits<int32_t>(max) - max_step);
+		assert(minval > std::numeric_limits<int32_t>(min) + max_step);
+#endif
 	}
 	sbi_->value = startval;
 	sbi_->unit = unit;
@@ -344,17 +351,8 @@ void SpinBox::set_unit_width(uint32_t width) {
  * private function called by spinbox buttons to in-/decrease the value
  */
 void SpinBox::change_value(int32_t const value) {
-	if (value == 0) {
-		return;
-	}
-	// Avoid integer overflows
-	int64_t new_value = static_cast<int64_t>(sbi_->value) + static_cast<int64_t>(value);
-	if (new_value > sbi_->max) {
-		set_value(sbi_->max);
-	} else if (new_value < sbi_->min) {
-		set_value(sbi_->min);
-	} else {
-		set_value(new_value);
+	if (value != 0) {
+		set_value(value + sbi_->value);
 	}
 }
 
