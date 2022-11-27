@@ -102,12 +102,6 @@ public:
 	}
 
 private:
-	// Read the table to add needed food and weapons for training a property.
-	// Properties are health, attack, defense, and evade.
-	void add_training_inputs(const LuaTable& table,
-	                         std::vector<std::vector<std::string>>* food,
-	                         std::vector<std::string>* weapons);
-
 	void update_level(TrainingAttribute attrib, unsigned from_level, unsigned to_level);
 
 	//  TODO(unknown): These variables should be per soldier type. They should be in a

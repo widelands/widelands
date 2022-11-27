@@ -84,43 +84,26 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 	//  These sections also seem redundant. Eliminate them (having the
 	//  programs should be enough).
 	std::unique_ptr<LuaTable> items_table;
-	if (table.has_key("soldier health")) {
-		items_table = table.get_table("soldier health");
-		// TODO(GunChleoc): Compatibility, remove these after v1.0
-		if (items_table->has_key<std::string>("min_level")) {
-			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			         "health' are no longer needed\n",
-			         name().c_str());
-		}
-		add_training_inputs(*items_table, &food_health_, &weapons_health_);
-	}
 
+	// TODO(hessenfarmer): Compatibility, remove these after v1.2
+	if (table.has_key("soldier health")) {
+		log_warn("Trainingsite '%s': Key 'soldier_health' is no longer needed\n",
+				 name().c_str());
+	}
+	// TODO(hessenfarmer): Compatibility, remove these after v1.2
 	if (table.has_key("soldier attack")) {
-		items_table = table.get_table("soldier attack");
-		if (items_table->has_key<std::string>("min_level")) {
-			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			         "attack' are no longer needed\n",
-			         name().c_str());
-		}
-		add_training_inputs(*items_table, &food_attack_, &weapons_attack_);
+		log_warn("Trainingsite '%s': Key 'soldier_attack' is no longer needed\n",
+				 name().c_str());
 	}
+	// TODO(hessenfarmer): Compatibility, remove these after v1.2
 	if (table.has_key("soldier defense")) {
-		items_table = table.get_table("soldier defense");
-		if (items_table->has_key<std::string>("min_level")) {
-			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			         "defense' are no longer needed\n",
-			         name().c_str());
-		}
-		add_training_inputs(*items_table, &food_defense_, &weapons_defense_);
+		log_warn("Trainingsite '%s': Key 'soldier_defense' is no longer needed\n",
+				 name().c_str());
 	}
+	// TODO(hessenfarmer): Compatibility, remove these after v1.2
 	if (table.has_key("soldier evade")) {
-		items_table = table.get_table("soldier evade");
-		if (items_table->has_key<std::string>("min_level")) {
-			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			         "evade' are no longer needed\n",
-			         name().c_str());
-		}
-		add_training_inputs(*items_table, &food_evade_, &weapons_evade_);
+		log_warn("Trainingsite '%s': Key 'soldier_evade' is no longer needed\n",
+				 name().c_str());
 	}
 
 	// Check dependencies between 'checksoldier' & 'train', and set min and max levels
@@ -243,28 +226,6 @@ int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at,
 	}
 
 	return rtv;
-}
-
-void TrainingSiteDescr::add_training_inputs(const LuaTable& table,
-                                            std::vector<std::vector<std::string>>* food,
-                                            std::vector<std::string>* weapons) {
-
-	if (table.has_key("food")) {
-		std::unique_ptr<LuaTable> food_table = table.get_table("food");
-		for (const int key : food_table->keys<int>()) {
-			std::vector<std::string> food_vector;
-			for (const std::string& food_item :
-			     food_table->get_table(key)->array_entries<std::string>()) {
-				food_vector.push_back(food_item);
-			}
-			food->push_back(food_vector);
-		}
-	}
-	if (table.has_key("weapons")) {
-		for (const std::string& weapon : table.get_table("weapons")->array_entries<std::string>()) {
-			weapons->push_back(weapon);
-		}
-	}
 }
 
 void TrainingSiteDescr::update_level(TrainingAttribute attrib, unsigned from_level, unsigned to_level) {
