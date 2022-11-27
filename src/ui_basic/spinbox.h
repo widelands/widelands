@@ -83,6 +83,7 @@ private:
 	void update();
 	void change_value(int32_t);
 	const std::string unit_text(int32_t value) const;
+	void calculate_bigstep();
 
 	const SpinBox::Type type_;
 	SpinBoxImpl* sbi_;

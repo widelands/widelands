@@ -141,7 +141,7 @@ SpinBox::SpinBox(Panel* const parent,
 		// Step size for PgUp/PgDn
 		assert(step_size > 0);
 		assert(sbi_->max >= sbi_->min);
-		sbi_->big_step_size = step_size * (((sbi_->max - sbi_->min) / step_size) <= 20 ? 5 : 10);
+		calculate_bigstep();
 	}
 
 	sbi_->button_minus =
@@ -388,6 +388,7 @@ void SpinBox::set_value_list(const std::vector<int32_t>& values) {
 	sbi_->values = values;
 	sbi_->min = 0;
 	sbi_->max = values.size() - 1;
+	calculate_bigstep();
 	update();
 }
 
@@ -397,12 +398,33 @@ void SpinBox::set_value_list(const std::vector<int32_t>& values) {
 void SpinBox::set_interval(int32_t const min, int32_t const max) {
 	sbi_->max = max;
 	sbi_->min = min;
+	bool changed_val = false;
 	if (sbi_->value > max) {
 		sbi_->value = max;
+		changed_val = true;
 	} else if (sbi_->value < min) {
 		sbi_->value = min;
+		changed_val = true;
 	}
+	calculate_bigstep();
 	update();
+	if (changed_val) {
+		changed();
+	}
+}
+
+void SpinBox::calculate_bigstep() {
+	if (type_ == SpinBox::Type::kBig) {
+		// Should have been set when the spinbox was set up, don't mess with it
+		return;
+	}
+	// Second part also prevents division by 0 in next step
+	if (sbi_->max <= sbi_->min || sbi_->step_size < 1) {
+		sbi_->big_step_size = 0;
+		return;
+	}
+	// It's OK if it becomes min/max when interval is smaller than 5
+	sbi_->big_step_size = sbi_->step_size * (((sbi_->max - sbi_->min) / sbi_->step_size) <= 20 ? 5 : 10);
 }
 
 /**
