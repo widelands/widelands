@@ -556,74 +556,6 @@ function building_help_dependencies_production(tribe, building_description)
 end
 
 -- RST
--- .. function:: building_help_dependencies_training(tribe, building_description)
---
---    Shows the production dependencies for a training site.
---
---    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that has this building.
---    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
---                               that we are displaying this help for.
---    :returns: rt string with training dependencies information.
---
-function building_help_dependencies_training(tribe, building_description)
-   local result = ""
-   if (building_description.max_health and building_description.min_health) then
-      result = result .. h2(_("Health Training"))
-      result = result .. p(_("Trains ‘Health’ from %1% up to %2%"):
-            bformat(building_description.min_health, building_description.max_health+1))
-      result = result .. h3(_("Soldiers:"))
-      result = result ..
-         dependencies_basic({
-            "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. building_description.min_health .. ".png",
-            building_description.icon_name,
-            "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. (building_description.max_health + 1) ..".png"})
-      result = result .. dependencies_training_food(building_description.food_health)
-      result = result .. dependencies_training_weapons(building_description.weapons_health, tribe.name)
-   end
-   if (building_description.max_attack and building_description.min_attack) then
-      result = result .. h2(_("Attack Training"))
-      -- TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
-      result = result .. p(_("Trains ‘Attack’ from %1% up to %2%"):
-         bformat(building_description.min_attack, building_description.max_attack+1))
-      result = result .. h3(_("Soldiers:")) ..
-         dependencies_basic({
-            "tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. building_description.min_attack .. ".png",
-            building_description.icon_name,
-            "tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. (building_description.max_attack + 1) ..".png"})
-      result = result .. dependencies_training_food(building_description.food_attack)
-      result = result .. dependencies_training_weapons(building_description.weapons_attack, tribe.name)
-   end
-   if (building_description.max_defense and building_description.min_defense) then
-      result = result .. h2(_("Defense Training"))
-      result = result .. p( _("Trains ‘Defense’ from %1% up to %2%"):
-            bformat(building_description.min_defense, building_description.max_defense+1))
-            result = result .. h3(_("Soldiers:"))
-      result = result ..
-         dependencies_basic({
-            "tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. building_description.min_defense .. ".png",
-            building_description.icon_name,
-            "tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. (building_description.max_defense + 1) ..".png"})
-      result = result .. dependencies_training_food(building_description.food_defense)
-      result = result .. dependencies_training_weapons(building_description.weapons_defense, tribe.name)
-   end
-   if (building_description.max_evade and building_description.min_evade) then
-      result = result .. h2(_("Evade Training"))
-      result = result .. p( _("Trains ‘Evade’ from %1% up to %2%"):
-            bformat(building_description.min_evade, building_description.max_evade+1))
-      result = result .. h3(_("Soldiers:"))
-      result = result ..
-         dependencies_basic({
-            "tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. building_description.min_evade .. ".png",
-            building_description.icon_name,
-            "tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. (building_description.max_evade + 1) ..".png"})
-      result = result .. dependencies_training_food(building_description.food_evade)
-      result = result .. dependencies_training_weapons(building_description.weapons_evade, tribe.name)
-   end
-   return result
-end
-
-
--- RST
 --
 -- .. function:: building_help_building_section(building_description)
 --
@@ -889,18 +821,36 @@ end
 function building_help_production_section(tribe, building_description)
    -- Produced items
    local result = h2(_("Production"))
-   if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
-      local checked_programs ={}
-      for i, ware_description in ipairs(building_description.output_ware_types) do
-         programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, ware_description)
-         -- check if the ware is collected (no producing program)
-         if #programs == 0 then
-            result = result .. h3(_("Ware produced:"))
-            result = result .. help_ware_amount_line(ware_description, 1)
-            break
-         end
+   local checked_programs = {}
+   if (building_description.type_name == "trainingsite") then
+      programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, nil)
+      if (not checked_programs[program]) then
          for j, program in ipairs(programs) do
-            if (ware_counters[program] > 0) and not checked_programs[program] then
+            trained = building_description:trained_soldiers(program)
+            -- TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
+            result = result .. h3(_("Trained skill:"))
+            if (trained[1] == "Health") then
+               result = result .. p(_("‘Health’ from %1% up to %2%"):bformat(trained[2], trained[3]))
+               result = result .. dependencies_basic({
+               "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. trained[2] .. ".png",
+               "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. trained[3] ..".png"})
+            elseif (trained[1] == "Attack") then
+               result = result .. p(_("‘Attack’ from %1% up to %2%"):bformat(trained[2], trained[3]))
+               result = result .. dependencies_basic({
+               "tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. trained[2] .. ".png",
+               "tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. trained[3] ..".png"})
+            elseif (trained[1] == "Defense") then
+               result = result .. p(_("‘Defense’ from %1% up to %2%"):bformat(trained[2], trained[3]))
+               result = result .. dependencies_basic({
+               "tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. trained[2] .. ".png",
+               "tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. trained[3] ..".png"})
+            elseif (trained[1] == "Evade") then
+               result = result .. p(_("‘Evade’ from %1% up to %2%"):bformat(trained[2], trained[3]))
+               result = result .. dependencies_basic({
+               "tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. trained[2] .. ".png",
+               "tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. trained[3] ..".png"})
+            end
+            if (ware_counters[program] > 0) then
                if (ware_counters[program] == 1) then
                   -- TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
                   result = result .. h3(_("Ware produced:"))
@@ -909,21 +859,47 @@ function building_help_production_section(tribe, building_description)
                   result = result .. h3(_("Wares produced:"))
                end
                result = result .. ware_strings[program]
-               result = result .. help_consumed_wares_workers(tribe, building_description, program)
             end
+         result = result .. help_consumed_wares_workers(tribe, building_description, program)
          checked_programs[program] = true
          end
       end
-      for i, worker_description in ipairs(building_description.output_worker_types) do
-         programs, worker_counters, worker_strings = programs_workers_count(tribe, building_description, worker_description)
-         for j, program in ipairs(programs) do
-            if (worker_counters[program] > 0) and not checked_programs[program] then
-               -- TRANSLATORS: Ware Encyclopedia: 1 special worker or soldier recruited by a productionsite
-               result = result .. h3(_("Workers recruited:"))
-               result = result .. worker_strings[program]
-               result = result .. help_consumed_wares_workers(tribe, building_description, program)
+   else
+      if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
+         for i, ware_description in ipairs(building_description.output_ware_types) do
+            programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, ware_description)
+            -- check if the ware is collected (no producing program)
+            if #programs == 0 then
+               result = result .. h3(_("Ware produced:"))
+               result = result .. help_ware_amount_line(ware_description, 1)
+               break
             end
-         checked_programs[program] = true
+            for j, program in ipairs(programs) do
+               if (ware_counters[program] > 0) and not checked_programs[program] then
+                  if (ware_counters[program] == 1) then
+                     -- TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
+                     result = result .. h3(_("Ware produced:"))
+                  else
+                     -- TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a productionsite
+                     result = result .. h3(_("Wares produced:"))
+                  end
+                  result = result .. ware_strings[program]
+                  result = result .. help_consumed_wares_workers(tribe, building_description, program)
+               end
+            checked_programs[program] = true
+            end
+         end
+         for i, worker_description in ipairs(building_description.output_worker_types) do
+            programs, worker_counters, worker_strings = programs_workers_count(tribe, building_description, worker_description)
+            for j, program in ipairs(programs) do
+               if (worker_counters[program] > 0) and not checked_programs[program] then
+                  -- TRANSLATORS: Ware Encyclopedia: 1 special worker or soldier recruited by a productionsite
+                  result = result .. h3(_("Workers recruited:"))
+                  result = result .. worker_strings[program]
+                  result = result .. help_consumed_wares_workers(tribe, building_description, program)
+               end
+            checked_programs[program] = true
+            end
          end
       end
    end
@@ -949,7 +925,7 @@ end
 --    :returns: rt of the formatted text
 --
 function building_help(tribe, building_description)
-   if (building_description.type_name == "productionsite") then
+   if (building_description.type_name == "productionsite") or (building_description.type_name == "trainingsite") then
       return building_help_general_string(tribe, building_description) ..
          building_help_dependencies_production(tribe, building_description) ..
          building_help_crew_section(tribe, building_description) ..
@@ -967,11 +943,6 @@ function building_help(tribe, building_description)
          return building_help_general_string(tribe, building_description) ..
             building_help_building_section(building_description)
       end
-   elseif (building_description.type_name == "trainingsite") then
-      return building_help_general_string(tribe, building_description) ..
-         building_help_dependencies_training(tribe, building_description) ..
-         building_help_crew_section(tribe, building_description) ..
-         building_help_building_section(building_description) ..building_help_production_section(tribe, building_description)
    elseif (building_description.type_name == "constructionsite" or
             building_description.type_name == "dismantlesite") then
             -- TODO(GunChleoc) Get them a crew string for the builder
