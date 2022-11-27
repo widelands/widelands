@@ -61,16 +61,20 @@ int text_height(int ptsize) {
 namespace UI {
 
 constexpr int CARET_BLINKING_DELAY = 1000;
+constexpr int CURSOR_MOVEMENT_THRESHOLD = 100;
 
 WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)
    : draw_caret_(false),
      fontsize_(fontsize),
      color_(color),
      font_(RT::load_font(UI::g_fh->fontset()->sans_bold(), fontsize_)),
-     caret_timer_("", true) {
+     caret_timer_("", true),
+     cursor_movement_timer("", true) {
 	wrapwidth_ = gwrapwidth;
-	caret_timer_.ms_since_last_query();
 	caret_ms = 0;
+	cursor_ms = 0;
+	caret_timer_.ms_since_last_query();
+	cursor_movement_timer.ms_since_last_query();
 
 	if (wrapwidth_ < std::numeric_limits<uint32_t>::max()) {
 		if (wrapwidth_ < 2 * kLineMargin) {
@@ -398,13 +402,23 @@ void WordWrap::draw(RenderTarget& dst,
 			caretpt.x = point.x + caret_x - caret_image->width() + kLineMargin;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 
-			if (caret_ms > CARET_BLINKING_DELAY) {
+			if (caret_ms > CARET_BLINKING_DELAY || cursor_movement_active) {
 				dst.blit(caretpt, caret_image);
 			}
 			if (caret_ms > 2 * CARET_BLINKING_DELAY) {
 				caret_ms = 0;
 			}
-			caret_ms += caret_timer_.ms_since_last_query();
+			if (!cursor_movement_active) {
+				caret_ms += caret_timer_.ms_since_last_query();
+			}
+
+			if (cursor_ms > CURSOR_MOVEMENT_THRESHOLD) {
+				cursor_movement_active = false;
+			}
+			if (cursor_movement_active) {
+				cursor_ms += cursor_movement_timer.ms_since_last_query();
+				caret_timer_.ms_since_last_query();
+			}
 		}
 	}
 }
@@ -445,6 +459,13 @@ void WordWrap::highlight_selection(RenderTarget& dst,
 	}
 	dst.brighten_rect(
 	   Recti(highlight_start, highlight_end.x, highlight_end.y), BUTTON_EDGE_BRIGHT_FACTOR);
+}
+
+void WordWrap::enter_cursor_movement_mode() {
+	cursor_movement_active = true;
+	cursor_ms = 0;
+	caret_ms = 1.5 * CARET_BLINKING_DELAY;
+	cursor_movement_timer.ms_since_last_query();
 }
 
 /**

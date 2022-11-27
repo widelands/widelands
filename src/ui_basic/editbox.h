@@ -111,6 +111,10 @@ private:
 
 	ScopedTimer caret_timer_;
 	uint32_t caret_ms;
+	ScopedTimer cursor_movement_timer;
+	uint32_t cursor_ms;
+	bool cursor_movement_active = false;
+	void enter_cursor_movement_mode();
 };
 }  // namespace UI
 
