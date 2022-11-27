@@ -167,9 +167,9 @@ public:
 	/**
 	 * Log a message to be displayed on screen
 	 */
-	void log_message(const std::string& message) const;
-	void log_message(const char* message) const {
-		log_message(std::string(message));
+	void log_message(const std::string& message, const std::string& tooltip = std::string()) const;
+	void log_message(const char* message, const char* tt = nullptr) const {
+		log_message(std::string(message), tt == nullptr ? std::string() : std::string(tt));
 	}
 
 	void toggle_minimap();
