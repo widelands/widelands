@@ -98,7 +98,7 @@ SpinBox::SpinBox(Panel* const parent,
      sbi_(new SpinBoxImpl),
      unit_width_(unit_w),
      button_size_(20),
-     bigstep_button_width_(32),
+     big_step_button_width_(32),
      buttons_width_(0),
      padding_(2),
      number_of_paddings_(type_ == SpinBox::Type::kBig ? 2 : 0) {
@@ -110,7 +110,7 @@ SpinBox::SpinBox(Panel* const parent,
 		sbi_->max = maxval;
 #ifndef NDEBUG
 		// Prevent integer overflows
-		// 10 is the maximum value that calculate_bigstep() can set
+		// 10 is the maximum value that calculate_big_step() can set
 		const int32_t max_step = std::max(abs(step_size), std::max(abs(big_step_size), 10));
 		assert(maxval < std::numeric_limits<int32_t>::max() - max_step);
 		assert(minval > std::numeric_limits<int32_t>::min() + max_step);
@@ -145,7 +145,7 @@ SpinBox::SpinBox(Panel* const parent,
 		// Step size for PgUp/PgDn
 		assert(step_size > 0);
 		assert(sbi_->max >= sbi_->min);
-		calculate_bigstep();
+		calculate_big_step();
 	}
 
 	sbi_->button_minus =
@@ -163,11 +163,11 @@ SpinBox::SpinBox(Panel* const parent,
 
 	if (is_big) {
 		sbi_->button_ten_minus =
-		   new Button(box_, "--", 0, 0, bigstep_button_width_, button_size_, sbi_->button_style,
+		   new Button(box_, "--", 0, 0, big_step_button_width_, button_size_, sbi_->button_style,
 		              g_image_cache->get("images/ui_basic/scrollbar_left_fast.png"),
 		              format(_("Decrease the value by %s"), unit_text(sbi_->big_step_size)));
 		sbi_->button_ten_plus =
-		   new Button(box_, "++", 0, 0, bigstep_button_width_, button_size_, sbi_->button_style,
+		   new Button(box_, "++", 0, 0, big_step_button_width_, button_size_, sbi_->button_style,
 		              g_image_cache->get("images/ui_basic/scrollbar_right_fast.png"),
 		              format(_("Increase the value by %s"), unit_text(sbi_->big_step_size)));
 		sbi_->button_ten_minus->set_can_focus(false);
@@ -224,7 +224,7 @@ SpinBox::SpinBox(Panel* const parent,
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
 
-	buttons_width_ = 2 * button_size_ + (is_big ? 2 * bigstep_button_width_ : 0);
+	buttons_width_ = 2 * button_size_ + (is_big ? 2 * big_step_button_width_ : 0);
 
 	set_can_focus(true);
 	layout();
@@ -392,7 +392,7 @@ void SpinBox::set_value_list(const std::vector<int32_t>& values) {
 	sbi_->values = values;
 	sbi_->min = 0;
 	sbi_->max = values.size() - 1;
-	calculate_bigstep();
+	calculate_big_step();
 	update();
 }
 
@@ -410,14 +410,14 @@ void SpinBox::set_interval(int32_t const min, int32_t const max) {
 		sbi_->value = min;
 		changed_val = true;
 	}
-	calculate_bigstep();
+	calculate_big_step();
 	update();
 	if (changed_val) {
 		changed();
 	}
 }
 
-void SpinBox::calculate_bigstep() {
+void SpinBox::calculate_big_step() {
 	if (type_ == SpinBox::Type::kBig) {
 		// Should have been set when the spinbox was set up, don't mess with it
 		return;

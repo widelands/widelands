@@ -83,7 +83,7 @@ private:
 	void update();
 	void change_value(int32_t);
 	const std::string unit_text(int32_t value) const;
-	void calculate_bigstep();
+	void calculate_big_step();
 
 	const SpinBox::Type type_;
 	SpinBoxImpl* sbi_;
@@ -91,7 +91,7 @@ private:
 	UI::Box* box_;
 	uint32_t unit_width_;
 	uint32_t button_size_;
-	uint32_t bigstep_button_width_;
+	uint32_t big_step_button_width_;
 	uint32_t buttons_width_;
 	uint32_t padding_;
 	uint32_t number_of_paddings_;

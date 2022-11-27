@@ -106,6 +106,7 @@ protected:
 	void bar_pressed(int32_t pointer, int32_t ofs);
 
 private:
+	void calculate_big_step();
 	void send_value_changed() const;
 	void set_highlighted(bool highlighted);
 
@@ -118,6 +119,7 @@ private:
 	int32_t max_value_;
 	int32_t value_;
 	int32_t relative_move_;
+	int32_t big_step_;
 
 	bool highlighted_;  //  mouse over
 	bool pressed_;      //  the cursor is pressed

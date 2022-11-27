@@ -17,6 +17,8 @@
 
 #include "ui_basic/slider.h"
 
+#include <cassert>
+#include <limits>
 #include <memory>
 
 #include <SDL_mouse.h>
@@ -77,6 +79,7 @@ Slider::Slider(Panel* const parent,
      max_value_(max_value),
      value_(value),
      relative_move_(0),
+     big_step_(0),
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
@@ -89,6 +92,7 @@ Slider::Slider(Panel* const parent,
 	set_thinks(false);
 	set_can_focus(enabled_);
 	calculate_cursor_position();
+	calculate_big_step();
 }
 
 inline const UI::PanelStyleInfo& Slider::cursor_style() const {
@@ -106,15 +110,27 @@ void Slider::set_value(int32_t new_value) {
 }
 
 void Slider::calculate_cursor_position() {
-	if (max_value_ == min_value_) {
-		cursor_pos_ = min_value_;
-	} else if (value_ == min_value_) {
+	assert(max_value_ >= min_value_);
+	assert(value_ >= min_value_);
+	assert(max_value_ >= value_);
+
+	if (value_ == min_value_) {
 		cursor_pos_ = 0;
 	} else if (value_ == max_value_) {
 		cursor_pos_ = get_bar_size();
 	} else {
 		cursor_pos_ = (value_ - min_value_) * get_bar_size() / (max_value_ - min_value_);
 	}
+}
+
+void Slider::calculate_big_step() {
+	assert(max_value_ >= min_value_);
+	// Check integer overflow
+	assert(max_value_ - min_value_ >= 0);
+	// Dividing the range to 8 steps makes the steps the same size as between keys 1-9
+	big_step_ = std::max(4, (max_value_ - min_value_) / 8);
+	assert(max_value_ < std::numeric_limits<int32_t>::max() - big_step_);
+	assert(min_value_ > std::numeric_limits<int32_t>::min() + big_step_);
 }
 
 void Slider::layout() {
@@ -129,11 +145,16 @@ void Slider::layout() {
  */
 void Slider::set_max_value(int32_t new_max) {
 	assert(min_value_ <= new_max);
-	if (max_value_ != new_max) {
-		calculate_cursor_position();
+	if (max_value_ == new_max) {
+		return;
 	}
 	max_value_ = new_max;
-	set_value(value_);
+	calculate_big_step();
+	if (value_ > max_value_) {
+		set_value(max_value_);
+	} else {
+		calculate_cursor_position();
+	}
 }
 
 /**
@@ -143,11 +164,16 @@ void Slider::set_max_value(int32_t new_max) {
  */
 void Slider::set_min_value(int32_t new_min) {
 	assert(max_value_ >= new_min);
-	if (min_value_ != new_min) {
-		calculate_cursor_position();
+	if (min_value_ == new_min) {
+		return;
 	}
 	min_value_ = new_min;
-	set_value(value_);
+	calculate_big_step();
+	if (value_ < min_value_) {
+		set_value(min_value_);
+	} else {
+		calculate_cursor_position();
+	}
 }
 
 /**
@@ -241,12 +267,18 @@ void Slider::set_highlighted(bool highlighted) {
 
 bool Slider::handle_key(bool down, SDL_Keysym code) {
 	if (down && enabled_) {
-		switch (get_keyboard_change(code, false)) {
+		switch (get_keyboard_change(code, true)) {
 		case ChangeType::kPlus:
 			set_value(get_value() + 1);
 			return true;
 		case ChangeType::kMinus:
 			set_value(get_value() - 1);
+			return true;
+		case ChangeType::kBigPlus:
+			set_value(get_value() + big_step_);
+			return true;
+		case ChangeType::kBigMinus:
+			set_value(get_value() - big_step_);
 			return true;
 		case ChangeType::kSetMax:
 			set_value(get_max_value());
@@ -290,6 +322,13 @@ bool Slider::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
 	if (change != 0) {
 		set_value(get_value() + change);
+		return true;
+	}
+
+	// Try big step
+	change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValueBig, x, y, modstate);
+	if (change != 0) {
+		set_value(get_value() + change * big_step_);
 		return true;
 	}
 
