@@ -613,7 +613,7 @@ void EditBox::draw(RenderTarget& dst) {
 		rendered_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
 	}
 
-	if (has_focus()) {
+	if (has_focus() && has_top_level_focus()) {
 		const uint16_t fontheight = text_height(m_->font_style(), m_->font_scale);
 		draw_caret(dst, point, fontheight);
 
