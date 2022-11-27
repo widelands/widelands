@@ -564,10 +564,10 @@ struct ProductionProgram : public MapObjectProgram {
 	const std::string& trained_attribute() const {
 		return trained_attribute_;
 	}
-	const uint8_t& train_from_level() const {
+	uint8_t train_from_level() const {
 		return train_from_level_;
 	}
-	const uint8_t& train_to_level() const {
+	uint8_t train_to_level() const {
 		return train_to_level_;
 	}
 	// Throws a GameDataError if we're trying to call an unknown program
