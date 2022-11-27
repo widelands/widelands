@@ -3609,11 +3609,12 @@ int LuaTrainingSiteDescription::get_weapons_health(lua_State* L) {
 /* RST
    .. method:: trained_soldiers(program_name)
 
-      Returns a :class:`table` of ``{worker_name=worker_amount}`` for the workers recruited
-      by this production program. See :ref:`production site programs <productionsite_programs>`.
+Returns a :class:`table` with following entries [1] = the trained skill, [2] = the starting level,
+      [3] = the resulting level trained by this production program.
+      See :ref:`production site programs <productionsite_programs>`.
 
-      :arg program_name: the name of the production program that we want to get the recruited
-         workers for.
+      :arg program_name: the name of the production program that we want to get the trained
+         soldiers for.
       :type program_name: :class:`string`
 
 */
