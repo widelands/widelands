@@ -282,7 +282,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
          -- TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a productionsite
          consumed_header = _("Wares consumed:")
       end
-      result = result .. h3(consumed_header) .. consumed_items_string
+      result = result .. h4(consumed_header) .. consumed_items_string
    end
    return result
 end

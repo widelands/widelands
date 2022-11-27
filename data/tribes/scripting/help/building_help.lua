@@ -853,10 +853,10 @@ function building_help_production_section(tribe, building_description)
             if (ware_counters[program] > 0) then
                if (ware_counters[program] == 1) then
                   -- TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
-                  result = result .. h3(_("Ware produced:"))
+                  result = result .. h4(_("Ware produced:"))
                else
                   -- TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a productionsite
-                  result = result .. h3(_("Wares produced:"))
+                  result = result .. h4(_("Wares produced:"))
                end
                result = result .. ware_strings[program]
             end

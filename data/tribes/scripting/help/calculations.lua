@@ -80,11 +80,12 @@ function programs_wares_count(tribe, building, ware_description)
    for j, prog1_name in ipairs(producing_programs) do
       local duplicate = false
       for i, prog2_name in ipairs(deduplicated_programs) do
+         if (building.type_name == "trainingsite") then
+            break
+         end
          if produced_wares_strings[prog1_name] == produced_wares_strings[prog2_name] and
                help_consumed_wares_workers(tribe, building, prog1_name) ==
-               help_consumed_wares_workers(tribe, building, prog2_name) and
-               building:trained_soldiers(prog1_name) == 
-               building:trained_soldiers(prog2_name) then
+               help_consumed_wares_workers(tribe, building, prog2_name) then
             duplicate = true
             break
          end
