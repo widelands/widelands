@@ -561,6 +561,15 @@ struct ProductionProgram : public MapObjectProgram {
 	const ProductionProgram::Groups& consumed_wares_workers() const;
 	const Buildcost& produced_wares() const;
 	const Buildcost& recruited_workers() const;
+	const std::string& trained_attribute() const {
+		return trained_attribute_;
+	}
+	const uint8_t& train_from_level() const {
+		return train_from_level_;
+	}
+	const uint8_t& train_to_level() const {
+		return train_to_level_;
+	}
 	// Throws a GameDataError if we're trying to call an unknown program
 	void validate_calls(const ProductionSiteDescr& descr) const;
 
@@ -570,6 +579,9 @@ private:
 	ProductionProgram::Groups consumed_wares_workers_;
 	Buildcost produced_wares_;
 	Buildcost recruited_workers_;
+	std::string trained_attribute_;
+	uint8_t train_from_level_;
+	uint8_t train_to_level_;
 };
 }  // namespace Widelands
 

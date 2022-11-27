@@ -2224,6 +2224,23 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 					recruited_workers_.insert(worker);
 				}
 			}
+			// Add trained attributes
+			if (upcast(const ActCheckSoldier, act_cs, &action)) {
+				const auto& train = act_cs->training();
+				train_from_level_= train.level;
+				if (train.attribute == Widelands::TrainingAttribute::kHealth) {
+					trained_attribute_ = "Health";
+				} else if (train.attribute == Widelands::TrainingAttribute::kAttack) {
+					trained_attribute_ = "Attack";
+				} else if (train.attribute == Widelands::TrainingAttribute::kDefense) {
+					trained_attribute_ = "Defense";
+				} else if (train.attribute == Widelands::TrainingAttribute::kEvade) {
+					trained_attribute_ = "Evade";
+				}
+			} else if (upcast(const ActTrain, act_tr, &action)) {
+				const auto& train = act_tr->training();
+				train_to_level_ = train.level;
+			}
 		} catch (const std::exception& e) {
 			throw GameDataError("Error reading line '%s': %s", line.c_str(), e.what());
 		}

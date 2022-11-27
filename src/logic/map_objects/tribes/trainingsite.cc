@@ -156,7 +156,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 					   training_attribute_to_string(checkme.attribute).c_str(), program.first.c_str());
 				}
 				// All clear, let's add the training information
-				update_level(from_checksoldier.attribute, from_checksoldier.level);
+				update_level(from_checksoldier.attribute, from_checksoldier.level, checkme.level);
 			}
 		}
 	}
@@ -267,26 +267,27 @@ void TrainingSiteDescr::add_training_inputs(const LuaTable& table,
 	}
 }
 
-void TrainingSiteDescr::update_level(TrainingAttribute attrib, unsigned level) {
+void TrainingSiteDescr::update_level(TrainingAttribute attrib, unsigned from_level, unsigned to_level) {
 	switch (attrib) {
 	case TrainingAttribute::kHealth:
-		min_health_ = std::min(min_health_, level);
-		max_health_ = std::max(max_health_, level);
+		min_health_ = std::min(min_health_, from_level);
+		max_health_ = std::max(max_health_, to_level);
 		train_health_ = true;
+		
 		return;
 	case TrainingAttribute::kAttack:
-		min_attack_ = std::min(min_attack_, level);
-		max_attack_ = std::max(max_attack_, level);
+		min_attack_ = std::min(min_attack_, from_level);
+		max_attack_ = std::max(max_attack_, to_level);
 		train_attack_ = true;
 		return;
 	case TrainingAttribute::kDefense:
-		min_defense_ = std::min(min_defense_, level);
-		max_defense_ = std::max(max_defense_, level);
+		min_defense_ = std::min(min_defense_, from_level);
+		max_defense_ = std::max(max_defense_, to_level);
 		train_defense_ = true;
 		return;
 	case TrainingAttribute::kEvade:
-		min_evade_ = std::min(min_evade_, level);
-		max_evade_ = std::max(max_evade_, level);
+		min_evade_ = std::min(min_evade_, from_level);
+		max_evade_ = std::max(max_evade_, to_level);
 		train_evade_ = true;
 		return;
 	case TrainingAttribute::kTotal:
