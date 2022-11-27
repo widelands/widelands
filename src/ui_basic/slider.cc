@@ -125,10 +125,22 @@ void Slider::calculate_cursor_position() {
 
 void Slider::calculate_big_step() {
 	assert(max_value_ >= min_value_);
+
 	// Check integer overflow
 	assert(max_value_ - min_value_ >= 0);
-	// Dividing the range to 8 steps makes the steps the same size as between keys 1-9
-	big_step_ = std::max(4, (max_value_ - min_value_) / 8);
+
+	int32_t range = max_value_ - min_value_;
+	if (range < 4) {
+		big_step_ = 4;  // to min/max
+	} else if (range < 16) {
+		big_step_ = range / 2;
+	} else if (range < 32) {
+		big_step_ = range / 4;
+	} else {
+		// This makes the steps the same size as between numeric keys in handle_key()
+		big_step_ = range / 8;
+	}
+
 	assert(max_value_ < std::numeric_limits<int32_t>::max() - big_step_);
 	assert(min_value_ > std::numeric_limits<int32_t>::min() + big_step_);
 }
