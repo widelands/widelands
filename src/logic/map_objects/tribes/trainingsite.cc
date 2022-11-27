@@ -87,23 +87,19 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 
 	// TODO(hessenfarmer): Compatibility, remove these after v1.2
 	if (table.has_key("soldier health")) {
-		log_warn("Trainingsite '%s': Key 'soldier_health' is no longer needed\n",
-				 name().c_str());
+		log_warn("Trainingsite '%s': Key 'soldier_health' is no longer needed\n", name().c_str());
 	}
 	// TODO(hessenfarmer): Compatibility, remove these after v1.2
 	if (table.has_key("soldier attack")) {
-		log_warn("Trainingsite '%s': Key 'soldier_attack' is no longer needed\n",
-				 name().c_str());
+		log_warn("Trainingsite '%s': Key 'soldier_attack' is no longer needed\n", name().c_str());
 	}
 	// TODO(hessenfarmer): Compatibility, remove these after v1.2
 	if (table.has_key("soldier defense")) {
-		log_warn("Trainingsite '%s': Key 'soldier_defense' is no longer needed\n",
-				 name().c_str());
+		log_warn("Trainingsite '%s': Key 'soldier_defense' is no longer needed\n", name().c_str());
 	}
 	// TODO(hessenfarmer): Compatibility, remove these after v1.2
 	if (table.has_key("soldier evade")) {
-		log_warn("Trainingsite '%s': Key 'soldier_evade' is no longer needed\n",
-				 name().c_str());
+		log_warn("Trainingsite '%s': Key 'soldier_evade' is no longer needed\n", name().c_str());
 	}
 
 	// Check dependencies between 'checksoldier' & 'train', and set min and max levels
@@ -228,13 +224,15 @@ int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at,
 	return rtv;
 }
 
-void TrainingSiteDescr::update_level(TrainingAttribute attrib, unsigned from_level, unsigned to_level) {
+void TrainingSiteDescr::update_level(TrainingAttribute attrib,
+                                     unsigned from_level,
+                                     unsigned to_level) {
 	switch (attrib) {
 	case TrainingAttribute::kHealth:
 		min_health_ = std::min(min_health_, from_level);
 		max_health_ = std::max(max_health_, to_level);
 		train_health_ = true;
-		
+
 		return;
 	case TrainingAttribute::kAttack:
 		min_attack_ = std::min(min_attack_, from_level);

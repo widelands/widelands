@@ -2227,7 +2227,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			// Add trained attributes
 			if (upcast(const ActCheckSoldier, act_cs, &action)) {
 				const auto& train = act_cs->training();
-				train_from_level_= train.level;
+				train_from_level_ = train.level;
 				if (train.attribute == Widelands::TrainingAttribute::kHealth) {
 					trained_attribute_ = "Health";
 				} else if (train.attribute == Widelands::TrainingAttribute::kAttack) {

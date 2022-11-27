@@ -3368,13 +3368,13 @@ int LuaTrainingSiteDescription::trained_soldiers(lua_State* L) {
 		lua_newtable(L);
 		lua_pushint32(L, 1);
 		lua_pushstring(L, program.trained_attribute());
-		lua_settable(L,-3);
+		lua_settable(L, -3);
 		lua_pushint32(L, 2);
 		lua_pushint32(L, program.train_from_level());
-		lua_settable(L,-3);
+		lua_settable(L, -3);
 		lua_pushint32(L, 3);
 		lua_pushint32(L, program.train_to_level());
-		lua_settable(L,-3);
+		lua_settable(L, -3);
 	}
 	return 1;
 }
