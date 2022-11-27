@@ -111,8 +111,8 @@ SpinBox::SpinBox(Panel* const parent,
 		// Prevent integer overflows
 		// 10 is the maximum value that calculate_bigstep() can set
 		const int32_t max_step = std::max(abs(step_size), std::max(abs(big_step_size), 10));
-		assert(maxval < std::numeric_limits<int32_t>::(max)-max_step);
-		assert(minval > std::numeric_limits<int32_t>::(min) + max_step);
+		assert(maxval < std::numeric_limits<int32_t>::max() - max_step);
+		assert(minval > std::numeric_limits<int32_t>::min() + max_step);
 #endif
 	}
 	sbi_->value = startval;
