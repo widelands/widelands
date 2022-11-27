@@ -491,6 +491,8 @@ public:
 	 * Lua methods
 	 */
 
+	int trained_soldiers(lua_State*);
+
 	/*
 	 * C methods
 	 */

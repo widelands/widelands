@@ -3342,6 +3342,7 @@ TrainingSiteDescription
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
+   METHOD(LuaTrainingSiteDescription, trained_soldiers),
    {nullptr, nullptr},
 };
 const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Properties[] = {
@@ -3601,6 +3602,38 @@ int LuaTrainingSiteDescription::get_weapons_health(lua_State* L) {
 		lua_pushuint32(L, ++counter);
 		lua_pushstring(L, weaponname);
 		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: trained_soldiers(program_name)
+
+      Returns a :class:`table` of ``{worker_name=worker_amount}`` for the workers recruited
+      by this production program. See :ref:`production site programs <productionsite_programs>`.
+
+      :arg program_name: the name of the production program that we want to get the recruited
+         workers for.
+      :type program_name: :class:`string`
+
+*/
+int LuaTrainingSiteDescription::trained_soldiers(lua_State* L) {
+	std::string program_name = luaL_checkstring(L, -1);
+	const Widelands::ProductionSiteDescr::Programs& programs = get()->programs();
+	if (programs.count(program_name) == 1) {
+		const Widelands::ProductionProgram& program = *programs.at(program_name);
+		log_warn("lua attrib: %s. from: %d to: %d",
+		         program.trained_attribute().c_str(), program.train_from_level(), program.train_to_level());
+		lua_newtable(L);
+		lua_pushint32(L, 1);
+		lua_pushstring(L, program.trained_attribute());
+		lua_settable(L,-3);
+		lua_pushint32(L, 2);
+		lua_pushint32(L, program.train_from_level());
+		lua_settable(L,-3);
+		lua_pushint32(L, 3);
+		lua_pushint32(L, program.train_to_level());
+		lua_settable(L,-3);
 	}
 	return 1;
 }
