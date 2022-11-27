@@ -20,6 +20,7 @@
 
 #include <cassert>
 #include <cstdlib>
+#include <limits>
 
 #include <SDL_keyboard.h>
 
