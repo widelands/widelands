@@ -3622,8 +3622,6 @@ int LuaTrainingSiteDescription::trained_soldiers(lua_State* L) {
 	const Widelands::ProductionSiteDescr::Programs& programs = get()->programs();
 	if (programs.count(program_name) == 1) {
 		const Widelands::ProductionProgram& program = *programs.at(program_name);
-		log_warn("lua attrib: %s. from: %d to: %d",
-		         program.trained_attribute().c_str(), program.train_from_level(), program.train_to_level());
 		lua_newtable(L);
 		lua_pushint32(L, 1);
 		lua_pushstring(L, program.trained_attribute());
