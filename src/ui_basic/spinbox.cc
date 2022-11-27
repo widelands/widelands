@@ -18,8 +18,8 @@
 
 #include "ui_basic/spinbox.h"
 
-#include <cassert>
 #include <SDL_mouse.h>
+#include <cassert>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -424,7 +424,8 @@ void SpinBox::calculate_bigstep() {
 		return;
 	}
 	// It's OK if it becomes min/max when interval is smaller than 5
-	sbi_->big_step_size = sbi_->step_size * (((sbi_->max - sbi_->min) / sbi_->step_size) <= 20 ? 5 : 10);
+	sbi_->big_step_size =
+	   sbi_->step_size * (((sbi_->max - sbi_->min) / sbi_->step_size) <= 20 ? 5 : 10);
 }
 
 /**
