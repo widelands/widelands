@@ -359,15 +359,15 @@ int Panel::do_run() {
 	notes_.clear();
 	handled_notes_.clear();
 	subscriber1_ = is_initializer ?
-	                  Notifications::subscribe<NoteThreadSafeFunction>(
+                     Notifications::subscribe<NoteThreadSafeFunction>(
 	                     [this](const NoteThreadSafeFunction& note) { notes_.push_back(note); }) :
-	                  nullptr;
+                     nullptr;
 	subscriber2_ = is_initializer ? Notifications::subscribe<NoteThreadSafeFunctionHandled>(
 	                                   [this](const NoteThreadSafeFunctionHandled& note) {
 		                                   assert(!handled_notes_.count(note.id));
 		                                   handled_notes_.insert(note.id);
 	                                   }) :
-	                                nullptr;
+                                   nullptr;
 
 	// Loop
 	running_ = true;
@@ -727,7 +727,7 @@ void Panel::draw_overlay(RenderTarget& dst) {
 		for (const Recti& r : focus_overlay_rects()) {
 			dst.fill_rect(r,
 			              focus_ != nullptr ? g_style_manager->semi_focused_color() :
-			                                  g_style_manager->focused_color(),
+                                           g_style_manager->focused_color(),
 			              BlendMode::Default);
 		}
 	}
@@ -811,7 +811,7 @@ void Panel::do_think() {
  */
 Vector2i Panel::get_mouse_position() const {
 	return (parent_ != nullptr ? parent_->get_mouse_position() :
-	                             WLApplication::get()->get_mouse_position()) -
+                                WLApplication::get()->get_mouse_position()) -
 	       Vector2i(get_x() + get_lborder(), get_y() + get_tborder());
 }
 
@@ -1679,8 +1679,8 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
 		text_to_render = as_richtext_paragraph(text_to_render, style == PanelStyle::kWui ?
-		                                                          UI::FontStyle::kWuiTooltip :
-		                                                          UI::FontStyle::kFsTooltip);
+                                                                UI::FontStyle::kWuiTooltip :
+                                                                UI::FontStyle::kFsTooltip);
 	}
 
 	constexpr int kTipWidthMax = 360;
