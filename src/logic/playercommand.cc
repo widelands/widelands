@@ -2224,18 +2224,29 @@ void CmdDiplomacy::execute(Game& game) {
 			    it->other == cmd_sender) {
 				const bool accept =
 				   action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kAcceptInvite;
+				std::string fmt_message;
+				if (accept) {
+					if (original_action == DiplomacyAction::kJoin) {
+						fmt_message = _("%1$s has accepted %2$s into their team.");
+					} else {
+						fmt_message = _("%1$s has accepted the invitation to join the team of %2$s.");
+					}
+				} else {
+					if (original_action == DiplomacyAction::kJoin) {
+						if (retract) {
+							fmt_message = _("%1$s has retracted the request to join the team of %2$s.");
+						} else {
+							fmt_message = _("%1$s has denied %2$s membership in their team.");
+						}
+					} else if (retract) {
+						fmt_message = _("%1$s has retracted the invitation to %2$s to join their team.");
+					} else {
+						fmt_message = _("%1$s has rejected the invitation to join the team of %2$s.");
+					}
+				}
 				broadcast_message(
 				   accept ? _("Team Change Accepted") : _("Team Change Rejected"),
-				   format(accept ?
-                         original_action == DiplomacyAction::kJoin ?
-                         _("%1$s has accepted %2$s into their team.") :
-                         _("%1$s has accepted the invitation to join the team of %2$s.") :
-				          original_action == DiplomacyAction::kJoin ?
-                         retract ? _("%1$s has retracted the request to join the team of %2$s.") :
-                                   _("%1$s has denied %2$s membership in their team.") :
-				          retract ? _("%1$s has retracted the invitation to %2$s to join their team.") :
-                                _("%1$s has rejected the invitation to join the team of %2$s."),
-				          sending_player.get_name(),
+				   format(fmt_message, sending_player.get_name(),
 				          game.get_safe_player(retract ? cmd_sender : other_player_)->get_name()));
 
 				if (accept) {
