@@ -721,14 +721,8 @@ std::vector<Recti> Panel::focus_overlay_rects() {
  */
 void Panel::draw_overlay(RenderTarget& dst) {
 	if (has_focus()) {
-		for (Panel* p = this; p->parent_ != nullptr; p = p->parent_) {
-			if (p->parent_->focus_ != p) {
-				// doesn't have toplevel focus
-				return;
-			}
-			if (p->parent_->is_focus_toplevel()) {
-				break;
-			}
+		if (!has_top_level_focus()) {
+			return;
 		}
 		for (const Recti& r : focus_overlay_rects()) {
 			dst.fill_rect(r,
@@ -737,6 +731,18 @@ void Panel::draw_overlay(RenderTarget& dst) {
 			              BlendMode::Default);
 		}
 	}
+}
+bool Panel::has_top_level_focus() {
+	for (Panel* p = this; p->parent_ != nullptr; p = p->parent_) {
+		if (p->parent_->focus_ != p) {
+			// doesn't have toplevel focus
+			return false;
+		}
+		if (p->parent_->is_focus_toplevel()) {
+			return true;
+		}
+	}
+	return true;
 }
 
 /**
