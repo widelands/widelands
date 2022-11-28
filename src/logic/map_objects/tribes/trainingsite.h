@@ -68,31 +68,6 @@ public:
 		max_stall_ = trainer_patience;
 	}
 
-	const std::vector<std::vector<std::string>>& get_food_health() const {
-		return food_health_;
-	}
-	const std::vector<std::vector<std::string>>& get_food_attack() const {
-		return food_attack_;
-	}
-	const std::vector<std::vector<std::string>>& get_food_defense() const {
-		return food_defense_;
-	}
-	const std::vector<std::vector<std::string>>& get_food_evade() const {
-		return food_evade_;
-	}
-	const std::vector<std::string>& get_weapons_health() const {
-		return weapons_health_;
-	}
-	const std::vector<std::string>& get_weapons_attack() const {
-		return weapons_attack_;
-	}
-	const std::vector<std::string>& get_weapons_defense() const {
-		return weapons_defense_;
-	}
-	const std::vector<std::string>& get_weapons_evade() const {
-		return weapons_evade_;
-	}
-
 	const std::string& no_soldier_to_train_message() const {
 		return no_soldier_to_train_message_;
 	}
@@ -137,16 +112,6 @@ private:
 	unsigned max_defense_;
 	/** Maximum evasion a soldier can acquire at this site*/
 	unsigned max_evade_;
-
-	// For building help
-	std::vector<std::vector<std::string>> food_health_;
-	std::vector<std::vector<std::string>> food_attack_;
-	std::vector<std::vector<std::string>> food_defense_;
-	std::vector<std::vector<std::string>> food_evade_;
-	std::vector<std::string> weapons_health_;
-	std::vector<std::string> weapons_attack_;
-	std::vector<std::string> weapons_defense_;
-	std::vector<std::string> weapons_evade_;
 
 	std::string no_soldier_to_train_message_;
 	std::string no_soldier_for_training_level_message_;
