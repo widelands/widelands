@@ -119,11 +119,11 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
      password_(false),
      warning_(false),
      caret_timer_("", true),
-     cursor_movement_timer("", true) {
-	caret_ms = 0;
-	cursor_ms = 0;
+     cursor_movement_timer_("", true) {
+	caret_ms_ = 0;
+	cursor_ms_ = 0;
 	caret_timer_.ms_since_last_query();
-	cursor_movement_timer.ms_since_last_query();
+	cursor_movement_timer_.ms_since_last_query();
 	set_thinks(false);
 
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -486,10 +486,10 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	return Panel::handle_key(down, code);
 }
 void EditBox::enter_cursor_movement_mode() {
-	cursor_movement_active = true;
-	cursor_ms = 0;
-	caret_ms = 1.5 * CARET_BLINKING_DELAY;
-	cursor_movement_timer.ms_since_last_query();
+	cursor_movement_active_ = true;
+	cursor_ms_ = 0;
+	caret_ms_ = 1.5 * CARET_BLINKING_DELAY;
+	cursor_movement_timer_.ms_since_last_query();
 }
 void EditBox::copy_selected_text() {
 	uint32_t start;
@@ -528,7 +528,7 @@ void EditBox::delete_selected_text() {
 
 void EditBox::focus(bool topcaller) {
 	Panel::focus(topcaller);
-	caret_ms = CARET_BLINKING_DELAY;
+	caret_ms_ = CARET_BLINKING_DELAY;
 	caret_timer_.ms_since_last_query();
 }
 
@@ -640,21 +640,21 @@ void EditBox::draw_caret(RenderTarget& dst, const Vector2i& point, const uint16_
 	Vector2i caretpt = Vector2i::zero();
 	caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 	caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
-	if (caret_ms > CARET_BLINKING_DELAY || cursor_movement_active) {
+	if (caret_ms_ > CARET_BLINKING_DELAY || cursor_movement_active_) {
 		dst.blit(caretpt, caret_image);
 	}
-	if (caret_ms > 2 * CARET_BLINKING_DELAY) {
-		caret_ms = 0;
+	if (caret_ms_ > 2 * CARET_BLINKING_DELAY) {
+		caret_ms_ = 0;
 	}
-	if (!cursor_movement_active) {
-		caret_ms += caret_timer_.ms_since_last_query();
+	if (!cursor_movement_active_) {
+		caret_ms_ += caret_timer_.ms_since_last_query();
 	}
 
-	if (cursor_ms > CURSOR_MOVEMENT_THRESHOLD) {
-		cursor_movement_active = false;
+	if (cursor_ms_ > CURSOR_MOVEMENT_THRESHOLD) {
+		cursor_movement_active_ = false;
 	}
-	if (cursor_movement_active) {
-		cursor_ms += cursor_movement_timer.ms_since_last_query();
+	if (cursor_movement_active_) {
+		cursor_ms_ += cursor_movement_timer_.ms_since_last_query();
 		caret_timer_.ms_since_last_query();
 	}
 }

@@ -108,13 +108,13 @@ private:
 	void set_caret_to_cursor_pos(int32_t cursor_pos_x);
 	int calculate_text_width(int pos) const;
 	int approximate_cursor(int32_t cursor_pos_x, int approx_caret_pos) const;
+	void enter_cursor_movement_mode();
 
 	ScopedTimer caret_timer_;
-	uint32_t caret_ms;
-	ScopedTimer cursor_movement_timer;
-	uint32_t cursor_ms;
-	bool cursor_movement_active = false;
-	void enter_cursor_movement_mode();
+	uint32_t caret_ms_;
+	ScopedTimer cursor_movement_timer_;
+	uint32_t cursor_ms_;
+	bool cursor_movement_active_ = false;
 };
 }  // namespace UI
 

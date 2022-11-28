@@ -116,10 +116,10 @@ private:
 	                         const Vector2i& point) const;
 	uint32_t line_index(int32_t y) const;
 	ScopedTimer caret_timer_;
-	uint32_t caret_ms;
-	ScopedTimer cursor_movement_timer;
-	uint32_t cursor_ms;
-	bool cursor_movement_active = false;
+	uint32_t caret_ms_;
+	ScopedTimer cursor_movement_timer_;
+	uint32_t cursor_ms_;
+	bool cursor_movement_active_ = false;
 };
 
 }  // namespace UI
