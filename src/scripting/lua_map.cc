@@ -3328,7 +3328,15 @@ const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods
    {nullptr, nullptr},
 };
 const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Properties[] = {
+   PROP_RO(LuaTrainingSiteDescription, max_attack),
+   PROP_RO(LuaTrainingSiteDescription, max_defense),
+   PROP_RO(LuaTrainingSiteDescription, max_evade),
+   PROP_RO(LuaTrainingSiteDescription, max_health),
    PROP_RO(LuaTrainingSiteDescription, max_number_of_soldiers),
+   PROP_RO(LuaTrainingSiteDescription, min_attack),
+   PROP_RO(LuaTrainingSiteDescription, min_defense),
+   PROP_RO(LuaTrainingSiteDescription, min_evade),
+   PROP_RO(LuaTrainingSiteDescription, min_health),
    {nullptr, nullptr, nullptr},
 };
 
@@ -3339,6 +3347,66 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
  */
 
 /* RST
+   .. attribute:: max_attack
+
+      (RO) The number of attack points that a soldier can train.
+*/
+int LuaTrainingSiteDescription::get_max_attack(lua_State* L) {
+	const Widelands::TrainingSiteDescr* descr = get();
+	if (descr->get_train_attack()) {
+		lua_pushinteger(L, descr->get_max_level(Widelands::TrainingAttribute::kAttack));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: max_defense
+
+      (RO) The number of defense points that a soldier can train.
+*/
+int LuaTrainingSiteDescription::get_max_defense(lua_State* L) {
+	const Widelands::TrainingSiteDescr* descr = get();
+	if (descr->get_train_defense()) {
+		lua_pushinteger(L, descr->get_max_level(Widelands::TrainingAttribute::kDefense));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: max_evade
+
+      (RO) The number of evade points that a soldier can train.
+*/
+int LuaTrainingSiteDescription::get_max_evade(lua_State* L) {
+	const Widelands::TrainingSiteDescr* descr = get();
+	if (descr->get_train_evade()) {
+		lua_pushinteger(L, descr->get_max_level(Widelands::TrainingAttribute::kEvade));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: max_health
+
+      (RO) The number of health points that a soldier can train.
+*/
+int LuaTrainingSiteDescription::get_max_health(lua_State* L) {
+	const Widelands::TrainingSiteDescr* descr = get();
+	if (descr->get_train_health()) {
+		lua_pushinteger(L, descr->get_max_level(Widelands::TrainingAttribute::kHealth));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/* RST
    .. attribute:: max_number_of_soldiers
 
       (RO) The number of soldiers that can be garrisoned at the trainingsite.
@@ -3347,6 +3415,67 @@ int LuaTrainingSiteDescription::get_max_number_of_soldiers(lua_State* L) {
 	lua_pushinteger(L, get()->get_max_number_of_soldiers());
 	return 1;
 }
+
+/* RST
+   .. attribute:: min_attack
+
+      (RO) The number of attack points that a soldier starts training with.
+*/
+int LuaTrainingSiteDescription::get_min_attack(lua_State* L) {
+	const Widelands::TrainingSiteDescr* descr = get();
+	if (descr->get_train_attack()) {
+		lua_pushinteger(L, descr->get_min_level(Widelands::TrainingAttribute::kAttack));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: min_defense
+
+      (RO) The number of defense points that a soldier starts training with.
+*/
+int LuaTrainingSiteDescription::get_min_defense(lua_State* L) {
+	const Widelands::TrainingSiteDescr* descr = get();
+	if (descr->get_train_defense()) {
+		lua_pushinteger(L, descr->get_min_level(Widelands::TrainingAttribute::kDefense));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: min_evade
+
+      (RO) The number of evade points that a soldier starts training with.
+*/
+int LuaTrainingSiteDescription::get_min_evade(lua_State* L) {
+	const Widelands::TrainingSiteDescr* descr = get();
+	if (descr->get_train_evade()) {
+		lua_pushinteger(L, descr->get_min_level(Widelands::TrainingAttribute::kEvade));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: min_health
+
+      (RO) The number of health points that a soldier starts training with.
+*/
+int LuaTrainingSiteDescription::get_min_health(lua_State* L) {
+	const Widelands::TrainingSiteDescr* descr = get();
+	if (descr->get_train_health()) {
+		lua_pushinteger(L, descr->get_min_level(Widelands::TrainingAttribute::kHealth));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
 
 /* RST
    .. method:: trained_soldiers(program_name)
