@@ -570,6 +570,13 @@ function test_descr:test_type()
    assert_equal("trainingsite", egbase:get_building_description("barbarians_battlearena").descr.type_name)
 end
 
+function test_descr:test_trained_soldiers()
+   trained = egbase:get_building_description("barbarians_battlearena"):trained_soldiers("upgrade_soldier_evade_0")
+   assert_equal("Evade", trained[1])
+   assert_equal(0, trained[2])
+   assert_equal(1, trained[3])
+end
+
 
 --  =======================================================
 --  **************** WarehouseDescription *****************
