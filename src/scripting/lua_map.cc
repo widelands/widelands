@@ -3476,7 +3476,6 @@ int LuaTrainingSiteDescription::get_min_health(lua_State* L) {
 	return 1;
 }
 
-
 /* RST
    .. method:: trained_soldiers(program_name)
 
