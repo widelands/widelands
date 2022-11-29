@@ -211,8 +211,8 @@ int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at,
 	const int32_t min = tsd.get_min_level(at);
 	int32_t lev = min;
 	int32_t rtv = min;
-	while (lev < max) {
-		TypeAndLevel train_tl(at, ++lev);
+	while (++lev < max) {
+		TypeAndLevel train_tl(at, lev);
 		TrainFailCount::const_iterator tstep = training_failure_count_.find(train_tl);
 		if (max_stall_val_ > tstep->second.first) {
 			rtv = lev;
@@ -420,7 +420,7 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 }
 void TrainingSite::init_kick_state(const TrainingAttribute& art, const TrainingSiteDescr& d) {
 	// Now with kick-out state saving implemented, initializing is an overkill
-	for (unsigned t = d.get_min_level(art); t <= d.get_max_level(art); t++) {
+	for (unsigned t = d.get_min_level(art); t < d.get_max_level(art); t++) {
 		training_attempted(art, t);
 	}
 }
@@ -666,7 +666,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			} else {
 				r.add(RequireAttribute(TrainingAttribute::kAttack,
 				                       descr().get_min_level(TrainingAttribute::kAttack),
-				                       descr().get_max_level(TrainingAttribute::kAttack)));
+				                       descr().get_max_level(TrainingAttribute::kAttack) - 1));
 			}
 		}
 		if (descr().get_train_defense()) {
@@ -677,7 +677,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			} else {
 				r.add(RequireAttribute(TrainingAttribute::kDefense,
 				                       descr().get_min_level(TrainingAttribute::kDefense),
-				                       descr().get_max_level(TrainingAttribute::kDefense)));
+				                       descr().get_max_level(TrainingAttribute::kDefense) - 1));
 			}
 		}
 		if (descr().get_train_evade()) {
@@ -688,7 +688,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			} else {
 				r.add(RequireAttribute(TrainingAttribute::kEvade,
 				                       descr().get_min_level(TrainingAttribute::kEvade),
-				                       descr().get_max_level(TrainingAttribute::kEvade)));
+				                       descr().get_max_level(TrainingAttribute::kEvade) - 1));
 			}
 		}
 		if (descr().get_train_health()) {
@@ -699,7 +699,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			} else {
 				r.add(RequireAttribute(TrainingAttribute::kHealth,
 				                       descr().get_min_level(TrainingAttribute::kHealth),
-				                       descr().get_max_level(TrainingAttribute::kHealth)));
+				                       descr().get_max_level(TrainingAttribute::kHealth) - 1));
 			}
 		}
 
@@ -1080,7 +1080,7 @@ void TrainingSite::add_upgrade(TrainingAttribute const atr, const std::string& p
 	u.attribute = atr;
 	u.prefix = prefix;
 	u.min = descr().get_min_level(atr);
-	u.max = descr().get_max_level(atr);
+	u.max = descr().get_max_level(atr) - 1;
 	u.prio = 6;
 	u.credit = 0;
 	u.lastattempt = -1;
