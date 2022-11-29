@@ -117,8 +117,8 @@ void Table<void*>::add_column(uint32_t const width,
 		Column c;
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
-		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_style_, title,
-		                   "");
+		c.btn =
+		   new Button(this, title, complete_width, 0, width, headerheight_, button_style_, title, "");
 		const size_t col_index = columns_.size();
 		c.btn->sigclicked.connect([this, col_index]() { header_button_clicked(col_index); });
 		c.width = width;
@@ -152,7 +152,8 @@ void Table<void*>::set_column_tooltip(uint8_t col, const std::string& text) {
 }
 
 void Table<void*>::Column::update_tooltip(bool sorted) {
-	const std::string click_tooltip = sorted ? _("Click to reverse sorting") : _("Click to sort by this column");
+	const std::string click_tooltip =
+	   sorted ? _("Click to reverse sorting") : _("Click to sort by this column");
 	if (user_tooltip.empty()) {
 		btn->set_tooltip(click_tooltip);
 	} else {
