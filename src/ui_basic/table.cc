@@ -207,6 +207,7 @@ void Table<void*>::header_button_clicked(Columns::size_type const n) {
 	}
 
 	set_sort_column(n);
+	set_sort_descending(false);
 	sort();
 }
 
