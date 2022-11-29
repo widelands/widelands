@@ -159,7 +159,7 @@ void Table<void*>::Column::update_tooltip(bool sorted) {
 	} else {
 		/** TRANSLATORS: Tooltip format for table headers: %1 is column description, %2 is
 		    "Click to sort ..." or "Click to reverse..." */
-		btn->set_tooltip(format(_("%1s<br>(%2s)"), user_tooltip, click_tooltip));
+		btn->set_tooltip(format(_("%1$s<br>(%2$s)"), user_tooltip, click_tooltip));
 	}
 }
 
