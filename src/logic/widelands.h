@@ -94,14 +94,17 @@ using SuggestedTeamLineup = std::vector<SuggestedTeam>;
 
 /** Describes diplomatic relation actions between players. */
 enum class DiplomacyAction : uint8_t {
-	kJoin,          ///< Request to join another player's team.
+	/* Do not change the order, indices are stored in savegames. */
+	kJoin = 0,      ///< Request to join another player's team.
 	kAcceptJoin,    ///< Accept another player's request to join your team.
 	kRefuseJoin,    ///< Refuse another player's request to join your team.
 	kInvite,        ///< Invite another player to join your team.
 	kAcceptInvite,  ///< Accept another player's invitation.
 	kRefuseInvite,  ///< Decline another player's invitation.
 	kLeaveTeam,     ///< Leave the current team and become teamless.
-	kResign         ///< Resign and become a spectator.
+	kResign,        ///< Resign and become a spectator.
+	kRetractJoin,   ///< Retract a previous joining request.
+	kRetractInvite  ///< Retract a previous invitation.
 };
 
 }  // namespace Widelands

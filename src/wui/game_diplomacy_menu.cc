@@ -20,93 +20,15 @@
 
 #include "base/time_string.h"
 #include "graphic/font_handler.h"
-#include "graphic/style_manager.h"
-#include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
+#include "wui/actionconfirm.h"
 #include "wui/interactive_player.h"
 
 constexpr int16_t kSpacing = 4;
 constexpr int16_t kRowSize = 32;
 constexpr int16_t kButtonWidth = 128;
-
-DiplomacyConfirmWindow::DiplomacyConfirmWindow(InteractivePlayer& parent,
-                                               const Widelands::Game::PendingDiplomacyAction& a)
-   : UI::Window(
-        &parent, UI::WindowStyle::kWui, "diplomacy_confirm", 0, 0, 300, 200, _("Diplomacy")),
-     iplayer_(parent),
-     action_(&a) {
-	// The layout here is designed to mimic the ActionConfirm dialog.
-	UI::Box* box = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
-	UI::Box* button_box = new UI::Box(box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-
-	UI::Button* okbtn = new UI::Button(button_box, "ok", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
-	                                   g_image_cache->get("images/wui/menu_okay.png"), _("Accept"));
-	UI::Button* cancelbtn =
-	   new UI::Button(button_box, "reject", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
-	                  g_image_cache->get("images/wui/menu_abort.png"), _("Reject"));
-
-	okbtn->sigclicked.connect([this]() { ok(); });
-	cancelbtn->sigclicked.connect([this]() { die(); });
-
-	button_box->add(
-	   UI::g_fh->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kFillSpace);
-	button_box->add_space(2 * kSpacing);
-	button_box->add(
-	   UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
-	box->add_inf_space();
-	box->add(new UI::MultilineTextarea(
-	            box, 0, 0, 100, 50, UI::PanelStyle::kWui,
-	            format(action_->action == Widelands::DiplomacyAction::kInvite ?
-                         _("%s has invited you to join their team.") :
-                         _("%s wants to join your team."),
-	                   iplayer_.egbase().get_safe_player(a.sender)->get_name()),
-	            UI::Align::kCenter, UI::MultilineTextarea::ScrollMode::kNoScrolling),
-	         UI::Box::Resizing::kExpandBoth);
-	box->add_space(kSpacing);
-	box->add(button_box, UI::Box::Resizing::kFullSize);
-
-	set_center_panel(box);
-	center_to_parent();
-	initialization_complete();
-}
-
-bool DiplomacyConfirmWindow::handle_key(bool down, SDL_Keysym code) {
-	if (down) {
-		switch (code.sym) {
-		case SDLK_RETURN:
-			ok();
-			return true;
-		default:
-			break;
-		}
-	}
-	return UI::Window::handle_key(down, code);
-}
-
-void DiplomacyConfirmWindow::ok() {
-	iplayer_.game().send_player_diplomacy(action_->other,
-	                                      action_->action == Widelands::DiplomacyAction::kInvite ?
-                                            Widelands::DiplomacyAction::kAcceptInvite :
-                                            Widelands::DiplomacyAction::kAcceptJoin,
-	                                      action_->sender);
-
-	action_ = nullptr;
-	die();
-}
-
-void DiplomacyConfirmWindow::die() {
-	if (action_ != nullptr) {
-		iplayer_.game().send_player_diplomacy(action_->other,
-		                                      action_->action == Widelands::DiplomacyAction::kInvite ?
-                                               Widelands::DiplomacyAction::kRefuseInvite :
-                                               Widelands::DiplomacyAction::kRefuseJoin,
-		                                      action_->sender);
-	}
-
-	UI::Window::die();
-}
 
 GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
                                      UI::UniqueWindow::Registry& registry)
@@ -121,15 +43,10 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
      vbox_team_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      vbox_status_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      vbox_action_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     diplomacy_info_(&diplomacy_box_,
-                     0,
-                     0,
-                     100,
-                     0,
-                     UI::PanelStyle::kWui,
-                     "",
-                     UI::Align::kLeft,
-                     UI::MultilineTextarea::ScrollMode::kNoScrolling) {
+     actions_hbox_(&diplomacy_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     actions_vbox_descr_(&actions_hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     actions_vbox_yes_(&actions_hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     actions_vbox_no_(&actions_hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical) {
 
 	const bool rtl = UI::g_fh->fontset()->is_rtl();
 	const bool show_all_players =
@@ -178,8 +95,13 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 					                                       0 /* ignored */);
 				});
 				b2->sigclicked.connect([this]() {
-					iplayer_->game().send_player_diplomacy(
-					   iplayer_->player_number(), Widelands::DiplomacyAction::kResign, 0 /* ignored */);
+					if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+						iplayer_->game().send_player_diplomacy(iplayer_->player_number(),
+						                                       Widelands::DiplomacyAction::kResign,
+						                                       0 /* ignored */);
+					} else {
+						show_resign_confirm(*iplayer_);
+					}
 				});
 			} else {
 				b1 = new UI::Button(buttonsbox, "join", 0, 0, kButtonWidth, kRowSize,
@@ -233,9 +155,16 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 	hbox_.add(rtl ? &vbox_name_ : &vbox_team_, UI::Box::Resizing::kExpandBoth);
 	hbox_.add_space(kSpacing);
 	hbox_.add(rtl ? &vbox_flag_ : &vbox_action_, UI::Box::Resizing::kExpandBoth);
+
+	actions_hbox_.add(&actions_vbox_descr_, UI::Box::Resizing::kExpandBoth);
+	actions_hbox_.add_space(kSpacing);
+	actions_hbox_.add(&actions_vbox_yes_, UI::Box::Resizing::kFullSize);
+	actions_hbox_.add_space(kSpacing);
+	actions_hbox_.add(&actions_vbox_no_, UI::Box::Resizing::kFullSize);
+
 	diplomacy_box_.add(&hbox_, UI::Box::Resizing::kExpandBoth);
 	diplomacy_box_.add_space(kSpacing);
-	diplomacy_box_.add(&diplomacy_info_, UI::Box::Resizing::kFullSize);
+	diplomacy_box_.add(&actions_hbox_, UI::Box::Resizing::kExpandBoth);
 
 	update_diplomacy_details();
 	set_center_panel(&diplomacy_box_);
@@ -305,36 +234,106 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 		}
 	}
 
-	if (igbase_.game().pending_diplomacy_actions().empty()) {
-		diplomacy_info_.set_visible(false);
-	} else {
-		std::string text = "<rt><p>";
-		text += g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading)
-		           .as_font_tag(_("Pending Diplomacy Actions"));
-		text += "</p>";
-		for (const Widelands::Game::PendingDiplomacyAction& pda :
-		     igbase_.game().pending_diplomacy_actions()) {
-			std::string descr;
-			switch (pda.action) {
-			case Widelands::DiplomacyAction::kJoin:
-				descr = format(_("%1$s has requested to join the team of %2$s."),
-				               igbase_.egbase().player(pda.sender).get_name(),
-				               igbase_.egbase().player(pda.other).get_name());
-				break;
-			case Widelands::DiplomacyAction::kInvite:
-				descr = format(_("%1$s has invited %2$s to join their team."),
-				               igbase_.egbase().player(pda.sender).get_name(),
-				               igbase_.egbase().player(pda.other).get_name());
-				break;
-			default:
-				NEVER_HERE();
-			}
-			text += as_listitem(descr, UI::FontStyle::kWuiInfoPanelParagraph);
-		}
-		text += "</rt>";
-		diplomacy_info_.set_text(text);
-		diplomacy_info_.set_visible(true);
+	/* Recreate the list of pending actions if needed. */
+	std::list<Widelands::Game::PendingDiplomacyAction> new_list =
+	   igbase_.game().pending_diplomacy_actions();
+	if (cached_diplomacy_actions_ == new_list) {
+		return;
 	}
+	cached_diplomacy_actions_ = new_list;
+
+	for (UI::Box* box : {&actions_vbox_descr_, &actions_vbox_yes_, &actions_vbox_no_}) {
+		while (box->get_first_child() != nullptr) {
+			delete box->get_first_child();
+		}
+		box->clear();
+	}
+	unsigned index = 0;
+	for (const Widelands::Game::PendingDiplomacyAction& pda : cached_diplomacy_actions_) {
+		if (index > 0) {
+			actions_vbox_descr_.add_space(kSpacing);
+			actions_vbox_no_.add_space(kSpacing);
+			actions_vbox_yes_.add_space(kSpacing);
+		}
+
+		std::string descr;
+		std::string approve_string;
+		std::string deny_string;
+		switch (pda.action) {
+		case Widelands::DiplomacyAction::kJoin:
+			descr = format(_("%1$s has requested to join the team of %2$s."),
+			               igbase_.egbase().player(pda.sender).get_name(),
+			               igbase_.egbase().player(pda.other).get_name());
+			approve_string = _("Approve");
+			deny_string = _("Reject");
+			break;
+		case Widelands::DiplomacyAction::kInvite:
+			descr = format(_("%1$s has invited %2$s to join their team."),
+			               igbase_.egbase().player(pda.sender).get_name(),
+			               igbase_.egbase().player(pda.other).get_name());
+			approve_string = _("Accept");
+			deny_string = _("Refuse");
+			break;
+		default:
+			NEVER_HERE();
+		}
+
+		actions_vbox_descr_.add_inf_space();
+		actions_vbox_descr_.add(new UI::Textarea(&actions_vbox_descr_, UI::PanelStyle::kWui,
+		                                         UI::FontStyle::kWuiInfoPanelParagraph, descr),
+		                        UI::Box::Resizing::kFullSize);
+		actions_vbox_descr_.add_inf_space();
+		if (iplayer_ != nullptr && iplayer_->player_number() == pda.sender) {
+			UI::Button* b =
+			   new UI::Button(&actions_vbox_no_, format("retract_%u", index), 0, 0, kRowSize, kRowSize,
+			                  UI::ButtonStyle::kWuiSecondary,
+			                  g_image_cache->get("images/wui/menu_abort.png"), _("Retract"));
+			b->sigclicked.connect([this, pda]() {
+				iplayer_->game().send_player_diplomacy(
+				   pda.sender,
+				   pda.action == Widelands::DiplomacyAction::kInvite ?
+                  Widelands::DiplomacyAction::kRetractInvite :
+                  Widelands::DiplomacyAction::kRetractJoin,
+				   pda.other);
+			});
+			actions_vbox_no_.add(b);
+			actions_vbox_yes_.add_space(kRowSize);
+		} else if (iplayer_ != nullptr &&
+		           iplayer_->player().may_approve_request(pda.action, pda.sender, pda.other)) {
+			UI::Button* b1 =
+			   new UI::Button(&actions_vbox_yes_, format("approve_%u", index), 0, 0, kRowSize,
+			                  kRowSize, UI::ButtonStyle::kWuiSecondary,
+			                  g_image_cache->get("images/wui/menu_okay.png"), approve_string);
+			UI::Button* b2 =
+			   new UI::Button(&actions_vbox_no_, format("reject_%u", index), 0, 0, kRowSize, kRowSize,
+			                  UI::ButtonStyle::kWuiSecondary,
+			                  g_image_cache->get("images/wui/menu_abort.png"), deny_string);
+			b1->sigclicked.connect([this, pda]() {
+				iplayer_->game().send_player_diplomacy(
+				   pda.other,
+				   pda.action == Widelands::DiplomacyAction::kInvite ?
+                  Widelands::DiplomacyAction::kAcceptInvite :
+                  Widelands::DiplomacyAction::kAcceptJoin,
+				   pda.sender);
+			});
+			b2->sigclicked.connect([this, pda]() {
+				iplayer_->game().send_player_diplomacy(
+				   pda.other,
+				   pda.action == Widelands::DiplomacyAction::kInvite ?
+                  Widelands::DiplomacyAction::kRefuseInvite :
+                  Widelands::DiplomacyAction::kRefuseJoin,
+				   pda.sender);
+			});
+			actions_vbox_yes_.add(b1);
+			actions_vbox_no_.add(b2);
+		} else {
+			actions_vbox_yes_.add_space(kRowSize);
+			actions_vbox_no_.add_space(kRowSize);
+		}
+
+		++index;
+	}
+	initialization_complete();
 }
 
 void GameDiplomacyMenu::think() {

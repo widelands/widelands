@@ -331,6 +331,27 @@ void Player::set_team_number(TeamNumber team) {
 	update_team_players();
 }
 
+bool Player::may_approve_request(DiplomacyAction action, PlayerNumber from, PlayerNumber to) const {
+	if (from == player_number()) {
+		return false;
+	}
+	if (to == player_number()) {
+		return true;
+	}
+
+	switch (action) {
+	case DiplomacyAction::kInvite:
+		return false;  // Only the invited player may do that.
+
+	case DiplomacyAction::kJoin:
+		/* If we are on the same team as the recipient, we may decide this too. */
+		return team_number() != 0 && team_number() == egbase().player(to).team_number();
+
+	default:
+		NEVER_HERE();
+	}
+}
+
 /**
  * Returns whether this player and the given other player can attack
  * each other.
