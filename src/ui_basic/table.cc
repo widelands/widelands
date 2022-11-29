@@ -136,7 +136,7 @@ void Table<void*>::add_column(uint32_t const width,
 	}
 }
 
-void Table<void*>::set_column_title(uint8_t const col, const std::string& title) {
+void Table<void*>::set_column_title(const uint8_t col, const std::string& title) {
 	assert(col < columns_.size());
 	Column& column = columns_.at(col);
 	assert(column.btn);
@@ -151,7 +151,7 @@ void Table<void*>::set_column_tooltip(uint8_t col, const std::string& text) {
 	column.update_tooltip(col == get_sort_column());
 }
 
-void Table<void*>::Column::update_tooltip(bool sorted) {
+void Table<void*>::Column::update_tooltip(const bool sorted) const {
 	const std::string click_tooltip =
 	   sorted ? _("Click to reverse sorting") : _("Click to sort by this column");
 	if (user_tooltip.empty()) {

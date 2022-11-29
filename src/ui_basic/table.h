@@ -202,7 +202,7 @@ public:
 	size_t number_of_columns() const;
 
 	void clear();
-	void set_sort_column(uint8_t const col);
+	void set_sort_column(uint8_t col);
 	uint8_t get_sort_column() const {
 		return sort_column_;
 	}
@@ -314,7 +314,7 @@ private:
 		CompareFn compare;
 		std::string user_tooltip;
 
-		void update_tooltip(bool sorted);
+		void update_tooltip(bool sorted) const;
 	};
 	using Columns = std::vector<Column>;
 
