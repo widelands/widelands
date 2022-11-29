@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-10 03:01+0000\n"
+"POT-Creation-Date: 2022-11-25 03:25+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>, 2016-2018,2020\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/txts/ABOUT.lua:7
 msgid "Readme"
@@ -791,9 +791,12 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads. The "
-"supplies and demands of buildings are handled in its economy."
-msgstr "Uma economia consiste em todos os edifícios e bandeiras ligados por estradas. Ela trata do abastecimento e das exigências dos seus edifícios."
+"An economy consists of all buildings and flags connected by roads, ferries "
+"or ships. The supplies and demands of buildings are handled in its economy. "
+"A player may have more than one economies, if those are not connected by any"
+" of these means. This is why the configure economy menu can only be accessed"
+" from flags and warehouses, not the player’s main menu."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:69
 msgid ""
