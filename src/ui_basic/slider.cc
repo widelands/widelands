@@ -279,7 +279,7 @@ void Slider::set_highlighted(bool highlighted) {
 
 bool Slider::handle_key(bool down, SDL_Keysym code) {
 	if (down && enabled_) {
-		switch (get_keyboard_change(code, true)) {
+		switch (get_keyboard_change(code)) {
 		case ChangeType::kPlus:
 			set_value(get_value() + 1);
 			return true;

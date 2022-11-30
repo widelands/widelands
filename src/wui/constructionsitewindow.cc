@@ -537,6 +537,12 @@ bool ConstructionSoldierCapacityBox::handle_key(bool down, SDL_Keysym code) {
 		case ChangeType::kMinus:
 			change_current(-1);
 			return true;
+		case ChangeType::kBigPlus:
+			change_current(3);
+			return true;
+		case ChangeType::kBigMinus:
+			change_current(-3);
+			return true;
 		case ChangeType::kSetMax:
 			set_current(max_);
 			return true;
@@ -555,7 +561,12 @@ bool ConstructionSoldierCapacityBox::handle_mousewheel(int32_t x, int32_t y, uin
 	}
 	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
 	if (change == 0) {
-		return false;
+		// Try big step
+		change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValueBig, x, y, modstate);
+		if (change == 0) {
+			return false;
+		}
+		change *= 3;
 	}
 	change_current(change);
 	return true;

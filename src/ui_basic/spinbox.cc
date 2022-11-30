@@ -238,7 +238,7 @@ SpinBox::~SpinBox() {
 
 bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
-		switch (get_keyboard_change(code, true)) {
+		switch (get_keyboard_change(code)) {
 		case ChangeType::kNone:
 			break;
 		case ChangeType::kPlus:

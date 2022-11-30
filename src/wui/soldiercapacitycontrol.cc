@@ -132,13 +132,15 @@ void SoldierCapacityControl::click_increase() {
 bool SoldierCapacityControl::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
 	if (change == 0) {
-		return false;
+		// Try big step
+		change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValueBig, x, y, modstate);
+		if (change == 0) {
+			return false;
+		}
+		// Arbitrary value: big step is 3.
+		change *= 3;
 	}
-	if (change > 0) {
-		click_increase();
-	} else {
-		click_decrease();
-	}
+	change_soldier_capacity(change);
 	return true;
 }
 

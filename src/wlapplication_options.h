@@ -311,7 +311,7 @@ enum class ChangeType : int32_t {
 };
 
 // Helper function for spinbox, slider, etc. handle_key(...)
-ChangeType get_keyboard_change(SDL_Keysym, bool enable_big_step = false);
+ChangeType get_keyboard_change(SDL_Keysym);
 
 /*
  * Sets the directory where to read/write kConfigFile.
