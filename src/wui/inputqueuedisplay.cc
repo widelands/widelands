@@ -405,9 +405,8 @@ bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstat
 		   MousewheelHandlerConfigID::kChangeValueBig, x, y, modstate & ~KMOD_SHIFT);
 		if (change == 0) {
 			return false;
-		} else {
-			big_step = true;
 		}
+		big_step = true;
 	}
 
 	if (get_mouse_position().x < priority_.get_x() - kButtonSize / 4) {
