@@ -401,8 +401,8 @@ bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstat
 	                                       modstate & ~KMOD_SHIFT);
 	if (change == 0) {
 		// Try big step
-		change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValueBig, x, y,
-		                                       modstate & ~KMOD_SHIFT);
+		change = get_mousewheel_change(
+		   MousewheelHandlerConfigID::kChangeValueBig, x, y, modstate & ~KMOD_SHIFT);
 		if (change == 0) {
 			return false;
 		} else {

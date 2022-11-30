@@ -679,8 +679,8 @@ void EditBox::highlight_selection(RenderTarget& dst,
 	std::string text_before_selection = m_->text.substr(0, start);
 	std::string text_before_sel_end = m_->text.substr(0, end);
 
-	Vector2i selection_start = Vector2i(
-	   text_width(text_before_selection, m_->font_style(), m_->font_scale), point.y);
+	Vector2i selection_start =
+	   Vector2i(text_width(text_before_selection, m_->font_style(), m_->font_scale), point.y);
 	Vector2i selection_end =
 	   Vector2i(text_width(text_before_sel_end, m_->font_style(), m_->font_scale), fontheight);
 
