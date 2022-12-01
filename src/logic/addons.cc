@@ -271,8 +271,9 @@ std::string list_game_relevant_addons() {
 
 	std::string addons_text =
 	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-	      .as_font_tag(format(
-	         ngettext("%u add-on in use:", "%u add-ons in use:", addons.size()), addons.size()));
+	      .as_font_tag(format(ngettext("%u game-relevant add-on in use:",
+	                                   "%u game-relevant add-ons in use:", addons.size()),
+	                          addons.size()));
 	for (const std::string& a : addons) {
 		addons_text += as_listitem(a, UI::FontStyle::kFsMenuInfoPanelParagraph);
 	}
