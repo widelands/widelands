@@ -23,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid "Note"
-msgstr "Заметка"
+msgstr "Примечание"
 
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:34
 msgid ""
@@ -125,8 +125,8 @@ msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
 msgstr ""
-"Решите, хотите ли вы помочь Мурилиусу против Варваров. Если да, наполните "
-"его склады следующими товарами:"
+"Решите, хотите ли вы помочь Мурилию против Варваров. Если да, наполните его "
+"склады следующими товарами:"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "30 × Log"
@@ -185,13 +185,12 @@ msgid ""
 "He forbade you to expand your territory until the wares have been handed "
 "over."
 msgstr ""
-"А если нет -  можете уничтожить склад, но тогда Мурилиус станет вашим "
-"врагом. Он не позволит вам расширять территорию до тех пор, пока не получит "
-"товары."
+"А если нет -  можете уничтожить склад, но тогда Мурилий станет вашим врагом."
+" Он не позволит вам расширять территорию до тех пор, пока не получит товары."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
-msgstr "Шпионьте за Мурилиусом"
+msgstr "Шпионьте за Мурилием"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Send a Scout to Spy on the Empire"
@@ -249,7 +248,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:107
 msgid "Defeat Murilius!"
-msgstr "Разбейте Мурилиуса!"
+msgstr "Разбейте Мурилия!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:109
 msgid "Defeat the Arrogant Outpost of the Empire"
@@ -265,11 +264,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:111
 msgid "Conquer every single field that still belongs to Murilius."
-msgstr "Захватите все до единого поля Мурилиуса."
+msgstr "Захватите все до единого поля Мурилия."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:116
 msgid "Defeat Murilius and the Barbarians!"
-msgstr "Разбейте и Мурилиуса, и Варваров!"
+msgstr "Разбейте и Мурилия, и Варваров!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat the Barbarians and the Empire Colony"
@@ -692,7 +691,7 @@ msgid ""
 "Empire, demand to know who you are and what business you have in these "
 "lands!"
 msgstr ""
-"Чужаки! Я, проконсул имперской провинции Северных Земель Мурилиус, хочу "
+"Чужаки! Я, проконсул имперской провинции Северных Земель Мурилий, хочу "
 "знать, кто вы такие и что вас привело на наши земли!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
@@ -904,8 +903,8 @@ msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
 msgstr ""
-"Мурилиус дал понять, что не оставит нас в покое. Боюсь, нам надо одолеть его"
-" и разрушить колонию, если хотим жить в мире."
+"Мурилий дал понять, что не оставит нас в покое. Боюсь, нам надо одолеть его "
+"и разрушить колонию, если хотим жить в мире."
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:376

@@ -2197,9 +2197,21 @@ void CmdDiplomacy::execute(Game& game) {
 
 	case DiplomacyAction::kAcceptJoin:
 	case DiplomacyAction::kRefuseJoin:
+	case DiplomacyAction::kRetractJoin:
 	case DiplomacyAction::kAcceptInvite:
-	case DiplomacyAction::kRefuseInvite: {
-		assert(other_player_ != sender());
+	case DiplomacyAction::kRefuseInvite:
+	case DiplomacyAction::kRetractInvite: {
+		PlayerNumber cmd_sender = sender();
+		bool retract = false;
+		if (action_ == DiplomacyAction::kRetractJoin || action_ == DiplomacyAction::kRetractInvite) {
+			/* Retracting is treated just like rejection but with a different message. */
+			std::swap(other_player_, cmd_sender);
+			retract = true;
+			action_ = (action_ == DiplomacyAction::kRetractJoin) ? DiplomacyAction::kRefuseJoin :
+                                                                DiplomacyAction::kRefuseInvite;
+		}
+		assert(other_player_ != cmd_sender);
+
 		const DiplomacyAction original_action =
 		   (action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kRefuseJoin) ?
             DiplomacyAction::kJoin :
@@ -2209,24 +2221,39 @@ void CmdDiplomacy::execute(Game& game) {
 			// Note that in the response the numbers of the two players
 			// are swapped compared to the original message.
 			if (it->action == original_action && it->sender == other_player_ &&
-			    it->other == sender()) {
+			    it->other == cmd_sender) {
 				const bool accept =
 				   action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kAcceptInvite;
+				std::string fmt_message;
+				if (accept) {
+					if (original_action == DiplomacyAction::kJoin) {
+						fmt_message = _("%1$s has accepted %2$s into their team.");
+					} else {
+						fmt_message = _("%1$s has accepted the invitation to join the team of %2$s.");
+					}
+				} else {
+					if (original_action == DiplomacyAction::kJoin) {
+						if (retract) {
+							fmt_message = _("%1$s has retracted the request to join the team of %2$s.");
+						} else {
+							fmt_message = _("%1$s has denied %2$s membership in their team.");
+						}
+					} else if (retract) {
+						fmt_message = _("%1$s has retracted the invitation to %2$s to join their team.");
+					} else {
+						fmt_message = _("%1$s has rejected the invitation to join the team of %2$s.");
+					}
+				}
 				broadcast_message(
 				   accept ? _("Team Change Accepted") : _("Team Change Rejected"),
-				   format(accept ? original_action == DiplomacyAction::kJoin ?
-                               _("%1$s has accepted %2$s into their team.") :
-                               _("%1$s has accepted the invitation to join the team of %2$s.") :
-				          original_action == DiplomacyAction::kJoin ?
-                               _("%1$s has denied %2$s membership in their team.") :
-                               _("%1$s has rejected the invitation to join the team of %2$s."),
-				          sending_player.get_name(), game.get_safe_player(other_player_)->get_name()));
+				   format(fmt_message, sending_player.get_name(),
+				          game.get_safe_player(retract ? cmd_sender : other_player_)->get_name()));
 
 				if (accept) {
 					Player* joiner = game.get_safe_player(
-					   original_action == DiplomacyAction::kJoin ? other_player_ : sender());
+					   original_action == DiplomacyAction::kJoin ? other_player_ : cmd_sender);
 					Player* other = game.get_safe_player(
-					   original_action != DiplomacyAction::kJoin ? other_player_ : sender());
+					   original_action != DiplomacyAction::kJoin ? other_player_ : cmd_sender);
 					if (other->team_number() == 0) {
 						// Assign both players to a previously unused team slot
 						std::set<TeamNumber> teams;
