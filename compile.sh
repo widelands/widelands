@@ -75,6 +75,10 @@ print_help () {
     echo "                      compiling and linking. Default is to leave 1 core"
     echo "                      free."
     echo " "
+    echo "--allow-more-cores"
+    echo "                      Allow 'j' to exceed the maximum number of cores"
+    echo "                      detected on the local machine."
+    echo ""
     echo "-r or --release       Create a release build. If this is not set,"
     echo "                      a debug build will be created."
     echo "-d or --debug         Create a debug build. This is the default,"
@@ -208,18 +212,12 @@ do
           exit 1
         ;;
       esac
-      if [ "$2" -lt 1 ]; then
-        echo "Invalid number of cores was specified: $2"
-        exit 1
-      fi
-      if [ "$MAXCORES" -ge "$2" -o "$MAXCORES" -eq 0 ]; then
-        CORES="$2"
-      else
-        echo "Cannot set number of cores to $2, because the maximum number"
-        echo "of supported cores is $MAXCORES."
-        exit 1
-      fi
-    shift 2 # past argument and value
+      REQUESTED_CORES=$2
+    shift 2
+    ;;
+    --allow-more-cores)
+      ALLOW_MORE_CORES=ON
+    shift # past argument and value
     ;;
     -r|--release)
       BUILD_TYPE="Release"
@@ -380,6 +378,18 @@ if [ -n "$EXTRA_OPTS" ]; then
   echo "Extra CMake options used: $EXTRA_OPTS"
   echo " "
   CMD_ADD "$EXTRA_OPTS"
+fi
+
+if [ "$REQUESTED_CORES" -lt 1 ]; then
+  echo "Invalid number of cores was specified: $2"
+  exit 1
+fi
+if [ "$MAXCORES" -ge "$REQUESTED_CORES" -o "$MAXCORES" -eq 0 -o -n "$ALLOW_MORE_CORES" ]; then
+  CORES="$REQUESTED_CORES"
+else
+  echo "Cannot set number of cores to $REQUESTED_CORES, because the maximum number"
+  echo "of supported cores is $MAXCORES."
+  exit 1
 fi
 
 echo "Using ${CORES} core(s)."
@@ -556,6 +566,14 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
                -DUSE_XDG=$USE_XDG                              \
                -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
 
+    if [ $CORES -gt $MAXCORES ] && [ "$BUILD_TRANSLATIONS" = "ON" ] ; then
+      if [ $MAXCORES -gt 0 ] ; then
+        local TMP_CORES=$MAXCORES;
+      else
+        local TMP_CORES=1;
+      fi
+      $RUN $buildtool lang -j $TMP_CORES
+    fi
     $RUN $buildtool -j $CORES
 
     return 0
