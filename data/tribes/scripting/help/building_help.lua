@@ -737,24 +737,27 @@ function building_help_production_section(tribe, building_description)
          for j, program in ipairs(programs) do
             trained = building_description:trained_soldiers(program)
             -- TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
-            result = result .. h3(_("Trained skill:"))
             if (trained[1] == "Health") then
-               result = result .. p(_("‘Health’ from %1% to %2%"):bformat(trained[2], trained[3]))
+               result = result .. h3(_("Health improvement:"))
+               result = result .. p(_("From %1% to %2%"):bformat(trained[2], trained[3]))
                result = result .. dependencies_basic({
                "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. trained[2] .. ".png",
                "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. trained[3] ..".png"})
             elseif (trained[1] == "Attack") then
-               result = result .. p(_("‘Attack’ from %1% to %2%"):bformat(trained[2], trained[3]))
+               result = result .. h3(_("Attack training:"))
+               result = result .. p(_("From %1% to %2%"):bformat(trained[2], trained[3]))
                result = result .. dependencies_basic({
                "tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. trained[2] .. ".png",
                "tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. trained[3] ..".png"})
             elseif (trained[1] == "Defense") then
-               result = result .. p(_("‘Defense’ from %1% to %2%"):bformat(trained[2], trained[3]))
+               result = result .. h3(_("Defense training:"))
+               result = result .. p(_("From %1% to %2%"):bformat(trained[2], trained[3]))
                result = result .. dependencies_basic({
                "tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. trained[2] .. ".png",
                "tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. trained[3] ..".png"})
             elseif (trained[1] == "Evade") then
-               result = result .. p(_("‘Evade’ from %1% to %2%"):bformat(trained[2], trained[3]))
+               result = result .. h3(_("Evade training:"))
+               result = result .. p(_("From %1% to %2%"):bformat(trained[2], trained[3]))
                result = result .. dependencies_basic({
                "tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. trained[2] .. ".png",
                "tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. trained[3] ..".png"})
