@@ -549,8 +549,6 @@ bool ConstructionSoldierCapacityBox::handle_key(bool down, SDL_Keysym code) {
 		case ChangeType::kSetMin:
 			set_current(min_);
 			return true;
-		default:
-			break;
 		}
 	}
 	return false;

@@ -280,6 +280,8 @@ void Slider::set_highlighted(bool highlighted) {
 bool Slider::handle_key(bool down, SDL_Keysym code) {
 	if (down && enabled_) {
 		switch (get_keyboard_change(code)) {
+		case ChangeType::kNone:
+			break;
 		case ChangeType::kPlus:
 			set_value(get_value() + 1);
 			return true;
@@ -298,8 +300,6 @@ bool Slider::handle_key(bool down, SDL_Keysym code) {
 		case ChangeType::kSetMin:
 			set_value(0);
 			return true;
-		default:
-			break;
 		}
 
 		int32_t num = -1;
