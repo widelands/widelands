@@ -551,7 +551,7 @@ bool ConstructionSoldierCapacityBox::handle_key(bool down, SDL_Keysym code) {
 			return true;
 		}
 	}
-	return false;
+	return Panel::handle_key(down, code);
 }
 bool ConstructionSoldierCapacityBox::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	if (!enabled_) {
