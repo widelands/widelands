@@ -281,7 +281,7 @@ void QuickNavigationWindow::rebuild() {
 
 		b = new UI::Button(
 		   &box, format("set_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-		   g_image_cache->get("images/wui/menus/save_game.png"),
+		   g_image_cache->get("images/wui/menus/quicknav_set.png"),
 		   i < kQuicknavSlots ?
             as_tooltip_text_with_hotkey(
 		         _("Set this landmark to the current map view location"),
