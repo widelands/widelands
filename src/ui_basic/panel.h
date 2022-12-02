@@ -298,6 +298,7 @@ public:
 	bool has_focus() const {
 		return (get_can_focus() && parent_->focus_ == this);
 	}
+	bool has_top_level_focus();
 	virtual void focus(bool topcaller = true);
 	Panel* focused_child() const {
 		return focus_;

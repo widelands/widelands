@@ -332,7 +332,7 @@ else()
   # Assuming GCC 4.8 or higher.
   if(WIN32)
     # This is needed for getenv().
-    wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
+    wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++17")
     if (OPTION_BUILD_WINSTATIC)
       set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ ${CMAKE_CXX_STANDARD_LIBRARIES}")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic")
@@ -397,7 +397,7 @@ if(NOT MSVC)
     endif()
   endif()
 
-  wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")
+  wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++17")
 endif()
 
 # Cross-compile-unit optimization slows linking significantly.
