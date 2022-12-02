@@ -72,6 +72,7 @@ struct WordWrap {
 	int text_width_of(std::string& text) const;
 
 	void focus();
+	void enter_cursor_movement_mode();
 
 private:
 	struct LineData {
@@ -115,7 +116,10 @@ private:
 	                         const Vector2i& point) const;
 	uint32_t line_index(int32_t y) const;
 	ScopedTimer caret_timer_;
-	uint32_t caret_ms;
+	uint32_t caret_ms_;
+	ScopedTimer cursor_movement_timer_;
+	uint32_t cursor_ms_;
+	bool cursor_movement_active_ = false;
 };
 
 }  // namespace UI
