@@ -142,6 +142,7 @@ public:
 		name_ = name;
 	}
 	void set_team_number(TeamNumber team);
+	bool may_approve_request(DiplomacyAction action, PlayerNumber from, PlayerNumber to) const;
 
 	void create_default_infrastructure();
 
@@ -620,6 +621,7 @@ public:
 
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
+	uint32_t count_soldiers() const;
 	uint32_t count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const;
 	uint32_t count_soldiers_h(unsigned) const;
 	uint32_t count_soldiers_a(unsigned) const;

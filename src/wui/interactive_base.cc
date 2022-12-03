@@ -1322,8 +1322,8 @@ Widelands::CoordPath InteractiveBase::get_build_road_path() const {
 	return road_building_mode_->path;
 }
 
-void InteractiveBase::log_message(const std::string& message) const {
-	info_panel_.log_message(message);
+void InteractiveBase::log_message(const std::string& message, const std::string& tooltip) const {
+	info_panel_.log_message(message, tooltip);
 }
 
 /**

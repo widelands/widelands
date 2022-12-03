@@ -331,6 +331,27 @@ void Player::set_team_number(TeamNumber team) {
 	update_team_players();
 }
 
+bool Player::may_approve_request(DiplomacyAction action, PlayerNumber from, PlayerNumber to) const {
+	if (from == player_number()) {
+		return false;
+	}
+	if (to == player_number()) {
+		return true;
+	}
+
+	switch (action) {
+	case DiplomacyAction::kInvite:
+		return false;  // Only the invited player may do that.
+
+	case DiplomacyAction::kJoin:
+		/* If we are on the same team as the recipient, we may decide this too. */
+		return team_number() != 0 && team_number() == egbase().player(to).team_number();
+
+	default:
+		NEVER_HERE();
+	}
+}
+
 /**
  * Returns whether this player and the given other player can attack
  * each other.
@@ -1872,6 +1893,13 @@ uint32_t Player::count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) 
 	const auto it =
 	   std::find(soldier_stats_.begin(), soldier_stats_.end(), SoldierStatistics(h, a, d, e));
 	return it == soldier_stats_.end() ? 0 : it->total;
+}
+uint32_t Player::count_soldiers() const {
+	uint32_t s = 0;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		s += ss.total;
+	}
+	return s;
 }
 uint32_t Player::count_soldiers_h(unsigned value) const {
 	uint32_t s = 0;

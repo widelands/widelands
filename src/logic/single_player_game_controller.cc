@@ -117,7 +117,7 @@ void SinglePlayerGameController::report_result(uint8_t p_nr,
                                                const std::string& info) {
 	Widelands::PlayerEndStatus pes;
 	Widelands::Player* player = game_.get_player(p_nr);
-	assert(player);
+	assert(player != nullptr);
 	pes.player = player->player_number();
 	pes.time = game_.get_gametime();
 	pes.result = result;

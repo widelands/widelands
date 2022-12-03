@@ -312,7 +312,7 @@ msgstr "Дом, милый дом"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:224
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:232
 msgid "Diary of Lutius"
-msgstr "Дневник Люциуса"
+msgstr "Дневник Люция"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:207
@@ -328,7 +328,7 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:210
 msgid "I expect that Saledus and Amalea are deeply delighted as well."
-msgstr "Ожидаю, что Саледус и Амалия также в восторге."
+msgstr "Ожидаю, что Салед и Амалия также в восторге."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:215
 msgid "Tools, Tools, Tools"
@@ -393,7 +393,7 @@ msgstr "Хаос"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:246
 msgid "Lutius is disappointed"
-msgstr "Люциус разочарован"
+msgstr "Люций разочарован"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:248
@@ -412,7 +412,7 @@ msgstr "Нужны объяснения"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:254
 msgid "Lutius greets the official"
-msgstr "Люциус приветствует чиновника"
+msgstr "Люций приветствует чиновника"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:256
@@ -425,7 +425,7 @@ msgstr "Трудные времена"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:262
 msgid "Lutius accepts the challenge"
-msgstr "Люциус принимает вызов"
+msgstr "Люций принимает вызов"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:264
@@ -528,9 +528,9 @@ msgid ""
 "our homeland again. But on the other hand, I have the impression that "
 "something went deeply wrong here."
 msgstr ""
-"Аве, Саледус! С одной стороны, вы правы, мне очень приятно снова увидеть "
-"нашу родину. Но, с другой стороны, у меня создается впечатление, что здесь "
-"что-то пошло не так."
+"Аве, Салед! С одной стороны, вы правы, мне очень приятно снова увидеть нашу "
+"родину. Но, с другой стороны, у меня создается впечатление, что здесь что-то"
+" пошло не так."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:306
@@ -560,7 +560,7 @@ msgid ""
 " You can hardly find a grain of dust left in there: no wares, no tools, no "
 "workers and no soldiers either."
 msgstr ""
-"Луциус, на мой взгляд, это будет очень сложной задачей. Но я боюсь, что мы "
+"Люций, на мой взгляд, это будет очень сложной задачей. Но я боюсь, что мы "
 "обречены на исправление этой ситуации. Что ещё хуже, меня ожидал неприятный "
 "сюрприз на складах: они все пустые. Вы вряд ли сможете найти там хоть что-то"
 " под слоем пыли: нет товаров, ни инструментов, ни рабочих, ни солдат."
@@ -671,7 +671,7 @@ msgid ""
 "Lutius, now we are getting somewhere. As we have gained some construction "
 "materials, we can start to rebuild our economy."
 msgstr ""
-"Люциус, у нас начало что-то получаться. Так как мы начали получать "
+"Люций, у нас начало что-то получаться. Так как мы начали получать "
 "строительные материалы, теперь мы можем начать восстанавливать нашу "
 "экономику."
 
@@ -712,7 +712,7 @@ msgid ""
 "Praise the gods, Lutius! We have found the plans on how to build and operate"
 " farms."
 msgstr ""
-"Хвала богам, Люциус! Мы нашли чертежи и теперь знаем как строить и "
+"Хвала богам, Люций! Мы нашли чертежи и теперь знаем как строить и "
 "эксплуатировать фермы."
 
 #. TRANSLATORS: Amalea
@@ -745,7 +745,7 @@ msgid ""
 "Lutius, well done so far. I just got the news that we have finished the "
 "basic buildings to obtain some construction materials."
 msgstr ""
-"Люциус, пока всё хорошо. Я только что получила новости, о том что мы "
+"Люций, пока всё хорошо. Я только что получила новости, о том что мы "
 "закончили основные здания, необходимые для производства строительных "
 "материалов."
 
@@ -871,7 +871,7 @@ msgid ""
 " our lumberjacks should be supplied with enough trees to enhance our "
 "economy."
 msgstr ""
-"Ну вот, Люциус, мы решили еще одну абсурдную проблему. Наконец-то наши "
+"Ну вот, Люций, мы решили еще одну абсурдную проблему. Наконец-то наши "
 "дровосеки будут обеспечены достаточным количеством деревьев для улучшения "
 "нашей экономики."
 
@@ -896,7 +896,7 @@ msgid ""
 "mills and breweries is somewhat outdated. This way, they are consuming far "
 "too many resources."
 msgstr ""
-"Хорошо Люциус, вот еще одна проблема: после того как мы произвели немного "
+"Хорошо Люций, вот еще одна проблема: после того как мы произвели немного "
 "пива и муки я поняла, что технология, которую мы используем на наших "
 "мельницах и пивоварнях, несколько устарела. Поэтому, они потребляют слишком "
 "много ресурсов."
@@ -1028,7 +1028,7 @@ msgid ""
 "immediately. After all, we need more tools to get our economy back up and "
 "build more and different production sites."
 msgstr ""
-"Хорошо, Люциус, другая проблема решена. Но много еще впереди. Поскольку "
+"Хорошо, Люций, другая проблема решена. Но много еще впереди. Поскольку "
 "сейчас мы уже можем производить продукты питания, нам следует немедленно "
 "начать добычу угля и железной руды. В конце концов, нам нужно больше "
 "инструментов, чтобы восстановить нашу экономику и построить больше разных "
@@ -1072,7 +1072,7 @@ msgid ""
 "Lutius, it seems that our coal supply is a little weak. So, we need to "
 "expand and explore all mineable areas for more coal."
 msgstr ""
-"Люциус, похоже, поставки угля немного ослабли. Поэтому, нам необходимо "
+"Люций, похоже, поставки угля немного ослабли. Поэтому, нам необходимо "
 "расширить границы и исследовать все области добычи для получения большего "
 "количества угля."
 
@@ -1139,9 +1139,9 @@ msgid ""
 "wine. We found the additional wares while we were taking stock recently. "
 "Maybe the goddess Vesta is still supporting us."
 msgstr ""
-"Ура, Люциус! Не знаю от кого, но нам прислали дары: пиво и вино. Их мы "
-"нашли, когда проводили пересчет товаров на складах. Быть может, это Веста "
-"помогает нам."
+"Ура, Люций! Не знаю от кого, но нам прислали дары: пиво и вино. Их мы нашли,"
+" когда проводили пересчет товаров на складах. Быть может, это Веста помогает"
+" нам."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:547
 msgid "Amalea Analyzes the Economy"
@@ -1149,7 +1149,7 @@ msgstr "Амалия анализирует экономику"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:548
 msgid "Amalea reminds Lutius of the farms…"
-msgstr "Амалия напоминает Люциусу о фермах..."
+msgstr "Амалия напоминает Люцию о фермах..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:550
@@ -1158,7 +1158,7 @@ msgid ""
 "there might be a problem with our farms. They don’t show any productivity "
 "although there is enough space to plant wheat."
 msgstr ""
-"Послушай, Люциус, я только что проанализировала перспективы развития нашей "
+"Послушай, Люций, я только что проанализировала перспективы развития нашей "
 "экономики. Думаю, что могут возникнуть проблемы с нашими фермами. Они не "
 "дают нужной производительности, хотя для выращивания пшеницы достаточно "
 "места."
@@ -1185,8 +1185,8 @@ msgid ""
 "Excuse me Lutius, but I think the most critical resources in the current "
 "state of our economy are logs."
 msgstr ""
-"Прости меня, Люциус, но я думаю, что самыми критическими ресурсами в "
-"нынешнем состоянии нашей экономики являются бревна."
+"Прости меня, Люций, но я думаю, что самыми критическими ресурсами в нынешнем"
+" состоянии нашей экономики являются бревна."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:566
@@ -1205,7 +1205,7 @@ msgstr "Напоминание Амалии о проблемах дорожно
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:572
 msgid "Amalea reminds Lutius of the scrambled road network…"
-msgstr "Амалия напоминает Люциусу о запутанной дорожной сети..."
+msgstr "Амалия напоминает Люцию о запутанной дорожной сети..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:574
@@ -1244,8 +1244,8 @@ msgid ""
 "Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
-"Проклятье, Люциус! Я не знаю как, но дикари захватили наш штаб. Мы проиграли"
-" и эту битву, и нашу империю!"
+"Проклятье, Люций! Я не знаю как, но дикари захватили наш штаб. Мы проиграли "
+"и эту битву, и нашу империю!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:591
 msgid "Amalea reports our headquarters lost…"
@@ -1258,7 +1258,7 @@ msgid ""
 "have destroyed our headquarters. So, we can’t deliver the wares to Julia "
 "anymore."
 msgstr ""
-"О нет, Люциус. Я не знаю, как это могло случиться, но дикари разрушили наши "
+"О нет, Люций. Я не знаю, как это могло случиться, но дикари разрушили наши "
 "штабы. Мы не сможем уже отправить товары Юлии."
 
 #. TRANSLATORS: Amalea
@@ -1277,8 +1277,8 @@ msgid ""
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
-"О, нет, Люциус. Я не знаю, как это могло случиться, но и последний наш склад"
-" разрушен дикарями. Мы проиграли и битву, и нашу империю!"
+"О, нет, Люций. Я не знаю, как это могло случиться, но и последний наш склад "
+"разрушен дикарями. Мы проиграли и битву, и нашу империю!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:609
 msgid "Amalea in a Hurry"
@@ -1311,7 +1311,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:623
 msgid "Saledus looks very relaxed…"
-msgstr "Саледус выглядит очень расслабленным ..."
+msgstr "Салед выглядит очень расслабленным ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:625
@@ -1330,7 +1330,7 @@ msgstr "Мы могли бы использовать войска вместо 
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:631
 msgid "Saledus raises his voice…"
-msgstr "Саледус поднимает голос..."
+msgstr "Салед возвышает голос..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:633
@@ -1356,7 +1356,7 @@ msgstr "Легкая победа"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:644
 msgid "Saledus is cheering proudly…"
-msgstr "Саледус радостно приветствует ..."
+msgstr "Салед радостно приветствует ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:646
@@ -1374,7 +1374,7 @@ msgstr "Неповиновение"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:652
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:660
 msgid "Saledus asserts his point…"
-msgstr "Саледус утверждает свою точку зрения ..."
+msgstr "Салед настаивает на своём ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:654
@@ -1408,7 +1408,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:669
 msgid "Saledus asks for a stronger army…"
-msgstr "Саледус просит более сильную армию..."
+msgstr "Салед просит более сильную армию..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:671
@@ -1441,7 +1441,7 @@ msgstr "Требуется тренировка"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:685
 msgid "Saledus still has security concerns…"
-msgstr "Саледуса все еще беспокоит безопастность..."
+msgstr "Саледа все еще беспокоит безопастность..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:687
@@ -1471,7 +1471,7 @@ msgstr "Слава имперской армии"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:697
 msgid "Saledus is happy…"
-msgstr "Саледус счастлив ..."
+msgstr "Салед счастлив ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:699
@@ -1498,7 +1498,7 @@ msgstr "Нам просто нужен еще один герой"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:709
 msgid "Saledus is in a good mood…"
-msgstr "У Саледуса хорошее настроение ..."
+msgstr "У Саледа хорошее настроение ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:711
@@ -1538,7 +1538,7 @@ msgstr "Мы должны изгнать варваров"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:723
 msgid "Saledus is excited…"
-msgstr "Саледус взволнован..."
+msgstr "Салед взволнован..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:725
@@ -1563,7 +1563,7 @@ msgstr "Победа за нами"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:735
 msgid "Saledus is cheering loudly…"
-msgstr "Саледус громко приветствует ..."
+msgstr "Салед громко приветствует ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:737
@@ -1589,7 +1589,7 @@ msgstr "Враг близок"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:745
 msgid "Saledus is alerted…"
-msgstr "Саледус предупрежден ..."
+msgstr "Салед предупрежден ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:747
@@ -1623,7 +1623,7 @@ msgid ""
 "goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 amphoras of wine"
 " to prepare a worthy sacrifice for her."
 msgstr ""
-"Аве, Люциус! Если вы хотите, чтобы мы вам помогли, для начала вы должны "
+"Аве, Люций! Если вы хотите, чтобы мы вам помогли, для начала вы должны "
 "воздать поклонение нашей богине Весте. Поэтому доставьте 35 снопов пшеницы и"
 " 15 амфор вина, чтобы принести ей достойную жертву."
 
@@ -1643,7 +1643,7 @@ msgid ""
 "you need so desperately as well. Furthermore, we will pray for you and join "
 "your party to safeguard our land from the Barbarians."
 msgstr ""
-"Спасибо, Люциус, ты хорошо послужил нашей богине. Вы получите не только "
+"Спасибо, Люций, ты хорошо послужил нашей богине. Вы получите не только "
 "улучшения технологий, но и товары, в которых вы остро нуждаетесь. Кроме "
 "того, мы будем молиться за вас и присоединимся к вам, чтобы защитить нашу "
 "землю от варваров."
@@ -1663,8 +1663,8 @@ msgid ""
 " life and your land be cursed and may the wrath of the goddess scourge your "
 "family from the face of the earth!"
 msgstr ""
-"Проклинаю тебя Люциус за убийство мирных слуг богини Весты! Пусть твоя жизнь"
-" и твоя земля будут прокляты, и гнев богини сотрет твою семью с лица земли!"
+"Проклинаю тебя Люций за убийство мирных слуг богини Весты! Пусть твоя жизнь "
+"и твоя земля будут прокляты, и гнев богини сотрет твою семью с лица земли!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
 msgctxt "empire_building"

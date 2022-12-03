@@ -141,10 +141,10 @@ jobs:
           - compiler: g++-8
             os: ubuntu-20.04
             config: Release
-          - compiler: clang-6.0
+          - compiler: clang-8
             os: ubuntu-20.04
             config: Debug
-          - compiler: clang-6.0
+          - compiler: clang-8
             os: ubuntu-20.04
             config: Release
           - compiler: clang-7
