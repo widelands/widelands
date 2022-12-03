@@ -56,6 +56,7 @@ struct AddOnCategoryInfo {
 	std::string internal_name;
 	std::function<std::string()> descname;
 	std::string icon;
+	bool network_relevant;
 };
 
 using AddOnVersion = std::vector<uint32_t>;
@@ -151,6 +152,8 @@ AddOnCategory get_category(const std::string&);
 AddOnConflict check_requirements(const AddOnRequirements&);
 
 unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
+
+std::string list_game_relevant_addons();
 
 /**
  * If an add-on of type `base` requires an add-on of type `dependency`, this function
