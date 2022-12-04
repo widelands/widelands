@@ -131,7 +131,8 @@ public:
 	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test'
 	/// returned 'true' for their filenames.
 	template <class UnaryPredicate>
-	[[nodiscard]] [[nodiscard]] [[nodiscard]] [[nodiscard]] [[nodiscard]] FilenameSet filter_directory(const std::string& directory, UnaryPredicate test) const {
+	[[nodiscard]] [[nodiscard]] [[nodiscard]] [[nodiscard]] [[nodiscard]] FilenameSet
+	filter_directory(const std::string& directory, UnaryPredicate test) const {
 		FilenameSet result = list_directory(directory);
 		for (auto it = result.begin(); it != result.end();) {
 			if (!test(*it)) {
@@ -146,8 +147,8 @@ public:
 	/// Returns all files in the given 'directory' that match 'basename' followed by 1-3 numbers,
 	/// followed by '.', followed by 'extension'
 	[[nodiscard]] std::vector<std::string> get_sequential_files(const std::string& directory,
-	                                              const std::string& basename,
-	                                              const std::string& extension) const;
+	                                                            const std::string& basename,
+	                                                            const std::string& extension) const;
 
 	virtual unsigned long long disk_space() = 0;  // NOLINT
 

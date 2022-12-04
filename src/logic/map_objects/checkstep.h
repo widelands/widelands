@@ -51,10 +51,10 @@ private:
 		}
 
 		[[nodiscard]] bool allowed(const Map& map,
-		             const FCoords& start,
-		             const FCoords& end,
-		             int32_t const dir,
-		             StepId const id) const override {
+		                           const FCoords& start,
+		                           const FCoords& end,
+		                           int32_t const dir,
+		                           StepId const id) const override {
 			return op.allowed(map, start, end, dir, id);
 		}
 		[[nodiscard]] bool reachable_dest(const Map& map, const FCoords& dest) const override {
@@ -79,10 +79,10 @@ public:
 	 * direction) is allowed.
 	 */
 	[[nodiscard]] bool allowed(const Map& map,
-	             const FCoords& start,
-	             const FCoords& end,
-	             int32_t const dir,
-	             StepId const id) const {
+	                           const FCoords& start,
+	                           const FCoords& end,
+	                           int32_t const dir,
+	                           StepId const id) const {
 		return capsule->allowed(map, start, end, dir, id);
 	}
 
@@ -103,10 +103,10 @@ struct CheckStepAnd {
 	void add(const CheckStep& sub);
 
 	[[nodiscard]] bool allowed(const Map&,
-	             const FCoords& start,
-	             const FCoords& end,
-	             int32_t dir,
-	             CheckStep::StepId id) const;
+	                           const FCoords& start,
+	                           const FCoords& end,
+	                           int32_t dir,
+	                           CheckStep::StepId id) const;
 	[[nodiscard]] bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:

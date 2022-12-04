@@ -155,6 +155,6 @@ private:
 	UI::Dropdown<AddOns::NetAddons::AdminAction> admin_action_;
 };
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_REMOTE_INTERACTION_H

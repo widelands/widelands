@@ -83,6 +83,6 @@ private:
 	ProgressIndicatorWindow progress_window_;
 };
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_PACKAGER_H

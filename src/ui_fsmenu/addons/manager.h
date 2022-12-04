@@ -146,6 +146,6 @@ private:
 	std::string username_, password_;
 };
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_MANAGER_H

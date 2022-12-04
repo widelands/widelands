@@ -117,7 +117,8 @@ public:
 		return *t;
 	}
 
-	template <typename... Args> [[nodiscard]] std::string format(const bool localize, Args... args) const {
+	template <typename... Args>
+	[[nodiscard]] std::string format(const bool localize, Args... args) const {
 		char* out(buffer_);
 		bool hit_last_arg = false;
 

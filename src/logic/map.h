@@ -546,8 +546,8 @@ public:
 	 * To qualify as valid, resources need to be surrounded by at least two matching terrains.
 	 */
 	[[nodiscard]] bool is_resource_valid(const Widelands::Descriptions& descriptions,
-	                       const Widelands::FCoords& c,
-	                       DescriptionIndex curres) const;
+	                                     const Widelands::FCoords& c,
+	                                     DescriptionIndex curres) const;
 
 	// The objectives that are defined in this map if it is a scenario.
 	[[nodiscard]] const Objectives& objectives() const {
@@ -633,9 +633,9 @@ private:
 	[[nodiscard]] NodeCaps
 	calc_nodecaps_pass1(const EditorGameBase&, const FCoords&, bool consider_mobs = true) const;
 	[[nodiscard]] NodeCaps calc_nodecaps_pass2(const EditorGameBase&,
-	                             const FCoords&,
-	                             bool consider_mobs = true,
-	                             NodeCaps initcaps = CAPS_NONE) const;
+	                                           const FCoords&,
+	                                           bool consider_mobs = true,
+	                                           NodeCaps initcaps = CAPS_NONE) const;
 	void check_neighbour_heights(FCoords, uint32_t& area);
 	int calc_buildsize(const EditorGameBase&,
 	                   const FCoords& f,
@@ -643,7 +643,8 @@ private:
 	                   bool* ismine = nullptr,
 	                   bool consider_mobs = true,
 	                   NodeCaps initcaps = CAPS_NONE) const;
-	[[nodiscard]] bool is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>&) const;
+	[[nodiscard]] bool is_cycle_connected(const FCoords& start,
+	                                      const std::vector<WalkingDir>&) const;
 	template <typename functorT>
 	void
 	find_reachable(const EditorGameBase&, const Area<FCoords>&, const CheckStep&, functorT&) const;

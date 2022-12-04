@@ -49,6 +49,6 @@ private:
 	void reset();
 };
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_LOGIN_BOX_H

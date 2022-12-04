@@ -80,6 +80,6 @@ private:
 	const bool full_upgrade_possible_;
 };
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_ROWS_UI_H

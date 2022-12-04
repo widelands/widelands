@@ -62,8 +62,8 @@ public:
 	[[nodiscard]] const std::string& lookup_program(const std::string& program) const;
 
 protected:
-	[[nodiscard]] const std::string& lookup_entry(const std::string& entry,
-	                                const std::map<std::string, std::string>& table) const;
+	[[nodiscard]] const std::string&
+	lookup_entry(const std::string& entry, const std::map<std::string, std::string>& table) const;
 
 	// <old name, new name>
 	const std::map<std::string, std::string> workers_;

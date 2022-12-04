@@ -93,7 +93,8 @@ struct MapGenLandResource {
 	[[nodiscard]] uint32_t get_weight() const {
 		return weight_;
 	}
-	[[nodiscard]] const MapGenBobCategory* get_bob_category(MapGenAreaInfo::Terrain terrain_type) const;
+	[[nodiscard]] const MapGenBobCategory*
+	get_bob_category(MapGenAreaInfo::Terrain terrain_type) const;
 
 	[[nodiscard]] uint8_t get_immovable_density() const {
 		return immovable_density_;

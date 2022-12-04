@@ -134,7 +134,8 @@ public:
 	                                        const ResourceAmount amount) const;
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
-	[[nodiscard]] const Widelands::TribeBasicInfo::Initialization& initialization(const uint8_t index) const {
+	[[nodiscard]] const Widelands::TribeBasicInfo::Initialization&
+	initialization(const uint8_t index) const {
 		return basic_info_.initializations.at(index);
 	}
 
@@ -201,7 +202,8 @@ public:
 	// The custom toolbar imageset if any. Can be nullptr.
 	[[nodiscard]] ToolbarImageset* toolbar_image_set() const;
 
-	[[nodiscard]] const std::map<std::string /* key */, std::string /* building */>& fastplace_defaults() const {
+	[[nodiscard]] const std::map<std::string /* key */, std::string /* building */>&
+	fastplace_defaults() const {
 		return fastplace_defaults_;
 	}
 

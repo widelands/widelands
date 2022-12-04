@@ -198,7 +198,8 @@ struct ProductionProgram : public MapObjectProgram {
 			}
 			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
 			[[nodiscard]] std::string description(const Descriptions& descriptions) const override;
-			[[nodiscard]] std::string description_negation(const Descriptions& descriptions) const override;
+			[[nodiscard]] std::string
+			description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			DescriptionIndex ware_type;
@@ -210,7 +211,8 @@ struct ProductionProgram : public MapObjectProgram {
 			}
 			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
 			[[nodiscard]] std::string description(const Descriptions& descriptions) const override;
-			[[nodiscard]] std::string description_negation(const Descriptions& descriptions) const override;
+			[[nodiscard]] std::string
+			description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			DescriptionIndex worker_type;
@@ -226,7 +228,8 @@ struct ProductionProgram : public MapObjectProgram {
 			        const Descriptions& descriptions);
 			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
 			[[nodiscard]] std::string description(const Descriptions& descriptions) const override;
-			[[nodiscard]] std::string description_negation(const Descriptions& descriptions) const override;
+			[[nodiscard]] std::string
+			description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			WareTypeGroup group;
@@ -540,7 +543,8 @@ struct ProductionProgram : public MapObjectProgram {
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;
 
-		[[nodiscard]] const ImmovableDescr& get_construction_descr(const Descriptions& descriptions) const;
+		[[nodiscard]] const ImmovableDescr&
+		get_construction_descr(const Descriptions& descriptions) const;
 
 	private:
 		std::string objectname;

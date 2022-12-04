@@ -105,8 +105,8 @@ public:
 	/// We need to expose these for the packed animation,
 	/// so that the create_spritesheet utility can use them.
 	/// Do not use otherwise.
-	[[nodiscard]] std::vector<std::unique_ptr<const Texture>> frame_textures(float scale,
-	                                                           bool return_playercolor_masks) const;
+	[[nodiscard]] std::vector<std::unique_ptr<const Texture>>
+	frame_textures(float scale, bool return_playercolor_masks) const;
 
 	/// The scales for which this animation has exact images.
 	[[nodiscard]] std::set<float> available_scales() const;

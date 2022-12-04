@@ -44,12 +44,13 @@ private:
 	[[nodiscard]] virtual const std::string
 	create_header_for_confirmation_window(const size_t no_selections) const;
 	void delete_and_count_failures(const std::vector<SavegameData>& to_be_deleted) const;
-	[[nodiscard]] virtual uint32_t try_to_delete(const std::vector<SavegameData>& to_be_deleted) const;
+	[[nodiscard]] virtual uint32_t
+	try_to_delete(const std::vector<SavegameData>& to_be_deleted) const;
 
 	void notify_deletion_failed(const std::vector<SavegameData>& to_be_deleted,
 	                            const uint32_t no_failed) const;
-	[[nodiscard]] virtual std::string create_header_for_deletion_failed_window(size_t no_to_be_deleted,
-	                                                             size_t no_failed) const;
+	[[nodiscard]] virtual std::string
+	create_header_for_deletion_failed_window(size_t no_to_be_deleted, size_t no_failed) const;
 
 	UI::Panel* parent_;
 	UI::WindowStyle style_;
@@ -62,9 +63,11 @@ public:
 private:
 	[[nodiscard]] const std::string
 	create_header_for_confirmation_window(const size_t no_selections) const override;
-	[[nodiscard]] std::string create_header_for_deletion_failed_window(size_t no_to_be_deleted,
-	                                                     size_t no_failed) const override;
-	[[nodiscard]] uint32_t try_to_delete(const std::vector<SavegameData>& to_be_deleted) const override;
+	[[nodiscard]] std::string
+	create_header_for_deletion_failed_window(size_t no_to_be_deleted,
+	                                         size_t no_failed) const override;
+	[[nodiscard]] uint32_t
+	try_to_delete(const std::vector<SavegameData>& to_be_deleted) const override;
 };
 
 #endif  // WL_WUI_SAVEGAMEDELETER_H

@@ -51,6 +51,6 @@ private:
 	UI::ProgressBar progress_;
 };
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_PROGRESS_H

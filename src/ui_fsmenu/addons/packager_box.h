@@ -113,6 +113,6 @@ private:
 	AddOns::CampaignAddon* selected_;  // Not owned
 };
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_PACKAGER_BOX_H

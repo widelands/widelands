@@ -63,9 +63,11 @@ public:
 	void load_description(const std::string& description_name);
 
 	/// Return the attributes registered to the given description name.
-	[[nodiscard]] const std::vector<std::string>& get_attributes(const std::string& description_name) const;
+	[[nodiscard]] const std::vector<std::string>&
+	get_attributes(const std::string& description_name) const;
 
-	[[nodiscard]] const RegistryCallerInfo& get_registry_caller_info(const std::string& description_name) const;
+	[[nodiscard]] const RegistryCallerInfo&
+	get_registry_caller_info(const std::string& description_name) const;
 
 	/// Deregister all scenario object descrptions
 	void clear_scenario_descriptions();

@@ -137,10 +137,10 @@ struct CheckStepRoadAI {
 	CheckStepRoadAI(Widelands::Player* const pl, uint8_t const mc, bool const oe);
 
 	[[nodiscard]] bool allowed(const Widelands::Map&,
-	             Widelands::FCoords start,
-	             Widelands::FCoords end,
-	             int32_t dir,
-	             Widelands::CheckStep::StepId) const;
+	                           Widelands::FCoords start,
+	                           Widelands::FCoords end,
+	                           int32_t dir,
+	                           Widelands::CheckStep::StepId) const;
 	[[nodiscard]] bool reachable_dest(const Widelands::Map&, const Widelands::FCoords& dest) const;
 
 	Widelands::Player* player;
@@ -155,10 +155,10 @@ struct CheckStepOwnTerritory {
 	CheckStepOwnTerritory(Widelands::Player* const pl, uint8_t const mc, bool const oe);
 
 	[[nodiscard]] bool allowed(const Widelands::Map&,
-	             Widelands::FCoords start,
-	             Widelands::FCoords end,
-	             int32_t dir,
-	             Widelands::CheckStep::StepId) const;
+	                           Widelands::FCoords start,
+	                           Widelands::FCoords end,
+	                           int32_t dir,
+	                           Widelands::CheckStep::StepId) const;
 	[[nodiscard]] bool reachable_dest(const Widelands::Map&, const Widelands::FCoords& dest) const;
 
 	Widelands::Player* player;
@@ -262,7 +262,8 @@ struct FindNodeMineable {
 struct FindNodeWater {
 	explicit FindNodeWater(const Widelands::Descriptions& descriptions);
 
-	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& coord) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&,
+	                          const Widelands::FCoords& coord) const;
 
 private:
 	const Widelands::Descriptions& descriptions_;
@@ -275,7 +276,8 @@ struct FindNodeOpenWater {
 	explicit FindNodeOpenWater(const Widelands::Descriptions& /* descriptions */) {
 	}
 
-	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& coord) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&,
+	                          const Widelands::FCoords& coord) const;
 };
 
 struct FindNodeWithFlagOrRoad {

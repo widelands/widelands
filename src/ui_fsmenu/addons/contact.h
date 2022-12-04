@@ -44,6 +44,6 @@ private:
 	UI::Button ok_, cancel_;
 };
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_CONTACT_H
