@@ -321,6 +321,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winconsistent-missing-override")
   endif()
 elseif(MSVC)
+  wl_add_flag(WL_GENERIC_CXX_FLAGS "/std:c++17")
   # https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/
   # Disabled warnings that are overly verbose right now or just do not make sense.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "/wd4244")
