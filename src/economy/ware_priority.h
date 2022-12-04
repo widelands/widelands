@@ -35,7 +35,7 @@ public:
 	~WarePriority() {
 	}
 
-	uint32_t to_weighting_factor() const {
+	[[nodiscard]] uint32_t to_weighting_factor() const {
 		return value_;
 	}
 

@@ -123,10 +123,10 @@ struct AddOnInfo {
 	uint32_t votes[kMaxRating] = {0};  ///< Total number of votes for each of the ratings 1-10.
 	std::map<size_t, AddOnComment> user_comments;
 
-	bool matches_widelands_version() const;
-	uint32_t number_of_votes() const;
-	double average_rating() const;
-	bool requires_texture_atlas_rebuild() const;
+	[[nodiscard]] bool matches_widelands_version() const;
+	[[nodiscard]] uint32_t number_of_votes() const;
+	[[nodiscard]] double average_rating() const;
+	[[nodiscard]] bool requires_texture_atlas_rebuild() const;
 };
 
 using AddOnsList = std::vector<std::shared_ptr<AddOns::AddOnInfo>>;

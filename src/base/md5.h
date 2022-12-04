@@ -42,7 +42,7 @@ struct Md5Ctx {
 struct Md5Checksum {
 	uint8_t data[16];
 
-	std::string str() const;
+	[[nodiscard]] std::string str() const;
 
 	bool operator==(const Md5Checksum& o) const {
 		return memcmp(data, o.data, sizeof(data)) == 0;
@@ -110,7 +110,7 @@ public:
 	/// before this function.
 	///
 	/// \return a pointer to an array of 16 bytes containing the checksum.
-	const Md5Checksum& get_checksum() const {
+	[[nodiscard]] const Md5Checksum& get_checksum() const {
 		assert(!can_handle_data);
 		return sum;
 	}

@@ -46,7 +46,7 @@ public:
 	~NetHostProxy() override;
 
 	// Inherited from NetHostInterface
-	bool is_connected(ConnectionId id) const override;
+	[[nodiscard]] bool is_connected(ConnectionId id) const override;
 	void close(ConnectionId id) override;
 	bool try_accept(ConnectionId* new_id) override;
 	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;

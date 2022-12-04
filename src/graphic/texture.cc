@@ -73,7 +73,7 @@ public:
 		glDeleteFramebuffers(1, &gl_framebuffer_id_);
 	}
 
-	GLuint id() const {
+	[[nodiscard]] GLuint id() const {
 		return gl_framebuffer_id_;
 	}
 

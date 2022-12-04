@@ -37,52 +37,52 @@ struct BuildingHints {
 	~BuildingHints() {
 	}
 
-	bool needs_water() const {
+	[[nodiscard]] bool needs_water() const {
 		return needs_water_;
 	}
 
-	bool is_space_consumer() const {
+	[[nodiscard]] bool is_space_consumer() const {
 		return space_consumer_;
 	}
-	bool is_expansion_type() const {
+	[[nodiscard]] bool is_expansion_type() const {
 		return expansion_;
 	}
-	bool is_fighting_type() const {
+	[[nodiscard]] bool is_fighting_type() const {
 		return fighting_;
 	}
-	bool is_mountain_conqueror() const {
+	[[nodiscard]] bool is_mountain_conqueror() const {
 		return mountain_conqueror_;
 	}
 
-	bool requires_supporters() const {
+	[[nodiscard]] bool requires_supporters() const {
 		return requires_supporters_;
 	}
 
-	bool is_shipyard() const {
+	[[nodiscard]] bool is_shipyard() const {
 		return shipyard_;
 	}
 
-	bool supports_seafaring() const {
+	[[nodiscard]] bool supports_seafaring() const {
 		return supports_seafaring_;
 	}
 
-	uint32_t get_prohibited_till() const {
+	[[nodiscard]] uint32_t get_prohibited_till() const {
 		return prohibited_till_;
 	}
 
-	uint32_t basic_amount() const {
+	[[nodiscard]] uint32_t basic_amount() const {
 		return basic_amount_;
 	}
 
-	uint32_t get_forced_after() const {
+	[[nodiscard]] uint32_t get_forced_after() const {
 		return forced_after_;
 	}
 
-	int16_t get_ai_limit(AiType) const;
+	[[nodiscard]] int16_t get_ai_limit(AiType) const;
 
 	void set_trainingsites_max_percent(int percent);
 
-	uint8_t trainingsites_max_percent() const;
+	[[nodiscard]] uint8_t trainingsites_max_percent() const;
 
 private:
 	const bool needs_water_;

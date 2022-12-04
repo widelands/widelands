@@ -152,17 +152,17 @@ struct GameSettings {
 	}
 
 	/// Returns the basic preload info for a tribe.
-	Widelands::TribeBasicInfo get_tribeinfo(const std::string& tribename) const;
+	[[nodiscard]] Widelands::TribeBasicInfo get_tribeinfo(const std::string& tribename) const;
 
 	/// Find a player number that the slot could share in. Does not guarantee that a viable slot was
 	/// actually found.
-	Widelands::PlayerNumber find_shared(PlayerSlot slot) const;
+	[[nodiscard]] Widelands::PlayerNumber find_shared(PlayerSlot slot) const;
 	/// Check if the player number returned by find_shared is usable
-	bool is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber shared) const;
+	[[nodiscard]] bool is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber shared) const;
 	/// Savegame slots and certain scenario slots can't be closed
-	bool uncloseable(PlayerSlot slot) const;
+	[[nodiscard]] bool uncloseable(PlayerSlot slot) const;
 	/// AIs cannot be changed in scenarios
-	bool allows_ais(PlayerSlot slot) const;
+	[[nodiscard]] bool allows_ais(PlayerSlot slot) const;
 
 	/// Number of player position of the host player
 	int16_t playernum;

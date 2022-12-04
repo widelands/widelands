@@ -170,7 +170,7 @@ struct InternetGaming : public ChatProvider {
 	}
 
 	/// ChatProvider: returns the list of chatmessages.
-	const std::vector<ChatMessage>& get_messages() const override {
+	[[nodiscard]] const std::vector<ChatMessage>& get_messages() const override {
 		return messages_;
 	}
 
@@ -185,7 +185,7 @@ struct InternetGaming : public ChatProvider {
 		ingame_system_chat_.clear();
 	}
 
-	bool has_been_set() const override {
+	[[nodiscard]] bool has_been_set() const override {
 		return true;
 	}
 

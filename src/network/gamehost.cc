@@ -228,7 +228,7 @@ struct HostChatProvider : public ChatProvider {
 		h->send(c);
 	}
 
-	const std::vector<ChatMessage>& get_messages() const override {
+	[[nodiscard]] const std::vector<ChatMessage>& get_messages() const override {
 		return messages;
 	}
 
@@ -237,7 +237,7 @@ struct HostChatProvider : public ChatProvider {
 		Notifications::publish(msg);
 	}
 
-	bool has_been_set() const override {
+	[[nodiscard]] bool has_been_set() const override {
 		return true;
 	}
 

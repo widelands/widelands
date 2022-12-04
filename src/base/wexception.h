@@ -45,7 +45,7 @@ public:
 	 * The target of the returned pointer remains valid during the lifetime of
 	 * the WException object.
 	 */
-	const char* what() const noexcept override;
+	[[nodiscard]] const char* what() const noexcept override;
 
 protected:
 	WException() {

@@ -68,7 +68,7 @@ template <> struct MapTriangleRegion<FCoords> {
 		left_ = area_.node;
 	}
 
-	const TCoords<FCoords>& location() const {
+	[[nodiscard]] const TCoords<FCoords>& location() const {
 		return area_;
 	}
 
@@ -105,7 +105,7 @@ private:
 template <typename CoordsType> struct MapTriangleRegion<TCoords<CoordsType>> {
 	MapTriangleRegion(const Map&, Area<TCoords<CoordsType>, uint16_t>);
 
-	const TCoords<CoordsType>& location() const {
+	[[nodiscard]] const TCoords<CoordsType>& location() const {
 		return location_;
 	}
 

@@ -34,13 +34,13 @@ public:
 	}
 
 	// Implements Surface.
-	int width() const override;
-	int height() const override;
+	[[nodiscard]] int width() const override;
+	[[nodiscard]] int height() const override;
 
 	// Reads out the current pixels in the framebuffer and returns
 	// them as a texture for screenshots. This is a very slow process,
 	// so use with care.
-	std::unique_ptr<Texture> to_texture() const;
+	[[nodiscard]] std::unique_ptr<Texture> to_texture() const;
 
 private:
 	void do_blit(const Rectf& dst_rect,

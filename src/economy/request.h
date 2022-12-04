@@ -62,44 +62,44 @@ public:
 	Request(PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
 	~Request() override;
 
-	PlayerImmovable& target() const {
+	[[nodiscard]] PlayerImmovable& target() const {
 		return target_;
 	}
-	DescriptionIndex get_index() const {
+	[[nodiscard]] DescriptionIndex get_index() const {
 		return index_;
 	}
-	WareWorker get_type() const {
+	[[nodiscard]] WareWorker get_type() const {
 		return type_;
 	}
-	Quantity get_count() const {
+	[[nodiscard]] Quantity get_count() const {
 		return count_;
 	}
-	uint32_t get_open_count() const {
+	[[nodiscard]] uint32_t get_open_count() const {
 		return count_ - transfers_.size();
 	}
-	bool get_exact_match() const {
+	[[nodiscard]] bool get_exact_match() const {
 		return exact_match_;
 	}
-	bool is_open() const {
+	[[nodiscard]] bool is_open() const {
 		return transfers_.size() < count_;
 	}
-	Economy* get_economy() const {
+	[[nodiscard]] Economy* get_economy() const {
 		return economy_;
 	}
-	Time get_required_time() const;
-	const Time& get_last_request_time() const {
+	[[nodiscard]] Time get_required_time() const;
+	[[nodiscard]] const Time& get_last_request_time() const {
 		return last_request_time_;
 	}
-	uint32_t get_priority(int32_t cost) const;
-	uint32_t get_normalized_transfer_priority() const;
-	uint32_t get_num_transfers() const {
+	[[nodiscard]] uint32_t get_priority(int32_t cost) const;
+	[[nodiscard]] uint32_t get_normalized_transfer_priority() const;
+	[[nodiscard]] uint32_t get_num_transfers() const {
 		return transfers_.size();
 	}
-	const TransferList& get_transfers() const {
+	[[nodiscard]] const TransferList& get_transfers() const {
 		return transfers_;
 	}
 
-	Flag& target_flag() const;
+	[[nodiscard]] Flag& target_flag() const;
 
 	void set_economy(Economy*);
 	void set_count(Quantity);
@@ -125,12 +125,12 @@ public:
 	void set_requirements(const Requirements& r) {
 		requirements_ = r;
 	}
-	const Requirements& get_requirements() const {
+	[[nodiscard]] const Requirements& get_requirements() const {
 		return requirements_;
 	}
 
 private:
-	Time get_base_required_time(const EditorGameBase&, uint32_t nr) const;
+	[[nodiscard]] Time get_base_required_time(const EditorGameBase&, uint32_t nr) const;
 	void remove_transfer(uint32_t idx);
 	uint32_t find_transfer(Transfer&);
 

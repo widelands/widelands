@@ -38,66 +38,66 @@ public:
 	~TrainingSiteDescr() override {
 	}
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	Quantity get_max_number_of_soldiers() const {
+	[[nodiscard]] Quantity get_max_number_of_soldiers() const {
 		return num_soldiers_;
 	}
 	void set_max_number_of_soldiers(Quantity q) {
 		num_soldiers_ = q;
 	}
-	bool get_train_health() const {
+	[[nodiscard]] bool get_train_health() const {
 		return train_health_;
 	}
-	bool get_train_attack() const {
+	[[nodiscard]] bool get_train_attack() const {
 		return train_attack_;
 	}
-	bool get_train_defense() const {
+	[[nodiscard]] bool get_train_defense() const {
 		return train_defense_;
 	}
-	bool get_train_evade() const {
+	[[nodiscard]] bool get_train_evade() const {
 		return train_evade_;
 	}
 
-	unsigned get_min_level(TrainingAttribute) const;
-	unsigned get_max_level(TrainingAttribute) const;
-	int32_t get_max_stall() const {
+	[[nodiscard]] unsigned get_min_level(TrainingAttribute) const;
+	[[nodiscard]] unsigned get_max_level(TrainingAttribute) const;
+	[[nodiscard]] int32_t get_max_stall() const {
 		return max_stall_;
 	}
 	void set_max_stall(int32_t trainer_patience) {
 		max_stall_ = trainer_patience;
 	}
 
-	const std::vector<std::vector<std::string>>& get_food_health() const {
+	[[nodiscard]] const std::vector<std::vector<std::string>>& get_food_health() const {
 		return food_health_;
 	}
-	const std::vector<std::vector<std::string>>& get_food_attack() const {
+	[[nodiscard]] const std::vector<std::vector<std::string>>& get_food_attack() const {
 		return food_attack_;
 	}
-	const std::vector<std::vector<std::string>>& get_food_defense() const {
+	[[nodiscard]] const std::vector<std::vector<std::string>>& get_food_defense() const {
 		return food_defense_;
 	}
-	const std::vector<std::vector<std::string>>& get_food_evade() const {
+	[[nodiscard]] const std::vector<std::vector<std::string>>& get_food_evade() const {
 		return food_evade_;
 	}
-	const std::vector<std::string>& get_weapons_health() const {
+	[[nodiscard]] const std::vector<std::string>& get_weapons_health() const {
 		return weapons_health_;
 	}
-	const std::vector<std::string>& get_weapons_attack() const {
+	[[nodiscard]] const std::vector<std::string>& get_weapons_attack() const {
 		return weapons_attack_;
 	}
-	const std::vector<std::string>& get_weapons_defense() const {
+	[[nodiscard]] const std::vector<std::string>& get_weapons_defense() const {
 		return weapons_defense_;
 	}
-	const std::vector<std::string>& get_weapons_evade() const {
+	[[nodiscard]] const std::vector<std::string>& get_weapons_evade() const {
 		return weapons_evade_;
 	}
 
-	const std::string& no_soldier_to_train_message() const {
+	[[nodiscard]] const std::string& no_soldier_to_train_message() const {
 		return no_soldier_to_train_message_;
 	}
 
-	const std::string& no_soldier_for_training_level_message() const {
+	[[nodiscard]] const std::string& no_soldier_for_training_level_message() const {
 		return no_soldier_for_training_level_message_;
 	}
 
@@ -227,12 +227,12 @@ private:
 		explicit SoldierControl(TrainingSite* training_site) : training_site_(training_site) {
 		}
 
-		std::vector<Soldier*> present_soldiers() const override;
-		std::vector<Soldier*> stationed_soldiers() const override;
-		std::vector<Soldier*> associated_soldiers() const override;
-		Quantity min_soldier_capacity() const override;
-		Quantity max_soldier_capacity() const override;
-		Quantity soldier_capacity() const override;
+		[[nodiscard]] std::vector<Soldier*> present_soldiers() const override;
+		[[nodiscard]] std::vector<Soldier*> stationed_soldiers() const override;
+		[[nodiscard]] std::vector<Soldier*> associated_soldiers() const override;
+		[[nodiscard]] Quantity min_soldier_capacity() const override;
+		[[nodiscard]] Quantity max_soldier_capacity() const override;
+		[[nodiscard]] Quantity soldier_capacity() const override;
 		void set_soldier_capacity(Quantity capacity) override;
 		void drop_soldier(Soldier&) override;
 		int incorporate_soldier(EditorGameBase& egbase, Soldier& s) override;
