@@ -173,9 +173,9 @@ SavegameTableReplay::SavegameTableReplay(UI::Panel* parent,
 void SavegameTableReplay::add_columns() {
 	add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	std::string game_mode_tooltip =
-	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
-	load.*/
-	g_style_manager->font_style(tooltip_header_style_).as_font_tag(_("Game Mode"));
+	   /** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
+	   load.*/
+	   g_style_manager->font_style(tooltip_header_style_).as_font_tag(_("Game Mode"));
 
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
@@ -236,9 +236,9 @@ SavegameTableMultiplayer::SavegameTableMultiplayer(UI::Panel* parent,
 void SavegameTableMultiplayer::add_columns() {
 	add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	std::string game_mode_tooltip =
-	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
-	load.*/
-	g_style_manager->font_style(tooltip_header_style_).as_font_tag(_("Game Mode"));
+	   /** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
+	   load.*/
+	   g_style_manager->font_style(tooltip_header_style_).as_font_tag(_("Game Mode"));
 
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
