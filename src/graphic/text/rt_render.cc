@@ -229,20 +229,20 @@ public:
 	}
 	virtual ~RenderNode() = default;
 
-	virtual uint16_t width() const = 0;
-	virtual uint16_t height() const = 0;
-	virtual uint16_t hotspot_y() const = 0;
+	[[nodiscard]] virtual uint16_t width() const = 0;
+	[[nodiscard]] virtual uint16_t height() const = 0;
+	[[nodiscard]] virtual uint16_t hotspot_y() const = 0;
 	virtual std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) = 0;
 
 	// TODO(GunChleoc): Remove this function once conversion is finished and well tested.
-	virtual std::string debug_info() const = 0;
+	[[nodiscard]] virtual std::string debug_info() const = 0;
 
 	// If a node is a non-mandatory space, it can be removed as a leading/trailing space
 	// by the positioning algorithm.
-	virtual bool is_non_mandatory_space() const {
+	[[nodiscard]] virtual bool is_non_mandatory_space() const {
 		return false;
 	}
-	virtual bool is_expanding() const {
+	[[nodiscard]] virtual bool is_expanding() const {
 		return false;
 	}
 	virtual void set_w(uint16_t /* w */) {
@@ -252,16 +252,16 @@ public:
 		return std::vector<Reference>();
 	}
 
-	Floating get_floating() const {
+	[[nodiscard]] Floating get_floating() const {
 		return floating_;
 	}
 	void set_floating(Floating f) {
 		floating_ = f;
 	}
-	UI::Align halign() const {
+	[[nodiscard]] UI::Align halign() const {
 		return halign_;
 	}
-	UI::Align valign() const {
+	[[nodiscard]] UI::Align valign() const {
 		return valign_;
 	}
 	void set_valign(UI::Align gvalign) {
@@ -270,7 +270,7 @@ public:
 
 	// True for nodes that need to stay aligned to the text baseline.
 	// False for the rest.
-	virtual bool align_to_baseline() const {
+	[[nodiscard]] virtual bool align_to_baseline() const {
 		return false;
 	}
 
@@ -280,10 +280,10 @@ public:
 	void set_y(int32_t ny) {
 		y_ = ny;
 	}
-	int32_t x() const {
+	[[nodiscard]] int32_t x() const {
 		return x_;
 	}
-	int32_t y() const {
+	[[nodiscard]] int32_t y() const {
 		return y_;
 	}
 
@@ -323,7 +323,7 @@ public:
 	}
 	virtual ~Layout() = default;
 
-	uint16_t height() const {
+	[[nodiscard]] uint16_t height() const {
 		return h_;
 	}
 	uint16_t fit_nodes(std::vector<RenderNode*>* rv, uint16_t w, Borders p, bool trim_spaces);
@@ -621,20 +621,20 @@ public:
 	TextNode(TextClickTarget* c, FontCache& font, NodeStyle& /*ns*/, const std::string& txt);
 	~TextNode() override = default;
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "'" + txt_ + "'";
 	}
 
-	uint16_t width() const override {
+	[[nodiscard]] uint16_t width() const override {
 		return w_;
 	}
-	uint16_t height() const override {
+	[[nodiscard]] uint16_t height() const override {
 		return h_ + nodestyle_.spacing;
 	}
-	bool align_to_baseline() const override {
+	[[nodiscard]] bool align_to_baseline() const override {
 		return true;
 	}
-	uint16_t hotspot_y() const override;
+	[[nodiscard]] uint16_t hotspot_y() const override;
 	const std::vector<Reference> get_references() override {
 		std::vector<Reference> rv;
 		if (!nodestyle_.reference.empty()) {
@@ -714,13 +714,13 @@ public:
 	}
 	~FillingTextNode() override = default;
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "ft";
 	}
 
 	std::shared_ptr<UI::RenderedText> render(TextureCache* /*texture_cache*/) override;
 
-	bool is_expanding() const override {
+	[[nodiscard]] bool is_expanding() const override {
 		return is_expanding_;
 	}
 	void set_w(uint16_t w) override {
@@ -766,7 +766,7 @@ public:
 		show_spaces_ = t;
 	}
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "wsp";
 	}
 
@@ -787,7 +787,7 @@ public:
 		}
 		return TextNode::render(texture_cache);
 	}
-	bool is_non_mandatory_space() const override {
+	[[nodiscard]] bool is_non_mandatory_space() const override {
 		return true;
 	}
 
@@ -805,23 +805,23 @@ public:
 	explicit NewlineNode(TextClickTarget* c, NodeStyle& ns) : RenderNode(c, ns) {
 	}
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "nl";
 	}
 
-	uint16_t height() const override {
+	[[nodiscard]] uint16_t height() const override {
 		return 0;
 	}
-	uint16_t width() const override {
+	[[nodiscard]] uint16_t width() const override {
 		return INFINITE_WIDTH;
 	}
-	uint16_t hotspot_y() const override {
+	[[nodiscard]] uint16_t hotspot_y() const override {
 		return 0;
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* /* texture_cache */) override {
 		return std::make_shared<UI::RenderedText>();
 	}
-	bool is_non_mandatory_space() const override {
+	[[nodiscard]] bool is_non_mandatory_space() const override {
 		return true;
 	}
 };
@@ -836,17 +836,17 @@ public:
 		check_size();
 	}
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "sp";
 	}
 
-	uint16_t height() const override {
+	[[nodiscard]] uint16_t height() const override {
 		return h_;
 	}
-	uint16_t width() const override {
+	[[nodiscard]] uint16_t width() const override {
 		return w_;
 	}
-	uint16_t hotspot_y() const override {
+	[[nodiscard]] uint16_t hotspot_y() const override {
 		return h_;
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override {
@@ -879,7 +879,7 @@ public:
 		return rendered_text;
 	}
 
-	bool is_expanding() const override {
+	[[nodiscard]] bool is_expanding() const override {
 		return is_expanding_;
 	}
 	void set_w(uint16_t w) override {
@@ -916,21 +916,21 @@ public:
 		nodes_to_render_.clear();
 	}
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "div";
 	}
 
-	uint16_t width() const override {
+	[[nodiscard]] uint16_t width() const override {
 		return w_ + margin_.left + margin_.right;
 	}
-	uint16_t height() const override {
+	[[nodiscard]] uint16_t height() const override {
 		return h_ + margin_.top + margin_.bottom;
 	}
-	uint16_t hotspot_y() const override {
+	[[nodiscard]] uint16_t hotspot_y() const override {
 		return height();
 	}
 
-	DesiredWidth desired_width() const {
+	[[nodiscard]] DesiredWidth desired_width() const {
 		return desired_width_;
 	}
 
@@ -1041,17 +1041,17 @@ public:
 		check_size();
 	}
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "img";
 	}
 
-	uint16_t width() const override {
+	[[nodiscard]] uint16_t width() const override {
 		return scale_ * image_->width();
 	}
-	uint16_t height() const override {
+	[[nodiscard]] uint16_t height() const override {
 		return scale_ * image_->height();
 	}
-	uint16_t hotspot_y() const override {
+	[[nodiscard]] uint16_t hotspot_y() const override {
 		return scale_ * image_->height();
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override;
@@ -1123,10 +1123,10 @@ public:
 	}
 	virtual void emit_nodes(std::vector<RenderNode*>& /*nodes*/);
 
-	bool handle_mousepress(int32_t x, int32_t y) const override {
+	[[nodiscard]] bool handle_mousepress(int32_t x, int32_t y) const override {
 		return parent_ != nullptr && parent_->handle_mousepress(x, y);
 	}
-	const std::string* get_tooltip(int32_t x, int32_t y) const override {
+	[[nodiscard]] const std::string* get_tooltip(int32_t x, int32_t y) const override {
 		return parent_ == nullptr ? nullptr : parent_->get_tooltip(x, y);
 	}
 
@@ -1404,7 +1404,7 @@ public:
 		}
 	}
 
-	bool handle_mousepress(int32_t /* x */, int32_t /* y */) const override {
+	[[nodiscard]] bool handle_mousepress(int32_t /* x */, int32_t /* y */) const override {
 		switch (type_) {
 		case Type::kUI:
 			Notifications::publish(NoteHyperlink(target_, action_));
@@ -1420,7 +1420,7 @@ public:
 		NEVER_HERE();
 	}
 
-	const std::string* get_tooltip(int32_t /* x */, int32_t /* y */) const override {
+	[[nodiscard]] const std::string* get_tooltip(int32_t /* x */, int32_t /* y */) const override {
 #if !CAN_OPEN_HYPERLINK
 		if (type_ == Type::kURL) {
 			static std::string cant_open_link;

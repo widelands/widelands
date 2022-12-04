@@ -83,15 +83,15 @@ constexpr int kMineTypes = 4;
 namespace AI {
 
 // Fix undefined references
-constexpr Duration DefaultAI::kManagementUpdateInterval;
-constexpr Duration DefaultAI::kStatUpdateInterval;
-constexpr Duration DefaultAI::kFlagWarehouseUpdInterval;
-constexpr Duration DefaultAI::kExpeditionMinDuration;
-constexpr Duration DefaultAI::kExpeditionMaxDuration;
-constexpr Duration DefaultAI::kShipCheckInterval;
-constexpr Duration DefaultAI::kCampaignDuration;
-constexpr Duration DefaultAI::kTrainingSitesCheckInterval;
-constexpr Duration DefaultAI::kDiplomacyInterval;
+
+
+
+
+
+
+
+
+
 
 DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;

@@ -506,7 +506,7 @@ struct CheckStepBlocked {
 	explicit CheckStepBlocked(BlockedTracker& tracker) : tracker_(tracker) {
 	}
 
-	bool allowed(const Map& /* map */,
+	[[nodiscard]] bool allowed(const Map& /* map */,
 	             FCoords /* start */,
 	             FCoords end,
 	             int32_t /* dir */,
@@ -516,7 +516,7 @@ struct CheckStepBlocked {
 		}
 		return !tracker_.is_blocked(end);
 	}
-	bool reachable_dest(const Map& /* map */, FCoords /* pos */) const {
+	[[nodiscard]] bool reachable_dest(const Map& /* map */, FCoords /* pos */) const {
 		return true;
 	}
 

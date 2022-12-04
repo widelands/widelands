@@ -92,7 +92,7 @@ bool TestingRoutingNode::all_members_zeroed() const {
 }
 
 class TestingTransportCostCalculator : public Widelands::ITransportCostCalculator {
-	int32_t calc_cost_estimate(const Widelands::Coords& c1,
+	[[nodiscard]] int32_t calc_cost_estimate(const Widelands::Coords& c1,
 	                           const Widelands::Coords& c2) const override {
 		// We use an euclidian metric here. It is much easier for
 		// test cases
@@ -112,7 +112,7 @@ public:
 		nodes.insert(nodes.begin(), node);
 	}
 
-	int32_t get_length() const {
+	[[nodiscard]] int32_t get_length() const {
 		return nodes.size();
 	}
 

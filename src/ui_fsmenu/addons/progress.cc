@@ -20,8 +20,7 @@
 
 #include "ui_fsmenu/addons/manager.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::string& title)
    : UI::Window(parent,
@@ -72,5 +71,4 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::s
 	initialization_complete();
 }
 
-}  // namespace AddOnsUI
 }  // namespace FsMenu

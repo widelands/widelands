@@ -31,8 +31,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/addons/manager.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 static const std::string kVotingTabName("votes");
 
@@ -989,5 +988,4 @@ void RemoteInteractionWindow::login_changed() {
 	}
 }
 
-}  // namespace AddOnsUI
 }  // namespace FsMenu
