@@ -46,7 +46,7 @@ public:
 
 	[[nodiscard]] virtual bool is_writable() const = 0;
 	[[nodiscard]] virtual bool is_directory(const std::string& path) const = 0;
-	[[nodiscard]] virtual bool file_exists(const std::string& path) const = 0;
+	virtual bool file_exists(const std::string& path) const = 0;  // NOLINT not nodicard
 
 	virtual void* load(const std::string& fname, size_t& length) = 0;
 
