@@ -57,11 +57,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr "Постройте дом дровосека, лесопилку и дом камнетеса"
+msgstr "Постройте дом дровосека, лесопилку и дом камнетёса"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
-msgstr "Дровосек, плотник и камнетес"
+msgstr "Дровосек, Плотник и Камнетёс"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid ""
@@ -69,7 +69,7 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
-"Постройте дом дровосека, лесопилку и дом камнетеса как только будет "
+"Постройте дом дровосека, лесопилку и дом камнетёса как только будет "
 "достаточно места для них. Это завершит основную цепочку поставок "
 "строительных материалов."
 
@@ -522,7 +522,7 @@ msgid ""
 "I noticed that our stonemason has started his work, finally. He will cut the"
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
-"Я заметила, что наш камнетес, наконец, начал работать. Он вырезает нужное "
+"Я заметила, что наш камнетёс, наконец, начал работать. Он вырезает нужное "
 "количество мраморных колонн, которые мы запрашиваем в основных настройках "
 "экономики."
 

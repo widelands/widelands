@@ -76,18 +76,18 @@ msgstr "Расширяйтесь на восток, чтобы начать до
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:61
 msgid "Build a stonemason’s house and mining infrastructure"
-msgstr "Постройте дом камнетеса и горнорудную инфраструктуру"
+msgstr "Постройте дом камнетёса и горнорудную инфраструктуру"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
 msgid "Stonemason’s house and Mining Infrastructure"
-msgstr "Дом камнетеса и горнорудная инфраструктура"
+msgstr "Дом камнетёса и горнорудная инфраструктура"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr "Постройте дом камнетеса, а потом завершите строительство добывающих и производственных сооружений (угольная шахта и/или печь углежога, железный рудник, инструментальную мастерскую, оружейную, бронную и литейную)."
+msgstr "Постройте дом камнетёса, а потом завершите строительство добывающих и производственных сооружений (угольная шахта и/или печь углежога, железный рудник, инструментальную мастерскую, оружейную, бронную и литейную)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
@@ -359,7 +359,7 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr "Однако: для всех этих зданий нам нужны более изящные строительные материалы. Таким образом, Вы должны построить дом камнетеса, который будет вырезать колонны из мрамора."
+msgstr "Однако: для всех этих зданий нам нужны более изящные строительные материалы. Таким образом, Вы должны построить дом камнетёса, который будет вырезать колонны из мрамора."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:204
