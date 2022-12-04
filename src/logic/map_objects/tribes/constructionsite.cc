@@ -45,8 +45,6 @@
 
 namespace Widelands {
 
-constexpr Duration ConstructionSite::kConstructionsiteStepTime;
-
 void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
                                        const Widelands::Coords& coords,
                                        float scale,

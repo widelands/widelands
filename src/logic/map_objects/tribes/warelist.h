@@ -39,7 +39,7 @@ struct WareList {
 	}  /// Clear the storage
 
 	/// \return Highest possible ware id
-	DescriptionIndex get_nrwareids() const {
+	[[nodiscard]] DescriptionIndex get_nrwareids() const {
 		return DescriptionIndex(wares_.size());
 	}
 
@@ -47,7 +47,7 @@ struct WareList {
 	void add(const WareList&);
 	void remove(DescriptionIndex, Quantity = 1);
 	void remove(const WareList& wl);
-	Quantity stock(DescriptionIndex) const;
+	[[nodiscard]] Quantity stock(DescriptionIndex) const;
 
 	void set_nrwares(DescriptionIndex const i) {
 		assert(wares_.empty());

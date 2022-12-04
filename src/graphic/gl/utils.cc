@@ -81,7 +81,7 @@ public:
 	explicit Shader(GLenum type);
 	~Shader();
 
-	GLuint object() const {
+	[[nodiscard]] GLuint object() const {
 		return shader_object_;
 	}
 

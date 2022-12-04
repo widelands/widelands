@@ -59,23 +59,23 @@ public:
 	~BuildingDescr() override {
 	}
 
-	bool is_buildable() const {
+	[[nodiscard]] bool is_buildable() const {
 		return buildable_;
 	}
-	bool can_be_dismantled() const {
+	[[nodiscard]] bool can_be_dismantled() const {
 		return can_be_dismantled_;
 	}
-	bool is_destructible() const {
+	[[nodiscard]] bool is_destructible() const {
 		return destructible_;
 	}
-	bool is_enhanced() const {
+	[[nodiscard]] bool is_enhanced() const {
 		return enhanced_building_;
 	}
 
 	/**
 	 * The build cost for direct construction
 	 */
-	const Buildcost& buildcost() const {
+	[[nodiscard]] const Buildcost& buildcost() const {
 		return buildcost_;
 	}
 	Buildcost& mutable_buildcost() {
@@ -85,7 +85,7 @@ public:
 	/**
 	 * Returned wares for dismantling
 	 */
-	const Buildcost& returns_on_dismantle() const {
+	[[nodiscard]] const Buildcost& returns_on_dismantle() const {
 		return returns_on_dismantle_;
 	}
 	Buildcost& mutable_returns_on_dismantle() {
@@ -95,7 +95,7 @@ public:
 	/**
 	 * The build cost for enhancing a previous building
 	 */
-	const Buildcost& enhancement_cost() const {
+	[[nodiscard]] const Buildcost& enhancement_cost() const {
 		return enhancement_cost_;
 	}
 	Buildcost& mutable_enhancement_cost() {
@@ -105,39 +105,39 @@ public:
 	/**
 	 * The returned wares for a enhaced building
 	 */
-	const Buildcost& enhancement_returns_on_dismantle() const {
+	[[nodiscard]] const Buildcost& enhancement_returns_on_dismantle() const {
 		return enhancement_returns_on_dismantle_;
 	}
 	Buildcost& mutable_enhancement_returns_on_dismantle() {
 		return enhancement_returns_on_dismantle_;
 	}
 
-	int32_t get_size() const {
+	[[nodiscard]] int32_t get_size() const {
 		return size_;
 	}
-	bool get_ismine() const {
+	[[nodiscard]] bool get_ismine() const {
 		return mine_;
 	}
-	bool get_isport() const {
+	[[nodiscard]] bool get_isport() const {
 		return port_;
 	}
-	bool needs_seafaring() const {
+	[[nodiscard]] bool needs_seafaring() const {
 		return needs_seafaring_;
 	}
-	bool needs_waterways() const {
+	[[nodiscard]] bool needs_waterways() const {
 		return needs_waterways_;
 	}
 
-	bool is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const;
+	[[nodiscard]] bool is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const;
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
-	const DescriptionIndex& enhancement() const {
+	[[nodiscard]] const DescriptionIndex& enhancement() const {
 		return enhancement_;
 	}
 	// Returns the building from which this building can be enhanced or
 	// INVALID_INDEX if it cannot be built as an enhanced building.
-	const DescriptionIndex& enhanced_from() const {
+	[[nodiscard]] const DescriptionIndex& enhanced_from() const {
 		return enhanced_from_;
 	}
 	void set_enhanced_from(const DescriptionIndex& index) {
@@ -161,10 +161,10 @@ public:
 	                 bool loading = false,
 	                 const FormerBuildings& former_buildings = FormerBuildings()) const;
 
-	virtual uint32_t get_conquers() const;
-	virtual uint32_t vision_range() const;
+	[[nodiscard]] virtual uint32_t get_conquers() const;
+	[[nodiscard]] virtual uint32_t vision_range() const;
 
-	const WorkareaInfo& workarea_info() const {
+	[[nodiscard]] const WorkareaInfo& workarea_info() const {
 		return workarea_info_;
 	}
 
@@ -172,17 +172,17 @@ public:
 	// in many places.
 	WorkareaInfo workarea_info_;
 
-	bool suitability(const Map&, const FCoords&) const;
-	const AI::BuildingHints& hints() const;
+	[[nodiscard]] bool suitability(const Map&, const FCoords&) const;
+	[[nodiscard]] const AI::BuildingHints& hints() const;
 	void set_hints_trainingsites_max_percent(int percent);
 
-	uint32_t get_unoccupied_animation() const;
+	[[nodiscard]] uint32_t get_unoccupied_animation() const;
 
-	DescriptionIndex get_built_over_immovable() const {
+	[[nodiscard]] DescriptionIndex get_built_over_immovable() const {
 		return built_over_immovable_;
 	}
 
-	const std::string& get_owning_tribe() const {
+	[[nodiscard]] const std::string& get_owning_tribe() const {
 		return owning_tribe_;
 	}
 	void set_owning_tribe(const std::string&);
@@ -190,8 +190,8 @@ public:
 	void set_enhancement(Descriptions&, LuaTable&);
 
 protected:
-	virtual Building& create_object() const = 0;
-	Building& create_constructionsite() const;
+	[[nodiscard]] virtual Building& create_object() const = 0;
+	[[nodiscard]] Building& create_constructionsite() const;
 
 private:
 	void set_enhancement_cost(const Buildcost& enhance_cost, const Buildcost& return_enhanced);

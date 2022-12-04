@@ -51,7 +51,7 @@ struct ComputerPlayer {
 
 	virtual void think() = 0;
 
-	Widelands::Game& game() const {
+	[[nodiscard]] Widelands::Game& game() const {
 		return game_;
 	}
 	Widelands::PlayerNumber player_number() {

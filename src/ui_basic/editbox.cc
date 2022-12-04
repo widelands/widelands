@@ -66,12 +66,12 @@ struct EditBoxImpl {
 	const UI::PanelStyle style;
 
 	/// Background color and texture
-	inline const UI::PanelStyleInfo& background_style() const {
+	[[nodiscard]] inline const UI::PanelStyleInfo& background_style() const {
 		return g_style_manager->editbox_style(style).background();
 	}
 
 	/// Font style
-	inline const UI::FontStyleInfo& font_style() const {
+	[[nodiscard]] inline const UI::FontStyleInfo& font_style() const {
 		return g_style_manager->editbox_style(style).font();
 	}
 

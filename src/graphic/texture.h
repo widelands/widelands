@@ -43,11 +43,11 @@ public:
 	~Texture() override;
 
 	// Implements Surface
-	int width() const override;
-	int height() const override;
+	[[nodiscard]] int width() const override;
+	[[nodiscard]] int height() const override;
 
 	// Implements Image.
-	const BlitData& blit_data() const override;
+	[[nodiscard]] const BlitData& blit_data() const override;
 
 	enum UnlockMode {
 		/**

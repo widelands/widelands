@@ -45,7 +45,7 @@ public:
 	~NetHost() override;
 
 	// Inherited from NetHostInterface
-	bool is_connected(ConnectionId id) const override;
+	[[nodiscard]] bool is_connected(ConnectionId id) const override;
 	void close(ConnectionId id) override;
 	bool try_accept(ConnectionId* new_id) override;
 	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
@@ -67,7 +67,7 @@ private:
 	 * \return \c true if the server is listening, \c false otherwise.
 	 */
 	// Feel free to make this method public if you need it
-	bool is_listening() const;
+	[[nodiscard]] bool is_listening() const;
 
 	/**
 	 * Starts an asynchronous accept on the given acceptor.

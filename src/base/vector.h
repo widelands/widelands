@@ -75,7 +75,7 @@ template <typename T> struct Vector2 {
 		return *this;
 	}
 
-	template <typename Type> Vector2<Type> cast() const {
+	template <typename Type> [[nodiscard]] Vector2<Type> cast() const {
 		return Vector2<Type>(Type(x), Type(y));
 	}
 
@@ -110,7 +110,7 @@ struct Vector3f {
 	}
 
 	// inner product
-	float dot(const Vector3f& other) const {
+	[[nodiscard]] float dot(const Vector3f& other) const {
 		return x * other.x + y * other.y + z * other.z;
 	}
 
