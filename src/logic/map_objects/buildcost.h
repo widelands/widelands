@@ -37,7 +37,7 @@ struct Buildcost : std::map<DescriptionIndex, uint8_t> {
 	Buildcost() = default;
 	Buildcost(std::unique_ptr<LuaTable> table, Widelands::Descriptions& descriptions);
 
-	Quantity total() const;
+	[[nodiscard]] Quantity total() const;
 
 	void save(FileWrite& fw, const TribeDescr& tribe) const;
 	void load(FileRead& fr, const TribeDescr& tribe);

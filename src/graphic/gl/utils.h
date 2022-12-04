@@ -41,7 +41,7 @@ public:
 	Program();
 	~Program();
 
-	GLuint object() const {
+	[[nodiscard]] GLuint object() const {
 		return program_object_;
 	}
 

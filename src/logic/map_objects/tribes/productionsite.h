@@ -57,37 +57,37 @@ public:
 	                    const LuaTable& t,
 	                    Descriptions& descriptions);
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
 	// List of wares to register having economy checks. Parsed by the tribes during postload and must
 	// be nullptr after loading has finished
-	std::set<DescriptionIndex>* ware_demand_checks() const;
+	[[nodiscard]] std::set<DescriptionIndex>* ware_demand_checks() const;
 	// List of workers to register having economy checks. Parsed by the tribes during postload and
 	// must be nullptr after loading has finished
-	std::set<DescriptionIndex>* worker_demand_checks() const;
+	[[nodiscard]] std::set<DescriptionIndex>* worker_demand_checks() const;
 	// Clear ware and worker demand check info
 	void clear_demand_checks();
 
-	uint32_t nr_working_positions() const {
+	[[nodiscard]] uint32_t nr_working_positions() const {
 		uint32_t result = 0;
 		for (const auto& working_pos : working_positions()) {
 			result += working_pos.second;
 		}
 		return result;
 	}
-	const BillOfMaterials& working_positions() const {
+	[[nodiscard]] const BillOfMaterials& working_positions() const {
 		return working_positions_;
 	}
-	bool is_output_ware_type(const DescriptionIndex& i) const {
+	[[nodiscard]] bool is_output_ware_type(const DescriptionIndex& i) const {
 		return output_ware_types_.count(i);
 	}
-	bool is_output_worker_type(const DescriptionIndex& i) const {
+	[[nodiscard]] bool is_output_worker_type(const DescriptionIndex& i) const {
 		return output_worker_types_.count(i);
 	}
-	const BillOfMaterials& input_wares() const {
+	[[nodiscard]] const BillOfMaterials& input_wares() const {
 		return input_wares_;
 	}
-	const BillOfMaterials& input_workers() const {
+	[[nodiscard]] const BillOfMaterials& input_workers() const {
 		return input_workers_;
 	}
 	BillOfMaterials& mutable_input_wares() {
@@ -97,25 +97,25 @@ public:
 		return input_workers_;
 	}
 	using Output = std::set<DescriptionIndex>;
-	const Output& output_ware_types() const {
+	[[nodiscard]] const Output& output_ware_types() const {
 		return output_ware_types_;
 	}
-	const Output& output_worker_types() const {
+	[[nodiscard]] const Output& output_worker_types() const {
 		return output_worker_types_;
 	}
 	/// Map objects that this production site needs nearby according to attribute, without removing
 	/// them from the map
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	[[nodiscard]] const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
 	needed_attributes() const {
 		return needed_attributes_;
 	}
 	/// Map objects that are collected from the map by this production site according to attribute
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	[[nodiscard]] const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
 	collected_attributes() const {
 		return collected_attributes_;
 	}
 	/// Map objects that are placed on the map by this production site according to attribute
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	[[nodiscard]] const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
 	created_attributes() const {
 		return created_attributes_;
 	}
@@ -130,15 +130,15 @@ public:
 
 	/// The resources that this production site needs to collect from the map, the max percent it can
 	/// achieve, and the chance when depleted
-	const std::map<std::string, CollectedResourceInfo>& collected_resources() const {
+	[[nodiscard]] const std::map<std::string, CollectedResourceInfo>& collected_resources() const {
 		return collected_resources_;
 	}
 	/// The resources that this production site will place on the map
-	const std::set<std::string>& created_resources() const {
+	[[nodiscard]] const std::set<std::string>& created_resources() const {
 		return created_resources_;
 	}
 	/// The bobs (critters) that this production site needs to collect from the map
-	const std::set<std::string>& collected_bobs() const {
+	[[nodiscard]] const std::set<std::string>& collected_bobs() const {
 		return collected_bobs_;
 	}
 	/// Set that this production site needs to collect the given bob from the map
@@ -146,7 +146,7 @@ public:
 		collected_bobs_.insert(bobname);
 	}
 	/// The bobs (critters or workers) that this production site will place on the map
-	const std::set<std::string>& created_bobs() const {
+	[[nodiscard]] const std::set<std::string>& created_bobs() const {
 		return created_bobs_;
 	}
 	/// Set that this production site will place the given bob on the map
@@ -154,11 +154,11 @@ public:
 		created_bobs_.insert(bobname);
 	}
 	/// The immovables that this production site needs to be nearby
-	const std::set<std::string>& needed_immovables() const {
+	[[nodiscard]] const std::set<std::string>& needed_immovables() const {
 		return needed_immovables_;
 	}
 	/// The immovables that this production site needs to collect from the map
-	const std::set<std::string>& collected_immovables() const {
+	[[nodiscard]] const std::set<std::string>& collected_immovables() const {
 		return collected_immovables_;
 	}
 	/// Set that this production site makes use of the given immovable nearby
@@ -170,7 +170,7 @@ public:
 		collected_immovables_.insert(immovablename);
 	}
 	/// The immovables that this production site will place on the map
-	const std::set<std::string>& created_immovables() const {
+	[[nodiscard]] const std::set<std::string>& created_immovables() const {
 		return created_immovables_;
 	}
 	/// Set that this production site will place the given immovable on the map
@@ -178,32 +178,32 @@ public:
 		created_immovables_.insert(immovablename);
 	}
 
-	const ProductionProgram* get_program(const std::string&) const;
+	[[nodiscard]] const ProductionProgram* get_program(const std::string&) const;
 	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
-	const Programs& programs() const {
+	[[nodiscard]] const Programs& programs() const {
 		return programs_;
 	}
 	Programs& mutable_programs() {
 		return programs_;
 	}
 
-	const std::string& out_of_resource_title() const {
+	[[nodiscard]] const std::string& out_of_resource_title() const {
 		return out_of_resource_title_;
 	}
 
-	const std::string& out_of_resource_heading() const {
+	[[nodiscard]] const std::string& out_of_resource_heading() const {
 		return out_of_resource_heading_;
 	}
 
-	const std::string& out_of_resource_message() const {
+	[[nodiscard]] const std::string& out_of_resource_message() const {
 		return out_of_resource_message_;
 	}
 
-	const std::string& resource_not_needed_message() const {
+	[[nodiscard]] const std::string& resource_not_needed_message() const {
 		return resource_not_needed_message_;
 	}
 
-	uint32_t out_of_resource_productivity_threshold() const {
+	[[nodiscard]] uint32_t out_of_resource_productivity_threshold() const {
 		return out_of_resource_productivity_threshold_;
 	}
 
@@ -220,21 +220,21 @@ public:
 	void add_supported_by_productionsite(const std::string& productionsite);
 	/// Returns whether this production site competes with the given 'productionsite' for map
 	/// resources.
-	bool competes_with_productionsite(const std::string& productionsite) const;
+	[[nodiscard]] bool competes_with_productionsite(const std::string& productionsite) const;
 	/// Returns whether this production site creates map resources or objects that the given
 	/// 'productionsite' needs.
-	bool supports_productionsite(const std::string& productionsite) const;
+	[[nodiscard]] bool supports_productionsite(const std::string& productionsite) const;
 	/// Returns whether the given 'productionsite' creates map resources or objects that this
 	/// production site needs.
-	bool is_supported_by_productionsite(const std::string& productionsite) const;
+	[[nodiscard]] bool is_supported_by_productionsite(const std::string& productionsite) const;
 	/// Returns the production sites that need a map resource or object that this production site
 	/// will place on the map.
-	std::set<std::string> supported_productionsites() const {
+	[[nodiscard]] std::set<std::string> supported_productionsites() const {
 		return supported_productionsites_;
 	}
 	/// Returns the production sites that create a map resource or object that this production site
 	/// needs.
-	std::set<std::string> supported_by_productionsites() const {
+	[[nodiscard]] std::set<std::string> supported_by_productionsites() const {
 		return supported_by_productionsites_;
 	}
 
@@ -533,10 +533,10 @@ struct Input {
 	~Input() {
 	}
 
-	DescriptionIndex ware() const {
+	[[nodiscard]] DescriptionIndex ware() const {
 		return ware_;
 	}
-	uint8_t max() const {
+	[[nodiscard]] uint8_t max() const {
 		return max_;
 	}
 

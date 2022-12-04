@@ -34,7 +34,7 @@ public:
 	}
 
 protected:
-	Bob& create_object() const override;
+	[[nodiscard]] Bob& create_object() const override;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(CarrierDescr);

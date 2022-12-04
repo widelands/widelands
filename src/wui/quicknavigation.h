@@ -57,7 +57,7 @@ struct QuickNavigation {
 	void remove_landmark(size_t index);
 
 	/** Returns the vector of all landmarks. */
-	const std::vector<Landmark>& landmarks() const {
+	[[nodiscard]] const std::vector<Landmark>& landmarks() const {
 		return landmarks_;
 	}
 	std::vector<Landmark>& landmarks() {
@@ -68,8 +68,8 @@ struct QuickNavigation {
 	void goto_prev();
 	void goto_next();
 	void goto_landmark(int index);
-	bool can_goto_prev() const;
-	bool can_goto_next() const;
+	[[nodiscard]] bool can_goto_prev() const;
+	[[nodiscard]] bool can_goto_next() const;
 
 	bool handle_key(bool down, SDL_Keysym key);
 

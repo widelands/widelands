@@ -79,17 +79,17 @@ public:
 	explicit RenderedRect(const Image* init_image, const TextClickTarget* click_target);
 
 	/// An image to be blitted. Can be nullptr.
-	const Image* image() const;
+	[[nodiscard]] const Image* image() const;
 
-	const Recti& rect() const;
+	[[nodiscard]] const Recti& rect() const;
 	/// The x position of the rectangle
-	int x() const;
+	[[nodiscard]] int x() const;
 	/// The y position of the rectangle
-	int y() const;
+	[[nodiscard]] int y() const;
 	/// The width of the rectangle
-	int width() const;
+	[[nodiscard]] int width() const;
 	/// The height of the rectangle
-	int height() const;
+	[[nodiscard]] int height() const;
 
 	/// Change x and y position of the rectangle.
 	void set_origin(const Vector2i& new_origin);
@@ -98,18 +98,18 @@ public:
 	/// for correct positioning.
 	void set_visited();
 	/// Whether this rectangle was already visited by the font renderer
-	bool was_visited() const;
+	[[nodiscard]] bool was_visited() const;
 
 	/// Whether this rectangle contains a background color
-	bool has_background_color() const;
+	[[nodiscard]] bool has_background_color() const;
 	/// This rectangle's background color
-	const RGBColor& background_color() const;
+	[[nodiscard]] const RGBColor& background_color() const;
 
 	/// Whether the RenderedRect's image should be blitted once or tiled
-	DrawMode mode() const;
+	[[nodiscard]] DrawMode mode() const;
 
-	bool handle_mousepress(int32_t x, int32_t y) const;
-	const std::string* get_tooltip(int32_t x, int32_t y) const;
+	[[nodiscard]] bool handle_mousepress(int32_t x, int32_t y) const;
+	[[nodiscard]] const std::string* get_tooltip(int32_t x, int32_t y) const;
 
 private:
 	Recti rect_;
@@ -134,12 +134,12 @@ struct RenderedText {
 	void set_memory_tree_root(TextClickTarget* t);
 
 	/// The width occupied  by all rects in pixels.
-	int width() const;
+	[[nodiscard]] int width() const;
 	/// The height occupied  by all rects in pixels.
-	int height() const;
+	[[nodiscard]] int height() const;
 
-	bool handle_mousepress(int32_t x, int32_t y) const;
-	const std::string* get_tooltip(int32_t x, int32_t y) const;
+	[[nodiscard]] bool handle_mousepress(int32_t x, int32_t y) const;
+	[[nodiscard]] const std::string* get_tooltip(int32_t x, int32_t y) const;
 
 	enum class CropMode {
 		// The RenderTarget will handle all cropping. Use this for scrollable elements or when you
