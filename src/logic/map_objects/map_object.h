@@ -61,24 +61,24 @@ public:
 	               const LuaTable& table);
 	virtual ~MapObjectDescr();
 
-	const std::string& name() const {
+	[[nodiscard]] const std::string& name() const {
 		return name_;
 	}
-	const std::string& descname() const {
+	[[nodiscard]] const std::string& descname() const {
 		return descname_;
 	}
 
 	// Type of the MapObjectDescr.
-	MapObjectType type() const {
+	[[nodiscard]] MapObjectType type() const {
 		return type_;
 	}
 
 	virtual uint32_t get_animation(const std::string& animname, const MapObject* mo) const;
 
-	uint32_t main_animation() const;
-	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
+	[[nodiscard]] uint32_t main_animation() const;
+	[[nodiscard]] std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
 
-	bool is_animation_known(const std::string& name) const;
+	[[nodiscard]] bool is_animation_known(const std::string& name) const;
 
 	/// Preload animation graphics at default scale
 	void load_graphics() const;
@@ -88,12 +88,12 @@ public:
 	const Image* representative_image(const RGBColor* player_color = nullptr) const;
 
 	/// Returns the menu image if the MapObject has one, nullptr otherwise
-	const Image* icon() const;
+	[[nodiscard]] const Image* icon() const;
 	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
-	const std::string& icon_filename() const;
+	[[nodiscard]] const std::string& icon_filename() const;
 
-	bool has_attribute(AttributeIndex) const;
-	const MapObjectDescr::Attributes& attributes() const;
+	[[nodiscard]] bool has_attribute(AttributeIndex) const;
+	[[nodiscard]] const MapObjectDescr::Attributes& attributes() const;
 	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 	/// Sets a tribe-specific ware or immovable helptext for this MapObject
@@ -101,9 +101,9 @@ public:
 	                   std::map<std::string, std::string> localized_helptext);
 	/// Gets the tribe-specific ware or immovable helptext for the given tribe. Fails if it doesn't
 	/// exist.
-	const std::map<std::string, std::string>& get_helptexts(const std::string& tribename) const;
+	[[nodiscard]] const std::map<std::string, std::string>& get_helptexts(const std::string& tribename) const;
 	/// Returns whether a tribe-specific helptext exists for the given tribe
-	bool has_helptext(const std::string& tribename) const;
+	[[nodiscard]] bool has_helptext(const std::string& tribename) const;
 
 protected:
 	// Add attributes to the attribute list
@@ -441,14 +441,14 @@ struct ObjectPointer {
 		return *this;
 	}
 
-	bool is_set() const {
+	[[nodiscard]] bool is_set() const {
 		return serial_;
 	}
 
 	// TODO(unknown): dammit... without an EditorGameBase object, we can't implement a
 	// MapObject* operator (would be really nice)
 	MapObject* get(const EditorGameBase&);
-	MapObject* get(const EditorGameBase& egbase) const;
+	[[nodiscard]] MapObject* get(const EditorGameBase& egbase) const;
 
 	bool operator<(const ObjectPointer& other) const {
 		return serial_ < other.serial_;
@@ -460,7 +460,7 @@ struct ObjectPointer {
 		return serial_ != other.serial_;
 	}
 
-	uint32_t serial() const {
+	[[nodiscard]] uint32_t serial() const {
 		return serial_;
 	}
 
@@ -477,14 +477,14 @@ template <class T> struct OPtr {
 		return *this;
 	}
 
-	bool is_set() const {
+	[[nodiscard]] bool is_set() const {
 		return m.is_set();
 	}
 
 	T* get(const EditorGameBase& egbase) {
 		return static_cast<T*>(m.get(egbase));
 	}
-	T* get(const EditorGameBase& egbase) const {
+	[[nodiscard]] T* get(const EditorGameBase& egbase) const {
 		return static_cast<T*>(m.get(egbase));
 	}
 
@@ -498,7 +498,7 @@ template <class T> struct OPtr {
 		return m != other.m;
 	}
 
-	Serial serial() const {
+	[[nodiscard]] Serial serial() const {
 		return m.serial();
 	}
 
@@ -515,7 +515,7 @@ struct CmdDestroyMapObject : public GameLogicCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kDestroyMapObject;
 	}
 
@@ -533,7 +533,7 @@ struct CmdAct : public GameLogicCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kAct;
 	}
 

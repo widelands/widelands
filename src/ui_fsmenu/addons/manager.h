@@ -36,8 +36,7 @@
 #include "ui_basic/window.h"
 #include "ui_fsmenu/main.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 class RemoteAddOnRow;
 
@@ -147,7 +146,6 @@ private:
 	std::string username_, password_;
 };
 
-}  // namespace AddOnsUI
 }  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_MANAGER_H

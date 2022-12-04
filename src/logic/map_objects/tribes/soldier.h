@@ -41,7 +41,7 @@ struct SoldierLevelRange {
 	SoldierLevelRange& operator=(const SoldierLevelRange& other) = default;
 
 	bool matches(const Soldier* soldier) const;
-	bool matches(int32_t health, int32_t attack, int32_t defense, int32_t evade) const;
+	[[nodiscard]] bool matches(int32_t health, int32_t attack, int32_t defense, int32_t evade) const;
 
 	bool operator==(const SoldierLevelRange& other) const {
 		return min_health == other.min_health && min_attack == other.min_attack &&

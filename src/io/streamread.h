@@ -52,7 +52,7 @@ public:
 	/**
 	 * \return \c true if the end of file / end of stream has been reached.
 	 */
-	virtual bool end_of_file() const = 0;
+	[[nodiscard]] virtual bool end_of_file() const = 0;
 
 	void data_complete(void* data, size_t size);
 

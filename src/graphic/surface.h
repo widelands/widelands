@@ -35,8 +35,8 @@ public:
 	}
 
 	/// Dimensions.
-	virtual int width() const = 0;
-	virtual int height() const = 0;
+	[[nodiscard]] virtual int width() const = 0;
+	[[nodiscard]] virtual int height() const = 0;
 
 	/// This draws a part of 'texture'.
 	void blit(const Rectf& dst,

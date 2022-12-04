@@ -39,7 +39,7 @@ struct CmdDeleteMessage : public Command {
 	}
 
 	void execute(Game& game) override;
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kDeleteMessage;
 	}
 

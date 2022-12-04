@@ -38,7 +38,7 @@ struct FXset {
 	/**
 	 * Number of ticks since this FXSet was last played
 	 */
-	uint32_t ticks_since_last_play() const;
+	[[nodiscard]] uint32_t ticks_since_last_play() const;
 
 	/** Get a sound effect from the fxset. Load the audio on demand.
 	 * \param random A random number for picking a variant

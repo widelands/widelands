@@ -50,16 +50,16 @@ private:
 		virtual ~BaseCapsule() {
 		}
 
-		virtual bool check(const MapObject&) const = 0;
+		[[nodiscard]] virtual bool check(const MapObject&) const = 0;
 		virtual void write(FileWrite&, EditorGameBase&, MapObjectSaver&) const = 0;
-		virtual const RequirementsStorage& storage() const = 0;
+		[[nodiscard]] virtual const RequirementsStorage& storage() const = 0;
 	};
 
 	template <typename T> struct Capsule : public BaseCapsule {
 		explicit Capsule(const T& init_m) : m(init_m) {
 		}
 
-		bool check(const MapObject& obj) const override {
+		[[nodiscard]] bool check(const MapObject& obj) const override {
 			return m.check(obj);
 		}
 
@@ -67,7 +67,7 @@ private:
 			m.write(fw, egbase, mos);
 		}
 
-		const RequirementsStorage& storage() const override {
+		[[nodiscard]] const RequirementsStorage& storage() const override {
 			return T::storage;
 		}
 
@@ -84,7 +84,7 @@ public:
 	/**
 	 * \return \c true if the object satisfies the requirements.
 	 */
-	bool check(const MapObject&) const;
+	[[nodiscard]] bool check(const MapObject&) const;
 
 	// For Save/Load Games
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&);
@@ -112,7 +112,7 @@ struct RequirementsStorage {
 	using Reader = Requirements (*)(FileRead&, EditorGameBase&, MapObjectLoader&);
 
 	RequirementsStorage(uint32_t id, Reader reader);
-	uint32_t id() const;
+	[[nodiscard]] uint32_t id() const;
 
 	static Requirements read(FileRead&, EditorGameBase&, MapObjectLoader&);
 
@@ -132,7 +132,7 @@ private:
 struct RequireOr {
 	void add(const Requirements&);
 
-	bool check(const MapObject&) const;
+	[[nodiscard]] bool check(const MapObject&) const;
 	void write(FileWrite&, EditorGameBase& egbase, MapObjectSaver&) const;
 
 	static const RequirementsStorage storage;
@@ -148,7 +148,7 @@ private:
 struct RequireAnd {
 	void add(const Requirements&);
 
-	bool check(const MapObject&) const;
+	[[nodiscard]] bool check(const MapObject&) const;
 	void write(FileWrite&, EditorGameBase& egbase, MapObjectSaver&) const;
 
 	static const RequirementsStorage storage;
@@ -167,15 +167,15 @@ struct RequireAttribute {
 
 	RequireAttribute() : at(TrainingAttribute::kTotal), min(SHRT_MIN), max(SHRT_MAX) {
 	}
-	bool check(const MapObject&) const;
+	[[nodiscard]] bool check(const MapObject&) const;
 	void write(FileWrite&, EditorGameBase& egbase, MapObjectSaver&) const;
 
 	static const RequirementsStorage storage;
 
-	int32_t get_min() const {
+	[[nodiscard]] int32_t get_min() const {
 		return min;
 	}
-	int32_t get_max() const {
+	[[nodiscard]] int32_t get_max() const {
 		return max;
 	}
 

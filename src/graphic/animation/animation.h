@@ -56,31 +56,31 @@ public:
 	virtual ~Animation() = default;
 
 	/// The height of this animation.
-	int height() const;
+	[[nodiscard]] int height() const;
 	/// The width of this animation.
-	int width() const;
+	[[nodiscard]] int width() const;
 	/// The hotspot of this animation for aligning it on the map.
-	const Vector2i& hotspot() const;
+	[[nodiscard]] const Vector2i& hotspot() const;
 
 	/// The frame to be blitted for the given 'time'
-	uint32_t current_frame(uint32_t time) const;
+	[[nodiscard]] uint32_t current_frame(uint32_t time) const;
 
 	/// The size of the animation source images in pixels. Use 'percent_from_bottom' to crop the
 	/// animation.
-	Rectf source_rectangle(int percent_from_bottom, float scale) const;
+	[[nodiscard]] Rectf source_rectangle(int percent_from_bottom, float scale) const;
 
 	/// Calculates the destination rectangle for blitting the animation in pixels.
 	/// 'position' is where the top left corner of the animation will end up,
 	/// 'source_rect' is the rectangle calculated by source_rectangle,
 	/// 'scale' is the zoom scale.
-	Rectf
+	[[nodiscard]] Rectf
 	destination_rectangle(const Vector2f& position, const Rectf& source_rect, float scale) const;
 
 	/// The number of animation frames of this animation. Returns a positive integer.
-	uint16_t nr_frames() const;
+	[[nodiscard]] uint16_t nr_frames() const;
 
 	/// The number of milliseconds each frame will be displayed. Returns a positive integer.
-	uint32_t frametime() const;
+	[[nodiscard]] uint32_t frametime() const;
 
 	/// An image of the first frame, blended with the given player color.
 	/// The 'clr' is the player color used for blending - the parameter can be
@@ -105,17 +105,17 @@ public:
 	/// We need to expose these for the packed animation,
 	/// so that the create_spritesheet utility can use them.
 	/// Do not use otherwise.
-	std::vector<std::unique_ptr<const Texture>> frame_textures(float scale,
+	[[nodiscard]] std::vector<std::unique_ptr<const Texture>> frame_textures(float scale,
 	                                                           bool return_playercolor_masks) const;
 
 	/// The scales for which this animation has exact images.
-	std::set<float> available_scales() const;
+	[[nodiscard]] std::set<float> available_scales() const;
 
 	/// Load animation images into memory for default scale.
 	void load_default_scale_and_sounds() const;
 
 	/// The frame to be shown in menus etc.
-	int representative_frame() const;
+	[[nodiscard]] int representative_frame() const;
 
 protected:
 	/// Animation data for a particular scale
@@ -140,11 +140,11 @@ protected:
 		                  float opacity) const = 0;
 
 		/// The width of this mipmap entry's textures
-		virtual int width() const = 0;
+		[[nodiscard]] virtual int width() const = 0;
 		/// The height of this mipmap entry's textures
-		virtual int height() const = 0;
+		[[nodiscard]] virtual int height() const = 0;
 
-		virtual std::vector<std::unique_ptr<const Texture>>
+		[[nodiscard]] virtual std::vector<std::unique_ptr<const Texture>>
 		frame_textures(bool return_playercolor_masks) const = 0;
 
 		/// Whether this texture set has player color masks provided
@@ -161,7 +161,7 @@ protected:
 	void trigger_sound(uint32_t time, const Widelands::Coords& coords) const;
 
 	/// Ensures that the graphics are loaded before returning the entry
-	const Animation::MipMapEntry& mipmap_entry(float scale) const;
+	[[nodiscard]] const Animation::MipMapEntry& mipmap_entry(float scale) const;
 
 	/// The number of textures this animation will play
 	uint16_t nr_frames_;
@@ -186,7 +186,7 @@ private:
 	                                        const std::string& scale_as_string) = 0;
 
 	/// Find the best scale for blitting at the given zoom 'scale'
-	float find_best_scale(float scale) const;
+	[[nodiscard]] float find_best_scale(float scale) const;
 
 	/// The frame to show in menus, in the in-game help etc.
 	int representative_frame_;

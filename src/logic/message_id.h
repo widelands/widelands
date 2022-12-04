@@ -60,7 +60,7 @@ struct MessageId {
 	operator bool() const {
 		return *this != null();
 	}
-	uint32_t value() const {
+	[[nodiscard]] uint32_t value() const {
 		return id;
 	}
 

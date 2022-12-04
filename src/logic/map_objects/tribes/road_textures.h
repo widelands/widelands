@@ -29,9 +29,9 @@ class RoadTextures {
 public:
 	// Returns the road texture that should be used for 'coords' and the road
 	// going into direction 'direction' (which can be any number).
-	const Image& get_normal_texture(const Widelands::Coords& coords, int direction) const;
-	const Image& get_busy_texture(const Widelands::Coords& coords, int direction) const;
-	const Image& get_waterway_texture(const Widelands::Coords& coords, int direction) const;
+	[[nodiscard]] const Image& get_normal_texture(const Widelands::Coords& coords, int direction) const;
+	[[nodiscard]] const Image& get_busy_texture(const Widelands::Coords& coords, int direction) const;
+	[[nodiscard]] const Image& get_waterway_texture(const Widelands::Coords& coords, int direction) const;
 
 	// Adds a new road texture.
 	void add_normal_road_texture(const Image* image);

@@ -76,13 +76,13 @@ struct ProductionProgram : public MapObjectProgram {
 		 */
 		virtual void building_work_failed(Game&, ProductionSite&, Worker&) const;
 
-		const Groups& consumed_wares_workers() const {
+		[[nodiscard]] const Groups& consumed_wares_workers() const {
 			return consumed_wares_workers_;
 		}
-		const BillOfMaterials& produced_wares() const {
+		[[nodiscard]] const BillOfMaterials& produced_wares() const {
 			return produced_wares_;
 		}
-		const BillOfMaterials& recruited_workers() const {
+		[[nodiscard]] const BillOfMaterials& recruited_workers() const {
 			return recruited_workers_;
 		}
 
@@ -165,9 +165,9 @@ struct ProductionProgram : public MapObjectProgram {
 
 		struct Condition {
 			virtual ~Condition() = default;
-			virtual bool evaluate(const ProductionSite&) const = 0;
-			virtual std::string description(const Descriptions&) const = 0;
-			virtual std::string description_negation(const Descriptions&) const = 0;
+			[[nodiscard]] virtual bool evaluate(const ProductionSite&) const = 0;
+			[[nodiscard]] virtual std::string description(const Descriptions&) const = 0;
+			[[nodiscard]] virtual std::string description_negation(const Descriptions&) const = 0;
 		};
 		static Condition* create_condition(const std::vector<std::string>& arguments,
 		                                   std::vector<std::string>::const_iterator& begin,
@@ -182,11 +182,11 @@ struct ProductionProgram : public MapObjectProgram {
 			         const ProductionSiteDescr& descr,
 			         const Descriptions& descriptions);
 			~Negation() override;
-			bool evaluate(const ProductionSite&) const override;
+			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.
-			std::string description(const Descriptions&) const override;
+			[[nodiscard]] std::string description(const Descriptions&) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.
-			std::string description_negation(const Descriptions&) const override;
+			[[nodiscard]] std::string description_negation(const Descriptions&) const override;
 
 		private:
 			Condition* const operand;
@@ -196,9 +196,9 @@ struct ProductionProgram : public MapObjectProgram {
 		struct EconomyNeedsWare : public Condition {
 			explicit EconomyNeedsWare(const DescriptionIndex& i) : ware_type(i) {
 			}
-			bool evaluate(const ProductionSite&) const override;
-			std::string description(const Descriptions& descriptions) const override;
-			std::string description_negation(const Descriptions& descriptions) const override;
+			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
+			[[nodiscard]] std::string description(const Descriptions& descriptions) const override;
+			[[nodiscard]] std::string description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			DescriptionIndex ware_type;
@@ -208,9 +208,9 @@ struct ProductionProgram : public MapObjectProgram {
 		struct EconomyNeedsWorker : public Condition {
 			explicit EconomyNeedsWorker(const DescriptionIndex& i) : worker_type(i) {
 			}
-			bool evaluate(const ProductionSite&) const override;
-			std::string description(const Descriptions& descriptions) const override;
-			std::string description_negation(const Descriptions& descriptions) const override;
+			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
+			[[nodiscard]] std::string description(const Descriptions& descriptions) const override;
+			[[nodiscard]] std::string description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			DescriptionIndex worker_type;
@@ -224,9 +224,9 @@ struct ProductionProgram : public MapObjectProgram {
 			        std::vector<std::string>::const_iterator end,
 			        const ProductionSiteDescr& descr,
 			        const Descriptions& descriptions);
-			bool evaluate(const ProductionSite&) const override;
-			std::string description(const Descriptions& descriptions) const override;
-			std::string description_negation(const Descriptions& descriptions) const override;
+			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
+			[[nodiscard]] std::string description(const Descriptions& descriptions) const override;
+			[[nodiscard]] std::string description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			WareTypeGroup group;
@@ -235,9 +235,9 @@ struct ProductionProgram : public MapObjectProgram {
 		/// Tests whether any of the workers at the site needs experience to
 		/// become upgraded.
 		struct WorkersNeedExperience : public Condition {
-			bool evaluate(const ProductionSite&) const override;
-			std::string description(const Descriptions&) const override;
-			std::string description_negation(const Descriptions&) const override;
+			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
+			[[nodiscard]] std::string description(const Descriptions&) const override;
+			[[nodiscard]] std::string description_negation(const Descriptions&) const override;
 		};
 
 		using Conditions = std::vector<Condition*>;
@@ -282,7 +282,7 @@ struct ProductionProgram : public MapObjectProgram {
 		explicit ActCall(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
-		const std::string& program_name() const {
+		[[nodiscard]] const std::string& program_name() const {
 			return program_name_;
 		}
 
@@ -306,7 +306,7 @@ struct ProductionProgram : public MapObjectProgram {
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;
-		const std::string& program() const {
+		[[nodiscard]] const std::string& program() const {
 			return program_;
 		}
 
@@ -475,7 +475,7 @@ struct ProductionProgram : public MapObjectProgram {
 		                         const ProductionSiteDescr& descr);
 		void execute(Game&, ProductionSite& ps) const override;
 
-		TrainingParameters training() const {
+		[[nodiscard]] TrainingParameters training() const {
 			return training_;
 		}
 
@@ -488,7 +488,7 @@ struct ProductionProgram : public MapObjectProgram {
 		                  const ProductionSiteDescr& descr);
 		void execute(Game&, ProductionSite& ps) const override;
 
-		TrainingParameters training() const {
+		[[nodiscard]] TrainingParameters training() const {
 			return training_;
 		}
 
@@ -540,7 +540,7 @@ struct ProductionProgram : public MapObjectProgram {
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;
 
-		const ImmovableDescr& get_construction_descr(const Descriptions& descriptions) const;
+		[[nodiscard]] const ImmovableDescr& get_construction_descr(const Descriptions& descriptions) const;
 
 	private:
 		std::string objectname;
@@ -553,14 +553,14 @@ struct ProductionProgram : public MapObjectProgram {
 	                  Descriptions& descriptions,
 	                  ProductionSiteDescr* building);
 
-	const std::string& descname() const;
+	[[nodiscard]] const std::string& descname() const;
 
-	size_t size() const;
+	[[nodiscard]] size_t size() const;
 	const ProductionProgram::Action& operator[](size_t const idx) const;
 
-	const ProductionProgram::Groups& consumed_wares_workers() const;
-	const Buildcost& produced_wares() const;
-	const Buildcost& recruited_workers() const;
+	[[nodiscard]] const ProductionProgram::Groups& consumed_wares_workers() const;
+	[[nodiscard]] const Buildcost& produced_wares() const;
+	[[nodiscard]] const Buildcost& recruited_workers() const;
 	// Throws a GameDataError if we're trying to call an unknown program
 	void validate_calls(const ProductionSiteDescr& descr) const;
 

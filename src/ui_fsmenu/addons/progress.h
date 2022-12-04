@@ -24,8 +24,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 class ProgressIndicatorWindow : public UI::Window {
 public:
@@ -52,7 +51,6 @@ private:
 	UI::ProgressBar progress_;
 };
 
-}  // namespace AddOnsUI
 }  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_PROGRESS_H

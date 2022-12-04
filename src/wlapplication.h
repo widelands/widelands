@@ -147,13 +147,13 @@ struct WLApplication {
 	static void initialize_g_addons();
 
 	/// \warning true if an external entity wants us to quit
-	bool should_die() const {
+	[[nodiscard]] bool should_die() const {
 		return should_die_;
 	}
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	bool get_key_state(SDL_Scancode const key) const {
+	[[nodiscard]] bool get_key_state(SDL_Scancode const key) const {
 		return SDL_GetKeyboardState(nullptr)[key];
 	}
 
@@ -162,12 +162,12 @@ struct WLApplication {
 	void set_input_grab(bool grab);
 
 	/// The mouse's current coordinates
-	Vector2i get_mouse_position() const {
+	[[nodiscard]] Vector2i get_mouse_position() const {
 		return mouse_position_;
 	}
 	//
 	/// Find out whether the mouse is currently pressed
-	bool is_mouse_pressed() const {
+	[[nodiscard]] bool is_mouse_pressed() const {
 		return SDL_GetMouseState(nullptr, nullptr);
 	}
 
@@ -178,12 +178,12 @@ struct WLApplication {
 
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
 	void set_mouse_lock(bool locked);
-	bool is_mouse_locked() const {
+	[[nodiscard]] bool is_mouse_locked() const {
 		return mouse_locked_;
 	}
 	// @}
 
-	const std::string& get_datadir() const {
+	[[nodiscard]] const std::string& get_datadir() const {
 		return datadir_;
 	}
 

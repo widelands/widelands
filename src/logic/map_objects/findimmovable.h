@@ -42,14 +42,14 @@ private:
 			if (--refcount == 0)
 				delete this;
 		}
-		virtual bool accept(const BaseImmovable&) const = 0;
+		[[nodiscard]] virtual bool accept(const BaseImmovable&) const = 0;
 
 		int refcount;
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
 		explicit Capsule(const T& init_op) : op(init_op) {
 		}
-		bool accept(const BaseImmovable& imm) const override {
+		[[nodiscard]] bool accept(const BaseImmovable& imm) const override {
 			return op.accept(imm);
 		}
 
@@ -79,7 +79,7 @@ public:
 	}
 
 	// Return true if this node should be returned by find_fields()
-	bool accept(const BaseImmovable& imm) const {
+	[[nodiscard]] bool accept(const BaseImmovable& imm) const {
 		return capsule->accept(imm);
 	}
 };
@@ -92,7 +92,7 @@ struct FindImmovableSize {
 	   : min(init_min), max(init_max) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 private:
 	int32_t min, max;
@@ -101,7 +101,7 @@ struct FindImmovableType {
 	explicit FindImmovableType(MapObjectType const init_type) : type(init_type) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 private:
 	MapObjectType type;
@@ -110,7 +110,7 @@ struct FindImmovableAttribute {
 	explicit FindImmovableAttribute(uint32_t const init_attrib) : attrib(init_attrib) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 private:
 	int32_t attrib;
@@ -119,13 +119,13 @@ struct FindImmovablePlayerImmovable {
 	FindImmovablePlayerImmovable() {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
 struct FindImmovablePlayerMilitarySite {
 	explicit FindImmovablePlayerMilitarySite(const Player& init_player) : player(init_player) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 	const Player& player;
 };
@@ -133,12 +133,12 @@ struct FindImmovableAttackTarget {
 	FindImmovableAttackTarget() {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
 struct FindForeignMilitarysite {
 	explicit FindForeignMilitarysite(const Player& init_player) : player(init_player) {
 	}
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 	const Player& player;
 };
 
@@ -146,7 +146,7 @@ struct FindImmovableByDescr {
 	explicit FindImmovableByDescr(const ImmovableDescr& init_descr) : descr(init_descr) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 	const ImmovableDescr& descr;
 };
@@ -154,7 +154,7 @@ struct FindFlagOf {
 	explicit FindFlagOf(const FindImmovable& init_finder) : finder(init_finder) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 	const FindImmovable finder;
 };

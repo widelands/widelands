@@ -63,9 +63,9 @@ public:
 	void load_description(const std::string& description_name);
 
 	/// Return the attributes registered to the given description name.
-	const std::vector<std::string>& get_attributes(const std::string& description_name) const;
+	[[nodiscard]] const std::vector<std::string>& get_attributes(const std::string& description_name) const;
 
-	const RegistryCallerInfo& get_registry_caller_info(const std::string& description_name) const;
+	[[nodiscard]] const RegistryCallerInfo& get_registry_caller_info(const std::string& description_name) const;
 
 	/// Deregister all scenario object descrptions
 	void clear_scenario_descriptions();
@@ -79,7 +79,7 @@ public:
 	 * The exact order in which all units have been loaded, e.g.
 	 * {"barbarians", "barbarians_ship", "barbarians_well", ...}.
 	 */
-	const std::vector<std::string>& load_order() const {
+	[[nodiscard]] const std::vector<std::string>& load_order() const {
 		return load_order_;
 	}
 

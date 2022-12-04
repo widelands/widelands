@@ -45,7 +45,7 @@ public:
 	 *
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */
-	virtual bool is_connected() const = 0;
+	[[nodiscard]] virtual bool is_connected() const = 0;
 
 	/**
 	 * Closes the connection.

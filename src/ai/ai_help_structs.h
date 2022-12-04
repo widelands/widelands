@@ -136,12 +136,12 @@ constexpr uint16_t kWhNotReachable = 500;
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Widelands::Player* const pl, uint8_t const mc, bool const oe);
 
-	bool allowed(const Widelands::Map&,
+	[[nodiscard]] bool allowed(const Widelands::Map&,
 	             Widelands::FCoords start,
 	             Widelands::FCoords end,
 	             int32_t dir,
 	             Widelands::CheckStep::StepId) const;
-	bool reachable_dest(const Widelands::Map&, const Widelands::FCoords& dest) const;
+	[[nodiscard]] bool reachable_dest(const Widelands::Map&, const Widelands::FCoords& dest) const;
 
 	Widelands::Player* player;
 	uint8_t movecaps;
@@ -154,12 +154,12 @@ struct CheckStepRoadAI {
 struct CheckStepOwnTerritory {
 	CheckStepOwnTerritory(Widelands::Player* const pl, uint8_t const mc, bool const oe);
 
-	bool allowed(const Widelands::Map&,
+	[[nodiscard]] bool allowed(const Widelands::Map&,
 	             Widelands::FCoords start,
 	             Widelands::FCoords end,
 	             int32_t dir,
 	             Widelands::CheckStep::StepId) const;
-	bool reachable_dest(const Widelands::Map&, const Widelands::FCoords& dest) const;
+	[[nodiscard]] bool reachable_dest(const Widelands::Map&, const Widelands::FCoords& dest) const;
 
 	Widelands::Player* player;
 	uint8_t movecaps;
@@ -171,7 +171,7 @@ struct CheckStepOwnTerritory {
 struct FindNodeEnemy {
 	FindNodeEnemy(Widelands::Player* p, Widelands::Game& g);
 
-	bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
 	Widelands::Player* player;
 	Widelands::Game& game;
@@ -184,7 +184,7 @@ struct FindNodeEnemy {
 struct FindNodeEnemiesBuilding {
 	FindNodeEnemiesBuilding(Widelands::Player* p, Widelands::Game& g);
 
-	bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
 	Widelands::Player* player;
 	Widelands::Game& game;
@@ -194,7 +194,7 @@ struct FindNodeEnemiesBuilding {
 struct FindEnemyNodeWalkable {
 	FindEnemyNodeWalkable(Widelands::Player* p, Widelands::Game& g);
 
-	bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
 	Widelands::Player* player;
 	Widelands::Game& game;
@@ -204,7 +204,7 @@ struct FindEnemyNodeWalkable {
 struct FindNodeAllyOwned {
 	FindNodeAllyOwned(Widelands::Player* p, Widelands::Game& g, Widelands::PlayerNumber n);
 
-	bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
 	Widelands::Player* player;
 	Widelands::Game& game;
@@ -219,7 +219,7 @@ struct FindNodeUnownedMineable {
 	                        Widelands::Game& g,
 	                        int32_t t = Widelands::INVALID_INDEX);
 
-	bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
 	Widelands::Player* player;
 	Widelands::Game& game;
@@ -231,7 +231,7 @@ struct FindNodeUnownedMineable {
 struct FindNodeUnownedBuildable {
 	FindNodeUnownedBuildable(Widelands::Player* p, Widelands::Game& g);
 
-	bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
 	Widelands::Player* player;
 	Widelands::Game& game;
@@ -241,7 +241,7 @@ struct FindNodeUnownedBuildable {
 struct FindNodeUnownedWalkable {
 	FindNodeUnownedWalkable(Widelands::Player* p, Widelands::Game& g);
 
-	bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
 	Widelands::Player* player;
 	Widelands::Game& game;
@@ -252,7 +252,7 @@ struct FindNodeUnownedWalkable {
 struct FindNodeMineable {
 	FindNodeMineable(Widelands::Game& g, Widelands::DescriptionIndex r);
 
-	bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
 	Widelands::Game& game;
 	int32_t res;
@@ -262,7 +262,7 @@ struct FindNodeMineable {
 struct FindNodeWater {
 	explicit FindNodeWater(const Widelands::Descriptions& descriptions);
 
-	bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& coord) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& coord) const;
 
 private:
 	const Widelands::Descriptions& descriptions_;
@@ -275,16 +275,16 @@ struct FindNodeOpenWater {
 	explicit FindNodeOpenWater(const Widelands::Descriptions& /* descriptions */) {
 	}
 
-	bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& coord) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& coord) const;
 };
 
 struct FindNodeWithFlagOrRoad {
-	bool accept(const Widelands::EditorGameBase&, Widelands::FCoords) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, Widelands::FCoords) const;
 };
 
 // Accepts any field
 struct FindNodeAcceptAll {
-	bool accept(const Widelands::EditorGameBase&, Widelands::FCoords) const {
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, Widelands::FCoords) const {
 		return true;
 	}
 };
@@ -625,7 +625,7 @@ struct EnemySiteObserver {
 struct MineTypesObserver {
 	MineTypesObserver();
 
-	uint16_t total_count() const;
+	[[nodiscard]] uint16_t total_count() const;
 
 	uint16_t in_construction;
 	uint16_t finished;
@@ -760,7 +760,7 @@ struct ManagementData {
 		ai_training_mode_ = true;
 	}
 
-	int16_t get_military_number_at(uint8_t) const;
+	[[nodiscard]] int16_t get_military_number_at(uint8_t) const;
 	void set_military_number_at(uint8_t, int16_t) const;
 	MutatingIntensity do_mutate(bool, int16_t);
 	int8_t shift_weight_value(int8_t, bool = true);
@@ -927,7 +927,7 @@ private:
 		// Saying the road was built and when
 		void set_road_built(const Time&);
 		// Asking if road can be built from this flag (providing current gametime)
-		bool is_road_prohibited(const Time&) const;
+		[[nodiscard]] bool is_road_prohibited(const Time&) const;
 		// get current distance (providing current gametime)
 		uint16_t get(const Time&, uint32_t*) const;
 	};
@@ -942,7 +942,7 @@ public:
 	int16_t get_wh_distance(uint32_t flag_coords, const Time& gametime, uint32_t* nw);
 	void set_road_built(uint32_t coords_hash, const Time& gametime);
 	bool is_road_prohibited(uint32_t coords_hash, const Time& gametime);
-	uint16_t count() const;
+	[[nodiscard]] uint16_t count() const;
 	bool remove_old_flag(const Time& gametime);
 };
 
@@ -965,7 +965,7 @@ struct FlagCandidates {
 		uint16_t possible_road_distance;
 		uint16_t cand_flag_distance_to_wh;
 		// Scoring is considering multiple things
-		int16_t score() const;
+		[[nodiscard]] int16_t score() const;
 		bool is_buildable() {
 			return possible_road_distance > 0;
 		}
@@ -979,10 +979,10 @@ private:
 	uint16_t start_flag_dist_to_wh;
 
 public:
-	const std::vector<Candidate>& flags() const {
+	[[nodiscard]] const std::vector<Candidate>& flags() const {
 		return flags_;
 	}
-	bool has_candidate(uint32_t) const;
+	[[nodiscard]] bool has_candidate(uint32_t) const;
 	void add_flag(uint32_t, bool, uint16_t, uint16_t);
 	bool set_cur_road_distance(uint32_t, uint16_t);
 	bool set_road_possible(uint32_t, uint16_t);
