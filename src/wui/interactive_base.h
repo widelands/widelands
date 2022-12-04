@@ -173,14 +173,13 @@ public:
 	}
 
 	void toggle_minimap();
+	void toggle_quicknav();
 	// Toggles the buildhelp and calls rebuild_showhide_menu
 	void toggle_buildhelp();
 
-	// Returns the list of landmarks that have been mapped to the keys 0-9
-	const QuickNavigation::Landmark* landmarks();
-
-	// Sets the landmark for the keyboard 'key' to 'point'
-	void set_landmark(size_t key, const MapView::View& view);
+	QuickNavigation& quick_navigation() {
+		return quick_navigation_;
+	}
 
 	void add_wanted_building_window(const Widelands::Coords& coords,
 	                                const Vector2i point,
@@ -225,7 +224,7 @@ public:
 
 protected:
 	// For referencing the items in mapviewmenu_
-	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom };
+	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom, kQuicknav };
 
 	// Adds the mapviewmenu_ to the toolbar
 	void add_mapview_menu(MiniMapType minimap_type);
@@ -403,6 +402,7 @@ private:
 
 public:
 	MiniMap::Registry minimap_registry_;
+	UI::UniqueWindow::Registry quicknav_registry_;
 
 private:
 	// The currently enabled work area previews

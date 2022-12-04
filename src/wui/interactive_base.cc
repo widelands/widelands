@@ -230,6 +230,10 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 		   }
 	   });
 
+	quicknav_registry_.open_window = [this]() {
+		new QuickNavigationWindow(*this, quicknav_registry_);
+	};
+
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
@@ -293,6 +297,15 @@ void InteractiveBase::rebuild_mapview_menu() {
 	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "",
 	                 shortcut_string_for(KeyboardShortcut::kCommonMinimap, false));
 
+	if (egbase().is_game()) {
+		/** TRANSLATORS: An entry in the game's map view menu */
+		mapviewmenu_.add(quicknav_registry_.window != nullptr ? _("Hide Quick Navigation") :
+                                                              _("Show Quick Navigation"),
+		                 MapviewMenuEntry::kQuicknav,
+		                 g_image_cache->get("images/wui/menus/quicknav.png"), false, "",
+		                 shortcut_string_for(KeyboardShortcut::kCommonQuicknavGUI, false));
+	}
+
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
@@ -315,6 +328,10 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	switch (entry) {
 	case MapviewMenuEntry::kMinimap: {
 		toggle_minimap();
+		mapviewmenu_.toggle();
+	} break;
+	case MapviewMenuEntry::kQuicknav: {
+		toggle_quicknav();
 		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kDecreaseZoom: {
@@ -876,12 +893,10 @@ void InteractiveBase::toggle_minimap() {
 	rebuild_mapview_menu();
 }
 
-const QuickNavigation::Landmark* InteractiveBase::landmarks() {
-	return quick_navigation_.landmarks();
-}
-
-void InteractiveBase::set_landmark(size_t key, const MapView::View& landmark_view) {
-	quick_navigation_.set_landmark(key, landmark_view);
+// Open the quicknav GUI or close it if it's open
+void InteractiveBase::toggle_quicknav() {
+	quicknav_registry_.toggle();
+	rebuild_mapview_menu();
 }
 
 /**
@@ -1010,6 +1025,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					break;
 				case UI::Panel::SaveType::kAttackWindow:
 					w = &AttackWindow::load(fr, *this, mol);
+					break;
+				case UI::Panel::SaveType::kQuicknav:
+					w = &QuickNavigationWindow::load(fr, *this);
 					break;
 				default:
 					throw Widelands::GameDataError(
@@ -1599,6 +1617,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kCommonMinimap, code)) {
 			toggle_minimap();
+			return true;
+		}
+		if (egbase().is_game() && matches_shortcut(KeyboardShortcut::kCommonQuicknavGUI, code)) {
+			toggle_quicknav();
 			return true;
 		}
 

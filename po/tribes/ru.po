@@ -40,31 +40,31 @@ msgstr "Укрепление"
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:32
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortification."
-msgstr "Ваши солдаты заняли ваше укрепление."
+msgstr "Ваши солдаты заняли укрепление."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:34
 msgctxt "amazons_building"
 msgid "Your fortification discovered an aggressor."
-msgstr "Ваше укрепление обнаружено врагом."
+msgstr "Ваше укрепление обнаружило врага."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:36
 msgctxt "amazons_building"
 msgid "Your fortification is under attack."
-msgstr "Ваши укрепления атакованы."
+msgstr "Ваше укрепление атаковано."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:38
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the fortification."
-msgstr "Враг перебил защитников одного из ваших укреплений."
+msgstr "Враг перебил защитников укрепления."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:40
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the fortification."
-msgstr "Защитники укрепления разбили врага."
+msgstr "Ваши солдаты разбили врага у укрепления."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:8
@@ -76,13 +76,13 @@ msgstr "Крепость"
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:59
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr "Солдаты заняли своё место в крепости."
+msgstr "Ваши солдаты заняли крепость"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:61
 msgctxt "amazons_building"
 msgid "Your fortress discovered an aggressor."
-msgstr "В районе вашей крепости обнаружен враг."
+msgstr "Ваша крепость обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:63
@@ -94,13 +94,13 @@ msgstr "Ваша крепость атакована."
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:65
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "Враг перебил защитников вашей крепости."
+msgstr "Враг перебил защитников крепости."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:67
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Защитники вашей крепости разбили врага."
+msgstr "Ваши солдаты разбили врага у крепости."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:8
@@ -112,13 +112,13 @@ msgstr "Смотровая башня"
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:30
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your observation tower."
-msgstr "Солдаты заняли свое место в Смотровой башне"
+msgstr "Ваши солдаты заняли смотровую башню."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:32
 msgctxt "amazons_building"
 msgid "Your observation tower discovered an aggressor."
-msgstr "Ваша Смотровая башня засекла врага."
+msgstr "Ваша смотровая башня обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:34
@@ -130,13 +130,13 @@ msgstr "Ваша  Смотровая башня атакована."
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:36
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the observation tower."
-msgstr "Враг перебил защитников вашей смотровой башни."
+msgstr "Враг перебил защитников смотровой башни."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:38
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the observation tower."
-msgstr "Защитники смотровой башни отбили нападение врага."
+msgstr "Ваши солдаты разбили врага у смотровой башни."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:8
@@ -148,19 +148,19 @@ msgstr "Патрульный пост"
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:39
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your patrol post."
-msgstr "Солдаты заняли своё место в вашем патрульном посту."
+msgstr "Ваши солдаты заняли патрульный пост."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:41
 msgctxt "amazons_building"
 msgid "Your patrol post discovered an aggressor."
-msgstr "Вашим патрульным постом засечены вражеские силы."
+msgstr "Ваш патрульный пост обнаружил врага."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:43
 msgctxt "amazons_building"
 msgid "Your patrol post is under attack."
-msgstr "На ваш Патрульный пост напали."
+msgstr "Ваш патрульный пост атакован."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:45
@@ -172,7 +172,7 @@ msgstr "Враг перебил защитников патрульного по
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:47
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the patrol post."
-msgstr "Защитники патрульного поста разбили врага."
+msgstr "Ваши солдаты разбили врага у патрульного поста."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:8
@@ -184,19 +184,19 @@ msgstr "Башня"
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:58
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your tower."
-msgstr "Ваши солдаты заняли свое место в башне."
+msgstr "Ваши солдаты заняли башню."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:60
 msgctxt "amazons_building"
 msgid "Your tower discovered an aggressor."
-msgstr "Башня засекла врага."
+msgstr "Ваша башня обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:62
 msgctxt "amazons_building"
 msgid "Your tower is under attack."
-msgstr "На вашу башню напали."
+msgstr "Ваша башня атакована."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:64
@@ -208,7 +208,7 @@ msgstr "Враг перебил защитников башни."
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:66
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Защитники башни разбили врага."
+msgstr "Ваши солдаты разбили врага у башни."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:8
@@ -220,19 +220,19 @@ msgstr "Наблюдательный пост"
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your treetop sentry."
-msgstr "Ваши солдаты заняли своё место на наблюдательном посту."
+msgstr "Ваши солдаты заняли наблюдательный пост."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
 msgctxt "amazons_building"
 msgid "Your treetop sentry discovered an aggressor."
-msgstr "Наблюдательный пост засек врага."
+msgstr "Ваш наблюдательный пост обнаружил врага."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:45
 msgctxt "amazons_building"
 msgid "Your treetop sentry is under attack."
-msgstr "На ваш наблюдательный пост напали."
+msgstr "Ваш наблюдательный пост атакован."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:47
@@ -244,7 +244,7 @@ msgstr "Враг перебил защитников наблюдательно�
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:49
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the treetop sentry."
-msgstr "Ваши солдаты отбили наблюдательный пост."
+msgstr "Ваши солдаты разбили врага у наблюдательного поста."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:8
@@ -256,31 +256,31 @@ msgstr "Обитель воинов"
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:42
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your warriors’ dwelling."
-msgstr "Ваши солдаты заняли свое место в обители воинов."
+msgstr "Ваши солдаты заняли обитель воинов."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:44
 msgctxt "amazons_building"
 msgid "Your warriors’ dwelling discovered an aggressor."
-msgstr "Ваша обитель воинов засекла врага."
+msgstr "Ваша обитель воинов обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:46
 msgctxt "amazons_building"
 msgid "Your warriors’ dwelling is under attack."
-msgstr "На вашу обитель воинов напали."
+msgstr "Ваша обитель воинов атакована."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:48
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the warriors’ dwelling."
-msgstr "Защитники обители воинов были перебиты."
+msgstr "Враг победил защитников обители воинов."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:50
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the warriors’ dwelling."
-msgstr "Вы отбилиобитель воинов у врага."
+msgstr "Ваши солдаты разбили врага у обители воинов."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:114
@@ -292,31 +292,31 @@ msgstr "Замок"
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:153
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your castle."
-msgstr "Ваши солдаты заняли свое место в замке."
+msgstr "Ваши солдаты заняли замок."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:155
 msgctxt "atlanteans_building"
 msgid "Your castle discovered an aggressor."
-msgstr "Ваш замок засек врага."
+msgstr "Ваш замок обнаружил врага."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:157
 msgctxt "atlanteans_building"
 msgid "Your castle is under attack."
-msgstr "На ваш замок напали."
+msgstr "Ваш замок атакован."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:159
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the castle."
-msgstr "Защитники замка были перебиты."
+msgstr "Враг перебил защитников замка"
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:161
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr "Ваши войска отбили замок у врага."
+msgstr "Ваши солдаты разбили врага у замка."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:8
@@ -328,7 +328,7 @@ msgstr "Форт"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhall."
-msgstr "Ваши солдаты заняли ваш форт."
+msgstr "Ваши солдаты заняли форт."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:44
@@ -346,7 +346,7 @@ msgstr "Ваш форт атакован."
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:48
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr "Враг победил защитников вашего форта."
+msgstr "Враг перебил защитников форта."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:50
@@ -364,25 +364,25 @@ msgstr "Сторожка"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhouse."
-msgstr "Ваши солдаты заняли вашу сторожку."
+msgstr "Ваши солдаты заняли сторожку."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your guardhouse discovered an aggressor."
-msgstr "Враг в окрестности сторожки."
+msgstr "Ваша сторожка обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:44
 msgctxt "atlanteans_building"
 msgid "Your guardhouse is under attack."
-msgstr "Ваша сторожка в осаде."
+msgstr "Ваша сторожка атакована."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:46
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr "Враг занял сторожку, разбив ваши силы."
+msgstr "Враг перебил защитников сторожки."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:48
@@ -400,19 +400,19 @@ msgstr "Башня"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:57
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your tower."
-msgstr "Ваши солдаты заняли свое место в башне."
+msgstr "Ваши солдаты заняли башню."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:59
 msgctxt "atlanteans_building"
 msgid "Your tower discovered an aggressor."
-msgstr "Враг в окрестности башни."
+msgstr "Ваша башня обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:61
 msgctxt "atlanteans_building"
 msgid "Your tower is under attack."
-msgstr "Ваша башня в осаде."
+msgstr "Ваша башня атакована."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:63
@@ -442,19 +442,19 @@ msgstr "Ваши солдаты заняли дозорную башню."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:31
 msgctxt "atlanteans_building"
 msgid "Your high tower discovered an aggressor."
-msgstr "Дозорной башней обнаружен враг."
+msgstr "Ваша дозорная башня обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:33
 msgctxt "atlanteans_building"
 msgid "Your high tower is under attack."
-msgstr "Ваша дозорная башня в осаде."
+msgstr "Ваша дозорная башня атакована."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:35
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr "Враг занял дозорную башню, разбив ваши силы."
+msgstr "Враг перебил защитников дозорной башни."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:37
@@ -478,19 +478,19 @@ msgstr "Ваши солдаты заняли малую башню."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:43
 msgctxt "atlanteans_building"
 msgid "Your small tower discovered an aggressor."
-msgstr "Малой башней обнаружен враг."
+msgstr "Ваша малая башня обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:45
 msgctxt "atlanteans_building"
 msgid "Your small tower is under attack."
-msgstr "Малая башня в осаде."
+msgstr "Ваша малая башня атакована."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:47
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr "Враг занял малую башню, разбив ваши силы."
+msgstr "Враг победил защитников малой башни."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:49
@@ -514,19 +514,19 @@ msgstr "Ваши солдаты заняли форпост."
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:54
 msgctxt "barbarians_building"
 msgid "Your barrier discovered an aggressor."
-msgstr "Ваш форпост засек врага."
+msgstr "Ваш форпост обнаружил врага."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:56
 msgctxt "barbarians_building"
 msgid "Your barrier is under attack."
-msgstr "На наш форпост напали."
+msgstr "Ваш форпост атакован."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:58
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr "Наших людей перебили у форпоста."
+msgstr "Враг победил защитников форпоста."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:60
@@ -550,19 +550,19 @@ msgstr "Ваши солдаты заняли цитадель."
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:45
 msgctxt "barbarians_building"
 msgid "Your citadel discovered an aggressor."
-msgstr "Враг недалеко от цитадели."
+msgstr "Ваша цитадель обнаружила врага."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:47
 msgctxt "barbarians_building"
 msgid "Your citadel is under attack."
-msgstr "На нашу цитадель напали."
+msgstr "Ваша цитадель атакована."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:49
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr "Наших людей перебили у цитадели."
+msgstr "Враг победил защитников цитадели."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:51
@@ -586,25 +586,25 @@ msgstr "Ваши солдаты заняли крепость."
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:79
 msgctxt "barbarians_building"
 msgid "Your fortress discovered an aggressor."
-msgstr "Вражеские силы в районе крепости."
+msgstr "Ваша крепость обнаружила врага."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:81
 msgctxt "barbarians_building"
 msgid "Your fortress is under attack."
-msgstr "На вашу крепость напали."
+msgstr "Ваша крепость атакована."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:83
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "Враг победил защитников вашей крепости."
+msgstr "Враг перебил защитников крепости."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:85
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Защитники вашей крепости разбили врага."
+msgstr "Ваши солдаты разбили врага у крепости."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:8
@@ -616,31 +616,31 @@ msgstr "Караульная"
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:54
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your sentry."
-msgstr "Воины в караульной."
+msgstr "Ваши солдаты заняли караульную."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:56
 msgctxt "barbarians_building"
 msgid "Your sentry discovered an aggressor."
-msgstr "Враг недалеко от караульной."
+msgstr "Ваша караульная обнаружила врага."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:58
 msgctxt "barbarians_building"
 msgid "Your sentry is under attack."
-msgstr "На нашу караульную напали."
+msgstr "Ваша караульная атакована."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:60
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr "Наших людей перебили в караульной."
+msgstr "Враг перебил защитников караульной."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:62
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr "Наши люди перебили врагов в караульной."
+msgstr "Ваши солдаты разбили врага у караульной."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:8
@@ -658,13 +658,13 @@ msgstr "Ваши солдаты заняли башню."
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:61
 msgctxt "barbarians_building"
 msgid "Your tower discovered an aggressor."
-msgstr "Вражеские силы в районе башни."
+msgstr "Ваша башня обнаружила врага."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:63
 msgctxt "barbarians_building"
 msgid "Your tower is under attack."
-msgstr "На вашу башню напали."
+msgstr "Ваша башня атакована."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:65
@@ -676,7 +676,7 @@ msgstr "Враг перебил защитников башни."
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:67
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Нападение на башню удалось отбить."
+msgstr "Ваши солдаты разбили врага у башни."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:8
@@ -694,19 +694,19 @@ msgstr "Ваши солдаты заняли форпост."
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:47
 msgctxt "empire_building"
 msgid "Your barrier discovered an aggressor."
-msgstr "Вражеские силы в районе форпоста."
+msgstr "Ваш форпост обнаружил врага."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:49
 msgctxt "empire_building"
 msgid "Your barrier is under attack."
-msgstr "Форпост атакован."
+msgstr "Ваш форпост атакован."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:51
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr "Враг победил защитников вашего форпоста."
+msgstr "Враг победил защитников форпоста."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:53
@@ -724,31 +724,31 @@ msgstr "Блокгауз"
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your blockhouse."
-msgstr "Гарнизон заступил на службу в блокгауз."
+msgstr "Ваши солдаты заняли блокгауз."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:52
 msgctxt "empire_building"
 msgid "Your blockhouse discovered an aggressor."
-msgstr "Вражеские силы в районе блокгауза."
+msgstr "Ваш блокгауз обнаружил врага."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:54
 msgctxt "empire_building"
 msgid "Your blockhouse is under attack."
-msgstr "Блокгауз атакован."
+msgstr "Ваш блокгауз атакован."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:56
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the blockhouse."
-msgstr "Вечная память павшим у блокгауза."
+msgstr "Враг победил защитников блокгауза."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:58
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the blockhouse."
-msgstr "Слава победителям! Блокгауз - наш!"
+msgstr "Ваши солдаты разбили врага у блокгауза."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:8
@@ -760,31 +760,31 @@ msgstr "Замок"
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:31
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your castle."
-msgstr "Гарнизон заступил на службу в замок."
+msgstr "Ваши солдаты заняли замок."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:33
 msgctxt "empire_building"
 msgid "Your castle discovered an aggressor."
-msgstr "Вражеские силы в районе замке."
+msgstr "Ваш замок обнаружил врага."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:35
 msgctxt "empire_building"
 msgid "Your castle is under attack."
-msgstr "Замок атакован."
+msgstr "Ваш замок атакован."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:37
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the castle."
-msgstr "Вечная память павшим у замка."
+msgstr "Враг перебил защитников замка"
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:39
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr "Слава победителям! Замок - наш!"
+msgstr "Ваши солдаты разбили врага у замка."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:8
@@ -796,31 +796,31 @@ msgstr "Крепость"
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:73
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr "Гарнизон заступил на службу в крепость."
+msgstr "Ваши солдаты заняли крепость."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:75
 msgctxt "empire_building"
 msgid "Your fortress discovered an aggressor."
-msgstr "Вражеские силы в районе крепости."
+msgstr "Ваша крепость обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:77
 msgctxt "empire_building"
 msgid "Your fortress is under attack."
-msgstr "Крепость атакована."
+msgstr "Ваша крепость атакована."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:79
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "Вечная память павшим в битве у крепости."
+msgstr "Враг перебил защитников крепости."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:81
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Слава победителям! Крепость - наша!"
+msgstr "Ваши солдаты разбили врага у крепости."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:8
@@ -832,31 +832,31 @@ msgstr "Застава"
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:59
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your outpost."
-msgstr "Гарнизон заступил на службу в заставу."
+msgstr "Ваши солдаты заняли заставу."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:61
 msgctxt "empire_building"
 msgid "Your outpost discovered an aggressor."
-msgstr "Вражеские силы в районе заставы."
+msgstr "Ваша застава обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:63
 msgctxt "empire_building"
 msgid "Your outpost is under attack."
-msgstr "Застава атакована."
+msgstr "Ваша застава атакована."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:65
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr "Вечная память павшим в битве за заставу."
+msgstr "Враг перебил защитников заставы."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:67
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr "Слава победителям! Застава - наша!"
+msgstr "Ваши солдаты разбили врага у заставы."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:8
@@ -868,31 +868,31 @@ msgstr "Караульная"
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:45
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your sentry."
-msgstr "Гарнизон заступил на службу в караульную."
+msgstr "Ваши солдаты заняли караульную."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:47
 msgctxt "empire_building"
 msgid "Your sentry discovered an aggressor."
-msgstr "Вражеские силы в районе караульной."
+msgstr "Ваша караульная обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:49
 msgctxt "empire_building"
 msgid "Your sentry is under attack."
-msgstr "Караульная атакована."
+msgstr "Ваша караульная атакована."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:51
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr "Враг разбил защитников караульной"
+msgstr "Враг перебил защитников караульной."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr "Слава победителям! Караульная - наша!"
+msgstr "Ваши солдаты разбили врага у караульной."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:8
@@ -904,31 +904,31 @@ msgstr "Башня"
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your tower."
-msgstr "Гарнизон заступил на службу в башню."
+msgstr "Ваши солдаты заняли башню."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:55
 msgctxt "empire_building"
 msgid "Your tower discovered an aggressor."
-msgstr "Вражеские силы в районе башни."
+msgstr "Ваша башня обнаружила врага."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:57
 msgctxt "empire_building"
 msgid "Your tower is under attack."
-msgstr "Башня атакована."
+msgstr "Ваша башня атакована."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:59
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr "Вечная память сражавшимся за башню."
+msgstr "Враг перебил защитников башни."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:61
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Слава победителям! Башня - наша!"
+msgstr "Ваши солдаты разбили врага у башни."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:8
@@ -940,31 +940,31 @@ msgstr "Крепость"
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:58
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr "Крепость взята под охрану."
+msgstr "Ваши солдаты заняли крепость."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:60
 msgctxt "frisians_building"
 msgid "Your fortress discovered an aggressor."
-msgstr "Враг в окрестности крепости."
+msgstr "Ваша крепость обнаружила врага."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:62
 msgctxt "frisians_building"
 msgid "Your fortress is under attack."
-msgstr "На вашу крепость напали."
+msgstr "Ваша крепость атакована."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:64
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "Наши воины пали, защищая крепость."
+msgstr "Враг перебил защитников крепости."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:66
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Нападение на крепость удалось отбить."
+msgstr "Ваши солдаты разбили врага у крепости."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:8
@@ -976,67 +976,67 @@ msgstr "Застава"
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:56
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your outpost."
-msgstr "Застава взята под охрану."
+msgstr "Ваши солдаты заняли заставу."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:58
 msgctxt "frisians_building"
 msgid "Your outpost discovered an aggressor."
-msgstr "Враг в окрестности заставы."
+msgstr "Ваша застава обнаружила врага."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:60
 msgctxt "frisians_building"
 msgid "Your outpost is under attack."
-msgstr "На вашу заставу напали."
+msgstr "Ваша застава атакована."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:62
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr "Наши воины пали, защищая заставу."
+msgstr "Враг перебил защитников заставы."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:64
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr "Нападение на заставу удалось отбить."
+msgstr "Ваши солдаты разбили врага у заставы."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:8
 msgctxt "frisians_building"
 msgid "Sentinel"
-msgstr "Наблюдательный пост"
+msgstr "Сторожка"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:54
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your sentinel."
-msgstr "Наблюдательный пост взят под охрану."
+msgstr "Ваши солдаты заняли сторожку."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:56
 msgctxt "frisians_building"
 msgid "Your sentinel discovered an aggressor."
-msgstr "Враг в окрестности наблюдательного поста."
+msgstr "Ваша сторожка обнаружила врага."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:58
 msgctxt "frisians_building"
 msgid "Your sentinel is under attack."
-msgstr "На ваш наблюдательный пост напали."
+msgstr "Ваша сторожка атакован."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:60
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the sentinel."
-msgstr "Наши воины пали, защищая наблюдательный пост."
+msgstr "Враг перебил защитников сторожки."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:62
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the sentinel."
-msgstr "Нападение на заставу удалось отбить."
+msgstr "Ваши солдаты разбили врага у сторожки."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:8
@@ -1048,31 +1048,31 @@ msgstr "Башня"
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:59
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your tower."
-msgstr "Башня взята под охрану."
+msgstr "Ваши солдаты заняли башню."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:61
 msgctxt "frisians_building"
 msgid "Your tower discovered an aggressor."
-msgstr "Враг в окрестности башни."
+msgstr "Ваша башня обнаружила врага."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:63
 msgctxt "frisians_building"
 msgid "Your tower is under attack."
-msgstr "На вашу башню напали."
+msgstr "Ваша башня атакована."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:65
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr "Наши воины пали, защищая башню."
+msgstr "Враг перебил защитников башни."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:67
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Нападение на башню удалось отбить."
+msgstr "Ваши солдаты разбили врага у башни."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:8
@@ -1084,31 +1084,31 @@ msgstr "Деревянная башня"
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:63
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your wooden tower."
-msgstr "Деревянная башня взята под охрану."
+msgstr "Ваши солдаты заняли деревянную башню."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:65
 msgctxt "frisians_building"
 msgid "Your wooden tower discovered an aggressor."
-msgstr "Враг в окрестности деревянной башни."
+msgstr "Ваша деревянная башня обнаружила врага."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:67
 msgctxt "frisians_building"
 msgid "Your wooden tower is under attack."
-msgstr "На нашу деревянную башню напали."
+msgstr "Ваша деревянная башня атакована."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:69
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the wooden tower."
-msgstr "Наши воины пали, защищая деревянную башню."
+msgstr "Враг перебил защитников деревянной башни."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:71
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the wooden tower."
-msgstr "Нападение на деревянную башню удалось отбить."
+msgstr "Ваши солдаты разбили врага у деревянной башни."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:8
@@ -1120,31 +1120,31 @@ msgstr "Высокая деревянная башня"
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:43
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your high wooden tower."
-msgstr "Высокая деревянная башня взята под охрану."
+msgstr "Ваши солдаты заняли высокую деревянную башню."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:45
 msgctxt "frisians_building"
 msgid "Your high wooden tower discovered an aggressor."
-msgstr "Враг в окрестности высокой деревянной башни."
+msgstr "Ваша высокая деревянная башня обнаружила врага."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:47
 msgctxt "frisians_building"
 msgid "Your high wooden tower is under attack."
-msgstr "На нашу высокую деревянную башню напали."
+msgstr "Ваша высокая деревянная башня атакована."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:49
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the high wooden tower."
-msgstr "Наши воины пали, защищая высокую деревянную башню."
+msgstr "Враг перебил защитников высокой деревянной башни."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:51
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the high wooden tower."
-msgstr "Нападение на высокую деревянную башню удалось отбить."
+msgstr "Ваши солдаты разбили врага у высокой деревянной башни."
 
 #. TRANSLATORS: This is a name used in lists of buildings for buildings under
 #. construction
@@ -1294,7 +1294,7 @@ msgstr "У фермера с этой плантации маниоки нет �
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
-msgstr "Пекарня маниоки"
+msgstr "Маниоковая кухня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
@@ -1319,7 +1319,7 @@ msgstr "производит уголь"
 #: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:8
 msgctxt "amazons_building"
 msgid "Chocolate Brewery"
-msgstr "Какаоварильня"
+msgstr "Шоколадный цех"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
 #: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:55
@@ -1347,13 +1347,13 @@ msgctxt "amazons_building"
 msgid ""
 "The cocoa farmer working at this cocoa farm has no cleared soil to plant her"
 " seeds."
-msgstr "Ферме какао не хватает свободного места под посевы."
+msgstr "Фермеру с фермы какао не хватает свободного места под посевы."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
 msgctxt "amazons_building"
 msgid "Dressmakery"
-msgstr "Текстильщик"
+msgstr "Ателье"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
@@ -1391,31 +1391,31 @@ msgstr "делает легкую обувь"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:139
 msgid "making hero boots"
-msgstr "делает командирские ботинки"
+msgstr "делает ботинки ветерана"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:150
 msgid "making a padded vest"
-msgstr "шьет подбитую мехом куртку"
+msgstr "делает мягкий жилет"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:161
 msgid "making a padded protector"
-msgstr "шьет подбитую мехом кожанку"
+msgstr "делает мягкую защиту"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
 msgctxt "amazons_building"
 msgid "Ferry Yard"
-msgstr "паромная переправа"
+msgstr "Паромная пристань"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:8
 msgctxt "amazons_building"
 msgid "Food Preserver"
-msgstr "Продуктовый склад"
+msgstr "Пищевой цех"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:60
@@ -1432,7 +1432,7 @@ msgstr "готовит паёк"
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:8
 msgctxt "amazons_building"
 msgid "Furnace"
-msgstr "Горн"
+msgstr "литейная"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:59
@@ -1454,13 +1454,13 @@ msgstr "Центр садоводства"
 #: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:54
 #: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:68
 msgid "enhancing the fertility of land"
-msgstr "обустроить ландшафт"
+msgstr "повышение плодородия земель"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:8
 msgctxt "amazons_building"
 msgid "Gold Digger Dwelling"
-msgstr "Жилище золотодобытчика"
+msgstr "Хижина золотоискателя"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:52
@@ -1511,13 +1511,13 @@ msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
 "diminished returns on investment. You should consider dismantling or "
 "destroying it."
-msgstr "Главная золотая жила хижины золотодобытчика истощилась. Отныне отдача от затрат на ее использование сильно уменьшится. Быть может, вам стоит разрушить или разобрать это здание."
+msgstr "Главная золотая жила хижины золотоискателя истощилась. Отныне отдача от затрат на ее использование сильно уменьшится. Быть может, вам стоит разрушить или разобрать это здание."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Hunter-Gatherer’s Hut"
-msgstr "Домик лесника"
+msgstr "Хижина охотника-собирателя"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
@@ -1549,13 +1549,13 @@ msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
 " game or fish in her work area."
-msgstr "Лесник не может найти дичь и рыбу в рабочей области вокруг своего домика."
+msgstr "Охотник-собиратель не может найти дичь и рыбу в рабочей области вокруг своей хижины."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
 msgctxt "amazons_building"
 msgid "Initiation Site"
-msgstr "Тренировочный плац"
+msgstr "Сборный пункт"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:60
@@ -1582,7 +1582,7 @@ msgstr "сажает деревья"
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Liana Cutter’s Hut"
-msgstr "Хижина собирателя лиан"
+msgstr "Хижина добытчика лиан"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:39
@@ -1609,13 +1609,13 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr "Собиратель лиан не может найти деревья в рабочей области вокруг своей хижины. Быть может, вам стоит разрушить или разобрать это сооружение или построить рядом хижину хранителя джунглей."
+msgstr "Добытчик лиан не может найти деревья в рабочей области вокруг своей хижины. Быть может, вам стоит разрушить или разобрать это сооружение или построить рядом хижину хранителя джунглей."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Cutter’s Hut"
-msgstr "Хижина лесозаготовителя"
+msgstr "Хижина рубщика редких деревьев"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -1639,7 +1639,7 @@ msgstr "рубит железное дерево"
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Plantation"
-msgstr "Посадка ценных пород деревьев"
+msgstr "Плантация редких деревьев"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -1668,7 +1668,7 @@ msgstr "Будка канатчика"
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:52
 msgid "making a rope"
-msgstr "вьет канат"
+msgstr "вьет верёвки"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:8
@@ -1744,7 +1744,7 @@ msgstr "делает кирку"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:116
 msgid "making a machete"
-msgstr "кует мачете"
+msgstr "делает мачете"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
@@ -1791,19 +1791,19 @@ msgstr "вырезает каменную чашу"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
 msgid "making a wooden spear"
-msgstr "точит кол"
+msgstr "делает деревянное копьё"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:193
 msgid "making a stone-tipped spear"
-msgstr "делает копье"
+msgstr "делает копьё с каменным наконечником"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:204
 msgid "making a hardened spear"
-msgstr "делает пику"
+msgstr "делает закаленное копьё"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:8
@@ -1814,7 +1814,7 @@ msgstr "Хижина каменотеса"
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:34
 msgid "cutting granite"
-msgstr "колит гранитные глыбы"
+msgstr "рубит гранит"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
@@ -1843,7 +1843,7 @@ msgstr "Камнетёс из этой каменоломни больше не 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Mine"
-msgstr "Гранитная шахта"
+msgstr "Каменоломня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:50
@@ -1886,7 +1886,7 @@ msgstr "Основная жила гранита в этой шахте исто
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
 msgctxt "amazons_building"
 msgid "Tapir Farm"
-msgstr "Тапирная ферма"
+msgstr "Ферма тапиров"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding tapir because ...
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:63
@@ -1898,7 +1898,7 @@ msgstr "разводит тапиров"
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Water Gatherer’s Hut"
-msgstr "Хижина водовоза"
+msgstr "Хижина водоноса"
 
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:55
@@ -1927,7 +1927,7 @@ msgstr "Носильщик, работающий у этого колодца, �
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
 msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
-msgstr "Палатка дикосея"
+msgstr "Палатка хранителя дикой природы"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
@@ -1971,7 +1971,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "Лесоруб не может найти деревьев в рабочей области вокруг этого домика лесоруба. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом домик хранителя джунглей."
+msgstr "Лесоруб не может найти деревьев в рабочей области вокруг своей хижины. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом домик хранителя джунглей."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2167,7 +2167,7 @@ msgstr "У фермера из этой фермы нет почвы приго�
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr "паромная переправа"
+msgstr "Паромная пристань"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:8
@@ -2198,7 +2198,7 @@ msgid ""
 "water where he can breed fish in his work area. Remember that you can only "
 "regenerate your fish resources if there ever were some fish in the vicinity "
 "in the first place."
-msgstr "Рыбовод из этого дома не может найти водоём в своей рабочей области для разведения рыбы. Помните, они нужны для восстановления рыбных ресурсов в случае исчерпания их в диких водоёмах."
+msgstr "Рыбовод из этого дома не может найти водоём в своей рабочей области для разведения рыбы. Помните, что для воспроизводства рыбных ресурсов в окрестностях должна быть рыба."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -2773,7 +2773,7 @@ msgstr "У фермера с этой фермы нет почвы пригод�
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr "Паромная переправа"
+msgstr "Паромная пристань"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:8
@@ -2990,7 +2990,7 @@ msgstr "Каменоломня"
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Камнетес из этой каменоломни больше не может найти скалы в своей рабочей области."
+msgstr "Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
@@ -3220,7 +3220,7 @@ msgstr "У фермера с этой фермы нет почвы пригод�
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:8
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr "Паромная переправа"
+msgstr "Паромная пристань"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:8
@@ -3413,7 +3413,7 @@ msgstr "добывает мрамор"
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Камнетес из этой каменоломни больше не может найти скалы в своей рабочей области."
+msgstr "Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:8
@@ -3454,7 +3454,7 @@ msgstr "Литейная"
 #: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:8
 msgctxt "empire_building"
 msgid "Stonemason’s House"
-msgstr "Дом камнетеса"
+msgstr "Дом камнетёса"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
@@ -3738,7 +3738,7 @@ msgstr "собирает уголь"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:98
 msgid "Out of Clay Ponds"
-msgstr "Глиняные пруды вычерпаны"
+msgstr "Не хватает глины"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:99
 msgctxt "frisians_building"
@@ -3840,7 +3840,7 @@ msgstr "Сборщик ягод, работающий в этом доме сб�
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr "Дом дайкера"
+msgstr "Дом плотинщика"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
@@ -3884,7 +3884,7 @@ msgstr "Фермер, работающий на этой ферме, не мож
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:8
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr "Паромная переправа"
+msgstr "Паромная пристань"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:8
@@ -4013,7 +4013,7 @@ msgstr "Каменоломня"
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Каменщик из этой каменоломни больше не может найти камня в своей рабочей области."
+msgstr "Камнетёс из этой каменоломни больше не может найти камня в своей рабочей области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:8
@@ -4203,7 +4203,7 @@ msgstr "Лесоруб не может найти деревьев в рабоч
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
 msgctxt "amazons_building"
 msgid "Training Glade"
-msgstr "Тренировочный полигон"
+msgstr "Тренировочная поляна"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:107
@@ -4224,37 +4224,37 @@ msgstr "спит"
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:115
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr "повысить ловкость солдата с 0 до 1"
+msgstr "повысить уклонение солдата с 0 до 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:129
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr "повысить ловкость солдата с 1 до 2"
+msgstr "повысить уклонение солдата с 1 до 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:143
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
-msgstr "повысить ловкость солдата с 2 до 3"
+msgstr "повысить уклонение солдата с 2 до 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:158
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr "повысить живучесть солдата с 0 до 1"
+msgstr "повысить здоровье солдата с 0 до 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:172
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr "повысить живучесть солдата с 1 до 2"
+msgstr "повысить здоровье солдата с 1 до 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:186
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr "повысить живучесть солдата с 2 до 3"
+msgstr "повысить здоровье солдата с 2 до 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:201
@@ -4287,7 +4287,7 @@ msgstr "Нет солдат для этого уровня тренировки!
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Gathering"
-msgstr "Место сбора войск"
+msgstr "Военный лагерь"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88
@@ -4921,11 +4921,11 @@ msgstr "Босция (средняя)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/ripe/init.lua:9
 msgid "Stink Shepherd’s Tree (ripe)"
-msgstr "Босция (срублена)"
+msgstr "Босция (зрелая)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/small/init.lua:9
 msgid "Stink Shepherd’s Tree (small)"
-msgstr "Босция (маленькая)"
+msgstr "Босция (малая)"
 
 #: ../../data/tribes/immovables/berry_bushes/stink_tree/tiny/init.lua:9
 msgid "Stink Shepherd’s Tree (tiny)"
@@ -4993,7 +4993,7 @@ msgstr "Поле маниоки (среднее)"
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (ripe)"
-msgstr "Поле маниоки (крохотное)"
+msgstr "Поле маниоки (зрелое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
@@ -5077,7 +5077,7 @@ msgstr "Виноград (крохотный)"
 #: ../../data/tribes/immovables/pond/burning/init.lua:8
 msgctxt "immovable"
 msgid "Burning Charcoal Stack"
-msgstr "Печь горшечника"
+msgstr "Горящая груда угля"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/coal/init.lua:8
@@ -5213,13 +5213,13 @@ msgstr "Много железа"
 #: ../../data/tribes/immovables/resi/atlanteans/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Crystals"
-msgstr "Немного хрусталя"
+msgstr "Немного кристаллов"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
-msgstr "Много хрусталя"
+msgstr "Много кристаллов"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/water/init.lua:8
@@ -5317,7 +5317,7 @@ msgstr "Какао-дерево (молодняк)"
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr "Сухостой"
+msgstr "Мертвое дерево"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5517,7 +5517,7 @@ msgstr "Открытие"
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
 msgid ""
 "Start the game with three ships on the ocean and only a handful of supplies"
-msgstr "Начать игру с тремя кораблями посреди океана и ресурсами впритык"
+msgstr "Начать игру с тремя кораблями посреди океана и небольшим количеством ресурсов"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
@@ -5593,7 +5593,7 @@ msgstr "Бедный Гамлет"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr "Начать игру лишь со складом и просто нулевой экономикой. Внимание: боты не могут полноценно играть в этом режиме."
+msgstr "Начать игру лишь со складом и просто нулевой экономикой. Внимание: ИИ не может полноценно играть в этом режиме."
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5601,7 +5601,7 @@ msgstr "Начать игру лишь со складом и просто ну�
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
 #: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:49
 msgid "Be careful"
-msgstr "Будь внимателен!"
+msgstr "Будь осторожен!"
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
 msgid ""
@@ -5616,7 +5616,7 @@ msgstr "Вы начинаете с товарами, которые хватит
 #: ../../data/tribes/initialization/empire/starting_conditions/struggling_outpost.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:11
 msgid "Struggling Outpost"
-msgstr "Рисковая застава"
+msgstr "Колония первопроходцев"
 
 #. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:13
@@ -5628,7 +5628,7 @@ msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can’t successfully start from "
 "this."
-msgstr "Начать игру лишь со штабом и кучкой товаров для подъема экономики. Внимание: боты не могут полноценно играть в этом режиме."
+msgstr "Начать игру лишь со штабом и кучкой товаров для подъема экономики. Внимание: ИИ не может полноценно играть в этом режиме."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
@@ -5687,7 +5687,7 @@ msgstr "Это племя известно из древнейших леген�
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."
-msgstr "Развивать вашу экономику придется, имея на старте только железо. Будьте внимательны, чтобы не спустить железо на ненужный инструмент."
+msgstr "Развивать вашу экономику придется, имея тольок по одному куску железа на каждое орудие. Будьте внимательны, чтобы не спустить железо на ненужный инструмент."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/barbarians/init.lua:12
@@ -5754,7 +5754,7 @@ msgstr "Неподвижные объекты (племя)"
 
 #: ../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
-msgstr "Неподвижные объекты(Мир)"
+msgstr "Неподвижные объекты (Мир)"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8
@@ -5777,7 +5777,7 @@ msgstr "Амазонка"
 #: ../../data/tribes/ships/amazons/init.lua:45
 msgctxt "shipname"
 msgid "Abacaxis"
-msgstr "Абакаксис"
+msgstr "Абакашис"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:47
@@ -5789,13 +5789,13 @@ msgstr "Анчикайя"
 #: ../../data/tribes/ships/amazons/init.lua:49
 msgctxt "shipname"
 msgid "Guáitara"
-msgstr "Гуитайо"
+msgstr "Гуайтара"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:51
 msgctxt "shipname"
 msgid "Iscuandé"
-msgstr "Искуанди"
+msgstr "Искуанде"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:53
@@ -5819,7 +5819,7 @@ msgstr "Акре"
 #: ../../data/tribes/ships/amazons/init.lua:59
 msgctxt "shipname"
 msgid "Açuã"
-msgstr "Ашуя"
+msgstr "Асуа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:61
@@ -5843,7 +5843,7 @@ msgstr "Алалау"
 #: ../../data/tribes/ships/amazons/init.lua:67
 msgctxt "shipname"
 msgid "Amanã"
-msgstr "Аманя"
+msgstr "Амана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:69
@@ -5855,7 +5855,7 @@ msgstr "Амапа"
 #: ../../data/tribes/ships/amazons/init.lua:71
 msgctxt "shipname"
 msgid "Andirá"
-msgstr "Андирра"
+msgstr "Андира"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:73
@@ -5867,19 +5867,19 @@ msgstr "Антимари"
 #: ../../data/tribes/ships/amazons/init.lua:75
 msgctxt "shipname"
 msgid "Apoquitaua"
-msgstr "Апокуатуа"
+msgstr "Апоквитауа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:77
 msgctxt "shipname"
 msgid "Apuaú"
-msgstr "Апаув"
+msgstr "Апуау"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:79
 msgctxt "shipname"
 msgid "Araçá"
-msgstr "Араша"
+msgstr "Араса"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:81
@@ -5891,7 +5891,7 @@ msgstr "Арара"
 #: ../../data/tribes/ships/amazons/init.lua:83
 msgctxt "shipname"
 msgid "Ararirá"
-msgstr "Араэра"
+msgstr "Арарира"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:85
@@ -5903,7 +5903,7 @@ msgstr "Арауа"
 #: ../../data/tribes/ships/amazons/init.lua:87
 msgctxt "shipname"
 msgid "Aripuanã"
-msgstr "Арипуаня"
+msgstr "Арипуана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:89
@@ -5921,19 +5921,19 @@ msgstr "Атипарана"
 #: ../../data/tribes/ships/amazons/init.lua:93
 msgctxt "shipname"
 msgid "Atucatiquini"
-msgstr "Атукатикуни"
+msgstr "Атукатиквини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:95
 msgctxt "shipname"
 msgid "Autaz-mirim"
-msgstr "Автоз-мирим"
+msgstr "Аутаз-мирим"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:97
 msgctxt "shipname"
 msgid "Badajós"
-msgstr "Бадажес"
+msgstr "Бадажос"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:99
@@ -5957,7 +5957,7 @@ msgstr "Камаю"
 #: ../../data/tribes/ships/amazons/init.lua:105
 msgctxt "shipname"
 msgid "Camanaú"
-msgstr "Каманай"
+msgstr "Каманау"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:107
@@ -5981,7 +5981,7 @@ msgstr "Карабинани"
 #: ../../data/tribes/ships/amazons/init.lua:113
 msgctxt "shipname"
 msgid "Cauaburi"
-msgstr "Каувабиру"
+msgstr "Кауабури"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:115
@@ -5993,13 +5993,13 @@ msgstr "Каурез"
 #: ../../data/tribes/ships/amazons/init.lua:117
 msgctxt "shipname"
 msgid "Ciriquiri"
-msgstr "Цириквири"
+msgstr "Чирикири"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:119
 msgctxt "shipname"
 msgid "Coari"
-msgstr "Куари"
+msgstr "Коари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:121
@@ -6017,13 +6017,13 @@ msgstr "Коти"
 #: ../../data/tribes/ships/amazons/init.lua:125
 msgctxt "shipname"
 msgid "Cubate"
-msgstr "Кубита"
+msgstr "Кубате"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:127
 msgctxt "shipname"
 msgid "Cuiari"
-msgstr "Куиари"
+msgstr "Квиари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:129
@@ -6035,43 +6035,43 @@ msgstr "Куэйрас"
 #: ../../data/tribes/ships/amazons/init.lua:131
 msgctxt "shipname"
 msgid "Cuini"
-msgstr "Цуини"
+msgstr "Куини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:133
 msgctxt "shipname"
 msgid "Cuniuá"
-msgstr "Цунюя"
+msgstr "Куниуа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:135
 msgctxt "shipname"
 msgid "Curicuriari"
-msgstr "Цурикуияри"
+msgstr "Курикуриари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:137
 msgctxt "shipname"
 msgid "Curiuaú"
-msgstr "Цурюев"
+msgstr "Куриуау"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:139
 msgctxt "shipname"
 msgid "Curuçá"
-msgstr "Цурюша"
+msgstr "Куруса"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:141
 msgctxt "shipname"
 msgid "Curuduri"
-msgstr "Цурудуру"
+msgstr "Курудури"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:143
 msgctxt "shipname"
 msgid "Curuquetê"
-msgstr "Курукуэтё"
+msgstr "Курукете"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:145
@@ -6119,7 +6119,7 @@ msgstr "Грегорио"
 #: ../../data/tribes/ships/amazons/init.lua:159
 msgctxt "shipname"
 msgid "Guaribe"
-msgstr "Гуарибэ"
+msgstr "Гуарибе"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:161
@@ -6137,25 +6137,25 @@ msgstr "Яко"
 #: ../../data/tribes/ships/amazons/init.lua:165
 msgctxt "shipname"
 msgid "Içá"
-msgstr "Иша"
+msgstr "Иса"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:167
 msgctxt "shipname"
 msgid "Içana"
-msgstr "Ишана"
+msgstr "Исана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:169
 msgctxt "shipname"
 msgid "Inauini"
-msgstr "Инауни"
+msgstr "Инауини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:171
 msgctxt "shipname"
 msgid "Ipixuna"
-msgstr "Ипиксина"
+msgstr "Ипиксуна"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:173
@@ -6179,13 +6179,13 @@ msgstr "Итакуай"
 #: ../../data/tribes/ships/amazons/init.lua:179
 msgctxt "shipname"
 msgid "Itucumã"
-msgstr "Итуцума"
+msgstr "Итукума"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:181
 msgctxt "shipname"
 msgid "Ituí"
-msgstr "Итуй"
+msgstr "Итуи"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:183
@@ -6203,7 +6203,7 @@ msgstr "Жакар"
 #: ../../data/tribes/ships/amazons/init.lua:187
 msgctxt "shipname"
 msgid "Jamicia"
-msgstr "Жамация"
+msgstr "Жамасия"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:189
@@ -6215,19 +6215,19 @@ msgstr "Жандиатуба"
 #: ../../data/tribes/ships/amazons/init.lua:191
 msgctxt "shipname"
 msgid "Japurá"
-msgstr "Джапура"
+msgstr "Жапура"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:193
 msgctxt "shipname"
 msgid "Jaquirana"
-msgstr "Жакуйрана"
+msgstr "Жаквирана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:195
 msgctxt "shipname"
 msgid "Jari"
-msgstr "Эари"
+msgstr "Жари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:197
@@ -6251,31 +6251,31 @@ msgstr "Жау"
 #: ../../data/tribes/ships/amazons/init.lua:203
 msgctxt "shipname"
 msgid "Jauaperi"
-msgstr "Жауаперэ"
+msgstr "Жауапери"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:205
 msgctxt "shipname"
 msgid "Javary"
-msgstr "Жаварай"
+msgstr "Жавари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:207
 msgctxt "shipname"
 msgid "Juami"
-msgstr "Жами"
+msgstr "Жуами"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:209
 msgctxt "shipname"
 msgid "Jufari"
-msgstr "Жафари"
+msgstr "Жуфари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:211
 msgctxt "shipname"
 msgid "Juma"
-msgstr "Зума"
+msgstr "Жума"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:213
@@ -6299,19 +6299,19 @@ msgstr "Журупари"
 #: ../../data/tribes/ships/amazons/init.lua:219
 msgctxt "shipname"
 msgid "Jutai"
-msgstr "Джатай"
+msgstr "Жутаи"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:221
 msgctxt "shipname"
 msgid "Jutaizinho"
-msgstr "Жутайзино"
+msgstr "Жутайзиньо"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:223
 msgctxt "shipname"
 msgid "Liberdade"
-msgstr "Либрдад"
+msgstr "Либердад"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:225
@@ -6323,25 +6323,25 @@ msgstr "Луна"
 #: ../../data/tribes/ships/amazons/init.lua:227
 msgctxt "shipname"
 msgid "Madeira"
-msgstr "Мадера"
+msgstr "Мадейра"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:229
 msgctxt "shipname"
 msgid "Madeirinha"
-msgstr "Мадеэрина"
+msgstr "Мадейрина"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:231
 msgctxt "shipname"
 msgid "Maiá"
-msgstr "Мая"
+msgstr "Майя"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:233
 msgctxt "shipname"
 msgid "Maici"
-msgstr "Майчи"
+msgstr "Майси"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:235
@@ -6377,7 +6377,7 @@ msgstr "Маникоре"
 #: ../../data/tribes/ships/amazons/init.lua:245
 msgctxt "shipname"
 msgid "Manicorezinho"
-msgstr "Маникорезино"
+msgstr "Маникорезиньо"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:247
@@ -6401,13 +6401,13 @@ msgstr "Маракана"
 #: ../../data/tribes/ships/amazons/init.lua:253
 msgctxt "shipname"
 msgid "Marari"
-msgstr "Марай"
+msgstr "Марари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:255
 msgctxt "shipname"
 msgid "Marauiá"
-msgstr "Мараюя"
+msgstr "Марауйя"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:257
@@ -6443,13 +6443,13 @@ msgstr "Матупири"
 #: ../../data/tribes/ships/amazons/init.lua:267
 msgctxt "shipname"
 msgid "Maués Açu"
-msgstr "Мауес Ашу"
+msgstr "Мауес Асу"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:269
 msgctxt "shipname"
 msgid "Mineruázinho"
-msgstr "Манеруазино"
+msgstr "Минеруазиньо"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:271
@@ -6473,7 +6473,7 @@ msgstr "Мутум"
 #: ../../data/tribes/ships/amazons/init.lua:277
 msgctxt "shipname"
 msgid "Nhamundá"
-msgstr "Ннамунда"
+msgstr "Намунда"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:279
@@ -6509,7 +6509,7 @@ msgstr "Паракони"
 #: ../../data/tribes/ships/amazons/init.lua:289
 msgctxt "shipname"
 msgid "Parauari"
-msgstr "Параюри"
+msgstr "Парауари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:291
@@ -6527,13 +6527,13 @@ msgstr "Пати"
 #: ../../data/tribes/ships/amazons/init.lua:295
 msgctxt "shipname"
 msgid "Pauini"
-msgstr "Пауни"
+msgstr "Пауини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:297
 msgctxt "shipname"
 msgid "Pinhuã"
-msgstr "Пинчуя"
+msgstr "Пинуа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:299
@@ -6545,7 +6545,7 @@ msgstr "Пиорини"
 #: ../../data/tribes/ships/amazons/init.lua:301
 msgctxt "shipname"
 msgid "Piratucu"
-msgstr "Пиратучу"
+msgstr "Пиратуку"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:303
@@ -6569,25 +6569,25 @@ msgstr "Прето да Эва"
 #: ../../data/tribes/ships/amazons/init.lua:309
 msgctxt "shipname"
 msgid "Prêto do Igapó-Açu"
-msgstr "Прето до Игапо-Ашу"
+msgstr "Прето до Игапо-Асу"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:311
 msgctxt "shipname"
 msgid "Puduari"
-msgstr "Падунари"
+msgstr "Падуари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:313
 msgctxt "shipname"
 msgid "Pureté"
-msgstr "Пурита"
+msgstr "Пуретэ"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:315
 msgctxt "shipname"
 msgid "Puruê"
-msgstr "Пуруя"
+msgstr "Пуруэ"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:317
@@ -6611,7 +6611,7 @@ msgstr "Рио-Негро"
 #: ../../data/tribes/ships/amazons/init.lua:323
 msgctxt "shipname"
 msgid "Riozinho"
-msgstr "Риозино"
+msgstr "Риозиньо"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:325
@@ -6635,13 +6635,13 @@ msgstr "Серуйни"
 #: ../../data/tribes/ships/amazons/init.lua:331
 msgctxt "shipname"
 msgid "Sucunduri"
-msgstr "Секундири"
+msgstr "Секундури"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:333
 msgctxt "shipname"
 msgid "Tapajós"
-msgstr "Тапайос"
+msgstr "Тапажос"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:335
@@ -6653,13 +6653,13 @@ msgstr "Тапауа"
 #: ../../data/tribes/ships/amazons/init.lua:337
 msgctxt "shipname"
 msgid "Tarauacá"
-msgstr "Тараюка"
+msgstr "Тарауака"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:339
 msgctxt "shipname"
 msgid "Tarumã Açu"
-msgstr "Тарума Ашу"
+msgstr "Тарума Асу"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:341
@@ -6671,19 +6671,19 @@ msgstr "Тарума Мирим"
 #: ../../data/tribes/ships/amazons/init.lua:343
 msgctxt "shipname"
 msgid "Tea"
-msgstr "Тия"
+msgstr "Теа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:345
 msgctxt "shipname"
 msgid "Tefé"
-msgstr "Тефё"
+msgstr "Тефе"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:347
 msgctxt "shipname"
 msgid "Tonantins"
-msgstr "Топантимус"
+msgstr "Тонантинс"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:349
@@ -6695,7 +6695,7 @@ msgstr "Тоототоби"
 #: ../../data/tribes/ships/amazons/init.lua:351
 msgctxt "shipname"
 msgid "Traíra"
-msgstr "Трайра"
+msgstr "Траира"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:353
@@ -6713,43 +6713,43 @@ msgstr "Тупана"
 #: ../../data/tribes/ships/amazons/init.lua:357
 msgctxt "shipname"
 msgid "Uaicurapa"
-msgstr "Юкурапа"
+msgstr "Уайкурапа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:359
 msgctxt "shipname"
 msgid "Uarini"
-msgstr "Юрини"
+msgstr "Уарини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:361
 msgctxt "shipname"
 msgid "Uatumã"
-msgstr "Ютума"
+msgstr "Уатума"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:363
 msgctxt "shipname"
 msgid "Uaupés"
-msgstr "Юупес"
+msgstr "Уаупес"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:365
 msgctxt "shipname"
 msgid "Umari"
-msgstr "Умару"
+msgstr "Умари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:367
 msgctxt "shipname"
 msgid "Uneiuxi"
-msgstr "Юнейкси"
+msgstr "Юнеиукси"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:369
 msgctxt "shipname"
 msgid "Unini"
-msgstr "Юними"
+msgstr "Уними"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:371
@@ -6761,7 +6761,7 @@ msgstr "Уруа"
 #: ../../data/tribes/ships/amazons/init.lua:373
 msgctxt "shipname"
 msgid "Urubaxi"
-msgstr "Урубахи"
+msgstr "Урубакси"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:375
@@ -6785,19 +6785,19 @@ msgstr "Урупади"
 #: ../../data/tribes/ships/amazons/init.lua:381
 msgctxt "shipname"
 msgid "Xeruã"
-msgstr "Ксёруя"
+msgstr "Ксеруа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:383
 msgctxt "shipname"
 msgid "Xie"
-msgstr "Си"
+msgstr "Се"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:385
 msgctxt "shipname"
 msgid "Zinho"
-msgstr "Зино"
+msgstr "Зиньо"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:101
@@ -6839,7 +6839,7 @@ msgstr "Аметист"
 #: ../../data/tribes/ships/atlanteans/init.lua:144
 msgctxt "shipname"
 msgid "Anguilla"
-msgstr "Анжулия"
+msgstr "Ангилья"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:146
@@ -6857,7 +6857,7 @@ msgstr "Аквамарин"
 #: ../../data/tribes/ships/atlanteans/init.lua:150
 msgctxt "shipname"
 msgid "Atlantean’s Stronghold"
-msgstr "Владыка Атлантиды"
+msgstr "Твердыня Атлантов"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:152
@@ -6893,7 +6893,7 @@ msgstr "Берил"
 #: ../../data/tribes/ships/atlanteans/init.lua:162
 msgctxt "shipname"
 msgid "Blanquilla"
-msgstr "Бланкулия"
+msgstr "Бланквилия"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:164
@@ -6935,7 +6935,7 @@ msgstr "Доминика"
 #: ../../data/tribes/ships/atlanteans/init.lua:176
 msgctxt "shipname"
 msgid "Eleuthera"
-msgstr "Элеутера"
+msgstr "Элевтера"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:178
@@ -6953,7 +6953,7 @@ msgstr "Гренада"
 #: ../../data/tribes/ships/atlanteans/init.lua:182
 msgctxt "shipname"
 msgid "Guadeloupe"
-msgstr "Галиполи"
+msgstr "Гваделупа"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:184
@@ -6965,7 +6965,7 @@ msgstr "Инагуа"
 #: ../../data/tribes/ships/atlanteans/init.lua:186
 msgctxt "shipname"
 msgid "Jundlina"
-msgstr "Жандлин"
+msgstr "Джандлина"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:188
@@ -6977,13 +6977,13 @@ msgstr "Жувентюд"
 #: ../../data/tribes/ships/atlanteans/init.lua:190
 msgctxt "shipname"
 msgid "King Ajanthul"
-msgstr "Король Ажантул"
+msgstr "Король Аджантул"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:192
 msgctxt "shipname"
 msgid "King Askandor"
-msgstr "Король Аскендер"
+msgstr "Король Аскандор"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:194
@@ -7067,7 +7067,7 @@ msgstr "Орчила"
 #: ../../data/tribes/ships/atlanteans/init.lua:220
 msgctxt "shipname"
 msgid "Ostur"
-msgstr "Остер"
+msgstr "Остур"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:222
@@ -7163,7 +7163,7 @@ msgstr "Судно"
 #: ../../data/tribes/ships/barbarians/init.lua:34
 msgctxt "shipname"
 msgid "Agilaz"
-msgstr "Агилиас"
+msgstr "Агилас"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:36
@@ -7181,7 +7181,7 @@ msgstr "Бальдр"
 #: ../../data/tribes/ships/barbarians/init.lua:40
 msgctxt "shipname"
 msgid "Bear"
-msgstr "Бер"
+msgstr "Медведь"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:42
@@ -7235,7 +7235,7 @@ msgstr "Хейдрик"
 #: ../../data/tribes/ships/barbarians/init.lua:58
 msgctxt "shipname"
 msgid "Heimdallr"
-msgstr "Хеймдалр"
+msgstr "Хеймдаль"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:60
@@ -7259,7 +7259,7 @@ msgstr "Ингельд"
 #: ../../data/tribes/ships/barbarians/init.lua:66
 msgctxt "shipname"
 msgid "Karl Hundason"
-msgstr "Карл Хьюндсон"
+msgstr "Карл Хундсон"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:68
@@ -7313,7 +7313,7 @@ msgstr "Сигурд"
 #: ../../data/tribes/ships/barbarians/init.lua:84
 msgctxt "shipname"
 msgid "Snotra"
-msgstr "Синатра"
+msgstr "Снотра"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:86
@@ -7325,13 +7325,13 @@ msgstr "Тор"
 #: ../../data/tribes/ships/barbarians/init.lua:88
 msgctxt "shipname"
 msgid "Thron"
-msgstr "Трун"
+msgstr "Трон"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:90
 msgctxt "shipname"
 msgid "Ullr"
-msgstr "Ульрик"
+msgstr "Уль"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:92
@@ -7343,7 +7343,7 @@ msgstr "Вальдр"
 #: ../../data/tribes/ships/barbarians/init.lua:94
 msgctxt "shipname"
 msgid "Vili"
-msgstr "Виле"
+msgstr "Вили"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:96
@@ -7367,7 +7367,7 @@ msgstr "Росомаха"
 #: ../../data/tribes/ships/barbarians/init.lua:102
 msgctxt "shipname"
 msgid "Yrsa"
-msgstr "Юрса"
+msgstr "Ирса"
 
 #. TRANSLATORS: This is the Empire's ship's name used in lists of units
 #: ../../data/tribes/ships/empire/init.lua:8
@@ -7391,7 +7391,7 @@ msgstr "Алексадрия"
 #: ../../data/tribes/ships/empire/init.lua:38
 msgctxt "shipname"
 msgid "Amalea"
-msgstr "Амелия"
+msgstr "Амалия"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:40
@@ -7439,7 +7439,7 @@ msgstr "Бен-Гур"
 #: ../../data/tribes/ships/empire/init.lua:54
 msgctxt "shipname"
 msgid "Bounty"
-msgstr "Сокровище"
+msgstr "Награда"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:56
@@ -7457,13 +7457,13 @@ msgstr "Калигула"
 #: ../../data/tribes/ships/empire/init.lua:60
 msgctxt "shipname"
 msgid "Camilla"
-msgstr "Камелия"
+msgstr "Камилла"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:62
 msgctxt "shipname"
 msgid "Carrara"
-msgstr "Карэрра"
+msgstr "Каррара"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:64
@@ -7475,7 +7475,7 @@ msgstr "Цезарь"
 #: ../../data/tribes/ships/empire/init.lua:66
 msgctxt "shipname"
 msgid "Cicero"
-msgstr "Циреро"
+msgstr "Цицерон"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:68
@@ -7493,7 +7493,7 @@ msgstr "Диана"
 #: ../../data/tribes/ships/empire/init.lua:72
 msgctxt "shipname"
 msgid "Domitianus"
-msgstr "Властитель"
+msgstr "Домициан"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:74
@@ -7505,19 +7505,19 @@ msgstr "Слава империи"
 #: ../../data/tribes/ships/empire/init.lua:76
 msgctxt "shipname"
 msgid "Faustulus"
-msgstr "Фастул"
+msgstr "Фавст"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:78
 msgctxt "shipname"
 msgid "Galba"
-msgstr "Гельб"
+msgstr "Гальба"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:80
 msgctxt "shipname"
 msgid "Gallus"
-msgstr "Галия"
+msgstr "Галл"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:82
@@ -7535,7 +7535,7 @@ msgstr "Юлий Цезарь"
 #: ../../data/tribes/ships/empire/init.lua:86
 msgctxt "shipname"
 msgid "Iuno"
-msgstr "Яно"
+msgstr "Юнона"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:88
@@ -7613,13 +7613,13 @@ msgstr "Нерва"
 #: ../../data/tribes/ships/empire/init.lua:112
 msgctxt "shipname"
 msgid "Octavianus"
-msgstr "Октавий"
+msgstr "Октавиан"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:114
 msgctxt "shipname"
 msgid "Otho"
-msgstr "Отто"
+msgstr "Ото"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:116
@@ -7631,13 +7631,13 @@ msgstr "Плутон"
 #: ../../data/tribes/ships/empire/init.lua:118
 msgctxt "shipname"
 msgid "Portus Bellus"
-msgstr "Портубеллум"
+msgstr "Порт Беллус"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:120
 msgctxt "shipname"
 msgid "Quirinus"
-msgstr "Квириний"
+msgstr "Квирин"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:122
@@ -7667,19 +7667,19 @@ msgstr "Сатурн"
 #: ../../data/tribes/ships/empire/init.lua:130
 msgctxt "shipname"
 msgid "Siena"
-msgstr "Сина"
+msgstr "Сиена"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:132
 msgctxt "shipname"
 msgid "Sparta"
-msgstr "Спартак"
+msgstr "Спарта"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:134
 msgctxt "shipname"
 msgid "Thyrrenia"
-msgstr "Триера"
+msgstr "Тиррения"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:136
@@ -7697,7 +7697,7 @@ msgstr "Тит"
 #: ../../data/tribes/ships/empire/init.lua:140
 msgctxt "shipname"
 msgid "Traianus"
-msgstr "Траиний"
+msgstr "Траян"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:142
@@ -7709,7 +7709,7 @@ msgstr "Венера"
 #: ../../data/tribes/ships/empire/init.lua:144
 msgctxt "shipname"
 msgid "Vespasianus"
-msgstr "Веспасий"
+msgstr "Веспасиан"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:146
@@ -7727,7 +7727,7 @@ msgstr "Винея"
 #: ../../data/tribes/ships/empire/init.lua:150
 msgctxt "shipname"
 msgid "Vitellius"
-msgstr "Вителий"
+msgstr "Вителлий"
 
 #. TRANSLATORS: This is the Frisians' ship's name used in lists of units
 #: ../../data/tribes/ships/frisians/init.lua:8
@@ -7746,14 +7746,14 @@ msgstr "Амрум"
 #: ../../data/tribes/ships/frisians/init.lua:47
 msgctxt "shipname"
 msgid "Alt-Nordstrand"
-msgstr "Альт-Ностранд"
+msgstr "Альт-Нордстранд"
 
 #. TRANSLATORS: This frisian ship is named after a peninsula in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:49
 msgctxt "shipname"
 msgid "Eiderstedt"
-msgstr "Эйдерстендт"
+msgstr "Эйдерстедт"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:51
@@ -7765,7 +7765,7 @@ msgstr "Фёр"
 #: ../../data/tribes/ships/frisians/init.lua:53
 msgctxt "shipname"
 msgid "Gröde"
-msgstr "Греде"
+msgstr "Грёде"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:55
@@ -7783,7 +7783,7 @@ msgstr "Гамбургер Халлиг"
 #: ../../data/tribes/ships/frisians/init.lua:59
 msgctxt "shipname"
 msgid "Helgoland"
-msgstr "Хельгланд"
+msgstr "Гельголанд"
 
 #. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:61
@@ -7795,13 +7795,13 @@ msgstr "Хевер"
 #: ../../data/tribes/ships/frisians/init.lua:63
 msgctxt "shipname"
 msgid "Hooge"
-msgstr "Хооги"
+msgstr "Хооге"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:65
 msgctxt "shipname"
 msgid "Japsand"
-msgstr "Жипсанд"
+msgstr "Япсанд"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:67
@@ -7820,7 +7820,7 @@ msgstr "Лангенесс"
 #: ../../data/tribes/ships/frisians/init.lua:71
 msgctxt "shipname"
 msgid "Norderaue"
-msgstr "Нормерауе"
+msgstr "Нордерауе"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:73
@@ -7838,7 +7838,7 @@ msgstr "Нордеругсанд"
 #: ../../data/tribes/ships/frisians/init.lua:77
 msgctxt "shipname"
 msgid "Nordstrand"
-msgstr "Нордстанд"
+msgstr "Нордстранд"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:79
@@ -7863,38 +7863,38 @@ msgstr "Пилворм"
 #: ../../data/tribes/ships/frisians/init.lua:85
 msgctxt "shipname"
 msgid "Strand"
-msgstr "Штранд"
+msgstr "Странд"
 
 #. TRANSLATORS: This frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:87
 msgctxt "shipname"
 msgid "Süderaue"
-msgstr "Шудерау"
+msgstr "Зюдерау"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:89
 msgctxt "shipname"
 msgid "Süderoog"
-msgstr "Шудеруг"
+msgstr "Зюдеруг"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:91
 msgctxt "shipname"
 msgid "Süderoogsand"
-msgstr "Шудеругсанд"
+msgstr "Зюдеругсанд"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:93
 msgctxt "shipname"
 msgid "Südfall"
-msgstr "Шудфал"
+msgstr "Зюдфал"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:95
 msgctxt "shipname"
 msgid "Sylt"
-msgstr "Шульт"
+msgstr "Зильт"
 
 #. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:97
@@ -7930,7 +7930,7 @@ msgstr "Шлем"
 #: ../../data/tribes/wares/armor_wooden/init.lua:8
 msgctxt "ware"
 msgid "Light Wooden Armor"
-msgstr "Легкие деревянные доспехи"
+msgstr "Легкая деревянная броня"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax/init.lua:8
@@ -8020,13 +8020,13 @@ msgstr "Балка"
 #: ../../data/tribes/wares/boots_hero/init.lua:8
 msgctxt "ware"
 msgid "Hero Boots"
-msgstr "Командирские ботинки"
+msgstr "Ботинки ветерана"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/boots_sturdy/init.lua:8
 msgctxt "ware"
 msgid "Sturdy Boots"
-msgstr "Крепкие ботинки"
+msgstr "Прочные ботинки"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/boots_swift/init.lua:8
@@ -8423,7 +8423,7 @@ msgstr "Доски"
 #: ../../data/tribes/wares/protector_padded/init.lua:8
 msgctxt "ware"
 msgid "Padded Protector"
-msgstr "Подбитая мехом кожанка"
+msgstr "Мягкая защита"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/quartz/init.lua:8
@@ -8448,7 +8448,7 @@ msgstr "Тростник"
 #: ../../data/tribes/wares/rope/init.lua:8
 msgctxt "ware"
 msgid "Rope"
-msgstr "Канат"
+msgstr "Верёвка"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/rubber/init.lua:8
@@ -8532,7 +8532,7 @@ msgstr "Улучшенное копьё"
 #: ../../data/tribes/wares/spear_hardened/init.lua:8
 msgctxt "ware"
 msgid "Hardened Spear"
-msgstr "Пика"
+msgstr "Закаленное копьё"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_heavy/init.lua:8
@@ -8544,7 +8544,7 @@ msgstr "Тяжёлое копьё"
 #: ../../data/tribes/wares/spear_stone_tipped/init.lua:8
 msgctxt "ware"
 msgid "Stone-tipped Spear"
-msgstr "Копье"
+msgstr "Копьё с каменным наконечником"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_war/init.lua:8
@@ -8652,7 +8652,7 @@ msgstr "Туника"
 #: ../../data/tribes/wares/vest_padded/init.lua:8
 msgctxt "ware"
 msgid "Padded Vest"
-msgstr "Подбитая мехом куртка"
+msgstr "Мягкий жилет"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/warriors_coat/init.lua:8
@@ -8712,7 +8712,7 @@ msgstr "Углежог"
 #: ../../data/tribes/workers/amazons/cocoa_farmer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Cocoa Farmer"
-msgstr "Какао плантатор"
+msgstr "Фермер какао"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cook/init.lua:8
@@ -8742,25 +8742,25 @@ msgstr "Геолог"
 #: ../../data/tribes/workers/amazons/gold_digger/init.lua:8
 msgctxt "amazons_worker"
 msgid "Gold Digger"
-msgstr "Золотодобытчик"
+msgstr "Золотоискатель"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/gold_smelter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Gold Smelter"
-msgstr "Золотолитейщик"
+msgstr "Плавщик золота"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/hunter_gatherer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Hunter-Gatherer"
-msgstr "Лесник"
+msgstr "Охотник-собиратель"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Master"
-msgstr "Древосажатель"
+msgstr "Хозяин джунглей"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_preserver/init.lua:8
@@ -8772,7 +8772,7 @@ msgstr "Хранитель джунглей"
 #: ../../data/tribes/workers/amazons/liana_cutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Liana Cutter"
-msgstr "Собиратель лиан"
+msgstr "Добытчик лиан"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/scout/init.lua:8
@@ -8790,19 +8790,19 @@ msgstr "Корабел"
 #: ../../data/tribes/workers/amazons/soldier/init.lua:20
 msgctxt "amazons_worker"
 msgid "Soldier"
-msgstr "Воин"
+msgstr "Солдат"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stone_carver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stone Carver"
-msgstr "Каменщик"
+msgstr "Камнерез"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stonecutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stonecutter"
-msgstr "Каменотес"
+msgstr "Камнетёс"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/tapir/init.lua:8
@@ -8814,31 +8814,31 @@ msgstr "Тапир"
 #: ../../data/tribes/workers/amazons/tapir_breeder/init.lua:8
 msgctxt "amazons_worker"
 msgid "Tapir Breeder"
-msgstr "Тапировод"
+msgstr "Заводчик тапиров"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/trainer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Trainer"
-msgstr "Сержант"
+msgstr "Инструктор"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/wilderness_keeper/init.lua:8
 msgctxt "amazons_worker"
 msgid "Wilderness Keeper"
-msgstr "Дикосей"
+msgstr "Хранитель дикой природы"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/woodcutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Woodcutter"
-msgstr "Дровосек"
+msgstr "Лесоруб"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/woodcutter_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Master Woodcutter"
-msgstr "Глава дровосеков"
+msgstr "Старший лесоруб"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #. descname = pgettext("empire_worker", "Fisher"),
@@ -9264,7 +9264,7 @@ msgstr "Солдат"
 #: ../../data/tribes/workers/barbarians/stonemason/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Stonemason"
-msgstr "Камнетес"
+msgstr "Камнетёс"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/trainer/init.lua:8
@@ -9444,7 +9444,7 @@ msgstr "Солдат"
 #: ../../data/tribes/workers/empire/stonemason/init.lua:8
 msgctxt "empire_worker"
 msgid "Stonemason"
-msgstr "Камнетес"
+msgstr "Камнетёс"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/toolsmith/init.lua:8
@@ -9564,7 +9564,7 @@ msgstr "Глина Копатель"
 #: ../../data/tribes/workers/frisians/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr "Дайкер"
+msgstr "Плотинщик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:8
@@ -9690,7 +9690,7 @@ msgstr "Солдат"
 #: ../../data/tribes/workers/frisians/stonemason/init.lua:8
 msgctxt "frisians_worker"
 msgid "Stonemason"
-msgstr "Камнетес"
+msgstr "Камнетёс"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/trainer/init.lua:8
