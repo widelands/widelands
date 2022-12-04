@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-10 03:01+0000\n"
+"POT-Creation-Date: 2022-11-25 03:25+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -366,7 +366,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr "In deesem Speel fangst du mit eenem lütten Deel Land an, waar du leep minn Materialien un Mineraale hest. Daarmit baust du een Riek mit dusenden Inwohners up. Up dienem Weg daarhen baust du eene starke Weertskupp up, förskst dat Land um di rum ut un kämpst tegen tegenstriedige Völker."
+msgstr "In deesem Speel fangst du mit eenem lütten Deel Land an, waar du leep minn Kraam un Mineraale hest. Daarmit baust du een Riek mit dusenden Inwohners up. Up dienem Weg daarhen baust du eene starke Weertskupp up, förskst dat Land um di rum ut un kämpst tegen tegenstriedige Völker."
 
 #: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
@@ -790,9 +790,12 @@ msgstr "Drück »%s«, um dien Bestands-Fenster fix to wiesen of to verbargen."
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads. The "
-"supplies and demands of buildings are handled in its economy."
-msgstr "Eene Weertskupp umfaat all Husen un Fahnen, de mit Straten verbunnen sünd. De Versörgung vun elkeen Huus word vun siener Weertskupp regelt."
+"An economy consists of all buildings and flags connected by roads, ferries "
+"or ships. The supplies and demands of buildings are handled in its economy. "
+"A player may have more than one economies, if those are not connected by any"
+" of these means. This is why the configure economy menu can only be accessed"
+" from flags and warehouses, not the player’s main menu."
+msgstr "Eene Weertskupp umfaat all Husen un Fahnen, wat mit Straten, Fähren of Schippen verbunnen sünd. De Versörgen un Verlangens vun all Husen worden vun hör Weertskupp verwalt. Een Speler kann mehr as eene Weertskupp hebben, wenn se nich eets verbunnen sünd. Um dat kann dat Weertskupp-Instellens-Menü blots von Fahnen un Kraamhusen opmaakt worden, nich vun de Speler-Höövdmenü."
 
 #: ../../data/txts/tips/general_game.lua:69
 msgid ""

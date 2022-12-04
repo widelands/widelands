@@ -430,6 +430,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_LEFT: {
 			if (d_->cursor_pos > 0) {
+				d_->ww.enter_cursor_movement_mode();
 				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
 					uint32_t newpos = d_->prev_char(d_->cursor_pos);
 					while (newpos > 0 && (isspace(d_->text[newpos]) != 0)) {
@@ -462,6 +463,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_RIGHT:
 			if (d_->cursor_pos < d_->text.size()) {
+				d_->ww.enter_cursor_movement_mode();
 				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
 					uint32_t newpos = d_->next_char(d_->cursor_pos);
 					while (newpos < d_->text.size() && (isspace(d_->text[newpos]) != 0)) {
