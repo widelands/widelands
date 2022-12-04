@@ -270,6 +270,7 @@ public:
 		HeaderPortDock = 10,
 		HeaderShipFleet = 11,
 		HeaderFerryFleet = 12,
+		HeaderPinnedNote = 13,
 	};
 
 	/**
