@@ -38,7 +38,7 @@ public:
 	[[nodiscard]] FilenameSet list_directory(const std::string& path) const override;
 
 	[[nodiscard]] bool is_directory(const std::string& path) const override;
-	[[nodiscard]] bool file_exists(const std::string& path) const override;
+	bool file_exists(const std::string& path) const override;  // NOLINT not nodicard
 
 	void* load(const std::string& fname, size_t& length) override;
 

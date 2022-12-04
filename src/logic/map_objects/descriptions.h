@@ -176,8 +176,8 @@ public:
 	/// when we don't know whether it's a ware or worker.
 	/// Throws GameDataError if object hasn't been registered.
 	/// This function is safe for map/savegame compatibility.
-	[[nodiscard]] std::pair<WareWorker, DescriptionIndex>
-	load_ware_or_worker(const std::string& objectname) const;
+	std::pair<WareWorker, DescriptionIndex>
+	load_ware_or_worker(const std::string& objectname) const;  // NOLINT not nodiscard
 	/// Try to load a building or immovable that has been registered previously with
 	/// 'register_description' when we don't know whether it's a building or immovable. Throws
 	/// GameDataError if object hasn't been registered. If first == 'true', we have a building.
