@@ -525,4 +525,4 @@ bool RemoteAddOnRow::upgradeable() const {
 	return upgrade_.enabled();
 }
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

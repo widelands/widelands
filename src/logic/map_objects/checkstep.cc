@@ -37,10 +37,10 @@ CheckStep::CheckStep() : capsule(always_false().capsule) {
 
 struct CheckStepAlwaysFalse {
 	[[nodiscard]] bool allowed(const Map& /* map */,
-	             const FCoords& /* start */,
-	             const FCoords& /* end */,
-	             int32_t /* dir */,
-	             CheckStep::StepId /* id */) const {
+	                           const FCoords& /* start */,
+	                           const FCoords& /* end */,
+	                           int32_t /* dir */,
+	                           CheckStep::StepId /* id */) const {
 		return false;
 	}
 	[[nodiscard]] bool reachable_dest(const Map& /* map */, const FCoords& /* dest */) const {

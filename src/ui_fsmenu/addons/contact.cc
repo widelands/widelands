@@ -110,4 +110,4 @@ bool ContactForm::check_ok_button_enabled() {
 	return ok_.enabled();
 }
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

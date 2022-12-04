@@ -2216,5 +2216,4 @@ void Player::write_statistics(FileWrite& fw) const {
 	}
 }
 
-
 }  // namespace Widelands

@@ -71,4 +71,4 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent, const std::s
 	initialization_complete();
 }
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

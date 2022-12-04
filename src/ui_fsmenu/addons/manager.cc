@@ -1624,4 +1624,4 @@ step1:
 }
 #endif
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

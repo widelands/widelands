@@ -542,4 +542,4 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	}
 }
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

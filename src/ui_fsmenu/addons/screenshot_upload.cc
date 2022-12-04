@@ -142,4 +142,4 @@ void ScreenshotUploadWindow::think() {
 	UI::Window::think();
 }
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

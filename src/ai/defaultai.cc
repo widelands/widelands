@@ -84,15 +84,6 @@ namespace AI {
 
 // Fix undefined references
 
-
-
-
-
-
-
-
-
-
 DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
 DefaultAI::VeryWeakImpl DefaultAI::very_weak_impl;

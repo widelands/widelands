@@ -597,4 +597,4 @@ void CampaignAddOnsPackagerBox::layout() {
 	AddOnsPackagerBox::layout();
 }
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

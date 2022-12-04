@@ -988,4 +988,4 @@ void RemoteInteractionWindow::login_changed() {
 	}
 }
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

@@ -507,10 +507,10 @@ struct CheckStepBlocked {
 	}
 
 	[[nodiscard]] bool allowed(const Map& /* map */,
-	             FCoords /* start */,
-	             FCoords end,
-	             int32_t /* dir */,
-	             CheckStep::StepId /* id */) const {
+	                           FCoords /* start */,
+	                           FCoords end,
+	                           int32_t /* dir */,
+	                           CheckStep::StepId /* id */) const {
 		if (end == tracker_.finaldest_) {
 			return true;
 		}

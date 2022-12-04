@@ -131,13 +131,15 @@ struct MousewheelHandlerOptions {
 		return ((((y != 0) && (current_sign_y_ != 0)) || ((x != 0) && (current_sign_x_ != 0))) &&
 		        matches_keymod(current_keymod_, modstate));
 	}
-	[[nodiscard]] int32_t get_change(const int32_t x, const int32_t y, const uint16_t modstate) const {
+	[[nodiscard]] int32_t
+	get_change(const int32_t x, const int32_t y, const uint16_t modstate) const {
 		if (can_handle(x, y, modstate)) {
 			return (x * current_sign_x_ + y * current_sign_y_);
 		}
 		return 0;
 	}
-	[[nodiscard]] Vector2i get_change_2D(const int32_t x, const int32_t y, const uint16_t modstate) const {
+	[[nodiscard]] Vector2i
+	get_change_2D(const int32_t x, const int32_t y, const uint16_t modstate) const {
 		if (can_handle(x, y, modstate)) {
 			return Vector2i(x * current_sign_x_, y * current_sign_y_);
 		}

@@ -45,8 +45,6 @@
 
 namespace Widelands {
 
-
-
 void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
                                        const Widelands::Coords& coords,
                                        float scale,

@@ -176,4 +176,4 @@ void AddOnsLoginBox::reset() {
 	}
 }
 
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

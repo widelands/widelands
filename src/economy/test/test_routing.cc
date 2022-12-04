@@ -93,7 +93,7 @@ bool TestingRoutingNode::all_members_zeroed() const {
 
 class TestingTransportCostCalculator : public Widelands::ITransportCostCalculator {
 	[[nodiscard]] int32_t calc_cost_estimate(const Widelands::Coords& c1,
-	                           const Widelands::Coords& c2) const override {
+	                                         const Widelands::Coords& c2) const override {
 		// We use an euclidian metric here. It is much easier for
 		// test cases
 		double xd = (c1.x - c2.x);
