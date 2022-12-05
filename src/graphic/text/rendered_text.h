@@ -186,7 +186,7 @@ private:
 	                  const Recti& region,
 	                  Align align) const;
 
-	TextClickTarget* memory_tree_root_;
+	TextClickTarget* memory_tree_root_{nullptr};
 };
 
 }  // namespace UI

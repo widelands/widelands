@@ -47,8 +47,7 @@ struct RequirementsStorage;
 struct Requirements {
 private:
 	struct BaseCapsule {
-		virtual ~BaseCapsule() {
-		}
+		virtual ~BaseCapsule() = default;
 
 		[[nodiscard]] virtual bool check(const MapObject&) const = 0;
 		virtual void write(FileWrite&, EditorGameBase&, MapObjectSaver&) const = 0;
@@ -75,8 +74,7 @@ private:
 	};
 
 public:
-	Requirements() {
-	}
+	Requirements() = default;
 
 	template <typename T> Requirements(const T& req) : m(new Capsule<T>(req)) {
 	}

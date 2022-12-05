@@ -60,7 +60,7 @@ private:
 	void recalc_desired_size();
 
 	const Widelands::Player& player_;
-	uint32_t capacity_;
+	uint32_t capacity_{0};
 	uint32_t items_per_row_;
 	std::vector<Item> items_;
 };

@@ -66,8 +66,7 @@ public:
 	friend class Economy;
 
 	SoldierDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
-	~SoldierDescr() override {
-	}
+	~SoldierDescr() override = default;
 
 	uint32_t get_max_health_level() const {
 		return health_.max_level;
@@ -174,7 +173,7 @@ private:
 	SoldierAnimationsList evade_failure_e_name_;
 	SoldierAnimationsList die_e_name_;
 
-	uint16_t max_anim_height_;
+	uint16_t max_anim_height_{0};
 
 	// We can have per-level walking and idle anims
 	// NOTE: I expect no soldier will ever agree to carry a ware, so we don't provide animations for
@@ -399,7 +398,7 @@ protected:
 		const Task* get_task(const std::string& name) override;
 
 	private:
-		uint32_t battle_;
+		uint32_t battle_{0};
 	};
 
 	Loader* create_loader() override;

@@ -55,7 +55,7 @@ private:
 	AddOnsCtrl& ctrl_;
 	std::shared_ptr<AddOns::AddOnInfo> info_;
 	const size_t& index_;
-	bool layouting_;
+	bool layouting_{false};
 	UI::MultilineTextarea text_;
 	UI::Box buttons_;
 	UI::Button edit_, delete_;
@@ -102,9 +102,9 @@ private:
 
 	UI::Box main_box_, buttons_box_;
 	UI::Button ok_, cancel_;
-	UI::Listselect<std::string>* list_;
-	UI::MultilineEditbox* text_;
-	TransifexSettingsBox* txsettings_;
+	UI::Listselect<std::string>* list_{nullptr};
+	UI::MultilineEditbox* text_{nullptr};
+	TransifexSettingsBox* txsettings_{nullptr};
 };
 
 class RemoteInteractionWindow : public UI::Window {
@@ -129,11 +129,11 @@ private:
 
 	AddOnsCtrl& parent_;
 	std::shared_ptr<AddOns::AddOnInfo> info_;
-	int32_t current_screenshot_, nr_screenshots_;
+	int32_t current_screenshot_{0}, nr_screenshots_;
 	std::vector<const Image*> screenshot_cache_;
 
 	/** How the user voted the current add-on (1-10; 0 for not voted; -1 for unknown). */
-	int current_vote_;
+	int current_vote_{-1};
 
 	void update_current_vote_on_demand();
 

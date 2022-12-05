@@ -220,14 +220,14 @@ private:
 	/// Contains options for a sound type or the music
 	struct SoundOptions {
 		explicit SoundOptions(int vol, const std::string& savename)
-		   : enabled(true), volume(vol), name(savename) {
+		   :  volume(vol), name(savename) {
 			assert(!savename.empty());
 			assert(vol >= 0);
 			assert(vol <= MIX_MAX_VOLUME);
 		}
 
 		/// Whether the user wants to hear this type of sound
-		bool enabled;
+		bool enabled{true};
 		/// Volume for sound effects or music (from 0 to get_max_volume())
 		int volume;
 		/// Name for saving
@@ -262,7 +262,7 @@ private:
 	RNG rng_;
 
 	/// Protects access to active_fx_ between callbacks and main code.
-	SDL_mutex* fx_lock_;
+	SDL_mutex* fx_lock_{nullptr};
 
 	/**
 	 * Can sounds be played?

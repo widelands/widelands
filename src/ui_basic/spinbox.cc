@@ -93,8 +93,7 @@ SpinBox::SpinBox(Panel* const parent,
      type_(type),
      sbi_(new SpinBoxImpl),
      unit_width_(unit_w),
-     button_height_(20),
-     padding_(2),
+     
      number_of_paddings_(type_ == SpinBox::Type::kBig ? 2 : 0) {
 	if (type_ == SpinBox::Type::kValueList) {
 		sbi_->min = 0;

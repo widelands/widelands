@@ -117,10 +117,10 @@ private:
 	int32_t min_value_;  //  cursor values
 	int32_t max_value_;
 	int32_t value_;
-	int32_t relative_move_;
+	int32_t relative_move_{0};
 
-	bool highlighted_;  //  mouse over
-	bool pressed_;      //  the cursor is pressed
+	bool highlighted_{false};  //  mouse over
+	bool pressed_{false};      //  the cursor is pressed
 	bool enabled_;      //  enabled widget
 
 	const UI::SliderStyle cursor_style_;  // Cursor color and texture. Not owned.
@@ -133,7 +133,7 @@ protected:
 
 	int32_t cursor_pos_;   //  cursor position
 	int32_t cursor_size_;  //  cursor width
-	int32_t cursor_fixed_height_;
+	int32_t cursor_fixed_height_{-1};
 };
 
 /**

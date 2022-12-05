@@ -33,8 +33,8 @@ GameChatMenu::GameChatMenu(UI::Panel* parent,
                            ChatProvider& chat,
                            const std::string& title)
    : UI::UniqueWindow(parent, UI::WindowStyle::kWui, "chat", &registry, 440, 235, title),
-     chat_(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat, UI::PanelStyle::kWui),
-     close_on_send_(false) {
+     chat_(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat, UI::PanelStyle::kWui)
+     {
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}

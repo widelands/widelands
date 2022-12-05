@@ -70,8 +70,8 @@ AbstractWaresDisplay::AbstractWaresDisplay(
      hgap_(hgap),
      vgap_(vgap),
      selection_anchor_(Widelands::INVALID_INDEX),
-     callback_function_(std::move(callback_function)),
-     min_free_vertical_space_(290) {
+     callback_function_(std::move(callback_function))
+     {
 	for (const Widelands::DescriptionIndex& index : indices_) {
 		selected_.insert(std::make_pair(index, false));
 		hidden_.insert(std::make_pair(index, false));
@@ -513,7 +513,7 @@ StockMenuWaresDisplay::StockMenuWaresDisplay(UI::Panel* const parent,
                                              const int32_t y,
                                              const Widelands::Player& p,
                                              const Widelands::WareWorker type)
-   : WaresDisplay(parent, x, y, p.tribe(), type, false), player_(p), solid_icon_backgrounds_(true) {
+   : WaresDisplay(parent, x, y, p.tribe(), type, false), player_(p) {
 }
 
 std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionIndex di) {

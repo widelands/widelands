@@ -33,8 +33,7 @@ public:
 	RoadBaseDescr(char const* const init_name, char const* const init_descname, MapObjectType mot)
 	   : MapObjectDescr(mot, init_name, init_descname) {
 	}
-	~RoadBaseDescr() override {
-	}
+	~RoadBaseDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(RoadBaseDescr);
@@ -111,7 +110,7 @@ protected:
 	int32_t cost_[2];
 
 	Path path_;            ///< path goes from start to end
-	uint32_t idle_index_;  ///< index into path where carriers should idle
+	uint32_t idle_index_{0};  ///< index into path where carriers should idle
 };
 }  // namespace Widelands
 

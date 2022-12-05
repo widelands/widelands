@@ -30,18 +30,8 @@
 namespace Widelands {
 
 MapObjectSaver::MapObjectSaver()
-   : nr_roads_(0),
-     nr_waterways_(0),
-     nr_flags_(0),
-     nr_buildings_(0),
-     nr_bobs_(0),
-     nr_wares_(0),
-     nr_immovables_(0),
-     nr_battles_(0),
-     nr_ship_fleets_(0),
-     nr_ferry_fleets_(0),
-     nr_portdocks_(0),
-     lastserial_(0) {
+   
+     {
 }
 
 /**

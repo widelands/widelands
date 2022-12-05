@@ -69,8 +69,7 @@ static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 template <typename CT = Coords, typename RT = uint16_t> struct Area : public CT {
 	using CoordsType = CT;
 	using RadiusType = RT;
-	Area() {
-	}
+	Area() = default;
 	Area(const CoordsType center, const RadiusType rad) : CoordsType(center), radius(rad) {
 	}
 

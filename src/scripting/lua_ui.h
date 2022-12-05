@@ -53,8 +53,7 @@ public:
 	explicit LuaPanel(lua_State* L) : panel_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
-	~LuaPanel() override {
-	}
+	~LuaPanel() override = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override {
@@ -99,14 +98,12 @@ class LuaButton : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaButton);
 
-	LuaButton()  {
-	}
+	LuaButton()  = default;
 	explicit LuaButton(UI::Panel* p) : LuaPanel(p) {
 	}
 	explicit LuaButton(lua_State* L) : LuaPanel(L) {
 	}
-	~LuaButton() override {
-	}
+	~LuaButton() override = default;
 
 	/*
 	 * Properties
@@ -131,14 +128,12 @@ class LuaDropdown : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaDropdown);
 
-	LuaDropdown()  {
-	}
+	LuaDropdown()  = default;
 	explicit LuaDropdown(UI::Panel* p) : LuaPanel(p) {
 	}
 	explicit LuaDropdown(lua_State* L) : LuaPanel(L) {
 	}
-	~LuaDropdown() override {
-	}
+	~LuaDropdown() override = default;
 
 	/*
 	 * Properties
@@ -167,14 +162,12 @@ class LuaTab : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaTab);
 
-	LuaTab()  {
-	}
+	LuaTab()  = default;
 	explicit LuaTab(UI::Panel* p) : LuaPanel(p) {
 	}
 	explicit LuaTab(lua_State* L) : LuaPanel(L) {
 	}
-	~LuaTab() override {
-	}
+	~LuaTab() override = default;
 
 	/*
 	 * Properties
@@ -199,14 +192,12 @@ class LuaWindow : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaWindow);
 
-	LuaWindow()  {
-	}
+	LuaWindow()  = default;
 	explicit LuaWindow(UI::Panel* p) : LuaPanel(p) {
 	}
 	explicit LuaWindow(lua_State* L) : LuaPanel(L) {
 	}
-	~LuaWindow() override {
-	}
+	~LuaWindow() override = default;
 
 	/*
 	 * Properties
@@ -230,13 +221,11 @@ class LuaMapView : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaMapView);
 
-	LuaMapView()  {
-	}
+	LuaMapView()  = default;
 	explicit LuaMapView(MapView* p) : LuaPanel(p) {
 	}
 	explicit LuaMapView(lua_State* L);
-	~LuaMapView() override {
-	}
+	~LuaMapView() override = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State*) override {

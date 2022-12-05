@@ -22,7 +22,7 @@
 
 #include "base/log.h"
 
-BufferedConnection::Peeker::Peeker(BufferedConnection* conn) : conn_(conn), peek_pointer_(0) {
+BufferedConnection::Peeker::Peeker(BufferedConnection* conn) : conn_(conn) {
 	assert(conn_);
 }
 

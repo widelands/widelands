@@ -400,7 +400,7 @@ public:
 	}
 
 private:
-	bool did_postload_addons_before_loading_;
+	bool did_postload_addons_before_loading_{false};
 
 	void sync_reset();
 
@@ -409,11 +409,8 @@ private:
 	struct SyncWrapper : public StreamWrite {
 		SyncWrapper(Game& game, StreamWrite& target)
 		   : game_(game),
-		     target_(target),
-		     counter_(0),
-		     next_diskspacecheck_(0),
-		     syncstreamsave_(false),
-		     current_excerpt_id_(0) {
+		     target_(target)
+		     {
 		}
 
 		~SyncWrapper() override;
@@ -433,14 +430,14 @@ private:
 	public:
 		Game& game_;
 		StreamWrite& target_;
-		uint32_t counter_;
-		uint32_t next_diskspacecheck_;
+		uint32_t counter_{0};
+		uint32_t next_diskspacecheck_{0};
 		std::unique_ptr<StreamWrite> dump_;
 		std::string dumpfname_;
-		bool syncstreamsave_;
+		bool syncstreamsave_{false};
 		// Use a cyclic buffer for storing parts of the syncstream
 		// Currently used buffer
-		size_t current_excerpt_id_;
+		size_t current_excerpt_id_{0};
 		// (Arbitrary) count of buffers
 		// Syncreports seem to be requested from the network clients every game second so this
 		// buffer should be big enough to store the last 32 seconds of the game actions leading
@@ -457,17 +454,17 @@ private:
 	/// Whether a replay writer should be created.
 	/// Defaults to \c true, and should only be set to \c false for playing back
 	/// replays.
-	bool writereplay_;
+	bool writereplay_{true};
 
 	/// Whether a syncsteam file should be created.
 	/// Defaults to \c false, and can be set to true for network games. The file
 	/// is written only if \ref writereplay_ is true too.
-	bool writesyncstream_;
+	bool writesyncstream_{false};
 
-	bool ai_training_mode_;
-	bool auto_speed_;
+	bool ai_training_mode_{false};
+	bool auto_speed_{false};
 
-	int32_t state_;
+	int32_t state_{gs_notrunning};
 
 	RNG rng_;
 
@@ -486,7 +483,7 @@ private:
 	std::map<int, TradeAgreement> trade_agreements_;
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
-	bool diplomacy_allowed_;
+	bool diplomacy_allowed_{true};
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;

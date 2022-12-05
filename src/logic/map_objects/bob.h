@@ -50,8 +50,7 @@ public:
 	         MapObjectType type,
 	         MapObjectDescr::OwnerType owner_type);
 
-	~BobDescr() override {
-	}
+	~BobDescr() override = default;
 
 	Bob& create(EditorGameBase&, Player* owner, const Coords&) const;
 
@@ -192,27 +191,23 @@ public:
 	struct State {
 		explicit State(const Task* const the_task = nullptr)
 		   : task(the_task),
-		     ivar1(0),
-		     ivar2(0),
-		     ivar3(0),
-		     coords(Coords::null()),
-		     path(nullptr),
-		     route(nullptr),
-		     program(nullptr) {
+		     
+		     coords(Coords::null())
+		     {
 		}
 
 		const Task* task;
-		int32_t ivar1;
-		int32_t ivar2;
-		int32_t ivar3;
+		int32_t ivar1{0};
+		int32_t ivar2{0};
+		int32_t ivar3{0};
 		ObjectPointer objvar1;
 		std::string svar1;
 
 		Coords coords;
 		DirAnimations diranims;
-		Path* path;
-		Route* route;
-		const MapObjectProgram* program;  ///< pointer to current program
+		Path* path{nullptr};
+		Route* route{nullptr};
+		const MapObjectProgram* program{nullptr};  ///< pointer to current program
 	};
 
 	MO_DESCR(BobDescr)
@@ -365,11 +360,11 @@ private:
 	static Task const taskMove;
 
 	FCoords position_;  ///< where are we right now?
-	Bob* linknext_;     ///< next object on this node
-	Bob** linkpprev_;
-	uint32_t anim_;
+	Bob* linknext_{nullptr};     ///< next object on this node
+	Bob** linkpprev_{nullptr};
+	uint32_t anim_{0};
 	Time animstart_;  ///< gametime when the animation was started
-	WalkingDir walking_;
+	WalkingDir walking_{IDLE};
 	Time walkstart_;  ///< start time (used for interpolation)
 	Time walkend_;    ///< end time (used for interpolation)
 
@@ -383,7 +378,7 @@ private:
 	 * only the earliest \ref Cmd_Act issued during one act phase is actually
 	 * executed. Subsequent \ref Cmd_Act could interfere and are eliminated.
 	 */
-	uint32_t actid_;
+	uint32_t actid_{0};
 
 	/**
 	 * Whether something was scheduled during this act phase.
@@ -392,8 +387,8 @@ private:
 	 * Bobs that hang themselves up. So e.g. \ref skip_act() also sets this
 	 * to \c true, even though it technically doesn't schedule anything.
 	 */
-	bool actscheduled_;
-	bool in_act_;  ///< if do_act is currently running
+	bool actscheduled_{false};
+	bool in_act_{false};  ///< if do_act is currently running
 	std::string signal_;
 
 	// saving and loading

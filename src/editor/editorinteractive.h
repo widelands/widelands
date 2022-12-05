@@ -55,7 +55,7 @@ public:
 	struct Tools {
 		explicit Tools(EditorInteractive& parent, const Widelands::Map& map)
 		   : current_pointer(&info),
-		     use_tool(EditorTool::First),
+		     
 		     info(parent),
 		     set_height(parent),
 		     decrease_height(parent),
@@ -81,7 +81,7 @@ public:
 		}
 		using ToolVector = std::vector<EditorTool*>;
 		EditorTool* current_pointer;
-		EditorTool::ToolIndex use_tool;
+		EditorTool::ToolIndex use_tool{EditorTool::First};
 		EditorInfoTool info;
 		EditorSetHeightTool set_height;
 		EditorDecreaseHeightTool decrease_height;
@@ -247,9 +247,9 @@ private:
 	void update_tool_history_window();
 
 	//  state variables
-	bool need_save_;
+	bool need_save_{false};
 	uint32_t realtime_;
-	bool is_painting_;
+	bool is_painting_{false};
 
 	// All unique menu windows
 	struct EditorMenuWindows {
@@ -287,8 +287,8 @@ private:
 	// Show / Hide menu on the toolbar
 	UI::Dropdown<ShowHideEntry> showhidemenu_;
 
-	UI::Button* undo_;
-	UI::Button* redo_;
+	UI::Button* undo_{nullptr};
+	UI::Button* redo_{nullptr};
 
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;

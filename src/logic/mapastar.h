@@ -52,7 +52,7 @@ protected:
 
 struct StepEvalAStar {
 	explicit StepEvalAStar(Coords target)
-	   : target_(target), estimator_bias_(0), conservative_(true), swim_(false) {
+	   : target_(target) {
 	}
 
 	int32_t estimate(Map& map, FCoords pos) const {
@@ -76,9 +76,9 @@ struct StepEvalAStar {
 	}
 
 	Coords target_;
-	int32_t estimator_bias_;
-	bool conservative_;
-	bool swim_;
+	int32_t estimator_bias_{0};
+	bool conservative_{true};
+	bool swim_{false};
 };
 
 /**

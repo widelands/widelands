@@ -45,7 +45,7 @@ public:
 	   Widelands::WareWorker type,
 	   bool selectable,
 	   CLANG_DIAG_OFF("-Wunknown-pragmas") CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-	      std::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
+	      std::function<void(Widelands::DescriptionIndex, bool)> callback_function = nullptr,
 	   CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false,
 	   int32_t hgap = 3,
@@ -153,7 +153,7 @@ private:
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
-	int32_t min_free_vertical_space_;
+	int32_t min_free_vertical_space_{290};
 };
 
 /*
@@ -202,7 +202,7 @@ protected:
 	std::string info_for_ware(Widelands::DescriptionIndex) override;
 
 	const Widelands::Player& player_;
-	bool solid_icon_backgrounds_;
+	bool solid_icon_backgrounds_{true};
 };
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,

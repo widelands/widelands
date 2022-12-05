@@ -32,7 +32,7 @@ class Panel;
  */
 struct UniqueWindow : public Window {
 	struct Registry {
-		UniqueWindow* window;
+		UniqueWindow* window{nullptr};
 
 		// Whenever Registry::toggle() is called, a window will be created using
 		// 'open_window' or if one is open already, the existing one will be
@@ -48,10 +48,10 @@ struct UniqueWindow : public Window {
 		void destroy() const;
 		void toggle();
 
-		int32_t x, y;
-		bool valid_pos;
+		int32_t x{0}, y{0};
+		bool valid_pos{false};
 
-		Registry() : window(nullptr), x(0), y(0), valid_pos(false) {
+		Registry()  {
 		}
 		~Registry();
 	};

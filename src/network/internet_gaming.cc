@@ -41,15 +41,10 @@ const uint8_t kTimeFormatLength = 32;
 /// that only one instance is running at time.
 InternetGaming::InternetGaming()
    : net(nullptr),
-     state_(OFFLINE),
-     reg_(false),
+     
      port_(kInternetGamingPort),
      clientrights_(INTERNET_CLIENT_UNREGISTERED),
-     clientupdateonmetaserver_(true),
-     gameupdateonmetaserver_(true),
-     clientupdate_(false),
-     gameupdate_(false),
-     time_offset_(0),
+     
      waittimeout_(std::numeric_limits<int32_t>::max()),
      lastping_(time(nullptr)) {
 	// Set connection tracking variables to 0

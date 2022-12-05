@@ -43,7 +43,7 @@ MapDetails::MapDetails(Panel* parent,
    : UI::Panel(parent, style, x, y, w, h),
 
      style_(style),
-     padding_(4),
+     
      main_box_(this, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      descr_box_(&main_box_, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_label_(&main_box_,

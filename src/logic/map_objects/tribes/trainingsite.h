@@ -35,8 +35,7 @@ public:
 	TrainingSiteDescr(const std::string& init_descname,
 	                  const LuaTable& table,
 	                  Descriptions& descriptions);
-	~TrainingSiteDescr() override {
-	}
+	~TrainingSiteDescr() override = default;
 
 	[[nodiscard]] Building& create_object() const override;
 
@@ -87,13 +86,13 @@ private:
 	/** Number of rounds w/o successful training, after which a soldier is kicked out.**/
 	uint32_t max_stall_;
 	/** Whether this site can train health*/
-	bool train_health_;
+	bool train_health_{false};
 	/** Whether this site can train attack*/
-	bool train_attack_;
+	bool train_attack_{false};
 	/** Whether this site can train defense*/
-	bool train_defense_;
+	bool train_defense_{false};
 	/** Whether this site can train evasion*/
-	bool train_evade_;
+	bool train_evade_{false};
 
 	/** Minimum health to which a soldier can drop at this site*/
 	unsigned min_health_;
@@ -105,13 +104,13 @@ private:
 	unsigned min_evade_;
 
 	/** Maximum health a soldier can acquire at this site*/
-	unsigned max_health_;
+	unsigned max_health_{0};
 	/** Maximum attack a soldier can acquire at this site*/
-	unsigned max_attack_;
+	unsigned max_attack_{0};
 	/** Maximum defense a soldier can acquire at this site*/
-	unsigned max_defense_;
+	unsigned max_defense_{0};
 	/** Maximum evasion a soldier can acquire at this site*/
-	unsigned max_evade_;
+	unsigned max_evade_{0};
 
 	std::string no_soldier_to_train_message_;
 	std::string no_soldier_for_training_level_message_;
@@ -215,7 +214,7 @@ private:
 
 	SoldierControl soldier_control_;
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
-	Request* soldier_request_;
+	Request* soldier_request_{nullptr};
 
 	/** The soldiers currently at the training site*/
 	std::vector<Soldier*> soldiers_;
@@ -229,12 +228,12 @@ private:
 
 	/** True, \b always upgrade already experienced soldiers first, when possible
 	 * False, \b always upgrade inexperienced soldiers first, when possible */
-	bool build_heroes_;
+	bool build_heroes_{false};
 
 	std::vector<Upgrade> upgrades_;
 	Upgrade* current_upgrade_;
 
-	ProgramResult result_;  /// The result of the last training program.
+	ProgramResult result_{ProgramResult::kFailed};  /// The result of the last training program.
 
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier_;

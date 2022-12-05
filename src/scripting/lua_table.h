@@ -226,7 +226,7 @@ private:
 	MutexLock mutex_lock_;
 	lua_State* L_;
 	mutable std::set<std::string> accessed_keys_;
-	bool warn_about_unaccessed_keys_;
+	bool warn_about_unaccessed_keys_{true};
 };
 
 template <> std::string LuaTable::get_value<std::string>() const;

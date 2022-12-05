@@ -58,13 +58,12 @@ public:
 	               button_style),
 	     launch_game_(lg),
 	     settings_(settings),
-	     id_(id),
-	     selection_locked_(false) {
+	     id_(id)
+	     {
 		dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		dropdown_.selected.connect([this]() { on_selection_changed(); });
 	}
-	virtual ~SinglePlayerDropdown() {
-	}
+	virtual ~SinglePlayerDropdown() = default;
 
 	UI::Panel* get_dropdown() {
 		return &dropdown_;
@@ -89,7 +88,7 @@ protected:
 	LaunchGame& launch_game_;
 	GameSettingsProvider* const settings_;
 	PlayerSlot const id_;
-	bool selection_locked_;
+	bool selection_locked_{false};
 
 private:
 	void on_selection_changed() {

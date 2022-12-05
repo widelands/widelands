@@ -31,8 +31,7 @@ public:
 	explicit RoadDescr(char const* const init_name, char const* const init_descname)
 	   : RoadBaseDescr(init_name, init_descname, MapObjectType::ROAD) {
 	}
-	~RoadDescr() override {
-	}
+	~RoadDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(RoadDescr);
@@ -66,7 +65,7 @@ struct Road : public RoadBase {
 		CarrierSlot();
 
 		OPtr<Carrier> carrier;
-		Request* carrier_request;
+		Request* carrier_request{nullptr};
 		uint8_t carrier_type_id;
 	};
 
@@ -104,10 +103,10 @@ private:
 
 	void link_into_flags(EditorGameBase&, bool = false) override;
 
-	bool busy_;
+	bool busy_{false};
 	/// Counter that is incremented when a ware does not get a carrier for this
 	/// road immediately and decremented over time.
-	int32_t wallet_;
+	int32_t wallet_{0};
 
 	/// holds the gametime when wallet_ was last charged
 	Time last_wallet_charge_;

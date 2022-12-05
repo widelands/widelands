@@ -30,8 +30,7 @@ public:
 	             const LuaTable& table,
 	             Descriptions& descriptions,
 	             MapObjectType t = MapObjectType::CARRIER);
-	~CarrierDescr() override {
-	}
+	~CarrierDescr() override = default;
 
 protected:
 	[[nodiscard]] Bob& create_object() const override;
@@ -51,8 +50,7 @@ struct Carrier : public Worker {
 	explicit Carrier(const CarrierDescr& carrier_descr)
 	   : Worker(carrier_descr), promised_pickup_to_(NOONE) {
 	}
-	~Carrier() override {
-	}
+	~Carrier() override = default;
 
 	bool notify_ware(Game&, int32_t flag);
 

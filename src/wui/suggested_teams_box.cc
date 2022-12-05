@@ -46,8 +46,8 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
      label_height_(g_image_cache->get("images/players/player_position_menu.png")->height() +
                    padding),
      suggested_teams_box_label_(new UI::Textarea(
-        this, s, s == PanelStyle::kWui ? FontStyle::kWuiLabel : FontStyle::kFsMenuLabel)),
-     lineup_box_(nullptr) {
+        this, s, s == PanelStyle::kWui ? FontStyle::kWuiLabel : FontStyle::kFsMenuLabel))
+     {
 	add(suggested_teams_box_label_);
 }
 

@@ -53,7 +53,7 @@ public:
 
 protected:
 	// Used to align addon specific with general UI elements
-	int32_t header_align_;
+	int32_t header_align_{0};
 	std::function<void()> modified_;
 	MainMenu& main_menu_;
 };
@@ -83,7 +83,7 @@ private:
 	// refers to which point of the file system hierarchy:
 	std::vector<std::vector<std::string>> dirstruct_to_tree_map_;
 	std::vector<MainMenu::MapEntry> maps_list_;
-	AddOns::AddOnCategory last_category_;
+	AddOns::AddOnCategory last_category_{AddOns::AddOnCategory::kNone};
 
 	UI::Box box_maps_list_, box_buttonsbox_, box_dirstruct_displayname_;
 	UI::Button map_add_, map_add_dir_, map_delete_;

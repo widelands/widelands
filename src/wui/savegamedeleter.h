@@ -36,8 +36,7 @@ public:
 	/// (because deletion can be aborted by user via "cancel" in confirmation window)
 	[[nodiscard]] bool delete_savegames(const std::vector<SavegameData>& to_be_deleted) const;
 
-	virtual ~SavegameDeleter() {
-	}
+	virtual ~SavegameDeleter() = default;
 
 private:
 	[[nodiscard]] bool show_confirmation_window(const std::vector<SavegameData>& selections) const;

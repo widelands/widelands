@@ -95,7 +95,7 @@ private:
 	[[nodiscard]] uint32_t quick_width(const std::string& text) const;
 
 	uint32_t wrapwidth_;
-	bool draw_caret_;
+	bool draw_caret_{false};
 
 	// TODO(GunChleoc): We can tie these to constexpr once the old font renderer is gone.
 	const int fontsize_;

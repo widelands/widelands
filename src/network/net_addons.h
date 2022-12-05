@@ -27,11 +27,8 @@ namespace AddOns {
 
 struct NetAddons {
 	NetAddons()
-	   : initialized_(false),
-	     network_active_(false),
-	     client_socket_(0),
-	     is_admin_(false),
-	     cached_remotes_(0) {
+	   
+	     {
 	}
 	~NetAddons();
 
@@ -100,11 +97,11 @@ private:
 	void write_to_server(const char*, size_t);
 
 	std::string last_username_, last_password_;
-	bool initialized_;
-	bool network_active_;
-	int client_socket_;
-	bool is_admin_;
-	size_t cached_remotes_;
+	bool initialized_{false};
+	bool network_active_{false};
+	int client_socket_{0};
+	bool is_admin_{false};
+	size_t cached_remotes_{0};
 	std::string server_descname_;
 };
 

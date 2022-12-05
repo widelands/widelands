@@ -84,16 +84,15 @@ BaseListselect::BaseListselect(Panel* const parent,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
    : Panel(parent, style, x, y, w, h),
-     widest_text_(0),
-     widest_hotkey_(0),
+     
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, 0, h, style),
-     scrollpos_(0),
+     
      selection_(no_selection_index()),
-     last_click_time_(-10000),
+     
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     lineheight_(text_height(table_style().enabled()) + kMargin),
-     linked_dropdown(nullptr) {
+     lineheight_(text_height(table_style().enabled()) + kMargin)
+     {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });

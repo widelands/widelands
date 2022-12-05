@@ -34,11 +34,10 @@
 #include "io/streamwrite.h"
 
 ZipFilesystem::ZipFile::ZipFile(const std::string& zipfile)
-   : state_(State::kIdle),
+   : 
      path_(zipfile),
-     basename_(fs_filename(zipfile.c_str())),
-     write_handle_(nullptr),
-     read_handle_(nullptr) {
+     basename_(fs_filename(zipfile.c_str()))
+     {
 }
 
 ZipFilesystem::ZipFile::~ZipFile() {

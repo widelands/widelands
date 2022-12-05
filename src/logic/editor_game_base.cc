@@ -68,8 +68,7 @@ initialization
 ============
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
-   : did_postload_addons_(false),
-     did_postload_tribes_(false),
+   : 
      gametime_(0),
      // TODO(SirVer): this is sooo ugly, I can't say
      lua_(lua_interface != nullptr ? lua_interface : new LuaEditorInterface(this)),

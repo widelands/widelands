@@ -89,14 +89,14 @@ private:
 			kDisconnected
 		};
 
-		Client() : state_(State::kConnecting) {
+		Client()  {
 		}
 
 		// deleted since RecvPacket does not offer a copy constructor
 		Client(const Client& other) = delete;
 
 		/// The current connection state
-		State state_;
+		State state_{State::kConnecting};
 		/// The packages that have been received
 		std::queue<std::unique_ptr<RecvPacket>> received_;
 	};

@@ -58,7 +58,7 @@ const ShipFleetDescr& ShipFleet::descr() const {
  * The Fleet takes care of merging with existing fleets, if any.
  */
 ShipFleet::ShipFleet(Player* player)
-   : MapObject(&g_ship_fleet_descr), act_pending_(false), schedule_(*this) {
+   : MapObject(&g_ship_fleet_descr),  schedule_(*this) {
 	owner_ = player;
 }
 

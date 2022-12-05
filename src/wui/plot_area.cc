@@ -326,15 +326,10 @@ WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
    : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
      plotmode_(plotmode),
      sample_rate_(sample_rate),
-     needs_update_(true),
-     lastupdate_(0),
+     
      xline_length_(get_inner_w() - kSpaceRight - kSpacing),
-     yline_length_(get_inner_h() - kSpaceBottom - kSpacing * 3),
-     time_ms_(0),
-     highest_scale_(0),
-     sub_(0),
-     time_(TIME_GAME),
-     game_time_id_(0) {
+     yline_length_(get_inner_h() - kSpaceBottom - kSpacing * 3)
+     {
 	update();
 }
 

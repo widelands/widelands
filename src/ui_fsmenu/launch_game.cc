@@ -118,8 +118,8 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 
      // Variables and objects used in the menu
      settings_(settings),
-     ctrl_(ctrl),
-     peaceful_mode_forbidden_(false) {
+     ctrl_(ctrl)
+     {
 	warn_desyncing_addon_.set_visible(false);
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	win_condition_duration_.changed.connect([this]() { win_condition_duration_changed(); });

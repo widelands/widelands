@@ -93,11 +93,11 @@ private:
 	void draw_caret(RenderTarget& dst, const Vector2i& point, uint16_t fontheight);
 	std::string text_to_asterisk();
 
-	bool history_active_;
-	int16_t history_position_;
+	bool history_active_{false};
+	int16_t history_position_{-1};
 	std::string history_[CHAT_HISTORY_SIZE];
-	bool password_;
-	bool warning_;
+	bool password_{false};
+	bool warning_{false};
 	uint32_t snap_to_char(uint32_t cursor) const;
 	void select_until(uint32_t end) const;
 	uint32_t next_char(uint32_t cursor) const;

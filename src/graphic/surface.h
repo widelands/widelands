@@ -31,8 +31,7 @@
 class Surface {
 public:
 	Surface() = default;
-	virtual ~Surface() {
-	}
+	virtual ~Surface() = default;
 
 	/// Dimensions.
 	[[nodiscard]] virtual int width() const = 0;

@@ -140,17 +140,13 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 
 Game::Game()
    : EditorGameBase(new LuaGameInterface(this)),
-     did_postload_addons_before_loading_(false),
+     
      syncwrapper_(*this, synchash_),
      ctrl_(nullptr),
-     writereplay_(true),
-     writesyncstream_(false),
-     ai_training_mode_(false),
-     auto_speed_(false),
-     state_(gs_notrunning),
+     
      cmdqueue_(*this),
      scenario_difficulty_(kScenarioDifficultyNotSet),
-     diplomacy_allowed_(true),
+     
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
      win_condition_duration_(kDefaultWinConditionDuration)

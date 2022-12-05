@@ -36,16 +36,11 @@
 #include "wui/interactive_base.h"
 
 SaveHandler::SaveHandler()
-   : next_save_realtime_(0),
-     last_save_realtime_(0),
-     initialized_(false),
-     allow_saving_(true),
-     save_requested_(false),
-     saving_next_tick_(false),
+   : 
      autosave_filename_(kAutosavePrefix),
-     fs_type_(FileSystem::ZIP),
-     autosave_interval_in_ms_(kDefaultAutosaveInterval * 60 * 1000),
-     number_of_rolls_(5) {
+     
+     autosave_interval_in_ms_(kDefaultAutosaveInterval * 60 * 1000)
+     {
 }
 
 bool SaveHandler::roll_save_files(const std::string& filename, std::string* const error) const {

@@ -39,11 +39,10 @@ Box::Box(Panel* const parent,
      max_x_(max_x != 0 ? max_x : g_gr->get_xres()),
      max_y_(max_y != 0 ? max_y : g_gr->get_yres()),
 
-     scrolling_(false),
-     force_scrolling_(false),
+     
      scrollbar_(nullptr),
      orientation_(orientation),
-     mindesiredbreadth_(0),
+     
      inner_spacing_(inner_spacing) {
 }
 

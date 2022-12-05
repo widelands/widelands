@@ -315,9 +315,8 @@ Warehouse Building
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
                                Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, descriptions),
-     conquers_(0),
-     heal_per_second_(0) {
+   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, descriptions)
+     {
 	heal_per_second_ = table.get_int("heal_per_second");
 	if (table.has_key("conquers")) {
 		conquers_ = table.get_int("conquers");
@@ -396,8 +395,8 @@ Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
      soldier_control_(this),
      supply_(new WarehouseSupply(this)),
      next_military_act_(Time(0)),
-     next_stock_remove_act_(Time(0)),
-     portdock_(nullptr) {
+     next_stock_remove_act_(Time(0))
+     {
 	cleanup_in_progress_ = false;
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);

@@ -177,17 +177,9 @@ public:
 		static constexpr Time kNoExpedition{0};
 
 		AiPersistentState()
-		   : initialized(false),
-		     colony_scan_area(0),
-		     trees_around_cutters(0),
+		   : 
 		     expedition_start_time(0),
-		     ships_utilization(0),
-		     no_more_expeditions(false),
-		     last_attacked_player(0),
-		     least_military_score(0),
-		     target_military_score(0),
-		     ai_productionsites_ratio(0),
-		     ai_personality_mil_upper_limit(0),
+		     
 		     magic_numbers(kMagicNumbersSize, 0),
 		     neuron_weights(kNeuronPoolSize, 0),
 		     neuron_functs(kNeuronPoolSize, 0),
@@ -197,18 +189,18 @@ public:
 		void initialize();
 
 		// Was initialized
-		bool initialized;
-		uint32_t colony_scan_area;
-		uint32_t trees_around_cutters;
+		bool initialized{false};
+		uint32_t colony_scan_area{0};
+		uint32_t trees_around_cutters{0};
 		Time expedition_start_time;
 		int16_t
-		   ships_utilization;  // 0-10000 to avoid floats, used for decision for building new ships
-		bool no_more_expeditions;
-		int16_t last_attacked_player;
-		int32_t least_military_score;
-		int32_t target_military_score;
-		uint32_t ai_productionsites_ratio;
-		int32_t ai_personality_mil_upper_limit;
+		   ships_utilization{0};  // 0-10000 to avoid floats, used for decision for building new ships
+		bool no_more_expeditions{false};
+		int16_t last_attacked_player{0};
+		int32_t least_military_score{0};
+		int32_t target_military_score{0};
+		uint32_t ai_productionsites_ratio{0};
+		int32_t ai_personality_mil_upper_limit{0};
 		std::vector<int16_t> magic_numbers;
 		std::vector<int8_t> neuron_weights;
 		std::vector<int8_t> neuron_functs;
@@ -223,20 +215,13 @@ public:
 	/// Per-player field information.
 	struct Field {
 		Field()
-		   : military_influence(0),
+		   : 
 		     vision(VisibleState::kUnexplored),
-		     r_e(RoadSegment::kNone),
-		     r_se(RoadSegment::kNone),
-		     r_sw(RoadSegment::kNone),
+		     
 		     time_node_last_unseen(0),
-		     map_object_descr(nullptr),
-		     dismantlesite(),
-		     is_constructionsite(false),
-		     border(false),
-		     border_r(false),
-		     border_br(false),
-		     border_bl(false),
-		     owner(0) {
+		     
+		     dismantlesite()
+		     {
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
 			//  darkening that actually hides the ground from the user).
@@ -264,7 +249,7 @@ public:
 		/// This is not saved/loaded. It is recalculated during the loading
 		/// process by adding influence values to the nodes surrounding a
 		/// building when the first soldier located in it is loaded.
-		MilitaryInfluence military_influence;
+		MilitaryInfluence military_influence{0};
 
 		/// Indicates whether the player is currently seeing this node or has
 		/// ever seen it.
@@ -306,9 +291,9 @@ public:
 		 * Each value is only valid when this player has seen this node
 		 * or the node to the the edge leads up to.
 		 */
-		RoadSegment r_e;
-		RoadSegment r_se;
-		RoadSegment r_sw;
+		RoadSegment r_e{RoadSegment::kNone};
+		RoadSegment r_se{RoadSegment::kNone};
+		RoadSegment r_sw{RoadSegment::kNone};
 
 		/// Whether there is a road between this node and the node to the
 		/// east, as far as this player knows.
@@ -383,7 +368,7 @@ public:
 		 * Only valid when the player has seen this node (or maybe a nearby node
 		 * if the immovable is big?). (Roads are not stored here.)
 		 */
-		const MapObjectDescr* map_object_descr;
+		const MapObjectDescr* map_object_descr{nullptr};
 
 		/* Information for ConstructionSite and DismantleSite animation.
 		 * `constructionsite` is only valid if there is a constructionsite
@@ -404,20 +389,20 @@ public:
 			DismantlesiteInformation dismantlesite;
 			ConstructionsiteInformation* constructionsite;
 		};
-		bool is_constructionsite;
+		bool is_constructionsite{false};
 		void set_constructionsite(bool);
 
 		/// Save whether the player saw a border the last time (s)he saw the node.
-		bool border;
-		bool border_r;
-		bool border_br;
-		bool border_bl;
+		bool border{false};
+		bool border_r{false};
+		bool border_br{false};
+		bool border_bl{false};
 
 		/**
 		 * The owner of this node, as far as this player knows.
 		 * Only valid when this player has seen this node.
 		 */
-		PlayerNumber owner;
+		PlayerNumber owner{0};
 
 		/**
 		 * The amount of resource at each of the triangles, as far as this player
@@ -682,19 +667,19 @@ private:
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
 	RGBColor playercolor_;
-	TeamNumber team_number_;
+	TeamNumber team_number_{0};
 	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
-	bool see_all_;
+	bool see_all_{false};
 	const PlayerNumber player_number_;
 	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
-	bool random_tribe_;
-	uint32_t casualties_, kills_;
-	uint32_t msites_lost_, msites_defeated_;
-	uint32_t civil_blds_lost_, civil_blds_defeated_;
+	bool random_tribe_{false};
+	uint32_t casualties_{0}, kills_{0};
+	uint32_t msites_lost_{0}, msites_defeated_{0};
+	uint32_t civil_blds_lost_{0}, civil_blds_defeated_{0};
 
 	std::list<std::string> remaining_shipnames_;
 	// If we run out of ship names, we'll want to continue with unique numbers
-	uint32_t ship_name_counter_;
+	uint32_t ship_name_counter_{0};
 
 	std::unique_ptr<Field[]> fields_;
 	std::set<DescriptionIndex> allowed_worker_types_;
@@ -743,9 +728,9 @@ private:
 
 	struct SoldierStatistics {
 		const unsigned health, attack, defense, evade;
-		Quantity total;
+		Quantity total{0};
 		SoldierStatistics(unsigned h, unsigned a, unsigned d, unsigned e)
-		   : health(h), attack(a), defense(d), evade(e), total(0) {
+		   : health(h), attack(a), defense(d), evade(e) {
 		}
 		bool operator==(const SoldierStatistics& s) const {
 			return s.health == health && s.attack == attack && s.defense == defense &&
@@ -754,11 +739,11 @@ private:
 	};
 	std::vector<SoldierStatistics> soldier_stats_;
 
-	bool is_picking_custom_starting_position_;
+	bool is_picking_custom_starting_position_{false};
 
-	bool allow_additional_expedition_items_;
+	bool allow_additional_expedition_items_{true};
 
-	bool hidden_from_general_statistics_;
+	bool hidden_from_general_statistics_{false};
 
 	FxId message_fx_;
 	FxId attack_fx_;

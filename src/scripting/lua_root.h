@@ -42,8 +42,7 @@ public:
 		return "";
 	}
 
-	LuaGame() {
-	}
+	LuaGame() = default;
 	explicit LuaGame(lua_State* L);
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
@@ -87,11 +86,9 @@ public:
 		return "";
 	}
 
-	LuaEditor() {
-	}
+	LuaEditor() = default;
 	explicit LuaEditor(lua_State* L);
-	~LuaEditor() override {
-	}
+	~LuaEditor() override = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
@@ -118,8 +115,7 @@ public:
 		return "";
 	}
 
-	LuaDescriptions() {
-	}
+	LuaDescriptions() = default;
 	explicit LuaDescriptions(lua_State* L);
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF

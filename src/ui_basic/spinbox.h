@@ -89,8 +89,8 @@ private:
 	std::vector<UI::Button*> buttons_;
 	UI::Box* box_;
 	uint32_t unit_width_;
-	uint32_t button_height_;
-	uint32_t padding_;
+	uint32_t button_height_{20};
+	uint32_t padding_{2};
 	uint32_t number_of_paddings_;
 };
 }  // namespace UI

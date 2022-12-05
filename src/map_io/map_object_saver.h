@@ -91,18 +91,18 @@ private:
 	MapObjectRec& get_object_record(const MapObject&);
 
 	MapObjectRecordMap objects_;
-	uint32_t nr_roads_;
-	uint32_t nr_waterways_;
-	uint32_t nr_flags_;
-	uint32_t nr_buildings_;
-	uint32_t nr_bobs_;
-	uint32_t nr_wares_;
-	uint32_t nr_immovables_;
-	uint32_t nr_battles_;
-	uint32_t nr_ship_fleets_;
-	uint32_t nr_ferry_fleets_;
-	uint32_t nr_portdocks_;
-	uint32_t lastserial_;
+	uint32_t nr_roads_{0};
+	uint32_t nr_waterways_{0};
+	uint32_t nr_flags_{0};
+	uint32_t nr_buildings_{0};
+	uint32_t nr_bobs_{0};
+	uint32_t nr_wares_{0};
+	uint32_t nr_immovables_{0};
+	uint32_t nr_battles_{0};
+	uint32_t nr_ship_fleets_{0};
+	uint32_t nr_ferry_fleets_{0};
+	uint32_t nr_portdocks_{0};
+	uint32_t lastserial_{0};
 };
 }  // namespace Widelands
 

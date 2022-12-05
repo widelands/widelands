@@ -241,10 +241,10 @@ private:
 	// Dimensions
 	unsigned int max_list_items_;
 	unsigned int max_list_height_;
-	int list_offset_x_;
-	int list_offset_y_;
+	int list_offset_x_{0};
+	int list_offset_y_{0};
 	const int base_height_;
-	const int mouse_tolerance_;  // Allow mouse outside the panel a bit before autocollapse
+	const int mouse_tolerance_{50};  // Allow mouse outside the panel a bit before autocollapse
 	UI::Box button_box_;
 	UI::Button* push_button_;  // Only used in textual dropdowns
 	UI::Button display_button_;
@@ -255,9 +255,9 @@ private:
 	std::string tooltip_;
 	uint32_t current_selection_;
 	DropdownType type_;
-	bool is_enabled_;
+	bool is_enabled_{true};
 	ButtonStyle button_style_;
-	bool autoexpand_display_button_;
+	bool autoexpand_display_button_{false};
 };
 
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.

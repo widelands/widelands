@@ -349,25 +349,13 @@ WLApplication* WLApplication::get(int const argc, char const** argv) {
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(int const argc, char const* const* const argv)
-   : game_type_(GameType::kNone),
-     mouse_swapped_(false),
-     faking_middle_mouse_button_(false),
+   : 
      mouse_position_(Vector2i::zero()),
-     mouse_locked_(false),
-     handle_key_enabled_(true),
+     
      should_die_(false),
 #ifdef _WIN32
-     homedir_(FileSystem::get_homedir() + "\\.widelands"),
-#elif defined USE_XDG
-     // To enable backwards compatibility, the program name is passed with the
-     // path.
-     homedir_(FileSystem::get_userdatadir()),
-     userconfigdir_(FileSystem::get_userconfigdir()),
-#else
-     homedir_(FileSystem::get_homedir() + "/.widelands"),
-#endif
-     redirected_stdio_(false),
-     last_resolution_change_(0) {
+     homedir_(FileSystem::get_homedir() + "\\.widelands")
+     {
 	g_fs = new LayeredFileSystem();
 
 	parse_commandline(argc, argv);  // throws ParameterError, handled by main.cc

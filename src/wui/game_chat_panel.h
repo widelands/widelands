@@ -76,9 +76,9 @@ private:
 	UI::Box hbox_;
 	UI::Dropdown<std::string> recipient_dropdown_;
 	UI::EditBox editbox;
-	size_t chat_message_counter;
+	size_t chat_message_counter{0};
 	FxId chat_sound;
-	bool has_team_;
+	bool has_team_{false};
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
 	std::unique_ptr<Notifications::Signal<>::SignalSubscriber> update_signal_connection_;
 };

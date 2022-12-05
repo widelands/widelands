@@ -289,12 +289,12 @@ private:
 	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
-	Economy* worker_economy_;          ///< economy this worker is registered in
-	Economy* ware_economy_;            ///< economy this worker's wares are registered in
+	Economy* worker_economy_{nullptr};          ///< economy this worker is registered in
+	Economy* ware_economy_{nullptr};            ///< economy this worker's wares are registered in
 	OPtr<WareInstance> carried_ware_;  ///< ware we are carrying
-	IdleWorkerSupply* supply_;         ///< supply while gowarehouse and not transfer
-	Transfer* transfer_;               ///< where we are currently being sent
-	int32_t current_exp_;              ///< current experience
+	IdleWorkerSupply* supply_{nullptr};         ///< supply while gowarehouse and not transfer
+	Transfer* transfer_{nullptr};               ///< where we are currently being sent
+	int32_t current_exp_{0};              ///< current experience
 
 	// saving and loading
 protected:
@@ -311,8 +311,8 @@ protected:
 		const MapObjectProgram* get_program(const std::string& name) override;
 
 	private:
-		uint32_t location_;
-		uint32_t carried_ware_;
+		uint32_t location_{0};
+		uint32_t carried_ware_{0};
 		Transfer::ReadData transfer_;
 	};
 

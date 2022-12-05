@@ -84,16 +84,9 @@ Window::Window(Panel* const parent,
                 w + kVerticalBorderThickness * 2,
                 kTopBorderThickness + h + kBottomBorderThickness),
      window_style_(s),
-     is_minimal_(false),
+     
      oldh_(kTopBorderThickness + h + kBottomBorderThickness),
-     dragging_(false),
-     drag_start_win_x_(0),
-     drag_start_win_y_(0),
-     drag_start_mouse_x_(0),
-     drag_start_mouse_y_(0),
-     pinned_(false),
-     center_panel_(nullptr),
-     fastclick_panel_(nullptr),
+     
      button_close_(new Button(
         this,
         "b_close",

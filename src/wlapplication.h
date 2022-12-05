@@ -242,24 +242,24 @@ private:
 	std::string script_to_run_;
 
 	enum class GameType { kNone, kEditor, kReplay, kScenario, kLoadGame, kFromTemplate };
-	GameType game_type_;
+	GameType game_type_{GameType::kNone};
 
 	/// True if left and right mouse button should be swapped
-	bool mouse_swapped_;
+	bool mouse_swapped_{false};
 
 	/// When apple is involved, the middle mouse button is sometimes send, even
 	/// if it wasn't pressed. We try to revert this and this helps.
-	bool faking_middle_mouse_button_;
+	bool faking_middle_mouse_button_{false};
 
 	/// The current position of the mouse pointer
 	Vector2i mouse_position_;
 
 	/// If true, the mouse cursor will \e not move with a mousemotion event:
 	/// instead, the map will be scrolled
-	bool mouse_locked_;
+	bool mouse_locked_{false};
 
 	/// Makes it possible to disable the fullscreen and screenshot shortcuts
-	bool handle_key_enabled_;
+	bool handle_key_enabled_{true};
 
 	/// true if an external entity wants us to quit
 	std::atomic_bool should_die_;
@@ -270,7 +270,7 @@ private:
 #endif
 
 	/// flag indicating if stdout and stderr have been redirected
-	bool redirected_stdio_;
+	bool redirected_stdio_{false};
 
 	/// Absolute path to the data directory.
 	std::string datadir_;
@@ -280,7 +280,7 @@ private:
 	std::string localedir_;
 
 	/// Prevent toggling fullscreen on and off from flickering
-	uint32_t last_resolution_change_;
+	uint32_t last_resolution_change_{0};
 
 	/// Holds this process' one and only instance of WLApplication, if it was
 	/// created already. nullptr otherwise.

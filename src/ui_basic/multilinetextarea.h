@@ -99,7 +99,7 @@ private:
 
 	FontStyle font_style_;
 	const FontStyleInfo& font_style() const;
-	float font_scale_;
+	float font_scale_{1.0f};
 
 	const Align align_;
 

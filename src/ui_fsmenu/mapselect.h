@@ -87,7 +87,7 @@ private:
 	GameController* ctrl_;
 
 	UI::Checkbox* cb_dont_localize_mapnames_;
-	bool has_translated_mapname_;
+	bool has_translated_mapname_{false};
 
 	UI::Button* show_all_maps_;
 	std::vector<UI::Checkbox*> tags_checkboxes_;
@@ -95,7 +95,7 @@ private:
 	UI::Dropdown<std::string>* official_tags_dropdown_;
 
 	UI::Dropdown<std::string>* balancing_tags_dropdown_;
-	bool unspecified_balancing_found_;  // Backwards compatibility
+	bool unspecified_balancing_found_{false};  // Backwards compatibility
 
 	UI::Dropdown<std::string>* team_tags_dropdown_;
 
@@ -104,7 +104,7 @@ private:
 
 	std::vector<MapData> maps_data_;
 
-	bool update_map_details_;
+	bool update_map_details_{false};
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_MAPSELECT_H

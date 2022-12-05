@@ -30,10 +30,9 @@ class Player;
 struct FindImmovable {
 private:
 	struct BaseCapsule {
-		BaseCapsule() : refcount(1) {
+		BaseCapsule()  {
 		}
-		virtual ~BaseCapsule() {
-		}
+		virtual ~BaseCapsule() = default;
 
 		void addref() {
 			++refcount;
@@ -45,7 +44,7 @@ private:
 		}
 		[[nodiscard]] virtual bool accept(const BaseImmovable&) const = 0;
 
-		int refcount;
+		int refcount{1};
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
 		explicit Capsule(const T& init_op) : op(init_op) {
@@ -117,8 +116,7 @@ private:
 	int32_t attrib;
 };
 struct FindImmovablePlayerImmovable {
-	FindImmovablePlayerImmovable() {
-	}
+	FindImmovablePlayerImmovable() = default;
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
@@ -131,8 +129,7 @@ struct FindImmovablePlayerMilitarySite {
 	const Player& player;
 };
 struct FindImmovableAttackTarget {
-	FindImmovableAttackTarget() {
-	}
+	FindImmovableAttackTarget() = default;
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };

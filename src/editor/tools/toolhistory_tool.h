@@ -25,12 +25,12 @@
 
 struct ListItem {
 	ListItem(const std::string& k, const std::string& t, ToolConf conf)
-	   : key(k), title(t), data(conf), sticky(false) {
+	   : key(k), title(t), data(conf) {
 	}
 	std::string key;    ///< Non-locale-dependent description
 	std::string title;  ///< Locale-dependent description
 	ToolConf data;
-	bool sticky;
+	bool sticky{false};
 };
 
 /// History of previously used tool settings

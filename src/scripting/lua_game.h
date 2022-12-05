@@ -52,8 +52,7 @@ public:
 
 	LUNA_CLASS_HEAD(LuaPlayer);
 
-	LuaPlayer()  {
-	}
+	LuaPlayer()  = default;
 	explicit LuaPlayer(Widelands::PlayerNumber n) : LuaBases::LuaPlayerBase(n) {
 	}
 	explicit LuaPlayer(lua_State* L) {
@@ -128,8 +127,7 @@ class LuaObjective : public LuaGameModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaObjective);
 
-	~LuaObjective() override {
-	}
+	~LuaObjective() override = default;
 
 	explicit LuaObjective(const Widelands::Objective& o);
 	LuaObjective() = default;
@@ -175,8 +173,7 @@ class LuaInboxMessage : public LuaGameModuleClass {
 
 public:
 	LUNA_CLASS_HEAD(LuaInboxMessage);
-	~LuaInboxMessage() override {
-	}
+	~LuaInboxMessage() override = default;
 
 	explicit LuaInboxMessage(uint8_t, Widelands::MessageId);
 	LuaInboxMessage() : player_number_(0), message_id_(0) {

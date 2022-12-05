@@ -36,7 +36,7 @@ struct EditorToolsizeMenu : public UI::UniqueWindow {
 private:
 	EditorInteractive& eia() const;
 	UI::SpinBox spinbox_;
-	uint32_t value_;
+	uint32_t value_{0};
 	void changed();
 	static constexpr uint32_t kMargin = 5;
 };

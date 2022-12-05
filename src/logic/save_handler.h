@@ -55,7 +55,7 @@ public:
 		allow_saving_ = t;
 	}
 	// Used by lua only
-	bool get_allow_saving() const {
+	[[nodiscard]] bool get_allow_saving() const {
 		return allow_saving_;
 	}
 	// Used by lua only
@@ -69,19 +69,19 @@ public:
 	}
 
 private:
-	uint32_t next_save_realtime_;
-	uint32_t last_save_realtime_;
-	bool initialized_;
-	bool allow_saving_;
-	bool save_requested_;
-	bool saving_next_tick_;
+	uint32_t next_save_realtime_{0};
+	uint32_t last_save_realtime_{0};
+	bool initialized_{false};
+	bool allow_saving_{true};
+	bool save_requested_{false};
+	bool saving_next_tick_{false};
 	std::string save_filename_;
 	std::string current_filename_;
 	std::string autosave_filename_;
 
-	FileSystem::Type fs_type_;
+	FileSystem::Type fs_type_{FileSystem::ZIP};
 	int32_t autosave_interval_in_ms_;
-	int32_t number_of_rolls_;  // For rolling file update
+	int32_t number_of_rolls_{5};  // For rolling file update
 
 	void initialize(uint32_t realtime);
 	bool roll_save_files(const std::string& filename, std::string* error) const;

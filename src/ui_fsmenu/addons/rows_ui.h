@@ -34,8 +34,7 @@ class AddOnsCtrl;
 class InstalledAddOnRow : public UI::Panel {
 public:
 	InstalledAddOnRow(Panel*, AddOnsCtrl*, std::shared_ptr<AddOns::AddOnInfo>, bool enabled);
-	~InstalledAddOnRow() override {
-	}
+	~InstalledAddOnRow() override = default;
 	const std::shared_ptr<AddOns::AddOnInfo> info() const {
 		return info_;
 	}
@@ -58,8 +57,7 @@ public:
 	               std::shared_ptr<AddOns::AddOnInfo>,
 	               const AddOns::AddOnVersion& installed_version,
 	               uint32_t installed_i18n_version);
-	~RemoteAddOnRow() override {
-	}
+	~RemoteAddOnRow() override = default;
 	void layout() override;
 	void draw(RenderTarget&) override;
 	const std::shared_ptr<AddOns::AddOnInfo> info() const {

@@ -93,17 +93,17 @@ private:
 	};
 
 	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;
-	UI::ProgressBar* progress_;
+	UI::ProgressBar* progress_{nullptr};
 
 	// BuildingSettings-related UI elements
-	UI::Checkbox* cs_launch_expedition_;
+	UI::Checkbox* cs_launch_expedition_{nullptr};
 	std::unique_ptr<UI::Radiogroup> cs_prefer_heroes_rookies_;
-	ConstructionSoldierCapacityBox* cs_soldier_capacity_;
+	ConstructionSoldierCapacityBox* cs_soldier_capacity_{nullptr};
 	std::vector<InputQueueDisplay*> cs_ware_queues_;
 	std::vector<InputQueueDisplay*> cs_worker_queues_;
-	UI::Checkbox* cs_stopped_;
-	FakeWaresDisplay* cs_warehouse_wares_;
-	FakeWaresDisplay* cs_warehouse_workers_;
+	UI::Checkbox* cs_stopped_{nullptr};
+	FakeWaresDisplay* cs_warehouse_wares_{nullptr};
+	FakeWaresDisplay* cs_warehouse_workers_{nullptr};
 	void change_policy(Widelands::WareWorker, Widelands::StockPolicy);
 	void add_wares_queues(Widelands::ConstructionSite* construction_site, UI::Box& box) const;
 	void add_progress_bar(UI::Box& box);

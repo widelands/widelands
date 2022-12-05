@@ -54,8 +54,7 @@ struct NoteShip {
 class ShipDescr : public BobDescr {
 public:
 	ShipDescr(const std::string& init_descname, const LuaTable& t);
-	~ShipDescr() override {
-	}
+	~ShipDescr() override = default;
 
 	[[nodiscard]] Bob& create_object() const override;
 
@@ -283,15 +282,15 @@ private:
 	                  const std::string& description,
 	                  const std::string& picture);
 
-	ShipFleet* fleet_;
-	Economy* ware_economy_;
-	Economy* worker_economy_;
+	ShipFleet* fleet_{nullptr};
+	Economy* ware_economy_{nullptr};
+	Economy* worker_economy_{nullptr};
 	OPtr<PortDock> lastdock_;
 	std::vector<ShippingItem> items_;
-	ShipStates ship_state_;
+	ShipStates ship_state_{ShipStates::kTransport};
 	std::string shipname_;
 
-	PortDock* destination_;
+	PortDock* destination_{nullptr};
 
 	struct Expedition {
 		~Expedition();
@@ -314,12 +313,10 @@ protected:
 	struct Loader : Bob::Loader {
 		// Initialize everything to make cppcheck happy.
 		Loader()
-		   : lastdock_(0),
+		   : 
 		     ware_economy_serial_(kInvalidSerial),
-		     worker_economy_serial_(kInvalidSerial),
-		     destination_(0),
-		     capacity_(0),
-		     ship_state_(ShipStates::kTransport) {
+		     worker_economy_serial_(kInvalidSerial)
+		     {
 		}
 
 		const Task* get_task(const std::string& name) override;
@@ -329,12 +326,12 @@ protected:
 		void load_finish() override;
 
 	private:
-		uint32_t lastdock_;
+		uint32_t lastdock_{0};
 		Serial ware_economy_serial_;
 		Serial worker_economy_serial_;
-		uint32_t destination_;
-		uint32_t capacity_;
-		ShipStates ship_state_;
+		uint32_t destination_{0};
+		uint32_t capacity_{0};
+		ShipStates ship_state_{ShipStates::kTransport};
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;

@@ -33,7 +33,7 @@ constexpr int kPadding = 1;
 
 }  // namespace
 
-TextureAtlas::Node::Node(const Recti& init_r) : used(false), r(init_r) {
+TextureAtlas::Node::Node(const Recti& init_r) :  r(init_r) {
 }
 
 void TextureAtlas::Node::split(int item_w, int item_h) {
@@ -48,7 +48,7 @@ void TextureAtlas::Node::split(int item_w, int item_h) {
 	// size of the full canvas.
 }
 
-TextureAtlas::TextureAtlas() : next_index_(0) {
+TextureAtlas::TextureAtlas()  {
 }
 
 void TextureAtlas::add(const Image& texture) {

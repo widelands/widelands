@@ -69,7 +69,7 @@ private:
 		explicit Node(const Recti& init_r);
 		void split(int w, int h);
 
-		bool used;
+		bool used{false};
 		Recti r;
 		std::unique_ptr<Node> right;
 		std::unique_ptr<Node> down;
@@ -79,16 +79,16 @@ private:
 
 	struct Block {
 		Block(int init_index, const Image* init_texture)
-		   : index(init_index), texture(init_texture), node(nullptr), done(false) {
+		   : index(init_index), texture(init_texture) {
 		}
 
 		// The index in the order the blocks have been added.
 		int index;
 		const Image* texture;
-		Node* node;
+		Node* node{nullptr};
 
 		// True if this block has already been packed into a texture atlas.
-		bool done;
+		bool done{false};
 	};
 
 	// Packs as many blocks from 'blocks_' that still have done = false into a
@@ -99,7 +99,7 @@ private:
 	                                                  std::vector<PackedTexture>* pack_info);
 	static Node* find_node(Node* node, int w, int h);
 
-	int next_index_;
+	int next_index_{0};
 
 	// Unpacked items.
 	std::vector<Block> blocks_;

@@ -20,7 +20,7 @@
 
 #include <cassert>
 
-FileRead::FileRead() : data_(nullptr), length_(0) {
+FileRead::FileRead()  {
 }
 
 FileRead::~FileRead() {

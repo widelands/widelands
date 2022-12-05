@@ -42,8 +42,7 @@ class GameController {
 public:
 	enum class GameType : uint8_t { kUndefined = 0, kSingleplayer, kNetClient, kNetHost, kReplay };
 
-	virtual ~GameController() {
-	}
+	virtual ~GameController() = default;
 
 	virtual void think() = 0;
 

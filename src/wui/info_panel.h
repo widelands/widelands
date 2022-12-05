@@ -39,8 +39,7 @@ class MessagePreview : public UI::Textarea {
 public:
 	MessagePreview(InfoPanel*, const Widelands::Message*, Widelands::MessageId);
 	MessagePreview(InfoPanel*, const std::string& text, const std::string& tooltip);
-	~MessagePreview() override {
-	}
+	~MessagePreview() override = default;
 
 	void think() override;
 	void draw(RenderTarget&) override;
@@ -63,8 +62,7 @@ private:
 class InfoPanel : public UI::Panel {
 public:
 	InfoPanel(InteractiveBase&);
-	~InfoPanel() override {
-	}
+	~InfoPanel() override = default;
 
 	// Update the text area without relayouting
 	void set_time_string(const std::string&);
@@ -90,9 +88,9 @@ private:
 	friend class MessagePreview;
 
 	InteractiveBase& ibase_;
-	InteractivePlayer* iplayer_;
+	InteractivePlayer* iplayer_{nullptr};
 
-	bool on_top_;
+	bool on_top_{false};
 
 	enum DisplayMode {
 		kCmdSwap = 1,
@@ -101,7 +99,7 @@ private:
 		kOnMouse_Visible = 8,
 		kOnMouse_Hidden = 16
 	};
-	DisplayMode display_mode_;
+	DisplayMode display_mode_{DisplayMode::kPinned};
 	void update_mode();
 	void rebuild_dropdown();
 
@@ -111,7 +109,7 @@ private:
 
 	void update_time_speed_string();
 
-	MainToolbar* toolbar_;
+	MainToolbar* toolbar_{nullptr};
 
 	UI::Dropdown<DisplayMode> toggle_mode_;
 	UI::Textarea text_time_speed_, text_fps_, text_coords_;
@@ -120,7 +118,7 @@ private:
 	size_t index_of(const MessagePreview*) const;
 	void pop_message(MessagePreview*);
 	void push_message(MessagePreview*);
-	const Widelands::MessageQueue* message_queue_;
+	const Widelands::MessageQueue* message_queue_{nullptr};
 	std::unique_ptr<Widelands::MessageId> last_message_id_;
 
 	bool draw_real_time_;

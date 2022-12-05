@@ -56,8 +56,7 @@ public:
 	              MapObjectType type,
 	              const LuaTable& t,
 	              Descriptions& descriptions);
-	~BuildingDescr() override {
-	}
+	~BuildingDescr() override = default;
 
 	[[nodiscard]] bool is_buildable() const {
 		return buildable_;
@@ -205,16 +204,16 @@ private:
 	Buildcost enhancement_cost_;      // cost for enhancing
 	Buildcost
 	   enhancement_returns_on_dismantle_;  // Returned ware for dismantling an enhanced building
-	int32_t size_;                         // size of the building
-	bool mine_;
-	bool port_;
+	int32_t size_{BaseImmovable::SMALL};                         // size of the building
+	bool mine_{false};
+	bool port_{false};
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
 	bool needs_waterways_;  // This building should only be built on maps with waterways/ferries
 	                        // enabled
 	DescriptionIndex enhancement_;
 	DescriptionIndex
 	   enhanced_from_;         // The building this building was enhanced from, or INVALID_INDEX
-	bool enhanced_building_;   // if it is one, it is bulldozable
+	bool enhanced_building_{false};   // if it is one, it is bulldozable
 	AI::BuildingHints hints_;  // hints (knowledge) for computer players
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
 	                                         // this attribute stands
@@ -222,7 +221,7 @@ private:
 	std::string owning_tribe_;
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
-	uint32_t vision_range_;
+	uint32_t vision_range_{0};
 	DISALLOW_COPY_AND_ASSIGN(BuildingDescr);
 };
 
@@ -417,9 +416,9 @@ protected:
 	void set_soldier_control(SoldierControl* new_soldier_control);
 
 	Coords position_;
-	Flag* flag_;
+	Flag* flag_{nullptr};
 
-	uint32_t anim_;
+	uint32_t anim_{0};
 	Time animstart_;
 
 	using LeaveQueue = std::vector<OPtr<Worker>>;
@@ -430,24 +429,24 @@ protected:
 	Time worker_evicted_;  // The time when a worker was last evicted by the player.
 
 	//  The player who has defeated this building.
-	PlayerNumber defeating_player_;
+	PlayerNumber defeating_player_{0};
 
 	std::map<DescriptionIndex, WarePriority> ware_priorities_;
 
 	/// Whether we see our vision_range area based on workers in the building
-	bool seeing_;
+	bool seeing_{false};
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings old_buildings_;
-	const MapObjectDescr* was_immovable_;
+	const MapObjectDescr* was_immovable_{nullptr};
 
 private:
 	std::string statistics_string_;
-	AttackTarget* attack_target_;      // owned by the base classes, set by 'set_attack_target'.
-	SoldierControl* soldier_control_;  // owned by the base classes, set by 'set_soldier_control'.
+	AttackTarget* attack_target_{nullptr};      // owned by the base classes, set by 'set_attack_target'.
+	SoldierControl* soldier_control_{nullptr};  // owned by the base classes, set by 'set_soldier_control'.
 
-	bool mute_messages_;
-	bool is_destruction_blocked_;
+	bool mute_messages_{false};
+	bool is_destruction_blocked_{false};
 };
 }  // namespace Widelands
 

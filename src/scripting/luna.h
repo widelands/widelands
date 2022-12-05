@@ -72,8 +72,7 @@
  */
 class LunaClass {
 public:
-	virtual ~LunaClass() {
-	}
+	virtual ~LunaClass() = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	virtual void __persist(lua_State*) = 0;

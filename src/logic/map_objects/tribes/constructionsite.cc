@@ -162,8 +162,7 @@ IMPLEMENTATION
 
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
    : PartiallyFinishedBuilding(cs_descr),
-     fetchfromflag_(0),
-     builder_idle_(false),
+     
      settings_(nullptr) {
 }
 

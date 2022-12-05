@@ -230,8 +230,8 @@ public:
 	const AllTribes& all_tribes() const;
 
 protected:
-	bool did_postload_addons_;
-	bool did_postload_tribes_;
+	bool did_postload_addons_{false};
+	bool did_postload_tribes_{false};
 
 private:
 	/// Common function for create_critter and create_ship.

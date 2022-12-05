@@ -144,7 +144,7 @@ RenderedRect::DrawMode RenderedRect::mode() const {
 }
 
 // RenderedText
-RenderedText::RenderedText() : memory_tree_root_(nullptr) {
+RenderedText::RenderedText()  {
 }
 RenderedText::~RenderedText() {
 	delete memory_tree_root_;

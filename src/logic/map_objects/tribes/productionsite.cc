@@ -286,16 +286,14 @@ IMPLEMENTATION
 ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
    : Building(ps_descr),
      working_positions_(ps_descr.nr_working_positions()),
-     fetchfromflag_(0),
-     program_timer_(false),
+     
      program_time_(0),
      post_timer_(50),
-     last_stat_percent_(0),
-     actual_percent_(0),
+     
      last_program_end_time(0),
-     is_stopped_(false),
-     default_anim_("idle"),
-     main_worker_(-1) {
+     
+     default_anim_("idle")
+     {
 	format_statistics_string();
 }
 

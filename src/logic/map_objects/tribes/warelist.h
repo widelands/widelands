@@ -30,8 +30,7 @@ namespace Widelands {
  * It is useful for warehouses and for economy-wide inventory.
  */
 struct WareList {
-	WareList() {
-	}
+	WareList() = default;
 	~WareList();
 
 	void clear() {

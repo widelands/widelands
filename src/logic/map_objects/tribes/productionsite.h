@@ -420,11 +420,11 @@ protected:
 
 
 	struct State {
-		const ProductionProgram* program;  ///< currently running program
-		size_t ip;                         ///< instruction pointer
-		ProgramResult phase;               ///< micro-step index (instruction dependent)
+		const ProductionProgram* program{nullptr};  ///< currently running program
+		size_t ip{0};                         ///< instruction pointer
+		ProgramResult phase{ProgramResult::kNone};               ///< micro-step index (instruction dependent)
 		enum StateFlags : uint32_t { kStateFlagIgnoreStopped = 1, kStateFlagHasExtraData = 2 };
-		uint32_t flags;  ///< pfXXX flags
+		uint32_t flags{0};  ///< pfXXX flags
 
 		/**
 		 * Instruction-dependent additional data.
@@ -435,7 +435,7 @@ protected:
 		/*@}*/
 
 		State()
-		   : program(nullptr), ip(0), phase(ProgramResult::kNone), flags(0), coord(Coords::null()) {
+		   :  coord(Coords::null()) {
 		}
 	};
 
@@ -483,7 +483,7 @@ protected:
  // TrainingSite must have access to this stuff
 	std::vector<WorkingPosition> working_positions_;
 
-	int32_t fetchfromflag_;  ///< Number of wares to fetch from flag
+	int32_t fetchfromflag_{0};  ///< Number of wares to fetch from flag
 
 	/// If a program has ended with the result Failed or Skipped, that program may not
 	/// start again until a certain time has passed. This is a map from program
@@ -495,19 +495,19 @@ protected:
 
 	using Stack = std::vector<State>;
 	Stack stack_;          ///<  program stack
-	bool program_timer_;   ///< execute next instruction based on pointer
+	bool program_timer_{false};   ///< execute next instruction based on pointer
 	Time program_time_;    ///< timer time
 	Duration post_timer_;  ///< Time to schedule after ends
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
 	InputQueues input_queues_;  ///< input queues for all inputs
-	uint16_t last_stat_percent_;
+	uint16_t last_stat_percent_{0};
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
 	// 0-100)
-	uint32_t actual_percent_;  // basically this is percent * 10 to avoid floats
+	uint32_t actual_percent_{0};  // basically this is percent * 10 to avoid floats
 	Time last_program_end_time;
-	bool is_stopped_;
+	bool is_stopped_{false};
 	std::string default_anim_;  // normally "idle", "empty", if empty mine.
 
 private:
@@ -516,7 +516,7 @@ private:
 	std::string statistics_string_on_changed_statistics_;
 	std::string production_result_;  // hover tooltip text
 
-	int32_t main_worker_;
+	int32_t main_worker_{-1};
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
@@ -530,8 +530,7 @@ private:
 struct Input {
 	Input(const DescriptionIndex& Ware, uint8_t const Max) : ware_(Ware), max_(Max) {
 	}
-	~Input() {
-	}
+	~Input() = default;
 
 	[[nodiscard]] DescriptionIndex ware() const {
 		return ware_;

@@ -98,7 +98,7 @@ namespace format_impl {
 class Tree {
 	std::vector<std::pair<std::unique_ptr<AbstractNode>, unsigned /* format index */>> nodes_;
 	std::vector<AbstractNode*> format_nodes_by_index_;
-	unsigned format_nodes_count_;
+	unsigned format_nodes_count_{0};
 
 	static std::map<std::string, std::unique_ptr<Tree>> cache_;
 

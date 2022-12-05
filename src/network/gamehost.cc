@@ -65,7 +65,7 @@
 #include "wui/interactive_spectator.h"
 
 struct HostChatProvider : public ChatProvider {
-	explicit HostChatProvider(GameHost* const init_host) : h(init_host), kickClient(0) {
+	explicit HostChatProvider(GameHost* const init_host) : h(init_host) {
 	}
 
 	// TODO(k.halfmann): this deserves a refactoring
@@ -245,7 +245,7 @@ private:
 	GameHost* h;
 	std::vector<ChatMessage> messages;
 	std::string kickUser;
-	uint32_t kickClient;
+	uint32_t kickClient{0};
 	std::string kickReason;
 };
 
@@ -271,7 +271,7 @@ struct Client {
 struct GameHostImpl {
 	GameSettings settings;
 	std::string localplayername;
-	uint32_t localdesiredspeed;
+	uint32_t localdesiredspeed{0};
 	// unique_ptr instead of object to break cyclic dependency
 	std::unique_ptr<ParticipantList> participants;
 	HostChatProvider chat;
@@ -286,12 +286,12 @@ struct GameHostImpl {
 	std::vector<Client> clients;
 
 	/// The game itself; only non-null while game is running
-	Widelands::Game* game;
+	Widelands::Game* game{nullptr};
 
 	/// If we were to send out a plain networktime packet, this would be the
 	/// time. However, we have not yet committed to this networktime.
 	Time pseudo_networktime;
-	int32_t last_heartbeat;
+	int32_t last_heartbeat{0};
 
 	/// The networktime we committed to by sending it across the network.
 	Time committed_networktime;
@@ -300,45 +300,41 @@ struct GameHostImpl {
 	NetworkTime time;
 
 	/// Whether we're waiting for all clients to report back.
-	bool waiting;
-	uint32_t lastframe;
+	bool waiting{false};
+	uint32_t lastframe{0};
 
 	/**
 	 * The speed, in milliseconds per second, that is effective as long
 	 * as we're not \ref waiting.
 	 */
-	uint32_t networkspeed;
-	time_t lastpauseping;
+	uint32_t networkspeed{0};
+	time_t lastpauseping{0};
 
 	/// All currently running computer players, *NOT* in one-one correspondence
 	/// with \ref Player objects
 	std::vector<AI::ComputerPlayer*> computerplayers;
 
 	/// \c true if a syncreport is currently in flight
-	bool syncreport_pending;
+	bool syncreport_pending{false};
 	Time syncreport_time;
 	Md5Checksum syncreport;
-	bool syncreport_arrived;
+	bool syncreport_arrived{false};
 
 	explicit GameHostImpl(GameHost* const h)
-	   : localdesiredspeed(0),
+	   : 
 	     participants(nullptr),
 	     chat(h),
 	     hp(h),
 	     npsb(&hp),
 
-	     game(nullptr),
+	     
 	     pseudo_networktime(0),
-	     last_heartbeat(0),
+	     
 	     committed_networktime(0),
-	     waiting(false),
-	     lastframe(0),
-	     networkspeed(0),
-	     lastpauseping(0),
-	     syncreport_pending(false),
+	     
 	     syncreport_time(0),
-	     syncreport(),
-	     syncreport_arrived(false) {
+	     syncreport()
+	     {
 	}
 
 	/// Takes ownership of the given pointer
@@ -356,8 +352,8 @@ GameHost::GameHost(FsMenu::MenuCapsule* c,
    : capsule_(c),
      pointer_(ptr),
      d(new GameHostImpl(this)),
-     internet_(internet),
-     forced_pause_(false) {
+     internet_(internet)
+     {
 	verb_log_info("[Host]: starting up.");
 
 	d->localplayername = playername;

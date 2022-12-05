@@ -111,8 +111,8 @@ public:
 	char* read_line();
 
 private:
-	char* data_;
-	size_t length_;
+	char* data_{nullptr};
+	size_t length_{0};
 	Pos filepos_;
 };
 

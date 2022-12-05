@@ -100,7 +100,7 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
                0,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Open a new game")),
-     prev_clientlist_len_(1000),
+     
      new_client_fx_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_freshmen")),
      // Login information
      nickname_(nick),

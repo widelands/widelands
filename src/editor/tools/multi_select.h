@@ -30,10 +30,8 @@
  * This is a helper class, no Editor Tool (might be usable in game too)
  */
 struct MultiSelect {
-	MultiSelect() {
-	}
-	~MultiSelect() {
-	}
+	MultiSelect() = default;
+	~MultiSelect() = default;
 
 	void enable(int32_t n, bool t) {
 		if (t) {

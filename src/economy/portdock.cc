@@ -51,10 +51,9 @@ PortdockDescr::PortdockDescr(char const* const init_name, char const* const init
 
 PortDock::PortDock(Warehouse* wh)
    : PlayerImmovable(g_portdock_descr),
-     fleet_(nullptr),
-     warehouse_(wh),
-     expedition_ready_(false),
-     expedition_cancelling_(false) {
+     
+     warehouse_(wh)
+     {
 }
 
 PortDock::~PortDock() {
@@ -478,7 +477,7 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 // to this port as this information was moved to the ShippingSchedule
 constexpr uint8_t kCurrentPacketVersion = 6;
 
-PortDock::Loader::Loader() : warehouse_(0) {
+PortDock::Loader::Loader()  {
 }
 
 void PortDock::Loader::load(FileRead& fr, uint8_t /* packet_version */) {

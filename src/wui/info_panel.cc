@@ -131,11 +131,9 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, in
 InfoPanel::InfoPanel(InteractiveBase& ib)
    : UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
      ibase_(ib),
-     iplayer_(nullptr),  // this function is called from IBase ctor so we can't upcast yet
-     on_top_(false),
-     display_mode_(DisplayMode::kPinned),
+     
      last_mouse_pos_(Vector2i(-1, -1)),
-     toolbar_(nullptr),  // will be set later by the IBase
+       // will be set later by the IBase
      toggle_mode_(this,
                   "mode",
                   0,
@@ -174,7 +172,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                   0,
                   "",
                   UI::Align::kRight),
-     message_queue_(nullptr),
+     
      last_message_id_(nullptr),
      draw_real_time_(get_config_bool("game_clock", true)) {
 	text_fps_.set_handle_mouse(true);

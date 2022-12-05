@@ -79,7 +79,7 @@ private:
 	void clicked_write_changes();
 	bool do_write_addon_to_disk(const std::string& addon);
 
-	bool update_in_progress_;
+	bool update_in_progress_{false};
 	ProgressIndicatorWindow progress_window_;
 };
 

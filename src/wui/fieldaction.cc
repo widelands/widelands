@@ -205,9 +205,9 @@ private:
 	Widelands::FCoords node_;
 
 	UI::TabPanel tabpanel_;
-	bool fastclick_;  // if true, put the mouse over first button in first tab
-	uint32_t best_tab_;
-	bool showing_workarea_preview_;
+	bool fastclick_{true};  // if true, put the mouse over first button in first tab
+	uint32_t best_tab_{0};
+	bool showing_workarea_preview_{false};
 	std::set<Widelands::Coords> overlapping_workareas_;
 	bool is_showing_workarea_overlaps_;
 	Widelands::DescriptionIndex building_under_mouse_;
@@ -259,9 +259,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
      tabpanel_(this, UI::TabPanelStyle::kWuiDark),
-     fastclick_(true),
-     best_tab_(0),
-     showing_workarea_preview_(false),
+     
      is_showing_workarea_overlaps_(ib->get_display_flag(InteractiveBase::dfShowWorkareaOverlap)),
      building_under_mouse_(Widelands::INVALID_INDEX) {
 	ib->set_sel_freeze(true);

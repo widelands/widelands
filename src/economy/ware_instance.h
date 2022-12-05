@@ -92,11 +92,11 @@ public:
 
 private:
 	ObjectPointer location_;
-	Economy* economy_;
+	Economy* economy_{nullptr};
 	DescriptionIndex descr_index_;
 
 	std::unique_ptr<IdleWareSupply> supply_;
-	Transfer* transfer_;
+	Transfer* transfer_{nullptr};
 	ObjectPointer transfer_nextstep_;  ///< cached PlayerImmovable, can be 0
 
 	// loading and saving stuff

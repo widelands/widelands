@@ -35,8 +35,7 @@ namespace Widelands {
 //
 CmdQueue::CmdQueue(Game& game)
    : game_(game),
-     nextserial_(0),
-     ncmds_(0),
+     
      cmds_(kCommandQueueBucketSize, std::priority_queue<CmdItem>()) {
 }
 

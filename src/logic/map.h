@@ -83,8 +83,7 @@ Predicates used in path finding and find functions.
 struct FindBob {
 	//  Return true if this bob should be returned by find_bobs.
 	virtual bool accept(Bob*) const = 0;
-	virtual ~FindBob() {
-	}  // make gcc shut up
+	virtual ~FindBob() = default;  // make gcc shut up
 };
 struct FindNode;
 struct CheckStep;
@@ -96,31 +95,26 @@ struct FindBobAlwaysTrue : public FindBob {
 	bool accept(Bob*) const override {
 		return true;
 	}
-	~FindBobAlwaysTrue() override {
-	}  // make gcc shut up
+	~FindBobAlwaysTrue() override = default;  // make gcc shut up
 };
 
 struct FindBobByName : public FindBob {
 	bool accept(Bob* b) const override;
 	explicit FindBobByName(const std::string& n) : name_(n) {
 	}
-	~FindBobByName() override {
-	}
+	~FindBobByName() override = default;
 
 private:
 	std::string name_;
 };
 struct FindCritter : public FindBob {
 	bool accept(Bob* b) const override;
-	~FindCritter() override {
-	}
+	~FindCritter() override = default;
 };
 struct FindCarnivores : public FindBob {
 	bool accept(Bob* b) const override;
-	explicit FindCarnivores() {
-	}
-	~FindCarnivores() override {
-	}
+	explicit FindCarnivores() = default;
+	~FindCarnivores() override = default;
 };
 struct FindCritterByClass : public FindBob {
 	enum class Class { Herbivore, Carnivore, Neither };
@@ -128,8 +122,7 @@ struct FindCritterByClass : public FindBob {
 	bool accept(Bob* b) const override;
 	explicit FindCritterByClass(const CritterDescr& b) : class_(classof(b)) {
 	}
-	~FindCritterByClass() override {
-	}
+	~FindCritterByClass() override = default;
 
 private:
 	Class class_;
@@ -652,14 +645,14 @@ private:
 	void find(const EditorGameBase&, const Area<FCoords>&, functorT&) const;
 
 	/// # of players this map supports (!= Game's number of players!)
-	PlayerNumber nrplayers_;
-	ScenarioTypes scenario_types_;  // whether the map is playable as scenario
+	PlayerNumber nrplayers_{0};
+	ScenarioTypes scenario_types_{NO_SCENARIO};  // whether the map is playable as scenario
 
-	int16_t width_;
-	int16_t height_;
+	int16_t width_{0};
+	int16_t height_{0};
 	std::string filename_;
 	std::string author_;
-	bool localize_author_;
+	bool localize_author_{false};
 	std::string name_;
 	std::string description_;
 	std::string hint_;
@@ -682,9 +675,9 @@ private:
 	std::unique_ptr<FileSystem> filesystem_;
 
 	PortSpacesSet port_spaces_;
-	bool allows_seafaring_;
+	bool allows_seafaring_{false};
 
-	uint32_t waterway_max_length_;
+	uint32_t waterway_max_length_{0};
 
 	Objectives objectives_;
 

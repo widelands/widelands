@@ -415,23 +415,23 @@ private:
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
 	uint64_t lastframe_;        //  system time (milliseconds)
-	uint64_t frametime_;        //  in millseconds
-	uint64_t avg_usframetime_;  //  in microseconds!
+	uint64_t frametime_{0};        //  in millseconds
+	uint64_t avg_usframetime_{0};  //  in microseconds!
 
 	// For measuring actual game speed and how smoothly the game logic runs
-	uint64_t last_frame_realtime_, previous_frame_realtime_;
+	uint64_t last_frame_realtime_{0}, previous_frame_realtime_{0};
 	Time last_frame_gametime_, previous_frame_gametime_;
-	uint64_t avg_actual_gamespeed_;  // in microseconds gametime per second realtime
-	uint64_t last_target_gamespeed_;
-	uint64_t gamespeed_last_change_time_;
+	uint64_t avg_actual_gamespeed_{0};  // in microseconds gametime per second realtime
+	uint64_t last_target_gamespeed_{0};
+	uint64_t gamespeed_last_change_time_{0};
 
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 
-	bool cheat_mode_enabled_;
-	bool screenshot_failed_;
+	bool cheat_mode_enabled_{false};
+	bool screenshot_failed_{false};
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

@@ -153,14 +153,14 @@ private:
 	};
 
 	int max_pic_width_;
-	int widest_text_;
-	int widest_hotkey_;
+	int widest_text_{0};
+	int widest_hotkey_{0};
 
 	std::deque<EntryRecord*> entry_records_;
 	Scrollbar scrollbar_;
-	uint32_t scrollpos_;  //  in pixels
+	uint32_t scrollpos_{0};  //  in pixels
 	uint32_t selection_;
-	uint32_t last_click_time_;
+	uint32_t last_click_time_{-10000};
 	uint32_t last_selection_;  // for double clicks
 	ListselectLayout selection_mode_;
 	const Image* check_pic_;
@@ -171,7 +171,7 @@ private:
 	int lineheight_;
 	std::string current_tooltip_;
 
-	UI::BaseDropdown* linked_dropdown;
+	UI::BaseDropdown* linked_dropdown{nullptr};
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {

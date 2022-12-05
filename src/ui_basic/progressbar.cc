@@ -38,10 +38,9 @@ ProgressBar::ProgressBar(Panel* const parent,
                          uint32_t const orientation)
    : Panel(parent, style, x, y, w, h),
      orientation_(orientation),
-     state_(0),
-     total_(100),
-     progress_style_(style),
-     show_percent_(true) {
+     
+     progress_style_(style)
+     {
 }
 
 inline const UI::ProgressbarStyleInfo& ProgressBar::progress_style() const {

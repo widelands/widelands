@@ -39,13 +39,13 @@ public:
 	/// A row of buttons and dropdown menus
 	UI::Box box;
 
-	bool on_top, draw_background;
+	bool on_top{false}, draw_background{false};
 
 private:
 	/// The set of background images
 	ToolbarImageset imageset_;
 	/// How often the left and right images get repeated, calculated from the width of the box
-	int repeat_;
+	int repeat_{0};
 };
 
 #endif  // end of include guard: WL_WUI_TOOLBAR_H

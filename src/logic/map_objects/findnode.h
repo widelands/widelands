@@ -33,10 +33,9 @@ struct FCoords;
 struct FindNode {
 private:
 	struct BaseCapsule {
-		BaseCapsule() : refcount(1) {
+		BaseCapsule()  {
 		}
-		virtual ~BaseCapsule() {
-		}
+		virtual ~BaseCapsule() = default;
 
 		void addref() {
 			++refcount;
@@ -48,7 +47,7 @@ private:
 		}
 		[[nodiscard]] virtual bool accept(const EditorGameBase&, const FCoords& coord) const = 0;
 
-		int refcount;
+		int refcount{1};
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
 		explicit Capsule(const T& init_op) : op(init_op) {
@@ -100,8 +99,7 @@ private:
 
 /// Accepts a node if it is accepted by all subfunctors.
 struct FindNodeAnd {
-	FindNodeAnd() {
-	}
+	FindNodeAnd() = default;
 
 	void add(const FindNode&, bool negate = false);
 

@@ -27,7 +27,7 @@ NotificationsManager* NotificationsManager::get() {
 	return &instance;
 }
 
-NotificationsManager::NotificationsManager() : next_subscriber_id_(1), num_subscribers_(0) {
+NotificationsManager::NotificationsManager()  {
 }
 
 NotificationsManager::~NotificationsManager() {

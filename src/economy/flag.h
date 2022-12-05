@@ -41,8 +41,7 @@ public:
 	FlagDescr(char const* const init_name, char const* const init_descname)
 	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname) {
 	}
-	~FlagDescr() override {
-	}
+	~FlagDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(FlagDescr);

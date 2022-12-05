@@ -173,7 +173,7 @@ public:
 
 protected:
 	Descriptions& descriptions_;
-	int32_t size_;
+	int32_t size_{BaseImmovable::NONE};
 	Programs programs_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
@@ -270,8 +270,8 @@ protected:
 	std::atomic<uint32_t> anim_;
 	Time animstart_;
 
-	const ImmovableProgram* program_;
-	uint32_t program_ptr_;  ///< index of next instruction to execute
+	const ImmovableProgram* program_{nullptr};
+	uint32_t program_ptr_{0};  ///< index of next instruction to execute
 
 	// Whether a worker was told to remove this object ASAP.
 	// A set of all players who want this object gone.
@@ -399,8 +399,8 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 private:
-	Economy* ware_economy_;
-	Economy* worker_economy_;
+	Economy* ware_economy_{nullptr};
+	Economy* worker_economy_{nullptr};
 
 	Workers workers_;
 

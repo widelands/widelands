@@ -23,7 +23,7 @@
 #include "base/log.h"
 
 LuaTable::LuaTable(lua_State* L)
-   : mutex_lock_(MutexLock::ID::kLua), L_(L), warn_about_unaccessed_keys_(true) {
+   : mutex_lock_(MutexLock::ID::kLua), L_(L) {
 	// S: <table>
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
 	lua_pushvalue(L, -2);                                    // S: <table> this <table>

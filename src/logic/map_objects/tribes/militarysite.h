@@ -41,8 +41,7 @@ public:
 	MilitarySiteDescr(const std::string& init_descname,
 	                  const LuaTable& t,
 	                  Descriptions& descriptions);
-	~MilitarySiteDescr() override {
-	}
+	~MilitarySiteDescr() override = default;
 
 	[[nodiscard]] Building& create_object() const override;
 
@@ -73,9 +72,9 @@ public:
 	std::string defeated_you_str_;
 
 private:
-	uint32_t conquer_radius_;
-	Quantity num_soldiers_;
-	uint32_t heal_per_second_;
+	uint32_t conquer_radius_{0};
+	Quantity num_soldiers_{0};
+	uint32_t heal_per_second_{0};
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteDescr);
 };
 
@@ -187,7 +186,7 @@ private:
 	RequireAttribute soldier_upgrade_requirements_;     // This is used when exchanging soldiers.
 	std::unique_ptr<Request> normal_soldier_request_;   // filling the site
 	std::unique_ptr<Request> upgrade_soldier_request_;  // seeking for better soldiers
-	bool didconquer_;
+	bool didconquer_{false};
 	Quantity capacity_;
 
 	/**
@@ -203,8 +202,8 @@ private:
 	std::vector<SoldierJob> soldierjobs_;
 	SoldierPreference soldier_preference_;
 	Time next_swap_soldiers_time_;
-	bool soldier_upgrade_try_;  // optimization -- if everybody is zero-level, do not downgrade
-	bool doing_upgrade_request_;
+	bool soldier_upgrade_try_{false};  // optimization -- if everybody is zero-level, do not downgrade
+	bool doing_upgrade_request_{false};
 	std::vector<std::map<std::tuple<int, int, int>, std::string>> statistics_string_cache_;
 };
 }  // namespace Widelands

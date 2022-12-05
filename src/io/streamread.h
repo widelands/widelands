@@ -37,8 +37,7 @@
  */
 class StreamRead {
 public:
-	explicit StreamRead() {
-	}
+	explicit StreamRead() = default;
 	virtual ~StreamRead() = default;
 
 	/**

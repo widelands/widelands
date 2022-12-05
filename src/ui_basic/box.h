@@ -118,10 +118,10 @@ private:
 		int assigned_var_depth;
 	};
 
-	bool scrolling_, force_scrolling_;
+	bool scrolling_{false}, force_scrolling_{false};
 	std::unique_ptr<Scrollbar> scrollbar_;
 	uint32_t orientation_;
-	uint32_t mindesiredbreadth_;
+	uint32_t mindesiredbreadth_{0};
 	uint32_t inner_spacing_;
 
 	std::vector<Item> items_;

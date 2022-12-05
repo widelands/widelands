@@ -140,8 +140,8 @@ public:
 
 private:
 	Game& game_;
-	uint32_t nextserial_;
-	uint32_t ncmds_;
+	uint32_t nextserial_{0};
+	uint32_t ncmds_{0};
 	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
 	CommandsContainer cmds_;
 };

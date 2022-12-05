@@ -40,8 +40,7 @@ struct CheckStep {
 
 private:
 	struct BaseCapsule {
-		virtual ~BaseCapsule() {
-		}
+		virtual ~BaseCapsule() = default;
 		[[nodiscard]] virtual bool allowed(
 		   const Map&, const FCoords& start, const FCoords& end, int32_t dir, StepId id) const = 0;
 		[[nodiscard]] virtual bool reachable_dest(const Map&, const FCoords& dest) const = 0;

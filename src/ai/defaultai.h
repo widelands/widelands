@@ -162,8 +162,8 @@ private:
 
 	// Variables of default AI
 	AiType type_;
-	Widelands::Player* player_;
-	Widelands::TribeDescr const* tribe_;
+	Widelands::Player* player_{nullptr};
+	Widelands::TribeDescr const* tribe_{nullptr};
 
 	// This points to persistent data stored in Player object
 	Widelands::Player::AiPersistentState* persistent_data;
@@ -300,7 +300,7 @@ private:
 
 	SoldiersStatus soldier_status_;
 	int32_t vacant_mil_positions_average_;
-	uint16_t attackers_count_;
+	uint16_t attackers_count_{0};
 	EventTimeQueue soldier_trained_log;
 	EventTimeQueue soldier_attacks_log;
 
@@ -308,7 +308,7 @@ private:
 	Time next_ai_think_;
 	// this is helping counter to track how many scheduler tasks are too delayed
 	// the purpose is to print out a warning that the game is pacing too fast
-	int32_t scheduler_delay_counter_;
+	int32_t scheduler_delay_counter_{0};
 
 	std::map<Widelands::DescriptionIndex, WoodPolicy> wood_policy_;
 	uint16_t trees_nearby_treshold_;
@@ -346,10 +346,10 @@ private:
 	MineFieldsObserver mine_fields_stat;
 
 	// used for statistics of buildings
-	uint32_t numof_psites_in_constr;
-	uint32_t num_ports;
-	uint16_t numof_warehouses_;
-	uint16_t numof_warehouses_in_const_;
+	uint32_t numof_psites_in_constr{0};
+	uint32_t num_ports{0};
+	uint16_t numof_warehouses_{0};
+	uint16_t numof_warehouses_in_const_{0};
 	uint32_t mines_in_constr() const;
 	uint32_t mines_built() const;
 	std::map<int32_t, MilitarySiteSizeObserver> msites_per_size;
@@ -361,15 +361,15 @@ private:
 	                            // military building built
 	Time time_of_last_construction_;
 	Time next_mine_construction_due_;
-	uint16_t fishers_count_;
+	uint16_t fishers_count_{0};
 	uint16_t bakeries_count_;
 
 	Time first_iron_mine_built;
 
 	// for training sites per type
-	int16_t ts_finished_count_;
-	int16_t ts_in_const_count_;
-	int16_t ts_without_trainers_;
+	int16_t ts_finished_count_{0};
+	int16_t ts_in_const_count_{0};
+	int16_t ts_without_trainers_{0};
 
 	// for roads
 	Time last_road_dismantled_;  // uses to prevent too frequent road dismantling
@@ -379,14 +379,14 @@ private:
 	// check ms in this interval - will auto-adjust
 	Duration enemysites_check_delay_;
 
-	int32_t spots_;  // sum of buildable fields
+	int32_t spots_{0};  // sum of buildable fields
 
 	int16_t productionsites_ratio_;
 
-	bool resource_necessity_water_needed_;  // unless atlanteans or amazons
+	bool resource_necessity_water_needed_{false};  // unless atlanteans or amazons
 
 	// This stores highest priority for new buildings except for militarysites
-	int32_t highest_nonmil_prio_;
+	int32_t highest_nonmil_prio_{0};
 
 	// if the basic economy is not established, there must be a non-empty list of remaining basic
 	// buildings

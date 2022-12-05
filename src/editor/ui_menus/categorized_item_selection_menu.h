@@ -60,7 +60,7 @@ private:
 
 	const Widelands::DescriptionMaintainer<DescriptionType>& descriptions_;
 	std::function<void()> select_correct_tool_;
-	bool protect_against_recursive_select_;
+	bool protect_against_recursive_select_{false};
 	UI::TabPanel tab_panel_;
 	UI::MultilineTextarea current_selection_names_;
 	std::map<int, UI::Checkbox*> checkboxes_;
@@ -79,7 +79,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
    : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      descriptions_(descriptions),
      select_correct_tool_(select_correct_tool),
-     protect_against_recursive_select_(false),
+     
      tab_panel_(this, UI::TabPanelStyle::kWuiLight),
      current_selection_names_(this,
                               0,

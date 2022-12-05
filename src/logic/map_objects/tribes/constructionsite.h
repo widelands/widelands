@@ -34,7 +34,7 @@ enum class StockPolicy;
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
 	ConstructionsiteInformation()
-	   : becomes(nullptr), was(nullptr),  totaltime(0), completedtime(0) {
+	   :   totaltime(0), completedtime(0) {
 	}
 
 	/// Draw the partly finished constructionsite
@@ -46,8 +46,8 @@ struct ConstructionsiteInformation {
 	          RenderTarget* dst) const;
 
 	const BuildingDescr*
-	   becomes;  // Also works as a marker telling whether there is a construction site.
-	const BuildingDescr* was;  // only valid if "becomes" is an enhanced building.
+	   becomes{nullptr};  // Also works as a marker telling whether there is a construction site.
+	const BuildingDescr* was{nullptr};  // only valid if "becomes" is an enhanced building.
 	std::vector<const BuildingDescr*>
 	   intermediates;  // If we enhance a building while it's still under construction
 	Duration totaltime;
@@ -77,8 +77,7 @@ public:
 	ConstructionSiteDescr(const std::string& init_descname,
 	                      const LuaTable& t,
 	                      Descriptions& descriptions);
-	~ConstructionSiteDescr() override {
-	}
+	~ConstructionSiteDescr() override = default;
 
 	[[nodiscard]] Building& create_object() const override;
 
@@ -153,9 +152,9 @@ protected:
 	          RenderTarget* dst) override;
 
 private:
-	int32_t fetchfromflag_;  // # of wares to fetch from flag
+	int32_t fetchfromflag_{0};  // # of wares to fetch from flag
 
-	bool builder_idle_;                 // used to determine whether the builder is idle
+	bool builder_idle_{false};                 // used to determine whether the builder is idle
 	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
 
 	std::map<DescriptionIndex, uint8_t> additional_wares_;

@@ -24,10 +24,10 @@
 
 namespace Widelands {
 
-Pathfields::Pathfields(uint32_t const nrfields) : fields(new Pathfield[nrfields]), cycle(0) {
+Pathfields::Pathfields(uint32_t const nrfields) : fields(new Pathfield[nrfields]) {
 }
 
-PathfieldManager::PathfieldManager() : nrfields_(0) {
+PathfieldManager::PathfieldManager()  {
 }
 
 void PathfieldManager::set_size(uint32_t const nrfields) {

@@ -471,7 +471,7 @@ protected:
 	                   const std::string& message_to_display = std::string());
 
 private:
-	bool initialized_;
+	bool initialized_{false};
 
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;
@@ -526,10 +526,10 @@ private:
 	Panel* parent_;
 	Panel* next_;
 	Panel* prev_;
-	Panel* first_child_;
-	Panel* last_child_;
-	Panel* mousein_child_;  //  child panel that the mouse is in
-	Panel* focus_;          //  keyboard focus
+	Panel* first_child_{nullptr};
+	Panel* last_child_{nullptr};
+	Panel* mousein_child_{nullptr};  //  child panel that the mouse is in
+	Panel* focus_{nullptr};          //  keyboard focus
 
 	std::atomic<uint32_t> flags_;
 
@@ -540,13 +540,13 @@ private:
 	int32_t x_, y_;
 	int w_, h_;
 	/*@}*/
-	int lborder_, rborder_, tborder_, bborder_;
-	uint8_t border_snap_distance_, panel_snap_distance_;
+	int lborder_{0}, rborder_{0}, tborder_{0}, bborder_{0};
+	uint8_t border_snap_distance_{0}, panel_snap_distance_{0};
 	int desired_w_, desired_h_;
 
 	friend struct ModalGuard;
 
-	bool running_;
+	bool running_{false};
 	int return_code_;
 
 	std::string tooltip_;

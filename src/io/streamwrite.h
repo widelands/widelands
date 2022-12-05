@@ -37,8 +37,7 @@
  */
 class StreamWrite {
 public:
-	explicit StreamWrite() {
-	}
+	explicit StreamWrite() = default;
 	virtual ~StreamWrite() = default;
 
 	/**

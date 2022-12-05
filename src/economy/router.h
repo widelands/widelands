@@ -47,7 +47,7 @@ struct Router {
 
 private:
 	ResetCycleFn reset_;
-	uint32_t mpf_cycle;  ///< pathfinding cycle, see Flag::mpf_cycle
+	uint32_t mpf_cycle{0};  ///< pathfinding cycle, see Flag::mpf_cycle
 };
 }  // namespace Widelands
 #endif  // end of include guard: WL_ECONOMY_ROUTER_H

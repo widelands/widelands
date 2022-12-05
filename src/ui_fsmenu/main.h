@@ -133,13 +133,13 @@ private:
 	uint32_t init_time_;
 
 	std::vector<std::string> images_;
-	uint32_t last_image_exchange_time_;
-	size_t draw_image_, last_image_;
+	uint32_t last_image_exchange_time_{0};
+	size_t draw_image_{0}, last_image_{0};
 	Rectf image_pos(const Image&, bool crop = true);
 	Rectf title_pos();
 	float calc_opacity(uint32_t time) const;
 
-	bool visible_;
+	bool visible_{true};
 	void set_button_visibility(bool);
 
 	void action(MenuTarget);
@@ -153,7 +153,7 @@ private:
 	// Values from internet login window
 	std::string nickname_;
 	std::string password_;
-	bool auto_log_;
+	bool auto_log_{false};
 	bool register_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>

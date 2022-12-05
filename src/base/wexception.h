@@ -48,8 +48,7 @@ public:
 	[[nodiscard]] const char* what() const noexcept override;
 
 protected:
-	WException() {
-	}
+	WException() = default;
 	std::string what_;
 };
 

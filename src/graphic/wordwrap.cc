@@ -64,7 +64,7 @@ constexpr int CARET_BLINKING_DELAY = 1000;
 constexpr int CURSOR_MOVEMENT_THRESHOLD = 200;
 
 WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)
-   : draw_caret_(false),
+   : 
      fontsize_(fontsize),
      color_(color),
      font_(RT::load_font(UI::g_fh->fontset()->sans_bold(), fontsize_)),

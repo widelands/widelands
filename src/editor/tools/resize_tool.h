@@ -52,7 +52,7 @@ struct EditorResizeTool : public EditorTool {
 		width_ = w;
 	}
 
-	uint32_t get_width() const {
+	[[nodiscard]] uint32_t get_width() const {
 		return width_;
 	}
 
@@ -60,7 +60,7 @@ struct EditorResizeTool : public EditorTool {
 		height_ = h;
 	}
 
-	uint32_t get_height() const {
+	[[nodiscard]] uint32_t get_height() const {
 		return height_;
 	}
 

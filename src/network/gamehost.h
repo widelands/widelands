@@ -133,7 +133,7 @@ public:
 		update_network_speed();
 	}
 
-	bool forced_pause() const {
+	[[nodiscard]] bool forced_pause() const {
 		return forced_pause_;
 	}
 
@@ -219,7 +219,7 @@ private:
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
-	bool forced_pause_;  // triggered by the forcePause host chat command, see HostChatProvider in
+	bool forced_pause_{false};  // triggered by the forcePause host chat command, see HostChatProvider in
 	                     // gamehost.cc
 	std::unique_ptr<Widelands::Game> game_;
 	std::string script_to_run_;

@@ -100,7 +100,7 @@ private:
 	/// Client ids not in this map should be considered invalid.
 	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
 	/// The next client id that will be used
-	NetHostInterface::ConnectionId next_id_;
+	NetHostInterface::ConnectionId next_id_{1};
 	/// An io_service needed by asio. Primary needed for async operations.
 	asio::io_service io_service_;
 	/// The acceptor we get IPv4 connection requests to.

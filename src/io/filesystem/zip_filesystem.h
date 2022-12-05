@@ -99,7 +99,7 @@ private:
 		// Closes 'path_' if it is opened.
 		void close();
 
-		State state_;
+		State state_{State::kIdle};
 
 		// E.g. "path/to/filename.zip"
 		std::string path_;
@@ -113,8 +113,8 @@ private:
 		std::string common_prefix_;
 
 		// File handles for zipping and unzipping.
-		zipFile write_handle_;
-		unzFile read_handle_;
+		zipFile write_handle_{nullptr};
+		unzFile read_handle_{nullptr};
 	};
 
 	struct ZipStreamRead : StreamRead {

@@ -90,9 +90,9 @@ public:
 	[[nodiscard]] std::string get_data() const;
 
 private:
-	char* data_;
-	size_t length_;
-	size_t max_size_;
+	char* data_{nullptr};
+	size_t length_{0};
+	size_t max_size_{0};
 	Pos filepos_;
 };
 

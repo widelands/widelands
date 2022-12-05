@@ -57,10 +57,8 @@ MapSelect::MapSelect(MenuCapsule& m,
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
      settings_(settings),
-     ctrl_(ctrl),
-     has_translated_mapname_(false),
-     unspecified_balancing_found_(false),
-     update_map_details_(false) {
+     ctrl_(ctrl)
+     {
 	curdir_ = basedir_;
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));

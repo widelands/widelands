@@ -41,8 +41,8 @@ struct MainMenuSaveMapMakeDirectory : public UI::Window {
 	}
 
 private:
-	const int padding_;
-	const int butw_, buth_;
+	const int padding_{5};
+	const int butw_, buth_{20};
 	std::string dirname_;
 	UI::Box vbox_;
 	UI::Textarea label_;

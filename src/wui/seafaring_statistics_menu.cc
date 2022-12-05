@@ -103,7 +103,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                    kButtonSize,
                    UI::ButtonStyle::kWuiSecondary,
                    status_to_image(ShipFilterStatus::kShipping)),
-     ship_filter_(ShipFilterStatus::kAll),
+     
      navigation_box_(&main_box_,
                      UI::PanelStyle::kWui,
                      0,

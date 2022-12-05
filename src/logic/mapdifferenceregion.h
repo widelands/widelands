@@ -31,7 +31,7 @@ namespace Widelands {
 /// \note The order in which nodes are returned is not guarantueed.
 template <typename AreaType = Area<>> struct MapDifferenceRegion {
 	MapDifferenceRegion(const Map& map, AreaType area, Direction direction)
-	   : area_(area), remaining_in_edge_(area.radius), passed_corner_(false) {
+	   : area_(area), remaining_in_edge_(area.radius) {
 		assert(1 <= direction);
 		assert(direction <= 6);
 		--direction;
@@ -89,7 +89,7 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 private:
 	AreaType area_;
 	typename AreaType::RadiusType remaining_in_edge_;
-	bool passed_corner_;
+	bool passed_corner_{false};
 	Direction direction_;
 };
 }  // namespace Widelands

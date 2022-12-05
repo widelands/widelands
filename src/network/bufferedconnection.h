@@ -108,7 +108,7 @@ public:
 		BufferedConnection* conn_;
 
 		/// The position of the next peek.
-		size_t peek_pointer_;
+		size_t peek_pointer_{0};
 	};
 
 	/**

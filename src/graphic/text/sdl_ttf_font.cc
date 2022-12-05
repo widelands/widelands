@@ -34,7 +34,7 @@ SdlTtfFont::SdlTtfFont(TTF_Font* font,
                        int ptsize,
                        std::string* ttf_memory_block)
    : font_(font),
-     style_(TTF_STYLE_NORMAL),
+     
      font_name_(face),
      ptsize_(ptsize),
      ttf_file_memory_block_(ttf_memory_block) {

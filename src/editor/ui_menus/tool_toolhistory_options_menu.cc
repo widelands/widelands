@@ -43,7 +43,7 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
                                                            UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 370, 100, _("Tool History"), history_tool),
      history_tool_(history_tool),
-     margin_(4),
+     
      box_width_(get_inner_w() - 2 * margin_),
      box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      list_(&box_, 0, 0, box_width_, 330, UI::PanelStyle::kWui) {

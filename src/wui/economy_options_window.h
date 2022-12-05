@@ -203,7 +203,7 @@ private:
 	void update_profiles_needed(const std::string&);
 	void update_profiles_select(const std::string&);
 
-	SaveProfileWindow* save_profile_dialog_;
+	SaveProfileWindow* save_profile_dialog_{nullptr};
 	// Mutable to allow dynamic loading of the correct ware/worker indices in case an old savegame
 	// has been loaded
 	Widelands::Descriptions* descriptions_;

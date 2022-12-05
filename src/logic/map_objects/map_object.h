@@ -188,8 +188,7 @@ class MapObject {
 public:
 	struct LogSink {
 		virtual void log(const std::string& str) = 0;
-		virtual ~LogSink() {
-		}
+		virtual ~LogSink() = default;
 	};
 
 	virtual void load_finish(EditorGameBase&) {
@@ -199,8 +198,7 @@ public:
 
 protected:
 	explicit MapObject(MapObjectDescr const* descr);
-	virtual ~MapObject() {
-	}
+	virtual ~MapObject() = default;
 
 public:
 	Serial serial() const {
@@ -294,17 +292,16 @@ public:
 	 * all Loader objects should be deleted.
 	 */
 	struct Loader {
-		EditorGameBase* egbase_;
-		MapObjectLoader* mol_;
-		MapObject* object_;
+		EditorGameBase* egbase_{nullptr};
+		MapObjectLoader* mol_{nullptr};
+		MapObject* object_{nullptr};
 
 	protected:
-		Loader() : egbase_(nullptr), mol_(nullptr), object_(nullptr) {
+		Loader()  {
 		}
 
 	public:
-		virtual ~Loader() {
-		}
+		virtual ~Loader() = default;
 
 		void init(EditorGameBase& e, MapObjectLoader& m, MapObject& object) {
 			egbase_ = &e;
@@ -312,13 +309,13 @@ public:
 			object_ = &object;
 		}
 
-		EditorGameBase& egbase() const {
+		[[nodiscard]] EditorGameBase& egbase() const {
 			return *egbase_;
 		}
-		MapObjectLoader& mol() const {
+		[[nodiscard]] MapObjectLoader& mol() const {
 			return *mol_;
 		}
-		MapObject* get_object() const {
+		[[nodiscard]] MapObject* get_object() const {
 			return object_;
 		}
 		template <typename T> T& get() {
@@ -361,8 +358,8 @@ protected:
 	void molog(const Time& gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
 
 	const MapObjectDescr* descr_;
-	Serial serial_;
-	LogSink* logsink_;
+	Serial serial_{0};
+	LogSink* logsink_{nullptr};
 	std::atomic<Player*> owner_;
 
 	/**
@@ -371,7 +368,7 @@ protected:
 	 * work on the same tree simultaneously or two hunters try to hunt
 	 * the same animal.
 	 */
-	bool reserved_by_worker_;
+	bool reserved_by_worker_{false};
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(MapObject);
@@ -388,7 +385,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
 struct ObjectManager {
 	using MapObjectMap = std::unordered_map<Serial, MapObject*>;
 
-	ObjectManager() : lastserial_(0), is_cleaning_up_(false) {
+	ObjectManager()  {
 	}
 	~ObjectManager();
 
@@ -413,10 +410,10 @@ struct ObjectManager {
 	}
 
 private:
-	Serial lastserial_;
+	Serial lastserial_{0};
 	MapObjectMap objects_;
 
-	bool is_cleaning_up_;
+	bool is_cleaning_up_{false};
 
 	DISALLOW_COPY_AND_ASSIGN(ObjectManager);
 };

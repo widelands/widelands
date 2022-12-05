@@ -215,11 +215,11 @@ private:
 
 	View view_;
 	Vector2i last_mouse_pos_;
-	bool dragging_;
+	bool dragging_{false};
 
 	bool edge_scrolling_;
 	bool invert_movement_;
-	int8_t is_scrolling_x_, is_scrolling_y_;
+	int8_t is_scrolling_x_{0}, is_scrolling_y_{0};
 
 	// The queue of plans to execute as animations.
 	std::deque<std::deque<TimestampedView>> view_plans_;

@@ -40,8 +40,7 @@ struct Path {
 	friend class Map;
 	friend struct MapAStarBase;
 
-	Path() {
-	}
+	Path() = default;
 	explicit Path(const Coords& c) : start_(c), end_(c) {
 	}
 	Path(CoordPath&);
@@ -82,8 +81,7 @@ private:
 
 // CoordPath is an extended path that also caches related Coords
 struct CoordPath {
-	CoordPath() {
-	}
+	CoordPath() = default;
 	explicit CoordPath(Coords c) {
 		coords_.push_back(c);
 	}

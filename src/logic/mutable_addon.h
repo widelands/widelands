@@ -30,8 +30,7 @@ namespace AddOns {
 class MutableAddOn {
 public:
 	explicit MutableAddOn(const AddOnInfo& a);
-	virtual ~MutableAddOn() {
-	}
+	virtual ~MutableAddOn() = default;
 	// Creates an addon with its type matching its category
 	static std::unique_ptr<MutableAddOn> create_mutable_addon(const AddOnInfo& a);
 	void update_info(const std::string& descname,

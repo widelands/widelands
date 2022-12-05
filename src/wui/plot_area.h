@@ -125,22 +125,22 @@ protected:
 	uint32_t sample_rate_;
 
 	/// Whether there has ben a data update since the last time that think() was executed
-	bool needs_update_;
+	bool needs_update_{true};
 	/// The last time the information in this Panel got updated
-	uint32_t lastupdate_;
+	uint32_t lastupdate_{0};
 
 	/// For first updating and then plotting the data
 	float const xline_length_;
 	float const yline_length_;
-	uint32_t time_ms_;
-	uint32_t highest_scale_;
-	float sub_;
+	uint32_t time_ms_{0};
+	uint32_t highest_scale_{0};
+	float sub_{0};
 
 private:
 	uint32_t get_game_time() const;
 
-	TIME time_;              // How much do you want to list
-	uint32_t game_time_id_;  // what label is used for TIME_GAME
+	TIME time_{TIME_GAME};              // How much do you want to list
+	uint32_t game_time_id_{0};  // what label is used for TIME_GAME
 };
 
 /**
@@ -168,8 +168,8 @@ struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 	                    tooltip_text,
 	                    cursor_size,
 	                    enabled),
-	     plot_area_(plot_area),
-	     last_game_time_id_(0) {
+	     plot_area_(plot_area)
+	     {
 	}
 
 protected:
@@ -177,7 +177,7 @@ protected:
 
 private:
 	WuiPlotArea& plot_area_;
-	uint32_t last_game_time_id_;
+	uint32_t last_game_time_id_{0};
 };
 
 /**

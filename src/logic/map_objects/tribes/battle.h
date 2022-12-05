@@ -28,8 +28,7 @@ public:
 	BattleDescr(char const* const init_name, char const* const init_descname)
 	   : MapObjectDescr(MapObjectType::BATTLE, init_name, init_descname) {
 	}
-	~BattleDescr() override {
-	}
+	~BattleDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(BattleDescr);

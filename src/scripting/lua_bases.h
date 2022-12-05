@@ -40,13 +40,11 @@ class LuaEditorGameBase : public LuaBasesModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaEditorGameBase);
 
-	LuaEditorGameBase() {
-	}
+	LuaEditorGameBase() = default;
 	explicit LuaEditorGameBase(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'EditorGameBase' directly!");
 	}
-	~LuaEditorGameBase() override {
-	}
+	~LuaEditorGameBase() override = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
@@ -95,8 +93,7 @@ public:
 	explicit LuaPlayerBase(Widelands::PlayerNumber n) {
 		player_number_ = n;
 	}
-	~LuaPlayerBase() override {
-	}
+	~LuaPlayerBase() override = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
@@ -130,7 +127,7 @@ public:
 	Widelands::Player& get(lua_State* L, const Widelands::EditorGameBase&) const;
 
 protected:
-	inline Widelands::PlayerNumber player_number() const {
+	[[nodiscard]] inline Widelands::PlayerNumber player_number() const {
 		return player_number_;
 	}
 };

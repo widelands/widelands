@@ -32,8 +32,7 @@ public:
 	WarePriority(const WarePriority&) = default;
 	WarePriority& operator=(const WarePriority&) = default;
 
-	~WarePriority() {
-	}
+	~WarePriority() = default;
 
 	[[nodiscard]] uint32_t to_weighting_factor() const {
 		return value_;

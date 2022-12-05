@@ -1197,12 +1197,8 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 }
 
 Worker::Worker(const WorkerDescr& worker_descr)
-   : Bob(worker_descr),
-     worker_economy_(nullptr),
-     ware_economy_(nullptr),
-     supply_(nullptr),
-     transfer_(nullptr),
-     current_exp_(0) {
+   : Bob(worker_descr)
+     {
 }
 
 Worker::~Worker() {
@@ -3319,7 +3315,7 @@ Load/save support
 
 constexpr uint8_t kCurrentPacketVersion = 3;
 
-Worker::Loader::Loader() : location_(0), carried_ware_(0) {
+Worker::Loader::Loader()  {
 }
 
 void Worker::Loader::load(FileRead& fr) {

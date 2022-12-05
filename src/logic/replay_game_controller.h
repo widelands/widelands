@@ -57,8 +57,8 @@ private:
 	std::unique_ptr<Widelands::ReplayReader> replayreader_;
 	int32_t lastframe_;
 	Time time_;
-	uint32_t speed_;
-	bool paused_;
+	uint32_t speed_{1000};
+	bool paused_{false};
 };
 
 #endif  // end of include guard: WL_LOGIC_REPLAY_GAME_CONTROLLER_H

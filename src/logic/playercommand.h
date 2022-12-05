@@ -124,8 +124,7 @@ private:
 };
 
 struct CmdBuildFlag : public PlayerCommand {
-	CmdBuildFlag()  {
-	}  // For savegame loading
+	CmdBuildFlag()  = default;  // For savegame loading
 	CmdBuildFlag(const Time& t, const int32_t p, const Coords& c) : PlayerCommand(t, p), coords(c) {
 	}
 
@@ -782,8 +781,7 @@ private:
 
 /// Abstract base for commands about a message.
 struct PlayerMessageCommand : public PlayerCommand {
-	PlayerMessageCommand()  {
-	}  //  for savegames
+	PlayerMessageCommand()  = default;  //  for savegames
 	PlayerMessageCommand(const Time& t, const PlayerNumber p, const MessageId& i)
 	   : PlayerCommand(t, p), message_id_(i) {
 	}
@@ -802,8 +800,7 @@ private:
 };
 
 struct CmdMessageSetStatusRead : public PlayerMessageCommand {
-	CmdMessageSetStatusRead()  {
-	}
+	CmdMessageSetStatusRead()  = default;
 	CmdMessageSetStatusRead(const Time& t, const PlayerNumber p, const MessageId& i)
 	   : PlayerMessageCommand(t, p, i) {
 	}
@@ -820,8 +817,7 @@ struct CmdMessageSetStatusRead : public PlayerMessageCommand {
 };
 
 struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
-	CmdMessageSetStatusArchived()  {
-	}
+	CmdMessageSetStatusArchived()  = default;
 	CmdMessageSetStatusArchived(const Time& t, const PlayerNumber p, const MessageId& i)
 	   : PlayerMessageCommand(t, p, i) {
 	}
@@ -983,8 +979,7 @@ struct CmdPinnedNote : PlayerCommand {
 	explicit CmdPinnedNote(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdPinnedNote()  {
-	}
+	CmdPinnedNote()  = default;
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
@@ -1009,8 +1004,7 @@ struct CmdPickCustomStartingPosition : PlayerCommand {
 	explicit CmdPickCustomStartingPosition(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdPickCustomStartingPosition()  {
-	}
+	CmdPickCustomStartingPosition()  = default;
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 

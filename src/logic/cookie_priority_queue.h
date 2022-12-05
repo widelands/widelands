@@ -37,8 +37,7 @@ template <typename CT> struct CookiePriorityQueueBase {
 	struct Cookie {
 		Cookie() : pos(bad_pos()) {
 		}
-		~Cookie() {
-		}
+		~Cookie() = default;
 
 		/** Returns \c true if the cookie is currently managed by a queue */
 		[[nodiscard]] bool is_active() const {

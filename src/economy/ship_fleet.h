@@ -39,8 +39,7 @@ public:
 	ShipFleetDescr(char const* const init_name, char const* const init_descname)
 	   : MapObjectDescr(MapObjectType::SHIP_FLEET, init_name, init_descname) {
 	}
-	~ShipFleetDescr() override {
-	}
+	~ShipFleetDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(ShipFleetDescr);
@@ -69,10 +68,10 @@ constexpr uint32_t kRouteNotCalculated = std::numeric_limits<uint32_t>::max();
  */
 struct ShipFleet : MapObject {
 	struct PortPath {
-		int32_t cost;
+		int32_t cost{-1};
 		std::shared_ptr<Path> path;
 
-		PortPath() : cost(-1) {
+		PortPath()  {
 		}
 	};
 
@@ -136,7 +135,7 @@ private:
 	std::vector<Ship*> ships_;
 	std::vector<PortDock*> ports_;
 
-	bool act_pending_;
+	bool act_pending_{false};
 
 	std::map<std::pair<Serial, Serial>, PortPath> port_paths_;
 

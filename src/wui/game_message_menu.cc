@@ -59,8 +59,8 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   UI::PanelStyle::kWui,
                   "",
                   UI::Align::kLeft,
-                  UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
-     mode(Mode::kInbox) {
+                  UI::MultilineTextarea::ScrollMode::kScrollNormalForced)
+     {
 
 	list = new UI::Table<uintptr_t>(this, kPadding, kButtonSize + 2 * kPadding,
 	                                kWindowWidth - 2 * kPadding, kTableHeight, UI::PanelStyle::kWui,

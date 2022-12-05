@@ -42,11 +42,11 @@ class Trackable {
 	friend class BaseTrackPtr;
 
 	class Tracker {
-		uint32_t refcount_;
+		uint32_t refcount_{0};
 		Trackable* ptr_;
 
 	public:
-		explicit Tracker(Trackable* const p) : refcount_(0), ptr_(p) {
+		explicit Tracker(Trackable* const p) :  ptr_(p) {
 		}
 
 		void addref() {
@@ -74,8 +74,7 @@ class Trackable {
 		//  Putting "private:" here causes a compiler warning, even though we use
 		//  delete this.
 	protected:
-		~Tracker() {
-		}
+		~Tracker() = default;
 	};
 
 public:

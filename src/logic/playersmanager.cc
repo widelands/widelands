@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-PlayersManager::PlayersManager(EditorGameBase& egbase) : egbase_(egbase), number_of_players_(0) {
+PlayersManager::PlayersManager(EditorGameBase& egbase) : egbase_(egbase) {
 	memset(players_, 0, sizeof(players_));
 }
 

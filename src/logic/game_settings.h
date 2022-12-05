@@ -117,14 +117,9 @@ struct NoteGameSettings {
  */
 struct GameSettings {
 	GameSettings()
-	   : playernum(0),
-	     usernum(0),
-	     win_condition_duration(Widelands::kDefaultWinConditionDuration),
-	     scenario(false),
-	     multiplayer(false),
-	     savegame(false),
-	     peaceful(false),
-	     custom_starting_positions(false) {
+	   : 
+	     win_condition_duration(Widelands::kDefaultWinConditionDuration)
+	     {
 		std::unique_ptr<LuaInterface> lua(new LuaInterface);
 		std::unique_ptr<LuaTable> win_conditions(
 		   lua->run_script("scripting/win_conditions/init.lua"));
@@ -165,9 +160,9 @@ struct GameSettings {
 	[[nodiscard]] bool allows_ais(PlayerSlot slot) const;
 
 	/// Number of player position of the host player
-	int16_t playernum;
+	int16_t playernum{0};
 	/// Number of users entry
-	int8_t usernum;
+	int8_t usernum{0};
 
 	/// Name of the selected map
 	std::string mapname;
@@ -181,19 +176,19 @@ struct GameSettings {
 	int32_t win_condition_duration;
 
 	/// Is map a scenario
-	bool scenario;
+	bool scenario{false};
 
 	/// Is this a multiplayer game
-	bool multiplayer;
+	bool multiplayer{false};
 
 	/// Is a savegame selected for loading?
-	bool savegame;
+	bool savegame{false};
 
 	/// Is all fighting forbidden?
-	bool peaceful;
+	bool peaceful{false};
 
 	// Whether players may pick their own starting positions
-	bool custom_starting_positions;
+	bool custom_starting_positions{false};
 
 	std::string map_theme;
 	std::string map_background;
@@ -217,8 +212,7 @@ struct GameSettings {
  * Think of it as a mix of Model and Controller in MVC.
  */
 struct GameSettingsProvider {
-	virtual ~GameSettingsProvider() {
-	}
+	virtual ~GameSettingsProvider() = default;
 
 	virtual const GameSettings& settings() = 0;
 

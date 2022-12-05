@@ -94,8 +94,8 @@ private:
 	// Checks that there are no more subscribers.
 	~NotificationsManager();
 
-	uint32_t next_subscriber_id_;
-	uint32_t num_subscribers_;
+	uint32_t next_subscriber_id_{1};
+	uint32_t num_subscribers_{0};
 
 	// Ideally we would like to keep a list<Subscriber<T>*> instead of void* to
 	// be typesafe. Unfortunately, C++ does not allow for an easy way. I could
