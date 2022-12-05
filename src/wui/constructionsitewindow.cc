@@ -564,7 +564,7 @@ bool ConstructionSoldierCapacityBox::handle_mousewheel(int32_t x, int32_t y, uin
 		if (change == 0) {
 			return false;
 		}
-		change *= 3;
+		change *= ChangeBigStep::kSmallRange;
 	}
 	change_current(change);
 	return true;
