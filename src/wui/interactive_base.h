@@ -40,7 +40,7 @@ class MainToolbar;
 class UniqueWindowHandler;
 namespace Widelands {
 class MapObjectLoader;
-}
+} // namespace Widelands
 
 struct WorkareaPreview {
 	Widelands::Coords coords;

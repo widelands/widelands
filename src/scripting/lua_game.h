@@ -216,4 +216,4 @@ public:
 void luaopen_wlgame(lua_State*);
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_GAME_H
-}
+} // namespace LuaGame

@@ -21,6 +21,6 @@
 
 namespace Widelands {
 enum class PlayerEndResult : uint8_t { kLost = 0, kWon = 1, kResigned = 2, kUndefined = 255 };
-}
+} // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_END_RESULT_H

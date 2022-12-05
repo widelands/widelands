@@ -35,10 +35,10 @@
 
 namespace UI {
 struct ProgressWindow;
-}
+} // namespace UI
 namespace FsMenu {
 class LaunchGame;
-}
+} // namespace FsMenu
 class InteractiveBase;
 class InteractiveGameBase;  // TODO(GunChleoc): Get rid
 

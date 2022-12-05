@@ -33,7 +33,7 @@ struct GameHostImpl;
 struct Client;
 namespace FsMenu {
 class MenuCapsule;
-}
+} // namespace FsMenu
 
 /**
  * GameHost manages the lifetime of a network game in which this computer

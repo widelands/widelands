@@ -42,7 +42,7 @@ class FileWrite;
 class RenderTarget;
 namespace Widelands {
 struct MapObjectSaver;
-}
+} // namespace Widelands
 
 namespace UI {
 

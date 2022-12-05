@@ -31,7 +31,7 @@
 struct GameClientImpl;
 namespace FsMenu {
 class MenuCapsule;
-}
+} // namespace FsMenu
 
 /**
  * GameClient manages the lifetime of a network game in which this computer

@@ -71,7 +71,7 @@ private:
 	void read(lua_State*, FileRead&);
 
 	lua_State* lua_state_;
-	uint32_t idx_{LUA_REFNIL};
+	uint32_t idx_{static_cast<uint32_t>(LUA_REFNIL)};
 	uint32_t nargs_;
 	uint32_t ninput_args_{0};
 	uint32_t nreturn_values_{0};

@@ -34,7 +34,7 @@
 
 namespace Widelands {
 struct TribeBasicInfo;
-}
+} // namespace Widelands
 namespace FsMenu {
 class InternetLobby : public TwoColumnsBasicNavigationMenu {
 public:

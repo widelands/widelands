@@ -160,7 +160,7 @@ private:
 	Scrollbar scrollbar_;
 	uint32_t scrollpos_{0};  //  in pixels
 	uint32_t selection_;
-	uint32_t last_click_time_{-10000};
+	uint32_t last_click_time_{static_cast<uint32_t>(-10000)};
 	uint32_t last_selection_;  // for double clicks
 	ListselectLayout selection_mode_;
 	const Image* check_pic_;

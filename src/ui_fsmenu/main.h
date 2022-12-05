@@ -31,7 +31,7 @@
 
 namespace Widelands {
 class Game;
-}
+} // namespace Widelands
 
 namespace FsMenu {
 

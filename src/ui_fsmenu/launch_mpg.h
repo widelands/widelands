@@ -32,7 +32,7 @@ struct ChatProvider;
 struct MapData;
 namespace Widelands {
 class Game;
-}
+} // namespace Widelands
 
 namespace FsMenu {
 

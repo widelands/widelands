@@ -334,7 +334,7 @@ private:
 	uint32_t last_multiselect_;  // Remembers last selected element in multiselect mode for keyboard
 	                             // navigation
 	std::set<uint32_t> multiselect_;
-	uint32_t last_click_time_{-10000};
+	uint32_t last_click_time_{static_cast<uint32_t>(-10000)};
 	uint32_t last_selection_;  // for double clicks
 	Columns::size_type sort_column_{0};
 	bool sort_descending_;

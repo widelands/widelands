@@ -24,7 +24,7 @@
 
 namespace Widelands {
 class Game;
-}
+} // namespace Widelands
 
 /**
  * This class shows a game for somebody who is only a spectator.

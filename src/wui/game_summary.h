@@ -30,7 +30,7 @@
 class InteractiveGameBase;
 namespace Widelands {
 class Game;
-}
+} // namespace Widelands
 
 /// Shows an ingame summary window on game end
 class GameSummaryScreen : public UI::UniqueWindow {
