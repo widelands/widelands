@@ -300,10 +300,10 @@ void unset_shortcut(KeyboardShortcut);
 
 // Default step sizes for changing value of spinbox, slider, etc. on PgUp/PgDown or Ctrl+mousewheel
 namespace ChangeBigStep {
-	constexpr int32_t kSmallRange = 3;
-	constexpr int32_t kMediumRange = 5;
-	constexpr int32_t kWideRange = 10;
-} // namespace ChangeBigStep
+constexpr int32_t kSmallRange = 3;
+constexpr int32_t kMediumRange = 5;
+constexpr int32_t kWideRange = 10;
+}  // namespace ChangeBigStep
 
 // Return values for changing value of spinbox, slider, etc.
 enum class ChangeType : int32_t {

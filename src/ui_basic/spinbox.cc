@@ -431,7 +431,8 @@ void SpinBox::calculate_big_step() {
 	// but let's have several big steps in the interval otherwise
 	const int32_t big_step_multiplier =
 	   (((sbi_->max - sbi_->min) / sbi_->step_size) <= 2 * ChangeBigStep::kWideRange) ?
-	   ChangeBigStep::kMediumRange : ChangeBigStep::kWideRange;
+         ChangeBigStep::kMediumRange :
+         ChangeBigStep::kWideRange;
 
 	sbi_->big_step_size = sbi_->step_size * big_step_multiplier;
 
