@@ -32,7 +32,7 @@ struct Ship;
 // Building confirm windows
 void show_bulldoze_confirm(InteractivePlayer& player,
                            Widelands::Building& building,
-                           Widelands::PlayerImmovable* const todestroy = nullptr);
+                           Widelands::PlayerImmovable* todestroy = nullptr);
 
 void show_dismantle_confirm(InteractivePlayer& player, Widelands::Building& building);
 

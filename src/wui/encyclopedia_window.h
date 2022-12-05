@@ -35,7 +35,7 @@ class InteractiveBase;
 namespace UI {
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
-	EncyclopediaWindow(InteractiveBase&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
+	EncyclopediaWindow(InteractiveBase&, UI::UniqueWindow::Registry&, LuaInterface* lua);
 
 	UI::Panel::SaveType save_type() const override {
 		return UI::Panel::SaveType::kEncyclopedia;

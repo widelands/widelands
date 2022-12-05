@@ -56,7 +56,7 @@ public:
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle);
-	~Table();
+	~Table() override;
 
 	Notifications::Signal<> cancel;
 	Notifications::Signal<uint32_t> selected;
@@ -84,7 +84,7 @@ public:
 	void remove(uint32_t);
 	void remove_entry(Entry);
 
-	EntryRecord& add(void* const entry, bool const select_this = false);
+	EntryRecord& add(void* entry, bool select_this = false);
 
 	uint32_t size() const;
 	bool empty() const;
@@ -116,7 +116,7 @@ public:
 
 	uint32_t get_eff_w() const;
 
-	std::vector<Recti> focus_overlay_rects();
+	std::vector<Recti> focus_overlay_rects() override;
 
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
@@ -218,9 +218,9 @@ public:
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
-	void remove_entry(const void* const entry);
+	void remove_entry(const void* entry);
 
-	EntryRecord& add(void* entry = nullptr, bool const do_select = false);
+	EntryRecord& add(void* entry = nullptr, bool do_select = false);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -267,8 +267,9 @@ public:
 	};
 	void scroll_to_item(int32_t item);
 	EntryRecord& get_selected_record() const {
-		if (selection_ == no_selection_index())
+		if (selection_ == no_selection_index()) {
 			throw NoSelection();
+}
 		assert(selection_ < entry_records_.size());
 		return *entry_records_.at(selection_);
 	}

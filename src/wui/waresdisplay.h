@@ -38,7 +38,7 @@ using WaresOrderCoords = std::map<Widelands::DescriptionIndex, Widelands::Coords
 class AbstractWaresDisplay : public UI::Panel {
 public:
 	AbstractWaresDisplay(
-	   UI::Panel* const parent,
+	   UI::Panel* parent,
 	   int32_t x,
 	   int32_t y,
 	   const Widelands::TribeDescr&,
@@ -71,10 +71,10 @@ public:
 		return type_;
 	}
 
-	int32_t get_hgap() {
+	int32_t get_hgap() const {
 		return hgap_;
 	}
-	int32_t get_vgap() {
+	int32_t get_vgap() const {
 		return vgap_;
 	}
 	void set_hgap(int32_t, bool = true);
@@ -164,7 +164,7 @@ must be valid while they are registered with this class.
 */
 class WaresDisplay : public AbstractWaresDisplay {
 public:
-	WaresDisplay(UI::Panel* const parent,
+	WaresDisplay(UI::Panel* parent,
 	             int32_t x,
 	             int32_t y,
 	             const Widelands::TribeDescr&,
@@ -187,7 +187,7 @@ private:
 
 class StockMenuWaresDisplay : public WaresDisplay {
 public:
-	StockMenuWaresDisplay(UI::Panel* const parent,
+	StockMenuWaresDisplay(UI::Panel* parent,
 	                      int32_t x,
 	                      int32_t y,
 	                      const Widelands::Player&,

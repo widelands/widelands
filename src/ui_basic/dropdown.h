@@ -77,7 +77,7 @@ protected:
 	             uint32_t max_list_items,
 	             int button_dimension,
 	             const std::string& label,
-	             const DropdownType type,
+	             DropdownType type,
 	             PanelStyle style,
 	             ButtonStyle button_style);
 	~BaseDropdown() override;
@@ -116,7 +116,7 @@ public:
 	void set_disable_style(UI::ButtonDisableStyle disable_style);
 
 	/// Whether the dropdown has no elements to select.
-	bool empty() {
+	bool empty() const {
 		return size() == 0;
 	}
 
@@ -184,7 +184,7 @@ protected:
 	void add(const std::string& name,
 	         uint32_t value,
 	         const Image* pic,
-	         const bool select_this,
+	         bool select_this,
 	         const std::string& tooltip_text,
 	         const std::string& hotkey);
 

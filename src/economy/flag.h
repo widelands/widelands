@@ -140,7 +140,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool is_dead_end() const;
 
 	bool has_capacity() const;
-	uint32_t total_capacity() {
+	uint32_t total_capacity() const {
 		return ware_capacity_;
 	}
 	uint32_t current_wares() const {
@@ -160,7 +160,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void call_carrier(Game&, WareInstance&, PlayerImmovable* nextstep);
 	void update_wares(Game&, Flag* other);
 
-	void remove_ware(EditorGameBase&, WareInstance* const);
+	void remove_ware(EditorGameBase&, WareInstance* );
 
 	void log_general_info(const EditorGameBase&) const override;
 

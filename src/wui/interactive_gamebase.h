@@ -45,14 +45,14 @@ public:
 	// 'map_views', hence this function.
 	virtual void draw_map_view(MapView* given_map_view, RenderTarget* dst) = 0;
 
-	void set_sel_pos(Widelands::NodeAndTriangle<> const center) override;
+	void set_sel_pos(Widelands::NodeAndTriangle<> center) override;
 
 	virtual void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) = 0;
 
 	void show_watch_window(Widelands::Bob&);
 
 	bool try_show_ship_window();
-	bool is_multiplayer() {
+	bool is_multiplayer() const {
 		return multiplayer_;
 	}
 

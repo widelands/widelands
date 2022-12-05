@@ -42,7 +42,7 @@ public:
 	void blit(const Rectf& dst,
 	          const Image&,
 	          const Rectf& src_rect,
-	          const float opacity,
+	          float opacity,
 	          BlendMode blend_mode);
 
 	/// This draws a playercolor blended image.

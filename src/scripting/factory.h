@@ -48,6 +48,6 @@ public:
 	void push_player(lua_State* L, Widelands::PlayerNumber plr) override;
 };
 
-Factory& get_factory(lua_State* const L);
+Factory& get_factory(lua_State* L);
 
 #endif  // end of include guard: WL_SCRIPTING_FACTORY_H

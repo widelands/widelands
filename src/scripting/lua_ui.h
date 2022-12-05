@@ -99,7 +99,7 @@ class LuaButton : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaButton);
 
-	LuaButton() : LuaPanel() {
+	LuaButton()  {
 	}
 	explicit LuaButton(UI::Panel* p) : LuaPanel(p) {
 	}
@@ -131,7 +131,7 @@ class LuaDropdown : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaDropdown);
 
-	LuaDropdown() : LuaPanel() {
+	LuaDropdown()  {
 	}
 	explicit LuaDropdown(UI::Panel* p) : LuaPanel(p) {
 	}
@@ -167,7 +167,7 @@ class LuaTab : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaTab);
 
-	LuaTab() : LuaPanel() {
+	LuaTab()  {
 	}
 	explicit LuaTab(UI::Panel* p) : LuaPanel(p) {
 	}
@@ -199,7 +199,7 @@ class LuaWindow : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaWindow);
 
-	LuaWindow() : LuaPanel() {
+	LuaWindow()  {
 	}
 	explicit LuaWindow(UI::Panel* p) : LuaPanel(p) {
 	}
@@ -230,7 +230,7 @@ class LuaMapView : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaMapView);
 
-	LuaMapView() : LuaPanel() {
+	LuaMapView()  {
 	}
 	explicit LuaMapView(MapView* p) : LuaPanel(p) {
 	}

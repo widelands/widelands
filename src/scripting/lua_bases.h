@@ -130,7 +130,7 @@ public:
 	Widelands::Player& get(lua_State* L, const Widelands::EditorGameBase&) const;
 
 protected:
-	inline Widelands::PlayerNumber player_number() {
+	inline Widelands::PlayerNumber player_number() const {
 		return player_number_;
 	}
 };

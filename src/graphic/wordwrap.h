@@ -111,7 +111,7 @@ private:
 	                         uint32_t selection_start_x,
 	                         uint32_t selection_end_line,
 	                         uint32_t selection_end_x,
-	                         const int fontheight,
+	                         int fontheight,
 	                         uint32_t line,
 	                         const Vector2i& point) const;
 	[[nodiscard]] uint32_t line_index(int32_t y) const;

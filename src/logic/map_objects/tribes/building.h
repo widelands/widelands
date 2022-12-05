@@ -253,7 +253,7 @@ public:
 		PCap_Enhancable = 1 << 2,  // can be enhanced to something
 	};
 
-public:
+
 	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
 
 	explicit Building(const BuildingDescr&);
@@ -363,7 +363,7 @@ public:
 	virtual bool is_present(Worker& worker) const;
 
 	void send_message(Game& game,
-	                  const Message::Type msgtype,
+	                  Message::Type msgtype,
 	                  const std::string& title,
 	                  const std::string& icon_filename,
 	                  const std::string& heading,

@@ -29,7 +29,7 @@ struct EditorToolsizeMenu : public UI::UniqueWindow {
 	EditorToolsizeMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
 	void update(uint32_t);
 	void set_buttons_enabled(bool enable);
-	uint32_t value() {
+	uint32_t value() const {
 		return value_;
 	}
 

@@ -84,7 +84,7 @@ public:
 	/**
 	 * Sets whether the game is paused.
 	 */
-	virtual void set_paused(const bool paused) = 0;
+	virtual void set_paused(bool paused) = 0;
 
 	/**
 	 * Toggle pause state (convenience function)

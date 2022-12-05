@@ -114,8 +114,8 @@ struct CoordPath {
 	[[nodiscard]] int32_t get_index(const Coords& field) const;
 
 	void reverse();
-	void truncate(const std::vector<char>::size_type after);
-	void trim_start(const std::vector<char>::size_type before);
+	void truncate(std::vector<char>::size_type after);
+	void trim_start(std::vector<char>::size_type before);
 	void append(const Map& map, const Path& tail);
 	void append(const CoordPath& tail);
 

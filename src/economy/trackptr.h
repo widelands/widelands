@@ -56,13 +56,15 @@ class Trackable {
 		void deref() {
 			assert(refcount_ > 0);
 			--refcount_;
-			if (!refcount_ && !ptr_)
+			if ((refcount_ == 0u) && (ptr_ == nullptr)) {
 				delete this;
+}
 		}
 		void clear() {
 			ptr_ = nullptr;
-			if (!refcount_)
+			if (refcount_ == 0u) {
 				delete this;
+}
 		}
 
 		Trackable* get() {
@@ -104,46 +106,54 @@ protected:
 	BaseTrackPtr() : tracker_(nullptr) {
 	}
 	~BaseTrackPtr() {
-		if (tracker_)
+		if (tracker_ != nullptr) {
 			tracker_->deref();
+}
 	}
 	explicit BaseTrackPtr(Trackable* const t) {
-		if (t) {
+		if (t != nullptr) {
 			tracker_ = t->tracker_;
 			tracker_->addref();
-		} else
+		} else {
 			tracker_ = nullptr;
+}
 	}
 	BaseTrackPtr(const BaseTrackPtr& o) {
 		tracker_ = o.tracker_;
-		if (tracker_)
+		if (tracker_ != nullptr) {
 			tracker_->addref();
+}
 	}
 
 	void set(const BaseTrackPtr& o) {
-		if (tracker_)
+		if (tracker_ != nullptr) {
 			tracker_->deref();
+}
 
 		tracker_ = o.tracker_;
-		if (tracker_)
+		if (tracker_ != nullptr) {
 			tracker_->addref();
+}
 	}
 
 	void set(Trackable* const t) {
-		if (tracker_)
+		if (tracker_ != nullptr) {
 			tracker_->deref();
+}
 
-		if (t) {
+		if (t != nullptr) {
 			tracker_ = t->tracker_;
 			tracker_->addref();
-		} else
+		} else {
 			tracker_ = nullptr;
+}
 	}
 
 	Trackable* get() const {
-		if (tracker_) {
-			if (Trackable* const t = tracker_->get())
+		if (tracker_ != nullptr) {
+			if (Trackable* const t = tracker_->get()) {
 				return t;
+}
 
 			tracker_->deref();
 			tracker_ = nullptr;

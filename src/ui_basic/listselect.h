@@ -57,17 +57,17 @@ struct BaseListselect : public Panel {
 	Notifications::Signal<uint32_t> double_clicked;
 
 	void clear();
-	void sort(const uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
+	void sort(uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
 	/**
 	 * Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
 	 */
 	void add(const std::string& name,
 	         uint32_t entry,
 	         const Image* pic,
-	         const bool select_this,
+	         bool select_this,
 	         const std::string& tooltip_text,
 	         const std::string& hotkey,
-	         const unsigned indent);
+	         unsigned indent);
 
 	void remove(uint32_t);
 	void remove(const char* str);
@@ -137,7 +137,7 @@ private:
 		                     const Image* init_pic,
 		                     const std::string& tooltip_text,
 		                     const std::string& hotkey_text,
-		                     const unsigned indent,
+		                     unsigned indent,
 		                     const UI::TableStyleInfo& style);
 		~EntryRecord();
 

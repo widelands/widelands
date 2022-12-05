@@ -54,7 +54,7 @@ class WareInstance : public MapObject {
 	MO_DESCR(WareDescr)
 
 public:
-	WareInstance(DescriptionIndex, const WareDescr* const);
+	WareInstance(DescriptionIndex, const WareDescr* );
 	~WareInstance() override;
 
 	MapObject* get_location(const EditorGameBase& egbase) const {

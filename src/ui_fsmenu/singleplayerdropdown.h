@@ -108,7 +108,7 @@ public:
 	                          int32_t y,
 	                          uint32_t w,
 	                          int button_dimension,
-	                          GameSettingsProvider* const settings,
+	                          GameSettingsProvider* settings,
 	                          PlayerSlot id);
 	void rebuild() override;
 
@@ -125,7 +125,7 @@ public:
 	                               int32_t y,
 	                               uint32_t w,
 	                               int button_dimension,
-	                               GameSettingsProvider* const settings,
+	                               GameSettingsProvider* settings,
 	                               PlayerSlot id);
 	void rebuild() override;
 
@@ -144,7 +144,7 @@ public:
 	                              int32_t y,
 	                              uint32_t w,
 	                              int button_dimension,
-	                              GameSettingsProvider* const settings,
+	                              GameSettingsProvider* settings,
 	                              PlayerSlot id);
 
 	void rebuild() override;
@@ -163,7 +163,7 @@ public:
 	                         int32_t y,
 	                         uint32_t w,
 	                         int button_dimension,
-	                         GameSettingsProvider* const settings,
+	                         GameSettingsProvider* settings,
 	                         PlayerSlot id);
 
 	void rebuild() override;

@@ -34,7 +34,7 @@ enum class StockPolicy;
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
 	ConstructionsiteInformation()
-	   : becomes(nullptr), was(nullptr), intermediates(), totaltime(0), completedtime(0) {
+	   : becomes(nullptr), was(nullptr),  totaltime(0), completedtime(0) {
 	}
 
 	/// Draw the partly finished constructionsite

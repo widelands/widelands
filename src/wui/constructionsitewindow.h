@@ -49,7 +49,7 @@ public:
 	void set_current(uint32_t value);
 	void change_current(int32_t delta);
 	Notifications::Signal<> changed;
-	uint32_t get_current() {
+	uint32_t get_current() const {
 		return current_;
 	}
 	bool handle_key(bool down, SDL_Keysym code) override;

@@ -49,10 +49,11 @@ struct EditorToolAction {
 	}
 
 	~EditorToolAction() {
-		if (args->refcount <= 1)
+		if (args->refcount <= 1) {
 			delete args;
-		else
+		} else {
 			args->refcount--;
+}
 	}
 
 	EditorToolAction(const EditorToolAction& b)

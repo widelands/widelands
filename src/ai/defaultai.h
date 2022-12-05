@@ -72,7 +72,7 @@ namespace AI {
 //   should be trained if inputs_ get filled again.).
 struct DefaultAI : ComputerPlayer {
 
-	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, AiType);
+	DefaultAI(Widelands::Game&, Widelands::PlayerNumber, AiType);
 	~DefaultAI() override;
 	void think() override;
 
@@ -206,7 +206,7 @@ private:
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(const Widelands::Road&);
 	bool dismantle_dead_ends();
-	void collect_nearflags(std::map<uint32_t, NearFlag>&, const Widelands::Flag&, const uint16_t);
+	void collect_nearflags(std::map<uint32_t, NearFlag>&, const Widelands::Flag&, uint16_t);
 	// calculating distances from local warehouse to flags
 	void check_flag_distances(const Time&);
 	void diplomacy_actions(const Time&);
@@ -266,8 +266,8 @@ private:
 	void initiate_dismantling(ProductionSiteObserver&, const Time&);
 
 	// Checks whether first value is in range, or lesser then...
-	template <typename T> void check_range(const T, const T, const T, const char*);
-	template <typename T> void check_range(const T, const T, const char*);
+	template <typename T> void check_range(T, T, T, const char*);
+	template <typename T> void check_range(T, T, const char*);
 
 	// Remove a member from std::deque
 	template <typename T> bool remove_from_dqueue(std::deque<T const*>&, T const*);

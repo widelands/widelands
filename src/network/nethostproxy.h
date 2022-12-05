@@ -89,7 +89,7 @@ private:
 			kDisconnected
 		};
 
-		Client() : state_(State::kConnecting), received_() {
+		Client() : state_(State::kConnecting) {
 		}
 
 		// deleted since RecvPacket does not offer a copy constructor

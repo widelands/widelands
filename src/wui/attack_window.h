@@ -66,7 +66,7 @@ private:
 	UI::Textarea& add_text(UI::Box& parent,
 	                       const std::string& str,
 	                       UI::Align alignment,
-	                       const UI::FontStyle style);
+	                       UI::FontStyle style);
 
 	void init_slider(const std::vector<Widelands::Soldier*>&);
 	void init_soldier_lists(const std::vector<Widelands::Soldier*>&);
@@ -90,12 +90,12 @@ private:
 
 	// A SoldierPanel is not applicable here as it's keyed to a building and thinks too much
 	struct ListOfSoldiers : public UI::Panel {
-		ListOfSoldiers(UI::Panel* const parent,
+		ListOfSoldiers(UI::Panel* parent,
 		               AttackWindow* parent_box,
-		               int32_t const x,
-		               int32_t const y,
-		               int const w,
-		               int const h,
+		               int32_t x,
+		               int32_t y,
+		               int w,
+		               int h,
 		               bool restrict_rows = false);
 
 		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;

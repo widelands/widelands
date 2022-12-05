@@ -134,7 +134,7 @@ constexpr uint16_t kWhFarButReachable = 250;
 constexpr uint16_t kWhNotReachable = 500;
 
 struct CheckStepRoadAI {
-	CheckStepRoadAI(Widelands::Player* const pl, uint8_t const mc, bool const oe);
+	CheckStepRoadAI(Widelands::Player* pl, uint8_t mc, bool oe);
 
 	[[nodiscard]] bool allowed(const Widelands::Map&,
 	                           Widelands::FCoords start,
@@ -152,7 +152,7 @@ struct CheckStepRoadAI {
 // plus one step more to a field with own immovable. So that also flags and buildings are
 // included in resulting list
 struct CheckStepOwnTerritory {
-	CheckStepOwnTerritory(Widelands::Player* const pl, uint8_t const mc, bool const oe);
+	CheckStepOwnTerritory(Widelands::Player* pl, uint8_t mc, bool oe);
 
 	[[nodiscard]] bool allowed(const Widelands::Map&,
 	                           Widelands::FCoords start,
@@ -299,7 +299,7 @@ struct NearFlag {
 		}
 	};
 	NearFlag();
-	NearFlag(const Widelands::Flag* f, int32_t const c);
+	NearFlag(const Widelands::Flag* f, int32_t c);
 
 	bool operator<(const NearFlag& f) const {
 		return current_road_distance > f.current_road_distance;
@@ -678,16 +678,16 @@ struct Neuron {
 	Neuron(int8_t, uint8_t, uint16_t);
 	void recalculate();
 	void set_weight(int8_t w);
-	int8_t get_weight() {
+	int8_t get_weight() const {
 		return weight;
 	}
 	int8_t get_result(size_t);
 	int8_t get_result_safe(int32_t, bool = false);
 	void set_type(uint8_t);
-	uint8_t get_type() {
+	uint8_t get_type() const {
 		return type;
 	}
-	uint16_t get_id() {
+	uint16_t get_id() const {
 		return id;
 	}
 
@@ -705,7 +705,7 @@ struct FNeuron {
 	bool get_result(bool, bool, bool, bool bool4 = true, bool bool5 = true);
 	bool get_position(uint8_t);
 	uint32_t get_int();
-	uint16_t get_id() {
+	uint16_t get_id() const {
 		return id;
 	}
 
@@ -796,7 +796,7 @@ struct MilitarySiteSizeObserver {
 
 // this represents a scheduler task
 struct SchedulerTask {
-	SchedulerTask(const Time& time, const SchedulerTaskId t, const uint8_t p, const char* d);
+	SchedulerTask(const Time& time, SchedulerTaskId t, uint8_t p, const char* d);
 
 	bool operator<(const SchedulerTask& other) const;
 
@@ -968,7 +968,7 @@ struct FlagCandidates {
 		uint16_t cand_flag_distance_to_wh;
 		// Scoring is considering multiple things
 		[[nodiscard]] int16_t score() const;
-		bool is_buildable() {
+		bool is_buildable() const {
 			return possible_road_distance > 0;
 		}
 		bool operator<(const Candidate& other) const {
@@ -993,7 +993,7 @@ public:
 	uint32_t count() {
 		return flags_.size();
 	}
-	FlagCandidates::Candidate* get_winner(const int16_t = 0);
+	FlagCandidates::Candidate* get_winner(int16_t = 0);
 };
 }  // namespace AI
 

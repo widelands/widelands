@@ -110,7 +110,7 @@ public:
 
 	// loading stuff
 	void load_all_tribes();
-	void allocate_player_maps();
+	void allocate_player_maps() const;
 	virtual void postload();
 	void postload_addons();
 	void postload_tribes();
@@ -142,7 +142,7 @@ public:
 	void remove_loader_ui();
 	UI::ProgressWindow* release_loader_ui();
 
-	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
+	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype) const;
 
 	// warping stuff. instantly creating map_objects
 	Building& warp_building(const Coords&,
@@ -170,7 +170,7 @@ public:
 	                                      const std::string& name,
 	                                      Player* owner,
 	                                      const BuildingDescr* former_building);
-	Bob& create_ship(const Coords&, const DescriptionIndex ship_type_idx, Player* owner = nullptr);
+	Bob& create_ship(const Coords&, DescriptionIndex ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 	Bob& create_worker(const Coords&, DescriptionIndex worker, Player* owner);
 
@@ -182,14 +182,14 @@ public:
 		return ibase_.get();
 	}
 
-	void inform_players_about_ownership(MapIndex, PlayerNumber);
-	void inform_players_about_immovable(MapIndex, MapObjectDescr const*);
+	void inform_players_about_ownership(MapIndex, PlayerNumber) const;
+	void inform_players_about_immovable(MapIndex, MapObjectDescr const*) const;
 	void inform_players_about_road(FCoords, MapObjectDescr const*);
 	void inform_players_about_waterway(FCoords, MapObjectDescr const*);
 
 	void unconquer_area(PlayerArea<Area<FCoords>>, PlayerNumber destroying_player = 0);
 	void conquer_area(PlayerArea<Area<FCoords>>, bool conquer_guarded_location = false);
-	void conquer_area_no_building(PlayerArea<Area<FCoords>> const);
+	void conquer_area_no_building(PlayerArea<Area<FCoords>> );
 
 	void cleanup_objects() {
 		objects().cleanup(*this);
@@ -200,7 +200,7 @@ public:
 	Time& get_gametime_pointer() {
 		return gametime_;
 	}
-	void set_ibase(InteractiveBase* const b);
+	void set_ibase(InteractiveBase* b);
 
 	/// Lua frontend, used to run Lua scripts
 	virtual LuaInterface& lua() {
@@ -274,7 +274,7 @@ private:
 	void change_field_owner(const FCoords& fc, PlayerNumber new_owner);
 
 	Immovable& do_create_immovable(const Coords& c,
-	                               DescriptionIndex const idx,
+	                               DescriptionIndex idx,
 	                               Player* owner,
 	                               const BuildingDescr* former_building_descr);
 

@@ -94,8 +94,8 @@ private:
 	// Packs as many blocks from 'blocks_' that still have done = false into a
 	// fresh texture atlas that will not grow bigger than 'max_size' x
 	// 'max_size'.
-	std::unique_ptr<Texture> pack_as_many_as_possible(const int max_dimension,
-	                                                  const int texture_atlas_index,
+	std::unique_ptr<Texture> pack_as_many_as_possible(int max_dimension,
+	                                                  int texture_atlas_index,
 	                                                  std::vector<PackedTexture>* pack_info);
 	static Node* find_node(Node* node, int w, int h);
 

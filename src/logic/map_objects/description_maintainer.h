@@ -32,7 +32,7 @@ namespace Widelands {
 template <typename T> struct DescriptionMaintainer {
 	// Adds the 'entry', will assert() if it is already registered. Returns the
 	// index of the entry. Ownership is taken.
-	Widelands::DescriptionIndex add(T* entry);
+	Widelands::DescriptionIndex add(T* item);
 
 	// Returns the number of entries in the container.
 	[[nodiscard]] Widelands::DescriptionIndex size() const {
@@ -84,8 +84,9 @@ template <typename T> Widelands::DescriptionIndex DescriptionMaintainer<T>::add(
 
 template <typename T> T* DescriptionMaintainer<T>::exists(const std::string& name) const {
 	auto index = get_index(name);
-	if (index == Widelands::INVALID_INDEX)
+	if (index == Widelands::INVALID_INDEX) {
 		return nullptr;
+}
 	return items_[index].get();
 }
 

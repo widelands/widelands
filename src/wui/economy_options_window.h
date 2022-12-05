@@ -102,9 +102,9 @@ public:
 
 private:
 	struct TargetWaresDisplay : public AbstractWaresDisplay {
-		TargetWaresDisplay(UI::Panel* const parent,
-		                   int32_t const x,
-		                   int32_t const y,
+		TargetWaresDisplay(UI::Panel* parent,
+		                   int32_t x,
+		                   int32_t y,
 		                   Widelands::Serial serial,
 		                   Widelands::Player* player,
 		                   Widelands::WareWorker type,
@@ -113,7 +113,7 @@ private:
 		void set_economy(Widelands::Serial serial);
 
 	protected:
-		std::string info_for_ware(Widelands::DescriptionIndex const ware) override;
+		std::string info_for_ware(Widelands::DescriptionIndex ware) override;
 
 	private:
 		Widelands::Serial serial_;

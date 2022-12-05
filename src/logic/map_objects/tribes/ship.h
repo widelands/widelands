@@ -196,8 +196,9 @@ struct Ship : Bob {
 
 	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimmable
 	bool exp_dir_swimmable(Direction dir) const {
-		if (!expedition_)
+		if (!expedition_) {
 			return false;
+}
 		return expedition_->swimmable[dir - 1];
 	}
 
@@ -208,11 +209,14 @@ struct Ship : Bob {
 
 	/// \returns whether the expedition ship is close to the coast
 	bool exp_close_to_coast() const {
-		if (!expedition_)
+		if (!expedition_) {
 			return false;
-		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir)
-			if (!expedition_->swimmable[dir - 1])
+}
+		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+			if (!expedition_->swimmable[dir - 1]) {
 				return true;
+}
+}
 		return false;
 	}
 

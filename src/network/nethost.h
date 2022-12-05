@@ -37,7 +37,7 @@ public:
 	 * \param port The port to listen on.
 	 * \return A pointer to a listening \c NetHost object or a nullptr if the connection failed.
 	 */
-	static std::unique_ptr<NetHost> listen(const uint16_t port);
+	static std::unique_ptr<NetHost> listen(uint16_t port);
 
 	/**
 	 * Closes the server.

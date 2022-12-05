@@ -32,7 +32,7 @@ struct LiteralNode : AbstractNode {
 			throw wexception("Attempt to call a literal node with a value");
 		}
 		const char* it = content_.c_str();
-		for (size_t l = len_; l; --l, ++out, ++it) {
+		for (size_t l = len_; l != 0u; --l, ++out, ++it) {
 			*out = *it;
 		}
 		return out;
@@ -67,7 +67,7 @@ struct CharNode : FormatNode {
 			*out = '^';
 			*(out + 1) = '@' + arg.char_val;
 			return out + 2;
-		} else if (arg.char_val == 0x7f) {
+		} if (arg.char_val == 0x7f) {
 			*out = '^';
 			*(out + 1) = '?';
 			return out + 2;

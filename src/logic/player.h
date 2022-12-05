@@ -232,10 +232,10 @@ public:
 		     map_object_descr(nullptr),
 		     dismantlesite(),
 		     is_constructionsite(false),
-		     border(0),
-		     border_r(0),
-		     border_br(0),
-		     border_bl(0),
+		     border(false),
+		     border_r(false),
+		     border_br(false),
+		     border_bl(false),
 		     owner(0) {
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
@@ -580,12 +580,12 @@ public:
 	// Statistics
 	const BuildingStatsVector& get_building_statistics(const DescriptionIndex& i) const;
 
-	std::vector<uint32_t> const* get_ware_production_statistics(DescriptionIndex const) const;
+	std::vector<uint32_t> const* get_ware_production_statistics(DescriptionIndex ) const;
 
-	std::vector<uint32_t> const* get_ware_consumption_statistics(DescriptionIndex const) const;
+	std::vector<uint32_t> const* get_ware_consumption_statistics(DescriptionIndex ) const;
 
-	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
-	std::vector<uint32_t> const* get_worker_stock_statistics(DescriptionIndex const) const;
+	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex ) const;
+	std::vector<uint32_t> const* get_worker_stock_statistics(DescriptionIndex ) const;
 
 	void init_statistics();
 	void read_statistics(FileRead&, uint16_t packet_version);
@@ -629,7 +629,7 @@ public:
 	uint32_t count_soldiers_e(unsigned) const;
 
 	bool is_muted(DescriptionIndex di) const {
-		return muted_building_types_.count(di);
+		return muted_building_types_.count(di) != 0u;
 	}
 	void set_muted(DescriptionIndex, bool mute);
 
@@ -780,7 +780,7 @@ struct NotePlayerDetailsEvent {
 };
 
 void find_former_buildings(const Descriptions& descriptions,
-                           const DescriptionIndex bi,
+                           DescriptionIndex bi,
                            FormerBuildings* former_buildings);
 }  // namespace Widelands
 

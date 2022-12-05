@@ -71,7 +71,7 @@ private:
 
 	void rebuild_dirstruct(AddOns::MapsAddon*, const std::vector<std::string>& select);
 	void do_recursively_rebuild_dirstruct(const AddOns::MapsAddon::DirectoryTree* tree,
-	                                      const unsigned level,
+	                                      unsigned level,
 	                                      const std::string& path,
 	                                      const std::vector<std::string>& map_path,
 	                                      const std::vector<std::string>& select);

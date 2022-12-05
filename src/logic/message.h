@@ -125,7 +125,7 @@ struct Message {
 		if (type_ >= Widelands::Message::Type::kWarfare) {
 			return Widelands::Message::Type::kWarfare;
 
-		} else if (type_ >= Widelands::Message::Type::kEconomy &&
+		} if (type_ >= Widelands::Message::Type::kEconomy &&
 		           type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
 			return Widelands::Message::Type::kEconomy;
 		}

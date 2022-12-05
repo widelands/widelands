@@ -42,7 +42,7 @@ struct DirAnimations {
 	}
 
 	operator bool() const {
-		return animations_[0];
+		return animations_[0] != 0u;
 	}
 
 private:

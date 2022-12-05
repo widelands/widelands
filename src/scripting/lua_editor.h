@@ -34,7 +34,7 @@ public:
 
 	LUNA_CLASS_HEAD(LuaPlayer);
 
-	LuaPlayer() : LuaBases::LuaPlayerBase() {
+	LuaPlayer()  {
 	}
 	explicit LuaPlayer(Widelands::PlayerNumber n) : LuaBases::LuaPlayerBase(n) {
 	}

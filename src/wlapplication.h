@@ -139,7 +139,7 @@ struct InputCallback {
 // TODO(sirver): this class makes no sense for c++ - most of these should be
 // stand alone functions.
 struct WLApplication {
-	static WLApplication* get(int const argc = 0, char const** argv = nullptr);
+	static WLApplication* get(int argc = 0, char const** argv = nullptr);
 	~WLApplication();
 
 	void run();
@@ -154,7 +154,7 @@ struct WLApplication {
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
 	[[nodiscard]] bool get_key_state(SDL_Scancode const key) const {
-		return SDL_GetKeyboardState(nullptr)[key];
+		return SDL_GetKeyboardState(nullptr)[key] != 0u;
 	}
 
 	// @{
@@ -168,7 +168,7 @@ struct WLApplication {
 	//
 	/// Find out whether the mouse is currently pressed
 	[[nodiscard]] bool is_mouse_pressed() const {
-		return SDL_GetMouseState(nullptr, nullptr);
+		return SDL_GetMouseState(nullptr, nullptr) != 0u;
 	}
 
 	/// Swap left and right mouse key?

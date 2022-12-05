@@ -79,7 +79,7 @@ public:
 
 	/// Reset the checksumming machinery to its initial state.
 	void reset() {
-		can_handle_data = 1;
+		can_handle_data = true;
 		ctx.A = 0x67452301;
 		ctx.B = 0xefcdab89;
 		ctx.C = 0x98badcfe;
@@ -102,7 +102,7 @@ public:
 	/// After this, no more data may be written to the checksum.
 	void finish_checksum() {
 		assert(can_handle_data);
-		can_handle_data = 0;
+		can_handle_data = false;
 		md5_finish_ctx(&ctx, sum.data);
 	}
 
@@ -125,7 +125,7 @@ class DummyMD5Base {
 public:
 	virtual ~DummyMD5Base() {
 	}
-	virtual void data(const void* const, const size_t) = 0;
+	virtual void data(const void* , size_t) = 0;
 };
 using SimpleMD5Checksum = MD5Checksum<DummyMD5Base>;
 

@@ -40,13 +40,13 @@ struct StatisticsPlotStyleInfo {
 	}
 
 	[[nodiscard]] const UI::FontStyleInfo& x_tick_font() const {
-		return *x_tick_font_.get();
+		return *x_tick_font_;
 	}
 	[[nodiscard]] const UI::FontStyleInfo& y_min_value_font() const {
-		return *y_min_value_font_.get();
+		return *y_min_value_font_;
 	}
 	[[nodiscard]] const UI::FontStyleInfo& y_max_value_font() const {
-		return *y_max_value_font_.get();
+		return *y_max_value_font_;
 	}
 	[[nodiscard]] const RGBColor& axis_line_color() const {
 		return axis_line_color_;

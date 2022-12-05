@@ -138,8 +138,8 @@ struct GameSettings {
 		}
 		for (const auto& pair : AddOns::g_addons) {
 			if (pair.first->category == AddOns::AddOnCategory::kWinCondition && pair.second) {
-				const std::string filename = kAddOnDir + g_fs->file_separator() +
-				                             pair.first->internal_name + g_fs->file_separator() +
+				const std::string filename = kAddOnDir + LayeredFileSystem::file_separator() +
+				                             pair.first->internal_name + LayeredFileSystem::file_separator() +
 				                             "init.lua";
 				if (g_fs->file_exists(filename)) {
 					win_condition_scripts.push_back(filename);
@@ -239,12 +239,12 @@ struct GameSettingsProvider {
 	                     uint32_t maxplayers,
 	                     bool savegame = false) = 0;
 	virtual void set_player_state(uint8_t number, PlayerSettings::State) = 0;
-	virtual void set_player_ai(uint8_t number, const std::string&, bool const random_ai = false) = 0;
+	virtual void set_player_ai(uint8_t number, const std::string&, bool random_ai = false) = 0;
 	// Multiplayer no longer toggles per button
 	virtual void next_player_state(uint8_t /* number */) {
 	}
 	virtual void
-	set_player_tribe(uint8_t number, const std::string&, bool const random_tribe = false) = 0;
+	set_player_tribe(uint8_t number, const std::string&, bool random_tribe = false) = 0;
 	virtual void set_player_init(uint8_t number, uint8_t index) = 0;
 	virtual void set_player_name(uint8_t number, const std::string&) = 0;
 	virtual void set_player(uint8_t number, const PlayerSettings&) = 0;
@@ -270,8 +270,9 @@ struct GameSettingsProvider {
 	// For retrieving tips texts
 	struct NoTribe {};
 	const std::string& get_players_tribe() {
-		if (!has_players_tribe())
+		if (!has_players_tribe()) {
 			throw NoTribe();
+}
 		return settings().players[settings().playernum].tribe;
 	}
 };

@@ -72,11 +72,11 @@ struct EditBox : public Panel {
 		warning_ = warn;
 	}
 
-	bool has_warning() {
+	bool has_warning() const {
 		return warning_;
 	}
 
-	bool is_password() {
+	bool is_password() const {
 		return password_;
 	}
 

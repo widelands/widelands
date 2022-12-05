@@ -69,20 +69,21 @@ struct WuiPlotArea : public UI::Panel {
 	}
 
 	void set_time_id(uint32_t time) {
-		if (time == game_time_id_)
+		if (time == game_time_id_) {
 			set_time(TIME_GAME);
-		else
+		} else {
 			set_time(static_cast<TIME>(time));
+}
 		needs_update_ = true;
 	}
 	TIME get_time() const {
 		return static_cast<TIME>(time_);
 	}
 	int32_t get_time_id() const {
-		if (time_ == TIME_GAME)
+		if (time_ == TIME_GAME) {
 			return game_time_id_;
-		else
-			return time_;
+}
+					return time_;
 	}
 
 	uint32_t get_game_time_id();
@@ -101,8 +102,8 @@ protected:
 	               uint32_t highest_scale);
 	void draw_plot_line(RenderTarget& dst,
 	                    std::vector<uint32_t> const* dataset,
-	                    uint32_t const highest_scale,
-	                    float const sub,
+	                    uint32_t highest_scale,
+	                    float sub,
 	                    const RGBColor& color,
 	                    int32_t yoffset);
 	uint32_t get_plot_time() const;

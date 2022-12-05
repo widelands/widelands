@@ -91,7 +91,7 @@ struct InvertDirDropdown : public UI::Dropdown<uint8_t> {
 struct KeymodAndDirBox : public UI::Box {
 	KeymodAndDirBox(UI::Panel* parent,
 	                const std::string& title,
-	                const std::list<KeymodAndDirBox*> shared_scope_list,
+	                std::list<KeymodAndDirBox*> shared_scope_list,
 	                uint16_t* keymod,
 	                uint8_t* dir,
 	                bool two_d = false);

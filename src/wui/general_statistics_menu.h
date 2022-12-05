@@ -36,7 +36,7 @@ struct GeneralStatisticsMenu : public UI::UniqueWindow {
 	// Custom registry, to store the selected_information as well.
 	struct Registry : public UI::UniqueWindow::Registry {
 		Registry()
-		   : UI::UniqueWindow::Registry(),
+		   : 
 		     selected_information(0),
 		     selected_players(kMaxPlayers, true),
 		     time(WuiPlotArea::TIME_GAME) {

@@ -182,7 +182,7 @@ public:
 	}
 
 	void add_wanted_building_window(const Widelands::Coords& coords,
-	                                const Vector2i point,
+	                                Vector2i point,
 	                                bool was_minimal,
 	                                bool was_pinned);
 	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
@@ -281,7 +281,7 @@ protected:
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
-	const Image* get_sel_picture() {
+	const Image* get_sel_picture() const {
 		return sel_.pic;
 	}
 

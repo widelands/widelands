@@ -81,7 +81,7 @@ protected:
 	void cleanup_temp_dir();
 	size_t do_recursively_copy_file_or_directory(const std::string& source,
 	                                             const std::string& dest,
-	                                             const bool dry_run);
+	                                             bool dry_run);
 
 	std::string internal_name_, descname_, description_, author_, version_, min_wl_version_,
 	   max_wl_version_;

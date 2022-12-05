@@ -130,7 +130,7 @@ private:
 	struct ZipStreamWrite : StreamWrite {
 		explicit ZipStreamWrite(const std::shared_ptr<ZipFile>& shared_data);
 		~ZipStreamWrite() override = default;
-		void data(const void* const data, size_t size) override;
+		void data(const void* data, size_t size) override;
 
 	private:
 		std::shared_ptr<ZipFile> zip_file_;

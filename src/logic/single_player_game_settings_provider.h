@@ -28,7 +28,7 @@
 struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	SinglePlayerGameSettingsProvider();
 
-	void set_scenario(bool const set) override;
+	void set_scenario(bool set) override;
 
 	const GameSettings& settings() override;
 
@@ -40,26 +40,26 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	bool can_launch() override;
 
 	virtual std::string get_map();
-	virtual void set_map(const std::string& mapname,
+	void set_map(const std::string& mapname,
 	                     const std::string& mapfilename,
 	                     const std::string& map_theme,
 	                     const std::string& map_bg,
-	                     uint32_t const maxplayers,
-	                     bool const savegame) override;
+	                     uint32_t maxplayers,
+	                     bool savegame) override;
 
-	void set_player_state(uint8_t const number, PlayerSettings::State state) override;
-	void set_player_ai(uint8_t const number, const std::string& ai, bool const random_ai) override;
-	void next_player_state(uint8_t const number) override;
+	void set_player_state(uint8_t number, PlayerSettings::State state) override;
+	void set_player_ai(uint8_t number, const std::string& ai, bool random_ai) override;
+	void next_player_state(uint8_t number) override;
 	void
-	set_player_tribe(uint8_t const number, const std::string& tribe, bool random_tribe) override;
-	void set_player_init(uint8_t const number, uint8_t const index) override;
+	set_player_tribe(uint8_t number, const std::string& tribe, bool random_tribe) override;
+	void set_player_init(uint8_t number, uint8_t index) override;
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
 	void set_player_color(uint8_t number, const RGBColor&) override;
 	void set_player_closeable(uint8_t, bool) override;
 	void set_player_shared(PlayerSlot, Widelands::PlayerNumber) override;
-	void set_player_name(uint8_t const number, const std::string& name) override;
-	void set_player(uint8_t const number, const PlayerSettings& ps) override;
-	void set_player_number(uint8_t const number) override;
+	void set_player_name(uint8_t number, const std::string& name) override;
+	void set_player(uint8_t number, const PlayerSettings& ps) override;
+	void set_player_number(uint8_t number) override;
 
 	std::string get_win_condition_script() override;
 	void set_win_condition_script(const std::string& wc) override;

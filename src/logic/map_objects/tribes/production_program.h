@@ -560,7 +560,7 @@ struct ProductionProgram : public MapObjectProgram {
 	[[nodiscard]] const std::string& descname() const;
 
 	[[nodiscard]] size_t size() const;
-	const ProductionProgram::Action& operator[](size_t const idx) const;
+	const ProductionProgram::Action& operator[](size_t idx) const;
 
 	[[nodiscard]] const ProductionProgram::Groups& consumed_wares_workers() const;
 	[[nodiscard]] const Buildcost& produced_wares() const;

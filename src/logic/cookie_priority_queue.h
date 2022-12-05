@@ -154,8 +154,9 @@ CookiePriorityQueue<t_T, t_Cw, t_CA>::CookiePriorityQueue(
 
 template <typename t_T, typename t_Cw, typename t_CA>
 CookiePriorityQueue<t_T, t_Cw, t_CA>::~CookiePriorityQueue() {
-	for (typename CookieTypeVector::iterator it = d.begin(); it != d.end(); ++it)
+	for (typename CookieTypeVector::iterator it = d.begin(); it != d.end(); ++it) {
 		cookie_pos(ca(*it, type_)) = bad_pos();
+}
 }
 
 template <typename t_T, typename t_Cw, typename t_CA>
@@ -207,8 +208,9 @@ void CookiePriorityQueue<t_T, t_Cw, t_CA>::pop(
 	d.pop_back();
 	cookie_pos(elt_cookie) = BaseType::bad_pos();
 
-	if (!d.empty())
+	if (!d.empty()) {
 		increase_key(*d.begin());
+}
 }
 
 template <typename t_T, typename t_Cw, typename t_CA>
@@ -221,8 +223,9 @@ void CookiePriorityQueue<t_T, t_Cw, t_CA>::decrease_key(
 	while (cookie_pos(elt_cookie) != 0) {
 		CookieSizeType parent = parent_pos(cookie_pos(elt_cookie));
 
-		if (!c(*elt, *d[parent], type_))
+		if (!c(*elt, *d[parent], type_)) {
 			break;
+}
 
 		Cookie& parent_cookie(ca(d[parent], type_));
 
@@ -247,8 +250,9 @@ void CookiePriorityQueue<t_T, t_Cw, t_CA>::increase_key(
 		CookieSizeType left_child = left_child_pos(cookie_pos(elt_cookie));
 		CookieSizeType right_child = right_child_pos(cookie_pos(elt_cookie));
 
-		if (left_child >= d.size())
+		if (left_child >= d.size()) {
 			break;
+}
 
 		Cookie& left_cookie(ca(d[left_child], type_));
 
@@ -261,8 +265,9 @@ void CookiePriorityQueue<t_T, t_Cw, t_CA>::increase_key(
 			}
 		}
 
-		if (right_child >= d.size())
+		if (right_child >= d.size()) {
 			break;
+}
 
 		Cookie& right_cookie(ca(d[right_child], type_));
 

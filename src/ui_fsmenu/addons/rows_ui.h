@@ -55,7 +55,7 @@ class RemoteAddOnRow : public UI::Panel {
 public:
 	RemoteAddOnRow(Panel*,
 	               AddOnsCtrl*,
-	               const std::shared_ptr<AddOns::AddOnInfo>,
+	               std::shared_ptr<AddOns::AddOnInfo>,
 	               const AddOns::AddOnVersion& installed_version,
 	               uint32_t installed_i18n_version);
 	~RemoteAddOnRow() override {

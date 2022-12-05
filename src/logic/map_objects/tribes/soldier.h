@@ -138,7 +138,7 @@ public:
 
 	uint32_t get_rand_anim(Game& game, const std::string& name, const Soldier* soldier) const;
 
-	const DirAnimations& get_right_walk_anims(bool const ware, Worker* w) const override;
+	const DirAnimations& get_right_walk_anims(bool ware, Worker* w) const override;
 	uint32_t get_animation(const std::string& anim, const MapObject* mo = nullptr) const override;
 
 protected:
@@ -249,7 +249,7 @@ public:
 	void init_auto_task(Game&) override;
 
 	Vector2f
-	calc_drawpos(const EditorGameBase& game, const Vector2f& field_on_dst, const float scale) const;
+	calc_drawpos(const EditorGameBase& game, const Vector2f& field_on_dst, float scale) const;
 
 	/// Draw this soldier
 	void draw(const EditorGameBase&,
@@ -265,9 +265,9 @@ public:
 	// true, the icon is drawn horizontally centered above Otherwise, the icon
 	// is drawn below and right of 'draw_position'.
 	void draw_info_icon(Vector2i draw_position,
-	                    const float scale,
-	                    const InfoMode draw_mode,
-	                    const InfoToDraw info_to_draw,
+	                    float scale,
+	                    InfoMode draw_mode,
+	                    InfoToDraw info_to_draw,
 	                    RenderTarget*) const;
 
 	unsigned get_current_health() const {

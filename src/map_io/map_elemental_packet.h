@@ -42,7 +42,7 @@ struct MapElementalPacket {
 	/// properly configured EditorGameBase object.
 	void pre_read(FileSystem&, Map*);
 
-	uint32_t get_version() {
+	uint32_t get_version() const {
 		return version_;
 	}
 

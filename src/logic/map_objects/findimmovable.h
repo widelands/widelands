@@ -39,8 +39,9 @@ private:
 			++refcount;
 		}
 		void deref() {
-			if (--refcount == 0)
+			if (--refcount == 0) {
 				delete this;
+}
 		}
 		[[nodiscard]] virtual bool accept(const BaseImmovable&) const = 0;
 

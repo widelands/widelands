@@ -42,12 +42,12 @@ public:
 	friend struct MapBobdataPacket;
 
 	BobDescr(const std::string& init_descname,
-	         const MapObjectType type,
+	         MapObjectType type,
 	         MapObjectDescr::OwnerType owner_type,
 	         const LuaTable& table);
 	BobDescr(const std::string& init_name,
 	         const std::string& init_descname,
-	         const MapObjectType type,
+	         MapObjectType type,
 	         MapObjectDescr::OwnerType owner_type);
 
 	~BobDescr() override {
@@ -275,11 +275,11 @@ public:
 	/// be a "failed to act" error.
 	bool start_task_movepath(Game&,
 	                         const Coords& dest,
-	                         const int32_t persist,
+	                         int32_t persist,
 	                         const DirAnimations&,
-	                         const bool forceonlast = false,
-	                         const int32_t only_step = -1,
-	                         const bool forceall = false) __attribute__((warn_unused_result));
+	                         bool forceonlast = false,
+	                         int32_t only_step = -1,
+	                         bool forceall = false) __attribute__((warn_unused_result));
 
 	/// This can fail (and return false). Therefore the caller must check the
 	/// result and find something else for the bob to do. Otherwise there will
@@ -287,25 +287,25 @@ public:
 	void start_task_movepath(Game&,
 	                         const Path&,
 	                         const DirAnimations&,
-	                         const bool forceonlast = false,
-	                         const int32_t only_step = -1);
+	                         bool forceonlast = false,
+	                         int32_t only_step = -1);
 
 	bool start_task_movepath(Game&,
 	                         const Path&,
-	                         const int32_t index,
+	                         int32_t index,
 	                         const DirAnimations&,
-	                         const bool forceonlast = false,
-	                         const int32_t only_step = -1) __attribute__((warn_unused_result));
+	                         bool forceonlast = false,
+	                         int32_t only_step = -1) __attribute__((warn_unused_result));
 
 	void start_task_move(Game& game, int32_t dir, const DirAnimations&, bool);
 
 	// higher level handling (task-based)
 	State& top_state() {
-		assert(stack_.size());
+		assert(!stack_.empty());
 		return *stack_.rbegin();
 	}
 	State* get_state() {
-		return stack_.size() ? &*stack_.rbegin() : nullptr;
+		return !stack_.empty() ? &*stack_.rbegin() : nullptr;
 	}
 
 	std::string get_signal() {

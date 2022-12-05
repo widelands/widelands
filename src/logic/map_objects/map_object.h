@@ -52,10 +52,10 @@ public:
 
 	enum class OwnerType { kWorld, kTribe };
 
-	MapObjectDescr(const MapObjectType init_type,
+	MapObjectDescr(MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname);
-	MapObjectDescr(const MapObjectType init_type,
+	MapObjectDescr(MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname,
 	               const LuaTable& table);
@@ -312,13 +312,13 @@ public:
 			object_ = &object;
 		}
 
-		EditorGameBase& egbase() {
+		EditorGameBase& egbase() const {
 			return *egbase_;
 		}
-		MapObjectLoader& mol() {
+		MapObjectLoader& mol() const {
 			return *mol_;
 		}
-		MapObject* get_object() {
+		MapObject* get_object() const {
 			return object_;
 		}
 		template <typename T> T& get() {
@@ -355,7 +355,7 @@ protected:
 	                  const std::string& census,
 	                  const std::string& statictics,
 	                  const Vector2f& field_on_dst,
-	                  const float scale,
+	                  float scale,
 	                  RenderTarget* dst) const;
 
 	void molog(const Time& gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
@@ -432,18 +432,18 @@ struct ObjectPointer {
 	}
 	ObjectPointer(const MapObject* const obj) {
 		assert(obj == nullptr || obj->serial_ != 0);
-		serial_ = obj ? obj->serial_ : 0;
+		serial_ = obj != nullptr ? obj->serial_ : 0;
 	}
 	// can use standard copy constructor and assignment operator
 
 	ObjectPointer& operator=(const MapObject* const obj) {
 		assert(obj == nullptr || obj->serial_ != 0);
-		serial_ = obj ? obj->serial_ : 0;
+		serial_ = obj != nullptr ? obj->serial_ : 0;
 		return *this;
 	}
 
 	[[nodiscard]] bool is_set() const {
-		return serial_;
+		return serial_ != 0u;
 	}
 
 	// TODO(unknown): dammit... without an EditorGameBase object, we can't implement a

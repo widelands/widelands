@@ -55,7 +55,7 @@ public:
 		allow_saving_ = t;
 	}
 	// Used by lua only
-	bool get_allow_saving() {
+	bool get_allow_saving() const {
 		return allow_saving_;
 	}
 	// Used by lua only

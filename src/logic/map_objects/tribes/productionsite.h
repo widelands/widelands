@@ -79,10 +79,10 @@ public:
 		return working_positions_;
 	}
 	[[nodiscard]] bool is_output_ware_type(const DescriptionIndex& i) const {
-		return output_ware_types_.count(i);
+		return output_ware_types_.count(i) != 0u;
 	}
 	[[nodiscard]] bool is_output_worker_type(const DescriptionIndex& i) const {
-		return output_worker_types_.count(i);
+		return output_worker_types_.count(i) != 0u;
 	}
 	[[nodiscard]] const BillOfMaterials& input_wares() const {
 		return input_wares_;
@@ -355,7 +355,7 @@ public:
 	// and sets actual_percent_ to new value
 	void update_actual_statistics(Duration, bool);
 
-	uint8_t get_actual_statistics() {
+	uint8_t get_actual_statistics() const {
 		return actual_percent_ / 10;
 	}
 
@@ -418,7 +418,7 @@ protected:
 
 	void load_finish(EditorGameBase& egbase) override;
 
-protected:
+
 	struct State {
 		const ProductionProgram* program;  ///< currently running program
 		size_t ip;                         ///< instruction pointer
@@ -450,11 +450,11 @@ protected:
 	virtual void find_and_start_next_program(Game&);
 
 	State& top_state() {
-		assert(stack_.size());
+		assert(!stack_.empty());
 		return *stack_.rbegin();
 	}
 	State* get_state() {
-		return stack_.size() ? &*stack_.rbegin() : nullptr;
+		return !stack_.empty() ? &*stack_.rbegin() : nullptr;
 	}
 	void program_act(Game&);
 
@@ -480,7 +480,7 @@ protected:
 		post_timer_ = t;
 	}
 
-protected:  // TrainingSite must have access to this stuff
+ // TrainingSite must have access to this stuff
 	std::vector<WorkingPosition> working_positions_;
 
 	int32_t fetchfromflag_;  ///< Number of wares to fetch from flag

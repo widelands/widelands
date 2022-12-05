@@ -156,7 +156,7 @@ public:
 	void remove_worker(Worker&) override;
 	bool is_present(Worker& worker) const override;
 
-	bool get_build_heroes() {
+	bool get_build_heroes() const {
 		return build_heroes_;
 	}
 	void set_build_heroes(bool b_heroes) {

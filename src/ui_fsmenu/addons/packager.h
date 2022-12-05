@@ -41,7 +41,7 @@ public:
 
 	void layout() override;
 	void die() override;
-	bool handle_key(const bool down, const SDL_Keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	MainMenu& main_menu_;

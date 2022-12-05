@@ -63,13 +63,13 @@ template <typename T> class Buffer {
 public:
 	Buffer() {
 		glGenBuffers(1, &object_);
-		if (!object_) {
+		if (object_ == 0u) {
 			throw wexception("Could not create GL buffer.");
 		}
 	}
 
 	~Buffer() {
-		if (object_) {
+		if (object_ != 0u) {
 			glDeleteBuffers(1, &object_);
 		}
 	}

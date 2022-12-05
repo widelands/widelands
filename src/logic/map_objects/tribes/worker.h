@@ -182,7 +182,7 @@ protected:
 	virtual void draw_inner(const EditorGameBase& game,
 	                        const Vector2f& point_on_dst,
 	                        const Widelands::Coords& coords,
-	                        const float scale,
+	                        float scale,
 	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
 	          const InfoToDraw& info_to_draw,

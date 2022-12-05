@@ -97,12 +97,12 @@ public:
 		Vector2f pixel = Vector2f::zero();
 	};
 
-	MapView(UI::Panel* const parent,
+	MapView(UI::Panel* parent,
 	        const Widelands::Map& map,
-	        const int32_t x,
-	        const int32_t y,
-	        const uint32_t w,
-	        const uint32_t h);
+	        int32_t x,
+	        int32_t y,
+	        uint32_t w,
+	        uint32_t h);
 	~MapView() override = default;
 
 	// Called whenever the view changed, also during automatic animations.

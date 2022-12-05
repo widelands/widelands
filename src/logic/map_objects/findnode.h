@@ -42,8 +42,9 @@ private:
 			++refcount;
 		}
 		void deref() {
-			if (--refcount == 0)
+			if (--refcount == 0) {
 				delete this;
+}
 		}
 		[[nodiscard]] virtual bool accept(const EditorGameBase&, const FCoords& coord) const = 0;
 

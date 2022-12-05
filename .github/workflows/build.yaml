@@ -103,7 +103,7 @@ jobs:
       # python3 ../utils/run-clang-tidy.py -checks=-*,my-check-prefix* | tee ../clang-tidy.log
       run: |
         pushd build
-        python3 ../utils/run-clang-tidy.py -j "$(nproc)" | tee ../clang-tidy.log
+        python3 ../utils/run-clang-tidy.py | tee ../clang-tidy.log
         popd
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log

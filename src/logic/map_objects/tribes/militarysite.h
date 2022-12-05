@@ -137,7 +137,7 @@ private:
 	Soldier* find_least_suited_soldier();
 	bool drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier* newguy);
 
-private:
+
 	// We can be attacked if we have stationed soldiers.
 	class AttackTarget : public Widelands::AttackTarget {
 	public:

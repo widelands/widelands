@@ -39,14 +39,14 @@ struct TextPanelStyleInfo {
 	}
 
 	[[nodiscard]] const UI::FontStyleInfo& font() const {
-		return *font_.get();
+		return *font_;
 	}
 	void set_font(const UI::FontStyleInfo& new_font) {
 		font_.reset(new UI::FontStyleInfo(new_font));
 	}
 
 	[[nodiscard]] const UI::PanelStyleInfo& background() const {
-		return *background_.get();
+		return *background_;
 	}
 
 private:

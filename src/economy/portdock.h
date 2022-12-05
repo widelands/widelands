@@ -36,7 +36,7 @@ class ExpeditionBootstrap;
 
 class PortdockDescr : public MapObjectDescr {
 public:
-	PortdockDescr(char const* const init_name, char const* const init_descname);
+	PortdockDescr(char const* init_name, char const* init_descname);
 	~PortdockDescr() override {
 	}
 

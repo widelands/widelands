@@ -206,7 +206,7 @@ private:
 
 	FxId do_register_fx(SoundType type, const std::string& fx_path);
 
-	void initialization_error(const char* const msg, bool quit_sdl);
+	void initialization_error(const char* msg, bool quit_sdl);
 
 	bool play_or_not(SoundType type, FxId fx_id, uint16_t priority, bool allow_multiple);
 	void start_music(const std::string& songset_name);

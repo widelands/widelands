@@ -95,14 +95,14 @@ private:
 };
 
 struct Child {
-	Child() : tag(nullptr), text() {
+	Child() : tag(nullptr) {
 	}
 	explicit Child(Tag* t) : tag(t) {
 	}
 	explicit Child(const std::string& t) : tag(nullptr), text(t) {
 	}
 	~Child() {
-		if (tag)
+		
 			delete tag;
 	}
 	Tag* tag;
