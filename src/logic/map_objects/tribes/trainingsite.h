@@ -68,31 +68,6 @@ public:
 		max_stall_ = trainer_patience;
 	}
 
-	[[nodiscard]] const std::vector<std::vector<std::string>>& get_food_health() const {
-		return food_health_;
-	}
-	[[nodiscard]] const std::vector<std::vector<std::string>>& get_food_attack() const {
-		return food_attack_;
-	}
-	[[nodiscard]] const std::vector<std::vector<std::string>>& get_food_defense() const {
-		return food_defense_;
-	}
-	[[nodiscard]] const std::vector<std::vector<std::string>>& get_food_evade() const {
-		return food_evade_;
-	}
-	[[nodiscard]] const std::vector<std::string>& get_weapons_health() const {
-		return weapons_health_;
-	}
-	[[nodiscard]] const std::vector<std::string>& get_weapons_attack() const {
-		return weapons_attack_;
-	}
-	[[nodiscard]] const std::vector<std::string>& get_weapons_defense() const {
-		return weapons_defense_;
-	}
-	[[nodiscard]] const std::vector<std::string>& get_weapons_evade() const {
-		return weapons_evade_;
-	}
-
 	[[nodiscard]] const std::string& no_soldier_to_train_message() const {
 		return no_soldier_to_train_message_;
 	}
@@ -102,13 +77,7 @@ public:
 	}
 
 private:
-	// Read the table to add needed food and weapons for training a property.
-	// Properties are health, attack, defense, and evade.
-	void add_training_inputs(const LuaTable& table,
-	                         std::vector<std::vector<std::string>>* food,
-	                         std::vector<std::string>* weapons);
-
-	void update_level(TrainingAttribute attrib, unsigned level);
+	void update_level(TrainingAttribute attrib, unsigned from_level, unsigned to_level);
 
 	//  TODO(unknown): These variables should be per soldier type. They should be in a
 	//  struct and there should be a vector, indexed by Soldier_Index,
@@ -143,16 +112,6 @@ private:
 	unsigned max_defense_;
 	/** Maximum evasion a soldier can acquire at this site*/
 	unsigned max_evade_;
-
-	// For building help
-	std::vector<std::vector<std::string>> food_health_;
-	std::vector<std::vector<std::string>> food_attack_;
-	std::vector<std::vector<std::string>> food_defense_;
-	std::vector<std::vector<std::string>> food_evade_;
-	std::vector<std::string> weapons_health_;
-	std::vector<std::string> weapons_attack_;
-	std::vector<std::string> weapons_defense_;
-	std::vector<std::string> weapons_evade_;
 
 	std::string no_soldier_to_train_message_;
 	std::string no_soldier_for_training_level_message_;
