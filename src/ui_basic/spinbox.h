@@ -30,6 +30,8 @@ struct SpinBoxImpl;
 /// w is the overall width of the SpinBox and must be wide enough to fit 2 labels and the buttons.
 /// unit_w is the width alotted for all buttons and the text between them (the actual spinbox).
 /// label_text is a text that precedes the actual spinbox.
+/// The current implementation does not allow minval or maxval to be near the numeric limits of
+/// int32_t.
 class SpinBox : public Panel {
 public:
 	enum class Type {

@@ -130,15 +130,31 @@ void Slider::calculate_big_step() {
 	assert(max_value_ - min_value_ >= 0);
 
 	int32_t range = max_value_ - min_value_;
-	if (range < 4) {
-		big_step_ = 4;  // to min/max
-	} else if (range < 16) {
-		big_step_ = range / 2;
-	} else if (range < 32) {
-		big_step_ = range / 4;
+
+	// Number of steps between the values that can be set with the numeric keys by handle_key()
+	constexpr int32_t kNumkeySteps = 8;  // 9 - 1
+
+	// The position of the value within the range is visualised by sliders, so stepping
+	// over small ranges looks better if instead of fixing the big step size we make it
+	// step from min or max to middle (2 steps from min to max or vice versa).
+	// Let's allow this from "big" step size of 2.
+	constexpr int32_t kMinTwoStep = 4;  // 2 * 2
+
+	// So we may have 1, 2 or 8 steps. Let's make the whole thing powers of 2.
+	constexpr int32_t kMediumNumSteps = 4;
+
+	if (range < kMinTwoStep) {
+		big_step_ = range;  // to min/max
 	} else {
-		// This makes the steps the same size as between numeric keys in handle_key()
-		big_step_ = range / 8;
+		int32_t num_steps = range / ChangeBigStep::kSmallRange;
+		if (num_steps >= kNumkeySteps) {
+			num_steps = kNumkeySteps;
+		} else if (num_steps >= kMediumNumSteps) {
+			num_steps = kMediumNumSteps;
+		} else {
+			num_steps = 2;
+		}
+		big_step_ = range / num_steps;
 	}
 
 	assert(max_value_ < std::numeric_limits<int32_t>::max() - big_step_);

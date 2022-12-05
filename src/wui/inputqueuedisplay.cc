@@ -413,10 +413,7 @@ bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstat
 		// Mouse is over desired fill
 
 		if (big_step) {
-			// Big step of 3 is arbitrary.
-			// TODO(tothxa): Should and could it be adjusted to max amount required for a
-			//               production step?
-			change *= 3;
+			change *= ChangeBigStep::kSmallRange;
 		}
 
 		if ((modstate & KMOD_SHIFT) != 0) {

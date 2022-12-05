@@ -137,8 +137,7 @@ bool SoldierCapacityControl::handle_mousewheel(int32_t x, int32_t y, uint16_t mo
 		if (change == 0) {
 			return false;
 		}
-		// Arbitrary value: big step is 3.
-		change *= 3;
+		change *= ChangeBigStep::kSmallRange;
 	}
 	change_soldier_capacity(change);
 	return true;

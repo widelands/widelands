@@ -19,7 +19,6 @@
 #include "ui_basic/spinbox.h"
 
 #include <cassert>
-#include <cstdlib>
 #include <limits>
 
 #include <SDL_keyboard.h>
@@ -106,15 +105,10 @@ SpinBox::SpinBox(Panel* const parent,
 		sbi_->min = 0;
 		sbi_->max = 0;
 	} else {
+		assert(minval <= maxval);
+
 		sbi_->min = minval;
 		sbi_->max = maxval;
-#ifndef NDEBUG
-		// Prevent integer overflows
-		// 10 is the maximum value that calculate_big_step() can set
-		const int32_t max_step = std::max(abs(step_size), std::max(abs(big_step_size), 10));
-		assert(maxval < std::numeric_limits<int32_t>::max() - max_step);
-		assert(minval > std::numeric_limits<int32_t>::min() + max_step);
-#endif
 	}
 	sbi_->value = startval;
 	sbi_->unit = unit;
@@ -136,15 +130,19 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->text->set_disable_style(UI::ButtonDisableStyle::kPermpressed);
 	sbi_->text->set_enabled(false);
 
+	assert(step_size > 0);
 	sbi_->step_size = step_size;
 
 	bool is_big = type_ == SpinBox::Type::kBig;
 	if (is_big) {
+		assert(big_step_size > 0);
 		sbi_->big_step_size = big_step_size;
+
+		// Prevent integer overflows
+		assert(maxval < std::numeric_limits<int32_t>::max() - big_step_size);
+		assert(minval > std::numeric_limits<int32_t>::min() + big_step_size);
 	} else {
 		// Step size for PgUp/PgDn
-		assert(step_size > 0);
-		assert(sbi_->max >= sbi_->min);
 		calculate_big_step();
 	}
 
@@ -400,6 +398,7 @@ void SpinBox::set_value_list(const std::vector<int32_t>& values) {
  * sets the interval the value may lay in and fixes the value, if outside.
  */
 void SpinBox::set_interval(int32_t const min, int32_t const max) {
+	assert(min <= max);
 	sbi_->max = max;
 	sbi_->min = min;
 	bool changed_val = false;
@@ -422,14 +421,23 @@ void SpinBox::calculate_big_step() {
 		// Should have been set when the spinbox was set up, don't mess with it
 		return;
 	}
-	// Second part also prevents division by 0 in next step
-	if (sbi_->max <= sbi_->min || sbi_->step_size < 1) {
-		sbi_->big_step_size = 0;
-		return;
-	}
-	// It's OK if it becomes min/max when interval is smaller than 5
-	sbi_->big_step_size =
-	   sbi_->step_size * (((sbi_->max - sbi_->min) / sbi_->step_size) <= 20 ? 5 : 10);
+
+	assert(sbi_->min <= sbi_->max);
+	// Also prevent integer overflow
+	assert(sbi_->max - sbi_->min >= 0);
+	assert(sbi_->step_size > 0);
+
+	// It's OK if it just jumps to min/max when interval is smaller than ChangeBigStep::kMediumRange,
+	// but let's have several big steps in the interval otherwise
+	const int32_t big_step_multiplier =
+	   (((sbi_->max - sbi_->min) / sbi_->step_size) <= 2 * ChangeBigStep::kWideRange) ?
+	   ChangeBigStep::kMediumRange : ChangeBigStep::kWideRange;
+
+	sbi_->big_step_size = sbi_->step_size * big_step_multiplier;
+
+	// Prevent integer overflows
+	assert(sbi_->max < std::numeric_limits<int32_t>::max() - sbi_->big_step_size);
+	assert(sbi_->min > std::numeric_limits<int32_t>::min() + sbi_->big_step_size);
 }
 
 /**

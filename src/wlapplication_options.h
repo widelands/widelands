@@ -298,15 +298,22 @@ void init_fastplace_default_shortcuts(
 /** Clear a shortcut. */
 void unset_shortcut(KeyboardShortcut);
 
+// Default step sizes for changing value of spinbox, slider, etc. on PgUp/PgDown or Ctrl+mousewheel
+namespace ChangeBigStep {
+	constexpr int32_t kSmallRange = 3;
+	constexpr int32_t kMediumRange = 5;
+	constexpr int32_t kWideRange = 10;
+} // namespace ChangeBigStep
+
 // Return values for changing value of spinbox, slider, etc.
 enum class ChangeType : int32_t {
 	kSetMin = std::numeric_limits<int32_t>::min(),  // set value to minimum
 	                                                //     -- keys: Home, Ctrl + decrease keys
-	kBigMinus = -10,                                // decrease by big step -- key: PageDown
+	kBigMinus = -ChangeBigStep::kWideRange,         // decrease by big step -- key: PageDown
 	kMinus = -1,                                    // decrease  -- keys: Left, Down, Minus
 	kNone = 0,                                      // no change -- all other keys
 	kPlus = 1,                                      // increase  -- keys: Right, Up, Plus
-	kBigPlus = 10,                                  // increase by big step -- key: PageUp
+	kBigPlus = ChangeBigStep::kWideRange,           // increase by big step -- key: PageUp
 	kSetMax = std::numeric_limits<int32_t>::max()   // set value to maximum
 	                                                //     -- keys: End, Ctrl + increase keys
 };

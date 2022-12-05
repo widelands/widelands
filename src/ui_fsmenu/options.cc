@@ -226,7 +226,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::SpinBox::Units::kNone,
                           UI::SpinBox::Type::kBig,
                           1,
-                          5),
+                          ChangeBigStep::kMediumRange),
 
      zip_(&box_saving_,
           UI::PanelStyle::kFsMenu,

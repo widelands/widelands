@@ -538,10 +538,10 @@ bool ConstructionSoldierCapacityBox::handle_key(bool down, SDL_Keysym code) {
 			change_current(-1);
 			return true;
 		case ChangeType::kBigPlus:
-			change_current(3);
+			change_current(ChangeBigStep::kSmallRange);
 			return true;
 		case ChangeType::kBigMinus:
-			change_current(-3);
+			change_current(-ChangeBigStep::kSmallRange);
 			return true;
 		case ChangeType::kSetMax:
 			set_current(max_);
