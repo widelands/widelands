@@ -27,7 +27,7 @@ Widelands::NodeCaps resource_tools_nodecaps(const Widelands::FCoords& fcoords,
 
 ///  Decreases the resources of a node by a value.
 struct EditorSetResourcesTool : public EditorTool {
-	EditorSetResourcesTool(EditorInteractive& parent)
+	explicit EditorSetResourcesTool(EditorInteractive& parent)
 	   : EditorTool(parent, *this, *this) {
 	}
 

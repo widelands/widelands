@@ -73,7 +73,7 @@ public:
 	MD5Checksum() : sum({0}) {
 		reset();
 	}
-	explicit MD5Checksum(const MD5Checksum& other)
+	MD5Checksum(const MD5Checksum& other)
 	   : Base(), can_handle_data(other.can_handle_data), sum(other.sum), ctx(other.ctx) {
 	}
 

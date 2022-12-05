@@ -23,7 +23,7 @@
 
 /// Manages a set of 6 animations, one for each possible direction.
 struct DirAnimations {
-	DirAnimations(uint32_t dir1 = 0,
+	explicit DirAnimations(uint32_t dir1 = 0,
 	              uint32_t dir2 = 0,
 	              uint32_t dir3 = 0,
 	              uint32_t dir4 = 0,
@@ -41,7 +41,7 @@ struct DirAnimations {
 		return DirAnimations(0);  // Since real animation IDs are positive, this is safe
 	}
 
-	operator bool() const {
+	explicit operator bool() const {
 		return animations_[0] != 0u;
 	}
 

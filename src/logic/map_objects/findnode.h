@@ -62,7 +62,7 @@ private:
 	BaseCapsule* capsule;
 
 public:
-	explicit FindNode(const FindNode& o) {
+	FindNode(const FindNode& o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -77,7 +77,7 @@ public:
 		return *this;
 	}
 
-	template <typename T> FindNode(const T& op) {
+	template <typename T> explicit FindNode(const T& op) {
 		capsule = new Capsule<T>(op);
 	}
 
@@ -190,7 +190,7 @@ private:
 
 /// Accepts a node where at least 1 adjacent triangle has enhancable terrain
 struct FindNodeTerraform {
-	FindNodeTerraform(const std::string& c) : category_(c) {
+	explicit FindNodeTerraform(const std::string& c) : category_(c) {
 	}
 	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const;
 

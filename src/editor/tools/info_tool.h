@@ -25,7 +25,7 @@
 
 /// A simple tool to show information about the clicked node.
 struct EditorInfoTool : public EditorTool {
-	EditorInfoTool(EditorInteractive& parent)
+	explicit EditorInfoTool(EditorInteractive& parent)
 	   : EditorTool(parent, *this, *this, false) {
 	}
 

@@ -173,7 +173,7 @@ template <class T> struct TrackPtr : BaseTrackPtr {
 
 	explicit TrackPtr(T* ptr) : BaseTrackPtr(ptr) {
 	}
-	explicit TrackPtr(const TrackPtr<T>& o) : BaseTrackPtr(o) {
+	TrackPtr(const TrackPtr<T>& o) : BaseTrackPtr(o) {
 	}
 
 	TrackPtr& operator=(const TrackPtr<T>& o) {
@@ -185,7 +185,7 @@ template <class T> struct TrackPtr : BaseTrackPtr {
 		return *this;
 	}
 
-	operator T*() const {
+	explicit operator T*() const {
 		return static_cast<T*>(get());
 	}
 	T* operator->() const {

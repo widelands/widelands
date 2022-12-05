@@ -23,7 +23,7 @@
 
 /// Deletes immovables from the map.
 struct EditorDeleteImmovableTool : public EditorTool {
-	EditorDeleteImmovableTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	explicit EditorDeleteImmovableTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

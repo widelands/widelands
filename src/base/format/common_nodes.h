@@ -24,7 +24,7 @@
 namespace format_impl {
 
 struct LiteralNode : AbstractNode {
-	LiteralNode(const std::string& str) : content_(str), len_(content_.size()) {
+	explicit LiteralNode(const std::string& str) : content_(str), len_(content_.size()) {
 	}
 
 	inline char* append(char* out, const ArgType t, Argument, bool) const override {

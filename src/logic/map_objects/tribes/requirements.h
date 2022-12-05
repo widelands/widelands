@@ -76,7 +76,7 @@ private:
 public:
 	Requirements() = default;
 
-	template <typename T> Requirements(const T& req) : m(new Capsule<T>(req)) {
+	template <typename T> explicit Requirements(const T& req) : m(new Capsule<T>(req)) {
 	}
 
 	/**

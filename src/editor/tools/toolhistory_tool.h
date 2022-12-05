@@ -35,7 +35,7 @@ struct ListItem {
 
 /// History of previously used tool settings
 struct EditorHistoryTool : public EditorTool {
-	EditorHistoryTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	explicit EditorHistoryTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,

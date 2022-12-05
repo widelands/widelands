@@ -24,7 +24,7 @@
 
 ///  Decreases the resources of a node by a value.
 struct EditorDecreaseResourcesTool : public EditorTool {
-	EditorDecreaseResourcesTool(EditorInteractive& parent)
+	explicit EditorDecreaseResourcesTool(EditorInteractive& parent)
 	   : EditorTool(parent, *this, *this) {
 	}
 

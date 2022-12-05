@@ -427,7 +427,7 @@ struct ObjectPointer {
 	ObjectPointer() {
 		serial_ = 0;
 	}
-	ObjectPointer(const MapObject* const obj) {
+	explicit ObjectPointer(const MapObject* const obj) {
 		assert(obj == nullptr || obj->serial_ != 0);
 		serial_ = obj != nullptr ? obj->serial_ : 0;
 	}
@@ -467,7 +467,7 @@ private:
 };
 
 template <class T> struct OPtr {
-	OPtr(T* const obj = nullptr) : m(obj) {
+	explicit OPtr(T* const obj = nullptr) : m(obj) {
 	}
 
 	OPtr& operator=(T* const obj) {

@@ -76,15 +76,15 @@ struct MousewheelConfigSettings {
 class MousewheelOptionsDialog;
 
 struct KeymodDropdown : public UI::Dropdown<uint16_t> {
-	KeymodDropdown(UI::Panel* parent);
+	explicit KeymodDropdown(UI::Panel* parent);
 };
 
 struct DirDropdown : public UI::Dropdown<uint8_t> {
-	DirDropdown(Panel* parent, bool two_d = false);
+	explicit DirDropdown(Panel* parent, bool two_d = false);
 };
 
 struct InvertDirDropdown : public UI::Dropdown<uint8_t> {
-	InvertDirDropdown(Panel* parent);
+	explicit InvertDirDropdown(Panel* parent);
 };
 
 // Box for options of a single handler
@@ -135,7 +135,7 @@ private:
 };
 
 struct ScrollOptionsButtonBox : public UI::Box {
-	ScrollOptionsButtonBox(MousewheelOptionsDialog* parent);
+	explicit ScrollOptionsButtonBox(MousewheelOptionsDialog* parent);
 
 private:
 	UI::Button reset_button_;
@@ -148,7 +148,7 @@ private:
 // Main dialog box
 class MousewheelOptionsDialog : public UI::Box {
 public:
-	MousewheelOptionsDialog(UI::Panel* parent);
+	explicit MousewheelOptionsDialog(UI::Panel* parent);
 
 	void update_settings();
 	void apply_settings();

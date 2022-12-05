@@ -46,7 +46,7 @@ private:
 		[[nodiscard]] virtual bool reachable_dest(const Map&, const FCoords& dest) const = 0;
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
-		Capsule(const T& init_op) : op(init_op) {
+		explicit Capsule(const T& init_op) : op(init_op) {
 		}
 
 		[[nodiscard]] bool allowed(const Map& map,
@@ -70,7 +70,7 @@ private:
 public:
 	CheckStep();
 
-	template <typename T> CheckStep(const T& op) : capsule(new Capsule<T>(op)) {
+	template <typename T> explicit CheckStep(const T& op) : capsule(new Capsule<T>(op)) {
 	}
 
 	/**

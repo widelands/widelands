@@ -61,7 +61,7 @@ private:
 
 class InfoPanel : public UI::Panel {
 public:
-	InfoPanel(InteractiveBase&);
+	explicit InfoPanel(InteractiveBase&);
 	~InfoPanel() override = default;
 
 	// Update the text area without relayouting

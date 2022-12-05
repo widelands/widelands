@@ -335,7 +335,7 @@ public:
 	void set_stopped(bool);
 
 	struct WorkingPosition {
-		WorkingPosition(Request* const wr = nullptr, Worker* const w = nullptr)
+		explicit WorkingPosition(Request* const wr = nullptr, Worker* const w = nullptr)
 		   : worker_request(wr), worker(w) {
 		}
 		Request* worker_request;

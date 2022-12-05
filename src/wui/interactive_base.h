@@ -354,7 +354,7 @@ private:
 	virtual void rebuild_showhide_menu() = 0;
 
 	struct SelData {
-		SelData(const bool Freeze = false,
+		explicit SelData(const bool Freeze = false,
 		        const bool Triangles = false,
 		        const Widelands::NodeAndTriangle<>& Pos =
 		           Widelands::NodeAndTriangle<>{

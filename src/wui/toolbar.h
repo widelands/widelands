@@ -27,7 +27,7 @@ class InfoPanel;
 /// A horizontal menu bar embellished with background graphics
 class MainToolbar : public UI::Panel {
 public:
-	MainToolbar(InfoPanel&);
+	explicit MainToolbar(InfoPanel&);
 
 	static constexpr uint8_t kButtonSize = 33;
 

@@ -120,7 +120,7 @@ public:
 	 * C Methods
 	 */
 	UI::Button* get() {
-		return static_cast<UI::Button*>(panel_);
+		return dynamic_cast<UI::Button*>(panel_);
 	}
 };
 
@@ -154,7 +154,7 @@ public:
 	 * C Methods
 	 */
 	UI::BaseDropdown* get() {
-		return static_cast<UI::BaseDropdown*>(panel_);
+		return dynamic_cast<UI::BaseDropdown*>(panel_);
 	}
 };
 
@@ -184,7 +184,7 @@ public:
 	 * C Methods
 	 */
 	UI::Tab* get() {
-		return static_cast<UI::Tab*>(panel_);
+		return dynamic_cast<UI::Tab*>(panel_);
 	}
 };
 
@@ -213,7 +213,7 @@ public:
 	 * C Methods
 	 */
 	UI::Window* get() {
-		return static_cast<UI::Window*>(panel_);
+		return dynamic_cast<UI::Window*>(panel_);
 	}
 };
 
@@ -265,7 +265,7 @@ public:
 	 * C Methods
 	 */
 	InteractiveBase* get() {
-		return static_cast<InteractiveBase*>(panel_);
+		return dynamic_cast<InteractiveBase*>(panel_);
 	}
 };
 

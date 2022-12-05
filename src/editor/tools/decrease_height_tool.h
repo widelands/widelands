@@ -23,7 +23,7 @@
 
 ///  Decreases the height of a node by a value.
 struct EditorDecreaseHeightTool : public EditorTool {
-	EditorDecreaseHeightTool(EditorInteractive& parent)
+	explicit EditorDecreaseHeightTool(EditorInteractive& parent)
 	   : EditorTool(parent, *this, *this) {
 	}
 

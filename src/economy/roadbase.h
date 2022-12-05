@@ -54,7 +54,7 @@ struct RoadBase : public PlayerImmovable {
 
 	enum FlagId { FlagStart = 0, FlagEnd = 1 };
 
-	RoadBase(const RoadBaseDescr& d);
+	explicit RoadBase(const RoadBaseDescr& d);
 
 	Flag& get_flag(FlagId const flag) const {
 		return *flags_[flag];

@@ -27,7 +27,7 @@
 
 class SavegameLoader {
 public:
-	SavegameLoader(Widelands::Game& game);
+	explicit SavegameLoader(Widelands::Game& game);
 	virtual ~SavegameLoader() = default;
 	std::vector<SavegameData> load_files(const std::string& directory);
 

@@ -59,7 +59,7 @@ private:
 	BaseCapsule* capsule;
 
 public:
-	explicit FindImmovable(const FindImmovable& o) {
+	FindImmovable(const FindImmovable& o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -74,7 +74,7 @@ public:
 		return *this;
 	}
 
-	template <typename T> FindImmovable(const T& op) {
+	template <typename T> explicit FindImmovable(const T& op) {
 		capsule = new Capsule<T>(op);
 	}
 
