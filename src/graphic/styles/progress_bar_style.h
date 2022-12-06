@@ -43,16 +43,16 @@ struct ProgressbarStyleInfo {
 	     high_color_(other.high_color()) {
 	}
 
-	const UI::FontStyleInfo& font() const {
+	[[nodiscard]] const UI::FontStyleInfo& font() const {
 		return *font_.get();
 	}
-	const RGBColor& low_color() const {
+	[[nodiscard]] const RGBColor& low_color() const {
 		return low_color_;
 	}
-	const RGBColor& medium_color() const {
+	[[nodiscard]] const RGBColor& medium_color() const {
 		return medium_color_;
 	}
-	const RGBColor& high_color() const {
+	[[nodiscard]] const RGBColor& high_color() const {
 		return high_color_;
 	}
 

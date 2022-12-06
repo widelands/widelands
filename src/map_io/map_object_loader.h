@@ -33,7 +33,7 @@ class Bob;
  */
 class MapObjectLoader {
 public:
-	bool is_object_known(uint32_t) const;
+	[[nodiscard]] bool is_object_known(uint32_t) const;
 
 	/// Registers the object as a new one.
 	///

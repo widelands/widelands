@@ -36,12 +36,12 @@ public:
 	}
 
 	// Unique internal name of the objective.
-	const std::string& name() const {
+	[[nodiscard]] const std::string& name() const {
 		return name_;
 	}
 
 	// User facing (translated) descriptive name.
-	const std::string& descname() const {
+	[[nodiscard]] const std::string& descname() const {
 		return descname_;
 	}
 	void set_descname(const std::string& new_name) {
@@ -49,7 +49,7 @@ public:
 	}
 
 	// Description text of this name.
-	const std::string& descr() const {
+	[[nodiscard]] const std::string& descr() const {
 		return descr_;
 	}
 	void set_descr(const std::string& new_descr) {
@@ -57,7 +57,7 @@ public:
 	}
 
 	// True, if this objective is fulfilled.
-	bool done() const {
+	[[nodiscard]] bool done() const {
 		return done_;
 	}
 
@@ -66,7 +66,7 @@ public:
 	}
 
 	// True, if this objective is visible to the user.
-	bool visible() const {
+	[[nodiscard]] bool visible() const {
 		return visible_;
 	}
 	void set_visible(const bool t) {

@@ -460,7 +460,7 @@ struct StepEvalFindPorts {
 		return std::max(0, est - 5 * map.calc_cost(0));
 	}
 
-	int32_t stepcost(
+	[[nodiscard]] int32_t stepcost(
 	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
 		if ((to.field->nodecaps() & MOVECAPS_SWIM) == 0) {
 			return -1;

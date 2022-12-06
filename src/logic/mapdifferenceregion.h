@@ -64,7 +64,7 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 		direction_ = direction;
 	}
 
-	typename AreaType::CoordsType& location() const {
+	[[nodiscard]] typename AreaType::CoordsType& location() const {
 		return area_;
 	}
 
@@ -78,7 +78,7 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 	 */
 	bool advance(const Map& map);
 
-	typename AreaType::RadiusType radius() const {
+	[[nodiscard]] typename AreaType::RadiusType radius() const {
 		return area_.radius;
 	}
 

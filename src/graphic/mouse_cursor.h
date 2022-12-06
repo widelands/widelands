@@ -44,14 +44,14 @@ public:
 
 	// Enable/disable SDL mode
 	void set_use_sdl(bool init_use_sdl);
-	bool is_using_sdl() const;
+	[[nodiscard]] bool is_using_sdl() const;
 
 	// Switch between "normal" and "pressed" cursors
 	void change_cursor(bool is_pressed);
 
 	// Hide/show the cursor
 	void set_visible(bool visible);
-	bool is_visible() const;
+	[[nodiscard]] bool is_visible() const;
 
 	// Render the cursor (does nothing in SDL mode)
 	void draw(RenderTarget& rt, Vector2i position);

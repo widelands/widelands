@@ -52,31 +52,6 @@ wl.Descriptions():new_trainingsite_type {
       { name = "shield_advanced", amount = 4 },
    },
 
-   ["soldier defense"] = {
-      food = {
-         {"smoked_fish", "smoked_meat"},
-         {"atlanteans_bread"}
-      },
-      weapons = {
-         "shield_steel",
-         "shield_advanced"
-      }
-   },
-   ["soldier health"] = {
-      food = {
-         {"smoked_fish", "smoked_meat"},
-      },
-      weapons = {
-         "tabard_golden"
-      }
-   },
-   ["soldier evade"] = {
-      food = {
-         {"smoked_fish", "smoked_meat"},
-         {"atlanteans_bread"}
-      }
-   },
-
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...

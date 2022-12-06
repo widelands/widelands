@@ -143,7 +143,7 @@ public:
 	 * Returns whether the connection is established.
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */
-	bool is_connected() const;
+	[[nodiscard]] bool is_connected() const;
 
 	/**
 	 * Closes the connection.

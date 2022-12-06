@@ -44,7 +44,7 @@ public:
 	~NetClient() override;
 
 	// Inherited from NetClientInterface
-	bool is_connected() const override;
+	[[nodiscard]] bool is_connected() const override;
 	void close() override;
 	std::unique_ptr<RecvPacket> try_receive() override;
 	void send(const SendPacket& packet, NetPriority priority = NetPriority::kNormal) override;

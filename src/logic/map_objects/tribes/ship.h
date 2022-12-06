@@ -57,18 +57,18 @@ public:
 	~ShipDescr() override {
 	}
 
-	Bob& create_object() const override;
+	[[nodiscard]] Bob& create_object() const override;
 
-	uint32_t movecaps() const override;
-	const DirAnimations& get_sail_anims() const {
+	[[nodiscard]] uint32_t movecaps() const override;
+	[[nodiscard]] const DirAnimations& get_sail_anims() const {
 		return sail_anims_;
 	}
 
-	Quantity get_default_capacity() const {
+	[[nodiscard]] Quantity get_default_capacity() const {
 		return default_capacity_;
 	}
 
-	const std::vector<std::string>& get_ship_names() const {
+	[[nodiscard]] const std::vector<std::string>& get_ship_names() const {
 		return ship_names_;
 	}
 

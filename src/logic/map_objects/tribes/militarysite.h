@@ -44,21 +44,21 @@ public:
 	~MilitarySiteDescr() override {
 	}
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	uint32_t get_conquers() const override {
+	[[nodiscard]] uint32_t get_conquers() const override {
 		return conquer_radius_;
 	}
 	void set_conquers(uint32_t c) {
 		conquer_radius_ = c;
 	}
-	Quantity get_max_number_of_soldiers() const {
+	[[nodiscard]] Quantity get_max_number_of_soldiers() const {
 		return num_soldiers_;
 	}
 	void set_max_number_of_soldiers(Quantity q) {
 		num_soldiers_ = q;
 	}
-	uint32_t get_heal_per_second() const {
+	[[nodiscard]] uint32_t get_heal_per_second() const {
 		return heal_per_second_;
 	}
 	void set_heal_per_second(uint32_t h) {
@@ -167,12 +167,12 @@ private:
 		explicit SoldierControl(MilitarySite* military_site) : military_site_(military_site) {
 		}
 
-		std::vector<Soldier*> present_soldiers() const override;
-		std::vector<Soldier*> stationed_soldiers() const override;
-		std::vector<Soldier*> associated_soldiers() const override;
-		Quantity min_soldier_capacity() const override;
-		Quantity max_soldier_capacity() const override;
-		Quantity soldier_capacity() const override;
+		[[nodiscard]] std::vector<Soldier*> present_soldiers() const override;
+		[[nodiscard]] std::vector<Soldier*> stationed_soldiers() const override;
+		[[nodiscard]] std::vector<Soldier*> associated_soldiers() const override;
+		[[nodiscard]] Quantity min_soldier_capacity() const override;
+		[[nodiscard]] Quantity max_soldier_capacity() const override;
+		[[nodiscard]] Quantity soldier_capacity() const override;
 		void set_soldier_capacity(Quantity capacity) override;
 		void drop_soldier(Soldier&) override;
 		int incorporate_soldier(EditorGameBase& egbase, Soldier& s) override;

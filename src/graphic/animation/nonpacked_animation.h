@@ -61,10 +61,10 @@ private:
 		          Surface* target,
 		          float opacity) const override;
 
-		int width() const override;
-		int height() const override;
+		[[nodiscard]] int width() const override;
+		[[nodiscard]] int height() const override;
 
-		std::vector<std::unique_ptr<const Texture>>
+		[[nodiscard]] std::vector<std::unique_ptr<const Texture>>
 		frame_textures(bool return_playercolor_masks) const override;
 
 		/// Image files on disk

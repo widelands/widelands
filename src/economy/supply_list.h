@@ -35,7 +35,7 @@ struct SupplyList {
 	void add_supply(Supply&);
 	void remove_supply(Supply&);
 
-	size_t get_nrsupplies() const {
+	[[nodiscard]] size_t get_nrsupplies() const {
 		return supplies_.size();
 	}
 	const Supply& operator[](size_t const idx) const {
