@@ -292,6 +292,8 @@ protected:
 		return chat_overlay_;
 	}
 
+	ChatColorForPlayer color_functor() const;
+
 	UI::Box* toolbar();
 
 	// Returns the information which overlay text should currently be drawn.
