@@ -377,14 +377,14 @@ struct BuildableField {
 	bool invalidated{false};
 
 	bool enemy_wh_nearby{false};
-	uint16_t unowned_land_nearby{0};
+	uint16_t unowned_land_nearby{0U};
 	uint16_t enemy_owned_land_nearby{0U};
 	uint16_t unowned_buildable_spots_nearby{0U};
 	uint16_t unowned_portspace_vicinity_nearby{0U};
 	uint16_t nearest_buildable_spot_nearby{0U};
 	// to identify that field is too close to border and no production building should be built there
 	bool near_border{false};
-	uint16_t unowned_mines_spots_nearby{0};
+	uint16_t unowned_mines_spots_nearby{0U};
 	uint16_t unowned_iron_mines_nearby{0u};
 	// Immovables categorized by building name, so we can have multiple lumberjack/ranger types
 	std::map<std::string, uint8_t> immovables_by_name_nearby;
@@ -397,8 +397,8 @@ struct BuildableField {
 	int16_t fish_nearby{-1};
 	int8_t critters_nearby{-1};
 	Widelands::ResourceAmount ground_water{1};  // used by wells
-	uint8_t space_consumers_nearby{0};
-	uint8_t rangers_nearby{0};
+	uint8_t space_consumers_nearby{0U};
+	uint8_t rangers_nearby{0U};
 	// to manage the military better following variables exists:
 	// future soldier capacity of own nearby militarysites:
 	int16_t area_military_capacity{0};
@@ -433,7 +433,7 @@ struct BuildableField {
 	Time last_resources_check_time;
 	int32_t military_score_{0};
 	bool inland{false};
-	uint16_t local_soldier_capacity{0};
+	uint16_t local_soldier_capacity{0U};
 	bool is_militarysite{false};
 
 	std::vector<uint8_t> consumers_nearby;
@@ -629,10 +629,10 @@ struct MineTypesObserver {
 
 	[[nodiscard]] uint16_t total_count() const;
 
-	uint16_t in_construction{0};
-	uint16_t finished{0};
+	uint16_t in_construction{0U};
+	uint16_t finished{0U};
 	bool is_critical{false};
-	uint16_t unoccupied{0};
+	uint16_t unoccupied{0U};
 };
 
 // This struct contains count of mineable fields grouped by ore/resource type
@@ -790,8 +790,8 @@ private:
 struct MilitarySiteSizeObserver {
 	MilitarySiteSizeObserver() = default;
 
-	uint16_t in_construction{0};
-	uint16_t finished{0};
+	uint16_t in_construction{0U};
+	uint16_t finished{0U};
 };
 
 // this represents a scheduler task
