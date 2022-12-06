@@ -47,8 +47,7 @@
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 constexpr const char* const kDocumentationURL = "https://www.widelands.org/documentation/add-ons/";
 constexpr const char* const kForumURL = "https://www.widelands.org/forum/forum/17/";
@@ -1625,5 +1624,4 @@ step1:
 }
 #endif
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

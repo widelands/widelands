@@ -20,6 +20,7 @@
 #define WL_CHAT_CHAT_H
 
 #include <ctime>
+#include <functional>
 #include <string>
 
 #include "logic/widelands.h"
@@ -27,6 +28,7 @@
 #include "notifications/notifications.h"
 
 class ParticipantList;
+struct RGBColor;
 
 // A chat message as received in game.
 struct ChatMessage {
@@ -72,7 +74,7 @@ struct ChatProvider {
 	// This list need not be stable or monotonic. In other words,
 	// subsequent calls to this functions may return a smaller or
 	// greater number of chat messages.
-	virtual const std::vector<ChatMessage>& get_messages() const = 0;
+	[[nodiscard]] virtual const std::vector<ChatMessage>& get_messages() const = 0;
 
 	// reimplemented e.g. in internet_gaming to silence the chat if in game.
 	// TODO(sirver): this does not belong here. The receiver of the
@@ -82,7 +84,7 @@ struct ChatProvider {
 	}
 
 	// The specific chat provider subclass might not have been set, e.g. due to an exception.
-	virtual bool has_been_set() const {
+	[[nodiscard]] virtual bool has_been_set() const {
 		return false;
 	}
 
@@ -92,5 +94,11 @@ struct ChatProvider {
 	// The last recipient a message has been send to
 	std::string last_recipient_;
 };
+
+/**
+ * A function that looks up the player colour belonging to a given 1-based player number.
+ * May return \c nullptr to use a default server colour.
+ */
+using ChatColorForPlayer = std::function<const RGBColor*(int)>;
 
 #endif  // end of include guard:

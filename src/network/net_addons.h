@@ -35,10 +35,10 @@ struct NetAddons {
 	}
 	~NetAddons();
 
-	bool is_admin() const {
+	[[nodiscard]] bool is_admin() const {
 		return is_admin_;
 	}
-	const std::string& server_descname() const {
+	[[nodiscard]] const std::string& server_descname() const {
 		return server_descname_;
 	}
 
@@ -93,7 +93,7 @@ private:
 	void quit_connection();
 
 	// Read a '\n'-terminated string from the socket. The terminator is not part of the result.
-	std::string read_line() const;
+	[[nodiscard]] std::string read_line() const;
 	void read_file(int64_t length, const std::string& out) const;
 	void check_endofstream();
 	void write_to_server(const std::string&);

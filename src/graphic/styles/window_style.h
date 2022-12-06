@@ -54,42 +54,42 @@ struct WindowStyleInfo {
 	}
 	WindowStyleInfo(const WindowStyleInfo&) = default;
 
-	const RGBAColor& window_border_focused() const {
+	[[nodiscard]] const RGBAColor& window_border_focused() const {
 		return window_border_focused_;
 	}
-	const RGBAColor& window_border_unfocused() const {
+	[[nodiscard]] const RGBAColor& window_border_unfocused() const {
 		return window_border_unfocused_;
 	}
 
-	const Image* background() const {
+	[[nodiscard]] const Image* background() const {
 		return background_;
 	}
-	const Image* border_top() const {
+	[[nodiscard]] const Image* border_top() const {
 		return border_top_;
 	}
-	const Image* border_right() const {
+	[[nodiscard]] const Image* border_right() const {
 		return border_right_;
 	}
-	const Image* border_left() const {
+	[[nodiscard]] const Image* border_left() const {
 		return border_left_;
 	}
-	const Image* border_bottom() const {
+	[[nodiscard]] const Image* border_bottom() const {
 		return border_bottom_;
 	}
 
-	const std::string& button_close() const {
+	[[nodiscard]] const std::string& button_close() const {
 		return button_close_;
 	}
-	const std::string& button_pin() const {
+	[[nodiscard]] const std::string& button_pin() const {
 		return button_pin_;
 	}
-	const std::string& button_unpin() const {
+	[[nodiscard]] const std::string& button_unpin() const {
 		return button_unpin_;
 	}
-	const std::string& button_unminimize() const {
+	[[nodiscard]] const std::string& button_unminimize() const {
 		return button_unminimize_;
 	}
-	const std::string& button_minimize() const {
+	[[nodiscard]] const std::string& button_minimize() const {
 		return button_minimize_;
 	}
 

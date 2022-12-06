@@ -36,7 +36,7 @@ class MapObjectDescr;
 struct MapObjectProgram {
 	static constexpr const char* const kMainProgram = "main";
 
-	const std::string& name() const;
+	[[nodiscard]] const std::string& name() const;
 
 	explicit MapObjectProgram(const std::string& init_name);
 	virtual ~MapObjectProgram() = default;

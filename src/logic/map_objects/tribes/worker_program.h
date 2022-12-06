@@ -39,45 +39,45 @@ struct WorkerProgram : public MapObjectProgram {
 	              Descriptions& descriptions);
 
 	using Actions = std::vector<Worker::Action>;
-	Actions::size_type get_size() const {
+	[[nodiscard]] Actions::size_type get_size() const {
 		return actions_.size();
 	}
-	const Actions& actions() const {
+	[[nodiscard]] const Actions& actions() const {
 		return actions_;
 	}
-	Worker::Action const* get_action(int32_t idx) const {
+	[[nodiscard]] Worker::Action const* get_action(int32_t idx) const {
 		assert(idx >= 0);
 		assert(static_cast<uint32_t>(idx) < actions_.size());
 		return &actions_[idx];
 	}
 
-	const WorkareaInfo& get_workarea_info() const {
+	[[nodiscard]] const WorkareaInfo& get_workarea_info() const {
 		return workarea_info_;
 	}
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	[[nodiscard]] const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
 	needed_attributes() const {
 		return needed_attributes_;
 	}
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	[[nodiscard]] const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
 	collected_attributes() const {
 		return collected_attributes_;
 	}
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	[[nodiscard]] const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
 	created_attributes() const {
 		return created_attributes_;
 	}
-	const std::set<std::string>& collected_resources() const {
+	[[nodiscard]] const std::set<std::string>& collected_resources() const {
 		return collected_resources_;
 	}
-	const std::set<std::string>& created_resources() const {
+	[[nodiscard]] const std::set<std::string>& created_resources() const {
 		return created_resources_;
 	}
-	const std::set<std::string>& created_bobs() const {
+	[[nodiscard]] const std::set<std::string>& created_bobs() const {
 		return created_bobs_;
 	}
 
 	/// Set of ware types produced by this program
-	const std::set<DescriptionIndex>& produced_ware_types() const {
+	[[nodiscard]] const std::set<DescriptionIndex>& produced_ware_types() const {
 		return produced_ware_types_;
 	}
 

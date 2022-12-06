@@ -129,39 +129,39 @@ public:
 	               Descriptions& descriptions);
 	~ImmovableDescr() override;
 
-	int32_t get_size() const {
+	[[nodiscard]] int32_t get_size() const {
 		return size_;
 	}
-	ImmovableProgram const* get_program(const std::string&) const;
+	[[nodiscard]] ImmovableProgram const* get_program(const std::string&) const;
 
 	Immovable& create(EditorGameBase&,
 	                  const Coords&,
 	                  const Widelands::BuildingDescr* former_building_descr) const;
 
-	const Buildcost& buildcost() const {
+	[[nodiscard]] const Buildcost& buildcost() const {
 		return buildcost_;
 	}
 
 	// A basic localized name for the immovable, used by trees
-	const std::string& species() const {
+	[[nodiscard]] const std::string& species() const {
 		return species_;
 	}
 
 	// Every immovable that can 'grow' needs to have terrain affinity defined,
 	// all others do not. Returns true if this one has it defined.
-	bool has_terrain_affinity() const;
+	[[nodiscard]] bool has_terrain_affinity() const;
 
 	// Returns the terrain affinity. If !has_terrain_affinity() this will return
 	// an undefined value.
-	const TerrainAffinity& terrain_affinity() const;
+	[[nodiscard]] const TerrainAffinity& terrain_affinity() const;
 
 	// Map object names that the immovable can transform/grow into
-	const std::set<std::pair<MapObjectType, std::string>>& becomes() const {
+	[[nodiscard]] const std::set<std::pair<MapObjectType, std::string>>& becomes() const {
 		return becomes_;
 	}
 
 	// A set of all productionsites that gather this immovable or any of its future types
-	const std::set<std::string> collected_by() const {
+	[[nodiscard]] const std::set<std::string> collected_by() const {
 		return collected_by_;
 	}
 	void add_collected_by(const Descriptions& descriptions,

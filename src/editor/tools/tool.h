@@ -86,7 +86,7 @@ public:
 	bool is_undoable() {
 		return undoable_;
 	}
-	virtual bool has_size_one() const {
+	[[nodiscard]] virtual bool has_size_one() const {
 		return false;
 	}
 	virtual EditorActionArgs format_args_impl() {
@@ -104,7 +104,7 @@ public:
 	handle_undo_impl(const Widelands::NodeAndTriangle<>&, EditorActionArgs*, Widelands::Map*) {
 		return 0;
 	}  // non unduable tools don't need to implement this.
-	virtual const Image* get_sel_impl() const = 0;
+	[[nodiscard]] virtual const Image* get_sel_impl() const = 0;
 
 	// Gives the tool the chance to modify the nodecaps to change what will be
 	// displayed as build help.
@@ -120,7 +120,7 @@ public:
 		return fcoords.field->maxcaps();
 	}
 
-	virtual bool operates_on_triangles() const {
+	[[nodiscard]] virtual bool operates_on_triangles() const {
 		return false;
 	}
 

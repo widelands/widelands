@@ -51,13 +51,13 @@ public:
 
 	void write_to_file(FileSystem& fs, const std::string& filename) const;
 
-	virtual std::string as_string() const;
+	[[nodiscard]] virtual std::string as_string() const;
 
 protected:
 	static const std::string tab_;
 
-	std::string values_as_string(const std::string& tabs) const;
-	std::string children_as_string() const;
+	[[nodiscard]] std::string values_as_string(const std::string& tabs) const;
+	[[nodiscard]] std::string children_as_string() const;
 	static std::string key_to_string(const std::string& value, bool value_is_empty = false);
 
 	std::string key_;
@@ -77,7 +77,7 @@ public:
 	// Constructor for root node
 	explicit Object() : JSON::Element("", 0) {
 	}
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 };
 
 class Array : public Element {
@@ -88,7 +88,7 @@ protected:
 	explicit Array(const std::string& key, int level);
 
 public:
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 };
 }  // namespace JSON
 #endif  // end of include guard: WL_WEBSITE_JSON_JSON_H

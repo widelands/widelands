@@ -34,9 +34,9 @@ public:
 	~MarketDescr() override {
 	}
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	DescriptionIndex carrier() const {
+	[[nodiscard]] DescriptionIndex carrier() const {
 		return carrier_;
 	}
 
@@ -74,10 +74,10 @@ private:
 		std::vector<Worker*> workers;
 
 		// The number of individual wares in 'items', i.e. the sum of all '.second's.
-		int num_wares_per_batch() const;
+		[[nodiscard]] int num_wares_per_batch() const;
 
 		// True if the 'num_shipped_batches' equals the 'initial_num_batches'
-		bool fulfilled() const;
+		[[nodiscard]] bool fulfilled() const;
 	};
 
 	static void

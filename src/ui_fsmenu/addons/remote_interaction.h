@@ -34,8 +34,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 class AddOnsCtrl;
 class RemoteInteractionWindow;
@@ -156,7 +155,6 @@ private:
 	UI::Dropdown<AddOns::NetAddons::AdminAction> admin_action_;
 };
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_REMOTE_INTERACTION_H

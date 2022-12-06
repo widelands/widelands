@@ -74,27 +74,27 @@ public:
 	/// Sets the mapname as a localized string
 	void set_mapname(const std::string& input_mapname);
 
-	bool is_directory() const;
+	[[nodiscard]] bool is_directory() const;
 
-	bool is_parent_directory() const;
+	[[nodiscard]] bool is_parent_directory() const;
 
-	bool is_sub_directory() const;
+	[[nodiscard]] bool is_sub_directory() const;
 
-	bool is_multiplayer() const;
+	[[nodiscard]] bool is_multiplayer() const;
 
-	bool is_multiplayer_host() const;
+	[[nodiscard]] bool is_multiplayer_host() const;
 
-	bool is_multiplayer_client() const;
+	[[nodiscard]] bool is_multiplayer_client() const;
 
-	bool is_singleplayer() const;
+	[[nodiscard]] bool is_singleplayer() const;
 
-	bool is_replay() const;
+	[[nodiscard]] bool is_replay() const;
 
-	bool compare_save_time(const SavegameData& other) const;
+	[[nodiscard]] bool compare_save_time(const SavegameData& other) const;
 
-	bool compare_directories(const SavegameData& other) const;
+	[[nodiscard]] bool compare_directories(const SavegameData& other) const;
 
-	bool compare_map_name(const SavegameData& other) const;
+	[[nodiscard]] bool compare_map_name(const SavegameData& other) const;
 
 private:
 	/// Savegame or directory

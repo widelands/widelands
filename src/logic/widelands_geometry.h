@@ -47,7 +47,7 @@ struct Coords {
 	static Coords unhash(uint32_t hash);
 
 	/// Hash coordinates to use them as keys in a container
-	uint32_t hash() const;
+	[[nodiscard]] uint32_t hash() const;
 
 	bool operator==(const Coords& other) const;
 	bool operator!=(const Coords& other) const;
@@ -147,7 +147,7 @@ struct NodeAndTriangle {
 struct HeightInterval {
 	HeightInterval(const uint8_t Min, const uint8_t Max) : min(Min), max(Max) {
 	}
-	bool valid() const {
+	[[nodiscard]] bool valid() const {
 		return min <= max;
 	}
 

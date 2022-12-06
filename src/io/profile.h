@@ -63,21 +63,21 @@ public:
 		Value& operator=(Value) noexcept;
 		Value& operator=(Value&& other) noexcept;
 
-		char const* get_name() const {
+		[[nodiscard]] char const* get_name() const {
 			return name_.c_str();
 		}
 
-		bool is_used() const;
+		[[nodiscard]] bool is_used() const;
 		void mark_used();
 
-		int32_t get_int() const;
-		uint32_t get_natural() const;
-		uint32_t get_positive() const;
-		bool get_bool() const;
-		char const* get_string() const;
-		Vector2i get_point() const;
+		[[nodiscard]] int32_t get_int() const;
+		[[nodiscard]] uint32_t get_natural() const;
+		[[nodiscard]] uint32_t get_positive() const;
+		[[nodiscard]] bool get_bool() const;
+		[[nodiscard]] char const* get_string() const;
+		[[nodiscard]] Vector2i get_point() const;
 
-		char const* get_untranslated_string() const {
+		[[nodiscard]] char const* get_untranslated_string() const {
 			return value_.get();
 		}
 		char* get_untranslated_string() {
@@ -86,7 +86,7 @@ public:
 
 		void set_string(char const*);
 
-		bool get_translate() const {
+		[[nodiscard]] bool get_translate() const {
 			return translate_;
 		}
 		void set_translate(const bool t) {
@@ -125,14 +125,14 @@ public:
 
 	Value* get_val(char const* name);
 	Value* get_next_val(char const* name = nullptr);
-	uint32_t get_num_values() const {
+	[[nodiscard]] uint32_t get_num_values() const {
 		return values_.size();
 	}
 
-	char const* get_name() const;
+	[[nodiscard]] char const* get_name() const;
 	void set_name(const std::string&);
 
-	bool is_used() const;
+	[[nodiscard]] bool is_used() const;
 	void mark_used();
 
 	void check_used() const;
