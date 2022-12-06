@@ -675,15 +675,18 @@ void EditBox::highlight_selection(RenderTarget& dst,
 	uint32_t start;
 	uint32_t end;
 	calculate_selection_boundaries(start, end);
-	auto nr_characters = end - start;
 
-	std::string selected_text = m_->text.substr(start, nr_characters);
 	std::string text_before_selection = m_->text.substr(0, start);
+	std::string text_before_sel_end = m_->text.substr(0, end);
 
-	Vector2i selection_start = Vector2i(
-	   text_width(text_before_selection, m_->font_style(), m_->font_scale) + point.x, point.y);
+	Vector2i selection_start =
+	   Vector2i(text_width(text_before_selection, m_->font_style(), m_->font_scale), point.y);
 	Vector2i selection_end =
-	   Vector2i(text_width(selected_text, m_->font_style(), m_->font_scale), fontheight);
+	   Vector2i(text_width(text_before_sel_end, m_->font_style(), m_->font_scale), fontheight);
+
+	selection_end.x -= selection_start.x;
+	selection_start.x += point.x;
+
 	if (m_->scrolloffset != 0) {
 		selection_start.x += m_->scrolloffset;
 	}

@@ -77,7 +77,7 @@ public:
 
 	void clear();
 	void set_sort_column(uint8_t col);
-	uint8_t get_sort_colum() const;
+	uint8_t get_sort_column() const;
 	bool get_sort_descending() const;
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
@@ -202,11 +202,8 @@ public:
 	size_t number_of_columns() const;
 
 	void clear();
-	void set_sort_column(uint8_t const col) {
-		assert(col < columns_.size());
-		sort_column_ = col;
-	}
-	uint8_t get_sort_colum() const {
+	void set_sort_column(uint8_t col);
+	uint8_t get_sort_column() const {
 		return sort_column_;
 	}
 	bool get_sort_descending() const {
@@ -315,6 +312,9 @@ private:
 		int original_width;
 		Align alignment;
 		CompareFn compare;
+		std::string user_tooltip;
+
+		void update_tooltip(bool sorted) const;
 	};
 	using Columns = std::vector<Column>;
 
