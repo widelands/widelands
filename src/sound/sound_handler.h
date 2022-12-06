@@ -188,16 +188,16 @@ public:
 	void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade);
 	void use_custom_songset(bool on);
-	bool use_custom_songset() const;
+	[[nodiscard]] bool use_custom_songset() const;
 
-	const std::string current_songset() const;
+	[[nodiscard]] const std::string current_songset() const;
 
-	bool is_sound_enabled(SoundType type) const;
+	[[nodiscard]] bool is_sound_enabled(SoundType type) const;
 	void set_enable_sound(SoundType type, bool enable);
-	int32_t get_volume(SoundType type) const;
+	[[nodiscard]] int32_t get_volume(SoundType type) const;
 	void set_volume(SoundType type, int32_t volume);
 
-	int32_t get_max_volume() const;
+	[[nodiscard]] int32_t get_max_volume() const;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(SoundHandler);

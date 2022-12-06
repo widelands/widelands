@@ -81,7 +81,7 @@ public:
 	   : start_(start), end_(end), dt_(dt) {
 	}
 
-	T value(const float time_ms) const {
+	[[nodiscard]] T value(const float time_ms) const {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
 		return mix(math::sqr(t) * (3.f - 2.f * t), start_, end_);
 	}
@@ -101,7 +101,7 @@ public:
 	   : first_(start, middle, dt / 2.f), second_(middle, end, dt / 2.f), dt_(dt) {
 	}
 
-	T value(const float time_ms) const {
+	[[nodiscard]] T value(const float time_ms) const {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
 		if (t < 0.5f) {
 			return first_.value(t * dt_);

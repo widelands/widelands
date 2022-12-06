@@ -101,7 +101,7 @@ public:
 		return rendered_text;
 	}
 
-	UI::FontSet const* fontset() const override {
+	[[nodiscard]] UI::FontSet const* fontset() const override {
 		return fontset_;
 	}
 

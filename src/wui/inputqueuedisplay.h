@@ -61,6 +61,7 @@ struct PrioritySlider : public HorizontalSlider {
 	}
 
 public:
+	bool handle_key(bool, SDL_Keysym) override;
 	bool handle_mousewheel(int32_t, int32_t, uint16_t) override {
 		return false;
 	}

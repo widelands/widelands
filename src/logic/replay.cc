@@ -56,7 +56,7 @@ public:
 	   : Command(init_duetime), hash_(hash) {
 	}
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kReplaySyncRead;
 	}
 
@@ -237,7 +237,7 @@ public:
 	explicit CmdReplaySyncWrite(const Time& init_duetime) : Command(init_duetime) {
 	}
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kReplaySyncWrite;
 	}
 

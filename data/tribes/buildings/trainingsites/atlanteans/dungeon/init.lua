@@ -28,49 +28,16 @@
 --        If trainer patience runs out, a soldier will be kicked out.
 --
 --    **soldier attack**
---        *Optional*. A table describing what is needed to train a soldier in attack.
---        It contains the following entries:
---
---        **min_level**
---            *Deprecated*. The minimum attack level that a soldier needs before it
---            can be trained in attack at this training site.
---
---        **max_level**
---            *Deprecated*. The maximum level of attack that a soldier can be trained in.
---
---        **food**
---            *Optional*. A table with the types of food needed to train a
---            soldier in attack. It contains subtables with alternatives, e.g.
---            ``{"fish", "meat"}`` means that fish OR meat is needed,
---            ``{"fish"}, {"meat"}`` means that fish AND meat are needed.
---
---        **weapons**
---            *Optional*. A table with the list of weapons that are used for
---            attack training at the various levels.
---
---        Example::
---
---            ["soldier attack"] = {
---                food = {
---                    {"smoked_fish", "smoked_meat"},
---                    {"atlanteans_bread"}
---                },
---                weapons = {
---                    "trident_long",
---                    "trident_steel",
---                    "trident_double",
---                    "trident_heavy_double"
---                }
---            },
+--        *Deprecated*. A table describing what is needed to train a soldier in attack.
 --
 --    **soldier defense**
---        *Optional*. Just like ``soldier attack``, but for defense training.
+--        *Deprecated*. Just like ``soldier attack``, but for defense training.
 --
 --    **soldier health**
---        *Optional*. Just like ``soldier attack``, but for health training.
+--        *Deprecated*. Just like ``soldier attack``, but for health training.
 --
 --    **soldier evade**
---        *Optional*. Just like ``soldier attack``, but for evade training.
+--        *Deprecated*. Just like ``soldier attack``, but for evade training.
 --
 --    **messages**
 --        *Mandatory*. A table with translatable production tooltips, containing the
@@ -151,13 +118,6 @@
 --          { name = "fish", amount = 6 },
 --          { name = "meat", amount = 6 },
 --          { name = "empire_bread", amount = 10 }
---       },
---
---       ["soldier evade"] = {
---          food = {
---             {"fish", "meat"},
---             {"empire_bread"}
---          }
 --       },
 --
 --       programs = {
@@ -250,19 +210,6 @@ wl.Descriptions():new_trainingsite_type {
       { name = "trident_steel", amount = 4 },
       { name = "trident_double", amount = 4 },
       { name = "trident_heavy_double", amount = 4 }
-   },
-
-   ["soldier attack"] = {
-      food = {
-         {"smoked_fish", "smoked_meat"},
-         {"atlanteans_bread"}
-      },
-      weapons = {
-         "trident_long",
-         "trident_steel",
-         "trident_double",
-         "trident_heavy_double"
-      }
    },
 
    programs = {

@@ -35,35 +35,35 @@ public:
 	virtual ~DescriptionsCompatibilityTable() = default;
 
 	/// Looks up the new name for the 'resource'.
-	virtual std::string lookup_resource(const std::string& resource) const = 0;
+	[[nodiscard]] virtual std::string lookup_resource(const std::string& resource) const = 0;
 
 	/// Looks up the new name for the 'terrain'.
-	virtual std::string lookup_terrain(const std::string& terrain) const = 0;
+	[[nodiscard]] virtual std::string lookup_terrain(const std::string& terrain) const = 0;
 
 	/// Looks up the new name for the 'critter'.
-	virtual std::string lookup_critter(const std::string& critter) const = 0;
+	[[nodiscard]] virtual std::string lookup_critter(const std::string& critter) const = 0;
 
 	/// Looks up the new name for the 'immovable'.
-	virtual std::string lookup_immovable(const std::string& immovable) const = 0;
+	[[nodiscard]] virtual std::string lookup_immovable(const std::string& immovable) const = 0;
 
 	/// Looks up the new name for the 'worker'.
-	const std::string& lookup_worker(const std::string& worker) const;
+	[[nodiscard]] const std::string& lookup_worker(const std::string& worker) const;
 
 	/// Looks up the new name for the 'ware'.
-	const std::string& lookup_ware(const std::string& ware) const;
+	[[nodiscard]] const std::string& lookup_ware(const std::string& ware) const;
 
 	/// Looks up the new name for the 'building'.
-	const std::string& lookup_building(const std::string& building) const;
+	[[nodiscard]] const std::string& lookup_building(const std::string& building) const;
 
 	/// Looks up the new name for the 'ship'.
-	const std::string& lookup_ship(const std::string& ship) const;
+	[[nodiscard]] const std::string& lookup_ship(const std::string& ship) const;
 
 	/// Looks up the new name for the 'program'.
-	const std::string& lookup_program(const std::string& program) const;
+	[[nodiscard]] const std::string& lookup_program(const std::string& program) const;
 
 protected:
-	const std::string& lookup_entry(const std::string& entry,
-	                                const std::map<std::string, std::string>& table) const;
+	[[nodiscard]] const std::string&
+	lookup_entry(const std::string& entry, const std::map<std::string, std::string>& table) const;
 
 	// <old name, new name>
 	const std::map<std::string, std::string> workers_;
@@ -83,10 +83,10 @@ public:
 	PostOneWorldLegacyLookupTable();
 
 	// Implements DescriptionsCompatibilityTable.
-	std::string lookup_resource(const std::string& resource) const override;
-	std::string lookup_terrain(const std::string& terrain) const override;
-	std::string lookup_critter(const std::string& critter) const override;
-	std::string lookup_immovable(const std::string& immovable) const override;
+	[[nodiscard]] std::string lookup_resource(const std::string& resource) const override;
+	[[nodiscard]] std::string lookup_terrain(const std::string& terrain) const override;
+	[[nodiscard]] std::string lookup_critter(const std::string& critter) const override;
+	[[nodiscard]] std::string lookup_immovable(const std::string& immovable) const override;
 
 private:
 	// <old name, new name>
@@ -101,13 +101,13 @@ public:
 	explicit OneWorldLegacyLookupTable(const std::string& old_world_name);
 
 	// Implements DescriptionsCompatibilityTable.
-	std::string lookup_resource(const std::string& resource) const override;
-	std::string lookup_terrain(const std::string& terrain) const override;
-	std::string lookup_critter(const std::string& critter) const override;
-	std::string lookup_immovable(const std::string& immovable) const override;
+	[[nodiscard]] std::string lookup_resource(const std::string& resource) const override;
+	[[nodiscard]] std::string lookup_terrain(const std::string& terrain) const override;
+	[[nodiscard]] std::string lookup_critter(const std::string& critter) const override;
+	[[nodiscard]] std::string lookup_immovable(const std::string& immovable) const override;
 
 private:
-	const std::string&
+	[[nodiscard]] const std::string&
 	lookup_world_entry(const std::string& entry,
 	                   const std::map<std::string, std::map<std::string, std::string>>& table) const;
 

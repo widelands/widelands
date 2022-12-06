@@ -71,7 +71,7 @@ msgstr "Обработка окна \"Задания\""
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr "Вы можете открыть окно \"Цели\" по нажатию кнопки \"Цели\" в панели внизу экрана."
+msgstr "Вы можете открыть окно \"Задания\" по нажатию кнопки \"Задания\" в панели внизу экрана."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
@@ -831,7 +831,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "Отлично! Давайте посмотрим, как работает система сообщений в реальной игре, приступим? Для этого я уберу все скалы подальше от несчастных камнетесов в каменоломнях. Тогда каждый из них отправит сообщение о том, что он не может найти каких либо скал в его рабочей области, а потом они попробуют сделать какую-нибудь другую работу."
+msgstr "Отлично! Давайте посмотрим, как работает система сообщений в реальной игре, приступим? Для этого я уберу все скалы подальше от несчастных камнетёсов в каменоломнях. Тогда каждый из них отправит сообщение о том, что он не может найти каких либо скал в его рабочей области, а потом они попробуют сделать какую-нибудь другую работу."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:539
 msgid "Destroy the two quarries"

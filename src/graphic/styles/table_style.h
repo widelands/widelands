@@ -32,13 +32,13 @@ struct TableStyleInfo {
 	   : enabled_(init_enabled), disabled_(init_disabled), hotkey_(init_hotkey) {
 	}
 
-	const UI::FontStyleInfo& enabled() const {
+	[[nodiscard]] const UI::FontStyleInfo& enabled() const {
 		return *enabled_.get();
 	}
-	const UI::FontStyleInfo& disabled() const {
+	[[nodiscard]] const UI::FontStyleInfo& disabled() const {
 		return *disabled_.get();
 	}
-	const UI::FontStyleInfo& hotkey() const {
+	[[nodiscard]] const UI::FontStyleInfo& hotkey() const {
 		return *hotkey_.get();
 	}
 

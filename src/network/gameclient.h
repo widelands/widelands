@@ -118,8 +118,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	// ChatProvider interface
 	void send(const std::string& msg) override;
-	const std::vector<ChatMessage>& get_messages() const override;
-	bool has_been_set() const override {
+	[[nodiscard]] const std::vector<ChatMessage>& get_messages() const override;
+	[[nodiscard]] bool has_been_set() const override {
 		return true;
 	}
 

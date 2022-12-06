@@ -224,7 +224,9 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::PanelStyle::kFsMenu,
                           _("Maximum number of autosave files:"),
                           UI::SpinBox::Units::kNone,
-                          UI::SpinBox::Type::kBig),
+                          UI::SpinBox::Type::kBig,
+                          1,
+                          ChangeBigStep::kMediumRange),
 
      sb_replay_lifetime_(&box_saving_,
                          0,

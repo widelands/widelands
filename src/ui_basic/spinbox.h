@@ -30,6 +30,8 @@ struct SpinBoxImpl;
 /// w is the overall width of the SpinBox and must be wide enough to fit 2 labels and the buttons.
 /// unit_w is the width alotted for all buttons and the text between them (the actual spinbox).
 /// label_text is a text that precedes the actual spinbox.
+/// The current implementation does not allow minval or maxval to be near the numeric limits of
+/// int32_t.
 class SpinBox : public Panel {
 public:
 	enum class Type {
@@ -83,13 +85,16 @@ private:
 	void update();
 	void change_value(int32_t);
 	const std::string unit_text(int32_t value) const;
+	void calculate_big_step();
 
 	const SpinBox::Type type_;
 	SpinBoxImpl* sbi_;
 	std::vector<UI::Button*> buttons_;
 	UI::Box* box_;
 	uint32_t unit_width_;
-	uint32_t button_height_;
+	uint32_t button_size_;
+	uint32_t big_step_button_width_;
+	uint32_t buttons_width_;
 	uint32_t padding_;
 	uint32_t number_of_paddings_;
 };

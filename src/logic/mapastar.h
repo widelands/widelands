@@ -32,7 +32,7 @@ struct MapAStarBase {
 	   : map(m), pathfields(m.pathfieldmgr_->allocate()), queue(type) {
 	}
 
-	bool empty() const {
+	[[nodiscard]] bool empty() const {
 		return queue.empty();
 	}
 	void pathto(Coords dest, Path& path) const;
@@ -41,7 +41,7 @@ protected:
 	Pathfield& pathfield(Coords where) {
 		return pathfields->fields[map.get_index(where, map.get_width())];
 	}
-	const Pathfield& pathfield(Coords where) const {
+	[[nodiscard]] const Pathfield& pathfield(Coords where) const {
 		return pathfields->fields[map.get_index(where, map.get_width())];
 	}
 
@@ -64,7 +64,7 @@ struct StepEvalAStar {
 		return est;
 	}
 
-	int32_t stepcost(
+	[[nodiscard]] int32_t stepcost(
 	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
 		if ((swim_ && !(to.field->nodecaps() & MOVECAPS_SWIM)) ||
 		    (!swim_ && !(to.field->nodecaps() & MOVECAPS_WALK)))
