@@ -210,50 +210,50 @@ private:
 	}
 
 	inline void
-	format_do_impl(char** out, unsigned orig_index, bool localize, signed long long int t) const {
+	format_do_impl(char** out, unsigned orig_index, bool localize, signed long long int t) const {  // NOLINT suppress google-runtime-int
 		arg_.signed_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kSigned);
 	}
 	inline void
-	format_do_impl(char** out, unsigned orig_index, bool localize, signed long int t) const {
+	format_do_impl(char** out, unsigned orig_index, bool localize, signed long int t) const {  // NOLINT suppress google-runtime-int
 		arg_.signed_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kSigned);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, signed int t) const {
+	inline void format_do_impl(char** out, unsigned orig_index, bool localize, signed int t) const {  // NOLINT suppress google-runtime-int
 		arg_.signed_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kSigned);
 	}
 	inline void
-	format_do_impl(char** out, unsigned orig_index, bool localize, signed short int t) const {
+	format_do_impl(char** out, unsigned orig_index, bool localize, signed short int t) const {  // NOLINT suppress google-runtime-int
 		arg_.signed_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kSigned);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, int8_t t) const {
+	inline void format_do_impl(char** out, unsigned orig_index, bool localize, int8_t t) const {  // NOLINT suppress google-runtime-int
 		arg_.signed_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kSigned);
 	}
 
 	inline void
-	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned long long int t) const {
+	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned long long int t) const {  // NOLINT suppress google-runtime-int
 		arg_.unsigned_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
 	}
 	inline void
-	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned long int t) const {
+	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned long int t) const {  // NOLINT suppress google-runtime-int
 		arg_.unsigned_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
 	}
 	inline void
-	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned int t) const {
+	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned int t) const {  // NOLINT suppress google-runtime-int
 		arg_.unsigned_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
 	}
 	inline void
-	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned short t) const {
+	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned short t) const {  // NOLINT suppress google-runtime-int
 		arg_.unsigned_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, uint8_t t) const {
+	inline void format_do_impl(char** out, unsigned orig_index, bool localize, uint8_t t) const {  // NOLINT suppress google-runtime-int
 		arg_.unsigned_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
 	}

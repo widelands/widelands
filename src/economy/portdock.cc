@@ -477,9 +477,6 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 // to this port as this information was moved to the ShippingSchedule
 constexpr uint8_t kCurrentPacketVersion = 6;
 
-PortDock::Loader::Loader()  {
-}
-
 void PortDock::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
 	PlayerImmovable::Loader::load(fr);
 

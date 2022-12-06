@@ -389,7 +389,7 @@ private:
 protected:
 	struct Loader : public Worker::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&) override;
 		void load_pointers() override;

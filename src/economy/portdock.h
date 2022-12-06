@@ -160,7 +160,7 @@ private:
 protected:
 	class Loader : public PlayerImmovable::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&, uint8_t packet_version);
 		void load_pointers() override;

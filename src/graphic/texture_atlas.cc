@@ -48,9 +48,6 @@ void TextureAtlas::Node::split(int item_w, int item_h) {
 	// size of the full canvas.
 }
 
-TextureAtlas::TextureAtlas()  {
-}
-
 void TextureAtlas::add(const Image& texture) {
 	blocks_.emplace_back(next_index_++, &texture);
 }

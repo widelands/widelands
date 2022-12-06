@@ -33,7 +33,7 @@ class MapObject;
  *   - translate MapObject* Pointer into the index used in the saved file
  */
 struct MapObjectSaver {
-	MapObjectSaver();
+	MapObjectSaver() = default;
 
 	[[nodiscard]] bool is_object_known(const MapObject&) const;
 	Serial register_object(const MapObject&);

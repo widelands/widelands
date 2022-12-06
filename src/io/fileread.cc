@@ -20,9 +20,6 @@
 
 #include <cassert>
 
-FileRead::FileRead()  {
-}
-
 FileRead::~FileRead() {
 	if (data_ != nullptr) {
 		close();

@@ -27,9 +27,6 @@ namespace Widelands {
 Pathfields::Pathfields(uint32_t const nrfields) : fields(new Pathfield[nrfields]) {
 }
 
-PathfieldManager::PathfieldManager()  {
-}
-
 void PathfieldManager::set_size(uint32_t const nrfields) {
 	if (nrfields_ != nrfields) {
 		list_.clear();

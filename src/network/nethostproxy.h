@@ -89,8 +89,7 @@ private:
 			kDisconnected
 		};
 
-		Client()  {
-		}
+		Client() = default;
 
 		// deleted since RecvPacket does not offer a copy constructor
 		Client(const Client& other) = delete;

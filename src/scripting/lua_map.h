@@ -227,7 +227,7 @@ private:
 
 #define CASTED_GET_DESCRIPTION(klass)                                                              \
 	const Widelands::klass* get() const {                                                           \
-		return static_cast<const Widelands::klass*>(LuaMapObjectDescription::get());                 \
+		return dynamic_cast<const Widelands::klass*>(LuaMapObjectDescription::get());                \
 	}
 
 class LuaImmovableDescription : public LuaMapObjectDescription {
@@ -844,7 +844,7 @@ private:
 
 #define CASTED_GET(klass)                                                                          \
 	Widelands::klass* get(lua_State* L, Widelands::EditorGameBase& egbase) {                        \
-		return static_cast<Widelands::klass*>(LuaMapObject::get(L, egbase, #klass));                 \
+		return dynamic_cast<Widelands::klass*>(LuaMapObject::get(L, egbase, #klass));                \
 	}
 
 class LuaMapObject : public LuaMapModuleClass {

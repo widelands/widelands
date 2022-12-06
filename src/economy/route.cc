@@ -34,8 +34,6 @@ Route IMPLEMENTATION
 */
 
 namespace Widelands {
-Route::Route()  {
-}
 
 /**
  * Completely clear the route and initialize it

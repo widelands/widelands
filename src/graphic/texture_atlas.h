@@ -49,7 +49,7 @@ public:
 		int index_;
 	};
 
-	TextureAtlas();
+	TextureAtlas() = default;
 
 	// Add 'texture' as one of the textures to be packed. Ownership is
 	// not taken, but 'texture' must be valid until pack() has been

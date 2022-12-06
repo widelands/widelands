@@ -72,7 +72,7 @@ struct Pathfields {
  * which is required for pathfinding reentrancy.
  */
 struct PathfieldManager {
-	PathfieldManager();
+	PathfieldManager() = default;
 
 	void set_size(uint32_t nrfields);
 	std::shared_ptr<Pathfields> allocate();

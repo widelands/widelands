@@ -1765,9 +1765,6 @@ Load/save support
 
 constexpr uint8_t kCurrentPacketVersion = 3;
 
-Soldier::Loader::Loader()  {
-}
-
 void Soldier::Loader::load(FileRead& fr) {
 	Worker::Loader::load(fr);
 

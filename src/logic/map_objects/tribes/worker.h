@@ -300,7 +300,7 @@ private:
 protected:
 	struct Loader : public Bob::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
 		virtual void load(FileRead&);
 		void load_pointers() override;

@@ -125,7 +125,7 @@ private:
 };
 
 struct RenderedText {
-	RenderedText();
+	RenderedText() = default;
 	~RenderedText();
 
 	/// RenderedRects that can be drawn on screen

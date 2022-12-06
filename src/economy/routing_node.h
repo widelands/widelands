@@ -75,10 +75,7 @@ struct RoutingNode {
 	int32_t mpf_estimate_worker{0};       ///< estimate of cost to destination
 
 public:
-	RoutingNode()
-	   
-	     {
-	}
+	RoutingNode() = default;
 	virtual ~RoutingNode() = default;
 
 	void reset_path_finding_cycle(WareWorker which) {

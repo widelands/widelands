@@ -26,10 +26,7 @@
 namespace AddOns {
 
 struct NetAddons {
-	NetAddons()
-	   
-	     {
-	}
+	NetAddons() = default;
 	~NetAddons();
 
 	[[nodiscard]] bool is_admin() const {

@@ -74,8 +74,7 @@ struct Transfer {
 	struct ReadData {
 		uint32_t destination{0};
 
-		ReadData()  {
-		}
+		ReadData() = default;
 	};
 
 	void read(FileRead& fr, ReadData& rd);

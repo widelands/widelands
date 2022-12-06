@@ -89,7 +89,7 @@ public:
 
 private:
 	// Private constructor for Singleton.
-	NotificationsManager();
+	NotificationsManager() = default;
 
 	// Checks that there are no more subscribers.
 	~NotificationsManager();

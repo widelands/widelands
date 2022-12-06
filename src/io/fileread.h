@@ -70,7 +70,7 @@ public:
 	};
 
 	/// Create the object with nothing to read.
-	FileRead();
+	FileRead() = default;
 
 	~FileRead() override;
 

@@ -41,8 +41,7 @@ struct QuickNavigation {
 		bool set{false};
 		std::string name;
 
-		Landmark()  {
-		}
+		Landmark() = default;
 	};
 
 	explicit QuickNavigation(MapView* map_view);

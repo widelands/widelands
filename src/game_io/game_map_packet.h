@@ -30,8 +30,7 @@ struct WidelandsMapLoader;
  * This is just a wrapper around MapSaver and MapLoader
  */
 struct GameMapPacket : public GameDataPacket {
-	GameMapPacket()  {
-	}
+	GameMapPacket() = default;
 	~GameMapPacket() override;
 
 	/// Ensures that the world gets loaded but does not much more.

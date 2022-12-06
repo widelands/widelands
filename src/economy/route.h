@@ -41,7 +41,7 @@ struct Route : public IRoute {
 	friend struct Router;
 	friend class Request;
 
-	Route();
+	Route() = default;
 
 	void init(int32_t) override;
 

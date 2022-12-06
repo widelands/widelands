@@ -625,7 +625,7 @@ struct EnemySiteObserver {
 // as all mines have 3 levels, AI does not know total count of mines per mined material
 // so this observer will be used for this
 struct MineTypesObserver {
-	MineTypesObserver();
+	MineTypesObserver() = default;
 
 	[[nodiscard]] uint16_t total_count() const;
 
@@ -788,7 +788,7 @@ private:
 
 // this is used to count militarysites by their size
 struct MilitarySiteSizeObserver {
-	MilitarySiteSizeObserver();
+	MilitarySiteSizeObserver() = default;
 
 	uint16_t in_construction{0};
 	uint16_t finished{0};

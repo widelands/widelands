@@ -3315,9 +3315,6 @@ Load/save support
 
 constexpr uint8_t kCurrentPacketVersion = 3;
 
-Worker::Loader::Loader()  {
-}
-
 void Worker::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
 	try {

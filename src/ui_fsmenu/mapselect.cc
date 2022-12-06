@@ -54,7 +54,7 @@ MapSelect::MapSelect(MenuCapsule& m,
      map_details_(
         &right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, *game_for_preview_),
 
-     scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
+     scenario_types_(settings->settings().multiplayer ? Widelands::Map::MP_SCENARIO : Widelands::Map::SP_SCENARIO),
      basedir_(kMapsDir),
      settings_(settings),
      ctrl_(ctrl)

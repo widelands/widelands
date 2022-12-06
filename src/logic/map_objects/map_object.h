@@ -297,8 +297,8 @@ public:
 		MapObject* object_{nullptr};
 
 	protected:
-		Loader()  {
-		}
+		Loader() = default;
+		
 
 	public:
 		virtual ~Loader() = default;
@@ -385,8 +385,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
 struct ObjectManager {
 	using MapObjectMap = std::unordered_map<Serial, MapObject*>;
 
-	ObjectManager()  {
-	}
+	ObjectManager() = default;
 	~ObjectManager();
 
 	void cleanup(EditorGameBase&);

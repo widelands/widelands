@@ -33,8 +33,7 @@ struct FCoords;
 struct FindNode {
 private:
 	struct BaseCapsule {
-		BaseCapsule()  {
-		}
+		BaseCapsule() = default;
 		virtual ~BaseCapsule() = default;
 
 		void addref() {

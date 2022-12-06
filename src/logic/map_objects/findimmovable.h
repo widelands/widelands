@@ -30,8 +30,7 @@ class Player;
 struct FindImmovable {
 private:
 	struct BaseCapsule {
-		BaseCapsule()  {
-		}
+		BaseCapsule() = default;
 		virtual ~BaseCapsule() = default;
 
 		void addref() {

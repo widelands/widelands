@@ -124,16 +124,16 @@ template <typename T> inline bool compare(const char* a, const T b) {  // NOLINT
 template <typename T> inline bool compare(char* a, const T b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
 	return std::string(a) == b;
 }
-inline bool compare(const unsigned a, const int b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
-	return static_cast<long>(a) == b;
+inline bool compare(const unsigned a, const int b) {  // NOLINT false-positive readability-avoid-const-params-in-decls, google-runtime-int
+	return static_cast<long>(a) == b;  // NOLINT suppress google-runtime-int
 }
-inline bool compare(const unsigned long a, const int b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
-	return static_cast<long long>(a) == b;
+inline bool compare(const unsigned long a, const int b) {  // NOLINT false-positive readability-avoid-const-params-in-decls, google-runtime-int
+	return static_cast<long long>(a) == b;  // NOLINT suppress google-runtime-int
 }
-inline bool compare(const unsigned long long a, const int b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
-	return static_cast<long long>(a) == b;
+inline bool compare(const unsigned long long a, const int b) {  // NOLINT false-positive readability-avoid-const-params-in-decls, google-runtime-int
+	return static_cast<long long>(a) == b;  // NOLINT suppress google-runtime-int
 }
-template <typename T> inline bool compare(const float a, const T b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
+template <typename T> inline bool compare(const float a, const T b) {  // NOLINT false-positive readability-avoid-const-params-in-decls, google-runtime-int
 	return std::fabs(a - b) < 0.001f;
 }
 template <typename T> inline bool compare(const double a, const T b) {  // NOLINT false-positive readability-avoid-const-params-in-decls

@@ -121,7 +121,7 @@ protected:
 	/// Animation data for a particular scale
 	struct MipMapEntry {
 
-		MipMapEntry();
+		MipMapEntry() = default;
 		virtual ~MipMapEntry() = default;
 
 		/// Loads the graphics if they are not yet loaded.

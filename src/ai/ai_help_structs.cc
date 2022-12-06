@@ -377,12 +377,6 @@ bool BuildingObserver::buildable(const Widelands::Player& p) const {
 	       p.tribe().has_building(id);
 }
 
-// as all mines have 3 levels, AI does not know total count of mines per mined material
-// so this observer will be used for this
-MineTypesObserver::MineTypesObserver()
-    {
-}
-
 // Reset counter for all field types
 void MineFieldsObserver::zero() {
 	for (auto& material : stat) {
@@ -924,10 +918,6 @@ void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) co
 
 uint16_t MineTypesObserver::total_count() const {
 	return in_construction + finished;
-}
-
-// this is used to count militarysites by their size
-MilitarySiteSizeObserver::MilitarySiteSizeObserver()  {
 }
 
 // this represents a scheduler task

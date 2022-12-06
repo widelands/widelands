@@ -33,9 +33,6 @@
 const std::map<float, std::string> Animation::kSupportedScales{
    {0.5, "_0.5"}, {1, "_1"}, {2, "_2"}, {4, "_4"}};
 
-Animation::MipMapEntry::MipMapEntry()  {
-}
-
 Animation::Animation(const LuaTable& table)
    : 
      representative_frame_(

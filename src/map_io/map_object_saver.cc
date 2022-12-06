@@ -29,11 +29,6 @@
 
 namespace Widelands {
 
-MapObjectSaver::MapObjectSaver()
-   
-     {
-}
-
 /**
  * Return a pointer to the record for the given object.
  * Create a record if that hasn't been done yet.
