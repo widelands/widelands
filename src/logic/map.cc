@@ -2323,8 +2323,6 @@ bool Map::can_reach_by_water(const Coords& field) const {
 		return false;
 	}
 
-	FCoords neighb;
-
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		if ((get_neighbour(fc, dir).field->nodecaps() & MOVECAPS_SWIM) != 0) {
 			return true;

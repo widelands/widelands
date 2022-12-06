@@ -79,8 +79,8 @@ public:
 };
 
 class LuaPlayerBase : public LuaBasesModuleClass {
+	enum { NONE = 0xff };
 	Widelands::PlayerNumber player_number_{NONE};
-	enum { NONE = -1 };
 
 public:
 	LUNA_CLASS_HEAD(LuaPlayerBase);

@@ -202,7 +202,7 @@ private:
 	};
 
 	Coords position_;
-	Time animstart_=0;
+	Time animstart_{0};
 
 	Building* building_=nullptr;  ///< attached building (replaces road WALK_NW)
 	RoadBase* roads_[WalkingDir::LAST_DIRECTION];
