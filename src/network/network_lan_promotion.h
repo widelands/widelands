@@ -179,7 +179,7 @@ struct LanGameFinder : LanBase {
 private:
 	std::list<std::unique_ptr<NetOpenGame>> opengames;
 
-	void (*callback)(int32_t, const NetOpenGame* const, void*){nullptr};
+	void (*callback)(int32_t, const NetOpenGame* const, void*) {nullptr};
 	void* userdata;
 };
 
