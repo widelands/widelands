@@ -24,7 +24,7 @@
 
 namespace Widelands {
 class Player;
-} // namespace Widelands
+}  // namespace Widelands
 
 /**
  * Display a mixed list of wares and workers using their in-game graphics,

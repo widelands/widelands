@@ -80,9 +80,9 @@ std::string editor_splash_image() {
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, get_config_section(), nullptr),
-     
+
      realtime_(SDL_GetTicks()),
-     
+
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -128,7 +128,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                    UI::PanelStyle::kWui,
                    UI::ButtonStyle::kWuiPrimary,
                    [this](ShowHideEntry t) { showhide_menu_selected(t); }),
-     
+
      tools_(new Tools(*this, e.map())),
      history_(nullptr)  // history needs the undo/redo buttons
 {

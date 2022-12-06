@@ -103,8 +103,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
                       kPlotWidth + 2 * kSpacing,
                       270,
                       _("Ware Statistics")),
-     iplayer_(parent)
-     {
+     iplayer_(parent) {
 
 	const Widelands::TribeDescr& player_tribe = parent.get_player()->tribe();
 

@@ -26,7 +26,7 @@ namespace Widelands {
 
 MapVersion::MapVersion()
    : map_creator_version(build_id()),
-     
+
      map_version_timestamp(static_cast<uint32_t>(time(nullptr))) {
 }
 }  // namespace Widelands

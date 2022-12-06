@@ -425,8 +425,8 @@ struct BuildableField {
 	ExtendedBool is_portspace{ExtendedBool::kUnset};
 	bool port_nearby{false};  // to increase priority if a port is nearby,
 	// especially for new colonies
-	ExtendedBool portspace_nearby{ExtendedBool::kUnset};    // special fields intended for ports
-	ExtendedBool shipyard_preferred;  // special fields intended for shipyards
+	ExtendedBool portspace_nearby{ExtendedBool::kUnset};  // special fields intended for ports
+	ExtendedBool shipyard_preferred;                      // special fields intended for shipyards
 	int32_t max_buildcap_nearby{0};
 	// It is not necessary to check resources (stones, fish...) too frequently as they do not change
 	// fast. This stores the time of the last check.

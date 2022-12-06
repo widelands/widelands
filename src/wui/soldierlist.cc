@@ -116,10 +116,7 @@ private:
 SoldierPanel::SoldierPanel(UI::Panel& parent,
                            Widelands::EditorGameBase& gegbase,
                            Widelands::Building& building)
-   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
-     egbase_(gegbase),
-     building_(&building)
-     {
+   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0), egbase_(gegbase), building_(&building) {
 	assert(building.soldier_control() != nullptr);
 	Soldier::calc_info_icon_size(building.owner().tribe(), icon_width_, icon_height_);
 	icon_width_ += 2 * kIconBorder;
@@ -406,7 +403,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 
      ibase_(ib),
      building_(building),
-     
+
      soldierpanel_(*this, ib.egbase(), building),
      infotext_(
         this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Click soldier to send away")) {

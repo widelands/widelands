@@ -39,8 +39,7 @@ const BattleDescr& Battle::descr() const {
 	return g_battle_descr;
 }
 
-Battle::Battle()
-   : MapObject(&g_battle_descr) {
+Battle::Battle() : MapObject(&g_battle_descr) {
 }
 
 Battle::Battle(Game& game, Soldier* first_soldier, Soldier* second_soldier)

@@ -530,8 +530,7 @@ MapObject IMPLEMENTATION
 /**
  * Zero-initialize a map object
  */
-MapObject::MapObject(const MapObjectDescr* const the_descr)
-   : descr_(the_descr),  owner_(nullptr) {
+MapObject::MapObject(const MapObjectDescr* const the_descr) : descr_(the_descr), owner_(nullptr) {
 }
 
 /**

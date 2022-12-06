@@ -52,7 +52,7 @@ public:
 
 	LUNA_CLASS_HEAD(LuaPlayer);
 
-	LuaPlayer()  = default;
+	LuaPlayer() = default;
 	explicit LuaPlayer(Widelands::PlayerNumber n) : LuaBases::LuaPlayerBase(n) {
 	}
 	explicit LuaPlayer(lua_State* L) {
@@ -215,4 +215,4 @@ public:
 void luaopen_wlgame(lua_State*);
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_GAME_H
-} // namespace LuaGame
+}  // namespace LuaGame

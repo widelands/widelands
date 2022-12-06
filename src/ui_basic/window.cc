@@ -84,9 +84,9 @@ Window::Window(Panel* const parent,
                 w + kVerticalBorderThickness * 2,
                 kTopBorderThickness + h + kBottomBorderThickness),
      window_style_(s),
-     
+
      oldh_(kTopBorderThickness + h + kBottomBorderThickness),
-     
+
      button_close_(new Button(
         this,
         "b_close",

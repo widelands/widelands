@@ -225,9 +225,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                       350,
                       parent.get_inner_h() - 80,
                       _("Map Options")),
-     
+
      labelh_(text_height(UI::FontStyle::kWuiLabel) + 4),
-     
+
      butw_((get_inner_w() - 3 * padding_) / 2),
      max_w_(get_inner_w() - 2 * padding_),
      tab_box_(this,

@@ -95,20 +95,20 @@ bool DefaultAI::map_allows_seafaring_ = false;
 DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, AiType const t)
    : ComputerPlayer(ggame, pid),
      type_(t),
-     
+
      // Delay initialization to allow scenario scripts
      // to load custom units/buildings at gametime 0
      next_ai_think_(1),
-     
+
      military_last_dismantle_(0),
      military_last_build_(0),
      time_of_last_construction_(0),
      next_mine_construction_due_(0),
-     
+
      first_iron_mine_built(50 * 60 * 60 * 1000),
-     
+
      enemysites_check_delay_(30),
-     
+
      expedition_ship_(kNoShip) {
 
 	// Subscribe to NoteFieldPossession.

@@ -36,7 +36,7 @@ template <typename AreaType = Area<>> struct MapFringeRegion {
 	   : area_(area), remaining_in_phase_(area.radius), phase_(area.radius ? 6 : 0) {
 		for (typename AreaType::RadiusType r = area.radius; r; --r) {
 			map.get_tln(area_, &area_);
-}
+		}
 	}
 
 	[[nodiscard]] const typename AreaType::CoordsType& location() const {

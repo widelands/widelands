@@ -173,7 +173,7 @@ struct FilePart {
 };
 
 struct NetTransferFile {
-	NetTransferFile() :  filename(""), md5sum("") {
+	NetTransferFile() : filename(""), md5sum("") {
 	}
 	~NetTransferFile() = default;
 

@@ -73,7 +73,7 @@ struct WuiPlotArea : public UI::Panel {
 			set_time(TIME_GAME);
 		} else {
 			set_time(static_cast<TIME>(time));
-}
+		}
 		needs_update_ = true;
 	}
 	TIME get_time() const {
@@ -82,8 +82,8 @@ struct WuiPlotArea : public UI::Panel {
 	int32_t get_time_id() const {
 		if (time_ == TIME_GAME) {
 			return game_time_id_;
-}
-					return time_;
+		}
+		return time_;
 	}
 
 	uint32_t get_game_time_id();
@@ -139,7 +139,7 @@ protected:
 private:
 	uint32_t get_game_time() const;
 
-	TIME time_{TIME_GAME};              // How much do you want to list
+	TIME time_{TIME_GAME};      // How much do you want to list
 	uint32_t game_time_id_{0};  // what label is used for TIME_GAME
 };
 
@@ -168,8 +168,7 @@ struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 	                    tooltip_text,
 	                    cursor_size,
 	                    enabled),
-	     plot_area_(plot_area)
-	     {
+	     plot_area_(plot_area) {
 	}
 
 protected:

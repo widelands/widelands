@@ -58,8 +58,7 @@ public:
 	               button_style),
 	     launch_game_(lg),
 	     settings_(settings),
-	     id_(id)
-	     {
+	     id_(id) {
 		dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		dropdown_.selected.connect([this]() { on_selection_changed(); });
 	}

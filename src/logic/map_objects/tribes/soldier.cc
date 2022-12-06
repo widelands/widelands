@@ -88,8 +88,7 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
      health_(table.get_table("health")),
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),
-     evade_(table.get_table("evade"))
-     {
+     evade_(table.get_table("evade")) {
 
 	// Battle animations
 	// attack_success_*-> soldier is attacking and hit his opponent

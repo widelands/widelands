@@ -42,7 +42,7 @@ constexpr unsigned kWareBaseLine = -6;
 ItemWaresDisplay::ItemWaresDisplay(Panel* parent, const Widelands::Player& gplayer)
    : Panel(parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
      player_(gplayer),
-     
+
      items_per_row_(kDefaultItemsPerRow) {
 	recalc_desired_size();
 }

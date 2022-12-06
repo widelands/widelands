@@ -75,9 +75,9 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      id_(next_id_++),
      max_list_items_(max_list_items),
      max_list_height_(std::numeric_limits<uint32_t>::max()),
-     
+
      base_height_(base_height(button_dimension, style)),
-     
+
      button_box_(this, style, 0, 0, UI::Box::Horizontal, w, get_h()),
      push_button_(type == DropdownType::kTextual ?
                      new UI::Button(&button_box_,
@@ -104,10 +104,10 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      label),
      label_(label),
      type_(type),
-     
+
      button_style_(button_style)
 
-     {
+{
 	if (label.empty()) {
 		set_tooltip(pgettext("dropdown", "Select Item"));
 	} else {

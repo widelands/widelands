@@ -30,9 +30,8 @@ namespace Widelands {
 
 PartiallyFinishedBuilding::PartiallyFinishedBuilding(const BuildingDescr& gdescr)
    : Building(gdescr),
-     
-     work_steptime_(0)
-     {
+
+     work_steptime_(0) {
 }
 
 /*

@@ -70,8 +70,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
      hgap_(hgap),
      vgap_(vgap),
      selection_anchor_(Widelands::INVALID_INDEX),
-     callback_function_(std::move(callback_function))
-     {
+     callback_function_(std::move(callback_function)) {
 	for (const Widelands::DescriptionIndex& index : indices_) {
 		selected_.insert(std::make_pair(index, false));
 		hidden_.insert(std::make_pair(index, false));

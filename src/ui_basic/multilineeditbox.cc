@@ -115,7 +115,7 @@ MultilineEditbox::Data::Data(MultilineEditbox& init_owner)
                init_owner.get_h(),
                init_owner.panel_style_),
      style(init_owner.panel_style_),
-     
+
      caret_image_path(init_owner.panel_style_ == PanelStyle::kWui ?
                          "images/ui_basic/caret_wui.png" :
                          "images/ui_basic/caret_fs.png"),
@@ -124,7 +124,7 @@ MultilineEditbox::Data::Data(MultilineEditbox& init_owner)
                           g_gr->max_texture_size_for_font_rendering() /
                           (text_height(get_style().font()) * text_height(get_style().font())),
                        std::numeric_limits<int32_t>::max())),
-     
+
      ww(get_style().font().size(), get_style().font().color(), init_owner.get_w()),
      owner(init_owner) {
 	scrollbar.moved.connect([&init_owner](int32_t a) { init_owner.scrollpos_changed(a); });

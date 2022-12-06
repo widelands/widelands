@@ -50,7 +50,7 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
      ctrl_(ctrl),
      info_(info),
      index_(index),
-     
+
      text_(this,
            0,
            0,
@@ -466,8 +466,7 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
              kRowButtonSize,
              0,
              UI::ButtonStyle::kFsMenuSecondary,
-             _("Cancel"))
-     {
+             _("Cancel")) {
 	switch (a) {
 	case AddOns::NetAddons::AdminAction::kDelete: {
 		text_ = new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu);
@@ -602,9 +601,8 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
                 info->descname()),
      parent_(parent),
      info_(info),
-     
+
      nr_screenshots_(info->screenshots.size()),
-     
 
      main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      tabs_(&main_box_, UI::TabPanelStyle::kFsMenu),

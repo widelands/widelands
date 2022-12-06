@@ -28,10 +28,7 @@ namespace Widelands {
 class Objective {
 public:
 	explicit Objective(const std::string& init_name)
-	   : name_(init_name),
-	     descname_(init_name),
-	     descr_(_("This objective has no description."))
-	     {
+	   : name_(init_name), descname_(init_name), descr_(_("This objective has no description.")) {
 	}
 
 	// Unique internal name of the objective.

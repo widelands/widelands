@@ -140,13 +140,13 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 
 Game::Game()
    : EditorGameBase(new LuaGameInterface(this)),
-     
+
      syncwrapper_(*this, synchash_),
      ctrl_(nullptr),
-     
+
      cmdqueue_(*this),
      scenario_difficulty_(kScenarioDifficultyNotSet),
-     
+
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
      win_condition_duration_(kDefaultWinConditionDuration)

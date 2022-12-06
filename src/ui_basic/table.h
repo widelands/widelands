@@ -269,7 +269,7 @@ public:
 	EntryRecord& get_selected_record() const {
 		if (selection_ == no_selection_index()) {
 			throw NoSelection();
-}
+		}
 		assert(selection_ < entry_records_.size());
 		return *entry_records_.at(selection_);
 	}

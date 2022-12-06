@@ -52,8 +52,8 @@ struct MultiSelect {
 	}
 
 	[[nodiscard]] int32_t get_random_enabled() const {
-		int32_t rand_value =
-		   static_cast<int32_t>(static_cast<double>(get_nr_enabled()) * RNG::static_rand() / (RAND_MAX + 1.0));
+		int32_t rand_value = static_cast<int32_t>(static_cast<double>(get_nr_enabled()) *
+		                                          RNG::static_rand() / (RAND_MAX + 1.0));
 
 		for (int32_t item : enabled_) {
 			if (rand_value == 0) {

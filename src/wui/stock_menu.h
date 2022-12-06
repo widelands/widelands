@@ -27,7 +27,7 @@
 
 namespace UI {
 struct BuildingStatisticsStyleInfo;
-} // namespace UI
+}  // namespace UI
 class InteractivePlayer;
 
 /*

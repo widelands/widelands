@@ -259,7 +259,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
      tabpanel_(this, UI::TabPanelStyle::kWuiDark),
-     
+
      is_showing_workarea_overlaps_(ib->get_display_flag(InteractiveBase::dfShowWorkareaOverlap)),
      building_under_mouse_(Widelands::INVALID_INDEX) {
 	ib->set_sel_freeze(true);

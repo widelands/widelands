@@ -112,9 +112,8 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveBase& parent,
                                                bool workarea_preview_wanted)
    : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick),
      construction_site_(&cs),
-     
-     cs_prefer_heroes_rookies_(nullptr)
-     {
+
+     cs_prefer_heroes_rookies_(nullptr) {
 	init(avoid_fastclick, workarea_preview_wanted);
 }
 

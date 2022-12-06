@@ -64,12 +64,12 @@ public:
 		ReverseMapObjectMap::iterator const it = objects_.find(serial);
 		if (it == objects_.end()) {
 			throw GameDataError("not found");
-}
+		}
 		if (upcast(T, result, it->second)) {
 			return *result;
 		}
-			throw GameDataError("is a %s, expected a %s",
-			                    to_string(it->second->descr().type()).c_str(), typeid(T).name());
+		throw GameDataError(
+		   "is a %s, expected a %s", to_string(it->second->descr().type()).c_str(), typeid(T).name());
 	}
 
 	int32_t get_nr_unloaded_objects();

@@ -51,8 +51,7 @@ protected:
 };
 
 struct StepEvalAStar {
-	explicit StepEvalAStar(Coords target)
-	   : target_(target) {
+	explicit StepEvalAStar(Coords target) : target_(target) {
 	}
 
 	int32_t estimate(Map& map, FCoords pos) const {
@@ -61,7 +60,7 @@ struct StepEvalAStar {
 			est += map.calc_cost_lowerbound(pos, target_);
 		} else {
 			est += map.calc_cost_estimate(pos, target_);
-}
+		}
 		return est;
 	}
 
@@ -70,7 +69,7 @@ struct StepEvalAStar {
 		if ((swim_ && ((to.field->nodecaps() & MOVECAPS_SWIM) == 0)) ||
 		    (!swim_ && ((to.field->nodecaps() & MOVECAPS_WALK) == 0))) {
 			return -1;
-}
+		}
 
 		return map.calc_cost(from, dir);
 	}
@@ -152,7 +151,7 @@ template <typename StepEval> void MapAStar<StepEval>::push(Coords pos, int32_t c
 template <typename StepEval> bool MapAStar<StepEval>::step(FCoords& cur, int32_t& cost) {
 	if (queue.empty()) {
 		return false;
-}
+	}
 
 	Pathfield* curpf = queue.top();
 	queue.pop(curpf);
@@ -174,13 +173,13 @@ template <typename StepEval> bool MapAStar<StepEval>::step(FCoords& cur, int32_t
 		// Field is closed already
 		if (neighbpf.cycle == pathfields->cycle && !neighbpf.heap_cookie.is_active()) {
 			continue;
-}
+		}
 
 		int32_t stepcost = eval.stepcost(map, cur, cost, WalkingDir(*direction), neighb);
 
 		if (stepcost < 0) {
 			continue;
-}
+		}
 
 		int32_t newcost = cost + stepcost;
 

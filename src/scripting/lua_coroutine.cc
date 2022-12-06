@@ -63,8 +63,7 @@ void unreference_coroutine(lua_State* L, uint32_t idx) {
 
 }  // namespace
 
-LuaCoroutine::LuaCoroutine(lua_State* ms)
-   : lua_state_(ms) {
+LuaCoroutine::LuaCoroutine(lua_State* ms) : lua_state_(ms) {
 	if (lua_state_ != nullptr) {
 		idx_ = reference_coroutine(lua_state_);
 	}

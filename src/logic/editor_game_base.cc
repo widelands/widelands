@@ -68,8 +68,7 @@ initialization
 ============
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
-   : 
-     gametime_(0),
+   : gametime_(0),
      // TODO(SirVer): this is sooo ugly, I can't say
      lua_(lua_interface != nullptr ? lua_interface : new LuaEditorInterface(this)),
      player_manager_(new PlayersManager(*this)),

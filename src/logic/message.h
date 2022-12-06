@@ -124,9 +124,9 @@ struct Message {
 	[[nodiscard]] Message::Type message_type_category() const {
 		if (type_ >= Widelands::Message::Type::kWarfare) {
 			return Widelands::Message::Type::kWarfare;
-
-		} if (type_ >= Widelands::Message::Type::kEconomy &&
-		           type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
+		}
+		if (type_ >= Widelands::Message::Type::kEconomy &&
+		    type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
 			return Widelands::Message::Type::kEconomy;
 		}
 		return type_;

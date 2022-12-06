@@ -319,12 +319,11 @@ MapView::MapView(
      animate_map_panning_(get_config_bool("animate_map_panning", true)),
      map_(map),
      last_mouse_pos_(Vector2i::zero()),
-     
+
      edge_scrolling_((parent != nullptr) &&
                      (parent->get_parent() == nullptr) /* not in watch windows */ &&
                      get_config_bool("edge_scrolling", false)),
-     invert_movement_(get_config_bool("invert_movement", false))
-     {
+     invert_movement_(get_config_bool("invert_movement", false)) {
 }
 
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {

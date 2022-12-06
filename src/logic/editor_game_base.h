@@ -35,10 +35,10 @@
 
 namespace UI {
 struct ProgressWindow;
-} // namespace UI
+}  // namespace UI
 namespace FsMenu {
 class LaunchGame;
-} // namespace FsMenu
+}  // namespace FsMenu
 class InteractiveBase;
 class InteractiveGameBase;  // TODO(GunChleoc): Get rid
 
@@ -189,7 +189,7 @@ public:
 
 	void unconquer_area(PlayerArea<Area<FCoords>>, PlayerNumber destroying_player = 0);
 	void conquer_area(PlayerArea<Area<FCoords>>, bool conquer_guarded_location = false);
-	void conquer_area_no_building(PlayerArea<Area<FCoords>> );
+	void conquer_area_no_building(PlayerArea<Area<FCoords>>);
 
 	void cleanup_objects() {
 		objects().cleanup(*this);

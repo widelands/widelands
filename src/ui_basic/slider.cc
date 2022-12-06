@@ -76,14 +76,13 @@ Slider::Slider(Panel* const parent,
      min_value_(min_value),
      max_value_(max_value),
      value_(value),
-     
+
      enabled_(enabled),
      cursor_style_(style),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
-     cursor_size_(cursor_size)
-     {
+     cursor_size_(cursor_size) {
 	set_thinks(false);
 	set_can_focus(enabled_);
 	calculate_cursor_position();

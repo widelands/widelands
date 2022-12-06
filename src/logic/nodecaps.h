@@ -58,6 +58,6 @@ enum NodeCaps {
 	/// This clause stops ducks from "swimwalking" along the coast.
 	MOVECAPS_SWIM = 64,
 };
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_NODECAPS_H

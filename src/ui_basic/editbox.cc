@@ -52,7 +52,7 @@ struct EditBoxImpl {
 	explicit EditBoxImpl(const UI::PanelStyle s)
 	   : style(s),
 	     margin(background_style().margin()),
-	     
+
 	     // Set alignment to the UI language's principal writing direction
 	     align(UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft) {
 	}
@@ -108,7 +108,7 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
            text_height(g_style_manager->editbox_style(style).font()) +
               2 * g_style_manager->editbox_style(style).background().margin()),
      m_(new EditBoxImpl(style)),
-     
+
      caret_timer_("", true),
      cursor_movement_timer_("", true) {
 	caret_ms_ = 0;

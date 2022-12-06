@@ -80,7 +80,7 @@ MapObjectDebugWindow
 */
 MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::MapObject& obj)
    : UI::Window(&parent, UI::WindowStyle::kWui, "map_object_debug", 0, 0, 100, 100, ""),
-     
+
      object_(&obj),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
 	serial_ = obj.serial();

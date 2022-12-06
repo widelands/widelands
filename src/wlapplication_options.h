@@ -48,8 +48,7 @@ bool get_config_bool(const std::string& section, const std::string& name, bool d
 int32_t get_config_int(const std::string& name, int32_t dflt = 0);
 int32_t get_config_int(const std::string& section, const std::string& name, int32_t dflt);
 uint32_t get_config_natural(const std::string& name, uint32_t dflt);
-uint32_t
-get_config_natural(const std::string& section, const std::string& name, uint32_t dflt);
+uint32_t get_config_natural(const std::string& section, const std::string& name, uint32_t dflt);
 std::string get_config_string(const std::string& name, const std::string& dflt);
 std::string
 get_config_string(const std::string& section, const std::string& name, const std::string& dflt);

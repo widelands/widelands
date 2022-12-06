@@ -272,8 +272,8 @@ private:
 		// The variable scoutme should not be accessed when randomwalk is true.
 		// Initializing the scoutme variable with an obviously-wrong value.
 		PlaceToScout() = default;
-		const bool randomwalk=true;
-		const Coords scoutme{-32100,-32100};
+		const bool randomwalk = true;
+		const Coords scoutme{-32100, -32100};
 	};
 	std::vector<PlaceToScout> scouts_worklist;
 
@@ -287,13 +287,13 @@ private:
 	bool scout_random_walk(Game& game, const Map& map, const State& state);
 	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
-	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
-	Economy* worker_economy_{nullptr};          ///< economy this worker is registered in
-	Economy* ware_economy_{nullptr};            ///< economy this worker's wares are registered in
-	OPtr<WareInstance> carried_ware_;  ///< ware we are carrying
-	IdleWorkerSupply* supply_{nullptr};         ///< supply while gowarehouse and not transfer
-	Transfer* transfer_{nullptr};               ///< where we are currently being sent
-	int32_t current_exp_{0};              ///< current experience
+	OPtr<PlayerImmovable> location_;     ///< meta location of the worker
+	Economy* worker_economy_{nullptr};   ///< economy this worker is registered in
+	Economy* ware_economy_{nullptr};     ///< economy this worker's wares are registered in
+	OPtr<WareInstance> carried_ware_;    ///< ware we are carrying
+	IdleWorkerSupply* supply_{nullptr};  ///< supply while gowarehouse and not transfer
+	Transfer* transfer_{nullptr};        ///< where we are currently being sent
+	int32_t current_exp_{0};             ///< current experience
 
 	// saving and loading
 protected:

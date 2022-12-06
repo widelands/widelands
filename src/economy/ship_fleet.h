@@ -71,7 +71,7 @@ struct ShipFleet : MapObject {
 		int32_t cost{-1};
 		std::shared_ptr<Path> path;
 
-		PortPath()  = default;
+		PortPath() = default;
 	};
 
 	const ShipFleetDescr& descr() const;

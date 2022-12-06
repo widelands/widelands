@@ -66,9 +66,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                          UI::PanelStyle::kFsMenu,
                          UI::ButtonStyle::kFsMenuSecondary),
      editbox(&hbox_, 28, 0, w - 28, style),
-     
-     chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat"))
-     {
+
+     chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
 	vbox_.add(&chatbox, UI::Box::Resizing::kExpandBoth);
 	vbox_.add_space(4);

@@ -101,8 +101,8 @@ struct Child {
 	explicit Child(const std::string& t) : tag(nullptr), text(t) {
 	}
 	~Child() {
-		
-			delete tag;
+
+		delete tag;
 	}
 	Tag* tag{nullptr};
 	std::string text;

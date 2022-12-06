@@ -34,15 +34,13 @@ const std::map<float, std::string> Animation::kSupportedScales{
    {0.5, "_0.5"}, {1, "_1"}, {2, "_2"}, {4, "_4"}};
 
 Animation::Animation(const LuaTable& table)
-   : 
-     representative_frame_(
+   : representative_frame_(
         table.has_key("representative_frame") ? table.get_int("representative_frame") : 0),
      hotspot_(table.get_vector<std::string, int>("hotspot")),
      frametime_(table.has_key("fps") ? (1000 / get_positive_int(table, "fps")) : kFrameLength),
      play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false),
      sound_effect_(kNoSoundEffect),
-     sound_priority_(kFxPriorityLowest)
-     {
+     sound_priority_(kFxPriorityLowest) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {

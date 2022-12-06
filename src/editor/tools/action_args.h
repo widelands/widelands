@@ -46,10 +46,10 @@ struct EditorActionArgs {
 
 	uint32_t sel_radius;
 
-	int32_t change_by{0};                                     // resources, change height tools
+	int32_t change_by{0};                                  // resources, change height tools
 	std::list<Widelands::Field::Height> original_heights;  // change height tool
-	Widelands::DescriptionIndex current_resource{0};          // resources change tools
-	Widelands::ResourceAmount set_to{0};                      // resources change tools
+	Widelands::DescriptionIndex current_resource{0};       // resources change tools
+	Widelands::ResourceAmount set_to{0};                   // resources change tools
 	Widelands::Extent new_map_size;                        // resize tool
 
 	struct ResourceState {

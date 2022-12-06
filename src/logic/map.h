@@ -800,7 +800,7 @@ inline Coords Map::l_n(const Coords& f) const {
 	Coords result(f.x - 1, f.y);
 	if (result.x == -1) {
 		result.x = width_ - 1;
-}
+	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
 	assert(0 <= result.y);
@@ -837,7 +837,7 @@ inline void Map::get_rn(const Coords& f, Coords* const o) const {
 	o->x = f.x + 1;
 	if (o->x == width_) {
 		o->x = 0;
-}
+	}
 	assert(0 <= o->x);
 	assert(o->x < width_);
 	assert(0 <= o->y);
@@ -873,7 +873,7 @@ inline Coords Map::r_n(const Coords& f) const {
 	Coords result(f.x + 1, f.y);
 	if (result.x == width_) {
 		result.x = 0;
-}
+	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
 	assert(0 <= result.y);
@@ -912,7 +912,7 @@ inline void Map::get_tln(const Coords& f, Coords* const o) const {
 	if ((o->y & 1) != 0) {
 		if (o->y == -1) {
 			o->y = height_ - 1;
-}
+		}
 		o->x = (o->x != 0 ? o->x : width_) - 1;
 	}
 	assert(0 <= o->x);
@@ -959,11 +959,11 @@ inline Coords Map::tl_n(const Coords& f) const {
 	if ((result.y & 1) != 0) {
 		if (result.y == -1) {
 			result.y = height_ - 1;
-}
+		}
 		--result.x;
 		if (result.x == -1) {
 			result.x = width_ - 1;
-}
+		}
 	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
@@ -1011,7 +1011,7 @@ inline void Map::get_trn(const Coords& f, Coords* const o) const {
 		++o->x;
 		if (o->x == width_) {
 			o->x = 0;
-}
+		}
 	}
 	o->y = (f.y != 0 ? f.y : height_) - 1;
 	assert(0 <= o->x);
@@ -1059,11 +1059,11 @@ inline Coords Map::tr_n(const Coords& f) const {
 		++result.x;
 		if (result.x == width_) {
 			result.x = 0;
-}
+		}
 	}
 	if (result.y == -1) {
 		result.y = height_ - 1;
-}
+	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
 	assert(0 <= result.y);
@@ -1109,10 +1109,10 @@ inline void Map::get_bln(const Coords& f, Coords* const o) const {
 	o->x = f.x;
 	if (o->y == height_) {
 		o->y = 0;
-}
+	}
 	if ((o->y & 1) != 0) {
 		o->x = (o->x != 0 ? o->x : width_) - 1;
-}
+	}
 	assert(0 <= o->x);
 	assert(o->x < width_);
 	assert(0 <= o->y);
@@ -1156,12 +1156,12 @@ inline Coords Map::bl_n(const Coords& f) const {
 	Coords result(f.x, f.y + 1);
 	if (result.y == height_) {
 		result.y = 0;
-}
+	}
 	if ((result.y & 1) != 0) {
 		--result.x;
 		if (result.x == -1) {
 			result.x = width_ - 1;
-}
+		}
 	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
@@ -1209,12 +1209,12 @@ inline void Map::get_brn(const Coords& f, Coords* const o) const {
 		++o->x;
 		if (o->x == width_) {
 			o->x = 0;
-}
+		}
 	}
 	o->y = f.y + 1;
 	if (o->y == height_) {
 		o->y = 0;
-}
+	}
 	assert(0 <= o->x);
 	assert(o->x < width_);
 	assert(0 <= o->y);
@@ -1260,11 +1260,11 @@ inline Coords Map::br_n(const Coords& f) const {
 		++result.x;
 		if (result.x == width_) {
 			result.x = 0;
-}
+		}
 	}
 	if (result.y == height_) {
 		result.y = 0;
-}
+	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
 	assert(0 <= result.y);

@@ -121,7 +121,7 @@ private:
 
 	bool highlighted_{false};  //  mouse over
 	bool pressed_{false};      //  the cursor is pressed
-	bool enabled_;      //  enabled widget
+	bool enabled_;             //  enabled widget
 
 	const UI::SliderStyle cursor_style_;  // Cursor color and texture. Not owned.
 	const UI::PanelStyleInfo& cursor_style() const;

@@ -349,9 +349,8 @@ WLApplication* WLApplication::get(int const argc, char const** argv) {
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(int const argc, char const* const* const argv)
-   : 
-     mouse_position_(Vector2i::zero()),
-     
+   : mouse_position_(Vector2i::zero()),
+
      should_die_(false),
 #ifdef _WIN32
      homedir_(FileSystem::get_homedir() + "\\.widelands")
@@ -363,7 +362,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 #else
      homedir_(FileSystem::get_homedir() + "/.widelands")
 #endif
-     {
+{
 	g_fs = new LayeredFileSystem();
 
 	parse_commandline(argc, argv);  // throws ParameterError, handled by main.cc

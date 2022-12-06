@@ -63,7 +63,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                       parent.get_inner_w() - 40,
                       parent.get_inner_h() - 40,
                       _(kTypes.at(type).window_title)),
-     
+
      type_(type),
 
      main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),

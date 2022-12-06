@@ -27,7 +27,7 @@
 class InteractiveGameBase;
 namespace Widelands {
 class Game;
-} // namespace Widelands
+}  // namespace Widelands
 
 struct WatchWindow : public UI::Window {
 	WatchWindow(InteractiveGameBase& parent,

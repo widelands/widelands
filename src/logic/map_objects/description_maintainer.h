@@ -86,7 +86,7 @@ template <typename T> T* DescriptionMaintainer<T>::exists(const std::string& nam
 	auto index = get_index(name);
 	if (index == Widelands::INVALID_INDEX) {
 		return nullptr;
-}
+	}
 	return items_[index].get();
 }
 

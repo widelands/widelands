@@ -26,7 +26,7 @@
 
 namespace Widelands {
 class ReplayReader;
-} // namespace Widelands
+}  // namespace Widelands
 
 class ReplayGameController : public GameController {
 public:

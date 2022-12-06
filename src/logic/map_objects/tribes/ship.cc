@@ -148,7 +148,7 @@ Bob& ShipDescr::create_object() const {
 
 Ship::Ship(const ShipDescr& gdescr)
    : Bob(gdescr),
-     
+
      capacity_(gdescr.get_default_capacity()) {
 }
 

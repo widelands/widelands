@@ -148,8 +148,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const std::vector<std::string>& attribs,
                                Descriptions& descriptions)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
-     descriptions_(descriptions)
-     {
+     descriptions_(descriptions) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", name().c_str());
 	}
@@ -332,7 +331,7 @@ Immovable::Immovable(const ImmovableDescr& imm_descr,
      former_building_descr_(former_building_descr),
      anim_(0),
      animstart_(0),
-     
+
      anim_construction_total_(0),
      anim_construction_done_(0),
      program_step_(0),
@@ -811,8 +810,7 @@ PlayerImmovable IMPLEMENTATION
 /**
  * Zero-initialize
  */
-PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
-   : BaseImmovable(mo_descr) {
+PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr) : BaseImmovable(mo_descr) {
 }
 
 /**

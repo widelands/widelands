@@ -42,7 +42,7 @@ class FileWrite;
 class RenderTarget;
 namespace Widelands {
 struct MapObjectSaver;
-} // namespace Widelands
+}  // namespace Widelands
 
 namespace UI {
 
@@ -309,7 +309,7 @@ public:
 			flags_ |= pf_top_on_click;
 		} else {
 			flags_ &= ~pf_top_on_click;
-}
+		}
 	}
 	bool get_top_on_click() const {
 		return (flags_ & pf_top_on_click) != 0u;
@@ -517,8 +517,7 @@ private:
 	static Panel* ui_trackmouse(int32_t& x, int32_t& y);
 	static bool ui_mousepress(uint8_t button, int32_t x, int32_t y);
 	static bool ui_mouserelease(uint8_t button, int32_t x, int32_t y);
-	static bool
-	ui_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	static bool ui_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	static bool ui_mousewheel(int32_t x, int32_t y, uint16_t modstate);
 	static bool ui_key(bool down, SDL_Keysym code);
 	static bool ui_textinput(const std::string& text);
@@ -578,13 +577,13 @@ inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {
 	flags_ &= ~pf_snap_windows_only_when_overlapping;
 	if (on) {
 		flags_ |= pf_snap_windows_only_when_overlapping;
-}
+	}
 }
 inline void Panel::set_dock_windows_to_edges(const bool on) {
 	flags_ &= ~pf_dock_windows_to_edges;
 	if (on) {
 		flags_ |= pf_dock_windows_to_edges;
-}
+	}
 }
 
 /**

@@ -329,17 +329,14 @@ void EventTimeQueue::strip_old(const Time& current_time) {
 BuildableField::BuildableField(const Widelands::FCoords& fc)
    : coords(fc),
      field_info_expiration(20000),
-     
+
      average_flag_dist_to_wh(kWhFarButReachable),
-     
-     last_resources_check_time(0)
-     {
+
+     last_resources_check_time(0) {
 }
 
 MineableField::MineableField(const Widelands::FCoords& fc)
-   : coords(fc),
-     field_info_expiration(20000)
-     {
+   : coords(fc), field_info_expiration(20000) {
 }
 
 EconomyObserver::EconomyObserver(Widelands::Economy& e)

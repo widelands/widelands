@@ -197,7 +197,7 @@ struct Ship : Bob {
 	bool exp_dir_swimmable(Direction dir) const {
 		if (!expedition_) {
 			return false;
-}
+		}
 		return expedition_->swimmable[dir - 1];
 	}
 
@@ -210,12 +210,12 @@ struct Ship : Bob {
 	bool exp_close_to_coast() const {
 		if (!expedition_) {
 			return false;
-}
+		}
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			if (!expedition_->swimmable[dir - 1]) {
 				return true;
-}
-}
+			}
+		}
 		return false;
 	}
 
@@ -312,11 +312,7 @@ private:
 protected:
 	struct Loader : Bob::Loader {
 		// Initialize everything to make cppcheck happy.
-		Loader()
-		   : 
-		     ware_economy_serial_(kInvalidSerial),
-		     worker_economy_serial_(kInvalidSerial)
-		     {
+		Loader() : ware_economy_serial_(kInvalidSerial), worker_economy_serial_(kInvalidSerial) {
 		}
 
 		const Task* get_task(const std::string& name) override;

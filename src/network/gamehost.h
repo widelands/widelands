@@ -33,7 +33,7 @@ struct GameHostImpl;
 struct Client;
 namespace FsMenu {
 class MenuCapsule;
-} // namespace FsMenu
+}  // namespace FsMenu
 
 /**
  * GameHost manages the lifetime of a network game in which this computer
@@ -219,8 +219,8 @@ private:
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
-	bool forced_pause_{false};  // triggered by the forcePause host chat command, see HostChatProvider in
-	                     // gamehost.cc
+	bool forced_pause_{false};  // triggered by the forcePause host chat command, see
+	                            // HostChatProvider in gamehost.cc
 	std::unique_ptr<Widelands::Game> game_;
 	std::string script_to_run_;
 };

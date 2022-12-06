@@ -321,20 +321,17 @@ struct GameHostImpl {
 	bool syncreport_arrived{false};
 
 	explicit GameHostImpl(GameHost* const h)
-	   : 
-	     participants(nullptr),
+	   : participants(nullptr),
 	     chat(h),
 	     hp(h),
 	     npsb(&hp),
 
-	     
 	     pseudo_networktime(0),
-	     
+
 	     committed_networktime(0),
-	     
+
 	     syncreport_time(0),
-	     syncreport()
-	     {
+	     syncreport() {
 	}
 
 	/// Takes ownership of the given pointer
@@ -349,11 +346,7 @@ GameHost::GameHost(FsMenu::MenuCapsule* c,
                    const std::string& playername,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
-   : capsule_(c),
-     pointer_(ptr),
-     d(new GameHostImpl(this)),
-     internet_(internet)
-     {
+   : capsule_(c), pointer_(ptr), d(new GameHostImpl(this)), internet_(internet) {
 	verb_log_info("[Host]: starting up.");
 
 	d->localplayername = playername;

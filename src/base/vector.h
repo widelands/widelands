@@ -99,7 +99,7 @@ struct Vector3f {
 		const float f = static_cast<float>(std::sqrt(x * x + y * y + z * z));
 		if (std::fabs(f) < 0.00001f) {  // check for ==0
 			return;
-}
+		}
 		x /= f;
 		y /= f;
 		z /= f;

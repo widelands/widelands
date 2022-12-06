@@ -217,4 +217,4 @@ public:
 void luaopen_wlroot(lua_State*, bool in_editor);
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_H
-} // namespace LuaRoot
+}  // namespace LuaRoot

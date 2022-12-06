@@ -49,20 +49,20 @@ Table<void*>::Table(Panel* const parent,
                     PanelStyle style,
                     TableRows rowtype)
    : Panel(parent, style, x, y, w, h),
-     
+
      lineheight_(text_height(g_style_manager->table_style(style).enabled())),
      headerheight_(lineheight_ + 4),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                       UI::ButtonStyle::kWuiSecondary),
-     
+
      scrollbar_filler_button_(
         new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),
-     
+
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),
-     
+
      last_selection_(no_selection_index()),
-     
+
      sort_descending_(rowtype == TableRows::kSingleDescending ||
                       rowtype == TableRows::kMultiDescending),
      flexible_column_idx_(std::numeric_limits<size_t>::max()),
@@ -848,8 +848,7 @@ bool Table<void*>::handle_mousemove(
 	return true;
 }
 
-Table<void*>::EntryRecord::EntryRecord(void* const e)
-   : entry_(e), font_style_(nullptr) {
+Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e), font_style_(nullptr) {
 }
 
 void Table<void*>::EntryRecord::set_picture(uint8_t const col,

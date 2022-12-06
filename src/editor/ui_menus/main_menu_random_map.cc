@@ -50,7 +50,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
      label_height_(text_height(label_style_) + 2),
      // Size
      map_size_box_(*this, panel_style_, "random_map_menu", 4, w, h),
-     
+
      players_(this,
               0,
               0,
@@ -73,7 +73,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
         /** TRANSLATORS: Amount of resources in the random map generator in the editor */
         _("High"),
      }),
-     
+
      world_(this,
             "world",
             0,
@@ -111,7 +111,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
                             panel_style_ == UI::PanelStyle::kWui ?
                                UI::ButtonStyle::kWuiSecondary :
                                UI::ButtonStyle::kFsMenuSecondary),
-     
+
      mountainsval_(100 - waterval_ - landval_ - wastelandval_),
      water_(this,
             0,
@@ -183,8 +183,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
                   0,
                   0,
                   inner_w - 2 * kMargin - map_id_label_.get_w(),
-                  panel_style_)
-     {
+                  panel_style_) {
 	set_size(inner_w, 50);  // Prevent assert failures
 
 	// ---------- Width + Height ----------

@@ -39,10 +39,9 @@ SpriteSheetAnimation::MipMapEntry IMPLEMENTATION
 SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::string& file,
                                                                      int init_rows,
                                                                      int init_columns)
-   : 
-     rows(init_rows),
+   : rows(init_rows),
      columns(init_columns),
-     
+
      sheet_file(file) {
 
 	assert(g_fs->file_exists(file));

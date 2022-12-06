@@ -25,8 +25,7 @@ namespace RT {
 
 class TextStream {
 public:
-	explicit TextStream(const std::string& text)
-	   : text_(text),  end_(text.size()) {
+	explicit TextStream(const std::string& text) : text_(text), end_(text.size()) {
 	}
 
 	[[nodiscard]] size_t line() const {

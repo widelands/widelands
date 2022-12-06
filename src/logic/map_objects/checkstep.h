@@ -70,8 +70,9 @@ private:
 public:
 	CheckStep();
 
-	template <typename T> CheckStep(const T& op)  // NOLINT allow implicit conversion
-	: capsule(new Capsule<T>(op)) {
+	template <typename T>
+	CheckStep(const T& op)  // NOLINT allow implicit conversion
+	   : capsule(new Capsule<T>(op)) {
 	}
 
 	/**

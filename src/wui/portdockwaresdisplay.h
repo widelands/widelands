@@ -25,7 +25,7 @@
 
 namespace Widelands {
 class PortDock;
-} // namespace Widelands
+}  // namespace Widelands
 
 AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
                                                     uint32_t width,

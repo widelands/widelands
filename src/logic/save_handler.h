@@ -23,7 +23,7 @@
 
 namespace Widelands {
 class Game;
-} // namespace Widelands
+}  // namespace Widelands
 
 /**
  * Takes care of manual or autosave via think().

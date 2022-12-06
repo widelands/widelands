@@ -63,10 +63,8 @@ private:
 	                                                 uint32_t max,
 	                                                 uint32_t initial,
 	                                                 char const* hint);
-	UI::Textarea& add_text(UI::Box& parent,
-	                       const std::string& str,
-	                       UI::Align alignment,
-	                       UI::FontStyle style);
+	UI::Textarea&
+	add_text(UI::Box& parent, const std::string& str, UI::Align alignment, UI::FontStyle style);
 
 	void init_slider(const std::vector<Widelands::Soldier*>&);
 	void init_soldier_lists(const std::vector<Widelands::Soldier*>&);

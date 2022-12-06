@@ -162,7 +162,7 @@ IMPLEMENTATION
 
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
    : PartiallyFinishedBuilding(cs_descr),
-     
+
      settings_(nullptr) {
 }
 

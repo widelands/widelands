@@ -132,7 +132,7 @@ template <class T, class PT> int property_dispatch(lua_State* const L) {
 	int const n = lua_gettop(L);
 	if (!n) {
 		report_error(L, "Property needs at least the object as argument!");
-}
+	}
 
 	// Check for invalid: obj.method(plainOldDatatype)
 	luaL_checktype(L, 1, LUA_TTABLE);
@@ -161,7 +161,7 @@ template <class T, class PT> int method_dispatch(lua_State* const L) {
 	int const n = lua_gettop(L);
 	if (!n) {
 		report_error(L, "Method needs at least the object as argument!");
-}
+	}
 
 	// Check for invalid: obj.method(plainOldDatatype)
 	luaL_checktype(L, 1, LUA_TTABLE);
@@ -188,7 +188,7 @@ template <class T> int garbage_collect(lua_State* const L) {
 	T** const obj = static_cast<T**>(luaL_testudata(L, -1, T::className));
 	if (!obj) {
 		return 0;
-}
+	}
 
 	delete *obj;
 	return 0;
@@ -330,7 +330,7 @@ template <class T> void extract_userdata_from_user_class(lua_State* const L, int
 		lua_rawget(L, narg);
 	} else {
 		lua_rawget(L, narg - 1);
-}
+	}
 
 	if (!lua_isuserdata(L, -1)) {
 		report_error(L, "Expected a userdata, but got something else.");

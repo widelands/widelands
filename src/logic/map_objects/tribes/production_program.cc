@@ -919,8 +919,7 @@ Calls a program of the productionsite's main worker. Example:
 ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& arguments,
                                                 const std::string& production_program_name,
                                                 ProductionSiteDescr* descr,
-                                                const Descriptions& descriptions)
-    {
+                                                const Descriptions& descriptions) {
 	const size_t nr_args = arguments.size();
 	if (nr_args != 1 && nr_args != 4) {
 		throw GameDataError(

@@ -168,9 +168,8 @@ MainMenu::MainMenu(const bool skip_init)
                 "",
                 UI::Align::kCenter),
      init_time_(kNoSplash),
-     
-     menu_capsule_(*this)
-     {
+
+     menu_capsule_(*this) {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.new_width, message.new_height);

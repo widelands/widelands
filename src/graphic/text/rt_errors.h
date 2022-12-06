@@ -27,7 +27,7 @@ namespace RT {
 
 class Exception : public std::exception {
 public:
-	explicit Exception(const std::string& msg) :  msg_(msg) {
+	explicit Exception(const std::string& msg) : msg_(msg) {
 	}
 	[[nodiscard]] const char* what() const noexcept override {
 		return msg_.c_str();

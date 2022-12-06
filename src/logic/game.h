@@ -263,7 +263,7 @@ public:
 	void report_desync(int32_t playernumber);
 	Md5Checksum get_sync_hash() const;
 
-	void enqueue_command(Command* );
+	void enqueue_command(Command*);
 
 	void send_player_command(Widelands::PlayerCommand*);
 
@@ -407,10 +407,7 @@ private:
 	MD5Checksum<StreamWrite> synchash_;
 
 	struct SyncWrapper : public StreamWrite {
-		SyncWrapper(Game& game, StreamWrite& target)
-		   : game_(game),
-		     target_(target)
-		     {
+		SyncWrapper(Game& game, StreamWrite& target) : game_(game), target_(target) {
 		}
 
 		~SyncWrapper() override;

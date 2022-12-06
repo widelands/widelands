@@ -30,8 +30,7 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	                            EditorSetResourcesTool& the_set_to_tool)
 	   : EditorTool(parent, the_decrease_tool, the_set_to_tool),
 	     decrease_tool_(the_decrease_tool),
-	     set_tool_(the_set_to_tool)
-	     {
+	     set_tool_(the_set_to_tool) {
 	}
 
 	/***

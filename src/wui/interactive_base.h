@@ -40,7 +40,7 @@ class MainToolbar;
 class UniqueWindowHandler;
 namespace Widelands {
 class MapObjectLoader;
-} // namespace Widelands
+}  // namespace Widelands
 
 struct WorkareaPreview {
 	Widelands::Coords coords;
@@ -357,13 +357,14 @@ private:
 
 	struct SelData {
 		explicit SelData(const bool Freeze = false,
-		        const bool Triangles = false,
-		        const Widelands::NodeAndTriangle<>& Pos =
-		           Widelands::NodeAndTriangle<>{
-		              Widelands::Coords(0, 0),
-		              Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)},
-		        const uint32_t Radius = 0,
-		        const Image* Pic = nullptr)
+		                 const bool Triangles = false,
+		                 const Widelands::NodeAndTriangle<>& Pos =
+		                    Widelands::NodeAndTriangle<>{
+		                       Widelands::Coords(0, 0),
+		                       Widelands::TCoords<>(Widelands::Coords(0, 0),
+		                                            Widelands::TriangleIndex::D)},
+		                 const uint32_t Radius = 0,
+		                 const Image* Pic = nullptr)
 		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), pic(Pic) {
 		}
 		bool freeze;     // don't change sel, even if mouse moves
@@ -416,7 +417,7 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
-	uint64_t lastframe_;        //  system time (milliseconds)
+	uint64_t lastframe_;           //  system time (milliseconds)
 	uint64_t frametime_{0};        //  in millseconds
 	uint64_t avg_usframetime_{0};  //  in microseconds!
 

@@ -57,9 +57,7 @@ TrainingsiteSettings::TrainingsiteSettings(const TrainingSiteDescr& descr, const
 }
 
 WarehouseSettings::WarehouseSettings(const WarehouseDescr& wh, const TribeDescr& tribe)
-   : BuildingSettings(wh.name(), tribe),
-     launch_expedition_allowed(wh.get_isport())
-     {
+   : BuildingSettings(wh.name(), tribe), launch_expedition_allowed(wh.get_isport()) {
 	for (const DescriptionIndex di : tribe.wares()) {
 		ware_preferences.emplace(di, StockPolicy::kNormal);
 	}

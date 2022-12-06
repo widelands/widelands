@@ -64,8 +64,7 @@
 
 namespace Widelands {
 
-MapSaver::MapSaver(FileSystem& fs, EditorGameBase& egbase)
-   : egbase_(egbase), fs_(fs) {
+MapSaver::MapSaver(FileSystem& fs, EditorGameBase& egbase) : egbase_(egbase), fs_(fs) {
 }
 
 MapSaver::~MapSaver() {

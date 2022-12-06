@@ -177,9 +177,8 @@ public:
 		static constexpr Time kNoExpedition{0};
 
 		AiPersistentState()
-		   : 
-		     expedition_start_time(0),
-		     
+		   : expedition_start_time(0),
+
 		     magic_numbers(kMagicNumbersSize, 0),
 		     neuron_weights(kNeuronPoolSize, 0),
 		     neuron_functs(kNeuronPoolSize, 0),
@@ -193,8 +192,8 @@ public:
 		uint32_t colony_scan_area{0};
 		uint32_t trees_around_cutters{0};
 		Time expedition_start_time;
-		int16_t
-		   ships_utilization{0};  // 0-10000 to avoid floats, used for decision for building new ships
+		int16_t ships_utilization{
+		   0};  // 0-10000 to avoid floats, used for decision for building new ships
 		bool no_more_expeditions{false};
 		int16_t last_attacked_player{0};
 		int32_t least_military_score{0};
@@ -215,13 +214,11 @@ public:
 	/// Per-player field information.
 	struct Field {
 		Field()
-		   : 
-		     vision(VisibleState::kUnexplored),
-		     
+		   : vision(VisibleState::kUnexplored),
+
 		     time_node_last_unseen(0),
-		     
-		     dismantlesite()
-		     {
+
+		     dismantlesite() {
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
 			//  darkening that actually hides the ground from the user).
@@ -565,12 +562,12 @@ public:
 	// Statistics
 	const BuildingStatsVector& get_building_statistics(const DescriptionIndex& i) const;
 
-	std::vector<uint32_t> const* get_ware_production_statistics(DescriptionIndex ) const;
+	std::vector<uint32_t> const* get_ware_production_statistics(DescriptionIndex) const;
 
-	std::vector<uint32_t> const* get_ware_consumption_statistics(DescriptionIndex ) const;
+	std::vector<uint32_t> const* get_ware_consumption_statistics(DescriptionIndex) const;
 
-	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex ) const;
-	std::vector<uint32_t> const* get_worker_stock_statistics(DescriptionIndex ) const;
+	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex) const;
+	std::vector<uint32_t> const* get_worker_stock_statistics(DescriptionIndex) const;
 
 	void init_statistics();
 	void read_statistics(FileRead&, uint16_t packet_version);

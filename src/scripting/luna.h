@@ -116,7 +116,7 @@ void register_class(lua_State* const L,
 
 	if (!return_metatable) {
 		lua_pop(L, 1);  // remove the Metatable
-}
+	}
 }
 /**
  * Makes the first class a children of the second. Make sure that T is really a

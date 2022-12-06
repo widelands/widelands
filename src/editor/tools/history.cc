@@ -29,10 +29,9 @@ constexpr size_t kTooManyUndoActionsDeleteBatch = 50;
 
 EditorActionArgs::EditorActionArgs(EditorInteractive& base)
    : sel_radius(base.get_sel_radius()),
-     
+
      new_map_size(0, 0),
-     interval(0, 0)
-     {
+     interval(0, 0) {
 }
 
 EditorActionArgs::~EditorActionArgs() {

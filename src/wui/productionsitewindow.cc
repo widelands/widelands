@@ -42,9 +42,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
                                            Widelands::ProductionSite& ps,
                                            bool avoid_fastclick,
                                            bool workarea_preview_wanted)
-   : BuildingWindow(parent, reg, ps, avoid_fastclick),
-     production_site_(&ps)
-     {
+   : BuildingWindow(parent, reg, ps, avoid_fastclick), production_site_(&ps) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
 		   if (is_dying_) {

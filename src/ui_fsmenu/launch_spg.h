@@ -28,7 +28,7 @@
 struct MapData;
 namespace Widelands {
 class Game;
-} // namespace Widelands
+}  // namespace Widelands
 
 namespace FsMenu {
 

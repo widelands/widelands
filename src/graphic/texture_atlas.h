@@ -32,7 +32,7 @@ public:
 		PackedTexture() = default;
 
 		// The index of the returned texture atlas that contains this image.
-		int texture_atlas=-1;
+		int texture_atlas = -1;
 
 		// The newly packed texture.
 		std::unique_ptr<Texture> texture{nullptr};
@@ -45,7 +45,7 @@ public:
 		}
 
 		// The position the images was 'add'()ed into the packing queue. Purely internal.
-		int index_=-1;
+		int index_ = -1;
 	};
 
 	TextureAtlas() = default;
@@ -77,8 +77,7 @@ private:
 	};
 
 	struct Block {
-		Block(int init_index, const Image* init_texture)
-		   : index(init_index), texture(init_texture) {
+		Block(int init_index, const Image* init_texture) : index(init_index), texture(init_texture) {
 		}
 
 		// The index in the order the blocks have been added.

@@ -1196,9 +1196,7 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 	return true;
 }
 
-Worker::Worker(const WorkerDescr& worker_descr)
-   : Bob(worker_descr)
-     {
+Worker::Worker(const WorkerDescr& worker_descr) : Bob(worker_descr) {
 }
 
 Worker::~Worker() {

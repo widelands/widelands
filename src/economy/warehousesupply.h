@@ -30,8 +30,7 @@ WarehouseSupply is the implementation of Supply that is used by Warehouses.
 It also manages the list of wares in the warehouse.
 */
 struct WarehouseSupply : public Supply {
-	explicit WarehouseSupply(Warehouse* const wh)
-	   :  warehouse_(wh) {
+	explicit WarehouseSupply(Warehouse* const wh) : warehouse_(wh) {
 	}
 	~WarehouseSupply() override;
 

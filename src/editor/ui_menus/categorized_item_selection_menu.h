@@ -79,7 +79,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
    : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      descriptions_(descriptions),
      select_correct_tool_(select_correct_tool),
-     
+
      tab_panel_(this, UI::TabPanelStyle::kWuiLight),
      current_selection_names_(this,
                               0,
@@ -130,7 +130,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
                                                                        const bool t) {
 	if (protect_against_recursive_select_) {
 		return;
-}
+	}
 
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
@@ -142,14 +142,14 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 		if (!multiselect) {
 			for (uint32_t i = 0; tool_->get_nr_enabled(); ++i) {
 				tool_->enable(i, false);
-}
+			}
 			//  disable all checkboxes
 			protect_against_recursive_select_ = true;
 			const int32_t size = checkboxes_.size();
 			for (int32_t i = 0; i < size; ++i) {
 				if (i != n) {
 					checkboxes_[i]->set_state(false);
-}
+				}
 			}
 			protect_against_recursive_select_ = false;
 		}

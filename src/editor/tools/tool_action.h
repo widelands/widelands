@@ -53,7 +53,7 @@ struct EditorToolAction {
 			delete args;
 		} else {
 			args->refcount--;
-}
+		}
 	}
 
 	EditorToolAction(const EditorToolAction& b)

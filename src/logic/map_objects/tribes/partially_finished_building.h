@@ -96,8 +96,8 @@ protected:
 	                       // (dismantlesites)
 	Wares dropout_wares_;  // additional items to drop out immediately
 
-	bool working_{false};             // true if the builder is currently working
-	Time work_steptime_;       // time when next step is completed
+	bool working_{false};         // true if the builder is currently working
+	Time work_steptime_;          // time when next step is completed
 	uint32_t work_completed_{0};  // how many steps have we done so far?
 	uint32_t work_steps_{0};      // how many steps (= wares) until we're done?
 };

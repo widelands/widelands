@@ -29,9 +29,9 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
                                                            char const* dirname)
    : UI::Window(
         parent, UI::WindowStyle::kWui, "make_directory", 0, 0, 330, 100, _("Make Directory")),
-     
+
      butw_(get_inner_w() / 2 - 3 * padding_),
-     
+
      dirname_(dirname),
      vbox_(this,
            UI::PanelStyle::kWui,

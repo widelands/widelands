@@ -204,7 +204,7 @@ private:
 	Buildcost enhancement_cost_;      // cost for enhancing
 	Buildcost
 	   enhancement_returns_on_dismantle_;  // Returned ware for dismantling an enhanced building
-	int32_t size_{BaseImmovable::SMALL};                         // size of the building
+	int32_t size_{BaseImmovable::SMALL};   // size of the building
 	bool mine_{false};
 	bool port_{false};
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
@@ -212,9 +212,9 @@ private:
 	                        // enabled
 	DescriptionIndex enhancement_;
 	DescriptionIndex
-	   enhanced_from_;         // The building this building was enhanced from, or INVALID_INDEX
-	bool enhanced_building_{false};   // if it is one, it is bulldozable
-	AI::BuildingHints hints_;  // hints (knowledge) for computer players
+	   enhanced_from_;  // The building this building was enhanced from, or INVALID_INDEX
+	bool enhanced_building_{false};          // if it is one, it is bulldozable
+	AI::BuildingHints hints_;                // hints (knowledge) for computer players
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
 	                                         // this attribute stands
 
@@ -251,7 +251,6 @@ public:
 		PCap_Dismantle = 1 << 1,   // can dismantle this buildings
 		PCap_Enhancable = 1 << 2,  // can be enhanced to something
 	};
-
 
 	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
 
@@ -442,8 +441,9 @@ protected:
 
 private:
 	std::string statistics_string_;
-	AttackTarget* attack_target_{nullptr};      // owned by the base classes, set by 'set_attack_target'.
-	SoldierControl* soldier_control_{nullptr};  // owned by the base classes, set by 'set_soldier_control'.
+	AttackTarget* attack_target_{nullptr};  // owned by the base classes, set by 'set_attack_target'.
+	SoldierControl* soldier_control_{
+	   nullptr};  // owned by the base classes, set by 'set_soldier_control'.
 
 	bool mute_messages_{false};
 	bool is_destruction_blocked_{false};

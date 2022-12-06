@@ -35,8 +35,7 @@ public:
 
 		Registry()
 		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Owner | MiniMapLayer::Flag |
-		                    MiniMapLayer::Road | MiniMapLayer::Building)
-		     {
+		                    MiniMapLayer::Road | MiniMapLayer::Building) {
 		}
 
 		MiniMap* get_window() const {

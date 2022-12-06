@@ -29,8 +29,7 @@ struct EditorIncreaseHeightTool : public EditorTool {
 	                         EditorSetHeightTool& the_set_tool)
 	   : EditorTool(parent, the_decrease_tool, the_set_tool),
 	     decrease_tool_(the_decrease_tool),
-	     set_tool_(the_set_tool)
-	     {
+	     set_tool_(the_set_tool) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

@@ -76,8 +76,9 @@ private:
 public:
 	Requirements() = default;
 
-	template <typename T> Requirements(const T& req)  // NOLINT allow implicit conversion
-	: m(new Capsule<T>(req)) {
+	template <typename T>
+	Requirements(const T& req)  // NOLINT allow implicit conversion
+	   : m(new Capsule<T>(req)) {
 	}
 
 	/**
@@ -178,9 +179,9 @@ struct RequireAttribute {
 	}
 
 private:
-	TrainingAttribute at=TrainingAttribute::kTotal;
-	int32_t min=SHRT_MIN;
-	int32_t max=SHRT_MAX;
+	TrainingAttribute at = TrainingAttribute::kTotal;
+	int32_t min = SHRT_MIN;
+	int32_t max = SHRT_MAX;
 };
 }  // namespace Widelands
 

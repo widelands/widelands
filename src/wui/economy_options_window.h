@@ -37,7 +37,7 @@ const std::string kDefaultEconomyProfile = "Default";
 class InteractiveBase;
 namespace Widelands {
 class MapObjectLoader;
-} // namespace Widelands
+}  // namespace Widelands
 
 // Used to indicate that a profile has been saved or deleted, so all open windows can update it
 struct NoteEconomyProfile {

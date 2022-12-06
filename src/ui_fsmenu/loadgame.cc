@@ -55,8 +55,7 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
                    &left_column_box_,
                    &right_column_content_box_),
 
-     is_replay_(is_replay)
-     {
+     is_replay_(is_replay) {
 
 	if (is_replay_) {
 		show_filenames_ = new UI::Checkbox(

@@ -64,15 +64,15 @@ struct RoutingNode {
 
 	uint32_t mpf_cycle_ware{0};
 	Queue::Cookie mpf_cookie_ware;
-	int32_t mpf_realcost_ware{0};       ///< real cost of getting to this flag
+	int32_t mpf_realcost_ware{0};             ///< real cost of getting to this flag
 	RoutingNode* mpf_backlink_ware{nullptr};  ///< flag where we came from
-	int32_t mpf_estimate_ware{0};       ///< estimate of cost to destination
+	int32_t mpf_estimate_ware{0};             ///< estimate of cost to destination
 
 	uint32_t mpf_cycle_worker{0};
 	Queue::Cookie mpf_cookie_worker;
-	int32_t mpf_realcost_worker{0};       ///< real cost of getting to this flag
+	int32_t mpf_realcost_worker{0};             ///< real cost of getting to this flag
 	RoutingNode* mpf_backlink_worker{nullptr};  ///< flag where we came from
-	int32_t mpf_estimate_worker{0};       ///< estimate of cost to destination
+	int32_t mpf_estimate_worker{0};             ///< estimate of cost to destination
 
 public:
 	RoutingNode() = default;

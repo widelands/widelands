@@ -224,9 +224,7 @@ public:
 	void error(char const*, ...) const __attribute__((format(printf, 2, 3)));
 	void check_used() const;
 
-	void read(const char* filename,
-	          const char* global_section = nullptr,
-	          FileSystem& = *g_fs);
+	void read(const char* filename, const char* global_section = nullptr, FileSystem& = *g_fs);
 	void write(const char* filename,
 	           bool used_only = true,
 	           FileSystem& = *g_fs,

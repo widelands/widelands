@@ -66,9 +66,9 @@ private:
 	HollowArea<AreaType> hollow_area_;
 	Phase phase_{Phase::kTop};
 	const uint32_t delta_radius_;
-	uint32_t row_{0};                        // # of rows completed in this phase
+	uint32_t row_{0};                     // # of rows completed in this phase
 	uint32_t rowwidth_;                   // # of fields to return per row
-	uint32_t rowpos_{0};                     // # of fields we have returned in this row
+	uint32_t rowpos_{0};                  // # of fields we have returned in this row
 	typename AreaType::CoordsType left_;  //  left-most node of current row
 };
 

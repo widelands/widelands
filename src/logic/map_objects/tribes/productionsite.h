@@ -418,11 +418,10 @@ protected:
 
 	void load_finish(EditorGameBase& egbase) override;
 
-
 	struct State {
 		const ProductionProgram* program{nullptr};  ///< currently running program
-		size_t ip{0};                         ///< instruction pointer
-		ProgramResult phase{ProgramResult::kNone};               ///< micro-step index (instruction dependent)
+		size_t ip{0};                               ///< instruction pointer
+		ProgramResult phase{ProgramResult::kNone};  ///< micro-step index (instruction dependent)
 		enum StateFlags : uint32_t { kStateFlagIgnoreStopped = 1, kStateFlagHasExtraData = 2 };
 		uint32_t flags{0};  ///< pfXXX flags
 
@@ -434,8 +433,7 @@ protected:
 		Coords coord;
 		/*@}*/
 
-		State()
-		   :  coord(Coords::null()) {
+		State() : coord(Coords::null()) {
 		}
 	};
 
@@ -480,7 +478,7 @@ protected:
 		post_timer_ = t;
 	}
 
- // TrainingSite must have access to this stuff
+	// TrainingSite must have access to this stuff
 	std::vector<WorkingPosition> working_positions_;
 
 	int32_t fetchfromflag_{0};  ///< Number of wares to fetch from flag
@@ -494,10 +492,10 @@ protected:
 	FailedSkippedPrograms failed_skipped_programs_;
 
 	using Stack = std::vector<State>;
-	Stack stack_;          ///<  program stack
-	bool program_timer_{false};   ///< execute next instruction based on pointer
-	Time program_time_;    ///< timer time
-	Duration post_timer_;  ///< Time to schedule after ends
+	Stack stack_;                ///<  program stack
+	bool program_timer_{false};  ///< execute next instruction based on pointer
+	Time program_time_;          ///< timer time
+	Duration post_timer_;        ///< Time to schedule after ends
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;

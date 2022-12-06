@@ -298,7 +298,6 @@ public:
 
 	protected:
 		Loader() = default;
-		
 
 	public:
 		virtual ~Loader() = default;
@@ -517,7 +516,7 @@ struct CmdDestroyMapObject : public GameLogicCommand {
 	}
 
 private:
-	Serial obj_serial=0;
+	Serial obj_serial = 0;
 };
 
 struct CmdAct : public GameLogicCommand {
@@ -535,8 +534,8 @@ struct CmdAct : public GameLogicCommand {
 	}
 
 private:
-	Serial obj_serial=0;
-	int32_t arg=0;
+	Serial obj_serial = 0;
+	int32_t arg = 0;
 };
 }  // namespace Widelands
 

@@ -36,10 +36,9 @@ struct GeneralStatisticsMenu : public UI::UniqueWindow {
 	// Custom registry, to store the selected_information as well.
 	struct Registry : public UI::UniqueWindow::Registry {
 		Registry()
-		   : 
-		     
-		     selected_players(kMaxPlayers, true)
-		     {
+		   :
+
+		     selected_players(kMaxPlayers, true) {
 		}
 
 		int32_t selected_information{0};

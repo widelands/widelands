@@ -138,8 +138,7 @@ ScopedScissor::~ScopedScissor() {
 }  // namespace
 
 RenderQueue::RenderQueue()
-   : 
-     terrain_program_(new TerrainProgram()),
+   : terrain_program_(new TerrainProgram()),
      dither_program_(new DitherProgram()),
      workarea_program_(new WorkareaProgram()),
      grid_program_(new GridProgram()),

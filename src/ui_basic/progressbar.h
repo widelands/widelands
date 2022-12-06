@@ -61,7 +61,7 @@ protected:
 
 private:
 	uint32_t orientation_;
-	uint32_t state_{0};  ///< state_ is [0..total_]
+	uint32_t state_{0};    ///< state_ is [0..total_]
 	uint32_t total_{100};  ///< maximum progress
 	const UI::PanelStyle progress_style_;
 	const UI::ProgressbarStyleInfo& progress_style() const;

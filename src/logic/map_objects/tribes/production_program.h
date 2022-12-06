@@ -48,7 +48,7 @@ struct ProductionProgram : public MapObjectProgram {
 	/// Can be executed on a ProductionSite.
 	struct Action {
 		struct TrainingParameters {
-			TrainingParameters() :  level(INVALID_INDEX) {
+			TrainingParameters() : level(INVALID_INDEX) {
 			}
 			static TrainingParameters parse(const std::vector<std::string>& arguments,
 			                                const std::string& action_name);
@@ -466,11 +466,11 @@ struct ProductionProgram : public MapObjectProgram {
 
 	private:
 		DescriptionIndex resource_;
-		uint8_t workarea_;            // width/radius of mine
-		unsigned max_resources_;      // Can work up to this percent (of total mountain resources)
-		unsigned depleted_chance_;    // odds of finding resources from empty mine
-		unsigned experience_chance_;  // probability of training in _empty_ mines
-		bool notify_on_failure_{true};      // Send a message if no resources could be found.
+		uint8_t workarea_;              // width/radius of mine
+		unsigned max_resources_;        // Can work up to this percent (of total mountain resources)
+		unsigned depleted_chance_;      // odds of finding resources from empty mine
+		unsigned experience_chance_;    // probability of training in _empty_ mines
+		bool notify_on_failure_{true};  // Send a message if no resources could be found.
 	};
 
 	struct ActCheckSoldier : public Action {

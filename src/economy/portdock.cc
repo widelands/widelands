@@ -51,9 +51,8 @@ PortdockDescr::PortdockDescr(char const* const init_name, char const* const init
 
 PortDock::PortDock(Warehouse* wh)
    : PlayerImmovable(g_portdock_descr),
-     
-     warehouse_(wh)
-     {
+
+     warehouse_(wh) {
 }
 
 PortDock::~PortDock() {

@@ -33,7 +33,7 @@ constexpr int kPadding = 1;
 
 }  // namespace
 
-TextureAtlas::Node::Node(const Recti& init_r) :  r(init_r) {
+TextureAtlas::Node::Node(const Recti& init_r) : r(init_r) {
 }
 
 void TextureAtlas::Node::split(int item_w, int item_h) {

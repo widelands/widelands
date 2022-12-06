@@ -191,9 +191,8 @@ public:
 	struct State {
 		explicit State(const Task* const the_task = nullptr)
 		   : task(the_task),
-		     
-		     coords(Coords::null())
-		     {
+
+		     coords(Coords::null()) {
 		}
 
 		const Task* task;
@@ -279,11 +278,8 @@ public:
 	/// This can fail (and return false). Therefore the caller must check the
 	/// result and find something else for the bob to do. Otherwise there will
 	/// be a "failed to act" error.
-	void start_task_movepath(Game&,
-	                         const Path&,
-	                         const DirAnimations&,
-	                         bool forceonlast = false,
-	                         int32_t only_step = -1);
+	void start_task_movepath(
+	   Game&, const Path&, const DirAnimations&, bool forceonlast = false, int32_t only_step = -1);
 
 	bool start_task_movepath(Game&,
 	                         const Path&,
@@ -359,8 +355,8 @@ private:
 	static Task const taskMovepath;
 	static Task const taskMove;
 
-	FCoords position_;  ///< where are we right now?
-	Bob* linknext_{nullptr};     ///< next object on this node
+	FCoords position_;        ///< where are we right now?
+	Bob* linknext_{nullptr};  ///< next object on this node
 	Bob** linkpprev_{nullptr};
 	uint32_t anim_{0};
 	Time animstart_;  ///< gametime when the animation was started

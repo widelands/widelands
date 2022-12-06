@@ -124,7 +124,7 @@ private:
 class DummyMD5Base {
 public:
 	virtual ~DummyMD5Base() = default;
-	virtual void data(const void* , size_t) = 0;
+	virtual void data(const void*, size_t) = 0;
 };
 using SimpleMD5Checksum = MD5Checksum<DummyMD5Base>;
 

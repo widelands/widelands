@@ -49,24 +49,24 @@ struct Utf8 {
 			uint16_t value = in[pos++];
 			if (!is_utf8_extended(in[pos])) {
 				return 0;
-}
+			}
 			value = (value << 6) | (in[pos++] & 0x3f);
 			if ((ctrl & 0xe0) == 0xc0) {
 				return value & 0x07ff;
-}
+			}
 			if (!is_utf8_extended(in[pos])) {
 				return 0;
-}
+			}
 			value = (value << 6) | (in[pos++] & 0x3f);
 			if ((ctrl & 0xf0) == 0xe0) {
 				return value & 0xffff;
-}
+			}
 			while (is_utf8_extended(in[pos])) {
 				++pos;
-}
+			}
 			return 0;
-		} 			return in[pos++];
-	
+		}
+		return in[pos++];
 	}
 };
 

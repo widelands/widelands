@@ -23,11 +23,11 @@ namespace Widelands {
 template <>
 MapHollowRegion<Area<>>::MapHollowRegion(const Map& map, const HollowArea<Area<>>& hollow_area)
    : hollow_area_(hollow_area),
-     
+
      delta_radius_(hollow_area.radius - hollow_area.hole_radius),
-     
+
      rowwidth_(hollow_area.radius + 1),
-     
+
      left_(hollow_area) {
 	assert(hollow_area.hole_radius < hollow_area.radius);
 	for (uint16_t r = hollow_area.radius; r != 0u; --r) {

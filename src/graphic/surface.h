@@ -38,11 +38,8 @@ public:
 	[[nodiscard]] virtual int height() const = 0;
 
 	/// This draws a part of 'texture'.
-	void blit(const Rectf& dst,
-	          const Image&,
-	          const Rectf& src_rect,
-	          float opacity,
-	          BlendMode blend_mode);
+	void
+	blit(const Rectf& dst, const Image&, const Rectf& src_rect, float opacity, BlendMode blend_mode);
 
 	/// This draws a playercolor blended image.
 	void blit_blended(const Rectf& dst,

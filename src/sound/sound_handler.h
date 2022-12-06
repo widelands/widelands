@@ -219,8 +219,7 @@ private:
 
 	/// Contains options for a sound type or the music
 	struct SoundOptions {
-		explicit SoundOptions(int vol, const std::string& savename)
-		   :  volume(vol), name(savename) {
+		explicit SoundOptions(int vol, const std::string& savename) : volume(vol), name(savename) {
 			assert(!savename.empty());
 			assert(vol >= 0);
 			assert(vol <= MIX_MAX_VOLUME);

@@ -326,10 +326,9 @@ WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
    : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
      plotmode_(plotmode),
      sample_rate_(sample_rate),
-     
+
      xline_length_(get_inner_w() - kSpaceRight - kSpacing),
-     yline_length_(get_inner_h() - kSpaceBottom - kSpacing * 3)
-     {
+     yline_length_(get_inner_h() - kSpaceBottom - kSpacing * 3) {
 	update();
 }
 

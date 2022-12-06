@@ -23,7 +23,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem.h"
 
-FileWrite::FileWrite() :  filepos_(0) {
+FileWrite::FileWrite() : filepos_(0) {
 }
 
 FileWrite::~FileWrite() {

@@ -84,15 +84,14 @@ BaseListselect::BaseListselect(Panel* const parent,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
    : Panel(parent, style, x, y, w, h),
-     
+
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, 0, h, style),
-     
+
      selection_(no_selection_index()),
-     
+
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     lineheight_(text_height(table_style().enabled()) + kMargin)
-     {
+     lineheight_(text_height(table_style().enabled()) + kMargin) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });

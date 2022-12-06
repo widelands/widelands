@@ -24,11 +24,11 @@
 /// Manages a set of 6 animations, one for each possible direction.
 struct DirAnimations {
 	explicit DirAnimations(uint32_t dir1 = 0,
-	              uint32_t dir2 = 0,
-	              uint32_t dir3 = 0,
-	              uint32_t dir4 = 0,
-	              uint32_t dir5 = 0,
-	              uint32_t dir6 = 0);
+	                       uint32_t dir2 = 0,
+	                       uint32_t dir3 = 0,
+	                       uint32_t dir4 = 0,
+	                       uint32_t dir5 = 0,
+	                       uint32_t dir6 = 0);
 
 	[[nodiscard]] uint32_t get_animation(Widelands::Direction const dir) const {
 		return animations_[dir - 1];

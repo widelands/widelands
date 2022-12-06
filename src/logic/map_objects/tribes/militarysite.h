@@ -136,7 +136,6 @@ private:
 	Soldier* find_least_suited_soldier();
 	bool drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier* newguy);
 
-
 	// We can be attacked if we have stationed soldiers.
 	class AttackTarget : public Widelands::AttackTarget {
 	public:
@@ -202,7 +201,8 @@ private:
 	std::vector<SoldierJob> soldierjobs_;
 	SoldierPreference soldier_preference_;
 	Time next_swap_soldiers_time_;
-	bool soldier_upgrade_try_{false};  // optimization -- if everybody is zero-level, do not downgrade
+	bool soldier_upgrade_try_{
+	   false};  // optimization -- if everybody is zero-level, do not downgrade
 	bool doing_upgrade_request_{false};
 	std::vector<std::map<std::tuple<int, int, int>, std::string>> statistics_string_cache_;
 };

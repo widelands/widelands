@@ -299,7 +299,7 @@ void Tree::parse_next_node(const char*& format_string) {
 	++format_string;
 }
 
-Tree::Tree(const char* format_string)  {
+Tree::Tree(const char* format_string) {
 	has_positional_node = false;
 	has_unpositional_node = false;
 

@@ -221,10 +221,9 @@ public:
 	};
 	explicit RenderNode(TextClickTarget* c, const NodeStyle& ns)
 	   : click_target_(c),
-	     
+
 	     halign_(ns.halign),
-	     valign_(ns.valign)
-	     {
+	     valign_(ns.valign) {
 	}
 	virtual ~RenderNode() = default;
 
@@ -318,7 +317,7 @@ private:
  */
 class Layout {
 public:
-	explicit Layout(std::vector<RenderNode*>& all) :  all_nodes_(all) {
+	explicit Layout(std::vector<RenderNode*>& all) : all_nodes_(all) {
 	}
 	virtual ~Layout() = default;
 
@@ -831,7 +830,7 @@ public:
 class SpaceNode : public RenderNode {
 public:
 	SpaceNode(TextClickTarget* c, NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false)
-	   : RenderNode(c, ns), w_(w), h_(h),  is_expanding_(expanding) {
+	   : RenderNode(c, ns), w_(w), h_(h), is_expanding_(expanding) {
 		check_size();
 	}
 
@@ -905,9 +904,8 @@ class DivTagRenderNode : public RenderNode {
 public:
 	explicit DivTagRenderNode(TextClickTarget* c, const NodeStyle& ns)
 	   : RenderNode(c, ns),
-	     
-	     background_color_(0, 0, 0)
-	     {
+
+	     background_color_(0, 0, 0) {
 	}
 	~DivTagRenderNode() override {
 		nodes_to_render_.clear();
@@ -1442,8 +1440,7 @@ public:
 	              ImageCache* image_cache,
 	              RendererStyle& init_renderer_style,
 	              const UI::FontSets* fontsets)
-	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets)
-	     {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1524,8 +1521,7 @@ public:
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
 	                 const UI::FontSets* fontsets)
-	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets)
-	     {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1608,7 +1604,7 @@ public:
 	              bool shrink_to_fit = true)
 	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     shrink_to_fit_(shrink_to_fit),
-	     
+
 	     w_(max_w),
 	     render_node_(new DivTagRenderNode(this, ns)) {
 	}

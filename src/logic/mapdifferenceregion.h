@@ -37,11 +37,11 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 		--direction;
 		if (direction == 0u) {
 			direction = 6;
-}
+		}
 		--direction;
 		if (direction == 0u) {
 			direction = 6;
-}
+		}
 		switch (direction) {
 #define DIRECTION_CASE(dir, neighbour_function)                                                    \
 	case dir:                                                                                       \
@@ -60,11 +60,11 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 		--direction;
 		if (direction == 0u) {
 			direction = 6;
-}
+		}
 		--direction;
 		if (direction == 0u) {
 			direction = 6;
-}
+		}
 		direction_ = direction;
 	}
 

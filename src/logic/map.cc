@@ -132,10 +132,7 @@ Map IMPLEMENTATION
  * This really identifies a map like it is in the game
  */
 
-Map::Map()
-   : 
-     pathfieldmgr_(new PathfieldManager)
-     {
+Map::Map() : pathfieldmgr_(new PathfieldManager) {
 }
 
 Map::~Map() {

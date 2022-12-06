@@ -38,9 +38,7 @@
 GameTips::GameTips(UI::ProgressWindow& progressWindow,
                    const std::vector<std::string>& names,
                    const Widelands::AllTribes& t)
-   : 
-     progressWindow_(progressWindow)
-     {
+   : progressWindow_(progressWindow) {
 	// Loading the "texts" locale for translating the tips
 	i18n::Textdomain textdomain("texts");
 

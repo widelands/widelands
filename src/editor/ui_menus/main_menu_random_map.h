@@ -38,7 +38,7 @@ class EditorInteractive;
 struct SinglePlayerGameSettingsProvider;
 namespace UI {
 template <typename T, typename ID> struct IDButton;
-} // namespace UI
+}  // namespace UI
 
 class MainMenuNewRandomMapPanel : public UI::Box {
 public:

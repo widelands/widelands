@@ -20,7 +20,7 @@
 
 #include "editor/editorinteractive.h"
 
-ToolConf::ToolConf() :  interval(0, 0) {
+ToolConf::ToolConf() : interval(0, 0) {
 }
 
 std::string ToolConf::to_key() const {

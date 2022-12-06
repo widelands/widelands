@@ -125,14 +125,14 @@ void make_valid_addon_filename(std::string& name,
 
 AddOnsPackagerBox::AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent, uint32_t orientation)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, orientation),
-     
+
      main_menu_(mainmenu) {
 }
 
 MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
    : AddOnsPackagerBox(mainmenu, parent, UI::Box::Horizontal),
      box_dirstruct_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     
+
      box_maps_list_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      box_buttonsbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      box_dirstruct_displayname_(&box_dirstruct_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),

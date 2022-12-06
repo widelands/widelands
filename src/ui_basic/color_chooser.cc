@@ -37,12 +37,11 @@ struct ColorChooserImpl : public Panel {
 	ColorChooserImpl(Panel& parent, PanelStyle s, ColorChooser& c)
 	   : Panel(&parent, s, 0, 0, kMainDimension + kSpacing + kSidebarWidth, kMainDimension),
 	     chooser_(c),
-	     
+
 	     selector_(*g_image_cache->get("images/ui_basic/fsel.png")),
-	     
+
 	     texture_left_(kMainDimension, kMainDimension),
-	     texture_right_(1, kMainDimension)
-	     {
+	     texture_right_(1, kMainDimension) {
 	}
 
 	ColorAttribute sidebar_attribute() const {

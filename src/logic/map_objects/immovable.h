@@ -242,10 +242,10 @@ public:
 	template <typename T> T* get_action_data() {
 		if (!action_data_) {
 			return nullptr;
-}
+		}
 		if (T* data = dynamic_cast<T*>(action_data_.get())) {
 			return data;
-}
+		}
 		set_action_data(nullptr);
 		return nullptr;
 	}

@@ -23,8 +23,7 @@
 
 ///  Decreases the height of a node by a value.
 struct EditorDecreaseHeightTool : public EditorTool {
-	explicit EditorDecreaseHeightTool(EditorInteractive& parent)
-	   : EditorTool(parent, *this, *this) {
+	explicit EditorDecreaseHeightTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

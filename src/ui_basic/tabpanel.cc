@@ -131,7 +131,7 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
            0,
            0),
      tab_style_(style),
-     
+
      highlight_(kNotFound),
      background_style_(style) {
 	set_can_focus(true);

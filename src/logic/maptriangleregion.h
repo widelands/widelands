@@ -65,7 +65,7 @@ template <> struct MapTriangleRegion<FCoords> {
 	     remaining_rows_(area_.radius * 2) {
 		for (uint8_t r = area_.radius; r != 0u; --r) {
 			map.get_tln(area_.node, &area_.node);
-}
+		}
 		left_ = area_.node;
 	}
 
@@ -93,7 +93,7 @@ template <> struct MapTriangleRegion<FCoords> {
 			remaining_in_row_ = rowwidth_ -= 2;
 		} else {
 			return false;
-}
+		}
 		return true;
 	}
 

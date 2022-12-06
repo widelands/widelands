@@ -67,7 +67,8 @@ struct CharNode : FormatNode {
 			*out = '^';
 			*(out + 1) = '@' + arg.char_val;
 			return out + 2;
-		} if (arg.char_val == 0x7f) {
+		}
+		if (arg.char_val == 0x7f) {
 			*out = '^';
 			*(out + 1) = '?';
 			return out + 2;

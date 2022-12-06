@@ -55,7 +55,7 @@ public:
 	struct Tools {
 		explicit Tools(EditorInteractive& parent, const Widelands::Map& map)
 		   : current_pointer(&info),
-		     
+
 		     info(parent),
 		     set_height(parent),
 		     decrease_height(parent),

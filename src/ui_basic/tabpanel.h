@@ -159,7 +159,7 @@ private:
 	size_t find_tab(int32_t x, int32_t y) const;
 
 	TabList tabs_;
-	size_t active_{0};     ///< index of the currently active tab
+	size_t active_{0};  ///< index of the currently active tab
 	size_t highlight_;  ///< index of the highlighted button
 
 	const UI::TabPanelStyle background_style_;  // Background color and texture. Not owned.

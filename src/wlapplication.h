@@ -42,10 +42,10 @@
 
 namespace UI {
 class Panel;
-} // namespace UI
+}  // namespace UI
 namespace Widelands {
 class Game;
-} // namespace Widelands
+}  // namespace Widelands
 
 /** Returns the widelands executable path. */
 std::string get_executable_directory(bool logdir = true);

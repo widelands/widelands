@@ -36,7 +36,7 @@ template <typename AreaType = Area<>> struct MapRegion {
 	     remaining_rows_(rowwidth_ + area.radius) {
 		for (typename AreaType::RadiusType r = area.radius; r; --r) {
 			map.get_tln(area_, &area_);
-}
+		}
 		left_ = area_;
 	}
 
@@ -63,7 +63,7 @@ template <typename AreaType = Area<>> struct MapRegion {
 			remaining_in_row_ = --rowwidth_;
 		} else {
 			return false;
-}
+		}
 		return true;
 	}
 
