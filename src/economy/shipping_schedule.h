@@ -92,9 +92,9 @@ public:
 	 * We may have ships and/or ports but no plans to carry anything.
 	 * @return true when no plans for any ship exist
 	 */
-	bool empty() const;
+	[[nodiscard]] bool empty() const;
 
-	bool is_busy(const Ship&) const;
+	[[nodiscard]] bool is_busy(const Ship&) const;
 
 	void log_general_info(const EditorGameBase&) const;
 

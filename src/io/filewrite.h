@@ -38,7 +38,7 @@ public:
 			return std::numeric_limits<size_t>::max();
 		}
 
-		bool is_null() const {
+		[[nodiscard]] bool is_null() const {
 			return *this == null();
 		}
 		operator size_t() const {
@@ -74,7 +74,7 @@ public:
 
 	/// Get the position that will be written to in the next write operation that
 	/// does not specify a position.
-	Pos get_pos() const;
+	[[nodiscard]] Pos get_pos() const;
 
 	/// Set the file pointer to a new location. The position can be beyond the
 	/// current end of file.
@@ -87,7 +87,7 @@ public:
 	void data(void const* src, size_t size) override;
 
 	/// Returns the current buffer. Use this for in_memory operations.
-	std::string get_data() const;
+	[[nodiscard]] std::string get_data() const;
 
 private:
 	char* data_;

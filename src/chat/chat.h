@@ -74,7 +74,7 @@ struct ChatProvider {
 	// This list need not be stable or monotonic. In other words,
 	// subsequent calls to this functions may return a smaller or
 	// greater number of chat messages.
-	virtual const std::vector<ChatMessage>& get_messages() const = 0;
+	[[nodiscard]] virtual const std::vector<ChatMessage>& get_messages() const = 0;
 
 	// reimplemented e.g. in internet_gaming to silence the chat if in game.
 	// TODO(sirver): this does not belong here. The receiver of the
@@ -84,7 +84,7 @@ struct ChatProvider {
 	}
 
 	// The specific chat provider subclass might not have been set, e.g. due to an exception.
-	virtual bool has_been_set() const {
+	[[nodiscard]] virtual bool has_been_set() const {
 		return false;
 	}
 

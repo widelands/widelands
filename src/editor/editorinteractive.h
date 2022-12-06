@@ -76,7 +76,7 @@ public:
 		     resize(parent, map.get_width(), map.get_height()),
 		     tool_history(parent) {
 		}
-		EditorTool& current() const {
+		[[nodiscard]] EditorTool& current() const {
 			return *current_pointer;
 		}
 		using ToolVector = std::vector<EditorTool*>;

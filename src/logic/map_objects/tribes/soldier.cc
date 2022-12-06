@@ -806,7 +806,7 @@ void Soldier::init_auto_task(Game& game) {
 struct FindNodeOwned {
 	explicit FindNodeOwned(PlayerNumber owner) : owner_(owner) {
 	}
-	bool accept(const EditorGameBase& /* egbase */, const FCoords& coords) const {
+	[[nodiscard]] bool accept(const EditorGameBase& /* egbase */, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == owner_);
 	}
 

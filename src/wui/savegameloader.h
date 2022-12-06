@@ -33,8 +33,8 @@ public:
 	std::vector<SavegameData> load_files(const std::string& directory);
 
 private:
-	virtual bool is_valid_gametype(const SavegameData& gamedata) const = 0;
-	virtual std::string get_savename(const std::string& gamefilename) const;
+	[[nodiscard]] virtual bool is_valid_gametype(const SavegameData& gamedata) const = 0;
+	[[nodiscard]] virtual std::string get_savename(const std::string& gamefilename) const;
 
 	void add_general_information(SavegameData& gamedata,
 	                             const Widelands::GamePreloadPacket& gpdp) const;
@@ -55,8 +55,8 @@ public:
 	explicit ReplayLoader(Widelands::Game& game);
 
 private:
-	bool is_valid_gametype(const SavegameData& gamedata) const override;
-	std::string get_savename(const std::string& gamefilename) const override;
+	[[nodiscard]] bool is_valid_gametype(const SavegameData& gamedata) const override;
+	[[nodiscard]] std::string get_savename(const std::string& gamefilename) const override;
 };
 
 class MultiPlayerLoader : public SavegameLoader {
@@ -64,7 +64,7 @@ public:
 	explicit MultiPlayerLoader(Widelands::Game& game);
 
 private:
-	bool is_valid_gametype(const SavegameData& gamedata) const override;
+	[[nodiscard]] bool is_valid_gametype(const SavegameData& gamedata) const override;
 };
 
 class SinglePlayerLoader : public SavegameLoader {
@@ -72,7 +72,7 @@ public:
 	explicit SinglePlayerLoader(Widelands::Game& game);
 
 private:
-	bool is_valid_gametype(const SavegameData& gamedata) const override;
+	[[nodiscard]] bool is_valid_gametype(const SavegameData& gamedata) const override;
 };
 
 class EverythingLoader : public SavegameLoader {
@@ -80,7 +80,7 @@ public:
 	explicit EverythingLoader(Widelands::Game& game);
 
 private:
-	bool is_valid_gametype(const SavegameData& gamedata) const override;
+	[[nodiscard]] bool is_valid_gametype(const SavegameData& gamedata) const override;
 };
 
 #endif  // WL_WUI_SAVEGAMELOADER_H

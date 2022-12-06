@@ -67,9 +67,9 @@ struct Command {
 	virtual ~Command() = default;
 
 	virtual void execute(Game&) = 0;
-	virtual QueueCommandTypes id() const = 0;
+	[[nodiscard]] virtual QueueCommandTypes id() const = 0;
 
-	const Time& duetime() const {
+	[[nodiscard]] const Time& duetime() const {
 		return duetime_;
 	}
 	void set_duetime(const Time& t) {

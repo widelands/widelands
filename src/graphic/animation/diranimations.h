@@ -30,7 +30,7 @@ struct DirAnimations {
 	              uint32_t dir5 = 0,
 	              uint32_t dir6 = 0);
 
-	uint32_t get_animation(Widelands::Direction const dir) const {
+	[[nodiscard]] uint32_t get_animation(Widelands::Direction const dir) const {
 		return animations_[dir - 1];
 	}
 	void set_animation(const Widelands::Direction dir, const uint32_t anim) {

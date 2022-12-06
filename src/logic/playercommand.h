@@ -52,10 +52,10 @@ public:
 
 	void write_id_and_sender(StreamWrite& ser);
 
-	PlayerNumber sender() const {
+	[[nodiscard]] PlayerNumber sender() const {
 		return sender_;
 	}
-	uint32_t cmdserial() const {
+	[[nodiscard]] uint32_t cmdserial() const {
 		return cmdserial_;
 	}
 	void set_cmdserial(const uint32_t s) {
@@ -87,7 +87,7 @@ struct CmdBulldoze : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kBulldoze;
 	}
 
@@ -111,7 +111,7 @@ struct CmdBuild : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kBuild;
 	}
 
@@ -134,7 +134,7 @@ struct CmdBuildFlag : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kBuildFlag;
 	}
 
@@ -156,7 +156,7 @@ struct CmdBuildRoad : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kBuildRoad;
 	}
 
@@ -181,7 +181,7 @@ struct CmdBuildWaterway : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kBuildWaterway;
 	}
 
@@ -205,7 +205,7 @@ struct CmdFlagAction : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kFlagAction;
 	}
 
@@ -229,7 +229,7 @@ struct CmdStartStopBuilding : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kStartStopBuilding;
 	}
 
@@ -256,7 +256,7 @@ struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kMilitarysiteSetSoldierPreference;
 	}
 
@@ -279,7 +279,7 @@ struct CmdStartOrCancelExpedition : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kStartOrCancelExpedition;
 	}
 
@@ -304,7 +304,7 @@ struct CmdExpeditionConfig : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kExpeditionConfig;
 	}
 
@@ -332,7 +332,7 @@ struct CmdEnhanceBuilding : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kEnhanceBuilding;
 	}
 
@@ -358,7 +358,7 @@ struct CmdDismantleBuilding : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kDismantleBuilding;
 	}
 
@@ -383,7 +383,7 @@ struct CmdEvictWorker : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kEvictWorker;
 	}
 
@@ -406,7 +406,7 @@ struct CmdShipScoutDirection : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kShipScoutDirection;
 	}
 
@@ -430,7 +430,7 @@ struct CmdShipConstructPort : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kShipConstructPort;
 	}
 
@@ -458,7 +458,7 @@ struct CmdShipExploreIsland : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kShipExploreIsland;
 	}
 
@@ -481,7 +481,7 @@ struct CmdShipSink : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kShipSink;
 	}
 
@@ -504,7 +504,7 @@ struct CmdShipCancelExpedition : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kShipCancelExpedition;
 	}
 
@@ -538,7 +538,7 @@ struct CmdSetWarePriority : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kSetWarePriority;
 	}
 
@@ -575,7 +575,7 @@ struct CmdSetInputMaxFill : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kSetInputMaxFill;
 	}
 
@@ -609,10 +609,10 @@ struct CmdChangeTargetQuantity : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 protected:
-	Serial economy() const {
+	[[nodiscard]] Serial economy() const {
 		return economy_;
 	}
-	DescriptionIndex ware_type() const {
+	[[nodiscard]] DescriptionIndex ware_type() const {
 		return ware_type_;
 	}
 
@@ -634,7 +634,7 @@ struct CmdSetWareTargetQuantity : public CmdChangeTargetQuantity {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kSetWareTargetQuantity;
 	}
 
@@ -660,7 +660,7 @@ struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kSetWorkerTargetQuantity;
 	}
 
@@ -689,7 +689,7 @@ struct CmdChangeTrainingOptions : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kChangeTrainingOptions;
 	}
 
@@ -715,7 +715,7 @@ struct CmdDropSoldier : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kDropSoldier;
 	}
 
@@ -740,7 +740,7 @@ struct CmdChangeSoldierCapacity : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kChangeSoldierCapacity;
 	}
 
@@ -765,7 +765,7 @@ struct CmdEnemyFlagAction : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kEnemyFlagAction;
 	}
 
@@ -793,7 +793,7 @@ struct PlayerMessageCommand : public PlayerCommand {
 
 	explicit PlayerMessageCommand(StreamRead&);
 
-	MessageId message_id() const {
+	[[nodiscard]] MessageId message_id() const {
 		return message_id_;
 	}
 
@@ -808,7 +808,7 @@ struct CmdMessageSetStatusRead : public PlayerMessageCommand {
 	   : PlayerMessageCommand(t, p, i) {
 	}
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kMessageSetStatusRead;
 	}
 
@@ -826,7 +826,7 @@ struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
 	   : PlayerMessageCommand(t, p, i) {
 	}
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kMessageSetStatusArchived;
 	}
 
@@ -848,7 +848,7 @@ struct CmdSetStockPolicy : PlayerCommand {
 	                  DescriptionIndex ware,
 	                  StockPolicy policy);
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kSetStockPolicy;
 	}
 
@@ -873,7 +873,7 @@ private:
 struct CmdProposeTrade : PlayerCommand {
 	CmdProposeTrade(const Time& time, PlayerNumber pn, const Trade& trade);
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kProposeTrade;
 	}
 
@@ -897,7 +897,7 @@ struct CmdToggleMuteMessages : PlayerCommand {
 	   : PlayerCommand(t, p), building_(b.serial()), all_(a) {
 	}
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kToggleMuteMessages;
 	}
 
@@ -921,7 +921,7 @@ struct CmdMarkMapObjectForRemoval : PlayerCommand {
 	   : PlayerCommand(t, p), object_(mo.serial()), mark_(m) {
 	}
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kMarkMapObjectForRemoval;
 	}
 
@@ -945,7 +945,7 @@ struct CmdDiplomacy : PlayerCommand {
 	   : PlayerCommand(t, p), action_(a), other_player_(o) {
 	}
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kDiplomacy;
 	}
 
@@ -974,7 +974,7 @@ struct CmdPinnedNote : PlayerCommand {
 	   : PlayerCommand(t, p), text_(text), pos_(pos), rgb_(rgb), delete_(del) {
 	}
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kPinnedNote;
 	}
 
@@ -1000,7 +1000,7 @@ struct CmdPickCustomStartingPosition : PlayerCommand {
 	   : PlayerCommand(t, p), coords_(c) {
 	}
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kPickCustomStartingPosition;
 	}
 

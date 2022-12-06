@@ -112,15 +112,15 @@ public:
 	explicit Economy(Player&, Serial serial, WareWorker);  // For saveloading
 	~Economy();
 
-	Serial serial() const {
+	[[nodiscard]] Serial serial() const {
 		return serial_;
 	}
 
-	Player& owner() const {
+	[[nodiscard]] Player& owner() const {
 		return owner_;
 	}
 
-	WareWorker type() const {
+	[[nodiscard]] WareWorker type() const {
 		return type_;
 	}
 
@@ -135,7 +135,7 @@ public:
 	                                  uint32_t cost_cutoff = 0,
 	                                  const WarehouseAcceptFn& acceptfn = WarehouseAcceptFn());
 
-	std::vector<Flag*>::size_type get_nrflags() const {
+	[[nodiscard]] std::vector<Flag*>::size_type get_nrflags() const {
 		return flags_.size();
 	}
 	void add_flag(Flag&);
@@ -153,7 +153,7 @@ public:
 
 	void add_warehouse(Warehouse&);
 	void remove_warehouse(Warehouse&);
-	const std::vector<Warehouse*>& warehouses() const {
+	[[nodiscard]] const std::vector<Warehouse*>& warehouses() const {
 		return warehouses_;
 	}
 
@@ -171,28 +171,28 @@ public:
 	/// Whether the economy needs more of this ware/worker type.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing another from it.
-	bool needs_ware_or_worker(DescriptionIndex) const;
+	[[nodiscard]] bool needs_ware_or_worker(DescriptionIndex) const;
 
-	const TargetQuantity& target_quantity(DescriptionIndex const i) const {
+	[[nodiscard]] const TargetQuantity& target_quantity(DescriptionIndex const i) const {
 		return target_quantities_[i];
 	}
 	TargetQuantity& target_quantity(DescriptionIndex const i) {
 		return target_quantities_[i];
 	}
 
-	void* get_options_window() const {
+	[[nodiscard]] void* get_options_window() const {
 		return options_window_;
 	}
 	void set_options_window(void* window) {
 		options_window_ = window;
 	}
 
-	const WareList& get_wares_or_workers() const {
+	[[nodiscard]] const WareList& get_wares_or_workers() const {
 		return wares_or_workers_;
 	}
 
 	// Checks whether this economy contains a building of the specified type
-	bool has_building(DescriptionIndex) const;
+	[[nodiscard]] bool has_building(DescriptionIndex) const;
 	/**
 	 * Of all occupied ProductionSites of the specified type in this economy,
 	 * find the one that is closest to the specified flag and return it.

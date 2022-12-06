@@ -50,7 +50,7 @@ struct WidelandsMapLoader : public MapLoader {
 	}
 
 	// If this was made pre one-world, the name of the world.
-	const std::string& old_world_name() const {
+	[[nodiscard]] const std::string& old_world_name() const {
 		return old_world_name_;
 	}
 
