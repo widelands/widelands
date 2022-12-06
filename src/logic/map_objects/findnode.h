@@ -50,7 +50,7 @@ private:
 		int refcount{1};
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
-		explicit Capsule(const T& init_op) : op(init_op) {
+		Capsule(const T& init_op) : op(init_op) {  // NOLINT allow implicit conversion
 		}
 		[[nodiscard]] bool accept(const EditorGameBase& map, const FCoords& coord) const override {
 			return op.accept(map, coord);
@@ -77,7 +77,7 @@ public:
 		return *this;
 	}
 
-	template <typename T> explicit FindNode(const T& op) {
+	template <typename T> FindNode(const T& op) {  // NOLINT allow implicit conversion
 		capsule = new Capsule<T>(op);
 	}
 

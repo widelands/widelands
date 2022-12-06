@@ -43,7 +43,7 @@ struct Path {
 	Path() = default;
 	explicit Path(const Coords& c) : start_(c), end_(c) {
 	}
-	explicit Path(CoordPath&);
+	Path(CoordPath&);  // NOLINT allow implicit conversion
 
 	void reverse();
 

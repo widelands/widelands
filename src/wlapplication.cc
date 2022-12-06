@@ -355,6 +355,14 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
      should_die_(false),
 #ifdef _WIN32
      homedir_(FileSystem::get_homedir() + "\\.widelands")
+#elif defined USE_XDG
+     // To enable backwards compatibility, the program name is passed with the
+     // path.
+     homedir_(FileSystem::get_userdatadir()),
+     userconfigdir_(FileSystem::get_userconfigdir())
+#else
+     homedir_(FileSystem::get_homedir() + "/.widelands")
+#endif
      {
 	g_fs = new LayeredFileSystem();
 

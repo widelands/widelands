@@ -427,7 +427,7 @@ struct ObjectPointer {
 	ObjectPointer() {
 		serial_ = 0;
 	}
-	explicit ObjectPointer(const MapObject* const obj) {
+	ObjectPointer(const MapObject* const obj) {  // NOLINT allow implicit conversion
 		assert(obj == nullptr || obj->serial_ != 0);
 		serial_ = obj != nullptr ? obj->serial_ : 0;
 	}
@@ -467,7 +467,7 @@ private:
 };
 
 template <class T> struct OPtr {
-	explicit OPtr(T* const obj = nullptr) : m(obj) {
+	OPtr(T* const obj = nullptr) : m(obj) {  // NOLINT allow implicit conversion
 	}
 
 	OPtr& operator=(T* const obj) {

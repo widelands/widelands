@@ -55,7 +55,7 @@ private:
 	};
 
 	template <typename T> struct Capsule : public BaseCapsule {
-		explicit Capsule(const T& init_m) : m(init_m) {
+		Capsule(const T& init_m) : m(init_m) {  // NOLINT allow implicit conversion
 		}
 
 		[[nodiscard]] bool check(const MapObject& obj) const override {
@@ -76,7 +76,8 @@ private:
 public:
 	Requirements() = default;
 
-	template <typename T> explicit Requirements(const T& req) : m(new Capsule<T>(req)) {
+	template <typename T> Requirements(const T& req)  // NOLINT allow implicit conversion
+	: m(new Capsule<T>(req)) {
 	}
 
 	/**

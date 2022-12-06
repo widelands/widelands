@@ -185,7 +185,7 @@ template <class T> struct TrackPtr : BaseTrackPtr {
 		return *this;
 	}
 
-	explicit operator T*() const {
+	operator T*() const {  // NOLINT allow implicit conversion
 		return static_cast<T*>(get());
 	}
 	T* operator->() const {

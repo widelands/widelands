@@ -47,7 +47,7 @@ private:
 		int refcount{1};
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
-		explicit Capsule(const T& init_op) : op(init_op) {
+		Capsule(const T& init_op) : op(init_op) {  // NOLINT allow implicit conversion
 		}
 		[[nodiscard]] bool accept(const BaseImmovable& imm) const override {
 			return op.accept(imm);
@@ -74,7 +74,7 @@ public:
 		return *this;
 	}
 
-	template <typename T> explicit FindImmovable(const T& op) {
+	template <typename T> FindImmovable(const T& op) {  // NOLINT allow implicit conversion
 		capsule = new Capsule<T>(op);
 	}
 
