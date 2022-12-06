@@ -180,7 +180,7 @@ private:
 	std::list<std::unique_ptr<NetOpenGame>> opengames;
 
 	void (*callback)(int32_t, const NetOpenGame* const, void*)  // linebreak to make codecheck happy
-	{nullptr};
+	   {nullptr};
 	void* userdata;
 };
 
