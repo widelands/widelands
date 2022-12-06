@@ -26,7 +26,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
-#include "ui_basic/table.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 

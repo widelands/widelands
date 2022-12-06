@@ -117,8 +117,8 @@ void Table<void*>::add_column(uint32_t const width,
 		Column c;
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
-		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_style_, title,
-		                   tooltip_string);
+		c.btn =
+		   new Button(this, title, complete_width, 0, width, headerheight_, button_style_, title, "");
 		const size_t col_index = columns_.size();
 		c.btn->sigclicked.connect([this, col_index]() { header_button_clicked(col_index); });
 		c.width = width;
@@ -126,6 +126,8 @@ void Table<void*>::add_column(uint32_t const width,
 		c.alignment = alignment;
 		c.compare = [this, col_index](
 		               uint32_t a, uint32_t b) { return default_compare_string(col_index, a, b); };
+		c.user_tooltip = tooltip_string;
+		c.update_tooltip(columns_.size() == get_sort_column());
 		columns_.push_back(c);
 		if (column_type == TableColumnType::kFlexible) {
 			assert(flexible_column_idx_ == std::numeric_limits<size_t>::max());
@@ -134,7 +136,7 @@ void Table<void*>::add_column(uint32_t const width,
 	}
 }
 
-void Table<void*>::set_column_title(uint8_t const col, const std::string& title) {
+void Table<void*>::set_column_title(const uint8_t col, const std::string& title) {
 	assert(col < columns_.size());
 	Column& column = columns_.at(col);
 	assert(column.btn);
@@ -145,7 +147,20 @@ void Table<void*>::set_column_tooltip(uint8_t col, const std::string& text) {
 	assert(col < columns_.size());
 	Column& column = columns_.at(col);
 	assert(column.btn);
-	column.btn->set_tooltip(text);
+	column.user_tooltip = text;
+	column.update_tooltip(col == get_sort_column());
+}
+
+void Table<void*>::Column::update_tooltip(const bool sorted) const {
+	const std::string click_tooltip =
+	   sorted ? _("Click to reverse sorting") : _("Click to sort by this column");
+	if (user_tooltip.empty()) {
+		btn->set_tooltip(click_tooltip);
+	} else {
+		/** TRANSLATORS: Tooltip format for table headers: %1 is column description, %2 is
+		    "Click to sort ..." or "Click to reverse..." */
+		btn->set_tooltip(format(_("%1$s<br>(%2$s)"), user_tooltip, click_tooltip));
+	}
 }
 
 /**
@@ -155,6 +170,18 @@ void Table<void*>::set_column_compare(uint8_t col, const Table<void*>::CompareFn
 	assert(col < columns_.size());
 	Column& column = columns_.at(col);
 	column.compare = fn;
+}
+
+void Table<void*>::set_sort_column(uint8_t const col) {
+	const uint8_t old = get_sort_column();
+	if (col == old) {
+		return;
+	}
+	columns_.at(old).update_tooltip(false);
+
+	assert(col < columns_.size());
+	sort_column_ = col;
+	columns_.at(col).update_tooltip(true);
 }
 
 Table<void*>::EntryRecord* Table<void*>::find(const void* const entry) const
@@ -173,13 +200,14 @@ Table<void*>::EntryRecord* Table<void*>::find(const void* const entry) const
  */
 void Table<void*>::header_button_clicked(Columns::size_type const n) {
 	assert(columns_.at(n).btn);
-	if (get_sort_colum() == n) {
+	if (get_sort_column() == n) {
 		set_sort_descending(!get_sort_descending());  //  change sort direction
 		sort();
 		return;
 	}
 
 	set_sort_column(n);
+	set_sort_descending(false);
 	sort();
 }
 

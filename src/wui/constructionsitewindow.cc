@@ -532,17 +532,21 @@ bool ConstructionSoldierCapacityBox::handle_key(bool down, SDL_Keysym code) {
 		case ChangeType::kMinus:
 			change_current(-1);
 			return true;
+		case ChangeType::kBigPlus:
+			change_current(ChangeBigStep::kSmallRange);
+			return true;
+		case ChangeType::kBigMinus:
+			change_current(-ChangeBigStep::kSmallRange);
+			return true;
 		case ChangeType::kSetMax:
 			set_current(max_);
 			return true;
 		case ChangeType::kSetMin:
 			set_current(min_);
 			return true;
-		default:
-			break;
 		}
 	}
-	return false;
+	return UI::Box::handle_key(down, code);
 }
 bool ConstructionSoldierCapacityBox::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	if (!enabled_) {
@@ -550,7 +554,12 @@ bool ConstructionSoldierCapacityBox::handle_mousewheel(int32_t x, int32_t y, uin
 	}
 	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
 	if (change == 0) {
-		return false;
+		// Try big step
+		change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValueBig, x, y, modstate);
+		if (change == 0) {
+			return false;
+		}
+		change *= ChangeBigStep::kSmallRange;
 	}
 	change_current(change);
 	return true;
