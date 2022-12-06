@@ -29,7 +29,7 @@ class Exception : public std::exception {
 public:
 	explicit Exception(const std::string& msg) : std::exception(), msg_(msg) {
 	}
-	const char* what() const noexcept override {
+	[[nodiscard]] const char* what() const noexcept override {
 		return msg_.c_str();
 	}
 

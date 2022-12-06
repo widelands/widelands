@@ -46,7 +46,7 @@ struct EditorHistoryTool : public EditorTool {
 
 	bool add_configuration(const ToolConf& conf);
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
 	}
 

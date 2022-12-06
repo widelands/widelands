@@ -44,7 +44,7 @@ struct EditorSetResourcesTool : public EditorTool {
 
 	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_set_resources.png");
 	}
 
@@ -53,13 +53,13 @@ struct EditorSetResourcesTool : public EditorTool {
 		return resource_tools_nodecaps(fcoords, egbase, cur_res_);
 	}
 
-	Widelands::ResourceAmount get_set_to() const {
+	[[nodiscard]] Widelands::ResourceAmount get_set_to() const {
 		return set_to_;
 	}
 	void set_set_to(Widelands::ResourceAmount const n) {
 		set_to_ = n;
 	}
-	Widelands::DescriptionIndex get_cur_res() const {
+	[[nodiscard]] Widelands::DescriptionIndex get_cur_res() const {
 		return cur_res_;
 	}
 	void set_cur_res(Widelands::DescriptionIndex const res) {

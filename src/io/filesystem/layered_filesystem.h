@@ -55,11 +55,11 @@ public:
 	// files). Take ownership of the given filesystem.
 	void set_home_file_system(FileSystem*);
 
-	FilenameSet list_directory(const std::string& path) const override;
+	[[nodiscard]] FilenameSet list_directory(const std::string& path) const override;
 
-	bool is_writable() const override;
-	bool file_exists(const std::string& path) const override;
-	bool is_directory(const std::string& path) const override;
+	[[nodiscard]] bool is_writable() const override;
+	[[nodiscard]] bool file_exists(const std::string& path) const override;
+	[[nodiscard]] bool is_directory(const std::string& path) const override;
 	void ensure_directory_exists(const std::string& fs_dirname) override;
 	void make_directory(const std::string& fs_dirname) override;
 
@@ -82,7 +82,7 @@ public:
 
 private:
 	/// This is used to assemble an error message for exceptions that includes all file paths
-	std::string paths_error_message(const std::string& filename) const;
+	[[nodiscard]] std::string paths_error_message(const std::string& filename) const;
 
 	std::vector<std::unique_ptr<FileSystem>> filesystems_;
 	std::unique_ptr<FileSystem> home_;

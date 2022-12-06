@@ -33,13 +33,13 @@ public:
 	}
 
 	// Dimensions of this Image in pixels.
-	virtual int width() const = 0;
-	virtual int height() const = 0;
+	[[nodiscard]] virtual int width() const = 0;
+	[[nodiscard]] virtual int height() const = 0;
 
 	// OpenGL texture and texture coordinates backing this Image. This can
 	// change at any time, so do not hold one to this value for more than one
 	// frame.
-	virtual const BlitData& blit_data() const = 0;
+	[[nodiscard]] virtual const BlitData& blit_data() const = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Image);

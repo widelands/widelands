@@ -41,6 +41,7 @@ namespace {
 constexpr int kMarginX = 4;
 constexpr int kLineMargin = 1;
 constexpr int CARET_BLINKING_DELAY = 1000;
+constexpr int CURSOR_MOVEMENT_THRESHOLD = 200;
 }  // namespace
 
 namespace UI {
@@ -65,12 +66,12 @@ struct EditBoxImpl {
 	const UI::PanelStyle style;
 
 	/// Background color and texture
-	inline const UI::PanelStyleInfo& background_style() const {
+	[[nodiscard]] inline const UI::PanelStyleInfo& background_style() const {
 		return g_style_manager->editbox_style(style).background();
 	}
 
 	/// Font style
-	inline const UI::FontStyleInfo& font_style() const {
+	[[nodiscard]] inline const UI::FontStyleInfo& font_style() const {
 		return g_style_manager->editbox_style(style).font();
 	}
 
@@ -117,9 +118,12 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
      history_position_(-1),
      password_(false),
      warning_(false),
-     caret_timer_("", true) {
-	caret_ms = 0;
+     caret_timer_("", true),
+     cursor_movement_timer_("", true) {
+	caret_ms_ = 0;
+	cursor_ms_ = 0;
 	caret_timer_.ms_since_last_query();
+	cursor_movement_timer_.ms_since_last_query();
 	set_thinks(false);
 
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -358,7 +362,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
-
+				enter_cursor_movement_mode();
 				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
 					uint32_t newpos = prev_char(m_->caret);
 					while (newpos > 0 && (isspace(m_->text[newpos]) != 0)) {
@@ -392,7 +396,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
-
+				enter_cursor_movement_mode();
 				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
 					uint32_t newpos = next_char(m_->caret);
 					while (newpos < m_->text.size() && (isspace(m_->text[newpos]) != 0)) {
@@ -481,6 +485,12 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 	return Panel::handle_key(down, code);
 }
+void EditBox::enter_cursor_movement_mode() {
+	cursor_movement_active_ = true;
+	cursor_ms_ = 0;
+	caret_ms_ = 1.5 * CARET_BLINKING_DELAY;
+	cursor_movement_timer_.ms_since_last_query();
+}
 void EditBox::copy_selected_text() {
 	uint32_t start;
 	uint32_t end;
@@ -518,7 +528,7 @@ void EditBox::delete_selected_text() {
 
 void EditBox::focus(bool topcaller) {
 	Panel::focus(topcaller);
-	caret_ms = CARET_BLINKING_DELAY;
+	caret_ms_ = CARET_BLINKING_DELAY;
 	caret_timer_.ms_since_last_query();
 }
 
@@ -603,7 +613,7 @@ void EditBox::draw(RenderTarget& dst) {
 		rendered_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
 	}
 
-	if (has_focus()) {
+	if (has_focus() && has_top_level_focus()) {
 		const uint16_t fontheight = text_height(m_->font_style(), m_->font_scale);
 		draw_caret(dst, point, fontheight);
 
@@ -630,13 +640,23 @@ void EditBox::draw_caret(RenderTarget& dst, const Vector2i& point, const uint16_
 	Vector2i caretpt = Vector2i::zero();
 	caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 	caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
-	if (caret_ms > CARET_BLINKING_DELAY) {
+	if (caret_ms_ > CARET_BLINKING_DELAY || cursor_movement_active_) {
 		dst.blit(caretpt, caret_image);
 	}
-	if (caret_ms > 2 * CARET_BLINKING_DELAY) {
-		caret_ms = 0;
+	if (caret_ms_ > 2 * CARET_BLINKING_DELAY) {
+		caret_ms_ = 0;
 	}
-	caret_ms += caret_timer_.ms_since_last_query();
+	if (!cursor_movement_active_) {
+		caret_ms_ += caret_timer_.ms_since_last_query();
+	}
+
+	if (cursor_ms_ > CURSOR_MOVEMENT_THRESHOLD) {
+		cursor_movement_active_ = false;
+	}
+	if (cursor_movement_active_) {
+		cursor_ms_ += cursor_movement_timer_.ms_since_last_query();
+		caret_timer_.ms_since_last_query();
+	}
 }
 
 void EditBox::set_caret_pos(const size_t pos) {
@@ -655,15 +675,18 @@ void EditBox::highlight_selection(RenderTarget& dst,
 	uint32_t start;
 	uint32_t end;
 	calculate_selection_boundaries(start, end);
-	auto nr_characters = end - start;
 
-	std::string selected_text = m_->text.substr(start, nr_characters);
 	std::string text_before_selection = m_->text.substr(0, start);
+	std::string text_before_sel_end = m_->text.substr(0, end);
 
-	Vector2i selection_start = Vector2i(
-	   text_width(text_before_selection, m_->font_style(), m_->font_scale) + point.x, point.y);
+	Vector2i selection_start =
+	   Vector2i(text_width(text_before_selection, m_->font_style(), m_->font_scale), point.y);
 	Vector2i selection_end =
-	   Vector2i(text_width(selected_text, m_->font_style(), m_->font_scale), fontheight);
+	   Vector2i(text_width(text_before_sel_end, m_->font_style(), m_->font_scale), fontheight);
+
+	selection_end.x -= selection_start.x;
+	selection_start.x += point.x;
+
 	if (m_->scrolloffset != 0) {
 		selection_start.x += m_->scrolloffset;
 	}

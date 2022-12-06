@@ -47,6 +47,7 @@
 #include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h"
 #include "logic/widelands_geometry.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
@@ -120,7 +121,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
      info_panel_(*new InfoPanel(*this)),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoverlay before the toolbar so it is below
-     chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
+     chat_overlay_(new ChatOverlay(this, color_functor(), 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(*new MainToolbar(info_panel_)),
      mapviewmenu_(toolbar(),
                   "dropdown_menu_mapview",
@@ -230,6 +231,10 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 		   }
 	   });
 
+	quicknav_registry_.open_window = [this]() {
+		new QuickNavigationWindow(*this, quicknav_registry_);
+	};
+
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
@@ -293,6 +298,15 @@ void InteractiveBase::rebuild_mapview_menu() {
 	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "",
 	                 shortcut_string_for(KeyboardShortcut::kCommonMinimap, false));
 
+	if (egbase().is_game()) {
+		/** TRANSLATORS: An entry in the game's map view menu */
+		mapviewmenu_.add(quicknav_registry_.window != nullptr ? _("Hide Quick Navigation") :
+                                                              _("Show Quick Navigation"),
+		                 MapviewMenuEntry::kQuicknav,
+		                 g_image_cache->get("images/wui/menus/quicknav.png"), false, "",
+		                 shortcut_string_for(KeyboardShortcut::kCommonQuicknavGUI, false));
+	}
+
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
@@ -315,6 +329,10 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	switch (entry) {
 	case MapviewMenuEntry::kMinimap: {
 		toggle_minimap();
+		mapviewmenu_.toggle();
+	} break;
+	case MapviewMenuEntry::kQuicknav: {
+		toggle_quicknav();
 		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kDecreaseZoom: {
@@ -876,12 +894,10 @@ void InteractiveBase::toggle_minimap() {
 	rebuild_mapview_menu();
 }
 
-const QuickNavigation::Landmark* InteractiveBase::landmarks() {
-	return quick_navigation_.landmarks();
-}
-
-void InteractiveBase::set_landmark(size_t key, const MapView::View& landmark_view) {
-	quick_navigation_.set_landmark(key, landmark_view);
+// Open the quicknav GUI or close it if it's open
+void InteractiveBase::toggle_quicknav() {
+	quicknav_registry_.toggle();
+	rebuild_mapview_menu();
 }
 
 /**
@@ -1010,6 +1026,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					break;
 				case UI::Panel::SaveType::kAttackWindow:
 					w = &AttackWindow::load(fr, *this, mol);
+					break;
+				case UI::Panel::SaveType::kQuicknav:
+					w = &QuickNavigationWindow::load(fr, *this);
 					break;
 				default:
 					throw Widelands::GameDataError(
@@ -1561,6 +1580,15 @@ UI::UniqueWindow& InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 	return *registry.window;
 }
 
+ChatColorForPlayer InteractiveBase::color_functor() const {
+	return [this](int player_number) {
+		return (player_number > 0 &&
+		        player_number <= egbase().player_manager()->get_number_of_players()) ?
+                &egbase().player(player_number).get_playercolor() :
+                nullptr;
+	};
+}
+
 void InteractiveBase::broadcast_cheating_message() const {
 	if (get_game() == nullptr) {
 		return;  // Editor
@@ -1601,13 +1629,17 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			toggle_minimap();
 			return true;
 		}
+		if (egbase().is_game() && matches_shortcut(KeyboardShortcut::kCommonQuicknavGUI, code)) {
+			toggle_quicknav();
+			return true;
+		}
 
 		switch (code.sym) {
 #ifndef NDEBUG  //  only in debug builds
 		case SDLK_SPACE:
 			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
 				GameChatMenu::create_script_console(
-				   this, debugconsole_, *DebugConsole::get_chat_provider());
+				   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
 				return true;
 			}
 			break;

@@ -33,7 +33,7 @@ struct CmdCallEconomyBalance : public GameLogicCommand {
 
 	void execute(Game&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kCallEconomyBalance;
 	}
 

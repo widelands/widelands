@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-10 03:01+0000\n"
+"POT-Creation-Date: 2022-11-25 03:25+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -795,9 +795,12 @@ msgstr "재고 목록을 빨리 전환하려면  ‘%s’ 키를 누르십시오
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads. The "
-"supplies and demands of buildings are handled in its economy."
-msgstr "경제는 길로 연결된 모든 건물과 깃발로 이루어져 있습니다. 건물의 공급과 수요는 경제에서 처리됩니다.[쉬운번역으로수정바람 내용어려움]"
+"An economy consists of all buildings and flags connected by roads, ferries "
+"or ships. The supplies and demands of buildings are handled in its economy. "
+"A player may have more than one economies, if those are not connected by any"
+" of these means. This is why the configure economy menu can only be accessed"
+" from flags and warehouses, not the player’s main menu."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:69
 msgid ""

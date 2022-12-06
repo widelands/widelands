@@ -59,8 +59,8 @@ private:
 		          Surface* target,
 		          float opacity) const override;
 
-		int width() const override;
-		int height() const override;
+		[[nodiscard]] int width() const override;
+		[[nodiscard]] int height() const override;
 
 		/// Loaded sprite sheet for all frames
 		const Image* sheet;
@@ -77,7 +77,7 @@ private:
 		/// Texture height
 		int h;
 
-		std::vector<std::unique_ptr<const Texture>>
+		[[nodiscard]] std::vector<std::unique_ptr<const Texture>>
 		frame_textures(bool return_playercolor_masks) const override;
 
 	private:

@@ -36,7 +36,7 @@ public:
 	              MapObjectDescr::OwnerType::kTribe) {
 	}
 
-	Bob& create_object() const override {
+	[[nodiscard]] Bob& create_object() const override {
 		return *new PinnedNote();
 	}
 

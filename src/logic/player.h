@@ -142,6 +142,7 @@ public:
 		name_ = name;
 	}
 	void set_team_number(TeamNumber team);
+	bool may_approve_request(DiplomacyAction action, PlayerNumber from, PlayerNumber to) const;
 
 	void create_default_infrastructure();
 
@@ -313,7 +314,7 @@ public:
 		/// east, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// east.
-		RoadSegment road_e() const {
+		[[nodiscard]] RoadSegment road_e() const {
 			return r_e;
 		}
 
@@ -321,7 +322,7 @@ public:
 		/// southeast, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southeast.
-		RoadSegment road_se() const {
+		[[nodiscard]] RoadSegment road_se() const {
 			return r_se;
 		}
 
@@ -329,7 +330,7 @@ public:
 		/// southwest, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southwest.
-		RoadSegment road_sw() const {
+		[[nodiscard]] RoadSegment road_sw() const {
 			return r_sw;
 		}
 
