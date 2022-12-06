@@ -35,7 +35,7 @@ class EditorGameBase;
 class Battle;
 
 struct SoldierLevelRange {
-	SoldierLevelRange();
+	SoldierLevelRange() = default;
 	explicit SoldierLevelRange(const LuaTable&);
 	SoldierLevelRange(const SoldierLevelRange&) = default;
 	SoldierLevelRange& operator=(const SoldierLevelRange& other) = default;
@@ -50,14 +50,14 @@ struct SoldierLevelRange {
 		       max_defense == other.max_defense && max_evade == other.max_evade;
 	}
 
-	int32_t min_health;
-	int32_t min_attack;
-	int32_t min_defense;
-	int32_t min_evade;
-	int32_t max_health;
-	int32_t max_attack;
-	int32_t max_defense;
-	int32_t max_evade;
+	int32_t min_health = -1;
+	int32_t min_attack = -1;
+	int32_t min_defense = -1;
+	int32_t min_evade = -1;
+	int32_t max_health = -1;
+	int32_t max_attack = -1;
+	int32_t max_defense = -1;
+	int32_t max_evade = -1;
 };
 using SoldierAnimationsList = std::map<std::string, SoldierLevelRange>;
 

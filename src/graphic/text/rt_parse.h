@@ -95,8 +95,7 @@ private:
 };
 
 struct Child {
-	Child() : tag(nullptr) {
-	}
+	Child() = default;
 	explicit Child(Tag* t) : tag(t) {
 	}
 	explicit Child(const std::string& t) : tag(nullptr), text(t) {
@@ -105,7 +104,7 @@ struct Child {
 		
 			delete tag;
 	}
-	Tag* tag;
+	Tag* tag{nullptr};
 	std::string text;
 };
 

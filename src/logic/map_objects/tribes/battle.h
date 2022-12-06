@@ -94,35 +94,35 @@ private:
 
 	void calculate_round(Game&);
 
-	Soldier* first_;
-	Soldier* second_;
+	Soldier* first_=nullptr;
+	Soldier* second_=nullptr;
 
 	/**
 	 * Gametime when the battle was created.
 	 */
-	Time creationtime_;
+	Time creationtime_{0};
 
 	/**
 	 * 1 if only the first soldier is ready, 2 if only the second soldier
 	 * is ready, 3 if both are ready.
 	 */
-	uint8_t readyflags_;
+	uint8_t readyflags_=0;
 
 	/**
 	 * Damage pending to apply. Damage is applied at end of round so animations
 	 * can show current action.
 	 */
-	uint32_t damage_;
+	uint32_t damage_=0;
 
 	/**
 	 * \c true if the first soldier is the next to strike.
 	 */
-	bool first_strikes_;
+	bool first_strikes_=true;
 
 	/**
 	 * \c true if the last turn attacker damaged his opponent
 	 */
-	bool last_attack_hits_;
+	bool last_attack_hits_=false;
 };
 }  // namespace Widelands
 

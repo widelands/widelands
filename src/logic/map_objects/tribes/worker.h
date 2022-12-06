@@ -271,10 +271,9 @@ private:
 		}
 		// The variable scoutme should not be accessed when randomwalk is true.
 		// Initializing the scoutme variable with an obviously-wrong value.
-		PlaceToScout() : randomwalk(true), scoutme(-32100, -32100) {
-		}
-		const bool randomwalk;
-		const Coords scoutme;
+		PlaceToScout() = default;
+		const bool randomwalk=true;
+		const Coords scoutme{-32100,-32100};
 	};
 	std::vector<PlaceToScout> scouts_worklist;
 

@@ -99,11 +99,10 @@ TrackPtr is a template that derives from BaseTrackPtr and provides a
 type-safe interface.
 */
 class BaseTrackPtr {
-	mutable Trackable::Tracker* tracker_;
+	mutable Trackable::Tracker* tracker_{nullptr};
 
 protected:
-	BaseTrackPtr() : tracker_(nullptr) {
-	}
+	BaseTrackPtr() = default;
 	~BaseTrackPtr() {
 		if (tracker_ != nullptr) {
 			tracker_->deref();

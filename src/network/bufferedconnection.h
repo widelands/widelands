@@ -331,7 +331,7 @@ private:
 	/// Protects receive_buffer_
 	std::mutex mutex_receive_;
 	/// Whether we are currently sending something, used within start_sending()
-	bool currently_sending_;
+	bool currently_sending_{false};
 };
 
 #endif  // end of include guard: WL_NETWORK_BUFFEREDCONNECTION_H

@@ -115,8 +115,7 @@ public:
 
 	~LuaTribeDescription() override = default;
 
-	LuaTribeDescription() : tribedescr_(nullptr) {
-	}
+	LuaTribeDescription() = default;
 	explicit LuaTribeDescription(const Widelands::TribeDescr* const tribedescr)
 	   : tribedescr_(tribedescr) {
 	}
@@ -172,7 +171,7 @@ protected:
 	}
 
 private:
-	const Widelands::TribeDescr* tribedescr_;
+	const Widelands::TribeDescr* tribedescr_{nullptr};
 };
 
 class LuaMapObjectDescription : public LuaMapModuleClass {
@@ -181,8 +180,7 @@ public:
 
 	~LuaMapObjectDescription() override = default;
 
-	LuaMapObjectDescription() : mapobjectdescr_(nullptr) {
-	}
+	LuaMapObjectDescription() = default;
 	explicit LuaMapObjectDescription(const Widelands::MapObjectDescr* const mapobjectdescr)
 	   : mapobjectdescr_(mapobjectdescr) {
 	}
@@ -222,7 +220,7 @@ protected:
 	}
 
 private:
-	const Widelands::MapObjectDescr* mapobjectdescr_;
+	const Widelands::MapObjectDescr* mapobjectdescr_{nullptr};
 };
 
 #define CASTED_GET_DESCRIPTION(klass)                                                              \
@@ -694,8 +692,7 @@ public:
 
 	~LuaResourceDescription() override = default;
 
-	LuaResourceDescription() : resourcedescr_(nullptr) {
-	}
+	LuaResourceDescription() = default;
 	explicit LuaResourceDescription(const Widelands::ResourceDescription* const resourcedescr)
 	   : resourcedescr_(resourcedescr) {
 	}
@@ -737,7 +734,7 @@ protected:
 	}
 
 private:
-	const Widelands::ResourceDescription* resourcedescr_;
+	const Widelands::ResourceDescription* resourcedescr_{nullptr};
 };
 
 class LuaTerrainDescription : public LuaMapModuleClass {
@@ -746,8 +743,7 @@ public:
 
 	~LuaTerrainDescription() override = default;
 
-	LuaTerrainDescription() : terraindescr_(nullptr) {
-	}
+	LuaTerrainDescription() = default;
 	explicit LuaTerrainDescription(const Widelands::TerrainDescription* const terraindescr)
 	   : terraindescr_(terraindescr) {
 	}
@@ -792,7 +788,7 @@ protected:
 	}
 
 private:
-	const Widelands::TerrainDescription* terraindescr_;
+	const Widelands::TerrainDescription* terraindescr_{nullptr};
 };
 
 class LuaEconomy : public LuaMapModuleClass {
@@ -801,8 +797,7 @@ public:
 
 	~LuaEconomy() override = default;
 
-	LuaEconomy() : economy_(nullptr) {
-	}
+	LuaEconomy() = default;
 	explicit LuaEconomy(Widelands::Economy* economy) : economy_(economy) {
 	}
 	explicit LuaEconomy(lua_State* L) : economy_(nullptr) {
@@ -839,7 +834,7 @@ protected:
 	}
 
 private:
-	Widelands::Economy* economy_;
+	Widelands::Economy* economy_{nullptr};
 };
 
 #define CASTED_GET(klass)                                                                          \
@@ -1520,13 +1515,12 @@ private:
 };
 
 class LuaPlayerSlot : public LuaMapModuleClass {
-	Widelands::PlayerNumber player_number_;
+	Widelands::PlayerNumber player_number_{0};
 
 public:
 	LUNA_CLASS_HEAD(LuaPlayerSlot);
 
-	LuaPlayerSlot() : player_number_(0) {
-	}
+	LuaPlayerSlot() = default;
 	explicit LuaPlayerSlot(Widelands::PlayerNumber plr) : player_number_(plr) {
 	}
 	explicit LuaPlayerSlot(lua_State* L) : player_number_(0) {

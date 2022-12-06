@@ -56,17 +56,6 @@ constexpr int kSoldierHealthBarWidth = 13;
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 
-SoldierLevelRange::SoldierLevelRange()
-   : min_health(-1),
-     min_attack(-1),
-     min_defense(-1),
-     min_evade(-1),
-     max_health(-1),
-     max_attack(-1),
-     max_defense(-1),
-     max_evade(-1) {
-}
-
 SoldierLevelRange::SoldierLevelRange(const LuaTable& t) {
 	min_health = t.get_int("min_health");
 	min_attack = t.get_int("min_attack");

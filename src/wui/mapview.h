@@ -91,10 +91,9 @@ public:
 	struct TimestampedMouse {
 		TimestampedMouse(uint32_t init_t, Vector2f init_pixel) : t(init_t), pixel(init_pixel) {
 		}
-		TimestampedMouse() : t(0), pixel(Vector2f::zero()) {
-		}
-		uint32_t t;
-		Vector2f pixel = Vector2f::zero();
+		TimestampedMouse() = default;
+		uint32_t t{0};
+		Vector2f pixel{Vector2f::zero()};
 	};
 
 	MapView(UI::Panel* parent,

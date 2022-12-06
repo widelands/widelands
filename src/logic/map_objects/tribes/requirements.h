@@ -164,8 +164,7 @@ struct RequireAttribute {
 	   : at(init_at), min(init_min), max(init_max) {
 	}
 
-	RequireAttribute() : at(TrainingAttribute::kTotal), min(SHRT_MIN), max(SHRT_MAX) {
-	}
+	RequireAttribute() = default;
 	[[nodiscard]] bool check(const MapObject&) const;
 	void write(FileWrite&, EditorGameBase& egbase, MapObjectSaver&) const;
 
@@ -179,9 +178,9 @@ struct RequireAttribute {
 	}
 
 private:
-	TrainingAttribute at;
-	int32_t min;
-	int32_t max;
+	TrainingAttribute at=TrainingAttribute::kTotal;
+	int32_t min=SHRT_MIN;
+	int32_t max=SHRT_MAX;
 };
 }  // namespace Widelands
 

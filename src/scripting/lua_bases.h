@@ -79,14 +79,13 @@ public:
 };
 
 class LuaPlayerBase : public LuaBasesModuleClass {
-	Widelands::PlayerNumber player_number_;
+	Widelands::PlayerNumber player_number_{NONE};
 	enum { NONE = -1 };
 
 public:
 	LUNA_CLASS_HEAD(LuaPlayerBase);
 
-	LuaPlayerBase() : player_number_(NONE) {
-	}
+	LuaPlayerBase() = default;
 	explicit LuaPlayerBase(lua_State* L) : player_number_(NONE) {
 		report_error(L, "Cannot instantiate a 'PlayerBase' directly!");
 	}

@@ -504,7 +504,7 @@ private:
 };
 
 struct CmdDestroyMapObject : public GameLogicCommand {
-	CmdDestroyMapObject() : GameLogicCommand(Time()), obj_serial(0) {
+	CmdDestroyMapObject() : GameLogicCommand(Time()) {
 	}  ///< For savegame loading
 	CmdDestroyMapObject(const Time&, MapObject&);
 	void execute(Game&) override;
@@ -517,11 +517,11 @@ struct CmdDestroyMapObject : public GameLogicCommand {
 	}
 
 private:
-	Serial obj_serial;
+	Serial obj_serial=0;
 };
 
 struct CmdAct : public GameLogicCommand {
-	CmdAct() : GameLogicCommand(Time()), obj_serial(0), arg(0) {
+	CmdAct() : GameLogicCommand(Time()) {
 	}  ///< For savegame loading
 	CmdAct(const Time& t, MapObject&, int32_t a);
 
@@ -535,8 +535,8 @@ struct CmdAct : public GameLogicCommand {
 	}
 
 private:
-	Serial obj_serial;
-	int32_t arg;
+	Serial obj_serial=0;
+	int32_t arg=0;
 };
 }  // namespace Widelands
 

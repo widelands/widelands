@@ -29,14 +29,13 @@
 class TextureAtlas {
 public:
 	struct PackedTexture {
-		PackedTexture() : texture_atlas(-1), texture(nullptr), index_(-1) {
-		}
+		PackedTexture() = default;
 
 		// The index of the returned texture atlas that contains this image.
-		int texture_atlas;
+		int texture_atlas=-1;
 
 		// The newly packed texture.
-		std::unique_ptr<Texture> texture;
+		std::unique_ptr<Texture> texture{nullptr};
 
 	private:
 		friend class TextureAtlas;
@@ -46,7 +45,7 @@ public:
 		}
 
 		// The position the images was 'add'()ed into the packing queue. Purely internal.
-		int index_;
+		int index_=-1;
 	};
 
 	TextureAtlas() = default;

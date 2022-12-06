@@ -61,8 +61,8 @@ struct Coords {
 	// Move the coords to the 'new_origin'.
 	void reorigin(Coords new_origin, const Extent& extent);
 
-	int16_t x;
-	int16_t y;
+	int16_t x{0};
+	int16_t y{0};
 };
 static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 
@@ -101,11 +101,10 @@ template <typename AreaType = Area<>> struct HollowArea : public AreaType {
 class Field;
 
 struct FCoords : public Coords {
-	FCoords() : field(nullptr) {
-	}
+	FCoords() = default;
 	FCoords(const Coords& nc, Field* const nf) : Coords(nc), field(nf) {
 	}
-	Field* field;
+	Field* field{nullptr};
 };
 
 enum class TriangleIndex {

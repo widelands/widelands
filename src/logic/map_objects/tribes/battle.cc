@@ -40,14 +40,7 @@ const BattleDescr& Battle::descr() const {
 }
 
 Battle::Battle()
-   : MapObject(&g_battle_descr),
-     first_(nullptr),
-     second_(nullptr),
-     creationtime_(0),
-     readyflags_(0),
-     damage_(0),
-     first_strikes_(true),
-     last_attack_hits_(false) {
+   : MapObject(&g_battle_descr) {
 }
 
 Battle::Battle(Game& game, Soldier* first_soldier, Soldier* second_soldier)

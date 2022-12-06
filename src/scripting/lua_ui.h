@@ -41,13 +41,12 @@ public:
 
 class LuaPanel : public LuaUiModuleClass {
 protected:
-	UI::Panel* panel_;
+	UI::Panel* panel_{nullptr};
 
 public:
 	LUNA_CLASS_HEAD(LuaPanel);
 
-	LuaPanel() : panel_(nullptr) {
-	}
+	LuaPanel() = default;
 	explicit LuaPanel(UI::Panel* p) : panel_(p) {
 	}
 	explicit LuaPanel(lua_State* L) : panel_(nullptr) {

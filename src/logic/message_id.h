@@ -36,8 +36,7 @@ namespace Widelands {
 /// the id that it has to the sequence number in the savegame of that message.
 /// MapMessageSaver does that.
 struct MessageId {
-	MessageId() : id(0) {
-	}
+	MessageId() = default;
 	explicit MessageId(uint32_t const init_id) : id(init_id) {
 	}
 
@@ -81,7 +80,7 @@ private:
 		++id;
 		return *this;
 	}
-	uint32_t id;
+	uint32_t id{0};
 };
 }  // namespace Widelands
 

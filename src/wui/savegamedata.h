@@ -50,18 +50,18 @@ public:
 	/// Compact gametime information
 	std::string gametime;
 	/// Number of players on the map
-	std::string nrplayers;
+	std::string nrplayers{"0"};
 	/// The version of Widelands that the game was played with
 	std::string version;
 	/// Gametime as time stamp. For games, it's the time the game ended. For replays, it's the time
 	/// the game started.
-	time_t savetimestamp;
+	time_t savetimestamp{0};
 	/// Single payer, nethost, netclient or replay
-	GameController::GameType gametype;
+	GameController::GameType gametype = GameController::GameType::kSingleplayer;
 
 	AddOns::AddOnRequirements required_addons;
 
-	SavegameData();
+	SavegameData() = default;
 	explicit SavegameData(const std::string& fname);
 	SavegameData(const std::string& fname, const SavegameType& type);
 	static SavegameData create_parent_dir(const std::string& current_dir);
@@ -98,7 +98,7 @@ public:
 
 private:
 	/// Savegame or directory
-	SavegameType type_;
+	SavegameType type_ = SavegameType::kSavegame;
 };
 const std::string as_filename_list(const std::vector<SavegameData>& savefiles);
 #endif  // WL_WUI_SAVEGAMEDATA_H

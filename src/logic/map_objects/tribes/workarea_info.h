@@ -51,12 +51,7 @@ struct WorkareaPreviewData {
 	WorkareaPreviewData(Widelands::TCoords<> c, uint8_t i, uint32_t col)
 	   : coords(c), index(i), use_special_coloring(true), special_coloring(col) {
 	}
-	WorkareaPreviewData()
-	   : coords(Widelands::TCoords<>(Widelands::Coords::null(), Widelands::TriangleIndex::D)),
-	     index(0),
-	     use_special_coloring(false),
-	     special_coloring(0) {
-	}
+	WorkareaPreviewData() = default;
 	WorkareaPreviewData(const WorkareaPreviewData& other) = default;
 	WorkareaPreviewData& operator=(const WorkareaPreviewData&) = default;
 
@@ -67,14 +62,14 @@ struct WorkareaPreviewData {
 	}
 
 	// The triangle this data is applied to
-	Widelands::TCoords<> coords;
+	Widelands::TCoords<> coords{Widelands::TCoords<>(Widelands::Coords::null(), Widelands::TriangleIndex::D)};
 	// The underlying workarea color
-	uint8_t index;
+	uint8_t index=0;
 	// If a "special coloring" is specified, its RGB will be overlayed over the base color as
 	// strongly as if it had full alpha, and the final transparency of the entire triangle will be
 	// set to this color's alpha
-	bool use_special_coloring;
-	uint32_t special_coloring;
+	bool use_special_coloring=false;
+	uint32_t special_coloring=0;
 };
 // Pair of interior information and a per-circle list of border coords
 using WorkareasEntry =

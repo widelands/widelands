@@ -168,16 +168,15 @@ public:
 };
 
 class LuaInboxMessage : public LuaGameModuleClass {
-	Widelands::PlayerNumber player_number_;
-	Widelands::MessageId message_id_;
+	Widelands::PlayerNumber player_number_{0};
+	Widelands::MessageId message_id_{0};
 
 public:
 	LUNA_CLASS_HEAD(LuaInboxMessage);
 	~LuaInboxMessage() override = default;
 
 	explicit LuaInboxMessage(uint8_t, Widelands::MessageId);
-	LuaInboxMessage() : player_number_(0), message_id_(0) {
-	}
+	LuaInboxMessage() = default;
 	explicit LuaInboxMessage(lua_State* L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
