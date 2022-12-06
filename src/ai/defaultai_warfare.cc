@@ -493,7 +493,6 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 				inputs[110] =
 				   (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
 				   std::abs(management_data.get_military_number_at(30)) / 20;
-				
 
 				// add up all scores according to neuronvalues
 				observer.second.score = 0;
@@ -1427,7 +1426,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	}
 	inputs[118] = -mine_fields_stat.count_types();
 	inputs[119] = -mine_fields_stat.count_types() * 3;
-	if (!basic_economy_established) { // discourage big milsites if no basic economy
+	if (!basic_economy_established) {  // discourage big milsites if no basic economy
 		inputs[120] = size * -5;
 		inputs[121] = size * -3;
 		inputs[122] = size * -4;
