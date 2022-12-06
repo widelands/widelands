@@ -68,6 +68,9 @@ public:
 		capsule = nullptr;
 	}
 	FindImmovable& operator=(const FindImmovable& o) {
+		if (&o == this) {
+			return *this;
+		}
 		capsule->deref();
 		capsule = o.capsule;
 		capsule->addref();

@@ -115,28 +115,28 @@ inline void log_value(std::ostringstream& oss, char* str) {
 	}                                                                                               \
 	}
 
-template <typename T1, typename T2> inline bool compare(const T1 a, const T2 b) {
+template <typename T1, typename T2> inline bool compare(const T1 a, const T2 b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
 	return a == b;
 }
-template <typename T> inline bool compare(const char* a, const T b) {
+template <typename T> inline bool compare(const char* a, const T b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
 	return std::string(a) == b;
 }
-template <typename T> inline bool compare(char* a, const T b) {
+template <typename T> inline bool compare(char* a, const T b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
 	return std::string(a) == b;
 }
-inline bool compare(const unsigned a, const int b) {
+inline bool compare(const unsigned a, const int b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
 	return static_cast<long>(a) == b;
 }
-inline bool compare(const unsigned long a, const int b) {
+inline bool compare(const unsigned long a, const int b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
 	return static_cast<long long>(a) == b;
 }
-inline bool compare(const unsigned long long a, const int b) {
+inline bool compare(const unsigned long long a, const int b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
 	return static_cast<long long>(a) == b;
 }
-template <typename T> inline bool compare(const float a, const T b) {
+template <typename T> inline bool compare(const float a, const T b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
 	return std::fabs(a - b) < 0.001f;
 }
-template <typename T> inline bool compare(const double a, const T b) {
+template <typename T> inline bool compare(const double a, const T b) {  // NOLINT false-positive readability-avoid-const-params-in-decls
 	return std::fabs(a - b) < 0.001;
 }
 

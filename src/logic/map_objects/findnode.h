@@ -71,6 +71,9 @@ public:
 		capsule = nullptr;
 	}
 	FindNode& operator=(const FindNode& o) {
+		if (&o == this) {
+			return *this;
+		}
 		capsule->deref();
 		capsule = o.capsule;
 		capsule->addref();

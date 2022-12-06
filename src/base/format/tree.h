@@ -118,7 +118,7 @@ public:
 	}
 
 	template <typename... Args>
-	[[nodiscard]] std::string format(const bool localize, Args... args) const {
+	[[nodiscard]] std::string format(const bool localize, Args... args) const {  // NOLINT false-positive readability-avoid-const-params-in-decls
 		char* out(buffer_);
 		bool hit_last_arg = false;
 
@@ -281,7 +281,7 @@ private:
 	inline bool format_impl(char** out,
 	                        unsigned orig_index,
 	                        unsigned arg_index,
-	                        const bool localize,
+	                        const bool localize,  // NOLINT false-positive readability-avoid-const-params-in-decls
 	                        T t,
 	                        Args... args) const {
 		if (arg_index == 0) {

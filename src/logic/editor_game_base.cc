@@ -700,7 +700,7 @@ void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area,
 	do_conquer_area(player_area, true, 0, conquer_guarded_location);
 }
 
-void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const new_owner) {
+void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const new_owner) const {
 	const Field& first_field = map()[0];
 
 	PlayerNumber const old_owner = fc.field->get_owned_by();

@@ -112,6 +112,9 @@ public:
 	}
 
 	Section& operator=(const Section& other) {
+		if (&other == this) {
+			return *this;
+		}
 		profile_ = other.profile_;
 		used_ = other.used_.load();
 		section_name_ = other.section_name_;

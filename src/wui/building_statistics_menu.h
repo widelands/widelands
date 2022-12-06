@@ -30,15 +30,11 @@
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_player.h"
 
-namespace {
-
-constexpr int kNoOfBuildingTabs = 5;
-
-}  // namespace
-
 /// This window shows statistics for all the buildings that the player owns.
 /// It also allows to jump through buildings on the map.
 struct BuildingStatisticsMenu : public UI::UniqueWindow {
+	static constexpr int kNoOfBuildingTabs = 5;
+
 	BuildingStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 	~BuildingStatisticsMenu() override;
 

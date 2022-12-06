@@ -177,6 +177,9 @@ template <class T> struct TrackPtr : BaseTrackPtr {
 	}
 
 	TrackPtr& operator=(const TrackPtr<T>& o) {
+		if (&o == this) {
+			return *this;
+		}
 		set(o);
 		return *this;
 	}

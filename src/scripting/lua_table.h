@@ -131,7 +131,7 @@ public:
 			lua_pop(L_, 1);
 			throw LuaError(as_string(key) + " is not a string value.");
 		}
-		const std::string rv = lua_tostring(L_, -1);
+		std::string rv = lua_tostring(L_, -1);
 		lua_pop(L_, 1);
 		return rv;
 	}

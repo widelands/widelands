@@ -271,7 +271,7 @@ private:
 
 	// Changes the owner of 'fc' from the current player to the new player and
 	// sends notifications about this.
-	void change_field_owner(const FCoords& fc, PlayerNumber new_owner);
+	void change_field_owner(const FCoords& fc, PlayerNumber new_owner) const;
 
 	Immovable& do_create_immovable(const Coords& c,
 	                               DescriptionIndex idx,

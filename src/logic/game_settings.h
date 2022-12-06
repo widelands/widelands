@@ -262,7 +262,7 @@ struct GameSettingsProvider {
 		return UserSettings::highest_playernum() >= settings().playernum;
 	}
 	// For retrieving tips texts
-	struct NoTribe {};
+	struct NoTribe : public std::exception {};
 	const std::string& get_players_tribe() {
 		if (!has_players_tribe()) {
 			throw NoTribe();

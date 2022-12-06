@@ -93,6 +93,9 @@ public:
 	}
 
 	Field& operator=(const Field& other) {
+		if (&other == this) {
+			return *this;
+		}
 		bobs = other.bobs;
 		immovable = other.immovable;
 		caps = other.caps;

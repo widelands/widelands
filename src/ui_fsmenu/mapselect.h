@@ -29,7 +29,6 @@
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
 
-using Widelands::Map;
 struct GameSettingsProvider;
 
 namespace FsMenu {
@@ -78,7 +77,7 @@ private:
 	MapTable table_;
 	MapDetails map_details_;
 
-	Map::ScenarioTypes scenario_types_;
+	Widelands::Map::ScenarioTypes scenario_types_;
 
 	const std::string basedir_;
 	std::string curdir_;

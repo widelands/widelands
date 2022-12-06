@@ -67,10 +67,9 @@ public:
 }
 		if (upcast(T, result, it->second)) {
 			return *result;
-		} else {
+		}
 			throw GameDataError("is a %s, expected a %s",
 			                    to_string(it->second->descr().type()).c_str(), typeid(T).name());
-}
 	}
 
 	int32_t get_nr_unloaded_objects();

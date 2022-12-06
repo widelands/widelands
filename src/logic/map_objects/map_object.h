@@ -323,7 +323,7 @@ public:
 		}
 
 	protected:
-		void load(FileRead&);
+		void load(FileRead&) const;
 
 	public:
 		virtual void load_pointers();

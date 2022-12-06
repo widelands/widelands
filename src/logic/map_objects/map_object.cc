@@ -726,7 +726,7 @@ constexpr uint8_t kCurrentPacketVersionMapObject = 2;
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void MapObject::Loader::load(FileRead& fr) {
+void MapObject::Loader::load(FileRead& fr) const {
 	try {
 		uint8_t const header = fr.unsigned_8();
 		if (header != HeaderMapObject) {

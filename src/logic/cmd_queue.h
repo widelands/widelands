@@ -115,11 +115,11 @@ class CmdQueue {
 		bool operator<(const CmdItem& c) const {
 			if (cmd->duetime() != c.cmd->duetime()) {
 				return cmd->duetime() > c.cmd->duetime();
-			} if (category != c.category) {
-				return category > c.category;
-			} else {
-				return serial > c.serial;
 			}
+			if (category != c.category) {
+				return category > c.category;
+			}
+			return serial > c.serial;
 		}
 	};
 
