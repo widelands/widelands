@@ -46,31 +46,31 @@ public:
 	// May throw a WLWarning, if it fails
 	virtual bool write_to_disk();
 
-	const std::string& get_internal_name() const {
+	[[nodiscard]] const std::string& get_internal_name() const {
 		return internal_name_;
 	}
-	const std::string& get_descname() const {
+	[[nodiscard]] const std::string& get_descname() const {
 		return descname_;
 	}
-	const std::string& get_description() const {
+	[[nodiscard]] const std::string& get_description() const {
 		return description_;
 	}
-	const std::string& get_author() const {
+	[[nodiscard]] const std::string& get_author() const {
 		return author_;
 	}
-	const std::string& get_version() const {
+	[[nodiscard]] const std::string& get_version() const {
 		return version_;
 	}
-	const std::string& get_min_wl_version() const {
+	[[nodiscard]] const std::string& get_min_wl_version() const {
 		return min_wl_version_;
 	}
-	const std::string& get_max_wl_version() const {
+	[[nodiscard]] const std::string& get_max_wl_version() const {
 		return max_wl_version_;
 	}
 	void set_version(const std::string& version) {
 		version_ = version;
 	}
-	AddOnCategory get_category() const {
+	[[nodiscard]] AddOnCategory get_category() const {
 		return category_;
 	}
 
@@ -129,7 +129,7 @@ public:
 	void set_dirname(const std::string& dir, const std::string& name) {
 		dirnames_[dir] = name;
 	}
-	std::string get_dirname(const std::string& dir) const {
+	[[nodiscard]] std::string get_dirname(const std::string& dir) const {
 		const auto it = dirnames_.find(dir);
 		return it != dirnames_.end() ? it->second : "";
 	}

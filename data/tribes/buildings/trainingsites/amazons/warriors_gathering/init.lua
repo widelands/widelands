@@ -62,18 +62,6 @@ wl.Descriptions():new_trainingsite_type {
       { name = "spear_hardened", amount = 3 },
    },
 
-   ["soldier attack"] = {
-      food = {
-         {"fish", "meat"},
-         {"chocolate"},
-         {"amazons_bread"}
-      },
-      weapons = {
-         "spear_stone_tipped",
-         "spear_hardened",
-      }
-   },
-
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...

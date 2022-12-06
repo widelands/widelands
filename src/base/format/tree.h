@@ -117,7 +117,8 @@ public:
 		return *t;
 	}
 
-	template <typename... Args> std::string format(const bool localize, Args... args) const {
+	template <typename... Args>
+	[[nodiscard]] std::string format(const bool localize, Args... args) const {
 		char* out(buffer_);
 		bool hit_last_arg = false;
 
@@ -142,7 +143,7 @@ public:
 		return buffer_;
 	}
 
-	std::string format(const bool localize, const ArgsVector& args) const {
+	[[nodiscard]] std::string format(const bool localize, const ArgsVector& args) const {
 		if (args.size() != format_nodes_count_) {
 			throw wexception("Wrong number of arguments: expected %u, found %u", format_nodes_count_,
 			                 static_cast<unsigned>(args.size()));
@@ -167,7 +168,7 @@ public:
 		return buffer_;
 	}
 
-	inline unsigned get_nodes_count() const {
+	[[nodiscard]] inline unsigned get_nodes_count() const {
 		return format_nodes_count_;
 	}
 

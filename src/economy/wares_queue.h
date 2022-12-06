@@ -37,7 +37,7 @@ public:
 	}
 #endif
 
-	Quantity get_filled() const override {
+	[[nodiscard]] Quantity get_filled() const override {
 		return filled_;
 	}
 

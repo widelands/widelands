@@ -104,7 +104,7 @@ msgstr "Тёмная ночь"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:109
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:222
 msgid "Diary of Lutius"
-msgstr "Дневник Люциуса"
+msgstr "Дневник Люция"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:78
@@ -204,7 +204,7 @@ msgstr "Предчуствие"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:124
 msgid "Saledus looks around nervously…"
-msgstr "Саледус нервно озирается..."
+msgstr "Салед нервно озирается..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:126
@@ -236,7 +236,7 @@ msgstr "На данный момент безопасно"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:140
 msgid "Saledus speaks with a sigh of relief…"
-msgstr "Саледус говорит со вздохом облегчения …"
+msgstr "Салед говорит со вздохом облегчения …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:142
@@ -265,7 +265,7 @@ msgstr "Амалия улыбается..."
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:153
 msgid "Greetings, Lutius! I just met Saledus outside."
-msgstr "Приветствую, Люциус! Я только что встретила Саледуса снаружи."
+msgstr "Приветствую, Люций! Я только что встретила Саледа снаружи."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:156
@@ -338,7 +338,7 @@ msgstr "Эти деревья - приют от песчаных бурь, ко�
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:192
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr "Люциус, пожалуйста, найдите кого-то, кто позаботится о посадке новых деревьев."
+msgstr "Люций, пожалуйста, найдите кого-то, кто позаботится о посадке новых деревьев."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:198
 msgid "Thinking About the Future"
@@ -346,7 +346,7 @@ msgstr "В раздумьях о будущем"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:199
 msgid "Saledus notes…"
-msgstr "Саледус отмечает…"
+msgstr "Салед отмечает…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:201
@@ -368,7 +368,7 @@ msgstr "Шаг вперед"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:211
 msgid "Saledus looks excited…"
-msgstr "Саледус выглядит взволнованным..."
+msgstr "Салед выглядит взволнованным..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:213
@@ -423,7 +423,7 @@ msgstr "Безопасный полуостров"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:239
 msgid "Saledus speaks:"
-msgstr "Саледус говорит:"
+msgstr "Салед говорит:"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:241

@@ -374,6 +374,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_0, kDefaultCtrlModifier),
                          "zoom_reset",
                          []() { return _("Reset Zoom"); })},
+   {KeyboardShortcut::kCommonQuicknavGUI,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                         keysym(SDLK_v),
+                         "quicknav_gui",
+                         []() { return _("Toggle Quick Navigation"); })},
    {KeyboardShortcut::kCommonQuicknavNext,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_PERIOD),
@@ -1186,7 +1191,7 @@ void init_shortcuts(const bool force_defaults) {
 	}
 }
 
-ChangeType get_keyboard_change(SDL_Keysym keysym, bool enable_big_step) {
+ChangeType get_keyboard_change(SDL_Keysym keysym) {
 	bool to_limit = false;
 	if (matches_keymod(keysym.mod, KMOD_CTRL)) {
 		to_limit = true;
@@ -1207,17 +1212,9 @@ ChangeType get_keyboard_change(SDL_Keysym keysym, bool enable_big_step) {
 	case SDLK_RIGHT:
 		return to_limit ? ChangeType::kSetMax : ChangeType::kPlus;
 	case SDLK_PAGEDOWN:
-		if (enable_big_step) {
-			return to_limit ? ChangeType::kSetMin : ChangeType::kBigMinus;
-		} else {
-			return ChangeType::kNone;
-		}
+		return to_limit ? ChangeType::kSetMin : ChangeType::kBigMinus;
 	case SDLK_PAGEUP:
-		if (enable_big_step) {
-			return to_limit ? ChangeType::kSetMax : ChangeType::kBigPlus;
-		} else {
-			return ChangeType::kNone;
-		}
+		return to_limit ? ChangeType::kSetMax : ChangeType::kBigPlus;
 	default:
 		return ChangeType::kNone;
 	}

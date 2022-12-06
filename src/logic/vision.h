@@ -80,7 +80,7 @@ public:
 		return *this;
 	}
 
-	uint16_t value() const {
+	[[nodiscard]] uint16_t value() const {
 		return value_;
 	}
 	operator VisibleState() const {
@@ -109,22 +109,22 @@ public:
 		return value_ != other.value_ || override_ != other.override_;
 	}
 
-	bool is_explored() const {
+	[[nodiscard]] bool is_explored() const {
 		return value_ > 0;
 	}
-	bool is_visible() const {
+	[[nodiscard]] bool is_visible() const {
 		return value_ > 1;
 	}
-	bool is_seen_by_us() const {
+	[[nodiscard]] bool is_seen_by_us() const {
 		return seers() > 0 || is_revealed();
 	}
-	bool is_revealed() const {
+	[[nodiscard]] bool is_revealed() const {
 		return static_cast<Override>(override_) == Override::kRevealed;
 	}
-	bool is_hidden() const {
+	[[nodiscard]] bool is_hidden() const {
 		return static_cast<Override>(override_) == Override::kHidden;
 	}
-	uint16_t seers() const {
+	[[nodiscard]] uint16_t seers() const {
 		return value_ > 2 ? (value_ - 2) : 0;
 	}
 

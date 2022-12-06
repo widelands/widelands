@@ -21,7 +21,6 @@
 -- * **script**: File path to the :ref:`units.lua <lua_tribes_tribes_units>` file
 --   that configures which units the tribe is using
 -- * **starting_conditions**: A table of file paths to starting condition Lua scripts
--- * **collectors_points_table**: An array of tables of warename-integer pairs used by the Collectors win condition.
 -- * **suited_for_ai** (optional, defaults to ``true``): Whether it is allowed to assign this tribe to AI players.
 --
 
@@ -54,6 +53,9 @@
 --    ``busy_e``, ``busy_se`` and ``busy_sw``.
 --
 --    **bridge_height**: The height in pixels of each bridge at it's summit at 1x scale.
+--
+--    **collectors_points_table**: An array of tables of warename-integer pairs used by the Collectors win condition.
+--    This table shall contain gold and all weapons and armor needed for soldier training.
 --
 --    **roads**: The file paths for the tribe's road textures in 3 subtables ``busy``,
 --    ``normal`` and ``waterway``.

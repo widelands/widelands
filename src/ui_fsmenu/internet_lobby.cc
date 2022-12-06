@@ -63,7 +63,17 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
                            0,
                            _("Clients online:")),
      clientsonline_table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     chat_(&left_column_box_, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kFsMenu),
+     chat_(
+        &left_column_box_,
+        [](int /* unused */) {
+	        return nullptr; /* No ongoing game while still in the lobby. */
+        },
+        0,
+        0,
+        0,
+        0,
+        InternetGaming::ref(),
+        UI::PanelStyle::kFsMenu),
 
      // Right column content
      label_opengames_(&right_column_content_box_,
@@ -125,6 +135,12 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
 	right_column_content_box_.add(&servername_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(0);
 	right_column_content_box_.add(&hostgame_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(0);
+	right_column_content_box_.add(
+	   new UI::MultilineTextarea(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu,
+	                             AddOns::list_game_relevant_addons(), UI::Align::kLeft,
+	                             UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 
 	joingame_.sigclicked.connect([this]() { clicked_joingame(); });

@@ -36,6 +36,7 @@ wl.Descriptions():new_tribe {
       { ware = "gold", points = 12},
       { ware = "spear_stone_tipped", points = 1},
       { ware = "spear_hardened", points = 1},
+      { ware = "armor_wooden", points = 1},
       { ware = "helmet_wooden", points = 1},
       { ware = "warriors_coat", points = 16},
       { ware = "tunic", points = 1},

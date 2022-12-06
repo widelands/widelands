@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-10 03:01+0000\n"
+"POT-Creation-Date: 2022-11-25 03:25+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
@@ -796,9 +796,12 @@ msgstr "Drücke „%s“, um das Lagerfenster schnell zu öffnen und zu schließ
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads. The "
-"supplies and demands of buildings are handled in its economy."
-msgstr "Eine Wirtschaft umfasst alle Gebäude und Flaggen, die durch Straßen verbunden sind. Angebot und Nachfrage der einzelnen Gebäude werden in der jeweiligen Wirtschaft gehandhabt."
+"An economy consists of all buildings and flags connected by roads, ferries "
+"or ships. The supplies and demands of buildings are handled in its economy. "
+"A player may have more than one economies, if those are not connected by any"
+" of these means. This is why the configure economy menu can only be accessed"
+" from flags and warehouses, not the player’s main menu."
+msgstr "Eine Wirtschaft besteht aus allen Gebäuden und Flaggen, die durch Straßen, Fähren oder Schiffe verbunden sind. Die Versorgung und der Bedarf von Gebäuden werden innerhalb ihrer Wirtschaft behandelt. Ein Spieler kann mehr als eine Wirtschaft haben, wenn diese nicht auf die genannten Arten verbunden sind. Daher ist das Menü \"Wirtschaftseinstellungen\" nur über Flaggen und Warenhäuser zu erreichen und nicht über das Hauptmenü."
 
 #: ../../data/txts/tips/general_game.lua:69
 msgid ""

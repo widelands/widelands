@@ -48,30 +48,30 @@ public:
 	StyleManager();
 	~StyleManager() = default;
 
-	const UI::BuildingStatisticsStyleInfo& building_statistics_style() const;
-	const UI::ButtonStyleInfo& button_style(UI::ButtonStyle) const;
-	const UI::TextPanelStyleInfo& slider_style(UI::SliderStyle) const;
-	const UI::PanelStyleInfo* tabpanel_style(UI::TabPanelStyle) const;
-	const UI::TextPanelStyleInfo& editbox_style(UI::PanelStyle) const;
-	const UI::PanelStyleInfo* dropdown_style(UI::PanelStyle) const;
-	const UI::PanelStyleInfo* scrollbar_style(UI::PanelStyle) const;
-	const UI::ProgressbarStyleInfo& progressbar_style(UI::PanelStyle) const;
-	const UI::StatisticsPlotStyleInfo& statistics_plot_style() const;
-	const UI::TableStyleInfo& table_style(UI::PanelStyle) const;
-	const UI::WareInfoStyleInfo& ware_info_style(UI::WareInfoStyle) const;
-	const UI::WindowStyleInfo& window_style(UI::WindowStyle) const;
-	const UI::FontStyleInfo& font_style(UI::FontStyle style) const;
+	[[nodiscard]] const UI::BuildingStatisticsStyleInfo& building_statistics_style() const;
+	[[nodiscard]] const UI::ButtonStyleInfo& button_style(UI::ButtonStyle) const;
+	[[nodiscard]] const UI::TextPanelStyleInfo& slider_style(UI::SliderStyle) const;
+	[[nodiscard]] const UI::PanelStyleInfo* tabpanel_style(UI::TabPanelStyle) const;
+	[[nodiscard]] const UI::TextPanelStyleInfo& editbox_style(UI::PanelStyle) const;
+	[[nodiscard]] const UI::PanelStyleInfo* dropdown_style(UI::PanelStyle) const;
+	[[nodiscard]] const UI::PanelStyleInfo* scrollbar_style(UI::PanelStyle) const;
+	[[nodiscard]] const UI::ProgressbarStyleInfo& progressbar_style(UI::PanelStyle) const;
+	[[nodiscard]] const UI::StatisticsPlotStyleInfo& statistics_plot_style() const;
+	[[nodiscard]] const UI::TableStyleInfo& table_style(UI::PanelStyle) const;
+	[[nodiscard]] const UI::WareInfoStyleInfo& ware_info_style(UI::WareInfoStyle) const;
+	[[nodiscard]] const UI::WindowStyleInfo& window_style(UI::WindowStyle) const;
+	[[nodiscard]] const UI::FontStyleInfo& font_style(UI::FontStyle style) const;
 
 	// Special elements
-	int minimum_font_size() const;
-	const RGBColor& minimap_icon_frame() const;
-	const RGBAColor& focused_color() const {
+	[[nodiscard]] int minimum_font_size() const;
+	[[nodiscard]] const RGBColor& minimap_icon_frame() const;
+	[[nodiscard]] const RGBAColor& focused_color() const {
 		return focused_color_;
 	}
-	const RGBAColor& semi_focused_color() const {
+	[[nodiscard]] const RGBAColor& semi_focused_color() const {
 		return semi_focused_color_;
 	}
-	int focus_border_thickness() const {
+	[[nodiscard]] int focus_border_thickness() const {
 		return focus_border_thickness_;
 	}
 	static std::string color_tag(const std::string& text, const RGBColor& color);

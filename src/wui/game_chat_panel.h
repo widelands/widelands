@@ -33,6 +33,7 @@
  */
 struct GameChatPanel : public UI::Panel {
 	GameChatPanel(UI::Panel*,
+	              ChatColorForPlayer fn,
 	              int32_t x,
 	              int32_t y,
 	              uint32_t w,
@@ -70,6 +71,7 @@ private:
 	void key_changed();
 	bool try_autocomplete();
 
+	ChatColorForPlayer color_functor_;
 	ChatProvider& chat_;
 	UI::Box vbox_;
 	UI::MultilineTextarea chatbox;

@@ -37,7 +37,7 @@ public:
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get(FSEL_EUPS_FILENAME);
 	}
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
@@ -57,7 +57,7 @@ public:
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get(FSEL_ESPS_FILENAME);
 	}
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,

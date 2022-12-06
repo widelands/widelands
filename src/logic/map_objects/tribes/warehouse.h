@@ -44,16 +44,16 @@ public:
 	~WarehouseDescr() override {
 	}
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	uint32_t get_conquers() const override {
+	[[nodiscard]] uint32_t get_conquers() const override {
 		return conquers_;
 	}
 	void set_conquers(uint32_t c) {
 		conquers_ = c;
 	}
 
-	unsigned get_heal_per_second() const {
+	[[nodiscard]] unsigned get_heal_per_second() const {
 		return heal_per_second_;
 	}
 	void set_heal_per_second(unsigned h) {
@@ -223,12 +223,12 @@ private:
 		explicit SoldierControl(Warehouse* warehouse) : warehouse_(warehouse) {
 		}
 
-		std::vector<Soldier*> present_soldiers() const override;
-		std::vector<Soldier*> stationed_soldiers() const override;
-		std::vector<Soldier*> associated_soldiers() const override;
-		Quantity min_soldier_capacity() const override;
-		Quantity max_soldier_capacity() const override;
-		Quantity soldier_capacity() const override;
+		[[nodiscard]] std::vector<Soldier*> present_soldiers() const override;
+		[[nodiscard]] std::vector<Soldier*> stationed_soldiers() const override;
+		[[nodiscard]] std::vector<Soldier*> associated_soldiers() const override;
+		[[nodiscard]] Quantity min_soldier_capacity() const override;
+		[[nodiscard]] Quantity max_soldier_capacity() const override;
+		[[nodiscard]] Quantity soldier_capacity() const override;
 		void set_soldier_capacity(Quantity capacity) override;
 		void drop_soldier(Soldier&) override;
 		int incorporate_soldier(EditorGameBase& egbase, Soldier& s) override;
@@ -244,13 +244,13 @@ private:
 		explicit AttackTarget(Warehouse* warehouse) : warehouse_(warehouse) {
 		}
 
-		bool can_be_attacked() const override;
+		[[nodiscard]] bool can_be_attacked() const override;
 		void enemy_soldier_approaches(const Soldier&) const override;
 		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
 		void set_allow_conquer(PlayerNumber, bool) const override {
 			// Warehouses can never be conquered
 		}
-		bool get_allow_conquer(PlayerNumber) const override {
+		[[nodiscard]] bool get_allow_conquer(PlayerNumber) const override {
 			return false;
 		}
 

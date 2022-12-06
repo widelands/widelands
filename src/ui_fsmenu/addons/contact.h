@@ -24,8 +24,7 @@
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/window.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 class AddOnsCtrl;
 
@@ -45,7 +44,6 @@ private:
 	UI::Button ok_, cancel_;
 };
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_CONTACT_H

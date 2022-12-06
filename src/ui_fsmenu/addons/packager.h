@@ -29,8 +29,7 @@
 #include "ui_fsmenu/addons/packager_box.h"
 #include "ui_fsmenu/addons/progress.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 class AddOnsPackager : public UI::Window {
 public:
@@ -84,7 +83,6 @@ private:
 	ProgressIndicatorWindow progress_window_;
 };
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_PACKAGER_H

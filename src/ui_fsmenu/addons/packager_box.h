@@ -27,8 +27,7 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_fsmenu/main.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 /** Check whether the filename is valid. Returns the reason why it's invalid, or "" if valid. */
 std::string check_addon_filename_validity(const std::string&);
@@ -114,7 +113,6 @@ private:
 	AddOns::CampaignAddon* selected_;  // Not owned
 };
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_PACKAGER_BOX_H

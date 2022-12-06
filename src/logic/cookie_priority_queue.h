@@ -41,7 +41,7 @@ template <typename CT> struct CookiePriorityQueueBase {
 		}
 
 		/** Returns \c true if the cookie is currently managed by a queue */
-		bool is_active() const {
+		[[nodiscard]] bool is_active() const {
 			return pos != bad_pos();
 		}
 
@@ -96,16 +96,16 @@ struct CookiePriorityQueue : CookiePriorityQueueBase<CPQType> {
 	                             const CookieAccessor& accessor = CookieAccessor());
 	~CookiePriorityQueue();
 
-	CookieSizeType size() const;
-	bool empty() const;
-	CookieType* top() const;
+	[[nodiscard]] CookieSizeType size() const;
+	[[nodiscard]] bool empty() const;
+	[[nodiscard]] CookieType* top() const;
 
 	void push(CookieType* elt);
 	void pop(CookieType* elt);
 	void decrease_key(CookieType* elt);
 	void increase_key(CookieType* elt);
 
-	Widelands::WareWorker type() const {
+	[[nodiscard]] Widelands::WareWorker type() const {
 		return type_;
 	}
 

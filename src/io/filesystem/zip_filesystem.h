@@ -33,12 +33,12 @@ public:
 	explicit ZipFilesystem(const std::string&);
 	~ZipFilesystem() override = default;
 
-	bool is_writable() const override;
+	[[nodiscard]] bool is_writable() const override;
 
-	FilenameSet list_directory(const std::string& path) const override;
+	[[nodiscard]] FilenameSet list_directory(const std::string& path) const override;
 
-	bool is_directory(const std::string& path) const override;
-	bool file_exists(const std::string& path) const override;
+	[[nodiscard]] bool is_directory(const std::string& path) const override;
+	bool file_exists(const std::string& path) const override;  // NOLINT not nodicard
 
 	void* load(const std::string& fname, size_t& length) override;
 
@@ -79,7 +79,7 @@ private:
 		std::string strip_basename(const std::string& filename);
 
 		// Full path to the zip file.
-		const std::string& path() const;
+		[[nodiscard]] const std::string& path() const;
 
 		// Closes the file if it is open, reopens it for writing, and
 		// returns the minizip handle.
@@ -121,7 +121,7 @@ private:
 		explicit ZipStreamRead(const std::shared_ptr<ZipFile>& shared_data);
 		~ZipStreamRead() override = default;
 		size_t data(void* data, size_t bufsize) override;
-		bool end_of_file() const override;
+		[[nodiscard]] bool end_of_file() const override;
 
 	private:
 		std::shared_ptr<ZipFile> zip_file_;
