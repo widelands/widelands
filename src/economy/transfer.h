@@ -49,13 +49,13 @@ struct Transfer {
 	Transfer(Game&, Worker&);
 	~Transfer();
 
-	Request* get_request() const {
+	[[nodiscard]] Request* get_request() const {
 		return request_;
 	}
 	void set_request(Request* req);
 	void set_destination(PlayerImmovable& imm);
 	PlayerImmovable* get_destination(Game& g);
-	uint32_t get_steps_left() const {
+	[[nodiscard]] uint32_t get_steps_left() const {
 		return route_.get_nrsteps();
 	}
 
@@ -64,10 +64,10 @@ struct Transfer {
 	void has_finished();
 	void has_failed();
 
-	WareInstance* get_ware() const {
+	[[nodiscard]] WareInstance* get_ware() const {
 		return ware_;
 	}
-	Worker* get_worker() const {
+	[[nodiscard]] Worker* get_worker() const {
 		return worker_;
 	}
 

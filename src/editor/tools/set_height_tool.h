@@ -39,11 +39,11 @@ struct EditorSetHeightTool : public EditorTool {
 
 	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_set_height.png");
 	}
 
-	Widelands::HeightInterval get_interval() const {
+	[[nodiscard]] Widelands::HeightInterval get_interval() const {
 		return interval_;
 	}
 	void set_interval(const Widelands::HeightInterval& i) {

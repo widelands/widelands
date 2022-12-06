@@ -39,7 +39,7 @@ template <typename AreaType = Area<>> struct MapRegion {
 		left_ = area_;
 	}
 
-	const typename AreaType::CoordsType& location() const {
+	[[nodiscard]] const typename AreaType::CoordsType& location() const {
 		return area_;
 	}
 
@@ -65,7 +65,7 @@ template <typename AreaType = Area<>> struct MapRegion {
 		return true;
 	}
 
-	typename AreaType::RadiusType radius() const {
+	[[nodiscard]] typename AreaType::RadiusType radius() const {
 		return area_.radius;
 	}
 

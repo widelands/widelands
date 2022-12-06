@@ -34,10 +34,10 @@ struct RoutingNode;
 struct RoutingNodeNeighbour {
 	RoutingNodeNeighbour(RoutingNode* const f, int32_t const cost) : nb_(f), cost_(cost) {
 	}
-	RoutingNode* get_neighbour() const {
+	[[nodiscard]] RoutingNode* get_neighbour() const {
 		return nb_;
 	}
-	int32_t get_cost() const {
+	[[nodiscard]] int32_t get_cost() const {
 		return cost_;
 	}
 
@@ -99,7 +99,7 @@ public:
 		}
 	}
 
-	int32_t cost(WareWorker which) const {
+	[[nodiscard]] int32_t cost(WareWorker which) const {
 		return (which == wwWARE) ? mpf_realcost_ware + mpf_estimate_ware :
                                  mpf_realcost_worker + mpf_estimate_worker;
 	}
@@ -109,7 +109,7 @@ public:
 
 	virtual Flag& base_flag() = 0;
 	virtual void get_neighbours(WareWorker type, RoutingNodeNeighbours&) = 0;
-	virtual const Coords& get_position() const = 0;
+	[[nodiscard]] virtual const Coords& get_position() const = 0;
 };
 }  // namespace Widelands
 

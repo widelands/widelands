@@ -44,7 +44,7 @@ struct CritterAction {
 struct CritterProgram : public MapObjectProgram {
 	explicit CritterProgram(const std::string& program_name, const LuaTable& actions_table);
 
-	int32_t get_size() const {
+	[[nodiscard]] int32_t get_size() const {
 		return actions_.size();
 	}
 	const CritterAction& operator[](size_t const idx) const {

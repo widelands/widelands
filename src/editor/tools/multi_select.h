@@ -43,15 +43,15 @@ struct MultiSelect {
 		}
 	}
 
-	bool is_enabled(int32_t n) const {
+	[[nodiscard]] bool is_enabled(int32_t n) const {
 		return enabled_.find(n) != enabled_.end();
 	}
 
-	int32_t get_nr_enabled() const {
+	[[nodiscard]] int32_t get_nr_enabled() const {
 		return enabled_.size();
 	}
 
-	int32_t get_random_enabled() const {
+	[[nodiscard]] int32_t get_random_enabled() const {
 		int32_t rand_value =
 		   static_cast<int32_t>(static_cast<double>(get_nr_enabled()) * rand() / (RAND_MAX + 1.0));
 
@@ -69,11 +69,11 @@ struct MultiSelect {
 		enabled_.clear();
 	}
 
-	int32_t count() const {
+	[[nodiscard]] int32_t count() const {
 		return enabled_.size();
 	}
 
-	const std::set<int32_t>& get_enabled() const {
+	[[nodiscard]] const std::set<int32_t>& get_enabled() const {
 		return enabled_;
 	}
 

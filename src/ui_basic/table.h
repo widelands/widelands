@@ -77,7 +77,7 @@ public:
 
 	void clear();
 	void set_sort_column(uint8_t col);
-	uint8_t get_sort_colum() const;
+	uint8_t get_sort_column() const;
 	bool get_sort_descending() const;
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
@@ -103,7 +103,7 @@ public:
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
-		char const* what() const noexcept override {
+		[[nodiscard]] char const* what() const noexcept override {
 			return "UI::Table<Entry>: No selection";
 		}
 	};
@@ -136,9 +136,9 @@ public:
 		void set_picture(uint8_t col, const Image* pic, const std::string& str = std::string());
 		/// Text conventions: Title Case for the 'str'
 		void set_string(uint8_t col, const std::string& str);
-		const Image* get_picture(uint8_t col) const;
-		const std::string& get_string(uint8_t col) const;
-		void* entry() const {
+		[[nodiscard]] const Image* get_picture(uint8_t col) const;
+		[[nodiscard]] const std::string& get_string(uint8_t col) const;
+		[[nodiscard]] void* entry() const {
 			return entry_;
 		}
 
@@ -146,11 +146,11 @@ public:
 			font_style_.reset(new FontStyle(style));
 		}
 
-		const UI::FontStyleInfo* font_style() const {
+		[[nodiscard]] const UI::FontStyleInfo* font_style() const {
 			return font_style_ ? &g_style_manager->font_style(*font_style_) : nullptr;
 		}
 
-		bool is_disabled() const {
+		[[nodiscard]] bool is_disabled() const {
 			return disabled_;
 		}
 		void set_disabled(bool disable) {
@@ -202,11 +202,8 @@ public:
 	size_t number_of_columns() const;
 
 	void clear();
-	void set_sort_column(uint8_t const col) {
-		assert(col < columns_.size());
-		sort_column_ = col;
-	}
-	uint8_t get_sort_colum() const {
+	void set_sort_column(uint8_t col);
+	uint8_t get_sort_column() const {
 		return sort_column_;
 	}
 	bool get_sort_descending() const {
@@ -261,7 +258,7 @@ public:
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
-		char const* what() const noexcept override {
+		[[nodiscard]] char const* what() const noexcept override {
 			return "UI::Table<void *>: No selection";
 		}
 	};
@@ -315,6 +312,9 @@ private:
 		int original_width;
 		Align alignment;
 		CompareFn compare;
+		std::string user_tooltip;
+
+		void update_tooltip(bool sorted) const;
 	};
 	using Columns = std::vector<Column>;
 

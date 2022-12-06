@@ -68,15 +68,15 @@ public:
 	void set_economy(Economy* economy, WareWorker);
 
 	// Returns the wares and workers currently waiting for the expedition.
-	std::vector<InputQueue*> queues(bool all) const;
+	[[nodiscard]] std::vector<InputQueue*> queues(bool all) const;
 
 	// Returns the matching input queue for the given index and type.
-	InputQueue& inputqueue(DescriptionIndex index, WareWorker type, bool) const;
-	InputQueue* inputqueue(size_t additional_index) const;
-	InputQueue& inputqueue(const Request&) const;
+	[[nodiscard]] InputQueue& inputqueue(DescriptionIndex index, WareWorker type, bool) const;
+	[[nodiscard]] InputQueue* inputqueue(size_t additional_index) const;
+	[[nodiscard]] InputQueue& inputqueue(const Request&) const;
 
 	void demand_additional_item(Game&, WareWorker, DescriptionIndex, bool);
-	size_t count_additional_queues() const;
+	[[nodiscard]] size_t count_additional_queues() const;
 
 	// Tests if all wares for the expedition have arrived. If so, informs the portdock.
 	void check_is_ready(Game& game);

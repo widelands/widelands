@@ -32,13 +32,14 @@
 /**
  * Time, in seconds, that chat messages are shown in the overlay.
  */
-static const int32_t CHAT_DISPLAY_TIME = 10;
-static const uint32_t MARGIN = 2;
+constexpr int32_t kChatDisplayTime = 10;
+constexpr uint32_t kMargin = 2;
 
 struct ChatOverlay::Impl {
 	bool transparent_ = false;
 	ChatProvider* chat_ = nullptr;
 	bool havemessages_ = false;
+	ChatColorForPlayer color_functor_;
 
 	/// Reception time of oldest message
 	time_t oldest_ = std::time(nullptr);
@@ -51,8 +52,9 @@ struct ChatOverlay::Impl {
 
 	FxId new_message_;
 
-	Impl()
-	   : chat_message_subscriber_(Notifications::subscribe<ChatMessage>(
+	explicit Impl(ChatColorForPlayer fn)
+	   : color_functor_(fn),
+	     chat_message_subscriber_(Notifications::subscribe<ChatMessage>(
 	        [this](const ChatMessage& /* msg */) { recompute(); })),
 	     new_message_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 	}
@@ -60,16 +62,20 @@ struct ChatOverlay::Impl {
 	void recompute();
 
 private:
-	bool has_chat_provider() const {
+	[[nodiscard]] bool has_chat_provider() const {
 		// The chat provider might not have been assigned a specific subclass,
 		// e.g. if there was an exception thrown.
 		return (chat_ != nullptr && chat_->has_been_set());
 	}
 };
 
-ChatOverlay::ChatOverlay(
-   UI::Panel* const parent, int32_t const x, int32_t const y, int32_t const w, int32_t const h)
-   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h), m(new Impl()) {
+ChatOverlay::ChatOverlay(UI::Panel* const parent,
+                         ChatColorForPlayer fn,
+                         int32_t const x,
+                         int32_t const y,
+                         int32_t const w,
+                         int32_t const h)
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h), m(new Impl(fn)) {
 	m->transparent_ = get_config_bool("transparent_chat", true);
 
 	set_thinks(true);
@@ -85,7 +91,7 @@ void ChatOverlay::set_chat_provider(ChatProvider& chat) {
  */
 void ChatOverlay::think() {
 	if (m->havemessages_) {
-		if (time(nullptr) - m->oldest_ > CHAT_DISPLAY_TIME) {
+		if (time(nullptr) - m->oldest_ > kChatDisplayTime) {
 			m->recompute();
 		}
 	}
@@ -110,8 +116,9 @@ void ChatOverlay::Impl::recompute() {
 	while (chat_idx >= 0) {
 		// Chat message is more recent
 		oldest_ = chat_->get_messages()[chat_idx].time;
-		if (now - oldest_ < CHAT_DISPLAY_TIME) {
-			richtext = format_as_richtext(chat_->get_messages()[chat_idx]).append(richtext);
+		if (now - oldest_ < kChatDisplayTime) {
+			richtext =
+			   format_as_richtext(chat_->get_messages()[chat_idx], color_functor_).append(richtext);
 		}
 		if (!chat_->sound_off() && sound_played_ < oldest_) {
 			g_sh->play_fx(SoundType::kChat, new_message_);
@@ -143,7 +150,7 @@ void ChatOverlay::draw(RenderTarget& dst) {
 
 	// Background
 	const int32_t height = im->height() > get_h() ? get_h() : im->height();
-	const int32_t top = get_h() - height - 2 * MARGIN;
+	const int32_t top = get_h() - height - 2 * kMargin;
 	const int width = std::min<int>(get_w(), im->width());
 
 	if (!m->transparent_) {

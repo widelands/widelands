@@ -101,6 +101,7 @@ wl_library(logic_addons
     build_info
     graphic
     graphic_image_cache
+    graphic_text_layout
     io_fileread
     io_filesystem
     io_profile

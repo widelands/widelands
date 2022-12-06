@@ -99,7 +99,7 @@ struct Duration {
 		return Duration(get() / d);
 	}
 
-	uint32_t get() const {
+	[[nodiscard]] uint32_t get() const {
 		return value_.load();
 	}
 
@@ -123,10 +123,10 @@ struct Duration {
 	}
 
 	// Special values
-	inline bool is_invalid() const {
+	[[nodiscard]] inline bool is_invalid() const {
 		return *this == Duration();
 	}
-	inline bool is_valid() const {
+	[[nodiscard]] inline bool is_valid() const {
 		return !is_invalid();
 	}
 
@@ -181,7 +181,7 @@ struct Time {
 		return Duration(get() - t.get());
 	}
 
-	uint32_t get() const {
+	[[nodiscard]] uint32_t get() const {
 		return value_;
 	}
 
@@ -212,10 +212,10 @@ struct Time {
 	}
 
 	// Special values
-	inline bool is_invalid() const {
+	[[nodiscard]] inline bool is_invalid() const {
 		return *this == Time();
 	}
-	inline bool is_valid() const {
+	[[nodiscard]] inline bool is_valid() const {
 		return !is_invalid();
 	}
 

@@ -394,31 +394,61 @@ bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstat
 	if (show_only_ || !can_act_) {
 		return false;
 	}
+	bool big_step = false;
 	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y,
 	                                       // shift has special meaning, prevent it to work
 	                                       // as part of modifier
 	                                       modstate & ~KMOD_SHIFT);
-	if (change != 0) {
-		if (get_mouse_position().x < priority_.get_x() - kButtonSize / 4) {
-			// Mouse is over desired fill
-			if ((modstate & KMOD_SHIFT) != 0) {
-				recurse([change](InputQueueDisplay& i) { i.change_desired_fill(change); });
-			} else {
-				change_desired_fill(change);
-			}
-			return true;
+	if (change == 0) {
+		// Try big step
+		change = get_mousewheel_change(
+		   MousewheelHandlerConfigID::kChangeValueBig, x, y, modstate & ~KMOD_SHIFT);
+		if (change == 0) {
+			return false;
 		}
-		if (has_priority_) {
-			// Mouse is over priority or collapse button
-			// Can't just use method from Slider, because of the special
-			// meaning of shift to change all input priorities together.
-
-			// KMOD_SHIFT + changedto is already connected to recurse.
-			priority_.change_value_by(change);
-			return true;
-		}
+		big_step = true;
 	}
+
+	if (get_mouse_position().x < priority_.get_x() - kButtonSize / 4) {
+		// Mouse is over desired fill
+
+		if (big_step) {
+			change *= ChangeBigStep::kSmallRange;
+		}
+
+		if ((modstate & KMOD_SHIFT) != 0) {
+			recurse([change](InputQueueDisplay& i) { i.change_desired_fill(change); });
+		} else {
+			change_desired_fill(change);
+		}
+		return true;
+	}
+	if (has_priority_) {
+		// Mouse is over priority or collapse button
+		// Can't just use method from Slider, because of the special
+		// meaning of shift to change all input priorities together.
+
+		if (big_step) {
+			// This makes the steps: Very Low -> Normal -> Very High
+			change *= 2;
+		}
+
+		// KMOD_SHIFT + changedto is already connected to recurse.
+		priority_.change_value_by(change);
+		return true;
+	}
+
 	return false;
+}
+
+bool UI::PrioritySlider::handle_key(bool down, SDL_Keysym code) {
+	// shift has special meaning, prevent it to work as part of modifier
+	const uint16_t filtered_keymod = code.mod & ~KMOD_SHIFT;
+	SDL_Keysym filtered_code = {code.scancode, code.sym, filtered_keymod, code.unused};
+
+	// If this changes the slider's value while Shift is pressed, then KMOD_SHIFT + changedto
+	// takes care of changing the other ones too.
+	return Slider::handle_key(down, filtered_code);
 }
 
 void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {

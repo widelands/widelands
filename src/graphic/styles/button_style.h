@@ -48,10 +48,10 @@ struct ButtonStyleInfo {
 	     disabled_(new UI::TextPanelStyleInfo(other.disabled())) {
 	}
 
-	const UI::TextPanelStyleInfo& enabled() const {
+	[[nodiscard]] const UI::TextPanelStyleInfo& enabled() const {
 		return *enabled_.get();
 	}
-	const UI::TextPanelStyleInfo& disabled() const {
+	[[nodiscard]] const UI::TextPanelStyleInfo& disabled() const {
 		return *disabled_.get();
 	}
 

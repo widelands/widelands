@@ -42,12 +42,12 @@ struct WordWrap {
 
 	void set_wrapwidth(uint32_t wrapwidth);
 
-	uint32_t wrapwidth() const;
+	[[nodiscard]] uint32_t wrapwidth() const;
 
 	void wrap(const std::string& text);
 
-	uint32_t width() const;
-	uint32_t height() const;
+	[[nodiscard]] uint32_t width() const;
+	[[nodiscard]] uint32_t height() const;
 	void set_draw_caret(bool draw_it) {
 		draw_caret_ = draw_it;
 	}
@@ -63,15 +63,16 @@ struct WordWrap {
 	          const std::string& caret_image_path = std::string());
 
 	void calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) const;
-	uint32_t nrlines() const {
+	[[nodiscard]] uint32_t nrlines() const {
 		return lines_.size();
 	}
-	uint32_t line_offset(uint32_t line) const;
-	uint32_t offset_of_line_at(int32_t y) const;
-	std::string text_of_line_at(int32_t y) const;
+	[[nodiscard]] uint32_t line_offset(uint32_t line) const;
+	[[nodiscard]] uint32_t offset_of_line_at(int32_t y) const;
+	[[nodiscard]] std::string text_of_line_at(int32_t y) const;
 	int text_width_of(std::string& text) const;
 
 	void focus();
+	void enter_cursor_movement_mode();
 
 private:
 	struct LineData {
@@ -88,10 +89,10 @@ private:
 	                         std::string::size_type& next_line_start,
 	                         uint32_t safety_margin);
 
-	bool line_fits(const std::string& text, uint32_t safety_margin) const;
+	[[nodiscard]] bool line_fits(const std::string& text, uint32_t safety_margin) const;
 
-	uint32_t quick_width(const UChar& c) const;
-	uint32_t quick_width(const std::string& text) const;
+	[[nodiscard]] uint32_t quick_width(const UChar& c) const;
+	[[nodiscard]] uint32_t quick_width(const std::string& text) const;
 
 	uint32_t wrapwidth_;
 	bool draw_caret_;
@@ -113,9 +114,12 @@ private:
 	                         const int fontheight,
 	                         uint32_t line,
 	                         const Vector2i& point) const;
-	uint32_t line_index(int32_t y) const;
+	[[nodiscard]] uint32_t line_index(int32_t y) const;
 	ScopedTimer caret_timer_;
-	uint32_t caret_ms;
+	uint32_t caret_ms_;
+	ScopedTimer cursor_movement_timer_;
+	uint32_t cursor_ms_;
+	bool cursor_movement_active_ = false;
 };
 
 }  // namespace UI

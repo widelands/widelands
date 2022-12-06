@@ -33,11 +33,11 @@ struct EditorInfoTool : public EditorTool {
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
 	}
 
-	bool has_size_one() const override {
+	[[nodiscard]] bool has_size_one() const override {
 		return true;
 	}
 

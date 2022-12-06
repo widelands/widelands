@@ -36,10 +36,10 @@ public:
 	~FerryDescr() override {
 	}
 
-	uint32_t movecaps() const override;
+	[[nodiscard]] uint32_t movecaps() const override;
 
 protected:
-	Bob& create_object() const override;
+	[[nodiscard]] Bob& create_object() const override;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(FerryDescr);

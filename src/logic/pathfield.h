@@ -50,7 +50,7 @@ struct Pathfield {
 	uint16_t cycle;
 	uint8_t backlink;  //  how we got here (WALK_*)
 
-	int32_t cost(WareWorker) const {
+	[[nodiscard]] int32_t cost(WareWorker) const {
 		return real_cost + estim_cost;
 	}
 	Queue::Cookie& cookie(WareWorker) {

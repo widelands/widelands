@@ -29,17 +29,17 @@ public:
 	   : text_(text), line_(1), col_(0), pos_(0), end_(text.size()) {
 	}
 
-	size_t line() const {
+	[[nodiscard]] size_t line() const {
 		return line_;
 	}
-	size_t col() const {
+	[[nodiscard]] size_t col() const {
 		return col_;
 	}
-	size_t pos() const {
+	[[nodiscard]] size_t pos() const {
 		return pos_;
 	}
 
-	std::string peek(size_t, size_t = -1) const;
+	[[nodiscard]] std::string peek(size_t, size_t = -1) const;
 	void expect(std::string, bool = true);
 
 	std::string till_any(std::string);

@@ -560,7 +560,7 @@ struct FindNodeSpace {
 	explicit FindNodeSpace(bool land) : landbased_(land) {
 	}
 
-	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
 		if ((coords.field->nodecaps() & MOVECAPS_WALK) == 0) {
 			return false;
 		}
@@ -586,7 +586,7 @@ private:
 
 /** Accepts a node if and only if a ferry can reach it or depart from there. */
 struct FindNodeFerry {
-	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
 		CheckStepFerry csf(egbase);
 		return csf.reachable_dest(egbase.map(), coords);
 	}
@@ -2652,7 +2652,7 @@ void Worker::start_task_fugitive(Game& game) {
 struct FindFlagWithPlayersWarehouse {
 	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
 	}
-	bool accept(const BaseImmovable& imm) const {
+	[[nodiscard]] bool accept(const BaseImmovable& imm) const {
 		if (upcast(Flag const, flag, &imm)) {
 			if (flag->get_owner() == &owner_) {
 				if (!flag->economy(wwWORKER).warehouses().empty()) {

@@ -374,12 +374,16 @@ public:
 	void cancel_trade(int trade_id);
 
 	struct PendingDiplomacyAction {
-		const PlayerNumber sender;     ///< The player who initiated the action.
-		const DiplomacyAction action;  ///< The action to perform.
-		const PlayerNumber other;      ///< The other player affected, if any.
+		PlayerNumber sender;     ///< The player who initiated the action.
+		DiplomacyAction action;  ///< The action to perform.
+		PlayerNumber other;      ///< The other player affected, if any.
 
 		PendingDiplomacyAction(PlayerNumber p1, DiplomacyAction a, PlayerNumber p2)
 		   : sender(p1), action(a), other(p2) {
+		}
+
+		inline bool operator==(const PendingDiplomacyAction& pda) const {
+			return sender == pda.sender && action == pda.action && other == pda.other;
 		}
 	};
 	const std::list<PendingDiplomacyAction>& pending_diplomacy_actions() const {

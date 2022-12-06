@@ -57,7 +57,7 @@ protected:
 	void set_state(State const s) {
 		state_ = s;
 	}
-	State get_state() const {
+	[[nodiscard]] State get_state() const {
 		return state_;
 	}
 	Map& map_;
