@@ -98,7 +98,7 @@ inline std::string as_string(const signed int t) {  // NOLINT suppress google-ru
 	return std::to_string(t);
 }
 inline std::string as_string(const signed long t) {  // NOLINT suppress google-runtime-int
-	return std::to_string(static_cast<long long>(t));
+	return std::to_string(static_cast<long long>(t));  // NOLINT suppress google-runtime-int
 }
 inline std::string as_string(const signed long long t) {  // NOLINT suppress google-runtime-int
 	return std::to_string(t);
@@ -113,7 +113,7 @@ inline std::string as_string(const unsigned int t) {  // NOLINT suppress google-
 	return std::to_string(t);
 }
 inline std::string as_string(const unsigned long t) {  // NOLINT suppress google-runtime-int
-	return std::to_string(static_cast<unsigned long long>(t));
+	return std::to_string(static_cast<unsigned long long>(t));  // NOLINT suppress google-runtime-int
 }
 inline std::string as_string(const unsigned long long t) {  // NOLINT suppress google-runtime-int
 	return std::to_string(t);
