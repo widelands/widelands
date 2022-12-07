@@ -30,25 +30,30 @@ class FileSystem;
 class FileWrite : public StreamWrite {
 public:
 	struct Pos {
-		Pos(size_t const p = 0) : pos(p) {
+		Pos(size_t const p = 0) : pos(p) {  // NOLINT allow implicit conversion
 		}
 
 		/// Returns a special value indicating invalidity.
 		static Pos null() {
-			return std::numeric_limits<size_t>::max();
+			return Pos(std::numeric_limits<size_t>::max());
 		}
 
+		[[nodiscard]] bool operator==(const Pos& p) const {
+			return pos == p.pos;
+		}
 		[[nodiscard]] bool is_null() const {
 			return *this == null();
 		}
-		operator size_t() const {
+		operator size_t() const {  // NOLINT allow implicit conversion
 			return pos;
 		}
-		Pos operator++() {
-			return ++pos;
+		Pos& operator++() {
+			++pos;
+			return *this;
 		}
-		Pos operator+=(const Pos& other) {
-			return pos += other.pos;
+		Pos& operator+=(const Pos& other) {
+			pos += other.pos;
+			return *this;
 		}
 
 	private:
@@ -90,9 +95,9 @@ public:
 	[[nodiscard]] std::string get_data() const;
 
 private:
-	char* data_;
-	size_t length_;
-	size_t max_size_;
+	char* data_{nullptr};
+	size_t length_{0};
+	size_t max_size_{0};
 	Pos filepos_;
 };
 
