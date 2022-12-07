@@ -41,7 +41,7 @@ private:
 	std::string make_tooltip(const ToolConf& conf, const std::string& title);
 	void rebuild_list();
 
-	int32_t margin_;
+	int32_t margin_{4};
 	int32_t box_width_;
 	UI::Box box_;
 	UI::Listselect<std::string> list_;

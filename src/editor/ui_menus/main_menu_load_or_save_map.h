@@ -54,7 +54,7 @@ protected:
 	// Private variables first, because compiler would complain about initialization order otherwise
 private:
 	// Common padding between panels
-	int32_t const padding_;
+	int32_t const padding_{4};
 
 	// Whether to list empty directories
 	bool const show_empty_dirs_;

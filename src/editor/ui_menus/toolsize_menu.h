@@ -29,14 +29,14 @@ struct EditorToolsizeMenu : public UI::UniqueWindow {
 	EditorToolsizeMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
 	void update(uint32_t);
 	void set_buttons_enabled(bool enable);
-	uint32_t value() {
+	uint32_t value() const {
 		return value_;
 	}
 
 private:
 	EditorInteractive& eia() const;
 	UI::SpinBox spinbox_;
-	uint32_t value_;
+	uint32_t value_{0};
 	void changed();
 	static constexpr uint32_t kMargin = 5;
 };

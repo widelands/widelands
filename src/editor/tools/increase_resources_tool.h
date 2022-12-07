@@ -30,9 +30,7 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	                            EditorSetResourcesTool& the_set_to_tool)
 	   : EditorTool(parent, the_decrease_tool, the_set_to_tool),
 	     decrease_tool_(the_decrease_tool),
-	     set_tool_(the_set_to_tool),
-	     change_by_(1),
-	     cur_res_(0) {
+	     set_tool_(the_set_to_tool) {
 	}
 
 	/***
@@ -101,8 +99,8 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 private:
 	EditorDecreaseResourcesTool& decrease_tool_;
 	EditorSetResourcesTool& set_tool_;
-	int32_t change_by_;
-	Widelands::DescriptionIndex cur_res_;
+	int32_t change_by_{1};
+	Widelands::DescriptionIndex cur_res_{0};
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_INCREASE_RESOURCES_TOOL_H
