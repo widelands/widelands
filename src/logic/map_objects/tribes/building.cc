@@ -58,14 +58,11 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
      buildable_(table.has_key("buildcost")),
      can_be_dismantled_(table.has_key("return_on_dismantle")),
      destructible_(table.has_key("destructible") ? table.get_bool("destructible") : true),
-     size_(BaseImmovable::SMALL),
-     mine_(false),
-     port_(false),
+
      enhancement_(INVALID_INDEX),
      enhanced_from_(INVALID_INDEX),
-     enhanced_building_(false),
-     hints_(table.get_table("aihints"), name()),
-     vision_range_(0) {
+
+     hints_(table.get_table("aihints"), name()) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Building %s has no idle animation", name().c_str());
 	}
@@ -364,17 +361,9 @@ Implementation
 
 Building::Building(const BuildingDescr& building_descr)
    : PlayerImmovable(building_descr),
-     flag_(nullptr),
-     anim_(0),
+
      animstart_(0),
-     leave_time_(0),
-     defeating_player_(0),
-     seeing_(false),
-     was_immovable_(nullptr),
-     attack_target_(nullptr),
-     soldier_control_(nullptr),
-     mute_messages_(false),
-     is_destruction_blocked_(false) {
+     leave_time_(0) {
 }
 
 void Building::load_finish(EditorGameBase& egbase) {

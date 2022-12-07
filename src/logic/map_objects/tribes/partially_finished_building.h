@@ -86,9 +86,9 @@ private:
 	virtual const Duration& build_step_time() const = 0;
 
 protected:
-	const BuildingDescr* building_;  // type of building that was or will become
+	const BuildingDescr* building_{nullptr};  // type of building that was or will become
 
-	Request* builder_request_;
+	Request* builder_request_{nullptr};
 	OPtr<Worker> builder_;
 
 	using Wares = std::vector<WaresQueue*>;
@@ -96,10 +96,10 @@ protected:
 	                       // (dismantlesites)
 	Wares dropout_wares_;  // additional items to drop out immediately
 
-	bool working_;             // true if the builder is currently working
-	Time work_steptime_;       // time when next step is completed
-	uint32_t work_completed_;  // how many steps have we done so far?
-	uint32_t work_steps_;      // how many steps (= wares) until we're done?
+	bool working_{false};         // true if the builder is currently working
+	Time work_steptime_;          // time when next step is completed
+	uint32_t work_completed_{0};  // how many steps have we done so far?
+	uint32_t work_steps_{0};      // how many steps (= wares) until we're done?
 };
 }  // namespace Widelands
 

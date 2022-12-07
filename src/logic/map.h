@@ -83,8 +83,7 @@ Predicates used in path finding and find functions.
 struct FindBob {
 	//  Return true if this bob should be returned by find_bobs.
 	virtual bool accept(Bob*) const = 0;
-	virtual ~FindBob() {
-	}  // make gcc shut up
+	virtual ~FindBob() = default;  // make gcc shut up
 };
 struct FindNode;
 struct CheckStep;
@@ -96,31 +95,26 @@ struct FindBobAlwaysTrue : public FindBob {
 	bool accept(Bob*) const override {
 		return true;
 	}
-	~FindBobAlwaysTrue() override {
-	}  // make gcc shut up
+	~FindBobAlwaysTrue() override = default;  // make gcc shut up
 };
 
 struct FindBobByName : public FindBob {
 	bool accept(Bob* b) const override;
 	explicit FindBobByName(const std::string& n) : name_(n) {
 	}
-	~FindBobByName() override {
-	}
+	~FindBobByName() override = default;
 
 private:
 	std::string name_;
 };
 struct FindCritter : public FindBob {
 	bool accept(Bob* b) const override;
-	~FindCritter() override {
-	}
+	~FindCritter() override = default;
 };
 struct FindCarnivores : public FindBob {
 	bool accept(Bob* b) const override;
-	explicit FindCarnivores() {
-	}
-	~FindCarnivores() override {
-	}
+	explicit FindCarnivores() = default;
+	~FindCarnivores() override = default;
 };
 struct FindCritterByClass : public FindBob {
 	enum class Class { Herbivore, Carnivore, Neither };
@@ -128,8 +122,7 @@ struct FindCritterByClass : public FindBob {
 	bool accept(Bob* b) const override;
 	explicit FindCritterByClass(const CritterDescr& b) : class_(classof(b)) {
 	}
-	~FindCritterByClass() override {
-	}
+	~FindCritterByClass() override = default;
 
 private:
 	Class class_;
@@ -228,7 +221,7 @@ public:
 	   (const EditorGameBase&,
 	    uint32_t w = 64,
 	    uint32_t h = 64,
-	    const Widelands::DescriptionIndex default_terrain = 0,
+	    Widelands::DescriptionIndex default_terrain = 0,
 	    const std::string& name = _("No Name"),
 	    const std::string& author = pgettext("author_name", "Unknown"),
 	    const std::string& description = _("No description defined"));
@@ -339,7 +332,7 @@ public:
 		tags_.clear();
 	}
 	[[nodiscard]] bool has_tag(const std::string& s) const {
-		return tags_.count(s);
+		return tags_.count(s) != 0u;
 	}
 
 	[[nodiscard]] const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {
@@ -384,35 +377,35 @@ public:
 
 	[[nodiscard]] BaseImmovable* get_immovable(const Coords&) const;
 	uint32_t find_bobs(const EditorGameBase&,
-	                   const Area<FCoords>,
+	                   Area<FCoords>,
 	                   std::vector<Bob*>* list,
 	                   const FindBob& functor = FindBobAlwaysTrue()) const;
 	uint32_t find_reachable_bobs(const EditorGameBase&,
-	                             const Area<FCoords>,
+	                             Area<FCoords>,
 	                             std::vector<Bob*>* list,
 	                             const CheckStep&,
 	                             const FindBob& functor = FindBobAlwaysTrue()) const;
 	uint32_t find_immovables(const EditorGameBase&,
-	                         const Area<FCoords>,
+	                         Area<FCoords>,
 	                         std::vector<ImmovableFound>* list,
 	                         const FindImmovable& = find_immovable_always_true()) const;
 	uint32_t find_reachable_immovables(const EditorGameBase&,
-	                                   const Area<FCoords>,
+	                                   Area<FCoords>,
 	                                   std::vector<ImmovableFound>* list,
 	                                   const CheckStep&,
 	                                   const FindImmovable& = find_immovable_always_true()) const;
 	uint32_t
 	find_reachable_immovables_unique(const EditorGameBase&,
-	                                 const Area<FCoords>,
+	                                 Area<FCoords>,
 	                                 std::vector<BaseImmovable*>& list,
 	                                 const CheckStep&,
 	                                 const FindImmovable& = find_immovable_always_true()) const;
 	uint32_t find_fields(const EditorGameBase&,
-	                     const Area<FCoords>,
+	                     Area<FCoords>,
 	                     std::vector<Coords>* list,
 	                     const FindNode& functor) const;
 	uint32_t find_reachable_fields(const EditorGameBase&,
-	                               const Area<FCoords>,
+	                               Area<FCoords>,
 	                               std::vector<Coords>* list,
 	                               const CheckStep&,
 	                               const FindNode&) const;
@@ -475,11 +468,11 @@ public:
 	// Pathfinding
 	int32_t findpath(Coords instart,
 	                 Coords inend,
-	                 const int32_t persist,
+	                 int32_t persist,
 	                 Path&,
 	                 const CheckStep&,
-	                 const uint32_t flags = 0,
-	                 const uint32_t caps_sensitivity = 0,
+	                 uint32_t flags = 0,
+	                 uint32_t caps_sensitivity = 0,
 	                 WareWorker type = wwWORKER) const;
 
 	/**
@@ -652,14 +645,14 @@ private:
 	void find(const EditorGameBase&, const Area<FCoords>&, functorT&) const;
 
 	/// # of players this map supports (!= Game's number of players!)
-	PlayerNumber nrplayers_;
-	ScenarioTypes scenario_types_;  // whether the map is playable as scenario
+	PlayerNumber nrplayers_{0};
+	ScenarioTypes scenario_types_{NO_SCENARIO};  // whether the map is playable as scenario
 
-	int16_t width_;
-	int16_t height_;
+	int16_t width_{0};
+	int16_t height_{0};
 	std::string filename_;
 	std::string author_;
-	bool localize_author_;
+	bool localize_author_{false};
 	std::string name_;
 	std::string description_;
 	std::string hint_;
@@ -682,9 +675,9 @@ private:
 	std::unique_ptr<FileSystem> filesystem_;
 
 	PortSpacesSet port_spaces_;
-	bool allows_seafaring_;
+	bool allows_seafaring_{false};
 
-	uint32_t waterway_max_length_;
+	uint32_t waterway_max_length_{0};
 
 	Objectives objectives_;
 
@@ -771,7 +764,7 @@ inline void Map::get_ln(const Coords& f, Coords* const o) const {
 	assert(0 <= f.y);
 	assert(f.y < height_);
 	o->y = f.y;
-	o->x = (f.x ? f.x : width_) - 1;
+	o->x = (f.x != 0 ? f.x : width_) - 1;
 	assert(0 <= o->x);
 	assert(0 <= o->y);
 	assert(o->x < width_);
@@ -805,8 +798,9 @@ inline Coords Map::l_n(const Coords& f) const {
 	assert(0 <= f.y);
 	assert(f.y < height_);
 	Coords result(f.x - 1, f.y);
-	if (result.x == -1)
+	if (result.x == -1) {
 		result.x = width_ - 1;
+	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
 	assert(0 <= result.y);
@@ -841,8 +835,9 @@ inline void Map::get_rn(const Coords& f, Coords* const o) const {
 	assert(f.y < height_);
 	o->y = f.y;
 	o->x = f.x + 1;
-	if (o->x == width_)
+	if (o->x == width_) {
 		o->x = 0;
+	}
 	assert(0 <= o->x);
 	assert(o->x < width_);
 	assert(0 <= o->y);
@@ -876,8 +871,9 @@ inline Coords Map::r_n(const Coords& f) const {
 	assert(0 <= f.y);
 	assert(f.y < height_);
 	Coords result(f.x + 1, f.y);
-	if (result.x == width_)
+	if (result.x == width_) {
 		result.x = 0;
+	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
 	assert(0 <= result.y);
@@ -913,10 +909,11 @@ inline void Map::get_tln(const Coords& f, Coords* const o) const {
 	assert(f.y < height_);
 	o->y = f.y - 1;
 	o->x = f.x;
-	if (o->y & 1) {
-		if (o->y == -1)
+	if ((o->y & 1) != 0) {
+		if (o->y == -1) {
 			o->y = height_ - 1;
-		o->x = (o->x ? o->x : width_) - 1;
+		}
+		o->x = (o->x != 0 ? o->x : width_) - 1;
 	}
 	assert(0 <= o->x);
 	assert(o->x < width_);
@@ -934,7 +931,7 @@ inline void Map::get_tln(const FCoords& f, FCoords* const o) const {
 	o->y = f.y - 1;
 	o->x = f.x;
 	o->field = f.field - width_;
-	if (o->y & 1) {
+	if ((o->y & 1) != 0) {
 		if (o->y == -1) {
 			o->y = height_ - 1;
 			o->field += max_index();
@@ -959,12 +956,14 @@ inline Coords Map::tl_n(const Coords& f) const {
 	assert(0 <= f.y);
 	assert(f.y < height_);
 	Coords result(f.x, f.y - 1);
-	if (result.y & 1) {
-		if (result.y == -1)
+	if ((result.y & 1) != 0) {
+		if (result.y == -1) {
 			result.y = height_ - 1;
+		}
 		--result.x;
-		if (result.x == -1)
+		if (result.x == -1) {
 			result.x = width_ - 1;
+		}
 	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
@@ -980,7 +979,7 @@ inline FCoords Map::tl_n(const FCoords& f) const {
 	assert(fields_.get() <= f.field);
 	assert(f.field < fields_.get() + max_index());
 	FCoords result(Coords(f.x, f.y - 1), f.field - width_);
-	if (result.y & 1) {
+	if ((result.y & 1) != 0) {
 		if (result.y == -1) {
 			result.y = height_ - 1;
 			result.field += max_index();
@@ -1008,12 +1007,13 @@ inline void Map::get_trn(const Coords& f, Coords* const o) const {
 	assert(0 <= f.y);
 	assert(f.y < height_);
 	o->x = f.x;
-	if (f.y & 1) {
+	if ((f.y & 1) != 0) {
 		++o->x;
-		if (o->x == width_)
+		if (o->x == width_) {
 			o->x = 0;
+		}
 	}
-	o->y = (f.y ? f.y : height_) - 1;
+	o->y = (f.y != 0 ? f.y : height_) - 1;
 	assert(0 <= o->x);
 	assert(o->x < width_);
 	assert(0 <= o->y);
@@ -1029,7 +1029,7 @@ inline void Map::get_trn(const FCoords& f, FCoords* const o) const {
 	assert(f.field < fields_.get() + max_index());
 	o->x = f.x;
 	o->field = f.field - width_;
-	if (f.y & 1) {
+	if ((f.y & 1) != 0) {
 		++o->x;
 		++o->field;
 		if (o->x == width_) {
@@ -1055,13 +1055,15 @@ inline Coords Map::tr_n(const Coords& f) const {
 	assert(0 <= f.y);
 	assert(f.y < height_);
 	Coords result(f.x, f.y - 1);
-	if (f.y & 1) {
+	if ((f.y & 1) != 0) {
 		++result.x;
-		if (result.x == width_)
+		if (result.x == width_) {
 			result.x = 0;
+		}
 	}
-	if (result.y == -1)
+	if (result.y == -1) {
 		result.y = height_ - 1;
+	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
 	assert(0 <= result.y);
@@ -1076,7 +1078,7 @@ inline FCoords Map::tr_n(const FCoords& f) const {
 	assert(fields_.get() <= f.field);
 	assert(f.field < fields_.get() + max_index());
 	FCoords result(Coords(f.x, f.y - 1), f.field - width_);
-	if (f.y & 1) {
+	if ((f.y & 1) != 0) {
 		++result.x;
 		++result.field;
 		if (result.x == width_) {
@@ -1105,10 +1107,12 @@ inline void Map::get_bln(const Coords& f, Coords* const o) const {
 	assert(f.y < height_);
 	o->y = f.y + 1;
 	o->x = f.x;
-	if (o->y == height_)
+	if (o->y == height_) {
 		o->y = 0;
-	if (o->y & 1)
-		o->x = (o->x ? o->x : width_) - 1;
+	}
+	if ((o->y & 1) != 0) {
+		o->x = (o->x != 0 ? o->x : width_) - 1;
+	}
 	assert(0 <= o->x);
 	assert(o->x < width_);
 	assert(0 <= o->y);
@@ -1129,7 +1133,7 @@ inline void Map::get_bln(const FCoords& f, FCoords* const o) const {
 		o->y = 0;
 		o->field -= max_index();
 	}
-	if (o->y & 1) {
+	if ((o->y & 1) != 0) {
 		--o->x;
 		--o->field;
 		if (o->x == -1) {
@@ -1150,12 +1154,14 @@ inline Coords Map::bl_n(const Coords& f) const {
 	assert(0 <= f.y);
 	assert(f.y < height_);
 	Coords result(f.x, f.y + 1);
-	if (result.y == height_)
+	if (result.y == height_) {
 		result.y = 0;
-	if (result.y & 1) {
+	}
+	if ((result.y & 1) != 0) {
 		--result.x;
-		if (result.x == -1)
+		if (result.x == -1) {
 			result.x = width_ - 1;
+		}
 	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
@@ -1175,7 +1181,7 @@ inline FCoords Map::bl_n(const FCoords& f) const {
 		result.y = 0;
 		result.field -= max_index();
 	}
-	if (result.y & 1) {
+	if ((result.y & 1) != 0) {
 		--result.x;
 		--result.field;
 		if (result.x == -1) {
@@ -1199,14 +1205,16 @@ inline void Map::get_brn(const Coords& f, Coords* const o) const {
 	assert(0 <= f.y);
 	assert(f.y < height_);
 	o->x = f.x;
-	if (f.y & 1) {
+	if ((f.y & 1) != 0) {
 		++o->x;
-		if (o->x == width_)
+		if (o->x == width_) {
 			o->x = 0;
+		}
 	}
 	o->y = f.y + 1;
-	if (o->y == height_)
+	if (o->y == height_) {
 		o->y = 0;
+	}
 	assert(0 <= o->x);
 	assert(o->x < width_);
 	assert(0 <= o->y);
@@ -1222,7 +1230,7 @@ inline void Map::get_brn(const FCoords& f, FCoords* const o) const {
 	assert(f.field < fields_.get() + max_index());
 	o->x = f.x;
 	o->field = f.field + width_;
-	if (f.y & 1) {
+	if ((f.y & 1) != 0) {
 		++o->x;
 		++o->field;
 		if (o->x == width_) {
@@ -1248,13 +1256,15 @@ inline Coords Map::br_n(const Coords& f) const {
 	assert(0 <= f.y);
 	assert(f.y < height_);
 	Coords result(f.x, f.y + 1);
-	if (f.y & 1) {
+	if ((f.y & 1) != 0) {
 		++result.x;
-		if (result.x == width_)
+		if (result.x == width_) {
 			result.x = 0;
+		}
 	}
-	if (result.y == height_)
+	if (result.y == height_) {
 		result.y = 0;
+	}
 	assert(0 <= result.x);
 	assert(result.x < width_);
 	assert(0 <= result.y);
@@ -1269,7 +1279,7 @@ inline FCoords Map::br_n(const FCoords& f) const {
 	assert(fields_.get() <= f.field);
 	assert(f.field < fields_.get() + max_index());
 	FCoords result(Coords(f.x, f.y + 1), f.field + width_);
-	if (f.y & 1) {
+	if ((f.y & 1) != 0) {
 		++result.x;
 		++result.field;
 		if (result.x == width_) {

@@ -68,9 +68,7 @@ initialization
 ============
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
-   : did_postload_addons_(false),
-     did_postload_tribes_(false),
-     gametime_(0),
+   : gametime_(0),
      // TODO(SirVer): this is sooo ugly, I can't say
      lua_(lua_interface != nullptr ? lua_interface : new LuaEditorInterface(this)),
      player_manager_(new PlayersManager(*this)),
@@ -262,7 +260,7 @@ const Player& EditorGameBase::player(const int32_t n) const {
 }
 
 void EditorGameBase::inform_players_about_ownership(MapIndex const i,
-                                                    PlayerNumber const new_owner) {
+                                                    PlayerNumber const new_owner) const {
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& player_field = p->fields_[i];
 		if (VisibleState::kVisible == player_field.vision) {
@@ -271,7 +269,7 @@ void EditorGameBase::inform_players_about_ownership(MapIndex const i,
 	}
 }
 void EditorGameBase::inform_players_about_immovable(MapIndex const i,
-                                                    MapObjectDescr const* const descr) {
+                                                    MapObjectDescr const* const descr) const {
 	if (!Road::is_road_descr(descr) && !Waterway::is_waterway_descr(descr)) {
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
@@ -294,7 +292,7 @@ void EditorGameBase::load_all_tribes() {
 	}
 }
 
-void EditorGameBase::allocate_player_maps() {
+void EditorGameBase::allocate_player_maps() const {
 	iterate_players_existing(plnum, kMaxPlayers, *this, p) {
 		p->allocate_map();
 	}
@@ -610,7 +608,7 @@ void EditorGameBase::full_cleanup() {
 
 void EditorGameBase::set_road(const FCoords& f,
                               uint8_t const direction,
-                              RoadSegment const roadtype) {
+                              RoadSegment const roadtype) const {
 	const Map& m = map();
 	const Field& first_field = m[0];
 	assert(0 <= f.x);
@@ -701,7 +699,7 @@ void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area,
 	do_conquer_area(player_area, true, 0, conquer_guarded_location);
 }
 
-void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const new_owner) {
+void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const new_owner) const {
 	const Field& first_field = map()[0];
 
 	PlayerNumber const old_owner = fc.field->get_owned_by();

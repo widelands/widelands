@@ -76,7 +76,7 @@ private:
 };
 
 struct CmdBulldoze : public PlayerCommand {
-	CmdBulldoze() : PlayerCommand(), serial(0), recurse(0) {
+	CmdBulldoze() : serial(0), recurse(false) {
 	}  // For savegame loading
 	CmdBulldoze(const Time& t, const int32_t p, PlayerImmovable& pi, const bool init_recurse = false)
 	   : PlayerCommand(t, p), serial(pi.serial()), recurse(init_recurse) {
@@ -100,7 +100,7 @@ private:
 };
 
 struct CmdBuild : public PlayerCommand {
-	CmdBuild() : PlayerCommand(), bi(0) {
+	CmdBuild() : bi(0) {
 	}  // For savegame loading
 	CmdBuild(const Time& init_duetime, const int32_t p, const Coords& c, const DescriptionIndex i)
 	   : PlayerCommand(init_duetime, p), coords(c), bi(i) {
@@ -124,8 +124,7 @@ private:
 };
 
 struct CmdBuildFlag : public PlayerCommand {
-	CmdBuildFlag() : PlayerCommand() {
-	}  // For savegame loading
+	CmdBuildFlag() = default;  // For savegame loading
 	CmdBuildFlag(const Time& t, const int32_t p, const Coords& c) : PlayerCommand(t, p), coords(c) {
 	}
 
@@ -146,7 +145,7 @@ private:
 };
 
 struct CmdBuildRoad : public PlayerCommand {
-	CmdBuildRoad() : PlayerCommand(), path(nullptr), start(), nsteps(0), steps(nullptr) {
+	CmdBuildRoad() : path(nullptr), start(), nsteps(0), steps(nullptr) {
 	}  // For savegame loading
 	CmdBuildRoad(const Time&, int32_t, Path&);
 	explicit CmdBuildRoad(StreamRead&);
@@ -171,7 +170,7 @@ private:
 };
 
 struct CmdBuildWaterway : public PlayerCommand {
-	CmdBuildWaterway() : PlayerCommand(), path(nullptr), start(), nsteps(0), steps(nullptr) {
+	CmdBuildWaterway() : path(nullptr), start(), nsteps(0), steps(nullptr) {
 	}  // For savegame loading
 	CmdBuildWaterway(const Time&, int32_t, Path&);
 	explicit CmdBuildWaterway(StreamRead&);
@@ -196,7 +195,7 @@ private:
 };
 
 struct CmdFlagAction : public PlayerCommand {
-	CmdFlagAction() : PlayerCommand(), serial_(0), type_(FlagJob::Type::kGeologist) {
+	CmdFlagAction() : serial_(0), type_(FlagJob::Type::kGeologist) {
 	}  // For savegame loading
 	CmdFlagAction(const Time& t, const int32_t p, const Flag& f, FlagJob::Type y)
 	   : PlayerCommand(t, p), serial_(f.serial()), type_(y) {
@@ -220,7 +219,7 @@ private:
 };
 
 struct CmdStartStopBuilding : public PlayerCommand {
-	CmdStartStopBuilding() : PlayerCommand(), serial(0) {
+	CmdStartStopBuilding() : serial(0) {
 	}  // For savegame loading
 	CmdStartStopBuilding(const Time& t, const PlayerNumber p, Building& b)
 	   : PlayerCommand(t, p), serial(b.serial()) {
@@ -243,8 +242,7 @@ private:
 };
 
 struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {
-	CmdMilitarySiteSetSoldierPreference()
-	   : PlayerCommand(), serial(0), preference(SoldierPreference::kRookies) {
+	CmdMilitarySiteSetSoldierPreference() : serial(0), preference(SoldierPreference::kRookies) {
 	}  // For savegame loading
 	CmdMilitarySiteSetSoldierPreference(const Time& t,
 	                                    const PlayerNumber p,
@@ -270,7 +268,7 @@ private:
 	Widelands::SoldierPreference preference;
 };
 struct CmdStartOrCancelExpedition : public PlayerCommand {
-	CmdStartOrCancelExpedition() : PlayerCommand(), serial(kInvalidSerial) {
+	CmdStartOrCancelExpedition() : serial(kInvalidSerial) {
 	}  // For savegame loading
 	CmdStartOrCancelExpedition(const Time& t, PlayerNumber const p, Building& b)
 	   : PlayerCommand(t, p), serial(b.serial()) {
@@ -293,8 +291,7 @@ private:
 };
 
 struct CmdExpeditionConfig : public PlayerCommand {
-	CmdExpeditionConfig()
-	   : PlayerCommand(), serial(kInvalidSerial), type(wwWARE), index(0), add(false) {
+	CmdExpeditionConfig() : serial(kInvalidSerial), type(wwWARE), index(0), add(false) {
 	}  // For savegame loading
 	CmdExpeditionConfig(
 	   const Time& t, PlayerNumber const p, PortDock& pd, WareWorker ww, DescriptionIndex di, bool a)
@@ -321,7 +318,7 @@ private:
 };
 
 struct CmdEnhanceBuilding : public PlayerCommand {
-	CmdEnhanceBuilding() : PlayerCommand(), serial_(0), bi_(0), keep_wares_(false) {
+	CmdEnhanceBuilding() : serial_(0), bi_(0), keep_wares_(false) {
 	}  // For savegame loading
 	CmdEnhanceBuilding(
 	   const Time& init_duetime, const int32_t p, Building& b, const DescriptionIndex i, bool kw)
@@ -348,7 +345,7 @@ private:
 };
 
 struct CmdDismantleBuilding : public PlayerCommand {
-	CmdDismantleBuilding() : PlayerCommand(), serial_(0), keep_wares_(false) {
+	CmdDismantleBuilding() : serial_(0), keep_wares_(false) {
 	}  // For savegame loading
 	CmdDismantleBuilding(const Time& t, const int32_t p, PlayerImmovable& pi, bool kw)
 	   : PlayerCommand(t, p), serial_(pi.serial()), keep_wares_(kw) {
@@ -373,7 +370,7 @@ private:
 };
 
 struct CmdEvictWorker : public PlayerCommand {
-	CmdEvictWorker() : PlayerCommand(), serial(0) {
+	CmdEvictWorker() : serial(0) {
 	}  // For savegame loading
 	CmdEvictWorker(const Time& t, const int32_t p, Worker& w)
 	   : PlayerCommand(t, p), serial(w.serial()) {
@@ -397,7 +394,7 @@ private:
 };
 
 struct CmdShipScoutDirection : public PlayerCommand {
-	CmdShipScoutDirection() : PlayerCommand(), serial(0), dir(WalkingDir::IDLE) {
+	CmdShipScoutDirection() : serial(0), dir(WalkingDir::IDLE) {
 	}  // For savegame loading
 	CmdShipScoutDirection(const Time& t, PlayerNumber const p, Serial s, WalkingDir direction)
 	   : PlayerCommand(t, p), serial(s), dir(direction) {
@@ -421,7 +418,7 @@ private:
 };
 
 struct CmdShipConstructPort : public PlayerCommand {
-	CmdShipConstructPort() : PlayerCommand(), serial(0) {
+	CmdShipConstructPort() : serial(0) {
 	}  // For savegame loading
 	CmdShipConstructPort(const Time& t, PlayerNumber const p, Serial s, Coords c)
 	   : PlayerCommand(t, p), serial(s), coords(c) {
@@ -445,8 +442,7 @@ private:
 };
 
 struct CmdShipExploreIsland : public PlayerCommand {
-	CmdShipExploreIsland()
-	   : PlayerCommand(), serial(0), island_explore_direction(IslandExploreDirection::kNotSet) {
+	CmdShipExploreIsland() : serial(0), island_explore_direction(IslandExploreDirection::kNotSet) {
 	}  // For savegame loading
 	CmdShipExploreIsland(const Time& t,
 	                     PlayerNumber const p,
@@ -473,7 +469,7 @@ private:
 };
 
 struct CmdShipSink : public PlayerCommand {
-	CmdShipSink() : PlayerCommand(), serial(0) {
+	CmdShipSink() : serial(0) {
 	}  // For savegame loading
 	CmdShipSink(const Time& t, PlayerNumber const p, Serial s) : PlayerCommand(t, p), serial(s) {
 	}
@@ -495,7 +491,7 @@ private:
 };
 
 struct CmdShipCancelExpedition : public PlayerCommand {
-	CmdShipCancelExpedition() : PlayerCommand(), serial(0) {
+	CmdShipCancelExpedition() : serial(0) {
 	}  // For savegame loading
 	CmdShipCancelExpedition(const Time& t, PlayerNumber const p, Serial s)
 	   : PlayerCommand(t, p), serial(s) {
@@ -520,8 +516,7 @@ private:
 struct CmdSetWarePriority : public PlayerCommand {
 	// For savegame loading
 	CmdSetWarePriority()
-	   : PlayerCommand(),
-	     serial_(0),
+	   : serial_(0),
 	     type_(wwWARE),
 	     priority_(WarePriority::kNormal),
 	     is_constructionsite_setting_(false) {
@@ -557,11 +552,7 @@ private:
 
 struct CmdSetInputMaxFill : public PlayerCommand {
 	CmdSetInputMaxFill()
-	   : PlayerCommand(),
-	     serial_(0),
-	     type_(wwWARE),
-	     max_fill_(0),
-	     is_constructionsite_setting_(false) {
+	   : serial_(0), type_(wwWARE), max_fill_(0), is_constructionsite_setting_(false) {
 	}  // For savegame loading
 	CmdSetInputMaxFill(const Time& duetime,
 	                   PlayerNumber,
@@ -593,7 +584,7 @@ private:
 };
 
 struct CmdChangeTargetQuantity : public PlayerCommand {
-	CmdChangeTargetQuantity() : PlayerCommand(), economy_(0), ware_type_() {
+	CmdChangeTargetQuantity() : economy_(0), ware_type_() {
 	}  //  For savegame loading.
 	CmdChangeTargetQuantity(const Time& duetime,
 	                        PlayerNumber sender,
@@ -622,7 +613,7 @@ private:
 };
 
 struct CmdSetWareTargetQuantity : public CmdChangeTargetQuantity {
-	CmdSetWareTargetQuantity() : CmdChangeTargetQuantity(), permanent_(0) {
+	CmdSetWareTargetQuantity() : permanent_(0) {
 	}
 	CmdSetWareTargetQuantity(const Time& duetime,
 	                         PlayerNumber sender,
@@ -648,7 +639,7 @@ private:
 };
 
 struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
-	CmdSetWorkerTargetQuantity() : CmdChangeTargetQuantity(), permanent_(0) {
+	CmdSetWorkerTargetQuantity() : permanent_(0) {
 	}
 	CmdSetWorkerTargetQuantity(const Time& duetime,
 	                           PlayerNumber sender,
@@ -674,8 +665,7 @@ private:
 };
 
 struct CmdChangeTrainingOptions : public PlayerCommand {
-	CmdChangeTrainingOptions()
-	   : PlayerCommand(), serial(0), attribute(TrainingAttribute::kHealth), value(0) {
+	CmdChangeTrainingOptions() : serial(0), attribute(TrainingAttribute::kHealth), value(0) {
 	}  // For savegame loading
 	CmdChangeTrainingOptions(const Time& t,
 	                         const PlayerNumber p,
@@ -705,7 +695,7 @@ private:
 };
 
 struct CmdDropSoldier : public PlayerCommand {
-	CmdDropSoldier() : PlayerCommand(), serial(0), soldier(0) {
+	CmdDropSoldier() : serial(0), soldier(0) {
 	}  //  for savegames
 	CmdDropSoldier(const Time& t, const int32_t p, Building& b, const int32_t init_soldier)
 	   : PlayerCommand(t, p), serial(b.serial()), soldier(init_soldier) {
@@ -730,7 +720,7 @@ private:
 };
 
 struct CmdChangeSoldierCapacity : public PlayerCommand {
-	CmdChangeSoldierCapacity() : PlayerCommand(), serial(0), val(0) {
+	CmdChangeSoldierCapacity() : serial(0), val(0) {
 	}  //  for savegames
 	CmdChangeSoldierCapacity(const Time& t, const int32_t p, Building& b, const int32_t i)
 	   : PlayerCommand(t, p), serial(b.serial()), val(i) {
@@ -755,7 +745,7 @@ private:
 };
 
 struct CmdEnemyFlagAction : public PlayerCommand {
-	CmdEnemyFlagAction() : PlayerCommand(), serial_(0), allow_conquer_(true) {
+	CmdEnemyFlagAction() : serial_(0), allow_conquer_(true) {
 	}  // For savegame loading
 	CmdEnemyFlagAction(const Time& t, int32_t p, const Flag& f, const std::vector<Serial>& s, bool c)
 	   : PlayerCommand(t, p), serial_(f.serial()), soldiers_(s), allow_conquer_(c) {
@@ -782,8 +772,7 @@ private:
 
 /// Abstract base for commands about a message.
 struct PlayerMessageCommand : public PlayerCommand {
-	PlayerMessageCommand() : PlayerCommand() {
-	}  //  for savegames
+	PlayerMessageCommand() = default;  //  for savegames
 	PlayerMessageCommand(const Time& t, const PlayerNumber p, const MessageId& i)
 	   : PlayerCommand(t, p), message_id_(i) {
 	}
@@ -802,8 +791,7 @@ private:
 };
 
 struct CmdMessageSetStatusRead : public PlayerMessageCommand {
-	CmdMessageSetStatusRead() : PlayerMessageCommand() {
-	}
+	CmdMessageSetStatusRead() = default;
 	CmdMessageSetStatusRead(const Time& t, const PlayerNumber p, const MessageId& i)
 	   : PlayerMessageCommand(t, p, i) {
 	}
@@ -820,8 +808,7 @@ struct CmdMessageSetStatusRead : public PlayerMessageCommand {
 };
 
 struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
-	CmdMessageSetStatusArchived() : PlayerMessageCommand() {
-	}
+	CmdMessageSetStatusArchived() = default;
 	CmdMessageSetStatusArchived(const Time& t, const PlayerNumber p, const MessageId& i)
 	   : PlayerMessageCommand(t, p, i) {
 	}
@@ -906,7 +893,7 @@ struct CmdToggleMuteMessages : PlayerCommand {
 	explicit CmdToggleMuteMessages(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdToggleMuteMessages() : PlayerCommand(), building_(kInvalidSerial), all_(false) {
+	CmdToggleMuteMessages() : building_(kInvalidSerial), all_(false) {
 	}
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -930,7 +917,7 @@ struct CmdMarkMapObjectForRemoval : PlayerCommand {
 	explicit CmdMarkMapObjectForRemoval(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdMarkMapObjectForRemoval() : PlayerCommand(), object_(kInvalidSerial), mark_(false) {
+	CmdMarkMapObjectForRemoval() : object_(kInvalidSerial), mark_(false) {
 	}
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -954,7 +941,7 @@ struct CmdDiplomacy : PlayerCommand {
 	explicit CmdDiplomacy(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdDiplomacy() : PlayerCommand(), action_(DiplomacyAction::kResign), other_player_(0) {
+	CmdDiplomacy() : action_(DiplomacyAction::kResign), other_player_(0) {
 	}
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -983,8 +970,7 @@ struct CmdPinnedNote : PlayerCommand {
 	explicit CmdPinnedNote(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdPinnedNote() : PlayerCommand() {
-	}
+	CmdPinnedNote() = default;
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
@@ -1009,8 +995,7 @@ struct CmdPickCustomStartingPosition : PlayerCommand {
 	explicit CmdPickCustomStartingPosition(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdPickCustomStartingPosition() : PlayerCommand() {
-	}
+	CmdPickCustomStartingPosition() = default;
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 

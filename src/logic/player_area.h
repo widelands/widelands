@@ -24,11 +24,10 @@
 namespace Widelands {
 
 template <typename AreaType = Area<>> struct PlayerArea : public AreaType {
-	PlayerArea() : player_number(0) {
-	}
+	PlayerArea() = default;
 	PlayerArea(const PlayerNumber pn, const AreaType area) : AreaType(area), player_number(pn) {
 	}
-	PlayerNumber player_number;
+	PlayerNumber player_number = 0;
 };
 }  // namespace Widelands
 

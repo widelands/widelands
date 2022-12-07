@@ -66,18 +66,10 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
      num_soldiers_(table.get_int("soldier_capacity")),
      max_stall_(table.get_int("trainer_patience")),
 
-     train_health_(false),
-     train_attack_(false),
-     train_defense_(false),
-     train_evade_(false),
      min_health_(std::numeric_limits<uint32_t>::max()),
      min_attack_(std::numeric_limits<uint32_t>::max()),
      min_defense_(std::numeric_limits<uint32_t>::max()),
-     min_evade_(std::numeric_limits<uint32_t>::max()),
-     max_health_(0),
-     max_attack_(0),
-     max_defense_(0),
-     max_evade_(0) {
+     min_evade_(std::numeric_limits<uint32_t>::max()) {
 	// Read the range of levels that can update this building
 	//  TODO(unknown): This is currently hardcoded to "soldier" but it should search for
 	//  sections starting with the name of each soldier type.
@@ -382,10 +374,8 @@ class TrainingSite
 TrainingSite::TrainingSite(const TrainingSiteDescr& d)
    : ProductionSite(d),
      soldier_control_(this),
-     soldier_request_(nullptr),
-     capacity_(descr().get_max_number_of_soldiers()),
-     build_heroes_(false),
-     result_(ProgramResult::kFailed) {
+
+     capacity_(descr().get_max_number_of_soldiers()) {
 	set_soldier_control(&soldier_control_);
 
 	// Initialize this in the constructor so that loading code may

@@ -35,7 +35,7 @@ class EditorGameBase;
 class Battle;
 
 struct SoldierLevelRange {
-	SoldierLevelRange();
+	SoldierLevelRange() = default;
 	explicit SoldierLevelRange(const LuaTable&);
 	SoldierLevelRange(const SoldierLevelRange&) = default;
 	SoldierLevelRange& operator=(const SoldierLevelRange& other) = default;
@@ -50,14 +50,14 @@ struct SoldierLevelRange {
 		       max_defense == other.max_defense && max_evade == other.max_evade;
 	}
 
-	int32_t min_health;
-	int32_t min_attack;
-	int32_t min_defense;
-	int32_t min_evade;
-	int32_t max_health;
-	int32_t max_attack;
-	int32_t max_defense;
-	int32_t max_evade;
+	int32_t min_health = -1;
+	int32_t min_attack = -1;
+	int32_t min_defense = -1;
+	int32_t min_evade = -1;
+	int32_t max_health = -1;
+	int32_t max_attack = -1;
+	int32_t max_defense = -1;
+	int32_t max_evade = -1;
 };
 using SoldierAnimationsList = std::map<std::string, SoldierLevelRange>;
 
@@ -66,8 +66,7 @@ public:
 	friend class Economy;
 
 	SoldierDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
-	~SoldierDescr() override {
-	}
+	~SoldierDescr() override = default;
 
 	uint32_t get_max_health_level() const {
 		return health_.max_level;
@@ -138,7 +137,7 @@ public:
 
 	uint32_t get_rand_anim(Game& game, const std::string& name, const Soldier* soldier) const;
 
-	const DirAnimations& get_right_walk_anims(bool const ware, Worker* w) const override;
+	const DirAnimations& get_right_walk_anims(bool ware, Worker* w) const override;
 	uint32_t get_animation(const std::string& anim, const MapObject* mo = nullptr) const override;
 
 protected:
@@ -174,7 +173,7 @@ private:
 	SoldierAnimationsList evade_failure_e_name_;
 	SoldierAnimationsList die_e_name_;
 
-	uint16_t max_anim_height_;
+	uint16_t max_anim_height_{0};
 
 	// We can have per-level walking and idle anims
 	// NOTE: I expect no soldier will ever agree to carry a ware, so we don't provide animations for
@@ -249,7 +248,7 @@ public:
 	void init_auto_task(Game&) override;
 
 	Vector2f
-	calc_drawpos(const EditorGameBase& game, const Vector2f& field_on_dst, const float scale) const;
+	calc_drawpos(const EditorGameBase& game, const Vector2f& field_on_dst, float scale) const;
 
 	/// Draw this soldier
 	void draw(const EditorGameBase&,
@@ -265,9 +264,9 @@ public:
 	// true, the icon is drawn horizontally centered above Otherwise, the icon
 	// is drawn below and right of 'draw_position'.
 	void draw_info_icon(Vector2i draw_position,
-	                    const float scale,
-	                    const InfoMode draw_mode,
-	                    const InfoToDraw info_to_draw,
+	                    float scale,
+	                    InfoMode draw_mode,
+	                    InfoToDraw info_to_draw,
 	                    RenderTarget*) const;
 
 	unsigned get_current_health() const {
@@ -390,7 +389,7 @@ private:
 protected:
 	struct Loader : public Worker::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&) override;
 		void load_pointers() override;
@@ -399,7 +398,7 @@ protected:
 		const Task* get_task(const std::string& name) override;
 
 	private:
-		uint32_t battle_;
+		uint32_t battle_{0};
 	};
 
 	Loader* create_loader() override;
