@@ -20,6 +20,7 @@
 #define WL_WUI_INTERACTIVE_BASE_H
 
 #include <memory>
+#include <optional>
 
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
@@ -157,7 +158,8 @@ public:
 	void start_build_road(Widelands::Coords start, Widelands::PlayerNumber player, RoadBuildingType);
 	void abort_build_road();
 	void finish_build_road();
-	bool append_build_road(Widelands::Coords field);
+	bool append_build_road(Widelands::Coords field, bool is_preview);
+	[[nodiscard]] std::optional<Widelands::CoordPath> try_append_build_road(Widelands::Coords field) const;
 	Widelands::Coords get_build_road_start() const;
 	Widelands::Coords get_build_road_end() const;
 	Widelands::CoordPath get_build_road_path() const;
@@ -318,12 +320,16 @@ protected:
 		}
 		const Widelands::PlayerNumber player;
 		Widelands::CoordPath path;
+		std::optional<Widelands::CoordPath> preview_path;
 		const RoadBuildingType type;
 		std::unique_ptr<WorkareaInfo> work_area;
-		std::map<Widelands::Coords, std::vector<uint8_t>> overlay_road_previews;
+		using PreviewPathMap = std::map<Widelands::Coords, std::vector<uint8_t>>;
+		PreviewPathMap overlay_road_previews;
+		PreviewPathMap overlay_roadpreview_previews;
 		std::map<Widelands::Coords, const Image*> overlay_steepness_indicators;
 	};
-	std::map<Widelands::Coords, std::vector<uint8_t>> road_building_preview_overlays() const;
+	RoadBuildingMode::PreviewPathMap road_building_preview_overlays() const;
+	RoadBuildingMode::PreviewPathMap road_building_preview_preview_overlays() const;
 	std::map<Widelands::Coords, const Image*> road_building_steepness_overlays() const;
 
 	/// Returns true if there is a workarea preview being shown at the given coordinates.
@@ -351,6 +357,7 @@ private:
 	void play_sound_effect(const NoteSound& note) const;
 	void resize_chat_overlay();
 	void road_building_add_overlay();
+	void road_building_add_overlay(const Widelands::CoordPath& path, RoadBuildingMode::PreviewPathMap& target, bool steepness);
 	void road_building_remove_overlay();
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args);
