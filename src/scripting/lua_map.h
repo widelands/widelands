@@ -165,7 +165,7 @@ public:
 	 * C methods
 	 */
 protected:
-	const Widelands::TribeDescr* get() const {
+	[[nodiscard]] const Widelands::TribeDescr* get() const {
 		assert(tribedescr_ != nullptr);
 		return tribedescr_;
 	}
@@ -216,7 +216,7 @@ public:
 	 * C methods
 	 */
 protected:
-	const Widelands::MapObjectDescr* get() const {
+	[[nodiscard]] const Widelands::MapObjectDescr* get() const {
 		assert(mapobjectdescr_ != nullptr);
 		return mapobjectdescr_;
 	}
@@ -469,10 +469,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_food_attack(lua_State*);
-	int get_food_defense(lua_State*);
-	int get_food_evade(lua_State*);
-	int get_food_health(lua_State*);
 	int get_max_attack(lua_State*);
 	int get_max_defense(lua_State*);
 	int get_max_evade(lua_State*);
@@ -482,14 +478,12 @@ public:
 	int get_min_defense(lua_State*);
 	int get_min_evade(lua_State*);
 	int get_min_health(lua_State*);
-	int get_weapons_attack(lua_State*);
-	int get_weapons_defense(lua_State*);
-	int get_weapons_evade(lua_State*);
-	int get_weapons_health(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+
+	int trained_soldiers(lua_State*);
 
 	/*
 	 * C methods
@@ -764,7 +758,7 @@ public:
 	 * C methods
 	 */
 protected:
-	const Widelands::ResourceDescription* get() const {
+	[[nodiscard]] const Widelands::ResourceDescription* get() const {
 		assert(resourcedescr_ != nullptr);
 		return resourcedescr_;
 	}
@@ -818,7 +812,7 @@ public:
 	/*
 	 * C methods
 	 */
-	const Widelands::TerrainDescription* get() const {
+	[[nodiscard]] const Widelands::TerrainDescription* get() const {
 		assert(terraindescr_ != nullptr);
 		return terraindescr_;
 	}
@@ -869,7 +863,7 @@ public:
 	 */
 
 protected:
-	Widelands::Economy* get() const {
+	[[nodiscard]] Widelands::Economy* get() const {
 		assert(economy_ != nullptr);
 		return economy_;
 	}

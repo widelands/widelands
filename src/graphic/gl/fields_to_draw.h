@@ -66,7 +66,7 @@ public:
 		int bln_index;
 		int brn_index;
 
-		inline bool all_neighbors_valid() const {
+		[[nodiscard]] inline bool all_neighbors_valid() const {
 			return ln_index != kInvalidIndex && rn_index != kInvalidIndex &&
 			       trn_index != kInvalidIndex && bln_index != kInvalidIndex &&
 			       brn_index != kInvalidIndex;
@@ -80,12 +80,12 @@ public:
 	           RenderTarget* dst);
 
 	// The number of fields to draw.
-	inline size_t size() const {
+	[[nodiscard]] inline size_t size() const {
 		return fields_.size();
 	}
 
 	// Get the field at 'index' which must be in bound.
-	inline const Field& at(const int index) const {
+	[[nodiscard]] inline const Field& at(const int index) const {
 		return fields_.at(index);
 	}
 
@@ -97,7 +97,7 @@ public:
 	// Calculates the index of the given field with ('fx', 'fy') being geometric
 	// coordinates in the map. Returns INVALID_INDEX if this field is not in the
 	// fields_to_draw.
-	inline int calculate_index(int fx, int fy) const {
+	[[nodiscard]] inline int calculate_index(int fx, int fy) const {
 		if (fx < min_fx_ || fx > max_fx_ || fy < min_fy_ || fy > max_fy_) {
 			return kInvalidIndex;
 		}

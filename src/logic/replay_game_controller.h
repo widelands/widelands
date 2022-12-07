@@ -50,7 +50,7 @@ private:
 		explicit CmdReplayEnd(const Time& init_duetime) : Widelands::Command(init_duetime) {
 		}
 		void execute(Widelands::Game& game) override;
-		Widelands::QueueCommandTypes id() const override;
+		[[nodiscard]] Widelands::QueueCommandTypes id() const override;
 	};
 
 	Widelands::Game& game_;

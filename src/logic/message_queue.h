@@ -47,13 +47,13 @@ struct MessageQueue {
 	//  Make some selected inherited members public.
 	//  TODO(sirver): This is weird design. Instead pass out a const ref& to
 	//  'messages_'?
-	MessageMap::const_iterator begin() const {
+	[[nodiscard]] MessageMap::const_iterator begin() const {
 		return messages_.begin();
 	}
-	MessageMap::const_iterator end() const {
+	[[nodiscard]] MessageMap::const_iterator end() const {
 		return messages_.end();
 	}
-	size_t count(uint32_t const i) const {
+	[[nodiscard]] size_t count(uint32_t const i) const {
 		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		return messages_.count(MessageId(i));
@@ -68,7 +68,7 @@ struct MessageQueue {
 	}
 
 	/// \returns the number of messages with the given status.
-	uint32_t nr_messages(Message::Status const status) const {
+	[[nodiscard]] uint32_t nr_messages(Message::Status const status) const {
 		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		assert(static_cast<int>(status) < 3);
@@ -124,14 +124,14 @@ struct MessageQueue {
 		assert_counts();
 	}
 
-	MessageId current_message_id() const {
+	[[nodiscard]] MessageId current_message_id() const {
 		return current_message_id_;
 	}
 
 	/// \returns whether all messages with id 1, 2, 3, ..., current_message_id
 	/// exist. This should be the case when messages have been loaded from a map
 	/// file/savegame but the simulation has not started to run yet.
-	bool is_continuous() const {
+	[[nodiscard]] bool is_continuous() const {
 		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		return current_message_id().value() == messages_.size();

@@ -65,42 +65,6 @@ wl.Descriptions():new_trainingsite_type {
       { name = "protector_padded", amount = 2 },
    },
 
-   ["soldier evade"] = {
-      food = {
-         {"fish", "meat"},
-         {"chocolate"},
-         {"amazons_bread"}
-      },
-      weapons = {
-         "boots_sturdy",
-         "boots_swift",
-         "boots_hero",
-      }
-   },
-   ["soldier health"] = {
-      food = {
-         {"fish", "meat"},
-         {"chocolate"},
-         {"amazons_bread"}
-      },
-      weapons = {
-         "armor_wooden",
-         "helmet_wooden",
-         "warriors_coat",
-      }
-   },
-   ["soldier defense"] = {
-      food = {
-         {"fish", "meat"},
-         {"chocolate"},
-         {"amazons_bread"}
-      },
-      weapons = {
-         "vest_padded",
-         "protector_padded"
-      }
-   },
-
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...

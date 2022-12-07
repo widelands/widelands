@@ -55,17 +55,17 @@ public:
 
 	Bob& create(EditorGameBase&, Player* owner, const Coords&) const;
 
-	MapObjectDescr::OwnerType get_owner_type() const {
+	[[nodiscard]] MapObjectDescr::OwnerType get_owner_type() const {
 		return owner_type_;
 	}
 
-	virtual uint32_t movecaps() const {
+	[[nodiscard]] virtual uint32_t movecaps() const {
 		return 0;
 	}
-	uint32_t vision_range() const;
+	[[nodiscard]] uint32_t vision_range() const;
 
 protected:
-	virtual Bob& create_object() const = 0;
+	[[nodiscard]] virtual Bob& create_object() const = 0;
 
 private:
 	const MapObjectDescr::OwnerType owner_type_;

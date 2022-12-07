@@ -60,31 +60,6 @@ wl.Descriptions():new_trainingsite_type {
       { name = "armor_gilded", amount = 2 },
    },
 
-   ["soldier attack"] = {
-      food = {
-         {"fish", "meat"},
-         {"empire_bread"}
-      },
-      weapons = {
-         "spear",
-         "spear_advanced",
-         "spear_heavy",
-         "spear_war"
-      }
-   },
-   ["soldier health"] = {
-      food = {
-         {"fish", "meat"},
-         {"empire_bread"}
-      },
-      weapons = {
-         "armor_helmet",
-         "armor",
-         "armor_chain",
-         "armor_gilded"
-      }
-   },
-
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...

@@ -30,8 +30,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/main.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 constexpr int16_t kButtonSize = 32;
 constexpr int16_t kSpacing = 4;
@@ -598,5 +597,4 @@ void CampaignAddOnsPackagerBox::layout() {
 	AddOnsPackagerBox::layout();
 }
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

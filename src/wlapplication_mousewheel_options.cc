@@ -44,7 +44,7 @@ public:
 		return MousewheelOption(n, MousewheelOptionType::kBool, def ? 1 : 0);
 	}
 
-	bool get_bool() const {
+	[[nodiscard]] bool get_bool() const {
 		assert(type_ == MousewheelOptionType::kBool);
 		const bool def = (default_ != 0);
 		if (internal_name_.empty()) {
@@ -52,7 +52,7 @@ public:
 		}
 		return get_config_bool("mousewheel", internal_name_, def);
 	}
-	uint16_t get_keymod() const {
+	[[nodiscard]] uint16_t get_keymod() const {
 		assert(type_ == MousewheelOptionType::kKeymod);
 		if (internal_name_.empty()) {
 			return default_;
@@ -127,17 +127,19 @@ struct MousewheelHandlerOptions {
 		}
 	}
 
-	bool can_handle(const int32_t x, const int32_t y, const uint16_t modstate) const {
+	[[nodiscard]] bool can_handle(const int32_t x, const int32_t y, const uint16_t modstate) const {
 		return ((((y != 0) && (current_sign_y_ != 0)) || ((x != 0) && (current_sign_x_ != 0))) &&
 		        matches_keymod(current_keymod_, modstate));
 	}
-	int32_t get_change(const int32_t x, const int32_t y, const uint16_t modstate) const {
+	[[nodiscard]] int32_t
+	get_change(const int32_t x, const int32_t y, const uint16_t modstate) const {
 		if (can_handle(x, y, modstate)) {
 			return (x * current_sign_x_ + y * current_sign_y_);
 		}
 		return 0;
 	}
-	Vector2i get_change_2D(const int32_t x, const int32_t y, const uint16_t modstate) const {
+	[[nodiscard]] Vector2i
+	get_change_2D(const int32_t x, const int32_t y, const uint16_t modstate) const {
 		if (can_handle(x, y, modstate)) {
 			return Vector2i(x * current_sign_x_, y * current_sign_y_);
 		}
@@ -179,6 +181,7 @@ static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options =
    {MousewheelOptionID::kAlwaysOn, MousewheelOption::create_bool("", true)},
    {MousewheelOptionID::kDisabled, MousewheelOption::create_bool("", false)},
    {MousewheelOptionID::kNoMod, MousewheelOption::create_mod("", KMOD_NONE)},
+   {MousewheelOptionID::kModBigStep, MousewheelOption::create_mod("", KMOD_CTRL)},
 
    {MousewheelOptionID::kInvertedXDetected,  //
     MousewheelOption::create_bool("last_autoinvert_x", false)},
@@ -201,6 +204,13 @@ static const Sign2D kDefaultSignScroll(kSignScrollX, kSignScrollY);
 static std::map<MousewheelHandlerConfigID, MousewheelHandlerOptions> mousewheel_handlers = {
    {MousewheelHandlerConfigID::kChangeValue,
     MousewheelHandlerOptions(MousewheelOptionID::kNoMod,
+                             MousewheelOptionID::kAlwaysOn,
+                             MousewheelOptionID::kUIChangeValueInvertX,
+                             MousewheelOptionID::kAlwaysOn,
+                             MousewheelOptionID::kUIChangeValueInvertY,
+                             kDefaultSignValue)},
+   {MousewheelHandlerConfigID::kChangeValueBig,
+    MousewheelHandlerOptions(MousewheelOptionID::kModBigStep,
                              MousewheelOptionID::kAlwaysOn,
                              MousewheelOptionID::kUIChangeValueInvertX,
                              MousewheelOptionID::kAlwaysOn,

@@ -124,25 +124,6 @@ int wares_or_workers_map_to_lua(lua_State* L,
 	return 1;
 }
 
-// Pushes a lua table of tables with food ware names on the stack. Returns 1.
-// Resulting table will look e.g. like {{"barbarians_bread"}, {"fish", "meat"}}
-int food_list_to_lua(lua_State* L, const std::vector<std::vector<std::string>>& table) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const std::vector<std::string>& foodlist : table) {
-		lua_pushuint32(L, ++counter);
-		lua_newtable(L);
-		int counter2 = 0;
-		for (const std::string& foodname : foodlist) {
-			lua_pushuint32(L, ++counter2);
-			lua_pushstring(L, foodname);
-			lua_settable(L, -3);
-		}
-		lua_settable(L, -3);
-	}
-	return 1;
-}
-
 struct SoldierMapDescr {
 	SoldierMapDescr(uint8_t init_health,
 	                uint8_t init_attack,
@@ -3343,13 +3324,10 @@ TrainingSiteDescription
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
+   METHOD(LuaTrainingSiteDescription, trained_soldiers),
    {nullptr, nullptr},
 };
 const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Properties[] = {
-   PROP_RO(LuaTrainingSiteDescription, food_attack),
-   PROP_RO(LuaTrainingSiteDescription, food_defense),
-   PROP_RO(LuaTrainingSiteDescription, food_evade),
-   PROP_RO(LuaTrainingSiteDescription, food_health),
    PROP_RO(LuaTrainingSiteDescription, max_attack),
    PROP_RO(LuaTrainingSiteDescription, max_defense),
    PROP_RO(LuaTrainingSiteDescription, max_evade),
@@ -3359,10 +3337,6 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
    PROP_RO(LuaTrainingSiteDescription, min_defense),
    PROP_RO(LuaTrainingSiteDescription, min_evade),
    PROP_RO(LuaTrainingSiteDescription, min_health),
-   PROP_RO(LuaTrainingSiteDescription, weapons_attack),
-   PROP_RO(LuaTrainingSiteDescription, weapons_defense),
-   PROP_RO(LuaTrainingSiteDescription, weapons_evade),
-   PROP_RO(LuaTrainingSiteDescription, weapons_health),
    {nullptr, nullptr, nullptr},
 };
 
@@ -3371,46 +3345,6 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
  PROPERTIES
  ==========================================================
  */
-
-/* RST
-   .. attribute:: food_attack
-
-      (RO) A :class:`table` of tables with food ware names used for attack training,
-      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
-*/
-int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
-	return food_list_to_lua(L, get()->get_food_attack());
-}
-
-/* RST
-   .. attribute:: food_defense
-
-      (RO) A :class:`table` of tables with food ware names used for defense training,
-      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
-*/
-int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
-	return food_list_to_lua(L, get()->get_food_defense());
-}
-
-/* RST
-   .. attribute:: food_evade
-
-      (RO) A :class:`table` of tables with food ware names used for evade training,
-      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
-*/
-int LuaTrainingSiteDescription::get_food_evade(lua_State* L) {
-	return food_list_to_lua(L, get()->get_food_evade());
-}
-
-/* RST
-   .. attribute:: food_health
-
-      (RO) A :class:`table` of tables with food ware names used for health training,
-      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
-*/
-int LuaTrainingSiteDescription::get_food_health(lua_State* L) {
-	return food_list_to_lua(L, get()->get_food_health());
-}
 
 /* RST
    .. attribute:: max_attack
@@ -3543,64 +3477,31 @@ int LuaTrainingSiteDescription::get_min_health(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: weapons_attack
+   .. method:: trained_soldiers(program_name)
 
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Attack training.
+Returns a :class:`table` with following entries [1] = the trained skill, [2] = the starting level,
+      [3] = the resulting level trained by this production program.
+      See :ref:`production site programs <productionsite_programs>`.
+
+      :arg program_name: the name of the production program that we want to get the trained
+         soldiers for.
+      :type program_name: :class:`string`
+
 */
-int LuaTrainingSiteDescription::get_weapons_attack(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const std::string& weaponname : get()->get_weapons_attack()) {
-		lua_pushuint32(L, ++counter);
-		lua_pushstring(L, weaponname);
+int LuaTrainingSiteDescription::trained_soldiers(lua_State* L) {
+	std::string program_name = luaL_checkstring(L, -1);
+	const Widelands::ProductionSiteDescr::Programs& programs = get()->programs();
+	if (programs.count(program_name) == 1) {
+		const Widelands::ProductionProgram& program = *programs.at(program_name);
+		lua_newtable(L);
+		lua_pushint32(L, 1);
+		lua_pushstring(L, program.trained_attribute());
 		lua_settable(L, -3);
-	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: weapons_defense
-
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Defense training.
-*/
-int LuaTrainingSiteDescription::get_weapons_defense(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const std::string& weaponname : get()->get_weapons_defense()) {
-		lua_pushuint32(L, ++counter);
-		lua_pushstring(L, weaponname);
+		lua_pushint32(L, 2);
+		lua_pushint32(L, program.train_from_level());
 		lua_settable(L, -3);
-	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: weapons_evade
-
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Evade training.
-*/
-int LuaTrainingSiteDescription::get_weapons_evade(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const std::string& weaponname : get()->get_weapons_evade()) {
-		lua_pushuint32(L, ++counter);
-		lua_pushstring(L, weaponname);
-		lua_settable(L, -3);
-	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: weapons_health
-
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Health training.
-*/
-int LuaTrainingSiteDescription::get_weapons_health(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const std::string& weaponname : get()->get_weapons_health()) {
-		lua_pushuint32(L, ++counter);
-		lua_pushstring(L, weaponname);
+		lua_pushint32(L, 3);
+		lua_pushint32(L, program.train_to_level());
 		lua_settable(L, -3);
 	}
 	return 1;

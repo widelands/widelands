@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-28 03:22+0000\n"
+"POT-Creation-Date: 2022-12-04 03:01+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -111,7 +111,7 @@ msgstr "%1$s tai %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/richtext.lua:612 ../../data/scripting/richtext.lua:617
 #: ../../src/base/i18n.cc:415 ../../src/base/i18n.cc:424
-#: ../../src/logic/addons.cc:198
+#: ../../src/logic/addons.cc:200
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -327,7 +327,7 @@ msgid "Redo"
 msgstr "Tee uudelleen"
 
 #: ../../src/editor/editorinteractive.cc:172
-#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:232
+#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:231
 msgid "Help"
 msgstr "Ohje"
 
@@ -604,7 +604,7 @@ msgstr "Tallentamaton kartta"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Karttaa ei ole tallennettu. Haluatko poistua?"
 
-#: ../../src/editor/editorinteractive.cc:1049 ../../src/logic/addons.cc:46
+#: ../../src/editor/editorinteractive.cc:1049 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1341
@@ -842,7 +842,7 @@ msgstr "%1%× %2%"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:158
-#: ../../src/ui_fsmenu/netsetup_lan.cc:131 ../../src/wui/mapdetails.cc:136
+#: ../../src/ui_fsmenu/netsetup_lan.cc:137 ../../src/wui/mapdetails.cc:136
 #: ../../src/wui/minimap.cc:143
 msgid "Map"
 msgstr "Kartta"
@@ -1023,7 +1023,7 @@ msgid "Add a player to this team"
 msgstr "Lisää pelaaja tähän joukkueeseen"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:323
-#: ../../src/logic/addons.cc:64
+#: ../../src/logic/addons.cc:65
 msgid "Theme"
 msgstr "Teema"
 
@@ -1301,7 +1301,7 @@ msgstr "Luo hakemisto"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:162
-#: ../../src/ui_fsmenu/internet_lobby.cc:490
+#: ../../src/ui_fsmenu/internet_lobby.cc:496
 msgid "unnamed"
 msgstr "nimetön"
 
@@ -1398,7 +1398,7 @@ msgstr "Pelaajien määrä"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:131
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:185
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:49
-#: ../../src/wui/game_diplomacy_menu.cc:160
+#: ../../src/wui/game_diplomacy_menu.cc:77
 #, c-format
 msgid "Player %u"
 msgstr "Pelaaja %u"
@@ -1568,8 +1568,8 @@ msgstr "Komentojono"
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:147
 #: ../../src/map_io/widelands_map_loader.cc:394
 #: ../../src/wlapplication_options.cc:543
-#: ../../src/wui/interactive_player.cc:222
-#: ../../src/wui/interactive_player.cc:461
+#: ../../src/wui/interactive_player.cc:221
+#: ../../src/wui/interactive_player.cc:460
 msgid "Messages"
 msgstr "Viestit"
 
@@ -1713,91 +1713,91 @@ msgstr "ei"
 msgid "off"
 msgstr "pois"
 
-#: ../../src/logic/addons.cc:47
+#: ../../src/logic/addons.cc:49
 msgid "Tribes"
 msgstr "Heimot"
 
-#: ../../src/logic/addons.cc:49
+#: ../../src/logic/addons.cc:51
 msgid "World"
 msgstr "Maailma"
 
-#: ../../src/logic/addons.cc:52
+#: ../../src/logic/addons.cc:53
 msgid "Script"
 msgstr "Komentosarja"
 
-#: ../../src/logic/addons.cc:53
+#: ../../src/logic/addons.cc:55
 msgid "Map Set"
 msgstr "Kartta-asetelma"
 
 #. * TRANSLATORS: Header for campaign name
-#: ../../src/logic/addons.cc:55 ../../src/ui_fsmenu/campaigndetails.cc:47
+#: ../../src/logic/addons.cc:57 ../../src/ui_fsmenu/campaigndetails.cc:47
 msgid "Campaign"
 msgstr "Kampanja"
 
-#: ../../src/logic/addons.cc:59
+#: ../../src/logic/addons.cc:60
 msgid "Win Condition"
 msgstr "Voittoehto"
 
-#: ../../src/logic/addons.cc:61
+#: ../../src/logic/addons.cc:63
 msgid "Starting Condition"
 msgstr "Aloitusasemat"
 
-#: ../../src/logic/addons.cc:104
+#: ../../src/logic/addons.cc:106
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:171
+#: ../../src/logic/addons.cc:173
 msgid "No conflicts"
 msgstr "Ei ristiriitoja"
 
-#: ../../src/logic/addons.cc:176
+#: ../../src/logic/addons.cc:178
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (odotettu versio %2$s, löytyi %3$s)"
 
-#: ../../src/logic/addons.cc:179 ../../src/logic/addons.cc:215
+#: ../../src/logic/addons.cc:181 ../../src/logic/addons.cc:217
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (odotettiin versiota %3$s, löytyi %4$s)"
 
-#: ../../src/logic/addons.cc:186
+#: ../../src/logic/addons.cc:188
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$u laajennus joka on väärää versiota: %2$s"
 msgstr[1] "%1$u laajennusta jotka ovat väärää versiota: %2$s"
 
-#: ../../src/logic/addons.cc:201
+#: ../../src/logic/addons.cc:203
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] "%1$u uupuva lisäosa: %2$s"
 msgstr[1] "%1$u uupuvat lisäosat: %2$s"
 
-#: ../../src/logic/addons.cc:209
+#: ../../src/logic/addons.cc:211
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (puuttuu)"
 
-#: ../../src/logic/addons.cc:211
+#: ../../src/logic/addons.cc:213
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (puuttuu)"
 
-#: ../../src/logic/addons.cc:219
+#: ../../src/logic/addons.cc:221
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s ja%2$s: %3$s"
 
-#: ../../src/logic/addons.cc:220
+#: ../../src/logic/addons.cc:222
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
 msgstr[0] "%u puuttuva laajennus"
 msgstr[1] "%u puuttuvaa laajennusta"
 
-#: ../../src/logic/addons.cc:222
+#: ../../src/logic/addons.cc:224
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -1805,14 +1805,25 @@ msgstr[0] "%ulaajennus on väärää versiota"
 msgstr[1] "%ulaajennusta jotka ovat väärää versiota"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:233
+#: ../../src/logic/addons.cc:235
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../../src/logic/addons.cc:237
+#: ../../src/logic/addons.cc:239
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (versio %3$s)"
+
+#: ../../src/logic/addons.cc:269
+msgid "No game-relevant add-ons in use."
+msgstr ""
+
+#: ../../src/logic/addons.cc:274
+#, c-format
+msgid "%u game-relevant add-on in use:"
+msgid_plural "%u game-relevant add-ons in use:"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../src/logic/editor_game_base.cc:252
 #, c-format
@@ -2315,7 +2326,7 @@ msgstr "Laivat"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:154
-#: ../../src/wui/interactive_player.cc:331
+#: ../../src/wui/interactive_player.cc:330
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
 msgid "Wares"
@@ -2337,7 +2348,7 @@ msgstr "Työläiset"
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:329
 #: ../../src/wui/general_statistics_menu.cc:150
-#: ../../src/wui/interactive_player.cc:326 ../../src/wui/minimap.cc:199
+#: ../../src/wui/interactive_player.cc:325 ../../src/wui/minimap.cc:199
 msgid "Buildings"
 msgstr "Rakennukset"
 
@@ -2462,7 +2473,7 @@ msgstr "Karttatiedosto on viallinen:\n%s"
 msgid "This objective has no description."
 msgstr "Tällä kohteella ei ole kuvailua."
 
-#: ../../src/logic/player.cc:1945
+#: ../../src/logic/player.cc:1966
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2470,8 +2481,7 @@ msgstr "Laiva %d"
 
 #: ../../src/logic/playercommand.cc:2152
 #: ../../src/wlapplication_options.cc:539
-#: ../../src/wui/game_diplomacy_menu.cc:37
-#: ../../src/wui/game_diplomacy_menu.cc:114
+#: ../../src/wui/game_diplomacy_menu.cc:36
 #: ../../src/wui/interactive_gamebase.cc:234
 msgid "Diplomacy"
 msgstr "Diplomatia"
@@ -2503,44 +2513,54 @@ msgid "Team Joining Invitation"
 msgstr "Joukkueeseen liittymiskutsu"
 
 #: ../../src/logic/playercommand.cc:2190
-#: ../../src/wui/game_diplomacy_menu.cc:320
+#: ../../src/wui/game_diplomacy_menu.cc:264
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
 msgstr "%1$s on tehnyt pyynnön liittyä %2$s:n joukkueeseen."
 
 #: ../../src/logic/playercommand.cc:2191
-#: ../../src/wui/game_diplomacy_menu.cc:325
+#: ../../src/wui/game_diplomacy_menu.cc:271
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
 msgstr "%1$s on kutsunut %2$s liittyäkseen heidän joukkueeseensa."
 
-#: ../../src/logic/playercommand.cc:2216
-msgid "Team Change Accepted"
-msgstr "Joukkuemuutos hyväksytty"
-
-#: ../../src/logic/playercommand.cc:2216
-msgid "Team Change Rejected"
-msgstr "Joukkuemuutos hylätty"
-
-#: ../../src/logic/playercommand.cc:2218
+#: ../../src/logic/playercommand.cc:2230
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
 msgstr "%1$s hyväksyi %2$s joukkueeseensa."
 
-#: ../../src/logic/playercommand.cc:2219
+#: ../../src/logic/playercommand.cc:2232
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
 msgstr "%1$s hyväksyi kutsun liittyä joukkueeseen %2$s."
 
-#: ../../src/logic/playercommand.cc:2221
+#: ../../src/logic/playercommand.cc:2237
+#, c-format
+msgid "%1$s has retracted the request to join the team of %2$s."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2239
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
 msgstr "%1$s eväsi %2$s jäsenyyden joukkueessaan."
 
-#: ../../src/logic/playercommand.cc:2222
+#: ../../src/logic/playercommand.cc:2242
+#, c-format
+msgid "%1$s has retracted the invitation to %2$s to join their team."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2244
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
 msgstr "%1$s hylkäsi kutsun liittyä joukkueeseen %2$s."
+
+#: ../../src/logic/playercommand.cc:2248
+msgid "Team Change Accepted"
+msgstr "Joukkuemuutos hyväksytty"
+
+#: ../../src/logic/playercommand.cc:2248
+msgid "Team Change Rejected"
+msgstr "Joukkuemuutos hylätty"
 
 #: ../../src/logic/replay.cc:86
 msgid "Desync"
@@ -2664,7 +2684,7 @@ msgstr "Skriptaus"
 #: ../../src/map_io/widelands_map_loader.cc:412
 #: ../../src/wlapplication_options.cc:534
 #: ../../src/wui/game_objectives_menu.cc:30
-#: ../../src/wui/interactive_player.cc:212
+#: ../../src/wui/interactive_player.cc:211
 msgid "Objectives"
 msgstr "Tavoitteet"
 
@@ -4970,64 +4990,64 @@ msgstr "Avaa uusi peli"
 msgid "Leave Lobby"
 msgstr "Poistu odotushuoneesta"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:161
+#: ../../src/ui_fsmenu/internet_lobby.cc:167
 msgid "User Status"
 msgstr "Käyttäjän tila"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:162
+#: ../../src/ui_fsmenu/internet_lobby.cc:168
 msgid "Administrator"
 msgstr "Pääkäyytäjä"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:163
+#: ../../src/ui_fsmenu/internet_lobby.cc:169
 msgid "Registered"
 msgstr "Rekisteröitynyt"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:164
+#: ../../src/ui_fsmenu/internet_lobby.cc:170
 msgid "Unregistered"
 msgstr "Rekisteröitymätön"
 
 #. * TRANSLATORS: Player Name
-#: ../../src/ui_fsmenu/internet_lobby.cc:167
+#: ../../src/ui_fsmenu/internet_lobby.cc:173
 msgctxt "player"
 msgid "Name"
 msgstr "Nimi"
 
 #. * TRANSLATORS: Widelands version
-#: ../../src/ui_fsmenu/internet_lobby.cc:169
+#: ../../src/ui_fsmenu/internet_lobby.cc:175
 msgid "Version"
 msgstr "Versio"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:171
+#: ../../src/ui_fsmenu/internet_lobby.cc:177
 #: ../../src/ui_fsmenu/keyboard_options.cc:295
 msgid "Game"
 msgstr "Peli"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:417
+#: ../../src/ui_fsmenu/internet_lobby.cc:423
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
 msgstr "Peli %son jo käynnissä. Valitse jokin käyttämätön nimi."
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:430
+#: ../../src/ui_fsmenu/internet_lobby.cc:436
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr "Widelands ei kyennyt selvittämään palvelimen IP-osoitetta ajoissa. Tämä näyttää verkko-ongelmalta, joko sinun tai palvelimen päässä.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:433
+#: ../../src/ui_fsmenu/internet_lobby.cc:439
 msgid "Connection Timed Out"
 msgstr "Yhteys Aikakatkaistu"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:458
-#: ../../src/ui_fsmenu/internet_lobby.cc:517
-#: ../../src/ui_fsmenu/netsetup_lan.cc:313
-#: ../../src/ui_fsmenu/netsetup_lan.cc:335
+#: ../../src/ui_fsmenu/internet_lobby.cc:464
+#: ../../src/ui_fsmenu/internet_lobby.cc:523
+#: ../../src/ui_fsmenu/netsetup_lan.cc:319
+#: ../../src/ui_fsmenu/netsetup_lan.cc:341
 msgid "Network Error"
 msgstr "Verkkovirhe"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:482
+#: ../../src/ui_fsmenu/internet_lobby.cc:488
 #, c-format
 msgid "unnamed %u"
 msgstr "Nimetön %u"
@@ -5077,7 +5097,7 @@ msgstr "Valitsemasi pikanäppäin (‘%1$s’) on jo käytössä toiminnolle ‘
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:292
-#: ../../src/wui/interactive_player.cc:336
+#: ../../src/wui/interactive_player.cc:335
 msgid "General"
 msgstr "Yleistä"
 
@@ -5295,7 +5315,7 @@ msgstr "Nimimerkki:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:676
+#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:676
 msgid "nobody"
 msgstr "ei kukaan"
 
@@ -5510,11 +5530,11 @@ msgstr "Tahdistusvirheitä aiheuttava laajennus havaittu"
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Käytössä oleva laajennus tunnetusti aiheuttaa tahdistusvirheitä. Etene omalla vastuullasi."
 
-#: ../../src/ui_fsmenu/main.cc:915 ../../src/ui_fsmenu/netsetup_lan.cc:324
+#: ../../src/ui_fsmenu/main.cc:915 ../../src/ui_fsmenu/netsetup_lan.cc:330
 msgid "No tribes found!"
 msgstr "Heimoja ei löytynyt!"
 
-#: ../../src/ui_fsmenu/main.cc:916 ../../src/ui_fsmenu/netsetup_lan.cc:325
+#: ../../src/ui_fsmenu/main.cc:916 ../../src/ui_fsmenu/netsetup_lan.cc:331
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Heimoja ei löytynyt tiedostosta data/tribes/initialization/[tribename]/init.lua."
 
@@ -5852,13 +5872,13 @@ msgstr "Jaettu"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:337
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:338
-#: ../../src/ui_fsmenu/netsetup_lan.cc:227
+#: ../../src/ui_fsmenu/netsetup_lan.cc:233
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:188
 msgid "Closed"
 msgstr "Suljettu"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:342
-#: ../../src/ui_fsmenu/netsetup_lan.cc:224
+#: ../../src/ui_fsmenu/netsetup_lan.cc:230
 msgid "Open"
 msgstr "Auki"
 
@@ -5919,31 +5939,31 @@ msgstr "Lataa edellinen pelipalvelin"
 msgid "Host a new game"
 msgstr "Isännöi uutta peliä"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:130
+#: ../../src/ui_fsmenu/netsetup_lan.cc:136
 msgid "Host"
 msgstr "Palvelin"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:132
+#: ../../src/ui_fsmenu/netsetup_lan.cc:138
 msgid "State"
 msgstr "Tila"
 
 #. * TRANSLATORS: The state of a LAN game can be open, closed or unknown
-#: ../../src/ui_fsmenu/netsetup_lan.cc:231
+#: ../../src/ui_fsmenu/netsetup_lan.cc:237
 msgctxt "game_state"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:280
+#: ../../src/ui_fsmenu/netsetup_lan.cc:286
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
 msgstr "Anna kelpo nimimerkki. Tämä saa sisältää vain englanninkielisiä kirjaimia, numeroita, ja @ . + - _ merkkejä eikä se saa olla \"team\"."
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:301
+#: ../../src/ui_fsmenu/netsetup_lan.cc:307
 msgid "Invalid Address"
 msgstr "Virheellinen Osoite"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:302
+#: ../../src/ui_fsmenu/netsetup_lan.cc:308
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Annettu isäntänimi tai osoite on virheellinen, eikä siihen voida ottaa yhteyttä."
 
@@ -6038,7 +6058,7 @@ msgstr "Näytä rakennukset"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:381
+#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:380
 msgid "Show Workarea Overlaps"
 msgstr "Näytä työalue kartalla"
 
@@ -7165,69 +7185,77 @@ msgstr "%1$s%2$s"
 msgid "Fastplace #%i"
 msgstr "Pikapaikka #%i"
 
-#: ../../src/wui/actionconfirm.cc:187
+#: ../../src/wui/actionconfirm.cc:198
 msgid "Destroy building?"
 msgstr "Tuhoa rakennus?"
 
-#: ../../src/wui/actionconfirm.cc:188
+#: ../../src/wui/actionconfirm.cc:199
 msgid "Do you really want to destroy this building?"
 msgstr "Haluatko varmasti tuhota tämän rakennuksen?"
 
-#: ../../src/wui/actionconfirm.cc:248
+#: ../../src/wui/actionconfirm.cc:259
 msgid "Dismantle building?"
 msgstr "Puretaanko rakennus?"
 
-#: ../../src/wui/actionconfirm.cc:249
+#: ../../src/wui/actionconfirm.cc:260
 msgid "Do you really want to dismantle this building?"
 msgstr "Haluatko varmasti purkaa tämän rakennuksen?"
 
-#: ../../src/wui/actionconfirm.cc:251 ../../src/wui/actionconfirm.cc:311
+#: ../../src/wui/actionconfirm.cc:262 ../../src/wui/actionconfirm.cc:322
 msgid "Preserve wares"
 msgstr "Pelasta tarvikkeet"
 
-#: ../../src/wui/actionconfirm.cc:253
+#: ../../src/wui/actionconfirm.cc:264
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
 msgstr "Rakennuksessa olevat tarvikkeet säästetään. Tämä hidastaa rakennuksen purkamista"
 
-#: ../../src/wui/actionconfirm.cc:302
+#: ../../src/wui/actionconfirm.cc:313
 msgid "Enhance building?"
 msgstr "Laajennetaanko rakennus?"
 
-#: ../../src/wui/actionconfirm.cc:306 ../../src/wui/actionconfirm.cc:309
+#: ../../src/wui/actionconfirm.cc:317 ../../src/wui/actionconfirm.cc:320
 msgid "Do you really want to enhance this building?"
 msgstr "Haluatko varmasti laajentaa tätä rakennusta?"
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
-#: ../../src/wui/actionconfirm.cc:308
+#: ../../src/wui/actionconfirm.cc:319
 msgid "Be careful if the enemy is near!"
 msgstr "Ole varovainen, jos vihollinen on lähellä!"
 
-#: ../../src/wui/actionconfirm.cc:315
+#: ../../src/wui/actionconfirm.cc:326
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
 msgstr "Rakennuksessa olevat tarvikkeet säästetään. Tämä hidastaa rakennuksen laajentamista"
 
-#: ../../src/wui/actionconfirm.cc:366
+#: ../../src/wui/actionconfirm.cc:377
 msgid "Sink the ship?"
 msgstr "Upotetaanko alus?"
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:368
+#: ../../src/wui/actionconfirm.cc:379
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr "Haluatko todellakin upottaa aluksen %s?"
 
-#: ../../src/wui/actionconfirm.cc:405
+#: ../../src/wui/actionconfirm.cc:416
 msgid "Cancel expedition?"
 msgstr "Keskeytä tutkimusmatka?"
 
-#: ../../src/wui/actionconfirm.cc:406
+#: ../../src/wui/actionconfirm.cc:417
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Haluatko perua meneilläänolevan tutkimusmatkan?"
+
+#: ../../src/wui/actionconfirm.cc:456
+msgid "Do you really want to give up and become a spectator?"
+msgstr ""
+
+#: ../../src/wui/actionconfirm.cc:456
+msgid "Resign?"
+msgstr ""
 
 #: ../../src/wui/attack_window.cc:46
 msgid "Attack"
@@ -7808,83 +7836,81 @@ msgstr "Korvaavaksi pelaajaksi %s"
 msgid "Debug Field"
 msgstr "Debug-kenttä"
 
-#: ../../src/wui/game_diplomacy_menu.cc:45
-msgid "Accept"
-msgstr "Hyväksy"
-
-#: ../../src/wui/game_diplomacy_menu.cc:48
-msgid "Reject"
-msgstr "Hylkää"
-
-#: ../../src/wui/game_diplomacy_menu.cc:62
-#, c-format
-msgid "%s has invited you to join their team."
-msgstr "%s kutsui sinut liittymään joukkueeseensa."
-
-#: ../../src/wui/game_diplomacy_menu.cc:63
-#, c-format
-msgid "%s wants to join your team."
-msgstr "%s haluaa liittyä joukkueeseesi."
-
-#: ../../src/wui/game_diplomacy_menu.cc:170
+#: ../../src/wui/game_diplomacy_menu.cc:87
 msgid "Leave"
 msgstr "Poistu"
 
-#: ../../src/wui/game_diplomacy_menu.cc:171
+#: ../../src/wui/game_diplomacy_menu.cc:88
 msgid "Leave your current team and become teamless"
 msgstr "Jätä nykyinen joukkueesi jääden vaille joukkuetta"
 
-#: ../../src/wui/game_diplomacy_menu.cc:173
+#: ../../src/wui/game_diplomacy_menu.cc:90
 msgid "Resign"
 msgstr "Eroa"
 
-#: ../../src/wui/game_diplomacy_menu.cc:174
+#: ../../src/wui/game_diplomacy_menu.cc:91
 msgid "Give up and become a spectator"
 msgstr "Luovuta ja rupea katsojaksi"
 
-#: ../../src/wui/game_diplomacy_menu.cc:186
+#: ../../src/wui/game_diplomacy_menu.cc:108
 msgid "Join"
 msgstr "Liity"
 
-#: ../../src/wui/game_diplomacy_menu.cc:187
+#: ../../src/wui/game_diplomacy_menu.cc:109
 msgid "Request to join this player’s team"
 msgstr "Pyyntö liittyä tämän pelaajan joukkueeseen"
 
-#: ../../src/wui/game_diplomacy_menu.cc:189
+#: ../../src/wui/game_diplomacy_menu.cc:111
 msgid "Invite"
 msgstr "Kutsu"
 
-#: ../../src/wui/game_diplomacy_menu.cc:190
+#: ../../src/wui/game_diplomacy_menu.cc:112
 msgid "Invite this player to join your team"
 msgstr "Kutsu tämä pelaaja liittymään joukkueeseesi"
 
-#: ../../src/wui/game_diplomacy_menu.cc:258
+#: ../../src/wui/game_diplomacy_menu.cc:187
 msgid "No team"
 msgstr "Ei joukkuetta"
 
-#: ../../src/wui/game_diplomacy_menu.cc:258
+#: ../../src/wui/game_diplomacy_menu.cc:187
 #, c-format
 msgid "Team %u"
 msgstr "Joukkue %u"
 
-#: ../../src/wui/game_diplomacy_menu.cc:273
+#: ../../src/wui/game_diplomacy_menu.cc:202
 #, c-format
 msgid "Won at %s"
 msgstr "Voitettu %s"
 
-#: ../../src/wui/game_diplomacy_menu.cc:276
+#: ../../src/wui/game_diplomacy_menu.cc:205
 #, c-format
 msgid "Lost at %s"
 msgstr "Hävitty %s"
 
-#: ../../src/wui/game_diplomacy_menu.cc:279
+#: ../../src/wui/game_diplomacy_menu.cc:208
 #, c-format
 msgid "Resigned at %s"
 msgstr "Eronnut %s"
 
-#: ../../src/wui/game_diplomacy_menu.cc:313
-msgid "Pending Diplomacy Actions"
-msgstr "Vireillä olevat diplomatiatoiminnot"
+#: ../../src/wui/game_diplomacy_menu.cc:267
+msgid "Approve"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:268
+msgid "Reject"
+msgstr "Hylkää"
+
+#: ../../src/wui/game_diplomacy_menu.cc:274
+msgid "Accept"
+msgstr "Hyväksy"
+
+#: ../../src/wui/game_diplomacy_menu.cc:275
+msgid "Refuse"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:290
+msgid "Retract"
+msgstr ""
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_exit_confirm_box.cc:27
@@ -8456,25 +8482,25 @@ msgid "%1$s (%2$s) (%3$s)"
 msgstr ""
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../src/wui/interactive_player.cc:182
+#: ../../src/wui/interactive_player.cc:181
 #: ../../src/wui/interactive_spectator.cc:45
 msgid "Statistics"
 msgstr "Tilastot"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:310 ../../src/wui/map_tags.cc:51
+#: ../../src/wui/interactive_player.cc:309 ../../src/wui/map_tags.cc:51
 msgid "Seafaring"
 msgstr "Merenkäynti"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:316
+#: ../../src/wui/interactive_player.cc:315
 #: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:287
 msgid "Soldiers"
 msgstr "Sotilaat"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:321 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:320 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Varasto"
@@ -8482,17 +8508,17 @@ msgstr "Varasto"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:378
+#: ../../src/wui/interactive_player.cc:377
 msgid "Hide Workarea Overlaps"
 msgstr "Piilota työalueen näyttö"
 
-#: ../../src/wui/interactive_player.cc:384
+#: ../../src/wui/interactive_player.cc:383
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "Näytä/piilota työalue kartalla"
 
-#: ../../src/wui/interactive_player.cc:466
+#: ../../src/wui/interactive_player.cc:465
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"

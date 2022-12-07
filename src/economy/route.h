@@ -45,10 +45,10 @@ struct Route : public IRoute {
 
 	void init(int32_t) override;
 
-	int32_t get_totalcost() const {
+	[[nodiscard]] int32_t get_totalcost() const {
 		return totalcost_;
 	}
-	int32_t get_nrsteps() const {
+	[[nodiscard]] int32_t get_nrsteps() const {
 		return route_.size() - 1;
 	}
 	Flag& get_flag(EditorGameBase&, std::vector<Flag*>::size_type) const;

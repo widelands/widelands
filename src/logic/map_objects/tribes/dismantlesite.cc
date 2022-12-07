@@ -32,8 +32,6 @@
 
 namespace Widelands {
 
-constexpr Duration DismantleSite::kDismantlesiteStepTime;
-
 /**
  * The contents of 'table' are documented in
  * /data/tribes/buildings/partially_finished/dismantlesite/init.lua

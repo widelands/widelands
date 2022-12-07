@@ -99,7 +99,7 @@ struct StepEvalFindFerryFleet {
 	int32_t estimate(Map& /* map */, FCoords /* pos */) const {
 		return 0;
 	}
-	int32_t stepcost(
+	[[nodiscard]] int32_t stepcost(
 	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
 		return checkstep_->allowed(map, from, to, dir, CheckStep::StepId::stepNormal) ? 1 : -1;
 	}

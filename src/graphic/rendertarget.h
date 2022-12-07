@@ -54,8 +54,8 @@ public:
 	void set_window(const Recti& rc, const Vector2i& ofs);
 	bool enter_window(const Recti& rc, Recti* previous, Vector2i* prevofs);
 
-	int32_t width() const;
-	int32_t height() const;
+	[[nodiscard]] int32_t width() const;
+	[[nodiscard]] int32_t height() const;
 
 	void draw_line_strip(const std::vector<Vector2f>& points, const RGBColor& color, float width);
 	void draw_rect(const Recti&, const RGBColor&);
@@ -119,13 +119,13 @@ public:
 
 	void reset();
 
-	const Surface& get_surface() const {
+	[[nodiscard]] const Surface& get_surface() const {
 		return *surface_;
 	}
-	const Recti& get_rect() const {
+	[[nodiscard]] const Recti& get_rect() const {
 		return rect_;
 	}
-	const Vector2i& get_offset() const {
+	[[nodiscard]] const Vector2i& get_offset() const {
 		return offset_;
 	}
 

@@ -72,14 +72,6 @@ wl.Descriptions():new_trainingsite_type {
       { name = "beer_strong", amount = 8 }
    },
 
-   ["soldier evade"] = {
-      food = {
-         {"fish", "meat"},
-         {"beer_strong"},
-         {"barbarians_bread"}
-      }
-   },
-
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...

@@ -44,22 +44,22 @@ struct WareInfoStyleInfo {
 	     info_background_(init_info_background) {
 	}
 
-	const UI::FontStyleInfo& header_font() const {
+	[[nodiscard]] const UI::FontStyleInfo& header_font() const {
 		return *header_font_.get();
 	}
-	const UI::FontStyleInfo& info_font() const {
+	[[nodiscard]] const UI::FontStyleInfo& info_font() const {
 		return *info_font_.get();
 	}
-	const Image* icon_background_image() const {
+	[[nodiscard]] const Image* icon_background_image() const {
 		return icon_background_image_;
 	}
-	const RGBColor& icon_frame() const {
+	[[nodiscard]] const RGBColor& icon_frame() const {
 		return icon_frame_;
 	}
-	const RGBColor& icon_background() const {
+	[[nodiscard]] const RGBColor& icon_background() const {
 		return icon_background_;
 	}
-	const RGBColor& info_background() const {
+	[[nodiscard]] const RGBColor& info_background() const {
 		return info_background_;
 	}
 

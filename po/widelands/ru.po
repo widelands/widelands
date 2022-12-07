@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-28 03:22+0000\n"
+"POT-Creation-Date: 2022-12-04 03:01+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -118,7 +118,7 @@ msgstr "%1$s или %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/richtext.lua:612 ../../data/scripting/richtext.lua:617
 #: ../../src/base/i18n.cc:415 ../../src/base/i18n.cc:424
-#: ../../src/logic/addons.cc:198
+#: ../../src/logic/addons.cc:200
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -334,7 +334,7 @@ msgid "Redo"
 msgstr "Повторить"
 
 #: ../../src/editor/editorinteractive.cc:172
-#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:232
+#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:231
 msgid "Help"
 msgstr "Помощь"
 
@@ -611,7 +611,7 @@ msgstr "Карта не сохранена"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Карта не была сохранена, вы действительно хотите выйти?"
 
-#: ../../src/editor/editorinteractive.cc:1049 ../../src/logic/addons.cc:46
+#: ../../src/editor/editorinteractive.cc:1049 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1341
@@ -849,7 +849,7 @@ msgstr "%1%× %2%"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:158
-#: ../../src/ui_fsmenu/netsetup_lan.cc:131 ../../src/wui/mapdetails.cc:136
+#: ../../src/ui_fsmenu/netsetup_lan.cc:137 ../../src/wui/mapdetails.cc:136
 #: ../../src/wui/minimap.cc:143
 msgid "Map"
 msgstr "Карта"
@@ -1030,7 +1030,7 @@ msgid "Add a player to this team"
 msgstr "Доб. игрока в команду"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:323
-#: ../../src/logic/addons.cc:64
+#: ../../src/logic/addons.cc:65
 msgid "Theme"
 msgstr "Тема"
 
@@ -1310,7 +1310,7 @@ msgstr "Создать каталог"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:162
-#: ../../src/ui_fsmenu/internet_lobby.cc:490
+#: ../../src/ui_fsmenu/internet_lobby.cc:496
 msgid "unnamed"
 msgstr "Без названия"
 
@@ -1407,7 +1407,7 @@ msgstr "Количество игроков"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:131
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:185
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:49
-#: ../../src/wui/game_diplomacy_menu.cc:160
+#: ../../src/wui/game_diplomacy_menu.cc:77
 #, c-format
 msgid "Player %u"
 msgstr "Игрок %u"
@@ -1577,8 +1577,8 @@ msgstr "Очередь команд"
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:147
 #: ../../src/map_io/widelands_map_loader.cc:394
 #: ../../src/wlapplication_options.cc:543
-#: ../../src/wui/interactive_player.cc:222
-#: ../../src/wui/interactive_player.cc:461
+#: ../../src/wui/interactive_player.cc:221
+#: ../../src/wui/interactive_player.cc:460
 msgid "Messages"
 msgstr "Сообщения"
 
@@ -1722,55 +1722,55 @@ msgstr "нет"
 msgid "off"
 msgstr "выкл"
 
-#: ../../src/logic/addons.cc:47
+#: ../../src/logic/addons.cc:49
 msgid "Tribes"
 msgstr "Племена"
 
-#: ../../src/logic/addons.cc:49
+#: ../../src/logic/addons.cc:51
 msgid "World"
 msgstr "Мир"
 
-#: ../../src/logic/addons.cc:52
+#: ../../src/logic/addons.cc:53
 msgid "Script"
 msgstr "Сценарий"
 
-#: ../../src/logic/addons.cc:53
+#: ../../src/logic/addons.cc:55
 msgid "Map Set"
 msgstr "Набор карт"
 
 #. * TRANSLATORS: Header for campaign name
-#: ../../src/logic/addons.cc:55 ../../src/ui_fsmenu/campaigndetails.cc:47
+#: ../../src/logic/addons.cc:57 ../../src/ui_fsmenu/campaigndetails.cc:47
 msgid "Campaign"
 msgstr "Кампания"
 
-#: ../../src/logic/addons.cc:59
+#: ../../src/logic/addons.cc:60
 msgid "Win Condition"
 msgstr "Условия победы"
 
-#: ../../src/logic/addons.cc:61
+#: ../../src/logic/addons.cc:63
 msgid "Starting Condition"
 msgstr "Начальные условия"
 
-#: ../../src/logic/addons.cc:104
+#: ../../src/logic/addons.cc:106
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:171
+#: ../../src/logic/addons.cc:173
 msgid "No conflicts"
 msgstr "Конфликтов не обнаружено"
 
-#: ../../src/logic/addons.cc:176
+#: ../../src/logic/addons.cc:178
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (требуется версия %2$s, найдена - %3$s)"
 
-#: ../../src/logic/addons.cc:179 ../../src/logic/addons.cc:215
+#: ../../src/logic/addons.cc:181 ../../src/logic/addons.cc:217
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (требуется версия %3$s, тогда как установлена %4$s)"
 
-#: ../../src/logic/addons.cc:186
+#: ../../src/logic/addons.cc:188
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
@@ -1779,7 +1779,7 @@ msgstr[1] "%1$u дополнения не той версии (%2$s)"
 msgstr[2] "%1$u дополнений не той версии (%2$s)"
 msgstr[3] "%1$u дополнений не той версии: %2$s"
 
-#: ../../src/logic/addons.cc:201
+#: ../../src/logic/addons.cc:203
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
@@ -1788,22 +1788,22 @@ msgstr[1] "%1$u дополнения пропущено: %2$s"
 msgstr[2] "%1$u дополнений пропущено: %2$s"
 msgstr[3] "%1$u дополнений пропущено: %2$s"
 
-#: ../../src/logic/addons.cc:209
+#: ../../src/logic/addons.cc:211
 #, c-format
 msgid "%s (missing)"
 msgstr "%s(упущено)"
 
-#: ../../src/logic/addons.cc:211
+#: ../../src/logic/addons.cc:213
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (упущено)"
 
-#: ../../src/logic/addons.cc:219
+#: ../../src/logic/addons.cc:221
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s и %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:220
+#: ../../src/logic/addons.cc:222
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
@@ -1812,7 +1812,7 @@ msgstr[1] "%u дополнения пропущено"
 msgstr[2] "%u дополнений пропущено"
 msgstr[3] "%u дополнений пропущено"
 
-#: ../../src/logic/addons.cc:222
+#: ../../src/logic/addons.cc:224
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -1822,14 +1822,27 @@ msgstr[2] "У %u дополнений не та версия"
 msgstr[3] "У %u дополнений не та версия"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:233
+#: ../../src/logic/addons.cc:235
 msgid "None"
 msgstr "Нет"
 
-#: ../../src/logic/addons.cc:237
+#: ../../src/logic/addons.cc:239
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s версии %3$s"
+
+#: ../../src/logic/addons.cc:269
+msgid "No game-relevant add-ons in use."
+msgstr ""
+
+#: ../../src/logic/addons.cc:274
+#, c-format
+msgid "%u game-relevant add-on in use:"
+msgid_plural "%u game-relevant add-ons in use:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: ../../src/logic/editor_game_base.cc:252
 #, c-format
@@ -2338,7 +2351,7 @@ msgstr "Корабли"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:154
-#: ../../src/wui/interactive_player.cc:331
+#: ../../src/wui/interactive_player.cc:330
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
 msgid "Wares"
@@ -2360,7 +2373,7 @@ msgstr "Работники"
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:329
 #: ../../src/wui/general_statistics_menu.cc:150
-#: ../../src/wui/interactive_player.cc:326 ../../src/wui/minimap.cc:199
+#: ../../src/wui/interactive_player.cc:325 ../../src/wui/minimap.cc:199
 msgid "Buildings"
 msgstr "Строения"
 
@@ -2485,7 +2498,7 @@ msgstr "Файл карты забракован по причине:\n%s"
 msgid "This objective has no description."
 msgstr "Эта задача без описания."
 
-#: ../../src/logic/player.cc:1945
+#: ../../src/logic/player.cc:1966
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2493,8 +2506,7 @@ msgstr "Корабль %d"
 
 #: ../../src/logic/playercommand.cc:2152
 #: ../../src/wlapplication_options.cc:539
-#: ../../src/wui/game_diplomacy_menu.cc:37
-#: ../../src/wui/game_diplomacy_menu.cc:114
+#: ../../src/wui/game_diplomacy_menu.cc:36
 #: ../../src/wui/interactive_gamebase.cc:234
 msgid "Diplomacy"
 msgstr ""
@@ -2526,43 +2538,53 @@ msgid "Team Joining Invitation"
 msgstr ""
 
 #: ../../src/logic/playercommand.cc:2190
-#: ../../src/wui/game_diplomacy_menu.cc:320
+#: ../../src/wui/game_diplomacy_menu.cc:264
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
 msgstr ""
 
 #: ../../src/logic/playercommand.cc:2191
-#: ../../src/wui/game_diplomacy_menu.cc:325
+#: ../../src/wui/game_diplomacy_menu.cc:271
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2216
-msgid "Team Change Accepted"
-msgstr ""
-
-#: ../../src/logic/playercommand.cc:2216
-msgid "Team Change Rejected"
-msgstr ""
-
-#: ../../src/logic/playercommand.cc:2218
+#: ../../src/logic/playercommand.cc:2230
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2219
+#: ../../src/logic/playercommand.cc:2232
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2221
+#: ../../src/logic/playercommand.cc:2237
+#, c-format
+msgid "%1$s has retracted the request to join the team of %2$s."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2239
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2222
+#: ../../src/logic/playercommand.cc:2242
+#, c-format
+msgid "%1$s has retracted the invitation to %2$s to join their team."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2244
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2248
+msgid "Team Change Accepted"
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2248
+msgid "Team Change Rejected"
 msgstr ""
 
 #: ../../src/logic/replay.cc:86
@@ -2687,7 +2709,7 @@ msgstr "Сценарий"
 #: ../../src/map_io/widelands_map_loader.cc:412
 #: ../../src/wlapplication_options.cc:534
 #: ../../src/wui/game_objectives_menu.cc:30
-#: ../../src/wui/interactive_player.cc:212
+#: ../../src/wui/interactive_player.cc:211
 msgid "Objectives"
 msgstr "Задания"
 
@@ -2933,7 +2955,7 @@ msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
-msgstr "«Widelands» не может установить соединение с данным адресом. \nЛибо метасервер не работает на предполагаемом порту, либо ваши настройки сети не верны."
+msgstr "«Widelands» не может установить соединение с данным адресом.\nЛибо метасервер не работает на предполагаемом порту, \nлибо ваши настройки сети не верны."
 
 #: ../../src/network/internet_gaming.cc:173
 msgid "Users marked with IRC will possibly not react to messages."
@@ -5031,64 +5053,64 @@ msgstr "Открыть новую игру"
 msgid "Leave Lobby"
 msgstr "Покинуть лобби"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:161
+#: ../../src/ui_fsmenu/internet_lobby.cc:167
 msgid "User Status"
 msgstr "Состояние игрока"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:162
+#: ../../src/ui_fsmenu/internet_lobby.cc:168
 msgid "Administrator"
 msgstr "Администратор"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:163
+#: ../../src/ui_fsmenu/internet_lobby.cc:169
 msgid "Registered"
 msgstr "Зарегистрирован"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:164
+#: ../../src/ui_fsmenu/internet_lobby.cc:170
 msgid "Unregistered"
 msgstr "Незарегистрирован"
 
 #. * TRANSLATORS: Player Name
-#: ../../src/ui_fsmenu/internet_lobby.cc:167
+#: ../../src/ui_fsmenu/internet_lobby.cc:173
 msgctxt "player"
 msgid "Name"
 msgstr "Имя"
 
 #. * TRANSLATORS: Widelands version
-#: ../../src/ui_fsmenu/internet_lobby.cc:169
+#: ../../src/ui_fsmenu/internet_lobby.cc:175
 msgid "Version"
 msgstr "Версия"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:171
+#: ../../src/ui_fsmenu/internet_lobby.cc:177
 #: ../../src/ui_fsmenu/keyboard_options.cc:295
 msgid "Game"
 msgstr "Игра"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:417
+#: ../../src/ui_fsmenu/internet_lobby.cc:423
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
 msgstr "Игра %s уже работает. Пожалуйста, выберите другое имя."
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:430
+#: ../../src/ui_fsmenu/internet_lobby.cc:436
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr "Widelands не удалось получить IP-адрес сервера за отведённое время. Похоже имеются проблемы с сетью на вашей стороне или стороне сервера.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:433
+#: ../../src/ui_fsmenu/internet_lobby.cc:439
 msgid "Connection Timed Out"
 msgstr "Время ожидания для соединения истекло"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:458
-#: ../../src/ui_fsmenu/internet_lobby.cc:517
-#: ../../src/ui_fsmenu/netsetup_lan.cc:313
-#: ../../src/ui_fsmenu/netsetup_lan.cc:335
+#: ../../src/ui_fsmenu/internet_lobby.cc:464
+#: ../../src/ui_fsmenu/internet_lobby.cc:523
+#: ../../src/ui_fsmenu/netsetup_lan.cc:319
+#: ../../src/ui_fsmenu/netsetup_lan.cc:341
 msgid "Network Error"
 msgstr "Ошибка сети"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:482
+#: ../../src/ui_fsmenu/internet_lobby.cc:488
 #, c-format
 msgid "unnamed %u"
 msgstr "неименованый%u"
@@ -5138,7 +5160,7 @@ msgstr "Выбранные горячие клавиши (%1$s) уже испо�
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:292
-#: ../../src/wui/interactive_player.cc:336
+#: ../../src/wui/interactive_player.cc:335
 msgid "General"
 msgstr "Главное"
 
@@ -5356,7 +5378,7 @@ msgstr "Имя:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:676
+#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:676
 msgid "nobody"
 msgstr "никто"
 
@@ -5571,11 +5593,11 @@ msgstr "Рассинхронизация дополнений"
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Это объявление доступно, но рассинхронизовано с сервером. Использовать на свой страх и риск."
 
-#: ../../src/ui_fsmenu/main.cc:915 ../../src/ui_fsmenu/netsetup_lan.cc:324
+#: ../../src/ui_fsmenu/main.cc:915 ../../src/ui_fsmenu/netsetup_lan.cc:330
 msgid "No tribes found!"
 msgstr "Племён не найдено!"
 
-#: ../../src/ui_fsmenu/main.cc:916 ../../src/ui_fsmenu/netsetup_lan.cc:325
+#: ../../src/ui_fsmenu/main.cc:916 ../../src/ui_fsmenu/netsetup_lan.cc:331
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "В data/tribes/initialization/[tribename]/init.lua не найдено племен."
 
@@ -5913,13 +5935,13 @@ msgstr "Общие в"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:337
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:338
-#: ../../src/ui_fsmenu/netsetup_lan.cc:227
+#: ../../src/ui_fsmenu/netsetup_lan.cc:233
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:188
 msgid "Closed"
 msgstr "Закрыто"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:342
-#: ../../src/ui_fsmenu/netsetup_lan.cc:224
+#: ../../src/ui_fsmenu/netsetup_lan.cc:230
 msgid "Open"
 msgstr "Открыто"
 
@@ -5980,31 +6002,31 @@ msgstr "Загрузить ранее размещённую игру"
 msgid "Host a new game"
 msgstr "Разместить новую игру"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:130
+#: ../../src/ui_fsmenu/netsetup_lan.cc:136
 msgid "Host"
 msgstr "Хост"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:132
+#: ../../src/ui_fsmenu/netsetup_lan.cc:138
 msgid "State"
 msgstr "Состояние"
 
 #. * TRANSLATORS: The state of a LAN game can be open, closed or unknown
-#: ../../src/ui_fsmenu/netsetup_lan.cc:231
+#: ../../src/ui_fsmenu/netsetup_lan.cc:237
 msgctxt "game_state"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:280
+#: ../../src/ui_fsmenu/netsetup_lan.cc:286
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
 msgstr "Укажите корректный ник. Он может содержать буквы латиницы, цифры и знаки @ . + - _ . Слово \"team\" не годится."
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:301
+#: ../../src/ui_fsmenu/netsetup_lan.cc:307
 msgid "Invalid Address"
 msgstr "Некорректный адрес"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:302
+#: ../../src/ui_fsmenu/netsetup_lan.cc:308
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Соединение невозможно. Некорректное имя хоста или адрес."
 
@@ -6099,7 +6121,7 @@ msgstr "Показывать здания"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:381
+#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:380
 msgid "Show Workarea Overlaps"
 msgstr "Показывать слои рабочей области"
 
@@ -7226,69 +7248,77 @@ msgstr "%1$s%2$s"
 msgid "Fastplace #%i"
 msgstr "Площадка №%i"
 
-#: ../../src/wui/actionconfirm.cc:187
+#: ../../src/wui/actionconfirm.cc:198
 msgid "Destroy building?"
 msgstr "Разрушить здание?"
 
-#: ../../src/wui/actionconfirm.cc:188
+#: ../../src/wui/actionconfirm.cc:199
 msgid "Do you really want to destroy this building?"
 msgstr "Вы уверены, что хотите разрушить это строение?"
 
-#: ../../src/wui/actionconfirm.cc:248
+#: ../../src/wui/actionconfirm.cc:259
 msgid "Dismantle building?"
 msgstr "Разобрать строение?"
 
-#: ../../src/wui/actionconfirm.cc:249
+#: ../../src/wui/actionconfirm.cc:260
 msgid "Do you really want to dismantle this building?"
 msgstr "Вы уверены, что хотите разобрать это строение?"
 
-#: ../../src/wui/actionconfirm.cc:251 ../../src/wui/actionconfirm.cc:311
+#: ../../src/wui/actionconfirm.cc:262 ../../src/wui/actionconfirm.cc:322
 msgid "Preserve wares"
 msgstr "Запасено товаров"
 
-#: ../../src/wui/actionconfirm.cc:253
+#: ../../src/wui/actionconfirm.cc:264
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
 msgstr "Оставшиеся в здании товары будут вынесены строителем, что задержит демонтаж"
 
-#: ../../src/wui/actionconfirm.cc:302
+#: ../../src/wui/actionconfirm.cc:313
 msgid "Enhance building?"
 msgstr "Улучшить здание?"
 
-#: ../../src/wui/actionconfirm.cc:306 ../../src/wui/actionconfirm.cc:309
+#: ../../src/wui/actionconfirm.cc:317 ../../src/wui/actionconfirm.cc:320
 msgid "Do you really want to enhance this building?"
 msgstr "Вы действительно хотите улучшить это строение?"
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
-#: ../../src/wui/actionconfirm.cc:308
+#: ../../src/wui/actionconfirm.cc:319
 msgid "Be careful if the enemy is near!"
 msgstr "Будьте осторожны, если враг находится рядом!"
 
-#: ../../src/wui/actionconfirm.cc:315
+#: ../../src/wui/actionconfirm.cc:326
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
 msgstr "Оставшиеся в здании товары будут вынесены строителем, что задержит снос"
 
-#: ../../src/wui/actionconfirm.cc:366
+#: ../../src/wui/actionconfirm.cc:377
 msgid "Sink the ship?"
 msgstr "Затопить корабль?"
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:368
+#: ../../src/wui/actionconfirm.cc:379
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr "Вы действительно хотите затопить %s?"
 
-#: ../../src/wui/actionconfirm.cc:405
+#: ../../src/wui/actionconfirm.cc:416
 msgid "Cancel expedition?"
 msgstr "Отменить экспедицию?"
 
-#: ../../src/wui/actionconfirm.cc:406
+#: ../../src/wui/actionconfirm.cc:417
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Вы действительно хотите отменить текущую экспедицию?"
+
+#: ../../src/wui/actionconfirm.cc:456
+msgid "Do you really want to give up and become a spectator?"
+msgstr ""
+
+#: ../../src/wui/actionconfirm.cc:456
+msgid "Resign?"
+msgstr ""
 
 #: ../../src/wui/attack_window.cc:46
 msgid "Attack"
@@ -7871,82 +7901,80 @@ msgstr "Замените игрока %s"
 msgid "Debug Field"
 msgstr "Отладочное поле"
 
-#: ../../src/wui/game_diplomacy_menu.cc:45
-msgid "Accept"
-msgstr ""
-
-#: ../../src/wui/game_diplomacy_menu.cc:48
-msgid "Reject"
-msgstr ""
-
-#: ../../src/wui/game_diplomacy_menu.cc:62
-#, c-format
-msgid "%s has invited you to join their team."
-msgstr ""
-
-#: ../../src/wui/game_diplomacy_menu.cc:63
-#, c-format
-msgid "%s wants to join your team."
-msgstr ""
-
-#: ../../src/wui/game_diplomacy_menu.cc:170
+#: ../../src/wui/game_diplomacy_menu.cc:87
 msgid "Leave"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:171
+#: ../../src/wui/game_diplomacy_menu.cc:88
 msgid "Leave your current team and become teamless"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:173
+#: ../../src/wui/game_diplomacy_menu.cc:90
 msgid "Resign"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:174
+#: ../../src/wui/game_diplomacy_menu.cc:91
 msgid "Give up and become a spectator"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:186
+#: ../../src/wui/game_diplomacy_menu.cc:108
 msgid "Join"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:187
+#: ../../src/wui/game_diplomacy_menu.cc:109
 msgid "Request to join this player’s team"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:189
+#: ../../src/wui/game_diplomacy_menu.cc:111
 msgid "Invite"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:190
+#: ../../src/wui/game_diplomacy_menu.cc:112
 msgid "Invite this player to join your team"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:258
+#: ../../src/wui/game_diplomacy_menu.cc:187
 msgid "No team"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:258
+#: ../../src/wui/game_diplomacy_menu.cc:187
 #, c-format
 msgid "Team %u"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:273
+#: ../../src/wui/game_diplomacy_menu.cc:202
 #, c-format
 msgid "Won at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:276
+#: ../../src/wui/game_diplomacy_menu.cc:205
 #, c-format
 msgid "Lost at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:279
+#: ../../src/wui/game_diplomacy_menu.cc:208
 #, c-format
 msgid "Resigned at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:313
-msgid "Pending Diplomacy Actions"
+#: ../../src/wui/game_diplomacy_menu.cc:267
+msgid "Approve"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:268
+msgid "Reject"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:274
+msgid "Accept"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:275
+msgid "Refuse"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:290
+msgid "Retract"
 msgstr ""
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
@@ -8527,25 +8555,25 @@ msgid "%1$s (%2$s) (%3$s)"
 msgstr ""
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../src/wui/interactive_player.cc:182
+#: ../../src/wui/interactive_player.cc:181
 #: ../../src/wui/interactive_spectator.cc:45
 msgid "Statistics"
 msgstr "Статистика"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:310 ../../src/wui/map_tags.cc:51
+#: ../../src/wui/interactive_player.cc:309 ../../src/wui/map_tags.cc:51
 msgid "Seafaring"
 msgstr "С мореплаванием"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:316
+#: ../../src/wui/interactive_player.cc:315
 #: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:287
 msgid "Soldiers"
 msgstr "Солдаты"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:321 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:320 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Запасы"
@@ -8553,17 +8581,17 @@ msgstr "Запасы"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:378
+#: ../../src/wui/interactive_player.cc:377
 msgid "Hide Workarea Overlaps"
 msgstr "Скрыть слои рабочей области"
 
-#: ../../src/wui/interactive_player.cc:384
+#: ../../src/wui/interactive_player.cc:383
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "Переключить, указываются ли перекрывающиеся рабочие области при размещении строительной площадки"
 
-#: ../../src/wui/interactive_player.cc:466
+#: ../../src/wui/interactive_player.cc:465
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"

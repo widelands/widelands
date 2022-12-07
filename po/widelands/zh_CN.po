@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-28 03:22+0000\n"
+"POT-Creation-Date: 2022-12-04 03:01+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Jiawei Sun, 2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -108,7 +108,7 @@ msgstr "%1$s or %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/richtext.lua:612 ../../data/scripting/richtext.lua:617
 #: ../../src/base/i18n.cc:415 ../../src/base/i18n.cc:424
-#: ../../src/logic/addons.cc:198
+#: ../../src/logic/addons.cc:200
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s,%2$s"
@@ -324,7 +324,7 @@ msgid "Redo"
 msgstr "重做"
 
 #: ../../src/editor/editorinteractive.cc:172
-#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:232
+#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:231
 msgid "Help"
 msgstr "帮助"
 
@@ -601,7 +601,7 @@ msgstr "未保存的地图"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "这个地图没有保存，您确定真的要退出吗？"
 
-#: ../../src/editor/editorinteractive.cc:1049 ../../src/logic/addons.cc:46
+#: ../../src/editor/editorinteractive.cc:1049 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1341
@@ -839,7 +839,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:158
-#: ../../src/ui_fsmenu/netsetup_lan.cc:131 ../../src/wui/mapdetails.cc:136
+#: ../../src/ui_fsmenu/netsetup_lan.cc:137 ../../src/wui/mapdetails.cc:136
 #: ../../src/wui/minimap.cc:143
 msgid "Map"
 msgstr "地图"
@@ -1020,7 +1020,7 @@ msgid "Add a player to this team"
 msgstr "添加一个游戏玩家到这个团队"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:323
-#: ../../src/logic/addons.cc:64
+#: ../../src/logic/addons.cc:65
 msgid "Theme"
 msgstr "主题"
 
@@ -1297,7 +1297,7 @@ msgstr "建立目录"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:162
-#: ../../src/ui_fsmenu/internet_lobby.cc:490
+#: ../../src/ui_fsmenu/internet_lobby.cc:496
 msgid "unnamed"
 msgstr "未命名"
 
@@ -1394,7 +1394,7 @@ msgstr "玩家数量"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:131
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:185
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:49
-#: ../../src/wui/game_diplomacy_menu.cc:160
+#: ../../src/wui/game_diplomacy_menu.cc:77
 #, c-format
 msgid "Player %u"
 msgstr "玩家 %u"
@@ -1564,8 +1564,8 @@ msgstr "命令队列"
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:147
 #: ../../src/map_io/widelands_map_loader.cc:394
 #: ../../src/wlapplication_options.cc:543
-#: ../../src/wui/interactive_player.cc:222
-#: ../../src/wui/interactive_player.cc:461
+#: ../../src/wui/interactive_player.cc:221
+#: ../../src/wui/interactive_player.cc:460
 msgid "Messages"
 msgstr "消息"
 
@@ -1709,102 +1709,112 @@ msgstr "没有"
 msgid "off"
 msgstr "关闭"
 
-#: ../../src/logic/addons.cc:47
+#: ../../src/logic/addons.cc:49
 msgid "Tribes"
 msgstr "部落"
 
-#: ../../src/logic/addons.cc:49
+#: ../../src/logic/addons.cc:51
 msgid "World"
 msgstr "世界"
 
-#: ../../src/logic/addons.cc:52
+#: ../../src/logic/addons.cc:53
 msgid "Script"
 msgstr "脚本"
 
-#: ../../src/logic/addons.cc:53
+#: ../../src/logic/addons.cc:55
 msgid "Map Set"
 msgstr "地图设置"
 
 #. * TRANSLATORS: Header for campaign name
-#: ../../src/logic/addons.cc:55 ../../src/ui_fsmenu/campaigndetails.cc:47
+#: ../../src/logic/addons.cc:57 ../../src/ui_fsmenu/campaigndetails.cc:47
 msgid "Campaign"
 msgstr "战役"
 
-#: ../../src/logic/addons.cc:59
+#: ../../src/logic/addons.cc:60
 msgid "Win Condition"
 msgstr "胜利条件"
 
-#: ../../src/logic/addons.cc:61
+#: ../../src/logic/addons.cc:63
 msgid "Starting Condition"
 msgstr "起始条件"
 
-#: ../../src/logic/addons.cc:104
+#: ../../src/logic/addons.cc:106
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:171
+#: ../../src/logic/addons.cc:173
 msgid "No conflicts"
 msgstr "没有冲突"
 
-#: ../../src/logic/addons.cc:176
+#: ../../src/logic/addons.cc:178
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (预期版本 %2$s, 找到 %3$s)"
 
-#: ../../src/logic/addons.cc:179 ../../src/logic/addons.cc:215
+#: ../../src/logic/addons.cc:181 ../../src/logic/addons.cc:217
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (预期版本 %3$s,找到 %4$s)"
 
-#: ../../src/logic/addons.cc:186
+#: ../../src/logic/addons.cc:188
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$u 错误的附件版本: %2$s"
 
-#: ../../src/logic/addons.cc:201
+#: ../../src/logic/addons.cc:203
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] "%1$u 缺少附件: %2$s"
 
-#: ../../src/logic/addons.cc:209
+#: ../../src/logic/addons.cc:211
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (缺少)"
 
-#: ../../src/logic/addons.cc:211
+#: ../../src/logic/addons.cc:213
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (缺少)"
 
-#: ../../src/logic/addons.cc:219
+#: ../../src/logic/addons.cc:221
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s 和 %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:220
+#: ../../src/logic/addons.cc:222
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
 msgstr[0] "%u 缺少插件"
 
-#: ../../src/logic/addons.cc:222
+#: ../../src/logic/addons.cc:224
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
 msgstr[0] "%u 错误的插件版本"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:233
+#: ../../src/logic/addons.cc:235
 msgid "None"
 msgstr "没有"
 
-#: ../../src/logic/addons.cc:237
+#: ../../src/logic/addons.cc:239
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (版本 %3$s)"
+
+#: ../../src/logic/addons.cc:269
+msgid "No game-relevant add-ons in use."
+msgstr ""
+
+#: ../../src/logic/addons.cc:274
+#, c-format
+msgid "%u game-relevant add-on in use:"
+msgid_plural "%u game-relevant add-ons in use:"
+msgstr[0] ""
 
 #: ../../src/logic/editor_game_base.cc:252
 #, c-format
@@ -2304,7 +2314,7 @@ msgstr "船舶"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:154
-#: ../../src/wui/interactive_player.cc:331
+#: ../../src/wui/interactive_player.cc:330
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
 msgid "Wares"
@@ -2326,7 +2336,7 @@ msgstr "劳动者"
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:329
 #: ../../src/wui/general_statistics_menu.cc:150
-#: ../../src/wui/interactive_player.cc:326 ../../src/wui/minimap.cc:199
+#: ../../src/wui/interactive_player.cc:325 ../../src/wui/minimap.cc:199
 msgid "Buildings"
 msgstr "建筑物"
 
@@ -2451,7 +2461,7 @@ msgstr "地图文件已经失效：\n%s"
 msgid "This objective has no description."
 msgstr "此目标无描述。"
 
-#: ../../src/logic/player.cc:1945
+#: ../../src/logic/player.cc:1966
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2459,8 +2469,7 @@ msgstr "船 %d"
 
 #: ../../src/logic/playercommand.cc:2152
 #: ../../src/wlapplication_options.cc:539
-#: ../../src/wui/game_diplomacy_menu.cc:37
-#: ../../src/wui/game_diplomacy_menu.cc:114
+#: ../../src/wui/game_diplomacy_menu.cc:36
 #: ../../src/wui/interactive_gamebase.cc:234
 msgid "Diplomacy"
 msgstr ""
@@ -2492,43 +2501,53 @@ msgid "Team Joining Invitation"
 msgstr ""
 
 #: ../../src/logic/playercommand.cc:2190
-#: ../../src/wui/game_diplomacy_menu.cc:320
+#: ../../src/wui/game_diplomacy_menu.cc:264
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
 msgstr ""
 
 #: ../../src/logic/playercommand.cc:2191
-#: ../../src/wui/game_diplomacy_menu.cc:325
+#: ../../src/wui/game_diplomacy_menu.cc:271
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2216
-msgid "Team Change Accepted"
-msgstr ""
-
-#: ../../src/logic/playercommand.cc:2216
-msgid "Team Change Rejected"
-msgstr ""
-
-#: ../../src/logic/playercommand.cc:2218
+#: ../../src/logic/playercommand.cc:2230
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2219
+#: ../../src/logic/playercommand.cc:2232
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2221
+#: ../../src/logic/playercommand.cc:2237
+#, c-format
+msgid "%1$s has retracted the request to join the team of %2$s."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2239
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2222
+#: ../../src/logic/playercommand.cc:2242
+#, c-format
+msgid "%1$s has retracted the invitation to %2$s to join their team."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2244
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2248
+msgid "Team Change Accepted"
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2248
+msgid "Team Change Rejected"
 msgstr ""
 
 #: ../../src/logic/replay.cc:86
@@ -2653,7 +2672,7 @@ msgstr "脚本"
 #: ../../src/map_io/widelands_map_loader.cc:412
 #: ../../src/wlapplication_options.cc:534
 #: ../../src/wui/game_objectives_menu.cc:30
-#: ../../src/wui/interactive_player.cc:212
+#: ../../src/wui/interactive_player.cc:211
 msgid "Objectives"
 msgstr "目标"
 
@@ -4940,64 +4959,64 @@ msgstr "打开一个新游戏"
 msgid "Leave Lobby"
 msgstr "离开大厅"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:161
+#: ../../src/ui_fsmenu/internet_lobby.cc:167
 msgid "User Status"
 msgstr "用户状态"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:162
+#: ../../src/ui_fsmenu/internet_lobby.cc:168
 msgid "Administrator"
 msgstr "管理员"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:163
+#: ../../src/ui_fsmenu/internet_lobby.cc:169
 msgid "Registered"
 msgstr "已注册"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:164
+#: ../../src/ui_fsmenu/internet_lobby.cc:170
 msgid "Unregistered"
 msgstr "未注册"
 
 #. * TRANSLATORS: Player Name
-#: ../../src/ui_fsmenu/internet_lobby.cc:167
+#: ../../src/ui_fsmenu/internet_lobby.cc:173
 msgctxt "player"
 msgid "Name"
 msgstr "姓名"
 
 #. * TRANSLATORS: Widelands version
-#: ../../src/ui_fsmenu/internet_lobby.cc:169
+#: ../../src/ui_fsmenu/internet_lobby.cc:175
 msgid "Version"
 msgstr "版本"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:171
+#: ../../src/ui_fsmenu/internet_lobby.cc:177
 #: ../../src/ui_fsmenu/keyboard_options.cc:295
 msgid "Game"
 msgstr "游戏"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:417
+#: ../../src/ui_fsmenu/internet_lobby.cc:423
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
 msgstr "游戏%s已在运行中，请选择其他名称。"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:430
+#: ../../src/ui_fsmenu/internet_lobby.cc:436
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr " Widelands不能及时获取服务器的IP地址。似乎存在一个网络问题，这个问题不在客户端就在服务器端。 \n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:433
+#: ../../src/ui_fsmenu/internet_lobby.cc:439
 msgid "Connection Timed Out"
 msgstr "连接超时 "
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:458
-#: ../../src/ui_fsmenu/internet_lobby.cc:517
-#: ../../src/ui_fsmenu/netsetup_lan.cc:313
-#: ../../src/ui_fsmenu/netsetup_lan.cc:335
+#: ../../src/ui_fsmenu/internet_lobby.cc:464
+#: ../../src/ui_fsmenu/internet_lobby.cc:523
+#: ../../src/ui_fsmenu/netsetup_lan.cc:319
+#: ../../src/ui_fsmenu/netsetup_lan.cc:341
 msgid "Network Error"
 msgstr "网络错误"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:482
+#: ../../src/ui_fsmenu/internet_lobby.cc:488
 #, c-format
 msgid "unnamed %u"
 msgstr "未命名 %u"
@@ -5047,7 +5066,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:292
-#: ../../src/wui/interactive_player.cc:336
+#: ../../src/wui/interactive_player.cc:335
 msgid "General"
 msgstr "常规的"
 
@@ -5265,7 +5284,7 @@ msgstr "昵称："
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:676
+#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:676
 msgid "nobody"
 msgstr "没有人"
 
@@ -5480,11 +5499,11 @@ msgstr ""
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:915 ../../src/ui_fsmenu/netsetup_lan.cc:324
+#: ../../src/ui_fsmenu/main.cc:915 ../../src/ui_fsmenu/netsetup_lan.cc:330
 msgid "No tribes found!"
 msgstr "找不到部落！"
 
-#: ../../src/ui_fsmenu/main.cc:916 ../../src/ui_fsmenu/netsetup_lan.cc:325
+#: ../../src/ui_fsmenu/main.cc:916 ../../src/ui_fsmenu/netsetup_lan.cc:331
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "在 data/tribes/initialization/[tribename]/init.lua 中找不到部落。"
 
@@ -5822,13 +5841,13 @@ msgstr "共享给"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:337
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:338
-#: ../../src/ui_fsmenu/netsetup_lan.cc:227
+#: ../../src/ui_fsmenu/netsetup_lan.cc:233
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:188
 msgid "Closed"
 msgstr "关闭"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:342
-#: ../../src/ui_fsmenu/netsetup_lan.cc:224
+#: ../../src/ui_fsmenu/netsetup_lan.cc:230
 msgid "Open"
 msgstr "开放"
 
@@ -5889,31 +5908,31 @@ msgstr "载入先前的主机"
 msgid "Host a new game"
 msgstr "发起新游戏"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:130
+#: ../../src/ui_fsmenu/netsetup_lan.cc:136
 msgid "Host"
 msgstr "主机"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:132
+#: ../../src/ui_fsmenu/netsetup_lan.cc:138
 msgid "State"
 msgstr "状态"
 
 #. * TRANSLATORS: The state of a LAN game can be open, closed or unknown
-#: ../../src/ui_fsmenu/netsetup_lan.cc:231
+#: ../../src/ui_fsmenu/netsetup_lan.cc:237
 msgctxt "game_state"
 msgid "Unknown"
 msgstr "不详"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:280
+#: ../../src/ui_fsmenu/netsetup_lan.cc:286
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
 msgstr "键入一个有效的昵称。昵称只能由英文字母，数字，和@ . + - _ 等英文输入法状态下的字符构成，且不能是团队名。"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:301
+#: ../../src/ui_fsmenu/netsetup_lan.cc:307
 msgid "Invalid Address"
 msgstr "无效地址"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:302
+#: ../../src/ui_fsmenu/netsetup_lan.cc:308
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "输入的主机名或地址是无效的，无法进行连接。 "
 
@@ -6008,7 +6027,7 @@ msgstr "显示建筑"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:381
+#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:380
 msgid "Show Workarea Overlaps"
 msgstr "显示叠加的工作区域"
 
@@ -7135,69 +7154,77 @@ msgstr "%1$s%2$s"
 msgid "Fastplace #%i"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:187
+#: ../../src/wui/actionconfirm.cc:198
 msgid "Destroy building?"
 msgstr "摧毁建筑？"
 
-#: ../../src/wui/actionconfirm.cc:188
+#: ../../src/wui/actionconfirm.cc:199
 msgid "Do you really want to destroy this building?"
 msgstr "你真的想摧毁这栋建筑吗？ "
 
-#: ../../src/wui/actionconfirm.cc:248
+#: ../../src/wui/actionconfirm.cc:259
 msgid "Dismantle building?"
 msgstr "拆除建筑？"
 
-#: ../../src/wui/actionconfirm.cc:249
+#: ../../src/wui/actionconfirm.cc:260
 msgid "Do you really want to dismantle this building?"
 msgstr "你真的想拆除这栋建筑吗？ "
 
-#: ../../src/wui/actionconfirm.cc:251 ../../src/wui/actionconfirm.cc:311
+#: ../../src/wui/actionconfirm.cc:262 ../../src/wui/actionconfirm.cc:322
 msgid "Preserve wares"
 msgstr "保存物品"
 
-#: ../../src/wui/actionconfirm.cc:253
+#: ../../src/wui/actionconfirm.cc:264
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
 msgstr "建筑者会把留在大楼里的所有物品都扔掉，从而延长拆卸时间"
 
-#: ../../src/wui/actionconfirm.cc:302
+#: ../../src/wui/actionconfirm.cc:313
 msgid "Enhance building?"
 msgstr "升级建筑？"
 
-#: ../../src/wui/actionconfirm.cc:306 ../../src/wui/actionconfirm.cc:309
+#: ../../src/wui/actionconfirm.cc:317 ../../src/wui/actionconfirm.cc:320
 msgid "Do you really want to enhance this building?"
 msgstr "你真的想把这栋建筑升级吗？ "
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
-#: ../../src/wui/actionconfirm.cc:308
+#: ../../src/wui/actionconfirm.cc:319
 msgid "Be careful if the enemy is near!"
 msgstr "敌人在附近的时候一定要小心！"
 
-#: ../../src/wui/actionconfirm.cc:315
+#: ../../src/wui/actionconfirm.cc:326
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
 msgstr "建筑者会把留在大楼里的所有物品都扔掉，从而延长升级时间"
 
-#: ../../src/wui/actionconfirm.cc:366
+#: ../../src/wui/actionconfirm.cc:377
 msgid "Sink the ship?"
 msgstr "沉掉这艘船？"
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:368
+#: ../../src/wui/actionconfirm.cc:379
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr "你真的想沉掉%s吗？"
 
-#: ../../src/wui/actionconfirm.cc:405
+#: ../../src/wui/actionconfirm.cc:416
 msgid "Cancel expedition?"
 msgstr "取消探险？"
 
-#: ../../src/wui/actionconfirm.cc:406
+#: ../../src/wui/actionconfirm.cc:417
 msgid "Do you really want to cancel the active expedition?"
 msgstr "你真的想放弃已激活的探险？"
+
+#: ../../src/wui/actionconfirm.cc:456
+msgid "Do you really want to give up and become a spectator?"
+msgstr ""
+
+#: ../../src/wui/actionconfirm.cc:456
+msgid "Resign?"
+msgstr ""
 
 #: ../../src/wui/attack_window.cc:46
 msgid "Attack"
@@ -7777,82 +7804,80 @@ msgstr "使用%s替换游戏玩家"
 msgid "Debug Field"
 msgstr "调试区域"
 
-#: ../../src/wui/game_diplomacy_menu.cc:45
-msgid "Accept"
-msgstr ""
-
-#: ../../src/wui/game_diplomacy_menu.cc:48
-msgid "Reject"
-msgstr ""
-
-#: ../../src/wui/game_diplomacy_menu.cc:62
-#, c-format
-msgid "%s has invited you to join their team."
-msgstr ""
-
-#: ../../src/wui/game_diplomacy_menu.cc:63
-#, c-format
-msgid "%s wants to join your team."
-msgstr ""
-
-#: ../../src/wui/game_diplomacy_menu.cc:170
+#: ../../src/wui/game_diplomacy_menu.cc:87
 msgid "Leave"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:171
+#: ../../src/wui/game_diplomacy_menu.cc:88
 msgid "Leave your current team and become teamless"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:173
+#: ../../src/wui/game_diplomacy_menu.cc:90
 msgid "Resign"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:174
+#: ../../src/wui/game_diplomacy_menu.cc:91
 msgid "Give up and become a spectator"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:186
+#: ../../src/wui/game_diplomacy_menu.cc:108
 msgid "Join"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:187
+#: ../../src/wui/game_diplomacy_menu.cc:109
 msgid "Request to join this player’s team"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:189
+#: ../../src/wui/game_diplomacy_menu.cc:111
 msgid "Invite"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:190
+#: ../../src/wui/game_diplomacy_menu.cc:112
 msgid "Invite this player to join your team"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:258
+#: ../../src/wui/game_diplomacy_menu.cc:187
 msgid "No team"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:258
+#: ../../src/wui/game_diplomacy_menu.cc:187
 #, c-format
 msgid "Team %u"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:273
+#: ../../src/wui/game_diplomacy_menu.cc:202
 #, c-format
 msgid "Won at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:276
+#: ../../src/wui/game_diplomacy_menu.cc:205
 #, c-format
 msgid "Lost at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:279
+#: ../../src/wui/game_diplomacy_menu.cc:208
 #, c-format
 msgid "Resigned at %s"
 msgstr ""
 
-#: ../../src/wui/game_diplomacy_menu.cc:313
-msgid "Pending Diplomacy Actions"
+#: ../../src/wui/game_diplomacy_menu.cc:267
+msgid "Approve"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:268
+msgid "Reject"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:274
+msgid "Accept"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:275
+msgid "Refuse"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:290
+msgid "Retract"
 msgstr ""
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
@@ -8421,25 +8446,25 @@ msgid "%1$s (%2$s) (%3$s)"
 msgstr ""
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../src/wui/interactive_player.cc:182
+#: ../../src/wui/interactive_player.cc:181
 #: ../../src/wui/interactive_spectator.cc:45
 msgid "Statistics"
 msgstr "统计"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:310 ../../src/wui/map_tags.cc:51
+#: ../../src/wui/interactive_player.cc:309 ../../src/wui/map_tags.cc:51
 msgid "Seafaring"
 msgstr "航海"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:316
+#: ../../src/wui/interactive_player.cc:315
 #: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:287
 msgid "Soldiers"
 msgstr "士兵"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:321 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:320 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "存货"
@@ -8447,17 +8472,17 @@ msgstr "存货"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:378
+#: ../../src/wui/interactive_player.cc:377
 msgid "Hide Workarea Overlaps"
 msgstr "隐藏工作区重叠"
 
-#: ../../src/wui/interactive_player.cc:384
+#: ../../src/wui/interactive_player.cc:383
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "放置建筑场所时是否切换标识重叠的部分的工作区域"
 
-#: ../../src/wui/interactive_player.cc:466
+#: ../../src/wui/interactive_player.cc:465
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"

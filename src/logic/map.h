@@ -256,7 +256,7 @@ public:
 	 * Counts the valuable fields that are owned by each player. Only players that currently own a
 	 * field are added. Returns a map of <player number, number of owned fields>.
 	 */
-	std::map<PlayerNumber, size_t>
+	[[nodiscard]] std::map<PlayerNumber, size_t>
 	count_owned_valuable_fields(const std::string& immovable_attribute) const;
 
 	/***
@@ -276,7 +276,7 @@ public:
 	void set_nrplayers(PlayerNumber);
 
 	void set_starting_pos(PlayerNumber, const Coords&);
-	Coords get_starting_pos(PlayerNumber const p) const {
+	[[nodiscard]] Coords get_starting_pos(PlayerNumber const p) const {
 		assert(1 <= p && p <= get_nrplayers());
 		return starting_pos_[p - 1];
 	}
@@ -297,93 +297,93 @@ public:
 
 	// Allows access to the filesystem of the map to access auxiliary files.
 	// This can be nullptr if this file is new.
-	FileSystem* filesystem() const;
+	[[nodiscard]] FileSystem* filesystem() const;
 	// swap the filesystem after load / save
 	void swap_filesystem(std::unique_ptr<FileSystem>& fs);
 	void reset_filesystem();
 
 	// informational functions
-	const std::string& get_filename() const {
+	[[nodiscard]] const std::string& get_filename() const {
 		return filename_;
 	}
-	const std::string& get_author() const {
+	[[nodiscard]] const std::string& get_author() const {
 		return author_;
 	}
-	bool get_localize_author() const {
+	[[nodiscard]] bool get_localize_author() const {
 		return localize_author_;
 	}
-	const std::string& get_name() const {
+	[[nodiscard]] const std::string& get_name() const {
 		return name_;
 	}
-	const std::string& get_description() const {
+	[[nodiscard]] const std::string& get_description() const {
 		return description_;
 	}
-	const std::string& get_hint() const {
+	[[nodiscard]] const std::string& get_hint() const {
 		return hint_;
 	}
-	const std::string& get_background() const {
+	[[nodiscard]] const std::string& get_background() const {
 		return background_;
 	}
-	const std::string& get_background_theme() const {
+	[[nodiscard]] const std::string& get_background_theme() const {
 		return background_theme_;
 	}
 
-	const MapVersion& version() const {
+	[[nodiscard]] const MapVersion& version() const {
 		return map_version_;
 	}
 
 	using Tags = std::set<std::string>;
-	const Tags& get_tags() const {
+	[[nodiscard]] const Tags& get_tags() const {
 		return tags_;
 	}
 	void clear_tags() {
 		tags_.clear();
 	}
-	bool has_tag(const std::string& s) const {
+	[[nodiscard]] bool has_tag(const std::string& s) const {
 		return tags_.count(s);
 	}
 
-	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {
+	[[nodiscard]] const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {
 		return suggested_teams_;
 	}
 	std::vector<SuggestedTeamLineup>& get_suggested_teams() {
 		return suggested_teams_;
 	}
 
-	PlayerNumber get_nrplayers() const {
+	[[nodiscard]] PlayerNumber get_nrplayers() const {
 		return nrplayers_;
 	}
-	ScenarioTypes scenario_types() const {
+	[[nodiscard]] ScenarioTypes scenario_types() const {
 		return scenario_types_;
 	}
-	Extent extent() const {
+	[[nodiscard]] Extent extent() const {
 		return Extent(width_, height_);
 	}
-	int16_t get_width() const {
+	[[nodiscard]] int16_t get_width() const {
 		return width_;
 	}
-	int16_t get_height() const {
+	[[nodiscard]] int16_t get_height() const {
 		return height_;
 	}
 
 	// Map compatibility information for the website
-	const std::string& minimum_required_widelands_version() const;
+	[[nodiscard]] const std::string& minimum_required_widelands_version() const;
 
 	//  The next few functions are only valid when the map is loaded as a
 	//  scenario.
-	const std::string& get_scenario_player_tribe(PlayerNumber) const;
-	const std::string& get_scenario_player_name(PlayerNumber) const;
-	const std::string& get_scenario_player_ai(PlayerNumber) const;
-	bool get_scenario_player_closeable(PlayerNumber) const;
+	[[nodiscard]] const std::string& get_scenario_player_tribe(PlayerNumber) const;
+	[[nodiscard]] const std::string& get_scenario_player_name(PlayerNumber) const;
+	[[nodiscard]] const std::string& get_scenario_player_ai(PlayerNumber) const;
+	[[nodiscard]] bool get_scenario_player_closeable(PlayerNumber) const;
 	void set_scenario_player_tribe(PlayerNumber, const std::string&);
 	void set_scenario_player_name(PlayerNumber, const std::string&);
 	void set_scenario_player_ai(PlayerNumber, const std::string&);
 	void set_scenario_player_closeable(PlayerNumber, bool);
 
 	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, immovables etc.)
-	NodeCaps get_max_nodecaps(const EditorGameBase&, const FCoords&) const;
+	[[nodiscard]] NodeCaps get_max_nodecaps(const EditorGameBase&, const FCoords&) const;
 
-	BaseImmovable* get_immovable(const Coords&) const;
+	[[nodiscard]] BaseImmovable* get_immovable(const Coords&) const;
 	uint32_t find_bobs(const EditorGameBase&,
 	                   const Area<FCoords>,
 	                   std::vector<Bob*>* list,
@@ -420,58 +420,58 @@ public:
 
 	// Field logic
 	static MapIndex get_index(const Coords&, int16_t width);
-	MapIndex get_index(const Coords&) const;
-	MapIndex max_index() const {
+	[[nodiscard]] MapIndex get_index(const Coords&) const;
+	[[nodiscard]] MapIndex max_index() const {
 		return width_ * height_;
 	}
 	Field& operator[](MapIndex) const;
 	Field& operator[](const Coords&) const;
-	FCoords get_fcoords(const Coords&) const;
+	[[nodiscard]] FCoords get_fcoords(const Coords&) const;
 	static void normalize_coords(Coords&, int16_t, int16_t);
 	void normalize_coords(Coords&) const;
 	FCoords get_fcoords(Field&) const;
 	void get_coords(Field& f, Coords& c) const;
 
-	uint32_t calc_distance(const Coords&, const Coords&) const;
+	[[nodiscard]] uint32_t calc_distance(const Coords&, const Coords&) const;
 
-	int32_t calc_cost_estimate(const Coords&, const Coords&) const override;
-	int32_t calc_cost_lowerbound(const Coords&, const Coords&) const;
-	int32_t calc_cost(int32_t slope) const;
-	int32_t calc_cost(const Coords&, int32_t dir) const;
-	int32_t calc_bidi_cost(const Coords&, int32_t dir) const;
+	[[nodiscard]] int32_t calc_cost_estimate(const Coords&, const Coords&) const override;
+	[[nodiscard]] int32_t calc_cost_lowerbound(const Coords&, const Coords&) const;
+	[[nodiscard]] int32_t calc_cost(int32_t slope) const;
+	[[nodiscard]] int32_t calc_cost(const Coords&, int32_t dir) const;
+	[[nodiscard]] int32_t calc_bidi_cost(const Coords&, int32_t dir) const;
 	void calc_cost(const Path&, int32_t* forward, int32_t* backward) const;
 
 	void get_ln(const Coords&, Coords*) const;
 	void get_ln(const FCoords&, FCoords*) const;
-	Coords l_n(const Coords&) const;
-	FCoords l_n(const FCoords&) const;
+	[[nodiscard]] Coords l_n(const Coords&) const;
+	[[nodiscard]] FCoords l_n(const FCoords&) const;
 	void get_rn(const Coords&, Coords*) const;
 	void get_rn(const FCoords&, FCoords*) const;
-	Coords r_n(const Coords&) const;
-	FCoords r_n(const FCoords&) const;
+	[[nodiscard]] Coords r_n(const Coords&) const;
+	[[nodiscard]] FCoords r_n(const FCoords&) const;
 	void get_tln(const Coords&, Coords*) const;
 	void get_tln(const FCoords&, FCoords*) const;
-	Coords tl_n(const Coords&) const;
-	FCoords tl_n(const FCoords&) const;
+	[[nodiscard]] Coords tl_n(const Coords&) const;
+	[[nodiscard]] FCoords tl_n(const FCoords&) const;
 	void get_trn(const Coords&, Coords*) const;
 	void get_trn(const FCoords&, FCoords*) const;
-	Coords tr_n(const Coords&) const;
-	FCoords tr_n(const FCoords&) const;
+	[[nodiscard]] Coords tr_n(const Coords&) const;
+	[[nodiscard]] FCoords tr_n(const FCoords&) const;
 	void get_bln(const Coords&, Coords*) const;
 	void get_bln(const FCoords&, FCoords*) const;
-	Coords bl_n(const Coords&) const;
-	FCoords bl_n(const FCoords&) const;
+	[[nodiscard]] Coords bl_n(const Coords&) const;
+	[[nodiscard]] FCoords bl_n(const FCoords&) const;
 	void get_brn(const Coords&, Coords*) const;
 	void get_brn(const FCoords&, FCoords*) const;
-	Coords br_n(const Coords&) const;
-	FCoords br_n(const FCoords&) const;
+	[[nodiscard]] Coords br_n(const Coords&) const;
+	[[nodiscard]] FCoords br_n(const FCoords&) const;
 
 	void get_neighbour(const Coords&, Direction dir, Coords*) const;
 	void get_neighbour(const FCoords&, Direction dir, FCoords*) const;
-	FCoords get_neighbour(const FCoords&, Direction dir) const;
+	[[nodiscard]] FCoords get_neighbour(const FCoords&, Direction dir) const;
 
-	std::set<Coords> to_set(Area<Coords> area) const;
-	std::set<TCoords<Coords>> triangles_in_region(std::set<Coords> area) const;
+	[[nodiscard]] std::set<Coords> to_set(Area<Coords> area) const;
+	[[nodiscard]] std::set<TCoords<Coords>> triangles_in_region(std::set<Coords> area) const;
 
 	// Pathfinding
 	int32_t findpath(Coords instart,
@@ -487,7 +487,7 @@ public:
 	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
 	 * MOVECAPS_WALK and at least one of the neighbours has MOVECAPS_SWIM
 	 */
-	bool can_reach_by_water(const Coords&) const;
+	[[nodiscard]] bool can_reach_by_water(const Coords&) const;
 
 	/// Sets the height to a value. Recalculates brightness. Changes the
 	/// surrounding nodes if necessary. Returns the radius that covers all
@@ -546,12 +546,12 @@ public:
 	 *
 	 * To qualify as valid, resources need to be surrounded by at least two matching terrains.
 	 */
-	bool is_resource_valid(const Widelands::Descriptions& descriptions,
-	                       const Widelands::FCoords& c,
-	                       DescriptionIndex curres) const;
+	[[nodiscard]] bool is_resource_valid(const Widelands::Descriptions& descriptions,
+	                                     const Widelands::FCoords& c,
+	                                     DescriptionIndex curres) const;
 
 	// The objectives that are defined in this map if it is a scenario.
-	const Objectives& objectives() const {
+	[[nodiscard]] const Objectives& objectives() const {
 		return objectives_;
 	}
 	Objectives* mutable_objectives() {
@@ -563,7 +563,7 @@ public:
 	}
 
 	/// Returns the military influence on a location from an area.
-	MilitaryInfluence calc_influence(Coords, Area<>) const;
+	[[nodiscard]] MilitaryInfluence calc_influence(Coords, Area<>) const;
 
 	/// Translate the whole map so that the given point becomes the new origin.
 	void set_origin(const Coords&);
@@ -572,8 +572,8 @@ public:
 
 	/// Checks whether the maximum theoretical possible NodeCap of the field is big,
 	/// and there is room for a port space
-	bool is_port_space_allowed(const EditorGameBase&, const FCoords& fc) const;
-	bool is_port_space(const Coords& c) const;
+	[[nodiscard]] bool is_port_space_allowed(const EditorGameBase&, const FCoords& fc) const;
+	[[nodiscard]] bool is_port_space(const Coords& c) const;
 
 	/// If 'set', set the space at 'c' as port space, otherwise unset.
 	/// 'force' sets the port space even if it isn't viable, and is to be used for map loading only.
@@ -583,13 +583,13 @@ public:
 	                    bool set,
 	                    bool force = false,
 	                    bool recalculate_seafaring = false);
-	const PortSpacesSet& get_port_spaces() const {
+	[[nodiscard]] const PortSpacesSet& get_port_spaces() const {
 		return port_spaces_;
 	}
-	std::vector<Coords> find_portdock(const Widelands::Coords& c, bool force) const;
+	[[nodiscard]] std::vector<Coords> find_portdock(const Widelands::Coords& c, bool force) const;
 
 	/// Return true if there are at least 2 port spaces that can be reached from each other by water
-	bool allows_seafaring() const;
+	[[nodiscard]] bool allows_seafaring() const;
 	/// Calculate whether there are at least 2 port spaces that can be reached from each other by
 	/// water and set the allows_seafaring property
 	void recalculate_allows_seafaring();
@@ -611,16 +611,16 @@ public:
 	// Creates a ResizeHistory that can be passed to set_to() later.
 	// This has to save the entire map's state because resize operations
 	// may affect all fields when resolving height differences etc.
-	ResizeHistory dump_state(const EditorGameBase&) const;
+	[[nodiscard]] ResizeHistory dump_state(const EditorGameBase&) const;
 
-	uint32_t get_waterway_max_length() const;
+	[[nodiscard]] uint32_t get_waterway_max_length() const;
 	void set_waterway_max_length(uint32_t max_length);
 
-	int max_field_height_diff() const {
+	[[nodiscard]] int max_field_height_diff() const {
 		return max_field_height_diff_;
 	}
 
-	const AddOns::AddOnRequirements& required_addons() const {
+	[[nodiscard]] const AddOns::AddOnRequirements& required_addons() const {
 		return required_addons_;
 	}
 
@@ -635,12 +635,12 @@ private:
 	void recalc_brightness(const FCoords&) const;
 	void recalc_nodecaps_pass1(const EditorGameBase&, const FCoords&);
 	void recalc_nodecaps_pass2(const EditorGameBase&, const FCoords& f);
-	NodeCaps
+	[[nodiscard]] NodeCaps
 	calc_nodecaps_pass1(const EditorGameBase&, const FCoords&, bool consider_mobs = true) const;
-	NodeCaps calc_nodecaps_pass2(const EditorGameBase&,
-	                             const FCoords&,
-	                             bool consider_mobs = true,
-	                             NodeCaps initcaps = CAPS_NONE) const;
+	[[nodiscard]] NodeCaps calc_nodecaps_pass2(const EditorGameBase&,
+	                                           const FCoords&,
+	                                           bool consider_mobs = true,
+	                                           NodeCaps initcaps = CAPS_NONE) const;
 	void check_neighbour_heights(FCoords, uint32_t& area);
 	int calc_buildsize(const EditorGameBase&,
 	                   const FCoords& f,
@@ -648,7 +648,8 @@ private:
 	                   bool* ismine = nullptr,
 	                   bool consider_mobs = true,
 	                   NodeCaps initcaps = CAPS_NONE) const;
-	bool is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>&) const;
+	[[nodiscard]] bool is_cycle_connected(const FCoords& start,
+	                                      const std::vector<WalkingDir>&) const;
 	template <typename functorT>
 	void
 	find_reachable(const EditorGameBase&, const Area<FCoords>&, const CheckStep&, functorT&) const;
