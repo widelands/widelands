@@ -108,7 +108,7 @@ public:
 		BufferedConnection* conn_;
 
 		/// The position of the next peek.
-		size_t peek_pointer_;
+		size_t peek_pointer_{0};
 	};
 
 	/**
@@ -331,7 +331,7 @@ private:
 	/// Protects receive_buffer_
 	std::mutex mutex_receive_;
 	/// Whether we are currently sending something, used within start_sending()
-	bool currently_sending_;
+	bool currently_sending_{false};
 };
 
 #endif  // end of include guard: WL_NETWORK_BUFFEREDCONNECTION_H
