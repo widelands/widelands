@@ -146,10 +146,10 @@ private:
 	ConstructionSite* target_constructionsite_;
 
 	Economy* economy_;
-	DescriptionIndex index_;  //  the index of the ware descr
-	Quantity count_;          //  how many do we need in total
-	bool exact_match_;        // Whether a worker supply has to match exactly
-	                          // or if a can_act_as() comparison is good enough
+	DescriptionIndex index_;   //  the index of the ware descr
+	Quantity count_{1};        //  how many do we need in total
+	bool exact_match_{false};  // Whether a worker supply has to match exactly
+	                           // or if a can_act_as() comparison is good enough
 
 	CallbackFn callbackfn_;  //  called on request success
 

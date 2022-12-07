@@ -41,8 +41,7 @@ public:
 	FlagDescr(char const* const init_name, char const* const init_descname)
 	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname) {
 	}
-	~FlagDescr() override {
-	}
+	~FlagDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(FlagDescr);
@@ -140,7 +139,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool is_dead_end() const;
 
 	bool has_capacity() const;
-	uint32_t total_capacity() {
+	uint32_t total_capacity() const {
 		return ware_capacity_;
 	}
 	uint32_t current_wares() const {
@@ -160,7 +159,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void call_carrier(Game&, WareInstance&, PlayerImmovable* nextstep);
 	void update_wares(Game&, Flag* other);
 
-	void remove_ware(EditorGameBase&, WareInstance* const);
+	void remove_ware(EditorGameBase&, WareInstance*);
 
 	void log_general_info(const EditorGameBase&) const override;
 
@@ -203,25 +202,25 @@ private:
 	};
 
 	Coords position_;
-	Time animstart_;
+	Time animstart_{0};
 
-	Building* building_;  ///< attached building (replaces road WALK_NW)
+	Building* building_ = nullptr;  ///< attached building (replaces road WALK_NW)
 	RoadBase* roads_[WalkingDir::LAST_DIRECTION];
 
-	int32_t ware_capacity_;  ///< size of wares_ array
-	int32_t ware_filled_;    ///< number of wares currently on the flag
-	PendingWare* wares_;     ///< wares currently on the flag
+	int32_t ware_capacity_ = 8;                            ///< size of wares_ array
+	int32_t ware_filled_ = 0;                              ///< number of wares currently on the flag
+	PendingWare* wares_{new PendingWare[ware_capacity_]};  ///< wares currently on the flag
 
 	/// call_carrier() will always call a carrier when the destination is
 	/// the given flag
-	Flag* always_call_for_flag_;
+	Flag* always_call_for_flag_ = nullptr;
 
 	using CapacityWaitQueue = std::deque<OPtr<Worker>>;
 	CapacityWaitQueue capacity_wait_;  ///< workers waiting for capacity
 
 	using FlagJobs = std::list<FlagJob>;
 	FlagJobs flag_jobs_;
-	bool act_pending_;
+	bool act_pending_ = false;
 	void do_schedule_act(Game&, const Duration&);
 };
 

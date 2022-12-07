@@ -131,8 +131,9 @@ void RouteAStar<Est_>::push(RoutingNode& node, int32_t cost, RoutingNode* backli
 }
 
 template <typename Est_> RoutingNode* RouteAStar<Est_>::step() {
-	if (open_.empty())
+	if (open_.empty()) {
 		return nullptr;
+	}
 
 	// Keep the neighbours vector around to avoid excessive amounts of memory
 	// allocations and frees.

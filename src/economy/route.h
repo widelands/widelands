@@ -41,7 +41,7 @@ struct Route : public IRoute {
 	friend struct Router;
 	friend class Request;
 
-	Route();
+	Route() = default;
 
 	void init(int32_t) override;
 
@@ -67,7 +67,7 @@ struct Route : public IRoute {
 	void insert_as_first(RoutingNode* node) override;
 
 private:
-	int32_t totalcost_;
+	int32_t totalcost_{0};
 	std::vector<OPtr<Flag>> route_;  ///< includes start and end flags
 };
 }  // namespace Widelands
