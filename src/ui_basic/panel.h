@@ -42,7 +42,7 @@ class FileWrite;
 class RenderTarget;
 namespace Widelands {
 struct MapObjectSaver;
-}
+}  // namespace Widelands
 
 namespace UI {
 
@@ -93,12 +93,12 @@ public:
 		pf_hide_all_overlays = 1 << 13,
 	};
 
-	Panel(Panel* const nparent,
+	Panel(Panel* nparent,
 	      UI::PanelStyle,
-	      int32_t const nx,
-	      int32_t const ny,
-	      int const nw,
-	      int const nh,
+	      int32_t nx,
+	      int32_t ny,
+	      int nw,
+	      int nh,
 	      const std::string& tooltip_text = std::string());
 	virtual ~Panel();
 
@@ -115,7 +115,7 @@ public:
 	// This check is used to stop panels from thinking and performing other
 	// activities to prevent undesired side-effects.
 	bool is_dying() const {
-		return flags_ & pf_die;
+		return (flags_ & pf_die) != 0u;
 	}
 
 	// Modal
@@ -187,13 +187,13 @@ public:
 		panel_snap_distance_ = value;
 	}
 	bool get_snap_windows_only_when_overlapping() const {
-		return flags_ & pf_snap_windows_only_when_overlapping;
+		return (flags_ & pf_snap_windows_only_when_overlapping) != 0u;
 	}
-	void set_snap_windows_only_when_overlapping(const bool on = true);
+	void set_snap_windows_only_when_overlapping(bool on = true);
 	bool get_dock_windows_to_edges() const {
-		return flags_ & pf_dock_windows_to_edges;
+		return (flags_ & pf_dock_windows_to_edges) != 0u;
 	}
-	void set_dock_windows_to_edges(const bool on = true);
+	void set_dock_windows_to_edges(bool on = true);
 	void set_inner_size(int nw, int nh);
 	void set_border(int l, int r, int t, int b);
 
@@ -242,7 +242,7 @@ public:
 
 	// Drawing, visibility
 	bool is_visible() const {
-		return flags_ & pf_visible;
+		return (flags_ & pf_visible) != 0u;
 	}
 	void set_visible(bool on);
 
@@ -293,7 +293,7 @@ public:
 
 	void set_can_focus(bool yes);
 	bool get_can_focus() const {
-		return flags_ & pf_can_focus;
+		return (flags_ & pf_can_focus) != 0u;
 	}
 	bool has_focus() const {
 		return (get_can_focus() && parent_->focus_ == this);
@@ -305,13 +305,14 @@ public:
 	}
 
 	void set_top_on_click(bool const on) {
-		if (on)
+		if (on) {
 			flags_ |= pf_top_on_click;
-		else
+		} else {
 			flags_ &= ~pf_top_on_click;
+		}
 	}
 	bool get_top_on_click() const {
-		return flags_ & pf_top_on_click;
+		return (flags_ & pf_top_on_click) != 0u;
 	}
 
 	static void set_allow_user_input(bool const t) {
@@ -426,7 +427,7 @@ protected:
 	void set_thinks(bool yes);
 
 	bool keyboard_free() {
-		return !(focus_);
+		return (focus_) == nullptr;
 	}
 
 	virtual void update_desired_size();
@@ -470,7 +471,7 @@ protected:
 	                   const std::string& message_to_display = std::string());
 
 private:
-	bool initialized_;
+	bool initialized_{false};
 
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;
@@ -502,9 +503,9 @@ private:
 
 	Panel* child_at_mouse_cursor(int32_t mouse_x, int32_t mouse_y, Panel* child);
 	void do_mousein(bool inside);
-	bool do_mousepress(const uint8_t btn, int32_t x, int32_t y);
-	bool do_mouserelease(const uint8_t btn, int32_t x, int32_t y);
-	bool do_mousemove(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool do_mousepress(uint8_t btn, int32_t x, int32_t y);
+	bool do_mouserelease(uint8_t btn, int32_t x, int32_t y);
+	bool do_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool do_mousewheel(int32_t x, int32_t y, uint16_t modstate, Vector2i rel_mouse_pos);
 	bool do_key(bool down, SDL_Keysym code);
 	bool do_textinput(const std::string& text);
@@ -514,10 +515,9 @@ private:
 	std::deque<Panel*> gather_focusable_children();
 
 	static Panel* ui_trackmouse(int32_t& x, int32_t& y);
-	static bool ui_mousepress(const uint8_t button, int32_t x, int32_t y);
-	static bool ui_mouserelease(const uint8_t button, int32_t x, int32_t y);
-	static bool
-	ui_mousemove(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	static bool ui_mousepress(uint8_t button, int32_t x, int32_t y);
+	static bool ui_mouserelease(uint8_t button, int32_t x, int32_t y);
+	static bool ui_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	static bool ui_mousewheel(int32_t x, int32_t y, uint16_t modstate);
 	static bool ui_key(bool down, SDL_Keysym code);
 	static bool ui_textinput(const std::string& text);
@@ -525,10 +525,10 @@ private:
 	Panel* parent_;
 	Panel* next_;
 	Panel* prev_;
-	Panel* first_child_;
-	Panel* last_child_;
-	Panel* mousein_child_;  //  child panel that the mouse is in
-	Panel* focus_;          //  keyboard focus
+	Panel* first_child_{nullptr};
+	Panel* last_child_{nullptr};
+	Panel* mousein_child_{nullptr};  //  child panel that the mouse is in
+	Panel* focus_{nullptr};          //  keyboard focus
 
 	std::atomic<uint32_t> flags_;
 
@@ -539,13 +539,13 @@ private:
 	int32_t x_, y_;
 	int w_, h_;
 	/*@}*/
-	int lborder_, rborder_, tborder_, bborder_;
-	uint8_t border_snap_distance_, panel_snap_distance_;
+	int lborder_{0}, rborder_{0}, tborder_{0}, bborder_{0};
+	uint8_t border_snap_distance_{0}, panel_snap_distance_{0};
 	int desired_w_, desired_h_;
 
 	friend struct ModalGuard;
 
-	bool running_;
+	bool running_{false};
 	int return_code_;
 
 	std::string tooltip_;
@@ -575,26 +575,28 @@ private:
 
 inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {
 	flags_ &= ~pf_snap_windows_only_when_overlapping;
-	if (on)
+	if (on) {
 		flags_ |= pf_snap_windows_only_when_overlapping;
+	}
 }
 inline void Panel::set_dock_windows_to_edges(const bool on) {
 	flags_ &= ~pf_dock_windows_to_edges;
-	if (on)
+	if (on) {
 		flags_ |= pf_dock_windows_to_edges;
+	}
 }
 
 /**
  * A Panel with a name. Important for scripting
  */
 struct NamedPanel : public Panel {
-	NamedPanel(Panel* const nparent,
+	NamedPanel(Panel* nparent,
 	           UI::PanelStyle s,
 	           const std::string& name,
-	           int32_t const nx,
-	           int32_t const ny,
-	           int const nw,
-	           int const nh,
+	           int32_t nx,
+	           int32_t ny,
+	           int nw,
+	           int nh,
 	           const std::string& tooltip_text = std::string());
 
 	const std::string& get_name() const {

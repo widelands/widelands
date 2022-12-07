@@ -89,17 +89,17 @@ private:
 	handle_mousemove(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 
 	bool horizontal_;
-	bool force_draw_;  // draw this scrollbar, even if it can't do anything
+	bool force_draw_{false};  // draw this scrollbar, even if it can't do anything
 
-	uint32_t pos_;  ///< from 0 to range_ - 1
-	uint32_t singlestepsize_;
-	uint32_t pagesize_;
+	uint32_t pos_{0};  ///< from 0 to range_ - 1
+	uint32_t singlestepsize_{1};
+	uint32_t pagesize_{5};
 	uint32_t buttonsize_;
-	uint32_t steps_;
+	uint32_t steps_{100};
 
-	Area pressed_;  ///< area that the user clicked on (None if mouse is up)
-	uint32_t time_nextact_;
-	int32_t knob_grabdelta_;  ///< only while pressed_ == Knob
+	Area pressed_{Area::None};  ///< area that the user clicked on (None if mouse is up)
+	uint32_t time_nextact_{0};
+	int32_t knob_grabdelta_{0};  ///< only while pressed_ == Knob
 
 	const Image* pic_minus_;  ///< left/up
 	const Image* pic_plus_;   ///< right/down

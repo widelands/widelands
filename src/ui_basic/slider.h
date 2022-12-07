@@ -121,9 +121,9 @@ private:
 	int32_t relative_move_;
 	int32_t big_step_;
 
-	bool highlighted_;  //  mouse over
-	bool pressed_;      //  the cursor is pressed
-	bool enabled_;      //  enabled widget
+	bool highlighted_{false};  //  mouse over
+	bool pressed_{false};      //  the cursor is pressed
+	bool enabled_;             //  enabled widget
 
 	const UI::SliderStyle cursor_style_;  // Cursor color and texture. Not owned.
 	const UI::PanelStyleInfo& cursor_style() const;
@@ -135,7 +135,7 @@ protected:
 
 	int32_t cursor_pos_;   //  cursor position
 	int32_t cursor_size_;  //  cursor width
-	int32_t cursor_fixed_height_;
+	int32_t cursor_fixed_height_{-1};
 };
 
 /**
@@ -223,17 +223,17 @@ protected:
  * Slider, but rather embed it, as we need to re-size it and add the labels.
  */
 struct DiscreteSlider : public Panel {
-	DiscreteSlider(Panel* const parent,
-	               const int32_t x,
-	               const int32_t y,
-	               const uint32_t w,
-	               const uint32_t h,
+	DiscreteSlider(Panel* parent,
+	               int32_t x,
+	               int32_t y,
+	               uint32_t w,
+	               uint32_t h,
 	               const std::vector<std::string>& labels_in,
 	               uint32_t init_value,
 	               UI::SliderStyle style,
 	               const std::string& tooltip_text = std::string(),
-	               const uint32_t cursor_size = 20,
-	               const bool enabled = true);
+	               uint32_t cursor_size = 20,
+	               bool enabled = true);
 
 	void set_labels(const std::vector<std::string>&);
 
