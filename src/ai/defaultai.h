@@ -300,7 +300,7 @@ private:
 
 	SoldiersStatus soldier_status_;
 	int32_t vacant_mil_positions_average_;
-	uint16_t attackers_count_{0};
+	uint16_t attackers_count_{0U};
 	EventTimeQueue soldier_trained_log;
 	EventTimeQueue soldier_attacks_log;
 
@@ -346,10 +346,10 @@ private:
 	MineFieldsObserver mine_fields_stat;
 
 	// used for statistics of buildings
-	uint32_t numof_psites_in_constr{0};
-	uint32_t num_ports{0};
-	uint16_t numof_warehouses_{0};
-	uint16_t numof_warehouses_in_const_{0};
+	uint32_t numof_psites_in_constr{0U};
+	uint32_t num_ports{0U};
+	uint16_t numof_warehouses_{0U};
+	uint16_t numof_warehouses_in_const_{0U};
 	uint32_t mines_in_constr() const;
 	uint32_t mines_built() const;
 	std::map<int32_t, MilitarySiteSizeObserver> msites_per_size;
@@ -361,7 +361,7 @@ private:
 	                            // military building built
 	Time time_of_last_construction_;
 	Time next_mine_construction_due_;
-	uint16_t fishers_count_{0};
+	uint16_t fishers_count_{0U};
 	uint16_t bakeries_count_;
 
 	Time first_iron_mine_built;
