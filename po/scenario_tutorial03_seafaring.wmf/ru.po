@@ -6,6 +6,7 @@
 # Anton Khabarov <2233009@gmail.com>, 2015
 # nskdmitry, 2021
 # Viktor S <awsswa59@gmail.com>, 2019
+# Yuriy Sokolov <lention@mail.ru>, 2022
 # 6da4f49c4b78e697e34b24b2a66289f5, 2016
 # bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -17,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: nskdmitry, 2021\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -565,7 +566,7 @@ msgid ""
 " Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr "Паромы строят на особых пристанях. На один паром уходит два бревна, одна мера сукна и совсем немного времени на постройку. Паромная пристань среднеразмерна и её нужно ставить на побережье."
+msgstr "Паромы строят на особых пристанях. На один паром уходит два бревна, одна мера полотна и совсем немного времени на постройку. Паромная пристань это здание среднего размера и её нужно ставить на побережье."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."

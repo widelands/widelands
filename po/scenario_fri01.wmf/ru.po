@@ -55,8 +55,8 @@ msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
-"Поставьте печь для обжига кирпича, угольную шахту, гранитную шахту, глиняный"
-" карьер и колодец для начала производства кирпичей."
+"Поставьте печь для обжига кирпича, угольную шахту, каменные копи, глиняный "
+"карьер и колодец для начала производства кирпичей."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
@@ -81,7 +81,7 @@ msgstr "30 × Гранит"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
-msgstr "10 × Глина"
+msgstr "10 × Глиняного теста"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
@@ -143,8 +143,7 @@ msgstr "Постройте шахты и горнодобывающую инфр
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
-msgstr ""
-"Постройте железную шахту, литейную, кузницу и малую оружейную мастерскую."
+msgstr "Постройте железную шахту, литейную, кузницу и малую бронную."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
@@ -363,7 +362,7 @@ msgstr ""
 "Снабжение деревом и тростником налажено. Теперь надо заняться производством "
 "кирпича. Его получают путем обжига глины и гранита в печи, и с сырья-то мы и"
 " начнем. На материке гранит мы добывали в скалах, но здесь я их не видел. "
-"ВОзможно, в тех холмах достаточно гранита для его добычи в шахтах."
+"Возможно, в тех холмах достаточно гранита для его добычи в шахтах."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
@@ -443,7 +442,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
-msgstr "Нехватка глины"
+msgstr "Нехватка глиняного теста"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
@@ -457,9 +456,9 @@ msgid ""
 " down a lot. It would be better to build one or two more clay pits, and "
 "wells to supply them with water."
 msgstr ""
-"Наши кирпичники уже некоторое время жалуются на нехватку глины. Без глины не"
-" будет обжига кирпича, а это сильно замедлит темпы развития. Нам бы еще "
-"парочку глиняных карьеров и колодцев к ним."
+"Наши кирпичники уже некоторое время жалуются на нехватку глиняного теста. "
+"Без глины не будет обжига кирпича, а это сильно замедлит темпы развития. Нам"
+" бы еще парочку глиняных карьеров и колодцев к ним."
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:197
@@ -1048,10 +1047,10 @@ msgid ""
 "sails. Then we can launch an expedition from the port. Pray to the gods and "
 "make haste!"
 msgstr ""
-"Шторм гонит воду с запада. Мы еще можем успеть, если поторопимся. Нам нужны "
-"порт и верфь... ах, да, ткацкая фабрика для шитья парусов из тростника и "
-"шерсти. Затем мы отправимся в экспедицию из порта. Помните о богах, но и "
-"сами не плошайте!"
+"Наводнение гонит воду с запада. Мы еще можем успеть, если поторопимся. Нам "
+"нужны порт и верфь... ах, да, ткацкая фабрика для изготовления прочной ткани"
+" из тростника и шерсти. Затем мы отправимся в экспедицию из порта. Помните о"
+" богах, но и сами не плошайте!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
