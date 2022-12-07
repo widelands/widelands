@@ -39,8 +39,7 @@ saved game file. it is an abstract base class
 */
 class GameDataPacket {
 public:
-	virtual ~GameDataPacket() {
-	}
+	virtual ~GameDataPacket() = default;
 	virtual void read(FileSystem&, Game&, MapObjectLoader* = nullptr) = 0;
 	virtual void write(FileSystem&, Game&, MapObjectSaver* = nullptr) = 0;
 };
