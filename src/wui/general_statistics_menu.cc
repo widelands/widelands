@@ -55,7 +55,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
            kPlotHeight,
            Widelands::kStatisticsSampleTime.get(),
            WuiPlotArea::Plotmode::kAbsolute),
-     selected_information_(0),
+
      game_(*parent.get_game()),
      subscriber_(Notifications::subscribe<Widelands::NotePlayerDetailsEvent>(
         [this](const Widelands::NotePlayerDetailsEvent& note) {

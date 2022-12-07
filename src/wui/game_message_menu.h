@@ -83,7 +83,7 @@ private:
 	UI::Button* archivebtn_;
 	UI::Button* togglemodebtn_;
 	UI::Button* centerviewbtn_;
-	Mode mode;
+	Mode mode{Mode::kInbox};
 	// Buttons for message types
 	UI::Button* geologistsbtn_;
 	UI::Button* economybtn_;

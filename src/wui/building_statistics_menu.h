@@ -30,15 +30,11 @@
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_player.h"
 
-namespace {
-
-constexpr int kNoOfBuildingTabs = 5;
-
-}  // namespace
-
 /// This window shows statistics for all the buildings that the player owns.
 /// It also allows to jump through buildings on the map.
 struct BuildingStatisticsMenu : public UI::UniqueWindow {
+	static constexpr int kNoOfBuildingTabs = 5;
+
 	BuildingStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 	~BuildingStatisticsMenu() override;
 
@@ -124,7 +120,7 @@ private:
 	std::vector<UI::Textarea*> productivity_labels_;
 
 	/// At which percent to deem buildings as unproductive
-	int low_production_;
+	int low_production_{33};
 
 	UI::Box hbox_owned_, hbox_construction_, hbox_unproductive_;
 	UI::Textarea label_name_, label_owned_, label_construction_, label_unproductive_,
@@ -136,16 +132,16 @@ private:
 	/// The building type we are currently navigating
 	Widelands::DescriptionIndex current_building_type_;
 	/// The last building that was jumped to
-	int32_t last_building_index_;
+	int32_t last_building_index_{0};
 	/// The type of last building that was jumped to
 	Widelands::DescriptionIndex last_building_type_;
 	/// The last time the information in this Panel got updated
 	Time lastupdate_;
 	/// Whether the window was minimized the last time that think() was executed
-	bool was_minimized_;
+	bool was_minimized_{false};
 
 	/// Whether a building has been selected
-	bool has_selection_;
+	bool has_selection_{false};
 
 	/// The total number of building types available for all the tribes
 	const Widelands::DescriptionIndex nr_building_types_;

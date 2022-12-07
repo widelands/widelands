@@ -91,18 +91,13 @@ public:
 	struct TimestampedMouse {
 		TimestampedMouse(uint32_t init_t, Vector2f init_pixel) : t(init_t), pixel(init_pixel) {
 		}
-		TimestampedMouse() : t(0), pixel(Vector2f::zero()) {
-		}
-		uint32_t t;
-		Vector2f pixel = Vector2f::zero();
+		TimestampedMouse() = default;
+		uint32_t t{0};
+		Vector2f pixel{Vector2f::zero()};
 	};
 
-	MapView(UI::Panel* const parent,
-	        const Widelands::Map& map,
-	        const int32_t x,
-	        const int32_t y,
-	        const uint32_t w,
-	        const uint32_t h);
+	MapView(
+	   UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h);
 	~MapView() override = default;
 
 	// Called whenever the view changed, also during automatic animations.
@@ -215,11 +210,11 @@ private:
 
 	View view_;
 	Vector2i last_mouse_pos_;
-	bool dragging_;
+	bool dragging_{false};
 
 	bool edge_scrolling_;
 	bool invert_movement_;
-	int8_t is_scrolling_x_, is_scrolling_y_;
+	int8_t is_scrolling_x_{0}, is_scrolling_y_{0};
 
 	// The queue of plans to execute as animations.
 	std::deque<std::deque<TimestampedView>> view_plans_;

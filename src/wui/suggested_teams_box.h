@@ -46,7 +46,7 @@ private:
 	int32_t const indent_;
 	int32_t const label_height_;
 	UI::Textarea* suggested_teams_box_label_;
-	UI::Box* lineup_box_;
+	UI::Box* lineup_box_{nullptr};
 	std::vector<UI::Icon*> player_icons_;
 	std::vector<UI::Textarea*> vs_labels_;
 	std::vector<Widelands::SuggestedTeamLineup> suggested_teams_;

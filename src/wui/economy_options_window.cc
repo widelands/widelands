@@ -69,7 +69,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiSecondary),
      time_last_thought_(0),
-     save_profile_dialog_(nullptr),
+
      descriptions_(descriptions) {
 	set_center_panel(&main_box_);
 

@@ -40,7 +40,7 @@ class MainToolbar;
 class UniqueWindowHandler;
 namespace Widelands {
 class MapObjectLoader;
-}
+}  // namespace Widelands
 
 struct WorkareaPreview {
 	Widelands::Coords coords;
@@ -182,7 +182,7 @@ public:
 	}
 
 	void add_wanted_building_window(const Widelands::Coords& coords,
-	                                const Vector2i point,
+	                                Vector2i point,
 	                                bool was_minimal,
 	                                bool was_pinned);
 	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
@@ -281,7 +281,7 @@ protected:
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
-	const Image* get_sel_picture() {
+	const Image* get_sel_picture() const {
 		return sel_.pic;
 	}
 
@@ -356,14 +356,15 @@ private:
 	virtual void rebuild_showhide_menu() = 0;
 
 	struct SelData {
-		SelData(const bool Freeze = false,
-		        const bool Triangles = false,
-		        const Widelands::NodeAndTriangle<>& Pos =
-		           Widelands::NodeAndTriangle<>{
-		              Widelands::Coords(0, 0),
-		              Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)},
-		        const uint32_t Radius = 0,
-		        const Image* Pic = nullptr)
+		explicit SelData(const bool Freeze = false,
+		                 const bool Triangles = false,
+		                 const Widelands::NodeAndTriangle<>& Pos =
+		                    Widelands::NodeAndTriangle<>{
+		                       Widelands::Coords(0, 0),
+		                       Widelands::TCoords<>(Widelands::Coords(0, 0),
+		                                            Widelands::TriangleIndex::D)},
+		                 const uint32_t Radius = 0,
+		                 const Image* Pic = nullptr)
 		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), pic(Pic) {
 		}
 		bool freeze;     // don't change sel, even if mouse moves
@@ -416,24 +417,24 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
-	uint64_t lastframe_;        //  system time (milliseconds)
-	uint64_t frametime_;        //  in millseconds
-	uint64_t avg_usframetime_;  //  in microseconds!
+	uint64_t lastframe_;           //  system time (milliseconds)
+	uint64_t frametime_{0};        //  in millseconds
+	uint64_t avg_usframetime_{0};  //  in microseconds!
 
 	// For measuring actual game speed and how smoothly the game logic runs
-	uint64_t last_frame_realtime_, previous_frame_realtime_;
+	uint64_t last_frame_realtime_{0}, previous_frame_realtime_{0};
 	Time last_frame_gametime_, previous_frame_gametime_;
-	uint64_t avg_actual_gamespeed_;  // in microseconds gametime per second realtime
-	uint64_t last_target_gamespeed_;
-	uint64_t gamespeed_last_change_time_;
+	uint64_t avg_actual_gamespeed_{0};  // in microseconds gametime per second realtime
+	uint64_t last_target_gamespeed_{0};
+	uint64_t gamespeed_last_change_time_{0};
 
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 
-	bool cheat_mode_enabled_;
-	bool screenshot_failed_;
+	bool cheat_mode_enabled_{false};
+	bool screenshot_failed_{false};
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H
