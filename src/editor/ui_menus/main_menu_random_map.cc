@@ -46,8 +46,8 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                                                      const int32_t inner_w,
                                                      const uint32_t w,
                                                      const uint32_t h,
-                                                     UI::Button& o,
-                                                     UI::Button& c)
+                                                     UI::Button& ok_button,
+                                                     UI::Button& cancel_button)
    : UI::Box(&parent, s, kMargin, kMargin, UI::Box::Vertical, 0, 0, kMargin),
      label_style_(s == UI::PanelStyle::kWui ? UI::FontStyle::kWuiLabel :
                                               UI::FontStyle::kFsMenuLabel),
@@ -215,8 +215,8 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                   0,
                   inner_w - 2 * kMargin - map_id_label_.get_w(),
                   panel_style_),
-     ok_button_(o),
-     cancel_button_(c) {
+     ok_button_(ok_button),
+     cancel_button_(cancel_button) {
 	set_size(inner_w, 50);  // Prevent assert failures
 
 	generator_.set_enabled(false);

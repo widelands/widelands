@@ -50,8 +50,8 @@ public:
 	                                   int32_t inner_w,
 	                                   uint32_t map_w,
 	                                   uint32_t map_h,
-	                                   UI::Button& o,
-	                                   UI::Button& c);
+	                                   UI::Button& ok_button,
+	                                   UI::Button& cancel_button);
 
 	bool do_generate_map(Widelands::EditorGameBase&,
 	                     EditorInteractive*,
