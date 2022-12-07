@@ -25,8 +25,7 @@ namespace RT {
 
 class TextStream {
 public:
-	explicit TextStream(const std::string& text)
-	   : text_(text), line_(1), col_(0), pos_(0), end_(text.size()) {
+	explicit TextStream(const std::string& text) : text_(text), end_(text.size()) {
 	}
 
 	[[nodiscard]] size_t line() const {
@@ -57,8 +56,8 @@ public:
 private:
 	void consume(size_t);
 	std::string text_;
-	uint32_t line_, col_;
-	size_t pos_, end_;
+	uint32_t line_{1}, col_{0};
+	size_t pos_{0}, end_;
 };
 }  // namespace RT
 #endif  // end of include guard: WL_GRAPHIC_TEXT_TEXTSTREAM_H
