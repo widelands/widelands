@@ -117,7 +117,7 @@ public:
 
 private:
 	char* data_{nullptr};
-	size_t length_{0};
+	size_t length_{0U};
 	Pos filepos_;
 };
 
