@@ -1361,7 +1361,7 @@ InteractiveBase::try_append_build_road(const Widelands::Coords field) const {
 		result_path.truncate(map.get_waterway_max_length());
 	}
 
-	return result_path;
+	return std::optional<Widelands::CoordPath>(result_path);
 }
 
 /*
