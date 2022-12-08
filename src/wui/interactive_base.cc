@@ -775,10 +775,9 @@ void InteractiveBase::draw_road_building(RenderTarget* dst,
 		     i += (start_to_end ? 1 : -1)) {
 			if (coords.at(i) == field.fcoords) {
 				if ((i == 0 || i == ncoords - 1) || (!last_is_flag && i != 1 && i != ncoords - 2)) {
-					constexpr float kOpacity = 0.7f;
 					dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-					                    field.owner->tribe().flag_animation(), gametime, nullptr,
-					                    kOpacity);
+					                    field.owner->tribe().flag_animation(), gametime,
+					                    &field.owner->get_playercolor());
 				}
 				return true;
 			}
