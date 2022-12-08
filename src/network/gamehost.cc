@@ -320,11 +320,7 @@ struct GameHostImpl {
 	Md5Checksum syncreport;
 	bool syncreport_arrived{false};
 
-	explicit GameHostImpl(GameHost* const h)
-	   : participants(nullptr),
-	     chat(h),
-	     hp(h),
-	     npsb(&hp) {
+	explicit GameHostImpl(GameHost* const h) : participants(nullptr), chat(h), hp(h), npsb(&hp) {
 	}
 
 	/// Takes ownership of the given pointer
