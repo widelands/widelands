@@ -52,7 +52,7 @@ struct MapSaver {
 private:
 	EditorGameBase& egbase_;
 	FileSystem& fs_;
-	MapObjectSaver* mos_;
+	MapObjectSaver* mos_{nullptr};
 };
 }  // namespace Widelands
 
