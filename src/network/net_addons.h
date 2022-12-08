@@ -98,7 +98,7 @@ private:
 	bool network_active_{false};
 	int client_socket_{0};
 	bool is_admin_{false};
-	size_t cached_remotes_{0};
+	size_t cached_remotes_{0U};
 	std::string server_descname_;
 };
 

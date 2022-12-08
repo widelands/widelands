@@ -245,7 +245,7 @@ private:
 	GameHost* h;
 	std::vector<ChatMessage> messages;
 	std::string kickUser;
-	uint32_t kickClient{0};
+	uint32_t kickClient{0U};
 	std::string kickReason;
 };
 
@@ -271,7 +271,7 @@ struct Client {
 struct GameHostImpl {
 	GameSettings settings;
 	std::string localplayername;
-	uint32_t localdesiredspeed{0};
+	uint32_t localdesiredspeed{0U};
 	// unique_ptr instead of object to break cyclic dependency
 	std::unique_ptr<ParticipantList> participants;
 	HostChatProvider chat;
@@ -290,25 +290,25 @@ struct GameHostImpl {
 
 	/// If we were to send out a plain networktime packet, this would be the
 	/// time. However, we have not yet committed to this networktime.
-	Time pseudo_networktime;
+	Time pseudo_networktime{0U};
 	int32_t last_heartbeat{0};
 
 	/// The networktime we committed to by sending it across the network.
-	Time committed_networktime;
+	Time committed_networktime{0U};
 
 	/// This is the time for local simulation
 	NetworkTime time;
 
 	/// Whether we're waiting for all clients to report back.
 	bool waiting{false};
-	uint32_t lastframe{0};
+	uint32_t lastframe{0U};
 
 	/**
 	 * The speed, in milliseconds per second, that is effective as long
 	 * as we're not \ref waiting.
 	 */
-	uint32_t networkspeed{0};
-	time_t lastpauseping{0};
+	uint32_t networkspeed{0U};
+	time_t lastpauseping{0U};
 
 	/// All currently running computer players, *NOT* in one-one correspondence
 	/// with \ref Player objects
@@ -316,7 +316,7 @@ struct GameHostImpl {
 
 	/// \c true if a syncreport is currently in flight
 	bool syncreport_pending{false};
-	Time syncreport_time;
+	Time syncreport_time{0U};
 	Md5Checksum syncreport;
 	bool syncreport_arrived{false};
 
@@ -324,14 +324,7 @@ struct GameHostImpl {
 	   : participants(nullptr),
 	     chat(h),
 	     hp(h),
-	     npsb(&hp),
-
-	     pseudo_networktime(0),
-
-	     committed_networktime(0),
-
-	     syncreport_time(0),
-	     syncreport() {
+	     npsb(&hp) {
 	}
 
 	/// Takes ownership of the given pointer
