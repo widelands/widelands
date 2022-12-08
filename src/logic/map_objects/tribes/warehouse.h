@@ -205,6 +205,7 @@ public:
 	PortDock* get_portdock() const {
 		return portdock_;
 	}
+	void update_statistics_string(std::string* str) override;
 
 	// Returns the first matching not completely filled waresqueue of the expedition if this is a
 	// port.

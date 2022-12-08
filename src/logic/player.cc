@@ -154,6 +154,7 @@ Player::Player(EditorGameBase& the_egbase,
      civil_blds_lost_(0),
      civil_blds_defeated_(0),
      ship_name_counter_(0),
+     port_name_counter_(0),
      fields_(nullptr),
      is_picking_custom_starting_position_(false),
      allow_additional_expedition_items_(true),
@@ -197,6 +198,10 @@ Player::Player(EditorGameBase& the_egbase,
 	for (const std::string& shipname :
 	     egbase_.descriptions().get_ship_descr(tribe().ship())->get_ship_names()) {
 		remaining_shipnames_.push_back(shipname);
+	}
+	for (const std::string& portname :
+	     egbase_.descriptions().get_ship_descr(tribe().ship())->get_port_names()) {
+		remaining_portnames_.push_back(portname);
 	}
 
 	update_team_players();
@@ -1975,8 +1980,24 @@ const std::string Player::pick_shipname() {
 	return new_name;
 }
 
+const std::string Player::pick_portname() {
+	++port_name_counter_;
+
+	if (remaining_portnames_.empty()) {
+		return format(pgettext("portname", "Port %d"), port_name_counter_);
+	}
+
+	Game& game = dynamic_cast<Game&>(egbase());
+	const size_t index = game.logic_rand() % remaining_portnames_.size();
+	auto it = remaining_portnames_.begin();
+	std::advance(it, index);
+	std::string new_name = *it;
+	remaining_portnames_.erase(it);
+	return new_name;
+}
+
 /**
- * Read remaining ship indexes to the give file
+ * Read remaining ship names from the given file
  *
  * \param fr source stream
  */
@@ -1988,6 +2009,14 @@ void Player::read_remaining_shipnames(FileRead& fr) {
 		remaining_shipnames_.push_back(fr.string());
 	}
 	ship_name_counter_ = fr.unsigned_32();
+}
+void Player::read_remaining_portnames(FileRead& fr) {
+	remaining_portnames_.clear();
+	const uint16_t count = fr.unsigned_16();
+	for (uint16_t i = 0; i < count; ++i) {
+		remaining_portnames_.push_back(fr.string());
+	}
+	port_name_counter_ = fr.unsigned_32();
 }
 
 void Player::init_statistics() {
@@ -2144,7 +2173,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 }
 
 /**
- * Write remaining ship indexes to the given file
+ * Write remaining ship names to the given file
  */
 void Player::write_remaining_shipnames(FileWrite& fw) const {
 	fw.unsigned_16(remaining_shipnames_.size());
@@ -2152,6 +2181,13 @@ void Player::write_remaining_shipnames(FileWrite& fw) const {
 		fw.string(shipname);
 	}
 	fw.unsigned_32(ship_name_counter_);
+}
+void Player::write_remaining_portnames(FileWrite& fw) const {
+	fw.unsigned_16(remaining_portnames_.size());
+	for (const auto& portname : remaining_portnames_) {
+		fw.string(portname);
+	}
+	fw.unsigned_32(port_name_counter_);
 }
 
 /**

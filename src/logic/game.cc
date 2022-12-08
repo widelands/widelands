@@ -1206,6 +1206,10 @@ void Game::send_player_pinned_note(
 	send_player_command(new CmdPinnedNote(get_gametime(), p, text, pos, rgb, del));
 }
 
+void Game::send_player_ship_port_name(PlayerNumber p, Serial s, const std::string& n) {
+	send_player_command(new CmdShipPortName(get_gametime(), p, s, n));
+}
+
 int Game::propose_trade(const Trade& trade) {
 	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
 	// path between the two markets);

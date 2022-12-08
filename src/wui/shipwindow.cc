@@ -62,6 +62,15 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	vbox_.set_inner_spacing(kPadding);
 	assert(ship->get_owner());
 
+	if (ibase_.can_act(ship->owner().player_number())) {
+		name_field_ = new UI::EditBox(&vbox_, 0, 0, 0, UI::PanelStyle::kWui);
+		name_field_->set_text(ship->get_shipname());
+		name_field_->changed.connect([this]() { act_rename(); });
+		vbox_.add(name_field_, UI::Box::Resizing::kFullSize);
+	} else {
+		name_field_ = nullptr;
+	}
+
 	display_ = new ItemWaresDisplay(&vbox_, ship->owner());
 	display_->set_capacity(ship->get_capacity());
 	vbox_.add(display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -145,9 +154,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 		buttons->add(btn_debug_);
 	}
 
-	btn_destination_ = make_button(buttons, "destination", _("Go to destination"), kImgDestination,
+	btn_destination_ = make_button(buttons, "destination", "", kImgDestination,
 	                               [this]() { act_destination(); });
-	btn_destination_->set_enabled(false);
 	buttons->add(btn_destination_);
 
 	btn_goto_ = make_button(buttons, "goto", _("Go to ship"), kImgGoTo, [this]() { act_goto(); });
@@ -186,6 +194,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	// Init button visibility
 	navigation_box_.set_visible(false);
 	btn_cancel_expedition_->set_enabled(false);
+	update_destination_button(ship);
 
 	initialization_complete();
 }
@@ -222,15 +231,24 @@ void ShipWindow::no_port_error_message() {
 	}
 }
 
+void ShipWindow::update_destination_button(const Widelands::Ship* ship) {
+	btn_destination_->set_enabled(ship->get_destination() != nullptr);
+	btn_destination_->set_tooltip(ship->get_destination() == nullptr ? _("Go to destination") :
+		/** TRANSLATORS: Placeholder is the name of the destination port */
+		format(_("Go to destination (%s)"), ship->get_destination()->get_port_name()));
+}
+
 void ShipWindow::think() {
 	UI::Window::think();
 	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
+
+	set_title(ship->get_shipname());
 	const bool can_act = ibase_.can_act(ship->owner().player_number());
 
-	btn_destination_->set_enabled(ship->get_destination() != nullptr);
+	update_destination_button(ship);
 	btn_sink_->set_enabled(can_act);
 
 	display_->clear();
@@ -294,6 +312,18 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
 	   parent, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, g_image_cache->get(picname), title);
 	btn->sigclicked.connect(callback);
 	return btn;
+}
+
+void ShipWindow::act_rename() {
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_ship_port_name(ship->owner().player_number(), ship->serial(), name_field_->text());
+	} else {
+		ship->set_shipname(name_field_->text());
+	}
 }
 
 /// Move the main view towards the current ship location

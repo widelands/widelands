@@ -1441,6 +1441,14 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
                          portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 
+void Warehouse::update_statistics_string(std::string* str) {
+	if (portdock_ == nullptr) {
+		str->clear();
+	} else {
+		*str = portdock_->get_port_name();
+	}
+}
+
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
 	std::unique_ptr<WarehouseSettings> settings(new WarehouseSettings(descr(), owner().tribe()));
 	for (auto& pair : settings->ware_preferences) {

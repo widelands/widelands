@@ -592,6 +592,8 @@ public:
 	void write_statistics(FileWrite&) const;
 	void read_remaining_shipnames(FileRead&);
 	void write_remaining_shipnames(FileWrite&) const;
+	void read_remaining_portnames(FileRead&);
+	void write_remaining_portnames(FileWrite&) const;
 	void sample_statistics();
 	void ware_produced(DescriptionIndex);
 
@@ -618,6 +620,7 @@ public:
 	bool is_attack_forbidden(PlayerNumber who) const;
 
 	const std::string pick_shipname();
+	const std::string pick_portname();
 
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
@@ -693,8 +696,10 @@ private:
 	uint32_t civil_blds_lost_, civil_blds_defeated_;
 
 	std::list<std::string> remaining_shipnames_;
-	// If we run out of ship names, we'll want to continue with unique numbers
+	std::list<std::string> remaining_portnames_;
+	// If we run out of ship/port names, we'll want to continue with unique numbers
 	uint32_t ship_name_counter_;
+	uint32_t port_name_counter_;
 
 	std::unique_ptr<Field[]> fields_;
 	std::set<DescriptionIndex> allowed_worker_types_;

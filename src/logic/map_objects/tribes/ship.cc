@@ -133,6 +133,11 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
    : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table),
      default_capacity_(table.has_key("capacity") ? table.get_int("capacity") : 20),
      ship_names_(table.get_table("names")->array_entries<std::string>()) {
+	if (table.has_key("port_names")) {
+		port_names_ = table.get_table("port_names")->array_entries<std::string>();
+	} else {
+		log_warn("Ship %s specifies no port_names", name().c_str());
+	}
 
 	// Read the sailing animations
 	assign_directional_animation(&sail_anims_, "sail");
@@ -1060,13 +1065,19 @@ void Ship::draw(const EditorGameBase& egbase,
 	if ((info_to_draw & InfoToDraw::kStatistics) != 0) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
-			statistics_string =
-			   (destination_ != nullptr) && fleet_->get_schedule().is_busy(*this) ?
-                /** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
-                pgettext("ship_state", "Shipping") :
-                /** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
-                 * nothing to do. */
-                pgettext("ship_state", "Empty");
+			if (destination_ == nullptr) {
+                /** TRANSLATORS: This is a ship state. The ship is ready
+                 * to transport wares, but has nothing to do. */
+				statistics_string = pgettext("ship_state", "Empty");
+			} else if (fleet_->get_schedule().is_busy(*this)) {
+                /** TRANSLATORS: This is a ship state. The ship is currently
+                 * transporting wares to a specific destination port. */
+				statistics_string = format(pgettext("ship_state", "Shipping to %s"), destination_->get_port_name());
+			} else {
+                /** TRANSLATORS: This is a ship state. The ship is currently sailing
+                 * to a specific destination port without transporting wares. */
+				statistics_string = format(pgettext("ship_state", "Roaming to %s"), destination_->get_port_name());
+			}
 			break;
 		case (ShipStates::kExpeditionWaiting):
 			/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */
@@ -1100,17 +1111,19 @@ void Ship::draw(const EditorGameBase& egbase,
 void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
+	molog(egbase.get_gametime(), "Name: %s", get_shipname().c_str());
 	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\n",
 	      fleet_ != nullptr ? fleet_->serial() : 0,
-	      (lastdock_.is_set()) ? format("%u (%d x %d)", lastdock_.serial(),
+	      (lastdock_.is_set()) ? format("%u (%3dx%3d) %s", lastdock_.serial(),
 	                                    lastdock_.get(egbase)->get_positions(egbase)[0].x,
-	                                    lastdock_.get(egbase)->get_positions(egbase)[0].y)
+	                                    lastdock_.get(egbase)->get_positions(egbase)[0].y,
+	                                    lastdock_.get(egbase)->get_port_name().c_str())
 
 	                                .c_str() :
                                 "-");
 	if (destination_ != nullptr) {
-		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d)\n", destination_->serial(),
-		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y);
+		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d) %s\n", destination_->serial(),
+		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y, destination_->get_port_name().c_str());
 	} else {
 		molog(egbase.get_gametime(), "No destination\n");
 	}

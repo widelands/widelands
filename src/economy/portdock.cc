@@ -149,6 +149,8 @@ bool PortDock::init(EditorGameBase& egbase) {
 		set_position(egbase, coords);
 	}
 
+	set_port_name(get_owner()->pick_portname());
+
 	init_fleet(egbase);
 	return true;
 }
@@ -453,6 +455,7 @@ void PortDock::cancel_expedition(Game& game) {
 void PortDock::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
 
+	molog(egbase.get_gametime(), "Name: %s", get_port_name().c_str());
 	if (warehouse_ != nullptr) {
 		Coords pos(warehouse_->get_position());
 		molog(
@@ -474,18 +477,23 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 	}
 }
 
-// Changelog of version 5 → 6: deleted the list with the serials of ships heading
-// to this port as this information was moved to the ShippingSchedule
-constexpr uint8_t kCurrentPacketVersion = 6;
+/* Changelog:
+ * Version 6 (v1.1): Deleted the list with the serials of ships heading
+ * to this port as this information was moved to the ShippingSchedule.
+ * Version 7: Added port name.
+ */
+constexpr uint8_t kCurrentPacketVersion = 7;
 
 PortDock::Loader::Loader() : warehouse_(0) {
 }
 
-void PortDock::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
+void PortDock::Loader::load(FileRead& fr, uint8_t packet_version) {
 	PlayerImmovable::Loader::load(fr);
 
 	PortDock& pd = get<PortDock>();
 
+	// TODO(Nordfriese): Savegame compatibility v1.2
+	pd.port_name_ = packet_version >= 7 ? fr.string() : pd.get_owner()->pick_portname();
 	warehouse_ = fr.unsigned_32();
 	uint16_t nrdockpoints = fr.unsigned_16();
 
@@ -546,7 +554,7 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 		// The header has been peeled away by the caller
 
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= 6 && packet_version <= kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr, packet_version);
 		} else {
@@ -565,6 +573,7 @@ void PortDock::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) 
 
 	PlayerImmovable::save(egbase, mos, fw);
 
+	fw.string(port_name_);
 	fw.unsigned_32(mos.get_object_file_index(*warehouse_));
 	fw.unsigned_16(dockpoints_.size());
 	for (const Coords& coords : dockpoints_) {

@@ -109,6 +109,9 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 }
 
 void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
+	Widelands::Building* building = building_.get(parent_->egbase());
+	assert(building != nullptr);
+
 	capscache_player_number_ = 0;
 	capsbuttons_ = nullptr;
 	capscache_ = 0;
@@ -121,6 +124,8 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 
 	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight);
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
+
+	setup_name_field_editbox(*vbox_);
 
 	capsbuttons_ = new UI::Box(vbox_.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	vbox_->add(capsbuttons_, UI::Box::Resizing::kFullSize);

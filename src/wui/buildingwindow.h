@@ -75,10 +75,13 @@ protected:
 	virtual void init(bool avoid_fastclick, bool workarea_preview_wanted);
 	void die() override;
 
+
 	UI::TabPanel* get_tabs() {
 		return tabs_;
 	}
 
+	virtual void setup_name_field_editbox(UI::Box& /* vbox */) {
+	}
 	void act_bulldoze();
 	void act_dismantle();
 	void act_debug();
