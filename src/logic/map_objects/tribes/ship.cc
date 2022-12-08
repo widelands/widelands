@@ -1070,14 +1070,14 @@ void Ship::draw(const EditorGameBase& egbase,
 				 * to transport wares, but has nothing to do. */
 				statistics_string = pgettext("ship_state", "Empty");
 			} else if (fleet_->get_schedule().is_busy(*this)) {
-				/** TRANSLATORS: This is a ship state. The ship is currently
-				 * transporting wares to a specific destination port. */
 				statistics_string =
+				   /** TRANSLATORS: This is a ship state. The ship is currently
+				    * transporting wares to a specific destination port. */
 				   format(pgettext("ship_state", "Shipping to %s"), destination_->get_port_name());
 			} else {
-				/** TRANSLATORS: This is a ship state. The ship is currently sailing
-				 * to a specific destination port without transporting wares. */
 				statistics_string =
+				   /** TRANSLATORS: This is a ship state. The ship is currently sailing
+				    * to a specific destination port without transporting wares. */
 				   format(pgettext("ship_state", "Roaming to %s"), destination_->get_port_name());
 			}
 			break;
