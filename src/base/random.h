@@ -47,8 +47,8 @@ struct RNG {
 	}
 
 private:
-	uint32_t state0 = 0;
-	uint32_t state1 = 0;
+	uint32_t state0{0U};
+	uint32_t state1{0U};
 };
 
 #define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x)&0xff])
