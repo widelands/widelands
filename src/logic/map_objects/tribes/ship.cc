@@ -1066,17 +1066,19 @@ void Ship::draw(const EditorGameBase& egbase,
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			if (destination_ == nullptr) {
-                /** TRANSLATORS: This is a ship state. The ship is ready
-                 * to transport wares, but has nothing to do. */
+				/** TRANSLATORS: This is a ship state. The ship is ready
+				 * to transport wares, but has nothing to do. */
 				statistics_string = pgettext("ship_state", "Empty");
 			} else if (fleet_->get_schedule().is_busy(*this)) {
-                /** TRANSLATORS: This is a ship state. The ship is currently
-                 * transporting wares to a specific destination port. */
-				statistics_string = format(pgettext("ship_state", "Shipping to %s"), destination_->get_port_name());
+				/** TRANSLATORS: This is a ship state. The ship is currently
+				 * transporting wares to a specific destination port. */
+				statistics_string =
+				   format(pgettext("ship_state", "Shipping to %s"), destination_->get_port_name());
 			} else {
-                /** TRANSLATORS: This is a ship state. The ship is currently sailing
-                 * to a specific destination port without transporting wares. */
-				statistics_string = format(pgettext("ship_state", "Roaming to %s"), destination_->get_port_name());
+				/** TRANSLATORS: This is a ship state. The ship is currently sailing
+				 * to a specific destination port without transporting wares. */
+				statistics_string =
+				   format(pgettext("ship_state", "Roaming to %s"), destination_->get_port_name());
 			}
 			break;
 		case (ShipStates::kExpeditionWaiting):
@@ -1123,7 +1125,8 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
                                 "-");
 	if (destination_ != nullptr) {
 		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d) %s\n", destination_->serial(),
-		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y, destination_->get_port_name().c_str());
+		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y,
+		      destination_->get_port_name().c_str());
 	} else {
 		molog(egbase.get_gametime(), "No destination\n");
 	}

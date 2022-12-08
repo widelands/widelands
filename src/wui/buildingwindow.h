@@ -75,7 +75,6 @@ protected:
 	virtual void init(bool avoid_fastclick, bool workarea_preview_wanted);
 	void die() override;
 
-
 	UI::TabPanel* get_tabs() {
 		return tabs_;
 	}

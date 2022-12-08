@@ -154,8 +154,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 		buttons->add(btn_debug_);
 	}
 
-	btn_destination_ = make_button(buttons, "destination", "", kImgDestination,
-	                               [this]() { act_destination(); });
+	btn_destination_ =
+	   make_button(buttons, "destination", "", kImgDestination, [this]() { act_destination(); });
 	buttons->add(btn_destination_);
 
 	btn_goto_ = make_button(buttons, "goto", _("Go to ship"), kImgGoTo, [this]() { act_goto(); });
@@ -233,9 +233,11 @@ void ShipWindow::no_port_error_message() {
 
 void ShipWindow::update_destination_button(const Widelands::Ship* ship) {
 	btn_destination_->set_enabled(ship->get_destination() != nullptr);
-	btn_destination_->set_tooltip(ship->get_destination() == nullptr ? _("Go to destination") :
-		/** TRANSLATORS: Placeholder is the name of the destination port */
-		format(_("Go to destination (%s)"), ship->get_destination()->get_port_name()));
+	btn_destination_->set_tooltip(
+	   ship->get_destination() == nullptr ?
+         _("Go to destination") :
+         /** TRANSLATORS: Placeholder is the name of the destination port */
+         format(_("Go to destination (%s)"), ship->get_destination()->get_port_name()));
 }
 
 void ShipWindow::think() {
@@ -320,7 +322,8 @@ void ShipWindow::act_rename() {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_ship_port_name(ship->owner().player_number(), ship->serial(), name_field_->text());
+		game->send_player_ship_port_name(
+		   ship->owner().player_number(), ship->serial(), name_field_->text());
 	} else {
 		ship->set_shipname(name_field_->text());
 	}

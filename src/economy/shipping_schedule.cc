@@ -124,8 +124,8 @@ void ShippingSchedule::start_expedition(Game& game, Ship& ship, PortDock& port) 
 }
 
 void ShippingSchedule::ship_arrived(Game& game, Ship& ship, PortDock& port) {
-	sslog(
-	   "\nShippingSchedule::ship_arrived(%s at %u %s)\n", ship.get_shipname().c_str(), port.serial(), port.get_port_name().c_str());
+	sslog("\nShippingSchedule::ship_arrived(%s at %u %s)\n", ship.get_shipname().c_str(),
+	      port.serial(), port.get_port_name().c_str());
 	auto plan = plans_.find(&ship);
 	assert(plan != plans_.end());
 	const size_t plan_size = plan->second.size();
@@ -216,7 +216,8 @@ bool ShippingSchedule::do_remove_port_from_plan(Game& game,
 			}
 			if (closest != nullptr) {
 				sslog("Ship %s is carrying %u items, rerouting to NEW destination %u %s\n",
-				      ship.get_shipname().c_str(), ship.get_nritems(), closest->serial(), closest->get_port_name().c_str());
+				      ship.get_shipname().c_str(), ship.get_nritems(), closest->serial(),
+				      closest->get_port_name().c_str());
 				ship_plan.push_back(SchedulingState(closest, false, Duration(dist)));
 				ship.set_destination(game, closest);
 			} else {
@@ -231,7 +232,8 @@ bool ShippingSchedule::do_remove_port_from_plan(Game& game,
 		} else {  // the ships has more destinations in its plan, just reroute to the next one
 			PortDock* dest = ship_plan.front().dock.get(game);
 			ship.set_destination(game, dest);
-			sslog("Rerouted %s to %u %s\n", ship.get_shipname().c_str(), dest->serial(), dest->get_port_name().c_str());
+			sslog("Rerouted %s to %u %s\n", ship.get_shipname().c_str(), dest->serial(),
+			      dest->get_port_name().c_str());
 			Path path;
 			ship.calculate_sea_route(game, *ship_plan.front().dock.get(game), &path);
 			int32_t d = -1;
@@ -271,7 +273,8 @@ bool ShippingSchedule::do_remove_port_from_plan(Game& game,
 // `dock` is not a dangling reference yet, but this function is called
 // via `ShipFleet::remove_port()` from `PortDock::cleanup()`
 void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
-	sslog("\nShippingSchedule::port_removed (%u %s)\n", dock->serial(), dock->get_port_name().c_str());
+	sslog(
+	   "\nShippingSchedule::port_removed (%u %s)\n", dock->serial(), dock->get_port_name().c_str());
 	// Find all ships planning to visit this dock and reroute them.
 	std::vector<Ship*> ships_heading_there;
 	for (auto& ship_and_plan : plans_) {
@@ -289,7 +292,8 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 	for (PortDock* pd : fleet_.get_ports()) {
 		for (auto it = pd->waiting_.begin(); it != pd->waiting_.end();) {
 			if (it->destination_dock_.serial() == dock->serial()) {
-				sslog("found a shippingitem in port %u %s\n", pd->serial(), pd->get_port_name().c_str());
+				sslog(
+				   "found a shippingitem in port %u %s\n", pd->serial(), pd->get_port_name().c_str());
 				it->set_location(game, pd->warehouse_);
 				it->end_shipping(game);
 				it = pd->waiting_.erase(it);
@@ -359,7 +363,8 @@ void ShippingSchedule::ship_added(Game& game, Ship& s) {
 	plans_[&s].push_back(SchedulingState(closest, false, Duration(dist)));
 	s.set_destination(game, closest);
 	// Check for closest to make clang-tidy happy
-	sslog("Sent to %u %s\n\n", closest ? closest->serial() : 0, closest ? closest->get_port_name().c_str() : "");
+	sslog("Sent to %u %s\n\n", closest ? closest->serial() : 0,
+	      closest ? closest->get_port_name().c_str() : "");
 }
 
 void ShippingSchedule::port_added(Game& game, PortDock& dock) {
@@ -593,9 +598,11 @@ void ShippingSchedule::load_on_ship(Game& game,
                                     std::list<PrioritisedPortPair>& all_ppps) {
 	const uint32_t take = std::min(ppp.open_count, ppp.ships.front().capacity);
 	Ship* ship = ppp.ships.front().ship;
-	sslog("load_on_ship: PPP %u %s –> %u %s (open_count %u): assigning %u items (capacity %u) to %s\n",
-	      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(), ppp.end->get_port_name().c_str(), ppp.open_count, take, ppp.ships.front().capacity,
-	      ship->get_shipname().c_str());
+	sslog(
+	   "load_on_ship: PPP %u %s –> %u %s (open_count %u): assigning %u items (capacity %u) to %s\n",
+	   ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(),
+	   ppp.end->get_port_name().c_str(), ppp.open_count, take, ppp.ships.front().capacity,
+	   ship->get_shipname().c_str());
 	assert(take);
 	// We assume that EITHER both end points are already part of the plan,
 	// or that the start point is the last entry in the plan
@@ -657,10 +664,12 @@ void ShippingSchedule::load_on_ship(Game& game,
 		p.ships.erase(ship_it);
 		if ((free_capacity != 0u) && found_start && !expedition && (found_end || start_is_last)) {
 			ScoredShip updated_ship(ship, free_capacity, arrival_time, detour_start_end);
-			sslog("load_on_ship: PPP %u %s –> %u %s (open_count %u) UPDATED: may assign up to %u items "
-			      "to %s (score %" PRIu64 ")\n",
-			      p.start->serial(), p.start->get_port_name().c_str(), p.end->serial(), p.end->get_port_name().c_str(), ppp.open_count, free_capacity,
-			      ship->get_shipname().c_str(), updated_ship.score);
+			sslog(
+			   "load_on_ship: PPP %u %s –> %u %s (open_count %u) UPDATED: may assign up to %u items "
+			   "to %s (score %" PRIu64 ")\n",
+			   p.start->serial(), p.start->get_port_name().c_str(), p.end->serial(),
+			   p.end->get_port_name().c_str(), ppp.open_count, free_capacity,
+			   ship->get_shipname().c_str(), updated_ship.score);
 			for (auto it = p.ships.begin();; ++it) {
 				if (it == p.ships.end() || updated_ship < *it) {
 					p.ships.insert(it, updated_ship);
@@ -668,8 +677,9 @@ void ShippingSchedule::load_on_ship(Game& game,
 				}
 			}
 		} else {
-			sslog("load_on_ship: PPP %u %s –> %u %s (open_count %u) REMOVED %s\n", p.start->serial(), p.start->get_port_name().c_str(),
-			      p.end->serial(), p.end->get_port_name().c_str(), ppp.open_count, ship->get_shipname().c_str());
+			sslog("load_on_ship: PPP %u %s –> %u %s (open_count %u) REMOVED %s\n", p.start->serial(),
+			      p.start->get_port_name().c_str(), p.end->serial(), p.end->get_port_name().c_str(),
+			      ppp.open_count, ship->get_shipname().c_str());
 		}
 	}
 }
@@ -800,8 +810,8 @@ Duration ShippingSchedule::update(Game& game) {
 
 	for (PortDock* dock : fleet_.get_ports()) {
 		const bool expedition_ready = dock->is_expedition_ready();
-		sslog("Iteration: dock %u %s (expedition ready %s)\n", dock->serial(), dock->get_port_name().c_str(),
-		      expedition_ready ? "true" : "false");
+		sslog("Iteration: dock %u %s (expedition ready %s)\n", dock->serial(),
+		      dock->get_port_name().c_str(), expedition_ready ? "true" : "false");
 		Ship* expedition_ship_coming = nullptr;
 		Map_ToDestination_ShipsWithInfoAndCapacity map;
 		for (auto& plan : plans_) {
@@ -847,7 +857,8 @@ Duration ShippingSchedule::update(Game& game) {
 
 		for (PortDock* dest : fleet_.get_ports()) {
 			const int32_t waiting_items = dock->count_waiting(dest);
-			sslog("Iteration: Iteration: dest %u %s, waiting %d\n", dest->serial(), dest->get_port_name().c_str(), waiting_items);
+			sslog("Iteration: Iteration: dest %u %s, waiting %d\n", dest->serial(),
+			      dest->get_port_name().c_str(), waiting_items);
 			std::multiset<Duration> arrival_times;  // one entry per item that will be picked up
 			for (const auto& pair : map[dest].first) {
 				for (uint32_t i = pair.second.second; i != 0u; --i) {
@@ -1067,7 +1078,8 @@ Duration ShippingSchedule::update(Game& game) {
 					closest = dock;
 				}
 			}
-			sslog("assigned %s to dock %u %s\n", ship->get_shipname().c_str(), (*closest)->serial(), (*closest)->get_port_name().c_str());
+			sslog("assigned %s to dock %u %s\n", ship->get_shipname().c_str(), (*closest)->serial(),
+			      (*closest)->get_port_name().c_str());
 			ship->set_destination(game, *closest);
 			plans_[ship].clear();
 			plans_[ship].push_back(SchedulingState(*closest, true, Duration(dist)));
@@ -1142,9 +1154,11 @@ Duration ShippingSchedule::update(Game& game) {
 			                          detour_start_end, free_capacity);
 			if ((free_capacity != 0u) && found_start && !expedition && (found_end || start_is_last)) {
 				ScoredShip ss(plan.first.get(game), free_capacity, arrival_time, detour_start_end);
-				sslog("Phase 5.0: PPP %u %s –> %u %s (open_count %u): may assign up to %u items to %s (score "
+				sslog("Phase 5.0: PPP %u %s –> %u %s (open_count %u): may assign up to %u items to %s "
+				      "(score "
 				      "%" PRIu64 ")\n",
-				      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(), ppp.end->get_port_name().c_str(), ppp.open_count, free_capacity,
+				      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(),
+				      ppp.end->get_port_name().c_str(), ppp.open_count, free_capacity,
 				      plan.first.get(game)->get_shipname().c_str(), ss.score);
 				_ships.insert(ss);
 			}
@@ -1163,8 +1177,9 @@ Duration ShippingSchedule::update(Game& game) {
 			}
 			load_on_ship(game, ppp, open_pairs);
 		}
-		sslog("Phase 5.1: PPP %u %s –> %u %s: %u open_count remaining\n", ppp.start->serial(), ppp.start->get_port_name().c_str(),
-		      ppp.end->serial(), ppp.end->get_port_name().c_str(), ppp.open_count);
+		sslog("Phase 5.1: PPP %u %s –> %u %s: %u open_count remaining\n", ppp.start->serial(),
+		      ppp.start->get_port_name().c_str(), ppp.end->serial(), ppp.end->get_port_name().c_str(),
+		      ppp.open_count);
 	}
 
 	// 2) assign idle ships
@@ -1196,7 +1211,8 @@ Duration ShippingSchedule::update(Game& game) {
 			const uint32_t take = std::min(ppp.open_count, closest->get_capacity());
 			assert(take);
 			sslog("Phase 5.2: PPP %u %s –> %u %s (open_count %u): assigning %u items to %s\n",
-			      ppp.start->serial() , ppp.start->get_port_name().c_str(), ppp.end->serial(), ppp.end->get_port_name().c_str(), ppp.open_count, take,
+			      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(),
+			      ppp.end->get_port_name().c_str(), ppp.open_count, take,
 			      closest->get_shipname().c_str());
 			plans_[closest].clear();
 			plans_[closest].push_back(SchedulingState(ppp.start, false, Duration(dist)));
@@ -1225,8 +1241,9 @@ Duration ShippingSchedule::update(Game& game) {
 	std::list<PortDock*> open_count_left;
 	for (PrioritisedPortPair& ppp : open_pairs) {
 		while ((ppp.open_count != 0u) && !ppp.ships.empty()) {
-			sslog("Phase 5.3: PPP %u %s –> %u %s (open_count %u): assigning items…\n", ppp.start->serial(), ppp.start->get_port_name().c_str(),
-			      ppp.end->serial(), ppp.end->get_port_name().c_str(), ppp.open_count);
+			sslog("Phase 5.3: PPP %u %s –> %u %s (open_count %u): assigning items…\n",
+			      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(),
+			      ppp.end->get_port_name().c_str(), ppp.open_count);
 			load_on_ship(game, ppp, open_pairs);
 		}
 		sslog("%u open_count remaining\n", ppp.open_count);
@@ -1327,9 +1344,11 @@ Duration ShippingSchedule::update(Game& game) {
 							continue;
 						}
 						const uint32_t take = std::min(capacity, ppp.open_count);
-						sslog("Phase 5.4.A: PPP %u %s –> %u %s (open_count %u): assigning %u items to %s\n",
-						      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(), ppp.end->get_port_name().c_str(), ppp.open_count, take,
-						      plan.first.get(game)->get_shipname().c_str());
+						sslog(
+						   "Phase 5.4.A: PPP %u %s –> %u %s (open_count %u): assigning %u items to %s\n",
+						   ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(),
+						   ppp.end->get_port_name().c_str(), ppp.open_count, take,
+						   plan.first.get(game)->get_shipname().c_str());
 						assert(take);
 						ppp.open_count -= take;
 						// c
@@ -1365,9 +1384,11 @@ Duration ShippingSchedule::update(Game& game) {
 						// → a) add items for start and b) push a State to end
 						const uint32_t take =
 						   std::min(plan.first.get(game)->get_capacity(), ppp.open_count);
-						sslog("Phase 5.4.B: PPP %u %s –> %u %s (open_count %u): assigning %u items to %s\n",
-						      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(), ppp.end->get_port_name().c_str(), ppp.open_count, take,
-						      plan.first.get(game)->get_shipname().c_str());
+						sslog(
+						   "Phase 5.4.B: PPP %u %s –> %u %s (open_count %u): assigning %u items to %s\n",
+						   ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(),
+						   ppp.end->get_port_name().c_str(), ppp.open_count, take,
+						   plan.first.get(game)->get_shipname().c_str());
 						assert(take);
 						ppp.open_count -= take;
 						// a
@@ -1393,7 +1414,8 @@ Duration ShippingSchedule::update(Game& game) {
 					// → a) insert a new state with items for start and b) push a State to end
 					const uint32_t take = std::min(plan.first.get(game)->get_capacity(), ppp.open_count);
 					sslog("Phase 5.4.C: PPP %u %s –> %u %s (open_count %u): assigning %u items to %s\n",
-					      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(), ppp.end->get_port_name().c_str(), ppp.open_count, take,
+					      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(),
+					      ppp.end->get_port_name().c_str(), ppp.open_count, take,
 					      plan.first.get(game)->get_shipname().c_str());
 					assert(take);
 					ppp.open_count -= take;
@@ -1434,7 +1456,8 @@ Duration ShippingSchedule::update(Game& game) {
 					}
 					const uint32_t take = std::min(capacity, ppp.open_count);
 					sslog("Phase 5.4.D: PPP %u %s –> %u %s (open_count %u): assigning %u items to %s\n",
-					      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(), ppp.end->get_port_name().c_str(), ppp.open_count, take,
+					      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(),
+					      ppp.end->get_port_name().c_str(), ppp.open_count, take,
 					      plan.first.get(game)->get_shipname().c_str());
 					assert(take);
 					ppp.open_count -= take;
@@ -1476,9 +1499,11 @@ Duration ShippingSchedule::update(Game& game) {
 								continue;
 							}
 							const uint32_t take = std::min(capacity, ppp.open_count);
-							sslog("Phase 5.4.E: PPP %u %s –> %u %s (open_count %u): assigning %u items to %s\n",
-							      ppp.start->serial(), ppp.start->get_port_name().c_str(), ppp.end->serial(), ppp.end->get_port_name().c_str(), ppp.open_count, take,
-							      plan.first.get(game)->get_shipname().c_str());
+							sslog("Phase 5.4.E: PPP %u %s –> %u %s (open_count %u): assigning %u items to "
+							      "%s\n",
+							      ppp.start->serial(), ppp.start->get_port_name().c_str(),
+							      ppp.end->serial(), ppp.end->get_port_name().c_str(), ppp.open_count,
+							      take, plan.first.get(game)->get_shipname().c_str());
 							assert(take);
 							ppp.open_count -= take;
 							// c
@@ -1585,7 +1610,8 @@ Duration ShippingSchedule::update(Game& game) {
 		} else {
 			plans_[ship].push_back(SchedulingState(closest, false, Duration(dist)));
 			ship->set_destination(game, closest);
-			sslog("Sending %s to %u %s\n", ship->get_shipname().c_str(), closest->serial(), closest->get_port_name().c_str());
+			sslog("Sending %s to %u %s\n", ship->get_shipname().c_str(), closest->serial(),
+			      closest->get_port_name().c_str());
 		}
 		for (auto it = ships_per_port.begin(); it != ships_per_port.end(); ++it) {
 			if (it->first == closest) {

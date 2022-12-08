@@ -2415,7 +2415,8 @@ void CmdShipPortName::execute(Game& game) {
 		return;
 
 	default:
-		throw wexception("CmdShipPortName for object %u of type %s", serial_, to_string(mo->descr().type()).c_str());
+		throw wexception("CmdShipPortName for object %u of type %s", serial_,
+		                 to_string(mo->descr().type()).c_str());
 	}
 }
 

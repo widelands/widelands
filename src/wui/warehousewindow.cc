@@ -255,7 +255,8 @@ WarehouseWindow::WarehouseWindow(InteractiveBase& parent,
 
 void WarehouseWindow::setup_name_field_editbox(UI::Box& vbox) {
 	Widelands::Warehouse* warehouse = warehouse_.get(ibase()->egbase());
-	if (warehouse == nullptr || warehouse->get_portdock() == nullptr || !ibase()->can_act(warehouse->owner().player_number())) {
+	if (warehouse == nullptr || warehouse->get_portdock() == nullptr ||
+	    !ibase()->can_act(warehouse->owner().player_number())) {
 		return BuildingWindow::setup_name_field_editbox(vbox);
 	}
 
@@ -267,7 +268,8 @@ void WarehouseWindow::setup_name_field_editbox(UI::Box& vbox) {
 			return;
 		}
 		if (Widelands::Game* game = ibase()->get_game()) {
-			game->send_player_ship_port_name(wh->owner().player_number(), wh->get_portdock()->serial(), name_field->text());
+			game->send_player_ship_port_name(
+			   wh->owner().player_number(), wh->get_portdock()->serial(), name_field->text());
 		} else {
 			wh->get_portdock()->set_port_name(name_field->text());
 		}
