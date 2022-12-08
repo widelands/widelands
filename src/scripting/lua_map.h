@@ -1515,7 +1515,7 @@ private:
 };
 
 class LuaPlayerSlot : public LuaMapModuleClass {
-	Widelands::PlayerNumber player_number_{0};
+	Widelands::PlayerNumber player_number_{0U};
 
 public:
 	LUNA_CLASS_HEAD(LuaPlayerSlot);
