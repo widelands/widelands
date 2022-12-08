@@ -125,8 +125,8 @@ private:
 	std::unordered_map<GLuint, GLenum> texture_to_target_;
 	std::unordered_set<GLint> enabled_attrib_arrays_;
 	GLenum last_active_texture_;
-	GLuint current_framebuffer_{0};
-	GLuint current_framebuffer_texture_{0};
+	GLuint current_framebuffer_{0U};
+	GLuint current_framebuffer_texture_{0U};
 
 	State();
 

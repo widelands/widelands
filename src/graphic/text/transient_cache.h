@@ -77,7 +77,7 @@ private:
 	};
 
 	uint32_t max_size_in_size_unit_;
-	uint32_t size_in_size_unit_{0};
+	uint32_t size_in_size_unit_{0U};
 	std::map<std::string, Entry> entries_;
 	AccessHistory access_history_;
 

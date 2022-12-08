@@ -309,7 +309,8 @@ private:
 	Floating floating_{Floating::kNone};
 	UI::Align halign_;
 	UI::Align valign_;
-	int32_t x_{0}, y_{0};
+	int32_t x_{0};
+	int32_t y_{0};
 };
 
 /*
@@ -331,8 +332,8 @@ private:
 	uint16_t
 	fit_line(uint16_t w, const Borders& /*p*/, std::vector<RenderNode*>* rv, bool trim_spaces);
 
-	uint16_t h_{0};
-	size_t idx_{0};
+	uint16_t h_{0U};
+	size_t idx_{0U};
 	std::vector<RenderNode*>& all_nodes_;
 	std::queue<RenderNode*> floats_;
 };
@@ -902,10 +903,7 @@ private:
  */
 class DivTagRenderNode : public RenderNode {
 public:
-	explicit DivTagRenderNode(TextClickTarget* c, const NodeStyle& ns)
-	   : RenderNode(c, ns),
-
-	     background_color_(0, 0, 0) {
+	explicit DivTagRenderNode(TextClickTarget* c, const NodeStyle& ns) : RenderNode(c, ns) {
 	}
 	~DivTagRenderNode() override {
 		nodes_to_render_.clear();
@@ -1000,10 +998,11 @@ public:
 
 private:
 	DesiredWidth desired_width_;
-	uint16_t w_{0}, h_{0};
+	uint16_t w_{0U};
+	uint16_t h_{0U};
 	std::vector<RenderNode*> nodes_to_render_;
 	Borders margin_;
-	RGBColor background_color_;
+	RGBColor background_color_{0, 0, 0};
 	bool is_background_color_set_{false};
 	const Image* background_image_{nullptr};  // Not owned.
 	std::vector<Reference> refs_;
@@ -1338,7 +1337,7 @@ public:
 	}
 
 private:
-	uint16_t indent_{0};
+	uint16_t indent_{0U};
 };
 
 class LinkTagHandler : public TagHandler {
@@ -1509,7 +1508,7 @@ public:
 	}
 
 private:
-	uint16_t space_{0};
+	uint16_t space_{0U};
 };
 
 class HspaceTagHandler : public TagHandler {
@@ -1571,7 +1570,7 @@ private:
 	std::string fill_text_;
 	const Image* background_image_{nullptr};
 	std::string image_filename_;
-	uint16_t space_{0};
+	uint16_t space_{0U};
 };
 
 class BrTagHandler : public TagHandler {

@@ -163,7 +163,7 @@ protected:
 	[[nodiscard]] const Animation::MipMapEntry& mipmap_entry(float scale) const;
 
 	/// The number of textures this animation will play
-	uint16_t nr_frames_{0};
+	uint16_t nr_frames_{0U};
 
 	/// Reverse sort the zoom scales for faster lookup
 	struct MipMapCompare {
