@@ -129,7 +129,8 @@ private:
 
 	AddOnsCtrl& parent_;
 	std::shared_ptr<AddOns::AddOnInfo> info_;
-	int32_t current_screenshot_{0}, nr_screenshots_;
+	int32_t current_screenshot_{0};
+	int32_t nr_screenshots_;
 	std::vector<const Image*> screenshot_cache_;
 
 	/** How the user voted the current add-on (1-10; 0 for not voted; -1 for unknown). */

@@ -133,8 +133,9 @@ private:
 	uint32_t init_time_;
 
 	std::vector<std::string> images_;
-	uint32_t last_image_exchange_time_{0};
-	size_t draw_image_{0}, last_image_{0};
+	uint32_t last_image_exchange_time_{0U};
+	size_t draw_image_{0U};
+	size_t last_image_{0U};
 	Rectf image_pos(const Image&, bool crop = true);
 	Rectf title_pos();
 	float calc_opacity(uint32_t time) const;
