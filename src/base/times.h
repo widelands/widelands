@@ -38,6 +38,9 @@ struct Duration {
 	}
 
 	Duration& operator=(const Duration& other) {
+		if (&other == this) {
+			return *this;
+		}
 		value_ = other.get();
 		return *this;
 	}
@@ -149,6 +152,9 @@ struct Time {
 	}
 
 	Time& operator=(const Time& other) {
+		if (&other == this) {
+			return *this;
+		}
 		value_ = other.get();
 		return *this;
 	}

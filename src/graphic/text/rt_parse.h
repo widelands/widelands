@@ -95,17 +95,16 @@ private:
 };
 
 struct Child {
-	Child() : tag(nullptr), text() {
-	}
+	Child() = default;
 	explicit Child(Tag* t) : tag(t) {
 	}
 	explicit Child(const std::string& t) : tag(nullptr), text(t) {
 	}
 	~Child() {
-		if (tag)
-			delete tag;
+
+		delete tag;
 	}
-	Tag* tag;
+	Tag* tag{nullptr};
 	std::string text;
 };
 

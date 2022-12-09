@@ -29,8 +29,7 @@
 class Image {
 public:
 	Image() = default;
-	virtual ~Image() {
-	}
+	virtual ~Image() = default;
 
 	// Dimensions of this Image in pixels.
 	[[nodiscard]] virtual int width() const = 0;

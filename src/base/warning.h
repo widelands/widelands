@@ -43,8 +43,7 @@ struct WLWarning : public std::exception {
 	[[nodiscard]] const char* what() const noexcept override;
 
 protected:
-	WLWarning() {
-	}
+	WLWarning() = default;
 	std::string what_;
 	std::string title_;
 };
