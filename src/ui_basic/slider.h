@@ -118,8 +118,8 @@ private:
 	int32_t min_value_;  //  cursor values
 	int32_t max_value_;
 	int32_t value_;
-	int32_t relative_move_;
-	int32_t big_step_;
+	int32_t relative_move_{0};
+	int32_t big_step_{0};
 
 	bool highlighted_{false};  //  mouse over
 	bool pressed_{false};      //  the cursor is pressed
