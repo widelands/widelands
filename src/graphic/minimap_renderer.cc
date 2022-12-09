@@ -95,6 +95,9 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			Widelands::Coords starting_pos;
 			for (uint32_t p = 1; p <= map.get_nrplayers(); p++) {
 				starting_pos = map.get_starting_pos(p);
+				if (!static_cast<bool>(starting_pos)) {
+					continue;
+				}
 				uint32_t dist = map.calc_distance(f, starting_pos);
 				if (dist < 9) {
 					color = dist == 0 ? kWhite : blend_color(color, kPlayerColors[p - 1]);
