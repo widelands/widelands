@@ -25,8 +25,7 @@
 #include "io/filesystem/layered_filesystem.h"
 
 /// Prepare infrastructure for reading song files from disk and register the matching files
-Songset::Songset(const std::string& dir, const std::string& basename)
-   : m_(nullptr), rwops_(nullptr) {
+Songset::Songset(const std::string& dir, const std::string& basename) {
 	assert(g_fs);
 	std::vector<std::string> mp3_files = g_fs->get_sequential_files(dir, basename, "mp3");
 	std::vector<std::string> ogg_files = g_fs->get_sequential_files(dir, basename, "ogg");

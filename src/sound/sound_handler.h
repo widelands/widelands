@@ -206,7 +206,7 @@ private:
 
 	FxId do_register_fx(SoundType type, const std::string& fx_path);
 
-	void initialization_error(const char* const msg, bool quit_sdl);
+	void initialization_error(const char* msg, bool quit_sdl);
 
 	bool play_or_not(SoundType type, FxId fx_id, uint16_t priority, bool allow_multiple);
 	void start_music(const std::string& songset_name);
@@ -219,15 +219,14 @@ private:
 
 	/// Contains options for a sound type or the music
 	struct SoundOptions {
-		explicit SoundOptions(int vol, const std::string& savename)
-		   : enabled(true), volume(vol), name(savename) {
+		explicit SoundOptions(int vol, const std::string& savename) : volume(vol), name(savename) {
 			assert(!savename.empty());
 			assert(vol >= 0);
 			assert(vol <= MIX_MAX_VOLUME);
 		}
 
 		/// Whether the user wants to hear this type of sound
-		bool enabled;
+		bool enabled{true};
 		/// Volume for sound effects or music (from 0 to get_max_volume())
 		int volume;
 		/// Name for saving
@@ -262,7 +261,7 @@ private:
 	RNG rng_;
 
 	/// Protects access to active_fx_ between callbacks and main code.
-	SDL_mutex* fx_lock_;
+	SDL_mutex* fx_lock_{nullptr};
 
 	/**
 	 * Can sounds be played?

@@ -28,7 +28,7 @@ class StreamRead;
 class StreamWrite;
 
 struct RNG {
-	RNG();
+	RNG() = default;
 	explicit RNG(const uint32_t s) : RNG() {
 		seed(s);
 	}
@@ -47,8 +47,8 @@ struct RNG {
 	}
 
 private:
-	uint32_t state0;
-	uint32_t state1;
+	uint32_t state0{0U};
+	uint32_t state1{0U};
 };
 
 #define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x)&0xff])
