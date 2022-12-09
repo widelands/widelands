@@ -50,7 +50,7 @@ public:
 	// coordinates are in the OpenGL frame. The 'texture_mask' is used to selectively apply
 	// the 'blend'. This is used for blitting player colored images.
 	void draw(const Rectf& gl_dest_rect,
-	          const float z_value,
+	          float z_value,
 	          const BlitData& texture,
 	          const BlitData& mask,
 	          const RGBAColor& blend,
@@ -61,7 +61,7 @@ public:
 	// coordinates are in the OpenGL frame. The image is first converted to
 	// luminance, then all values are multiplied with blend.
 	void draw_monochrome(const Rectf& gl_dest_rect,
-	                     const float z_value,
+	                     float z_value,
 	                     const BlitData& texture,
 	                     const RGBAColor& blend);
 

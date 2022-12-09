@@ -39,7 +39,7 @@ struct Utf8 {
 	 */
 	static uint16_t utf8_to_unicode(const std::string& in, std::string::size_type& pos) {
 		assert(pos < in.size());
-		if (in[pos] & 0x80) {
+		if ((in[pos] & 0x80) != 0) {
 			if (is_utf8_extended(in[pos])) {
 				pos++;
 				return 0;
@@ -47,22 +47,26 @@ struct Utf8 {
 
 			uint8_t ctrl = in[pos];
 			uint16_t value = in[pos++];
-			if (!is_utf8_extended(in[pos]))
+			if (!is_utf8_extended(in[pos])) {
 				return 0;
+			}
 			value = (value << 6) | (in[pos++] & 0x3f);
-			if ((ctrl & 0xe0) == 0xc0)
+			if ((ctrl & 0xe0) == 0xc0) {
 				return value & 0x07ff;
-			if (!is_utf8_extended(in[pos]))
+			}
+			if (!is_utf8_extended(in[pos])) {
 				return 0;
+			}
 			value = (value << 6) | (in[pos++] & 0x3f);
-			if ((ctrl & 0xf0) == 0xe0)
+			if ((ctrl & 0xf0) == 0xe0) {
 				return value & 0xffff;
-			while (is_utf8_extended(in[pos]))
+			}
+			while (is_utf8_extended(in[pos])) {
 				++pos;
+			}
 			return 0;
-		} else {
-			return in[pos++];
 		}
+		return in[pos++];
 	}
 };
 
