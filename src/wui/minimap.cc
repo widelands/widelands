@@ -142,7 +142,8 @@ inline uint32_t MiniMap::but_h() const {
 MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
    : UI::UniqueWindow(&ibase, UI::WindowStyle::kWui, "minimap", registry, 0, 0, _("Map")),
      ibase_(ibase),
-     owner_button_impl_(ibase.egbase().is_game() ? MiniMapLayer::Owner : MiniMapLayer::StartingPositions),
+     owner_button_impl_(ibase.egbase().is_game() ? MiniMapLayer::Owner :
+                                                   MiniMapLayer::StartingPositions),
      view_(*this, &registry->minimap_layers, &registry->minimap_type, 0, 0, 0, 0, ibase),
 
      button_terrn(this,
