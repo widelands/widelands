@@ -76,19 +76,19 @@ struct EditBoxImpl {
 	float font_scale{1.0f};
 
 	/// Maximum number of characters in the input
-	uint32_t maxLength{1};
+	uint32_t maxLength{1U};
 
 	/// Current text in the box.
 	std::string text;
 
 	/// Position of the caret.
-	uint32_t caret{0};
+	uint32_t caret{0U};
 
 	/// Position of the caret at text selection end.
-	uint32_t selection_end{0};
+	uint32_t selection_end{0U};
 
 	/// Initial position of text when selection was started
-	uint32_t selection_start{0};
+	uint32_t selection_start{0U};
 
 	Mode mode{Mode::kNormal};
 

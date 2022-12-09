@@ -240,7 +240,7 @@ private:
 
 	// Dimensions
 	unsigned int max_list_items_;
-	unsigned int max_list_height_;
+	uint32_t max_list_height_{std::numeric_limits<uint32_t>::max()};
 	int list_offset_x_{0};
 	int list_offset_y_{0};
 	const int base_height_;

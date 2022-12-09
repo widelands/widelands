@@ -48,7 +48,7 @@ struct MultilineEditbox::Data {
 	/// Position of the cursor inside the text.
 	/// 0 indicates that the cursor is before the first character,
 	/// text.size() inidicates that the cursor is after the last character.
-	uint32_t cursor_pos{0};
+	uint32_t cursor_pos{0U};
 	std::string caret_image_path;
 
 	const int lineheight;
@@ -60,9 +60,8 @@ struct MultilineEditbox::Data {
 
 	Mode mode{Mode::kNormal};
 
-	uint32_t selection_start{0};
-
-	uint32_t selection_end{0};
+	uint32_t selection_start{0U};
+	uint32_t selection_end{0U};
 
 	/// Cached wrapping info; see @ref refresh_ww and @ref update
 	/*@{*/

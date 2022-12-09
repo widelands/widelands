@@ -536,12 +536,19 @@ private:
 	 * The outer rectangle is defined by (x_, y_, w_, h_)
 	 */
 	/*@{*/
-	int32_t x_, y_;
-	int w_, h_;
+	int32_t x_;
+	int32_t y_;
+	int w_;
+	int h_;
 	/*@}*/
-	int lborder_{0}, rborder_{0}, tborder_{0}, bborder_{0};
-	uint8_t border_snap_distance_{0}, panel_snap_distance_{0};
-	int desired_w_, desired_h_;
+	int lborder_{0};
+	int rborder_{0};
+	int tborder_{0};
+	int bborder_{0};
+	uint8_t border_snap_distance_{0U};
+	uint8_t panel_snap_distance_{0U};
+	int desired_w_;
+	int desired_h_;
 
 	friend struct ModalGuard;
 

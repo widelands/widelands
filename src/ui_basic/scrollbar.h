@@ -91,14 +91,14 @@ private:
 	bool horizontal_;
 	bool force_draw_{false};  // draw this scrollbar, even if it can't do anything
 
-	uint32_t pos_{0};  ///< from 0 to range_ - 1
-	uint32_t singlestepsize_{1};
-	uint32_t pagesize_{5};
+	uint32_t pos_{0U};  ///< from 0 to range_ - 1
+	uint32_t singlestepsize_{1U};
+	uint32_t pagesize_{5U};
 	uint32_t buttonsize_;
-	uint32_t steps_{100};
+	uint32_t steps_{100U};
 
 	Area pressed_{Area::None};  ///< area that the user clicked on (None if mouse is up)
-	uint32_t time_nextact_{0};
+	uint32_t time_nextact_{0U};
 	int32_t knob_grabdelta_{0};  ///< only while pressed_ == Knob
 
 	const Image* pic_minus_;  ///< left/up

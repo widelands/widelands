@@ -36,12 +36,7 @@ struct ColorChooserImpl : public Panel {
 
 	ColorChooserImpl(Panel& parent, PanelStyle s, ColorChooser& c)
 	   : Panel(&parent, s, 0, 0, kMainDimension + kSpacing + kSidebarWidth, kMainDimension),
-	     chooser_(c),
-
-	     selector_(*g_image_cache->get("images/ui_basic/fsel.png")),
-
-	     texture_left_(kMainDimension, kMainDimension),
-	     texture_right_(1, kMainDimension) {
+	     chooser_(c) {
 	}
 
 	ColorAttribute sidebar_attribute() const {
@@ -106,11 +101,14 @@ struct ColorChooserImpl : public Panel {
 private:
 	ColorChooser& chooser_;
 	ColorAttribute sidebar_attribute_{ColorAttribute::kRed};
-	const Image& selector_;
+	const Image& selector_{*g_image_cache->get("images/ui_basic/fsel.png")};
 	bool dragging_{false};
 
-	Texture texture_left_, texture_right_;
-	uint8_t texture_cache_r_{0}, texture_cache_g_{0}, texture_cache_b_{0};
+	Texture texture_left_{kMainDimension, kMainDimension};
+	Texture texture_right_{1, kMainDimension};
+	uint8_t texture_cache_r_{0U};
+	uint8_t texture_cache_g_{0U};
+	uint8_t texture_cache_b_{0U};
 
 	inline void set_color_at_mouse(const int32_t x, const int32_t y) {
 		chooser_.set_color(color_at(x, y));
