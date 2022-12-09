@@ -37,7 +37,7 @@ struct S2MapLoader : public Widelands::MapLoader {
 
 private:
 	const std::string filename_;
-	WorldType worldtype_;
+	WorldType worldtype_{WorldType::kGreenland};
 	std::set<Widelands::Coords> port_spaces_to_set_;
 
 	void load_s2mf_header(FileRead&);

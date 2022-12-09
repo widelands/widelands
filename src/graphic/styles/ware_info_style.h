@@ -45,10 +45,10 @@ struct WareInfoStyleInfo {
 	}
 
 	[[nodiscard]] const UI::FontStyleInfo& header_font() const {
-		return *header_font_.get();
+		return *header_font_;
 	}
 	[[nodiscard]] const UI::FontStyleInfo& info_font() const {
-		return *info_font_.get();
+		return *info_font_;
 	}
 	[[nodiscard]] const Image* icon_background_image() const {
 		return icon_background_image_;
