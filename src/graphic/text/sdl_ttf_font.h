@@ -45,8 +45,7 @@ public:
 		UNDERLINE = 4,
 		SHADOW = 8,
 	};
-	virtual ~IFont() {
-	}
+	virtual ~IFont() = default;
 
 	virtual void dimensions(const std::string&, int, uint16_t*, uint16_t*) = 0;
 	virtual std::shared_ptr<const Image>
@@ -74,7 +73,7 @@ private:
 	void set_style(int);
 
 	TTF_Font* font_;
-	int style_;
+	int style_{TTF_STYLE_NORMAL};
 	const std::string font_name_;
 	const int ptsize_;
 	// Old version of SDLTtf seem to need to keep this around.

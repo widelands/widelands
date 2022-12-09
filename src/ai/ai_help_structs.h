@@ -134,7 +134,7 @@ constexpr uint16_t kWhFarButReachable = 250;
 constexpr uint16_t kWhNotReachable = 500;
 
 struct CheckStepRoadAI {
-	CheckStepRoadAI(Widelands::Player* const pl, uint8_t const mc, bool const oe);
+	CheckStepRoadAI(Widelands::Player* pl, uint8_t mc, bool oe);
 
 	[[nodiscard]] bool allowed(const Widelands::Map&,
 	                           Widelands::FCoords start,
@@ -152,7 +152,7 @@ struct CheckStepRoadAI {
 // plus one step more to a field with own immovable. So that also flags and buildings are
 // included in resulting list
 struct CheckStepOwnTerritory {
-	CheckStepOwnTerritory(Widelands::Player* const pl, uint8_t const mc, bool const oe);
+	CheckStepOwnTerritory(Widelands::Player* pl, uint8_t mc, bool oe);
 
 	[[nodiscard]] bool allowed(const Widelands::Map&,
 	                           Widelands::FCoords start,
@@ -299,7 +299,7 @@ struct NearFlag {
 		}
 	};
 	NearFlag();
-	NearFlag(const Widelands::Flag* f, int32_t const c);
+	NearFlag(const Widelands::Flag* f, int32_t c);
 
 	bool operator<(const NearFlag& f) const {
 		return current_road_distance > f.current_road_distance;
@@ -370,71 +370,71 @@ struct BuildableField {
 
 	Time field_info_expiration;
 
-	bool preferred;
-	bool enemy_nearby;
-	bool enemy_accessible_;
+	bool preferred{false};
+	bool enemy_nearby{false};
+	bool enemy_accessible_{false};
 
-	bool invalidated;
+	bool invalidated{false};
 
-	bool enemy_wh_nearby;
-	uint16_t unowned_land_nearby;
-	uint16_t enemy_owned_land_nearby;
-	uint16_t unowned_buildable_spots_nearby;
-	uint16_t unowned_portspace_vicinity_nearby;
-	uint16_t nearest_buildable_spot_nearby;
+	bool enemy_wh_nearby{false};
+	uint16_t unowned_land_nearby{0U};
+	uint16_t enemy_owned_land_nearby{0U};
+	uint16_t unowned_buildable_spots_nearby{0U};
+	uint16_t unowned_portspace_vicinity_nearby{0U};
+	uint16_t nearest_buildable_spot_nearby{0U};
 	// to identify that field is too close to border and no production building should be built there
-	bool near_border;
-	uint16_t unowned_mines_spots_nearby;
-	uint16_t unowned_iron_mines_nearby;
+	bool near_border{false};
+	uint16_t unowned_mines_spots_nearby{0U};
+	uint16_t unowned_iron_mines_nearby{0u};
 	// Immovables categorized by building name, so we can have multiple lumberjack/ranger types
 	std::map<std::string, uint8_t> immovables_by_name_nearby;
 	// Immovables categorized by building attribute, so other buildings can access the information
 	// (e.g. space consumers). Also used for the neurons.
 	std::map<BuildingAttribute, uint8_t> immovables_by_attribute_nearby;
-	int16_t water_nearby;
-	int16_t open_water_nearby;
-	int16_t distant_water;
-	int16_t fish_nearby;
-	int8_t critters_nearby;
-	Widelands::ResourceAmount ground_water;  // used by wells
-	uint8_t space_consumers_nearby;
-	uint8_t rangers_nearby;
+	int16_t water_nearby{-1};
+	int16_t open_water_nearby{-1};
+	int16_t distant_water{0};
+	int16_t fish_nearby{-1};
+	int8_t critters_nearby{-1};
+	Widelands::ResourceAmount ground_water{1};  // used by wells
+	uint8_t space_consumers_nearby{0U};
+	uint8_t rangers_nearby{0U};
 	// to manage the military better following variables exists:
 	// future soldier capacity of own nearby militarysites:
-	int16_t area_military_capacity;
-	int16_t future_area_military_capacity;
+	int16_t area_military_capacity{0};
+	int16_t future_area_military_capacity{0};
 	// distance to near buldings:
-	int16_t military_loneliness;
-	int16_t future_military_loneliness;
+	int16_t military_loneliness{1000};
+	int16_t future_military_loneliness{1000};
 	// count of military buildings in construction
 	// when making decision on new mulitary buildings it considers also
 	// unowned fields and mines, but this information is not quite correct as there
 	// are construction sites that will change this once they are built
-	int16_t military_in_constr_nearby;
+	int16_t military_in_constr_nearby{0};
 	// actual count of soldiers in nearby buldings
-	int16_t own_military_presence;
-	int16_t enemy_military_presence;
-	int16_t enemy_military_sites;  // Including unfinished
-	int16_t ally_military_presence;
+	int16_t own_military_presence{0};
+	int16_t enemy_military_presence{0};
+	int16_t enemy_military_sites{0};  // Including unfinished
+	int16_t ally_military_presence{0};
 	// stationed (manned) military buildings nearby
-	int16_t military_stationed;
+	int16_t military_stationed{0};
 	uint32_t average_flag_dist_to_wh;
-	int16_t military_unstationed;
-	int16_t own_non_military_nearby;
-	bool defense_msite_allowed;
-	ExtendedBool is_portspace;
-	bool port_nearby;  // to increase priority if a port is nearby,
+	int16_t military_unstationed{0};
+	int16_t own_non_military_nearby{0};
+	bool defense_msite_allowed{false};
+	ExtendedBool is_portspace{ExtendedBool::kUnset};
+	bool port_nearby{false};  // to increase priority if a port is nearby,
 	// especially for new colonies
-	ExtendedBool portspace_nearby;    // special fields intended for ports
-	ExtendedBool shipyard_preferred;  // special fields intended for shipyards
-	int32_t max_buildcap_nearby;
+	ExtendedBool portspace_nearby{ExtendedBool::kUnset};  // special fields intended for ports
+	ExtendedBool shipyard_preferred;                      // special fields intended for shipyards
+	int32_t max_buildcap_nearby{0};
 	// It is not necessary to check resources (stones, fish...) too frequently as they do not change
 	// fast. This stores the time of the last check.
 	Time last_resources_check_time;
-	int32_t military_score_;
-	bool inland;
-	uint16_t local_soldier_capacity;
-	bool is_militarysite;
+	int32_t military_score_{0};
+	bool inland{false};
+	uint16_t local_soldier_capacity{0U};
+	bool is_militarysite{false};
 
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
@@ -451,10 +451,10 @@ struct MineableField {
 
 	Widelands::FCoords coords;
 	Time field_info_expiration;
-	bool preferred;
-	int32_t mines_nearby;
+	bool preferred{false};
+	int32_t mines_nearby{0};
 	// this is to provide that a mine is not built on the edge of mine area
-	int32_t same_mine_fields_nearby;
+	int32_t same_mine_fields_nearby{0};
 };
 
 struct EconomyObserver {
@@ -625,14 +625,14 @@ struct EnemySiteObserver {
 // as all mines have 3 levels, AI does not know total count of mines per mined material
 // so this observer will be used for this
 struct MineTypesObserver {
-	MineTypesObserver();
+	MineTypesObserver() = default;
 
 	[[nodiscard]] uint16_t total_count() const;
 
-	uint16_t in_construction;
-	uint16_t finished;
-	bool is_critical;
-	uint16_t unoccupied;
+	uint16_t in_construction{0U};
+	uint16_t finished{0U};
+	bool is_critical{false};
+	uint16_t unoccupied{0U};
 };
 
 // This struct contains count of mineable fields grouped by ore/resource type
@@ -678,16 +678,16 @@ struct Neuron {
 	Neuron(int8_t, uint8_t, uint16_t);
 	void recalculate();
 	void set_weight(int8_t w);
-	int8_t get_weight() {
+	[[nodiscard]] int8_t get_weight() const {
 		return weight;
 	}
 	int8_t get_result(size_t);
 	int8_t get_result_safe(int32_t, bool = false);
 	void set_type(uint8_t);
-	uint8_t get_type() {
+	[[nodiscard]] uint8_t get_type() const {
 		return type;
 	}
-	uint16_t get_id() {
+	[[nodiscard]] uint16_t get_id() const {
 		return id;
 	}
 
@@ -705,7 +705,7 @@ struct FNeuron {
 	bool get_result(bool, bool, bool, bool bool4 = true, bool bool5 = true);
 	bool get_position(uint8_t);
 	uint32_t get_int();
-	uint16_t get_id() {
+	[[nodiscard]] uint16_t get_id() const {
 		return id;
 	}
 
@@ -788,15 +788,15 @@ private:
 
 // this is used to count militarysites by their size
 struct MilitarySiteSizeObserver {
-	MilitarySiteSizeObserver();
+	MilitarySiteSizeObserver() = default;
 
-	uint16_t in_construction;
-	uint16_t finished;
+	uint16_t in_construction{0U};
+	uint16_t finished{0U};
 };
 
 // this represents a scheduler task
 struct SchedulerTask {
-	SchedulerTask(const Time& time, const SchedulerTaskId t, const uint8_t p, const char* d);
+	SchedulerTask(const Time& time, SchedulerTaskId t, uint8_t p, const char* d);
 
 	bool operator<(const SchedulerTask& other) const;
 
@@ -968,7 +968,7 @@ struct FlagCandidates {
 		uint16_t cand_flag_distance_to_wh;
 		// Scoring is considering multiple things
 		[[nodiscard]] int16_t score() const;
-		bool is_buildable() {
+		[[nodiscard]] bool is_buildable() const {
 			return possible_road_distance > 0;
 		}
 		bool operator<(const Candidate& other) const {
@@ -993,7 +993,7 @@ public:
 	uint32_t count() {
 		return flags_.size();
 	}
-	FlagCandidates::Candidate* get_winner(const int16_t = 0);
+	FlagCandidates::Candidate* get_winner(int16_t = 0);
 };
 }  // namespace AI
 

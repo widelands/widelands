@@ -71,10 +71,10 @@ private:
 	void read(lua_State*, FileRead&);
 
 	lua_State* lua_state_;
-	uint32_t idx_;
+	uint32_t idx_{static_cast<uint32_t>(LUA_REFNIL)};
 	uint32_t nargs_;
-	uint32_t ninput_args_;
-	uint32_t nreturn_values_;
+	uint32_t ninput_args_{0U};
+	uint32_t nreturn_values_{0U};
 };
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_COROUTINE_H

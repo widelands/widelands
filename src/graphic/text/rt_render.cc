@@ -221,11 +221,9 @@ public:
 	};
 	explicit RenderNode(TextClickTarget* c, const NodeStyle& ns)
 	   : click_target_(c),
-	     floating_(Floating::kNone),
+
 	     halign_(ns.halign),
-	     valign_(ns.valign),
-	     x_(0),
-	     y_(0) {
+	     valign_(ns.valign) {
 	}
 	virtual ~RenderNode() = default;
 
@@ -308,10 +306,11 @@ protected:
 	TextClickTarget* click_target_;
 
 private:
-	Floating floating_;
+	Floating floating_{Floating::kNone};
 	UI::Align halign_;
 	UI::Align valign_;
-	int32_t x_, y_;
+	int32_t x_{0};
+	int32_t y_{0};
 };
 
 /*
@@ -319,7 +318,7 @@ private:
  */
 class Layout {
 public:
-	explicit Layout(std::vector<RenderNode*>& all) : h_(0), idx_(0), all_nodes_(all) {
+	explicit Layout(std::vector<RenderNode*>& all) : all_nodes_(all) {
 	}
 	virtual ~Layout() = default;
 
@@ -333,8 +332,8 @@ private:
 	uint16_t
 	fit_line(uint16_t w, const Borders& /*p*/, std::vector<RenderNode*>* rv, bool trim_spaces);
 
-	uint16_t h_;
-	size_t idx_;
+	uint16_t h_{0U};
+	size_t idx_{0U};
 	std::vector<RenderNode*>& all_nodes_;
 	std::queue<RenderNode*> floats_;
 };
@@ -832,7 +831,7 @@ public:
 class SpaceNode : public RenderNode {
 public:
 	SpaceNode(TextClickTarget* c, NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false)
-	   : RenderNode(c, ns), w_(w), h_(h), background_image_(nullptr), is_expanding_(expanding) {
+	   : RenderNode(c, ns), w_(w), h_(h), is_expanding_(expanding) {
 		check_size();
 	}
 
@@ -894,7 +893,7 @@ public:
 
 private:
 	uint16_t w_, h_;
-	const Image* background_image_;  // not owned
+	const Image* background_image_{nullptr};  // not owned
 	std::string filename_;
 	bool is_expanding_;
 };
@@ -904,13 +903,7 @@ private:
  */
 class DivTagRenderNode : public RenderNode {
 public:
-	explicit DivTagRenderNode(TextClickTarget* c, const NodeStyle& ns)
-	   : RenderNode(c, ns),
-	     w_(0),
-	     h_(0),
-	     background_color_(0, 0, 0),
-	     is_background_color_set_(false),
-	     background_image_(nullptr) {
+	explicit DivTagRenderNode(TextClickTarget* c, const NodeStyle& ns) : RenderNode(c, ns) {
 	}
 	~DivTagRenderNode() override {
 		nodes_to_render_.clear();
@@ -1005,12 +998,13 @@ public:
 
 private:
 	DesiredWidth desired_width_;
-	uint16_t w_, h_;
+	uint16_t w_{0U};
+	uint16_t h_{0U};
 	std::vector<RenderNode*> nodes_to_render_;
 	Borders margin_;
-	RGBColor background_color_;
-	bool is_background_color_set_;
-	const Image* background_image_;  // Not owned.
+	RGBColor background_color_{0, 0, 0};
+	bool is_background_color_set_{false};
+	const Image* background_image_{nullptr};  // Not owned.
 	std::vector<Reference> refs_;
 };
 
@@ -1298,7 +1292,7 @@ public:
 	            ImageCache* image_cache,
 	            RendererStyle& init_renderer_style,
 	            const UI::FontSets* fontsets)
-	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets), indent_(0) {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1343,7 +1337,7 @@ public:
 	}
 
 private:
-	uint16_t indent_;
+	uint16_t indent_{0U};
 };
 
 class LinkTagHandler : public TagHandler {
@@ -1445,8 +1439,7 @@ public:
 	              ImageCache* image_cache,
 	              RendererStyle& init_renderer_style,
 	              const UI::FontSets* fontsets)
-	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets),
-	     render_node_(nullptr) {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1489,7 +1482,7 @@ public:
 	}
 
 private:
-	ImgRenderNode* render_node_;
+	ImgRenderNode* render_node_{nullptr};
 };
 
 class VspaceTagHandler : public TagHandler {
@@ -1501,7 +1494,7 @@ public:
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
 	                 const UI::FontSets* fontsets)
-	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets), space_(0) {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1515,7 +1508,7 @@ public:
 	}
 
 private:
-	uint16_t space_;
+	uint16_t space_{0U};
 };
 
 class HspaceTagHandler : public TagHandler {
@@ -1527,9 +1520,7 @@ public:
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
 	                 const UI::FontSets* fontsets)
-	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets),
-	     background_image_(nullptr),
-	     space_(0) {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1577,9 +1568,9 @@ public:
 
 private:
 	std::string fill_text_;
-	const Image* background_image_;
+	const Image* background_image_{nullptr};
 	std::string image_filename_;
-	uint16_t space_;
+	uint16_t space_{0U};
 };
 
 class BrTagHandler : public TagHandler {
@@ -1612,7 +1603,7 @@ public:
 	              bool shrink_to_fit = true)
 	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     shrink_to_fit_(shrink_to_fit),
-	     trim_spaces_(true),
+
 	     w_(max_w),
 	     render_node_(new DivTagRenderNode(this, ns)) {
 	}
@@ -1816,7 +1807,7 @@ public:
 protected:
 	bool shrink_to_fit_;
 	// Always true for DivTagHandler but might be overwritten in RTTagHandler
-	bool trim_spaces_;
+	bool trim_spaces_{true};
 
 private:
 	uint16_t w_;

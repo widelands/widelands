@@ -233,11 +233,11 @@ private:
 	std::unique_ptr<NetClient> net;
 
 	/// Current state of this class
-	enum { OFFLINE, CONNECTING, LOBBY, IN_GAME, COMMUNICATION_ERROR } state_;
+	enum { OFFLINE, CONNECTING, LOBBY, IN_GAME, COMMUNICATION_ERROR } state_{OFFLINE};
 
 	/// data saved for possible relogin
 	std::string authenticator_;
-	bool reg_;
+	bool reg_{false};
 
 	/// Password for connecting as host to a game on the relay server
 	std::string relay_password_;
@@ -256,13 +256,13 @@ private:
 	std::pair<NetAddress, NetAddress> gameips_;
 
 	/// Metaserver information
-	bool clientupdateonmetaserver_;
-	bool gameupdateonmetaserver_;
-	bool clientupdate_;
-	bool gameupdate_;
+	bool clientupdateonmetaserver_{true};
+	bool gameupdateonmetaserver_{true};
+	bool clientupdate_{false};
+	bool gameupdate_{false};
 	std::vector<InternetClient> clientlist_;
 	std::vector<InternetGame> gamelist_;
-	int32_t time_offset_;
+	int32_t time_offset_{0};
 
 	/// ChatProvider: chat messages
 	std::vector<ChatMessage> messages_;

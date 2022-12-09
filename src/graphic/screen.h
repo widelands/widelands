@@ -30,8 +30,7 @@
 class Screen : public Surface {
 public:
 	Screen(int w, int h);
-	~Screen() override {
-	}
+	~Screen() override = default;
 
 	// Implements Surface.
 	[[nodiscard]] int width() const override;
