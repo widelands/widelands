@@ -82,7 +82,7 @@ struct StringNode : FormatNode {
 			}
 			if (written < min_width_) {
 				written = min_width_ - written;
-				for (; written; ++out, --written) {
+				for (; written != 0u; ++out, --written) {
 					*out = ' ';
 				}
 			}

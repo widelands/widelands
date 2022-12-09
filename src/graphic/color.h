@@ -56,7 +56,7 @@ struct RGBAColor {
 	RGBAColor();
 
 	// Initializes to opaque color.
-	RGBAColor(const RGBColor& c);
+	RGBAColor(const RGBColor& c);  // NOLINT allow implicit conversion
 
 	// Returns this color in hex format.
 	[[nodiscard]] std::string hex_value() const;

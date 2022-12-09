@@ -121,9 +121,8 @@ protected:
 	/// Animation data for a particular scale
 	struct MipMapEntry {
 
-		MipMapEntry();
-		virtual ~MipMapEntry() {
-		}
+		MipMapEntry() = default;
+		virtual ~MipMapEntry() = default;
 
 		/// Loads the graphics if they are not yet loaded.
 		virtual void ensure_graphics_are_loaded() const = 0;
@@ -148,7 +147,7 @@ protected:
 		frame_textures(bool return_playercolor_masks) const = 0;
 
 		/// Whether this texture set has player color masks provided
-		bool has_playercolor_masks;
+		bool has_playercolor_masks{false};
 	};
 
 	/// Register animations for the scales listed in kSupportedScales if available. The scale of 1.0
@@ -164,7 +163,7 @@ protected:
 	[[nodiscard]] const Animation::MipMapEntry& mipmap_entry(float scale) const;
 
 	/// The number of textures this animation will play
-	uint16_t nr_frames_;
+	uint16_t nr_frames_{0U};
 
 	/// Reverse sort the zoom scales for faster lookup
 	struct MipMapCompare {
@@ -205,7 +204,7 @@ private:
 	/// How likely it is that the sound effect will be played
 	int32_t sound_priority_;
 	/// Whether the sound can be played by different map objects at the same time
-	bool sound_allow_multiple_;
+	bool sound_allow_multiple_{false};
 };
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_ANIMATION_H
