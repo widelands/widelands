@@ -33,13 +33,13 @@ struct TableStyleInfo {
 	}
 
 	[[nodiscard]] const UI::FontStyleInfo& enabled() const {
-		return *enabled_.get();
+		return *enabled_;
 	}
 	[[nodiscard]] const UI::FontStyleInfo& disabled() const {
-		return *disabled_.get();
+		return *disabled_;
 	}
 	[[nodiscard]] const UI::FontStyleInfo& hotkey() const {
-		return *hotkey_.get();
+		return *hotkey_;
 	}
 
 private:

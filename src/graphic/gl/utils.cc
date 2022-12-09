@@ -174,8 +174,7 @@ void Program::build(const std::string& program_name) {
 	}
 }
 
-State::State()
-   : last_active_texture_(NONE), current_framebuffer_(0), current_framebuffer_texture_(0) {
+State::State() : last_active_texture_(NONE) {
 }
 
 void State::bind(const GLenum target, const GLuint texture) {

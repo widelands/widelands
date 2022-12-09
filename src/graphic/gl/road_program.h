@@ -56,8 +56,8 @@ private:
 	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
 	              float scale,
-	              const Widelands::RoadSegment road_type,
-	              const Direction direction,
+	              Widelands::RoadSegment road_type,
+	              Direction direction,
 	              uint32_t* gl_texture);
 
 	// The buffer that will contain 'vertices_' for rendering.
