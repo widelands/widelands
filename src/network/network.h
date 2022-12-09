@@ -173,11 +173,11 @@ struct FilePart {
 };
 
 struct NetTransferFile {
-	NetTransferFile() : bytes(0), filename(""), md5sum("") {
+	NetTransferFile() : filename(""), md5sum("") {
 	}
 	~NetTransferFile() = default;
 
-	uint32_t bytes;
+	uint32_t bytes{0U};
 	std::string filename;
 	std::string md5sum;
 	std::vector<FilePart> parts;
