@@ -72,7 +72,7 @@ private:
 	void pause_game(bool paused);
 
 	// UI coordinates and spacers
-	int32_t const padding_;  // Common padding between panels
+	int32_t const padding_{4};  // Common padding between panels
 
 	const Type type_;
 

@@ -90,7 +90,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
         /** TRANSLATORS: Amount of resources in the random map generator in the editor */
         _("High"),
      }),
-     resource_amount_(2),
+
      world_(this,
             "world",
             0,
@@ -128,11 +128,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                             panel_style_ == UI::PanelStyle::kWui ?
                                UI::ButtonStyle::kWuiSecondary :
                                UI::ButtonStyle::kFsMenuSecondary),
-     // Terrain
-     waterval_(20),
-     landval_(60),
-     wastelandval_(0),
-     mountainsval_(100 - waterval_ - landval_ - wastelandval_),
+
      water_(this,
             0,
             0,

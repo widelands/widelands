@@ -143,7 +143,7 @@ private:
 	UI::Button scouting_btn_;
 	UI::Button portspace_btn_;
 	UI::Button shipping_btn_;
-	ShipFilterStatus ship_filter_;
+	ShipFilterStatus ship_filter_{ShipFilterStatus::kAll};
 	// Navigation buttons
 	UI::Box navigation_box_;
 	UI::Button watchbtn_;

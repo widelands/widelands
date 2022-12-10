@@ -366,7 +366,7 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 
 		//  make a histogram of the heights
 
-		uint32_t histo[1024] = {0};
+		uint32_t histo[1024] = {0U};
 
 		for (uint32_t x = 0; x < w; ++x) {
 			for (uint32_t y = 0; y < h; ++y) {
