@@ -143,8 +143,7 @@ Game::Game()
      syncwrapper_(*this, synchash_),
      cmdqueue_(*this),
      /** TRANSLATORS: Win condition for this game has not been set. */
-     win_condition_displayname_(_("Not set"))
-{
+     win_condition_displayname_(_("Not set")) {
 	Economy::initialize_serial();
 }
 

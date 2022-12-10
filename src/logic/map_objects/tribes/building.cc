@@ -355,8 +355,7 @@ Implementation
 ==============================
 */
 
-Building::Building(const BuildingDescr& building_descr)
-   : PlayerImmovable(building_descr) {
+Building::Building(const BuildingDescr& building_descr) : PlayerImmovable(building_descr) {
 }
 
 void Building::load_finish(EditorGameBase& egbase) {

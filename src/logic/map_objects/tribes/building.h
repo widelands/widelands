@@ -211,7 +211,8 @@ private:
 	bool needs_waterways_;  // This building should only be built on maps with waterways/ferries
 	                        // enabled
 	DescriptionIndex enhancement_{INVALID_INDEX};
-	DescriptionIndex enhanced_from_{INVALID_INDEX};  // The building this building was enhanced from, or INVALID_INDEX
+	DescriptionIndex enhanced_from_{
+	   INVALID_INDEX};  // The building this building was enhanced from, or INVALID_INDEX
 	bool enhanced_building_{false};          // if it is one, it is bulldozable
 	AI::BuildingHints hints_;                // hints (knowledge) for computer players
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with

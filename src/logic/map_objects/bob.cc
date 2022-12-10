@@ -91,8 +91,7 @@ Bob& BobDescr::create(EditorGameBase& egbase, Player* const owner, const Coords&
 	return bob;
 }
 
-Bob::Bob(const BobDescr& init_descr)
-   : MapObject(&init_descr) {
+Bob::Bob(const BobDescr& init_descr) : MapObject(&init_descr) {
 }
 
 /**

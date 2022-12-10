@@ -206,7 +206,8 @@ private:
 	bool doing_upgrade_request_{false};
 
 	static constexpr size_t kNoOfStatisticsStringCases = 4U;
-	std::vector<std::map<std::tuple<int, int, int>, std::string>> statistics_string_cache_{kNoOfStatisticsStringCases};
+	std::vector<std::map<std::tuple<int, int, int>, std::string>> statistics_string_cache_{
+	   kNoOfStatisticsStringCases};
 };
 }  // namespace Widelands
 

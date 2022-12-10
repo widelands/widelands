@@ -68,7 +68,7 @@ initialization
 ============
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
-   : // TODO(SirVer): this is sooo ugly, I can't say
+   :  // TODO(SirVer): this is sooo ugly, I can't say
      lua_(lua_interface != nullptr ? lua_interface : new LuaEditorInterface(this)),
      player_manager_(new PlayersManager(*this)),
      loading_message_subscriber_(Notifications::subscribe<UI::NoteLoadingMessage>(

@@ -494,8 +494,8 @@ protected:
 	using Stack = std::vector<State>;
 	Stack stack_;                ///<  program stack
 	bool program_timer_{false};  ///< execute next instruction based on pointer
-	Time program_time_{0U};          ///< timer time
-	Duration post_timer_{50U};        ///< Time to schedule after ends
+	Time program_time_{0U};      ///< timer time
+	Duration post_timer_{50U};   ///< Time to schedule after ends
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;

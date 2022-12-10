@@ -284,8 +284,7 @@ IMPLEMENTATION
 */
 
 ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
-   : Building(ps_descr),
-     working_positions_(ps_descr.nr_working_positions()) {
+   : Building(ps_descr), working_positions_(ps_descr.nr_working_positions()) {
 	format_statistics_string();
 }
 

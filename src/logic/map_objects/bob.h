@@ -189,8 +189,7 @@ public:
 	 * \see class Bob for in-depth explanation
 	 */
 	struct State {
-		explicit State(const Task* const the_task = nullptr)
-		   : task(the_task) {
+		explicit State(const Task* const the_task = nullptr) : task(the_task) {
 		}
 
 		const Task* task;
@@ -222,7 +221,8 @@ public:
 	void schedule_destroy(Game&);
 	void schedule_act(Game&, const Duration& tdelta);
 	void skip_act();
-	[[nodiscard]] Vector2f calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float scale) const;
+	[[nodiscard]] Vector2f
+	calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float scale) const;
 	void set_owner(Player*);
 
 	void set_position(EditorGameBase&, const Coords&);
@@ -353,8 +353,8 @@ private:
 	static Task const taskMovepath;
 	static Task const taskMove;
 
-	FCoords position_{Coords(0, 0), nullptr};        ///< where are we right now?
-	Bob* linknext_{nullptr};  ///< next object on this node
+	FCoords position_{Coords(0, 0), nullptr};  ///< where are we right now?
+	Bob* linknext_{nullptr};                   ///< next object on this node
 	Bob** linkpprev_{nullptr};
 	uint32_t anim_{0U};
 	Time animstart_{0U};  ///< gametime when the animation was started
