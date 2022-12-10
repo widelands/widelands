@@ -64,12 +64,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
                                      Descriptions& descriptions)
    : ProductionSiteDescr(init_descname, MapObjectType::TRAININGSITE, table, descriptions),
      num_soldiers_(table.get_int("soldier_capacity")),
-     max_stall_(table.get_int("trainer_patience")),
-
-     min_health_(std::numeric_limits<uint32_t>::max()),
-     min_attack_(std::numeric_limits<uint32_t>::max()),
-     min_defense_(std::numeric_limits<uint32_t>::max()),
-     min_evade_(std::numeric_limits<uint32_t>::max()) {
+     max_stall_(table.get_int("trainer_patience")) {
 	// Read the range of levels that can update this building
 	//  TODO(unknown): This is currently hardcoded to "soldier" but it should search for
 	//  sections starting with the name of each soldier type.

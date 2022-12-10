@@ -225,7 +225,7 @@ private:
 	/** Helper function for add_object_description(). */
 	void add_terrain_description(const std::string&, const LuaTable&);
 
-	uint32_t largest_workarea_{0};
+	uint32_t largest_workarea_{0U};
 
 	/// Custom scenario tribes
 	std::unique_ptr<LuaTable> scenario_tribes_;

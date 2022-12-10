@@ -30,8 +30,8 @@ namespace Widelands {
 
 // Used for having a typesafe maintainer for description classes.
 template <typename T> struct DescriptionMaintainer {
-	// Adds the 'entry', will assert() if it is already registered. Returns the
-	// index of the entry. Ownership is taken.
+	// Adds the 'item', will assert() if it is already registered. Returns the
+	// index of the item. Ownership is taken.
 	Widelands::DescriptionIndex add(T* item);
 
 	// Returns the number of entries in the container.
@@ -39,10 +39,10 @@ template <typename T> struct DescriptionMaintainer {
 		return items_.size();
 	}
 
-	// Returns the entry with the given 'name' if it exists or nullptr.
+	// Returns the item with the given 'name' if it exists or nullptr.
 	[[nodiscard]] T* exists(const std::string& name) const;
 
-	// Returns the index of the entry with the given 'name' or INVALID_INDEX if the entry
+	// Returns the index of the item with the given 'name' or INVALID_INDEX if the item
 	// is not in the container.
 	[[nodiscard]] Widelands::DescriptionIndex get_index(const std::string& name) const {
 		NameToIndexMap::const_iterator i = name_to_index_.find(name);
@@ -52,13 +52,13 @@ template <typename T> struct DescriptionMaintainer {
 		return i->second;
 	}
 
-	// Returns the entry with the given 'idx' or nullptr if 'idx' is out of
+	// Returns the item with the given 'idx' or nullptr if 'idx' is out of
 	// bounds. Ownership is retained.
 	[[nodiscard]] T* get_mutable(const Widelands::DescriptionIndex idx) const {
 		return (idx < items_.size()) ? items_[idx].get() : nullptr;
 	}
 
-	// Returns the entry at 'index'. If 'index' is out of bounds the result is
+	// Returns the item at 'index'. If 'index' is out of bounds the result is
 	// undefined.
 	[[nodiscard]] const T& get(const Widelands::DescriptionIndex index) const {
 		assert(index < items_.size());

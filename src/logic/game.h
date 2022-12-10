@@ -427,14 +427,14 @@ private:
 	public:
 		Game& game_;
 		StreamWrite& target_;
-		uint32_t counter_{0};
-		uint32_t next_diskspacecheck_{0};
+		uint32_t counter_{0U};
+		uint32_t next_diskspacecheck_{0U};
 		std::unique_ptr<StreamWrite> dump_;
 		std::string dumpfname_;
 		bool syncstreamsave_{false};
 		// Use a cyclic buffer for storing parts of the syncstream
 		// Currently used buffer
-		size_t current_excerpt_id_{0};
+		size_t current_excerpt_id_{0U};
 		// (Arbitrary) count of buffers
 		// Syncreports seem to be requested from the network clients every game second so this
 		// buffer should be big enough to store the last 32 seconds of the game actions leading
@@ -472,7 +472,7 @@ private:
 
 	std::unique_ptr<ReplayWriter> replaywriter_;
 
-	uint32_t scenario_difficulty_;
+	uint32_t scenario_difficulty_{kScenarioDifficultyNotSet};
 
 	GeneralStatsVector general_stats_;
 	int next_trade_agreement_id_ = 1;
@@ -485,11 +485,11 @@ private:
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
 
-	int32_t win_condition_duration_;
+	int32_t win_condition_duration_{kDefaultWinConditionDuration};
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	std::unique_ptr<TrainingWheels> training_wheels_;
-	bool training_wheels_wanted_;
+	bool training_wheels_wanted_{false};
 #endif
 
 	/** Filename of the replay represented by this game, or empty if this is not a replay. */

@@ -33,8 +33,7 @@ enum class StockPolicy;
 
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
-	ConstructionsiteInformation() : totaltime(0), completedtime(0) {
-	}
+	ConstructionsiteInformation() = default;
 
 	/// Draw the partly finished constructionsite
 	void draw(const Vector2f& point_on_dst,
@@ -49,8 +48,8 @@ struct ConstructionsiteInformation {
 	const BuildingDescr* was{nullptr};  // only valid if "becomes" is an enhanced building.
 	std::vector<const BuildingDescr*>
 	   intermediates;  // If we enhance a building while it's still under construction
-	Duration totaltime;
-	Duration completedtime;
+	Duration totaltime{0U};
+	Duration completedtime{0U};
 };
 
 /*

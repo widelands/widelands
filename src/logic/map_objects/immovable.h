@@ -240,10 +240,10 @@ public:
 
 	void set_action_data(ImmovableActionData* data);
 	template <typename T> T* get_action_data() {
-		if (!action_data_) {
+		if (action_data_ == nullptr) {
 			return nullptr;
 		}
-		if (T* data = dynamic_cast<T*>(action_data_.get())) {
+		if (T* data = dynamic_cast<T*>(action_data_.get()); data != nullptr) {
 			return data;
 		}
 		set_action_data(nullptr);
@@ -267,11 +267,11 @@ protected:
 
 	Coords position_;
 
-	std::atomic<uint32_t> anim_;
-	Time animstart_;
+	std::atomic<uint32_t> anim_{0U};
+	Time animstart_{0U};
 
 	const ImmovableProgram* program_{nullptr};
-	uint32_t program_ptr_{0};  ///< index of next instruction to execute
+	uint32_t program_ptr_{0U};  ///< index of next instruction to execute
 
 	// Whether a worker was told to remove this object ASAP.
 	// A set of all players who want this object gone.
@@ -286,15 +286,15 @@ protected:
  */
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 0)
 public:
-	uint32_t anim_construction_total_;
-	uint32_t anim_construction_done_;
-	Time program_step_;
+	uint32_t anim_construction_total_{0U};
+	uint32_t anim_construction_done_{0U};
+	Time program_step_{0U};
 
 protected:
 #else
-	std::atomic<uint32_t> anim_construction_total_;
-	std::atomic<uint32_t> anim_construction_done_;
-	Time program_step_;  ///< time of next step
+	std::atomic<uint32_t> anim_construction_total_{0U};
+	std::atomic<uint32_t> anim_construction_done_{0U};
+	Time program_step_{0U};  ///< time of next step
 #endif
 
 	/**
@@ -305,7 +305,7 @@ protected:
 	std::unique_ptr<ImmovableActionData> action_data_;
 
 private:
-	Duration growth_delay_;
+	Duration growth_delay_{0U};
 
 	// Load/save support
 protected:

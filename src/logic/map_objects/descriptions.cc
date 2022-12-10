@@ -67,8 +67,6 @@ Descriptions::Descriptions(LuaInterface* lua, const AddOns::AddOnsList& addons)
      tribes_(new DescriptionMaintainer<TribeDescr>()),
      compatibility_table_(new PostOneWorldLegacyLookupTable()),
 
-     scenario_tribes_(nullptr),
-
      subscriber_(Notifications::subscribe<DescriptionManager::NoteMapObjectDescriptionTypeCheck>(
         [this](DescriptionManager::NoteMapObjectDescriptionTypeCheck note) { check(note); })),
      lua_(lua),

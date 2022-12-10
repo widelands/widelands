@@ -65,12 +65,12 @@ struct WorkareaPreviewData {
 	Widelands::TCoords<> coords{
 	   Widelands::TCoords<>(Widelands::Coords::null(), Widelands::TriangleIndex::D)};
 	// The underlying workarea color
-	uint8_t index = 0;
+	uint8_t index{0U};
 	// If a "special coloring" is specified, its RGB will be overlayed over the base color as
 	// strongly as if it had full alpha, and the final transparency of the entire triangle will be
 	// set to this color's alpha
-	bool use_special_coloring = false;
-	uint32_t special_coloring = 0;
+	bool use_special_coloring{false};
+	uint32_t special_coloring{0U};
 };
 // Pair of interior information and a per-circle list of border coords
 using WorkareasEntry =

@@ -645,7 +645,7 @@ private:
 	void find(const EditorGameBase&, const Area<FCoords>&, functorT&) const;
 
 	/// # of players this map supports (!= Game's number of players!)
-	PlayerNumber nrplayers_{0};
+	PlayerNumber nrplayers_{0U};
 	ScenarioTypes scenario_types_{NO_SCENARIO};  // whether the map is playable as scenario
 
 	int16_t width_{0};
@@ -677,7 +677,7 @@ private:
 	PortSpacesSet port_spaces_;
 	bool allows_seafaring_{false};
 
-	uint32_t waterway_max_length_{0};
+	uint32_t waterway_max_length_{0U};
 
 	Objectives objectives_;
 

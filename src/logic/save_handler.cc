@@ -35,12 +35,6 @@
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
 
-SaveHandler::SaveHandler()
-   : autosave_filename_(kAutosavePrefix),
-
-     autosave_interval_in_ms_(kDefaultAutosaveInterval * 60 * 1000) {
-}
-
 bool SaveHandler::roll_save_files(const std::string& filename, std::string* const error) const {
 	int32_t rolls = 0;
 	std::string filename_previous;

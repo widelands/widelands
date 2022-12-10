@@ -140,20 +140,10 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 
 Game::Game()
    : EditorGameBase(new LuaGameInterface(this)),
-
      syncwrapper_(*this, synchash_),
-     ctrl_(nullptr),
-
      cmdqueue_(*this),
-     scenario_difficulty_(kScenarioDifficultyNotSet),
-
      /** TRANSLATORS: Win condition for this game has not been set. */
-     win_condition_displayname_(_("Not set")),
-     win_condition_duration_(kDefaultWinConditionDuration)
-#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
-     ,
-     training_wheels_wanted_(false)
-#endif
+     win_condition_displayname_(_("Not set"))
 {
 	Economy::initialize_serial();
 }

@@ -37,10 +37,6 @@
 #include "logic/message_queue.h"
 #include "logic/player.h"
 
-namespace {
-constexpr size_t kNoOfStatisticsStringCases = 4;
-}  // namespace
-
 namespace Widelands {
 
 std::vector<Soldier*> MilitarySite::SoldierControl::present_soldiers() const {
@@ -361,13 +357,8 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
      soldier_control_(this),
 
      capacity_(ms_descr.get_max_number_of_soldiers()),
-     nexthealtime_(0),
      soldier_preference_(ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes :
-                                                             SoldierPreference::kRookies),
-     next_swap_soldiers_time_(Time(0)),
-
-     // Initialize vector capacity for statistics string cache
-     statistics_string_cache_(kNoOfStatisticsStringCases) {
+                                                             SoldierPreference::kRookies) {
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
 }

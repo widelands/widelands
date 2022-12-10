@@ -173,7 +173,7 @@ private:
 	SoldierAnimationsList evade_failure_e_name_;
 	SoldierAnimationsList die_e_name_;
 
-	uint16_t max_anim_height_{0};
+	uint16_t max_anim_height_{0U};
 
 	// We can have per-level walking and idle anims
 	// NOTE: I expect no soldier will ever agree to carry a ware, so we don't provide animations for
@@ -398,7 +398,7 @@ protected:
 		const Task* get_task(const std::string& name) override;
 
 	private:
-		uint32_t battle_{0};
+		uint32_t battle_{0U};
 	};
 
 	Loader* create_loader() override;

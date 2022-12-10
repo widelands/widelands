@@ -1480,8 +1480,7 @@ mine
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     Descriptions& descriptions,
                                     const std::string& production_program_name,
-                                    ProductionSiteDescr* descr)
-   : resource_(INVALID_INDEX) {
+                                    ProductionSiteDescr* descr) {
 	if (arguments.size() > 6 || arguments.size() < 4) {
 		throw GameDataError("Usage: mine=<resource name> radius:<number> yield:<percent> "
 		                    "when_empty:<percent> [experience:<percent>] [no_notify]");

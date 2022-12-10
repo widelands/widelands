@@ -174,36 +174,29 @@ public:
 		// Seafaring constants for controlling expeditions
 		static constexpr uint32_t kColonyScanStartArea = 35;
 		static constexpr uint32_t kColonyScanMinArea = 12;
-		static constexpr Time kNoExpedition{0};
+		static constexpr Time kNoExpedition{0U};
 
-		AiPersistentState()
-		   : expedition_start_time(0),
-
-		     magic_numbers(kMagicNumbersSize, 0),
-		     neuron_weights(kNeuronPoolSize, 0),
-		     neuron_functs(kNeuronPoolSize, 0),
-		     f_neurons(kFNeuronPoolSize, 0) {
-		}
+		AiPersistentState() = default;
 
 		void initialize();
 
 		// Was initialized
 		bool initialized{false};
-		uint32_t colony_scan_area{0};
-		uint32_t trees_around_cutters{0};
-		Time expedition_start_time;
+		uint32_t colony_scan_area{0U};
+		uint32_t trees_around_cutters{0U};
+		Time expedition_start_time{0U};
 		int16_t ships_utilization{
 		   0};  // 0-10000 to avoid floats, used for decision for building new ships
 		bool no_more_expeditions{false};
 		int16_t last_attacked_player{0};
 		int32_t least_military_score{0};
 		int32_t target_military_score{0};
-		uint32_t ai_productionsites_ratio{0};
+		uint32_t ai_productionsites_ratio{0U};
 		int32_t ai_personality_mil_upper_limit{0};
-		std::vector<int16_t> magic_numbers;
-		std::vector<int8_t> neuron_weights;
-		std::vector<int8_t> neuron_functs;
-		std::vector<uint32_t> f_neurons;
+		std::vector<int16_t> magic_numbers{kMagicNumbersSize, 0};
+		std::vector<int8_t> neuron_weights{kNeuronPoolSize, 0};
+		std::vector<int8_t> neuron_functs{kNeuronPoolSize, 0};
+		std::vector<uint32_t> f_neurons{kFNeuronPoolSize, 0};
 		std::unordered_map<Widelands::DescriptionIndex, uint32_t> remaining_basic_buildings;
 	} ai_data;
 
@@ -213,12 +206,7 @@ public:
 
 	/// Per-player field information.
 	struct Field {
-		Field()
-		   : vision(VisibleState::kUnexplored),
-
-		     time_node_last_unseen(0),
-
-		     dismantlesite() {
+		Field() {
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
 			//  darkening that actually hides the ground from the user).
@@ -246,7 +234,7 @@ public:
 		/// This is not saved/loaded. It is recalculated during the loading
 		/// process by adding influence values to the nodes surrounding a
 		/// building when the first soldier located in it is loaded.
-		MilitaryInfluence military_influence{0};
+		MilitaryInfluence military_influence{0U};
 
 		/// Indicates whether the player is currently seeing this node or has
 		/// ever seen it.
@@ -271,7 +259,7 @@ public:
 		/// a worker or a building starts seeing an area, unsee_area when it
 		/// stops seeing that area, and hide_or_reveal_field to add or remove
 		/// permanent vision.
-		Vision vision;
+		Vision vision{VisibleState::kUnexplored};
 
 		//  Below follows information about the field, as far as this player
 		//  knows.
@@ -358,7 +346,7 @@ public:
 		 * least one of them has been seen at least once.
 		 *
 		 */
-		Time time_node_last_unseen;
+		Time time_node_last_unseen{0U};
 
 		/**
 		 * The type of immovable on this node, as far as this player knows.
@@ -399,7 +387,7 @@ public:
 		 * The owner of this node, as far as this player knows.
 		 * Only valid when this player has seen this node.
 		 */
-		PlayerNumber owner{0};
+		PlayerNumber owner{0U};
 
 		/**
 		 * The amount of resource at each of the triangles, as far as this player
@@ -664,19 +652,22 @@ private:
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
 	RGBColor playercolor_;
-	TeamNumber team_number_{0};
+	TeamNumber team_number_{0U};
 	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
 	bool see_all_{false};
 	const PlayerNumber player_number_;
 	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
 	bool random_tribe_{false};
-	uint32_t casualties_{0}, kills_{0};
-	uint32_t msites_lost_{0}, msites_defeated_{0};
-	uint32_t civil_blds_lost_{0}, civil_blds_defeated_{0};
+	uint32_t casualties_{0U};
+	uint32_t kills_{0U};
+	uint32_t msites_lost_{0U};
+	uint32_t msites_defeated_{0U};
+	uint32_t civil_blds_lost_{0U};
+	uint32_t civil_blds_defeated_{0U};
 
 	std::list<std::string> remaining_shipnames_;
 	// If we run out of ship names, we'll want to continue with unique numbers
-	uint32_t ship_name_counter_{0};
+	uint32_t ship_name_counter_{0U};
 
 	std::unique_ptr<Field[]> fields_;
 	std::set<DescriptionIndex> allowed_worker_types_;
@@ -725,7 +716,7 @@ private:
 
 	struct SoldierStatistics {
 		const unsigned health, attack, defense, evade;
-		Quantity total{0};
+		Quantity total{0U};
 		SoldierStatistics(unsigned h, unsigned a, unsigned d, unsigned e)
 		   : health(h), attack(a), defense(d), evade(e) {
 		}

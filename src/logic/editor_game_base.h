@@ -278,7 +278,7 @@ private:
 	                               Player* owner,
 	                               const BuildingDescr* former_building_descr);
 
-	Time gametime_;
+	Time gametime_{0U};
 	ObjectManager objects_;
 
 	std::unique_ptr<LuaInterface> lua_;

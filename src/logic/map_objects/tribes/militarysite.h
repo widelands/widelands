@@ -72,9 +72,9 @@ public:
 	std::string defeated_you_str_;
 
 private:
-	uint32_t conquer_radius_{0};
-	Quantity num_soldiers_{0};
-	uint32_t heal_per_second_{0};
+	uint32_t conquer_radius_{0U};
+	Quantity num_soldiers_{0U};
+	uint32_t heal_per_second_{0U};
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteDescr);
 };
 
@@ -191,7 +191,7 @@ private:
 	/**
 	 * Next gametime where we should heal something.
 	 */
-	Time nexthealtime_;
+	Time nexthealtime_{0U};
 
 	struct SoldierJob {
 		Soldier* soldier;
@@ -200,11 +200,13 @@ private:
 	};
 	std::vector<SoldierJob> soldierjobs_;
 	SoldierPreference soldier_preference_;
-	Time next_swap_soldiers_time_;
+	Time next_swap_soldiers_time_{0U};
 	bool soldier_upgrade_try_{
 	   false};  // optimization -- if everybody is zero-level, do not downgrade
 	bool doing_upgrade_request_{false};
-	std::vector<std::map<std::tuple<int, int, int>, std::string>> statistics_string_cache_;
+
+	static constexpr size_t kNoOfStatisticsStringCases = 4U;
+	std::vector<std::map<std::tuple<int, int, int>, std::string>> statistics_string_cache_{kNoOfStatisticsStringCases};
 };
 }  // namespace Widelands
 

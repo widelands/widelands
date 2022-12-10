@@ -84,7 +84,7 @@ private:
 	void unemployed_update(Game&, State&);
 	void row_update(Game&, State&);
 
-	Time unemployed_since_;
+	Time unemployed_since_{0U};
 
 protected:
 	void cleanup(EditorGameBase&) override;

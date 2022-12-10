@@ -328,14 +328,7 @@ IMPLEMENTATION
 Immovable::Immovable(const ImmovableDescr& imm_descr,
                      const Widelands::BuildingDescr* former_building_descr)
    : BaseImmovable(imm_descr),
-     former_building_descr_(former_building_descr),
-     anim_(0),
-     animstart_(0),
-
-     anim_construction_total_(0),
-     anim_construction_done_(0),
-     program_step_(0),
-     growth_delay_(0) {
+     former_building_descr_(former_building_descr) {
 }
 
 BaseImmovable::PositionList Immovable::get_positions(const EditorGameBase& /* egbase */) const {

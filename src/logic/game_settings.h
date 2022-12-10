@@ -116,7 +116,7 @@ struct NoteGameSettings {
  * Think of it as the Model in MVC.
  */
 struct GameSettings {
-	GameSettings() : win_condition_duration(Widelands::kDefaultWinConditionDuration) {
+	GameSettings() {
 		std::unique_ptr<LuaInterface> lua(new LuaInterface);
 		std::unique_ptr<LuaTable> win_conditions(
 		   lua->run_script("scripting/win_conditions/init.lua"));
@@ -170,7 +170,7 @@ struct GameSettings {
 	/// An ordered list of all win condition script files.
 	std::vector<std::string> win_condition_scripts;
 	/// User-configured win condition time limit, in minutes.
-	int32_t win_condition_duration;
+	int32_t win_condition_duration{Widelands::kDefaultWinConditionDuration};
 
 	/// Is map a scenario
 	bool scenario{false};

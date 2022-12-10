@@ -357,9 +357,9 @@ protected:
 	void molog(const Time& gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
 
 	const MapObjectDescr* descr_;
-	Serial serial_{0};
+	Serial serial_{0U};
 	LogSink* logsink_{nullptr};
-	std::atomic<Player*> owner_;
+	std::atomic<Player*> owner_{nullptr};
 
 	/**
 	 * MapObjects like trees are reserved by a worker that is walking
@@ -408,7 +408,7 @@ struct ObjectManager {
 	}
 
 private:
-	Serial lastserial_{0};
+	Serial lastserial_{0U};
 	MapObjectMap objects_;
 
 	bool is_cleaning_up_{false};
@@ -516,7 +516,7 @@ struct CmdDestroyMapObject : public GameLogicCommand {
 	}
 
 private:
-	Serial obj_serial = 0;
+	Serial obj_serial{0U};
 };
 
 struct CmdAct : public GameLogicCommand {
@@ -534,8 +534,8 @@ struct CmdAct : public GameLogicCommand {
 	}
 
 private:
-	Serial obj_serial = 0;
-	int32_t arg = 0;
+	Serial obj_serial{0U};
+	int32_t arg{0};
 };
 }  // namespace Widelands
 
