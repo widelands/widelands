@@ -57,17 +57,17 @@ struct BaseListselect : public Panel {
 	Notifications::Signal<uint32_t> double_clicked;
 
 	void clear();
-	void sort(const uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
+	void sort(uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
 	/**
 	 * Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
 	 */
 	void add(const std::string& name,
 	         uint32_t entry,
 	         const Image* pic,
-	         const bool select_this,
+	         bool select_this,
 	         const std::string& tooltip_text,
 	         const std::string& hotkey,
-	         const unsigned indent);
+	         unsigned indent);
 
 	void remove(uint32_t);
 	void remove(const char* str);
@@ -137,7 +137,7 @@ private:
 		                     const Image* init_pic,
 		                     const std::string& tooltip_text,
 		                     const std::string& hotkey_text,
-		                     const unsigned indent,
+		                     unsigned indent,
 		                     const UI::TableStyleInfo& style);
 		~EntryRecord();
 
@@ -153,14 +153,14 @@ private:
 	};
 
 	int max_pic_width_;
-	int widest_text_;
-	int widest_hotkey_;
+	int widest_text_{0};
+	int widest_hotkey_{0};
 
 	std::deque<EntryRecord*> entry_records_;
 	Scrollbar scrollbar_;
-	uint32_t scrollpos_;  //  in pixels
+	uint32_t scrollpos_{0U};  //  in pixels
 	uint32_t selection_;
-	uint32_t last_click_time_;
+	uint32_t last_click_time_{std::numeric_limits<uint32_t>::max()};
 	uint32_t last_selection_;  // for double clicks
 	ListselectLayout selection_mode_;
 	const Image* check_pic_;
@@ -171,7 +171,7 @@ private:
 	int lineheight_;
 	std::string current_tooltip_;
 
-	UI::BaseDropdown* linked_dropdown;
+	UI::BaseDropdown* linked_dropdown{nullptr};
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {

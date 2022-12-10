@@ -170,7 +170,7 @@ private:
 	UI::Box box_;
 	std::vector<Entry> visible_menus_;
 	MainMenu& fsmm_;
-	bool should_die_;
+	bool should_die_{false};
 };
 
 }  // namespace FsMenu

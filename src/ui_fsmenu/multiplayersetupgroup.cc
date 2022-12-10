@@ -62,7 +62,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	     name(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0),
 	     settings_(settings),
 	     id_(id),
-	     slot_selection_locked_(false),
+
 	     menu_parent_(grand_parent) {
 		add(&slot_dropdown_);
 		add(&name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -156,8 +156,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 	UI::Dropdown<uintptr_t> slot_dropdown_;  /// Select the player slot.
 	UI::Textarea name;                       /// Client nick name
 	GameSettingsProvider* const settings_;
-	uint8_t const id_;            /// User number
-	bool slot_selection_locked_;  // Ensure that dropdowns will close on selection.
+	uint8_t const id_;                   /// User number
+	bool slot_selection_locked_{false};  // Ensure that dropdowns will close on selection.
 	UI::Panel* menu_parent_;
 };
 
@@ -226,12 +226,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    _("Team"),
 	                    UI::DropdownType::kPictorial,
 	                    UI::PanelStyle::kFsMenu,
-	                    UI::ButtonStyle::kFsMenuSecondary),
-	     last_state_(PlayerSettings::State::kClosed),
-	     type_selection_locked_(false),
-	     tribe_selection_locked_(false),
-	     init_selection_locked_(false),
-	     team_selection_locked_(false) {
+	                    UI::ButtonStyle::kFsMenuSecondary) {
 
 		type_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		tribes_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
@@ -632,13 +627,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	UI::Dropdown<uintptr_t>
 	   init_dropdown_;  /// Select the initialization (Headquarters, Fortified Village etc.)
 	UI::Dropdown<uintptr_t> team_dropdown_;  /// Select the team number
-	PlayerSettings::State
-	   last_state_;  /// The dropdowns for the other slots need updating if this changes
+	PlayerSettings::State last_state_{
+	   PlayerSettings::State::kClosed};  /// The dropdowns for the other slots need updating if this
+	                                     /// changes
 	/// Lock rebuilding dropdowns so that they can close on selection
-	bool type_selection_locked_;
-	bool tribe_selection_locked_;
-	bool init_selection_locked_;
-	bool team_selection_locked_;
+	bool type_selection_locked_{false};
+	bool tribe_selection_locked_{false};
+	bool init_selection_locked_{false};
+	bool team_selection_locked_{false};
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
