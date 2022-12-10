@@ -33,7 +33,7 @@ struct GameHostImpl;
 struct Client;
 namespace FsMenu {
 class MenuCapsule;
-}
+}  // namespace FsMenu
 
 /**
  * GameHost manages the lifetime of a network game in which this computer
@@ -86,9 +86,9 @@ public:
 	             uint32_t maxplayers,
 	             bool savegame = false);
 	void set_player_state(uint8_t number, PlayerSettings::State state, bool host = false);
-	void set_player_tribe(uint8_t number, const std::string& tribe, bool const random_tribe = false);
+	void set_player_tribe(uint8_t number, const std::string& tribe, bool random_tribe = false);
 	void set_player_init(uint8_t number, uint8_t index);
-	void set_player_ai(uint8_t number, const std::string& name, bool const random_ai = false);
+	void set_player_ai(uint8_t number, const std::string& name, bool random_ai = false);
 	void set_player_name(uint8_t number, const std::string& name);
 	void set_player(uint8_t number, const PlayerSettings&);
 	void set_player_number(uint8_t number);
@@ -134,7 +134,7 @@ public:
 		update_network_speed();
 	}
 
-	bool forced_pause() {
+	[[nodiscard]] bool forced_pause() const {
 		return forced_pause_;
 	}
 
@@ -220,8 +220,8 @@ private:
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
-	bool forced_pause_;  // triggered by the forcePause host chat command, see HostChatProvider in
-	                     // gamehost.cc
+	bool forced_pause_{false};  // triggered by the forcePause host chat command, see
+	                            // HostChatProvider in gamehost.cc
 	std::unique_ptr<Widelands::Game> game_;
 	std::string script_to_run_;
 };

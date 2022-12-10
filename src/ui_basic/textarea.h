@@ -52,7 +52,7 @@ namespace UI {
  */
 struct Textarea : public Panel {
 public:
-	explicit Textarea(Panel* const parent,
+	explicit Textarea(Panel* parent,
 	                  PanelStyle,
 	                  FontStyle,
 	                  int32_t x,
@@ -91,7 +91,7 @@ protected:
 private:
 	enum class LayoutMode { AutoMove, Layouted };
 
-	Textarea(Panel* const parent,
+	Textarea(Panel* parent,
 	         PanelStyle,
 	         FontStyle,
 	         int32_t x,

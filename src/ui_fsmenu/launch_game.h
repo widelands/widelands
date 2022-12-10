@@ -102,7 +102,7 @@ protected:
 	GameSettingsProvider& settings_;
 	GameController* ctrl_;
 
-	bool peaceful_mode_forbidden_;
+	bool peaceful_mode_forbidden_{false};
 
 private:
 	void add_all_widgets();

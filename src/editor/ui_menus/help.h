@@ -26,7 +26,7 @@
 class EditorInteractive;
 
 struct EditorHelp : public UI::EncyclopediaWindow {
-	EditorHelp(EditorInteractive&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
+	EditorHelp(EditorInteractive&, UI::UniqueWindow::Registry&, LuaInterface* lua);
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_HELP_H

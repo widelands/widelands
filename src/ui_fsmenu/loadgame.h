@@ -65,10 +65,10 @@ private:
 	LoadOrSaveGame load_or_save_;
 
 	bool is_replay_;
-	bool update_game_details_;
+	bool update_game_details_{false};
 
 	UI::Checkbox* show_filenames_;
-	bool showing_filenames_;
+	bool showing_filenames_{false};
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LOADGAME_H

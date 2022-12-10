@@ -38,8 +38,7 @@ public:
 	/**
 	 * Closes the server.
 	 */
-	virtual ~NetHostInterface() {
-	}
+	virtual ~NetHostInterface() = default;
 
 	/**
 	 * Returns whether the given client is connected.

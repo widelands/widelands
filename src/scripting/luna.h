@@ -72,8 +72,7 @@
  */
 class LunaClass {
 public:
-	virtual ~LunaClass() {
-	}
+	virtual ~LunaClass() = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	virtual void __persist(lua_State*) = 0;
@@ -115,8 +114,9 @@ void register_class(lua_State* const L,
 	register_properties_in_metatable<T, T>(L);
 	register_methods_in_metatable<T, T>(L);
 
-	if (!return_metatable)
+	if (!return_metatable) {
 		lua_pop(L, 1);  // remove the Metatable
+	}
 }
 /**
  * Makes the first class a children of the second. Make sure that T is really a

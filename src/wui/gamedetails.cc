@@ -36,8 +36,7 @@
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
    : UI::Panel(parent, style, 0, 0, 0, 0),
      mode_(mode),
-     padding_(4),
-     has_conflicts_(false),
+
      main_box_(this, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      descr_box_(&main_box_, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_label_(&main_box_,
