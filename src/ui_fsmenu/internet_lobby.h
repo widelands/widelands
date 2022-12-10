@@ -34,7 +34,7 @@
 
 namespace Widelands {
 struct TribeBasicInfo;
-}
+}  // namespace Widelands
 namespace FsMenu {
 class InternetLobby : public TwoColumnsBasicNavigationMenu {
 public:
@@ -85,7 +85,7 @@ private:
 	UI::EditBox servername_;
 	UI::Button hostgame_;
 
-	uint32_t prev_clientlist_len_;
+	uint32_t prev_clientlist_len_{1000};
 	FxId new_client_fx_;
 
 	// Login information

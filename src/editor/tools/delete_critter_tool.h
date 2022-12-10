@@ -23,7 +23,7 @@
 
 /// Deletes critter from the map.
 struct EditorDeleteCritterTool : public EditorTool {
-	EditorDeleteCritterTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	explicit EditorDeleteCritterTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

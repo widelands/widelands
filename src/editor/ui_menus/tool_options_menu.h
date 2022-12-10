@@ -26,8 +26,8 @@
 struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	EditorToolOptionsMenu(EditorInteractive& parent,
 	                      UI::UniqueWindow::Registry&,
-	                      const uint32_t width,
-	                      const uint32_t height,
+	                      uint32_t width,
+	                      uint32_t height,
 	                      const std::string& title,
 	                      EditorTool& tool);
 

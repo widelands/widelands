@@ -34,7 +34,7 @@
  */
 struct StoryMessageBox : public UI::Window {
 	StoryMessageBox(Widelands::Game* game,
-	                const Widelands::Coords coords,
+	                Widelands::Coords coords,
 	                const std::string& title,
 	                const std::string& body,
 	                int32_t x,
