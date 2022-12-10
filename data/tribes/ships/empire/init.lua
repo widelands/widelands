@@ -148,6 +148,372 @@ wl.Descriptions():new_ship_type {
       pgettext("shipname", "Vinea"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Vitellius"),
+   },
+   port_names = {
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Abila"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Ad Flexum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Aelia Capitolina"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Aeminium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Aequum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Ala"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Albanianis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Ambianum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Andautonia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Apulum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Aquae Granni"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Aquae Helveticae"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Aquae Mattiacorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Aquae Sulis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Aquileia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Aquincum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Arae Flaviae"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Argentoratum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Ariminum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Ascrivium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Asturica Augusta"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Atuatuca Tungrorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Augusta Praetoria Salassorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Augusta Raurica"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Augusta Taurinorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Augusta Treverorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Augusta Vindelicorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Aurelia Aquensis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Aventicum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Belum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Biriciana"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Blestium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Bonames"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Bonna"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Bononia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Borbetomagus"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Bovium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Bracara Augusta"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Brigantium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Burgodunum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Caesaraugusta"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Caesarea"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Caesaromagus"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Calisia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Calleva Atrebatum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Camulodunum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Cannstatt Castrum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Castellum apud Confluentes"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Castra Batavar"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Castra Legionis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Castra Regina"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Castra Vetera"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Cibalae"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Clausentum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Colonia Agrippina"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Colonia Claudia Savariensum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Colonia Narbo Martius"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Colonia Nervia Glevensium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Colonia Patricia Corduba"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Colonia Pietas Iulia Pola Pollentia Herculanea"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Colonia Ulpia Traiana"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Comagenis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Complutum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Concangis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Condate"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Confloenta"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Constantinopolis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Coria"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Corinium Dobunnorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Coriovallum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Cosa"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Curia Raetorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Danum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Deva Victrix"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Divodurum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Dubris"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Durnovaria"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Durocobrivis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Durocornovium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Duroliponte"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Durovernum Cantiacorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Durovigutum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Eboracum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Emerita Augusta"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Faventia Paterna Barcino"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Florentia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Forum Hadriani"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Forum Livii"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Gerulata"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Gerunda"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Gesoriacum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Hadrianopolis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Isca Augusta"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Isca Dumnoniorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Italica"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Iulia Aemona"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Iulia Romula Hispalis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Iuvavum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lactodurum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lagentium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lauri"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lentia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Letocetum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lindinis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lindum Colonia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Londinium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lopodunum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lousonna"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lucus Augusta"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lugdunum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lugdunum Batavorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Luguvalium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Lutetia Parisiorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Mamucium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Marsonia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Massa"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Matilo"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Mediolanum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Modoetia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Mogontiacum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Moridunum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Mursa"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Naissus"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Nemausus"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Nicopolis ad Istrum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Nicopolis ad Nestum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Nida"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Nigrum Pullum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Norba Caesarina"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Novae"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Novaesium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Noviodunum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Noviomagus"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Olicana"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Ovilava"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Palma"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Partiscum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Pistoria"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Placentia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Poetovium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Pomaria"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Pompaelo"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Pons Aelius"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Pons Drusi"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Portus Lemanis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Portus Victoriae Iuliobrigensium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Praetorium Agrippinae"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Ragusium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Ratae Corieltauvorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Regium Lepidi"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Regulbium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Rigomagus"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Roma"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Rutupiae"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Salernum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Salona"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Scalabis"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Sirmium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Siscia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Sorviodurum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Sostra"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Storgosia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Sumelocenna"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Tarraco"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Theranda"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Traiectum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Traiectum ad Mosam"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Traiectum ad Nicrem"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Turicum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Ulpia Noviomagus Batavorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Urbs Aurelianorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Valentia Edetanorum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Venetiae"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Venta Belgarum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Venta Silurum"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Verulamium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Vesontio"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Viminacium"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Vindobona"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Vindonissa"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Vinovia"),
+      -- TRANSLATORS: This Empire port is named after a Roman town
+      pgettext("portname", "Viroconium Cornoviorum"),
    }
 }
 
