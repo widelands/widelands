@@ -634,9 +634,8 @@ struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	void serialize(StreamWrite&) override;
 
 private:
-	uint32_t permanent_ {
-		0U’;
-	};
+	uint32_t permanent_{0U};
+};
 
 	struct CmdChangeTrainingOptions : public PlayerCommand {
 		CmdChangeTrainingOptions() = default;  // For savegame loading
