@@ -80,8 +80,8 @@ struct EditorSetResourcesTool : public EditorTool {
 	}
 
 private:
-	Widelands::DescriptionIndex cur_res_{0};
-	Widelands::ResourceAmount set_to_{0};
+	Widelands::DescriptionIndex cur_res_{0U};
+	Widelands::ResourceAmount set_to_{0U};
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_RESOURCES_TOOL_H

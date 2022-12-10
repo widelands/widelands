@@ -87,13 +87,13 @@ private:
 	// Size
 	MapSizeBox map_size_box_;
 
-	uint8_t max_players_{2};
+	uint8_t max_players_{2U};
 	UI::SpinBox players_;
 
 	// World + Resources
 	int current_world_;
 	std::vector<std::string> resource_amounts_;
-	uint32_t resource_amount_{2};
+	uint32_t resource_amount_{2U};
 	UI::Dropdown<size_t> world_, resources_;
 
 	enum class TerrainDistribution { kDefault, kAlpine, kAtoll, kWasteland, kRandom, kCustom };
@@ -101,7 +101,10 @@ private:
 	void select_terrains_distribution();
 
 	// Land
-	int32_t waterval_{20}, landval_{60}, wastelandval_{0}, mountainsval_;
+	int32_t waterval_{20};
+	int32_t landval_{60};
+	int32_t wastelandval_{0};
+	int32_t mountainsval_{100 - waterval_ - landval_ - wastelandval_};
 	UI::SpinBox water_, land_, wasteland_;
 	UI::Box mountains_box_;
 	UI::Textarea mountains_label_, mountains_;

@@ -75,7 +75,7 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 	}
 
 private:
-	Widelands::DescriptionIndex cur_res_{0};
+	Widelands::DescriptionIndex cur_res_{0U};
 	int32_t change_by_{1};
 };
 

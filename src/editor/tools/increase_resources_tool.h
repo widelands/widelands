@@ -100,7 +100,7 @@ private:
 	EditorDecreaseResourcesTool& decrease_tool_;
 	EditorSetResourcesTool& set_tool_;
 	int32_t change_by_{1};
-	Widelands::DescriptionIndex cur_res_{0};
+	Widelands::DescriptionIndex cur_res_{0U};
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_INCREASE_RESOURCES_TOOL_H

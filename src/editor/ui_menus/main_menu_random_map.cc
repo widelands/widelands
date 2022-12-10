@@ -112,7 +112,6 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
                                UI::ButtonStyle::kWuiSecondary :
                                UI::ButtonStyle::kFsMenuSecondary),
 
-     mountainsval_(100 - waterval_ - landval_ - wastelandval_),
      water_(this,
             0,
             0,
