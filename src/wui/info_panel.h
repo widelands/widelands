@@ -55,7 +55,7 @@ private:
 
 	bool message_still_exists() const;
 
-	const Widelands::Message* message_;
+	const Widelands::Message* message_{nullptr};
 	Widelands::MessageId id_;
 };
 
@@ -103,7 +103,7 @@ private:
 	void update_mode();
 	void rebuild_dropdown();
 
-	Vector2i last_mouse_pos_;
+	Vector2i last_mouse_pos_{-1, -1};
 	bool is_mouse_over_panel() const;
 	void set_textareas_visibility(bool);
 
@@ -119,10 +119,11 @@ private:
 	void pop_message(MessagePreview*);
 	void push_message(MessagePreview*);
 	const Widelands::MessageQueue* message_queue_{nullptr};
-	std::unique_ptr<Widelands::MessageId> last_message_id_;
+	std::unique_ptr<Widelands::MessageId> last_message_id_{nullptr};
 
 	bool draw_real_time_;
-	std::string time_string_, speed_string_;
+	std::string time_string_;
+	std::string speed_string_;
 };
 
 #endif  // end of include guard: WL_WUI_INFO_PANEL_H

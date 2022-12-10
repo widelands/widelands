@@ -171,7 +171,7 @@ private:
 	std::string applicable_target();
 	std::set<std::string> last_added_to_dropdown_;
 	void think() override;
-	Time time_last_thought_;
+	Time time_last_thought_{0U};
 
 	struct SaveProfileWindow : public UI::Window {
 		SaveProfileWindow(UI::Panel* parent, EconomyOptionsWindow* eco);

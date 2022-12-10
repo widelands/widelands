@@ -68,7 +68,6 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
                UI::DropdownType::kTextual,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiSecondary),
-     time_last_thought_(0),
 
      descriptions_(descriptions) {
 	set_center_panel(&main_box_);

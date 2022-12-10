@@ -159,12 +159,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                              "",
                              UI::SpinBox::Units::kPercent,
                              UI::SpinBox::Type::kBig),
-
-     current_building_type_(Widelands::INVALID_INDEX),
-
-     last_building_type_(Widelands::INVALID_INDEX),
-     lastupdate_(0),
-
      nr_building_types_(parent.egbase().descriptions().nr_buildings()) {
 
 	building_buttons_ = std::vector<UI::Button*>(nr_building_types_);

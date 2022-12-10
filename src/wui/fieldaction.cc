@@ -206,7 +206,7 @@ private:
 
 	UI::TabPanel tabpanel_;
 	bool fastclick_{true};  // if true, put the mouse over first button in first tab
-	uint32_t best_tab_{0};
+	uint32_t best_tab_{0U};
 	bool showing_workarea_preview_{false};
 	std::set<Widelands::Coords> overlapping_workareas_;
 	bool is_showing_workarea_overlaps_;

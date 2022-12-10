@@ -50,8 +50,7 @@ MessagePreview::MessagePreview(InfoPanel* i, const std::string& text, const std:
                   std::string("   ") + text + "   ",
                   UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft),
      owner_(*i),
-     creation_time_(SDL_GetTicks()),
-     message_(nullptr) {
+     creation_time_(SDL_GetTicks()) {
 	set_thinks(true);
 	set_handle_mouse(true);
 	set_tooltip(tooltip);
@@ -132,7 +131,6 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
    : UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
      ibase_(ib),
 
-     last_mouse_pos_(Vector2i(-1, -1)),
      // will be set later by the IBase
      toggle_mode_(this,
                   "mode",
@@ -173,7 +171,6 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                   "",
                   UI::Align::kRight),
 
-     last_message_id_(nullptr),
      draw_real_time_(get_config_bool("game_clock", true)) {
 	text_fps_.set_handle_mouse(true);
 	int mode = get_config_int("toolbar_pos", 0);

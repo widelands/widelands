@@ -77,7 +77,7 @@ private:
 	MapView map_view_;
 	Time last_visit_;
 	bool single_window_;
-	uint8_t cur_index_{0};
+	uint8_t cur_index_{0U};
 	UI::Button* view_btns_[kViews];
 	std::vector<WatchWindow::View> views_;
 };

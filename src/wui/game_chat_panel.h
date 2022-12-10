@@ -78,7 +78,7 @@ private:
 	UI::Box hbox_;
 	UI::Dropdown<std::string> recipient_dropdown_;
 	UI::EditBox editbox;
-	size_t chat_message_counter{0};
+	size_t chat_message_counter{0U};
 	FxId chat_sound;
 	bool has_team_{false};
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;

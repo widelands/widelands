@@ -92,7 +92,7 @@ public:
 		TimestampedMouse(uint32_t init_t, Vector2f init_pixel) : t(init_t), pixel(init_pixel) {
 		}
 		TimestampedMouse() = default;
-		uint32_t t{0};
+		uint32_t t{0U};
 		Vector2f pixel{Vector2f::zero()};
 	};
 
@@ -214,7 +214,8 @@ private:
 
 	bool edge_scrolling_;
 	bool invert_movement_;
-	int8_t is_scrolling_x_{0}, is_scrolling_y_{0};
+	int8_t is_scrolling_x_{0};
+	int8_t is_scrolling_y_{0};
 
 	// The queue of plans to execute as animations.
 	std::deque<std::deque<TimestampedView>> view_plans_;

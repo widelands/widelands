@@ -146,10 +146,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 #endif
      lastframe_(SDL_GetTicks()),
 
-     last_frame_gametime_(0),
-     previous_frame_gametime_(0),
-
-     road_building_mode_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()) {
 
 	// Load the buildhelp icons.

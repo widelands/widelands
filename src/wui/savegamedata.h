@@ -55,9 +55,9 @@ public:
 	std::string version;
 	/// Gametime as time stamp. For games, it's the time the game ended. For replays, it's the time
 	/// the game started.
-	time_t savetimestamp{0};
+	time_t savetimestamp{0U};
 	/// Single payer, nethost, netclient or replay
-	GameController::GameType gametype = GameController::GameType::kSingleplayer;
+	GameController::GameType gametype{GameController::GameType::kSingleplayer};
 
 	AddOns::AddOnRequirements required_addons;
 
@@ -98,7 +98,7 @@ public:
 
 private:
 	/// Savegame or directory
-	SavegameType type_ = SavegameType::kSavegame;
+	SavegameType type_{SavegameType::kSavegame};
 };
 const std::string as_filename_list(const std::vector<SavegameData>& savefiles);
 #endif  // WL_WUI_SAVEGAMEDATA_H

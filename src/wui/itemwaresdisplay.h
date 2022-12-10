@@ -52,6 +52,8 @@ struct ItemWaresDisplay : UI::Panel {
 	void draw(RenderTarget&) override;
 
 private:
+	static constexpr unsigned kDefaultItemsPerRow = 9;
+
 	struct Item {
 		bool worker;
 		Widelands::DescriptionIndex index;
@@ -60,8 +62,8 @@ private:
 	void recalc_desired_size();
 
 	const Widelands::Player& player_;
-	uint32_t capacity_{0};
-	uint32_t items_per_row_;
+	uint32_t capacity_{0U};
+	uint32_t items_per_row_{kDefaultItemsPerRow};
 	std::vector<Item> items_;
 };
 

@@ -28,7 +28,6 @@ namespace {
 constexpr int kMargin = 4;
 constexpr unsigned kHBorder = 10;
 constexpr unsigned kVBorder = 10;
-constexpr unsigned kDefaultItemsPerRow = 9;
 constexpr unsigned kItemWidth = 14;
 constexpr unsigned kItemHeight = 26;
 constexpr unsigned kWorkerBaseline = 2;  ///< Offset of anim center from bottom border of item rect
@@ -41,9 +40,7 @@ constexpr unsigned kWareBaseLine = -6;
  */
 ItemWaresDisplay::ItemWaresDisplay(Panel* parent, const Widelands::Player& gplayer)
    : Panel(parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
-     player_(gplayer),
-
-     items_per_row_(kDefaultItemsPerRow) {
+     player_(gplayer) {
 	recalc_desired_size();
 }
 
