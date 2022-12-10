@@ -747,6 +747,8 @@ bool MapGenerator::create_random_map() {
 		pn[n - 1] = x;
 	}
 
+	map_.set_waterway_max_length(RNG::static_rand(4) * (3 + RNG::static_rand(4)));
+
 	for (PlayerNumber n = 1; n <= map_info_.numPlayers; ++n) {
 		// Set scenario information - needed even if it's not a scenario
 		map_.set_scenario_player_name(n, _("Random Player"));
