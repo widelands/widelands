@@ -35,7 +35,7 @@ namespace math {
 	}
 
 TO_NUMBER(to_int, int, stoi)
-TO_NUMBER(to_long, long long, stoll)
+TO_NUMBER(to_long, int64_t, stoll)
 #undef TO_NUMBER
 
 // This function has RST documentation in logic/map_objects/map_object_program

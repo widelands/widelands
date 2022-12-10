@@ -56,20 +56,20 @@ struct BuildingStatisticsStyleInfo {
 	}
 
 	[[nodiscard]] const UI::FontStyleInfo& building_statistics_button_font() const {
-		return *building_statistics_button_font_.get();
+		return *building_statistics_button_font_;
 	}
 	[[nodiscard]] const UI::FontStyleInfo& building_statistics_details_font() const {
-		return *building_statistics_details_font_.get();
+		return *building_statistics_details_font_;
 	}
 	[[nodiscard]] int editbox_margin() const {
 		return editbox_margin_;
 	}
 
 	[[nodiscard]] const UI::FontStyleInfo& census_font() const {
-		return *census_font_.get();
+		return *census_font_;
 	}
 	[[nodiscard]] const UI::FontStyleInfo& statistics_font() const {
-		return *statistics_font_.get();
+		return *statistics_font_;
 	}
 	[[nodiscard]] const RGBColor& construction_color() const {
 		return construction_color_;

@@ -78,17 +78,12 @@ Slider::Slider(Panel* const parent,
      min_value_(min_value),
      max_value_(max_value),
      value_(value),
-     relative_move_(0),
-     big_step_(0),
-     highlighted_(false),
-     pressed_(false),
      enabled_(enabled),
      cursor_style_(style),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
-     cursor_size_(cursor_size),
-     cursor_fixed_height_(-1) {
+     cursor_size_(cursor_size) {
 	set_thinks(false);
 	set_snap_target(true);
 	set_can_focus(enabled_);

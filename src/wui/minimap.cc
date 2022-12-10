@@ -41,7 +41,7 @@ MiniMap::View::View(UI::Panel& parent,
    : UI::Panel(&parent, UI::PanelStyle::kWui, x, y, 10, 10),
      ibase_(ibase),
      pic_map_spot_(g_image_cache->get("images/wui/overlays/map_spot.png")),
-     rows_drawn_(0),
+
      minimap_layers_(flags),
      minimap_type_(type) {
 }

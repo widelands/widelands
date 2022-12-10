@@ -24,9 +24,6 @@
 #include "io/streamread.h"
 #include "io/streamwrite.h"
 
-RNG::RNG() : state0(0), state1(0) {
-}
-
 void RNG::seed(uint32_t s) {
 	state0 ^= state1;
 	state1 = SIMPLE_RAND(state1) + s;

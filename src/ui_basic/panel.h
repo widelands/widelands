@@ -42,7 +42,7 @@ class FileWrite;
 class RenderTarget;
 namespace Widelands {
 struct MapObjectSaver;
-}
+}  // namespace Widelands
 
 namespace UI {
 
@@ -95,12 +95,12 @@ public:
 		pf_snap_target = 1 << 14,
 	};
 
-	Panel(Panel* const nparent,
+	Panel(Panel* nparent,
 	      UI::PanelStyle,
-	      int32_t const nx,
-	      int32_t const ny,
-	      int const nw,
-	      int const nh,
+	      int32_t nx,
+	      int32_t ny,
+	      int nw,
+	      int nh,
 	      const std::string& tooltip_text = std::string());
 	virtual ~Panel();
 
@@ -209,11 +209,11 @@ public:
 	bool get_snap_windows_only_when_overlapping() const {
 		return get_flag(pf_snap_windows_only_when_overlapping);
 	}
-	void set_snap_windows_only_when_overlapping(const bool on = true);
+	void set_snap_windows_only_when_overlapping(bool on = true);
 	bool get_dock_windows_to_edges() const {
 		return get_flag(pf_dock_windows_to_edges);
 	}
-	void set_dock_windows_to_edges(const bool on = true);
+	void set_dock_windows_to_edges(bool on = true);
 	void set_inner_size(int nw, int nh);
 	void set_border(int l, int r, int t, int b);
 
@@ -439,7 +439,7 @@ protected:
 	}
 
 	bool keyboard_free() {
-		return !(focus_);
+		return (focus_) == nullptr;
 	}
 
 	virtual void update_desired_size();
@@ -488,7 +488,7 @@ public:
 	}
 
 private:
-	bool initialized_;
+	bool initialized_{false};
 
 	bool handles_keypresses() const {
 		if (get_parent() != nullptr && !get_parent()->handles_keypresses()) {
@@ -516,9 +516,9 @@ private:
 
 	Panel* child_at_mouse_cursor(int32_t mouse_x, int32_t mouse_y, Panel* child);
 	void do_mousein(bool inside);
-	bool do_mousepress(const uint8_t btn, int32_t x, int32_t y);
-	bool do_mouserelease(const uint8_t btn, int32_t x, int32_t y);
-	bool do_mousemove(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool do_mousepress(uint8_t btn, int32_t x, int32_t y);
+	bool do_mouserelease(uint8_t btn, int32_t x, int32_t y);
+	bool do_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool do_mousewheel(int32_t x, int32_t y, uint16_t modstate, Vector2i rel_mouse_pos);
 	bool do_key(bool down, SDL_Keysym code);
 	bool do_textinput(const std::string& text);
@@ -528,10 +528,9 @@ private:
 	std::deque<Panel*> gather_focusable_children();
 
 	static Panel* ui_trackmouse(int32_t& x, int32_t& y);
-	static bool ui_mousepress(const uint8_t button, int32_t x, int32_t y);
-	static bool ui_mouserelease(const uint8_t button, int32_t x, int32_t y);
-	static bool
-	ui_mousemove(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	static bool ui_mousepress(uint8_t button, int32_t x, int32_t y);
+	static bool ui_mouserelease(uint8_t button, int32_t x, int32_t y);
+	static bool ui_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	static bool ui_mousewheel(int32_t x, int32_t y, uint16_t modstate);
 	static bool ui_key(bool down, SDL_Keysym code);
 	static bool ui_textinput(const std::string& text);
@@ -539,10 +538,10 @@ private:
 	Panel* parent_;
 	Panel* next_;
 	Panel* prev_;
-	Panel* first_child_;
-	Panel* last_child_;
-	Panel* mousein_child_;  //  child panel that the mouse is in
-	Panel* focus_;          //  keyboard focus
+	Panel* first_child_{nullptr};
+	Panel* last_child_{nullptr};
+	Panel* mousein_child_{nullptr};  //  child panel that the mouse is in
+	Panel* focus_{nullptr};          //  keyboard focus
 
 	std::atomic<uint32_t> flags_;
 
@@ -550,16 +549,23 @@ private:
 	 * The outer rectangle is defined by (x_, y_, w_, h_)
 	 */
 	/*@{*/
-	int32_t x_, y_;
-	int w_, h_;
+	int32_t x_;
+	int32_t y_;
+	int w_;
+	int h_;
 	/*@}*/
-	int lborder_, rborder_, tborder_, bborder_;
-	uint8_t border_snap_distance_, panel_snap_distance_;
-	int desired_w_, desired_h_;
+	int lborder_{0};
+	int rborder_{0};
+	int tborder_{0};
+	int bborder_{0};
+	uint8_t border_snap_distance_{0U};
+	uint8_t panel_snap_distance_{0U};
+	int desired_w_;
+	int desired_h_;
 
 	friend struct ModalGuard;
 
-	bool running_;
+	bool running_{false};
 	int return_code_;
 
 	std::string tooltip_;
@@ -598,13 +604,13 @@ inline void Panel::set_dock_windows_to_edges(const bool on) {
  * A Panel with a name. Important for scripting
  */
 struct NamedPanel : public Panel {
-	NamedPanel(Panel* const nparent,
+	NamedPanel(Panel* nparent,
 	           UI::PanelStyle s,
 	           const std::string& name,
-	           int32_t const nx,
-	           int32_t const ny,
-	           int const nw,
-	           int const nh,
+	           int32_t nx,
+	           int32_t ny,
+	           int nw,
+	           int nh,
 	           const std::string& tooltip_text = std::string());
 
 	const std::string& get_name() const {

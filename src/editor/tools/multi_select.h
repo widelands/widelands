@@ -23,6 +23,8 @@
 #include <cstdlib>
 #include <set>
 
+#include "base/random.h"
+
 /**
  * This class allows for selection of more than just one
  * thing. Like more than one texture, more than one map object
@@ -30,10 +32,8 @@
  * This is a helper class, no Editor Tool (might be usable in game too)
  */
 struct MultiSelect {
-	MultiSelect() {
-	}
-	~MultiSelect() {
-	}
+	MultiSelect() = default;
+	~MultiSelect() = default;
 
 	void enable(int32_t n, bool t) {
 		if (t) {
@@ -52,8 +52,8 @@ struct MultiSelect {
 	}
 
 	[[nodiscard]] int32_t get_random_enabled() const {
-		int32_t rand_value =
-		   static_cast<int32_t>(static_cast<double>(get_nr_enabled()) * rand() / (RAND_MAX + 1.0));
+		int32_t rand_value = static_cast<int32_t>(static_cast<double>(get_nr_enabled()) *
+		                                          RNG::static_rand() / (RAND_MAX + 1.0));
 
 		for (int32_t item : enabled_) {
 			if (rand_value == 0) {

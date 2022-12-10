@@ -62,7 +62,7 @@ struct Statebox : public Panel {
 	void set_enabled(bool enabled);
 
 	bool get_state() const {
-		return flags_ & Is_Checked;
+		return (flags_ & Is_Checked) != 0;
 	}
 	void set_state(bool on, bool send_signal = true);
 

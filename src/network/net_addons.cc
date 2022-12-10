@@ -346,7 +346,7 @@ void NetAddons::check_endofstream() {
 // reading or writing random leftover bytes. Create it before doing some
 // networking stuff and call `ok()` after everything has gone well.
 struct CrashGuard {
-	explicit CrashGuard(NetAddons& n, bool uses_cache = false) : net_(n), ok_(false) {
+	explicit CrashGuard(NetAddons& n, bool uses_cache = false) : net_(n) {
 		assert(net_.initialized_);
 		if (net_.network_active_) {
 			throw WLWarning("", "Network is already active");
@@ -373,7 +373,7 @@ struct CrashGuard {
 
 private:
 	NetAddons& net_;
-	bool ok_;
+	bool ok_{false};
 };
 
 std::vector<std::string> NetAddons::refresh_remotes(const bool all) {

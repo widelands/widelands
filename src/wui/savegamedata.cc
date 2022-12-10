@@ -23,13 +23,6 @@
 #include "base/time_string.h"
 #include "graphic/text_layout.h"
 
-SavegameData::SavegameData()
-   : nrplayers("0"),
-     savetimestamp(0),
-     gametype(GameController::GameType::kSingleplayer),
-     type_(SavegameType::kSavegame) {
-}
-
 SavegameData::SavegameData(const std::string& fname)
    : SavegameData(fname, SavegameType::kSavegame) {
 }

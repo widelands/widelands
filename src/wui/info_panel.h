@@ -39,15 +39,14 @@ class MessagePreview : public UI::Textarea {
 public:
 	MessagePreview(InfoPanel*, const Widelands::Message*, Widelands::MessageId);
 	MessagePreview(InfoPanel*, const std::string& text, const std::string& tooltip);
-	~MessagePreview() override {
-	}
+	~MessagePreview() override = default;
 
 	void think() override;
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 
 	bool is_system_message() const {
-		return !message_;
+		return message_ == nullptr;
 	}
 
 private:
@@ -56,15 +55,14 @@ private:
 
 	bool message_still_exists() const;
 
-	const Widelands::Message* message_;
+	const Widelands::Message* message_{nullptr};
 	Widelands::MessageId id_;
 };
 
 class InfoPanel : public UI::Panel {
 public:
-	InfoPanel(InteractiveBase&);
-	~InfoPanel() override {
-	}
+	explicit InfoPanel(InteractiveBase&);
+	~InfoPanel() override = default;
 
 	// Update the text area without relayouting
 	void set_time_string(const std::string&);
@@ -92,10 +90,10 @@ private:
 	friend class MessagePreview;
 
 	InteractiveBase& ibase_;
-	InteractivePlayer* iplayer_;
+	InteractivePlayer* iplayer_{nullptr};
 	UI::Panel snap_target_panel_, snap_target_toolbar_;
 
-	bool on_top_;
+	bool on_top_{false};
 
 	enum DisplayMode {
 		kCmdSwap = 1,
@@ -104,11 +102,11 @@ private:
 		kOnMouse_Visible = 8,
 		kOnMouse_Hidden = 16
 	};
-	DisplayMode display_mode_;
+	DisplayMode display_mode_{DisplayMode::kPinned};
 	void update_mode();
 	void rebuild_dropdown();
 
-	Vector2i last_mouse_pos_;
+	Vector2i last_mouse_pos_{-1, -1};
 	bool is_mouse_over_panel(int32_t x, int32_t y) const;
 	bool is_mouse_over_panel() const {
 		return is_mouse_over_panel(last_mouse_pos_.x, last_mouse_pos_.y);
@@ -117,7 +115,7 @@ private:
 
 	void update_time_speed_string();
 
-	MainToolbar* toolbar_;
+	MainToolbar* toolbar_{nullptr};
 
 	UI::Dropdown<DisplayMode> toggle_mode_;
 	UI::Textarea text_time_speed_, text_fps_, text_coords_;
@@ -126,11 +124,12 @@ private:
 	size_t index_of(const MessagePreview*) const;
 	void pop_message(MessagePreview*);
 	void push_message(MessagePreview*);
-	const Widelands::MessageQueue* message_queue_;
-	std::unique_ptr<Widelands::MessageId> last_message_id_;
+	const Widelands::MessageQueue* message_queue_{nullptr};
+	std::unique_ptr<Widelands::MessageId> last_message_id_{nullptr};
 
 	bool draw_real_time_;
-	std::string time_string_, speed_string_;
+	std::string time_string_;
+	std::string speed_string_;
 };
 
 #endif  // end of include guard: WL_WUI_INFO_PANEL_H

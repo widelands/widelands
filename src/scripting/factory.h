@@ -28,26 +28,23 @@
 class Factory {
 public:
 	virtual void push_player(lua_State* L, Widelands::PlayerNumber) = 0;
-	virtual ~Factory() {
-	}
+	virtual ~Factory() = default;
 };
 
 class GameFactory : public Factory {
 public:
-	~GameFactory() override {
-	}
+	~GameFactory() override = default;
 
 	void push_player(lua_State* L, Widelands::PlayerNumber plr) override;
 };
 
 class EditorFactory : public Factory {
 public:
-	~EditorFactory() override {
-	}
+	~EditorFactory() override = default;
 
 	void push_player(lua_State* L, Widelands::PlayerNumber plr) override;
 };
 
-Factory& get_factory(lua_State* const L);
+Factory& get_factory(lua_State* L);
 
 #endif  // end of include guard: WL_SCRIPTING_FACTORY_H

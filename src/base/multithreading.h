@@ -54,7 +54,7 @@ struct NoteThreadSafeFunction {
 	const uint32_t id;
 
 private:
-	NoteThreadSafeFunction(const std::function<void()>& f) : run(f), id(next_id_++) {
+	explicit NoteThreadSafeFunction(const std::function<void()>& f) : run(f), id(next_id_++) {
 	}
 
 	static uint32_t next_id_;
