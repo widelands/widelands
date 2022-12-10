@@ -29,8 +29,7 @@
 
 /* Logic backend. */
 
-QuickNavigation::QuickNavigation(MapView* map_view)
-   : map_view_(map_view), location_jumping_started_(false) {
+QuickNavigation::QuickNavigation(MapView* map_view) : map_view_(map_view) {
 	landmarks_.resize(kQuicknavSlots);
 	map_view->changeview.connect([this] { view_changed(); });
 	map_view->jump.connect([this] { jumped(); });

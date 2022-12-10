@@ -329,64 +329,14 @@ void EventTimeQueue::strip_old(const Time& current_time) {
 BuildableField::BuildableField(const Widelands::FCoords& fc)
    : coords(fc),
      field_info_expiration(20000),
-     preferred(false),
-     enemy_nearby(false),
-     enemy_accessible_(false),
-     invalidated(false),
-     enemy_wh_nearby(false),
-     unowned_land_nearby(0),
-     enemy_owned_land_nearby(0U),
-     unowned_buildable_spots_nearby(0U),
-     unowned_portspace_vicinity_nearby(0U),
-     nearest_buildable_spot_nearby(0U),
-     near_border(false),
-     unowned_mines_spots_nearby(0),
-     unowned_iron_mines_nearby(0u),
-     // explanation of starting values
-     // this is done to save some work for AI (CPU utilization)
-     // base rules are:
-     // count of water fields are stable, so if the current count is
-     // non-negative, water is not recalculated
-     water_nearby(-1),
-     open_water_nearby(-1),
-     distant_water(0),
-     fish_nearby(-1),
-     critters_nearby(-1),
-     ground_water(1),
-     space_consumers_nearby(0),
-     rangers_nearby(0),
-     area_military_capacity(0),
-     future_area_military_capacity(0),
-     military_loneliness(1000),
-     future_military_loneliness(1000),
-     military_in_constr_nearby(0),
-     own_military_presence(0),
-     enemy_military_presence(0),
-     enemy_military_sites(0),
-     ally_military_presence(0),
-     military_stationed(0),
+
      average_flag_dist_to_wh(kWhFarButReachable),
-     military_unstationed(0),
-     own_non_military_nearby(0),
-     defense_msite_allowed(false),
-     is_portspace(ExtendedBool::kUnset),
-     port_nearby(false),
-     portspace_nearby(ExtendedBool::kUnset),
-     max_buildcap_nearby(0),
-     last_resources_check_time(0),
-     // the higher the most important the side/field is
-     military_score_(0),
-     inland(false),
-     local_soldier_capacity(0),
-     is_militarysite(false) {
+
+     last_resources_check_time(0) {
 }
 
 MineableField::MineableField(const Widelands::FCoords& fc)
-   : coords(fc),
-     field_info_expiration(20000),
-     preferred(false),
-     mines_nearby(0),
-     same_mine_fields_nearby(0) {
+   : coords(fc), field_info_expiration(20000) {
 }
 
 EconomyObserver::EconomyObserver(Widelands::Economy& e)
@@ -422,12 +372,6 @@ AiModeBuildings BuildingObserver::aimode_limit_status() const {
 bool BuildingObserver::buildable(const Widelands::Player& p) const {
 	return is(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id) &&
 	       p.tribe().has_building(id);
-}
-
-// as all mines have 3 levels, AI does not know total count of mines per mined material
-// so this observer will be used for this
-MineTypesObserver::MineTypesObserver()
-   : in_construction(0), finished(0), is_critical(false), unoccupied(0) {
 }
 
 // Reset counter for all field types
@@ -971,10 +915,6 @@ void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) co
 
 uint16_t MineTypesObserver::total_count() const {
 	return in_construction + finished;
-}
-
-// this is used to count militarysites by their size
-MilitarySiteSizeObserver::MilitarySiteSizeObserver() : in_construction(0), finished(0) {
 }
 
 // this represents a scheduler task

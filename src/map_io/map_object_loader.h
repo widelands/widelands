@@ -62,13 +62,14 @@ public:
 
 	template <typename T> T& get(Serial const serial) {
 		ReverseMapObjectMap::iterator const it = objects_.find(serial);
-		if (it == objects_.end())
+		if (it == objects_.end()) {
 			throw GameDataError("not found");
-		else if (upcast(T, result, it->second))
+		}
+		if (upcast(T, result, it->second)) {
 			return *result;
-		else
-			throw GameDataError("is a %s, expected a %s",
-			                    to_string(it->second->descr().type()).c_str(), typeid(T).name());
+		}
+		throw GameDataError(
+		   "is a %s, expected a %s", to_string(it->second->descr().type()).c_str(), typeid(T).name());
 	}
 
 	int32_t get_nr_unloaded_objects();

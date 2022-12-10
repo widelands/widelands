@@ -108,7 +108,6 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
          UI::ButtonStyle::kFsMenuPrimary,
          _("OK")),
      addons_(&box_left_, 0, 0, 250, 0, UI::PanelStyle::kFsMenu),
-     update_in_progress_(false),
      progress_window_(this, UI::WindowStyle::kFsMenu, _("Writing Add-Ons…")) {
 	progress_window_.set_visible(false);
 	progress_window_.set_message_1(_("Please be patient while your changes are written."));

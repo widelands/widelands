@@ -62,7 +62,7 @@ public:
 	void think() override;
 
 private:
-	bool log_general_info_;
+	bool log_general_info_{true};
 	Widelands::ObjectPointer object_;
 	uint32_t serial_;
 	UI::TabPanel tabs_;

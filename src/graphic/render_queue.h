@@ -179,7 +179,7 @@ private:
 
 	// The z value that should be used for the next draw, so that it is on top
 	// of everything before.
-	int next_z_;
+	int next_z_{1};
 
 	std::unique_ptr<TerrainProgram> terrain_program_;
 	std::unique_ptr<DitherProgram> dither_program_;

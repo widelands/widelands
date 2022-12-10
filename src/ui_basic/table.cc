@@ -49,20 +49,20 @@ Table<void*>::Table(Panel* const parent,
                     PanelStyle style,
                     TableRows rowtype)
    : Panel(parent, style, x, y, w, h),
-     total_width_(0),
+
      lineheight_(text_height(g_style_manager->table_style(style).enabled())),
      headerheight_(lineheight_ + 4),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                       UI::ButtonStyle::kWuiSecondary),
-     scrollbar_(nullptr),
+
      scrollbar_filler_button_(
         new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),
-     scrollpos_(0),
+
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),
-     last_click_time_(-10000),
+
      last_selection_(no_selection_index()),
-     sort_column_(0),
+
      sort_descending_(rowtype == TableRows::kSingleDescending ||
                       rowtype == TableRows::kMultiDescending),
      flexible_column_idx_(std::numeric_limits<size_t>::max()),
@@ -224,7 +224,7 @@ void Table<void*>::clear() {
 		scrollbar_->set_steps(1);
 	}
 	scrollpos_ = 0;
-	last_click_time_ = -10000;
+	last_click_time_ = std::numeric_limits<uint32_t>::max();
 	clear_selections();
 }
 
@@ -540,7 +540,7 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t /*x*/, int32_t c
 		}
 
 		// Check if doubleclicked
-		if (((SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) == 0) &&
+		if (((SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) == 0) && time >= real_last_click_time &&
 		    time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
 		    selection_ != no_selection_index()) {
 			double_clicked(selection_);
@@ -876,8 +876,7 @@ bool Table<void*>::handle_mousemove(
 	return true;
 }
 
-Table<void*>::EntryRecord::EntryRecord(void* const e)
-   : entry_(e), font_style_(nullptr), disabled_(false) {
+Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e), font_style_(nullptr) {
 }
 
 void Table<void*>::EntryRecord::set_picture(uint8_t const col,

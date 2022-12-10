@@ -35,8 +35,7 @@ namespace UI {
 class IFontHandler {
 public:
 	IFontHandler() = default;
-	virtual ~IFontHandler() {
-	}
+	virtual ~IFontHandler() = default;
 
 	/// Renders the given text into a set of images. The images are cached in a transient cache,
 	/// so we share the ownership. Will throw on error.

@@ -69,7 +69,7 @@ struct FontStyleInfo {
 	                       bool init_italic,
 	                       bool init_underline,
 	                       bool init_shadow);
-	explicit FontStyleInfo(const FontStyleInfo& other);
+	FontStyleInfo(const FontStyleInfo& other);
 
 	[[nodiscard]] std::string as_font_tag(const std::string& text) const;
 

@@ -127,14 +127,14 @@ AddOnsPackagerBox::AddOnsPackagerBox(FsMenu::MainMenu& mainmenu,
                                      Panel* parent,
                                      uint32_t orientation)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, orientation),
-     header_align_(0),
+
      main_menu_(mainmenu) {
 }
 
 MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent)
    : AddOnsPackagerBox(mainmenu, parent, UI::Box::Horizontal),
      box_dirstruct_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     last_category_(AddOns::AddOnCategory::kNone),
+
      box_maps_list_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      box_buttonsbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      box_dirstruct_displayname_(&box_dirstruct_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
