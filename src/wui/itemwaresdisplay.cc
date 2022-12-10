@@ -39,8 +39,7 @@ constexpr unsigned kWareBaseLine = -6;
  * Create an ItemWaresDisplay with no items and zero capacity.
  */
 ItemWaresDisplay::ItemWaresDisplay(Panel* parent, const Widelands::Player& gplayer)
-   : Panel(parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
-     player_(gplayer) {
+   : Panel(parent, UI::PanelStyle::kWui, 0, 0, 0, 0), player_(gplayer) {
 	recalc_desired_size();
 }
 
