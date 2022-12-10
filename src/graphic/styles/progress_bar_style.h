@@ -36,7 +36,7 @@ struct ProgressbarStyleInfo {
 	     medium_color_(init_medium_color),
 	     high_color_(init_high_color) {
 	}
-	explicit ProgressbarStyleInfo(const ProgressbarStyleInfo& other)
+	ProgressbarStyleInfo(const ProgressbarStyleInfo& other)
 	   : font_(new UI::FontStyleInfo(other.font())),
 	     low_color_(other.low_color()),
 	     medium_color_(other.medium_color()),
@@ -44,7 +44,7 @@ struct ProgressbarStyleInfo {
 	}
 
 	[[nodiscard]] const UI::FontStyleInfo& font() const {
-		return *font_.get();
+		return *font_;
 	}
 	[[nodiscard]] const RGBColor& low_color() const {
 		return low_color_;

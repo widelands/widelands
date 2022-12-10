@@ -49,9 +49,9 @@ public:
 private:
 	void update_tab_size(size_t index);
 	void layout() override;
-	const int padding_;
-	int contents_width_;
-	int contents_height_;
+	const int padding_{5};
+	int contents_width_{0};
+	int contents_height_{0};
 
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;

@@ -25,8 +25,7 @@ namespace RT {
 
 class TextStream {
 public:
-	explicit TextStream(const std::string& text)
-	   : text_(text), line_(1), col_(0), pos_(0), end_(text.size()) {
+	explicit TextStream(const std::string& text) : text_(text), end_(text.size()) {
 	}
 
 	[[nodiscard]] size_t line() const {
@@ -39,7 +38,7 @@ public:
 		return pos_;
 	}
 
-	[[nodiscard]] std::string peek(size_t, size_t = -1) const;
+	[[nodiscard]] std::string peek(size_t n, size_t at = std::string::npos) const;
 	void expect(std::string, bool = true);
 
 	std::string till_any(std::string);
@@ -57,8 +56,10 @@ public:
 private:
 	void consume(size_t);
 	std::string text_;
-	uint32_t line_, col_;
-	size_t pos_, end_;
+	uint32_t line_{1U};
+	uint32_t col_{0U};
+	size_t pos_{0U};
+	size_t end_;
 };
 }  // namespace RT
 #endif  // end of include guard: WL_GRAPHIC_TEXT_TEXTSTREAM_H
