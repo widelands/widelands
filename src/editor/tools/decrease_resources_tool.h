@@ -24,8 +24,8 @@
 
 ///  Decreases the resources of a node by a value.
 struct EditorDecreaseResourcesTool : public EditorTool {
-	EditorDecreaseResourcesTool(EditorInteractive& parent)
-	   : EditorTool(parent, *this, *this), cur_res_(0), change_by_(1) {
+	explicit EditorDecreaseResourcesTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -75,8 +75,8 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 	}
 
 private:
-	Widelands::DescriptionIndex cur_res_;
-	int32_t change_by_;
+	Widelands::DescriptionIndex cur_res_{0U};
+	int32_t change_by_{1};
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_DECREASE_RESOURCES_TOOL_H

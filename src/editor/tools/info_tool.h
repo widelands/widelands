@@ -25,8 +25,7 @@
 
 /// A simple tool to show information about the clicked node.
 struct EditorInfoTool : public EditorTool {
-	EditorInfoTool(EditorInteractive& parent)
-	   : EditorTool(parent, *this, *this, false), number_of_open_windows_(0) {
+	explicit EditorInfoTool(EditorInteractive& parent) : EditorTool(parent, *this, *this, false) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -42,7 +41,7 @@ struct EditorInfoTool : public EditorTool {
 	}
 
 private:
-	int16_t number_of_open_windows_;
+	int16_t number_of_open_windows_{0};
 	std::map<Widelands::Coords, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>
 	   cached_subscribers_opened_;
 	std::map<Widelands::Coords, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>

@@ -44,8 +44,7 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
               UI::PanelStyle::kWui,
               _("Current Size:"),
               UI::SpinBox::Units::kNone,
-              UI::SpinBox::Type::kSmall),
-     value_(0) {
+              UI::SpinBox::Type::kSmall) {
 	spinbox_.changed.connect([this]() { changed(); });
 
 	set_inner_size(spinbox_.get_w() + 2 * kMargin, spinbox_.get_h() + 2 * kMargin);

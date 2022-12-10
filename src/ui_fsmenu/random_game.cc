@@ -30,8 +30,7 @@ RandomGame::RandomGame(MenuCapsule& m)
      menu_(left_column_box_, UI::PanelStyle::kFsMenu, 350, 64, 64),
      icon_(&right_column_content_box_,
            UI::PanelStyle::kFsMenu,
-           g_image_cache->get("images/logos/wl-ico-128.png")),
-     progress_window_(nullptr) {
+           g_image_cache->get("images/logos/wl-ico-128.png")) {
 	m.set_visible(false);
 
 	{  // Do this first to prevent crashes with incompatible add-on types

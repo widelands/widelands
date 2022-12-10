@@ -81,10 +81,10 @@ private:
 	                   RNG&,
 	                   MapGenAreaInfo::Terrain terrType);
 
-	void generate_resources(uint32_t const* const random1,
-	                        uint32_t const* const random2,
-	                        uint32_t const* const random3,
-	                        uint32_t const* const random4,
+	void generate_resources(uint32_t const* random1,
+	                        uint32_t const* random2,
+	                        uint32_t const* random3,
+	                        uint32_t const* random4,
 	                        const FCoords& fc);
 
 	uint8_t make_node_elevation(double elevation, const Coords&);
@@ -97,9 +97,9 @@ private:
 	                                    const Coords& c0,
 	                                    const Coords& c1,
 	                                    const Coords& c2,
-	                                    uint32_t const h1,
-	                                    uint32_t const h2,
-	                                    uint32_t const h3,
+	                                    uint32_t h1,
+	                                    uint32_t h2,
+	                                    uint32_t h3,
 	                                    RNG& rng,
 	                                    MapGenAreaInfo::Terrain& terrType);
 
