@@ -62,11 +62,11 @@ struct Road : public RoadBase {
 
 	// A CarrierSlot can store a carrier.
 	struct CarrierSlot {
-		CarrierSlot();
+		CarrierSlot() = default;
 
-		OPtr<Carrier> carrier;
+		OPtr<Carrier> carrier{nullptr};
 		Request* carrier_request{nullptr};
-		uint8_t carrier_type_id;
+		uint8_t carrier_type_id{std::numeric_limits<uint8_t>::max()};
 	};
 
 	void postsplit(Game&, Flag&) override;
@@ -109,7 +109,7 @@ private:
 	int32_t wallet_{0};
 
 	/// holds the gametime when wallet_ was last charged
-	Time last_wallet_charge_;
+	Time last_wallet_charge_{0U};
 
 	void request_carrier(CarrierSlot&);
 	static void

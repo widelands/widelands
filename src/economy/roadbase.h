@@ -109,8 +109,8 @@ protected:
 	/// cost for walking this road (0 = from start to end, 1 = from end to start)
 	int32_t cost_[2];
 
-	Path path_;               ///< path goes from start to end
-	uint32_t idle_index_{0};  ///< index into path where carriers should idle
+	Path path_;                ///< path goes from start to end
+	uint32_t idle_index_{0U};  ///< index into path where carriers should idle
 };
 }  // namespace Widelands
 

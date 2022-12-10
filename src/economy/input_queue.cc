@@ -40,9 +40,7 @@ InputQueue::InputQueue(PlayerImmovable& init_owner,
      index_(init_index),
      max_size_(init_max_size),
      max_fill_(init_max_size),
-     type_(init_type),
-     consume_interval_(0),
-     request_(nullptr) {
+     type_(init_type) {
 }
 
 void InputQueue::update() {

@@ -204,23 +204,23 @@ private:
 	Coords position_;
 	Time animstart_{0};
 
-	Building* building_ = nullptr;  ///< attached building (replaces road WALK_NW)
+	Building* building_{nullptr};  ///< attached building (replaces road WALK_NW)
 	RoadBase* roads_[WalkingDir::LAST_DIRECTION];
 
-	int32_t ware_capacity_ = 8;                            ///< size of wares_ array
-	int32_t ware_filled_ = 0;                              ///< number of wares currently on the flag
+	int32_t ware_capacity_{8};                             ///< size of wares_ array
+	int32_t ware_filled_{0};                               ///< number of wares currently on the flag
 	PendingWare* wares_{new PendingWare[ware_capacity_]};  ///< wares currently on the flag
 
 	/// call_carrier() will always call a carrier when the destination is
 	/// the given flag
-	Flag* always_call_for_flag_ = nullptr;
+	Flag* always_call_for_flag_{nullptr};
 
 	using CapacityWaitQueue = std::deque<OPtr<Worker>>;
 	CapacityWaitQueue capacity_wait_;  ///< workers waiting for capacity
 
 	using FlagJobs = std::list<FlagJob>;
 	FlagJobs flag_jobs_;
-	bool act_pending_ = false;
+	bool act_pending_{false};
 	void do_schedule_act(Game&, const Duration&);
 };
 

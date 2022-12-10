@@ -155,7 +155,7 @@ private:
 
 	//  when do we need the first ware (can be in the past)
 	Time required_time_;
-	Duration required_interval_;  //  time between wares
+	Duration required_interval_{0U};  //  time between wares
 	Time last_request_time_;
 
 	TransferList transfers_;  //  maximum size is count_

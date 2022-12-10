@@ -43,7 +43,7 @@ struct CmdCallEconomyBalance : public GameLogicCommand {
 private:
 	OPtr<Flag> flag_;
 	WareWorker type_{wwWARE};
-	uint32_t timerid_ = 0;
+	uint32_t timerid_{0U};
 };
 }  // namespace Widelands
 
