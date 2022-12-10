@@ -37,8 +37,7 @@ public:
 	 * Closes the connection.
 	 * If you want to send a goodbye-message to the host, do so before freeing the object.
 	 */
-	virtual ~NetClientInterface() {
-	}
+	virtual ~NetClientInterface() = default;
 
 	/**
 	 * Returns whether the client is connected.

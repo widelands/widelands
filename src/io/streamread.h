@@ -37,8 +37,7 @@
  */
 class StreamRead {
 public:
-	explicit StreamRead() {
-	}
+	explicit StreamRead() = default;
 	virtual ~StreamRead() = default;
 
 	/**
@@ -72,7 +71,7 @@ public:
 	///  read.
 	class DataError : public WException {
 	public:
-		DataError(char const* const fmt, ...) PRINTF_FORMAT(2, 3);
+		explicit DataError(char const* fmt, ...) PRINTF_FORMAT(2, 3);
 	};
 #define data_error(...) DataError(__VA_ARGS__)
 

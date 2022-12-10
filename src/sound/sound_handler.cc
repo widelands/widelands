@@ -49,8 +49,7 @@ SoundHandler::SoundHandler()
                     {SoundType::kMessage, SoundOptions(kDefaultFxVolume, "message")},
                     {SoundType::kChat, SoundOptions(kDefaultFxVolume, "chat")},
                     {SoundType::kAmbient, SoundOptions(kDefaultFxVolume, "ambient")},
-                    {SoundType::kMusic, SoundOptions(kDefaultMusicVolume, "music")}},
-     fx_lock_(nullptr) {
+                    {SoundType::kMusic, SoundOptions(kDefaultMusicVolume, "music")}} {
 	// Ensure that we don't lose our config for when we start with sound the next time
 	read_config();
 

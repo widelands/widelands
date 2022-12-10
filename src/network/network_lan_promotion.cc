@@ -436,7 +436,7 @@ void LanGamePromoter::set_map(char const* map) {
 
 /*** class LanGameFinder ***/
 
-LanGameFinder::LanGameFinder() : LanBase(kWidelandsLanDiscoveryPort), callback(nullptr) {
+LanGameFinder::LanGameFinder() : LanBase(kWidelandsLanDiscoveryPort) {
 
 	reset();
 }

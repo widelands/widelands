@@ -37,14 +37,13 @@
  */
 class StreamWrite {
 public:
-	explicit StreamWrite() {
-	}
+	explicit StreamWrite() = default;
 	virtual ~StreamWrite() = default;
 
 	/**
 	 * Write a number of bytes to the stream.
 	 */
-	virtual void data(const void* const write_data, const size_t size) = 0;
+	virtual void data(const void* write_data, size_t size) = 0;
 
 	/**
 	 * Make sure all data submitted so far is written to disk.

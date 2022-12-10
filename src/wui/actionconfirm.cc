@@ -47,7 +47,7 @@ struct ActionConfirm : public UI::Window {
 
 protected:
 	Widelands::ObjectPointer object_;
-	UI::Checkbox* checkbox_;
+	UI::Checkbox* checkbox_{nullptr};
 };
 
 /**
@@ -141,8 +141,7 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
                              const std::string& checkbox)
    : UI::Window(
         &parent, UI::WindowStyle::kWui, "building_action_confirm", 0, 0, 200, 120, windowtitle),
-     object_(map_object),
-     checkbox_(nullptr) {
+     object_(map_object) {
 	const int padding = 6;
 	UI::Box* main_box = new UI::Box(this, UI::PanelStyle::kWui, padding, padding, UI::Box::Vertical);
 	UI::Box* button_box = new UI::Box(main_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);

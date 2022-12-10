@@ -25,7 +25,7 @@
 ///  This is not a real editor tool. It serves to combine 'hold down mouse and move'
 ///  tool actions in one class.
 struct EditorDrawTool : public EditorTool {
-	EditorDrawTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	explicit EditorDrawTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

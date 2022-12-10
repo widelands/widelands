@@ -62,8 +62,8 @@ private:
 	std::string show_minimap(const SavegameData& gamedata);
 
 	const Mode mode_;
-	const int padding_;
-	bool has_conflicts_;
+	const int padding_{4};
+	bool has_conflicts_{false};
 
 	UI::Box main_box_, descr_box_;
 	UI::MultilineTextarea name_label_;

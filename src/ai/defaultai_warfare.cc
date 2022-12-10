@@ -1426,6 +1426,18 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	}
 	inputs[118] = -mine_fields_stat.count_types();
 	inputs[119] = -mine_fields_stat.count_types() * 3;
+	if (!basic_economy_established) {  // discourage big milsites if no basic economy
+		inputs[120] = size * -5;
+		inputs[121] = size * -3;
+		inputs[122] = size * -4;
+		inputs[123] = size * -2;
+	}
+	if (!basic_economy_established && !bo.critical_building_material.empty()) {
+		inputs[124] = (size - buil_material_mines_count) * -5;
+		inputs[125] = (size - buil_material_mines_count) * -3;
+		inputs[126] = (size - buil_material_mines_count) * -4;
+		inputs[127] = (size - buil_material_mines_count) * -2;
+	}
 
 	for (int i = 0; i < 4 * kFNeuronBitSize; i = i + 1) {
 		if (inputs[i] < -35 || inputs[i] > 6) {

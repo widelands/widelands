@@ -33,8 +33,7 @@ namespace FsMenu {
 class About : public UI::UniqueWindow {
 public:
 	explicit About(MainMenu&, UI::UniqueWindow::Registry&);
-	~About() override {
-	}
+	~About() override = default;
 
 	WindowLayoutID window_layout_id() const override {
 		return UI::Window::WindowLayoutID::kFsMenuAbout;

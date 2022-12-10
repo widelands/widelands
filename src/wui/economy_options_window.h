@@ -37,7 +37,7 @@ const std::string kDefaultEconomyProfile = "Default";
 class InteractiveBase;
 namespace Widelands {
 class MapObjectLoader;
-}
+}  // namespace Widelands
 
 // Used to indicate that a profile has been saved or deleted, so all open windows can update it
 struct NoteEconomyProfile {
@@ -102,9 +102,9 @@ public:
 
 private:
 	struct TargetWaresDisplay : public AbstractWaresDisplay {
-		TargetWaresDisplay(UI::Panel* const parent,
-		                   int32_t const x,
-		                   int32_t const y,
+		TargetWaresDisplay(UI::Panel* parent,
+		                   int32_t x,
+		                   int32_t y,
 		                   Widelands::Serial serial,
 		                   Widelands::Player* player,
 		                   Widelands::WareWorker type,
@@ -113,7 +113,7 @@ private:
 		void set_economy(Widelands::Serial serial);
 
 	protected:
-		std::string info_for_ware(Widelands::DescriptionIndex const ware) override;
+		std::string info_for_ware(Widelands::DescriptionIndex ware) override;
 
 	private:
 		Widelands::Serial serial_;
@@ -171,7 +171,7 @@ private:
 	std::string applicable_target();
 	std::set<std::string> last_added_to_dropdown_;
 	void think() override;
-	Time time_last_thought_;
+	Time time_last_thought_{0U};
 
 	struct SaveProfileWindow : public UI::Window {
 		SaveProfileWindow(UI::Panel* parent, EconomyOptionsWindow* eco);
@@ -203,7 +203,7 @@ private:
 	void update_profiles_needed(const std::string&);
 	void update_profiles_select(const std::string&);
 
-	SaveProfileWindow* save_profile_dialog_;
+	SaveProfileWindow* save_profile_dialog_{nullptr};
 	// Mutable to allow dynamic loading of the correct ware/worker indices in case an old savegame
 	// has been loaded
 	Widelands::Descriptions* descriptions_;

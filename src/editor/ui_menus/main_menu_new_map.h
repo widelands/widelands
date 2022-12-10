@@ -43,7 +43,7 @@ private:
 	void clicked_cancel();
 	void fill_list();
 
-	int32_t margin_;
+	int32_t margin_{4};
 	int32_t box_width_;
 	UI::Box box_;
 	MapSizeBox map_size_box_;
