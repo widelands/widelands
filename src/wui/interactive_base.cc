@@ -145,19 +145,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
      display_flags_(get_config_int("display_flags", kDefaultDisplayFlags)),
 #endif
      lastframe_(SDL_GetTicks()),
-     frametime_(0),
-     avg_usframetime_(0),
-     last_frame_realtime_(0),
-     previous_frame_realtime_(0),
-     last_frame_gametime_(0),
-     previous_frame_gametime_(0),
-     avg_actual_gamespeed_(0),
-     last_target_gamespeed_(0),
-     gamespeed_last_change_time_(0),
-     road_building_mode_(nullptr),
-     unique_window_handler_(new UniqueWindowHandler()),
-     cheat_mode_enabled_(false),
-     screenshot_failed_(false) {
+
+     unique_window_handler_(new UniqueWindowHandler()) {
 
 	// Load the buildhelp icons.
 	{
