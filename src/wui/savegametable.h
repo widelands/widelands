@@ -79,7 +79,7 @@ public:
 	void set_show_filenames(bool show_filenames) override;
 
 private:
-	bool show_filenames_;
+	bool show_filenames_{false};
 	void add_columns() override;
 	void create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
 	                        const SavegameData& savegame) override;

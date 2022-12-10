@@ -53,7 +53,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      style_(g_style_manager->building_statistics_style()),
      main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
      tab_panel_(&main_box_, UI::TabPanelStyle::kWuiDark),
-     low_production_(33),
 
      hbox_owned_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      hbox_construction_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
@@ -160,13 +159,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                              "",
                              UI::SpinBox::Units::kPercent,
                              UI::SpinBox::Type::kBig),
-
-     current_building_type_(Widelands::INVALID_INDEX),
-     last_building_index_(0),
-     last_building_type_(Widelands::INVALID_INDEX),
-     lastupdate_(0),
-     was_minimized_(false),
-     has_selection_(false),
      nr_building_types_(parent.egbase().descriptions().nr_buildings()) {
 
 	building_buttons_ = std::vector<UI::Button*>(nr_building_types_);

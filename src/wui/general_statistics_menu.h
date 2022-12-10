@@ -36,15 +36,14 @@ struct GeneralStatisticsMenu : public UI::UniqueWindow {
 	// Custom registry, to store the selected_information as well.
 	struct Registry : public UI::UniqueWindow::Registry {
 		Registry()
-		   : UI::UniqueWindow::Registry(),
-		     selected_information(0),
-		     selected_players(kMaxPlayers, true),
-		     time(WuiPlotArea::TIME_GAME) {
+		   :
+
+		     selected_players(kMaxPlayers, true) {
 		}
 
-		int32_t selected_information;
+		int32_t selected_information{0};
 		std::vector<bool> selected_players;
-		WuiPlotArea::TIME time;
+		WuiPlotArea::TIME time{WuiPlotArea::TIME_GAME};
 	};
 
 	GeneralStatisticsMenu(InteractiveGameBase&, Registry&);
@@ -61,7 +60,7 @@ private:
 	UI::Box box_, player_buttons_box_;
 	WuiPlotArea plot_;
 	UI::Radiogroup radiogroup_;
-	int32_t selected_information_;
+	int32_t selected_information_{0};
 	UI::Button* cbs_[kMaxPlayers];
 	WuiPlotAreaSlider* slider_;
 	uint32_t ndatasets_;
