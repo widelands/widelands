@@ -44,14 +44,14 @@ struct MultilineTextarea : public Panel {
 	};
 
 	MultilineTextarea(
-	   Panel* const parent,
-	   const int32_t x,
-	   const int32_t y,
-	   const uint32_t w,
-	   const uint32_t h,
+	   Panel* parent,
+	   int32_t x,
+	   int32_t y,
+	   uint32_t w,
+	   uint32_t h,
 	   UI::PanelStyle style,
 	   const std::string& text = std::string(),
-	   const Align = UI::Align::kLeft,
+	   Align = UI::Align::kLeft,
 	   MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
 
 	const std::string& get_text() const {
@@ -99,7 +99,7 @@ private:
 
 	FontStyle font_style_;
 	const FontStyleInfo& font_style() const;
-	float font_scale_;
+	float font_scale_{1.0f};
 
 	const Align align_;
 

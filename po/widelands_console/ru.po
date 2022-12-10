@@ -6,7 +6,7 @@
 # Anton Khabarov <2233009@gmail.com>, 2016,2018
 # nskdmitry, 2021-2022
 # GunChleoc, 2020
-# Blueberryy <igory.ygr200@gmail.com>, 2021
+# berry <igory.ygr200@gmail.com>, 2021
 # Vasiliy Anosov <basil.snowman@gmail.com>, 2021
 # Viktor S <awsswa59@gmail.com>, 2018,2020
 # Yuriy Sokolov <lention@mail.ru>, 2015,2022
@@ -293,7 +293,7 @@ msgstr "Занять порт  `n` метасерером для игры в И�
 
 #: ../../src/wlapplication_messages.cc:160
 msgid "The name of the last hosted game."
-msgstr "Название последней сохраненной игры."
+msgstr "Название последней сетевой игры."
 
 #: ../../src/wlapplication_messages.cc:161
 msgid "The nickname used for LAN and online games."
@@ -305,7 +305,7 @@ msgstr "Имя автора карты."
 
 #: ../../src/wlapplication_messages.cc:163
 msgid "The last host connected to."
-msgstr "Последний подключенный хост."
+msgstr "Последний подключенный сервер."
 
 #: ../../src/wlapplication_messages.cc:165
 msgid "Whether the used metaserver login is for a registered user."

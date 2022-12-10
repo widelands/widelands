@@ -34,8 +34,7 @@ enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
 /// special properties of a building.
 struct BuildingHints {
 	explicit BuildingHints(std::unique_ptr<LuaTable>, const std::string& building_name);
-	~BuildingHints() {
-	}
+	~BuildingHints() = default;
 
 	[[nodiscard]] bool needs_water() const {
 		return needs_water_;

@@ -49,15 +49,9 @@ Scrollbar::Scrollbar(Panel* const parent,
                      bool const horiz)
    : Panel(parent, style, x, y, w, h),
      horizontal_(horiz),
-     force_draw_(false),
-     pos_(0),
-     singlestepsize_(1),
-     pagesize_(5),
+
      buttonsize_(kSize),
-     steps_(100),
-     pressed_(Area::None),
-     time_nextact_(0),
-     knob_grabdelta_(0),
+
      pic_minus_(g_image_cache->get(horiz ? "images/ui_basic/scrollbar_left.png" :
                                            "images/ui_basic/scrollbar_up.png")),
      pic_plus_(g_image_cache->get(horiz ? "images/ui_basic/scrollbar_right.png" :

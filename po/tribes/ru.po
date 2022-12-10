@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-10-31 04:13+0000\n"
+"POT-Creation-Date: 2022-12-07 03:09+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -1409,7 +1409,7 @@ msgstr "делает мягкую защиту"
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
 msgctxt "amazons_building"
 msgid "Ferry Yard"
-msgstr "Паромная пристань"
+msgstr "Паромная верфь"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:8
@@ -1567,7 +1567,7 @@ msgstr "вербует солдат"
 #: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Jungle Preserver’s Hut"
-msgstr "Хижина хранителя джунглей"
+msgstr "Хижина защитницы джунглей"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
 #: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:51
@@ -1609,7 +1609,7 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr "Резчица лиан не может найти деревья в рабочей области вокруг своей хижины. Быть может, вам стоит разрушить или разобрать это сооружение или построить рядом хижину хранителя джунглей."
+msgstr "Резчица лиан не может найти деревья в рабочей области вокруг своей хижины. Быть может, вам стоит разрушить или разобрать это сооружение или построить рядом хижину защитницы джунглей."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
@@ -1971,7 +1971,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "Лесоруб не может найти деревьев в рабочей области вокруг своей хижины. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом домик хранителя джунглей."
+msgstr "Лесоруб не может найти деревьев в рабочей области вокруг своей хижины. Быть может вам стоит разрушить или разобрать это сооружение, или построить рядом хижину защитницы джунглей."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2167,7 +2167,7 @@ msgstr "У фермера из этой фермы нет почвы приго�
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr "Паромная пристань"
+msgstr "Паромная верфь"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:8
@@ -2773,7 +2773,7 @@ msgstr "У фермера с этой фермы нет почвы пригод�
 #: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ferry Yard"
-msgstr "Паромная пристань"
+msgstr "Паромная верфь"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:8
@@ -3220,7 +3220,7 @@ msgstr "У фермера с этой фермы нет почвы пригод�
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:8
 msgctxt "empire_building"
 msgid "Ferry Yard"
-msgstr "Паромная пристань"
+msgstr "Паромная верфь"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:8
@@ -3884,7 +3884,7 @@ msgstr "Фермер, работающий на этой ферме, не мож
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:8
 msgctxt "frisians_building"
 msgid "Ferry Yard"
-msgstr "Паромная пристань"
+msgstr "Паромная верфь"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:8
@@ -4206,79 +4206,79 @@ msgid "Training Glade"
 msgstr "Тренировочная поляна"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:107
-#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:80
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:271
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:83
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:86
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:101
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:90
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:49
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:91
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:111
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:71
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:68
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:218
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:58
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:78
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:76
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:82
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:42
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:66
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:81
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:80
 msgid "sleeping"
 msgstr "спит"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:115
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:79
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "повысить уклонение солдата с 0 до 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:129
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:93
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "повысить уклонение солдата с 1 до 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:143
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:107
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
 msgstr "повысить уклонение солдата с 2 до 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:158
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:122
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "повысить здоровье солдата с 0 до 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:172
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:136
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "повысить здоровье солдата с 1 до 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:186
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:150
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "повысить здоровье солдата с 2 до 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:201
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:165
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "повысить защиту солдата с 0 до 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:215
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:179
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "повысить защиту солдата с 1 до 2"
 
 #. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:236
-#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:122
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:200
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:110
 msgctxt "amazons_building"
 msgid "No soldier to train!"
 msgstr "Нет солдат для тренировки!"
 
 #. TRANSLATORS: Amazon training site tooltip when none of the present soldiers
 #. match the current training program
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:238
-#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:124
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:202
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:112
 msgctxt "amazons_building"
 msgid "No soldier found for this training level!"
 msgstr "Нет солдат для этого уровня тренировки!"
@@ -4290,59 +4290,59 @@ msgid "Warriors’ Gathering"
 msgstr "Военный лагерь"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:76
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "повысить урон солдата с 0 до 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:102
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:90
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "повысить урон солдата с 1 до 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:205
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:165
 msgctxt "atlanteans_building"
 msgid "Dungeon"
 msgstr "Темница"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:279
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:226
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "повышает урон солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:293
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:240
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "повышает урон солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:307
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:254
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "повышает урон солдата с 2 до 3 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:321
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:268
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "повышает урон солдата с 3 до 4 уровня"
 
 #. TRANSLATORS: Atlantean training site tooltip when it has no soldiers
 #. assigned
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:340
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:163
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:287
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:138
 msgctxt "atlanteans_building"
 msgid "No soldier to train!"
 msgstr "Нет солдат для тренировки!"
 
 #. TRANSLATORS: Atlantean training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:342
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:165
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:289
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:140
 msgctxt "atlanteans_building"
 msgid "No soldier found for this training level!"
 msgstr "Нет солдат для этого уровня тренировки!"
@@ -4354,31 +4354,31 @@ msgid "Labyrinth"
 msgstr "Лабиринт"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:91
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:66
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "повышает защиту солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:105
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:80
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "повышает защиту солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:119
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "повышает здоровье солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:132
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:107
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "повышает уклонение солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:145
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:120
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "повышает уклонение солдата с 1 до 2 уровня"
@@ -4390,29 +4390,29 @@ msgid "Battle Arena"
 msgstr "Арена поединков"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:94
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:86
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "повышает уклонение солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:109
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:101
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "повышает уклонение солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
 #. assigned
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:129
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:225
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:121
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:200
 msgctxt "barbarians_building"
 msgid "No soldier to train!"
 msgstr "Нет солдат для тренировки!"
 
 #. TRANSLATORS: Barbarian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:131
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:227
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:123
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:202
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
 msgstr "Нет солдат для этого уровня тренировки!"
@@ -4424,49 +4424,49 @@ msgid "Training Camp"
 msgstr "Тренировочный лагерь"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:109
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:84
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "повышает урон солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:123
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:98
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "повышает урон солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:137
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:112
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "повышает урон солдата с 2 до 3 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:151
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:126
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "повышает урон солдата с 3 до 4 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:140
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "повышает урон солдата с 4 до 5 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:179
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:154
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "повышает здоровье солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:192
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:167
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "повышает здоровье солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:206
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:181
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "повышает здоровье солдата с 2 до 3 уровня"
@@ -4478,25 +4478,25 @@ msgid "Arena"
 msgstr "Арена"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:98
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:57
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:90
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:50
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "повышает уклонение солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:116
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:88
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:215
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:108
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:81
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:190
 msgctxt "empire_building"
 msgid "No soldier to train!"
 msgstr "Нет солдат для тренировки!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:118
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:90
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:217
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:110
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:83
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:192
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
 msgstr "Нет солдат для этого уровня тренировки!"
@@ -4508,7 +4508,7 @@ msgid "Colosseum"
 msgstr "Колизей"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:70
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:63
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "повышает уклонение солдата с 1 до 2 уровня"
@@ -4520,49 +4520,49 @@ msgid "Training Camp"
 msgstr "Тренировочный лагерь"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:99
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:74
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "повышает урон солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:113
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:88
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "повышает урон солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:127
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:102
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "повышает урон солдата с 2 до 3 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:141
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:116
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "повышает урон солдата с 3 до 4 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:155
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:130
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "повышает здоровье солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:168
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:143
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "повышает здоровье солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:182
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:157
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "повышает здоровье солдата с 2 до 3 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:196
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:171
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr "повышает здоровье солдата с 3 до 4 уровня"
@@ -4574,46 +4574,46 @@ msgid "Training Arena"
 msgstr "Тренировочная арена"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:120
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:89
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "повышает урон солдата с 3 до 4 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:135
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:104
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "повышает урон солдата с 4 до 5 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:151
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr "повышает урон солдата с 5 до 6 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:168
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:137
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "повышает защиту солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:184
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:153
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "повышает здоровье солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:205
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:202
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:174
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:171
 msgctxt "frisians_building"
 msgid "No soldier to train!"
 msgstr "Нет солдат для тренировки!"
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:207
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:204
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:176
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:173
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
 msgstr "Нет солдат для этого уровня тренировки!"
@@ -4625,31 +4625,31 @@ msgid "Training Camp"
 msgstr "Тренировочный лагерь"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:119
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:88
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "повышает урон солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:134
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:103
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "повышает урон солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:150
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:119
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "повышает урон солдата с 2 до 3 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:135
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "повышает здоровье солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:181
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:150
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "повышает защиту солдата с 0 до 1 уровня"
@@ -5317,7 +5317,7 @@ msgstr "Какао-дерево (молодняк)"
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr "Мертвое дерево"
+msgstr "Сухостой"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -8730,7 +8730,7 @@ msgstr "Портниха"
 #: ../../data/tribes/workers/amazons/ferry/init.lua:8
 msgctxt "amazons_worker"
 msgid "Ferry"
-msgstr "Паром"
+msgstr "Перевозчик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/geologist/init.lua:8
@@ -8760,13 +8760,13 @@ msgstr "Охотник-собиратель"
 #: ../../data/tribes/workers/amazons/jungle_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Master"
-msgstr "Хозяин джунглей"
+msgstr "Хозяйка джунглей"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_preserver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Preserver"
-msgstr "Хранитель джунглей"
+msgstr "Защитница джунглей"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/liana_cutter/init.lua:8
@@ -8940,7 +8940,7 @@ msgstr "Фермер"
 #: ../../data/tribes/workers/atlanteans/ferry/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Ferry"
-msgstr "Паром"
+msgstr "Перевозчик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/fishbreeder/init.lua:8
@@ -9144,7 +9144,7 @@ msgstr "Фермер"
 #: ../../data/tribes/workers/barbarians/ferry/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Ferry"
-msgstr "Паром"
+msgstr "Перевозчик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/fisher/init.lua:8
@@ -9342,7 +9342,7 @@ msgstr "Фермер"
 #: ../../data/tribes/workers/empire/ferry/init.lua:8
 msgctxt "empire_worker"
 msgid "Ferry"
-msgstr "Паром"
+msgstr "Перевозчик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/fisher/init.lua:8
@@ -9576,7 +9576,7 @@ msgstr "Фермер"
 #: ../../data/tribes/workers/frisians/ferry/init.lua:8
 msgctxt "frisians_worker"
 msgid "Ferry"
-msgstr "Паром"
+msgstr "Перевозчик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/fisher/init.lua:8

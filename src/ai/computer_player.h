@@ -46,7 +46,7 @@ namespace AI {
  * \ref Implementation interface.
  */
 struct ComputerPlayer {
-	ComputerPlayer(Widelands::Game&, const Widelands::PlayerNumber);
+	ComputerPlayer(Widelands::Game&, Widelands::PlayerNumber);
 	virtual ~ComputerPlayer() = default;
 
 	virtual void think() = 0;
@@ -54,7 +54,7 @@ struct ComputerPlayer {
 	[[nodiscard]] Widelands::Game& game() const {
 		return game_;
 	}
-	Widelands::PlayerNumber player_number() {
+	[[nodiscard]] Widelands::PlayerNumber player_number() const {
 		return player_number_;
 	}
 
@@ -81,8 +81,7 @@ struct ComputerPlayer {
 			assert(!contains(name, as_string(kAiNameSeparator)));
 		}
 
-		virtual ~Implementation() {
-		}
+		virtual ~Implementation() = default;
 		virtual ComputerPlayer* instantiate(Widelands::Game&, Widelands::PlayerNumber) const = 0;
 	};
 	using ImplementationVector = std::vector<ComputerPlayer::Implementation const*>;

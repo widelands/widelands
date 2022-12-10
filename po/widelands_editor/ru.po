@@ -148,7 +148,7 @@ msgstr "Подсказки"
 
 #: ../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
-msgstr "Местности"
+msgstr "Ландшафты"
 
 #: ../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
@@ -220,4 +220,4 @@ msgstr "%2.1f %%"
 #: ../../data/scripting/editor/tree_help.lua:18
 #: ../../data/scripting/editor/tree_tooltip.lua:31
 msgid "Preferred terrains"
-msgstr "Предпочитаемые местности"
+msgstr "Предпочитаемые ландшафты"
