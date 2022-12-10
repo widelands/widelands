@@ -66,26 +66,18 @@ Panel::Panel(Panel* const nparent,
              const int nh,
              const std::string& tooltip_text)
    : panel_style_(s),
-     initialized_(false),
+
      parent_(nparent),
-     first_child_(nullptr),
-     last_child_(nullptr),
-     mousein_child_(nullptr),
-     focus_(nullptr),
+
      flags_(pf_handle_mouse | pf_thinks | pf_visible | pf_handle_keypresses),
      x_(nx),
      y_(ny),
      w_(nw),
      h_(nh),
-     lborder_(0),
-     rborder_(0),
-     tborder_(0),
-     bborder_(0),
-     border_snap_distance_(0),
-     panel_snap_distance_(0),
+
      desired_w_(nw),
      desired_h_(nh),
-     running_(false),
+
      tooltip_(tooltip_text),
      logic_thread_locked_(LogicThreadState::kEndingConfirmed) {
 	assert(nparent != this);

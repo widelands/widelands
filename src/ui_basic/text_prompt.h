@@ -44,7 +44,7 @@ public:
 		return content_box_;
 	}
 
-	bool handle_key(const bool down, const SDL_Keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	UI::Box box_, content_box_, buttonsbox_;

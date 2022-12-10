@@ -168,12 +168,8 @@ MainMenu::MainMenu(const bool skip_init)
                 "",
                 UI::Align::kCenter),
      init_time_(kNoSplash),
-     last_image_exchange_time_(0),
-     draw_image_(0),
-     last_image_(0),
-     visible_(true),
-     menu_capsule_(*this),
-     auto_log_(false) {
+
+     menu_capsule_(*this) {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.new_width, message.new_height);
@@ -287,7 +283,7 @@ void MainMenu::find_maps(const std::string& directory, std::vector<MapEntry>& re
 				map.set_filename(file);
 				ml->preload_map(true, nullptr);
 				if (map.version().map_version_timestamp > 0) {
-					MapData::MapType type = map.scenario_types() == Map::SP_SCENARIO ?
+					MapData::MapType type = map.scenario_types() == Widelands::Map::SP_SCENARIO ?
                                           MapData::MapType::kScenario :
                                           MapData::MapType::kNormal;
 					results.emplace_back(
