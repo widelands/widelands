@@ -64,7 +64,7 @@ struct Road : public RoadBase {
 	struct CarrierSlot {
 		CarrierSlot() = default;
 
-		OPtr<Carrier> carrier{nullptr};
+		OPtr<Carrier> carrier;
 		Request* carrier_request{nullptr};
 		uint8_t carrier_type_id{std::numeric_limits<uint8_t>::max()};
 	};
