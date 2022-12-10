@@ -20,6 +20,7 @@
 #define WL_LOGIC_SAVE_HANDLER_H
 
 #include "io/filesystem/filesystem.h"
+#include "logic/filesystem_constants.h"
 
 namespace Widelands {
 class Game;

@@ -28,7 +28,6 @@
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
-#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/generic_save_handler.h"
