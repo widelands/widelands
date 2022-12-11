@@ -193,10 +193,10 @@ public:
 		int32_t target_military_score{0};
 		uint32_t ai_productionsites_ratio{0U};
 		int32_t ai_personality_mil_upper_limit{0};
-		std::vector<int16_t> magic_numbers{kMagicNumbersSize, 0};
-		std::vector<int8_t> neuron_weights{kNeuronPoolSize, 0};
-		std::vector<int8_t> neuron_functs{kNeuronPoolSize, 0};
-		std::vector<uint32_t> f_neurons{kFNeuronPoolSize, 0};
+		std::vector<int16_t> magic_numbers{std::vector<int16_t>(kMagicNumbersSize, 0)};
+		std::vector<int8_t> neuron_weights{std::vector<int8_t>(kNeuronPoolSize, 0)};
+		std::vector<int8_t> neuron_functs{std::vector<int8_t>(kNeuronPoolSize, 0)};
+		std::vector<uint32_t> f_neurons{std::vector<uint32_t>(kFNeuronPoolSize, 0)};
 		std::unordered_map<Widelands::DescriptionIndex, uint32_t> remaining_basic_buildings;
 	} ai_data;
 
