@@ -43,7 +43,7 @@ class Worker;
 
 class ExpeditionBootstrap {
 public:
-	explicit ExpeditionBootstrap(PortDock* const portdock);
+	explicit ExpeditionBootstrap(PortDock* portdock);
 	virtual ~ExpeditionBootstrap();
 
 	// Start bootstrapping an expedition. This will request all wares and workers.

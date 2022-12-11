@@ -94,6 +94,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
    : BuildingDescr(init_descname, init_type, table, descriptions),
      ware_demand_checks_(new std::set<DescriptionIndex>()),
      worker_demand_checks_(new std::set<DescriptionIndex>()),
+     is_infinite_production_useful_(false),
      out_of_resource_productivity_threshold_(100) {
 
 	std::unique_ptr<LuaTable> items_table;
@@ -284,18 +285,7 @@ IMPLEMENTATION
 */
 
 ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
-   : Building(ps_descr),
-     working_positions_(ps_descr.nr_working_positions()),
-     fetchfromflag_(0),
-     program_timer_(false),
-     program_time_(0),
-     post_timer_(50),
-     last_stat_percent_(0),
-     actual_percent_(0),
-     last_program_end_time(0),
-     is_stopped_(false),
-     default_anim_("idle"),
-     main_worker_(-1) {
+   : Building(ps_descr), working_positions_(ps_descr.nr_working_positions()) {
 	format_statistics_string();
 }
 
@@ -915,6 +905,11 @@ void ProductionSite::set_stopped(bool const stopped) {
 	is_stopped_ = stopped;
 	get_economy(wwWARE)->rebalance_supply();
 	get_economy(wwWORKER)->rebalance_supply();
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
+}
+
+void ProductionSite::set_infinite_production(const bool i) {
+	infinite_production_ = i;
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 

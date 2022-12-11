@@ -45,8 +45,7 @@ public:
 	DismantleSiteDescr(const std::string& init_descname,
 	                   const LuaTable& t,
 	                   Descriptions& descriptions);
-	~DismantleSiteDescr() override {
-	}
+	~DismantleSiteDescr() override = default;
 
 	[[nodiscard]] Building& create_object() const override;
 

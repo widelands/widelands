@@ -30,8 +30,7 @@ WarehouseSupply is the implementation of Supply that is used by Warehouses.
 It also manages the list of wares in the warehouse.
 */
 struct WarehouseSupply : public Supply {
-	explicit WarehouseSupply(Warehouse* const wh)
-	   : ware_economy_(nullptr), worker_economy_(nullptr), warehouse_(wh) {
+	explicit WarehouseSupply(Warehouse* const wh) : warehouse_(wh) {
 	}
 	~WarehouseSupply() override;
 
@@ -70,8 +69,8 @@ struct WarehouseSupply : public Supply {
 	Worker& launch_worker(Game&, const Request&) override;
 
 private:
-	Economy* ware_economy_;
-	Economy* worker_economy_;
+	Economy* ware_economy_{nullptr};
+	Economy* worker_economy_{nullptr};
 	WareList wares_;
 	WareList workers_;  //  we use this to keep the soldiers
 	Warehouse* warehouse_;

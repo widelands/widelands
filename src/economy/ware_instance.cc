@@ -66,13 +66,13 @@ struct IdleWareSupply : public Supply {
 
 private:
 	WareInstance& ware_;
-	Economy* economy_;
+	Economy* economy_{nullptr};
 };
 
 /**
  * Initialize the Supply and update the economy.
  */
-IdleWareSupply::IdleWareSupply(WareInstance& ware) : ware_(ware), economy_(nullptr) {
+IdleWareSupply::IdleWareSupply(WareInstance& ware) : ware_(ware) {
 	set_economy(ware.get_economy());
 }
 
@@ -188,11 +188,7 @@ void IdleWareSupply::send_to_storage(Game& game, Warehouse* wh) {
 /*                     Ware Instance Implementation                      */
 /*************************************************************************/
 WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware_descr)
-   : MapObject(ware_descr),
-     economy_(nullptr),
-     descr_index_(i),
-     supply_(nullptr),
-     transfer_(nullptr) {
+   : MapObject(ware_descr), descr_index_(i) {
 }
 
 WareInstance::~WareInstance() {

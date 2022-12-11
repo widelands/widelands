@@ -56,17 +56,6 @@ constexpr int kSoldierHealthBarWidth = 13;
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 
-SoldierLevelRange::SoldierLevelRange()
-   : min_health(-1),
-     min_attack(-1),
-     min_defense(-1),
-     min_evade(-1),
-     max_health(-1),
-     max_attack(-1),
-     max_defense(-1),
-     max_evade(-1) {
-}
-
 SoldierLevelRange::SoldierLevelRange(const LuaTable& t) {
 	min_health = t.get_int("min_health");
 	min_attack = t.get_int("min_attack");
@@ -99,8 +88,7 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
      health_(table.get_table("health")),
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),
-     evade_(table.get_table("evade")),
-     max_anim_height_(0) {
+     evade_(table.get_table("evade")) {
 
 	// Battle animations
 	// attack_success_*-> soldier is attacking and hit his opponent
@@ -1764,9 +1752,6 @@ Load/save support
 */
 
 constexpr uint8_t kCurrentPacketVersion = 3;
-
-Soldier::Loader::Loader() : battle_(0) {
-}
 
 void Soldier::Loader::load(FileRead& fr) {
 	Worker::Loader::load(fr);
