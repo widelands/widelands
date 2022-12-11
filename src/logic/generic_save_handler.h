@@ -56,7 +56,7 @@ public:
 	                            FileSystem::Type type)
 	   : do_save_(do_save),
 	     complete_filename_(complete_filename),
-	     dir_(FileSystem::fs_dirname(complete_filename.c_str())),
+	     dir_(FileSystem::fs_dirname(complete_filename)),
 	     filename_(FileSystem::fs_filename(complete_filename.c_str())),
 	     type_(type),
 	     error_(static_cast<Error>(1132)) {

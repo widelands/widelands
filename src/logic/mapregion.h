@@ -34,8 +34,9 @@ template <typename AreaType = Area<>> struct MapRegion {
 	     rowwidth_(area.radius + 1),
 	     remaining_in_row_(rowwidth_),
 	     remaining_rows_(rowwidth_ + area.radius) {
-		for (typename AreaType::RadiusType r = area.radius; r; --r)
+		for (typename AreaType::RadiusType r = area.radius; r > 0; --r) {
 			map.get_tln(area_, &area_);
+		}
 		left_ = area_;
 	}
 
@@ -50,18 +51,19 @@ template <typename AreaType = Area<>> struct MapRegion {
 	/// while advance keeps returning true. When finally advance returns false,
 	/// it means that the iteration is done.
 	bool advance(const Map& map) {
-		if (--remaining_in_row_)
+		if (--remaining_in_row_ > 0) {
 			map.get_rn(area_, &area_);
-		else if (area_.radius < --remaining_rows_) {
+		} else if (area_.radius < --remaining_rows_) {
 			map.get_bln(left_, &area_);
 			left_ = area_;
 			remaining_in_row_ = ++rowwidth_;
-		} else if (remaining_rows_) {
+		} else if (remaining_rows_ > 0) {
 			map.get_brn(left_, &area_);
 			left_ = area_;
 			remaining_in_row_ = --rowwidth_;
-		} else
+		} else {
 			return false;
+		}
 		return true;
 	}
 

@@ -115,11 +115,11 @@ class CmdQueue {
 		bool operator<(const CmdItem& c) const {
 			if (cmd->duetime() != c.cmd->duetime()) {
 				return cmd->duetime() > c.cmd->duetime();
-			} else if (category != c.category) {
-				return category > c.category;
-			} else {
-				return serial > c.serial;
 			}
+			if (category != c.category) {
+				return category > c.category;
+			}
+			return serial > c.serial;
 		}
 	};
 
@@ -140,8 +140,8 @@ public:
 
 private:
 	Game& game_;
-	uint32_t nextserial_;
-	uint32_t ncmds_;
+	uint32_t nextserial_{0};
+	uint32_t ncmds_{0};
 	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
 	CommandsContainer cmds_;
 };

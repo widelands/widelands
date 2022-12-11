@@ -170,8 +170,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	                 const std::vector<std::string>& lines,
 	                 ImmovableDescr& immovable);
 
-	~ImmovableProgram() override {
-	}
+	~ImmovableProgram() override = default;
 
 	[[nodiscard]] size_t size() const {
 		return actions_.size();
@@ -186,10 +185,8 @@ private:
 };
 
 struct ImmovableActionData {
-	ImmovableActionData() {
-	}
-	virtual ~ImmovableActionData() {
-	}
+	ImmovableActionData() = default;
+	virtual ~ImmovableActionData() = default;
 
 	[[nodiscard]] virtual const char* name() const = 0;
 	virtual void save(FileWrite& fw, Immovable& imm) const = 0;

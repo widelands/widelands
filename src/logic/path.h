@@ -40,11 +40,10 @@ struct Path {
 	friend class Map;
 	friend struct MapAStarBase;
 
-	Path() {
-	}
+	Path() = default;
 	explicit Path(const Coords& c) : start_(c), end_(c) {
 	}
-	Path(CoordPath&);
+	Path(CoordPath&);  // NOLINT allow implicit conversion
 
 	void reverse();
 
@@ -82,8 +81,7 @@ private:
 
 // CoordPath is an extended path that also caches related Coords
 struct CoordPath {
-	CoordPath() {
-	}
+	CoordPath() = default;
 	explicit CoordPath(Coords c) {
 		coords_.push_back(c);
 	}
@@ -114,8 +112,8 @@ struct CoordPath {
 	[[nodiscard]] int32_t get_index(const Coords& field) const;
 
 	void reverse();
-	void truncate(const std::vector<char>::size_type after);
-	void trim_start(const std::vector<char>::size_type before);
+	void truncate(std::vector<char>::size_type after);
+	void trim_start(std::vector<char>::size_type before);
 	void append(const Map& map, const Path& tail);
 	void append(const CoordPath& tail);
 

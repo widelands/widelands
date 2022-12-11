@@ -33,8 +33,7 @@ struct GameDataError : public WException {
 	}
 
 protected:
-	GameDataError() {
-	}
+	GameDataError() = default;
 };
 
 /** This exception's message compiles information for the user when an old savegame could not be
@@ -58,8 +57,7 @@ struct UnhandledVersionError : public GameDataError {
 	}
 
 protected:
-	UnhandledVersionError() {
-	}
+	UnhandledVersionError() = default;
 };
 }  // namespace Widelands
 

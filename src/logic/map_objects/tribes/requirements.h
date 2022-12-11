@@ -47,8 +47,7 @@ struct RequirementsStorage;
 struct Requirements {
 private:
 	struct BaseCapsule {
-		virtual ~BaseCapsule() {
-		}
+		virtual ~BaseCapsule() = default;
 
 		[[nodiscard]] virtual bool check(const MapObject&) const = 0;
 		virtual void write(FileWrite&, EditorGameBase&, MapObjectSaver&) const = 0;
@@ -56,7 +55,7 @@ private:
 	};
 
 	template <typename T> struct Capsule : public BaseCapsule {
-		explicit Capsule(const T& init_m) : m(init_m) {
+		Capsule(const T& init_m) : m(init_m) {  // NOLINT allow implicit conversion
 		}
 
 		[[nodiscard]] bool check(const MapObject& obj) const override {
@@ -75,10 +74,11 @@ private:
 	};
 
 public:
-	Requirements() {
-	}
+	Requirements() = default;
 
-	template <typename T> Requirements(const T& req) : m(new Capsule<T>(req)) {
+	template <typename T>
+	Requirements(const T& req)  // NOLINT allow implicit conversion
+	   : m(new Capsule<T>(req)) {
 	}
 
 	/**
@@ -165,8 +165,7 @@ struct RequireAttribute {
 	   : at(init_at), min(init_min), max(init_max) {
 	}
 
-	RequireAttribute() : at(TrainingAttribute::kTotal), min(SHRT_MIN), max(SHRT_MAX) {
-	}
+	RequireAttribute() = default;
 	[[nodiscard]] bool check(const MapObject&) const;
 	void write(FileWrite&, EditorGameBase& egbase, MapObjectSaver&) const;
 
@@ -180,9 +179,9 @@ struct RequireAttribute {
 	}
 
 private:
-	TrainingAttribute at;
-	int32_t min;
-	int32_t max;
+	TrainingAttribute at = TrainingAttribute::kTotal;
+	int32_t min = SHRT_MIN;
+	int32_t max = SHRT_MAX;
 };
 }  // namespace Widelands
 
