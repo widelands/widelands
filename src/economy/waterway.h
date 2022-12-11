@@ -32,8 +32,7 @@ public:
 	WaterwayDescr(char const* const init_name, char const* const init_descname)
 	   : RoadBaseDescr(init_name, init_descname, MapObjectType::WATERWAY) {
 	}
-	~WaterwayDescr() override {
-	}
+	~WaterwayDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(WaterwayDescr);
