@@ -672,8 +672,8 @@ private:
 	PlayerBuildingStats building_stats_;
 	std::vector<SoldierStatistics> soldier_stats_;
 
-	std::string name_;  // Player name
-	std::string ai_;    /**< Name of preferred AI implementation */
+	std::string name_;                     // Player name
+	std::string ai_;                       /**< Name of preferred AI implementation */
 	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
 
 	std::set<DescriptionIndex> allowed_worker_types_;
