@@ -38,11 +38,10 @@ struct NoteQuicknavChangedEvent {
 struct QuickNavigation {
 	struct Landmark {
 		MapView::View view;
-		bool set;
+		bool set{false};
 		std::string name;
 
-		Landmark() : set(false) {
-		}
+		Landmark() = default;
 	};
 
 	explicit QuickNavigation(MapView* map_view);
@@ -89,7 +88,7 @@ private:
 	std::list<MapView::View> previous_locations_;
 	std::list<MapView::View> next_locations_;
 	// Ignore the initial (0,0,1×) view
-	bool location_jumping_started_;
+	bool location_jumping_started_{false};
 	void insert_if_applicable(std::list<MapView::View>&);
 };
 

@@ -64,7 +64,7 @@ private:
 	void minimize() override;
 	void acknowledge();
 	GameChatPanel chat_;
-	bool close_on_send_;
+	bool close_on_send_{false};
 };
 
 #endif  // end of include guard: WL_WUI_GAME_CHAT_MENU_H

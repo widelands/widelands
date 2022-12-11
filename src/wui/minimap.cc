@@ -41,7 +41,7 @@ MiniMap::View::View(UI::Panel& parent,
    : UI::Panel(&parent, UI::PanelStyle::kWui, x, y, 10, 10),
      ibase_(ibase),
      pic_map_spot_(g_image_cache->get("images/wui/overlays/map_spot.png")),
-     rows_drawn_(0),
+
      minimap_layers_(flags),
      minimap_type_(type) {
 }
@@ -142,6 +142,8 @@ inline uint32_t MiniMap::but_h() const {
 MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
    : UI::UniqueWindow(&ibase, UI::WindowStyle::kWui, "minimap", registry, 0, 0, _("Map")),
      ibase_(ibase),
+     owner_button_impl_(ibase.egbase().is_game() ? MiniMapLayer::Owner :
+                                                   MiniMapLayer::StartingPositions),
      view_(*this, &registry->minimap_layers, &registry->minimap_type, 0, 0, 0, 0, ibase),
 
      button_terrn(this,
@@ -222,7 +224,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                  UI::Button::VisualState::kRaised,
                  UI::Button::ImageMode::kUnscaled) {
 	button_terrn.sigclicked.connect([this]() { toggle(MiniMapLayer::Terrain); });
-	button_owner.sigclicked.connect([this]() { toggle(MiniMapLayer::Owner); });
+	button_owner.sigclicked.connect([this]() { toggle(owner_button_impl_); });
 	button_flags.sigclicked.connect([this]() { toggle(MiniMapLayer::Flag); });
 	button_roads.sigclicked.connect([this]() { toggle(MiniMapLayer::Road); });
 	button_bldns.sigclicked.connect([this]() { toggle(MiniMapLayer::Building); });
@@ -301,7 +303,7 @@ void MiniMap::resize() {
 
 void MiniMap::update_button_permpressed() {
 	button_terrn.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Terrain) != 0);
-	button_owner.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Owner) != 0);
+	button_owner.set_perm_pressed((*view_.minimap_layers_ & owner_button_impl_) != 0);
 	button_flags.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Flag) != 0);
 	button_roads.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Road) != 0);
 	button_bldns.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Building) != 0);

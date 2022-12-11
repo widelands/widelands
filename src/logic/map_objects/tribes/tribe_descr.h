@@ -130,8 +130,8 @@ public:
 	// The road textures used for drawing roads and waterways.
 	[[nodiscard]] const RoadTextures& road_textures() const;
 
-	DescriptionIndex get_resource_indicator(const ResourceDescription* const res,
-	                                        const ResourceAmount amount) const;
+	DescriptionIndex get_resource_indicator(const ResourceDescription* res,
+	                                        ResourceAmount amount) const;
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
 	[[nodiscard]] const Widelands::TribeBasicInfo::Initialization&
@@ -159,7 +159,7 @@ public:
 	}
 
 	[[nodiscard]] bool uses_resource(const std::string& name) const {
-		return used_resources_.count(name);
+		return used_resources_.count(name) != 0u;
 	}
 	// Warning: Do not use pointer arithmetics in logic code!
 	[[nodiscard]] const std::set<const BuildingDescr*>& buildings_built_over_immovables() const {

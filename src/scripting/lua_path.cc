@@ -38,7 +38,7 @@ private:
 	std::string template_;
 	std::string format_;
 	std::string to_replace_;
-	uint32_t current_;
+	uint32_t current_{0U};
 	uint32_t max_;
 
 	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
@@ -47,7 +47,7 @@ private:
 /**
  * Implementation for NumberGlob.
  */
-NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
+NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template) {
 	int nchars = count(file_template.begin(), file_template.end(), '?');
 	format_ = "%0" + as_string(nchars) + "i";
 

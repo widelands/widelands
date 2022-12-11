@@ -35,8 +35,7 @@ struct RoutingNode;
  * interface
  **/
 struct IRoute {
-	virtual ~IRoute() {
-	}
+	virtual ~IRoute() = default;
 
 	virtual void init(int32_t) = 0;
 	virtual void insert_as_first(RoutingNode* node) = 0;

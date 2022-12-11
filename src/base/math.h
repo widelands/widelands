@@ -55,7 +55,7 @@ unsigned read_percent_to_int(const std::string& input);
 
 // Wrappers around stoi/stoll with more verbose exceptions
 int to_int(const std::string&);
-long long to_long(const std::string&);
+int64_t to_long(const std::string&);
 
 }  // namespace math
 

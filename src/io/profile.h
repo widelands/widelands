@@ -54,7 +54,7 @@ public:
 	friend class Profile;
 
 	struct Value {
-		Value(const std::string& nname, const char* const nval);
+		Value(const std::string& nname, const char* nval);
 		Value(const Value&);
 		Value(Value&& other) noexcept;
 
@@ -112,6 +112,9 @@ public:
 	}
 
 	Section& operator=(const Section& other) {
+		if (&other == this) {
+			return *this;
+		}
 		profile_ = other.profile_;
 		used_ = other.used_.load();
 		section_name_ = other.section_name_;
@@ -221,13 +224,11 @@ public:
 	void error(char const*, ...) const __attribute__((format(printf, 2, 3)));
 	void check_used() const;
 
-	void read(const char* const filename,
-	          const char* const global_section = nullptr,
-	          FileSystem& = *g_fs);
-	void write(const char* const filename,
+	void read(const char* filename, const char* global_section = nullptr, FileSystem& = *g_fs);
+	void write(const char* filename,
 	           bool used_only = true,
 	           FileSystem& = *g_fs,
-	           const char* const comment = nullptr);
+	           const char* comment = nullptr);
 
 	Section* get_section(const std::string& name);
 	Section& get_safe_section(const std::string& name);

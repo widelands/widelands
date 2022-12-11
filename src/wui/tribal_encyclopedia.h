@@ -26,7 +26,7 @@
 class InteractivePlayer;
 
 struct TribalEncyclopedia : public UI::EncyclopediaWindow {
-	TribalEncyclopedia(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
+	TribalEncyclopedia(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* lua);
 };
 
 #endif  // end of include guard: WL_WUI_TRIBAL_ENCYCLOPEDIA_H

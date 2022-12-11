@@ -76,7 +76,7 @@ public:
 	// Reinitialize for the given view parameters.
 	void reset(const Widelands::EditorGameBase& egbase,
 	           const Vector2f& viewpoint,
-	           const float zoom,
+	           float zoom,
 	           RenderTarget* dst);
 
 	// The number of fields to draw.

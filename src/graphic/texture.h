@@ -38,7 +38,7 @@ public:
 
 	// Create a logical texture that is a 'subrect' (in Pixel) in
 	// another texture. Ownership of 'texture' is not taken.
-	Texture(const GLuint texture, const Recti& subrect, int parent_w, int parent_h);
+	Texture(GLuint texture, const Recti& subrect, int parent_w, int parent_h);
 
 	~Texture() override;
 

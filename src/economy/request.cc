@@ -60,11 +60,9 @@ Request::Request(PlayerImmovable& init_target,
      target_constructionsite_(dynamic_cast<ConstructionSite*>(&init_target)),
      economy_(init_target.get_economy(w)),
      index_(index),
-     count_(1),
-     exact_match_(false),
+
      callbackfn_(cbfn),
      required_time_(init_target.owner().egbase().get_gametime()),
-     required_interval_(0),
      last_request_time_(required_time_) {
 	assert(type_ == wwWARE || type_ == wwWORKER);
 	if (w == wwWARE && !init_target.owner().egbase().descriptions().ware_exists(index)) {

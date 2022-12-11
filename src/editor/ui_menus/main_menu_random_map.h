@@ -19,8 +19,11 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "editor/ui_menus/map_size_box.h"
+#include "logic/addons.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
@@ -38,12 +41,17 @@ class EditorInteractive;
 struct SinglePlayerGameSettingsProvider;
 namespace UI {
 template <typename T, typename ID> struct IDButton;
-}
+}  // namespace UI
 
 class MainMenuNewRandomMapPanel : public UI::Box {
 public:
-	explicit MainMenuNewRandomMapPanel(
-	   UI::Panel& parent, UI::PanelStyle, int32_t inner_w, uint32_t map_w, uint32_t map_h);
+	explicit MainMenuNewRandomMapPanel(UI::Panel& parent,
+	                                   UI::PanelStyle,
+	                                   int32_t inner_w,
+	                                   uint32_t map_w,
+	                                   uint32_t map_h,
+	                                   UI::Button& ok_button,
+	                                   UI::Button& cancel_button);
 
 	bool do_generate_map(Widelands::EditorGameBase&,
 	                     EditorInteractive*,
@@ -59,15 +67,12 @@ public:
 		kPlayers
 	};
 
-	void set_buttons(UI::Button& o, UI::Button& c) {
-		ok_button_ = &o;
-		cancel_button_ = &c;
-	}
-
 private:
 	void button_clicked(ButtonId);
 	void id_edit_box_changed();
 	void nr_edit_box_changed();
+
+	size_t compute_max_players() const;
 
 	// Ensures that the sum of our landmass is >= 0% and <= 100%, and changes
 	// values as necessary.
@@ -84,6 +89,8 @@ private:
 	// UI elements
 	int32_t label_height_;
 
+	UI::Dropdown<std::shared_ptr<const AddOns::AddOnInfo>> generator_;
+
 	// Size
 	MapSizeBox map_size_box_;
 
@@ -93,7 +100,7 @@ private:
 	// World + Resources
 	int current_world_;
 	std::vector<std::string> resource_amounts_;
-	uint32_t resource_amount_;
+	uint32_t resource_amount_{2U};
 	UI::Dropdown<size_t> world_, resources_;
 
 	enum class TerrainDistribution { kDefault, kAlpine, kAtoll, kWasteland, kRandom, kCustom };
@@ -101,7 +108,10 @@ private:
 	void select_terrains_distribution();
 
 	// Land
-	int32_t waterval_, landval_, wastelandval_, mountainsval_;
+	int32_t waterval_{20};
+	int32_t landval_{60};
+	int32_t wastelandval_{0};
+	int32_t mountainsval_{100 - waterval_ - landval_ - wastelandval_};
 	UI::SpinBox water_, land_, wasteland_;
 	UI::Box mountains_box_;
 	UI::Textarea mountains_label_, mountains_;
@@ -109,17 +119,19 @@ private:
 	UI::Checkbox island_mode_;
 
 	// Geeky stuff
-	UI::Box map_number_and_id_hbox_, map_number_and_id_vbox_1_, map_number_and_id_vbox_2_;
+	UI::Box map_number_and_id_hbox_, map_number_and_id_vbox_1_, map_number_and_id_vbox_2_,
+	   random_number_hbox_;
 
 	uint32_t map_number_;
 	UI::Textarea map_number_label_;
 	UI::EditBox map_number_edit_;
+	UI::Button map_number_randomize_;
 
 	UI::Textarea map_id_label_;
 	UI::EditBox map_id_edit_;
 
-	UI::Button* ok_button_;
-	UI::Button* cancel_button_;
+	UI::Button& ok_button_;
+	UI::Button& cancel_button_;
 
 	DISALLOW_COPY_AND_ASSIGN(MainMenuNewRandomMapPanel);
 };
@@ -135,11 +147,9 @@ public:
 
 private:
 	UI::Box box_;
-	MainMenuNewRandomMapPanel panel_;
-
-	// Buttons
 	UI::Box button_box_;
 	UI::Button ok_button_, cancel_button_;
+	MainMenuNewRandomMapPanel panel_;
 	void clicked_ok();
 	DISALLOW_COPY_AND_ASSIGN(MainMenuNewRandomMap);
 };

@@ -52,8 +52,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
      parent_(parent),
      map_view_(this, game().map(), 0, 0, 200, 166),
      last_visit_(game().get_gametime()),
-     single_window_(init_single_window),
-     cur_index_(0) {
+     single_window_(init_single_window) {
 	UI::Button* followbtn =
 	   new UI::Button(this, "follow", 0, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
 	                  g_image_cache->get("images/wui/menus/watch_follow.png"), _("Follow"));

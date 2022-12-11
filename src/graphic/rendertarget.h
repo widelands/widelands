@@ -110,12 +110,12 @@ public:
 	// The `opacity` parameter is ignored unless `player_color` is nullptr.
 	void blit_animation(const Vector2f& dst,
 	                    const Widelands::Coords& coords,
-	                    const float scale,
+	                    float scale,
 	                    uint32_t animation_id,
 	                    const Time& time,
 	                    const RGBColor* player_color = nullptr,
 	                    float opacity = 1.0f,
-	                    const int percent_from_bottom = 100);
+	                    int percent_from_bottom = 100);
 
 	void reset();
 

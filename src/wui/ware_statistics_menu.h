@@ -49,10 +49,10 @@ protected:
 
 private:
 	InteractivePlayer& iplayer_;
-	UI::Box* main_box_;
-	UI::TabPanel* tab_panel_;
-	StatisticWaresDisplay* display_;
-	WuiPlotAreaSlider* slider_;
+	UI::Box* main_box_{nullptr};
+	UI::TabPanel* tab_panel_{nullptr};
+	StatisticWaresDisplay* display_{nullptr};
+	WuiPlotAreaSlider* slider_{nullptr};
 
 	WuiPlotArea* plot_production_;
 	WuiPlotArea* plot_consumption_;

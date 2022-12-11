@@ -42,8 +42,7 @@ public:
 	 * Destructor.
 	 * Does nothing currently.
 	 */
-	virtual ~InputQueue() {
-	}
+	virtual ~InputQueue() = default;
 
 	/**
 	 * The declaration of a callback function which can be registered to get notified
@@ -270,15 +269,15 @@ protected:
 	const WareWorker type_;
 
 	/// Time in ms between consumption at full speed.
-	Duration consume_interval_;
+	Duration consume_interval_{0U};
 
 	/// The currently pending request.
 	std::unique_ptr<Request> request_;
 
 	/// The function to call on fulfilled request.
-	CallbackFn* callback_fn_;
+	CallbackFn* callback_fn_{nullptr};
 	/// Unspecified data to pass to function.
-	void* callback_data_;
+	void* callback_data_{nullptr};
 };
 }  // namespace Widelands
 

@@ -22,7 +22,7 @@
 
 #include "base/log.h"
 
-BufferedConnection::Peeker::Peeker(BufferedConnection* conn) : conn_(conn), peek_pointer_(0) {
+BufferedConnection::Peeker::Peeker(BufferedConnection* conn) : conn_(conn) {
 	assert(conn_);
 }
 
@@ -364,7 +364,7 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 	}
 }
 
-BufferedConnection::BufferedConnection() : socket_(io_service_), currently_sending_(false) {
+BufferedConnection::BufferedConnection() : socket_(io_service_) {
 }
 
 void BufferedConnection::notify_connected() {

@@ -23,7 +23,7 @@
 
 /// Sets the starting position of players.
 struct EditorSetOriginTool : public EditorTool {
-	EditorSetOriginTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	explicit EditorSetOriginTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

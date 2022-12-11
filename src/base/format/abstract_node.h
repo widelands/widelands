@@ -44,8 +44,7 @@ constexpr unsigned kDefaultFloatPrecision = 6;
 constexpr double kDynamicPrecisionExtra = 0.005;
 
 struct AbstractNode {
-	virtual ~AbstractNode() {
-	}
+	virtual ~AbstractNode() = default;
 
 	union Argument {
 		signed char char_val;
