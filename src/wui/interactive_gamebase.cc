@@ -233,7 +233,7 @@ void InteractiveGameBase::handle_restart(const bool force) {
 		GameExitConfirmBox* gecb =
 		   new GameExitConfirmBox(*this, *this, r ? _("Restart Replay") : _("Restart Scenario"),
 		                          r ? _("Are you sure you wish to restart this replay?") :
-                                         _("Are you sure you wish to restart this scenario?"));
+                                    _("Are you sure you wish to restart this scenario?"));
 		gecb->ok.connect([this, next] { game().set_next_game_to_load(next); });
 	}
 }
@@ -514,7 +514,7 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		if (matches_shortcut(KeyboardShortcut::kCommonLoad, code)) {
 			new GameMainMenuSaveGame(*this, menu_windows_.loadgame,
 			                         game().is_replay() ? GameMainMenuSaveGame::Type::kLoadReplay :
-                                            GameMainMenuSaveGame::Type::kLoadSavegame);
+                                                       GameMainMenuSaveGame::Type::kLoadSavegame);
 			return true;
 		}
 		if (can_restart_ && matches_shortcut(KeyboardShortcut::kInGameRestart, code)) {

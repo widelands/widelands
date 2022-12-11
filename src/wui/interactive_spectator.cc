@@ -43,12 +43,12 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	constexpr int kSpacing = 15;
 	add_main_menu();
 
-	add_toolbar_button("wui/menus/statistics_general", "general_stats",
-	                   as_tooltip_text_with_hotkey(
-	                      _("Statistics"),
-	                      shortcut_string_for(KeyboardShortcut::kInGameStatsGeneral, false),
-	                      UI::PanelStyle::kWui),
-	                   &menu_windows_.stats_general, true);
+	add_toolbar_button(
+	   "wui/menus/statistics_general", "general_stats",
+	   as_tooltip_text_with_hotkey(_("Statistics"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameStatsGeneral, false),
+	                               UI::PanelStyle::kWui),
+	   &menu_windows_.stats_general, true);
 	menu_windows_.stats_general.open_window = [this] {
 		new GeneralStatisticsMenu(*this, menu_windows_.stats_general);
 	};

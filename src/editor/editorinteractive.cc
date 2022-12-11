@@ -238,7 +238,7 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor,
 	              g_image_cache->get("images/wui/menus/exit.png"), false, "",
-                      shortcut_string_for(KeyboardShortcut::kCommonExit, false));
+	              shortcut_string_for(KeyboardShortcut::kCommonExit, false));
 
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
 	toolbar()->add(&mainmenu_);
@@ -601,11 +601,11 @@ void EditorInteractive::exit(const bool force) {
 	if (force) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
-		UI::WLMessageBox mmb(this, UI::WindowStyle::kWui,
-		                     need_save_ ? _("Unsaved Map") : _("Exit Editor Confirmation"),
-		                     need_save_ ? _("The map has not been saved, do you really want to quit?") :
-		                        _("Are you sure you wish to exit the editor?"),
-		                     UI::WLMessageBox::MBoxType::kOkCancel);
+		UI::WLMessageBox mmb(
+		   this, UI::WindowStyle::kWui, need_save_ ? _("Unsaved Map") : _("Exit Editor Confirmation"),
+		   need_save_ ? _("The map has not been saved, do you really want to quit?") :
+                      _("Are you sure you wish to exit the editor?"),
+		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 			return;
 		}
