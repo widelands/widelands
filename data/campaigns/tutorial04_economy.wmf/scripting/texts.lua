@@ -489,7 +489,16 @@ economy_settings2 = {
          _([[If you build two farms, only one of them will start working immediately. The second farm will have to wait for its worker, who will lack a scythe. If you had set the target quantity to 2 before, two scythes would have been available and both farms would have been able to start working right away.]]), plr.color)
    )
 }
+
 economy_settings3 = {
+   position = "topright",
+   title = _("Economy options"),
+   body = (
+      p(_([[Stockpiling wares is a double-edged sword. On the one hand, wares in stock are useful to buffer temporary fluctuations in your economy, which tend to occur all the time. On the other hand, any ware that is sitting around in a warehouse instead of being processed into something else is wasted. Finding the balance between wasteful stockpiling and just-in-time production in your supply chains is one of most profound challenges of perfecting your economy. When in doubt, lean towards having some extra reserves.]]))
+   )
+}
+
+economy_settings4 = {
    position = "topright",
    title = _("Economy options"),
    body = (
@@ -509,7 +518,7 @@ obj_produce_marble_columns = {
       li_arrow(_([[Sometimes, you will need many wares at the same time quickly – faster than they can be produced. In this case, it is good to have enough on reserve.]]))
    )
 }
-economy_settings4 = {
+economy_settings5 = {
    position = "topright",
    title = _("Economy options"),
    body = (

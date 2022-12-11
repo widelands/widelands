@@ -146,8 +146,11 @@ function plan_the_future()
    while not mv.windows.economy_options do sleep(200) end
    set_objective_done(o, 0)
    campaign_message_box(economy_settings2)
+   sleep(200)
    campaign_message_box(economy_settings3)
-   o = campaign_message_with_objective(economy_settings4, obj_produce_marble_columns)
+   sleep(200)
+   campaign_message_box(economy_settings4)
+   o = campaign_message_with_objective(economy_settings5, obj_produce_marble_columns)
 
    while sf.brn.immovable.ware_economy:target_quantity("marble_column") ~= 20 do
       sleep(200)

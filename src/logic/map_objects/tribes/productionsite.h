@@ -395,13 +395,13 @@ public:
 	void set_economy(Economy*, WareWorker) override;
 
 	using InputQueues = std::vector<InputQueue*>;
-	const InputQueues& inputqueues() const {
+	[[nodiscard]] const InputQueues& inputqueues() const {
 		return input_queues_;
 	}
 
-	const std::vector<Worker*>& workers() const;
+	[[nodiscard]] const std::vector<Worker*>& workers() const;
 
-	bool can_start_working() const;
+	[[nodiscard]] bool can_start_working() const;
 
 	/// sends a message to the player e.g. if the building's resource can't be found
 	void notify_player(Game& game,
@@ -411,7 +411,7 @@ public:
 
 	void set_default_anim(const std::string&);
 
-	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
+	[[nodiscard]] std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 	// This function forces the productionsite to interrupt whatever it is doing ASAP,
 	// and start the specified program immediately afterwards. If that program expects
@@ -419,9 +419,9 @@ public:
 	void set_next_program_override(Game&, const std::string&, MapObject* extra_data);
 	// Returns `true` if `set_next_program_override()` has been called recently
 	// and the force-started program has not terminated yet.
-	bool has_forced_state() const;
+	[[nodiscard]] bool has_forced_state() const;
 
-	bool infinite_production() const {
+	[[nodiscard]] bool infinite_production() const {
 		return infinite_production_;
 	}
 	void set_infinite_production(bool);

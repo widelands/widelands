@@ -277,8 +277,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			stopbtn->sigclicked.connect([this]() { act_start_stop(); });
 			capsbuttons->add(stopbtn);
 
-			if (productionsite->descr().is_infinite_production_useful() ||
-			    productionsite->infinite_production()) {
+			if (productionsite->descr().is_infinite_production_useful()) {
 				UI::Button* infbtn = new UI::Button(
 				   capsbuttons,
 				   productionsite->infinite_production() ? "end_produce_infinite" : "produce_infinite",

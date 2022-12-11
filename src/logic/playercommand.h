@@ -236,8 +236,7 @@ private:
 };
 
 struct CmdToggleInfiniteProduction : public PlayerCommand {
-	CmdToggleInfiniteProduction() : PlayerCommand(), serial_(0) {
-	}  // For savegame loading
+	CmdToggleInfiniteProduction() = default;  // For savegame loading
 	CmdToggleInfiniteProduction(const Time& t, const PlayerNumber p, Building& b)
 	   : PlayerCommand(t, p), serial_(b.serial()) {
 	}
@@ -245,7 +244,7 @@ struct CmdToggleInfiniteProduction : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kToggleInfiniteProduction;
 	}
 
@@ -255,7 +254,7 @@ struct CmdToggleInfiniteProduction : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Serial serial_;
+	Serial serial_{0U};
 };
 
 struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {

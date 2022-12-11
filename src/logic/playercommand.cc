@@ -635,7 +635,7 @@ void CmdToggleInfiniteProduction::read(FileRead& fr, EditorGameBase& egbase, Map
 			                            kCurrentPacketVersionCmdToggleInfiniteProduction);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("start/stop building: %s", e.what());
+		throw GameDataError("toggle infinite production: %s", e.what());
 	}
 }
 void CmdToggleInfiniteProduction::write(FileWrite& fw,
