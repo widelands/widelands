@@ -96,18 +96,18 @@ struct Ship : Bob {
 	~Ship() override = default;
 
 	// Returns the fleet the ship is a part of.
-	ShipFleet* get_fleet() const;
+	[[nodiscard]] ShipFleet* get_fleet() const;
 
-	PortDock* get_destination(EditorGameBase& e) const {
+	[[nodiscard]] PortDock* get_destination(EditorGameBase& e) const {
 		return destination_.get(e);
 	}
 	void set_destination(EditorGameBase&, PortDock*);
 
 	// Returns the last visited portdock of this ship or nullptr if there is none or
 	// the last visited was removed.
-	PortDock* get_lastdock(EditorGameBase& egbase) const;
+	[[nodiscard]] PortDock* get_lastdock(EditorGameBase& egbase) const;
 
-	Economy* get_economy(WareWorker type) const {
+	[[nodiscard]] Economy* get_economy(WareWorker type) const {
 		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
 	void set_economy(const Game&, Economy* e, WareWorker);
@@ -131,14 +131,14 @@ struct Ship : Bob {
 			kDefenderAttacking = 5,
 		};
 
-		Battle(MapObject* o, bool f) : opponent(o), is_first(f), phase(Phase::kNotYetStarted), pending_damage(0) {
+		Battle(MapObject* o, bool f) : opponent(o), is_first(f) {
 		}
 
 		OPtr<MapObject> opponent;
-		bool is_first;
-		Phase phase;
-		uint32_t pending_damage;
 		Time time_of_last_action;
+		uint32_t pending_damage{0U};
+		Phase phase{Phase::kNotYetStarted};
+		bool is_first;
 	};
 	void start_battle(Game&, Battle);
 
@@ -146,10 +146,10 @@ struct Ship : Bob {
 
 	void log_general_info(const EditorGameBase&) const override;
 
-	uint32_t get_nritems() const {
+	[[nodiscard]] uint32_t get_nritems() const {
 		return items_.size();
 	}
-	const ShippingItem& get_item(uint32_t idx) const {
+	[[nodiscard]] const ShippingItem& get_item(uint32_t idx) const {
 		return items_[idx];
 	}
 
@@ -235,30 +235,30 @@ struct Ship : Bob {
 		capacity_ = c;
 	}
 
-	MapObject* get_attack_target(const EditorGameBase& e) const {
+	[[nodiscard]] MapObject* get_attack_target(const EditorGameBase& e) const {
 		return expedition_ ? expedition_->attack_target.get(e) : nullptr;
 	}
-	bool has_battle() const {
+	[[nodiscard]] bool has_battle() const {
 		return !battles_.empty();
 	}
 
-	bool can_be_attacked() const;
-	bool can_attack() const;
-	bool is_attackable_enemy_warship(const Bob&) const;
-	uint32_t get_hitpoints() const {
+	[[nodiscard]] bool can_be_attacked() const;
+	[[nodiscard]] bool can_attack() const;
+	[[nodiscard]] bool is_attackable_enemy_warship(const Bob&) const;
+	[[nodiscard]] uint32_t get_hitpoints() const {
 		return hitpoints_;
 	}
 
 	void warship_command(Game&, WarshipCommand);
 
-	ShipType get_ship_type() const {
+	[[nodiscard]] ShipType get_ship_type() const {
 		return ship_type_;
 	}
-	ShipType get_pending_refit() const {
+	[[nodiscard]] ShipType get_pending_refit() const {
 		return pending_refit_;
 	}
-	bool can_refit(ShipType) const;
-	inline bool is_refitting() const {
+	[[nodiscard]] bool can_refit(ShipType) const;
+	[[nodiscard]] inline bool is_refitting() const {
 		return get_pending_refit() != get_ship_type();
 	}
 	void refit(EditorGameBase&, ShipType);
@@ -309,7 +309,7 @@ private:
 	ShipType pending_refit_{ShipType::kTransport};
 	std::string shipname_;
 
-	PortDock* destination_{nullptr};
+	OPtr<PortDock> destination_{nullptr};
 
 	struct Expedition {
 		~Expedition();

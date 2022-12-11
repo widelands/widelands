@@ -595,12 +595,12 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 	warship_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show warships"),
-	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterWarship),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterWarship, true),
 	   UI::PanelStyle::kWui));
 	refitting_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show ships being refitted"),
-	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterRefitting),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterRefitting, true),
 	   UI::PanelStyle::kWui));
 }
 
