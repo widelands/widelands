@@ -32,8 +32,7 @@ public:
 	FerryFleetDescr(char const* const init_name, char const* const init_descname)
 	   : MapObjectDescr(MapObjectType::FERRY_FLEET, init_name, init_descname) {
 	}
-	~FerryFleetDescr() override {
-	}
+	~FerryFleetDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(FerryFleetDescr);
@@ -88,7 +87,7 @@ private:
 	std::vector<Ferry*> ferries_;
 	std::multimap<Time, Waterway*> pending_ferry_requests_;
 
-	bool act_pending_;
+	bool act_pending_{false};
 
 	// saving and loading
 protected:

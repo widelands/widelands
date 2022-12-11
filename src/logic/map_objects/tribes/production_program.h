@@ -48,13 +48,12 @@ struct ProductionProgram : public MapObjectProgram {
 	/// Can be executed on a ProductionSite.
 	struct Action {
 		struct TrainingParameters {
-			TrainingParameters() : attribute(TrainingAttribute::kTotal), level(INVALID_INDEX) {
-			}
+			TrainingParameters() = default;
 			static TrainingParameters parse(const std::vector<std::string>& arguments,
 			                                const std::string& action_name);
 
-			TrainingAttribute attribute;
-			unsigned level;
+			TrainingAttribute attribute{TrainingAttribute::kTotal};
+			unsigned level{INVALID_INDEX};
 		};
 
 		Action() = default;
@@ -315,7 +314,7 @@ struct ProductionProgram : public MapObjectProgram {
 
 	private:
 		std::string program_;
-		ProgramResult on_failure_;
+		ProgramResult on_failure_{ProgramResult::kFailed};
 	};
 
 	/// Does nothing.
@@ -465,12 +464,12 @@ struct ProductionProgram : public MapObjectProgram {
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		DescriptionIndex resource_;
-		uint8_t workarea_;            // width/radius of mine
-		unsigned max_resources_;      // Can work up to this percent (of total mountain resources)
-		unsigned depleted_chance_;    // odds of finding resources from empty mine
-		unsigned experience_chance_;  // probability of training in _empty_ mines
-		bool notify_on_failure_;      // Send a message if no resources could be found.
+		DescriptionIndex resource_{INVALID_INDEX};
+		uint8_t workarea_;              // width/radius of mine
+		unsigned max_resources_;        // Can work up to this percent (of total mountain resources)
+		unsigned depleted_chance_;      // odds of finding resources from empty mine
+		unsigned experience_chance_;    // probability of training in _empty_ mines
+		bool notify_on_failure_{true};  // Send a message if no resources could be found.
 	};
 
 	struct ActCheckSoldier : public Action {
@@ -560,7 +559,7 @@ struct ProductionProgram : public MapObjectProgram {
 	[[nodiscard]] const std::string& descname() const;
 
 	[[nodiscard]] size_t size() const;
-	const ProductionProgram::Action& operator[](size_t const idx) const;
+	const ProductionProgram::Action& operator[](size_t idx) const;
 
 	[[nodiscard]] const ProductionProgram::Groups& consumed_wares_workers() const;
 	[[nodiscard]] const Buildcost& produced_wares() const;

@@ -19,8 +19,11 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "editor/ui_menus/map_size_box.h"
+#include "logic/addons.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
@@ -42,8 +45,13 @@ template <typename T, typename ID> struct IDButton;
 
 class MainMenuNewRandomMapPanel : public UI::Box {
 public:
-	explicit MainMenuNewRandomMapPanel(
-	   UI::Panel& parent, UI::PanelStyle, int32_t inner_w, uint32_t map_w, uint32_t map_h);
+	explicit MainMenuNewRandomMapPanel(UI::Panel& parent,
+	                                   UI::PanelStyle,
+	                                   int32_t inner_w,
+	                                   uint32_t map_w,
+	                                   uint32_t map_h,
+	                                   UI::Button& ok_button,
+	                                   UI::Button& cancel_button);
 
 	bool do_generate_map(Widelands::EditorGameBase&,
 	                     EditorInteractive*,
@@ -59,15 +67,12 @@ public:
 		kPlayers
 	};
 
-	void set_buttons(UI::Button& o, UI::Button& c) {
-		ok_button_ = &o;
-		cancel_button_ = &c;
-	}
-
 private:
 	void button_clicked(ButtonId);
 	void id_edit_box_changed();
 	void nr_edit_box_changed();
+
+	size_t compute_max_players() const;
 
 	// Ensures that the sum of our landmass is >= 0% and <= 100%, and changes
 	// values as necessary.
@@ -84,10 +89,12 @@ private:
 	// UI elements
 	int32_t label_height_;
 
+	UI::Dropdown<std::shared_ptr<const AddOns::AddOnInfo>> generator_;
+
 	// Size
 	MapSizeBox map_size_box_;
 
-	uint8_t max_players_{2U};
+	uint8_t max_players_;
 	UI::SpinBox players_;
 
 	// World + Resources
@@ -112,17 +119,19 @@ private:
 	UI::Checkbox island_mode_;
 
 	// Geeky stuff
-	UI::Box map_number_and_id_hbox_, map_number_and_id_vbox_1_, map_number_and_id_vbox_2_;
+	UI::Box map_number_and_id_hbox_, map_number_and_id_vbox_1_, map_number_and_id_vbox_2_,
+	   random_number_hbox_;
 
 	uint32_t map_number_;
 	UI::Textarea map_number_label_;
 	UI::EditBox map_number_edit_;
+	UI::Button map_number_randomize_;
 
 	UI::Textarea map_id_label_;
 	UI::EditBox map_id_edit_;
 
-	UI::Button* ok_button_{nullptr};
-	UI::Button* cancel_button_{nullptr};
+	UI::Button& ok_button_;
+	UI::Button& cancel_button_;
 
 	DISALLOW_COPY_AND_ASSIGN(MainMenuNewRandomMapPanel);
 };
@@ -138,11 +147,9 @@ public:
 
 private:
 	UI::Box box_;
-	MainMenuNewRandomMapPanel panel_;
-
-	// Buttons
 	UI::Box button_box_;
 	UI::Button ok_button_, cancel_button_;
+	MainMenuNewRandomMapPanel panel_;
 	void clicked_ok();
 	DISALLOW_COPY_AND_ASSIGN(MainMenuNewRandomMap);
 };

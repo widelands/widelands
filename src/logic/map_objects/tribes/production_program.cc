@@ -920,8 +920,7 @@ Calls a program of the productionsite's main worker. Example:
 ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& arguments,
                                                 const std::string& production_program_name,
                                                 ProductionSiteDescr* descr,
-                                                const Descriptions& descriptions)
-   : on_failure_(ProgramResult::kFailed) {
+                                                const Descriptions& descriptions) {
 	const size_t nr_args = arguments.size();
 	if (nr_args != 1 && nr_args != 4) {
 		throw GameDataError(
@@ -1482,8 +1481,7 @@ mine
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     Descriptions& descriptions,
                                     const std::string& production_program_name,
-                                    ProductionSiteDescr* descr)
-   : resource_(INVALID_INDEX), notify_on_failure_(true) {
+                                    ProductionSiteDescr* descr) {
 	if (arguments.size() > 6 || arguments.size() < 4) {
 		throw GameDataError("Usage: mine=<resource name> radius:<number> yield:<percent> "
 		                    "when_empty:<percent> [experience:<percent>] [no_notify]");

@@ -146,16 +146,16 @@ private:
 	ConstructionSite* target_constructionsite_;
 
 	Economy* economy_;
-	DescriptionIndex index_;  //  the index of the ware descr
-	Quantity count_;          //  how many do we need in total
-	bool exact_match_;        // Whether a worker supply has to match exactly
-	                          // or if a can_act_as() comparison is good enough
+	DescriptionIndex index_;   //  the index of the ware descr
+	Quantity count_{1};        //  how many do we need in total
+	bool exact_match_{false};  // Whether a worker supply has to match exactly
+	                           // or if a can_act_as() comparison is good enough
 
 	CallbackFn callbackfn_;  //  called on request success
 
 	//  when do we need the first ware (can be in the past)
 	Time required_time_;
-	Duration required_interval_;  //  time between wares
+	Duration required_interval_{0U};  //  time between wares
 	Time last_request_time_;
 
 	TransferList transfers_;  //  maximum size is count_

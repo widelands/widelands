@@ -40,10 +40,11 @@ enum class AddOnCategory {
 	kTribes,
 	kScript,
 	kMaps,
+	kMapGenerator,
 	kCampaign,
 	kWinCondition,
 	kStartingCondition,
-	kTheme
+	kTheme,
 };
 
 // Note: Below you will see some lines like `std::function<std::string()> descname`.

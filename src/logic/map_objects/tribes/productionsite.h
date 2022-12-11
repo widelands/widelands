@@ -79,10 +79,10 @@ public:
 		return working_positions_;
 	}
 	[[nodiscard]] bool is_output_ware_type(const DescriptionIndex& i) const {
-		return output_ware_types_.count(i);
+		return output_ware_types_.count(i) != 0u;
 	}
 	[[nodiscard]] bool is_output_worker_type(const DescriptionIndex& i) const {
-		return output_worker_types_.count(i);
+		return output_worker_types_.count(i) != 0u;
 	}
 	[[nodiscard]] const BillOfMaterials& input_wares() const {
 		return input_wares_;
@@ -343,19 +343,19 @@ public:
 	void set_stopped(bool);
 
 	struct WorkingPosition {
-		WorkingPosition(Request* const wr = nullptr, Worker* const w = nullptr)
+		explicit WorkingPosition(Request* const wr = nullptr, Worker* const w = nullptr)
 		   : worker_request(wr), worker(w) {
 		}
 		Request* worker_request;
 		OPtr<Worker> worker;
 	};
 
-	const std::vector<WorkingPosition>* working_positions() const {
+	[[nodiscard]] const std::vector<WorkingPosition>* working_positions() const {
 		return &working_positions_;
 	}
 
 	virtual bool has_workers(DescriptionIndex targetSite, Game& game);
-	uint8_t get_statistics_percent() const {
+	[[nodiscard]] uint8_t get_statistics_percent() const {
 		return last_stat_percent_ / 10;
 	}
 
@@ -363,11 +363,11 @@ public:
 	// and sets actual_percent_ to new value
 	void update_actual_statistics(Duration, bool);
 
-	uint8_t get_actual_statistics() {
+	[[nodiscard]] uint8_t get_actual_statistics() const {
 		return actual_percent_ / 10;
 	}
 
-	const std::string& production_result() const {
+	[[nodiscard]] const std::string& production_result() const {
 		return production_result_;
 	}
 
@@ -431,13 +431,12 @@ protected:
 
 	void load_finish(EditorGameBase& egbase) override;
 
-protected:
 	struct State {
-		const ProductionProgram* program;  ///< currently running program
-		size_t ip;                         ///< instruction pointer
-		ProgramResult phase;               ///< micro-step index (instruction dependent)
+		const ProductionProgram* program{nullptr};  ///< currently running program
+		size_t ip{0};                               ///< instruction pointer
+		ProgramResult phase{ProgramResult::kNone};  ///< micro-step index (instruction dependent)
 		enum StateFlags : uint32_t { kStateFlagIgnoreStopped = 1, kStateFlagHasExtraData = 2 };
-		uint32_t flags;  ///< pfXXX flags
+		uint32_t flags{0};  ///< pfXXX flags
 
 		/**
 		 * Instruction-dependent additional data.
@@ -447,8 +446,7 @@ protected:
 		Coords coord;
 		/*@}*/
 
-		State()
-		   : program(nullptr), ip(0), phase(ProgramResult::kNone), flags(0), coord(Coords::null()) {
+		State() : coord(Coords::null()) {
 		}
 	};
 
@@ -462,12 +460,12 @@ protected:
 	 */
 	virtual void find_and_start_next_program(Game&);
 
-	State& top_state() {
-		assert(stack_.size());
+	[[nodiscard]] State& top_state() {
+		assert(!stack_.empty());
 		return *stack_.rbegin();
 	}
-	State* get_state() {
-		return stack_.size() ? &*stack_.rbegin() : nullptr;
+	[[nodiscard]] State* get_state() {
+		return !stack_.empty() ? &*stack_.rbegin() : nullptr;
 	}
 	void program_act(Game&);
 
@@ -493,10 +491,10 @@ protected:
 		post_timer_ = t;
 	}
 
-protected:  // TrainingSite must have access to this stuff
+	// TrainingSite must have access to this stuff
 	std::vector<WorkingPosition> working_positions_;
 
-	int32_t fetchfromflag_;  ///< Number of wares to fetch from flag
+	int32_t fetchfromflag_{0};  ///< Number of wares to fetch from flag
 
 	/// If a program has ended with the result Failed or Skipped, that program may not
 	/// start again until a certain time has passed. This is a map from program
@@ -507,22 +505,22 @@ protected:  // TrainingSite must have access to this stuff
 	FailedSkippedPrograms failed_skipped_programs_;
 
 	using Stack = std::vector<State>;
-	Stack stack_;          ///<  program stack
-	bool program_timer_;   ///< execute next instruction based on pointer
-	Time program_time_;    ///< timer time
-	Duration post_timer_;  ///< Time to schedule after ends
+	Stack stack_;                ///<  program stack
+	bool program_timer_{false};  ///< execute next instruction based on pointer
+	Time program_time_{0U};      ///< timer time
+	Duration post_timer_{50U};   ///< Time to schedule after ends
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
 	InputQueues input_queues_;  ///< input queues for all inputs
-	uint16_t last_stat_percent_;
+	uint16_t last_stat_percent_{0U};
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
 	// 0-100)
-	uint32_t actual_percent_;  // basically this is percent * 10 to avoid floats
-	Time last_program_end_time;
-	bool is_stopped_;
-	bool infinite_production_;
-	std::string default_anim_;  // normally "idle", "empty", if empty mine.
+	uint32_t actual_percent_{0U};  // basically this is percent * 10 to avoid floats
+	Time last_program_end_time{0U};
+	bool is_stopped_{false};
+	bool infinite_production_{false};
+	std::string default_anim_{"idle"};  // normally "idle", "empty", if empty mine.
 
 private:
 	enum class Trend { kUnchanged, kRising, kFalling };
@@ -530,7 +528,7 @@ private:
 	std::string statistics_string_on_changed_statistics_;
 	std::string production_result_;  // hover tooltip text
 
-	int32_t main_worker_;
+	int32_t main_worker_{-1};
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
@@ -544,8 +542,7 @@ private:
 struct Input {
 	Input(const DescriptionIndex& Ware, uint8_t const Max) : ware_(Ware), max_(Max) {
 	}
-	~Input() {
-	}
+	~Input() = default;
 
 	[[nodiscard]] DescriptionIndex ware() const {
 		return ware_;
