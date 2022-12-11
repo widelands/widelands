@@ -954,7 +954,8 @@ void MainMenu::action(const MenuTarget t) {
 void MainMenu::exit(const bool force) {
 	if (!force) {
 		UI::WLMessageBox confirmbox(this, UI::WindowStyle::kFsMenu, _("Exit Confirmation"),
-		   _("Are you sure you wish to exit Widelands?"), UI::WLMessageBox::MBoxType::kOkCancel);
+		                            _("Are you sure you wish to exit Widelands?"),
+		                            UI::WLMessageBox::MBoxType::kOkCancel);
 		if (confirmbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 			return;
 		}
