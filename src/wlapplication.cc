@@ -349,9 +349,7 @@ WLApplication* WLApplication::get(int const argc, char const** argv) {
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(int const argc, char const* const* const argv)
-   : mouse_position_(Vector2i::zero()),
-
-     should_die_(false),
+   :
 #ifdef _WIN32
      homedir_(FileSystem::get_homedir() + "\\.widelands")
 #elif defined USE_XDG

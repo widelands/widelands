@@ -252,7 +252,7 @@ private:
 	bool faking_middle_mouse_button_{false};
 
 	/// The current position of the mouse pointer
-	Vector2i mouse_position_;
+	Vector2i mouse_position_{Vector2i::zero()};
 
 	/// If true, the mouse cursor will \e not move with a mousemotion event:
 	/// instead, the map will be scrolled
@@ -262,7 +262,7 @@ private:
 	bool handle_key_enabled_{true};
 
 	/// true if an external entity wants us to quit
-	std::atomic_bool should_die_;
+	std::atomic_bool should_die_{false};
 
 	std::string homedir_;
 #ifdef USE_XDG
