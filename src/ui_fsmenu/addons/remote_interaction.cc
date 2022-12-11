@@ -31,8 +31,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/addons/manager.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 static const std::string kVotingTabName("votes");
 
@@ -51,7 +50,7 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
      ctrl_(ctrl),
      info_(info),
      index_(index),
-     layouting_(false),
+
      text_(this,
            0,
            0,
@@ -467,10 +466,7 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
              kRowButtonSize,
              0,
              UI::ButtonStyle::kFsMenuSecondary,
-             _("Cancel")),
-     list_(nullptr),
-     text_(nullptr),
-     txsettings_(nullptr) {
+             _("Cancel")) {
 	switch (a) {
 	case AddOns::NetAddons::AdminAction::kDelete: {
 		text_ = new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu);
@@ -605,9 +601,8 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
                 info->descname()),
      parent_(parent),
      info_(info),
-     current_screenshot_(0),
+
      nr_screenshots_(info->screenshots.size()),
-     current_vote_(-1),
 
      main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      tabs_(&main_box_, UI::TabPanelStyle::kFsMenu),
@@ -989,5 +984,4 @@ void RemoteInteractionWindow::login_changed() {
 	}
 }
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

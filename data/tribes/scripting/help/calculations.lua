@@ -35,6 +35,14 @@ function programs_wares_count(tribe, building, ware_description)
             end
          end
       end
+   elseif (building.type_name == "trainingsite") then
+      -- Find out which programs in the building produce this ware
+      for j, program_name in ipairs(building.production_programs) do
+         local consumes = building:consumed_wares_workers(program_name)
+         if (#consumes > 0) then
+            table.insert(producing_programs, program_name)
+         end
+      end
    else
       -- Find out which programs in the building produce this ware
       for j, program_name in ipairs(building.production_programs) do
@@ -72,6 +80,9 @@ function programs_wares_count(tribe, building, ware_description)
    for j, prog1_name in ipairs(producing_programs) do
       local duplicate = false
       for i, prog2_name in ipairs(deduplicated_programs) do
+         if (building.type_name == "trainingsite") then
+            break
+         end
          if produced_wares_strings[prog1_name] == produced_wares_strings[prog2_name] and
                help_consumed_wares_workers(tribe, building, prog1_name) ==
                help_consumed_wares_workers(tribe, building, prog2_name) then

@@ -55,21 +55,20 @@ struct NoteShip {
 class ShipDescr : public BobDescr {
 public:
 	ShipDescr(const std::string& init_descname, const LuaTable& t);
-	~ShipDescr() override {
-	}
+	~ShipDescr() override = default;
 
-	Bob& create_object() const override;
+	[[nodiscard]] Bob& create_object() const override;
 
-	uint32_t movecaps() const override;
-	const DirAnimations& get_sail_anims() const {
+	[[nodiscard]] uint32_t movecaps() const override;
+	[[nodiscard]] const DirAnimations& get_sail_anims() const {
 		return sail_anims_;
 	}
 
-	Quantity get_default_capacity() const {
+	[[nodiscard]] Quantity get_default_capacity() const {
 		return default_capacity_;
 	}
 
-	const std::vector<std::string>& get_ship_names() const {
+	[[nodiscard]] const std::vector<std::string>& get_ship_names() const {
 		return ship_names_;
 	}
 
@@ -158,57 +157,58 @@ struct Ship : Bob {
 	bool withdraw_item(Game&, PortDock&);
 
 	/// \returns the current state the ship is in
-	ShipStates get_ship_state() const {
+	[[nodiscard]] ShipStates get_ship_state() const {
 		return ship_state_;
 	}
 
 	/// \returns the current name of ship
-	const std::string& get_shipname() const {
+	[[nodiscard]] const std::string& get_shipname() const {
 		return shipname_;
 	}
 
 	/// \returns whether the ship is currently on an expedition
-	bool state_is_expedition() const {
+	[[nodiscard]] bool state_is_expedition() const {
 		return (ship_state_ == ShipStates::kExpeditionScouting ||
 		        ship_state_ == ShipStates::kExpeditionWaiting ||
 		        ship_state_ == ShipStates::kExpeditionPortspaceFound ||
 		        ship_state_ == ShipStates::kExpeditionColonizing);
 	}
 	/// \returns whether the ship is in transport mode
-	bool state_is_transport() const {
+	[[nodiscard]] bool state_is_transport() const {
 		return (ship_state_ == ShipStates::kTransport);
 	}
 	/// \returns whether a sink request for the ship is currently valid
-	bool state_is_sinkable() const {
+	[[nodiscard]] bool state_is_sinkable() const {
 		return (ship_state_ != ShipStates::kSinkRequest &&
 		        ship_state_ != ShipStates::kSinkAnimation &&
 		        ship_state_ != ShipStates::kExpeditionColonizing);
 	}
 
 	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimmable
-	bool exp_dir_swimmable(Direction dir) const {
-		if (!expedition_)
-			return false;
-		return expedition_->swimmable[dir - 1];
+	[[nodiscard]] bool exp_dir_swimmable(Direction dir) const {
+		return expedition_ != nullptr && expedition_->swimmable[dir - 1];
 	}
 
 	// whether the ship's expedition is in state "island-exploration" (circular movement)
-	bool is_exploring_island() const {
+	[[nodiscard]] bool is_exploring_island() const {
 		return expedition_->island_exploration;
 	}
 
 	/// \returns whether the expedition ship is close to the coast
-	bool exp_close_to_coast() const {
-		if (!expedition_)
+	[[nodiscard]] bool exp_close_to_coast() const {
+		if (expedition_ == nullptr) {
 			return false;
-		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir)
-			if (!expedition_->swimmable[dir - 1])
+		}
+		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+			if (!expedition_->swimmable[dir - 1]) {
 				return true;
+			}
+		}
 		return false;
 	}
 
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
-	const std::vector<Coords>& exp_port_spaces() const {
+	[[nodiscard]] const std::vector<Coords>& exp_port_spaces() const {
 		return expedition_->seen_port_buildspaces;
 	}
 
@@ -218,17 +218,17 @@ struct Ship : Bob {
 
 	// Returns integer of direction, or WalkingDir::IDLE if query invalid
 	// Intended for LUA scripting
-	WalkingDir get_scouting_direction() const;
+	[[nodiscard]] WalkingDir get_scouting_direction() const;
 
 	// Returns integer of direction, or IslandExploreDirection::kNotSet
 	// if query invalid
 	// Intended for LUA scripting
-	IslandExploreDirection get_island_explore_direction() const;
+	[[nodiscard]] IslandExploreDirection get_island_explore_direction() const;
 
 	void exp_cancel(Game&);
 	void sink_ship(Game&);
 
-	Quantity get_capacity() const {
+	[[nodiscard]] Quantity get_capacity() const {
 		return capacity_;
 	}
 	void set_capacity(Quantity c) {
@@ -288,6 +288,7 @@ private:
 	void battle_update(Game&);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
+	bool check_port_space_still_available(Game&);
 
 	bool init_fleet(EditorGameBase&);
 	void set_fleet(ShipFleet* fleet);
@@ -298,16 +299,17 @@ private:
 	                  const std::string& description,
 	                  const std::string& picture);
 
-	ShipFleet* fleet_;
-	Economy* ware_economy_;
-	Economy* worker_economy_;
+	ShipFleet* fleet_{nullptr};
+	Economy* ware_economy_{nullptr};
+	Economy* worker_economy_{nullptr};
 	OPtr<PortDock> lastdock_;
 	std::vector<ShippingItem> items_;
-	ShipStates ship_state_;
-	ShipType ship_type_, pending_refit_;
+	ShipStates ship_state_{ShipStates::kTransport};
+	ShipType ship_type_{ShipType::kTransport};
+	ShipType pending_refit_{ShipType::kTransport};
 	std::string shipname_;
 
-	OPtr<PortDock> destination_;
+	PortDock* destination_{nullptr};
 
 	struct Expedition {
 		~Expedition();
@@ -332,19 +334,6 @@ private:
 	// saving and loading
 protected:
 	struct Loader : Bob::Loader {
-		// Initialize everything to make cppcheck happy.
-		Loader()
-		   : lastdock_(0),
-		     ware_economy_serial_(kInvalidSerial),
-		     worker_economy_serial_(kInvalidSerial),
-		     destination_(0),
-		     capacity_(0),
-		     hitpoints_(-1),
-		     ship_state_(ShipStates::kTransport),
-             ship_type_(ShipType::kTransport),
-             pending_refit_(ship_type_),
-             expedition_attack_target_serial_(0) {
-		}
 
 		const Task* get_task(const std::string& name) override;
 
@@ -353,14 +342,15 @@ protected:
 		void load_finish() override;
 
 	private:
-		uint32_t lastdock_;
-		Serial ware_economy_serial_;
-		Serial worker_economy_serial_;
-		uint32_t destination_;
-		uint32_t capacity_;
-		int32_t hitpoints_;
-		ShipStates ship_state_;
-		ShipType ship_type_, pending_refit_;
+		uint32_t lastdock_{0U};
+		Serial ware_economy_serial_{kInvalidSerial};
+		Serial worker_economy_serial_{kInvalidSerial};
+		uint32_t destination_{0U};
+		uint32_t capacity_{0U};
+		int32_t hitpoints_{0};
+		ShipStates ship_state_{ShipStates::kTransport};
+		ShipType ship_type_{ShipType::kTransport};
+		ShipType pending_refit_{ShipType::kTransport};
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<Battle> battles_;

@@ -45,12 +45,11 @@ public:
 	DismantleSiteDescr(const std::string& init_descname,
 	                   const LuaTable& t,
 	                   Descriptions& descriptions);
-	~DismantleSiteDescr() override {
-	}
+	~DismantleSiteDescr() override = default;
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	FxId creation_fx() const;
+	[[nodiscard]] FxId creation_fx() const;
 
 private:
 	const FxId creation_fx_;

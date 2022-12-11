@@ -55,44 +55,44 @@ struct BuildingStatisticsStyleInfo {
 	     alternative_high_color_(init_alt_high_color) {
 	}
 
-	const UI::FontStyleInfo& building_statistics_button_font() const {
-		return *building_statistics_button_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& building_statistics_button_font() const {
+		return *building_statistics_button_font_;
 	}
-	const UI::FontStyleInfo& building_statistics_details_font() const {
-		return *building_statistics_details_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& building_statistics_details_font() const {
+		return *building_statistics_details_font_;
 	}
-	int editbox_margin() const {
+	[[nodiscard]] int editbox_margin() const {
 		return editbox_margin_;
 	}
 
-	const UI::FontStyleInfo& census_font() const {
-		return *census_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& census_font() const {
+		return *census_font_;
 	}
-	const UI::FontStyleInfo& statistics_font() const {
-		return *statistics_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& statistics_font() const {
+		return *statistics_font_;
 	}
-	const RGBColor& construction_color() const {
+	[[nodiscard]] const RGBColor& construction_color() const {
 		return construction_color_;
 	}
-	const RGBColor& neutral_color() const {
+	[[nodiscard]] const RGBColor& neutral_color() const {
 		return neutral_color_;
 	}
-	const RGBColor& low_color() const {
+	[[nodiscard]] const RGBColor& low_color() const {
 		return low_color_;
 	}
-	const RGBColor& medium_color() const {
+	[[nodiscard]] const RGBColor& medium_color() const {
 		return medium_color_;
 	}
-	const RGBColor& high_color() const {
+	[[nodiscard]] const RGBColor& high_color() const {
 		return high_color_;
 	}
-	const RGBColor& alternative_low_color() const {
+	[[nodiscard]] const RGBColor& alternative_low_color() const {
 		return alternative_low_color_;
 	}
-	const RGBColor& alternative_medium_color() const {
+	[[nodiscard]] const RGBColor& alternative_medium_color() const {
 		return alternative_medium_color_;
 	}
-	const RGBColor& alternative_high_color() const {
+	[[nodiscard]] const RGBColor& alternative_high_color() const {
 		return alternative_high_color_;
 	}
 

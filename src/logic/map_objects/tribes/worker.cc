@@ -560,7 +560,7 @@ struct FindNodeSpace {
 	explicit FindNodeSpace(bool land) : landbased_(land) {
 	}
 
-	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
 		if ((coords.field->nodecaps() & MOVECAPS_WALK) == 0) {
 			return false;
 		}
@@ -586,7 +586,7 @@ private:
 
 /** Accepts a node if and only if a ferry can reach it or depart from there. */
 struct FindNodeFerry {
-	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
 		CheckStepFerry csf(egbase);
 		return csf.reachable_dest(egbase.map(), coords);
 	}
@@ -1196,13 +1196,7 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 	return true;
 }
 
-Worker::Worker(const WorkerDescr& worker_descr)
-   : Bob(worker_descr),
-     worker_economy_(nullptr),
-     ware_economy_(nullptr),
-     supply_(nullptr),
-     transfer_(nullptr),
-     current_exp_(0) {
+Worker::Worker(const WorkerDescr& worker_descr) : Bob(worker_descr) {
 }
 
 Worker::~Worker() {
@@ -2652,7 +2646,7 @@ void Worker::start_task_fugitive(Game& game) {
 struct FindFlagWithPlayersWarehouse {
 	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
 	}
-	bool accept(const BaseImmovable& imm) const {
+	[[nodiscard]] bool accept(const BaseImmovable& imm) const {
 		if (upcast(Flag const, flag, &imm)) {
 			if (flag->get_owner() == &owner_) {
 				if (!flag->economy(wwWORKER).warehouses().empty()) {
@@ -3318,9 +3312,6 @@ Load/save support
 */
 
 constexpr uint8_t kCurrentPacketVersion = 3;
-
-Worker::Loader::Loader() : location_(0), carried_ware_(0) {
-}
 
 void Worker::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);

@@ -52,33 +52,33 @@ public:
 
 	enum class OwnerType { kWorld, kTribe };
 
-	MapObjectDescr(const MapObjectType init_type,
+	MapObjectDescr(MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname);
-	MapObjectDescr(const MapObjectType init_type,
+	MapObjectDescr(MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname,
 	               const LuaTable& table);
 	virtual ~MapObjectDescr();
 
-	const std::string& name() const {
+	[[nodiscard]] const std::string& name() const {
 		return name_;
 	}
-	const std::string& descname() const {
+	[[nodiscard]] const std::string& descname() const {
 		return descname_;
 	}
 
 	// Type of the MapObjectDescr.
-	MapObjectType type() const {
+	[[nodiscard]] MapObjectType type() const {
 		return type_;
 	}
 
 	virtual uint32_t get_animation(const std::string& animname, const MapObject* mo) const;
 
-	uint32_t main_animation() const;
-	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
+	[[nodiscard]] uint32_t main_animation() const;
+	[[nodiscard]] std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
 
-	bool is_animation_known(const std::string& name) const;
+	[[nodiscard]] bool is_animation_known(const std::string& name) const;
 
 	/// Preload animation graphics at default scale
 	void load_graphics() const;
@@ -88,12 +88,12 @@ public:
 	const Image* representative_image(const RGBColor* player_color = nullptr) const;
 
 	/// Returns the menu image if the MapObject has one, nullptr otherwise
-	const Image* icon() const;
+	[[nodiscard]] const Image* icon() const;
 	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
-	const std::string& icon_filename() const;
+	[[nodiscard]] const std::string& icon_filename() const;
 
-	bool has_attribute(AttributeIndex) const;
-	const MapObjectDescr::Attributes& attributes() const;
+	[[nodiscard]] bool has_attribute(AttributeIndex) const;
+	[[nodiscard]] const MapObjectDescr::Attributes& attributes() const;
 	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 	/// Sets a tribe-specific ware or immovable helptext for this MapObject
@@ -101,9 +101,10 @@ public:
 	                   std::map<std::string, std::string> localized_helptext);
 	/// Gets the tribe-specific ware or immovable helptext for the given tribe. Fails if it doesn't
 	/// exist.
-	const std::map<std::string, std::string>& get_helptexts(const std::string& tribename) const;
+	[[nodiscard]] const std::map<std::string, std::string>&
+	get_helptexts(const std::string& tribename) const;
 	/// Returns whether a tribe-specific helptext exists for the given tribe
-	bool has_helptext(const std::string& tribename) const;
+	[[nodiscard]] bool has_helptext(const std::string& tribename) const;
 
 protected:
 	// Add attributes to the attribute list
@@ -187,8 +188,7 @@ class MapObject {
 public:
 	struct LogSink {
 		virtual void log(const std::string& str) = 0;
-		virtual ~LogSink() {
-		}
+		virtual ~LogSink() = default;
 	};
 
 	virtual void load_finish(EditorGameBase&) {
@@ -198,8 +198,7 @@ public:
 
 protected:
 	explicit MapObject(MapObjectDescr const* descr);
-	virtual ~MapObject() {
-	}
+	virtual ~MapObject() = default;
 
 public:
 	Serial serial() const {
@@ -270,6 +269,7 @@ public:
 		HeaderPortDock = 10,
 		HeaderShipFleet = 11,
 		HeaderFerryFleet = 12,
+		HeaderPinnedNote = 13,
 	};
 
 	/**
@@ -292,17 +292,15 @@ public:
 	 * all Loader objects should be deleted.
 	 */
 	struct Loader {
-		EditorGameBase* egbase_;
-		MapObjectLoader* mol_;
-		MapObject* object_;
+		EditorGameBase* egbase_{nullptr};
+		MapObjectLoader* mol_{nullptr};
+		MapObject* object_{nullptr};
 
 	protected:
-		Loader() : egbase_(nullptr), mol_(nullptr), object_(nullptr) {
-		}
+		Loader() = default;
 
 	public:
-		virtual ~Loader() {
-		}
+		virtual ~Loader() = default;
 
 		void init(EditorGameBase& e, MapObjectLoader& m, MapObject& object) {
 			egbase_ = &e;
@@ -310,13 +308,13 @@ public:
 			object_ = &object;
 		}
 
-		EditorGameBase& egbase() {
+		[[nodiscard]] EditorGameBase& egbase() const {
 			return *egbase_;
 		}
-		MapObjectLoader& mol() {
+		[[nodiscard]] MapObjectLoader& mol() const {
 			return *mol_;
 		}
-		MapObject* get_object() {
+		[[nodiscard]] MapObject* get_object() const {
 			return object_;
 		}
 		template <typename T> T& get() {
@@ -324,7 +322,7 @@ public:
 		}
 
 	protected:
-		void load(FileRead&);
+		void load(FileRead&) const;
 
 	public:
 		virtual void load_pointers();
@@ -353,15 +351,15 @@ protected:
 	                  const std::string& census,
 	                  const std::string& statictics,
 	                  const Vector2f& field_on_dst,
-	                  const float scale,
+	                  float scale,
 	                  RenderTarget* dst) const;
 
 	void molog(const Time& gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
 
 	const MapObjectDescr* descr_;
-	Serial serial_;
-	LogSink* logsink_;
-	std::atomic<Player*> owner_;
+	Serial serial_{0U};
+	LogSink* logsink_{nullptr};
+	std::atomic<Player*> owner_{nullptr};
 
 	/**
 	 * MapObjects like trees are reserved by a worker that is walking
@@ -369,7 +367,7 @@ protected:
 	 * work on the same tree simultaneously or two hunters try to hunt
 	 * the same animal.
 	 */
-	bool reserved_by_worker_;
+	bool reserved_by_worker_{false};
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(MapObject);
@@ -386,8 +384,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
 struct ObjectManager {
 	using MapObjectMap = std::unordered_map<Serial, MapObject*>;
 
-	ObjectManager() : lastserial_(0), is_cleaning_up_(false) {
-	}
+	ObjectManager() = default;
 	~ObjectManager();
 
 	void cleanup(EditorGameBase&);
@@ -411,10 +408,10 @@ struct ObjectManager {
 	}
 
 private:
-	Serial lastserial_;
+	Serial lastserial_{0U};
 	MapObjectMap objects_;
 
-	bool is_cleaning_up_;
+	bool is_cleaning_up_{false};
 
 	DISALLOW_COPY_AND_ASSIGN(ObjectManager);
 };
@@ -428,26 +425,26 @@ struct ObjectPointer {
 	ObjectPointer() {
 		serial_ = 0;
 	}
-	ObjectPointer(const MapObject* const obj) {
+	ObjectPointer(const MapObject* const obj) {  // NOLINT allow implicit conversion
 		assert(obj == nullptr || obj->serial_ != 0);
-		serial_ = obj ? obj->serial_ : 0;
+		serial_ = obj != nullptr ? obj->serial_ : 0;
 	}
 	// can use standard copy constructor and assignment operator
 
 	ObjectPointer& operator=(const MapObject* const obj) {
 		assert(obj == nullptr || obj->serial_ != 0);
-		serial_ = obj ? obj->serial_ : 0;
+		serial_ = obj != nullptr ? obj->serial_ : 0;
 		return *this;
 	}
 
-	bool is_set() const {
-		return serial_;
+	[[nodiscard]] bool is_set() const {
+		return serial_ != 0u;
 	}
 
 	// TODO(unknown): dammit... without an EditorGameBase object, we can't implement a
 	// MapObject* operator (would be really nice)
 	MapObject* get(const EditorGameBase&);
-	MapObject* get(const EditorGameBase& egbase) const;
+	[[nodiscard]] MapObject* get(const EditorGameBase& egbase) const;
 
 	bool operator<(const ObjectPointer& other) const {
 		return serial_ < other.serial_;
@@ -459,7 +456,7 @@ struct ObjectPointer {
 		return serial_ != other.serial_;
 	}
 
-	uint32_t serial() const {
+	[[nodiscard]] uint32_t serial() const {
 		return serial_;
 	}
 
@@ -468,7 +465,7 @@ private:
 };
 
 template <class T> struct OPtr {
-	OPtr(T* const obj = nullptr) : m(obj) {
+	OPtr(T* const obj = nullptr) : m(obj) {  // NOLINT allow implicit conversion
 	}
 
 	OPtr& operator=(T* const obj) {
@@ -476,14 +473,14 @@ template <class T> struct OPtr {
 		return *this;
 	}
 
-	bool is_set() const {
+	[[nodiscard]] bool is_set() const {
 		return m.is_set();
 	}
 
 	T* get(const EditorGameBase& egbase) {
 		return static_cast<T*>(m.get(egbase));
 	}
-	T* get(const EditorGameBase& egbase) const {
+	[[nodiscard]] T* get(const EditorGameBase& egbase) const {
 		return static_cast<T*>(m.get(egbase));
 	}
 
@@ -497,7 +494,7 @@ template <class T> struct OPtr {
 		return m != other.m;
 	}
 
-	Serial serial() const {
+	[[nodiscard]] Serial serial() const {
 		return m.serial();
 	}
 
@@ -506,7 +503,7 @@ private:
 };
 
 struct CmdDestroyMapObject : public GameLogicCommand {
-	CmdDestroyMapObject() : GameLogicCommand(Time()), obj_serial(0) {
+	CmdDestroyMapObject() : GameLogicCommand(Time()) {
 	}  ///< For savegame loading
 	CmdDestroyMapObject(const Time&, MapObject&);
 	void execute(Game&) override;
@@ -514,16 +511,16 @@ struct CmdDestroyMapObject : public GameLogicCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kDestroyMapObject;
 	}
 
 private:
-	Serial obj_serial;
+	Serial obj_serial{0U};
 };
 
 struct CmdAct : public GameLogicCommand {
-	CmdAct() : GameLogicCommand(Time()), obj_serial(0), arg(0) {
+	CmdAct() : GameLogicCommand(Time()) {
 	}  ///< For savegame loading
 	CmdAct(const Time& t, MapObject&, int32_t a);
 
@@ -532,13 +529,13 @@ struct CmdAct : public GameLogicCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kAct;
 	}
 
 private:
-	Serial obj_serial;
-	int32_t arg;
+	Serial obj_serial{0U};
+	int32_t arg{0};
 };
 }  // namespace Widelands
 

@@ -23,7 +23,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/listselect.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
@@ -32,7 +31,7 @@ class InteractiveBase;
 ///  Shows the current teams lineup and allows the player to perform diplomatic actions.
 class GameDiplomacyMenu : public UI::UniqueWindow {
 public:
-	GameDiplomacyMenu(InteractivePlayer& parent, UI::UniqueWindow::Registry&);
+	GameDiplomacyMenu(InteractiveGameBase& parent, UI::UniqueWindow::Registry&);
 	void think() override;
 	void draw(RenderTarget&) override;
 
@@ -43,37 +42,18 @@ public:
 	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
-	InteractivePlayer& iplayer_;
+	InteractiveGameBase& igbase_;
+	InteractivePlayer* iplayer_;
 	void update_diplomacy_details();
 
 	UI::Box diplomacy_box_;
 
 	UI::Box hbox_, vbox_flag_, vbox_name_, vbox_team_, vbox_status_, vbox_action_;
-	UI::MultilineTextarea diplomacy_info_;
+	UI::Box actions_hbox_, actions_vbox_descr_, actions_vbox_yes_, actions_vbox_no_;
 	std::map<Widelands::PlayerNumber, UI::Icon*> diplomacy_teams_;
 	std::map<Widelands::PlayerNumber, UI::Textarea*> diplomacy_status_;
 	std::map<Widelands::PlayerNumber, std::pair<UI::Button*, UI::Button*>> diplomacy_buttons_;
-};
-
-/**
- * A window that allows a player to decide whether to accept or refuse another player's
- * invitation to join their team or request to join your team.
- *
- * This window is not saveloaded; it will be recreated automatically by the InteractivePlayer.
- */
-class DiplomacyConfirmWindow : public UI::Window {
-public:
-	DiplomacyConfirmWindow(InteractivePlayer& parent,
-	                       const Widelands::Game::PendingDiplomacyAction&);
-
-	void die() override;
-	bool handle_key(bool down, SDL_Keysym code) override;
-
-private:
-	void ok();
-
-	InteractivePlayer& iplayer_;
-	const Widelands::Game::PendingDiplomacyAction* action_;
+	std::list<Widelands::Game::PendingDiplomacyAction> cached_diplomacy_actions_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_DIPLOMACY_MENU_H

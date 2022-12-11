@@ -34,11 +34,12 @@ namespace Widelands {
 template <typename AreaType = Area<>> struct MapFringeRegion {
 	MapFringeRegion(const Map& map, AreaType area)
 	   : area_(area), remaining_in_phase_(area.radius), phase_(area.radius ? 6 : 0) {
-		for (typename AreaType::RadiusType r = area.radius; r; --r)
+		for (typename AreaType::RadiusType r = area.radius; r; --r) {
 			map.get_tln(area_, &area_);
+		}
 	}
 
-	const typename AreaType::CoordsType& location() const {
+	[[nodiscard]] const typename AreaType::CoordsType& location() const {
 		return area_;
 	}
 
@@ -67,7 +68,7 @@ template <typename AreaType = Area<>> struct MapFringeRegion {
 		phase_ = 6;
 	}
 
-	typename AreaType::RadiusType radius() const {
+	[[nodiscard]] typename AreaType::RadiusType radius() const {
 		return area_.radius;
 	}
 

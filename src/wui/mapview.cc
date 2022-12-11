@@ -81,7 +81,7 @@ public:
 	   : start_(start), end_(end), dt_(dt) {
 	}
 
-	T value(const float time_ms) const {
+	[[nodiscard]] T value(const float time_ms) const {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
 		return mix(math::sqr(t) * (3.f - 2.f * t), start_, end_);
 	}
@@ -101,7 +101,7 @@ public:
 	   : first_(start, middle, dt / 2.f), second_(middle, end, dt / 2.f), dt_(dt) {
 	}
 
-	T value(const float time_ms) const {
+	[[nodiscard]] T value(const float time_ms) const {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
 		if (t < 0.5f) {
 			return first_.value(t * dt_);
@@ -319,13 +319,11 @@ MapView::MapView(
      animate_map_panning_(get_config_bool("animate_map_panning", true)),
      map_(map),
      last_mouse_pos_(Vector2i::zero()),
-     dragging_(false),
+
      edge_scrolling_((parent != nullptr) &&
                      (parent->get_parent() == nullptr) /* not in watch windows */ &&
                      get_config_bool("edge_scrolling", false)),
-     invert_movement_(get_config_bool("invert_movement", false)),
-     is_scrolling_x_(0),
-     is_scrolling_y_(0) {
+     invert_movement_(get_config_bool("invert_movement", false)) {
 }
 
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {

@@ -142,22 +142,10 @@ Player::Player(EditorGameBase& the_egbase,
    : egbase_(the_egbase),
      initialization_index_(initialization_index),
      playercolor_(pc),
-     team_number_(0),
-     see_all_(false),
+
      player_number_(plnum),
      tribe_(tribe_descr),
-     random_tribe_(false),
-     casualties_(0),
-     kills_(0),
-     msites_lost_(0),
-     msites_defeated_(0),
-     civil_blds_lost_(0),
-     civil_blds_defeated_(0),
-     ship_name_counter_(0),
-     fields_(nullptr),
-     is_picking_custom_starting_position_(false),
-     allow_additional_expedition_items_(true),
-     hidden_from_general_statistics_(false),
+
      message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
      attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
      occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {
@@ -329,6 +317,27 @@ void Player::set_team_number(TeamNumber team) {
 	}
 	team_number_ = team;
 	update_team_players();
+}
+
+bool Player::may_approve_request(DiplomacyAction action, PlayerNumber from, PlayerNumber to) const {
+	if (from == player_number()) {
+		return false;
+	}
+	if (to == player_number()) {
+		return true;
+	}
+
+	switch (action) {
+	case DiplomacyAction::kInvite:
+		return false;  // Only the invited player may do that.
+
+	case DiplomacyAction::kJoin:
+		/* If we are on the same team as the recipient, we may decide this too. */
+		return team_number() != 0 && team_number() == egbase().player(to).team_number();
+
+	default:
+		NEVER_HERE();
+	}
 }
 
 /**
@@ -1873,6 +1882,13 @@ uint32_t Player::count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) 
 	   std::find(soldier_stats_.begin(), soldier_stats_.end(), SoldierStatistics(h, a, d, e));
 	return it == soldier_stats_.end() ? 0 : it->total;
 }
+uint32_t Player::count_soldiers() const {
+	uint32_t s = 0;
+	for (const SoldierStatistics& ss : soldier_stats_) {
+		s += ss.total;
+	}
+	return s;
+}
 uint32_t Player::count_soldiers_h(unsigned value) const {
 	uint32_t s = 0;
 	for (const SoldierStatistics& ss : soldier_stats_) {
@@ -2188,5 +2204,4 @@ void Player::write_statistics(FileWrite& fw) const {
 	}
 }
 
-constexpr Time Player::AiPersistentState::kNoExpedition;
 }  // namespace Widelands

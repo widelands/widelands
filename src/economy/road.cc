@@ -43,16 +43,10 @@ bool Road::is_road_descr(MapObjectDescr const* const descr) {
 	return descr == &g_road_descr;
 }
 
-Road::CarrierSlot::CarrierSlot()
-   : carrier(nullptr),
-     carrier_request(nullptr),
-     carrier_type_id(std::numeric_limits<uint8_t>::max()) {
-}
-
 /**
  * Most of the actual work is done in init.
  */
-Road::Road() : RoadBase(g_road_descr), busy_(false), wallet_(0), last_wallet_charge_(0) {
+Road::Road() : RoadBase(g_road_descr) {
 }
 
 /**

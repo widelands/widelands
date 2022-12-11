@@ -182,7 +182,7 @@ protected:
 	virtual void draw_inner(const EditorGameBase& game,
 	                        const Vector2f& point_on_dst,
 	                        const Widelands::Coords& coords,
-	                        const float scale,
+	                        float scale,
 	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
 	          const InfoToDraw& info_to_draw,
@@ -271,10 +271,9 @@ private:
 		}
 		// The variable scoutme should not be accessed when randomwalk is true.
 		// Initializing the scoutme variable with an obviously-wrong value.
-		PlaceToScout() : randomwalk(true), scoutme(-32100, -32100) {
-		}
-		const bool randomwalk;
-		const Coords scoutme;
+		PlaceToScout() = default;
+		const bool randomwalk = true;
+		const Coords scoutme{-32100, -32100};
 	};
 	std::vector<PlaceToScout> scouts_worklist;
 
@@ -288,19 +287,19 @@ private:
 	bool scout_random_walk(Game& game, const Map& map, const State& state);
 	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
-	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
-	Economy* worker_economy_;          ///< economy this worker is registered in
-	Economy* ware_economy_;            ///< economy this worker's wares are registered in
-	OPtr<WareInstance> carried_ware_;  ///< ware we are carrying
-	IdleWorkerSupply* supply_;         ///< supply while gowarehouse and not transfer
-	Transfer* transfer_;               ///< where we are currently being sent
-	int32_t current_exp_;              ///< current experience
+	OPtr<PlayerImmovable> location_;     ///< meta location of the worker
+	Economy* worker_economy_{nullptr};   ///< economy this worker is registered in
+	Economy* ware_economy_{nullptr};     ///< economy this worker's wares are registered in
+	OPtr<WareInstance> carried_ware_;    ///< ware we are carrying
+	IdleWorkerSupply* supply_{nullptr};  ///< supply while gowarehouse and not transfer
+	Transfer* transfer_{nullptr};        ///< where we are currently being sent
+	int32_t current_exp_{0};             ///< current experience
 
 	// saving and loading
 protected:
 	struct Loader : public Bob::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
 		virtual void load(FileRead&);
 		void load_pointers() override;
@@ -311,8 +310,8 @@ protected:
 		const MapObjectProgram* get_program(const std::string& name) override;
 
 	private:
-		uint32_t location_;
-		uint32_t carried_ware_;
+		uint32_t location_{0U};
+		uint32_t carried_ware_{0U};
 		Transfer::ReadData transfer_;
 	};
 

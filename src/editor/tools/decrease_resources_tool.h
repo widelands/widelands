@@ -24,8 +24,8 @@
 
 ///  Decreases the resources of a node by a value.
 struct EditorDecreaseResourcesTool : public EditorTool {
-	EditorDecreaseResourcesTool(EditorInteractive& parent)
-	   : EditorTool(parent, *this, *this), cur_res_(0), change_by_(1) {
+	explicit EditorDecreaseResourcesTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -38,7 +38,7 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 
 	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_decrease_resources.png");
 	}
 
@@ -47,13 +47,13 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 		return resource_tools_nodecaps(fcoords, egbase, cur_res_);
 	}
 
-	int32_t get_change_by() const {
+	[[nodiscard]] int32_t get_change_by() const {
 		return change_by_;
 	}
 	void set_change_by(const int32_t n) {
 		change_by_ = n;
 	}
-	Widelands::DescriptionIndex get_cur_res() const {
+	[[nodiscard]] Widelands::DescriptionIndex get_cur_res() const {
 		return cur_res_;
 	}
 	void set_cur_res(Widelands::DescriptionIndex const res) {
@@ -75,8 +75,8 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 	}
 
 private:
-	Widelands::DescriptionIndex cur_res_;
-	int32_t change_by_;
+	Widelands::DescriptionIndex cur_res_{0U};
+	int32_t change_by_{1};
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_DECREASE_RESOURCES_TOOL_H

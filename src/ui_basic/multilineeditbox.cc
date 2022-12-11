@@ -48,7 +48,7 @@ struct MultilineEditbox::Data {
 	/// Position of the cursor inside the text.
 	/// 0 indicates that the cursor is before the first character,
 	/// text.size() inidicates that the cursor is after the last character.
-	uint32_t cursor_pos;
+	uint32_t cursor_pos{0U};
 	std::string caret_image_path;
 
 	const int lineheight;
@@ -58,15 +58,14 @@ struct MultilineEditbox::Data {
 
 	enum class Mode { kNormal, kSelection };
 
-	Mode mode;
+	Mode mode{Mode::kNormal};
 
-	uint32_t selection_start;
-
-	uint32_t selection_end;
+	uint32_t selection_start{0U};
+	uint32_t selection_end{0U};
 
 	/// Cached wrapping info; see @ref refresh_ww and @ref update
 	/*@{*/
-	bool ww_valid;
+	bool ww_valid{false};
 	WordWrap ww;
 	/*@}*/
 
@@ -115,7 +114,7 @@ MultilineEditbox::Data::Data(MultilineEditbox& init_owner)
                init_owner.get_h(),
                init_owner.panel_style_),
      style(init_owner.panel_style_),
-     cursor_pos(0),
+
      caret_image_path(init_owner.panel_style_ == PanelStyle::kWui ?
                          "images/ui_basic/caret_wui.png" :
                          "images/ui_basic/caret_fs.png"),
@@ -124,10 +123,7 @@ MultilineEditbox::Data::Data(MultilineEditbox& init_owner)
                           g_gr->max_texture_size_for_font_rendering() /
                           (text_height(get_style().font()) * text_height(get_style().font())),
                        std::numeric_limits<int32_t>::max())),
-     mode(Mode::kNormal),
-     selection_start(0),
-     selection_end(0),
-     ww_valid(false),
+
      ww(get_style().font().size(), get_style().font().color(), init_owner.get_w()),
      owner(init_owner) {
 	scrollbar.moved.connect([&init_owner](int32_t a) { init_owner.scrollpos_changed(a); });
@@ -430,6 +426,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_LEFT: {
 			if (d_->cursor_pos > 0) {
+				d_->ww.enter_cursor_movement_mode();
 				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
 					uint32_t newpos = d_->prev_char(d_->cursor_pos);
 					while (newpos > 0 && (isspace(d_->text[newpos]) != 0)) {
@@ -462,6 +459,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_RIGHT:
 			if (d_->cursor_pos < d_->text.size()) {
+				d_->ww.enter_cursor_movement_mode();
 				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
 					uint32_t newpos = d_->next_char(d_->cursor_pos);
 					while (newpos < d_->text.size() && (isspace(d_->text[newpos]) != 0)) {

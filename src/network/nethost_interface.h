@@ -38,15 +38,14 @@ public:
 	/**
 	 * Closes the server.
 	 */
-	virtual ~NetHostInterface() {
-	}
+	virtual ~NetHostInterface() = default;
 
 	/**
 	 * Returns whether the given client is connected.
 	 * \param The id of the client to check.
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */
-	virtual bool is_connected(ConnectionId id) const = 0;
+	[[nodiscard]] virtual bool is_connected(ConnectionId id) const = 0;
 
 	/**
 	 * Closes the connection to the given client.

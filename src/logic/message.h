@@ -81,37 +81,37 @@ struct Message {
 	     status_(s) {
 	}
 
-	Message::Type type() const {
+	[[nodiscard]] Message::Type type() const {
 		return type_;
 	}
-	const std::string& sub_type() const {
+	[[nodiscard]] const std::string& sub_type() const {
 		return sub_type_;
 	}
-	const Time& sent() const {
+	[[nodiscard]] const Time& sent() const {
 		return sent_;
 	}
-	const std::string& title() const {
+	[[nodiscard]] const std::string& title() const {
 		return title_;
 	}
-	const std::string& icon_filename() const {
+	[[nodiscard]] const std::string& icon_filename() const {
 		return icon_filename_;
 	}
-	const Image* icon() const {
+	[[nodiscard]] const Image* icon() const {
 		return icon_;
 	}
-	const std::string& heading() const {
+	[[nodiscard]] const std::string& heading() const {
 		return heading_;
 	}
-	const std::string& body() const {
+	[[nodiscard]] const std::string& body() const {
 		return body_;
 	}
-	const Widelands::Coords& position() const {
+	[[nodiscard]] const Widelands::Coords& position() const {
 		return position_;
 	}
-	Widelands::Serial serial() const {
+	[[nodiscard]] Widelands::Serial serial() const {
 		return serial_;
 	}
-	Status status() const {
+	[[nodiscard]] Status status() const {
 		return status_;
 	}
 	Status set_status(Status const s) {
@@ -121,12 +121,12 @@ struct Message {
 	/**
 	 * Returns the main type for the message's sub type
 	 */
-	Message::Type message_type_category() const {
+	[[nodiscard]] Message::Type message_type_category() const {
 		if (type_ >= Widelands::Message::Type::kWarfare) {
 			return Widelands::Message::Type::kWarfare;
-
-		} else if (type_ >= Widelands::Message::Type::kEconomy &&
-		           type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
+		}
+		if (type_ >= Widelands::Message::Type::kEconomy &&
+		    type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
 			return Widelands::Message::Type::kEconomy;
 		}
 		return type_;

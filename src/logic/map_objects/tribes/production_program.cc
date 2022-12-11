@@ -919,8 +919,7 @@ Calls a program of the productionsite's main worker. Example:
 ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& arguments,
                                                 const std::string& production_program_name,
                                                 ProductionSiteDescr* descr,
-                                                const Descriptions& descriptions)
-   : on_failure_(ProgramResult::kFailed) {
+                                                const Descriptions& descriptions) {
 	const size_t nr_args = arguments.size();
 	if (nr_args != 1 && nr_args != 4) {
 		throw GameDataError(
@@ -1481,8 +1480,7 @@ mine
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     Descriptions& descriptions,
                                     const std::string& production_program_name,
-                                    ProductionSiteDescr* descr)
-   : resource_(INVALID_INDEX), notify_on_failure_(true) {
+                                    ProductionSiteDescr* descr) {
 	if (arguments.size() > 6 || arguments.size() < 4) {
 		throw GameDataError("Usage: mine=<resource name> radius:<number> yield:<percent> "
 		                    "when_empty:<percent> [experience:<percent>] [no_notify]");
@@ -2223,6 +2221,23 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				} else {
 					recruited_workers_.insert(worker);
 				}
+			}
+			// Add trained attributes
+			if (upcast(const ActCheckSoldier, act_cs, &action)) {
+				const auto& train = act_cs->training();
+				train_from_level_ = train.level;
+				if (train.attribute == Widelands::TrainingAttribute::kHealth) {
+					trained_attribute_ = "Health";
+				} else if (train.attribute == Widelands::TrainingAttribute::kAttack) {
+					trained_attribute_ = "Attack";
+				} else if (train.attribute == Widelands::TrainingAttribute::kDefense) {
+					trained_attribute_ = "Defense";
+				} else if (train.attribute == Widelands::TrainingAttribute::kEvade) {
+					trained_attribute_ = "Evade";
+				}
+			} else if (upcast(const ActTrain, act_tr, &action)) {
+				const auto& train = act_tr->training();
+				train_to_level_ = train.level;
 			}
 		} catch (const std::exception& e) {
 			throw GameDataError("Error reading line '%s': %s", line.c_str(), e.what());

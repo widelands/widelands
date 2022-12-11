@@ -33,6 +33,7 @@
  * Create a game chat panel
  */
 GameChatPanel::GameChatPanel(UI::Panel* parent,
+                             ChatColorForPlayer fn,
                              int32_t const x,
                              int32_t const y,
                              uint32_t const w,
@@ -40,6 +41,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                              ChatProvider& chat,
                              UI::PanelStyle style)
    : UI::Panel(parent, style, x, y, w, h),
+     color_functor_(fn),
      chat_(chat),
      vbox_(this, style, 0, 0, UI::Box::Vertical),
      chatbox(&vbox_,
@@ -64,9 +66,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                          UI::PanelStyle::kFsMenu,
                          UI::ButtonStyle::kFsMenuSecondary),
      editbox(&hbox_, 28, 0, w - 28, style),
-     chat_message_counter(0),
-     chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")),
-     has_team_(false) {
+
+     chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
 	vbox_.add(&chatbox, UI::Box::Resizing::kExpandBoth);
 	vbox_.add_space(4);
@@ -298,7 +299,7 @@ void GameChatPanel::recalculate(bool has_new_message) {
 	const size_t msgs_size = msgs.size();
 	std::string str = "<rt>";
 	for (uint32_t i = 0; i < msgs_size; ++i) {
-		str += format_as_richtext(msgs[i]);
+		str += format_as_richtext(msgs[i], color_functor_);
 	}
 	str += "</rt>";
 

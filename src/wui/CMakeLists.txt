@@ -133,15 +133,6 @@ wl_library(wui_common_mapdetails
     wui_common_suggested_teams
 )
 
-wl_library(wui_quicknavigation
-  SRCS
-    quicknavigation.cc
-    quicknavigation.h
-  DEPENDS
-    widelands_options
-    wui_mapview
-)
-
 wl_library(wui_mapview
   SRCS
     mapview.cc
@@ -262,12 +253,16 @@ wl_library(wui
     militarysitewindow.h
     minimap.cc
     minimap.h
+    pinned_note.cc
+    pinned_note.h
     plot_area.cc
     plot_area.h
     portdockwaresdisplay.cc
     portdockwaresdisplay.h
     productionsitewindow.cc
     productionsitewindow.h
+    quicknavigation.cc
+    quicknavigation.h
     seafaring_statistics_menu.cc
     seafaring_statistics_menu.h
     shipwindow.cc
@@ -349,7 +344,6 @@ wl_library(wui
     wui_common_gamedetails
     wui_mapview
     wui_mapview_pixelfunctions
-    wui_quicknavigation
     wui_sound_options
     wui_waresdisplay
 )

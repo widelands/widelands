@@ -9,7 +9,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Sergey Trofimov <sarg@sarg.org.ru>, 2021
 # Viktor S <awsswa59@gmail.com>, 2019
-# Yuriy Sokolov <lention@mail.ru>, 2015
+# Yuriy Sokolov <lention@mail.ru>, 2015,2022
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # Владимир Шевцов, 2022
 # Евгений Кривошеев <euja@yandex.ru>, 2019
@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-03-25 02:57+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Владимир Шевцов, 2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,7 +71,7 @@ msgstr "Обработка окна \"Задания\""
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr "Вы можете открыть окно \"Цели\" по нажатию кнопки \"Цели\" в панели внизу экрана."
+msgstr "Вы можете открыть окно \"Задания\" по нажатию кнопки \"Задания\" в панели внизу экрана."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
@@ -453,13 +453,13 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr "Каменоломня - малое строение, как и хижина дровосека. Поэтому вы можете построить ее на любом участке с красным, желтым или зеленым домиком, когда значки мест строительства включены (нажмите \"%s\", для этого)."
+msgstr "Каменоломня - малое строение, как и хижина дровосека. Поэтому вы можете построить ее на любом участке с красным, желтым или зеленым домом, когда значки мест строительства включены (нажмите \"%s\", для этого)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr "Просто щёлкните на любой участок со значком домика рядом со скалами, выберите вкладку малых строений в открывшемся окне, затем щёлкните на значок каменоломни."
+msgstr "Просто щёлкните на любой участок со значком дома рядом со скалами, выберите вкладку малых строений в открывшемся окне, затем щёлкните на значок каменоломни."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "How to Build a Quarry"
@@ -486,12 +486,12 @@ msgstr "На участках в Widelands вы можете построить 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:326
 msgid "Everything can be built on the green house symbol."
-msgstr "На значке зелёного домика могут быть построены все строения."
+msgstr "На значке зелёного дома могут быть построены все строения."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:327
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
-msgstr "На значке желтого домика могут быть построены все строения, кроме больших."
+msgstr "На значке желтого дома могут быть построены все строения, кроме больших."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
 msgid "Red building symbols can only hold small buildings and flags."
@@ -831,7 +831,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "Отлично! Давайте посмотрим, как работает система сообщений в реальной игре, приступим? Для этого я уберу все скалы подальше от несчастных камнетесов в каменоломнях. Тогда каждый из них отправит сообщение о том, что он не может найти каких либо скал в его рабочей области, а потом они попробуют сделать какую-нибудь другую работу."
+msgstr "Отлично! Давайте посмотрим, как работает система сообщений в реальной игре, приступим? Для этого я уберу все скалы подальше от несчастных камнетёсов в каменоломнях. Тогда каждый из них отправит сообщение о том, что он не может найти каких либо скал в его рабочей области, а потом они попробуют сделать какую-нибудь другую работу."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:539
 msgid "Destroy the two quarries"

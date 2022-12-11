@@ -33,20 +33,20 @@ struct TextPanelStyleInfo {
 	                            const UI::PanelStyleInfo* init_background)
 	   : background_(init_background), font_(init_font) {
 	}
-	explicit TextPanelStyleInfo(const TextPanelStyleInfo& other)
+	TextPanelStyleInfo(const TextPanelStyleInfo& other)
 	   : background_(new UI::PanelStyleInfo(other.background())),
 	     font_(new UI::FontStyleInfo(other.font())) {
 	}
 
-	const UI::FontStyleInfo& font() const {
-		return *font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& font() const {
+		return *font_;
 	}
 	void set_font(const UI::FontStyleInfo& new_font) {
 		font_.reset(new UI::FontStyleInfo(new_font));
 	}
 
-	const UI::PanelStyleInfo& background() const {
-		return *background_.get();
+	[[nodiscard]] const UI::PanelStyleInfo& background() const {
+		return *background_;
 	}
 
 private:

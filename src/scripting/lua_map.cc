@@ -124,25 +124,6 @@ int wares_or_workers_map_to_lua(lua_State* L,
 	return 1;
 }
 
-// Pushes a lua table of tables with food ware names on the stack. Returns 1.
-// Resulting table will look e.g. like {{"barbarians_bread"}, {"fish", "meat"}}
-int food_list_to_lua(lua_State* L, const std::vector<std::vector<std::string>>& table) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const std::vector<std::string>& foodlist : table) {
-		lua_pushuint32(L, ++counter);
-		lua_newtable(L);
-		int counter2 = 0;
-		for (const std::string& foodname : foodlist) {
-			lua_pushuint32(L, ++counter2);
-			lua_pushstring(L, foodname);
-			lua_settable(L, -3);
-		}
-		lua_settable(L, -3);
-	}
-	return 1;
-}
-
 struct SoldierMapDescr {
 	SoldierMapDescr(uint8_t init_health,
 	                uint8_t init_attack,
@@ -930,6 +911,7 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::SHIP_FLEET:
 	case Widelands::MapObjectType::FERRY_FLEET:
 	case Widelands::MapObjectType::WARE:
+	case Widelands::MapObjectType::PINNED_NOTE:
 		throw LuaError(
 		   format("upcasted_map_object_to_lua: Unknown %i", static_cast<int>(mo->descr().type())));
 	}
@@ -1411,9 +1393,13 @@ const MethodType<LuaMap> LuaMap::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMap> LuaMap::Properties[] = {
-   PROP_RO(LuaMap, allows_seafaring), PROP_RO(LuaMap, number_of_port_spaces),
-   PROP_RO(LuaMap, port_spaces),      PROP_RO(LuaMap, width),
-   PROP_RO(LuaMap, height),           PROP_RO(LuaMap, player_slots),
+   PROP_RO(LuaMap, allows_seafaring),
+   PROP_RO(LuaMap, number_of_port_spaces),
+   PROP_RO(LuaMap, port_spaces),
+   PROP_RO(LuaMap, width),
+   PROP_RO(LuaMap, height),
+   PROP_RO(LuaMap, player_slots),
+   PROP_RW(LuaMap, waterway_max_length),
    {nullptr, nullptr, nullptr},
 };
 
@@ -1494,6 +1480,22 @@ int LuaMap::get_width(lua_State* L) {
 int LuaMap::get_height(lua_State* L) {
 	lua_pushuint32(L, get_egbase(L).map().get_height());
 	return 1;
+}
+
+/* RST
+   .. attribute:: waterway_max_length
+
+      .. versionadded:: 1.2
+
+      (RW) The waterway length limit on this map.
+*/
+int LuaMap::get_waterway_max_length(lua_State* L) {
+	lua_pushuint32(L, get_egbase(L).map().get_waterway_max_length());
+	return 1;
+}
+int LuaMap::set_waterway_max_length(lua_State* L) {
+	get_egbase(L).mutable_map()->set_waterway_max_length(luaL_checkuint32(L, -1));
+	return 0;
 }
 
 /* RST
@@ -3342,13 +3344,10 @@ TrainingSiteDescription
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
+   METHOD(LuaTrainingSiteDescription, trained_soldiers),
    {nullptr, nullptr},
 };
 const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Properties[] = {
-   PROP_RO(LuaTrainingSiteDescription, food_attack),
-   PROP_RO(LuaTrainingSiteDescription, food_defense),
-   PROP_RO(LuaTrainingSiteDescription, food_evade),
-   PROP_RO(LuaTrainingSiteDescription, food_health),
    PROP_RO(LuaTrainingSiteDescription, max_attack),
    PROP_RO(LuaTrainingSiteDescription, max_defense),
    PROP_RO(LuaTrainingSiteDescription, max_evade),
@@ -3358,10 +3357,6 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
    PROP_RO(LuaTrainingSiteDescription, min_defense),
    PROP_RO(LuaTrainingSiteDescription, min_evade),
    PROP_RO(LuaTrainingSiteDescription, min_health),
-   PROP_RO(LuaTrainingSiteDescription, weapons_attack),
-   PROP_RO(LuaTrainingSiteDescription, weapons_defense),
-   PROP_RO(LuaTrainingSiteDescription, weapons_evade),
-   PROP_RO(LuaTrainingSiteDescription, weapons_health),
    {nullptr, nullptr, nullptr},
 };
 
@@ -3370,46 +3365,6 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
  PROPERTIES
  ==========================================================
  */
-
-/* RST
-   .. attribute:: food_attack
-
-      (RO) A :class:`table` of tables with food ware names used for attack training,
-      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
-*/
-int LuaTrainingSiteDescription::get_food_attack(lua_State* L) {
-	return food_list_to_lua(L, get()->get_food_attack());
-}
-
-/* RST
-   .. attribute:: food_defense
-
-      (RO) A :class:`table` of tables with food ware names used for defense training,
-      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
-*/
-int LuaTrainingSiteDescription::get_food_defense(lua_State* L) {
-	return food_list_to_lua(L, get()->get_food_defense());
-}
-
-/* RST
-   .. attribute:: food_evade
-
-      (RO) A :class:`table` of tables with food ware names used for evade training,
-      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``
-*/
-int LuaTrainingSiteDescription::get_food_evade(lua_State* L) {
-	return food_list_to_lua(L, get()->get_food_evade());
-}
-
-/* RST
-   .. attribute:: food_health
-
-      (RO) A :class:`table` of tables with food ware names used for health training,
-      e.g. ``{{"barbarians_bread"},{"fish","meat"}}``.
-*/
-int LuaTrainingSiteDescription::get_food_health(lua_State* L) {
-	return food_list_to_lua(L, get()->get_food_health());
-}
 
 /* RST
    .. attribute:: max_attack
@@ -3542,64 +3497,31 @@ int LuaTrainingSiteDescription::get_min_health(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: weapons_attack
+   .. method:: trained_soldiers(program_name)
 
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Attack training.
+Returns a :class:`table` with following entries [1] = the trained skill, [2] = the starting level,
+      [3] = the resulting level trained by this production program.
+      See :ref:`production site programs <productionsite_programs>`.
+
+      :arg program_name: the name of the production program that we want to get the trained
+         soldiers for.
+      :type program_name: :class:`string`
+
 */
-int LuaTrainingSiteDescription::get_weapons_attack(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const std::string& weaponname : get()->get_weapons_attack()) {
-		lua_pushuint32(L, ++counter);
-		lua_pushstring(L, weaponname);
+int LuaTrainingSiteDescription::trained_soldiers(lua_State* L) {
+	std::string program_name = luaL_checkstring(L, -1);
+	const Widelands::ProductionSiteDescr::Programs& programs = get()->programs();
+	if (programs.count(program_name) == 1) {
+		const Widelands::ProductionProgram& program = *programs.at(program_name);
+		lua_newtable(L);
+		lua_pushint32(L, 1);
+		lua_pushstring(L, program.trained_attribute());
 		lua_settable(L, -3);
-	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: weapons_defense
-
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Defense training.
-*/
-int LuaTrainingSiteDescription::get_weapons_defense(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const std::string& weaponname : get()->get_weapons_defense()) {
-		lua_pushuint32(L, ++counter);
-		lua_pushstring(L, weaponname);
+		lua_pushint32(L, 2);
+		lua_pushint32(L, program.train_from_level());
 		lua_settable(L, -3);
-	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: weapons_evade
-
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Evade training.
-*/
-int LuaTrainingSiteDescription::get_weapons_evade(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const std::string& weaponname : get()->get_weapons_evade()) {
-		lua_pushuint32(L, ++counter);
-		lua_pushstring(L, weaponname);
-		lua_settable(L, -3);
-	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: weapons_health
-
-      (RO) A :class:`table` with ``{weapon=ware_names}`` used for Health training.
-*/
-int LuaTrainingSiteDescription::get_weapons_health(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const std::string& weaponname : get()->get_weapons_health()) {
-		lua_pushuint32(L, ++counter);
-		lua_pushstring(L, weaponname);
+		lua_pushint32(L, 3);
+		lua_pushint32(L, program.train_to_level());
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -4661,6 +4583,7 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case Widelands::MapObjectType::ROADBASE:
 	case Widelands::MapObjectType::PORTDOCK:
 	case Widelands::MapObjectType::WARE:
+	case Widelands::MapObjectType::PINNED_NOTE:
 		return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 	}
 	NEVER_HERE();
@@ -7727,7 +7650,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, viewpoint_y),
    PROP_RW(LuaField, resource),
    PROP_RW(LuaField, resource_amount),
-   PROP_RO(LuaField, initial_resource_amount),
+   PROP_RW(LuaField, initial_resource_amount),
    PROP_RO(LuaField, claimers),
    PROP_RO(LuaField, owner),
    PROP_RO(LuaField, buildable),
@@ -7864,10 +7787,10 @@ int LuaField::get_viewpoint_y(lua_State* L) {
       :see also: :attr:`resource_amount`
 */
 int LuaField::get_resource(lua_State* L) {
-	const Widelands::ResourceDescription* rDesc =
+	const Widelands::ResourceDescription* res_desc =
 	   get_egbase(L).descriptions().get_resource_descr(fcoords(L).field->get_resources());
 
-	lua_pushstring(L, rDesc != nullptr ? rDesc->name().c_str() : "none");
+	lua_pushstring(L, res_desc != nullptr ? res_desc->name().c_str() : "none");
 
 	return 1;
 }
@@ -7903,8 +7826,8 @@ int LuaField::set_resource_amount(lua_State* L) {
 	auto c = fcoords(L);
 	Widelands::DescriptionIndex res = c.field->get_resources();
 	auto amount = luaL_checkint32(L, -1);
-	const Widelands::ResourceDescription* resDesc = egbase.descriptions().get_resource_descr(res);
-	Widelands::ResourceAmount max_amount = (resDesc != nullptr) ? resDesc->max_amount() : 0;
+	const Widelands::ResourceDescription* res_desc = egbase.descriptions().get_resource_descr(res);
+	Widelands::ResourceAmount max_amount = (res_desc != nullptr) ? res_desc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount,
@@ -7920,10 +7843,14 @@ int LuaField::set_resource_amount(lua_State* L) {
 	}
 	return 0;
 }
+
 /* RST
    .. attribute:: initial_resource_amount
 
-      (RO) Starting value of resource. It is set be resource_amount.
+      .. versionchanged:: 1.2
+         Read-only in 1.1 and older.
+
+      (RW) Starting value of resource.
 
       :see also: :attr:`resource`
 */
@@ -7931,6 +7858,23 @@ int LuaField::get_initial_resource_amount(lua_State* L) {
 	lua_pushuint32(L, fcoords(L).field->get_initial_res_amount());
 	return 1;
 }
+int LuaField::set_initial_resource_amount(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	auto c = fcoords(L);
+	Widelands::DescriptionIndex res = c.field->get_resources();
+	auto amount = luaL_checkint32(L, -1);
+	const Widelands::ResourceDescription* res_desc = egbase.descriptions().get_resource_descr(res);
+	Widelands::ResourceAmount max_amount = (res_desc != nullptr) ? res_desc->max_amount() : 0;
+
+	if (amount < 0 || amount > max_amount) {
+		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount,
+		             static_cast<unsigned int>(max_amount));
+	}
+
+	egbase.mutable_map()->initialize_resources(c, res, amount);
+	return 0;
+}
+
 /* RST
    .. attribute:: immovable
 
@@ -8368,9 +8312,9 @@ const MethodType<LuaPlayerSlot> LuaPlayerSlot::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerSlot> LuaPlayerSlot::Properties[] = {
-   PROP_RO(LuaPlayerSlot, tribe_name),
-   PROP_RO(LuaPlayerSlot, name),
-   PROP_RO(LuaPlayerSlot, starting_field),
+   PROP_RW(LuaPlayerSlot, tribe_name),
+   PROP_RW(LuaPlayerSlot, name),
+   PROP_RW(LuaPlayerSlot, starting_field),
    {nullptr, nullptr, nullptr},
 };
 
@@ -8390,27 +8334,44 @@ void LuaPlayerSlot::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: tribe_name
 
-      (RO) The name of the tribe suggested for this player in this map.
+      .. versionchanged:: 1.2
+         Read-only in 1.1 and older.
+
+      (RW) The name of the tribe suggested for this player in this map.
 */
 int LuaPlayerSlot::get_tribe_name(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushstring(L, get_egbase(L).map().get_scenario_player_tribe(player_number_));
 	return 1;
 }
+int LuaPlayerSlot::set_tribe_name(lua_State* L) {  // NOLINT - can not be made const
+	get_egbase(L).mutable_map()->set_scenario_player_tribe(player_number_, luaL_checkstring(L, -1));
+	return 0;
+}
 
 /* RST
    .. attribute:: name
 
-      (RO) The name for this player as suggested in this map.
+      .. versionchanged:: 1.2
+         Read-only in 1.1 and older.
+
+      (RW) The name for this player as suggested in this map.
 */
 int LuaPlayerSlot::get_name(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushstring(L, get_egbase(L).map().get_scenario_player_name(player_number_));
 	return 1;
 }
+int LuaPlayerSlot::set_name(lua_State* L) {  // NOLINT - can not be made const
+	get_egbase(L).mutable_map()->set_scenario_player_name(player_number_, luaL_checkstring(L, -1));
+	return 0;
+}
 
 /* RST
    .. attribute:: starting_field
 
-      (RO) The starting_field for this player as set in the map.
+      .. versionchanged:: 1.2
+         Read-only in 1.1 and older.
+
+      (RW) The starting_field for this player as set in the map.
       Note that it is not guaranteed that the HQ of the player is on this
       field as scenarios and starting conditions are free to place the HQ
       wherever it want. This field is only centered when the game starts.
@@ -8418,6 +8379,11 @@ int LuaPlayerSlot::get_name(lua_State* L) {  // NOLINT - can not be made const
 int LuaPlayerSlot::get_starting_field(lua_State* L) {  // NOLINT - can not be made const
 	to_lua<LuaField>(L, new LuaField(get_egbase(L).map().get_starting_pos(player_number_)));
 	return 1;
+}
+int LuaPlayerSlot::set_starting_field(lua_State* L) {  // NOLINT - can not be made const
+	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, -1);
+	get_egbase(L).mutable_map()->set_starting_pos(player_number_, c->coords());
+	return 0;
 }
 
 /*

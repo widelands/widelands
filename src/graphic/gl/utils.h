@@ -41,7 +41,7 @@ public:
 	Program();
 	~Program();
 
-	GLuint object() const {
+	[[nodiscard]] GLuint object() const {
 		return program_object_;
 	}
 
@@ -63,13 +63,13 @@ template <typename T> class Buffer {
 public:
 	Buffer() {
 		glGenBuffers(1, &object_);
-		if (!object_) {
+		if (object_ == 0u) {
 			throw wexception("Could not create GL buffer.");
 		}
 	}
 
 	~Buffer() {
-		if (object_) {
+		if (object_ != 0u) {
 			glDeleteBuffers(1, &object_);
 		}
 	}
@@ -125,8 +125,8 @@ private:
 	std::unordered_map<GLuint, GLenum> texture_to_target_;
 	std::unordered_set<GLint> enabled_attrib_arrays_;
 	GLenum last_active_texture_;
-	GLuint current_framebuffer_;
-	GLuint current_framebuffer_texture_;
+	GLuint current_framebuffer_{0U};
+	GLuint current_framebuffer_texture_{0U};
 
 	State();
 

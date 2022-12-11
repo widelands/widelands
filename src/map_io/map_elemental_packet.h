@@ -42,13 +42,13 @@ struct MapElementalPacket {
 	/// properly configured EditorGameBase object.
 	void pre_read(FileSystem&, Map*);
 
-	uint32_t get_version() {
+	[[nodiscard]] uint32_t get_version() const {
 		return version_;
 	}
 
 	/// If this map was created before the one_world merge was done, this returns
 	/// the old world name, otherwise "".
-	const std::string& old_world_name() const {
+	[[nodiscard]] const std::string& old_world_name() const {
 		return old_world_name_;
 	}
 

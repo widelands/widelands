@@ -75,7 +75,7 @@ template <typename T> struct Vector2 {
 		return *this;
 	}
 
-	template <typename Type> Vector2<Type> cast() const {
+	template <typename Type> [[nodiscard]] Vector2<Type> cast() const {
 		return Vector2<Type>(Type(x), Type(y));
 	}
 
@@ -97,8 +97,9 @@ struct Vector3f {
 
 	void normalize() {
 		const float f = static_cast<float>(std::sqrt(x * x + y * y + z * z));
-		if (std::fabs(f) < 0.00001f)  // check for ==0
+		if (std::fabs(f) < 0.00001f) {  // check for ==0
 			return;
+		}
 		x /= f;
 		y /= f;
 		z /= f;
@@ -110,7 +111,7 @@ struct Vector3f {
 	}
 
 	// inner product
-	float dot(const Vector3f& other) const {
+	[[nodiscard]] float dot(const Vector3f& other) const {
 		return x * other.x + y * other.y + z * other.z;
 	}
 

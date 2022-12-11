@@ -55,7 +55,7 @@ const FerryFleetDescr& FerryFleet::descr() const {
  * instance, then add themselves \em before calling the \ref init function.
  * The FerryFleet takes care of merging with existing fleets, if any.
  */
-FerryFleet::FerryFleet(Player* player) : MapObject(&g_ferry_fleet_descr), act_pending_(false) {
+FerryFleet::FerryFleet(Player* player) : MapObject(&g_ferry_fleet_descr) {
 	owner_ = player;
 }
 
@@ -99,7 +99,7 @@ struct StepEvalFindFerryFleet {
 	int32_t estimate(Map& /* map */, FCoords /* pos */) const {
 		return 0;
 	}
-	int32_t stepcost(
+	[[nodiscard]] int32_t stepcost(
 	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
 		return checkstep_->allowed(map, from, to, dir, CheckStep::StepId::stepNormal) ? 1 : -1;
 	}

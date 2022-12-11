@@ -33,9 +33,9 @@ class MapObject;
  *   - translate MapObject* Pointer into the index used in the saved file
  */
 struct MapObjectSaver {
-	MapObjectSaver();
+	MapObjectSaver() = default;
 
-	bool is_object_known(const MapObject&) const;
+	[[nodiscard]] bool is_object_known(const MapObject&) const;
 	Serial register_object(const MapObject&);
 
 	uint32_t get_object_file_index(const MapObject&);
@@ -47,28 +47,28 @@ struct MapObjectSaver {
 #ifndef NDEBUG
 	void detect_unsaved_objects() const;
 #endif
-	uint32_t get_nr_roads() const {
+	[[nodiscard]] uint32_t get_nr_roads() const {
 		return nr_roads_;
 	}
-	uint32_t get_nr_waterways() const {
+	[[nodiscard]] uint32_t get_nr_waterways() const {
 		return nr_waterways_;
 	}
-	uint32_t get_nr_flags() const {
+	[[nodiscard]] uint32_t get_nr_flags() const {
 		return nr_flags_;
 	}
-	uint32_t get_nr_buildings() const {
+	[[nodiscard]] uint32_t get_nr_buildings() const {
 		return nr_buildings_;
 	}
-	uint32_t get_nr_wares() const {
+	[[nodiscard]] uint32_t get_nr_wares() const {
 		return nr_wares_;
 	}
-	uint32_t get_nr_bobs() const {
+	[[nodiscard]] uint32_t get_nr_bobs() const {
 		return nr_bobs_;
 	}
-	uint32_t get_nr_immovables() const {
+	[[nodiscard]] uint32_t get_nr_immovables() const {
 		return nr_immovables_;
 	}
-	uint32_t get_nr_battles() const {
+	[[nodiscard]] uint32_t get_nr_battles() const {
 		return nr_battles_;
 	}
 
@@ -91,18 +91,18 @@ private:
 	MapObjectRec& get_object_record(const MapObject&);
 
 	MapObjectRecordMap objects_;
-	uint32_t nr_roads_;
-	uint32_t nr_waterways_;
-	uint32_t nr_flags_;
-	uint32_t nr_buildings_;
-	uint32_t nr_bobs_;
-	uint32_t nr_wares_;
-	uint32_t nr_immovables_;
-	uint32_t nr_battles_;
-	uint32_t nr_ship_fleets_;
-	uint32_t nr_ferry_fleets_;
-	uint32_t nr_portdocks_;
-	uint32_t lastserial_;
+	uint32_t nr_roads_{0U};
+	uint32_t nr_waterways_{0U};
+	uint32_t nr_flags_{0U};
+	uint32_t nr_buildings_{0U};
+	uint32_t nr_bobs_{0U};
+	uint32_t nr_wares_{0U};
+	uint32_t nr_immovables_{0U};
+	uint32_t nr_battles_{0U};
+	uint32_t nr_ship_fleets_{0U};
+	uint32_t nr_ferry_fleets_{0U};
+	uint32_t nr_portdocks_{0U};
+	uint32_t lastserial_{0U};
 };
 }  // namespace Widelands
 

@@ -38,13 +38,14 @@ enum class MapObjectType : uint8_t {
 	SHIP_FLEET,
 	FERRY_FLEET,
 
-	BOB = 10,  // Bob
-	CRITTER,   // Bob -- Critter
-	SHIP,      // Bob -- Ship
-	WORKER,    // Bob -- Worker
-	SOLDIER,   // Bob -- Worker -- Soldier
-	CARRIER,   // Bob -- Worker -- Carrier
-	FERRY,     // Bob -- Worker -- Carrier -- Ferry
+	BOB = 10,     // Bob
+	CRITTER,      // Bob -- Critter
+	SHIP,         // Bob -- Ship
+	WORKER,       // Bob -- Worker
+	SOLDIER,      // Bob -- Worker -- Soldier
+	CARRIER,      // Bob -- Worker -- Carrier
+	FERRY,        // Bob -- Worker -- Carrier -- Ferry
+	PINNED_NOTE,  // Bob -- Pinned Note
 
 	// everything below is at least a BaseImmovable
 	IMMOVABLE = 30,

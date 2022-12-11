@@ -252,7 +252,7 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 class TerrainConverter {
 public:
 	explicit TerrainConverter(Widelands::Descriptions* descriptions);
-	Widelands::DescriptionIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
+	[[nodiscard]] Widelands::DescriptionIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
 	Widelands::Descriptions* descriptions_;
@@ -365,7 +365,7 @@ Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType worl
 }  // namespace
 
 S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
-   : Widelands::MapLoader(filename, M), filename_(filename), worldtype_(WorldType::kGreenland) {
+   : Widelands::MapLoader(filename, M), filename_(filename) {
 }
 
 /// Load the header. The map will then return valid information when

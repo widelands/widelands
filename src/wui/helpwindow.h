@@ -39,7 +39,7 @@ public:
 	                   UI::UniqueWindow::Registry& reg,
 	                   const Widelands::BuildingDescr& building_description,
 	                   const Widelands::TribeDescr& tribe,
-	                   LuaInterface* const lua,
+	                   LuaInterface* lua,
 	                   uint32_t width = 300,
 	                   uint32_t height = 400);
 

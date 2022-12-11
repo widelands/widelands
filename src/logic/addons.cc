@@ -28,6 +28,7 @@
 #include "build_info.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
 #include "wlapplication_options.h"
@@ -43,25 +44,29 @@ const std::unordered_map<std::string, std::string> kDifficultyIcons = {
 
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kNone,
-    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png"}},
-   {AddOnCategory::kTribes, AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
-                                              "images/wui/stats/menu_tab_wares_warehouse.png"}},
+    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false}},
+   {AddOnCategory::kTribes,
+    AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
+                      "images/wui/stats/menu_tab_wares_warehouse.png", true}},
    {AddOnCategory::kWorld, AddOnCategoryInfo{"world", []() { return _("World"); },
-                                             "images/wui/menus/toggle_immovables.png"}},
-   {AddOnCategory::kScript,
-    AddOnCategoryInfo{"script", []() { return _("Script"); }, "images/logos/WL-Editor-32.png"}},
+                                             "images/wui/menus/toggle_immovables.png", true}},
+   {AddOnCategory::kScript, AddOnCategoryInfo{"script", []() { return _("Script"); },
+                                              "images/logos/WL-Editor-32.png", true}},
    {AddOnCategory::kMaps, AddOnCategoryInfo{"maps", []() { return _("Map Set"); },
-                                            "images/wui/menus/toggle_minimap.png"}},
+                                            "images/wui/menus/toggle_minimap.png", true}},
+   {AddOnCategory::kMapGenerator,
+    AddOnCategoryInfo{"map_generator", []() { return _("Map Generator"); },
+                      "images/wui/editor/menus/new_random_map.png", false}},
    {AddOnCategory::kCampaign, AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
-                                                "images/wui/messages/messages_warfare.png"}},
+                                                "images/wui/messages/messages_warfare.png", false}},
    {AddOnCategory::kWinCondition,
-    AddOnCategoryInfo{
-       "win_condition", []() { return _("Win Condition"); }, "images/wui/menus/objectives.png"}},
+    AddOnCategoryInfo{"win_condition", []() { return _("Win Condition"); },
+                      "images/wui/menus/objectives.png", true}},
    {AddOnCategory::kStartingCondition,
     AddOnCategoryInfo{"starting_condition", []() { return _("Starting Condition"); },
-                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png"}},
-   {AddOnCategory::kTheme,
-    AddOnCategoryInfo{"theme", []() { return _("Theme"); }, "images/wui/menus/main_menu.png"}}};
+                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", true}},
+   {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
+                                             "images/wui/menus/main_menu.png", false}}};
 
 std::vector<AddOnState> g_addons;
 
@@ -252,6 +257,30 @@ unsigned count_all_dependencies(const std::string& info,
 		deps += count_all_dependencies(req, all);
 	}
 	return deps;
+}
+
+std::string list_game_relevant_addons() {
+	std::vector<std::string> addons;
+	for (const auto& pair : AddOns::g_addons) {
+		if (pair.second && AddOns::kAddOnCategories.at(pair.first->category).network_relevant) {
+			addons.push_back(pair.first->descname());
+		}
+	}
+
+	if (addons.empty()) {
+		return as_richtext(g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		                      .as_font_tag(_("No game-relevant add-ons in use.")));
+	}
+
+	std::string addons_text =
+	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+	      .as_font_tag(format(ngettext("%u game-relevant add-on in use:",
+	                                   "%u game-relevant add-ons in use:", addons.size()),
+	                          addons.size()));
+	for (const std::string& a : addons) {
+		addons_text += as_listitem(a, UI::FontStyle::kFsMenuInfoPanelParagraph);
+	}
+	return as_richtext(addons_text);
 }
 
 AddOnCategory get_category(const std::string& name) {

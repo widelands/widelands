@@ -101,6 +101,7 @@ wl_library(logic_addons
     build_info
     graphic
     graphic_image_cache
+    graphic_text_layout
     io_fileread
     io_filesystem
     io_profile
@@ -221,6 +222,7 @@ wl_library(logic_commands
     scripting_coroutine
     scripting_logic # TODO(GunChleoc): Circular dependency
     scripting_lua_table
+    wui
 )
 
 

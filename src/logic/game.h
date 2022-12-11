@@ -264,7 +264,7 @@ public:
 	void report_desync(int32_t playernumber);
 	Md5Checksum get_sync_hash() const;
 
-	void enqueue_command(Command* const);
+	void enqueue_command(Command*);
 
 	void send_player_command(Widelands::PlayerCommand*);
 
@@ -306,8 +306,11 @@ public:
 	void send_player_propose_trade(const Trade& trade);
 	void send_player_toggle_mute(const Building&, bool all);
 	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
+	void send_player_pinned_note(
+	   PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del);
 
 	InteractivePlayer* get_ipl();
+	const InteractivePlayer* get_ipl() const;
 
 	SaveHandler& save_handler() {
 		return savehandler_;
@@ -373,12 +376,16 @@ public:
 	void cancel_trade(int trade_id);
 
 	struct PendingDiplomacyAction {
-		const PlayerNumber sender;     ///< The player who initiated the action.
-		const DiplomacyAction action;  ///< The action to perform.
-		const PlayerNumber other;      ///< The other player affected, if any.
+		PlayerNumber sender;     ///< The player who initiated the action.
+		DiplomacyAction action;  ///< The action to perform.
+		PlayerNumber other;      ///< The other player affected, if any.
 
 		PendingDiplomacyAction(PlayerNumber p1, DiplomacyAction a, PlayerNumber p2)
 		   : sender(p1), action(a), other(p2) {
+		}
+
+		inline bool operator==(const PendingDiplomacyAction& pda) const {
+			return sender == pda.sender && action == pda.action && other == pda.other;
 		}
 	};
 	const std::list<PendingDiplomacyAction>& pending_diplomacy_actions() const {
@@ -396,20 +403,14 @@ public:
 	}
 
 private:
-	bool did_postload_addons_before_loading_;
+	bool did_postload_addons_before_loading_{false};
 
 	void sync_reset();
 
 	MD5Checksum<StreamWrite> synchash_;
 
 	struct SyncWrapper : public StreamWrite {
-		SyncWrapper(Game& game, StreamWrite& target)
-		   : game_(game),
-		     target_(target),
-		     counter_(0),
-		     next_diskspacecheck_(0),
-		     syncstreamsave_(false),
-		     current_excerpt_id_(0) {
+		SyncWrapper(Game& game, StreamWrite& target) : game_(game), target_(target) {
 		}
 
 		~SyncWrapper() override;
@@ -429,14 +430,14 @@ private:
 	public:
 		Game& game_;
 		StreamWrite& target_;
-		uint32_t counter_;
-		uint32_t next_diskspacecheck_;
+		uint32_t counter_{0U};
+		uint32_t next_diskspacecheck_{0U};
 		std::unique_ptr<StreamWrite> dump_;
 		std::string dumpfname_;
-		bool syncstreamsave_;
+		bool syncstreamsave_{false};
 		// Use a cyclic buffer for storing parts of the syncstream
 		// Currently used buffer
-		size_t current_excerpt_id_;
+		size_t current_excerpt_id_{0U};
 		// (Arbitrary) count of buffers
 		// Syncreports seem to be requested from the network clients every game second so this
 		// buffer should be big enough to store the last 32 seconds of the game actions leading
@@ -453,17 +454,17 @@ private:
 	/// Whether a replay writer should be created.
 	/// Defaults to \c true, and should only be set to \c false for playing back
 	/// replays.
-	bool writereplay_;
+	bool writereplay_{true};
 
 	/// Whether a syncsteam file should be created.
 	/// Defaults to \c false, and can be set to true for network games. The file
 	/// is written only if \ref writereplay_ is true too.
-	bool writesyncstream_;
+	bool writesyncstream_{false};
 
-	bool ai_training_mode_;
-	bool auto_speed_;
+	bool ai_training_mode_{false};
+	bool auto_speed_{false};
 
-	int32_t state_;
+	int32_t state_{gs_notrunning};
 
 	RNG rng_;
 
@@ -474,7 +475,7 @@ private:
 
 	std::unique_ptr<ReplayWriter> replaywriter_;
 
-	uint32_t scenario_difficulty_;
+	uint32_t scenario_difficulty_{kScenarioDifficultyNotSet};
 
 	GeneralStatsVector general_stats_;
 	int next_trade_agreement_id_ = 1;
@@ -482,16 +483,16 @@ private:
 	std::map<int, TradeAgreement> trade_agreements_;
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
-	bool diplomacy_allowed_;
+	bool diplomacy_allowed_{true};
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
 
-	int32_t win_condition_duration_;
+	int32_t win_condition_duration_{kDefaultWinConditionDuration};
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	std::unique_ptr<TrainingWheels> training_wheels_;
-	bool training_wheels_wanted_;
+	bool training_wheels_wanted_{false};
 #endif
 
 	/** Filename of the replay represented by this game, or empty if this is not a replay. */

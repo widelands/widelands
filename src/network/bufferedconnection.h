@@ -108,7 +108,7 @@ public:
 		BufferedConnection* conn_;
 
 		/// The position of the next peek.
-		size_t peek_pointer_;
+		size_t peek_pointer_{0U};
 	};
 
 	/**
@@ -143,7 +143,7 @@ public:
 	 * Returns whether the connection is established.
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */
-	bool is_connected() const;
+	[[nodiscard]] bool is_connected() const;
 
 	/**
 	 * Closes the connection.
@@ -331,7 +331,7 @@ private:
 	/// Protects receive_buffer_
 	std::mutex mutex_receive_;
 	/// Whether we are currently sending something, used within start_sending()
-	bool currently_sending_;
+	bool currently_sending_{false};
 };
 
 #endif  // end of include guard: WL_NETWORK_BUFFEREDCONNECTION_H

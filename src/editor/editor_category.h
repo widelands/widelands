@@ -38,18 +38,18 @@ public:
 	                        Widelands::Descriptions& descriptions);
 
 	/// Internal name.
-	const std::string& name() const;
+	[[nodiscard]] const std::string& name() const;
 
 	/// User facing (translated) name.
-	const std::string& descname() const;
+	[[nodiscard]] const std::string& descname() const;
 
 	/// The menu image for the category.
-	const Image* picture() const;
+	[[nodiscard]] const Image* picture() const;
 
 	/// The number of items displayed in each row.
-	int items_per_row() const;
+	[[nodiscard]] int items_per_row() const;
 
-	const std::vector<Widelands::DescriptionIndex>& items() const;
+	[[nodiscard]] const std::vector<Widelands::DescriptionIndex>& items() const;
 
 private:
 	const std::string name_;

@@ -83,15 +83,6 @@ constexpr int kMineTypes = 4;
 namespace AI {
 
 // Fix undefined references
-constexpr Duration DefaultAI::kManagementUpdateInterval;
-constexpr Duration DefaultAI::kStatUpdateInterval;
-constexpr Duration DefaultAI::kFlagWarehouseUpdInterval;
-constexpr Duration DefaultAI::kExpeditionMinDuration;
-constexpr Duration DefaultAI::kExpeditionMaxDuration;
-constexpr Duration DefaultAI::kShipCheckInterval;
-constexpr Duration DefaultAI::kCampaignDuration;
-constexpr Duration DefaultAI::kTrainingSitesCheckInterval;
-constexpr Duration DefaultAI::kDiplomacyInterval;
 
 DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
@@ -104,30 +95,20 @@ bool DefaultAI::map_allows_seafaring_ = false;
 DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, AiType const t)
    : ComputerPlayer(ggame, pid),
      type_(t),
-     player_(nullptr),
-     tribe_(nullptr),
-     attackers_count_(0),
+
      // Delay initialization to allow scenario scripts
      // to load custom units/buildings at gametime 0
      next_ai_think_(1),
-     scheduler_delay_counter_(0),
-     numof_psites_in_constr(0),
-     num_ports(0),
-     numof_warehouses_(0),
-     numof_warehouses_in_const_(0),
+
      military_last_dismantle_(0),
      military_last_build_(0),
      time_of_last_construction_(0),
      next_mine_construction_due_(0),
-     fishers_count_(0),
+
      first_iron_mine_built(50 * 60 * 60 * 1000),
-     ts_finished_count_(0),
-     ts_in_const_count_(0),
-     ts_without_trainers_(0),
+
      enemysites_check_delay_(30),
-     spots_(0),
-     resource_necessity_water_needed_(false),
-     highest_nonmil_prio_(0),
+
      expedition_ship_(kNoShip) {
 
 	// Subscribe to NoteFieldPossession.

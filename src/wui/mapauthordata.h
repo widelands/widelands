@@ -27,10 +27,10 @@
  * Author data for a map or scenario.
  */
 struct MapAuthorData {
-	const std::string& get_names() const {
+	[[nodiscard]] const std::string& get_names() const {
 		return names_;
 	}
-	size_t get_number() const {
+	[[nodiscard]] size_t get_number() const {
 		return number_;
 	}
 

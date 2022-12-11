@@ -36,13 +36,6 @@ wl.Descriptions():new_trainingsite_type {
       { name = "empire_bread", amount = 8 }
    },
 
-   ["soldier evade"] = {
-      food = {
-         {"fish", "meat"},
-         {"empire_bread"}
-      }
-   },
-
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...

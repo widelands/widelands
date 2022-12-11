@@ -31,7 +31,7 @@
 struct GameClientImpl;
 namespace FsMenu {
 class MenuCapsule;
-}
+}  // namespace FsMenu
 
 /**
  * GameClient manages the lifetime of a network game in which this computer
@@ -83,19 +83,17 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	bool can_launch() override;
 
-	virtual void set_map(const std::string& mapname,
-	                     const std::string& mapfilename,
-	                     const std::string&,
-	                     const std::string&,
-	                     uint32_t maxplayers,
-	                     bool savegame = false) override;
+	void set_map(const std::string& mapname,
+	             const std::string& mapfilename,
+	             const std::string&,
+	             const std::string&,
+	             uint32_t maxplayers,
+	             bool savegame = false) override;
 	void set_player_state(uint8_t number, PlayerSettings::State state) override;
-	virtual void
-	set_player_ai(uint8_t number, const std::string& ai, bool const random_ai = false) override;
+	void set_player_ai(uint8_t number, const std::string& ai, bool random_ai = false) override;
 	void next_player_state(uint8_t number) override;
-	virtual void set_player_tribe(uint8_t number,
-	                              const std::string& tribe,
-	                              bool const random_tribe = false) override;
+	void
+	set_player_tribe(uint8_t number, const std::string& tribe, bool random_tribe = false) override;
 	void set_player_init(uint8_t number, uint8_t initialization_index) override;
 	void set_player_name(uint8_t number, const std::string& name) override;
 	void set_player(uint8_t number, const PlayerSettings& ps) override;
@@ -117,8 +115,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	// ChatProvider interface
 	void send(const std::string& msg) override;
-	const std::vector<ChatMessage>& get_messages() const override;
-	bool has_been_set() const override {
+	[[nodiscard]] const std::vector<ChatMessage>& get_messages() const override;
+	[[nodiscard]] bool has_been_set() const override {
 		return true;
 	}
 

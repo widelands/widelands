@@ -31,19 +31,19 @@ struct IdleWorkerSupply : public Supply {
 	void set_economy(Economy*);
 	PlayerImmovable* get_position(Game&) override;
 
-	bool is_active() const override;
+	[[nodiscard]] bool is_active() const override;
 	SupplyProviders provider_type(Game*) const override;
-	bool has_storage() const override;
+	[[nodiscard]] bool has_storage() const override;
 	void get_ware_type(WareWorker& type, DescriptionIndex& ware) const override;
 	void send_to_storage(Game&, Warehouse* wh) override;
 
-	uint32_t nr_supplies(const Game&, const Request&) const override;
+	[[nodiscard]] uint32_t nr_supplies(const Game&, const Request&) const override;
 	WareInstance& launch_ware(Game&, const Request&) override;
 	Worker& launch_worker(Game&, const Request&) override;
 
 private:
 	Worker& worker_;
-	Economy* economy_;
+	Economy* economy_{nullptr};
 };
 }  // namespace Widelands
 

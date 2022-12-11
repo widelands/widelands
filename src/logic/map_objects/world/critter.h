@@ -39,34 +39,34 @@ public:
 	             const std::vector<std::string>& attribs);
 	~CritterDescr() override = default;
 
-	Bob& create_object() const override;
+	[[nodiscard]] Bob& create_object() const override;
 
-	bool is_swimming() const;
-	uint32_t movecaps() const override;
-	const DirAnimations& get_walk_anims() const {
+	[[nodiscard]] bool is_swimming() const;
+	[[nodiscard]] uint32_t movecaps() const override;
+	[[nodiscard]] const DirAnimations& get_walk_anims() const {
 		return walk_anims_;
 	}
 
-	bool is_herbivore() const {
+	[[nodiscard]] bool is_herbivore() const {
 		return !food_plants_.empty();
 	}
-	bool is_carnivore() const {
+	[[nodiscard]] bool is_carnivore() const {
 		return carnivore_;
 	}
-	uint8_t get_size() const {
+	[[nodiscard]] uint8_t get_size() const {
 		return size_;
 	}
-	const std::set<uint32_t>& food_plants() const {
+	[[nodiscard]] const std::set<uint32_t>& food_plants() const {
 		return food_plants_;
 	}
-	uint8_t get_appetite() const {
+	[[nodiscard]] uint8_t get_appetite() const {
 		return appetite_;
 	}
-	uint8_t get_reproduction_rate() const {
+	[[nodiscard]] uint8_t get_reproduction_rate() const {
 		return reproduction_rate_;
 	}
 
-	CritterProgram const* get_program(const std::string&) const;
+	[[nodiscard]] CritterProgram const* get_program(const std::string&) const;
 
 private:
 	DirAnimations walk_anims_;
@@ -75,7 +75,7 @@ private:
 	const uint8_t size_;
 	const bool carnivore_;
 	std::set<uint32_t> food_plants_;  // set of immovable attributes
-	uint8_t appetite_;  // chance that we feel hungry when we encounter one food item, in %
+	uint8_t appetite_{0U};  // chance that we feel hungry when we encounter one food item, in %
 	const uint8_t reproduction_rate_;  // reproduction adjustment factor, in %
 	DISALLOW_COPY_AND_ASSIGN(CritterDescr);
 };

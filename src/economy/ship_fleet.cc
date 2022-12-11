@@ -57,8 +57,7 @@ const ShipFleetDescr& ShipFleet::descr() const {
  * instance, then add themselves \em before calling the \ref init function.
  * The Fleet takes care of merging with existing fleets, if any.
  */
-ShipFleet::ShipFleet(Player* player)
-   : MapObject(&g_ship_fleet_descr), act_pending_(false), schedule_(*this) {
+ShipFleet::ShipFleet(Player* player) : MapObject(&g_ship_fleet_descr), schedule_(*this) {
 	owner_ = player;
 }
 
@@ -460,7 +459,7 @@ struct StepEvalFindPorts {
 		return std::max(0, est - 5 * map.calc_cost(0));
 	}
 
-	int32_t stepcost(
+	[[nodiscard]] int32_t stepcost(
 	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
 		if ((to.field->nodecaps() & MOVECAPS_SWIM) == 0) {
 			return -1;

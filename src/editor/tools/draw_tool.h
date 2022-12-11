@@ -25,7 +25,7 @@
 ///  This is not a real editor tool. It serves to combine 'hold down mouse and move'
 ///  tool actions in one class.
 struct EditorDrawTool : public EditorTool {
-	EditorDrawTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	explicit EditorDrawTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -38,7 +38,7 @@ struct EditorDrawTool : public EditorTool {
 
 	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/novalue.png");
 	}
 

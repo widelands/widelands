@@ -39,19 +39,19 @@ struct StatisticsPlotStyleInfo {
 	     zero_line_color_(init_zero_line_color) {
 	}
 
-	const UI::FontStyleInfo& x_tick_font() const {
-		return *x_tick_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& x_tick_font() const {
+		return *x_tick_font_;
 	}
-	const UI::FontStyleInfo& y_min_value_font() const {
-		return *y_min_value_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& y_min_value_font() const {
+		return *y_min_value_font_;
 	}
-	const UI::FontStyleInfo& y_max_value_font() const {
-		return *y_max_value_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& y_max_value_font() const {
+		return *y_max_value_font_;
 	}
-	const RGBColor& axis_line_color() const {
+	[[nodiscard]] const RGBColor& axis_line_color() const {
 		return axis_line_color_;
 	}
-	const RGBColor& zero_line_color() const {
+	[[nodiscard]] const RGBColor& zero_line_color() const {
 		return zero_line_color_;
 	}
 

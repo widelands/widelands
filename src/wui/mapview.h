@@ -35,19 +35,19 @@ public:
 	class ViewArea {
 	public:
 		// View in map pixels that is spanned by this.
-		const Rectf& rect() const {
+		[[nodiscard]] const Rectf& rect() const {
 			return rect_;
 		}
 
 		// Returns true if 'coords' is contained inside this view. Containing
 		// is defined as such that the shortest distance between the center of
 		// 'rect()' is smaller than (rect().w / 2, rect().h / 2).
-		bool contains(const Widelands::Coords& coords) const;
+		[[nodiscard]] bool contains(const Widelands::Coords& coords) const;
 
 		// Returns a map pixel 'p' such that rect().x <= p.x <= rect().x + rect().w similar
 		// for y. This requires that 'contains' would return true for 'coords', otherwise this will
 		// be an infinite loop.
-		Vector2f find_pixel_for_coordinates(const Widelands::Coords& coords) const;
+		[[nodiscard]] Vector2f find_pixel_for_coordinates(const Widelands::Coords& coords) const;
 
 	private:
 		friend class MapView;
@@ -55,7 +55,7 @@ public:
 		ViewArea(const Rectf& rect, const Widelands::Map& map);
 
 		// Returns true if 'map_pixel' is inside this view area.
-		bool contains_map_pixel(const Vector2f& map_pixel) const;
+		[[nodiscard]] bool contains_map_pixel(const Vector2f& map_pixel) const;
 
 		const Rectf rect_;
 		const Widelands::Map& map_;
@@ -67,11 +67,11 @@ public:
 		View() : View(Vector2f::zero(), 1.0f) {
 		}
 
-		bool zoom_near(float other_zoom) const;
+		[[nodiscard]] bool zoom_near(float other_zoom) const;
 
-		bool view_near(const View& other) const;
+		[[nodiscard]] bool view_near(const View& other) const;
 
-		bool view_roughly_near(const View& other) const;
+		[[nodiscard]] bool view_roughly_near(const View& other) const;
 
 		// Mappixel of top-left pixel of this MapView.
 		Vector2f viewpoint;
@@ -91,18 +91,13 @@ public:
 	struct TimestampedMouse {
 		TimestampedMouse(uint32_t init_t, Vector2f init_pixel) : t(init_t), pixel(init_pixel) {
 		}
-		TimestampedMouse() : t(0), pixel(Vector2f::zero()) {
-		}
-		uint32_t t;
-		Vector2f pixel = Vector2f::zero();
+		TimestampedMouse() = default;
+		uint32_t t{0U};
+		Vector2f pixel{Vector2f::zero()};
 	};
 
-	MapView(UI::Panel* const parent,
-	        const Widelands::Map& map,
-	        const int32_t x,
-	        const int32_t y,
-	        const uint32_t w,
-	        const uint32_t h);
+	MapView(
+	   UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h);
 	~MapView() override = default;
 
 	// Called whenever the view changed, also during automatic animations.
@@ -215,11 +210,12 @@ private:
 
 	View view_;
 	Vector2i last_mouse_pos_;
-	bool dragging_;
+	bool dragging_{false};
 
 	bool edge_scrolling_;
 	bool invert_movement_;
-	int8_t is_scrolling_x_, is_scrolling_y_;
+	int8_t is_scrolling_x_{0};
+	int8_t is_scrolling_y_{0};
 
 	// The queue of plans to execute as animations.
 	std::deque<std::deque<TimestampedView>> view_plans_;

@@ -93,6 +93,9 @@ public:
 	}
 
 	Field& operator=(const Field& other) {
+		if (&other == this) {
+			return *this;
+		}
 		bobs = other.bobs;
 		immovable = other.immovable;
 		caps = other.caps;
@@ -110,28 +113,28 @@ public:
 		return *this;
 	}
 
-	Height get_height() const {
+	[[nodiscard]] Height get_height() const {
 		return height;
 	}
-	NodeCaps nodecaps() const {
+	[[nodiscard]] NodeCaps nodecaps() const {
 		return static_cast<NodeCaps>(caps);
 	}
-	NodeCaps maxcaps() const {
+	[[nodiscard]] NodeCaps maxcaps() const {
 		return static_cast<NodeCaps>(max_caps);
 	}
-	uint16_t get_caps() const {
+	[[nodiscard]] uint16_t get_caps() const {
 		return caps;
 	}
 
-	Terrains get_terrains() const {
+	[[nodiscard]] Terrains get_terrains() const {
 		return terrains;
 	}
 	// The terrain on the downward triangle
-	DescriptionIndex terrain_d() const {
+	[[nodiscard]] DescriptionIndex terrain_d() const {
 		return terrains.d;
 	}
 	// The terrain on the triangle to the right
-	DescriptionIndex terrain_r() const {
+	[[nodiscard]] DescriptionIndex terrain_r() const {
 		return terrains.r;
 	}
 	void set_terrains(const Terrains& i) {
@@ -140,10 +143,11 @@ public:
 	void set_terrain(const TriangleIndex& t, DescriptionIndex const i)
 
 	{
-		if (t == TriangleIndex::D)
+		if (t == TriangleIndex::D) {
 			set_terrain_d(i);
-		else
+		} else {
 			set_terrain_r(i);
+		}
 	}
 	void set_terrain_d(DescriptionIndex const i) {
 		terrains.d = i;
@@ -152,10 +156,10 @@ public:
 		terrains.r = i;
 	}
 
-	Bob* get_first_bob() const {
+	[[nodiscard]] Bob* get_first_bob() const {
 		return bobs;
 	}
-	const BaseImmovable* get_immovable() const {
+	[[nodiscard]] const BaseImmovable* get_immovable() const {
 		return immovable;
 	}
 	BaseImmovable* get_immovable() {
@@ -163,7 +167,7 @@ public:
 	}
 
 	void set_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
-	int8_t get_brightness() const {
+	[[nodiscard]] int8_t get_brightness() const {
 		return brightness;
 	}
 
@@ -176,12 +180,12 @@ public:
 		owner_info_and_selections = n | (owner_info_and_selections & ~Player_Number_Bitmask);
 	}
 
-	PlayerNumber get_owned_by() const {
+	[[nodiscard]] PlayerNumber get_owned_by() const {
 		assert((owner_info_and_selections & Player_Number_Bitmask) <= kMaxPlayers);
 		return owner_info_and_selections & Player_Number_Bitmask;
 	}
-	bool is_border() const {
-		return owner_info_and_selections & Border_Bitmask;
+	[[nodiscard]] bool is_border() const {
+		return (owner_info_and_selections & Border_Bitmask) != 0;
 	}
 
 	///
@@ -191,17 +195,18 @@ public:
 	///
 	/// player_number must be in the range 1 .. Player_Number_Bitmask or the
 	/// behaviour is undefined.
-	bool is_interior(const PlayerNumber player_number) const {
+	[[nodiscard]] bool is_interior(const PlayerNumber player_number) const {
 		assert(0 < player_number);
 		assert(player_number <= Player_Number_Bitmask);
 		return player_number == (owner_info_and_selections & Owner_Info_Bitmask);
 	}
 
 	void set_border(const bool b) {
-		owner_info_and_selections = (owner_info_and_selections & ~Border_Bitmask) | (b << Border_Bit);
+		owner_info_and_selections =
+		   (owner_info_and_selections & ~Border_Bitmask) | (static_cast<int>(b) << Border_Bit);
 	}
 
-	RoadSegment get_road(uint8_t dir) const {
+	[[nodiscard]] RoadSegment get_road(uint8_t dir) const {
 		switch (dir) {
 		case WalkingDir::WALK_E:
 			return road_east;
@@ -231,14 +236,14 @@ public:
 
 	// Resources can be set through Map::set_resources()
 	// TODO(unknown): This should return DescriptionIndex
-	DescriptionIndex get_resources() const {
+	[[nodiscard]] DescriptionIndex get_resources() const {
 		return resources;
 	}
-	ResourceAmount get_resources_amount() const {
+	[[nodiscard]] ResourceAmount get_resources_amount() const {
 		return res_amount;
 	}
 	// TODO(unknown): This should return uint8_t
-	ResourceAmount get_initial_res_amount() const {
+	[[nodiscard]] ResourceAmount get_initial_res_amount() const {
 		return initial_res_amount;
 	}
 

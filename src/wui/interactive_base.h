@@ -40,7 +40,7 @@ class MainToolbar;
 class UniqueWindowHandler;
 namespace Widelands {
 class MapObjectLoader;
-}
+}  // namespace Widelands
 
 struct WorkareaPreview {
 	Widelands::Coords coords;
@@ -167,23 +167,22 @@ public:
 	/**
 	 * Log a message to be displayed on screen
 	 */
-	void log_message(const std::string& message) const;
-	void log_message(const char* message) const {
-		log_message(std::string(message));
+	void log_message(const std::string& message, const std::string& tooltip = std::string()) const;
+	void log_message(const char* message, const char* tt = nullptr) const {
+		log_message(std::string(message), tt == nullptr ? std::string() : std::string(tt));
 	}
 
 	void toggle_minimap();
+	void toggle_quicknav();
 	// Toggles the buildhelp and calls rebuild_showhide_menu
 	void toggle_buildhelp();
 
-	// Returns the list of landmarks that have been mapped to the keys 0-9
-	const QuickNavigation::Landmark* landmarks();
-
-	// Sets the landmark for the keyboard 'key' to 'point'
-	void set_landmark(size_t key, const MapView::View& view);
+	QuickNavigation& quick_navigation() {
+		return quick_navigation_;
+	}
 
 	void add_wanted_building_window(const Widelands::Coords& coords,
-	                                const Vector2i point,
+	                                Vector2i point,
 	                                bool was_minimal,
 	                                bool was_pinned);
 	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
@@ -225,7 +224,7 @@ public:
 
 protected:
 	// For referencing the items in mapviewmenu_
-	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom };
+	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom, kQuicknav };
 
 	// Adds the mapviewmenu_ to the toolbar
 	void add_mapview_menu(MiniMapType minimap_type);
@@ -282,7 +281,7 @@ protected:
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
-	const Image* get_sel_picture() {
+	const Image* get_sel_picture() const {
 		return sel_.pic;
 	}
 
@@ -292,6 +291,8 @@ protected:
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;
 	}
+
+	ChatColorForPlayer color_functor() const;
 
 	UI::Box* toolbar();
 
@@ -355,14 +356,15 @@ private:
 	virtual void rebuild_showhide_menu() = 0;
 
 	struct SelData {
-		SelData(const bool Freeze = false,
-		        const bool Triangles = false,
-		        const Widelands::NodeAndTriangle<>& Pos =
-		           Widelands::NodeAndTriangle<>{
-		              Widelands::Coords(0, 0),
-		              Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)},
-		        const uint32_t Radius = 0,
-		        const Image* Pic = nullptr)
+		explicit SelData(const bool Freeze = false,
+		                 const bool Triangles = false,
+		                 const Widelands::NodeAndTriangle<>& Pos =
+		                    Widelands::NodeAndTriangle<>{
+		                       Widelands::Coords(0, 0),
+		                       Widelands::TCoords<>(Widelands::Coords(0, 0),
+		                                            Widelands::TriangleIndex::D)},
+		                 const uint32_t Radius = 0,
+		                 const Image* Pic = nullptr)
 		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), pic(Pic) {
 		}
 		bool freeze;     // don't change sel, even if mouse moves
@@ -403,6 +405,7 @@ private:
 
 public:
 	MiniMap::Registry minimap_registry_;
+	UI::UniqueWindow::Registry quicknav_registry_;
 
 private:
 	// The currently enabled work area previews
@@ -414,24 +417,26 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
-	uint64_t lastframe_;        //  system time (milliseconds)
-	uint64_t frametime_;        //  in millseconds
-	uint64_t avg_usframetime_;  //  in microseconds!
+	uint64_t lastframe_;            //  system time (milliseconds)
+	uint64_t frametime_{0U};        //  in millseconds
+	uint64_t avg_usframetime_{0U};  //  in microseconds!
 
 	// For measuring actual game speed and how smoothly the game logic runs
-	uint64_t last_frame_realtime_, previous_frame_realtime_;
-	Time last_frame_gametime_, previous_frame_gametime_;
-	uint64_t avg_actual_gamespeed_;  // in microseconds gametime per second realtime
-	uint64_t last_target_gamespeed_;
-	uint64_t gamespeed_last_change_time_;
+	uint64_t last_frame_realtime_{0U};
+	uint64_t previous_frame_realtime_{0U};
+	Time last_frame_gametime_{0U};
+	Time previous_frame_gametime_{0U};
+	uint64_t avg_actual_gamespeed_{0U};  // in microseconds gametime per second realtime
+	uint64_t last_target_gamespeed_{0U};
+	uint64_t gamespeed_last_change_time_{0U};
 
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 
-	bool cheat_mode_enabled_;
-	bool screenshot_failed_;
+	bool cheat_mode_enabled_{false};
+	bool screenshot_failed_{false};
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

@@ -23,11 +23,11 @@ class InteractiveBase;
 
 namespace UI {
 class Panel;
-}
+}  // namespace UI
 
 namespace Widelands {
 class Building;
-}
+}  // namespace Widelands
 
 UI::Panel*
 create_soldier_capacity_control(UI::Panel& parent, InteractiveBase&, Widelands::Building& building);

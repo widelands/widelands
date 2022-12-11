@@ -34,7 +34,7 @@ namespace Widelands {
 /**
  * Most of the actual work is done in init.
  */
-RoadBase::RoadBase(const RoadBaseDescr& d) : PlayerImmovable(d), idle_index_(0) {
+RoadBase::RoadBase(const RoadBaseDescr& d) : PlayerImmovable(d) {
 	flags_[0] = flags_[1] = nullptr;
 	flagidx_[0] = flagidx_[1] = -1;
 	cost_[0] = cost_[1] = 0;

@@ -46,6 +46,13 @@ SUPPRESSED_CHECKS = {
     '[modernize-use-auto]',
     '[modernize-raw-string-literal]',
     '[modernize-return-braced-init-list]',
+    '[altera-id-dependent-backward-branch]',
+    '[altera-unroll-loops]',
+    '[llvmlibc-implementation-in-namespace]',
+    '[llvmlibc-restrict-system-libc-headers]',
+    '[misc-no-recursion]',
+    '[modernize-replace-disallow-copy-and-assign-macro]',
+    '[readability-identifier-length]',
 
     # Checks we probably want to clean up sometime (discussible; see link above)
     '[boost-use-to-string]',
@@ -87,7 +94,24 @@ SUPPRESSED_CHECKS = {
     '[readability-const-return-type]',
     '[readability-convert-member-functions-to-static]',
     '[readability-function-size]',
-    '[readability-magic-numbers]'
+    '[readability-magic-numbers]',
+    '[altera-struct-pack-align]',
+    '[bugprone-easily-swappable-parameters]',
+    '[bugprone-implicit-widening-of-multiplication-result]',
+    '[cert-err33-c]',
+    '[concurrency-mt-unsafe]',
+    '[cppcoreguidelines-avoid-non-const-global-variables]',
+    '[cppcoreguidelines-prefer-member-initializer]',
+    '[google-readability-casting]',
+    '[hicpp-named-parameter]',
+    '[hicpp-use-nullptr]',
+    '[misc-unused-using-decls]',
+    '[modernize-use-default-member-init]',
+    '[performance-no-int-to-ptr]',
+    '[readability-container-data-pointer]',
+    '[readability-function-cognitive-complexity]',
+    '[readability-suspicious-call-argument]',
+    '[readability-use-anyofallof]',
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')

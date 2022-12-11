@@ -45,8 +45,6 @@
 
 namespace Widelands {
 
-constexpr Duration ConstructionSite::kConstructionsiteStepTime;
-
 void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
                                        const Widelands::Coords& coords,
                                        float scale,
@@ -163,10 +161,7 @@ IMPLEMENTATION
 */
 
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
-   : PartiallyFinishedBuilding(cs_descr),
-     fetchfromflag_(0),
-     builder_idle_(false),
-     settings_(nullptr) {
+   : PartiallyFinishedBuilding(cs_descr) {
 }
 
 void ConstructionSite::update_statistics_string(std::string* s) {

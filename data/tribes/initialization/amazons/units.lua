@@ -12,6 +12,7 @@ wl.Descriptions():new_tribe {
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {5, 35} },
+      pinned_note = { hotspot = {18, 67} },
       bridge_normal_e =  { hotspot = {-1, 15}},
       bridge_busy_e =    { hotspot = {-1, 15}},
       bridge_normal_se = { hotspot = {5, 4}},
@@ -35,6 +36,7 @@ wl.Descriptions():new_tribe {
       { ware = "gold", points = 12},
       { ware = "spear_stone_tipped", points = 1},
       { ware = "spear_hardened", points = 1},
+      { ware = "armor_wooden", points = 1},
       { ware = "helmet_wooden", points = 1},
       { ware = "warriors_coat", points = 16},
       { ware = "tunic", points = 1},

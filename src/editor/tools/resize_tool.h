@@ -40,11 +40,11 @@ struct EditorResizeTool : public EditorTool {
 
 	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_resize.png");
 	}
 
-	bool has_size_one() const override {
+	[[nodiscard]] bool has_size_one() const override {
 		return true;
 	}
 
@@ -52,7 +52,7 @@ struct EditorResizeTool : public EditorTool {
 		width_ = w;
 	}
 
-	uint32_t get_width() {
+	[[nodiscard]] uint32_t get_width() const {
 		return width_;
 	}
 
@@ -60,7 +60,7 @@ struct EditorResizeTool : public EditorTool {
 		height_ = h;
 	}
 
-	uint32_t get_height() {
+	[[nodiscard]] uint32_t get_height() const {
 		return height_;
 	}
 

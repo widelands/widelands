@@ -30,8 +30,7 @@ namespace AddOns {
 class MutableAddOn {
 public:
 	explicit MutableAddOn(const AddOnInfo& a);
-	virtual ~MutableAddOn() {
-	}
+	virtual ~MutableAddOn() = default;
 	// Creates an addon with its type matching its category
 	static std::unique_ptr<MutableAddOn> create_mutable_addon(const AddOnInfo& a);
 	void update_info(const std::string& descname,
@@ -46,31 +45,31 @@ public:
 	// May throw a WLWarning, if it fails
 	virtual bool write_to_disk();
 
-	const std::string& get_internal_name() const {
+	[[nodiscard]] const std::string& get_internal_name() const {
 		return internal_name_;
 	}
-	const std::string& get_descname() const {
+	[[nodiscard]] const std::string& get_descname() const {
 		return descname_;
 	}
-	const std::string& get_description() const {
+	[[nodiscard]] const std::string& get_description() const {
 		return description_;
 	}
-	const std::string& get_author() const {
+	[[nodiscard]] const std::string& get_author() const {
 		return author_;
 	}
-	const std::string& get_version() const {
+	[[nodiscard]] const std::string& get_version() const {
 		return version_;
 	}
-	const std::string& get_min_wl_version() const {
+	[[nodiscard]] const std::string& get_min_wl_version() const {
 		return min_wl_version_;
 	}
-	const std::string& get_max_wl_version() const {
+	[[nodiscard]] const std::string& get_max_wl_version() const {
 		return max_wl_version_;
 	}
 	void set_version(const std::string& version) {
 		version_ = version;
 	}
-	AddOnCategory get_category() const {
+	[[nodiscard]] AddOnCategory get_category() const {
 		return category_;
 	}
 
@@ -81,7 +80,7 @@ protected:
 	void cleanup_temp_dir();
 	size_t do_recursively_copy_file_or_directory(const std::string& source,
 	                                             const std::string& dest,
-	                                             const bool dry_run);
+	                                             bool dry_run);
 
 	std::string internal_name_, descname_, description_, author_, version_, min_wl_version_,
 	   max_wl_version_;
@@ -129,7 +128,7 @@ public:
 	void set_dirname(const std::string& dir, const std::string& name) {
 		dirnames_[dir] = name;
 	}
-	std::string get_dirname(const std::string& dir) const {
+	[[nodiscard]] std::string get_dirname(const std::string& dir) const {
 		const auto it = dirnames_.find(dir);
 		return it != dirnames_.end() ? it->second : "";
 	}
@@ -188,6 +187,11 @@ private:
 	std::regex rex_difficulty_, rex_difficulty_icon_, rex_descname_, rex_description_,
 	   rex_short_desc_, rex_tribe_, rex_scenario_;
 	CampaignInfo metadata_;
+};
+
+class MapGenAddon : public MutableAddOn {
+public:
+	using MutableAddOn::MutableAddOn;
 };
 
 class WinCondAddon : public MutableAddOn {

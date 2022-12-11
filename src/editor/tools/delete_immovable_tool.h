@@ -23,7 +23,8 @@
 
 /// Deletes immovables from the map.
 struct EditorDeleteImmovableTool : public EditorTool {
-	EditorDeleteImmovableTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	explicit EditorDeleteImmovableTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -36,7 +37,7 @@ struct EditorDeleteImmovableTool : public EditorTool {
 
 	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_delete.png");
 	}
 };

@@ -56,7 +56,7 @@ public:
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle);
-	~Table();
+	~Table() override;
 
 	Notifications::Signal<> cancel;
 	Notifications::Signal<uint32_t> selected;
@@ -77,14 +77,14 @@ public:
 
 	void clear();
 	void set_sort_column(uint8_t col);
-	uint8_t get_sort_colum() const;
+	uint8_t get_sort_column() const;
 	bool get_sort_descending() const;
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 	void remove_entry(Entry);
 
-	EntryRecord& add(void* const entry, bool const select_this = false);
+	EntryRecord& add(void* entry, bool select_this = false);
 
 	uint32_t size() const;
 	bool empty() const;
@@ -103,7 +103,7 @@ public:
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
-		char const* what() const noexcept override {
+		[[nodiscard]] char const* what() const noexcept override {
 			return "UI::Table<Entry>: No selection";
 		}
 	};
@@ -116,7 +116,7 @@ public:
 
 	uint32_t get_eff_w() const;
 
-	std::vector<Recti> focus_overlay_rects();
+	std::vector<Recti> focus_overlay_rects() override;
 
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
@@ -136,9 +136,9 @@ public:
 		void set_picture(uint8_t col, const Image* pic, const std::string& str = std::string());
 		/// Text conventions: Title Case for the 'str'
 		void set_string(uint8_t col, const std::string& str);
-		const Image* get_picture(uint8_t col) const;
-		const std::string& get_string(uint8_t col) const;
-		void* entry() const {
+		[[nodiscard]] const Image* get_picture(uint8_t col) const;
+		[[nodiscard]] const std::string& get_string(uint8_t col) const;
+		[[nodiscard]] void* entry() const {
 			return entry_;
 		}
 
@@ -146,11 +146,11 @@ public:
 			font_style_.reset(new FontStyle(style));
 		}
 
-		const UI::FontStyleInfo* font_style() const {
+		[[nodiscard]] const UI::FontStyleInfo* font_style() const {
 			return font_style_ ? &g_style_manager->font_style(*font_style_) : nullptr;
 		}
 
-		bool is_disabled() const {
+		[[nodiscard]] bool is_disabled() const {
 			return disabled_;
 		}
 		void set_disabled(bool disable) {
@@ -166,7 +166,7 @@ public:
 			std::string d_string;
 		};
 		std::vector<Data> data_;
-		bool disabled_;
+		bool disabled_{false};
 	};
 
 	Table(Panel* parent,
@@ -202,11 +202,8 @@ public:
 	size_t number_of_columns() const;
 
 	void clear();
-	void set_sort_column(uint8_t const col) {
-		assert(col < columns_.size());
-		sort_column_ = col;
-	}
-	uint8_t get_sort_colum() const {
+	void set_sort_column(uint8_t col);
+	uint8_t get_sort_column() const {
 		return sort_column_;
 	}
 	bool get_sort_descending() const {
@@ -218,9 +215,9 @@ public:
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
-	void remove_entry(const void* const entry);
+	void remove_entry(const void* entry);
 
-	EntryRecord& add(void* entry = nullptr, bool const do_select = false);
+	EntryRecord& add(void* entry = nullptr, bool do_select = false);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -261,14 +258,15 @@ public:
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
-		char const* what() const noexcept override {
+		[[nodiscard]] char const* what() const noexcept override {
 			return "UI::Table<void *>: No selection";
 		}
 	};
 	void scroll_to_item(int32_t item);
 	EntryRecord& get_selected_record() const {
-		if (selection_ == no_selection_index())
+		if (selection_ == no_selection_index()) {
 			throw NoSelection();
+		}
 		assert(selection_ < entry_records_.size());
 		return *entry_records_.at(selection_);
 	}
@@ -315,27 +313,30 @@ private:
 		int original_width;
 		Align alignment;
 		CompareFn compare;
+		std::string user_tooltip;
+
+		void update_tooltip(bool sorted) const;
 	};
 	using Columns = std::vector<Column>;
 
 	static const int32_t ms_darken_value = -20;
 
 	Columns columns_;
-	int total_width_;
+	int total_width_{0};
 	int32_t lineheight_;
 	const uint32_t headerheight_;
 	const UI::ButtonStyle button_style_;
-	Scrollbar* scrollbar_;
+	Scrollbar* scrollbar_{nullptr};
 	// A disabled button that will fill the space above the scroll bar
 	UI::Button* scrollbar_filler_button_;
-	int32_t scrollpos_;  //  in pixels
+	int32_t scrollpos_{0};  //  in pixels
 	uint32_t selection_;
 	uint32_t last_multiselect_;  // Remembers last selected element in multiselect mode for keyboard
 	                             // navigation
 	std::set<uint32_t> multiselect_;
-	uint32_t last_click_time_;
+	uint32_t last_click_time_{std::numeric_limits<uint32_t>::max()};
 	uint32_t last_selection_;  // for double clicks
-	Columns::size_type sort_column_;
+	Columns::size_type sort_column_{0};
 	bool sort_descending_;
 	// This column will grow/shrink depending on the scrollbar being present
 	size_t flexible_column_idx_;

@@ -37,6 +37,7 @@
 #include "wlapplication_options.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
+#include "wui/game_diplomacy_menu.h"
 #include "wui/game_exit_confirm_box.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
@@ -189,7 +190,8 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	switch (entry) {
 #ifndef NDEBUG  //  only in debug builds
 	case MainMenuEntry::kScriptConsole: {
-		GameChatMenu::create_script_console(this, debugconsole_, *DebugConsole::get_chat_provider());
+		GameChatMenu::create_script_console(
+		   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
 	} break;
 #endif
 	case MainMenuEntry::kOptions: {
@@ -225,6 +227,16 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 		}
 	} break;
 	}
+}
+
+void InteractiveGameBase::add_diplomacy_menu() {
+	add_toolbar_button(
+	   "wui/menus/diplomacy", "diplomacy",
+	   as_tooltip_text_with_hotkey(_("Diplomacy"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameDiplomacy, true),
+	                               UI::PanelStyle::kWui),
+	   &diplomacy_, true);
+	diplomacy_.open_window = [this] { new GameDiplomacyMenu(*this, diplomacy_); };
 }
 
 void InteractiveGameBase::add_showhide_menu() {
@@ -386,7 +398,7 @@ void InteractiveGameBase::add_chat_ui() {
 	   &chat_, true);
 	chat_.open_window = [this] {
 		if (chat_provider_ != nullptr) {
-			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+			GameChatMenu::create_chat_console(this, color_functor(), chat_, *chat_provider_);
 		}
 	};
 }
@@ -481,6 +493,10 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		menu_windows_.stats_general.toggle();
 		return true;
 	}
+	if (matches_shortcut(KeyboardShortcut::kInGameDiplomacy, code)) {
+		diplomacy_.toggle();
+		return true;
+	}
 	if (matches_shortcut(KeyboardShortcut::kInGameSave, code)) {
 		new GameMainMenuSaveGame(*this, menu_windows_.savegame, GameMainMenuSaveGame::Type::kSave);
 		return true;
@@ -493,7 +509,7 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	}
 	if ((chat_provider_ != nullptr) && matches_shortcut(KeyboardShortcut::kInGameChat, code)) {
 		if (chat_.window == nullptr) {
-			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+			GameChatMenu::create_chat_console(this, color_functor(), chat_, *chat_provider_);
 		}
 		return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
 	}

@@ -34,10 +34,10 @@ struct RoutingNode;
 struct RoutingNodeNeighbour {
 	RoutingNodeNeighbour(RoutingNode* const f, int32_t const cost) : nb_(f), cost_(cost) {
 	}
-	RoutingNode* get_neighbour() const {
+	[[nodiscard]] RoutingNode* get_neighbour() const {
 		return nb_;
 	}
-	int32_t get_cost() const {
+	[[nodiscard]] int32_t get_cost() const {
 		return cost_;
 	}
 
@@ -62,31 +62,21 @@ struct RoutingNode {
 	};
 	using Queue = CookiePriorityQueue<RoutingNode, LessCost>;
 
-	uint32_t mpf_cycle_ware;
+	uint32_t mpf_cycle_ware{0U};
 	Queue::Cookie mpf_cookie_ware;
-	int32_t mpf_realcost_ware;       ///< real cost of getting to this flag
-	RoutingNode* mpf_backlink_ware;  ///< flag where we came from
-	int32_t mpf_estimate_ware;       ///< estimate of cost to destination
+	int32_t mpf_realcost_ware{0};             ///< real cost of getting to this flag
+	RoutingNode* mpf_backlink_ware{nullptr};  ///< flag where we came from
+	int32_t mpf_estimate_ware{0};             ///< estimate of cost to destination
 
-	uint32_t mpf_cycle_worker;
+	uint32_t mpf_cycle_worker{0U};
 	Queue::Cookie mpf_cookie_worker;
-	int32_t mpf_realcost_worker;       ///< real cost of getting to this flag
-	RoutingNode* mpf_backlink_worker;  ///< flag where we came from
-	int32_t mpf_estimate_worker;       ///< estimate of cost to destination
+	int32_t mpf_realcost_worker{0};             ///< real cost of getting to this flag
+	RoutingNode* mpf_backlink_worker{nullptr};  ///< flag where we came from
+	int32_t mpf_estimate_worker{0};             ///< estimate of cost to destination
 
 public:
-	RoutingNode()
-	   : mpf_cycle_ware(0),
-	     mpf_realcost_ware(0),
-	     mpf_backlink_ware(nullptr),
-	     mpf_estimate_ware(0),
-	     mpf_cycle_worker(0),
-	     mpf_realcost_worker(0),
-	     mpf_backlink_worker(nullptr),
-	     mpf_estimate_worker(0) {
-	}
-	virtual ~RoutingNode() {
-	}
+	RoutingNode() = default;
+	virtual ~RoutingNode() = default;
 
 	void reset_path_finding_cycle(WareWorker which) {
 		switch (which) {
@@ -99,7 +89,7 @@ public:
 		}
 	}
 
-	int32_t cost(WareWorker which) const {
+	[[nodiscard]] int32_t cost(WareWorker which) const {
 		return (which == wwWARE) ? mpf_realcost_ware + mpf_estimate_ware :
                                  mpf_realcost_worker + mpf_estimate_worker;
 	}
@@ -109,7 +99,7 @@ public:
 
 	virtual Flag& base_flag() = 0;
 	virtual void get_neighbours(WareWorker type, RoutingNodeNeighbours&) = 0;
-	virtual const Coords& get_position() const = 0;
+	[[nodiscard]] virtual const Coords& get_position() const = 0;
 };
 }  // namespace Widelands
 

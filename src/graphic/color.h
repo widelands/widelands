@@ -32,10 +32,10 @@ struct RGBColor {
 	RGBColor();
 
 	// Returns this color in hex format.
-	std::string hex_value() const;
+	[[nodiscard]] std::string hex_value() const;
 
 	// Map this color to the given 'fmt'
-	uint32_t map(const SDL_PixelFormat& fmt) const;
+	[[nodiscard]] uint32_t map(const SDL_PixelFormat& fmt) const;
 
 	// Set it to the given 'clr' which is interpretes through 'fmt'.
 	void set(SDL_PixelFormat* fmt, uint32_t clr);
@@ -56,13 +56,13 @@ struct RGBAColor {
 	RGBAColor();
 
 	// Initializes to opaque color.
-	RGBAColor(const RGBColor& c);
+	RGBAColor(const RGBColor& c);  // NOLINT allow implicit conversion
 
 	// Returns this color in hex format.
-	std::string hex_value() const;
+	[[nodiscard]] std::string hex_value() const;
 
 	// Map this color to the given 'fmt'
-	uint32_t map(const SDL_PixelFormat& fmt) const;
+	[[nodiscard]] uint32_t map(const SDL_PixelFormat& fmt) const;
 
 	// Set it to the given 'clr' which is interpretes through 'fmt'.
 	void set(const SDL_PixelFormat& fmt, uint32_t clr);

@@ -72,13 +72,13 @@ struct NetAddress {
 	 * @return \c true if the stored IP is in IPv6 format, \c false otherwise.
 	 *   If it isn't an IPv6 address, it is an IPv4 address.
 	 */
-	bool is_ipv6() const;
+	[[nodiscard]] bool is_ipv6() const;
 
 	/**
 	 * Returns whether valid IP address and port are stored.
 	 * @return \c true if valid, \c false otherwise.
 	 */
-	bool is_valid() const;
+	[[nodiscard]] bool is_valid() const;
 
 	asio::ip::address ip;
 	uint16_t port;
@@ -95,7 +95,7 @@ struct CmdNetCheckSync : public Widelands::Command {
 
 	void execute(Widelands::Game&) override;
 
-	Widelands::QueueCommandTypes id() const override {
+	[[nodiscard]] Widelands::QueueCommandTypes id() const override {
 		return Widelands::QueueCommandTypes::kNetCheckSync;
 	}
 
@@ -120,8 +120,8 @@ public:
 	void fastforward();
 
 	void think(uint32_t speed);
-	const Time& time() const;
-	const Time& networktime() const;
+	[[nodiscard]] const Time& time() const;
+	[[nodiscard]] const Time& networktime() const;
 	void receive(const Time& ntime);
 
 private:
@@ -160,7 +160,7 @@ private:
 struct RecvPacket : public StreamRead {
 public:
 	size_t data(void* data, size_t bufsize) override;
-	bool end_of_file() const override;
+	[[nodiscard]] bool end_of_file() const override;
 
 private:
 	friend class BufferedConnection;
@@ -173,11 +173,11 @@ struct FilePart {
 };
 
 struct NetTransferFile {
-	NetTransferFile() : bytes(0), filename(""), md5sum("") {
+	NetTransferFile() : filename(""), md5sum("") {
 	}
 	~NetTransferFile() = default;
 
-	uint32_t bytes;
+	uint32_t bytes{0U};
 	std::string filename;
 	std::string md5sum;
 	std::vector<FilePart> parts;
@@ -193,7 +193,7 @@ struct NetTransferFile {
 struct DisconnectException : public std::exception {
 	explicit DisconnectException(const char* fmt, ...) PRINTF_FORMAT(2, 3);
 
-	const char* what() const noexcept override;
+	[[nodiscard]] const char* what() const noexcept override;
 
 private:
 	std::string what_;
@@ -209,7 +209,7 @@ struct ProtocolException : public std::exception {
 	}
 
 	/// \returns the command number of the received message
-	const char* what() const noexcept override {
+	[[nodiscard]] const char* what() const noexcept override {
 		return what_.c_str();
 	}
 

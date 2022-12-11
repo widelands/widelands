@@ -26,7 +26,7 @@
 
 namespace Widelands {
 class ReplayReader;
-}
+}  // namespace Widelands
 
 class ReplayGameController : public GameController {
 public:
@@ -39,24 +39,26 @@ public:
 	GameController::GameType get_game_type() override;
 	uint32_t real_speed() override;
 	uint32_t desired_speed() override;
-	void set_desired_speed(uint32_t const speed) override;
+	void set_desired_speed(uint32_t speed) override;
 	bool is_paused() override;
-	void set_paused(bool const paused) override;
+	void set_paused(bool paused) override;
+	void
+	report_result(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string& info) override;
 
 private:
 	struct CmdReplayEnd : public Widelands::Command {
 		explicit CmdReplayEnd(const Time& init_duetime) : Widelands::Command(init_duetime) {
 		}
 		void execute(Widelands::Game& game) override;
-		Widelands::QueueCommandTypes id() const override;
+		[[nodiscard]] Widelands::QueueCommandTypes id() const override;
 	};
 
 	Widelands::Game& game_;
 	std::unique_ptr<Widelands::ReplayReader> replayreader_;
 	int32_t lastframe_;
 	Time time_;
-	uint32_t speed_;
-	bool paused_;
+	uint32_t speed_{1000};
+	bool paused_{false};
 };
 
 #endif  // end of include guard: WL_LOGIC_REPLAY_GAME_CONTROLLER_H

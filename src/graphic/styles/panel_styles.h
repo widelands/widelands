@@ -36,14 +36,14 @@ struct PanelStyleInfo {
 	   : margin_(other.margin()), image_(other.image()), color_(other.color()) {
 	}
 
-	const RGBAColor& color() const {
+	[[nodiscard]] const RGBAColor& color() const {
 		return color_;
 	}
-	const Image* image() const {
+	[[nodiscard]] const Image* image() const {
 		return image_;
 	}
 
-	int margin() const {
+	[[nodiscard]] int margin() const {
 		return margin_;
 	}
 

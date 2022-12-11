@@ -55,7 +55,7 @@ struct Supply : public Trackable {
 	 * Indicates whether this supply is active as explained above (out
 	 * on the road network).
 	 */
-	virtual bool is_active() const = 0;
+	[[nodiscard]] virtual bool is_active() const = 0;
 
 	/**
 	 * Return the type of player im/movable where the ware is now (warehouse,
@@ -69,7 +69,7 @@ struct Supply : public Trackable {
 	 *
 	 * If this is \c false, somebody needs to find this supply a warehouse.
 	 */
-	virtual bool has_storage() const = 0;
+	[[nodiscard]] virtual bool has_storage() const = 0;
 
 	/**
 	 * Gets the ware type of this supply.
@@ -90,7 +90,7 @@ struct Supply : public Trackable {
 	 * \return the number of wares or workers that can be launched right
 	 * now for the thing requested by the given request
 	 */
-	virtual uint32_t nr_supplies(const Game&, const Request&) const = 0;
+	[[nodiscard]] virtual uint32_t nr_supplies(const Game&, const Request&) const = 0;
 
 	/**
 	 * Prepare an ware to satisfy the given request. Note that the caller

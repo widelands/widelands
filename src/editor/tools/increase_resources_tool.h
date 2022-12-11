@@ -30,9 +30,7 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	                            EditorSetResourcesTool& the_set_to_tool)
 	   : EditorTool(parent, the_decrease_tool, the_set_to_tool),
 	     decrease_tool_(the_decrease_tool),
-	     set_tool_(the_set_to_tool),
-	     change_by_(1),
-	     cur_res_(0) {
+	     set_tool_(the_set_to_tool) {
 	}
 
 	/***
@@ -49,7 +47,7 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 
 	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_increase_resources.png");
 	}
 
@@ -58,23 +56,23 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 		return resource_tools_nodecaps(fcoords, egbase, cur_res_);
 	}
 
-	int32_t get_change_by() const {
+	[[nodiscard]] int32_t get_change_by() const {
 		return change_by_;
 	}
 	void set_change_by(const int32_t n) {
 		change_by_ = n;
 	}
-	Widelands::DescriptionIndex get_cur_res() const {
+	[[nodiscard]] Widelands::DescriptionIndex get_cur_res() const {
 		return cur_res_;
 	}
 	void set_cur_res(Widelands::DescriptionIndex const res) {
 		cur_res_ = res;
 	}
 
-	EditorDecreaseResourcesTool& decrease_tool() const {
+	[[nodiscard]] EditorDecreaseResourcesTool& decrease_tool() const {
 		return decrease_tool_;
 	}
-	EditorSetResourcesTool& set_tool() const {
+	[[nodiscard]] EditorSetResourcesTool& set_tool() const {
 		return set_tool_;
 	}
 
@@ -101,8 +99,8 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 private:
 	EditorDecreaseResourcesTool& decrease_tool_;
 	EditorSetResourcesTool& set_tool_;
-	int32_t change_by_;
-	Widelands::DescriptionIndex cur_res_;
+	int32_t change_by_{1};
+	Widelands::DescriptionIndex cur_res_{0U};
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_INCREASE_RESOURCES_TOOL_H

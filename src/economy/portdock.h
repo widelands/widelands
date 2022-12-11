@@ -36,9 +36,8 @@ class ExpeditionBootstrap;
 
 class PortdockDescr : public MapObjectDescr {
 public:
-	PortdockDescr(char const* const init_name, char const* const init_descname);
-	~PortdockDescr() override {
-	}
+	PortdockDescr(char const* init_name, char const* init_descname);
+	~PortdockDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(PortdockDescr);
@@ -148,12 +147,12 @@ private:
 
 	uint32_t calc_max_priority(const EditorGameBase&, const PortDock& dest) const;
 
-	ShipFleet* fleet_;
+	ShipFleet* fleet_{nullptr};
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
 	std::list<ShippingItem> waiting_;
-	bool expedition_ready_;
-	bool expedition_cancelling_;
+	bool expedition_ready_{false};
+	bool expedition_cancelling_{false};
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
 
@@ -161,14 +160,14 @@ private:
 protected:
 	class Loader : public PlayerImmovable::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&, uint8_t packet_version);
 		void load_pointers() override;
 		void load_finish() override;
 
 	private:
-		uint32_t warehouse_;
+		uint32_t warehouse_{0U};
 		std::vector<ShippingItem::Loader> waiting_;
 	};
 

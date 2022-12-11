@@ -52,9 +52,15 @@ private:
 	void update();
 	void clicked_ok();
 	void clicked_cancel();
-	void add_tag_checkbox(UI::Box* parent, const std::string& tag, const std::string& displ_name);
+	void add_tag_checkbox(UI::Box* parent, const std::string& tag);
 
-	const unsigned int padding_, indent_, labelh_, checkbox_space_, butw_, max_w_;
+	static constexpr unsigned padding_{4U};
+	static constexpr unsigned separator_{8U};
+	static constexpr unsigned indent_{10U};
+	static constexpr unsigned checkbox_space_{25U};
+	const unsigned labelh_;
+	const unsigned butw_;
+	const unsigned max_w_;
 
 	UI::Box tab_box_, buttons_box_;
 
@@ -91,8 +97,7 @@ struct SuggestedTeamsEntry : public UI::Panel {
 	                    const Widelands::Map&,
 	                    unsigned w,
 	                    Widelands::SuggestedTeamLineup);
-	~SuggestedTeamsEntry() override {
-	}
+	~SuggestedTeamsEntry() override = default;
 
 	void layout() override;
 

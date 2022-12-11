@@ -41,14 +41,14 @@ struct Route : public IRoute {
 	friend struct Router;
 	friend class Request;
 
-	Route();
+	Route() = default;
 
 	void init(int32_t) override;
 
-	int32_t get_totalcost() const {
+	[[nodiscard]] int32_t get_totalcost() const {
 		return totalcost_;
 	}
-	int32_t get_nrsteps() const {
+	[[nodiscard]] int32_t get_nrsteps() const {
 		return route_.size() - 1;
 	}
 	Flag& get_flag(EditorGameBase&, std::vector<Flag*>::size_type) const;
@@ -67,7 +67,7 @@ struct Route : public IRoute {
 	void insert_as_first(RoutingNode* node) override;
 
 private:
-	int32_t totalcost_;
+	int32_t totalcost_{0};
 	std::vector<OPtr<Flag>> route_;  ///< includes start and end flags
 };
 }  // namespace Widelands

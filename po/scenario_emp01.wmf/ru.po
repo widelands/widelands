@@ -5,6 +5,7 @@
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
 # Viktor S <awsswa59@gmail.com>, 2019
+# Yuriy Sokolov <lention@mail.ru>, 2022
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018
 # 66c17387c1d6640720971b8ab706da27_0feead1, 2015
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
-"Last-Translator: Viktor S <awsswa59@gmail.com>, 2019\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,31 +39,31 @@ msgstr "Постройте блокгауз на значке красного �
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Build a lumberjack’s house"
-msgstr "Постройте домик дровосека"
+msgstr "Постройте дом дровосека"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Lumberjack’s House"
-msgstr "Домик дровосека"
+msgstr "Дом дровосека"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:37
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr "Постройте домик дровосека на значке красного дома, к югу от Вашего временного склада."
+msgstr "Постройте дом дровосека на значке красного дома, к югу от Вашего временного склада."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr "Постройте 2 домика дровосека и лесопилку"
+msgstr "Постройте 2 дома дровосека и лесопилку"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr "Два домика дровосека и лесопилка"
+msgstr "Два дома дровосека и лесопилка"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr "Постройте ещё два домика дровосека и лесопилку, как только у вас появится для них место."
+msgstr "Постройте ещё два дома дровосека и лесопилку, как только у вас появится для них место."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:52
 msgid "Build a forester’s house"
@@ -70,12 +71,12 @@ msgstr "Постройте домик лесника"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Forester’s House"
-msgstr "Домик лесника"
+msgstr "Дом лесника"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr "Постройте домик лесника, чтобы сохранить древесные ресурсы этого острова."
+msgstr "Постройте дом лесника, чтобы сохранить древесные ресурсы этого острова."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
@@ -103,7 +104,7 @@ msgstr "Тёмная ночь"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:109
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:222
 msgid "Diary of Lutius"
-msgstr "Дневник Люциуса"
+msgstr "Дневник Люция"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:78
@@ -121,7 +122,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr "С армией в 150 человек, я получил приказ патрулировать нашу северную границу, пролегающую близ Галдинских гор в обширным, прекрасном и древнем лесу. Вскоре мы повстречали племя варваров, поначалу казалось мирным. Некоторые из моих людей даже торговали с ними товарами, а их дети прибегали в наш лагерь поглазеть на нашу чистую одежду и блестящее оружие."
+msgstr "С армией в 150 человек, я получил приказ патрулировать нашу северную границу, пролегающую близ Галдинских гор в обширном, прекрасном и древнем лесу. Вскоре мы повстречали племя варваров, поначалу бывшее дружелюбным. Некоторые из моих людей даже торговали с ними, а их дети прибегали в наш лагерь поглазеть на нашу чистую одежду и блестящее оружие."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -203,7 +204,7 @@ msgstr "Предчуствие"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:124
 msgid "Saledus looks around nervously…"
-msgstr "Саледус нервно озирается..."
+msgstr "Салед нервно озирается..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:126
@@ -235,7 +236,7 @@ msgstr "На данный момент безопасно"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:140
 msgid "Saledus speaks with a sigh of relief…"
-msgstr "Саледус говорит со вздохом облегчения …"
+msgstr "Салед говорит со вздохом облегчения …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:142
@@ -264,7 +265,7 @@ msgstr "Амалия улыбается..."
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:153
 msgid "Greetings, Lutius! I just met Saledus outside."
-msgstr "Приветствую, Люциус! Я только что встретила Саледуса снаружи."
+msgstr "Приветствую, Люций! Я только что встретила Саледа снаружи."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:156
@@ -279,7 +280,7 @@ msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr "Совершенно очевидно, что нам нужно дерево для ремонта нашего корабля. В общем, я шла через лес вчера, присматривая хорошее место для домика лесоруба и нашла его прямо к югу от нашего штаба."
+msgstr "Совершенно очевидно, что нам нужно дерево для ремонта нашего корабля. В общем, я шла через лес вчера, присматривая хорошее место для дома лесоруба и нашла его прямо к югу от нашего штаба."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:166
 msgid "Amalea recommends…"
@@ -292,7 +293,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr "Я получила сообщение, что наш первый дровосек сегодня начал свою работу. Возможно, было бы лучше подождать, пока он не освободит достаточно пространства для строительства еще двух домиков дровосека, чтобы мы могли получать бревна быстрее."
+msgstr "Я получила сообщение, что наш первый дровосек сегодня начал свою работу. Возможно, было бы лучше подождать, пока он не освободит достаточно пространства для строительства еще двух домов дровосека, чтобы мы могли получать бревна быстрее."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:171
@@ -324,7 +325,7 @@ msgstr "Я заметила, что строительство лесопилк�
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr "Плохая новость в том, что наши дровосеки вырубают деревья на невероятной скорости. На острове почти не осталось деревьев."
+msgstr "Плохая новость в том, что наши дровосеки вырубают деревья слишком быстро. На острове почти не осталось деревьев."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
@@ -332,12 +333,12 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr "Эти деревья - приют от песчаных бурь, которые приходят из пустыни и дают тень в жаркие дни. Кроме этоо, это дом для многих слабых животных. Мы не можем оставить этот остров полной пустыней."
+msgstr "Эти деревья - приют от песчаных бурь, которые приходят из пустыни и дают тень в жаркие дни. Кроме этого, это дом для многих слабых животных. Мы не можем оставить этот остров полной пустыней."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:192
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr "Люциус, пожалуйста, найдите кого-то, кто позаботится о посадке новых деревьев."
+msgstr "Люций, пожалуйста, найдите кого-то, кто позаботится о посадке новых деревьев."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:198
 msgid "Thinking About the Future"
@@ -345,7 +346,7 @@ msgstr "В раздумьях о будущем"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:199
 msgid "Saledus notes…"
-msgstr "Саледус отмечает…"
+msgstr "Салед отмечает…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:201
@@ -367,7 +368,7 @@ msgstr "Шаг вперед"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:211
 msgid "Saledus looks excited…"
-msgstr "Саледус выглядит взволнованным..."
+msgstr "Салед выглядит взволнованным..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:213
@@ -422,7 +423,7 @@ msgstr "Безопасный полуостров"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:239
 msgid "Saledus speaks:"
-msgstr "Саледус говорит:"
+msgstr "Салед говорит:"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:241

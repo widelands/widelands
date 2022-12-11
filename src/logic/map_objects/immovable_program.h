@@ -59,7 +59,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	public:
 		ActAnimate(const std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
-		uint32_t animation() const {
+		[[nodiscard]] uint32_t animation() const {
 			return parameters.animation;
 		}
 
@@ -149,10 +149,10 @@ struct ImmovableProgram : public MapObjectProgram {
 		ActConstruct(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
-		Duration buildtime() const {
+		[[nodiscard]] Duration buildtime() const {
 			return buildtime_;
 		}
-		Duration decaytime() const {
+		[[nodiscard]] Duration decaytime() const {
 			return decaytime_;
 		}
 
@@ -170,10 +170,9 @@ struct ImmovableProgram : public MapObjectProgram {
 	                 const std::vector<std::string>& lines,
 	                 ImmovableDescr& immovable);
 
-	~ImmovableProgram() override {
-	}
+	~ImmovableProgram() override = default;
 
-	size_t size() const {
+	[[nodiscard]] size_t size() const {
 		return actions_.size();
 	}
 	const Action& operator[](size_t const idx) const {
@@ -186,19 +185,17 @@ private:
 };
 
 struct ImmovableActionData {
-	ImmovableActionData() {
-	}
-	virtual ~ImmovableActionData() {
-	}
+	ImmovableActionData() = default;
+	virtual ~ImmovableActionData() = default;
 
-	virtual const char* name() const = 0;
+	[[nodiscard]] virtual const char* name() const = 0;
 	virtual void save(FileWrite& fw, Immovable& imm) const = 0;
 
 	static ImmovableActionData* load(FileRead& fr, const Immovable& imm, const std::string& name);
 };
 
 struct ActConstructData : ImmovableActionData {
-	const char* name() const override;
+	[[nodiscard]] const char* name() const override;
 	void save(FileWrite& fw, Immovable& imm) const override;
 	static ActConstructData* load(FileRead& fr, const Immovable& imm);
 

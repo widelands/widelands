@@ -34,25 +34,30 @@
 class FileRead : public StreamRead {
 public:
 	struct Pos {
-		Pos(size_t const p = 0) : pos(p) {
+		Pos(size_t const p = 0) : pos(p) {  // NOLINT allow implicit conversion
 		}
 		/// Returns a special value indicating invalidity.
 		static Pos null() {
-			return std::numeric_limits<size_t>::max();
+			return Pos(std::numeric_limits<size_t>::max());
 		}
 
-		bool is_null() const {
+		[[nodiscard]] bool operator==(const Pos& p) const {
+			return pos == p.pos;
+		}
+		[[nodiscard]] bool is_null() const {
 			return *this == null();
 		}
-		operator size_t() const {
+		operator size_t() const {  // NOLINT allow implicit conversion
 			return pos;
 		}
-		Pos operator++() {
-			return ++pos;
+		Pos& operator++() {
+			++pos;
+			return *this;
 		}
 
-		Pos operator+=(Pos const other) {
-			return pos += other.pos;
+		Pos& operator+=(Pos const other) {
+			pos += other.pos;
+			return *this;
 		}
 
 	private:
@@ -65,13 +70,13 @@ public:
 	};
 
 	/// Create the object with nothing to read.
-	FileRead();
+	FileRead() = default;
 
 	~FileRead() override;
 
 	// See base class.
 	size_t data(void* dst, size_t bufsize) override;
-	bool end_of_file() const override;
+	[[nodiscard]] bool end_of_file() const override;
 	char const* c_string() override;
 
 	/// Loads a file into memory. Reserves one additional byte which is zeroed,
@@ -90,7 +95,7 @@ public:
 	void close();
 
 	// Returns the size of the file in bytes;
-	size_t get_size() const;
+	[[nodiscard]] size_t get_size() const;
 
 	/// Set the file pointer to the given location.
 	/// \throws File_Boundary_Exceeded if the pointer is out of bound.
@@ -98,7 +103,7 @@ public:
 
 	/// Get the position that will be read from in the next read operation that
 	/// does not specify a position.
-	Pos get_pos() const;
+	[[nodiscard]] Pos get_pos() const;
 
 	// Returns the next 'bytes' starting at 'pos' in the file. Can throw
 	// File_Boundary_Exceeded.
@@ -111,8 +116,8 @@ public:
 	char* read_line();
 
 private:
-	char* data_;
-	size_t length_;
+	char* data_{nullptr};
+	size_t length_{0U};
 	Pos filepos_;
 };
 

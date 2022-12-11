@@ -50,8 +50,7 @@ MessagePreview::MessagePreview(InfoPanel* i, const std::string& text, const std:
                   std::string("   ") + text + "   ",
                   UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft),
      owner_(*i),
-     creation_time_(SDL_GetTicks()),
-     message_(nullptr) {
+     creation_time_(SDL_GetTicks()) {
 	set_thinks(true);
 	set_handle_mouse(true);
 	set_tooltip(tooltip);
@@ -131,11 +130,8 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, in
 InfoPanel::InfoPanel(InteractiveBase& ib)
    : UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
      ibase_(ib),
-     iplayer_(nullptr),  // this function is called from IBase ctor so we can't upcast yet
-     on_top_(false),
-     display_mode_(DisplayMode::kPinned),
-     last_mouse_pos_(Vector2i(-1, -1)),
-     toolbar_(nullptr),  // will be set later by the IBase
+
+     // will be set later by the IBase
      toggle_mode_(this,
                   "mode",
                   0,
@@ -174,8 +170,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                   0,
                   "",
                   UI::Align::kRight),
-     message_queue_(nullptr),
-     last_message_id_(nullptr),
+
      draw_real_time_(get_config_bool("game_clock", true)) {
 	text_fps_.set_handle_mouse(true);
 	int mode = get_config_int("toolbar_pos", 0);
@@ -340,7 +335,7 @@ size_t InfoPanel::index_of(const MessagePreview* mp) const {
 	return 0;
 }
 
-void InfoPanel::log_message(const std::string& message) {
+void InfoPanel::log_message(const std::string& message, const std::string& tooltip) {
 	// There is never more than 1 system message visible
 	for (MessagePreview* m : messages_) {
 		if (m->is_system_message()) {
@@ -349,7 +344,7 @@ void InfoPanel::log_message(const std::string& message) {
 		}
 	}
 
-	push_message(new MessagePreview(this, message, ""));
+	push_message(new MessagePreview(this, message, tooltip));
 }
 
 void InfoPanel::pop_message(MessagePreview* m) {

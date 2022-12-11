@@ -37,15 +37,14 @@ public:
 	 * Closes the connection.
 	 * If you want to send a goodbye-message to the host, do so before freeing the object.
 	 */
-	virtual ~NetClientInterface() {
-	}
+	virtual ~NetClientInterface() = default;
 
 	/**
 	 * Returns whether the client is connected.
 	 *
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */
-	virtual bool is_connected() const = 0;
+	[[nodiscard]] virtual bool is_connected() const = 0;
 
 	/**
 	 * Closes the connection.

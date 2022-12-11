@@ -63,20 +63,21 @@ template <> struct MapTriangleRegion<FCoords> {
 	     rowwidth_(area_.radius * 2 + 1),
 	     remaining_in_row_(rowwidth_),
 	     remaining_rows_(area_.radius * 2) {
-		for (uint8_t r = area_.radius; r; --r)
+		for (uint8_t r = area_.radius; r != 0u; --r) {
 			map.get_tln(area_.node, &area_.node);
+		}
 		left_ = area_.node;
 	}
 
-	const TCoords<FCoords>& location() const {
+	[[nodiscard]] const TCoords<FCoords>& location() const {
 		return area_;
 	}
 
 	bool advance(const Map& map) {
-		if (--remaining_in_row_) {
-			if (area_.t == TriangleIndex::D)
+		if (--remaining_in_row_ != 0u) {
+			if (area_.t == TriangleIndex::D) {
 				area_.t = TriangleIndex::R;
-			else {
+			} else {
 				area_.t = TriangleIndex::D;
 				map.get_rn(area_.node, &area_.node);
 			}
@@ -85,13 +86,14 @@ template <> struct MapTriangleRegion<FCoords> {
 			left_ = area_.node;
 			area_.t = TriangleIndex::D;
 			remaining_in_row_ = rowwidth_ += 2;
-		} else if (remaining_rows_) {
+		} else if (remaining_rows_ != 0u) {
 			map.get_brn(left_, &area_.node);
 			left_ = area_.node;
 			area_.t = TriangleIndex::D;
 			remaining_in_row_ = rowwidth_ -= 2;
-		} else
+		} else {
 			return false;
+		}
 		return true;
 	}
 
@@ -105,7 +107,7 @@ private:
 template <typename CoordsType> struct MapTriangleRegion<TCoords<CoordsType>> {
 	MapTriangleRegion(const Map&, Area<TCoords<CoordsType>, uint16_t>);
 
-	const TCoords<CoordsType>& location() const {
+	[[nodiscard]] const TCoords<CoordsType>& location() const {
 		return location_;
 	}
 

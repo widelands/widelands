@@ -80,9 +80,9 @@ std::string editor_splash_image() {
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, get_config_section(), nullptr),
-     need_save_(false),
+
      realtime_(SDL_GetTicks()),
-     is_painting_(false),
+
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -128,8 +128,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                    UI::PanelStyle::kWui,
                    UI::ButtonStyle::kWuiPrimary,
                    [this](ShowHideEntry t) { showhide_menu_selected(t); }),
-     undo_(nullptr),
-     redo_(nullptr),
+
      tools_(new Tools(*this, e.map())),
      history_(nullptr)  // history needs the undo/redo buttons
 {
@@ -231,7 +230,8 @@ void EditorInteractive::add_main_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions,
-	              g_image_cache->get("images/wui/editor/menus/map_options.png"));
+	              g_image_cache->get("images/wui/editor/menus/map_options.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kEditorMapOptions, false));
 
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor,
@@ -880,6 +880,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorLoad, code)) {
 			menu_windows_.loadmap.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorMapOptions, code)) {
+			menu_windows_.mapoptions.toggle();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorTools, code)) {

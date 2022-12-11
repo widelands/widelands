@@ -25,7 +25,7 @@
 namespace Widelands {
 
 struct CmdIncorporate : public GameLogicCommand {
-	CmdIncorporate() : GameLogicCommand(Time(0)), worker(nullptr) {
+	CmdIncorporate() : GameLogicCommand(Time(0)) {
 	}  // For savegame loading
 	CmdIncorporate(const Time& t, Worker* const w) : GameLogicCommand(t), worker(w) {
 	}
@@ -37,12 +37,12 @@ struct CmdIncorporate : public GameLogicCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kIncorporate;
 	}
 
 private:
-	Worker* worker;
+	Worker* worker{nullptr};
 };
 }  // namespace Widelands
 

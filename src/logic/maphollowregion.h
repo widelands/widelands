@@ -33,7 +33,7 @@ namespace Widelands {
 template <typename AreaType = Area<>> struct MapHollowRegion {
 	MapHollowRegion(const Map& map, const HollowArea<AreaType>& hollow_area);
 
-	const typename AreaType::CoordsType& location() const {
+	[[nodiscard]] const typename AreaType::CoordsType& location() const {
 		return hollow_area_;
 	}
 
@@ -64,11 +64,11 @@ template <typename AreaType = Area<>> struct MapHollowRegion {
 
 private:
 	HollowArea<AreaType> hollow_area_;
-	Phase phase_;
+	Phase phase_{Phase::kTop};
 	const uint32_t delta_radius_;
-	uint32_t row_;                        // # of rows completed in this phase
+	uint32_t row_{0U};                    // # of rows completed in this phase
 	uint32_t rowwidth_;                   // # of fields to return per row
-	uint32_t rowpos_;                     // # of fields we have returned in this row
+	uint32_t rowpos_{0U};                 // # of fields we have returned in this row
 	typename AreaType::CoordsType left_;  //  left-most node of current row
 };
 

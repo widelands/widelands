@@ -47,7 +47,7 @@ struct Coords {
 	static Coords unhash(uint32_t hash);
 
 	/// Hash coordinates to use them as keys in a container
-	uint32_t hash() const;
+	[[nodiscard]] uint32_t hash() const;
 
 	bool operator==(const Coords& other) const;
 	bool operator!=(const Coords& other) const;
@@ -61,16 +61,15 @@ struct Coords {
 	// Move the coords to the 'new_origin'.
 	void reorigin(Coords new_origin, const Extent& extent);
 
-	int16_t x;
-	int16_t y;
+	int16_t x{0};
+	int16_t y{0};
 };
 static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 
 template <typename CT = Coords, typename RT = uint16_t> struct Area : public CT {
 	using CoordsType = CT;
 	using RadiusType = RT;
-	Area() {
-	}
+	Area() = default;
 	Area(const CoordsType center, const RadiusType rad) : CoordsType(center), radius(rad) {
 	}
 
@@ -102,11 +101,10 @@ template <typename AreaType = Area<>> struct HollowArea : public AreaType {
 class Field;
 
 struct FCoords : public Coords {
-	FCoords() : field(nullptr) {
-	}
+	FCoords() = default;
 	FCoords(const Coords& nc, Field* const nf) : Coords(nc), field(nf) {
 	}
-	Field* field;
+	Field* field{nullptr};
 };
 
 enum class TriangleIndex {
@@ -147,7 +145,7 @@ struct NodeAndTriangle {
 struct HeightInterval {
 	HeightInterval(const uint8_t Min, const uint8_t Max) : min(Min), max(Max) {
 	}
-	bool valid() const {
+	[[nodiscard]] bool valid() const {
 		return min <= max;
 	}
 

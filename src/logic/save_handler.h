@@ -20,10 +20,11 @@
 #define WL_LOGIC_SAVE_HANDLER_H
 
 #include "io/filesystem/filesystem.h"
+#include "logic/filesystem_constants.h"
 
 namespace Widelands {
 class Game;
-}
+}  // namespace Widelands
 
 /**
  * Takes care of manual or autosave via think().
@@ -32,10 +33,11 @@ class Game;
  */
 class SaveHandler {
 public:
-	SaveHandler();
+	SaveHandler() = default;
 
 	void think(Widelands::Game&);
-	std::string create_file_name(const std::string& dir, const std::string& filename) const;
+	[[nodiscard]] std::string create_file_name(const std::string& dir,
+	                                           const std::string& filename) const;
 
 	// Saves the game, overwrites file, handles errors
 	bool save_game(Widelands::Game&, const std::string& filename, std::string* error_str = nullptr);
@@ -54,7 +56,7 @@ public:
 		allow_saving_ = t;
 	}
 	// Used by lua only
-	bool get_allow_saving() {
+	[[nodiscard]] bool get_allow_saving() const {
 		return allow_saving_;
 	}
 	// Used by lua only
@@ -63,24 +65,24 @@ public:
 		save_filename_ = filename;
 	}
 
-	uint32_t last_save_time() const {
+	[[nodiscard]] uint32_t last_save_time() const {
 		return last_save_realtime_;
 	}
 
 private:
-	uint32_t next_save_realtime_;
-	uint32_t last_save_realtime_;
-	bool initialized_;
-	bool allow_saving_;
-	bool save_requested_;
-	bool saving_next_tick_;
+	uint32_t next_save_realtime_{0U};
+	uint32_t last_save_realtime_{0U};
+	bool initialized_{false};
+	bool allow_saving_{true};
+	bool save_requested_{false};
+	bool saving_next_tick_{false};
 	std::string save_filename_;
 	std::string current_filename_;
-	std::string autosave_filename_;
+	std::string autosave_filename_{kAutosavePrefix};
 
-	FileSystem::Type fs_type_;
-	int32_t autosave_interval_in_ms_;
-	int32_t number_of_rolls_;  // For rolling file update
+	FileSystem::Type fs_type_{FileSystem::ZIP};
+	int32_t autosave_interval_in_ms_{kDefaultAutosaveInterval * 60 * 1000};
+	int32_t number_of_rolls_{5};  // For rolling file update
 
 	void initialize(uint32_t realtime);
 	bool roll_save_files(const std::string& filename, std::string* error) const;

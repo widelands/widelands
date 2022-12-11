@@ -6,10 +6,10 @@
 # Anton Khabarov <2233009@gmail.com>, 2016,2018
 # nskdmitry, 2021-2022
 # GunChleoc, 2020
-# Blueberryy <igory.ygr200@gmail.com>, 2021
+# berry <igory.ygr200@gmail.com>, 2021
 # Vasiliy Anosov <basil.snowman@gmail.com>, 2021
 # Viktor S <awsswa59@gmail.com>, 2018,2020
-# Yuriy Sokolov <lention@mail.ru>, 2015
+# Yuriy Sokolov <lention@mail.ru>, 2015,2022
 # Алексей Баринов <leha.bar.ru@gmail.com>, 2018
 # Владимир Шевцов, 2022
 # Олег Шевченко <olegrock@gmail.com>, 2017-2018
@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-05-16 03:13+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Владимир Шевцов, 2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -138,7 +138,7 @@ msgstr "Включить режим самообучения ИИ. Здесь - 
 msgid ""
 "Constantly adjust the game speed automatically depending on AI delay. Only "
 "to be used for AI testing or training (in conjunction with --ai_training)."
-msgstr ""
+msgstr "Автоматическая регулировка скорости игры в зависимости от задержки искусственного интеллекта. Используется только для тестирования или обучения ИИ (в сочетании с --ai_trining)."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid "Game options:"
@@ -196,7 +196,7 @@ msgstr "[true*|false]"
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players."
-msgstr ""
+msgstr "Должно ли отображаться предупреждение в редакторе, если игроков слишком много."
 
 #: ../../src/wlapplication_messages.cc:118
 msgid "Start building a road after placing a flag."
@@ -204,7 +204,7 @@ msgstr "Начинать строительство дорог сразу пос
 
 #: ../../src/wlapplication_messages.cc:122
 msgid "Bitmask of display flags to set for new games."
-msgstr ""
+msgstr "Битовая маска отображаемых флагов для установки новых игр."
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
@@ -293,7 +293,7 @@ msgstr "Занять порт  `n` метасерером для игры в И�
 
 #: ../../src/wlapplication_messages.cc:160
 msgid "The name of the last hosted game."
-msgstr "Название последней сохраненной игры."
+msgstr "Название последней сетевой игры."
 
 #: ../../src/wlapplication_messages.cc:161
 msgid "The nickname used for LAN and online games."
@@ -305,7 +305,7 @@ msgstr "Имя автора карты."
 
 #: ../../src/wlapplication_messages.cc:163
 msgid "The last host connected to."
-msgstr "Последний подключенный хост."
+msgstr "Последний подключенный сервер."
 
 #: ../../src/wlapplication_messages.cc:165
 msgid "Whether the used metaserver login is for a registered user."
@@ -379,7 +379,7 @@ msgstr "Максимальная оптическая частота кадро�
 #: ../../src/wlapplication_messages.cc:196
 msgid ""
 "The path to the active UI theme, relative to the Widelands home directory."
-msgstr ""
+msgstr "Путь к активной теме пользовательского интерфейса относительно домашнего каталога Widelands."
 
 #: ../../src/wlapplication_messages.cc:198
 msgid "Options for the internal window manager:"
@@ -387,33 +387,33 @@ msgstr "Настройки внутреннего оконного менедж�
 
 #: ../../src/wlapplication_messages.cc:199
 msgid "Whether automatic map movements should be animated."
-msgstr ""
+msgstr "Следует ли анимировать автоматические перемещения карты."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:202
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen."
-msgstr ""
+msgstr "Переместить окно к краю экрана, когда край окна находится на расстоянии `n` от края экрана."
 
 #: ../../src/wlapplication_messages.cc:206
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen."
-msgstr ""
+msgstr "Убрать границу окна со стороны края экрана, когда край окна находится рядом с краем экрана."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:211
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel."
-msgstr ""
+msgstr "Переместите окно к краю панели, когда край окна находится на расстоянии \"n\" от края панели."
 
 #: ../../src/wlapplication_messages.cc:215
 msgid ""
 "Only move a window to the edge of a panel if the window is overlapping with "
 "the panel."
-msgstr ""
+msgstr "Перемещайте окно к краю панели только в том случае, если окно перекрывается с панелью."
 
 #: ../../src/wlapplication_messages.cc:218
 msgid "Enable verbose debug messages"
@@ -450,13 +450,13 @@ msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay."
-msgstr ""
+msgstr "Загрузить данную сохраненную игру или переиграть её. Полезно для ассоциации расширений файлов .wgf/.wrpl. Не работает с другими опциями. Также смотрите --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:254
 #, c-format
 msgid "This is Widelands version %s"
-msgstr ""
+msgstr "Это версия Widelands %s"
 
 #: ../../src/wlapplication_messages.cc:312
 msgid ""

@@ -23,7 +23,7 @@
 
 /// Sets the starting position of players.
 struct EditorSetOriginTool : public EditorTool {
-	EditorSetOriginTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	explicit EditorSetOriginTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -36,11 +36,11 @@ struct EditorSetOriginTool : public EditorTool {
 
 	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/ui_basic/fsel.png");
 	}
 
-	bool has_size_one() const override {
+	[[nodiscard]] bool has_size_one() const override {
 		return true;
 	}
 };

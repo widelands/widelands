@@ -23,7 +23,7 @@
 #include "editor/tools/tool.h"
 
 struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
-	EditorSetTerrainTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	explicit EditorSetTerrainTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -36,10 +36,10 @@ struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
 
 	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/ui_basic/fsel.png");
 	}
-	bool operates_on_triangles() const override {
+	[[nodiscard]] bool operates_on_triangles() const override {
 		return true;
 	}
 

@@ -54,7 +54,7 @@ public:
 	friend class Profile;
 
 	struct Value {
-		Value(const std::string& nname, const char* const nval);
+		Value(const std::string& nname, const char* nval);
 		Value(const Value&);
 		Value(Value&& other) noexcept;
 
@@ -63,21 +63,21 @@ public:
 		Value& operator=(Value) noexcept;
 		Value& operator=(Value&& other) noexcept;
 
-		char const* get_name() const {
+		[[nodiscard]] char const* get_name() const {
 			return name_.c_str();
 		}
 
-		bool is_used() const;
+		[[nodiscard]] bool is_used() const;
 		void mark_used();
 
-		int32_t get_int() const;
-		uint32_t get_natural() const;
-		uint32_t get_positive() const;
-		bool get_bool() const;
-		char const* get_string() const;
-		Vector2i get_point() const;
+		[[nodiscard]] int32_t get_int() const;
+		[[nodiscard]] uint32_t get_natural() const;
+		[[nodiscard]] uint32_t get_positive() const;
+		[[nodiscard]] bool get_bool() const;
+		[[nodiscard]] char const* get_string() const;
+		[[nodiscard]] Vector2i get_point() const;
 
-		char const* get_untranslated_string() const {
+		[[nodiscard]] char const* get_untranslated_string() const {
 			return value_.get();
 		}
 		char* get_untranslated_string() {
@@ -86,7 +86,7 @@ public:
 
 		void set_string(char const*);
 
-		bool get_translate() const {
+		[[nodiscard]] bool get_translate() const {
 			return translate_;
 		}
 		void set_translate(const bool t) {
@@ -112,6 +112,9 @@ public:
 	}
 
 	Section& operator=(const Section& other) {
+		if (&other == this) {
+			return *this;
+		}
 		profile_ = other.profile_;
 		used_ = other.used_.load();
 		section_name_ = other.section_name_;
@@ -125,14 +128,14 @@ public:
 
 	Value* get_val(char const* name);
 	Value* get_next_val(char const* name = nullptr);
-	uint32_t get_num_values() const {
+	[[nodiscard]] uint32_t get_num_values() const {
 		return values_.size();
 	}
 
-	char const* get_name() const;
+	[[nodiscard]] char const* get_name() const;
 	void set_name(const std::string&);
 
-	bool is_used() const;
+	[[nodiscard]] bool is_used() const;
 	void mark_used();
 
 	void check_used() const;
@@ -221,13 +224,11 @@ public:
 	void error(char const*, ...) const __attribute__((format(printf, 2, 3)));
 	void check_used() const;
 
-	void read(const char* const filename,
-	          const char* const global_section = nullptr,
-	          FileSystem& = *g_fs);
-	void write(const char* const filename,
+	void read(const char* filename, const char* global_section = nullptr, FileSystem& = *g_fs);
+	void write(const char* filename,
 	           bool used_only = true,
 	           FileSystem& = *g_fs,
-	           const char* const comment = nullptr);
+	           const char* comment = nullptr);
 
 	Section* get_section(const std::string& name);
 	Section& get_safe_section(const std::string& name);
