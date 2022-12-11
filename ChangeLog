@@ -1,5 +1,144 @@
 [TOC]
 
+## Post-1.1 until [git 0fc809d](https://github.com/widelands/widelands/commit/0fc809d0dc979de59640116300dfbe8cdb1bc942)
+
+### Animations, Icons and Overlays
+
+- Remove leftover individual animation frames of buildings (#5269)
+- Upscaled editor splash image (#5634)
+- Move empty sign on Atlantean mines to make it visible when status labels are shown (#5642)
+
+
+### Sounds and Music
+
+
+
+### Tutorials and Campaigns
+
+- Minor tweaks in emp03 to reflect user comments in #5478 (#5648)
+
+
+### Scripting
+
+- Limit `set_soldiers` to 10000 soldiers (#5568)
+
+
+### Maps
+
+
+
+### Add-Ons
+
+
+
+### Saveloading
+
+- Allow loading another replay in replay mode (#5611)
+- Fix saving game with new name (#5639)
+
+
+### AI
+
+- Small AI Fixes (#5683)
+
+
+### Gameplay
+
+- Configurable Win Condition Duration (#5380)
+- Seed random number generator before starting new game (#5608)
+- Fix trainingsites' definition of when a soldier is present (#5640)
+- #5594 Fix portspace detection (#5647)
+- Worker and Soldier Statistics Tweaks (#5607)
+    - Fix incorrect genstats labels font colour
+    - Add statistics about civil buildings defeated
+    - Workers without buildcost and soldiers now don't count for the workers graph
+    - Refactored military graph calculation
+    - Show total number of soldiers in soldier stats window
+- Cancel battles when players negotiate truce (#5665)
+- Pinned Notes (#5569)
+- Allow letting individual productionsites produce indefinitely (#4961)
+
+
+### User Interface
+
+- Default select the first worker to kick from a production site (#5515)
+- Do not cut filename extension for directories (#5623)
+- Consume every keydown event in editbox (#5626)
+- Show name and experience type of missing workers (#5432)
+- Delete selected text on text input (#5633)
+- Show coming and absent soldiers in building soldier list (#5437)
+- Draw Actual Game Speed (#5621)
+- Make diplomacy window available to spectators (#5609)
+- Fix cursor flashing (#5674)
+- Redesign Diplomacy Accept/Reject/Retract UI (#5670)
+    - Allow retracting your own pending invitations and join requests.
+    - Join requests may be approved or rejected by any member of the team, not just the player the request was made to.
+    - Removed the confirmation popup and instead added the buttons to the diplomacy window.
+    - Prompt for confirmation before resigning.
+- Quick Navigation GUI (#5487)
+- UI Elements Fixes And Tweaks (#5668)
+     * Allow using PageUp/PageDown and Ctrl+scroll in sliders and spinboxes to change the value faster
+     * Make sure that no slider nor spinbox can wrap around due to integer overflow
+     * Add missing changed() call in spinbox when value is set to min/max (fixes warning update in Editor/Map Options/Ferry Range)
+     * Decrease width of big step buttons of spinboxes (should help dealing with #5631)
+     * Fix updating slider position when min/max is changed (affected attack window)
+     * Add "Click to sort/reverse" to table header tooltips (requested by @frankystone for map selection)
+     * Reset sorting order when user changes column to sort by
+     * Handle big step in inputqueue
+     * Allow using Shift + arrow keys in priority slider to set all input priorities at once
+     * Stabilize selection end in editbox (fixes #5676)
+     * Handle big step in soldier capacity settings
+     * Converted all users of `get_keyboard_change()` to handle big step, remove `enable_big_step` option
+
+
+### Internationalization
+
+
+
+### Help and Documentation
+
+- Encyclopedia Hyperlinks (#5533)
+- Fix buildings help button (#5661)
+- Explain clearer what an economy is (#5630)
+- #5589 Traingsite encyclopedia enhancements (#5673)
+
+
+### Editor
+
+- Explain waterway setting in Editor Map Options and add toolips to all map tags (#5653)
+- Map Generator Add-Ons & Map Generating Dialog Accessibility Tweaks (#5537)
+- Editor: Show Starting Positions on Minimap (#5704)
+
+
+### Graphics Engine
+
+- Show chat with customized player colours (#5671)
+
+
+### Networking
+
+- Networking log output and formatting usage cleanups (#5560)
+- Prevent spectating host from changing game speed (#5604)
+- Show enabled game-relevant add-ons before hosting (#5599)
+
+
+### Build System
+
+- Fix undefined `PATH_MAX` (#5615)
+- Drop support for g++-5 and g++-6 (#5541)
+- Require libpng >= 1.6 (#5625)
+- Fix Clang15 Compiler Warnings (#5629)
+- Replace `sprintf` with `snprintf` (#5651)
+- Switch to C++17 (#5672)
+- Fix more clang-tidy checks (#5679, #5682, #5689, #5696, #5684, #5695, #5693, #5690, #5694, #5692, #5685, #5688, #5698, #5697, #5686, #5699, #5687, #5691)
+
+
+### Other Issues
+
+- Caret-escape control characters in strings (#5496)
+
+
+
 ## Release 1.1
 
 ### Animations, Icons and Overlays
