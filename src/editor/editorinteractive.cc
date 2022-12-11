@@ -93,7 +93,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the main menu button in the editor */
                   _("Main Menu"),
-                  shortcut_string_for(KeyboardShortcut::kEditorMenu, true),
+                  pgettext("hotkey", "Esc"),
                   UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
@@ -199,7 +199,8 @@ void EditorInteractive::add_main_menu() {
 	menu_windows_.newmap.open_window = [this] { new MainMenuNewMap(*this, menu_windows_.newmap); };
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap,
-	              g_image_cache->get("images/wui/editor/menus/new_map.png"));
+	              g_image_cache->get("images/wui/editor/menus/new_map.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kEditorNewMap, false));
 
 	menu_windows_.newrandommap.open_window = [this] {
 		new MainMenuNewRandomMap(*this, menu_windows_.newrandommap, egbase().map().get_width(),
@@ -207,7 +208,8 @@ void EditorInteractive::add_main_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap,
-	              g_image_cache->get("images/wui/editor/menus/new_random_map.png"));
+	              g_image_cache->get("images/wui/editor/menus/new_random_map.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kEditorNewRandomMap, false));
 
 	menu_windows_.loadmap.open_window = [this] {
 		new MainMenuLoadMap(*this, menu_windows_.loadmap);
@@ -215,7 +217,7 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap,
 	              g_image_cache->get("images/wui/editor/menus/load_map.png"), false, "",
-	              shortcut_string_for(KeyboardShortcut::kEditorLoad, false));
+	              shortcut_string_for(KeyboardShortcut::kCommonLoad, false));
 
 	menu_windows_.savemap.open_window = [this] {
 		new MainMenuSaveMap(*this, menu_windows_.savemap, menu_windows_.mapoptions);
@@ -223,7 +225,7 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap,
 	              g_image_cache->get("images/wui/editor/menus/save_map.png"), false, "",
-	              shortcut_string_for(KeyboardShortcut::kEditorSave, false));
+	              shortcut_string_for(KeyboardShortcut::kCommonSave, false));
 
 	menu_windows_.mapoptions.open_window = [this] {
 		new MainMenuMapOptions(*this, menu_windows_.mapoptions);
@@ -235,7 +237,9 @@ void EditorInteractive::add_main_menu() {
 
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor,
-	              g_image_cache->get("images/wui/menus/exit.png"));
+	              g_image_cache->get("images/wui/menus/exit.png"), false, "",
+                      shortcut_string_for(KeyboardShortcut::kCommonExit, false));
+
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
 	toolbar()->add(&mainmenu_);
 }
@@ -258,7 +262,7 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 		menu_windows_.mapoptions.toggle();
 	} break;
 	case MainMenuEntry::kExitEditor: {
-		exit();
+		exit((SDL_GetModState() & KMOD_CTRL) != 0);
 	}
 	}
 }
@@ -273,7 +277,8 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Change height"), ToolMenuEntry::kChangeHeight,
 	              g_image_cache->get("images/wui/editor/tools/height.png"), false,
 	              /** TRANSLATORS: Tooltip for the change height tool in the editor */
-	              _("Change the terrain height"));
+	              _("Change the terrain height"),
+	              shortcut_string_for(KeyboardShortcut::kEditorChangeHeight, false));
 
 	tool_windows_.noiseheight.open_window = [this] {
 		new EditorToolNoiseHeightOptionsMenu(*this, tools()->noise_height, tool_windows_.noiseheight);
@@ -282,7 +287,8 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Random height"), ToolMenuEntry::kRandomHeight,
 	              g_image_cache->get("images/wui/editor/tools/noise_height.png"), false,
 	              /** TRANSLATORS: Tooltip for the random height tool in the editor */
-	              _("Set the terrain height to random values"));
+	              _("Set the terrain height to random values"),
+	              shortcut_string_for(KeyboardShortcut::kEditorRandomHeight, false));
 
 	tool_windows_.terrain.open_window = [this] {
 		new EditorToolSetTerrainOptionsMenu(*this, tools()->set_terrain, tool_windows_.terrain);
@@ -291,7 +297,8 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Terrain"), ToolMenuEntry::kTerrain,
 	              g_image_cache->get("images/wui/editor/tools/terrain.png"), false,
 	              /** TRANSLATORS: Tooltip for the terrain tool in the editor */
-	              _("Change the map’s terrain"));
+	              _("Change the map’s terrain"),
+	              shortcut_string_for(KeyboardShortcut::kEditorTerrain, false));
 
 	tool_windows_.immovables.open_window = [this] {
 		new EditorToolPlaceImmovableOptionsMenu(
@@ -301,7 +308,8 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Immovables"), ToolMenuEntry::kImmovables,
 	              g_image_cache->get("images/wui/editor/tools/immovables.png"), false,
 	              /** TRANSLATORS: Tooltip for the immovables tool in the editor */
-	              _("Add or remove immovables"));
+	              _("Add or remove immovables"),
+	              shortcut_string_for(KeyboardShortcut::kEditorImmovables, false));
 
 	tool_windows_.critters.open_window = [this] {
 		new EditorToolPlaceCritterOptionsMenu(*this, tools()->place_critter, tool_windows_.critters);
@@ -310,7 +318,8 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Animals"), ToolMenuEntry::kAnimals,
 	              g_image_cache->get("images/wui/editor/tools/critters.png"), false,
 	              /** TRANSLATORS: Tooltip for the animals tool in the editor */
-	              _("Add or remove animals"));
+	              _("Add or remove animals"),
+	              shortcut_string_for(KeyboardShortcut::kEditorAnimals, false));
 
 	tool_windows_.resources.open_window = [this] {
 		new EditorToolChangeResourcesOptionsMenu(
@@ -320,13 +329,15 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Resources"), ToolMenuEntry::kResources,
 	              g_image_cache->get("images/wui/editor/tools/resources.png"), false,
 	              /** TRANSLATORS: Tooltip for the resources tool in the editor */
-	              _("Set or change resources"));
+	              _("Set or change resources"),
+	              shortcut_string_for(KeyboardShortcut::kEditorResources, false));
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Port spaces"), ToolMenuEntry::kPortSpace,
 	              g_image_cache->get("images/wui/editor/tools/port_spaces.png"), false,
 	              /** TRANSLATORS: Tooltip for the port spaces tool in the editor */
-	              _("Add or remove port spaces"));
+	              _("Add or remove port spaces"),
+	              shortcut_string_for(KeyboardShortcut::kEditorPortSpaces, false));
 
 	tool_windows_.players.open_window = [this] {
 		new EditorPlayerMenu(*this, tools()->set_starting_pos, tool_windows_.players);
@@ -344,7 +355,8 @@ void EditorInteractive::add_tool_menu() {
 	              g_image_cache->get("images/wui/editor/tools/map_origin.png"), false,
 	              /** TRANSLATORS: Tooltip for the map origin tool in the editor */
 	              _("Set the position that will have the coordinates (0, 0). This will be the "
-	                "top-left corner of a generated minimap."));
+	                "top-left corner of a generated minimap."),
+	              shortcut_string_for(KeyboardShortcut::kEditorMapOrigin, false));
 
 	tool_windows_.resizemap.open_window = [this] {
 		new EditorToolResizeOptionsMenu(*this, tools()->resize, tool_windows_.resizemap);
@@ -353,7 +365,8 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Map size"), ToolMenuEntry::kMapSize,
 	              g_image_cache->get("images/wui/editor/tools/resize_map.png"), false,
 	              /** TRANSLATORS: Tooltip for the map size tool in the editor */
-	              _("Change the map’s size"));
+	              _("Change the map’s size"),
+	              shortcut_string_for(KeyboardShortcut::kEditorMapSize, false));
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Information"), ToolMenuEntry::kFieldInfo,
@@ -584,17 +597,17 @@ void EditorInteractive::think() {
 	egbase().get_gametime_pointer().increment(Duration(realtime_ - lasttime));
 }
 
-void EditorInteractive::exit() {
-	if (need_save_) {
-		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
-			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-		} else {
-			UI::WLMessageBox mmb(this, UI::WindowStyle::kWui, _("Unsaved Map"),
-			                     _("The map has not been saved, do you really want to quit?"),
-			                     UI::WLMessageBox::MBoxType::kOkCancel);
-			if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
-				return;
-			}
+void EditorInteractive::exit(const bool force) {
+	if (force) {
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+	} else {
+		UI::WLMessageBox mmb(this, UI::WindowStyle::kWui,
+		                     need_save_ ? _("Unsaved Map") : _("Exit Editor Confirmation"),
+		                     need_save_ ? _("The map has not been saved, do you really want to quit?") :
+		                        _("Are you sure you wish to exit the editor?"),
+		                     UI::WLMessageBox::MBoxType::kOkCancel);
+		if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
+			return;
 		}
 	}
 	g_sh->change_music(Songset::kMenu, 200);
@@ -870,16 +883,24 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			menu_windows_.help.toggle();
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kEditorMenu, code)) {
-			mainmenu_.toggle();
+		if (matches_shortcut(KeyboardShortcut::kCommonExit, code)) {
+			exit();
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kEditorSave, code)) {
+		if (matches_shortcut(KeyboardShortcut::kCommonSave, code)) {
 			menu_windows_.savemap.toggle();
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kEditorLoad, code)) {
+		if (matches_shortcut(KeyboardShortcut::kCommonLoad, code)) {
 			menu_windows_.loadmap.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorNewMap, code)) {
+			menu_windows_.newmap.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorNewRandomMap, code)) {
+			menu_windows_.newrandommap.toggle();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorMapOptions, code)) {
@@ -890,8 +911,44 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			toolmenu_.toggle();
 			return true;
 		}
+		if (matches_shortcut(KeyboardShortcut::kEditorChangeHeight, code)) {
+			tool_windows_.height.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorRandomHeight, code)) {
+			tool_windows_.noiseheight.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorTerrain, code)) {
+			tool_windows_.terrain.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorImmovables, code)) {
+			tool_windows_.immovables.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorAnimals, code)) {
+			tool_windows_.critters.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorResources, code)) {
+			tool_windows_.resources.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorPortSpaces, code)) {
+			select_tool(tools()->set_port_space, EditorTool::First);
+			return true;
+		}
 		if (matches_shortcut(KeyboardShortcut::kEditorInfo, code)) {
 			select_tool(tools_->info, EditorTool::First);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorMapOrigin, code)) {
+			select_tool(tools()->set_origin, EditorTool::First);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorMapSize, code)) {
+			tool_windows_.resizemap.toggle();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorPlayers, code)) {

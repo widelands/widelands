@@ -82,6 +82,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    UI::PanelStyle::kWui,
                    UI::ButtonStyle::kWuiPrimary,
                    [this](ShowHideEntry t) { showhide_menu_selected(t); }),
+     can_restart_(g.is_replay() || !g.list_of_scenarios().empty()),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -141,7 +142,8 @@ void InteractiveGameBase::rebuild_main_menu() {
 	mainmenu_.add(_("Sound Options"), MainMenuEntry::kOptions,
 	              g_image_cache->get("images/wui/menus/options.png"), false,
 	              /** TRANSLATORS: Tooltip for Sound Options in the game's main menu */
-	              _("Set sound effect and music options"));
+	              _("Set sound effect and music options"),
+	              shortcut_string_for(KeyboardShortcut::kInGameSoundOptions, false));
 
 	menu_windows_.savegame.open_window = [this] {
 		new GameMainMenuSaveGame(*this, menu_windows_.savegame, GameMainMenuSaveGame::Type::kSave);
@@ -149,7 +151,7 @@ void InteractiveGameBase::rebuild_main_menu() {
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap,
 	              g_image_cache->get("images/wui/menus/save_game.png"), false, "",
-	              shortcut_string_for(KeyboardShortcut::kInGameSave, false));
+	              shortcut_string_for(KeyboardShortcut::kCommonSave, false));
 
 	if (game().is_replay()) {
 		menu_windows_.loadgame.open_window = [this] {
@@ -159,11 +161,12 @@ void InteractiveGameBase::rebuild_main_menu() {
 		/** TRANSLATORS: An entry in the game's main menu */
 		mainmenu_.add(_("Load Replay"), MainMenuEntry::kLoadMap,
 		              g_image_cache->get("images/wui/menus/load_game.png"), false, "",
-		              shortcut_string_for(KeyboardShortcut::kInGameLoad, false));
+		              shortcut_string_for(KeyboardShortcut::kCommonLoad, false));
 
 		/** TRANSLATORS: An entry in the game's main menu */
 		mainmenu_.add(_("Restart Replay"), MainMenuEntry::kRestartScenario,
-		              g_image_cache->get("images/wui/menus/restart_scenario.png"));
+		              g_image_cache->get("images/wui/menus/restart_scenario.png"), false, "",
+		              shortcut_string_for(KeyboardShortcut::kInGameRestart, false));
 	} else if (!is_multiplayer()) {
 		menu_windows_.loadgame.open_window = [this] {
 			new GameMainMenuSaveGame(
@@ -172,18 +175,20 @@ void InteractiveGameBase::rebuild_main_menu() {
 		/** TRANSLATORS: An entry in the game's main menu */
 		mainmenu_.add(_("Load Game"), MainMenuEntry::kLoadMap,
 		              g_image_cache->get("images/wui/menus/load_game.png"), false, "",
-		              shortcut_string_for(KeyboardShortcut::kInGameLoad, false));
+		              shortcut_string_for(KeyboardShortcut::kCommonLoad, false));
 	}
 
 	if (!game().list_of_scenarios().empty()) {
 		/** TRANSLATORS: An entry in the game's main menu */
 		mainmenu_.add(_("Restart Scenario"), MainMenuEntry::kRestartScenario,
-		              g_image_cache->get("images/wui/menus/restart_scenario.png"));
+		              g_image_cache->get("images/wui/menus/restart_scenario.png"), false, "",
+		              shortcut_string_for(KeyboardShortcut::kInGameRestart, false));
 	}
 
-	mainmenu_.add(
-	   /** TRANSLATORS: An entry in the game's main menu */
-	   _("Exit Game"), MainMenuEntry::kExitGame, g_image_cache->get("images/wui/menus/exit.png"));
+	/** TRANSLATORS: An entry in the game's main menu */
+	mainmenu_.add(_("Exit Game"), MainMenuEntry::kExitGame,
+	              g_image_cache->get("images/wui/menus/exit.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kCommonExit, false));
 }
 
 void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
@@ -201,18 +206,7 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 		menu_windows_.savegame.toggle();
 	} break;
 	case MainMenuEntry::kRestartScenario: {
-		const bool r = game().is_replay();
-		const std::string& next = r ? game().replay_filename() : game().list_of_scenarios().front();
-		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
-			game().set_next_game_to_load(next);
-			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-		} else {
-			GameExitConfirmBox* gecb =
-			   new GameExitConfirmBox(*this, *this, r ? _("Restart Replay") : _("Restart Scenario"),
-			                          r ? _("Are you sure you wish to restart this replay?") :
-                                       _("Are you sure you wish to restart this scenario?"));
-			gecb->ok.connect([this, next] { game().set_next_game_to_load(next); });
-		}
+		handle_restart((SDL_GetModState() & KMOD_CTRL) != 0);
 	} break;
 	case MainMenuEntry::kLoadMap:
 		if (!is_multiplayer()) {
@@ -226,6 +220,21 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 			new GameExitConfirmBox(*this, *this);
 		}
 	} break;
+	}
+}
+
+void InteractiveGameBase::handle_restart(const bool force) {
+	const bool r = game().is_replay();
+	const std::string& next = r ? game().replay_filename() : game().list_of_scenarios().front();
+	if (force) {
+		game().set_next_game_to_load(next);
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+	} else {
+		GameExitConfirmBox* gecb =
+		   new GameExitConfirmBox(*this, *this, r ? _("Restart Replay") : _("Restart Scenario"),
+		                          r ? _("Are you sure you wish to restart this replay?") :
+                                         _("Are you sure you wish to restart this scenario?"));
+		gecb->ok.connect([this, next] { game().set_next_game_to_load(next); });
 	}
 }
 
@@ -497,14 +506,28 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		diplomacy_.toggle();
 		return true;
 	}
-	if (matches_shortcut(KeyboardShortcut::kInGameSave, code)) {
+	if (matches_shortcut(KeyboardShortcut::kCommonSave, code)) {
 		new GameMainMenuSaveGame(*this, menu_windows_.savegame, GameMainMenuSaveGame::Type::kSave);
 		return true;
 	}
-	if (!is_multiplayer() && matches_shortcut(KeyboardShortcut::kInGameLoad, code)) {
-		new GameMainMenuSaveGame(*this, menu_windows_.loadgame,
-		                         game().is_replay() ? GameMainMenuSaveGame::Type::kLoadReplay :
-                                                    GameMainMenuSaveGame::Type::kLoadSavegame);
+	if (!is_multiplayer()) {
+		if (matches_shortcut(KeyboardShortcut::kCommonLoad, code)) {
+			new GameMainMenuSaveGame(*this, menu_windows_.loadgame,
+			                         game().is_replay() ? GameMainMenuSaveGame::Type::kLoadReplay :
+                                            GameMainMenuSaveGame::Type::kLoadSavegame);
+			return true;
+		}
+		if (can_restart_ && matches_shortcut(KeyboardShortcut::kInGameRestart, code)) {
+			handle_restart();
+			return true;
+		}
+	}
+	if (matches_shortcut(KeyboardShortcut::kCommonExit, code)) {
+		new GameExitConfirmBox(*this, *this);
+		return true;
+	}
+	if (matches_shortcut(KeyboardShortcut::kInGameSoundOptions, code)) {
+		menu_windows_.sound_options.toggle();
 		return true;
 	}
 	if ((chat_provider_ != nullptr) && matches_shortcut(KeyboardShortcut::kInGameChat, code)) {

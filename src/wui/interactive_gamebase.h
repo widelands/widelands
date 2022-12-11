@@ -134,6 +134,9 @@ private:
 		kExitGame
 	};
 
+	bool can_restart_;
+	void handle_restart(const bool force = false);
+
 	// For referencing the items in gamespeedmenu_
 	enum class GameSpeedEntry { kIncrease, kDecrease, kPause };
 
