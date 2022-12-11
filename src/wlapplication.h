@@ -154,7 +154,7 @@ struct WLApplication {
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
 	[[nodiscard]] bool get_key_state(SDL_Scancode const key) const {
-		return SDL_GetKeyboardState(nullptr)[key] != 0u;
+		return SDL_GetKeyboardState(nullptr)[key] != 0U;
 	}
 
 	// @{
@@ -168,7 +168,7 @@ struct WLApplication {
 	//
 	/// Find out whether the mouse is currently pressed
 	[[nodiscard]] bool is_mouse_pressed() const {
-		return SDL_GetMouseState(nullptr, nullptr) != 0u;
+		return SDL_GetMouseState(nullptr, nullptr) != 0U;
 	}
 
 	/// Swap left and right mouse key?
@@ -280,7 +280,7 @@ private:
 	std::string localedir_;
 
 	/// Prevent toggling fullscreen on and off from flickering
-	uint32_t last_resolution_change_{0};
+	uint32_t last_resolution_change_{0U};
 
 	/// Holds this process' one and only instance of WLApplication, if it was
 	/// created already. nullptr otherwise.
