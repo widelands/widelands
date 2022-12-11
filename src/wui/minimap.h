@@ -33,9 +33,10 @@ public:
 		MiniMapLayer minimap_layers;
 		MiniMapType minimap_type{MiniMapType::kStaticViewWindow};
 
-		Registry()
-		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Owner | MiniMapLayer::Flag |
-		                    MiniMapLayer::Road | MiniMapLayer::Building) {
+		explicit Registry(bool is_game)
+		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Flag | MiniMapLayer::Road |
+		                    MiniMapLayer::Building | MiniMapLayer::Ship |
+		                    (is_game ? MiniMapLayer::Owner : MiniMapLayer::StartingPositions)) {
 		}
 
 		MiniMap* get_window() const {
@@ -103,7 +104,7 @@ private:
 
 		// Intermediate texture, cached between frames.
 		std::unique_ptr<Texture> minimap_image_static_;
-		uint16_t rows_drawn_{0};
+		uint16_t rows_drawn_{0U};
 
 		// This needs to be owned since it will be rendered by the RenderQueue
 		// later, so it must be valid for the whole frame.
@@ -120,6 +121,7 @@ private:
 	uint32_t but_h() const;
 
 	InteractiveBase& ibase_;
+	MiniMapLayer owner_button_impl_;
 	View view_;
 	UI::Button button_terrn;
 	UI::Button button_owner;

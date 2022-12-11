@@ -72,7 +72,7 @@ struct Transfer {
 	}
 
 	struct ReadData {
-		uint32_t destination{0};
+		uint32_t destination{0U};
 
 		ReadData() = default;
 	};

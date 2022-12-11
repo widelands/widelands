@@ -28,18 +28,11 @@
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
-#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/generic_save_handler.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
-
-SaveHandler::SaveHandler()
-   : autosave_filename_(kAutosavePrefix),
-
-     autosave_interval_in_ms_(kDefaultAutosaveInterval * 60 * 1000) {
-}
 
 bool SaveHandler::roll_save_files(const std::string& filename, std::string* const error) const {
 	int32_t rolls = 0;

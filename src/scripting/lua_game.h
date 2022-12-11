@@ -168,8 +168,8 @@ public:
 };
 
 class LuaInboxMessage : public LuaGameModuleClass {
-	Widelands::PlayerNumber player_number_{0};
-	Widelands::MessageId message_id_{0};
+	Widelands::PlayerNumber player_number_{0U};
+	Widelands::MessageId message_id_{0U};
 
 public:
 	LUNA_CLASS_HEAD(LuaInboxMessage);

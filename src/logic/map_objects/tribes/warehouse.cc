@@ -392,9 +392,7 @@ Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
    : Building(warehouse_descr),
      attack_target_(this),
      soldier_control_(this),
-     supply_(new WarehouseSupply(this)),
-     next_military_act_(Time(0)),
-     next_stock_remove_act_(Time(0)) {
+     supply_(new WarehouseSupply(this)) {
 	cleanup_in_progress_ = false;
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);

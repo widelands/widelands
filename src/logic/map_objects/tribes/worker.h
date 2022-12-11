@@ -310,8 +310,8 @@ protected:
 		const MapObjectProgram* get_program(const std::string& name) override;
 
 	private:
-		uint32_t location_{0};
-		uint32_t carried_ware_{0};
+		uint32_t location_{0U};
+		uint32_t carried_ware_{0U};
 		Transfer::ReadData transfer_;
 	};
 

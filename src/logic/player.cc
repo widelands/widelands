@@ -146,8 +146,6 @@ Player::Player(EditorGameBase& the_egbase,
      player_number_(plnum),
      tribe_(tribe_descr),
 
-     fields_(nullptr),
-
      message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
      attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
      occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {

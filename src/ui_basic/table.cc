@@ -224,7 +224,7 @@ void Table<void*>::clear() {
 		scrollbar_->set_steps(1);
 	}
 	scrollpos_ = 0;
-	last_click_time_ = -10000;
+	last_click_time_ = std::numeric_limits<uint32_t>::max();
 	clear_selections();
 }
 
@@ -540,7 +540,7 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t /*x*/, int32_t c
 		}
 
 		// Check if doubleclicked
-		if (((SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) == 0) &&
+		if (((SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) == 0) && time >= real_last_click_time &&
 		    time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
 		    selection_ != no_selection_index()) {
 			double_clicked(selection_);

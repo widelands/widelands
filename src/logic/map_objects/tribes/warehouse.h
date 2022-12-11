@@ -61,7 +61,7 @@ public:
 
 private:
 	int32_t conquers_{0};
-	unsigned heal_per_second_{0};
+	unsigned heal_per_second_{0U};
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
@@ -299,8 +299,8 @@ private:
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers incorporated_workers_;
 	std::vector<Time> next_worker_without_cost_spawn_;
-	Time next_military_act_;
-	Time next_stock_remove_act_;
+	Time next_military_act_{0U};
+	Time next_stock_remove_act_{0U};
 
 	std::vector<PlannedWorkers> planned_workers_;
 

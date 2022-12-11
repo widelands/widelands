@@ -158,9 +158,9 @@ private:
 
 	std::deque<EntryRecord*> entry_records_;
 	Scrollbar scrollbar_;
-	uint32_t scrollpos_{0};  //  in pixels
+	uint32_t scrollpos_{0U};  //  in pixels
 	uint32_t selection_;
-	uint32_t last_click_time_{static_cast<uint32_t>(-10000)};
+	uint32_t last_click_time_{std::numeric_limits<uint32_t>::max()};
 	uint32_t last_selection_;  // for double clicks
 	ListselectLayout selection_mode_;
 	const Image* check_pic_;

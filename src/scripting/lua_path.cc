@@ -38,7 +38,7 @@ private:
 	std::string template_;
 	std::string format_;
 	std::string to_replace_;
-	uint32_t current_{0};
+	uint32_t current_{0U};
 	uint32_t max_;
 
 	DISALLOW_COPY_AND_ASSIGN(NumberGlob);

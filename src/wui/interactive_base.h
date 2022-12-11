@@ -417,16 +417,18 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
-	uint64_t lastframe_;           //  system time (milliseconds)
-	uint64_t frametime_{0};        //  in millseconds
-	uint64_t avg_usframetime_{0};  //  in microseconds!
+	uint64_t lastframe_;            //  system time (milliseconds)
+	uint64_t frametime_{0U};        //  in millseconds
+	uint64_t avg_usframetime_{0U};  //  in microseconds!
 
 	// For measuring actual game speed and how smoothly the game logic runs
-	uint64_t last_frame_realtime_{0}, previous_frame_realtime_{0};
-	Time last_frame_gametime_, previous_frame_gametime_;
-	uint64_t avg_actual_gamespeed_{0};  // in microseconds gametime per second realtime
-	uint64_t last_target_gamespeed_{0};
-	uint64_t gamespeed_last_change_time_{0};
+	uint64_t last_frame_realtime_{0U};
+	uint64_t previous_frame_realtime_{0U};
+	Time last_frame_gametime_{0U};
+	Time previous_frame_gametime_{0U};
+	uint64_t avg_actual_gamespeed_{0U};  // in microseconds gametime per second realtime
+	uint64_t last_target_gamespeed_{0U};
+	uint64_t gamespeed_last_change_time_{0U};
 
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 

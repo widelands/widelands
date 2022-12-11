@@ -48,13 +48,12 @@ struct ProductionProgram : public MapObjectProgram {
 	/// Can be executed on a ProductionSite.
 	struct Action {
 		struct TrainingParameters {
-			TrainingParameters() : level(INVALID_INDEX) {
-			}
+			TrainingParameters() = default;
 			static TrainingParameters parse(const std::vector<std::string>& arguments,
 			                                const std::string& action_name);
 
 			TrainingAttribute attribute{TrainingAttribute::kTotal};
-			unsigned level;
+			unsigned level{INVALID_INDEX};
 		};
 
 		Action() = default;
@@ -465,7 +464,7 @@ struct ProductionProgram : public MapObjectProgram {
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		DescriptionIndex resource_;
+		DescriptionIndex resource_{INVALID_INDEX};
 		uint8_t workarea_;              // width/radius of mine
 		unsigned max_resources_;        // Can work up to this percent (of total mountain resources)
 		unsigned depleted_chance_;      // odds of finding resources from empty mine

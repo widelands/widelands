@@ -96,7 +96,7 @@ public:
 private:
 	Player* players_[kMaxPlayers];
 	EditorGameBase& egbase_;
-	uint8_t number_of_players_{0};
+	uint8_t number_of_players_{0U};
 	std::vector<PlayerEndStatus> players_end_status_;
 };
 }  // namespace Widelands

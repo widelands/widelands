@@ -39,7 +39,8 @@ public:
 	/// A row of buttons and dropdown menus
 	UI::Box box;
 
-	bool on_top{false}, draw_background{false};
+	bool on_top{false};
+	bool draw_background{false};
 
 private:
 	/// The set of background images

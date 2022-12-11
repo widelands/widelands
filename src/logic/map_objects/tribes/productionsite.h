@@ -342,12 +342,12 @@ public:
 		OPtr<Worker> worker;
 	};
 
-	const std::vector<WorkingPosition>* working_positions() const {
+	[[nodiscard]] const std::vector<WorkingPosition>* working_positions() const {
 		return &working_positions_;
 	}
 
 	virtual bool has_workers(DescriptionIndex targetSite, Game& game);
-	uint8_t get_statistics_percent() const {
+	[[nodiscard]] uint8_t get_statistics_percent() const {
 		return last_stat_percent_ / 10;
 	}
 
@@ -355,11 +355,11 @@ public:
 	// and sets actual_percent_ to new value
 	void update_actual_statistics(Duration, bool);
 
-	uint8_t get_actual_statistics() const {
+	[[nodiscard]] uint8_t get_actual_statistics() const {
 		return actual_percent_ / 10;
 	}
 
-	const std::string& production_result() const {
+	[[nodiscard]] const std::string& production_result() const {
 		return production_result_;
 	}
 
@@ -447,11 +447,11 @@ protected:
 	 */
 	virtual void find_and_start_next_program(Game&);
 
-	State& top_state() {
+	[[nodiscard]] State& top_state() {
 		assert(!stack_.empty());
 		return *stack_.rbegin();
 	}
-	State* get_state() {
+	[[nodiscard]] State* get_state() {
 		return !stack_.empty() ? &*stack_.rbegin() : nullptr;
 	}
 	void program_act(Game&);
@@ -494,19 +494,19 @@ protected:
 	using Stack = std::vector<State>;
 	Stack stack_;                ///<  program stack
 	bool program_timer_{false};  ///< execute next instruction based on pointer
-	Time program_time_;          ///< timer time
-	Duration post_timer_;        ///< Time to schedule after ends
+	Time program_time_{0U};      ///< timer time
+	Duration post_timer_{50U};   ///< Time to schedule after ends
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
 	InputQueues input_queues_;  ///< input queues for all inputs
-	uint16_t last_stat_percent_{0};
+	uint16_t last_stat_percent_{0U};
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
 	// 0-100)
-	uint32_t actual_percent_{0};  // basically this is percent * 10 to avoid floats
-	Time last_program_end_time;
+	uint32_t actual_percent_{0U};  // basically this is percent * 10 to avoid floats
+	Time last_program_end_time{0U};
 	bool is_stopped_{false};
-	std::string default_anim_;  // normally "idle", "empty", if empty mine.
+	std::string default_anim_{"idle"};  // normally "idle", "empty", if empty mine.
 
 private:
 	enum class Trend { kUnchanged, kRising, kFalling };

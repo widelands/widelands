@@ -127,20 +127,20 @@ protected:
 	/// Whether there has ben a data update since the last time that think() was executed
 	bool needs_update_{true};
 	/// The last time the information in this Panel got updated
-	uint32_t lastupdate_{0};
+	uint32_t lastupdate_{0U};
 
 	/// For first updating and then plotting the data
 	float const xline_length_;
 	float const yline_length_;
-	uint32_t time_ms_{0};
-	uint32_t highest_scale_{0};
-	float sub_{0};
+	uint32_t time_ms_{0U};
+	uint32_t highest_scale_{0U};
+	float sub_{0.f};
 
 private:
 	uint32_t get_game_time() const;
 
-	TIME time_{TIME_GAME};      // How much do you want to list
-	uint32_t game_time_id_{0};  // what label is used for TIME_GAME
+	TIME time_{TIME_GAME};       // How much do you want to list
+	uint32_t game_time_id_{0U};  // what label is used for TIME_GAME
 };
 
 /**
@@ -176,7 +176,7 @@ protected:
 
 private:
 	WuiPlotArea& plot_area_;
-	uint32_t last_game_time_id_{0};
+	uint32_t last_game_time_id_{0U};
 };
 
 /**

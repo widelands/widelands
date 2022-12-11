@@ -20,6 +20,7 @@
 #define WL_LOGIC_SAVE_HANDLER_H
 
 #include "io/filesystem/filesystem.h"
+#include "logic/filesystem_constants.h"
 
 namespace Widelands {
 class Game;
@@ -32,7 +33,7 @@ class Game;
  */
 class SaveHandler {
 public:
-	SaveHandler();
+	SaveHandler() = default;
 
 	void think(Widelands::Game&);
 	[[nodiscard]] std::string create_file_name(const std::string& dir,
@@ -69,18 +70,18 @@ public:
 	}
 
 private:
-	uint32_t next_save_realtime_{0};
-	uint32_t last_save_realtime_{0};
+	uint32_t next_save_realtime_{0U};
+	uint32_t last_save_realtime_{0U};
 	bool initialized_{false};
 	bool allow_saving_{true};
 	bool save_requested_{false};
 	bool saving_next_tick_{false};
 	std::string save_filename_;
 	std::string current_filename_;
-	std::string autosave_filename_;
+	std::string autosave_filename_{kAutosavePrefix};
 
 	FileSystem::Type fs_type_{FileSystem::ZIP};
-	int32_t autosave_interval_in_ms_;
+	int32_t autosave_interval_in_ms_{kDefaultAutosaveInterval * 60 * 1000};
 	int32_t number_of_rolls_{5};  // For rolling file update
 
 	void initialize(uint32_t realtime);

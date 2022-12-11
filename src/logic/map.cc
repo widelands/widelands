@@ -1119,7 +1119,7 @@ struct FindBobsCallback {
 
 	std::vector<Bob*>* list_;
 	const FindBob& functor_;
-	uint32_t found_{0};
+	uint32_t found_{0U};
 };
 
 /*
@@ -1200,7 +1200,7 @@ struct FindImmovablesCallback {
 
 	std::vector<ImmovableFound>* list_;
 	const FindImmovable& functor_;
-	uint32_t found_{0};
+	uint32_t found_{0U};
 };
 
 /*
@@ -1296,7 +1296,7 @@ struct FindNodesCallback {
 
 	std::vector<Coords>* list_;
 	const FindNode& functor_;
-	uint32_t found_{0};
+	uint32_t found_{0U};
 };
 
 /*

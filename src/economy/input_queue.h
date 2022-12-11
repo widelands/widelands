@@ -269,7 +269,7 @@ protected:
 	const WareWorker type_;
 
 	/// Time in ms between consumption at full speed.
-	Duration consume_interval_;
+	Duration consume_interval_{0U};
 
 	/// The currently pending request.
 	std::unique_ptr<Request> request_;

@@ -137,6 +137,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
                   UI::ButtonStyle::kWuiPrimary,
                   [this](MapviewMenuEntry t) { mapview_menu_selected(t); }),
      quick_navigation_(&map_view_),
+     minimap_registry_(the_egbase.is_game()),
      workareas_cache_(nullptr),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
@@ -146,10 +147,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 #endif
      lastframe_(SDL_GetTicks()),
 
-     last_frame_gametime_(0),
-     previous_frame_gametime_(0),
-
-     road_building_mode_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()) {
 
 	// Load the buildhelp icons.

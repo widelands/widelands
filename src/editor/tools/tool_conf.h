@@ -38,10 +38,10 @@ struct ToolConf {
 	EditorTool* primary{nullptr};
 
 	int32_t change_by{0};
-	Widelands::ResourceAmount set_to{0};
+	Widelands::ResourceAmount set_to{0U};
 	Widelands::HeightInterval interval;
 	std::set<Widelands::DescriptionIndex> map_obj_types;
-	Widelands::DescriptionIndex resource{0};
+	Widelands::DescriptionIndex resource{0U};
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOL_CONF_H

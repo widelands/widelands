@@ -46,7 +46,7 @@ private:
 	Time time_;
 	uint32_t speed_;  ///< current game speed, in milliseconds per second
 	bool paused_{false};
-	uint32_t player_cmdserial_{0};
+	uint32_t player_cmdserial_{0U};
 	Widelands::PlayerNumber local_;
 	std::vector<AI::ComputerPlayer*> computerplayers_;
 };

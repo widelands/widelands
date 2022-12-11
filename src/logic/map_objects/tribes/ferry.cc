@@ -41,8 +41,7 @@ uint32_t FerryDescr::movecaps() const {
 	return MOVECAPS_SWIM | MOVECAPS_WALK;
 }
 
-Ferry::Ferry(const FerryDescr& ferry_descr)
-   : Carrier(ferry_descr), destination_(nullptr), unemployed_since_(0) {
+Ferry::Ferry(const FerryDescr& ferry_descr) : Carrier(ferry_descr) {
 }
 
 bool Ferry::init(EditorGameBase& egbase) {

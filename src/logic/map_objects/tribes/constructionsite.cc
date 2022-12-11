@@ -161,9 +161,7 @@ IMPLEMENTATION
 */
 
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
-   : PartiallyFinishedBuilding(cs_descr),
-
-     settings_(nullptr) {
+   : PartiallyFinishedBuilding(cs_descr) {
 }
 
 void ConstructionSite::update_statistics_string(std::string* s) {

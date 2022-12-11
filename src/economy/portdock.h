@@ -167,7 +167,7 @@ protected:
 		void load_finish() override;
 
 	private:
-		uint32_t warehouse_{0};
+		uint32_t warehouse_{0U};
 		std::vector<ShippingItem::Loader> waiting_;
 	};
 

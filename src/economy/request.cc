@@ -63,7 +63,6 @@ Request::Request(PlayerImmovable& init_target,
 
      callbackfn_(cbfn),
      required_time_(init_target.owner().egbase().get_gametime()),
-     required_interval_(0),
      last_request_time_(required_time_) {
 	assert(type_ == wwWARE || type_ == wwWORKER);
 	if (w == wwWARE && !init_target.owner().egbase().descriptions().ware_exists(index)) {

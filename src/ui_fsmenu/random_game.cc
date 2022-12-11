@@ -27,7 +27,7 @@ namespace FsMenu {
 
 RandomGame::RandomGame(MenuCapsule& m)
    : TwoColumnsFullNavigationMenu(m, _("New Random Game")),
-     menu_(left_column_box_, UI::PanelStyle::kFsMenu, 350, 64, 64),
+     menu_(left_column_box_, UI::PanelStyle::kFsMenu, 350, 64, 64, ok_, back_),
      icon_(&right_column_content_box_,
            UI::PanelStyle::kFsMenu,
            g_image_cache->get("images/logos/wl-ico-128.png")) {

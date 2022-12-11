@@ -60,7 +60,7 @@ struct Pathfield {
 
 struct Pathfields {
 	std::unique_ptr<Pathfield[]> fields;
-	uint16_t cycle{0};
+	uint16_t cycle{0U};
 
 	explicit Pathfields(uint32_t nrfields);
 };
@@ -82,7 +82,7 @@ private:
 
 	using List = std::vector<std::shared_ptr<Pathfields>>;
 
-	uint32_t nrfields_{0};
+	uint32_t nrfields_{0U};
 	List list_;
 };
 }  // namespace Widelands

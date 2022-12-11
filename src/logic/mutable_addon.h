@@ -189,6 +189,11 @@ private:
 	CampaignInfo metadata_;
 };
 
+class MapGenAddon : public MutableAddOn {
+public:
+	using MutableAddOn::MutableAddOn;
+};
+
 class WinCondAddon : public MutableAddOn {
 public:
 	using MutableAddOn::MutableAddOn;

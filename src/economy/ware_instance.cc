@@ -188,10 +188,7 @@ void IdleWareSupply::send_to_storage(Game& game, Warehouse* wh) {
 /*                     Ware Instance Implementation                      */
 /*************************************************************************/
 WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware_descr)
-   : MapObject(ware_descr),
-
-     descr_index_(i),
-     supply_(nullptr) {
+   : MapObject(ware_descr), descr_index_(i) {
 }
 
 WareInstance::~WareInstance() {

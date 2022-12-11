@@ -189,10 +189,7 @@ public:
 	 * \see class Bob for in-depth explanation
 	 */
 	struct State {
-		explicit State(const Task* const the_task = nullptr)
-		   : task(the_task),
-
-		     coords(Coords::null()) {
+		explicit State(const Task* const the_task = nullptr) : task(the_task) {
 		}
 
 		const Task* task;
@@ -202,7 +199,7 @@ public:
 		ObjectPointer objvar1;
 		std::string svar1;
 
-		Coords coords;
+		Coords coords{Coords::null()};
 		DirAnimations diranims;
 		Path* path{nullptr};
 		Route* route{nullptr};
@@ -211,10 +208,10 @@ public:
 
 	MO_DESCR(BobDescr)
 
-	uint32_t get_current_anim() const {
+	[[nodiscard]] uint32_t get_current_anim() const {
 		return anim_;
 	}
-	const Time& get_animstart() const {
+	[[nodiscard]] const Time& get_animstart() const {
 		return animstart_;
 	}
 
@@ -224,14 +221,15 @@ public:
 	void schedule_destroy(Game&);
 	void schedule_act(Game&, const Duration& tdelta);
 	void skip_act();
-	Vector2f calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float scale) const;
+	[[nodiscard]] Vector2f
+	calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float scale) const;
 	void set_owner(Player*);
 
 	void set_position(EditorGameBase&, const Coords&);
-	const FCoords& get_position() const {
+	[[nodiscard]] const FCoords& get_position() const {
 		return position_;
 	}
-	Bob* get_next_bob() const {
+	[[nodiscard]] Bob* get_next_bob() const {
 		return linknext_;
 	}
 
@@ -262,7 +260,7 @@ public:
 	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game&, char const*);
 	void start_task_idle(Game&, uint32_t anim, int32_t timeout, Vector2i offset = Vector2i::zero());
-	bool is_idle() const;
+	[[nodiscard]] bool is_idle() const;
 
 	/// This can fail (and return false). Therefore the caller must check the
 	/// result and find something else for the bob to do. Otherwise there will
@@ -291,19 +289,19 @@ public:
 	void start_task_move(Game& game, int32_t dir, const DirAnimations&, bool);
 
 	// higher level handling (task-based)
-	State& top_state() {
+	[[nodiscard]] State& top_state() {
 		assert(!stack_.empty());
 		return *stack_.rbegin();
 	}
-	State* get_state() {
+	[[nodiscard]] State* get_state() {
 		return !stack_.empty() ? &*stack_.rbegin() : nullptr;
 	}
 
-	std::string get_signal() {
+	[[nodiscard]] std::string get_signal() const {
 		return signal_;
 	}
-	State* get_state(const Task&);
-	State const* get_state(const Task&) const;
+	[[nodiscard]] State* get_state(const Task&);
+	[[nodiscard]] State const* get_state(const Task&) const;
 	void push_task(Game& game, const Task& task, const Duration& tdelta = Duration(10));
 	void pop_task(Game&);
 
@@ -317,7 +315,7 @@ public:
 	void set_animation(const EditorGameBase&, uint32_t anim);
 
 	/// \return true if we're currently walking
-	bool is_walking() {
+	[[nodiscard]] bool is_walking() const {
 		return walking_ != IDLE;
 	}
 
@@ -326,7 +324,7 @@ public:
 	 * It is only introduced here because profiling showed
 	 * that soldiers spend a lot of time in the node blocked check.
 	 */
-	Bob* get_next_on_field() const {
+	[[nodiscard]] Bob* get_next_on_field() const {
 		return linknext_;
 	}
 
@@ -355,14 +353,14 @@ private:
 	static Task const taskMovepath;
 	static Task const taskMove;
 
-	FCoords position_;        ///< where are we right now?
-	Bob* linknext_{nullptr};  ///< next object on this node
+	FCoords position_{Coords(0, 0), nullptr};  ///< where are we right now?
+	Bob* linknext_{nullptr};                   ///< next object on this node
 	Bob** linkpprev_{nullptr};
-	uint32_t anim_{0};
-	Time animstart_;  ///< gametime when the animation was started
+	uint32_t anim_{0U};
+	Time animstart_{0U};  ///< gametime when the animation was started
 	WalkingDir walking_{IDLE};
-	Time walkstart_;  ///< start time (used for interpolation)
-	Time walkend_;    ///< end time (used for interpolation)
+	Time walkstart_{0U};  ///< start time (used for interpolation)
+	Time walkend_{0U};    ///< end time (used for interpolation)
 
 	// Task framework variables
 	std::vector<State> stack_;
@@ -374,7 +372,7 @@ private:
 	 * only the earliest \ref Cmd_Act issued during one act phase is actually
 	 * executed. Subsequent \ref Cmd_Act could interfere and are eliminated.
 	 */
-	uint32_t actid_{0};
+	uint32_t actid_{0U};
 
 	/**
 	 * Whether something was scheduled during this act phase.

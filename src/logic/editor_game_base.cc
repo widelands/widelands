@@ -68,16 +68,11 @@ initialization
 ============
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
-   : gametime_(0),
-     // TODO(SirVer): this is sooo ugly, I can't say
+   :  // TODO(SirVer): this is sooo ugly, I can't say
      lua_(lua_interface != nullptr ? lua_interface : new LuaEditorInterface(this)),
      player_manager_(new PlayersManager(*this)),
-     ibase_(nullptr),
-     loader_ui_(nullptr),
-     game_tips_(nullptr),
      loading_message_subscriber_(Notifications::subscribe<UI::NoteLoadingMessage>(
-        [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); })),
-     tmp_fs_(nullptr) {
+        [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); })) {
 
 	init_addons(false);
 

@@ -74,7 +74,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                     base_height(button_dimension, style)),
      id_(next_id_++),
      max_list_items_(max_list_items),
-     max_list_height_(std::numeric_limits<uint32_t>::max()),
 
      base_height_(base_height(button_dimension, style)),
 
