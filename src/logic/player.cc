@@ -140,15 +140,15 @@ Player::Player(EditorGameBase& the_egbase,
                const TribeDescr& tribe_descr,
                const std::string& name)
    : egbase_(the_egbase),
-     initialization_index_(initialization_index),
-     playercolor_(pc),
-
-     player_number_(plnum),
      tribe_(tribe_descr),
 
      message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
      attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
-     occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {
+     occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")),
+
+     playercolor_(pc),
+     player_number_(plnum),
+     initialization_index_(initialization_index) {
 	set_name(name);
 
 	init_statistics();
