@@ -33,24 +33,23 @@ struct FCoords;
 struct FindNode {
 private:
 	struct BaseCapsule {
-		BaseCapsule() : refcount(1) {
-		}
-		virtual ~BaseCapsule() {
-		}
+		BaseCapsule() = default;
+		virtual ~BaseCapsule() = default;
 
 		void addref() {
 			++refcount;
 		}
 		void deref() {
-			if (--refcount == 0)
+			if (--refcount == 0) {
 				delete this;
+			}
 		}
 		[[nodiscard]] virtual bool accept(const EditorGameBase&, const FCoords& coord) const = 0;
 
-		int refcount;
+		int refcount{1};
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
-		explicit Capsule(const T& init_op) : op(init_op) {
+		Capsule(const T& init_op) : op(init_op) {  // NOLINT allow implicit conversion
 		}
 		[[nodiscard]] bool accept(const EditorGameBase& map, const FCoords& coord) const override {
 			return op.accept(map, coord);
@@ -62,7 +61,7 @@ private:
 	BaseCapsule* capsule;
 
 public:
-	explicit FindNode(const FindNode& o) {
+	FindNode(const FindNode& o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -71,13 +70,16 @@ public:
 		capsule = nullptr;
 	}
 	FindNode& operator=(const FindNode& o) {
+		if (&o == this) {
+			return *this;
+		}
 		capsule->deref();
 		capsule = o.capsule;
 		capsule->addref();
 		return *this;
 	}
 
-	template <typename T> FindNode(const T& op) {
+	template <typename T> FindNode(const T& op) {  // NOLINT allow implicit conversion
 		capsule = new Capsule<T>(op);
 	}
 
@@ -99,8 +101,7 @@ private:
 
 /// Accepts a node if it is accepted by all subfunctors.
 struct FindNodeAnd {
-	FindNodeAnd() {
-	}
+	FindNodeAnd() = default;
 
 	void add(const FindNode&, bool negate = false);
 
@@ -191,7 +192,7 @@ private:
 
 /// Accepts a node where at least 1 adjacent triangle has enhancable terrain
 struct FindNodeTerraform {
-	FindNodeTerraform(const std::string& c) : category_(c) {
+	explicit FindNodeTerraform(const std::string& c) : category_(c) {
 	}
 	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const;
 

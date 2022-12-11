@@ -91,19 +91,7 @@ Bob& BobDescr::create(EditorGameBase& egbase, Player* const owner, const Coords&
 	return bob;
 }
 
-Bob::Bob(const BobDescr& init_descr)
-   : MapObject(&init_descr),
-     position_(FCoords(Coords(0, 0), nullptr)),  // not linked anywhere
-     linknext_(nullptr),
-     linkpprev_(nullptr),
-     anim_(0),
-     animstart_(0),
-     walking_(IDLE),
-     walkstart_(0),
-     walkend_(0),
-     actid_(0),
-     actscheduled_(false),
-     in_act_(false) {
+Bob::Bob(const BobDescr& init_descr) : MapObject(&init_descr) {
 }
 
 /**

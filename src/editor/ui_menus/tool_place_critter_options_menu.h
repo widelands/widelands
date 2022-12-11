@@ -28,7 +28,7 @@
 class EditorInteractive;
 namespace Widelands {
 class CritterDescr;
-}
+}  // namespace Widelands
 
 struct EditorToolPlaceCritterOptionsMenu : public EditorToolOptionsMenu {
 	EditorToolPlaceCritterOptionsMenu(EditorInteractive&,

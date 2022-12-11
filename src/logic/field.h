@@ -93,6 +93,9 @@ public:
 	}
 
 	Field& operator=(const Field& other) {
+		if (&other == this) {
+			return *this;
+		}
 		bobs = other.bobs;
 		immovable = other.immovable;
 		caps = other.caps;
@@ -140,10 +143,11 @@ public:
 	void set_terrain(const TriangleIndex& t, DescriptionIndex const i)
 
 	{
-		if (t == TriangleIndex::D)
+		if (t == TriangleIndex::D) {
 			set_terrain_d(i);
-		else
+		} else {
 			set_terrain_r(i);
+		}
 	}
 	void set_terrain_d(DescriptionIndex const i) {
 		terrains.d = i;
@@ -181,7 +185,7 @@ public:
 		return owner_info_and_selections & Player_Number_Bitmask;
 	}
 	[[nodiscard]] bool is_border() const {
-		return owner_info_and_selections & Border_Bitmask;
+		return (owner_info_and_selections & Border_Bitmask) != 0;
 	}
 
 	///
@@ -198,7 +202,8 @@ public:
 	}
 
 	void set_border(const bool b) {
-		owner_info_and_selections = (owner_info_and_selections & ~Border_Bitmask) | (b << Border_Bit);
+		owner_info_and_selections =
+		   (owner_info_and_selections & ~Border_Bitmask) | (static_cast<int>(b) << Border_Bit);
 	}
 
 	[[nodiscard]] RoadSegment get_road(uint8_t dir) const {

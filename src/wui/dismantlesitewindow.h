@@ -38,7 +38,7 @@ private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 	Widelands::OPtr<Widelands::DismantleSite> dismantle_site_;
-	UI::ProgressBar* progress_;
+	UI::ProgressBar* progress_{nullptr};
 	DISALLOW_COPY_AND_ASSIGN(DismantleSiteWindow);
 };
 

@@ -40,14 +40,13 @@ struct CheckStep {
 
 private:
 	struct BaseCapsule {
-		virtual ~BaseCapsule() {
-		}
+		virtual ~BaseCapsule() = default;
 		[[nodiscard]] virtual bool allowed(
 		   const Map&, const FCoords& start, const FCoords& end, int32_t dir, StepId id) const = 0;
 		[[nodiscard]] virtual bool reachable_dest(const Map&, const FCoords& dest) const = 0;
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
-		Capsule(const T& init_op) : op(init_op) {
+		Capsule(const T& init_op) : op(init_op) {  // NOLINT allow implicit conversion
 		}
 
 		[[nodiscard]] bool allowed(const Map& map,
@@ -71,7 +70,9 @@ private:
 public:
 	CheckStep();
 
-	template <typename T> CheckStep(const T& op) : capsule(new Capsule<T>(op)) {
+	template <typename T>
+	CheckStep(const T& op)  // NOLINT allow implicit conversion
+	   : capsule(new Capsule<T>(op)) {
 	}
 
 	/**

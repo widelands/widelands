@@ -153,11 +153,7 @@ Bob& ShipDescr::create_object() const {
 
 Ship::Ship(const ShipDescr& gdescr)
    : Bob(gdescr),
-     fleet_(nullptr),
-     ware_economy_(nullptr),
-     worker_economy_(nullptr),
-     ship_state_(ShipStates::kTransport),
-     destination_(nullptr),
+
      capacity_(gdescr.get_default_capacity()) {
 }
 

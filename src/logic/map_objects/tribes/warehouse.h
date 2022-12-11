@@ -41,8 +41,7 @@ struct WarehouseSupply;
 class WarehouseDescr : public BuildingDescr {
 public:
 	WarehouseDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
-	~WarehouseDescr() override {
-	}
+	~WarehouseDescr() override = default;
 
 	[[nodiscard]] Building& create_object() const override;
 
@@ -61,8 +60,8 @@ public:
 	}
 
 private:
-	int32_t conquers_;
-	unsigned heal_per_second_;
+	int32_t conquers_{0};
+	unsigned heal_per_second_{0U};
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
@@ -301,12 +300,12 @@ private:
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers incorporated_workers_;
 	std::vector<Time> next_worker_without_cost_spawn_;
-	Time next_military_act_;
-	Time next_stock_remove_act_;
+	Time next_military_act_{0U};
+	Time next_stock_remove_act_{0U};
 
 	std::vector<PlannedWorkers> planned_workers_;
 
-	PortDock* portdock_;
+	PortDock* portdock_{nullptr};
 
 	// This is information for portdock, to know whether it should
 	// try to recreate itself

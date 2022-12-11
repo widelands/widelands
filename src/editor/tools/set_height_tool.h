@@ -25,7 +25,7 @@
 
 ///  Ensures that the height of a node is within an interval.
 struct EditorSetHeightTool : public EditorTool {
-	EditorSetHeightTool(EditorInteractive& parent)
+	explicit EditorSetHeightTool(EditorInteractive& parent)
 	   : EditorTool(parent, *this, *this), interval_(10, 10) {
 	}
 

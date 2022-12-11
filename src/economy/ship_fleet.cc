@@ -57,8 +57,7 @@ const ShipFleetDescr& ShipFleet::descr() const {
  * instance, then add themselves \em before calling the \ref init function.
  * The Fleet takes care of merging with existing fleets, if any.
  */
-ShipFleet::ShipFleet(Player* player)
-   : MapObject(&g_ship_fleet_descr), act_pending_(false), schedule_(*this) {
+ShipFleet::ShipFleet(Player* player) : MapObject(&g_ship_fleet_descr), schedule_(*this) {
 	owner_ = player;
 }
 
