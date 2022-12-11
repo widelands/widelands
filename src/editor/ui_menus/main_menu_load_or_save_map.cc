@@ -39,9 +39,6 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, name, &registry, parent.get_w(), parent.get_h(), title),
 
-     // Values for alignment and size
-     padding_(4),
-
      show_empty_dirs_(show_empty_dirs),
 
      main_box_(this, UI::PanelStyle::kWui, padding_, padding_, UI::Box::Vertical, 0, 0, padding_),

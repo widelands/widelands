@@ -30,8 +30,7 @@ namespace AddOns {
 class MutableAddOn {
 public:
 	explicit MutableAddOn(const AddOnInfo& a);
-	virtual ~MutableAddOn() {
-	}
+	virtual ~MutableAddOn() = default;
 	// Creates an addon with its type matching its category
 	static std::unique_ptr<MutableAddOn> create_mutable_addon(const AddOnInfo& a);
 	void update_info(const std::string& descname,
@@ -81,7 +80,7 @@ protected:
 	void cleanup_temp_dir();
 	size_t do_recursively_copy_file_or_directory(const std::string& source,
 	                                             const std::string& dest,
-	                                             const bool dry_run);
+	                                             bool dry_run);
 
 	std::string internal_name_, descname_, description_, author_, version_, min_wl_version_,
 	   max_wl_version_;
@@ -188,6 +187,11 @@ private:
 	std::regex rex_difficulty_, rex_difficulty_icon_, rex_descname_, rex_description_,
 	   rex_short_desc_, rex_tribe_, rex_scenario_;
 	CampaignInfo metadata_;
+};
+
+class MapGenAddon : public MutableAddOn {
+public:
+	using MutableAddOn::MutableAddOn;
 };
 
 class WinCondAddon : public MutableAddOn {

@@ -166,7 +166,7 @@ void SavegameTableSinglePlayer::create_valid_entry(UI::Table<uintptr_t const>::E
 SavegameTableReplay::SavegameTableReplay(UI::Panel* parent,
                                          UI::PanelStyle style,
                                          bool localize_autosave)
-   : SavegameTable(parent, style, localize_autosave), show_filenames_(false) {
+   : SavegameTable(parent, style, localize_autosave) {
 	add_columns();
 }
 

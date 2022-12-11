@@ -27,9 +27,6 @@ NotificationsManager* NotificationsManager::get() {
 	return &instance;
 }
 
-NotificationsManager::NotificationsManager() : next_subscriber_id_(1), num_subscribers_(0) {
-}
-
 NotificationsManager::~NotificationsManager() {
 	if (num_subscribers_ != 0) {
 		log_err("NotificationsManager is destroyed, but there are still subscribers.\n");

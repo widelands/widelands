@@ -42,8 +42,8 @@ private:
 	void update_worker_table(Widelands::ProductionSite* production_site);
 
 	Widelands::OPtr<Widelands::ProductionSite> production_site_;
-	UI::Table<uintptr_t>* worker_table_;
-	UI::Box* worker_caps_;
+	UI::Table<uintptr_t>* worker_table_{nullptr};
+	UI::Box* worker_caps_{nullptr};
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>>
 	   productionsitenotes_subscriber_;
 
@@ -52,9 +52,9 @@ private:
 	void worker_table_xp_clicked(int8_t);
 	void update_worker_xp_buttons(const Widelands::Worker*);
 
-	UI::Dropdown<Widelands::DescriptionIndex>* worker_type_;
-	UI::Button* worker_xp_decrease_;
-	UI::Button* worker_xp_increase_;
+	UI::Dropdown<Widelands::DescriptionIndex>* worker_type_{nullptr};
+	UI::Button* worker_xp_decrease_{nullptr};
+	UI::Button* worker_xp_increase_{nullptr};
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteWindow);
 };

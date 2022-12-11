@@ -55,7 +55,7 @@ protected:
 	void entered(DescriptionIndex index, Worker* worker) override;
 
 	/// Number of items that are currently in the queue
-	Quantity filled_;
+	Quantity filled_{0};
 };
 }  // namespace Widelands
 

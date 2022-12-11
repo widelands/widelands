@@ -38,8 +38,7 @@ public:
 	//  TODO(unknown): This should be unnecessary. Make it so.
 	enum Type { DIR, ZIP };
 
-	virtual ~FileSystem() {
-	}
+	virtual ~FileSystem() = default;
 
 	// Returns all files and directories (full path) in the given directory 'directory'.
 	[[nodiscard]] virtual FilenameSet list_directory(const std::string& directory) const = 0;

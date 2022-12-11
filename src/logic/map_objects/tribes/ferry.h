@@ -33,8 +33,7 @@ struct Coords;
 class FerryDescr : public CarrierDescr {
 public:
 	FerryDescr(const std::string& init_descname, const LuaTable& table, Descriptions& descriptions);
-	~FerryDescr() override {
-	}
+	~FerryDescr() override = default;
 
 	[[nodiscard]] uint32_t movecaps() const override;
 
@@ -55,8 +54,7 @@ struct Ferry : public Carrier {
 	MO_DESCR(FerryDescr)
 
 	explicit Ferry(const FerryDescr& ferry_descr);
-	~Ferry() override {
-	}
+	~Ferry() override = default;
 
 	bool init(EditorGameBase&) override;
 	void set_economy(Game&, Economy*, WareWorker);
@@ -74,7 +72,7 @@ struct Ferry : public Carrier {
 
 private:
 	friend struct FerryFleet;
-	FerryFleet* fleet_;
+	FerryFleet* fleet_{nullptr};
 
 	std::unique_ptr<Coords> destination_;
 
@@ -86,15 +84,14 @@ private:
 	void unemployed_update(Game&, State&);
 	void row_update(Game&, State&);
 
-	Time unemployed_since_;
+	Time unemployed_since_{0U};
 
 protected:
 	void cleanup(EditorGameBase&) override;
 
 	struct Loader : public Carrier::Loader {
 	public:
-		Loader() {
-		}
+		Loader() = default;
 		void load(FileRead&) override;
 
 	protected:

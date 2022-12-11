@@ -33,8 +33,7 @@ constexpr int kMaxProtectionRadius = 25;
 class AttackTarget {
 public:
 	AttackTarget() = default;
-	virtual ~AttackTarget() {
-	}
+	virtual ~AttackTarget() = default;
 
 	// Determines whether this building can be attacked right now.
 	[[nodiscard]] virtual bool can_be_attacked() const = 0;

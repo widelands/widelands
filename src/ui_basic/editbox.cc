@@ -52,13 +52,7 @@ struct EditBoxImpl {
 	explicit EditBoxImpl(const UI::PanelStyle s)
 	   : style(s),
 	     margin(background_style().margin()),
-	     font_scale(1.0f),
-	     maxLength(1),
-	     caret(0),
-	     selection_end(0),
-	     selection_start(0),
-	     mode(Mode::kNormal),
-	     scrolloffset(0),
+
 	     // Set alignment to the UI language's principal writing direction
 	     align(UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft) {
 	}
@@ -79,27 +73,27 @@ struct EditBoxImpl {
 	int margin;
 
 	/// Scale for font size
-	float font_scale;
+	float font_scale{1.0f};
 
 	/// Maximum number of characters in the input
-	uint32_t maxLength;
+	uint32_t maxLength{1U};
 
 	/// Current text in the box.
 	std::string text;
 
 	/// Position of the caret.
-	uint32_t caret;
+	uint32_t caret{0U};
 
 	/// Position of the caret at text selection end.
-	uint32_t selection_end;
+	uint32_t selection_end{0U};
 
 	/// Initial position of text when selection was started
-	uint32_t selection_start;
+	uint32_t selection_start{0U};
 
-	Mode mode;
+	Mode mode{Mode::kNormal};
 
 	/// Current scrolling offset to the text anchor position, in pixels
-	int32_t scrolloffset;
+	int32_t scrolloffset{0};
 
 	/// Alignment of the text. Vertical alignment is always centered.
 	Align align;
@@ -114,10 +108,7 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
            text_height(g_style_manager->editbox_style(style).font()) +
               2 * g_style_manager->editbox_style(style).background().margin()),
      m_(new EditBoxImpl(style)),
-     history_active_(false),
-     history_position_(-1),
-     password_(false),
-     warning_(false),
+
      caret_timer_("", true),
      cursor_movement_timer_("", true) {
 	caret_ms_ = 0;

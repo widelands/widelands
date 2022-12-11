@@ -176,8 +176,8 @@ public:
 	/// when we don't know whether it's a ware or worker.
 	/// Throws GameDataError if object hasn't been registered.
 	/// This function is safe for map/savegame compatibility.
-	std::pair<WareWorker, DescriptionIndex>
-	load_ware_or_worker(const std::string& objectname) const;  // NOLINT not nodiscard
+	std::pair<WareWorker, DescriptionIndex>  // NOLINT not nodiscard
+	load_ware_or_worker(const std::string& objectname) const;
 	/// Try to load a building or immovable that has been registered previously with
 	/// 'register_description' when we don't know whether it's a building or immovable. Throws
 	/// GameDataError if object hasn't been registered. If first == 'true', we have a building.
@@ -225,11 +225,11 @@ private:
 	/** Helper function for add_object_description(). */
 	void add_terrain_description(const std::string&, const LuaTable&);
 
-	uint32_t largest_workarea_;
+	uint32_t largest_workarea_{0U};
 
 	/// Custom scenario tribes
 	std::unique_ptr<LuaTable> scenario_tribes_;
-	bool tribes_have_been_registered_;
+	bool tribes_have_been_registered_{false};
 
 	std::unique_ptr<Notifications::Subscriber<DescriptionManager::NoteMapObjectDescriptionTypeCheck>>
 	   subscriber_;

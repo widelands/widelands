@@ -28,7 +28,7 @@
 
 namespace Widelands {
 class Objective;
-}
+}  // namespace Widelands
 class InteractiveBase;
 
 ///  Shows the not already fulfilled objectives.

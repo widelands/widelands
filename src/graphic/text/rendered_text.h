@@ -125,7 +125,7 @@ private:
 };
 
 struct RenderedText {
-	RenderedText();
+	RenderedText() = default;
 	~RenderedText();
 
 	/// RenderedRects that can be drawn on screen
@@ -186,7 +186,7 @@ private:
 	                  const Recti& region,
 	                  Align align) const;
 
-	TextClickTarget* memory_tree_root_;
+	TextClickTarget* memory_tree_root_{nullptr};
 };
 
 }  // namespace UI

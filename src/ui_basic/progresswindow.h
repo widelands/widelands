@@ -39,8 +39,7 @@ struct IProgressVisualization {
 	/// Progress Window is closing, unregister and cleanup
 	virtual void stop() = 0;
 
-	virtual ~IProgressVisualization() {
-	}
+	virtual ~IProgressVisualization() = default;
 };
 
 /// Manages a progress window on the screen.

@@ -52,8 +52,7 @@ template <typename DockT, typename CargosT> struct SchedulingStateT {
 	}
 	SchedulingStateT(const SchedulingStateT&) = default;
 	SchedulingStateT& operator=(const SchedulingStateT&) = default;
-	~SchedulingStateT() {
-	}
+	~SchedulingStateT() = default;
 };
 
 using SchedulingState = SchedulingStateT<OPtr<PortDock>, CargoList>;
@@ -62,8 +61,7 @@ using ShipPlan = std::list<SchedulingState>;
 struct ShippingSchedule {
 public:
 	explicit ShippingSchedule(ShipFleet&);
-	~ShippingSchedule() {
-	}
+	~ShippingSchedule() = default;
 
 	// called by ShipFleet::act()
 	// returns the time until the next update

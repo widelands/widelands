@@ -35,8 +35,7 @@ public:
 	TrainingSiteDescr(const std::string& init_descname,
 	                  const LuaTable& table,
 	                  Descriptions& descriptions);
-	~TrainingSiteDescr() override {
-	}
+	~TrainingSiteDescr() override = default;
 
 	[[nodiscard]] Building& create_object() const override;
 
@@ -82,36 +81,36 @@ private:
 	//  TODO(unknown): These variables should be per soldier type. They should be in a
 	//  struct and there should be a vector, indexed by Soldier_Index,
 	//  with that struct structs as element type.
-	/** Maximum number of soldiers for a training site*/
+	/** Maximum number of soldiers for a training site */
 	Quantity num_soldiers_;
-	/** Number of rounds w/o successful training, after which a soldier is kicked out.**/
+	/** Number of rounds w/o successful training, after which a soldier is kicked out. */
 	uint32_t max_stall_;
-	/** Whether this site can train health*/
-	bool train_health_;
-	/** Whether this site can train attack*/
-	bool train_attack_;
-	/** Whether this site can train defense*/
-	bool train_defense_;
-	/** Whether this site can train evasion*/
-	bool train_evade_;
+	/** Whether this site can train health */
+	bool train_health_{false};
+	/** Whether this site can train attack */
+	bool train_attack_{false};
+	/** Whether this site can train defense */
+	bool train_defense_{false};
+	/** Whether this site can train evasion */
+	bool train_evade_{false};
 
-	/** Minimum health to which a soldier can drop at this site*/
-	unsigned min_health_;
-	/** Minimum attacks to which a soldier can drop at this site*/
-	unsigned min_attack_;
-	/** Minimum defense to which a soldier can drop at this site*/
-	unsigned min_defense_;
-	/** Minimum evasion to which a soldier can drop at this site*/
-	unsigned min_evade_;
+	/** Minimum health a soldier needs to train at this site */
+	unsigned min_health_{std::numeric_limits<uint32_t>::max()};
+	/** Minimum attack a soldier needs to train at this site */
+	unsigned min_attack_{std::numeric_limits<uint32_t>::max()};
+	/** Minimum defense a soldier needs to train at this site */
+	unsigned min_defense_{std::numeric_limits<uint32_t>::max()};
+	/** Minimum evade a soldier needs to train at this site */
+	unsigned min_evade_{std::numeric_limits<uint32_t>::max()};
 
-	/** Maximum health a soldier can acquire at this site*/
-	unsigned max_health_;
-	/** Maximum attack a soldier can acquire at this site*/
-	unsigned max_attack_;
-	/** Maximum defense a soldier can acquire at this site*/
-	unsigned max_defense_;
-	/** Maximum evasion a soldier can acquire at this site*/
-	unsigned max_evade_;
+	/** Maximum health a soldier can acquire at this site */
+	unsigned max_health_{0U};
+	/** Maximum attack a soldier can acquire at this site */
+	unsigned max_attack_{0U};
+	/** Maximum defense a soldier can acquire at this site */
+	unsigned max_defense_{0U};
+	/** Maximum evasion a soldier can acquire at this site */
+	unsigned max_evade_{0U};
 
 	std::string no_soldier_to_train_message_;
 	std::string no_soldier_for_training_level_message_;
@@ -156,7 +155,7 @@ public:
 	void remove_worker(Worker&) override;
 	bool is_present(Worker& worker) const override;
 
-	bool get_build_heroes() {
+	bool get_build_heroes() const {
 		return build_heroes_;
 	}
 	void set_build_heroes(bool b_heroes) {
@@ -215,7 +214,7 @@ private:
 
 	SoldierControl soldier_control_;
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
-	Request* soldier_request_;
+	Request* soldier_request_{nullptr};
 
 	/** The soldiers currently at the training site*/
 	std::vector<Soldier*> soldiers_;
@@ -229,12 +228,12 @@ private:
 
 	/** True, \b always upgrade already experienced soldiers first, when possible
 	 * False, \b always upgrade inexperienced soldiers first, when possible */
-	bool build_heroes_;
+	bool build_heroes_{false};
 
 	std::vector<Upgrade> upgrades_;
 	Upgrade* current_upgrade_;
 
-	ProgramResult result_;  /// The result of the last training program.
+	ProgramResult result_{ProgramResult::kFailed};  /// The result of the last training program.
 
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier_;

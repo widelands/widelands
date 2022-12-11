@@ -45,7 +45,7 @@ private:
 	std::shared_ptr<Widelands::Game> game_;
 	std::unique_ptr<SinglePlayerGameSettingsProvider> settings_;
 	UI::Icon icon_;
-	UI::ProgressWindow* progress_window_;  // not owned
+	UI::ProgressWindow* progress_window_{nullptr};  // not owned
 };
 
 }  // namespace FsMenu

@@ -35,7 +35,7 @@ namespace Widelands {
 WaresQueue::WaresQueue(PlayerImmovable& init_owner,
                        DescriptionIndex const init_ware,
                        uint8_t const init_max_size)
-   : InputQueue(init_owner, init_ware, init_max_size, wwWARE), filled_(0) {
+   : InputQueue(init_owner, init_ware, init_max_size, wwWARE) {
 	if (index_ != INVALID_INDEX) {
 		update();
 	}
