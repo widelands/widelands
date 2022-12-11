@@ -494,7 +494,8 @@ economy_settings3 = {
    position = "topright",
    title = _("Economy options"),
    body = (
-      p(_([[Stockpiling wares is a double-edged sword. On the one hand, wares in stock are useful to buffer temporary fluctuations in your economy, which tend to occur all the time. On the other hand, any ware that is sitting around in a warehouse instead of being processed into something else is wasted. Finding the balance between wasteful stockpiling and just-in-time production in your supply chains is one of most profound challenges of perfecting your economy. When in doubt, lean towards having some extra reserves.]]))
+      p(_([[Stockpiling wares is a double-edged sword. On the one hand, wares in stock are useful to buffer temporary fluctuations in your economy, which tend to occur all the time. On the other hand, any ware that is sitting around in a warehouse instead of being processed into something else is wasted. Finding the balance between wasteful stockpiling and just-in-time production in your supply chains is one of most profound challenges of perfecting your economy. When in doubt, lean towards having some extra reserves.]])) ..
+      p(_([[To ease the process of switching between different economic situations, you can save and apply economy profiles at the bottom of the economy options window. A profile for stockpiling and one for efficiency are preset there.]]))
    )
 }
 
