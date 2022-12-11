@@ -598,9 +598,7 @@ void EditorInteractive::think() {
 }
 
 void EditorInteractive::exit(const bool force) {
-	if (force) {
-		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-	} else {
+	if (!force) {
 		UI::WLMessageBox mmb(
 		   this, UI::WindowStyle::kWui, need_save_ ? _("Unsaved Map") : _("Exit Editor Confirmation"),
 		   need_save_ ? _("The map has not been saved, do you really want to quit?") :
