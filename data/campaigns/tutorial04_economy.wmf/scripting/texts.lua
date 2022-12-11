@@ -489,6 +489,14 @@ economy_settings2 = {
          _([[If you build two farms, only one of them will start working immediately. The second farm will have to wait for its worker, who will lack a scythe. If you had set the target quantity to 2 before, two scythes would have been available and both farms would have been able to start working right away.]]), plr.color)
    )
 }
+economy_settings3 = {
+   position = "topright",
+   title = _("Economy options"),
+   body = (
+      li_image("images/wui/menus/infinity.png", _([[Most of the time, the economy options are a useful tool to ensure that resources are not wasted to produce wares your economy does not actually need. However, sometimes it can be useful to stockpile a ware in very large quantities. To achieve this, the economy options window allows you to set the target of a ware to infinite, so that it will always be produced.]])) ..
+      p(_([[The same button can also be found in the building window of production sites. There, it causes only this one site to produce indefinitely, regardless of the economy settings. This can be useful to arrange, for example, that more building materials are produced near the border even if there are plenty in stock far away in your homeland.]]))
+   )
+}
 
 obj_produce_marble_columns = {
    name = "produce_marble_columns",
@@ -501,7 +509,7 @@ obj_produce_marble_columns = {
       li_arrow(_([[Sometimes, you will need many wares at the same time quickly – faster than they can be produced. In this case, it is good to have enough on reserve.]]))
    )
 }
-economy_settings3 = {
+economy_settings4 = {
    position = "topright",
    title = _("Economy options"),
    body = (
