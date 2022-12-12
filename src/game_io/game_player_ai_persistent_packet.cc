@@ -39,19 +39,19 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 		if (packet_version == kCurrentPacketVersion) {
 			iterate_players_existing(p, nr_players, game, player) try {
 				// Make sure that all containers are reset properly etc.
-				player->ai_data.initialize();
+				player->ai_data_.initialize();
 				// Contains Genetic algorithm data
-				player->ai_data.initialized = (fr.unsigned_8() != 0u);
-				player->ai_data.colony_scan_area = fr.unsigned_32();
-				player->ai_data.trees_around_cutters = fr.unsigned_32();
-				player->ai_data.expedition_start_time = Time(fr);
-				player->ai_data.ships_utilization = fr.unsigned_16();
-				player->ai_data.no_more_expeditions = (fr.unsigned_8() != 0u);
-				player->ai_data.last_attacked_player = fr.signed_16();
-				player->ai_data.least_military_score = fr.unsigned_32();
-				player->ai_data.target_military_score = fr.unsigned_32();
-				player->ai_data.ai_productionsites_ratio = fr.unsigned_32();
-				player->ai_data.ai_personality_mil_upper_limit = fr.signed_32();
+				player->ai_data_.initialized = (fr.unsigned_8() != 0u);
+				player->ai_data_.colony_scan_area = fr.unsigned_32();
+				player->ai_data_.trees_around_cutters = fr.unsigned_32();
+				player->ai_data_.expedition_start_time = Time(fr);
+				player->ai_data_.ships_utilization = fr.unsigned_16();
+				player->ai_data_.no_more_expeditions = (fr.unsigned_8() != 0u);
+				player->ai_data_.last_attacked_player = fr.signed_16();
+				player->ai_data_.least_military_score = fr.unsigned_32();
+				player->ai_data_.target_military_score = fr.unsigned_32();
+				player->ai_data_.ai_productionsites_ratio = fr.unsigned_32();
+				player->ai_data_.ai_personality_mil_upper_limit = fr.signed_32();
 
 				// Magic numbers
 				const size_t magic_numbers_size = fr.unsigned_32();
@@ -60,10 +60,10 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					   "Too many magic numbers: We have %" PRIuS " but only %" PRIuS "are allowed",
 					   magic_numbers_size, Widelands::Player::AiPersistentState::kMagicNumbersSize);
 				}
-				assert(player->ai_data.magic_numbers.size() ==
+				assert(player->ai_data_.magic_numbers.size() ==
 				       Widelands::Player::AiPersistentState::kMagicNumbersSize);
 				for (size_t i = 0; i < magic_numbers_size; ++i) {
-					player->ai_data.magic_numbers.at(i) = fr.signed_16();
+					player->ai_data_.magic_numbers.at(i) = fr.signed_16();
 				}
 
 				// Neurons
@@ -73,15 +73,15 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					   "Too many neurons: We have %" PRIuS " but only %" PRIuS "are allowed",
 					   neuron_pool_size, Widelands::Player::AiPersistentState::kNeuronPoolSize);
 				}
-				assert(player->ai_data.neuron_weights.size() ==
+				assert(player->ai_data_.neuron_weights.size() ==
 				       Widelands::Player::AiPersistentState::kNeuronPoolSize);
 				for (size_t i = 0; i < neuron_pool_size; ++i) {
-					player->ai_data.neuron_weights.at(i) = fr.signed_8();
+					player->ai_data_.neuron_weights.at(i) = fr.signed_8();
 				}
-				assert(player->ai_data.neuron_functs.size() ==
+				assert(player->ai_data_.neuron_functs.size() ==
 				       Widelands::Player::AiPersistentState::kNeuronPoolSize);
 				for (size_t i = 0; i < neuron_pool_size; ++i) {
-					player->ai_data.neuron_functs.at(i) = fr.signed_8();
+					player->ai_data_.neuron_functs.at(i) = fr.signed_8();
 				}
 
 				// F-neurons
@@ -91,14 +91,14 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					   "Too many f neurons: We have %" PRIuS " but only %" PRIuS "are allowed",
 					   f_neuron_pool_size, Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 				}
-				assert(player->ai_data.f_neurons.size() ==
+				assert(player->ai_data_.f_neurons.size() ==
 				       Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 				for (size_t i = 0; i < f_neuron_pool_size; ++i) {
-					player->ai_data.f_neurons.at(i) = fr.unsigned_32();
+					player->ai_data_.f_neurons.at(i) = fr.unsigned_32();
 				}
 
 				// Remaining buildings for basic economy
-				assert(player->ai_data.remaining_basic_buildings.empty());
+				assert(player->ai_data_.remaining_basic_buildings.empty());
 
 				size_t remaining_basic_buildings_size = fr.unsigned_32();
 				for (uint16_t i = 0; i < remaining_basic_buildings_size; ++i) {
@@ -106,10 +106,10 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					const std::string building_string = fr.string();
 					const Widelands::DescriptionIndex bld_idx =
 					   player->tribe().safe_building_index(building_string);
-					player->ai_data.remaining_basic_buildings.emplace(bld_idx, fr.unsigned_32());
+					player->ai_data_.remaining_basic_buildings.emplace(bld_idx, fr.unsigned_32());
 				}
 				// Basic sanity check for remaining basic buildings
-				assert(player->ai_data.remaining_basic_buildings.size() <
+				assert(player->ai_data_.remaining_basic_buildings.size() <
 				       player->tribe().buildings().size());
 
 			} catch (const WException& e) {
@@ -136,49 +136,49 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs,
 
 	PlayerNumber const nr_players = game.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
-		fw.unsigned_8(player->ai_data.initialized ? 1 : 0);
-		fw.unsigned_32(player->ai_data.colony_scan_area);
-		fw.unsigned_32(player->ai_data.trees_around_cutters);
-		player->ai_data.expedition_start_time.save(fw);
-		fw.unsigned_16(player->ai_data.ships_utilization);
-		fw.unsigned_8(player->ai_data.no_more_expeditions ? 1 : 0);
-		fw.signed_16(player->ai_data.last_attacked_player);
-		fw.unsigned_32(player->ai_data.least_military_score);
-		fw.unsigned_32(player->ai_data.target_military_score);
-		fw.unsigned_32(player->ai_data.ai_productionsites_ratio);
-		fw.signed_32(player->ai_data.ai_personality_mil_upper_limit);
+		fw.unsigned_8(player->ai_data_.initialized ? 1 : 0);
+		fw.unsigned_32(player->ai_data_.colony_scan_area);
+		fw.unsigned_32(player->ai_data_.trees_around_cutters);
+		player->ai_data_.expedition_start_time.save(fw);
+		fw.unsigned_16(player->ai_data_.ships_utilization);
+		fw.unsigned_8(player->ai_data_.no_more_expeditions ? 1 : 0);
+		fw.signed_16(player->ai_data_.last_attacked_player);
+		fw.unsigned_32(player->ai_data_.least_military_score);
+		fw.unsigned_32(player->ai_data_.target_military_score);
+		fw.unsigned_32(player->ai_data_.ai_productionsites_ratio);
+		fw.signed_32(player->ai_data_.ai_personality_mil_upper_limit);
 
 		// Magic numbers
-		assert(player->ai_data.magic_numbers.size() ==
+		assert(player->ai_data_.magic_numbers.size() ==
 		       Widelands::Player::AiPersistentState::kMagicNumbersSize);
-		fw.unsigned_32(player->ai_data.magic_numbers.size());
-		for (int16_t magic_number : player->ai_data.magic_numbers) {
+		fw.unsigned_32(player->ai_data_.magic_numbers.size());
+		for (int16_t magic_number : player->ai_data_.magic_numbers) {
 			fw.signed_16(magic_number);
 		}
 		// Neurons
 		fw.unsigned_32(Widelands::Player::AiPersistentState::kNeuronPoolSize);
-		assert(player->ai_data.neuron_weights.size() ==
+		assert(player->ai_data_.neuron_weights.size() ==
 		       Widelands::Player::AiPersistentState::kNeuronPoolSize);
-		assert(player->ai_data.neuron_functs.size() ==
+		assert(player->ai_data_.neuron_functs.size() ==
 		       Widelands::Player::AiPersistentState::kNeuronPoolSize);
 		for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-			fw.signed_8(player->ai_data.neuron_weights.at(i));
+			fw.signed_8(player->ai_data_.neuron_weights.at(i));
 		}
 		for (size_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-			fw.signed_8(player->ai_data.neuron_functs.at(i));
+			fw.signed_8(player->ai_data_.neuron_functs.at(i));
 		}
 
 		// F-Neurons
-		assert(player->ai_data.f_neurons.size() ==
+		assert(player->ai_data_.f_neurons.size() ==
 		       Widelands::Player::AiPersistentState::kFNeuronPoolSize);
-		fw.unsigned_32(player->ai_data.f_neurons.size());
-		for (uint32_t f_neuron : player->ai_data.f_neurons) {
+		fw.unsigned_32(player->ai_data_.f_neurons.size());
+		for (uint32_t f_neuron : player->ai_data_.f_neurons) {
 			fw.unsigned_32(f_neuron);
 		}
 
 		// Remaining buildings for basic economy
-		fw.unsigned_32(player->ai_data.remaining_basic_buildings.size());
-		for (auto bb : player->ai_data.remaining_basic_buildings) {
+		fw.unsigned_32(player->ai_data_.remaining_basic_buildings.size());
+		for (auto bb : player->ai_data_.remaining_basic_buildings) {
 			const std::string bld_name = game.descriptions().get_building_descr(bb.first)->name();
 			fw.string(bld_name);
 			fw.unsigned_32(bb.second);
