@@ -714,7 +714,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          []() { return _("Seafaring: Open Ship Window"); })},
    {KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_o, kDefaultCtrlModifier),
+                         keysym(SDLK_o, KMOD_SHIFT),
                          "game_sfstats_open_goto",
                          []() { return _("Seafaring: Open Ship Window And Go to Ship"); })},
    {KeyboardShortcut::kInGameSeafaringstatsFilterAll,
