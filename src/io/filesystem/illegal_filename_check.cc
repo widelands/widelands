@@ -49,11 +49,15 @@ bool is_legal_filename(const std::string& filename) {
 	if (filename.empty()) {
 		return false;
 	}
-	return std::none_of(illegal_filename_starting_characters.begin(), illegal_filename_starting_characters.end(), [&filename](const std::string& illegal_start) {
-		return starts_with(filename, illegal_start);
-	}) && std::none_of(illegal_filename_characters.begin(), illegal_filename_characters.end(), [&filename](const std::string& illegal_char) {
-		return contains(filename, illegal_char);
-	});
+	return std::none_of(illegal_filename_starting_characters.begin(),
+	                    illegal_filename_starting_characters.end(),
+	                    [&filename](const std::string& illegal_start) {
+		                    return starts_with(filename, illegal_start);
+	                    }) &&
+	       std::none_of(illegal_filename_characters.begin(), illegal_filename_characters.end(),
+	                    [&filename](const std::string& illegal_char) {
+		                    return contains(filename, illegal_char);
+	                    });
 }
 
 std::string illegal_filename_tooltip() {

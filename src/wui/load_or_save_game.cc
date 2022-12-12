@@ -99,9 +99,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 
 bool LoadOrSaveGame::selection_contains_directory() const {
 	const std::set<uint32_t>& selections = table_->selections();
-	return std::any_of(selections.begin(), selections.end(), [this](const uint32_t index) {
-		return get_savegame(index).is_directory();
-	});
+	return std::any_of(selections.begin(), selections.end(),
+	                   [this](const uint32_t index) { return get_savegame(index).is_directory(); });
 }
 
 const SavegameData& LoadOrSaveGame::get_savegame(uint32_t index) const {

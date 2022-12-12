@@ -504,10 +504,11 @@ bool is_rtl_character(UChar32 c) {
 	CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 	UBlockCode code = ublock_getCode(c);
 	CLANG_DIAG_ON("-Wdisabled-macro-expansion")
-	return std::any_of(kRTLScripts.begin(), kRTLScripts.end(), [code](UI::FontSets::Selector script) {
-		assert(kRTLCodeBlocks.count(script) == 1);
-		return kRTLCodeBlocks.at(script).count(code) != 0;
-	});
+	return std::any_of(
+	   kRTLScripts.begin(), kRTLScripts.end(), [code](UI::FontSets::Selector script) {
+		   assert(kRTLCodeBlocks.count(script) == 1);
+		   return kRTLCodeBlocks.at(script).count(code) != 0;
+	   });
 }
 
 // Helper function for make_ligatures.
@@ -565,9 +566,8 @@ bool has_rtl_character(const char* input, int32_t limit) {
 
 // True if the strings contain non-Latin characters
 bool has_rtl_character(std::vector<std::string> input) {
-	return std::any_of(input.begin(), input.end(), [](const std::string& string) {
-		return has_rtl_character(string.c_str());
-	});
+	return std::any_of(input.begin(), input.end(),
+	                   [](const std::string& string) { return has_rtl_character(string.c_str()); });
 }
 
 // Contracts glyphs into their ligatures

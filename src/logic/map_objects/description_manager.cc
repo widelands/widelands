@@ -114,7 +114,8 @@ void DescriptionManager::register_directory(const std::string& dirname,
 				           nr_registered_items > 1) {
 					std::string all;
 					/* Arbitrary estimate to reduce number of memory reallocations */
-					all.reserve(static_cast<std::basic_string<char>::size_type>(nr_registered_items) * 20);
+					all.reserve(static_cast<std::basic_string<char>::size_type>(nr_registered_items) *
+					            20);
 					for (const std::string& str : all_registered_items) {
 						all += ' ';
 						all += str;

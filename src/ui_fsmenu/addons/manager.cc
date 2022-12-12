@@ -968,7 +968,8 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 		// no text filter given, so we accept it
 		return true;
 	}
-	auto array = {info->descname(), info->author(), info->upload_username, info->internal_name, info->description()};
+	auto array = {info->descname(), info->author(), info->upload_username, info->internal_name,
+	              info->description()};
 	return std::any_of(array.begin(), array.end(), [this](const std::string& text) {
 		return text.find(filter_name_.text()) != std::string::npos;
 	});
@@ -1267,9 +1268,8 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 		// No data available
 		return true;
 	}
-	return std::any_of(remotes_.begin(), remotes_.end(), [&name](const auto& r) {
-		return r->internal_name == name;
-	});
+	return std::any_of(remotes_.begin(), remotes_.end(),
+	                   [&name](const auto& r) { return r->internal_name == name; });
 }
 
 static void install_translation(const std::string& temp_locale_path,

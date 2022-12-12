@@ -387,9 +387,8 @@ void InteractivePlayer::rebuild_showhide_menu() {
 }
 
 bool InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) const {
-	return std::any_of(expedition_port_spaces_.begin(), expedition_port_spaces_.end(), [&coords](const auto& pair) {
-		return pair.second == coords;
-	});
+	return std::any_of(expedition_port_spaces_.begin(), expedition_port_spaces_.end(),
+	                   [&coords](const auto& pair) { return pair.second == coords; });
 }
 
 void InteractivePlayer::draw_immovables_for_visible_field(

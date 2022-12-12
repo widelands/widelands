@@ -521,12 +521,15 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 	}  // Target quantity is set to 0, we need to check if there is an open request.
 	// For soldier requests, do not recruit new rookies if only heroes are needed.
 	const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
-	return std::any_of(requests_.begin(), requests_.end(), [this, is_soldier, ware_or_worker_type](const Request* req) {
-		return req->get_type() == type_ && req->get_index() == ware_or_worker_type && req->is_open() &&
-		    (!is_soldier ||
-		     req->get_requirements().check(soldier_prototype(
-		        owner().egbase().descriptions().get_worker_descr(ware_or_worker_type))));
-	});
+	return std::any_of(
+	   requests_.begin(), requests_.end(),
+	   [this, is_soldier, ware_or_worker_type](const Request* req) {
+		   return req->get_type() == type_ && req->get_index() == ware_or_worker_type &&
+		          req->is_open() &&
+		          (!is_soldier ||
+		           req->get_requirements().check(soldier_prototype(
+		              owner().egbase().descriptions().get_worker_descr(ware_or_worker_type))));
+	   });
 }
 
 bool Economy::has_building(const DescriptionIndex di) const {

@@ -79,9 +79,8 @@ ShippingSchedule::ShippingSchedule(ShipFleet& f) : fleet_(f), last_updated_(0), 
 }
 
 bool ShippingSchedule::empty() const {
-	return std::all_of(plans_.begin(), plans_.end(), [](const auto& pair) {
-		return pair.second.empty();
-	});
+	return std::all_of(
+	   plans_.begin(), plans_.end(), [](const auto& pair) { return pair.second.empty(); });
 }
 
 bool ShippingSchedule::is_busy(const Ship& ship) const {

@@ -3730,9 +3730,10 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 					   gametime + Duration(60 * 60 * 1000);  // one hour should be enough
 				} else {  // other constructionsites, usually new (standalone) constructionsites
 					eco->dismantle_grace_time =
-					   gametime + Duration(static_cast<unsigned long>(30) * 1000 +  // very short time is enough
-					                       (eco->flags.size() * 30 *
-					                        1000));  // + 30 seconds for every flag in economy
+					   gametime +
+					   Duration(
+					      static_cast<unsigned long>(30) * 1000 +  // very short time is enough
+					      (eco->flags.size() * 30 * 1000));  // + 30 seconds for every flag in economy
 				}
 
 				// buildings
@@ -3740,11 +3741,13 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 
 				if (occupied_military_) {
 					eco->dismantle_grace_time =
-					   gametime + Duration((static_cast<unsigned long>(90 * 60) * 1000) + (eco->flags.size() * 20 * 1000));
+					   gametime + Duration((static_cast<unsigned long>(90 * 60) * 1000) +
+					                       (eco->flags.size() * 20 * 1000));
 
 				} else {  // for other normal buildings
 					eco->dismantle_grace_time =
-					   gametime + Duration((static_cast<unsigned long>(45 * 60) * 1000) + (eco->flags.size() * 20 * 1000));
+					   gametime + Duration((static_cast<unsigned long>(45 * 60) * 1000) +
+					                       (eco->flags.size() * 20 * 1000));
 				}
 			}
 
@@ -5037,8 +5040,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		if (static_cast<int>(roads.size()) < min_roads_count * (1 + bo.total_count())) {
 			return BuildingNecessity::kForbidden;
 		}
-		bo.primary_priority += (roads.size() - static_cast<unsigned long>(min_roads_count * (1 + bo.total_count()))) *
-		                       (2 + std::abs(management_data.get_military_number_at(143)) / 5);
+		bo.primary_priority +=
+		   (roads.size() - static_cast<unsigned long>(min_roads_count * (1 + bo.total_count()))) *
+		   (2 + std::abs(management_data.get_military_number_at(143)) / 5);
 		return BuildingNecessity::kNeeded;
 	}
 
@@ -6271,9 +6275,8 @@ bool DefaultAI::has_building_observer(char const* const name) {
 		late_initialization();
 	}
 
-	return std::any_of(buildings_.begin(), buildings_.end(), [name](const BuildingObserver& bo) {
-		return strcmp(bo.name, name) == 0;
-	});
+	return std::any_of(buildings_.begin(), buildings_.end(),
+	                   [name](const BuildingObserver& bo) { return strcmp(bo.name, name) == 0; });
 }
 
 // return observer for a first (only) building that has required attribute
@@ -6780,7 +6783,8 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 	tribe_ = &player_->tribe();
 
 	// to avoid floats real multiplier is multiplier/10
-	const uint16_t multiplier = std::max<uint16_t>((productionsites.size() + static_cast<unsigned long>(num_ports) * 5) / 5, 10);
+	const uint16_t multiplier = std::max<uint16_t>(
+	   (productionsites.size() + static_cast<unsigned long>(num_ports) * 5) / 5, 10);
 
 	for (EconomyObserver* observer : economies) {
 		if (observer->economy.type() != Widelands::wwWARE) {

@@ -37,9 +37,10 @@ void FindNodeAnd::add(const FindNode& findfield, bool const negate) {
 }
 
 bool FindNodeAnd::accept(const EditorGameBase& egbase, const FCoords& coord) const {
-	return std::all_of(subfunctors.begin(), subfunctors.end(), [&egbase, &coord](const Subfunctor& subfunctor) {
-		return subfunctor.findfield.accept(egbase, coord) != subfunctor.negate;
-	});
+	return std::all_of(
+	   subfunctors.begin(), subfunctors.end(), [&egbase, &coord](const Subfunctor& subfunctor) {
+		   return subfunctor.findfield.accept(egbase, coord) != subfunctor.negate;
+	   });
 }
 
 bool FindNodeCaps::accept(const EditorGameBase& /* egbase */, const FCoords& coord) const {

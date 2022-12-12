@@ -393,9 +393,8 @@ void MineFieldsObserver::add_critical_ore(const Widelands::DescriptionIndex idx)
 
 // Does the player has at least one mineable field with positive amount for each critical ore?
 bool MineFieldsObserver::has_critical_ore_fields() {
-	return std::all_of(critical_ores.begin(), critical_ores.end(), [this](const auto& ore) {
-		return get(ore) != 0;
-	});
+	return std::all_of(critical_ores.begin(), critical_ores.end(),
+	                   [this](const auto& ore) { return get(ore) != 0; });
 }
 
 // Returns count of fields with desired ore
@@ -1462,9 +1461,8 @@ void FlagCandidates::add_flag(const uint32_t coords,
 }
 
 bool FlagCandidates::has_candidate(const uint32_t coords_hash) const {
-	return std::any_of(flags_.begin(), flags_.end(), [coords_hash](const auto& item) {
-		return item.coords_hash == coords_hash;
-	});
+	return std::any_of(flags_.begin(), flags_.end(),
+	                   [coords_hash](const auto& item) { return item.coords_hash == coords_hash; });
 }
 
 }  // namespace AI

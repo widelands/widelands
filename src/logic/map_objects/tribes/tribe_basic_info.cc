@@ -161,9 +161,8 @@ TribeBasicInfo get_tribeinfo(const std::string& tribename, const AllTribes& all)
 }
 
 bool tribe_exists(const std::string& tribename, const AllTribes& tribeinfos) {
-	return std::any_of(tribeinfos.begin(), tribeinfos.end(), [&tribename](const auto& t) {
-		return t.name == tribename;
-	});
+	return std::any_of(tribeinfos.begin(), tribeinfos.end(),
+	                   [&tribename](const auto& t) { return t.name == tribename; });
 }
 
 }  // namespace Widelands

@@ -891,7 +891,8 @@ bool MilitarySite::military_presence_kept(Game& game) {
 			return false;
 		}
 		upcast(const MilitarySite, militarysite, imm.object);
-		return this != militarysite && &owner() == &militarysite->owner() && get_size() <= militarysite->get_size() && militarysite->didconquer_;
+		return this != militarysite && &owner() == &militarysite->owner() &&
+		       get_size() <= militarysite->get_size() && militarysite->didconquer_;
 	});
 }
 
