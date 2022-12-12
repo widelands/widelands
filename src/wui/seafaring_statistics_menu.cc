@@ -150,8 +150,9 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                  /** TRANSLATORS: Tooltip in the seafaring statistics window, placeholder is a
                      hotkey */
                  format(_("(You can use %s to go to the selected ship and open its window.)"),
-                        shortcut_string_for(
-                           KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto, true))))),
+                        g_style_manager->font_style(UI::FontStyle::kWuiTooltipHotkey).as_font_tag(
+                           shortcut_string_for(
+                              KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto, true)))))),
      centerviewbtn_(&navigation_box_,
                     "seafaring_stats_center_main_mapview_button",
                     0,
