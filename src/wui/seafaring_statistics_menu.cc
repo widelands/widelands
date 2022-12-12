@@ -135,7 +135,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
         UI::ButtonStyle::kWuiPrimary,
         g_image_cache->get("images/ui_basic/fsel.png"),
         format(
-           "<rt><p>%s %s<br>%s %s</p></rt>",
+           "<rt><p>%s %s<br>%s</p></rt>",
            g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
               .as_font_tag(
                  /** TRANSLATORS: Tooltip in the seafaring statistics window */
