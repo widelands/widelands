@@ -3732,7 +3732,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 					eco->dismantle_grace_time =
 					   gametime +
 					   Duration(
-					      static_cast<unsigned long>(30) * 1000 +  // very short time is enough
+					      static_cast<uint64_t>(30) * 1000 +  // very short time is enough
 					      (eco->flags.size() * 30 * 1000));  // + 30 seconds for every flag in economy
 				}
 
@@ -3741,12 +3741,12 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 
 				if (occupied_military_) {
 					eco->dismantle_grace_time =
-					   gametime + Duration((static_cast<unsigned long>(90 * 60) * 1000) +
+					   gametime + Duration((static_cast<uint64_t>(90 * 60) * 1000) +
 					                       (eco->flags.size() * 20 * 1000));
 
 				} else {  // for other normal buildings
 					eco->dismantle_grace_time =
-					   gametime + Duration((static_cast<unsigned long>(45 * 60) * 1000) +
+					   gametime + Duration((static_cast<uint64_t>(45 * 60) * 1000) +
 					                       (eco->flags.size() * 20 * 1000));
 				}
 			}
@@ -5041,7 +5041,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kForbidden;
 		}
 		bo.primary_priority +=
-		   (roads.size() - static_cast<unsigned long>(min_roads_count * (1 + bo.total_count()))) *
+		   (roads.size() - static_cast<uint64_t>(min_roads_count * (1 + bo.total_count()))) *
 		   (2 + std::abs(management_data.get_military_number_at(143)) / 5);
 		return BuildingNecessity::kNeeded;
 	}
@@ -6784,7 +6784,7 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 
 	// to avoid floats real multiplier is multiplier/10
 	const uint16_t multiplier = std::max<uint16_t>(
-	   (productionsites.size() + static_cast<unsigned long>(num_ports) * 5) / 5, 10);
+	   (productionsites.size() + static_cast<uint64_t>(num_ports) * 5) / 5, 10);
 
 	for (EconomyObserver* observer : economies) {
 		if (observer->economy.type() != Widelands::wwWARE) {
@@ -7070,13 +7070,8 @@ bool DefaultAI::critical_mine_unoccupied(const Time& gametime) {
 
 	// Now check that that there is no working mine of the critical type
 	return std::any_of(mines_per_type.begin(), mines_per_type.end(), [](const auto& mine) {
-		if (mine.second.is_critical && mine.second.finished > 0 &&
-		    mine.second.unoccupied == mine.second.finished) {
-			return true;
-		}
-		assert(mine.second.unoccupied <= mines_.size());
-		assert(mine.second.unoccupied <= mine.second.total_count());
-		return false;
+		return mine.second.is_critical && mine.second.finished > 0 &&
+		    mine.second.unoccupied == mine.second.finished;
 	});
 }
 

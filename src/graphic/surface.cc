@@ -128,7 +128,7 @@ void Surface::draw_line_strip(const std::vector<Vector2f>& points,
 
 	std::vector<DrawLineProgram::PerVertexData> vertices;
 	// Each line needs 2 triangles.
-	vertices.reserve(static_cast<unsigned long>(3) * 2 * points.size());
+	vertices.reserve(static_cast<uint64_t>(3) * 2 * points.size());
 	tesselate_line_strip(width(), height(), color, line_width, points, &vertices);
 	do_draw_line_strip(std::move(vertices));
 }

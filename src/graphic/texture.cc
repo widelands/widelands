@@ -213,7 +213,7 @@ void Texture::lock() {
 		throw wexception("A surface that does not own its pixels can not be locked..");
 	}
 
-	pixels_.reset(new uint8_t[static_cast<unsigned long>(width() * height()) * 4]);
+	pixels_.reset(new uint8_t[static_cast<uint64_t>(width() * height()) * 4]);
 
 	Gl::State::instance().bind(GL_TEXTURE0, blit_data_.texture_id);
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels_.get());

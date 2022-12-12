@@ -107,6 +107,7 @@ SUPPRESSED_CHECKS = {
     '[modernize-use-default-member-init]',
     '[readability-function-cognitive-complexity]',
     '[readability-suspicious-call-argument]',
+    '[performance-no-int-to-ptr]',
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')
@@ -137,7 +138,7 @@ def main():
         for line in contents:
             if line in errors:
                 continue
-            if 'third_party' in line:
+            if 'third_party' in line or '/usr/include' in line:
                 continue
             # We're not piloting alpha-level checks
             if 'clang-analyzer-alpha' in line:

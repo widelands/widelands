@@ -107,7 +107,7 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 
 	// Next neighbours to the North and the West may have size = small immovables
 	std::array<Widelands::FCoords, 7> cn;
-	map.get_bln(c[1], &cn[0]);
+	map.get_bln(c[1], &cn[0]);  // NOLINT no readability-container-data-pointer here
 	map.get_ln(c[1], &cn[1]);
 	map.get_tln(c[1], &cn[2]);
 	map.get_tln(c[2], &cn[3]);

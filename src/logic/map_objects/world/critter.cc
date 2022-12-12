@@ -462,7 +462,7 @@ void Critter::roam_update(Game& game, State& state) {
 		assert(weighted_population >= population_size_2);
 		if ((game.logic_rand() % (reproduction_rate * reproduction_rate)) *
 		       std::exp2(weighted_population - mating_partners - 1) <
-		    static_cast<unsigned long>(reproduction_rate) * reproduction_rate * weighted_population) {
+		    static_cast<uint64_t>(reproduction_rate) * reproduction_rate * weighted_population) {
 			molog(game.get_gametime(), "A cute little %s cub :)\n", descr().name().c_str());
 			game.create_critter(get_position(), descr().name());
 		}

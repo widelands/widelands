@@ -240,7 +240,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 					observer.second.attack_soldiers_strength = strength;
 					assert(!attackers.empty());
 					observer.second.attack_soldiers_competency =
-					   static_cast<unsigned long>(strength) * 10 / attackers.size();
+					   static_cast<uint64_t>(strength) * 10 / attackers.size();
 				}
 			} else {
 				observer.second.attack_soldiers_strength = 0;

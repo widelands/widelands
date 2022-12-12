@@ -547,7 +547,7 @@ void Map::set_origin(const Coords& new_origin) {
 	assert(0 <= new_origin.y);
 	assert(new_origin.y < height_);
 
-	const size_t field_size = static_cast<const size_t>(width_) * height_;
+	const size_t field_size = static_cast<size_t>(width_) * height_;
 
 	for (uint8_t i = get_nrplayers(); i != 0u;) {
 		starting_pos_[--i].reorigin(new_origin, extent());
@@ -645,9 +645,9 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 
 	// Generate the new fields. Does not modify the actual map yet.
 
-	std::unique_ptr<Field[]> new_fields(new Field[static_cast<unsigned long>(w) * h]());
-	std::unique_ptr<bool[]> was_preserved(new bool[static_cast<unsigned long>(width_) * height_]());
-	std::unique_ptr<bool[]> was_created(new bool[static_cast<unsigned long>(w) * h]());
+	std::unique_ptr<Field[]> new_fields(new Field[static_cast<uint64_t>(w) * h]());
+	std::unique_ptr<bool[]> was_preserved(new bool[static_cast<uint64_t>(width_) * height_]());
+	std::unique_ptr<bool[]> was_created(new bool[static_cast<uint64_t>(w) * h]());
 
 	for (int16_t x = 0; x < width_; ++x) {
 		for (int16_t y = 0; y < height_; ++y) {
@@ -788,7 +788,7 @@ void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
 	// Reset the fields to blank
 	width_ = rh.size.w;
 	height_ = rh.size.h;
-	fields_.reset(new Field[static_cast<unsigned long>(width_) * height_]);
+	fields_.reset(new Field[static_cast<uint64_t>(width_) * height_]);
 	egbase.allocate_player_maps();
 
 	// Overwrite starting locations and port spaces
