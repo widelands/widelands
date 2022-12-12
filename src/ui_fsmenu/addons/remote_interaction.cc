@@ -18,6 +18,7 @@
 
 #include "ui_fsmenu/addons/remote_interaction.h"
 
+#include <cstddef>
 #include <memory>
 #include <regex>
 
@@ -112,7 +113,7 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 }
 
 /** The server disallows editing a comment more than 24 hours after posting. */
-constexpr std::time_t kCommentEditTimeout = 24 * 60 * 60;
+constexpr std::time_t kCommentEditTimeout = static_cast<const std::time_t>(24 * 60) * 60;
 
 void CommentRow::update_edit_enabled() {
 	/* Admins can edit all posts at all times;

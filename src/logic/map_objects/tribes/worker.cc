@@ -2828,21 +2828,18 @@ void Worker::geologist_update(Game& game, State& state) {
 			FCoords target;
 
 			auto is_mountain = [&map, &descriptions](const FCoords& f) {
-				for (const TCoords<FCoords>& t :
-				     {TCoords<FCoords>(f, TriangleIndex::D), TCoords<FCoords>(f, TriangleIndex::R),
+				auto array = {TCoords<FCoords>(f, TriangleIndex::D), TCoords<FCoords>(f, TriangleIndex::R),
 				      TCoords<FCoords>(map.tl_n(f), TriangleIndex::D),
 				      TCoords<FCoords>(map.tl_n(f), TriangleIndex::R),
 				      TCoords<FCoords>(map.tr_n(f), TriangleIndex::D),
-				      TCoords<FCoords>(map.l_n(f), TriangleIndex::R)}) {
-					if ((descriptions
+				      TCoords<FCoords>(map.l_n(f), TriangleIndex::R)};
+				return std::any_of(array.begin(), array.end(), [&descriptions](const TCoords<FCoords>& t) {
+					return (descriptions
 					        .get_terrain_descr((t.t == TriangleIndex::D ? t.node.field->terrain_d() :
                                                                      t.node.field->terrain_r()))
 					        ->get_is() &
-					     TerrainDescription::Is::kMineable) != 0) {
-						return true;
-					}
-				}
-				return false;
+					     TerrainDescription::Is::kMineable) != 0;
+				});
 			};
 
 			// is center a mountain piece?

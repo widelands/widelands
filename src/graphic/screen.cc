@@ -17,6 +17,7 @@
 
 #include "graphic/screen.h"
 
+#include <cstddef>
 #include <memory>
 
 #include "base/wexception.h"
@@ -36,7 +37,7 @@ int Screen::height() const {
 }
 
 std::unique_ptr<Texture> Screen::to_texture() const {
-	std::unique_ptr<uint8_t[]> pixels(new uint8_t[w_ * h_ * 4]);
+	std::unique_ptr<uint8_t[]> pixels(new uint8_t[static_cast<unsigned long>(w_ * h_) * 4]);
 	glReadPixels(0, 0, w_, h_, GL_RGBA, GL_UNSIGNED_BYTE, pixels.get());
 
 	Gl::swap_rows(w_, h_, w_ * 4, 4, pixels.get());

@@ -117,12 +117,9 @@ public:
 	}
 
 	bool has_node(Widelands::RoutingNode* const n) {
-		for (Widelands::RoutingNode* temp_node : nodes) {
-			if (temp_node == n) {
-				return true;
-			}
-		}
-		return false;
+		return std::any_of(nodes.begin(), nodes.end(), [n](Widelands::RoutingNode* temp_node) {
+			return temp_node == n;
+		});
 	}
 	bool has_chain(Nodes& n) {
 		bool chain_begin_found = false;

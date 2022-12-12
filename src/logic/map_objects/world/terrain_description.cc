@@ -303,12 +303,9 @@ std::vector<DescriptionIndex> TerrainDescription::valid_resources() const {
 }
 
 bool TerrainDescription::is_resource_valid(const DescriptionIndex res) const {
-	for (const DescriptionIndex resource_index : valid_resources_) {
-		if (resource_index == res) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(valid_resources_.begin(), valid_resources_.end(), [res](const DescriptionIndex resource_index) {
+		return resource_index == res;
+	});
 }
 
 DescriptionIndex TerrainDescription::get_default_resource() const {

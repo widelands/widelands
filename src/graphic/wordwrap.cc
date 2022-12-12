@@ -22,6 +22,7 @@
 
 #include "graphic/wordwrap.h"
 
+#include <cstddef>
 #include <memory>
 
 #include <ui_basic/mouse_constants.h>
@@ -283,7 +284,7 @@ uint32_t WordWrap::width() const {
  * Compute the total height of the word-wrapped text.
  */
 uint32_t WordWrap::height() const {
-	return text_height(fontsize_) * (lines_.size()) + 2 * kLineMargin;
+	return text_height(fontsize_) * (lines_.size()) + static_cast<unsigned long>(2) * kLineMargin;
 }
 
 uint32_t WordWrap::line_index(int32_t y) const {

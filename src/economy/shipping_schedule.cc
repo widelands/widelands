@@ -18,6 +18,7 @@
 
 #include "economy/shipping_schedule.h"
 
+#include <cstddef>
 #include <memory>
 #include <set>
 
@@ -48,8 +49,8 @@ constexpr Duration kActualDurationsRecalculationInterval(60 * 1000);
 // Give a ship the highest score for assigning wares to it if it will
 // arrive at the port of interest within the next 10 s gametime,
 // or the lowest score if this will take longer than 10 min gametime
-constexpr uint64_t kWonderfullyShortDuration = 10 * 1000;   // 10 s
-constexpr uint64_t kHorriblyLongDuration = 10 * 60 * 1000;  // 10 min
+constexpr uint64_t kWonderfullyShortDuration = static_cast<const uint64_t>(10) * 1000;   // 10 s
+constexpr uint64_t kHorriblyLongDuration = static_cast<const uint64_t>(10 * 60) * 1000;  // 10 min
 
 // Only assign wares to a ship in 5.1 if it's score is higher than a certain
 // threshold based on minimal distance. Ships with lower scores will only be
@@ -78,24 +79,19 @@ ShippingSchedule::ShippingSchedule(ShipFleet& f) : fleet_(f), last_updated_(0), 
 }
 
 bool ShippingSchedule::empty() const {
-	for (const auto& pair : plans_) {
-		if (!pair.second.empty()) {
-			return false;
-		}
-	}
-	return true;
+	return std::all_of(plans_.begin(), plans_.end(), [](const auto& pair) {
+		return pair.second.empty();
+	});
 }
 
 bool ShippingSchedule::is_busy(const Ship& ship) const {
 	if (ship.get_nritems() != 0u) {
 		return true;
 	}
-	for (const SchedulingState& ss : plans_.at(const_cast<Ship*>(&ship))) {
-		if (ss.expedition || !ss.load_there.empty()) {
-			return true;
-		}
-	}
-	return false;
+	const auto& plan = plans_.at(const_cast<Ship*>(&ship));
+	return std::any_of(plan.begin(), plan.end(), [](const SchedulingState& ss) {
+		return ss.expedition || !ss.load_there.empty();
+	});
 }
 
 void ShippingSchedule::start_expedition(Game& game, Ship& ship, PortDock& port) {

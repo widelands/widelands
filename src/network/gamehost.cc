@@ -1087,9 +1087,9 @@ void GameHost::set_map(const std::string& mapname,
 		}
 		std::vector<char> complete(file_->bytes);
 		fr.set_file_pos(0);
-		fr.data_complete(&complete[0], file_->bytes);
+		fr.data_complete(complete.data(), file_->bytes);
 		SimpleMD5Checksum md5sum;
-		md5sum.data(&complete[0], file_->bytes);
+		md5sum.data(complete.data(), file_->bytes);
 		md5sum.finish_checksum();
 		file_->md5sum = md5sum.get_checksum().str();
 	} else {

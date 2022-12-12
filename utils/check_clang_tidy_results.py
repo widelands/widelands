@@ -97,7 +97,6 @@ SUPPRESSED_CHECKS = {
     '[readability-magic-numbers]',
     '[altera-struct-pack-align]',
     '[bugprone-easily-swappable-parameters]',
-    '[bugprone-implicit-widening-of-multiplication-result]',
     '[cert-err33-c]',
     '[concurrency-mt-unsafe]',
     '[cppcoreguidelines-avoid-non-const-global-variables]',
@@ -105,14 +104,9 @@ SUPPRESSED_CHECKS = {
     '[google-readability-casting]',
     '[hicpp-named-parameter]',
     '[readability-named-parameter]',
-    '[hicpp-use-nullptr]',
-    '[misc-unused-using-decls]',
     '[modernize-use-default-member-init]',
-    '[performance-no-int-to-ptr]',
-    '[readability-container-data-pointer]',
     '[readability-function-cognitive-complexity]',
     '[readability-suspicious-call-argument]',
-    '[readability-use-anyofallof]',
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')
@@ -154,8 +148,7 @@ def main():
                     check_suppressed = True
                     break
             if not check_suppressed and CHECK_REGEX.match(line):
-                line = line.strip()
-                print(line)
+                print(line.strip())
                 errors.append(line)
 
     if len(errors) > 0:

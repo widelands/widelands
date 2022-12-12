@@ -886,15 +886,13 @@ bool MilitarySite::military_presence_kept(Game& game) {
 	FCoords const fc = game.map().get_fcoords(get_position());
 	game.map().find_immovables(game, Area<FCoords>(fc, 3), &immovables);
 
-	for (const ImmovableFound& imm : immovables) {
-		if (upcast(MilitarySite const, militarysite, imm.object)) {
-			if (this != militarysite && &owner() == &militarysite->owner() &&
-			    get_size() <= militarysite->get_size() && militarysite->didconquer_) {
-				return true;
-			}
+	return std::any_of(immovables.begin(), immovables.end(), [this](const ImmovableFound& imm) {
+		if (imm.object->descr().type() != MapObjectType::MILITARYSITE) {
+			return false;
 		}
-	}
-	return false;
+		upcast(const MilitarySite, militarysite, imm.object);
+		return this != militarysite && &owner() == &militarysite->owner() && get_size() <= militarysite->get_size() && militarysite->didconquer_;
+	});
 }
 
 /// Informs the player about an attack of his opponent.
