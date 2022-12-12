@@ -102,8 +102,7 @@ class Tree {
 
 	static std::map<std::string, std::unique_ptr<Tree>> cache_;
 
-	static constexpr int64_t kBufferSize =
-	   static_cast<int64_t>(1024) * 1024;  // arbitrary limit
+	static constexpr int64_t kBufferSize = static_cast<int64_t>(1024) * 1024;  // arbitrary limit
 	static char buffer_[kBufferSize];
 
 public:

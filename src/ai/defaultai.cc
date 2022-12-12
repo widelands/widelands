@@ -3733,7 +3733,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 					   gametime +
 					   Duration(
 					      static_cast<uint64_t>(30) * 1000 +  // very short time is enough
-					      (eco->flags.size() * 30 * 1000));  // + 30 seconds for every flag in economy
+					      (eco->flags.size() * 30 * 1000));   // + 30 seconds for every flag in economy
 				}
 
 				// buildings
@@ -6783,8 +6783,8 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 	tribe_ = &player_->tribe();
 
 	// to avoid floats real multiplier is multiplier/10
-	const uint16_t multiplier = std::max<uint16_t>(
-	   (productionsites.size() + static_cast<uint64_t>(num_ports) * 5) / 5, 10);
+	const uint16_t multiplier =
+	   std::max<uint16_t>((productionsites.size() + static_cast<uint64_t>(num_ports) * 5) / 5, 10);
 
 	for (EconomyObserver* observer : economies) {
 		if (observer->economy.type() != Widelands::wwWARE) {
@@ -7071,7 +7071,7 @@ bool DefaultAI::critical_mine_unoccupied(const Time& gametime) {
 	// Now check that that there is no working mine of the critical type
 	return std::any_of(mines_per_type.begin(), mines_per_type.end(), [](const auto& mine) {
 		return mine.second.is_critical && mine.second.finished > 0 &&
-		    mine.second.unoccupied == mine.second.finished;
+		       mine.second.unoccupied == mine.second.finished;
 	});
 }
 
