@@ -1005,10 +1005,6 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_LCTRL:
 		case SDLK_RCTRL:
-		// TODO(GunChleoc): Keeping ALT and MODE to make the transition easier. Remove for Build 20.
-		case SDLK_LALT:
-		case SDLK_RALT:
-		case SDLK_MODE:
 			if (tools_->use_tool == EditorTool::First) {
 				select_tool(tools_->current(), EditorTool::Third);
 			}
@@ -1027,10 +1023,6 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RSHIFT:
 		case SDLK_LCTRL:
 		case SDLK_RCTRL:
-		// TODO(GunChleoc): Keeping ALT and MODE to make the transition easier. Remove for Build 20.
-		case SDLK_LALT:
-		case SDLK_RALT:
-		case SDLK_MODE:
 			if (tools_->use_tool != EditorTool::First) {
 				select_tool(tools_->current(), EditorTool::First);
 			}
