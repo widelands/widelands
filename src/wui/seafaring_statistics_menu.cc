@@ -134,25 +134,25 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
         kButtonSize,
         UI::ButtonStyle::kWuiPrimary,
         g_image_cache->get("images/ui_basic/fsel.png"),
-        format(
-           "<rt><p>%s %s<br>%s</p></rt>",
-           g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-              .as_font_tag(
-                 /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                 _("Open the selected ship’s window")),
-           g_style_manager->font_style(UI::FontStyle::kWuiTooltipHotkey)
-              .as_font_tag(
-                 "(" +
-                 shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow, true) +
-                 ")"),
-           g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-              .as_font_tag(
-                 /** TRANSLATORS: Tooltip in the seafaring statistics window, placeholder is a
-                     hotkey */
-                 format(_("(You can use %s to go to the selected ship and open its window.)"),
-                        g_style_manager->font_style(UI::FontStyle::kWuiTooltipHotkey).as_font_tag(
-                           shortcut_string_for(
-                              KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto, true)))))),
+        format("<rt><p>%s %s<br>%s</p></rt>",
+               g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+                  .as_font_tag(
+                     /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                     _("Open the selected ship’s window")),
+               g_style_manager->font_style(UI::FontStyle::kWuiTooltipHotkey)
+                  .as_font_tag("(" +
+                               shortcut_string_for(
+                                  KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow, true) +
+                               ")"),
+               g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+                  .as_font_tag(
+                     /** TRANSLATORS: Tooltip in the seafaring statistics window, placeholder is a
+                         hotkey */
+                     format(_("(You can use %s to go to the selected ship and open its window.)"),
+                            g_style_manager->font_style(UI::FontStyle::kWuiTooltipHotkey)
+                               .as_font_tag(shortcut_string_for(
+                                  KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto,
+                                  true)))))),
      centerviewbtn_(&navigation_box_,
                     "seafaring_stats_center_main_mapview_button",
                     0,
