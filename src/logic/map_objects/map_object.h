@@ -186,6 +186,8 @@ class MapObject {
 	MO_DESCR(MapObjectDescr)
 
 public:
+	virtual ~MapObject() = default;
+
 	struct LogSink {
 		virtual void log(const std::string& str) = 0;
 		virtual ~LogSink() = default;
@@ -198,7 +200,6 @@ public:
 
 protected:
 	explicit MapObject(MapObjectDescr const* descr);
-	virtual ~MapObject() = default;
 
 public:
 	Serial serial() const {
