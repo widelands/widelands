@@ -55,7 +55,7 @@ const FerryFleetDescr& FerryFleet::descr() const {
  * instance, then add themselves \em before calling the \ref init function.
  * The FerryFleet takes care of merging with existing fleets, if any.
  */
-FerryFleet::FerryFleet(Player* player) : MapObject(&g_ferry_fleet_descr), act_pending_(false) {
+FerryFleet::FerryFleet(Player* player) : MapObject(&g_ferry_fleet_descr) {
 	owner_ = player;
 }
 

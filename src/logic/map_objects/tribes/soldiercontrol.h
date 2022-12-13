@@ -105,9 +105,7 @@ public:
 		return 0;
 	}
 
-protected:
-	virtual ~SoldierControl() {
-	}
+	virtual ~SoldierControl() = default;
 };
 }  // namespace Widelands
 

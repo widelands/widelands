@@ -147,7 +147,7 @@ public:
 	}
 
 	// action functions
-	void exit();
+	void exit(bool force = false);
 
 	void set_need_save(bool const t) {
 		need_save_ = t;

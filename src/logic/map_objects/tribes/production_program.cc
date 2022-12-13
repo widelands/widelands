@@ -171,10 +171,11 @@ Available actions are:
 */
 
 ProductionProgram::ActReturn::Condition* create_economy_condition(
-   const std::string& item, const ProductionSiteDescr& descr, const Descriptions& descriptions) {
+   const std::string& item, ProductionSiteDescr& descr, const Descriptions& descriptions) {
 	try {
 		const std::pair<WareWorker, DescriptionIndex> wareworker =
 		   descriptions.load_ware_or_worker(item);
+		descr.set_infinite_production_useful(true);
 		switch (wareworker.first) {
 		case WareWorker::wwWARE: {
 			descr.ware_demand_checks()->insert(wareworker.second);
@@ -405,7 +406,7 @@ Examples for ``return=skipped``:
    -- If the economy has sufficient 'coal', run anyway even if none of these two wares are needed.
    return=skipped unless economy needs iron or economy needs gold or not economy needs coal
 
-   -- If the building has no 'fur_garment_old' in its input queues, skip running this progam.
+   -- If the building has no 'fur_garment_old' in its input queues, skip running this program.
    return=skipped unless site has fur_garment_old
 
    -- If the building has 'wheat' in its input queue and if the economy needs the ware
@@ -427,7 +428,7 @@ Examples for ``return=skipped``:
 ProductionProgram::ActReturn::Negation::Negation(const std::vector<std::string>& arguments,
                                                  std::vector<std::string>::const_iterator& begin,
                                                  std::vector<std::string>::const_iterator& end,
-                                                 const ProductionSiteDescr& descr,
+                                                 ProductionSiteDescr& descr,
                                                  const Descriptions& descriptions)
    : operand(create_condition(arguments, begin, end, descr, descriptions)) {
 }
@@ -451,7 +452,7 @@ ProductionProgram::ActReturn::Negation::description_negation(const Descriptions&
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {
-	return ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type);
+	return ps.infinite_production() || ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type);
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description(
    const Descriptions& descriptions) const {
@@ -471,7 +472,7 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const ProductionSite& ps) const {
-	return ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type);
+	return ps.infinite_production() || ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type);
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description(
    const Descriptions& descriptions) const {
@@ -592,7 +593,7 @@ ProductionProgram::ActReturn::Condition*
 ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& arguments,
                                                std::vector<std::string>::const_iterator& begin,
                                                std::vector<std::string>::const_iterator& end,
-                                               const ProductionSiteDescr& descr,
+                                               ProductionSiteDescr& descr,
                                                const Descriptions& descriptions) {
 	if (begin == end) {
 		throw GameDataError("Expected a condition after '%s'", (begin - 1)->c_str());
@@ -632,7 +633,7 @@ ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& a
 }
 
 ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& arguments,
-                                        const ProductionSiteDescr& descr,
+                                        ProductionSiteDescr& descr,
                                         const Descriptions& descriptions) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: return=failed|completed|skipped [when|unless <conditions>]");
@@ -919,8 +920,7 @@ Calls a program of the productionsite's main worker. Example:
 ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& arguments,
                                                 const std::string& production_program_name,
                                                 ProductionSiteDescr* descr,
-                                                const Descriptions& descriptions)
-   : on_failure_(ProgramResult::kFailed) {
+                                                const Descriptions& descriptions) {
 	const size_t nr_args = arguments.size();
 	if (nr_args != 1 && nr_args != 4) {
 		throw GameDataError(
@@ -1481,8 +1481,7 @@ mine
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     Descriptions& descriptions,
                                     const std::string& production_program_name,
-                                    ProductionSiteDescr* descr)
-   : resource_(INVALID_INDEX), notify_on_failure_(true) {
+                                    ProductionSiteDescr* descr) {
 	if (arguments.size() > 6 || arguments.size() < 4) {
 		throw GameDataError("Usage: mine=<resource name> radius:<number> yield:<percent> "
 		                    "when_empty:<percent> [experience:<percent>] [no_notify]");

@@ -60,7 +60,7 @@ struct Pathfield {
 
 struct Pathfields {
 	std::unique_ptr<Pathfield[]> fields;
-	uint16_t cycle;
+	uint16_t cycle{0U};
 
 	explicit Pathfields(uint32_t nrfields);
 };
@@ -72,7 +72,7 @@ struct Pathfields {
  * which is required for pathfinding reentrancy.
  */
 struct PathfieldManager {
-	PathfieldManager();
+	PathfieldManager() = default;
 
 	void set_size(uint32_t nrfields);
 	std::shared_ptr<Pathfields> allocate();
@@ -82,7 +82,7 @@ private:
 
 	using List = std::vector<std::shared_ptr<Pathfields>>;
 
-	uint32_t nrfields_;
+	uint32_t nrfields_{0U};
 	List list_;
 };
 }  // namespace Widelands

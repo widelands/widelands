@@ -28,7 +28,7 @@ namespace Widelands {
 /*************************************************************************/
 /*                         Router Implementation                         */
 /*************************************************************************/
-Router::Router(const ResetCycleFn& reset) : reset_(reset), mpf_cycle(0) {
+Router::Router(const ResetCycleFn& reset) : reset_(reset) {
 }
 
 uint32_t Router::assign_cycle() {

@@ -68,7 +68,7 @@ protected:
 	 */
 	static const std::pair<std::string, std::string>
 	read_key_value_pair(const std::string& input,
-	                    const char separator,
+	                    char separator,
 	                    const std::string& default_value = "",
 	                    const std::string& expected_key = "");
 
