@@ -148,7 +148,7 @@ msgstr "Очки"
 #: ../../data/scripting/win_conditions/collectors.lua:72
 #, lua-format
 msgid "Status for %s"
-msgstr "Статус для %s"
+msgstr "Состояние для %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
 #: ../../data/scripting/win_conditions/collectors.lua:84
@@ -167,7 +167,7 @@ msgstr[3] "Всего очков: %i"
 #: ../../data/scripting/win_conditions/collectors.lua:111
 #, lua-format
 msgid "Status for Team %d"
-msgstr "Статус для команды %d"
+msgstr "Состояние команды %d"
 
 #: ../../data/scripting/win_conditions/collectors.lua:113
 #, lua-format
@@ -368,7 +368,7 @@ msgstr "Вы проиграли в этой игре!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:81
 msgid "Status"
-msgstr "Статус"
+msgstr "Состояние"
 
 #. TRANSLATORS: This is an overview for all players.
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:83
