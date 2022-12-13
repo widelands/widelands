@@ -983,13 +983,12 @@ struct CmdShipPortName : PlayerCommand {
 	explicit CmdShipPortName(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdShipPortName() : PlayerCommand() {
-	}
+	CmdShipPortName() = default;
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 private:
-	Serial serial_;
+	Serial serial_{0U};
 	std::string name_;
 };
 
