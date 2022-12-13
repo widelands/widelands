@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git 0fc809d](https://github.com/widelands/widelands/commit/0fc809d0dc979de59640116300dfbe8cdb1bc942)
+## Post-1.1 until [git 2349508](https://github.com/widelands/widelands/commit/2349508087d4f6206d21be30dd7dd47de62e09d1)
 
 ### Animations, Icons and Overlays
 
@@ -89,6 +89,14 @@
      * Stabilize selection end in editbox (fixes #5676)
      * Handle big step in soldier capacity settings
      * Converted all users of `get_keyboard_change()` to handle big step, remove `enable_big_step` option
+- Add shortcut keys for all menu items (#5705)
+     * add shortcut to statistics button tooltip in interactive_spectator.cc
+     * unify Load and Save hotkeys
+     * change some editor tool hotkeys and make all tools use Shift modifier
+     * editor new map window: create new map when terrain is doubleclicked
+     * editor: remove Alt modifier for third tool function (old TODO item)
+     * editor: ask for exit confirmation even if map is not modified (still skip on Ctrl+click)
+     * ask for exit confirmation in main menu (can be skipped by Ctrl+clicking)
 
 
 ### Internationalization
@@ -108,6 +116,7 @@
 - Explain waterway setting in Editor Map Options and add toolips to all map tags (#5653)
 - Map Generator Add-Ons & Map Generating Dialog Accessibility Tweaks (#5537)
 - Editor: Show Starting Positions on Minimap (#5704)
+- Fix segfault in multiselect editor tools (#5708)
 
 
 ### Graphics Engine
@@ -130,7 +139,7 @@
 - Fix Clang15 Compiler Warnings (#5629)
 - Replace `sprintf` with `snprintf` (#5651)
 - Switch to C++17 (#5672)
-- Fix more clang-tidy checks (#5679, #5682, #5689, #5696, #5684, #5695, #5693, #5690, #5694, #5692, #5685, #5688, #5698, #5697, #5686, #5699, #5687, #5691)
+- Fix more clang-tidy checks (#5679, #5682, #5689, #5696, #5684, #5695, #5693, #5690, #5694, #5692, #5685, #5688, #5698, #5697, #5686, #5699, #5687, #5691, #5681)
 
 
 ### Other Issues
