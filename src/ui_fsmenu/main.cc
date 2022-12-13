@@ -590,7 +590,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
 			if (!fell_through) {
-				end_modal<MenuTarget>(MenuTarget::kBack);
+				exit();
 				return true;
 			}
 		}
@@ -822,7 +822,7 @@ void MainMenu::action(const MenuTarget t) {
 	switch (t) {
 
 	case MenuTarget::kExit:
-		end_modal<MenuTarget>(MenuTarget::kBack);
+		exit((SDL_GetModState() & KMOD_CTRL) != 0);
 		break;
 
 	case MenuTarget::kOptions: {
@@ -949,6 +949,18 @@ void MainMenu::action(const MenuTarget t) {
 	default:
 		throw wexception("Invalid MenuTarget %d", static_cast<int>(t));
 	}
+}
+
+void MainMenu::exit(const bool force) {
+	if (!force) {
+		UI::WLMessageBox confirmbox(this, UI::WindowStyle::kFsMenu, _("Exit Confirmation"),
+		                            _("Are you sure you wish to exit Widelands?"),
+		                            UI::WLMessageBox::MBoxType::kOkCancel);
+		if (confirmbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
+			return;
+		}
+	}
+	end_modal<MenuTarget>(MenuTarget::kBack);
 }
 
 /// called if the user is not registered

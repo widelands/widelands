@@ -5043,7 +5043,7 @@ msgid ""
 "‘When the Barbarian was created,<br>this was the first thing that he "
 "stated:<br>“You want me fighting without fear?<br>Then you should create "
 "some beer!”’"
-msgstr "‘Когда был варвар сотворен, <br>первым вот что молвил он:<br> “Чтоб ничего мне не бояться, <br>пивом надо бы ужраться!”’"
+msgstr "‘Когда был варвар сотворен, <br>первым вот что молвил он:<br> “Чтоб мне без страха в бой ходить, <br>ты должен пива мне сварить!”’"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Brewery
 #: ../../data/tribes/initialization/barbarians/units.lua:1323
@@ -9917,7 +9917,7 @@ msgctxt "frisians_building"
 msgid ""
 "Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For "
 "ships of wood to chain the gales<br>In sturdy, beautious, blowing sails!"
-msgstr "Тростник и мех северного оленя<br>Идут на парусное обеспечение.<br>И приковывают ветра к судам<br>Прекрасные наши паруса!"
+msgstr "Из меха и из тростника<br>ткань парусов у нас крепка<br>Красивы, крепки и сильны<br>Корабль проводят сквозь штормы!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Weaving
 #. Mill
@@ -10443,7 +10443,7 @@ msgstr "Приостановить игру"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'c'
 #: ../../data/tribes/scripting/help/controls.lua:56
 msgid "Toggle census"
-msgstr "Переключить показ наименований"
+msgstr "Переключить подписи"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
 #: ../../data/tribes/scripting/help/controls.lua:58
@@ -10463,7 +10463,7 @@ msgstr "Переключение видимости зданий"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'w'
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Toggle workarea overlap indicators"
-msgstr "Переключение индикаторов слоев рабочей области"
+msgstr "Переключение индикаторов наложения рабочих областей"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'o'
 #: ../../data/tribes/scripting/help/controls.lua:68
@@ -10800,11 +10800,11 @@ msgstr "Размер"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:65
 msgid "Workers and animals can walk across fields with this immovable."
-msgstr "Работники и животные могут пройти сквозь поля с такими неподвижными объектами"
+msgstr "Работники и животные могут пройти сквозь поля с такими объектами"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:67
 msgid "Workers and animals can’t walk across fields with this immovable."
-msgstr "Работники и животные не могут пройти сквозь поля с такими неподвижными объектами."
+msgstr "Работники и животные не могут пройти сквозь поля с такими объектами."
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:73
 msgid "Becomes"
@@ -10833,11 +10833,11 @@ msgstr "Здания"
 
 #: ../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
-msgstr "Недвижимые объекты (племя)"
+msgstr "Статичные объекты (племена)"
 
 #: ../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
-msgstr "Недвижимые объекты(мир)"
+msgstr "Статичные объекты (Мир)"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
