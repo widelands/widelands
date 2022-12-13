@@ -62,31 +62,21 @@ struct RoutingNode {
 	};
 	using Queue = CookiePriorityQueue<RoutingNode, LessCost>;
 
-	uint32_t mpf_cycle_ware;
+	uint32_t mpf_cycle_ware{0U};
 	Queue::Cookie mpf_cookie_ware;
-	int32_t mpf_realcost_ware;       ///< real cost of getting to this flag
-	RoutingNode* mpf_backlink_ware;  ///< flag where we came from
-	int32_t mpf_estimate_ware;       ///< estimate of cost to destination
+	int32_t mpf_realcost_ware{0};             ///< real cost of getting to this flag
+	RoutingNode* mpf_backlink_ware{nullptr};  ///< flag where we came from
+	int32_t mpf_estimate_ware{0};             ///< estimate of cost to destination
 
-	uint32_t mpf_cycle_worker;
+	uint32_t mpf_cycle_worker{0U};
 	Queue::Cookie mpf_cookie_worker;
-	int32_t mpf_realcost_worker;       ///< real cost of getting to this flag
-	RoutingNode* mpf_backlink_worker;  ///< flag where we came from
-	int32_t mpf_estimate_worker;       ///< estimate of cost to destination
+	int32_t mpf_realcost_worker{0};             ///< real cost of getting to this flag
+	RoutingNode* mpf_backlink_worker{nullptr};  ///< flag where we came from
+	int32_t mpf_estimate_worker{0};             ///< estimate of cost to destination
 
 public:
-	RoutingNode()
-	   : mpf_cycle_ware(0),
-	     mpf_realcost_ware(0),
-	     mpf_backlink_ware(nullptr),
-	     mpf_estimate_ware(0),
-	     mpf_cycle_worker(0),
-	     mpf_realcost_worker(0),
-	     mpf_backlink_worker(nullptr),
-	     mpf_estimate_worker(0) {
-	}
-	virtual ~RoutingNode() {
-	}
+	RoutingNode() = default;
+	virtual ~RoutingNode() = default;
 
 	void reset_path_finding_cycle(WareWorker which) {
 		switch (which) {

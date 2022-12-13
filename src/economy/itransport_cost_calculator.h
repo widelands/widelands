@@ -34,8 +34,7 @@ namespace Widelands {
 class ITransportCostCalculator {
 public:
 	ITransportCostCalculator() = default;
-	virtual ~ITransportCostCalculator() {
-	}
+	virtual ~ITransportCostCalculator() = default;
 
 	[[nodiscard]] virtual int32_t calc_cost_estimate(const Coords&, const Coords&) const = 0;
 

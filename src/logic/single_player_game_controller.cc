@@ -35,8 +35,7 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
      lastframe_(SDL_GetTicks()),
      time_(game_.get_gametime()),
      speed_(get_config_natural("speed_of_new_game", 1000)),
-     paused_(false),
-     player_cmdserial_(0),
+
      local_(local) {
 }
 

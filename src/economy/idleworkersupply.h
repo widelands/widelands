@@ -43,7 +43,7 @@ struct IdleWorkerSupply : public Supply {
 
 private:
 	Worker& worker_;
-	Economy* economy_;
+	Economy* economy_{nullptr};
 };
 }  // namespace Widelands
 

@@ -36,8 +36,7 @@ namespace Widelands {
 /// the id that it has to the sequence number in the savegame of that message.
 /// MapMessageSaver does that.
 struct MessageId {
-	MessageId() : id(0) {
-	}
+	MessageId() = default;
 	explicit MessageId(uint32_t const init_id) : id(init_id) {
 	}
 
@@ -57,7 +56,7 @@ struct MessageId {
 	bool operator<(const MessageId& other) const {
 		return id < other.id;
 	}
-	operator bool() const {
+	explicit operator bool() const {
 		return *this != null();
 	}
 	[[nodiscard]] uint32_t value() const {
@@ -70,10 +69,10 @@ private:
 	//  this operator instead and fail because it is private. As an extra line
 	//  of defense, it is marked as deprectated. In any case, the linking will
 	//  fail because the function body is missing.
-	operator int8_t() const __attribute__((deprecated));
-	operator int16_t() const __attribute__((deprecated));
-	operator int32_t() const __attribute__((deprecated));
-	operator int64_t() const __attribute__((deprecated));
+	explicit operator int8_t() const __attribute__((deprecated));
+	explicit operator int16_t() const __attribute__((deprecated));
+	explicit operator int32_t() const __attribute__((deprecated));
+	explicit operator int64_t() const __attribute__((deprecated));
 
 	friend struct MapMessageSaver;
 	friend struct MessageQueue;
@@ -81,7 +80,7 @@ private:
 		++id;
 		return *this;
 	}
-	uint32_t id;
+	uint32_t id{0U};
 };
 }  // namespace Widelands
 

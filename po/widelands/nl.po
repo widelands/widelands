@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-07 03:09+0000\n"
+"POT-Creation-Date: 2022-12-10 03:07+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Foppe Benedictus <foppe.benedictus@gmail.com>, 2020,2022\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
@@ -130,7 +130,7 @@ msgstr "“%s”"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:41
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:359
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:354
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:206
 msgid "No AI"
 msgstr "Geen AI"
@@ -332,7 +332,7 @@ msgstr "Help"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:202
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
-#: ../../src/ui_fsmenu/main.cc:394
+#: ../../src/ui_fsmenu/main.cc:390
 msgid "New Map"
 msgstr "Nieuwe kaart"
 
@@ -345,7 +345,7 @@ msgstr "Nieuwe willekeurige kaart"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:217
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:399 ../../src/wlapplication_options.cc:404
+#: ../../src/ui_fsmenu/main.cc:395 ../../src/wlapplication_options.cc:404
 msgid "Load Map"
 msgstr "Laad kaart"
 
@@ -431,7 +431,7 @@ msgstr "Toevoegen of verwijderen van dieren"
 #: ../../src/editor/ui_menus/field_info_window.cc:220
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:96
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
-#: ../../src/map_io/map_saver.cc:155
+#: ../../src/map_io/map_saver.cc:154
 #: ../../src/map_io/widelands_map_loader.cc:268
 msgid "Resources"
 msgstr "Grondstoffen"
@@ -453,7 +453,7 @@ msgstr "Toevoegen of verwijderen van havenlocaties"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:337
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:677
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:673
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:149
 msgid "Players"
 msgstr "Spelers"
@@ -603,7 +603,7 @@ msgid "The map has not been saved, do you really want to quit?"
 msgstr "Deze kaart is niet opgeslagen, weet je zeker dat je wilt afsluiten?"
 
 #: ../../src/editor/editorinteractive.cc:1049 ../../src/logic/addons.cc:47
-#: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
+#: ../../src/ui_basic/dropdown.cc:357 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1340
 #: ../../src/ui_fsmenu/addons/manager.cc:1351
@@ -613,12 +613,12 @@ msgstr "Deze kaart is niet opgeslagen, weet je zeker dat je wilt afsluiten?"
 #: ../../src/ui_fsmenu/addons/manager.cc:1595
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:102
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:292
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:562
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:705
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:559
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:701
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:454
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
-#: ../../src/ui_fsmenu/launch_mpg.cc:310 ../../src/ui_fsmenu/main.cc:234
+#: ../../src/ui_fsmenu/launch_mpg.cc:310 ../../src/ui_fsmenu/main.cc:230
 #: ../../src/wlapplication.cc:1638
 msgid "Error"
 msgstr "Fout"
@@ -871,7 +871,7 @@ msgstr "Auteur: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
 #: ../../src/ui_fsmenu/addons/packager_box.cc:282
-#: ../../src/ui_fsmenu/main.cc:433 ../../src/ui_fsmenu/mapdetailsbox.cc:124
+#: ../../src/ui_fsmenu/main.cc:429 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
 msgstr "Beschrijving: %s"
@@ -892,7 +892,7 @@ msgid "Enabled Add-Ons: %s"
 msgstr "Gebruikte Uitbreidingen: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:238
-#: ../../src/ui_fsmenu/main.cc:1011 ../../src/wui/encyclopedia_window.cc:145
+#: ../../src/ui_fsmenu/main.cc:1007 ../../src/wui/encyclopedia_window.cc:145
 #: ../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
 msgstr "Fout!"
@@ -938,14 +938,14 @@ msgstr "Beeldscherm"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:251
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:60
 #: ../../src/editor/ui_menus/player_menu.cc:78
-#: ../../src/ui_basic/color_chooser.cc:263
+#: ../../src/ui_basic/color_chooser.cc:258
 #: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:46
 #: ../../src/ui_fsmenu/addons/login_box.cc:52
 #: ../../src/ui_fsmenu/addons/manager.cc:249
 #: ../../src/ui_fsmenu/addons/packager.cc:109
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:174
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:461
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:679
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:675
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
 #: ../../src/ui_fsmenu/keyboard_options.cc:230 ../../src/ui_fsmenu/menu.cc:143
@@ -961,7 +961,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:68
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:755
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:68
-#: ../../src/ui_basic/color_chooser.cc:272
+#: ../../src/ui_basic/color_chooser.cc:267
 #: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:55
 #: ../../src/ui_fsmenu/addons/contact.cc:55
 #: ../../src/ui_fsmenu/addons/login_box.cc:60
@@ -1246,7 +1246,7 @@ msgstr "Willekeurige kaart aanmaken…"
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:580
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:607
-#: ../../src/ui_fsmenu/main.cc:396
+#: ../../src/ui_fsmenu/main.cc:392
 msgid "Random Map"
 msgstr "Willekeurige Kaart"
 
@@ -1273,7 +1273,7 @@ msgid ""
 msgstr "Deze kaart is automatisch aangemaakt door de Widelands Willekeurige Kaart Generator"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:621
-#: ../../src/network/gamehost.cc:1641
+#: ../../src/network/gamehost.cc:1619
 #, c-format
 msgid "Computer %u"
 msgstr "Computer %u"
@@ -1414,14 +1414,14 @@ msgstr "Stam"
 
 #: ../../src/editor/ui_menus/player_menu.cc:192
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:30
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:440
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:435
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:97
 msgctxt "tribe"
 msgid "Random"
 msgstr "Willekeurig"
 
 #: ../../src/editor/ui_menus/player_menu.cc:194
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:442
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:437
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random"
 msgstr "De stam zal willekeurig gekozen worden"
@@ -1520,9 +1520,9 @@ msgstr "Selecteer het nieuwe formaat van de kaart, klik dan op de kaart om deze 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
-#: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
-#: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:349
+#: ../../src/ui_basic/dropdown.cc:305 ../../src/ui_basic/dropdown.cc:357
+#: ../../src/ui_basic/dropdown.cc:424 ../../src/ui_basic/dropdown.cc:432
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:344
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
 msgstr "%1%: %2%"
@@ -1547,7 +1547,7 @@ msgid "Loading game: %1$s (%2$u/%3$d)"
 msgstr "Laadt spel: %1$s (%2$u/%3$d)"
 
 #: ../../src/game_io/game_loader.cc:71 ../../src/game_io/game_saver.cc:57
-#: ../../src/map_io/map_saver.cc:101
+#: ../../src/map_io/map_saver.cc:100
 #: ../../src/map_io/widelands_map_loader.cc:205
 msgid "Elemental data"
 msgstr "Elementaire data"
@@ -1564,7 +1564,7 @@ msgstr "AI"
 msgid "Command queue"
 msgstr "Wachtrij voor opdrachten"
 
-#: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:147
+#: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:146
 #: ../../src/map_io/widelands_map_loader.cc:394
 #: ../../src/wlapplication_options.cc:548
 #: ../../src/wui/interactive_player.cc:221
@@ -1649,7 +1649,7 @@ msgstr "OpenGL"
 msgid "Shading Language"
 msgstr "Shading taal"
 
-#: ../../src/graphic/text/rt_render.cc:1427
+#: ../../src/graphic/text/rt_render.cc:1421
 msgid "Copy link to clipboard"
 msgstr ""
 
@@ -2344,7 +2344,7 @@ msgstr "Werkers"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
-#: ../../src/map_io/map_saver.cc:220
+#: ../../src/map_io/map_saver.cc:219
 #: ../../src/map_io/widelands_map_loader.cc:329
 #: ../../src/wui/general_statistics_menu.cc:150
 #: ../../src/wui/interactive_player.cc:325 ../../src/wui/minimap.cc:199
@@ -2599,87 +2599,87 @@ msgstr "Het opslaan is mislukt!"
 msgid "Game saved"
 msgstr "Het spel is opgeslagen"
 
-#: ../../src/map_io/map_saver.cc:86
+#: ../../src/map_io/map_saver.cc:85
 #, c-format
 msgid "Saving map: %1$s (%2$d/%3$d)"
 msgstr "Kaart wordt opgeslagen: %1$s (%2$d/%3$d)"
 
-#: ../../src/map_io/map_saver.cc:88
+#: ../../src/map_io/map_saver.cc:87
 msgid "Autosaving map…"
 msgstr "Kaart wordt automatisch opgeslagen..."
 
-#: ../../src/map_io/map_saver.cc:121
+#: ../../src/map_io/map_saver.cc:120
 #: ../../src/map_io/widelands_map_loader.cc:230
 msgid "Heights"
 msgstr "Hoogtes"
 
-#: ../../src/map_io/map_saver.cc:128
+#: ../../src/map_io/map_saver.cc:127
 #: ../../src/map_io/widelands_map_loader.cc:237
 msgid "Terrains"
 msgstr "Terreinen"
 
-#: ../../src/map_io/map_saver.cc:135
+#: ../../src/map_io/map_saver.cc:134
 #: ../../src/map_io/widelands_map_loader.cc:250
 msgid "Starting positions"
 msgstr "Startposities"
 
-#: ../../src/map_io/map_saver.cc:163
+#: ../../src/map_io/map_saver.cc:162
 #: ../../src/map_io/widelands_map_loader.cc:278
 msgid "Map version"
 msgstr "Kaartversie"
 
-#: ../../src/map_io/map_saver.cc:175
+#: ../../src/map_io/map_saver.cc:174
 #: ../../src/map_io/widelands_map_loader.cc:284
 msgid "Building restrictions"
 msgstr "Bouwbeperkingen"
 
-#: ../../src/map_io/map_saver.cc:200
+#: ../../src/map_io/map_saver.cc:199
 #: ../../src/map_io/widelands_map_loader.cc:309 ../../src/wui/minimap.cc:177
 msgid "Flags"
 msgstr "Vlaggen"
 
-#: ../../src/map_io/map_saver.cc:207
+#: ../../src/map_io/map_saver.cc:206
 #: ../../src/map_io/widelands_map_loader.cc:316
 msgid "Roads and waterways"
 msgstr "Wegen en waterwegen"
 
-#: ../../src/map_io/map_saver.cc:229
+#: ../../src/map_io/map_saver.cc:228
 #: ../../src/map_io/widelands_map_loader.cc:246
 msgid "Map objects"
 msgstr "Kaartobjecten"
 
-#: ../../src/map_io/map_saver.cc:238
+#: ../../src/map_io/map_saver.cc:237
 #: ../../src/map_io/widelands_map_loader.cc:402
 msgid "Win condition"
 msgstr "Winconditie"
 
-#: ../../src/map_io/map_saver.cc:247
+#: ../../src/map_io/map_saver.cc:246
 msgid "Flag details"
 msgstr "Vlagdetails"
 
-#: ../../src/map_io/map_saver.cc:256
+#: ../../src/map_io/map_saver.cc:255
 msgid "Road and waterway details"
 msgstr "Weg- en waterwegdetails"
 
-#: ../../src/map_io/map_saver.cc:273
+#: ../../src/map_io/map_saver.cc:272
 msgid "Building details"
 msgstr "Gebouwdetails"
 
-#: ../../src/map_io/map_saver.cc:281
+#: ../../src/map_io/map_saver.cc:280
 msgid "Territory"
 msgstr "Grondgebied"
 
-#: ../../src/map_io/map_saver.cc:288
+#: ../../src/map_io/map_saver.cc:287
 #: ../../src/map_io/widelands_map_loader.cc:384
 msgid "Vision"
 msgstr "Zicht"
 
-#: ../../src/map_io/map_saver.cc:297
+#: ../../src/map_io/map_saver.cc:296
 #: ../../src/map_io/widelands_map_loader.cc:419
 msgid "Scripting"
 msgstr "Scripting"
 
-#: ../../src/map_io/map_saver.cc:304
+#: ../../src/map_io/map_saver.cc:303
 #: ../../src/map_io/widelands_map_loader.cc:412
 #: ../../src/wlapplication_options.cc:539
 #: ../../src/wui/game_objectives_menu.cc:30
@@ -2687,12 +2687,12 @@ msgstr "Scripting"
 msgid "Objectives"
 msgstr "Doelstellingen"
 
-#: ../../src/map_io/map_saver.cc:308
+#: ../../src/map_io/map_saver.cc:307
 #: ../../src/map_io/widelands_map_loader.cc:426
 msgid "Images"
 msgstr "Beelden"
 
-#: ../../src/map_io/map_saver.cc:318
+#: ../../src/map_io/map_saver.cc:317
 msgid "Minimap"
 msgstr "Minikaart"
 
@@ -2740,13 +2740,13 @@ msgstr "Kaartobjecten initialiseren"
 msgid "Checking map"
 msgstr "Kaart controleren"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
+#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:520
 #: ../../src/ui_fsmenu/launch_spg.cc:168 ../../src/wlapplication.cc:751
 msgid "Preparing game…"
 msgstr "Spel Voorbereiden..."
 
 #: ../../src/network/gameclient.cc:212
-#: ../../src/network/internet_gaming.cc:109
+#: ../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "Kon geen verbinding met de host maken"
 
@@ -2893,201 +2893,201 @@ msgstr "Er is geen geforceerde pauze - niets te stoppen."
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Ongeldige opdracht! Type /help voor een opdrachtenlijst."
 
-#: ../../src/network/gamehost.cc:373
+#: ../../src/network/gamehost.cc:351
 msgid "Failed to host the server!"
 msgstr "Fout bij het hosten van de server!"
 
-#: ../../src/network/gamehost.cc:374
+#: ../../src/network/gamehost.cc:352
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
 msgstr "Widelands kon geen server instellen om te hosten.\nDit zou niet mogen gebeuren, waarschijnlijk kan je hier zelf niets aan doen.  Gelieve deze fout te rapporteren."
 
-#: ../../src/network/gamehost.cc:382
+#: ../../src/network/gamehost.cc:360
 msgid "Failed to start the server!"
 msgstr "Fout bij het starten van de server!"
 
-#: ../../src/network/gamehost.cc:383
+#: ../../src/network/gamehost.cc:361
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
 msgstr "Widelands kon geen server starten.\nHet lijkt erop dat een ander proces al als server draait op onze poort."
 
-#: ../../src/network/gamehost.cc:1895
+#: ../../src/network/gamehost.cc:1873
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
 msgstr[0] "%li seconde"
 msgstr[1] "%li seconden"
 
-#: ../../src/network/internet_gaming.cc:110
+#: ../../src/network/internet_gaming.cc:105
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr "Widelands kon geen verbinding krijgen met het opgegeven netwerkadres.\nEr is op de aangegeven locatie geen poort beschikbaar of\nde netwerkverbinding is verbroken."
 
-#: ../../src/network/internet_gaming.cc:173
+#: ../../src/network/internet_gaming.cc:168
 msgid "Users marked with IRC will possibly not react to messages."
 msgstr "Gebruikers aangeduid met 'IRC' zullen misschien niet reageren op berichten."
 
-#: ../../src/network/internet_gaming.cc:211
+#: ../../src/network/internet_gaming.cc:206
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Succesvol herverbonden met de metaserver!"
 
-#: ../../src/network/internet_gaming.cc:334
+#: ../../src/network/internet_gaming.cc:329
 #: ../../src/network/network_gaming_messages.cc:40
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Er is iets mis gegeaan: %s"
 
-#: ../../src/network/internet_gaming.cc:426
+#: ../../src/network/internet_gaming.cc:421
 msgid "Welcome to the Widelands Metaserver!"
 msgstr "Welkom op de Metaserver van Widelands!"
 
-#: ../../src/network/internet_gaming.cc:430
+#: ../../src/network/internet_gaming.cc:425
 #, c-format
 msgid ""
 "You have been logged in as ‘%s’ since your requested name is already in use "
 "or reserved."
 msgstr "Je bent ingelogd als ' %s ' want de door jouw gevraagde naam is al in gebruik of gereserveerd"
 
-#: ../../src/network/internet_gaming.cc:442
+#: ../../src/network/internet_gaming.cc:437
 msgid "Our forums can be found at:"
 msgstr "Onze fora zijn te vinden op:"
 
-#: ../../src/network/internet_gaming.cc:444
+#: ../../src/network/internet_gaming.cc:439
 msgid "For reporting bugs, visit:"
 msgstr "Om bugs te melden, kijk op:"
 
-#: ../../src/network/internet_gaming.cc:467
+#: ../../src/network/internet_gaming.cc:462
 msgid "Mixed up"
 msgstr "Gehusseld"
 
-#: ../../src/network/internet_gaming.cc:467
+#: ../../src/network/internet_gaming.cc:462
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "De metaserver stuurde een vreemde ERROR gedurende de verbinding"
 
-#: ../../src/network/internet_gaming.cc:481
+#: ../../src/network/internet_gaming.cc:476
 msgid "Unexpected packet"
 msgstr "Onverwacht pakket"
 
-#: ../../src/network/internet_gaming.cc:482
+#: ../../src/network/internet_gaming.cc:477
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr "Onverwacht netwerkpakket ontvangen van de metaserver.  De metaserver gebruikt misschien een andere protocolversie.  Als het probleem aanhoudt kan je proberen om je versie van het spel up to date te brengen."
 
-#: ../../src/network/internet_gaming.cc:492
+#: ../../src/network/internet_gaming.cc:487
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "WAARSCHUWING: ontvangen commando: %s zonder in CONNECTING state te zijn."
 
-#: ../../src/network/internet_gaming.cc:500
+#: ../../src/network/internet_gaming.cc:495
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "Tijdsverschil met server is %d seconde."
 msgstr[1] "Tijdsverschil met server is %d seconden."
 
-#: ../../src/network/internet_gaming.cc:514
+#: ../../src/network/internet_gaming.cc:509
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Ongeldig chat bericht van type \"%s\"."
 
-#: ../../src/network/internet_gaming.cc:514
+#: ../../src/network/internet_gaming.cc:509
 msgid "Invalid message type"
 msgstr "Ongeldig bericht type"
 
-#: ../../src/network/internet_gaming.cc:554
+#: ../../src/network/internet_gaming.cc:549
 #, c-format
 msgid "The game %s is now available"
 msgstr "Het spel %s is nu beschikbaar"
 
-#: ../../src/network/internet_gaming.cc:564
+#: ../../src/network/internet_gaming.cc:559
 #, c-format
 msgid "The game %s has been closed"
 msgstr "Het spel %s is gesloten"
 
-#: ../../src/network/internet_gaming.cc:603
+#: ../../src/network/internet_gaming.cc:598
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s sloot zich aan bij de lobby"
 
-#: ../../src/network/internet_gaming.cc:614
+#: ../../src/network/internet_gaming.cc:609
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s verliet de lobby"
 
-#: ../../src/network/internet_gaming.cc:671
+#: ../../src/network/internet_gaming.cc:666
 msgid "Chat message could not be sent."
 msgstr "Chatbericht kon niet verzonden worden."
 
-#: ../../src/network/internet_gaming.cc:679
+#: ../../src/network/internet_gaming.cc:674
 msgid "Command could not be executed."
 msgstr "Opdracht kon niet worden uitgevoerd."
 
-#: ../../src/network/internet_gaming.cc:697
+#: ../../src/network/internet_gaming.cc:692
 #, c-format
 msgid "ERROR: %s"
 msgstr "FOUT: %s"
 
-#: ../../src/network/internet_gaming.cc:700
+#: ../../src/network/internet_gaming.cc:695
 msgid "An unexpected error message has been received about command %1%: %2%"
 msgstr "Onverwachte foutboodschap ontvangen in verband met opdracht \"%1%\": %2%"
 
-#: ../../src/network/internet_gaming.cc:711
+#: ../../src/network/internet_gaming.cc:706
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Onbekende opdracht ontvangen van de metaserver: %s"
 
-#: ../../src/network/internet_gaming.cc:864
+#: ../../src/network/internet_gaming.cc:859
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Bericht kon niet verzonden worden: Je bent niet verbonden met de metaserver!"
 
-#: ../../src/network/internet_gaming.cc:884
-#: ../../src/network/internet_gaming.cc:892
+#: ../../src/network/internet_gaming.cc:879
+#: ../../src/network/internet_gaming.cc:887
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Bericht kon niet verzonden worden: Was dit bedoelt als een prive bericht?"
 
-#: ../../src/network/internet_gaming.cc:907
+#: ../../src/network/internet_gaming.cc:902
 msgid "Supported admin commands:"
 msgstr "Ondersteunde admin-opdrachten:"
 
-#: ../../src/network/internet_gaming.cc:908
+#: ../../src/network/internet_gaming.cc:903
 msgid "/motd <msg> - Set a permanent greeting message"
 msgstr "/motd <msg> - Stel een permanente begroeting in"
 
-#: ../../src/network/internet_gaming.cc:909
+#: ../../src/network/internet_gaming.cc:904
 msgid "/announce <msg> - Send a one time system message"
 msgstr "/announce <msg> - Stuur eenmalig een systeembericht"
 
-#: ../../src/network/internet_gaming.cc:912
+#: ../../src/network/internet_gaming.cc:907
 msgid "/warn <user> <msg> - Send a private system message to the given user"
 msgstr "/warn <user> <msg> - Stuur een privébericht naar de gegeven gebruiker"
 
-#: ../../src/network/internet_gaming.cc:915
+#: ../../src/network/internet_gaming.cc:910
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
 msgstr "/kick <user|game> - Verwijder een gebruiker of spel uit de metaserver"
 
-#: ../../src/network/internet_gaming.cc:917
+#: ../../src/network/internet_gaming.cc:912
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
 msgstr "/ban <user> - Ban een gebruiker 24 uur uit de metaserver"
 
-#: ../../src/network/internet_gaming.cc:996
+#: ../../src/network/internet_gaming.cc:991
 msgid "Conversion error"
 msgstr "Conversiefout"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:999
+#: ../../src/network/internet_gaming.cc:994
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Kon de waarheidswaarde van \"%s\" niet bepalen"
 
-#: ../../src/network/internet_gaming.cc:1023
+#: ../../src/network/internet_gaming.cc:1018
 msgctxt "chat_sender"
 msgid "Unknown"
 msgstr "Onbekend"
@@ -3320,55 +3320,55 @@ msgstr "Widelands kon het lokale netwerk niet gebruiken. Misschien voert een and
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/ui_basic/color_chooser.cc:245
+#: ../../src/ui_basic/color_chooser.cc:240
 msgid "Choose Color…"
 msgstr "Kies Kleur..."
 
-#: ../../src/ui_basic/color_chooser.cc:281
+#: ../../src/ui_basic/color_chooser.cc:276
 msgid "Initial Color"
 msgstr "Begin Kleur"
 
 #. * TRANSLATORS: First letter of the word "Red"
-#: ../../src/ui_basic/color_chooser.cc:290
+#: ../../src/ui_basic/color_chooser.cc:285
 msgctxt "color"
 msgid "R"
 msgstr "R"
 
 #. * TRANSLATORS: First letter of the word "Green"
-#: ../../src/ui_basic/color_chooser.cc:299
+#: ../../src/ui_basic/color_chooser.cc:294
 msgctxt "color"
 msgid "G"
 msgstr "G"
 
 #. * TRANSLATORS: First letter of the word "Blue"
-#: ../../src/ui_basic/color_chooser.cc:308
+#: ../../src/ui_basic/color_chooser.cc:303
 msgctxt "color"
 msgid "B"
 msgstr "B"
 
-#: ../../src/ui_basic/color_chooser.cc:318
+#: ../../src/ui_basic/color_chooser.cc:313
 msgid "Default Color"
 msgstr "Standaard Kleur"
 
-#: ../../src/ui_basic/color_chooser.cc:329
+#: ../../src/ui_basic/color_chooser.cc:324
 msgid "Red"
 msgstr "Rood"
 
-#: ../../src/ui_basic/color_chooser.cc:341
+#: ../../src/ui_basic/color_chooser.cc:336
 msgid "Green"
 msgstr "Groen"
 
-#: ../../src/ui_basic/color_chooser.cc:353
+#: ../../src/ui_basic/color_chooser.cc:348
 msgid "Blue"
 msgstr "Blauw"
 
-#: ../../src/ui_basic/dropdown.cc:113
+#: ../../src/ui_basic/dropdown.cc:111
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Kies Item"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:419
+#: ../../src/ui_basic/dropdown.cc:417
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Niet Gekozen"
@@ -3377,11 +3377,11 @@ msgstr "Niet Gekozen"
 msgid "No matches"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:302
+#: ../../src/ui_basic/panel.cc:294
 msgid "Please wait…"
 msgstr "Even geduld a.u.b .."
 
-#: ../../src/ui_basic/panel.cc:432
+#: ../../src/ui_basic/panel.cc:424
 msgid "Game ending – please wait…"
 msgstr "Het spel stopt – even geduld aub..."
 
@@ -3447,28 +3447,28 @@ msgstr ""
 msgid "%1$s<br>(%2$s)"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:107 ../../src/ui_fsmenu/about.cc:41
+#: ../../src/ui_basic/window.cc:100 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/mousewheel_report.cc:73 ../../src/wui/watchwindow.cc:76
 msgid "Close"
 msgstr "Sluit"
 
-#: ../../src/ui_basic/window.cc:172
+#: ../../src/ui_basic/window.cc:165
 msgid "Minimize"
 msgstr "Minimaliseer"
 
-#: ../../src/ui_basic/window.cc:172
+#: ../../src/ui_basic/window.cc:165
 msgid "Restore"
 msgstr "Herstel"
 
-#: ../../src/ui_basic/window.cc:177 ../../src/wui/info_panel.cc:197
+#: ../../src/ui_basic/window.cc:170 ../../src/wui/info_panel.cc:197
 msgid "Pin"
 msgstr "Vastmaken"
 
-#: ../../src/ui_basic/window.cc:177
+#: ../../src/ui_basic/window.cc:170
 msgid "Unpin"
 msgstr "Losmaken"
 
-#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:466
+#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:462
 msgid "About Widelands"
 msgstr "Over Widelands"
 
@@ -4100,7 +4100,7 @@ msgid "–"
 msgstr "–"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:85
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:794
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:790
 msgid "Delete this add-on"
 msgstr "Verwijder deze uitbreiding"
 
@@ -4326,25 +4326,25 @@ msgid "Directory Tree"
 msgstr "Mappen Boom"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:272
-#: ../../src/ui_fsmenu/main.cc:423
+#: ../../src/ui_fsmenu/main.cc:419
 #, c-format
 msgid "Name: %s"
 msgstr "Naam: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:275
-#: ../../src/ui_fsmenu/main.cc:426 ../../src/ui_fsmenu/mapdetailsbox.cc:112
+#: ../../src/ui_fsmenu/main.cc:422 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
 msgstr "Grootte: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:278
-#: ../../src/ui_fsmenu/main.cc:428 ../../src/ui_fsmenu/mapdetailsbox.cc:114
+#: ../../src/ui_fsmenu/main.cc:424 ../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:279
-#: ../../src/ui_fsmenu/main.cc:367 ../../src/ui_fsmenu/main.cc:430
+#: ../../src/ui_fsmenu/main.cc:363 ../../src/ui_fsmenu/main.cc:426
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Players: %s"
@@ -4577,95 +4577,95 @@ msgctxt "priority"
 msgid "High"
 msgstr "Hoog"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:480
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:477
 msgid "Please explain why you are deleting this add-on."
 msgstr ""
 
 #. * TRANSLATORS: This add-on has not yet been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:497
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:494
 msgid "Unchecked"
 msgstr ""
 
 #. * TRANSLATORS: This add-on has been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:499
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:496
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:393
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:418
 msgid "Verified"
 msgstr "Gecontroleerd"
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:503
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
 msgid "Desyncs"
 msgstr ""
 
 #. * TRANSLATORS: This add-on will not cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:505
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
 msgid "Sync-safe"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:637
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:633
 msgid "Your vote"
 msgstr "Jouw stem"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:661
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:657
 msgid "Next screenshot"
 msgstr "Volgende schermafbeelding"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:670
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:666
 msgid "Previous screenshot"
 msgstr "Vorige schermafbeelding"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:678
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:674
 msgid "Write a comment…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:688
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:684
 msgid "Administrator actions"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:695
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:691
 msgid "Not voted"
 msgstr "Niet gestemd"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:706
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:702
 #, c-format
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:766
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:762
 #, c-format
 msgid "Screenshots (%u)"
 msgstr "Schermafbeeldingen (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:789
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:785
 msgid "Change verification status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:790
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:786
 msgid "Change quality rating"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:791
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:787
 msgid "Change sync-safety status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:793
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:789
 msgid "Configure Transifex integration"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:844
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:840
 #, c-format
 msgid "Comments (%u)"
 msgstr "Opmerkingen (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:845
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:841
 #, c-format
 msgid "Votes (%u)"
 msgstr "Stemmen (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:849
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:845
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:472
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
@@ -4673,51 +4673,51 @@ msgid_plural "Average rating: %1$.3f (%2$u votes)"
 msgstr[0] "Gemiddelde waardering: %1$.3f (%2$u stem)"
 msgstr[1] "Gemiddelde waardering: %1$.3f (%2$u stemmen)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:852
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:848
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:475
 msgid "No votes yet"
 msgstr "Nog geen stemmen:"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:870
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:866
 msgid "No comments yet."
 msgstr "Nog geen opmerking"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:871
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:867
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
 msgstr[0] "%u opmerking:"
 msgstr[1] "%u opmerkingen:"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:882
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:878
 #, c-format
 msgid "%1$s (edited on %2$s)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:888
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:884
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:894
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:890
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr "'%1$s' merkte op over versie %2$s:"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:920
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:916
 #, c-format
 msgid "%1$u / %2$u"
 msgstr "%1$u / %2$u"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:956
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:952
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "Deze schermafbeelding kon door een fout niet van de server gehaald worden."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:974
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:970
 msgid "Please log in to comment"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:976
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:972
 msgid "Please log in to vote"
 msgstr ""
 
@@ -4948,7 +4948,7 @@ msgid "Choose Campaign"
 msgstr "Kies een Veldtocht"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:38
-#: ../../src/ui_fsmenu/loadgame.cc:78
+#: ../../src/ui_fsmenu/loadgame.cc:76
 #: ../../src/ui_fsmenu/scenario_select.cc:103
 #: ../../src/wui/story_message_box.cc:75
 msgid "Return to the main menu"
@@ -5163,68 +5163,68 @@ msgstr "Verander kaart..."
 msgid "Change saved game…"
 msgstr "Verander bewaard spel..."
 
-#: ../../src/ui_fsmenu/launch_game.cc:134
+#: ../../src/ui_fsmenu/launch_game.cc:133
 msgid "Start game"
 msgstr "Start spel"
 
-#: ../../src/ui_fsmenu/launch_game.cc:205
+#: ../../src/ui_fsmenu/launch_game.cc:204
 msgid "The relations between players are set by the scenario"
 msgstr "De verhouding tussen spelers is bepaald door het scenario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:207
+#: ../../src/ui_fsmenu/launch_game.cc:206
 msgid "The relations between players are set by the saved game"
 msgstr "De verhouding tussen spelers is bepaald door het opgeslagen spel"
 
-#: ../../src/ui_fsmenu/launch_game.cc:209
+#: ../../src/ui_fsmenu/launch_game.cc:208
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "De geselecteerde winconditie staat geen vreedzame spellen toe"
 
-#: ../../src/ui_fsmenu/launch_game.cc:211
+#: ../../src/ui_fsmenu/launch_game.cc:210
 msgid "Forbid fighting between players"
 msgstr "Verbied gevechten tussen spelers"
 
-#: ../../src/ui_fsmenu/launch_game.cc:238
+#: ../../src/ui_fsmenu/launch_game.cc:237
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Alle geslecteerde startposities negeren de startposities van de kaart"
 
-#: ../../src/ui_fsmenu/launch_game.cc:243
+#: ../../src/ui_fsmenu/launch_game.cc:242
 msgid "The starting positions are set by the scenario"
 msgstr "De start posities zijn door het scenario ingesteld"
 
-#: ../../src/ui_fsmenu/launch_game.cc:245
+#: ../../src/ui_fsmenu/launch_game.cc:244
 msgid "The starting positions are set by the saved game"
 msgstr "De begin posities zijn ingesteld door het bewaarde spel"
 
-#: ../../src/ui_fsmenu/launch_game.cc:248
+#: ../../src/ui_fsmenu/launch_game.cc:247
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Sta toe dat spelers aan het begin van het spel hun eigen start posities kiezen"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:256
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:485
+#: ../../src/ui_fsmenu/launch_game.cc:255
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:480
 #: ../../src/ui_fsmenu/scenariodetails.cc:46
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
 #: ../../src/wui/map_tags.cc:66 ../../src/wui/mapdetails.cc:136
 msgid "Scenario"
 msgstr "Scenario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:257
+#: ../../src/ui_fsmenu/launch_game.cc:256
 msgid "Win condition is set through the scenario"
 msgstr "Winconditie wordt tijdens het scenario gesteld"
 
-#: ../../src/ui_fsmenu/launch_game.cc:263
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:489
+#: ../../src/ui_fsmenu/launch_game.cc:262
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:484
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Opgeslagen Spel"
 
-#: ../../src/ui_fsmenu/launch_game.cc:265
+#: ../../src/ui_fsmenu/launch_game.cc:264
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Het spel is een bewaard spel - de winconditie was al eerder ingesteld."
 
-#: ../../src/ui_fsmenu/launch_game.cc:338
+#: ../../src/ui_fsmenu/launch_game.cc:337
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -5290,27 +5290,27 @@ msgstr "Kies Spel"
 msgid "Choose Replay"
 msgstr "Kies Herhaling"
 
-#: ../../src/ui_fsmenu/loadgame.cc:64
+#: ../../src/ui_fsmenu/loadgame.cc:62
 msgid "Show Filenames"
 msgstr "Toon Bestandsnamen"
 
-#: ../../src/ui_fsmenu/loadgame.cc:79
+#: ../../src/ui_fsmenu/loadgame.cc:77
 msgid "Load this replay"
 msgstr "Laad deze herhaling"
 
-#: ../../src/ui_fsmenu/loadgame.cc:81 ../../src/ui_fsmenu/mapselect.cc:66
+#: ../../src/ui_fsmenu/loadgame.cc:79 ../../src/ui_fsmenu/mapselect.cc:64
 msgid "Return to the multiplayer game setup"
 msgstr "Keer terug naar de instellingen van het multiplayer spel"
 
-#: ../../src/ui_fsmenu/loadgame.cc:82 ../../src/ui_fsmenu/mapselect.cc:68
+#: ../../src/ui_fsmenu/loadgame.cc:80 ../../src/ui_fsmenu/mapselect.cc:66
 msgid "Return to the single player menu"
 msgstr "Keer terug naar het menu alleen spelen"
 
-#: ../../src/ui_fsmenu/loadgame.cc:83
+#: ../../src/ui_fsmenu/loadgame.cc:81
 msgid "Load this game"
 msgstr "Laad dit spel"
 
-#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:387
+#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:383
 msgid "Online Game Settings"
 msgstr "Instellingen Online Spel"
 
@@ -5349,7 +5349,7 @@ msgstr "Kies een geldige bijnaam. Deze waarde mag alleen normale letters, cijfer
 msgid "Please enter your password!"
 msgstr "Voer alsjeblieft je wachtwoord in!"
 
-#: ../../src/ui_fsmenu/main.cc:235
+#: ../../src/ui_fsmenu/main.cc:231
 #, c-format
 msgid ""
 "Unable to create a Game instance!\n"
@@ -5357,200 +5357,200 @@ msgid ""
 "%s"
 msgstr "Niet in staat een spel situatie te creëren.\nFoutmelding:\n%s"
 
-#: ../../src/ui_fsmenu/main.cc:320
+#: ../../src/ui_fsmenu/main.cc:316
 msgid "Begin a new game"
 msgstr "Begin een nieuw spel"
 
-#: ../../src/ui_fsmenu/main.cc:320 ../../src/wlapplication_options.cc:218
+#: ../../src/ui_fsmenu/main.cc:316 ../../src/wlapplication_options.cc:218
 msgid "New Game"
 msgstr "Nieuw Spel"
 
-#: ../../src/ui_fsmenu/main.cc:322 ../../src/ui_fsmenu/random_game.cc:29
+#: ../../src/ui_fsmenu/main.cc:318 ../../src/ui_fsmenu/random_game.cc:29
 #: ../../src/wlapplication_options.cc:232
 msgid "New Random Game"
 msgstr "Nieuw Willekeurig Spel"
 
-#: ../../src/ui_fsmenu/main.cc:323
+#: ../../src/ui_fsmenu/main.cc:319
 msgid "Create a new random match"
 msgstr "Maak een nieuw willekeurig gevecht"
 
-#: ../../src/ui_fsmenu/main.cc:325 ../../src/wlapplication_options.cc:242
+#: ../../src/ui_fsmenu/main.cc:321 ../../src/wlapplication_options.cc:242
 msgid "Campaigns"
 msgstr "Veldtochten"
 
-#: ../../src/ui_fsmenu/main.cc:325
+#: ../../src/ui_fsmenu/main.cc:321
 msgid "Play a campaign"
 msgstr "Speel een veldtocht"
 
-#: ../../src/ui_fsmenu/main.cc:327 ../../src/wlapplication_options.cc:237
+#: ../../src/ui_fsmenu/main.cc:323 ../../src/wlapplication_options.cc:237
 msgid "Tutorials"
 msgstr "Uitlegspelen"
 
-#: ../../src/ui_fsmenu/main.cc:328
+#: ../../src/ui_fsmenu/main.cc:324
 msgid "Play one of our beginners’ tutorials"
 msgstr "Speel een van de beginners uitlegspelen."
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/ui_fsmenu/main.cc:330 ../../src/wlapplication_options.cc:222
+#: ../../src/ui_fsmenu/main.cc:326 ../../src/wlapplication_options.cc:222
 #: ../../src/wlapplication_options.cc:609
 #: ../../src/wui/game_main_menu_save_game.cc:48
 #: ../../src/wui/interactive_gamebase.cc:173
 msgid "Load Game"
 msgstr "Laad spel"
 
-#: ../../src/ui_fsmenu/main.cc:331
+#: ../../src/ui_fsmenu/main.cc:327
 msgid "Continue a saved game"
 msgstr "Ga verder met een bewaard spel"
 
-#: ../../src/ui_fsmenu/main.cc:352 ../../src/wlapplication_options.cc:279
+#: ../../src/ui_fsmenu/main.cc:348 ../../src/wlapplication_options.cc:279
 msgid "Continue Playing"
 msgstr "Ga door met spelen"
 
-#: ../../src/ui_fsmenu/main.cc:361
+#: ../../src/ui_fsmenu/main.cc:357
 #, c-format
 msgid "Map: %s"
 msgstr "Kaart: %s"
 
-#: ../../src/ui_fsmenu/main.cc:364
+#: ../../src/ui_fsmenu/main.cc:360
 #, c-format
 msgid "Win Condition: %s"
 msgstr "Win Condities: %s"
 
-#: ../../src/ui_fsmenu/main.cc:370
+#: ../../src/ui_fsmenu/main.cc:366
 #, c-format
 msgid "Gametime: %s"
 msgstr "Speeltijd: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. * 10:30'
-#: ../../src/ui_fsmenu/main.cc:376
+#: ../../src/ui_fsmenu/main.cc:372
 #, c-format
 msgid "Saved: %s"
 msgstr "Bewaard: %s"
 
-#: ../../src/ui_fsmenu/main.cc:384
+#: ../../src/ui_fsmenu/main.cc:380
 msgid "Online Game"
 msgstr "Online Spel"
 
-#: ../../src/ui_fsmenu/main.cc:385
+#: ../../src/ui_fsmenu/main.cc:381
 msgid "Join the Widelands lobby"
 msgstr "Kom bij de Widelands club"
 
-#: ../../src/ui_fsmenu/main.cc:388
+#: ../../src/ui_fsmenu/main.cc:384
 msgid "Log in as a registered user"
 msgstr "Log in als een geregistreerd gebruiker"
 
-#: ../../src/ui_fsmenu/main.cc:390 ../../src/wlapplication_options.cc:296
+#: ../../src/ui_fsmenu/main.cc:386 ../../src/wlapplication_options.cc:296
 msgid "LAN / Direct IP"
 msgstr "LAN / Direct IP"
 
-#: ../../src/ui_fsmenu/main.cc:391
+#: ../../src/ui_fsmenu/main.cc:387
 msgid "Play a private online game"
 msgstr "Speel een prive spel online"
 
-#: ../../src/ui_fsmenu/main.cc:394
+#: ../../src/ui_fsmenu/main.cc:390
 msgid "Create a new empty map"
 msgstr "Maak een nieuwe lege kaart"
 
-#: ../../src/ui_fsmenu/main.cc:397
+#: ../../src/ui_fsmenu/main.cc:393
 msgid "Create a new random map"
 msgstr "Maak een nieuwe willekeurige kaart"
 
-#: ../../src/ui_fsmenu/main.cc:399
+#: ../../src/ui_fsmenu/main.cc:395
 msgid "Edit an existing map"
 msgstr "Bewerk een bestaande kaart"
 
-#: ../../src/ui_fsmenu/main.cc:416 ../../src/wlapplication_options.cc:274
+#: ../../src/ui_fsmenu/main.cc:412 ../../src/wlapplication_options.cc:274
 msgid "Continue Editing"
 msgstr "Ga door met editten"
 
-#: ../../src/ui_fsmenu/main.cc:440
+#: ../../src/ui_fsmenu/main.cc:436
 msgid "Single Player…"
 msgstr "Eenspeler..."
 
-#: ../../src/ui_fsmenu/main.cc:441
+#: ../../src/ui_fsmenu/main.cc:437
 msgid "Multiplayer…"
 msgstr "Meerspeler..."
 
-#: ../../src/ui_fsmenu/main.cc:442
+#: ../../src/ui_fsmenu/main.cc:438
 msgid "Editor…"
 msgstr "Bewerken..."
 
-#: ../../src/ui_fsmenu/main.cc:444
+#: ../../src/ui_fsmenu/main.cc:440
 msgid "Begin or load a single-player campaign or free game"
 msgstr "Begin of laad een een-speler veldtocht of een vrij spel"
 
-#: ../../src/ui_fsmenu/main.cc:447
+#: ../../src/ui_fsmenu/main.cc:443
 msgid "Play with your friends over the internet"
 msgstr "Speel met je vrienden over internet."
 
-#: ../../src/ui_fsmenu/main.cc:450
+#: ../../src/ui_fsmenu/main.cc:446
 msgid "Launch the map editor"
 msgstr "Start met kaarten bewerken"
 
-#: ../../src/ui_fsmenu/main.cc:453 ../../src/wlapplication_options.cc:227
+#: ../../src/ui_fsmenu/main.cc:449 ../../src/wlapplication_options.cc:227
 msgid "Watch Replay"
 msgstr "Bekijk herhaling"
 
-#: ../../src/ui_fsmenu/main.cc:455
+#: ../../src/ui_fsmenu/main.cc:451
 msgid "Watch the replay of an old game"
 msgstr "Bekijk de herhaling van een oud spel"
 
-#: ../../src/ui_fsmenu/main.cc:458 ../../src/wlapplication_options.cc:292
+#: ../../src/ui_fsmenu/main.cc:454 ../../src/wlapplication_options.cc:292
 msgid "Add-Ons"
 msgstr "Uitbreidingen"
 
-#: ../../src/ui_fsmenu/main.cc:460
+#: ../../src/ui_fsmenu/main.cc:456
 msgid "Install and manage add-ons"
 msgstr "Instaleer en beheer Uitbreidingen"
 
-#: ../../src/ui_fsmenu/main.cc:462 ../../src/ui_fsmenu/options.cc:86
+#: ../../src/ui_fsmenu/main.cc:458 ../../src/ui_fsmenu/options.cc:86
 #: ../../src/wlapplication_options.cc:309
 msgid "Options"
 msgstr "Opties"
 
-#: ../../src/ui_fsmenu/main.cc:464
+#: ../../src/ui_fsmenu/main.cc:460
 msgid "Technical and game-related settings"
 msgstr "Technische en spel gerelateerde instellingen"
 
-#: ../../src/ui_fsmenu/main.cc:468
+#: ../../src/ui_fsmenu/main.cc:464
 msgid "Readme, License, and Credits"
 msgstr "Leesmij, Licentie en Credits"
 
-#: ../../src/ui_fsmenu/main.cc:470 ../../src/wlapplication_options.cc:283
+#: ../../src/ui_fsmenu/main.cc:466 ../../src/wlapplication_options.cc:283
 msgid "Exit Widelands"
 msgstr "Verlaat Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:472
+#: ../../src/ui_fsmenu/main.cc:468
 msgid "Quit the game"
 msgstr "Stop het spel"
 
 #. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
-#: ../../src/ui_fsmenu/main.cc:477
+#: ../../src/ui_fsmenu/main.cc:473
 #, c-format
 msgid "Version %1$s"
 msgstr ""
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:480
+#: ../../src/ui_fsmenu/main.cc:476
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
 msgstr "(C) %1%-%2% door het Widelands Development Team . Licentie onder de GNU General Public License V2.0"
 
-#: ../../src/ui_fsmenu/main.cc:812
+#: ../../src/ui_fsmenu/main.cc:808
 msgid "Desyncing Add-On Found"
 msgstr "Onregelmatigheden Uitbreiding Gevonden"
 
-#: ../../src/ui_fsmenu/main.cc:813
+#: ../../src/ui_fsmenu/main.cc:809
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Een uitbreiding die aanstaat veroorzaakt onregelmatigheden. Ga verder op eigen risico."
 
-#: ../../src/ui_fsmenu/main.cc:915 ../../src/ui_fsmenu/netsetup_lan.cc:330
+#: ../../src/ui_fsmenu/main.cc:911 ../../src/ui_fsmenu/netsetup_lan.cc:330
 msgid "No tribes found!"
 msgstr "Geen stammen gevonden!"
 
-#: ../../src/ui_fsmenu/main.cc:916 ../../src/ui_fsmenu/netsetup_lan.cc:331
+#: ../../src/ui_fsmenu/main.cc:912 ../../src/ui_fsmenu/netsetup_lan.cc:331
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Geen stammen gevonden in data/tribes/initialization/[tribename]/init.lua."
 
@@ -5599,59 +5599,59 @@ msgstr "(geen kaart)"
 msgid "Choose Map"
 msgstr "Kies Kaart"
 
-#: ../../src/ui_fsmenu/mapselect.cc:81
+#: ../../src/ui_fsmenu/mapselect.cc:79
 msgid "Show all maps"
 msgstr "Toon alle kaarten"
 
-#: ../../src/ui_fsmenu/mapselect.cc:83
+#: ../../src/ui_fsmenu/mapselect.cc:81
 msgid "Show original map names"
 msgstr "Toon originele kaartnamen"
 
-#: ../../src/ui_fsmenu/mapselect.cc:101
+#: ../../src/ui_fsmenu/mapselect.cc:99
 msgid "Filter by official status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:103
+#: ../../src/ui_fsmenu/mapselect.cc:101
 msgid "Official & Unofficial"
 msgstr "Officieel & Onofficieel"
 
-#: ../../src/ui_fsmenu/mapselect.cc:103
+#: ../../src/ui_fsmenu/mapselect.cc:101
 msgid "Show both official and unofficial maps"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:115
+#: ../../src/ui_fsmenu/mapselect.cc:113
 msgid "Filter by desired line-up"
 msgstr ""
 
 #. * TRANSLATORS: Filter entry in map selection. Other entries are "Free for
 #. all"",
 #. * "Teams of 2" etc.
-#: ../../src/ui_fsmenu/mapselect.cc:119
+#: ../../src/ui_fsmenu/mapselect.cc:117
 msgid "Any Teams"
 msgstr "Alle Teams"
 
-#: ../../src/ui_fsmenu/mapselect.cc:119
+#: ../../src/ui_fsmenu/mapselect.cc:117
 msgid "Do not filter by line-up suggestions"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:134
+#: ../../src/ui_fsmenu/mapselect.cc:132
 msgid "Filter by balancing status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:471
+#: ../../src/ui_fsmenu/mapselect.cc:469
 msgid "Balanced & Unbalanced"
 msgstr "Gebalanceerd & Ongebalanceerd"
 
-#: ../../src/ui_fsmenu/mapselect.cc:471
+#: ../../src/ui_fsmenu/mapselect.cc:469
 msgid "Show both balanced and unbalanced maps"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:476
+#: ../../src/ui_fsmenu/mapselect.cc:474
 msgctxt "balancing"
 msgid "Unspecified"
 msgstr "Niet gespecificeerd"
 
-#: ../../src/ui_fsmenu/mapselect.cc:477
+#: ../../src/ui_fsmenu/mapselect.cc:475
 msgid "The map does not specify whether it is balanced"
 msgstr ""
 
@@ -5659,12 +5659,12 @@ msgstr ""
 msgid "Back"
 msgstr "Terug"
 
-#: ../../src/ui_fsmenu/menu.cc:270
+#: ../../src/ui_fsmenu/menu.cc:269
 #, c-format
 msgid "Back to ‘%s’"
 msgstr "Terug naar '%s'"
 
-#: ../../src/ui_fsmenu/menu.cc:277
+#: ../../src/ui_fsmenu/menu.cc:276
 msgid "Close window"
 msgstr "Sluit venster"
 
@@ -5861,7 +5861,7 @@ msgid "Spectator"
 msgstr "Toeschouwer"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:193
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:349
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:344
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:152
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "Type"
@@ -5874,60 +5874,60 @@ msgid "Team"
 msgstr "Team"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:324
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:325
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:319
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:320
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:178
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:179
 msgid "Random AI"
 msgstr "Willekeurige AI"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:330
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:332
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:325
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:327
 msgid "Shared in"
 msgstr "Gedeeld in"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:337
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:338
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:332
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:333
 #: ../../src/ui_fsmenu/netsetup_lan.cc:233
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:188
 msgid "Closed"
 msgstr "Gesloten"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:342
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:337
 #: ../../src/ui_fsmenu/netsetup_lan.cc:230
 msgid "Open"
 msgstr "Open"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:349
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:344
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "Human"
 msgstr "Mens"
 
 #. * TRANSLATORS: This is an option in multiplayer setup for sharing
 #. another player's starting position.
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:425
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:420
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:84
 #, c-format
 msgid "Shared in Player %u"
 msgstr "Gedeeld in speler %u"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:486
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:481
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:284
 msgid "Start type is set via the scenario"
 msgstr "Starttype is ingesteld door het scenario"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:558
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:553
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:378
 msgid "No Team"
 msgstr "Geen Team"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:564
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:559
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:384
 #, c-format
 msgid "Team %d"
 msgstr "Team %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:668
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:664
 msgid "Clients"
 msgstr "Cliënten"
 
@@ -6179,7 +6179,7 @@ msgstr "De vertaling in het %1% is voor %2%%% volledig."
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Als je ons wilt helpen met vertalen, ga dan naar %s"
 
-#: ../../src/ui_fsmenu/random_game.cc:74
+#: ../../src/ui_fsmenu/random_game.cc:73
 msgid ""
 "The random map generator is still in beta stage. The maps it generates are "
 "usually – but not always – well playable. Seafaring and artifacts are not "
@@ -6187,11 +6187,11 @@ msgid ""
 "in random matches."
 msgstr "De willekeurige kaart ontwerper is nog in de beta fase. De kaarten die het ontwerpt zijn meestal – maar niet altijd – goed speelbaar. Zeevaart en kunstschatten worden niet onderhouden. Uitbreidingen van de Wereld, Stammen en Script catagorien zijn uitgeschakeld in de willekeurige gevechten."
 
-#: ../../src/ui_fsmenu/random_game.cc:128
+#: ../../src/ui_fsmenu/random_game.cc:127
 msgid "Map Generation Error"
 msgstr "Kaart Ontwerp Fout"
 
-#: ../../src/ui_fsmenu/random_game.cc:129
+#: ../../src/ui_fsmenu/random_game.cc:128
 msgid ""
 "The random map generator was unable to generate a suitable map. This happens"
 " occasionally because the generator is still in beta stage. Please try again"
