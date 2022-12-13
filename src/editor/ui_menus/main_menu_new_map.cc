@@ -87,6 +87,8 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
 	}
 	box_.add(&button_box_);
 
+	list_.double_clicked.connect([this](uint32_t /* item */) { clicked_create_map(); });
+
 	set_center_panel(&box_);
 	fill_list();
 	center_to_parent();

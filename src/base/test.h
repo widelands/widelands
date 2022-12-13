@@ -135,13 +135,13 @@ inline bool compare(const unsigned a,
 	                                   // readability-avoid-const-params-in-decls, google-runtime-int
 	return static_cast<long>(a) == b;  // NOLINT suppress google-runtime-int
 }
-inline bool compare(const unsigned long a,
-                    const int b) {  // NOLINT false-positive
+inline bool compare(const unsigned long a,  // NOLINT suppress google-runtime-int
+                    const int b) {          // NOLINT false-positive
 	                                 // readability-avoid-const-params-in-decls, google-runtime-int
 	return static_cast<long long>(a) == b;  // NOLINT suppress google-runtime-int
 }
-inline bool compare(const unsigned long long a,
-                    const int b) {  // NOLINT false-positive
+inline bool compare(const unsigned long long a,  // NOLINT suppress google-runtime-int
+                    const int b) {               // NOLINT false-positive
 	                                 // readability-avoid-const-params-in-decls, google-runtime-int
 	return static_cast<long long>(a) == b;  // NOLINT suppress google-runtime-int
 }
