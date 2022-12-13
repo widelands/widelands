@@ -18,6 +18,7 @@
 
 #include "logic/map_objects/tribes/ship.h"
 
+#include <array>
 #include <memory>
 
 #include "base/log.h"
