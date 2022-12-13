@@ -94,7 +94,7 @@ private:
 	// Size
 	MapSizeBox map_size_box_;
 
-	uint8_t max_players_;
+	uint8_t max_players_{2U};
 	UI::SpinBox players_;
 
 	// World + Resources

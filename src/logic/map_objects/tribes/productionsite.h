@@ -183,8 +183,15 @@ public:
 	[[nodiscard]] const Programs& programs() const {
 		return programs_;
 	}
-	Programs& mutable_programs() {
+	[[nodiscard]] Programs& mutable_programs() {
 		return programs_;
+	}
+
+	[[nodiscard]] bool is_infinite_production_useful() const {
+		return is_infinite_production_useful_;
+	}
+	void set_infinite_production_useful(const bool u) {
+		is_infinite_production_useful_ = u;
 	}
 
 	[[nodiscard]] const std::string& out_of_resource_title() const {
@@ -294,6 +301,7 @@ private:
 	std::set<std::string> collected_immovables_;
 	std::set<std::string> created_immovables_;
 	Programs programs_;
+	bool is_infinite_production_useful_;
 	std::string out_of_resource_title_;
 	std::string out_of_resource_heading_;
 	std::string out_of_resource_message_;
@@ -387,13 +395,13 @@ public:
 	void set_economy(Economy*, WareWorker) override;
 
 	using InputQueues = std::vector<InputQueue*>;
-	const InputQueues& inputqueues() const {
+	[[nodiscard]] const InputQueues& inputqueues() const {
 		return input_queues_;
 	}
 
-	const std::vector<Worker*>& workers() const;
+	[[nodiscard]] const std::vector<Worker*>& workers() const;
 
-	bool can_start_working() const;
+	[[nodiscard]] bool can_start_working() const;
 
 	/// sends a message to the player e.g. if the building's resource can't be found
 	void notify_player(Game& game,
@@ -403,7 +411,7 @@ public:
 
 	void set_default_anim(const std::string&);
 
-	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
+	[[nodiscard]] std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 	// This function forces the productionsite to interrupt whatever it is doing ASAP,
 	// and start the specified program immediately afterwards. If that program expects
@@ -411,7 +419,12 @@ public:
 	void set_next_program_override(Game&, const std::string&, MapObject* extra_data);
 	// Returns `true` if `set_next_program_override()` has been called recently
 	// and the force-started program has not terminated yet.
-	bool has_forced_state() const;
+	[[nodiscard]] bool has_forced_state() const;
+
+	[[nodiscard]] bool infinite_production() const {
+		return infinite_production_;
+	}
+	void set_infinite_production(bool);
 
 protected:
 	void update_statistics_string(std::string* statistics) override;
@@ -506,6 +519,7 @@ protected:
 	uint32_t actual_percent_{0U};  // basically this is percent * 10 to avoid floats
 	Time last_program_end_time{0U};
 	bool is_stopped_{false};
+	bool infinite_production_{false};
 	std::string default_anim_{"idle"};  // normally "idle", "empty", if empty mine.
 
 private:

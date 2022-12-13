@@ -5750,11 +5750,11 @@ msgstr "Здания"
 
 #: ../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
-msgstr "Неподвижные объекты (племя)"
+msgstr "Статичные объекты (племена)"
 
 #: ../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
-msgstr "Неподвижные объекты (Мир)"
+msgstr "Статичные объекты (Мир)"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8

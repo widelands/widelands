@@ -198,10 +198,10 @@ public:
 		std::vector<int8_t> neuron_functs{std::vector<int8_t>(kNeuronPoolSize, 0)};
 		std::vector<uint32_t> f_neurons{std::vector<uint32_t>(kFNeuronPoolSize, 0)};
 		std::unordered_map<Widelands::DescriptionIndex, uint32_t> remaining_basic_buildings;
-	} ai_data;
+	};
 
-	AiPersistentState* get_mutable_ai_persistent_state() {
-		return &ai_data;
+	[[nodiscard]] AiPersistentState* get_mutable_ai_persistent_state() {
+		return &ai_data_;
 	}
 
 	/// Per-player field information.
@@ -644,43 +644,47 @@ private:
 	/// those of the 6 surrounding edges/triangles that are not seen from another node.
 	void rediscover_node(const Map&, const FCoords&);
 
+	using StatisticsMap = std::map<DescriptionIndex, std::vector<Quantity>>;
+
+	struct SoldierStatistics {
+		const unsigned health, attack, defense, evade;
+		Quantity total{0U};
+		SoldierStatistics(unsigned h, unsigned a, unsigned d, unsigned e)
+		   : health(h), attack(a), defense(d), evade(e) {
+		}
+		bool operator==(const SoldierStatistics& s) const {
+			return s.health == health && s.attack == attack && s.defense == defense &&
+			       s.evade == evade;
+		}
+	};
+
 	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteFieldTerrainChanged>>
 	   field_terrain_changed_subscriber_;
 
-	MessageQueue messages_;
-
 	EditorGameBase& egbase_;
-	uint8_t initialization_index_;
+	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
+
+	std::unique_ptr<Field[]> fields_;
+
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
-	RGBColor playercolor_;
-	TeamNumber team_number_{0U};
-	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
-	bool see_all_{false};
-	const PlayerNumber player_number_;
-	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
-	bool random_tribe_{false};
-	uint32_t casualties_{0U};
-	uint32_t kills_{0U};
-	uint32_t msites_lost_{0U};
-	uint32_t msites_defeated_{0U};
-	uint32_t civil_blds_lost_{0U};
-	uint32_t civil_blds_defeated_{0U};
 
 	std::list<std::string> remaining_shipnames_;
 	std::list<std::string> remaining_portnames_;
-	// If we run out of ship/port names, we'll want to continue with unique numbers
-	uint32_t ship_name_counter_{0U};
-	uint32_t port_name_counter_{0U};
 
-	std::unique_ptr<Field[]> fields_;
+	PlayerBuildingStats building_stats_;
+	std::vector<SoldierStatistics> soldier_stats_;
+
+	std::string name_;                     // Player name
+	std::string ai_;                       /**< Name of preferred AI implementation */
+	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
+
 	std::set<DescriptionIndex> allowed_worker_types_;
 	std::set<DescriptionIndex> allowed_building_types_;
+
 	std::map<Serial, std::unique_ptr<Economy>> economies_;
 	std::set<Serial> ships_;
-	std::string name_;  // Player name
-	std::string ai_;    /**< Name of preferred AI implementation */
 
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics
@@ -691,8 +695,6 @@ private:
 	 * Wares consumed (by ware id) since the last call to @ref sample_statistics
 	 */
 	std::map<DescriptionIndex, Quantity> current_consumed_statistics_;
-
-	using StatisticsMap = std::map<DescriptionIndex, std::vector<Quantity>>;
 
 	/**
 	 * Statistics of wares produced over the life of the game, indexed as
@@ -711,36 +713,41 @@ private:
 	 * life of the game, indexed as
 	 * ware_stocks_[ware_id][time_index]
 	 */
-	StatisticsMap ware_stocks_, worker_stocks_;
+	StatisticsMap ware_stocks_;
+	StatisticsMap worker_stocks_;
 
 	std::set<DescriptionIndex> muted_building_types_;
 
 	std::set<PlayerNumber> forbid_attack_;
 
-	PlayerBuildingStats building_stats_;
+	MessageQueue messages_;
 
-	struct SoldierStatistics {
-		const unsigned health, attack, defense, evade;
-		Quantity total{0U};
-		SoldierStatistics(unsigned h, unsigned a, unsigned d, unsigned e)
-		   : health(h), attack(a), defense(d), evade(e) {
-		}
-		bool operator==(const SoldierStatistics& s) const {
-			return s.health == health && s.attack == attack && s.defense == defense &&
-			       s.evade == evade;
-		}
-	};
-	std::vector<SoldierStatistics> soldier_stats_;
+	AiPersistentState ai_data_;
 
-	bool is_picking_custom_starting_position_{false};
+	uint32_t casualties_{0U};
+	uint32_t kills_{0U};
+	uint32_t msites_lost_{0U};
+	uint32_t msites_defeated_{0U};
+	uint32_t civil_blds_lost_{0U};
+	uint32_t civil_blds_defeated_{0U};
 
-	bool allow_additional_expedition_items_{true};
-
-	bool hidden_from_general_statistics_{false};
+	// If we run out of ship names, we'll want to continue with unique numbers
+	uint32_t ship_name_counter_{0U};
+	uint32_t port_name_counter_{0U};
 
 	FxId message_fx_;
 	FxId attack_fx_;
 	FxId occupied_fx_;
+
+	RGBColor playercolor_;
+	const PlayerNumber player_number_;
+	TeamNumber team_number_{0U};
+	uint8_t initialization_index_;
+	bool see_all_{false};
+	bool random_tribe_{false};
+	bool is_picking_custom_starting_position_{false};
+	bool allow_additional_expedition_items_{true};
+	bool hidden_from_general_statistics_{false};
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };

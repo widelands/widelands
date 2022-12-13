@@ -106,7 +106,8 @@ enum class QueueCommandTypes : uint8_t {
 	kMarkMapObjectForRemoval,
 	kDiplomacy,
 	kPinnedNote,
-	kShipPortName,  // 206
+	kToggleInfiniteProduction,
+	kShipPortName,  // 207
 
 	kNetCheckSync = 250,
 	kReplaySyncWrite,

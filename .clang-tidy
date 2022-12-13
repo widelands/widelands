@@ -1,0 +1,5 @@
+Checks:          '*,-android*,-fuchsia*,-llvm-header-guard,-cert-dcl50-cpp,-cppcoreguidelines-pro-type-vararg,-hicpp-vararg'
+WarningsAsErrors: ''
+HeaderFilterRegex: 'src/'
+AnalyzeTemporaryDtors: true
+FormatStyle:     none

@@ -104,6 +104,7 @@ SUPPRESSED_CHECKS = {
     '[cppcoreguidelines-prefer-member-initializer]',
     '[google-readability-casting]',
     '[hicpp-named-parameter]',
+    '[readability-named-parameter]',
     '[hicpp-use-nullptr]',
     '[misc-unused-using-decls]',
     '[modernize-use-default-member-init]',
@@ -135,11 +136,13 @@ def main():
 
     log_file = sys.argv[1]
 
-    errors = 0
+    errors = []
 
     with open(log_file) as checkme:
         contents = checkme.readlines()
         for line in contents:
+            if line in errors:
+                continue
             if 'third_party' in line:
                 continue
             # We're not piloting alpha-level checks
@@ -151,15 +154,16 @@ def main():
                     check_suppressed = True
                     break
             if not check_suppressed and CHECK_REGEX.match(line):
-                print(line.strip())
-                errors = errors + 1
+                line = line.strip()
+                print(line)
+                errors.append(line)
 
-    if errors > 0:
+    if len(errors) > 0:
         print('########################################################')
         print('########################################################')
         print('###                                                  ###')
         print('###   Found %s error(s)                               ###'
-              % errors)
+              % len(errors))
         print('###                                                  ###')
         print('########################################################')
         print('########################################################')
