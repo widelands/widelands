@@ -45,7 +45,7 @@ private:
 	void load_savegame_from_file(const std::string& gamefilename,
 	                             std::vector<SavegameData>& loaded_games) const;
 	void load(const std::string& to_be_loaded, std::vector<SavegameData>& loaded_games) const;
-	virtual bool is_valid_savegame(const std::string& filename) const {
+	[[nodiscard]] virtual bool is_valid_savegame(const std::string& filename) const {
 		return ends_with(filename, kSavegameExtension);
 	}
 

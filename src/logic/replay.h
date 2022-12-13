@@ -80,7 +80,7 @@ struct ReplayPreloader {
 	explicit ReplayPreloader(const std::string& gamefilename);
 	~ReplayPreloader();
 
-	inline const std::string& file() const {
+	[[nodiscard]] inline const std::string& file() const {
 		return temp_file_.empty() ? source_file_ : temp_file_;
 	}
 
