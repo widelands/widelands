@@ -1148,7 +1148,7 @@ bool WLApplication::init_settings() {
 
 	int64_t last_start = get_config_int("last_start", 0);
 	int64_t now = time(nullptr);
-	if (last_start + static_cast<uint64_t>(12 * 60) * 60 < now ||
+	if (last_start + static_cast<int64_t>(12 * 60) * 60 < now ||
 	    get_config_string("uuid", "").empty()) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h
