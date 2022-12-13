@@ -144,6 +144,7 @@ private:
 	void set_button_visibility(bool);
 
 	void action(MenuTarget);
+	void exit(bool force = false);
 	bool check_desyncing_addon();
 
 	MenuCapsule menu_capsule_;

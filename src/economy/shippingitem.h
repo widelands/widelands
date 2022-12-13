@@ -38,8 +38,7 @@ class Worker;
  * encapsulated in this structure during shipping and the waiting time in the @ref PortDock.
  */
 struct ShippingItem {
-	ShippingItem() {
-	}
+	ShippingItem() = default;
 	explicit ShippingItem(WareInstance& ware);
 	explicit ShippingItem(Worker& worker);
 

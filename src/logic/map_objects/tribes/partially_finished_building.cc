@@ -29,13 +29,7 @@
 namespace Widelands {
 
 PartiallyFinishedBuilding::PartiallyFinishedBuilding(const BuildingDescr& gdescr)
-   : Building(gdescr),
-     building_(nullptr),
-     builder_request_(nullptr),
-     working_(false),
-     work_steptime_(0),
-     work_completed_(0),
-     work_steps_(0) {
+   : Building(gdescr) {
 }
 
 /*

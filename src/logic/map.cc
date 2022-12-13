@@ -132,15 +132,7 @@ Map IMPLEMENTATION
  * This really identifies a map like it is in the game
  */
 
-Map::Map()
-   : nrplayers_(0),
-     scenario_types_(NO_SCENARIO),
-     width_(0),
-     height_(0),
-     localize_author_(false),
-     pathfieldmgr_(new PathfieldManager),
-     allows_seafaring_(false),
-     waterway_max_length_(0) {
+Map::Map() : pathfieldmgr_(new PathfieldManager) {
 }
 
 Map::~Map() {
@@ -1107,7 +1099,7 @@ The actual logic behind find_bobs and find_reachable_bobs.
 */
 struct FindBobsCallback {
 	FindBobsCallback(std::vector<Bob*>* const list, const FindBob& functor)
-	   : list_(list), functor_(functor), found_(0) {
+	   : list_(list), functor_(functor) {
 	}
 
 	void operator()(const EditorGameBase& /* egbase */, const FCoords& cur) {
@@ -1127,7 +1119,7 @@ struct FindBobsCallback {
 
 	std::vector<Bob*>* list_;
 	const FindBob& functor_;
-	uint32_t found_;
+	uint32_t found_{0U};
 };
 
 /*
@@ -1184,7 +1176,7 @@ The actual logic behind find_immovables and find_reachable_immovables.
 */
 struct FindImmovablesCallback {
 	FindImmovablesCallback(std::vector<ImmovableFound>* const list, const FindImmovable& functor)
-	   : list_(list), functor_(functor), found_(0) {
+	   : list_(list), functor_(functor) {
 	}
 
 	void operator()(const EditorGameBase& /* egbase */, const FCoords& cur) {
@@ -1208,7 +1200,7 @@ struct FindImmovablesCallback {
 
 	std::vector<ImmovableFound>* list_;
 	const FindImmovable& functor_;
-	uint32_t found_;
+	uint32_t found_{0U};
 };
 
 /*
@@ -1290,7 +1282,7 @@ The actual logic behind find_fields and find_reachable_fields.
 */
 struct FindNodesCallback {
 	FindNodesCallback(std::vector<Coords>* const list, const FindNode& functor)
-	   : list_(list), functor_(functor), found_(0) {
+	   : list_(list), functor_(functor) {
 	}
 
 	void operator()(const EditorGameBase& egbase, const FCoords& cur) {
@@ -1304,7 +1296,7 @@ struct FindNodesCallback {
 
 	std::vector<Coords>* list_;
 	const FindNode& functor_;
-	uint32_t found_;
+	uint32_t found_{0U};
 };
 
 /*
@@ -2327,8 +2319,6 @@ bool Map::can_reach_by_water(const Coords& field) const {
 	if ((fc.field->nodecaps() & MOVECAPS_WALK) == 0) {
 		return false;
 	}
-
-	FCoords neighb;
 
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		if ((get_neighbour(fc, dir).field->nodecaps() & MOVECAPS_SWIM) != 0) {

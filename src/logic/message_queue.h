@@ -41,8 +41,7 @@ struct MessageQueue {
 		counts_[static_cast<int>(Message::Status::kArchived)] = 0;
 	}
 
-	~MessageQueue() {
-	}
+	~MessageQueue() = default;
 
 	//  Make some selected inherited members public.
 	//  TODO(sirver): This is weird design. Instead pass out a const ref& to

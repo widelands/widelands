@@ -30,24 +30,23 @@ class Player;
 struct FindImmovable {
 private:
 	struct BaseCapsule {
-		BaseCapsule() : refcount(1) {
-		}
-		virtual ~BaseCapsule() {
-		}
+		BaseCapsule() = default;
+		virtual ~BaseCapsule() = default;
 
 		void addref() {
 			++refcount;
 		}
 		void deref() {
-			if (--refcount == 0)
+			if (--refcount == 0) {
 				delete this;
+			}
 		}
 		[[nodiscard]] virtual bool accept(const BaseImmovable&) const = 0;
 
-		int refcount;
+		int refcount{1};
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
-		explicit Capsule(const T& init_op) : op(init_op) {
+		Capsule(const T& init_op) : op(init_op) {  // NOLINT allow implicit conversion
 		}
 		[[nodiscard]] bool accept(const BaseImmovable& imm) const override {
 			return op.accept(imm);
@@ -59,7 +58,7 @@ private:
 	BaseCapsule* capsule;
 
 public:
-	explicit FindImmovable(const FindImmovable& o) {
+	FindImmovable(const FindImmovable& o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -68,13 +67,16 @@ public:
 		capsule = nullptr;
 	}
 	FindImmovable& operator=(const FindImmovable& o) {
+		if (&o == this) {
+			return *this;
+		}
 		capsule->deref();
 		capsule = o.capsule;
 		capsule->addref();
 		return *this;
 	}
 
-	template <typename T> FindImmovable(const T& op) {
+	template <typename T> FindImmovable(const T& op) {  // NOLINT allow implicit conversion
 		capsule = new Capsule<T>(op);
 	}
 
@@ -116,8 +118,7 @@ private:
 	int32_t attrib;
 };
 struct FindImmovablePlayerImmovable {
-	FindImmovablePlayerImmovable() {
-	}
+	FindImmovablePlayerImmovable() = default;
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
@@ -130,8 +131,7 @@ struct FindImmovablePlayerMilitarySite {
 	const Player& player;
 };
 struct FindImmovableAttackTarget {
-	FindImmovableAttackTarget() {
-	}
+	FindImmovableAttackTarget() = default;
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };

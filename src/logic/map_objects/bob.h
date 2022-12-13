@@ -42,16 +42,15 @@ public:
 	friend struct MapBobdataPacket;
 
 	BobDescr(const std::string& init_descname,
-	         const MapObjectType type,
+	         MapObjectType type,
 	         MapObjectDescr::OwnerType owner_type,
 	         const LuaTable& table);
 	BobDescr(const std::string& init_name,
 	         const std::string& init_descname,
-	         const MapObjectType type,
+	         MapObjectType type,
 	         MapObjectDescr::OwnerType owner_type);
 
-	~BobDescr() override {
-	}
+	~BobDescr() override = default;
 
 	Bob& create(EditorGameBase&, Player* owner, const Coords&) const;
 
@@ -149,6 +148,8 @@ public:
 	friend struct MapBobdataPacket;
 	friend struct MapBobPacket;
 
+	~Bob() override;
+
 	struct State;
 	using Ptr = void (Bob::*)(Game&, State&);
 	using PtrSignal = void (Bob::*)(Game&, State&, const std::string&);
@@ -190,37 +191,29 @@ public:
 	 * \see class Bob for in-depth explanation
 	 */
 	struct State {
-		explicit State(const Task* const the_task = nullptr)
-		   : task(the_task),
-		     ivar1(0),
-		     ivar2(0),
-		     ivar3(0),
-		     coords(Coords::null()),
-		     path(nullptr),
-		     route(nullptr),
-		     program(nullptr) {
+		explicit State(const Task* const the_task = nullptr) : task(the_task) {
 		}
 
 		const Task* task;
-		int32_t ivar1;
-		int32_t ivar2;
-		int32_t ivar3;
+		int32_t ivar1{0};
+		int32_t ivar2{0};
+		int32_t ivar3{0};
 		ObjectPointer objvar1;
 		std::string svar1;
 
-		Coords coords;
+		Coords coords{Coords::null()};
 		DirAnimations diranims;
-		Path* path;
-		Route* route;
-		const MapObjectProgram* program;  ///< pointer to current program
+		Path* path{nullptr};
+		Route* route{nullptr};
+		const MapObjectProgram* program{nullptr};  ///< pointer to current program
 	};
 
 	MO_DESCR(BobDescr)
 
-	uint32_t get_current_anim() const {
+	[[nodiscard]] uint32_t get_current_anim() const {
 		return anim_;
 	}
-	const Time& get_animstart() const {
+	[[nodiscard]] const Time& get_animstart() const {
 		return animstart_;
 	}
 
@@ -230,14 +223,15 @@ public:
 	void schedule_destroy(Game&);
 	void schedule_act(Game&, const Duration& tdelta);
 	void skip_act();
-	Vector2f calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float scale) const;
+	[[nodiscard]] Vector2f
+	calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float scale) const;
 	void set_owner(Player*);
 
 	void set_position(EditorGameBase&, const Coords&);
-	const FCoords& get_position() const {
+	[[nodiscard]] const FCoords& get_position() const {
 		return position_;
 	}
-	Bob* get_next_bob() const {
+	[[nodiscard]] Bob* get_next_bob() const {
 		return linknext_;
 	}
 
@@ -268,51 +262,48 @@ public:
 	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game&, char const*);
 	void start_task_idle(Game&, uint32_t anim, int32_t timeout, Vector2i offset = Vector2i::zero());
-	bool is_idle() const;
+	[[nodiscard]] bool is_idle() const;
 
 	/// This can fail (and return false). Therefore the caller must check the
 	/// result and find something else for the bob to do. Otherwise there will
 	/// be a "failed to act" error.
 	bool start_task_movepath(Game&,
 	                         const Coords& dest,
-	                         const int32_t persist,
+	                         int32_t persist,
 	                         const DirAnimations&,
-	                         const bool forceonlast = false,
-	                         const int32_t only_step = -1,
-	                         const bool forceall = false) __attribute__((warn_unused_result));
+	                         bool forceonlast = false,
+	                         int32_t only_step = -1,
+	                         bool forceall = false) __attribute__((warn_unused_result));
 
 	/// This can fail (and return false). Therefore the caller must check the
 	/// result and find something else for the bob to do. Otherwise there will
 	/// be a "failed to act" error.
-	void start_task_movepath(Game&,
-	                         const Path&,
-	                         const DirAnimations&,
-	                         const bool forceonlast = false,
-	                         const int32_t only_step = -1);
+	void start_task_movepath(
+	   Game&, const Path&, const DirAnimations&, bool forceonlast = false, int32_t only_step = -1);
 
 	bool start_task_movepath(Game&,
 	                         const Path&,
-	                         const int32_t index,
+	                         int32_t index,
 	                         const DirAnimations&,
-	                         const bool forceonlast = false,
-	                         const int32_t only_step = -1) __attribute__((warn_unused_result));
+	                         bool forceonlast = false,
+	                         int32_t only_step = -1) __attribute__((warn_unused_result));
 
 	void start_task_move(Game& game, int32_t dir, const DirAnimations&, bool);
 
 	// higher level handling (task-based)
-	State& top_state() {
-		assert(stack_.size());
+	[[nodiscard]] State& top_state() {
+		assert(!stack_.empty());
 		return *stack_.rbegin();
 	}
-	State* get_state() {
-		return stack_.size() ? &*stack_.rbegin() : nullptr;
+	[[nodiscard]] State* get_state() {
+		return !stack_.empty() ? &*stack_.rbegin() : nullptr;
 	}
 
-	std::string get_signal() {
+	[[nodiscard]] std::string get_signal() const {
 		return signal_;
 	}
-	State* get_state(const Task&);
-	State const* get_state(const Task&) const;
+	[[nodiscard]] State* get_state(const Task&);
+	[[nodiscard]] State const* get_state(const Task&) const;
 	void push_task(Game& game, const Task& task, const Duration& tdelta = Duration(10));
 	void pop_task(Game&);
 
@@ -326,7 +317,7 @@ public:
 	void set_animation(const EditorGameBase&, uint32_t anim);
 
 	/// \return true if we're currently walking
-	bool is_walking() {
+	[[nodiscard]] bool is_walking() const {
 		return walking_ != IDLE;
 	}
 
@@ -335,13 +326,12 @@ public:
 	 * It is only introduced here because profiling showed
 	 * that soldiers spend a lot of time in the node blocked check.
 	 */
-	Bob* get_next_on_field() const {
+	[[nodiscard]] Bob* get_next_on_field() const {
 		return linknext_;
 	}
 
 protected:
 	explicit Bob(const BobDescr& descr);
-	~Bob() override;
 
 private:
 	void do_act(Game&);
@@ -364,14 +354,14 @@ private:
 	static Task const taskMovepath;
 	static Task const taskMove;
 
-	FCoords position_;  ///< where are we right now?
-	Bob* linknext_;     ///< next object on this node
-	Bob** linkpprev_;
-	uint32_t anim_;
-	Time animstart_;  ///< gametime when the animation was started
-	WalkingDir walking_;
-	Time walkstart_;  ///< start time (used for interpolation)
-	Time walkend_;    ///< end time (used for interpolation)
+	FCoords position_{Coords(0, 0), nullptr};  ///< where are we right now?
+	Bob* linknext_{nullptr};                   ///< next object on this node
+	Bob** linkpprev_{nullptr};
+	uint32_t anim_{0U};
+	Time animstart_{0U};  ///< gametime when the animation was started
+	WalkingDir walking_{IDLE};
+	Time walkstart_{0U};  ///< start time (used for interpolation)
+	Time walkend_{0U};    ///< end time (used for interpolation)
 
 	// Task framework variables
 	std::vector<State> stack_;
@@ -383,7 +373,7 @@ private:
 	 * only the earliest \ref Cmd_Act issued during one act phase is actually
 	 * executed. Subsequent \ref Cmd_Act could interfere and are eliminated.
 	 */
-	uint32_t actid_;
+	uint32_t actid_{0U};
 
 	/**
 	 * Whether something was scheduled during this act phase.
@@ -392,8 +382,8 @@ private:
 	 * Bobs that hang themselves up. So e.g. \ref skip_act() also sets this
 	 * to \c true, even though it technically doesn't schedule anything.
 	 */
-	bool actscheduled_;
-	bool in_act_;  ///< if do_act is currently running
+	bool actscheduled_{false};
+	bool in_act_{false};  ///< if do_act is currently running
 	std::string signal_;
 
 	// saving and loading

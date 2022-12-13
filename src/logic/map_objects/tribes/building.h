@@ -56,8 +56,7 @@ public:
 	              MapObjectType type,
 	              const LuaTable& t,
 	              Descriptions& descriptions);
-	~BuildingDescr() override {
-	}
+	~BuildingDescr() override = default;
 
 	[[nodiscard]] bool is_buildable() const {
 		return buildable_;
@@ -205,24 +204,24 @@ private:
 	Buildcost enhancement_cost_;      // cost for enhancing
 	Buildcost
 	   enhancement_returns_on_dismantle_;  // Returned ware for dismantling an enhanced building
-	int32_t size_;                         // size of the building
-	bool mine_;
-	bool port_;
+	int32_t size_{BaseImmovable::SMALL};   // size of the building
+	bool mine_{false};
+	bool port_{false};
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
 	bool needs_waterways_;  // This building should only be built on maps with waterways/ferries
 	                        // enabled
-	DescriptionIndex enhancement_;
-	DescriptionIndex
-	   enhanced_from_;         // The building this building was enhanced from, or INVALID_INDEX
-	bool enhanced_building_;   // if it is one, it is bulldozable
-	AI::BuildingHints hints_;  // hints (knowledge) for computer players
+	DescriptionIndex enhancement_{INVALID_INDEX};
+	DescriptionIndex enhanced_from_{
+	   INVALID_INDEX};  // The building this building was enhanced from, or INVALID_INDEX
+	bool enhanced_building_{false};          // if it is one, it is bulldozable
+	AI::BuildingHints hints_;                // hints (knowledge) for computer players
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
 	                                         // this attribute stands
 
 	std::string owning_tribe_;
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
-	uint32_t vision_range_;
+	uint32_t vision_range_{0U};
 	DISALLOW_COPY_AND_ASSIGN(BuildingDescr);
 };
 
@@ -253,7 +252,6 @@ public:
 		PCap_Enhancable = 1 << 2,  // can be enhanced to something
 	};
 
-public:
 	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
 
 	explicit Building(const BuildingDescr&);
@@ -363,7 +361,7 @@ public:
 	virtual bool is_present(Worker& worker) const;
 
 	void send_message(Game& game,
-	                  const Message::Type msgtype,
+	                  Message::Type msgtype,
 	                  const std::string& title,
 	                  const std::string& icon_filename,
 	                  const std::string& heading,
@@ -417,37 +415,38 @@ protected:
 	void set_soldier_control(SoldierControl* new_soldier_control);
 
 	Coords position_;
-	Flag* flag_;
+	Flag* flag_{nullptr};
 
-	uint32_t anim_;
-	Time animstart_;
+	uint32_t anim_{0U};
+	Time animstart_{0U};
 
 	using LeaveQueue = std::vector<OPtr<Worker>>;
 	LeaveQueue leave_queue_;     //  FIFO queue of workers leaving the building
-	Time leave_time_;            //  when to wake the next one from leave queue
+	Time leave_time_{0U};        //  when to wake the next one from leave queue
 	ObjectPointer leave_allow_;  //  worker that is allowed to leave now
 
 	Time worker_evicted_;  // The time when a worker was last evicted by the player.
 
 	//  The player who has defeated this building.
-	PlayerNumber defeating_player_;
+	PlayerNumber defeating_player_{0U};
 
 	std::map<DescriptionIndex, WarePriority> ware_priorities_;
 
 	/// Whether we see our vision_range area based on workers in the building
-	bool seeing_;
+	bool seeing_{false};
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings old_buildings_;
-	const MapObjectDescr* was_immovable_;
+	const MapObjectDescr* was_immovable_{nullptr};
 
 private:
 	std::string statistics_string_;
-	AttackTarget* attack_target_;      // owned by the base classes, set by 'set_attack_target'.
-	SoldierControl* soldier_control_;  // owned by the base classes, set by 'set_soldier_control'.
+	AttackTarget* attack_target_{nullptr};  // owned by the base classes, set by 'set_attack_target'.
+	SoldierControl* soldier_control_{
+	   nullptr};  // owned by the base classes, set by 'set_soldier_control'.
 
-	bool mute_messages_;
-	bool is_destruction_blocked_;
+	bool mute_messages_{false};
+	bool is_destruction_blocked_{false};
 };
 }  // namespace Widelands
 
