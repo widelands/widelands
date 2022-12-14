@@ -959,11 +959,11 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 		return false;
 	}
 
-	return std::any_of(kNumpadIdentifications.begin(), kNumpadIdentifications.end(),
-	                   [code, key](const auto& pair) {
-		                   return (code == pair.first && key.sym == pair.second) ||
-		                          (code == pair.second && key.sym == pair.first);
-	                   });
+	return std::any_of(
+	   kNumpadIdentifications.begin(), kNumpadIdentifications.end(), [code, key](const auto& pair) {
+		   return (code == pair.first && key.sym == pair.second) ||
+		          (code == pair.second && key.sym == pair.first);
+	   });
 }
 
 std::string matching_fastplace_shortcut(const SDL_Keysym key, const std::string& tribename) {

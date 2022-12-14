@@ -537,7 +537,8 @@ bool Economy::has_building(const DescriptionIndex di) const {
 	const auto& stats = owner().get_building_statistics(di);
 	return std::any_of(stats.begin(), stats.end(), [this, &name](const auto& bld) {
 		const BaseImmovable* i = owner().egbase().map()[bld.pos].get_immovable();
-		return !bld.is_constructionsite && i != nullptr && i->descr().name() == name && dynamic_cast<const Building&>(*i).get_economy(type_) == this;
+		return !bld.is_constructionsite && i != nullptr && i->descr().name() == name &&
+		       dynamic_cast<const Building&>(*i).get_economy(type_) == this;
 	});
 }
 

@@ -7071,17 +7071,17 @@ bool DefaultAI::critical_mine_unoccupied(const Time& gametime) {
 	// Now check that that there is no working mine of the critical type
 	return std::any_of(mines_per_type.begin(), mines_per_type.end(),
 #ifndef NDEBUG
-	[this]  // captured only for the asserts
+	                   [this]  // captured only for the asserts
 #else
 	[]
 #endif
-	(const auto& mine) {
-		const bool result = mine.second.is_critical && mine.second.finished > 0 &&
-		       mine.second.unoccupied == mine.second.finished;
-		assert(result || mine.second.unoccupied <= mines_.size());
-		assert(result || mine.second.unoccupied <= mine.second.total_count());
-		return result;
-	});
+	                   (const auto& mine) {
+		                   const bool result = mine.second.is_critical && mine.second.finished > 0 &&
+		                                       mine.second.unoccupied == mine.second.finished;
+		                   assert(result || mine.second.unoccupied <= mines_.size());
+		                   assert(result || mine.second.unoccupied <= mine.second.total_count());
+		                   return result;
+	                   });
 }
 
 // Sets all inputs to zero and return true if inputs are already empty
