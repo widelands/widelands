@@ -62,8 +62,12 @@ tips = {
       seconds = 4
    },
    {
-      text = _("An economy consists of all buildings and flags connected by roads, ferries or ships. The supplies and demands of buildings are handled in its economy. A player may have more than one economies, if those are not connected by any of these means. This is why the configure economy menu can only be accessed from flags and warehouses, not the player’s main menu."),
-      seconds = 12
+      text = _("An economy consists of all buildings and flags connected by roads, ferries, or ships. The supplies and demands of buildings are handled in its economy. A player can have more than one economy."),
+      seconds = 8
+   },
+   {
+      text = _("You can have more than one economy if they are not connected by any means. This is why the Configure Economy menu can only be accessed from flags and warehouses, not the player’s main menu."),
+      seconds = 8
    },
    {
       text = _("Some buildings, such as the farm, have a very small work area. If the building is surrounded with trees or roads, production will stop."),
