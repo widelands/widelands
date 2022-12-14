@@ -84,7 +84,7 @@ briefing_bring_shovels_1 = {
 briefing_bring_shovels_2 = {
    title = _("Your Advisor"),
    body = advisor(_("Removing the swamps"),
-      _([[Sire, all shovels have been handed out, but if we continue at this pace then we will not have removed the swamps before the next wet season. If you bring more shovels to the new warehouse then more volunteers will join in.]]))
+      _([[Sire, all shovels have been handed out, but if we continue at this pace we will not have removed the swamps before the next wet season. If you bring more shovels to the new warehouse then more volunteers will join in.]]))
       .. new_objectives(obj_bring_shovels_2),
 }
 
