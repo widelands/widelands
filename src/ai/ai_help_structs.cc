@@ -1399,7 +1399,7 @@ FlagCandidates::Candidate* FlagCandidates::get_winner(const int16_t threshold) {
 	if (!flags_[0].is_buildable()) {
 		return nullptr;
 	}
-	return flags_.data();
+	return &flags_[0];  // NOLINT no readability-container-data-pointer here
 }
 
 FlagCandidates::Candidate::Candidate(const uint32_t c_hash,

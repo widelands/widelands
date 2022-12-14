@@ -960,7 +960,7 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 	}
 
 	return std::any_of(kNumpadIdentifications.begin(), kNumpadIdentifications.end(),
-	                   [code, key](const std::pair<SDL_Keycode, SDL_Keycode>& pair) {
+	                   [code, key](const auto& pair) {
 		                   return (code == pair.first && key.sym == pair.second) ||
 		                          (code == pair.second && key.sym == pair.first);
 	                   });

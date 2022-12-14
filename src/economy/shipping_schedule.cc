@@ -50,7 +50,7 @@ constexpr Duration kActualDurationsRecalculationInterval(60 * 1000);
 // arrive at the port of interest within the next 10 s gametime,
 // or the lowest score if this will take longer than 10 min gametime
 constexpr uint64_t kWonderfullyShortDuration = static_cast<uint64_t>(10) * 1000;   // 10 s
-constexpr uint64_t kHorriblyLongDuration = static_cast<uint64_t>(10 * 60) * 1000;  // 10 min
+constexpr uint64_t kHorriblyLongDuration = static_cast<uint64_t>(10) * 60 * 1000;  // 10 min
 
 // Only assign wares to a ship in 5.1 if it's score is higher than a certain
 // threshold based on minimal distance. Ships with lower scores will only be

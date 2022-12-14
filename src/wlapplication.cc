@@ -893,7 +893,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int 
 	if (matches_shortcut(KeyboardShortcut::kCommonScreenshot, keycode, modifiers)) {
 		if (g_fs->disk_space() < kMinimumDiskSpace) {
 			log_warn("Omitting screenshot because diskspace is lower than %lluMiB\n",
-			         kMinimumDiskSpace / (static_cast<unsigned long long>(1024) * 1024));
+			         kMinimumDiskSpace / (static_cast<uint64_t>(1024) * 1024));
 		} else {
 			g_fs->ensure_directory_exists(kScreenshotsDir);
 			for (uint32_t nr = 0; nr < 10000; ++nr) {

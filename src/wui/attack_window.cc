@@ -459,8 +459,8 @@ bool AttackWindow::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 
 Widelands::Extent AttackWindow::ListOfSoldiers::size() const {
 	const size_t nr_soldiers = count_soldiers();
-	uint32_t rows = nr_soldiers / current_size_;
-	if (nr_soldiers == 0 || static_cast<uint64_t>(rows) * current_size_ < nr_soldiers) {
+	size_t rows = nr_soldiers / current_size_;
+	if (nr_soldiers == 0 || rows * current_size_ < nr_soldiers) {
 		++rows;
 	}
 	if (restricted_row_number_) {

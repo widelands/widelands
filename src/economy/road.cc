@@ -503,7 +503,7 @@ void Road::add_to_wallet(int32_t sum) {
  * Add carrying payment, and check for promotion.
  */
 void Road::pay_for_road(Game& game, uint8_t queue_length) {
-	wallet_ += static_cast<uint64_t>(2 * (carriers_count() + 1)) *
+	wallet_ += static_cast<uint64_t>(2) * (carriers_count() + 1) *
 	           (static_cast<uint64_t>(4) * queue_length + path_.get_nsteps());
 	charge_wallet(game);
 

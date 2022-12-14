@@ -6783,8 +6783,8 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 	tribe_ = &player_->tribe();
 
 	// to avoid floats real multiplier is multiplier/10
-	const uint16_t multiplier =
-	   std::max<uint16_t>((productionsites.size() + static_cast<uint64_t>(num_ports) * 5) / 5, 10);
+	const uint64_t multiplier =
+	   std::max<uint64_t>((productionsites.size() + static_cast<uint64_t>(num_ports) * 5) / 5, 10);
 
 	for (EconomyObserver* observer : economies) {
 		if (observer->economy.type() != Widelands::wwWARE) {
@@ -6809,8 +6809,8 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 				default_target = kTargetQuantCap;
 			}
 
-			const uint16_t new_target = std::max<uint16_t>(default_target * multiplier / 10, 3);
-			assert(new_target > 1);
+			const uint64_t new_target = std::max<uint64_t>(multiplier * default_target / 10, 3);
+			assert(new_target > 1 && new_target < 30000);
 
 			game().send_player_command(new Widelands::CmdSetWareTargetQuantity(
 			   gametime, player_number(), observer->economy.serial(), id, new_target));
@@ -7069,9 +7069,18 @@ bool DefaultAI::critical_mine_unoccupied(const Time& gametime) {
 	}
 
 	// Now check that that there is no working mine of the critical type
-	return std::any_of(mines_per_type.begin(), mines_per_type.end(), [](const auto& mine) {
-		return mine.second.is_critical && mine.second.finished > 0 &&
+	return std::any_of(mines_per_type.begin(), mines_per_type.end(),
+#ifndef NDEBUG
+	[this]  // captured only for the asserts
+#else
+	[]
+#endif
+	(const auto& mine) {
+		const bool result = mine.second.is_critical && mine.second.finished > 0 &&
 		       mine.second.unoccupied == mine.second.finished;
+		assert(result || mine.second.unoccupied <= mines_.size());
+		assert(result || mine.second.unoccupied <= mine.second.total_count());
+		return result;
 	});
 }
 
