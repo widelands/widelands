@@ -47,15 +47,8 @@
 - Configurable Win Condition Duration (#5380)
 - Seed random number generator before starting new game (#5608)
 - Fix trainingsites' definition of when a soldier is present (#5640)
-- #5594 Fix portspace detection (#5647)
-- Worker and Soldier Statistics Tweaks (#5607)
-    - Fix incorrect genstats labels font colour
-    - Add statistics about civil buildings defeated
-    - Workers without buildcost and soldiers now don't count for the workers graph
-    - Refactored military graph calculation
-    - Show total number of soldiers in soldier stats window
+- Fix portspace detection (#5647)
 - Cancel battles when players negotiate truce (#5665)
-- Pinned Notes (#5569)
 - Allow letting individual productionsites produce indefinitely (#4961)
 
 
@@ -97,6 +90,13 @@
      * editor: remove Alt modifier for third tool function (old TODO item)
      * editor: ask for exit confirmation even if map is not modified (still skip on Ctrl+click)
      * ask for exit confirmation in main menu (can be skipped by Ctrl+clicking)
+- Worker and Soldier Statistics Tweaks (#5607)
+    - Fix incorrect genstats labels font colour
+    - Add statistics about civil buildings defeated
+    - Workers without buildcost and soldiers now don't count for the workers graph
+    - Refactored military graph calculation
+    - Show total number of soldiers in soldier stats window
+- Pinned Notes (#5569)
 
 
 ### Internationalization
@@ -108,7 +108,7 @@
 - Encyclopedia Hyperlinks (#5533)
 - Fix buildings help button (#5661)
 - Explain clearer what an economy is (#5630)
-- #5589 Traingsite encyclopedia enhancements (#5673)
+- Trainigsite encyclopedia enhancements (#5673)
 
 
 ### Editor
@@ -139,7 +139,9 @@
 - Fix Clang15 Compiler Warnings (#5629)
 - Replace `sprintf` with `snprintf` (#5651)
 - Switch to C++17 (#5672)
-- Fix more clang-tidy checks (#5679, #5682, #5689, #5696, #5684, #5695, #5693, #5690, #5694, #5692, #5685, #5688, #5698, #5697, #5686, #5699, #5687, #5691, #5681)
+- Update clang-tidy CI version (#5682)
+- Fix more clang-tidy checks (#5679, #5689, #5696, #5684, #5695, #5693, #5690, #5694, #5692, #5685, #5688, #5698, #5697, #5686, #5699, #5687, #5691, #5681)
+- Fix member initializer ambiguity regression
 
 
 ### Other Issues
