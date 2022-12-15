@@ -844,14 +844,14 @@ void InteractiveBase::think() {
 				set_tooltip(format(_("Road length: %1$u (%2$u)"), steps, preview_steps));
 			} else {
 				set_tooltip(format(_("Waterway length: %1$u (%2$u) / %3$u"), steps, preview_steps,
-					               egbase().map().get_waterway_max_length()));
+				                   egbase().map().get_waterway_max_length()));
 			}
 		} else {
 			if (in_road_building_mode(RoadBuildingType::kRoad)) {
 				set_tooltip(format(_("Road length: %u"), steps));
 			} else {
-				set_tooltip(format(_("Waterway length: %1$u / %2$u"), steps,
-					               egbase().map().get_waterway_max_length()));
+				set_tooltip(format(
+				   _("Waterway length: %1$u / %2$u"), steps, egbase().map().get_waterway_max_length()));
 			}
 		}
 	}
