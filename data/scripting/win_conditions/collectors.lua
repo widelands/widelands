@@ -18,9 +18,9 @@ local wc_descname = _("Collectors")
 local wc_version = 2
 local wc_desc_placeholder = _(
    "You get points for precious wares in your warehouses. The player with " ..
-   "the highest number of wares after %s wins the game."
+   "the highest score after %s wins the game."
 )
--- TRANSLATORS: Will be inserted into "The player with the highest number of wares after %s wins the game."
+-- TRANSLATORS: Will be inserted into "The player with the highest score after %s wins the game."
 local wc_desc = wc_desc_placeholder:bformat(_("the configured time limit"))
 local wc_points = "Points"
 -- This needs to be exactly like wc_points, but localized, because wc_points

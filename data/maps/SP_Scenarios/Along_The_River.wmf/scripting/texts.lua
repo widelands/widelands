@@ -11,7 +11,7 @@ briefing_intro = {
    body = advisor( _("Along the River"),
       _([[Sire, let me inform you about the surrounding tribes.]])
       .. paragraphdivider() ..
-      _([[From the north we are endangered by a belligerent tribe, led by warlord Törver, that is rapidly building up its armies. They may soon have become too strong to be defeated.]])
+      _([[From the North we are endangered by a belligerent tribe, led by warlord Törver, that is rapidly building up its armies. They may soon have become too strong to be defeated.]])
       .. paragraphdivider() ..
       _([[A large area to the north-east is agonized by a wild horde of unfettered pirates, led by their insane Arvid. Their presence blocks our ways to other tribes.]])
       .. paragraphdivider() ..
@@ -25,14 +25,14 @@ briefing_intro = {
 briefing_warn_for_red = {
    title = _("Your Advisor"),
    body = advisor(_("Our northern enemy"),
-      _([[Sire, although our soldiers would face any enemy without the slightest fear, our rival in the north is still stronger than all our armies combined. We should avoid a conflict until we are able to defeat them.]])
+      _([[Sire, although our soldiers would face any enemy without the slightest fear, our rival in the North is still stronger than all our armies combined. We should avoid a conflict until we are able to defeat them.]])
       .. paragraphdivider() ..
       _([[Be patient and recognize that a strong army is indispensable in this situation. Törver has a very bad reputation.]]))
 }
 
 briefing_defeat_red = {
    title = _("Your Advisor"),
-   body = advisor(_("Peril from the north"),
+   body = advisor(_("Peril from the North"),
       _([[Sire, we received an alarming message from one of our explorers. Törver is expanding his front line and approaching our territory.]])
       .. paragraphdivider() ..
       _([[We cannot avoid attacking their armies forever. If we manage to conquer our northern enemy, we will enlarge our territory and find more resources to strengthen our armies.]])
@@ -50,7 +50,7 @@ briefing_red_mercenaries = {
 briefing_build_port = {
    title = _("Your Advisor"),
    body = advisor(_("The great lake"),
-      _([[Sire, now that we have conquered the land of Törver, we can make use of their excellent access to the adjacent great lake. A port in the north will give us better opportunities to have contact with other tribes.]])
+      _([[Sire, now that we have conquered the land of Törver, we can make use of their excellent access to the adjacent great lake. A port in the North will give us better opportunities to have contact with other tribes.]])
       .. paragraphdivider() ..
       _([[In Törver’s headquarters we found papers describing the construction of ships. Unfortunately, the texts are written in a language that is unknown to us. Our wise men will try to translate these descriptions.]]))
       .. new_objectives(obj_build_port),
@@ -77,14 +77,14 @@ briefing_found_pirate_treasure = {
 briefing_bring_shovels_1 = {
    title = _("Your Advisor"),
    body = advisor(_("Removing the swamps"),
-      _([[Sire, the wet season has created swamps along the brook to the east and we are unable to pass through them. They have to be removed before we can continue. If you bring enough shovels to the new warehouse then volunteers will remove the swamps.]]))
+      _([[Sire, the wet season has created swamps along the brook to the East and we are unable to pass through them. They have to be removed before we can continue. If you bring enough shovels to the new warehouse then volunteers will remove the swamps.]]))
       .. new_objectives(obj_bring_shovels_1),
 }
 
 briefing_bring_shovels_2 = {
    title = _("Your Advisor"),
    body = advisor(_("Removing the swamps"),
-      _([[Sire, all shovels have been handed out but if we continue at this pace than we will not have removed the swamps before the next wet season. If you bring more shovels to the new warehouse then more volunteers will join in.]]))
+      _([[Sire, all shovels have been handed out, but if we continue at this pace we will not have removed the swamps before the next wet season. If you bring more shovels to the new warehouse then more volunteers will join in.]]))
       .. new_objectives(obj_bring_shovels_2),
 }
 

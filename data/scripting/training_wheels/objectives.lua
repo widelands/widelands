@@ -45,7 +45,7 @@ run(function()
       title=_("Close this window"),
       number = 1,
       body = objective_text(_("Closing this window"),
-         li_image("images/wui/menus/objectives.png", _([[ You can open and close this window by clicking on the ‘Objectives’ button in the toolbar on the bottom of the screen.]])) ..
+         li_image("images/wui/menus/objectives.png", _([[You can open and close this window by clicking on the ‘Objectives’ button in the toolbar on the bottom of the screen.]])) ..
          li_arrow(_([[Like any other window, you can also close the ‘Objectives’ window by right-clicking on it.]]))
       )
    }
