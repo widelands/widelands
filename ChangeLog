@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git 2349508](https://github.com/widelands/widelands/commit/2349508087d4f6206d21be30dd7dd47de62e09d1)
+## Post-1.1 until [git 75dfa800](https://github.com/widelands/widelands/commit/75dfa800f399355adb7ee17b5be3237f243afd41)
 
 ### Animations, Icons and Overlays
 
@@ -101,6 +101,7 @@
 
 ### Internationalization
 
+- String Fixes (#5710)
 
 
 ### Help and Documentation
