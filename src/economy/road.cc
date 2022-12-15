@@ -503,8 +503,7 @@ void Road::add_to_wallet(int32_t sum) {
  * Add carrying payment, and check for promotion.
  */
 void Road::pay_for_road(Game& game, uint8_t queue_length) {
-	wallet_ += 2UL * (carriers_count() + 1) *
-	           (4UL * queue_length + path_.get_nsteps());
+	wallet_ += 2UL * (carriers_count() + 1) * (4UL * queue_length + path_.get_nsteps());
 	charge_wallet(game);
 
 	if (!busy_ && wallet_ > 1.5 * kRoadAnimalPrice) {
