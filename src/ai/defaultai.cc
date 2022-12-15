@@ -6807,7 +6807,7 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 			}
 
 			const uint64_t new_target = std::max<uint64_t>(multiplier * default_target / 10, 3);
-			assert(new_target > 1 && new_target < std::numeric_limits<uint16_t> : max());
+			assert(new_target > 1 && new_target < std::numeric_limits<uint16_t>::max());
 
 			game().send_player_command(new Widelands::CmdSetWareTargetQuantity(
 			   gametime, player_number(), observer->economy.serial(), id, new_target));
