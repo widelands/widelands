@@ -765,9 +765,10 @@ void InteractiveBase::draw_road_building(RenderTarget* dst,
 		     i += (start_to_end ? 1 : -1)) {
 			if (coords.at(i) == field.fcoords) {
 				if ((i == 0 || i == ncoords - 1) || (!last_is_flag && i != 1 && i != ncoords - 2)) {
+					constexpr float kOpacity = 0.5f;
 					dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-					                    field.owner->tribe().flag_animation(), gametime,
-					                    &field.owner->get_playercolor());
+					                    field.owner->tribe().flag_animation(), gametime, nullptr,
+					                    kOpacity);
 				}
 				return true;
 			}
@@ -836,11 +837,22 @@ void InteractiveBase::game_logic_think() {
 void InteractiveBase::think() {
 	UI::Panel::think();
 	if (in_road_building_mode()) {
-		if (in_road_building_mode(RoadBuildingType::kRoad)) {
-			set_tooltip(format(_("Road length: %u"), get_build_road_path().get_nsteps()));
+		const size_t steps = get_build_road_path().get_nsteps();
+		if ((SDL_GetModState() & KMOD_CTRL) != 0 && road_building_mode_->preview_path.has_value()) {
+			const size_t preview_steps = road_building_mode_->preview_path.value().get_nsteps();
+			if (in_road_building_mode(RoadBuildingType::kRoad)) {
+				set_tooltip(format(_("Road length: %1$u (%2$u)"), steps, preview_steps));
+			} else {
+				set_tooltip(format(_("Waterway length: %1$u (%2$u) / %3$u"), steps, preview_steps,
+					               egbase().map().get_waterway_max_length()));
+			}
 		} else {
-			set_tooltip(format(_("Waterway length: %1$u/%2$u"), get_build_road_path().get_nsteps(),
-			                   egbase().map().get_waterway_max_length()));
+			if (in_road_building_mode(RoadBuildingType::kRoad)) {
+				set_tooltip(format(_("Road length: %u"), steps));
+			} else {
+				set_tooltip(format(_("Waterway length: %1$u / %2$u"), steps,
+					               egbase().map().get_waterway_max_length()));
+			}
 		}
 	}
 }
