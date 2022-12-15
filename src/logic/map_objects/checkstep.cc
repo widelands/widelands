@@ -62,14 +62,14 @@ bool CheckStepAnd::allowed(const Map& map,
                            const FCoords& end,
                            int32_t const dir,
                            CheckStep::StepId const id) const {
-	return std::all_of(subs.begin(), subs.end(), [&map, &start, &end, dir, id](const CheckStep& c) {
-		return c.allowed(map, start, end, dir, id);
+	return std::all_of(subs.begin(), subs.end(), [&map, &start, &end, dir, id](const CheckStep& cstep) {
+		return cstep.allowed(map, start, end, dir, id);
 	});
 }
 
 bool CheckStepAnd::reachable_dest(const Map& map, const FCoords& dest) const {
 	return std::all_of(subs.begin(), subs.end(),
-	                   [&map, &dest](const CheckStep& c) { return c.reachable_dest(map, dest); });
+	                   [&map, &dest](const CheckStep& cstep) { return cstep.reachable_dest(map, dest); });
 }
 
 /*

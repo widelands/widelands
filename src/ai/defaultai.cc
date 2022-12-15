@@ -3732,7 +3732,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 					eco->dismantle_grace_time =
 					   gametime +
 					   Duration(
-					      static_cast<uint64_t>(30) * 1000 +  // very short time is enough
+					      30ULL * 1000 +  // very short time is enough
 					      (eco->flags.size() * 30 * 1000));   // + 30 seconds for every flag in economy
 				}
 
@@ -3741,12 +3741,12 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 
 				if (occupied_military_) {
 					eco->dismantle_grace_time =
-					   gametime + Duration((static_cast<uint64_t>(90 * 60) * 1000) +
+					   gametime + Duration((90ULL * 60 * 1000) +
 					                       (eco->flags.size() * 20 * 1000));
 
 				} else {  // for other normal buildings
 					eco->dismantle_grace_time =
-					   gametime + Duration((static_cast<uint64_t>(45 * 60) * 1000) +
+					   gametime + Duration((45ULL * 60 * 1000) +
 					                       (eco->flags.size() * 20 * 1000));
 				}
 			}
@@ -6784,7 +6784,7 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 
 	// to avoid floats real multiplier is multiplier/10
 	const uint64_t multiplier =
-	   std::max<uint64_t>((productionsites.size() + static_cast<uint64_t>(num_ports) * 5) / 5, 10);
+	   std::max<uint64_t>((productionsites.size() + 5ULL * num_ports) / 5, 10);
 
 	for (EconomyObserver* observer : economies) {
 		if (observer->economy.type() != Widelands::wwWARE) {
@@ -6810,7 +6810,7 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 			}
 
 			const uint64_t new_target = std::max<uint64_t>(multiplier * default_target / 10, 3);
-			assert(new_target > 1 && new_target < 30000);
+			assert(new_target > 1 && new_target < std::numeric_limits<uint16_t>:max());
 
 			game().send_player_command(new Widelands::CmdSetWareTargetQuantity(
 			   gametime, player_number(), observer->economy.serial(), id, new_target));

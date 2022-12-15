@@ -18,7 +18,6 @@
 
 #include "wui/attack_window.h"
 
-#include <cstddef>
 #include <memory>
 
 #include <SDL_mouse.h>

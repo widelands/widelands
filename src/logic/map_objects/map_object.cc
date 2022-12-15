@@ -452,7 +452,8 @@ const std::string& MapObjectDescr::icon_filename() const {
  */
 bool MapObjectDescr::has_attribute(AttributeIndex attr) const {
 	return std::any_of(
-	   attribute_ids_.begin(), attribute_ids_.end(), [attr](const uint32_t a) { return a == attr; });
+	   attribute_ids_.begin(), attribute_ids_.end(),
+	   [attr](const uint32_t atrribute) { return atrribute == attr; });
 }
 
 /**
