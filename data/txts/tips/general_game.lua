@@ -66,7 +66,7 @@ tips = {
       seconds = 8
    },
    {
-      text = _("You can have more than one economy if they are not connected by any means of transportation. This is why the Configure Economy menu can only be accessed from flags and warehouses, not the player’s main menu."),
+      text = _("You can have more than one economy if their flags are not connected by any means of transportation. This is why the Configure Economy menu can only be accessed from flags and warehouses, not the player’s main menu."),
       seconds = 8
    },
    {
