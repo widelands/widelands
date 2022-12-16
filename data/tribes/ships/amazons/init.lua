@@ -398,10 +398,6 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Belterra"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Boa Esperança"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Boa Vista"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Cabana do Amorim"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Cabelo du Cuia"),
