@@ -3103,7 +3103,7 @@ msgstr "Балочная мастерская"
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:65
 msgid "hardening wood"
-msgstr "собирает древисину"
+msgstr "обжигает дерево"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:8
@@ -4144,7 +4144,7 @@ msgstr "шьёт шипованную меховую одежду"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:79
 msgid "sewing golden fur garment"
-msgstr "шьёт золотую меховую одежду"
+msgstr "шьётпозолоченную меховую одежду"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:8
@@ -8200,7 +8200,7 @@ msgstr "Меховая одежда"
 #: ../../data/tribes/wares/fur_garment_golden/init.lua:8
 msgctxt "ware"
 msgid "Golden Fur Garment"
-msgstr "Золотая меховая одежда"
+msgstr "позолоченная меховая одежда"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fur_garment_old/init.lua:8
