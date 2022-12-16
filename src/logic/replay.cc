@@ -348,7 +348,8 @@ ReplayfileSavegameExtractor::ReplayfileSavegameExtractor(const std::string& game
 
 	const uint8_t packet_version = fr.unsigned_8();
 	if (packet_version != kCurrentPacketVersion) {
-		throw UnhandledVersionError("ReplayfileSavegameExtractor", packet_version, kCurrentPacketVersion);
+		throw UnhandledVersionError(
+		   "ReplayfileSavegameExtractor", packet_version, kCurrentPacketVersion);
 	}
 
 	const uint32_t bytes = fr.unsigned_32();

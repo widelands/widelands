@@ -188,7 +188,8 @@ void LaunchGame::layout() {
 }
 
 void LaunchGame::update_warn_desyncing_addon() {
-	const bool has_desyncing_addon = std::any_of(AddOns::g_addons.begin(), AddOns::g_addons.end(),
+	const bool has_desyncing_addon = std::any_of(
+	   AddOns::g_addons.begin(), AddOns::g_addons.end(),
 	   [](const AddOns::AddOnState& addon) { return addon.second && !addon.first->sync_safe; });
 
 	warn_desyncing_addon_.set_visible(has_desyncing_addon);
