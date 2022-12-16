@@ -44,7 +44,7 @@
 namespace Widelands {
 
 // File format definitions
-constexpr uint32_t kReplayMagic = 0x2E21A101;
+constexpr uint32_t kReplayMagic = 0x2E21A102;
 constexpr uint8_t kCurrentPacketVersion = 4;
 constexpr Duration kSyncInterval(200);
 
@@ -332,7 +332,8 @@ void ReplayWriter::send_sync(const Md5Checksum& hash) {
 	cmdlog_->flush();
 }
 
-ReplayPreloader::ReplayPreloader(const std::string& gamefilename) : source_file_(gamefilename) {
+ReplayfileSavegameExtractor::ReplayfileSavegameExtractor(const std::string& gamefilename)
+   : source_file_(gamefilename) {
 	if (!ends_with(source_file_, kReplayExtension)) {
 		return;
 	}
@@ -347,7 +348,7 @@ ReplayPreloader::ReplayPreloader(const std::string& gamefilename) : source_file_
 
 	const uint8_t packet_version = fr.unsigned_8();
 	if (packet_version != kCurrentPacketVersion) {
-		throw UnhandledVersionError("ReplayPreloader", packet_version, kCurrentPacketVersion);
+		throw UnhandledVersionError("ReplayfileSavegameExtractor", packet_version, kCurrentPacketVersion);
 	}
 
 	const uint32_t bytes = fr.unsigned_32();
@@ -359,7 +360,7 @@ ReplayPreloader::ReplayPreloader(const std::string& gamefilename) : source_file_
 	fw.write(*g_fs, temp_file_);
 }
 
-ReplayPreloader::~ReplayPreloader() {
+ReplayfileSavegameExtractor::~ReplayfileSavegameExtractor() {
 	if (!temp_file_.empty()) {
 		g_fs->fs_unlink(temp_file_);
 	}

@@ -188,15 +188,11 @@ void LaunchGame::layout() {
 }
 
 void LaunchGame::update_warn_desyncing_addon() {
-	for (const auto& pair : AddOns::g_addons) {
-		if (pair.second && !pair.first->sync_safe) {
-			warn_desyncing_addon_.set_visible(true);
-			write_replay_.set_visible(false);
-			return;
-		}
-	}
-	warn_desyncing_addon_.set_visible(false);
-	write_replay_.set_visible(true);
+	const bool has_desyncing_addon = std::any_of(AddOns::g_addons.begin(), AddOns::g_addons.end(),
+	   [](const AddOns::AddOnState& addon) { return addon.second && !addon.first->sync_safe; });
+
+	warn_desyncing_addon_.set_visible(has_desyncing_addon);
+	write_replay_.set_visible(!has_desyncing_addon);
 }
 
 bool LaunchGame::should_write_replay() const {

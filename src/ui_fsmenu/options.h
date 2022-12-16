@@ -62,7 +62,7 @@ public:
 		// Saving options
 		int32_t autosave;          // autosave interval in minutes
 		int32_t rolling_autosave;  // number of file to use for rolling autosave
-		int32_t replay_lifetime;   // number of days to keep replays around
+		int32_t replay_lifetime;   // number of weeks to keep replays around
 		bool zip;
 		bool write_syncstreams;
 

@@ -235,11 +235,13 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                          0,
                          opt.replay_lifetime,
                          0,
-                         365,
+                         52,
                          UI::PanelStyle::kFsMenu,
                          _("Delete replays after:"),
                          UI::SpinBox::Units::kWeeks,
-                         UI::SpinBox::Type::kBig),
+                         UI::SpinBox::Type::kBig,
+                         1,
+                         4),
 
      zip_(&box_saving_,
           UI::PanelStyle::kFsMenu,
@@ -521,7 +523,7 @@ void Options::layout() {
 	if (!is_minimal()) {
 		const int16_t butw = get_inner_w() / 5;
 		const int16_t buth = get_inner_h() / 16;
-		const int16_t spinbox_w = get_inner_w() / 2;
+		constexpr int16_t kSpinboxW = 250;
 
 		// Buttons
 		cancel_.set_desired_size(butw, buth);
@@ -551,11 +553,11 @@ void Options::layout() {
 		sb_dis_border_.set_desired_size(tab_panel_width, sb_dis_border_.get_h());
 
 		// Saving options
-		sb_autosave_.set_unit_width(spinbox_w);
+		sb_autosave_.set_unit_width(kSpinboxW);
 		sb_autosave_.set_desired_size(tab_panel_width, sb_autosave_.get_h());
-		sb_rolling_autosave_.set_unit_width(spinbox_w);
+		sb_rolling_autosave_.set_unit_width(kSpinboxW);
 		sb_rolling_autosave_.set_desired_size(tab_panel_width, sb_rolling_autosave_.get_h());
-		sb_replay_lifetime_.set_unit_width(spinbox_w);
+		sb_replay_lifetime_.set_unit_width(kSpinboxW);
 		sb_replay_lifetime_.set_desired_size(tab_panel_width, sb_replay_lifetime_.get_h());
 	}
 	UI::Window::layout();

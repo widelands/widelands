@@ -220,7 +220,7 @@ std::string GameDetails::show_minimap(const SavegameData& gamedata) {
 			minimap_icon_.set_visible(true);
 		} else {
 			try {
-				Widelands::ReplayPreloader converter(last_game_);
+				Widelands::ReplayfileSavegameExtractor converter(last_game_);
 				Widelands::Game game_for_render;
 				std::unique_ptr<Widelands::MapLoader> ml(
 				   game_for_render.mutable_map()->get_correct_loader(converter.file()));

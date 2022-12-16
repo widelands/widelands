@@ -76,9 +76,9 @@ private:
 };
 
 /** Extract the savegame from a replay to a temporary file. */
-struct ReplayPreloader {
-	explicit ReplayPreloader(const std::string& gamefilename);
-	~ReplayPreloader();
+struct ReplayfileSavegameExtractor {
+	explicit ReplayfileSavegameExtractor(const std::string& gamefilename);
+	~ReplayfileSavegameExtractor();
 
 	[[nodiscard]] inline const std::string& file() const {
 		return temp_file_.empty() ? source_file_ : temp_file_;
