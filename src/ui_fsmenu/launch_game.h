@@ -84,11 +84,13 @@ protected:
 
 	void toggle_peaceful();
 	void toggle_custom_starting_positions();
+	bool should_write_replay() const;
 
 	void layout() override;
 
 	MapDetailsBox map_details_;
 	UI::Textarea configure_game_;
+	UI::Checkbox write_replay_;
 	UI::MultilineTextarea warn_desyncing_addon_;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::SpinBox win_condition_duration_;
