@@ -149,7 +149,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
 
 		// Road to right neighbor.
-		if (field.rn_index != FieldsToDraw::kInvalidIndex && !(field.obscured_by_slope && fields_to_draw.at(field.rn_index).obscured_by_slope)) {
+		if (field.rn_index != FieldsToDraw::kInvalidIndex &&
+		    !(field.obscured_by_slope && fields_to_draw.at(field.rn_index).obscured_by_slope)) {
 			if (field.road_e != Widelands::RoadSegment::kNone &&
 			    field.road_e != Widelands::RoadSegment::kBridgeNormal &&
 			    field.road_e != Widelands::RoadSegment::kBridgeBusy) {
@@ -159,7 +160,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 		}
 
 		// Road to bottom right neighbor.
-		if (field.brn_index != FieldsToDraw::kInvalidIndex && !(field.obscured_by_slope && fields_to_draw.at(field.brn_index).obscured_by_slope)) {
+		if (field.brn_index != FieldsToDraw::kInvalidIndex &&
+		    !(field.obscured_by_slope && fields_to_draw.at(field.brn_index).obscured_by_slope)) {
 			if (field.road_se != Widelands::RoadSegment::kNone &&
 			    field.road_se != Widelands::RoadSegment::kBridgeNormal &&
 			    field.road_se != Widelands::RoadSegment::kBridgeBusy) {
@@ -170,7 +172,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 		}
 
 		// Road to bottom left neighbor.
-		if (field.bln_index != FieldsToDraw::kInvalidIndex && !(field.obscured_by_slope && fields_to_draw.at(field.bln_index).obscured_by_slope)) {
+		if (field.bln_index != FieldsToDraw::kInvalidIndex &&
+		    !(field.obscured_by_slope && fields_to_draw.at(field.bln_index).obscured_by_slope)) {
 			if (field.road_sw != Widelands::RoadSegment::kNone &&
 			    field.road_sw != Widelands::RoadSegment::kBridgeNormal &&
 			    field.road_sw != Widelands::RoadSegment::kBridgeBusy) {

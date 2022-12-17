@@ -223,9 +223,8 @@ void WorkareaProgram::draw(uint32_t texture_id,
 		}
 		if (color.a > 0) {
 			const FieldsToDraw::Field& f2 = fields_to_draw.at(field.brn_index);
-			const FieldsToDraw::Field& f3 =
-			   fields_to_draw.at(triangle_index == Widelands::TriangleIndex::D ? field.bln_index :
-                                                                                 field.rn_index);
+			const FieldsToDraw::Field& f3 = fields_to_draw.at(
+			   triangle_index == Widelands::TriangleIndex::D ? field.bln_index : field.rn_index);
 			if (!(field.obscured_by_slope && f2.obscured_by_slope && f3.obscured_by_slope)) {
 				add_vertex(field, color, &vertices_);
 				add_vertex(f2, color, &vertices_);
