@@ -4465,7 +4465,7 @@ int LuaEconomy::needs(lua_State* L) {
 	case Widelands::wwWARE: {
 		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().ware_index(wname);
 		if (get_egbase(L).descriptions().ware_exists(index)) {
-			lua_pushboolean(L, get()->needs_ware_or_worker(index));
+			lua_pushboolean(L, static_cast<int>(get()->needs_ware_or_worker(index)));
 		} else {
 			report_error(L, "There is no ware '%s'.", wname.c_str());
 		}
@@ -4474,7 +4474,7 @@ int LuaEconomy::needs(lua_State* L) {
 	case Widelands::wwWORKER: {
 		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().worker_index(wname);
 		if (get_egbase(L).descriptions().worker_exists(index)) {
-			lua_pushboolean(L, get()->needs_ware_or_worker(index));
+			lua_pushboolean(L, static_cast<int>(get()->needs_ware_or_worker(index)));
 		} else {
 			report_error(L, "There is no worker '%s'.", wname.c_str());
 		}
