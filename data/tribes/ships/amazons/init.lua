@@ -386,9 +386,11 @@ wl.Descriptions():new_ship_type {
    },
    port_names = {
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Alter do Chāo"),
+      pgettext("portname", "Alter"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Anumā"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Aquiqui"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Arapixuna"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
@@ -398,11 +400,13 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Belterra"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Cabana do Amorim"),
+      pgettext("portname", "Amorim"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Cabelo du Cuia"),
+      pgettext("portname", "Canindé"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Cacoal Grande"),
+      pgettext("portname", "Cuia"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Cacoal"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Capichauā"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
@@ -412,25 +416,51 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Curariaca"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Curuá-una"),
+      pgettext("portname", "Curupari"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Curuá"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Diogo"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Guajará"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Guaranazinho"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Gurupá"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Ipanema"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Ipaupixuna"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Irateua"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Itacoatiara"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Itanduba"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Itapari"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Jaburu"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Jacarecapá"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Jaguara"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Janauacá"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Macapá"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Maguari"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Mambeca"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Manacapuru"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Mararu"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Maripi"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Maruá"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Mataraí"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
@@ -438,9 +468,17 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Moju"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Mojui dos Campos"),
+      pgettext("portname", "Mojui"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Morimutuba"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Oriximiná"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Pacoval"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Paranquara"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Paricó"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Passagem"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
@@ -450,13 +488,11 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Povoado"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Prainha"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Preta"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Santarém"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Santarém-Mirim"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Sāo Diogo"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Sāo Tomé"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Socorro"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
@@ -464,21 +500,19 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Surucá"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Taperinha"),
+      pgettext("portname", "Tambaqui"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Terra Preta"),
+      pgettext("portname", "Tapará"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Taperinha"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Tiningu"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
+      pgettext("portname", "Tomé"),
+      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Una"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Vila Brasil"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Vila Franca"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Vila Gorete"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Vila Vieira"),
+      pgettext("portname", "Brasil"),
    }
 }
 
