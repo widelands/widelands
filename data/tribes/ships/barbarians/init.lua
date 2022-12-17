@@ -57,7 +57,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This a Barbarian ship name
       pgettext("shipname", "Hagbard"),
       -- TRANSLATORS: This Barbarian ship is named after a barbarian bard
-      pgettext("shipname", "Hakhor")
+      pgettext("shipname", "Hakhor"),
       -- TRANSLATORS: This a Barbarian ship name
       pgettext("shipname", "Heidrek"),
       -- TRANSLATORS: This a Barbarian ship name
