@@ -54,7 +54,7 @@ hq:set_workers {
    empire_armorsmith = 1,
    empire_weaponsmith = 1,
 }
-local soldiers = {75, 250, 450}
+local soldiers = {75, 200, 400}
 hq:set_soldiers({
    [{0,0,0,0}] = soldiers[difficulty],
    [{2,2,0,1}] = soldiers[difficulty],
