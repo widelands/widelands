@@ -23,6 +23,7 @@
 #include "base/log.h"
 #include "base/md5.h"
 #include "base/random.h"
+#include "base/time_string.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "game_io/game_loader.h"
@@ -43,9 +44,8 @@
 namespace Widelands {
 
 // File format definitions
-constexpr uint32_t kReplayKnownToDesync = 0x2E21A100;
-constexpr uint32_t kReplayMagic = 0x2E21A101;
-constexpr uint8_t kCurrentPacketVersion = 3;
+constexpr uint32_t kReplayMagic = 0x2E21A102;
+constexpr uint8_t kCurrentPacketVersion = 4;
 constexpr Duration kSyncInterval(200);
 
 enum { pkt_end = 2, pkt_playercommand = 3, pkt_syncreport = 4 };
@@ -108,17 +108,6 @@ const Game* CmdReplaySyncRead::reported_desync_for_(nullptr);
  * Load the savegame part of the given replay and open the command log.
  */
 ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime_(Time(0)) {
-
-	{
-		game.enabled_addons().clear();
-		GameLoader gl(filename + kSavegameExtension, game);
-		Widelands::GamePreloadPacket gpdp;
-		gl.preload_game(gpdp);
-		game.set_win_condition_displayname(gpdp.get_win_condition());
-		gl.load_game();
-		game.postload_addons();
-	}
-
 	if (!g_fs->file_exists(filename)) {
 		// Try locating file in a distinct fs
 		std::unique_ptr<FileSystem> fs(g_fs->make_sub_file_system(FileSystem::fs_dirname(filename)));
@@ -129,20 +118,35 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime
 
 	try {
 		const uint32_t magic = cmdlog_->unsigned_32();
-		if (magic == kReplayKnownToDesync) {
-			// Note: This was never released as part of a build
-			throw wexception("%s is a replay from a version that is known to have desync "
-			                 "problems",
-			                 filename.c_str());
-		}
 		if (magic != kReplayMagic) {
-			throw wexception("%s apparently not a valid replay file", filename.c_str());
+			throw wexception("%s not a valid replay file", filename.c_str());
 		}
 
 		const uint8_t packet_version = cmdlog_->unsigned_8();
 		if (packet_version != kCurrentPacketVersion) {
 			throw UnhandledVersionError("ReplayReader", packet_version, kCurrentPacketVersion);
 		}
+
+		const std::string temp_file = kTempFileDir + timestring() + kSavegameExtension;
+		{
+			const uint32_t bytes = cmdlog_->unsigned_32();
+			std::unique_ptr<char[]> buffer(new char[bytes]);
+			cmdlog_->data_complete(buffer.get(), bytes);
+			FileWrite fw;
+			fw.data(buffer.get(), bytes);
+			fw.write(*g_fs, temp_file);
+		}
+
+		game.enabled_addons().clear();
+		GameLoader gl(temp_file, game);
+		Widelands::GamePreloadPacket gpdp;
+		gl.preload_game(gpdp);
+		game.set_win_condition_displayname(gpdp.get_win_condition());
+		gl.load_game();
+		game.postload_addons();
+
+		g_fs->fs_unlink(temp_file);
+
 		game.rng().read_state(*cmdlog_);
 	} catch (...) {
 		delete cmdlog_;
@@ -259,24 +263,35 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 
 	SaveHandler& save_handler = game_.save_handler();
 
+	const std::string temp_savegame = kTempFileDir + timestring() + kSavegameExtension;
 	std::string error;
-	if (!save_handler.save_game(game_, filename_ + kSavegameExtension, &error)) {
+	if (!save_handler.save_game(game_, temp_savegame, &error)) {
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 	}
 
-	verb_log_info("Reloading the game from replay\n");
-	game.cleanup_for_load();
-	{
-		GameLoader gl(filename_ + kSavegameExtension, game);
-		gl.load_game();
-	}
-	verb_log_info("Done reloading the game from replay\n");
-
-	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
-
+	verb_log_info("Initializing replay stream");
 	cmdlog_ = g_fs->open_stream_write(filename);
 	cmdlog_->unsigned_32(kReplayMagic);
 	cmdlog_->unsigned_8(kCurrentPacketVersion);
+
+	{
+		FileRead fr;
+		fr.open(*g_fs, temp_savegame);
+		const size_t bytes = fr.get_size();
+		cmdlog_->unsigned_32(bytes);
+		cmdlog_->data(fr.data(bytes), bytes);
+	}
+
+	verb_log_info("Reloading the game from replay");
+	game.cleanup_for_load();
+	{
+		GameLoader gl(temp_savegame, game);
+		gl.load_game();
+	}
+	verb_log_info("Done reloading the game from replay");
+	g_fs->fs_unlink(temp_savegame);
+
+	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
 
 	game.rng().write_state(*cmdlog_);
 }
@@ -315,5 +330,40 @@ void ReplayWriter::send_sync(const Md5Checksum& hash) {
 	cmdlog_->unsigned_32(game_.get_gametime().get());
 	cmdlog_->data(hash.data, sizeof(hash.data));
 	cmdlog_->flush();
+}
+
+ReplayfileSavegameExtractor::ReplayfileSavegameExtractor(const std::string& gamefilename)
+   : source_file_(gamefilename) {
+	if (!ends_with(source_file_, kReplayExtension)) {
+		return;
+	}
+
+	FileRead fr;
+	fr.open(*g_fs, source_file_);
+
+	const uint32_t magic = fr.unsigned_32();
+	if (magic != kReplayMagic) {
+		throw wexception("%s not a valid replay file", source_file_.c_str());
+	}
+
+	const uint8_t packet_version = fr.unsigned_8();
+	if (packet_version != kCurrentPacketVersion) {
+		throw UnhandledVersionError(
+		   "ReplayfileSavegameExtractor", packet_version, kCurrentPacketVersion);
+	}
+
+	const uint32_t bytes = fr.unsigned_32();
+	std::unique_ptr<char[]> buffer(new char[bytes]);
+	fr.data_complete(buffer.get(), bytes);
+	FileWrite fw;
+	fw.data(buffer.get(), bytes);
+	temp_file_ = kTempFileDir + timestring() + kSavegameExtension;
+	fw.write(*g_fs, temp_file_);
+}
+
+ReplayfileSavegameExtractor::~ReplayfileSavegameExtractor() {
+	if (!temp_file_.empty()) {
+		g_fs->fs_unlink(temp_file_);
+	}
 }
 }  // namespace Widelands

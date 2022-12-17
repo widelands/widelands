@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2021
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-12-13 03:18+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2021\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -758,7 +758,9 @@ msgstr "Du kannst deeses Fenster vun elkeen vun dienen Fahnen opmaken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:480
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
 msgid "Economy options"
 msgstr "Weertskupp-Instellens"
 
@@ -814,36 +816,72 @@ msgid ""
 "available and both farms would have been able to start working right away."
 msgstr "Wenn du twee Buurdereen baust, kann blot eene stracks anfangen to arbeiden. De anner mutt eerst up eenen Arbeider wachten, wiel för hüm keene Sichte daar is. Wenn du vörher de End-Tahl to 2 settst, sünd twee Sichten paraat un beide Buurdereen könen stracks anfangen to warken."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+msgid ""
+"Stockpiling wares is a double-edged sword. On the one hand, wares in stock "
+"are useful to buffer temporary fluctuations in your economy, which tend to "
+"occur all the time. On the other hand, any ware that is sitting around in a "
+"warehouse instead of being processed into something else is wasted. Finding "
+"the balance between wasteful stockpiling and just-in-time production in your"
+" supply chains is one of most profound challenges of perfecting your "
+"economy. When in doubt, lean towards having some extra reserves."
+msgstr "Waren up Lager to hebben, is een tweesneidigs Sweert. Up de een Kant sünd Waren im Lager nüttelk, um tiedwies Umswungens in de Weertskupp oftofangen, wat all de Tied passeeren. Up de anner Kant is elkeen Waar, wat in eenem Kraamhuus sitt un nich in wat anners umwannelt word, verklüngelt. Dat Evenwicht tüsken Lagern-Verklüngeln un Produzeren jüüst bi Tied to finnen. is eene von de allerwichtigsten Rutfödderungen, wenn du diene Weertskupp so good as mögelk klaarmaken willst. Im Twiefelsfall köör lever een paar Reserven mehr."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+msgid ""
+"To ease the process of switching between different economic situations, you "
+"can save and apply economy profiles at the bottom of the economy options "
+"window. A profile for stockpiling and one for efficiency are preset there."
+msgstr "Um dat Umschalten tüsken verscheden Weertskupp-Lagen lichter to maken, kannst du an de unnern Rand vun de Weertskupp-Instellens-Fenster Weertskupp-Vörinstellens sekern un laden. Daar gifft ’t al eene Vörinstellen för vööl up Lager un eene för eene trimmt Weertskupp."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+msgid ""
+"Most of the time, the economy options are a useful tool to ensure that "
+"resources are not wasted to produce wares your economy does not actually "
+"need. However, sometimes it can be useful to stockpile a ware in very large "
+"quantities. To achieve this, the economy options window allows you to set "
+"the target of a ware to infinite, so that it will always be produced."
+msgstr "De meeste Tied sünd de Weertskupp-Instellens nüttelk, um uptopassen, dat keen Kraam verklüngelt word, um Waren to produzeren, wat diene Weertskupp gaar nich bruukt. Aver mennigmaal kann dat nüttelk wesen, eene Ware in bannig groter Tahl to lagern. Daarto verlöövt di dat Weertskupp-Instellens-Fenster, dat Enn vun eener Waar up produzeren sünner Tahl to setten, un dann word de Waar alltiedens produzeert."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
+msgid ""
+"The same button can also be found in the building window of production "
+"sites. There, it causes only this one site to produce indefinitely, "
+"regardless of the economy settings. This can be useful to arrange, for "
+"example, that more building materials are produced near the border even if "
+"there are plenty in stock far away in your homeland."
+msgstr "Deesen Knoop finnt man ok in de Huus-Fenster vun Produzerens-Husen. Daar lett dat blots deeses eene Huus ewig produzeren, egaal wat de Weertskupp-Instellens seggen. Dat is nüttelk um tum Bispööl intostellen, dat mehr Baukraam bi de Grenz produzeert word, ok wenn noch bannig vööl daarvon wied weg im Heimaadland up Lager is."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 msgid "Produce 20 marble columns"
 msgstr "Produzeert 20 Marmelpielers"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:516
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
 msgstr "Rüst di vör neje Befestigungen, indeem du 20 Marmelpieler produzeerst."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
 msgstr "Dien Flintslager produzeert keene Marmelpielers, wenn se nich bruukt worden. Du muttst de End-Tahl verhogen."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
 msgstr "Daarto klickst du elkeen Fahn an un bruukst de Knoop »Weertskupp-Instellens«. In deesem Fenster kannst du fastleggen, wo völe Waren vun elkeen Aard du in Kraamhusen hebben willst."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
 msgstr "Mennigmaal bruukst du mennig Waren fix tur glieken Tied – fixer as se produzeert worden könen. Dann is ’t good, welke övertohebben."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:527
 msgid ""
 "By changing the target quantity, you can therefore decide which wares/tools "
 "your resources (in this case: iron) should be turned into or whether you "
@@ -851,86 +889,86 @@ msgid ""
 "for."
 msgstr "Indeem du de Enn-Tahl ännerst kannst du fastleggen, to wat för Waren of Warktüüg diene Mineraale (im Bispööl Iesen) verarbeidt worden sallen of of du se lever behollst, bit du weetst, för wat du se bruukst."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:528
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
 msgstr "Blot Husen, de Waren verbruuken, achten up deese Instellens. Husen, de Waren umsünst produzeren (to ’n Bispööl Buurdereen of Wellen) arbeiden alltied."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
 msgstr "Versöök ’t nu: Upstünds is de End-Tahl för Marmelpielers 10. Verhoog se, daarmit all paraat is, wenn du maal fix mennig Soldateree-Boen bauen willst."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
 msgid "Bring 20 marble columns to the front line"
 msgstr "Breng 20 Marmelpielers tur Grenz"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:522
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:540
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
 msgstr "Breng all 20 Marmelpielers tum Kraamhuus an de Grenz."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
 msgstr "Daartu muttst du twee Dingen doon. Eerst muttst du in de Kraamhuus, waar se hen sallen, eenen Vörrang för Marmelpielers fastsetten. Vun nu of an worden all Marmelpielers, de produzeert worden, daarhen brocht, wenn dat gaht."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
 msgstr "Daarmit de Marmelpielers ut dienem Raadhuus brocht worden, muttst du dann daar de »Wegbrengen«-Knoop anklicken."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:550
 msgid "Warehouse Preferences"
 msgstr "Kraamhuus-Instellens"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:534
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Bring the marble columns to the front line"
 msgstr "Breng de Marmelpielers tur Grenz"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:536
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
 msgstr "De Marmelpielers worden nu good produzeert, aver ’t is beter, wenn se daar verwahrt worden, waar wi se bruken."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:555
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
 msgstr "Produzeerte Waren worden egentlik tum token Kraamhuus brocht, wenn se nich enerwegens bruukt worden. Dat is hier uns’ Raadhuus. Aver wi willen se lever in de Kraamhuus tegen de Schanzen hebben."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:538
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
 msgstr "Elkeen Waarhuus hett veer Knopen, um Vörrang fasttoleggen. Wenn du de Muus daaröver beweegst, süchst du Texten, de di seggen, wat de Knopen doon."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:562
 msgid "Borders Secured"
 msgstr "De Grenzen sünd seker"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:546
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
 msgid "We’re safe now"
 msgstr "Wi sünd nu seker"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:548
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
 msgstr "Hunnert. Wi hebben nu genoog Marmelpielers, dat wi mennig Schanzen bauen könen, wenn sik een Feind sehn lett. Ick gloov aver nich, dat dat passeren word. Bit nu is ’t ok nich passeert."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:549
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
 "I hope I could teach you how you can control the economy in Widelands. There"
 " are many options and they can be confusing at first. Even if you’ve only "
@@ -939,7 +977,7 @@ msgid ""
 "this tutorial and learn the rest!"
 msgstr "Ich hoop, dat ick di lehren kunn, wo du de Weertskupp in Widelands kuntrolleren kannst. ’t gifft mennig Instellens un se könen toeerst elkeen rammdösig maken. Ok wenn du eerst een paar daarvun verstahn hest, dürst du nich upgeven. Versöök ’t all in een paar Spelen, um ’t to kennen to kriegen, un probeer de Kansen ut. Dann koom torügg to deese Inföhren un lehr de Rest!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:551
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"

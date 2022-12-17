@@ -49,7 +49,7 @@ void fill_parameter_vector() {
 	i18n::Textdomain textdomain("widelands_console");
 	parameters =
 	{ {_("Usage:"), _("widelands <option0>=<value0> ... <optionN>=<valueN>"), "--", "", false},
-	  {"", _("widelands <save.wgf>/<replay.wrpl>"), "--", "", false},
+	  {"", _("widelands <save.wgf>/<replay.wry>"), "--", "", false},
 	  /// Paths
 	  {_("Options:"), "datadir", _("DIRNAME"),
 		_("Use the specified directory for the Widelands data files."), false},
@@ -89,6 +89,7 @@ void fill_parameter_vector() {
 	  /// Misc
 	  {"", "nosound", "", _("Start the game with sound disabled."), false},
 	  {"", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs."), false},
+	  {"", "replay_lifetime", _("n"), _("Delete replays automatically after `n` weeks."), true},
 	  {"", "ai_training", "",
 		_("Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ for a full "
 		  "description of the AI training logic."),
@@ -223,8 +224,8 @@ void fill_parameter_vector() {
 	  {"", "version", "", _("Only print version and exit."), false},
 	  {"", "help", "", _("Show this help."), false},
 	  {"", "help-all", "", _("Show this help with all available config options."), false},
-	  {"", _("<save.wgf>/<replay.wrpl>"), "--",
-		_("Load the given savegame or replay directly. Useful for .wgf/.wrpl file extension "
+	  {"", _("<save.wgf>/<replay.wry>"), "--",
+		_("Load the given savegame or replay directly. Useful for .wgf/.wry file extension "
 		  "association. Does not work with other options. Also see --loadgame/--replay."),
 		false} };
 }

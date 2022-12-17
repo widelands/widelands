@@ -893,7 +893,7 @@ void AddOnsCtrl::erase_remote(std::shared_ptr<AddOns::AddOnInfo> a) {
 
 void AddOnsCtrl::refresh_remotes(const bool showall) {
 	UI::ProgressWindow progress(this, "", "");
-	const std::string step_message = _("Fetching add-ons (%.1f%%)");
+	const std::string step_message = _("Fetching add-ons… (%.1f%%)");
 
 	try {
 		progress.step(_("Connecting to the server…"));
