@@ -193,7 +193,6 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 				f0 = &fields_[f1->trn_index];
 				if (f.surface_pixel.y < f0->surface_pixel.y) {
 					f0->obscured_by_slope = true;
-					// log_dbg("NOCOM %2dx%2d is obscured!", f0->fcoords.x, f0->fcoords.y);
 				} else {
 					break;
 				}
