@@ -465,13 +465,16 @@ void GameHost::init_computer_players() {
 
 void GameHost::run() {
 	game_.reset(new Widelands::Game());
-	new FsMenu::LaunchMPG(
-	   *capsule_, d->hp, *this, d->chat, *game_, internet_, [this]() { run_callback(); });
+	new FsMenu::LaunchMPG(*capsule_, d->hp, *this, d->chat, internet_, [this]() { run_callback(); });
 }
 
 void GameHost::run_direct() {
 	game_.reset(new Widelands::Game());
 	run_callback();
+}
+
+void GameHost::set_write_replay(bool replay) {
+	game_->set_write_replay(replay);
 }
 
 // TODO(k.halfmann): refactor into smaller functions
