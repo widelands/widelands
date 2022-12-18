@@ -425,7 +425,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after the lake in the Andes
       pgettext("shipname", "Lake Titicaca"),
       -- TRANSLATORS: This Amazonian ship is named after the main Inca temple
-      pgettext("shipname", Koricancha"),
+      pgettext("shipname", "Koricancha"),
    },
    port_names = {
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
