@@ -215,6 +215,13 @@ public:
 	// Will throw an exception otherwise.
 	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 
+	[[nodiscard]] const std::string& get_warehouse_name() const {
+		return warehouse_name_;
+	}
+	void set_warehouse_name(const std::string& name) {
+		warehouse_name_ = name;
+	}
+
 	void log_general_info(const EditorGameBase&) const override;
 
 private:
@@ -294,6 +301,7 @@ private:
 
 	std::vector<StockPolicy> ware_policy_;
 	std::vector<StockPolicy> worker_policy_;
+	std::string warehouse_name_;
 
 	// Workers who live here at the moment
 	using WorkerList = std::vector<OPtr<Worker>>;

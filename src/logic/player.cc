@@ -185,8 +185,9 @@ Player::Player(EditorGameBase& the_egbase,
 	const Widelands::ShipDescr& ship = *egbase_.descriptions().get_ship_descr(tribe().ship());
 	remaining_shipnames_.insert(
 	   remaining_shipnames_.begin(), ship.get_ship_names().begin(), ship.get_ship_names().end());
-	remaining_portnames_.insert(remaining_portnames_.begin(), tribe().get_port_names().begin(),
-	                            tribe().get_port_names().end());
+	remaining_warehousenames_.insert(remaining_warehousenames_.begin(),
+	                                 tribe().get_warehouse_names().begin(),
+	                                 tribe().get_warehouse_names().end());
 
 	update_team_players();
 }
@@ -1964,19 +1965,19 @@ std::string Player::pick_shipname() {
 	return new_name;
 }
 
-std::string Player::pick_portname() {
-	++port_name_counter_;
+std::string Player::pick_warehousename(bool port) {
+	++warehouse_name_counter_;
 
-	if (remaining_portnames_.empty()) {
-		return format(pgettext("portname", "Port %d"), port_name_counter_);
+	if (remaining_warehousenames_.empty()) {
+		return format(port ? pgettext("warehouse", "Port %d") : pgettext("warehouse", "Warehouse %d"), warehouse_name_counter_);
 	}
 
 	Game& game = dynamic_cast<Game&>(egbase());
-	const size_t index = game.logic_rand() % remaining_portnames_.size();
-	auto it = remaining_portnames_.begin();
+	const size_t index = game.logic_rand() % remaining_warehousenames_.size();
+	auto it = remaining_warehousenames_.begin();
 	std::advance(it, index);
 	std::string new_name = *it;
-	remaining_portnames_.erase(it);
+	remaining_warehousenames_.erase(it);
 	return new_name;
 }
 
@@ -1994,13 +1995,13 @@ void Player::read_remaining_shipnames(FileRead& fr) {
 	}
 	ship_name_counter_ = fr.unsigned_32();
 }
-void Player::read_remaining_portnames(FileRead& fr) {
-	remaining_portnames_.clear();
+void Player::read_remaining_warehousenames(FileRead& fr) {
+	remaining_warehousenames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
-		remaining_portnames_.push_back(fr.string());
+		remaining_warehousenames_.push_back(fr.string());
 	}
-	port_name_counter_ = fr.unsigned_32();
+	warehouse_name_counter_ = fr.unsigned_32();
 }
 
 void Player::init_statistics() {
@@ -2166,12 +2167,12 @@ void Player::write_remaining_shipnames(FileWrite& fw) const {
 	}
 	fw.unsigned_32(ship_name_counter_);
 }
-void Player::write_remaining_portnames(FileWrite& fw) const {
-	fw.unsigned_16(remaining_portnames_.size());
-	for (const auto& portname : remaining_portnames_) {
-		fw.string(portname);
+void Player::write_remaining_warehousenames(FileWrite& fw) const {
+	fw.unsigned_16(remaining_warehousenames_.size());
+	for (const auto& warehousename : remaining_warehousenames_) {
+		fw.string(warehousename);
 	}
-	fw.unsigned_32(port_name_counter_);
+	fw.unsigned_32(warehouse_name_counter_);
 }
 
 /**

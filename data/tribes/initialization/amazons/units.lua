@@ -1633,345 +1633,345 @@ wl.Descriptions():new_tribe {
       }
    },
 
-   port_names = {
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Alter"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Anumā"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Aquiqui"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Arapixuna"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Aritapera"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Atamanai"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Amorim"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Canindé"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Cuia"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Cacoal"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Capichauā"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Cipoal"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Cupiranga"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Curariaca"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Curupari"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Curuá"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Diogo"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Guajará"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Guarana"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Gurupá"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Ipanema"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Ipaupixuna"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Irateua"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Itacoatiara"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Itanduba"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Itapari"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Jaburu"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Jacarecapá"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Jaguara"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Janauacá"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Macapá"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Maguari"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Mambeca"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Manacapuru"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Mararu"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Maripi"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Maruá"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Mataraí"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Miri"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Moju"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Mojui"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Morimutuba"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Oriximiná"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Pacoval"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Paranquara"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Paricó"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Pedreira"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Povoado"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Prainha"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Preta"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Santarém"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Socorro"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Solimōes"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Surucá"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Tambaqui"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Tapará"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Taperinha"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Tiningu"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Tomé"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Una"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Bonampak"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Calakmul"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Chichén Itzá"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Copán"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Kaminaljuyú"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Lamanai"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Mayapán"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Pomoná"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Quiriguá"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Tikal"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Tononá"),
-      -- TRANSLATORS: This Amazonian port is named after a Maya city
-      pgettext("portname", "Uxmal"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Arequipa"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Aypate"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Cahuachi"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Choquequirao"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Kashamarka"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Kuelap"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Machu Picchu"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Nazca"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Ollantaytambo"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Pachacamac"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Paititi"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Paqari-tampu"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Cuzco"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Teyuna"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Tiahuanaco"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Vilcabamba"),
-      -- TRANSLATORS: This Amazonian port is named after an Inca city
-      pgettext("portname", "Vitcos"),
-      -- TRANSLATORS: This Amazonian port is named after a part of the Inca Empire
-      pgettext("portname", "Antisuyu"),
-      -- TRANSLATORS: This Amazonian port is named after a part of the Inca Empire
-      pgettext("portname", "Chinchasuyu"),
-      -- TRANSLATORS: This Amazonian port is named after a part of the Inca Empire
-      pgettext("portname", "Kuntisuyu"),
-      -- TRANSLATORS: This Amazonian port is named after a part of the Inca Empire
-      pgettext("portname", "Qullasuyu"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Achuar"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Aguaruna"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Aikanã"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Aimoré"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Amahuaca"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Amuesha"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Apiacá"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Arapaco"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Arara"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Ararandeura"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Arasairi"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Araueté"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Awá"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Aweti"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Banawá"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Baniwa"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Barasana"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Caeté"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Chaywita"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Cocama"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Enawene Nawe"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Goitacaz"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Himarimã"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Huambisa"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Irántxe"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Kachá"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Kagwahiva"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Kamayurá"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Kanamarí"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Kapixaná"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Kareneri"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Karitiâna"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Kaxinawá"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Kayapo"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Kobeua"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Korubu"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Kuikoro"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Machiguenga"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Majaguaje"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Makuna"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Marajoara"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Marubo"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Mayoruna"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Miriti"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Nahukuá"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Nambikwara"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Ocaina"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Omagua"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Pacanawa"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Pacawara"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Pirahã"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Potiguara"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Saraguro"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Sateré-Mawé"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Suruwaha"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Suyá"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Tabajara"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Tacana"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Tamoio"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Tapirapé"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Tariana"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Temiminó"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Terena"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Toromona"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Tremembé"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Tsimané"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Tupinambá"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Tupiniquim"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Uru-Eu-Wau-Wau"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Waorani"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Waurá"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Yaminawá"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Yaruna"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Yawalipiti"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Yawanawa"),
-      -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
-      pgettext("portname", "Yora"),
+   warehouse_names = {
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Alter"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Anumā"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Aquiqui"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Arapixuna"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Aritapera"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Atamanai"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Amorim"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Canindé"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Cuia"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Cacoal"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Capichauā"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Cipoal"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Cupiranga"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Curariaca"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Curupari"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Curuá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Diogo"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Guajará"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Guarana"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Gurupá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Ipanema"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Ipaupixuna"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Irateua"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Itacoatiara"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Itanduba"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Itapari"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Jaburu"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Jacarecapá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Jaguara"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Janauacá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Macapá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Maguari"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Mambeca"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Manacapuru"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Mararu"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Maripi"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Maruá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Mataraí"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Miri"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Moju"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Mojui"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Morimutuba"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Oriximiná"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Pacoval"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Paranquara"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Paricó"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Pedreira"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Povoado"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Prainha"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Preta"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Santarém"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Socorro"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Solimōes"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Surucá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Tambaqui"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Tapará"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Taperinha"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Tiningu"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Tomé"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon Basin
+      pgettext("warehousename", "Una"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Bonampak"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Calakmul"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Chichén Itzá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Copán"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Kaminaljuyú"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Lamanai"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Mayapán"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Pomoná"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Quiriguá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Tikal"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Tononá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a Maya city
+      pgettext("warehousename", "Uxmal"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Arequipa"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Aypate"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Cahuachi"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Choquequirao"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Kashamarka"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Kuelap"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Machu Picchu"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Nazca"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Ollantaytambo"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Pachacamac"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Paititi"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Paqari-tampu"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Cuzco"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Teyuna"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Tiahuanaco"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Vilcabamba"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an Inca city
+      pgettext("warehousename", "Vitcos"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a part of the Inca Empire
+      pgettext("warehousename", "Antisuyu"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a part of the Inca Empire
+      pgettext("warehousename", "Chinchasuyu"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a part of the Inca Empire
+      pgettext("warehousename", "Kuntisuyu"),
+      -- TRANSLATORS: This Amazonian warehouse is named after a part of the Inca Empire
+      pgettext("warehousename", "Qullasuyu"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Achuar"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Aguaruna"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Aikanã"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Aimoré"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Amahuaca"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Amuesha"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Apiacá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Arapaco"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Arara"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Ararandeura"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Arasairi"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Araueté"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Awá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Aweti"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Banawá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Baniwa"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Barasana"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Caeté"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Chaywita"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Cocama"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Enawene Nawe"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Goitacaz"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Himarimã"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Huambisa"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Irántxe"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Kachá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Kagwahiva"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Kamayurá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Kanamarí"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Kapixaná"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Kareneri"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Karitiâna"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Kaxinawá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Kayapo"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Kobeua"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Korubu"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Kuikoro"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Machiguenga"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Majaguaje"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Makuna"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Marajoara"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Marubo"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Mayoruna"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Miriti"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Nahukuá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Nambikwara"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Ocaina"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Omagua"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Pacanawa"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Pacawara"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Pirahã"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Potiguara"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Saraguro"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Sateré-Mawé"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Suruwaha"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Suyá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Tabajara"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Tacana"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Tamoio"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Tapirapé"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Tariana"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Temiminó"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Terena"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Toromona"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Tremembé"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Tsimané"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Tupinambá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Tupiniquim"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Uru-Eu-Wau-Wau"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Waorani"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Waurá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Yaminawá"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Yaruna"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Yawalipiti"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Yawanawa"),
+      -- TRANSLATORS: This Amazonian warehouse is named after an indigenous people in the Amazon Basin
+      pgettext("warehousename", "Yora"),
    },
 
    -- Productionsite status strings

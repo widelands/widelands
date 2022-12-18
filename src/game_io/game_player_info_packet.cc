@@ -33,7 +33,7 @@ namespace Widelands {
 
 /* Changelog:
  * Version 30: Release 1.1
- * Version 31: Added port names.
+ * Version 31: Added warehouse names.
  */
 constexpr uint16_t kCurrentPacketVersion = 31;
 
@@ -82,7 +82,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 					player->read_remaining_shipnames(fr);
 					if (packet_version >= 31) {
 						// TODO(Nordfriese): Savegame compatibility, remove after v1.2
-						player->read_remaining_portnames(fr);
+						player->read_remaining_warehousenames(fr);
 					}
 
 					player->casualties_ = fr.unsigned_32();
@@ -160,7 +160,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver* /* 
 
 		plr->write_statistics(fw);
 		plr->write_remaining_shipnames(fw);
-		plr->write_remaining_portnames(fw);
+		plr->write_remaining_warehousenames(fw);
 		fw.unsigned_32(plr->casualties());
 		fw.unsigned_32(plr->kills());
 		fw.unsigned_32(plr->msites_lost());

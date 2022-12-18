@@ -2456,8 +2456,8 @@ void CmdShipPortName::execute(Game& game) {
 		dynamic_cast<Ship&>(*mo).set_shipname(name_);
 		return;
 
-	case MapObjectType::PORTDOCK:
-		dynamic_cast<PortDock&>(*mo).set_port_name(name_);
+	case MapObjectType::WAREHOUSE:
+		dynamic_cast<Warehouse&>(*mo).set_warehouse_name(name_);
 		return;
 
 	default:

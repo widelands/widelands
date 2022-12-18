@@ -213,10 +213,10 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 			}
 		}
 
-		if (table.has_key("port_names")) {
-			port_names_ = table.get_table("port_names")->array_entries<std::string>();
+		if (table.has_key("warehouse_names")) {
+			warehouse_names_ = table.get_table("warehouse_names")->array_entries<std::string>();
 		} else {
-			log_warn("Tribe %s specifies no port_names", name().c_str());
+			log_warn("Tribe %s specifies no warehouse_names", name().c_str());
 		}
 
 		// TODO(Nordfriese): Require these strings after v1.1

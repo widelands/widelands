@@ -130,13 +130,6 @@ public:
 	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
 	void set_expedition_bootstrap_complete(Game& game, bool complete);
 
-	[[nodiscard]] const std::string& get_port_name() const {
-		return port_name_;
-	}
-	void set_port_name(const std::string& name) {
-		port_name_ = name;
-	}
-
 private:
 	friend struct ShipFleet;
 	friend struct ShippingSchedule;
@@ -160,7 +153,6 @@ private:
 	std::list<ShippingItem> waiting_;
 	bool expedition_ready_{false};
 	bool expedition_cancelling_{false};
-	std::string port_name_;
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
 
