@@ -185,9 +185,8 @@ Player::Player(EditorGameBase& the_egbase,
 	const Widelands::ShipDescr& ship = *egbase_.descriptions().get_ship_descr(tribe().ship());
 	remaining_shipnames_.insert(
 	   remaining_shipnames_.begin(), ship.get_ship_names().begin(), ship.get_ship_names().end());
-	remaining_portnames_.insert(
-	   remaining_portnames_.begin(), tribe().get_port_names().begin(),
-	   tribe().get_port_names().end());
+	remaining_portnames_.insert(remaining_portnames_.begin(), tribe().get_port_names().begin(),
+	                            tribe().get_port_names().end());
 
 	update_team_players();
 }
