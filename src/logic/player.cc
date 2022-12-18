@@ -1956,8 +1956,9 @@ std::string Player::pick_shipname() {
 		return format(pgettext("shipname", "Ship %d"), ship_name_counter_);
 	}
 
-	Game& game = dynamic_cast<Game&>(egbase());
-	const size_t index = game.logic_rand() % remaining_shipnames_.size();
+	const size_t index = egbase().is_game() ?
+			(dynamic_cast<Game&>(egbase()).logic_rand() % remaining_shipnames_.size()) :
+			RNG::static_rand(remaining_shipnames_.size());
 	auto it = remaining_shipnames_.begin();
 	std::advance(it, index);
 	std::string new_name = *it;
@@ -1973,8 +1974,9 @@ std::string Player::pick_warehousename(bool port) {
 		              warehouse_name_counter_);
 	}
 
-	Game& game = dynamic_cast<Game&>(egbase());
-	const size_t index = game.logic_rand() % remaining_warehousenames_.size();
+	const size_t index = egbase().is_game() ?
+			(dynamic_cast<Game&>(egbase()).logic_rand() % remaining_warehousenames_.size()) :
+			RNG::static_rand(remaining_warehousenames_.size());
 	auto it = remaining_warehousenames_.begin();
 	std::advance(it, index);
 	std::string new_name = *it;
