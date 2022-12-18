@@ -11,7 +11,7 @@ wl.Descriptions():new_tribe {
    name = "amazons",
    animation_directory = image_dirname,
    animations = {
-      frontier = { hotspot = {5, 35} },
+      frontier = { hotspot = {8, 36} },
       pinned_note = { hotspot = {18, 67} },
       bridge_normal_e =  { hotspot = {-1, 15}},
       bridge_busy_e =    { hotspot = {-1, 15}},
