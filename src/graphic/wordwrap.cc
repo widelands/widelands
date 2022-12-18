@@ -284,7 +284,8 @@ uint32_t WordWrap::width() const {
  * Compute the total height of the word-wrapped text.
  */
 uint32_t WordWrap::height() const {
-	return lines_.size() * text_height(fontsize_) + 2 * kLineMargin;  // NOLINT silence bugprone-implicit-widening-of-multiplication-result
+	return lines_.size() * text_height(fontsize_) +
+	       2 * kLineMargin;  // NOLINT silence bugprone-implicit-widening-of-multiplication-result
 }
 
 uint32_t WordWrap::line_index(int32_t y) const {
