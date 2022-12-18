@@ -371,7 +371,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
       pgettext("portname", "Rafina"),
       -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
-      pgettext("portname", "Rhodes"),
+      pgettext("portname", "Rhodos"),
       -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
       pgettext("portname", "Samos"),
       -- TRANSLATORS: This Atlantean port is named after a harbour in Greece

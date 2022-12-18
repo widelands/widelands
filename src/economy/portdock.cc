@@ -487,6 +487,7 @@ void PortDock::Loader::load(FileRead& fr, uint8_t packet_version) {
 
 	PortDock& pd = get<PortDock>();
 
+	assert(pd.port_name_.empty());
 	// TODO(Nordfriese): Savegame compatibility v1.2
 	pd.port_name_ = packet_version >= 7 ? fr.string() : pd.get_owner()->pick_portname();
 	warehouse_ = fr.unsigned_32();

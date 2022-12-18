@@ -267,7 +267,7 @@ void WarehouseWindow::setup_name_field_editbox(UI::Box& vbox) {
 		if (wh == nullptr || wh->get_portdock() == nullptr) {
 			return;
 		}
-		if (Widelands::Game* game = ibase()->get_game()) {
+		if (Widelands::Game* game = ibase()->get_game(); game != nullptr) {
 			game->send_player_ship_port_name(
 			   wh->owner().player_number(), wh->get_portdock()->serial(), name_field->text());
 		} else {

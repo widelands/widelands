@@ -109,9 +109,6 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 }
 
 void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
-	Widelands::Building* building = building_.get(parent_->egbase());
-	assert(building != nullptr);
-
 	capscache_player_number_ = 0;
 	capsbuttons_ = nullptr;
 	capscache_ = 0;

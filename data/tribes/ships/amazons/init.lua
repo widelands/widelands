@@ -367,9 +367,6 @@ wl.Descriptions():new_ship_type {
       pgettext("shipname", "Xeruã"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Xie"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Zinho"),
-
       -- TRANSLATORS: This Amazonian ship is named after an Inca god
       pgettext("shipname", "Apu Illapu"),
       -- TRANSLATORS: This Amazonian ship is named after an Inca god
@@ -396,7 +393,6 @@ wl.Descriptions():new_ship_type {
       pgettext("shipname", "Viracocha"),
       -- TRANSLATORS: This Amazonian ship is named after an Inca god
       pgettext("shipname", "Yakumama"),
-
       -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
       pgettext("shipname", "Atahuallpa"),
       -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
@@ -421,7 +417,6 @@ wl.Descriptions():new_ship_type {
       pgettext("shipname", "Yawar Waqaq"),
       -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
       pgettext("shipname", "Zinchi Roqa"),
-
       -- TRANSLATORS: This Amazonian ship is named after the lake in the Andes
       pgettext("shipname", "Lake Titicaca"),
       -- TRANSLATORS: This Amazonian ship is named after the main Inca temple
@@ -442,8 +437,6 @@ wl.Descriptions():new_ship_type {
       pgettext("portname", "Atamanai"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Amorim"),
-      -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
-      pgettext("portname", "Brasil"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Canindé"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
@@ -550,7 +543,6 @@ wl.Descriptions():new_ship_type {
       pgettext("portname", "Tomé"),
       -- TRANSLATORS: This Amazonian port is named after a town in the Amazon Basin
       pgettext("portname", "Una"),
-
       -- TRANSLATORS: This Amazonian port is named after a Maya city
       pgettext("portname", "Bonampak"),
       -- TRANSLATORS: This Amazonian port is named after a Maya city
@@ -575,7 +567,6 @@ wl.Descriptions():new_ship_type {
       pgettext("portname", "Tononá"),
       -- TRANSLATORS: This Amazonian port is named after a Maya city
       pgettext("portname", "Uxmal"),
-
       -- TRANSLATORS: This Amazonian port is named after an Inca city
       pgettext("portname", "Arequipa"),
       -- TRANSLATORS: This Amazonian port is named after an Inca city
@@ -610,7 +601,6 @@ wl.Descriptions():new_ship_type {
       pgettext("portname", "Vilcabamba"),
       -- TRANSLATORS: This Amazonian port is named after an Inca city
       pgettext("portname", "Vitcos"),
-
       -- TRANSLATORS: This Amazonian port is named after a part of the Inca Empire
       pgettext("portname", "Antisuyu"),
       -- TRANSLATORS: This Amazonian port is named after a part of the Inca Empire
@@ -619,7 +609,6 @@ wl.Descriptions():new_ship_type {
       pgettext("portname", "Kuntisuyu"),
       -- TRANSLATORS: This Amazonian port is named after a part of the Inca Empire
       pgettext("portname", "Qullasuyu"),
-
       -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin
       pgettext("portname", "Achuar"),
       -- TRANSLATORS: This Amazonian port is named after an indigenous people in the Amazon Basin

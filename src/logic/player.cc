@@ -181,15 +181,10 @@ Player::Player(EditorGameBase& the_egbase,
 		   }
 	   });
 
-	// Populating remaining_shipnames vector
-	for (const std::string& shipname :
-	     egbase_.descriptions().get_ship_descr(tribe().ship())->get_ship_names()) {
-		remaining_shipnames_.push_back(shipname);
-	}
-	for (const std::string& portname :
-	     egbase_.descriptions().get_ship_descr(tribe().ship())->get_port_names()) {
-		remaining_portnames_.push_back(portname);
-	}
+	// Populating list of remaining ship/port names
+	const Widelands::ShipDescr& ship = *egbase_.descriptions().get_ship_descr(tribe().ship());
+	remaining_shipnames_.insert(remaining_shipnames_.begin(), ship.get_ship_names().begin(), ship.get_ship_names().end());
+	remaining_portnames_.insert(remaining_portnames_.begin(), ship.get_port_names().begin(), ship.get_port_names().end());
 
 	update_team_players();
 }
@@ -1951,7 +1946,7 @@ void Player::set_hidden_from_general_statistics(const bool hide) {
 /**
  * Pick random name from remaining names (if any)
  */
-const std::string Player::pick_shipname() {
+std::string Player::pick_shipname() {
 	++ship_name_counter_;
 
 	if (remaining_shipnames_.empty()) {
@@ -1967,7 +1962,7 @@ const std::string Player::pick_shipname() {
 	return new_name;
 }
 
-const std::string Player::pick_portname() {
+std::string Player::pick_portname() {
 	++port_name_counter_;
 
 	if (remaining_portnames_.empty()) {

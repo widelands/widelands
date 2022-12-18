@@ -589,8 +589,8 @@ public:
 	void set_attack_forbidden(PlayerNumber who, bool forbid);
 	bool is_attack_forbidden(PlayerNumber who) const;
 
-	const std::string pick_shipname();
-	const std::string pick_portname();
+	[[nodiscard]] std::string pick_shipname();
+	[[nodiscard]] std::string pick_portname();
 
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);

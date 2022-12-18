@@ -136,6 +136,7 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	if (table.has_key("port_names")) {
 		port_names_ = table.get_table("port_names")->array_entries<std::string>();
 	} else {
+		// Non-critical for add-on tribes compatibility
 		log_warn("Ship %s specifies no port_names", name().c_str());
 	}
 
@@ -1074,7 +1075,7 @@ void Ship::draw(const EditorGameBase& egbase,
 				statistics_string =
 				   /** TRANSLATORS: This is a ship state. The ship is currently sailing
 				    * to a specific destination port without transporting wares. */
-				   format(pgettext("ship_state", "Roaming to %s"), destination_->get_port_name());
+				   format(pgettext("ship_state", "Sailing to %s"), destination_->get_port_name());
 			}
 			break;
 		case (ShipStates::kExpeditionWaiting):

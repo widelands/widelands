@@ -113,13 +113,11 @@ wl.Descriptions():new_ship_type {
    },
    port_names = {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Al’fjord"),
+      pgettext("portname", "Al’Fjord"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Al’sund"),
+      pgettext("portname", "Al’Sund"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Al’thaug"),
-      -- TRANSLATORS: This Barbarian port is named after the barbarian capital.
-      pgettext("portname", "Al’thunran"),
+      pgettext("portname", "Al’Thaug"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Al’ta"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -137,7 +135,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "As’ral"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "As’kvoll"),
+      pgettext("portname", "As’Kvoll"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "As’key"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -175,9 +173,9 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Birk’nes"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Bjer’kreim"),
+      pgettext("portname", "Bjer’Kreim"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Bjer’fjord’n"),
+      pgettext("portname", "Bjer’Fjord’n"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Bo’do"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -215,13 +213,13 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Elv’rum"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "En’bakk"),
+      pgettext("portname", "En’Bakk"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Eng’rdal"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Et’ne"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Et’nedal"),
+      pgettext("portname", "Et’Nedal"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Ev’nes"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -351,7 +349,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Holm’strand"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Hol’talen"),
+      pgettext("portname", "Hol’Talen"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Horten"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -373,7 +371,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Ind’re"),
       -- TRANSLATORS: This Barbarian port is named after a barbarian town.
-      pgettext("portname", "Ir Kal’tur"),
+      pgettext("portname", "Ir Kal’Tur"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Iv’land"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -409,11 +407,11 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Kvin’sdal"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Kvin’herad"),
+      pgettext("portname", "Kvin’Herad"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Kvit’seid"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Kvit’sey"),
+      pgettext("portname", "Kvit’Sey"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Lærdal"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -465,7 +463,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "L’ngen"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Mal’selv"),
+      pgettext("portname", "Mal’Selv"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Mal’vik"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -521,7 +519,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Nome"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Nord’aurdal"),
+      pgettext("portname", "Nord’Aurdal"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Nord’fron"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -529,7 +527,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Nord’odal"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Nord’reisa"),
+      pgettext("portname", "Nord’Reisa"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Nord’re"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -599,13 +597,13 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "R’dey"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Rol’lag"),
+      pgettext("portname", "Rol’Lag"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "R’ros"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Rest"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Reyr’vik"),
+      pgettext("portname", "Reyr’Vik"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Sal’ngen"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -693,9 +691,9 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Stord"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Stor’elvdal"),
+      pgettext("portname", "Stor’Elvdal"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Stor’fjord"),
+      pgettext("portname", "Stor’Fjord"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Stranda"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
@@ -791,7 +789,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Veg’rshei"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
-      pgettext("portname", "Ven’sla"),
+      pgettext("portname", "Ven’Sla"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.
       pgettext("portname", "Ver’dal"),
       -- TRANSLATORS: This Barbarian port is inspired by a Norwegian town name.

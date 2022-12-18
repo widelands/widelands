@@ -1196,8 +1196,8 @@ void Game::send_player_pinned_note(
 	send_player_command(new CmdPinnedNote(get_gametime(), p, text, pos, rgb, del));
 }
 
-void Game::send_player_ship_port_name(PlayerNumber p, Serial s, const std::string& n) {
-	send_player_command(new CmdShipPortName(get_gametime(), p, s, n));
+void Game::send_player_ship_port_name(PlayerNumber p, Serial s, const std::string& name) {
+	send_player_command(new CmdShipPortName(get_gametime(), p, s, name));
 }
 
 int Game::propose_trade(const Trade& trade) {
