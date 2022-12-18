@@ -392,7 +392,9 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			const TribeDescr& tribe = player->tribe();
 
 			assert(warehouse.get_warehouse_name().empty());
-			warehouse.set_warehouse_name(packet_version >= 9 ? fr.string() : player->pick_warehousename(warehouse.descr().get_isport()));
+			warehouse.set_warehouse_name(
+			   packet_version >= 9 ? fr.string() :
+                                  player->pick_warehousename(warehouse.descr().get_isport()));
 
 			while (fr.unsigned_8() != 0u) {
 				const DescriptionIndex& id = game.mutable_descriptions()->load_ware(fr.c_string());

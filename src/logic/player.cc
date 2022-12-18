@@ -1969,7 +1969,8 @@ std::string Player::pick_warehousename(bool port) {
 	++warehouse_name_counter_;
 
 	if (remaining_warehousenames_.empty()) {
-		return format(port ? pgettext("warehouse", "Port %d") : pgettext("warehouse", "Warehouse %d"), warehouse_name_counter_);
+		return format(port ? pgettext("warehouse", "Port %d") : pgettext("warehouse", "Warehouse %d"),
+		              warehouse_name_counter_);
 	}
 
 	Game& game = dynamic_cast<Game&>(egbase());

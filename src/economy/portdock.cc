@@ -453,11 +453,12 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 
 	if (warehouse_ != nullptr) {
 		Coords pos(warehouse_->get_position());
-		molog(
-		   egbase.get_gametime(),
-		   "PortDock for warehouse %u (%s) (at %i,%i) in fleet %u, expedition_ready: %s, waiting: %" PRIuS
-		   "\n",
-		   warehouse_->serial(), warehouse_->get_warehouse_name().c_str(), pos.x, pos.y, fleet_ != nullptr ? fleet_->serial() : 0, expedition_ready_ ? "true" : "false", waiting_.size());
+		molog(egbase.get_gametime(),
+		      "PortDock for warehouse %u (%s) (at %i,%i) in fleet %u, expedition_ready: %s, waiting: "
+		      "%" PRIuS "\n",
+		      warehouse_->serial(), warehouse_->get_warehouse_name().c_str(), pos.x, pos.y,
+		      fleet_ != nullptr ? fleet_->serial() : 0, expedition_ready_ ? "true" : "false",
+		      waiting_.size());
 	} else {
 		molog(egbase.get_gametime(),
 		      "PortDock without a warehouse in fleet %u, expedition_ready: %s, waiting: %" PRIuS "\n",

@@ -1063,12 +1063,14 @@ void Ship::draw(const EditorGameBase& egbase,
 				statistics_string =
 				   /** TRANSLATORS: This is a ship state. The ship is currently
 				    * transporting wares to a specific destination port. */
-				   format(pgettext("ship_state", "Shipping to %s"), destination_->get_warehouse()->get_warehouse_name());
+				   format(pgettext("ship_state", "Shipping to %s"),
+				          destination_->get_warehouse()->get_warehouse_name());
 			} else {
 				statistics_string =
 				   /** TRANSLATORS: This is a ship state. The ship is currently sailing
 				    * to a specific destination port without transporting wares. */
-				   format(pgettext("ship_state", "Sailing to %s"), destination_->get_warehouse()->get_warehouse_name());
+				   format(pgettext("ship_state", "Sailing to %s"),
+				          destination_->get_warehouse()->get_warehouse_name());
 			}
 			break;
 		case (ShipStates::kExpeditionWaiting):
@@ -1106,13 +1108,14 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "Name: %s", get_shipname().c_str());
 	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\n",
 	      fleet_ != nullptr ? fleet_->serial() : 0,
-	      (lastdock_.is_set()) ? format("%u (%3dx%3d) %s", lastdock_.serial(),
-	                                    lastdock_.get(egbase)->get_positions(egbase)[0].x,
-	                                    lastdock_.get(egbase)->get_positions(egbase)[0].y,
-	                                    lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str())
+	      (lastdock_.is_set()) ?
+            format("%u (%3dx%3d) %s", lastdock_.serial(),
+	                lastdock_.get(egbase)->get_positions(egbase)[0].x,
+	                lastdock_.get(egbase)->get_positions(egbase)[0].y,
+	                lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str())
 
-	                                .c_str() :
-                                "-");
+	            .c_str() :
+            "-");
 	if (destination_ != nullptr) {
 		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d) %s\n", destination_->serial(),
 		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y,
