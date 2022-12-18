@@ -57,6 +57,15 @@
 --    **collectors_points_table**: An array of tables of warename-integer pairs used by the Collectors win condition.
 --    This table shall contain gold and all weapons and armor needed for soldier training.
 --
+--    **port_names**: A list of strings with port names presented to the user - be creative. Example:
+--
+--    .. code-block:: lua
+--
+--       port_names = {
+--          pgettext("portname", "Kos"),
+--          pgettext("portname", "Patmos"),
+--       }
+--
 --    **roads**: The file paths for the tribe's road textures in 3 subtables ``busy``,
 --    ``normal`` and ``waterway``.
 --
@@ -2022,6 +2031,159 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
          }
       }
+   },
+
+   port_names = {
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Aegina"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Constantinos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kirikos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Aggistri"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Alonissos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Anafi"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Andros"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Antikythira"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Arkyi"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Astypalea"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Chalki"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Chania"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Chios"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Diafani"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Donoussa"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Euboea"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Folegandros"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Fourni"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Gytheio"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Heraklion"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Hydra"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Igoumenitsa"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Ios"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Iraklia"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Ithaki"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kalamata"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kalymnos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Karlovassi"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Karpathos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kasos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kastelorizo"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Katapola"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kavala"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kefalonia"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kilini"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kimolos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kissamos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Korfu"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Koufonissi"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kythira"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Kythnos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Lavrio"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Leros"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Lesvos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Limnos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Lipsi"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Milos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Mykonos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Naxos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Nisyros"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Paros"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Patmos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Patras"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Paxoi"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Piraeus"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Poros"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Rafina"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Rhodos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Samos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Santorini"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Schinoussa"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Serifos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Sifnos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Sikinos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Sitia"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Skiathos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Skopelos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Symi"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Syros"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Thessaloniki"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Tilos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Tinos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Volos"),
+      -- TRANSLATORS: This Atlantean port is named after a harbour in Greece
+      pgettext("portname", "Zakynthos"),
    },
 
    -- Productionsite status strings

@@ -133,13 +133,6 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
    : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table),
      default_capacity_(table.has_key("capacity") ? table.get_int("capacity") : 20),
      ship_names_(table.get_table("names")->array_entries<std::string>()) {
-	if (table.has_key("port_names")) {
-		port_names_ = table.get_table("port_names")->array_entries<std::string>();
-	} else {
-		// Non-critical for add-on tribes compatibility
-		log_warn("Ship %s specifies no port_names", name().c_str());
-	}
-
 	// Read the sailing animations
 	assign_directional_animation(&sail_anims_, "sail");
 }

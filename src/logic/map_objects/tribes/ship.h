@@ -70,15 +70,11 @@ public:
 	[[nodiscard]] const std::vector<std::string>& get_ship_names() const {
 		return ship_names_;
 	}
-	[[nodiscard]] const std::vector<std::string>& get_port_names() const {
-		return port_names_;
-	}
 
 private:
 	DirAnimations sail_anims_;
 	Quantity default_capacity_;
 	std::vector<std::string> ship_names_;
-	std::vector<std::string> port_names_;
 
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };

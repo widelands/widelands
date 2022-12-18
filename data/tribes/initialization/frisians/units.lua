@@ -2205,6 +2205,135 @@ wl.Descriptions():new_tribe {
       }
    },
 
+   port_names = {
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Aalkersem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Äfkebel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Ämelsbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "A Nääs"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Ārichsem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Baamst"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Beergem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Borigsem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Bousbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Bräist"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Bualigsem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Deesbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Doogebel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Dunsem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "E Hoorne"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Emst"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Fåålst"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Friedrichstääd"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Gaarding"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Haatst"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Hoorbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Hoorst"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Hörnem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Hüsem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Iibel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Imensteed"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Kååting"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Kairem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Klangsbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Kläntem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Klasbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Kuurlem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Läitjholem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Madlem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Mälst"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Mönkebel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Moosbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Muasem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Naibel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Neebel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Njiblem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Noorst"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Olersem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Odenbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Ödersem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Popenbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Raantem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Reinsbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Rikesbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Risem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Seebel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Snootebel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Söleraanj"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Strükem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Tååting"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Taning"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Teedenbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Tinem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Toorpem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Ülwelsbel"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Wiisem"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "A Wik"),
+      -- TRANSLATORS: This Frisian port is named after a town in Northern Frisia
+      pgettext("portname", "Witjdün"),
+   },
+
    -- Productionsite status strings
 
    -- TRANSLATORS: Productivity label on a frisian building if there is 1 worker missing
