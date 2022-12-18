@@ -6781,8 +6781,8 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 
 	// to avoid floats real multiplier is multiplier/10
 	const uint16_t multiplier =
-	   std::max<uint16_t>(static_cast<uint16_t>((productionsites.size() + num_ports * 5) / 5),
-	                      10);  // NOLINT silence bugprone-implicit-widening-of-multiplication-result
+	   std::max<uint16_t>(static_cast<uint16_t>((productionsites.size()) + num_ports * 5) / 5,  // NOLINT silence bugprone-implicit-widening-of-multiplication-result
+	                      10);
 
 	for (EconomyObserver* observer : economies) {
 		if (observer->economy.type() != Widelands::wwWARE) {
