@@ -846,12 +846,9 @@ void ProductionSite::set_next_program_override(Game& game,
 }
 
 bool ProductionSite::has_forced_state() const {
-	for (const State& s : stack_) {
-		if ((s.flags & State::StateFlags::kStateFlagIgnoreStopped) != 0u) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(stack_.begin(), stack_.end(), [](const State& s) {
+		return (s.flags & State::StateFlags::kStateFlagIgnoreStopped) != 0;
+	});
 }
 
 void ProductionSite::find_and_start_next_program(Game& game) {

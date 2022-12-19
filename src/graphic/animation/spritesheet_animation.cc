@@ -19,6 +19,7 @@
 #include "graphic/animation/spritesheet_animation.h"
 
 #include <cassert>
+#include <cstddef>
 #include <memory>
 
 #include "graphic/image.h"
@@ -128,7 +129,7 @@ SpriteSheetAnimation::SpriteSheetMipMapEntry::frame_textures(bool return_playerc
 	std::vector<std::unique_ptr<const Texture>> result;
 	const Rectf rect(Vector2f::zero(), width(), height());
 	if (!return_playercolor_masks || has_playercolor_masks) {
-		const size_t no_of_frames = rows * columns;
+		const size_t no_of_frames = static_cast<size_t>(rows) * columns;
 		for (size_t i = 0; i < no_of_frames; ++i) {
 			std::unique_ptr<Texture> texture(new Texture(width(), height()));
 

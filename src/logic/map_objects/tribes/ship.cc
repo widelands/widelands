@@ -18,6 +18,7 @@
 
 #include "logic/map_objects/tribes/ship.h"
 
+#include <array>
 #include <memory>
 
 #include "base/log.h"
@@ -106,21 +107,17 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 	}
 
 	// Next neighbours to the North and the West may have size = small immovables
-	Widelands::FCoords cn[7];
-	map.get_bln(c[1], &cn[0]);
+	std::array<Widelands::FCoords, 7> cn;
+	map.get_bln(c[1], &cn[0]);  // NOLINT no readability-container-data-pointer here
 	map.get_ln(c[1], &cn[1]);
 	map.get_tln(c[1], &cn[2]);
 	map.get_tln(c[2], &cn[3]);
 	map.get_trn(c[2], &cn[4]);
 	map.get_trn(c[3], &cn[5]);
 	map.get_rn(c[3], &cn[6]);
-	for (const Widelands::FCoords& fc : cn) {
-		if (!can_support_port(fc, BaseImmovable::SMALL)) {  // check for blocking immovables
-			return false;
-		}
-	}
-
-	return true;
+	return std::all_of(cn.begin(), cn.end(), [](const Widelands::FCoords& fc) {
+		return can_support_port(fc, BaseImmovable::SMALL);
+	});
 }
 
 }  // namespace

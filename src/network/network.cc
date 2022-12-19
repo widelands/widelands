@@ -205,7 +205,7 @@ uint8_t* SendPacket::get_data() const {
 	buffer[0] = length >> 8;
 	buffer[1] = length & 0xFF;
 
-	return &(buffer[0]);
+	return buffer.data();
 }
 
 /*** class RecvPacket ***/

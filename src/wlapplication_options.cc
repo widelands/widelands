@@ -835,12 +835,8 @@ static bool shared_scope(const std::set<KeyboardShortcutInfo::Scope>& scopes,
 		return true;
 	}
 
-	for (KeyboardShortcutInfo::Scope s : scopes) {
-		if (k.scopes.count(s) != 0u) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(scopes.begin(), scopes.end(),
+	                   [&k](KeyboardShortcutInfo::Scope s) { return k.scopes.count(s) != 0u; });
 }
 
 bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShortcut* conflict) {
@@ -963,14 +959,11 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 		return false;
 	}
 
-	for (const auto& pair : kNumpadIdentifications) {
-		if ((code == pair.first && key.sym == pair.second) ||
-		    (code == pair.second && key.sym == pair.first)) {
-			return true;
-		}
-	}
-
-	return false;
+	return std::any_of(
+	   kNumpadIdentifications.begin(), kNumpadIdentifications.end(), [code, key](const auto& pair) {
+		   return (code == pair.first && key.sym == pair.second) ||
+		          (code == pair.second && key.sym == pair.first);
+	   });
 }
 
 std::string matching_fastplace_shortcut(const SDL_Keysym key, const std::string& tribename) {
