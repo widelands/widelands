@@ -19,7 +19,7 @@
 #include "game_io/game_cmd_queue_packet.h"
 
 #include "base/macros.h"
-#include "base/multithreading.h"
+#include "base/mutex.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"

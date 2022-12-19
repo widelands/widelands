@@ -23,7 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "base/multithreading.h"
+#include "base/mutex.h"
 #include "logic/message.h"
 #include "logic/message_id.h"
 

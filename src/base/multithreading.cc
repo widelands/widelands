@@ -25,6 +25,7 @@
 #include <SDL_timer.h>
 
 #include "base/log.h"
+#include "base/mutex.h"
 #include "base/wexception.h"
 
 static const std::thread::id kNoThread;

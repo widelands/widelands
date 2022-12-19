@@ -22,7 +22,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
-#include "base/multithreading.h"
+#include "base/mutex.h"
 #include "base/string.h"
 #include "base/wexception.h"
 #include "economy/flag.h"

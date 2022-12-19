@@ -23,7 +23,7 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "base/multithreading.h"
+#include "base/mutex.h"
 #include "config.h"
 #include "third_party/gettext/gettext.h"  // For ngettext and pgettext.
 
