@@ -1109,11 +1109,10 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\n",
 	      fleet_ != nullptr ? fleet_->serial() : 0,
 	      (lastdock_.is_set()) ?
-            format("%u (%3dx%3d) %s", lastdock_.serial(),
+            format("%u (%s at %3dx%3d)", lastdock_.serial(),
+	                lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
 	                lastdock_.get(egbase)->get_positions(egbase)[0].x,
-	                lastdock_.get(egbase)->get_positions(egbase)[0].y,
-	                lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str())
-
+	                lastdock_.get(egbase)->get_positions(egbase)[0].y)
 	            .c_str() :
             "-");
 	if (destination_ != nullptr) {
