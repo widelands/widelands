@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-01 04:33+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
@@ -123,11 +123,11 @@ msgstr "Sammler"
 #, lua-format
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
-"highest number of wares after %s wins the game."
+"highest score after %s wins the game."
 msgstr "Du erhältst Punkte für alle wertvollen Waren, die in deinen Lagerhäusern eingelagert sind. Der Spieler, der nach %s die höchste Punktzahl erreicht hat, gewinnt das Spiel."
 
-#. TRANSLATORS: Will be inserted into "The player with the highest number of
-#. wares after %s wins the game."
+#. TRANSLATORS: Will be inserted into "The player with the highest score after
+#. %s wins the game."
 #. TRANSLATORS: Will be inserted into "The winner will be the player […] with
 #. the most territory after %s"
 #. TRANSLATORS: Will be inserted into "The game will end after %s."

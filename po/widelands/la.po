@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-13 03:18+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: mfluehr <radick334@yahoo.com>, 2020\n"
 "Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
@@ -3944,7 +3944,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:896
 #, c-format
-msgid "Fetching add-ons (%.1f%%)"
+msgid "Fetching add-ons… (%.1f%%)"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:899

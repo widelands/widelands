@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-13 03:18+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
@@ -3990,8 +3990,8 @@ msgstr "Niewłaściwa nazwa użytkownika lub hasło:\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:896
 #, c-format
-msgid "Fetching add-ons (%.1f%%)"
-msgstr "Pobieranie dodatków (%.1f%%)"
+msgid "Fetching add-ons… (%.1f%%)"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:899
 msgid "Connecting to the server…"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-22 03:53+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2022\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
@@ -223,13 +223,10 @@ msgstr "Uram! Tájékoztatni szeretnélek a környező törzsekről."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
-"From the north we are endangered by a belligerent tribe, led by warlord "
+"From the North we are endangered by a belligerent tribe, led by warlord "
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
-"Északról egy harcias törzs fenyeget minket, amit a Törver nevű hadúr vezet, "
-"aki rohamléptekkel fejleszti a haderejét. Hamarosan olyan erősek lehetnek, "
-"hogy nem tudnánk nekik ellenállni."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -275,12 +272,9 @@ msgstr "Az északi ellenségünk"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
 "Sire, although our soldiers would face any enemy without the slightest fear,"
-" our rival in the north is still stronger than all our armies combined. We "
+" our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-"Uram! Bár katonáink bármilyen ellenséggel félelem nélkül szállnának szembe, "
-"az északi ellenségünk mégiscsak erősebb, mint a mi teljes haderőnk összesen."
-" Jobb lenne kerülni az összetűzést, amíg nem tudjuk legyőzni őket."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -291,8 +285,8 @@ msgstr ""
 "egy erős hadsereg. Törvernek igen rossz híre van."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
-msgid "Peril from the north"
-msgstr "Veszély északról"
+msgid "Peril from the North"
+msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -341,12 +335,9 @@ msgstr "A nagy tó"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
 "Sire, now that we have conquered the land of Törver, we can make use of "
-"their excellent access to the adjacent great lake. A port in the north will "
+"their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
-"Uram! Most, hogy elfoglaltuk Törver földjét, kihasználhatjuk a szomszédos "
-"nagy tó adta lehetőségeket. Ha építünk egy kikötőt északon, jobb "
-"lehetőségeink lesznek elérni a többi törzset."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -415,25 +406,18 @@ msgstr "A mocsár feltöltése"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
-"Sire, the wet season has created swamps along the brook to the east and we "
+"Sire, the wet season has created swamps along the brook to the East and we "
 "are unable to pass through them. They have to be removed before we can "
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
-"Uram! Az esős évszak idején elmocsarasodott a patak környéke kelet felé, így"
-" nem tudunk átjutni rajta. Fel kell töltenünk a mocsarakat ahhoz, hogy "
-"továbbléphessünk. Ha hozatsz elegendő lapátot az új raktárba, akkor "
-"önkéntesek el tudják végezni a munkát."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
-"Sire, all shovels have been handed out but if we continue at this pace than "
-"we will not have removed the swamps before the next wet season. If you bring"
-" more shovels to the new warehouse then more volunteers will join in."
+"Sire, all shovels have been handed out, but if we continue at this pace we "
+"will not have removed the swamps before the next wet season. If you bring "
+"more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
-"Uram! Kiosztottuk az összes lapátot, de ebben az ütemben haladva nem végzünk"
-" a mocsarak feltöltésével a következő esős évszakig. Ha tudnál még több "
-"lapátot hozatni az új raktárba, akkor további önkénteseket küldhetnénk."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
