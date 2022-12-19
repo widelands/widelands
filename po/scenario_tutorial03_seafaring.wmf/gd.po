@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
 "Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2013\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
@@ -556,10 +556,10 @@ msgstr "Seo as adhbhar gun cleachd sinn bàtaichean-aiseig. ’S e bàtaichean b
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:261
 msgid ""
-" Ferries are built in ferry yards, one rowboat costs two logs and one piece "
+"Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr " Togaidh tu bàtaichean-aiseig ann an taighean-aiseig ’s cosgaidh bàta dà grunn fhiodha agus aon rùsgan clòtha agus thèid a thogail gu luath. ’S e togalach meadhanach a th’ anns an taigh-aiseig a dh’fheumas tu togail faisg air an oirthir."
+msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."

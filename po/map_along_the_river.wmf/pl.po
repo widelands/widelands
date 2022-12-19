@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-22 03:53+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Pawel <pawcio980@gmail.com>, 2022\n"
 "Language-Team: Polish (https://www.transifex.com/widelands/teams/35159/pl/)\n"
@@ -231,13 +231,10 @@ msgstr "Panie, pozwól, że poinformuję cię o otaczających nas plemionach."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
-"From the north we are endangered by a belligerent tribe, led by warlord "
+"From the North we are endangered by a belligerent tribe, led by warlord "
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
-"Od północy jesteśmy zagrożeni przez wojownicze plemię pod wodzą Törvera "
-"który szybko formuje swoje armie. Niedługo mogą stać się zbyt silni aby ich "
-"pokonać."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -284,13 +281,9 @@ msgstr "Nasz północny wróg"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
 "Sire, although our soldiers would face any enemy without the slightest fear,"
-" our rival in the north is still stronger than all our armies combined. We "
+" our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-"Panie, mimo, że nasi żołnierze stanęli by odważnie z każdym wrogiem, nasz "
-"rywal na północy jest nadal silniejszy niż wszystkie nasze armie razem "
-"wzięte. Powinniśmy unikać z nim kontaktu dopóki nie będziemy w stanie go "
-"pokonać."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -301,8 +294,8 @@ msgstr ""
 "Törver ma bardzo złą reputację."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
-msgid "Peril from the north"
-msgstr "Niebezpieczeństwo na północy"
+msgid "Peril from the North"
+msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -351,12 +344,9 @@ msgstr "Wielkie jezioro"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
 "Sire, now that we have conquered the land of Törver, we can make use of "
-"their excellent access to the adjacent great lake. A port in the north will "
+"their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
-"Panie! Teraz gdy podbiliśmy ziemie Törvera możemy użyć wspaniałego dojścia "
-"do przylegającego wielkiego jeziora. Port na północy da nam lepsze "
-"możliwości do kontaktu w innymi plemieniami."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -425,26 +415,18 @@ msgstr "Usuwanie bagniska"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
-"Sire, the wet season has created swamps along the brook to the east and we "
+"Sire, the wet season has created swamps along the brook to the East and we "
 "are unable to pass through them. They have to be removed before we can "
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
-"Panie! Sezon deszczowy spowodował utworzenie się bagnisk wzdłuż strumienia "
-"na wschodzie poprzez które nie możemy przejść. Musimy je usunąć zanim "
-"będziemy mogli iść dalej. Jeśli przetransportujesz odpowiednią ilość łopat "
-"do nowego magazynu wtedy ochotnicy usuną bagniska."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
-"Sire, all shovels have been handed out but if we continue at this pace than "
-"we will not have removed the swamps before the next wet season. If you bring"
-" more shovels to the new warehouse then more volunteers will join in."
+"Sire, all shovels have been handed out, but if we continue at this pace we "
+"will not have removed the swamps before the next wet season. If you bring "
+"more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
-"Panie! Wszystkie łopaty zostały przekazane ale jeśli będziemy kontynuować w "
-"tym tempie nie zdążymy usunąć bagien przed następnym sezonem deszczowym. "
-"Jeśli przetransportujesz więcej łopat do nowego magazynu więcej ochotników "
-"dołączy do pomocy."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-13 03:18+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1156,7 +1156,7 @@ msgstr "Es crea un mapa buit…"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:63
 #: ../../src/logic/addons.cc:58
 msgid "Map Generator"
-msgstr ""
+msgstr "Generador del mapa"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:80
 #: ../../src/wui/gamedetails.cc:167
@@ -1224,7 +1224,7 @@ msgstr "Nombre aleatori:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:206
 msgid "Generate a new random number"
-msgstr ""
+msgstr "Genera un nombre aleatori nou"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:208
 msgid "Map ID:"
@@ -3942,8 +3942,8 @@ msgstr "El nom d’usuari o la contrasenya no són vàlids:\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:896
 #, c-format
-msgid "Fetching add-ons (%.1f%%)"
-msgstr "Es carreguen els complements (%.1f%%)"
+msgid "Fetching add-ons… (%.1f%%)"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:899
 msgid "Connecting to the server…"
@@ -6781,7 +6781,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:376
 msgid "Exit"
-msgstr ""
+msgstr "Surt"
 
 #: ../../src/wlapplication_options.cc:381
 msgid "Zoom In"

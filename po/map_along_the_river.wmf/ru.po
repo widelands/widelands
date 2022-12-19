@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-22 03:53+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
@@ -225,12 +225,13 @@ msgstr "Сир, позвольте вам рассказать об окрест
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
-"From the north we are endangered by a belligerent tribe, led by warlord "
+"From the North we are endangered by a belligerent tribe, led by warlord "
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
-"С севера нам угрожает воинственное племя под начальством Тёрвера, быстро "
-"пополняющего свои армии. Он очень скоро может стать нам не по зубам."
+"С севера нам угрожает воинственное племя, приведённое вождём Тервером. Они "
+"быстро наращивает свои силы. Возможно, вскоре они станут слишком сильными, "
+"чтобы их можно было победить."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -276,12 +277,12 @@ msgstr "Наш северный враг"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
 "Sire, although our soldiers would face any enemy without the slightest fear,"
-" our rival in the north is still stronger than all our armies combined. We "
+" our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-"Сир, хоть в храбрости наших воинов нет никаких сомнений, наши враги на "
-"севере всё ещё сильнее всех наших воинств вместе взятых. Нужно избегать "
-"сражения, пока мы достаточно не окрепнем."
+"Сир, хотя наши солдаты готовы бесстрашно драться с любым врагом, ваш "
+"соперник на Севере все еще сильнее, чем все наши армии вместе взятые. Мы "
+"должны избегать конфликта до тех пор, пока не сможем победить их."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -292,8 +293,8 @@ msgstr ""
 "Тёрвера очень скверная репутация."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
-msgid "Peril from the north"
-msgstr "Северная угроза"
+msgid "Peril from the North"
+msgstr "Угроза с севера"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -341,12 +342,12 @@ msgstr "Великое озеро"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
 "Sire, now that we have conquered the land of Törver, we can make use of "
-"their excellent access to the adjacent great lake. A port in the north will "
+"their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
-"Сир! Теперь, когда мы завоевали земли Тёрвера, мы можем воспользоваться "
-"превосходным доступом к прилегающему к ним большому озеру. Порт на севере "
-"обеспечит нам контакт с другими племенами."
+"Сир, теперь, когда мы завоевали землю Тёрвера, для нас открылся прекрасный "
+"доступ к соседнему великому озеру. Порт на Севере даст нам больше "
+"возможностей для контактов с другими племенами."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -413,25 +414,25 @@ msgstr "Осушение болот"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
-"Sire, the wet season has created swamps along the brook to the east and we "
+"Sire, the wet season has created swamps along the brook to the East and we "
 "are unable to pass through them. They have to be removed before we can "
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
-"Сир, сезон дождей привел к появлению болот вдоль ручья на востоке и мы не "
-"можем пересечь их. Они должны быть осушены, прежде чем мы продвинемся "
-"дальше. Если вы доставите достаточно лопат в новый склад, то волонтеры "
-"разберутся с болотами."
+"Сир, сезон дождей превратил берега восточного ручья в болото, и мы не сможем"
+" пройти через него. Болото нужно осушить, прежде чем мы сможем продолжить. "
+"Если вы принесете достаточно лопат на новый склад, то добровольцы осушат "
+"болота."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
-"Sire, all shovels have been handed out but if we continue at this pace than "
-"we will not have removed the swamps before the next wet season. If you bring"
-" more shovels to the new warehouse then more volunteers will join in."
+"Sire, all shovels have been handed out, but if we continue at this pace we "
+"will not have removed the swamps before the next wet season. If you bring "
+"more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
-"Сир, все лопаты были розданы, но если мы продолжим в том же темпе, то  не "
-"осушим болота до следующего сезона дождей. Мы задействуем больше волонтеров,"
-" если вы доставите больше  лопат к новому складу."
+"Сир, все лопаты розданы, но если мы продолжим в том же темпе, мы не уберем "
+"болота до следующего сезона дождей. Если вы принесете больше лопат на новый "
+"склад, к вам присоединится больше добровольцев."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""

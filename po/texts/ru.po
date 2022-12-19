@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-25 03:25+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2018,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -127,7 +127,7 @@ msgstr "Widelands лицензируется в соответствии с Об
 
 #: ../../data/txts/README.lua:12
 msgid "Status"
-msgstr "Статус"
+msgstr "Состояние"
 
 #: ../../data/txts/README.lua:13
 msgid ""
@@ -801,57 +801,62 @@ msgstr "Нажмите %s чтобы переключится на просмо�
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads, ferries "
+"An economy consists of all buildings and flags connected by roads, ferries, "
 "or ships. The supplies and demands of buildings are handled in its economy. "
-"A player may have more than one economies, if those are not connected by any"
-" of these means. This is why the configure economy menu can only be accessed"
-" from flags and warehouses, not the player’s main menu."
-msgstr "Экономика состоит из всех зданий и флагов, соединенных дорогами, паромами или кораблями. Поставки и потребности зданий удовлетворяются в рамках его экономики. У игрока может быть более одной экономики, если они не связаны ни одним из этих способов. Вот почему меню настройки экономики доступно только из флагов и складов, а не из главного меню."
+"A player can have more than one economy."
+msgstr "Экономика состоит из всех зданий и флагов, соединенных дорогами, паромами или кораблями. Поставки и потребности зданий удовлетворяются в рамках его экономики. У игрока может быть более одной экономики."
 
 #: ../../data/txts/tips/general_game.lua:69
+msgid ""
+"You can have more than one economy if they are not connected by any means. "
+"This is why the Configure Economy menu can only be accessed from flags and "
+"warehouses, not the player’s main menu."
+msgstr "У вас может быть более одной экономики, если они никак не связаны. Вот почему меню \"Настройка экономики\" доступно только из флагов и складов, а не из главного меню."
+
+#: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr "Некоторые здания, например фермы, имеют очень небольшую рабочую область. Если здание будет окружено деревьями и дорогами, то производство остановится."
 
-#: ../../data/txts/tips/general_game.lua:73
+#: ../../data/txts/tips/general_game.lua:77
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
 msgstr "Изменить масштаб можно колесом мыши или %1%/%2%. Нажмите %3%, чтобы сбросить масштаб."
 
-#: ../../data/txts/tips/general_game.lua:80
+#: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
 msgstr "Используйте клавиши \"%1$s\" и \"%2$s\" для быстрого перехода между недавно посещенными местами."
 
-#: ../../data/txts/tips/general_game.lua:84
+#: ../../data/txts/tips/general_game.lua:88
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
 msgstr "Ускорьте или замедлите игру с помощью %1%/%2%. Используйте %3%/%4% для ускорения, 5%5%/6%6% для замедления."
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Клавиши со стрелками"
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "Ctrl + стрелка"
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "Перемешайте карту, используя %1%. %2% будет перемещать быстрее, %3% - медленнее."
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "Shift + стрелка"
 
-#: ../../data/txts/tips/general_game.lua:98
+#: ../../data/txts/tips/general_game.lua:102
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
