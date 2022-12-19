@@ -12,7 +12,7 @@ field_mill = map:get_field(18, 184)
 place_building_in_region(p3, "empire_mill", {field_mill})
 
 field_warehouse = map:get_field(21, 186)
-place_building_in_region(p3, "empire_temple_of_vesta", {field_warehouse}, {workers = {empire_carrier = 0, empire_recruit = 0}, wares = {wheat = 200}, soldiers = {[{0,0,0,0}] = 3}}).warehousename = pgettext("empire_building", "Temple of Vesta")
+place_building_in_region(p3, "empire_temple_of_vesta", {field_warehouse}, {workers = {empire_carrier = 0, empire_recruit = 0}, wares = {wheat = 200}, soldiers = {[{0,0,0,0}] = 3}}).warehousename = ""
 
    r1 = p3:place_road("normal", field_warehouse.immovable.flag, "l", "tl", true)
    r2 = p3:place_road("normal", field_mill.immovable.flag, "tr", "r", true)
