@@ -18,6 +18,7 @@
 
 #include "map_io/s2map.h"
 
+#include <cstddef>
 #include <iomanip>
 #include <iostream>
 #include <memory>
@@ -223,7 +224,7 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	int32_t y = 0;
 	for (; y < height; ++y) {
 		uint8_t const* const ptr = reinterpret_cast<uint8_t*>(fr.data(width));
-		memcpy(section.get() + y * width, ptr, width);
+		memcpy(section.get() + static_cast<ptrdiff_t>(y) * width, ptr, width);
 		fr.data(dw - width);  // skip the alignment junk
 	}
 	while (y < dh) {

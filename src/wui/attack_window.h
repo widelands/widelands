@@ -104,12 +104,8 @@ private:
 		void add(const Widelands::Soldier*);
 		void remove(const Widelands::Soldier*);
 		bool contains(const Widelands::Soldier* soldier) const {
-			for (const auto& s : soldiers_) {
-				if (s == soldier) {
-					return true;
-				}
-			}
-			return false;
+			return std::any_of(
+			   soldiers_.begin(), soldiers_.end(), [soldier](const auto& s) { return s == soldier; });
 		}
 
 		std::vector<const Widelands::Soldier*> get_soldiers() const {
