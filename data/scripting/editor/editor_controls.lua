@@ -14,9 +14,7 @@ local r = {
       p(
          -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
          dl(help_format_hotkey(wl.ui.get_shortcut("encyclopedia")), _("Help")) ..
-         -- TRANSLATORS: This is an access key combination.
-         dl(help_format_hotkey(wl.ui.get_shortcut("editor_menu")), _("Toggle main menu")) ..
-         -- TRANSLATORS: This is an access key combination. The hotkey is 't'
+         -- TRANSLATORS: This is an access key combination. The default hotkey is 't'
          dl(help_format_hotkey(wl.ui.get_shortcut("editor_tools")), _("Toggle tools menu")) ..
          toggle_minimap_hotkey ..
          toggle_building_spaces_hotkey ..
@@ -29,9 +27,9 @@ local r = {
          -- TRANSLATORS: This is an access key combination. The hotkey is 'i'
          dl(help_format_hotkey(wl.ui.get_shortcut("editor_info")), _("Activate information tool")) ..
          -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-         dl(help_format_hotkey(wl.ui.get_shortcut("editor_load")), _("Load map")) ..
+         dl(help_format_hotkey(wl.ui.get_shortcut("load")), _("Load map")) ..
          -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-         dl(help_format_hotkey(wl.ui.get_shortcut("editor_save")), _("Save map")) ..
+         dl(help_format_hotkey(wl.ui.get_shortcut("save")), _("Save map")) ..
             toggle_fullscreen_hotkey
       ) ..
 
