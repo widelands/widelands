@@ -39,14 +39,16 @@ class MutexLock {
 public:
 	// Which mutex to lock. Each entry corresponds to a different mutex.
 	enum class ID : uint32_t {
-		kLogicFrame,
-		kObjects,
-		kCommands,
-		kMessages,
-		kIBaseVisualizations,
-		kI18N,
-		kLua,
-		kLog
+		kLogicFrame,           ///< The game logic progression.
+		kObjects,              ///< MapObjects are being modified.
+		kCommands,             ///< The game's command queue is being modified.
+		kMessages,             ///< In-game messages are being modified.
+		kIBaseVisualizations,  ///< The InteractiveBase's overlays are being updated.
+		kI18N,                 ///< The gettext backend.
+		kLua,                  ///< Lua scripts.
+		kLog,                  ///< Log output backend.
+
+		kLastID                ///< Last entry in the enum, do not use.
 	};
 
 	static ID create_custom_mutex();
