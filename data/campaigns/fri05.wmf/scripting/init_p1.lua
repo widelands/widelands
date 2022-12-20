@@ -2938,13 +2938,14 @@ place_buildings(eco)
 
 local soldiers = {}
 local max_takeover_soldiers = {300, 200, 100}
+max_takeover_soldiers = max_takeover_soldiers[difficulty]
 local total_soldiers = 0
 for descr,n in pairs(campaign_data) do
    if descr ~= "000" and n > 0 then
       total_soldiers = total_soldiers + n
    end
 end
-if total_soldiers > max_takeover_soldiers[difficulty] then total_soldiers = max_takeover_soldiers[difficulty] end
+if total_soldiers > max_takeover_soldiers then total_soldiers = max_takeover_soldiers end
 while total_soldiers > 0 do
    local key1 = math.random(0, 2)
    local key2 = math.random(0, 6)
@@ -2955,19 +2956,21 @@ while total_soldiers > 0 do
       if campaign_data[descr] < total_soldiers then
          soldiers[{key1, key2, key3, 0}] = campaign_data[descr]
          total_soldiers = total_soldiers - campaign_data[descr]
+         max_takeover_soldiers = max_takeover_soldiers - campaign_data[descr]
       else
          soldiers[{key1, key2, key3, 0}] = total_soldiers
          total_soldiers = 0
+         max_takeover_soldiers = 0
       end
       campaign_data[descr] = nil
    end
 end
-if total_soldiers > 0 then
+if max_takeover_soldiers > 0 then
    if campaign_data["000"] ~= nil then
-      if campaign_data["000"] < total_soldiers then
+      if campaign_data["000"] < max_takeover_soldiers then
          soldiers[{0, 0, 0, 0}] = campaign_data["000"]
       else
-         soldiers[{0, 0, 0, 0}] = total_soldiers
+         soldiers[{0, 0, 0, 0}] = max_takeover_soldiers
       end
    end
 end
