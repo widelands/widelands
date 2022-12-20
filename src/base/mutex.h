@@ -48,7 +48,7 @@ public:
 		kLua,                  ///< Lua scripts.
 		kLog,                  ///< Log output backend.
 
-		kLastID                ///< Last entry in the enum, do not use.
+		kLastID  ///< Last entry in the enum, do not use.
 	};
 
 	static ID create_custom_mutex();
