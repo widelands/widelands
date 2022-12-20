@@ -1153,6 +1153,8 @@ public:
 	 */
 	int get_portdock(lua_State* L);
 	int get_expedition_in_progress(lua_State* L);
+	int get_warehousename(lua_State* L);
+	int set_warehousename(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -1413,6 +1415,7 @@ public:
 	int get_island_explore_direction(lua_State* L);
 	int set_island_explore_direction(lua_State* L);
 	int get_shipname(lua_State* L);
+	int set_shipname(lua_State* L);
 	int get_capacity(lua_State* L);
 	int set_capacity(lua_State* L);
 	/*

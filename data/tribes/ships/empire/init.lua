@@ -33,6 +33,10 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Adriatic Sea"),
       -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Adamas"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Agrippa"),
+      -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Alexandria"),
       -- TRANSLATORS: This Empire ship is named after an in-game character
       pgettext("shipname", "Amalea"),
@@ -41,17 +45,17 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Empire ship is named after a Roman god
       pgettext("shipname", "Apollo"),
       -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Aquila"),
+      -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Augustus"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Aurum"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Azurea Sea"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Baltic Sea"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Bellona"),
-      -- TRANSLATORS: This is an Empire ship name
-      pgettext("shipname", "Ben Hur"),
-      -- TRANSLATORS: This is an Empire ship name
-      pgettext("shipname", "Bounty"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Brutus"),
       -- TRANSLATORS: This is an Empire ship name
@@ -61,7 +65,11 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Carrara"),
       -- TRANSLATORS: This is an Empire ship name
-      pgettext("shipname", "Caesar"),
+      pgettext("shipname", "Cato"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Cæsar"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Cervus"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Cicero"),
       -- TRANSLATORS: This is an Empire ship name
@@ -69,19 +77,27 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Diana"),
       -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Delphinus"),
+      -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Domitianus"),
       -- TRANSLATORS: This is an Empire ship name
-      pgettext("shipname", "Empire Glory"),
+      pgettext("shipname", "Etna"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Faustulus"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Ferrum"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Galba"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Gallus"),
       -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Gladiator"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Gloria Imperii"),
+      -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Ianus"),
       -- TRANSLATORS: This is an Empire ship name
-      pgettext("shipname", "Iulius Caesar"),
+      pgettext("shipname", "Iulius Cæsar"),
       -- TRANSLATORS: This Empire ship is named after a Roman goddess
       pgettext("shipname", "Iuno"),
       -- TRANSLATORS: This Empire ship is named after a Roman god
@@ -91,13 +107,17 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Latonia"),
       -- TRANSLATORS: This is an Empire ship name
-      pgettext("shipname", "Leonardo"),
+      pgettext("shipname", "Leo"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Lepus"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Liguria"),
       -- TRANSLATORS: This Empire ship is named after an in-game character
       pgettext("shipname", "Lutius"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Marble"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Marcus Aurelius"),
       -- TRANSLATORS: This Empire ship is named after a Roman god
       pgettext("shipname", "Mars"),
       -- TRANSLATORS: This Empire ship is named after a Roman goddess
@@ -117,19 +137,27 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Portus Bellus"),
       -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Præda"),
+      -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Quirinus"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Remus"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Romulus"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Sagitta"),
       -- TRANSLATORS: This Empire ship is named after an in-game character
       pgettext("shipname", "Saledus"),
       -- TRANSLATORS: This Empire ship is named after a Roman deity
       pgettext("shipname", "Saturn"),
       -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Scipio"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Seneca"),
+      -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Siena"),
       -- TRANSLATORS: This is an Empire ship name
-      pgettext("shipname", "Sparta"),
+      pgettext("shipname", "Spiculum"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Thyrrenia"),
       -- TRANSLATORS: This is an Empire ship name
@@ -139,11 +167,19 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Traianus"),
       -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Venator"),
+      -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Venus"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Vergilius"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Vespa"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Vespasianus"),
       -- TRANSLATORS: This Empire ship is named after a Roman goddess
       pgettext("shipname", "Vesta"),
+      -- TRANSLATORS: This is an Empire ship name
+      pgettext("shipname", "Vesuvius"),
       -- TRANSLATORS: This is an Empire ship name
       pgettext("shipname", "Vinea"),
       -- TRANSLATORS: This is an Empire ship name

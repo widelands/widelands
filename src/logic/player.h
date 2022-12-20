@@ -562,6 +562,8 @@ public:
 	void write_statistics(FileWrite&) const;
 	void read_remaining_shipnames(FileRead&);
 	void write_remaining_shipnames(FileWrite&) const;
+	void read_remaining_warehousenames(FileRead&);
+	void write_remaining_warehousenames(FileWrite&) const;
 	void sample_statistics();
 	void ware_produced(DescriptionIndex);
 
@@ -587,7 +589,8 @@ public:
 	void set_attack_forbidden(PlayerNumber who, bool forbid);
 	bool is_attack_forbidden(PlayerNumber who) const;
 
-	const std::string pick_shipname();
+	[[nodiscard]] std::string pick_shipname();
+	[[nodiscard]] std::string pick_warehousename(bool port);
 
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
@@ -668,6 +671,7 @@ private:
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
 
 	std::list<std::string> remaining_shipnames_;
+	std::list<std::string> remaining_warehousenames_;
 
 	PlayerBuildingStats building_stats_;
 	std::vector<SoldierStatistics> soldier_stats_;
@@ -729,6 +733,7 @@ private:
 
 	// If we run out of ship names, we'll want to continue with unique numbers
 	uint32_t ship_name_counter_{0U};
+	uint32_t warehouse_name_counter_{0U};
 
 	FxId message_fx_;
 	FxId attack_fx_;
