@@ -891,7 +891,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int 
 	if (matches_shortcut(KeyboardShortcut::kCommonScreenshot, keycode, modifiers)) {
 		if (g_fs->disk_space() < kMinimumDiskSpace) {
 			log_warn("Omitting screenshot because diskspace is lower than %lluMiB\n",
-			         kMinimumDiskSpace / (1024 * 1024));
+			         kMinimumDiskSpace / (1024ULL * 1024));
 		} else {
 			g_fs->ensure_directory_exists(kScreenshotsDir);
 			for (uint32_t nr = 0; nr < 10000; ++nr) {
@@ -1146,7 +1146,7 @@ bool WLApplication::init_settings() {
 
 	int64_t last_start = get_config_int("last_start", 0);
 	int64_t now = time(nullptr);
-	if (last_start + 12 * 60 * 60 < now || get_config_string("uuid", "").empty()) {
+	if (last_start + 12LL * 60LL * 60LL < now || get_config_string("uuid", "").empty()) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h
 		set_config_string("uuid", generate_random_uuid());

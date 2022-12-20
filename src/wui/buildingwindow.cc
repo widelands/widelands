@@ -122,6 +122,8 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight);
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
 
+	setup_name_field_editbox(*vbox_);
+
 	capsbuttons_ = new UI::Box(vbox_.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	vbox_->add(capsbuttons_, UI::Box::Resizing::kFullSize);
 

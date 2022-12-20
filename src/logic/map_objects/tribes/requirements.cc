@@ -101,13 +101,8 @@ void RequireOr::add(const Requirements& req) {
 }
 
 bool RequireOr::check(const MapObject& obj) const {
-	for (const Requirements& req : m) {
-		if (req.check(obj)) {
-			return true;
-		}
-	}
-
-	return false;
+	return std::any_of(
+	   m.begin(), m.end(), [&obj](const Requirements& req) { return req.check(obj); });
 }
 
 void RequireOr::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) const {
@@ -139,12 +134,8 @@ void RequireAnd::add(const Requirements& req) {
 }
 
 bool RequireAnd::check(const MapObject& obj) const {
-	for (const Requirements& req : m) {
-		if (!req.check(obj)) {
-			return false;
-		}
-	}
-	return true;
+	return std::all_of(
+	   m.begin(), m.end(), [&obj](const Requirements& req) { return req.check(obj); });
 }
 
 void RequireAnd::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) const {
