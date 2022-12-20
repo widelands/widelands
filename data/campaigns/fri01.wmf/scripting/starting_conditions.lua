@@ -5,6 +5,7 @@ p1:forbid_buildings("all")
 p1:allow_buildings {"frisians_sentinel","frisians_warehouse"}
 
 hq = p1:place_building("frisians_headquarters", map.player_slots [1].starting_field, false, true)
+hq.warehousename = _("Langeneß")
 hq:set_wares {
    log = 40,
    brick = 50,

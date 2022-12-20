@@ -387,12 +387,8 @@ void InteractivePlayer::rebuild_showhide_menu() {
 }
 
 bool InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) const {
-	for (const auto& pair : expedition_port_spaces_) {
-		if (pair.second == coords) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(expedition_port_spaces_.begin(), expedition_port_spaces_.end(),
+	                   [&coords](const auto& pair) { return pair.second == coords; });
 }
 
 void InteractivePlayer::draw_immovables_for_visible_field(
@@ -536,7 +532,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		// Add road building overlays if applicable.
 		if (f->seeing != Widelands::VisibleState::kUnexplored) {
-			draw_road_building(*f);
+			draw_road_building(dst, *f, gametime, scale);
 
 			draw_bridges(
 			   dst, f, f->seeing == Widelands::VisibleState::kVisible ? gametime : Time(0), scale);

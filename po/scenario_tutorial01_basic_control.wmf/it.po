@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-25 02:57+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2017,2021\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:10
 msgid "Nice And Easy Does It All the Time"
@@ -403,8 +403,8 @@ msgid "Using the Minimap"
 msgstr "Come usare la minimappa"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:274
-msgid "Very good. And now about the minimap. "
-msgstr "Molto bene! Per quanto riguarda la minimappa..."
+msgid "Very good. And now about the minimap."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #, lua-format

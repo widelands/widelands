@@ -146,8 +146,6 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Demini"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Dos Marmelos"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Eiru"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Endimari"),
@@ -165,6 +163,8 @@ wl.Descriptions():new_ship_type {
       pgettext("shipname", "Içá"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Içana"),
+      -- TRANSLATORS: This Amazonian ship is named after a river
+      pgettext("shipname", "Igapó-Açu"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Inauini"),
       -- TRANSLATORS: This Amazonian ship is named after a river
@@ -220,13 +220,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Jutaizinho"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Liberdade"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Luna"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Madeira"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Madeirinha"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Maiá"),
       -- TRANSLATORS: This Amazonian ship is named after a river
@@ -246,7 +240,7 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Mapari"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Mapiá Grande"),
+      pgettext("shipname", "Mapiá"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Maracanã"),
       -- TRANSLATORS: This Amazonian ship is named after a river
@@ -304,10 +298,6 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Preto"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Preto da Eva"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Prêto do Igapó-Açu"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Puduari"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Pureté"),
@@ -317,10 +307,6 @@ wl.Descriptions():new_ship_type {
       pgettext("shipname", "Purus"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Quixito"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Rio Negro"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Riozinho"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Sepatini"),
       -- TRANSLATORS: This Amazonian ship is named after a river
@@ -381,9 +367,61 @@ wl.Descriptions():new_ship_type {
       pgettext("shipname", "Xeruã"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Xie"),
-      -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Zinho"),
-   },
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Apu Illapu"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Ayar Cachi"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Illapa"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Inti"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Kuychi"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Mama Killa"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Mama Occlo"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Manco Cápac"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Pachamama"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Quchamama"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Sachamama"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Viracocha"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca god
+      pgettext("shipname", "Yakumama"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Atahuallpa"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Lloqe Yupanki"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Manqo Qhapaq"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Mayta Qhapaq"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Pachakuti"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Qhapaq Yupanki"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Thupa"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Urqon"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Washkar"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Wayna Qhapaq"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Yawar Waqaq"),
+      -- TRANSLATORS: This Amazonian ship is named after an Inca ruler
+      pgettext("shipname", "Zinchi Roqa"),
+      -- TRANSLATORS: This Amazonian ship is named after the lake in the Andes
+      pgettext("shipname", "Lake Titicaca"),
+      -- TRANSLATORS: This Amazonian ship is named after the main Inca temple
+      pgettext("shipname", "Koricancha"),
+   }
 }
 
 pop_textdomain()

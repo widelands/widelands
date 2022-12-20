@@ -50,7 +50,6 @@ namespace Widelands {
 class BuildingDescr;
 }  // namespace Widelands
 using Widelands::Building;
-using Widelands::EditorGameBase;
 using Widelands::Game;
 
 constexpr int kBuildGridCellSize = 50;
@@ -1102,7 +1101,7 @@ void show_field_action(InteractiveBase* const ibase,
 		}
 
 		// append or take away from the road
-		if (!ibase->append_build_road(target) ||
+		if (!ibase->append_build_road(target, false) ||
 		    (ibase->in_road_building_mode(RoadBuildingType::kWaterway) &&
 		     target != ibase->get_build_road_end())) {
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);

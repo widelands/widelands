@@ -48,7 +48,6 @@ public:
 	   GameSettingsProvider&,
 	   GameController&,
 	   ChatProvider&,
-	   Widelands::Game&,
 	   bool game_done_on_cancel,
 	   const std::function<void()>& callback = []() {});
 	~LaunchMPG() override;
@@ -81,7 +80,6 @@ private:
 	std::unique_ptr<HelpWindow> help_;
 	MultiPlayerSetupGroup mpsg_;
 	std::unique_ptr<GameChatPanel> chat_;
-	Widelands::Game& game_;  // Not owned
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };

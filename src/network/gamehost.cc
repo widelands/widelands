@@ -465,13 +465,16 @@ void GameHost::init_computer_players() {
 
 void GameHost::run() {
 	game_.reset(new Widelands::Game());
-	new FsMenu::LaunchMPG(
-	   *capsule_, d->hp, *this, d->chat, *game_, internet_, [this]() { run_callback(); });
+	new FsMenu::LaunchMPG(*capsule_, d->hp, *this, d->chat, internet_, [this]() { run_callback(); });
 }
 
 void GameHost::run_direct() {
 	game_.reset(new Widelands::Game());
 	run_callback();
+}
+
+void GameHost::set_write_replay(bool replay) {
+	game_->set_write_replay(replay);
 }
 
 // TODO(k.halfmann): refactor into smaller functions
@@ -1087,9 +1090,9 @@ void GameHost::set_map(const std::string& mapname,
 		}
 		std::vector<char> complete(file_->bytes);
 		fr.set_file_pos(0);
-		fr.data_complete(&complete[0], file_->bytes);
+		fr.data_complete(complete.data(), file_->bytes);
 		SimpleMD5Checksum md5sum;
-		md5sum.data(&complete[0], file_->bytes);
+		md5sum.data(complete.data(), file_->bytes);
 		md5sum.finish_checksum();
 		file_->md5sum = md5sum.get_checksum().str();
 	} else {

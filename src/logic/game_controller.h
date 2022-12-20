@@ -92,6 +92,8 @@ public:
 		set_paused(!is_paused());
 	}
 
+	virtual void set_write_replay(bool replay) = 0;
+
 	/**
 	 * Report a player result once he has left the game. This may be done through lua
 	 * by the win_condition scripts.

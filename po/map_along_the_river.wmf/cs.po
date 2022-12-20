@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-22 03:53+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Jiří Doubravský <jiri.doubravsky@gmail.com>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -228,13 +228,10 @@ msgstr "Sire, dovolte mi informovat Vás o okolních kmenech."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
-"From the north we are endangered by a belligerent tribe, led by warlord "
+"From the North we are endangered by a belligerent tribe, led by warlord "
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
-"Ze severu nás ohrožuje agresivní kmen vedený vojevůdcem Törverem, který "
-"rychle rozšiřuje své vojsko. Možná se brzy stanou příliš silnými na to, "
-"abchom je mohli porazit."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -281,12 +278,9 @@ msgstr "Náš severní nepřítel"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
 "Sire, although our soldiers would face any enemy without the slightest fear,"
-" our rival in the north is still stronger than all our armies combined. We "
+" our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-"Můj pane, ačkoli by se naši vojáci hrdinně postavili jakémukoli nepříteli, "
-"nepřítel na severu je stále silnější než všechny naše armády dohromady. Měli"
-" bychom se vyhnout konfliktu, dokud jej nedokážeme porazit."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -297,8 +291,8 @@ msgstr ""
 "Torver má velmi zlou pověst."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
-msgid "Peril from the north"
-msgstr "Nebezpečí ze severu"
+msgid "Peril from the North"
+msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -345,12 +339,9 @@ msgstr "Velké jezero"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
 "Sire, now that we have conquered the land of Törver, we can make use of "
-"their excellent access to the adjacent great lake. A port in the north will "
+"their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
-"Sire, nyní, kdy jste dobyli zemi Torverskou, můžeme využít jejich výborný "
-"přístup k nádhernému velkému jezeru. Přístav na severu nám poskytne lepší "
-"příležitosti ke kontaktu s ostatními kmeny."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -417,25 +408,18 @@ msgstr "Odstraňování bažin"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
-"Sire, the wet season has created swamps along the brook to the east and we "
+"Sire, the wet season has created swamps along the brook to the East and we "
 "are unable to pass through them. They have to be removed before we can "
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
-"Pane, v období silných dešťů se podél potoka na východě vytvořily bažiny, "
-"kterými nemůžeme projít. Než budeme moci pokračovat, musíme je vysušit. "
-"Pokud přinesete do nového skladiště dostatek lopat, pak bažiny odstraní "
-"dobrovolníci."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
-"Sire, all shovels have been handed out but if we continue at this pace than "
-"we will not have removed the swamps before the next wet season. If you bring"
-" more shovels to the new warehouse then more volunteers will join in."
+"Sire, all shovels have been handed out, but if we continue at this pace we "
+"will not have removed the swamps before the next wet season. If you bring "
+"more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
-"Pane, všechny lopaty byly rozdány, ale pokud budeme pokračovat tímto tempem,"
-" neodstraníme bažiny před dalším obdobím dešťů. Pokud do nového skladu "
-"přinesete více lopat, připojí se více dobrovolníků."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
