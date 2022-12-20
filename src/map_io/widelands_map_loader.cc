@@ -107,8 +107,8 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, AddOns::AddOnsList*
 						}
 						assert(pair.first->category == AddOns::AddOnCategory::kWorld);
 						addons->push_back(pair.first);
-						desired_world_addons.erase(std::remove(desired_world_addons.begin(),
-						                                       desired_world_addons.end(), pair.first));
+						desired_world_addons.erase(std::remove(
+						   desired_world_addons.begin(), desired_world_addons.end(), pair.first));
 						break;
 					}
 				}
