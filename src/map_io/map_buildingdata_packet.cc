@@ -386,10 +386,15 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
                                            MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= 6) {
+		if (packet_version >= 8 && packet_version <= kCurrentPacketVersionWarehouseAndExpedition) {
 			Player* player = warehouse.get_owner();
 			warehouse.init_containers(*player);
 			const TribeDescr& tribe = player->tribe();
+
+			assert(warehouse.get_warehouse_name().empty());
+			warehouse.set_warehouse_name(
+			   packet_version >= 9 ? fr.string() :
+                                  player->pick_warehousename(warehouse.descr().get_isport()));
 
 			while (fr.unsigned_8() != 0u) {
 				const DescriptionIndex& id = game.mutable_descriptions()->load_ware(fr.c_string());
@@ -1154,6 +1159,8 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
                                             Game& game,
                                             MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionWarehouseAndExpedition);
+
+	fw.string(warehouse.get_warehouse_name());
 
 	//  supply
 	const TribeDescr& tribe = warehouse.owner().tribe();

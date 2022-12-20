@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-22 03:53+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Niklas Nordgren, 2022\n"
 "Language-Team: Swedish (https://www.transifex.com/widelands/teams/35159/sv/)\n"
@@ -226,13 +226,10 @@ msgstr "Ers höghet, låt mig informera dig om de kringliggande stammarna."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
-"From the north we are endangered by a belligerent tribe, led by warlord "
+"From the North we are endangered by a belligerent tribe, led by warlord "
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
-"Från norr sätts vi i fara av en krigslysten stam, ledd av krigsherren "
-"Törver, som snabbt bygger upp sina arméer. De kan snart bli för starka för "
-"att besegras."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -279,12 +276,9 @@ msgstr "Vår fiende i norr"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
 "Sire, although our soldiers would face any enemy without the slightest fear,"
-" our rival in the north is still stronger than all our armies combined. We "
+" our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-"Ers höghet, trots att våra soldater skulle möta varje fiende utan den minsta"
-" rädsla, är vår rival i norr fortfarande starkare än alla våra arméer "
-"tillsammans. Vi borde undvika strider tills vi kan besegra dem."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -295,8 +289,8 @@ msgstr ""
 "Törver har ett väldigt dåligt rykte."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
-msgid "Peril from the north"
-msgstr "Fara från norr"
+msgid "Peril from the North"
+msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -345,12 +339,9 @@ msgstr "Den stora sjön"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
 "Sire, now that we have conquered the land of Törver, we can make use of "
-"their excellent access to the adjacent great lake. A port in the north will "
+"their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
-"Es höghet, nu när vi har tagit över Törvers land, kan vi använda deras goda "
-"åtkomst till den stora sjön bredvid. En hamn i norr ger oss bättre "
-"möjligheter att komma i kontakt med andra stammar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -416,26 +407,18 @@ msgstr "Ta bort träsken"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
-"Sire, the wet season has created swamps along the brook to the east and we "
+"Sire, the wet season has created swamps along the brook to the East and we "
 "are unable to pass through them. They have to be removed before we can "
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
-"Ers höghet, regnperioden har skapat träsk längs med bäcken i öster och vi "
-"kan inte passera genom dem. De måste tas bort innan vi kan fortsätta. Om du "
-"tar tillräckligt med spadar till den nya lagerbyggnaden kan volontärer ta "
-"bort träsken."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
-"Sire, all shovels have been handed out but if we continue at this pace than "
-"we will not have removed the swamps before the next wet season. If you bring"
-" more shovels to the new warehouse then more volunteers will join in."
+"Sire, all shovels have been handed out, but if we continue at this pace we "
+"will not have removed the swamps before the next wet season. If you bring "
+"more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
-"Ers höghet, alla spadar har givits ut men om vi fortsätter i denna takt "
-"kommer vi inte ha tagit bort träsken när nästa regnperiod börjar. Om du tar "
-"fler spadar till den nya lagerbyggnaden kommer fler volontärer gå med i "
-"arbetet."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
