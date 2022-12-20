@@ -34,6 +34,7 @@ struct WarehouseWindow : public BuildingWindow {
 
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
+	void setup_name_field_editbox(UI::Box& vbox) override;
 
 	Widelands::OPtr<Widelands::Warehouse> warehouse_;
 

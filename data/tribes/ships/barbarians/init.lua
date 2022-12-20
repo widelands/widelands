@@ -4,7 +4,7 @@ dirname = path.dirname(__file__)
 
 wl.Descriptions():new_ship_type {
    name = "barbarians_ship",
-   -- TRANSLATORS: This is the Barbarians' ship's name used in lists of units
+   -- TRANSLATORS: This is the Barbarians’ ship’s name used in lists of units
    descname = pgettext("barbarians_ship", "Ship"),
    animation_directory = dirname,
    icon = dirname .. "menu.png",
@@ -40,6 +40,8 @@ wl.Descriptions():new_ship_type {
       pgettext("shipname", "Bear"),
       -- TRANSLATORS: This a Barbarian ship name
       pgettext("shipname", "Beowulf"),
+      -- TRANSLATORS: This a Barbarian ship name
+      pgettext("shipname", "Bison"),
       -- TRANSLATORS: This Barbarian ship is named after an in-game character
       pgettext("shipname", "Boldreth"),
       -- TRANSLATORS: This Barbarian ship is named after an in-game character
@@ -47,11 +49,15 @@ wl.Descriptions():new_ship_type {
       -- TRANSLATORS: This a Barbarian ship name
       pgettext("shipname", "Dellingr"),
       -- TRANSLATORS: This a Barbarian ship name
+      pgettext("shipname", "Eagle"),
+      -- TRANSLATORS: This a Barbarian ship name
       pgettext("shipname", "Fulla"),
       -- TRANSLATORS: This a Barbarian ship name
       pgettext("shipname", "Gersemi"),
       -- TRANSLATORS: This a Barbarian ship name
       pgettext("shipname", "Hagbard"),
+      -- TRANSLATORS: This Barbarian ship is named after a barbarian bard
+      pgettext("shipname", "Hakhor"),
       -- TRANSLATORS: This a Barbarian ship name
       pgettext("shipname", "Heidrek"),
       -- TRANSLATORS: This a Barbarian ship name
@@ -96,6 +102,10 @@ wl.Descriptions():new_ship_type {
       pgettext("shipname", "Volf"),
       -- TRANSLATORS: This a Barbarian ship name
       pgettext("shipname", "Wild Boar"),
+      -- TRANSLATORS: This a Barbarian ship name
+      pgettext("shipname", "Valkyrie"),
+      -- TRANSLATORS: This a Barbarian ship name
+      pgettext("shipname", "Wisent"),
       -- TRANSLATORS: This a Barbarian ship name
       pgettext("shipname", "Wolverine"),
       -- TRANSLATORS: This a Barbarian ship name

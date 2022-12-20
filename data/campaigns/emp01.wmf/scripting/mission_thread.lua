@@ -4,6 +4,7 @@ function mission_thread()
    -- Initial messages
    local sea = wl.Game().map:get_field(50,25)
    local ship = p1:place_ship(sea)
+   shipname = ship.shipname
    p1:hide_fields(sea:region(6), "permanent")
    scroll_to_field(sea,0)
 

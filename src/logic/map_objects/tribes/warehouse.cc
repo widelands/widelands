@@ -520,6 +520,7 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	Player* player = get_owner();
 
 	init_containers(*player);
+	set_warehouse_name(player->pick_warehousename(descr().get_isport()));
 
 	set_seeing(true);
 
@@ -1436,6 +1437,10 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
                          portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 
+void Warehouse::update_statistics_string(std::string* str) {
+	*str = get_warehouse_name();
+}
+
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
 	std::unique_ptr<WarehouseSettings> settings(new WarehouseSettings(descr(), owner().tribe()));
 	for (auto& pair : settings->ware_preferences) {
@@ -1453,6 +1458,7 @@ std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() co
 }
 
 void Warehouse::log_general_info(const EditorGameBase& egbase) const {
+	molog(egbase.get_gametime(), "Warehouse '%s'", warehouse_name_.c_str());
 	Building::log_general_info(egbase);
 
 	if (descr().get_isport()) {

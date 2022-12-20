@@ -1807,6 +1807,709 @@ wl.Descriptions():new_tribe {
       },
    },
 
+   warehouse_names = {
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Al’Fjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Al’Sund"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Al’Thaug"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Al’ta"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Al’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Al’ver"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "An’dey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ar’mark"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ar’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Asker"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "As’ral"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "As’Kvoll"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "As’key"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "As’nes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Au’kra"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Au’re"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Au’land"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Au’skog"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Au’tevoll"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Au’trheim"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Av’rey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Bærum"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Bal’fjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ba’ble"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ba’rdu"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Bat’fjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "B’iarn"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Berl’vog"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Bindal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Birk’nes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Bjer’Kreim"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Bjer’Fjord’n"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Bo’do"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Bok’n"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Bom’lo"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Bremanger"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Bren’ey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "B’gland"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "B’kle"),
+      -- TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
+      pgettext("warehousename", "Damack"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Danna"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Do’vre"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "D’rammen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "D’rangedal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "D’rey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ei’dfjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ei’dskog"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ei’dsvoll"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ei’g’rsund"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Elv’rum"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "En’Bakk"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Eng’rdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Et’ne"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Et’Nedal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ev’nes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ev’je"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Eyer"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Eygard’n"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Eystre"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Færdr"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Farsund"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Foske"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "F’dje"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "F’tjar"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "F’jaler"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Fjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Flo"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Flakstad"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Flatang’r"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Flek’fjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Fl’sberg"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Folldal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Frogn"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Fr’land"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Frosta"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Freya"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Fyr’sdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Gamvik"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Gausdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Gild’skol"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Gi’ske"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "G’jemnes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Gjerdrum"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Gjerst’d"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "G’jesdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Gjovik"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Glopp’n"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Gol"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Gran"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Gra’ne"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Gr’tangen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Grimst’d"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Grong"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Grue"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "G’len"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ho"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’dsel"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hæg’bost’d"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’lden"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’mar"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’marey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’merfest"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’reid"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’rstad"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hasvik"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hattfjelldal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Haug’sund"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Heim"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’mnes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hems’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’rey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’roy"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hitra"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hjartdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hjelm’land"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hol"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hole"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Holm’strand"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hol’Talen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Horten"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’yanger"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’ylandet"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’rdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hustadvik"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "H’valer"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Hyll’stad"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ib’stad"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ind’rey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ind’re"),
+      -- TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
+      pgettext("warehousename", "Ir Kal’Tur"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Iv’land"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "J’vnaker"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "K’fjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Kar’sjok"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Karls’y"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Karm’y"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Kot’keino"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "K’nn"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Kl’pp"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "K’ngsberg"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "K’ngsvinger"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Krag’re"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Kr’dsherad"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Kvæfjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Kvæn’ngen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Kvam"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Kvin’sdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Kvin’Herad"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Kvit’seid"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Kvit’Sey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Lærdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Larvik"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Lav’ngen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’besby"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’rfjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’ka"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’sja"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’vanger"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Lier"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’rne"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Lil’hammer"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Lil’sand"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Lil’strom"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Lind’snes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’dingen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Lom"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Loppa"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Lar’nskog"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’ten"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Lund"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Lunner"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’rey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’ster"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’ngdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "L’ngen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Mal’Selv"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Mal’vik"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Mar’ker"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Mas’fjordn"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Mos’y"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "M’lhus"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "M’ley"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Mer’ker"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Midt’re"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Midt’lemark"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Mod’al’en"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Modum"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "M’lde"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Mos’kenes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Mos’s"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Næreysund"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Namsos"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nams’skogan"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nan’stad"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nar’vik"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "N’sbyen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nesna"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nesod’n"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nes’by"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nis’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nit’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nome"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nord’Aurdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nord’fron"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nord’kapp"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nord’odal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nord’Reisa"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Nord’re"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "No’re"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Notod’n"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ok’snes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Omli"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Omot"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Op’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Or’kland"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Or’land"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Or’sta"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Osen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Os"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Os’lo"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ost’rey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ost’re"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ov’rhala"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ov’re"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Pors’nger"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Pors’grun"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Rode"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ræl’ngen"),
+      -- TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
+      pgettext("warehousename", "Rænt"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Rak’stad"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Rana"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Rand’berg"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Rauma"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ren’dlen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ren’bu"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Rin’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Rin’gbu"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Rin’grike"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Rin’gsker"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ris’r"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "R’dey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Rol’Lag"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "R’ros"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Rest"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Reyr’Vik"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sal’ngen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sal’tdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Samn’nger"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sand’fjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sand’e"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sand’nes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sarpsb’rg"),
+      -- TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
+      pgettext("warehousename", "Sars’tun"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sauda"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sel’bu"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sel’jord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sel"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sen’ja"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sig’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sil’jan"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sir’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Skaun"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Skien"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Skipt’vet"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Skjok"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Skjer’vey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Smola"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Snosa"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sog’ndal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sok’ndal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sola"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sol’nd"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Som’na"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Son’dre"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sor’aur’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sor’fold"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sor’fron"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sor’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sor’reisa"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sor’tland"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sor’var’nger"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Stad"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Stange"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Stav’nger"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "St’gen"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "St’nkjer"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Stjor’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Stord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Stor’Elvdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Stor’Fjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Stranda"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Strand"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Stryn"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sula"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Suldal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sun’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sun’fjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Surn’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Sveio"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Syk’lven"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Tana"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Thronsand"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Thronsund"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Time"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "T’ngvol"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ti’n"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Tjeld’sund"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Toke"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Tolga"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Tonsberg"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Træna"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Tromso"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Tr’ndheim"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Tr’sil"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Tved’strand"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "T’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Tynset"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Tys’nes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Tys’vær"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ul’nsaker"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ul’nsvang"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ul’stein"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ul’vik"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Uts’ra"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vadso"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Værey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vogo"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "V’gan"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "V’ksdal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "V’ler"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vale"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vang"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Van’lven"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vardo"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vef’sn"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vega"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Veg’rshei"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ven’Sla"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Ver’dal"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "V’stby"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "V’stnes"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "V’stre"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "V’stvogey"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vev’lstad"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vik"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vind’fjord"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vin’je"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "V’lda"),
+      -- TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
+      pgettext("warehousename", "Vos"),
+   },
+
    -- Productionsite status strings
 
    -- TRANSLATORS: Productivity label on a barbarian building if there is 1 worker missing

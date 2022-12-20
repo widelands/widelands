@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-31 02:58+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
 "Last-Translator: ks k, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -196,9 +196,9 @@ msgstr "이 창을 닫고 있음"
 
 #: ../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
-" You can open and close this window by clicking on the ‘Objectives’ button "
-"in the toolbar on the bottom of the screen."
-msgstr " 화면 하단의 도구 모음에서 ‘목표’ 단추를 눌러 이 창을 열고 닫을 수 있습니다."
+"You can open and close this window by clicking on the ‘Objectives’ button in"
+" the toolbar on the bottom of the screen."
+msgstr ""
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""

@@ -169,6 +169,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdDiplomacy(des);
 	case QueueCommandTypes::kPinnedNote:
 		return new CmdPinnedNote(des);
+	case QueueCommandTypes::kShipPortName:
+		return new CmdShipPortName(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
@@ -2440,6 +2442,64 @@ void CmdPinnedNote::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver&
 	fw.unsigned_8(rgb_.g);
 	fw.unsigned_8(rgb_.b);
 	fw.unsigned_8(delete_ ? 1 : 0);
+}
+
+// CmdShipPortName
+void CmdShipPortName::execute(Game& game) {
+	MapObject* mo = game.objects().get_object(serial_);
+	if (mo == nullptr) {
+		return;
+	}
+
+	switch (mo->descr().type()) {
+	case MapObjectType::SHIP:
+		dynamic_cast<Ship&>(*mo).set_shipname(name_);
+		return;
+
+	case MapObjectType::WAREHOUSE:
+		dynamic_cast<Warehouse&>(*mo).set_warehouse_name(name_);
+		return;
+
+	default:
+		throw wexception("CmdShipPortName for object %u of type %s", serial_,
+		                 to_string(mo->descr().type()).c_str());
+	}
+}
+
+CmdShipPortName::CmdShipPortName(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+	name_ = des.string();
+}
+
+void CmdShipPortName::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial_);
+	ser.string(name_);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdShipPortName = 1;
+
+void CmdShipPortName::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdShipPortName) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial_ = fr.unsigned_32();
+			name_ = fr.string();
+		} else {
+			throw UnhandledVersionError(
+			   "CmdShipPortName", packet_version, kCurrentPacketVersionCmdShipPortName);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_ShipPortName: %s", e.what());
+	}
+}
+
+void CmdShipPortName::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdShipPortName);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.string(name_);
 }
 
 // CmdPickCustomStartingPosition

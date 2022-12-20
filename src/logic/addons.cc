@@ -310,16 +310,13 @@ double AddOnInfo::average_rating() const {
 }
 
 static bool contains_png(const std::string& dir) {
-	for (const std::string& f : g_fs->list_directory(dir)) {
+	const auto dirs = g_fs->list_directory(dir);
+	return std::any_of(dirs.begin(), dirs.end(), [](const std::string& f) {
 		if (g_fs->is_directory(f)) {
-			if (contains_png(f)) {
-				return true;
-			}
-		} else if (FileSystem::filename_ext(f) == ".png") {
-			return true;
+			return contains_png(f);
 		}
-	}
-	return false;
+		return FileSystem::filename_ext(f) == ".png";
+	});
 }
 // Rebuilding the texture atlas is required if an add-on defines new terrain, flag, or road
 // textures.
