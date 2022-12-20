@@ -2873,9 +2873,7 @@ function place_flags(eco)
 
    for i = 1, #eco.flags do
       local flag = p1:place_flag(map:get_field(eco.flags[i].x, eco.flags[i].y),true)
-      for ware,count in pairs(eco.flags[i].wares) do
-         flag:set_wares(ware,count)
-      end
+      flag:set_wares(eco.flags[i].wares)
    end
 end
 
@@ -2952,6 +2950,7 @@ while total_soldiers > 0 do
    local key2 = math.random(0, 6)
    local key3 = math.random(0, 2)
    local descr = key1 .. key2 .. key3
+   -- First, we only take heroes. Rookies are taken afterwards if there aren't enough heroes to fill the available capacity.
    if not (key1 == 0 and key2 == 0 and key3 == 0) and campaign_data[descr] ~= nil then
       if campaign_data[descr] < total_soldiers then
          soldiers[{key1, key2, key3, 0}] = campaign_data[descr]
@@ -2972,4 +2971,6 @@ if total_soldiers > 0 then
       end
    end
 end
-p1:get_buildings("frisians_headquarters")[1]:set_soldiers(soldiers)
+hq = p1:get_buildings("frisians_headquarters")[1]
+hq:set_soldiers(soldiers)
+hq.warehousename = _("Helgoland")

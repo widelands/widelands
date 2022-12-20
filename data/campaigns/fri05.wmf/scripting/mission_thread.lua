@@ -81,11 +81,17 @@ function check_objective_uplands()
    local o = add_campaign_objective(obj_uplands)
    while true do
       sleep(4471)
-      for _,wh in ipairs(p1:get_buildings("frisians_warehouse")) do
-         if wh.fields[1].height > 40 then
-            set_objective_done(o)
-            campaign_message_box(secured_uplands)
-            return
+      local nr = 0
+      for _,descr in pairs(p1.tribe.buildings) do
+         for _,b in pairs(p1:get_buildings(descr.name)) do
+            if b.fields[1].height > 40 then
+               nr = nr + 1
+               if nr >= 15 then
+                  set_objective_done(o)
+                  campaign_message_box(secured_uplands)
+                  return
+               end
+            end
          end
       end
    end
@@ -125,7 +131,7 @@ function mission_thread()
    campaign_message_box(intro_7)
 
    scroll_to_field(map.player_slots[2].starting_field)
-   sleep(10000)
+   sleep(5000)
    scroll_to_field(map.player_slots[1].starting_field)
 
    campaign_message_box(intro_8)
@@ -149,39 +155,39 @@ function mission_thread()
       scroll_to_field(f)
    end
 
-   sleep(2500)
+   sleep(1000)
    campaign_message_box(trade_3)
    add_campaign_objective(obj_trade)
    run(check_trade)
 
-   sleep(7500)
-   scroll_to_field(map:get_field(78, 141))
    sleep(2500)
+   scroll_to_field(map:get_field(78, 141))
+   sleep(1000)
    campaign_message_box(getting_started_1)
    run(check_objective_uplands)
-   sleep(2500)
+   sleep(1000)
    scroll_to_field(map:get_field(86, 116))
-   sleep(2500)
+   sleep(1000)
    campaign_message_box(getting_started_2)
    run(check_objective_block)
 
-   sleep(5000)
+   sleep(2000)
    scroll_to_field(map:get_field(90, 185))
-   sleep(5000)
+   sleep(2000)
    campaign_message_box(getting_started_3)
    run(check_objective_wood)
-   sleep(2500)
+   sleep(1000)
    scroll_to_field(map:get_field(79, 139))
-   sleep(2500)
+   sleep(1000)
    campaign_message_box(getting_started_4)
 
-   sleep(5000)
+   sleep(2000)
    scroll_to_field(map:get_field(95, 156))
-   sleep(5000)
+   sleep(2000)
    campaign_message_box(getting_started_5)
-   sleep(2500)
+   sleep(1000)
    scroll_to_field(map.player_slots[1].starting_field)
-   sleep(2500)
+   sleep(1000)
    campaign_message_box(getting_started_6)
 
    local defeated = false
