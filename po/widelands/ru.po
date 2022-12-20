@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-13 03:18+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -3990,8 +3990,8 @@ msgstr "Логин или пароль введены неверно:\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:896
 #, c-format
-msgid "Fetching add-ons (%.1f%%)"
-msgstr "Выборка дополнений (%.1f %%)"
+msgid "Fetching add-ons… (%.1f%%)"
+msgstr "Подбор дополнений...(%.1f%%)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:899
 msgid "Connecting to the server…"

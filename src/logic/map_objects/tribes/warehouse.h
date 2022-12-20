@@ -204,6 +204,7 @@ public:
 	PortDock* get_portdock() const {
 		return portdock_;
 	}
+	void update_statistics_string(std::string* str) override;
 
 	// Returns the first matching not completely filled waresqueue of the expedition if this is a
 	// port.
@@ -213,6 +214,13 @@ public:
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
 	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
+
+	[[nodiscard]] const std::string& get_warehouse_name() const {
+		return warehouse_name_;
+	}
+	void set_warehouse_name(const std::string& name) {
+		warehouse_name_ = name;
+	}
 
 	void log_general_info(const EditorGameBase&) const override;
 
@@ -293,6 +301,7 @@ private:
 
 	std::vector<StockPolicy> ware_policy_;
 	std::vector<StockPolicy> worker_policy_;
+	std::string warehouse_name_;
 
 	// Workers who live here at the moment
 	using WorkerList = std::vector<OPtr<Worker>>;

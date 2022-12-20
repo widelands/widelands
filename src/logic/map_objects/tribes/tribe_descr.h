@@ -169,6 +169,9 @@ public:
 	[[nodiscard]] const std::vector<std::pair<std::string, int>>& collectors_points_table() const {
 		return collectors_points_table_;
 	}
+	[[nodiscard]] const std::vector<std::string>& get_warehouse_names() const {
+		return warehouse_names_;
+	}
 
 	[[nodiscard]] const std::string& get_productionsite_worker_missing_string() const {
 		return productionsite_worker_missing_;
@@ -278,6 +281,7 @@ private:
 	WaresOrder wares_order_;
 	WaresOrder workers_order_;
 	std::vector<std::pair<std::string, int>> collectors_points_table_;
+	std::vector<std::string> warehouse_names_;
 
 	std::string productionsite_worker_missing_;
 	std::string productionsite_workers_missing_;

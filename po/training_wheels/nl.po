@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-31 02:58+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
 "Last-Translator: CrisiusXIII <chris@cborn.nl>, 2021\n"
 "Language-Team: Dutch (https://www.transifex.com/widelands/teams/35159/nl/)\n"
@@ -196,8 +196,8 @@ msgstr ""
 
 #: ../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
-" You can open and close this window by clicking on the ‘Objectives’ button "
-"in the toolbar on the bottom of the screen."
+"You can open and close this window by clicking on the ‘Objectives’ button in"
+" the toolbar on the bottom of the screen."
 msgstr ""
 
 #: ../../data/scripting/training_wheels/objectives.lua:49

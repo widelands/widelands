@@ -16,6 +16,7 @@
  *
  */
 
+#include <cstddef>
 #include <cstdlib>
 
 #include "ai/defaultai.h"
@@ -238,7 +239,9 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 					int32_t strength = calculate_strength(attackers);
 					observer.second.attack_soldiers_strength = strength;
 					assert(!attackers.empty());
-					observer.second.attack_soldiers_competency = strength * 10 / attackers.size();
+					assert(strength >= 0);
+					observer.second.attack_soldiers_competency =
+					   strength * 10 / static_cast<int32_t>(attackers.size());
 				}
 			} else {
 				observer.second.attack_soldiers_strength = 0;

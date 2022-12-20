@@ -79,6 +79,8 @@ protected:
 		return tabs_;
 	}
 
+	virtual void setup_name_field_editbox(UI::Box& /* vbox */) {
+	}
 	void act_bulldoze();
 	void act_dismantle();
 	void act_debug();
