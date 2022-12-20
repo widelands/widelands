@@ -268,8 +268,8 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 	}
 	PlayerSettings const position = settings().players.at(number);
 	// Ensure that old player number isn't out of range when we switch to a map with less players
-	const uint8_t old_number = settings().playernum < static_cast<int>(settings().players.size()) ?
-	                           settings().playernum : 0;
+	const uint8_t old_number =
+	   settings().playernum < static_cast<int>(settings().players.size()) ? settings().playernum : 0;
 	PlayerSettings const player = settings().players.at(old_number);
 	if (number < settings().players.size() && (position.state == PlayerSettings::State::kOpen ||
 	                                           position.state == PlayerSettings::State::kClosed ||
