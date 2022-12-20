@@ -47,6 +47,7 @@ public:
 private:
 	PlayerSlot id_;
 	GameSettingsProvider* const settings_;
+	UI::Button number_;
 	UI::Button player_;
 	SinglePlayerPlayerTypeDropdown player_type_;
 	SinglePlayerTribeDropdown tribe_;

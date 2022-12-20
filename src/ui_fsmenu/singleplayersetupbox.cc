@@ -38,6 +38,15 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      id_(id),
      settings_(settings),
+     number_(this,
+             "number",
+             0,
+             0,
+             h,
+             h,
+             UI::ButtonStyle::kFsMenuSecondary,
+             std::to_string(id_ + 1),
+             _("Player Number")),
      player_(this,
              "player",
              0,
@@ -63,6 +72,10 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
      teams_(
         this, lg, format("dropdown_team%d", static_cast<unsigned>(id)), 0, 0, h, h, settings, id) {
 
+	number_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+	number_.set_enabled(false);
+
+	add(&number_);
 	add(&player_);
 	add(player_type_.get_dropdown());
 	add(tribe_.get_dropdown());
