@@ -264,7 +264,11 @@ struct Ship : Bob {
 	[[nodiscard]] inline bool is_refitting() const {
 		return get_pending_refit() != get_ship_type();
 	}
-	void refit(EditorGameBase&, ShipType);
+	void refit(Game&, ShipType);
+	// Editor only
+	void set_ship_type(EditorGameBase& egbase, ShipType t);
+
+	static void warship_soldier_callback(Game& game, Request& req, DescriptionIndex di, Worker* worker, PlayerImmovable& immovable);
 
 protected:
 	void draw(const EditorGameBase&,
@@ -286,7 +290,7 @@ private:
 	void ship_wakeup(Game&);
 
 	bool ship_update_transport(Game&, State&);
-	void ship_update_expedition(Game&, State&);
+	bool ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
@@ -295,6 +299,8 @@ private:
 
 	bool init_fleet(EditorGameBase&);
 	void set_fleet(ShipFleet* fleet);
+
+	PortDock* find_nearest_port(EditorGameBase& egbase);
 
 	void send_message(Game& game,
 	                  const std::string& title,
@@ -313,6 +319,7 @@ private:
 	std::string shipname_;
 
 	OPtr<PortDock> destination_{nullptr};
+	std::unique_ptr<Request> warship_soldier_request_;
 
 	struct Expedition {
 		~Expedition();
@@ -358,7 +365,7 @@ protected:
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<Battle> battles_;
 		std::vector<ShippingItem::Loader> items_;
-		Serial expedition_attack_target_serial_;
+		Serial expedition_attack_target_serial_{0U};
 		std::vector<Serial> battle_serials_;
 	};
 

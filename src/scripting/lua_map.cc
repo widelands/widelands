@@ -7007,7 +7007,7 @@ int LuaShip::get_state(lua_State* L) {
 /* RST
    .. attribute:: type
 
-      .. versionadded:: 1.1
+      .. versionadded:: 1.2
 
       (RO) The state the ship is in as :const:`string`:
       :const:`"transport"` or :const:`"warship"`.
@@ -7425,9 +7425,9 @@ int LuaShip::make_expedition(lua_State* L) {
 /* RST
    .. method:: refit(type)
 
-      .. versionadded:: 1.1
+      .. versionadded:: 1.2
 
-      Order the ship to refit to the given type
+      Order the ship to refit to the given type.
 
       :arg string type: :const:`"transport"` or :const:`"warship"`
 
@@ -7437,13 +7437,13 @@ int LuaShip::refit(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments to refit!");
 	}
-	Widelands::EditorGameBase& egbase = get_egbase(L);
-	Widelands::Ship* ship = get(L, egbase);
+	Widelands::Game& game = get_game(L);
+	Widelands::Ship* ship = get(L, game);
 	const std::string type = luaL_checkstring(L, 2);
 	if (type == "transport") {
-		ship->refit(egbase, Widelands::ShipType::kTransport);
+		ship->refit(game, Widelands::ShipType::kTransport);
 	} else if (type == "warship") {
-		ship->refit(egbase, Widelands::ShipType::kWarship);
+		ship->refit(game, Widelands::ShipType::kWarship);
 	} else {
 		report_error(L, "Invalid ship refit type '%s'", type.c_str());
 	}

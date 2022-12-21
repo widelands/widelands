@@ -342,8 +342,10 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 				}
 				items_.clear();
 				ship_type_ = pending_refit_;
+				warship_soldier_request_.reset();
 				if (ship_type_ == ShipType::kWarship) {
 					start_task_expedition(game);
+					set_destination(game, d);
 				} else {
 					exp_cancel(game);
 				}
@@ -366,7 +368,9 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 	case ShipStates::kExpeditionPortspaceFound:
 	case ShipStates::kExpeditionScouting:
 	case ShipStates::kExpeditionWaiting:
-		ship_update_expedition(game, state);
+		if (ship_update_expedition(game, state)) {
+			return;
+		}
 		break;
 	case ShipStates::kExpeditionColonizing:
 		break;
@@ -479,63 +483,17 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	return true;
 }
 
-/// updates a ships tasks in expedition mode
-void Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
+/// updates a ships tasks in expedition mode; returns whether tasks were updated
+bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	Map* map = game.mutable_map();
 
 	assert(expedition_);
+	const FCoords position = get_position();
 
 	// Update the knowledge of the surrounding fields
-	FCoords position = get_position();
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		expedition_->swimmable[dir - 1] =
 		   ((map->get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM) != 0);
-	}
-
-	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
-		// Check surrounding fields for port buildspaces
-		std::vector<Coords> temp_port_buildspaces;
-		MapRegion<Area<Coords>> mr(*map, Area<Coords>(position, descr().vision_range()));
-		bool new_port_space = false;
-		do {
-			if (!map->is_port_space(mr.location())) {
-				continue;
-			}
-
-			const FCoords fc = map->get_fcoords(mr.location());
-
-			// Check whether the maximum theoretical possible NodeCap of the field
-			// is of the size big and whether it can theoretically be a port space
-			if ((map->get_max_nodecaps(game, fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
-			    map->find_portdock(fc, true).empty()) {
-				continue;
-			}
-
-			if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
-				continue;
-			}
-
-			// Check if the ship knows this port space already from its last check
-			if (std::find(expedition_->seen_port_buildspaces.begin(),
-			              expedition_->seen_port_buildspaces.end(),
-			              mr.location()) != expedition_->seen_port_buildspaces.end()) {
-				temp_port_buildspaces.push_back(mr.location());
-			} else {
-				new_port_space = true;
-				temp_port_buildspaces.insert(temp_port_buildspaces.begin(), mr.location());
-			}
-		} while (mr.advance(*map));
-
-		expedition_->seen_port_buildspaces = temp_port_buildspaces;
-		if (new_port_space) {
-			set_ship_state_and_notify(
-			   ShipStates::kExpeditionPortspaceFound, NoteShip::Action::kWaitingForCommand);
-			send_message(game, _("Port Space"), _("Port Space Found"),
-			             _("An expedition ship found a new port build space."),
-			             "images/wui/editor/fsel_editor_set_port_space.png");
-		}
-	} else if (ship_state_ == ShipStates::kExpeditionPortspaceFound) {
-		check_port_space_still_available(game);
 	}
 
 	if (get_ship_type() == ShipType::kWarship) {
@@ -587,6 +545,97 @@ void Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			}
 		}
 	}
+
+	if (PortDock* dest = destination_.get(game); dest != nullptr) {
+		// Sail to the destination port if we're not there yet.
+		if (position.field->get_immovable() != dest) {
+			start_task_movetodock(game, *dest);
+			return true;
+		}
+		// We're on the destination dock. Load soldiers and wait for orders.
+		set_ship_state_and_notify(ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
+		if (warship_soldier_request_ == nullptr) {
+			warship_soldier_request_.reset(new Request(*dest->get_warehouse(), owner().tribe().soldier(), Ship::warship_soldier_callback, wwWORKER));
+		}
+		warship_soldier_request_->set_count(get_capacity() - get_nritems());
+		start_task_idle(game, descr().main_animation(), 250);
+		return true;
+	}
+
+	warship_soldier_request_.reset();  // Clear the request when not in port
+
+	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
+		// Check surrounding fields for port buildspaces
+		std::vector<Coords> temp_port_buildspaces;
+		MapRegion<Area<Coords>> mr(*map, Area<Coords>(position, descr().vision_range()));
+		bool new_port_space = false;
+		do {
+			if (!map->is_port_space(mr.location())) {
+				continue;
+			}
+
+			const FCoords fc = map->get_fcoords(mr.location());
+
+			// Check whether the maximum theoretical possible NodeCap of the field
+			// is of the size big and whether it can theoretically be a port space
+			if ((map->get_max_nodecaps(game, fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
+			    map->find_portdock(fc, true).empty()) {
+				continue;
+			}
+
+			if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
+				continue;
+			}
+
+			// Check if the ship knows this port space already from its last check
+			if (std::find(expedition_->seen_port_buildspaces.begin(),
+			              expedition_->seen_port_buildspaces.end(),
+			              mr.location()) != expedition_->seen_port_buildspaces.end()) {
+				temp_port_buildspaces.push_back(mr.location());
+			} else {
+				new_port_space = true;
+				temp_port_buildspaces.insert(temp_port_buildspaces.begin(), mr.location());
+			}
+		} while (mr.advance(*map));
+
+		expedition_->seen_port_buildspaces = temp_port_buildspaces;
+		if (new_port_space) {
+			set_ship_state_and_notify(
+			   ShipStates::kExpeditionPortspaceFound, NoteShip::Action::kWaitingForCommand);
+			send_message(game, _("Port Space"), _("Port Space Found"),
+			             _("An expedition ship found a new port build space."),
+			             "images/wui/editor/fsel_editor_set_port_space.png");
+		}
+	} else if (ship_state_ == ShipStates::kExpeditionPortspaceFound) {
+		check_port_space_still_available(game);
+	}
+
+	return false;  // Continue with the regular expedition updates
+}
+
+// static
+void Ship::warship_soldier_callback(Game& game, Request& req, DescriptionIndex /*di*/, Worker* worker, PlayerImmovable& immovable) {
+	Warehouse& warehouse = dynamic_cast<Warehouse&>(immovable);
+	PortDock* dock = warehouse.get_portdock();
+	assert(dock != nullptr);
+	for (const Coords& c : dock->get_positions(game)) {
+		for (Bob* b = game.map()[c].get_first_bob(); b != nullptr; b = b->get_next_bob()) {
+			if (b->descr().type() == MapObjectType::SHIP) {
+				upcast(Ship, ship, b);
+				if (ship->warship_soldier_request_.get() == &req) {
+					assert(ship->get_owner() == dock->get_owner());
+					assert(ship->get_ship_type() == ShipType::kWarship);
+					ship->molog(game.get_gametime(), "%s %u embarked on warship", worker->descr().name().c_str(), worker->serial());
+					ship->add_item(game, ShippingItem(*worker));
+					return;
+				}
+			}
+		}
+	}
+
+	verb_log_info_time(game.get_gametime(), "%s %u missed his assigned warship at dock %s",
+			worker->descr().name().c_str(), worker->serial(), warehouse.get_warehouse_name().c_str());
+	// The soldier is in the port now, ready to get some new assignment by the economy
 }
 
 bool Ship::is_attackable_enemy_warship(const Bob& b) const {
@@ -621,41 +670,71 @@ bool Ship::can_refit(const ShipType type) const {
 	return !is_refitting() && !has_battle() && type != ship_type_;
 }
 
-void Ship::refit(EditorGameBase& egbase, const ShipType type) {
+#ifndef NDEBUG
+void Ship::set_ship_type(EditorGameBase& egbase, ShipType t) {
+	assert(!egbase.is_game());
+	ship_type_ = t;
+	pending_refit_ = ship_type_;
+}
+#else
+void Ship::set_ship_type(EditorGameBase& /* egbase */, ShipType t) {
+	ship_type_ = t;
+	pending_refit_ = ship_type_;
+}
+#endif
+
+void Ship::refit(Game& game, const ShipType type) {
 	if (!can_refit(type)) {
-		molog(egbase.get_gametime(), "Requested refit to %d not possible", static_cast<int>(type));
+		molog(game.get_gametime(), "Requested refit to %d not possible", static_cast<int>(type));
 		return;
 	}
 
-	if (!fleet_) {
-		init_fleet(egbase);
-		assert(fleet_);
-	}
-	PortDock* dest = destination_.get(egbase);
-	if (!dest) {
-		int32_t dist = 0;
-		for (PortDock* pd : fleet_->get_ports()) {
-			Path path;
-			int32_t d = -1;
-			calculate_sea_route(egbase, *pd, &path);
-			egbase.map().calc_cost(path, &d, nullptr);
-			assert(d >= 0);
-			if (!dest || d < dist) {
-				dist = d;
-				dest = pd;
-			}
-		}
-		if (!dest) {
-			molog(egbase.get_gametime(), "Attempted refit to %d but no ports in fleet", static_cast<int>(type));
-			return;
-		}
+	if (destination_.get(game) != nullptr) {
+		send_signal(game, "wakeup");
+	} else if (PortDock* dest = find_nearest_port(game); dest != nullptr) {
+		set_destination(game, dest);
+	} else {
+		molog(game.get_gametime(), "Attempted refit to %d but no ports in fleet", static_cast<int>(type));
+		return;
 	}
 
 	pending_refit_ = type;
-	fleet_->remove_ship(egbase, this);
-	assert(fleet_ == nullptr);
 
-	set_destination(egbase, dest);
+	// Already remove the ship from the fleet
+	if (fleet_ != nullptr) {
+		fleet_->remove_ship(game, this);
+		assert(fleet_ == nullptr);
+	}
+}
+
+PortDock* Ship::find_nearest_port(EditorGameBase& egbase) {
+	const bool in_fleet = fleet_ != nullptr;
+
+	if (!in_fleet) {
+		init_fleet(egbase);
+		assert(fleet_ != nullptr);
+	}
+
+	PortDock* nearest = nullptr;
+	int32_t dist = 0;
+	for (PortDock* pd : fleet_->get_ports()) {
+		Path path;
+		int32_t d = -1;
+		calculate_sea_route(egbase, *pd, &path);
+		egbase.map().calc_cost(path, &d, nullptr);
+		assert(d >= 0);
+		if (nearest == nullptr || d < dist) {
+			dist = d;
+			nearest = pd;
+		}
+	}
+
+	if (!in_fleet) {
+		fleet_->remove_ship(egbase, this);
+		assert(fleet_ == nullptr);
+	}
+
+	return nearest;
 }
 
 void Ship::warship_command(Game& game, const WarshipCommand cmd) {
@@ -665,14 +744,23 @@ void Ship::warship_command(Game& game, const WarshipCommand cmd) {
 
 	switch (cmd) {
 	case WarshipCommand::kAttack:
-		if (MapObject* a = get_attack_target(game)) {
-			start_battle(game, Battle(a, true));
+		if (MapObject* target = get_attack_target(game); target != nullptr) {
+			start_battle(game, Battle(target, true));
 		}
-		break;
+		return;
 
-	default:
-		NEVER_HERE();  // NOCOM
+	case WarshipCommand::kRetreat:
+		if (destination_.get(game) == nullptr) {
+			if (PortDock* dest = find_nearest_port(game); dest != nullptr) {
+				set_destination(game, dest);
+			} else {
+				molog(game.get_gametime(), "Attempted retreat but no ports in fleet");
+			}
+		}
+		return;
 	}
+
+	throw wexception("Invalid warship command %d", static_cast<int>(cmd));
 }
 
 void Ship::start_battle(Game& game, const Battle new_battle) {
@@ -962,7 +1050,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					expedition_->exploration_start = get_position();
 				} else {
 					// Check whether the island was completely surrounded
-					if (get_position() == expedition_->exploration_start) {
+					if (ship_type_ != ShipType::kWarship && get_position() == expedition_->exploration_start) {
 						set_ship_state_and_notify(
 						   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 						send_message(game,
@@ -1029,12 +1117,14 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		set_ship_state_and_notify(
 		   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 		start_task_idle(game, descr().main_animation(), kShipInterval);
-		// Send a message to the player, that a new coast was reached
-		send_message(game,
-		             /** TRANSLATORS: A ship has discovered land */
-		             _("Land Ahoy!"), _("Coast Reached"),
-		             _("An expedition ship reached a coast and is waiting for further commands."),
-		             "images/wui/ship/ship_scout_ne.png");
+		if (ship_type_ != ShipType::kWarship) {
+			// Send a message to the player, that a new coast was reached
+			send_message(game,
+				         /** TRANSLATORS: A ship has discovered land */
+				         _("Land Ahoy!"), _("Coast Reached"),
+				         _("An expedition ship reached a coast and is waiting for further commands."),
+				         "images/wui/ship/ship_scout_ne.png");
+		}
 		return;
 	}
 	case ShipStates::kExpeditionColonizing: {
@@ -1290,23 +1380,32 @@ void Ship::start_task_expedition(Game& game) {
 		}
 	}
 
-	// Send a message to the player, that an expedition is ready to go
-	send_message(game,
-	             /** TRANSLATORS: Ship expedition ready */
-	             pgettext("ship", "Expedition"), _("Expedition Ready"),
-	             _("An expedition ship is waiting for your commands."),
-	             "images/wui/buildings/start_expedition.png");
+	// Send a message to the player that an expedition is ready to go
+	if (ship_type_ == ShipType::kWarship) {
+		send_message(game,
+			         /** TRANSLATORS: Warship ready */
+			         pgettext("ship", "Warship"), _("Warship Ready"),
+			         _("A warship is waiting for your commands."),
+			         "images/wui/buildings/start_expedition.png");
+	} else {
+		send_message(game,
+			         /** TRANSLATORS: Ship expedition ready */
+			         pgettext("ship", "Expedition"), _("Expedition Ready"),
+			         _("An expedition ship is waiting for your commands."),
+			         "images/wui/buildings/start_expedition.png");
+	}
 	Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
 }
 
 /// Initializes / changes the direction of scouting to @arg direction
 /// @note only called via player command
-void Ship::exp_scouting_direction(Game& /* game */, WalkingDir scouting_direction) {
+void Ship::exp_scouting_direction(Game& game, WalkingDir scouting_direction) {
 	assert(expedition_);
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
 	expedition_->scouting_direction = scouting_direction;
 	expedition_->island_exploration = false;
+	set_destination(game, nullptr);
 }
 
 WalkingDir Ship::get_scouting_direction() const {
@@ -1344,13 +1443,14 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 /// Initializes / changes the direction the island exploration in @arg island_explore_direction
 /// direction
 /// @note only called via player command
-void Ship::exp_explore_island(Game& /* game */, IslandExploreDirection island_explore_direction) {
+void Ship::exp_explore_island(Game& game, IslandExploreDirection island_explore_direction) {
 	assert(expedition_);
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
 	expedition_->island_explore_direction = island_explore_direction;
 	expedition_->scouting_direction = WalkingDir::IDLE;
 	expedition_->island_exploration = true;
+	set_destination(game, nullptr);
 }
 
 IslandExploreDirection Ship::get_island_explore_direction() const {

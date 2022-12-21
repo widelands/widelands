@@ -403,10 +403,10 @@ void ShipWindow::act_refit() {
 		return;
 	}
 	const Widelands::ShipType t = ship->get_ship_type() == Widelands::ShipType::kWarship ? Widelands::ShipType::kTransport : Widelands::ShipType::kWarship;
-	if (Widelands::Game* game = ibase_.get_game()) {
+	if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
 		game->send_player_refit_ship(*ship, t);
 	} else {
-		ship->refit(ibase_.egbase(), t);
+		ship->set_ship_type(ibase_.egbase(), t);
 	}
 }
 

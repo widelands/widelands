@@ -311,13 +311,14 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 }
 
 void ShippingSchedule::ship_removed(const Game& /* game */, Ship* ship) {
-	auto it = plans_.find(ship);
-	assert(it != plans_.end());
-	plans_.erase(it);
+	if (auto it = plans_.find(ship); it != plans_.end()) {
+		plans_.erase(it);
+	} else if (ship->get_ship_type() != ShipType::kWarship) {  // Warships might not have a schedule.
+		throw wexception("Removing ship %s from fleet which did not have a schedule", ship->get_shipname().c_str());
+	}
 
-	auto i = last_actual_duration_recalculation_.find(ship);
-	if (i != last_actual_duration_recalculation_.end()) {
-		last_actual_duration_recalculation_.erase(i);
+	if (auto it = last_actual_duration_recalculation_.find(ship); it != last_actual_duration_recalculation_.end()) {
+		last_actual_duration_recalculation_.erase(it);
 	}
 
 	// Handling any items that were intended to be transported by this ship
@@ -326,6 +327,10 @@ void ShippingSchedule::ship_removed(const Game& /* game */, Ship* ship) {
 
 void ShippingSchedule::ship_added(Game& game, Ship& s) {
 	sslog("\nShippingSchedule::ship_added (%s)\n", s.get_shipname().c_str());
+	if (s.get_ship_type() == ShipType::kWarship) {
+		sslog("Is a warship, won't create a plan.\n\n");
+		return;
+	}
 	assert(!s.get_destination(game));
 	plans_[&s] = ShipPlan();
 	last_actual_duration_recalculation_[&s] = game.get_gametime();
