@@ -45,11 +45,10 @@ Section& get_config_section(const std::string&);
 Section* get_config_section_ptr(const std::string&);
 bool get_config_bool(const std::string& name, bool dflt);
 bool get_config_bool(const std::string& section, const std::string& name, bool dflt);
-int32_t get_config_int(const std::string& name, const int32_t dflt = 0);
+int32_t get_config_int(const std::string& name, int32_t dflt = 0);
 int32_t get_config_int(const std::string& section, const std::string& name, int32_t dflt);
 uint32_t get_config_natural(const std::string& name, uint32_t dflt);
-uint32_t
-get_config_natural(const std::string& section, const std::string& name, const uint32_t dflt);
+uint32_t get_config_natural(const std::string& section, const std::string& name, uint32_t dflt);
 std::string get_config_string(const std::string& name, const std::string& dflt);
 std::string
 get_config_string(const std::string& section, const std::string& name, const std::string& dflt);
@@ -111,6 +110,9 @@ enum class KeyboardShortcut : uint16_t {
 	kCommon_Begin = kMainMenu_End + 1,
 	kCommonFullscreen = kCommon_Begin,
 	kCommonScreenshot,
+	kCommonSave,
+	kCommonLoad,
+	kCommonExit,
 	kCommonTextCut,
 	kCommonTextCopy,
 	kCommonTextPaste,
@@ -129,14 +131,22 @@ enum class KeyboardShortcut : uint16_t {
 	kCommon_End = kCommonQuicknavNext,
 
 	kEditor_Begin = kCommon_End + 1,
-	kEditorMenu = kEditor_Begin,
-	kEditorSave,
-	kEditorLoad,
+	kEditorNewMap = kEditor_Begin,
+	kEditorNewRandomMap,
 	kEditorMapOptions,
 	kEditorUndo,
 	kEditorRedo,
 	kEditorTools,
+	kEditorChangeHeight,
+	kEditorRandomHeight,
+	kEditorTerrain,
+	kEditorImmovables,
+	kEditorAnimals,
+	kEditorResources,
+	kEditorPortSpaces,
 	kEditorInfo,
+	kEditorMapOrigin,
+	kEditorMapSize,
 	kEditorPlayers,
 	kEditorToolHistory,
 	kEditorShowhideGrid,
@@ -157,8 +167,8 @@ enum class KeyboardShortcut : uint16_t {
 	kEditor_End = kEditorToolsize10,
 
 	kInGame_Begin = kEditor_End + 1,
-	kInGameSave = kInGame_Begin,
-	kInGameLoad,
+	kInGameSoundOptions = kInGame_Begin,
+	kInGameRestart,
 	kInGameChat,
 	kInGamePinnedNote,
 	kInGameMessages,
@@ -283,7 +293,7 @@ KeyboardShortcut shortcut_from_string(const std::string&);
  * Generate a human-readable description of a keyboard shortcut.
  * Return value will either be an empty string or have a trailing "+".
  */
-std::string keymod_string_for(const uint16_t modstate, const bool rt_escape = true);
+std::string keymod_string_for(uint16_t modstate, bool rt_escape = true);
 std::string shortcut_string_for(SDL_Keysym, bool rt_escape);
 std::string shortcut_string_for(KeyboardShortcut, bool rt_escape);
 

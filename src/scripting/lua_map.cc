@@ -5853,6 +5853,7 @@ const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
 const PropertyType<LuaWarehouse> LuaWarehouse::Properties[] = {
    PROP_RO(LuaWarehouse, portdock),
    PROP_RO(LuaWarehouse, expedition_in_progress),
+   PROP_RW(LuaWarehouse, warehousename),
    {nullptr, nullptr, nullptr},
 };
 
@@ -6212,6 +6213,26 @@ int LuaWarehouse::get_soldiers(lua_State* L) {
 int LuaWarehouse::set_soldiers(lua_State* L) {
 	Widelands::Warehouse* wh = get(L, get_egbase(L));
 	return do_set_soldiers(L, wh->get_position(), wh->mutable_soldier_control(), wh->get_owner());
+}
+
+/* RST
+   .. attribute:: warehousename
+
+   .. versionadded:: 1.2
+
+   (RW) The name of the warehouse as :class:`string`.
+
+
+*/
+int LuaWarehouse::get_warehousename(lua_State* L) {
+	Widelands::Warehouse* wh = get(L, get_egbase(L));
+	lua_pushstring(L, wh->get_warehouse_name().c_str());
+	return 1;
+}
+int LuaWarehouse::set_warehousename(lua_State* L) {
+	Widelands::Warehouse* wh = get(L, get_egbase(L));
+	wh->set_warehouse_name(luaL_checkstring(L, -1));
+	return 0;
 }
 
 /* RST
@@ -6894,7 +6915,7 @@ const PropertyType<LuaShip> LuaShip::Properties[] = {
    PROP_RO(LuaShip, type),
    PROP_RW(LuaShip, scouting_direction),
    PROP_RW(LuaShip, island_explore_direction),
-   PROP_RO(LuaShip, shipname),
+   PROP_RW(LuaShip, shipname),
    PROP_RW(LuaShip, capacity),
    {nullptr, nullptr, nullptr},
 };
@@ -7108,7 +7129,10 @@ int LuaShip::set_island_explore_direction(lua_State* L) {
 /* RST
    .. attribute:: shipname
 
-   (RO) The name of the ship as :class:`string`.
+   .. versionchanged:: 1.2
+      Read-only in 1.1 and older.
+
+   (RW) The name of the ship as :class:`string`.
 
 
 */
@@ -7116,6 +7140,11 @@ int LuaShip::get_shipname(lua_State* L) {
 	Widelands::Ship* ship = get(L, get_egbase(L));
 	lua_pushstring(L, ship->get_shipname().c_str());
 	return 1;
+}
+int LuaShip::set_shipname(lua_State* L) {
+	Widelands::Ship* ship = get(L, get_egbase(L));
+	ship->set_shipname(luaL_checkstring(L, -1));
+	return 0;
 }
 
 /* RST

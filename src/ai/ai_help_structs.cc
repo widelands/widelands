@@ -393,12 +393,8 @@ void MineFieldsObserver::add_critical_ore(const Widelands::DescriptionIndex idx)
 
 // Does the player has at least one mineable field with positive amount for each critical ore?
 bool MineFieldsObserver::has_critical_ore_fields() {
-	for (auto ore : critical_ores) {
-		if (get(ore) == 0) {
-			return false;
-		}
-	}
-	return true;
+	return std::all_of(critical_ores.begin(), critical_ores.end(),
+	                   [this](const auto& ore) { return get(ore) != 0; });
 }
 
 // Returns count of fields with desired ore
@@ -1058,12 +1054,9 @@ void PlayersStrengths::recalculate_team_power() {
 
 // This just goes over information about all enemies and where they were seen the last time
 bool PlayersStrengths::any_enemy_seen_lately(const Time& gametime) {
-	for (auto& item : all_stats) {
-		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(all_stats.begin(), all_stats.end(), [this, &gametime](const auto& item) {
+		return get_is_enemy(item.first) && player_seen_lately(item.first, gametime);
+	});
 }
 
 // Returns count of nearby enemies
@@ -1406,7 +1399,7 @@ FlagCandidates::Candidate* FlagCandidates::get_winner(const int16_t threshold) {
 	if (!flags_[0].is_buildable()) {
 		return nullptr;
 	}
-	return &flags_[0];
+	return &flags_[0];  // NOLINT no readability-container-data-pointer here
 }
 
 FlagCandidates::Candidate::Candidate(const uint32_t c_hash,
@@ -1468,12 +1461,8 @@ void FlagCandidates::add_flag(const uint32_t coords,
 }
 
 bool FlagCandidates::has_candidate(const uint32_t coords_hash) const {
-	for (const auto& item : flags_) {
-		if (item.coords_hash == coords_hash) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(flags_.begin(), flags_.end(),
+	                   [coords_hash](const auto& item) { return item.coords_hash == coords_hash; });
 }
 
 }  // namespace AI

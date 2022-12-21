@@ -309,6 +309,7 @@ public:
 	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
 	void send_player_pinned_note(
 	   PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del);
+	void send_player_ship_port_name(PlayerNumber p, Serial s, const std::string& name);
 
 	InteractivePlayer* get_ipl();
 	const InteractivePlayer* get_ipl() const;

@@ -80,9 +80,10 @@ protected:
 	             DropdownType type,
 	             PanelStyle style,
 	             ButtonStyle button_style);
-	~BaseDropdown() override;
 
 public:
+	~BaseDropdown() override;
+
 	/// An entry was selected
 	Notifications::Signal<> selected;
 

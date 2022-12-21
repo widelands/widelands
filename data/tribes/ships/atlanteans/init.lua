@@ -96,7 +96,7 @@
 --       names = {
 --          pgettext("shipname", "Abaco"),
 --          pgettext("shipname", "Agate"),
---       }
+--       },
 --    }
 --
 --    pop_textdomain()

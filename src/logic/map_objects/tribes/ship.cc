@@ -18,6 +18,7 @@
 
 #include "logic/map_objects/tribes/ship.h"
 
+#include <array>
 #include <memory>
 
 #include "base/log.h"
@@ -108,21 +109,17 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 	}
 
 	// Next neighbours to the North and the West may have size = small immovables
-	Widelands::FCoords cn[7];
-	map.get_bln(c[1], &cn[0]);
+	std::array<Widelands::FCoords, 7> cn;
+	map.get_bln(c[1], &cn[0]);  // NOLINT no readability-container-data-pointer here
 	map.get_ln(c[1], &cn[1]);
 	map.get_tln(c[1], &cn[2]);
 	map.get_tln(c[2], &cn[3]);
 	map.get_trn(c[2], &cn[4]);
 	map.get_trn(c[3], &cn[5]);
 	map.get_rn(c[3], &cn[6]);
-	for (const Widelands::FCoords& fc : cn) {
-		if (!can_support_port(fc, BaseImmovable::SMALL)) {  // check for blocking immovables
-			return false;
-		}
-	}
-
-	return true;
+	return std::all_of(cn.begin(), cn.end(), [](const Widelands::FCoords& fc) {
+		return can_support_port(fc, BaseImmovable::SMALL);
+	});
 }
 
 }  // namespace
@@ -177,7 +174,6 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
      attack_accuracy_(table.get_int("attack_accuracy")),
      default_capacity_(table.has_key("capacity") ? table.get_int("capacity") : 20),
      ship_names_(table.get_table("names")->array_entries<std::string>()) {
-
 	// Read the sailing animations
 	assign_directional_animation(&sail_anims_, "sail");
 }
@@ -1452,7 +1448,7 @@ void Ship::draw(const EditorGameBase& egbase,
 
 	// Show ship name and current activity
 	std::string statistics_string;
-	if (info_to_draw & InfoToDraw::kStatistics) {
+	if ((info_to_draw & InfoToDraw::kStatistics) != 0) {
 		if (has_battle()) {
 			statistics_string = pgettext("ship_state", "Fighting");
 		} else if (is_refitting()) {
@@ -1465,37 +1461,53 @@ void Ship::draw(const EditorGameBase& egbase,
 				break;
 			}
 		} else {
-			// NOCOM show ship_type_
-			switch (ship_state_) {
-			case (ShipStates::kTransport):
-				statistics_string =
-				   destination_.get(egbase) != nullptr && fleet_->get_schedule().is_busy(*this) ?
-					  /** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
-					  pgettext("ship_state", "Shipping") :
-					  /** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
-					   * nothing to do. */
-					  pgettext("ship_state", "Empty");
-				break;
-			case (ShipStates::kExpeditionWaiting):
-				/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */
-				statistics_string = pgettext("ship_state", "Waiting");
-				break;
-			case (ShipStates::kExpeditionScouting):
-				/** TRANSLATORS: This is a ship state. An expedition is scouting for port spaces. */
-				statistics_string = pgettext("ship_state", "Scouting");
-				break;
-			case (ShipStates::kExpeditionPortspaceFound):
-				/** TRANSLATORS: This is a ship state. An expedition has found a port space. */
-				statistics_string = pgettext("ship_state", "Port Space Found");
-				break;
-			case (ShipStates::kExpeditionColonizing):
-				/** TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
-				 * port. */
-				statistics_string = pgettext("ship_state", "Founding a Colony");
-				break;
-			case (ShipStates::kSinkRequest):
-			case (ShipStates::kSinkAnimation):
-				break;
+			if (ship_type_ == ShipType::kWarship) {
+				// NOCOM show more state here
+				statistics_string = pgettext("ship_state", "Warship");
+			} else {
+				switch (ship_state_) {
+				case (ShipStates::kTransport): {
+					PortDock* dest = destination_.get(egbase);
+					if (dest == nullptr) {
+						/** TRANSLATORS: This is a ship state. The ship is ready
+						 * to transport wares, but has nothing to do. */
+						statistics_string = pgettext("ship_state", "Empty");
+					} else if (fleet_->get_schedule().is_busy(*this)) {
+						statistics_string =
+						   /** TRANSLATORS: This is a ship state. The ship is currently
+							* transporting wares to a specific destination port. */
+						   format(pgettext("ship_state", "Shipping to %s"),
+								  dest->get_warehouse()->get_warehouse_name());
+					} else {
+						statistics_string =
+						   /** TRANSLATORS: This is a ship state. The ship is currently sailing
+							* to a specific destination port without transporting wares. */
+						   format(pgettext("ship_state", "Sailing to %s"),
+								  dest->get_warehouse()->get_warehouse_name());
+					}
+					break;
+				}
+				case (ShipStates::kExpeditionWaiting):
+					/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */
+					statistics_string = pgettext("ship_state", "Waiting");
+					break;
+				case (ShipStates::kExpeditionScouting):
+					/** TRANSLATORS: This is a ship state. An expedition is scouting for port spaces. */
+					statistics_string = pgettext("ship_state", "Scouting");
+					break;
+				case (ShipStates::kExpeditionPortspaceFound):
+					/** TRANSLATORS: This is a ship state. An expedition has found a port space. */
+					statistics_string = pgettext("ship_state", "Port Space Found");
+					break;
+				case (ShipStates::kExpeditionColonizing):
+					/** TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
+					 * port. */
+					statistics_string = pgettext("ship_state", "Founding a Colony");
+					break;
+				case (ShipStates::kSinkRequest):
+				case (ShipStates::kSinkAnimation):
+					break;
+				}
 			}
 		}
 		statistics_string = StyleManager::color_tag(
@@ -1548,17 +1560,20 @@ void Ship::draw(const EditorGameBase& egbase,
 void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
+	molog(egbase.get_gametime(), "Name: %s", get_shipname().c_str());
 	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\n",
 	      fleet_ != nullptr ? fleet_->serial() : 0,
-	      (lastdock_.is_set()) ? format("%u (%d x %d)", lastdock_.serial(),
-	                                    lastdock_.get(egbase)->get_positions(egbase)[0].x,
-	                                    lastdock_.get(egbase)->get_positions(egbase)[0].y)
-
-	                                .c_str() :
-	                             "-");
-	if (destination_.get(egbase) != nullptr) {
-		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d)\n", destination_.serial(),
-		      destination_.get(egbase)->get_positions(egbase)[0].x, destination_.get(egbase)->get_positions(egbase)[0].y);
+	      (lastdock_.is_set()) ?
+            format("%u (%s at %3dx%3d)", lastdock_.serial(),
+	                lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
+	                lastdock_.get(egbase)->get_positions(egbase)[0].x,
+	                lastdock_.get(egbase)->get_positions(egbase)[0].y)
+	            .c_str() :
+            "-");
+	if (PortDock* dest = destination_.get(egbase); dest != nullptr) {
+		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d) %s\n", dest->serial(),
+		      dest->get_positions(egbase)[0].x, dest->get_positions(egbase)[0].y,
+		      dest->get_warehouse()->get_warehouse_name().c_str());
 	} else {
 		molog(egbase.get_gametime(), "No destination\n");
 	}

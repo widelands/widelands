@@ -140,15 +140,15 @@ Player::Player(EditorGameBase& the_egbase,
                const TribeDescr& tribe_descr,
                const std::string& name)
    : egbase_(the_egbase),
-     initialization_index_(initialization_index),
-     playercolor_(pc),
-
-     player_number_(plnum),
      tribe_(tribe_descr),
 
      message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
      attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
-     occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {
+     occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")),
+
+     playercolor_(pc),
+     player_number_(plnum),
+     initialization_index_(initialization_index) {
 	set_name(name);
 
 	init_statistics();
@@ -181,11 +181,13 @@ Player::Player(EditorGameBase& the_egbase,
 		   }
 	   });
 
-	// Populating remaining_shipnames vector
-	for (const std::string& shipname :
-	     egbase_.descriptions().get_ship_descr(tribe().ship())->get_ship_names()) {
-		remaining_shipnames_.push_back(shipname);
-	}
+	// Populating list of remaining ship/port names
+	const Widelands::ShipDescr& ship = *egbase_.descriptions().get_ship_descr(tribe().ship());
+	remaining_shipnames_.insert(
+	   remaining_shipnames_.begin(), ship.get_ship_names().begin(), ship.get_ship_names().end());
+	remaining_warehousenames_.insert(remaining_warehousenames_.begin(),
+	                                 tribe().get_warehouse_names().begin(),
+	                                 tribe().get_warehouse_names().end());
 
 	update_team_players();
 }
@@ -1947,15 +1949,17 @@ void Player::set_hidden_from_general_statistics(const bool hide) {
 /**
  * Pick random name from remaining names (if any)
  */
-const std::string Player::pick_shipname() {
+std::string Player::pick_shipname() {
 	++ship_name_counter_;
 
 	if (remaining_shipnames_.empty()) {
 		return format(pgettext("shipname", "Ship %d"), ship_name_counter_);
 	}
 
-	Game& game = dynamic_cast<Game&>(egbase());
-	const size_t index = game.logic_rand() % remaining_shipnames_.size();
+	const size_t index =
+	   egbase().is_game() ?
+         (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_shipnames_.size()) :
+         RNG::static_rand(remaining_shipnames_.size());
 	auto it = remaining_shipnames_.begin();
 	std::advance(it, index);
 	std::string new_name = *it;
@@ -1963,8 +1967,27 @@ const std::string Player::pick_shipname() {
 	return new_name;
 }
 
+std::string Player::pick_warehousename(bool port) {
+	++warehouse_name_counter_;
+
+	if (remaining_warehousenames_.empty()) {
+		return format(port ? pgettext("warehouse", "Port %d") : pgettext("warehouse", "Warehouse %d"),
+		              warehouse_name_counter_);
+	}
+
+	const size_t index =
+	   egbase().is_game() ?
+         (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_warehousenames_.size()) :
+         RNG::static_rand(remaining_warehousenames_.size());
+	auto it = remaining_warehousenames_.begin();
+	std::advance(it, index);
+	std::string new_name = *it;
+	remaining_warehousenames_.erase(it);
+	return new_name;
+}
+
 /**
- * Read remaining ship indexes to the give file
+ * Read remaining ship names from the given file
  *
  * \param fr source stream
  */
@@ -1976,6 +1999,14 @@ void Player::read_remaining_shipnames(FileRead& fr) {
 		remaining_shipnames_.push_back(fr.string());
 	}
 	ship_name_counter_ = fr.unsigned_32();
+}
+void Player::read_remaining_warehousenames(FileRead& fr) {
+	remaining_warehousenames_.clear();
+	const uint16_t count = fr.unsigned_16();
+	for (uint16_t i = 0; i < count; ++i) {
+		remaining_warehousenames_.push_back(fr.string());
+	}
+	warehouse_name_counter_ = fr.unsigned_32();
 }
 
 void Player::init_statistics() {
@@ -2132,7 +2163,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 }
 
 /**
- * Write remaining ship indexes to the given file
+ * Write remaining ship names to the given file
  */
 void Player::write_remaining_shipnames(FileWrite& fw) const {
 	fw.unsigned_16(remaining_shipnames_.size());
@@ -2140,6 +2171,13 @@ void Player::write_remaining_shipnames(FileWrite& fw) const {
 		fw.string(shipname);
 	}
 	fw.unsigned_32(ship_name_counter_);
+}
+void Player::write_remaining_warehousenames(FileWrite& fw) const {
+	fw.unsigned_16(remaining_warehousenames_.size());
+	for (const auto& warehousename : remaining_warehousenames_) {
+		fw.string(warehousename);
+	}
+	fw.unsigned_32(warehouse_name_counter_);
 }
 
 /**

@@ -38,5 +38,6 @@ CMakeSettings.json
 gmon.out
 
 # Validation checks
-po_validation
-clang-tidy.log
+/po_validation
+/clang-tidy.log
+/clangtidy

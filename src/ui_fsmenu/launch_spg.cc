@@ -148,6 +148,7 @@ void LaunchSPG::clicked_ok() {
 	upcast(SinglePlayerGameSettingsProvider, sp, &settings_);
 	assert(sp);
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
+	game_->set_write_replay(should_write_replay());
 	game_->logic_rand_seed(RNG::static_rand());
 	try {
 		if (sp->settings().scenario) {  // scenario

@@ -224,12 +224,9 @@ void Section::check_used() const {
 }
 
 bool Section::has_val(char const* const name) const {
-	for (const Value& temp_value : values_) {
-		if (iequals(temp_value.get_name(), name)) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(values_.begin(), values_.end(), [name](const Value& temp_value) {
+		return iequals(temp_value.get_name(), name);
+	});
 }
 
 /**

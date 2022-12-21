@@ -148,6 +148,8 @@ public:
 	friend struct MapBobdataPacket;
 	friend struct MapBobPacket;
 
+	~Bob() override;
+
 	struct State;
 	using Ptr = void (Bob::*)(Game&, State&);
 	using PtrSignal = void (Bob::*)(Game&, State&, const std::string&);
@@ -330,7 +332,6 @@ public:
 
 protected:
 	explicit Bob(const BobDescr& descr);
-	~Bob() override;
 
 private:
 	void do_act(Game&);

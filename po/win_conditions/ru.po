@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-01 04:33+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -127,11 +127,11 @@ msgstr "Коллекционер"
 #, lua-format
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
-"highest number of wares after %s wins the game."
-msgstr "Вы получаете очки за ценные товары, находящиеся на ваших складах. Игрок, набравший наибольшее количество товаров за %s побеждает."
+"highest score after %s wins the game."
+msgstr "Вы получаете баллы за ценные товары на ваших складах. Игрок, набравший наибольшее количество очков после %s выигрывает игру."
 
-#. TRANSLATORS: Will be inserted into "The player with the highest number of
-#. wares after %s wins the game."
+#. TRANSLATORS: Will be inserted into "The player with the highest score after
+#. %s wins the game."
 #. TRANSLATORS: Will be inserted into "The winner will be the player […] with
 #. the most territory after %s"
 #. TRANSLATORS: Will be inserted into "The game will end after %s."
@@ -148,7 +148,7 @@ msgstr "Очки"
 #: ../../data/scripting/win_conditions/collectors.lua:72
 #, lua-format
 msgid "Status for %s"
-msgstr "Статус для %s"
+msgstr "Состояние для %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
 #: ../../data/scripting/win_conditions/collectors.lua:84
@@ -167,7 +167,7 @@ msgstr[3] "Всего очков: %i"
 #: ../../data/scripting/win_conditions/collectors.lua:111
 #, lua-format
 msgid "Status for Team %d"
-msgstr "Статус для команды %d"
+msgstr "Состояние команды %d"
 
 #: ../../data/scripting/win_conditions/collectors.lua:113
 #, lua-format
@@ -368,7 +368,7 @@ msgstr "Вы проиграли в этой игре!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:81
 msgid "Status"
-msgstr "Статус"
+msgstr "Состояние"
 
 #. TRANSLATORS: This is an overview for all players.
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:83

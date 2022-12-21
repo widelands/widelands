@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
 "Last-Translator: Juanjo, 2015-2017,2019-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -555,10 +555,10 @@ msgstr "Aquí és on entren en joc els transbordadors. Són unes embarcacions pe
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:261
 msgid ""
-" Ferries are built in ferry yards, one rowboat costs two logs and one piece "
+"Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr "Els transbordadors es construeixen en tallers de transbordadors. Fer una embarcació costa dos troncs, una peça de tela i relativament poc temps. Un taller de transbordadors és un edifici mitjà que s’ha de construir prop de la costa."
+msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."
@@ -712,7 +712,7 @@ msgstr "Recordeu parar el taller de transbordadors quan no en necessiteu més. L
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:346
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:348
 msgid "Congratulations"
-msgstr "Felicitats"
+msgstr "Enhorabona"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "You have learnt all there is to learn about ships and ferries!"

@@ -97,21 +97,17 @@ SUPPRESSED_CHECKS = {
     '[readability-magic-numbers]',
     '[altera-struct-pack-align]',
     '[bugprone-easily-swappable-parameters]',
-    '[bugprone-implicit-widening-of-multiplication-result]',
     '[cert-err33-c]',
     '[concurrency-mt-unsafe]',
     '[cppcoreguidelines-avoid-non-const-global-variables]',
     '[cppcoreguidelines-prefer-member-initializer]',
     '[google-readability-casting]',
     '[hicpp-named-parameter]',
-    '[hicpp-use-nullptr]',
-    '[misc-unused-using-decls]',
+    '[readability-named-parameter]',
     '[modernize-use-default-member-init]',
-    '[performance-no-int-to-ptr]',
-    '[readability-container-data-pointer]',
     '[readability-function-cognitive-complexity]',
     '[readability-suspicious-call-argument]',
-    '[readability-use-anyofallof]',
+    '[performance-no-int-to-ptr]',
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')
@@ -135,12 +131,14 @@ def main():
 
     log_file = sys.argv[1]
 
-    errors = 0
+    errors = []
 
     with open(log_file) as checkme:
         contents = checkme.readlines()
         for line in contents:
-            if 'third_party' in line:
+            if line in errors:
+                continue
+            if 'third_party' in line or '/usr/include' in line:
                 continue
             # We're not piloting alpha-level checks
             if 'clang-analyzer-alpha' in line:
@@ -152,14 +150,14 @@ def main():
                     break
             if not check_suppressed and CHECK_REGEX.match(line):
                 print(line.strip())
-                errors = errors + 1
+                errors.append(line)
 
-    if errors > 0:
+    if len(errors) > 0:
         print('########################################################')
         print('########################################################')
         print('###                                                  ###')
         print('###   Found %s error(s)                               ###'
-              % errors)
+              % len(errors))
         print('###                                                  ###')
         print('########################################################')
         print('########################################################')

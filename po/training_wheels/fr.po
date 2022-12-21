@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-31 02:58+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
 "Last-Translator: Renaud Bouchard, 2022\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/building_spaces.lua:25
@@ -221,11 +221,9 @@ msgstr "Fermeture de cette fenêtre"
 
 #: ../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
-" You can open and close this window by clicking on the ‘Objectives’ button "
-"in the toolbar on the bottom of the screen."
+"You can open and close this window by clicking on the ‘Objectives’ button in"
+" the toolbar on the bottom of the screen."
 msgstr ""
-"Tu peux ouvrir et fermer cette fenêtre en cliquant sur le bouton 'Objectifs'"
-" dans la barre du bas de l'écran. "
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""

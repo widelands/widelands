@@ -453,12 +453,12 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 
 	if (warehouse_ != nullptr) {
 		Coords pos(warehouse_->get_position());
-		molog(
-		   egbase.get_gametime(),
-		   "PortDock for warehouse %u (at %i,%i) in fleet %u, expedition_ready: %s, waiting: %" PRIuS
-		   "\n",
-		   warehouse_->serial(), pos.x, pos.y, fleet_ != nullptr ? fleet_->serial() : 0,
-		   expedition_ready_ ? "true" : "false", waiting_.size());
+		molog(egbase.get_gametime(),
+		      "PortDock for warehouse %u (%s at %3dx%3d) in fleet %u, expedition_ready: %s, "
+		      "waiting: %" PRIuS "\n",
+		      warehouse_->serial(), warehouse_->get_warehouse_name().c_str(), pos.x, pos.y,
+		      fleet_ != nullptr ? fleet_->serial() : 0, expedition_ready_ ? "true" : "false",
+		      waiting_.size());
 	} else {
 		molog(egbase.get_gametime(),
 		      "PortDock without a warehouse in fleet %u, expedition_ready: %s, waiting: %" PRIuS "\n",
@@ -472,8 +472,10 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 	}
 }
 
-// Changelog of version 5 → 6: deleted the list with the serials of ships heading
-// to this port as this information was moved to the ShippingSchedule
+/* Changelog:
+ * Version 6 (v1.1): Deleted the list with the serials of ships heading
+ * to this port as this information was moved to the ShippingSchedule.
+ */
 constexpr uint8_t kCurrentPacketVersion = 6;
 
 void PortDock::Loader::load(FileRead& fr, uint8_t /* packet_version */) {

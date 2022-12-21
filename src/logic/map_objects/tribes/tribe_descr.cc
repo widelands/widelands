@@ -213,6 +213,12 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 			}
 		}
 
+		if (table.has_key("warehouse_names")) {
+			warehouse_names_ = table.get_table("warehouse_names")->array_entries<std::string>();
+		} else {
+			log_warn("Tribe %s specifies no warehouse_names", name().c_str());
+		}
+
 		// TODO(Nordfriese): Require these strings after v1.1
 		auto load_productionsite_string = [this, &table](std::string& target, const std::string& key,
 		                                                 const std::string& default_value) {

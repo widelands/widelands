@@ -1017,6 +1017,29 @@ private:
 	bool delete_;
 };
 
+struct CmdShipPortName : PlayerCommand {
+	CmdShipPortName(const Time& t, PlayerNumber p, Serial s, const std::string& n)
+	   : PlayerCommand(t, p), serial_(s), name_(n) {
+	}
+
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kShipPortName;
+	}
+
+	void execute(Game& game) override;
+
+	explicit CmdShipPortName(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	CmdShipPortName() = default;
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial serial_{0U};
+	std::string name_;
+};
+
 struct CmdPickCustomStartingPosition : PlayerCommand {
 	CmdPickCustomStartingPosition(const Time& t, PlayerNumber p, const Coords& c)
 	   : PlayerCommand(t, p), coords_(c) {

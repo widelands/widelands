@@ -69,6 +69,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	void report_result(uint8_t player,
 	                   Widelands::PlayerEndResult result,
 	                   const std::string& info) override;
+	void set_write_replay(bool replay) override;
 	// End GameController interface
 
 	// GameSettingsProvider interface
