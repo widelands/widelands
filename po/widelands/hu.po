@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-16 02:54+0000\n"
+"POT-Creation-Date: 2022-12-19 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2022\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -527,7 +527,7 @@ msgid "Hide Building Spaces"
 msgstr "Beépíthető helyek elrejtése"
 
 #: ../../src/editor/editorinteractive.cc:451
-#: ../../src/ui_fsmenu/options.cc:245
+#: ../../src/ui_fsmenu/options.cc:260
 #: ../../src/wui/interactive_gamebase.cc:265
 msgid "Show Building Spaces"
 msgstr "Beépíthető helyek megjelenítése"
@@ -595,7 +595,7 @@ msgstr "Nyersanyagok megjelenítése"
 msgid "Unsupported Format"
 msgstr "Nem támogatott formátum"
 
-#: ../../src/editor/editorinteractive.cc:531 ../../src/wlapplication.cc:789
+#: ../../src/editor/editorinteractive.cc:531 ../../src/wlapplication.cc:788
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -634,12 +634,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:454
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
-#: ../../src/ui_fsmenu/launch_mpg.cc:310 ../../src/ui_fsmenu/main.cc:230
-#: ../../src/wlapplication.cc:1631
+#: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:230
+#: ../../src/wlapplication.cc:1630
 msgid "Error"
 msgstr "Hiba"
 
-#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1633
+#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1632
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1216,7 +1216,7 @@ msgstr "Hegyek:"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:180
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:463
-#: ../../src/ui_basic/spinbox.cc:499
+#: ../../src/ui_basic/spinbox.cc:502
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -1311,7 +1311,7 @@ msgid ""
 msgstr "Ez egy, a Widelands Véletlen Térkép Generátor által automatikusan létrehozott térkép."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:702
-#: ../../src/network/gamehost.cc:1619
+#: ../../src/network/gamehost.cc:1622
 #, c-format
 msgid "Computer %u"
 msgstr "%u. számítógép"
@@ -2778,59 +2778,59 @@ msgstr "Térképobjektumok előkészítése"
 msgid "Checking map"
 msgstr "Térkép ellenőrzése"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:520
-#: ../../src/ui_fsmenu/launch_spg.cc:168 ../../src/wlapplication.cc:744
+#: ../../src/network/gameclient.cc:144 ../../src/network/gamehost.cc:523
+#: ../../src/ui_fsmenu/launch_spg.cc:169 ../../src/wlapplication.cc:743
 msgid "Preparing game…"
 msgstr "Játék előkészítése…"
 
-#: ../../src/network/gameclient.cc:212
+#: ../../src/network/gameclient.cc:214
 #: ../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "Nem sikerült kapcsolatot létesíteni a gazdagéppel"
 
-#: ../../src/network/gameclient.cc:213
+#: ../../src/network/gameclient.cc:215
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
 msgstr "A Widelands nem tud kapcsolatot létesíteni a megadott címmel. Vagy nem fut Widelands kiszolgáló a feltételezett porton, vagy a kiszolgáló leállt a csatlakozás közben."
 
-#: ../../src/network/gameclient.cc:763
+#: ../../src/network/gameclient.cc:771
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u bővítményütközés:\n"
 msgstr[1] "%u bővítményütközés:\n"
 
-#: ../../src/network/gameclient.cc:765
+#: ../../src/network/gameclient.cc:773
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr "%1$s\n· a gazdagép által igényelt ‘%2$s’ nem található"
 
-#: ../../src/network/gameclient.cc:768
+#: ../../src/network/gameclient.cc:776
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n· ‘%2$s’ %3$s verziója van telepítve, de a gazdagép %4$s verziót használ"
 
-#: ../../src/network/gameclient.cc:939
+#: ../../src/network/gameclient.cc:947
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me fájljának nem sikerült az md5 ellenőrzése."
 
-#: ../../src/network/gameclient.cc:981
+#: ../../src/network/gameclient.cc:989
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me ellenőrizte a kapott fájlt. Bár az md5 ellenőrzés sikeres volt, a fájl nem kezelhető."
 
-#: ../../src/network/gameclient.cc:1291
+#: ../../src/network/gameclient.cc:1299
 msgid "Disconnected"
 msgstr "Kapcsolat bontva"
 
-#: ../../src/network/gameclient.cc:1292
+#: ../../src/network/gameclient.cc:1300
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2951,7 +2951,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "A Widelands nem tudott kiszolgálót indítani.\nLehet hogy már fut egy folyamat ezen a porton."
 
-#: ../../src/network/gamehost.cc:1873
+#: ../../src/network/gamehost.cc:1876
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3456,13 +3456,21 @@ msgstr[1] "%d órával"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:493
 #, c-format
+msgid "%d week"
+msgid_plural "%d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#. * TRANSLATORS: A spinbox unit
+#: ../../src/ui_basic/spinbox.cc:496
+#, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
 msgstr[0] "%d képponttal"
 msgstr[1] "%d képponttal"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:496
+#: ../../src/ui_basic/spinbox.cc:499
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
@@ -5176,71 +5184,75 @@ msgstr "Játék indítása"
 msgid "Configure this game"
 msgstr "Játék beállításai"
 
-#: ../../src/ui_fsmenu/launch_game.cc:64
+#: ../../src/ui_fsmenu/launch_game.cc:55
+msgid "Write Replay"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:66
 msgid ""
 "An enabled add-on is known to cause desyncs. No replay will be written."
 msgstr "Egy bekapcsolt bővítmény szinkronizációs hibákat szokott okozni. Nem készül visszajátszás."
 
-#: ../../src/ui_fsmenu/launch_game.cc:87
+#: ../../src/ui_fsmenu/launch_game.cc:89
 msgid "Playing time"
 msgstr "Játék hossza"
 
-#: ../../src/ui_fsmenu/launch_game.cc:93
+#: ../../src/ui_fsmenu/launch_game.cc:95
 msgid "Peaceful mode"
 msgstr "Békés mód"
 
-#: ../../src/ui_fsmenu/launch_game.cc:97
+#: ../../src/ui_fsmenu/launch_game.cc:99
 msgid "Custom starting positions"
 msgstr "Egyedi kezdőpontok"
 
-#: ../../src/ui_fsmenu/launch_game.cc:106
+#: ../../src/ui_fsmenu/launch_game.cc:108
 msgid "Change map…"
 msgstr "Térkép választása…"
 
-#: ../../src/ui_fsmenu/launch_game.cc:116
+#: ../../src/ui_fsmenu/launch_game.cc:118
 msgid "Change saved game…"
 msgstr "Mentett játék választása…"
 
-#: ../../src/ui_fsmenu/launch_game.cc:133
+#: ../../src/ui_fsmenu/launch_game.cc:136
 msgid "Start game"
 msgstr "Játék indítása"
 
-#: ../../src/ui_fsmenu/launch_game.cc:204
+#: ../../src/ui_fsmenu/launch_game.cc:211
 msgid "The relations between players are set by the scenario"
 msgstr "A békés mód beállítását a küldetés határozza meg."
 
-#: ../../src/ui_fsmenu/launch_game.cc:206
+#: ../../src/ui_fsmenu/launch_game.cc:213
 msgid "The relations between players are set by the saved game"
 msgstr "A békés mód beállítását a mentett játék határozza meg."
 
-#: ../../src/ui_fsmenu/launch_game.cc:208
+#: ../../src/ui_fsmenu/launch_game.cc:215
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "A kiválasztott játékmód nem teszi lehetővé a békés mérkőzést."
 
-#: ../../src/ui_fsmenu/launch_game.cc:210
+#: ../../src/ui_fsmenu/launch_game.cc:217
 msgid "Forbid fighting between players"
 msgstr "Ne harcolhassanak egymással a játékosok"
 
-#: ../../src/ui_fsmenu/launch_game.cc:237
+#: ../../src/ui_fsmenu/launch_game.cc:244
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Minden kiválasztott kezdőállapot figyelmen kívül hagyja a térkép kezdőpozícióit."
 
-#: ../../src/ui_fsmenu/launch_game.cc:242
+#: ../../src/ui_fsmenu/launch_game.cc:249
 msgid "The starting positions are set by the scenario"
 msgstr "A kezdőpozíciókat a küldetés határozza meg."
 
-#: ../../src/ui_fsmenu/launch_game.cc:244
+#: ../../src/ui_fsmenu/launch_game.cc:251
 msgid "The starting positions are set by the saved game"
 msgstr "A kezdőpozíciókat a mentett játék határozza meg."
 
-#: ../../src/ui_fsmenu/launch_game.cc:247
+#: ../../src/ui_fsmenu/launch_game.cc:254
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "A játékosok maguk választhatják meg a kezdőpozíciójukat a játék elején."
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:255
+#: ../../src/ui_fsmenu/launch_game.cc:262
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:480
 #: ../../src/ui_fsmenu/scenariodetails.cc:46
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -5248,55 +5260,55 @@ msgstr "A játékosok maguk választhatják meg a kezdőpozíciójukat a játék
 msgid "Scenario"
 msgstr "Küldetés"
 
-#: ../../src/ui_fsmenu/launch_game.cc:256
+#: ../../src/ui_fsmenu/launch_game.cc:263
 msgid "Win condition is set through the scenario"
 msgstr "A játék célját a küldetés határozza meg"
 
-#: ../../src/ui_fsmenu/launch_game.cc:262
+#: ../../src/ui_fsmenu/launch_game.cc:269
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:484
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Mentett játék"
 
-#: ../../src/ui_fsmenu/launch_game.cc:264
+#: ../../src/ui_fsmenu/launch_game.cc:271
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Ez egy mentett játék - a játék célja hamarabb lett beállítva."
 
-#: ../../src/ui_fsmenu/launch_game.cc:337
+#: ../../src/ui_fsmenu/launch_game.cc:344
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
 "loaded."
 msgstr "Nem lehet meghatározni a használható játékmódokat, mert a „%s” térképet nem sikerült betölteni."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:65
+#: ../../src/ui_fsmenu/launch_mpg.cc:64
 msgid "Show the help window"
 msgstr "Súgóablak megjelenítése"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:89
+#: ../../src/ui_fsmenu/launch_mpg.cc:87
 msgid "Please select a map or saved game."
 msgstr "Kérjük válassz egy térképet vagy egy mentett játékot!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:92
+#: ../../src/ui_fsmenu/launch_mpg.cc:90
 msgid "The host has not yet selected a map or saved game."
 msgstr "A gazda még nem választott térképet vagy mentett játékot."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:205
+#: ../../src/ui_fsmenu/launch_mpg.cc:203
 msgid "Saved Game is Directory"
 msgstr "A mentett játék egy könyvtár"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:206
+#: ../../src/ui_fsmenu/launch_mpg.cc:204
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "FIGYELMEZTETÉS:\nA mentett játék amit kiválasztottál egy könyvtár. Ez akkor történik ha igazra állítod a „nozip” beállítást vagy kézzel kicsomagolod a mentett játékot.\nA Widelands nem képes közvetlenül könyvtárakat átküldeni az ügyfeleknek, kérlek válassz egy másik mentett játékot vagy csomagold be a könyvtár tartalmát."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:225 ../../src/ui_fsmenu/launch_spg.cc:129
+#: ../../src/ui_fsmenu/launch_mpg.cc:223 ../../src/ui_fsmenu/launch_spg.cc:129
 msgid "File not found"
 msgstr "A fájl nem található"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:226 ../../src/ui_fsmenu/launch_spg.cc:130
+#: ../../src/ui_fsmenu/launch_mpg.cc:224 ../../src/ui_fsmenu/launch_spg.cc:130
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -5304,19 +5316,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "A Widelands megpróbált elindítani egy játékot egy olyan fájlból amely nem található a megadott útvonalon.\nA fájl ez volt: %s\nHa ez történik egy hálózati játékban, akkor a gazda lehet hogy olyan fájlt választott amit nem birtokolsz. Alapesetben az ilyen fájlokat a gazdának kell elküldenie neked, de lehet hogy még nem végzett az átvitel!?!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:266
+#: ../../src/ui_fsmenu/launch_mpg.cc:265
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "A kiválasztott fájl nem található. Ha nem kerül automatikus átküldésre, akkor kérlek írj a gazdának erről a problémáról."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:312
+#: ../../src/ui_fsmenu/launch_mpg.cc:311
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr "A(z) „%s” játékmód parancsfájl nem tölthető be."
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:439
+#: ../../src/ui_fsmenu/launch_mpg.cc:438
 msgid "Multiplayer Game Setup"
 msgstr "Többjátékos beállítások"
 
@@ -5369,7 +5381,7 @@ msgstr "Becenév:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:669
+#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:668
 msgid "nobody"
 msgstr "névtelen"
 
@@ -6088,30 +6100,34 @@ msgstr "Automatikus mentés ennyi időnként:"
 msgid "Maximum number of autosave files:"
 msgstr "Automatikus mentés fájlok legnagyobb száma:"
 
-#: ../../src/ui_fsmenu/options.cc:234
+#: ../../src/ui_fsmenu/options.cc:240
+msgid "Delete replays after:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:249
 msgid "Compress Widelands data files (maps, replays, and savegames)"
 msgstr "A Widelands adatfájlok tömörítése (térképek, visszajátszások és mentett játékok)"
 
-#: ../../src/ui_fsmenu/options.cc:240
+#: ../../src/ui_fsmenu/options.cc:255
 msgid "Write syncstreams in network games to debug desyncs"
 msgstr "Szinkronizálási folyam írása a hálózati játékokban a szinkronizációs hibák hibakövetéséhez"
 
-#: ../../src/ui_fsmenu/options.cc:246
+#: ../../src/ui_fsmenu/options.cc:261
 #: ../../src/wui/interactive_gamebase.cc:272
 msgid "Show Census"
 msgstr "Épületnevek megjelenítése"
 
-#: ../../src/ui_fsmenu/options.cc:247
+#: ../../src/ui_fsmenu/options.cc:262
 #: ../../src/wui/interactive_gamebase.cc:281
 msgid "Show Status"
 msgstr "Állapotsorok megjelenítése"
 
-#: ../../src/ui_fsmenu/options.cc:249
+#: ../../src/ui_fsmenu/options.cc:264
 #: ../../src/wui/interactive_gamebase.cc:290
 msgid "Show Soldier Levels"
 msgstr "Tapasztalati pontok megjelenítése"
 
-#: ../../src/ui_fsmenu/options.cc:250
+#: ../../src/ui_fsmenu/options.cc:265
 #: ../../src/wui/interactive_gamebase.cc:299
 msgid "Show Buildings"
 msgstr "Épületek megjelenítése"
@@ -6119,107 +6135,112 @@ msgstr "Épületek megjelenítése"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:252 ../../src/wui/interactive_player.cc:380
+#: ../../src/ui_fsmenu/options.cc:267 ../../src/wui/interactive_player.cc:380
 msgid "Show Workarea Overlaps"
 msgstr "Munkaterület átfedések megjelenítése"
 
-#: ../../src/ui_fsmenu/options.cc:258
+#: ../../src/ui_fsmenu/options.cc:273
 msgid "Start building road after placing a flag"
 msgstr "Útépítés megkezdése zászló elhelyezése után"
 
-#: ../../src/ui_fsmenu/options.cc:262
+#: ../../src/ui_fsmenu/options.cc:277
 msgid "Show in-game chat with transparent background"
 msgstr "Játék közbeni csevegés átlátszó háttérrel mutatása"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:272
+#: ../../src/ui_fsmenu/options.cc:287
 msgid "Use single watchwindow mode"
 msgstr "Egy figyelőablakos mód"
 
-#: ../../src/ui_fsmenu/options.cc:276
+#: ../../src/ui_fsmenu/options.cc:291
 msgid "Display system time in the info panel"
 msgstr "Valós idő megjelenítése a tálcán"
 
-#: ../../src/ui_fsmenu/options.cc:280
+#: ../../src/ui_fsmenu/options.cc:295
 msgid "Allow diagonal scrolling with the numeric keypad"
 msgstr "Átlós térképmozgatás engedélyezése a numerikus billentyűzet használatával"
 
-#: ../../src/ui_fsmenu/options.cc:284
+#: ../../src/ui_fsmenu/options.cc:299
 msgid "Scroll when the mouse cursor is near the screen edge"
 msgstr "Térkép mozgatása amikor az egérmutató a kép szélén van"
 
-#: ../../src/ui_fsmenu/options.cc:288
+#: ../../src/ui_fsmenu/options.cc:303
 msgid "Invert click-and-drag map movement direction"
 msgstr "Jobb egérgombos térképmozgatás irányának megfordítása"
 
-#: ../../src/ui_fsmenu/options.cc:294
+#: ../../src/ui_fsmenu/options.cc:309
 msgid "Teach me how to play"
 msgstr "Játék betanítása"
 
 #. * TRANSLATORS: Button to bring up a window to edit teaching progress in the
 #. Options
-#: ../../src/ui_fsmenu/options.cc:304
+#: ../../src/ui_fsmenu/options.cc:319
 msgid "Progress…"
 msgstr "Betanítás állása…"
 
-#: ../../src/ui_fsmenu/options.cc:320
+#: ../../src/ui_fsmenu/options.cc:335
 msgid "Interface"
 msgstr "Kezelés"
 
-#: ../../src/ui_fsmenu/options.cc:321
+#: ../../src/ui_fsmenu/options.cc:336
 msgid "Sound"
 msgstr "Hang"
 
-#: ../../src/ui_fsmenu/options.cc:322
+#: ../../src/ui_fsmenu/options.cc:337
 msgid "Saving"
 msgstr "Mentés"
 
-#: ../../src/ui_fsmenu/options.cc:323
+#: ../../src/ui_fsmenu/options.cc:338
 msgid "New Games"
 msgstr "Játék kezdésekor"
 
-#: ../../src/ui_fsmenu/options.cc:324
+#: ../../src/ui_fsmenu/options.cc:339
 msgid "In-Game"
 msgstr "Játék alatt"
 
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:422
+#: ../../src/ui_fsmenu/options.cc:433
 msgid "Off"
 msgstr "Kikapcsolva"
 
+#. * TRANSLATORS: Options: Delete replays after:
+#: ../../src/ui_fsmenu/options.cc:435
+msgid "Never"
+msgstr ""
+
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:474
+#: ../../src/ui_fsmenu/options.cc:491
 msgid "Fullscreen"
 msgstr "Teljes képernyő"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:477
+#: ../../src/ui_fsmenu/options.cc:494
 msgid "Maximized"
 msgstr "Kinagyított"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
-#: ../../src/ui_fsmenu/options.cc:493 ../../src/ui_fsmenu/options.cc:501
+#: ../../src/ui_fsmenu/options.cc:510 ../../src/ui_fsmenu/options.cc:518
 msgid "%1% × %2%"
 msgstr "%1% × %2%"
 
-#: ../../src/ui_fsmenu/options.cc:549
+#: ../../src/ui_fsmenu/options.cc:569
 msgid "Try system language"
 msgstr "Az operációs rendszer nyelve"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:659
+#: ../../src/ui_fsmenu/options.cc:679
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "A %s fordítás teljes."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:663
+#: ../../src/ui_fsmenu/options.cc:683
 msgid "The translation into %1% is %2%%% complete."
 msgstr "A %1% fordítás %2%%%-os."
 
-#: ../../src/ui_fsmenu/options.cc:675
+#: ../../src/ui_fsmenu/options.cc:695
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Ha segítenél nekünk fordítani, akkor keresd fel ezt az oldalt: %s"
@@ -6430,59 +6451,59 @@ msgid "Unmark All"
 msgstr "Kijelölések megszüntetése"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:792 ../../src/wlapplication.cc:796
-#: ../../src/wlapplication.cc:801 ../../src/wui/savegameloader.cc:123
+#: ../../src/wlapplication.cc:791 ../../src/wlapplication.cc:795
+#: ../../src/wlapplication.cc:800 ../../src/wui/savegameloader.cc:119
 msgid "Error message:"
 msgstr "Hibaüzenet:"
 
-#: ../../src/wlapplication.cc:793 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:792 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "Játékadat hiba"
 
-#: ../../src/wlapplication.cc:795
+#: ../../src/wlapplication.cc:794
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "A Widelands nem találja a(z) „%s” fájlt."
 
-#: ../../src/wlapplication.cc:797
+#: ../../src/wlapplication.cc:796
 msgid "File system error"
 msgstr "Fájlrendszer hiba"
 
-#: ../../src/wlapplication.cc:1295
+#: ../../src/wlapplication.cc:1294
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Hiányzik az érték a %s parancssori beállításhoz."
 
-#: ../../src/wlapplication.cc:1300
+#: ../../src/wlapplication.cc:1299
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "A(z) %s nem használható más beállításokkal együtt."
 
-#: ../../src/wlapplication.cc:1455
+#: ../../src/wlapplication.cc:1454
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Ismeretlen parancssori beállítás: %s\nLehet, hogy az '=' hiányzik?"
 
-#: ../../src/wlapplication.cc:1576
+#: ../../src/wlapplication.cc:1575
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "Az --xres/--yres, a --maximized és a --fullscreen beállítások nem használhatók együtt."
 
-#: ../../src/wlapplication.cc:1594
+#: ../../src/wlapplication.cc:1593
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Ismeretlen parancssori beállítás: %s"
 
-#: ../../src/wlapplication.cc:1646
+#: ../../src/wlapplication.cc:1645
 msgid "Game ended unexpectedly"
 msgstr "A játék váratlanul ért véget"
 
-#: ../../src/wlapplication.cc:1646
+#: ../../src/wlapplication.cc:1645
 msgid "Unexpected error during the game"
 msgstr "Váratlan hiba játék közben"
 
-#: ../../src/wlapplication.cc:1649
+#: ../../src/wlapplication.cc:1648
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6496,7 +6517,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hiba történt játék közben. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s verziót használod\nKérjük add meg ezeket az információkat a hibajelentésben.\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1658
+#: ../../src/wlapplication.cc:1657
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6506,11 +6527,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "A játék váratlanul ért véget az alábbi okból:\n\n%s\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1684
+#: ../../src/wlapplication.cc:1683
 msgid "Emergency save failed"
 msgstr "Vészhelyzeti mentés sikertelen"
 
-#: ../../src/wlapplication.cc:1685
+#: ../../src/wlapplication.cc:1684
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -8470,21 +8491,31 @@ msgstr "Nagyítás alaphelyzet"
 msgid "Zoom –"
 msgstr "Kicsinyítés"
 
-#: ../../src/wui/interactive_base.cc:775
+#: ../../src/wui/interactive_base.cc:844
+#, c-format
+msgid "Road length: %1$u (%2$u)"
+msgstr ""
+
+#: ../../src/wui/interactive_base.cc:846
+#, c-format
+msgid "Waterway length: %1$u (%2$u) / %3$u"
+msgstr ""
+
+#: ../../src/wui/interactive_base.cc:851
 #, c-format
 msgid "Road length: %u"
 msgstr "Út hossza: %u"
 
-#: ../../src/wui/interactive_base.cc:777
+#: ../../src/wui/interactive_base.cc:854
 #, c-format
-msgid "Waterway length: %1$u/%2$u"
-msgstr "Vízi út hossza: %1$u/%2$u"
+msgid "Waterway length: %1$u / %2$u"
+msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1602
+#: ../../src/wui/interactive_base.cc:1712
 msgid "Failed saving screenshot!"
 msgstr "Nem sikerült elmenteni a képernyőképet!"
 
-#: ../../src/wui/interactive_base.cc:1606
+#: ../../src/wui/interactive_base.cc:1716
 msgid "Screenshot saved"
 msgstr "Képernyőkép elmentve"
 
@@ -9098,7 +9129,7 @@ msgstr[1] "%d visszajátszás nem törölhető."
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/wui/savegameloader.cc:120
+#: ../../src/wui/savegameloader.cc:116
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
@@ -9107,35 +9138,35 @@ msgstr "Nem megfelelő a fájl formátuma. Lehet, hogy a Widelands korábbi verz
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/savegameloader.cc:152
+#: ../../src/wui/savegameloader.cc:148
 msgid "Today, %1%:%2%"
 msgstr "Ma %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/savegameloader.cc:157
+#: ../../src/wui/savegameloader.cc:153
 msgid "saved today at %1%:%2%"
 msgstr "mentve: ma, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/savegameloader.cc:170
+#: ../../src/wui/savegameloader.cc:166
 msgid "Yesterday, %1%:%2%"
 msgstr "Tegnap %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/savegameloader.cc:175
+#: ../../src/wui/savegameloader.cc:171
 msgid "saved yesterday at %1%:%2%"
 msgstr "mentve: tegnap %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
-#: ../../src/wui/savegameloader.cc:180
+#: ../../src/wui/savegameloader.cc:176
 msgid "%1% %2%, %3%"
 msgstr "%3%. %1%. %2%"
 
@@ -9143,7 +9174,7 @@ msgstr "%3%. %1%. %2%"
 #. are:
 #. month (short name) day (number),
 #. year (number). This is part of a list.
-#: ../../src/wui/savegameloader.cc:186
+#: ../../src/wui/savegameloader.cc:182
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
 msgstr "mentés dátuma: %3$u. %1$s. %2$u."

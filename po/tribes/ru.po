@@ -1809,7 +1809,7 @@ msgstr "делает закаленное копьё"
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Stonecutter’s Hut"
-msgstr "Хижина каменотеса"
+msgstr "Хижина камнетёса"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:34
@@ -1914,7 +1914,7 @@ msgstr "Нет воды"
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:65
 msgid "Out of Water"
-msgstr "Больше нет воды"
+msgstr "Вода закончилась"
 
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:52
 msgctxt "amazons_building"
@@ -2476,7 +2476,7 @@ msgstr "Инструментальная мастерская"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:98
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:168
 msgid "making a bread paddle"
-msgstr "делает садник для выпечки"
+msgstr "делает хлебную лопату"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
@@ -3002,7 +3002,7 @@ msgstr "Хижина лесничего"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:8
 msgctxt "barbarians_building"
 msgid "Reed Yard"
-msgstr "Тростниковый двор"
+msgstr "Плантация"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:48
@@ -3021,7 +3021,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
-msgstr "У садовника на тростниковом дворе нет почвы пригодной для посева."
+msgstr "У садовника на плантации тростника нет почвы пригодной для посева."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:8
@@ -3781,7 +3781,7 @@ msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr "Копатель глины, работающий в этом Глиняном карьере, не может найти ни одного уровня в своей рабочей области. Подумайте о демонтаже этого глиняного карьера и постройке его в другом месте."
+msgstr "Землекоп, работающий в этом Глиняном карьере, не может найти ни одного уровня в своей рабочей области. Подумайте о демонтаже этого глиняного карьера и постройке его в другом месте."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:8
@@ -4963,7 +4963,7 @@ msgstr "Козельцовое поле (среднее)"
 #: ../../data/tribes/immovables/blackrootfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (ripe)"
-msgstr "Козельцовое поле (крохотное)"
+msgstr "Козельцовое поле (зрелое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield/small/init.lua:8
@@ -5023,7 +5023,7 @@ msgstr "Кукурузное поле (среднее)"
 #: ../../data/tribes/immovables/cornfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (ripe)"
-msgstr "Кукурузное поле (крохотное)"
+msgstr "Кукурузное поле (зрелое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/small/init.lua:8
@@ -8068,7 +8068,7 @@ msgstr "Хлеб"
 #: ../../data/tribes/wares/bread_paddle/init.lua:8
 msgctxt "ware"
 msgid "Bread Paddle"
-msgstr "Садник для выпечки"
+msgstr "Хлебная лопата"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/brick/init.lua:8
@@ -8278,7 +8278,7 @@ msgstr "Золотой шлем"
 #: ../../data/tribes/wares/helmet_mask/init.lua:8
 msgctxt "ware"
 msgid "Mask"
-msgstr "Защитная маска"
+msgstr "Маска"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet_warhelm/init.lua:8
@@ -9558,7 +9558,7 @@ msgstr "Углежог"
 #: ../../data/tribes/workers/frisians/claydigger/init.lua:8
 msgctxt "frisians_worker"
 msgid "Clay Digger"
-msgstr "Глина Копатель"
+msgstr "Землекоп"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/diker/init.lua:8

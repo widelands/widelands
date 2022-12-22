@@ -227,6 +227,9 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
+"Des del nord ens amenaça una tribu bel·ligerant, liderada pel senyor de la "
+"guerra Törver, que està preparant els seus exèrcits. Aviat seran massa forts"
+" per ser derrotats."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -276,6 +279,10 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"Senyor, encara que els nostres soldats s’enfrontarien a qualsevol enemic "
+"sense por, el rival del nord encara és més fort que tots els nostres "
+"exèrcits combinats. Hauríem d’evitar el conflicte fins que puguem derrotar-"
+"lo."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -287,7 +294,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
-msgstr ""
+msgstr "Perill des del nord"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -339,6 +346,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Senyor, ara que hem conquerit la terra d’en Törver, podem usar el seu accés "
+"al gran llac. Un port al nord ens donarà millors oportunitats de contactar "
+"amb altres clans."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -410,6 +420,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Senyor, han aparegut pantans durant la temporada humida al llarg del rierol "
+"que va cap a l’est i no podem travessar-lo. S’hauria de treure les zones "
+"pantanoses abans de continuar. Si porteu prou pales al magatzem nou, alguns "
+"voluntaris se n’encarregaran de treure-les."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -417,6 +431,9 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Senyor, ja s’han entregat totes les pales, però si continuem a aquest ritme "
+"potser no podrem treure els pantans abans de la propera temporada. Si porteu"
+" més pales al magatzem, hi podran treballar més voluntaris."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""

@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-16 02:54+0000\n"
+"POT-Creation-Date: 2022-12-19 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -534,7 +534,7 @@ msgid "Hide Building Spaces"
 msgstr "Скрыть места под здания"
 
 #: ../../src/editor/editorinteractive.cc:451
-#: ../../src/ui_fsmenu/options.cc:245
+#: ../../src/ui_fsmenu/options.cc:260
 #: ../../src/wui/interactive_gamebase.cc:265
 msgid "Show Building Spaces"
 msgstr "Показать места под здания"
@@ -602,7 +602,7 @@ msgstr "Показать ресурсы"
 msgid "Unsupported Format"
 msgstr "Формат не поддерживается"
 
-#: ../../src/editor/editorinteractive.cc:531 ../../src/wlapplication.cc:789
+#: ../../src/editor/editorinteractive.cc:531 ../../src/wlapplication.cc:788
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -641,12 +641,12 @@ msgstr "Вы уверены, что хотите выйти из редакто�
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:454
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
-#: ../../src/ui_fsmenu/launch_mpg.cc:310 ../../src/ui_fsmenu/main.cc:230
-#: ../../src/wlapplication.cc:1631
+#: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:230
+#: ../../src/wlapplication.cc:1630
 msgid "Error"
 msgstr "Ошибка"
 
-#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1633
+#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1632
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -655,7 +655,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr "Обнапужена ошибка. Сообщение об ошибке:\n\n%1$s\n\nПожалуйста, сообщите нам о проблеме, чтобы мы могли улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt в Windows). Вы используете версию %2$s.\nПожалуйста, добавьте эту информацию в ваш отчёт."
+msgstr "Обнаружена ошибка. Сообщение об ошибке:\n\n%1$s\n\nПожалуйста, сообщите нам о проблеме, чтобы мы могли улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt в Windows). Вы используете версию %2$s.\nПожалуйста, добавьте эту информацию в ваш отчёт."
 
 #: ../../src/editor/editorinteractive.cc:1131
 #, c-format
@@ -1225,7 +1225,7 @@ msgstr "Горы:"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:180
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:463
-#: ../../src/ui_basic/spinbox.cc:499
+#: ../../src/ui_basic/spinbox.cc:502
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -1320,7 +1320,7 @@ msgid ""
 msgstr "Эта карта была сгенерирована автоматически генератором случайных карт Widelands."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:702
-#: ../../src/network/gamehost.cc:1619
+#: ../../src/network/gamehost.cc:1622
 #, c-format
 msgid "Computer %u"
 msgstr "Компьютер %u"
@@ -2803,24 +2803,24 @@ msgstr "Размещение объектов на карте"
 msgid "Checking map"
 msgstr "Проверка карты"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:520
-#: ../../src/ui_fsmenu/launch_spg.cc:168 ../../src/wlapplication.cc:744
+#: ../../src/network/gameclient.cc:144 ../../src/network/gamehost.cc:523
+#: ../../src/ui_fsmenu/launch_spg.cc:169 ../../src/wlapplication.cc:743
 msgid "Preparing game…"
 msgstr "Подготовка к игре..."
 
-#: ../../src/network/gameclient.cc:212
+#: ../../src/network/gameclient.cc:214
 #: ../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "Невозможно установить соединение с хостом"
 
-#: ../../src/network/gameclient.cc:213
+#: ../../src/network/gameclient.cc:215
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
 msgstr "Widelands не может осуществить соединение по указанному адресу. Возможно сервер выключен или запущен на другом порту. Проверьте настройки и попробуйте подключиться еще раз."
 
-#: ../../src/network/gameclient.cc:763
+#: ../../src/network/gameclient.cc:771
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
@@ -2829,35 +2829,35 @@ msgstr[1] "%u конфликта дополнений:\n"
 msgstr[2] "%u конфликтов дополнений:\n"
 msgstr[3] "%u конфликтов дополнений:\n"
 
-#: ../../src/network/gameclient.cc:765
+#: ../../src/network/gameclient.cc:773
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr "%1$s\n. Требования  \"%2$s\" не выполнены"
 
-#: ../../src/network/gameclient.cc:768
+#: ../../src/network/gameclient.cc:776
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n. Установлено дополнение \"%2$s\" версии %3$s, тогда как хост использует %4$s"
 
-#: ../../src/network/gameclient.cc:939
+#: ../../src/network/gameclient.cc:947
 msgid "/me ’s file failed md5 checksumming."
 msgstr "Файл /me не прошел проверку контрольной суммы MD5."
 
-#: ../../src/network/gameclient.cc:981
+#: ../../src/network/gameclient.cc:989
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me проверка полученного файла. Хотя проверка md5 суммы успешна, файл не доступен."
 
-#: ../../src/network/gameclient.cc:1291
+#: ../../src/network/gameclient.cc:1299
 msgid "Disconnected"
 msgstr "Отвалилась сеть"
 
-#: ../../src/network/gameclient.cc:1292
+#: ../../src/network/gameclient.cc:1300
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2978,7 +2978,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands не удалось запустить сервер.\nВероятно, какой-то другой процесс уже запустил сервер на нашем порту."
 
-#: ../../src/network/gamehost.cc:1873
+#: ../../src/network/gamehost.cc:1876
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3491,6 +3491,16 @@ msgstr[3] "%d часов"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:493
 #, c-format
+msgid "%d week"
+msgid_plural "%d weeks"
+msgstr[0] "%d неделя"
+msgstr[1] "%d недели"
+msgstr[2] "%d недель"
+msgstr[3] "%d недель"
+
+#. * TRANSLATORS: A spinbox unit
+#: ../../src/ui_basic/spinbox.cc:496
+#, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
 msgstr[0] "%d пиксель"
@@ -3499,7 +3509,7 @@ msgstr[2] "%d пикселей"
 msgstr[3] "%d пикселей"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:496
+#: ../../src/ui_basic/spinbox.cc:499
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
@@ -3721,7 +3731,7 @@ msgstr "Поставив здесь галочку, вы подтверждае�
 
 #: ../../src/ui_fsmenu/addons/manager.cc:224
 msgid "Reset the filters"
-msgstr "Сбросить фильтров"
+msgstr "Сброс фильтров"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:240
 msgid "Refresh"
@@ -5239,71 +5249,75 @@ msgstr "Запуск игры"
 msgid "Configure this game"
 msgstr "Игровые настройки"
 
-#: ../../src/ui_fsmenu/launch_game.cc:64
+#: ../../src/ui_fsmenu/launch_game.cc:55
+msgid "Write Replay"
+msgstr "Записать повтор"
+
+#: ../../src/ui_fsmenu/launch_game.cc:66
 msgid ""
 "An enabled add-on is known to cause desyncs. No replay will be written."
 msgstr "Включённое дополнение ведёт к рассинхрону игр и невозможности записи повтора."
 
-#: ../../src/ui_fsmenu/launch_game.cc:87
+#: ../../src/ui_fsmenu/launch_game.cc:89
 msgid "Playing time"
 msgstr "Время игры"
 
-#: ../../src/ui_fsmenu/launch_game.cc:93
+#: ../../src/ui_fsmenu/launch_game.cc:95
 msgid "Peaceful mode"
 msgstr "Мирный режим"
 
-#: ../../src/ui_fsmenu/launch_game.cc:97
+#: ../../src/ui_fsmenu/launch_game.cc:99
 msgid "Custom starting positions"
 msgstr "Выбрать начальные позиции"
 
-#: ../../src/ui_fsmenu/launch_game.cc:106
+#: ../../src/ui_fsmenu/launch_game.cc:108
 msgid "Change map…"
 msgstr "Изменить карту..."
 
-#: ../../src/ui_fsmenu/launch_game.cc:116
+#: ../../src/ui_fsmenu/launch_game.cc:118
 msgid "Change saved game…"
 msgstr "Изменить сохранение..."
 
-#: ../../src/ui_fsmenu/launch_game.cc:133
+#: ../../src/ui_fsmenu/launch_game.cc:136
 msgid "Start game"
 msgstr "Начать игру"
 
-#: ../../src/ui_fsmenu/launch_game.cc:204
+#: ../../src/ui_fsmenu/launch_game.cc:211
 msgid "The relations between players are set by the scenario"
 msgstr "Отношения между игроками задаются сценарием"
 
-#: ../../src/ui_fsmenu/launch_game.cc:206
+#: ../../src/ui_fsmenu/launch_game.cc:213
 msgid "The relations between players are set by the saved game"
 msgstr "Отношения между игроками устанавливаются сохраненной игрой"
 
-#: ../../src/ui_fsmenu/launch_game.cc:208
+#: ../../src/ui_fsmenu/launch_game.cc:215
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "Выбранное условие победы не позволяет проводить мирные матчи"
 
-#: ../../src/ui_fsmenu/launch_game.cc:210
+#: ../../src/ui_fsmenu/launch_game.cc:217
 msgid "Forbid fighting between players"
 msgstr "Запретить борьбу между игроками"
 
-#: ../../src/ui_fsmenu/launch_game.cc:237
+#: ../../src/ui_fsmenu/launch_game.cc:244
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Указанные стартовые условия игнорируют начальные позиции в игре"
 
-#: ../../src/ui_fsmenu/launch_game.cc:242
+#: ../../src/ui_fsmenu/launch_game.cc:249
 msgid "The starting positions are set by the scenario"
 msgstr "Начальные позиции заданы в сценарии"
 
-#: ../../src/ui_fsmenu/launch_game.cc:244
+#: ../../src/ui_fsmenu/launch_game.cc:251
 msgid "The starting positions are set by the saved game"
 msgstr "Начальные позиции заданы в сохранении"
 
-#: ../../src/ui_fsmenu/launch_game.cc:247
+#: ../../src/ui_fsmenu/launch_game.cc:254
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Разрешить пользователям самим выбирать стартовые позиции в игре"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:255
+#: ../../src/ui_fsmenu/launch_game.cc:262
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:480
 #: ../../src/ui_fsmenu/scenariodetails.cc:46
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -5311,55 +5325,55 @@ msgstr "Разрешить пользователям самим выбират�
 msgid "Scenario"
 msgstr "Сценарий"
 
-#: ../../src/ui_fsmenu/launch_game.cc:256
+#: ../../src/ui_fsmenu/launch_game.cc:263
 msgid "Win condition is set through the scenario"
 msgstr "Условия для победы установлены сценарием"
 
-#: ../../src/ui_fsmenu/launch_game.cc:262
+#: ../../src/ui_fsmenu/launch_game.cc:269
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:484
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Сохраненная игра"
 
-#: ../../src/ui_fsmenu/launch_game.cc:264
+#: ../../src/ui_fsmenu/launch_game.cc:271
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Эта игра сохранена ранее. Условия победы уже заданы."
 
-#: ../../src/ui_fsmenu/launch_game.cc:337
+#: ../../src/ui_fsmenu/launch_game.cc:344
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
 "loaded."
 msgstr "Карта '%s' не загружена и потому нельзя задать корректные условия победы."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:65
+#: ../../src/ui_fsmenu/launch_mpg.cc:64
 msgid "Show the help window"
 msgstr "Показать окно справки"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:89
+#: ../../src/ui_fsmenu/launch_mpg.cc:87
 msgid "Please select a map or saved game."
 msgstr "Выберите карту или сохранение."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:92
+#: ../../src/ui_fsmenu/launch_mpg.cc:90
 msgid "The host has not yet selected a map or saved game."
 msgstr "Хост ещё не выбрал карту или сохранённую игру."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:205
+#: ../../src/ui_fsmenu/launch_mpg.cc:203
 msgid "Saved Game is Directory"
 msgstr "Сохраненная игра – каталог"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:206
+#: ../../src/ui_fsmenu/launch_mpg.cc:204
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "ВНИМАНИЕ:\nВыбранная вами сохраненная игра представляет собой каталог. Такое могло случиться если вы поставили параметр ‘nozip’  в значение \"истина\" или вручную распаковали сохраненную игру.\nWidelands не может передавать клиентам структуру каталогов, поэтому, пожалуйста, выберите другую сохраненную игру, или упакуйте содержимое каталога."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:225 ../../src/ui_fsmenu/launch_spg.cc:129
+#: ../../src/ui_fsmenu/launch_mpg.cc:223 ../../src/ui_fsmenu/launch_spg.cc:129
 msgid "File not found"
 msgstr "Файл не найден"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:226 ../../src/ui_fsmenu/launch_spg.cc:130
+#: ../../src/ui_fsmenu/launch_mpg.cc:224 ../../src/ui_fsmenu/launch_spg.cc:130
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -5367,19 +5381,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands предпринял попытку начать игру с файлом, который не может быть найден по данному адресу.\nФайл: %s\nЕсли это происходит в сетевой игре, хост мог выбрать файл, которого у вас нет. Как правило, такой файл должен пересылаться от хоста к вам, но, возможно, передача еще не закончена!?!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:266
+#: ../../src/ui_fsmenu/launch_mpg.cc:265
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "Выбранный файл не найден. Если он не автоматически передан вам, напишите хосту о проблеме."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:312
+#: ../../src/ui_fsmenu/launch_mpg.cc:311
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr "Сценарий '%s' с условиями победы недоступен."
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:439
+#: ../../src/ui_fsmenu/launch_mpg.cc:438
 msgid "Multiplayer Game Setup"
 msgstr "Настройка многопользовательской игры"
 
@@ -5432,7 +5446,7 @@ msgstr "Имя:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:669
+#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:668
 msgid "nobody"
 msgstr "никто"
 
@@ -6151,30 +6165,34 @@ msgstr "Автосохранение каждые:"
 msgid "Maximum number of autosave files:"
 msgstr "Максимум файлов автосохранения:"
 
-#: ../../src/ui_fsmenu/options.cc:234
+#: ../../src/ui_fsmenu/options.cc:240
+msgid "Delete replays after:"
+msgstr "Удалить повтор после:"
+
+#: ../../src/ui_fsmenu/options.cc:249
 msgid "Compress Widelands data files (maps, replays, and savegames)"
 msgstr "Сжимать данные игры (карты, повторы и сохранения)"
 
-#: ../../src/ui_fsmenu/options.cc:240
+#: ../../src/ui_fsmenu/options.cc:255
 msgid "Write syncstreams in network games to debug desyncs"
 msgstr "Записывать синхронизацию клиентов в сетевой игре для отладки рассинхронизации"
 
-#: ../../src/ui_fsmenu/options.cc:246
+#: ../../src/ui_fsmenu/options.cc:261
 #: ../../src/wui/interactive_gamebase.cc:272
 msgid "Show Census"
 msgstr "Показать подписи"
 
-#: ../../src/ui_fsmenu/options.cc:247
+#: ../../src/ui_fsmenu/options.cc:262
 #: ../../src/wui/interactive_gamebase.cc:281
 msgid "Show Status"
 msgstr "Показать состояние"
 
-#: ../../src/ui_fsmenu/options.cc:249
+#: ../../src/ui_fsmenu/options.cc:264
 #: ../../src/wui/interactive_gamebase.cc:290
 msgid "Show Soldier Levels"
 msgstr "Показывать уровень солдат"
 
-#: ../../src/ui_fsmenu/options.cc:250
+#: ../../src/ui_fsmenu/options.cc:265
 #: ../../src/wui/interactive_gamebase.cc:299
 msgid "Show Buildings"
 msgstr "Показывать здания"
@@ -6182,107 +6200,112 @@ msgstr "Показывать здания"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:252 ../../src/wui/interactive_player.cc:380
+#: ../../src/ui_fsmenu/options.cc:267 ../../src/wui/interactive_player.cc:380
 msgid "Show Workarea Overlaps"
 msgstr "Показывать наложения рабочих областей"
 
-#: ../../src/ui_fsmenu/options.cc:258
+#: ../../src/ui_fsmenu/options.cc:273
 msgid "Start building road after placing a flag"
 msgstr "Предлагать строительство дороги сразу после установки флага"
 
-#: ../../src/ui_fsmenu/options.cc:262
+#: ../../src/ui_fsmenu/options.cc:277
 msgid "Show in-game chat with transparent background"
 msgstr "Использовать полупрозрачный фон для внутриигрового чата"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:272
+#: ../../src/ui_fsmenu/options.cc:287
 msgid "Use single watchwindow mode"
 msgstr "Включить однооконный режим \"Наблюдение\""
 
-#: ../../src/ui_fsmenu/options.cc:276
+#: ../../src/ui_fsmenu/options.cc:291
 msgid "Display system time in the info panel"
 msgstr "Показывать системное время на панели информирования"
 
-#: ../../src/ui_fsmenu/options.cc:280
+#: ../../src/ui_fsmenu/options.cc:295
 msgid "Allow diagonal scrolling with the numeric keypad"
 msgstr "Включить прокрутку по диагонали для цифровой части клавиатуры"
 
-#: ../../src/ui_fsmenu/options.cc:284
+#: ../../src/ui_fsmenu/options.cc:299
 msgid "Scroll when the mouse cursor is near the screen edge"
 msgstr "Прокручивать окно, когда курсор упирается в границу экрана"
 
-#: ../../src/ui_fsmenu/options.cc:288
+#: ../../src/ui_fsmenu/options.cc:303
 msgid "Invert click-and-drag map movement direction"
 msgstr "Обратить направления перетаскивания"
 
-#: ../../src/ui_fsmenu/options.cc:294
+#: ../../src/ui_fsmenu/options.cc:309
 msgid "Teach me how to play"
 msgstr "Научите меня играть"
 
 #. * TRANSLATORS: Button to bring up a window to edit teaching progress in the
 #. Options
-#: ../../src/ui_fsmenu/options.cc:304
+#: ../../src/ui_fsmenu/options.cc:319
 msgid "Progress…"
 msgstr "Процесс обучения..."
 
-#: ../../src/ui_fsmenu/options.cc:320
+#: ../../src/ui_fsmenu/options.cc:335
 msgid "Interface"
 msgstr "Интерфейс"
 
-#: ../../src/ui_fsmenu/options.cc:321
+#: ../../src/ui_fsmenu/options.cc:336
 msgid "Sound"
 msgstr "Звук"
 
-#: ../../src/ui_fsmenu/options.cc:322
+#: ../../src/ui_fsmenu/options.cc:337
 msgid "Saving"
 msgstr "Сохранение"
 
-#: ../../src/ui_fsmenu/options.cc:323
+#: ../../src/ui_fsmenu/options.cc:338
 msgid "New Games"
 msgstr "Новые игры"
 
-#: ../../src/ui_fsmenu/options.cc:324
+#: ../../src/ui_fsmenu/options.cc:339
 msgid "In-Game"
 msgstr "В игре"
 
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:422
+#: ../../src/ui_fsmenu/options.cc:433
 msgid "Off"
 msgstr "Откл."
 
+#. * TRANSLATORS: Options: Delete replays after:
+#: ../../src/ui_fsmenu/options.cc:435
+msgid "Never"
+msgstr "Никогда"
+
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:474
+#: ../../src/ui_fsmenu/options.cc:491
 msgid "Fullscreen"
 msgstr "Во весь экран"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:477
+#: ../../src/ui_fsmenu/options.cc:494
 msgid "Maximized"
 msgstr "Развернуть"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
-#: ../../src/ui_fsmenu/options.cc:493 ../../src/ui_fsmenu/options.cc:501
+#: ../../src/ui_fsmenu/options.cc:510 ../../src/ui_fsmenu/options.cc:518
 msgid "%1% × %2%"
 msgstr "%1% × %2%"
 
-#: ../../src/ui_fsmenu/options.cc:549
+#: ../../src/ui_fsmenu/options.cc:569
 msgid "Try system language"
 msgstr "Пытаться использовать язык системы"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:659
+#: ../../src/ui_fsmenu/options.cc:679
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "Перевод на %sзавершен."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:663
+#: ../../src/ui_fsmenu/options.cc:683
 msgid "The translation into %1% is %2%%% complete."
 msgstr "Перевод на %1% завершен на %2%%%."
 
-#: ../../src/ui_fsmenu/options.cc:675
+#: ../../src/ui_fsmenu/options.cc:695
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Если вы хотите помочь нам с переводами, пожалуйста посетите %s"
@@ -6493,59 +6516,59 @@ msgid "Unmark All"
 msgstr "Снять метки со всех"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:792 ../../src/wlapplication.cc:796
-#: ../../src/wlapplication.cc:801 ../../src/wui/savegameloader.cc:123
+#: ../../src/wlapplication.cc:791 ../../src/wlapplication.cc:795
+#: ../../src/wlapplication.cc:800 ../../src/wui/savegameloader.cc:119
 msgid "Error message:"
 msgstr "Сообщение об ошибке:"
 
-#: ../../src/wlapplication.cc:793 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:792 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "Ошибка в данных игры"
 
-#: ../../src/wlapplication.cc:795
+#: ../../src/wlapplication.cc:794
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Игра не нашла этот файл: \"%s\""
 
-#: ../../src/wlapplication.cc:797
+#: ../../src/wlapplication.cc:796
 msgid "File system error"
 msgstr "Ошибка файловой системы"
 
-#: ../../src/wlapplication.cc:1295
+#: ../../src/wlapplication.cc:1294
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Не указан параметр командной строки %s"
 
-#: ../../src/wlapplication.cc:1300
+#: ../../src/wlapplication.cc:1299
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "Сочетать %s с другими действиями не получится"
 
-#: ../../src/wlapplication.cc:1455
+#: ../../src/wlapplication.cc:1454
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Неизвестный параметр командной строки: %s\nМожет, пропущен знак \"=\"?"
 
-#: ../../src/wlapplication.cc:1576
+#: ../../src/wlapplication.cc:1575
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "Нельзя использовать сочетания параметров --xres/--yres, --maximized и --fullscreen. Выберите что-то одно"
 
-#: ../../src/wlapplication.cc:1594
+#: ../../src/wlapplication.cc:1593
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Задан неизвестный параметр командной строки: %s"
 
-#: ../../src/wlapplication.cc:1646
+#: ../../src/wlapplication.cc:1645
 msgid "Game ended unexpectedly"
 msgstr "Неожиданный конец игры"
 
-#: ../../src/wlapplication.cc:1646
+#: ../../src/wlapplication.cc:1645
 msgid "Unexpected error during the game"
 msgstr "Неожиданная ошибка во время игры"
 
-#: ../../src/wlapplication.cc:1649
+#: ../../src/wlapplication.cc:1648
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6559,7 +6582,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Во время игры произошла ошибка. Сообщение об ошибке:\n\n%1$s\n\nПожалуйста, сообщите об этой проблеме, чтобы помочь нам улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt в Windows). Вы используете версию %2$s.\n\nПожалуйста, добавьте эту информацию в свой отчет.\n\nХотели бы вы, чтобы Widelands попытался создать автосохранение? Часто – хотя и не всегда – можно загрузить его и продолжить играть."
 
-#: ../../src/wlapplication.cc:1658
+#: ../../src/wlapplication.cc:1657
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6569,11 +6592,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Игра неожиданно завершилась по следующей причине:\n\n%s.\n\nХотели бы вы, чтобы Widelands попытался создать автосохранение? Часто – хотя и не всегда – можно загрузить его и продолжить играть."
 
-#: ../../src/wlapplication.cc:1684
+#: ../../src/wlapplication.cc:1683
 msgid "Emergency save failed"
 msgstr "Автосохранение завершилось с ошибкой"
 
-#: ../../src/wlapplication.cc:1685
+#: ../../src/wlapplication.cc:1684
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7012,7 +7035,7 @@ msgstr "Замедлить игру в 1× раз"
 
 #: ../../src/wlapplication_options.cc:621
 msgid "Decrease Game Speed by 0.25×"
-msgstr "Замедлить игру в 0.25× раз"
+msgstr "Замедлить игру на 0.25 раз"
 
 #: ../../src/wlapplication_options.cc:626
 msgid "Decrease Game Speed by 10×"
@@ -7024,7 +7047,7 @@ msgstr "Ускорить игру в 1× раз"
 
 #: ../../src/wlapplication_options.cc:636
 msgid "Increase Game Speed by 0.25×"
-msgstr "Ускорить игру в 0.25× раз"
+msgstr "Ускорить игру на 0.25 раза"
 
 #: ../../src/wlapplication_options.cc:641
 msgid "Increase Game Speed by 10×"
@@ -8543,21 +8566,31 @@ msgstr "Сбросить масштаб"
 msgid "Zoom –"
 msgstr "Отдалить – "
 
-#: ../../src/wui/interactive_base.cc:775
+#: ../../src/wui/interactive_base.cc:844
+#, c-format
+msgid "Road length: %1$u (%2$u)"
+msgstr "Длина дороги: %1$u (%2$u)"
+
+#: ../../src/wui/interactive_base.cc:846
+#, c-format
+msgid "Waterway length: %1$u (%2$u) / %3$u"
+msgstr "Длина переправы: %1$u (%2$u) / %3$u"
+
+#: ../../src/wui/interactive_base.cc:851
 #, c-format
 msgid "Road length: %u"
 msgstr "Длина дороги: %u"
 
-#: ../../src/wui/interactive_base.cc:777
+#: ../../src/wui/interactive_base.cc:854
 #, c-format
-msgid "Waterway length: %1$u/%2$u"
-msgstr "Длина переправы: %1$u/%2$u"
+msgid "Waterway length: %1$u / %2$u"
+msgstr "Длина переправы: %1$u / %2$u"
 
-#: ../../src/wui/interactive_base.cc:1602
+#: ../../src/wui/interactive_base.cc:1712
 msgid "Failed saving screenshot!"
 msgstr "Не удалось записать снимок экрана!"
 
-#: ../../src/wui/interactive_base.cc:1606
+#: ../../src/wui/interactive_base.cc:1716
 msgid "Screenshot saved"
 msgstr "Снимок сохранен"
 
@@ -9187,7 +9220,7 @@ msgstr[3] "%d повторы не могут быть удалены."
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/wui/savegameloader.cc:120
+#: ../../src/wui/savegameloader.cc:116
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
@@ -9196,35 +9229,35 @@ msgstr "Этот файл имеет неправильный формат и н
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/savegameloader.cc:152
+#: ../../src/wui/savegameloader.cc:148
 msgid "Today, %1%:%2%"
 msgstr "Сегодня, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/savegameloader.cc:157
+#: ../../src/wui/savegameloader.cc:153
 msgid "saved today at %1%:%2%"
 msgstr "сохранена сегодня в %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/savegameloader.cc:170
+#: ../../src/wui/savegameloader.cc:166
 msgid "Yesterday, %1%:%2%"
 msgstr "Вчера, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/savegameloader.cc:175
+#: ../../src/wui/savegameloader.cc:171
 msgid "saved yesterday at %1%:%2%"
 msgstr "сохранена вчера в %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
-#: ../../src/wui/savegameloader.cc:180
+#: ../../src/wui/savegameloader.cc:176
 msgid "%1% %2%, %3%"
 msgstr "%2% %1%, %3%"
 
@@ -9232,7 +9265,7 @@ msgstr "%2% %1%, %3%"
 #. are:
 #. month (short name) day (number),
 #. year (number). This is part of a list.
-#: ../../src/wui/savegameloader.cc:186
+#: ../../src/wui/savegameloader.cc:182
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
 msgstr "сохранение от %2$u %1$s %3$u "
