@@ -893,7 +893,7 @@ void Ship::battle_update(Game& game) {
 		case Battle::Phase::kDefendersTurn:
 			fight();
 			set_phase(Battle::Phase::kDefenderAttacking);
-			start_task_idle(game, descr().main_animation(), kAttackAnimationDuration);  // NOCOM proper animation
+			start_task_idle(game, descr().main_animation(), kAttackAnimationDuration);  // TODO(Nordfriese): proper animation
 			return;
 
 		default:
@@ -1023,7 +1023,7 @@ void Ship::battle_update(Game& game) {
 	case Battle::Phase::kAttackersTurn:
 		fight();
 		set_phase(Battle::Phase::kAttackerAttacking);
-		start_task_idle(game, descr().main_animation(), kAttackAnimationDuration);  // NOCOM proper animation
+		start_task_idle(game, descr().main_animation(), kAttackAnimationDuration);  // TODO(Nordfriese): proper animation
 		return;
 	}
 
