@@ -683,10 +683,11 @@ bool Ship::is_attackable_enemy_warship(const Bob& b) const {
 bool Ship::can_be_attacked() const {
 	// Only warships can be attacked, but not if they're already engaged in battle
 	// against any other ship. Ships attacking a port CAN be attacked though.
-	return get_ship_type() == ShipType::kWarship && std::all_of(battles_.begin(), battles_.end(), [this](const Battle& battle) {
-		const MapObject* opponent = battle.opponent.get(owner().egbase());
-		return opponent == nullptr || opponent->descr().type() == MapObjectType::PORTDOCK;
-	});
+	return get_ship_type() == ShipType::kWarship &&
+	       std::all_of(battles_.begin(), battles_.end(), [this](const Battle& battle) {
+		       const MapObject* opponent = battle.opponent.get(owner().egbase());
+		       return opponent == nullptr || opponent->descr().type() == MapObjectType::PORTDOCK;
+	       });
 }
 
 bool Ship::can_attack() const {
