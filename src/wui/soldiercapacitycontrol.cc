@@ -34,7 +34,9 @@ using Widelands::SoldierControl;
  * via \ref SoldierControl
  */
 struct SoldierCapacityControl : UI::Box {
-	SoldierCapacityControl(UI::Panel* parent, InteractiveBase& ib, Widelands::MapObject& building_or_ship);
+	SoldierCapacityControl(UI::Panel* parent,
+	                       InteractiveBase& ib,
+	                       Widelands::MapObject& building_or_ship);
 
 public:
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
@@ -65,7 +67,9 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                                                Widelands::MapObject& building_or_ship)
    : Box(parent, UI::PanelStyle::kWui, 0, 0, Horizontal),
      ibase_(ib),
-     ship_(building_or_ship.descr().type() == Widelands::MapObjectType::SHIP ? &dynamic_cast<Widelands::Ship&>(building_or_ship) : nullptr),
+     ship_(building_or_ship.descr().type() == Widelands::MapObjectType::SHIP ?
+              &dynamic_cast<Widelands::Ship&>(building_or_ship) :
+              nullptr),
      building_(ship_ == nullptr ? &dynamic_cast<Widelands::Building&>(building_or_ship) : nullptr),
      decrease_(this,
                "decrease",
@@ -102,20 +106,24 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
 }
 
 uint32_t SoldierCapacityControl::get_cur_capacity() const {
-	return building_ != nullptr ? building_->soldier_control()->soldier_capacity() : ship_->get_warship_soldier_capacity();
+	return building_ != nullptr ? building_->soldier_control()->soldier_capacity() :
+                                 ship_->get_warship_soldier_capacity();
 }
 uint32_t SoldierCapacityControl::get_min_capacity() const {
-	return building_ != nullptr ? building_->soldier_control()->min_soldier_capacity() : ship_->min_warship_soldier_capacity();
+	return building_ != nullptr ? building_->soldier_control()->min_soldier_capacity() :
+                                 ship_->min_warship_soldier_capacity();
 }
 uint32_t SoldierCapacityControl::get_max_capacity() const {
-	return building_ != nullptr ? building_->soldier_control()->min_soldier_capacity() : ship_->get_capacity();
+	return building_ != nullptr ? building_->soldier_control()->min_soldier_capacity() :
+                                 ship_->get_capacity();
 }
 
 void SoldierCapacityControl::think() {
 	const uint32_t capacity = get_cur_capacity();
 	value_.set_text(as_string(capacity));
 
-	bool const can_act = ibase_.can_act((building_ != nullptr ? building_->owner() : ship_->owner()).player_number());
+	bool const can_act =
+	   ibase_.can_act((building_ != nullptr ? building_->owner() : ship_->owner()).player_number());
 	decrease_.set_enabled(can_act && get_min_capacity() < capacity);
 	increase_.set_enabled(can_act && get_max_capacity() > capacity);
 }
@@ -128,9 +136,11 @@ void SoldierCapacityControl::change_soldier_capacity(const int delta) {
 			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 		}
 	} else {
-		const int32_t new_capacity = static_cast<int32_t>(ship_->get_warship_soldier_capacity()) + delta;
+		const int32_t new_capacity =
+		   static_cast<int32_t>(ship_->get_warship_soldier_capacity()) + delta;
 		if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
-			game->send_player_warship_command(*ship_, Widelands::WarshipCommand::kSetCapacity, new_capacity);
+			game->send_player_warship_command(
+			   *ship_, Widelands::WarshipCommand::kSetCapacity, new_capacity);
 		} else {
 			ship_->set_warship_soldier_capacity(new_capacity);
 		}
@@ -138,15 +148,13 @@ void SoldierCapacityControl::change_soldier_capacity(const int delta) {
 }
 
 void SoldierCapacityControl::click_decrease() {
-	change_soldier_capacity((SDL_GetModState() & KMOD_CTRL) != 0 ?
-                              get_min_capacity() - get_cur_capacity() :
-                              -1);
+	change_soldier_capacity(
+	   (SDL_GetModState() & KMOD_CTRL) != 0 ? get_min_capacity() - get_cur_capacity() : -1);
 }
 
 void SoldierCapacityControl::click_increase() {
-	change_soldier_capacity((SDL_GetModState() & KMOD_CTRL) != 0 ?
-                              get_max_capacity() - get_cur_capacity() :
-                              1);
+	change_soldier_capacity(
+	   (SDL_GetModState() & KMOD_CTRL) != 0 ? get_max_capacity() - get_cur_capacity() : 1);
 }
 
 bool SoldierCapacityControl::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {

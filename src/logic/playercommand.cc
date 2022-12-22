@@ -954,8 +954,7 @@ void CmdEvictWorker::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 }
 
 /*** Cmd_ShipRefit ***/
-CmdShipRefit::CmdShipRefit(StreamRead& des)
-   : PlayerCommand(Time(0), des.unsigned_8()) {
+CmdShipRefit::CmdShipRefit(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
 	type_ = static_cast<ShipType>(des.unsigned_8());
 }
@@ -999,8 +998,7 @@ void CmdShipRefit::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 }
 
 /*** Cmd_WarshipCommand ***/
-CmdWarshipCommand::CmdWarshipCommand(StreamRead& des)
-   : PlayerCommand(Time(0), des.unsigned_8()) {
+CmdWarshipCommand::CmdWarshipCommand(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
 	cmd_ = static_cast<WarshipCommand>(des.unsigned_8());
 	parameter_ = des.signed_32();

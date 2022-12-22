@@ -29,7 +29,8 @@ namespace Widelands {
 class MapObject;
 }  // namespace Widelands
 
-UI::Panel*
-create_soldier_capacity_control(UI::Panel& parent, InteractiveBase&, Widelands::MapObject& building_or_ship);
+UI::Panel* create_soldier_capacity_control(UI::Panel& parent,
+                                           InteractiveBase&,
+                                           Widelands::MapObject& building_or_ship);
 
 #endif  // end of include guard: WL_WUI_SOLDIERCAPACITYCONTROL_H

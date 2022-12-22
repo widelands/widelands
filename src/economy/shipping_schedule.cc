@@ -314,10 +314,12 @@ void ShippingSchedule::ship_removed(const Game& /* game */, Ship* ship) {
 	if (auto it = plans_.find(ship); it != plans_.end()) {
 		plans_.erase(it);
 	} else if (ship->get_ship_type() != ShipType::kWarship) {  // Warships might not have a schedule.
-		throw wexception("Removing ship %s from fleet which did not have a schedule", ship->get_shipname().c_str());
+		throw wexception(
+		   "Removing ship %s from fleet which did not have a schedule", ship->get_shipname().c_str());
 	}
 
-	if (auto it = last_actual_duration_recalculation_.find(ship); it != last_actual_duration_recalculation_.end()) {
+	if (auto it = last_actual_duration_recalculation_.find(ship);
+	    it != last_actual_duration_recalculation_.end()) {
 		last_actual_duration_recalculation_.erase(it);
 	}
 

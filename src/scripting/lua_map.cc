@@ -7362,8 +7362,7 @@ int LuaShip::make_expedition(lua_State* L) {
 	assert(game);
 	Widelands::Ship* ship = get(L, *game);
 	assert(ship);
-	if (ship->get_ship_state() != Widelands::ShipStates::kTransport ||
-	    ship->get_nritems() > 0) {
+	if (ship->get_ship_state() != Widelands::ShipStates::kTransport || ship->get_nritems() > 0) {
 		report_error(L, "Ship.make_expedition can be used only on empty transport ships!");
 	}
 

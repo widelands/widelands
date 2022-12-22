@@ -259,7 +259,8 @@ struct Ship : Bob {
 
 	void warship_command(Game&, WarshipCommand, int32_t parameter);
 
-	static void warship_soldier_callback(Game& game, Request& req, DescriptionIndex di, Worker* worker, PlayerImmovable& immovable);
+	static void warship_soldier_callback(
+	   Game& game, Request& req, DescriptionIndex di, Worker* worker, PlayerImmovable& immovable);
 
 	[[nodiscard]] ShipType get_ship_type() const {
 		return ship_type_;
@@ -383,7 +384,6 @@ protected:
 	};
 
 public:
-
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
 	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);

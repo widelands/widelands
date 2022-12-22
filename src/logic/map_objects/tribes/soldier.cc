@@ -1000,7 +1000,8 @@ void Soldier::attack_update(Game& game, State& state) {
 		defenders += soldiers.size();
 	}
 
-	const bool consider_retreat = (state.ivar1 & CF_RETREAT_WHEN_INJURED) != 0 && defenders > 0 && get_retreat_health() > get_current_health();
+	const bool consider_retreat = (state.ivar1 & CF_RETREAT_WHEN_INJURED) != 0 && defenders > 0 &&
+	                              get_retreat_health() > get_current_health();
 	if (enemy == nullptr || consider_retreat) {
 		// Injured soldiers will try to return to safe site at home.
 		if (consider_retreat) {

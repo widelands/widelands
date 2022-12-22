@@ -254,8 +254,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
 		   if (note.ship->owner().player_number() == player_number() &&
 		       note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
-		       note.ship->get_ship_state() ==
-		          Widelands::ShipStates::kExpeditionPortspaceFound) {
+		       note.ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound) {
 			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
 		   }
 	   });

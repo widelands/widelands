@@ -104,21 +104,21 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                    UI::ButtonStyle::kWuiSecondary,
                    status_to_image(ShipFilterStatus::kShipping)),
      warship_btn_(&filter_box_,
-                   "filter_ship_warship",
-                   0,
-                   0,
-                   kButtonSize,
-                   kButtonSize,
-                   UI::ButtonStyle::kWuiSecondary,
-                   status_to_image(ShipFilterStatus::kWarship)),
+                  "filter_ship_warship",
+                  0,
+                  0,
+                  kButtonSize,
+                  kButtonSize,
+                  UI::ButtonStyle::kWuiSecondary,
+                  status_to_image(ShipFilterStatus::kWarship)),
      refitting_btn_(&filter_box_,
-                   "filter_ship_refitting",
-                   0,
-                   0,
-                   kButtonSize,
-                   kButtonSize,
-                   UI::ButtonStyle::kWuiSecondary,
-                   status_to_image(ShipFilterStatus::kRefitting)),
+                    "filter_ship_refitting",
+                    0,
+                    0,
+                    kButtonSize,
+                    kButtonSize,
+                    UI::ButtonStyle::kWuiSecondary,
+                    status_to_image(ShipFilterStatus::kRefitting)),
      navigation_box_(&main_box_,
                      UI::PanelStyle::kWui,
                      0,
@@ -212,10 +212,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	   [this]() { filter_ships(ShipFilterStatus::kExpeditionScouting); });
 	portspace_btn_.sigclicked.connect(
 	   [this]() { filter_ships(ShipFilterStatus::kExpeditionPortspaceFound); });
-	warship_btn_.sigclicked.connect(
-	   [this]() { filter_ships(ShipFilterStatus::kWarship); });
-	refitting_btn_.sigclicked.connect(
-	   [this]() { filter_ships(ShipFilterStatus::kRefitting); });
+	warship_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kWarship); });
+	refitting_btn_.sigclicked.connect([this]() { filter_ships(ShipFilterStatus::kRefitting); });
 	ship_filter_ = ShipFilterStatus::kAll;
 	set_filter_ships_tooltips();
 
@@ -327,7 +325,8 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 		case Widelands::ShipType::kTransport:
 			switch (state) {
 			case Widelands::ShipStates::kTransport:
-				if (ship.get_destination(iplayer().egbase()) != nullptr && ship.get_fleet()->get_schedule().is_busy(ship)) {
+				if (ship.get_destination(iplayer().egbase()) != nullptr &&
+				    ship.get_fleet()->get_schedule().is_busy(ship)) {
 					status = ShipFilterStatus::kShipping;
 				} else {
 					status = ShipFilterStatus::kIdle;

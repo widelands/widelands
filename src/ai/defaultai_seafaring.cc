@@ -284,8 +284,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 
 			// only two states need an attention
 			if ((so.ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
-			     so.ship->get_ship_state() ==
-			        Widelands::ShipStates::kExpeditionPortspaceFound) &&
+			     so.ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound) &&
 			    !so.waiting_for_command_) {
 				if (gametime - so.last_command_time > Duration(180 * 1000)) {
 					so.waiting_for_command_ = true;
