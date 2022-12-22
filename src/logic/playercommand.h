@@ -405,8 +405,7 @@ private:
 };
 
 struct CmdShipRefit : public PlayerCommand {
-	CmdShipRefit() : PlayerCommand(), serial_(0), type_(ShipType::kTransport) {
-	}  // For savegame loading
+	CmdShipRefit() = default;  // For savegame loading
 	CmdShipRefit(const Time& t, PlayerNumber const p, Serial s, ShipType ss)
 	   : PlayerCommand(t, p), serial_(s), type_(ss) {
 	}
@@ -414,7 +413,7 @@ struct CmdShipRefit : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kShipRefit;
 	}
 
@@ -424,8 +423,8 @@ struct CmdShipRefit : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Serial serial_;
-	ShipType type_;
+	Serial serial_{0U};
+	ShipType type_{ShipType::kTransport};
 };
 
 struct CmdWarshipCommand : public PlayerCommand {
@@ -437,7 +436,7 @@ struct CmdWarshipCommand : public PlayerCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kWarshipCommand;
 	}
 

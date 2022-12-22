@@ -27,8 +27,6 @@
 #include "wlapplication_mousewheel_options.h"
 #include "wui/interactive_base.h"
 
-using Widelands::SoldierControl;
-
 /**
  * Widget to control the capacity of \ref MilitaryBuilding and \ref TrainingSite
  * via \ref SoldierControl

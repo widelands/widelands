@@ -961,7 +961,7 @@ CmdShipRefit::CmdShipRefit(StreamRead& des) : PlayerCommand(Time(0), des.unsigne
 
 void CmdShipRefit::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial_));
-	if (ship && ship->get_owner()->player_number() == sender()) {
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
 		ship->refit(game, type_);
 	}
 }

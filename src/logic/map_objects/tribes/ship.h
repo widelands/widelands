@@ -282,7 +282,7 @@ struct Ship : Bob {
 	}
 
 protected:
-	void draw(const EditorGameBase&,
+	void draw(const EditorGameBase& egbase,
 	          const InfoToDraw& info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,
