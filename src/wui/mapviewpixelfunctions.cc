@@ -89,8 +89,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 	Widelands::Coords result_node;
 
 	const uint16_t col_number = x / (kTriangleWidth / 2);
-	uint16_t row_number = y / kTriangleHeight;
-	uint16_t next_row_number;
+	uint16_t row_number = (y + kHeightFactor * MAX_FIELD_HEIGHT) / kTriangleHeight;
+	int16_t next_row_number;
 	assert(row_number < mapheight);
 	const uint32_t left_col = col_number / 2;
 	uint16_t right_col = (col_number + 1) / 2;
@@ -113,10 +113,10 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 	      kHeightFactor -
 	   y;
 	for (;;) {
-		screen_y_base += kTriangleHeight;
-		next_row_number = row_number + 1;
-		if (next_row_number == mapheight) {
-			next_row_number = 0;
+		screen_y_base -= kTriangleHeight;
+		next_row_number = row_number - 1;
+		if (next_row_number < 0) {
+			next_row_number += mapheight;
 		}
 		upper_screen_dy = lower_screen_dy;
 		lower_screen_dy =
@@ -124,7 +124,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 		   map[Widelands::Coords(slash ? left_col : right_col, next_row_number)].get_height() *
 		      kHeightFactor -
 		   y;
-		if (lower_screen_dy < 0) {
+		if (lower_screen_dy > 0) {
 			row_number = next_row_number;
 			slash = !slash;
 		} else {
