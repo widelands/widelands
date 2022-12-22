@@ -894,7 +894,7 @@ msgstr "Гевея созрела. Можно собирать с него ли�
 msgid ""
 "This rubber tree is ready for harvesting rubber by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr "Эта гевея готовадля сбора каучука Старшим лесорубом. Прочие племена получат только обычные бревна."
+msgstr "Эта гевея готова для сбора каучука Старшим лесорубом. Прочие племена получат только обычные бревна."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
@@ -2211,7 +2211,7 @@ msgstr "Косы производятся инструментальщиком."
 #: ../../data/tribes/initialization/frisians/units.lua:483
 msgctxt "ware"
 msgid "The bread paddle is the tool of the baker, each baker needs one."
-msgstr "Садник для выпечки - это инструмент пекаря, каждому пекарю нужно по-одному."
+msgstr "Хлебная лопата - это инструмент пекаря, каждому пекарю нужно по-одному."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:771
@@ -2787,7 +2787,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This is the building where expeditions will be equipped to boldly go and "
 "find new shores."
-msgstr "В жэтом здании снаряжают экспедиции, чтобы смело отправляться на поиски новых земель."
+msgstr "В этом здании снаряжают экспедиции, чтобы смело отправляться на поиски новых земель."
 
 #. TRANSLATORS: Note lore_autor for an atlantean production site: Port
 #: ../../data/tribes/initialization/atlanteans/units.lua:1459
@@ -4557,7 +4557,7 @@ msgid ""
 "‘Steep like the slopes of Kal’mavrath, shiny like the most delicate armor "
 "and strong like our ancestors, that’s how the headquarters of Chat’Karuth "
 "presented itself to us.’"
-msgstr "\"Крутой, как склоны Кал'Маврата, блестящий, как самые иящный доспех, и крепкий, как наши предки - таким мы увидели чертог Чат'Карута\"."
+msgstr "\"Крутой, как склоны Кал'Маврата, блестящий, как самые изящный доспех, и крепкий, как наши предки - таким мы увидели чертог Чат'Карута\"."
 
 #. TRANSLATORS: Lore author helptext for a barbarian warehouse: Headquarters
 #. TRANSLATORS: Lore author helptext for a barbarian military site: Barrier
@@ -5107,7 +5107,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Seasonal fish and game specialties served with pitta bread.<br>Choose from "
 "a prime selection of regional craft beer brands.’"
-msgstr "\"Сезонная блюда из рыбы и дичи подаюь лепешками.<br> Выбирайте из превосходного ассортимента региональных брендов крафтового пива.\""
+msgstr "\"Сезонная блюда из рыбы и дичи подают c лепешками.<br> Выбирайте из превосходного ассортимента региональных брендов крафтового пива.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1356
@@ -5277,7 +5277,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Don’t ask what your tribe can do for you, ask what you can do for your "
 "tribe!’"
-msgstr "\"Не спрашивай, что племя может тебе дать. Спрашивай, что ты можешь дать племени!\""
+msgstr "\"Не спрашивай, что племя может тебе дать. Спроси, что ты можешь дать племени!\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Barracks
 #: ../../data/tribes/initialization/barbarians/units.lua:1450
@@ -5580,7 +5580,7 @@ msgstr "Если поставка пищи будет стабильной, эт
 msgctxt "barbarians_building"
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
-msgstr "\"В бою нет лучшего друга в бою, чем удар врага, не достигший цели\"."
+msgstr "\"В бою нет лучшего друга, чем удар врага, не достигший цели\"."
 
 #. TRANSLATORS: Lore author helptext for a barbarian training site: Battle
 #. Arena
@@ -8453,7 +8453,7 @@ msgctxt "frisians_worker"
 msgid ""
 "Reindeer help to carry items along busy roads. They are reared in a reindeer"
 " farm."
-msgstr "Северный олень - гужевой транспорт на забитых дорогах. Выращиваются на оленьих выгонах."
+msgstr "Северные олени помогают перетаскивать вещи по загруженным дорогам. Выращиваются на оленьих выгонах."
 
 #. TRANSLATORS: Helptext for a frisian worker: Reindeer Breeder
 #: ../../data/tribes/initialization/frisians/units.lua:649
@@ -8501,7 +8501,7 @@ msgstr "Работает на строительных площадках, во�
 #: ../../data/tribes/initialization/frisians/units.lua:701
 msgctxt "frisians_worker"
 msgid "Plants and harvests reed fields."
-msgstr "Сажает и собирает тростник с полей."
+msgstr "Сажает и собирает тростник."
 
 #. TRANSLATORS: Helptext for a frisian worker: Seamstress
 #: ../../data/tribes/initialization/frisians/units.lua:708
@@ -9254,7 +9254,7 @@ msgctxt "building"
 msgid ""
 "Burns bricks using granite and clay, and coal as fuel. Bricks are the most "
 "important building material."
-msgstr "Обжигает уголь из гранита и глины, топится углем. Кирпичи - важнейший стройматериал."
+msgstr "Обжигает кирпичи из гранита и глины, топится углем. Кирпичи - важнейший стройматериал."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1757
@@ -9806,7 +9806,7 @@ msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
 "explained to you how to hold a broadsword."
-msgstr "Молчи, слушай и и постарайся себя не покалечить,пока я объясняю тебе как держать тесак."
+msgstr "Молчи, слушай и и постарайся себя не покалечить, пока я объясняю тебе как держать тесак."
 
 #. TRANSLATORS: Lore author helptext for a frisian training site: Training
 #. Camp
@@ -10426,13 +10426,13 @@ msgstr "Замедлить игру в 10 раз"
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:50
 msgid "Increase game speed by 0.25x"
-msgstr "Ускорить игру на 0.25×"
+msgstr "Ускорить игру на 0.25 раза"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:52
 msgid "Decrease game speed by 0.25x"
-msgstr "Замедлить игру на 0.25×"
+msgstr "Замедлить игру на 0.25 раз"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.

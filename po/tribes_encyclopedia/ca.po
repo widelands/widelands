@@ -3790,7 +3790,7 @@ msgstr "Construeix transbordadors."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1976
 msgctxt "building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr "Necessita aigua a prop. Tingueu en compte que els ferris només transporten béns, no pas treballadors."
+msgstr "Necessita aigua a prop. Tingueu en compte que els transbordador només transporten béns, no pas treballadors."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1978
@@ -7899,7 +7899,7 @@ msgstr "Qui ha creuat mars no tem els rius."
 #: ../../data/tribes/initialization/empire/units.lua:2226
 msgctxt "empire_building"
 msgid "Amalea on the need for ferries after the reconstruction of Fremil"
-msgstr "L’Amalea sobre la necessitat de ferris després de la reconstrucció de Fremil"
+msgstr "L’Amalea sobre la necessitat de disposar de transbordadors després de la reconstrucció de Fremil"
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
