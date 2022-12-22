@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-16 02:54+0000\n"
+"POT-Creation-Date: 2022-12-19 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -522,7 +522,7 @@ msgid "Hide Building Spaces"
 msgstr "Rüümte tum Bauen verbargen"
 
 #: ../../src/editor/editorinteractive.cc:451
-#: ../../src/ui_fsmenu/options.cc:245
+#: ../../src/ui_fsmenu/options.cc:260
 #: ../../src/wui/interactive_gamebase.cc:265
 msgid "Show Building Spaces"
 msgstr "Rüümte tum Bauen wiesen"
@@ -590,7 +590,7 @@ msgstr "Mineraale wiesen"
 msgid "Unsupported Format"
 msgstr "Formaat word nich unnerstütt"
 
-#: ../../src/editor/editorinteractive.cc:531 ../../src/wlapplication.cc:789
+#: ../../src/editor/editorinteractive.cc:531 ../../src/wlapplication.cc:788
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -629,12 +629,12 @@ msgstr "Willst du de Bewarker würrelk verlaten?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:454
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
-#: ../../src/ui_fsmenu/launch_mpg.cc:310 ../../src/ui_fsmenu/main.cc:230
-#: ../../src/wlapplication.cc:1631
+#: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:230
+#: ../../src/wlapplication.cc:1630
 msgid "Error"
 msgstr "Fehler"
 
-#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1633
+#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1632
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1211,7 +1211,7 @@ msgstr "Bargen:"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:180
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:463
-#: ../../src/ui_basic/spinbox.cc:499
+#: ../../src/ui_basic/spinbox.cc:502
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -1306,7 +1306,7 @@ msgid ""
 msgstr "Deese Kaart is vum Widelands-Tofallskaarten-Maker automatisk maakt worden."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:702
-#: ../../src/network/gamehost.cc:1619
+#: ../../src/network/gamehost.cc:1622
 #, c-format
 msgid "Computer %u"
 msgstr "Reekner %u"
@@ -2773,59 +2773,59 @@ msgstr "Kaart-Dingen klaarmaken"
 msgid "Checking map"
 msgstr "Kaart nakieken"
 
-#: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:520
-#: ../../src/ui_fsmenu/launch_spg.cc:168 ../../src/wlapplication.cc:744
+#: ../../src/network/gameclient.cc:144 ../../src/network/gamehost.cc:523
+#: ../../src/ui_fsmenu/launch_spg.cc:169 ../../src/wlapplication.cc:743
 msgid "Preparing game…"
 msgstr "Speel word torechtmaakt …"
 
-#: ../../src/network/gameclient.cc:212
+#: ../../src/network/gameclient.cc:214
 #: ../../src/network/internet_gaming.cc:104
 msgid "Could not establish connection to host"
 msgstr "Kunn keen Verbinnen mit de Weert maken"
 
-#: ../../src/network/gameclient.cc:213
+#: ../../src/network/gameclient.cc:215
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
 msgstr "Widelands kunn keen Verbinnen mit de angeven Adress maken. Of keen Widelands-Server leep an de angeven Port of de Server weer utknipst as du di verbinnen wullst."
 
-#: ../../src/network/gameclient.cc:763
+#: ../../src/network/gameclient.cc:771
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "%u Verwiederns-Fehler funnen:\n"
 msgstr[1] "%u Verwiederns-Fehlers funnen:\n"
 
-#: ../../src/network/gameclient.cc:765
+#: ../../src/network/gameclient.cc:773
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr "%1$s\n· Weert bruukt »%2$s« – nich funnen"
 
-#: ../../src/network/gameclient.cc:768
+#: ../../src/network/gameclient.cc:776
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n· »%2$s« up Versioon %3$s installeert, aver Weert bruukt Versioon %4$s"
 
-#: ../../src/network/gameclient.cc:939
+#: ../../src/network/gameclient.cc:947
 msgid "/me ’s file failed md5 checksumming."
 msgstr "/me sien Datei hett de falske MD5-Nakiektahl."
 
-#: ../../src/network/gameclient.cc:981
+#: ../../src/network/gameclient.cc:989
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me hett de Datei kregen un nakiekt. De MD5-Nakiektahl is richtig, aver ick kann mit de Datei nix anfangen."
 
-#: ../../src/network/gameclient.cc:1291
+#: ../../src/network/gameclient.cc:1299
 msgid "Disconnected"
 msgstr "Verbinnung trennt"
 
-#: ../../src/network/gameclient.cc:1292
+#: ../../src/network/gameclient.cc:1300
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -2946,7 +2946,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands kunn eenen Server nich anschalten.\nWahrschienelk bedrifft een anner Prozess al eenen Server up uns’ Port."
 
-#: ../../src/network/gamehost.cc:1873
+#: ../../src/network/gamehost.cc:1876
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3451,13 +3451,21 @@ msgstr[1] "%d Stünnen"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:493
 #, c-format
+msgid "%d week"
+msgid_plural "%d weeks"
+msgstr[0] "%d Week"
+msgstr[1] "%d Weken"
+
+#. * TRANSLATORS: A spinbox unit
+#: ../../src/ui_basic/spinbox.cc:496
+#, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
 msgstr[0] "%d Bildtüttel"
 msgstr[1] "%d Bildtüttels"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:496
+#: ../../src/ui_basic/spinbox.cc:499
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
@@ -5171,71 +5179,75 @@ msgstr "Speel begünnen"
 msgid "Configure this game"
 msgstr "Deeses Speel inrichten"
 
-#: ../../src/ui_fsmenu/launch_game.cc:64
+#: ../../src/ui_fsmenu/launch_game.cc:55
+msgid "Write Replay"
+msgstr "Upteken schrieven"
+
+#: ../../src/ui_fsmenu/launch_game.cc:66
 msgid ""
 "An enabled add-on is known to cause desyncs. No replay will be written."
 msgstr "Een anknipst Verwiedern maakt bekennterwies Verschuvens. Keen Upteken word schrieven."
 
-#: ../../src/ui_fsmenu/launch_game.cc:87
+#: ../../src/ui_fsmenu/launch_game.cc:89
 msgid "Playing time"
 msgstr "Speeltied"
 
-#: ../../src/ui_fsmenu/launch_game.cc:93
+#: ../../src/ui_fsmenu/launch_game.cc:95
 msgid "Peaceful mode"
 msgstr "Freedsames Speel"
 
-#: ../../src/ui_fsmenu/launch_game.cc:97
+#: ../../src/ui_fsmenu/launch_game.cc:99
 msgid "Custom starting positions"
 msgstr "Anfangs-Steden sülvst kören"
 
-#: ../../src/ui_fsmenu/launch_game.cc:106
+#: ../../src/ui_fsmenu/launch_game.cc:108
 msgid "Change map…"
 msgstr "Anner Kaart utkören …"
 
-#: ../../src/ui_fsmenu/launch_game.cc:116
+#: ../../src/ui_fsmenu/launch_game.cc:118
 msgid "Change saved game…"
 msgstr "Anner sekert Speel utkören …"
 
-#: ../../src/ui_fsmenu/launch_game.cc:133
+#: ../../src/ui_fsmenu/launch_game.cc:136
 msgid "Start game"
 msgstr "Speel begünnen"
 
-#: ../../src/ui_fsmenu/launch_game.cc:204
+#: ../../src/ui_fsmenu/launch_game.cc:211
 msgid "The relations between players are set by the scenario"
 msgstr "De Betrecken tüsken Spelers worden vun de Rutfödderung fastleggt."
 
-#: ../../src/ui_fsmenu/launch_game.cc:206
+#: ../../src/ui_fsmenu/launch_game.cc:213
 msgid "The relations between players are set by the saved game"
 msgstr "De Betrecken tüsken Spelers worden vun de sekert Speel fastleggt."
 
-#: ../../src/ui_fsmenu/launch_game.cc:208
+#: ../../src/ui_fsmenu/launch_game.cc:215
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "De utköört Upgaav tum Winnen verlöövt keene freedsamen Spelen"
 
-#: ../../src/ui_fsmenu/launch_game.cc:210
+#: ../../src/ui_fsmenu/launch_game.cc:217
 msgid "Forbid fighting between players"
 msgstr "Kämpe tüsken Spelers verseggen"
 
-#: ../../src/ui_fsmenu/launch_game.cc:237
+#: ../../src/ui_fsmenu/launch_game.cc:244
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Keene utköört Anfangs-Kondiesje bruukt de Anfangs-Steden vun de Kaart."
 
-#: ../../src/ui_fsmenu/launch_game.cc:242
+#: ../../src/ui_fsmenu/launch_game.cc:249
 msgid "The starting positions are set by the scenario"
 msgstr "De Anfangs-Steden worden vun de Rutfödderung fastleggt."
 
-#: ../../src/ui_fsmenu/launch_game.cc:244
+#: ../../src/ui_fsmenu/launch_game.cc:251
 msgid "The starting positions are set by the saved game"
 msgstr "De Betrecken tüsken Spelers worden vun de sekert Speel fastleggt."
 
-#: ../../src/ui_fsmenu/launch_game.cc:247
+#: ../../src/ui_fsmenu/launch_game.cc:254
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Spelers hör eegen Anfangs-Steden tum Begünn vun de Speel utkören laten"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:255
+#: ../../src/ui_fsmenu/launch_game.cc:262
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:480
 #: ../../src/ui_fsmenu/scenariodetails.cc:46
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -5243,55 +5255,55 @@ msgstr "Spelers hör eegen Anfangs-Steden tum Begünn vun de Speel utkören late
 msgid "Scenario"
 msgstr "Rutfödderung"
 
-#: ../../src/ui_fsmenu/launch_game.cc:256
+#: ../../src/ui_fsmenu/launch_game.cc:263
 msgid "Win condition is set through the scenario"
 msgstr "De Upgaav tum Winnen leggt de Rutfödderung fast"
 
-#: ../../src/ui_fsmenu/launch_game.cc:262
+#: ../../src/ui_fsmenu/launch_game.cc:269
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:484
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Sekert Speel"
 
-#: ../../src/ui_fsmenu/launch_game.cc:264
+#: ../../src/ui_fsmenu/launch_game.cc:271
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Dat is een sekert Speel – de Upgaav tum Winnen is also al fastleggt."
 
-#: ../../src/ui_fsmenu/launch_game.cc:337
+#: ../../src/ui_fsmenu/launch_game.cc:344
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
 "loaded."
 msgstr "Kann mögelk Upgaven tum Winnen nich utfinnen, wiel de Kaart »%s« nich laden worden kunn."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:65
+#: ../../src/ui_fsmenu/launch_mpg.cc:64
 msgid "Show the help window"
 msgstr "Wies de Hülp-Fenster"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:89
+#: ../../src/ui_fsmenu/launch_mpg.cc:87
 msgid "Please select a map or saved game."
 msgstr "Bidde köör eene Kaart of een sekert Speel ut."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:92
+#: ../../src/ui_fsmenu/launch_mpg.cc:90
 msgid "The host has not yet selected a map or saved game."
 msgstr "De Weert hett noch keene Kaart un keen sekert Speel utköört."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:205
+#: ../../src/ui_fsmenu/launch_mpg.cc:203
 msgid "Saved Game is Directory"
 msgstr "Dat sekert Speel is een Verteeknis"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:206
+#: ../../src/ui_fsmenu/launch_mpg.cc:204
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "WAHRSCHAU: Du hest een sekert Speel utköört, wat een Verteeknis is. Dat passeert, wenn du de Instellen »nozip« up wahr settst of de sekert Speel sülven utpackst.\nWidelands kann keene Verteeknissen an de Gasten schicken. Bidde köör een anner sekert Speel ut of pack de Inholl vun de Verteeknis in."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:225 ../../src/ui_fsmenu/launch_spg.cc:129
+#: ../../src/ui_fsmenu/launch_mpg.cc:223 ../../src/ui_fsmenu/launch_spg.cc:129
 msgid "File not found"
 msgstr "Datei nich funnen"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:226 ../../src/ui_fsmenu/launch_spg.cc:130
+#: ../../src/ui_fsmenu/launch_mpg.cc:224 ../../src/ui_fsmenu/launch_spg.cc:130
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -5299,19 +5311,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands wull een Speel begünnen, kunn de Datei daarför aver nich an de angeven Padd finnen.\nDe Datei weer: %s\nWenn dat in eenem Internett-Speel passeert, hett de Weert wull eene Datei utköört, wat du nich hest. De Weert sall di eene sülke Datei egentlik schicken, aver se is villicht noch nich ganz överdragen?!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:266
+#: ../../src/ui_fsmenu/launch_mpg.cc:265
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "De utköört Datei kann nich funnen worden. Wenn se di nich automatisk överdragen word, informeer bidde de Weert över deeses Probleem."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:312
+#: ../../src/ui_fsmenu/launch_mpg.cc:311
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr "Kann de Schrieven »%s« för de Upgaav tum Winnen nich laden."
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:439
+#: ../../src/ui_fsmenu/launch_mpg.cc:438
 msgid "Multiplayer Game Setup"
 msgstr "Instellens för Speel för mennig Spelers"
 
@@ -5364,7 +5376,7 @@ msgstr "Spitznaam:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:669
+#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:668
 msgid "nobody"
 msgstr "unbekannt"
 
@@ -6083,30 +6095,34 @@ msgstr "Speel automatisk sekern all:"
 msgid "Maximum number of autosave files:"
 msgstr "Hoogste Tahl vun Dateien vun automatiskem Sekern:"
 
-#: ../../src/ui_fsmenu/options.cc:234
+#: ../../src/ui_fsmenu/options.cc:240
+msgid "Delete replays after:"
+msgstr "Uptekens lösken na:"
+
+#: ../../src/ui_fsmenu/options.cc:249
 msgid "Compress Widelands data files (maps, replays, and savegames)"
 msgstr "Dateien mit Widelands-Daten (Kaarten, Uptekens un sekert Speelen) spaarsam sekern"
 
-#: ../../src/ui_fsmenu/options.cc:240
+#: ../../src/ui_fsmenu/options.cc:255
 msgid "Write syncstreams in network games to debug desyncs"
 msgstr "Sync-Streamen in Internett-Speelen schrieven, um Verschuvens to unnersöken"
 
-#: ../../src/ui_fsmenu/options.cc:246
+#: ../../src/ui_fsmenu/options.cc:261
 #: ../../src/wui/interactive_gamebase.cc:272
 msgid "Show Census"
 msgstr "Namen vun Husen wiesen"
 
-#: ../../src/ui_fsmenu/options.cc:247
+#: ../../src/ui_fsmenu/options.cc:262
 #: ../../src/wui/interactive_gamebase.cc:281
 msgid "Show Status"
 msgstr "Tostand wiesen"
 
-#: ../../src/ui_fsmenu/options.cc:249
+#: ../../src/ui_fsmenu/options.cc:264
 #: ../../src/wui/interactive_gamebase.cc:290
 msgid "Show Soldier Levels"
 msgstr "Soldaten-Stand wiesen"
 
-#: ../../src/ui_fsmenu/options.cc:250
+#: ../../src/ui_fsmenu/options.cc:265
 #: ../../src/wui/interactive_gamebase.cc:299
 msgid "Show Buildings"
 msgstr "Husen wiesen"
@@ -6114,107 +6130,112 @@ msgstr "Husen wiesen"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:252 ../../src/wui/interactive_player.cc:380
+#: ../../src/ui_fsmenu/options.cc:267 ../../src/wui/interactive_player.cc:380
 msgid "Show Workarea Overlaps"
 msgstr "Arbeidsgewest-Övernannerliggen wiesen"
 
-#: ../../src/ui_fsmenu/options.cc:258
+#: ../../src/ui_fsmenu/options.cc:273
 msgid "Start building road after placing a flag"
 msgstr "Na de Fahnenbauen Straat bauen"
 
-#: ../../src/ui_fsmenu/options.cc:262
+#: ../../src/ui_fsmenu/options.cc:277
 msgid "Show in-game chat with transparent background"
 msgstr "Wies de Snack im Speel sünner Achtergrund"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:272
+#: ../../src/ui_fsmenu/options.cc:287
 msgid "Use single watchwindow mode"
 msgstr "Blot een Beluren-Fenster bruken"
 
-#: ../../src/ui_fsmenu/options.cc:276
+#: ../../src/ui_fsmenu/options.cc:291
 msgid "Display system time in the info panel"
 msgstr "Systeemtied in de Infobalken wiesen"
 
-#: ../../src/ui_fsmenu/options.cc:280
+#: ../../src/ui_fsmenu/options.cc:295
 msgid "Allow diagonal scrolling with the numeric keypad"
 msgstr "Diagonales Kart-Verschuven mit de Tahlenblock verlöven"
 
-#: ../../src/ui_fsmenu/options.cc:284
+#: ../../src/ui_fsmenu/options.cc:299
 msgid "Scroll when the mouse cursor is near the screen edge"
 msgstr "Kaart-Sicht verschuven, wenn de Muus bi de Rann vun de Billschirm is"
 
-#: ../../src/ui_fsmenu/options.cc:288
+#: ../../src/ui_fsmenu/options.cc:303
 msgid "Invert click-and-drag map movement direction"
 msgstr "Kaart-Klick-un-Treck-Richtung umdreihen"
 
-#: ../../src/ui_fsmenu/options.cc:294
+#: ../../src/ui_fsmenu/options.cc:309
 msgid "Teach me how to play"
 msgstr "Lehr mi wo man spöölt"
 
 #. * TRANSLATORS: Button to bring up a window to edit teaching progress in the
 #. Options
-#: ../../src/ui_fsmenu/options.cc:304
+#: ../../src/ui_fsmenu/options.cc:319
 msgid "Progress…"
 msgstr "Wiederkomen …"
 
-#: ../../src/ui_fsmenu/options.cc:320
+#: ../../src/ui_fsmenu/options.cc:335
 msgid "Interface"
 msgstr "Bedeenen"
 
-#: ../../src/ui_fsmenu/options.cc:321
+#: ../../src/ui_fsmenu/options.cc:336
 msgid "Sound"
 msgstr "Gedrüüs"
 
-#: ../../src/ui_fsmenu/options.cc:322
+#: ../../src/ui_fsmenu/options.cc:337
 msgid "Saving"
 msgstr "Sekern"
 
-#: ../../src/ui_fsmenu/options.cc:323
+#: ../../src/ui_fsmenu/options.cc:338
 msgid "New Games"
 msgstr "Neje Spelen"
 
-#: ../../src/ui_fsmenu/options.cc:324
+#: ../../src/ui_fsmenu/options.cc:339
 msgid "In-Game"
 msgstr "Im Speel"
 
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:422
+#: ../../src/ui_fsmenu/options.cc:433
 msgid "Off"
 msgstr "Nooit"
 
+#. * TRANSLATORS: Options: Delete replays after:
+#: ../../src/ui_fsmenu/options.cc:435
+msgid "Never"
+msgstr "Nienich"
+
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:474
+#: ../../src/ui_fsmenu/options.cc:491
 msgid "Fullscreen"
 msgstr "Heler Billschirm"
 
 #. * TRANSLATORS: Entry in the window size dropdown
-#: ../../src/ui_fsmenu/options.cc:477
+#: ../../src/ui_fsmenu/options.cc:494
 msgid "Maximized"
 msgstr "Grot"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
-#: ../../src/ui_fsmenu/options.cc:493 ../../src/ui_fsmenu/options.cc:501
+#: ../../src/ui_fsmenu/options.cc:510 ../../src/ui_fsmenu/options.cc:518
 msgid "%1% × %2%"
 msgstr "%1% × %2%"
 
-#: ../../src/ui_fsmenu/options.cc:549
+#: ../../src/ui_fsmenu/options.cc:569
 msgid "Try system language"
 msgstr "Spraak vun de Reekner versöken"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:659
+#: ../../src/ui_fsmenu/options.cc:679
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "De Översetten na %s is kumpleet."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:663
+#: ../../src/ui_fsmenu/options.cc:683
 msgid "The translation into %1% is %2%%% complete."
 msgstr "De Översetten na %1% is to %2%%% kumpleet."
 
-#: ../../src/ui_fsmenu/options.cc:675
+#: ../../src/ui_fsmenu/options.cc:695
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Wenn du mit de Översetten helpen willst, besöök bidde %s"
@@ -6425,59 +6446,59 @@ msgid "Unmark All"
 msgstr "Nix utkören"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:792 ../../src/wlapplication.cc:796
-#: ../../src/wlapplication.cc:801 ../../src/wui/savegameloader.cc:123
+#: ../../src/wlapplication.cc:791 ../../src/wlapplication.cc:795
+#: ../../src/wlapplication.cc:800 ../../src/wui/savegameloader.cc:119
 msgid "Error message:"
 msgstr "Fehler-Naricht:"
 
-#: ../../src/wlapplication.cc:793 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:792 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "Fehler mit de Speel-Daten"
 
-#: ../../src/wlapplication.cc:795
+#: ../../src/wlapplication.cc:794
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Widelands kunn de Datei »%s« nich finnen."
 
-#: ../../src/wlapplication.cc:797
+#: ../../src/wlapplication.cc:796
 msgid "File system error"
 msgstr "Dateisysteem-Fehler"
 
-#: ../../src/wlapplication.cc:1295
+#: ../../src/wlapplication.cc:1294
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Oorderreeg-Angaav för »%s« is leeg"
 
-#: ../../src/wlapplication.cc:1300
+#: ../../src/wlapplication.cc:1299
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "»%s« kann nich tosamen mit anner Dingen bruukt worden"
 
-#: ../../src/wlapplication.cc:1455
+#: ../../src/wlapplication.cc:1454
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Oorderreeg-Befehl »%s« is unbekannt.\nVillicht föhlt een »=«?"
 
-#: ../../src/wlapplication.cc:1576
+#: ../../src/wlapplication.cc:1575
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized un --fullscreen könen nich tosamen bruukt worden"
 
-#: ../../src/wlapplication.cc:1594
+#: ../../src/wlapplication.cc:1593
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Oorderreeg-Befehl »%s« is unbekannt"
 
-#: ../../src/wlapplication.cc:1646
+#: ../../src/wlapplication.cc:1645
 msgid "Game ended unexpectedly"
 msgstr "Speel ennt unverwacht"
 
-#: ../../src/wlapplication.cc:1646
+#: ../../src/wlapplication.cc:1645
 msgid "Unexpected error during the game"
 msgstr "Unverwachter Fehler bi’m Spölen"
 
-#: ../../src/wlapplication.cc:1649
+#: ../../src/wlapplication.cc:1648
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6491,7 +6512,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Bi’m Spölen is een Fehler uptreden. De Fehler seggt:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst wichtige Mellungen in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s.\n\nBidde föög deese Informatioon to de Fehler-Mellen hento.\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
 
-#: ../../src/wlapplication.cc:1658
+#: ../../src/wlapplication.cc:1657
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6501,11 +6522,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Dat Speel hett um dat unverwacht ennt:\n\n%s\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
 
-#: ../../src/wlapplication.cc:1684
+#: ../../src/wlapplication.cc:1683
 msgid "Emergency save failed"
 msgstr "Noodfall-Sekern fehlslaan"
 
-#: ../../src/wlapplication.cc:1685
+#: ../../src/wlapplication.cc:1684
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -8465,21 +8486,31 @@ msgstr "Vergrotern torüggsetten"
 msgid "Zoom –"
 msgstr "Verkleenern"
 
-#: ../../src/wui/interactive_base.cc:775
+#: ../../src/wui/interactive_base.cc:844
+#, c-format
+msgid "Road length: %1$u (%2$u)"
+msgstr "Straatenlängde: %1$u (%2$u)"
+
+#: ../../src/wui/interactive_base.cc:846
+#, c-format
+msgid "Waterway length: %1$u (%2$u) / %3$u"
+msgstr "Priellängde: %1$u (%2$u) / %3$u"
+
+#: ../../src/wui/interactive_base.cc:851
 #, c-format
 msgid "Road length: %u"
 msgstr "Straatenlängde: %u"
 
-#: ../../src/wui/interactive_base.cc:777
+#: ../../src/wui/interactive_base.cc:854
 #, c-format
-msgid "Waterway length: %1$u/%2$u"
-msgstr "Priellängde: %1$u/%2$u"
+msgid "Waterway length: %1$u / %2$u"
+msgstr "Priellängde: %1$u / %2$u"
 
-#: ../../src/wui/interactive_base.cc:1602
+#: ../../src/wui/interactive_base.cc:1712
 msgid "Failed saving screenshot!"
 msgstr "Billschirmfoto to sekern fehlslagen!"
 
-#: ../../src/wui/interactive_base.cc:1606
+#: ../../src/wui/interactive_base.cc:1716
 msgid "Screenshot saved"
 msgstr "Billschirmfoto sekert"
 
@@ -9093,7 +9124,7 @@ msgstr[1] "%d Uptekens kunnen nich wegdaan worden."
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/wui/savegameloader.cc:120
+#: ../../src/wui/savegameloader.cc:116
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
@@ -9102,35 +9133,35 @@ msgstr "Deese Datei hett de falsk Formaat un kann nich laden worden. Villicht wu
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/savegameloader.cc:152
+#: ../../src/wui/savegameloader.cc:148
 msgid "Today, %1%:%2%"
 msgstr "Vandaag, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/savegameloader.cc:157
+#: ../../src/wui/savegameloader.cc:153
 msgid "saved today at %1%:%2%"
 msgstr "vandaag um %1%:%2% sekert"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/savegameloader.cc:170
+#: ../../src/wui/savegameloader.cc:166
 msgid "Yesterday, %1%:%2%"
 msgstr "Güstern, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/savegameloader.cc:175
+#: ../../src/wui/savegameloader.cc:171
 msgid "saved yesterday at %1%:%2%"
 msgstr "güstern um %1%:%2% sekert"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
-#: ../../src/wui/savegameloader.cc:180
+#: ../../src/wui/savegameloader.cc:176
 msgid "%1% %2%, %3%"
 msgstr "%2%. %1% %3%"
 
@@ -9138,7 +9169,7 @@ msgstr "%2%. %1% %3%"
 #. are:
 #. month (short name) day (number),
 #. year (number). This is part of a list.
-#: ../../src/wui/savegameloader.cc:186
+#: ../../src/wui/savegameloader.cc:182
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
 msgstr "sekert am %2$u. %1$s %3$u"
