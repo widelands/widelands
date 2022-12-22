@@ -26,10 +26,10 @@ class Panel;
 }  // namespace UI
 
 namespace Widelands {
-class Building;
+class MapObject;
 }  // namespace Widelands
 
 UI::Panel*
-create_soldier_capacity_control(UI::Panel& parent, InteractiveBase&, Widelands::Building& building);
+create_soldier_capacity_control(UI::Panel& parent, InteractiveBase&, Widelands::MapObject& building_or_ship);
 
 #endif  // end of include guard: WL_WUI_SOLDIERCAPACITYCONTROL_H

@@ -61,6 +61,7 @@ enum class ShipType : uint8_t {
 enum class WarshipCommand : uint8_t {
 	kAttack = 1,
 	kRetreat = 2,
+	kSetCapacity = 3,
 };
 
 }  // namespace Widelands

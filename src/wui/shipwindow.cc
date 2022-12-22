@@ -32,6 +32,7 @@
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
+#include "wui/soldiercapacitycontrol.h"
 
 namespace {
 constexpr const char* const kImgGoTo = "images/wui/ship/menu_ship_goto.png";
@@ -91,7 +92,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	UI::Box* exp_bot =
 	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_bot, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	navigation_box_.add(&warship_controls_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	navigation_box_.add(&warship_controls_, UI::Box::Resizing::kFullSize);
 
 	btn_scout_[Widelands::WALK_NW - 1] =
 	   make_button(exp_top, "scnw", _("Scout towards the north west"), kImgScoutNW,
@@ -151,6 +152,9 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	   &warship_controls_, "war_attack", _("Attack the nearest enemy port or warship"),
 	   kImgWarshipAttack, [this]() { act_warship_command(Widelands::WarshipCommand::kAttack); });
 	warship_controls_.add(btn_warship_attack_);
+	warship_controls_.add_inf_space();
+
+	warship_controls_.add(create_soldier_capacity_control(warship_controls_, ibase_, *ship));
 
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -416,7 +420,7 @@ void ShipWindow::act_warship_command(const Widelands::WarshipCommand cmd) {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_warship_command(*ship, cmd);
+		game->send_player_warship_command(*ship, cmd, 0 /* ignored */);
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}

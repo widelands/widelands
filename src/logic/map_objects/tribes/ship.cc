@@ -193,7 +193,8 @@ Bob& ShipDescr::create_object() const {
 Ship::Ship(const ShipDescr& gdescr)
    : Bob(gdescr),
      hitpoints_(gdescr.max_hitpoints_),
-     capacity_(gdescr.get_default_capacity()) {
+     capacity_(gdescr.get_default_capacity()),
+     warship_soldier_capacity_(capacity_) {
 }
 
 PortDock* Ship::get_lastdock(EditorGameBase& egbase) const {
@@ -622,7 +623,7 @@ void Ship::update_warship_soldier_request(Game& /* game */) {
 	if (warship_soldier_request_ == nullptr) {
 		return;
 	}
-	warship_soldier_request_->set_count(get_capacity() - get_nritems());
+	warship_soldier_request_->set_count(get_nritems() > get_warship_soldier_capacity() ? 0 : get_warship_soldier_capacity() - get_nritems());
 }
 
 // static
@@ -757,12 +758,38 @@ PortDock* Ship::find_nearest_port(EditorGameBase& egbase) {
 	return nearest;
 }
 
-void Ship::warship_command(Game& game, const WarshipCommand cmd) {
+bool Ship::is_on_destination_dock() const {
+	if (const PortDock* dest = destination_.get(owner().egbase()); dest != nullptr) {
+		return get_position().field->get_immovable() == dest;
+	}
+	return false;
+}
+
+uint32_t Ship::min_warship_soldier_capacity() const {
+	return is_on_destination_dock() ? 0U : get_nritems();
+}
+
+void Ship::warship_command(Game& game, const WarshipCommand cmd, const int32_t parameter) {
 	if (get_ship_type() != ShipType::kWarship) {
 		return;
 	}
 
 	switch (cmd) {
+	case WarshipCommand::kSetCapacity: {
+		warship_soldier_capacity_ = std::max<int32_t>(std::min<int32_t>(parameter, get_capacity()), min_warship_soldier_capacity());
+		update_warship_soldier_request(game);
+
+		// If we have too many soldiers on board now, unload the extras.
+		PortDock* dest = destination_.get(game);
+		while (get_nritems() > warship_soldier_capacity_) {
+			assert(dest != nullptr);
+			dest->shipping_item_arrived(game, items_.back());
+			items_.pop_back();
+		}
+
+		return;
+	}
+
 	case WarshipCommand::kAttack:
 		if (MapObject* target = get_attack_target(game); target != nullptr) {
 			start_battle(game, Battle(target, true));
@@ -829,11 +856,11 @@ void Ship::battle_update(Game& game) {
 		}
 	};
 	auto fight = [this, &b, other_battle, &game, target_ship]() {
-		b.pending_damage =
+		b.pending_damage = target_ship == nullptr ? 1 :  // Ports always take 1 point
 			(game.logic_rand() % 100 < descr().attack_accuracy_) ?
 				(descr().min_attack_
 					+ (game.logic_rand() % (descr().max_attack_ - descr().min_attack_)))
-					* (100 - (target_ship ? target_ship->descr().defense_ : 0)) / 100
+					* (100 - target_ship->descr().defense_) / 100
 			: 0;
 		if (other_battle) {
 			other_battle->pending_damage = b.pending_damage;
@@ -950,6 +977,7 @@ void Ship::battle_update(Game& game) {
 				worker->reset_tasks(game);
 				dynamic_cast<Soldier&>(*worker).start_task_attack(game, warehouse, false);
 			}
+			items_.clear();
 
 			battles_.pop_back();
 		} else {
@@ -1792,6 +1820,10 @@ Load / Save implementation
 ==============================
 */
 
+/* Changelog:
+ * 12 - v1.1
+ * 13 - Added warships and naval warfare.
+ */
 constexpr uint8_t kCurrentPacketVersion = 13;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
@@ -1802,6 +1834,7 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 }
 
 void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
+	// TODO(Nordfriese): Savegame compatibility v1.1
 	if (packet_version >= 12 && packet_version <= kCurrentPacketVersion) {
 		Bob::Loader::load(fr);
 		// Economy
@@ -1859,6 +1892,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 
 		shipname_ = fr.c_string();
 		capacity_ = fr.unsigned_32();
+		warship_soldier_capacity_ = (packet_version >= 13) ? fr.unsigned_32() : capacity_;
 		lastdock_ = fr.unsigned_32();
 		destination_ = fr.unsigned_32();
 
@@ -1925,6 +1959,7 @@ void Ship::Loader::load_finish() {
 	ship.shipname_ = shipname_;
 
 	ship.capacity_ = capacity_;
+	ship.warship_soldier_capacity_ = warship_soldier_capacity_;
 
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {
@@ -2023,6 +2058,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 
 	fw.string(shipname_);
 	fw.unsigned_32(capacity_);
+	fw.unsigned_32(warship_soldier_capacity_);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(lastdock_.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_.get(egbase)));
 

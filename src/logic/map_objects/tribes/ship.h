@@ -102,6 +102,7 @@ struct Ship : Bob {
 		return destination_.get(e);
 	}
 	void set_destination(EditorGameBase&, PortDock*);
+	bool is_on_destination_dock() const;
 
 	// Returns the last visited portdock of this ship or nullptr if there is none or
 	// the last visited was removed.
@@ -251,8 +252,14 @@ struct Ship : Bob {
 	[[nodiscard]] uint32_t get_hitpoints() const {
 		return hitpoints_;
 	}
+	[[nodiscard]] uint32_t get_warship_soldier_capacity() const {
+		return warship_soldier_capacity_;
+	}
+	[[nodiscard]] uint32_t min_warship_soldier_capacity() const;
 
-	void warship_command(Game&, WarshipCommand);
+	void warship_command(Game&, WarshipCommand, int32_t parameter);
+
+	static void warship_soldier_callback(Game& game, Request& req, DescriptionIndex di, Worker* worker, PlayerImmovable& immovable);
 
 	[[nodiscard]] ShipType get_ship_type() const {
 		return ship_type_;
@@ -265,10 +272,13 @@ struct Ship : Bob {
 		return get_pending_refit() != get_ship_type();
 	}
 	void refit(Game&, ShipType);
+
 	// Editor only
 	void set_ship_type(EditorGameBase& egbase, ShipType t);
-
-	static void warship_soldier_callback(Game& game, Request& req, DescriptionIndex di, Worker* worker, PlayerImmovable& immovable);
+	void set_warship_soldier_capacity(uint32_t c) {
+		assert(c <= capacity_);
+		warship_soldier_capacity_ = c;
+	}
 
 protected:
 	void draw(const EditorGameBase&,
@@ -341,6 +351,7 @@ private:
 	uint32_t hitpoints_;
 
 	Quantity capacity_;
+	Quantity warship_soldier_capacity_;
 
 	// saving and loading
 protected:
@@ -358,6 +369,7 @@ protected:
 		Serial worker_economy_serial_{kInvalidSerial};
 		uint32_t destination_{0U};
 		uint32_t capacity_{0U};
+		uint32_t warship_soldier_capacity_{0U};
 		int32_t hitpoints_{0};
 		ShipStates ship_state_{ShipStates::kTransport};
 		ShipType ship_type_{ShipType::kTransport};

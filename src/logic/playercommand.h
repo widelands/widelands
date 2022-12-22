@@ -429,10 +429,9 @@ private:
 };
 
 struct CmdWarshipCommand : public PlayerCommand {
-	CmdWarshipCommand() : PlayerCommand(), serial_(0), cmd_(WarshipCommand::kRetreat) {
-	}  // For savegame loading
-	CmdWarshipCommand(const Time& t, PlayerNumber const p, Serial s, WarshipCommand c)
-	   : PlayerCommand(t, p), serial_(s), cmd_(c) {
+	CmdWarshipCommand() = default;  // For savegame loading
+	CmdWarshipCommand(const Time& t, PlayerNumber const p, Serial s, WarshipCommand c, int32_t param)
+	   : PlayerCommand(t, p), serial_(s), parameter_(param), cmd_(c) {
 	}
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -448,8 +447,9 @@ struct CmdWarshipCommand : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Serial serial_;
-	WarshipCommand cmd_;
+	Serial serial_{0U};
+	int32_t parameter_{0};
+	WarshipCommand cmd_{WarshipCommand::kRetreat};
 };
 
 struct CmdShipScoutDirection : public PlayerCommand {

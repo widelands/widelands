@@ -987,7 +987,7 @@ void CmdShipRefit::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& m
 			   "CmdShipRefit", packet_version, kCurrentPacketVersionShipRefit);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("Ship scout: %s", e.what());
+		throw GameDataError("Ship refit: %s", e.what());
 	}
 }
 void CmdShipRefit::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
@@ -1003,12 +1003,13 @@ CmdWarshipCommand::CmdWarshipCommand(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
 	cmd_ = static_cast<WarshipCommand>(des.unsigned_8());
+	parameter_ = des.signed_32();
 }
 
 void CmdWarshipCommand::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial_));
-	if (ship && ship->get_owner()->player_number() == sender()) {
-		ship->warship_command(game, cmd_);
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		ship->warship_command(game, cmd_, parameter_);
 	}
 }
 
@@ -1016,6 +1017,7 @@ void CmdWarshipCommand::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
 	ser.unsigned_8(static_cast<uint8_t>(cmd_));
+	ser.signed_32(parameter_);
 }
 
 constexpr uint16_t kCurrentPacketVersionWarshipCommand = 1;
@@ -1027,12 +1029,13 @@ void CmdWarshipCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoad
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
 			cmd_ = static_cast<WarshipCommand>(fr.unsigned_8());
+			parameter_ = fr.signed_32();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdWarshipCommand", packet_version, kCurrentPacketVersionWarshipCommand);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("Ship scout: %s", e.what());
+		throw GameDataError("Warship command: %s", e.what());
 	}
 }
 void CmdWarshipCommand::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
@@ -1041,6 +1044,7 @@ void CmdWarshipCommand::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.unsigned_8(static_cast<uint8_t>(cmd_));
+	fw.signed_32(parameter_);
 }
 
 /*** Cmd_ShipScoutDirection ***/
