@@ -52,6 +52,7 @@ private:
 	                        const std::string& name,
 	                        const std::string& title,
 	                        const std::string& picname,
+	                        bool flat_when_disabled,
 	                        const std::function<void()>& callback);
 	void set_button_visibility();
 	void no_port_error_message();
@@ -74,6 +75,7 @@ private:
 	UI::Box vbox_;
 	UI::Box navigation_box_;
 	UI::Box warship_controls_;
+	UI::Panel* warship_capacity_control_;
 	UI::EditBox* name_field_;
 	UI::Button* btn_goto_;
 	UI::Button* btn_destination_;

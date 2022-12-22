@@ -546,7 +546,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 				} else {
 					send_message(game, _("Enemy Port"), _("Enemy Port Found"),
 							     _("A warship spotted an enemy port."),
-							     "images/wui/ship/ship_attack.png");
+							     static_cast<PortDock*>(new_target)->get_warehouse()->descr().icon_filename());
 				}
 			}
 		}
@@ -871,6 +871,9 @@ void Ship::battle_update(Game& game) {
 			target_ship->hitpoints_ -= b.pending_damage;
 			set_phase(next);
 		} else {
+			target_ship->send_message(game, _("Ship Sunk"), _("Ship Destroyed"),
+					     _("An enemy ship has destroyed your warship."),
+					     "images/wui/ship/ship_attack.png");
 			target_ship->set_ship_state_and_notify(ShipStates::kSinkRequest, NoteShip::Action::kDestinationChanged);
 			target_ship->battles_.clear();
 			battles_.pop_back();
@@ -950,6 +953,15 @@ void Ship::battle_update(Game& game) {
 			// The naval assault was successful. Now unload the soldiers.
 			// From the ship's perspective, the attack was a success.
 			Warehouse& warehouse = *target_port->get_warehouse();
+			warehouse.send_message(game,
+                  Message::Type::kWarfareUnderAttack,
+                  _("Naval Attack"),
+                  "images/wui/ship/ship_attack.png",
+                  _("Enemy Ship Attacking"),
+                  _("Your port is under attack from an enemy warship."),
+                  false,
+                  Duration(60 * 1000) /* throttle timeout in milliseconds */,
+                  5 /* throttle radius */);
 
 			/* We can't drop off soldiers directly at the base flag as this would interfere
 			 * with battle code. Drop off at the directly adjacent fields instead.
@@ -1639,7 +1651,7 @@ void Ship::draw(const EditorGameBase& egbase,
 			}
 		} else {
 			if (ship_type_ == ShipType::kWarship) {
-				// NOCOM show more state here
+				// TODO(Nordfriese): maybe show more state here
 				statistics_string = pgettext("ship_state", "Warship");
 			} else {
 				switch (ship_state_) {
