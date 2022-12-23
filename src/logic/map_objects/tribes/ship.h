@@ -284,7 +284,7 @@ struct Ship : Bob {
 protected:
 	void draw(const EditorGameBase& egbase,
 	          const InfoToDraw& info_to_draw,
-	          const Vector2f& point_on_dst,
+	          const Vector2f& field_on_dst,
 	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
