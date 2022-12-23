@@ -27,7 +27,7 @@ function help_replays()
    push_textdomain("texts")
    local r =
       h2(_([[Replays]])) ..
-      p(_([[Widelands records every game you play in two files. One of these files has a .wrpl.wgf extension and contains an initial savegame. The other file has a .wrpl extension and contains all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game.]])) ..
+      p(_([[Widelands records every game you play in a replay file with .wry extension. This file contains an initial savegame and all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game.]])) ..
       p(_([[Using the Watch Replay option in the main menu, a previously played game will be precisely reconstructed for you to watch. Note, however, that even small changes in the game data files or the Widelands executable can cause a replay to become incompatible and to ‘go out of sync’. This is similar to how network games will suffer from desynchronization problems if one of the players has a different version of the game.]])) ..
       p((_([[Replays are a very useful tool to find bugs in the game logic, so they can be useful as attachments to bug reports. The replay files are saved in the %s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ subdirectory of your Widelands installation.]])):bformat(i("~/.widelands/replays"))
       )
@@ -44,8 +44,17 @@ end
 function help_toggle_building_spaces_hotkey()
    push_textdomain("texts")
    local r =
-      -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+      -- TRANSLATORS: This is the helptext for an access key combination.
       dl(help_format_hotkey(wl.ui.get_shortcut("buildhelp")), _("Toggle building spaces"))
+   pop_textdomain()
+   return r
+end
+
+function help_screenshot_hotkey()
+   push_textdomain("texts")
+   local r =
+      -- TRANSLATORS: This is the helptext for an access key combination.
+      dl(help_format_hotkey(wl.ui.get_shortcut("screenshot")), _("Take a screenshot"))
    pop_textdomain()
    return r
 end
@@ -53,8 +62,19 @@ end
 function help_toggle_fullscreen_hotkey()
    push_textdomain("texts")
    local r =
-      -- TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+      -- TRANSLATORS: This is the helptext for an access key combination.
       dl(help_format_hotkey(wl.ui.get_shortcut("fullscreen")), _("Toggle fullscreen (if supported by the OS)"))
+   pop_textdomain()
+   return r
+end
+
+function help_open_debug_console_hotkey()
+   push_textdomain("texts)
+   local r =
+      -- TRANSLATORS: This is an access key combination.
+      dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Shift + Space")),
+                            -- TRANSLATORS: This is the helptext for an access key combination.
+                            _("Show the debug console (only in debug-builds)"))
    pop_textdomain()
    return r
 end
@@ -62,7 +82,7 @@ end
 function help_toggle_minimap_hotkey()
    push_textdomain("texts")
    local r =
-      -- TRANSLATORS: This is an access key combination. The hotkey is 'm'
+      -- TRANSLATORS: This is the helptext for an access key combination.
       dl(help_format_hotkey(wl.ui.get_shortcut("minimap")), _("Toggle minimap"))
    pop_textdomain()
    return r
@@ -86,6 +106,7 @@ function help_goto_landmarks_hotkeys()
    pop_textdomain()
    return r
 end
+
 function help_editor_toolsize_tips()
    push_textdomain("texts")
    local r = wl.ui.get_shortcut("editor_toolsize1")
