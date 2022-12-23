@@ -69,7 +69,7 @@ function help_toggle_fullscreen_hotkey()
 end
 
 function help_open_debug_console_hotkey()
-   push_textdomain("texts)
+   push_textdomain("texts")
    local r =
       -- TRANSLATORS: This is an access key combination.
       dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Shift + Space")),
