@@ -153,7 +153,7 @@ void SaveHandler::think(Widelands::Game& game) {
 		if (save_success) {
 			// Saving now (always overwrite file)
 			std::string complete_filename = create_file_name(kSaveDir, filename);
-			save_success = save_game(game, complete_filename, &error);
+			save_success = save_game(game, complete_filename, std::nullopt, &error);
 		}
 		if (!save_success) {
 			log_err_time(game.get_gametime(), "Autosave: ERROR! - %s\n", error.c_str());
@@ -226,6 +226,7 @@ std::string SaveHandler::create_file_name(const std::string& dir,
  */
 bool SaveHandler::save_game(Widelands::Game& game,
                             const std::string& complete_filename,
+                            std::optional<FileSystem::Type> fstype,
                             std::string* const error_str) {
 	ScopedTimer save_timer("SaveHandler::save_game() took %ums", true);
 
@@ -235,7 +236,7 @@ bool SaveHandler::save_game(Widelands::Game& game,
 		   Widelands::GameSaver gs(fs, game);
 		   gs.save();
 	   },
-	   complete_filename, fs_type_);
+	   complete_filename, fstype.has_value() ? fstype.value() : fs_type_);
 	gsh.save();
 	last_save_realtime_ = SDL_GetTicks();
 

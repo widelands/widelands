@@ -1673,7 +1673,7 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		SaveHandler& save_handler = game.save_handler();
 		std::string e;
 		if (!save_handler.save_game(
-		       game, save_handler.create_file_name(kSaveDir, timestring()), &e)) {
+		       game, save_handler.create_file_name(kSaveDir, timestring()), FileSystem::ZIP, &e)) {
 			throw wexception("Save handler returned error: %s", e.c_str());
 		}
 	} catch (const std::exception& e) {

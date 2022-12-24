@@ -260,12 +260,14 @@ public:
 ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
    : game_(game), filename_(filename) {
 	g_fs->ensure_directory_exists(kReplayDir);
+	g_fs->ensure_directory_exists(kTempFileDir);
 
 	SaveHandler& save_handler = game_.save_handler();
 
-	const std::string temp_savegame = kTempFileDir + timestring() + kSavegameExtension;
+	const std::string temp_savegame =
+	   kTempFileDir + FileSystem::file_separator() + timestring() + kSavegameExtension;
 	std::string error;
-	if (!save_handler.save_game(game_, temp_savegame, &error)) {
+	if (!save_handler.save_game(game_, temp_savegame, FileSystem::ZIP, &error)) {
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 	}
 
