@@ -1157,9 +1157,9 @@ void Game::send_player_refit_ship(const Ship& ship, const ShipType t) {
 
 void Game::send_player_warship_command(const Ship& ship,
                                        const WarshipCommand cmd,
-                                       int32_t parameter) {
+                                       const std::vector<uint32_t>& parameters) {
 	send_player_command(new CmdWarshipCommand(
-	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), cmd, parameter));
+	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), cmd, parameters));
 }
 
 void Game::send_player_cancel_expedition_ship(const Ship& ship) {

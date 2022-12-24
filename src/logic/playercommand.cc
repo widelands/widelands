@@ -1001,13 +1001,15 @@ void CmdShipRefit::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 CmdWarshipCommand::CmdWarshipCommand(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
 	cmd_ = static_cast<WarshipCommand>(des.unsigned_8());
-	parameter_ = des.signed_32();
+	for (uint32_t i = des.unsigned_32(); i > 0U; --i) {
+		parameters_.push_back(des.signed_32());
+	}
 }
 
 void CmdWarshipCommand::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial_));
 	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
-		ship->warship_command(game, cmd_, parameter_);
+		ship->warship_command(game, cmd_, parameters_);
 	}
 }
 
@@ -1015,7 +1017,10 @@ void CmdWarshipCommand::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
 	ser.unsigned_8(static_cast<uint8_t>(cmd_));
-	ser.signed_32(parameter_);
+	ser.unsigned_32(parameters_.size());
+	for (uint32_t p : parameters_) {
+		ser.unsigned_32(p);
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersionWarshipCommand = 1;
@@ -1027,7 +1032,9 @@ void CmdWarshipCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoad
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
 			cmd_ = static_cast<WarshipCommand>(fr.unsigned_8());
-			parameter_ = fr.signed_32();
+			for (uint32_t i = fr.unsigned_32(); i > 0U; --i) {
+				parameters_.push_back(fr.signed_32());
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "CmdWarshipCommand", packet_version, kCurrentPacketVersionWarshipCommand);
@@ -1042,7 +1049,10 @@ void CmdWarshipCommand::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.unsigned_8(static_cast<uint8_t>(cmd_));
-	fw.signed_32(parameter_);
+	fw.unsigned_32(parameters_.size());
+	for (uint32_t p : parameters_) {
+		fw.unsigned_32(p);
+	}
 }
 
 /*** Cmd_ShipScoutDirection ***/

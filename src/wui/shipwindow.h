@@ -28,6 +28,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
+#include "wui/attack_window.h"
 #include "wui/interactive_base.h"
 #include "wui/itemwaresdisplay.h"
 
@@ -47,6 +48,7 @@ public:
 private:
 	void think() override;
 	void update_destination_button(const Widelands::Ship* ship);
+	std::vector<Widelands::Soldier*> get_soldiers() const;
 
 	UI::Button* make_button(UI::Panel* parent,
 	                        const std::string& name,
@@ -67,7 +69,8 @@ private:
 	void act_scout_towards(Widelands::WalkingDir);
 	void act_construct_port();
 	void act_explore_island(Widelands::IslandExploreDirection);
-	void act_warship_command(Widelands::WarshipCommand);
+	void act_warship_attack();
+	void act_warship_retreat();
 
 	InteractiveBase& ibase_;
 	Widelands::OPtr<Widelands::Ship> ship_;
@@ -92,6 +95,7 @@ private:
 	UI::Button* btn_warship_attack_;
 	UI::Button* btn_warship_retreat_;
 	ItemWaresDisplay* display_;
+	AttackPanel* warship_soldiers_display_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
 };

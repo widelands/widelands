@@ -132,10 +132,11 @@ struct Ship : Bob {
 			kDefenderAttacking = 5,
 		};
 
-		Battle(MapObject* o, bool f) : opponent(o), is_first(f) {
+		Battle(MapObject* o, const std::vector<uint32_t>& a, bool f) : opponent(o), attack_soldier_serials(a), is_first(f) {
 		}
 
 		OPtr<MapObject> opponent;
+		std::vector<uint32_t> attack_soldier_serials;
 		Time time_of_last_action;
 		uint32_t pending_damage{0U};
 		Phase phase{Phase::kNotYetStarted};
@@ -240,7 +241,7 @@ struct Ship : Bob {
 	}
 
 	[[nodiscard]] MapObject* get_attack_target(const EditorGameBase& e) const {
-		return expedition_ ? expedition_->attack_target.get(e) : nullptr;
+		return expedition_ != nullptr ? expedition_->attack_target.get(e) : nullptr;
 	}
 	[[nodiscard]] bool has_battle() const {
 		return !battles_.empty();
@@ -257,7 +258,7 @@ struct Ship : Bob {
 	}
 	[[nodiscard]] uint32_t min_warship_soldier_capacity() const;
 
-	void warship_command(Game&, WarshipCommand, int32_t parameter);
+	void warship_command(Game&, WarshipCommand, const std::vector<uint32_t>& parameters);
 
 	static void warship_soldier_callback(
 	   Game& game, Request& req, DescriptionIndex di, Worker* worker, PlayerImmovable& immovable);

@@ -429,8 +429,8 @@ private:
 
 struct CmdWarshipCommand : public PlayerCommand {
 	CmdWarshipCommand() = default;  // For savegame loading
-	CmdWarshipCommand(const Time& t, PlayerNumber const p, Serial s, WarshipCommand c, int32_t param)
-	   : PlayerCommand(t, p), serial_(s), parameter_(param), cmd_(c) {
+	CmdWarshipCommand(const Time& t, PlayerNumber const p, Serial s, WarshipCommand c, const std::vector<uint32_t>& params)
+	   : PlayerCommand(t, p), serial_(s), parameters_(params), cmd_(c) {
 	}
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -447,7 +447,7 @@ struct CmdWarshipCommand : public PlayerCommand {
 
 private:
 	Serial serial_{0U};
-	int32_t parameter_{0};
+	std::vector<uint32_t> parameters_;
 	WarshipCommand cmd_{WarshipCommand::kRetreat};
 };
 

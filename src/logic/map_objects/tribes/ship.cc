@@ -778,15 +778,16 @@ uint32_t Ship::min_warship_soldier_capacity() const {
 	return is_on_destination_dock() ? 0U : get_nritems();
 }
 
-void Ship::warship_command(Game& game, const WarshipCommand cmd, const int32_t parameter) {
+void Ship::warship_command(Game& game, const WarshipCommand cmd, const std::vector<uint32_t>& parameters) {
 	if (get_ship_type() != ShipType::kWarship) {
 		return;
 	}
 
 	switch (cmd) {
 	case WarshipCommand::kSetCapacity: {
-		warship_soldier_capacity_ = std::max<int32_t>(
-		   std::min<int32_t>(parameter, get_capacity()), min_warship_soldier_capacity());
+		assert(parameters.size() == 1);
+		warship_soldier_capacity_ = std::max(
+		   std::min(parameters.back(), get_capacity()), min_warship_soldier_capacity());
 		update_warship_soldier_request(game);
 
 		// If we have too many soldiers on board now, unload the extras.
@@ -802,11 +803,13 @@ void Ship::warship_command(Game& game, const WarshipCommand cmd, const int32_t p
 
 	case WarshipCommand::kAttack:
 		if (MapObject* target = get_attack_target(game); target != nullptr) {
-			start_battle(game, Battle(target, true));
+			assert((target->descr().type() == MapObjectType::PORTDOCK) ^ parameters.empty());
+			start_battle(game, Battle(target, parameters, true));
 		}
 		return;
 
 	case WarshipCommand::kRetreat:
+		assert(parameters.empty());
 		if (destination_.get(game) == nullptr) {
 			if (PortDock* dest = find_nearest_port(game); dest != nullptr) {
 				set_destination(game, dest);
@@ -833,7 +836,7 @@ void Ship::start_battle(Game& game, const Battle new_battle) {
 
 	// Summon someone to the defence
 	if (target->descr().type() == MapObjectType::SHIP) {
-		dynamic_cast<Ship&>(*target).start_battle(game, Battle(this, false));
+		dynamic_cast<Ship&>(*target).start_battle(game, Battle(this, {}, false));
 	}
 }
 
@@ -989,20 +992,29 @@ void Ship::battle_update(Game& game) {
 			}
 			assert(!suitable_coords.empty());
 
-			for (ShippingItem& si : items_) {
+			assert(!battles_.back().attack_soldier_serials.empty());
+			for (Serial serial : battles_.back().attack_soldier_serials) {
+				auto it = std::find_if(items_.begin(), items_.end(), [serial](const ShippingItem& si) {
+					return si.get_object_serial() == serial;
+				});
+				if (it == items_.end()) {
+					continue;
+				}
+
 				Worker* worker;
-				si.get(game, nullptr, &worker);
+				it->get(game, nullptr, &worker);
 				assert(worker != nullptr && worker->descr().type() == MapObjectType::SOLDIER);
 
-				si.set_location(game, nullptr);
-				si.end_shipping(game);
+				it->set_location(game, nullptr);
+				it->end_shipping(game);
 				worker->set_position(
 				   game, suitable_coords.at(game.logic_rand() % suitable_coords.size()));
 
 				worker->reset_tasks(game);
 				dynamic_cast<Soldier&>(*worker).start_task_attack(game, warehouse, false);
+
+				items_.erase(it);
 			}
-			items_.clear();
 
 			battles_.pop_back();
 		} else {
@@ -1023,7 +1035,7 @@ void Ship::battle_update(Game& game) {
 			if (nearest != nullptr) {
 				// Let the best candidate launch an attack against us. This
 				// suspends the current battle until the new fight is over.
-				dynamic_cast<Ship&>(*nearest).start_battle(game, Battle(this, true));
+				dynamic_cast<Ship&>(*nearest).start_battle(game, Battle(this, {}, true));
 			}
 			// Since ports can't defend themselves on their own, start the next round at once.
 			set_phase(Battle::Phase::kAttackersTurn);
@@ -1916,9 +1928,12 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 		for (uint8_t i = (packet_version >= 13) ? fr.unsigned_8() : 0; i != 0U; --i) {
 			const bool first = fr.unsigned_8() != 0U;
 			battle_serials_.push_back(fr.unsigned_32());
-			battles_.emplace_back(nullptr, first);
+			battles_.emplace_back(nullptr, std::vector<uint32_t>(), first);
 			battles_.back().phase = static_cast<Battle::Phase>(fr.unsigned_8());
 			battles_.back().pending_damage = fr.unsigned_32();
+			for (size_t i = fr.unsigned_32(); i > 0U; --i) {
+				battles_.back().attack_soldier_serials.push_back(fr.unsigned_32());
+			}
 			battles_.back().time_of_last_action = Time(fr);
 		}
 		hitpoints_ = (packet_version >= 13) ? fr.unsigned_32() : -1;
@@ -2085,6 +2100,10 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		fw.unsigned_32(mos.get_object_file_index_or_zero(b.opponent.get(egbase)));
 		fw.unsigned_8(static_cast<uint8_t>(b.phase));
 		fw.unsigned_32(b.pending_damage);
+		fw.unsigned_32(b.attack_soldier_serials.size());
+		for (Serial s : b.attack_soldier_serials) {
+			fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(s)));
+		}
 		b.time_of_last_action.save(fw);
 	}
 	fw.unsigned_32(hitpoints_);

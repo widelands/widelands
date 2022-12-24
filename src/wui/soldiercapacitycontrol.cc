@@ -136,9 +136,10 @@ void SoldierCapacityControl::change_soldier_capacity(const int delta) {
 	} else {
 		const int32_t new_capacity =
 		   static_cast<int32_t>(ship_->get_warship_soldier_capacity()) + delta;
+		assert(new_capacity >= 0);
 		if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
 			game->send_player_warship_command(
-			   *ship_, Widelands::WarshipCommand::kSetCapacity, new_capacity);
+			   *ship_, Widelands::WarshipCommand::kSetCapacity, {static_cast<uint32_t>(new_capacity)});
 		} else {
 			ship_->set_warship_soldier_capacity(new_capacity);
 		}
