@@ -778,7 +778,9 @@ uint32_t Ship::min_warship_soldier_capacity() const {
 	return is_on_destination_dock() ? 0U : get_nritems();
 }
 
-void Ship::warship_command(Game& game, const WarshipCommand cmd, const std::vector<uint32_t>& parameters) {
+void Ship::warship_command(Game& game,
+                           const WarshipCommand cmd,
+                           const std::vector<uint32_t>& parameters) {
 	if (get_ship_type() != ShipType::kWarship) {
 		return;
 	}
@@ -786,8 +788,8 @@ void Ship::warship_command(Game& game, const WarshipCommand cmd, const std::vect
 	switch (cmd) {
 	case WarshipCommand::kSetCapacity: {
 		assert(parameters.size() == 1);
-		warship_soldier_capacity_ = std::max(
-		   std::min(parameters.back(), get_capacity()), min_warship_soldier_capacity());
+		warship_soldier_capacity_ =
+		   std::max(std::min(parameters.back(), get_capacity()), min_warship_soldier_capacity());
 		update_warship_soldier_request(game);
 
 		// If we have too many soldiers on board now, unload the extras.

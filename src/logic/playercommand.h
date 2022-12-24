@@ -429,7 +429,11 @@ private:
 
 struct CmdWarshipCommand : public PlayerCommand {
 	CmdWarshipCommand() = default;  // For savegame loading
-	CmdWarshipCommand(const Time& t, PlayerNumber const p, Serial s, WarshipCommand c, const std::vector<uint32_t>& params)
+	CmdWarshipCommand(const Time& t,
+	                  PlayerNumber const p,
+	                  Serial s,
+	                  WarshipCommand c,
+	                  const std::vector<uint32_t>& params)
 	   : PlayerCommand(t, p), serial_(s), parameters_(params), cmd_(c) {
 	}
 

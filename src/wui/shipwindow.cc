@@ -98,7 +98,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	navigation_box_.add_space(kPadding);
 
 	if (upcast(InteractivePlayer, ipl, &ibase_); ipl != nullptr) {
-		warship_soldiers_display_ = new AttackPanel(navigation_box_, *ipl, false, [this]() { return get_soldiers(); });
+		warship_soldiers_display_ =
+		   new AttackPanel(navigation_box_, *ipl, false, [this]() { return get_soldiers(); });
 		navigation_box_.add(warship_soldiers_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		navigation_box_.add_space(kPadding);
 	} else {
@@ -157,16 +158,14 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	               [this]() { act_scout_towards(Widelands::WALK_SE); });
 	exp_bot->add(btn_scout_[Widelands::WALK_SE - 1]);
 
-	btn_warship_retreat_ = make_button(
-	   &warship_controls_, "war_retreat", _("Retreat to an own port"), kImgWarshipRetreat, false,
-	   [this]() { act_warship_retreat(); });
+	btn_warship_retreat_ =
+	   make_button(&warship_controls_, "war_retreat", _("Retreat to an own port"),
+	               kImgWarshipRetreat, false, [this]() { act_warship_retreat(); });
 	warship_controls_.add(btn_warship_retreat_);
 
 	btn_warship_attack_ =
 	   make_button(&warship_controls_, "war_attack", _("Attack the nearest enemy port or warship"),
-	               kImgWarshipAttack, false, [this]() {
-						act_warship_attack();
-					});
+	               kImgWarshipAttack, false, [this]() { act_warship_attack(); });
 	warship_controls_.add(btn_warship_attack_);
 
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -266,13 +265,15 @@ void ShipWindow::set_button_visibility() {
 	}
 
 	if (warship_soldiers_display_ != nullptr) {
-		const bool warship_display = ship->get_ship_type() == Widelands::ShipType::kWarship && !ship->is_refitting();
+		const bool warship_display =
+		   ship->get_ship_type() == Widelands::ShipType::kWarship && !ship->is_refitting();
 		warship_soldiers_display_->set_visible(warship_display);
 		display_->set_visible(!warship_display);
 	}
 
 	btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
-	warship_controls_.set_visible(ibase_.egbase().is_game() && ship->get_ship_type() == Widelands::ShipType::kWarship);
+	warship_controls_.set_visible(ibase_.egbase().is_game() &&
+	                              ship->get_ship_type() == Widelands::ShipType::kWarship);
 	warship_capacity_control_->set_visible(ship->get_ship_type() == Widelands::ShipType::kWarship);
 	btn_warship_stay_->set_visible(ship->get_ship_type() == Widelands::ShipType::kWarship);
 	btn_construct_port_->set_visible(!btn_warship_stay_->is_visible());
@@ -329,7 +330,9 @@ void ShipWindow::think() {
                               _("Refit to transport ship") :
                               _("Refit to warship"));
 	btn_warship_attack_->set_enabled(can_act && ship->can_attack() &&
-			(ship->get_attack_target(ibase_.egbase())->descr().type() != Widelands::MapObjectType::PORTDOCK || warship_soldiers_display_->count_soldiers() > 0U));
+	                                 (ship->get_attack_target(ibase_.egbase())->descr().type() !=
+	                                     Widelands::MapObjectType::PORTDOCK ||
+	                                  warship_soldiers_display_->count_soldiers() > 0U));
 
 	display_->clear();
 	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
@@ -467,7 +470,8 @@ void ShipWindow::act_warship_attack() {
 	if (ship == nullptr) {
 		return;
 	}
-	ibase_.game().send_player_warship_command(*ship, Widelands::WarshipCommand::kAttack, warship_soldiers_display_->soldiers());
+	ibase_.game().send_player_warship_command(
+	   *ship, Widelands::WarshipCommand::kAttack, warship_soldiers_display_->soldiers());
 }
 
 void ShipWindow::act_warship_retreat() {

@@ -79,7 +79,10 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
 	initialization_complete();
 }
 
-AttackPanel::AttackPanel(UI::Panel& parent, InteractivePlayer& iplayer, bool can_attack, std::function<std::vector<Widelands::Soldier*>()> get_max_attackers)
+AttackPanel::AttackPanel(UI::Panel& parent,
+                         InteractivePlayer& iplayer,
+                         bool can_attack,
+                         std::function<std::vector<Widelands::Soldier*>()> get_max_attackers)
    : UI::Box(&parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      iplayer_(iplayer),
      get_max_attackers_(get_max_attackers),
@@ -128,12 +131,12 @@ std::vector<Widelands::Soldier*> AttackWindow::get_max_attackers() {
 }
 
 std::unique_ptr<UI::HorizontalSlider> AttackPanel::add_slider(UI::Box& parent,
-                                                               uint32_t width,
-                                                               uint32_t height,
-                                                               uint32_t min,
-                                                               uint32_t max,
-                                                               uint32_t initial,
-                                                               char const* hint) {
+                                                              uint32_t width,
+                                                              uint32_t height,
+                                                              uint32_t min,
+                                                              uint32_t max,
+                                                              uint32_t initial,
+                                                              char const* hint) {
 	std::unique_ptr<UI::HorizontalSlider> result(new UI::HorizontalSlider(
 	   &parent, 0, 0, width, height, min, max, initial, UI::SliderStyle::kWuiLight, hint));
 	parent.add(result.get());
@@ -141,9 +144,9 @@ std::unique_ptr<UI::HorizontalSlider> AttackPanel::add_slider(UI::Box& parent,
 }
 
 UI::Textarea& AttackPanel::add_text(UI::Box& parent,
-                                     const std::string& str,
-                                     UI::Align alignment,
-                                     const UI::FontStyle style) {
+                                    const std::string& str,
+                                    UI::Align alignment,
+                                    const UI::FontStyle style) {
 	UI::Textarea& result =
 	   *new UI::Textarea(&parent, UI::PanelStyle::kWui, style, str, UI::Align::kLeft);
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
@@ -259,7 +262,8 @@ void AttackPanel::update(bool action_on_panel) {
 	more_soldiers_->set_title(std::to_string(max_attackers));
 }
 
-void AttackPanel::init_slider(const std::vector<Widelands::Soldier*>& all_attackers, bool can_attack) {
+void AttackPanel::init_slider(const std::vector<Widelands::Soldier*>& all_attackers,
+                              bool can_attack) {
 	const size_t max_attackers = all_attackers.size();
 
 	soldiers_text_.reset(&add_text(columnbox_, slider_heading(max_attackers > 0 ? 1 : 0),
@@ -366,8 +370,8 @@ void AttackWindow::act_attack() {
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* building = target_building_.get(iplayer_.egbase());
 	if (building != nullptr) {
-		iplayer_.game().send_player_enemyflagaction(
-		   building->base_flag(), iplayer_.player_number(), attack_panel_.soldiers(), get_allow_conquer());
+		iplayer_.game().send_player_enemyflagaction(building->base_flag(), iplayer_.player_number(),
+		                                            attack_panel_.soldiers(), get_allow_conquer());
 		iplayer_.map_view()->mouse_to_field(building->get_position(), MapView::Transition::Jump);
 	}
 	die();
@@ -411,12 +415,12 @@ constexpr int kSoldierIconWidth = 32;
 constexpr int kSoldierIconHeight = 30;
 
 AttackPanel::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
-                                             AttackPanel* parent_box,
-                                             int32_t const x,
-                                             int32_t const y,
-                                             int const w,
-                                             int const h,
-                                             bool restrict_rows)
+                                            AttackPanel* parent_box,
+                                            int32_t const x,
+                                            int32_t const y,
+                                            int const w,
+                                            int const h,
+                                            bool restrict_rows)
    : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
      restricted_row_number_(restrict_rows),
      attack_box_(parent_box) {

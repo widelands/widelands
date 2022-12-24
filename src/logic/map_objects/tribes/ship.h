@@ -132,7 +132,8 @@ struct Ship : Bob {
 			kDefenderAttacking = 5,
 		};
 
-		Battle(MapObject* o, const std::vector<uint32_t>& a, bool f) : opponent(o), attack_soldier_serials(a), is_first(f) {
+		Battle(MapObject* o, const std::vector<uint32_t>& a, bool f)
+		   : opponent(o), attack_soldier_serials(a), is_first(f) {
 		}
 
 		OPtr<MapObject> opponent;

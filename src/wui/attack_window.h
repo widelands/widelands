@@ -33,7 +33,10 @@
 /** Provides the attack settings when clicking on an enemy building. */
 class AttackPanel : public UI::Box {
 public:
-	AttackPanel(UI::Panel& parent, InteractivePlayer& iplayer, bool can_attack, std::function<std::vector<Widelands::Soldier*>()> get_max_attackers);
+	AttackPanel(UI::Panel& parent,
+	            InteractivePlayer& iplayer,
+	            bool can_attack,
+	            std::function<std::vector<Widelands::Soldier*>()> get_max_attackers);
 
 	size_t count_soldiers() const;
 	std::vector<Widelands::Serial> soldiers() const;
