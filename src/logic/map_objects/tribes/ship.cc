@@ -1933,7 +1933,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			battles_.emplace_back(nullptr, std::vector<uint32_t>(), first);
 			battles_.back().phase = static_cast<Battle::Phase>(fr.unsigned_8());
 			battles_.back().pending_damage = fr.unsigned_32();
-			for (size_t i = fr.unsigned_32(); i > 0U; --i) {
+			for (size_t j = fr.unsigned_32(); j > 0U; --j) {
 				battles_.back().attack_soldier_serials.push_back(fr.unsigned_32());
 			}
 			battles_.back().time_of_last_action = Time(fr);
