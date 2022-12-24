@@ -42,7 +42,10 @@ public:
 	                                           const std::string& filename) const;
 
 	// Saves the game, overwrites file, handles errors
-	bool save_game(Widelands::Game&, const std::string& filename, std::optional<FileSystem::Type> fstype, std::string* error_str = nullptr);
+	bool save_game(Widelands::Game&,
+	               const std::string& filename,
+	               std::optional<FileSystem::Type> fstype,
+	               std::string* error_str = nullptr);
 
 	const std::string get_cur_filename() {
 		return current_filename_;
