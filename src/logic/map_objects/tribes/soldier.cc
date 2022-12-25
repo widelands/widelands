@@ -962,6 +962,11 @@ void Soldier::attack_update(Game& game, State& state) {
 		}
 	}
 
+	if (location != nullptr && get_position() == location->get_position()) {
+		// Still at home, need to go outside first
+		return start_task_leavebuilding(game, false);
+	}
+
 	if (battle_ != nullptr) {
 		return start_task_battle(game);
 	}
