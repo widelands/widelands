@@ -388,7 +388,8 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
 			             owner().tribe().get_soldier_capacity_strings_sg()[0].c_str(),
 			             owner().tribe().get_soldier_capacity_strings_pl()[0].c_str(), stationed),
-			   stationed, StyleManager::color_tag(as_string(capacity_ - stationed), style.low_color()));
+			   stationed,
+			   StyleManager::color_tag(as_string(capacity_ - stationed), style.low_color()));
 		} else {  // Soldiers filled to capacity
 			*s = format(
 			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
@@ -402,20 +403,22 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
 			             owner().tribe().get_soldier_capacity_strings_sg()[2].c_str(),
 			             owner().tribe().get_soldier_capacity_strings_pl()[2].c_str(), stationed),
-			   present,
-			   StyleManager::color_tag(as_string(stationed - present), style.high_color()),
+			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()),
 			   StyleManager::color_tag(as_string(capacity_ - stationed), style.low_color()));
-		} else {  //Soldiers filled to capacity; some are outside
+		} else {  // Soldiers filled to capacity; some are outside
 			*s = format(
 			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
 			             owner().tribe().get_soldier_capacity_strings_sg()[3].c_str(),
 			             owner().tribe().get_soldier_capacity_strings_pl()[3].c_str(), stationed),
-			   present,
-			   StyleManager::color_tag(as_string(stationed - present), style.high_color()));
+			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()));
 		}
 	}
 
-	*s = format("%s %s", soldier_preference_ == SoldierPreference::kHeroes ? StyleManager::color_tag("↑", style.high_color()) : StyleManager::color_tag("↓", style.low_color()), StyleManager::color_tag(*s, style.medium_color()));
+	*s = format("%s %s",
+	            soldier_preference_ == SoldierPreference::kHeroes ?
+                  StyleManager::color_tag("↑", style.high_color()) :
+                  StyleManager::color_tag("↓", style.low_color()),
+	            StyleManager::color_tag(*s, style.medium_color()));
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {
