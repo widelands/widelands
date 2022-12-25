@@ -60,7 +60,8 @@ struct ItemWaresDisplay : UI::Panel {
 	void add(Widelands::WareWorker type, Widelands::DescriptionIndex index);
 
 	void draw(RenderTarget&) override;
-	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 
 private:
 	static constexpr unsigned kDefaultItemsPerRow = 7;

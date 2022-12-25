@@ -73,11 +73,14 @@ void ItemWaresDisplay::add(Widelands::WareWorker type, Widelands::DescriptionInd
 	items_.emplace_back(type, index);
 }
 
-bool ItemWaresDisplay::handle_mousemove(uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
+bool ItemWaresDisplay::handle_mousemove(
+   uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
 	const Item* i = at(x, y);
-	set_tooltip(i == nullptr ? std::string() : i->type == Widelands::wwWARE ?
-			player_.egbase().descriptions().get_ware_descr(i->index)->descname() :
-			player_.egbase().descriptions().get_worker_descr(i->index)->descname());
+	set_tooltip(i == nullptr ?
+                  std::string() :
+	            i->type == Widelands::wwWARE ?
+                  player_.egbase().descriptions().get_ware_descr(i->index)->descname() :
+                  player_.egbase().descriptions().get_worker_descr(i->index)->descname());
 	return true;
 }
 
@@ -123,16 +126,15 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 			constexpr float kZoom = 1.f;
 			const uint32_t anim_id = tribe.get_worker_descr(it.index)->main_animation();
 			const Animation& anim = g_animation_manager->get_animation(anim_id);
-			dst.blit_animation(Vector2f(
-					x + anim.hotspot().x + (kItemWidth - anim.width()) / 2.f,
-					y + anim.hotspot().y + (kItemHeight - anim.height()) / 2.f
-				),
-			                   Widelands::Coords::null(), kZoom,
-			                   anim_id, Time(0),
+			dst.blit_animation(Vector2f(x + anim.hotspot().x + (kItemWidth - anim.width()) / 2.f,
+			                            y + anim.hotspot().y + (kItemHeight - anim.height()) / 2.f),
+			                   Widelands::Coords::null(), kZoom, anim_id, Time(0),
 			                   &player().get_playercolor());
 		} else {
 			if (const Image* icon = tribe.get_ware_descr(it.index)->icon(); icon != nullptr) {
-				dst.blit(Vector2i(x + (kItemWidth - icon->width()) / 2.f, y + (kItemHeight - icon->height()) / 2.f), icon);
+				dst.blit(Vector2i(x + (kItemWidth - icon->width()) / 2.f,
+				                  y + (kItemHeight - icon->height()) / 2.f),
+				         icon);
 			}
 		}
 	}
