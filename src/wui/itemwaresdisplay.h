@@ -19,6 +19,7 @@
 #ifndef WL_WUI_ITEMWARESDISPLAY_H
 #define WL_WUI_ITEMWARESDISPLAY_H
 
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
 #include "ui_basic/panel.h"
 
@@ -31,33 +32,38 @@ class Player;
  * as seen in the @ref ShipWindow.
  */
 struct ItemWaresDisplay : UI::Panel {
+	struct Item {
+		Item(Widelands::WareWorker ww, Widelands::DescriptionIndex di) : type(ww), index(di) {
+		}
+		Widelands::WareWorker type;
+		Widelands::DescriptionIndex index;
+	};
+
 	ItemWaresDisplay(UI::Panel* parent, const Widelands::Player& player);
 
-	const Widelands::Player& player() const {
+	[[nodiscard]] const Widelands::Player& player() const {
 		return player_;
 	}
 
-	uint32_t capacity() const {
+	[[nodiscard]] uint32_t capacity() const {
 		return capacity_;
 	}
 	void set_capacity(uint32_t cap);
 
-	uint32_t items_per_row() const {
+	[[nodiscard]] uint32_t items_per_row() const {
 		return items_per_row_;
 	}
 
+	[[nodiscard]] const Item* at(int32_t x, int32_t y) const;
+
 	void clear();
-	void add(bool worker, Widelands::DescriptionIndex index);
+	void add(Widelands::WareWorker type, Widelands::DescriptionIndex index);
 
 	void draw(RenderTarget&) override;
+	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 
 private:
-	static constexpr unsigned kDefaultItemsPerRow = 9;
-
-	struct Item {
-		bool worker;
-		Widelands::DescriptionIndex index;
-	};
+	static constexpr unsigned kDefaultItemsPerRow = 7;
 
 	void recalc_desired_size();
 

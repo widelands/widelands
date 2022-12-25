@@ -262,10 +262,10 @@ void ShipWindow::think() {
 		item.get(ibase_.egbase(), &ware, &worker);
 
 		if (ware != nullptr) {
-			display_->add(false, ware->descr_index());
+			display_->add(Widelands::wwWARE, ware->descr_index());
 		}
 		if (worker != nullptr) {
-			display_->add(true, worker->descr().worker_index());
+			display_->add(Widelands::wwWORKER, worker->descr().worker_index());
 		}
 	}
 
