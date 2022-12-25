@@ -414,11 +414,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 		}
 	}
 
-	*s = format("%s %s",
-	            soldier_preference_ == SoldierPreference::kHeroes ?
-                  StyleManager::color_tag("↑", style.high_color()) :
-                  StyleManager::color_tag("↓", style.low_color()),
-	            StyleManager::color_tag(*s, style.medium_color()));
+	*s = StyleManager::color_tag(format("%s %s", soldier_preference_ == SoldierPreference::kHeroes ? "↑" : "↓", *s), style.medium_color());
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {
