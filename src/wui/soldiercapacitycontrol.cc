@@ -112,7 +112,7 @@ uint32_t SoldierCapacityControl::get_min_capacity() const {
                                  ship_->min_warship_soldier_capacity();
 }
 uint32_t SoldierCapacityControl::get_max_capacity() const {
-	return building_ != nullptr ? building_->soldier_control()->min_soldier_capacity() :
+	return building_ != nullptr ? building_->soldier_control()->max_soldier_capacity() :
                                  ship_->get_capacity();
 }
 
