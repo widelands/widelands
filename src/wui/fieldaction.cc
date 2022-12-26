@@ -648,8 +648,8 @@ void FieldActionWindow::add_buttons_road(bool flag) {
 
 	add_button(&buildbox, "cancel_road", kImgButtonAbort, &FieldActionWindow::act_abort_buildroad,
 	           _("Cancel road"));
-	add_button(&buildbox, "goto_buildroadstart", kImgButtonGoto, &FieldActionWindow::act_goto_buildroadstart,
-	           _("Go to road"));
+	add_button(&buildbox, "goto_buildroadstart", kImgButtonGoto,
+	           &FieldActionWindow::act_goto_buildroadstart, _("Go to road"));
 
 	const Widelands::Map& map = ibase().egbase().map();
 	if (map.get_waterway_max_length() >= 2 &&
@@ -674,8 +674,8 @@ void FieldActionWindow::add_buttons_waterway(bool flag) {
 
 	add_button(&buildbox, "cancel_waterway", kImgButtonAbort,
 	           &FieldActionWindow::act_abort_buildwaterway, _("Cancel waterway"));
-	add_button(&buildbox, "goto_buildwaterwaystart", kImgButtonGoto, &FieldActionWindow::act_goto_buildroadstart,
-	           _("Go to waterway"));
+	add_button(&buildbox, "goto_buildwaterwaystart", kImgButtonGoto,
+	           &FieldActionWindow::act_goto_buildroadstart, _("Go to waterway"));
 	add_button(&buildbox, "cancel_waterway_build_road", kImgButtonBuildRoad,
 	           &FieldActionWindow::act_abort_buildwaterway_and_start_buildroad,
 	           _("Cancel waterway and start building road"));
@@ -864,7 +864,10 @@ void FieldActionWindow::act_goto_buildroadstart() {
 	if (!ibase().in_road_building_mode()) {
 		return;
 	}
-	ibase().map_view()->scroll_to_field((SDL_GetModState() & KMOD_CTRL) != 0 ? ibase().get_build_road_end() : ibase().get_build_road_start(), MapView::Transition::Smooth);
+	ibase().map_view()->scroll_to_field((SDL_GetModState() & KMOD_CTRL) != 0 ?
+                                          ibase().get_build_road_end() :
+                                          ibase().get_build_road_start(),
+	                                    MapView::Transition::Smooth);
 }
 
 void FieldActionWindow::act_abort_buildroad_and_start_buildwaterway() {
