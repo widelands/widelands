@@ -737,11 +737,13 @@ void Ship::refit(Game& game, const ShipType type) {
 	}
 }
 
-PortDock* Ship::find_nearest_port(EditorGameBase& egbase) {
+PortDock* Ship::find_nearest_port(Game& game) {
 	const bool in_fleet = fleet_ != nullptr;
+	Economy* eco_ware = ware_economy_;
+	Economy* eco_worker = worker_economy_;
 
 	if (!in_fleet) {
-		init_fleet(egbase);
+		init_fleet(game);
 		assert(fleet_ != nullptr);
 	}
 
@@ -750,8 +752,8 @@ PortDock* Ship::find_nearest_port(EditorGameBase& egbase) {
 	for (PortDock* pd : fleet_->get_ports()) {
 		Path path;
 		int32_t d = -1;
-		calculate_sea_route(egbase, *pd, &path);
-		egbase.map().calc_cost(path, &d, nullptr);
+		calculate_sea_route(game, *pd, &path);
+		game.map().calc_cost(path, &d, nullptr);
 		assert(d >= 0);
 		if (nearest == nullptr || d < dist) {
 			dist = d;
@@ -760,8 +762,10 @@ PortDock* Ship::find_nearest_port(EditorGameBase& egbase) {
 	}
 
 	if (!in_fleet) {
-		fleet_->remove_ship(egbase, this);
+		fleet_->remove_ship(game, this);
 		assert(fleet_ == nullptr);
+		set_economy(game, eco_ware, wwWARE);
+		set_economy(game, eco_worker, wwWORKER);
 	}
 
 	return nearest;

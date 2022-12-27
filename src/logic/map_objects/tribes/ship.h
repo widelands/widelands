@@ -314,7 +314,7 @@ private:
 	bool init_fleet(EditorGameBase&);
 	void set_fleet(ShipFleet* fleet);
 
-	PortDock* find_nearest_port(EditorGameBase& egbase);
+	PortDock* find_nearest_port(Game& game);
 
 	void send_message(Game& game,
 	                  const std::string& title,
