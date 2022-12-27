@@ -252,7 +252,11 @@ std::vector<Widelands::Soldier*> ShipWindow::get_soldiers() const {
 	for (size_t i = 0; i < ship->get_nritems(); ++i) {
 		Widelands::Worker* worker;
 		ship->get_item(i).get(ibase_.egbase(), nullptr, &worker);
-		soldiers.push_back(dynamic_cast<Widelands::Soldier*>(worker));
+		if (worker != nullptr && worker->descr().type() == Widelands::MapObjectType::SOLDIER) {
+			soldiers.push_back(dynamic_cast<Widelands::Soldier*>(worker));
+		}
+		// TODO(Nordfriese): During refitting, we may also have other wares on board.
+		// Do we want to show these as well somewhere (maybe in the ItemWaresDisplay)?
 	}
 
 	return soldiers;
