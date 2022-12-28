@@ -2303,7 +2303,7 @@ msgstr "Buit"
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
-msgstr ""
+msgstr "Es fa un enviament a %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
@@ -2311,7 +2311,7 @@ msgstr ""
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
-msgstr ""
+msgstr "Es navega cap a %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
@@ -2520,13 +2520,13 @@ msgstr "Vaixell %d"
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
-msgstr ""
+msgstr "Port %d"
 
 #: ../../src/logic/player.cc:1974
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
-msgstr ""
+msgstr "Magatzem %d"
 
 #: ../../src/logic/playercommand.cc:2200
 #: ../../src/wlapplication_options.cc:607
@@ -9444,7 +9444,7 @@ msgstr "Vés al destí"
 #: ../../src/wui/shipwindow.cc:240
 #, c-format
 msgid "Go to destination (%s)"
-msgstr ""
+msgstr "Vés al destí (%s)"
 
 #: ../../src/wui/soldier_statistics_menu.cc:72
 #: ../../src/wui/soldier_statistics_menu.cc:164

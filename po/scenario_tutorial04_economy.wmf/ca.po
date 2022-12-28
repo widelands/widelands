@@ -826,14 +826,14 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr ""
+msgstr "Guardar recursos és una espasa de doble fil. Per una banda, els béns en estoc són útils per a amortir les fluctuacions de l'economia, que solen ocórrer de tant en tant. D'altra banda, qualsevol bé que estigui en un magatzem i que no es processi segurament estarà desaprofitat. Trobar l'equilibri entre acumular desmesuradament i la producció immediata de les cadenes de producció és un dels reptes més profunds per a perfeccionar l'economia. Quan tingueu dubtes, millor penseu en tenir una reserva dels béns més importants."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
-msgstr ""
+msgstr "Per a facilitar el procés de canviar entre diferents situacions econòmiques, podeu desar i aplicar perfils econòmics a la part de sota de la finestra d'opcions de l'economia. N'hi ha dos de preconfigurats: un perfil per a emmagatzemar i un altre per a produir."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
 msgid ""
@@ -842,7 +842,7 @@ msgid ""
 "need. However, sometimes it can be useful to stockpile a ware in very large "
 "quantities. To achieve this, the economy options window allows you to set "
 "the target of a ware to infinite, so that it will always be produced."
-msgstr ""
+msgstr "La major part del temps, les opcions de l'economia són una eina útil per a assegurar que els recursos no es malgasten per a produir béns que l'economia no necessita. No obstant, a vegades pot ser útil acumular un bé en grans quantitats. Per a fer-ho, la finestra d'opcions de l'economia us permet establir la quantitat objectiu d'un bé a infinit. Així, se'n produirà indefinidament."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
 msgid ""
@@ -851,7 +851,7 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr ""
+msgstr "El mateix botó també es pot trobar a la finestra dels edificis de producció. Amb aquest botó, es pot fer que el lloc produeixi indefinidament, sigui quina sigui la configuració de l'economia. Això pot ser útil, per exemple, per a que es produeixin més materials de construcció a prop de la frontera encara que l'estoc estigui ple en altres magatzems lluny del lloc on els necessiteu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
