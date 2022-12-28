@@ -346,6 +346,8 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 				// Arrived at destination, now unload and refit
 				set_destination(game, nullptr);
 				for (ShippingItem& si : items_) {
+					si.set_economy(game, nullptr, wwWARE);
+					si.set_economy(game, nullptr, wwWORKER);
 					d->shipping_item_arrived(game, si);
 				}
 				items_.clear();
@@ -1009,7 +1011,9 @@ void Ship::battle_update(Game& game) {
 
 				Worker* worker;
 				it->get(game, nullptr, &worker);
-				assert(worker != nullptr && worker->descr().type() == MapObjectType::SOLDIER);
+				if (worker == nullptr || worker->descr().type() != MapObjectType::SOLDIER) {
+					continue;
+				}
 
 				it->set_location(game, nullptr);
 				it->end_shipping(game);
