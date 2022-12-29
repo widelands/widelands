@@ -203,6 +203,7 @@ function mission_thread()
    end
 
    scroll_to_field(map.player_slots[2].starting_field)
+   set_objective_done(o)
    sleep(1500)
    campaign_message_box(victory_1)
    campaign_message_box(victory_2)
