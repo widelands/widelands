@@ -179,8 +179,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	buttons->add_space(kPadding);
 
 	btn_warship_retreat_ =
-	   make_button(buttons, "war_retreat", _("Retreat to an own port"),
-	               kImgWarshipRetreat, false, [this]() { act_warship_retreat(); });
+	   make_button(buttons, "war_retreat", _("Retreat to an own port"), kImgWarshipRetreat, false,
+	               [this]() { act_warship_retreat(); });
 	buttons->add(btn_warship_retreat_);
 
 	btn_cancel_expedition_ =
