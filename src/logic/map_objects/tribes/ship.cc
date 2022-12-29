@@ -148,7 +148,11 @@ private:
 struct FindNodeAttackTarget {
 	explicit FindNodeAttackTarget(const Widelands::Ship& s) : ship_(s) {
 	}
-	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords& f) const {
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& f) const {
+		if (ship_.owner().get_vision(egbase.map().get_index(f)) != VisibleState::kVisible) {
+			return false;
+		}
+
 		if (ship_.get_nritems() > 0 && f.field->get_immovable() != nullptr &&
 		    f.field->get_immovable()->descr().type() == MapObjectType::PORTDOCK &&
 		    ship_.owner().is_hostile(
