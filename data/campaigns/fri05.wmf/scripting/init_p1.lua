@@ -16,7 +16,6 @@ for i,f in ipairs({
    map:get_field(95, 181),
    map:get_field(97, 174),
    map:get_field(95, 198),
-   map:get_field(90, 204),
 }) do
    p1:place_ship(f)
 end

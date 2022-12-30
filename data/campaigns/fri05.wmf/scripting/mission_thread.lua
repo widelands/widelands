@@ -100,60 +100,119 @@ end
 function mission_thread()
    include "map:scripting/init_p2.lua"
    run(check_fish)
-   campaign_message_box(intro_1)
-   campaign_message_box(intro_2)
-   campaign_message_box(intro_3)
-   campaign_message_box(intro_4)
-
-   scroll_to_field(map.player_slots[1].starting_field)
    include "map:scripting/init_p1.lua"
-   p1:reveal_fields(map.player_slots[2].starting_field:region(9))
+   -- First prepare for scripted vision in the latter
+   local first_field = map:get_field(94, 145)
    local reveal_fields = {}
+   local owned_fields ={}
+   local land_fields = {}
    for x=0,121 do
       for y=17,240 do
          local f = map:get_field(x, y)
          p2:reveal_fields({f})
          if p1:sees_field(f) then
-            p1:reveal_fields({f})  -- Make currently seen fields permanently visible without hiding them first
+            table.insert(owned_fields, f)
+         elseif not f:has_caps("swimmable") then
+            table.insert(land_fields, f)
          else
             table.insert(reveal_fields, f)
          end
+         p1:hide_fields({f}, "permanent")
       end
    end
-   run(function()
-      reveal_randomly(p1, reveal_fields, 100)
-      reveal_fields = nil
-   end)
-   sleep(5000)
+   local reveal = {}
+   for i=0,6 do
+      reveal[i] ={}
+   end
+   for id, f in ipairs(reveal_fields) do
+      table.insert(reveal[id % 7],f)
+   end
+   reveal_fields = nil
 
+   -- start thread
+   campaign_message_box(intro_1)
+   campaign_message_box(intro_2)
+   campaign_message_box(intro_3)
+
+   p1:place_ship(first_field)
+   scroll_to_field(first_field)
+   reveal_concentric(p1, first_field, 9)
+   first_field = nil
+
+   campaign_message_box(intro_4)
+   sleep(1000)
    campaign_message_box(intro_5)
+   reveal_randomly(p1, owned_fields, 1000, false)
+   owned_fields = nil
+
    campaign_message_box(intro_6)
    campaign_message_box(intro_7)
 
    scroll_to_field(map.player_slots[2].starting_field)
-   sleep(5000)
+   reveal_concentric(p1, map.player_slots[2].starting_field, 11)
+   sleep(2000)
    scroll_to_field(map.player_slots[1].starting_field)
 
    campaign_message_box(intro_8)
    campaign_message_box(intro_9)
    campaign_message_box(intro_10)
    local o = add_campaign_objective(obj_fight)
-   sleep(1500)
 
    campaign_message_box(trade_1)
+   reveal_randomly(p1, land_fields, 1000, false)
+   land_fields = nil
    campaign_message_box(trade_2)
+
+   run(function()
+      reveal_randomly(p1, reveal[0], 1000, false)
+   end)
+   run(function()
+      reveal_randomly(p1, reveal[1], 1000, false)
+   end)
+   run(function()
+      reveal_randomly(p1, reveal[2], 1000, false)
+   end)
+   run(function()
+      reveal_randomly(p1, reveal[3], 1000, false)
+   end)
+   run(function()
+      reveal_randomly(p1, reveal[4], 1000, false)
+   end)
+   run(function()
+      reveal_randomly(p1, reveal[5], 1000, false)
+   end)
+   run(function()
+      reveal_randomly(p1, reveal[6], 1000, false)
+   end)
+   reveal = nil
 
    for i,f in ipairs({
       map:get_field(75, 107),
-      map:get_field(55,  75),
-      map:get_field(33,  72),
+      map:get_field(70, 99),
+      map:get_field(65, 91),
+      map:get_field(60, 83),
+      map:get_field(55, 75),
+      map:get_field(50, 74),
+      map:get_field(44, 73),
+      map:get_field(39, 73),
+      map:get_field(33, 72),
+      map:get_field(41, 83),
+      map:get_field(49, 94),
+      map:get_field(57, 106),
       map:get_field(65, 117),
+      map:get_field(69, 128),
+      map:get_field(72, 139),
+      map:get_field(75, 150),
       map:get_field(79, 161),
+      map:get_field(82, 165),
+      map:get_field(84, 169),
+      map:get_field(86, 173),
       map:get_field(89, 177),
    }) do
-      sleep(750)
+      sleep(100)
       scroll_to_field(f)
    end
+   scroll_to_field(map.player_slots[1].starting_field)
 
    sleep(1000)
    campaign_message_box(trade_3)
