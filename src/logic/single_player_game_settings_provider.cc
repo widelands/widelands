@@ -78,6 +78,14 @@ void SinglePlayerGameSettingsProvider::set_peaceful_mode(bool peace) {
 	s.peaceful = peace;
 }
 
+bool SinglePlayerGameSettingsProvider::is_fogless() {
+	return s.fogless;
+}
+
+void SinglePlayerGameSettingsProvider::set_fogless(bool fogless) {
+	s.fogless = fogless;
+}
+
 bool SinglePlayerGameSettingsProvider::get_custom_starting_positions() {
 	return s.custom_starting_positions;
 }

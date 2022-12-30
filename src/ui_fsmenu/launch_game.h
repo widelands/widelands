@@ -48,6 +48,7 @@ public:
 
 	/// Enables or disables the custom_starting_positions checkbox.
 	void update_custom_starting_positions();
+	void update_fogless();
 
 protected:
 	std::unique_ptr<LuaInterface> lua_;
@@ -83,6 +84,7 @@ protected:
 	                                                 const std::set<std::string>& tags) const;
 
 	void toggle_peaceful();
+	void toggle_fogless();
 	void toggle_custom_starting_positions();
 	bool should_write_replay() const;
 
@@ -94,7 +96,7 @@ protected:
 	UI::MultilineTextarea warn_desyncing_addon_;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::SpinBox win_condition_duration_;
-	UI::Checkbox peaceful_, custom_starting_positions_;
+	UI::Checkbox peaceful_, fogless_, custom_starting_positions_;
 	UI::Button* choose_map_;
 	UI::Button* choose_savegame_;
 	std::string last_win_condition_;
@@ -106,7 +108,6 @@ protected:
 
 private:
 	void add_all_widgets();
-	void add_behaviour_to_widgets();
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_GAME_H

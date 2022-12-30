@@ -675,6 +675,7 @@ void WLApplication::init_and_run_game_from_template() {
 	}
 
 	settings->set_peaceful_mode(section.get_bool("peaceful", false));
+	settings->set_fogless(section.get_bool("fogless", false));
 	settings->set_custom_starting_positions(section.get_bool("custom_starting_positions", false));
 
 	{

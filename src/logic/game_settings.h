@@ -184,6 +184,9 @@ struct GameSettings {
 	/// Is all fighting forbidden?
 	bool peaceful{false};
 
+	/// Is fog of war disabled?
+	bool fogless{false};
+
 	// Whether players may pick their own starting positions
 	bool custom_starting_positions{false};
 
@@ -250,6 +253,9 @@ struct GameSettingsProvider {
 
 	virtual void set_peaceful_mode(bool peace) = 0;
 	virtual bool is_peaceful_mode() = 0;
+
+	virtual void set_fogless(bool fogless) = 0;
+	virtual bool is_fogless() = 0;
 
 	virtual void set_custom_starting_positions(bool) = 0;
 	virtual bool get_custom_starting_positions() = 0;

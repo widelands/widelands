@@ -1400,6 +1400,16 @@ void GameHost::set_peaceful_mode(bool peace) {
 	broadcast(packet);
 }
 
+void GameHost::set_fogless(bool fogless) {
+	d->settings.fogless = fogless;
+
+	// Broadcast changes
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_FOGLESS);
+	packet.unsigned_8(fogless ? 1 : 0);
+	broadcast(packet);
+}
+
 void GameHost::set_custom_starting_positions(bool c) {
 	d->settings.custom_starting_positions = c;
 
@@ -1778,6 +1788,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.reset();
 	packet.unsigned_8(NETCMD_PEACEFUL_MODE);
 	packet.unsigned_8(d->settings.peaceful ? 1 : 0);
+	d->net->send(client.sock_id, packet);
+
+	packet.reset();
+	packet.unsigned_8(NETCMD_FOGLESS);
+	packet.unsigned_8(d->settings.fogless ? 1 : 0);
 	d->net->send(client.sock_id, packet);
 
 	packet.reset();
@@ -2402,6 +2417,7 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	case NETCMD_WIN_CONDITION:
 	case NETCMD_WIN_CONDITION_DURATION:
 	case NETCMD_PEACEFUL_MODE:
+	case NETCMD_FOGLESS:
 	case NETCMD_CUSTOM_STARTING_POSITIONS:
 	case NETCMD_LAUNCH:
 		if (d->game ==

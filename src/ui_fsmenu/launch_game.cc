@@ -93,6 +93,8 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                              60),
      peaceful_(
         &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
+     fogless_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("No fog of war")),
      custom_starting_positions_(&right_column_content_box_,
                                 UI::PanelStyle::kFsMenu,
                                 Vector2i::zero(),
@@ -126,6 +128,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	win_condition_duration_.changed.connect([this]() { win_condition_duration_changed(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
+	fogless_.changed.connect([this]() { toggle_fogless(); });
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
 	if (choose_map_ != nullptr) {
 		choose_map_->sigclicked.connect([this]() { clicked_select_map(); });
@@ -137,7 +140,6 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 
 	lua_.reset(new LuaInterface());
 	add_all_widgets();
-	add_behaviour_to_widgets();
 
 	layout();
 
@@ -164,6 +166,8 @@ void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&peaceful_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
+	right_column_content_box_.add(&fogless_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&custom_starting_positions_, UI::Box::Resizing::kFullSize);
 	if (choose_map_ != nullptr) {
 		right_column_content_box_.add_space(3 * kPadding);
@@ -175,10 +179,6 @@ void LaunchGame::add_all_widgets() {
 	}
 }
 
-void LaunchGame::add_behaviour_to_widgets() {
-	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
-	peaceful_.changed.connect([this]() { toggle_peaceful(); });
-}
 void LaunchGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
@@ -252,6 +252,26 @@ void LaunchGame::update_custom_starting_positions() {
 	} else {
 		custom_starting_positions_.set_tooltip(_(
 		   "Allow the players to choose their own starting positions at the beginning of the game"));
+	}
+}
+
+void LaunchGame::update_fogless() {
+	const GameSettings& settings = settings_.settings();
+	const bool forbidden = settings.scenario || settings.savegame;
+	if (forbidden || !settings_.can_change_map()) {
+		fogless_.set_enabled(false);
+		if (forbidden) {
+			fogless_.set_state(false);
+		}
+	} else {
+		fogless_.set_enabled(true);
+	}
+	if (settings_.settings().scenario) {
+		fogless_.set_tooltip(_("Player vision is set by the scenario"));
+	} else if (settings_.settings().savegame) {
+		fogless_.set_tooltip(_("Player vision is set by the saved game"));
+	} else {
+		fogless_.set_tooltip(_("Give all players permanent vision of the entire map"));
 	}
 }
 
@@ -383,6 +403,10 @@ void LaunchGame::win_condition_duration_changed() {
 
 void LaunchGame::toggle_peaceful() {
 	settings_.set_peaceful_mode(peaceful_.get_state());
+}
+
+void LaunchGame::toggle_fogless() {
+	settings_.set_fogless(fogless_.get_state());
 }
 
 void LaunchGame::toggle_custom_starting_positions() {

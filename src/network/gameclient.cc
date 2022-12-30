@@ -556,6 +556,14 @@ bool GameClient::is_peaceful_mode() {
 	return d->settings.peaceful;
 }
 
+void GameClient::set_fogless(bool fogless) {
+	d->settings.fogless = fogless;
+}
+
+bool GameClient::is_fogless() {
+	return d->settings.fogless;
+}
+
 void GameClient::set_custom_starting_positions(bool c) {
 	d->settings.custom_starting_positions = c;
 }
@@ -1185,6 +1193,9 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		break;
 	case NETCMD_PEACEFUL_MODE:
 		d->settings.peaceful = (packet.unsigned_8() != 0u);
+		break;
+	case NETCMD_FOGLESS:
+		d->settings.fogless = (packet.unsigned_8() != 0u);
 		break;
 	case NETCMD_CUSTOM_STARTING_POSITIONS:
 		d->settings.custom_starting_positions = (packet.unsigned_8() != 0u);

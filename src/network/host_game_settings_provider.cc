@@ -200,6 +200,14 @@ bool HostGameSettingsProvider::is_peaceful_mode() {
 	return HostGameSettingsProvider::settings().peaceful;
 }
 
+void HostGameSettingsProvider::set_fogless(bool fogless) {
+	host_->set_fogless(fogless);
+}
+
+bool HostGameSettingsProvider::is_fogless() {
+	return HostGameSettingsProvider::settings().fogless;
+}
+
 void HostGameSettingsProvider::set_custom_starting_positions(bool c) {
 	host_->set_custom_starting_positions(c);
 }
