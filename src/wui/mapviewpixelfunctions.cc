@@ -89,9 +89,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 	Widelands::Coords result_node;
 
 	const uint16_t col_number = x / (kTriangleWidth / 2);
-	uint16_t row_number = (y + kHeightFactor * MAX_FIELD_HEIGHT) / kTriangleHeight;
+	int16_t row_number = (y + kHeightFactor * MAX_FIELD_HEIGHT) / kTriangleHeight;
 	int16_t next_row_number;
-	assert(row_number < mapheight);
 	const uint32_t left_col = col_number / 2;
 	uint16_t right_col = (col_number + 1) / 2;
 	if (right_col == mapwidth) {
@@ -106,6 +105,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 	//  between them goes in the direction of the '/' character. When slash is
 	//  false, the edge goes in the direction of the '\' character.
 	uint16_t screen_y_base = row_number * kTriangleHeight;
+	row_number %= mapheight;
 	int32_t upper_screen_dy;
 	int32_t lower_screen_dy =
 	   screen_y_base -
