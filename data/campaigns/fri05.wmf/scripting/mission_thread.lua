@@ -104,7 +104,7 @@ function mission_thread()
    -- First prepare for scripted vision in the latter
    local first_field = map:get_field(94, 145)
    local reveal_fields = {}
-   local owned_fields ={}
+   local owned_fields = {}
    local land_fields = {}
    for x=0,121 do
       for y=17,240 do
@@ -121,11 +121,11 @@ function mission_thread()
       end
    end
    local reveal = {}
-   for i=0,6 do
-      reveal[i] ={}
+   for i=1,6 do
+      reveal[i] = {}
    end
    for id, f in ipairs(reveal_fields) do
-      table.insert(reveal[id % 7],f)
+      table.insert(reveal[(id % 6) + 1], f)
    end
    reveal_fields = nil
 
@@ -163,27 +163,12 @@ function mission_thread()
    land_fields = nil
    campaign_message_box(trade_2)
 
-   run(function()
-      reveal_randomly(p1, reveal[0], 1000, false)
-   end)
-   run(function()
-      reveal_randomly(p1, reveal[1], 1000, false)
-   end)
-   run(function()
-      reveal_randomly(p1, reveal[2], 1000, false)
-   end)
-   run(function()
-      reveal_randomly(p1, reveal[3], 1000, false)
-   end)
-   run(function()
-      reveal_randomly(p1, reveal[4], 1000, false)
-   end)
-   run(function()
-      reveal_randomly(p1, reveal[5], 1000, false)
-   end)
-   run(function()
-      reveal_randomly(p1, reveal[6], 1000, false)
-   end)
+   local function run_reveal(array)
+      reveal_randomly(p1, array, 1000, false)
+   end
+   for i=1,6 do
+      run(run_reveal, reveal[i])
+   end
    reveal = nil
 
    for i,f in ipairs({
