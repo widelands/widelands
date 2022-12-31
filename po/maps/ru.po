@@ -331,7 +331,7 @@ msgstr "Мореплавание"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr "Данный урок научит вас мореплаванию, управлению судами и портами, а также использованию паромов и фарватеров."
+msgstr "Данный урок научит вас мореплаванию, управлению судами и портами, а также использованию паромов и переправ."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -706,7 +706,7 @@ msgid ""
 "from glaciers in the mountains through hills and flatlands into the sea. "
 "Gold is a much rarer resource compared to coal and iron. Different resources"
 " are often found at some distance to each other."
-msgstr "Сбалансированная карта для 8ми игроков с правдоподобным рельефом. Реки здесь стекают с ледников, с гор и холмов, пока не достигают моря. Золото встречается существенно реже угля и железа. Ресурсы часто удалены друг от друга."
+msgstr "Сбалансированная карта для 8-ми игроков с правдоподобным рельефом. Реки здесь стекают с ледников, с гор и холмов, пока не достигают моря. Золото встречается существенно реже угля и железа. Ресурсы часто удалены друг от друга."
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
