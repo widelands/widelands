@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-12-22 03:00+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
@@ -25,6 +25,10 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
 msgstr "Великий потоп (автосохранение)"
+
+#: ../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
+msgid "Langeneß"
+msgstr "Лангенесс"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
@@ -488,9 +492,11 @@ msgid ""
 "in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
-"У нас кончаются кирпичи, и это сильно замедляет темп строительства. Кирпичей"
-" нам нужно немало, так что поставь еще печь по обжигу и задай этой стройке "
-"повышенный приоритет."
+"Я заметил, что у нас заканчиваются кирпичи. Это сильно замедляет "
+"строительство наших зданий, ведь для этого нужно очень много кирпичей. Нам "
+"стоит начать строительство еще одной печи для обжига кирпича и назначить ей "
+"наивысший приоритет для кирпичей в окне строительной площадки, чтобы как "
+"можно скорее устранить нехватку."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
@@ -550,7 +556,7 @@ msgid ""
 msgstr ""
 "Нам нужно построить таверну для готовки пайков. Для получения сырья нам "
 "нужен дом рыболова и коптильня (не будут же они есть рыбу сырой). Затем нам "
-"потребуется поставить ягодик который будет выращивать кустарник и дом "
+"потребуется поставить ягодник который будет выращивать кустарник и дом "
 "собирателя, который будет собирать ягоды."
 
 #. TRANSLATORS: Hauke – no rations left
@@ -765,8 +771,8 @@ msgid ""
 "true God that we will kill you all, and your souls shall be tormented in "
 "hell for ever!"
 msgstr ""
-"Это МОЙ остров! Это ВЫ сюда вторглись! С молитвой Единому мы истребим вас "
-"всех, и ваши души будут вечно гореть в аду!"
+"Это МОЙ остров! Это ВЫ сюда вторглись! С молитвой Единому Богу мы истребим "
+"вас всех, и ваши души будут вечно гореть в аду!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:305

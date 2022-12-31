@@ -215,6 +215,8 @@ msgid ""
 "You can open and close this window by clicking on the ‘Objectives’ button in"
 " the toolbar on the bottom of the screen."
 msgstr ""
+"Podeu obrir i tancar la finestra fent clic en el botó «Objectius» de la "
+"barra d’eines de la part inferior de la pantalla."
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
