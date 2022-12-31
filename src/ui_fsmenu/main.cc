@@ -248,7 +248,8 @@ void MainMenu::update_template() {
 	}
 	if (images_.empty() && !is_using_default_theme()) {
 		log_warn("No main menu backgrounds found, using fallback images");
-		for (const std::string& img : g_fs->list_directory(kDefaultTemplate + "loadscreens/mainmenu")) {
+		for (const std::string& img :
+		     g_fs->list_directory(kDefaultTemplate + "loadscreens/mainmenu")) {
 			images_.push_back(img);
 		}
 	}
