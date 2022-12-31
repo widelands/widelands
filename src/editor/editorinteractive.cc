@@ -52,7 +52,6 @@
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/playercolor.h"
-#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/addons.h"
 #include "logic/map.h"
