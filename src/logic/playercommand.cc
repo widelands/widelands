@@ -171,6 +171,10 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdPinnedNote(des);
 	case QueueCommandTypes::kShipPortName:
 		return new CmdShipPortName(des);
+	case QueueCommandTypes::kShipRefit:
+		return new CmdShipRefit(des);
+	case QueueCommandTypes::kWarshipCommand:
+		return new CmdWarshipCommand(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
