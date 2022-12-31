@@ -122,7 +122,9 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 	icon_width_ += 2 * kIconBorder;
 	icon_height_ += 2 * kIconBorder;
 
-	Widelands::Quantity maxcapacity = building.soldier_control()->max_soldier_capacity();
+	/* The +1 is because up to 1 additional soldier may be coming
+	 * to the building for the hero/rookie exchange. */
+	const Widelands::Quantity maxcapacity = building.soldier_control()->max_soldier_capacity() + 1;
 	if (maxcapacity <= kMaxColumns) {
 		cols_ = maxcapacity;
 		rows_ = 1;

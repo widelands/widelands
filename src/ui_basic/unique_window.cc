@@ -61,6 +61,7 @@ void UniqueWindow::Registry::toggle() {
 			opened();
 		} else {
 			window->die();
+			closed();
 			window = nullptr;
 		}
 	} else {

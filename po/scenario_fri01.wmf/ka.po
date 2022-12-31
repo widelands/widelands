@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-12-22 03:00+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Language-Team: Georgian (https://www.transifex.com/widelands/teams/35159/ka/)\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,10 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
+msgid "Langeneß"
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
