@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-22 03:00+0000\n"
+"POT-Creation-Date: 2022-12-28 02:57+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Karl Vest, 2020\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
@@ -7542,8 +7542,8 @@ msgid "Center view on this"
 msgstr "Vycentrovať sem pohľad"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/attack_window.cc:443 ../../src/wui/soldierlist.cc:426
-#: ../../src/wui/soldierlist.cc:488
+#: ../../src/wui/attack_window.cc:443 ../../src/wui/soldierlist.cc:428
+#: ../../src/wui/soldierlist.cc:490
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "ZD: %1$u/%2$u  ÚT: %3$u/%4$u  OB: %5$u/%6$u  UH: %7$u/%8$u"
@@ -7713,12 +7713,12 @@ msgid "Stopped"
 msgstr ""
 
 #: ../../src/wui/constructionsitewindow.cc:258
-#: ../../src/wui/soldierlist.cc:444
+#: ../../src/wui/soldierlist.cc:446
 msgid "Prefer heroes"
 msgstr ""
 
 #: ../../src/wui/constructionsitewindow.cc:261
-#: ../../src/wui/soldierlist.cc:441
+#: ../../src/wui/soldierlist.cc:443
 msgid "Prefer rookies"
 msgstr ""
 
@@ -9576,8 +9576,8 @@ msgstr ""
 msgid "Capacity"
 msgstr "Kapacita"
 
-#: ../../src/wui/soldierlist.cc:409 ../../src/wui/soldierlist.cc:431
-#: ../../src/wui/soldierlist.cc:484
+#: ../../src/wui/soldierlist.cc:411 ../../src/wui/soldierlist.cc:433
+#: ../../src/wui/soldierlist.cc:486
 msgid "Click soldier to send away"
 msgstr "Kliknutím na vojaka ho pošlete preč"
 
