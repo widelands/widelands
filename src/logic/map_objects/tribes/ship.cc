@@ -349,10 +349,25 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			} else {
 				// Arrived at destination, now unload and refit
 				set_destination(game, nullptr);
+				Warehouse* wh = d->get_warehouse();
 				for (ShippingItem& si : items_) {
-					si.set_economy(game, nullptr, wwWARE);
-					si.set_economy(game, nullptr, wwWORKER);
-					d->shipping_item_arrived(game, si);
+					/* Since the items may not have been in transit properly,
+					 * force their reception instead of doing it the normal way.
+					 */
+					WareInstance* ware;
+					Worker* worker;
+					si.get(game, &ware, &worker);
+					if (worker == nullptr) {
+						assert(ware != nullptr);
+						wh->receive_ware(game, game.descriptions().safe_ware_index(ware->descr().name()));
+						ware->remove(game);
+					} else {
+						assert(ware == nullptr);
+						worker->set_economy(nullptr, wwWARE);
+						worker->set_economy(nullptr, wwWORKER);
+						worker->set_position(game, wh->get_position());
+						wh->incorporate_worker(game, worker);
+					}
 				}
 				items_.clear();
 				ship_type_ = pending_refit_;
