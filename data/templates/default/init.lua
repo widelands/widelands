@@ -11,11 +11,9 @@
 
 -- Some elements carry custom parameters like e.g. "margin" that should be expanded upon in the future.
 
-dirname = path.dirname(__file__)
-
 -- Some common elements for reuse
-local fs_button = dirname .. "fsmenu/button.png"
-local wui_button = dirname .. "wui/button.png"
+local fs_button = "fsmenu/button.png"
+local wui_button = "wui/button.png"
 
 local fs_blue =  {0, 31, 40}
 local fs_green =  {10, 50, 0}
@@ -85,30 +83,30 @@ return {
          -- red, green, blue, alpha
          window_border_focused = {220, 220, 250, 40},
          window_border_unfocused = {50, 0, 0, 40},
-         background        = dirname .. "fsmenu/windows/background.png",
-         border_top        = dirname .. "fsmenu/windows/top.png",
-         border_bottom     = dirname .. "fsmenu/windows/bottom.png",
-         border_right      = dirname .. "fsmenu/windows/right.png",
-         border_left       = dirname .. "fsmenu/windows/left.png",
-         button_close      = dirname .. "fsmenu/windows/close.png",
-         button_pin        = dirname .. "fsmenu/windows/pin.png",
-         button_unpin      = dirname .. "fsmenu/windows/unpin.png",
-         button_minimize   = dirname .. "fsmenu/windows/minimize.png",
-         button_unminimize = dirname .. "fsmenu/windows/maximize.png",
+         background        = "fsmenu/windows/background.png",
+         border_top        = "fsmenu/windows/top.png",
+         border_bottom     = "fsmenu/windows/bottom.png",
+         border_right      = "fsmenu/windows/right.png",
+         border_left       = "fsmenu/windows/left.png",
+         button_close      = "fsmenu/windows/close.png",
+         button_pin        = "fsmenu/windows/pin.png",
+         button_unpin      = "fsmenu/windows/unpin.png",
+         button_minimize   = "fsmenu/windows/minimize.png",
+         button_unminimize = "fsmenu/windows/maximize.png",
       },
       wui = {
          window_border_focused = {220, 220, 250, 40},
          window_border_unfocused = {50, 0, 0, 40},
-         background        = dirname .. "wui/windows/background.png",
-         border_top        = dirname .. "wui/windows/top.png",
-         border_bottom     = dirname .. "wui/windows/bottom.png",
-         border_right      = dirname .. "wui/windows/right.png",
-         border_left       = dirname .. "wui/windows/left.png",
-         button_close      = dirname .. "wui/windows/close.png",
-         button_pin        = dirname .. "wui/windows/pin.png",
-         button_unpin      = dirname .. "wui/windows/unpin.png",
-         button_minimize   = dirname .. "wui/windows/minimize.png",
-         button_unminimize = dirname .. "wui/windows/maximize.png",
+         background        = "wui/windows/background.png",
+         border_top        = "wui/windows/top.png",
+         border_bottom     = "wui/windows/bottom.png",
+         border_right      = "wui/windows/right.png",
+         border_left       = "wui/windows/left.png",
+         button_close      = "wui/windows/close.png",
+         button_pin        = "wui/windows/pin.png",
+         button_unpin      = "wui/windows/unpin.png",
+         button_minimize   = "wui/windows/minimize.png",
+         button_unminimize = "wui/windows/maximize.png",
       },
    },
 

@@ -100,7 +100,6 @@ wl_library(logic_addons
     base_math
     build_info
     graphic
-    graphic_image_cache
     graphic_text_layout
     io_fileread
     io_filesystem
@@ -277,7 +276,6 @@ wl_library(logic
     editor  # TODO(Nordfriese): Needed only for an ugly temporary hack
     game_io
     graphic
-    graphic_image_cache
     graphic_color
     graphic_playercolor
     io_fileread

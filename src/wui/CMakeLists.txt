@@ -27,7 +27,6 @@ wl_library(wui_chat_ui
     chat
     graphic
     graphic_fonthandler
-    graphic_image_cache
     graphic_playercolor
     graphic_text
     graphic_text_layout
@@ -60,7 +59,7 @@ wl_library(wui_common_suggested_teams
     suggested_teams_box.h
   DEPENDS
     base
-    graphic_image_cache
+    graphic
     graphic_playercolor
     logic_constants
     ui_basic
@@ -87,7 +86,6 @@ wl_library(wui_common_gamedetails
     build_info
     game_io
     graphic
-    graphic_image_cache
     graphic_image_io
     graphic_minimap_renderer
     graphic_styles
@@ -118,7 +116,6 @@ wl_library(wui_common_mapdetails
     base
     base_exceptions
     graphic
-    graphic_image_cache
     graphic_minimap_renderer
     graphic_text_layout
     io_filesystem

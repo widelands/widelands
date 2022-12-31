@@ -59,6 +59,8 @@ A theme's directory needs to use the following directory structure:
             * winter/
                 * image1.png
                 * ...
+    * images/
+        * ...
 
 The names of all files and directories in ``loadscreens`` as well as the names ``wui/`` and ``fsmenu``
 are hardcoded, except for the names and amounts of the image files in ``loadscreens/mainmenu`` and
@@ -112,6 +114,9 @@ If any of the above images or directories is missing, a fallback image will be u
     * **windows/maximize.png** is used as the icon for the unminimize button in a minimized window's top-left corner.
     * **windows/background.png** is used as the window background. The image is tiled to fit the window's width and height.
     * **windows/top.png**, **windows/bottom.png**, **windows/left.png**, and **windows/right.png** are used as the window's upper, lower, left, and right border respectively. The images are tiled to fit the window's length.
+
+**images/**
+    This directory may contain replacement images for any image file located under the data directory's ``images`` directory.
 
 ``init.lua``
 ------------

@@ -31,19 +31,19 @@ const Image* playercolor_image(const RGBColor& clr, const std::string& image_fil
 
 	// Get from cache if we already have it
 	if (g_image_cache->has(hash)) {
-		return g_image_cache->get(hash);
+		return g_image_cache->get(hash, false);
 	}
 
 	// Check whether we have a player color mask
 	std::string color_mask_filename = image_filename;
 	replace_last(color_mask_filename, ".png", "_pc.png");
 	if (!g_fs->file_exists(color_mask_filename)) {
-		return g_image_cache->get(image_filename);
+		return g_image_cache->get(image_filename, false);
 	}
 
 	// Now calculate the image and add it to the cache
-	const Image* image = g_image_cache->get(image_filename);
-	const Image* color_mask = g_image_cache->get(color_mask_filename);
+	const Image* image = g_image_cache->get(image_filename, false);
+	const Image* color_mask = g_image_cache->get(color_mask_filename, false);
 	const int w = image->width();
 	const int h = image->height();
 	Texture* pc_image = new Texture(w, h);
@@ -51,7 +51,7 @@ const Image* playercolor_image(const RGBColor& clr, const std::string& image_fil
 	pc_image->blit_blended(Rectf(0.f, 0.f, w, h), *image, *color_mask, Rectf(0.f, 0.f, w, h), clr);
 	g_image_cache->insert(hash, std::unique_ptr<const Texture>(pc_image));
 	assert(g_image_cache->has(hash));
-	return g_image_cache->get(hash);
+	return g_image_cache->get(hash, false);
 }
 
 const Image* playercolor_image(int player_number, const std::string& image_filename) {

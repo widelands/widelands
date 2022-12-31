@@ -44,7 +44,7 @@
 
 class EditorTool;
 
-std::string editor_splash_image();
+extern const std::string kEditorSplashImage;
 
 /**
  * This is the EditorInteractive. It is like the InteractivePlayer class,

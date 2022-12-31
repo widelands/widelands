@@ -74,9 +74,7 @@
 #include "wui/interactive_base.h"
 #include "wui/toolbar.h"
 
-std::string editor_splash_image() {
-	return template_dir() + "loadscreens/editor.jpg";
-}
+const std::string kEditorSplashImage("loadscreens/editor.jpg");
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, get_config_section(), nullptr),
@@ -1120,7 +1118,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 		}
 	}
 
-	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image(), false);
+	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage, false);
 	EditorInteractive::load_world_units(&eia, egbase);
 
 	if (init == EditorInteractive::Init::kLoadMapDirectly) {

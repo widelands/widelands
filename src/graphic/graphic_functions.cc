@@ -22,7 +22,6 @@
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
-#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 
 constexpr int kTextPadding = 48;
@@ -31,7 +30,7 @@ void draw_game_tip(RenderTarget& rt,
                    const Recti& bounds,
                    const std::string& text,
                    unsigned opacity) {
-	const Image& pic_background = load_safe_template_image("loadscreens/gametips.png");
+	const Image& pic_background = *g_image_cache->get("loadscreens/gametips.png");
 	const int w = pic_background.width();
 	const int h = pic_background.height();
 	Vector2i pt(bounds.x + (bounds.w - w) / 2, bounds.y + (bounds.h - h) / 2);
