@@ -36,7 +36,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-22 03:00+0000\n"
+"POT-Creation-Date: 2022-12-28 02:57+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
@@ -2329,7 +2329,7 @@ msgstr "Leer"
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
-msgstr ""
+msgstr "Liefert nach %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
@@ -2337,7 +2337,7 @@ msgstr ""
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
-msgstr ""
+msgstr "Fährt nach %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
@@ -2546,13 +2546,13 @@ msgstr "Schiff %d"
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
-msgstr ""
+msgstr "Hafen %d"
 
 #: ../../src/logic/player.cc:1974
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
-msgstr ""
+msgstr "Lagerhaus %d"
 
 #: ../../src/logic/playercommand.cc:2200
 #: ../../src/wlapplication_options.cc:607
@@ -7507,8 +7507,8 @@ msgid "Center view on this"
 msgstr "Zentriere die Hauptansicht auf dieses Objekt"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/attack_window.cc:443 ../../src/wui/soldierlist.cc:426
-#: ../../src/wui/soldierlist.cc:488
+#: ../../src/wui/attack_window.cc:443 ../../src/wui/soldierlist.cc:428
+#: ../../src/wui/soldierlist.cc:490
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "Leben: %1$u/%2$u  Angr.: %3$u/%4$u  Vert.: %5$u/%6$u  Ausw.: %7$u/%8$u"
@@ -7678,12 +7678,12 @@ msgid "Stopped"
 msgstr "Gestoppt"
 
 #: ../../src/wui/constructionsitewindow.cc:258
-#: ../../src/wui/soldierlist.cc:444
+#: ../../src/wui/soldierlist.cc:446
 msgid "Prefer heroes"
 msgstr "Bevorzuge Helden"
 
 #: ../../src/wui/constructionsitewindow.cc:261
-#: ../../src/wui/soldierlist.cc:441
+#: ../../src/wui/soldierlist.cc:443
 msgid "Prefer rookies"
 msgstr "Bevorzuge Neulinge"
 
@@ -9470,7 +9470,7 @@ msgstr "Gehe zum Ziel"
 #: ../../src/wui/shipwindow.cc:240
 #, c-format
 msgid "Go to destination (%s)"
-msgstr ""
+msgstr "Gehe zum Ziel (%s)"
 
 #: ../../src/wui/soldier_statistics_menu.cc:72
 #: ../../src/wui/soldier_statistics_menu.cc:164
@@ -9517,8 +9517,8 @@ msgstr "×%u"
 msgid "Capacity"
 msgstr "Kapazität"
 
-#: ../../src/wui/soldierlist.cc:409 ../../src/wui/soldierlist.cc:431
-#: ../../src/wui/soldierlist.cc:484
+#: ../../src/wui/soldierlist.cc:411 ../../src/wui/soldierlist.cc:433
+#: ../../src/wui/soldierlist.cc:486
 msgid "Click soldier to send away"
 msgstr "Klicke auf einen Soldaten, um ihn wegzuschicken"
 
