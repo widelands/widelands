@@ -7529,7 +7529,7 @@ msgstr "Адриатика"
 #: ../../data/tribes/ships/empire/init.lua:36
 msgctxt "shipname"
 msgid "Adamas"
-msgstr "Алмаз"
+msgstr "Адамант"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:38
@@ -7637,7 +7637,7 @@ msgstr "Цезарь"
 #: ../../data/tribes/ships/empire/init.lua:72
 msgctxt "shipname"
 msgid "Cervus"
-msgstr "Олень"
+msgstr "Цервус"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:74
@@ -7709,7 +7709,7 @@ msgstr "Гладиатор"
 #: ../../data/tribes/ships/empire/init.lua:96
 msgctxt "shipname"
 msgid "Gloria Imperii"
-msgstr "Слава империи"
+msgstr "Глория империи"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:98
@@ -7751,13 +7751,13 @@ msgstr "Латония"
 #: ../../data/tribes/ships/empire/init.lua:110
 msgctxt "shipname"
 msgid "Leo"
-msgstr "Лев"
+msgstr "Лео"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:112
 msgctxt "shipname"
 msgid "Lepus"
-msgstr "Заяц"
+msgstr "Лепус"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:114
@@ -7841,7 +7841,7 @@ msgstr "Порт Беллус"
 #: ../../data/tribes/ships/empire/init.lua:140
 msgctxt "shipname"
 msgid "Præda"
-msgstr "Хищник"
+msgstr "Преда"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:142
@@ -7865,7 +7865,7 @@ msgstr "Ромул"
 #: ../../data/tribes/ships/empire/init.lua:148
 msgctxt "shipname"
 msgid "Sagitta"
-msgstr "Стрела"
+msgstr "Сагитта"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:150
@@ -7901,7 +7901,7 @@ msgstr "Сиена"
 #: ../../data/tribes/ships/empire/init.lua:160
 msgctxt "shipname"
 msgid "Spiculum"
-msgstr "Острый"
+msgstr "Спикулюм"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:162
@@ -7931,7 +7931,7 @@ msgstr "Траян"
 #: ../../data/tribes/ships/empire/init.lua:170
 msgctxt "shipname"
 msgid "Venator"
-msgstr "Охотник"
+msgstr "Венатор"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:172
@@ -7949,7 +7949,7 @@ msgstr "Вергилий"
 #: ../../data/tribes/ships/empire/init.lua:176
 msgctxt "shipname"
 msgid "Vespa"
-msgstr "Оса"
+msgstr "Веспа"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:178
