@@ -76,7 +76,7 @@ function check_objective_wood()
    end
    set_objective_done(o)
    campaign_message_box(secured_wood)
-   while not count_in_warehouses("log") > 80 do
+   while count_in_warehouses("log") < 80 do
       sleep(4887)
    end
    local prior_center = scroll_to_field(map:get_field(95, 156))
