@@ -52,7 +52,7 @@ function check_trade()
                   for output,amount in pairs(proposal[2]) do
                      port:set_wares(output, port:get_wares(output) + amount)
                   end
-                  trade_count = tradecount + 1
+                  trade_count = trade_count + 1
                   if trade_count == 3 then
                      local prior_center = scroll_to_field(map:get_field(90, 132))
                      sleep(1000)
