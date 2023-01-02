@@ -1067,11 +1067,13 @@ void WLApplication::warp_mouse(const Vector2i position) {
 		if (sdl_window != nullptr) {
 			if (!mouse_locked_) {
 				// Fix for #5655 needed for macOS
-				NoteThreadSafeFunction::instantiate([sdl_window, position]() {
-					SDL_PumpEvents();
-					SDL_FlushEvent(SDL_MOUSEMOTION);
-					SDL_WarpMouseInWindow(sdl_window, position.x, position.y);
-				}, true);
+				NoteThreadSafeFunction::instantiate(
+				   [sdl_window, position]() {
+					   SDL_PumpEvents();
+					   SDL_FlushEvent(SDL_MOUSEMOTION);
+					   SDL_WarpMouseInWindow(sdl_window, position.x, position.y);
+				   },
+				   true);
 				return;
 			}
 		}
