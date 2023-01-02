@@ -52,13 +52,13 @@ function check_trade()
                   for output,amount in pairs(proposal[2]) do
                      port:set_wares(output, port:get_wares(output) + amount)
                   end
-                  if (trade_count = tradecount + 1) == 3 then
+                  trade_count = tradecount + 1
+                  if trade_count == 3 then
                      local prior_center = scroll_to_field(map:get_field(90, 132))
                      sleep(1000)
                      campaign_message_box(training)
                      scroll_to_map_pixel(prior_center)
                      prior_center = nil
-                     trade_count = nil
                   end
                   sleep(3600)
                end
