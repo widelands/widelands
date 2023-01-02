@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,11 +24,10 @@
 namespace Widelands {
 
 template <typename AreaType = Area<>> struct PlayerArea : public AreaType {
-	PlayerArea() : player_number(0) {
-	}
+	PlayerArea() = default;
 	PlayerArea(const PlayerNumber pn, const AreaType area) : AreaType(area), player_number(pn) {
 	}
-	PlayerNumber player_number;
+	PlayerNumber player_number{0U};
 };
 }  // namespace Widelands
 

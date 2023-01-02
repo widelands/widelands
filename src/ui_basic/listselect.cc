@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,16 +84,14 @@ BaseListselect::BaseListselect(Panel* const parent,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
    : Panel(parent, style, x, y, w, h),
-     widest_text_(0),
-     widest_hotkey_(0),
+
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, 0, h, style),
-     scrollpos_(0),
+
      selection_(no_selection_index()),
-     last_click_time_(-10000),
+
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     lineheight_(text_height(table_style().enabled()) + kMargin),
-     linked_dropdown(nullptr) {
+     lineheight_(text_height(table_style().enabled()) + kMargin) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
@@ -143,7 +141,7 @@ void BaseListselect::clear() {
 	scrollbar_.set_steps(1);
 	scrollpos_ = 0;
 	selection_ = no_selection_index();
-	last_click_time_ = -10000;
+	last_click_time_ = std::numeric_limits<uint32_t>::max();
 	last_selection_ = no_selection_index();
 }
 
@@ -541,8 +539,8 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t
 		clicked();
 
 		if  //  check if doubleclicked
-		   (time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
-		    selection_ != no_selection_index()) {
+		   (time >= real_last_click_time && time - real_last_click_time < DOUBLE_CLICK_INTERVAL &&
+		    last_selection_ == selection_ && selection_ != no_selection_index()) {
 			double_clicked(selection_);
 		}
 

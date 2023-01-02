@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,14 +37,13 @@
  */
 class StreamWrite {
 public:
-	explicit StreamWrite() {
-	}
+	explicit StreamWrite() = default;
 	virtual ~StreamWrite() = default;
 
 	/**
 	 * Write a number of bytes to the stream.
 	 */
-	virtual void data(const void* const write_data, const size_t size) = 0;
+	virtual void data(const void* write_data, size_t size) = 0;
 
 	/**
 	 * Make sure all data submitted so far is written to disk.

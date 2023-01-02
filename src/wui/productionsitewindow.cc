@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,13 +42,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
                                            Widelands::ProductionSite& ps,
                                            bool avoid_fastclick,
                                            bool workarea_preview_wanted)
-   : BuildingWindow(parent, reg, ps, avoid_fastclick),
-     production_site_(&ps),
-     worker_table_(nullptr),
-     worker_caps_(nullptr),
-     worker_type_(nullptr),
-     worker_xp_decrease_(nullptr),
-     worker_xp_increase_(nullptr) {
+   : BuildingWindow(parent, reg, ps, avoid_fastclick), production_site_(&ps) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
 		   if (is_dying_) {

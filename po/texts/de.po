@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-10 03:01+0000\n"
+"POT-Creation-Date: 2022-12-19 02:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
@@ -796,54 +796,62 @@ msgstr "Drücke „%s“, um das Lagerfenster schnell zu öffnen und zu schließ
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads. The "
-"supplies and demands of buildings are handled in its economy."
-msgstr "Eine Wirtschaft umfasst alle Gebäude und Flaggen, die durch Straßen verbunden sind. Angebot und Nachfrage der einzelnen Gebäude werden in der jeweiligen Wirtschaft gehandhabt."
+"An economy consists of all buildings and flags connected by roads, ferries, "
+"or ships. The supplies and demands of buildings are handled in their "
+"economy. A player can have more than one economy."
+msgstr "Eine Wirtschaft umfasst alle Gebäude und Flaggen, die durch Straßen, Fähren oder Schiffe verbunden sind. Angebot und Nachfrage der einzelnen Gebäude werden in ihrer jeweiligen Wirtschaft gehandhabt. Ein Spieler kann mehr als eine Wirtschaft haben."
 
 #: ../../data/txts/tips/general_game.lua:69
+msgid ""
+"You can have more than one economy if their flags are not connected by any "
+"means of transportation. This is why the Configure Economy menu can only be "
+"accessed from flags and warehouses, not the player’s main menu."
+msgstr "Du kannst mehr als eine Wirtschaft haben, wenn ihre Flaggen nicht durch einen Transportweg verbunden sind. Daher kann das Menü für die Wirtschaftseinstellungen nur von Flaggen und Lagerhäusern aufgerufen werden und nicht aus dem Hauptmenü des Spielers."
+
+#: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr "Manche Gebäude, wie zum Beispiel Bauernhöfe, haben einen kleinen Arbeitsbereich. Diese Gebäude können nicht produzieren, wenn sie zu dicht von Straßen oder Bäumen umgeben sind."
 
-#: ../../data/txts/tips/general_game.lua:73
+#: ../../data/txts/tips/general_game.lua:77
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
 msgstr "Du kannst mit dem Mausrad oder %1%/ %2% rein- und rauszoomen. Drücke %3%, um den Zoomfaktor zurückzusetzen."
 
-#: ../../data/txts/tips/general_game.lua:80
+#: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
 msgstr "Verwende die „%1$s“ und „%2$s“ Tasten um schnell zwischen den zuletzt besuchten Orten hin und her zu springen."
 
-#: ../../data/txts/tips/general_game.lua:84
+#: ../../data/txts/tips/general_game.lua:88
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
 msgstr "Erhöhe oder verringere die Spielgeschwindigkeit mit %1%/%2%. Nutze %3%/%4% für große Änderungen, %5%/%6% wird die Geschwindigkeit langsam ändern."
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Pfeiltasten"
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "STRG + Pfeiltasten"
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "Bewege die Kartenansicht mit %1%. Mit %2% wird die Bewegung schneller, mit %3% wird die Bewegung langsamer."
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "UMSCHALT + Pfeiltasten"
 
-#: ../../data/txts/tips/general_game.lua:98
+#: ../../data/txts/tips/general_game.lua:102
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

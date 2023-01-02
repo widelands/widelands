@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 by the Widelands Development Team
+ * Copyright (C) 2022-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,8 +34,8 @@ struct NoteHyperlink {
 
 struct TextClickTarget {
 	virtual ~TextClickTarget() = default;
-	virtual bool handle_mousepress(int32_t x, int32_t y) const = 0;
-	virtual const std::string* get_tooltip(int32_t x, int32_t y) const = 0;
+	[[nodiscard]] virtual bool handle_mousepress(int32_t x, int32_t y) const = 0;
+	[[nodiscard]] virtual const std::string* get_tooltip(int32_t x, int32_t y) const = 0;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_HYPERLINK_H

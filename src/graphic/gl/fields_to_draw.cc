@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 
 #include "graphic/gl/fields_to_draw.h"
 
+#include <cstddef>
 #include <cstdlib>
 
 #include "base/log.h"
@@ -111,7 +112,7 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 	assert(h_ > 0);
 
 	// Ensure that there is enough memory for the resize operation
-	size_t dimension = w_ * h_;
+	size_t dimension = static_cast<size_t>(w_) * h_;
 	const size_t max_dimension = fields_.max_size();
 	if (dimension > max_dimension) {
 		log_warn_time(egbase.get_gametime(),

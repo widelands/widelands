@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,10 +65,10 @@ private:
 	LoadOrSaveGame load_or_save_;
 
 	bool is_replay_;
-	bool update_game_details_;
+	bool update_game_details_{false};
 
 	UI::Checkbox* show_filenames_;
-	bool showing_filenames_;
+	bool showing_filenames_{false};
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LOADGAME_H

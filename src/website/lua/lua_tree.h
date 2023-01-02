@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2022 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ public:
 
 	void write_to_file(FileSystem& fs, const std::string& filename) const;
 
-	virtual std::string as_string() const;
+	[[nodiscard]] virtual std::string as_string() const;
 
 protected:
 	static const std::string tab_;
@@ -64,9 +64,9 @@ protected:
 		std::unique_ptr<LuaTree::Value> value;
 	};
 
-	std::string keyless_values_as_string() const;
-	std::string values_as_string(const std::string& tabs) const;
-	std::string children_as_string() const;
+	[[nodiscard]] std::string keyless_values_as_string() const;
+	[[nodiscard]] std::string values_as_string(const std::string& tabs) const;
+	[[nodiscard]] std::string children_as_string() const;
 	static std::string key_to_string(const std::string& value, bool value_is_empty = false);
 
 	std::string key_;
@@ -87,7 +87,7 @@ public:
 	// Constructor for root node
 	explicit Object() : LuaTree::Element("", 0) {
 	}
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 };
 
 }  // namespace LuaTree

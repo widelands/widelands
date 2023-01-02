@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,8 +63,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                       parent.get_inner_w() - 40,
                       parent.get_inner_h() - 40,
                       _(kTypes.at(type).window_title)),
-     // Values for alignment and size
-     padding_(4),
+
      type_(type),
 
      main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),

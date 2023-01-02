@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,19 +26,13 @@
 namespace AddOns {
 
 struct NetAddons {
-	NetAddons()
-	   : initialized_(false),
-	     network_active_(false),
-	     client_socket_(0),
-	     is_admin_(false),
-	     cached_remotes_(0) {
-	}
+	NetAddons() = default;
 	~NetAddons();
 
-	bool is_admin() const {
+	[[nodiscard]] bool is_admin() const {
 		return is_admin_;
 	}
-	const std::string& server_descname() const {
+	[[nodiscard]] const std::string& server_descname() const {
 		return server_descname_;
 	}
 
@@ -93,18 +87,18 @@ private:
 	void quit_connection();
 
 	// Read a '\n'-terminated string from the socket. The terminator is not part of the result.
-	std::string read_line() const;
+	[[nodiscard]] std::string read_line() const;
 	void read_file(int64_t length, const std::string& out) const;
 	void check_endofstream();
 	void write_to_server(const std::string&);
 	void write_to_server(const char*, size_t);
 
 	std::string last_username_, last_password_;
-	bool initialized_;
-	bool network_active_;
-	int client_socket_;
-	bool is_admin_;
-	size_t cached_remotes_;
+	bool initialized_{false};
+	bool network_active_{false};
+	int client_socket_{0};
+	bool is_admin_{false};
+	size_t cached_remotes_{0U};
 	std::string server_descname_;
 };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2022 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,6 +95,9 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			Widelands::Coords starting_pos;
 			for (uint32_t p = 1; p <= map.get_nrplayers(); p++) {
 				starting_pos = map.get_starting_pos(p);
+				if (!static_cast<bool>(starting_pos)) {
+					continue;
+				}
 				uint32_t dist = map.calc_distance(f, starting_pos);
 				if (dist < 9) {
 					color = dist == 0 ? kWhite : blend_color(color, kPlayerColors[p - 1]);

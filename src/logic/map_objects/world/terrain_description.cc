@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -303,12 +303,9 @@ std::vector<DescriptionIndex> TerrainDescription::valid_resources() const {
 }
 
 bool TerrainDescription::is_resource_valid(const DescriptionIndex res) const {
-	for (const DescriptionIndex resource_index : valid_resources_) {
-		if (resource_index == res) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(
+	   valid_resources_.begin(), valid_resources_.end(),
+	   [res](const DescriptionIndex resource_index) { return resource_index == res; });
 }
 
 DescriptionIndex TerrainDescription::get_default_resource() const {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ public:
 	 * \param port The port to listen on.
 	 * \return A pointer to a listening \c NetHost object or a nullptr if the connection failed.
 	 */
-	static std::unique_ptr<NetHost> listen(const uint16_t port);
+	static std::unique_ptr<NetHost> listen(uint16_t port);
 
 	/**
 	 * Closes the server.
@@ -45,7 +45,7 @@ public:
 	~NetHost() override;
 
 	// Inherited from NetHostInterface
-	bool is_connected(ConnectionId id) const override;
+	[[nodiscard]] bool is_connected(ConnectionId id) const override;
 	void close(ConnectionId id) override;
 	bool try_accept(ConnectionId* new_id) override;
 	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
@@ -67,7 +67,7 @@ private:
 	 * \return \c true if the server is listening, \c false otherwise.
 	 */
 	// Feel free to make this method public if you need it
-	bool is_listening() const;
+	[[nodiscard]] bool is_listening() const;
 
 	/**
 	 * Starts an asynchronous accept on the given acceptor.
@@ -100,7 +100,7 @@ private:
 	/// Client ids not in this map should be considered invalid.
 	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
 	/// The next client id that will be used
-	NetHostInterface::ConnectionId next_id_;
+	NetHostInterface::ConnectionId next_id_{1};
 	/// An io_service needed by asio. Primary needed for async operations.
 	asio::io_service io_service_;
 	/// The acceptor we get IPv4 connection requests to.

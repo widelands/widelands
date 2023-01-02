@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,14 +33,13 @@ constexpr int kMaxProtectionRadius = 25;
 class AttackTarget {
 public:
 	AttackTarget() = default;
-	virtual ~AttackTarget() {
-	}
+	virtual ~AttackTarget() = default;
 
 	// Determines whether this building can be attacked right now.
-	virtual bool can_be_attacked() const = 0;
+	[[nodiscard]] virtual bool can_be_attacked() const = 0;
 
 	virtual void set_allow_conquer(PlayerNumber, bool) const = 0;
-	virtual bool get_allow_conquer(PlayerNumber) const = 0;
+	[[nodiscard]] virtual bool get_allow_conquer(PlayerNumber) const = 0;
 
 	// Called by an enemy soldier that enters a node with distance
 	// less than or equal to \ref kMaxProtectionRadius from the building.

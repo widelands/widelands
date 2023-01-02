@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ public:
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get(FSEL_EUPS_FILENAME);
 	}
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
@@ -57,7 +57,7 @@ public:
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get(FSEL_ESPS_FILENAME);
 	}
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,

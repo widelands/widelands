@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,7 @@ struct IProgressVisualization {
 	/// Progress Window is closing, unregister and cleanup
 	virtual void stop() = 0;
 
-	virtual ~IProgressVisualization() {
-	}
+	virtual ~IProgressVisualization() = default;
 };
 
 /// Manages a progress window on the screen.

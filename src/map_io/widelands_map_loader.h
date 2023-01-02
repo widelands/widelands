@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ struct WidelandsMapLoader : public MapLoader {
 	}
 
 	// If this was made pre one-world, the name of the world.
-	const std::string& old_world_name() const {
+	[[nodiscard]] const std::string& old_world_name() const {
 		return old_world_name_;
 	}
 

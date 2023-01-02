@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2022 by the Widelands Development Team
+ * Copyright (C) 2012-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,10 +49,11 @@ struct EditorToolAction {
 	}
 
 	~EditorToolAction() {
-		if (args->refcount <= 1)
+		if (args->refcount <= 1) {
 			delete args;
-		else
+		} else {
 			args->refcount--;
+		}
 	}
 
 	EditorToolAction(const EditorToolAction& b)

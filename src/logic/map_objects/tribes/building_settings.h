@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,8 +42,7 @@ struct BuildingSettings {
 	BuildingSettings(const std::string& name, const TribeDescr& tribe)
 	   : tribe_(tribe), descr_(name) {
 	}
-	virtual ~BuildingSettings() {
-	}
+	virtual ~BuildingSettings() = default;
 
 	static BuildingSettings* load(const Game&, const TribeDescr&, FileRead&);
 
@@ -62,8 +61,7 @@ private:
 
 struct ProductionsiteSettings : public BuildingSettings {
 	ProductionsiteSettings(const ProductionSiteDescr& descr, const TribeDescr& tribe);
-	~ProductionsiteSettings() override {
-	}
+	~ProductionsiteSettings() override = default;
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
@@ -76,13 +74,12 @@ struct ProductionsiteSettings : public BuildingSettings {
 	};
 	std::map<DescriptionIndex, InputQueueSetting> ware_queues;
 	std::map<DescriptionIndex, InputQueueSetting> worker_queues;
-	bool stopped;
+	bool stopped{false};
 };
 
 struct MilitarysiteSettings : public BuildingSettings {
 	MilitarysiteSettings(const MilitarySiteDescr&, const TribeDescr& tribe);
-	~MilitarysiteSettings() override {
-	}
+	~MilitarysiteSettings() override = default;
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
@@ -95,8 +92,7 @@ struct MilitarysiteSettings : public BuildingSettings {
 
 struct TrainingsiteSettings : public ProductionsiteSettings {
 	TrainingsiteSettings(const TrainingSiteDescr&, const TribeDescr& tribe);
-	~TrainingsiteSettings() override {
-	}
+	~TrainingsiteSettings() override = default;
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
@@ -108,8 +104,7 @@ struct TrainingsiteSettings : public ProductionsiteSettings {
 
 struct WarehouseSettings : public BuildingSettings {
 	WarehouseSettings(const WarehouseDescr&, const TribeDescr& tribe);
-	~WarehouseSettings() override {
-	}
+	~WarehouseSettings() override = default;
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
@@ -118,7 +113,7 @@ struct WarehouseSettings : public BuildingSettings {
 	std::map<DescriptionIndex, StockPolicy> ware_preferences;
 	std::map<DescriptionIndex, StockPolicy> worker_preferences;
 	const bool launch_expedition_allowed;
-	bool launch_expedition;
+	bool launch_expedition{false};
 };
 
 }  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 	Widelands::OPtr<Widelands::DismantleSite> dismantle_site_;
-	UI::ProgressBar* progress_;
+	UI::ProgressBar* progress_{nullptr};
 	DISALLOW_COPY_AND_ASSIGN(DismantleSiteWindow);
 };
 

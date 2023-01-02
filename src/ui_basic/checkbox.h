@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,7 @@ struct Statebox : public Panel {
 	void set_enabled(bool enabled);
 
 	bool get_state() const {
-		return flags_ & Is_Checked;
+		return (flags_ & Is_Checked) != 0;
 	}
 	void set_state(bool on, bool send_signal = true);
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-22 03:53+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Pedro Montaño <pedrol.montanoa@gmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
@@ -222,12 +222,10 @@ msgstr "Mi señor, permítame informarle sobre las tribus que nos rodean."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
-"From the north we are endangered by a belligerent tribe, led by warlord "
+"From the North we are endangered by a belligerent tribe, led by warlord "
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
-"Al norte hay una tribu muy peligrosa liderada por Törver, su jefe. Su "
-"ejército crece muy rápido y pronto serán invencibles."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -275,13 +273,9 @@ msgstr "El enemigo del norte"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
 "Sire, although our soldiers would face any enemy without the slightest fear,"
-" our rival in the north is still stronger than all our armies combined. We "
+" our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-" Mi señor, aunque nuestros valorosos hombres están preparados para enfrentar"
-" cualquier enermigo sin temor, el enemigo del norte es mucho más fuerte que "
-"nuestro ejército. Debemos evitar un conflicto directo hasta que podamos "
-"vencerlos."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -292,8 +286,8 @@ msgstr ""
 "ejército fuerte. Törver tiene muy mala reputación."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
-msgid "Peril from the north"
-msgstr "El peligro del norte"
+msgid "Peril from the North"
+msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -342,12 +336,9 @@ msgstr "El gran lago"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
 "Sire, now that we have conquered the land of Törver, we can make use of "
-"their excellent access to the adjacent great lake. A port in the north will "
+"their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
-"Mi señor, ahora que conquistamos las tierras de Törver, tendremos acceso "
-"gran lago. Un puerto allí en el norte nos dará más oportunidad para "
-"contactar otras tribus."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -405,7 +396,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
-"Sire, the wet season has created swamps along the brook to the east and we "
+"Sire, the wet season has created swamps along the brook to the East and we "
 "are unable to pass through them. They have to be removed before we can "
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
@@ -413,9 +404,9 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
-"Sire, all shovels have been handed out but if we continue at this pace than "
-"we will not have removed the swamps before the next wet season. If you bring"
-" more shovels to the new warehouse then more volunteers will join in."
+"Sire, all shovels have been handed out, but if we continue at this pace we "
+"will not have removed the swamps before the next wet season. If you bring "
+"more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94

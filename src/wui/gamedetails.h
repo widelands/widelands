@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,8 +62,8 @@ private:
 	std::string show_minimap(const SavegameData& gamedata);
 
 	const Mode mode_;
-	const int padding_;
-	bool has_conflicts_;
+	const int padding_{4};
+	bool has_conflicts_{false};
 
 	UI::Box main_box_, descr_box_;
 	UI::MultilineTextarea name_label_;

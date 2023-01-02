@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,6 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                      GameSettingsProvider& settings,
                      GameController& ctrl,
                      ChatProvider& chat,
-                     Widelands::Game& g,
                      bool game_done_on_cancel,
                      const std::function<void()>& c)
    : LaunchGame(fsmm, settings, &ctrl, false, true),
@@ -66,8 +65,20 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
      help_(nullptr),
 
      mpsg_(this, &left_column_box_, 0, 0, 0, 0, &settings, scale_factor * standard_height_),
-     chat_(new GameChatPanel(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu)),
-     game_(g) {
+     chat_(new GameChatPanel(
+        &left_column_box_,
+        [&settings](int player_number) {
+	        const GameSettings& s = settings.settings();
+	        return (player_number > 0 && player_number <= static_cast<int>(s.players.size())) ?
+                     &s.players.at(player_number - 1).color :
+                     nullptr;
+        },
+        0,
+        0,
+        0,
+        0,
+        chat,
+        UI::PanelStyle::kFsMenu)) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
 	chat_->aborted.connect([this]() { die(); });
@@ -235,9 +246,10 @@ void LaunchMPG::clicked_ok() {
 }
 
 void LaunchMPG::think() {
-	if (ctrl_ != nullptr) {
-		ctrl_->think();
-	}
+	assert(ctrl_ != nullptr);
+	ctrl_->set_write_replay(should_write_replay());
+	ctrl_->think();
+
 	refresh();
 
 	// unfocus chat window when other UI element has focus

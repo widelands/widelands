@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-12-13 03:18+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -759,7 +759,9 @@ msgstr "A aquesta finestra s’hi pot accedir clicant qualsevol bandera de les v
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:480
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
 msgid "Economy options"
 msgstr "Opcions de l’economia"
 
@@ -815,36 +817,72 @@ msgid ""
 "available and both farms would have been able to start working right away."
 msgstr "Si construïu dues masoveries, només una començarà a treballar immediatament. La segona masoveria haurà d’esperar el seu treballador, al que li manca la dalla. Si haguéssiu escollit una quantitat desitjada de 2, probablement s’haurien fabricat dues dalles i les dues masoveries haurien començat a treballar immediatament."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+msgid ""
+"Stockpiling wares is a double-edged sword. On the one hand, wares in stock "
+"are useful to buffer temporary fluctuations in your economy, which tend to "
+"occur all the time. On the other hand, any ware that is sitting around in a "
+"warehouse instead of being processed into something else is wasted. Finding "
+"the balance between wasteful stockpiling and just-in-time production in your"
+" supply chains is one of most profound challenges of perfecting your "
+"economy. When in doubt, lean towards having some extra reserves."
+msgstr "Guardar recursos és una espasa de doble fil. Per una banda, els béns en estoc són útils per a amortir les fluctuacions de l'economia, que solen ocórrer de tant en tant. D'altra banda, qualsevol bé que estigui en un magatzem i que no es processi segurament estarà desaprofitat. Trobar l'equilibri entre acumular desmesuradament i la producció immediata de les cadenes de producció és un dels reptes més profunds per a perfeccionar l'economia. Quan tingueu dubtes, millor penseu en tenir una reserva dels béns més importants."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+msgid ""
+"To ease the process of switching between different economic situations, you "
+"can save and apply economy profiles at the bottom of the economy options "
+"window. A profile for stockpiling and one for efficiency are preset there."
+msgstr "Per a facilitar el procés de canviar entre diferents situacions econòmiques, podeu desar i aplicar perfils econòmics a la part de sota de la finestra d'opcions de l'economia. N'hi ha dos de preconfigurats: un perfil per a emmagatzemar i un altre per a produir."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+msgid ""
+"Most of the time, the economy options are a useful tool to ensure that "
+"resources are not wasted to produce wares your economy does not actually "
+"need. However, sometimes it can be useful to stockpile a ware in very large "
+"quantities. To achieve this, the economy options window allows you to set "
+"the target of a ware to infinite, so that it will always be produced."
+msgstr "La major part del temps, les opcions de l'economia són una eina útil per a assegurar que els recursos no es malgasten per a produir béns que l'economia no necessita. No obstant, a vegades pot ser útil acumular un bé en grans quantitats. Per a fer-ho, la finestra d'opcions de l'economia us permet establir la quantitat objectiu d'un bé a infinit. Així, se'n produirà indefinidament."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
+msgid ""
+"The same button can also be found in the building window of production "
+"sites. There, it causes only this one site to produce indefinitely, "
+"regardless of the economy settings. This can be useful to arrange, for "
+"example, that more building materials are produced near the border even if "
+"there are plenty in stock far away in your homeland."
+msgstr "El mateix botó també es pot trobar a la finestra dels edificis de producció. Amb aquest botó, es pot fer que el lloc produeixi indefinidament, sigui quina sigui la configuració de l'economia. Això pot ser útil, per exemple, per a que es produeixin més materials de construcció a prop de la frontera encara que l'estoc estigui ple en altres magatzems lluny del lloc on els necessiteu."
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 msgid "Produce 20 marble columns"
 msgstr "Produïu 20 columnes de marbre"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:516
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
 msgstr "Per estar preparat per a fortificacions addicionals, hauríeu de produir 20 columnes de marbre."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
 msgstr "El vostre picapedrer no produirà columnes de marbre si no es necessiten. Haureu d’incrementar la quantitat desitjada d’aquest bé."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
 msgstr "Per fer-ho, cliqueu qualsevol bandera i escolliu «Configura l’economia». En aquesta finestra podreu decidir quants béns de cada tipus voleu tenir a l’estoc."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
 msgstr "Alguns cops, necessitareu molts béns al mateix temps i els consumireu més ràpidament del que us costarà produir-los. En aquest cas, és bo tenir-ne suficients en reserva."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:527
 msgid ""
 "By changing the target quantity, you can therefore decide which wares/tools "
 "your resources (in this case: iron) should be turned into or whether you "
@@ -852,86 +890,86 @@ msgid ""
 "for."
 msgstr "Canviant la quantitat desitjada d’un bé podeu decidir en quins béns/eines s’han de convertir els vostres recursos (en aquest cas, el ferro) o si voleu estalviar ferro i esperar fins a saber per què el necessiteu."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:528
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
 msgstr "Aquesta opció només influeix els edificis que consumeixen béns. Els edificis que produeixen béns sense consumir recursos (com ara masoveries o pous) continuaran treballant indefinidament."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
 msgstr "Proveu-ho. L’actual quantitat desitjada de columnes de marbre és 10. Incrementeu-ho per preparar-vos en cas que calgui construir fortificacions ràpidament."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
 msgid "Bring 20 marble columns to the front line"
 msgstr "Envieu 20 columnes de marbre al front."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:522
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:540
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
 msgstr "Envieu les 20 columnes de marbre al magatzem que està prop del front"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
 msgstr "Per aconseguir-ho, haureu de fer dues coses. Primer, donar preferència a portar les columnes de marbre al magatzem escollit. Les columnes de marbre produïdes a partir de llavors seran portades allí si és possible."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
 msgstr "Llavors, per moure les columnes de marbre fora del quarter general, haureu de clicar el botó d’extraure el bé."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:550
 msgid "Warehouse Preferences"
 msgstr "Preferències dels magatzems"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:534
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Bring the marble columns to the front line"
 msgstr "Envieu les columnes de marbre al front"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:536
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
 msgstr "La producció de columnes de marbre està en marxa, però seria millor si s’emmagatzemessin prop del lloc on es necessitaran."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:555
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
 msgstr "Normalment, els béns produïts es porten a l’edifici que els necessiten. Si no els necessiten cap edifici, es porten al magatzem més proper. En aquest cas, es portaran al quarter general. Però voldríem tenir-les en el magatzem proper a les nostres fortaleses."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:538
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
 msgstr "Cada magatzem té quatre botons per establir-ne la preferència. Si moveu el punter per sobre, veureu indicadors de funció que expliquen què fan els botons."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:562
 msgid "Borders Secured"
 msgstr "S’han assegurat les fronteres"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:546
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
 msgid "We’re safe now"
 msgstr "De moment, estem segurs"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:548
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
 msgstr "Genial. Ara tenim suficients columnes de marbre per construir les nostres fortificacions en cas d’agressió. Tot i això, fins ara no ha aparegut cap enemic…"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:549
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
 "I hope I could teach you how you can control the economy in Widelands. There"
 " are many options and they can be confusing at first. Even if you’ve only "
@@ -940,7 +978,7 @@ msgid ""
 "this tutorial and learn the rest!"
 msgstr "Espero haver-vos ensenyat com controlar l’economia del Widelands. Hi ha moltes opcions i poden semblar difícils d’entendre. De moment, només cal que entengueu els conceptes bàsics i provar-los en algunes partides. Un cop ho hàgiu fet, podeu tornar a aquest tutorial i aprendre’n la resta!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:551
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"

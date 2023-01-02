@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,6 +60,15 @@ BobDescr::BobDescr(const std::string& init_descname,
 	}
 }
 
+BobDescr::BobDescr(const std::string& init_name,
+                   const std::string& init_descname,
+                   const MapObjectType init_type,
+                   MapObjectDescr::OwnerType owner_type)
+   : MapObjectDescr(init_type, init_name, init_descname),
+     owner_type_(owner_type),
+     vision_range_(0) {
+}
+
 /**
  * Only tribe bobs (workers, ships) have a vision range, since it would be irrelevant
  * for world bobs (critters).
@@ -82,19 +91,7 @@ Bob& BobDescr::create(EditorGameBase& egbase, Player* const owner, const Coords&
 	return bob;
 }
 
-Bob::Bob(const BobDescr& init_descr)
-   : MapObject(&init_descr),
-     position_(FCoords(Coords(0, 0), nullptr)),  // not linked anywhere
-     linknext_(nullptr),
-     linkpprev_(nullptr),
-     anim_(0),
-     animstart_(0),
-     walking_(IDLE),
-     walkstart_(0),
-     walkend_(0),
-     actid_(0),
-     actscheduled_(false),
-     in_act_(false) {
+Bob::Bob(const BobDescr& init_descr) : MapObject(&init_descr) {
 }
 
 /**
@@ -497,17 +494,17 @@ struct CheckStepBlocked {
 	explicit CheckStepBlocked(BlockedTracker& tracker) : tracker_(tracker) {
 	}
 
-	bool allowed(const Map& /* map */,
-	             FCoords /* start */,
-	             FCoords end,
-	             int32_t /* dir */,
-	             CheckStep::StepId /* id */) const {
+	[[nodiscard]] bool allowed(const Map& /* map */,
+	                           FCoords /* start */,
+	                           FCoords end,
+	                           int32_t /* dir */,
+	                           CheckStep::StepId /* id */) const {
 		if (end == tracker_.finaldest_) {
 			return true;
 		}
 		return !tracker_.is_blocked(end);
 	}
-	bool reachable_dest(const Map& /* map */, FCoords /* pos */) const {
+	[[nodiscard]] bool reachable_dest(const Map& /* map */, FCoords /* pos */) const {
 		return true;
 	}
 

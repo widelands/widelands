@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2022 by the Widelands Development Team
+ * Copyright (C) 2015-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 class EditorInteractive;
 
 struct EditorHelp : public UI::EncyclopediaWindow {
-	EditorHelp(EditorInteractive&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
+	EditorHelp(EditorInteractive&, UI::UniqueWindow::Registry&, LuaInterface* lua);
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_HELP_H

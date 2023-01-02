@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,14 +30,13 @@
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/addons.h"
-#include "logic/filesystem_constants.h"
+#include "logic/replay.h"
 #include "map_io/map_loader.h"
 
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
    : UI::Panel(parent, style, 0, 0, 0, 0),
      mode_(mode),
-     padding_(4),
-     has_conflicts_(false),
+
      main_box_(this, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      descr_box_(&main_box_, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_label_(&main_box_,
@@ -221,11 +220,10 @@ std::string GameDetails::show_minimap(const SavegameData& gamedata) {
 			minimap_icon_.set_visible(true);
 		} else {
 			try {
+				Widelands::ReplayfileSavegameExtractor converter(last_game_);
 				Widelands::Game game_for_render;
-				std::string filename(last_game_);
-				filename.append(kSavegameExtension);
 				std::unique_ptr<Widelands::MapLoader> ml(
-				   game_for_render.mutable_map()->get_correct_loader(filename));
+				   game_for_render.mutable_map()->get_correct_loader(converter.file()));
 				if (ml != nullptr &&
 				    0 == ml->load_map_for_render(game_for_render, &game_for_render.enabled_addons())) {
 					minimap_cache_[last_game_] =

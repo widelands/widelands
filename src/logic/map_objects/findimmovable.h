@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,26 +30,25 @@ class Player;
 struct FindImmovable {
 private:
 	struct BaseCapsule {
-		BaseCapsule() : refcount(1) {
-		}
-		virtual ~BaseCapsule() {
-		}
+		BaseCapsule() = default;
+		virtual ~BaseCapsule() = default;
 
 		void addref() {
 			++refcount;
 		}
 		void deref() {
-			if (--refcount == 0)
+			if (--refcount == 0) {
 				delete this;
+			}
 		}
-		virtual bool accept(const BaseImmovable&) const = 0;
+		[[nodiscard]] virtual bool accept(const BaseImmovable&) const = 0;
 
-		int refcount;
+		int refcount{1};
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
-		explicit Capsule(const T& init_op) : op(init_op) {
+		Capsule(const T& init_op) : op(init_op) {  // NOLINT allow implicit conversion
 		}
-		bool accept(const BaseImmovable& imm) const override {
+		[[nodiscard]] bool accept(const BaseImmovable& imm) const override {
 			return op.accept(imm);
 		}
 
@@ -59,7 +58,7 @@ private:
 	BaseCapsule* capsule;
 
 public:
-	explicit FindImmovable(const FindImmovable& o) {
+	FindImmovable(const FindImmovable& o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -68,18 +67,21 @@ public:
 		capsule = nullptr;
 	}
 	FindImmovable& operator=(const FindImmovable& o) {
+		if (&o == this) {
+			return *this;
+		}
 		capsule->deref();
 		capsule = o.capsule;
 		capsule->addref();
 		return *this;
 	}
 
-	template <typename T> FindImmovable(const T& op) {
+	template <typename T> FindImmovable(const T& op) {  // NOLINT allow implicit conversion
 		capsule = new Capsule<T>(op);
 	}
 
 	// Return true if this node should be returned by find_fields()
-	bool accept(const BaseImmovable& imm) const {
+	[[nodiscard]] bool accept(const BaseImmovable& imm) const {
 		return capsule->accept(imm);
 	}
 };
@@ -92,7 +94,7 @@ struct FindImmovableSize {
 	   : min(init_min), max(init_max) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 private:
 	int32_t min, max;
@@ -101,7 +103,7 @@ struct FindImmovableType {
 	explicit FindImmovableType(MapObjectType const init_type) : type(init_type) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 private:
 	MapObjectType type;
@@ -110,35 +112,33 @@ struct FindImmovableAttribute {
 	explicit FindImmovableAttribute(uint32_t const init_attrib) : attrib(init_attrib) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 private:
 	int32_t attrib;
 };
 struct FindImmovablePlayerImmovable {
-	FindImmovablePlayerImmovable() {
-	}
+	FindImmovablePlayerImmovable() = default;
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
 struct FindImmovablePlayerMilitarySite {
 	explicit FindImmovablePlayerMilitarySite(const Player& init_player) : player(init_player) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 	const Player& player;
 };
 struct FindImmovableAttackTarget {
-	FindImmovableAttackTarget() {
-	}
+	FindImmovableAttackTarget() = default;
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
 struct FindForeignMilitarysite {
 	explicit FindForeignMilitarysite(const Player& init_player) : player(init_player) {
 	}
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 	const Player& player;
 };
 
@@ -146,7 +146,7 @@ struct FindImmovableByDescr {
 	explicit FindImmovableByDescr(const ImmovableDescr& init_descr) : descr(init_descr) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 	const ImmovableDescr& descr;
 };
@@ -154,7 +154,7 @@ struct FindFlagOf {
 	explicit FindFlagOf(const FindImmovable& init_finder) : finder(init_finder) {
 	}
 
-	bool accept(const BaseImmovable&) const;
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
 	const FindImmovable finder;
 };

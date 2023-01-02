@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,22 +41,39 @@ constexpr uint8_t kMaxMapgenPlayers = 8;
 constexpr uint8_t kMargin = 4;
 }  // namespace
 
-MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
-   UI::Panel& parent, UI::PanelStyle s, const int32_t inner_w, const uint32_t w, const uint32_t h)
+MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
+                                                     UI::PanelStyle s,
+                                                     const int32_t inner_w,
+                                                     const uint32_t w,
+                                                     const uint32_t h,
+                                                     UI::Button& ok_button,
+                                                     UI::Button& cancel_button)
    : UI::Box(&parent, s, kMargin, kMargin, UI::Box::Vertical, 0, 0, kMargin),
      label_style_(s == UI::PanelStyle::kWui ? UI::FontStyle::kWuiLabel :
                                               UI::FontStyle::kFsMenuLabel),
      // UI elements
      label_height_(text_height(label_style_) + 2),
+     generator_(this,
+                "generator",
+                0,
+                0,
+                inner_w,
+                8,
+                label_height_,
+                _("Map Generator"),
+                UI::DropdownType::kTextual,
+                panel_style_,
+                panel_style_ == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary :
+                                                       UI::ButtonStyle::kFsMenuSecondary),
      // Size
      map_size_box_(*this, panel_style_, "random_map_menu", 4, w, h),
-     max_players_(2),
+     max_players_(compute_max_players()),
      players_(this,
               0,
               0,
               inner_w,
               inner_w / 3,
-              2,
+              max_players_,
               1,
               max_players_,
               panel_style_,
@@ -73,7 +90,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
         /** TRANSLATORS: Amount of resources in the random map generator in the editor */
         _("High"),
      }),
-     resource_amount_(2),
+
      world_(this,
             "world",
             0,
@@ -111,11 +128,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
                             panel_style_ == UI::PanelStyle::kWui ?
                                UI::ButtonStyle::kWuiSecondary :
                                UI::ButtonStyle::kFsMenuSecondary),
-     // Terrain
-     waterval_(20),
-     landval_(60),
-     wastelandval_(0),
-     mountainsval_(100 - waterval_ - landval_ - wastelandval_),
+
      water_(this,
             0,
             0,
@@ -173,13 +186,24 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
         &map_number_and_id_hbox_, panel_style_, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
      map_number_and_id_vbox_2_(
         &map_number_and_id_hbox_, panel_style_, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+     random_number_hbox_(
+        &map_number_and_id_vbox_2_, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      map_number_label_(
         &map_number_and_id_vbox_1_, panel_style_, label_style_, 0, 0, 0, 0, _("Random number:")),
-     map_number_edit_(&map_number_and_id_vbox_2_,
+     map_number_edit_(&random_number_hbox_,
                       0,
                       0,
                       inner_w - 2 * kMargin - map_number_label_.get_w(),
                       panel_style_),
+     map_number_randomize_(&random_number_hbox_,
+                           "new_random_number",
+                           0,
+                           0,
+                           map_number_edit_.get_h(),
+                           map_number_edit_.get_h(),
+                           UI::ButtonStyle::kWuiSecondary,
+                           g_image_cache->get("images/ui_fsmenu/random.png"),
+                           _("Generate a new random number")),
      map_id_label_(
         &map_number_and_id_vbox_1_, panel_style_, label_style_, 0, 0, 0, 0, _("Map ID:")),
      map_id_edit_(&map_number_and_id_vbox_2_,
@@ -187,14 +211,26 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
                   0,
                   inner_w - 2 * kMargin - map_id_label_.get_w(),
                   panel_style_),
-     ok_button_(nullptr),
-     cancel_button_(nullptr) {
+     ok_button_(ok_button),
+     cancel_button_(cancel_button) {
 	set_size(inner_w, 50);  // Prevent assert failures
+
+	generator_.set_enabled(false);
+	generator_.add(_("Default"), nullptr, g_image_cache->get("images/logos/wl-ico-64.png"), true);
+	for (const auto& addon : AddOns::g_addons) {
+		if (addon.second && addon.first->category == AddOns::AddOnCategory::kMapGenerator) {
+			generator_.add(addon.first->descname(), addon.first, addon.first->icon, false);
+			generator_.set_enabled(true);
+		}
+	}
+	add(&generator_, UI::Box::Resizing::kExpandBoth);
+	add_space(kMargin);
 
 	// ---------- Width + Height ----------
 
 	map_size_box_.set_selection_function([this] { button_clicked(ButtonId::kMapSize); });
 	add(&map_size_box_, UI::Box::Resizing::kExpandBoth);
+	add_space(kMargin);
 
 	// ---------- Players -----------
 
@@ -294,12 +330,17 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
 	map_number_and_id_vbox_1_.add(&map_number_label_, UI::Box::Resizing::kExpandBoth);
 
 	map_number_edit_.changed.connect([this]() { nr_edit_box_changed(); });
-	RNG rng;
-	rng.seed(clock());
-	rng.rand();
-	map_number_ = rng.rand();
+	map_number_edit_.ok.connect([this]() { ok_button_.sigclicked(); });
+	map_number_ = RNG::static_rand();
 	map_number_edit_.set_text(std::to_string(static_cast<unsigned int>(map_number_)));
-	map_number_and_id_vbox_2_.add(&map_number_edit_, UI::Box::Resizing::kExpandBoth);
+	map_number_and_id_vbox_2_.add(&random_number_hbox_, UI::Box::Resizing::kExpandBoth);
+	random_number_hbox_.add(&map_number_edit_, UI::Box::Resizing::kExpandBoth);
+
+	map_number_randomize_.sigclicked.connect([this]() {
+		map_number_edit_.set_text(std::to_string(RNG::static_rand()));
+		nr_edit_box_changed();
+	});
+	random_number_hbox_.add(&map_number_randomize_);
 
 	add_space(kMargin);
 
@@ -309,6 +350,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
 
 	map_id_edit_.set_text("abcd-efgh-ijkl-mnop");
 	map_id_edit_.changed.connect([this]() { id_edit_box_changed(); });
+	map_id_edit_.ok.connect([this]() { ok_button_.sigclicked(); });
 	map_number_and_id_vbox_2_.add(&map_id_edit_, UI::Box::Resizing::kExpandBoth);
 
 	map_number_and_id_hbox_.add(&map_number_and_id_vbox_1_, UI::Box::Resizing::kExpandBoth);
@@ -352,11 +394,7 @@ void MainMenuNewRandomMapPanel::button_clicked(MainMenuNewRandomMapPanel::Button
 	case ButtonId::kMapSize:
 	case ButtonId::kNone:
 		// Restrict maximum players according to map size, but allow at least 2 players.
-		max_players_ = std::min(static_cast<size_t>(kMaxMapgenPlayers),
-		                        (find_dimension_index(map_size_box_.selected_width()) +
-		                         find_dimension_index(map_size_box_.selected_height())) /
-		                              2 +
-		                           2);
+		max_players_ = compute_max_players();
 		players_.set_interval(1, max_players_);
 		if (players_.get_value() > max_players_) {
 			players_.set_value(max_players_);
@@ -365,6 +403,14 @@ void MainMenuNewRandomMapPanel::button_clicked(MainMenuNewRandomMapPanel::Button
 		normalize_landmass(n);
 	}
 	nr_edit_box_changed();  // Update ID String
+}
+
+size_t MainMenuNewRandomMapPanel::compute_max_players() const {
+	return std::min(static_cast<size_t>(kMaxMapgenPlayers),
+	                (find_dimension_index(map_size_box_.selected_width()) +
+	                 find_dimension_index(map_size_box_.selected_height())) /
+	                      2 +
+	                   2);
 }
 
 // If the the sum of our landmass is < 0% or > 100% change the mountain value.
@@ -491,10 +537,8 @@ void MainMenuNewRandomMapPanel::select_terrains_distribution() {
 bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbase,
                                                 EditorInteractive* eia,
                                                 SinglePlayerGameSettingsProvider* sp) {
-	if (ok_button_ != nullptr) {
-		ok_button_->set_enabled(false);
-		cancel_button_->set_enabled(false);
-	}
+	ok_button_.set_enabled(false);
+	cancel_button_.set_enabled(false);
 
 	assert((eia == nullptr) ^ (sp == nullptr));
 	assert((sp == nullptr) ^ egbase.is_game());
@@ -531,12 +575,16 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	      << "Land = " << landval_ << " %\n"
 	      << "Wasteland = " << wastelandval_ << " %\n"
 	      << "Resources = " << resource_amounts_[resources_.get_selected()] << "\n"
-	      << "ID = " << map_id_edit_.text() << "\n";
+	      << "ID = " << map_id_edit_.text() << "\n"
+	      << "Generator = "
+	      << (generator_.get_selected() == nullptr ? "default" :
+                                                    generator_.get_selected()->internal_name)
+	      << "\n";
 
-	Widelands::MapGenerator gen(*map, map_info, egbase);
 	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")),
 	                      sstrm.str());
+	map->set_nrplayers(map_info.numPlayers);
 	Notifications::publish(UI::NoteLoadingMessage(_("Generating random map…")));
 
 	log_info("============== Generating Map ==============\n");
@@ -561,9 +609,36 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	if (map_info.islandMode) {
 		log_info("Using Island Mode\n");
 	}
+	log_info("Generator:     %s\n", generator_.get_selected() == nullptr ?
+                                      "default" :
+                                      generator_.get_selected()->internal_name.c_str());
 	log_info("\n");
 
-	bool result = gen.create_random_map();
+	bool result;
+	if (generator_.get_selected() == nullptr) {
+		Widelands::MapGenerator gen(*map, map_info, egbase);
+		result = gen.create_random_map();
+	} else {
+		try {
+			LuaInterface& lua = egbase.lua();
+			lua.interpret_string(format("kClimate = \"%s\"", map_info.world_name));
+			lua.interpret_string(
+			   format("kResourceAmount = %d", static_cast<int>(map_info.resource_amount)));
+			lua.interpret_string(format("kWater = %d", map_info.waterRatio * 100));
+			lua.interpret_string(format("kLand = %d", map_info.landRatio * 100));
+			lua.interpret_string(format("kWasteland = %d", map_info.wastelandRatio * 100));
+			lua.interpret_string(format("kIslandMode = %b", map_info.islandMode));
+			lua.interpret_string(format("kRandomNumber = %d", map_info.mapNumber));
+			lua.interpret_string(format("kMapID = \"%s\"", map_id_edit_.text()));
+			lua.run_script(kAddOnDir + FileSystem::file_separator() +
+			               generator_.get_selected()->internal_name + FileSystem::file_separator() +
+			               "init.lua");
+			result = true;
+		} catch (const std::exception& e) {
+			log_err("Map generation Lua error: %s", e.what());
+			result = false;
+		}
+	}
 
 	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
@@ -578,13 +653,20 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 		   /** TRANSLATORS: Window title. This is shown after a random map has been created in the
 		     editor.*/
 		   _("Random Map"),
-		   /** TRANSLATORS: This is shown after a random map has been created in the editor. */
-		   /** TRANSLATORS: You don't need to be literal with your translation, */
-		   /** TRANSLATORS: as long as the user understands that he needs to check the player
-		     positions.*/
-		   _("The map has been generated. Please double-check the player starting positions to make "
-		     "sure that your carriers won’t drown, or be stuck on an island or on top of a "
-		     "mountain."),
+		   result ?
+              /** TRANSLATORS: This is shown after a random map has been created in the editor. */
+              /** TRANSLATORS: You don't need to be literal with your translation, */
+              /** TRANSLATORS: as long as the user understands that he needs to check the player
+                positions.*/
+              _("The map has been generated. Please double-check the player starting positions to "
+              "make sure that your carriers won’t drown, or be stuck on an island or on top of a "
+              "mountain.") :
+              /** TRANSLATORS: This is shown after a random map has been created in the editor. */
+              /** TRANSLATORS: You don't need to be literal with your translation, as long as */
+              /** TRANSLATORS: the user understands that the map's quality is pretty poor.*/
+              _("The map generator could not produce a good-enough map with the provided settings. "
+              "This map will probably need extensive editing to be playable. Consider creating a "
+              "new map with different parameters."),
 		   UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 	} else {
@@ -608,7 +690,6 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 			map->set_author(_("The Widelands Random Map Generator"));
 			map->set_description(
 			   _("This map was generated automatically by the Widelands Random Map Generator."));
-			map->set_waterway_max_length(RNG::static_rand(5) * RNG::static_rand(6));
 
 			sp->set_map("", "", map_info.world_name, "", nr_players, false);
 			sp->set_scenario(false);
@@ -623,12 +704,11 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 				sp->set_player_team(p, p == plnum ? 0 : 1);
 				sp->set_player_init(p, 0);
 			}
-		} else if (ok_button_ != nullptr) {
-			ok_button_->set_enabled(true);
-			cancel_button_->set_enabled(true);
 		}
 	}
 
+	ok_button_.set_enabled(true);
+	cancel_button_.set_enabled(true);
 	return result;
 }
 
@@ -644,9 +724,7 @@ void MainMenuNewRandomMapPanel::id_edit_box_changed() {
 	}
 
 	if (!Widelands::UniqueRandomMapInfo::set_from_id_string(map_info, str, world_names)) {
-		if (ok_button_ != nullptr) {
-			ok_button_->set_enabled(false);
-		}
+		ok_button_.set_enabled(false);
 	} else {
 		std::stringstream sstrm;
 		sstrm << map_info.mapNumber;
@@ -676,9 +754,7 @@ void MainMenuNewRandomMapPanel::id_edit_box_changed() {
 		// Update other values in UI as well
 		button_clicked(ButtonId::kNone);
 
-		if (ok_button_ != nullptr) {
-			ok_button_->set_enabled(true);
-		}
+		ok_button_.set_enabled(true);
 	}
 }
 
@@ -701,16 +777,12 @@ void MainMenuNewRandomMapPanel::nr_edit_box_changed() {
 
 			map_id_edit_.set_text(id_string);
 
-			if (ok_button_ != nullptr) {
-				ok_button_->set_enabled(true);
-			}
-		} else if (ok_button_ != nullptr) {
-			ok_button_->set_enabled(false);
+			ok_button_.set_enabled(true);
+		} else {
+			ok_button_.set_enabled(false);
 		}
 	} catch (...) {
-		if (ok_button_ != nullptr) {
-			ok_button_->set_enabled(false);
-		}
+		ok_button_.set_enabled(false);
 	}
 }
 
@@ -735,7 +807,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "random_map_menu", &r, 400, 500, _("New Random Map")),
      box_(this, panel_style_, 0, 0, UI::Box::Vertical),
-     panel_(box_, UI::PanelStyle::kWui, get_inner_w(), w, h),
      button_box_(&box_, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      ok_button_(&button_box_,
                 "generate_map",
@@ -752,7 +823,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                     get_inner_w() / 2 - kMargin,
                     0,
                     UI::ButtonStyle::kWuiSecondary,
-                    _("Cancel")) {
+                    _("Cancel")),
+     panel_(box_, UI::PanelStyle::kWui, get_inner_w(), w, h, ok_button_, cancel_button_) {
 	box_.add(&panel_, UI::Box::Resizing::kAlign);
 
 	cancel_button_.sigclicked.connect([this]() { die(); });
@@ -765,7 +837,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 		button_box_.add(&ok_button_, UI::Box::Resizing::kExpandBoth);
 	}
 	box_.add(&button_box_, UI::Box::Resizing::kExpandBoth);
-	panel_.set_buttons(ok_button_, cancel_button_);
 
 	set_center_panel(&box_);
 	center_to_parent();

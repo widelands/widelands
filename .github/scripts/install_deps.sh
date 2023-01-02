@@ -6,9 +6,8 @@ set -ev
 ADD_PKG_LIST=""
 
 if [ "${GITHUB_JOB}" = "clang_tidy" ]; then
-  ADD_PKG_LIST="
-    clang-tidy  \
-    python-yaml"
+  pip install pyyaml
+  ADD_PKG_LIST="clang-tidy"
 fi
 
 if [ "${GITHUB_JOB}" = "testsuite" ]; then

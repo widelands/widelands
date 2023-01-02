@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -103,11 +103,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
                       kPlotWidth + 2 * kSpacing,
                       270,
                       _("Ware Statistics")),
-     iplayer_(parent),
-     main_box_(nullptr),
-     tab_panel_(nullptr),
-     display_(nullptr),
-     slider_(nullptr) {
+     iplayer_(parent) {
 
 	const Widelands::TribeDescr& player_tribe = parent.get_player()->tribe();
 

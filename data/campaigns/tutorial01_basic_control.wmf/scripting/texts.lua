@@ -271,7 +271,7 @@ tell_about_minimap_1 = {
    body = (
       h1(_("Using the Minimap")) ..
       li_image("images/wui/menus/toggle_minimap.png",
-         p(_([[Very good. And now about the minimap. ]])) ..
+         p(_([[Very good. And now about the minimap.]])) ..
          -- TRANSLATORS it = the minimap
          p(_([[You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu at the bottom of the screen or simply by using the keyboard shortcut ‘%s’.]]):bformat(wl.ui.get_shortcut("minimap")))) ..
       -- TRANSLATORS it = the minimap

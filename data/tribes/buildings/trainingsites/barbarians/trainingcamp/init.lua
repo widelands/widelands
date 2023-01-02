@@ -70,31 +70,6 @@ wl.Descriptions():new_trainingsite_type {
       { name = "helmet_warhelm", amount = 2 }
    },
 
-   ["soldier attack"] = {
-      food = {
-         {"fish", "meat"},
-         {"barbarians_bread"}
-      },
-      weapons = {
-         "ax_sharp",
-         "ax_broad",
-         "ax_bronze",
-         "ax_battle",
-         "ax_warriors"
-      }
-   },
-   ["soldier health"] = {
-      food = {
-         {"fish", "meat"},
-         {"barbarians_bread"}
-      },
-      weapons = {
-         "helmet",
-         "helmet_mask",
-         "helmet_warhelm"
-      }
-   },
-
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...

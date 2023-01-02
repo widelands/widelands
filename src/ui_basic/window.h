@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -156,17 +156,19 @@ protected:
 	virtual void on_resolution_changed_note(const GraphicResolutionChanged& note);
 
 private:
-	bool is_minimal_;
+	bool is_minimal_{false};
 	uint32_t oldh_;  // if it is minimized, this is the old height
-	bool dragging_;
-	int32_t drag_start_win_x_, drag_start_win_y_;
-	int32_t drag_start_mouse_x_, drag_start_mouse_y_;
-	bool pinned_;
+	bool dragging_{false};
+	int32_t drag_start_win_x_{0};
+	int32_t drag_start_win_y_{0};
+	int32_t drag_start_mouse_x_{0};
+	int32_t drag_start_mouse_y_{0};
+	bool pinned_{false};
 
 	std::string title_;
 
-	Panel* center_panel_;
-	Panel* fastclick_panel_;
+	Panel* center_panel_{nullptr};
+	Panel* fastclick_panel_{nullptr};
 
 	Button* button_close_;
 	Button* button_pin_;

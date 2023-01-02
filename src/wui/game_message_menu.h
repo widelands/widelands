@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,7 +83,7 @@ private:
 	UI::Button* archivebtn_;
 	UI::Button* togglemodebtn_;
 	UI::Button* centerviewbtn_;
-	Mode mode;
+	Mode mode{Mode::kInbox};
 	// Buttons for message types
 	UI::Button* geologistsbtn_;
 	UI::Button* economybtn_;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2022 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -131,8 +131,9 @@ void RouteAStar<Est_>::push(RoutingNode& node, int32_t cost, RoutingNode* backli
 }
 
 template <typename Est_> RoutingNode* RouteAStar<Est_>::step() {
-	if (open_.empty())
+	if (open_.empty()) {
 		return nullptr;
+	}
 
 	// Keep the neighbours vector around to avoid excessive amounts of memory
 	// allocations and frees.

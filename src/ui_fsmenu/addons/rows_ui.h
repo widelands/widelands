@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,16 +27,14 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 class AddOnsCtrl;
 
 class InstalledAddOnRow : public UI::Panel {
 public:
 	InstalledAddOnRow(Panel*, AddOnsCtrl*, std::shared_ptr<AddOns::AddOnInfo>, bool enabled);
-	~InstalledAddOnRow() override {
-	}
+	~InstalledAddOnRow() override = default;
 	const std::shared_ptr<AddOns::AddOnInfo> info() const {
 		return info_;
 	}
@@ -56,11 +54,10 @@ class RemoteAddOnRow : public UI::Panel {
 public:
 	RemoteAddOnRow(Panel*,
 	               AddOnsCtrl*,
-	               const std::shared_ptr<AddOns::AddOnInfo>,
+	               std::shared_ptr<AddOns::AddOnInfo>,
 	               const AddOns::AddOnVersion& installed_version,
 	               uint32_t installed_i18n_version);
-	~RemoteAddOnRow() override {
-	}
+	~RemoteAddOnRow() override = default;
 	void layout() override;
 	void draw(RenderTarget&) override;
 	const std::shared_ptr<AddOns::AddOnInfo> info() const {
@@ -81,7 +78,6 @@ private:
 	const bool full_upgrade_possible_;
 };
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_ROWS_UI_H

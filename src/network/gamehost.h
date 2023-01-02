@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ struct GameHostImpl;
 struct Client;
 namespace FsMenu {
 class MenuCapsule;
-}
+}  // namespace FsMenu
 
 /**
  * GameHost manages the lifetime of a network game in which this computer
@@ -57,7 +57,7 @@ public:
 	void run();
 	void run_direct();
 	void run_callback();
-	const std::string& get_local_playername() const;
+	[[nodiscard]] const std::string& get_local_playername() const;
 	int16_t get_local_playerposition();
 
 	// GameController interface
@@ -65,6 +65,7 @@ public:
 	void send_player_command(Widelands::PlayerCommand*) override;
 	Duration get_frametime() override;
 	GameController::GameType get_game_type() override;
+	void set_write_replay(bool replay) override;
 
 	uint32_t real_speed() override;
 	uint32_t desired_speed() override;
@@ -74,7 +75,7 @@ public:
 	// End GameController interface
 
 	// Pregame-related stuff
-	const GameSettings& settings() const;
+	[[nodiscard]] const GameSettings& settings() const;
 	/** return true in case all conditions for the game start are met */
 	bool can_launch();
 	void set_scenario(bool);
@@ -85,9 +86,9 @@ public:
 	             uint32_t maxplayers,
 	             bool savegame = false);
 	void set_player_state(uint8_t number, PlayerSettings::State state, bool host = false);
-	void set_player_tribe(uint8_t number, const std::string& tribe, bool const random_tribe = false);
+	void set_player_tribe(uint8_t number, const std::string& tribe, bool random_tribe = false);
 	void set_player_init(uint8_t number, uint8_t index);
-	void set_player_ai(uint8_t number, const std::string& name, bool const random_ai = false);
+	void set_player_ai(uint8_t number, const std::string& name, bool random_ai = false);
 	void set_player_name(uint8_t number, const std::string& name);
 	void set_player(uint8_t number, const PlayerSettings&);
 	void set_player_number(uint8_t number);
@@ -133,7 +134,7 @@ public:
 		update_network_speed();
 	}
 
-	bool forced_pause() {
+	[[nodiscard]] bool forced_pause() const {
 		return forced_pause_;
 	}
 
@@ -184,7 +185,7 @@ private:
 	void check_hung_clients();
 	void broadcast_real_speed(uint32_t speed);
 	void update_network_speed();
-	bool client_may_change_speed(uint8_t playernum) const;
+	[[nodiscard]] bool client_may_change_speed(uint8_t playernum) const;
 
 	std::string get_computer_player_name(uint8_t playernum);
 	bool has_user_name(const std::string& name, uint8_t ignoreplayer = UserSettings::none());
@@ -219,8 +220,8 @@ private:
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
-	bool forced_pause_;  // triggered by the forcePause host chat command, see HostChatProvider in
-	                     // gamehost.cc
+	bool forced_pause_{false};  // triggered by the forcePause host chat command, see
+	                            // HostChatProvider in gamehost.cc
 	std::unique_ptr<Widelands::Game> game_;
 	std::string script_to_run_;
 };

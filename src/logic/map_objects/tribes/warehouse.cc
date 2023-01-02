@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -315,9 +315,7 @@ Warehouse Building
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
                                Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, descriptions),
-     conquers_(0),
-     heal_per_second_(0) {
+   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, descriptions) {
 	heal_per_second_ = table.get_int("heal_per_second");
 	if (table.has_key("conquers")) {
 		conquers_ = table.get_int("conquers");
@@ -394,10 +392,7 @@ Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
    : Building(warehouse_descr),
      attack_target_(this),
      soldier_control_(this),
-     supply_(new WarehouseSupply(this)),
-     next_military_act_(Time(0)),
-     next_stock_remove_act_(Time(0)),
-     portdock_(nullptr) {
+     supply_(new WarehouseSupply(this)) {
 	cleanup_in_progress_ = false;
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
@@ -525,6 +520,7 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	Player* player = get_owner();
 
 	init_containers(*player);
+	set_warehouse_name(player->pick_warehousename(descr().get_isport()));
 
 	set_seeing(true);
 
@@ -1441,6 +1437,10 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
                          portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 
+void Warehouse::update_statistics_string(std::string* str) {
+	*str = get_warehouse_name();
+}
+
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
 	std::unique_ptr<WarehouseSettings> settings(new WarehouseSettings(descr(), owner().tribe()));
 	for (auto& pair : settings->ware_preferences) {
@@ -1458,6 +1458,7 @@ std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() co
 }
 
 void Warehouse::log_general_info(const EditorGameBase& egbase) const {
+	molog(egbase.get_gametime(), "Warehouse '%s'", warehouse_name_.c_str());
 	Building::log_general_info(egbase);
 
 	if (descr().get_isport()) {

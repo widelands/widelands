@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,12 +53,12 @@ struct Button : public NamedPanel {
 
 private:
 	Button  // Common constructor
-	   (Panel* const parent,
+	   (Panel* parent,
 	    const std::string& name,
-	    int32_t const x,
-	    int32_t const y,
-	    uint32_t const w,
-	    uint32_t const h,
+	    int32_t x,
+	    int32_t y,
+	    uint32_t w,
+	    uint32_t h,
 	    UI::ButtonStyle style,
 	    const Image* title_image,
 	    const std::string& title_text,
@@ -71,12 +71,12 @@ public:
 	 * Text conventions: Title Case for the 'title_text', Sentence case for the 'tooltip_text'
 	 */
 	Button  /// for textual buttons
-	   (Panel* const parent,
+	   (Panel* parent,
 	    const std::string& name,
-	    int32_t const x,
-	    int32_t const y,
-	    uint32_t const w,
-	    uint32_t const h,
+	    int32_t x,
+	    int32_t y,
+	    uint32_t w,
+	    uint32_t h,
 	    UI::ButtonStyle style,
 	    const std::string& title_text,
 	    const std::string& tooltip_text = std::string(),
@@ -86,12 +86,12 @@ public:
 	 * Text conventions: Sentence case for the 'tooltip_text'
 	 */
 	Button  /// for pictorial buttons
-	   (Panel* const parent,
+	   (Panel* parent,
 	    const std::string& name,
-	    const int32_t x,
-	    const int32_t y,
-	    const uint32_t w,
-	    const uint32_t h,
+	    int32_t x,
+	    int32_t y,
+	    uint32_t w,
+	    uint32_t h,
 	    UI::ButtonStyle style,
 	    const Image* title_image,
 	    const std::string& tooltip_text = std::string(),

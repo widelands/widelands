@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2022 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ struct Ship;
 // Building confirm windows
 void show_bulldoze_confirm(InteractivePlayer& player,
                            Widelands::Building& building,
-                           Widelands::PlayerImmovable* const todestroy = nullptr);
+                           Widelands::PlayerImmovable* todestroy = nullptr);
 
 void show_dismantle_confirm(InteractivePlayer& player, Widelands::Building& building);
 
@@ -45,5 +45,8 @@ void show_enhance_confirm(InteractivePlayer& player,
 void show_ship_sink_confirm(InteractivePlayer& player, Widelands::Ship& ship);
 
 void show_ship_cancel_expedition_confirm(InteractivePlayer& player, Widelands::Ship& ship);
+
+// Diplomacy confirm windows
+void show_resign_confirm(InteractivePlayer& player);
 
 #endif  // end of include guard: WL_WUI_ACTIONCONFIRM_H

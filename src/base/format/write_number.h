@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,7 @@ inline size_t number_of_digits(uint64_t arg, bool hexadecimal = false) {
 // by 1 in caller.
 inline char* write_minus_sign(char* out, bool localize) {
 	if (localize) {
-		for (const char* c = kLocalizedMinusSign; *c; ++c) {
+		for (const char* c = kLocalizedMinusSign; *c != 0; ++c) {
 			*out = *c;
 			++out;
 		}
@@ -79,7 +79,7 @@ inline char* write_minus_sign(char* out, bool localize) {
 // by 1 in caller.
 inline char* write_forced_plus_sign(char* out, bool localize, bool is_zero = false) {
 	if (localize && is_zero) {
-		for (const char* c = kDigitWidthSpace; *c; ++c) {
+		for (const char* c = kDigitWidthSpace; *c != 0; ++c) {
 			*out = *c;
 			++out;
 		}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2022 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,11 +48,11 @@ struct ButtonStyleInfo {
 	     disabled_(new UI::TextPanelStyleInfo(other.disabled())) {
 	}
 
-	const UI::TextPanelStyleInfo& enabled() const {
-		return *enabled_.get();
+	[[nodiscard]] const UI::TextPanelStyleInfo& enabled() const {
+		return *enabled_;
 	}
-	const UI::TextPanelStyleInfo& disabled() const {
-		return *disabled_.get();
+	[[nodiscard]] const UI::TextPanelStyleInfo& disabled() const {
+		return *disabled_;
 	}
 
 private:

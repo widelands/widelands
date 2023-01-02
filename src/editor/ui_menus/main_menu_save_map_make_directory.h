@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,8 +41,9 @@ struct MainMenuSaveMapMakeDirectory : public UI::Window {
 	}
 
 private:
-	const int padding_;
-	const int butw_, buth_;
+	static constexpr int padding_{5};
+	const int butw_;
+	static constexpr int buth_{20};
 	std::string dirname_;
 	UI::Box vbox_;
 	UI::Textarea label_;

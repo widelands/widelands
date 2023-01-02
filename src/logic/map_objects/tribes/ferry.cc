@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,8 +41,7 @@ uint32_t FerryDescr::movecaps() const {
 	return MOVECAPS_SWIM | MOVECAPS_WALK;
 }
 
-Ferry::Ferry(const FerryDescr& ferry_descr)
-   : Carrier(ferry_descr), fleet_(nullptr), destination_(nullptr), unemployed_since_(0) {
+Ferry::Ferry(const FerryDescr& ferry_descr) : Carrier(ferry_descr) {
 }
 
 bool Ferry::init(EditorGameBase& egbase) {

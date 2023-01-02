@@ -18,6 +18,7 @@
 #include "graphic/texture.h"
 
 #include <cassert>
+#include <cstddef>
 
 #include <SDL_surface.h>
 
@@ -73,7 +74,7 @@ public:
 		glDeleteFramebuffers(1, &gl_framebuffer_id_);
 	}
 
-	GLuint id() const {
+	[[nodiscard]] GLuint id() const {
 		return gl_framebuffer_id_;
 	}
 
@@ -212,7 +213,7 @@ void Texture::lock() {
 		throw wexception("A surface that does not own its pixels can not be locked..");
 	}
 
-	pixels_.reset(new uint8_t[width() * height() * 4]);
+	pixels_.reset(new uint8_t[4ULL * width() * height()]);
 
 	Gl::State::instance().bind(GL_TEXTURE0, blit_data_.texture_id);
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels_.get());

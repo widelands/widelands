@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,26 +33,25 @@ struct FCoords;
 struct FindNode {
 private:
 	struct BaseCapsule {
-		BaseCapsule() : refcount(1) {
-		}
-		virtual ~BaseCapsule() {
-		}
+		BaseCapsule() = default;
+		virtual ~BaseCapsule() = default;
 
 		void addref() {
 			++refcount;
 		}
 		void deref() {
-			if (--refcount == 0)
+			if (--refcount == 0) {
 				delete this;
+			}
 		}
-		virtual bool accept(const EditorGameBase&, const FCoords& coord) const = 0;
+		[[nodiscard]] virtual bool accept(const EditorGameBase&, const FCoords& coord) const = 0;
 
-		int refcount;
+		int refcount{1};
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
-		explicit Capsule(const T& init_op) : op(init_op) {
+		Capsule(const T& init_op) : op(init_op) {  // NOLINT allow implicit conversion
 		}
-		bool accept(const EditorGameBase& map, const FCoords& coord) const override {
+		[[nodiscard]] bool accept(const EditorGameBase& map, const FCoords& coord) const override {
 			return op.accept(map, coord);
 		}
 
@@ -62,7 +61,7 @@ private:
 	BaseCapsule* capsule;
 
 public:
-	explicit FindNode(const FindNode& o) {
+	FindNode(const FindNode& o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -71,18 +70,21 @@ public:
 		capsule = nullptr;
 	}
 	FindNode& operator=(const FindNode& o) {
+		if (&o == this) {
+			return *this;
+		}
 		capsule->deref();
 		capsule = o.capsule;
 		capsule->addref();
 		return *this;
 	}
 
-	template <typename T> FindNode(const T& op) {
+	template <typename T> FindNode(const T& op) {  // NOLINT allow implicit conversion
 		capsule = new Capsule<T>(op);
 	}
 
 	// Return true if this node should be returned by find_fields()
-	bool accept(const EditorGameBase& map, const FCoords& coord) const {
+	[[nodiscard]] bool accept(const EditorGameBase& map, const FCoords& coord) const {
 		return capsule->accept(map, coord);
 	}
 };
@@ -91,7 +93,7 @@ struct FindNodeCaps {
 	explicit FindNodeCaps(uint8_t init_mincaps) : mincaps(init_mincaps) {
 	}
 
-	bool accept(const EditorGameBase&, const FCoords&) const;
+	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	uint8_t mincaps;
@@ -99,12 +101,11 @@ private:
 
 /// Accepts a node if it is accepted by all subfunctors.
 struct FindNodeAnd {
-	FindNodeAnd() {
-	}
+	FindNodeAnd() = default;
 
 	void add(const FindNode&, bool negate = false);
 
-	bool accept(const EditorGameBase&, const FCoords&) const;
+	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	struct Subfunctor {
@@ -133,7 +134,7 @@ struct FindNodeSize {
 	explicit FindNodeSize(Size init_size) : size(init_size) {
 	}
 
-	bool accept(const EditorGameBase&, const FCoords&) const;
+	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	Size size;
@@ -146,7 +147,7 @@ struct FindNodeImmovableSize {
 	explicit FindNodeImmovableSize(uint32_t init_sizes) : sizes(init_sizes) {
 	}
 
-	bool accept(const EditorGameBase&, const FCoords&) const;
+	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	uint32_t sizes;
@@ -157,7 +158,7 @@ struct FindNodeImmovableAttribute {
 	explicit FindNodeImmovableAttribute(uint32_t attrib) : attribute(attrib) {
 	}
 
-	bool accept(const EditorGameBase&, const FCoords&) const;
+	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	uint32_t attribute;
@@ -168,7 +169,7 @@ struct FindNodeResource {
 	explicit FindNodeResource(DescriptionIndex res) : resource(res) {
 	}
 
-	bool accept(const EditorGameBase&, const FCoords&) const;
+	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	DescriptionIndex resource;
@@ -182,7 +183,7 @@ struct FindNodeResourceBreedable {
 	   : resource(res), strictness(br) {
 	}
 
-	bool accept(const EditorGameBase&, const FCoords&) const;
+	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	DescriptionIndex resource;
@@ -191,9 +192,9 @@ private:
 
 /// Accepts a node where at least 1 adjacent triangle has enhancable terrain
 struct FindNodeTerraform {
-	FindNodeTerraform(const std::string& c) : category_(c) {
+	explicit FindNodeTerraform(const std::string& c) : category_(c) {
 	}
-	bool accept(const EditorGameBase&, const FCoords&) const;
+	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const;
 
 	const std::string category_;
 };
@@ -204,7 +205,7 @@ struct FindNodeShore {
 	explicit FindNodeShore(uint16_t f = 1) : min_fields(f) {
 	}
 
-	bool accept(const EditorGameBase&, const FCoords&) const;
+	[[nodiscard]] bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	// Minimal number of reachable swimmable fields. 1 is minimum for this to be considered "shore"

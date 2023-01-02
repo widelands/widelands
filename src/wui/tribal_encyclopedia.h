@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 class InteractivePlayer;
 
 struct TribalEncyclopedia : public UI::EncyclopediaWindow {
-	TribalEncyclopedia(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
+	TribalEncyclopedia(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* lua);
 };
 
 #endif  // end of include guard: WL_WUI_TRIBAL_ENCYCLOPEDIA_H

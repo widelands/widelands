@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2022 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -131,7 +131,7 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
            0,
            0),
      tab_style_(style),
-     active_(0),
+
      highlight_(kNotFound),
      background_style_(style) {
 	set_can_focus(true);

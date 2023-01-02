@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2022 by the Widelands Development Team
+ * Copyright (C) 2017-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -144,8 +144,6 @@ RenderedRect::DrawMode RenderedRect::mode() const {
 }
 
 // RenderedText
-RenderedText::RenderedText() : memory_tree_root_(nullptr) {
-}
 RenderedText::~RenderedText() {
 	delete memory_tree_root_;
 }

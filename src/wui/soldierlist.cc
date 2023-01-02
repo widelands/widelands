@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -110,22 +110,21 @@ private:
 	int icon_width_;
 	int icon_height_;
 
-	int32_t last_animate_time_;
+	int32_t last_animate_time_{0};
 };
 
 SoldierPanel::SoldierPanel(UI::Panel& parent,
                            Widelands::EditorGameBase& gegbase,
                            Widelands::Building& building)
-   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
-     egbase_(gegbase),
-     building_(&building),
-     last_animate_time_(0) {
+   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0), egbase_(gegbase), building_(&building) {
 	assert(building.soldier_control() != nullptr);
 	Soldier::calc_info_icon_size(building.owner().tribe(), icon_width_, icon_height_);
 	icon_width_ += 2 * kIconBorder;
 	icon_height_ += 2 * kIconBorder;
 
-	Widelands::Quantity maxcapacity = building.soldier_control()->max_soldier_capacity();
+	/* The +1 is because up to 1 additional soldier may be coming
+	 * to the building for the hero/rookie exchange. */
+	const Widelands::Quantity maxcapacity = building.soldier_control()->max_soldier_capacity() + 1;
 	if (maxcapacity <= kMaxColumns) {
 		cols_ = maxcapacity;
 		rows_ = 1;
@@ -393,7 +392,7 @@ private:
 
 	InteractiveBase& ibase_;
 	Widelands::Building& building_;
-	const UI::FontStyle font_style_;
+	const UI::FontStyle font_style_{UI::FontStyle::kWuiLabel};
 	SoldierPanel soldierpanel_;
 	UI::Radiogroup soldier_preference_;
 	UI::Textarea infotext_;
@@ -406,7 +405,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 
      ibase_(ib),
      building_(building),
-     font_style_(UI::FontStyle::kWuiLabel),
+
      soldierpanel_(*this, ib.egbase(), building),
      infotext_(
         this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Click soldier to send away")) {

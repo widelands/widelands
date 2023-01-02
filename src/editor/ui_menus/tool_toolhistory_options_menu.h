@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ private:
 	std::string make_tooltip(const ToolConf& conf, const std::string& title);
 	void rebuild_list();
 
-	int32_t margin_;
+	int32_t margin_{4};
 	int32_t box_width_;
 	UI::Box box_;
 	UI::Listselect<std::string> list_;

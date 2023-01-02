@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,15 +33,15 @@ struct ToolConf {
 	ToolConf& operator=(const ToolConf&) = default;
 
 	/// Returns a description of the conf's content in non-locale-dependent form.
-	std::string to_key() const;
+	[[nodiscard]] std::string to_key() const;
 
-	EditorTool* primary;
+	EditorTool* primary{nullptr};
 
-	int32_t change_by;
-	Widelands::ResourceAmount set_to;
+	int32_t change_by{0};
+	Widelands::ResourceAmount set_to{0U};
 	Widelands::HeightInterval interval;
 	std::set<Widelands::DescriptionIndex> map_obj_types;
-	Widelands::DescriptionIndex resource;
+	Widelands::DescriptionIndex resource{0U};
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOL_CONF_H

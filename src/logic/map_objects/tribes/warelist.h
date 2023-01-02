@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,8 +30,7 @@ namespace Widelands {
  * It is useful for warehouses and for economy-wide inventory.
  */
 struct WareList {
-	WareList() {
-	}
+	WareList() = default;
 	~WareList();
 
 	void clear() {
@@ -39,7 +38,7 @@ struct WareList {
 	}  /// Clear the storage
 
 	/// \return Highest possible ware id
-	DescriptionIndex get_nrwareids() const {
+	[[nodiscard]] DescriptionIndex get_nrwareids() const {
 		return DescriptionIndex(wares_.size());
 	}
 
@@ -47,7 +46,7 @@ struct WareList {
 	void add(const WareList&);
 	void remove(DescriptionIndex, Quantity = 1);
 	void remove(const WareList& wl);
-	Quantity stock(DescriptionIndex) const;
+	[[nodiscard]] Quantity stock(DescriptionIndex) const;
 
 	void set_nrwares(DescriptionIndex const i) {
 		assert(wares_.empty());

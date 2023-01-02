@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,8 +33,7 @@ namespace FsMenu {
 class About : public UI::UniqueWindow {
 public:
 	explicit About(MainMenu&, UI::UniqueWindow::Registry&);
-	~About() override {
-	}
+	~About() override = default;
 
 	WindowLayoutID window_layout_id() const override {
 		return UI::Window::WindowLayoutID::kFsMenuAbout;

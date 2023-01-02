@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "economy/road.h"
+
+#include <cstddef>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -43,16 +45,10 @@ bool Road::is_road_descr(MapObjectDescr const* const descr) {
 	return descr == &g_road_descr;
 }
 
-Road::CarrierSlot::CarrierSlot()
-   : carrier(nullptr),
-     carrier_request(nullptr),
-     carrier_type_id(std::numeric_limits<uint8_t>::max()) {
-}
-
 /**
  * Most of the actual work is done in init.
  */
-Road::Road() : RoadBase(g_road_descr), busy_(false), wallet_(0), last_wallet_charge_(0) {
+Road::Road() : RoadBase(g_road_descr) {
 }
 
 /**
@@ -507,7 +503,7 @@ void Road::add_to_wallet(int32_t sum) {
  * Add carrying payment, and check for promotion.
  */
 void Road::pay_for_road(Game& game, uint8_t queue_length) {
-	wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
+	wallet_ += 2UL * (carriers_count() + 1) * (4UL * queue_length + path_.get_nsteps());
 	charge_wallet(game);
 
 	if (!busy_ && wallet_ > 1.5 * kRoadAnimalPrice) {

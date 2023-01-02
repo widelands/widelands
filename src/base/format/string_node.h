@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -82,7 +82,7 @@ struct StringNode : FormatNode {
 			}
 			if (written < min_width_) {
 				written = min_width_ - written;
-				for (; written; ++out, --written) {
+				for (; written != 0u; ++out, --written) {
 					*out = ' ';
 				}
 			}

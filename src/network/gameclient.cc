@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,6 +96,8 @@ struct GameClientImpl {
 	 * The speed desired by the local player.
 	 */
 	uint32_t desiredspeed;
+
+	bool should_write_replay;
 
 	/// Backlog of chat messages
 	std::vector<ChatMessage> chatmessages;
@@ -220,6 +222,7 @@ GameClient::GameClient(FsMenu::MenuCapsule& c,
 	d->localplayername = playername;
 	d->modal = nullptr;
 	d->panel_whose_mutex_needs_resetting_on_game_start = nullptr;
+	d->should_write_replay = true;
 	d->game = nullptr;
 	d->realspeed = 0;
 	d->desiredspeed = 1000;
@@ -247,7 +250,7 @@ GameClient::~GameClient() {
 void GameClient::run() {
 	d->send_hello();
 	d->settings.multiplayer = true;
-	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, d->internet_);
+	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, d->internet_);
 
 	// The main menu's think() loop creates a mutex lock that would permanently block the Game
 	// from locking this mutex. So when the game starts we'll need to break the lock by force.
@@ -260,10 +263,15 @@ void GameClient::run() {
 	NEVER_HERE();
 }
 
+void GameClient::set_write_replay(bool replay) {
+	d->should_write_replay = replay;
+}
+
 void GameClient::do_run(RecvPacket& packet) {
 	d->server_is_waiting = true;
 
 	Widelands::Game game;
+	game.set_write_replay(d->should_write_replay);
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 	game.logic_rand_seed(packet.unsigned_32());
 

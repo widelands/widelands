@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,12 +37,10 @@ void FindNodeAnd::add(const FindNode& findfield, bool const negate) {
 }
 
 bool FindNodeAnd::accept(const EditorGameBase& egbase, const FCoords& coord) const {
-	for (const Subfunctor& subfunctor : subfunctors) {
-		if (subfunctor.findfield.accept(egbase, coord) == subfunctor.negate) {
-			return false;
-		}
-	}
-	return true;
+	return std::all_of(
+	   subfunctors.begin(), subfunctors.end(), [&egbase, &coord](const Subfunctor& subfunctor) {
+		   return subfunctor.findfield.accept(egbase, coord) != subfunctor.negate;
+	   });
 }
 
 bool FindNodeCaps::accept(const EditorGameBase& /* egbase */, const FCoords& coord) const {

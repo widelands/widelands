@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2022 by the Widelands Development Team
+ * Copyright (C) 2012-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,11 +45,10 @@ Section& get_config_section(const std::string&);
 Section* get_config_section_ptr(const std::string&);
 bool get_config_bool(const std::string& name, bool dflt);
 bool get_config_bool(const std::string& section, const std::string& name, bool dflt);
-int32_t get_config_int(const std::string& name, const int32_t dflt = 0);
+int32_t get_config_int(const std::string& name, int32_t dflt = 0);
 int32_t get_config_int(const std::string& section, const std::string& name, int32_t dflt);
 uint32_t get_config_natural(const std::string& name, uint32_t dflt);
-uint32_t
-get_config_natural(const std::string& section, const std::string& name, const uint32_t dflt);
+uint32_t get_config_natural(const std::string& section, const std::string& name, uint32_t dflt);
 std::string get_config_string(const std::string& name, const std::string& dflt);
 std::string
 get_config_string(const std::string& section, const std::string& name, const std::string& dflt);
@@ -111,6 +110,9 @@ enum class KeyboardShortcut : uint16_t {
 	kCommon_Begin = kMainMenu_End + 1,
 	kCommonFullscreen = kCommon_Begin,
 	kCommonScreenshot,
+	kCommonSave,
+	kCommonLoad,
+	kCommonExit,
 	kCommonTextCut,
 	kCommonTextCopy,
 	kCommonTextPaste,
@@ -123,18 +125,28 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonZoomIn,
 	kCommonZoomOut,
 	kCommonZoomReset,
+	kCommonQuicknavGUI,
 	kCommonQuicknavPrev,
 	kCommonQuicknavNext,
 	kCommon_End = kCommonQuicknavNext,
 
 	kEditor_Begin = kCommon_End + 1,
-	kEditorMenu = kEditor_Begin,
-	kEditorSave,
-	kEditorLoad,
+	kEditorNewMap = kEditor_Begin,
+	kEditorNewRandomMap,
+	kEditorMapOptions,
 	kEditorUndo,
 	kEditorRedo,
 	kEditorTools,
+	kEditorChangeHeight,
+	kEditorRandomHeight,
+	kEditorTerrain,
+	kEditorImmovables,
+	kEditorAnimals,
+	kEditorResources,
+	kEditorPortSpaces,
 	kEditorInfo,
+	kEditorMapOrigin,
+	kEditorMapSize,
 	kEditorPlayers,
 	kEditorToolHistory,
 	kEditorShowhideGrid,
@@ -155,9 +167,10 @@ enum class KeyboardShortcut : uint16_t {
 	kEditor_End = kEditorToolsize10,
 
 	kInGame_Begin = kEditor_End + 1,
-	kInGameSave = kInGame_Begin,
-	kInGameLoad,
+	kInGameSoundOptions = kInGame_Begin,
+	kInGameRestart,
 	kInGameChat,
+	kInGamePinnedNote,
 	kInGameMessages,
 	kInGameObjectives,
 	kInGameDiplomacy,
@@ -278,7 +291,7 @@ KeyboardShortcut shortcut_from_string(const std::string&);
  * Generate a human-readable description of a keyboard shortcut.
  * Return value will either be an empty string or have a trailing "+".
  */
-std::string keymod_string_for(const uint16_t modstate, const bool rt_escape = true);
+std::string keymod_string_for(uint16_t modstate, bool rt_escape = true);
 std::string shortcut_string_for(SDL_Keysym, bool rt_escape);
 std::string shortcut_string_for(KeyboardShortcut, bool rt_escape);
 
@@ -295,21 +308,28 @@ void init_fastplace_default_shortcuts(
 /** Clear a shortcut. */
 void unset_shortcut(KeyboardShortcut);
 
+// Default step sizes for changing value of spinbox, slider, etc. on PgUp/PgDown or Ctrl+mousewheel
+namespace ChangeBigStep {
+constexpr int32_t kSmallRange = 3;
+constexpr int32_t kMediumRange = 5;
+constexpr int32_t kWideRange = 10;
+}  // namespace ChangeBigStep
+
 // Return values for changing value of spinbox, slider, etc.
 enum class ChangeType : int32_t {
 	kSetMin = std::numeric_limits<int32_t>::min(),  // set value to minimum
 	                                                //     -- keys: Home, Ctrl + decrease keys
-	kBigMinus = -10,                                // decrease by big step -- key: PageDown
+	kBigMinus = -ChangeBigStep::kWideRange,         // decrease by big step -- key: PageDown
 	kMinus = -1,                                    // decrease  -- keys: Left, Down, Minus
 	kNone = 0,                                      // no change -- all other keys
 	kPlus = 1,                                      // increase  -- keys: Right, Up, Plus
-	kBigPlus = 10,                                  // increase by big step -- key: PageUp
+	kBigPlus = ChangeBigStep::kWideRange,           // increase by big step -- key: PageUp
 	kSetMax = std::numeric_limits<int32_t>::max()   // set value to maximum
 	                                                //     -- keys: End, Ctrl + increase keys
 };
 
 // Helper function for spinbox, slider, etc. handle_key(...)
-ChangeType get_keyboard_change(SDL_Keysym, bool enable_big_step = false);
+ChangeType get_keyboard_change(SDL_Keysym);
 
 /*
  * Sets the directory where to read/write kConfigFile.

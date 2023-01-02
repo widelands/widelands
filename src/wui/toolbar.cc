@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,10 +22,7 @@
 
 MainToolbar::MainToolbar(InfoPanel& parent)
    : UI::Panel(&parent, UI::PanelStyle::kWui, 0, 0, parent.get_inner_w(), parent.get_inner_h()),
-     box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-     on_top(false),
-     draw_background(false),
-     repeat_(0) {
+     box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
 	parent.set_toolbar(*this);
 }
 

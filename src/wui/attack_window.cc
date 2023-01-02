@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -458,7 +458,7 @@ bool AttackWindow::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 
 Widelands::Extent AttackWindow::ListOfSoldiers::size() const {
 	const size_t nr_soldiers = count_soldiers();
-	uint32_t rows = nr_soldiers / current_size_;
+	size_t rows = nr_soldiers / current_size_;
 	if (nr_soldiers == 0 || rows * current_size_ < nr_soldiers) {
 		++rows;
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,12 +25,14 @@
 namespace {
 
 // Returns a player name font tag with player color.
-std::string as_playercolor(const int16_t playern, const std::string& text) {
-	const RGBColor& playercolor = ((playern >= 0) && playern < kMaxPlayers) ?
-                                    kPlayerColors[playern] :
-                                    g_style_manager->font_style(UI::FontStyle::kChatServer).color();
+std::string
+as_playercolor(const ChatColorForPlayer& fn, const int16_t playern, const std::string& text) {
+	const RGBColor* playercolor = fn(playern + 1);
 	return g_style_manager->font_style(UI::FontStyle::kChatPlayername)
-	   .as_font_tag(StyleManager::color_tag(text, playercolor));
+	   .as_font_tag(StyleManager::color_tag(
+	      text, playercolor != nullptr ?
+                  *playercolor :
+                  g_style_manager->font_style(UI::FontStyle::kChatServer).color()));
 }
 
 std::string sanitize_message(const std::string& given_text) {
@@ -43,7 +45,7 @@ std::string sanitize_message(const std::string& given_text) {
 }  // namespace
 
 // Returns a richtext string that can be displayed to the user.
-std::string format_as_richtext(const ChatMessage& chat_message) {
+std::string format_as_richtext(const ChatMessage& chat_message, const ChatColorForPlayer& fn) {
 	std::string message;
 
 	const std::string sanitized = sanitize_message(chat_message.msg);
@@ -53,11 +55,11 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	if (!chat_message.recipient.empty() && !chat_message.sender.empty()) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me") != 0) {
-			message = as_playercolor(
-			             chat_message.playern, format("%s @%s: ", sender_escaped, recipient_escaped)) +
+			message = as_playercolor(fn, chat_message.playern,
+			                         format("%s @%s: ", sender_escaped, recipient_escaped)) +
 			          g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(sanitized);
 		} else {
-			message = as_playercolor(chat_message.playern,
+			message = as_playercolor(fn, chat_message.playern,
 			                         (format("@%s: %s", recipient_escaped, sender_escaped))) +
 			          g_style_manager->font_style(UI::FontStyle::kChatWhisper)
 			             .as_font_tag(sanitized.substr(3));
@@ -65,13 +67,13 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	} else {
 		// Normal messages handling
 		if (sanitized.compare(0, 3, "/me") == 0) {
-			message = as_playercolor(chat_message.playern,
+			message = as_playercolor(fn, chat_message.playern,
 			                         (chat_message.sender.empty() ? "***" : sender_escaped)) +
 			          g_style_manager->font_style(UI::FontStyle::kChatMessage)
 			             .as_font_tag(sanitized.substr(3));
 		} else if (!chat_message.sender.empty()) {
 			const std::string sender_formatted =
-			   as_playercolor(chat_message.playern, format("%s:", sender_escaped));
+			   as_playercolor(fn, chat_message.playern, format("%s:", sender_escaped));
 			message =
 			   format("%s %s", sender_formatted,
 			          g_style_manager->font_style(UI::FontStyle::kChatMessage).as_font_tag(sanitized));

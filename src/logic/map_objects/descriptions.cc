@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,9 +66,7 @@ Descriptions::Descriptions(LuaInterface* lua, const AddOns::AddOnsList& addons)
      workers_(new DescriptionMaintainer<WorkerDescr>()),
      tribes_(new DescriptionMaintainer<TribeDescr>()),
      compatibility_table_(new PostOneWorldLegacyLookupTable()),
-     largest_workarea_(0),
-     scenario_tribes_(nullptr),
-     tribes_have_been_registered_(false),
+
      subscriber_(Notifications::subscribe<DescriptionManager::NoteMapObjectDescriptionTypeCheck>(
         [this](DescriptionManager::NoteMapObjectDescriptionTypeCheck note) { check(note); })),
      lua_(lua),

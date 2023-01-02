@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2022 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,8 +38,7 @@ class Worker;
  * encapsulated in this structure during shipping and the waiting time in the @ref PortDock.
  */
 struct ShippingItem {
-	ShippingItem() {
-	}
+	ShippingItem() = default;
 	explicit ShippingItem(WareInstance& ware);
 	explicit ShippingItem(Worker& worker);
 

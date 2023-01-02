@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +51,8 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                      0,
                      _("Configure this game"),
                      UI::Align::kCenter),
+     write_replay_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Write Replay")),
      warn_desyncing_addon_(
         &right_column_content_box_,
         0,
@@ -118,9 +120,9 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 
      // Variables and objects used in the menu
      settings_(settings),
-     ctrl_(ctrl),
-     peaceful_mode_forbidden_(false) {
+     ctrl_(ctrl) {
 	warn_desyncing_addon_.set_visible(false);
+	write_replay_.set_state(true);
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	win_condition_duration_.changed.connect([this]() { win_condition_duration_changed(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
@@ -151,6 +153,7 @@ LaunchGame::~LaunchGame() {
 void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add(&write_replay_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add(&warn_desyncing_addon_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(4 * kPadding);
 	right_column_content_box_.add(&configure_game_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -185,13 +188,16 @@ void LaunchGame::layout() {
 }
 
 void LaunchGame::update_warn_desyncing_addon() {
-	for (const auto& pair : AddOns::g_addons) {
-		if (pair.second && !pair.first->sync_safe) {
-			warn_desyncing_addon_.set_visible(true);
-			return;
-		}
-	}
-	warn_desyncing_addon_.set_visible(false);
+	const bool has_desyncing_addon = std::any_of(
+	   AddOns::g_addons.begin(), AddOns::g_addons.end(),
+	   [](const AddOns::AddOnState& addon) { return addon.second && !addon.first->sync_safe; });
+
+	warn_desyncing_addon_.set_visible(has_desyncing_addon);
+	write_replay_.set_visible(!has_desyncing_addon);
+}
+
+bool LaunchGame::should_write_replay() const {
+	return write_replay_.is_visible() && write_replay_.get_state();
 }
 
 void LaunchGame::update_peaceful_mode() {

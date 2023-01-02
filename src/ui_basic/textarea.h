@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ namespace UI {
  */
 struct Textarea : public Panel {
 public:
-	explicit Textarea(Panel* const parent,
+	explicit Textarea(Panel* parent,
 	                  PanelStyle,
 	                  FontStyle,
 	                  int32_t x,
@@ -91,7 +91,7 @@ protected:
 private:
 	enum class LayoutMode { AutoMove, Layouted };
 
-	Textarea(Panel* const parent,
+	Textarea(Panel* parent,
 	         PanelStyle,
 	         FontStyle,
 	         int32_t x,

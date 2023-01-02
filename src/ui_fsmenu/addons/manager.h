@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,8 +36,7 @@
 #include "ui_basic/window.h"
 #include "ui_fsmenu/main.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 class RemoteAddOnRow;
 
@@ -147,7 +146,6 @@ private:
 	std::string username_, password_;
 };
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_MANAGER_H

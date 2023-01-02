@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,11 +40,11 @@ private:
 	void load_tips(const std::string& name, const Widelands::AllTribes&);
 	void show_tip(RenderTarget&, const Recti& bounds, int32_t index);
 
-	uint32_t last_updated_;
-	uint32_t update_after_;
+	uint32_t last_updated_{0U};
+	uint32_t update_after_{0U};
 	UI::ProgressWindow& progressWindow_;
-	bool registered_;
-	uint32_t last_tip_;
+	bool registered_{false};
+	uint32_t last_tip_{0U};
 
 	std::vector<Tip> tips_;
 };

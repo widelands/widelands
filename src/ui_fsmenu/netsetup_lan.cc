@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,6 +108,12 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add(&hostgame_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_inf_space();
+	right_column_content_box_.add(
+	   new UI::MultilineTextarea(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu,
+	                             AddOns::list_game_relevant_addons(), UI::Align::kLeft,
+	                             UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add_inf_space();

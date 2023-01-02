@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2022 by the Widelands Development Team
+ * Copyright (C) 2013-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,8 +28,8 @@ struct MapVersion {
 	std::string map_source_url;
 	std::string map_source_release;
 	std::string map_creator_version;
-	int32_t map_version_major;
-	int32_t map_version_minor;
+	int32_t map_version_major{0};
+	int32_t map_version_minor{0};
 	uint32_t map_version_timestamp;
 	// Map compatibility information for the website
 	std::string minimum_required_widelands_version;

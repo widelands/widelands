@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,8 +42,7 @@ public:
 		return "";
 	}
 
-	LuaGame() {
-	}
+	LuaGame() = default;
 	explicit LuaGame(lua_State* L);
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
@@ -87,11 +86,9 @@ public:
 		return "";
 	}
 
-	LuaEditor() {
-	}
+	LuaEditor() = default;
 	explicit LuaEditor(lua_State* L);
-	~LuaEditor() override {
-	}
+	~LuaEditor() override = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
@@ -118,8 +115,7 @@ public:
 		return "";
 	}
 
-	LuaDescriptions() {
-	}
+	LuaDescriptions() = default;
 	explicit LuaDescriptions(lua_State* L);
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
@@ -221,4 +217,4 @@ public:
 void luaopen_wlroot(lua_State*, bool in_editor);
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_H
-}
+}  // namespace LuaRoot

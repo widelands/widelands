@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,13 +29,7 @@
 namespace Widelands {
 
 PartiallyFinishedBuilding::PartiallyFinishedBuilding(const BuildingDescr& gdescr)
-   : Building(gdescr),
-     building_(nullptr),
-     builder_request_(nullptr),
-     working_(false),
-     work_steptime_(0),
-     work_completed_(0),
-     work_steps_(0) {
+   : Building(gdescr) {
 }
 
 /*

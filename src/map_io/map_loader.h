@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,11 +33,10 @@ class MapLoader {
 public:
 	enum class LoadType { kGame, kScenario, kEditor };
 
-	MapLoader(const std::string& filename, Map& M) : map_(M), state_(State::kInit) {
+	MapLoader(const std::string& filename, Map& M) : map_(M) {
 		map_.set_filename(filename);
 	}
-	virtual ~MapLoader() {
-	}
+	virtual ~MapLoader() = default;
 
 	// If `addons` is not null, this function will also disable all world add-ons
 	// in that vector and enable the ones required by the map.
@@ -57,13 +56,13 @@ protected:
 	void set_state(State const s) {
 		state_ = s;
 	}
-	State get_state() const {
+	[[nodiscard]] State get_state() const {
 		return state_;
 	}
 	Map& map_;
 
 private:
-	State state_;
+	State state_{State::kInit};
 };
 }  // namespace Widelands
 

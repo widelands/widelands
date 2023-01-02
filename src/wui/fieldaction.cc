@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "graphic/style_manager.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -49,7 +50,6 @@ namespace Widelands {
 class BuildingDescr;
 }  // namespace Widelands
 using Widelands::Building;
-using Widelands::EditorGameBase;
 using Widelands::Game;
 
 constexpr int kBuildGridCellSize = 50;
@@ -180,6 +180,7 @@ public:
 	void act_scout();
 	void act_mark_removal();
 	void act_unmark_removal();
+	void act_pinned_note();
 
 private:
 	uint32_t add_tab(const std::string& name,
@@ -203,9 +204,9 @@ private:
 	Widelands::FCoords node_;
 
 	UI::TabPanel tabpanel_;
-	bool fastclick_;  // if true, put the mouse over first button in first tab
-	uint32_t best_tab_;
-	bool showing_workarea_preview_;
+	bool fastclick_{true};  // if true, put the mouse over first button in first tab
+	uint32_t best_tab_{0U};
+	bool showing_workarea_preview_{false};
 	std::set<Widelands::Coords> overlapping_workareas_;
 	bool is_showing_workarea_overlaps_;
 	Widelands::DescriptionIndex building_under_mouse_;
@@ -240,6 +241,7 @@ constexpr const char* const kImgButtonScout = "images/wui/menus/watch_follow.png
 constexpr const char* const kImgButtonMarkRemoval = "images/wui/fieldaction/menu_mark_removal.png";
 constexpr const char* const kImgButtonUnmarkRemoval =
    "images/wui/fieldaction/menu_unmark_removal.png";
+constexpr const char* const kImgButtonPinnedNote = "images/wui/fieldaction/pinned_note.png";
 
 constexpr const char* const kImgTabTarget = "images/wui/fieldaction/menu_tab_target.png";
 
@@ -256,9 +258,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
      tabpanel_(this, UI::TabPanelStyle::kWuiDark),
-     fastclick_(true),
-     best_tab_(0),
-     showing_workarea_preview_(false),
+
      is_showing_workarea_overlaps_(ib->get_display_flag(InteractiveBase::dfShowWorkareaOverlap)),
      building_under_mouse_(Widelands::INVALID_INDEX) {
 	ib->set_sel_freeze(true);
@@ -368,8 +368,9 @@ void FieldActionWindow::add_buttons_auto() {
 	UI::Box& watchbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	upcast(InteractiveGameBase, igbase, &ibase());
+	upcast(InteractivePlayer, ipl, igbase);
 
-	if (upcast(InteractivePlayer, ipl, igbase)) {
+	if (ipl != nullptr) {
 		// Target immovables for removal by workers
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
 			if (mo->is_marked_for_removal(ipl->player_number())) {
@@ -494,9 +495,14 @@ void FieldActionWindow::add_buttons_auto() {
 		           _("Watch field in a separate window"));
 	}
 
+	if (ipl != nullptr) {
+		add_button(&watchbox, "pinned_note", kImgButtonPinnedNote,
+		           &FieldActionWindow::act_pinned_note, _("Pinned note"));
+	}
+
 	if (ibase().get_display_flag(InteractiveBase::dfDebug)) {
 		add_button(
-		   &watchbox, "debug", kImgDebug, &FieldActionWindow::act_debug, _("Show Debug Window"));
+		   &watchbox, "debug", kImgDebug, &FieldActionWindow::act_debug, _("Show debug window"));
 	}
 
 	// Add tabs
@@ -719,6 +725,16 @@ Open a watch window for the given field and delete self.
 void FieldActionWindow::act_watch() {
 	upcast(InteractiveGameBase, igbase, &ibase());
 	show_watch_window(*igbase, node_);
+	reset_mouse_and_die();
+}
+
+/*
+===============
+Open the notes editor for the given field and delete self.
+===============
+*/
+void FieldActionWindow::act_pinned_note() {
+	dynamic_cast<InteractivePlayer&>(ibase()).edit_pinned_note(node_);
 	reset_mouse_and_die();
 }
 
@@ -1085,7 +1101,7 @@ void show_field_action(InteractiveBase* const ibase,
 		}
 
 		// append or take away from the road
-		if (!ibase->append_build_road(target) ||
+		if (!ibase->append_build_road(target, false) ||
 		    (ibase->in_road_building_mode(RoadBuildingType::kWaterway) &&
 		     target != ibase->get_build_road_end())) {
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);

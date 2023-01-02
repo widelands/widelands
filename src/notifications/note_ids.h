@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +48,8 @@ enum class NoteId : uint32_t {
 	ThreadSafeFunction,
 	ThreadSafeFunctionHandled,
 	Panel,
+	PinnedNoteMoved,
+	QuicknavChangedEvent,
 	Hyperlink,
 	PlayerDetailsEvent
 };

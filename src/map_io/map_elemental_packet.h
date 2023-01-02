@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,13 +42,13 @@ struct MapElementalPacket {
 	/// properly configured EditorGameBase object.
 	void pre_read(FileSystem&, Map*);
 
-	uint32_t get_version() {
+	[[nodiscard]] uint32_t get_version() const {
 		return version_;
 	}
 
 	/// If this map was created before the one_world merge was done, this returns
 	/// the old world name, otherwise "".
-	const std::string& old_world_name() const {
+	[[nodiscard]] const std::string& old_world_name() const {
 		return old_world_name_;
 	}
 

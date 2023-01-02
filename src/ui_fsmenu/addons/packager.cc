@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,8 +33,7 @@
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 constexpr int16_t kButtonSize = 32;
 constexpr int16_t kSpacing = 4;
@@ -109,7 +108,7 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
          UI::ButtonStyle::kFsMenuPrimary,
          _("OK")),
      addons_(&box_left_, 0, 0, 250, 0, UI::PanelStyle::kFsMenu),
-     update_in_progress_(false),
+
      progress_window_(this, _("Writing Add-Ons…")) {
 	progress_window_.set_visible(false);
 	progress_window_.set_message_1(_("Please be patient while your changes are written."));
@@ -543,5 +542,4 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	}
 }
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

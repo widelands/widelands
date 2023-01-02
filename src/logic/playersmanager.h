@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,12 +68,12 @@ public:
 	                   const std::string& tribe,
 	                   const std::string& name,
 	                   TeamNumber team = 0);
-	Player* get_player(int32_t n) const {
+	[[nodiscard]] Player* get_player(int32_t n) const {
 		assert(1 <= n);
 		assert(n <= kMaxPlayers);
 		return players_[n - 1];
 	}
-	const Player& player(int32_t n) const {
+	[[nodiscard]] const Player& player(int32_t n) const {
 		assert(1 <= n);
 		assert(n <= kMaxPlayers);
 		return *players_[n - 1];
@@ -82,7 +82,7 @@ public:
 	/**
 	 * \return the number of players (human or ai)
 	 */
-	uint8_t get_number_of_players() const {
+	[[nodiscard]] uint8_t get_number_of_players() const {
 		return number_of_players_;
 	}
 
@@ -91,12 +91,12 @@ public:
 	 */
 	void add_player_end_status(const PlayerEndStatus& status, bool change_existing = false);
 
-	const PlayerEndStatus* get_player_end_status(PlayerNumber player) const;
+	[[nodiscard]] const PlayerEndStatus* get_player_end_status(PlayerNumber player) const;
 
 private:
 	Player* players_[kMaxPlayers];
 	EditorGameBase& egbase_;
-	uint8_t number_of_players_;
+	uint8_t number_of_players_{0U};
 	std::vector<PlayerEndStatus> players_end_status_;
 };
 }  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ public:
 	}
 #endif
 
-	Quantity get_filled() const override {
+	[[nodiscard]] Quantity get_filled() const override {
 		return workers_.size();
 	}
 

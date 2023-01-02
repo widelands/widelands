@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -148,6 +148,7 @@ void LaunchSPG::clicked_ok() {
 	upcast(SinglePlayerGameSettingsProvider, sp, &settings_);
 	assert(sp);
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
+	game_->set_write_replay(should_write_replay());
 	game_->logic_rand_seed(RNG::static_rand());
 	try {
 		if (sp->settings().scenario) {  // scenario

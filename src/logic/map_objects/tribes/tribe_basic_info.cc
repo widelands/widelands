@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -161,12 +161,8 @@ TribeBasicInfo get_tribeinfo(const std::string& tribename, const AllTribes& all)
 }
 
 bool tribe_exists(const std::string& tribename, const AllTribes& tribeinfos) {
-	for (const auto& tribeinfo : tribeinfos) {
-		if (tribeinfo.name == tribename) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(tribeinfos.begin(), tribeinfos.end(),
+	                   [&tribename](const auto& tribeinfo) { return tribeinfo.name == tribename; });
 }
 
 }  // namespace Widelands

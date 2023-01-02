@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "economy/supply_list.h"
+
+#include <algorithm>
 
 #include "base/wexception.h"
 #include "economy/request.h"
@@ -57,11 +59,8 @@ void SupplyList::remove_supply(Supply& supp) {
  * supply that can match the given request.
  */
 bool SupplyList::have_supplies(const Game& game, const Request& req) {
-	for (const Supply* supply : supplies_) {
-		if (supply->nr_supplies(game, req) != 0u) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(supplies_.begin(), supplies_.end(), [&game, &req](const Supply* supply) {
+		return supply->nr_supplies(game, req) != 0u;
+	});
 }
 }  // namespace Widelands

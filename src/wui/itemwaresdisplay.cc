@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2022 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,6 @@ namespace {
 constexpr int kMargin = 4;
 constexpr unsigned kHBorder = 10;
 constexpr unsigned kVBorder = 10;
-constexpr unsigned kDefaultItemsPerRow = 9;
 constexpr unsigned kItemWidth = 14;
 constexpr unsigned kItemHeight = 26;
 constexpr unsigned kWorkerBaseline = 2;  ///< Offset of anim center from bottom border of item rect
@@ -40,10 +39,7 @@ constexpr unsigned kWareBaseLine = -6;
  * Create an ItemWaresDisplay with no items and zero capacity.
  */
 ItemWaresDisplay::ItemWaresDisplay(Panel* parent, const Widelands::Player& gplayer)
-   : Panel(parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
-     player_(gplayer),
-     capacity_(0),
-     items_per_row_(kDefaultItemsPerRow) {
+   : Panel(parent, UI::PanelStyle::kWui, 0, 0, 0, 0), player_(gplayer) {
 	recalc_desired_size();
 }
 

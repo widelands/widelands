@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,9 @@ struct Duration {
 	}
 
 	Duration& operator=(const Duration& other) {
+		if (&other == this) {
+			return *this;
+		}
 		value_ = other.get();
 		return *this;
 	}
@@ -99,7 +102,7 @@ struct Duration {
 		return Duration(get() / d);
 	}
 
-	uint32_t get() const {
+	[[nodiscard]] uint32_t get() const {
 		return value_.load();
 	}
 
@@ -123,10 +126,10 @@ struct Duration {
 	}
 
 	// Special values
-	inline bool is_invalid() const {
+	[[nodiscard]] inline bool is_invalid() const {
 		return *this == Duration();
 	}
-	inline bool is_valid() const {
+	[[nodiscard]] inline bool is_valid() const {
 		return !is_invalid();
 	}
 
@@ -149,6 +152,9 @@ struct Time {
 	}
 
 	Time& operator=(const Time& other) {
+		if (&other == this) {
+			return *this;
+		}
 		value_ = other.get();
 		return *this;
 	}
@@ -181,7 +187,7 @@ struct Time {
 		return Duration(get() - t.get());
 	}
 
-	uint32_t get() const {
+	[[nodiscard]] uint32_t get() const {
 		return value_;
 	}
 
@@ -212,10 +218,10 @@ struct Time {
 	}
 
 	// Special values
-	inline bool is_invalid() const {
+	[[nodiscard]] inline bool is_invalid() const {
 		return *this == Time();
 	}
-	inline bool is_valid() const {
+	[[nodiscard]] inline bool is_valid() const {
 		return !is_invalid();
 	}
 

@@ -38,16 +38,16 @@ public:
 
 	// Create a logical texture that is a 'subrect' (in Pixel) in
 	// another texture. Ownership of 'texture' is not taken.
-	Texture(const GLuint texture, const Recti& subrect, int parent_w, int parent_h);
+	Texture(GLuint texture, const Recti& subrect, int parent_w, int parent_h);
 
 	~Texture() override;
 
 	// Implements Surface
-	int width() const override;
-	int height() const override;
+	[[nodiscard]] int width() const override;
+	[[nodiscard]] int height() const override;
 
 	// Implements Image.
-	const BlitData& blit_data() const override;
+	[[nodiscard]] const BlitData& blit_data() const override;
 
 	enum UnlockMode {
 		/**

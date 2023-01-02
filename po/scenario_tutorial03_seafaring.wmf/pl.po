@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
 "Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
@@ -558,10 +558,10 @@ msgstr "W tej sytuacji przydadzą się nam promy. Promy są małymi łódkami wi
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:261
 msgid ""
-" Ferries are built in ferry yards, one rowboat costs two logs and one piece "
+"Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr "Promy buduje się w stoczni promów. Jedna łódka kosztuje dwie kłody i jedną tkaninę i jej konstrukcja nie zajmuje długo. Stocznia promów jest średnim budynkiem i musi być zbudowana blisko wybrzeża."
+msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."

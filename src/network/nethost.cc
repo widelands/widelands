@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -183,8 +183,7 @@ void NetHost::start_accepting(
 	});
 }
 
-NetHost::NetHost(const uint16_t port)
-   : next_id_(1), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
+NetHost::NetHost(const uint16_t port) : acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
 
 	if (open_acceptor(&acceptor_v4_, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))) {
 		verb_log_info("[NetHost] Opening a listening IPv4 socket on TCP port %u", port);

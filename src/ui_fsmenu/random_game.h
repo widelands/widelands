@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ private:
 	std::shared_ptr<Widelands::Game> game_;
 	std::unique_ptr<SinglePlayerGameSettingsProvider> settings_;
 	UI::Icon icon_;
-	UI::ProgressWindow* progress_window_;  // not owned
+	UI::ProgressWindow* progress_window_{nullptr};  // not owned
 };
 
 }  // namespace FsMenu

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,13 +89,13 @@ public:
 
 private:
 	// Private constructor for Singleton.
-	NotificationsManager();
+	NotificationsManager() = default;
 
 	// Checks that there are no more subscribers.
 	~NotificationsManager();
 
-	uint32_t next_subscriber_id_;
-	uint32_t num_subscribers_;
+	uint32_t next_subscriber_id_{1};
+	uint32_t num_subscribers_{0U};
 
 	// Ideally we would like to keep a list<Subscriber<T>*> instead of void* to
 	// be typesafe. Unfortunately, C++ does not allow for an easy way. I could

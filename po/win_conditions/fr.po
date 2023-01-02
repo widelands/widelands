@@ -7,7 +7,7 @@
 # Boese Kaiser, 2022
 # C138, 2021
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
-# David D, 2021
+# David D, 2021-2022
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-11-01 04:33+0000\n"
+"POT-Creation-Date: 2022-12-16 02:54+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Boese Kaiser, 2022\n"
+"Last-Translator: David D, 2021-2022\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -127,11 +127,11 @@ msgstr "Collecteurs"
 #, lua-format
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
-"highest number of wares after %s wins the game."
+"highest score after %s wins the game."
 msgstr ""
 
-#. TRANSLATORS: Will be inserted into "The player with the highest number of
-#. wares after %s wins the game."
+#. TRANSLATORS: Will be inserted into "The player with the highest score after
+#. %s wins the game."
 #. TRANSLATORS: Will be inserted into "The winner will be the player […] with
 #. the most territory after %s"
 #. TRANSLATORS: Will be inserted into "The game will end after %s."
@@ -139,7 +139,7 @@ msgstr ""
 #: ../../data/scripting/win_conditions/territorial_time.lua:32
 #: ../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "the configured time limit"
-msgstr ""
+msgstr "la limite de temps configurée"
 
 #: ../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
@@ -284,14 +284,14 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr ""
+msgstr "Chaque joueur ou équipe essaie d'obtenir plus de la moitié de la zone de la carte. Le gagnant sera le joueur de l'équipe qui sera capable de garder cette zone pendant au moins 20 minutes, ou celui qui aura le plus de territoire après %s, peu importe lequel y parviendra le premier. Si le mode paisible est sélectionné, le jeu se termine si un joueur a plus de terrain que tout autre joueur pourrait en gagner."
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
 msgid_plural "%1% days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% jour"
+msgstr[1] "%1% jours"
+msgstr[2] "%1% jours"
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:358
 msgid "%1% hour"
@@ -303,21 +303,21 @@ msgstr[2] "%1% heures"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% minute"
+msgstr[1] "%1% minutes"
+msgstr[2] "%1% minutes"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:364
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s, et %3$s"
 
 #. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
 #. and 30 minutes"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:367
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:371
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s et %2$s"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:394
@@ -378,7 +378,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr ""
+msgstr "En tant que gnome des bois, vous aimez les grandes forêts, ainsi votre tâche est d'avoir le plus grande nombre d'arbres sur votre territoire que celui des autres joueurs. Le jeu terminera après %s. Celui ayant le plus grand nombre d'arbres à ce moment gagnera la jeu."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"

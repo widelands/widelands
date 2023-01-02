@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -366,7 +366,7 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 
 		//  make a histogram of the heights
 
-		uint32_t histo[1024] = {0};
+		uint32_t histo[1024] = {0U};
 
 		for (uint32_t x = 0; x < w; ++x) {
 			for (uint32_t y = 0; y < h; ++y) {
@@ -746,6 +746,8 @@ bool MapGenerator::create_random_map() {
 		}
 		pn[n - 1] = x;
 	}
+
+	map_.set_waterway_max_length(RNG::static_rand(4) * (3 + RNG::static_rand(4)));
 
 	for (PlayerNumber n = 1; n <= map_info_.numPlayers; ++n) {
 		// Set scenario information - needed even if it's not a scenario

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,26 +66,18 @@ Panel::Panel(Panel* const nparent,
              const int nh,
              const std::string& tooltip_text)
    : panel_style_(s),
-     initialized_(false),
+
      parent_(nparent),
-     first_child_(nullptr),
-     last_child_(nullptr),
-     mousein_child_(nullptr),
-     focus_(nullptr),
+
      flags_(pf_handle_mouse | pf_thinks | pf_visible | pf_handle_keypresses),
      x_(nx),
      y_(ny),
      w_(nw),
      h_(nh),
-     lborder_(0),
-     rborder_(0),
-     tborder_(0),
-     bborder_(0),
-     border_snap_distance_(0),
-     panel_snap_distance_(0),
+
      desired_w_(nw),
      desired_h_(nh),
-     running_(false),
+
      tooltip_(tooltip_text),
      logic_thread_locked_(LogicThreadState::kEndingConfirmed) {
 	assert(nparent != this);
@@ -721,14 +713,8 @@ std::vector<Recti> Panel::focus_overlay_rects() {
  */
 void Panel::draw_overlay(RenderTarget& dst) {
 	if (has_focus()) {
-		for (Panel* p = this; p->parent_ != nullptr; p = p->parent_) {
-			if (p->parent_->focus_ != p) {
-				// doesn't have toplevel focus
-				return;
-			}
-			if (p->parent_->is_focus_toplevel()) {
-				break;
-			}
+		if (!has_top_level_focus()) {
+			return;
 		}
 		for (const Recti& r : focus_overlay_rects()) {
 			dst.fill_rect(r,
@@ -737,6 +723,18 @@ void Panel::draw_overlay(RenderTarget& dst) {
 			              BlendMode::Default);
 		}
 	}
+}
+bool Panel::has_top_level_focus() {
+	for (Panel* p = this; p->parent_ != nullptr; p = p->parent_) {
+		if (p->parent_->focus_ != p) {
+			// doesn't have toplevel focus
+			return false;
+		}
+		if (p->parent_->is_focus_toplevel()) {
+			return true;
+		}
+	}
+	return true;
 }
 
 /**

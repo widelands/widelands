@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,17 +49,17 @@ public:
 	WorkerDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
 	~WorkerDescr() override;
 
-	Bob& create_object() const override;
+	[[nodiscard]] Bob& create_object() const override;
 
-	bool is_buildable() const {
+	[[nodiscard]] bool is_buildable() const {
 		return buildable_;
 	}
-	const Buildcost& buildcost() const {
+	[[nodiscard]] const Buildcost& buildcost() const {
 		assert(is_buildable());
 		return buildcost_;
 	}
 
-	const Vector2i& ware_hotspot() const {
+	[[nodiscard]] const Vector2i& ware_hotspot() const {
 		return ware_hotspot_;
 	}
 
@@ -67,7 +67,7 @@ public:
 	/// The special value std::numeric_limits<uint32_t>::max() means that the
 	/// the target quantity of this ware type will never be checked and should
 	/// not be configurable.
-	Quantity default_target_quantity() const {
+	[[nodiscard]] Quantity default_target_quantity() const {
 		return default_target_quantity_;
 	}
 	/// Sets the default target quantity. Overwrites if it already exists.
@@ -76,7 +76,7 @@ public:
 	/// This is an AI hint
 	void set_preciousness(const std::string& tribename, int preciousness);
 
-	bool has_demand_check() const {
+	[[nodiscard]] bool has_demand_check() const {
 		return default_target_quantity() != kInvalidWare;
 	}
 
@@ -92,31 +92,31 @@ public:
 	virtual const DirAnimations& get_right_walk_anims(bool const carries_ware, Worker*) const {
 		return carries_ware ? walkload_anims_ : walk_anims_;
 	}
-	WorkerProgram const* get_program(const std::string&) const;
+	[[nodiscard]] WorkerProgram const* get_program(const std::string&) const;
 
 	// For leveling
-	int32_t get_needed_experience() const {
+	[[nodiscard]] int32_t get_needed_experience() const {
 		return needed_experience_;
 	}
-	DescriptionIndex becomes() const {
+	[[nodiscard]] DescriptionIndex becomes() const {
 		return becomes_;
 	}
 	void set_becomes(Descriptions&, const std::string&);
-	DescriptionIndex worker_index() const;
-	bool can_act_as(DescriptionIndex) const;
+	[[nodiscard]] DescriptionIndex worker_index() const;
+	[[nodiscard]] bool can_act_as(DescriptionIndex) const;
 
 	// Add a building to the list of employers
 	void add_employer(const DescriptionIndex& building_index);
 
 	// The buildings where this worker can work
-	const std::set<DescriptionIndex>& employers() const;
+	[[nodiscard]] const std::set<DescriptionIndex>& employers() const;
 
 	Worker& create(EditorGameBase&, Player*, PlayerImmovable*, Coords) const;
 
-	uint32_t movecaps() const override;
+	[[nodiscard]] uint32_t movecaps() const override;
 
 	using Programs = std::map<std::string, std::unique_ptr<WorkerProgram>>;
-	const Programs& programs() const {
+	[[nodiscard]] const Programs& programs() const {
 		return programs_;
 	}
 	Programs& mutable_programs() {
@@ -124,7 +124,7 @@ public:
 	}
 
 	/// AI hints for this worker type. Can be nullptr.
-	const AI::WareWorkerHints* ai_hints() const {
+	[[nodiscard]] const AI::WareWorkerHints* ai_hints() const {
 		return ai_hints_.get();
 	}
 

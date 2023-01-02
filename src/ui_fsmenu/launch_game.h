@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,11 +84,13 @@ protected:
 
 	void toggle_peaceful();
 	void toggle_custom_starting_positions();
+	bool should_write_replay() const;
 
 	void layout() override;
 
 	MapDetailsBox map_details_;
 	UI::Textarea configure_game_;
+	UI::Checkbox write_replay_;
 	UI::MultilineTextarea warn_desyncing_addon_;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::SpinBox win_condition_duration_;
@@ -100,7 +102,7 @@ protected:
 	GameSettingsProvider& settings_;
 	GameController* ctrl_;
 
-	bool peaceful_mode_forbidden_;
+	bool peaceful_mode_forbidden_{false};
 
 private:
 	void add_all_widgets();

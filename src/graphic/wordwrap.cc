@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 
 #include "graphic/wordwrap.h"
 
+#include <cstddef>
 #include <memory>
 
 #include <ui_basic/mouse_constants.h>
@@ -61,16 +62,19 @@ int text_height(int ptsize) {
 namespace UI {
 
 constexpr int CARET_BLINKING_DELAY = 1000;
+constexpr int CURSOR_MOVEMENT_THRESHOLD = 200;
 
 WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)
-   : draw_caret_(false),
-     fontsize_(fontsize),
+   : fontsize_(fontsize),
      color_(color),
      font_(RT::load_font(UI::g_fh->fontset()->sans_bold(), fontsize_)),
-     caret_timer_("", true) {
+     caret_timer_("", true),
+     cursor_movement_timer_("", true) {
 	wrapwidth_ = gwrapwidth;
+	caret_ms_ = 0;
+	cursor_ms_ = 0;
 	caret_timer_.ms_since_last_query();
-	caret_ms = 0;
+	cursor_movement_timer_.ms_since_last_query();
 
 	if (wrapwidth_ < std::numeric_limits<uint32_t>::max()) {
 		if (wrapwidth_ < 2 * kLineMargin) {
@@ -280,7 +284,8 @@ uint32_t WordWrap::width() const {
  * Compute the total height of the word-wrapped text.
  */
 uint32_t WordWrap::height() const {
-	return text_height(fontsize_) * (lines_.size()) + 2 * kLineMargin;
+	return lines_.size() * text_height(fontsize_) +
+	       2UL * kLineMargin;  // NOLINT silence bugprone-implicit-widening-of-multiplication-result
 }
 
 uint32_t WordWrap::line_index(int32_t y) const {
@@ -398,13 +403,23 @@ void WordWrap::draw(RenderTarget& dst,
 			caretpt.x = point.x + caret_x - caret_image->width() + kLineMargin;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 
-			if (caret_ms > CARET_BLINKING_DELAY) {
+			if (caret_ms_ > CARET_BLINKING_DELAY || cursor_movement_active_) {
 				dst.blit(caretpt, caret_image);
 			}
-			if (caret_ms > 2 * CARET_BLINKING_DELAY) {
-				caret_ms = 0;
+			if (caret_ms_ > 2 * CARET_BLINKING_DELAY) {
+				caret_ms_ = 0;
 			}
-			caret_ms += caret_timer_.ms_since_last_query();
+			if (!cursor_movement_active_) {
+				caret_ms_ += caret_timer_.ms_since_last_query();
+			}
+
+			if (cursor_ms_ > CURSOR_MOVEMENT_THRESHOLD) {
+				cursor_movement_active_ = false;
+			}
+			if (cursor_movement_active_) {
+				cursor_ms_ += cursor_movement_timer_.ms_since_last_query();
+				caret_timer_.ms_since_last_query();
+			}
 		}
 	}
 }
@@ -447,6 +462,13 @@ void WordWrap::highlight_selection(RenderTarget& dst,
 	   Recti(highlight_start, highlight_end.x, highlight_end.y), BUTTON_EDGE_BRIGHT_FACTOR);
 }
 
+void WordWrap::enter_cursor_movement_mode() {
+	cursor_movement_active_ = true;
+	cursor_ms_ = 0;
+	caret_ms_ = 1.5 * CARET_BLINKING_DELAY;
+	cursor_movement_timer_.ms_since_last_query();
+}
+
 /**
  * Get a width estimate for text wrapping.
  */
@@ -468,7 +490,7 @@ uint32_t WordWrap::quick_width(const std::string& text) const {
 	return result;
 }
 void WordWrap::focus() {
-	caret_ms = CARET_BLINKING_DELAY;
+	caret_ms_ = CARET_BLINKING_DELAY;
 	caret_timer_.ms_since_last_query();
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ public:
 	// coordinates are in the OpenGL frame. The 'texture_mask' is used to selectively apply
 	// the 'blend'. This is used for blitting player colored images.
 	void draw(const Rectf& gl_dest_rect,
-	          const float z_value,
+	          float z_value,
 	          const BlitData& texture,
 	          const BlitData& mask,
 	          const RGBAColor& blend,
@@ -61,7 +61,7 @@ public:
 	// coordinates are in the OpenGL frame. The image is first converted to
 	// luminance, then all values are multiplied with blend.
 	void draw_monochrome(const Rectf& gl_dest_rect,
-	                     const float z_value,
+	                     float z_value,
 	                     const BlitData& texture,
 	                     const RGBAColor& blend);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ public:
 	const Image* get(const std::string& hash);
 
 	// Returns true if the 'hash' is stored in the cache.
-	bool has(const std::string& hash) const;
+	[[nodiscard]] bool has(const std::string& hash) const;
 
 	// Fills the image cache with the hash -> Texture map 'textures_in_atlas'
 	// and take ownership of 'texture_atlases' so that the textures stay valid.

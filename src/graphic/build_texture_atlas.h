@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@
 // and fills in 'textures_in_atlas' which is a map from filename to Texture in
 // the atlas.
 std::vector<std::unique_ptr<Texture>>
-build_texture_atlas(const int max_size,
+build_texture_atlas(int max_size,
                     std::map<std::string, std::unique_ptr<Texture>>* textures_in_atlas);
 
 #endif  // end of include guard: WL_GRAPHIC_BUILD_TEXTURE_ATLAS_H

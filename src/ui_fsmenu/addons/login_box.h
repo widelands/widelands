@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,7 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/window.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 class AddOnsCtrl;
 
@@ -50,7 +49,6 @@ private:
 	void reset();
 };
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_LOGIN_BOX_H

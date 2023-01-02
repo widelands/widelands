@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,8 +56,8 @@ private:
 	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
 	              float scale,
-	              const Widelands::RoadSegment road_type,
-	              const Direction direction,
+	              Widelands::RoadSegment road_type,
+	              Direction direction,
 	              uint32_t* gl_texture);
 
 	// The buffer that will contain 'vertices_' for rendering.

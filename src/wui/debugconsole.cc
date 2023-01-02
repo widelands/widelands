@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,7 +79,7 @@ struct Console : public ChatProvider, public Handler {
 		it->second(arg);
 	}
 
-	const std::vector<ChatMessage>& get_messages() const override {
+	[[nodiscard]] const std::vector<ChatMessage>& get_messages() const override {
 		return messages;
 	}
 

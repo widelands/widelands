@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,11 +34,7 @@
 #include "io/streamwrite.h"
 
 ZipFilesystem::ZipFile::ZipFile(const std::string& zipfile)
-   : state_(State::kIdle),
-     path_(zipfile),
-     basename_(fs_filename(zipfile.c_str())),
-     write_handle_(nullptr),
-     read_handle_(nullptr) {
+   : path_(zipfile), basename_(fs_filename(zipfile.c_str())) {
 }
 
 ZipFilesystem::ZipFile::~ZipFile() {

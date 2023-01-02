@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,7 @@ struct RoutingNode;
  * interface
  **/
 struct IRoute {
-	virtual ~IRoute() {
-	}
+	virtual ~IRoute() = default;
 
 	virtual void init(int32_t) = 0;
 	virtual void insert_as_first(RoutingNode* node) = 0;

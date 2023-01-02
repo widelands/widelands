@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ MapDetails::MapDetails(Panel* parent,
    : UI::Panel(parent, style, x, y, w, h),
 
      style_(style),
-     padding_(4),
+
      main_box_(this, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      descr_box_(&main_box_, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_label_(&main_box_,
@@ -168,7 +168,7 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 
 		std::vector<std::string> tags;
 		for (const auto& tag : mapdata.tags) {
-			tags.push_back(localize_tag(tag));
+			tags.push_back(localize_tag(tag).displayname);
 		}
 		std::sort(tags.begin(), tags.end());
 		description = format("%s%s", description, as_heading(_("Tags"), style_));

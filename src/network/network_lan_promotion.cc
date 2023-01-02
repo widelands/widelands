@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -436,7 +436,7 @@ void LanGamePromoter::set_map(char const* map) {
 
 /*** class LanGameFinder ***/
 
-LanGameFinder::LanGameFinder() : LanBase(kWidelandsLanDiscoveryPort), callback(nullptr) {
+LanGameFinder::LanGameFinder() : LanBase(kWidelandsLanDiscoveryPort) {
 
 	reset();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,63 +64,29 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
                                      Descriptions& descriptions)
    : ProductionSiteDescr(init_descname, MapObjectType::TRAININGSITE, table, descriptions),
      num_soldiers_(table.get_int("soldier_capacity")),
-     max_stall_(table.get_int("trainer_patience")),
-
-     train_health_(false),
-     train_attack_(false),
-     train_defense_(false),
-     train_evade_(false),
-     min_health_(std::numeric_limits<uint32_t>::max()),
-     min_attack_(std::numeric_limits<uint32_t>::max()),
-     min_defense_(std::numeric_limits<uint32_t>::max()),
-     min_evade_(std::numeric_limits<uint32_t>::max()),
-     max_health_(0),
-     max_attack_(0),
-     max_defense_(0),
-     max_evade_(0) {
+     max_stall_(table.get_int("trainer_patience")) {
 	// Read the range of levels that can update this building
 	//  TODO(unknown): This is currently hardcoded to "soldier" but it should search for
 	//  sections starting with the name of each soldier type.
 	//  These sections also seem redundant. Eliminate them (having the
 	//  programs should be enough).
 	std::unique_ptr<LuaTable> items_table;
-	if (table.has_key("soldier health")) {
-		items_table = table.get_table("soldier health");
-		// TODO(GunChleoc): Compatibility, remove these after v1.0
-		if (items_table->has_key<std::string>("min_level")) {
-			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			         "health' are no longer needed\n",
-			         name().c_str());
-		}
-		add_training_inputs(*items_table, &food_health_, &weapons_health_);
-	}
 
+	// TODO(hessenfarmer): Compatibility, remove these after v1.2
+	if (table.has_key("soldier health")) {
+		log_warn("Trainingsite '%s': Key 'soldier_health' is no longer needed\n", name().c_str());
+	}
+	// TODO(hessenfarmer): Compatibility, remove these after v1.2
 	if (table.has_key("soldier attack")) {
-		items_table = table.get_table("soldier attack");
-		if (items_table->has_key<std::string>("min_level")) {
-			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			         "attack' are no longer needed\n",
-			         name().c_str());
-		}
-		add_training_inputs(*items_table, &food_attack_, &weapons_attack_);
+		log_warn("Trainingsite '%s': Key 'soldier_attack' is no longer needed\n", name().c_str());
 	}
+	// TODO(hessenfarmer): Compatibility, remove these after v1.2
 	if (table.has_key("soldier defense")) {
-		items_table = table.get_table("soldier defense");
-		if (items_table->has_key<std::string>("min_level")) {
-			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			         "defense' are no longer needed\n",
-			         name().c_str());
-		}
-		add_training_inputs(*items_table, &food_defense_, &weapons_defense_);
+		log_warn("Trainingsite '%s': Key 'soldier_defense' is no longer needed\n", name().c_str());
 	}
+	// TODO(hessenfarmer): Compatibility, remove these after v1.2
 	if (table.has_key("soldier evade")) {
-		items_table = table.get_table("soldier evade");
-		if (items_table->has_key<std::string>("min_level")) {
-			log_warn("Trainingsite '%s': Keys 'min_level' and 'max_level' in table 'soldier "
-			         "evade' are no longer needed\n",
-			         name().c_str());
-		}
-		add_training_inputs(*items_table, &food_evade_, &weapons_evade_);
+		log_warn("Trainingsite '%s': Key 'soldier_evade' is no longer needed\n", name().c_str());
 	}
 
 	// Check dependencies between 'checksoldier' & 'train', and set min and max levels
@@ -156,7 +122,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 					   training_attribute_to_string(checkme.attribute).c_str(), program.first.c_str());
 				}
 				// All clear, let's add the training information
-				update_level(from_checksoldier.attribute, from_checksoldier.level);
+				update_level(from_checksoldier.attribute, from_checksoldier.level, checkme.level);
 			}
 		}
 	}
@@ -232,8 +198,8 @@ int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at,
 	const int32_t min = tsd.get_min_level(at);
 	int32_t lev = min;
 	int32_t rtv = min;
-	while (lev < max) {
-		TypeAndLevel train_tl(at, ++lev);
+	while (++lev < max) {
+		TypeAndLevel train_tl(at, lev);
 		TrainFailCount::const_iterator tstep = training_failure_count_.find(train_tl);
 		if (max_stall_val_ > tstep->second.first) {
 			rtv = lev;
@@ -245,48 +211,29 @@ int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at,
 	return rtv;
 }
 
-void TrainingSiteDescr::add_training_inputs(const LuaTable& table,
-                                            std::vector<std::vector<std::string>>* food,
-                                            std::vector<std::string>* weapons) {
-
-	if (table.has_key("food")) {
-		std::unique_ptr<LuaTable> food_table = table.get_table("food");
-		for (const int key : food_table->keys<int>()) {
-			std::vector<std::string> food_vector;
-			for (const std::string& food_item :
-			     food_table->get_table(key)->array_entries<std::string>()) {
-				food_vector.push_back(food_item);
-			}
-			food->push_back(food_vector);
-		}
-	}
-	if (table.has_key("weapons")) {
-		for (const std::string& weapon : table.get_table("weapons")->array_entries<std::string>()) {
-			weapons->push_back(weapon);
-		}
-	}
-}
-
-void TrainingSiteDescr::update_level(TrainingAttribute attrib, unsigned level) {
+void TrainingSiteDescr::update_level(TrainingAttribute attrib,
+                                     unsigned from_level,
+                                     unsigned to_level) {
 	switch (attrib) {
 	case TrainingAttribute::kHealth:
-		min_health_ = std::min(min_health_, level);
-		max_health_ = std::max(max_health_, level);
+		min_health_ = std::min(min_health_, from_level);
+		max_health_ = std::max(max_health_, to_level);
 		train_health_ = true;
+
 		return;
 	case TrainingAttribute::kAttack:
-		min_attack_ = std::min(min_attack_, level);
-		max_attack_ = std::max(max_attack_, level);
+		min_attack_ = std::min(min_attack_, from_level);
+		max_attack_ = std::max(max_attack_, to_level);
 		train_attack_ = true;
 		return;
 	case TrainingAttribute::kDefense:
-		min_defense_ = std::min(min_defense_, level);
-		max_defense_ = std::max(max_defense_, level);
+		min_defense_ = std::min(min_defense_, from_level);
+		max_defense_ = std::max(max_defense_, to_level);
 		train_defense_ = true;
 		return;
 	case TrainingAttribute::kEvade:
-		min_evade_ = std::min(min_evade_, level);
-		max_evade_ = std::max(max_evade_, level);
+		min_evade_ = std::min(min_evade_, from_level);
+		max_evade_ = std::max(max_evade_, to_level);
 		train_evade_ = true;
 		return;
 	case TrainingAttribute::kTotal:
@@ -422,10 +369,8 @@ class TrainingSite
 TrainingSite::TrainingSite(const TrainingSiteDescr& d)
    : ProductionSite(d),
      soldier_control_(this),
-     soldier_request_(nullptr),
-     capacity_(descr().get_max_number_of_soldiers()),
-     build_heroes_(false),
-     result_(ProgramResult::kFailed) {
+
+     capacity_(descr().get_max_number_of_soldiers()) {
 	set_soldier_control(&soldier_control_);
 
 	// Initialize this in the constructor so that loading code may
@@ -460,7 +405,7 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 }
 void TrainingSite::init_kick_state(const TrainingAttribute& art, const TrainingSiteDescr& d) {
 	// Now with kick-out state saving implemented, initializing is an overkill
-	for (unsigned t = d.get_min_level(art); t <= d.get_max_level(art); t++) {
+	for (unsigned t = d.get_min_level(art); t < d.get_max_level(art); t++) {
 		training_attempted(art, t);
 	}
 }
@@ -706,7 +651,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			} else {
 				r.add(RequireAttribute(TrainingAttribute::kAttack,
 				                       descr().get_min_level(TrainingAttribute::kAttack),
-				                       descr().get_max_level(TrainingAttribute::kAttack)));
+				                       descr().get_max_level(TrainingAttribute::kAttack) - 1));
 			}
 		}
 		if (descr().get_train_defense()) {
@@ -717,7 +662,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			} else {
 				r.add(RequireAttribute(TrainingAttribute::kDefense,
 				                       descr().get_min_level(TrainingAttribute::kDefense),
-				                       descr().get_max_level(TrainingAttribute::kDefense)));
+				                       descr().get_max_level(TrainingAttribute::kDefense) - 1));
 			}
 		}
 		if (descr().get_train_evade()) {
@@ -728,7 +673,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			} else {
 				r.add(RequireAttribute(TrainingAttribute::kEvade,
 				                       descr().get_min_level(TrainingAttribute::kEvade),
-				                       descr().get_max_level(TrainingAttribute::kEvade)));
+				                       descr().get_max_level(TrainingAttribute::kEvade) - 1));
 			}
 		}
 		if (descr().get_train_health()) {
@@ -739,7 +684,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			} else {
 				r.add(RequireAttribute(TrainingAttribute::kHealth,
 				                       descr().get_min_level(TrainingAttribute::kHealth),
-				                       descr().get_max_level(TrainingAttribute::kHealth)));
+				                       descr().get_max_level(TrainingAttribute::kHealth) - 1));
 			}
 		}
 
@@ -1120,7 +1065,7 @@ void TrainingSite::add_upgrade(TrainingAttribute const atr, const std::string& p
 	u.attribute = atr;
 	u.prefix = prefix;
 	u.min = descr().get_min_level(atr);
-	u.max = descr().get_max_level(atr);
+	u.max = descr().get_max_level(atr) - 1;
 	u.prio = 6;
 	u.credit = 0;
 	u.lastattempt = -1;

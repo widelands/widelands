@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,8 +47,7 @@
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 constexpr const char* const kDocumentationURL = "https://www.widelands.org/documentation/add-ons/";
 constexpr const char* const kForumURL = "https://www.widelands.org/forum/forum/17/";
@@ -894,7 +893,7 @@ void AddOnsCtrl::erase_remote(std::shared_ptr<AddOns::AddOnInfo> a) {
 
 void AddOnsCtrl::refresh_remotes(const bool showall) {
 	UI::ProgressWindow progress(this, "", "");
-	const std::string step_message = _("Fetching add-ons (%.1f%%)");
+	const std::string step_message = _("Fetching add-ons… (%.1f%%)");
 
 	try {
 		progress.step(_("Connecting to the server…"));
@@ -969,15 +968,11 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 		// no text filter given, so we accept it
 		return true;
 	}
-	for (const std::string& text : {info->descname(), info->author(), info->upload_username,
-	                                info->internal_name, info->description()}) {
-		if (text.find(filter_name_.text()) != std::string::npos) {
-			// text filter found
-			return true;
-		}
-	}
-	// doesn't match the text filter
-	return false;
+	auto array = {info->descname(), info->author(), info->upload_username, info->internal_name,
+	              info->description()};
+	return std::any_of(array.begin(), array.end(), [this](const std::string& text) {
+		return text.find(filter_name_.text()) != std::string::npos;
+	});
 }
 
 void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
@@ -1273,12 +1268,8 @@ bool AddOnsCtrl::is_remote(const std::string& name) const {
 		// No data available
 		return true;
 	}
-	for (const auto& r : remotes_) {
-		if (r->internal_name == name) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(remotes_.begin(), remotes_.end(),
+	                   [&name](const auto& r) { return r->internal_name == name; });
 }
 
 static void install_translation(const std::string& temp_locale_path,
@@ -1625,5 +1616,4 @@ step1:
 }
 #endif
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

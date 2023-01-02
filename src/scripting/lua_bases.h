@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,13 +40,11 @@ class LuaEditorGameBase : public LuaBasesModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaEditorGameBase);
 
-	LuaEditorGameBase() {
-	}
+	LuaEditorGameBase() = default;
 	explicit LuaEditorGameBase(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'EditorGameBase' directly!");
 	}
-	~LuaEditorGameBase() override {
-	}
+	~LuaEditorGameBase() override = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
@@ -81,22 +79,19 @@ public:
 };
 
 class LuaPlayerBase : public LuaBasesModuleClass {
-	Widelands::PlayerNumber player_number_;
-	enum { NONE = -1 };
+	Widelands::PlayerNumber player_number_{0U};
 
 public:
 	LUNA_CLASS_HEAD(LuaPlayerBase);
 
-	LuaPlayerBase() : player_number_(NONE) {
-	}
-	explicit LuaPlayerBase(lua_State* L) : player_number_(NONE) {
+	LuaPlayerBase() = default;
+	explicit LuaPlayerBase(lua_State* L) : player_number_(0U) {
 		report_error(L, "Cannot instantiate a 'PlayerBase' directly!");
 	}
 	explicit LuaPlayerBase(Widelands::PlayerNumber n) {
 		player_number_ = n;
 	}
-	~LuaPlayerBase() override {
-	}
+	~LuaPlayerBase() override = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
@@ -130,7 +125,7 @@ public:
 	Widelands::Player& get(lua_State* L, const Widelands::EditorGameBase&) const;
 
 protected:
-	inline Widelands::PlayerNumber player_number() {
+	[[nodiscard]] inline Widelands::PlayerNumber player_number() const {
 		return player_number_;
 	}
 };

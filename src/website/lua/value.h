@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2022 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,12 +27,12 @@ namespace LuaTree {
 struct Value {
 	Value() = default;
 	virtual ~Value() = default;
-	virtual std::string as_string() const = 0;
+	[[nodiscard]] virtual std::string as_string() const = 0;
 };
 
 struct Boolean : Value {
 	explicit Boolean(bool value);
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 
 private:
 	const bool bool_value;
@@ -40,7 +40,7 @@ private:
 
 struct Double : Value {
 	explicit Double(double value);
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 
 private:
 	const double double_value;
@@ -48,12 +48,12 @@ private:
 
 struct Empty : Value {
 	Empty() = default;
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 };
 
 struct Int : Value {
 	explicit Int(int value);
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 
 private:
 	const int int_value;
@@ -61,7 +61,7 @@ private:
 
 struct String : Value {
 	explicit String(const std::string& value);
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 
 private:
 	const std::string string_value;
@@ -69,7 +69,7 @@ private:
 
 struct Raw : Value {
 	explicit Raw(const std::string& value);
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 
 private:
 	const std::string raw_value;

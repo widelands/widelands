@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -521,31 +521,25 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 	}  // Target quantity is set to 0, we need to check if there is an open request.
 	// For soldier requests, do not recruit new rookies if only heroes are needed.
 	const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
-	for (const Request* req : requests_) {
-		if (req->get_type() == type_ && req->get_index() == ware_or_worker_type && req->is_open() &&
-		    (!is_soldier ||
-		     req->get_requirements().check(soldier_prototype(
-		        owner().egbase().descriptions().get_worker_descr(ware_or_worker_type))))) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(
+	   requests_.begin(), requests_.end(),
+	   [this, is_soldier, ware_or_worker_type](const Request* req) {
+		   return req->get_type() == type_ && req->get_index() == ware_or_worker_type &&
+		          req->is_open() &&
+		          (!is_soldier ||
+		           req->get_requirements().check(soldier_prototype(
+		              owner().egbase().descriptions().get_worker_descr(ware_or_worker_type))));
+	   });
 }
 
 bool Economy::has_building(const DescriptionIndex di) const {
 	const std::string& name = owner().tribe().get_building_descr(di)->name();
-	for (const auto& bld : owner().get_building_statistics(di)) {
-		if (!bld.is_constructionsite) {
-			if (BaseImmovable* i = owner().egbase().map()[bld.pos].get_immovable()) {
-				if (i->descr().name() == name) {
-					if (dynamic_cast<const Building&>(*i).get_economy(type_) == this) {
-						return true;
-					}
-				}
-			}
-		}
-	}
-	return false;
+	const auto& stats = owner().get_building_statistics(di);
+	return std::any_of(stats.begin(), stats.end(), [this, &name](const auto& bld) {
+		const BaseImmovable* i = owner().egbase().map()[bld.pos].get_immovable();
+		return !bld.is_constructionsite && i != nullptr && i->descr().name() == name &&
+		       dynamic_cast<const Building&>(*i).get_economy(type_) == this;
+	});
 }
 
 bool Economy::check_building_can_start_working(const ProductionSite& ps,
@@ -565,14 +559,10 @@ bool Economy::check_building_can_start_working(const ProductionSite& ps,
 		return true;
 	}
 
-	for (const InputQueue* q : ps.inputqueues()) {
-		if (q->get_max_fill() > 0 && q->get_filled() > 0) {
-			// At least one input queue is filled → success
-			return true;
-		}
-	}
-	// All queues are empty
-	return false;
+	return std::any_of(ps.inputqueues().begin(), ps.inputqueues().end(), [](const InputQueue* q) {
+		// At least one input queue needs to be filled.
+		return q->get_max_fill() > 0 && q->get_filled() > 0;
+	});
 }
 
 ProductionSite* Economy::find_closest_occupied_productionsite(const Flag& base,

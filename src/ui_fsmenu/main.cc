@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -168,12 +168,8 @@ MainMenu::MainMenu(const bool skip_init)
                 "",
                 UI::Align::kCenter),
      init_time_(kNoSplash),
-     last_image_exchange_time_(0),
-     draw_image_(0),
-     last_image_(0),
-     visible_(true),
-     menu_capsule_(*this),
-     auto_log_(false) {
+
+     menu_capsule_(*this) {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.new_width, message.new_height);
@@ -287,7 +283,7 @@ void MainMenu::find_maps(const std::string& directory, std::vector<MapEntry>& re
 				map.set_filename(file);
 				ml->preload_map(true, nullptr);
 				if (map.version().map_version_timestamp > 0) {
-					MapData::MapType type = map.scenario_types() == Map::SP_SCENARIO ?
+					MapData::MapType type = map.scenario_types() == Widelands::Map::SP_SCENARIO ?
                                           MapData::MapType::kScenario :
                                           MapData::MapType::kNormal;
 					results.emplace_back(
@@ -594,7 +590,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
 			if (!fell_through) {
-				end_modal<MenuTarget>(MenuTarget::kBack);
+				exit();
 				return true;
 			}
 		}
@@ -826,7 +822,7 @@ void MainMenu::action(const MenuTarget t) {
 	switch (t) {
 
 	case MenuTarget::kExit:
-		end_modal<MenuTarget>(MenuTarget::kBack);
+		exit((SDL_GetModState() & KMOD_CTRL) != 0);
 		break;
 
 	case MenuTarget::kOptions: {
@@ -953,6 +949,18 @@ void MainMenu::action(const MenuTarget t) {
 	default:
 		throw wexception("Invalid MenuTarget %d", static_cast<int>(t));
 	}
+}
+
+void MainMenu::exit(const bool force) {
+	if (!force) {
+		UI::WLMessageBox confirmbox(this, UI::WindowStyle::kFsMenu, _("Exit Confirmation"),
+		                            _("Are you sure you wish to exit Widelands?"),
+		                            UI::WLMessageBox::MBoxType::kOkCancel);
+		if (confirmbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
+			return;
+		}
+	}
+	end_modal<MenuTarget>(MenuTarget::kBack);
 }
 
 /// called if the user is not registered

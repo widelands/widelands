@@ -18,6 +18,7 @@
 #include "graphic/gl/utils.h"
 
 #include <cassert>
+#include <cstddef>
 #include <memory>
 
 #include "base/wexception.h"
@@ -81,7 +82,7 @@ public:
 	explicit Shader(GLenum type);
 	~Shader();
 
-	GLuint object() const {
+	[[nodiscard]] GLuint object() const {
 		return shader_object_;
 	}
 
@@ -174,8 +175,7 @@ void Program::build(const std::string& program_name) {
 	}
 }
 
-State::State()
-   : last_active_texture_(NONE), current_framebuffer_(0), current_framebuffer_texture_(0) {
+State::State() : last_active_texture_(NONE) {
 }
 
 void State::bind(const GLenum target, const GLuint texture) {
@@ -267,7 +267,7 @@ void vertex_attrib_pointer(int vertex_index, int num_items, int stride, size_t o
 
 void swap_rows(const int width, const int height, const int pitch, const int bpp, uint8_t* pixels) {
 	uint8_t* begin_row = pixels;
-	uint8_t* end_row = pixels + pitch * (height - 1);
+	uint8_t* end_row = pixels + static_cast<ptrdiff_t>(pitch) * (height - 1);
 	while (begin_row < end_row) {
 		for (int x = 0; x < width * bpp; ++x) {
 			std::swap(begin_row[x], end_row[x]);

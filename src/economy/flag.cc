@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,15 +50,7 @@ const FlagDescr& Flag::descr() const {
 /**
  * A bare flag, used for testing only.
  */
-Flag::Flag()
-   : PlayerImmovable(g_flag_descr),
-     animstart_(0),
-     building_(nullptr),
-     ware_capacity_(8),
-     ware_filled_(0),
-     wares_(new PendingWare[ware_capacity_]),
-     always_call_for_flag_(nullptr),
-     act_pending_(false) {
+Flag::Flag() : PlayerImmovable(g_flag_descr) {
 	std::fill(std::begin(roads_), std::end(roads_), nullptr);
 }
 

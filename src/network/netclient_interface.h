@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,15 +37,14 @@ public:
 	 * Closes the connection.
 	 * If you want to send a goodbye-message to the host, do so before freeing the object.
 	 */
-	virtual ~NetClientInterface() {
-	}
+	virtual ~NetClientInterface() = default;
 
 	/**
 	 * Returns whether the client is connected.
 	 *
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */
-	virtual bool is_connected() const = 0;
+	[[nodiscard]] virtual bool is_connected() const = 0;
 
 	/**
 	 * Closes the connection.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,15 +41,10 @@ const uint8_t kTimeFormatLength = 32;
 /// that only one instance is running at time.
 InternetGaming::InternetGaming()
    : net(nullptr),
-     state_(OFFLINE),
-     reg_(false),
+
      port_(kInternetGamingPort),
      clientrights_(INTERNET_CLIENT_UNREGISTERED),
-     clientupdateonmetaserver_(true),
-     gameupdateonmetaserver_(true),
-     clientupdate_(false),
-     gameupdate_(false),
-     time_offset_(0),
+
      waittimeout_(std::numeric_limits<int32_t>::max()),
      lastping_(time(nullptr)) {
 	// Set connection tracking variables to 0

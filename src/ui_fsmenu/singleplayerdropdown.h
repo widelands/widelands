@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,13 +58,11 @@ public:
 	               button_style),
 	     launch_game_(lg),
 	     settings_(settings),
-	     id_(id),
-	     selection_locked_(false) {
+	     id_(id) {
 		dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		dropdown_.selected.connect([this]() { on_selection_changed(); });
 	}
-	virtual ~SinglePlayerDropdown() {
-	}
+	virtual ~SinglePlayerDropdown() = default;
 
 	UI::Panel* get_dropdown() {
 		return &dropdown_;
@@ -89,7 +87,7 @@ protected:
 	LaunchGame& launch_game_;
 	GameSettingsProvider* const settings_;
 	PlayerSlot const id_;
-	bool selection_locked_;
+	bool selection_locked_{false};
 
 private:
 	void on_selection_changed() {
@@ -108,7 +106,7 @@ public:
 	                          int32_t y,
 	                          uint32_t w,
 	                          int button_dimension,
-	                          GameSettingsProvider* const settings,
+	                          GameSettingsProvider* settings,
 	                          PlayerSlot id);
 	void rebuild() override;
 
@@ -125,7 +123,7 @@ public:
 	                               int32_t y,
 	                               uint32_t w,
 	                               int button_dimension,
-	                               GameSettingsProvider* const settings,
+	                               GameSettingsProvider* settings,
 	                               PlayerSlot id);
 	void rebuild() override;
 
@@ -144,7 +142,7 @@ public:
 	                              int32_t y,
 	                              uint32_t w,
 	                              int button_dimension,
-	                              GameSettingsProvider* const settings,
+	                              GameSettingsProvider* settings,
 	                              PlayerSlot id);
 
 	void rebuild() override;
@@ -163,7 +161,7 @@ public:
 	                         int32_t y,
 	                         uint32_t w,
 	                         int button_dimension,
-	                         GameSettingsProvider* const settings,
+	                         GameSettingsProvider* settings,
 	                         PlayerSlot id);
 
 	void rebuild() override;

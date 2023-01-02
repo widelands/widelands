@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,9 +63,9 @@ public:
 	static MapData create_directory(const std::string& directory);
 
 	// Sorting functions to order by different categories.
-	bool compare_names(const MapData& other) const;
-	bool compare_players(const MapData& other) const;
-	bool compare_size(const MapData& other) const;
+	[[nodiscard]] bool compare_names(const MapData& other) const;
+	[[nodiscard]] bool compare_players(const MapData& other) const;
+	[[nodiscard]] bool compare_size(const MapData& other) const;
 
 	std::string filename;
 	std::string name;

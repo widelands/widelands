@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,6 +79,8 @@ protected:
 		return tabs_;
 	}
 
+	virtual void setup_name_field_editbox(UI::Box& /* vbox */) {
+	}
 	void act_bulldoze();
 	void act_dismantle();
 	void act_debug();
@@ -87,6 +89,7 @@ protected:
 	void toggle_workarea();
 	void configure_workarea_button();
 	void act_start_stop();
+	void act_produce_infinite();
 	void act_start_or_cancel_expedition();
 	void act_enhance(Widelands::DescriptionIndex, bool is_csite);
 	void clicked_goto();

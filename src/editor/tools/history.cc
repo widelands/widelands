@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2022 by the Widelands Development Team
+ * Copyright (C) 2012-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,12 +29,9 @@ constexpr size_t kTooManyUndoActionsDeleteBatch = 50;
 
 EditorActionArgs::EditorActionArgs(EditorInteractive& base)
    : sel_radius(base.get_sel_radius()),
-     change_by(0),
-     current_resource(0),
-     set_to(0),
+
      new_map_size(0, 0),
-     interval(0, 0),
-     refcount(0) {
+     interval(0, 0) {
 }
 
 EditorActionArgs::~EditorActionArgs() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -299,7 +299,7 @@ void Tree::parse_next_node(const char*& format_string) {
 	++format_string;
 }
 
-Tree::Tree(const char* format_string) : format_nodes_count_(0) {
+Tree::Tree(const char* format_string) {
 	has_positional_node = false;
 	has_unpositional_node = false;
 

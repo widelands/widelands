@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2022 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,27 +69,27 @@ struct FontStyleInfo {
 	                       bool init_italic,
 	                       bool init_underline,
 	                       bool init_shadow);
-	explicit FontStyleInfo(const FontStyleInfo& other);
+	FontStyleInfo(const FontStyleInfo& other);
 
-	std::string as_font_tag(const std::string& text) const;
+	[[nodiscard]] std::string as_font_tag(const std::string& text) const;
 
-	Face face() const;
+	[[nodiscard]] Face face() const;
 	void make_condensed();
 
-	const RGBColor& color() const;
+	[[nodiscard]] const RGBColor& color() const;
 	void set_color(const RGBColor& new_color);
 
-	int size() const;
+	[[nodiscard]] int size() const;
 	void set_size(int new_size);
 
-	bool bold() const;
-	bool italic() const;
-	bool underline() const;
-	bool shadow() const;
+	[[nodiscard]] bool bold() const;
+	[[nodiscard]] bool italic() const;
+	[[nodiscard]] bool underline() const;
+	[[nodiscard]] bool shadow() const;
 
 private:
 	static Face string_to_face(const std::string& init_face);
-	const std::string face_to_string() const;
+	[[nodiscard]] const std::string face_to_string() const;
 
 	Face face_;
 	RGBColor color_;

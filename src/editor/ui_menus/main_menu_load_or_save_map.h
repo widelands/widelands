@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +54,7 @@ protected:
 	// Private variables first, because compiler would complain about initialization order otherwise
 private:
 	// Common padding between panels
-	int32_t const padding_;
+	int32_t const padding_{4};
 
 	// Whether to list empty directories
 	bool const show_empty_dirs_;

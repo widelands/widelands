@@ -46,6 +46,13 @@ SUPPRESSED_CHECKS = {
     '[modernize-use-auto]',
     '[modernize-raw-string-literal]',
     '[modernize-return-braced-init-list]',
+    '[altera-id-dependent-backward-branch]',
+    '[altera-unroll-loops]',
+    '[llvmlibc-implementation-in-namespace]',
+    '[llvmlibc-restrict-system-libc-headers]',
+    '[misc-no-recursion]',
+    '[modernize-replace-disallow-copy-and-assign-macro]',
+    '[readability-identifier-length]',
 
     # Checks we probably want to clean up sometime (discussible; see link above)
     '[boost-use-to-string]',
@@ -87,7 +94,20 @@ SUPPRESSED_CHECKS = {
     '[readability-const-return-type]',
     '[readability-convert-member-functions-to-static]',
     '[readability-function-size]',
-    '[readability-magic-numbers]'
+    '[readability-magic-numbers]',
+    '[altera-struct-pack-align]',
+    '[bugprone-easily-swappable-parameters]',
+    '[cert-err33-c]',
+    '[concurrency-mt-unsafe]',
+    '[cppcoreguidelines-avoid-non-const-global-variables]',
+    '[cppcoreguidelines-prefer-member-initializer]',
+    '[google-readability-casting]',
+    '[hicpp-named-parameter]',
+    '[readability-named-parameter]',
+    '[modernize-use-default-member-init]',
+    '[readability-function-cognitive-complexity]',
+    '[readability-suspicious-call-argument]',
+    '[performance-no-int-to-ptr]',
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')
@@ -111,12 +131,14 @@ def main():
 
     log_file = sys.argv[1]
 
-    errors = 0
+    errors = []
 
     with open(log_file) as checkme:
         contents = checkme.readlines()
         for line in contents:
-            if 'third_party' in line:
+            if line in errors:
+                continue
+            if 'third_party' in line or '/usr/include' in line:
                 continue
             # We're not piloting alpha-level checks
             if 'clang-analyzer-alpha' in line:
@@ -128,14 +150,14 @@ def main():
                     break
             if not check_suppressed and CHECK_REGEX.match(line):
                 print(line.strip())
-                errors = errors + 1
+                errors.append(line)
 
-    if errors > 0:
+    if len(errors) > 0:
         print('########################################################')
         print('########################################################')
         print('###                                                  ###')
         print('###   Found %s error(s)                               ###'
-              % errors)
+              % len(errors))
         print('###                                                  ###')
         print('########################################################')
         print('########################################################')

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,8 +34,7 @@ public:
 
 	LUNA_CLASS_HEAD(LuaPlayer);
 
-	LuaPlayer() : LuaBases::LuaPlayerBase() {
-	}
+	LuaPlayer() = default;
 	explicit LuaPlayer(Widelands::PlayerNumber n) : LuaBases::LuaPlayerBase(n) {
 	}
 	explicit LuaPlayer(lua_State* L) {

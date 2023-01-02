@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -199,8 +199,7 @@ MenuCapsule::MenuCapsule(MainMenu& fsmm)
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
                 ""),
      box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     fsmm_(fsmm),
-     should_die_(false) {
+     fsmm_(fsmm) {
 	set_visible(false);
 	do_not_layout_on_resolution_change();
 }

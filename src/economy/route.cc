@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,8 +34,6 @@ Route IMPLEMENTATION
 */
 
 namespace Widelands {
-Route::Route() : totalcost_(0) {
-}
 
 /**
  * Completely clear the route and initialize it

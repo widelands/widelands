@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,11 +30,10 @@ public:
 	             const LuaTable& table,
 	             Descriptions& descriptions,
 	             MapObjectType t = MapObjectType::CARRIER);
-	~CarrierDescr() override {
-	}
+	~CarrierDescr() override = default;
 
 protected:
-	Bob& create_object() const override;
+	[[nodiscard]] Bob& create_object() const override;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(CarrierDescr);
@@ -51,8 +50,7 @@ struct Carrier : public Worker {
 	explicit Carrier(const CarrierDescr& carrier_descr)
 	   : Worker(carrier_descr), promised_pickup_to_(NOONE) {
 	}
-	~Carrier() override {
-	}
+	~Carrier() override = default;
 
 	bool notify_ware(Game&, int32_t flag);
 

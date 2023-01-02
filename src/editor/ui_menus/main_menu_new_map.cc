@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ inline EditorInteractive& MainMenuNewMap::eia() {
 MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "new_map_menu", &registry, 360, 150, _("New Map")),
-     margin_(4),
+
      box_width_(get_inner_w() - 2 * margin_),
      box_(this, UI::PanelStyle::kWui, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
      map_size_box_(box_,
@@ -86,6 +86,8 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
 		button_box_.add(&ok_button_);
 	}
 	box_.add(&button_box_);
+
+	list_.double_clicked.connect([this](uint32_t /* item */) { clicked_create_map(); });
 
 	set_center_panel(&box_);
 	fill_list();

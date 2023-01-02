@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,6 @@
 #include "io/fileread.h"
 
 #include <cassert>
-
-FileRead::FileRead() : data_(nullptr), length_(0) {
-}
 
 FileRead::~FileRead() {
 	if (data_ != nullptr) {

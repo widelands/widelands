@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2022 by the Widelands Development Team
+ * Copyright (C) 2017-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -103,7 +103,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                    kButtonSize,
                    UI::ButtonStyle::kWuiSecondary,
                    status_to_image(ShipFilterStatus::kShipping)),
-     ship_filter_(ShipFilterStatus::kAll),
+
      navigation_box_(&main_box_,
                      UI::PanelStyle::kWui,
                      0,
@@ -127,25 +127,32 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                   UI::PanelStyle::kWui)),
      openwindowbtn_(
         &navigation_box_,
-        "seafaring_stats_watch_button",
+        "seafaring_stats_open_ship_window_button",
         0,
         0,
         kButtonSize,
         kButtonSize,
         UI::ButtonStyle::kWuiPrimary,
         g_image_cache->get("images/ui_basic/fsel.png"),
-        format("%s<br>%s",
-               as_tooltip_text_with_hotkey(
-                  /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                  _("Open the selected ship’s window"),
-                  shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow, true),
-                  UI::PanelStyle::kWui),
-               as_tooltip_text_with_hotkey(
-                  /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                  _("Go to the selected ship and open its window"),
-                  shortcut_string_for(
-                     KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto, true),
-                  UI::PanelStyle::kWui))),
+        format("<rt><p>%s %s<br>%s</p></rt>",
+               g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+                  .as_font_tag(
+                     /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                     _("Open the selected ship’s window")),
+               g_style_manager->font_style(UI::FontStyle::kWuiTooltipHotkey)
+                  .as_font_tag("(" +
+                               shortcut_string_for(
+                                  KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow, true) +
+                               ")"),
+               g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+                  .as_font_tag(
+                     /** TRANSLATORS: Tooltip in the seafaring statistics window, placeholder is a
+                         hotkey */
+                     format(_("(You can use %s to go to the selected ship and open its window.)"),
+                            g_style_manager->font_style(UI::FontStyle::kWuiTooltipHotkey)
+                               .as_font_tag(shortcut_string_for(
+                                  KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto,
+                                  true)))))),
      centerviewbtn_(&navigation_box_,
                     "seafaring_stats_center_main_mapview_button",
                     0,

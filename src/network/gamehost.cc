@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,7 +65,7 @@
 #include "wui/interactive_spectator.h"
 
 struct HostChatProvider : public ChatProvider {
-	explicit HostChatProvider(GameHost* const init_host) : h(init_host), kickClient(0) {
+	explicit HostChatProvider(GameHost* const init_host) : h(init_host) {
 	}
 
 	// TODO(k.halfmann): this deserves a refactoring
@@ -228,7 +228,7 @@ struct HostChatProvider : public ChatProvider {
 		h->send(c);
 	}
 
-	const std::vector<ChatMessage>& get_messages() const override {
+	[[nodiscard]] const std::vector<ChatMessage>& get_messages() const override {
 		return messages;
 	}
 
@@ -237,7 +237,7 @@ struct HostChatProvider : public ChatProvider {
 		Notifications::publish(msg);
 	}
 
-	bool has_been_set() const override {
+	[[nodiscard]] bool has_been_set() const override {
 		return true;
 	}
 
@@ -245,7 +245,7 @@ private:
 	GameHost* h;
 	std::vector<ChatMessage> messages;
 	std::string kickUser;
-	uint32_t kickClient;
+	uint32_t kickClient{0U};
 	std::string kickReason;
 };
 
@@ -271,7 +271,7 @@ struct Client {
 struct GameHostImpl {
 	GameSettings settings;
 	std::string localplayername;
-	uint32_t localdesiredspeed;
+	uint32_t localdesiredspeed{0U};
 	// unique_ptr instead of object to break cyclic dependency
 	std::unique_ptr<ParticipantList> participants;
 	HostChatProvider chat;
@@ -286,59 +286,41 @@ struct GameHostImpl {
 	std::vector<Client> clients;
 
 	/// The game itself; only non-null while game is running
-	Widelands::Game* game;
+	Widelands::Game* game{nullptr};
 
 	/// If we were to send out a plain networktime packet, this would be the
 	/// time. However, we have not yet committed to this networktime.
-	Time pseudo_networktime;
-	int32_t last_heartbeat;
+	Time pseudo_networktime{0U};
+	int32_t last_heartbeat{0};
 
 	/// The networktime we committed to by sending it across the network.
-	Time committed_networktime;
+	Time committed_networktime{0U};
 
 	/// This is the time for local simulation
 	NetworkTime time;
 
 	/// Whether we're waiting for all clients to report back.
-	bool waiting;
-	uint32_t lastframe;
+	bool waiting{false};
+	uint32_t lastframe{0U};
 
 	/**
 	 * The speed, in milliseconds per second, that is effective as long
 	 * as we're not \ref waiting.
 	 */
-	uint32_t networkspeed;
-	time_t lastpauseping;
+	uint32_t networkspeed{0U};
+	time_t lastpauseping{0U};
 
 	/// All currently running computer players, *NOT* in one-one correspondence
 	/// with \ref Player objects
 	std::vector<AI::ComputerPlayer*> computerplayers;
 
 	/// \c true if a syncreport is currently in flight
-	bool syncreport_pending;
-	Time syncreport_time;
+	bool syncreport_pending{false};
+	Time syncreport_time{0U};
 	Md5Checksum syncreport;
-	bool syncreport_arrived;
+	bool syncreport_arrived{false};
 
-	explicit GameHostImpl(GameHost* const h)
-	   : localdesiredspeed(0),
-	     participants(nullptr),
-	     chat(h),
-	     hp(h),
-	     npsb(&hp),
-
-	     game(nullptr),
-	     pseudo_networktime(0),
-	     last_heartbeat(0),
-	     committed_networktime(0),
-	     waiting(false),
-	     lastframe(0),
-	     networkspeed(0),
-	     lastpauseping(0),
-	     syncreport_pending(false),
-	     syncreport_time(0),
-	     syncreport(),
-	     syncreport_arrived(false) {
+	explicit GameHostImpl(GameHost* const h) : participants(nullptr), chat(h), hp(h), npsb(&hp) {
 	}
 
 	/// Takes ownership of the given pointer
@@ -353,11 +335,7 @@ GameHost::GameHost(FsMenu::MenuCapsule* c,
                    const std::string& playername,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
-   : capsule_(c),
-     pointer_(ptr),
-     d(new GameHostImpl(this)),
-     internet_(internet),
-     forced_pause_(false) {
+   : capsule_(c), pointer_(ptr), d(new GameHostImpl(this)), internet_(internet) {
 	verb_log_info("[Host]: starting up.");
 
 	d->localplayername = playername;
@@ -487,13 +465,16 @@ void GameHost::init_computer_players() {
 
 void GameHost::run() {
 	game_.reset(new Widelands::Game());
-	new FsMenu::LaunchMPG(
-	   *capsule_, d->hp, *this, d->chat, *game_, internet_, [this]() { run_callback(); });
+	new FsMenu::LaunchMPG(*capsule_, d->hp, *this, d->chat, internet_, [this]() { run_callback(); });
 }
 
 void GameHost::run_direct() {
 	game_.reset(new Widelands::Game());
 	run_callback();
+}
+
+void GameHost::set_write_replay(bool replay) {
+	game_->set_write_replay(replay);
 }
 
 // TODO(k.halfmann): refactor into smaller functions
@@ -1109,9 +1090,9 @@ void GameHost::set_map(const std::string& mapname,
 		}
 		std::vector<char> complete(file_->bytes);
 		fr.set_file_pos(0);
-		fr.data_complete(&complete[0], file_->bytes);
+		fr.data_complete(complete.data(), file_->bytes);
 		SimpleMD5Checksum md5sum;
-		md5sum.data(&complete[0], file_->bytes);
+		md5sum.data(complete.data(), file_->bytes);
 		md5sum.finish_checksum();
 		file_->md5sum = md5sum.get_checksum().str();
 	} else {
@@ -1730,7 +1711,7 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	{
 		std::vector<const AddOns::AddOnInfo*> enabled_addons;
 		for (const auto& pair : AddOns::g_addons) {
-			if (pair.second && pair.first->category != AddOns::AddOnCategory::kTheme) {
+			if (pair.second && AddOns::kAddOnCategories.at(pair.first->category).network_relevant) {
 				enabled_addons.push_back(pair.first.get());
 			}
 		}

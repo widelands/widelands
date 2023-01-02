@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,10 +42,10 @@
 
 namespace UI {
 class Panel;
-}
+}  // namespace UI
 namespace Widelands {
 class Game;
-}
+}  // namespace Widelands
 
 /** Returns the widelands executable path. */
 std::string get_executable_directory(bool logdir = true);
@@ -139,7 +139,7 @@ struct InputCallback {
 // TODO(sirver): this class makes no sense for c++ - most of these should be
 // stand alone functions.
 struct WLApplication {
-	static WLApplication* get(int const argc = 0, char const** argv = nullptr);
+	static WLApplication* get(int argc = 0, char const** argv = nullptr);
 	~WLApplication();
 
 	void run();
@@ -147,14 +147,14 @@ struct WLApplication {
 	static void initialize_g_addons();
 
 	/// \warning true if an external entity wants us to quit
-	bool should_die() const {
+	[[nodiscard]] bool should_die() const {
 		return should_die_;
 	}
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	bool get_key_state(SDL_Scancode const key) const {
-		return SDL_GetKeyboardState(nullptr)[key];
+	[[nodiscard]] bool get_key_state(SDL_Scancode const key) const {
+		return SDL_GetKeyboardState(nullptr)[key] != 0U;
 	}
 
 	// @{
@@ -162,13 +162,13 @@ struct WLApplication {
 	void set_input_grab(bool grab);
 
 	/// The mouse's current coordinates
-	Vector2i get_mouse_position() const {
+	[[nodiscard]] Vector2i get_mouse_position() const {
 		return mouse_position_;
 	}
 	//
 	/// Find out whether the mouse is currently pressed
-	bool is_mouse_pressed() const {
-		return SDL_GetMouseState(nullptr, nullptr);
+	[[nodiscard]] bool is_mouse_pressed() const {
+		return SDL_GetMouseState(nullptr, nullptr) != 0U;
 	}
 
 	/// Swap left and right mouse key?
@@ -178,12 +178,12 @@ struct WLApplication {
 
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
 	void set_mouse_lock(bool locked);
-	bool is_mouse_locked() const {
+	[[nodiscard]] bool is_mouse_locked() const {
 		return mouse_locked_;
 	}
 	// @}
 
-	const std::string& get_datadir() const {
+	[[nodiscard]] const std::string& get_datadir() const {
 		return datadir_;
 	}
 
@@ -242,27 +242,27 @@ private:
 	std::string script_to_run_;
 
 	enum class GameType { kNone, kEditor, kReplay, kScenario, kLoadGame, kFromTemplate };
-	GameType game_type_;
+	GameType game_type_{GameType::kNone};
 
 	/// True if left and right mouse button should be swapped
-	bool mouse_swapped_;
+	bool mouse_swapped_{false};
 
 	/// When apple is involved, the middle mouse button is sometimes send, even
 	/// if it wasn't pressed. We try to revert this and this helps.
-	bool faking_middle_mouse_button_;
+	bool faking_middle_mouse_button_{false};
 
 	/// The current position of the mouse pointer
-	Vector2i mouse_position_;
+	Vector2i mouse_position_{Vector2i::zero()};
 
 	/// If true, the mouse cursor will \e not move with a mousemotion event:
 	/// instead, the map will be scrolled
-	bool mouse_locked_;
+	bool mouse_locked_{false};
 
 	/// Makes it possible to disable the fullscreen and screenshot shortcuts
-	bool handle_key_enabled_;
+	bool handle_key_enabled_{true};
 
 	/// true if an external entity wants us to quit
-	std::atomic_bool should_die_;
+	std::atomic_bool should_die_{false};
 
 	std::string homedir_;
 #ifdef USE_XDG
@@ -270,7 +270,7 @@ private:
 #endif
 
 	/// flag indicating if stdout and stderr have been redirected
-	bool redirected_stdio_;
+	bool redirected_stdio_{false};
 
 	/// Absolute path to the data directory.
 	std::string datadir_;
@@ -280,7 +280,7 @@ private:
 	std::string localedir_;
 
 	/// Prevent toggling fullscreen on and off from flickering
-	uint32_t last_resolution_change_;
+	uint32_t last_resolution_change_{0U};
 
 	/// Holds this process' one and only instance of WLApplication, if it was
 	/// created already. nullptr otherwise.

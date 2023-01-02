@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "chat/chat.h"
 #include "graphic/game_renderer.h"
 #include "graphic/mouse_cursor.h"
+#include "graphic/text_layout.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "ui_basic/textarea.h"
@@ -39,25 +40,33 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            bool const multiplayer,
                                            ChatProvider* chat_provider)
    : InteractiveGameBase(g, global_s, multiplayer, chat_provider) {
+	constexpr int kSpacing = 15;
 	add_main_menu();
 
-	add_toolbar_button("wui/menus/statistics_general", "general_stats", _("Statistics"),
-	                   &menu_windows_.stats_general, true);
+	add_toolbar_button(
+	   "wui/menus/statistics_general", "general_stats",
+	   as_tooltip_text_with_hotkey(_("Statistics"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameStatsGeneral, false),
+	                               UI::PanelStyle::kWui),
+	   &menu_windows_.stats_general, true);
 	menu_windows_.stats_general.open_window = [this] {
 		new GeneralStatisticsMenu(*this, menu_windows_.stats_general);
 	};
 
-	toolbar()->add_space(15);
+	toolbar()->add_space(kSpacing);
 
 	add_mapview_menu(MiniMapType::kStaticViewWindow);
 	add_showhide_menu();
 	add_gamespeed_menu();
 
-	toolbar()->add_space(15);
+	toolbar()->add_space(kSpacing);
 
 	if (is_multiplayer()) {
 		add_chat_ui();
+		toolbar()->add_space(kSpacing);
 	}
+
+	add_diplomacy_menu();
 
 	finalize_toolbar();
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
 class InteractiveGameBase;
 namespace Widelands {
 class Game;
-}
+}  // namespace Widelands
 
 struct WatchWindow : public UI::Window {
 	WatchWindow(InteractiveGameBase& parent,
@@ -77,7 +77,7 @@ private:
 	MapView map_view_;
 	Time last_visit_;
 	bool single_window_;
-	uint8_t cur_index_;
+	uint8_t cur_index_{0U};
 	UI::Button* view_btns_[kViews];
 	std::vector<WatchWindow::View> views_;
 };

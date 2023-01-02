@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2022 by the Widelands Development Team
+ * Copyright (C) 2009-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -329,64 +329,14 @@ void EventTimeQueue::strip_old(const Time& current_time) {
 BuildableField::BuildableField(const Widelands::FCoords& fc)
    : coords(fc),
      field_info_expiration(20000),
-     preferred(false),
-     enemy_nearby(false),
-     enemy_accessible_(false),
-     invalidated(false),
-     enemy_wh_nearby(false),
-     unowned_land_nearby(0),
-     enemy_owned_land_nearby(0U),
-     unowned_buildable_spots_nearby(0U),
-     unowned_portspace_vicinity_nearby(0U),
-     nearest_buildable_spot_nearby(0U),
-     near_border(false),
-     unowned_mines_spots_nearby(0),
-     unowned_iron_mines_nearby(0u),
-     // explanation of starting values
-     // this is done to save some work for AI (CPU utilization)
-     // base rules are:
-     // count of water fields are stable, so if the current count is
-     // non-negative, water is not recalculated
-     water_nearby(-1),
-     open_water_nearby(-1),
-     distant_water(0),
-     fish_nearby(-1),
-     critters_nearby(-1),
-     ground_water(1),
-     space_consumers_nearby(0),
-     rangers_nearby(0),
-     area_military_capacity(0),
-     future_area_military_capacity(0),
-     military_loneliness(1000),
-     future_military_loneliness(1000),
-     military_in_constr_nearby(0),
-     own_military_presence(0),
-     enemy_military_presence(0),
-     enemy_military_sites(0),
-     ally_military_presence(0),
-     military_stationed(0),
+
      average_flag_dist_to_wh(kWhFarButReachable),
-     military_unstationed(0),
-     own_non_military_nearby(0),
-     defense_msite_allowed(false),
-     is_portspace(ExtendedBool::kUnset),
-     port_nearby(false),
-     portspace_nearby(ExtendedBool::kUnset),
-     max_buildcap_nearby(0),
-     last_resources_check_time(0),
-     // the higher the most important the side/field is
-     military_score_(0),
-     inland(false),
-     local_soldier_capacity(0),
-     is_militarysite(false) {
+
+     last_resources_check_time(0) {
 }
 
 MineableField::MineableField(const Widelands::FCoords& fc)
-   : coords(fc),
-     field_info_expiration(20000),
-     preferred(false),
-     mines_nearby(0),
-     same_mine_fields_nearby(0) {
+   : coords(fc), field_info_expiration(20000) {
 }
 
 EconomyObserver::EconomyObserver(Widelands::Economy& e)
@@ -424,12 +374,6 @@ bool BuildingObserver::buildable(const Widelands::Player& p) const {
 	       p.tribe().has_building(id);
 }
 
-// as all mines have 3 levels, AI does not know total count of mines per mined material
-// so this observer will be used for this
-MineTypesObserver::MineTypesObserver()
-   : in_construction(0), finished(0), is_critical(false), unoccupied(0) {
-}
-
 // Reset counter for all field types
 void MineFieldsObserver::zero() {
 	for (auto& material : stat) {
@@ -449,12 +393,8 @@ void MineFieldsObserver::add_critical_ore(const Widelands::DescriptionIndex idx)
 
 // Does the player has at least one mineable field with positive amount for each critical ore?
 bool MineFieldsObserver::has_critical_ore_fields() {
-	for (auto ore : critical_ores) {
-		if (get(ore) == 0) {
-			return false;
-		}
-	}
-	return true;
+	return std::all_of(critical_ores.begin(), critical_ores.end(),
+	                   [this](const auto& ore) { return get(ore) != 0; });
 }
 
 // Returns count of fields with desired ore
@@ -973,10 +913,6 @@ uint16_t MineTypesObserver::total_count() const {
 	return in_construction + finished;
 }
 
-// this is used to count militarysites by their size
-MilitarySiteSizeObserver::MilitarySiteSizeObserver() : in_construction(0), finished(0) {
-}
-
 // this represents a scheduler task
 SchedulerTask::SchedulerTask(const Time& time,
                              const SchedulerTaskId t,
@@ -1118,12 +1054,9 @@ void PlayersStrengths::recalculate_team_power() {
 
 // This just goes over information about all enemies and where they were seen the last time
 bool PlayersStrengths::any_enemy_seen_lately(const Time& gametime) {
-	for (auto& item : all_stats) {
-		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(all_stats.begin(), all_stats.end(), [this, &gametime](const auto& item) {
+		return get_is_enemy(item.first) && player_seen_lately(item.first, gametime);
+	});
 }
 
 // Returns count of nearby enemies
@@ -1466,7 +1399,7 @@ FlagCandidates::Candidate* FlagCandidates::get_winner(const int16_t threshold) {
 	if (!flags_[0].is_buildable()) {
 		return nullptr;
 	}
-	return &flags_[0];
+	return &flags_[0];  // NOLINT no readability-container-data-pointer here
 }
 
 FlagCandidates::Candidate::Candidate(const uint32_t c_hash,
@@ -1528,12 +1461,8 @@ void FlagCandidates::add_flag(const uint32_t coords,
 }
 
 bool FlagCandidates::has_candidate(const uint32_t coords_hash) const {
-	for (const auto& item : flags_) {
-		if (item.coords_hash == coords_hash) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(flags_.begin(), flags_.end(),
+	                   [coords_hash](const auto& item) { return item.coords_hash == coords_hash; });
 }
 
 }  // namespace AI

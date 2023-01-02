@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2022 by the Widelands Development Team
+ * Copyright (C) 2017-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,14 +36,14 @@ struct PanelStyleInfo {
 	   : margin_(other.margin()), image_(other.image()), color_(other.color()) {
 	}
 
-	const RGBAColor& color() const {
+	[[nodiscard]] const RGBAColor& color() const {
 		return color_;
 	}
-	const Image* image() const {
+	[[nodiscard]] const Image* image() const {
 		return image_;
 	}
 
-	int margin() const {
+	[[nodiscard]] int margin() const {
 		return margin_;
 	}
 

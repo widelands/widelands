@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,15 +38,14 @@ public:
 	//  TODO(unknown): This should be unnecessary. Make it so.
 	enum Type { DIR, ZIP };
 
-	virtual ~FileSystem() {
-	}
+	virtual ~FileSystem() = default;
 
 	// Returns all files and directories (full path) in the given directory 'directory'.
-	virtual FilenameSet list_directory(const std::string& directory) const = 0;
+	[[nodiscard]] virtual FilenameSet list_directory(const std::string& directory) const = 0;
 
-	virtual bool is_writable() const = 0;
-	virtual bool is_directory(const std::string& path) const = 0;
-	virtual bool file_exists(const std::string& path) const = 0;
+	[[nodiscard]] virtual bool is_writable() const = 0;
+	[[nodiscard]] virtual bool is_directory(const std::string& path) const = 0;
+	virtual bool file_exists(const std::string& path) const = 0;  // NOLINT not nodicard
 
 	virtual void* load(const std::string& fname, size_t& length) = 0;
 
@@ -96,9 +95,9 @@ public:
 	virtual std::string get_basename() = 0;
 
 	// basic path/filename manipulation
-	std::string fix_cross_file(const std::string&) const;
-	std::string canonicalize_name(const std::string& path) const;
-	bool is_path_absolute(const std::string& path) const;
+	[[nodiscard]] std::string fix_cross_file(const std::string&) const;
+	[[nodiscard]] std::string canonicalize_name(const std::string& path) const;
+	[[nodiscard]] bool is_path_absolute(const std::string& path) const;
 
 	// Returns the path separator, i.e. \ on windows and / everywhere else.
 	static char file_separator();
@@ -131,7 +130,8 @@ public:
 	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test'
 	/// returned 'true' for their filenames.
 	template <class UnaryPredicate>
-	FilenameSet filter_directory(const std::string& directory, UnaryPredicate test) const {
+	[[nodiscard]] [[nodiscard]] [[nodiscard]] [[nodiscard]] [[nodiscard]] FilenameSet
+	filter_directory(const std::string& directory, UnaryPredicate test) const {
 		FilenameSet result = list_directory(directory);
 		for (auto it = result.begin(); it != result.end();) {
 			if (!test(*it)) {
@@ -145,9 +145,9 @@ public:
 
 	/// Returns all files in the given 'directory' that match 'basename' followed by 1-3 numbers,
 	/// followed by '.', followed by 'extension'
-	std::vector<std::string> get_sequential_files(const std::string& directory,
-	                                              const std::string& basename,
-	                                              const std::string& extension) const;
+	[[nodiscard]] std::vector<std::string> get_sequential_files(const std::string& directory,
+	                                                            const std::string& basename,
+	                                                            const std::string& extension) const;
 
 	virtual unsigned long long disk_space() = 0;  // NOLINT
 

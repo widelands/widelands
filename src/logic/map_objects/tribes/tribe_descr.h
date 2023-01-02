@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,144 +63,150 @@ public:
 	           const LuaTable& table,
 	           const LuaTable* scenario_table = nullptr);
 
-	const std::string& name() const;
-	const std::string& descname() const;
+	[[nodiscard]] const std::string& name() const;
+	[[nodiscard]] const std::string& descname() const;
 
-	size_t get_nrwares() const;
-	size_t get_nrworkers() const;
+	[[nodiscard]] size_t get_nrwares() const;
+	[[nodiscard]] size_t get_nrworkers() const;
 
-	const std::set<DescriptionIndex>& buildings() const;
-	const std::set<DescriptionIndex>& wares() const;
-	const std::set<DescriptionIndex>& workers() const;
-	const std::set<DescriptionIndex>& immovables() const;
-	const ResourceIndicatorSet& resource_indicators() const;
+	[[nodiscard]] const std::set<DescriptionIndex>& buildings() const;
+	[[nodiscard]] const std::set<DescriptionIndex>& wares() const;
+	[[nodiscard]] const std::set<DescriptionIndex>& workers() const;
+	[[nodiscard]] const std::set<DescriptionIndex>& immovables() const;
+	[[nodiscard]] const ResourceIndicatorSet& resource_indicators() const;
 
 	std::set<DescriptionIndex>& mutable_wares();
 	std::set<DescriptionIndex>& mutable_workers();
 	std::set<DescriptionIndex>& mutable_buildings();
 	std::set<DescriptionIndex>& mutable_immovables();
 
-	bool has_building(const DescriptionIndex& index) const;
-	bool has_ware(const DescriptionIndex& index) const;
-	bool has_worker(const DescriptionIndex& index) const;
-	bool has_immovable(const DescriptionIndex& index) const;
+	[[nodiscard]] bool has_building(const DescriptionIndex& index) const;
+	[[nodiscard]] bool has_ware(const DescriptionIndex& index) const;
+	[[nodiscard]] bool has_worker(const DescriptionIndex& index) const;
+	[[nodiscard]] bool has_immovable(const DescriptionIndex& index) const;
 
 	// A ware is a construction material if it appears in a building's buildcost or enhancement cost
-	bool is_construction_material(const DescriptionIndex& ware_index) const;
+	[[nodiscard]] bool is_construction_material(const DescriptionIndex& ware_index) const;
 
-	DescriptionIndex building_index(const std::string& buildingname) const;
-	DescriptionIndex immovable_index(const std::string& immovablename) const;
-	DescriptionIndex ware_index(const std::string& warename) const;
-	DescriptionIndex worker_index(const std::string& workername) const;
+	[[nodiscard]] DescriptionIndex building_index(const std::string& buildingname) const;
+	[[nodiscard]] DescriptionIndex immovable_index(const std::string& immovablename) const;
+	[[nodiscard]] DescriptionIndex ware_index(const std::string& warename) const;
+	[[nodiscard]] DescriptionIndex worker_index(const std::string& workername) const;
 
 	/// Return the given building or die trying
-	DescriptionIndex safe_building_index(const std::string& buildingname) const;
+	[[nodiscard]] DescriptionIndex safe_building_index(const std::string& buildingname) const;
 	/// Return the given ware or die trying
-	DescriptionIndex safe_ware_index(const std::string& warename) const;
+	[[nodiscard]] DescriptionIndex safe_ware_index(const std::string& warename) const;
 	/// Return the given worker or die trying
-	DescriptionIndex safe_worker_index(const std::string& workername) const;
+	[[nodiscard]] DescriptionIndex safe_worker_index(const std::string& workername) const;
 
-	BuildingDescr const* get_building_descr(const DescriptionIndex& index) const;
-	ImmovableDescr const* get_immovable_descr(const DescriptionIndex& index) const;
-	WareDescr const* get_ware_descr(const DescriptionIndex& index) const;
-	WorkerDescr const* get_worker_descr(const DescriptionIndex& index) const;
+	[[nodiscard]] BuildingDescr const* get_building_descr(const DescriptionIndex& index) const;
+	[[nodiscard]] ImmovableDescr const* get_immovable_descr(const DescriptionIndex& index) const;
+	[[nodiscard]] WareDescr const* get_ware_descr(const DescriptionIndex& index) const;
+	[[nodiscard]] WorkerDescr const* get_worker_descr(const DescriptionIndex& index) const;
 
-	DescriptionIndex builder() const;
-	DescriptionIndex geologist() const;
-	DescriptionIndex scouts_house() const;
-	DescriptionIndex soldier() const;
-	DescriptionIndex ship() const;
-	DescriptionIndex ferry() const;
-	DescriptionIndex port() const;
-	const std::vector<DescriptionIndex>& carriers() const {
+	[[nodiscard]] DescriptionIndex builder() const;
+	[[nodiscard]] DescriptionIndex geologist() const;
+	[[nodiscard]] DescriptionIndex scouts_house() const;
+	[[nodiscard]] DescriptionIndex soldier() const;
+	[[nodiscard]] DescriptionIndex ship() const;
+	[[nodiscard]] DescriptionIndex ferry() const;
+	[[nodiscard]] DescriptionIndex port() const;
+	[[nodiscard]] const std::vector<DescriptionIndex>& carriers() const {
 		return carriers_;
 	}
 
-	const std::vector<DescriptionIndex>& trainingsites() const;
-	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
+	[[nodiscard]] const std::vector<DescriptionIndex>& trainingsites() const;
+	[[nodiscard]] const std::vector<DescriptionIndex>& worker_types_without_cost() const;
 
-	uint32_t frontier_animation() const;
-	uint32_t flag_animation() const;
-	uint32_t bridge_animation(uint8_t dir, bool busy) const;
+	[[nodiscard]] uint32_t frontier_animation() const;
+	[[nodiscard]] uint32_t flag_animation() const;
+	[[nodiscard]] uint32_t pinned_note_animation() const;
+	[[nodiscard]] uint32_t bridge_animation(uint8_t dir, bool busy) const;
 
 	// Bridge height in pixels at 1x scale, for drawing bobs walking over a bridge
-	uint32_t bridge_height() const;
+	[[nodiscard]] uint32_t bridge_height() const;
 
 	// The road textures used for drawing roads and waterways.
-	const RoadTextures& road_textures() const;
+	[[nodiscard]] const RoadTextures& road_textures() const;
 
-	DescriptionIndex get_resource_indicator(const ResourceDescription* const res,
-	                                        const ResourceAmount amount) const;
+	DescriptionIndex get_resource_indicator(const ResourceDescription* res,
+	                                        ResourceAmount amount) const;
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
-	const Widelands::TribeBasicInfo::Initialization& initialization(const uint8_t index) const {
+	[[nodiscard]] const Widelands::TribeBasicInfo::Initialization&
+	initialization(const uint8_t index) const {
 		return basic_info_.initializations.at(index);
 	}
 
-	const Widelands::TribeBasicInfo& basic_info() const {
+	[[nodiscard]] const Widelands::TribeBasicInfo& basic_info() const {
 		return basic_info_;
 	}
 
 	using WaresOrder = std::vector<std::vector<Widelands::DescriptionIndex>>;
-	const WaresOrder& wares_order() const {
+	[[nodiscard]] const WaresOrder& wares_order() const {
 		return wares_order_;
 	}
 	WaresOrder& mutable_wares_order() {
 		return wares_order_;
 	}
 
-	const WaresOrder& workers_order() const {
+	[[nodiscard]] const WaresOrder& workers_order() const {
 		return workers_order_;
 	}
 	WaresOrder& mutable_workers_order() {
 		return workers_order_;
 	}
 
-	bool uses_resource(const std::string& name) const {
-		return used_resources_.count(name);
+	[[nodiscard]] bool uses_resource(const std::string& name) const {
+		return used_resources_.count(name) != 0u;
 	}
 	// Warning: Do not use pointer arithmetics in logic code!
-	const std::set<const BuildingDescr*>& buildings_built_over_immovables() const {
+	[[nodiscard]] const std::set<const BuildingDescr*>& buildings_built_over_immovables() const {
 		return buildings_built_over_immovables_;
 	}
 
-	const std::vector<std::pair<std::string, int>>& collectors_points_table() const {
+	[[nodiscard]] const std::vector<std::pair<std::string, int>>& collectors_points_table() const {
 		return collectors_points_table_;
 	}
+	[[nodiscard]] const std::vector<std::string>& get_warehouse_names() const {
+		return warehouse_names_;
+	}
 
-	const std::string& get_productionsite_worker_missing_string() const {
+	[[nodiscard]] const std::string& get_productionsite_worker_missing_string() const {
 		return productionsite_worker_missing_;
 	}
-	const std::string& get_productionsite_worker_coming_string() const {
+	[[nodiscard]] const std::string& get_productionsite_worker_coming_string() const {
 		return productionsite_worker_coming_;
 	}
-	const std::string& get_productionsite_workers_missing_string() const {
+	[[nodiscard]] const std::string& get_productionsite_workers_missing_string() const {
 		return productionsite_workers_missing_;
 	}
-	const std::string& get_productionsite_workers_coming_string() const {
+	[[nodiscard]] const std::string& get_productionsite_workers_coming_string() const {
 		return productionsite_workers_coming_;
 	}
-	const std::string& get_productionsite_experienced_worker_missing_string() const {
+	[[nodiscard]] const std::string& get_productionsite_experienced_worker_missing_string() const {
 		return productionsite_experienced_worker_missing_;
 	}
-	const std::string& get_productionsite_experienced_workers_missing_string() const {
+	[[nodiscard]] const std::string& get_productionsite_experienced_workers_missing_string() const {
 		return productionsite_experienced_workers_missing_;
 	}
 
-	const std::string& get_soldier_context_string() const {
+	[[nodiscard]] const std::string& get_soldier_context_string() const {
 		return soldier_context_;
 	}
-	const std::string* get_soldier_capacity_strings_sg() const {
+	[[nodiscard]] const std::string* get_soldier_capacity_strings_sg() const {
 		return soldier_capacity_strings_sg_;
 	}
-	const std::string* get_soldier_capacity_strings_pl() const {
+	[[nodiscard]] const std::string* get_soldier_capacity_strings_pl() const {
 		return soldier_capacity_strings_pl_;
 	}
 
 	// The custom toolbar imageset if any. Can be nullptr.
-	ToolbarImageset* toolbar_image_set() const;
+	[[nodiscard]] ToolbarImageset* toolbar_image_set() const;
 
-	const std::map<std::string /* key */, std::string /* building */>& fastplace_defaults() const {
+	[[nodiscard]] const std::map<std::string /* key */, std::string /* building */>&
+	fastplace_defaults() const {
 		return fastplace_defaults_;
 	}
 
@@ -237,6 +243,7 @@ private:
 
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;
+	uint32_t pinned_note_animation_id_;
 	struct BridgeAnimationIDs {
 		uint32_t e;
 		uint32_t se;
@@ -274,6 +281,7 @@ private:
 	WaresOrder wares_order_;
 	WaresOrder workers_order_;
 	std::vector<std::pair<std::string, int>> collectors_points_table_;
+	std::vector<std::string> warehouse_names_;
 
 	std::string productionsite_worker_missing_;
 	std::string productionsite_workers_missing_;

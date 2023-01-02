@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,29 +38,29 @@ public:
 	explicit ResourceDescription(const LuaTable& table);
 
 	/// Returns the in engine name of this resource.
-	const std::string& name() const;
+	[[nodiscard]] const std::string& name() const;
 
 	/// Returns the name of this resource for users. Usually translated.
-	const std::string& descname() const;
+	[[nodiscard]] const std::string& descname() const;
 
 	/// Returns if this resource is detectable by a geologist.
-	bool detectable() const;
+	[[nodiscard]] bool detectable() const;
 
 	/// Returns the time for which nearby geologist messages for this resource are muted
-	uint32_t timeout_ms() const;
+	[[nodiscard]] uint32_t timeout_ms() const;
 
 	/// Returns the radius within which geologist messages for this resource are temporarily muted
-	uint32_t timeout_radius() const;
+	[[nodiscard]] uint32_t timeout_radius() const;
 
 	/// Returns the maximum amount that can be in a field for this resource.
-	ResourceAmount max_amount() const;
+	[[nodiscard]] ResourceAmount max_amount() const;
 
 	/// Returns the path to the image that should be used in the editor to
 	/// represent an 'amount' of this resource.
-	const std::string& editor_image(uint32_t amount) const;
+	[[nodiscard]] const std::string& editor_image(uint32_t amount) const;
 
 	/// Returns the path to the image that should be used in menus to represent this resource
-	const std::string& representative_image() const {
+	[[nodiscard]] const std::string& representative_image() const {
 		return representative_image_;
 	}
 

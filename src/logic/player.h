@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -142,6 +142,7 @@ public:
 		name_ = name;
 	}
 	void set_team_number(TeamNumber team);
+	bool may_approve_request(DiplomacyAction action, PlayerNumber from, PlayerNumber to) const;
 
 	void create_default_infrastructure();
 
@@ -173,69 +174,39 @@ public:
 		// Seafaring constants for controlling expeditions
 		static constexpr uint32_t kColonyScanStartArea = 35;
 		static constexpr uint32_t kColonyScanMinArea = 12;
-		static constexpr Time kNoExpedition{0};
+		static constexpr Time kNoExpedition{0U};
 
-		AiPersistentState()
-		   : initialized(false),
-		     colony_scan_area(0),
-		     trees_around_cutters(0),
-		     expedition_start_time(0),
-		     ships_utilization(0),
-		     no_more_expeditions(false),
-		     last_attacked_player(0),
-		     least_military_score(0),
-		     target_military_score(0),
-		     ai_productionsites_ratio(0),
-		     ai_personality_mil_upper_limit(0),
-		     magic_numbers(kMagicNumbersSize, 0),
-		     neuron_weights(kNeuronPoolSize, 0),
-		     neuron_functs(kNeuronPoolSize, 0),
-		     f_neurons(kFNeuronPoolSize, 0) {
-		}
+		AiPersistentState() = default;
 
 		void initialize();
 
 		// Was initialized
-		bool initialized;
-		uint32_t colony_scan_area;
-		uint32_t trees_around_cutters;
-		Time expedition_start_time;
-		int16_t
-		   ships_utilization;  // 0-10000 to avoid floats, used for decision for building new ships
-		bool no_more_expeditions;
-		int16_t last_attacked_player;
-		int32_t least_military_score;
-		int32_t target_military_score;
-		uint32_t ai_productionsites_ratio;
-		int32_t ai_personality_mil_upper_limit;
-		std::vector<int16_t> magic_numbers;
-		std::vector<int8_t> neuron_weights;
-		std::vector<int8_t> neuron_functs;
-		std::vector<uint32_t> f_neurons;
+		bool initialized{false};
+		uint32_t colony_scan_area{0U};
+		uint32_t trees_around_cutters{0U};
+		Time expedition_start_time{0U};
+		int16_t ships_utilization{
+		   0};  // 0-10000 to avoid floats, used for decision for building new ships
+		bool no_more_expeditions{false};
+		int16_t last_attacked_player{0};
+		int32_t least_military_score{0};
+		int32_t target_military_score{0};
+		uint32_t ai_productionsites_ratio{0U};
+		int32_t ai_personality_mil_upper_limit{0};
+		std::vector<int16_t> magic_numbers{std::vector<int16_t>(kMagicNumbersSize, 0)};
+		std::vector<int8_t> neuron_weights{std::vector<int8_t>(kNeuronPoolSize, 0)};
+		std::vector<int8_t> neuron_functs{std::vector<int8_t>(kNeuronPoolSize, 0)};
+		std::vector<uint32_t> f_neurons{std::vector<uint32_t>(kFNeuronPoolSize, 0)};
 		std::unordered_map<Widelands::DescriptionIndex, uint32_t> remaining_basic_buildings;
-	} ai_data;
+	};
 
-	AiPersistentState* get_mutable_ai_persistent_state() {
-		return &ai_data;
+	[[nodiscard]] AiPersistentState* get_mutable_ai_persistent_state() {
+		return &ai_data_;
 	}
 
 	/// Per-player field information.
 	struct Field {
-		Field()
-		   : military_influence(0),
-		     vision(VisibleState::kUnexplored),
-		     r_e(RoadSegment::kNone),
-		     r_se(RoadSegment::kNone),
-		     r_sw(RoadSegment::kNone),
-		     time_node_last_unseen(0),
-		     map_object_descr(nullptr),
-		     dismantlesite(),
-		     is_constructionsite(false),
-		     border(0),
-		     border_r(0),
-		     border_br(0),
-		     border_bl(0),
-		     owner(0) {
+		Field() {
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
 			//  darkening that actually hides the ground from the user).
@@ -263,7 +234,7 @@ public:
 		/// This is not saved/loaded. It is recalculated during the loading
 		/// process by adding influence values to the nodes surrounding a
 		/// building when the first soldier located in it is loaded.
-		MilitaryInfluence military_influence;
+		MilitaryInfluence military_influence{0U};
 
 		/// Indicates whether the player is currently seeing this node or has
 		/// ever seen it.
@@ -288,7 +259,7 @@ public:
 		/// a worker or a building starts seeing an area, unsee_area when it
 		/// stops seeing that area, and hide_or_reveal_field to add or remove
 		/// permanent vision.
-		Vision vision;
+		Vision vision{VisibleState::kUnexplored};
 
 		//  Below follows information about the field, as far as this player
 		//  knows.
@@ -305,15 +276,15 @@ public:
 		 * Each value is only valid when this player has seen this node
 		 * or the node to the the edge leads up to.
 		 */
-		RoadSegment r_e;
-		RoadSegment r_se;
-		RoadSegment r_sw;
+		RoadSegment r_e{RoadSegment::kNone};
+		RoadSegment r_se{RoadSegment::kNone};
+		RoadSegment r_sw{RoadSegment::kNone};
 
 		/// Whether there is a road between this node and the node to the
 		/// east, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// east.
-		RoadSegment road_e() const {
+		[[nodiscard]] RoadSegment road_e() const {
 			return r_e;
 		}
 
@@ -321,7 +292,7 @@ public:
 		/// southeast, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southeast.
-		RoadSegment road_se() const {
+		[[nodiscard]] RoadSegment road_se() const {
 			return r_se;
 		}
 
@@ -329,7 +300,7 @@ public:
 		/// southwest, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southwest.
-		RoadSegment road_sw() const {
+		[[nodiscard]] RoadSegment road_sw() const {
 			return r_sw;
 		}
 
@@ -375,14 +346,14 @@ public:
 		 * least one of them has been seen at least once.
 		 *
 		 */
-		Time time_node_last_unseen;
+		Time time_node_last_unseen{0U};
 
 		/**
 		 * The type of immovable on this node, as far as this player knows.
 		 * Only valid when the player has seen this node (or maybe a nearby node
 		 * if the immovable is big?). (Roads are not stored here.)
 		 */
-		const MapObjectDescr* map_object_descr;
+		const MapObjectDescr* map_object_descr{nullptr};
 
 		/* Information for ConstructionSite and DismantleSite animation.
 		 * `constructionsite` is only valid if there is a constructionsite
@@ -403,20 +374,20 @@ public:
 			DismantlesiteInformation dismantlesite;
 			ConstructionsiteInformation* constructionsite;
 		};
-		bool is_constructionsite;
+		bool is_constructionsite{false};
 		void set_constructionsite(bool);
 
 		/// Save whether the player saw a border the last time (s)he saw the node.
-		bool border;
-		bool border_r;
-		bool border_br;
-		bool border_bl;
+		bool border{false};
+		bool border_r{false};
+		bool border_br{false};
+		bool border_bl{false};
 
 		/**
 		 * The owner of this node, as far as this player knows.
 		 * Only valid when this player has seen this node.
 		 */
-		PlayerNumber owner;
+		PlayerNumber owner{0U};
 
 		/**
 		 * The amount of resource at each of the triangles, as far as this player
@@ -579,18 +550,20 @@ public:
 	// Statistics
 	const BuildingStatsVector& get_building_statistics(const DescriptionIndex& i) const;
 
-	std::vector<uint32_t> const* get_ware_production_statistics(DescriptionIndex const) const;
+	std::vector<uint32_t> const* get_ware_production_statistics(DescriptionIndex) const;
 
-	std::vector<uint32_t> const* get_ware_consumption_statistics(DescriptionIndex const) const;
+	std::vector<uint32_t> const* get_ware_consumption_statistics(DescriptionIndex) const;
 
-	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
-	std::vector<uint32_t> const* get_worker_stock_statistics(DescriptionIndex const) const;
+	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex) const;
+	std::vector<uint32_t> const* get_worker_stock_statistics(DescriptionIndex) const;
 
 	void init_statistics();
 	void read_statistics(FileRead&, uint16_t packet_version);
 	void write_statistics(FileWrite&) const;
 	void read_remaining_shipnames(FileRead&);
 	void write_remaining_shipnames(FileWrite&) const;
+	void read_remaining_warehousenames(FileRead&);
+	void write_remaining_warehousenames(FileWrite&) const;
 	void sample_statistics();
 	void ware_produced(DescriptionIndex);
 
@@ -616,10 +589,12 @@ public:
 	void set_attack_forbidden(PlayerNumber who, bool forbid);
 	bool is_attack_forbidden(PlayerNumber who) const;
 
-	const std::string pick_shipname();
+	[[nodiscard]] std::string pick_shipname();
+	[[nodiscard]] std::string pick_warehousename(bool port);
 
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
+	uint32_t count_soldiers() const;
 	uint32_t count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const;
 	uint32_t count_soldiers_h(unsigned) const;
 	uint32_t count_soldiers_a(unsigned) const;
@@ -627,7 +602,7 @@ public:
 	uint32_t count_soldiers_e(unsigned) const;
 
 	bool is_muted(DescriptionIndex di) const {
-		return muted_building_types_.count(di);
+		return muted_building_types_.count(di) != 0u;
 	}
 	void set_muted(DescriptionIndex, bool mute);
 
@@ -669,38 +644,47 @@ private:
 	/// those of the 6 surrounding edges/triangles that are not seen from another node.
 	void rediscover_node(const Map&, const FCoords&);
 
+	using StatisticsMap = std::map<DescriptionIndex, std::vector<Quantity>>;
+
+	struct SoldierStatistics {
+		const unsigned health, attack, defense, evade;
+		Quantity total{0U};
+		SoldierStatistics(unsigned h, unsigned a, unsigned d, unsigned e)
+		   : health(h), attack(a), defense(d), evade(e) {
+		}
+		bool operator==(const SoldierStatistics& s) const {
+			return s.health == health && s.attack == attack && s.defense == defense &&
+			       s.evade == evade;
+		}
+	};
+
 	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteFieldTerrainChanged>>
 	   field_terrain_changed_subscriber_;
 
-	MessageQueue messages_;
-
 	EditorGameBase& egbase_;
-	uint8_t initialization_index_;
-	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
-	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
-	RGBColor playercolor_;
-	TeamNumber team_number_;
-	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
-	bool see_all_;
-	const PlayerNumber player_number_;
 	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
-	bool random_tribe_;
-	uint32_t casualties_, kills_;
-	uint32_t msites_lost_, msites_defeated_;
-	uint32_t civil_blds_lost_, civil_blds_defeated_;
-
-	std::list<std::string> remaining_shipnames_;
-	// If we run out of ship names, we'll want to continue with unique numbers
-	uint32_t ship_name_counter_;
 
 	std::unique_ptr<Field[]> fields_;
+
+	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
+	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
+
+	std::list<std::string> remaining_shipnames_;
+	std::list<std::string> remaining_warehousenames_;
+
+	PlayerBuildingStats building_stats_;
+	std::vector<SoldierStatistics> soldier_stats_;
+
+	std::string name_;                     // Player name
+	std::string ai_;                       /**< Name of preferred AI implementation */
+	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
+
 	std::set<DescriptionIndex> allowed_worker_types_;
 	std::set<DescriptionIndex> allowed_building_types_;
+
 	std::map<Serial, std::unique_ptr<Economy>> economies_;
 	std::set<Serial> ships_;
-	std::string name_;  // Player name
-	std::string ai_;    /**< Name of preferred AI implementation */
 
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics
@@ -711,8 +695,6 @@ private:
 	 * Wares consumed (by ware id) since the last call to @ref sample_statistics
 	 */
 	std::map<DescriptionIndex, Quantity> current_consumed_statistics_;
-
-	using StatisticsMap = std::map<DescriptionIndex, std::vector<Quantity>>;
 
 	/**
 	 * Statistics of wares produced over the life of the game, indexed as
@@ -731,36 +713,41 @@ private:
 	 * life of the game, indexed as
 	 * ware_stocks_[ware_id][time_index]
 	 */
-	StatisticsMap ware_stocks_, worker_stocks_;
+	StatisticsMap ware_stocks_;
+	StatisticsMap worker_stocks_;
 
 	std::set<DescriptionIndex> muted_building_types_;
 
 	std::set<PlayerNumber> forbid_attack_;
 
-	PlayerBuildingStats building_stats_;
+	MessageQueue messages_;
 
-	struct SoldierStatistics {
-		const unsigned health, attack, defense, evade;
-		Quantity total;
-		SoldierStatistics(unsigned h, unsigned a, unsigned d, unsigned e)
-		   : health(h), attack(a), defense(d), evade(e), total(0) {
-		}
-		bool operator==(const SoldierStatistics& s) const {
-			return s.health == health && s.attack == attack && s.defense == defense &&
-			       s.evade == evade;
-		}
-	};
-	std::vector<SoldierStatistics> soldier_stats_;
+	AiPersistentState ai_data_;
 
-	bool is_picking_custom_starting_position_;
+	uint32_t casualties_{0U};
+	uint32_t kills_{0U};
+	uint32_t msites_lost_{0U};
+	uint32_t msites_defeated_{0U};
+	uint32_t civil_blds_lost_{0U};
+	uint32_t civil_blds_defeated_{0U};
 
-	bool allow_additional_expedition_items_;
-
-	bool hidden_from_general_statistics_;
+	// If we run out of ship names, we'll want to continue with unique numbers
+	uint32_t ship_name_counter_{0U};
+	uint32_t warehouse_name_counter_{0U};
 
 	FxId message_fx_;
 	FxId attack_fx_;
 	FxId occupied_fx_;
+
+	RGBColor playercolor_;
+	const PlayerNumber player_number_;
+	TeamNumber team_number_{0U};
+	uint8_t initialization_index_;
+	bool see_all_{false};
+	bool random_tribe_{false};
+	bool is_picking_custom_starting_position_{false};
+	bool allow_additional_expedition_items_{true};
+	bool hidden_from_general_statistics_{false};
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };
@@ -778,7 +765,7 @@ struct NotePlayerDetailsEvent {
 };
 
 void find_former_buildings(const Descriptions& descriptions,
-                           const DescriptionIndex bi,
+                           DescriptionIndex bi,
                            FormerBuildings* former_buildings);
 }  // namespace Widelands
 

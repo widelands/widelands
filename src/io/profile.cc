@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -224,12 +224,9 @@ void Section::check_used() const {
 }
 
 bool Section::has_val(char const* const name) const {
-	for (const Value& temp_value : values_) {
-		if (iequals(temp_value.get_name(), name)) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(values_.begin(), values_.end(), [name](const Value& temp_value) {
+		return iequals(temp_value.get_name(), name);
+	});
 }
 
 /**

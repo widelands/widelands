@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,8 @@ enum class MousewheelOptionID : uint16_t {
 
 	kAlwaysOn,
 	kDisabled,
-	kNoMod
+	kNoMod,
+	kModBigStep
 };
 
 void set_mousewheel_option_bool(MousewheelOptionID, bool);
@@ -76,6 +77,7 @@ enum class MousewheelHandlerConfigID : uint16_t {
 	k_Begin = 0,
 
 	kChangeValue = k_Begin,
+	kChangeValueBig,
 	kTabBar,
 	kZoom,
 	kMapScroll,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,13 +99,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 
 bool LoadOrSaveGame::selection_contains_directory() const {
 	const std::set<uint32_t>& selections = table_->selections();
-	for (const uint32_t index : selections) {
-		const SavegameData& gamedata = get_savegame(index);
-		if (gamedata.is_directory()) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(selections.begin(), selections.end(),
+	                   [this](const uint32_t index) { return get_savegame(index).is_directory(); });
 }
 
 const SavegameData& LoadOrSaveGame::get_savegame(uint32_t index) const {

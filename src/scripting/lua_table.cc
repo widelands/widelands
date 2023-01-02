@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,7 @@
 
 #include "base/log.h"
 
-LuaTable::LuaTable(lua_State* L)
-   : mutex_lock_(MutexLock::ID::kLua), L_(L), warn_about_unaccessed_keys_(true) {
+LuaTable::LuaTable(lua_State* L) : mutex_lock_(MutexLock::ID::kLua), L_(L) {
 	// S: <table>
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
 	lua_pushvalue(L, -2);                                    // S: <table> this <table>

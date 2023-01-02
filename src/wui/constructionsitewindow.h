@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ public:
 	void set_current(uint32_t value);
 	void change_current(int32_t delta);
 	Notifications::Signal<> changed;
-	uint32_t get_current() {
+	uint32_t get_current() const {
 		return current_;
 	}
 	bool handle_key(bool down, SDL_Keysym code) override;
@@ -93,17 +93,17 @@ private:
 	};
 
 	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;
-	UI::ProgressBar* progress_;
+	UI::ProgressBar* progress_{nullptr};
 
 	// BuildingSettings-related UI elements
-	UI::Checkbox* cs_launch_expedition_;
+	UI::Checkbox* cs_launch_expedition_{nullptr};
 	std::unique_ptr<UI::Radiogroup> cs_prefer_heroes_rookies_;
-	ConstructionSoldierCapacityBox* cs_soldier_capacity_;
+	ConstructionSoldierCapacityBox* cs_soldier_capacity_{nullptr};
 	std::vector<InputQueueDisplay*> cs_ware_queues_;
 	std::vector<InputQueueDisplay*> cs_worker_queues_;
-	UI::Checkbox* cs_stopped_;
-	FakeWaresDisplay* cs_warehouse_wares_;
-	FakeWaresDisplay* cs_warehouse_workers_;
+	UI::Checkbox* cs_stopped_{nullptr};
+	FakeWaresDisplay* cs_warehouse_wares_{nullptr};
+	FakeWaresDisplay* cs_warehouse_workers_{nullptr};
 	void change_policy(Widelands::WareWorker, Widelands::StockPolicy);
 	void add_wares_queues(Widelands::ConstructionSite* construction_site, UI::Box& box) const;
 	void add_progress_bar(UI::Box& box);
