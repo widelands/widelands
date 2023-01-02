@@ -1,8 +1,8 @@
 function count_in_warehouses(ware)
    local whs = array_combine(
-      p1:get_buildings("frisian_headquarters"),
-      p1:get_buildings("frisian_warehouse"),
-      p1:get_buildings("frisian_port")
+      p1:get_buildings("frisians_headquarters"),
+      p1:get_buildings("frisians_warehouse"),
+      p1:get_buildings("frisians_port")
    )
    local rv = 0
    for idx,wh in ipairs(whs) do
@@ -220,10 +220,10 @@ function mission_thread()
       map:get_field(89, 177),
       map:get_field(89, 160),
    }) do
-      sleep(20)
+      sleep(75)
       scroll_to_field(f)
    end
-   sleep(20)
+   sleep(100)
    scroll_to_field(map.player_slots[1].starting_field)
 
    campaign_message_box(trade_2)

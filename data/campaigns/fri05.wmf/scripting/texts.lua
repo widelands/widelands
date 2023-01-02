@@ -183,7 +183,10 @@ trade_1 = {
       _([[Your enthusiasm warms me as much as your plight engages my sympathy. But the enemies are more powerful than they may appear – they have brought an enormous force of Danish soldiers, and even your mighty soldiers will not be able to defeat them all.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Ocke Ketelsen – Trade 1
-      _([[Our island is not accustomed to this kind of warfare. We are fishers and farmers, we do not have the infrastructure to support a drawn-out battle. Your expertise in this area would be much appreciated. But first let me give you a clear picture of our small island by showing you around.]]))
+      _([[Our island is not accustomed to this kind of warfare. We are fishers and farmers, we do not have the infrastructure to support a drawn-out battle. Your expertise in this area would be much appreciated.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Ocke Ketelsen – Trade 1
+      _([[But first let me give you a clear picture of our small island by showing you around.]]))
 }
 
 trade_2 = {
@@ -203,7 +206,7 @@ trade_3 = {
 
 getting_started_1 = {
    title = _("Planning the War"),
-   body=reebaud(_("Use the uplands wisely"),
+   body=reebaud(_("Use the Uplands wisely"),
       -- TRANSLATORS: Reebaud – Getting Started 1
       _([[First things first. This town has an excellent defensive position, but it is woefully unguarded. We must plan ahead tactically, because I agree that this battle will not be won quickly.]])
       .. paragraphdivider() ..
@@ -241,7 +244,7 @@ training = {
    title = _("Planning the War"),
    body=henneke(_("Long-term strategy"),
       -- TRANSLATORS: Henneke Lembeck – Training
-      _([[Our trading has succesfully started. Now we will need to plan our recruitment and training facilities. We do have a basic food and metal industry, but it seems to have grown haphazardly and will not suffice to meet our needs. We will require more numerous and more advanced sites to provide enough weapons and armour as well as food for our soldiers. Needless to say, a pair of training sites and a barracks are also essential.]])
+      _([[Our trading has successfully started. Now we will need to plan our recruitment and training facilities. We do have a basic food and metal industry, but it seems to have grown haphazardly and will not suffice to meet our needs. We will require more numerous and more advanced sites to provide enough weapons and armour as well as food for our soldiers. Needless to say, a pair of training sites and a barracks are also essential.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Henneke Lembeck – Training
       _([[At all times, we will need to keep a close eye on our supply of tradeable goods. I will ask Ocke Ketelsen to purchase only the goods our economy actually needs so that we won’t waste any wares, but it will be up to us to ensure we can provide enough goods. These trade routes are all very expensive, and we will need to mark out a large amount of space purely to produce wares to sell.]]))
@@ -251,7 +254,7 @@ diking = {
    title = _("Planning the War"),
    body=claus(_("Diking"),
       -- TRANSLATORS: Claus Lembeck – Diking
-      _([[The lack of space on Helgoland is still a concern. The land would be sufficiently large to train a decent number of soldiers in a reasonable time, but training the armies I believe we will need would take forever! We may need to take some chances, and use superior tactics to compensate for this disadvantage.]])
+      _([[The lack of space on Helgoland is still a concern. The land would be sufficiently large to train a decent number of soldiers in a reasonable time, but training the armies we believe we will need would take forever! We may need to take some chances, and use superior tactics to compensate for this disadvantage.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Claus Lembeck – Diking
       _([[However, if you prefer to play it safe, don’t forget that we can simply enlarge the island. As we have a steady supply of logs now, we can construct dikes and breakwaters to gain more building space from the sea. When we are ready to attack, we can even use this as a way of bypassing the chokepoint in the east, or if we are to be truly bold we could dike around the whole western coast of the island to attack the enemy from two sides at once!]]))
