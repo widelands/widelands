@@ -76,7 +76,7 @@ function check_objective_wood()
    end
    set_objective_done(o)
    campaign_message_box(secured_wood)
-   while count_in_warehouses("log") < 80 do
+   while count_in_warehouses("log") < 40 do
       sleep(4887)
    end
    local prior_center = scroll_to_field(map:get_field(95, 156))
@@ -92,7 +92,7 @@ function check_objective_block()
       sleep(4916)
       local sites = 0
       for x = 84, 94 do
-         for y = 114, 122 do
+         for y = 114, 125 do
             local f = map:get_field(x, y)
             if f.immovable ~= nil and f.immovable.descr.type_name == "militarysite" and f.immovable.fields[1] == f and f.owner == p1 then
                sites = sites + 1
@@ -116,7 +116,7 @@ function check_objective_uplands()
          for _,b in pairs(p1:get_buildings(descr.name)) do
             if b.fields[1].height > 40 then
                nr = nr + 1
-               if nr >= 15 then
+               if nr >= 20 then
                   set_objective_done(o)
                   campaign_message_box(secured_uplands)
                   return
