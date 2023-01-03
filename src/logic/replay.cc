@@ -127,7 +127,8 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime
 			throw UnhandledVersionError("ReplayReader", packet_version, kCurrentPacketVersion);
 		}
 
-		const std::string temp_file = kTempFileDir + timestring() + kSavegameExtension;
+		const std::string temp_file =
+		   kTempFileDir + FileSystem::file_separator() + timestring() + kSavegameExtension;
 		{
 			const uint32_t bytes = cmdlog_->unsigned_32();
 			std::unique_ptr<char[]> buffer(new char[bytes]);
@@ -359,7 +360,7 @@ ReplayfileSavegameExtractor::ReplayfileSavegameExtractor(const std::string& game
 	fr.data_complete(buffer.get(), bytes);
 	FileWrite fw;
 	fw.data(buffer.get(), bytes);
-	temp_file_ = kTempFileDir + timestring() + kSavegameExtension;
+	temp_file_ = kTempFileDir + FileSystem::file_separator() + timestring() + kSavegameExtension;
 	fw.write(*g_fs, temp_file_);
 }
 
