@@ -43,6 +43,14 @@
 
 namespace Widelands {
 
+static inline void delete_temp_file(const std::string& temp_file) {
+	try {
+		g_fs->fs_unlink(temp_file);
+	} catch (const std::exception& e) {
+		log_err("Unable to delete temporary file '%s': %s", temp_file.c_str(), e.what());
+	}
+}
+
 // File format definitions
 constexpr uint32_t kReplayMagic = 0x2E21A102;
 constexpr uint8_t kCurrentPacketVersion = 4;
@@ -146,7 +154,7 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime
 		gl.load_game();
 		game.postload_addons();
 
-		g_fs->fs_unlink(temp_file);
+		delete_temp_file(temp_file);
 
 		game.rng().read_state(*cmdlog_);
 	} catch (...) {
@@ -292,7 +300,7 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 		gl.load_game();
 	}
 	verb_log_info("Done reloading the game from replay");
-	g_fs->fs_unlink(temp_savegame);
+	delete_temp_file(temp_savegame);
 
 	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
 
@@ -366,7 +374,7 @@ ReplayfileSavegameExtractor::ReplayfileSavegameExtractor(const std::string& game
 
 ReplayfileSavegameExtractor::~ReplayfileSavegameExtractor() {
 	if (!temp_file_.empty()) {
-		g_fs->fs_unlink(temp_file_);
+		delete_temp_file(temp_file_);
 	}
 }
 }  // namespace Widelands
