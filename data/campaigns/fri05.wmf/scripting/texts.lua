@@ -22,6 +22,8 @@ end
 --                           Texts - No logic here
 -- =======================================================================
 
+local objective_message_height = 550
+
 -- ===========
 -- objectives
 -- ===========
@@ -174,6 +176,7 @@ intro_10 = {
       -- TRANSLATORS: Claus Lembeck – Introduction 10
       _([[That it did so might even be heavenly intervention. We will gladly help you fight this enemy. A warm-up battle, so to speak – I am looking forward to it!]]))
       .. new_objectives(obj_fight),
+   h = objective_message_height,
 }
 
 trade_1 = {
@@ -202,6 +205,7 @@ trade_3 = {
       -- TRANSLATORS: Ocke Ketelsen – Trade 3
       _([[By trade. We sell grain, fish, and various other goods to the mainland and buy ores and granite from there. Let’s split out duties according to what each of us does best: You take charge of reorganizing our economy for war and training our people for battle, and I will arrange to import goods in any quantity you require. Simply drop off the wares to sell in the ports and I will take care of the rest. This chart indicates how many goods of which sorts we usually trade.]]))
       .. new_objectives(obj_trade),
+   h = objective_message_height,
 }
 
 getting_started_1 = {
@@ -213,6 +217,8 @@ getting_started_1 = {
       -- TRANSLATORS: Reebaud – Getting Started 1
       _([[The Uplands have only one entrance: this ramp right here next to the town center. Let’s build all our important infrastructure up there. A few fortresses placed closely together right at its southern tip will make this vast plateau nearly impossible to conquer. Even if the enemy should manage to take the entire lower island, we could conceivably hold out for years there, provided we stock enough supplies in warehouses on the Uplands in advance. Of course we’d be cut off from the ports and the trade routes, so we should try to avoid getting to this point.]]))
       .. new_objectives(obj_uplands),
+   h = objective_message_height,
+   position = "topleft",
 }
 
 getting_started_2 = {
@@ -224,6 +230,8 @@ getting_started_2 = {
       -- TRANSLATORS: Reebaud – Getting Started 2
       _([[Depending on how many building materials we can spare, it might be wise to demolish some of the other buildings here to make room for even more fortifications. In any case, all civil buildings in this area will be in constant danger of being burnt down during a Danish incursion.]]))
       .. new_objectives(obj_block),
+   h = objective_message_height,
+   position = "topleft",
 }
 
 getting_started_3 = {
@@ -238,6 +246,8 @@ getting_started_3 = {
       -- TRANSLATORS: Henneke Lembeck – Getting Started 3
       _([[The land looks fairly barren, so we will need to reserve more space for foresting than I’m comfortable with. The Lowlands seem to be slightly more fertile, so it might be wise to build the forest infrastructure down here and relocate some of the farms to the Uplands. Farms, reed farms, and berry farms do not depend on fertile land as much as trees do.]]))
       .. new_objectives(obj_wood),
+   h = objective_message_height,
+   position = "topleft",
 }
 
 training = {
