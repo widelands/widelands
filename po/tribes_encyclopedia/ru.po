@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -11,7 +11,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # CupIvan <mail@cupivan.ru>, 2015
 # Viktor S <awsswa59@gmail.com>, 2018-2019
-# Yuriy Sokolov <lention@mail.ru>, 2015,2019,2022
+# Yuriy Sokolov <lention@mail.ru>, 2015,2019,2022-2023
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # Владимир Шевцов, 2022
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -21,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-22 03:00+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2019,2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2019,2022-2023\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -7940,1579 +7940,1579 @@ msgstr "Глопп'н"
 #: ../../data/tribes/initialization/barbarians/units.lua:1986
 msgctxt "warehousename"
 msgid "Gol"
-msgstr ""
+msgstr "Гол"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:1988
 msgctxt "warehousename"
 msgid "Gran"
-msgstr ""
+msgstr "Гран"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:1990
 msgctxt "warehousename"
 msgid "Gra’ne"
-msgstr ""
+msgstr "Гра'не"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:1992
 msgctxt "warehousename"
 msgid "Gr’tangen"
-msgstr ""
+msgstr "Гр'танген"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:1994
 msgctxt "warehousename"
 msgid "Grimst’d"
-msgstr ""
+msgstr "Гримст'д"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:1996
 msgctxt "warehousename"
 msgid "Grong"
-msgstr ""
+msgstr "Гронг"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:1998
 msgctxt "warehousename"
 msgid "Grue"
-msgstr ""
+msgstr "Груэ"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2000
 msgctxt "warehousename"
 msgid "G’len"
-msgstr ""
+msgstr "G’len"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2002
 msgctxt "warehousename"
 msgid "Ho"
-msgstr ""
+msgstr "Хо"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2004
 msgctxt "warehousename"
 msgid "H’dsel"
-msgstr ""
+msgstr "Х'дсель"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2006
 msgctxt "warehousename"
 msgid "Hæg’bost’d"
-msgstr ""
+msgstr "Хег'бост'д"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2008
 msgctxt "warehousename"
 msgid "H’lden"
-msgstr ""
+msgstr "Х'лден"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2010
 msgctxt "warehousename"
 msgid "H’mar"
-msgstr ""
+msgstr "Х'мар"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2012
 msgctxt "warehousename"
 msgid "H’marey"
-msgstr ""
+msgstr "Х'марей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2014
 msgctxt "warehousename"
 msgid "H’merfest"
-msgstr ""
+msgstr "Х'мерфест"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2016
 msgctxt "warehousename"
 msgid "H’reid"
-msgstr ""
+msgstr "Х'рейд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2018
 msgctxt "warehousename"
 msgid "H’rstad"
-msgstr ""
+msgstr "Х'рстад"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2020
 msgctxt "warehousename"
 msgid "Hasvik"
-msgstr ""
+msgstr "Хасвик"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2022
 msgctxt "warehousename"
 msgid "Hattfjelldal"
-msgstr ""
+msgstr "Хаттфьельдал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2024
 msgctxt "warehousename"
 msgid "Haug’sund"
-msgstr ""
+msgstr "Хауг'сунд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2026
 msgctxt "warehousename"
 msgid "Heim"
-msgstr ""
+msgstr "Хейм"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2028
 msgctxt "warehousename"
 msgid "H’mnes"
-msgstr ""
+msgstr "Х'мнес"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2030
 msgctxt "warehousename"
 msgid "Hems’dal"
-msgstr ""
+msgstr "Хемс'даль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2032
 msgctxt "warehousename"
 msgid "H’rey"
-msgstr ""
+msgstr "Х'рей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2034
 msgctxt "warehousename"
 msgid "H’roy"
-msgstr ""
+msgstr "Х'рой"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2036
 msgctxt "warehousename"
 msgid "Hitra"
-msgstr ""
+msgstr "Хитра"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2038
 msgctxt "warehousename"
 msgid "Hjartdal"
-msgstr ""
+msgstr "Хьяртдал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2040
 msgctxt "warehousename"
 msgid "Hjelm’land"
-msgstr ""
+msgstr "Хьем'ланд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2042
 msgctxt "warehousename"
 msgid "Hol"
-msgstr ""
+msgstr "Хол"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2044
 msgctxt "warehousename"
 msgid "Hole"
-msgstr ""
+msgstr "Холэ"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2046
 msgctxt "warehousename"
 msgid "Holm’strand"
-msgstr ""
+msgstr "Холм'странд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2048
 msgctxt "warehousename"
 msgid "Hol’Talen"
-msgstr ""
+msgstr "Хол'Тален"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2050
 msgctxt "warehousename"
 msgid "Horten"
-msgstr ""
+msgstr "Хортен"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2052
 msgctxt "warehousename"
 msgid "H’yanger"
-msgstr ""
+msgstr "Х'янгер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2054
 msgctxt "warehousename"
 msgid "H’ylandet"
-msgstr ""
+msgstr "Х'иландет"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2056
 msgctxt "warehousename"
 msgid "H’rdal"
-msgstr ""
+msgstr "Х'рдаль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2058
 msgctxt "warehousename"
 msgid "Hustadvik"
-msgstr ""
+msgstr "Хустадвик"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2060
 msgctxt "warehousename"
 msgid "H’valer"
-msgstr ""
+msgstr "Х'валер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2062
 msgctxt "warehousename"
 msgid "Hyll’stad"
-msgstr ""
+msgstr "Хилл'стад"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2064
 msgctxt "warehousename"
 msgid "Ib’stad"
-msgstr ""
+msgstr "Иб'стад"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2066
 msgctxt "warehousename"
 msgid "Ind’rey"
-msgstr ""
+msgstr "Инд'рей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2068
 msgctxt "warehousename"
 msgid "Ind’re"
-msgstr ""
+msgstr "Инд'ре"
 
 #. TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
 #: ../../data/tribes/initialization/barbarians/units.lua:2070
 msgctxt "warehousename"
 msgid "Ir Kal’Tur"
-msgstr ""
+msgstr "Ир Каль'тур"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2072
 msgctxt "warehousename"
 msgid "Iv’land"
-msgstr ""
+msgstr "Ив'ланд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2074
 msgctxt "warehousename"
 msgid "J’vnaker"
-msgstr ""
+msgstr "Й'внакер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2076
 msgctxt "warehousename"
 msgid "K’fjord"
-msgstr ""
+msgstr "К'фьорд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2078
 msgctxt "warehousename"
 msgid "Kar’sjok"
-msgstr ""
+msgstr "Кар'зёк"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2080
 msgctxt "warehousename"
 msgid "Karls’y"
-msgstr ""
+msgstr "Карлс'йи"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2082
 msgctxt "warehousename"
 msgid "Karm’y"
-msgstr ""
+msgstr "Карм'йи"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2084
 msgctxt "warehousename"
 msgid "Kot’keino"
-msgstr ""
+msgstr "Кот'кейно"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2086
 msgctxt "warehousename"
 msgid "K’nn"
-msgstr ""
+msgstr "К'нн"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2088
 msgctxt "warehousename"
 msgid "Kl’pp"
-msgstr ""
+msgstr "Кл'пп"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2090
 msgctxt "warehousename"
 msgid "K’ngsberg"
-msgstr ""
+msgstr "К'нгсберг"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2092
 msgctxt "warehousename"
 msgid "K’ngsvinger"
-msgstr ""
+msgstr "К'нгсвингер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2094
 msgctxt "warehousename"
 msgid "Krag’re"
-msgstr ""
+msgstr "Краг'ре"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2096
 msgctxt "warehousename"
 msgid "Kr’dsherad"
-msgstr ""
+msgstr "Кр'дшерад"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2098
 msgctxt "warehousename"
 msgid "Kvæfjord"
-msgstr ""
+msgstr "Квефьорд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2100
 msgctxt "warehousename"
 msgid "Kvæn’ngen"
-msgstr ""
+msgstr "Квен'нген"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2102
 msgctxt "warehousename"
 msgid "Kvam"
-msgstr ""
+msgstr "Квам"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2104
 msgctxt "warehousename"
 msgid "Kvin’sdal"
-msgstr ""
+msgstr "Квин'сдал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2106
 msgctxt "warehousename"
 msgid "Kvin’Herad"
-msgstr ""
+msgstr "Квин'Герад"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2108
 msgctxt "warehousename"
 msgid "Kvit’seid"
-msgstr ""
+msgstr "Квитсейд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2110
 msgctxt "warehousename"
 msgid "Kvit’Sey"
-msgstr ""
+msgstr "Квит'Сей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2112
 msgctxt "warehousename"
 msgid "Lærdal"
-msgstr ""
+msgstr "Лердаль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2114
 msgctxt "warehousename"
 msgid "Larvik"
-msgstr ""
+msgstr "Ларвик"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2116
 msgctxt "warehousename"
 msgid "Lav’ngen"
-msgstr ""
+msgstr "Лав'нген"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2118
 msgctxt "warehousename"
 msgid "L’besby"
-msgstr ""
+msgstr "Л'Бесби"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2120
 msgctxt "warehousename"
 msgid "L’rfjord"
-msgstr ""
+msgstr "Л'рфьорд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2122
 msgctxt "warehousename"
 msgid "L’ka"
-msgstr ""
+msgstr "Л'ка"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2124
 msgctxt "warehousename"
 msgid "L’sja"
-msgstr ""
+msgstr "Л'ся"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2126
 msgctxt "warehousename"
 msgid "L’vanger"
-msgstr ""
+msgstr "Л'Вангер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2128
 msgctxt "warehousename"
 msgid "Lier"
-msgstr ""
+msgstr "Лир"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2130
 msgctxt "warehousename"
 msgid "L’rne"
-msgstr ""
+msgstr "Л'рне"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2132
 msgctxt "warehousename"
 msgid "Lil’hammer"
-msgstr ""
+msgstr "Лил'хаммер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2134
 msgctxt "warehousename"
 msgid "Lil’sand"
-msgstr ""
+msgstr "Лил'санд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2136
 msgctxt "warehousename"
 msgid "Lil’strom"
-msgstr ""
+msgstr "Лил'стром"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2138
 msgctxt "warehousename"
 msgid "Lind’snes"
-msgstr ""
+msgstr "Линд'снес"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2140
 msgctxt "warehousename"
 msgid "L’dingen"
-msgstr ""
+msgstr "Л'динген"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2142
 msgctxt "warehousename"
 msgid "Lom"
-msgstr ""
+msgstr "Лом"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2144
 msgctxt "warehousename"
 msgid "Loppa"
-msgstr ""
+msgstr "Лоппа"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2146
 msgctxt "warehousename"
 msgid "Lar’nskog"
-msgstr ""
+msgstr "Лар'нског"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2148
 msgctxt "warehousename"
 msgid "L’ten"
-msgstr ""
+msgstr "Л'тен"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2150
 msgctxt "warehousename"
 msgid "Lund"
-msgstr ""
+msgstr "Лунд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2152
 msgctxt "warehousename"
 msgid "Lunner"
-msgstr ""
+msgstr "Луннер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2154
 msgctxt "warehousename"
 msgid "L’rey"
-msgstr ""
+msgstr "Л'рей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2156
 msgctxt "warehousename"
 msgid "L’ster"
-msgstr ""
+msgstr "Л'стер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2158
 msgctxt "warehousename"
 msgid "L’ngdal"
-msgstr ""
+msgstr "Л'нгдал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2160
 msgctxt "warehousename"
 msgid "L’ngen"
-msgstr ""
+msgstr "Л'нген"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2162
 msgctxt "warehousename"
 msgid "Mal’Selv"
-msgstr ""
+msgstr "Мал'Селв"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2164
 msgctxt "warehousename"
 msgid "Mal’vik"
-msgstr ""
+msgstr "Мал'вик"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2166
 msgctxt "warehousename"
 msgid "Mar’ker"
-msgstr ""
+msgstr "Мар'кер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2168
 msgctxt "warehousename"
 msgid "Mas’fjordn"
-msgstr ""
+msgstr "Мас'фьордн"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2170
 msgctxt "warehousename"
 msgid "Mos’y"
-msgstr ""
+msgstr "Мос'и"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2172
 msgctxt "warehousename"
 msgid "M’lhus"
-msgstr ""
+msgstr "М'лхус"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2174
 msgctxt "warehousename"
 msgid "M’ley"
-msgstr ""
+msgstr "М'лей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2176
 msgctxt "warehousename"
 msgid "Mer’ker"
-msgstr ""
+msgstr "Мер'кер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2178
 msgctxt "warehousename"
 msgid "Midt’re"
-msgstr ""
+msgstr "Мидт'рэ"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2180
 msgctxt "warehousename"
 msgid "Midt’lemark"
-msgstr ""
+msgstr "Мидт'лемарк"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2182
 msgctxt "warehousename"
 msgid "Mod’al’en"
-msgstr ""
+msgstr "Мод'ал'ен"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2184
 msgctxt "warehousename"
 msgid "Modum"
-msgstr ""
+msgstr "Модум"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2186
 msgctxt "warehousename"
 msgid "M’lde"
-msgstr ""
+msgstr "М'лде"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2188
 msgctxt "warehousename"
 msgid "Mos’kenes"
-msgstr ""
+msgstr "Мос'кенес"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2190
 msgctxt "warehousename"
 msgid "Mos’s"
-msgstr ""
+msgstr "Мос'с"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2192
 msgctxt "warehousename"
 msgid "Næreysund"
-msgstr ""
+msgstr "Нерейсунд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2194
 msgctxt "warehousename"
 msgid "Namsos"
-msgstr ""
+msgstr "Намсос"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2196
 msgctxt "warehousename"
 msgid "Nams’skogan"
-msgstr ""
+msgstr "Намс'скоган"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2198
 msgctxt "warehousename"
 msgid "Nan’stad"
-msgstr ""
+msgstr "Нан'стад"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2200
 msgctxt "warehousename"
 msgid "Nar’vik"
-msgstr ""
+msgstr "Нар'вик"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2202
 msgctxt "warehousename"
 msgid "Nes"
-msgstr ""
+msgstr "Нес"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2204
 msgctxt "warehousename"
 msgid "N’sbyen"
-msgstr ""
+msgstr "Н'сбьен"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2206
 msgctxt "warehousename"
 msgid "Nesna"
-msgstr ""
+msgstr "Несна"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2208
 msgctxt "warehousename"
 msgid "Nesod’n"
-msgstr ""
+msgstr "Несод'н"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2210
 msgctxt "warehousename"
 msgid "Nes’by"
-msgstr ""
+msgstr "Нес'би"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2212
 msgctxt "warehousename"
 msgid "Nis’dal"
-msgstr ""
+msgstr "Нис'даль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2214
 msgctxt "warehousename"
 msgid "Nit’dal"
-msgstr ""
+msgstr "Нит'даль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2216
 msgctxt "warehousename"
 msgid "Nome"
-msgstr ""
+msgstr "Номэ"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2218
 msgctxt "warehousename"
 msgid "Nord’Aurdal"
-msgstr ""
+msgstr "Норд'Аурдал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2220
 msgctxt "warehousename"
 msgid "Nord’fron"
-msgstr ""
+msgstr "Норд'фрон"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2222
 msgctxt "warehousename"
 msgid "Nord’kapp"
-msgstr ""
+msgstr "Норд'кап"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2224
 msgctxt "warehousename"
 msgid "Nord’odal"
-msgstr ""
+msgstr "Норд'одал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2226
 msgctxt "warehousename"
 msgid "Nord’Reisa"
-msgstr ""
+msgstr "Норд'Рейса"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2228
 msgctxt "warehousename"
 msgid "Nord’re"
-msgstr ""
+msgstr "Норд'ре"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2230
 msgctxt "warehousename"
 msgid "No’re"
-msgstr ""
+msgstr "Но'рэ"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2232
 msgctxt "warehousename"
 msgid "Notod’n"
-msgstr ""
+msgstr "Нотод'н"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2234
 msgctxt "warehousename"
 msgid "Ok’snes"
-msgstr ""
+msgstr "Ок'снес"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2236
 msgctxt "warehousename"
 msgid "Omli"
-msgstr ""
+msgstr "Омли"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2238
 msgctxt "warehousename"
 msgid "Omot"
-msgstr ""
+msgstr "Омот"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2240
 msgctxt "warehousename"
 msgid "Op’dal"
-msgstr ""
+msgstr "Оп'дал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2242
 msgctxt "warehousename"
 msgid "Or’kland"
-msgstr ""
+msgstr "Ор'кланд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2244
 msgctxt "warehousename"
 msgid "Or’land"
-msgstr ""
+msgstr "Ор'ланд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2246
 msgctxt "warehousename"
 msgid "Or’sta"
-msgstr ""
+msgstr "Ор'ста"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2248
 msgctxt "warehousename"
 msgid "Osen"
-msgstr ""
+msgstr "Осен"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2250
 msgctxt "warehousename"
 msgid "Os"
-msgstr ""
+msgstr "Ос"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2252
 msgctxt "warehousename"
 msgid "Os’lo"
-msgstr ""
+msgstr "Ос'ло"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2254
 msgctxt "warehousename"
 msgid "Ost’rey"
-msgstr ""
+msgstr "Ост'рей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2256
 msgctxt "warehousename"
 msgid "Ost’re"
-msgstr ""
+msgstr "Ост'ре"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2258
 msgctxt "warehousename"
 msgid "Ov’rhala"
-msgstr ""
+msgstr "Ов'рала"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2260
 msgctxt "warehousename"
 msgid "Ov’re"
-msgstr ""
+msgstr "Ов'ре"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2262
 msgctxt "warehousename"
 msgid "Pors’nger"
-msgstr ""
+msgstr "Порс'нгер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2264
 msgctxt "warehousename"
 msgid "Pors’grun"
-msgstr ""
+msgstr "Порс'грюн"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2266
 msgctxt "warehousename"
 msgid "Rode"
-msgstr ""
+msgstr "Родэ"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2268
 msgctxt "warehousename"
 msgid "Ræl’ngen"
-msgstr ""
+msgstr "Рел'нген"
 
 #. TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
 #: ../../data/tribes/initialization/barbarians/units.lua:2270
 msgctxt "warehousename"
 msgid "Rænt"
-msgstr ""
+msgstr "Рент"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2272
 msgctxt "warehousename"
 msgid "Rak’stad"
-msgstr ""
+msgstr "Рак'стад"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2274
 msgctxt "warehousename"
 msgid "Rana"
-msgstr ""
+msgstr "Рана"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2276
 msgctxt "warehousename"
 msgid "Rand’berg"
-msgstr ""
+msgstr "Ранд'берг"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2278
 msgctxt "warehousename"
 msgid "Rauma"
-msgstr ""
+msgstr "Раума"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2280
 msgctxt "warehousename"
 msgid "Ren’dlen"
-msgstr ""
+msgstr "Рен'длен"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2282
 msgctxt "warehousename"
 msgid "Ren’bu"
-msgstr ""
+msgstr "Рен'бу"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2284
 msgctxt "warehousename"
 msgid "Rin’dal"
-msgstr ""
+msgstr "Рин'даль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2286
 msgctxt "warehousename"
 msgid "Rin’gbu"
-msgstr ""
+msgstr "Рин'гбу"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2288
 msgctxt "warehousename"
 msgid "Rin’grike"
-msgstr ""
+msgstr "Рин'грике"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2290
 msgctxt "warehousename"
 msgid "Rin’gsker"
-msgstr ""
+msgstr "Рин'гскер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2292
 msgctxt "warehousename"
 msgid "Ris’r"
-msgstr ""
+msgstr "Рис'р"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2294
 msgctxt "warehousename"
 msgid "R’dey"
-msgstr ""
+msgstr "Р'дей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2296
 msgctxt "warehousename"
 msgid "Rol’Lag"
-msgstr ""
+msgstr "Рол'Лаг"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2298
 msgctxt "warehousename"
 msgid "R’ros"
-msgstr ""
+msgstr "Р'рос"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2300
 msgctxt "warehousename"
 msgid "Rest"
-msgstr ""
+msgstr "Рест"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2302
 msgctxt "warehousename"
 msgid "Reyr’Vik"
-msgstr ""
+msgstr "Рейр'Вик"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2304
 msgctxt "warehousename"
 msgid "Sal’ngen"
-msgstr ""
+msgstr "Сал'нген"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2306
 msgctxt "warehousename"
 msgid "Sal’tdal"
-msgstr ""
+msgstr "Сал'тдал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2308
 msgctxt "warehousename"
 msgid "Samn’nger"
-msgstr ""
+msgstr "Самн'нгер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2310
 msgctxt "warehousename"
 msgid "Sand’fjord"
-msgstr ""
+msgstr "Санд'фйорд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2312
 msgctxt "warehousename"
 msgid "Sand’e"
-msgstr ""
+msgstr "Санд'е"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2314
 msgctxt "warehousename"
 msgid "Sand’nes"
-msgstr ""
+msgstr "Санд'нес"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2316
 msgctxt "warehousename"
 msgid "Sarpsb’rg"
-msgstr ""
+msgstr "Сарпсб'рг"
 
 #. TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
 #: ../../data/tribes/initialization/barbarians/units.lua:2318
 msgctxt "warehousename"
 msgid "Sars’tun"
-msgstr ""
+msgstr "Сарс'тун"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2320
 msgctxt "warehousename"
 msgid "Sauda"
-msgstr ""
+msgstr "Сауда"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2322
 msgctxt "warehousename"
 msgid "Sel’bu"
-msgstr ""
+msgstr "Сел'бу"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2324
 msgctxt "warehousename"
 msgid "Sel’jord"
-msgstr ""
+msgstr "Сел'йорд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2326
 msgctxt "warehousename"
 msgid "Sel"
-msgstr ""
+msgstr "Сел"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2328
 msgctxt "warehousename"
 msgid "Sen’ja"
-msgstr ""
+msgstr "Сен'йа"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2330
 msgctxt "warehousename"
 msgid "Sig’dal"
-msgstr ""
+msgstr "Сиг'даль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2332
 msgctxt "warehousename"
 msgid "Sil’jan"
-msgstr ""
+msgstr "Сил'йан"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2334
 msgctxt "warehousename"
 msgid "Sir’dal"
-msgstr ""
+msgstr "Сир'дал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2336
 msgctxt "warehousename"
 msgid "Skaun"
-msgstr ""
+msgstr "Скаун"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2338
 msgctxt "warehousename"
 msgid "Skien"
-msgstr ""
+msgstr "Скиен"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2340
 msgctxt "warehousename"
 msgid "Skipt’vet"
-msgstr ""
+msgstr "Скипт'вет"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2342
 msgctxt "warehousename"
 msgid "Skjok"
-msgstr ""
+msgstr "Скьок"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2344
 msgctxt "warehousename"
 msgid "Skjer’vey"
-msgstr ""
+msgstr "Скьер'вей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2346
 msgctxt "warehousename"
 msgid "Smola"
-msgstr ""
+msgstr "Смола"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2348
 msgctxt "warehousename"
 msgid "Snosa"
-msgstr ""
+msgstr "Сноса"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2350
 msgctxt "warehousename"
 msgid "Sog’ndal"
-msgstr ""
+msgstr "Сог'ндал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2352
 msgctxt "warehousename"
 msgid "Sok’ndal"
-msgstr ""
+msgstr "Сок'ндал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2354
 msgctxt "warehousename"
 msgid "Sola"
-msgstr ""
+msgstr "Сола"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2356
 msgctxt "warehousename"
 msgid "Sol’nd"
-msgstr ""
+msgstr "Сол'нд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2358
 msgctxt "warehousename"
 msgid "Som’na"
-msgstr ""
+msgstr "Сом'на"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2360
 msgctxt "warehousename"
 msgid "Son’dre"
-msgstr ""
+msgstr "Сон'дре"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2362
 msgctxt "warehousename"
 msgid "Sor’aur’dal"
-msgstr ""
+msgstr "Сор'аур'дал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2364
 msgctxt "warehousename"
 msgid "Sor’fold"
-msgstr ""
+msgstr "Сор'фолд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2366
 msgctxt "warehousename"
 msgid "Sor’fron"
-msgstr ""
+msgstr "Сор'фрон"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2368
 msgctxt "warehousename"
 msgid "Sor’dal"
-msgstr ""
+msgstr "Сор'даль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2370
 msgctxt "warehousename"
 msgid "Sor’reisa"
-msgstr ""
+msgstr "Сор'рейса"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2372
 msgctxt "warehousename"
 msgid "Sor’tland"
-msgstr ""
+msgstr "Сор'тланд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2374
 msgctxt "warehousename"
 msgid "Sor’var’nger"
-msgstr ""
+msgstr "Сор'вар'нгер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2376
 msgctxt "warehousename"
 msgid "Stad"
-msgstr ""
+msgstr "Стад"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2378
 msgctxt "warehousename"
 msgid "Stange"
-msgstr ""
+msgstr "Станге"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2380
 msgctxt "warehousename"
 msgid "Stav’nger"
-msgstr ""
+msgstr "Став'нгер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2382
 msgctxt "warehousename"
 msgid "St’gen"
-msgstr ""
+msgstr "Ст'ген"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2384
 msgctxt "warehousename"
 msgid "St’nkjer"
-msgstr ""
+msgstr "Ст'нкьер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2386
 msgctxt "warehousename"
 msgid "Stjor’dal"
-msgstr ""
+msgstr "Стьор'даль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2388
 msgctxt "warehousename"
 msgid "Stord"
-msgstr ""
+msgstr "Сторд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2390
 msgctxt "warehousename"
 msgid "Stor’Elvdal"
-msgstr ""
+msgstr "Стор'Эльвдаль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2392
 msgctxt "warehousename"
 msgid "Stor’Fjord"
-msgstr ""
+msgstr "Стор'Фьорд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2394
 msgctxt "warehousename"
 msgid "Stranda"
-msgstr ""
+msgstr "Странда"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2396
 msgctxt "warehousename"
 msgid "Strand"
-msgstr ""
+msgstr "Странд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2398
 msgctxt "warehousename"
 msgid "Stryn"
-msgstr ""
+msgstr "Стрин"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2400
 msgctxt "warehousename"
 msgid "Sula"
-msgstr ""
+msgstr "Сула"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2402
 msgctxt "warehousename"
 msgid "Suldal"
-msgstr ""
+msgstr "Сулдал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2404
 msgctxt "warehousename"
 msgid "Sun’dal"
-msgstr ""
+msgstr "Сун'даль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2406
 msgctxt "warehousename"
 msgid "Sun’fjord"
-msgstr ""
+msgstr "Сун'фьорд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2408
 msgctxt "warehousename"
 msgid "Surn’dal"
-msgstr ""
+msgstr "Сурн'даль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2410
 msgctxt "warehousename"
 msgid "Sveio"
-msgstr ""
+msgstr "Свейо"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2412
 msgctxt "warehousename"
 msgid "Syk’lven"
-msgstr ""
+msgstr "Сык'лвен"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2414
 msgctxt "warehousename"
 msgid "Tana"
-msgstr ""
+msgstr "Тана"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2416
 msgctxt "warehousename"
 msgid "Thronsand"
-msgstr ""
+msgstr "Тронсанд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2418
 msgctxt "warehousename"
 msgid "Thronsund"
-msgstr ""
+msgstr "Тронсунд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2420
 msgctxt "warehousename"
 msgid "Time"
-msgstr ""
+msgstr "Тиме"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2422
 msgctxt "warehousename"
 msgid "T’ngvol"
-msgstr ""
+msgstr "Т'нгвол"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2424
 msgctxt "warehousename"
 msgid "Ti’n"
-msgstr ""
+msgstr "Ти'н"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2426
 msgctxt "warehousename"
 msgid "Tjeld’sund"
-msgstr ""
+msgstr "Тьелд'сунд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2428
 msgctxt "warehousename"
 msgid "Toke"
-msgstr ""
+msgstr "Токе"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2430
 msgctxt "warehousename"
 msgid "Tolga"
-msgstr ""
+msgstr "Толга"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2432
 msgctxt "warehousename"
 msgid "Tonsberg"
-msgstr ""
+msgstr "Тонсберг"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2434
 msgctxt "warehousename"
 msgid "Træna"
-msgstr ""
+msgstr "Трена"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2436
 msgctxt "warehousename"
 msgid "Tromso"
-msgstr ""
+msgstr "Тромсё"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2438
 msgctxt "warehousename"
 msgid "Tr’ndheim"
-msgstr ""
+msgstr "Тр'ндхейм"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2440
 msgctxt "warehousename"
 msgid "Tr’sil"
-msgstr ""
+msgstr "Тр'сил"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2442
 msgctxt "warehousename"
 msgid "Tved’strand"
-msgstr ""
+msgstr "Твед'странд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2444
 msgctxt "warehousename"
 msgid "T’dal"
-msgstr ""
+msgstr "Т'дал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2446
 msgctxt "warehousename"
 msgid "Tynset"
-msgstr ""
+msgstr "Тинсет"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2448
 msgctxt "warehousename"
 msgid "Tys’nes"
-msgstr ""
+msgstr "Тыс'нес"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2450
 msgctxt "warehousename"
 msgid "Tys’vær"
-msgstr ""
+msgstr "Тыс'вер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2452
 msgctxt "warehousename"
 msgid "Ul’nsaker"
-msgstr ""
+msgstr "Ул'нсакер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2454
 msgctxt "warehousename"
 msgid "Ul’nsvang"
-msgstr ""
+msgstr "Ул'нсванг"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2456
 msgctxt "warehousename"
 msgid "Ul’stein"
-msgstr ""
+msgstr "Ул'стейн"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2458
 msgctxt "warehousename"
 msgid "Ul’vik"
-msgstr ""
+msgstr "Ул'вик"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2460
 msgctxt "warehousename"
 msgid "Uts’ra"
-msgstr ""
+msgstr "Утс'ра"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2462
 msgctxt "warehousename"
 msgid "Vadso"
-msgstr ""
+msgstr "Вадсо"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2464
 msgctxt "warehousename"
 msgid "Værey"
-msgstr ""
+msgstr "Верей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2466
 msgctxt "warehousename"
 msgid "Vogo"
-msgstr ""
+msgstr "Вого"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2468
 msgctxt "warehousename"
 msgid "V’gan"
-msgstr ""
+msgstr "В'ган"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2470
 msgctxt "warehousename"
 msgid "V’ksdal"
-msgstr ""
+msgstr "В'ксдал"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2472
 msgctxt "warehousename"
 msgid "V’ler"
-msgstr ""
+msgstr "В'лер"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2474
 msgctxt "warehousename"
 msgid "Vale"
-msgstr ""
+msgstr "Вале"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2476
 msgctxt "warehousename"
 msgid "Vang"
-msgstr ""
+msgstr "Ванг"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2478
 msgctxt "warehousename"
 msgid "Van’lven"
-msgstr ""
+msgstr "Ван'лвен"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2480
 msgctxt "warehousename"
 msgid "Vardo"
-msgstr ""
+msgstr "Вардо"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2482
 msgctxt "warehousename"
 msgid "Vef’sn"
-msgstr ""
+msgstr "Веф'сн"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2484
 msgctxt "warehousename"
 msgid "Vega"
-msgstr ""
+msgstr "Вега"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2486
 msgctxt "warehousename"
 msgid "Veg’rshei"
-msgstr ""
+msgstr "Вег'ршей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2488
 msgctxt "warehousename"
 msgid "Ven’Sla"
-msgstr ""
+msgstr "Вен'Сла"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2490
 msgctxt "warehousename"
 msgid "Ver’dal"
-msgstr ""
+msgstr "Вер'даль"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2492
 msgctxt "warehousename"
 msgid "V’stby"
-msgstr ""
+msgstr "В'стбы"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2494
 msgctxt "warehousename"
 msgid "V’stnes"
-msgstr ""
+msgstr "В'стнес"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2496
 msgctxt "warehousename"
 msgid "V’stre"
-msgstr ""
+msgstr "V'stre"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2498
 msgctxt "warehousename"
 msgid "V’stvogey"
-msgstr ""
+msgstr "В'ствогей"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2500
 msgctxt "warehousename"
 msgid "Vev’lstad"
-msgstr ""
+msgstr "Вев'лстад"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2502
 msgctxt "warehousename"
 msgid "Vik"
-msgstr ""
+msgstr "Вик"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2504
 msgctxt "warehousename"
 msgid "Vind’fjord"
-msgstr ""
+msgstr "Винд'фьорд"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2506
 msgctxt "warehousename"
 msgid "Vin’je"
-msgstr ""
+msgstr "Вин'йе"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2508
 msgctxt "warehousename"
 msgid "V’lda"
-msgstr ""
+msgstr "В'лда"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
 #: ../../data/tribes/initialization/barbarians/units.lua:2510
 msgctxt "warehousename"
 msgid "Vos"
-msgstr ""
+msgstr "Вос"
 
 #. TRANSLATORS: Productivity label on a barbarian building if there is 1
 #. worker missing
@@ -11669,13 +11669,13 @@ msgstr "Корабел, сокрушаясь о том, что ему прика
 #: ../../data/tribes/initialization/empire/units.lua:2283
 msgctxt "warehousename"
 msgid "Abila"
-msgstr ""
+msgstr "Абила"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2285
 msgctxt "warehousename"
 msgid "Ad Flexum"
-msgstr ""
+msgstr "Ад Флексум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2287
@@ -11687,43 +11687,43 @@ msgstr "Элия Капитолина"
 #: ../../data/tribes/initialization/empire/units.lua:2289
 msgctxt "warehousename"
 msgid "Aeminium"
-msgstr ""
+msgstr "Эминиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2291
 msgctxt "warehousename"
 msgid "Aequum"
-msgstr ""
+msgstr "Эквуум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2293
 msgctxt "warehousename"
 msgid "Ala"
-msgstr ""
+msgstr "Ала"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2295
 msgctxt "warehousename"
 msgid "Albanianis"
-msgstr ""
+msgstr "Албанианис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2297
 msgctxt "warehousename"
 msgid "Ambianum"
-msgstr ""
+msgstr "Амбианум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2299
 msgctxt "warehousename"
 msgid "Andautonia"
-msgstr ""
+msgstr "Андаутония"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2301
 msgctxt "warehousename"
 msgid "Apulum"
-msgstr ""
+msgstr "Апулум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2303
