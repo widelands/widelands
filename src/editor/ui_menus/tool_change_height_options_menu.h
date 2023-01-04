@@ -34,6 +34,7 @@ struct EditorToolChangeHeightOptionsMenu : public EditorToolOptionsMenu {
 	void update_window() override;
 
 private:
+	EditorInteractive& eia_;
 	EditorIncreaseHeightTool& increase_tool_;
 	UI::Box box_;
 	UI::SpinBox change_by_;
