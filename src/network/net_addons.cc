@@ -43,6 +43,7 @@
 #include "base/i18n.h"
 #include "base/math.h"
 #include "base/md5.h"
+#include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
 #include "graphic/image_cache.h"
@@ -498,8 +499,8 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	} else {
 		g_fs->ensure_directory_exists(kTempFileDir);
 		const std::string path =
-		   kTempFileDir + FileSystem::file_separator() + a.internal_name + ".icon" +
-		   std::to_string(std::time(nullptr)) /* for disambiguation */ + kTempFileExtension;
+		   kTempFileDir + FileSystem::file_separator() + timestring() + ".icon." + a.internal_name +
+		   kTempFileExtension;
 		read_file(icon_file_size, path);
 		check_checksum(path, icon_checksum);
 		a.icon = g_image_cache->get(path);
@@ -885,7 +886,7 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 		write_to_server(send);
 
 		std::string temp_dirname =
-		   kTempFileDir + FileSystem::file_separator() + name + ".screenshots" + kTempFileExtension;
+		   kTempFileDir + FileSystem::file_separator() + timestring() + ".screenshots." + name + kTempFileExtension;
 		g_fs->ensure_directory_exists(temp_dirname);
 		std::string output = temp_dirname + FileSystem::file_separator() + screenie;
 
