@@ -286,7 +286,8 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 	cmdlog_->unsigned_8(kCurrentPacketVersion);
 
 	{
-		std::unique_ptr<FileSystem> sub_fs(g_fs->make_sub_file_system(FileSystem::fs_dirname(temp_savegame)));
+		std::unique_ptr<FileSystem> sub_fs(
+		   g_fs->make_sub_file_system(FileSystem::fs_dirname(temp_savegame)));
 		FileRead fr;
 		fr.open(*sub_fs, FileSystem::fs_filename(temp_savegame.c_str()));
 		const size_t bytes = fr.get_size();

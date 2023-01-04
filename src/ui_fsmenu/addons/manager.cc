@@ -1406,8 +1406,8 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	ProgressIndicatorWindow w(&get_topmost_forefather(), remote->descname());
 	w.set_message_1(format(_("Downloading ‘%s’…"), remote->descname()));
 
-	std::string temp_dir =
-	   kTempFileDir + FileSystem::file_separator() + timestring() + ".addon." + remote->internal_name + kTempFileExtension;
+	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + timestring() + ".addon." +
+	                       remote->internal_name + kTempFileExtension;
 	if (g_fs->file_exists(temp_dir)) {
 		g_fs->fs_unlink(temp_dir);
 	}

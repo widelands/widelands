@@ -135,8 +135,8 @@ void MutableAddOn::setup_temp_dir() {
 	// then delete the original add-on directory and move it over.
 	if (g_fs->file_exists(directory_)) {
 		backup_path_ = directory_;
-		directory_ =
-		   kTempFileDir + FileSystem::file_separator() + timestring() + ".autogen." + internal_name_ + kTempFileExtension;
+		directory_ = kTempFileDir + FileSystem::file_separator() + timestring() + ".autogen." +
+		             internal_name_ + kTempFileExtension;
 		if (g_fs->file_exists(directory_)) {
 			g_fs->fs_unlink(directory_);
 		}

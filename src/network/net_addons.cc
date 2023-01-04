@@ -498,9 +498,8 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 		a.icon = g_image_cache->get(kAddOnCategories.at(a.category).icon);
 	} else {
 		g_fs->ensure_directory_exists(kTempFileDir);
-		const std::string path =
-		   kTempFileDir + FileSystem::file_separator() + timestring() + ".icon." + a.internal_name +
-		   kTempFileExtension;
+		const std::string path = kTempFileDir + FileSystem::file_separator() + timestring() +
+		                         ".icon." + a.internal_name + kTempFileExtension;
 		read_file(icon_file_size, path);
 		check_checksum(path, icon_checksum);
 		a.icon = g_image_cache->get(path);
@@ -885,8 +884,8 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 		send += '\n';
 		write_to_server(send);
 
-		std::string temp_dirname =
-		   kTempFileDir + FileSystem::file_separator() + timestring() + ".screenshots." + name + kTempFileExtension;
+		std::string temp_dirname = kTempFileDir + FileSystem::file_separator() + timestring() +
+		                           ".screenshots." + name + kTempFileExtension;
 		g_fs->ensure_directory_exists(temp_dirname);
 		std::string output = temp_dirname + FileSystem::file_separator() + screenie;
 
