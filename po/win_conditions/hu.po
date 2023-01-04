@@ -9,7 +9,7 @@
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016,2020
 # litoll <litoll@freemail.hu>, 2016,2020
-# Tóth András <txa-dev@posteo.hu>, 2022
+# Tóth András <txa-dev@posteo.hu>, 2021-2023
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2022\n"
+"Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,7 +124,7 @@ msgstr "Gyűjtők"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr ""
+msgstr "Pontokat kapsz a raktáraidban lévő értékes árukért. A győztes az a játékos, akinek %s elteltével a legtöbb pontja van."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."

@@ -10,16 +10,16 @@
 # Herczeg Attila <hnczy.public@gmail.com>, 2015
 # litoll <litoll@freemail.hu>, 2016-2017,2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
-# Tóth András <txa-dev@posteo.hu>, 2021-2022
+# Tóth András <txa-dev@posteo.hu>, 2021-2023
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-04 03:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2022\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2023\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -604,7 +604,7 @@ msgstr "A Widelands nem tudja betölteni a \"%s\" fájlt. Úgy tűnik a fájl ne
 
 #: ../../src/editor/editorinteractive.cc:603
 msgid "Exit Editor Confirmation"
-msgstr ""
+msgstr "Kilépés megerősítése"
 
 #: ../../src/editor/editorinteractive.cc:603
 msgid "Unsaved Map"
@@ -616,7 +616,7 @@ msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 
 #: ../../src/editor/editorinteractive.cc:605
 msgid "Are you sure you wish to exit the editor?"
-msgstr ""
+msgstr "Valóban ki szeretnél lépni a térképszerkesztőből?"
 
 #: ../../src/editor/editorinteractive.cc:1095 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:357 ../../src/ui_basic/dropdown.cc:359
@@ -635,11 +635,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
 #: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:230
-#: ../../src/wlapplication.cc:1630
+#: ../../src/wlapplication.cc:1635
 msgid "Error"
 msgstr "Hiba"
 
-#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1632
+#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1637
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1076,7 +1076,7 @@ msgstr "Címkék:"
 #. * "Teams of 2", etc.
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:389
 msgid "This map is suitable for:"
-msgstr ""
+msgstr "Ez a térkép az alábbi játékmódokhoz használható:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:391
 msgid ""
@@ -1099,13 +1099,13 @@ msgstr "(nincs)"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:424
 msgid "Ferry range:"
-msgstr ""
+msgstr "Kompok hatótávja:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:425
 msgid ""
 "Enable ferries, waterways, and ferry yards on this map by setting the "
 "maximum length of waterways for ferries"
-msgstr ""
+msgstr "A kompok, vízi utak és csónakkészítő műhelyek akkor lesznek használhatók ezen a térképen, ha itt beállítod a vízi utak legnagyobb engedélyezett hosszát."
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
@@ -1163,7 +1163,7 @@ msgstr "Üres térkép létrehozása…"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:63
 #: ../../src/logic/addons.cc:58
 msgid "Map Generator"
-msgstr ""
+msgstr "Térképgenerátor"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:80
 #: ../../src/wui/gamedetails.cc:167
@@ -1231,7 +1231,7 @@ msgstr "Kiinduló véletlen szám:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:206
 msgid "Generate a new random number"
-msgstr ""
+msgstr "Új véletlen szám generálása"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:208
 msgid "Map ID:"
@@ -1853,14 +1853,14 @@ msgstr "%1$s<br>· %2$s (%3$s verzió)"
 
 #: ../../src/logic/addons.cc:272
 msgid "No game-relevant add-ons in use."
-msgstr ""
+msgstr "Nincsenek a játékot befolyásoló bővítmények bekapcsolva."
 
 #: ../../src/logic/addons.cc:277
 #, c-format
 msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u bővítmény van bekapcsolva, ami befolyásolja a játékot:"
+msgstr[1] "%u bővítmény van bekapcsolva, ami befolyásolja a játékot:"
 
 #: ../../src/logic/editor_game_base.cc:245
 #, c-format
@@ -2271,16 +2271,16 @@ msgstr "Az áruk kirakodása meghiúsult, expedíció törölve."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:752
 msgid "No Port Can Be Built"
-msgstr ""
+msgstr "Nem építhető meg a kikötő"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:752
 msgid "Port Space Lost!"
-msgstr ""
+msgstr "A kikötőhely megszűnt!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:753
 msgid ""
 "A discovered port build space is not available for building a port anymore."
-msgstr ""
+msgstr "Egy korábban felfedezett kikötő építési hely többé már nem szabad."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:899
@@ -2310,7 +2310,7 @@ msgstr "Üres"
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
-msgstr ""
+msgstr "Szállít %s kikötőbe"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
@@ -2318,7 +2318,7 @@ msgstr ""
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
-msgstr ""
+msgstr "Útban %s kikötőhöz"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
@@ -2527,13 +2527,13 @@ msgstr "%d. hajó"
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
-msgstr ""
+msgstr "%d. kikötő"
 
 #: ../../src/logic/player.cc:1974
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
-msgstr ""
+msgstr "%d. raktár"
 
 #: ../../src/logic/playercommand.cc:2200
 #: ../../src/wlapplication_options.cc:607
@@ -2593,7 +2593,7 @@ msgstr "%1$s elfogadta a meghívást %2$s csapatába."
 #: ../../src/logic/playercommand.cc:2285
 #, c-format
 msgid "%1$s has retracted the request to join the team of %2$s."
-msgstr ""
+msgstr "%1$s visszavonta a csatlakozási kérelmét %2$s csapatához."
 
 #: ../../src/logic/playercommand.cc:2287
 #, c-format
@@ -2603,7 +2603,7 @@ msgstr "%1$s elutasította %2$s csatlakozását a csapatához."
 #: ../../src/logic/playercommand.cc:2290
 #, c-format
 msgid "%1$s has retracted the invitation to %2$s to join their team."
-msgstr ""
+msgstr "%1$s visszavonta %2$s meghívását a csapatába."
 
 #: ../../src/logic/playercommand.cc:2292
 #, c-format
@@ -3477,8 +3477,8 @@ msgstr[1] "%d órával"
 #, c-format
 msgid "%d week"
 msgid_plural "%d weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d hét"
+msgstr[1] "%d hét"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:496
@@ -3498,11 +3498,11 @@ msgstr[1] "%d mezővel"
 
 #: ../../src/ui_basic/table.cc:156
 msgid "Click to reverse sorting"
-msgstr ""
+msgstr "kattintással a rendezési sorrend megfordítása"
 
 #: ../../src/ui_basic/table.cc:156
 msgid "Click to sort by this column"
-msgstr ""
+msgstr "kattintással rendezés erre az oszlopra"
 
 #. * TRANSLATORS: Tooltip format for table headers: %1 is column description,
 #. %2 is
@@ -3510,7 +3510,7 @@ msgstr ""
 #: ../../src/ui_basic/table.cc:162
 #, c-format
 msgid "%1$s<br>(%2$s)"
-msgstr ""
+msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/window.cc:100 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/mousewheel_report.cc:73 ../../src/wui/watchwindow.cc:75
@@ -3977,7 +3977,7 @@ msgstr "A megadott felhasználónév vagy jelszó hibás:\n%s"
 #: ../../src/ui_fsmenu/addons/manager.cc:896
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
-msgstr ""
+msgstr "Bővítmények lekérdezése… (%.1f%%)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:899
 msgid "Connecting to the server…"
@@ -5205,7 +5205,7 @@ msgstr "Játék beállításai"
 
 #: ../../src/ui_fsmenu/launch_game.cc:55
 msgid "Write Replay"
-msgstr ""
+msgstr "Visszajátszás mentése"
 
 #: ../../src/ui_fsmenu/launch_game.cc:66
 msgid ""
@@ -5624,11 +5624,11 @@ msgstr "Nem található törzs a data/tribes/initialization/[törzsnév]/init.lu
 
 #: ../../src/ui_fsmenu/main.cc:956
 msgid "Exit Confirmation"
-msgstr ""
+msgstr "Kilépés megerősítése"
 
 #: ../../src/ui_fsmenu/main.cc:957
 msgid "Are you sure you wish to exit Widelands?"
-msgstr ""
+msgstr "Valóban szeretnél kilépni a Widelandsből?"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:38
 #, c-format
@@ -5685,7 +5685,7 @@ msgstr "Eredeti térképnevek megjelenítése"
 
 #: ../../src/ui_fsmenu/mapselect.cc:99
 msgid "Filter by official status"
-msgstr ""
+msgstr "Szűrés hivatalosság szerint"
 
 #: ../../src/ui_fsmenu/mapselect.cc:101
 msgid "Official & Unofficial"
@@ -5693,11 +5693,11 @@ msgstr "Hivatalos és nem hivatalos"
 
 #: ../../src/ui_fsmenu/mapselect.cc:101
 msgid "Show both official and unofficial maps"
-msgstr ""
+msgstr "A hivatalos és a nem hivatalos térképek egyaránt láthatók"
 
 #: ../../src/ui_fsmenu/mapselect.cc:113
 msgid "Filter by desired line-up"
-msgstr ""
+msgstr "Szűrés csapatbeállítások szerint"
 
 #. * TRANSLATORS: Filter entry in map selection. Other entries are "Free for
 #. all"",
@@ -5708,11 +5708,11 @@ msgstr "Bármilyen csapatok"
 
 #: ../../src/ui_fsmenu/mapselect.cc:117
 msgid "Do not filter by line-up suggestions"
-msgstr ""
+msgstr "Nincs szűrés javasolt csapatbeállításra"
 
 #: ../../src/ui_fsmenu/mapselect.cc:132
 msgid "Filter by balancing status"
-msgstr ""
+msgstr "Szürés kiegyenlítettség szerint"
 
 #: ../../src/ui_fsmenu/mapselect.cc:469
 msgid "Balanced & Unbalanced"
@@ -5720,7 +5720,7 @@ msgstr "Kiegyenlített és kiegyenlítetlen"
 
 #: ../../src/ui_fsmenu/mapselect.cc:469
 msgid "Show both balanced and unbalanced maps"
-msgstr ""
+msgstr "A kiegyenlített és a kiegyenlítetlen térképek egyaránt láthatók"
 
 #: ../../src/ui_fsmenu/mapselect.cc:474
 msgctxt "balancing"
@@ -5729,7 +5729,7 @@ msgstr "Nincs megadva"
 
 #: ../../src/ui_fsmenu/mapselect.cc:475
 msgid "The map does not specify whether it is balanced"
-msgstr ""
+msgstr "A térképre nincs beállítva, hogy kiegyenlített-e"
 
 #: ../../src/ui_fsmenu/menu.cc:106
 msgid "Back"
@@ -6121,7 +6121,7 @@ msgstr "Automatikus mentés fájlok legnagyobb száma:"
 
 #: ../../src/ui_fsmenu/options.cc:240
 msgid "Delete replays after:"
-msgstr ""
+msgstr "Visszajátszások törlése ennyi idő után:"
 
 #: ../../src/ui_fsmenu/options.cc:249
 msgid "Compress Widelands data files (maps, replays, and savegames)"
@@ -6227,7 +6227,7 @@ msgstr "Kikapcsolva"
 #. * TRANSLATORS: Options: Delete replays after:
 #: ../../src/ui_fsmenu/options.cc:435
 msgid "Never"
-msgstr ""
+msgstr "Soha"
 
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../src/ui_fsmenu/options.cc:491
@@ -6488,41 +6488,41 @@ msgstr "A Widelands nem találja a(z) „%s” fájlt."
 msgid "File system error"
 msgstr "Fájlrendszer hiba"
 
-#: ../../src/wlapplication.cc:1294
+#: ../../src/wlapplication.cc:1299
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Hiányzik az érték a %s parancssori beállításhoz."
 
-#: ../../src/wlapplication.cc:1299
+#: ../../src/wlapplication.cc:1304
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "A(z) %s nem használható más beállításokkal együtt."
 
-#: ../../src/wlapplication.cc:1454
+#: ../../src/wlapplication.cc:1459
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Ismeretlen parancssori beállítás: %s\nLehet, hogy az '=' hiányzik?"
 
-#: ../../src/wlapplication.cc:1575
+#: ../../src/wlapplication.cc:1580
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "Az --xres/--yres, a --maximized és a --fullscreen beállítások nem használhatók együtt."
 
-#: ../../src/wlapplication.cc:1593
+#: ../../src/wlapplication.cc:1598
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Ismeretlen parancssori beállítás: %s"
 
-#: ../../src/wlapplication.cc:1645
+#: ../../src/wlapplication.cc:1650
 msgid "Game ended unexpectedly"
 msgstr "A játék váratlanul ért véget"
 
-#: ../../src/wlapplication.cc:1645
+#: ../../src/wlapplication.cc:1650
 msgid "Unexpected error during the game"
 msgstr "Váratlan hiba játék közben"
 
-#: ../../src/wlapplication.cc:1648
+#: ../../src/wlapplication.cc:1653
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6536,7 +6536,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hiba történt játék közben. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s verziót használod\nKérjük add meg ezeket az információkat a hibajelentésben.\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1657
+#: ../../src/wlapplication.cc:1662
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6546,11 +6546,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "A játék váratlanul ért véget az alábbi okból:\n\n%s\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1683
+#: ../../src/wlapplication.cc:1688
 msgid "Emergency save failed"
 msgstr "Vészhelyzeti mentés sikertelen"
 
-#: ../../src/wlapplication.cc:1684
+#: ../../src/wlapplication.cc:1689
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6824,11 +6824,11 @@ msgstr "Képernyőkép készítése"
 
 #: ../../src/wlapplication_options.cc:371
 msgid "Load"
-msgstr ""
+msgstr "Betöltés"
 
 #: ../../src/wlapplication_options.cc:376
 msgid "Exit"
-msgstr ""
+msgstr "Kilépés"
 
 #: ../../src/wlapplication_options.cc:381
 msgid "Zoom In"
@@ -6932,7 +6932,7 @@ msgstr "Hangbeállítások"
 
 #: ../../src/wlapplication_options.cc:543
 msgid "Restart Scenario or Replay"
-msgstr ""
+msgstr "Küldetés vagy visszajátszás újrakezdése"
 
 #: ../../src/wlapplication_options.cc:548
 msgid "Toggle Census"
@@ -7027,7 +7027,7 @@ msgstr "Csevegés"
 
 #: ../../src/wlapplication_options.cc:664 ../../src/wui/pinned_note.cc:41
 msgid "Pinned Note"
-msgstr ""
+msgstr "Térképjelölő"
 
 #: ../../src/wlapplication_options.cc:669
 msgid "Messages: Go to Location"
@@ -7400,11 +7400,11 @@ msgstr "Tényleg le akarod fújni az aktív expedíciót?"
 
 #: ../../src/wui/actionconfirm.cc:455
 msgid "Do you really want to give up and become a spectator?"
-msgstr ""
+msgstr "Valóban szeretnéd feladni a játékot? Nézőként így is tovább követheted."
 
 #: ../../src/wui/actionconfirm.cc:455
 msgid "Resign?"
-msgstr ""
+msgstr "Játék feladása?"
 
 #: ../../src/wui/attack_window.cc:46
 msgid "Attack"
@@ -7596,12 +7596,12 @@ msgstr "Leállítás"
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:292
 msgid "Stop producing indefinitely"
-msgstr ""
+msgstr "Állandó termelés kikapcsolása"
 
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:294
 msgid "Produce indefinitely regardless of the economy’s needs"
-msgstr ""
+msgstr "Állandó termelés a gazdaság szükségleteitől függetlenül"
 
 #: ../../src/wui/buildingwindow.cc:317
 #, c-format
@@ -7886,11 +7886,11 @@ msgstr "Terület figyelése külön ablakban"
 
 #: ../../src/wui/fieldaction.cc:500
 msgid "Pinned note"
-msgstr ""
+msgstr "Térképjelölő"
 
 #: ../../src/wui/fieldaction.cc:505
 msgid "Show debug window"
-msgstr ""
+msgstr "Hibakereső ablak megjelenítése"
 
 #: ../../src/wui/fieldaction.cc:513 ../../src/wui/watchwindow.cc:51
 msgid "Watch"
@@ -8053,7 +8053,7 @@ msgstr "Feladta %s-kor"
 
 #: ../../src/wui/game_diplomacy_menu.cc:267
 msgid "Approve"
-msgstr ""
+msgstr "Jóváhagyás"
 
 #: ../../src/wui/game_diplomacy_menu.cc:268
 msgid "Reject"
@@ -8065,11 +8065,11 @@ msgstr "Elfogadás"
 
 #: ../../src/wui/game_diplomacy_menu.cc:275
 msgid "Refuse"
-msgstr ""
+msgstr "Elutasítás"
 
 #: ../../src/wui/game_diplomacy_menu.cc:290
 msgid "Retract"
-msgstr ""
+msgstr "Visszavonás"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_exit_confirm_box.cc:27
@@ -8359,7 +8359,7 @@ msgstr "Elveszített civil épületek"
 
 #: ../../src/wui/general_statistics_menu.cc:190
 msgid "Civilian buildings destroyed"
-msgstr ""
+msgstr "Megsemmisített civil épületek"
 
 #: ../../src/wui/general_statistics_menu.cc:195
 msgid "Military"
@@ -8513,12 +8513,12 @@ msgstr "Kicsinyítés"
 #: ../../src/wui/interactive_base.cc:844
 #, c-format
 msgid "Road length: %1$u (%2$u)"
-msgstr ""
+msgstr "Út hossza: %1$u (%2$u)"
 
 #: ../../src/wui/interactive_base.cc:846
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
-msgstr ""
+msgstr "Vízi út hossza: %1$u (%2$u) / %3$u"
 
 #: ../../src/wui/interactive_base.cc:851
 #, c-format
@@ -8528,7 +8528,7 @@ msgstr "Út hossza: %u"
 #: ../../src/wui/interactive_base.cc:854
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
-msgstr ""
+msgstr "Vízi út hossza: %1$u / %2$u"
 
 #: ../../src/wui/interactive_base.cc:1712
 msgid "Failed saving screenshot!"
