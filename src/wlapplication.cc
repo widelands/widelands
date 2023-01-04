@@ -1610,7 +1610,8 @@ void WLApplication::emergency_save(UI::Panel* panel,
 	if (Widelands::UnhandledVersionError::is_unhandled_version_error(error)) {
 		// It's an incompatible savegame. Don't ask for a bug report, don't bother trying to save.
 		if (panel != nullptr) {
-			UI::WLMessageBox m(panel, UI::WindowStyle::kFsMenu, _("Incompatible"), error, UI::WLMessageBox::MBoxType::kOk);
+			UI::WLMessageBox m(panel, UI::WindowStyle::kFsMenu, _("Incompatible"), error,
+			                   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
 		return;
