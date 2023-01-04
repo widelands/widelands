@@ -186,7 +186,7 @@ trade_1 = {
       _([[Your enthusiasm warms me as much as your plight engages my sympathy. But the enemies are more powerful than they may appear – they have brought an enormous force of Danish soldiers, and even your mighty soldiers will not be able to defeat them all.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Ocke Ketelsen – Trade 1
-      _([[Our island is not accustomed to this kind of warfare. We are fishers and farmers, we do not have the infrastructure to support a drawn-out battle. Your expertise in this area would be much appreciated.]])
+      _([[Our island is not accustomed to this kind of warfare. We are fishers and farmers, we do not have the expertise or economy to support a drawn-out battle. Your expertise in this area would be much appreciated.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Ocke Ketelsen – Trade 1
       _([[But first let me give you a clear picture of our small island by showing you around.]]))
@@ -215,7 +215,7 @@ getting_started_1 = {
       _([[First things first. This town has an excellent defensive position, but it is woefully unguarded. We must plan ahead tactically, because I agree that this battle will not be won quickly.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Getting Started 1
-      _([[The Uplands have only one entrance: this ramp right here next to the town center. Let’s build all our important infrastructure up there. A few fortresses placed closely together right at its southern tip will make this vast plateau nearly impossible to conquer. Even if the enemy should manage to take the entire lower island, we could conceivably hold out for years there, provided we stock enough supplies in warehouses on the Uplands in advance. Of course we’d be cut off from the ports and the trade routes, so we should try to avoid getting to this point.]]))
+      _([[The Uplands have only one entrance: this ramp right here next to the town center. Let’s build all our important production buildings up there. A few fortresses placed closely together right at its southern tip will make this vast plateau nearly impossible to conquer. Even if the enemy should manage to take the entire lower island, we could conceivably hold out for years there, provided we stock enough supplies in warehouses on the Uplands in advance. Of course we’d be cut off from the ports and the trade routes, so we should try to avoid getting to this point.]]))
       .. new_objectives(obj_uplands),
    h = objective_message_height,
    position = "topleft",
@@ -223,12 +223,12 @@ getting_started_1 = {
 
 getting_started_2 = {
    title = _("Planning the War"),
-   body=reebaud(_("Fortify the chokepoint"),
+   body=reebaud(_("Fortify the narrow"),
       -- TRANSLATORS: Reebaud – Getting Started 2
-      _([[Our most urgent concern, however, should be to secure this pass near our northernmost port. Our enemy must pass through this chokepoint to reach us, but the same is also true in reverse. If we are careful, we can hold the enemy at this point for a long time until we are ready to launch our countercharge. However, the passage is too narrow to be fortified as easily as the Uplands. We must construct as many fortresses tightly together here as possible in order to prevent the enemy from gaining any land. It would be unwise to build anything at all north of the pass, as it would be dangerously exposed.]])
+      _([[Our most urgent concern, however, should be to secure this pass near our northernmost port. Our enemy must pass through this narrow point to reach us, but the same is also true in reverse. If we are careful, we can hold the enemy at this point for a long time until we are ready to launch our countercharge. However, the passage is too narrow to be fortified as easily as the Uplands. We must construct as many fortresses tightly together here as possible in order to prevent the enemy from gaining any land. It would be unwise to build anything at all north of the pass, as it would be dangerously exposed.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Getting Started 2
-      _([[Depending on how many building materials we can spare, it might be wise to demolish some of the other buildings here to make room for even more fortifications. In any case, all civil buildings in this area will be in constant danger of being burnt down during a Danish incursion.]]))
+      _([[Depending on how many building materials we can spare, it might be wise to demolish some of the other buildings here to make room for even more fortifications. In any case, all buildings in this area, military or otherwise, will be in constant danger of being burnt down during a Danish incursion.]]))
       .. new_objectives(obj_block),
    h = objective_message_height,
    position = "topleft",
@@ -241,10 +241,10 @@ getting_started_3 = {
       _([[As Reebaud points out correctly, the Uplands are the best position for new buildings. Besides their strategic value they offer lots of space for construction, of which the lower island is somewhat short.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Henneke Lembeck – Getting Started 3
-      _([[As for what we will build, I disagree. More military sites are important, but even more so is the ability to construct buildings in the first place. There are no woodcutters anywhere on the island, and we can’t rely on trade for wood, so we must secure our wood production at once before all our wood has used up by the smokeries and charcoal burners!]])
+      _([[As for what we will build, I disagree. More military sites are important, but even more so is the ability to construct buildings in the first place. There are no woodcutters anywhere on the island, and we can’t rely on trade for wood, so we must secure our wood production at once before all our wood has been used up by the smokeries and charcoal burners!]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Henneke Lembeck – Getting Started 3
-      _([[The land looks fairly barren, so we will need to reserve more space for foresting than I’m comfortable with. The Lowlands seem to be slightly more fertile, so it might be wise to build the forest infrastructure down here and relocate some of the farms to the Uplands. Farms, reed farms, and berry farms do not depend on fertile land as much as trees do.]]))
+      _([[The land looks fairly barren, so we will need to reserve more space for foresting than I’m comfortable with. The Lowlands seem to be slightly more fertile, so it might be wise to build the foresters’ and woodcutters’ houses down here and relocate some of the farms to the Uplands. Farms, reed farms, and berry farms do not depend on fertile land quite as much as trees do.]]))
       .. new_objectives(obj_wood),
    h = objective_message_height,
    position = "topleft",
@@ -254,7 +254,7 @@ training = {
    title = _("Planning the War"),
    body=henneke(_("Long-term strategy"),
       -- TRANSLATORS: Henneke Lembeck – Training
-      _([[Our trading has successfully started. Now we will need to plan our recruitment and training facilities. We do have a basic food and metal industry, but it seems to have grown haphazardly and will not suffice to meet our needs. We will require more numerous and more advanced sites to provide enough weapons and armour as well as food for our soldiers. Needless to say, a pair of training sites and a barracks are also essential.]])
+      _([[Our trading has successfully started. Now we will need to plan our recruitment and training economy. We do have a basic food and metal production, but it seems to have grown haphazardly and will not suffice to meet our needs. We will require more numerous and more advanced sites to provide enough weapons and armour as well as food for our soldiers. Needless to say, a pair of training sites and a barracks are also essential.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Henneke Lembeck – Training
       _([[At all times, we will need to keep a close eye on our supply of tradeable goods. I will ask Ocke Ketelsen to purchase only the goods our economy actually needs so that we won’t waste any wares, but it will be up to us to ensure we can provide enough goods. These trade routes are all very expensive, and we will need to mark out a large amount of space purely to produce wares to sell.]])),
@@ -268,7 +268,7 @@ diking = {
       _([[The lack of space on Helgoland is still a concern. The land would be sufficiently large to train a decent number of soldiers in a reasonable time, but training the armies we believe we will need would take forever! We may need to take some chances, and use superior tactics to compensate for this disadvantage.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Claus Lembeck – Diking
-      _([[However, if you prefer to play it safe, don’t forget that we can simply enlarge the island. As we have a steady supply of logs now, we can construct dikes and breakwaters to gain more building space from the sea. When we are ready to attack, we can even use this as a way of bypassing the chokepoint in the east, or if we are to be truly bold we could dike around the whole western coast of the island to attack the enemy from two sides at once!]])),
+      _([[However, if you prefer to play it safe, don’t forget that we can simply enlarge the island. As we have a steady supply of logs now, we can construct dikes and breakwaters to gain more building space from the sea. When we are ready to attack, we can even use this as a way to bypass the narrow point in the east, or if we are to be truly bold we could dike around the whole western coast of the island to attack the enemy from two sides at once!]])),
    position = "topleft",
 }
 
@@ -297,7 +297,7 @@ secured_uplands = {
    title = _("Uplands Colonized"),
    body=reebaud(_("The Uplands have been settled"),
       -- TRANSLATORS: Reebaud – Uplands Secured
-      _([[The Uplands are being converted to a true center of our economy. We must not forget to always keep a close eye on the ware exchange between Lowlands and Uplands and keep it to a minimum so as to avoid jams on the roads.]]))
+      _([[The Uplands are being converted to a true center of our economy. We must not forget to always keep a close eye on the ware exchange between the Lowlands and the Uplands and keep it to a minimum so as to avoid jams on the roads.]]))
 }
 
 victory_1 = {
