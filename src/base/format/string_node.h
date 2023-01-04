@@ -48,7 +48,7 @@ struct StringNode : FormatNode {
 		size_t nr_ctrl_chars = 0;
 		for (const char* c = arg; *c != 0; ++c, ++nr_characters) {
 			const signed char ch = *c;
-			if (ch == 0x7f || (ch >= 0 && ch < 0x20)) {
+			if (ch == 0x7f || (ch >= 0 && ch < 0x20 && ch != '\n')) {
 				++nr_ctrl_chars;
 			}
 		}
@@ -61,7 +61,7 @@ struct StringNode : FormatNode {
 					*write = '^';
 					++write;
 					*write = '?';
-				} else if (ch >= 0 && ch < 0x20) {
+				} else if (ch >= 0 && ch < 0x20 && ch != '\n') {
 					*write = '^';
 					++write;
 					*write = '@' + ch;

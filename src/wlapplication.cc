@@ -54,6 +54,7 @@
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -748,10 +749,7 @@ void WLApplication::init_and_run_game_from_template() {
 	game.init_newgame(settings->settings());
 	try {
 		game.run(Widelands::Game::StartGameType::kMap, script_to_run_, "single_player");
-	} catch (const Widelands::GameDataError& e) {
-		log_err("Game not started: Game data error: %s\n", e.what());
 	} catch (const std::exception& e) {
-		log_err("Fatal exception: %s\n", e.what());
 		emergency_save(nullptr, game, e.what());
 	}
 }
@@ -784,12 +782,6 @@ void WLApplication::run() {
 				game.set_ai_training_mode(get_config_bool("ai_training", false));
 				game.run_load_game(filename_, script_to_run_);
 			}
-		} catch (const Widelands::GameDataError& e) {
-			message = format(_("Widelands could not load the file \"%s\". The file format "
-			                   "seems to be incompatible."),
-			                 filename_.c_str());
-			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
-			title = _("Game data error");
 		} catch (const FileNotFoundError& e) {
 			message = format(_("Widelands could not find the file \"%s\"."), filename_.c_str());
 			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
@@ -804,16 +796,13 @@ void WLApplication::run() {
 			FsMenu::MainMenu m(true);
 			m.show_messagebox(title, message);
 			log_err("%s\n", message.c_str());
-			m.run<int>();
+			m.main_loop();
 		}
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct({filename_}, script_to_run_);
-		} catch (const Widelands::GameDataError& e) {
-			log_err("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception& e) {
-			log_err("Fatal exception: %s\n", e.what());
 			emergency_save(nullptr, game, e.what());
 		}
 	} else if (game_type_ == GameType::kFromTemplate) {
@@ -824,7 +813,7 @@ void WLApplication::run() {
 		g_sh->change_music(Songset::kMenu, 1000);
 
 		FsMenu::MainMenu m;
-		m.run<int>();
+		m.main_loop();
 	}
 
 	g_sh->stop_music(500);
@@ -1617,6 +1606,16 @@ void WLApplication::emergency_save(UI::Panel* panel,
 	        "  FATAL EXCEPTION: %s\n"
 	        "##############################\n",
 	        error.c_str());
+
+	if (Widelands::UnhandledVersionError::is_unhandled_version_error(error)) {
+		// It's an incompatible savegame. Don't ask for a bug report, don't bother trying to save.
+		if (panel != nullptr) {
+			UI::WLMessageBox m(panel, UI::WindowStyle::kFsMenu, _("Incompatible"), error, UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+		}
+		return;
+	}
+
 	if (ask_for_bug_report) {
 		log_err("  Please report this problem to help us improve Widelands.\n"
 		        "  You will find related messages in the standard output (stdout.txt on Windows).\n"
@@ -1628,7 +1627,7 @@ void WLApplication::emergency_save(UI::Panel* panel,
 	        "  It is often – though not always – possible to load it and continue playing.\n"
 	        "##############################");
 	if (!game.is_loaded()) {
-		if (!ask_for_bug_report) {
+		if (!ask_for_bug_report || panel == nullptr) {
 			return;
 		}
 		UI::WLMessageBox m(
