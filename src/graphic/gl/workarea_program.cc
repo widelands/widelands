@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -222,12 +222,14 @@ void WorkareaProgram::draw(uint32_t texture_id,
 			color = triangle_colors.at(Widelands::TCoords<>(field.fcoords, triangle_index));
 		}
 		if (color.a > 0) {
-			add_vertex(field, color, &vertices_);
-			add_vertex(fields_to_draw.at(field.brn_index), color, &vertices_);
-			add_vertex(
-			   fields_to_draw.at(triangle_index == Widelands::TriangleIndex::D ? field.bln_index :
-                                                                              field.rn_index),
-			   color, &vertices_);
+			const FieldsToDraw::Field& f2 = fields_to_draw.at(field.brn_index);
+			const FieldsToDraw::Field& f3 = fields_to_draw.at(
+			   triangle_index == Widelands::TriangleIndex::D ? field.bln_index : field.rn_index);
+			if (!(field.obscured_by_slope && f2.obscured_by_slope && f3.obscured_by_slope)) {
+				add_vertex(field, color, &vertices_);
+				add_vertex(f2, color, &vertices_);
+				add_vertex(f3, color, &vertices_);
+			}
 		}
 	};
 

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018-2022
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-28 03:54+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -654,7 +654,7 @@ msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores…"
-msgstr "Deeses Meer, deep in de steenollsen Walden, weer lange Tied för siene Mooigheid un  hagelke Stillte bekennt. Aber sien Hilligdoom is nu stöört worden, as twee Völker, nanner feindelk, an siener Küst ankomen sünd …"
+msgstr "Deeses Meer, deep in de steenollsen Walden, weer lange Tied för siene Mooigheid un hagelke Stillte bekennt. Aber sien Hilligdoom is nu stöört worden, as twee Völker, eenanner feindelk, an siener Küst ankomen sünd …"
 
 #: ../../data/maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"

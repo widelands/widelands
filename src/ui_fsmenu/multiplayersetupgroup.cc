@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2022 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -173,6 +173,15 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     settings_(settings),
 	     n(npsb),
 	     id_(id),
+	     number_(this,
+	             "player",
+	             0,
+	             0,
+	             h,
+	             h,
+	             UI::ButtonStyle::kFsMenuSecondary,
+	             std::to_string(id_ + 1),
+	             _("Player Number")),
 	     player_(this,
 	             "player",
 	             0,
@@ -233,6 +242,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		init_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		team_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		number_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		number_.set_enabled(false);
 
 		type_dropdown_.selected.connect([this]() { set_type(); });
 		tribes_dropdown_.selected.connect([this]() { set_tribe_or_shared_in(); });
@@ -240,6 +251,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team_dropdown_.selected.connect([this]() { set_team(); });
 		player_.sigclicked.connect([this]() { set_color(); });
 
+		add(&number_);
 		add(&player_);
 		add(&type_dropdown_);
 		add(&tribes_dropdown_);
@@ -620,6 +632,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	NetworkPlayerSettingsBackend* const n;
 	PlayerSlot const id_;
 
+	UI::Button number_;
 	UI::Button player_;
 	UI::Dropdown<std::string>
 	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).

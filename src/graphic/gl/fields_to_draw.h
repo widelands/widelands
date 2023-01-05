@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,6 +39,8 @@ public:
 
 		// Surface pixel this will be plotted on.
 		Vector2f surface_pixel = Vector2f::zero();
+
+		bool obscured_by_slope;  // Whether this field is invisible due to an obstacle in front.
 
 		// Rendertarget pixel this will be plotted on. This is only different by
 		// the Rendertarget::get_rect().origin() of the view window.
