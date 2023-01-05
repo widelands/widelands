@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,6 +118,7 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	avoid_fastclick_ = avoid_fastclick;
 
 	vbox_.reset(new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical));
+	set_center_panel(vbox_.get());  // Must be set immediately after deleting the old vbox, if any
 
 	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight);
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
@@ -130,7 +131,6 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
 
-	set_center_panel(vbox_.get());
 	set_thinks(true);
 	set_fastclick_panel(this);
 	if (workarea_preview_wanted) {

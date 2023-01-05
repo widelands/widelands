@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-19 02:53+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -39,7 +39,7 @@ msgstr "widelands <beállítás0>=<érték0> ... <beállításN>=<értékN>"
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "widelands <save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "widelands <mentés.wgf>/<visszajátszás.wry>"
 
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:56
@@ -132,7 +132,7 @@ msgstr "A Widelands összeomlásra kényszerítése Lua hiba esetén."
 
 #: ../../src/wlapplication_messages.cc:92
 msgid "Delete replays automatically after `n` weeks."
-msgstr ""
+msgstr "Visszajátszások automatikus törlése `n` hét után."
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../src/wlapplication_messages.cc:92
@@ -450,14 +450,14 @@ msgstr "Súgó megjelenítése minden elérhető beállítással."
 
 #: ../../src/wlapplication_messages.cc:227
 msgid "<save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "<mentés.wgf>/<visszajátszás.wry>"
 
 #: ../../src/wlapplication_messages.cc:228
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay."
-msgstr ""
+msgstr "A megadott mentés vagy visszajátszás közvetlen betöltése. A .wgf/.wry fájltípus hozzárendeléséhez használható. Más beállításokkal együtt nem működik. Lásd még: --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:255

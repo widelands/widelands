@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2022 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -262,10 +262,10 @@ void ShipWindow::think() {
 		item.get(ibase_.egbase(), &ware, &worker);
 
 		if (ware != nullptr) {
-			display_->add(false, ware->descr_index());
+			display_->add(Widelands::wwWARE, ware->descr_index());
 		}
 		if (worker != nullptr) {
-			display_->add(true, worker->descr().worker_index());
+			display_->add(Widelands::wwWORKER, worker->descr().worker_index());
 		}
 	}
 
