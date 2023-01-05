@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "graphic/texture.h"
-#include "logic/editor_game_base.h"
 #include "logic/game_controller.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
@@ -36,7 +35,7 @@ class GameDetails : public UI::Panel {
 public:
 	enum class Mode { kSavegame, kReplay };
 
-	GameDetails(Panel* parent, UI::PanelStyle style, Mode mode, Widelands::EditorGameBase& egbase);
+	GameDetails(Panel* parent, UI::PanelStyle style, Mode mode);
 
 	/// Reset the data
 	void clear();
@@ -63,8 +62,8 @@ private:
 	std::string show_minimap(const SavegameData& gamedata);
 
 	const Mode mode_;
-	const int padding_;
-	bool has_conflicts_;
+	const int padding_{4};
+	bool has_conflicts_{false};
 
 	UI::Box main_box_, descr_box_;
 	UI::MultilineTextarea name_label_;
@@ -75,7 +74,6 @@ private:
 	// Used to render map preview
 	std::string last_game_;
 	std::unordered_map<std::string, std::unique_ptr<const Texture>> minimap_cache_;
-	Widelands::EditorGameBase& egbase_;  // Not owned
 };
 
 #endif  // end of include guard: WL_WUI_GAMEDETAILS_H

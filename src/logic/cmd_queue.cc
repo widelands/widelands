@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,7 @@ namespace Widelands {
 //
 CmdQueue::CmdQueue(Game& game)
    : game_(game),
-     nextserial_(0),
-     ncmds_(0),
+
      cmds_(kCommandQueueBucketSize, std::priority_queue<CmdItem>()) {
 }
 

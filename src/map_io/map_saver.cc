@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,8 +64,7 @@
 
 namespace Widelands {
 
-MapSaver::MapSaver(FileSystem& fs, EditorGameBase& egbase)
-   : egbase_(egbase), fs_(fs), mos_(nullptr) {
+MapSaver::MapSaver(FileSystem& fs, EditorGameBase& egbase) : egbase_(egbase), fs_(fs) {
 }
 
 MapSaver::~MapSaver() {

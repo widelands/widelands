@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ namespace Widelands {
 
 ProductionsiteSettings::ProductionsiteSettings(const ProductionSiteDescr& descr,
                                                const TribeDescr& tribe)
-   : BuildingSettings(descr.name(), tribe), stopped(false) {
+   : BuildingSettings(descr.name(), tribe) {
 	for (const auto& pair : descr.input_wares()) {
 		ware_queues.insert(std::make_pair(
 		   pair.first, InputQueueSetting{pair.second, pair.second, WarePriority::kNormal}));
@@ -57,9 +57,7 @@ TrainingsiteSettings::TrainingsiteSettings(const TrainingSiteDescr& descr, const
 }
 
 WarehouseSettings::WarehouseSettings(const WarehouseDescr& wh, const TribeDescr& tribe)
-   : BuildingSettings(wh.name(), tribe),
-     launch_expedition_allowed(wh.get_isport()),
-     launch_expedition(false) {
+   : BuildingSettings(wh.name(), tribe), launch_expedition_allowed(wh.get_isport()) {
 	for (const DescriptionIndex di : tribe.wares()) {
 		ware_preferences.emplace(di, StockPolicy::kNormal);
 	}

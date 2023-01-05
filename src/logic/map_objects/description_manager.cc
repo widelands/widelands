@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 #include "logic/map_objects/description_manager.h"
 
 #include <cassert>
+#include <cstddef>
 #include <cstring>
 #include <list>
 #include <memory>
@@ -113,7 +114,8 @@ void DescriptionManager::register_directory(const std::string& dirname,
 				           nr_registered_items > 1) {
 					std::string all;
 					/* Arbitrary estimate to reduce number of memory reallocations */
-					all.reserve(nr_registered_items * 20);
+					all.reserve(static_cast<std::basic_string<char>::size_type>(nr_registered_items) *
+					            20);
 					for (const std::string& str : all_registered_items) {
 						all += ' ';
 						all += str;

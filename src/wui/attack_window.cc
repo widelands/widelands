@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -458,7 +458,7 @@ bool AttackWindow::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 
 Widelands::Extent AttackWindow::ListOfSoldiers::size() const {
 	const size_t nr_soldiers = count_soldiers();
-	uint32_t rows = nr_soldiers / current_size_;
+	size_t rows = nr_soldiers / current_size_;
 	if (nr_soldiers == 0 || rows * current_size_ < nr_soldiers) {
 		++rows;
 	}
@@ -550,8 +550,14 @@ UI::Window& AttackWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::Map
 			}
 			for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 				const Widelands::Soldier* s = &mol.get<Widelands::Soldier>(fr.unsigned_32());
-				a->remaining_soldiers_->remove(s);
-				a->attacking_soldiers_->add(s);
+				if (a->remaining_soldiers_->contains(s)) {
+					a->remaining_soldiers_->remove(s);
+					a->attacking_soldiers_->add(s);
+				}
+				/* Since the attack window only updates a soldier list every 500 ms, it is
+				 * possible for the saved list of soldiers to send to contain a soldier
+				 * who is no longer available. Skip this situation silently.
+				 */
 			}
 
 			return *a;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,17 +25,17 @@
 
 struct ListItem {
 	ListItem(const std::string& k, const std::string& t, ToolConf conf)
-	   : key(k), title(t), data(conf), sticky(false) {
+	   : key(k), title(t), data(conf) {
 	}
 	std::string key;    ///< Non-locale-dependent description
 	std::string title;  ///< Locale-dependent description
 	ToolConf data;
-	bool sticky;
+	bool sticky{false};
 };
 
 /// History of previously used tool settings
 struct EditorHistoryTool : public EditorTool {
-	EditorHistoryTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	explicit EditorHistoryTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
@@ -46,7 +46,7 @@ struct EditorHistoryTool : public EditorTool {
 
 	bool add_configuration(const ToolConf& conf);
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
 	}
 

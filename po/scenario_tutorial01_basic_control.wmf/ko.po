@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # ks k, 2018,2020
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-25 02:57+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
 "Last-Translator: TaeMin An, 2017,2019\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -395,8 +395,8 @@ msgid "Using the Minimap"
 msgstr "작은 지도를 사용하기"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:274
-msgid "Very good. And now about the minimap. "
-msgstr "아주 좋아요. 이제 작은 지도에 대해 알아보겠습니다. "
+msgid "Very good. And now about the minimap."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #, lua-format

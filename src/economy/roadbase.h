@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,8 +33,7 @@ public:
 	RoadBaseDescr(char const* const init_name, char const* const init_descname, MapObjectType mot)
 	   : MapObjectDescr(mot, init_name, init_descname) {
 	}
-	~RoadBaseDescr() override {
-	}
+	~RoadBaseDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(RoadBaseDescr);
@@ -55,7 +54,7 @@ struct RoadBase : public PlayerImmovable {
 
 	enum FlagId { FlagStart = 0, FlagEnd = 1 };
 
-	RoadBase(const RoadBaseDescr& d);
+	explicit RoadBase(const RoadBaseDescr& d);
 
 	Flag& get_flag(FlagId const flag) const {
 		return *flags_[flag];
@@ -110,8 +109,8 @@ protected:
 	/// cost for walking this road (0 = from start to end, 1 = from end to start)
 	int32_t cost_[2];
 
-	Path path_;            ///< path goes from start to end
-	uint32_t idle_index_;  ///< index into path where carriers should idle
+	Path path_;                ///< path goes from start to end
+	uint32_t idle_index_{0U};  ///< index into path where carriers should idle
 };
 }  // namespace Widelands
 

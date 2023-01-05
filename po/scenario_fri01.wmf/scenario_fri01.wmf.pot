@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -17,6 +17,10 @@ msgstr ""
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
+msgid "Langeneß"
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25

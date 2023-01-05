@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,14 +31,18 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 30;
+/* Changelog:
+ * Version 30: Release 1.1
+ * Version 31: Added warehouse names.
+ */
+constexpr uint16_t kCurrentPacketVersion = 31;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/player_info");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 22) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 30) {
 			uint32_t const max_players = fr.unsigned_16();
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
@@ -51,13 +55,9 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 						   "player number (%i) is out of range (1 .. %u)", plnum, kMaxPlayers);
 					}
 
-					// TODO(Nordfriese): Savegame compatibility, remove after v1.0
-					const uint8_t playercolor_r =
-					   packet_version >= 28 ? fr.unsigned_8() : kPlayerColors[i - 1].r;
-					const uint8_t playercolor_g =
-					   packet_version >= 28 ? fr.unsigned_8() : kPlayerColors[i - 1].g;
-					const uint8_t playercolor_b =
-					   packet_version >= 28 ? fr.unsigned_8() : kPlayerColors[i - 1].b;
+					const uint8_t playercolor_r = fr.unsigned_8();
+					const uint8_t playercolor_g = fr.unsigned_8();
+					const uint8_t playercolor_b = fr.unsigned_8();
 
 					Widelands::TeamNumber team = fr.unsigned_8();
 					char const* const tribe_name = fr.c_string();
@@ -70,21 +70,20 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 					player->set_see_all(see_all);
 
 					player->set_ai(fr.c_string());
+					player->set_random_tribe(fr.unsigned_8() != 0u);
 
-					if (packet_version >= 30) {
-						player->set_random_tribe(fr.unsigned_8() != 0u);
-					}
-
-					if (packet_version >= 23) {
-						player->forbid_attack_.clear();
-						uint8_t size = fr.unsigned_8();
-						for (uint8_t j = 0; j < size; ++j) {
-							player->forbid_attack_.emplace(fr.unsigned_8());
-						}
+					player->forbid_attack_.clear();
+					uint8_t size = fr.unsigned_8();
+					for (uint8_t j = 0; j < size; ++j) {
+						player->forbid_attack_.emplace(fr.unsigned_8());
 					}
 
 					player->read_statistics(fr, packet_version);
 					player->read_remaining_shipnames(fr);
+					if (packet_version >= 31) {
+						// TODO(Nordfriese): Savegame compatibility, remove after v1.2
+						player->read_remaining_warehousenames(fr);
+					}
 
 					player->casualties_ = fr.unsigned_32();
 					player->kills_ = fr.unsigned_32();
@@ -93,22 +92,13 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 					player->civil_blds_lost_ = fr.unsigned_32();
 					player->civil_blds_defeated_ = fr.unsigned_32();
 
-					// TODO(Nordfriese): Savegame compatibility, remove after v1.0
-					if (packet_version >= 24) {
-						for (size_t j = fr.unsigned_32(); j > 0; --j) {
-							player->muted_building_types_.insert(fr.unsigned_32());
-						}
+					for (size_t j = fr.unsigned_32(); j > 0; --j) {
+						player->muted_building_types_.insert(fr.unsigned_32());
 					}
-					if (packet_version >= 25) {
-						player->is_picking_custom_starting_position_ = (fr.unsigned_8() != 0u);
-						player->initialization_index_ = fr.unsigned_8();
-					}
-					if (packet_version >= 26) {
-						player->allow_additional_expedition_items_ = (fr.unsigned_8() != 0u);
-					}
-					if (packet_version >= 27) {
-						player->hidden_from_general_statistics_ = (fr.unsigned_8() != 0u);
-					}
+					player->is_picking_custom_starting_position_ = (fr.unsigned_8() != 0u);
+					player->initialization_index_ = fr.unsigned_8();
+					player->allow_additional_expedition_items_ = (fr.unsigned_8() != 0u);
+					player->hidden_from_general_statistics_ = (fr.unsigned_8() != 0u);
 				}
 			}
 
@@ -121,7 +111,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 				status.result = static_cast<PlayerEndResult>(fr.unsigned_8());
 				status.time = Time(fr);
 				status.info = fr.c_string();
-				manager->set_player_end_status(status);
+				manager->add_player_end_status(status, true);
 			}
 
 			game.read_statistics(fr);
@@ -170,6 +160,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver* /* 
 
 		plr->write_statistics(fw);
 		plr->write_remaining_shipnames(fw);
+		plr->write_remaining_warehousenames(fw);
 		fw.unsigned_32(plr->casualties());
 		fw.unsigned_32(plr->kills());
 		fw.unsigned_32(plr->msites_lost());
@@ -191,14 +182,19 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver* /* 
 	}
 
 	// Result screen
-	const std::vector<PlayerEndStatus>& end_status_list =
-	   game.player_manager()->get_players_end_status();
+	std::vector<const Widelands::PlayerEndStatus*> end_status_list;
+	for (uint8_t pn = 1; pn <= game.player_manager()->get_number_of_players(); ++pn) {
+		const Widelands::PlayerEndStatus* pes = game.player_manager()->get_player_end_status(pn);
+		if (pes != nullptr) {
+			end_status_list.push_back(pes);
+		}
+	}
 	fw.unsigned_8(end_status_list.size());
-	for (const PlayerEndStatus& status : end_status_list) {
-		fw.unsigned_8(status.player);
-		fw.unsigned_8(static_cast<uint8_t>(status.result));
-		status.time.save(fw);
-		fw.c_string(status.info.c_str());
+	for (const PlayerEndStatus* status : end_status_list) {
+		fw.unsigned_8(status->player);
+		fw.unsigned_8(static_cast<uint8_t>(status->result));
+		status->time.save(fw);
+		fw.c_string(status->info.c_str());
 	}
 
 	game.write_statistics(fw);

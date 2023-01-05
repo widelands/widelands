@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,14 +29,14 @@ struct EditorToolsizeMenu : public UI::UniqueWindow {
 	EditorToolsizeMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
 	void update(uint32_t);
 	void set_buttons_enabled(bool enable);
-	uint32_t value() {
+	[[nodiscard]] uint32_t value() const {
 		return value_;
 	}
 
 private:
 	EditorInteractive& eia() const;
 	UI::SpinBox spinbox_;
-	uint32_t value_;
+	uint32_t value_{0U};
 	void changed();
 	static constexpr uint32_t kMargin = 5;
 };

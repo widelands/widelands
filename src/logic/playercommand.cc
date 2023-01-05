@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@
 #include "io/streamwrite.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
+#include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -39,6 +40,7 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+#include "wui/interactive_spectator.h"
 
 namespace Widelands {
 
@@ -106,6 +108,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdFlagAction(des);
 	case QueueCommandTypes::kStartStopBuilding:
 		return new CmdStartStopBuilding(des);
+	case QueueCommandTypes::kToggleInfiniteProduction:
+		return new CmdToggleInfiniteProduction(des);
 	case QueueCommandTypes::kEnhanceBuilding:
 		return new CmdEnhanceBuilding(des);
 
@@ -163,6 +167,10 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdMarkMapObjectForRemoval(des);
 	case QueueCommandTypes::kDiplomacy:
 		return new CmdDiplomacy(des);
+	case QueueCommandTypes::kPinnedNote:
+		return new CmdPinnedNote(des);
+	case QueueCommandTypes::kShipPortName:
+		return new CmdShipPortName(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
@@ -597,6 +605,50 @@ void CmdStartStopBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 	// Now serial
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }
+
+/*** Cmd_ToggleInfiniteProduction ***/
+
+CmdToggleInfiniteProduction::CmdToggleInfiniteProduction(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+}
+
+void CmdToggleInfiniteProduction::execute(Game& game) {
+	if (upcast(ProductionSite, ps, game.objects().get_object(serial_))) {
+		ps->set_infinite_production(!ps->infinite_production());
+	}
+}
+
+void CmdToggleInfiniteProduction::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial_);
+}
+
+constexpr uint16_t kCurrentPacketVersionCmdToggleInfiniteProduction = 1;
+
+void CmdToggleInfiniteProduction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionCmdToggleInfiniteProduction) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
+		} else {
+			throw UnhandledVersionError("CmdToggleInfiniteProduction", packet_version,
+			                            kCurrentPacketVersionCmdToggleInfiniteProduction);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("toggle infinite production: %s", e.what());
+	}
+}
+void CmdToggleInfiniteProduction::write(FileWrite& fw,
+                                        EditorGameBase& egbase,
+                                        MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionCmdToggleInfiniteProduction);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+}
+
+/*** Cmd_MilitarySiteSetSoldierPreference ***/
 
 CmdMilitarySiteSetSoldierPreference::CmdMilitarySiteSetSoldierPreference(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
@@ -2148,15 +2200,16 @@ void CmdDiplomacy::execute(Game& game) {
 			                             Message::Type::kScenario, game.get_gametime(), _("Diplomacy"),
 			                             "images/players/team.png", heading, text)));
 		}
+		if (upcast(InteractiveSpectator, is, game.get_ibase())) {
+			is->log_message(heading, text);
+		}
 	};
 
 	switch (action_) {
 	case DiplomacyAction::kResign:
-		for (const auto& status : game.player_manager()->get_players_end_status()) {
-			if (status.player == sender()) {
-				// Ignore if the player lost a moment ago
-				return;
-			}
+		if (game.player_manager()->get_player_end_status(sender()) != nullptr) {
+			// Ignore if the player lost a moment ago
+			return;
 		}
 		broadcast_message(_("Player Resigned"), format(_("%s has resigned and is now a spectator."),
 		                                               sending_player.get_name()));
@@ -2192,9 +2245,21 @@ void CmdDiplomacy::execute(Game& game) {
 
 	case DiplomacyAction::kAcceptJoin:
 	case DiplomacyAction::kRefuseJoin:
+	case DiplomacyAction::kRetractJoin:
 	case DiplomacyAction::kAcceptInvite:
-	case DiplomacyAction::kRefuseInvite: {
-		assert(other_player_ != sender());
+	case DiplomacyAction::kRefuseInvite:
+	case DiplomacyAction::kRetractInvite: {
+		PlayerNumber cmd_sender = sender();
+		bool retract = false;
+		if (action_ == DiplomacyAction::kRetractJoin || action_ == DiplomacyAction::kRetractInvite) {
+			/* Retracting is treated just like rejection but with a different message. */
+			std::swap(other_player_, cmd_sender);
+			retract = true;
+			action_ = (action_ == DiplomacyAction::kRetractJoin) ? DiplomacyAction::kRefuseJoin :
+                                                                DiplomacyAction::kRefuseInvite;
+		}
+		assert(other_player_ != cmd_sender);
+
 		const DiplomacyAction original_action =
 		   (action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kRefuseJoin) ?
             DiplomacyAction::kJoin :
@@ -2204,24 +2269,39 @@ void CmdDiplomacy::execute(Game& game) {
 			// Note that in the response the numbers of the two players
 			// are swapped compared to the original message.
 			if (it->action == original_action && it->sender == other_player_ &&
-			    it->other == sender()) {
+			    it->other == cmd_sender) {
 				const bool accept =
 				   action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kAcceptInvite;
+				std::string fmt_message;
+				if (accept) {
+					if (original_action == DiplomacyAction::kJoin) {
+						fmt_message = _("%1$s has accepted %2$s into their team.");
+					} else {
+						fmt_message = _("%1$s has accepted the invitation to join the team of %2$s.");
+					}
+				} else {
+					if (original_action == DiplomacyAction::kJoin) {
+						if (retract) {
+							fmt_message = _("%1$s has retracted the request to join the team of %2$s.");
+						} else {
+							fmt_message = _("%1$s has denied %2$s membership in their team.");
+						}
+					} else if (retract) {
+						fmt_message = _("%1$s has retracted the invitation to %2$s to join their team.");
+					} else {
+						fmt_message = _("%1$s has rejected the invitation to join the team of %2$s.");
+					}
+				}
 				broadcast_message(
 				   accept ? _("Team Change Accepted") : _("Team Change Rejected"),
-				   format(accept ? original_action == DiplomacyAction::kJoin ?
-                               _("%1$s has accepted %2$s into their team.") :
-                               _("%1$s has accepted the invitation to join the team of %2$s.") :
-				          original_action == DiplomacyAction::kJoin ?
-                               _("%1$s has denied %2$s membership in their team.") :
-                               _("%1$s has rejected the invitation to join the team of %2$s."),
-				          sending_player.get_name(), game.get_safe_player(other_player_)->get_name()));
+				   format(fmt_message, sending_player.get_name(),
+				          game.get_safe_player(retract ? cmd_sender : other_player_)->get_name()));
 
 				if (accept) {
 					Player* joiner = game.get_safe_player(
-					   original_action == DiplomacyAction::kJoin ? other_player_ : sender());
+					   original_action == DiplomacyAction::kJoin ? other_player_ : cmd_sender);
 					Player* other = game.get_safe_player(
-					   original_action != DiplomacyAction::kJoin ? other_player_ : sender());
+					   original_action != DiplomacyAction::kJoin ? other_player_ : cmd_sender);
 					if (other->team_number() == 0) {
 						// Assign both players to a previously unused team slot
 						std::set<TeamNumber> teams;
@@ -2285,6 +2365,141 @@ void CmdDiplomacy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_8(static_cast<uint8_t>(action_));
 	fw.unsigned_8(other_player_);
+}
+
+// CmdPinnedNote
+void CmdPinnedNote::execute(Game& game) {
+	for (Bob* b = game.map()[pos_].get_first_bob(); b != nullptr; b = b->get_next_bob()) {
+		if (b->descr().type() == MapObjectType::PINNED_NOTE &&
+		    b->owner().player_number() == sender()) {
+			PinnedNote& pn = dynamic_cast<PinnedNote&>(*b);
+			if (delete_) {
+				pn.remove(game);
+			} else {
+				pn.set_text(text_);
+				pn.set_rgb(rgb_);
+			}
+			return;
+		}
+	}
+
+	if (!delete_) {
+		PinnedNote::create(game, *game.get_player(sender()), pos_, text_, rgb_);
+	}
+}
+
+CmdPinnedNote::CmdPinnedNote(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	text_ = des.string();
+	pos_.x = des.unsigned_16();
+	pos_.y = des.unsigned_16();
+	rgb_.r = des.unsigned_8();
+	rgb_.g = des.unsigned_8();
+	rgb_.b = des.unsigned_8();
+	delete_ = des.unsigned_8() != 0;
+}
+
+void CmdPinnedNote::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.string(text_);
+	ser.unsigned_16(pos_.x);
+	ser.unsigned_16(pos_.y);
+	ser.unsigned_8(rgb_.r);
+	ser.unsigned_8(rgb_.g);
+	ser.unsigned_8(rgb_.b);
+	ser.unsigned_8(delete_ ? 1 : 0);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdPinnedNote = 1;
+
+void CmdPinnedNote::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdPinnedNote) {
+			PlayerCommand::read(fr, egbase, mol);
+			text_ = fr.string();
+			pos_.x = fr.unsigned_16();
+			pos_.y = fr.unsigned_16();
+			rgb_.r = fr.unsigned_8();
+			rgb_.g = fr.unsigned_8();
+			rgb_.b = fr.unsigned_8();
+			delete_ = fr.unsigned_8() != 0;
+		} else {
+			throw UnhandledVersionError(
+			   "CmdPinnedNote", packet_version, kCurrentPacketVersionCmdPinnedNote);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_PinnedNote: %s", e.what());
+	}
+}
+
+void CmdPinnedNote::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdPinnedNote);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.string(text_);
+	fw.unsigned_16(pos_.x);
+	fw.unsigned_16(pos_.y);
+	fw.unsigned_8(rgb_.r);
+	fw.unsigned_8(rgb_.g);
+	fw.unsigned_8(rgb_.b);
+	fw.unsigned_8(delete_ ? 1 : 0);
+}
+
+// CmdShipPortName
+void CmdShipPortName::execute(Game& game) {
+	MapObject* mo = game.objects().get_object(serial_);
+	if (mo == nullptr) {
+		return;
+	}
+
+	switch (mo->descr().type()) {
+	case MapObjectType::SHIP:
+		dynamic_cast<Ship&>(*mo).set_shipname(name_);
+		return;
+
+	case MapObjectType::WAREHOUSE:
+		dynamic_cast<Warehouse&>(*mo).set_warehouse_name(name_);
+		return;
+
+	default:
+		throw wexception("CmdShipPortName for object %u of type %s", serial_,
+		                 to_string(mo->descr().type()).c_str());
+	}
+}
+
+CmdShipPortName::CmdShipPortName(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+	name_ = des.string();
+}
+
+void CmdShipPortName::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial_);
+	ser.string(name_);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdShipPortName = 1;
+
+void CmdShipPortName::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdShipPortName) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial_ = fr.unsigned_32();
+			name_ = fr.string();
+		} else {
+			throw UnhandledVersionError(
+			   "CmdShipPortName", packet_version, kCurrentPacketVersionCmdShipPortName);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_ShipPortName: %s", e.what());
+	}
+}
+
+void CmdShipPortName::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdShipPortName);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.string(name_);
 }
 
 // CmdPickCustomStartingPosition

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ struct SupplyList {
 	void add_supply(Supply&);
 	void remove_supply(Supply&);
 
-	size_t get_nrsupplies() const {
+	[[nodiscard]] size_t get_nrsupplies() const {
 		return supplies_.size();
 	}
 	const Supply& operator[](size_t const idx) const {

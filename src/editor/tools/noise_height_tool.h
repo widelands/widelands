@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,18 +42,18 @@ struct EditorNoiseHeightTool : public EditorTool {
 
 	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_noise_height.png");
 	}
 
-	Widelands::HeightInterval get_interval() const {
+	[[nodiscard]] Widelands::HeightInterval get_interval() const {
 		return interval_;
 	}
 	void set_interval(const Widelands::HeightInterval& i) {
 		interval_ = i;
 	}
 
-	EditorSetHeightTool& set_tool() const {
+	[[nodiscard]] EditorSetHeightTool& set_tool() const {
 		return set_tool_;
 	}
 

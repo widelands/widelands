@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,45 +57,49 @@ public:
 	friend class RequestList;
 
 	using CallbackFn = void (*)(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+	using TransferList = std::vector<Transfer*>;
 
 	Request(PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
 	~Request() override;
 
-	PlayerImmovable& target() const {
+	[[nodiscard]] PlayerImmovable& target() const {
 		return target_;
 	}
-	DescriptionIndex get_index() const {
+	[[nodiscard]] DescriptionIndex get_index() const {
 		return index_;
 	}
-	WareWorker get_type() const {
+	[[nodiscard]] WareWorker get_type() const {
 		return type_;
 	}
-	Quantity get_count() const {
+	[[nodiscard]] Quantity get_count() const {
 		return count_;
 	}
-	uint32_t get_open_count() const {
+	[[nodiscard]] uint32_t get_open_count() const {
 		return count_ - transfers_.size();
 	}
-	bool get_exact_match() const {
+	[[nodiscard]] bool get_exact_match() const {
 		return exact_match_;
 	}
-	bool is_open() const {
+	[[nodiscard]] bool is_open() const {
 		return transfers_.size() < count_;
 	}
-	Economy* get_economy() const {
+	[[nodiscard]] Economy* get_economy() const {
 		return economy_;
 	}
-	Time get_required_time() const;
-	const Time& get_last_request_time() const {
+	[[nodiscard]] Time get_required_time() const;
+	[[nodiscard]] const Time& get_last_request_time() const {
 		return last_request_time_;
 	}
-	uint32_t get_priority(int32_t cost) const;
-	uint32_t get_normalized_transfer_priority() const;
-	uint32_t get_num_transfers() const {
+	[[nodiscard]] uint32_t get_priority(int32_t cost) const;
+	[[nodiscard]] uint32_t get_normalized_transfer_priority() const;
+	[[nodiscard]] uint32_t get_num_transfers() const {
 		return transfers_.size();
 	}
+	[[nodiscard]] const TransferList& get_transfers() const {
+		return transfers_;
+	}
 
-	Flag& target_flag() const;
+	[[nodiscard]] Flag& target_flag() const;
 
 	void set_economy(Economy*);
 	void set_count(Quantity);
@@ -121,16 +125,14 @@ public:
 	void set_requirements(const Requirements& r) {
 		requirements_ = r;
 	}
-	const Requirements& get_requirements() const {
+	[[nodiscard]] const Requirements& get_requirements() const {
 		return requirements_;
 	}
 
 private:
-	Time get_base_required_time(const EditorGameBase&, uint32_t nr) const;
+	[[nodiscard]] Time get_base_required_time(const EditorGameBase&, uint32_t nr) const;
 	void remove_transfer(uint32_t idx);
 	uint32_t find_transfer(Transfer&);
-
-	using TransferList = std::vector<Transfer*>;
 
 	WareWorker type_;
 
@@ -144,16 +146,16 @@ private:
 	ConstructionSite* target_constructionsite_;
 
 	Economy* economy_;
-	DescriptionIndex index_;  //  the index of the ware descr
-	Quantity count_;          //  how many do we need in total
-	bool exact_match_;        // Whether a worker supply has to match exactly
-	                          // or if a can_act_as() comparison is good enough
+	DescriptionIndex index_;   //  the index of the ware descr
+	Quantity count_{1};        //  how many do we need in total
+	bool exact_match_{false};  // Whether a worker supply has to match exactly
+	                           // or if a can_act_as() comparison is good enough
 
 	CallbackFn callbackfn_;  //  called on request success
 
 	//  when do we need the first ware (can be in the past)
 	Time required_time_;
-	Duration required_interval_;  //  time between wares
+	Duration required_interval_{0U};  //  time between wares
 	Time last_request_time_;
 
 	TransferList transfers_;  //  maximum size is count_

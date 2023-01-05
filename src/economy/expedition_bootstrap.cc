@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -310,7 +310,7 @@ void ExpeditionBootstrap::load(
 	std::vector<WorkersQueue*> wqs;
 	std::vector<InputQueue*> additional_queues;
 	try {
-		if (packet_version == kCurrentPacketVersionWarehouseAndExpedition) {
+		if (packet_version >= 8 && packet_version <= kCurrentPacketVersionWarehouseAndExpedition) {
 			uint8_t num_queues = fr.unsigned_8();
 			for (uint8_t i = 0; i < num_queues; ++i) {
 				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);

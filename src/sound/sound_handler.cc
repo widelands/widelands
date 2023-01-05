@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2022 by the Widelands Development Team
+ * Copyright (C) 2005-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,8 +49,7 @@ SoundHandler::SoundHandler()
                     {SoundType::kMessage, SoundOptions(kDefaultFxVolume, "message")},
                     {SoundType::kChat, SoundOptions(kDefaultFxVolume, "chat")},
                     {SoundType::kAmbient, SoundOptions(kDefaultFxVolume, "ambient")},
-                    {SoundType::kMusic, SoundOptions(kDefaultMusicVolume, "music")}},
-     fx_lock_(nullptr) {
+                    {SoundType::kMusic, SoundOptions(kDefaultMusicVolume, "music")}} {
 	// Ensure that we don't lose our config for when we start with sound the next time
 	read_config();
 

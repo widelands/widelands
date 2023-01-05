@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 			cr->push_arg("multiplayer");
 		}
 		cr->resume();
-		init(parent, cr->pop_table());
+		init(cr->pop_table());
 	} catch (LuaError& err) {
 		log_err_time(parent.egbase().get_gametime(),
 		             "Error loading script for tribal encyclopedia:\n%s\n", err.what());

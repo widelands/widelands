@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,10 +61,10 @@ private:
 		          Surface* target,
 		          float opacity) const override;
 
-		int width() const override;
-		int height() const override;
+		[[nodiscard]] int width() const override;
+		[[nodiscard]] int height() const override;
 
-		std::vector<std::unique_ptr<const Texture>>
+		[[nodiscard]] std::vector<std::unique_ptr<const Texture>>
 		frame_textures(bool return_playercolor_masks) const override;
 
 		/// Image files on disk

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2022 by the Widelands Development Team
+ * Copyright (C) 2015-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ EditorHelp::EditorHelp(EditorInteractive& parent,
                        LuaInterface* const lua)
    : EncyclopediaWindow(parent, registry, lua) {
 	try {
-		init(parent, lua_->run_script("scripting/editor/editor_help.lua"));
+		init(lua_->run_script("scripting/editor/editor_help.lua"));
 	} catch (LuaError& err) {
 		log_err("Error loading script for editor help:\n%s\n", err.what());
 		UI::WLMessageBox wmb(&parent, UI::WindowStyle::kWui, _("Error!"),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,40 +37,43 @@ struct GamePreloadPacket : public GameDataPacket {
 	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
 	void write(FileSystem&, Game&, MapObjectSaver* = nullptr) override;
 
-	char const* get_mapname() const {
+	[[nodiscard]] char const* get_mapname() const {
 		return mapname_.c_str();
 	}
-	std::string get_background() const {
+	[[nodiscard]] std::string get_background() const {
 		return background_;
 	}
-	std::string get_background_theme() const {
+	[[nodiscard]] std::string get_background_theme() const {
 		return background_theme_;
 	}
-	std::string get_win_condition() const {
+	[[nodiscard]] std::string get_win_condition() const {
 		return win_condition_;
 	}
-	std::string get_localized_win_condition() const;
-	const Time& get_gametime() const {
+	[[nodiscard]] std::string get_localized_win_condition() const;
+	[[nodiscard]] int32_t get_win_condition_duration() const {
+		return win_condition_duration_;
+	}
+	[[nodiscard]] const Time& get_gametime() const {
 		return gametime_;
 	}
-	uint8_t get_player_nr() const {
+	[[nodiscard]] uint8_t get_player_nr() const {
 		return player_nr_;
 	}
-	std::string get_version() const {
+	[[nodiscard]] std::string get_version() const {
 		return version_;
 	}
 
-	uint8_t get_number_of_players() const {
+	[[nodiscard]] uint8_t get_number_of_players() const {
 		return number_of_players_;
 	}
-	std::string get_minimap_path() const {
+	[[nodiscard]] std::string get_minimap_path() const {
 		return minimap_path_;
 	}
 
-	time_t get_savetimestamp() const {
+	[[nodiscard]] time_t get_savetimestamp() const {
 		return savetimestamp_;
 	}
-	GameController::GameType get_gametype() const {
+	[[nodiscard]] GameController::GameType get_gametype() const {
 		return gametype_;
 	}
 
@@ -87,7 +90,7 @@ struct GamePreloadPacket : public GameDataPacket {
 	 * and players can not influence the world of existing maps.
 	 * Tribes add-ons however are selected when starting a new game.
 	 */
-	const AddOns::AddOnRequirements& required_addons() const {
+	[[nodiscard]] const AddOns::AddOnRequirements& required_addons() const {
 		return required_addons_;
 	}
 
@@ -107,6 +110,7 @@ private:
 	std::string background_;
 	std::string background_theme_;
 	std::string win_condition_;
+	int32_t win_condition_duration_;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	std::string active_training_wheel_;
 	// Initializing everything to make cppcheck happy.

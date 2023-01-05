@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -8,6 +8,7 @@
 # nskdmitry, 2021
 # GunChleoc, 2016
 # Viktor S <awsswa59@gmail.com>, 2018-2019
+# Yuriy Sokolov <lention@mail.ru>, 2022
 # Алексей Баринов <leha.bar.ru@gmail.com>, 2018
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
-"Last-Translator: nskdmitry, 2021\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +36,7 @@ msgstr "Деревообрабатывающая промышленность"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr "Постройте три домика дровосеков, домик лесника и лесопилку."
+msgstr "Постройте три дома дровосеков, дом лесника и лесопилку."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Build a quarry"
@@ -75,18 +76,18 @@ msgstr "Расширяйтесь на восток, чтобы начать до
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:61
 msgid "Build a stonemason’s house and mining infrastructure"
-msgstr "Постройте домик камнетеса и горнорудную инфраструктуру"
+msgstr "Постройте дом камнетёса и горнорудную инфраструктуру"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
 msgid "Stonemason’s house and Mining Infrastructure"
-msgstr "Домик камнетеса и горнорудная инфраструктура"
+msgstr "Дом камнетёса и горнорудная инфраструктура"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr "Постройте домик камнетеса, а потом завершите строительство добывающих и производственных сооружений (угольная шахта и/или печь углежога, железный рудник, инструментальную мастерскую, оружейную, бронную и литейную)."
+msgstr "Постройте дом камнетёса, а потом завершите строительство добывающих и производственных сооружений (угольная шахта и/или печь углежога, железный рудник, инструментальную мастерскую, оружейную, бронную и литейную)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
@@ -110,7 +111,7 @@ msgstr "Конечно, это означает, что вам понадоби�
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
-msgstr "Чтобы обеспечить эти продукты питания, вы можете построить Домик Рыболова, Домик Охотника, ферму, мельницу и пекарню."
+msgstr "Чтобы обеспечить эти продукты питания, вы можете построить Дом Рыболова, Дом Охотника, ферму, мельницу и пекарню."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
@@ -186,7 +187,7 @@ msgstr "Новый остров"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid "Diary of Lutius"
-msgstr "Дневник Люциуса"
+msgstr "Дневник Люция"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:111
@@ -215,7 +216,7 @@ msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
 "beautiful, I could stay here until the end of my life."
-msgstr "Когда мы вместе с Саледусом шли через эти удивительные леса на севере, мы чувствовали, что наше будущее только что началось. Эта земля настолько мирная, добрая и красивая, что я мог бы остаться здесь до конца моей жизни."
+msgstr "Когда мы вместе с Саледом шли через эти удивительные леса на севере, мы чувствовали, что наше будущее только что началось. Эта земля настолько мирная, добрая и красивая, что я мог бы остаться здесь до конца моей жизни."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:125
@@ -223,14 +224,14 @@ msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr "Но до этого дня, может пройти много лет! Сейчас мы должны сконцентрироваться на настоящем и построить несколько домиков дровосеков и лесопилку, чтобы начать производить некоторые основные строительные материалы."
+msgstr "Но до этого дня, может пройти много лет! Сейчас мы должны сконцентрироваться на настоящем и построить несколько домов дровосеков и лесопилку, чтобы начать производить некоторые основные строительные материалы."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:128
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
-msgstr "Но мы не должны забывать предохранять эту природную щедрость. Эти леса не вечны, так что нам обязательно нужно построить домик лесника."
+msgstr "Но мы не должны забывать предохранять эту природную щедрость. Эти леса не вечны, так что нам обязательно нужно построить дом лесника."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "The Rocks"
@@ -279,7 +280,7 @@ msgstr "Опасные останки корабля"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:164
 msgid "Saledus looks unhappy"
-msgstr "Саледус выглядит подавленным"
+msgstr "Салед выглядит подавленным"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:166
@@ -311,7 +312,7 @@ msgstr "Мрамор в горах"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:180
 msgid "Saledus smiles"
-msgstr "Саледус улыбается"
+msgstr "Салед улыбается"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:182
@@ -340,7 +341,7 @@ msgstr "Отдаленные горы"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196
 msgid "Saledus is excited"
-msgstr "Саледус взволнован"
+msgstr "Салед взволнован"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:198
@@ -358,7 +359,7 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr "Однако: для всех этих зданий нам нужны более изящные строительные материалы. Таким образом, Вы должны построить домик камнетеса, который будет вырезать колонны из мрамора."
+msgstr "Однако: для всех этих зданий нам нужны более изящные строительные материалы. Таким образом, Вы должны построить дом камнетёса, который будет вырезать колонны из мрамора."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:204
@@ -376,7 +377,7 @@ msgstr "Входит Амалия..."
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:212
 msgid "Lutius, don’t you think you forgot something important?"
-msgstr "Люциус, тебе не кажется, что ты забыл что-то важное?!"
+msgstr "Люций, тебе не кажется, что ты забыл что-то важное?!"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:215
@@ -414,7 +415,7 @@ msgstr "Я только что был в нашей новой таверне \"
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
-msgstr "Приятно видеть, как наше поселение становится теплым и уютным. Спасибо тебе, Люциус."
+msgstr "Приятно видеть, как наше поселение становится теплым и уютным. Спасибо тебе, Люций."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:233
 msgid "The Barbarians"
@@ -426,7 +427,7 @@ msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
 "shipwreck he found."
-msgstr "О, Боги! Это просто ужасно! Видимо, страхи Саледуса относительно кораблекрушения, были оправданы."
+msgstr "О, Боги! Это просто ужасно! Видимо, страхи Саледа относительно кораблекрушения, были оправданы."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:240
@@ -485,7 +486,7 @@ msgstr "Есть все еще несколько Варваров, скрыва
 msgid ""
 "We have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island. Now we can think about our next steps."
-msgstr "Теперь, когда мы наладили экономику, обучили солдат и прогнали варваров с острова, нам нужно подумать о том, что делать дальше."
+msgstr "Теперь, когда мы наладили производство, обучили солдат и прогнали варваров с острова, нам нужно подумать о том, что делать дальше."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"

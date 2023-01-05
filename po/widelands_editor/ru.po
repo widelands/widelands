@@ -1,9 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Viktor S <awsswa59@gmail.com>, 2019
+# Yuriy Sokolov <lention@mail.ru>, 2022
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2019
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2016-03-24 07:33+0000\n"
-"Last-Translator: Zme Zzzz <zmey1207@gmail.com>, 2021\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: ../../data/scripting/editor/editor_controls.lua:11
-#: ../../data/scripting/editor/editor_help.lua:65
+#: ../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
 msgstr "Управление"
 
@@ -127,29 +128,29 @@ msgstr "Ctrl + щелчок"
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr "Установить для элементов карты значение, выбранное \"Установить значение\""
 
-#: ../../data/scripting/editor/editor_help.lua:49
+#: ../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
 msgstr "Помощь по редактору карт"
 
-#: ../../data/scripting/editor/editor_help.lua:54
+#: ../../data/scripting/editor/editor_help.lua:55
 msgid "General"
 msgstr "Главное"
 
-#: ../../data/scripting/editor/editor_help.lua:59
+#: ../../data/scripting/editor/editor_help.lua:60
 #: ../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
 msgstr "Введение"
 
-#: ../../data/scripting/editor/editor_help.lua:71
+#: ../../data/scripting/editor/editor_help.lua:72
 #: ../../data/scripting/editor/tips.lua:15
 msgid "Tips"
 msgstr "Подсказки"
 
-#: ../../data/scripting/editor/editor_help.lua:81
+#: ../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
-msgstr "Местности"
+msgstr "Ландшафты"
 
-#: ../../data/scripting/editor/editor_help.lua:88
+#: ../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
 msgstr "Деревья"
 
@@ -167,7 +168,7 @@ msgstr "Этот редактор карт предназначен для иг�
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr "Как вы видите, этот редактор тяжелая постоянная работа и редактор становится лучше и лучше, этот текст также будет длиннее и более полным."
+msgstr "Как видите, разработка редактора продолжается, он становится всё лучше, а этот текст будет увеличиваться и дополняться."
 
 #: ../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
@@ -219,4 +220,4 @@ msgstr "%2.1f %%"
 #: ../../data/scripting/editor/tree_help.lua:18
 #: ../../data/scripting/editor/tree_tooltip.lua:31
 msgid "Preferred terrains"
-msgstr "Предпочитаемые местности"
+msgstr "Предпочитаемые ландшафты"

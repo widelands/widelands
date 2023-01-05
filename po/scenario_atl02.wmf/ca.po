@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-01 04:08+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
 "Last-Translator: Juanjo, 2022\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -226,7 +226,7 @@ msgstr "Pagueu tots els tributs a en Kalitath"
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:117
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:130
 msgid "Send Trader To Kalitath"
-msgstr "Envieu un comercial amb Kalitath"
+msgstr "Envieu un comerciant amb Kalitath"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:118
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:131
@@ -1123,7 +1123,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr "Felicitats!"
+msgstr "Enhorabona!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""

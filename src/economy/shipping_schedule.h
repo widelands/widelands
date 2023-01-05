@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2022 by the Widelands Development Team
+ * Copyright (C) 2019-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,8 +52,7 @@ template <typename DockT, typename CargosT> struct SchedulingStateT {
 	}
 	SchedulingStateT(const SchedulingStateT&) = default;
 	SchedulingStateT& operator=(const SchedulingStateT&) = default;
-	~SchedulingStateT() {
-	}
+	~SchedulingStateT() = default;
 };
 
 using SchedulingState = SchedulingStateT<OPtr<PortDock>, CargoList>;
@@ -62,8 +61,7 @@ using ShipPlan = std::list<SchedulingState>;
 struct ShippingSchedule {
 public:
 	explicit ShippingSchedule(ShipFleet&);
-	~ShippingSchedule() {
-	}
+	~ShippingSchedule() = default;
 
 	// called by ShipFleet::act()
 	// returns the time until the next update
@@ -92,9 +90,9 @@ public:
 	 * We may have ships and/or ports but no plans to carry anything.
 	 * @return true when no plans for any ship exist
 	 */
-	bool empty() const;
+	[[nodiscard]] bool empty() const;
 
-	bool is_busy(const Ship&) const;
+	[[nodiscard]] bool is_busy(const Ship&) const;
 
 	void log_general_info(const EditorGameBase&) const;
 

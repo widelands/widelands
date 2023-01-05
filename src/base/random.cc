@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,6 @@
 #include "base/wexception.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-
-RNG::RNG() : state0(0), state1(0) {
-}
 
 void RNG::seed(uint32_t s) {
 	state0 ^= state1;

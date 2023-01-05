@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,8 +44,6 @@
 #include "sound/sound_handler.h"
 
 namespace Widelands {
-
-constexpr Duration ConstructionSite::kConstructionsiteStepTime;
 
 void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
                                        const Widelands::Coords& coords,
@@ -163,10 +161,7 @@ IMPLEMENTATION
 */
 
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
-   : PartiallyFinishedBuilding(cs_descr),
-     fetchfromflag_(0),
-     builder_idle_(false),
-     settings_(nullptr) {
+   : PartiallyFinishedBuilding(cs_descr) {
 }
 
 void ConstructionSite::update_statistics_string(std::string* s) {

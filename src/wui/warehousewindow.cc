@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -251,6 +251,29 @@ WarehouseWindow::WarehouseWindow(InteractiveBase& parent,
                                  bool workarea_preview_wanted)
    : BuildingWindow(parent, reg, wh, avoid_fastclick), warehouse_(&wh) {
 	init(avoid_fastclick, workarea_preview_wanted);
+}
+
+void WarehouseWindow::setup_name_field_editbox(UI::Box& vbox) {
+	Widelands::Warehouse* warehouse = warehouse_.get(ibase()->egbase());
+	if (warehouse == nullptr || !ibase()->can_act(warehouse->owner().player_number())) {
+		return BuildingWindow::setup_name_field_editbox(vbox);
+	}
+
+	UI::EditBox* name_field = new UI::EditBox(&vbox, 0, 0, 0, UI::PanelStyle::kWui);
+	name_field->set_text(warehouse->get_warehouse_name());
+	name_field->changed.connect([this, name_field]() {
+		Widelands::Warehouse* wh = warehouse_.get(ibase()->egbase());
+		if (wh == nullptr) {
+			return;
+		}
+		if (Widelands::Game* game = ibase()->get_game(); game != nullptr) {
+			game->send_player_ship_port_name(
+			   wh->owner().player_number(), wh->serial(), name_field->text());
+		} else {
+			wh->set_warehouse_name(name_field->text());
+		}
+	});
+	vbox.add(name_field, UI::Box::Resizing::kFullSize);
 }
 
 void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {

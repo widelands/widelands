@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,10 +37,6 @@
 #include "logic/message_queue.h"
 #include "logic/player.h"
 
-namespace {
-constexpr size_t kNoOfStatisticsStringCases = 4;
-}  // namespace
-
 namespace Widelands {
 
 std::vector<Soldier*> MilitarySite::SoldierControl::present_soldiers() const {
@@ -62,6 +58,23 @@ std::vector<Soldier*> MilitarySite::SoldierControl::stationed_soldiers() const {
 	for (Worker* worker : military_site_->get_workers()) {
 		if (upcast(Soldier, soldier, worker)) {
 			soldiers.push_back(soldier);
+		}
+	}
+	return soldiers;
+}
+
+std::vector<Soldier*> MilitarySite::SoldierControl::associated_soldiers() const {
+	std::vector<Soldier*> soldiers = stationed_soldiers();
+	if (military_site_->normal_soldier_request_ != nullptr) {
+		for (const Transfer* t : military_site_->normal_soldier_request_->get_transfers()) {
+			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
+			soldiers.push_back(&s);
+		}
+	}
+	if (military_site_->upgrade_soldier_request_ != nullptr) {
+		for (const Transfer* t : military_site_->upgrade_soldier_request_->get_transfers()) {
+			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
+			soldiers.push_back(&s);
 		}
 	}
 	return soldiers;
@@ -302,10 +315,7 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
                                      Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, descriptions),
-     conquer_radius_(0),
-     num_soldiers_(0),
-     heal_per_second_(0) {
+   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, descriptions) {
 
 	conquer_radius_ = table.get_int("conquers");
 	num_soldiers_ = table.get_int("max_soldiers");
@@ -345,16 +355,10 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
    : Building(ms_descr),
      attack_target_(this),
      soldier_control_(this),
-     didconquer_(false),
+
      capacity_(ms_descr.get_max_number_of_soldiers()),
-     nexthealtime_(0),
      soldier_preference_(ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes :
-                                                             SoldierPreference::kRookies),
-     next_swap_soldiers_time_(Time(0)),
-     soldier_upgrade_try_(false),
-     doing_upgrade_request_(false),
-     // Initialize vector capacity for statistics string cache
-     statistics_string_cache_(kNoOfStatisticsStringCases) {
+                                                             SoldierPreference::kRookies) {
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
 }
@@ -853,15 +857,6 @@ bool MilitarySite::get_building_work(Game& game, Worker& worker, bool /*success*
 	return false;
 }
 
-/**
- * \return \c true if the soldier is currently present and idle in the building.
- */
-bool MilitarySite::is_present(Soldier& soldier) const {
-	return soldier.get_location(get_owner()->egbase()) == this &&
-	       soldier.get_state() == soldier.get_state(Worker::taskBuildingwork) &&
-	       soldier.get_position() == get_position();
-}
-
 void MilitarySite::conquer_area(EditorGameBase& egbase) {
 	assert(!didconquer_);
 	egbase.conquer_area(PlayerArea<Area<FCoords>>(
@@ -891,15 +886,14 @@ bool MilitarySite::military_presence_kept(Game& game) {
 	FCoords const fc = game.map().get_fcoords(get_position());
 	game.map().find_immovables(game, Area<FCoords>(fc, 3), &immovables);
 
-	for (const ImmovableFound& imm : immovables) {
-		if (upcast(MilitarySite const, militarysite, imm.object)) {
-			if (this != militarysite && &owner() == &militarysite->owner() &&
-			    get_size() <= militarysite->get_size() && militarysite->didconquer_) {
-				return true;
-			}
+	return std::any_of(immovables.begin(), immovables.end(), [this](const ImmovableFound& imm) {
+		if (imm.object->descr().type() != MapObjectType::MILITARYSITE) {
+			return false;
 		}
-	}
-	return false;
+		upcast(const MilitarySite, militarysite, imm.object);
+		return this != militarysite && &owner() == &militarysite->owner() &&
+		       get_size() <= militarysite->get_size() && militarysite->didconquer_;
+	});
 }
 
 /// Informs the player about an attack of his opponent.

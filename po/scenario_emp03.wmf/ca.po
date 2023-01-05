@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Juanjo, 2022\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -145,11 +145,12 @@ msgstr "Producció de tela"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
-"Now turn all the wheat into at least 50 bales of wool and then use the wool "
-"to weave cloth in order to build a ship."
+"Now build a sheep farm and turn all the wheat into at least 50 bales of "
+"wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
-"Ara convertiu el blat en almenys 50 bales de llana i useu la llana per "
-"teixir teles per construir vaixells."
+"Ara construïu una granja d'ovelles i convertiu tot el blat en almenys 50 "
+"bales de llana i feu servir la llana per a teixir teles i construir "
+"vaixells."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -163,11 +164,11 @@ msgstr "Construïu dos ports d’expedicions"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
-"Explore the island in the south. Use an expedition to build a port there. "
-"Afterwards, try to find some mining resources."
+"Explore the island in the south. Send an expedition from our port to build a"
+" port there. Afterwards, try to find some mining resources."
 msgstr ""
-"Exploreu les illes del sud. Useu una expedició per construir-hi un port. "
-"Després, busqueu-hi recursos miners."
+"Exploreu l'illa del sud. Envieu una expedició des del nostre port per a "
+"construir-n'hi un altre. Després, busqueu-hi recursos miners."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""

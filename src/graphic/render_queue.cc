@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -138,8 +138,7 @@ ScopedScissor::~ScopedScissor() {
 }  // namespace
 
 RenderQueue::RenderQueue()
-   : next_z_(1),
-     terrain_program_(new TerrainProgram()),
+   : terrain_program_(new TerrainProgram()),
      dither_program_(new DitherProgram()),
      workarea_program_(new WorkareaProgram()),
      grid_program_(new GridProgram()),

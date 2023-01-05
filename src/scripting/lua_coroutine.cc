@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,8 +63,7 @@ void unreference_coroutine(lua_State* L, uint32_t idx) {
 
 }  // namespace
 
-LuaCoroutine::LuaCoroutine(lua_State* ms)
-   : lua_state_(ms), idx_(LUA_REFNIL), ninput_args_(0), nreturn_values_(0) {
+LuaCoroutine::LuaCoroutine(lua_State* ms) : lua_state_(ms) {
 	if (lua_state_ != nullptr) {
 		idx_ = reference_coroutine(lua_state_);
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ template <class T> struct MethodType {
 
 // Forward declaration of public function, because we need it below
 template <class T> int to_lua(lua_State* L, T* obj);
-template <class T> T** get_user_class(lua_State* const L, int narg);
+template <class T> T** get_user_class(lua_State* L, int narg);
 
 // Returns true if the table at the top of the stack has the 'key'.
 bool luna_table_has_key(lua_State* L, const std::string& key);
@@ -130,8 +130,9 @@ template <class T> int property_setter(lua_State* const L) {
 template <class T, class PT> int property_dispatch(lua_State* const L) {
 	// Check for invalid: obj.method()
 	int const n = lua_gettop(L);
-	if (!n)
+	if (!n) {
 		report_error(L, "Property needs at least the object as argument!");
+	}
 
 	// Check for invalid: obj.method(plainOldDatatype)
 	luaL_checktype(L, 1, LUA_TTABLE);
@@ -158,8 +159,9 @@ template <class T, class PT> int property_dispatch(lua_State* const L) {
 template <class T, class PT> int method_dispatch(lua_State* const L) {
 	// Check for invalid: obj.method()
 	int const n = lua_gettop(L);
-	if (!n)
+	if (!n) {
 		report_error(L, "Method needs at least the object as argument!");
+	}
 
 	// Check for invalid: obj.method(plainOldDatatype)
 	luaL_checktype(L, 1, LUA_TTABLE);
@@ -184,8 +186,9 @@ template <class T> int garbage_collect(lua_State* const L) {
 	// return nullptr and we have nothing else today. In other cases, we have to
 	// delete our object.
 	T** const obj = static_cast<T**>(luaL_testudata(L, -1, T::className));
-	if (!obj)
+	if (!obj) {
 		return 0;
+	}
 
 	delete *obj;
 	return 0;
@@ -323,10 +326,11 @@ template <class T> void extract_userdata_from_user_class(lua_State* const L, int
 
 	//  GET table[0]
 	lua_pushnumber(L, 0);
-	if (narg > 0)
+	if (narg > 0) {
 		lua_rawget(L, narg);
-	else
+	} else {
 		lua_rawget(L, narg - 1);
+	}
 
 	if (!lua_isuserdata(L, -1)) {
 		report_error(L, "Expected a userdata, but got something else.");

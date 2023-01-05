@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # CrisiusXIII <chris@cborn.nl>, 2021
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
 "Last-Translator: CrisiusXIII <chris@cborn.nl>, 2021\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
@@ -560,10 +560,10 @@ msgstr "Nu komen we bij de veerboten. Veerboten zijn kleine roeiboten die maar �
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:261
 msgid ""
-" Ferries are built in ferry yards, one rowboat costs two logs and one piece "
+"Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr "Veerboten worden gebouwd in een veerbootwerf. Een veerboot kost twee boomstammen en één stuk doek en kost weinig tijd om te maken. Een veerbootwerf is een middelgroot gebouw en moet aan de kust worden gebouwd."
+msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."

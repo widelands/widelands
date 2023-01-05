@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-22 03:53+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Jukka Pakarinen, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
@@ -226,13 +226,10 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
-"From the north we are endangered by a belligerent tribe, led by warlord "
+"From the North we are endangered by a belligerent tribe, led by warlord "
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
-"Pohjoisesta meitä vaarantaa riidanhaluinen heimo, jota johtaa sotaherra "
-"Törver, ja joka rakentaa armeijoitaan nopeaan tahtii. Heistä voi piakkoin "
-"tulla liian voimakkaita voittaa."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -280,13 +277,9 @@ msgstr "Pohjoinen vihollisemme"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
 "Sire, although our soldiers would face any enemy without the slightest fear,"
-" our rival in the north is still stronger than all our armies combined. We "
+" our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-"Herra, vaikkakin sotilaamme ovatkin valmiita kohtaamaan minkä tahansa "
-"vihollisen ilman pelon häivääkään, vastustajamme pohjoisessa on edelleenkin "
-"voimallisempi kuin kaikki omat armeijamme yhdistettynä. Olisi viisasta "
-"välttää yhteenottoa kunnes saavutamme kyvyn heidän lyömiseensä."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -297,8 +290,8 @@ msgstr ""
 "tilanteessa. Törver omaa erittäin huonon maineen."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
-msgid "Peril from the north"
-msgstr "Uhka pohjoisesta"
+msgid "Peril from the North"
+msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -349,12 +342,9 @@ msgstr "Suurjärvi"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
 "Sire, now that we have conquered the land of Törver, we can make use of "
-"their excellent access to the adjacent great lake. A port in the north will "
+"their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
-"Herra, nyt kun olemme valloittaneet Törverin maat, voimme hyödyntää heidän "
-"erinomaista yhteyttä viereiselle suurjärvelle. Satama pohjoisessa antaa "
-"meille paremmat mahdollisuudet luoda yhteyksiä muihin heimoihin."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -422,25 +412,18 @@ msgstr "Soiden raivaaminen"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
-"Sire, the wet season has created swamps along the brook to the east and we "
+"Sire, the wet season has created swamps along the brook to the East and we "
 "are unable to pass through them. They have to be removed before we can "
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
-"Herra, sadekausi synnytti suoalueita puroa pitkin itään emmekä pääse "
-"kulkemaan niiden läpi. Suot täytyy raivata ennen kuin voimme jatkaa matkaa. "
-"Vapaaehtoiset voivat raivata suot, jos vain toimitatte riittävästi lapioita "
-"uudelle varastolle."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
-"Sire, all shovels have been handed out but if we continue at this pace than "
-"we will not have removed the swamps before the next wet season. If you bring"
-" more shovels to the new warehouse then more volunteers will join in."
+"Sire, all shovels have been handed out, but if we continue at this pace we "
+"will not have removed the swamps before the next wet season. If you bring "
+"more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
-"Herra, kaikki lapiot on jo jaettu mutta jos jatkamme tätä tahtia ei soiden "
-"raivaamisesta tule valmista ennen seuraavaa sadekautta. Jos toimitatte lisää"
-" lapioita uudelle varastolle saamme lisää vapaaehtoisia mukaan."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""

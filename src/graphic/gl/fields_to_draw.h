@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,8 @@ public:
 		// Surface pixel this will be plotted on.
 		Vector2f surface_pixel = Vector2f::zero();
 
+		bool obscured_by_slope;  // Whether this field is invisible due to an obstacle in front.
+
 		// Rendertarget pixel this will be plotted on. This is only different by
 		// the Rendertarget::get_rect().origin() of the view window.
 		Vector2f rendertarget_pixel = Vector2f::zero();
@@ -64,7 +66,7 @@ public:
 		int bln_index;
 		int brn_index;
 
-		inline bool all_neighbors_valid() const {
+		[[nodiscard]] inline bool all_neighbors_valid() const {
 			return ln_index != kInvalidIndex && rn_index != kInvalidIndex &&
 			       trn_index != kInvalidIndex && bln_index != kInvalidIndex &&
 			       brn_index != kInvalidIndex;
@@ -74,16 +76,16 @@ public:
 	// Reinitialize for the given view parameters.
 	void reset(const Widelands::EditorGameBase& egbase,
 	           const Vector2f& viewpoint,
-	           const float zoom,
+	           float zoom,
 	           RenderTarget* dst);
 
 	// The number of fields to draw.
-	inline size_t size() const {
+	[[nodiscard]] inline size_t size() const {
 		return fields_.size();
 	}
 
 	// Get the field at 'index' which must be in bound.
-	inline const Field& at(const int index) const {
+	[[nodiscard]] inline const Field& at(const int index) const {
 		return fields_.at(index);
 	}
 
@@ -95,7 +97,7 @@ public:
 	// Calculates the index of the given field with ('fx', 'fy') being geometric
 	// coordinates in the map. Returns INVALID_INDEX if this field is not in the
 	// fields_to_draw.
-	inline int calculate_index(int fx, int fy) const {
+	[[nodiscard]] inline int calculate_index(int fx, int fy) const {
 		if (fx < min_fx_ || fx > max_fx_ || fy < min_fy_ || fy > max_fy_) {
 			return kInvalidIndex;
 		}

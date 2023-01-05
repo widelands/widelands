@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -308,7 +308,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	tabs_.sigclicked.connect([this, all_keyboard_buttons, generate_title, fastplace_tab_index]() {
 		if (tabs_.active() == fastplace_tab_index && game_ == nullptr) {
 			game_.reset(new Widelands::Game());
-			game_->create_loader_ui({}, false, "", "", this);
+			game_->create_loader_ui({}, false, "", "", true, this);
 			game_->load_all_tribes();
 			game_->postload_addons();
 

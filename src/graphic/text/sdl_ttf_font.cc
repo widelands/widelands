@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ SdlTtfFont::SdlTtfFont(TTF_Font* font,
                        int ptsize,
                        std::string* ttf_memory_block)
    : font_(font),
-     style_(TTF_STYLE_NORMAL),
+
      font_name_(face),
      ptsize_(ptsize),
      ttf_file_memory_block_(ttf_memory_block) {

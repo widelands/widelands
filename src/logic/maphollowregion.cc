@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,11 +23,11 @@ namespace Widelands {
 template <>
 MapHollowRegion<Area<>>::MapHollowRegion(const Map& map, const HollowArea<Area<>>& hollow_area)
    : hollow_area_(hollow_area),
-     phase_(Phase::kTop),
+
      delta_radius_(hollow_area.radius - hollow_area.hole_radius),
-     row_(0),
+
      rowwidth_(hollow_area.radius + 1),
-     rowpos_(0),
+
      left_(hollow_area) {
 	assert(hollow_area.hole_radius < hollow_area.radius);
 	for (uint16_t r = hollow_area.radius; r != 0u; --r) {

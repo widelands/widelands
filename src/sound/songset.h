@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,7 @@ private:
 	uint32_t current_song_;
 
 	/// The current song
-	Mix_Music* m_;
+	Mix_Music* m_{nullptr};
 
 	/** File reader object to fetch songs from disk when they start playing.
 	 * Do not create this for each load, it's a major hassle to code.
@@ -70,7 +70,7 @@ private:
 	 * \sa fr_
 	 * \sa get_song()
 	 */
-	SDL_RWops* rwops_;
+	SDL_RWops* rwops_{nullptr};
 };
 
 #endif  // end of include guard: WL_SOUND_SONGSET_H

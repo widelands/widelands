@@ -1,18 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # nskdmitry, 2022
 # Владимир Шевцов, 2022
+# Yuriy Sokolov <lention@mail.ru>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-22 03:53+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Владимир Шевцов, 2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +49,7 @@ msgstr "Лопаты"
 msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."
-msgstr "На складе набралось более четырёх лопат для осушения болот."
+msgstr "На складе набралось ещё четыре лопаты для осушения болот."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
 msgid "Defeat Törver"
@@ -61,7 +62,7 @@ msgstr "Разгромите армии Тёрвера"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
 "Törver is the enemy in the north, who is fighting under the red banner."
-msgstr "Тёрвер - враг с севера, чем флаг красный."
+msgstr "Тёрвер - враг с севера, он сражается под красным флагом."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
@@ -76,8 +77,8 @@ msgid ""
 "We should build a port in Törver’s former land to be ready to send an "
 "expedition as soon as we found out how to build ships."
 msgstr ""
-"Нам нужен порт на бывших землях Тёрвера чтобы быть готовыми продолжить "
-"экспедицию сразу же, как сможем построить корабли."
+"Нам нужен порт на бывших землях Тёрвера чтобы быть готовыми отправить "
+"экспедицию сразу же, как научимся строить корабли."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
 msgid "Conquer pirate sentry"
@@ -145,19 +146,20 @@ msgstr "Разгромите пиратов"
 msgid ""
 "Free our neighbourhood from the pirate menace. The pirates are fighting "
 "under the grey banner."
-msgstr "Избавьте нас от соседства с пиратами под зелёным флагом."
+msgstr ""
+"Избавьте нас от пиратской угрозы. Пираты сражаются под зелёным флагом."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
-msgstr "Вызволите наших разведчиков из пиратского плена"
+msgstr "Вызволите нашего разведчика из пиратского плена"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
-msgstr "Захватите оплот на острове"
+msgstr "Захватите укрепление на острове"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
-msgstr "Именно там содержат пленных разведчиков."
+msgstr "Именно там содержат пленного разведчика."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
 msgid "Defeat Hjalmar"
@@ -171,7 +173,9 @@ msgstr "Разгромите армии Хьялмара"
 msgid ""
 "Hjalmar is the enemy north of the former pirates, who is fighting under the "
 "green banner."
-msgstr "Хьялмар - вожак пиратов, ходящих под зелёным флагом."
+msgstr ""
+"Хьялмар - враг, расположившийся к северу от бывших пиратов. Он сражается под"
+" зелёным флагом."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:88
 msgid "Defeat Runar"
@@ -185,7 +189,9 @@ msgstr "Разгромите армии Рунара"
 msgid ""
 "Runar is the enemy south-east of the former pirates, who is fighting under "
 "the yellow banner."
-msgstr "Наш юго-восточный враг Рунар - пиратский вожак под жёлтым флагом."
+msgstr ""
+"Рунар - враг расположившийся к юго-востоку от бывших пиратов, он дерётся пол"
+" жёлтым флагом."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:10
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:26
@@ -211,20 +217,21 @@ msgstr "Ваш советник"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
 msgid "Along the River"
-msgstr "Переправа через реку"
+msgstr "Вдоль реки"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
 msgid "Sire, let me inform you about the surrounding tribes."
-msgstr "Сэр, позвольте вам рассказать об окрестных племенах."
+msgstr "Сир, позвольте вам рассказать об окрестных племенах."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
-"From the north we are endangered by a belligerent tribe, led by warlord "
+"From the North we are endangered by a belligerent tribe, led by warlord "
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
-"На севере обитает воинственное племя под начальством Тёрвера, быстро "
-"пополняющего свои армии. Он очень скоро может стать нам не по зубам."
+"С севера нам угрожает воинственное племя, приведённое вождём Тервером. Они "
+"быстро наращивает свои силы. Возможно, вскоре они станут слишком сильными, "
+"чтобы их можно было победить."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -232,8 +239,8 @@ msgid ""
 "pirates, led by their insane Arvid. Their presence blocks our ways to other "
 "tribes."
 msgstr ""
-"Земля на северо-востоке стонет под гнётом орды пиратов Арвида. Он отрезает "
-"нас от пути к другим племенам."
+"Земля на северо-востоке стонет под гнётом дикой орды необузданых пиратов "
+"Арвида. Он отрезает нас от пути к другим племенам."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
 msgid ""
@@ -251,15 +258,17 @@ msgid ""
 " chieftain Hjalmar. They have had a long time of preparement to build up "
 "their deterring armies."
 msgstr ""
-"Не занятые пиратами земли принадлежат развитому племени с вождём Хьялмаром. "
-"Им хватило времени для того, чтобы собрать армию для защиты земель."
+"Не занятые пиратами земли принадлежат развитому племени, которым правит "
+"могучий вождём Хьялмар. Им хватило времени для того, чтобы собрать армию для"
+" защиты земель."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
 msgstr ""
-"Это опасное положение дел, нам нужно заняться созданием сильной армии."
+"Мы находимся в весьма опасном положении, и я советую сосредоточить наши "
+"усилия на создании сильной армии."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
@@ -268,12 +277,12 @@ msgstr "Наш северный враг"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
 "Sire, although our soldiers would face any enemy without the slightest fear,"
-" our rival in the north is still stronger than all our armies combined. We "
+" our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
-"Сэр, хоть в храбрости наших воинов нет никаких сомнений, наши враги на "
-"севере всё ещё сильнее всех наших воинств вместе взятых. Нужно избегать "
-"сражения, пока мы достаточно не окрепнем."
+"Сир, хотя наши солдаты готовы бесстрашно драться с любым врагом, ваш "
+"соперник на Севере все еще сильнее, чем все наши армии вместе взятые. Мы "
+"должны избегать конфликта до тех пор, пока не сможем победить их."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -284,15 +293,15 @@ msgstr ""
 "Тёрвера очень скверная репутация."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
-msgid "Peril from the north"
-msgstr "Северная угроза"
+msgid "Peril from the North"
+msgstr "Угроза с севера"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
 "Sire, we received an alarming message from one of our explorers. Törver is "
 "expanding his front line and approaching our territory."
 msgstr ""
-"Сэр, у нас дурные вести от разведчиков. Тёрвер расширяет фронт и движется к "
+"Сир, у нас дурные вести от разведчиков. Тёрвер расширяет фронт и движется к "
 "нашим границам."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
@@ -322,9 +331,9 @@ msgid ""
 "easily. In a desperate move Törver has called in a group of hardened "
 "mercenaries."
 msgstr ""
-"Сэр, война с Тёрвером идёт благоприятно, мы побили большую часть его армии. "
-"Тем не менее, он не так прост. Последняя надежда Тёрвера - несколько "
-"кампаний наёмников."
+"Сир, война с Тёрвером идёт благоприятно, мы побили большую часть его армии. "
+"Тем не менее, он не так прост. В отчаянии Тёрвер нанял группу закалённых в "
+"боях наёмников."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
 msgid "The great lake"
@@ -333,12 +342,12 @@ msgstr "Великое озеро"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
 "Sire, now that we have conquered the land of Törver, we can make use of "
-"their excellent access to the adjacent great lake. A port in the north will "
+"their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
-"Сэр! Теперь, когда мы завоевали земли Тёрвера, мы можем воспользоваться "
-"превосходным доступом к прилегающему к ним большому озеру. Порт на севере "
-"обеспечит нам контакт с другими племенами."
+"Сир, теперь, когда мы завоевали землю Тёрвера, для нас открылся прекрасный "
+"доступ к соседнему великому озеру. Порт на Севере даст нам больше "
+"возможностей для контактов с другими племенами."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -346,8 +355,8 @@ msgid ""
 "ships. Unfortunately, the texts are written in a language that is unknown to"
 " us. Our wise men will try to translate these descriptions."
 msgstr ""
-"В штабе Тёрвера были найдены чертежи судов. Увы, они на незнакомом нам "
-"языке. Наши мудрецы будут биться над переводом описаний."
+"В штабе Тёрвера были найдены чертежи для постройки судов. Увы, они на "
+"незнакомом нам языке. Наши мудрецы попытаются перевести их."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
@@ -371,7 +380,7 @@ msgstr ""
 "Однако, нам стоит быть на чеку, если мы хотим захватить караульную. Там "
 "могут быть еще вражеские постройки, которых отсюда не видно, а пираты "
 "известны как очень хорошие бойцы. Прежде чем мы продолжим,  лучше всего "
-"сформировать здесь сильное военное присутствие."
+"сформировать здесь сильную военную группировку."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
@@ -383,9 +392,9 @@ msgid ""
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
 "transported to our headquarters."
 msgstr ""
-"Сир, мы нашли 25 единиц золотой руды внутри пиратской сторожки. Они могли "
-"быть забраны из жилища золотодобытчиков неподалеку. Эта золотая руда будет "
-"доставлена в наш главный штаб."
+"Сир, мы нашли 25 единиц золотой руды внутри пиратской сторожки. Похоже их "
+"унесли из жилища золотоискателей расположенного поблизости. Эта золотая руда"
+" будет доставлена в наш главный штаб."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -394,10 +403,9 @@ msgid ""
 "this area. There is a good building spot only three steps away from the "
 "sentry."
 msgstr ""
-"Чтобы продолжить наше успешное освоение этой территории, нам следует "
-"построить склад в направлении юго-запада от караульной, тем самым закрепив "
-"наше расширение. Есть хорошее место под постройку, всего лишь в трех шагах "
-"от караульной."
+"Теперь, когда эта местность успешно захвачена, нам следует построить склад к"
+" юго-западу от караульной, чтобы продвинуться ещё дальше. Есть хорошее место"
+" под постройку, всего лишь в трех шагах от караульной."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
@@ -406,25 +414,25 @@ msgstr "Осушение болот"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
-"Sire, the wet season has created swamps along the brook to the east and we "
+"Sire, the wet season has created swamps along the brook to the East and we "
 "are unable to pass through them. They have to be removed before we can "
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
-"Сир, сезон дождей привел к появлению болот вдоль ручья до самого востока и "
-"мы не можем пересечь их. Они должны быть осушены, прежде чем мы продвинемся "
-"дальше. Если вы доставите достаточно лопат в новый склад, то волонтеры "
-"разберутся с болотами."
+"Сир, сезон дождей превратил берега восточного ручья в болото, и мы не сможем"
+" пройти через него. Болото нужно осушить, прежде чем мы сможем продолжить. "
+"Если вы принесете достаточно лопат на новый склад, то добровольцы осушат "
+"болота."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
-"Sire, all shovels have been handed out but if we continue at this pace than "
-"we will not have removed the swamps before the next wet season. If you bring"
-" more shovels to the new warehouse then more volunteers will join in."
+"Sire, all shovels have been handed out, but if we continue at this pace we "
+"will not have removed the swamps before the next wet season. If you bring "
+"more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
-"Сир, все лопаты были розданы, но если мы продолжим в том же темпе, то  не "
-"удалим все болота до следующего сезона дождей. Мы задействуем больше "
-"волонтеров, если вы доставите больше  лопат к новому складу."
+"Сир, все лопаты розданы, но если мы продолжим в том же темпе, мы не уберем "
+"болота до следующего сезона дождей. Если вы принесете больше лопат на новый "
+"склад, к вам присоединится больше добровольцев."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -479,7 +487,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
-msgstr "Возможности кораблестроения"
+msgstr "Технология строительства верфей"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
 msgid ""
@@ -488,12 +496,12 @@ msgid ""
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
 "Сир, после длительного изучения и исследования наши мудрецы наконец-то "
-"расшифровали необычный язык в записях Törver, которые мы нашли в его штабе. "
-"Теперь мы можем строить верфи."
+"расшифровали необычный язык в записях Тёрвера, которые мы нашли в его штабе."
+" Теперь мы можем строить верфи."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
-msgstr "Наши разведчики угодили в плен"
+msgstr "Наши разведчик угодил в плен"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
 msgid ""
@@ -502,7 +510,7 @@ msgid ""
 "towards Hjalmar."
 msgstr ""
 "Сир, один из наших разведчиков был схвачен пиратами и доставлен на их "
-"остров. Он единственный человек, который знает путь через болото к Hjalmar."
+"остров. Он единственный человек, который знает путь через болото к Хьялмару."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
@@ -512,7 +520,7 @@ msgid ""
 msgstr ""
 "Согласно донесениям нашего рыбака, он заперт в укреплении на острове. Нам "
 "следует использовать знания о постройке кораблей, которое мы получили от "
-"Törver, чтобы построить флот и атаковать их позиции."
+"Тёрвера, чтобы построить флот и атаковать их позиции."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
@@ -529,7 +537,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
-msgstr "Разведчики освобождены"
+msgstr "Разведчик освобожден"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
 msgid ""
@@ -537,15 +545,15 @@ msgid ""
 "through the swamps towards Hjalmar."
 msgstr ""
 "Сир, наш разведчик вернулся на нашу территорию и указал нам путь через "
-"болота к Hjalmar."
+"болота к Хьялмару."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
 msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
 msgstr ""
-"Он подметил, что мы также можем продвигаться вдоль другой стороны горы, в "
-"случае если здесь потерпим неудачу, но это будет намного труднее сделать."
+"Он подметил, что мы также можем перевалить через горы, в случае если здесь "
+"потерпим неудачу, но это будет намного труднее сделать."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
@@ -572,7 +580,7 @@ msgstr "Победа!"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
 msgid "Sire, my congratulations!"
-msgstr "Сэр, примите мои поздравления!"
+msgstr "Сир, примите мои поздравления!"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
 msgid ""
@@ -581,7 +589,7 @@ msgid ""
 "your loving people."
 msgstr ""
 "Вы достигли всех наших целей и разбили всех наших врагов. Вы не только "
-"подчинили речные племена, но и завоевали сердца вашего любящего народа."
+"подчинили враждебные племена, но и завоевали сердца любящего вас народа."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."

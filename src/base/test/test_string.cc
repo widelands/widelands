@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -143,6 +143,7 @@ TESTCASE(string_formatting) {
 	check_equal("A^@X", format("A%1$cX", '\0'));
 	check_equal("A^MX", format("A%cX", '\r'));
 	check_equal("A^[X", format("A%1%X", '\x1b'));
+	check_equal("W^I^D^EL^A^N^DS", format("W%sS", "\x09\x04\x05L\x01\x0E\x04"));
 
 	check_equal("AnullptrX", format("A%PX", nullptr));
 	check_equal("A0x123abcX", format("A%pX", reinterpret_cast<int*>(0x123abc)));

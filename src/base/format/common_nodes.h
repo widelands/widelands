@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 namespace format_impl {
 
 struct LiteralNode : AbstractNode {
-	LiteralNode(const std::string& str) : content_(str), len_(content_.size()) {
+	explicit LiteralNode(const std::string& str) : content_(str), len_(content_.size()) {
 	}
 
 	inline char* append(char* out, const ArgType t, Argument, bool) const override {
@@ -32,7 +32,7 @@ struct LiteralNode : AbstractNode {
 			throw wexception("Attempt to call a literal node with a value");
 		}
 		const char* it = content_.c_str();
-		for (size_t l = len_; l; --l, ++out, ++it) {
+		for (size_t l = len_; l != 0u; --l, ++out, ++it) {
 			*out = *it;
 		}
 		return out;
@@ -67,7 +67,8 @@ struct CharNode : FormatNode {
 			*out = '^';
 			*(out + 1) = '@' + arg.char_val;
 			return out + 2;
-		} else if (arg.char_val == 0x7f) {
+		}
+		if (arg.char_val == 0x7f) {
 			*out = '^';
 			*(out + 1) = '?';
 			return out + 2;

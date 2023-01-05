@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,6 +42,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdFlagAction();
 	case QueueCommandTypes::kStartStopBuilding:
 		return *new CmdStartStopBuilding();
+	case QueueCommandTypes::kToggleInfiniteProduction:
+		return *new CmdToggleInfiniteProduction();
 	case QueueCommandTypes::kEnhanceBuilding:
 		return *new CmdEnhanceBuilding();
 	case QueueCommandTypes::kBulldoze:
@@ -110,6 +112,10 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdMarkMapObjectForRemoval();
 	case QueueCommandTypes::kDiplomacy:
 		return *new CmdDiplomacy();
+	case QueueCommandTypes::kPinnedNote:
+		return *new CmdPinnedNote();
+	case QueueCommandTypes::kShipPortName:
+		return *new CmdShipPortName();
 	case QueueCommandTypes::kPickCustomStartingPosition:
 		return *new CmdPickCustomStartingPosition();
 	case QueueCommandTypes::kDeleteMessage:  // Not a logic command

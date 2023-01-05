@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 by the Widelands Development Team
+ * Copyright (C) 2022-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,12 +33,9 @@ struct InvertedScrollFeedbackWindow : public UI::Window {
 private:
 	UI::Box content_;
 	UI::MultilineTextarea header_;
-	UI::Button url_button_;
 	TechInfoBox infobox_;
 	UI::Button close_;
 };
-
-void url_button_action();
 
 }  // namespace FsMenu
 

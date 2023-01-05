@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ struct SaveWarnMessageBox;
  * Note that this window is always modal.
  */
 struct GameMainMenuSaveGame : public UI::UniqueWindow {
-	enum class Type { kSave, kLoad };
+	enum class Type { kSave, kLoadSavegame, kLoadReplay };
 
 	friend struct SaveWarnMessageBox;
 	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry, Type);
@@ -72,7 +72,7 @@ private:
 	void pause_game(bool paused);
 
 	// UI coordinates and spacers
-	int32_t const padding_;  // Common padding between panels
+	int32_t const padding_{4};  // Common padding between panels
 
 	const Type type_;
 

@@ -23,14 +23,16 @@ include "scripting/set.lua"
 
 local game = wl.Game()
 local map = game.map
-local rv = {
-   details = {},
-   flags = {},
-   roads = {},
-   buildings = {}
-}
+local rv
 
 function traverse_economy(plr, flag)
+
+   rv = {
+      details = {},
+      flags = {},
+      roads = {},
+      buildings = {}
+   }
 
    rv.details[1] = {playerno = plr.number, tribe = plr.tribe_name}
    local roads_done = Set:new{}
@@ -71,7 +73,9 @@ function traverse_economy(plr, flag)
 
    local _discover_road = function (r)
       if roads_done:contains(r) then return end
-      rv.roads[#rv.roads + 1] = {x = r.start_flag.fields[1].x, y = r.start_flag.fields[1].y, dirs = table.concat(_find_directions(r), ','), workers = r:get_workers("all")}
+      rv.roads[#rv.roads + 1] = {x = r.start_flag.fields[1].x, y = r.start_flag.fields[1].y,
+         dirs = table.concat(_find_directions(r), ','), workers = r:get_workers("all"),
+         road_type = r.road_type}
       roads_done:add(r)
    end
 
@@ -112,7 +116,7 @@ function traverse_economy(plr, flag)
 
       for idx,n in ipairs{f.rn, f.brn, f.bln, f.ln, f.tln, f.trn} do
          if n.immovable and n.immovable.owner == plr then
-            if n.immovable.descr.type_name == "road" then
+            if n.immovable.descr.type_name == "road" or n.immovable.descr.type_name == "waterway" then
                local r = n.immovable
                if r.start_flag == flag then
                   _handle_flag(r.end_flag)
@@ -124,10 +128,15 @@ function traverse_economy(plr, flag)
             elseif n.immovable.descr.type_name == "constructionsite" or n.immovable.descr.type_name == "dismantlesite" then
                print(("IGNORING constructionsite/dismantlesite at %s"):format(tostring(n)))
             elseif n.immovable.descr.type_name:sub(-4) == "site" or n.immovable.descr.type_name == "warehouse" then
-               _discover_building(n.immovable)
+               if n.immovable.descr.name == "amazons_treetop_sentry" then
+                  -- Can't be placed by lua
+                  -- Must be by name because built_over_immovable property isn't exposed to lua
+                  print("IGNORING treetop sentry")
+               else
+                  _discover_building(n.immovable)
+               end
             else
-               print("UNKNOWN immovable type: ", n.immovable.type)
-               assert(nil)
+               print("IGNORING immovable type: ", n.immovable.descr.type_name)
             end
          end
       end

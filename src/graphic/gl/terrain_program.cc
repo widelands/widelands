@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -106,19 +106,6 @@ void TerrainProgram::draw(
 			continue;
 		}
 
-		// Down triangle.
-		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
-			const Widelands::DescriptionIndex terrain =
-			   (player != nullptr) && !player->see_all() ?
-               player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.load().d :
-               field.fcoords.field->terrain_d();
-			const Vector2f texture_offset =
-			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
-			add_vertex(fields_to_draw.at(current_index), texture_offset);
-			add_vertex(fields_to_draw.at(field.bln_index), texture_offset);
-			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
-		}
-
 		// Right triangle.
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::DescriptionIndex terrain =
@@ -130,6 +117,19 @@ void TerrainProgram::draw(
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
 			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
 			add_vertex(fields_to_draw.at(field.rn_index), texture_offset);
+		}
+
+		// Down triangle.
+		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+			const Widelands::DescriptionIndex terrain =
+			   (player != nullptr) && !player->see_all() ?
+               player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.load().d :
+               field.fcoords.field->terrain_d();
+			const Vector2f texture_offset =
+			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
+			add_vertex(fields_to_draw.at(current_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.bln_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
 		}
 	}
 

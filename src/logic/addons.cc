@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@
 #include "build_info.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/profile.h"
 #include "wlapplication_options.h"
@@ -43,25 +44,29 @@ const std::unordered_map<std::string, std::string> kDifficultyIcons = {
 
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kNone,
-    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png"}},
-   {AddOnCategory::kTribes, AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
-                                              "images/wui/stats/menu_tab_wares_warehouse.png"}},
+    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false}},
+   {AddOnCategory::kTribes,
+    AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
+                      "images/wui/stats/menu_tab_wares_warehouse.png", true}},
    {AddOnCategory::kWorld, AddOnCategoryInfo{"world", []() { return _("World"); },
-                                             "images/wui/menus/toggle_immovables.png"}},
-   {AddOnCategory::kScript,
-    AddOnCategoryInfo{"script", []() { return _("Script"); }, "images/logos/WL-Editor-32.png"}},
+                                             "images/wui/menus/toggle_immovables.png", true}},
+   {AddOnCategory::kScript, AddOnCategoryInfo{"script", []() { return _("Script"); },
+                                              "images/logos/WL-Editor-32.png", true}},
    {AddOnCategory::kMaps, AddOnCategoryInfo{"maps", []() { return _("Map Set"); },
-                                            "images/wui/menus/toggle_minimap.png"}},
+                                            "images/wui/menus/toggle_minimap.png", true}},
+   {AddOnCategory::kMapGenerator,
+    AddOnCategoryInfo{"map_generator", []() { return _("Map Generator"); },
+                      "images/wui/editor/menus/new_random_map.png", false}},
    {AddOnCategory::kCampaign, AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
-                                                "images/wui/messages/messages_warfare.png"}},
+                                                "images/wui/messages/messages_warfare.png", false}},
    {AddOnCategory::kWinCondition,
-    AddOnCategoryInfo{
-       "win_condition", []() { return _("Win Condition"); }, "images/wui/menus/objectives.png"}},
+    AddOnCategoryInfo{"win_condition", []() { return _("Win Condition"); },
+                      "images/wui/menus/objectives.png", true}},
    {AddOnCategory::kStartingCondition,
     AddOnCategoryInfo{"starting_condition", []() { return _("Starting Condition"); },
-                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png"}},
-   {AddOnCategory::kTheme,
-    AddOnCategoryInfo{"theme", []() { return _("Theme"); }, "images/wui/menus/main_menu.png"}}};
+                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", true}},
+   {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
+                                             "images/wui/menus/main_menu.png", false}}};
 
 std::vector<AddOnState> g_addons;
 
@@ -254,6 +259,30 @@ unsigned count_all_dependencies(const std::string& info,
 	return deps;
 }
 
+std::string list_game_relevant_addons() {
+	std::vector<std::string> addons;
+	for (const auto& pair : AddOns::g_addons) {
+		if (pair.second && AddOns::kAddOnCategories.at(pair.first->category).network_relevant) {
+			addons.push_back(pair.first->descname());
+		}
+	}
+
+	if (addons.empty()) {
+		return as_richtext(g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		                      .as_font_tag(_("No game-relevant add-ons in use.")));
+	}
+
+	std::string addons_text =
+	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+	      .as_font_tag(format(ngettext("%u game-relevant add-on in use:",
+	                                   "%u game-relevant add-ons in use:", addons.size()),
+	                          addons.size()));
+	for (const std::string& a : addons) {
+		addons_text += as_listitem(a, UI::FontStyle::kFsMenuInfoPanelParagraph);
+	}
+	return as_richtext(addons_text);
+}
+
 AddOnCategory get_category(const std::string& name) {
 	for (const auto& pair : kAddOnCategories) {
 		if (pair.second.internal_name == name) {
@@ -281,16 +310,13 @@ double AddOnInfo::average_rating() const {
 }
 
 static bool contains_png(const std::string& dir) {
-	for (const std::string& f : g_fs->list_directory(dir)) {
+	const auto dirs = g_fs->list_directory(dir);
+	return std::any_of(dirs.begin(), dirs.end(), [](const std::string& f) {
 		if (g_fs->is_directory(f)) {
-			if (contains_png(f)) {
-				return true;
-			}
-		} else if (FileSystem::filename_ext(f) == ".png") {
-			return true;
+			return contains_png(f);
 		}
-	}
-	return false;
+		return FileSystem::filename_ext(f) == ".png";
+	});
 }
 // Rebuilding the texture atlas is required if an add-on defines new terrain, flag, or road
 // textures.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,10 +32,9 @@ public:
 	WarePriority(const WarePriority&) = default;
 	WarePriority& operator=(const WarePriority&) = default;
 
-	~WarePriority() {
-	}
+	~WarePriority() = default;
 
-	uint32_t to_weighting_factor() const {
+	[[nodiscard]] uint32_t to_weighting_factor() const {
 		return value_;
 	}
 

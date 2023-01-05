@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,12 +51,9 @@ constexpr double kTempBackupsKeepAroundTime = 24 * 60 * 60;
 
 /// Filesystem names and timeouts for replays
 const std::string kReplayDir = "replays";
-const std::string kReplayExtension = ".wrpl";
+const std::string kReplayExtension = ".wry";
 const std::string kSyncstreamExtension = ".wss";
 const std::string kSyncstreamExcerptExtension = ".wse";
-// The time in seconds for how long old replays/syncstreams should be kept
-// around, in seconds. Right now this is 4 weeks.
-constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
 
 /// Filesystem names and intervals for savegames
 const std::string kSaveDir = "save";

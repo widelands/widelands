@@ -12,6 +12,7 @@ wl.Descriptions():new_tribe {
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {8, 26} },
+      pinned_note = { hotspot = {18, 67} },
       bridge_normal_e = { hotspot = {-2, 12} },
       bridge_busy_e = { hotspot = {-2, 12} },
       bridge_normal_se = { hotspot = {5, 2} },
@@ -2204,6 +2205,135 @@ wl.Descriptions():new_tribe {
       }
    },
 
+   warehouse_names = {
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Aalkersem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Äfkebel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Ämelsbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "A Nääs"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Ārichsem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Baamst"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Beergem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Borigsem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Bousbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Bräist"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Bualigsem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Deesbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Doogebel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Dunsem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "E Hoorne"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Emst"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Fåålst"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Friedrichstääd"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Gaarding"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Haatst"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Hoorbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Hoorst"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Hörnem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Hüsem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Iibel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Imensteed"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Kååting"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Kairem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Klangsbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Kläntem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Klasbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Kuurlem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Läitjholem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Madlem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Mälst"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Mönkebel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Moosbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Muasem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Naibel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Neebel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Njiblem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Noorst"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Olersem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Odenbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Ödersem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Popenbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Raantem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Reinsbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Rikesbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Risem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Seebel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Snootebel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Söleraanj"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Strükem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Tååting"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Taning"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Teedenbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Tinem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Toorpem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Ülwelsbel"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Wiisem"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "A Wik"),
+      -- TRANSLATORS: This Frisian warehouse is named after a town in Northern Frisia
+      pgettext("warehousename", "Witjdün"),
+   },
+
    -- Productionsite status strings
 
    -- TRANSLATORS: Productivity label on a frisian building if there is 1 worker missing
@@ -2214,6 +2344,10 @@ wl.Descriptions():new_tribe {
    productionsite_workers_missing = pgettext("frisians", "Workers missing"),
    -- TRANSLATORS: Productivity label on a frisian building if there is more than 1 worker coming. If you need plural forms here, please let us know.
    productionsite_workers_coming = pgettext("frisians", "Workers are coming"),
+   -- TRANSLATORS: Productivity label on a frisian building if there is 1 experienced worker missing
+   productionsite_experienced_worker_missing = pgettext("frisians", "Expert missing"),
+   -- TRANSLATORS: Productivity label on a frisian building if there is more than 1 experienced worker missing. If you need plural forms here, please let us know.
+   productionsite_experienced_workers_missing = pgettext("frisians", "Experts missing"),
 
    -- Soldier strings to be used in Military Status strings
 

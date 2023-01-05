@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,13 +112,8 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveBase& parent,
                                                bool workarea_preview_wanted)
    : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick),
      construction_site_(&cs),
-     progress_(nullptr),
-     cs_launch_expedition_(nullptr),
-     cs_prefer_heroes_rookies_(nullptr),
-     cs_soldier_capacity_(nullptr),
-     cs_stopped_(nullptr),
-     cs_warehouse_wares_(nullptr),
-     cs_warehouse_workers_(nullptr) {
+
+     cs_prefer_heroes_rookies_(nullptr) {
 	init(avoid_fastclick, workarea_preview_wanted);
 }
 
@@ -537,17 +532,21 @@ bool ConstructionSoldierCapacityBox::handle_key(bool down, SDL_Keysym code) {
 		case ChangeType::kMinus:
 			change_current(-1);
 			return true;
+		case ChangeType::kBigPlus:
+			change_current(ChangeBigStep::kSmallRange);
+			return true;
+		case ChangeType::kBigMinus:
+			change_current(-ChangeBigStep::kSmallRange);
+			return true;
 		case ChangeType::kSetMax:
 			set_current(max_);
 			return true;
 		case ChangeType::kSetMin:
 			set_current(min_);
 			return true;
-		default:
-			break;
 		}
 	}
-	return false;
+	return UI::Box::handle_key(down, code);
 }
 bool ConstructionSoldierCapacityBox::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	if (!enabled_) {
@@ -555,7 +554,12 @@ bool ConstructionSoldierCapacityBox::handle_mousewheel(int32_t x, int32_t y, uin
 	}
 	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
 	if (change == 0) {
-		return false;
+		// Try big step
+		change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValueBig, x, y, modstate);
+		if (change == 0) {
+			return false;
+		}
+		change *= ChangeBigStep::kSmallRange;
 	}
 	change_current(change);
 	return true;

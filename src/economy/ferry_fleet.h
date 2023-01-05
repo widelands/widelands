@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2022 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,7 @@ public:
 	FerryFleetDescr(char const* const init_name, char const* const init_descname)
 	   : MapObjectDescr(MapObjectType::FERRY_FLEET, init_name, init_descname) {
 	}
-	~FerryFleetDescr() override {
-	}
+	~FerryFleetDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(FerryFleetDescr);
@@ -88,7 +87,7 @@ private:
 	std::vector<Ferry*> ferries_;
 	std::multimap<Time, Waterway*> pending_ferry_requests_;
 
-	bool act_pending_;
+	bool act_pending_{false};
 
 	// saving and loading
 protected:

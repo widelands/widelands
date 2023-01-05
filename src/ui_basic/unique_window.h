@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ class Panel;
  */
 struct UniqueWindow : public Window {
 	struct Registry {
-		UniqueWindow* window;
+		UniqueWindow* window{nullptr};
 
 		// Whenever Registry::toggle() is called, a window will be created using
 		// 'open_window' or if one is open already, the existing one will be
@@ -48,11 +48,11 @@ struct UniqueWindow : public Window {
 		void destroy() const;
 		void toggle();
 
-		int32_t x, y;
-		bool valid_pos;
+		int32_t x{0};
+		int32_t y{0};
+		bool valid_pos{false};
 
-		Registry() : window(nullptr), x(0), y(0), valid_pos(false) {
-		}
+		Registry() = default;
 		~Registry();
 	};
 
@@ -74,7 +74,7 @@ struct UniqueWindow : public Window {
 	             const std::string& title);
 	~UniqueWindow() override;
 
-	bool get_usedefaultpos() {
+	bool get_usedefaultpos() const {
 		return usedefaultpos_;
 	}
 

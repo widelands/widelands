@@ -18,6 +18,7 @@ wl.Descriptions():new_tribe {
    name = "empire",
    animation_directory = image_dirname,
    animations = {
+      pinned_note = { hotspot = {18, 67} },
       bridge_normal_e = { hotspot = {-2, 12} },
       bridge_busy_e = { hotspot = {-2, 12} },
       bridge_normal_se = { hotspot = {5, 2} },
@@ -2277,6 +2278,363 @@ wl.Descriptions():new_tribe {
       }
    },
 
+   warehouse_names = {
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Abila"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Ad Flexum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aelia Capitolina"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aeminium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aequum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Ala"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Albanianis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Ambianum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Andautonia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Apulum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aquæ Granni"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aquæ Helveticæ"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aquæ Mattiacorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aquæ Sulis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aquileia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aquincum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aræ Flaviæ"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Argentoratum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Ariminum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Ascrivium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Asturica Augusta"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Atuatuca Tungrorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Augusta Raurica"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Augusta Taurinorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Augusta Treverorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Augusta Vindelicorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aurelia Aquensis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Aventicum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Belum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Biriciana"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Blestium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Bonames"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Bonna"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Bononia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Borbetomagus"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Bovium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Bracara Augusta"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Brigantium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Burgodunum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Cæsaraugusta"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Cæsarea"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Cæsaromagus"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Calisia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Calleva Atrebatum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Camulodunum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Carnuntum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Castra Batavar"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Castra Legionis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Castra Regina"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Castra Vetera"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Cibalæ"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Clausentum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Colonia Agrippina"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Colonia Narbo Martius"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Colonia Ulpia Traiana"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Comagenis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Complutum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Concangis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Condate"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Confloenta"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Constantinopolis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Coria"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Corinium Dobunnorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Coriovallum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Cosa"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Curia Rætorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Danum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Deva Victrix"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Divodurum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Dubris"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Durnovaria"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Durocobrivis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Durocornovium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Duroliponte"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Durovigutum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Eboracum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Emerita Augusta"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Florentia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Forum Hadriani"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Forum Livii"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Gerulata"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Gerunda"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Gesoriacum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Gorsium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Hadrianopolis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Isca Augusta"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Isca Dumnoniorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Italica"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Iulia Aemona"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Iulia Romula Hispalis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Iuvavum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lactodurum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lagentium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lauri"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lentia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Letocetum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lindinis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lindum Colonia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Londinium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lopodunum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lousonna"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lucus Augusta"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lugdunum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lugdunum Batavorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Luguvalium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Lutetia Parisiorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Mamucium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Marsonia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Massa"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Matilo"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Mediolanum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Modoetia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Mogontiacum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Moridunum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Mursa"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Naissus"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Nemausus"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Nicopolis ad Istrum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Nicopolis ad Nestum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Nida"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Nigrum Pullum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Norba Cæsarina"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Novæ"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Novæsium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Noviodunum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Noviomagus"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Olicana"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Ovilava"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Palma"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Partiscum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Pistoria"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Placentia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Poetovium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Pomaria"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Pompælo"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Pompeii"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Pons Aelius"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Pons Drusi"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Portus Lemanis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Prætorium Agrippinæ"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Ragusium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Ratæ Corieltauvorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Regium Lepidi"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Regulbium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Rigomagus"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Roma"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Rutupiæ"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Salernum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Salona"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Savaria"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Scalabis"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Singidunum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Sirmium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Siscia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Sopiane"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Sorviodurum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Sostra"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Storgosia"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Sumelocenna"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Tarraco"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Theranda"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Tibiscum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Traiectum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Traiectum ad Mosam"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Traiectum ad Nicrem"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Turicum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Urbs Aurelianorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Valentia Edetanorum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Venetiæ"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Venta Belgarum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Venta Silurum"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Verulamium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Vesontio"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Viminacium"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Vindobona"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Vindonissa"),
+      -- TRANSLATORS: This Empire warehouse is named after a Roman town
+      pgettext("warehousename", "Vinovia"),
+   },
+
    -- Productionsite status strings
 
    -- TRANSLATORS: Productivity label on an empire building if there is 1 worker missing
@@ -2287,6 +2645,10 @@ wl.Descriptions():new_tribe {
    productionsite_workers_missing = pgettext("empire", "Workers missing"),
    -- TRANSLATORS: Productivity label on an empire building if there is more than 1 worker coming. If you need plural forms here, please let us know.
    productionsite_workers_coming = pgettext("empire", "Workers are coming"),
+   -- TRANSLATORS: Productivity label on an empire building if there is 1 experienced worker missing
+   productionsite_experienced_worker_missing = pgettext("empire", "Expert missing"),
+   -- TRANSLATORS: Productivity label on an empire building if there is more than 1 experienced worker missing. If you need plural forms here, please let us know.
+   productionsite_experienced_workers_missing = pgettext("empire", "Experts missing"),
 
    -- Soldier strings to be used in Military Status strings
 

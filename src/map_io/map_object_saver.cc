@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,21 +28,6 @@
 #include "logic/map_objects/tribes/battle.h"
 
 namespace Widelands {
-
-MapObjectSaver::MapObjectSaver()
-   : nr_roads_(0),
-     nr_waterways_(0),
-     nr_flags_(0),
-     nr_buildings_(0),
-     nr_bobs_(0),
-     nr_wares_(0),
-     nr_immovables_(0),
-     nr_battles_(0),
-     nr_ship_fleets_(0),
-     nr_ferry_fleets_(0),
-     nr_portdocks_(0),
-     lastserial_(0) {
-}
 
 /**
  * Return a pointer to the record for the given object.

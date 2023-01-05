@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,6 +75,12 @@ std::string as_mapobject_message(const std::string& image,
                                  const std::string& txt,
                                  const RGBColor* player_color = nullptr);
 std::string as_message(const std::string& heading, const std::string& body);
+
+std::string
+as_url_hyperlink(const std::string& url, const std::string& text, const std::string& mouseover);
+inline std::string as_url_hyperlink(const std::string& url) {
+	return as_url_hyperlink(url, url, url);
+}
 
 void newlines_to_richtext(std::string&);
 

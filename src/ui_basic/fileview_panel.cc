@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
 namespace UI {
 
 FileViewPanel::FileViewPanel(Panel* parent, TabPanelStyle background_style)
-   : TabPanel(parent, background_style), padding_(5), contents_width_(0), contents_height_(0) {
+   : TabPanel(parent, background_style) {
 	layout();
 
 	sigclicked.connect([this]() { load_tab_contents(); });

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -179,7 +179,8 @@ struct LanGameFinder : LanBase {
 private:
 	std::list<std::unique_ptr<NetOpenGame>> opengames;
 
-	void (*callback)(int32_t, const NetOpenGame* const, void*);
+	void (*callback)(int32_t, const NetOpenGame* const, void*)  // linebreak to make codecheck happy
+	   {nullptr};
 	void* userdata;
 };
 

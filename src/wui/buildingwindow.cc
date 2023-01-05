@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,9 +118,12 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	avoid_fastclick_ = avoid_fastclick;
 
 	vbox_.reset(new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical));
+	set_center_panel(vbox_.get());  // Must be set immediately after deleting the old vbox, if any
 
 	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight);
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
+
+	setup_name_field_editbox(*vbox_);
 
 	capsbuttons_ = new UI::Box(vbox_.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	vbox_->add(capsbuttons_, UI::Box::Resizing::kFullSize);
@@ -128,7 +131,6 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
 
-	set_center_panel(vbox_.get());
 	set_thinks(true);
 	set_fastclick_panel(this);
 	if (workarea_preview_wanted) {
@@ -276,6 +278,23 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
                _("Stop"));
 			stopbtn->sigclicked.connect([this]() { act_start_stop(); });
 			capsbuttons->add(stopbtn);
+
+			if (productionsite->descr().is_infinite_production_useful()) {
+				UI::Button* infbtn = new UI::Button(
+				   capsbuttons,
+				   productionsite->infinite_production() ? "end_produce_infinite" : "produce_infinite",
+				   0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+				   g_image_cache->get((productionsite->infinite_production() ?
+                                      "images/wui/menus/end_infinity.png" :
+                                      "images/wui/menus/infinity.png")),
+				   productionsite->infinite_production() ?
+                  /** TRANSLATORS: Infinite Production toggle button for production sites. */
+                  _("Stop producing indefinitely") :
+                  /** TRANSLATORS: Infinite Production toggle button for production sites. */
+                  _("Produce indefinitely regardless of the economy’s needs"));
+				infbtn->sigclicked.connect([this]() { act_produce_infinite(); });
+				capsbuttons->add(infbtn);
+			}
 
 			// Add a fixed width separator rather than infinite space so the
 			// enhance/destroy/dismantle buttons are fixed in their position
@@ -496,6 +515,27 @@ void BuildingWindow::act_start_stop() {
 			game_->send_player_start_stop_building(*building);
 		} else {
 			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+		}
+	}
+}
+
+/**
+===============
+Callback for toggling the production site's infinite production mode
+===============
+*/
+void BuildingWindow::act_produce_infinite() {
+	Widelands::Building* building = building_.get(parent_->egbase());
+	if (building == nullptr) {
+		return;
+	}
+
+	if (building->descr().type() >= Widelands::MapObjectType::PRODUCTIONSITE) {
+		if (game_ != nullptr) {
+			game_->send_player_toggle_infinite_production(*building);
+		} else {
+			Widelands::ProductionSite& ps = dynamic_cast<Widelands::ProductionSite&>(*building);
+			ps.set_infinite_production(!ps.infinite_production());
 		}
 	}
 }

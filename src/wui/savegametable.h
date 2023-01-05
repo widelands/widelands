@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,7 +79,7 @@ public:
 	void set_show_filenames(bool show_filenames) override;
 
 private:
-	bool show_filenames_;
+	bool show_filenames_{false};
 	void add_columns() override;
 	void create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
 	                        const SavegameData& savegame) override;

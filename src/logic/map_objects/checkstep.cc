@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,14 +36,14 @@ CheckStep::CheckStep() : capsule(always_false().capsule) {
 }
 
 struct CheckStepAlwaysFalse {
-	bool allowed(const Map& /* map */,
-	             const FCoords& /* start */,
-	             const FCoords& /* end */,
-	             int32_t /* dir */,
-	             CheckStep::StepId /* id */) const {
+	[[nodiscard]] bool allowed(const Map& /* map */,
+	                           const FCoords& /* start */,
+	                           const FCoords& /* end */,
+	                           int32_t /* dir */,
+	                           CheckStep::StepId /* id */) const {
 		return false;
 	}
-	bool reachable_dest(const Map& /* map */, const FCoords& /* dest */) const {
+	[[nodiscard]] bool reachable_dest(const Map& /* map */, const FCoords& /* dest */) const {
 		return false;
 	}
 };
@@ -62,21 +62,16 @@ bool CheckStepAnd::allowed(const Map& map,
                            const FCoords& end,
                            int32_t const dir,
                            CheckStep::StepId const id) const {
-	for (const CheckStep& checkstep : subs) {
-		if (!checkstep.allowed(map, start, end, dir, id)) {
-			return false;
-		}
-	}
-	return true;
+	return std::all_of(
+	   subs.begin(), subs.end(), [&map, &start, &end, dir, id](const CheckStep& cstep) {
+		   return cstep.allowed(map, start, end, dir, id);
+	   });
 }
 
 bool CheckStepAnd::reachable_dest(const Map& map, const FCoords& dest) const {
-	for (const CheckStep& checkstep : subs) {
-		if (!checkstep.reachable_dest(map, dest)) {
-			return false;
-		}
-	}
-	return true;
+	return std::all_of(subs.begin(), subs.end(), [&map, &dest](const CheckStep& cstep) {
+		return cstep.reachable_dest(map, dest);
+	});
 }
 
 /*

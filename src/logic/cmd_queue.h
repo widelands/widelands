@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,9 +67,9 @@ struct Command {
 	virtual ~Command() = default;
 
 	virtual void execute(Game&) = 0;
-	virtual QueueCommandTypes id() const = 0;
+	[[nodiscard]] virtual QueueCommandTypes id() const = 0;
 
-	const Time& duetime() const {
+	[[nodiscard]] const Time& duetime() const {
 		return duetime_;
 	}
 	void set_duetime(const Time& t) {
@@ -115,11 +115,11 @@ class CmdQueue {
 		bool operator<(const CmdItem& c) const {
 			if (cmd->duetime() != c.cmd->duetime()) {
 				return cmd->duetime() > c.cmd->duetime();
-			} else if (category != c.category) {
-				return category > c.category;
-			} else {
-				return serial > c.serial;
 			}
+			if (category != c.category) {
+				return category > c.category;
+			}
+			return serial > c.serial;
 		}
 	};
 
@@ -140,8 +140,8 @@ public:
 
 private:
 	Game& game_;
-	uint32_t nextserial_;
-	uint32_t ncmds_;
+	uint32_t nextserial_{0};
+	uint32_t ncmds_{0};
 	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
 	CommandsContainer cmds_;
 };

@@ -84,6 +84,7 @@ wl_library(wui_common_gamedetails
     base
     base_macros
     base_time_string
+    build_info
     game_io
     graphic
     graphic_image_cache
@@ -130,15 +131,6 @@ wl_library(wui_common_mapdetails
     map_io_map_loader
     ui_basic
     wui_common_suggested_teams
-)
-
-wl_library(wui_quicknavigation
-  SRCS
-    quicknavigation.cc
-    quicknavigation.h
-  DEPENDS
-    widelands_options
-    wui_mapview
 )
 
 wl_library(wui_mapview
@@ -261,12 +253,16 @@ wl_library(wui
     militarysitewindow.h
     minimap.cc
     minimap.h
+    pinned_note.cc
+    pinned_note.h
     plot_area.cc
     plot_area.h
     portdockwaresdisplay.cc
     portdockwaresdisplay.h
     productionsitewindow.cc
     productionsitewindow.h
+    quicknavigation.cc
+    quicknavigation.h
     seafaring_statistics_menu.cc
     seafaring_statistics_menu.h
     shipwindow.cc
@@ -308,6 +304,7 @@ wl_library(wui
     economy
     game_io
     graphic
+    graphic_animation
     graphic_color
     graphic_fonthandler
     graphic_game_renderer
@@ -348,7 +345,6 @@ wl_library(wui
     wui_common_gamedetails
     wui_mapview
     wui_mapview_pixelfunctions
-    wui_quicknavigation
     wui_sound_options
     wui_waresdisplay
 )

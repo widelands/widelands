@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -7,7 +7,7 @@
 # nskdmitry, 2021
 # Максим Дронь <dronmax@gmail.com>, 2015
 # Viktor S <awsswa59@gmail.com>, 2020
-# Yuriy Sokolov <lention@mail.ru>, 2015
+# Yuriy Sokolov <lention@mail.ru>, 2015,2022
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
 # Денис Шабанов <shadenis2015@gmail.com>, 2016
@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-13 02:42+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: nskdmitry, 2021\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -239,7 +239,7 @@ msgstr "Скалы 6"
 #: ../../data/world/immovables/standing_stones/standing_stone6/init.lua:7
 #: ../../data/world/immovables/standing_stones/standing_stone7/init.lua:7
 msgid "Standing Stone"
-msgstr "Скала"
+msgstr "Стоячий камень"
 
 #: ../../data/world/immovables/trees/alder/mature/init.lua:9
 msgid "Alder (Mature)"
@@ -382,27 +382,27 @@ msgstr "Лиственница (молодняк)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/mature/init.lua:10
 msgid "Liana Tree (Mature)"
-msgstr "Лиана (спелая)"
+msgstr "Лианодрев (спелый)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/old/init.lua:10
 msgid "Liana Tree (Old)"
-msgstr "Лиана (старая)"
+msgstr "Лианодрев (старый)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/old/init.lua:12
 msgid "Liana Tree"
-msgstr "Лиана"
+msgstr "Лианодрев"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/pole/init.lua:10
 msgid "Liana Tree (Pole)"
-msgstr "Лиана (средневозрастная)"
+msgstr "Лианодрев (средневозрастная)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/sapling/init.lua:10
 msgid "Liana Tree (Sapling)"
-msgstr "Лиана (молодняк)"
+msgstr "Лианодрев (молодняк)"
 
 #: ../../data/world/immovables/trees/maple/mature/init.lua:9
 msgid "Maple (Mature)"
@@ -761,7 +761,7 @@ msgstr "Артефакты"
 
 #: ../../data/world/init.lua:207
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "Эти статичные объекты используются в условиях победы \"Артефакты\"."
+msgstr "Эти объекты используются в условиях победы \"Артефакты\"."
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../data/world/init.lua:220
@@ -965,7 +965,7 @@ msgstr "Снег"
 
 #: ../../data/world/terrains/summer/steppe_barren/init.lua:5
 msgid "Barren Steppe"
-msgstr "Песчаная степь"
+msgstr "Бесплодная степь"
 
 #: ../../data/world/terrains/summer/swamp/init.lua:5
 msgid "Swamp"

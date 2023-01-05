@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
@@ -7,7 +7,7 @@
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2018,2020
-# LINUX SAUNA, 2022
+# LINUX-SAUNA, 2022
 # Oi Suomi On! <oisuomion@protonmail.com>, 2022
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-28 03:54+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: LINUX SAUNA, 2022\n"
+"Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

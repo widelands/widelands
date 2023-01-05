@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
 
 namespace Widelands {
 class Game;
-}
+}  // namespace Widelands
 
 namespace FsMenu {
 
@@ -75,7 +75,7 @@ enum class MenuTarget {
  */
 class MainMenu : public UI::Panel {
 public:
-	explicit MainMenu(const bool skip_init = false);
+	explicit MainMenu(bool skip_init = false);
 
 	// Internet login stuff
 	void show_internet_login(bool modal = false);
@@ -133,16 +133,18 @@ private:
 	uint32_t init_time_;
 
 	std::vector<std::string> images_;
-	uint32_t last_image_exchange_time_;
-	size_t draw_image_, last_image_;
+	uint32_t last_image_exchange_time_{0U};
+	size_t draw_image_{0U};
+	size_t last_image_{0U};
 	Rectf image_pos(const Image&, bool crop = true);
 	Rectf title_pos();
 	float calc_opacity(uint32_t time) const;
 
-	bool visible_;
+	bool visible_{true};
 	void set_button_visibility(bool);
 
 	void action(MenuTarget);
+	void exit(bool force = false);
 	bool check_desyncing_addon();
 
 	MenuCapsule menu_capsule_;
@@ -153,7 +155,7 @@ private:
 	// Values from internet login window
 	std::string nickname_;
 	std::string password_;
-	bool auto_log_;
+	bool auto_log_{false};
 	bool register_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>

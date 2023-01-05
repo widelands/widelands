@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,8 +30,7 @@ WarehouseSupply is the implementation of Supply that is used by Warehouses.
 It also manages the list of wares in the warehouse.
 */
 struct WarehouseSupply : public Supply {
-	explicit WarehouseSupply(Warehouse* const wh)
-	   : ware_economy_(nullptr), worker_economy_(nullptr), warehouse_(wh) {
+	explicit WarehouseSupply(Warehouse* const wh) : warehouse_(wh) {
 	}
 	~WarehouseSupply() override;
 
@@ -40,16 +39,16 @@ struct WarehouseSupply : public Supply {
 	void set_nrworkers(DescriptionIndex);
 	void set_nrwares(DescriptionIndex);
 
-	const WareList& get_wares() const {
+	[[nodiscard]] const WareList& get_wares() const {
 		return wares_;
 	}
-	const WareList& get_workers() const {
+	[[nodiscard]] const WareList& get_workers() const {
 		return workers_;
 	}
-	Quantity stock_wares(DescriptionIndex const i) const {
+	[[nodiscard]] Quantity stock_wares(DescriptionIndex const i) const {
 		return wares_.stock(i);
 	}
-	Quantity stock_workers(DescriptionIndex const i) const {
+	[[nodiscard]] Quantity stock_workers(DescriptionIndex const i) const {
 		return workers_.stock(i);
 	}
 	void add_wares(DescriptionIndex, Quantity count);
@@ -59,19 +58,19 @@ struct WarehouseSupply : public Supply {
 
 	// Supply implementation
 	PlayerImmovable* get_position(Game&) override;
-	bool is_active() const override;
+	[[nodiscard]] bool is_active() const override;
 	SupplyProviders provider_type(Game*) const override;
-	bool has_storage() const override;
+	[[nodiscard]] bool has_storage() const override;
 	void get_ware_type(WareWorker& type, DescriptionIndex& ware) const override;
 
 	void send_to_storage(Game&, Warehouse* wh) override;
-	uint32_t nr_supplies(const Game&, const Request&) const override;
+	[[nodiscard]] uint32_t nr_supplies(const Game&, const Request&) const override;
 	WareInstance& launch_ware(Game&, const Request&) override;
 	Worker& launch_worker(Game&, const Request&) override;
 
 private:
-	Economy* ware_economy_;
-	Economy* worker_economy_;
+	Economy* ware_economy_{nullptr};
+	Economy* worker_economy_{nullptr};
 	WareList wares_;
 	WareList workers_;  //  we use this to keep the soldiers
 	Warehouse* warehouse_;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,11 +27,10 @@ namespace FsMenu {
 
 RandomGame::RandomGame(MenuCapsule& m)
    : TwoColumnsFullNavigationMenu(m, _("New Random Game")),
-     menu_(left_column_box_, UI::PanelStyle::kFsMenu, 350, 64, 64),
+     menu_(left_column_box_, UI::PanelStyle::kFsMenu, 350, 64, 64, ok_, back_),
      icon_(&right_column_content_box_,
            UI::PanelStyle::kFsMenu,
-           g_image_cache->get("images/logos/wl-ico-128.png")),
-     progress_window_(nullptr) {
+           g_image_cache->get("images/logos/wl-ico-128.png")) {
 	m.set_visible(false);
 
 	{  // Do this first to prevent crashes with incompatible add-on types
@@ -52,6 +51,7 @@ RandomGame::RandomGame(MenuCapsule& m)
 		die();
 		return;
 	}
+	game_->logic_rand_seed(RNG::static_rand());
 	m.set_visible(true);
 
 	left_column_box_.add_inf_space();
@@ -100,7 +100,7 @@ RandomGame::~RandomGame() {
 void RandomGame::reactivated() {
 	if (progress_window_ == nullptr) {
 		progress_window_ =
-		   &game_->create_loader_ui({"general_game", "singleplayer"}, false, "", "", &capsule_);
+		   &game_->create_loader_ui({"general_game", "singleplayer"}, false, "", "", true, &capsule_);
 		progress_window_->set_visible(false);
 	}
 }

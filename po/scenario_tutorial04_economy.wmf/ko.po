@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2018
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
 "Last-Translator: TaeMin An, 2017\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -763,7 +763,9 @@ msgstr "이 창은 당신의 아무 깃발이나 클릭해서 접근할 수 있�
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:480
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
 msgid "Economy options"
 msgstr "경제 옵션"
 
@@ -819,36 +821,72 @@ msgid ""
 "available and both farms would have been able to start working right away."
 msgstr "두 개의 농장을 짓는다면, 하나만 즉시 일을 시작할 겁니다. 두번째 농장은 낫이 부족하기 때문에, 일꾼을 기다려야만 할 겁니다. 이전에 목표 양을 2로 설정하셨다면, 두 자루의 낫이 이용가능했을 것이고, 두 농장 모두 바로 일을 시작할 수 있었을 겁니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+msgid ""
+"Stockpiling wares is a double-edged sword. On the one hand, wares in stock "
+"are useful to buffer temporary fluctuations in your economy, which tend to "
+"occur all the time. On the other hand, any ware that is sitting around in a "
+"warehouse instead of being processed into something else is wasted. Finding "
+"the balance between wasteful stockpiling and just-in-time production in your"
+" supply chains is one of most profound challenges of perfecting your "
+"economy. When in doubt, lean towards having some extra reserves."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+msgid ""
+"To ease the process of switching between different economic situations, you "
+"can save and apply economy profiles at the bottom of the economy options "
+"window. A profile for stockpiling and one for efficiency are preset there."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+msgid ""
+"Most of the time, the economy options are a useful tool to ensure that "
+"resources are not wasted to produce wares your economy does not actually "
+"need. However, sometimes it can be useful to stockpile a ware in very large "
+"quantities. To achieve this, the economy options window allows you to set "
+"the target of a ware to infinite, so that it will always be produced."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
+msgid ""
+"The same button can also be found in the building window of production "
+"sites. There, it causes only this one site to produce indefinitely, "
+"regardless of the economy settings. This can be useful to arrange, for "
+"example, that more building materials are produced near the border even if "
+"there are plenty in stock far away in your homeland."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 msgid "Produce 20 marble columns"
 msgstr "20개의 대리석 기둥을 생산하기"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:516
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
 msgstr "추가적으로 요새화를 준비하기 위해, 20개의 대리석 기둥을 생산하셔야 합니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
 msgstr "석공은 필요없는 대리석 기둥을 생산하지 않을 것입니다. 목표 양을 증가시켜야 합니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
 msgstr "그럴려면, 아무 깃발이나 누르고 ‘경제 구성’ 을 선택하십시오. 이 창에서, 당신은 각 유형의 물품을 얼마나 많이 재고로 남길 지 결정할 수 있습니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
 msgstr "때때로, 같은 시간에 많은 물품이 급하게 필요할 겁니다 - 생산되는 것보다 더 빨리 말입니다. 이런 경우에는, 예비품을 충분히 갖는 것이 좋습니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:527
 msgid ""
 "By changing the target quantity, you can therefore decide which wares/tools "
 "your resources (in this case: iron) should be turned into or whether you "
@@ -856,86 +894,86 @@ msgid ""
 "for."
 msgstr "목표 양을 바꿈으로써, 어떤 물품/도구로 당신 자원들을 (이 경우에는: 철) 바꿀지 아니면 철을 아끼고 그것이 쓰일 무언가에 대해 알도록 기다릴지 결정할 수 있습니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:528
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
 msgstr "오직 물품을 소모하는 건물만이 이 설정에 좌우됩니다. 공짜로 물품을 생산하는 건물들은 (예로 농장이나 우물) 언제나 계속 일을 할 겁니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
 msgstr "이제 한 번 시도해봅시다: 대리석 기둥의 현재 목표 양은 10입니다. 당신의 요새화를 빠르게 진행할 준비를 갖출 수 있도록 증가시켜봅시다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
 msgid "Bring 20 marble columns to the front line"
 msgstr "20개의 대리석 기둥을 전방에 가져다 놓기"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:522
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:540
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
 msgstr "20 개의 대리석 기둥을 모두 최전선 근처의 창고로 가져다 놓으십시오."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
 msgstr "그렇게 하려면, 두 가지 일을 해야 합니다. 먼저, 대리석 기둥을 원하는 창고에서 선호도를 설정하십시오. 이후에 생산될 모든 대리석 기둥은 가능한 한 그곳으로 운반될 겁니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
 msgstr "그리고 나서, 본부의 대리석 기둥을 이동시키려면, 제거 버튼을 클릭하셔야 합니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:550
 msgid "Warehouse Preferences"
 msgstr "창고 선호도"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:534
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Bring the marble columns to the front line"
 msgstr "대리석 기둥을 전방에 가져다 놓으십시오"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:536
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
 msgstr "대리석 기둥 생산이 잘 이루어지고 있습니다만, 우리가 필요로 하는 곳에 저장이 된다면 더 좋을 겁니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:555
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
 msgstr "일반적으로, 생산한 물품은 어딘가에서 필요로 하지 않으면 가장 가까운 창고로 갑니다. 이 경우에는, 본부를 의미합니다. 하지만 우리는 요새들 근처의 창고에 저장하고 싶습니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:538
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
 msgstr "모든 창고들에는 선호도를 설정할 네 개의 버튼이 있습니다. 마우스 포인터를 그것들 위로 움직이면, 버튼들의 역할을 설명할 간단한 팁을 확인할 수 있습니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:562
 msgid "Borders Secured"
 msgstr "경계가 보호됩니다"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:546
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
 msgid "We’re safe now"
 msgstr "우리는 이제 안전합니다"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:548
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
 msgstr "훌륭합니다. 우리는 이제 충분한 대리석 기둥을 확보했고 공격자에 대비해서, 요새화를 진행할 수 있습니다. 하지만 그게 필요할 거라고 생각지는 않습니다. 그 이유는, 적이 없기 때문입니다."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:549
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
 "I hope I could teach you how you can control the economy in Widelands. There"
 " are many options and they can be confusing at first. Even if you’ve only "
@@ -944,7 +982,7 @@ msgid ""
 "this tutorial and learn the rest!"
 msgstr "저는 와이드랜드 에서 경제를 어떻게 제어하는지 당신에게 알려줄 수 있기를 바랍니다. 많은 옵션이 있기에 처음에는 헷갈릴 수 있습니다. 아직 개념의 일부만 이해하셨을지라도, 포기하시면 안 됩니다. 게임 몇 판을 시도해서, 그것들에 익숙해지고 익힌 것들을 경험하십시오. 그리고 나서, 자습서로 돌아와 나머지 것들을 배우십시오!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:551
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"

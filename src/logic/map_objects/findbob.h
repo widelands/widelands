@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2022 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,7 @@ struct FindBobAttribute : public FindBob {
 	bool accept(Bob*) const override;
 
 	uint32_t attrib;
-	~FindBobAttribute() override {
-	}  // make gcc shut up
+	~FindBobAttribute() override = default;  // make gcc shut up
 };
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,10 +24,7 @@
 
 namespace Widelands {
 
-Pathfields::Pathfields(uint32_t const nrfields) : fields(new Pathfield[nrfields]), cycle(0) {
-}
-
-PathfieldManager::PathfieldManager() : nrfields_(0) {
+Pathfields::Pathfields(uint32_t const nrfields) : fields(new Pathfield[nrfields]) {
 }
 
 void PathfieldManager::set_size(uint32_t const nrfields) {

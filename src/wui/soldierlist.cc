@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,6 +92,7 @@ private:
 		/*@{*/
 		uint32_t cache_level = 0;
 		uint32_t cache_health = 0;
+		bool cache_is_present = false;
 		/*@}*/
 	};
 
@@ -109,22 +110,21 @@ private:
 	int icon_width_;
 	int icon_height_;
 
-	int32_t last_animate_time_;
+	int32_t last_animate_time_{0};
 };
 
 SoldierPanel::SoldierPanel(UI::Panel& parent,
                            Widelands::EditorGameBase& gegbase,
                            Widelands::Building& building)
-   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
-     egbase_(gegbase),
-     building_(&building),
-     last_animate_time_(0) {
+   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0), egbase_(gegbase), building_(&building) {
 	assert(building.soldier_control() != nullptr);
 	Soldier::calc_info_icon_size(building.owner().tribe(), icon_width_, icon_height_);
 	icon_width_ += 2 * kIconBorder;
 	icon_height_ += 2 * kIconBorder;
 
-	Widelands::Quantity maxcapacity = building.soldier_control()->max_soldier_capacity();
+	/* The +1 is because up to 1 additional soldier may be coming
+	 * to the building for the hero/rookie exchange. */
+	const Widelands::Quantity maxcapacity = building.soldier_control()->max_soldier_capacity() + 1;
 	if (maxcapacity <= kMaxColumns) {
 		cols_ = maxcapacity;
 		rows_ = 1;
@@ -140,7 +140,7 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 	// Initialize the icons
 	uint32_t row = 0;
 	uint32_t col = 0;
-	for (Soldier* soldier : building.soldier_control()->present_soldiers()) {
+	for (Soldier* soldier : building.soldier_control()->associated_soldiers()) {
 		Icon icon;
 		icon.soldier = soldier;
 		icon.row = row;
@@ -148,6 +148,7 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 		icon.pos = calc_pos(row, col);
 		icon.cache_health = 0;
 		icon.cache_level = 0;
+		icon.cache_is_present = building.is_present(*soldier);
 		icons_.push_back(icon);
 
 		if (++col >= cols_) {
@@ -181,7 +182,7 @@ void SoldierPanel::think() {
 	uint32_t capacity = b->soldier_control()->soldier_capacity();
 
 	// Update soldier list and target row/col:
-	std::vector<Soldier*> soldierlist = b->soldier_control()->present_soldiers();
+	std::vector<Soldier*> soldierlist = b->soldier_control()->associated_soldiers();
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(rows_);
 
@@ -272,10 +273,13 @@ void SoldierPanel::think() {
 		level = level * (soldier->descr().get_max_health_level() + 1) + soldier->get_health_level();
 
 		uint32_t health = soldier->get_current_health();
+		bool present = b->is_present(*soldier);
 
-		if (health != icon.cache_health || level != icon.cache_level) {
+		if (health != icon.cache_health || level != icon.cache_level ||
+		    present != icon.cache_is_present) {
 			icon.cache_level = level;
 			icon.cache_health = health;
+			icon.cache_is_present = present;
 			changes = true;
 		}
 	}
@@ -315,6 +319,12 @@ void SoldierPanel::draw(RenderTarget& dst) {
 		constexpr float kNoZoom = 1.f;
 		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom,
 		                        Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
+
+		if (!icon.cache_is_present) {
+			// Since the background is black, darkening the icon has the same effect
+			// as drawing it with partial transparency but is easier to achieve.
+			dst.brighten_rect(Recti(icon.pos, icon_width_, icon_height_), -128);
+		}
 	}
 }
 
@@ -382,7 +392,7 @@ private:
 
 	InteractiveBase& ibase_;
 	Widelands::Building& building_;
-	const UI::FontStyle font_style_;
+	const UI::FontStyle font_style_{UI::FontStyle::kWuiLabel};
 	SoldierPanel soldierpanel_;
 	UI::Radiogroup soldier_preference_;
 	UI::Textarea infotext_;
@@ -395,7 +405,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 
      ibase_(ib),
      building_(building),
-     font_style_(UI::FontStyle::kWuiLabel),
+
      soldierpanel_(*this, ib.egbase(), building),
      infotext_(
         this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Click soldier to send away")) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2022 by the Widelands Development Team
+ * Copyright (C) 2017-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -143,7 +143,7 @@ private:
 	UI::Button scouting_btn_;
 	UI::Button portspace_btn_;
 	UI::Button shipping_btn_;
-	ShipFilterStatus ship_filter_;
+	ShipFilterStatus ship_filter_{ShipFilterStatus::kAll};
 	// Navigation buttons
 	UI::Box navigation_box_;
 	UI::Button watchbtn_;

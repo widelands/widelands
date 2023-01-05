@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -148,8 +148,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
                                const std::vector<std::string>& attribs,
                                Descriptions& descriptions)
    : MapObjectDescr(MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
-     descriptions_(descriptions),
-     size_(BaseImmovable::NONE) {
+     descriptions_(descriptions) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", name().c_str());
 	}
@@ -328,16 +327,7 @@ IMPLEMENTATION
 
 Immovable::Immovable(const ImmovableDescr& imm_descr,
                      const Widelands::BuildingDescr* former_building_descr)
-   : BaseImmovable(imm_descr),
-     former_building_descr_(former_building_descr),
-     anim_(0),
-     animstart_(0),
-     program_(nullptr),
-     program_ptr_(0),
-     anim_construction_total_(0),
-     anim_construction_done_(0),
-     program_step_(0),
-     growth_delay_(0) {
+   : BaseImmovable(imm_descr), former_building_descr_(former_building_descr) {
 }
 
 BaseImmovable::PositionList Immovable::get_positions(const EditorGameBase& /* egbase */) const {
@@ -812,8 +802,7 @@ PlayerImmovable IMPLEMENTATION
 /**
  * Zero-initialize
  */
-PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
-   : BaseImmovable(mo_descr), ware_economy_(nullptr), worker_economy_(nullptr) {
+PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr) : BaseImmovable(mo_descr) {
 }
 
 /**

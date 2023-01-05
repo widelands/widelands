@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,6 +87,8 @@ std::unique_ptr<MutableAddOn> MutableAddOn::create_mutable_addon(const AddOnInfo
 		return std::unique_ptr<ScriptAddon>(new ScriptAddon(a));
 	case AddOnCategory::kMaps:
 		return std::unique_ptr<MapsAddon>(new MapsAddon(a));
+	case AddOnCategory::kMapGenerator:
+		return std::unique_ptr<MapGenAddon>(new MapGenAddon(a));
 	case AddOnCategory::kCampaign:
 		return std::unique_ptr<CampaignAddon>(new CampaignAddon(a));
 	case AddOnCategory::kWinCondition:

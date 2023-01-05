@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-25 02:57+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
 "Last-Translator: Willian Francisco Urbano, 2022\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
@@ -395,8 +395,8 @@ msgid "Using the Minimap"
 msgstr "Usando o Mini-mapa"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:274
-msgid "Very good. And now about the minimap. "
-msgstr "Muito bom.  E agora sobre o mini-mapa."
+msgid "Very good. And now about the minimap."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #, lua-format
@@ -661,20 +661,20 @@ msgstr "Construir uma segunda pedreira"
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr ""
+msgstr "Quando há muitas rochas, você pode considerar a construção de outra pedreira.  Isso tornará a produção de granito mais rápida."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid "Census and Status"
-msgstr ""
+msgstr "Censo e Estatisticas"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "Enquanto esperamos, mostrarei rapidamente outro recurso útil.  Às vezes é difícil distinguir todos os edifícios.  Widelands oferece um recurso para mostrar textos de etiquetas chamado 'censo' sobre os edifícios."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #, lua-format
@@ -682,16 +682,16 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Para mostrar ou ocultar os rótulos do censo de construção, você pode selecionar a entrada 'Mostrar Censo' / 'Ocultar Censo' no menu 'Mostrar/Ocultar' na parte inferior ou pressionar a tecla ‘%s’  no teclado."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
-msgstr ""
+msgstr "Deixe-me habilitar o censo para você."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
 msgid "Show the building status"
-msgstr ""
+msgstr "Mostrar o estado do edifício"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format

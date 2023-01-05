@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 
 #include "map_io/s2map.h"
 
+#include <cstddef>
 #include <iomanip>
 #include <iostream>
 #include <memory>
@@ -223,7 +224,7 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	int32_t y = 0;
 	for (; y < height; ++y) {
 		uint8_t const* const ptr = reinterpret_cast<uint8_t*>(fr.data(width));
-		memcpy(section.get() + y * width, ptr, width);
+		memcpy(section.get() + static_cast<ptrdiff_t>(y) * width, ptr, width);
 		fr.data(dw - width);  // skip the alignment junk
 	}
 	while (y < dh) {
@@ -252,7 +253,7 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 class TerrainConverter {
 public:
 	explicit TerrainConverter(Widelands::Descriptions* descriptions);
-	Widelands::DescriptionIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
+	[[nodiscard]] Widelands::DescriptionIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
 	Widelands::Descriptions* descriptions_;
@@ -365,7 +366,7 @@ Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType worl
 }  // namespace
 
 S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
-   : Widelands::MapLoader(filename, M), filename_(filename), worldtype_(WorldType::kGreenland) {
+   : Widelands::MapLoader(filename, M), filename_(filename) {
 }
 
 /// Load the header. The map will then return valid information when

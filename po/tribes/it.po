@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # Alen Ciga, 2021
@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-09-04 04:26+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -1295,7 +1295,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Cucina di radici di manioca"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1712,7 +1711,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1724,8 +1722,6 @@ msgstr ""
 msgid "making a shovel"
 msgstr "sta producendo una pala"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1735,7 +1731,6 @@ msgstr "sta producendo una pala"
 msgid "making a felling ax"
 msgstr "sta producendo un'ascia da disboscamento"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1750,8 +1745,6 @@ msgstr "sta producendo un piccone"
 msgid "making a machete"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1762,7 +1755,6 @@ msgstr ""
 msgid "making kitchen tools"
 msgstr "sta producendo degli utensili da cucina"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1936,8 +1928,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -4213,79 +4205,79 @@ msgid "Training Glade"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:107
-#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:80
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:271
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:83
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:86
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:101
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:90
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:49
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:91
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:111
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:71
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:68
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:218
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:58
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:78
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:76
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:82
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:42
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:66
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:81
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:80
 msgid "sleeping"
 msgstr "sta dormendo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:115
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:79
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:129
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:93
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:143
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:107
 msgctxt "amazons_building"
 msgid "upgrading soldier evade from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:158
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:122
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:172
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:136
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:186
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:150
 msgctxt "amazons_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:201
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:165
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:215
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:179
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:236
-#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:122
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:200
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:110
 msgctxt "amazons_building"
 msgid "No soldier to train!"
 msgstr "Nessun soldato da addestrare!"
 
 #. TRANSLATORS: Amazon training site tooltip when none of the present soldiers
 #. match the current training program
-#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:238
-#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:124
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:202
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:112
 msgctxt "amazons_building"
 msgid "No soldier found for this training level!"
 msgstr ""
@@ -4297,59 +4289,59 @@ msgid "Warriors’ Gathering"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:76
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:102
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:90
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:205
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:165
 msgctxt "atlanteans_building"
 msgid "Dungeon"
 msgstr "Segrete"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:279
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:226
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:293
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:240
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:307
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:254
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:321
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:268
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
 #. TRANSLATORS: Atlantean training site tooltip when it has no soldiers
 #. assigned
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:340
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:163
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:287
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:138
 msgctxt "atlanteans_building"
 msgid "No soldier to train!"
 msgstr "Nessun soldato da addestrare!"
 
 #. TRANSLATORS: Atlantean training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:342
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:165
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:289
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:140
 msgctxt "atlanteans_building"
 msgid "No soldier found for this training level!"
 msgstr ""
@@ -4361,31 +4353,31 @@ msgid "Labyrinth"
 msgstr "Labirinto"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:91
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:66
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:105
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:80
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:119
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:132
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:107
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:145
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:120
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr ""
@@ -4397,29 +4389,29 @@ msgid "Battle Arena"
 msgstr "Arena di battaglia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:94
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:86
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:109
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:101
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
 #. assigned
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:129
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:225
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:121
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:200
 msgctxt "barbarians_building"
 msgid "No soldier to train!"
 msgstr "Nessun soldato da addestrare!"
 
 #. TRANSLATORS: Barbarian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:131
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:227
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:123
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:202
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
 msgstr ""
@@ -4431,49 +4423,49 @@ msgid "Training Camp"
 msgstr "Campo di addestramento"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:109
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:84
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:123
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:98
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:137
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:112
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:151
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:126
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:140
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:179
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:154
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:192
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:167
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:206
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:181
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr ""
@@ -4485,25 +4477,25 @@ msgid "Arena"
 msgstr "Arena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:98
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:57
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:90
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:50
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:116
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:88
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:215
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:108
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:81
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:190
 msgctxt "empire_building"
 msgid "No soldier to train!"
 msgstr "Nessun soldato da addestrare!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:118
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:90
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:217
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:110
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:83
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:192
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
 msgstr ""
@@ -4515,7 +4507,7 @@ msgid "Colosseum"
 msgstr "Colosseo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:70
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:63
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr ""
@@ -4527,49 +4519,49 @@ msgid "Training Camp"
 msgstr "Campo di addestramento"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:99
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:74
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:113
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:88
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:127
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:102
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:141
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:116
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:155
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:130
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:168
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:143
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:182
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:157
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:196
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:171
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr ""
@@ -4581,46 +4573,46 @@ msgid "Training Arena"
 msgstr "Arena d'addestramento"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:120
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:89
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:135
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:104
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:151
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:168
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:137
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:184
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:153
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:205
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:202
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:174
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:171
 msgctxt "frisians_building"
 msgid "No soldier to train!"
 msgstr "Nessun soldato da addestrare!"
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:207
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:204
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:176
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:173
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
 msgstr ""
@@ -4632,31 +4624,31 @@ msgid "Training Camp"
 msgstr "Campo di addestramento"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:119
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:88
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:134
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:103
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:150
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:119
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:135
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:181
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:150
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr ""
@@ -5291,6 +5283,7 @@ msgstr ""
 msgid "Balsa Tree (Pole)"
 msgstr ""
 
+#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5722,43 +5715,43 @@ msgstr "Frisoni"
 msgid "The inhabitants of the rough North Sea shore."
 msgstr ""
 
-#: ../../data/tribes/scripting/help/init.lua:84
+#: ../../data/tribes/scripting/help/init.lua:85
 msgid "Tribal Encyclopedia"
 msgstr "Enciclopedia tribale"
 
-#: ../../data/tribes/scripting/help/init.lua:89
+#: ../../data/tribes/scripting/help/init.lua:90
 msgid "General"
 msgstr "Generale"
 
-#: ../../data/tribes/scripting/help/init.lua:94
+#: ../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
 msgstr "Introduzione"
 
-#: ../../data/tribes/scripting/help/init.lua:100
+#: ../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
 msgstr "Controlli"
 
-#: ../../data/tribes/scripting/help/init.lua:106
+#: ../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
 msgstr "Suggerimenti"
 
-#: ../../data/tribes/scripting/help/init.lua:115
+#: ../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
 msgstr "Merci"
 
-#: ../../data/tribes/scripting/help/init.lua:122
+#: ../../data/tribes/scripting/help/init.lua:123
 msgid "Workers"
 msgstr "Lavoratori"
 
-#: ../../data/tribes/scripting/help/init.lua:129
+#: ../../data/tribes/scripting/help/init.lua:130
 msgid "Buildings"
 msgstr "Edifici"
 
-#: ../../data/tribes/scripting/help/init.lua:136
+#: ../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/init.lua:143
+#: ../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
 msgstr ""
 
@@ -6094,62 +6087,62 @@ msgstr "Demini"
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:149
 msgctxt "shipname"
-msgid "Dos Marmelos"
-msgstr "Dos Marmelos"
-
-#. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:151
-msgctxt "shipname"
 msgid "Eiru"
 msgstr "Eiru"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:153
+#: ../../data/tribes/ships/amazons/init.lua:151
 msgctxt "shipname"
 msgid "Endimari"
 msgstr "Endimari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:155
+#: ../../data/tribes/ships/amazons/init.lua:153
 msgctxt "shipname"
 msgid "Envira"
 msgstr "Envira"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:157
+#: ../../data/tribes/ships/amazons/init.lua:155
 msgctxt "shipname"
 msgid "Gregório"
 msgstr "Gregório"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:159
+#: ../../data/tribes/ships/amazons/init.lua:157
 msgctxt "shipname"
 msgid "Guaribe"
 msgstr "Guaribe"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:161
+#: ../../data/tribes/ships/amazons/init.lua:159
 msgctxt "shipname"
 msgid "Iá"
 msgstr "Iá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:163
+#: ../../data/tribes/ships/amazons/init.lua:161
 msgctxt "shipname"
 msgid "Iaco"
 msgstr "Iaco"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:165
+#: ../../data/tribes/ships/amazons/init.lua:163
 msgctxt "shipname"
 msgid "Içá"
 msgstr "Içá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:167
+#: ../../data/tribes/ships/amazons/init.lua:165
 msgctxt "shipname"
 msgid "Içana"
 msgstr "Içana"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:167
+msgctxt "shipname"
+msgid "Igapó-Açu"
+msgstr ""
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:169
@@ -6316,494 +6309,608 @@ msgstr "Jutaizinho"
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:223
 msgctxt "shipname"
-msgid "Liberdade"
-msgstr "Liberdade"
-
-#. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:225
-msgctxt "shipname"
 msgid "Luna"
 msgstr "Luna"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:227
-msgctxt "shipname"
-msgid "Madeira"
-msgstr "Madeira"
-
-#. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:229
-msgctxt "shipname"
-msgid "Madeirinha"
-msgstr "Madeirinha"
-
-#. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:231
+#: ../../data/tribes/ships/amazons/init.lua:225
 msgctxt "shipname"
 msgid "Maiá"
 msgstr "Maiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:233
+#: ../../data/tribes/ships/amazons/init.lua:227
 msgctxt "shipname"
 msgid "Maici"
 msgstr "Maici"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:235
+#: ../../data/tribes/ships/amazons/init.lua:229
 msgctxt "shipname"
 msgid "Mamiá"
 msgstr "Mamiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:237
+#: ../../data/tribes/ships/amazons/init.lua:231
 msgctxt "shipname"
 msgid "Mamoriá"
 msgstr "Mamoriá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:239
+#: ../../data/tribes/ships/amazons/init.lua:233
 msgctxt "shipname"
 msgid "Mamuru"
 msgstr "Mamuru"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:241
+#: ../../data/tribes/ships/amazons/init.lua:235
 msgctxt "shipname"
 msgid "Manacapuru"
 msgstr "Manacapuru"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:243
+#: ../../data/tribes/ships/amazons/init.lua:237
 msgctxt "shipname"
 msgid "Manicoré"
 msgstr "Manicoré"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:245
+#: ../../data/tribes/ships/amazons/init.lua:239
 msgctxt "shipname"
 msgid "Manicorezinho"
 msgstr "Manicorezinho"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:247
+#: ../../data/tribes/ships/amazons/init.lua:241
 msgctxt "shipname"
 msgid "Mapari"
 msgstr "Mapari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:249
+#: ../../data/tribes/ships/amazons/init.lua:243
 msgctxt "shipname"
-msgid "Mapiá Grande"
-msgstr "Mapiá Grande"
+msgid "Mapiá"
+msgstr ""
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:251
+#: ../../data/tribes/ships/amazons/init.lua:245
 msgctxt "shipname"
 msgid "Maracanã"
 msgstr "Maracanã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:253
+#: ../../data/tribes/ships/amazons/init.lua:247
 msgctxt "shipname"
 msgid "Marari"
 msgstr "Marari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:255
+#: ../../data/tribes/ships/amazons/init.lua:249
 msgctxt "shipname"
 msgid "Marauiá"
 msgstr "Marauiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:257
+#: ../../data/tribes/ships/amazons/init.lua:251
 msgctxt "shipname"
 msgid "Marié"
 msgstr "Marié"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:259
+#: ../../data/tribes/ships/amazons/init.lua:253
 msgctxt "shipname"
 msgid "Mariepauá"
 msgstr "Mariepauá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:261
+#: ../../data/tribes/ships/amazons/init.lua:255
 msgctxt "shipname"
 msgid "Marimari"
 msgstr "Marimari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:263
+#: ../../data/tribes/ships/amazons/init.lua:257
 msgctxt "shipname"
 msgid "Mataurá"
 msgstr "Mataurá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:265
+#: ../../data/tribes/ships/amazons/init.lua:259
 msgctxt "shipname"
 msgid "Matupiri"
 msgstr "Matupiri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:267
+#: ../../data/tribes/ships/amazons/init.lua:261
 msgctxt "shipname"
 msgid "Maués Açu"
 msgstr "Maués Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:269
+#: ../../data/tribes/ships/amazons/init.lua:263
 msgctxt "shipname"
 msgid "Mineruázinho"
 msgstr "Mineruázinho"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:271
+#: ../../data/tribes/ships/amazons/init.lua:265
 msgctxt "shipname"
 msgid "Muaco"
 msgstr "Muaco"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:273
+#: ../../data/tribes/ships/amazons/init.lua:267
 msgctxt "shipname"
 msgid "Mucum"
 msgstr "Mucum"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:275
+#: ../../data/tribes/ships/amazons/init.lua:269
 msgctxt "shipname"
 msgid "Mutum"
 msgstr "Mutum"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:277
+#: ../../data/tribes/ships/amazons/init.lua:271
 msgctxt "shipname"
 msgid "Nhamundá"
 msgstr "Nhamundá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:279
+#: ../../data/tribes/ships/amazons/init.lua:273
 msgctxt "shipname"
 msgid "Paciá"
 msgstr "Paciá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:281
+#: ../../data/tribes/ships/amazons/init.lua:275
 msgctxt "shipname"
 msgid "Padauari"
 msgstr "Padauari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:283
+#: ../../data/tribes/ships/amazons/init.lua:277
 msgctxt "shipname"
 msgid "Papagaio"
 msgstr "Papagaio"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:285
+#: ../../data/tribes/ships/amazons/init.lua:279
 msgctxt "shipname"
 msgid "Papuri"
 msgstr "Papuri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:287
+#: ../../data/tribes/ships/amazons/init.lua:281
 msgctxt "shipname"
 msgid "Paraconi"
 msgstr "Paraconi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:289
+#: ../../data/tribes/ships/amazons/init.lua:283
 msgctxt "shipname"
 msgid "Parauari"
 msgstr "Parauari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:291
+#: ../../data/tribes/ships/amazons/init.lua:285
 msgctxt "shipname"
 msgid "Pardo"
 msgstr "Pardo"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:293
+#: ../../data/tribes/ships/amazons/init.lua:287
 msgctxt "shipname"
 msgid "Pati"
 msgstr "Pati"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:295
+#: ../../data/tribes/ships/amazons/init.lua:289
 msgctxt "shipname"
 msgid "Pauini"
 msgstr "Pauini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:297
+#: ../../data/tribes/ships/amazons/init.lua:291
 msgctxt "shipname"
 msgid "Pinhuã"
 msgstr "Pinhuã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:299
+#: ../../data/tribes/ships/amazons/init.lua:293
 msgctxt "shipname"
 msgid "Piorini"
 msgstr "Piorini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:301
+#: ../../data/tribes/ships/amazons/init.lua:295
 msgctxt "shipname"
 msgid "Piratucu"
 msgstr "Piratucu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:303
+#: ../../data/tribes/ships/amazons/init.lua:297
 msgctxt "shipname"
 msgid "Pitinga"
 msgstr "Pitinga"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:305
+#: ../../data/tribes/ships/amazons/init.lua:299
 msgctxt "shipname"
 msgid "Preto"
 msgstr "Preto"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:307
-msgctxt "shipname"
-msgid "Preto da Eva"
-msgstr "Preto da Eva"
-
-#. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:309
-msgctxt "shipname"
-msgid "Prêto do Igapó-Açu"
-msgstr "Prêto do Igapó-Açu"
-
-#. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:311
+#: ../../data/tribes/ships/amazons/init.lua:301
 msgctxt "shipname"
 msgid "Puduari"
 msgstr "Puduari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:313
+#: ../../data/tribes/ships/amazons/init.lua:303
 msgctxt "shipname"
 msgid "Pureté"
 msgstr "Pureté"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:315
+#: ../../data/tribes/ships/amazons/init.lua:305
 msgctxt "shipname"
 msgid "Puruê"
 msgstr "Puruê"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:317
+#: ../../data/tribes/ships/amazons/init.lua:307
 msgctxt "shipname"
 msgid "Purus"
 msgstr "Purus"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:319
+#: ../../data/tribes/ships/amazons/init.lua:309
 msgctxt "shipname"
 msgid "Quixito"
 msgstr "Quixito"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:321
-msgctxt "shipname"
-msgid "Rio Negro"
-msgstr "Rio Negro"
-
-#. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:323
-msgctxt "shipname"
-msgid "Riozinho"
-msgstr "Riozinho"
-
-#. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:325
+#: ../../data/tribes/ships/amazons/init.lua:311
 msgctxt "shipname"
 msgid "Sepatini"
 msgstr "Sepatini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:327
+#: ../../data/tribes/ships/amazons/init.lua:313
 msgctxt "shipname"
 msgid "Sepoti"
 msgstr "Sepoti"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:329
+#: ../../data/tribes/ships/amazons/init.lua:315
 msgctxt "shipname"
 msgid "Seruini"
 msgstr "Seruini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:331
+#: ../../data/tribes/ships/amazons/init.lua:317
 msgctxt "shipname"
 msgid "Sucunduri"
 msgstr "Sucunduri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:333
+#: ../../data/tribes/ships/amazons/init.lua:319
 msgctxt "shipname"
 msgid "Tapajós"
 msgstr "Tapajós"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:335
+#: ../../data/tribes/ships/amazons/init.lua:321
 msgctxt "shipname"
 msgid "Tapauá"
 msgstr "Tapauá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:337
+#: ../../data/tribes/ships/amazons/init.lua:323
 msgctxt "shipname"
 msgid "Tarauacá"
 msgstr "Tarauacá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:339
+#: ../../data/tribes/ships/amazons/init.lua:325
 msgctxt "shipname"
 msgid "Tarumã Açu"
 msgstr "Tarumã Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:341
+#: ../../data/tribes/ships/amazons/init.lua:327
 msgctxt "shipname"
 msgid "Tarumã Mirim"
 msgstr "Tarumã Mirim"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:343
+#: ../../data/tribes/ships/amazons/init.lua:329
 msgctxt "shipname"
 msgid "Tea"
 msgstr "Tea"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:345
+#: ../../data/tribes/ships/amazons/init.lua:331
 msgctxt "shipname"
 msgid "Tefé"
 msgstr "Tefé"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:347
+#: ../../data/tribes/ships/amazons/init.lua:333
 msgctxt "shipname"
 msgid "Tonantins"
 msgstr "Tonantins"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:349
+#: ../../data/tribes/ships/amazons/init.lua:335
 msgctxt "shipname"
 msgid "Toototobi"
 msgstr "Toototobi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:351
+#: ../../data/tribes/ships/amazons/init.lua:337
 msgctxt "shipname"
 msgid "Traíra"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:353
+#: ../../data/tribes/ships/amazons/init.lua:339
 msgctxt "shipname"
 msgid "Tumiã"
 msgstr "Tumiã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:355
+#: ../../data/tribes/ships/amazons/init.lua:341
 msgctxt "shipname"
 msgid "Tupana"
 msgstr "Tupana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:357
+#: ../../data/tribes/ships/amazons/init.lua:343
 msgctxt "shipname"
 msgid "Uaicurapa"
 msgstr "Uaicurapa"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:359
+#: ../../data/tribes/ships/amazons/init.lua:345
 msgctxt "shipname"
 msgid "Uarini"
 msgstr "Uarini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:361
+#: ../../data/tribes/ships/amazons/init.lua:347
 msgctxt "shipname"
 msgid "Uatumã"
 msgstr "Uatumã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:363
+#: ../../data/tribes/ships/amazons/init.lua:349
 msgctxt "shipname"
 msgid "Uaupés"
 msgstr "Uaupés"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:365
+#: ../../data/tribes/ships/amazons/init.lua:351
 msgctxt "shipname"
 msgid "Umari"
 msgstr "Umari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:367
+#: ../../data/tribes/ships/amazons/init.lua:353
 msgctxt "shipname"
 msgid "Uneiuxi"
 msgstr "Uneiuxi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:369
+#: ../../data/tribes/ships/amazons/init.lua:355
 msgctxt "shipname"
 msgid "Unini"
 msgstr "Unini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:371
+#: ../../data/tribes/ships/amazons/init.lua:357
 msgctxt "shipname"
 msgid "Uruá"
 msgstr "Uruá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:373
+#: ../../data/tribes/ships/amazons/init.lua:359
 msgctxt "shipname"
 msgid "Urubaxi"
 msgstr "Urubaxi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:375
+#: ../../data/tribes/ships/amazons/init.lua:361
 msgctxt "shipname"
 msgid "Urubu"
 msgstr "Urubu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:377
+#: ../../data/tribes/ships/amazons/init.lua:363
 msgctxt "shipname"
 msgid "Urucu"
 msgstr "Urucu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:379
+#: ../../data/tribes/ships/amazons/init.lua:365
 msgctxt "shipname"
 msgid "Urupadi"
 msgstr "Urupadi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:381
+#: ../../data/tribes/ships/amazons/init.lua:367
 msgctxt "shipname"
 msgid "Xeruã"
 msgstr "Xeruã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:383
+#: ../../data/tribes/ships/amazons/init.lua:369
 msgctxt "shipname"
 msgid "Xie"
 msgstr "Xie"
 
-#. TRANSLATORS: This Amazonian ship is named after a river
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:371
+msgctxt "shipname"
+msgid "Apu Illapu"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:373
+msgctxt "shipname"
+msgid "Ayar Cachi"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:375
+msgctxt "shipname"
+msgid "Illapa"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:377
+msgctxt "shipname"
+msgid "Inti"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:379
+msgctxt "shipname"
+msgid "Kuychi"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:381
+msgctxt "shipname"
+msgid "Mama Killa"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:383
+msgctxt "shipname"
+msgid "Mama Occlo"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:385
 msgctxt "shipname"
-msgid "Zinho"
-msgstr "Zinho"
+msgid "Manco Cápac"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:387
+msgctxt "shipname"
+msgid "Pachamama"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:389
+msgctxt "shipname"
+msgid "Quchamama"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:391
+msgctxt "shipname"
+msgid "Sachamama"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:393
+msgctxt "shipname"
+msgid "Viracocha"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca god
+#: ../../data/tribes/ships/amazons/init.lua:395
+msgctxt "shipname"
+msgid "Yakumama"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:397
+msgctxt "shipname"
+msgid "Atahuallpa"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:399
+msgctxt "shipname"
+msgid "Lloqe Yupanki"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:401
+msgctxt "shipname"
+msgid "Manqo Qhapaq"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:403
+msgctxt "shipname"
+msgid "Mayta Qhapaq"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:405
+msgctxt "shipname"
+msgid "Pachakuti"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:407
+msgctxt "shipname"
+msgid "Qhapaq Yupanki"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:409
+msgctxt "shipname"
+msgid "Thupa"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:411
+msgctxt "shipname"
+msgid "Urqon"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:413
+msgctxt "shipname"
+msgid "Washkar"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:415
+msgctxt "shipname"
+msgid "Wayna Qhapaq"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:417
+msgctxt "shipname"
+msgid "Yawar Waqaq"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after an Inca ruler
+#: ../../data/tribes/ships/amazons/init.lua:419
+msgctxt "shipname"
+msgid "Zinchi Roqa"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after the lake in the Andes
+#: ../../data/tribes/ships/amazons/init.lua:421
+msgctxt "shipname"
+msgid "Lake Titicaca"
+msgstr ""
+
+#. TRANSLATORS: This Amazonian ship is named after the main Inca temple
+#: ../../data/tribes/ships/amazons/init.lua:423
+msgctxt "shipname"
+msgid "Koricancha"
+msgstr ""
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:101
@@ -7159,7 +7266,7 @@ msgctxt "shipname"
 msgid "Trinidad"
 msgstr "Trinidad"
 
-#. TRANSLATORS: This is the Barbarians' ship's name used in lists of units
+#. TRANSLATORS: This is the Barbarians’ ship’s name used in lists of units
 #: ../../data/tribes/ships/barbarians/init.lua:8
 msgctxt "barbarians_ship"
 msgid "Ship"
@@ -7195,182 +7302,212 @@ msgctxt "shipname"
 msgid "Beowulf"
 msgstr "Beowulf"
 
-#. TRANSLATORS: This Barbarian ship is named after an in-game character
+#. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:44
+msgctxt "shipname"
+msgid "Bison"
+msgstr ""
+
+#. TRANSLATORS: This Barbarian ship is named after an in-game character
+#: ../../data/tribes/ships/barbarians/init.lua:46
 msgctxt "shipname"
 msgid "Boldreth"
 msgstr "Boldreth"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/ships/barbarians/init.lua:46
+#: ../../data/tribes/ships/barbarians/init.lua:48
 msgctxt "shipname"
 msgid "Chat’Karuth"
 msgstr "Chat’Karuth"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:48
+#: ../../data/tribes/ships/barbarians/init.lua:50
 msgctxt "shipname"
 msgid "Dellingr"
 msgstr "Dellingr"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:50
+#: ../../data/tribes/ships/barbarians/init.lua:52
+msgctxt "shipname"
+msgid "Eagle"
+msgstr ""
+
+#. TRANSLATORS: This a Barbarian ship name
+#: ../../data/tribes/ships/barbarians/init.lua:54
 msgctxt "shipname"
 msgid "Fulla"
 msgstr "Fulla"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:52
+#: ../../data/tribes/ships/barbarians/init.lua:56
 msgctxt "shipname"
 msgid "Gersemi"
 msgstr "Gersemi"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:54
+#: ../../data/tribes/ships/barbarians/init.lua:58
 msgctxt "shipname"
 msgid "Hagbard"
 msgstr "Hagbard"
 
+#. TRANSLATORS: This Barbarian ship is named after a barbarian bard
+#: ../../data/tribes/ships/barbarians/init.lua:60
+msgctxt "shipname"
+msgid "Hakhor"
+msgstr ""
+
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:56
+#: ../../data/tribes/ships/barbarians/init.lua:62
 msgctxt "shipname"
 msgid "Heidrek"
 msgstr "Heidrek"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:58
+#: ../../data/tribes/ships/barbarians/init.lua:64
 msgctxt "shipname"
 msgid "Heimdallr"
 msgstr "Heimdallr"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:60
+#: ../../data/tribes/ships/barbarians/init.lua:66
 msgctxt "shipname"
 msgid "Hnoss"
 msgstr "Hnoss"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:62
+#: ../../data/tribes/ships/barbarians/init.lua:68
 msgctxt "shipname"
 msgid "Hrothgar"
 msgstr "Hrothgar"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:64
+#: ../../data/tribes/ships/barbarians/init.lua:70
 msgctxt "shipname"
 msgid "Ingeld"
 msgstr "Ingeld"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:66
+#: ../../data/tribes/ships/barbarians/init.lua:72
 msgctxt "shipname"
 msgid "Karl Hundason"
 msgstr "Karl Hundason"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/ships/barbarians/init.lua:68
+#: ../../data/tribes/ships/barbarians/init.lua:74
 msgctxt "shipname"
 msgid "Khantrukh"
 msgstr "Khantrukh"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:70
+#: ../../data/tribes/ships/barbarians/init.lua:76
 msgctxt "shipname"
 msgid "Lynx"
 msgstr "Lince"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:72
+#: ../../data/tribes/ships/barbarians/init.lua:78
 msgctxt "shipname"
 msgid "Mani"
 msgstr "Mani"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:74
+#: ../../data/tribes/ships/barbarians/init.lua:80
 msgctxt "shipname"
 msgid "Odin"
 msgstr "Odino"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:76
+#: ../../data/tribes/ships/barbarians/init.lua:82
 msgctxt "shipname"
 msgid "Red Fox"
 msgstr "Volpe rossa"
 
 #. TRANSLATORS: This Barbarian ship is mentioned in some lore texts
-#: ../../data/tribes/ships/barbarians/init.lua:78
+#: ../../data/tribes/ships/barbarians/init.lua:84
 msgctxt "shipname"
 msgid "Saxnot"
 msgstr "Saxnot"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:80
+#: ../../data/tribes/ships/barbarians/init.lua:86
 msgctxt "shipname"
 msgid "Sigmund"
 msgstr "Sigmund"
 
 #. TRANSLATORS: This Barbarian ship is named after a barbarian bard
-#: ../../data/tribes/ships/barbarians/init.lua:82
+#: ../../data/tribes/ships/barbarians/init.lua:88
 msgctxt "shipname"
 msgid "Sigurd"
 msgstr "Sigurd"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:84
+#: ../../data/tribes/ships/barbarians/init.lua:90
 msgctxt "shipname"
 msgid "Snotra"
 msgstr "Snotra"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:86
+#: ../../data/tribes/ships/barbarians/init.lua:92
 msgctxt "shipname"
 msgid "Thor"
 msgstr "Thor"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/ships/barbarians/init.lua:88
+#: ../../data/tribes/ships/barbarians/init.lua:94
 msgctxt "shipname"
 msgid "Thron"
 msgstr "Thron"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:90
+#: ../../data/tribes/ships/barbarians/init.lua:96
 msgctxt "shipname"
 msgid "Ullr"
 msgstr "Ullr"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:92
+#: ../../data/tribes/ships/barbarians/init.lua:98
 msgctxt "shipname"
 msgid "Valdar"
 msgstr "Valdar"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:94
+#: ../../data/tribes/ships/barbarians/init.lua:100
 msgctxt "shipname"
 msgid "Vili"
 msgstr "Vili"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:96
+#: ../../data/tribes/ships/barbarians/init.lua:102
 msgctxt "shipname"
 msgid "Volf"
 msgstr "Volf"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:98
+#: ../../data/tribes/ships/barbarians/init.lua:104
 msgctxt "shipname"
 msgid "Wild Boar"
 msgstr "Cinghiale selvatico"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:100
+#: ../../data/tribes/ships/barbarians/init.lua:106
+msgctxt "shipname"
+msgid "Valkyrie"
+msgstr ""
+
+#. TRANSLATORS: This a Barbarian ship name
+#: ../../data/tribes/ships/barbarians/init.lua:108
+msgctxt "shipname"
+msgid "Wisent"
+msgstr ""
+
+#. TRANSLATORS: This a Barbarian ship name
+#: ../../data/tribes/ships/barbarians/init.lua:110
 msgctxt "shipname"
 msgid "Wolverine"
 msgstr "Wolverine"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:102
+#: ../../data/tribes/ships/barbarians/init.lua:112
 msgctxt "shipname"
 msgid "Yrsa"
 msgstr "Yrsa"
@@ -7390,347 +7527,455 @@ msgstr "Mare Adriatico"
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:36
 msgctxt "shipname"
+msgid "Adamas"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:38
+msgctxt "shipname"
+msgid "Agrippa"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:40
+msgctxt "shipname"
 msgid "Alexandria"
 msgstr "Alessandria"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
-#: ../../data/tribes/ships/empire/init.lua:38
+#: ../../data/tribes/ships/empire/init.lua:42
 msgctxt "shipname"
 msgid "Amalea"
 msgstr "Amalea"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:40
+#: ../../data/tribes/ships/empire/init.lua:44
 msgctxt "shipname"
 msgid "Amolius"
 msgstr "Amolius"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/ships/empire/init.lua:42
+#: ../../data/tribes/ships/empire/init.lua:46
 msgctxt "shipname"
 msgid "Apollo"
 msgstr "Apollo"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:44
+#: ../../data/tribes/ships/empire/init.lua:48
+msgctxt "shipname"
+msgid "Aquila"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:50
 msgctxt "shipname"
 msgid "Augustus"
 msgstr "Augustus"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:46
+#: ../../data/tribes/ships/empire/init.lua:52
+msgctxt "shipname"
+msgid "Aurum"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:54
 msgctxt "shipname"
 msgid "Azurea Sea"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:48
+#: ../../data/tribes/ships/empire/init.lua:56
 msgctxt "shipname"
 msgid "Baltic Sea"
 msgstr "Mar Baltico"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:50
+#: ../../data/tribes/ships/empire/init.lua:58
 msgctxt "shipname"
 msgid "Bellona"
 msgstr "Bellona"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:52
-msgctxt "shipname"
-msgid "Ben Hur"
-msgstr "Ben Hur"
-
-#. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:54
-msgctxt "shipname"
-msgid "Bounty"
-msgstr "Bottino"
-
-#. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:56
+#: ../../data/tribes/ships/empire/init.lua:60
 msgctxt "shipname"
 msgid "Brutus"
 msgstr "Bruto"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:58
+#: ../../data/tribes/ships/empire/init.lua:62
 msgctxt "shipname"
 msgid "Caligula"
 msgstr "Caligola"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:60
+#: ../../data/tribes/ships/empire/init.lua:64
 msgctxt "shipname"
 msgid "Camilla"
 msgstr "Camilla"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:62
+#: ../../data/tribes/ships/empire/init.lua:66
 msgctxt "shipname"
 msgid "Carrara"
 msgstr "Carrara"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:64
-msgctxt "shipname"
-msgid "Caesar"
-msgstr "Cesare"
-
-#. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:66
-msgctxt "shipname"
-msgid "Cicero"
-msgstr ""
-
-#. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:68
 msgctxt "shipname"
-msgid "Claudius"
+msgid "Cato"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:70
 msgctxt "shipname"
-msgid "Diana"
-msgstr "Diana"
+msgid "Cæsar"
+msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:72
 msgctxt "shipname"
-msgid "Domitianus"
+msgid "Cervus"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:74
 msgctxt "shipname"
-msgid "Empire Glory"
-msgstr "Gloria dell'impero"
+msgid "Cicero"
+msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:76
+msgctxt "shipname"
+msgid "Claudius"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:78
+msgctxt "shipname"
+msgid "Diana"
+msgstr "Diana"
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:80
+msgctxt "shipname"
+msgid "Delphinus"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:82
+msgctxt "shipname"
+msgid "Domitianus"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:84
+msgctxt "shipname"
+msgid "Etna"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:86
 msgctxt "shipname"
 msgid "Faustulus"
 msgstr "Faustulus"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:78
-msgctxt "shipname"
-msgid "Galba"
-msgstr "Galba"
-
-#. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:80
-msgctxt "shipname"
-msgid "Gallus"
-msgstr "Gallus"
-
-#. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:82
-msgctxt "shipname"
-msgid "Ianus"
-msgstr "Ianus"
-
-#. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:84
-msgctxt "shipname"
-msgid "Iulius Caesar"
-msgstr "Giulio Cesare"
-
-#. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/ships/empire/init.lua:86
-msgctxt "shipname"
-msgid "Iuno"
-msgstr ""
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:88
 msgctxt "shipname"
-msgid "Iupiter"
+msgid "Ferrum"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:90
 msgctxt "shipname"
-msgid "Latium"
-msgstr ""
+msgid "Galba"
+msgstr "Galba"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:92
 msgctxt "shipname"
-msgid "Latonia"
-msgstr ""
+msgid "Gallus"
+msgstr "Gallus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:94
 msgctxt "shipname"
-msgid "Leonardo"
+msgid "Gladiator"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:96
 msgctxt "shipname"
-msgid "Liguria"
-msgstr "Liguria"
+msgid "Gloria Imperii"
+msgstr ""
 
-#. TRANSLATORS: This Empire ship is named after an in-game character
+#. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:98
 msgctxt "shipname"
-msgid "Lutius"
-msgstr ""
+msgid "Ianus"
+msgstr "Ianus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:100
 msgctxt "shipname"
-msgid "Marble"
-msgstr "Marmo"
-
-#. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/ships/empire/init.lua:102
-msgctxt "shipname"
-msgid "Mars"
-msgstr "Marte"
+msgid "Iulius Cæsar"
+msgstr ""
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/ships/empire/init.lua:104
+#: ../../data/tribes/ships/empire/init.lua:102
 msgctxt "shipname"
-msgid "Minerva"
-msgstr "Minerva"
+msgid "Iuno"
+msgstr ""
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/ships/empire/init.lua:104
+msgctxt "shipname"
+msgid "Iupiter"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:106
 msgctxt "shipname"
-msgid "Neptune"
-msgstr "Nettuno"
+msgid "Latium"
+msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:108
 msgctxt "shipname"
-msgid "Nero"
-msgstr "Nerone"
+msgid "Latonia"
+msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:110
 msgctxt "shipname"
-msgid "Nerva"
+msgid "Leo"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:112
 msgctxt "shipname"
-msgid "Octavianus"
-msgstr "Ottaviano"
+msgid "Lepus"
+msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:114
 msgctxt "shipname"
-msgid "Otho"
-msgstr ""
+msgid "Liguria"
+msgstr "Liguria"
 
-#. TRANSLATORS: This Empire ship is named after a Roman god
+#. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:116
 msgctxt "shipname"
-msgid "Pluto"
+msgid "Lutius"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:118
 msgctxt "shipname"
+msgid "Marble"
+msgstr "Marmo"
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:120
+msgctxt "shipname"
+msgid "Marcus Aurelius"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/ships/empire/init.lua:122
+msgctxt "shipname"
+msgid "Mars"
+msgstr "Marte"
+
+#. TRANSLATORS: This Empire ship is named after a Roman goddess
+#: ../../data/tribes/ships/empire/init.lua:124
+msgctxt "shipname"
+msgid "Minerva"
+msgstr "Minerva"
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/ships/empire/init.lua:126
+msgctxt "shipname"
+msgid "Neptune"
+msgstr "Nettuno"
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:128
+msgctxt "shipname"
+msgid "Nero"
+msgstr "Nerone"
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:130
+msgctxt "shipname"
+msgid "Nerva"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:132
+msgctxt "shipname"
+msgid "Octavianus"
+msgstr "Ottaviano"
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:134
+msgctxt "shipname"
+msgid "Otho"
+msgstr ""
+
+#. TRANSLATORS: This Empire ship is named after a Roman god
+#: ../../data/tribes/ships/empire/init.lua:136
+msgctxt "shipname"
+msgid "Pluto"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:138
+msgctxt "shipname"
 msgid "Portus Bellus"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:120
+#: ../../data/tribes/ships/empire/init.lua:140
+msgctxt "shipname"
+msgid "Præda"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:142
 msgctxt "shipname"
 msgid "Quirinus"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:122
+#: ../../data/tribes/ships/empire/init.lua:144
 msgctxt "shipname"
 msgid "Remus"
 msgstr "Remo"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:124
+#: ../../data/tribes/ships/empire/init.lua:146
 msgctxt "shipname"
 msgid "Romulus"
 msgstr "Romolo"
 
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:148
+msgctxt "shipname"
+msgid "Sagitta"
+msgstr ""
+
 #. TRANSLATORS: This Empire ship is named after an in-game character
-#: ../../data/tribes/ships/empire/init.lua:126
+#: ../../data/tribes/ships/empire/init.lua:150
 msgctxt "shipname"
 msgid "Saledus"
 msgstr ""
 
 #. TRANSLATORS: This Empire ship is named after a Roman deity
-#: ../../data/tribes/ships/empire/init.lua:128
+#: ../../data/tribes/ships/empire/init.lua:152
 msgctxt "shipname"
 msgid "Saturn"
 msgstr "Saturno"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:130
+#: ../../data/tribes/ships/empire/init.lua:154
+msgctxt "shipname"
+msgid "Scipio"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:156
+msgctxt "shipname"
+msgid "Seneca"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:158
 msgctxt "shipname"
 msgid "Siena"
 msgstr "Siena"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:132
+#: ../../data/tribes/ships/empire/init.lua:160
 msgctxt "shipname"
-msgid "Sparta"
-msgstr "Sparta"
+msgid "Spiculum"
+msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:134
+#: ../../data/tribes/ships/empire/init.lua:162
 msgctxt "shipname"
 msgid "Thyrrenia"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:136
+#: ../../data/tribes/ships/empire/init.lua:164
 msgctxt "shipname"
 msgid "Tiberius"
 msgstr "Tiberio"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:138
+#: ../../data/tribes/ships/empire/init.lua:166
 msgctxt "shipname"
 msgid "Titus"
 msgstr "Tito"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:140
+#: ../../data/tribes/ships/empire/init.lua:168
 msgctxt "shipname"
 msgid "Traianus"
 msgstr "Traiano"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:142
+#: ../../data/tribes/ships/empire/init.lua:170
+msgctxt "shipname"
+msgid "Venator"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:172
 msgctxt "shipname"
 msgid "Venus"
 msgstr "Venere"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:144
+#: ../../data/tribes/ships/empire/init.lua:174
+msgctxt "shipname"
+msgid "Vergilius"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:176
+msgctxt "shipname"
+msgid "Vespa"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:178
 msgctxt "shipname"
 msgid "Vespasianus"
 msgstr "Vespasiano"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/ships/empire/init.lua:146
+#: ../../data/tribes/ships/empire/init.lua:180
 msgctxt "shipname"
 msgid "Vesta"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:148
+#: ../../data/tribes/ships/empire/init.lua:182
+msgctxt "shipname"
+msgid "Vesuvius"
+msgstr ""
+
+#. TRANSLATORS: This is an Empire ship name
+#: ../../data/tribes/ships/empire/init.lua:184
 msgctxt "shipname"
 msgid "Vinea"
 msgstr ""
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:150
+#: ../../data/tribes/ships/empire/init.lua:186
 msgctxt "shipname"
 msgid "Vitellius"
 msgstr ""

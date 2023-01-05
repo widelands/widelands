@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-31 02:58+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -192,8 +192,8 @@ msgstr ""
 
 #: ../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
-" You can open and close this window by clicking on the ‘Objectives’ button "
-"in the toolbar on the bottom of the screen."
+"You can open and close this window by clicking on the ‘Objectives’ button in"
+" the toolbar on the bottom of the screen."
 msgstr ""
 
 #: ../../data/scripting/training_wheels/objectives.lua:49

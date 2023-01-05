@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 #include "ai/defaultai.h"
 
 #include <algorithm>
+#include <cstddef>
 #include <cstdlib>
 #include <memory>
 
@@ -83,15 +84,6 @@ constexpr int kMineTypes = 4;
 namespace AI {
 
 // Fix undefined references
-constexpr Duration DefaultAI::kManagementUpdateInterval;
-constexpr Duration DefaultAI::kStatUpdateInterval;
-constexpr Duration DefaultAI::kFlagWarehouseUpdInterval;
-constexpr Duration DefaultAI::kExpeditionMinDuration;
-constexpr Duration DefaultAI::kExpeditionMaxDuration;
-constexpr Duration DefaultAI::kShipCheckInterval;
-constexpr Duration DefaultAI::kCampaignDuration;
-constexpr Duration DefaultAI::kTrainingSitesCheckInterval;
-constexpr Duration DefaultAI::kDiplomacyInterval;
 
 DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
@@ -104,30 +96,20 @@ bool DefaultAI::map_allows_seafaring_ = false;
 DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, AiType const t)
    : ComputerPlayer(ggame, pid),
      type_(t),
-     player_(nullptr),
-     tribe_(nullptr),
-     attackers_count_(0),
+
      // Delay initialization to allow scenario scripts
      // to load custom units/buildings at gametime 0
      next_ai_think_(1),
-     scheduler_delay_counter_(0),
-     numof_psites_in_constr(0),
-     num_ports(0),
-     numof_warehouses_(0),
-     numof_warehouses_in_const_(0),
+
      military_last_dismantle_(0),
      military_last_build_(0),
      time_of_last_construction_(0),
      next_mine_construction_due_(0),
-     fishers_count_(0),
+
      first_iron_mine_built(50 * 60 * 60 * 1000),
-     ts_finished_count_(0),
-     ts_in_const_count_(0),
-     ts_without_trainers_(0),
+
      enemysites_check_delay_(30),
-     spots_(0),
-     resource_necessity_water_needed_(false),
-     highest_nonmil_prio_(0),
+
      expedition_ship_(kNoShip) {
 
 	// Subscribe to NoteFieldPossession.
@@ -3748,7 +3730,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 					   gametime + Duration(60 * 60 * 1000);  // one hour should be enough
 				} else {  // other constructionsites, usually new (standalone) constructionsites
 					eco->dismantle_grace_time =
-					   gametime + Duration(30 * 1000 +  // very short time is enough
+					   gametime + Duration(30ULL * 1000 +  // very short time is enough
 					                       (eco->flags.size() * 30 *
 					                        1000));  // + 30 seconds for every flag in economy
 				}
@@ -3758,11 +3740,11 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 
 				if (occupied_military_) {
 					eco->dismantle_grace_time =
-					   gametime + Duration((90 * 60 * 1000) + (eco->flags.size() * 20 * 1000));
+					   gametime + Duration((90ULL * 60 * 1000) + (eco->flags.size() * 20 * 1000));
 
 				} else {  // for other normal buildings
 					eco->dismantle_grace_time =
-					   gametime + Duration((45 * 60 * 1000) + (eco->flags.size() * 20 * 1000));
+					   gametime + Duration((45ULL * 60 * 1000) + (eco->flags.size() * 20 * 1000));
 				}
 			}
 
@@ -5055,8 +5037,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		if (static_cast<int>(roads.size()) < min_roads_count * (1 + bo.total_count())) {
 			return BuildingNecessity::kForbidden;
 		}
-		bo.primary_priority += (roads.size() - min_roads_count * (1 + bo.total_count())) *
-		                       (2 + std::abs(management_data.get_military_number_at(143)) / 5);
+		bo.primary_priority +=
+		   (static_cast<int32_t>(roads.size()) - min_roads_count * (1 + bo.total_count())) *
+		   (2 + std::abs(management_data.get_military_number_at(143)) / 5);
 		return BuildingNecessity::kNeeded;
 	}
 
@@ -6289,13 +6272,8 @@ bool DefaultAI::has_building_observer(char const* const name) {
 		late_initialization();
 	}
 
-	for (BuildingObserver& bo : buildings_) {
-		if (strcmp(bo.name, name) == 0) {
-			return true;
-		}
-	}
-
-	return false;
+	return std::any_of(buildings_.begin(), buildings_.end(),
+	                   [name](const BuildingObserver& bo) { return strcmp(bo.name, name) == 0; });
 }
 
 // return observer for a first (only) building that has required attribute
@@ -6451,7 +6429,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		// increase mines counter
 		// (used when testing possible port location)
 		if ((f->nodecaps() & Widelands::BUILDCAPS_MINE) != 0) {
-			++mineable_fields_count;
+			++(*mineable_fields_count);
 		}
 
 		// add neighbours to a queue (duplicates are no problem)
@@ -6802,7 +6780,8 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 	tribe_ = &player_->tribe();
 
 	// to avoid floats real multiplier is multiplier/10
-	const uint16_t multiplier = std::max<uint16_t>((productionsites.size() + num_ports * 5) / 5, 10);
+	const uint16_t multiplier =
+	   std::max<uint16_t>((static_cast<uint16_t>(productionsites.size()) + num_ports * 5) / 5, 10);
 
 	for (EconomyObserver* observer : economies) {
 		if (observer->economy.type() != Widelands::wwWARE) {
@@ -6827,7 +6806,7 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 				default_target = kTargetQuantCap;
 			}
 
-			const uint16_t new_target = std::max<uint16_t>(default_target * multiplier / 10, 3);
+			const uint16_t new_target = std::max<uint16_t>(multiplier * default_target / 10, 3);
 			assert(new_target > 1);
 
 			game().send_player_command(new Widelands::CmdSetWareTargetQuantity(
@@ -7087,15 +7066,19 @@ bool DefaultAI::critical_mine_unoccupied(const Time& gametime) {
 	}
 
 	// Now check that that there is no working mine of the critical type
-	for (auto& mine : mines_per_type) {
-		if (mine.second.is_critical && mine.second.finished > 0 &&
-		    mine.second.unoccupied == mine.second.finished) {
-			return true;
-		}
-		assert(mine.second.unoccupied <= mines_.size());
-		assert(mine.second.unoccupied <= mine.second.total_count());
-	}
-	return false;
+	return std::any_of(mines_per_type.begin(), mines_per_type.end(),
+#ifndef NDEBUG
+	                   [this]  // captured only for the asserts
+#else
+	[]
+#endif
+	                   (const auto& mine) {
+		                   const bool result = mine.second.is_critical && mine.second.finished > 0 &&
+		                                       mine.second.unoccupied == mine.second.finished;
+		                   assert(result || mine.second.unoccupied <= mines_.size());
+		                   assert(result || mine.second.unoccupied <= mine.second.total_count());
+		                   return result;
+	                   });
 }
 
 // Sets all inputs to zero and return true if inputs are already empty

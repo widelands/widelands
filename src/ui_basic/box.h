@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2022 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,10 +118,11 @@ private:
 		int assigned_var_depth;
 	};
 
-	bool scrolling_, force_scrolling_;
+	bool scrolling_{false};
+	bool force_scrolling_{false};
 	std::unique_ptr<Scrollbar> scrollbar_;
 	uint32_t orientation_;
-	uint32_t mindesiredbreadth_;
+	uint32_t mindesiredbreadth_{0U};
 	uint32_t inner_spacing_;
 
 	std::vector<Item> items_;

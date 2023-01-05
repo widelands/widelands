@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,8 +45,8 @@ public:
 	   const std::vector<std::unique_ptr<EditorCategory>>& categories,
 	   const Widelands::DescriptionMaintainer<DescriptionType>& descriptions,
 	   std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
-	   const std::function<void()> select_correct_tool,
-	   ToolType* const tool);
+	   std::function<void()> select_correct_tool,
+	   ToolType* tool);
 
 	// Updates selection to match the tool settings
 	void update_selection();
@@ -60,7 +60,7 @@ private:
 
 	const Widelands::DescriptionMaintainer<DescriptionType>& descriptions_;
 	std::function<void()> select_correct_tool_;
-	bool protect_against_recursive_select_;
+	bool protect_against_recursive_select_{false};
 	UI::TabPanel tab_panel_;
 	UI::MultilineTextarea current_selection_names_;
 	std::map<int, UI::Checkbox*> checkboxes_;
@@ -79,7 +79,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
    : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      descriptions_(descriptions),
      select_correct_tool_(select_correct_tool),
-     protect_against_recursive_select_(false),
+
      tab_panel_(this, UI::TabPanelStyle::kWuiLight),
      current_selection_names_(this,
                               0,
@@ -128,25 +128,28 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 template <typename DescriptionType, typename ToolType>
 void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int32_t n,
                                                                        const bool t) {
-	if (protect_against_recursive_select_)
+	if (protect_against_recursive_select_) {
 		return;
+	}
 
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	const bool multiselect = SDL_GetModState() & KMOD_CTRL;
-	if (!t && (!multiselect || tool_->get_nr_enabled() == 1))
+	const bool multiselect = (SDL_GetModState() & KMOD_CTRL) != 0;
+	if (!t && (!multiselect || tool_->get_nr_enabled() == 1)) {
 		checkboxes_[n]->set_state(true);
-	else {
+	} else {
 		if (!multiselect) {
-			for (uint32_t i = 0; tool_->get_nr_enabled(); ++i)
+			for (uint32_t i = 0; tool_->get_nr_enabled(); ++i) {
 				tool_->enable(i, false);
+			}
 			//  disable all checkboxes
 			protect_against_recursive_select_ = true;
 			const int32_t size = checkboxes_.size();
 			for (int32_t i = 0; i < size; ++i) {
-				if (i != n)
+				if (i != n) {
 					checkboxes_[i]->set_state(false);
+				}
 			}
 			protect_against_recursive_select_ = false;
 		}
@@ -163,7 +166,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 	std::string buf;
 	constexpr int max_string_size = 100;
 	int j = tool_->get_nr_enabled();
-	for (int i = 0; j && buf.size() < max_string_size; ++i) {
+	for (int i = 0; (j != 0) && buf.size() < max_string_size; ++i) {
 		if (tool_->is_enabled(i)) {
 			if (j < tool_->get_nr_enabled()) {
 				buf += " • ";

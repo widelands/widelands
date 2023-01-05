@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +54,7 @@ class WareInstance : public MapObject {
 	MO_DESCR(WareDescr)
 
 public:
-	WareInstance(DescriptionIndex, const WareDescr* const);
+	WareInstance(DescriptionIndex, const WareDescr*);
 	~WareInstance() override;
 
 	MapObject* get_location(const EditorGameBase& egbase) const {
@@ -92,11 +92,11 @@ public:
 
 private:
 	ObjectPointer location_;
-	Economy* economy_;
+	Economy* economy_{nullptr};
 	DescriptionIndex descr_index_;
 
 	std::unique_ptr<IdleWareSupply> supply_;
-	Transfer* transfer_;
+	Transfer* transfer_{nullptr};
 	ObjectPointer transfer_nextstep_;  ///< cached PlayerImmovable, can be 0
 
 	// loading and saving stuff

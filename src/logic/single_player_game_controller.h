@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2022 by the Widelands Development Team
+ * Copyright (C) 2015-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,9 @@ public:
 	void set_paused(bool paused) override;
 	void
 	report_result(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string& info) override;
+	void set_write_replay(bool /* replay */) override {
+		NEVER_HERE();
+	}
 
 private:
 	Widelands::Game& game_;
@@ -45,8 +48,8 @@ private:
 	uint32_t lastframe_;
 	Time time_;
 	uint32_t speed_;  ///< current game speed, in milliseconds per second
-	bool paused_;
-	uint32_t player_cmdserial_;
+	bool paused_{false};
+	uint32_t player_cmdserial_{0U};
 	Widelands::PlayerNumber local_;
 	std::vector<AI::ComputerPlayer*> computerplayers_;
 };

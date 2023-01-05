@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,8 +42,7 @@ public:
 	 * Destructor.
 	 * Does nothing currently.
 	 */
-	virtual ~InputQueue() {
-	}
+	virtual ~InputQueue() = default;
 
 	/**
 	 * The declaration of a callback function which can be registered to get notified
@@ -61,7 +60,7 @@ public:
 	 * Returns the index of the ware or worker which is handled by the queue.
 	 * @return The DescriptionIndex of whatever is stored here.
 	 */
-	DescriptionIndex get_index() const {
+	[[nodiscard]] DescriptionIndex get_index() const {
 		return index_;
 	}
 
@@ -70,7 +69,7 @@ public:
 	 * This is a value which can be influenced by the player with the provided buttons.
 	 * @return The maximum number of wares or workers which should be here.
 	 */
-	Quantity get_max_fill() const {
+	[[nodiscard]] Quantity get_max_fill() const {
 		return max_fill_;
 	}
 
@@ -78,7 +77,7 @@ public:
 	 * Whether wares or workers are stored in this queue.
 	 * @return Whether wares or workers are stored in this queue.
 	 */
-	WareWorker get_type() const {
+	[[nodiscard]] WareWorker get_type() const {
 		return type_;
 	}
 
@@ -86,7 +85,7 @@ public:
 	 * The maximum size of the queue as defined by the building.
 	 * @return The maximum size.
 	 */
-	Quantity get_max_size() const {
+	[[nodiscard]] Quantity get_max_size() const {
 		return max_size_;
 	}
 
@@ -96,7 +95,7 @@ public:
 	 * be smaller than get_max_size().
 	 * @return The amount at this moment.
 	 */
-	virtual Quantity get_filled() const = 0;
+	[[nodiscard]] virtual Quantity get_filled() const = 0;
 
 	/**
 	 * The amount of missing wares or workers which have been requested
@@ -104,7 +103,7 @@ public:
 	 * This will never be larger than (get_max_fill()-get_filled()).
 	 * @return The amount at this moment.
 	 */
-	uint32_t get_missing() const;
+	[[nodiscard]] uint32_t get_missing() const;
 
 	/**
 	 * Clear the queue appropriately.
@@ -172,11 +171,11 @@ public:
 	 * Returns the player owning the building containing this queue.
 	 * @return A reference to the owning player.
 	 */
-	const Player& owner() const {
+	[[nodiscard]] const Player& owner() const {
 		return owner_.owner();
 	}
 
-	bool matches(const Request& r) const {
+	[[nodiscard]] bool matches(const Request& r) const {
 		return request_.get() == &r;
 	}
 
@@ -210,7 +209,7 @@ protected:
 	 * Returns the mutable player owning the building containing this queue.
 	 * @return A pointer to the owning player.
 	 */
-	Player* get_owner() const {
+	[[nodiscard]] Player* get_owner() const {
 		return owner_.get_owner();
 	}
 
@@ -270,15 +269,15 @@ protected:
 	const WareWorker type_;
 
 	/// Time in ms between consumption at full speed.
-	Duration consume_interval_;
+	Duration consume_interval_{0U};
 
 	/// The currently pending request.
 	std::unique_ptr<Request> request_;
 
 	/// The function to call on fulfilled request.
-	CallbackFn* callback_fn_;
+	CallbackFn* callback_fn_{nullptr};
 	/// Unspecified data to pass to function.
-	void* callback_data_;
+	void* callback_data_{nullptr};
 };
 }  // namespace Widelands
 

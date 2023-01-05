@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021
@@ -9,6 +9,7 @@
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Marcin S <dzidek1003@o2.pl>, 2021
+# Michał Łysiak, 2022
 # Niektóry <niektory@gmail.com>, 2020
 # tombox <wptom@wp.pl>, 2015-2016,2018-2019
 # tombox <wptom@wp.pl>, 2015
@@ -17,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-25 02:57+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
+"Last-Translator: Michał Łysiak, 2022\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -69,7 +70,7 @@ msgstr "Obsługa okna ‘Cele’"
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Okno zadań możesz otworzyć i zamknąć klikając na przycisk \"Cele\", znajdujący się na pasku narzędzi u dołu ekranu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
@@ -118,7 +119,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have different "
 "economies, strengths, and weaknesses, but the general gameplay is the same "
 "for all. We will play the Barbarians for now."
-msgstr ""
+msgstr "W Widelands istnieje pięć różniących się plemion: Barbarzyńcy, Imperium, Atlantydzi, Fryzowie oraz Amazończycy. Każde plemię cechuje inna gospodarka oraz mocne i słabe strony, lecz ogólna rozgrywka jest podobna dla wszystkich plemion. Tym razem zagramy plemieniem Barbarzyńców."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
@@ -402,8 +403,8 @@ msgid "Using the Minimap"
 msgstr "Używanie minimapy"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:274
-msgid "Very good. And now about the minimap. "
-msgstr "Doskonale. Teraz zajmijmy się minimapą."
+msgid "Very good. And now about the minimap."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #, lua-format

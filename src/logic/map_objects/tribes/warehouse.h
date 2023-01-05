@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,19 +41,18 @@ struct WarehouseSupply;
 class WarehouseDescr : public BuildingDescr {
 public:
 	WarehouseDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
-	~WarehouseDescr() override {
-	}
+	~WarehouseDescr() override = default;
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	uint32_t get_conquers() const override {
+	[[nodiscard]] uint32_t get_conquers() const override {
 		return conquers_;
 	}
 	void set_conquers(uint32_t c) {
 		conquers_ = c;
 	}
 
-	unsigned get_heal_per_second() const {
+	[[nodiscard]] unsigned get_heal_per_second() const {
 		return heal_per_second_;
 	}
 	void set_heal_per_second(unsigned h) {
@@ -61,8 +60,8 @@ public:
 	}
 
 private:
-	int32_t conquers_;
-	unsigned heal_per_second_;
+	int32_t conquers_{0};
+	unsigned heal_per_second_{0U};
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
@@ -205,6 +204,7 @@ public:
 	PortDock* get_portdock() const {
 		return portdock_;
 	}
+	void update_statistics_string(std::string* str) override;
 
 	// Returns the first matching not completely filled waresqueue of the expedition if this is a
 	// port.
@@ -215,6 +215,13 @@ public:
 	// Will throw an exception otherwise.
 	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 
+	[[nodiscard]] const std::string& get_warehouse_name() const {
+		return warehouse_name_;
+	}
+	void set_warehouse_name(const std::string& name) {
+		warehouse_name_ = name;
+	}
+
 	void log_general_info(const EditorGameBase&) const override;
 
 private:
@@ -223,11 +230,12 @@ private:
 		explicit SoldierControl(Warehouse* warehouse) : warehouse_(warehouse) {
 		}
 
-		std::vector<Soldier*> present_soldiers() const override;
-		std::vector<Soldier*> stationed_soldiers() const override;
-		Quantity min_soldier_capacity() const override;
-		Quantity max_soldier_capacity() const override;
-		Quantity soldier_capacity() const override;
+		[[nodiscard]] std::vector<Soldier*> present_soldiers() const override;
+		[[nodiscard]] std::vector<Soldier*> stationed_soldiers() const override;
+		[[nodiscard]] std::vector<Soldier*> associated_soldiers() const override;
+		[[nodiscard]] Quantity min_soldier_capacity() const override;
+		[[nodiscard]] Quantity max_soldier_capacity() const override;
+		[[nodiscard]] Quantity soldier_capacity() const override;
 		void set_soldier_capacity(Quantity capacity) override;
 		void drop_soldier(Soldier&) override;
 		int incorporate_soldier(EditorGameBase& egbase, Soldier& s) override;
@@ -243,13 +251,13 @@ private:
 		explicit AttackTarget(Warehouse* warehouse) : warehouse_(warehouse) {
 		}
 
-		bool can_be_attacked() const override;
+		[[nodiscard]] bool can_be_attacked() const override;
 		void enemy_soldier_approaches(const Soldier&) const override;
 		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
 		void set_allow_conquer(PlayerNumber, bool) const override {
 			// Warehouses can never be conquered
 		}
-		bool get_allow_conquer(PlayerNumber) const override {
+		[[nodiscard]] bool get_allow_conquer(PlayerNumber) const override {
 			return false;
 		}
 
@@ -293,18 +301,19 @@ private:
 
 	std::vector<StockPolicy> ware_policy_;
 	std::vector<StockPolicy> worker_policy_;
+	std::string warehouse_name_;
 
 	// Workers who live here at the moment
 	using WorkerList = std::vector<OPtr<Worker>>;
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers incorporated_workers_;
 	std::vector<Time> next_worker_without_cost_spawn_;
-	Time next_military_act_;
-	Time next_stock_remove_act_;
+	Time next_military_act_{0U};
+	Time next_stock_remove_act_{0U};
 
 	std::vector<PlannedWorkers> planned_workers_;
 
-	PortDock* portdock_;
+	PortDock* portdock_{nullptr};
 
 	// This is information for portdock, to know whether it should
 	// try to recreate itself

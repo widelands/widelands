@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2022 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 
 namespace Widelands {
 class PortDock;
-}
+}  // namespace Widelands
 
 AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
                                                     uint32_t width,

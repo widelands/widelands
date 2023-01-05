@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,12 +34,12 @@ namespace FsMenu {
 // horizontal group
 class SinglePlayerActivePlayerGroup : public UI::Box {
 public:
-	SinglePlayerActivePlayerGroup(UI::Panel* const parent,
+	SinglePlayerActivePlayerGroup(UI::Panel* parent,
 	                              LaunchGame&,
-	                              int32_t const w,
-	                              int32_t const h,
+	                              int32_t w,
+	                              int32_t h,
 	                              PlayerSlot id,
-	                              GameSettingsProvider* const settings);
+	                              GameSettingsProvider* settings);
 
 	void update();
 	void force_new_dimensions(uint32_t standard_element_height);
@@ -47,6 +47,7 @@ public:
 private:
 	PlayerSlot id_;
 	GameSettingsProvider* const settings_;
+	UI::Button number_;
 	UI::Button player_;
 	SinglePlayerPlayerTypeDropdown player_type_;
 	SinglePlayerTribeDropdown tribe_;
@@ -60,9 +61,9 @@ private:
 class SinglePlayerSetupBox : public UI::Box {
 
 public:
-	SinglePlayerSetupBox(UI::Panel* const parent,
+	SinglePlayerSetupBox(UI::Panel* parent,
 	                     LaunchGame&,
-	                     GameSettingsProvider* const settings,
+	                     GameSettingsProvider* settings,
 	                     uint32_t standard_element_height);
 
 	void force_new_dimensions(uint32_t standard_element_height, int32_t max_size);

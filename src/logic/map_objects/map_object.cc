@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -449,12 +449,8 @@ const std::string& MapObjectDescr::icon_filename() const {
  * Search for the attribute in the attribute list
  */
 bool MapObjectDescr::has_attribute(AttributeIndex attr) const {
-	for (const uint32_t& attrib : attribute_ids_) {
-		if (attrib == attr) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(attribute_ids_.begin(), attribute_ids_.end(),
+	                   [attr](const uint32_t atrribute) { return atrribute == attr; });
 }
 
 /**
@@ -528,8 +524,7 @@ MapObject IMPLEMENTATION
 /**
  * Zero-initialize a map object
  */
-MapObject::MapObject(const MapObjectDescr* const the_descr)
-   : descr_(the_descr), serial_(0), logsink_(nullptr), owner_(nullptr), reserved_by_worker_(false) {
+MapObject::MapObject(const MapObjectDescr* const the_descr) : descr_(the_descr) {
 }
 
 /**
@@ -724,7 +719,7 @@ constexpr uint8_t kCurrentPacketVersionMapObject = 2;
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void MapObject::Loader::load(FileRead& fr) {
+void MapObject::Loader::load(FileRead& fr) const {
 	try {
 		uint8_t const header = fr.unsigned_8();
 		if (header != HeaderMapObject) {

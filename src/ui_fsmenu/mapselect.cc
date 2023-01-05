@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,13 +54,11 @@ MapSelect::MapSelect(MenuCapsule& m,
      map_details_(
         &right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, *game_for_preview_),
 
-     scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
+     scenario_types_(settings->settings().multiplayer ? Widelands::Map::MP_SCENARIO :
+                                                        Widelands::Map::SP_SCENARIO),
      basedir_(kMapsDir),
      settings_(settings),
-     ctrl_(ctrl),
-     has_translated_mapname_(false),
-     unspecified_balancing_found_(false),
-     update_map_details_(false) {
+     ctrl_(ctrl) {
 	curdir_ = basedir_;
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
@@ -98,9 +96,11 @@ MapSelect::MapSelect(MenuCapsule& m,
 	   hbox, "dropdown_official_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	official_tags_dropdown_->set_autoexpand_display_button();
-	official_tags_dropdown_->add(_("Official & Unofficial"), "");
-	official_tags_dropdown_->add(localize_tag("official"), "official");
-	official_tags_dropdown_->add(localize_tag("unofficial"), "unofficial");
+	official_tags_dropdown_->set_tooltip(_("Filter by official status"));
+	official_tags_dropdown_->add(
+	   _("Official & Unofficial"), "", nullptr, false, _("Show both official and unofficial maps"));
+	add_tag_to_dropdown(official_tags_dropdown_, "official");
+	add_tag_to_dropdown(official_tags_dropdown_, "unofficial");
 
 	hbox->add(official_tags_dropdown_, UI::Box::Resizing::kFullSize);
 
@@ -110,14 +110,16 @@ MapSelect::MapSelect(MenuCapsule& m,
 	   hbox, "dropdown_team_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	team_tags_dropdown_->set_autoexpand_display_button();
-	/** TRANSLATORS: Filter entry in map selection. Other entries are "Free for all"", "Teams of 2"
-	 * etc. */
-	team_tags_dropdown_->add(_("Any Teams"), "");
-	team_tags_dropdown_->add(localize_tag("ffa"), "ffa");
-	team_tags_dropdown_->add(localize_tag("1v1"), "1v1");
-	team_tags_dropdown_->add(localize_tag("2teams"), "2teams");
-	team_tags_dropdown_->add(localize_tag("3teams"), "3teams");
-	team_tags_dropdown_->add(localize_tag("4teams"), "4teams");
+	team_tags_dropdown_->set_tooltip(_("Filter by desired line-up"));
+	team_tags_dropdown_->add(
+	   /** TRANSLATORS: Filter entry in map selection. Other entries are "Free for all"",
+	    * "Teams of 2" etc. */
+	   _("Any Teams"), "", nullptr, false, _("Do not filter by line-up suggestions"));
+	add_tag_to_dropdown(team_tags_dropdown_, "ffa");
+	add_tag_to_dropdown(team_tags_dropdown_, "1v1");
+	add_tag_to_dropdown(team_tags_dropdown_, "2teams");
+	add_tag_to_dropdown(team_tags_dropdown_, "3teams");
+	add_tag_to_dropdown(team_tags_dropdown_, "4teams");
 
 	hbox->add(team_tags_dropdown_, UI::Box::Resizing::kFullSize);
 
@@ -127,6 +129,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	   hbox, "dropdown_balancing", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	balancing_tags_dropdown_->set_autoexpand_display_button();
+	balancing_tags_dropdown_->set_tooltip(_("Filter by balancing status"));
 	rebuild_balancing_dropdown();
 
 	hbox->add(balancing_tags_dropdown_, UI::Box::Resizing::kFullSize);
@@ -137,10 +140,10 @@ MapSelect::MapSelect(MenuCapsule& m,
 
 	hbox = new UI::Box(
 	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
-	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
-	add_tag_checkbox(hbox, "ferries", localize_tag("ferries"));
-	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));
-	add_tag_checkbox(hbox, "scenario", localize_tag("scenario"));
+	add_tag_checkbox(hbox, "seafaring");
+	add_tag_checkbox(hbox, "ferries");
+	add_tag_checkbox(hbox, "artifacts");
+	add_tag_checkbox(hbox, "scenario");
 	hbox->add_inf_space();
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
@@ -418,11 +421,13 @@ void MapSelect::fill_table() {
 /*
  * Add a tag to the checkboxes
  */
-UI::Checkbox*
-MapSelect::add_tag_checkbox(UI::Box* box, const std::string& tag, const std::string& displ_name) {
+UI::Checkbox* MapSelect::add_tag_checkbox(UI::Box* box, const std::string& tag) {
 	tags_ordered_.push_back(tag);
 
-	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), displ_name);
+	const TagTexts l = localize_tag(tag);
+	UI::Checkbox* cb =
+	   new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), l.displayname);
+	cb->set_tooltip(l.tooltip);
 
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);
@@ -460,12 +465,14 @@ void MapSelect::rebuild_balancing_dropdown() {
 	const std::string selected =
 	   balancing_tags_dropdown_->has_selection() ? balancing_tags_dropdown_->get_selected() : "";
 	balancing_tags_dropdown_->clear();
-	balancing_tags_dropdown_->add(_("Balanced & Unbalanced"), "");
-	balancing_tags_dropdown_->add(localize_tag("balanced"), "balanced");
-	balancing_tags_dropdown_->add(localize_tag("unbalanced"), "unbalanced");
+	balancing_tags_dropdown_->add(
+	   _("Balanced & Unbalanced"), "", nullptr, false, _("Show both balanced and unbalanced maps"));
+	add_tag_to_dropdown(balancing_tags_dropdown_, "balanced");
+	add_tag_to_dropdown(balancing_tags_dropdown_, "unbalanced");
 	if (unspecified_balancing_found_) {
 		// Backwards compatibility with old maps
-		balancing_tags_dropdown_->add(pgettext("balancing", "Unspecified"), "unspecified");
+		balancing_tags_dropdown_->add(pgettext("balancing", "Unspecified"), "unspecified", nullptr,
+		                              false, _("The map does not specify whether it is balanced"));
 		balancing_tags_dropdown_->select(selected);
 	} else {
 		balancing_tags_dropdown_->select(selected == "unspecified" ? "" : selected);

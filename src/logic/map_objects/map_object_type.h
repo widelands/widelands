@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,13 +38,14 @@ enum class MapObjectType : uint8_t {
 	SHIP_FLEET,
 	FERRY_FLEET,
 
-	BOB = 10,  // Bob
-	CRITTER,   // Bob -- Critter
-	SHIP,      // Bob -- Ship
-	WORKER,    // Bob -- Worker
-	SOLDIER,   // Bob -- Worker -- Soldier
-	CARRIER,   // Bob -- Worker -- Carrier
-	FERRY,     // Bob -- Worker -- Carrier -- Ferry
+	BOB = 10,     // Bob
+	CRITTER,      // Bob -- Critter
+	SHIP,         // Bob -- Ship
+	WORKER,       // Bob -- Worker
+	SOLDIER,      // Bob -- Worker -- Soldier
+	CARRIER,      // Bob -- Worker -- Carrier
+	FERRY,        // Bob -- Worker -- Carrier -- Ferry
+	PINNED_NOTE,  // Bob -- Pinned Note
 
 	// everything below is at least a BaseImmovable
 	IMMOVABLE = 30,

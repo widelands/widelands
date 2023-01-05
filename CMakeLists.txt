@@ -16,6 +16,8 @@ option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
 option(OPTION_FORCE_EMBEDDED_MINIZIP "Use embedded minizip sources" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
+set(CMAKE_FIND_FRAMEWORK LAST)
+
 # Absolute path reference for submodules
 set(WL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 
@@ -152,7 +154,7 @@ find_package (PythonInterp REQUIRED)
 
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
-find_package(PNG REQUIRED)
+find_package(PNG 1.6 REQUIRED)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
@@ -222,23 +224,23 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     endif()
   endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.2))
-    message(STATUS "GCC >6.2.0 breaks -O3, setting -O2")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 7.5))
+    message(STATUS "GCC >7.5.0 breaks -O3, setting -O2")
     set(WL_OPTIMIZE_FLAGS "-O2")
   elseif(MSVC)
     set(WL_OPTIMIZE_FLAGS "/O2")
   else()
     set(WL_OPTIMIZE_FLAGS "-O3")
   endif ()
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.0))
-    message(WARNING "GCC <7.0.0 is known to cause segfaults in release builds. Please consider upgrading to GCC version 7 or newer or using Clang. Adding selected overrides to suppress reporting of known bugs.")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.6))
+    message(WARNING "GCC <7.6.0 is known to cause segfaults in release builds. Please consider upgrading to GCC version 7.6 or newer or using Clang. Adding selected overrides to suppress reporting of known bugs.")
     wl_add_flag(WL_OPTIMIZE_FLAGS "--param asan-stack=0")
   endif()
   set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
   option(OPTION_ASAN "Build with AddressSanitizer" OFF)
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.2))
-    message(STATUS "GCC >6.2.0 breaks -O3, setting -O2")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 7.5))
+    message(STATUS "GCC >7.5.0 breaks -O3, setting -O2")
     set(WL_OPTIMIZE_FLAGS "-O2")
   elseif(MSVC)
     set(WL_OPTIMIZE_FLAGS "/O2")
@@ -319,6 +321,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winconsistent-missing-override")
   endif()
 elseif(MSVC)
+  wl_add_flag(WL_GENERIC_CXX_FLAGS "/std:c++17")
   # https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/
   # Disabled warnings that are overly verbose right now or just do not make sense.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "/wd4244")
@@ -330,7 +333,7 @@ else()
   # Assuming GCC 4.8 or higher.
   if(WIN32)
     # This is needed for getenv().
-    wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++11")
+    wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=gnu++17")
     if (OPTION_BUILD_WINSTATIC)
       set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ ${CMAKE_CXX_STANDARD_LIBRARIES}")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic")
@@ -395,7 +398,7 @@ if(NOT MSVC)
     endif()
   endif()
 
-  wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")
+  wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++17")
 endif()
 
 # Cross-compile-unit optimization slows linking significantly.

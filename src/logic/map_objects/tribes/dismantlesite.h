@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,12 +45,11 @@ public:
 	DismantleSiteDescr(const std::string& init_descname,
 	                   const LuaTable& t,
 	                   Descriptions& descriptions);
-	~DismantleSiteDescr() override {
-	}
+	~DismantleSiteDescr() override = default;
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	FxId creation_fx() const;
+	[[nodiscard]] FxId creation_fx() const;
 
 private:
 	const FxId creation_fx_;

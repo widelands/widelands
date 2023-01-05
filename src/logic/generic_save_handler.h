@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,7 @@ public:
 	                            FileSystem::Type type)
 	   : do_save_(do_save),
 	     complete_filename_(complete_filename),
-	     dir_(FileSystem::fs_dirname(complete_filename.c_str())),
+	     dir_(FileSystem::fs_dirname(complete_filename)),
 	     filename_(FileSystem::fs_filename(complete_filename.c_str())),
 	     type_(type),
 	     error_(static_cast<Error>(1132)) {

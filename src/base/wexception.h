@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,18 +38,16 @@
  */
 class WException : public std::exception {
 public:
-	explicit WException(char const* const file, uint32_t const line, char const* const fmt, ...)
-	   PRINTF_FORMAT(4, 5);
+	explicit WException(char const* file, uint32_t line, char const* fmt, ...) PRINTF_FORMAT(4, 5);
 
 	/**
 	 * The target of the returned pointer remains valid during the lifetime of
 	 * the WException object.
 	 */
-	const char* what() const noexcept override;
+	[[nodiscard]] const char* what() const noexcept override;
 
 protected:
-	WException() {
-	}
+	WException() = default;
 	std::string what_;
 };
 

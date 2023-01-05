@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "ui_basic/multilinetextarea.h"
+
+#include <SDL_mouse.h>
 
 #include "base/log.h"
 #include "graphic/font_handler.h"
@@ -42,8 +44,9 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, style, x, y, w, h),
      text_(text),
+     render_anchor_(0, 0),
      font_style_(style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel),
-     font_scale_(1.0f),
+
      align_(align),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
 	set_thinks(false);
@@ -171,9 +174,33 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 	case UI::Align::kLeft:
 		anchor = kRichtextMargin;
 	}
-	rendered_text_->draw(dst, Vector2i(anchor, 0),
+	render_anchor_ = Vector2i(anchor, 0);
+	rendered_text_->draw(dst, render_anchor_,
 	                     Recti(0, scrollbar_.get_scrollpos(), rendered_text_->width(),
 	                           rendered_text_->height() - scrollbar_.get_scrollpos()));
+}
+
+bool MultilineTextarea::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
+	return rendered_text_ != nullptr && btn == SDL_BUTTON_LEFT &&
+	       rendered_text_->handle_mousepress(
+	          x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
+}
+bool MultilineTextarea::handle_mousemove(
+   uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
+	if (rendered_text_ != nullptr) {
+		const std::string* tt = rendered_text_->get_tooltip(
+		   x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
+		if (tt != nullptr) {
+			if (*tt != tooltip()) {
+				tooltip_before_hyperlink_tooltip_ = tooltip();
+			}
+			set_tooltip(*tt);
+			return true;
+		}
+	}
+
+	set_tooltip(tooltip_before_hyperlink_tooltip_);
+	return false;
 }
 
 bool MultilineTextarea::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {

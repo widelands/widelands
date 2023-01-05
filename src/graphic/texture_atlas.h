@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,14 +29,13 @@
 class TextureAtlas {
 public:
 	struct PackedTexture {
-		PackedTexture() : texture_atlas(-1), texture(nullptr), index_(-1) {
-		}
+		PackedTexture() = default;
 
 		// The index of the returned texture atlas that contains this image.
-		int texture_atlas;
+		int texture_atlas = -1;
 
 		// The newly packed texture.
-		std::unique_ptr<Texture> texture;
+		std::unique_ptr<Texture> texture{nullptr};
 
 	private:
 		friend class TextureAtlas;
@@ -46,10 +45,10 @@ public:
 		}
 
 		// The position the images was 'add'()ed into the packing queue. Purely internal.
-		int index_;
+		int index_ = -1;
 	};
 
-	TextureAtlas();
+	TextureAtlas() = default;
 
 	// Add 'texture' as one of the textures to be packed. Ownership is
 	// not taken, but 'texture' must be valid until pack() has been
@@ -69,7 +68,7 @@ private:
 		explicit Node(const Recti& init_r);
 		void split(int w, int h);
 
-		bool used;
+		bool used{false};
 		Recti r;
 		std::unique_ptr<Node> right;
 		std::unique_ptr<Node> down;
@@ -78,28 +77,27 @@ private:
 	};
 
 	struct Block {
-		Block(int init_index, const Image* init_texture)
-		   : index(init_index), texture(init_texture), node(nullptr), done(false) {
+		Block(int init_index, const Image* init_texture) : index(init_index), texture(init_texture) {
 		}
 
 		// The index in the order the blocks have been added.
 		int index;
 		const Image* texture;
-		Node* node;
+		Node* node{nullptr};
 
 		// True if this block has already been packed into a texture atlas.
-		bool done;
+		bool done{false};
 	};
 
 	// Packs as many blocks from 'blocks_' that still have done = false into a
 	// fresh texture atlas that will not grow bigger than 'max_size' x
 	// 'max_size'.
-	std::unique_ptr<Texture> pack_as_many_as_possible(const int max_dimension,
-	                                                  const int texture_atlas_index,
+	std::unique_ptr<Texture> pack_as_many_as_possible(int max_dimension,
+	                                                  int texture_atlas_index,
 	                                                  std::vector<PackedTexture>* pack_info);
 	static Node* find_node(Node* node, int w, int h);
 
-	int next_index_;
+	int next_index_{0};
 
 	// Unpacked items.
 	std::vector<Block> blocks_;

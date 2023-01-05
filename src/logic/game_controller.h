@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,8 +42,7 @@ class GameController {
 public:
 	enum class GameType : uint8_t { kUndefined = 0, kSingleplayer, kNetClient, kNetHost, kReplay };
 
-	virtual ~GameController() {
-	}
+	virtual ~GameController() = default;
 
 	virtual void think() = 0;
 
@@ -84,7 +83,7 @@ public:
 	/**
 	 * Sets whether the game is paused.
 	 */
-	virtual void set_paused(const bool paused) = 0;
+	virtual void set_paused(bool paused) = 0;
 
 	/**
 	 * Toggle pause state (convenience function)
@@ -93,14 +92,15 @@ public:
 		set_paused(!is_paused());
 	}
 
+	virtual void set_write_replay(bool replay) = 0;
+
 	/**
 	 * Report a player result once he has left the game. This may be done through lua
 	 * by the win_condition scripts.
 	 */
 	virtual void report_result(uint8_t /* player */,
 	                           Widelands::PlayerEndResult /*result*/,
-	                           const std::string& /* info */) {
-	}
+	                           const std::string& /* info */) = 0;
 
 	/** Callback when the game setup UI is closed before a game was started. */
 	virtual void game_setup_aborted() {

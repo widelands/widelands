@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 
 #include "graphic/surface.h"
 
+#include <cstddef>
 #include <cstdlib>
 
 #include "base/rect.h"
@@ -127,7 +128,7 @@ void Surface::draw_line_strip(const std::vector<Vector2f>& points,
 
 	std::vector<DrawLineProgram::PerVertexData> vertices;
 	// Each line needs 2 triangles.
-	vertices.reserve(3 * 2 * points.size());
+	vertices.reserve(points.size() * 3 * 2);
 	tesselate_line_strip(width(), height(), color, line_width, points, &vertices);
 	do_draw_line_strip(std::move(vertices));
 }

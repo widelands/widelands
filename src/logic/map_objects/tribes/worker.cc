@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -560,7 +560,7 @@ struct FindNodeSpace {
 	explicit FindNodeSpace(bool land) : landbased_(land) {
 	}
 
-	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
 		if ((coords.field->nodecaps() & MOVECAPS_WALK) == 0) {
 			return false;
 		}
@@ -586,7 +586,7 @@ private:
 
 /** Accepts a node if and only if a ferry can reach it or depart from there. */
 struct FindNodeFerry {
-	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
 		CheckStepFerry csf(egbase);
 		return csf.reachable_dest(egbase.map(), coords);
 	}
@@ -1196,13 +1196,7 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 	return true;
 }
 
-Worker::Worker(const WorkerDescr& worker_descr)
-   : Bob(worker_descr),
-     worker_economy_(nullptr),
-     ware_economy_(nullptr),
-     supply_(nullptr),
-     transfer_(nullptr),
-     current_exp_(0) {
+Worker::Worker(const WorkerDescr& worker_descr) : Bob(worker_descr) {
 }
 
 Worker::~Worker() {
@@ -2652,7 +2646,7 @@ void Worker::start_task_fugitive(Game& game) {
 struct FindFlagWithPlayersWarehouse {
 	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
 	}
-	bool accept(const BaseImmovable& imm) const {
+	[[nodiscard]] bool accept(const BaseImmovable& imm) const {
 		if (upcast(Flag const, flag, &imm)) {
 			if (flag->get_owner() == &owner_) {
 				if (!flag->economy(wwWORKER).warehouses().empty()) {
@@ -2834,21 +2828,21 @@ void Worker::geologist_update(Game& game, State& state) {
 			FCoords target;
 
 			auto is_mountain = [&map, &descriptions](const FCoords& f) {
-				for (const TCoords<FCoords>& t :
-				     {TCoords<FCoords>(f, TriangleIndex::D), TCoords<FCoords>(f, TriangleIndex::R),
-				      TCoords<FCoords>(map.tl_n(f), TriangleIndex::D),
-				      TCoords<FCoords>(map.tl_n(f), TriangleIndex::R),
-				      TCoords<FCoords>(map.tr_n(f), TriangleIndex::D),
-				      TCoords<FCoords>(map.l_n(f), TriangleIndex::R)}) {
-					if ((descriptions
-					        .get_terrain_descr((t.t == TriangleIndex::D ? t.node.field->terrain_d() :
-                                                                     t.node.field->terrain_r()))
-					        ->get_is() &
-					     TerrainDescription::Is::kMineable) != 0) {
-						return true;
-					}
-				}
-				return false;
+				auto array = {TCoords<FCoords>(f, TriangleIndex::D),
+				              TCoords<FCoords>(f, TriangleIndex::R),
+				              TCoords<FCoords>(map.tl_n(f), TriangleIndex::D),
+				              TCoords<FCoords>(map.tl_n(f), TriangleIndex::R),
+				              TCoords<FCoords>(map.tr_n(f), TriangleIndex::D),
+				              TCoords<FCoords>(map.l_n(f), TriangleIndex::R)};
+				return std::any_of(
+				   array.begin(), array.end(), [&descriptions](const TCoords<FCoords>& t) {
+					   return (descriptions
+					              .get_terrain_descr((t.t == TriangleIndex::D ?
+                                                    t.node.field->terrain_d() :
+                                                    t.node.field->terrain_r()))
+					              ->get_is() &
+					           TerrainDescription::Is::kMineable) != 0;
+				   });
 			};
 
 			// is center a mountain piece?
@@ -3318,9 +3312,6 @@ Load/save support
 */
 
 constexpr uint8_t kCurrentPacketVersion = 3;
-
-Worker::Loader::Loader() : location_(0), carried_ware_(0) {
-}
 
 void Worker::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);

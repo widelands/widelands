@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 by the Widelands Development Team
+ * Copyright (C) 2020-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +54,7 @@ struct NoteThreadSafeFunction {
 	const uint32_t id;
 
 private:
-	NoteThreadSafeFunction(const std::function<void()>& f) : run(f), id(next_id_++) {
+	explicit NoteThreadSafeFunction(const std::function<void()>& f) : run(f), id(next_id_++) {
 	}
 
 	static uint32_t next_id_;

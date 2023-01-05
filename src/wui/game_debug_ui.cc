@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,7 +80,7 @@ MapObjectDebugWindow
 */
 MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::MapObject& obj)
    : UI::Window(&parent, UI::WindowStyle::kWui, "map_object_debug", 0, 0, 100, 100, ""),
-     log_general_info_(true),
+
      object_(&obj),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
 	serial_ = obj.serial();

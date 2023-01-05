@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ namespace math {
 	}
 
 TO_NUMBER(to_int, int, stoi)
-TO_NUMBER(to_long, long long, stoll)
+TO_NUMBER(to_long, int64_t, stoll)
 #undef TO_NUMBER
 
 // This function has RST documentation in logic/map_objects/map_object_program

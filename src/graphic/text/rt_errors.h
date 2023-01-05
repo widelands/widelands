@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,9 +27,9 @@ namespace RT {
 
 class Exception : public std::exception {
 public:
-	explicit Exception(const std::string& msg) : std::exception(), msg_(msg) {
+	explicit Exception(const std::string& msg) : msg_(msg) {
 	}
-	const char* what() const noexcept override {
+	[[nodiscard]] const char* what() const noexcept override {
 		return msg_.c_str();
 	}
 

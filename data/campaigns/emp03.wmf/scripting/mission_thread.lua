@@ -298,6 +298,7 @@ function mission_thread()
    reveal_randomly(p1, sea:region(5), 1000)
    sleep(100)
    local ship = p1:place_ship(sea)
+   shipname = ship.shipname
    sleep(2500)
    campaign_message_box(diary_page_2)
 

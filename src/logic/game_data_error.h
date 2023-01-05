@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2022 by the Widelands Development Team
+ * Copyright (C) 2009-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,13 +28,12 @@ namespace Widelands {
 struct GameDataError : public WException {
 	explicit GameDataError(char const* fmt, ...) PRINTF_FORMAT(2, 3);
 
-	char const* what() const noexcept override {
+	[[nodiscard]] char const* what() const noexcept override {
 		return what_.c_str();
 	}
 
 protected:
-	GameDataError() {
-	}
+	GameDataError() = default;
 };
 
 /** This exception's message compiles information for the user when an old savegame could not be
@@ -53,13 +52,12 @@ struct UnhandledVersionError : public GameDataError {
 	                               int32_t packet_version,
 	                               int32_t current_packet_version);
 
-	char const* what() const noexcept override {
+	[[nodiscard]] char const* what() const noexcept override {
 		return what_.c_str();
 	}
 
 protected:
-	UnhandledVersionError() {
-	}
+	UnhandledVersionError() = default;
 };
 }  // namespace Widelands
 

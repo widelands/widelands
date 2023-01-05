@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,25 +63,25 @@ public:
 	// Use 'resize_window = true' to resize the window to the new resolution.
 	// Use 'resize_window = false' if the window has already been resized.
 	void change_resolution(int w, int h, bool resize_window);
-	int get_xres() const;
-	int get_yres() const;
-	int get_window_mode_xres() const;
-	int get_window_mode_yres() const;
+	[[nodiscard]] int get_xres() const;
+	[[nodiscard]] int get_yres() const;
+	[[nodiscard]] int get_window_mode_xres() const;
+	[[nodiscard]] int get_window_mode_yres() const;
 
-	bool maximized() const;
+	[[nodiscard]] bool maximized() const;
 	void set_maximized(bool);
 
 	// Changes the window to be fullscreen or not.
-	bool fullscreen() const;
+	[[nodiscard]] bool fullscreen() const;
 	void set_fullscreen(bool);
 
 	RenderTarget* get_render_target();
 	void refresh();
-	SDL_Window* get_sdlwindow() const {
+	[[nodiscard]] SDL_Window* get_sdlwindow() const {
 		return sdl_window_;
 	}
 
-	int max_texture_size_for_font_rendering() const;
+	[[nodiscard]] int max_texture_size_for_font_rendering() const;
 
 	// Requests a screenshot being taken on the next frame.
 	void screenshot(const std::string& fname);

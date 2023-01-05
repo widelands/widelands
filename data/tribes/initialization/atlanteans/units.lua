@@ -21,7 +21,6 @@
 -- * **script**: File path to the :ref:`units.lua <lua_tribes_tribes_units>` file
 --   that configures which units the tribe is using
 -- * **starting_conditions**: A table of file paths to starting condition Lua scripts
--- * **collectors_points_table**: An array of tables of warename-integer pairs used by the Collectors win condition.
 -- * **suited_for_ai** (optional, defaults to ``true``): Whether it is allowed to assign this tribe to AI players.
 --
 
@@ -44,7 +43,7 @@
 --
 --    **name**: A string containing the internal name of the tribe.
 --
---    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``.
+--    **animations**: Global animations. Contains subtables for ``frontier``, ``flag``, and ``pinned_note``.
 --    Each animation needs the parameter ``hotspot`` (2 integer coordinates),
 --    and may also define ``fps`` (integer frames per second).
 --
@@ -54,6 +53,18 @@
 --    ``busy_e``, ``busy_se`` and ``busy_sw``.
 --
 --    **bridge_height**: The height in pixels of each bridge at it's summit at 1x scale.
+--
+--    **collectors_points_table**: An array of tables of warename-integer pairs used by the Collectors win condition.
+--    This table shall contain gold and all weapons and armor needed for soldier training.
+--
+--    **warehouse_names**: A list of strings with warehouse names presented to the user - be creative. Example:
+--
+--    .. code-block:: lua
+--
+--       warehouse_names = {
+--          pgettext("warehousename", "Kos"),
+--          pgettext("warehousename", "Patmos"),
+--       }
 --
 --    **roads**: The file paths for the tribe's road textures in 3 subtables ``busy``,
 --    ``normal`` and ``waterway``.
@@ -195,6 +206,10 @@
 --
 --    **productionsite_workers_coming**: The string to display over this tribe's productionsites when more than 1 worker is coming.
 --
+--    **productionsite_experienced_worker_missing**: The string to display over this tribe's productionsites when 1 experienced worker is missing.
+--
+--    **productionsite_experienced_workers_missing**: The string to display over this tribe's productionsites when more than 1 experienced worker is missing.
+--
 --    **soldier_context**, **soldier_0_sg**, **soldier_0_pl**, **soldier_1_sg**, **soldier_1_pl**, **soldier_2_sg**, **soldier_2_pl**,
 --    **soldier_3_sg**, **soldier_3_pl**: The pgettext context for militarysites' soldier strings, and the corresponding **unlocalized**
 --    singular and plural strings. Additionally, it is necessary to specify an ``npgettext`` call for all four types of soldier strings
@@ -330,6 +345,7 @@ wl.Descriptions():new_tribe {
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {6, 18} },
+      pinned_note = { hotspot = {18, 67} },
       bridge_normal_e = { hotspot = {-2, 11} },
       bridge_busy_e = { hotspot = {-2, 11} },
       bridge_normal_se = { hotspot = {5, 2} },
@@ -2017,6 +2033,159 @@ wl.Descriptions():new_tribe {
       }
    },
 
+   warehouse_names = {
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Aegina"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Constantinos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kirikos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Aggistri"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Alonissos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Anafi"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Andros"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Antikythira"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Arkyi"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Astypalea"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Chalki"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Chania"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Chios"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Diafani"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Donoussa"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Euboea"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Folegandros"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Fourni"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Gytheio"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Heraklion"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Hydra"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Igoumenitsa"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Ios"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Iraklia"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Ithaki"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kalamata"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kalymnos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Karlovassi"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Karpathos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kasos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kastelorizo"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Katapola"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kavala"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kefalonia"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kilini"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kimolos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kissamos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Korfu"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Koufonissi"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kythira"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Kythnos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Lavrio"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Leros"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Lesvos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Limnos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Lipsi"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Milos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Mykonos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Naxos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Nisyros"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Paros"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Patmos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Patras"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Paxoi"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Piraeus"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Poros"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Rafina"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Rhodos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Samos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Santorini"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Schinoussa"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Serifos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Sifnos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Sikinos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Sitia"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Skiathos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Skopelos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Symi"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Syros"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Thessaloniki"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Tilos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Tinos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Volos"),
+      -- TRANSLATORS: This Atlantean warehouse is named after a harbour in Greece
+      pgettext("warehousename", "Zakynthos"),
+   },
+
    -- Productionsite status strings
 
    -- TRANSLATORS: Productivity label on an atlantean building if there is 1 worker missing
@@ -2027,6 +2196,10 @@ wl.Descriptions():new_tribe {
    productionsite_workers_missing = pgettext("atlanteans", "Workers missing"),
    -- TRANSLATORS: Productivity label on an atlantean building if there is more than 1 worker coming. If you need plural forms here, please let us know.
    productionsite_workers_coming = pgettext("atlanteans", "Workers are coming"),
+   -- TRANSLATORS: Productivity label on an atlantean building if there is 1 experienced worker missing
+   productionsite_experienced_worker_missing = pgettext("atlanteans", "Expert missing"),
+   -- TRANSLATORS: Productivity label on an atlantean building if there is more than 1 experienced worker missing. If you need plural forms here, please let us know.
+   productionsite_experienced_workers_missing = pgettext("atlanteans", "Experts missing"),
 
    -- Soldier strings to be used in Military Status strings
 

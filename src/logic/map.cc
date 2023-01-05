@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 
 #include "logic/map.h"
 
+#include <cstddef>
 #include <cstdlib>
 #include <memory>
 
@@ -132,15 +133,7 @@ Map IMPLEMENTATION
  * This really identifies a map like it is in the game
  */
 
-Map::Map()
-   : nrplayers_(0),
-     scenario_types_(NO_SCENARIO),
-     width_(0),
-     height_(0),
-     localize_author_(false),
-     pathfieldmgr_(new PathfieldManager),
-     allows_seafaring_(false),
-     waterway_max_length_(0) {
+Map::Map() : pathfieldmgr_(new PathfieldManager) {
 }
 
 Map::~Map() {
@@ -554,7 +547,7 @@ void Map::set_origin(const Coords& new_origin) {
 	assert(0 <= new_origin.y);
 	assert(new_origin.y < height_);
 
-	const size_t field_size = width_ * height_;
+	const size_t field_size = static_cast<size_t>(width_) * height_;
 
 	for (uint8_t i = get_nrplayers(); i != 0u;) {
 		starting_pos_[--i].reorigin(new_origin, extent());
@@ -652,9 +645,9 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 
 	// Generate the new fields. Does not modify the actual map yet.
 
-	std::unique_ptr<Field[]> new_fields(new Field[w * h]());
-	std::unique_ptr<bool[]> was_preserved(new bool[width_ * height_]());
-	std::unique_ptr<bool[]> was_created(new bool[w * h]());
+	std::unique_ptr<Field[]> new_fields(new Field[static_cast<uint64_t>(w) * h]());
+	std::unique_ptr<bool[]> was_preserved(new bool[static_cast<uint64_t>(width_) * height_]());
+	std::unique_ptr<bool[]> was_created(new bool[static_cast<uint64_t>(w) * h]());
 
 	for (int16_t x = 0; x < width_; ++x) {
 		for (int16_t y = 0; y < height_; ++y) {
@@ -795,7 +788,7 @@ void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
 	// Reset the fields to blank
 	width_ = rh.size.w;
 	height_ = rh.size.h;
-	fields_.reset(new Field[width_ * height_]);
+	fields_.reset(new Field[static_cast<uint64_t>(width_) * height_]);
 	egbase.allocate_player_maps();
 
 	// Overwrite starting locations and port spaces
@@ -1107,7 +1100,7 @@ The actual logic behind find_bobs and find_reachable_bobs.
 */
 struct FindBobsCallback {
 	FindBobsCallback(std::vector<Bob*>* const list, const FindBob& functor)
-	   : list_(list), functor_(functor), found_(0) {
+	   : list_(list), functor_(functor) {
 	}
 
 	void operator()(const EditorGameBase& /* egbase */, const FCoords& cur) {
@@ -1127,7 +1120,7 @@ struct FindBobsCallback {
 
 	std::vector<Bob*>* list_;
 	const FindBob& functor_;
-	uint32_t found_;
+	uint32_t found_{0U};
 };
 
 /*
@@ -1184,7 +1177,7 @@ The actual logic behind find_immovables and find_reachable_immovables.
 */
 struct FindImmovablesCallback {
 	FindImmovablesCallback(std::vector<ImmovableFound>* const list, const FindImmovable& functor)
-	   : list_(list), functor_(functor), found_(0) {
+	   : list_(list), functor_(functor) {
 	}
 
 	void operator()(const EditorGameBase& /* egbase */, const FCoords& cur) {
@@ -1208,7 +1201,7 @@ struct FindImmovablesCallback {
 
 	std::vector<ImmovableFound>* list_;
 	const FindImmovable& functor_;
-	uint32_t found_;
+	uint32_t found_{0U};
 };
 
 /*
@@ -1290,7 +1283,7 @@ The actual logic behind find_fields and find_reachable_fields.
 */
 struct FindNodesCallback {
 	FindNodesCallback(std::vector<Coords>* const list, const FindNode& functor)
-	   : list_(list), functor_(functor), found_(0) {
+	   : list_(list), functor_(functor) {
 	}
 
 	void operator()(const EditorGameBase& egbase, const FCoords& cur) {
@@ -1304,7 +1297,7 @@ struct FindNodesCallback {
 
 	std::vector<Coords>* list_;
 	const FindNode& functor_;
-	uint32_t found_;
+	uint32_t found_{0U};
 };
 
 /*
@@ -2328,8 +2321,6 @@ bool Map::can_reach_by_water(const Coords& field) const {
 		return false;
 	}
 
-	FCoords neighb;
-
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		if ((get_neighbour(fc, dir).field->nodecaps() & MOVECAPS_SWIM) != 0) {
 			return true;
@@ -2502,11 +2493,11 @@ Map::set_height(const EditorGameBase& egbase, Area<FCoords> area, HeightInterval
 		bool changed;
 		do {
 			changed = false;
-			height_interval.min = height_interval.min < MAX_FIELD_HEIGHT_DIFF ?
+			height_interval.min = height_interval.min < max_field_height_diff() ?
                                   0 :
-                                  height_interval.min - MAX_FIELD_HEIGHT_DIFF;
-			height_interval.max = height_interval.max < MAX_FIELD_HEIGHT - MAX_FIELD_HEIGHT_DIFF ?
-                                  height_interval.max + MAX_FIELD_HEIGHT_DIFF :
+                                  height_interval.min - max_field_height_diff();
+			height_interval.max = height_interval.max < MAX_FIELD_HEIGHT - max_field_height_diff() ?
+                                  height_interval.max + max_field_height_diff() :
                                   MAX_FIELD_HEIGHT;
 			do {
 				if (mr.location().field->height < height_interval.min) {
@@ -2548,14 +2539,14 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t& area) {
 	for (uint8_t i = 0; i < 6; ++i) {
 		Field& f = *n[i].field;
 		const int32_t diff = height - f.get_height();
-		if (diff > MAX_FIELD_HEIGHT_DIFF) {
+		if (diff > max_field_height_diff()) {
 			++area;
-			f.set_height(height - MAX_FIELD_HEIGHT_DIFF);
+			f.set_height(height - max_field_height_diff());
 			check[i] = true;
 		}
-		if (diff < -MAX_FIELD_HEIGHT_DIFF) {
+		if (diff < -max_field_height_diff()) {
 			++area;
-			f.set_height(height + MAX_FIELD_HEIGHT_DIFF);
+			f.set_height(height + max_field_height_diff());
 			check[i] = true;
 		}
 	}

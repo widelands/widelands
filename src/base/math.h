@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,7 +55,7 @@ unsigned read_percent_to_int(const std::string& input);
 
 // Wrappers around stoi/stoll with more verbose exceptions
 int to_int(const std::string&);
-long long to_long(const std::string&);
+int64_t to_long(const std::string&);
 
 }  // namespace math
 

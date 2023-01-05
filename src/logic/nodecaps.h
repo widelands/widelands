@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,6 +58,6 @@ enum NodeCaps {
 	/// This clause stops ducks from "swimwalking" along the coast.
 	MOVECAPS_SWIM = 64,
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_NODECAPS_H

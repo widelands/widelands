@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2022 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	     name(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0),
 	     settings_(settings),
 	     id_(id),
-	     slot_selection_locked_(false),
+
 	     menu_parent_(grand_parent) {
 		add(&slot_dropdown_);
 		add(&name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -156,8 +156,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 	UI::Dropdown<uintptr_t> slot_dropdown_;  /// Select the player slot.
 	UI::Textarea name;                       /// Client nick name
 	GameSettingsProvider* const settings_;
-	uint8_t const id_;            /// User number
-	bool slot_selection_locked_;  // Ensure that dropdowns will close on selection.
+	uint8_t const id_;                   /// User number
+	bool slot_selection_locked_{false};  // Ensure that dropdowns will close on selection.
 	UI::Panel* menu_parent_;
 };
 
@@ -173,6 +173,15 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     settings_(settings),
 	     n(npsb),
 	     id_(id),
+	     number_(this,
+	             "player",
+	             0,
+	             0,
+	             h,
+	             h,
+	             UI::ButtonStyle::kFsMenuSecondary,
+	             std::to_string(id_ + 1),
+	             _("Player Number")),
 	     player_(this,
 	             "player",
 	             0,
@@ -226,18 +235,15 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    _("Team"),
 	                    UI::DropdownType::kPictorial,
 	                    UI::PanelStyle::kFsMenu,
-	                    UI::ButtonStyle::kFsMenuSecondary),
-	     last_state_(PlayerSettings::State::kClosed),
-	     type_selection_locked_(false),
-	     tribe_selection_locked_(false),
-	     init_selection_locked_(false),
-	     team_selection_locked_(false) {
+	                    UI::ButtonStyle::kFsMenuSecondary) {
 
 		type_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		tribes_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		init_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		team_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		number_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		number_.set_enabled(false);
 
 		type_dropdown_.selected.connect([this]() { set_type(); });
 		tribes_dropdown_.selected.connect([this]() { set_tribe_or_shared_in(); });
@@ -245,6 +251,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team_dropdown_.selected.connect([this]() { set_team(); });
 		player_.sigclicked.connect([this]() { set_color(); });
 
+		add(&number_);
 		add(&player_);
 		add(&type_dropdown_);
 		add(&tribes_dropdown_);
@@ -625,6 +632,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	NetworkPlayerSettingsBackend* const n;
 	PlayerSlot const id_;
 
+	UI::Button number_;
 	UI::Button player_;
 	UI::Dropdown<std::string>
 	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
@@ -632,13 +640,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	UI::Dropdown<uintptr_t>
 	   init_dropdown_;  /// Select the initialization (Headquarters, Fortified Village etc.)
 	UI::Dropdown<uintptr_t> team_dropdown_;  /// Select the team number
-	PlayerSettings::State
-	   last_state_;  /// The dropdowns for the other slots need updating if this changes
+	PlayerSettings::State last_state_{
+	   PlayerSettings::State::kClosed};  /// The dropdowns for the other slots need updating if this
+	                                     /// changes
 	/// Lock rebuilding dropdowns so that they can close on selection
-	bool type_selection_locked_;
-	bool tribe_selection_locked_;
-	bool init_selection_locked_;
-	bool team_selection_locked_;
+	bool type_selection_locked_{false};
+	bool tribe_selection_locked_{false};
+	bool init_selection_locked_{false};
+	bool team_selection_locked_{false};
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };

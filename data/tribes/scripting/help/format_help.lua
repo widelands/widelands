@@ -5,6 +5,7 @@
 -- Functions used in the ingame help windows for formatting the text and pictures.
 
 include "scripting/richtext.lua"
+include "scripting/help.lua"
 
 --  =======================================================
 --  *************** Basic helper functions ****************
@@ -17,8 +18,7 @@ include "scripting/richtext.lua"
 --
 --    :arg image: the picture to be aligned to a row.
 --    :arg count: length of the picture row.
---    :arg text: if given the text aligned on the left side, formatted via
---       formatting.lua functions.
+--    :arg text: if given the text aligned on the left side, formatted via richtext.lua functions.
 --    :returns: the text on the left and a picture row on the right.
 --
 function image_line(image, count, text)
@@ -145,7 +145,7 @@ function help_ware_amount_line(ware_description, amount)
       temp_amount = temp_amount - imgperline
    end
    -- TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-   result = image_line(image, temp_amount, p(_("%1$dx %2$s"):bformat(amount, ware_description.descname))) .. result
+   result = image_line(image, temp_amount, p(_("%1$dx %2$s"):bformat(amount, linkify_encyclopedia_object(ware_description)))) .. result
    return result
 end
 
@@ -162,8 +162,8 @@ function help_worker_experience(worker_description, becomes_description)
    local result = ""
    -- TRANSLATORS: EP = Experience Points
    local exp_string = _("%s to %s (%s EP)"):format(
-         worker_description.descname,
-         becomes_description.descname,
+         linkify_encyclopedia_object(worker_description),
+         linkify_encyclopedia_object(becomes_description),
          worker_description.needed_experience
       )
 
@@ -172,8 +172,8 @@ function help_worker_experience(worker_description, becomes_description)
    if(becomes_description) then
      -- TRANSLATORS: EP = Experience Points
       exp_string = exp_string .. "<br>" .. _("%s to %s (%s EP)"):format(
-            worker_description.descname,
-            becomes_description.descname,
+            linkify_encyclopedia_object(worker_description),
+            linkify_encyclopedia_object(becomes_description),
             worker_description.needed_experience
          )
    end
@@ -197,10 +197,10 @@ function help_tool_string(tribe, toolnames, no_of_workers)
    for i, toolname in ipairs(toolnames) do
       if (tribe:has_ware(toolname)) then
          local ware_description = game:get_ware_description(toolname)
-         result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
+         result = result .. image_line(ware_description.icon_name, 1, p(linkify_encyclopedia_object(ware_description)))
       elseif (tribe:has_worker(toolname)) then
          local worker_description = game:get_worker_description(toolname)
-         result = result .. image_line(worker_description.icon_name, 1, p(worker_description.descname))
+         result = result .. image_line(worker_description.icon_name, 1, p(linkify_encyclopedia_object(worker_description)))
       end
    end
    return result
@@ -239,7 +239,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
             description = wl.Game():get_worker_description(consumed_item)
             consumes_workers = true
          end
-         consumed_itemnames[count] = _("%1$dx %2$s"):bformat(amount, description.descname)
+         consumed_itemnames[count] = _("%1$dx %2$s"):bformat(amount, linkify_encyclopedia_object(description))
          consumed_images[count] = description.icon_name
          consumed_amount[count] = amount
          count = count + 1
@@ -283,7 +283,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
          -- TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a productionsite
          consumed_header = _("Wares consumed:")
       end
-      result = result .. h3(consumed_header) .. consumed_items_string
+      result = result .. h4(consumed_header) .. consumed_items_string
    end
    return result
 end

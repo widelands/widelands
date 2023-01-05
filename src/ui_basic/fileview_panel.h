@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,9 +49,9 @@ public:
 private:
 	void update_tab_size(size_t index);
 	void layout() override;
-	const int padding_;
-	int contents_width_;
-	int contents_height_;
+	const int padding_{5};
+	int contents_width_{0};
+	int contents_height_{0};
 
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;

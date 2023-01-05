@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
 struct GameClientImpl;
 namespace FsMenu {
 class MenuCapsule;
-}
+}  // namespace FsMenu
 
 /**
  * GameClient manages the lifetime of a network game in which this computer
@@ -69,6 +69,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	void report_result(uint8_t player,
 	                   Widelands::PlayerEndResult result,
 	                   const std::string& info) override;
+	void set_write_replay(bool replay) override;
 	// End GameController interface
 
 	// GameSettingsProvider interface
@@ -83,19 +84,17 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	bool can_launch() override;
 
-	virtual void set_map(const std::string& mapname,
-	                     const std::string& mapfilename,
-	                     const std::string&,
-	                     const std::string&,
-	                     uint32_t maxplayers,
-	                     bool savegame = false) override;
+	void set_map(const std::string& mapname,
+	             const std::string& mapfilename,
+	             const std::string&,
+	             const std::string&,
+	             uint32_t maxplayers,
+	             bool savegame = false) override;
 	void set_player_state(uint8_t number, PlayerSettings::State state) override;
-	virtual void
-	set_player_ai(uint8_t number, const std::string& ai, bool const random_ai = false) override;
+	void set_player_ai(uint8_t number, const std::string& ai, bool random_ai = false) override;
 	void next_player_state(uint8_t number) override;
-	virtual void set_player_tribe(uint8_t number,
-	                              const std::string& tribe,
-	                              bool const random_tribe = false) override;
+	void
+	set_player_tribe(uint8_t number, const std::string& tribe, bool random_tribe = false) override;
 	void set_player_init(uint8_t number, uint8_t initialization_index) override;
 	void set_player_name(uint8_t number, const std::string& name) override;
 	void set_player(uint8_t number, const PlayerSettings& ps) override;
@@ -106,6 +105,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) override;
 	void set_win_condition_script(const std::string&) override;
 	std::string get_win_condition_script() override;
+	int32_t get_win_condition_duration() override;
+	void set_win_condition_duration(int32_t duration) override;
 
 	void set_peaceful_mode(bool peace) override;
 	bool is_peaceful_mode() override;
@@ -115,8 +116,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	// ChatProvider interface
 	void send(const std::string& msg) override;
-	const std::vector<ChatMessage>& get_messages() const override;
-	bool has_been_set() const override {
+	[[nodiscard]] const std::vector<ChatMessage>& get_messages() const override;
+	[[nodiscard]] bool has_been_set() const override {
 		return true;
 	}
 

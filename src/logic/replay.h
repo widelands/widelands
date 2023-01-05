@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,6 +74,21 @@ private:
 	StreamWrite* cmdlog_;
 	std::string filename_;
 };
+
+/** Extract the savegame from a replay to a temporary file. */
+struct ReplayfileSavegameExtractor {
+	explicit ReplayfileSavegameExtractor(const std::string& gamefilename);
+	~ReplayfileSavegameExtractor();
+
+	[[nodiscard]] inline const std::string& file() const {
+		return temp_file_.empty() ? source_file_ : temp_file_;
+	}
+
+private:
+	const std::string& source_file_;
+	std::string temp_file_;
+};
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_REPLAY_H

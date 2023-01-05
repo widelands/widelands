@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2021
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-10 03:01+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2013\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
@@ -790,54 +790,62 @@ msgstr "Brùth air “%s” gus uinneag an stòrais a thoglachadh gu luath."
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads. The "
-"supplies and demands of buildings are handled in its economy."
-msgstr "Togaidh tu eaconamaidh le togalaichean is brataich a bhios ceangailte le rathaidean. Thèid an saothrachadh is na feumalachdan aig togalach a làimhseachadh taobh a-staigh an eaconamaidh aige."
+"An economy consists of all buildings and flags connected by roads, ferries, "
+"or ships. The supplies and demands of buildings are handled in their "
+"economy. A player can have more than one economy."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:69
+msgid ""
+"You can have more than one economy if their flags are not connected by any "
+"means of transportation. This is why the Configure Economy menu can only be "
+"accessed from flags and warehouses, not the player’s main menu."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr "Tha raon-obrach glè bheag aig cuid a thogalaichean, can an tuathanas. Ma thèid an togalach a chuairteachadh le craobhan no rathaidean, cha shaothraich e bathar tuilleadh."
 
-#: ../../data/txts/tips/general_game.lua:73
+#: ../../data/txts/tips/general_game.lua:77
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
 msgstr "Sùm a-steach/a-mach le cuibhle na luchaige no le %1%/%2%. Brùth air %3% gus an sùm ath-shuidheachadh."
 
-#: ../../data/txts/tips/general_game.lua:80
+#: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
 msgstr "Cleachd iuchraichean “%1$s” agus “%2$s” airson leum a ghearradh eadar ionadan far an robh thu o chionn ghoirid."
 
-#: ../../data/txts/tips/general_game.lua:84
+#: ../../data/txts/tips/general_game.lua:88
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
 msgstr "Dèan an geama nas luaithe no nas maille le %1%/%2%. Cleachd %3%/%4% airson atharrachadh luath no %5%/%6% airson gleusadh rèidh."
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Iuchraichean saighde"
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "Ctrl + Iuchraichean saighde"
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "Gluais sealladh a’ mhapa le %1%. Gluaisidh %2% an sealladh nas luaithe agus %3% gu mall."
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "Shift + Iuchraichean saighde"
 
-#: ../../data/txts/tips/general_game.lua:98
+#: ../../data/txts/tips/general_game.lua:102
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

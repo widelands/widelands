@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 namespace Widelands {
 
 struct CmdIncorporate : public GameLogicCommand {
-	CmdIncorporate() : GameLogicCommand(Time(0)), worker(nullptr) {
+	CmdIncorporate() : GameLogicCommand(Time(0)) {
 	}  // For savegame loading
 	CmdIncorporate(const Time& t, Worker* const w) : GameLogicCommand(t), worker(w) {
 	}
@@ -37,12 +37,12 @@ struct CmdIncorporate : public GameLogicCommand {
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kIncorporate;
 	}
 
 private:
-	Worker* worker;
+	Worker* worker{nullptr};
 };
 }  // namespace Widelands
 

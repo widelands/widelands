@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@ namespace Widelands {
 /*************************************************************************/
 /*                         Router Implementation                         */
 /*************************************************************************/
-Router::Router(const ResetCycleFn& reset) : reset_(reset), mpf_cycle(0) {
+Router::Router(const ResetCycleFn& reset) : reset_(reset) {
 }
 
 uint32_t Router::assign_cycle() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "build_info.h"
 #include "logic/replay.h"
 #include "logic/replay_game_controller.h"
 #include "ui_basic/messagebox.h"
@@ -56,9 +55,7 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
                    &left_column_box_,
                    &right_column_content_box_),
 
-     is_replay_(is_replay),
-     update_game_details_(false),
-     showing_filenames_(false) {
+     is_replay_(is_replay) {
 
 	if (is_replay_) {
 		show_filenames_ = new UI::Checkbox(
@@ -158,33 +155,15 @@ void LoadGame::clicked_ok() {
 				return;
 			}
 
-			if (is_replay_ && gamedata->version != build_id()) {
-				UI::WLMessageBox w(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Version Mismatch"),
-				                   _("This replay was created with a different Widelands version. It "
-				                     "might be compatible, but will more likely desync or even fail to "
-				                     "load.\n\nPlease do not report any bugs that occur while watching "
-				                     "this replay.\n\nDo you want to load the replay anyway?"),
-				                   UI::WLMessageBox::MBoxType::kOkCancel);
-				if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-					return;
-				}
+			if (!load_or_save_.check_replay_compatibility(*gamedata)) {
+				return;
 			}
 
 			capsule_.set_visible(false);
 
 			try {
 				if (is_replay_) {
-					game_.create_loader_ui({"general_game"}, true, settings_.settings().map_theme,
-					                       settings_.settings().map_background);
-
-					game_.set_ibase(new InteractiveSpectator(game_, get_config_section()));
-					game_.set_write_replay(false);
-
-					new ReplayGameController(game_, gamedata->filename);
-					game_.save_handler().set_allow_saving(false);
-
-					game_.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
-
+					game_.run_replay(gamedata->filename, "");
 				} else {
 					game_.run_load_game(gamedata->filename, "");
 				}

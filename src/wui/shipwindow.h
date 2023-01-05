@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2022 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/walkingdir.h"
 #include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
 #include "wui/itemwaresdisplay.h"
@@ -45,6 +46,7 @@ public:
 
 private:
 	void think() override;
+	void update_destination_button(const Widelands::Ship* ship);
 
 	UI::Button* make_button(UI::Panel* parent,
 	                        const std::string& name,
@@ -55,6 +57,7 @@ private:
 	void no_port_error_message();
 
 	void act_goto();
+	void act_rename();
 	void act_destination();
 	void act_sink();
 	void act_debug();
@@ -68,6 +71,7 @@ private:
 
 	UI::Box vbox_;
 	UI::Box navigation_box_;
+	UI::EditBox* name_field_;
 	UI::Button* btn_goto_;
 	UI::Button* btn_destination_;
 	UI::Button* btn_sink_;

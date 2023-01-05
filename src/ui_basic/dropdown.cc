@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,11 +74,9 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                     base_height(button_dimension, style)),
      id_(next_id_++),
      max_list_items_(max_list_items),
-     max_list_height_(std::numeric_limits<uint32_t>::max()),
-     list_offset_x_(0),
-     list_offset_y_(0),
+
      base_height_(base_height(button_dimension, style)),
-     mouse_tolerance_(50),
+
      button_box_(this, style, 0, 0, UI::Box::Horizontal, w, get_h()),
      push_button_(type == DropdownType::kTextual ?
                      new UI::Button(&button_box_,
@@ -105,10 +103,10 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      label),
      label_(label),
      type_(type),
-     is_enabled_(true),
-     button_style_(button_style),
 
-     autoexpand_display_button_(false) {
+     button_style_(button_style)
+
+{
 	if (label.empty()) {
 		set_tooltip(pgettext("dropdown", "Select Item"));
 	} else {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,9 +33,7 @@ enum class StockPolicy;
 
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
-	ConstructionsiteInformation()
-	   : becomes(nullptr), was(nullptr), intermediates(), totaltime(0), completedtime(0) {
-	}
+	ConstructionsiteInformation() = default;
 
 	/// Draw the partly finished constructionsite
 	void draw(const Vector2f& point_on_dst,
@@ -45,13 +43,13 @@ struct ConstructionsiteInformation {
 	          const RGBColor& player_color,
 	          RenderTarget* dst) const;
 
-	const BuildingDescr*
-	   becomes;  // Also works as a marker telling whether there is a construction site.
-	const BuildingDescr* was;  // only valid if "becomes" is an enhanced building.
+	const BuildingDescr* becomes{
+	   nullptr};  // Also works as a marker telling whether there is a construction site.
+	const BuildingDescr* was{nullptr};  // only valid if "becomes" is an enhanced building.
 	std::vector<const BuildingDescr*>
 	   intermediates;  // If we enhance a building while it's still under construction
-	Duration totaltime;
-	Duration completedtime;
+	Duration totaltime{0U};
+	Duration completedtime{0U};
 };
 
 /*
@@ -77,12 +75,11 @@ public:
 	ConstructionSiteDescr(const std::string& init_descname,
 	                      const LuaTable& t,
 	                      Descriptions& descriptions);
-	~ConstructionSiteDescr() override {
-	}
+	~ConstructionSiteDescr() override = default;
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	FxId creation_fx() const;
+	[[nodiscard]] FxId creation_fx() const;
 
 private:
 	const FxId creation_fx_;
@@ -153,9 +150,9 @@ protected:
 	          RenderTarget* dst) override;
 
 private:
-	int32_t fetchfromflag_;  // # of wares to fetch from flag
+	int32_t fetchfromflag_{0};  // # of wares to fetch from flag
 
-	bool builder_idle_;                 // used to determine whether the builder is idle
+	bool builder_idle_{false};          // used to determine whether the builder is idle
 	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
 
 	std::map<DescriptionIndex, uint8_t> additional_wares_;

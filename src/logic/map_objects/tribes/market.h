@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,12 +31,11 @@ namespace Widelands {
 class MarketDescr : public BuildingDescr {
 public:
 	MarketDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
-	~MarketDescr() override {
-	}
+	~MarketDescr() override = default;
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	DescriptionIndex carrier() const {
+	[[nodiscard]] DescriptionIndex carrier() const {
 		return carrier_;
 	}
 
@@ -74,10 +73,10 @@ private:
 		std::vector<Worker*> workers;
 
 		// The number of individual wares in 'items', i.e. the sum of all '.second's.
-		int num_wares_per_batch() const;
+		[[nodiscard]] int num_wares_per_batch() const;
 
 		// True if the 'num_shipped_batches' equals the 'initial_num_batches'
-		bool fulfilled() const;
+		[[nodiscard]] bool fulfilled() const;
 	};
 
 	static void

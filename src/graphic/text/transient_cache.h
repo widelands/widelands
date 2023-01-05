@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,7 +77,7 @@ private:
 	};
 
 	uint32_t max_size_in_size_unit_;
-	uint32_t size_in_size_unit_;
+	uint32_t size_in_size_unit_{0U};
 	std::map<std::string, Entry> entries_;
 	AccessHistory access_history_;
 
@@ -88,7 +88,7 @@ private:
 
 template <typename T>
 TransientCache<T>::TransientCache(uint32_t max_size_in_arbitrary_unit)
-   : max_size_in_size_unit_(max_size_in_arbitrary_unit), size_in_size_unit_(0) {
+   : max_size_in_size_unit_(max_size_in_arbitrary_unit) {
 }
 template <typename T> TransientCache<T>::~TransientCache() {
 	flush();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,30 +43,35 @@ public:
 	/**
 	 * \return a list of soldiers that are currently present in the building.
 	 */
-	virtual std::vector<Soldier*> present_soldiers() const = 0;
+	[[nodiscard]] virtual std::vector<Soldier*> present_soldiers() const = 0;
 
 	/**
 	 * \return a list of soldiers that are currently stationed in the building.
 	 */
-	virtual std::vector<Soldier*> stationed_soldiers() const = 0;
+	[[nodiscard]] virtual std::vector<Soldier*> stationed_soldiers() const = 0;
+
+	/**
+	 * \return a list of soldiers that are currently stationed in or coming to the building.
+	 */
+	[[nodiscard]] virtual std::vector<Soldier*> associated_soldiers() const = 0;
 
 	/**
 	 * \return the minimum number of soldiers that this building can be
 	 * configured to hold.
 	 */
-	virtual Quantity min_soldier_capacity() const = 0;
+	[[nodiscard]] virtual Quantity min_soldier_capacity() const = 0;
 
 	/**
 	 * \return the maximum number of soldiers that this building can be
 	 * configured to hold.
 	 */
-	virtual Quantity max_soldier_capacity() const = 0;
+	[[nodiscard]] virtual Quantity max_soldier_capacity() const = 0;
 
 	/**
 	 * \return the number of soldiers this building is configured to hold
 	 * right now.
 	 */
-	virtual Quantity soldier_capacity() const = 0;
+	[[nodiscard]] virtual Quantity soldier_capacity() const = 0;
 
 	/**
 	 * Sets the capacity for soldiers of this building.
@@ -100,9 +105,7 @@ public:
 		return 0;
 	}
 
-protected:
-	virtual ~SoldierControl() {
-	}
+	virtual ~SoldierControl() = default;
 };
 }  // namespace Widelands
 

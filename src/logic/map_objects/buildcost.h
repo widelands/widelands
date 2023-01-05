@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2022 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ struct Buildcost : std::map<DescriptionIndex, uint8_t> {
 	Buildcost() = default;
 	Buildcost(std::unique_ptr<LuaTable> table, Widelands::Descriptions& descriptions);
 
-	Quantity total() const;
+	[[nodiscard]] Quantity total() const;
 
 	void save(FileWrite& fw, const TribeDescr& tribe) const;
 	void load(FileRead& fr, const TribeDescr& tribe);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,12 +31,12 @@ class MiniMap : public UI::UniqueWindow {
 public:
 	struct Registry : public UI::UniqueWindow::Registry {
 		MiniMapLayer minimap_layers;
-		MiniMapType minimap_type;
+		MiniMapType minimap_type{MiniMapType::kStaticViewWindow};
 
-		Registry()
-		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Owner | MiniMapLayer::Flag |
-		                    MiniMapLayer::Road | MiniMapLayer::Building),
-		     minimap_type(MiniMapType::kStaticViewWindow) {
+		explicit Registry(bool is_game)
+		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Flag | MiniMapLayer::Road |
+		                    MiniMapLayer::Building | MiniMapLayer::Ship |
+		                    (is_game ? MiniMapLayer::Owner : MiniMapLayer::StartingPositions)) {
 		}
 
 		MiniMap* get_window() const {
@@ -104,7 +104,7 @@ private:
 
 		// Intermediate texture, cached between frames.
 		std::unique_ptr<Texture> minimap_image_static_;
-		uint16_t rows_drawn_;
+		uint16_t rows_drawn_{0U};
 
 		// This needs to be owned since it will be rendered by the RenderQueue
 		// later, so it must be valid for the whole frame.
@@ -121,6 +121,7 @@ private:
 	uint32_t but_h() const;
 
 	InteractiveBase& ibase_;
+	MiniMapLayer owner_button_impl_;
 	View view_;
 	UI::Button button_terrn;
 	UI::Button button_owner;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,10 +38,8 @@ ProgressBar::ProgressBar(Panel* const parent,
                          uint32_t const orientation)
    : Panel(parent, style, x, y, w, h),
      orientation_(orientation),
-     state_(0),
-     total_(100),
-     progress_style_(style),
-     show_percent_(true) {
+
+     progress_style_(style) {
 }
 
 inline const UI::ProgressbarStyleInfo& ProgressBar::progress_style() const {

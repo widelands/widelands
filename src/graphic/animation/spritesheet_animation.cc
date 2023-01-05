@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2022 by the Widelands Development Team
+ * Copyright (C) 2019-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 #include "graphic/animation/spritesheet_animation.h"
 
 #include <cassert>
+#include <cstddef>
 #include <memory>
 
 #include "graphic/image.h"
@@ -39,12 +40,9 @@ SpriteSheetAnimation::MipMapEntry IMPLEMENTATION
 SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::string& file,
                                                                      int init_rows,
                                                                      int init_columns)
-   : sheet(nullptr),
-     playercolor_mask_sheet(nullptr),
-     rows(init_rows),
+   : rows(init_rows),
      columns(init_columns),
-     w(0),
-     h(0),
+
      sheet_file(file) {
 
 	assert(g_fs->file_exists(file));
@@ -131,7 +129,7 @@ SpriteSheetAnimation::SpriteSheetMipMapEntry::frame_textures(bool return_playerc
 	std::vector<std::unique_ptr<const Texture>> result;
 	const Rectf rect(Vector2f::zero(), width(), height());
 	if (!return_playercolor_masks || has_playercolor_masks) {
-		const size_t no_of_frames = rows * columns;
+		const size_t no_of_frames = static_cast<size_t>(rows) * columns;
 		for (size_t i = 0; i < no_of_frames; ++i) {
 			std::unique_ptr<Texture> texture(new Texture(width(), height()));
 

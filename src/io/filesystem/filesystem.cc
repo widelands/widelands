@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,6 +59,15 @@
 #define PATH_MAX MAX_PATH
 #endif
 
+/* Quickfix for bug https://github.com/widelands/widelands/issues/5614:
+ * Most systems specify PATH_MAX to be the maximum number of characters in a file path.
+ * Systems without a limit (or which don't care about standards) may neglect to define this symbol.
+ * On such systems, simply use an arbitrary value that is high enough for some very long paths.
+ */
+#ifndef PATH_MAX
+#define PATH_MAX 0x10000
+#endif
+
 namespace {
 /// A class that makes iteration over filename_?.* templates easy. It is much faster than using
 /// regex.
@@ -73,7 +82,7 @@ private:
 	std::string template_;
 	std::string format_;
 	std::string to_replace_;
-	uint32_t current_;
+	uint32_t current_{0U};
 	uint32_t max_;
 
 	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
@@ -82,7 +91,7 @@ private:
 /**
  * Implementation for NumberGlob.
  */
-NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
+NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template) {
 	int nchars = count(file_template.begin(), file_template.end(), '?');
 	format_ = "%0" + as_string(nchars) + "i";
 

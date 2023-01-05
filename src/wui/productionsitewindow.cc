@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,13 +42,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
                                            Widelands::ProductionSite& ps,
                                            bool avoid_fastclick,
                                            bool workarea_preview_wanted)
-   : BuildingWindow(parent, reg, ps, avoid_fastclick),
-     production_site_(&ps),
-     worker_table_(nullptr),
-     worker_caps_(nullptr),
-     worker_type_(nullptr),
-     worker_xp_decrease_(nullptr),
-     worker_xp_increase_(nullptr) {
+   : BuildingWindow(parent, reg, ps, avoid_fastclick), production_site_(&ps) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
 		   if (is_dying_) {
@@ -243,7 +237,9 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 		} else if (request != nullptr) {
 			const Widelands::WorkerDescr* desc =
 			   production_site->owner().tribe().get_worker_descr(request->get_index());
-			er.set_picture(0, desc->icon(), request->is_open() ? _("(vacant)") : _("(coming)"));
+			er.set_picture(0, desc->icon(),
+			               format(_("%1$s (%2$s)"), request->is_open() ? _("vacant") : _("coming"),
+			                      desc->descname()));
 
 			er.set_string(1, "");
 			er.set_string(2, "");
@@ -260,16 +256,18 @@ void ProductionSiteWindow::evict_worker() {
 		return;
 	}
 
-	if (worker_table_->has_selection()) {
-		Widelands::Worker* worker = production_site->working_positions()
-		                               ->at(worker_table_->get_selected())
-		                               .worker.get(ibase()->egbase());
-		if (worker != nullptr) {
-			if (game_ != nullptr) {
-				game_->send_player_evict_worker(*worker);
-			} else {
-				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
-			}
+	if (!worker_table_->has_selection()) {
+		worker_table_->select(0);
+	}
+
+	Widelands::Worker* worker = production_site->working_positions()
+	                               ->at(worker_table_->get_selected())
+	                               .worker.get(ibase()->egbase());
+	if (worker != nullptr) {
+		if (game_ != nullptr) {
+			game_->send_player_evict_worker(*worker);
+		} else {
+			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 		}
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 #include "base/log.h"
 
-BufferedConnection::Peeker::Peeker(BufferedConnection* conn) : conn_(conn), peek_pointer_(0) {
+BufferedConnection::Peeker::Peeker(BufferedConnection* conn) : conn_(conn) {
 	assert(conn_);
 }
 
@@ -299,9 +299,15 @@ void BufferedConnection::start_receiving() {
 			   start_receiving();
 		   } else {
 			   if (socket_.is_open()) {
-				   log_err("[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
-				           ec.value(), ec.message().c_str());
-				   log_err("[BufferedConnection] Closing socket\n");
+				   if (ec == asio::error::eof) {
+					   log_info("[BufferedConnection] End of file when receiving data from host, "
+					            "closing socket\n");
+				   } else {
+					   log_err(
+					      "[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
+					      ec.value(), ec.message().c_str());
+					   log_info("[BufferedConnection] Closing socket\n");
+				   }
 				   socket_.shutdown(asio::ip::tcp::socket::shutdown_both, ec);
 				   socket_.close();
 			   }
@@ -358,7 +364,7 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 	}
 }
 
-BufferedConnection::BufferedConnection() : socket_(io_service_), currently_sending_(false) {
+BufferedConnection::BufferedConnection() : socket_(io_service_) {
 }
 
 void BufferedConnection::notify_connected() {

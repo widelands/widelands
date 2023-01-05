@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2022 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -159,8 +159,8 @@ private:
 	size_t find_tab(int32_t x, int32_t y) const;
 
 	TabList tabs_;
-	size_t active_;     ///< index of the currently active tab
-	size_t highlight_;  ///< index of the highlighted button
+	size_t active_{0U};  ///< index of the currently active tab
+	size_t highlight_;   ///< index of the highlighted button
 
 	const UI::TabPanelStyle background_style_;  // Background color and texture. Not owned.
 	const UI::PanelStyleInfo& background_style() const;

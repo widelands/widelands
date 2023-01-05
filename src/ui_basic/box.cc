@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2022 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,11 +39,9 @@ Box::Box(Panel* const parent,
      max_x_(max_x != 0 ? max_x : g_gr->get_xres()),
      max_y_(max_y != 0 ? max_y : g_gr->get_yres()),
 
-     scrolling_(false),
-     force_scrolling_(false),
      scrollbar_(nullptr),
      orientation_(orientation),
-     mindesiredbreadth_(0),
+
      inner_spacing_(inner_spacing) {
 }
 

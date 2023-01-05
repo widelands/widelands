@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,22 +76,22 @@ struct MousewheelConfigSettings {
 class MousewheelOptionsDialog;
 
 struct KeymodDropdown : public UI::Dropdown<uint16_t> {
-	KeymodDropdown(UI::Panel* parent);
+	explicit KeymodDropdown(UI::Panel* parent);
 };
 
 struct DirDropdown : public UI::Dropdown<uint8_t> {
-	DirDropdown(Panel* parent, bool two_d = false);
+	explicit DirDropdown(Panel* parent, bool two_d = false);
 };
 
 struct InvertDirDropdown : public UI::Dropdown<uint8_t> {
-	InvertDirDropdown(Panel* parent);
+	explicit InvertDirDropdown(Panel* parent);
 };
 
 // Box for options of a single handler
 struct KeymodAndDirBox : public UI::Box {
 	KeymodAndDirBox(UI::Panel* parent,
 	                const std::string& title,
-	                const std::list<KeymodAndDirBox*> shared_scope_list,
+	                std::list<KeymodAndDirBox*> shared_scope_list,
 	                uint16_t* keymod,
 	                uint8_t* dir,
 	                bool two_d = false);
@@ -135,7 +135,7 @@ private:
 };
 
 struct ScrollOptionsButtonBox : public UI::Box {
-	ScrollOptionsButtonBox(MousewheelOptionsDialog* parent);
+	explicit ScrollOptionsButtonBox(MousewheelOptionsDialog* parent);
 
 private:
 	UI::Button reset_button_;
@@ -148,7 +148,7 @@ private:
 // Main dialog box
 class MousewheelOptionsDialog : public UI::Box {
 public:
-	MousewheelOptionsDialog(UI::Panel* parent);
+	explicit MousewheelOptionsDialog(UI::Panel* parent);
 
 	void update_settings();
 	void apply_settings();

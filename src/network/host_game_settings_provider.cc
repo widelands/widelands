@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -182,6 +182,14 @@ std::string HostGameSettingsProvider::get_win_condition_script() {
 
 void HostGameSettingsProvider::set_win_condition_script(const std::string& wc) {
 	host_->set_win_condition_script(wc);
+}
+
+int32_t HostGameSettingsProvider::get_win_condition_duration() {
+	return host_->settings().win_condition_duration;
+}
+
+void HostGameSettingsProvider::set_win_condition_duration(const int32_t duration) {
+	host_->set_win_condition_duration(duration);
 }
 
 void HostGameSettingsProvider::set_peaceful_mode(bool peace) {

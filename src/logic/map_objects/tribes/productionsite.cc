@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -94,6 +94,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
    : BuildingDescr(init_descname, init_type, table, descriptions),
      ware_demand_checks_(new std::set<DescriptionIndex>()),
      worker_demand_checks_(new std::set<DescriptionIndex>()),
+     is_infinite_production_useful_(false),
      out_of_resource_productivity_threshold_(100) {
 
 	std::unique_ptr<LuaTable> items_table;
@@ -284,18 +285,7 @@ IMPLEMENTATION
 */
 
 ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
-   : Building(ps_descr),
-     working_positions_(ps_descr.nr_working_positions()),
-     fetchfromflag_(0),
-     program_timer_(false),
-     program_time_(0),
-     post_timer_(50),
-     last_stat_percent_(0),
-     actual_percent_(0),
-     last_program_end_time(0),
-     is_stopped_(false),
-     default_anim_("idle"),
-     main_worker_(-1) {
+   : Building(ps_descr), working_positions_(ps_descr.nr_working_positions()) {
 	format_statistics_string();
 }
 
@@ -308,21 +298,55 @@ void ProductionSite::load_finish(EditorGameBase& egbase) {
  * Display whether we're occupied.
  */
 void ProductionSite::update_statistics_string(std::string* s) {
+	uint32_t nr_xp_requests = 0;
 	uint32_t nr_requests = 0;
 	uint32_t nr_coming = 0;
+
+	auto worker_descr_it = descr().working_positions().begin();
+	uint32_t worker_descr_it_counter = worker_descr_it->second;
+
 	for (uint32_t i = 0; i < descr().nr_working_positions(); ++i) {
 		const Widelands::Request* request = working_positions_.at(i).worker_request;
 		// Check whether a request is being fulfilled or not
+		bool vacant = false;
 		if (request != nullptr) {
 			if (request->is_open()) {
-				++nr_requests;
+				vacant = true;
 			} else {
 				++nr_coming;
 			}
 		} else if (working_positions_.at(i).worker == nullptr) {
 			// We might have no request, but no worker either
-			++nr_requests;
+			vacant = true;
 		}
+
+		if (vacant) {
+			// Check if this worker can be built directly
+			const WorkerDescr& d =
+			   *owner().egbase().descriptions().get_worker_descr(worker_descr_it->first);
+			if (d.is_buildable() || d.has_demand_check()) {
+				++nr_requests;
+			} else {
+				++nr_xp_requests;
+			}
+		}
+
+		--worker_descr_it_counter;
+		if (worker_descr_it_counter == 0) {
+			++worker_descr_it;
+			if (worker_descr_it != descr().working_positions().end()) {
+				worker_descr_it_counter = worker_descr_it->second;
+			}
+		}
+	}
+
+	if (nr_xp_requests > 0) {
+		*s = StyleManager::color_tag(
+		   (nr_xp_requests == 1 ?
+             owner().tribe().get_productionsite_experienced_worker_missing_string() :
+             owner().tribe().get_productionsite_experienced_workers_missing_string()),
+		   g_style_manager->building_statistics_style().low_color());
+		return;
 	}
 
 	if (nr_requests > 0) {
@@ -822,12 +846,9 @@ void ProductionSite::set_next_program_override(Game& game,
 }
 
 bool ProductionSite::has_forced_state() const {
-	for (const State& s : stack_) {
-		if ((s.flags & State::StateFlags::kStateFlagIgnoreStopped) != 0u) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(stack_.begin(), stack_.end(), [](const State& s) {
+		return (s.flags & State::StateFlags::kStateFlagIgnoreStopped) != 0;
+	});
 }
 
 void ProductionSite::find_and_start_next_program(Game& game) {
@@ -881,6 +902,11 @@ void ProductionSite::set_stopped(bool const stopped) {
 	is_stopped_ = stopped;
 	get_economy(wwWARE)->rebalance_supply();
 	get_economy(wwWORKER)->rebalance_supply();
+	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
+}
+
+void ProductionSite::set_infinite_production(const bool i) {
+	infinite_production_ = i;
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2022 by the Widelands Development Team
+ * Copyright (C) 2019-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,25 +59,25 @@ private:
 		          Surface* target,
 		          float opacity) const override;
 
-		int width() const override;
-		int height() const override;
+		[[nodiscard]] int width() const override;
+		[[nodiscard]] int height() const override;
 
 		/// Loaded sprite sheet for all frames
-		const Image* sheet;
+		const Image* sheet{nullptr};
 
 		/// Loaded player color mask sprite sheet for all frames
-		const Image* playercolor_mask_sheet;
+		const Image* playercolor_mask_sheet{nullptr};
 
 		/// Number of rows for the spritesheets
 		const int rows;
 		/// Number of columns for the spritesheets
 		const int columns;
 		/// Texture width
-		int w;
+		int w{0};
 		/// Texture height
-		int h;
+		int h{0};
 
-		std::vector<std::unique_ptr<const Texture>>
+		[[nodiscard]] std::vector<std::unique_ptr<const Texture>>
 		frame_textures(bool return_playercolor_masks) const override;
 
 	private:

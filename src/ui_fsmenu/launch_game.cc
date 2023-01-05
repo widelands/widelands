@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +51,8 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                      0,
                      _("Configure this game"),
                      UI::Align::kCenter),
+     write_replay_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Write Replay")),
      warn_desyncing_addon_(
         &right_column_content_box_,
         0,
@@ -75,6 +77,20 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
+     win_condition_duration_(&right_column_content_box_,
+                             0,
+                             0,
+                             360,
+                             240,
+                             Widelands::kDefaultWinConditionDuration,
+                             15,        // 15 minutes minimum gametime
+                             512 * 60,  // 512 hours maximum gametime (arbitrary limit)
+                             UI::PanelStyle::kFsMenu,
+                             _("Playing time"),
+                             UI::SpinBox::Units::kMinutes,
+                             UI::SpinBox::Type::kBig,
+                             5,
+                             60),
      peaceful_(
         &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
      custom_starting_positions_(&right_column_content_box_,
@@ -104,10 +120,11 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 
      // Variables and objects used in the menu
      settings_(settings),
-     ctrl_(ctrl),
-     peaceful_mode_forbidden_(false) {
+     ctrl_(ctrl) {
 	warn_desyncing_addon_.set_visible(false);
+	write_replay_.set_state(true);
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
+	win_condition_duration_.changed.connect([this]() { win_condition_duration_changed(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
 	if (choose_map_ != nullptr) {
@@ -136,11 +153,14 @@ LaunchGame::~LaunchGame() {
 void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add(&write_replay_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add(&warn_desyncing_addon_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(4 * kPadding);
 	right_column_content_box_.add(&configure_game_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add(&win_condition_duration_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&peaceful_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
@@ -168,13 +188,16 @@ void LaunchGame::layout() {
 }
 
 void LaunchGame::update_warn_desyncing_addon() {
-	for (const auto& pair : AddOns::g_addons) {
-		if (pair.second && !pair.first->sync_safe) {
-			warn_desyncing_addon_.set_visible(true);
-			return;
-		}
-	}
-	warn_desyncing_addon_.set_visible(false);
+	const bool has_desyncing_addon = std::any_of(
+	   AddOns::g_addons.begin(), AddOns::g_addons.end(),
+	   [](const AddOns::AddOnState& addon) { return addon.second && !addon.first->sync_safe; });
+
+	warn_desyncing_addon_.set_visible(has_desyncing_addon);
+	write_replay_.set_visible(!has_desyncing_addon);
+}
+
+bool LaunchGame::should_write_replay() const {
+	return write_replay_.is_visible() && write_replay_.get_state();
 }
 
 void LaunchGame::update_peaceful_mode() {
@@ -233,6 +256,7 @@ void LaunchGame::update_custom_starting_positions() {
 }
 
 bool LaunchGame::init_win_condition_label() {
+	win_condition_duration_.set_visible(false);
 	if (settings_.settings().scenario) {
 		win_condition_dropdown_.set_enabled(false);
 		win_condition_dropdown_.set_label(_("Scenario"));
@@ -351,6 +375,10 @@ LaunchGame::win_condition_if_valid(const std::string& win_condition_script,
 		t.reset(nullptr);
 	}
 	return t;
+}
+
+void LaunchGame::win_condition_duration_changed() {
+	settings_.set_win_condition_duration(win_condition_duration_.get_value());
 }
 
 void LaunchGame::toggle_peaceful() {

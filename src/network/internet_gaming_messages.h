@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2022 by the Widelands Development Team
+ * Copyright (C) 2012-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,10 +23,7 @@
 
 struct InternetGamingMessages {
 public:
-	// Before calling this function the first time, keep in mind to first fill_map()
-	static const std::string& get_message(const std::string& code);
-
-	static void fill_map();
+	static const std::string get_message(const std::string& code);
 };
 
 #endif  // end of include guard: WL_NETWORK_INTERNET_GAMING_MESSAGES_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2022 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,11 +72,11 @@ struct EditBox : public Panel {
 		warning_ = warn;
 	}
 
-	bool has_warning() {
+	bool has_warning() const {
 		return warning_;
 	}
 
-	bool is_password() {
+	bool is_password() const {
 		return password_;
 	}
 
@@ -93,11 +93,11 @@ private:
 	void draw_caret(RenderTarget& dst, const Vector2i& point, uint16_t fontheight);
 	std::string text_to_asterisk();
 
-	bool history_active_;
-	int16_t history_position_;
+	bool history_active_{false};
+	int16_t history_position_{-1};
 	std::string history_[CHAT_HISTORY_SIZE];
-	bool password_;
-	bool warning_;
+	bool password_{false};
+	bool warning_{false};
 	uint32_t snap_to_char(uint32_t cursor) const;
 	void select_until(uint32_t end) const;
 	uint32_t next_char(uint32_t cursor) const;
@@ -108,9 +108,13 @@ private:
 	void set_caret_to_cursor_pos(int32_t cursor_pos_x);
 	int calculate_text_width(int pos) const;
 	int approximate_cursor(int32_t cursor_pos_x, int approx_caret_pos) const;
+	void enter_cursor_movement_mode();
 
 	ScopedTimer caret_timer_;
-	uint32_t caret_ms;
+	uint32_t caret_ms_;
+	ScopedTimer cursor_movement_timer_;
+	uint32_t cursor_ms_;
+	bool cursor_movement_active_ = false;
 };
 }  // namespace UI
 

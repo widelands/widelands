@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,7 @@
 #include "io/filesystem/layered_filesystem.h"
 
 /// Prepare infrastructure for reading song files from disk and register the matching files
-Songset::Songset(const std::string& dir, const std::string& basename)
-   : m_(nullptr), rwops_(nullptr) {
+Songset::Songset(const std::string& dir, const std::string& basename) {
 	assert(g_fs);
 	std::vector<std::string> mp3_files = g_fs->get_sequential_files(dir, basename, "mp3");
 	std::vector<std::string> ogg_files = g_fs->get_sequential_files(dir, basename, "ogg");

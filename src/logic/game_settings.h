@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -116,14 +116,7 @@ struct NoteGameSettings {
  * Think of it as the Model in MVC.
  */
 struct GameSettings {
-	GameSettings()
-	   : playernum(0),
-	     usernum(0),
-	     scenario(false),
-	     multiplayer(false),
-	     savegame(false),
-	     peaceful(false),
-	     custom_starting_positions(false) {
+	GameSettings() {
 		std::unique_ptr<LuaInterface> lua(new LuaInterface);
 		std::unique_ptr<LuaTable> win_conditions(
 		   lua->run_script("scripting/win_conditions/init.lua"));
@@ -137,9 +130,9 @@ struct GameSettings {
 		}
 		for (const auto& pair : AddOns::g_addons) {
 			if (pair.first->category == AddOns::AddOnCategory::kWinCondition && pair.second) {
-				const std::string filename = kAddOnDir + g_fs->file_separator() +
-				                             pair.first->internal_name + g_fs->file_separator() +
-				                             "init.lua";
+				const std::string filename = kAddOnDir + LayeredFileSystem::file_separator() +
+				                             pair.first->internal_name +
+				                             LayeredFileSystem::file_separator() + "init.lua";
 				if (g_fs->file_exists(filename)) {
 					win_condition_scripts.push_back(filename);
 				} else {
@@ -151,22 +144,22 @@ struct GameSettings {
 	}
 
 	/// Returns the basic preload info for a tribe.
-	Widelands::TribeBasicInfo get_tribeinfo(const std::string& tribename) const;
+	[[nodiscard]] Widelands::TribeBasicInfo get_tribeinfo(const std::string& tribename) const;
 
 	/// Find a player number that the slot could share in. Does not guarantee that a viable slot was
 	/// actually found.
-	Widelands::PlayerNumber find_shared(PlayerSlot slot) const;
+	[[nodiscard]] Widelands::PlayerNumber find_shared(PlayerSlot slot) const;
 	/// Check if the player number returned by find_shared is usable
-	bool is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber shared) const;
+	[[nodiscard]] bool is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber shared) const;
 	/// Savegame slots and certain scenario slots can't be closed
-	bool uncloseable(PlayerSlot slot) const;
+	[[nodiscard]] bool uncloseable(PlayerSlot slot) const;
 	/// AIs cannot be changed in scenarios
-	bool allows_ais(PlayerSlot slot) const;
+	[[nodiscard]] bool allows_ais(PlayerSlot slot) const;
 
 	/// Number of player position of the host player
-	int16_t playernum;
+	int16_t playernum{0};
 	/// Number of users entry
-	int8_t usernum;
+	int8_t usernum{0};
 
 	/// Name of the selected map
 	std::string mapname;
@@ -176,21 +169,23 @@ struct GameSettings {
 	std::string win_condition_script;
 	/// An ordered list of all win condition script files.
 	std::vector<std::string> win_condition_scripts;
+	/// User-configured win condition time limit, in minutes.
+	int32_t win_condition_duration{Widelands::kDefaultWinConditionDuration};
 
 	/// Is map a scenario
-	bool scenario;
+	bool scenario{false};
 
 	/// Is this a multiplayer game
-	bool multiplayer;
+	bool multiplayer{false};
 
 	/// Is a savegame selected for loading?
-	bool savegame;
+	bool savegame{false};
 
 	/// Is all fighting forbidden?
-	bool peaceful;
+	bool peaceful{false};
 
 	// Whether players may pick their own starting positions
-	bool custom_starting_positions;
+	bool custom_starting_positions{false};
 
 	std::string map_theme;
 	std::string map_background;
@@ -214,8 +209,7 @@ struct GameSettings {
  * Think of it as a mix of Model and Controller in MVC.
  */
 struct GameSettingsProvider {
-	virtual ~GameSettingsProvider() {
-	}
+	virtual ~GameSettingsProvider() = default;
 
 	virtual const GameSettings& settings() = 0;
 
@@ -236,12 +230,11 @@ struct GameSettingsProvider {
 	                     uint32_t maxplayers,
 	                     bool savegame = false) = 0;
 	virtual void set_player_state(uint8_t number, PlayerSettings::State) = 0;
-	virtual void set_player_ai(uint8_t number, const std::string&, bool const random_ai = false) = 0;
+	virtual void set_player_ai(uint8_t number, const std::string&, bool random_ai = false) = 0;
 	// Multiplayer no longer toggles per button
 	virtual void next_player_state(uint8_t /* number */) {
 	}
-	virtual void
-	set_player_tribe(uint8_t number, const std::string&, bool const random_tribe = false) = 0;
+	virtual void set_player_tribe(uint8_t number, const std::string&, bool random_tribe = false) = 0;
 	virtual void set_player_init(uint8_t number, uint8_t index) = 0;
 	virtual void set_player_name(uint8_t number, const std::string&) = 0;
 	virtual void set_player(uint8_t number, const PlayerSettings&) = 0;
@@ -252,6 +245,8 @@ struct GameSettingsProvider {
 	virtual void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) = 0;
 	virtual void set_win_condition_script(const std::string& wc) = 0;
 	virtual std::string get_win_condition_script() = 0;
+	virtual void set_win_condition_duration(int32_t duration) = 0;
+	virtual int32_t get_win_condition_duration() = 0;
 
 	virtual void set_peaceful_mode(bool peace) = 0;
 	virtual bool is_peaceful_mode() = 0;
@@ -263,10 +258,11 @@ struct GameSettingsProvider {
 		return UserSettings::highest_playernum() >= settings().playernum;
 	}
 	// For retrieving tips texts
-	struct NoTribe {};
+	struct NoTribe : public std::exception {};
 	const std::string& get_players_tribe() {
-		if (!has_players_tribe())
+		if (!has_players_tribe()) {
 			throw NoTribe();
+		}
 		return settings().players[settings().playernum].tribe;
 	}
 };

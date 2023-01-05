@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,7 @@ saved game file. it is an abstract base class
 */
 class GameDataPacket {
 public:
-	virtual ~GameDataPacket() {
-	}
+	virtual ~GameDataPacket() = default;
 	virtual void read(FileSystem&, Game&, MapObjectLoader* = nullptr) = 0;
 	virtual void write(FileSystem&, Game&, MapObjectSaver* = nullptr) = 0;
 };

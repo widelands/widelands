@@ -69,37 +69,6 @@ wl.Descriptions():new_trainingsite_type {
       { name = "fur_garment_studded", amount = 2 },
    },
 
-   ["soldier attack"] = {
-      food = {
-         {"smoked_fish", "smoked_meat"},
-         {"beer"},
-         {"bread_frisians"},
-      },
-      weapons = {
-         "sword_long",
-         "sword_broad",
-         "sword_double",
-      }
-   },
-   ["soldier health"] = {
-      food = {
-         {"bread_frisians", "beer"},
-         {"smoked_fish", "smoked_meat"},
-      },
-      weapons = {
-         "helmet",
-      }
-   },
-   ["soldier defense"] = {
-      food = {
-         {"bread_frisians", "beer"},
-         {"smoked_fish", "smoked_meat"},
-      },
-      weapons = {
-         "fur_garment_studded",
-      }
-   },
-
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...

@@ -1,7 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
+# Emil Stoyanov <emil.stynv@gmail.com>, 2022
 # Erdoğan Şahin, 2017
 # Erdoğan Şahin, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-10 03:01+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Erdoğan Şahin, 2017\n"
+"Last-Translator: Emil Stoyanov <emil.stynv@gmail.com>, 2022\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,36 +49,36 @@ msgstr "Wideland için Lisans Bilgilendirmesi"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr ""
+msgstr "Telif hakki 2002 - %1% Widelands Gelistirme Ekibi."
 
 #: ../../data/txts/LICENSE.lua:11
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr ""
+msgstr "Bu oyun Ozgur ve Acik Kaynak (FOSS), GNU Genel kamuya acik lisans kapsamindadir (GPL V2.0)."
 
 #: ../../data/txts/LICENSE.lua:13
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "FOSS ve GPL hakkinda daha fazla bilgi icin: %s"
 
 #: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr ""
+msgstr "Lisansin tum metnini, ayrica felsefesi ve kanuni yaptirimlari ile ilgili ayrintilari bulabilirsiniz."
 
 #: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+msgstr "Widelands ile birlikte, GPL'i metin dokumani olarak gonderiyoruz. "
 
 #: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "Linux'ta, COPYING adli dokumani kok kaynakta veya bagimsiz binari paketinde veya yukleme dosyasinda( ‘%1%’ , gibi)."
 
 #: ../../data/txts/LICENSE.lua:19
 msgid ""
@@ -792,54 +793,62 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads. The "
-"supplies and demands of buildings are handled in its economy."
+"An economy consists of all buildings and flags connected by roads, ferries, "
+"or ships. The supplies and demands of buildings are handled in their "
+"economy. A player can have more than one economy."
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:69
+msgid ""
+"You can have more than one economy if their flags are not connected by any "
+"means of transportation. This is why the Configure Economy menu can only be "
+"accessed from flags and warehouses, not the player’s main menu."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:73
+#: ../../data/txts/tips/general_game.lua:77
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:80
+#: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:84
+#: ../../data/txts/tips/general_game.lua:88
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:98
+#: ../../data/txts/tips/general_game.lua:102
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

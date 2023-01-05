@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,8 +92,8 @@ bool TestingRoutingNode::all_members_zeroed() const {
 }
 
 class TestingTransportCostCalculator : public Widelands::ITransportCostCalculator {
-	int32_t calc_cost_estimate(const Widelands::Coords& c1,
-	                           const Widelands::Coords& c2) const override {
+	[[nodiscard]] int32_t calc_cost_estimate(const Widelands::Coords& c1,
+	                                         const Widelands::Coords& c2) const override {
 		// We use an euclidian metric here. It is much easier for
 		// test cases
 		double xd = (c1.x - c2.x);
@@ -112,17 +112,13 @@ public:
 		nodes.insert(nodes.begin(), node);
 	}
 
-	int32_t get_length() const {
+	[[nodiscard]] int32_t get_length() const {
 		return nodes.size();
 	}
 
 	bool has_node(Widelands::RoutingNode* const n) {
-		for (Widelands::RoutingNode* temp_node : nodes) {
-			if (temp_node == n) {
-				return true;
-			}
-		}
-		return false;
+		return std::any_of(nodes.begin(), nodes.end(),
+		                   [n](Widelands::RoutingNode* temp_node) { return temp_node == n; });
 	}
 	bool has_chain(Nodes& n) {
 		bool chain_begin_found = false;

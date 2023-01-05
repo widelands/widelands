@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -239,7 +239,7 @@ FileSystem* LayeredFileSystem::make_sub_file_system(const std::string& dirname) 
 		return &FileSystem::create(canonicalize_name(dirname));
 	} catch (const FileError&) {
 		throw FileNotFoundError(
-		   "LayeredFileSystem: unable to create sub filesystem for existing directory: %s",
+		   "LayeredFileSystem: unable to create sub filesystem for existing directory:",
 		   paths_error_message(dirname));
 	}
 }

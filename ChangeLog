@@ -1,6 +1,157 @@
 [TOC]
 
-## post-1.0 until [git b1c9ca4](https://github.com/widelands/widelands/commit/b1c9ca4d95767cb85427ce235448f6e4cde3d9d1)
+## Post-1.1 until [git 75dfa800](https://github.com/widelands/widelands/commit/75dfa800f399355adb7ee17b5be3237f243afd41)
+
+### Animations, Icons and Overlays
+
+- Remove leftover individual animation frames of buildings (#5269)
+- Upscaled editor splash image (#5634)
+- Move empty sign on Atlantean mines to make it visible when status labels are shown (#5642)
+
+
+### Sounds and Music
+
+
+
+### Tutorials and Campaigns
+
+- Minor tweaks in emp03 to reflect user comments in #5478 (#5648)
+
+
+### Scripting
+
+- Limit `set_soldiers` to 10000 soldiers (#5568)
+
+
+### Maps
+
+
+
+### Add-Ons
+
+
+
+### Saveloading
+
+- Allow loading another replay in replay mode (#5611)
+- Fix saving game with new name (#5639)
+
+
+### AI
+
+- Small AI Fixes (#5683)
+
+
+### Gameplay
+
+- Configurable Win Condition Duration (#5380)
+- Seed random number generator before starting new game (#5608)
+- Fix trainingsites' definition of when a soldier is present (#5640)
+- Fix portspace detection (#5647)
+- Cancel battles when players negotiate truce (#5665)
+- Allow letting individual productionsites produce indefinitely (#4961)
+
+
+### User Interface
+
+- Default select the first worker to kick from a production site (#5515)
+- Do not cut filename extension for directories (#5623)
+- Consume every keydown event in editbox (#5626)
+- Show name and experience type of missing workers (#5432)
+- Delete selected text on text input (#5633)
+- Show coming and absent soldiers in building soldier list (#5437)
+- Draw Actual Game Speed (#5621)
+- Make diplomacy window available to spectators (#5609)
+- Fix cursor flashing (#5674)
+- Redesign Diplomacy Accept/Reject/Retract UI (#5670)
+    - Allow retracting your own pending invitations and join requests.
+    - Join requests may be approved or rejected by any member of the team, not just the player the request was made to.
+    - Removed the confirmation popup and instead added the buttons to the diplomacy window.
+    - Prompt for confirmation before resigning.
+- Quick Navigation GUI (#5487)
+- UI Elements Fixes And Tweaks (#5668)
+     * Allow using PageUp/PageDown and Ctrl+scroll in sliders and spinboxes to change the value faster
+     * Make sure that no slider nor spinbox can wrap around due to integer overflow
+     * Add missing changed() call in spinbox when value is set to min/max (fixes warning update in Editor/Map Options/Ferry Range)
+     * Decrease width of big step buttons of spinboxes (should help dealing with #5631)
+     * Fix updating slider position when min/max is changed (affected attack window)
+     * Add "Click to sort/reverse" to table header tooltips (requested by @frankystone for map selection)
+     * Reset sorting order when user changes column to sort by
+     * Handle big step in inputqueue
+     * Allow using Shift + arrow keys in priority slider to set all input priorities at once
+     * Stabilize selection end in editbox (fixes #5676)
+     * Handle big step in soldier capacity settings
+     * Converted all users of `get_keyboard_change()` to handle big step, remove `enable_big_step` option
+- Add shortcut keys for all menu items (#5705)
+     * add shortcut to statistics button tooltip in interactive_spectator.cc
+     * unify Load and Save hotkeys
+     * change some editor tool hotkeys and make all tools use Shift modifier
+     * editor new map window: create new map when terrain is doubleclicked
+     * editor: remove Alt modifier for third tool function (old TODO item)
+     * editor: ask for exit confirmation even if map is not modified (still skip on Ctrl+click)
+     * ask for exit confirmation in main menu (can be skipped by Ctrl+clicking)
+- Worker and Soldier Statistics Tweaks (#5607)
+    - Fix incorrect genstats labels font colour
+    - Add statistics about civil buildings defeated
+    - Workers without buildcost and soldiers now don't count for the workers graph
+    - Refactored military graph calculation
+    - Show total number of soldiers in soldier stats window
+- Pinned Notes (#5569)
+
+
+### Internationalization
+
+- String Fixes (#5710)
+
+
+### Help and Documentation
+
+- Encyclopedia Hyperlinks (#5533)
+- Fix buildings help button (#5661)
+- Explain clearer what an economy is (#5630)
+- Trainigsite encyclopedia enhancements (#5673)
+
+
+### Editor
+
+- Explain waterway setting in Editor Map Options and add toolips to all map tags (#5653)
+- Map Generator Add-Ons & Map Generating Dialog Accessibility Tweaks (#5537)
+- Editor: Show Starting Positions on Minimap (#5704)
+- Fix segfault in multiselect editor tools (#5708)
+
+
+### Graphics Engine
+
+- Show chat with customized player colours (#5671)
+
+
+### Networking
+
+- Networking log output and formatting usage cleanups (#5560)
+- Prevent spectating host from changing game speed (#5604)
+- Show enabled game-relevant add-ons before hosting (#5599)
+
+
+### Build System
+
+- Fix undefined `PATH_MAX` (#5615)
+- Drop support for g++-5 and g++-6 (#5541)
+- Require libpng >= 1.6 (#5625)
+- Fix Clang15 Compiler Warnings (#5629)
+- Replace `sprintf` with `snprintf` (#5651)
+- Switch to C++17 (#5672)
+- Update clang-tidy CI version (#5682)
+- Fix more clang-tidy checks (#5679, #5689, #5696, #5684, #5695, #5693, #5690, #5694, #5692, #5685, #5688, #5698, #5697, #5686, #5699, #5687, #5691, #5681)
+- Fix member initializer ambiguity regression
+
+
+### Other Issues
+
+- Caret-escape control characters in strings (#5496)
+
+
+
+## Release 1.1
 
 ### Animations, Icons and Overlays
 
@@ -14,6 +165,7 @@
 - Fix pause and jump in empire mill animation (#5270)
 - Add high resolution images for Empire buildings (#5376)
 - Add high resolution images for Atlantean buildings (#5384)
+- Add some new main menu background images (#5606)
 
 
 ### Sounds and Music
@@ -68,6 +220,7 @@
 - Clean up `descriptions` vs `wl.Descriptions()` in init.lua files (#5296)
 - Restore global descriptions for savegame compatibility (#5393)
 - Fix Lua Scripting Multithreading (#5475)
+- Fixes in dump- and load economy scripts (#5601)
 
 
 ### Maps
@@ -106,6 +259,7 @@
 - Fix tribes postloading again and add regression test (#5323)
 - v1.0 backwards compatibility for world/tribe add-ons (#5353)
 - Fix too-early add-on descriptions registries & legacy scenario units loading (#5480)
+- Remove outdated info that add-on maps should not be zipped (#5538)
 
 
 ### Saveloading
@@ -123,6 +277,8 @@
 - Cleanup player end statuses on loading (#5070)
 - Fix `DescriptionManager` Stacking (#5386)
 - Saveload `destruction_blocked` Property (#5450)
+- Relax Invalid Assumption in AttackWindow Saveloading (#5597)
+- Fix fri03 v1.0 Saveloading Compatibility (#5510)
 
 
 ### AI
@@ -184,6 +340,8 @@
 - Diplomacy (#5091)
 - Made diking part of the official tribe (#5104)
 - Fix Segfault on Building Dismantle (#5482)
+- Do not delete units during random game loading (#5590)
+- Prevent shipwright from building ferries where no ferry can live (#5534)
 
 
 ### User Interface
@@ -238,7 +396,7 @@
 - Fix infinite loop at startup map panning (#5429)
 - Add highlighting of filter text in dropdown list (#5443)
 - Fix save dialog and debug window text input bug (#5421)
-- Workaround for inverted horizontal scrolling bug in SDL (#5394)
+- Workaround for inverted horizontal scrolling bug in SDL (#5394, #5543)
 - Fix fake-modal in-game load dialog releasing modal grab (#5454)
 - Make space available as dropdown hotkey & only trigger hotkey when not filtered (#5441)
 - Add-Ons Admin Dialog Accessibility (#5452)
@@ -248,6 +406,10 @@
 - Warp mouse to target when launching attack (#5497)
 - Richtext-Escape Hotkey Strings (#5499)
 - Consistent UI Keyboard Selection (#5495)
+- Misc Replay Fixes (#5554)
+    - Use default display flags in replays
+    - Skip version mismatch message on Ctrl+click
+- Don't warp mouse to dropdown if it's already there (#5536)
 
 
 ### Internationalization
@@ -271,6 +433,7 @@
 - Skip installing locales when translations are disabled (#5302)
 - Tut01 String Fix (#5327)
 - Military capacity string refactor (#5476)
+- Sort xgettext inputs in translations update
 
 
 ### Help and Documentation
@@ -323,6 +486,8 @@
 - Thread safe destructor for Texture `shared_ptr` (#5436)
 - Use SDL Relative Mouse Mode (#5494)
 - Set SDL hint for relative mouse mode (#5504)
+- Support Non-Indexed Terrain Textures (#5545)
+- Use old style name for SDL pixelformat (#5547)
 
 
 ### Networking
@@ -330,7 +495,7 @@
 - Break mutex deadlock in GameClient (#4948)
 - Fix game client deletion crash (#4970)
 - Keep GameController pointer alive for template game (#5128)
-- Replace Boost::Asio → Asio (#5164)
+- Replace Boost::Asio → Asio (#5164, #5532)
 - Fix Description Index Misordering from UI Code (#5288)
 - Fix sync report requesting during game startup (#5382)
 
@@ -353,11 +518,11 @@
 - Fix compiling error introduced by boost 1.77 (#5063)
 - Honour `--(no|with)-asan`-option regardless of ARGV-order (#5078)
 - Fix Brotli Windows CI Error (#5079)
-- Build System Update (#5085)
+- Build System Update (#5085, #5513, #5539)
     - Silence an undesired naming scheme warning in the SDL2 finding module
     - Add a customized copy of CMake's deprecated Documentation module as recommended
     - Update latest g++/clang versions in the CI
-    - Treat enabled compiler warnings as errors
+    - Treat enabled compiler warnings as errors in debug builds
     - Allow silencing compile.sh status messages with `-q`
 - Fix Clang 13 Warnings (#5088)
 - Handle undefined `__WORDSIZE32_SIZE_ULONG` (#5098)
@@ -382,7 +547,7 @@
 - Resolve MSVC warnings (#5157)
 - Fix older g++ optimization segfaults (#5176)
 - Fix -O3/-O2 typos (#5187)
-- Dependencies: Asio include handling & Solus support (#5182)
+- Dependencies: Asio include handling, Solus support, installation script coverage (#5182, #5524)
 - Don't require Homebrew to be installed at `/usr/local` (#5208)
 - CMakeLists.txt: Use a list for many build flags (#5328)
 - Only use embedded minizip if not installed (#5360, #5392)
@@ -400,6 +565,7 @@
     - Break up the CMake command line for readibility
 - Added new SDL2-image dependencies to static linking (#5472)
 - Added static SDL2 targets for transitioning (#5484)
+- Update screenshots in `appdata.xml` (#5598)
 
 
 ### Other Issues
@@ -420,7 +586,7 @@
 - Readme Typo Fixes (#5461)
 - Fix race in use of `logic_thread_locked` (#5419)
 - Disable logging in notifications test (#5490)
-- Fix non-i18n Spelling Issues Reported by Lintian (#5502)
+- Fix non-i18n Spelling Issues Reported by Lintian (#5502, #5512)
 
 
 

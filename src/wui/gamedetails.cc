@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2022 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,17 +30,13 @@
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/addons.h"
-#include "logic/filesystem_constants.h"
+#include "logic/replay.h"
 #include "map_io/map_loader.h"
 
-GameDetails::GameDetails(Panel* parent,
-                         UI::PanelStyle style,
-                         Mode mode,
-                         Widelands::EditorGameBase& egbase)
+GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
    : UI::Panel(parent, style, 0, 0, 0, 0),
      mode_(mode),
-     padding_(4),
-     has_conflicts_(false),
+
      main_box_(this, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      descr_box_(&main_box_, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_label_(&main_box_,
@@ -62,8 +58,7 @@ GameDetails::GameDetails(Panel* parent,
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
-     button_box_(new UI::Box(&main_box_, style, 0, 0, UI::Box::Vertical)),
-     egbase_(egbase) {
+     button_box_(new UI::Box(&main_box_, style, 0, 0, UI::Box::Vertical)) {
 	descr_.set_handle_mouse(false);
 	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);
 	descr_box_.add_space(padding_);
@@ -225,14 +220,14 @@ std::string GameDetails::show_minimap(const SavegameData& gamedata) {
 			minimap_icon_.set_visible(true);
 		} else {
 			try {
-				egbase_.cleanup_for_load();
-				std::string filename(last_game_);
-				filename.append(kSavegameExtension);
+				Widelands::ReplayfileSavegameExtractor converter(last_game_);
+				Widelands::Game game_for_render;
 				std::unique_ptr<Widelands::MapLoader> ml(
-				   egbase_.mutable_map()->get_correct_loader(filename));
-				if (ml != nullptr && 0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
+				   game_for_render.mutable_map()->get_correct_loader(converter.file()));
+				if (ml != nullptr &&
+				    0 == ml->load_map_for_render(game_for_render, &game_for_render.enabled_addons())) {
 					minimap_cache_[last_game_] =
-					   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
+					   draw_minimap(game_for_render, nullptr, Rectf(), MiniMapType::kStaticMap,
 					                MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
 					minimap_icon_.set_icon(minimap_cache_.at(last_game_).get());
 					minimap_icon_.set_visible(true);

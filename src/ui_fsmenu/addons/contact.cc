@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/addons/manager.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 ContactForm::ContactForm(AddOnsCtrl& ctrl)
    : UI::Window(&ctrl.get_topmost_forefather(),
@@ -111,5 +110,4 @@ bool ContactForm::check_ok_button_enabled() {
 	return ok_.enabled();
 }
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI

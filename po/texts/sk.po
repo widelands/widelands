@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # Karl Vest, 2020
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-10 03:01+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Karl Vest, 2020\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
@@ -790,54 +790,62 @@ msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads. The "
-"supplies and demands of buildings are handled in its economy."
-msgstr "Ekonomika sa skladá zo všetkých budov a vlajok spojenými cestami. Ponuku a dopyt každej budovy má na starosti príslušná ekonomika."
+"An economy consists of all buildings and flags connected by roads, ferries, "
+"or ships. The supplies and demands of buildings are handled in their "
+"economy. A player can have more than one economy."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:69
+msgid ""
+"You can have more than one economy if their flags are not connected by any "
+"means of transportation. This is why the Configure Economy menu can only be "
+"accessed from flags and warehouses, not the player’s main menu."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr "Niektoré budovy, ako napríklad farma, majú veľmi malú pracovnú oblasť. Ak je budova obklopená stromami alebo cestami, zastaví sa jej produkcia."
 
-#: ../../data/txts/tips/general_game.lua:73
+#: ../../data/txts/tips/general_game.lua:77
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:80
+#: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:84
+#: ../../data/txts/tips/general_game.lua:88
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Klávesy šípiek"
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr "Posuňte mapu použitím %1%. %2% posun zrýchli, %3% posun spomalí."
 
-#: ../../data/txts/tips/general_game.lua:94
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:98
+#: ../../data/txts/tips/general_game.lua:102
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

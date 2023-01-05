@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,8 +34,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
-namespace FsMenu {
-namespace AddOnsUI {
+namespace FsMenu::AddOnsUI {
 
 class AddOnsCtrl;
 class RemoteInteractionWindow;
@@ -56,7 +55,7 @@ private:
 	AddOnsCtrl& ctrl_;
 	std::shared_ptr<AddOns::AddOnInfo> info_;
 	const size_t& index_;
-	bool layouting_;
+	bool layouting_{false};
 	UI::MultilineTextarea text_;
 	UI::Box buttons_;
 	UI::Button edit_, delete_;
@@ -103,9 +102,9 @@ private:
 
 	UI::Box main_box_, buttons_box_;
 	UI::Button ok_, cancel_;
-	UI::Listselect<std::string>* list_;
-	UI::MultilineEditbox* text_;
-	TransifexSettingsBox* txsettings_;
+	UI::Listselect<std::string>* list_{nullptr};
+	UI::MultilineEditbox* text_{nullptr};
+	TransifexSettingsBox* txsettings_{nullptr};
 };
 
 class RemoteInteractionWindow : public UI::Window {
@@ -130,11 +129,12 @@ private:
 
 	AddOnsCtrl& parent_;
 	std::shared_ptr<AddOns::AddOnInfo> info_;
-	int32_t current_screenshot_, nr_screenshots_;
+	int32_t current_screenshot_{0};
+	int32_t nr_screenshots_;
 	std::vector<const Image*> screenshot_cache_;
 
 	/** How the user voted the current add-on (1-10; 0 for not voted; -1 for unknown). */
-	int current_vote_;
+	int current_vote_{-1};
 
 	void update_current_vote_on_demand();
 
@@ -156,7 +156,6 @@ private:
 	UI::Dropdown<AddOns::NetAddons::AdminAction> admin_action_;
 };
 
-}  // namespace AddOnsUI
-}  // namespace FsMenu
+}  // namespace FsMenu::AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_REMOTE_INTERACTION_H

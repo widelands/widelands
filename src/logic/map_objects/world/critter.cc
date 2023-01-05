@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 #include "logic/map_objects/world/critter.h"
 
 #include <cmath>
+#include <cstddef>
 #include <memory>
 
 #include "base/wexception.h"
@@ -97,7 +98,7 @@ CritterDescr::CritterDescr(const std::string& init_descname,
    : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
      size_(table.get_int("size")),
      carnivore_(table.has_key("carnivore") && table.get_bool("carnivore")),
-     appetite_(0),
+
      reproduction_rate_(table.get_int("reproduction_rate")) {
 	assign_directional_animation(&walk_anims_, "walk");
 
@@ -461,7 +462,7 @@ void Critter::roam_update(Game& game, State& state) {
 		assert(weighted_population >= population_size_2);
 		if ((game.logic_rand() % (reproduction_rate * reproduction_rate)) *
 		       std::exp2(weighted_population - mating_partners - 1) <
-		    reproduction_rate * reproduction_rate * weighted_population) {
+		    static_cast<uint64_t>(reproduction_rate) * reproduction_rate * weighted_population) {
 			molog(game.get_gametime(), "A cute little %s cub :)\n", descr().name().c_str());
 			game.create_critter(get_position(), descr().name());
 		}

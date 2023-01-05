@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,25 +53,26 @@ struct IdleWareSupply : public Supply {
 
 	//  implementation of Supply
 	PlayerImmovable* get_position(Game& /*game*/) override;
-	bool is_active() const override;
+	[[nodiscard]] bool is_active() const override;
 	SupplyProviders provider_type(Game* /*game*/) const override;
-	bool has_storage() const override;
+	[[nodiscard]] bool has_storage() const override;
 	void get_ware_type(WareWorker& type, DescriptionIndex& ware) const override;
 	void send_to_storage(Game& /*game*/, Warehouse* wh) override;
 
-	uint32_t nr_supplies(const Game& /* game */, const Request& /* req */) const override;
+	[[nodiscard]] uint32_t nr_supplies(const Game& /* game */,
+	                                   const Request& /* req */) const override;
 	WareInstance& launch_ware(Game& /* game */, const Request& /* req */) override;
 	Worker& launch_worker(Game& /* game */, const Request& /* req */) override;
 
 private:
 	WareInstance& ware_;
-	Economy* economy_;
+	Economy* economy_{nullptr};
 };
 
 /**
  * Initialize the Supply and update the economy.
  */
-IdleWareSupply::IdleWareSupply(WareInstance& ware) : ware_(ware), economy_(nullptr) {
+IdleWareSupply::IdleWareSupply(WareInstance& ware) : ware_(ware) {
 	set_economy(ware.get_economy());
 }
 
@@ -187,11 +188,7 @@ void IdleWareSupply::send_to_storage(Game& game, Warehouse* wh) {
 /*                     Ware Instance Implementation                      */
 /*************************************************************************/
 WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware_descr)
-   : MapObject(ware_descr),
-     economy_(nullptr),
-     descr_index_(i),
-     supply_(nullptr),
-     transfer_(nullptr) {
+   : MapObject(ware_descr), descr_index_(i) {
 }
 
 WareInstance::~WareInstance() {

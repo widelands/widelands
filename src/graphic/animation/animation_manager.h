@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ public:
 
 	/// Returns the animation with the given ID or throws an exception if it is
 	/// unknown.
-	const Animation& get_animation(uint32_t id) const;
+	[[nodiscard]] const Animation& get_animation(uint32_t id) const;
 
 	/// Returns the representative image for the animation with the given 'id', using the given
 	/// player color. If this image has already been generated, it is pulled from the cache using the

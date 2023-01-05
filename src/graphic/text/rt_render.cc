@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 #include <memory>
 #include <queue>
 
+#include <SDL.h>
+
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
@@ -32,6 +34,7 @@
 #include "graphic/animation/animation.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
+#include "graphic/hyperlink.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 #include "graphic/playercolor.h"
@@ -46,6 +49,8 @@
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
+
+#define CAN_OPEN_HYPERLINK (SDL_VERSION_ATLEAST(2, 0, 14))
 
 namespace {
 /**
@@ -214,25 +219,28 @@ public:
 		kRight,
 		kLeft,
 	};
-	explicit RenderNode(const NodeStyle& ns)
-	   : floating_(Floating::kNone), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
+	explicit RenderNode(TextClickTarget* c, const NodeStyle& ns)
+	   : click_target_(c),
+
+	     halign_(ns.halign),
+	     valign_(ns.valign) {
 	}
 	virtual ~RenderNode() = default;
 
-	virtual uint16_t width() const = 0;
-	virtual uint16_t height() const = 0;
-	virtual uint16_t hotspot_y() const = 0;
+	[[nodiscard]] virtual uint16_t width() const = 0;
+	[[nodiscard]] virtual uint16_t height() const = 0;
+	[[nodiscard]] virtual uint16_t hotspot_y() const = 0;
 	virtual std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) = 0;
 
 	// TODO(GunChleoc): Remove this function once conversion is finished and well tested.
-	virtual std::string debug_info() const = 0;
+	[[nodiscard]] virtual std::string debug_info() const = 0;
 
 	// If a node is a non-mandatory space, it can be removed as a leading/trailing space
 	// by the positioning algorithm.
-	virtual bool is_non_mandatory_space() const {
+	[[nodiscard]] virtual bool is_non_mandatory_space() const {
 		return false;
 	}
-	virtual bool is_expanding() const {
+	[[nodiscard]] virtual bool is_expanding() const {
 		return false;
 	}
 	virtual void set_w(uint16_t /* w */) {
@@ -242,16 +250,16 @@ public:
 		return std::vector<Reference>();
 	}
 
-	Floating get_floating() const {
+	[[nodiscard]] Floating get_floating() const {
 		return floating_;
 	}
 	void set_floating(Floating f) {
 		floating_ = f;
 	}
-	UI::Align halign() const {
+	[[nodiscard]] UI::Align halign() const {
 		return halign_;
 	}
-	UI::Align valign() const {
+	[[nodiscard]] UI::Align valign() const {
 		return valign_;
 	}
 	void set_valign(UI::Align gvalign) {
@@ -260,7 +268,7 @@ public:
 
 	// True for nodes that need to stay aligned to the text baseline.
 	// False for the rest.
-	virtual bool align_to_baseline() const {
+	[[nodiscard]] virtual bool align_to_baseline() const {
 		return false;
 	}
 
@@ -270,10 +278,10 @@ public:
 	void set_y(int32_t ny) {
 		y_ = ny;
 	}
-	int32_t x() const {
+	[[nodiscard]] int32_t x() const {
 		return x_;
 	}
-	int32_t y() const {
+	[[nodiscard]] int32_t y() const {
 		return y_;
 	}
 
@@ -295,11 +303,14 @@ protected:
 		check_size(width(), height());
 	}
 
+	TextClickTarget* click_target_;
+
 private:
-	Floating floating_;
+	Floating floating_{Floating::kNone};
 	UI::Align halign_;
 	UI::Align valign_;
-	int32_t x_, y_;
+	int32_t x_{0};
+	int32_t y_{0};
 };
 
 /*
@@ -307,28 +318,24 @@ private:
  */
 class Layout {
 public:
-	explicit Layout(std::vector<std::shared_ptr<RenderNode>>& all)
-	   : h_(0), idx_(0), all_nodes_(all) {
+	explicit Layout(std::vector<RenderNode*>& all) : all_nodes_(all) {
 	}
 	virtual ~Layout() = default;
 
-	uint16_t height() const {
+	[[nodiscard]] uint16_t height() const {
 		return h_;
 	}
-	uint16_t
-	fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv, uint16_t w, Borders p, bool trim_spaces);
+	uint16_t fit_nodes(std::vector<RenderNode*>* rv, uint16_t w, Borders p, bool trim_spaces);
 
 private:
 	bool calculate_line_width(uint16_t* x, uint16_t* w, uint16_t lineheight);
-	uint16_t fit_line(uint16_t w,
-	                  const Borders& /*p*/,
-	                  std::vector<std::shared_ptr<RenderNode>>* rv,
-	                  bool trim_spaces);
+	uint16_t
+	fit_line(uint16_t w, const Borders& /*p*/, std::vector<RenderNode*>* rv, bool trim_spaces);
 
-	uint16_t h_;
-	size_t idx_;
-	std::vector<std::shared_ptr<RenderNode>>& all_nodes_;
-	std::queue<std::shared_ptr<RenderNode>> floats_;
+	uint16_t h_{0U};
+	size_t idx_{0U};
+	std::vector<RenderNode*>& all_nodes_;
+	std::queue<RenderNode*> floats_;
 };
 
 /**
@@ -349,7 +356,7 @@ bool Layout::calculate_line_width(uint16_t* x, uint16_t* w, uint16_t lineheight)
 		return false;
 	}
 	// Check whether there is an element at the current height
-	std::shared_ptr<RenderNode> n = floats_.front();
+	RenderNode* n = floats_.front();
 	if (h_ + lineheight < n->y()) {
 		// Nope, nothing in the current line
 		// Since the elements are ordered, no further element can match
@@ -373,15 +380,15 @@ bool Layout::calculate_line_width(uint16_t* x, uint16_t* w, uint16_t lineheight)
  * Returns hotspot of the line.
  * Method is called from within Layout::fit_nodes().
  */
-uint16_t Layout::fit_line(const uint16_t w_max,  // Maximum width of line
-                          const Borders& p,      // Left/right border. Is left empty
-                          std::vector<std::shared_ptr<RenderNode>>* rv,  // Output: Nodes to render
+uint16_t Layout::fit_line(const uint16_t w_max,          // Maximum width of line
+                          const Borders& p,              // Left/right border. Is left empty
+                          std::vector<RenderNode*>* rv,  // Output: Nodes to render
                           bool trim_spaces) {  // Whether leading/trailing space should be removed
 	assert(rv->empty());
 
 	// Remove leading spaces
 	while (idx_ < all_nodes_.size() && all_nodes_[idx_]->is_non_mandatory_space() && trim_spaces) {
-		all_nodes_[idx_++].reset();
+		all_nodes_[idx_++] = nullptr;
 	}
 
 	uint16_t w;
@@ -437,7 +444,7 @@ uint16_t Layout::fit_line(const uint16_t w_max,  // Maximum width of line
 
 	// Calc fitting nodes
 	while (idx_ < all_nodes_.size()) {
-		std::shared_ptr<RenderNode> n = all_nodes_[idx_];
+		RenderNode* n = all_nodes_[idx_];
 		if (n->get_floating() != RenderNode::Floating::kNone) {
 			// Don't handle floaters here
 			rv->push_back(n);
@@ -526,16 +533,13 @@ uint16_t Layout::fit_line(const uint16_t w_max,  // Maximum width of line
  * and the widths of the nodes.
  * Method is called from within DivTagHandler::enter().
  */
-uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
-                           uint16_t w,
-                           Borders p,
-                           bool trim_spaces) {
+uint16_t Layout::fit_nodes(std::vector<RenderNode*>* rv, uint16_t w, Borders p, bool trim_spaces) {
 	assert(rv->empty());
 	h_ = p.top;
 
 	uint16_t max_line_width = 0;
 	while (idx_ < all_nodes_.size()) {
-		std::vector<std::shared_ptr<RenderNode>> nodes_in_line;
+		std::vector<RenderNode*> nodes_in_line;
 		size_t idx_before_iteration_ = idx_;
 		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, trim_spaces);
 
@@ -613,23 +617,23 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
  */
 class TextNode : public RenderNode {
 public:
-	TextNode(FontCache& font, NodeStyle& /*ns*/, const std::string& txt);
+	TextNode(TextClickTarget* c, FontCache& font, NodeStyle& /*ns*/, const std::string& txt);
 	~TextNode() override = default;
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "'" + txt_ + "'";
 	}
 
-	uint16_t width() const override {
+	[[nodiscard]] uint16_t width() const override {
 		return w_;
 	}
-	uint16_t height() const override {
+	[[nodiscard]] uint16_t height() const override {
 		return h_ + nodestyle_.spacing;
 	}
-	bool align_to_baseline() const override {
+	[[nodiscard]] bool align_to_baseline() const override {
 		return true;
 	}
-	uint16_t hotspot_y() const override;
+	[[nodiscard]] uint16_t hotspot_y() const override;
 	const std::vector<Reference> get_references() override {
 		std::vector<Reference> rv;
 		if (!nodestyle_.reference.empty()) {
@@ -649,8 +653,8 @@ protected:
 	SdlTtfFont& font_;
 };
 
-TextNode::TextNode(FontCache& font, NodeStyle& ns, const std::string& txt)
-   : RenderNode(ns),
+TextNode::TextNode(TextClickTarget* c, FontCache& font, NodeStyle& ns, const std::string& txt)
+   : RenderNode(c, ns),
      txt_(txt),
      nodestyle_(ns),
      fontcache_(font),
@@ -687,7 +691,7 @@ std::shared_ptr<UI::RenderedText> TextNode::render(TextureCache* texture_cache) 
 	assert(rendered_image != nullptr);
 	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 	rendered_text->rects.push_back(
-	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image, click_target_)));
 	return rendered_text;
 }
 
@@ -697,21 +701,25 @@ std::shared_ptr<UI::RenderedText> TextNode::render(TextureCache* texture_cache) 
  */
 class FillingTextNode : public TextNode {
 public:
-	FillingTextNode(
-	   FontCache& font, NodeStyle& ns, uint16_t w, const std::string& txt, bool expanding = false)
-	   : TextNode(font, ns, txt), is_expanding_(expanding) {
+	FillingTextNode(TextClickTarget* c,
+	                FontCache& font,
+	                NodeStyle& ns,
+	                uint16_t w,
+	                const std::string& txt,
+	                bool expanding = false)
+	   : TextNode(c, font, ns, txt), is_expanding_(expanding) {
 		w_ = w;
 		check_size();
 	}
 	~FillingTextNode() override = default;
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "ft";
 	}
 
 	std::shared_ptr<UI::RenderedText> render(TextureCache* /*texture_cache*/) override;
 
-	bool is_expanding() const override {
+	[[nodiscard]] bool is_expanding() const override {
 		return is_expanding_;
 	}
 	void set_w(uint16_t w) override {
@@ -740,7 +748,7 @@ std::shared_ptr<UI::RenderedText> FillingTextNode::render(TextureCache* texture_
 	}
 	assert(rendered_image != nullptr);
 	rendered_text->rects.push_back(
-	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image, click_target_)));
 	return rendered_text;
 }
 
@@ -750,14 +758,14 @@ std::shared_ptr<UI::RenderedText> FillingTextNode::render(TextureCache* texture_
  */
 class WordSpacerNode : public TextNode {
 public:
-	WordSpacerNode(FontCache& font, NodeStyle& ns) : TextNode(font, ns, " ") {
+	WordSpacerNode(TextClickTarget* c, FontCache& font, NodeStyle& ns) : TextNode(c, font, ns, " ") {
 		check_size();
 	}
 	static void show_spaces(bool t) {
 		show_spaces_ = t;
 	}
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "wsp";
 	}
 
@@ -773,12 +781,12 @@ public:
 			}
 			assert(rendered_image != nullptr);
 			rendered_text->rects.push_back(
-			   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+			   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image, click_target_)));
 			return rendered_text;
 		}
 		return TextNode::render(texture_cache);
 	}
-	bool is_non_mandatory_space() const override {
+	[[nodiscard]] bool is_non_mandatory_space() const override {
 		return true;
 	}
 
@@ -793,26 +801,26 @@ bool WordSpacerNode::show_spaces_;
  */
 class NewlineNode : public RenderNode {
 public:
-	explicit NewlineNode(NodeStyle& ns) : RenderNode(ns) {
+	explicit NewlineNode(TextClickTarget* c, NodeStyle& ns) : RenderNode(c, ns) {
 	}
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "nl";
 	}
 
-	uint16_t height() const override {
+	[[nodiscard]] uint16_t height() const override {
 		return 0;
 	}
-	uint16_t width() const override {
+	[[nodiscard]] uint16_t width() const override {
 		return INFINITE_WIDTH;
 	}
-	uint16_t hotspot_y() const override {
+	[[nodiscard]] uint16_t hotspot_y() const override {
 		return 0;
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* /* texture_cache */) override {
 		return std::make_shared<UI::RenderedText>();
 	}
-	bool is_non_mandatory_space() const override {
+	[[nodiscard]] bool is_non_mandatory_space() const override {
 		return true;
 	}
 };
@@ -822,22 +830,22 @@ public:
  */
 class SpaceNode : public RenderNode {
 public:
-	SpaceNode(NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false)
-	   : RenderNode(ns), w_(w), h_(h), background_image_(nullptr), is_expanding_(expanding) {
+	SpaceNode(TextClickTarget* c, NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false)
+	   : RenderNode(c, ns), w_(w), h_(h), is_expanding_(expanding) {
 		check_size();
 	}
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "sp";
 	}
 
-	uint16_t height() const override {
+	[[nodiscard]] uint16_t height() const override {
 		return h_;
 	}
-	uint16_t width() const override {
+	[[nodiscard]] uint16_t width() const override {
 		return w_;
 	}
-	uint16_t hotspot_y() const override {
+	[[nodiscard]] uint16_t hotspot_y() const override {
 		return h_;
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override {
@@ -866,11 +874,11 @@ public:
 		}
 		assert(rendered_image != nullptr);
 		rendered_text->rects.push_back(
-		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image, click_target_)));
 		return rendered_text;
 	}
 
-	bool is_expanding() const override {
+	[[nodiscard]] bool is_expanding() const override {
 		return is_expanding_;
 	}
 	void set_w(uint16_t w) override {
@@ -885,7 +893,7 @@ public:
 
 private:
 	uint16_t w_, h_;
-	const Image* background_image_;  // not owned
+	const Image* background_image_{nullptr};  // not owned
 	std::string filename_;
 	bool is_expanding_;
 };
@@ -895,33 +903,27 @@ private:
  */
 class DivTagRenderNode : public RenderNode {
 public:
-	explicit DivTagRenderNode(const NodeStyle& ns)
-	   : RenderNode(ns),
-	     w_(0),
-	     h_(0),
-	     background_color_(0, 0, 0),
-	     is_background_color_set_(false),
-	     background_image_(nullptr) {
+	explicit DivTagRenderNode(TextClickTarget* c, const NodeStyle& ns) : RenderNode(c, ns) {
 	}
 	~DivTagRenderNode() override {
 		nodes_to_render_.clear();
 	}
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "div";
 	}
 
-	uint16_t width() const override {
+	[[nodiscard]] uint16_t width() const override {
 		return w_ + margin_.left + margin_.right;
 	}
-	uint16_t height() const override {
+	[[nodiscard]] uint16_t height() const override {
 		return h_ + margin_.top + margin_.bottom;
 	}
-	uint16_t hotspot_y() const override {
+	[[nodiscard]] uint16_t hotspot_y() const override {
 		return height();
 	}
 
-	DesiredWidth desired_width() const {
+	[[nodiscard]] DesiredWidth desired_width() const {
 		return desired_width_;
 	}
 
@@ -929,13 +931,13 @@ public:
 		std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 		// Preserve padding
 		rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(
-		   new UI::RenderedRect(Recti(0, 0, width(), height()), nullptr)));
+		   new UI::RenderedRect(Recti(0, 0, width(), height()), nullptr, click_target_)));
 
 		// Draw Solid background Color
 		if (is_background_color_set_) {
 			// TODO(Notabilis): I think margin_.right and .bottom are missing in next line
-			UI::RenderedRect* bg_rect =
-			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_color_);
+			UI::RenderedRect* bg_rect = new UI::RenderedRect(
+			   Recti(margin_.left, margin_.top, w_, h_), background_color_, click_target_);
 			// Size is automatically adjusted in RenderedText while blitting, so no need to call
 			// check_size() here.
 			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(bg_rect));
@@ -943,8 +945,8 @@ public:
 
 		// Draw background image (tiling)
 		if (background_image_ != nullptr) {
-			UI::RenderedRect* bg_rect =
-			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_image_);
+			UI::RenderedRect* bg_rect = new UI::RenderedRect(
+			   Recti(margin_.left, margin_.top, w_, h_), background_image_, click_target_);
 			check_size(bg_rect->width(), bg_rect->height());
 			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(bg_rect));
 		}
@@ -986,7 +988,7 @@ public:
 	void set_background(const Image* img) {
 		background_image_ = img;
 	}
-	void set_nodes_to_render(const std::vector<std::shared_ptr<RenderNode>>& n) {
+	void set_nodes_to_render(const std::vector<RenderNode*>& n) {
 		nodes_to_render_ = n;
 	}
 	void add_reference(int16_t gx, int16_t gy, uint16_t w, uint16_t h, const std::string& s) {
@@ -996,23 +998,25 @@ public:
 
 private:
 	DesiredWidth desired_width_;
-	uint16_t w_, h_;
-	std::vector<std::shared_ptr<RenderNode>> nodes_to_render_;
+	uint16_t w_{0U};
+	uint16_t h_{0U};
+	std::vector<RenderNode*> nodes_to_render_;
 	Borders margin_;
-	RGBColor background_color_;
-	bool is_background_color_set_;
-	const Image* background_image_;  // Not owned.
+	RGBColor background_color_{0, 0, 0};
+	bool is_background_color_set_{false};
+	const Image* background_image_{nullptr};  // Not owned.
 	std::vector<Reference> refs_;
 };
 
 class ImgRenderNode : public RenderNode {
 public:
-	ImgRenderNode(NodeStyle& ns,
+	ImgRenderNode(TextClickTarget* c,
+	              NodeStyle& ns,
 	              const std::string& image_filename,
 	              double scale,
 	              const RGBColor& color,
 	              bool use_playercolor)
-	   : RenderNode(ns),
+	   : RenderNode(c, ns),
 	     image_(use_playercolor ? playercolor_image(color, image_filename) :
                                  g_image_cache->get(image_filename)),
 	     filename_(image_filename),
@@ -1022,8 +1026,8 @@ public:
 		check_size();
 	}
 
-	ImgRenderNode(NodeStyle& ns, const Image* image)
-	   : RenderNode(ns),
+	ImgRenderNode(TextClickTarget* c, NodeStyle& ns, const Image* image)
+	   : RenderNode(c, ns),
 	     image_(image),
 	     scale_(1.0),
 	     color_(RGBColor(0, 0, 0)),
@@ -1031,17 +1035,17 @@ public:
 		check_size();
 	}
 
-	std::string debug_info() const override {
+	[[nodiscard]] std::string debug_info() const override {
 		return "img";
 	}
 
-	uint16_t width() const override {
+	[[nodiscard]] uint16_t width() const override {
 		return scale_ * image_->width();
 	}
-	uint16_t height() const override {
+	[[nodiscard]] uint16_t height() const override {
 		return scale_ * image_->height();
 	}
-	uint16_t hotspot_y() const override {
+	[[nodiscard]] uint16_t hotspot_y() const override {
 		return scale_ * image_->height();
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override;
@@ -1061,7 +1065,7 @@ std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_ca
 		// Image can be used as is, and has already been cached in g_image_cache
 		assert(image_ != nullptr);
 		rendered_text->rects.push_back(
-		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_)));
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_, click_target_)));
 	} else {
 		const std::string hash =
 		   format("rt:img:%s:%s:%i:%i", filename_, (use_playercolor_ ? color_.hex_value() : ""),
@@ -1076,68 +1080,82 @@ std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_ca
 
 		assert(rendered_image != nullptr);
 		rendered_text->rects.push_back(
-		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image, click_target_)));
 	}
 
 	return rendered_text;
 }
 // End: Helper Stuff
 
-class TagHandler;
-TagHandler* create_taghandler(Tag& tag,
+TagHandler* create_taghandler(const TagHandler* p,
+                              Tag& tag,
                               FontCache& fc,
                               NodeStyle& ns,
                               ImageCache* image_cache,
                               RendererStyle& renderer_style,
                               const UI::FontSets* fontsets);
 
-class TagHandler {
+class TagHandler : public TextClickTarget {
 public:
-	TagHandler(Tag& tag,
+	TagHandler(const TagHandler* p,
+	           Tag& tag,
 	           FontCache& fc,
 	           NodeStyle ns,
 	           ImageCache* image_cache,
 	           RendererStyle& renderer_style,
 	           const UI::FontSets* fontsets)
-	   : tag_(tag),
+	   : parent_(p),
+	     tag_(tag),
 	     font_cache_(fc),
 	     nodestyle_(std::move(ns)),
 	     image_cache_(image_cache),
 	     renderer_style_(renderer_style),
 	     fontsets_(fontsets) {
 	}
-	virtual ~TagHandler() = default;
 
 	virtual void enter() {
 	}
-	virtual void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& /*nodes*/);
+	virtual void emit_nodes(std::vector<RenderNode*>& /*nodes*/);
+
+	[[nodiscard]] bool handle_mousepress(int32_t x, int32_t y) const override {
+		return parent_ != nullptr && parent_->handle_mousepress(x, y);
+	}
+	[[nodiscard]] const std::string* get_tooltip(int32_t x, int32_t y) const override {
+		return parent_ == nullptr ? nullptr : parent_->get_tooltip(x, y);
+	}
 
 private:
-	void make_text_nodes(const std::string& txt,
-	                     std::vector<std::shared_ptr<RenderNode>>& nodes,
-	                     NodeStyle& ns);
+	void make_text_nodes(const std::string& txt, std::vector<RenderNode*>& nodes, NodeStyle& ns);
 
 protected:
+	void new_node(std::vector<RenderNode*>& nodes, RenderNode* rn) {
+		nodes.push_back(rn);
+		child_rendernodes_.emplace_back(rn);
+	}
+
+	const TagHandler* parent_;
 	Tag& tag_;
 	FontCache& font_cache_;
 	NodeStyle nodestyle_;
 	ImageCache* image_cache_;        // Not owned
 	RendererStyle& renderer_style_;  // Reference to global renderer style in the renderer
 	const UI::FontSets* fontsets_;
+	std::vector<std::unique_ptr<TagHandler>> child_taghandlers_;
+	std::vector<std::unique_ptr<RenderNode>> child_rendernodes_;
 };
 
 void TagHandler::make_text_nodes(const std::string& txt,
-                                 std::vector<std::shared_ptr<RenderNode>>& nodes,
+                                 std::vector<RenderNode*>& nodes,
                                  NodeStyle& ns) {
 	TextStream ts(txt);
 	std::string word;
-	std::vector<std::shared_ptr<RenderNode>> text_nodes;
+	std::vector<RenderNode*> text_nodes;
 
 	// Bidirectional text (Arabic etc.)
 	if (i18n::has_rtl_character(txt.c_str())) {
 		std::string previous_word;
-		std::vector<std::shared_ptr<RenderNode>>::iterator it = text_nodes.begin();
-		std::vector<std::shared_ptr<RenderNode>> spacer_nodes;
+		std::vector<RenderNode*>::iterator it = text_nodes.begin();
+		std::vector<RenderNode*> spacer_nodes;
 
 		// Collect the word nodes
 		while (ts.pos() < txt.size()) {
@@ -1148,8 +1166,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 			// We only know if the spacer goes to the left or right after having a look at the current
 			// word.
 			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
-				spacer_nodes.push_back(
-				   std::shared_ptr<RenderNode>(new WordSpacerNode(font_cache_, ns)));
+				spacer_nodes.push_back(new WordSpacerNode(this, font_cache_, ns));
 			}
 
 			word = ts.till_any_or_end(" \t\n\r");
@@ -1165,8 +1182,8 @@ void TagHandler::make_text_nodes(const std::string& txt,
 					if (word_is_bidi) {
 						word = i18n::line2bidi(word.c_str());
 					}
-					it = text_nodes.insert(text_nodes.begin(), std::shared_ptr<RenderNode>(
-					                                              new TextNode(font_cache_, ns, word)));
+					it =
+					   text_nodes.insert(text_nodes.begin(), new TextNode(this, font_cache_, ns, word));
 				} else {  // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;
@@ -1177,15 +1194,14 @@ void TagHandler::make_text_nodes(const std::string& txt,
 							++it;
 						}
 					}
-					it = text_nodes.insert(
-					   it, std::shared_ptr<RenderNode>(new TextNode(font_cache_, ns, word)));
+					it = text_nodes.insert(it, new TextNode(this, font_cache_, ns, word));
 				}
 			}
 			previous_word = word;
 		}
 		// Add the nodes to the end of the previously existing nodes.
 		for (const auto& node : text_nodes) {
-			nodes.push_back(node);
+			new_node(nodes, node);
 		}
 
 	} else {  // LTR
@@ -1193,7 +1209,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 			std::size_t cpos = ts.pos();
 			ts.skip_ws();
 			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
-				nodes.push_back(std::shared_ptr<RenderNode>(new WordSpacerNode(font_cache_, ns)));
+				new_node(nodes, new WordSpacerNode(this, font_cache_, ns));
 			}
 			word = ts.till_any_or_end(" \t\n\r");
 			ns.fontset = i18n::find_fontset(word.c_str(), *fontsets_);
@@ -1203,23 +1219,23 @@ void TagHandler::make_text_nodes(const std::string& txt,
 				if (i18n::has_script_character(word.c_str(), UI::FontSets::Selector::kCJK)) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());
 					for (const std::string& unit : units) {
-						nodes.push_back(std::shared_ptr<RenderNode>(new TextNode(font_cache_, ns, unit)));
+						new_node(nodes, new TextNode(this, font_cache_, ns, unit));
 					}
 				} else {
-					nodes.push_back(std::shared_ptr<RenderNode>(new TextNode(font_cache_, ns, word)));
+					new_node(nodes, new TextNode(this, font_cache_, ns, word));
 				}
 			}
 		}
 	}
 }
 
-void TagHandler::emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) {
+void TagHandler::emit_nodes(std::vector<RenderNode*>& nodes) {
 	for (Child* c : tag_.children()) {
 		if (c->tag != nullptr) {
-			std::unique_ptr<TagHandler> th(create_taghandler(
-			   *c->tag, font_cache_, nodestyle_, image_cache_, renderer_style_, fontsets_));
-			th->enter();
-			th->emit_nodes(nodes);
+			child_taghandlers_.emplace_back(create_taghandler(
+			   this, *c->tag, font_cache_, nodestyle_, image_cache_, renderer_style_, fontsets_));
+			child_taghandlers_.back()->enter();
+			child_taghandlers_.back()->emit_nodes(nodes);
 		} else {
 			make_text_nodes(c->text, nodes, nodestyle_);
 		}
@@ -1228,13 +1244,14 @@ void TagHandler::emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) {
 
 class FontTagHandler : public TagHandler {
 public:
-	FontTagHandler(Tag& tag,
+	FontTagHandler(const TagHandler* p,
+	               Tag& tag,
 	               FontCache& fc,
 	               const NodeStyle& ns,
 	               ImageCache* image_cache,
 	               RendererStyle& init_renderer_style,
 	               const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1268,13 +1285,14 @@ public:
 
 class PTagHandler : public TagHandler {
 public:
-	PTagHandler(Tag& tag,
+	PTagHandler(const TagHandler* p,
+	            Tag& tag,
 	            FontCache& fc,
 	            const NodeStyle& ns,
 	            ImageCache* image_cache,
 	            RendererStyle& init_renderer_style,
 	            const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), indent_(0) {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1307,30 +1325,121 @@ public:
 			nodestyle_.spacing = a["spacing"].get_int(std::numeric_limits<uint8_t>::max());
 		}
 	}
-	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
+	void emit_nodes(std::vector<RenderNode*>& nodes) override {
 		// Put a newline if this is not the first paragraph
 		if (!nodes.empty()) {
-			nodes.push_back(std::shared_ptr<RenderNode>(new NewlineNode(nodestyle_)));
+			new_node(nodes, new NewlineNode(this, nodestyle_));
 		}
 		if (indent_ != 0u) {
-			nodes.push_back(std::shared_ptr<RenderNode>(new SpaceNode(nodestyle_, indent_)));
+			new_node(nodes, new SpaceNode(this, nodestyle_, indent_));
 		}
 		TagHandler::emit_nodes(nodes);
 	}
 
 private:
-	uint16_t indent_;
+	uint16_t indent_{0U};
+};
+
+class LinkTagHandler : public TagHandler {
+public:
+	LinkTagHandler(const TagHandler* p,
+	               Tag& tag,
+	               FontCache& fc,
+	               const NodeStyle& ns,
+	               ImageCache* image_cache,
+	               RendererStyle& init_renderer_style,
+	               const UI::FontSets* fontsets)
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
+	}
+
+	enum class Type { kURL, kUI };
+
+	void enter() override {
+		const AttrMap& a = tag_.attrs();
+
+		std::string t = a["type"].get_string();
+		if (t == "url") {
+			type_ = Type::kURL;
+		} else if (t == "ui") {
+			type_ = Type::kUI;
+			action_ = a["action"].get_string();
+		} else {
+			throw RenderError(format("Invalid link type '%s'", t));
+		}
+		target_ = a["target"].get_string();
+
+		if (a.has("mouseover")) {
+			mouseover_ = a["mouseover"].get_string();
+		}
+
+		if (a.has("align")) {
+			const std::string align = a["align"].get_string();
+			if (align == "right") {
+				nodestyle_.halign = UI::Align::kRight;
+			} else if (align == "center" || align == "middle") {
+				nodestyle_.halign = UI::Align::kCenter;
+			} else {
+				nodestyle_.halign = UI::Align::kLeft;
+			}
+		}
+		nodestyle_.halign = mirror_alignment(nodestyle_.halign, nodestyle_.is_rtl);
+		if (a.has("valign")) {
+			const std::string align = a["valign"].get_string();
+			if (align == "bottom") {
+				nodestyle_.valign = UI::Align::kBottom;
+			} else if (align == "center" || align == "middle") {
+				nodestyle_.valign = UI::Align::kCenter;
+			} else {
+				nodestyle_.valign = UI::Align::kTop;
+			}
+		}
+		if (a.has("spacing")) {
+			nodestyle_.spacing = a["spacing"].get_int(std::numeric_limits<uint8_t>::max());
+		}
+	}
+
+	[[nodiscard]] bool handle_mousepress(int32_t /* x */, int32_t /* y */) const override {
+		switch (type_) {
+		case Type::kUI:
+			Notifications::publish(NoteHyperlink(target_, action_));
+			return true;
+		case Type::kURL:
+#if CAN_OPEN_HYPERLINK
+			SDL_OpenURL(target_.c_str());
+#else
+			SDL_SetClipboardText(target_.c_str());
+#endif
+			return true;
+		}
+		NEVER_HERE();
+	}
+
+	[[nodiscard]] const std::string* get_tooltip(int32_t /* x */, int32_t /* y */) const override {
+#if !CAN_OPEN_HYPERLINK
+		if (type_ == Type::kURL) {
+			static std::string cant_open_link;
+			cant_open_link = _("Copy link to clipboard");
+			return &cant_open_link;
+		}
+#endif
+		return &mouseover_;
+	}
+
+private:
+	std::string target_, action_, mouseover_;
+	Type type_;
 };
 
 class ImgTagHandler : public TagHandler {
 public:
-	ImgTagHandler(Tag& tag,
+	ImgTagHandler(const TagHandler* p,
+	              Tag& tag,
 	              FontCache& fc,
 	              const NodeStyle& ns,
 	              ImageCache* image_cache,
 	              RendererStyle& init_renderer_style,
 	              const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), render_node_(nullptr) {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1345,7 +1454,7 @@ public:
 		if (a.has("object")) {
 			const Image* representative_image = g_animation_manager->get_representative_image(
 			   a["object"].get_string(), use_playercolor ? &color : nullptr);
-			render_node_.reset(new ImgRenderNode(nodestyle_, representative_image));
+			render_node_ = new ImgRenderNode(this, nodestyle_, representative_image);
 		} else {
 			const std::string image_filename = a["src"].get_string();
 			double scale = 1.0;
@@ -1364,27 +1473,28 @@ public:
 					scale = static_cast<double>(width) / image_width;
 				}
 			}
-			render_node_.reset(
-			   new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor));
+			render_node_ =
+			   new ImgRenderNode(this, nodestyle_, image_filename, scale, color, use_playercolor);
 		}
 	}
-	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
-		nodes.push_back(render_node_);
+	void emit_nodes(std::vector<RenderNode*>& nodes) override {
+		new_node(nodes, render_node_);
 	}
 
 private:
-	std::shared_ptr<ImgRenderNode> render_node_;
+	ImgRenderNode* render_node_{nullptr};
 };
 
 class VspaceTagHandler : public TagHandler {
 public:
-	VspaceTagHandler(Tag& tag,
+	VspaceTagHandler(const TagHandler* p,
+	                 Tag& tag,
 	                 FontCache& fc,
 	                 const NodeStyle& ns,
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
 	                 const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), space_(0) {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1392,26 +1502,25 @@ public:
 
 		space_ = a["gap"].get_int(std::numeric_limits<uint16_t>::max());
 	}
-	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
-		nodes.push_back(std::shared_ptr<RenderNode>(new SpaceNode(nodestyle_, 0, space_)));
-		nodes.push_back(std::shared_ptr<RenderNode>(new NewlineNode(nodestyle_)));
+	void emit_nodes(std::vector<RenderNode*>& nodes) override {
+		new_node(nodes, new SpaceNode(this, nodestyle_, 0, space_));
+		new_node(nodes, new NewlineNode(this, nodestyle_));
 	}
 
 private:
-	uint16_t space_;
+	uint16_t space_{0U};
 };
 
 class HspaceTagHandler : public TagHandler {
 public:
-	HspaceTagHandler(Tag& tag,
+	HspaceTagHandler(const TagHandler* p,
+	                 Tag& tag,
 	                 FontCache& fc,
 	                 const NodeStyle& ns,
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
 	                 const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
-	     background_image_(nullptr),
-	     space_(0) {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1434,55 +1543,57 @@ public:
 		}
 	}
 
-	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
+	void emit_nodes(std::vector<RenderNode*>& nodes) override {
 		if (!fill_text_.empty()) {
-			std::shared_ptr<FillingTextNode> node;
+			FillingTextNode* node;
 			if (space_ < INFINITE_WIDTH) {
-				node.reset(new FillingTextNode(font_cache_, nodestyle_, space_, fill_text_));
+				node = new FillingTextNode(this, font_cache_, nodestyle_, space_, fill_text_);
 			} else {
-				node.reset(new FillingTextNode(font_cache_, nodestyle_, 0, fill_text_, true));
+				node = new FillingTextNode(this, font_cache_, nodestyle_, 0, fill_text_, true);
 			}
-			nodes.push_back(node);
+			new_node(nodes, node);
 		} else {
-			std::shared_ptr<SpaceNode> node;
+			SpaceNode* node;
 			if (space_ < INFINITE_WIDTH) {
-				node.reset(new SpaceNode(nodestyle_, space_, 0));
+				node = new SpaceNode(this, nodestyle_, space_, 0);
 			} else {
-				node.reset(new SpaceNode(nodestyle_, 0, 0, true));
+				node = new SpaceNode(this, nodestyle_, 0, 0, true);
 			}
 			if (background_image_ != nullptr) {
 				node->set_background(background_image_, image_filename_);
 			}
-			nodes.push_back(node);
+			new_node(nodes, node);
 		}
 	}
 
 private:
 	std::string fill_text_;
-	const Image* background_image_;
+	const Image* background_image_{nullptr};
 	std::string image_filename_;
-	uint16_t space_;
+	uint16_t space_{0U};
 };
 
 class BrTagHandler : public TagHandler {
 public:
-	BrTagHandler(Tag& tag,
+	BrTagHandler(const TagHandler* p,
+	             Tag& tag,
 	             FontCache& fc,
 	             const NodeStyle& ns,
 	             ImageCache* image_cache,
 	             RendererStyle& init_renderer_style,
 	             const UI::FontSets* fontsets)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
-	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
-		nodes.push_back(std::shared_ptr<RenderNode>(new NewlineNode(nodestyle_)));
+	void emit_nodes(std::vector<RenderNode*>& nodes) override {
+		new_node(nodes, new NewlineNode(this, nodestyle_));
 	}
 };
 
 class DivTagHandler : public TagHandler {
 public:
-	DivTagHandler(Tag& tag,
+	DivTagHandler(const TagHandler* p,
+	              Tag& tag,
 	              FontCache& fc,
 	              const NodeStyle& ns,
 	              ImageCache* image_cache,
@@ -1490,11 +1601,11 @@ public:
 	              const UI::FontSets* fontsets,
 	              uint16_t max_w = 0,
 	              bool shrink_to_fit = true)
-	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
+	   : TagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     shrink_to_fit_(shrink_to_fit),
-	     trim_spaces_(true),
+
 	     w_(max_w),
-	     render_node_(new DivTagRenderNode(ns)) {
+	     render_node_(new DivTagRenderNode(this, ns)) {
 	}
 
 	/*
@@ -1543,7 +1654,7 @@ public:
 			margin.left = margin.top = margin.right = margin.bottom = p;
 		}
 
-		std::vector<std::shared_ptr<RenderNode>> subnodes;
+		std::vector<RenderNode*> subnodes;
 		// If a percentage width is used, temporarily set it as the overall width. This way,
 		// divs with width "fill" only use the width of their parent node. Also, percentages
 		// given in child nodes are relative to the width of their parent node.
@@ -1603,7 +1714,7 @@ public:
 
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
-		std::vector<std::shared_ptr<RenderNode>> nodes_to_render;
+		std::vector<RenderNode*> nodes_to_render;
 		uint16_t max_line_width = layout.fit_nodes(&nodes_to_render, w_, padding, trim_spaces_);
 		uint16_t extra_width = 0;
 		if (w_ < INFINITE_WIDTH && w_ > max_line_width) {
@@ -1641,8 +1752,8 @@ public:
 		render_node_->set_dimensions(w_, layout.height(), margin);
 		render_node_->set_nodes_to_render(nodes_to_render);
 	}
-	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
-		nodes.push_back(render_node_);
+	void emit_nodes(std::vector<RenderNode*>& nodes) override {
+		new_node(nodes, render_node_);
 	}
 
 	// Handle attributes that are in div, but not in rt.
@@ -1696,23 +1807,24 @@ public:
 protected:
 	bool shrink_to_fit_;
 	// Always true for DivTagHandler but might be overwritten in RTTagHandler
-	bool trim_spaces_;
+	bool trim_spaces_{true};
 
 private:
 	uint16_t w_;
-	std::shared_ptr<DivTagRenderNode> render_node_;
+	DivTagRenderNode* render_node_;
 };
 
 class RTTagHandler : public DivTagHandler {
 public:
-	RTTagHandler(Tag& tag,
+	RTTagHandler(const TagHandler* p,
+	             Tag& tag,
 	             FontCache& fc,
 	             const NodeStyle& ns,
 	             ImageCache* image_cache,
 	             RendererStyle& init_renderer_style,
 	             const UI::FontSets* fontsets,
 	             uint16_t w)
-	   : DivTagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets, w, true) {
+	   : DivTagHandler(p, tag, fc, ns, image_cache, init_renderer_style, fontsets, w, true) {
 	}
 
 	// Handle attributes that are in rt, but not in div.
@@ -1725,23 +1837,26 @@ public:
 };
 
 template <typename T>
-TagHandler* create_taghandler(Tag& tag,
+TagHandler* create_taghandler(const TagHandler* p,
+                              Tag& tag,
                               FontCache& fc,
                               NodeStyle& ns,
                               ImageCache* image_cache,
                               RendererStyle& renderer_style,
                               const UI::FontSets* fontsets) {
-	return new T(tag, fc, ns, image_cache, renderer_style, fontsets);
+	return new T(p, tag, fc, ns, image_cache, renderer_style, fontsets);
 }
 using TagHandlerMap = std::map<const std::string,
-                               TagHandler* (*)(Tag& tag,
+                               TagHandler* (*)(const TagHandler* p,
+                                               Tag& tag,
                                                FontCache& fc,
                                                NodeStyle& ns,
                                                ImageCache* image_cache,
                                                RendererStyle& renderer_style,
                                                const UI::FontSets* fontsets)>;
 
-TagHandler* create_taghandler(Tag& tag,
+TagHandler* create_taghandler(const TagHandler* p,
+                              Tag& tag,
                               FontCache& fc,
                               NodeStyle& ns,
                               ImageCache* image_cache,
@@ -1753,6 +1868,7 @@ TagHandler* create_taghandler(Tag& tag,
 		map["font"] = &create_taghandler<FontTagHandler>;
 		map["div"] = &create_taghandler<DivTagHandler>;
 		map["p"] = &create_taghandler<PTagHandler>;
+		map["link"] = &create_taghandler<LinkTagHandler>;
 		map["img"] = &create_taghandler<ImgTagHandler>;
 		map["vspace"] = &create_taghandler<VspaceTagHandler>;
 		map["space"] = &create_taghandler<HspaceTagHandler>;
@@ -1762,7 +1878,7 @@ TagHandler* create_taghandler(Tag& tag,
 		throw RenderError(
 		   format("No Tag handler for %s. This is a bug, please submit a report.", tag.name()));
 	}
-	return i->second(tag, fc, ns, image_cache, renderer_style, fontsets);
+	return i->second(p, tag, fc, ns, image_cache, renderer_style, fontsets);
 }
 
 Renderer::Renderer(ImageCache* image_cache,
@@ -1782,7 +1898,7 @@ Renderer::~Renderer() {  // NOLINT
 	                      // FontCache, FontHandler and Parser need this
 }
 
-std::shared_ptr<RenderNode>
+std::pair<RenderNode*, TagHandler*>
 Renderer::layout(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
@@ -1806,20 +1922,25 @@ Renderer::layout(const std::string& text, uint16_t width, bool is_rtl, const Tag
 	                           is_rtl,
 	                           ""};
 
-	RTTagHandler rtrn(
-	   *rt, *font_cache_, default_style, image_cache_, renderer_style_, fontsets_, width);
-	std::vector<std::shared_ptr<RenderNode>> nodes;
-	rtrn.enter();
-	rtrn.emit_nodes(nodes);
+	std::unique_ptr<TagHandler> rtrn(new RTTagHandler(
+	   nullptr, *rt, *font_cache_, default_style, image_cache_, renderer_style_, fontsets_, width));
+	std::vector<RenderNode*> nodes;
+	rtrn->enter();
+	rtrn->emit_nodes(nodes);
 
 	assert(nodes.size() == 1);
-	assert(nodes[0]);
-	return nodes[0];
+	assert(nodes[0] != nullptr);
+	return {nodes[0], rtrn.release()};
 }
 
 std::shared_ptr<const UI::RenderedText>
 Renderer::render(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
-	std::shared_ptr<RenderNode> node(layout(text, width, is_rtl, allowed_tags));
-	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
+	std::pair<RenderNode*, TagHandler*> node = layout(text, width, is_rtl, allowed_tags);
+	std::shared_ptr<UI::RenderedText> result(node.first->render(texture_cache_));
+	result->set_memory_tree_root(node.second);
+	/* The famous "defect report against ISO C++11" makes it impossible for both
+	 * older and newer compilers to like any simpler version of this line.
+	 */
+	return std::shared_ptr<const UI::RenderedText>(std::move(result));
 }
 }  // namespace RT

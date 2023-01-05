@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -144,6 +144,11 @@ build_texture_atlas(const int max_size,
 		} catch (const std::exception& e) {
 			log_warn("Ignoring unreadable add-ons profile %s: %s", file.c_str(), e.what());
 		}
+	}
+
+	// …and similar for scenario-specific terrains.
+	for (const std::string& dir : g_fs->list_directory("campaigns")) {
+		find_images(dir + "/scripting/tribes", &all_images, &first_atlas_images);
 	}
 
 	auto first_texture_atlas = pack_images(first_atlas_images, max_size, textures_in_atlas);

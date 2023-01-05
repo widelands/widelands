@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -213,6 +213,12 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 			}
 		}
 
+		if (table.has_key("warehouse_names")) {
+			warehouse_names_ = table.get_table("warehouse_names")->array_entries<std::string>();
+		} else {
+			log_warn("Tribe %s specifies no warehouse_names", name().c_str());
+		}
+
 		// TODO(Nordfriese): Require these strings after v1.1
 		auto load_productionsite_string = [this, &table](std::string& target, const std::string& key,
 		                                                 const std::string& default_value) {
@@ -242,6 +248,16 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		   /** TRANSLATORS: Productivity label on a building if there is more than 1 worker coming. If
 		      you need plural forms here, please let us know. */
 		   _("Workers are coming"));
+		load_productionsite_string(productionsite_experienced_worker_missing_,
+		                           "productionsite_experienced_worker_missing",
+		                           /** TRANSLATORS: Productivity label on a building if there is 1
+		                              experienced worker missing. */
+		                           _("Expert missing"));
+		load_productionsite_string(
+		   productionsite_experienced_workers_missing_, "productionsite_experienced_workers_missing",
+		   /** TRANSLATORS: Productivity label on a building if there is more than 1 experienced
+		      worker missing. If you need plural forms here, please let us know. */
+		   _("Experts missing"));
 
 		auto load_soldier_string = [this, &table](std::string& target, const std::string& key,
 		                                          const std::string& default_value) {
@@ -349,6 +365,12 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 			flag_animation_id_ =
 			   g_animation_manager->load(name_ + std::string("_flag"), *animation_table, "flag",
 			                             animation_directory, animation_type);
+		}
+		if (animations_table.has_key("pinned_note")) {
+			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("pinned_note");
+			pinned_note_animation_id_ =
+			   g_animation_manager->load(name_ + std::string("_pinned_note"), *animation_table,
+			                             "pinned_note", animation_directory, animation_type);
 		}
 		load_bridge_if_present(
 		   animations_table, animation_directory, animation_type, "e", "normal", &bridges_normal_.e);
@@ -734,11 +756,12 @@ const std::vector<DescriptionIndex>& TribeDescr::worker_types_without_cost() con
 uint32_t TribeDescr::frontier_animation() const {
 	return frontier_animation_id_;
 }
-
 uint32_t TribeDescr::flag_animation() const {
 	return flag_animation_id_;
 }
-
+uint32_t TribeDescr::pinned_note_animation() const {
+	return pinned_note_animation_id_;
+}
 uint32_t TribeDescr::bridge_animation(uint8_t dir, bool busy) const {
 	switch (dir) {
 	case WALK_E:

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,17 +49,15 @@ bool is_legal_filename(const std::string& filename) {
 	if (filename.empty()) {
 		return false;
 	}
-	for (const std::string& illegal_start : illegal_filename_starting_characters) {
-		if (starts_with(filename, illegal_start)) {
-			return false;
-		}
-	}
-	for (const std::string& illegal_char : illegal_filename_characters) {
-		if (contains(filename, illegal_char)) {
-			return false;
-		}
-	}
-	return true;
+	return std::none_of(illegal_filename_starting_characters.begin(),
+	                    illegal_filename_starting_characters.end(),
+	                    [&filename](const std::string& illegal_start) {
+		                    return starts_with(filename, illegal_start);
+	                    }) &&
+	       std::none_of(illegal_filename_characters.begin(), illegal_filename_characters.end(),
+	                    [&filename](const std::string& illegal_char) {
+		                    return contains(filename, illegal_char);
+	                    });
 }
 
 std::string illegal_filename_tooltip() {

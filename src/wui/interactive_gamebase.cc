@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 
 #include "wui/interactive_gamebase.h"
 
+#include <cstdlib>
 #include <memory>
 
 #include "base/macros.h"
@@ -36,6 +37,7 @@
 #include "wlapplication_options.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
+#include "wui/game_diplomacy_menu.h"
 #include "wui/game_exit_confirm_box.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
@@ -80,6 +82,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    UI::PanelStyle::kWui,
                    UI::ButtonStyle::kWuiPrimary,
                    [this](ShowHideEntry t) { showhide_menu_selected(t); }),
+     can_restart_(g.is_replay() || !g.list_of_scenarios().empty()),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -139,7 +142,8 @@ void InteractiveGameBase::rebuild_main_menu() {
 	mainmenu_.add(_("Sound Options"), MainMenuEntry::kOptions,
 	              g_image_cache->get("images/wui/menus/options.png"), false,
 	              /** TRANSLATORS: Tooltip for Sound Options in the game's main menu */
-	              _("Set sound effect and music options"));
+	              _("Set sound effect and music options"),
+	              shortcut_string_for(KeyboardShortcut::kInGameSoundOptions, false));
 
 	menu_windows_.savegame.open_window = [this] {
 		new GameMainMenuSaveGame(*this, menu_windows_.savegame, GameMainMenuSaveGame::Type::kSave);
@@ -147,34 +151,52 @@ void InteractiveGameBase::rebuild_main_menu() {
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap,
 	              g_image_cache->get("images/wui/menus/save_game.png"), false, "",
-	              shortcut_string_for(KeyboardShortcut::kInGameSave, false));
+	              shortcut_string_for(KeyboardShortcut::kCommonSave, false));
 
-	if (!is_multiplayer() && !game().is_replay()) {
+	if (game().is_replay()) {
 		menu_windows_.loadgame.open_window = [this] {
-			new GameMainMenuSaveGame(*this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoad);
+			new GameMainMenuSaveGame(
+			   *this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoadReplay);
+		};
+		/** TRANSLATORS: An entry in the game's main menu */
+		mainmenu_.add(_("Load Replay"), MainMenuEntry::kLoadMap,
+		              g_image_cache->get("images/wui/menus/load_game.png"), false, "",
+		              shortcut_string_for(KeyboardShortcut::kCommonLoad, false));
+
+		/** TRANSLATORS: An entry in the game's main menu */
+		mainmenu_.add(_("Restart Replay"), MainMenuEntry::kRestartScenario,
+		              g_image_cache->get("images/wui/menus/restart_scenario.png"), false, "",
+		              shortcut_string_for(KeyboardShortcut::kInGameRestart, false));
+	} else if (!is_multiplayer()) {
+		menu_windows_.loadgame.open_window = [this] {
+			new GameMainMenuSaveGame(
+			   *this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoadSavegame);
 		};
 		/** TRANSLATORS: An entry in the game's main menu */
 		mainmenu_.add(_("Load Game"), MainMenuEntry::kLoadMap,
 		              g_image_cache->get("images/wui/menus/load_game.png"), false, "",
-		              shortcut_string_for(KeyboardShortcut::kInGameLoad, false));
+		              shortcut_string_for(KeyboardShortcut::kCommonLoad, false));
 	}
 
 	if (!game().list_of_scenarios().empty()) {
 		/** TRANSLATORS: An entry in the game's main menu */
 		mainmenu_.add(_("Restart Scenario"), MainMenuEntry::kRestartScenario,
-		              g_image_cache->get("images/wui/menus/restart_scenario.png"));
+		              g_image_cache->get("images/wui/menus/restart_scenario.png"), false, "",
+		              shortcut_string_for(KeyboardShortcut::kInGameRestart, false));
 	}
 
-	mainmenu_.add(
-	   /** TRANSLATORS: An entry in the game's main menu */
-	   _("Exit Game"), MainMenuEntry::kExitGame, g_image_cache->get("images/wui/menus/exit.png"));
+	/** TRANSLATORS: An entry in the game's main menu */
+	mainmenu_.add(_("Exit Game"), MainMenuEntry::kExitGame,
+	              g_image_cache->get("images/wui/menus/exit.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kCommonExit, false));
 }
 
 void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	switch (entry) {
 #ifndef NDEBUG  //  only in debug builds
 	case MainMenuEntry::kScriptConsole: {
-		GameChatMenu::create_script_console(this, debugconsole_, *DebugConsole::get_chat_provider());
+		GameChatMenu::create_script_console(
+		   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
 	} break;
 #endif
 	case MainMenuEntry::kOptions: {
@@ -184,19 +206,10 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 		menu_windows_.savegame.toggle();
 	} break;
 	case MainMenuEntry::kRestartScenario: {
-		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
-			game().set_next_game_to_load(game().list_of_scenarios().front());
-			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-		} else {
-			GameExitConfirmBox* gecb =
-			   new GameExitConfirmBox(*this, *this, _("Restart Scenario"),
-			                          _("Are you sure you wish to restart this scenario?"));
-			gecb->ok.connect(
-			   [this] { game().set_next_game_to_load(game().list_of_scenarios().front()); });
-		}
+		handle_restart((SDL_GetModState() & KMOD_CTRL) != 0);
 	} break;
 	case MainMenuEntry::kLoadMap:
-		if (!is_multiplayer() && !game().is_replay()) {
+		if (!is_multiplayer()) {
 			menu_windows_.loadgame.toggle();
 		}
 		break;
@@ -208,6 +221,31 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 		}
 	} break;
 	}
+}
+
+void InteractiveGameBase::handle_restart(const bool force) {
+	const bool r = game().is_replay();
+	const std::string& next = r ? game().replay_filename() : game().list_of_scenarios().front();
+	if (force) {
+		game().set_next_game_to_load(next);
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+	} else {
+		GameExitConfirmBox* gecb =
+		   new GameExitConfirmBox(*this, *this, r ? _("Restart Replay") : _("Restart Scenario"),
+		                          r ? _("Are you sure you wish to restart this replay?") :
+                                    _("Are you sure you wish to restart this scenario?"));
+		gecb->ok.connect([this, next] { game().set_next_game_to_load(next); });
+	}
+}
+
+void InteractiveGameBase::add_diplomacy_menu() {
+	add_toolbar_button(
+	   "wui/menus/diplomacy", "diplomacy",
+	   as_tooltip_text_with_hotkey(_("Diplomacy"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameDiplomacy, true),
+	                               UI::PanelStyle::kWui),
+	   &diplomacy_, true);
+	diplomacy_.open_window = [this] { new GameDiplomacyMenu(*this, diplomacy_); };
 }
 
 void InteractiveGameBase::add_showhide_menu() {
@@ -369,7 +407,7 @@ void InteractiveGameBase::add_chat_ui() {
 	   &chat_, true);
 	chat_.open_window = [this] {
 		if (chat_provider_ != nullptr) {
-			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+			GameChatMenu::create_chat_console(this, color_functor(), chat_, *chat_provider_);
 		}
 	};
 }
@@ -464,18 +502,37 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		menu_windows_.stats_general.toggle();
 		return true;
 	}
-	if (matches_shortcut(KeyboardShortcut::kInGameSave, code)) {
+	if (matches_shortcut(KeyboardShortcut::kInGameDiplomacy, code)) {
+		diplomacy_.toggle();
+		return true;
+	}
+	if (matches_shortcut(KeyboardShortcut::kCommonSave, code)) {
 		new GameMainMenuSaveGame(*this, menu_windows_.savegame, GameMainMenuSaveGame::Type::kSave);
 		return true;
 	}
-	if (!is_multiplayer() && !game().is_replay() &&
-	    matches_shortcut(KeyboardShortcut::kInGameLoad, code)) {
-		new GameMainMenuSaveGame(*this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoad);
+	if (!is_multiplayer()) {
+		if (matches_shortcut(KeyboardShortcut::kCommonLoad, code)) {
+			new GameMainMenuSaveGame(*this, menu_windows_.loadgame,
+			                         game().is_replay() ? GameMainMenuSaveGame::Type::kLoadReplay :
+                                                       GameMainMenuSaveGame::Type::kLoadSavegame);
+			return true;
+		}
+		if (can_restart_ && matches_shortcut(KeyboardShortcut::kInGameRestart, code)) {
+			handle_restart();
+			return true;
+		}
+	}
+	if (matches_shortcut(KeyboardShortcut::kCommonExit, code)) {
+		new GameExitConfirmBox(*this, *this);
+		return true;
+	}
+	if (matches_shortcut(KeyboardShortcut::kInGameSoundOptions, code)) {
+		menu_windows_.sound_options.toggle();
 		return true;
 	}
 	if ((chat_provider_ != nullptr) && matches_shortcut(KeyboardShortcut::kInGameChat, code)) {
 		if (chat_.window == nullptr) {
-			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+			GameChatMenu::create_chat_console(this, color_functor(), chat_, *chat_provider_);
 		}
 		return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
 	}
@@ -522,16 +579,27 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 	// Display the gamespeed.
 	if (game_controller != nullptr) {
 		std::string game_speed;
-		uint32_t const real = game_controller->real_speed();
-		uint32_t const desired = game_controller->desired_speed();
-		if (real == desired) {
-			if (real != 1000) {
-				game_speed = speed_string(real);
+		const int64_t computed_target = game_controller->real_speed();
+		const int64_t desired = game_controller->desired_speed();
+		int64_t actual = average_real_gamespeed();
+		constexpr int64_t kFluctuationTolerance = 1000;  // Arbitrary value.
+		if (abs(actual - computed_target) < kFluctuationTolerance) {
+			actual = computed_target;  // Ignore minor fluctuations.
+		}
+
+		if (desired == computed_target && actual == computed_target) {
+			if (actual != 1000) {
+				game_speed = speed_string(actual);
 			}
-		} else {
+		} else if (desired == computed_target || actual == computed_target) {
 			game_speed = format
 			   /** TRANSLATORS: actual_speed (desired_speed) */
-			   (_("%1$s (%2$s)"), speed_string(real), speed_string(desired));
+			   (_("%1$s (%2$s)"), speed_string(actual), speed_string(desired));
+		} else {
+			game_speed = format
+			   /** TRANSLATORS: actual_speed (target_speed) (desired_speed) */
+			   (_("%1$s (%2$s) (%3$s)"), speed_string(actual), speed_string(computed_target),
+			    speed_string(desired));
 		}
 
 		info_panel_.set_speed_string(game_speed);

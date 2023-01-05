@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -335,7 +335,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
-	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
+	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image(), false);
 	Notifications::publish(UI::NoteLoadingMessage(_("Saving the map…")));
 
 	// Try saving the map.

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2019
@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-25 02:57+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020,2022\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -405,8 +405,8 @@ msgid "Using the Minimap"
 msgstr "Utilisation de la mini-carte"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:274
-msgid "Very good. And now about the minimap. "
-msgstr "Très bien. Et maintenant voyons la mini-carte."
+msgid "Very good. And now about the minimap."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #, lua-format

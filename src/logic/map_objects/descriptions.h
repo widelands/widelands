@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,86 +50,89 @@ public:
 	explicit Descriptions(LuaInterface* lua, const AddOns::AddOnsList&);
 	~Descriptions();
 
-	const DescriptionMaintainer<CritterDescr>& critters() const;
-	const DescriptionMaintainer<TerrainDescription>& terrains() const;
-	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
-	const DescriptionMaintainer<WorkerDescr>& workers() const;
+	[[nodiscard]] const DescriptionMaintainer<CritterDescr>& critters() const;
+	[[nodiscard]] const DescriptionMaintainer<TerrainDescription>& terrains() const;
+	[[nodiscard]] const DescriptionMaintainer<ImmovableDescr>& immovables() const;
+	[[nodiscard]] const DescriptionMaintainer<WorkerDescr>& workers() const;
 
-	size_t nr_buildings() const;
-	size_t nr_critters() const;
-	size_t nr_immovables() const;
-	size_t nr_terrains() const;
-	size_t nr_tribes() const;
-	size_t nr_resources() const;
-	size_t nr_wares() const;
-	size_t nr_workers() const;
+	[[nodiscard]] size_t nr_buildings() const;
+	[[nodiscard]] size_t nr_critters() const;
+	[[nodiscard]] size_t nr_immovables() const;
+	[[nodiscard]] size_t nr_terrains() const;
+	[[nodiscard]] size_t nr_tribes() const;
+	[[nodiscard]] size_t nr_resources() const;
+	[[nodiscard]] size_t nr_wares() const;
+	[[nodiscard]] size_t nr_workers() const;
 
-	bool building_exists(const std::string& buildingname) const;
-	bool building_exists(DescriptionIndex index) const;
-	bool immovable_exists(DescriptionIndex index) const;
-	bool ship_exists(DescriptionIndex index) const;
-	bool tribe_exists(const std::string& tribename) const;
-	bool tribe_exists(DescriptionIndex index) const;
-	bool ware_exists(const std::string& warename) const;
-	bool ware_exists(DescriptionIndex index) const;
-	bool worker_exists(const std::string& workername) const;
-	bool worker_exists(DescriptionIndex index) const;
+	[[nodiscard]] bool building_exists(const std::string& buildingname) const;
+	[[nodiscard]] bool building_exists(DescriptionIndex index) const;
+	[[nodiscard]] bool immovable_exists(const std::string& immoname) const;
+	[[nodiscard]] bool immovable_exists(DescriptionIndex index) const;
+	[[nodiscard]] bool ship_exists(DescriptionIndex index) const;
+	[[nodiscard]] bool tribe_exists(const std::string& tribename) const;
+	[[nodiscard]] bool tribe_exists(DescriptionIndex index) const;
+	[[nodiscard]] bool ware_exists(const std::string& warename) const;
+	[[nodiscard]] bool ware_exists(DescriptionIndex index) const;
+	[[nodiscard]] bool worker_exists(const std::string& workername) const;
+	[[nodiscard]] bool worker_exists(DescriptionIndex index) const;
+	[[nodiscard]] bool terrain_exists(const std::string& terrainname) const;
+	[[nodiscard]] bool terrain_exists(DescriptionIndex index) const;
 
 	/// Returns the index for 'buildingname' and throws an exception if the building can't be found.
 	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_building_index(const std::string& buildingname) const;
+	[[nodiscard]] DescriptionIndex safe_building_index(const std::string& buildingname) const;
 	/// Returns the index for 'crittername' and throws an exception if the critter can't be found.
 	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_critter_index(const std::string& crittername) const;
+	[[nodiscard]] DescriptionIndex safe_critter_index(const std::string& crittername) const;
 	/// Returns the index for 'immovablename' and throws an exception if the immovable can't be
 	/// found. This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_immovable_index(const std::string& immovablename) const;
+	[[nodiscard]] DescriptionIndex safe_immovable_index(const std::string& immovablename) const;
 	/// Returns the index for 'warename' and throws an exception if the ware can't be found.
 	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_resource_index(const std::string& resourcename) const;
+	[[nodiscard]] DescriptionIndex safe_resource_index(const std::string& resourcename) const;
 	/// Returns the index for 'shipname' and throws an exception if the ship can't be found.
 	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_ship_index(const std::string& shipname) const;
+	[[nodiscard]] DescriptionIndex safe_ship_index(const std::string& shipname) const;
 	/// Returns the index for 'terrainname' and throws an exception if the terrain can't be found.
 	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_terrain_index(const std::string& terrainname) const;
+	[[nodiscard]] DescriptionIndex safe_terrain_index(const std::string& terrainname) const;
 	/// Returns the index for 'tribename' and throws an exception if the tribe can't be found.
-	DescriptionIndex safe_tribe_index(const std::string& tribename) const;
+	[[nodiscard]] DescriptionIndex safe_tribe_index(const std::string& tribename) const;
 	/// Returns the index for 'warename' and throws an exception if the ware can't be found.
 	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_ware_index(const std::string& warename) const;
+	[[nodiscard]] DescriptionIndex safe_ware_index(const std::string& warename) const;
 	/// Returns the index for 'workername' and throws an exception if the worker can't be found.
 	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_worker_index(const std::string& workername) const;
+	[[nodiscard]] DescriptionIndex safe_worker_index(const std::string& workername) const;
 
-	DescriptionIndex building_index(const std::string& buildingname) const;
-	DescriptionIndex critter_index(const std::string& crittername) const;
-	DescriptionIndex immovable_index(const std::string& immovablename) const;
-	DescriptionIndex resource_index(const std::string& resourcename) const;
-	DescriptionIndex ship_index(const std::string& shipname) const;
-	DescriptionIndex terrain_index(const std::string& terrainname) const;
-	DescriptionIndex tribe_index(const std::string& tribename) const;
-	DescriptionIndex ware_index(const std::string& warename) const;
-	DescriptionIndex worker_index(const std::string& workername) const;
+	[[nodiscard]] DescriptionIndex building_index(const std::string& buildingname) const;
+	[[nodiscard]] DescriptionIndex critter_index(const std::string& crittername) const;
+	[[nodiscard]] DescriptionIndex immovable_index(const std::string& immovablename) const;
+	[[nodiscard]] DescriptionIndex resource_index(const std::string& resourcename) const;
+	[[nodiscard]] DescriptionIndex ship_index(const std::string& shipname) const;
+	[[nodiscard]] DescriptionIndex terrain_index(const std::string& terrainname) const;
+	[[nodiscard]] DescriptionIndex tribe_index(const std::string& tribename) const;
+	[[nodiscard]] DescriptionIndex ware_index(const std::string& warename) const;
+	[[nodiscard]] DescriptionIndex worker_index(const std::string& workername) const;
 
-	const BuildingDescr* get_building_descr(DescriptionIndex index) const;
-	BuildingDescr* get_mutable_building_descr(DescriptionIndex index) const;
-	const CritterDescr* get_critter_descr(DescriptionIndex index) const;
-	const CritterDescr* get_critter_descr(const std::string& name) const;
-	const ImmovableDescr* get_immovable_descr(DescriptionIndex index) const;
-	ImmovableDescr* get_mutable_immovable_descr(DescriptionIndex index) const;
-	const ResourceDescription* get_resource_descr(DescriptionIndex index) const;
-	ResourceDescription* get_mutable_resource_descr(DescriptionIndex index) const;
-	const ShipDescr* get_ship_descr(DescriptionIndex index) const;
-	const TerrainDescription* get_terrain_descr(DescriptionIndex index) const;
-	const TerrainDescription* get_terrain_descr(const std::string& name) const;
-	TerrainDescription* get_mutable_terrain_descr(DescriptionIndex index) const;
-	const WareDescr* get_ware_descr(DescriptionIndex index) const;
-	WareDescr* get_mutable_ware_descr(DescriptionIndex index) const;
-	const WorkerDescr* get_worker_descr(DescriptionIndex index) const;
-	WorkerDescr* get_mutable_worker_descr(DescriptionIndex index) const;
-	const TribeDescr* get_tribe_descr(DescriptionIndex index) const;
-	TribeDescr* get_mutable_tribe_descr(DescriptionIndex index) const;
+	[[nodiscard]] const BuildingDescr* get_building_descr(DescriptionIndex index) const;
+	[[nodiscard]] BuildingDescr* get_mutable_building_descr(DescriptionIndex index) const;
+	[[nodiscard]] const CritterDescr* get_critter_descr(DescriptionIndex index) const;
+	[[nodiscard]] const CritterDescr* get_critter_descr(const std::string& name) const;
+	[[nodiscard]] const ImmovableDescr* get_immovable_descr(DescriptionIndex index) const;
+	[[nodiscard]] ImmovableDescr* get_mutable_immovable_descr(DescriptionIndex index) const;
+	[[nodiscard]] const ResourceDescription* get_resource_descr(DescriptionIndex index) const;
+	[[nodiscard]] ResourceDescription* get_mutable_resource_descr(DescriptionIndex index) const;
+	[[nodiscard]] const ShipDescr* get_ship_descr(DescriptionIndex index) const;
+	[[nodiscard]] const TerrainDescription* get_terrain_descr(DescriptionIndex index) const;
+	[[nodiscard]] const TerrainDescription* get_terrain_descr(const std::string& name) const;
+	[[nodiscard]] TerrainDescription* get_mutable_terrain_descr(DescriptionIndex index) const;
+	[[nodiscard]] const WareDescr* get_ware_descr(DescriptionIndex index) const;
+	[[nodiscard]] WareDescr* get_mutable_ware_descr(DescriptionIndex index) const;
+	[[nodiscard]] const WorkerDescr* get_worker_descr(DescriptionIndex index) const;
+	[[nodiscard]] WorkerDescr* get_mutable_worker_descr(DescriptionIndex index) const;
+	[[nodiscard]] const TribeDescr* get_tribe_descr(DescriptionIndex index) const;
+	[[nodiscard]] TribeDescr* get_mutable_tribe_descr(DescriptionIndex index) const;
 
 	// ************************ Loading *************************
 
@@ -173,29 +176,30 @@ public:
 	/// when we don't know whether it's a ware or worker.
 	/// Throws GameDataError if object hasn't been registered.
 	/// This function is safe for map/savegame compatibility.
-	std::pair<WareWorker, DescriptionIndex> load_ware_or_worker(const std::string& objectname) const;
+	std::pair<WareWorker, DescriptionIndex>  // NOLINT not nodiscard
+	load_ware_or_worker(const std::string& objectname) const;
 	/// Try to load a building or immovable that has been registered previously with
 	/// 'register_description' when we don't know whether it's a building or immovable. Throws
 	/// GameDataError if object hasn't been registered. If first == 'true', we have a building.
 	/// Otherwise, it's an immovable. This function is safe for map/savegame compatibility.
-	std::pair<bool, DescriptionIndex>
+	[[nodiscard]] std::pair<bool, DescriptionIndex>
 	load_building_or_immovable(const std::string& objectname) const;
 
 	/** Register the tribes if they have not been registered yet. */
 	void ensure_tribes_are_registered();
 
-	uint32_t get_largest_workarea() const;
+	[[nodiscard]] uint32_t get_largest_workarea() const;
 	void increase_largest_workarea(uint32_t workarea);
 
 	/// For loading old maps
 	void set_old_world_name(const std::string& name);
 
-	const AllTribes& all_tribes() const {
+	[[nodiscard]] const AllTribes& all_tribes() const {
 		return all_tribes_;
 	}
 
 	/** The order in which all units have been loaded. */
-	const std::vector<std::string>& load_order() const {
+	[[nodiscard]] const std::vector<std::string>& load_order() const {
 		return description_manager_->load_order();
 	}
 
@@ -221,11 +225,11 @@ private:
 	/** Helper function for add_object_description(). */
 	void add_terrain_description(const std::string&, const LuaTable&);
 
-	uint32_t largest_workarea_;
+	uint32_t largest_workarea_{0U};
 
 	/// Custom scenario tribes
 	std::unique_ptr<LuaTable> scenario_tribes_;
-	bool tribes_have_been_registered_;
+	bool tribes_have_been_registered_{false};
 
 	std::unique_ptr<Notifications::Subscriber<DescriptionManager::NoteMapObjectDescriptionTypeCheck>>
 	   subscriber_;

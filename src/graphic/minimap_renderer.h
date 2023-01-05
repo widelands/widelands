@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2022 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,7 +66,7 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
                                    const Vector2i& minimap_pixel,
                                    const Rectf& view_area,
                                    MiniMapType minimap_type,
-                                   const bool zoom);
+                                   bool zoom);
 
 // Render the minimap. If player is not nullptr, it renders from that player's
 // point of view. The 'view_area' designates the currently visible area in the
@@ -96,7 +96,7 @@ void draw_minimap_static(Texture& texture,
                          const Widelands::EditorGameBase& egbase,
                          const Widelands::Player* player,
                          MiniMapLayer layers,
-                         const bool draw_full = true,
+                         bool draw_full = true,
                          uint16_t* rows_drawn = nullptr);
 
 // Blit the static texture from the previous step onto a new texture.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/mapdetailsbox.h"
 #include "ui_fsmenu/menu.h"
@@ -73,6 +74,8 @@ protected:
 	void load_win_conditions(const std::set<std::string>& tags);
 	/// Remembers the win condition that is currently selected in the dropdown.
 	virtual void win_condition_selected() = 0;
+	/// The time limit for the win condition was changed.
+	void win_condition_duration_changed();
 	/// If the win condition in 'win_condition_script' can be played with the map tags,
 	/// parses the win condition and returns it as a std::unique_ptr<LuaTable>.
 	/// If this win condition can't be played with the map tags, returns a unique_ptr to nullptr.
@@ -81,13 +84,16 @@ protected:
 
 	void toggle_peaceful();
 	void toggle_custom_starting_positions();
+	bool should_write_replay() const;
 
 	void layout() override;
 
 	MapDetailsBox map_details_;
 	UI::Textarea configure_game_;
+	UI::Checkbox write_replay_;
 	UI::MultilineTextarea warn_desyncing_addon_;
 	UI::Dropdown<std::string> win_condition_dropdown_;
+	UI::SpinBox win_condition_duration_;
 	UI::Checkbox peaceful_, custom_starting_positions_;
 	UI::Button* choose_map_;
 	UI::Button* choose_savegame_;
@@ -96,7 +102,7 @@ protected:
 	GameSettingsProvider& settings_;
 	GameController* ctrl_;
 
-	bool peaceful_mode_forbidden_;
+	bool peaceful_mode_forbidden_{false};
 
 private:
 	void add_all_widgets();

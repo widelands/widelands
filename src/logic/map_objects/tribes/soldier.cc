@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,17 +56,6 @@ constexpr int kSoldierHealthBarWidth = 13;
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 
-SoldierLevelRange::SoldierLevelRange()
-   : min_health(-1),
-     min_attack(-1),
-     min_defense(-1),
-     min_evade(-1),
-     max_health(-1),
-     max_attack(-1),
-     max_defense(-1),
-     max_evade(-1) {
-}
-
 SoldierLevelRange::SoldierLevelRange(const LuaTable& t) {
 	min_health = t.get_int("min_health");
 	min_attack = t.get_int("min_attack");
@@ -99,8 +88,7 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
      health_(table.get_table("health")),
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),
-     evade_(table.get_table("evade")),
-     max_anim_height_(0) {
+     evade_(table.get_table("evade")) {
 
 	// Battle animations
 	// attack_success_*-> soldier is attacking and hit his opponent
@@ -806,7 +794,7 @@ void Soldier::init_auto_task(Game& game) {
 struct FindNodeOwned {
 	explicit FindNodeOwned(PlayerNumber owner) : owner_(owner) {
 	}
-	bool accept(const EditorGameBase& /* egbase */, const FCoords& coords) const {
+	[[nodiscard]] bool accept(const EditorGameBase& /* egbase */, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == owner_);
 	}
 
@@ -988,6 +976,13 @@ void Soldier::attack_update(Game& game, State& state) {
 
 	// Count remaining defenders
 	if (enemy != nullptr) {
+		if (!owner().is_hostile(enemy->owner())) {
+			/* The players agreed on a truce. */
+			molog(game.get_gametime(), "[attack] opponent is an ally, cancel attack");
+			combat_walking_ = CD_NONE;
+			return pop_task(game);
+		}
+
 		if (enemy->soldier_control() != nullptr) {
 			defenders = enemy->soldier_control()->present_soldiers().size();
 		}
@@ -1440,6 +1435,12 @@ void Soldier::battle_update(Game& game, State& /* state */) {
 
 	const Map& map = game.map();
 	Soldier& opponent = *battle_->opponent(*this);
+	if (!owner().is_hostile(opponent.owner())) {
+		/* The players agreed on a truce. */
+		molog(game.get_gametime(), "[battle] opponent is an ally, cancel battle");
+		combat_walking_ = CD_NONE;
+		return pop_task(game);
+	}
 	if (opponent.get_position() != get_position()) {
 		const MapObject* mo = map[get_position()].get_immovable();
 		if ((mo != nullptr) && mo->descr().type() >= MapObjectType::BUILDING) {
@@ -1751,9 +1752,6 @@ Load/save support
 */
 
 constexpr uint8_t kCurrentPacketVersion = 3;
-
-Soldier::Loader::Loader() : battle_(0) {
-}
 
 void Soldier::Loader::load(FileRead& fr) {
 	Worker::Loader::load(fr);

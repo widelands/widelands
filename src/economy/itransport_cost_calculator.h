@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,10 +34,9 @@ namespace Widelands {
 class ITransportCostCalculator {
 public:
 	ITransportCostCalculator() = default;
-	virtual ~ITransportCostCalculator() {
-	}
+	virtual ~ITransportCostCalculator() = default;
 
-	virtual int32_t calc_cost_estimate(const Coords&, const Coords&) const = 0;
+	[[nodiscard]] virtual int32_t calc_cost_estimate(const Coords&, const Coords&) const = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(ITransportCostCalculator);

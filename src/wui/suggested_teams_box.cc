@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2022 by the Widelands Development Team
+ * Copyright (C) 2015-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,8 +46,7 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
      label_height_(g_image_cache->get("images/players/player_position_menu.png")->height() +
                    padding),
      suggested_teams_box_label_(new UI::Textarea(
-        this, s, s == PanelStyle::kWui ? FontStyle::kWuiLabel : FontStyle::kFsMenuLabel)),
-     lineup_box_(nullptr) {
+        this, s, s == PanelStyle::kWui ? FontStyle::kWuiLabel : FontStyle::kFsMenuLabel)) {
 	add(suggested_teams_box_label_);
 }
 

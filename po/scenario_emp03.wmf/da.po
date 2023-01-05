@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
@@ -141,11 +141,9 @@ msgstr "Klædeproduktion"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
-"Now turn all the wheat into at least 50 bales of wool and then use the wool "
-"to weave cloth in order to build a ship."
+"Now build a sheep farm and turn all the wheat into at least 50 bales of "
+"wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
-"Lad os nu omdanne hveden til mindst 50 baller uld og brugs å ulden til at "
-"væve klæde til skibet."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -159,11 +157,9 @@ msgstr "Byg to ekspeditionshavne"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
-"Explore the island in the south. Use an expedition to build a port there. "
-"Afterwards, try to find some mining resources."
+"Explore the island in the south. Send an expedition from our port to build a"
+" port there. Afterwards, try to find some mining resources."
 msgstr ""
-"Udforsk øen mod syd. Brug en ekspedition til at bygge en havn der. "
-"Efterfølgende skal vi prøve at finde nogle mineressourcer."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""

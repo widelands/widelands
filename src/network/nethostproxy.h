@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2022 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ public:
 	~NetHostProxy() override;
 
 	// Inherited from NetHostInterface
-	bool is_connected(ConnectionId id) const override;
+	[[nodiscard]] bool is_connected(ConnectionId id) const override;
 	void close(ConnectionId id) override;
 	bool try_accept(ConnectionId* new_id) override;
 	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
@@ -89,14 +89,13 @@ private:
 			kDisconnected
 		};
 
-		Client() : state_(State::kConnecting), received_() {
-		}
+		Client() = default;
 
 		// deleted since RecvPacket does not offer a copy constructor
 		Client(const Client& other) = delete;
 
 		/// The current connection state
-		State state_;
+		State state_{State::kConnecting};
 		/// The packages that have been received
 		std::queue<std::unique_ptr<RecvPacket>> received_;
 	};

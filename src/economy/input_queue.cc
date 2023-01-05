@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,11 +40,7 @@ InputQueue::InputQueue(PlayerImmovable& init_owner,
      index_(init_index),
      max_size_(init_max_size),
      max_fill_(init_max_size),
-     type_(init_type),
-     consume_interval_(0),
-     request_(nullptr),
-     callback_fn_(nullptr),
-     callback_data_(nullptr) {
+     type_(init_type) {
 }
 
 void InputQueue::update() {

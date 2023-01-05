@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,25 +28,11 @@
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
-#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/generic_save_handler.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
-
-SaveHandler::SaveHandler()
-   : next_save_realtime_(0),
-     last_save_realtime_(0),
-     initialized_(false),
-     allow_saving_(true),
-     save_requested_(false),
-     saving_next_tick_(false),
-     autosave_filename_(kAutosavePrefix),
-     fs_type_(FileSystem::ZIP),
-     autosave_interval_in_ms_(kDefaultAutosaveInterval * 60 * 1000),
-     number_of_rolls_(5) {
-}
 
 bool SaveHandler::roll_save_files(const std::string& filename, std::string* const error) const {
 	int32_t rolls = 0;

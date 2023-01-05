@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,8 +44,7 @@ constexpr unsigned kDefaultFloatPrecision = 6;
 constexpr double kDynamicPrecisionExtra = 0.005;
 
 struct AbstractNode {
-	virtual ~AbstractNode() {
-	}
+	virtual ~AbstractNode() = default;
 
 	union Argument {
 		signed char char_val;

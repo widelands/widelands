@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2022 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,20 +41,12 @@ const uint8_t kTimeFormatLength = 32;
 /// that only one instance is running at time.
 InternetGaming::InternetGaming()
    : net(nullptr),
-     state_(OFFLINE),
-     reg_(false),
+
      port_(kInternetGamingPort),
      clientrights_(INTERNET_CLIENT_UNREGISTERED),
-     clientupdateonmetaserver_(true),
-     gameupdateonmetaserver_(true),
-     clientupdate_(false),
-     gameupdate_(false),
-     time_offset_(0),
+
      waittimeout_(std::numeric_limits<int32_t>::max()),
      lastping_(time(nullptr)) {
-	// Fill the list of possible messages from the server
-	InternetGamingMessages::fill_map();
-
 	// Set connection tracking variables to 0
 	lastbrokensocket_[0] = 0;
 	lastbrokensocket_[1] = 0;
@@ -228,7 +220,7 @@ void InternetGaming::logout(const std::string& msgcode) {
 		net->send(s);
 	}
 
-	const std::string& msg = InternetGamingMessages::get_message(msgcode);
+	const std::string msg = InternetGamingMessages::get_message(msgcode);
 	verb_log_info("InternetGaming: logout(%s)", msg.c_str());
 	format_and_add_chat("", "", true, msg);
 
@@ -288,7 +280,7 @@ bool InternetGaming::check_password(const std::string& nick,
  */
 void InternetGaming::handle_failed_read() {
 	set_error();
-	const std::string& msg = InternetGamingMessages::get_message("CONNECTION_LOST");
+	const std::string msg = InternetGamingMessages::get_message("CONNECTION_LOST");
 	log_err("InternetGaming: Error: %s\n", msg.c_str());
 	format_and_add_chat("", "", true, msg);
 

@@ -25,7 +25,7 @@ tips = {
    },
    {
       -- TRANSLATORS: %s = URL to the Widelands website
-      text = (_("Any further questions? Our FAQ, the wiki and of course our community forums can be found online at %s.")):bformat(u("widelands.org")),
+      text = (_("Any further questions? Our FAQ, the wiki and of course our community forums can be found online at %s.")):bformat(a("widelands.org", "url", "https://www.widelands.org")),
       seconds = 6
    },
    {
@@ -62,7 +62,11 @@ tips = {
       seconds = 4
    },
    {
-      text = _("An economy consists of all buildings and flags connected by roads. The supplies and demands of buildings are handled in its economy."),
+      text = _("An economy consists of all buildings and flags connected by roads, ferries, or ships. The supplies and demands of buildings are handled in their economy. A player can have more than one economy."),
+      seconds = 8
+   },
+   {
+      text = _("You can have more than one economy if their flags are not connected by any means of transportation. This is why the Configure Economy menu can only be accessed from flags and warehouses, not the player’s main menu."),
       seconds = 8
    },
    {

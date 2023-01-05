@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 by the Widelands Development Team
+ * Copyright (C) 2021-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ namespace format_impl {
 // stored as a multi-byte UTF-8 sequence.
 inline char* write_decimal_separator(char* out, bool localize) {
 	if (localize) {
-		for (const char* dec_sep = pgettext("decimal_separator", "."); *dec_sep; ++dec_sep) {
+		for (const char* dec_sep = pgettext("decimal_separator", "."); *dec_sep != 0; ++dec_sep) {
 			*out = *dec_sep;
 			++out;
 		}
