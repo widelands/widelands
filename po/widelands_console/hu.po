@@ -39,7 +39,7 @@ msgstr "widelands <beállítás0>=<érték0> ... <beállításN>=<értékN>"
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "widelands <save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "widelands <mentés.wgf>/<visszajátszás.wry>"
 
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:56
@@ -132,7 +132,7 @@ msgstr "A Widelands összeomlásra kényszerítése Lua hiba esetén."
 
 #: ../../src/wlapplication_messages.cc:92
 msgid "Delete replays automatically after `n` weeks."
-msgstr ""
+msgstr "Visszajátszások automatikus törlése `n` hét után."
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../src/wlapplication_messages.cc:92
@@ -450,14 +450,14 @@ msgstr "Súgó megjelenítése minden elérhető beállítással."
 
 #: ../../src/wlapplication_messages.cc:227
 msgid "<save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "<mentés.wgf>/<visszajátszás.wry>"
 
 #: ../../src/wlapplication_messages.cc:228
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay."
-msgstr ""
+msgstr "A megadott mentés vagy visszajátszás közvetlen betöltése. A .wgf/.wry fájltípus hozzárendeléséhez használható. Más beállításokkal együtt nem működik. Lásd még: --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:255

@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Tóth András <txa-dev@posteo.hu>, 2022
+# Tóth András <txa-dev@posteo.hu>, 2023
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2022\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2023\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -215,14 +215,16 @@ msgid ""
 "You can open and close this window by clicking on the ‘Objectives’ button in"
 " the toolbar on the bottom of the screen."
 msgstr ""
+"Ennek az ablaknak a megnyitásához és bezárásához kattints a Célkitűzések "
+"gombra a képernyő alján található eszközsoron."
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
 msgstr ""
-"A legtöbb ablakot, így a „Célkitűzések” ablakot is be tudod zárni jobb "
-"gombos rákattintással."
+"A legtöbb ablakot, így a „Célkitűzések” ablakot is be tudod zárni, ha a jobb"
+" egérgombbal kattintasz rá."
 
 #: ../../data/scripting/training_wheels/rocks.lua:122
 msgid ""
