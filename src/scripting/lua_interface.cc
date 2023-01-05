@@ -20,6 +20,7 @@
 
 #include <memory>
 
+#include "base/multithreading.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_globals.h"
 #include "scripting/lua_path.h"
