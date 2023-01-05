@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2022\n"
+"Last-Translator: litoll <litoll@freemail.hu>, 2016\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1761,294 +1761,294 @@ msgstr "Egy épület bontása zajlik itt, ami visszaadja az épület építések
 #: ../../data/tribes/initialization/amazons/units.lua:1638
 msgctxt "warehousename"
 msgid "Alter"
-msgstr ""
+msgstr "Alter"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1640
 msgctxt "warehousename"
 msgid "Anumā"
-msgstr ""
+msgstr "Anumā"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1642
 msgctxt "warehousename"
 msgid "Aquiqui"
-msgstr ""
+msgstr "Aquiqui"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1644
 msgctxt "warehousename"
 msgid "Arapixuna"
-msgstr ""
+msgstr "Arapixuna"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1646
 msgctxt "warehousename"
 msgid "Aritapera"
-msgstr ""
+msgstr "Aritapera"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1648
 msgctxt "warehousename"
 msgid "Atamanai"
-msgstr ""
+msgstr "Atamanai"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1650
 msgctxt "warehousename"
 msgid "Amorim"
-msgstr ""
+msgstr "Amorim"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1652
 msgctxt "warehousename"
 msgid "Canindé"
-msgstr ""
+msgstr "Canindé"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1654
 msgctxt "warehousename"
 msgid "Cuia"
-msgstr ""
+msgstr "Cuia"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1656
 msgctxt "warehousename"
 msgid "Cacoal"
-msgstr ""
+msgstr "Cacoal"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1658
 msgctxt "warehousename"
 msgid "Capichauā"
-msgstr ""
+msgstr "Capichauā"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1660
 msgctxt "warehousename"
 msgid "Cipoal"
-msgstr ""
+msgstr "Cipoal"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1662
 msgctxt "warehousename"
 msgid "Cupiranga"
-msgstr ""
+msgstr "Cupiranga"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1664
 msgctxt "warehousename"
 msgid "Curariaca"
-msgstr ""
+msgstr "Curariaca"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1666
 msgctxt "warehousename"
 msgid "Curupari"
-msgstr ""
+msgstr "Curupari"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1668
 msgctxt "warehousename"
 msgid "Curuá"
-msgstr ""
+msgstr "Curuá"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1670
 msgctxt "warehousename"
 msgid "Diogo"
-msgstr ""
+msgstr "Diogo"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1672
 msgctxt "warehousename"
 msgid "Guajará"
-msgstr ""
+msgstr "Guajará"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1674
 msgctxt "warehousename"
 msgid "Guarana"
-msgstr ""
+msgstr "Guarana"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1676
 msgctxt "warehousename"
 msgid "Gurupá"
-msgstr ""
+msgstr "Gurupá"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1678
 msgctxt "warehousename"
 msgid "Ipanema"
-msgstr ""
+msgstr "Ipanema"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1680
 msgctxt "warehousename"
 msgid "Ipaupixuna"
-msgstr ""
+msgstr "Ipaupixuna"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1682
 msgctxt "warehousename"
 msgid "Irateua"
-msgstr ""
+msgstr "Irateua"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1684
 msgctxt "warehousename"
 msgid "Itacoatiara"
-msgstr ""
+msgstr "Itacoatiara"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1686
 msgctxt "warehousename"
 msgid "Itanduba"
-msgstr ""
+msgstr "Itanduba"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1688
 msgctxt "warehousename"
 msgid "Itapari"
-msgstr ""
+msgstr "Itapari"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1690
 msgctxt "warehousename"
 msgid "Jaburu"
-msgstr ""
+msgstr "Jaburu"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1692
 msgctxt "warehousename"
 msgid "Jacarecapá"
-msgstr ""
+msgstr "Jacarecapá"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1694
 msgctxt "warehousename"
 msgid "Jaguara"
-msgstr ""
+msgstr "Jaguara"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1696
 msgctxt "warehousename"
 msgid "Janauacá"
-msgstr ""
+msgstr "Janauacá"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1698
 msgctxt "warehousename"
 msgid "Macapá"
-msgstr ""
+msgstr "Macapá"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1700
 msgctxt "warehousename"
 msgid "Maguari"
-msgstr ""
+msgstr "Maguari"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1702
 msgctxt "warehousename"
 msgid "Mambeca"
-msgstr ""
+msgstr "Mambeca"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1704
 msgctxt "warehousename"
 msgid "Manacapuru"
-msgstr ""
+msgstr "Manacapuru"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1706
 msgctxt "warehousename"
 msgid "Mararu"
-msgstr ""
+msgstr "Mararu"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1708
 msgctxt "warehousename"
 msgid "Maripi"
-msgstr ""
+msgstr "Maripi"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1710
 msgctxt "warehousename"
 msgid "Maruá"
-msgstr ""
+msgstr "Maruá"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1712
 msgctxt "warehousename"
 msgid "Mataraí"
-msgstr ""
+msgstr "Mataraí"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1714
 msgctxt "warehousename"
 msgid "Miri"
-msgstr ""
+msgstr "Miri"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1716
 msgctxt "warehousename"
 msgid "Moju"
-msgstr ""
+msgstr "Moju"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1718
 msgctxt "warehousename"
 msgid "Mojui"
-msgstr ""
+msgstr "Mojui"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
 #: ../../data/tribes/initialization/amazons/units.lua:1720
 msgctxt "warehousename"
 msgid "Morimutuba"
-msgstr ""
+msgstr "Morimutuba"
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
