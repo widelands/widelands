@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ int32_t EditorDecreaseHeightTool::handle_click_impl(const Widelands::NodeAndTria
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<Widelands::FCoords>(
 		            map->get_fcoords(center.node),
-		            args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+		            args->sel_radius + MAX_FIELD_HEIGHT / map->max_field_height_diff() + 1));
 		do {
 			args->original_heights.push_back(mr.location().field->get_height());
 		} while (mr.advance(*map));
@@ -50,7 +50,7 @@ int32_t EditorDecreaseHeightTool::handle_undo_impl(const Widelands::NodeAndTrian
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(
 	            map->get_fcoords(center.node),
-	            args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+	            args->sel_radius + MAX_FIELD_HEIGHT / map->max_field_height_diff() + 1));
 	std::list<Widelands::Field::Height>::iterator i = args->original_heights.begin();
 
 	do {
@@ -61,7 +61,7 @@ int32_t EditorDecreaseHeightTool::handle_undo_impl(const Widelands::NodeAndTrian
 	map->recalc_for_field_area(
 	   parent_.egbase(), Widelands::Area<Widelands::FCoords>(
 	                        map->get_fcoords(center.node),
-	                        args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
+	                        args->sel_radius + MAX_FIELD_HEIGHT / map->max_field_height_diff() + 2));
 
 	return mr.radius() + 1;
 }

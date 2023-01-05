@@ -13,13 +13,16 @@ def update_file(filename, regex, replace):
     sys.stdout.flush()
     lines = read_text_file(filename).strip().split('\n')
     new_lines = []
+    did_match = False
     for line in lines:
         match = regex.match(line)
         if match:
             line = replace(match)
+            did_match = True
         new_lines.append(line.rstrip() + '\n')
     write_text_file(filename, ''.join(new_lines))
-
+    if not did_match:
+        print('WARNING: You might need to update some copyright years in %s manually.' % filename)
 
 def main():
     """Updates the copyright year in all source files to the given year."""
@@ -59,7 +62,7 @@ def main():
         # Now update special files
         filename = os.path.join(base_path, 'data/txts/LICENSE.lua')
         regex = re.compile(
-            '(.*\"Copyright 2002 - %1% by the Widelands Development Team\.\"\):bformat\()(\d\d\d\d)(\).*)')
+            '(.*_\(\"Copyright 2002 - %1% by the Widelands Development Team\.\"\)\):bformat\()(\d\d\d\d)(\).*)')
         update_file(filename, regex, replace)
 
         filename = os.path.join(
@@ -77,8 +80,6 @@ def main():
         update_file(filename, regex, replace)
 
         print(' done.')
-
-        print('You might need to update some copyright years in %s manually.' % filename)
 
     except Exception:
         print('Something went wrong:')

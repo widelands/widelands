@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2022 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,10 +30,11 @@
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
+constexpr int MAX_FIELD_HEIGHT = 60;
+
 namespace Widelands {
 
-#define MAX_FIELD_HEIGHT 60
-#define MAX_FIELD_HEIGHT_DIFF 5
+constexpr int kDefaultMaxFieldHeightDiff = 5;
 
 // Think, if we shouldn't call for each field a new() in map::set_size
 // and a delete
