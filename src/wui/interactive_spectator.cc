@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2022 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,6 +102,9 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
+		if (field.obscured_by_slope) {
+			continue;
+		}
 
 		draw_bridges(dst, &field, gametime, scale);
 		draw_border_markers(field, scale, *fields_to_draw, dst);

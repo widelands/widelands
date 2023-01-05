@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014,2017
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-28 02:57+0000\n"
+"POT-Creation-Date: 2023-01-04 03:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
@@ -629,11 +629,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
 #: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:230
-#: ../../src/wlapplication.cc:1630
+#: ../../src/wlapplication.cc:1635
 msgid "Error"
 msgstr "Mearachd"
 
-#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1632
+#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1637
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -6540,41 +6540,41 @@ msgstr "Cha do lorg Widelands am faidhle “%s”."
 msgid "File system error"
 msgstr "Mearachd leis an t-siostam-fhaidhlichean"
 
-#: ../../src/wlapplication.cc:1294
+#: ../../src/wlapplication.cc:1299
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Luach falamh air paramadair na loidhne-àithne: %s"
 
-#: ../../src/wlapplication.cc:1299
+#: ../../src/wlapplication.cc:1304
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "Cha ghabh %s a chur ri gnìomhan eile"
 
-#: ../../src/wlapplication.cc:1454
+#: ../../src/wlapplication.cc:1459
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Paramadair loidhne-àithne nach aithne dhuinn: %s\n’S dòcha gu bheil “=” a dhìth?"
 
-#: ../../src/wlapplication.cc:1575
+#: ../../src/wlapplication.cc:1580
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "Cha ghabh --xres/--yres, --maximized agus --fullscreen a chur ri chèile"
 
-#: ../../src/wlapplication.cc:1593
+#: ../../src/wlapplication.cc:1598
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Paramadair loidhne-àithne nach aithne dhuinn: %s"
 
-#: ../../src/wlapplication.cc:1645
+#: ../../src/wlapplication.cc:1650
 msgid "Game ended unexpectedly"
 msgstr "Thàinig an geama gu crìoch gun dùil"
 
-#: ../../src/wlapplication.cc:1645
+#: ../../src/wlapplication.cc:1650
 msgid "Unexpected error during the game"
 msgstr "Mearachd ris nach robh dùil rè a’ gheama"
 
-#: ../../src/wlapplication.cc:1648
+#: ../../src/wlapplication.cc:1653
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6588,7 +6588,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1657
+#: ../../src/wlapplication.cc:1662
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6598,11 +6598,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Thàinig an geama gu crìoch gun dùil air an adhbhar seo:\n\n%s\n\nAm bu mhiann leat gum feuch Widelands ri sàbhaladh èiginneach a chruthachadh? Tha teans gun gabh a luchdadh an uairsin ach an lean thu ort a chluiche."
 
-#: ../../src/wlapplication.cc:1683
+#: ../../src/wlapplication.cc:1688
 msgid "Emergency save failed"
 msgstr "Dh’fhàillig leis an t-sàbhaladh èiginneach"
 
-#: ../../src/wlapplication.cc:1684
+#: ../../src/wlapplication.cc:1689
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"

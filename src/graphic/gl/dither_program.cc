@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,11 +95,24 @@ void DitherProgram::maybe_add_dithering_triangle(
 	}
 	const Widelands::TerrainDescription& other_terrain_description = terrains.get(other_terrain);
 	if (terrains.get(my_terrain).dither_layer() < other_terrain_description.dither_layer()) {
+		const FieldsToDraw::Field& f1 = fields_to_draw.at(idx1);
+		if (f1.obscured_by_slope) {
+			return;
+		}
+		const FieldsToDraw::Field& f2 = fields_to_draw.at(idx2);
+		if (f2.obscured_by_slope) {
+			return;
+		}
+		const FieldsToDraw::Field& f3 = fields_to_draw.at(idx3);
+		if (f3.obscured_by_slope) {
+			return;
+		}
+
 		const Vector2f texture_offset =
 		   to_gl_texture(other_terrain_description.get_texture(gametime).blit_data()).origin();
-		add_vertex(fields_to_draw.at(idx1), TrianglePoint::kTopRight, texture_offset);
-		add_vertex(fields_to_draw.at(idx2), TrianglePoint::kTopLeft, texture_offset);
-		add_vertex(fields_to_draw.at(idx3), TrianglePoint::kBottomMiddle, texture_offset);
+		add_vertex(f1, TrianglePoint::kTopRight, texture_offset);
+		add_vertex(f2, TrianglePoint::kTopLeft, texture_offset);
+		add_vertex(f3, TrianglePoint::kBottomMiddle, texture_offset);
 	}
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2022 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,19 +62,22 @@ void GridProgram::draw(uint32_t texture_id, const FieldsToDraw& fields_to_draw, 
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
 
 		// Southwestern edge
-		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+		if (field.bln_index != FieldsToDraw::kInvalidIndex &&
+		    !(field.obscured_by_slope && fields_to_draw.at(field.bln_index).obscured_by_slope)) {
 			add_vertex(fields_to_draw.at(current_index));
 			add_vertex(fields_to_draw.at(field.bln_index));
 		}
 
 		// Southeastern edge
-		if (field.brn_index != FieldsToDraw::kInvalidIndex) {
+		if (field.brn_index != FieldsToDraw::kInvalidIndex &&
+		    !(field.obscured_by_slope && fields_to_draw.at(field.brn_index).obscured_by_slope)) {
 			add_vertex(fields_to_draw.at(current_index));
 			add_vertex(fields_to_draw.at(field.brn_index));
 		}
 
 		// Eastern edge
-		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
+		if (field.rn_index != FieldsToDraw::kInvalidIndex &&
+		    !(field.obscured_by_slope && fields_to_draw.at(field.rn_index).obscured_by_slope)) {
 			add_vertex(fields_to_draw.at(current_index));
 			add_vertex(fields_to_draw.at(field.rn_index));
 		}
