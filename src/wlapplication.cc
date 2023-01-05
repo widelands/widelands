@@ -54,7 +54,6 @@
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
