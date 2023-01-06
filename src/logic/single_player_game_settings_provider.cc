@@ -276,19 +276,29 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 	}
 	PlayerSettings const position = settings().players.at(number);
 	// Ensure that old player number isn't out of range when we switch to a map with less players
-	PlayerSettings const player = settings().players.at(
-	   settings().playernum < static_cast<int>(settings().players.size()) ? settings().playernum :
-                                                                           0);
+	const uint8_t old_number =
+	   settings().playernum < static_cast<int>(settings().players.size()) ? settings().playernum : 0;
+	PlayerSettings const player = settings().players.at(old_number);
 	if (number < settings().players.size() && (position.state == PlayerSettings::State::kOpen ||
 	                                           position.state == PlayerSettings::State::kClosed ||
 	                                           position.state == PlayerSettings::State::kComputer)) {
 
-		// swap player but keep player name
+		// swap player but keep player name and, if unchanged from the default, colour
+		bool new_uses_default_colour = s.players[old_number].color == kPlayerColors[old_number];
+		bool old_uses_default_colour = s.players[number].color == kPlayerColors[number];
 		set_player(number, player);
 		set_player_name(number, position.name);
 
 		set_player(settings().playernum, position);
 		set_player_name(settings().playernum, player.name);
+
+		if (old_uses_default_colour) {
+			set_player_color(old_number, kPlayerColors[old_number]);
+		}
+		if (new_uses_default_colour) {
+			set_player_color(number, kPlayerColors[number]);
+		}
+
 		s.playernum = number;
 	}
 }

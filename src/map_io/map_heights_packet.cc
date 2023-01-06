@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void MapHeightsPacket::read(FileSystem& fs,
                             EditorGameBase& egbase,
@@ -38,8 +38,10 @@ void MapHeightsPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
-			const Map& map = egbase.map();
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersion) {
+			Map& map = *egbase.mutable_map();
+			map.max_field_height_diff_ =
+			   (packet_version < 2) ? kDefaultMaxFieldHeightDiff : fr.unsigned_8();
 			MapIndex const max_index = map.max_index();
 			for (MapIndex i = 0; i < max_index; ++i) {
 				map[i].set_height(fr.unsigned_8());
@@ -55,14 +57,13 @@ void MapHeightsPacket::read(FileSystem& fs,
 /*
  * Write Function
  */
-void MapHeightsPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& /* mos */)
-
-{
+void MapHeightsPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& /* mos */) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	const Map& map = egbase.map();
+	fw.unsigned_8(map.max_field_height_diff());
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i) {
 		fw.unsigned_8(map[i].get_height());

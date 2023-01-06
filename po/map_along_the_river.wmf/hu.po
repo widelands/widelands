@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@mailbox.org>, 2021
-# Tóth András <txa-dev@posteo.hu>, 2022
+# Tóth András <txa-dev@posteo.hu>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-16 02:54+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2022\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2023\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -227,6 +227,9 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
+"Északról egy harcias törzs fenyeget minket, amit a Törver nevű hadúr vezet, "
+"aki rohamléptekkel fejleszti a haderejét. Hamarosan olyan erősek lehetnek, "
+"hogy nem tudnánk nekik ellenállni."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -275,6 +278,9 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"Uram! Bár katonáink bármilyen ellenséggel félelem nélkül szállnának szembe, "
+"az északi ellenségünk mégiscsak erősebb, mint a mi teljes haderőnk összesen."
+" Jobb lenne kerülni az összetűzést, amíg nem tudjuk legyőzni őket."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -286,7 +292,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
-msgstr ""
+msgstr "Veszély északról"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -338,6 +344,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Uram! Most, hogy elfoglaltuk Törver földjét, kihasználhatjuk a szomszédos "
+"nagy tó adta lehetőségeket. Ha építünk egy kikötőt északon, jobb "
+"lehetőségeink lesznek elérni a többi törzset."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -411,6 +420,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Uram! Az esős évszak idején elmocsarasodott a patak környéke kelet felé, így"
+" nem tudunk átjutni rajta. Fel kell töltenünk a mocsarakat ahhoz, hogy "
+"továbbléphessünk. Ha hozatsz elegendő lapátot az új raktárba, akkor "
+"önkéntesek el tudják végezni a munkát."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -418,6 +431,9 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Uram! Kiosztottuk az összes lapátot, de ebben az ütemben haladva nem végzünk"
+" a mocsarak feltöltésével a következő esős évszakig. Ha tudnál még több "
+"lapátot hozatni az új raktárba, akkor további önkénteseket küldhetnénk."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""

@@ -32,7 +32,7 @@ int32_t EditorIncreaseHeightTool::handle_click_impl(const Widelands::NodeAndTria
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<Widelands::FCoords>(
 		            map->get_fcoords(center.node),
-		            args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+		            args->sel_radius + MAX_FIELD_HEIGHT / map->max_field_height_diff() + 1));
 		do {
 			args->original_heights.push_back(mr.location().field->get_height());
 		} while (mr.advance(*map));
