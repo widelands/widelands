@@ -702,6 +702,10 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
+		if (field.obscured_by_slope) {
+			continue;
+		}
+
 		if (get_display_flag(dfShowImmovables)) {
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
