@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2022 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-12-28 02:57+0000\n"
+"POT-Creation-Date: 2023-01-04 03:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/widelands/widelands/language/sr_RS/)\n"
@@ -624,11 +624,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
 #: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:230
-#: ../../src/wlapplication.cc:1630
+#: ../../src/wlapplication.cc:1635
 msgid "Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1632
+#: ../../src/editor/editorinteractive.cc:1097 ../../src/wlapplication.cc:1637
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -6506,41 +6506,41 @@ msgstr ""
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1294
+#: ../../src/wlapplication.cc:1299
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1299
+#: ../../src/wlapplication.cc:1304
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1454
+#: ../../src/wlapplication.cc:1459
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1575
+#: ../../src/wlapplication.cc:1580
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1593
+#: ../../src/wlapplication.cc:1598
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1645
+#: ../../src/wlapplication.cc:1650
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1645
+#: ../../src/wlapplication.cc:1650
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1648
+#: ../../src/wlapplication.cc:1653
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6554,7 +6554,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1657
+#: ../../src/wlapplication.cc:1662
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6564,11 +6564,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1683
+#: ../../src/wlapplication.cc:1688
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1684
+#: ../../src/wlapplication.cc:1689
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
