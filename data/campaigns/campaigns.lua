@@ -128,6 +128,7 @@ return {
             "fri02.wmf",
             "fri03.wmf",
             "fri04.wmf",
+            "fri05.wmf",
             "dummy.wmf"
          }
       }

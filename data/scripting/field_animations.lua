@@ -27,13 +27,18 @@
 --    :arg time: Optional. The time the whole animation will run.
 --               Defaults to 1000 (1 sec)
 --    :type time: :class:`integer`
+--    :arg hide: Optional, if :const:`false` automatic hiding is disabled
+--    :type hide: :class:`boolean`
 
-function reveal_randomly(plr, region, time)
+function reveal_randomly(plr, region, time, hide)
    -- If no 'time' is given use a default
    time = time or 1000
+   if hide == nil then hide = true end
 
-   -- Make sure the region is hidden
-   plr:hide_fields(region, "permanent")
+   if hide then
+      -- Make sure the region is hidden
+      plr:hide_fields(region, "permanent")
+   end
 
    -- Turn off buildhelp during animation
    local buildhelp_state = wl.ui.MapView().buildhelp

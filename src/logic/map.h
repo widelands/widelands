@@ -171,6 +171,7 @@ class Map : public ITransportCostCalculator {
 public:
 	friend class EditorGameBase;
 	friend class MapLoader;
+	friend class MapHeightsPacket;
 	friend class MapVersionPacket;
 	friend struct ::S2MapLoader;
 	friend struct MainMenuNewMap;
@@ -608,6 +609,10 @@ public:
 	[[nodiscard]] uint32_t get_waterway_max_length() const;
 	void set_waterway_max_length(uint32_t max_length);
 
+	[[nodiscard]] int max_field_height_diff() const {
+		return max_field_height_diff_;
+	}
+
 	[[nodiscard]] const AddOns::AddOnRequirements& required_addons() const {
 		return required_addons_;
 	}
@@ -663,6 +668,7 @@ private:
 
 	std::vector<Coords> starting_pos_;  //  players' starting positions
 
+	int max_field_height_diff_{kDefaultMaxFieldHeightDiff};
 	std::unique_ptr<Field[]> fields_;
 
 	std::unique_ptr<PathfieldManager> pathfieldmgr_;
