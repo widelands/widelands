@@ -55,6 +55,16 @@ local r = {
          h2(_("Keyboard Shortcuts")) ..
             p(
                -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_sound_options")), _("Sound Options")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("save")), _("Save Game")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("load")), _("Load Game")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_restart")), _("Restart Scenario")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("exit")), _("Exit Game")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("game_speed_up")), _("Increase game speed")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("game_speed_down")), _("Decrease game speed")) ..
@@ -66,6 +76,8 @@ local r = {
                dl(help_format_hotkey(wl.ui.get_shortcut("game_speed_up_slow")), _("Increase game speed by 0.25x")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("game_speed_down_slow")), _("Decrease game speed by 0.25x")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_speed_reset")), _("Reset game speed")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("game_pause")), _("Pause the game")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
@@ -85,9 +97,17 @@ local r = {
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("game_messages")), _("Toggle messages (‘news’)")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_diplomacy")), _("Toggle diplomacy")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_chat")), _("Toggle chat (only in multiplayer games)")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("encyclopedia")), _("Tribal Encyclopedia")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_stats_general")), _("Toggle general statistics")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("game_stats_stock")), _("Toggle stock inventory")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_stats_wares")), _("Toggle ware statistics")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("game_stats_buildings")), _("Toggle building statistics")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
@@ -109,12 +129,16 @@ local r = {
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("game_hq")), _("Center main mapview on starting location")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("quicknav_gui")), _("Toggle quick navigation")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(help_set_landmarks_hotkeys()), _("Remember current location")) ..
                dl(help_format_hotkey(help_goto_landmarks_hotkeys()), _("Go to previously remembered location")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("quicknav_prev")), _("Go to previous location")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("quicknav_next")), _("Go to next location")) ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_pinned_note")), _("Create or edit a pinned note")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("zoom_in")), _("Increase zoom")) ..
                -- TRANSLATORS: This is the helptext for an access key combination.
