@@ -1385,7 +1385,7 @@ const MethodType<LuaMap> LuaMap::Methods[] = {
    METHOD(LuaMap, count_owned_valuable_fields),
    METHOD(LuaMap, place_immovable),
    METHOD(LuaMap, get_field),
-   METHOD(LuaMap, get_map_field),
+   METHOD(LuaMap, wrap_field),
    METHOD(LuaMap, recalculate),
    METHOD(LuaMap, recalculate_seafaring),
    METHOD(LuaMap, set_port_space),
@@ -1680,6 +1680,8 @@ int LuaMap::place_immovable(lua_State* const L) {
 
       Returns a :class:`wl.map.Field` object of the given coordinates.
       The coordinates must be in range from 0 (inclusive) to the map's width/height (exclusive).
+
+      :see also: :meth:`wrap_field`
 */
 int LuaMap::get_field(lua_State* L) {
 	uint32_t x = luaL_checkuint32(L, 2);
@@ -1698,29 +1700,24 @@ int LuaMap::get_field(lua_State* L) {
 }
 
 /* RST
-   .. method:: get_map_field(x, y)
+   .. method:: wrap_field(x, y)
 
       .. versionadded:: 1.2
 
       Returns a :class:`wl.map.Field` object of the given coordinates.
       If the coordinates are out of bounds, they will wrap around.
+
+      :see also: :meth:`get_field`
 */
-int LuaMap::get_map_field(lua_State* L) {
+int LuaMap::wrap_field(lua_State* L) {
 	int32_t x = luaL_checkint32(L, 2);
 	int32_t y = luaL_checkint32(L, 3);
+	Widelands::Coords c(x, y);
 
 	const Widelands::Map& map = get_egbase(L).map();
+	map.normalize_coords(c);
 
-	x %= map.get_width();
-	y %= map.get_height();
-	while (x < 0) {
-		x += map.get_width();
-	}
-	while (y < 0) {
-		y += map.get_height();
-	}
-
-	return to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(x, y));
+	return to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(c));
 }
 
 /* RST
