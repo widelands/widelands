@@ -23,7 +23,7 @@
 #include <memory>
 #include <set>
 
-#include "base/multithreading.h"
+#include "base/mutex.h"
 #include "base/string.h"
 #include "base/vector.h"
 #include "scripting/lua.h"

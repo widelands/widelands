@@ -25,7 +25,6 @@
 #include <SDL_timer.h>
 
 #include "graphic/font_handler.h"
-#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/message_queue.h"
 #include "wlapplication_options.h"
@@ -79,7 +78,7 @@ void MessagePreview::draw(RenderTarget& r) {
 		return;
 	}
 
-	r.tile(Recti(0, 0, get_w(), get_h()), &load_safe_template_image("wui/windows/background.png"),
+	r.tile(Recti(0, 0, get_w(), get_h()), g_image_cache->get("wui/windows/background.png"),
 	       Vector2i(0, 0));
 
 	// every second message is highlighted
@@ -191,8 +190,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
 void InfoPanel::rebuild_dropdown() {
 	toggle_mode_.clear();
 
-	toggle_mode_.add(_("Pin"), DisplayMode::kPinned,
-	                 &load_safe_template_image("wui/windows/pin.png"),
+	toggle_mode_.add(_("Pin"), DisplayMode::kPinned, g_image_cache->get("wui/windows/pin.png"),
 	                 display_mode_ == DisplayMode::kPinned);
 	toggle_mode_.add(_("Follow mouse"), DisplayMode::kOnMouse_Visible,
 	                 g_image_cache->get("images/ui_basic/fsel.png"),
@@ -200,12 +198,12 @@ void InfoPanel::rebuild_dropdown() {
 	                    display_mode_ == DisplayMode::kOnMouse_Hidden);
 	toggle_mode_.add(
 	   _("Hide"), DisplayMode::kMinimized,
-	   &load_safe_template_image(on_top_ ? "wui/windows/minimize.png" : "wui/windows/maximize.png"),
+	   g_image_cache->get(on_top_ ? "wui/windows/minimize.png" : "wui/windows/maximize.png"),
 	   display_mode_ == DisplayMode::kMinimized);
 
 	toggle_mode_.add(
 	   on_top_ ? _("Move panel to bottom") : _("Move panel to top"), DisplayMode::kCmdSwap,
-	   &load_safe_template_image(on_top_ ? "wui/windows/maximize.png" : "wui/windows/minimize.png"));
+	   g_image_cache->get(on_top_ ? "wui/windows/maximize.png" : "wui/windows/minimize.png"));
 
 	toggle_mode_.selected.connect([this]() {
 		update_mode();

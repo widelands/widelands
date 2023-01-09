@@ -34,13 +34,18 @@
 #include "graphic/styles/window_style.h"
 #include "scripting/lua_table.h"
 
+extern const std::string kDefaultTemplate;
 const std::string& template_dir();
 void set_template_dir(std::string);
+inline bool is_using_default_theme() {
+	return template_dir() == kDefaultTemplate;
+}
 
-// Load the specified image. If it does not exist,
-// print a warning and use a fallback image.
-// `path` is relative to the template directory.
-const Image& load_safe_template_image(const std::string& path);
+/** Try to resolve an image file path relative to the
+ * active theme or the template directory or the data directory, in this order.
+ * Returns a fallback image path on failure.
+ */
+std::string resolve_template_image_filename(const std::string& path);
 
 class StyleManager {
 public:
