@@ -98,6 +98,7 @@ wl_library(logic_addons
     base
     base_exceptions
     base_math
+    base_time_string
     build_info
     graphic
     graphic_text_layout
