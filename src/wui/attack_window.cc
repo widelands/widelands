@@ -22,7 +22,7 @@
 
 #include <SDL_mouse.h>
 
-#include "base/multithreading.h"
+#include "base/mutex.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/militarysite.h"

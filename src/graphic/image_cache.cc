@@ -24,6 +24,7 @@
 #include "base/multithreading.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
+#include "graphic/style_manager.h"
 #include "graphic/texture.h"
 
 ImageCache* g_image_cache;
@@ -68,7 +69,10 @@ void ImageCache::fill_with_texture_atlases(
  *
  * In case hash is not not found it will we fetched via load_image().
  */
-const Image* ImageCache::get(const std::string& hash) {
+const Image* ImageCache::get(std::string hash, bool theme_lookup) {
+	if (theme_lookup) {
+		hash = resolve_template_image_filename(hash);
+	}
 	auto it = images_.find(hash);
 	if (it == images_.end()) {
 		NoteThreadSafeFunction::instantiate(

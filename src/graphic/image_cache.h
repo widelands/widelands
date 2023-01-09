@@ -44,7 +44,7 @@ public:
 	// Returns the image associated with the 'hash'. If no image by this hash is
 	// known, it will try to load one from disk with the filename = hash. If
 	// this fails, it will throw an error.
-	const Image* get(const std::string& hash);
+	const Image* get(std::string hash, bool theme_lookup = true);
 
 	// Returns true if the 'hash' is stored in the cache.
 	[[nodiscard]] bool has(const std::string& hash) const;
