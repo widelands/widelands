@@ -1,4 +1,8 @@
 # Automatically created by Widelands 1.2~git26016 (ce73813@island_hopping_fix) Release
 
 [global]
-packet_version="2"
+packet_version="1"
+waterway_max_length="0"
+number_of_port_spaces="0"
+
+[port_spaces]
