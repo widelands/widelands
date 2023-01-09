@@ -14,9 +14,17 @@ function add_workers(hq, workers)
 end
 
 function add_soldiers(hq, soldiers)
-   local setpoints = {}
+   local setpoints = hq:get_soldiers("all")
    for sdescr, count in pairs(soldiers) do
-      setpoints[ {sdescr:match("(%d):(%d):(%d):(%d)")} ] = count
+      local desc = {sdescr:match("(%d):(%d):(%d):(%d)")}
+      local did_add = false
+      for key, value in pairs(setpoints) do
+         if key[1] == desc[1] and key[2] == desc[2] and key[3] == desc[3] and key[4] == desc[4] then
+            setpoints[desc] = value + count
+            did_add = true
+         end
+      end
+      if not did_add then setpoints[desc] = count end
    end
    hq:set_soldiers(setpoints)
 end
