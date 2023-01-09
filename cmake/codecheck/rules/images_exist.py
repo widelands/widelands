@@ -1,6 +1,6 @@
 #!/usr/bin/python3 -tt
 
-"""Checks that images loaded via g_gr->images() exist.
+"""Checks that images loaded via g_image_cache->get() exist.
 
 Some images can't be checked, e.g. when they are being passed via a
 function.
@@ -18,7 +18,7 @@ FIND_VARIABLE_NAMES = re.compile(
 # Find the data path
 base_path = os.getenv('WL_ROOT_DIR', os.getcwd())
 data_path = os.path.join(base_path, 'data')
-
+template_path = os.path.join(data_path, 'templates', 'default')
 
 def evaluate_matches(lines, fn):
     errors = []
@@ -29,16 +29,16 @@ def evaluate_matches(lines, fn):
         if len(matches) > 0:
             # Check for images that are fetched by direct quotes
             for match in matches:
-                image_file = os.path.join(data_path, match)
                 if '"' in match:
                     # Let's not deal with assembled filenames like
                     # "images/wui/editor/editor_menu_tool_" pic ".png" or
                     # "images/" + image_basename + ".png" for now
                     continue
 
-                if (not (os.path.exists(image_file) and os.path.isfile(image_file))):
-                    errors.append(
-                        [fn, lineno, 'Image file does not exist: %s' % os.path.join(data_path, match)])
+                image_file_1 = os.path.join(data_path, match)
+                image_file_2 = os.path.join(template_path, match)
+                if not (os.path.exists(image_file_1) and os.path.isfile(image_file_1)) and not (os.path.exists(image_file_2) and os.path.isfile(image_file_2)):
+                    errors.append([fn, lineno, 'Image file does not exist: %s' % match])
 
         else:
             # Collect image variable names
@@ -60,8 +60,9 @@ def evaluate_matches(lines, fn):
             if len(matches) > 0:
                 no_matches = no_matches + len(matches)
                 for match in matches:
-                    image_file = os.path.join(data_path, match)
-                    if (os.path.exists(image_file) and os.path.isfile(image_file)):
+                    image_file_1 = os.path.join(data_path, match)
+                    image_file_2 = os.path.join(template_path, match)
+                    if (os.path.exists(image_file_1) and os.path.isfile(image_file_1)) or (os.path.exists(image_file_2) and os.path.isfile(image_file_2)):
                         found = True
                         break
                     else:
@@ -85,4 +86,5 @@ allowed = [
     'g_image_cache->get(kConstexpr)',
     'g_image_cache->get("images/" + "foo/nonexistent.png")',
     'g_image_cache->get(format("images/%s", "foo/nonexistent.png"))',
+    'g_image_cache->get("loadscreens/ending.png")',
 ]
