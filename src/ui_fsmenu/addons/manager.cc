@@ -26,6 +26,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/time_string.h"
 #include "base/warning.h"
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
@@ -1407,8 +1408,8 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, remote->descname());
 	w.set_message_1(format(_("Downloading ‘%s’…"), remote->descname()));
 
-	std::string temp_dir =
-	   kTempFileDir + FileSystem::file_separator() + remote->internal_name + kTempFileExtension;
+	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + timestring() + ".addon." +
+	                       remote->internal_name + kTempFileExtension;
 	if (g_fs->file_exists(temp_dir)) {
 		g_fs->fs_unlink(temp_dir);
 	}

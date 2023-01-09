@@ -63,11 +63,11 @@ wl_library(ui_fsmenu
     base
     base_exceptions
     base_random
+    base_time_string
     build_info
     editor
     graphic
     graphic_fonthandler
-    graphic_image_cache
     graphic_mouse_cursor
     graphic_playercolor
     graphic_surface

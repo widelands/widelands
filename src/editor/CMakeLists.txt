@@ -105,7 +105,6 @@ wl_library(editor
     build_info
     graphic
     graphic_fonthandler
-    graphic_image_cache
     graphic_mouse_cursor
     graphic_playercolor
     graphic_surface

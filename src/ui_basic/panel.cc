@@ -257,7 +257,7 @@ void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 		// handle input, and we gray out the user interface to indicate this.
 
 		rt.tile(Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()),
-		        &load_safe_template_image("loadscreens/ending.png"), Vector2i(0, 0));
+		        g_image_cache->get("loadscreens/ending.png"), Vector2i(0, 0));
 
 		draw_game_tip(rt, Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()), message, 2);
 	}

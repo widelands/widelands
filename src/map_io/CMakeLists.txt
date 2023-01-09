@@ -96,7 +96,7 @@ wl_library(map_io
     base_macros
     base_scoped_timer
     economy
-    graphic_image_cache
+    graphic
     graphic_image_io
     graphic_minimap_renderer
     graphic_playercolor
