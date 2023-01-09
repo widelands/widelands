@@ -25,7 +25,7 @@ wl_library(graphic_text_test_render
     render.h
   DEPENDS
     base
-    graphic_image_cache
+    graphic
     graphic_text
     io_filesystem
 )

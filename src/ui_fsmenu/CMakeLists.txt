@@ -84,7 +84,6 @@ wl_library(ui_fsmenu
     editor
     graphic
     graphic_fonthandler
-    graphic_image_cache
     graphic_mouse_cursor
     graphic_playercolor
     graphic_surface

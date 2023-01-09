@@ -28,7 +28,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 
-constexpr const char* const kDefaultTemplate = "templates/default/";
+const std::string kDefaultTemplate("templates/default/");
 static std::string g_template_dir;
 static std::map<std::string, std::unique_ptr<StyleManager>> g_style_managers;
 StyleManager* g_style_manager(nullptr);  // points to an entry in `g_style_managers`
@@ -71,14 +71,34 @@ void set_template_dir(std::string dir) {
 	}
 }
 
-const Image& load_safe_template_image(const std::string& path) {
-	try {
-		return *g_image_cache->get(template_dir() + path);
-	} catch (const ImageNotFound& error) {
-		log_warn(
-		   "Template image '%s' not found, using fallback image (%s)", path.c_str(), error.what());
-		return *g_image_cache->get("images/novalue.png");
+std::string resolve_template_image_filename(const std::string& path) {
+	if (starts_with(path, "map:")) {
+		/* Skip the lookup for map-specific images. */
+		return path;
 	}
+
+	/* Check if the current theme provides an override path. */
+	std::string override_path = template_dir() + path;
+	if (g_fs->file_exists(override_path)) {
+		return override_path;
+	}
+
+	/* Check if the default theme provides an alternative path. */
+	if (!is_using_default_theme()) {
+		override_path = kDefaultTemplate + path;
+		if (g_fs->file_exists(override_path)) {
+			return override_path;
+		}
+	}
+
+	/* If it's a regular image path, use that. */
+	if (g_fs->file_exists(path)) {
+		return path;
+	}
+
+	/* If all else fails (e.g. a missing template sprite): Default image. */
+	log_warn("Template image '%s' not found, using fallback image", path.c_str());
+	return "images/novalue.png";
 }
 
 namespace {

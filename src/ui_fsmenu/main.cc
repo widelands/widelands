@@ -239,15 +239,22 @@ Widelands::Game* MainMenu::create_safe_game(const bool show_error) {
 void MainMenu::update_template() {
 	UI::Panel::update_template();
 
-	splashscreen_ = &load_safe_template_image("loadscreens/splash.jpg");
-	title_image_ = &load_safe_template_image("loadscreens/logo.png");
+	splashscreen_ = g_image_cache->get("loadscreens/splash.jpg");
+	title_image_ = g_image_cache->get("loadscreens/logo.png");
 
 	images_.clear();
 	for (const std::string& img : g_fs->list_directory(template_dir() + "loadscreens/mainmenu")) {
 		images_.push_back(img);
 	}
+	if (images_.empty() && !is_using_default_theme()) {
+		log_warn("No main menu backgrounds found, using fallback images");
+		for (const std::string& img :
+		     g_fs->list_directory(kDefaultTemplate + "loadscreens/mainmenu")) {
+			images_.push_back(img);
+		}
+	}
 	if (images_.empty()) {
-		log_warn("No main menu backgrounds found, using fallback image");
+		log_warn("No main menu backgrounds found in default theme, using fallback image");
 		images_.emplace_back("images/logos/wl-ico-128.png");
 	}
 
