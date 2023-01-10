@@ -97,6 +97,7 @@ public:
 	int count_owned_valuable_fields(lua_State*);
 	int place_immovable(lua_State*);
 	int get_field(lua_State*);
+	int wrap_field(lua_State*);
 	int recalculate(lua_State*);
 	int recalculate_seafaring(lua_State*);
 	int set_port_space(lua_State*);

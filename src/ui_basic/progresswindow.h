@@ -63,6 +63,8 @@ struct ProgressWindow : public UI::Panel {
 private:
 	using VisualizationArray = std::vector<IProgressVisualization*>;
 
+	bool try_set_background(const std::string& template_directory);
+
 	Vector2i label_center_;
 	Recti label_rectangle_;
 	VisualizationArray visualizations_;

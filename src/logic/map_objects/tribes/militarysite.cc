@@ -379,16 +379,18 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	s->clear();
 	Quantity present = soldier_control_.present_soldiers().size();
 	Quantity stationed = soldier_control_.stationed_soldiers().size();
+	const UI::BuildingStatisticsStyleInfo& style = g_style_manager->building_statistics_style();
 
 	// military capacity strings
 	if (present == stationed) {
-		if (capacity_ > stationed) {
+		if (capacity_ > stationed) {  // Soldiers are lacking
 			*s = format(
 			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
 			             owner().tribe().get_soldier_capacity_strings_sg()[0].c_str(),
 			             owner().tribe().get_soldier_capacity_strings_pl()[0].c_str(), stationed),
-			   stationed, (capacity_ - stationed));
-		} else {
+			   stationed,
+			   StyleManager::color_tag(as_string(capacity_ - stationed), style.low_color()));
+		} else {  // Soldiers filled to capacity
 			*s = format(
 			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
 			             owner().tribe().get_soldier_capacity_strings_sg()[1].c_str(),
@@ -396,24 +398,25 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			   stationed);
 		}
 	} else {
-		if (capacity_ > stationed) {
+		if (capacity_ > stationed) {  // Soldiers are lacking; others are outside
 			*s = format(
 			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
 			             owner().tribe().get_soldier_capacity_strings_sg()[2].c_str(),
 			             owner().tribe().get_soldier_capacity_strings_pl()[2].c_str(), stationed),
-			   present, (stationed - present), (capacity_ - stationed));
-		} else {
+			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()),
+			   StyleManager::color_tag(as_string(capacity_ - stationed), style.low_color()));
+		} else {  // Soldiers filled to capacity; some are outside
 			*s = format(
 			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
 			             owner().tribe().get_soldier_capacity_strings_sg()[3].c_str(),
 			             owner().tribe().get_soldier_capacity_strings_pl()[3].c_str(), stationed),
-			   present, (stationed - present));
+			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()));
 		}
 	}
 
 	*s = StyleManager::color_tag(
-	   // Line break to make Codecheck happy.
-	   *s, g_style_manager->building_statistics_style().medium_color());
+	   format("%s %s", soldier_preference_ == SoldierPreference::kHeroes ? "↑" : "↓", *s),
+	   style.medium_color());
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {
