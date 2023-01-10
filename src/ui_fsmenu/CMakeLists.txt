@@ -63,7 +63,6 @@ wl_library(ui_fsmenu
     base
     base_exceptions
     base_random
-    base_time_string
     build_info
     editor
     graphic

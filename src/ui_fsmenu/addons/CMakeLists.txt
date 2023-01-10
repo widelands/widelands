@@ -19,7 +19,7 @@ wl_library(ui_addons
     screenshot_upload.cc
     screenshot_upload.h
   DEPENDS
-    graphic_image_cache
+    base_time_string
     scripting_lua_table
     logic_filesystem_constants
     logic_tribe_basic_info
