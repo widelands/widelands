@@ -25,6 +25,7 @@
 #include <SDL_timer.h>
 
 #include "base/log.h"
+#include "base/mutex.h"
 #include "base/wexception.h"
 
 static const std::thread::id kNoThread;
@@ -126,11 +127,12 @@ struct MutexRecord {
 };
 static std::map<MutexLock::ID, MutexRecord> g_mutex;
 
-MutexLock::ID MutexLock::last_custom_mutex_ = MutexLock::ID::kI18N;
+MutexLock::ID MutexLock::last_custom_mutex_ = MutexLock::ID::kLastID;
 MutexLock::ID MutexLock::create_custom_mutex() {
 	last_custom_mutex_ = static_cast<MutexLock::ID>(static_cast<uint32_t>(last_custom_mutex_) + 1);
 #ifdef MUTEX_LOCK_DEBUG
-	log_dbg("Create custom mutex #%u.", static_cast<uint32_t>(last_custom_mutex_));
+	log_dbg("Create custom mutex #%d.",
+	        static_cast<int>(last_custom_mutex_) - static_cast<int>(MutexLock::ID::kLastID));
 #endif
 	return last_custom_mutex_;
 }
@@ -153,8 +155,10 @@ static std::string to_string(const MutexLock::ID i) {
 		return "Lua";
 	case MutexLock::ID::kI18N:
 		return "i18n";
+	default:
+		return std::string("Custom lock #") +
+		       std::to_string(static_cast<int>(i) - static_cast<int>(MutexLock::ID::kLastID));
 	}
-	return std::string("Custom lock #") + std::to_string(static_cast<unsigned>(i));
 }
 
 constexpr uint32_t kMutexPriorityLockInterval = 2;
