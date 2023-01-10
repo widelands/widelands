@@ -66,6 +66,8 @@ wl_library(scripting_lua_interface
     lua_interface.h
     lua_path.cc
     lua_path.h
+    lua_textstyle.cc
+    lua_textstyle.h
     run_script.cc
     run_script.h
   USES_SDL2
@@ -73,6 +75,7 @@ wl_library(scripting_lua_interface
     base
     base_macros
     build_info
+    graphic_text_layout
     io_fileread
     io_filesystem
     logic_addons

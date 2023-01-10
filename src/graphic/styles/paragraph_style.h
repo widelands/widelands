@@ -67,10 +67,10 @@ struct ParagraphStyleInfo {
 	[[nodiscard]] std::string as_paragraph(const std::string& text, const std::string& attrib = "") const;
 
 	/** Return opening paragraph and font richtext tags for this style */
-	[[nodiscard]] std::string as_paragraph_open(const std::string& attrib = "") const;
+	[[nodiscard]] std::string open_paragraph(const std::string& attrib = "") const;
 
 	/** Return closing font and paragraph richtext tags for this style */
-	[[nodiscard]] std::string as_paragraph_close() const;
+	[[nodiscard]] std::string close_paragraph() const;
 
 private:
 	std::unique_ptr<const UI::FontStyleInfo> font_;

@@ -135,7 +135,7 @@ end
 --    :returns: A paragraph with text formatted as title.
 
 function title(font_face, text)
-   return p_font("align=center", "size=38 face=".. font_face .. " color=2F9131", text)
+   return textstyle.as_title(font("face=".. font_face, text))
 end
 
 
@@ -147,11 +147,13 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h1(text_or_color, text)
+   local t
    if text then
-      return p_font("", "size=18 bold=1 color=".. text_or_color, vspace(12) .. text .. vspace(1))
+      t = font("color=".. text_or_color, text)
    else
-      return p_font("", "size=18 bold=1 color=D1D1D1", vspace(12) .. text_or_color .. vspace(1))
+      t = text_or_color
    end
+   return textstyle.as_h1(t)
 end
 
 
@@ -163,7 +165,7 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h2(text)
-   return p_font("", "size=14 bold=1 color=D1D1D1", vspace(12) .. text .. vspace(1))
+   return textstyle.as_h2(text)
 end
 
 
@@ -175,7 +177,7 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h3(text)
-   return p_font("", "size=13 color=D1D1D1", vspace(6) .. text .. vspace(1))
+   return textstyle.as_h3(text)
 end
 
 
@@ -187,7 +189,7 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h4(text)
-   return p_font("", "size=12 italic=1 color=D1D1D1", text)
+   return textstyle.as_h4(text)
 end
 
 
@@ -222,9 +224,9 @@ end
 
 function p(text_or_attributes, text)
    if text then
-      return open_p(text_or_attributes) .. text .. close_p()
+      return textstyle.as_p_with_attr(text_or_attributes, text)
    else
-      return open_p() .. text_or_attributes .. close_p()
+      return textstyle.as_p(text_or_attributes)
    end
 end
 
@@ -253,9 +255,9 @@ end
 
 function open_p(attributes)
    if attributes then
-      return ("<p %s>"):format(attributes) .. "<font size=12>"
+      return textstyle.open_p_with_attr(attributes)
    else
-      return "<p><font size=12>"
+      return textstyle.open_p()
    end
 end
 
@@ -268,7 +270,7 @@ end
 --    :returns: The closing tags for a paragraph
 
 function close_p(t)
-   return vspace(6) .. "</font>" .. vspace(6)  .. "</p>"
+   return textstyle.close_p()
 end
 
 
@@ -292,9 +294,9 @@ end
 
 function p_font(p_or_font_attributes, text_or_font_attributes, text)
    if text then
-      return ("<p %s>"):format(p_or_font_attributes) .. "<font " .. text_or_font_attributes .. ">" .. text .. close_p()
+      return textstyle.as_p_with_attr(p_or_font_attributes, font(text_or_font_attributes, text))
    else
-      return "<p><font " .. p_or_font_attributes .. ">" .. text_or_font_attributes .. close_p()
+      return textstyle.as_p(font(p_or_font_attributes, text_or_font_attributes))
    end
 end
 
@@ -321,7 +323,6 @@ end
 function font(attributes, text)
    return ("<font %s>"):format(attributes) .. text .. "</font>"
 end
-
 
 -- RST
 -- .. function:: b(text)

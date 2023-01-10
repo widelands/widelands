@@ -41,7 +41,7 @@ int text_height(const UI::FontStyleInfo& style, float scale = 1.0f);
 int text_height(UI::FontStyle style, float scale = 1.0f);
 
 /**
- * Checks it the given string is RichText or not. Does not do validity checking.
+ * Checks if the given string is RichText or not. Does not do validity checking.
  */
 inline bool is_richtext(const std::string& text) {
 	return text.compare(0, 3, "<rt") == 0;
@@ -113,5 +113,33 @@ std::string as_content(const std::string& txt, UI::PanelStyle style);
 
 std::string
 as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey, UI::PanelStyle);
+
+/** Helper functions for data/scripting/richtext.lua, used by scenario messages and help texts */
+
+/// Format 'text' as main title
+std::string as_ingame_title(const std::string& text);
+
+/// Format 'text' as level 1 heading
+std::string as_ingame_heading_1(const std::string& text);
+
+/// Format 'text' as level 2 heading
+std::string as_ingame_heading_2(const std::string& text);
+
+/// Format 'text' as level 3 heading
+std::string as_ingame_heading_3(const std::string& text);
+
+/// Format 'text' as level 4 heading
+std::string as_ingame_heading_4(const std::string& text);
+
+/// Format 'text' as plain paragraph with optional 'attributes' to be included in the paragraph tag
+/// (Font attributes can be changed in a nested font tag.)
+std::string as_ingame_text(const std::string& text, const std::string& attributes = "");
+
+/// Return opening paragraph and font tags for formatting as plain paragraph.
+/// The optional 'attributes' will be included in the paragraph tag.
+std::string open_ingame_text(const std::string& attributes = "");
+
+/// Return closing font and paragraph tags for formatting as plain paragraph.
+std::string close_ingame_text();
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_LAYOUT_H

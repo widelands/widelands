@@ -23,7 +23,7 @@
 namespace UI {
 
 std::string ParagraphStyleInfo::as_paragraph(const std::string& text, const std::string& attrib) const {
-	return format("%s%s%s", as_paragraph_open(attrib), text, as_paragraph_close());
+	return format("%s%s%s", open_paragraph(attrib), text, close_paragraph());
 }
 
 // TODO(tothxa): this should be in graphic/text_layout.h, but may I include that here?
@@ -34,12 +34,14 @@ std::string ParagraphStyleInfo::as_paragraph(const std::string& text, const std:
 	return format("<vspace gap=%d>", gap);
 }
 
-std::string ParagraphStyleInfo::as_paragraph_open(const std::string& attrib) const {
+std::string ParagraphStyleInfo::open_paragraph(const std::string& attrib) const {
 	return format("<p %s>%s%s", attrib, as_vspace(space_before_), font_->as_font_open());
 }
 
-std::string ParagraphStyleInfo::as_paragraph_close() const {
-	return format("</font>%s</p>", as_vspace(space_after_));
+std::string ParagraphStyleInfo::close_paragraph() const {
+	const int gap2 = space_after_ / 2;
+	const int gap1 = space_after_ - gap2;
+	return format("%s</font>%s</p>", as_vspace(gap1), as_vspace(gap2));
 }
 
 }  // namespace UI
