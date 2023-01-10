@@ -6,6 +6,8 @@ wl_library(graphic_styles
     font_style.cc
     font_style.h
     panel_styles.h
+    paragraph_style.cc
+    paragraph_style.h
     progress_bar_style.h
     text_panel_style.h
     statistics_plot_style.h

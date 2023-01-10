@@ -26,6 +26,7 @@
 #include "graphic/styles/button_style.h"
 #include "graphic/styles/font_style.h"
 #include "graphic/styles/panel_styles.h"
+#include "graphic/styles/paragraph_style.h"
 #include "graphic/styles/progress_bar_style.h"
 #include "graphic/styles/statistics_plot_style.h"
 #include "graphic/styles/table_style.h"
@@ -66,6 +67,7 @@ public:
 	[[nodiscard]] const UI::WareInfoStyleInfo& ware_info_style(UI::WareInfoStyle) const;
 	[[nodiscard]] const UI::WindowStyleInfo& window_style(UI::WindowStyle) const;
 	[[nodiscard]] const UI::FontStyleInfo& font_style(UI::FontStyle style) const;
+	[[nodiscard]] const UI::ParagraphStyleInfo& paragraph_style(UI::ParagraphStyle style) const;
 
 	// Special elements
 	[[nodiscard]] int minimum_font_size() const;
@@ -95,6 +97,8 @@ private:
 	void add_window_style(UI::WindowStyle style, const LuaTable& table);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 	void add_font_style(UI::FontStyle font, const LuaTable& table, const std::string& key);
+	void add_paragraph_style(
+	   UI::ParagraphStyle style, const LuaTable& table, const std::string& key);
 
 	std::map<UI::ButtonStyle, std::unique_ptr<const UI::ButtonStyleInfo>> buttonstyles_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::TextPanelStyleInfo>> editboxstyles_;
@@ -107,6 +111,7 @@ private:
 	RGBColor minimap_icon_frame_;
 	RGBAColor focused_color_, semi_focused_color_;
 	std::map<UI::FontStyle, std::unique_ptr<const UI::FontStyleInfo>> fontstyles_;
+	std::map<UI::ParagraphStyle, std::unique_ptr<const UI::ParagraphStyleInfo>> paragraphstyles_;
 	std::unique_ptr<const UI::BuildingStatisticsStyleInfo> building_statistics_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::ProgressbarStyleInfo>> progressbar_styles_;
 	std::unique_ptr<const UI::StatisticsPlotStyleInfo> statistics_plot_style_;

@@ -31,6 +31,15 @@ local wui_font_color = {255, 255, 0}
 local wui_font_face = "sans"
 local wui_font_size = 14
 
+local ingame_font_face = "sans"
+local ingame_heading_color = {209, 209, 209}
+local ingame_text_color = wui_font_color
+local ingame_padding = 6
+local ingame_text_space_after = 2 * ingame_padding
+local ingame_heading_space_before_big = 2 * ingame_padding
+local ingame_heading_space_before_small = ingame_padding
+local ingame_heading_space_after = ingame_text_space_after + 1
+
 local default_wui_font = {
    color = wui_font_color,
    face = wui_font_face,
@@ -779,6 +788,65 @@ return {
          size = wui_font_size,
          bold = true,
          shadow = true
+      },
+
+      -- Campaign and help texts
+      ingame_title = {
+         color = {47, 145, 49},
+         face = ingame_font_face,
+         size = 38,
+      },
+   },
+
+   paragraphs = {
+      -- Campaign and help texts
+      ingame_heading_1 = {
+         font = {
+            color = ingame_heading_color,
+            face = ingame_font_face,
+            size = 18,
+            bold = true,
+         },
+         space_before = ingame_heading_space_before_big,
+         space_after = ingame_heading_space_after,
+      },
+      ingame_heading_2 = {
+         font = {
+            color = ingame_heading_color,
+            face = ingame_font_face,
+            size = 14,
+            bold = true,
+         },
+         space_before = ingame_heading_space_before_big,
+         space_after = ingame_heading_space_after,
+      },
+      ingame_heading_3 = {
+         font = {
+            color = ingame_heading_color,
+            face = ingame_font_face,
+            size = 13,
+         },
+         space_before = ingame_heading_space_before_small,
+         space_after = ingame_heading_space_after,
+      },
+      ingame_heading_4 = {
+         font = {
+            color = ingame_heading_color,
+            face = ingame_font_face,
+            size = 12,
+            italic = true,
+         },
+         space_before = 0,
+         space_after = ingame_text_space_after,
+      },
+      ingame_text = {
+         font = {
+            color = ingame_text_color,
+            face = ingame_font_face,
+            size = 12,
+         },
+         space_before = 0,
+         space_after = ingame_text_space_after,
       },
    },
 }

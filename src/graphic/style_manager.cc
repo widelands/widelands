@@ -134,6 +134,15 @@ UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::stri
 	   style_table->has_key<std::string>("shadow") ? style_table->get_bool("shadow") : false);
 }
 
+// Read paragraph style from LuaTable
+UI::ParagraphStyleInfo* read_paragraph_style(
+   const LuaTable& parent_table, const std::string& table_key) {
+	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
+	return new UI::ParagraphStyleInfo(read_font_style(*style_table, "font"),
+	                                  style_table->get_int("space_before"),
+	                                  style_table->get_int("space_after"));
+}
+
 // Read image filename and RGBA color from LuaTable
 UI::PanelStyleInfo* read_panel_style(const LuaTable& table) {
 	const std::string image = table.get_string("image");
@@ -324,8 +333,19 @@ StyleManager::StyleManager() {
 	add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
 	add_font_style(UI::FontStyle::kFsMenuWindowTitle, *element_table, "fs_window_title");
 	add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
+	add_font_style(UI::FontStyle::kIngameTitle, *element_table, "ingame_title");
 	check_completeness(
-	   "fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kWuiWindowTitle));
+	   "fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kIngameTitle));
+
+	// Paragraphs
+	element_table = table->get_table("paragraphs");
+	add_paragraph_style(UI::ParagraphStyle::kIngameHeading1, *element_table, "ingame_heading_1");
+	add_paragraph_style(UI::ParagraphStyle::kIngameHeading2, *element_table, "ingame_heading_2");
+	add_paragraph_style(UI::ParagraphStyle::kIngameHeading3, *element_table, "ingame_heading_3");
+	add_paragraph_style(UI::ParagraphStyle::kIngameHeading4, *element_table, "ingame_heading_4");
+	add_paragraph_style(UI::ParagraphStyle::kIngameText, *element_table, "ingame_text");
+	check_completeness(
+	   "paragraphs", paragraphstyles_.size(), static_cast<size_t>(UI::ParagraphStyle::kIngameText));
 }
 
 // Return functions for the styles
@@ -390,6 +410,11 @@ const UI::WindowStyleInfo& StyleManager::window_style(UI::WindowStyle style) con
 const UI::FontStyleInfo& StyleManager::font_style(UI::FontStyle style) const {
 	assert(fontstyles_.count(style) == 1);
 	return *fontstyles_.at(style);
+}
+
+const UI::ParagraphStyleInfo& StyleManager::paragraph_style(UI::ParagraphStyle style) const {
+	assert(paragraphstyles_.count(style) == 1);
+	return *paragraphstyles_.at(style);
 }
 
 int StyleManager::minimum_font_size() const {
@@ -506,4 +531,11 @@ void StyleManager::add_font_style(UI::FontStyle font_key,
                                   const std::string& table_key) {
 	fontstyles_.emplace(std::make_pair(
 	   font_key, std::unique_ptr<UI::FontStyleInfo>(read_font_style(table, table_key))));
+}
+
+void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
+                                  const LuaTable& table,
+                                  const std::string& table_key) {
+	paragraphstyles_.emplace(std::make_pair(
+	   style, std::unique_ptr<UI::ParagraphStyleInfo>(read_paragraph_style(table, table_key))));
 }
