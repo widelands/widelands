@@ -10,7 +10,7 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023
 # Tino Miegel <tino.miegel@gmail.com>, 2016
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2014
@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-04 20:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -305,6 +305,17 @@ msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
 msgstr "Claus und Hennecke Lembeck haben endlich den Norden erreicht. Aber werden sie in der Lage sein, Reebaud zu überzeugen ihnen zu helfen?"
+
+#: ../../data/campaigns/fri05.wmf/elemental:8
+msgid "Reconquest"
+msgstr "Rückeroberung"
+
+#: ../../data/campaigns/fri05.wmf/elemental:10
+msgid ""
+"Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
+"for battle against the invaders. They must gather allies and plan their "
+"strategy, but the foe is never far away…"
+msgstr "Endlich zurück in Nordfriesland bereiten sich Claus, Henneke und Reebaud auf den Kampf gegen die Eindringlinge vor. Sie müssen Verbündete sammeln und ihre Strategie planen, aber der Feind ist nie weit entfernt…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
