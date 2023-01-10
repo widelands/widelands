@@ -62,7 +62,7 @@ void ProductionSiteWindow::on_building_note(const Widelands::NoteBuilding& note)
 		break;
 	default:
 		break;
-   }
+	}
 
 	BuildingWindow::on_building_note(note);
 }

@@ -852,8 +852,8 @@ void InteractiveBase::think() {
 			continue;
 		}
 
-		UI::UniqueWindow* building_window =
-		   show_building_window(Widelands::Coords::unhash(pair.first), true, pair.second->show_workarea);
+		UI::UniqueWindow* building_window = show_building_window(
+		   Widelands::Coords::unhash(pair.first), true, pair.second->show_workarea);
 		building_window->set_pos(pair.second->window_position);
 		if (pair.second->minimize) {
 			building_window->minimize();
