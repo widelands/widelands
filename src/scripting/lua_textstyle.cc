@@ -188,16 +188,16 @@ static int L_close_p(lua_State* L) {
 }
 
 const static struct luaL_Reg textstyle[] = {{"as_title", &L_as_title},
-                                       {"as_h1", &L_as_h1},
-                                       {"as_h2", &L_as_h2},
-                                       {"as_h3", &L_as_h3},
-                                       {"as_h4", &L_as_h4},
-                                       {"as_p", &L_as_p},
-                                       {"as_p_with_attr", &L_as_p_with_attr},
-                                       {"open_p", &L_open_p},
-                                       {"open_p_with_attr", &L_open_p_with_attr},
-                                       {"close_p", &L_close_p},
-                                       {nullptr, nullptr}};
+                                            {"as_h1", &L_as_h1},
+                                            {"as_h2", &L_as_h2},
+                                            {"as_h3", &L_as_h3},
+                                            {"as_h4", &L_as_h4},
+                                            {"as_p", &L_as_p},
+                                            {"as_p_with_attr", &L_as_p_with_attr},
+                                            {"open_p", &L_open_p},
+                                            {"open_p_with_attr", &L_open_p_with_attr},
+                                            {"close_p", &L_close_p},
+                                            {nullptr, nullptr}};
 
 void luaopen_textstyle(lua_State* L) {
 	luaL_newlib(L, textstyle);

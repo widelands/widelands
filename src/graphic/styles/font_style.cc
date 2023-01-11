@@ -94,8 +94,8 @@ std::string FontStyleInfo::as_font_open() const {
 	if (underline_) {
 		optionals += " underline=1";
 	}
-	return format("<font face=%s size=%d color=%s%s>", face_to_string(), size_, color_.hex_value(),
-	              optionals);
+	return format(
+	   "<font face=%s size=%d color=%s%s>", face_to_string(), size_, color_.hex_value(), optionals);
 }
 
 FontStyleInfo::Face FontStyleInfo::face() const {

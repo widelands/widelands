@@ -97,8 +97,8 @@ private:
 	void add_window_style(UI::WindowStyle style, const LuaTable& table);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 	void add_font_style(UI::FontStyle font, const LuaTable& table, const std::string& key);
-	void add_paragraph_style(
-	   UI::ParagraphStyle style, const LuaTable& table, const std::string& key);
+	void
+	add_paragraph_style(UI::ParagraphStyle style, const LuaTable& table, const std::string& key);
 
 	std::map<UI::ButtonStyle, std::unique_ptr<const UI::ButtonStyleInfo>> buttonstyles_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::TextPanelStyleInfo>> editboxstyles_;

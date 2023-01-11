@@ -22,7 +22,8 @@
 
 namespace UI {
 
-std::string ParagraphStyleInfo::as_paragraph(const std::string& text, const std::string& attrib) const {
+std::string ParagraphStyleInfo::as_paragraph(const std::string& text,
+                                             const std::string& attrib) const {
 	return format("%s%s%s", open_paragraph(attrib), text, close_paragraph());
 }
 

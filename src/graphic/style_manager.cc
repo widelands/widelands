@@ -135,8 +135,8 @@ UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::stri
 }
 
 // Read paragraph style from LuaTable
-UI::ParagraphStyleInfo* read_paragraph_style(
-   const LuaTable& parent_table, const std::string& table_key) {
+UI::ParagraphStyleInfo* read_paragraph_style(const LuaTable& parent_table,
+                                             const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
 	return new UI::ParagraphStyleInfo(read_font_style(*style_table, "font"),
 	                                  style_table->get_int("space_before"),
@@ -534,8 +534,8 @@ void StyleManager::add_font_style(UI::FontStyle font_key,
 }
 
 void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
-                                  const LuaTable& table,
-                                  const std::string& table_key) {
+                                       const LuaTable& table,
+                                       const std::string& table_key) {
 	paragraphstyles_.emplace(std::make_pair(
 	   style, std::unique_ptr<UI::ParagraphStyleInfo>(read_paragraph_style(table, table_key))));
 }

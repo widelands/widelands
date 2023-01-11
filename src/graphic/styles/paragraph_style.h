@@ -34,13 +34,14 @@ enum class ParagraphStyle {
 };
 
 struct ParagraphStyleInfo {
-	explicit ParagraphStyleInfo(
-	   UI::FontStyleInfo* init_font, const int init_before, const int init_after) :
-	   font_(init_font), space_before_(init_before), space_after_(init_after) {
+	explicit ParagraphStyleInfo(UI::FontStyleInfo* init_font,
+	                            const int init_before,
+	                            const int init_after)
+	   : font_(init_font), space_before_(init_before), space_after_(init_after) {
 	}
 	ParagraphStyleInfo(const ParagraphStyleInfo& other)
 	   : font_(new UI::FontStyleInfo(other.font())),
-        space_before_(other.space_before()),
+	     space_before_(other.space_before()),
 	     space_after_(other.space_after()) {
 	}
 
@@ -61,10 +62,11 @@ struct ParagraphStyleInfo {
 	}
 
 	/**
-    * Add enclosing paragraph and font richtext tags to the given text to format it according to
-    * this style.
-    */
-	[[nodiscard]] std::string as_paragraph(const std::string& text, const std::string& attrib = "") const;
+	 * Add enclosing paragraph and font richtext tags to the given text to format it according to
+	 * this style.
+	 */
+	[[nodiscard]] std::string as_paragraph(const std::string& text,
+	                                       const std::string& attrib = "") const;
 
 	/** Return opening paragraph and font richtext tags for this style */
 	[[nodiscard]] std::string open_paragraph(const std::string& attrib = "") const;

@@ -251,10 +251,11 @@ std::string as_ingame_title(const std::string& text) {
 	              g_style_manager->paragraph_style(UI::ParagraphStyle::kIngameText).space_after());
 }
 
-#define INGAME_HEADING(i)  \
-std::string as_ingame_heading_##i(const std::string& text) {  \
-	return g_style_manager->paragraph_style(UI::ParagraphStyle::kIngameHeading##i).as_paragraph(text); \
-}
+#define INGAME_HEADING(i)                                                                          \
+	std::string as_ingame_heading_##i(const std::string& text) {                                    \
+		return g_style_manager->paragraph_style(UI::ParagraphStyle::kIngameHeading##i)               \
+		   .as_paragraph(text);                                                                      \
+	}
 INGAME_HEADING(1)
 INGAME_HEADING(2)
 INGAME_HEADING(3)
@@ -262,8 +263,8 @@ INGAME_HEADING(4)
 #undef INGAME_HEADING
 
 std::string as_ingame_text(const std::string& text, const std::string& attrib) {
-	return
-	   g_style_manager->paragraph_style(UI::ParagraphStyle::kIngameText).as_paragraph(text, attrib);
+	return g_style_manager->paragraph_style(UI::ParagraphStyle::kIngameText)
+	   .as_paragraph(text, attrib);
 }
 
 std::string open_ingame_text(const std::string& attrib) {
