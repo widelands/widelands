@@ -847,19 +847,22 @@ void InteractiveBase::think() {
 		}
 	}
 
-	for (const auto& pair : wanted_building_windows_) {
-		if (!pair.second->warp_done) {
+	for (auto it = wanted_building_windows_.begin(); it != wanted_building_windows_.end();) {
+		if (!it->second->warp_done) {
+			++it;
 			continue;
 		}
 
 		UI::UniqueWindow* building_window = show_building_window(
-		   Widelands::Coords::unhash(pair.first), true, pair.second->show_workarea);
-		building_window->set_pos(pair.second->window_position);
-		if (pair.second->minimize) {
+		   Widelands::Coords::unhash(it->first), true, it->second->show_workarea);
+
+		building_window->set_pos(it->second->window_position);
+		if (it->second->minimize) {
 			building_window->minimize();
 		}
-		building_window->set_pinned(pair.second->pin);
-		break;
+		building_window->set_pinned(it->second->pin);
+
+		it = wanted_building_windows_.erase(it);
 	}
 }
 
