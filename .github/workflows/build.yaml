@@ -68,7 +68,7 @@ jobs:
       with:
         fetch-depth: 1
     - name: Installing python
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
         python-version: 3.x
     - name: Generate documentation
@@ -231,10 +231,10 @@ jobs:
       run: |
         mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
         cd ${{ env.VCPKG_ROOT }}
-        echo "::set-output name=head::$(git rev-parse --short HEAD)"
+        echo "head=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       shell: bash
     - name: Restore vcpkg and its artifacts.
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: |
@@ -266,7 +266,7 @@ jobs:
         $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
         ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
     - name: Uploading installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MSVC)
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe
@@ -319,7 +319,7 @@ jobs:
         strip.exe -sv .\build\src\widelands.exe
         ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-mingw-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
     - name: Uploading installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MinGW)
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-mingw-${{ matrix.config }}-${{ matrix.arch }}.exe
@@ -354,7 +354,7 @@ jobs:
         #echo "::set-env name=dmg::$DMGPATH/$DMGFILE"
 
     - name: Uploading DMG
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 11 AppImage
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
@@ -399,7 +399,7 @@ jobs:
         chmod +x linuxdeploy-x86_64.AppImage
         ./linuxdeploy-x86_64.AppImage --executable AppDir/usr/bin/widelands --desktop-file xdg/org.widelands.Widelands.desktop --appdir AppDir --output appimage
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} Linux AppImage
         path: ${{ github.workspace }}/Widelands-${{ env.VERSION }}-x86_64.AppImage
@@ -411,7 +411,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
       - name: Check missing artifacts
         # This step ensures that the development release always contains an artifact for every platform.
         # artifacts.list lists all attachments of the pre-release. In case a build step failed, we detect
