@@ -18,7 +18,6 @@ _re_blit = re.compile(r'(\d+),(\d+),(\d+),(\d+)@(-?\d+),(-?\d+)$')
 
 
 class Context(object):
-
     def __init__(self):
         self.filenames = set()
         self.spritemap_names = set()
@@ -72,7 +71,6 @@ class AnimationFullFrames(Animation):
 
 
 class Chunk(object):
-
     def __init__(self, pic, pc_pic=None):
         self.pic = pic
         self.pc_pic = pc_pic
@@ -89,7 +87,6 @@ Blit = collections.namedtuple('Blit', ('chunk', 'offset'))
 
 
 class ChunkSet(object):
-
     def __init__(self, has_player_color):
         self.has_player_color = has_player_color
         self._chunks = []
@@ -151,7 +148,6 @@ class ChunkSet(object):
 
 
 class AnimationBlits(Animation):
-
     def __init__(self, chunkset):
         super(AnimationBlits, self).__init__()
         self.chunkset = chunkset
