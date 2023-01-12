@@ -183,9 +183,9 @@ public:
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	void think() override;
+	void stop_dragging();
 
 private:
-	void stop_dragging();
 
 	// Returns the target view of the last entry in 'view_plans_' or (now,
 	// 'view_') if we are not animating.
