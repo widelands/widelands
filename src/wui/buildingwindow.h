@@ -75,6 +75,9 @@ protected:
 	virtual void init(bool avoid_fastclick, bool workarea_preview_wanted);
 	void die() override;
 
+	// Actions performed when a NoteBuilding is received.
+	virtual void on_building_note(const Widelands::NoteBuilding& note);
+
 	UI::TabPanel* get_tabs() {
 		return tabs_;
 	}
@@ -111,9 +114,6 @@ protected:
 
 private:
 	void create_capsbuttons(UI::Box* buttons, Widelands::Building* building);
-
-	// Actions performed when a NoteBuilding is received.
-	void on_building_note(const Widelands::NoteBuilding& note);
 
 	// For ports only.
 	void update_expedition_button(bool expedition_was_canceled);

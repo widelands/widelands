@@ -37,6 +37,7 @@ protected:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 	void evict_worker();
 	void clicked_watch() override;
+	void on_building_note(const Widelands::NoteBuilding& note) override;
 
 private:
 	void update_worker_table(Widelands::ProductionSite* production_site);
@@ -44,8 +45,6 @@ private:
 	Widelands::OPtr<Widelands::ProductionSite> production_site_;
 	UI::Table<uintptr_t>* worker_table_{nullptr};
 	UI::Box* worker_caps_{nullptr};
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>>
-	   productionsitenotes_subscriber_;
 
 	void worker_table_selection_changed();
 	void worker_table_dropdown_clicked();
