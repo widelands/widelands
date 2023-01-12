@@ -868,6 +868,7 @@ void FieldActionWindow::act_goto_buildroadstart() {
                                           ibase().get_build_road_end() :
                                           ibase().get_build_road_start(),
 	                                    MapView::Transition::Smooth);
+	reset_mouse_and_die();
 }
 
 void FieldActionWindow::act_abort_buildroad_and_start_buildwaterway() {
