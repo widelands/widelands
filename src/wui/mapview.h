@@ -186,7 +186,6 @@ public:
 	void stop_dragging();
 
 private:
-
 	// Returns the target view of the last entry in 'view_plans_' or (now,
 	// 'view_') if we are not animating.
 	TimestampedView animation_target_view() const;
