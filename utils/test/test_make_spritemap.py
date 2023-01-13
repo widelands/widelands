@@ -11,7 +11,6 @@ sys.path.append(os.path.normpath(
 
 
 class TestMinimumAverageCostRectangle(unittest.TestCase):
-
     def test_case1(self):
         FRAGMENT_COST = 4
         bitmask = np.array([
@@ -27,7 +26,6 @@ class TestMinimumAverageCostRectangle(unittest.TestCase):
 
 
 class TestMinimumAverageCostGrow(unittest.TestCase):
-
     def test_basic_right(self):
         bitmask = np.array([
             [False, False, False, False],
@@ -86,7 +84,6 @@ class TestMinimumAverageCostGrow(unittest.TestCase):
 
 
 class TestComputeRectangleCovering(unittest.TestCase):
-
     def test_basic(self):
         """Tests a case where the optimal solution consists of a single minimum
         average cost rectangle."""
