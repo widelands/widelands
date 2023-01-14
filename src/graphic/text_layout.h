@@ -114,6 +114,8 @@ std::string as_content(const std::string& txt, UI::PanelStyle style);
 std::string
 as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey, UI::PanelStyle);
 
+[[nodiscard]] std::string as_vspace(const int gap);
+
 /** Helper functions for data/scripting/richtext.lua, used by scenario messages and help texts */
 
 /// Format 'text' as main title

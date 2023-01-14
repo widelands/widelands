@@ -19,20 +19,13 @@
 #include "graphic/styles/paragraph_style.h"
 
 #include "base/string.h"
+#include "graphic/text_layout.h"
 
 namespace UI {
 
 std::string ParagraphStyleInfo::as_paragraph(const std::string& text,
                                              const std::string& attrib) const {
 	return format("%s%s%s", open_paragraph(attrib), text, close_paragraph());
-}
-
-// TODO(tothxa): this should be in graphic/text_layout.h, but may I include that here?
-[[nodiscard]] std::string as_vspace(const int gap) {
-	if (gap <= 0) {
-		return "";
-	}
-	return format("<vspace gap=%d>", gap);
 }
 
 std::string ParagraphStyleInfo::open_paragraph(const std::string& attrib) const {

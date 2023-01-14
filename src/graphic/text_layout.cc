@@ -245,6 +245,13 @@ std::string as_tooltip_text_with_hotkey(const std::string& text,
 	                 .as_font_tag("(" + hotkey + ")"));
 }
 
+std::string as_vspace(const int gap) {
+	if (gap <= 0) {
+		return "";
+	}
+	return format("<vspace gap=%d>", gap);
+}
+
 std::string as_ingame_title(const std::string& text) {
 	return format("<p align=center>%s<vspace gap=%d></p>",
 	              g_style_manager->font_style(UI::FontStyle::kIngameTitle).as_font_tag(text),
