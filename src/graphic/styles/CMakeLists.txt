@@ -19,4 +19,5 @@ wl_library(graphic_styles
     base_exceptions
     graphic_color
     graphic_surface
+    graphic_text_layout
 )
