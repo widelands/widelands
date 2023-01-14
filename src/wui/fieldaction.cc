@@ -172,6 +172,7 @@ public:
 	void act_buildwaterway();
 	void act_abort_buildwaterway();
 	void act_abort_buildwaterway_and_start_buildroad();
+	void act_goto_buildroadstart();
 	void act_removewaterway();
 	void act_build(Widelands::DescriptionIndex /* idx */);
 	void building_icon_mouse_out(Widelands::DescriptionIndex /* idx */);
@@ -236,6 +237,7 @@ constexpr const char* const kImgButtonRipFlag = "images/wui/fieldaction/menu_rip
 constexpr const char* const kImgButtonWatchField = "images/wui/fieldaction/menu_watch_field.png";
 constexpr const char* const kImgDebug = "images/wui/fieldaction/menu_debug.png";
 constexpr const char* const kImgButtonAbort = "images/wui/menu_abort.png";
+constexpr const char* const kImgButtonGoto = "images/wui/menus/goto.png";
 constexpr const char* const kImgButtonGeologist = "images/wui/fieldaction/menu_geologist.png";
 constexpr const char* const kImgButtonScout = "images/wui/menus/watch_follow.png";
 constexpr const char* const kImgButtonMarkRemoval = "images/wui/fieldaction/menu_mark_removal.png";
@@ -646,6 +648,9 @@ void FieldActionWindow::add_buttons_road(bool flag) {
 
 	add_button(&buildbox, "cancel_road", kImgButtonAbort, &FieldActionWindow::act_abort_buildroad,
 	           _("Cancel road"));
+	add_button(&buildbox, "goto_buildroadstart", kImgButtonGoto,
+	           &FieldActionWindow::act_goto_buildroadstart, _("Go to road"));
+
 	const Widelands::Map& map = ibase().egbase().map();
 	if (map.get_waterway_max_length() >= 2 &&
 	    Widelands::CheckStepFerry(ibase().egbase())
@@ -669,6 +674,8 @@ void FieldActionWindow::add_buttons_waterway(bool flag) {
 
 	add_button(&buildbox, "cancel_waterway", kImgButtonAbort,
 	           &FieldActionWindow::act_abort_buildwaterway, _("Cancel waterway"));
+	add_button(&buildbox, "goto_buildwaterwaystart", kImgButtonGoto,
+	           &FieldActionWindow::act_goto_buildroadstart, _("Go to waterway"));
 	add_button(&buildbox, "cancel_waterway_build_road", kImgButtonBuildRoad,
 	           &FieldActionWindow::act_abort_buildwaterway_and_start_buildroad,
 	           _("Cancel waterway and start building road"));
@@ -850,6 +857,17 @@ void FieldActionWindow::act_abort_buildwaterway() {
 	}
 
 	ibase().abort_build_road();
+	reset_mouse_and_die();
+}
+
+void FieldActionWindow::act_goto_buildroadstart() {
+	if (!ibase().in_road_building_mode()) {
+		return;
+	}
+	ibase().map_view()->scroll_to_field((SDL_GetModState() & KMOD_CTRL) != 0 ?
+                                          ibase().get_build_road_end() :
+                                          ibase().get_build_road_start(),
+	                                    MapView::Transition::Smooth);
 	reset_mouse_and_die();
 }
 

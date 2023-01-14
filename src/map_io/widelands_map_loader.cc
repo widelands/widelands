@@ -68,7 +68,7 @@ WidelandsMapLoader::~WidelandsMapLoader() {  // NOLINT
 }
 
 /**
- * Preloads a map so that the map class returns valid data for all it's
+ * Preloads a map so that the map class returns valid data for all its
  * get_info() functions (width, nrplayers..)
  */
 int32_t WidelandsMapLoader::preload_map(bool const scenario, AddOns::AddOnsList* addons) {
@@ -83,8 +83,10 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, AddOns::AddOnsList*
 
 		if (addons != nullptr) {
 			// first, clear all world add-ons…
+			std::vector<std::shared_ptr<AddOns::AddOnInfo>> desired_world_addons;
 			for (auto it = addons->begin(); it != addons->end();) {
 				if ((*it)->category == AddOns::AddOnCategory::kWorld) {
+					desired_world_addons.push_back(*it);
 					it = addons->erase(it);
 				} else {
 					++it;
@@ -105,6 +107,9 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, AddOns::AddOnsList*
 						}
 						assert(pair.first->category == AddOns::AddOnCategory::kWorld);
 						addons->push_back(pair.first);
+						desired_world_addons.erase(std::remove(desired_world_addons.begin(),
+						                                       desired_world_addons.end(), pair.first),
+						                           desired_world_addons.end());
 						break;
 					}
 				}
@@ -114,6 +119,8 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, AddOns::AddOnsList*
 					                    AddOns::version_to_string(requirement.second).c_str());
 				}
 			}
+			// Reenable additional desired world add-ons
+			addons->insert(addons->end(), desired_world_addons.begin(), desired_world_addons.end());
 		}
 	}
 	{
