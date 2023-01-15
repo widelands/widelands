@@ -77,6 +77,9 @@ class MainMenu : public UI::Panel {
 public:
 	explicit MainMenu(bool skip_init = false);
 
+	/** Exception-safe wrapper around Panel::run */
+	void main_loop();
+
 	// Internet login stuff
 	void show_internet_login(bool modal = false);
 	void internet_login_callback();

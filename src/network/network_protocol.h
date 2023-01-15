@@ -27,7 +27,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 29,
+	NETWORK_PROTOCOL_VERSION = 30,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -468,6 +468,14 @@ enum : uint8_t {
 	 * \li signed_32: win condition duration in minutes
 	 */
 	NETCMD_WIN_CONDITION_DURATION = 36,
+
+	/**
+	 * Sent by the host to toggle fogless mode.
+	 *
+	 * Attached data is:
+	 * \li uint8_t: 1 if fogless mode is enabled, 0 otherwise
+	 */
+	NETCMD_FOGLESS = 37,
 
 	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability
