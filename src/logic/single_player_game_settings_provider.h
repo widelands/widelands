@@ -68,6 +68,9 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	void set_peaceful_mode(bool peace) override;
 	bool is_peaceful_mode() override;
 
+	void set_fogless(bool fogless) override;
+	bool is_fogless() override;
+
 	void set_custom_starting_positions(bool) override;
 	bool get_custom_starting_positions() override;
 
