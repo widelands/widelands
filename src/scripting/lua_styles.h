@@ -16,24 +16,24 @@
  *
  */
 
-#ifndef WL_SCRIPTING_LUA_TEXTSTYLE_H
-#define WL_SCRIPTING_LUA_TEXTSTYLE_H
+#ifndef WL_SCRIPTING_LUA_STYLES_H
+#define WL_SCRIPTING_LUA_STYLES_H
 
 #include "scripting/luna.h"
 
-namespace LuaTextstyle {
+namespace LuaStyles {
 
 /**
- * Base class for all classes in textstyle.
+ * Base class for all classes in 'styles'.
  */
-class LuaTextstyleModuleClass : public LunaClass {
+class LuaStylesModuleClass : public LunaClass {
 public:
 	const char* get_modulename() override {
-		return "textstyle";
+		return "styles";
 	}
 };
 
-void luaopen_textstyle(lua_State*);
-}  // namespace LuaTextstyle
+void luaopen_styles(lua_State*);
+}  // namespace LuaStyles
 
-#endif  // end of include guard: WL_SCRIPTING_LUA_TEXTSTYLE_H
+#endif  // end of include guard: WL_SCRIPTING_LUA_STYLES_H

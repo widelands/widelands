@@ -333,12 +333,12 @@ StyleManager::StyleManager() {
 	add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
 	add_font_style(UI::FontStyle::kFsMenuWindowTitle, *element_table, "fs_window_title");
 	add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
-	add_font_style(UI::FontStyle::kIngameTitle, *element_table, "ingame_title");
 	check_completeness(
-	   "fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kIngameTitle));
+	   "fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kWuiWindowTitle));
 
 	// Paragraphs
 	element_table = table->get_table("paragraphs");
+	add_paragraph_style(UI::ParagraphStyle::kReadmeTitle, *element_table, "readme_title");
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading1, *element_table, "ingame_heading_1");
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading2, *element_table, "ingame_heading_2");
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading3, *element_table, "ingame_heading_3");
@@ -412,9 +412,19 @@ const UI::FontStyleInfo& StyleManager::font_style(UI::FontStyle style) const {
 	return *fontstyles_.at(style);
 }
 
+const UI::FontStyleInfo& StyleManager::font_style(std::string style_name) const {
+	assert(fontstyle_keys_.count(style_name) == 1);
+	return font_style(fontstyle_keys_.at(style_name));
+}
+
 const UI::ParagraphStyleInfo& StyleManager::paragraph_style(UI::ParagraphStyle style) const {
 	assert(paragraphstyles_.count(style) == 1);
 	return *paragraphstyles_.at(style);
+}
+
+const UI::ParagraphStyleInfo& StyleManager::paragraph_style(std::string style_name) const {
+	assert(paragraphstyle_keys_.count(style_name) == 1);
+	return paragraph_style(paragraphstyle_keys_.at(style_name));
 }
 
 int StyleManager::minimum_font_size() const {
@@ -531,6 +541,7 @@ void StyleManager::add_font_style(UI::FontStyle font_key,
                                   const std::string& table_key) {
 	fontstyles_.emplace(std::make_pair(
 	   font_key, std::unique_ptr<UI::FontStyleInfo>(read_font_style(table, table_key))));
+	fontstyle_keys_.emplace(std::make_pair(table_key, font_key));
 }
 
 void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
@@ -538,4 +549,5 @@ void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
                                        const std::string& table_key) {
 	paragraphstyles_.emplace(std::make_pair(
 	   style, std::unique_ptr<UI::ParagraphStyleInfo>(read_paragraph_style(table, table_key))));
+	paragraphstyle_keys_.emplace(std::make_pair(table_key, style));
 }

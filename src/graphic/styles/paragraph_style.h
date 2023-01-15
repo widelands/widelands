@@ -26,6 +26,7 @@
 
 namespace UI {
 enum class ParagraphStyle {
+	kReadmeTitle,
 	kIngameHeading1,
 	kIngameHeading2,
 	kIngameHeading3,

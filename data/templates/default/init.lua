@@ -789,17 +789,19 @@ return {
          bold = true,
          shadow = true
       },
-
-      -- Campaign and help texts
-      ingame_title = {
-         color = {47, 145, 49},
-         face = ingame_font_face,
-         size = 38,
-      },
    },
 
    paragraphs = {
       -- Campaign and help texts
+      readme_title = {
+         font = {
+            color = {47, 145, 49},
+            face = ingame_font_face,
+            size = 38,
+         },
+         space_before = 0,
+         space_after = ingame_text_space_after,
+      },
       ingame_heading_1 = {
          font = {
             color = ingame_heading_color,

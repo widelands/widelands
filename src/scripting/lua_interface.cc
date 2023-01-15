@@ -25,7 +25,7 @@
 #include "scripting/lua_globals.h"
 #include "scripting/lua_path.h"
 #include "scripting/lua_table.h"
-#include "scripting/lua_textstyle.h"
+#include "scripting/lua_styles.h"
 #include "scripting/lua_ui.h"
 #include "scripting/run_script.h"
 
@@ -73,7 +73,7 @@ LuaInterface::LuaInterface() {
 
 	// And helper methods.
 	LuaPath::luaopen_path(lua_state_);
-	LuaTextstyle::luaopen_textstyle(lua_state_);
+	LuaStyles::luaopen_styles(lua_state_);
 
 	// Also push the "wl" and the "hooks" table.
 	lua_newtable(lua_state_);

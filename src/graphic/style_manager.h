@@ -69,6 +69,10 @@ public:
 	[[nodiscard]] const UI::FontStyleInfo& font_style(UI::FontStyle style) const;
 	[[nodiscard]] const UI::ParagraphStyleInfo& paragraph_style(UI::ParagraphStyle style) const;
 
+	// Look up by name for Lua
+	[[nodiscard]] const UI::FontStyleInfo& font_style(std::string name) const;
+	[[nodiscard]] const UI::ParagraphStyleInfo& paragraph_style(std::string name) const;
+
 	// Special elements
 	[[nodiscard]] int minimum_font_size() const;
 	[[nodiscard]] const RGBColor& minimap_icon_frame() const;
@@ -110,7 +114,9 @@ private:
 	int minimum_font_size_, focus_border_thickness_;
 	RGBColor minimap_icon_frame_;
 	RGBAColor focused_color_, semi_focused_color_;
+	std::map<std::string, UI::FontStyle> fontstyle_keys_;
 	std::map<UI::FontStyle, std::unique_ptr<const UI::FontStyleInfo>> fontstyles_;
+	std::map<std::string, UI::ParagraphStyle> paragraphstyle_keys_;
 	std::map<UI::ParagraphStyle, std::unique_ptr<const UI::ParagraphStyleInfo>> paragraphstyles_;
 	std::unique_ptr<const UI::BuildingStatisticsStyleInfo> building_statistics_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::ProgressbarStyleInfo>> progressbar_styles_;

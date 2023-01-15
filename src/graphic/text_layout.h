@@ -25,6 +25,7 @@
 #include "graphic/color.h"
 #include "graphic/styles/font_style.h"
 #include "graphic/styles/panel_styles.h"
+#include "graphic/styles/paragraph_style.h"
 #include "graphic/text/rendered_text.h"
 
 /**
@@ -117,32 +118,18 @@ as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey, 
 /// Insert vertical space. Returns an empty string if gap is zero or negative.
 [[nodiscard]] std::string as_vspace(int gap);
 
-/** Helper functions for data/scripting/richtext.lua, used by scenario messages and help texts */
+/// Format 'text' with paragraph style 'style'
+std::string as_paragraph_style(UI::ParagraphStyle style, const std::string& text);
 
-/// Format 'text' as main title
-std::string as_ingame_title(const std::string& text);
+/// Format 'text' with paragraph style 'style' with optional 'attributes' to be included
+/// in the paragraph tag. (Font attributes can be changed in a nested font tag.)
+std::string as_paragraph_style(UI::ParagraphStyle style, const std::string& attributes, const std::string& text);
 
-/// Format 'text' as level 1 heading
-std::string as_ingame_heading_1(const std::string& text);
-
-/// Format 'text' as level 2 heading
-std::string as_ingame_heading_2(const std::string& text);
-
-/// Format 'text' as level 3 heading
-std::string as_ingame_heading_3(const std::string& text);
-
-/// Format 'text' as level 4 heading
-std::string as_ingame_heading_4(const std::string& text);
-
-/// Format 'text' as plain paragraph with optional 'attributes' to be included in the paragraph tag
-/// (Font attributes can be changed in a nested font tag.)
-std::string as_ingame_text(const std::string& text, const std::string& attributes = "");
-
-/// Return opening paragraph and font tags for formatting as plain paragraph.
+/// Return opening paragraph and font tags for formatting with paragraph style 'style'.
 /// The optional 'attributes' will be included in the paragraph tag.
-std::string open_ingame_text(const std::string& attributes = "");
+std::string open_paragraph_style(UI::ParagraphStyle style, const std::string& attributes = "");
 
 /// Return closing font and paragraph tags for formatting as plain paragraph.
-std::string close_ingame_text();
+std::string close_paragraph_style(UI::ParagraphStyle style);
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_LAYOUT_H

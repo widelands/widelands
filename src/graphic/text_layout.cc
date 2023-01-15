@@ -252,32 +252,19 @@ std::string as_vspace(const int gap) {
 	return format("<vspace gap=%d>", gap);
 }
 
-std::string as_ingame_title(const std::string& text) {
-	return format("<p align=center>%s<vspace gap=%d></p>",
-	              g_style_manager->font_style(UI::FontStyle::kIngameTitle).as_font_tag(text),
-	              g_style_manager->paragraph_style(UI::ParagraphStyle::kIngameText).space_after());
+std::string as_paragraph_style(UI::ParagraphStyle style, const std::string& text) {
+	return g_style_manager->paragraph_style(style).as_paragraph(text);
 }
 
-#define INGAME_HEADING(i)                                                                          \
-	std::string as_ingame_heading_##i(const std::string& text) {                                    \
-		return g_style_manager->paragraph_style(UI::ParagraphStyle::kIngameHeading##i)               \
-		   .as_paragraph(text);                                                                      \
-	}
-INGAME_HEADING(1)
-INGAME_HEADING(2)
-INGAME_HEADING(3)
-INGAME_HEADING(4)
-#undef INGAME_HEADING
-
-std::string as_ingame_text(const std::string& text, const std::string& attrib) {
-	return g_style_manager->paragraph_style(UI::ParagraphStyle::kIngameText)
-	   .as_paragraph(text, attrib);
+std::string as_paragraph_style(
+   UI::ParagraphStyle style, const std::string& attrib, const std::string& text) {
+	return g_style_manager->paragraph_style(style).as_paragraph(text, attrib);
 }
 
-std::string open_ingame_text(const std::string& attrib) {
-	return g_style_manager->paragraph_style(UI::ParagraphStyle::kIngameText).open_paragraph(attrib);
+std::string open_paragraph_style(UI::ParagraphStyle style, const std::string& attrib) {
+	return g_style_manager->paragraph_style(style).open_paragraph(attrib);
 }
 
-std::string close_ingame_text() {
-	return g_style_manager->paragraph_style(UI::ParagraphStyle::kIngameText).close_paragraph();
+std::string close_paragraph_style(UI::ParagraphStyle style) {
+	return g_style_manager->paragraph_style(style).close_paragraph();
 }

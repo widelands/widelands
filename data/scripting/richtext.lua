@@ -135,7 +135,7 @@ end
 --    :returns: A paragraph with text formatted as title.
 
 function title(font_face, text)
-   return textstyle.as_title(font("face=".. font_face, text))
+   return styles.as_p_with_attr("readme_title", "align=center", font("face=".. font_face, text))
 end
 
 
@@ -153,7 +153,7 @@ function h1(text_or_color, text)
    else
       t = text_or_color
    end
-   return textstyle.as_h1(t)
+   return styles.as_paragraph("ingame_heading_1", t)
 end
 
 
@@ -165,7 +165,7 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h2(text)
-   return textstyle.as_h2(text)
+   return styles.as_paragraph("ingame_heading_2", text)
 end
 
 
@@ -177,7 +177,7 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h3(text)
-   return textstyle.as_h3(text)
+   return styles.as_paragraph("ingame_heading_3", text)
 end
 
 
@@ -189,7 +189,7 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h4(text)
-   return textstyle.as_h4(text)
+   return styles.as_paragraph("ingame_heading_4", text)
 end
 
 
@@ -224,9 +224,9 @@ end
 
 function p(text_or_attributes, text)
    if text then
-      return textstyle.as_p_with_attr(text_or_attributes, text)
+      return styles.as_p_with_attr("ingame_text", text_or_attributes, text)
    else
-      return textstyle.as_p(text_or_attributes)
+      return styles.as_paragraph("ingame_text", text_or_attributes)
    end
 end
 
@@ -255,9 +255,9 @@ end
 
 function open_p(attributes)
    if attributes then
-      return textstyle.open_p_with_attr(attributes)
+      return styles.open_p_with_attr("ingame_text", attributes)
    else
-      return textstyle.open_p()
+      return styles.open_p("ingame_text")
    end
 end
 
@@ -270,7 +270,7 @@ end
 --    :returns: The closing tags for a paragraph
 
 function close_p(t)
-   return textstyle.close_p()
+   return styles.close_p("ingame_text")
 end
 
 
@@ -294,9 +294,9 @@ end
 
 function p_font(p_or_font_attributes, text_or_font_attributes, text)
    if text then
-      return textstyle.as_p_with_attr(p_or_font_attributes, font(text_or_font_attributes, text))
+      return styles.as_p_with_attr("ingame_text", p_or_font_attributes, font(text_or_font_attributes, text))
    else
-      return textstyle.as_p(font(p_or_font_attributes, text_or_font_attributes))
+      return styles.as_p("ingame_text", font(p_or_font_attributes, text_or_font_attributes))
    end
 end
 
