@@ -220,6 +220,25 @@ MainMenu::MainMenu(const bool skip_init)
 	initialization_complete();
 }
 
+void MainMenu::main_loop() {
+	for (;;) {
+		try {
+			run<int>();
+			return;  // We only get here though normal termination by the user.
+		} catch (const std::exception& e) {
+			// This is the outermost wrapper within the GUI and should not normally be reachable.
+			show_messagebox(
+			   _("Error!"),
+			   format(
+			      _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
+			        "this problem to help us improve Widelands. You will find related messages in the "
+			        "standard output (stdout.txt on Windows). You are using version %2$s.\n"
+			        "Please add this information to your report."),
+			      e.what(), build_ver_details()));
+		}
+	}
+}
+
 Widelands::Game* MainMenu::create_safe_game(const bool show_error) {
 	try {
 		return new Widelands::Game;
