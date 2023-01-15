@@ -256,8 +256,8 @@ std::string as_paragraph_style(UI::ParagraphStyle style, const std::string& text
 	return g_style_manager->paragraph_style(style).as_paragraph(text);
 }
 
-std::string as_paragraph_style(
-   UI::ParagraphStyle style, const std::string& attrib, const std::string& text) {
+std::string
+as_paragraph_style(UI::ParagraphStyle style, const std::string& attrib, const std::string& text) {
 	return g_style_manager->paragraph_style(style).as_paragraph(text, attrib);
 }
 

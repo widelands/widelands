@@ -123,7 +123,9 @@ std::string as_paragraph_style(UI::ParagraphStyle style, const std::string& text
 
 /// Format 'text' with paragraph style 'style' with optional 'attributes' to be included
 /// in the paragraph tag. (Font attributes can be changed in a nested font tag.)
-std::string as_paragraph_style(UI::ParagraphStyle style, const std::string& attributes, const std::string& text);
+std::string as_paragraph_style(UI::ParagraphStyle style,
+                               const std::string& attributes,
+                               const std::string& text);
 
 /// Return opening paragraph and font tags for formatting with paragraph style 'style'.
 /// The optional 'attributes' will be included in the paragraph tag.

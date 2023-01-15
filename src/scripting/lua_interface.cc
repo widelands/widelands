@@ -24,8 +24,8 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_globals.h"
 #include "scripting/lua_path.h"
-#include "scripting/lua_table.h"
 #include "scripting/lua_styles.h"
+#include "scripting/lua_table.h"
 #include "scripting/lua_ui.h"
 #include "scripting/run_script.h"
 
