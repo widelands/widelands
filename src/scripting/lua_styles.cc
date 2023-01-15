@@ -42,9 +42,29 @@ Module Functions
 */
 
 /* RST
+.. function:: as_font(style, text)
+
+   Format the given text with the given font style.
+
+   :type style: class:`string`
+   :arg style: name of the font style to use.
+   :type text: class:`string`
+   :arg text: text to format.
+
+   :returns: The text with richtext tags.
+*/
+static int L_as_font(lua_State* L) {
+	const std::string style(luaL_checkstring(L, 1));
+	const std::string text(luaL_checkstring(L, 2));
+	const std::string result = g_style_manager->font_style(style).as_font_tag(text);
+	lua_pushstring(L, result.c_str());
+	return 1;
+}
+
+/* RST
 .. function:: as_paragraph(style, text)
 
-   Format the given text with the given style.
+   Format the given text as a paragraph with the given style.
 
    :type style: class:`string`
    :arg style: name of the paragraph style to use.
@@ -138,11 +158,34 @@ static int L_close_p(lua_State* L) {
 	return 1;
 }
 
-const static struct luaL_Reg styles[] = {{"as_paragraph", &L_as_paragraph},
+/* RST
+.. function:: as_font_from_p(p_style, text)
+
+   Format the given text with the font style of the given paragraph style, without the paragraph
+   tags.
+
+   :type style: class:`string`
+   :arg p_style: name of the paragraph style to use.
+   :type text: class:`string`
+   :arg text: text to format.
+
+   :returns: The text with richtext tags.
+*/
+static int L_as_font_from_p(lua_State* L) {
+	const std::string p_style(luaL_checkstring(L, 1));
+	const std::string text(luaL_checkstring(L, 2));
+	const std::string result = g_style_manager->paragraph_style(p_style).font().as_font_tag(text);
+	lua_pushstring(L, result.c_str());
+	return 1;
+}
+
+const static struct luaL_Reg styles[] = {{"as_font", &L_as_font},
+                                         {"as_paragraph", &L_as_paragraph},
                                          {"as_p_with_attr", &L_as_p_with_attr},
                                          {"open_p", &L_open_p},
                                          {"open_p_with_attr", &L_open_p_with_attr},
                                          {"close_p", &L_close_p},
+                                         {"as_font_from_p", &L_as_font_from_p},
                                          {nullptr, nullptr}};
 
 void luaopen_styles(lua_State* L) {

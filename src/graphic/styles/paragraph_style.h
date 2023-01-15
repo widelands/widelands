@@ -31,7 +31,10 @@ enum class ParagraphStyle {
 	kIngameHeading2,
 	kIngameHeading3,
 	kIngameHeading4,
-	kIngameText
+	kIngameText,
+
+	// Returned when lookup by name fails
+	kUnknown
 };
 
 struct ParagraphStyleInfo {

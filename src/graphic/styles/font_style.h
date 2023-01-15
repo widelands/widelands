@@ -56,7 +56,10 @@ enum class FontStyle {
 	kWuiMessageHeading,
 	kWuiMessageParagraph,
 	kFsMenuWindowTitle,
-	kWuiWindowTitle
+	kWuiWindowTitle,
+
+	// Returned when lookup by name fails
+	kUnknown
 };
 
 struct FontStyleInfo {

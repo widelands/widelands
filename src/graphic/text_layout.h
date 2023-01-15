@@ -67,6 +67,9 @@ std::string as_richtext_paragraph(const std::string& text,
                                   UI::Align align = UI::Align::kLeft);
 std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style);
 
+std::string as_font_tag(UI::FontStyle style, const std::string& text);
+std::string as_font_tag(const std::string& text, UI::FontStyle style);
+
 std::string as_listitem(const std::string&, UI::FontStyle style);
 
 std::string as_game_tip(const std::string&);

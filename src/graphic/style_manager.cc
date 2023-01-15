@@ -333,8 +333,9 @@ StyleManager::StyleManager() {
 	add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
 	add_font_style(UI::FontStyle::kFsMenuWindowTitle, *element_table, "fs_window_title");
 	add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
+	add_font_style(UI::FontStyle::kUnknown, *element_table, "unknown");
 	check_completeness(
-	   "fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kWuiWindowTitle));
+	   "fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kUnknown));
 
 	// Paragraphs
 	element_table = table->get_table("paragraphs");
@@ -344,8 +345,9 @@ StyleManager::StyleManager() {
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading3, *element_table, "ingame_heading_3");
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading4, *element_table, "ingame_heading_4");
 	add_paragraph_style(UI::ParagraphStyle::kIngameText, *element_table, "ingame_text");
+	add_paragraph_style(UI::ParagraphStyle::kUnknown, *element_table, "unknown");
 	check_completeness(
-	   "paragraphs", paragraphstyles_.size(), static_cast<size_t>(UI::ParagraphStyle::kIngameText));
+	   "paragraphs", paragraphstyles_.size(), static_cast<size_t>(UI::ParagraphStyle::kUnknown));
 }
 
 // Return functions for the styles
@@ -413,7 +415,10 @@ const UI::FontStyleInfo& StyleManager::font_style(UI::FontStyle style) const {
 }
 
 const UI::FontStyleInfo& StyleManager::font_style(std::string style_name) const {
-	assert(fontstyle_keys_.count(style_name) == 1);
+	if (fontstyle_keys_.count(style_name) != 1) {
+		log_warn("Undefined font style requested: %s", style_name.c_str());
+		return *fontstyles_.at(UI::FontStyle::kUnknown);
+	}
 	return font_style(fontstyle_keys_.at(style_name));
 }
 
@@ -423,7 +428,10 @@ const UI::ParagraphStyleInfo& StyleManager::paragraph_style(UI::ParagraphStyle s
 }
 
 const UI::ParagraphStyleInfo& StyleManager::paragraph_style(std::string style_name) const {
-	assert(paragraphstyle_keys_.count(style_name) == 1);
+	if (paragraphstyle_keys_.count(style_name) != 1) {
+		log_warn("Undefined paragraph style requested: %s", style_name.c_str());
+		return *paragraphstyles_.at(UI::ParagraphStyle::kUnknown);
+	}
 	return paragraph_style(paragraphstyle_keys_.at(style_name));
 }
 

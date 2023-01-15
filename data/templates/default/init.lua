@@ -40,6 +40,10 @@ local ingame_heading_space_before_big = 2 * ingame_padding
 local ingame_heading_space_before_small = ingame_padding
 local ingame_heading_space_after = ingame_text_space_after + 1
 
+local unknown_font_color = {209, 45, 45}
+local unknown_font_face = "sans"
+local unknown_font_size = 16
+
 local default_wui_font = {
    color = wui_font_color,
    face = wui_font_face,
@@ -789,6 +793,15 @@ return {
          bold = true,
          shadow = true
       },
+
+      -- Returned when lookup by name fails.
+      -- Make this stand out to help debugging
+      unknown = {
+         color = unknown_font_color,
+         face = unknown_font_face,
+         size = unknown_font_size,
+         bold = true,
+      }
    },
 
    paragraphs = {
@@ -849,6 +862,19 @@ return {
          },
          space_before = 0,
          space_after = ingame_text_space_after,
+      },
+
+      -- Returned when lookup by name fails.
+      -- Make this stand out to help debugging
+      unknown = {
+         font = {
+            color = unknown_font_color,
+            face = unknown_font_face,
+            size = unknown_font_size,
+            italic = true,
+         },
+         space_before = unknown_font_size,
+         space_after = unknown_font_size,
       },
    },
 }

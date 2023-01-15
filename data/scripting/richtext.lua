@@ -204,9 +204,10 @@ end
 
 function inline_header(header, text)
    return
+      -- TODO(tothxa): implement styling for space
       div("width=100%", vspace(8)) ..
-      div("width=100%", font("size=13 color=D1D1D1", header .. " ") ..
-      font("size=12", text))
+      div("width=100%", styles.as_font_from_p("ingame_heading_3", header .. " ") ..
+      styles.as_font_from_p("ingame_text", text))
 end
 
 
@@ -237,6 +238,7 @@ end
 --    Returns the given text wrapped in a font tag for the
 --    default color that is used for texts in the main menu.
 function fs_color(text)
+   -- TODO(tothxa): implement styling
    return "<font color=FFDC00>" .. text .. "</font>"
 end
 
@@ -400,6 +402,7 @@ end
 --    :returns: a p tag containing the formatted text
 
 function li(text_or_symbol, text)
+   -- TODO(tothxa): implement styling
    if text then
       return div(p(text_or_symbol)) .. div(p(space(6))) .. div("width=*", p(text .. vspace(6)))
    else
@@ -438,6 +441,7 @@ end
 function li_image(imagepath, text)
    return
       div("width=100%",
+         -- TODO(tothxa): implement styling
          div("float=left padding_r=6", p(img(imagepath))) ..
          p(text)
       )
@@ -466,6 +470,7 @@ function li_object(name, text, playercolor)
    end
    return
       div("width=100%",
+         -- TODO(tothxa): implement styling
          div("float=left padding_r=6", p(image)) ..
          p(text)
       )
