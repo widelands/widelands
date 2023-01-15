@@ -334,8 +334,7 @@ StyleManager::StyleManager() {
 	add_font_style(UI::FontStyle::kFsMenuWindowTitle, *element_table, "fs_window_title");
 	add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
 	add_font_style(UI::FontStyle::kUnknown, *element_table, "unknown");
-	check_completeness(
-	   "fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kUnknown));
+	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kUnknown));
 
 	// Paragraphs
 	element_table = table->get_table("paragraphs");
