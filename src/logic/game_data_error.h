@@ -56,6 +56,8 @@ struct UnhandledVersionError : public GameDataError {
 		return what_.c_str();
 	}
 
+	[[nodiscard]] static bool is_unhandled_version_error(const std::string& err);
+
 protected:
 	UnhandledVersionError() = default;
 };

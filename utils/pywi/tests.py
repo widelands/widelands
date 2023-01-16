@@ -12,7 +12,6 @@ root_dir = os.path.normpath(source_dir + '/../..')
 
 
 class TestConfig(unittest.TestCase):
-
     def sample_text(self):
         return """
 key = this is global
@@ -102,7 +101,6 @@ baz= quux
 
 
 class TestAnimation(unittest.TestCase):
-
     def test_load_conf(self):
         # This needs to be updated when the game data changes
         tests = [

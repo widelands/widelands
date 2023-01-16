@@ -10,5 +10,4 @@ return {
    dirname .. "hq_hunter.lua",
    dirname .. "defeat_all.lua",
    dirname .. "endless_game.lua",
-   dirname .. "endless_game_fogless.lua",
 }
