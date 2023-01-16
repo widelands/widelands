@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# C138, 2023
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-04 20:42+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
+"Last-Translator: C138, 2023\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,16 +30,20 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Vous semblez ne pas avoir terminé la mission précédente. Vous pouvez "
+"toujours jouer à ce scénario, mais vous serez désavantagé. Je vous "
+"recommande de terminer d'abord le scénario précédent, puis de redémarrer "
+"cette mission."
 
 #: ../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2978
 #: ../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
-msgstr ""
+msgstr "Helgoland"
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
 #: ../../data/campaigns/fri05.wmf/scripting/init_p2.lua:13
 msgid "København"
-msgstr ""
+msgstr "København"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:34
 msgid "%1$d× %2$s"
@@ -58,20 +66,25 @@ msgid ""
 "You can not mine resources or quarry rocks on this island. Instead, you can "
 "trade local produce against other types of wares."
 msgstr ""
+"Vous ne pouvez pas extraire des ressources ou des roches de carrière sur "
+"cette île. Au lieu de cela, vous pouvez échanger des produits locaux contre "
+"d'autres types de marchandises."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:49
 msgid ""
 "Any wares stored in a port will be traded. The trade prices are indicated by"
 " the following chart."
 msgstr ""
+"Toutes les marchandises stockées dans un port seront échangées. Les prix des"
+" échanges sont indiqués par le tableau suivant."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:56
 msgid "Defeat the invaders"
-msgstr ""
+msgstr "Vaincre les envahisseurs"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:58
 msgid "Defeat Atterdag’s Forces."
-msgstr ""
+msgstr "Vaincre les forces d'Atterdag."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:59
 msgid "Destroy all the enemy’s buildings."
@@ -79,11 +92,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:65
 msgid "Block the bottleneck"
-msgstr ""
+msgstr "Bloquez le goulot d'étranglement"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:67
 msgid "Block the Bottleneck."
-msgstr ""
+msgstr "Bloquez le goulot d'étranglement"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:68
 msgid ""
@@ -91,30 +104,33 @@ msgid ""
 "military buildings, so the enemy cannot get past before you’re ready for the"
 " attack."
 msgstr ""
+"Sécurisez le passage étroit à l'est des Uplands avec plusieurs grands "
+"bâtiments militaires, afin que l'ennemi ne puisse pas passer avant d'être "
+"prêt pour l'attaque."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:74
 msgid "Wood production"
-msgstr ""
+msgstr "Production de bois"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:76
 msgid "Secure your Wood Production."
-msgstr ""
+msgstr "Sécurisez votre production de bois."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:77
 msgid "Build at least three woodcutter’s houses."
-msgstr ""
+msgstr "Construisez au moins trois maisons de bûcheron."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:78
 msgid "Build at least four forester’s houses."
-msgstr ""
+msgstr "Construire au moins quatre maisons forestières."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:84
 msgid "The Uplands"
-msgstr ""
+msgstr "Les hautes terres"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:86
 msgid "Use the Uplands Wisely."
-msgstr ""
+msgstr "Utilisez les hautes terres à bon escient."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:87
 msgid "Relocate your industry to the Uplands."
@@ -125,14 +141,14 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:116
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:126
 msgid "Introduction"
-msgstr ""
+msgstr "Introduction"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:107
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:117
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:127
 msgid "Welcome back!"
-msgstr ""
+msgstr "Bienvenue!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:99
@@ -140,6 +156,9 @@ msgid ""
 "Home at last! I cannot put into words the joy I feel at seeing my homelands "
 "again… nor the impatience at being so close and yet so far away."
 msgstr ""
+"Enfin à la maison! Je ne peux pas exprimer avec des mots la joie que je "
+"ressens en revoyant ma patrie... ni l'impatience d'être si proche et "
+"pourtant si loin."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:102
@@ -152,6 +171,14 @@ msgid ""
 "will inspire his soldiers to fight as hard as my own troops will strive to "
 "reclaim our home."
 msgstr ""
+"Pour une fois, la mer était douce et permettait un passage rapide vers le "
+"sud. Henneke et moi avons tous deux passé la plus longue partie du voyage "
+"debout à la proue du navire dans l'attente de notre retour. Reebaud se tint "
+"d'abord à l'arrière et regarda en arrière de la même manière que nous "
+"regardions devant nous. Cleary, il aime sa nouvelle maison autant que moi "
+"mon ancienne. Je suis sûr que le souhait de revenir vivant et d'un vainqueur"
+" inspirera ses soldats à se battre aussi fort que mes propres troupes "
+"s'efforceront de récupérer notre maison."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:109
@@ -160,6 +187,10 @@ msgid ""
 "joyous laughter and excited anticipation of our return turned into a somber "
 "mood as we prepared for battle."
 msgstr ""
+"L'ambiance sur notre navire devenait de plus en plus tendue à mesure que "
+"nous approchions des eaux familières. Le rire joyeux et l'anticipation "
+"excitée de notre retour se sont transformés en une humeur sombre alors que "
+"nous nous préparions pour la bataille."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:112
@@ -168,6 +199,9 @@ msgid ""
 "island Sylt and knew we’d land on Föhr on the evening of that same day. But "
 "then –"
 msgstr ""
+"Et puis le jour est enfin arrivé. Nous avons aperçu la pointe la plus "
+"septentrionale de l'île de Sylt et nous savions que nous atterririons sur "
+"Föhr le soir du même jour. Mais alors..."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:119
@@ -176,6 +210,10 @@ msgid ""
 "being no more careful than a cabin boy. Over the course of the months since "
 "we had left Föhr, we had neglected to pay attention to the calendar."
 msgstr ""
+"Nous avions commis l'une des erreurs les plus élémentaires, et nous devrions"
+" tous avoir honte de ne pas être plus prudents qu'un garçon de cabine. Au "
+"cours des mois qui se sont écoulés depuis que nous avons quitté Föhr, nous "
+"avions négligé de faire attention au calendrier."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:122
@@ -186,6 +224,12 @@ msgid ""
 "storms that always blow at this time of year have sent many a careless "
 "sailor to a watery grave."
 msgstr ""
+"Aujourd'hui, c'est le jour de la Toussaint, le deuxième jour de novembre, et"
+" chaque enfant ici sait qu'aucun capitaine sain d'esprit ne rêverait de "
+"prendre la mer dans la semaine qui suit ce jour. Depuis des temps "
+"immémoriaux, les tempêtes exceptionnellement fortes qui soufflent toujours à"
+" cette période de l'année ont envoyé beaucoup de marins négligents dans une "
+"tombe d'eau."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:129
@@ -196,6 +240,11 @@ msgid ""
 "hope – it is obviously a sign that our perilous endeavour is blessed by the "
 "saints."
 msgstr ""
+"La chance à elle seule nous a sauvés. Nos navires ont été à peine "
+"endommagés, pas un marin n'a perdu dans les vagues. Je ne croirais pas que "
+"quelqu'un puisse avoir autant de chance si je n'en avais pas été témoin moi-"
+"même. Notre incroyable évasion me remplit d'espoir – c'est évidemment un "
+"signe que notre entreprise périlleuse est bénie par les saints."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:132
@@ -207,6 +256,13 @@ msgid ""
 "hospitality, and the chance to rest and refresh ourselves before the battle "
 "will make a difference. Some of them might even join our cause."
 msgstr ""
+"La tempête a poussé notre navire à environ deux jours de route de sa route. "
+"Heureusement, je reconnais encore ces eaux, donc c'est vraiment un revers "
+"très mineur. Lorsque la tempête s'est calmée, nous étions près de l'île "
+"d'Helgoland et avons décidé d'atterrir ici. Les insulaires sont bien connus "
+"pour leur hospitalité, et la chance de se reposer et de se rafraîchir avant "
+"la bataille fera une différence. Certains d'entre eux pourraient même se "
+"joindre à notre cause."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:136
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:143
