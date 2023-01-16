@@ -199,6 +199,9 @@ msgid ""
 "being no more careful than a cabin boy. Over the course of the months since "
 "we had left Föhr, we had neglected to pay attention to the calendar."
 msgstr ""
+"Hem comès un dels errors més bàsics i hauríem d'estar avergonyits per no ser"
+" més curosos. Després d'anar-nos-es de Föhr, vam descuidar-nos i no vam "
+"parar atenció al calendari."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:122
@@ -209,6 +212,11 @@ msgid ""
 "storms that always blow at this time of year have sent many a careless "
 "sailor to a watery grave."
 msgstr ""
+"Avui és el dia de Tots Sants, el segon dia de novembre, i cada nen de per "
+"aquí sap que cap capità amb dos dits de front voldria sortir a navegar "
+"durant una setmana. Des de temps immemorials, les tempestes excepcionalment "
+"fortes que bufen en aquesta època de l'any han enviat a molts mariners a "
+"tombes molt humides."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:129

@@ -10,14 +10,12 @@ from collections import defaultdict
 
 
 class occurences:
-
     def __init__(self, file, line):
         self.line = line
         self.file = file
 
 
 class trans_string:
-
     def __init__(self):
         self.occurences = []
         self.str = ''
@@ -76,7 +74,6 @@ def _format_msgid(tag, string, output):
 
 
 class Conf_GetText(object):
-
     def __init__(self):
         self.translatable_strings = []
 

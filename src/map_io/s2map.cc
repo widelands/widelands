@@ -371,20 +371,8 @@ S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
 
 /// Load the header. The map will then return valid information when
 /// get_width(), get_nrplayers(), get_author() and so on are called.
-int32_t S2MapLoader::preload_map(bool const scenario, AddOns::AddOnsList* addons) {
+int32_t S2MapLoader::preload_map(bool const scenario, AddOns::AddOnsList* /* addons */) {
 	assert(get_state() != State::kLoaded);
-
-	// s2 maps don't have world add-ons
-	// (UNTESTED because I don't have an s2 map to test this with)
-	if (addons != nullptr) {
-		for (auto it = addons->begin(); it != addons->end();) {
-			if ((*it)->category == AddOns::AddOnCategory::kWorld) {
-				it = addons->erase(it);
-			} else {
-				++it;
-			}
-		}
-	}
 
 	map_.cleanup();
 
