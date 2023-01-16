@@ -36,8 +36,7 @@ RandomGame::RandomGame(MenuCapsule& m)
 	{  // Do this first to prevent crashes with incompatible add-on types
 		std::vector<AddOns::AddOnState> new_g_addons;
 		for (const AddOns::AddOnState& s : AddOns::g_addons) {
-			if (s.second && s.first->category != AddOns::AddOnCategory::kWorld &&
-			    s.first->category != AddOns::AddOnCategory::kTribes &&
+			if (s.second && s.first->category != AddOns::AddOnCategory::kTribes &&
 			    s.first->category != AddOns::AddOnCategory::kScript) {
 				new_g_addons.push_back(s);
 			}
@@ -72,7 +71,7 @@ RandomGame::RandomGame(MenuCapsule& m)
 		txt->set_text(
 		   _("The random map generator is still in beta stage. The maps it generates are usually – "
 		     "but not always – well playable. Seafaring and artifacts are not supported. Add-ons of "
-		     "the World, Tribes, and Script categories are disabled in random matches."));
+		     "the Tribes and Script categories are disabled in random matches."));
 		right_column_content_box_.add(txt, UI::Box::Resizing::kFullSize);
 		right_column_content_box_.add_inf_space();
 	}
