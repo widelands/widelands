@@ -393,6 +393,19 @@ void Game::init_newgame(const GameSettings& settings) {
 			}
 		}
 
+		if (settings.fogless) {
+			Coords c;
+			iterate_players_existing(p, map().get_nrplayers(), *this, pl) {
+				c.x = 0;
+				for (; c.x < map().get_width(); ++c.x) {
+					c.y = 0;
+					for (; c.y < map().get_height(); ++c.y) {
+						pl->hide_or_reveal_field(c, HideOrRevealFieldMode::kReveal);
+					}
+				}
+			}
+		}
+
 		win_condition_duration_ = settings.win_condition_duration;
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();

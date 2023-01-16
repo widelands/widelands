@@ -10,7 +10,6 @@ sys.path.append(os.path.dirname(__file__) + os.path.sep + '..')
 
 
 class TestXGettext(unittest.TestCase):
-
     def runTest(self):
         self.assertTrue(True)
 

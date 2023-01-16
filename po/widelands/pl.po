@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-07 02:53+0000\n"
+"POT-Creation-Date: 2023-01-10 04:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
@@ -295,21 +295,21 @@ msgstr "gru"
 
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
-#: ../../src/editor/editorinteractive.cc:95
+#: ../../src/editor/editorinteractive.cc:92
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:95
 #: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
 msgstr "Menu główne"
 
-#: ../../src/editor/editorinteractive.cc:96
+#: ../../src/editor/editorinteractive.cc:93
 #: ../../src/wui/interactive_gamebase.cc:96
 msgctxt "hotkey"
 msgid "Esc"
 msgstr "Esc"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
-#: ../../src/editor/editorinteractive.cc:110
+#: ../../src/editor/editorinteractive.cc:107
 #: ../../src/wlapplication_options.cc:433
 msgid "Tools"
 msgstr "Narzędzia"
@@ -320,59 +320,59 @@ msgstr "Narzędzia"
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
-#: ../../src/editor/editorinteractive.cc:126
+#: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:80
 msgid "Show / Hide"
 msgstr "Pokaż / Ukryj"
 
-#: ../../src/editor/editorinteractive.cc:139
+#: ../../src/editor/editorinteractive.cc:136
 msgid "Tool size"
 msgstr "Wielkość narzędzia"
 
-#: ../../src/editor/editorinteractive.cc:154
+#: ../../src/editor/editorinteractive.cc:151
 #: ../../src/wlapplication_options.cc:425
 msgid "Undo"
 msgstr "Cofnij"
 
-#: ../../src/editor/editorinteractive.cc:159
+#: ../../src/editor/editorinteractive.cc:156
 #: ../../src/wlapplication_options.cc:429
 msgid "Redo"
 msgstr "Ponów"
 
-#: ../../src/editor/editorinteractive.cc:171
+#: ../../src/editor/editorinteractive.cc:168
 #: ../../src/wui/buildingwindow.cc:436 ../../src/wui/interactive_player.cc:234
 msgid "Help"
 msgstr "Pomoc"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:201
+#: ../../src/editor/editorinteractive.cc:198
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
-#: ../../src/ui_fsmenu/main.cc:390 ../../src/wlapplication_options.cc:411
+#: ../../src/ui_fsmenu/main.cc:397 ../../src/wlapplication_options.cc:411
 msgid "New Map"
 msgstr "Nowa mapa"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:210
+#: ../../src/editor/editorinteractive.cc:207
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:808
 #: ../../src/wlapplication_options.cc:416
 msgid "New Random Map"
 msgstr "Nowa losowa mapa"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:218
+#: ../../src/editor/editorinteractive.cc:215
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:395
+#: ../../src/ui_fsmenu/main.cc:402
 msgid "Load Map"
 msgstr "Wczytaj mapę"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:226
+#: ../../src/editor/editorinteractive.cc:223
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:53
 msgid "Save Map"
 msgstr "Zapisz mapę"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:234
+#: ../../src/editor/editorinteractive.cc:231
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:62
 #: ../../src/wlapplication_options.cc:421
@@ -380,33 +380,33 @@ msgid "Map Options"
 msgstr "Opcje mapy"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:239
+#: ../../src/editor/editorinteractive.cc:236
 msgid "Exit Editor"
 msgstr "Opuść edytor"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:277
+#: ../../src/editor/editorinteractive.cc:274
 msgid "Change height"
 msgstr "Ustaw wysokość"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
-#: ../../src/editor/editorinteractive.cc:280
+#: ../../src/editor/editorinteractive.cc:277
 msgid "Change the terrain height"
 msgstr "Zmień wysokość terenu"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:287
+#: ../../src/editor/editorinteractive.cc:284
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Random height"
 msgstr "Losowa wysokość"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
-#: ../../src/editor/editorinteractive.cc:290
+#: ../../src/editor/editorinteractive.cc:287
 msgid "Set the terrain height to random values"
 msgstr "Ustaw wysokość terenu na losowe wartości"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:297
+#: ../../src/editor/editorinteractive.cc:294
 #: ../../src/editor/ui_menus/field_info_window.cc:139
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
 #: ../../src/wui/minimap.cc:157
@@ -414,35 +414,35 @@ msgid "Terrain"
 msgstr "Teren"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
-#: ../../src/editor/editorinteractive.cc:300
+#: ../../src/editor/editorinteractive.cc:297
 msgid "Change the map’s terrain"
 msgstr "Zmień teren mapy"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:308
+#: ../../src/editor/editorinteractive.cc:305
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:61
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Obiekty nieruchome"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
-#: ../../src/editor/editorinteractive.cc:311
+#: ../../src/editor/editorinteractive.cc:308
 msgid "Add or remove immovables"
 msgstr "Dodaj lub usuń obiekty nieruchome"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:318
+#: ../../src/editor/editorinteractive.cc:315
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:46
 msgid "Animals"
 msgstr "Zwierzęta"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
-#: ../../src/editor/editorinteractive.cc:321
+#: ../../src/editor/editorinteractive.cc:318
 msgid "Add or remove animals"
 msgstr "Dodaj lub usuń zwierzęta"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:329
+#: ../../src/editor/editorinteractive.cc:326
 #: ../../src/editor/ui_menus/field_info_window.cc:220
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:113
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
@@ -452,73 +452,73 @@ msgid "Resources"
 msgstr "Surowce"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
-#: ../../src/editor/editorinteractive.cc:332
+#: ../../src/editor/editorinteractive.cc:329
 msgid "Set or change resources"
 msgstr "Ustaw lub zmień surowce"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:336
+#: ../../src/editor/editorinteractive.cc:333
 msgid "Port spaces"
 msgstr "Miejsca na port"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
-#: ../../src/editor/editorinteractive.cc:339
+#: ../../src/editor/editorinteractive.cc:336
 msgid "Add or remove port spaces"
 msgstr "Dodaj lub usuń miejsca na port"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:347
+#: ../../src/editor/editorinteractive.cc:344
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:686
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:162
 msgid "Players"
 msgstr "Gracze"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:350
+#: ../../src/editor/editorinteractive.cc:347
 msgid "Set number of players and their names, tribes and starting positions"
 msgstr "Ustaw liczbę graczy, ich imiona, plemiona i pozycje początkowe"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:354
+#: ../../src/editor/editorinteractive.cc:351
 msgid "Map origin"
 msgstr "Róg mapy"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
-#: ../../src/editor/editorinteractive.cc:357
+#: ../../src/editor/editorinteractive.cc:354
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "Ustaw pozycję, która będzie miała współrzędne (0, 0). Będzie ona lewym górnym rogiem wygenerowanej minimapy."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:365
+#: ../../src/editor/editorinteractive.cc:362
 msgid "Map size"
 msgstr "Rozmiar mapy"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:368
+#: ../../src/editor/editorinteractive.cc:365
 msgid "Change the map’s size"
 msgstr "Zmień rozmiar mapy"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:372
+#: ../../src/editor/editorinteractive.cc:369
 msgid "Information"
 msgstr "Informacja"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
-#: ../../src/editor/editorinteractive.cc:375
+#: ../../src/editor/editorinteractive.cc:372
 msgid "Click on a field to show information about it"
 msgstr "Kliknij pole, by pokazać informacje o nim"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:379
+#: ../../src/editor/editorinteractive.cc:376
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:487
 msgid "Tool History"
 msgstr "Historia narzędzi"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
-#: ../../src/editor/editorinteractive.cc:382
+#: ../../src/editor/editorinteractive.cc:379
 msgid "Restore previous tool settings"
 msgstr "Przywróć poprzednie ustawienia narzędzi"
 
@@ -528,12 +528,12 @@ msgstr "Przywróć poprzednie ustawienia narzędzi"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../src/editor/editorinteractive.cc:451
+#: ../../src/editor/editorinteractive.cc:448
 #: ../../src/wui/interactive_gamebase.cc:265
 msgid "Hide Building Spaces"
 msgstr "Ukryj Miejsca na Budynki"
 
-#: ../../src/editor/editorinteractive.cc:451
+#: ../../src/editor/editorinteractive.cc:448
 #: ../../src/ui_fsmenu/options.cc:260
 #: ../../src/wui/interactive_gamebase.cc:265
 msgid "Show Building Spaces"
@@ -543,15 +543,15 @@ msgstr "Pokaż Miejsca na Budynki"
 #. show maximum
 #. * building spaces that will be available if all immovables (trees, rocks,
 #. etc.) are removed
-#: ../../src/editor/editorinteractive.cc:458
+#: ../../src/editor/editorinteractive.cc:455
 msgid "Hide Maximum Building Spaces"
 msgstr "Ukryj maksymalne miejsca na budynki"
 
-#: ../../src/editor/editorinteractive.cc:459
+#: ../../src/editor/editorinteractive.cc:456
 msgid "Show Maximum Building Spaces"
 msgstr "Pokaż maksymalne miejsca na budynki"
 
-#: ../../src/editor/editorinteractive.cc:462
+#: ../../src/editor/editorinteractive.cc:459
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
@@ -559,73 +559,73 @@ msgstr "Przełącz, czy wyświetlać maksymalne miejsca na budynki, które będ�
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../src/editor/editorinteractive.cc:468
+#: ../../src/editor/editorinteractive.cc:465
 msgid "Hide Grid"
 msgstr "Ukryj Siatkę"
 
-#: ../../src/editor/editorinteractive.cc:468
+#: ../../src/editor/editorinteractive.cc:465
 msgid "Show Grid"
 msgstr "Pokaż Siatkę"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
-#: ../../src/editor/editorinteractive.cc:476
+#: ../../src/editor/editorinteractive.cc:473
 msgid "Hide Immovables"
 msgstr "Ukryj Obiekty Nieruchome"
 
-#: ../../src/editor/editorinteractive.cc:476
+#: ../../src/editor/editorinteractive.cc:473
 msgid "Show Immovables"
 msgstr "Pokaż Obiekty Nieruchome"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../src/editor/editorinteractive.cc:481
+#: ../../src/editor/editorinteractive.cc:478
 msgid "Hide Animals"
 msgstr "Ukryj Zwierzęta"
 
-#: ../../src/editor/editorinteractive.cc:481
+#: ../../src/editor/editorinteractive.cc:478
 msgid "Show Animals"
 msgstr "Pokaż Zwierzęta"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../src/editor/editorinteractive.cc:487
+#: ../../src/editor/editorinteractive.cc:484
 msgid "Hide Resources"
 msgstr "Ukryj Surowce"
 
-#: ../../src/editor/editorinteractive.cc:487
+#: ../../src/editor/editorinteractive.cc:484
 msgid "Show Resources"
 msgstr "Pokaż Surowce"
 
-#: ../../src/editor/editorinteractive.cc:530
+#: ../../src/editor/editorinteractive.cc:527
 msgid "Unsupported Format"
 msgstr "Nieobsługiwany format"
 
-#: ../../src/editor/editorinteractive.cc:531 ../../src/wlapplication.cc:788
+#: ../../src/editor/editorinteractive.cc:528 ../../src/wlapplication.cc:788
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Widelands nie mogło załadować pliku \"%s\". Format pliku wygląda na nieobsługiwany."
 
-#: ../../src/editor/editorinteractive.cc:603
+#: ../../src/editor/editorinteractive.cc:600
 msgid "Exit Editor Confirmation"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:603
+#: ../../src/editor/editorinteractive.cc:600
 msgid "Unsaved Map"
 msgstr "Niezapisana mapa"
 
-#: ../../src/editor/editorinteractive.cc:604
+#: ../../src/editor/editorinteractive.cc:601
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Mapa nie została zapisana, czy na pewno chcesz wyjść?"
 
-#: ../../src/editor/editorinteractive.cc:605
+#: ../../src/editor/editorinteractive.cc:602
 msgid "Are you sure you wish to exit the editor?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1099 ../../src/logic/addons.cc:47
+#: ../../src/editor/editorinteractive.cc:1096 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:357 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1333
@@ -646,7 +646,7 @@ msgstr ""
 msgid "Error"
 msgstr "Błąd"
 
-#: ../../src/editor/editorinteractive.cc:1101 ../../src/wlapplication.cc:1637
+#: ../../src/editor/editorinteractive.cc:1098 ../../src/wlapplication.cc:1637
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -657,13 +657,13 @@ msgid ""
 "Please add this information to your report."
 msgstr "Wystąpił błąd. Wiadomość o błędzie:\n\n%1$s\n\nProsimy o zgłoszenie błędu, by pomóc nam ulepszać Widelands. Informacje o błędzie znajdziesz na standardowym wyjściu (stdout.txt na Windows). Używasz wersji %2$s.\nProsimy o dodanie tej informacji do zgłoszenia."
 
-#: ../../src/editor/editorinteractive.cc:1135
+#: ../../src/editor/editorinteractive.cc:1132
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Wczytywanie mapy “%s”…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1157
+#: ../../src/editor/editorinteractive.cc:1154
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:112
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:584
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
@@ -672,7 +672,7 @@ msgid "No Name"
 msgstr "Bez nazwy"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1160
+#: ../../src/editor/editorinteractive.cc:1157
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:113
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:585
 #: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:368
@@ -680,7 +680,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Nieznany"
 
-#: ../../src/editor/editorinteractive.cc:1184
+#: ../../src/editor/editorinteractive.cc:1181
 msgid "Loading world…"
 msgstr "Wczytywanie świata…"
 
@@ -894,7 +894,7 @@ msgstr "Autor: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
 #: ../../src/ui_fsmenu/addons/packager_box.cc:282
-#: ../../src/ui_fsmenu/main.cc:429 ../../src/ui_fsmenu/mapdetailsbox.cc:124
+#: ../../src/ui_fsmenu/main.cc:436 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
 msgstr "Opis: %s"
@@ -915,7 +915,7 @@ msgid "Enabled Add-Ons: %s"
 msgstr "Uruchomione dodatki: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:238
-#: ../../src/ui_fsmenu/main.cc:1019 ../../src/wui/encyclopedia_window.cc:145
+#: ../../src/ui_fsmenu/main.cc:1026 ../../src/wui/encyclopedia_window.cc:145
 #: ../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
 msgstr "Błąd!"
@@ -1281,7 +1281,7 @@ msgstr "Generowanie losowej mapy..."
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:655
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:689
-#: ../../src/ui_fsmenu/main.cc:392
+#: ../../src/ui_fsmenu/main.cc:399
 msgid "Random Map"
 msgstr "Losowa mapa"
 
@@ -2376,8 +2376,8 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Zakłada kolonię"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1517
-#: ../../src/logic/map_objects/tribes/soldier.cc:1521
+#: ../../src/logic/map_objects/tribes/soldier.cc:1522
+#: ../../src/logic/map_objects/tribes/soldier.cc:1526
 msgid "Logic error"
 msgstr "Błąd logiki"
 
@@ -3566,7 +3566,7 @@ msgstr "Zminimalizuj"
 msgid "Restore"
 msgstr "Przywróć"
 
-#: ../../src/ui_basic/window.cc:170 ../../src/wui/info_panel.cc:192
+#: ../../src/ui_basic/window.cc:170 ../../src/wui/info_panel.cc:191
 msgid "Pin"
 msgstr "Przypnij"
 
@@ -3574,7 +3574,7 @@ msgstr "Przypnij"
 msgid "Unpin"
 msgstr "Odepnij"
 
-#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:462
+#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:469
 msgid "About Widelands"
 msgstr "O Widelands"
 
@@ -4444,25 +4444,25 @@ msgid "Directory Tree"
 msgstr "Drzewo katalogów"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:272
-#: ../../src/ui_fsmenu/main.cc:419
+#: ../../src/ui_fsmenu/main.cc:426
 #, c-format
 msgid "Name: %s"
 msgstr "Nazwa: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:275
-#: ../../src/ui_fsmenu/main.cc:422 ../../src/ui_fsmenu/mapdetailsbox.cc:112
+#: ../../src/ui_fsmenu/main.cc:429 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
 msgstr "Rozmiar: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:278
-#: ../../src/ui_fsmenu/main.cc:424 ../../src/ui_fsmenu/mapdetailsbox.cc:114
+#: ../../src/ui_fsmenu/main.cc:431 ../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:279
-#: ../../src/ui_fsmenu/main.cc:363 ../../src/ui_fsmenu/main.cc:426
+#: ../../src/ui_fsmenu/main.cc:370 ../../src/ui_fsmenu/main.cc:433
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Players: %s"
@@ -5444,7 +5444,7 @@ msgstr "Powrót do menu jednego gracza"
 msgid "Load this game"
 msgstr "Wczytaj tę grę"
 
-#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:383
+#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:390
 msgid "Online Game Settings"
 msgstr "Ustawienia Gry Online"
 
@@ -5491,207 +5491,207 @@ msgid ""
 "%s"
 msgstr "Nie udało się utworzyć instancji gry.\nKomunikat o błędzie:\n%s"
 
-#: ../../src/ui_fsmenu/main.cc:316
+#: ../../src/ui_fsmenu/main.cc:323
 msgid "Begin a new game"
 msgstr "Zacznij nową grę"
 
-#: ../../src/ui_fsmenu/main.cc:316 ../../src/wlapplication_options.cc:218
+#: ../../src/ui_fsmenu/main.cc:323 ../../src/wlapplication_options.cc:218
 msgid "New Game"
 msgstr "Nowa gra"
 
-#: ../../src/ui_fsmenu/main.cc:318 ../../src/ui_fsmenu/random_game.cc:29
+#: ../../src/ui_fsmenu/main.cc:325 ../../src/ui_fsmenu/random_game.cc:29
 #: ../../src/wlapplication_options.cc:232
 msgid "New Random Game"
 msgstr "Nowa losowa gra"
 
-#: ../../src/ui_fsmenu/main.cc:319
+#: ../../src/ui_fsmenu/main.cc:326
 msgid "Create a new random match"
 msgstr "Utwórz nowe losowe dopasowanie"
 
-#: ../../src/ui_fsmenu/main.cc:321 ../../src/wlapplication_options.cc:242
+#: ../../src/ui_fsmenu/main.cc:328 ../../src/wlapplication_options.cc:242
 msgid "Campaigns"
 msgstr "Kampanie"
 
-#: ../../src/ui_fsmenu/main.cc:321
+#: ../../src/ui_fsmenu/main.cc:328
 msgid "Play a campaign"
 msgstr "Zagraj w kampanię"
 
-#: ../../src/ui_fsmenu/main.cc:323 ../../src/wlapplication_options.cc:237
+#: ../../src/ui_fsmenu/main.cc:330 ../../src/wlapplication_options.cc:237
 msgid "Tutorials"
 msgstr "Poradniki"
 
-#: ../../src/ui_fsmenu/main.cc:324
+#: ../../src/ui_fsmenu/main.cc:331
 msgid "Play one of our beginners’ tutorials"
 msgstr "Zagraj w jeden z naszych samouczków"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/ui_fsmenu/main.cc:326 ../../src/wlapplication_options.cc:222
+#: ../../src/ui_fsmenu/main.cc:333 ../../src/wlapplication_options.cc:222
 #: ../../src/wui/game_main_menu_save_game.cc:48
 #: ../../src/wui/interactive_gamebase.cc:176
 msgid "Load Game"
 msgstr "Wczytaj grę"
 
-#: ../../src/ui_fsmenu/main.cc:327
+#: ../../src/ui_fsmenu/main.cc:334
 msgid "Continue a saved game"
 msgstr "Kontynuuj zapisaną grę"
 
-#: ../../src/ui_fsmenu/main.cc:348 ../../src/wlapplication_options.cc:279
+#: ../../src/ui_fsmenu/main.cc:355 ../../src/wlapplication_options.cc:279
 msgid "Continue Playing"
 msgstr "Kontynuuj grę"
 
-#: ../../src/ui_fsmenu/main.cc:357
+#: ../../src/ui_fsmenu/main.cc:364
 #, c-format
 msgid "Map: %s"
 msgstr "Mapa: %s"
 
-#: ../../src/ui_fsmenu/main.cc:360
+#: ../../src/ui_fsmenu/main.cc:367
 #, c-format
 msgid "Win Condition: %s"
 msgstr "Warunek zwycięstwa: %s"
 
-#: ../../src/ui_fsmenu/main.cc:366
+#: ../../src/ui_fsmenu/main.cc:373
 #, c-format
 msgid "Gametime: %s"
 msgstr "Czas gry: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. * 10:30'
-#: ../../src/ui_fsmenu/main.cc:372
+#: ../../src/ui_fsmenu/main.cc:379
 #, c-format
 msgid "Saved: %s"
 msgstr "Zapisano: %s"
 
-#: ../../src/ui_fsmenu/main.cc:380
+#: ../../src/ui_fsmenu/main.cc:387
 msgid "Online Game"
 msgstr "Gra Online"
 
-#: ../../src/ui_fsmenu/main.cc:381
+#: ../../src/ui_fsmenu/main.cc:388
 msgid "Join the Widelands lobby"
 msgstr "Dołącz do lobby Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:384
+#: ../../src/ui_fsmenu/main.cc:391
 msgid "Log in as a registered user"
 msgstr "Zaloguj się jako zarejestrowany użytkownik"
 
-#: ../../src/ui_fsmenu/main.cc:386 ../../src/wlapplication_options.cc:296
+#: ../../src/ui_fsmenu/main.cc:393 ../../src/wlapplication_options.cc:296
 msgid "LAN / Direct IP"
 msgstr "LAN / Bezpośrednie IP"
 
-#: ../../src/ui_fsmenu/main.cc:387
+#: ../../src/ui_fsmenu/main.cc:394
 msgid "Play a private online game"
 msgstr "Zagraj w prywatną grę online"
 
-#: ../../src/ui_fsmenu/main.cc:390
+#: ../../src/ui_fsmenu/main.cc:397
 msgid "Create a new empty map"
 msgstr "Stwórz nową pustą mapę"
 
-#: ../../src/ui_fsmenu/main.cc:393
+#: ../../src/ui_fsmenu/main.cc:400
 msgid "Create a new random map"
 msgstr "Stwórz nową losową mapę"
 
-#: ../../src/ui_fsmenu/main.cc:395
+#: ../../src/ui_fsmenu/main.cc:402
 msgid "Edit an existing map"
 msgstr "Edytuj istniejącą mapę"
 
-#: ../../src/ui_fsmenu/main.cc:412 ../../src/wlapplication_options.cc:274
+#: ../../src/ui_fsmenu/main.cc:419 ../../src/wlapplication_options.cc:274
 msgid "Continue Editing"
 msgstr "Kontynuuj edycję"
 
-#: ../../src/ui_fsmenu/main.cc:436
+#: ../../src/ui_fsmenu/main.cc:443
 msgid "Single Player…"
 msgstr "Jeden gracz..."
 
-#: ../../src/ui_fsmenu/main.cc:437
+#: ../../src/ui_fsmenu/main.cc:444
 msgid "Multiplayer…"
 msgstr "Wielu graczy..."
 
-#: ../../src/ui_fsmenu/main.cc:438
+#: ../../src/ui_fsmenu/main.cc:445
 msgid "Editor…"
 msgstr "Edytor..."
 
-#: ../../src/ui_fsmenu/main.cc:440
+#: ../../src/ui_fsmenu/main.cc:447
 msgid "Begin or load a single-player campaign or free game"
 msgstr "Zacznij lub wczytaj kampanię jednego gracza lub wolną grę"
 
-#: ../../src/ui_fsmenu/main.cc:443
+#: ../../src/ui_fsmenu/main.cc:450
 msgid "Play with your friends over the internet"
 msgstr "Zagraj ze znajomymi przez internet"
 
-#: ../../src/ui_fsmenu/main.cc:446
+#: ../../src/ui_fsmenu/main.cc:453
 msgid "Launch the map editor"
 msgstr "Włącz edytor map"
 
-#: ../../src/ui_fsmenu/main.cc:449 ../../src/wlapplication_options.cc:227
+#: ../../src/ui_fsmenu/main.cc:456 ../../src/wlapplication_options.cc:227
 msgid "Watch Replay"
 msgstr "Obejrzyj powtórkę"
 
-#: ../../src/ui_fsmenu/main.cc:451
+#: ../../src/ui_fsmenu/main.cc:458
 msgid "Watch the replay of an old game"
 msgstr "Obejrzyj powtórkę starej gry"
 
-#: ../../src/ui_fsmenu/main.cc:454 ../../src/wlapplication_options.cc:292
+#: ../../src/ui_fsmenu/main.cc:461 ../../src/wlapplication_options.cc:292
 msgid "Add-Ons"
 msgstr "Dodatki"
 
-#: ../../src/ui_fsmenu/main.cc:456
+#: ../../src/ui_fsmenu/main.cc:463
 msgid "Install and manage add-ons"
 msgstr "Instaluj i zarządzaj dodatkami"
 
-#: ../../src/ui_fsmenu/main.cc:458 ../../src/ui_fsmenu/options.cc:86
+#: ../../src/ui_fsmenu/main.cc:465 ../../src/ui_fsmenu/options.cc:86
 #: ../../src/wlapplication_options.cc:309
 msgid "Options"
 msgstr "Opcje"
 
-#: ../../src/ui_fsmenu/main.cc:460
+#: ../../src/ui_fsmenu/main.cc:467
 msgid "Technical and game-related settings"
 msgstr "Ustawienia techniczne i związane z grą"
 
-#: ../../src/ui_fsmenu/main.cc:464
+#: ../../src/ui_fsmenu/main.cc:471
 msgid "Readme, License, and Credits"
 msgstr "Pomoc (Readme), Licencja i Twórcy"
 
-#: ../../src/ui_fsmenu/main.cc:466 ../../src/wlapplication_options.cc:283
+#: ../../src/ui_fsmenu/main.cc:473 ../../src/wlapplication_options.cc:283
 msgid "Exit Widelands"
 msgstr "Wyjdź z Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:468
+#: ../../src/ui_fsmenu/main.cc:475
 msgid "Quit the game"
 msgstr "Wyjdź z gry"
 
 #. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
-#: ../../src/ui_fsmenu/main.cc:473
+#: ../../src/ui_fsmenu/main.cc:480
 #, c-format
 msgid "Version %1$s"
 msgstr "Wersja %1$s"
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:476
+#: ../../src/ui_fsmenu/main.cc:483
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
 msgstr "(C) %1%-%2% przez Widelands Development Team · Opublikowane na licencji GNU General Public License V2.0"
 
-#: ../../src/ui_fsmenu/main.cc:808
+#: ../../src/ui_fsmenu/main.cc:815
 msgid "Desyncing Add-On Found"
 msgstr "Znaleziono dodatek powodujący desynchronizację"
 
-#: ../../src/ui_fsmenu/main.cc:809
+#: ../../src/ui_fsmenu/main.cc:816
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Wiadomo, że włączony dodatek powoduje desynchronizację. Postępuj na własne ryzyko."
 
-#: ../../src/ui_fsmenu/main.cc:911 ../../src/ui_fsmenu/netsetup_lan.cc:330
+#: ../../src/ui_fsmenu/main.cc:918 ../../src/ui_fsmenu/netsetup_lan.cc:330
 msgid "No tribes found!"
 msgstr "Nie znaleziono plemion!"
 
-#: ../../src/ui_fsmenu/main.cc:912 ../../src/ui_fsmenu/netsetup_lan.cc:331
+#: ../../src/ui_fsmenu/main.cc:919 ../../src/ui_fsmenu/netsetup_lan.cc:331
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Nie znaleziono plemion w data/tribes/initialization/[tribename]/init.lua."
 
-#: ../../src/ui_fsmenu/main.cc:956
+#: ../../src/ui_fsmenu/main.cc:963
 msgid "Exit Confirmation"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:957
+#: ../../src/ui_fsmenu/main.cc:964
 msgid "Are you sure you wish to exit Widelands?"
 msgstr ""
 
@@ -8445,39 +8445,39 @@ msgstr "Zniszczone budynki cywilne"
 msgid "Military"
 msgstr "Wojsko"
 
-#: ../../src/wui/info_panel.cc:142
+#: ../../src/wui/info_panel.cc:141
 msgid "Info Panel Visibility"
 msgstr "Widoczność panelu informacyjnego"
 
-#: ../../src/wui/info_panel.cc:195
+#: ../../src/wui/info_panel.cc:193
 msgid "Follow mouse"
 msgstr "Śledź myszkę"
 
-#: ../../src/wui/info_panel.cc:200
+#: ../../src/wui/info_panel.cc:198
 msgid "Hide"
 msgstr "Ukryj"
 
-#: ../../src/wui/info_panel.cc:205
+#: ../../src/wui/info_panel.cc:203
 msgid "Move panel to bottom"
 msgstr "Przenieś panel na dół"
 
-#: ../../src/wui/info_panel.cc:205
+#: ../../src/wui/info_panel.cc:203
 msgid "Move panel to top"
 msgstr "Przenieś panel do góry"
 
-#: ../../src/wui/info_panel.cc:385
+#: ../../src/wui/info_panel.cc:383
 msgid "Cheat mode enabled"
 msgstr "Tryb oszukiwania uruchomiony"
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:436
+#: ../../src/wui/info_panel.cc:434
 #, c-format
 msgid "%1$s · %2$s"
 msgstr "%1$s . %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:441
+#: ../../src/wui/info_panel.cc:439
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr "%1$s . %2$s . %3$s"
