@@ -50,8 +50,13 @@ struct ParagraphStyleInfo {
 	                            const int init_spacing,
 	                            const int init_before,
 	                            const int init_after)
-	   : font_(init_font), halign_(init_halign), valign_(init_valign), indent_(init_indent),
-	     spacing_(init_spacing), space_before_(init_before), space_after_(init_after) {
+	   : font_(init_font),
+	     halign_(init_halign),
+	     valign_(init_valign),
+	     indent_(init_indent),
+	     spacing_(init_spacing),
+	     space_before_(init_before),
+	     space_after_(init_after) {
 	}
 	ParagraphStyleInfo(const ParagraphStyleInfo& other)
 	   : font_(new UI::FontStyleInfo(other.font())),

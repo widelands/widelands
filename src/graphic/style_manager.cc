@@ -143,10 +143,8 @@ UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::stri
 	}
 	return new UI::FontStyleInfo(
 	   style_table->get_string("face"), read_rgb_color(*style_table->get_table("color")), size,
-		read_bool(*style_table, "bold"),
-		read_bool(*style_table, "italic"),
-		read_bool(*style_table, "underline"),
-		read_bool(*style_table, "shadow"));
+	   read_bool(*style_table, "bold"), read_bool(*style_table, "italic"),
+	   read_bool(*style_table, "underline"), read_bool(*style_table, "shadow"));
 }
 
 // Read paragraph style from LuaTable
@@ -154,12 +152,9 @@ UI::ParagraphStyleInfo* read_paragraph_style(const LuaTable& parent_table,
                                              const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
 	return new UI::ParagraphStyleInfo(
-	   read_font_style(*style_table, "font"),
-	   read_string(*style_table, "align"),
-	   read_string(*style_table, "valign"),
-	   read_int(*style_table, "indent"),
-	   read_int(*style_table, "spacing"),
-	   read_int(*style_table, "space_before"),
+	   read_font_style(*style_table, "font"), read_string(*style_table, "align"),
+	   read_string(*style_table, "valign"), read_int(*style_table, "indent"),
+	   read_int(*style_table, "spacing"), read_int(*style_table, "space_before"),
 	   read_int(*style_table, "space_after"));
 }
 
