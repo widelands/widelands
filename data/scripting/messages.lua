@@ -264,8 +264,8 @@ function new_objectives(...)
       div("width=100%",
          vspace(18) ..
          div("float=left padding_r=6", p(img("images/wui/menus/objectives.png"))) ..
-         p_font("", "size=18 bold=1 color=D1D1D1",  vspace(6) .. objectives_header) ..
-         vspace(1) .. text
+         styles.as_paragraph("ingame_objectives_heading", objectives_header) ..
+         text
       )
 end
 

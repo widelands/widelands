@@ -129,13 +129,39 @@ end
 -- RST
 -- .. function:: title(font_face, text)
 --
+--    Returns a paragraph formatted as a title heading. Use this only for the
+--    name of the game.
+--
+--    :returns: A paragraph with text formatted as title.
+
+function title(font_face, text)
+   return styles.as_paragraph("readme_title", font("face=".. font_face, text))
+end
+
+
+-- RST
+-- .. function:: pagetitle(text)
+--
 --    Returns a paragraph formatted as a title heading. Use this on the top of
 --    your document only.
 --
 --    :returns: A paragraph with text formatted as title.
 
-function title(font_face, text)
-   return styles.as_p_with_attr("readme_title", "align=center", font("face=".. font_face, text))
+function pagetitle(text)
+   return styles.as_paragraph("ingame_title", text)
+end
+
+
+-- RST
+-- .. function:: subtitle(text)
+--
+--    Returns a paragraph formatted as a subtitle under a title heading.
+--    Use this only after title() or pagetitle().
+--
+--    :returns: A paragraph with text formatted as subtitle.
+
+function subtitle(text)
+   return styles.as_paragraph("ingame_subtitle", text)
 end
 
 

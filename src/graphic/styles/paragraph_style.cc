@@ -29,7 +29,23 @@ std::string ParagraphStyleInfo::as_paragraph(const std::string& text,
 }
 
 std::string ParagraphStyleInfo::open_paragraph(const std::string& attrib) const {
-	return format("<p %s>%s%s", attrib, as_vspace(space_before_), font_->as_font_open());
+	std::string attribs_out;
+	if (!halign_.empty()) {
+		attribs_out += " align=" + halign_;
+	}
+	if (!valign_.empty()) {
+		attribs_out += " align=" + halign_;
+	}
+	if (indent_ > 0) {
+		attribs_out += format(" indent=%d", indent_);
+	}
+	if (spacing_ > 0) {
+		attribs_out += format(" spacing=%d", spacing_);
+	}
+	if (!attrib.empty()) {
+		attribs_out += " " + attrib;
+	}
+	return format("<p%s>%s%s", attribs_out, as_vspace(space_before_), font_->as_font_open());
 }
 
 std::string ParagraphStyleInfo::close_paragraph() const {

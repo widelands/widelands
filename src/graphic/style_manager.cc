@@ -118,6 +118,21 @@ RGBAColor read_rgba_color(const LuaTable& table) {
 	return RGBAColor(rgbacolor[0], rgbacolor[1], rgbacolor[2], rgbacolor[3]);
 }
 
+// Read optional bool value from LuaTable
+int read_bool(const LuaTable& table, const std::string& key) {
+	return table.has_key(key) ? table.get_bool(key) : false;
+}
+
+// Read optional int value from LuaTable
+int read_int(const LuaTable& table, const std::string& key) {
+	return table.has_key(key) ? table.get_int(key) : 0;
+}
+
+// Read optional string value from LuaTable
+std::string read_string(const LuaTable& table, const std::string& key) {
+	return table.has_key(key) ? table.get_string(key) : "";
+}
+
 // Read font style from LuaTable
 UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
@@ -128,19 +143,24 @@ UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::stri
 	}
 	return new UI::FontStyleInfo(
 	   style_table->get_string("face"), read_rgb_color(*style_table->get_table("color")), size,
-	   style_table->has_key<std::string>("bold") ? style_table->get_bool("bold") : false,
-	   style_table->has_key<std::string>("italic") ? style_table->get_bool("italic") : false,
-	   style_table->has_key<std::string>("underline") ? style_table->get_bool("underline") : false,
-	   style_table->has_key<std::string>("shadow") ? style_table->get_bool("shadow") : false);
+		read_bool(*style_table, "bold"),
+		read_bool(*style_table, "italic"),
+		read_bool(*style_table, "underline"),
+		read_bool(*style_table, "shadow"));
 }
 
 // Read paragraph style from LuaTable
 UI::ParagraphStyleInfo* read_paragraph_style(const LuaTable& parent_table,
                                              const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
-	return new UI::ParagraphStyleInfo(read_font_style(*style_table, "font"),
-	                                  style_table->get_int("space_before"),
-	                                  style_table->get_int("space_after"));
+	return new UI::ParagraphStyleInfo(
+	   read_font_style(*style_table, "font"),
+	   read_string(*style_table, "align"),
+	   read_string(*style_table, "valign"),
+	   read_int(*style_table, "indent"),
+	   read_int(*style_table, "spacing"),
+	   read_int(*style_table, "space_before"),
+	   read_int(*style_table, "space_after"));
 }
 
 // Read image filename and RGBA color from LuaTable
@@ -339,11 +359,17 @@ StyleManager::StyleManager() {
 	// Paragraphs
 	element_table = table->get_table("paragraphs");
 	add_paragraph_style(UI::ParagraphStyle::kReadmeTitle, *element_table, "readme_title");
+	add_paragraph_style(UI::ParagraphStyle::kIngameTitle, *element_table, "ingame_title");
+	add_paragraph_style(UI::ParagraphStyle::kIngameSubtitle, *element_table, "ingame_subtitle");
+	add_paragraph_style(UI::ParagraphStyle::kAuthorsHeading1, *element_table, "authors_heading_1");
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading1, *element_table, "ingame_heading_1");
+	add_paragraph_style(
+	   UI::ParagraphStyle::kIngameObjectivesHeading, *element_table, "ingame_objectives_heading");
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading2, *element_table, "ingame_heading_2");
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading3, *element_table, "ingame_heading_3");
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading4, *element_table, "ingame_heading_4");
 	add_paragraph_style(UI::ParagraphStyle::kIngameText, *element_table, "ingame_text");
+	add_paragraph_style(UI::ParagraphStyle::kIngameLoreAuthor, *element_table, "ingame_lore_author");
 	add_paragraph_style(UI::ParagraphStyle::kUnknown, *element_table, "unknown");
 	check_completeness(
 	   "paragraphs", paragraphstyles_.size(), static_cast<size_t>(UI::ParagraphStyle::kUnknown));

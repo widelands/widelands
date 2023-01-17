@@ -27,11 +27,16 @@
 namespace UI {
 enum class ParagraphStyle {
 	kReadmeTitle,
+	kIngameTitle,
+	kIngameSubtitle,
+	kAuthorsHeading1,
 	kIngameHeading1,
+	kIngameObjectivesHeading,
 	kIngameHeading2,
 	kIngameHeading3,
 	kIngameHeading4,
 	kIngameText,
+	kIngameLoreAuthor,
 
 	// Returned when lookup by name fails
 	kUnknown
@@ -39,12 +44,21 @@ enum class ParagraphStyle {
 
 struct ParagraphStyleInfo {
 	explicit ParagraphStyleInfo(UI::FontStyleInfo* init_font,
+	                            const std::string& init_halign,
+	                            const std::string& init_valign,
+	                            const int init_indent,
+	                            const int init_spacing,
 	                            const int init_before,
 	                            const int init_after)
-	   : font_(init_font), space_before_(init_before), space_after_(init_after) {
+	   : font_(init_font), halign_(init_halign), valign_(init_valign), indent_(init_indent),
+	     spacing_(init_spacing), space_before_(init_before), space_after_(init_after) {
 	}
 	ParagraphStyleInfo(const ParagraphStyleInfo& other)
 	   : font_(new UI::FontStyleInfo(other.font())),
+	     halign_(other.halign()),
+	     valign_(other.valign()),
+	     indent_(other.indent()),
+	     spacing_(other.spacing()),
 	     space_before_(other.space_before()),
 	     space_after_(other.space_after()) {
 	}
@@ -52,17 +66,23 @@ struct ParagraphStyleInfo {
 	[[nodiscard]] const UI::FontStyleInfo& font() const {
 		return *font_;
 	}
+	[[nodiscard]] const std::string halign() const {
+		return halign_;
+	}
+	[[nodiscard]] const std::string valign() const {
+		return valign_;
+	}
+	[[nodiscard]] int indent() const {
+		return indent_;
+	}
+	[[nodiscard]] int spacing() const {
+		return spacing_;
+	}
 	[[nodiscard]] int space_before() const {
 		return space_before_;
 	}
 	[[nodiscard]] int space_after() const {
 		return space_after_;
-	}
-	void set_space_before(int new_space) {
-		space_before_ = new_space;
-	}
-	void set_space_after(int new_space) {
-		space_after_ = new_space;
 	}
 
 	/**
@@ -80,6 +100,10 @@ struct ParagraphStyleInfo {
 
 private:
 	std::unique_ptr<const UI::FontStyleInfo> font_;
+	std::string halign_;
+	std::string valign_;
+	int indent_;
+	int spacing_;
 	int space_before_;
 	int space_after_;
 };

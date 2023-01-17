@@ -63,7 +63,7 @@ function plot_size_line(size, size_only)
       end
       -- TRANSLATORS: Size of a map immovable
       if text ~= "" then
-         text = p(font("size=13 color=D1D1D1", text))
+         text = p(styles.as_font_from_p("ingame_heading_3", text))
       end
       return text
    else
@@ -91,7 +91,9 @@ function plot_size_line(size, size_only)
          return ""
       end
    -- TRANSLATORS: Space on the map required for building a building there
-      text = p(join_sentences(font("size=13 color=D1D1D1", _("Space required:")), text))
+      text = p(join_sentences(
+         styles.as_font_from_p("ingame_heading_3", _("Space required:")),
+         text))
       return div("width=100%", div("float=right padding_l=6", p(img(image)))) .. text
    end
 end

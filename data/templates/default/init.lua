@@ -32,9 +32,11 @@ local wui_font_face = "sans"
 local wui_font_size = 14
 
 local ingame_font_face = "sans"
+local ingame_title_color = {47, 145, 49}
 local ingame_heading_color = {209, 209, 209}
 local ingame_text_color = wui_font_color
 local ingame_padding = 6
+local ingame_text_space_before = 0
 local ingame_text_space_after = 2 * ingame_padding
 local ingame_heading_space_before_big = 2 * ingame_padding
 local ingame_heading_space_before_small = ingame_padding
@@ -807,12 +809,45 @@ return {
    paragraphs = {
       -- Campaign and help texts
       readme_title = {
+         -- this is used for the "Widelands" title
          font = {
-            color = {47, 145, 49},
+            color = ingame_title_color,
+            -- should be "Widelands/Widelands.ttf", but it's not possible to pass font filename here
             face = ingame_font_face,
             size = 38,
          },
+         align = "center",
          space_before = 0,
+         space_after = ingame_text_space_after,
+      },
+      ingame_title = {
+         font = {
+            color = ingame_title_color,
+            face = ingame_font_face,
+            size = 28,
+         },
+         align = "center",
+         space_before = ingame_text_space_before,
+         space_after = ingame_text_space_after,
+      },
+      ingame_subtitle = {
+         font = {
+            color = ingame_heading_color,
+            face = ingame_font_face,
+            size = 14,
+            italic = true,
+         },
+         align = "center",
+         space_before = ingame_text_space_before,
+         space_after = ingame_text_space_after,
+      },
+      authors_heading_1 = {
+         font = {
+            color = {244, 161, 49},
+            face = ingame_font_face,
+            size = 24,
+         },
+         space_before = ingame_text_space_before,
          space_after = ingame_text_space_after,
       },
       ingame_heading_1 = {
@@ -823,6 +858,16 @@ return {
             bold = true,
          },
          space_before = ingame_heading_space_before_big,
+         space_after = ingame_heading_space_after,
+      },
+      ingame_objectives_heading = {
+         font = {
+            color = ingame_heading_color,
+            face = ingame_font_face,
+            size = 18,
+            bold = true,
+         },
+         space_before = ingame_heading_space_before_small,
          space_after = ingame_heading_space_after,
       },
       ingame_heading_2 = {
@@ -851,7 +896,7 @@ return {
             size = 12,
             italic = true,
          },
-         space_before = 0,
+         space_before = ingame_text_space_before,
          space_after = ingame_text_space_after,
       },
       ingame_text = {
@@ -860,8 +905,19 @@ return {
             face = ingame_font_face,
             size = 12,
          },
-         space_before = 0,
+         space_before = ingame_text_space_before,
          space_after = ingame_text_space_after,
+      },
+      ingame_lore_author = {
+         font = {
+            color = ingame_text_color,
+            face = ingame_font_face,
+            size = 10,
+            italic = true,
+         },
+         align = "right",
+         space_before = ingame_text_space_before,
+         space_after = ingame_text_space_after + 3,
       },
 
       -- Returned when lookup by name fails.

@@ -5,7 +5,7 @@ push_textdomain("texts")
 local r = {
    rt(fs_color(
       title("Widelands/Widelands.ttf", img("images/logos/wl-ico-32.png") .. "Widelands") ..
-      p_font("align=center", "size=14 italic=1 color=D1D1D1", _("an open source strategy game")) ..
+      subtitle(_("an open source strategy game")) ..
       help_introduction() ..
       p(vspace(3)) .. inline_header(_("Check out the Widelands project homepage:"), a("widelands.org", "url", "https://www.widelands.org")) .. p(vspace(3)) ..
       p(_("Widelands is licensed under the GNU General Public License (GPL). For more information, see the file ‘COPYING’.")) ..
