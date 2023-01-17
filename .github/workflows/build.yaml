@@ -408,6 +408,7 @@ jobs:
   dev_release:
     name: Automated development pre-release
     # TODO reenable if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
+    if: ${{ always() }}
     needs: [windows, windows-msvc, macos, appimage]
     runs-on: "ubuntu-latest"
     steps:
