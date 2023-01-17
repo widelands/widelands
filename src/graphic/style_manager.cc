@@ -119,7 +119,7 @@ RGBAColor read_rgba_color(const LuaTable& table) {
 }
 
 // Read optional bool value from LuaTable
-int read_bool(const LuaTable& table, const std::string& key) {
+bool read_bool(const LuaTable& table, const std::string& key) {
 	return table.has_key(key) ? table.get_bool(key) : false;
 }
 
