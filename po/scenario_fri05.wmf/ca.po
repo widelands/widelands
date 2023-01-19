@@ -169,6 +169,13 @@ msgid ""
 "will inspire his soldiers to fight as hard as my own troops will strive to "
 "reclaim our home."
 msgstr ""
+"Per una vegada la mar estava tranquil·la i permeté un retorn al sud fàcil. "
+"En Henneke i jo vam passar gran part del viatge drets mentre esperàvem "
+"arribar a casa. En Reebaud primer estava dret a coberta, però mirava enrere,"
+" enlloc de mirar endavant con nosaltres. S'estima la seva nova llar tant com"
+" jo m'estimo la meva. Volem tornar vius i una victòria inspiraria als seus "
+"soldats a lluitar amb tantes ganes com els meus, que voldran reclamar les "
+"seves terres."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:109
@@ -227,6 +234,11 @@ msgid ""
 "hope – it is obviously a sign that our perilous endeavour is blessed by the "
 "saints."
 msgstr ""
+"Hem sobreviscut gràcies a la sort. Les nostres naus no han rebut massa dany "
+"ni s'ha perdut cap mariner per les onades. No em creuria que siguem tan "
+"afortunats si no ho hagués presenciat. La nostra fugida increïble m'omple "
+"d'esperança. És òbviament un senyal que la nostra missió està beneïda pels "
+"sants."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:132
@@ -238,6 +250,12 @@ msgid ""
 "hospitality, and the chance to rest and refresh ourselves before the battle "
 "will make a difference. Some of them might even join our cause."
 msgstr ""
+"La tempesta ha desviat el vaixell dos dies del rumb previst. Afortunadament,"
+" puc reconèixer aquestes aigües i podrem corregir el rumb. Quan la tempesta "
+"ha amainat, estàvem a prop de l'illa de Helgoland i hem decidit parar-hi. "
+"Els illencs tenen fama d'hospitalaris i aquesta oportunitat de descansar i "
+"recuperar-nos abans de la batalla no l'havíem de perdre. Potser fins i tot "
+"algun illenc s'uneixi a la nostra causa."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:136
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:143
@@ -262,6 +280,11 @@ msgid ""
 "and despite these hard times I am pleased and honoured to receive such "
 "illustrious guests."
 msgstr ""
+"Pau! I us donem la benvinguda a Helgoland! La vostra reputació ha arribat "
+"fins a aquesta illa, Claus Lembeck, el senyor respectat de Föhr, i Reebaud, "
+"a qui els bards anomenen valent i poderós. Jo sóc en Ocke Ketelsen, senyor "
+"de Helgoland i, tot i que són temps difícils, m'honra rebre uns convidats "
+"tan il·lustres."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:144
 msgid "Hospitality"
@@ -277,6 +300,12 @@ msgid ""
 " Assuming you don’t mind if I ask and that this question does not appear "
 "impertinent, I would like to know if we can help you in any way."
 msgstr ""
+"Pau i gràcies per la vostra acollida amistosa, Ocke Ketelsen! És un canvi "
+"molt agradable que no ens vegem abocats a lluitar per haver parat en aquesta"
+" illa. Encara que la vostra benvinguda soni breu. Com que les vostres "
+"paraules són càlides, només puc concloure que teniu algun altre tipus de "
+"problema. Si no us molesta que pregunti i sense ànim de ser impertinent, "
+"m'agradaria saber si us podem ajudar."
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 7
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:153
@@ -297,6 +326,8 @@ msgstr "Enemics"
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:160
 msgid "Danes! Does Atterdag’s thirst for conquest reach this far then?"
 msgstr ""
+"Vaja! La set de l'Attergad per conquerir més territoris ha arribat fins "
+"aquí?"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 9
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:167
@@ -304,6 +335,8 @@ msgid ""
 "It does. I see that you recognize this enemy, and I would be interested in "
 "hearing how you met – though I imagine it will not have gone well for them!"
 msgstr ""
+"Sí. Veig que reconeixeu l'enemic i estaria interessat en que m'expliqueu com"
+" us vau conèixer, encara que imagino que no va acabar massa bé per a ells."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:174
@@ -314,6 +347,11 @@ msgid ""
 "fact, we were sailing to Föhr to drive the invaders out once and for all "
 "when a storm blew us off our course and to Helgoland."
 msgstr ""
+"Aquesta pressuposició no és certa. Per a mirar de ser breu, només diré que "
+"l'Atterdag va envair Föhr amb una força tan brutal que vaig haver de fugir "
+"de l'illa i demanar ajuda al Reebaud per a recuperar-la. De fet, navegàvem "
+"cap a Föhr per a fer fora als invasors d'una vegada per totes quan una "
+"tempesta ens va desviar del curs cap a Helgoland."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:177
@@ -322,6 +360,8 @@ msgid ""
 "fight this enemy. A warm-up battle, so to speak – I am looking forward to "
 "it!"
 msgstr ""
+"Que potser ha estat una intervenció divina. Us ajudarem a lluitar contra "
+"l'enemic. Una batalla d'escalfament, com si diguéssim. L'espero amb ganes."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:196
@@ -337,6 +377,10 @@ msgid ""
 "enormous force of Danish soldiers, and even your mighty soldiers will not be"
 " able to defeat them all."
 msgstr ""
+"El vostre entusiasme m'escalfa tant com el que dieu em desperta simpatia. "
+"Però els enemics són més poderosos del que pareix. Han portat una força "
+"enorme de soldats danesos i, fins i tot els vostres soldats més valents, no "
+"poden derrotar-los."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:189
@@ -345,6 +389,10 @@ msgid ""
 "farmers, we do not have the expertise or economy to support a drawn-out "
 "battle. Your expertise in this area would be much appreciated."
 msgstr ""
+"La nostra illa no està avesada a aquest tipus de guerra. Som pescadors i "
+"grangers, no tenim experiència ni una economia que pugui suportar una "
+"batalla constant. La vostra experiència en aquesta àrea serà molt "
+"benvinguda."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:192
@@ -352,6 +400,8 @@ msgid ""
 "But first let me give you a clear picture of our small island by showing you"
 " around."
 msgstr ""
+"Però primer deixeu que us expliqui una mica com és la nostra illa. Deixeu-me"
+" que us la mostri."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:197
 msgid "Economy"
@@ -365,6 +415,9 @@ msgid ""
 "any trees, and no places where you could mine iron and other minerals! How "
 "do you come by?"
 msgstr ""
+"Com viviu aquí? Aquestes roques són impressionants però no veig com els "
+"pedrers podrien traure pedres per a construir cases. Pocs arbres veig i no "
+"hi ha lloc d'on traure ferro i altres minerals! Com sobreviviu?"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:206
@@ -377,6 +430,12 @@ msgid ""
 " I will take care of the rest. This chart indicates how many goods of which "
 "sorts we usually trade."
 msgstr ""
+"Amb el comerç. Venem gra, peix i altres béns als pobles de terra ferma i hi "
+"comprem minerals i granit. Repartim-nos les tasques segons el que fem "
+"millor: vós reorganitzeu l'economia de guerra i entrenaments dels soldats i "
+"jo importaré els béns que us facin falta. Deixeu els béns que voleu vendre "
+"als ports i jo ja me n'encarregaré de la resta. Aquest gràfic indica quants "
+"béns intercanviem habitualment."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:212
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:225
@@ -398,6 +457,9 @@ msgid ""
 " woefully unguarded. We must plan ahead tactically, because I agree that "
 "this battle will not be won quickly."
 msgstr ""
+"Primer, el primer. Aquesta població té una posició defensiva, però està mal "
+"guardada. Hem de planificar i escollir unes tàctiques adequades, perquè "
+"aquesta guerra no es guanyarà de pressa."
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:218
@@ -411,6 +473,13 @@ msgid ""
 "advance. Of course we’d be cut off from the ports and the trade routes, so "
 "we should try to avoid getting to this point."
 msgstr ""
+"Les Terres Altes només tenen una entrada: aquesta rampa de la dreta del "
+"centre del poble. Construïm-hi tots els edificis productius importants. Unes"
+" quantes fortaleses situades a prop una de l'altra a la dreta farien que "
+"conquerir la plana fos pràcticament impossible. Fins i tot si l'enemic fos "
+"capaç de conquerir tota l'illa baixa, podríem resistir molts anys aquí si "
+"tinguéssim prou recursos emmagatzemats. Estaríem aïllats dels ports i de les"
+" rutes comercials i, per això, seria millor no arribar a aquesta situació."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:226
 msgid "Fortify the narrow"
@@ -429,6 +498,14 @@ msgid ""
 " unwise to build anything at all north of the pass, as it would be "
 "dangerously exposed."
 msgstr ""
+"El que més urgeix és la seguretat del pas a prop del port del nord. L'enemic"
+" ha de passar per un estret si ens vol atacar, però el mateix també és cert "
+"a l'inrevés. Si anem amb compte, podem agafar l'enemic desprevingut durant "
+"molt temps fins que puguem llançar un contraatac. No obstant, el pas és "
+"massa estret per a fortificar-lo com es pot fer a les Terres Altes. Hem de "
+"construir tantes fortaleses a prop una de l'altra com sigui possible per tal"
+" d'evitar que l'enemic guany terreny. Seria poc prudent construir-hi res al "
+"nord del pas, ja que és un lloc molt exposat."
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:231
@@ -439,6 +516,10 @@ msgid ""
 "otherwise, will be in constant danger of being burnt down during a Danish "
 "incursion."
 msgstr ""
+"En funció dels materials de construcció que puguem fer servir, seria "
+"convenient desmuntar alguns dels edificis d'aquí per a fer espai per a més "
+"fortificacions. En tot cas, tots els edificis de l'àrea, siguin militars o "
+"no, estaran en perill constant que cremin durant la incursió danesa."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:239
 msgid "Wood supply"
@@ -451,6 +532,9 @@ msgid ""
 "buildings. Besides their strategic value they offer lots of space for "
 "construction, of which the lower island is somewhat short."
 msgstr ""
+"Tal com en Reebaud indica, les Terres Altes són la millor posició per a "
+"construir edificis nous. A banda del seu valor estratègic, ofereixen molts "
+"llocs de construcció que no trobarem a la part inferior de l'illa."
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:244
@@ -461,6 +545,12 @@ msgid ""
 "for wood, so we must secure our wood production at once before all our wood "
 "has been used up by the smokeries and charcoal burners!"
 msgstr ""
+"I pel que fa a què construir-hi, hi estic en desacord. Més construccions "
+"militars ens poden ser útils, però encara més útil és l'habilitat de "
+"construir edificis. No hi ha llenyataires enlloc de la illa i no podem "
+"confiar en el comerç per a aconseguir fusta. Per això hem d'assegurar la "
+"producció de fusta el més aviat possible, abans que s'acabi la fusta que "
+"cremen els fumadors i els carboners."
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:247
@@ -471,6 +561,12 @@ msgid ""
 " down here and relocate some of the farms to the Uplands. Farms, reed farms,"
 " and berry farms do not depend on fertile land quite as much as trees do."
 msgstr ""
+"El terreny sembla erm, així que necessitarem reservar més espai per a "
+"plantar-hi arbres del que voldria. Les Terres Baixes sembla que siguin més "
+"fèrtils. Potser seria convenient construir-hi cases de guardes forestals i "
+"llenyataires a baix i canviar el lloc d'algunes granges a les terres altes. "
+"Les masoveries normals, de juncs o de baies no depenen de la fertilitat de "
+"la terra tant com els arbres."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:255
 msgid "Long-term strategy"
@@ -486,6 +582,12 @@ msgid ""
 "provide enough weapons and armour as well as food for our soldiers. Needless"
 " to say, a pair of training sites and a barracks are also essential."
 msgstr ""
+"El comerç ja ha començat. Ara hem de planificar el reclutament i l'economia "
+"militar. Tenim producció bàsica de menjar i de metalls, però sembla que no "
+"serà suficient per a cobrir les nostres necessitats. Necessitarem més i "
+"millors edificis per a proporcionar prou armes i armadures, així com menjar "
+"per als soldats. No fa falta dir-ho, però faran falta un parell de llocs "
+"d'entrenament i un quarter."
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:260
@@ -497,10 +599,16 @@ msgid ""
 "expensive, and we will need to mark out a large amount of space purely to "
 "produce wares to sell."
 msgstr ""
+"Haurem de vigilar el subministrament de béns comercials. Demanaré a l'Ocke "
+"Ketelsen que compri només els béns que la nostra economia realment necessiti"
+" i així no malgastem cap recurs, però sembla que dependrà de nosaltres "
+"assegurar-nos d'aconseguir prou béns. Aquestes rutes comercials són molt "
+"cares i haurem de dedicar una gran extensió de terreny només per a produir "
+"béns per a vendre."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
-msgstr ""
+msgstr "Fent dics"
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:268
@@ -511,6 +619,10 @@ msgid ""
 " may need to take some chances, and use superior tactics to compensate for "
 "this disadvantage."
 msgstr ""
+"La falta d'espai a Helgoland encara és un problema. Hi ha prou terreny per "
+"entrenar un nombre decent de soldats en poc temps, però els exèrcits que "
+"potser necessitarem trigarien massa temps! Hem d'arriscar-nos i fer servir "
+"tàctiques per a compensar aquest desavantatge."
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:271
@@ -522,6 +634,12 @@ msgid ""
 "in the east, or if we are to be truly bold we could dike around the whole "
 "western coast of the island to attack the enemy from two sides at once!"
 msgstr ""
+"No obstant, si preferiu jugar de manera més segura, no oblideu que podem fer"
+" més gran l'illa. Com que tenim un subministrament constant de troncs, podem"
+" construir dics i espigons per a aconseguir més espai on construir. Quan "
+"estiguéssim preparats per a atacar, podem fer-los servir per a creuar "
+"l'estret de l'est o, si som molt valents, podríem fer dics a tota la costa "
+"oest de l'illa per a atacar l'enemic des dels dos fronts."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:277
 msgid "Good luck!"
@@ -533,6 +651,8 @@ msgid ""
 "I am heartened by your forwardness. Let us all hasten to our separate tasks,"
 " and may fortune smile on us!"
 msgstr ""
+"Fantàstic! Afanyem-nos cadascú a fer les seves tasques i que la fortuna ens "
+"somrigui!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:283
 msgid "Wood Supply"
@@ -549,6 +669,8 @@ msgid ""
 "time before we have a steady supply of logs, but the immediate problem has "
 "been averted."
 msgstr ""
+"Els guardes forestals i llenyataires han començat a treballar. Trigarem una "
+"mica fins que tinguem un subministrament adequat de troncs."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:290
 msgid "Pass Secured"
@@ -646,6 +768,13 @@ msgid ""
 "that might be useful – any piece of tactical advice – any towns who might "
 "join us – please share this information with us."
 msgstr ""
+"I rebeu les meves gràcies més sinceres per la promesa d'enviar-nos soldats. "
+"Ja sabia que l'Atterdag era un enemic formidable, però les forces amb les "
+"que ens hem trobat superen qualsevol altra que hagi vist en tota la meva "
+"vida, i només eren l'avantguarda! Hem d'aprofitar qualsevol avantatge que "
+"puguem aconseguir i, fins i tot així, no estic segur que aconseguim la "
+"victòria. Si heu sentit res que ens pugui ajudar, com ara qualsevol consell "
+"tàctic o poble que ens pugui ajudar, compartiu la informació, si us plau."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:325
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:335
@@ -662,6 +791,12 @@ msgid ""
 "stronghold on Föhr has always been their only defence to speak of, so once "
 "you were gone he seized the entire area with ease."
 msgstr ""
+"Ho faré amb molt de gust. La veritat és que, pel que m'han dit els meus "
+"contactes comercials, la set de conquesta de l'Atterdag no té limit. Després"
+" que s'establís a Föhr, ha conquerit totes les altres illes del seu voltant."
+" La vostra fortalesa de Föhr és de fa temps l'única posició estratègica "
+"forta de la zona. Així que, una vegada va conquerir Föhr, li va ser fàcil "
+"conquerir la resta."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:330
@@ -672,6 +807,11 @@ msgid ""
 "said to have been executed for embezzling a bushel of grain. People are "
 "suffering, and will no doubt gladly join anyone who comes to free them."
 msgstr ""
+"Es rumoreja que els ocupants governen amb mà dura. És conegut que han tallat"
+" totes les rutes comercials i els locals han de donar la meitat de tot el "
+"que produeixen als danesos com a tribut. La meitat! Es diu que ja han "
+"executat a dotzenes de persones per l'estraperlo de gra. La gent pateix i no"
+" dubtaran a unir-se a la causa de qualsevol que els vulgui alliberar."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:337
@@ -681,6 +821,10 @@ msgid ""
 " swear that the pirates were in fact Danish soldiers, and that their ships "
 "belong to the Danish fleet."
 msgstr ""
+"Hi ha una cosa més. Els vaixells comercials que intenten navegar pel nord de"
+" l'àrea ocupada han estat assaltats i enfonsats pels pirates. Els "
+"supervivents juren que els pirates eren de fet soldats danesos i que els "
+"seus vaixells pertanyen a la flota danesa."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:340
@@ -691,6 +835,12 @@ msgid ""
 "would do that. Clearly he attempts to disguise this fact. Why would he do "
 "that, unless he believes this secret to be of strategical importance?"
 msgstr ""
+"Són només especulacions, però crec que l'Atterdag transporta tropes de la "
+"capital danesa a les illes que conquereix amb vaixells. La ruta terrestre és"
+" molt més llarga i més sinuosa. Per això no és massa complicat entendre per "
+"què ho fa així. No obstant, intenta que no es vegi com mou les tropes. Per "
+"què ho faria així, si no és perquè creu que aquest secret és d'importància "
+"estratègica?"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:343
@@ -704,6 +854,14 @@ msgid ""
 "ships, you can seize the islands and build a belt of inconquerable "
 "strongholds that block any enemy ship attempting to pass."
 msgstr ""
+"Desconec quants soldats intercanvia entre la capital i les illes amb "
+"vaixells, però sembla que el nombre sigui prou gran com per a aconsellar-vos"
+" que talleu les vies d'intercanvi. Com ja sabeu, aquestes zones estan "
+"connectades només per via marítima que passa per un estret que es diu "
+"Kattegat. L'estret té unes milles d'ample i està esquitxat amb illes "
+"petites. Si podeu arribar-hi sense que us ataquin les seves naus, podeu "
+"conquerir-les i construir-hi un cinturó de fortaleses inexpugnables que "
+"bloquin qualsevol vaixell enemic que hi vulgui passar."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:348
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:362
@@ -718,6 +876,10 @@ msgid ""
 " then we’ll raise the people of Föhr and all the other islands in joint "
 "rebellion against the invader!"
 msgstr ""
+"I si el podem blocar, perdran la seva ruta comercial més important. Ho hem "
+"d'intentar. Navegarem al Kattegat ara mateix per a conquerir l'estret i "
+"després unirem la gent de Föhr i totes les altres illes perquè ens rebel·lem"
+" junts contra l'invasor!"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 6
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:357
@@ -729,6 +891,12 @@ msgid ""
 "to me afterwards. In the meantime, we will use the industry you built for us"
 " to train more soldiers who shall aid you in your subsequent endeavours."
 msgstr ""
+"Voldria fer una sol·licitud més. Una sol·licitud i una oferta. Els meus "
+"fills, en Harke Ockesen i Eschel Ockesen, s'entrenen com a soldats i "
+"comandants. Estaria molt agraït si deixeu que us acompanyin al Kattegat per "
+"a què guanyin experiència i, després, me'ls retorneu. Durant aquest temps, "
+"farem servir la indústria per a entrenar més soldats, que us ajudaran en el "
+"futur."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:364

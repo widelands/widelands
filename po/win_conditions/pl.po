@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-16 09:46+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
@@ -192,14 +192,6 @@ msgstr "Niekończąca się gra"
 #: ../../data/scripting/win_conditions/endless_game.lua:16
 msgid "This is an endless game without rules."
 msgstr "Niekończąca się gra bez wytycznych."
-
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:14
-msgid "Endless Game (no fog)"
-msgstr "Niekończąca się gra (bez mgły)"
-
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
-msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr "Niekończąca się gra bez wytycznych. Mgła wojny jest wyłączona."
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
