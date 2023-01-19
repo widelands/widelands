@@ -37,10 +37,10 @@ local ingame_heading_color = {209, 209, 209}
 local ingame_text_color = wui_font_color
 local ingame_padding = 6
 local ingame_text_space_before = 0
-local ingame_text_space_after = 2 * ingame_padding
+local ingame_text_space_after = ingame_padding
 local ingame_heading_space_before_big = 2 * ingame_padding
 local ingame_heading_space_before_small = ingame_padding
-local ingame_heading_space_after = ingame_text_space_after + 1
+local ingame_heading_space_after = 2 * ingame_padding
 
 local unknown_font_color = {209, 45, 45}
 local unknown_font_face = "sans"
@@ -847,8 +847,8 @@ return {
             face = ingame_font_face,
             size = 24,
          },
-         space_before = ingame_text_space_before,
-         space_after = ingame_text_space_after,
+         space_before = ingame_heading_space_before_big,
+         space_after = ingame_heading_space_after,
       },
       ingame_heading_1 = {
          font = {

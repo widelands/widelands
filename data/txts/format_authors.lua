@@ -7,5 +7,5 @@ function h1_authors(text)
 end
 
 function h2_authors(text)
-   return h2(text .. vspace(3))
+   return h2(text .. vspace(1))
 end

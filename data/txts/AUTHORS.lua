@@ -17,7 +17,6 @@ function list_authors()
             result = result .. p(img(category["image"]) .. " " .. member)
          end
       end
-      result = result .. p(vspace(6))
    end
    return result
 end

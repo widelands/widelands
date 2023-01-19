@@ -49,9 +49,7 @@ std::string ParagraphStyleInfo::open_paragraph(const std::string& attrib) const 
 }
 
 std::string ParagraphStyleInfo::close_paragraph() const {
-	const int gap2 = space_after_ / 2;
-	const int gap1 = space_after_ - gap2;
-	return format("%s</font>%s</p>", as_vspace(gap1), as_vspace(gap2));
+	return format("</font>%s</p>", as_vspace(space_after_));
 }
 
 }  // namespace UI
