@@ -498,7 +498,7 @@ void InfoPanel::think() {
 		      p->get_x() < snap_target_toolbar_.get_x() + snap_target_toolbar_.get_w())) &&
 		    (on_top_ ? (p->get_y() < snap_target_panel_.get_y() + snap_target_panel_.get_h()) :
                      (p->get_y() + p->get_h() > snap_target_panel_.get_y()))) {
-			if (UI::Window* w = dynamic_cast<UI::Window*>(p)) {
+			if (UI::Window* w = dynamic_cast<UI::Window*>(p); w != nullptr && !w->moved_by_user()) {
 				w->set_pos(Vector2i(
 				   w->get_x(), on_top_ ? snap_target_panel_.get_y() + snap_target_panel_.get_h() :
                                      snap_target_panel_.get_y() - w->get_h()));
