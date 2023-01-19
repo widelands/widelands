@@ -287,6 +287,11 @@ msgid ""
 "and despite these hard times I am pleased and honoured to receive such "
 "illustrious guests."
 msgstr ""
+"Paix et bienvenue à Helgoland! Votre réputation vous précède, Claus Lembeck,"
+" le seigneur bien-aimé de Föhr, et Reebaud que les bardes appellent le "
+"Téméraire, le Brave et le Puissant. Je suis Ocke Ketelsen, échevin principal"
+" de Helgoland, et malgré ces temps difficiles, je suis heureux et honoré de "
+"recevoir des invités aussi illustres."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:144
 msgid "Hospitality"
@@ -302,6 +307,14 @@ msgid ""
 " Assuming you don’t mind if I ask and that this question does not appear "
 "impertinent, I would like to know if we can help you in any way."
 msgstr ""
+"Paix et merci pour votre salut amical, Ocke Ketelsen! C'est un changement "
+"agréable de ne pas être forcé d'entrer en guerre contre quelqu'un sur l'île "
+"duquel nous débarquons. Pourtant, votre accueil semble étrangement court. "
+"Puisque vos paroles sont si chaleureuses, je ne peux que conclure qu'une "
+"autre sorte de problème vous est arrivé. En supposant que cela ne vous "
+"dérange pas si je pose la question et que cette question ne semble pas "
+"impertinente, j'aimerais savoir si nous pouvons vous aider de quelque façon "
+"que ce soit."
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 7
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:153
@@ -309,6 +322,8 @@ msgid ""
 "You are remarkably astute. Indeed we have a problem, and you can see it "
 "right over there."
 msgstr ""
+"Vous êtes remarquablement astucieux. En effet, nous avons un problème, et "
+"vous pouvez le voir là-bas."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:158
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:165
@@ -320,7 +335,7 @@ msgstr ""
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:160
 msgid "Danes! Does Atterdag’s thirst for conquest reach this far then?"
-msgstr ""
+msgstr "Danes! La soif de conquête d'Atterdag va-t-elle jusque-là ?"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 9
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:167
