@@ -119,9 +119,8 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 	const bool mirror = UI::g_fh->fontset()->is_rtl();
 	add_space(kSpacing);
 	add(new UI::Textarea(this, UI::PanelStyle::kFsMenu,
-	                     (t == TechInfoBox::Type::kAbout) ?
-                        UI::FontStyle::kAboutTitle :
-                        UI::FontStyle::kFsGameSetupHeadings,
+	                     (t == TechInfoBox::Type::kAbout) ? UI::FontStyle::kAboutTitle :
+                                                           UI::FontStyle::kFsGameSetupHeadings,
 	                     _("Technical Info"), UI::Align::kCenter),
 	    UI::Box::Resizing::kFullSize);
 	add_space(2 * kSpacing);
