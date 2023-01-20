@@ -19,36 +19,38 @@
 #include "ui_fsmenu/addons/login_box.h"
 
 #include "base/string.h"
+#include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "third_party/sha1/sha1.h"
-#include "ui_fsmenu/addons/manager.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 
-namespace FsMenu::AddOnsUI {
+namespace AddOnsUI {
 
-AddOnsLoginBox::AddOnsLoginBox(AddOnsCtrl& ctrl)
-   : UI::Window(&ctrl.get_topmost_forefather(),
-                UI::WindowStyle::kFsMenu,
-                "login",
-                0,
-                0,
-                100,
-                100,
-                _("Login")),
+constexpr int16_t kRowButtonSize = 32;
+constexpr int16_t kRowButtonSpacing = 4;
+
+constexpr const char* const kRegisterURL = "https://widelands.org/accounts/register/";
+
+AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
+   : UI::Window(&parent, style, "login", 0, 0, 100, 100, _("Login")),
      password_sha1_(get_config_string("password_sha1", "")),
-     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     left_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     right_box_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     username_(&right_box_, 0, 0, 400, UI::PanelStyle::kFsMenu),
-     password_(&right_box_, 0, 0, 400, UI::PanelStyle::kFsMenu),
+     box_(this, panel_style_, 0, 0, UI::Box::Vertical),
+     hbox_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
+     left_box_(&hbox_, panel_style_, 0, 0, UI::Box::Vertical),
+     right_box_(&hbox_, panel_style_, 0, 0, UI::Box::Vertical),
+     buttons_box_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
+     username_(&right_box_, 0, 0, 400, panel_style_),
+     password_(&right_box_, 0, 0, 400, panel_style_),
      ok_(&buttons_box_,
          "ok",
          0,
          0,
          kRowButtonSize,
          kRowButtonSize,
-         UI::ButtonStyle::kFsMenuPrimary,
+         style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuPrimary :
+                                             UI::ButtonStyle::kWuiPrimary,
          _("OK")),
      cancel_(&buttons_box_,
              "cancel",
@@ -56,7 +58,8 @@ AddOnsLoginBox::AddOnsLoginBox(AddOnsCtrl& ctrl)
              0,
              kRowButtonSize,
              kRowButtonSize,
-             UI::ButtonStyle::kFsMenuSecondary,
+             style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                 UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
      reset_(&buttons_box_,
             "reset",
@@ -64,25 +67,36 @@ AddOnsLoginBox::AddOnsLoginBox(AddOnsCtrl& ctrl)
             0,
             kRowButtonSize,
             kRowButtonSize,
-            UI::ButtonStyle::kFsMenuSecondary,
+            style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                UI::ButtonStyle::kWuiSecondary,
             _("Reset")) {
 	UI::MultilineTextarea* m =
-	   new UI::MultilineTextarea(&box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "",
-	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
-	m->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
-	m->set_text(format(
-	   _("In order to use a registered account, you need an account on the Widelands website. "
-	     "Please log in at %s and set an online gaming password on your profile page."),
-	   "\n\nhttps://widelands.org/accounts/register/\n\n"));
+	   new UI::MultilineTextarea(&box_, 0, 0, 100, 100, panel_style_, "", UI::Align::kLeft,
+	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	m->set_text(as_richtext(
+	   g_style_manager
+	      ->font_style(style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
+                                                          UI::FontStyle::kWuiInfoPanelParagraph)
+	      .as_font_tag(format(
+	         _("In order to use a registered account, you need an account on the Widelands website. "
+	           "Please log in at %s and set an online gaming password on your profile page."),
+	         g_style_manager
+	            ->font_style(style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsTooltip :
+                                                                UI::FontStyle::kWuiTooltip)
+	            .as_font_tag(as_url_hyperlink(kRegisterURL))))));
 
 	left_box_.add_inf_space();
 	left_box_.add(
-	   new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	   new UI::Textarea(&left_box_, panel_style_,
+	                    style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
+                                                           UI::FontStyle::kWuiInfoPanelHeading,
 	                    _("Username:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	left_box_.add_inf_space();
 	left_box_.add(
-	   new UI::Textarea(&left_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	   new UI::Textarea(&left_box_, panel_style_,
+	                    style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
+                                                           UI::FontStyle::kWuiInfoPanelHeading,
 	                    _("Password:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	left_box_.add_inf_space();
@@ -176,4 +190,4 @@ void AddOnsLoginBox::reset() {
 	}
 }
 
-}  // namespace FsMenu::AddOnsUI
+}  // namespace AddOnsUI

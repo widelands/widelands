@@ -48,7 +48,7 @@
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
-namespace FsMenu::AddOnsUI {
+namespace AddOnsUI {
 
 constexpr const char* const kDocumentationURL = "https://www.widelands.org/documentation/add-ons/";
 constexpr const char* const kForumURL = "https://www.widelands.org/forum/forum/17/";
@@ -110,7 +110,7 @@ const std::map<unsigned, std::function<AddOnQuality()>> AddOnQuality::kQualities
 
 struct OperationCancelledByUserException : std::exception {};
 
-AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
+AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
    : UI::UniqueWindow(&fsmm,
                       UI::WindowStyle::kFsMenu,
                       "addons",
@@ -721,7 +721,7 @@ AddOnsCtrl::~AddOnsCtrl() {
 void AddOnsCtrl::login_button_clicked() {
 	if (username_.empty()) {
 		UI::UniqueWindow::Registry r;
-		AddOnsLoginBox b(*this);
+		AddOnsLoginBox b(get_topmost_forefather(), UI::WindowStyle::kFsMenu);
 		if (b.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
 		}
@@ -1362,7 +1362,8 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		}
 	}
 
-	ProgressIndicatorWindow w(&get_topmost_forefather(), addon->descname());
+	ProgressIndicatorWindow w(
+	   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, addon->descname());
 	w.set_message_1(format(_("Uploading ‘%s’…"), addon->descname()));
 	try {
 		int64_t nr_files = 0;
@@ -1403,7 +1404,8 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 // requirements
 void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
                                     const bool only_translations) {
-	ProgressIndicatorWindow w(&get_topmost_forefather(), remote->descname());
+	ProgressIndicatorWindow w(
+	   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, remote->descname());
 	w.set_message_1(format(_("Downloading ‘%s’…"), remote->descname()));
 
 	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + timestring() + ".addon." +
@@ -1617,4 +1619,4 @@ step1:
 }
 #endif
 
-}  // namespace FsMenu::AddOnsUI
+}  // namespace AddOnsUI

@@ -30,7 +30,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
-namespace FsMenu::AddOnsUI {
+namespace AddOnsUI {
 
 class AddOnsCtrl;
 
@@ -51,6 +51,6 @@ private:
 	UI::Textarea progress_;
 };
 
-}  // namespace FsMenu::AddOnsUI
+}  // namespace AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_SCREENSHOT_UPLOAD_H

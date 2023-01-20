@@ -113,6 +113,7 @@ MutableAddOn::MutableAddOn(const AddOnInfo& a)
      min_wl_version_(a.min_wl_version),
      max_wl_version_(a.max_wl_version),
      category_(a.category),
+     force_sync_safe_(false),
      directory_(kAddOnDir + FileSystem::file_separator() + internal_name_) {
 }
 
@@ -191,6 +192,7 @@ bool MutableAddOn::write_to_disk() {
 	s.set_string("requires", requirements);
 	s.set_string("min_wl_version", min_wl_version_);
 	s.set_string("max_wl_version", max_wl_version_);
+	s.set_bool("sync_safe", force_sync_safe_);
 
 	p.write(profile_path().c_str(), false);
 

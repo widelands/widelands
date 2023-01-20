@@ -29,11 +29,11 @@
 #include "ui_fsmenu/addons/packager_box.h"
 #include "ui_fsmenu/addons/progress.h"
 
-namespace FsMenu::AddOnsUI {
+namespace AddOnsUI {
 
 class AddOnsPackager : public UI::Window {
 public:
-	explicit AddOnsPackager(MainMenu&, AddOnsCtrl&);
+	explicit AddOnsPackager(FsMenu::MainMenu&, AddOnsCtrl&);
 
 	WindowLayoutID window_layout_id() const override {
 		return UI::Window::WindowLayoutID::kFsMenuDefault;
@@ -44,7 +44,7 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
-	MainMenu& main_menu_;
+	FsMenu::MainMenu& main_menu_;
 	AddOnsCtrl& ctrl_;
 
 	UI::Box main_box_, box_left_, box_right_, box_left_buttons_, box_right_subbox_header_hbox_,
@@ -83,6 +83,6 @@ private:
 	ProgressIndicatorWindow progress_window_;
 };
 
-}  // namespace FsMenu::AddOnsUI
+}  // namespace AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_PACKAGER_H
