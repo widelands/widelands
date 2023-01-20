@@ -34,7 +34,7 @@ std::string ParagraphStyleInfo::open_paragraph(const std::string& attrib) const 
 		attribs_out += " align=" + halign_;
 	}
 	if (!valign_.empty()) {
-		attribs_out += " align=" + halign_;
+		attribs_out += " valign=" + valign_;
 	}
 	if (indent_ > 0) {
 		attribs_out += format(" indent=%d", indent_);

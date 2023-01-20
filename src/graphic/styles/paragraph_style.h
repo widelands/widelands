@@ -27,7 +27,7 @@
 namespace UI {
 enum class ParagraphStyle {
 	kReadmeTitle,
-	kIngameTitle,
+	kAboutTitle,
 	kIngameSubtitle,
 	kAuthorsHeading1,
 	kIngameHeading1,
@@ -36,6 +36,8 @@ enum class ParagraphStyle {
 	kIngameHeading3,
 	kIngameHeading4,
 	kIngameText,
+	kAboutText,
+	kAboutSparse,
 	kIngameLoreAuthor,
 
 	// Returned when lookup by name fails

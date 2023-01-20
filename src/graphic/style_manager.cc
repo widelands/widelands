@@ -348,13 +348,14 @@ StyleManager::StyleManager() {
 	add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
 	add_font_style(UI::FontStyle::kFsMenuWindowTitle, *element_table, "fs_window_title");
 	add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
+	add_font_style(UI::FontStyle::kAboutTitle, *element_table, "about_title");
 	add_font_style(UI::FontStyle::kUnknown, *element_table, "unknown");
 	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kUnknown));
 
 	// Paragraphs
 	element_table = table->get_table("paragraphs");
 	add_paragraph_style(UI::ParagraphStyle::kReadmeTitle, *element_table, "readme_title");
-	add_paragraph_style(UI::ParagraphStyle::kIngameTitle, *element_table, "ingame_title");
+	add_paragraph_style(UI::ParagraphStyle::kAboutTitle, *element_table, "about_title");
 	add_paragraph_style(UI::ParagraphStyle::kIngameSubtitle, *element_table, "ingame_subtitle");
 	add_paragraph_style(UI::ParagraphStyle::kAuthorsHeading1, *element_table, "authors_heading_1");
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading1, *element_table, "ingame_heading_1");
@@ -364,6 +365,8 @@ StyleManager::StyleManager() {
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading3, *element_table, "ingame_heading_3");
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading4, *element_table, "ingame_heading_4");
 	add_paragraph_style(UI::ParagraphStyle::kIngameText, *element_table, "ingame_text");
+	add_paragraph_style(UI::ParagraphStyle::kAboutText, *element_table, "about_text");
+	add_paragraph_style(UI::ParagraphStyle::kAboutSparse, *element_table, "about_sparse");
 	add_paragraph_style(UI::ParagraphStyle::kIngameLoreAuthor, *element_table, "ingame_lore_author");
 	add_paragraph_style(UI::ParagraphStyle::kUnknown, *element_table, "unknown");
 	check_completeness(

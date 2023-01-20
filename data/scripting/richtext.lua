@@ -148,7 +148,7 @@ end
 --    :returns: A paragraph with text formatted as title.
 
 function pagetitle(text)
-   return styles.as_paragraph("ingame_title", text)
+   return styles.as_paragraph("about_title", text)
 end
 
 
@@ -219,6 +219,40 @@ function h4(text)
 end
 
 
+-- Variable to store current style for normal paragraphs
+if (_p_style_ == nil) then
+   _p_style_ = "ingame_text"
+end
+
+-- RST
+-- .. function:: set_fs_style(enable)
+--
+--    Change the style for normal paragraphs between the in-game and the main menu styles.
+--
+--    :arg enable: If evaluates to `true`, then the main menu text style will be used for normal
+--                 paragraphs, otherwise the in-game style.
+
+function set_fs_style(enable)
+   if enable then
+      _p_style_ = "about_text"
+   else
+      _p_style_ = "ingame_text"
+   end
+end
+
+
+-- RST
+-- .. function:: fs_color(text)
+--
+--    *Deprecated*. Use `set_fs_style()` instead.
+--
+--    Returns the given text wrapped in a font tag for the
+--    default color that is used for texts in the main menu.
+function fs_color(text)
+   return "<font color=FFDC00>" .. text .. "</font>"
+end
+
+
 -- RST
 -- .. function:: inline_header(header, text)
 --
@@ -233,7 +267,7 @@ function inline_header(header, text)
       -- TODO(tothxa): implement styling for space
       div("width=100%", vspace(8)) ..
       div("width=100%", styles.as_font_from_p("ingame_heading_3", header .. " ") ..
-      styles.as_font_from_p("ingame_text", text))
+      styles.as_font_from_p(_p_style_, text))
 end
 
 
@@ -251,21 +285,10 @@ end
 
 function p(text_or_attributes, text)
    if text then
-      return styles.as_p_with_attr("ingame_text", text_or_attributes, text)
+      return styles.as_p_with_attr(_p_style_, text_or_attributes, text)
    else
-      return styles.as_paragraph("ingame_text", text_or_attributes)
+      return styles.as_paragraph(_p_style_, text_or_attributes)
    end
-end
-
-
--- RST
--- .. function:: fs_color(text)
---
---    Returns the given text wrapped in a font tag for the
---    default color that is used for texts in the main menu.
-function fs_color(text)
-   -- TODO(tothxa): implement styling
-   return "<font color=FFDC00>" .. text .. "</font>"
 end
 
 
@@ -283,9 +306,9 @@ end
 
 function open_p(attributes)
    if attributes then
-      return styles.open_p_with_attr("ingame_text", attributes)
+      return styles.open_p_with_attr(_p_style_, attributes)
    else
-      return styles.open_p("ingame_text")
+      return styles.open_p(_p_style_)
    end
 end
 
@@ -298,7 +321,7 @@ end
 --    :returns: The closing tags for a paragraph
 
 function close_p(t)
-   return styles.close_p("ingame_text")
+   return styles.close_p(_p_style_)
 end
 
 
@@ -322,9 +345,9 @@ end
 
 function p_font(p_or_font_attributes, text_or_font_attributes, text)
    if text then
-      return styles.as_p_with_attr("ingame_text", p_or_font_attributes, font(text_or_font_attributes, text))
+      return styles.as_p_with_attr(_p_style_, p_or_font_attributes, font(text_or_font_attributes, text))
    else
-      return styles.as_p("ingame_text", font(p_or_font_attributes, text_or_font_attributes))
+      return styles.as_p(_p_style_, font(p_or_font_attributes, text_or_font_attributes))
    end
 end
 

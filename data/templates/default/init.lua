@@ -32,7 +32,7 @@ local wui_font_face = "sans"
 local wui_font_size = 14
 
 local ingame_font_face = "sans"
-local ingame_title_color = {47, 145, 49}
+local about_title_color = {47, 145, 49}
 local ingame_heading_color = {209, 209, 209}
 local ingame_text_color = wui_font_color
 local ingame_padding = 6
@@ -59,6 +59,11 @@ local default_fs_font = {
    size = fs_font_size,
    bold = true,
    shadow = true
+}
+local about_title_font = {
+   color = about_title_color,
+   face = ingame_font_face,
+   size = 28,
 }
 
 local default_button_fonts = {
@@ -795,6 +800,7 @@ return {
          bold = true,
          shadow = true
       },
+      about_title = about_title_font,
 
       -- Returned when lookup by name fails.
       -- Make this stand out to help debugging
@@ -811,21 +817,18 @@ return {
       readme_title = {
          -- this is used for the "Widelands" title
          font = {
-            color = ingame_title_color,
+            color = about_title_color,
             -- should be "Widelands/Widelands.ttf", but it's not possible to pass font filename here
             face = ingame_font_face,
             size = 38,
          },
          align = "center",
+         valign = "center",
          space_before = 0,
          space_after = ingame_text_space_after,
       },
-      ingame_title = {
-         font = {
-            color = ingame_title_color,
-            face = ingame_font_face,
-            size = 28,
-         },
+      about_title = {
+         font = about_title_font,
          align = "center",
          space_before = ingame_text_space_before,
          space_after = ingame_text_space_after,
@@ -919,6 +922,25 @@ return {
          space_before = ingame_text_space_before,
          space_after = ingame_text_space_after + 3,
       },
+      about_text = {
+         font = {
+            color = fs_font_color,
+            face = fs_font_face,
+            size = 12,
+         },
+         space_before = ingame_text_space_before,
+         space_after = ingame_text_space_after,
+      },
+      about_sparse = {
+         font = {
+            color = fs_font_color,
+            face = fs_font_face,
+            size = 12,
+         },
+         space_before = ingame_text_space_before + ingame_padding,
+         space_after = ingame_text_space_after,
+      },
+
 
       -- Returned when lookup by name fails.
       -- Make this stand out to help debugging

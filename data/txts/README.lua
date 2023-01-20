@@ -1,10 +1,11 @@
 include "txts/help/common_helptexts.lua"
 
 push_textdomain("texts")
+set_fs_style(true)
 
 local r = {
-   rt(fs_color(
-      title("Widelands/Widelands.ttf", img("images/logos/wl-ico-32.png") .. "Widelands") ..
+   rt(
+      title("Widelands/Widelands.ttf", img("images/logos/wl-ico-32.png") .. " Widelands") ..
       subtitle(_("an open source strategy game")) ..
       help_introduction() ..
       p(vspace(3)) .. inline_header(_("Check out the Widelands project homepage:"), a("widelands.org", "url", "https://www.widelands.org")) .. p(vspace(3)) ..
@@ -32,7 +33,9 @@ local r = {
           li(_("If the bug concerns something not being displayed correctly or if it helps demonstrate the issue, please include one or more screenshots.")) ..
           li(_("If you have a save game or replay demonstrating the issue (for instance crashes where it can be hard to tell exactly what is triggering it), please include that too. For more information, see the section on Replays below."))) ..
       help_replays()
-   ))
+   )
 }
+
+set_fs_style(false)
 pop_textdomain()
 return r
