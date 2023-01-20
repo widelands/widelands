@@ -302,7 +302,10 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 
 	if (message.empty()) {
 		if (is_uploading_addon_) {
-			throw WLWarning("", "Connection interrupted (%s). Please note that you can not upload updates for an add-on more often than every three days.", strerror(errno));
+			throw WLWarning("",
+			                "Connection interrupted (%s). Please note that you can not upload updates "
+			                "for an add-on more often than every three days.",
+			                strerror(errno));
 		}
 		throw WLWarning("", "Connection interrupted (%s)", strerror(errno));
 	}
