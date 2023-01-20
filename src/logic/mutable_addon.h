@@ -69,6 +69,9 @@ public:
 	void set_version(const std::string& version) {
 		version_ = version;
 	}
+	void set_force_sync_safe(bool fss) {
+		force_sync_safe_ = fss;
+	}
 	[[nodiscard]] AddOnCategory get_category() const {
 		return category_;
 	}
@@ -89,6 +92,7 @@ protected:
 	 * The `sync_safe` property is not stored here because all new or updated add-ons
 	 * should by default be marked as sync-unsafe until approved by a reviewer.
 	 */
+	bool force_sync_safe_;
 
 	std::string directory_, backup_path_;
 

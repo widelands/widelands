@@ -295,8 +295,8 @@ void WLApplication::setup_homedir() {
 		// Create directory structure
 		g_fs->ensure_directory_exists("save");
 		g_fs->ensure_directory_exists("replays");
-		g_fs->ensure_directory_exists("maps/My_Maps");
-		g_fs->ensure_directory_exists("maps/Downloaded");
+		g_fs->ensure_directory_exists(kMapsDir + "/" + kMyMapsDir);
+		g_fs->ensure_directory_exists(kMapsDir + "/" + kDownloadedMapsDir);
 	}
 
 #ifdef USE_XDG

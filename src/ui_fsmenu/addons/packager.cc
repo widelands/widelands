@@ -33,12 +33,12 @@
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
-namespace FsMenu::AddOnsUI {
+namespace AddOnsUI {
 
 constexpr int16_t kButtonSize = 32;
 constexpr int16_t kSpacing = 4;
 
-AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
+AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
    : UI::Window(&parent,
                 UI::WindowStyle::kFsMenu,
                 "addons_packager",
@@ -108,8 +108,7 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
          UI::ButtonStyle::kFsMenuPrimary,
          _("OK")),
      addons_(&box_left_, 0, 0, 250, 0, UI::PanelStyle::kFsMenu),
-
-     progress_window_(this, _("Writing Add-Ons…")) {
+     progress_window_(this, UI::WindowStyle::kFsMenu, _("Writing Add-Ons…")) {
 	progress_window_.set_visible(false);
 	progress_window_.set_message_1(_("Please be patient while your changes are written."));
 
@@ -542,4 +541,4 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	}
 }
 
-}  // namespace FsMenu::AddOnsUI
+}  // namespace AddOnsUI
