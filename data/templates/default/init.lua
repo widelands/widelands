@@ -60,11 +60,6 @@ local default_fs_font = {
    bold = true,
    shadow = true
 }
-local about_title_font = {
-   color = about_title_color,
-   face = ingame_font_face,
-   size = 28,
-}
 
 local default_button_fonts = {
    enabled_wui = default_wui_font,
@@ -800,7 +795,6 @@ return {
          bold = true,
          shadow = true
       },
-      about_title = about_title_font,
 
       -- Returned when lookup by name fails.
       -- Make this stand out to help debugging
@@ -828,7 +822,11 @@ return {
          space_after = ingame_text_space_after,
       },
       about_title = {
-         font = about_title_font,
+         font = {
+            color = about_title_color,
+            face = ingame_font_face,
+            size = 28,
+         }
          align = "center",
          space_before = ingame_text_space_before,
          space_after = ingame_text_space_after,

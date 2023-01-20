@@ -57,7 +57,6 @@ enum class FontStyle {
 	kWuiMessageParagraph,
 	kFsMenuWindowTitle,
 	kWuiWindowTitle,
-	kAboutTitle,
 
 	// Returned when lookup by name fails
 	kUnknown
