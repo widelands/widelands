@@ -77,8 +77,8 @@ public:
 		pf_child_die = 1 << 4,     ///< a child needs to die
 		pf_visible = 1 << 5,       ///< render the panel
 		pf_can_focus = 1 << 6,     ///< can receive the keyboard focus
-		/// children should snap only when overlapping the snap target
-		pf_snap_windows_only_when_overlapping = 1 << 7,
+		// This panel will always be displayed on top of other panels.
+		pf_always_on_top = 1 << 7,
 		/// children should snap to the edges of this panel
 		pf_dock_windows_to_edges = 1 << 8,
 		/// whether any change in the desired size should propagate to the actual size
@@ -93,8 +93,6 @@ public:
 		pf_hide_all_overlays = 1 << 13,
 		// Other panels will snap to this one.
 		pf_snap_target = 1 << 14,
-		// This panel will always be displayed on top of other panels.
-		pf_always_on_top = 1 << 15,
 	};
 
 	Panel(Panel* nparent,
@@ -208,10 +206,6 @@ public:
 	void set_panel_snap_distance(uint8_t const value) {
 		panel_snap_distance_ = value;
 	}
-	bool get_snap_windows_only_when_overlapping() const {
-		return get_flag(pf_snap_windows_only_when_overlapping);
-	}
-	void set_snap_windows_only_when_overlapping(bool on = true);
 	bool get_dock_windows_to_edges() const {
 		return get_flag(pf_dock_windows_to_edges);
 	}
@@ -595,9 +589,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };
 
-inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {
-	set_flag(pf_snap_windows_only_when_overlapping, on);
-}
 inline void Panel::set_dock_windows_to_edges(const bool on) {
 	set_flag(pf_dock_windows_to_edges, on);
 }
