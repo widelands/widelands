@@ -364,9 +364,11 @@ StyleManager::StyleManager() {
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading3, *element_table, "ingame_heading_3");
 	add_paragraph_style(UI::ParagraphStyle::kIngameHeading4, *element_table, "ingame_heading_4");
 	add_paragraph_style(UI::ParagraphStyle::kIngameText, *element_table, "ingame_text");
+	add_paragraph_style(UI::ParagraphStyle::kIngameSparse, *element_table, "ingame_sparse");
+	add_paragraph_style(UI::ParagraphStyle::kIngameImageLine, *element_table, "ingame_image_line");
+	add_paragraph_style(UI::ParagraphStyle::kIngameLoreAuthor, *element_table, "ingame_lore_author");
 	add_paragraph_style(UI::ParagraphStyle::kAboutText, *element_table, "about_text");
 	add_paragraph_style(UI::ParagraphStyle::kAboutSparse, *element_table, "about_sparse");
-	add_paragraph_style(UI::ParagraphStyle::kIngameLoreAuthor, *element_table, "ingame_lore_author");
 	add_paragraph_style(UI::ParagraphStyle::kUnknown, *element_table, "unknown");
 	check_completeness(
 	   "paragraphs", paragraphstyles_.size(), static_cast<size_t>(UI::ParagraphStyle::kUnknown));
@@ -398,7 +400,7 @@ StyleManager::StyleManager() {
 	add_color(UI::ColorStyle::kCampaignFrisianAngadthur, *element_table, "campaign_fri_angadthur");
 	add_color(UI::ColorStyle::kCampaignFrisianAmazon, *element_table, "campaign_fri_amazon");
 	add_color(UI::ColorStyle::kCampaignFrisianKetelsen, *element_table, "campaign_fri_ketelsen");
-	add_color(UI::ColorStyle::kSPScenarioRiverAdvisor, *element_table, "scenario_river_advisor");
+	add_color(UI::ColorStyle::kSPScenarioRiverAdvisor, *element_table, "map_river_advisor");
 	add_color(UI::ColorStyle::kUnknown, *element_table, "unknown");
 	check_completeness("colors", colors_.size(), static_cast<size_t>(UI::ColorStyle::kUnknown));
 
@@ -407,6 +409,24 @@ StyleManager::StyleManager() {
 	add_dimension(UI::StyledSize::kTextDefaultGap, *element_table, "text_default_gap");
 	add_dimension(UI::StyledSize::kTextSpaceBeforeInlineHeader, *element_table,
 	              "text_space_before_inline_header");
+	add_dimension(UI::StyledSize::kIngameSpaceBeforeObjective, *element_table,
+	              "ingame_space_before_objective");
+	add_dimension(UI::StyledSize::kIngameSpaceBeforeImmovableIcon, *element_table,
+	              "ingame_space_before_immovable_icon");
+	add_dimension(UI::StyledSize::kCampaignMessageBoxDefaultH, *element_table,
+	              "campaign_message_box_default_h");
+	add_dimension(UI::StyledSize::kCampaignMessageBoxDefaultW, *element_table,
+	              "campaign_message_box_default_w");
+	add_dimension(UI::StyledSize::kCampaignMessageBoxTopPosY, *element_table,
+	              "campaign_message_box_top_pos_y");
+	add_dimension(UI::StyledSize::kCampaignFri02PoemIndent, *element_table,
+	              "campaign_fri02_poem_indent");
+	add_dimension(UI::StyledSize::kSPScenarioPlateauMessageBoxH, *element_table,
+	              "map_plateau_message_h");
+	add_dimension(UI::StyledSize::kSPScenarioPlateauMessageBoxW, *element_table,
+	              "map_plateau_message_w");
+	add_dimension(UI::StyledSize::kSPScenarioPlateauMessageBoxPosY, *element_table,
+	              "map_plateau_message_pos_y");
 	add_dimension(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
 	check_completeness(
 	   "dimensions", dimensions_.size(), static_cast<size_t>(UI::StyledSize::kUIDefaultPadding));

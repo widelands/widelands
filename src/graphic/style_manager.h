@@ -76,7 +76,19 @@ enum class ColorStyle {
 	kUnknown
 };
 
-enum class StyledSize { kTextDefaultGap, kTextSpaceBeforeInlineHeader, kUIDefaultPadding };
+enum class StyledSize {
+	kTextDefaultGap,
+	kTextSpaceBeforeInlineHeader,
+	kIngameSpaceBeforeObjective,
+	kIngameSpaceBeforeImmovableIcon,
+	kCampaignMessageBoxDefaultH,
+	kCampaignMessageBoxDefaultW,
+	kCampaignMessageBoxTopPosY,
+	kCampaignFri02PoemIndent,
+	kSPScenarioPlateauMessageBoxH,
+	kSPScenarioPlateauMessageBoxW,
+	kSPScenarioPlateauMessageBoxPosY,
+	kUIDefaultPadding };
 
 }  // namespace UI
 

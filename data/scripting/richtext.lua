@@ -90,29 +90,49 @@ end
 
 
 -- RST
--- .. function:: space(gap)
+-- .. function:: default_gap()
+--
+--    Looks up the size of the default gap in the style library.
+--
+--    :returns: the size of the default gap
+
+function default_gap()
+   return styles.dimension("text_default_gap")
+end
+
+
+-- RST
+-- .. function:: space([gap])
 --
 --    Adds a horizontal space
 --
 --    :arg gap: the size of the space as pixels.
+--              If omitted, the default gap size will be used.
 --
 --    :returns: a space tag
 
 function space(gap)
+   if gap == nil then
+      gap = default_gap()
+   end
    return "<space gap="..gap..">"
 end
 
 
 -- RST
--- .. function:: vspace(gap)
+-- .. function:: vspace([gap])
 --
 --    Adds a vertical space
 --
 --    :arg gap: the size of the space as pixels.
+--              If omitted, the default gap size will be used.
 --
 --    :returns: a vspace tag
 
 function vspace(gap)
+   if gap == nil then
+      gap = default_gap()
+   end
    return "<vspace gap="..gap..">"
 end
 
@@ -440,17 +460,6 @@ end
 
 
 -- RST
--- .. function:: default_gap()
---
---    Looks up the size of the default gap in the style library.
---
---    :returns: the size of the default gap
-
-function default_gap()
-   return styles.dimension("text_default_gap")
-end
-
--- RST
 -- .. function:: li(text_or_symbol[, text = nil])
 --
 --    Adds the symbol in front of the text to create a list item and
@@ -471,7 +480,7 @@ function li(text_or_symbol, text)
       symbol ="•"
       t = text_or_symbol
    end
-   return div(p(symbol)) .. div(p(space(default_gap()))) .. div("width=*", p(t .. vspace(default_gap())))
+   return div(p(symbol)) .. div(p(space())) .. div("width=*", p(t .. vspace()))
 end
 
 

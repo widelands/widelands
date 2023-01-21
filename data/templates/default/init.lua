@@ -911,6 +911,24 @@ return {
          space_before = ingame_text_space_before,
          space_after = ingame_text_space_after,
       },
+      ingame_sparse = {
+         font = {
+            color = ingame_text_color,
+            face = ingame_font_face,
+            size = 12,
+         },
+         space_before = ingame_text_space_before + ingame_padding,
+         space_after = ingame_text_space_after,
+      },
+      ingame_image_line = {
+         font = {
+            color = ingame_text_color,
+            face = ingame_font_face,
+            size = 12,
+         },
+         space_before = ingame_text_space_before + ingame_padding,
+         space_after = ingame_text_space_after + ingame_padding,
+      },
       ingame_lore_author = {
          font = {
             color = ingame_text_color,
@@ -986,7 +1004,7 @@ return {
       campaign_fri_amazon = {0x6C, 0x00, 0x97},
       campaign_fri_ketelsen = {0x44, 0x55, 0xCC},
 
-      scenario_river_advisor = {0xEE, 0xBB, 0x00},
+      map_river_advisor = {0xEE, 0xBB, 0x00},
 
       unknown = {73, 64, 55}
    },
@@ -994,6 +1012,15 @@ return {
    dimensions = {
       text_default_gap = ingame_padding,
       text_space_before_inline_header = 8,
+      ingame_space_before_objective = 18,
+      ingame_space_before_immovable_icon = 14,
+      campaign_message_box_default_h = 400,
+      campaign_message_box_default_w = 450,
+      campaign_message_box_top_pos_y = 25,
+      campaign_fri02_poem_indent = 10,
+      map_plateau_message_w = 400,
+      map_plateau_message_h = 300,
+      map_plateau_message_pos_y = 1,
       ui_default_padding = 4,
    }
 }

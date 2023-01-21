@@ -119,7 +119,7 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 #undef ADD_CONTENT
 
 	const bool mirror = UI::g_fh->fontset()->is_rtl();
-	const UI::ParagraphStyleInfo title_style =
+	const UI::ParagraphStyleInfo& title_style =
 	   g_style_manager->paragraph_style(UI::ParagraphStyle::kAboutTitle);
 	int space = title_style.space_before();
 	if (space > 0) {

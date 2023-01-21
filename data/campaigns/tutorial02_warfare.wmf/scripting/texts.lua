@@ -10,12 +10,7 @@ local empire_tribe = wl.Game():get_tribe_description("empire")
 local empire_soldier = wl.Game():get_worker_description(empire_tribe.soldier)
 
 function h2_image(imagepath, text)
-   return
-      div("width=100%",
-         div(p(vspace(12) .. img(imagepath) .. space(6))) ..
-         div(p(space(6))) ..
-         div("width=*", h2(text))
-      )
+   return h2(img(imagepath) .. space() .. text)
 end
 
 -- =============

@@ -36,9 +36,11 @@ enum class ParagraphStyle {
 	kIngameHeading3,
 	kIngameHeading4,
 	kIngameText,
+	kIngameSparse,
+	kIngameImageLine,
+	kIngameLoreAuthor,
 	kAboutText,
 	kAboutSparse,
-	kIngameLoreAuthor,
 
 	// Returned when lookup by name fails
 	kUnknown

@@ -8,7 +8,7 @@ local r = {
       title("Widelands/Widelands.ttf", img("images/logos/wl-ico-32.png") .. " Widelands") ..
       subtitle(_("an open source strategy game")) ..
       help_introduction() ..
-      p(vspace(3)) .. inline_header(_("Check out the Widelands project homepage:"), a("widelands.org", "url", "https://www.widelands.org")) .. p(vspace(3)) ..
+      p(vspace()) .. inline_header(_("Check out the Widelands project homepage:"), a("widelands.org", "url", "https://www.widelands.org")) .. p(vspace()) ..
       p(_("Widelands is licensed under the GNU General Public License (GPL). For more information, see the file ‘COPYING’.")) ..
       h2(_("Status")) ..
       p(_("Widelands is nearly feature complete and is much fun to play alone and even more in multiplayer with others. Still, there is always more work to be done in all areas. If you are interested in contributing – be it by making graphics, fixing bugs or adding new features, translating the game into your language or creating new maps – get in touch on our homepage.")) ..
