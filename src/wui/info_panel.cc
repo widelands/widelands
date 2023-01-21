@@ -490,8 +490,7 @@ void InfoPanel::think() {
 	}
 
 	for (UI::Panel* p = ibase_.get_first_child(); p != nullptr; p = p->get_next_sibling()) {
-		if (!p->get_flag(UI::Panel::pf_always_on_top) &&
-			p->get_x() < snap_target_panel_.get_w() &&
+		if (!p->get_flag(UI::Panel::pf_always_on_top) && p->get_x() < snap_target_panel_.get_w() &&
 		    (on_top_ ? (p->get_y() < snap_target_panel_.get_y() + snap_target_panel_.get_h()) :
                      (p->get_y() + p->get_h() > snap_target_panel_.get_y()))) {
 			if (UI::Window* w = dynamic_cast<UI::Window*>(p); w != nullptr && !w->moved_by_user()) {
