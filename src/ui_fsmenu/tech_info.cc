@@ -119,15 +119,15 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 #undef ADD_CONTENT
 
 	const bool mirror = UI::g_fh->fontset()->is_rtl();
-	UI::ParagraphStyleInfo
-	title_style(g_style_manager->paragraph_style(UI::ParagraphStyle::kAboutTitle));
+	UI::ParagraphStyleInfo title_style(
+	   g_style_manager->paragraph_style(UI::ParagraphStyle::kAboutTitle));
 	int space = title_style.space_before();
 	if (space > 0) {
 		add_space(space);
 	}
-	UI::Textarea* title = new UI::Textarea(this, UI::PanelStyle::kFsMenu,
-	                                       UI::FontStyle::kFsGameSetupHeadings,
-	                                       _("Technical Info"), UI::Align::kCenter);
+	UI::Textarea* title =
+	   new UI::Textarea(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsGameSetupHeadings,
+	                    _("Technical Info"), UI::Align::kCenter);
 	add(title, UI::Box::Resizing::kFullSize);
 	if (t == TechInfoBox::Type::kAbout) {
 		title->set_style_override(title_style.font());

@@ -400,13 +400,13 @@ StyleManager::StyleManager() {
 	add_color(UI::ColorStyle::kCampaignFrisianKetelsen, *element_table, "campaign_fri_ketelsen");
 	add_color(UI::ColorStyle::kSPScenarioRiverAdvisor, *element_table, "scenario_river_advisor");
 	add_color(UI::ColorStyle::kUnknown, *element_table, "unknown");
-	check_completeness(
-	   "colors", colors_.size(), static_cast<size_t>(UI::ColorStyle::kUnknown));
+	check_completeness("colors", colors_.size(), static_cast<size_t>(UI::ColorStyle::kUnknown));
 
 	// Sizes
 	element_table = table->get_table("dimensions");
 	add_dimension(UI::StyledSize::kTextDefaultGap, *element_table, "text_default_gap");
-	add_dimension(UI::StyledSize::kTextSpaceBeforeInlineHeader, *element_table, "text_space_before_inline_header");
+	add_dimension(UI::StyledSize::kTextSpaceBeforeInlineHeader, *element_table,
+	              "text_space_before_inline_header");
 	add_dimension(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
 	check_completeness(
 	   "dimensions", dimensions_.size(), static_cast<size_t>(UI::StyledSize::kUIDefaultPadding));

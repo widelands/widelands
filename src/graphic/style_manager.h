@@ -76,11 +76,7 @@ enum class ColorStyle {
 	kUnknown
 };
 
-enum class StyledSize {
-	kTextDefaultGap,
-	kTextSpaceBeforeInlineHeader,
-	kUIDefaultPadding
-};
+enum class StyledSize { kTextDefaultGap, kTextSpaceBeforeInlineHeader, kUIDefaultPadding };
 
 }  // namespace UI
 
