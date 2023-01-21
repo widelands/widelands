@@ -24,13 +24,11 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/window.h"
 
-namespace FsMenu::AddOnsUI {
-
-class AddOnsCtrl;
+namespace AddOnsUI {
 
 class AddOnsLoginBox : public UI::Window {
 public:
-	explicit AddOnsLoginBox(AddOnsCtrl& ctrl);
+	explicit AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style);
 
 	const std::string& get_username() const;
 	std::string get_password() const;
@@ -49,6 +47,6 @@ private:
 	void reset();
 };
 
-}  // namespace FsMenu::AddOnsUI
+}  // namespace AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_LOGIN_BOX_H

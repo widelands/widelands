@@ -291,7 +291,7 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 	}
 
 	std::string message;
-	for (; initialized_;) {
+	while (initialized_) {
 		std::string line = read_line();
 		if (line.empty()) {
 			break;
@@ -301,6 +301,12 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 	}
 
 	if (message.empty()) {
+		if (is_uploading_addon_) {
+			throw WLWarning("",
+			                "Connection interrupted (%s). Please note that you can not upload updates "
+			                "for an add-on more often than every three days.",
+			                strerror(errno));
+		}
 		throw WLWarning("", "Connection interrupted (%s)", strerror(errno));
 	}
 	throw WLWarning("", "Connection interrupted (%s). Reason: %s", strerror(errno), message.c_str());
@@ -367,6 +373,7 @@ struct CrashGuard {
 		assert(net_.initialized_);
 		assert(net_.network_active_);
 		net_.network_active_ = false;
+		net_.is_uploading_addon_ = false;
 		if (!ok_) {
 			net_.quit_connection();
 		}
@@ -740,6 +747,7 @@ void NetAddons::upload_addon(const std::string& name,
 		init_fn("", gather_addon_content(dir, "", content));
 	}
 
+	is_uploading_addon_ = true;
 	CrashGuard guard(*this);
 	std::string send = kCmdSubmit;
 	send += ' ';

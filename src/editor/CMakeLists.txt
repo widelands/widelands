@@ -126,9 +126,11 @@ wl_library(editor
     logic_widelands_geometry
     map_io
     map_io_map_loader
+    network
     scripting_lua_interface
     scripting_lua_table
     sound
+    ui_addons
     ui_basic
     widelands_options
     wui
