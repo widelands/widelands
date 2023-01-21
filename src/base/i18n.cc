@@ -374,9 +374,10 @@ void set_locale(const std::string& name) {
 		// maybe, do another check with the return value (?)
 		locale = lang;
 	}
-
+#if defined(HAS_NL_MSG_CAT_CNTR)
 	/* Finally make changes known.  */
 	++_nl_msg_cat_cntr;
+#endif
 #endif
 
 	SETLOCALE(LC_ALL, "");  //  call to libintl

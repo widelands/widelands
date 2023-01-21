@@ -8,6 +8,9 @@
 // "/usr/local/share/games/widelands" or something along these lines.
 #define INSTALL_DATADIR "@WL_INSTALL_DATADIR@"
 
+// glibc magic for GNU Gettext
+#cmakedefine HAS_NL_MSG_CAT_CNTR
+
 // True if getenv has been found.
 #define HAS_GETENV
 

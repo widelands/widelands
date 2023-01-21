@@ -1,3 +1,7 @@
+include(CheckCXXSourceCompiles)
+# _nl_msg_cat_cntr is a glibc speciality and not available in other C libs (e.g. musl)
+check_cxx_source_compiles("extern \"C\" int _nl_msg_cat_cntr; int main(void) { ++_nl_msg_cat_cntr; return 0; }" HAS_NL_MSG_CAT_CNTR)
+
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../cmake/datadirversion.cmake ${CMAKE_CURRENT_SOURCE_DIR}/../data/datadirversion)
