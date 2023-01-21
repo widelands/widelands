@@ -179,6 +179,41 @@ static int L_as_font_from_p(lua_State* L) {
 	return 1;
 }
 
+/* RST
+.. function:: color(style_name)
+
+   Return the given color style in hex format suitable for font tags.
+
+   :type style_name: class:`string`
+   :arg style_name: name of the color style to use.
+
+   :returns: The color as 6 characters hexadecimal RGB value.
+*/
+static int L_color(lua_State* L) {
+	const std::string style_name(luaL_checkstring(L, 1));
+	const std::string result = g_style_manager->color(style_name).hex_value();
+	lua_pushstring(L, result.c_str());
+	return 1;
+}
+
+/* RST
+.. function:: dimension(style_name)
+
+   Return the given styled dimension.
+
+   :type style_name: class:`string`
+   :arg style_name: name of the styled dimension to get.
+
+   :returns: The integer value of the dimension, or 0 if no styled dimension is defined
+             with the given `style_name`.
+*/
+static int L_dimension(lua_State* L) {
+	const std::string style_name(luaL_checkstring(L, 1));
+	const int result = g_style_manager->dimension(style_name);
+	lua_pushinteger(L, result);
+	return 1;
+}
+
 const static struct luaL_Reg styles[] = {{"as_font", &L_as_font},
                                          {"as_paragraph", &L_as_paragraph},
                                          {"as_p_with_attr", &L_as_p_with_attr},
@@ -186,6 +221,8 @@ const static struct luaL_Reg styles[] = {{"as_font", &L_as_font},
                                          {"open_p_with_attr", &L_open_p_with_attr},
                                          {"close_p", &L_close_p},
                                          {"as_font_from_p", &L_as_font_from_p},
+                                         {"color", &L_color},
+                                         {"dimension", &L_dimension},
                                          {nullptr, nullptr}};
 
 void luaopen_styles(lua_State* L) {

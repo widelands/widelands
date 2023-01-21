@@ -370,6 +370,46 @@ StyleManager::StyleManager() {
 	add_paragraph_style(UI::ParagraphStyle::kUnknown, *element_table, "unknown");
 	check_completeness(
 	   "paragraphs", paragraphstyles_.size(), static_cast<size_t>(UI::ParagraphStyle::kUnknown));
+
+	// Colors
+	element_table = table->get_table("colors");
+	add_color(UI::ColorStyle::kCampaignBarbarianThron, *element_table, "campaign_bar_thron");
+	add_color(UI::ColorStyle::kCampaignBarbarianBoldreth, *element_table, "campaign_bar_boldreth");
+	add_color(UI::ColorStyle::kCampaignBarbarianKhantrukh, *element_table, "campaign_bar_khantrukh");
+	add_color(UI::ColorStyle::kCampaignEmpireLutius, *element_table, "campaign_emp_lutius");
+	add_color(UI::ColorStyle::kCampaignEmpireAmalea, *element_table, "campaign_emp_amalea");
+	add_color(UI::ColorStyle::kCampaignEmpireSaledus, *element_table, "campaign_emp_saledus");
+	add_color(UI::ColorStyle::kCampaignEmpireMarkus, *element_table, "campaign_emp_markus");
+	add_color(UI::ColorStyle::kCampaignEmpireJulia, *element_table, "campaign_emp_julia");
+	add_color(UI::ColorStyle::kCampaignAtlanteanJundlina, *element_table, "campaign_atl_jundlina");
+	add_color(UI::ColorStyle::kCampaignAtlanteanSidolus, *element_table, "campaign_atl_sidolus");
+	add_color(UI::ColorStyle::kCampaignAtlanteanLoftomor, *element_table, "campaign_atl_loftomor");
+	add_color(UI::ColorStyle::kCampaignAtlanteanColionder, *element_table, "campaign_atl_colionder");
+	add_color(UI::ColorStyle::kCampaignAtlanteanOpol, *element_table, "campaign_atl_opol");
+	add_color(UI::ColorStyle::kCampaignAtlanteanOstur, *element_table, "campaign_atl_ostur");
+	add_color(UI::ColorStyle::kCampaignAtlanteanKalitath, *element_table, "campaign_atl_kalitath");
+	add_color(UI::ColorStyle::kCampaignFrisianReebaud, *element_table, "campaign_fri_reebaud");
+	add_color(UI::ColorStyle::kCampaignFrisianHauke, *element_table, "campaign_fri_hauke");
+	add_color(UI::ColorStyle::kCampaignFrisianMaukor, *element_table, "campaign_fri_maukor");
+	add_color(UI::ColorStyle::kCampaignFrisianMurilius, *element_table, "campaign_fri_murilius");
+	add_color(UI::ColorStyle::kCampaignFrisianClaus, *element_table, "campaign_fri_claus");
+	add_color(UI::ColorStyle::kCampaignFrisianHenneke, *element_table, "campaign_fri_henneke");
+	add_color(UI::ColorStyle::kCampaignFrisianIniucundus, *element_table, "campaign_fri_iniucundus");
+	add_color(UI::ColorStyle::kCampaignFrisianAngadthur, *element_table, "campaign_fri_angadthur");
+	add_color(UI::ColorStyle::kCampaignFrisianAmazon, *element_table, "campaign_fri_amazon");
+	add_color(UI::ColorStyle::kCampaignFrisianKetelsen, *element_table, "campaign_fri_ketelsen");
+	add_color(UI::ColorStyle::kSPScenarioRiverAdvisor, *element_table, "scenario_river_advisor");
+	add_color(UI::ColorStyle::kUnknown, *element_table, "unknown");
+	check_completeness(
+	   "colors", colors_.size(), static_cast<size_t>(UI::ColorStyle::kUnknown));
+
+	// Sizes
+	element_table = table->get_table("dimensions");
+	add_dimension(UI::StyledSize::kTextDefaultGap, *element_table, "text_default_gap");
+	add_dimension(UI::StyledSize::kTextSpaceBeforeInlineHeader, *element_table, "text_space_before_inline_header");
+	add_dimension(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
+	check_completeness(
+	   "dimensions", dimensions_.size(), static_cast<size_t>(UI::StyledSize::kUIDefaultPadding));
 }
 
 // Return functions for the styles
@@ -455,6 +495,32 @@ const UI::ParagraphStyleInfo& StyleManager::paragraph_style(std::string style_na
 		return *paragraphstyles_.at(UI::ParagraphStyle::kUnknown);
 	}
 	return paragraph_style(paragraphstyle_keys_.at(style_name));
+}
+
+const RGBColor& StyleManager::color(UI::ColorStyle id) const {
+	assert(colors_.count(id) == 1);
+	return colors_.at(id);
+}
+
+const RGBColor& StyleManager::color(std::string name) const {
+	if (color_keys_.count(name) != 1) {
+		log_warn("Undefined color style requested: %s", name.c_str());
+		return colors_.at(UI::ColorStyle::kUnknown);
+	}
+	return color(color_keys_.at(name));
+}
+
+int StyleManager::dimension(UI::StyledSize id) const {
+	assert(dimensions_.count(id) == 1);
+	return dimensions_.at(id);
+}
+
+int StyleManager::dimension(std::string name) const {
+	if (dimension_keys_.count(name) != 1) {
+		log_warn("Undefined styled size requested: %s", name.c_str());
+		return 0;
+	}
+	return dimension(dimension_keys_.at(name));
 }
 
 int StyleManager::minimum_font_size() const {
@@ -580,4 +646,16 @@ void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
 	paragraphstyles_.emplace(std::make_pair(
 	   style, std::unique_ptr<UI::ParagraphStyleInfo>(read_paragraph_style(table, table_key))));
 	paragraphstyle_keys_.emplace(std::make_pair(table_key, style));
+}
+
+void StyleManager::add_color(UI::ColorStyle id, const LuaTable& table, const std::string& key) {
+	const std::unique_ptr<LuaTable> color_table(table.get_table(key));
+	const RGBColor color = read_rgb_color(*color_table);
+	colors_.emplace(std::make_pair(id, color));
+	color_keys_.emplace(std::make_pair(key, id));
+}
+
+void StyleManager::add_dimension(UI::StyledSize id, const LuaTable& table, const std::string& key) {
+	dimensions_.emplace(std::make_pair(id, table.get_int(key)));
+	dimension_keys_.emplace(std::make_pair(key, id));
 }

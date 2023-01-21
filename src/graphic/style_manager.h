@@ -42,6 +42,48 @@ inline bool is_using_default_theme() {
 	return template_dir() == kDefaultTemplate;
 }
 
+namespace UI {
+
+enum class ColorStyle {
+	kCampaignBarbarianThron,
+	kCampaignBarbarianBoldreth,
+	kCampaignBarbarianKhantrukh,
+	kCampaignEmpireLutius,
+	kCampaignEmpireAmalea,
+	kCampaignEmpireSaledus,
+	kCampaignEmpireMarkus,
+	kCampaignEmpireJulia,
+	kCampaignAtlanteanJundlina,
+	kCampaignAtlanteanSidolus,
+	kCampaignAtlanteanLoftomor,
+	kCampaignAtlanteanColionder,
+	kCampaignAtlanteanOpol,
+	kCampaignAtlanteanOstur,
+	kCampaignAtlanteanKalitath,
+	kCampaignFrisianReebaud,
+	kCampaignFrisianHauke,
+	kCampaignFrisianMaukor,
+	kCampaignFrisianMurilius,
+	kCampaignFrisianClaus,
+	kCampaignFrisianHenneke,
+	kCampaignFrisianIniucundus,
+	kCampaignFrisianAngadthur,
+	kCampaignFrisianAmazon,
+	kCampaignFrisianKetelsen,
+	kSPScenarioRiverAdvisor,
+
+	// Returned when lookup by name fails
+	kUnknown
+};
+
+enum class StyledSize {
+	kTextDefaultGap,
+	kTextSpaceBeforeInlineHeader,
+	kUIDefaultPadding
+};
+
+}  // namespace UI
+
 /** Try to resolve an image file path relative to the
  * active theme or the template directory or the data directory, in this order.
  * Returns a fallback image path on failure.
@@ -68,12 +110,17 @@ public:
 	[[nodiscard]] const UI::WindowStyleInfo& window_style(UI::WindowStyle) const;
 	[[nodiscard]] const UI::FontStyleInfo& font_style(UI::FontStyle style) const;
 	[[nodiscard]] const UI::ParagraphStyleInfo& paragraph_style(UI::ParagraphStyle style) const;
+	[[nodiscard]] const RGBColor& color(UI::ColorStyle id) const;
+	[[nodiscard]] int dimension(UI::StyledSize id) const;
 
 	// Look up by name for Lua.
 	// If there is no style defined with the given name, then log it as warning and return a style
 	// that makes the erroneously formatted text stand out.
 	[[nodiscard]] const UI::FontStyleInfo& font_style(std::string name) const;
 	[[nodiscard]] const UI::ParagraphStyleInfo& paragraph_style(std::string name) const;
+	[[nodiscard]] const RGBColor& color(std::string name) const;
+	// Returns 0 if 'name' is not defined.
+	[[nodiscard]] int dimension(std::string name) const;
 
 	// Special elements
 	[[nodiscard]] int minimum_font_size() const;
@@ -105,6 +152,8 @@ private:
 	void add_font_style(UI::FontStyle font, const LuaTable& table, const std::string& key);
 	void
 	add_paragraph_style(UI::ParagraphStyle style, const LuaTable& table, const std::string& key);
+	void add_color(UI::ColorStyle id, const LuaTable& table, const std::string& key);
+	void add_dimension(UI::StyledSize id, const LuaTable& table, const std::string& key);
 
 	std::map<UI::ButtonStyle, std::unique_ptr<const UI::ButtonStyleInfo>> buttonstyles_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::TextPanelStyleInfo>> editboxstyles_;
@@ -116,6 +165,10 @@ private:
 	int minimum_font_size_, focus_border_thickness_;
 	RGBColor minimap_icon_frame_;
 	RGBAColor focused_color_, semi_focused_color_;
+	std::map<std::string, UI::ColorStyle> color_keys_;
+	std::map<UI::ColorStyle, RGBColor> colors_;
+	std::map<std::string, UI::StyledSize> dimension_keys_;
+	std::map<UI::StyledSize, int> dimensions_;
 	std::map<std::string, UI::FontStyle> fontstyle_keys_;
 	std::map<UI::FontStyle, std::unique_ptr<const UI::FontStyleInfo>> fontstyles_;
 	std::map<std::string, UI::ParagraphStyle> paragraphstyle_keys_;

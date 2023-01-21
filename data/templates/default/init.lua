@@ -42,6 +42,8 @@ local ingame_heading_space_before_big = 2 * ingame_padding
 local ingame_heading_space_before_small = ingame_padding
 local ingame_heading_space_after = 2 * ingame_padding
 
+local campaign_leader_color = about_title_color
+
 local unknown_font_color = {209, 45, 45}
 local unknown_font_face = "sans"
 local unknown_font_size = 16
@@ -826,7 +828,7 @@ return {
             color = about_title_color,
             face = ingame_font_face,
             size = 28,
-         }
+         },
          align = "center",
          space_before = ingame_text_space_before,
          space_after = ingame_text_space_after,
@@ -953,4 +955,45 @@ return {
          space_after = unknown_font_size,
       },
    },
+
+   colors = {
+      campaign_bar_thron = campaign_leader_color,
+      campaign_bar_boldreth = {0xFF, 0x00, 0x00},
+      campaign_bar_khantrukh = {0x80, 0x80, 0xFF},
+
+      campaign_emp_lutius = campaign_leader_color,
+      campaign_emp_amalea = {0xFF, 0x00, 0x00},
+      campaign_emp_saledus = {0x8F, 0x91, 0x31},
+      campaign_emp_markus = {0x11, 0x75, 0xAF},
+      campaign_emp_julia = {0xD0, 0xD0, 0xD0},
+
+      campaign_atl_jundlina = campaign_leader_color,
+      campaign_atl_sidolus = {0xFF, 0x1A, 0x30},
+      campaign_atl_loftomor = {0xFD, 0xD5, 0x3D},
+      campaign_atl_colionder = {0x33, 0xA9, 0xFD},
+      campaign_atl_opol = {0xFF, 0x3F, 0xFB},
+      campaign_atl_ostur = {0x37, 0x5F, 0xFC},
+      campaign_atl_kalitath = {0xFF, 0x00, 0x00},
+
+      campaign_fri_reebaud = {0x55, 0xBB, 0x55},
+      campaign_fri_hauke = {0x77, 0x99, 0xBB},
+      campaign_fri_maukor = {0x99, 0x00, 0x00},
+      campaign_fri_murilius = {0xBB, 0x77, 0x55},
+      campaign_fri_claus = {0x1C, 0xC2, 0x00},
+      campaign_fri_henneke = {0xF7, 0xFF, 0x00},
+      campaign_fri_iniucundus = {0xFF, 0x00, 0x59},
+      campaign_fri_angadthur = {0x00, 0x16, 0xFF},
+      campaign_fri_amazon = {0x6C, 0x00, 0x97},
+      campaign_fri_ketelsen = {0x44, 0x55, 0xCC},
+
+      scenario_river_advisor = {0xEE, 0xBB, 0x00},
+
+      unknown = {73, 64, 55}
+   },
+
+   dimensions = {
+      text_default_gap = ingame_padding,
+      text_space_before_inline_header = 8,
+      ui_default_padding = 4,
+   }
 }

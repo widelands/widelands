@@ -252,7 +252,6 @@ function fs_color(text)
    return "<font color=FFDC00>" .. text .. "</font>"
 end
 
-
 -- RST
 -- .. function:: inline_header(header, text)
 --
@@ -264,8 +263,9 @@ end
 
 function inline_header(header, text)
    return
-      -- TODO(tothxa): implement styling for space
-      div("width=100%", vspace(8)) ..
+      -- TODO(tothxa): Could this be a paragraph style, or would it be confusing
+      --               that only the heading font is defined in the style?
+      div("width=100%", vspace(styles.dimension("text_space_before_inline_header"))) ..
       div("width=100%", styles.as_font_from_p("ingame_heading_3", header .. " ") ..
       styles.as_font_from_p(_p_style_, text))
 end
@@ -440,6 +440,17 @@ end
 
 
 -- RST
+-- .. function:: default_gap()
+--
+--    Looks up the size of the default gap in the style library.
+--
+--    :returns: the size of the default gap
+
+function default_gap()
+   return styles.dimension("text_default_gap")
+end
+
+-- RST
 -- .. function:: li(text_or_symbol[, text = nil])
 --
 --    Adds the symbol in front of the text to create a list item and
@@ -451,12 +462,16 @@ end
 --    :returns: a p tag containing the formatted text
 
 function li(text_or_symbol, text)
-   -- TODO(tothxa): implement styling
+   local symbol
+   local t
    if text then
-      return div(p(text_or_symbol)) .. div(p(space(6))) .. div("width=*", p(text .. vspace(6)))
+      symbol = text_or_symbol
+      t = text
    else
-      return div(p("•")) .. div(p(space(6))) .. div("width=*", p(text_or_symbol .. vspace(6)))
+      symbol ="•"
+      t = text_or_symbol
    end
+   return div(p(symbol)) .. div(p(space(default_gap()))) .. div("width=*", p(t .. vspace(default_gap())))
 end
 
 
@@ -490,8 +505,7 @@ end
 function li_image(imagepath, text)
    return
       div("width=100%",
-         -- TODO(tothxa): implement styling
-         div("float=left padding_r=6", p(img(imagepath))) ..
+         div("float=left padding_r=" .. default_gap(), p(img(imagepath))) ..
          p(text)
       )
 end
@@ -519,8 +533,7 @@ function li_object(name, text, playercolor)
    end
    return
       div("width=100%",
-         -- TODO(tothxa): implement styling
-         div("float=left padding_r=6", p(image)) ..
+         div("float=left padding_r=" .. default_gap(), p(image)) ..
          p(text)
       )
 end
