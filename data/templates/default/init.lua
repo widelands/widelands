@@ -964,7 +964,7 @@ return {
       campaign_emp_lutius = campaign_leader_color,
       campaign_emp_amalea = {0xFF, 0x00, 0x00},
       campaign_emp_saledus = {0x8F, 0x91, 0x31},
-      campaign_emp_markus = {0x11, 0x75, 0xAF},
+      campaign_emp_marcus = {0x11, 0x75, 0xAF},
       campaign_emp_julia = {0xD0, 0xD0, 0xD0},
 
       campaign_atl_jundlina = campaign_leader_color,

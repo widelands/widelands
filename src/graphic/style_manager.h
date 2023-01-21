@@ -51,7 +51,7 @@ enum class ColorStyle {
 	kCampaignEmpireLutius,
 	kCampaignEmpireAmalea,
 	kCampaignEmpireSaledus,
-	kCampaignEmpireMarkus,
+	kCampaignEmpireMarcus,
 	kCampaignEmpireJulia,
 	kCampaignAtlanteanJundlina,
 	kCampaignAtlanteanSidolus,

@@ -3,13 +3,13 @@
 -- =========================
 
 function reebaud(title, text)
-   return speech("map:reebaud.png", "55BB55", title, text)
+   return speech("map:reebaud.png", styles.color("campaign_fri_reebaud"), title, text)
 end
 function hauke(title, text)
-   return speech("map:hauke.png", "7799BB", title, text)
+   return speech("map:hauke.png", styles.color("campaign_fri_hauke"), title, text)
 end
 function murilius(title, text)
-   return speech("map:murilius.png", "BB7755", title, text)
+   return speech("map:murilius.png", styles.color("campaign_fri_murilius"), title, text)
 end
 
 -- =======================================================================

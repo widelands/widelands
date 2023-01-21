@@ -379,7 +379,7 @@ StyleManager::StyleManager() {
 	add_color(UI::ColorStyle::kCampaignEmpireLutius, *element_table, "campaign_emp_lutius");
 	add_color(UI::ColorStyle::kCampaignEmpireAmalea, *element_table, "campaign_emp_amalea");
 	add_color(UI::ColorStyle::kCampaignEmpireSaledus, *element_table, "campaign_emp_saledus");
-	add_color(UI::ColorStyle::kCampaignEmpireMarkus, *element_table, "campaign_emp_markus");
+	add_color(UI::ColorStyle::kCampaignEmpireMarcus, *element_table, "campaign_emp_marcus");
 	add_color(UI::ColorStyle::kCampaignEmpireJulia, *element_table, "campaign_emp_julia");
 	add_color(UI::ColorStyle::kCampaignAtlanteanJundlina, *element_table, "campaign_atl_jundlina");
 	add_color(UI::ColorStyle::kCampaignAtlanteanSidolus, *element_table, "campaign_atl_sidolus");

@@ -6,16 +6,16 @@ include "scripting/richtext_scenarios.lua"
 
 -- TODO(Nordfriese): Need new images for them all
 function claus(title, text)
-   return speech ("map:claus.png", "1CC200", title, text)
+   return speech ("map:claus.png", styles.color("campaign_fri_claus"), title, text)
 end
 function henneke(title, text)
-   return speech ("map:henneke.png", "F7FF00", title, text)
+   return speech ("map:henneke.png", styles.color("campaign_fri_henneke"), title, text)
 end
 function reebaud(title, text)
-   return speech ("map:reebaud.png", "55BB55", title, text)
+   return speech ("map:reebaud.png", styles.color("campaign_fri_reebaud"), title, text)
 end
 function ketelsen(title, text)
-   return speech ("map:ketelsen.png", "4455CC", title, text)
+   return speech ("map:ketelsen.png", styles.color("campaign_fri_ketelsen"), title, text)
 end
 
 -- =======================================================================

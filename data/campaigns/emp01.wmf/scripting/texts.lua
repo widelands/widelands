@@ -3,13 +3,13 @@
 -- =========================
 
 function lutius(title, text)
-   return speech("map:Lutius.png", "2F9131", title, text)
+   return speech("map:Lutius.png", styles.color("campaign_emp_lutius"), title, text)
 end
 function saledus(title, text)
-   return speech("map:Saledus.png", "8F9131", title, text)
+   return speech("map:Saledus.png", styles.color("campaign_emp_saledus"), title, text)
 end
 function amalea(title, text)
-   return speech("map:Amalea.png", "AF7511", title, text)
+   return speech("map:Amalea.png", styles.color("campaign_emp_amalea"), title, text)
 end
 
 -- =======================================================================
