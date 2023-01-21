@@ -93,6 +93,8 @@ public:
 		pf_hide_all_overlays = 1 << 13,
 		// Other panels will snap to this one.
 		pf_snap_target = 1 << 14,
+		// This panel will always be displayed on top of other panels.
+		pf_always_on_top = 1 << 15,
 	};
 
 	Panel(Panel* nparent,

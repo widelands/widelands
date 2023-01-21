@@ -130,7 +130,6 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
    : UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
      ibase_(ib),
      snap_target_panel_(&ibase_, UI::PanelStyle::kWui, 0, 0, 0, 0),
-     snap_target_toolbar_(&ibase_, UI::PanelStyle::kWui, 0, 0, 0, 0),
      toggle_mode_(this,
                   "mode",
                   0,
@@ -171,9 +170,9 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                   UI::Align::kRight),
 
      draw_real_time_(get_config_bool("game_clock", true)) {
+	set_flag(UI::Panel::pf_always_on_top, true);
 	text_fps_.set_handle_mouse(true);
 	snap_target_panel_.set_snap_target(true);
-	snap_target_toolbar_.set_snap_target(true);
 	int mode = get_config_int("toolbar_pos", 0);
 	on_top_ = ((mode & DisplayMode::kCmdSwap) != 0);
 	if ((mode & (DisplayMode::kOnMouse_Visible | DisplayMode::kOnMouse_Hidden)) != 0) {
@@ -476,8 +475,6 @@ void InfoPanel::think() {
 		message_queue_ = &iplayer_->player().messages();
 	}
 
-	move_to_top();
-
 	while ((message_queue_ != nullptr) &&
 	       *last_message_id_ != message_queue_->current_message_id()) {
 		*last_message_id_ = Widelands::MessageId(last_message_id_->value() + 1);
@@ -493,9 +490,8 @@ void InfoPanel::think() {
 	}
 
 	for (UI::Panel* p = ibase_.get_first_child(); p != nullptr; p = p->get_next_sibling()) {
-		if ((p->get_x() < snap_target_panel_.get_w() ||
-		     (p->get_x() + p->get_w() > snap_target_toolbar_.get_x() &&
-		      p->get_x() < snap_target_toolbar_.get_x() + snap_target_toolbar_.get_w())) &&
+		if (!p->get_flag(UI::Panel::pf_always_on_top) &&
+			p->get_x() < snap_target_panel_.get_w() &&
 		    (on_top_ ? (p->get_y() < snap_target_panel_.get_y() + snap_target_panel_.get_h()) :
                      (p->get_y() + p->get_h() > snap_target_panel_.get_y()))) {
 			if (UI::Window* w = dynamic_cast<UI::Window*>(p); w != nullptr && !w->moved_by_user()) {
@@ -566,8 +562,6 @@ void InfoPanel::layout() {
          toggle_mode_.get_w() :
          w,
 	   toggle_mode_.get_h());
-	snap_target_toolbar_.set_pos(toolbar_->get_pos());
-	snap_target_toolbar_.set_size(toolbar_->get_w(), snap_target_panel_.get_h());
 }
 
 void InfoPanel::draw(RenderTarget& r) {

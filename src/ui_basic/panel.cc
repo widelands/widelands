@@ -611,6 +611,14 @@ void Panel::move_to_top() {
 	if (parent_ == nullptr) {
 		return;
 	}
+	/* If all siblings above us are permanently on top, skip. */
+	bool all_on_top = true;
+	for (Panel* p = parent_->first_child_; p != this && all_on_top; p = p->next_) {
+		all_on_top &= p->get_flag(pf_always_on_top);
+	}
+	if (all_on_top) {
+		return;
+	}
 
 	// unlink
 	if (prev_ != nullptr) {
@@ -757,6 +765,10 @@ void Panel::do_think() {
 	// No longer think when we are about to die
 	if (is_dying() || !initialized_) {
 		return;
+	}
+
+	if (get_flag(pf_always_on_top)) {
+		move_to_top();
 	}
 
 	if (thinks()) {
