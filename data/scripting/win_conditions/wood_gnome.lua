@@ -61,7 +61,7 @@ local r = {
 
    local function _send_state(remaining_time, plrs, show_popup)
       _calc_points()
-      local msg = format_remaining_time(remaining_time) .. vspace(8) .. game_status.body
+      local msg = format_remaining_time(remaining_time) .. msg_vspace() .. game_status.body
 
       push_textdomain("win_conditions")
       for idx,plr in ipairs(plrs) do
@@ -84,14 +84,14 @@ local r = {
       table.sort(points, function(a,b) return a[2] < b[2] end)
 
       push_textdomain("win_conditions")
-      local msg = vspace(8) .. game_status.body
+      local msg = msg_vspace() .. game_status.body
       for idx,plr in ipairs(plrs) do
-         msg = msg .. vspace(8)
+         msg = msg .. msg_vspace()
          local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number])):format(playerpoints[plr.number])
          -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
          msg = msg ..  p(_("%1$s had %2$s.")):bformat(plr.name,trees)
       end
-      msg = msg .. vspace(8)
+      msg = msg .. msg_vspace()
       local trees = (ngettext ("%i tree", "%i trees", playerpoints[points[#points][1].number]))
             :format(playerpoints[points[#points][1].number])
       -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)

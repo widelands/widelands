@@ -1012,8 +1012,12 @@ return {
    dimensions = {
       text_default_gap = ingame_padding,
       text_space_before_inline_header = 8,
+      ingame_message_gap = 8,
       ingame_space_before_objective = 18,
       ingame_space_before_immovable_icon = 14,
+      help_terrain_tree_header_space_before = 12,
+      help_terrain_tree_header_space_after = 3,
+      editor_tooltip_icon_gap = 2,
       campaign_message_box_default_h = 400,
       campaign_message_box_default_w = 450,
       campaign_message_box_top_pos_y = 25,

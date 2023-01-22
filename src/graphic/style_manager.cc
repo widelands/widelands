@@ -409,10 +409,17 @@ StyleManager::StyleManager() {
 	add_dimension(UI::StyledSize::kTextDefaultGap, *element_table, "text_default_gap");
 	add_dimension(UI::StyledSize::kTextSpaceBeforeInlineHeader, *element_table,
 	              "text_space_before_inline_header");
+	add_dimension(UI::StyledSize::kIngameMessageGap, *element_table, "ingame_message_gap");
 	add_dimension(UI::StyledSize::kIngameSpaceBeforeObjective, *element_table,
 	              "ingame_space_before_objective");
 	add_dimension(UI::StyledSize::kIngameSpaceBeforeImmovableIcon, *element_table,
 	              "ingame_space_before_immovable_icon");
+	add_dimension(UI::StyledSize::kHelpTerrainTreeHeaderSpaceBefore, *element_table,
+	              "help_terrain_tree_header_space_before");
+	add_dimension(UI::StyledSize::kHelpTerrainTreeHeaderSpaceAfter, *element_table,
+	              "help_terrain_tree_header_space_after");
+	add_dimension(UI::StyledSize::kEditorTooltipIconGap, *element_table,
+	              "editor_tooltip_icon_gap");
 	add_dimension(UI::StyledSize::kCampaignMessageBoxDefaultH, *element_table,
 	              "campaign_message_box_default_h");
 	add_dimension(UI::StyledSize::kCampaignMessageBoxDefaultW, *element_table,

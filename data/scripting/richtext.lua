@@ -138,6 +138,17 @@ end
 
 
 -- RST
+-- .. function:: msg_vspace()
+--
+--    Adds a standard vertical space for in-game messages.
+--
+--    :returns: a vspace tag with the standard gap size for in-game messages
+
+function msg_vspace()
+   return vspace(styles.dimension("ingame_message_gap"))
+end
+
+-- RST
 -- :ref:`Return to index<richtext.lua>`
 --
 -- Headings and Paragraphs
@@ -736,5 +747,9 @@ end
 --    :scale: 100
 --    :alt: sample rendering
 --    :align: center
+--
+-- Please try to avoid hardcoding colors and non-default spacing and sizes. Best practice is to use
+-- `styles.color()` to get color values and `styles.dimension()` to get values for spacing and
+-- other sizes from the style manager whenever possible.
 --
 -- :ref:`Return to index<richtext.lua>`
