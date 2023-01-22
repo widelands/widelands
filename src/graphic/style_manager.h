@@ -92,7 +92,8 @@ enum class StyledSize {
 	kSPScenarioPlateauMessageBoxH,
 	kSPScenarioPlateauMessageBoxW,
 	kSPScenarioPlateauMessageBoxPosY,
-	kUIDefaultPadding };
+	kUIDefaultPadding
+};
 
 }  // namespace UI
 

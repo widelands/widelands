@@ -410,28 +410,27 @@ StyleManager::StyleManager() {
 	add_dimension(UI::StyledSize::kTextSpaceBeforeInlineHeader, *element_table,
 	              "text_space_before_inline_header");
 	add_dimension(UI::StyledSize::kIngameMessageGap, *element_table, "ingame_message_gap");
-	add_dimension(UI::StyledSize::kIngameSpaceBeforeObjective, *element_table,
-	              "ingame_space_before_objective");
+	add_dimension(
+	   UI::StyledSize::kIngameSpaceBeforeObjective, *element_table, "ingame_space_before_objective");
 	add_dimension(UI::StyledSize::kIngameSpaceBeforeImmovableIcon, *element_table,
 	              "ingame_space_before_immovable_icon");
 	add_dimension(UI::StyledSize::kHelpTerrainTreeHeaderSpaceBefore, *element_table,
 	              "help_terrain_tree_header_space_before");
 	add_dimension(UI::StyledSize::kHelpTerrainTreeHeaderSpaceAfter, *element_table,
 	              "help_terrain_tree_header_space_after");
-	add_dimension(UI::StyledSize::kEditorTooltipIconGap, *element_table,
-	              "editor_tooltip_icon_gap");
+	add_dimension(UI::StyledSize::kEditorTooltipIconGap, *element_table, "editor_tooltip_icon_gap");
 	add_dimension(UI::StyledSize::kCampaignMessageBoxDefaultH, *element_table,
 	              "campaign_message_box_default_h");
 	add_dimension(UI::StyledSize::kCampaignMessageBoxDefaultW, *element_table,
 	              "campaign_message_box_default_w");
-	add_dimension(UI::StyledSize::kCampaignMessageBoxTopPosY, *element_table,
-	              "campaign_message_box_top_pos_y");
-	add_dimension(UI::StyledSize::kCampaignFri02PoemIndent, *element_table,
-	              "campaign_fri02_poem_indent");
-	add_dimension(UI::StyledSize::kSPScenarioPlateauMessageBoxH, *element_table,
-	              "map_plateau_message_h");
-	add_dimension(UI::StyledSize::kSPScenarioPlateauMessageBoxW, *element_table,
-	              "map_plateau_message_w");
+	add_dimension(
+	   UI::StyledSize::kCampaignMessageBoxTopPosY, *element_table, "campaign_message_box_top_pos_y");
+	add_dimension(
+	   UI::StyledSize::kCampaignFri02PoemIndent, *element_table, "campaign_fri02_poem_indent");
+	add_dimension(
+	   UI::StyledSize::kSPScenarioPlateauMessageBoxH, *element_table, "map_plateau_message_h");
+	add_dimension(
+	   UI::StyledSize::kSPScenarioPlateauMessageBoxW, *element_table, "map_plateau_message_w");
 	add_dimension(UI::StyledSize::kSPScenarioPlateauMessageBoxPosY, *element_table,
 	              "map_plateau_message_pos_y");
 	add_dimension(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
