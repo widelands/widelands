@@ -15,12 +15,11 @@ end
 
 function add_soldiers(hq, soldiers)
    local setpoints = hq:get_soldiers("all")
-   for sdescr, count in pairs(soldiers) do
-      local desc = {sdescr:match("(%d):(%d):(%d):(%d)")}
+   for desc, count in pairs(soldiers) do
       local did_add = false
       for key, value in pairs(setpoints) do
          if key[1] == desc[1] and key[2] == desc[2] and key[3] == desc[3] and key[4] == desc[4] then
-            setpoints[desc] = value + count
+            setpoints[key] = value + count
             did_add = true
          end
       end
@@ -33,11 +32,7 @@ function _remove_content(old)
    local soldiers, workers, wares = {}, {}, {}
 
    -- salvage soldiers
-   for descr, count in pairs(old:get_soldiers("all")) do
-      local sdescr = ("%i:%i:%i:%i"):format(table.unpack(descr))
-      if not soldiers[sdescr] then soldiers[sdescr] = 0 end
-      soldiers[sdescr] = soldiers[sdescr] + count
-   end
+   soldiers = old:get_soldiers("all")
    old:set_soldiers({0,0,0,0}, 0)
 
    -- salvage workers
