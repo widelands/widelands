@@ -9,19 +9,21 @@ welcome_msg = {
    [[Island Hopping is a traditional tournament in Atlantean culture. ]] ..
    [[The rules of the game are simple: you start with a headquarters on an island. ]] ..
    [[When you finish a castle at the end of the first island, you are granted a ]] ..
-   [[second headquarters on a second island, which will contain all wares from your ]] ..
-   [[first headquarters.]]
+   [[second headquarters on a second island, which will get all wares, workers and soldiers ]] ..
+   [[transferred from your headquarters and warehouses on the first island.]]
    )) ..
     p(_(
    [[If you finish a castle in the target area on the second island, you will get ]] ..
-   [[a third headquarters on the third island. You must build a castle at ]] ..
+   [[a third headquarters on the third island with all wares, workers and soldiers ]] ..
+   [[getting transferred from your previous headquarters and warehouses again. You must build a castle at ]] ..
    [[the center of the third island and hold it for 20 minutes to win the game.]]
    )) ..
     p(_(
    [[Whenever you finish an island, you will get bonus wares, depending on how many players ]] ..
    [[have finished the island before you. The earlier you finish, the fewer wares you will get. ]] ..
    [[See below for the details.]])) .. p(_(
-   [[The point is that the first island only provides rocks and trees, the second only meadows and resources. The economies you leave behind will continue to work for you, but you will only reap the benefits at the moment you reach a new island.]])
+   [[The point is that the first island only provides rocks and trees, the second only meadows and resources. ]] ..
+   [[The economies you leave behind will continue to work for you, but you will only reap the benefits at the moment you reach a new island.]])
    ) ..
    p(_
    [[Finally, be careful not to waste your quartz and diamonds.]]
