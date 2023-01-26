@@ -43,6 +43,14 @@
 
 namespace Widelands {
 
+static inline void delete_temp_file(const std::string& temp_file) {
+	try {
+		g_fs->fs_unlink(temp_file);
+	} catch (const std::exception& e) {
+		log_err("Unable to delete temporary file '%s': %s", temp_file.c_str(), e.what());
+	}
+}
+
 // File format definitions
 constexpr uint32_t kReplayMagic = 0x2E21A102;
 constexpr uint8_t kCurrentPacketVersion = 4;
@@ -127,7 +135,8 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime
 			throw UnhandledVersionError("ReplayReader", packet_version, kCurrentPacketVersion);
 		}
 
-		const std::string temp_file = kTempFileDir + timestring() + kSavegameExtension;
+		const std::string temp_file =
+		   kTempFileDir + FileSystem::file_separator() + timestring() + kSavegameExtension;
 		{
 			const uint32_t bytes = cmdlog_->unsigned_32();
 			std::unique_ptr<char[]> buffer(new char[bytes]);
@@ -145,7 +154,7 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime
 		gl.load_game();
 		game.postload_addons();
 
-		g_fs->fs_unlink(temp_file);
+		delete_temp_file(temp_file);
 
 		game.rng().read_state(*cmdlog_);
 	} catch (...) {
@@ -260,12 +269,14 @@ public:
 ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
    : game_(game), filename_(filename) {
 	g_fs->ensure_directory_exists(kReplayDir);
+	g_fs->ensure_directory_exists(kTempFileDir);
 
 	SaveHandler& save_handler = game_.save_handler();
 
-	const std::string temp_savegame = kTempFileDir + timestring() + kSavegameExtension;
+	const std::string temp_savegame =
+	   kTempFileDir + FileSystem::file_separator() + timestring() + kSavegameExtension;
 	std::string error;
-	if (!save_handler.save_game(game_, temp_savegame, &error)) {
+	if (!save_handler.save_game(game_, temp_savegame, FileSystem::ZIP, &error)) {
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 	}
 
@@ -275,8 +286,10 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 	cmdlog_->unsigned_8(kCurrentPacketVersion);
 
 	{
+		std::unique_ptr<FileSystem> sub_fs(
+		   g_fs->make_sub_file_system(FileSystem::fs_dirname(temp_savegame)));
 		FileRead fr;
-		fr.open(*g_fs, temp_savegame);
+		fr.open(*sub_fs, FileSystem::fs_filename(temp_savegame.c_str()));
 		const size_t bytes = fr.get_size();
 		cmdlog_->unsigned_32(bytes);
 		cmdlog_->data(fr.data(bytes), bytes);
@@ -289,7 +302,7 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 		gl.load_game();
 	}
 	verb_log_info("Done reloading the game from replay");
-	g_fs->fs_unlink(temp_savegame);
+	delete_temp_file(temp_savegame);
 
 	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
 
@@ -357,13 +370,13 @@ ReplayfileSavegameExtractor::ReplayfileSavegameExtractor(const std::string& game
 	fr.data_complete(buffer.get(), bytes);
 	FileWrite fw;
 	fw.data(buffer.get(), bytes);
-	temp_file_ = kTempFileDir + timestring() + kSavegameExtension;
+	temp_file_ = kTempFileDir + FileSystem::file_separator() + timestring() + kSavegameExtension;
 	fw.write(*g_fs, temp_file_);
 }
 
 ReplayfileSavegameExtractor::~ReplayfileSavegameExtractor() {
 	if (!temp_file_.empty()) {
-		g_fs->fs_unlink(temp_file_);
+		delete_temp_file(temp_file_);
 	}
 }
 }  // namespace Widelands

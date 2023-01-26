@@ -18,8 +18,12 @@ import argparse
 import os
 import re
 import sys
-from subprocess import call
+from subprocess import check_call
 from file_utils import read_text_file, write_text_file, find_files
+
+import autoflake
+import autopep8
+import unify
 
 LEADING_TABS = re.compile(r'^\s*\t+\s*')
 SPACES_PER_TAB = 3
@@ -42,6 +46,41 @@ def parse_args():
 
     return vars(p.parse_args())
 
+def pyformatters():
+    """Return list of code formatters."""
+    yield lambda code: autoflake.fix_code(
+        code,
+        remove_all_unused_imports=True,
+        remove_unused_variables=True)
+
+    yield autopep8.fix_code
+    yield unify.format_code
+
+def pyformat_file(filename):
+    """Run format_code() on a file.
+
+    Return True if the new formatting differs from the original.
+    Based on pyformat https://github.com/myint/pyformat @ 7293e4d
+    """
+    encoding = autopep8.detect_encoding(filename)
+    with autopep8.open_with_encoding(filename,
+                                     encoding=encoding) as input_file:
+        source = input_file.read()
+
+    if not source:
+        return False
+
+    for fix in pyformatters():
+        formatted_source = fix(source)
+
+    if source != formatted_source:
+        with autopep8.open_with_encoding(filename, mode='w',
+                                         encoding=encoding) as output_file:
+            output_file.write(formatted_source)
+        return True
+
+    return False
+
 
 def main():
     args = parse_args()
@@ -63,8 +102,8 @@ def main():
                 continue
             sys.stdout.write('.')
             sys.stdout.flush()
-            call(['clang-format', '-i', filename])
-            call(['git', 'add', '--renormalize', filename])
+            check_call(['clang-format', '-i', filename])
+            check_call(['git', 'add', '--renormalize', filename])
         print(' done.')
 
     if format_lua:
@@ -88,7 +127,7 @@ def main():
                             SPACES_PER_TAB) + line[m.end():]
                     new_lines.append(line.rstrip() + '\n')
                 write_text_file(filename, ''.join(new_lines))
-                call(['git', 'add', '--renormalize', filename])
+                check_call(['git', 'add', '--renormalize', filename])
             print(' done.')
 
     if format_python:
@@ -100,11 +139,13 @@ def main():
         for directory in directories:
             sys.stdout.write(
                 '\nFormatting Python scripts in directory: ' + directory + ' ')
+            python_files = find_files(directory, ['.py'])
+            check_call(['docformatter', '-i', *python_files])
             for filename in find_files(directory, ['.py']):
                 sys.stdout.write('.')
                 sys.stdout.flush()
-                call(['pyformat', '-i', filename])
-                call(['git', 'add', '--renormalize', filename])
+                pyformat_file(filename)
+                check_call(['git', 'add', '--renormalize', filename])
             print(' done.')
 
     print('Formatting finished.')

@@ -16,6 +16,7 @@ wl_library(base
     i18n.cc
     multithreading.h
     multithreading.cc
+    mutex.h
     log.cc
     log.h
     string.h

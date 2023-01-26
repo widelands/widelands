@@ -487,9 +487,11 @@ void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
 }
 
 void MapView::stop_dragging() {
-	WLApplication::get()->set_mouse_lock(false);
-	grab_mouse(false);
-	dragging_ = false;
+	if (dragging_) {
+		WLApplication::get()->set_mouse_lock(false);
+		grab_mouse(false);
+		dragging_ = false;
+	}
 }
 
 bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t const y) {

@@ -22,7 +22,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/addons/manager.h"
 
-namespace FsMenu::AddOnsUI {
+namespace AddOnsUI {
 
 ContactForm::ContactForm(AddOnsCtrl& ctrl)
    : UI::Window(&ctrl.get_topmost_forefather(),
@@ -110,4 +110,4 @@ bool ContactForm::check_ok_button_enabled() {
 	return ok_.enabled();
 }
 
-}  // namespace FsMenu::AddOnsUI
+}  // namespace AddOnsUI

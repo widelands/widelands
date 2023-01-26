@@ -36,6 +36,12 @@ GameDataError::GameDataError(char const* const fmt, ...) {
 	what_ = buffer;
 }
 
+bool UnhandledVersionError::is_unhandled_version_error(const std::string& err) {
+	/* Check that the given error message looks mostly like the standard message
+	 * of an UnhandledVersionError as created below. */
+	return contains(err, "UnhandledVersionError");
+}
+
 UnhandledVersionError::UnhandledVersionError(const char* packet_name,
                                              int32_t packet_version,
                                              int32_t current_packet_version) {

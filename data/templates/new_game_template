@@ -24,8 +24,9 @@ interactive_player="1"
 # win_condition="100-wells.wad"    # Script at: addons/100-wells.wad/init.lua
 win_condition="endless_game.lua"
 
-# Whether peaceful mode and custom starting positions mode are enabled. Default: false.
+# Whether peaceful mode, fogless mode, and custom starting positions mode are enabled. Default: false.
 peaceful="false"
+fogless="false"
 custom_starting_positions="false"
 
 # Comma-separated, ordered list of the internal names of the add-ons to enable. Default: All disabled.
@@ -51,7 +52,7 @@ team="0"
 # The comma-separated R,G,B values of the player's player color. Default: The i-th scenario player color.
 playercolor="26,23,162"
 
-# The AI to use, if this player is not the interactive one. 
+# The AI to use, if this player is not the interactive one.
 # Possible values are: empty, very_weak, weak, normal, random. Default: normal
 ai="normal"
 

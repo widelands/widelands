@@ -68,7 +68,7 @@ jobs:
       with:
         fetch-depth: 1
     - name: Installing python
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
         python-version: 3.x
     - name: Generate documentation
@@ -231,10 +231,10 @@ jobs:
       run: |
         mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
         cd ${{ env.VCPKG_ROOT }}
-        echo "::set-output name=head::$(git rev-parse --short HEAD)"
+        echo "head=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       shell: bash
     - name: Restore vcpkg and its artifacts.
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: |
@@ -266,7 +266,7 @@ jobs:
         $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
         ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
     - name: Uploading installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MSVC)
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe
@@ -319,7 +319,7 @@ jobs:
         strip.exe -sv .\build\src\widelands.exe
         ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-mingw-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
     - name: Uploading installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MinGW)
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-mingw-${{ matrix.config }}-${{ matrix.arch }}.exe
@@ -354,7 +354,7 @@ jobs:
         #echo "::set-env name=dmg::$DMGPATH/$DMGFILE"
 
     - name: Uploading DMG
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 11 AppImage
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
@@ -399,7 +399,7 @@ jobs:
         chmod +x linuxdeploy-x86_64.AppImage
         ./linuxdeploy-x86_64.AppImage --executable AppDir/usr/bin/widelands --desktop-file xdg/org.widelands.Widelands.desktop --appdir AppDir --output appimage
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} Linux AppImage
         path: ${{ github.workspace }}/Widelands-${{ env.VERSION }}-x86_64.AppImage
@@ -410,8 +410,13 @@ jobs:
     needs: [windows, windows-msvc, macos, appimage]
     runs-on: "ubuntu-latest"
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 15
+          token: '${{ secrets.WIDELANDS_FORMAT_TOKEN }}'
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
       - name: Check missing artifacts
         # This step ensures that the development release always contains an artifact for every platform.
         # artifacts.list lists all attachments of the pre-release. In case a build step failed, we detect
@@ -432,15 +437,19 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install rename
-          find . -name 'Widelands*' -type f -printf '%f\n' | tee artifacts.list
-          find . -name 'Widelands*' -type f -exec prename 's/Widelands-[0-9a-f]*-/Widelands-daily-/' "{}" \;
-          find . -name 'Widelands*' -type f -print0 | while IFS= read -d '' -r ARTIFACT; do
-            dir=$(dirname "$ARTIFACT")
-            filename=$(basename "$ARTIFACT")
+          find . -name 'Widelands-*' -type f -print0 | while IFS= read -d '' -r ARTIFACT; do
+            FILENAME=$(basename "$ARTIFACT")
+            # Move all artifacts to the current folder
+            mv "$ARTIFACT" "$FILENAME"
+            # Store original file names
+            echo $FILENAME | tee -a artifacts.list
+            # Rename artifacts to have a fixed url
+            prename 's/Widelands-[0-9a-f]*-/Widelands-daily-/' "$FILENAME" \;
+          done
+          # Calculate checksums
+          find . -name 'Widelands-daily-*' -type f -print0 | while IFS= read -d '' -r ARTIFACT; do
             echo "Calculate checksum for \"$ARTIFACT\""
-            pushd "$dir"
-            md5sum "${filename}" > "${filename}.md5"
-            popd
+            md5sum "${ARTIFACT}" > "${ARTIFACT}.md5"
           done
           # curl exits 23 because grep will kill it after the first match
           set +e
@@ -456,27 +465,24 @@ jobs:
       - name: Updating latest pre-release
         # Creates a new pre-release with the "latest" tag and all gathered artifacts.
         # Because all older artifacts are removed, we have to reupload the missing ones detected in the previous step
-        uses: "marvinpinto/action-automatic-releases@v1.2.1"
-        with:
-          repo_token: "${{ secrets.WIDELANDS_FORMAT_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Builds"
-          files: |
-            */Widelands-daily-*.exe
-            */Widelands-daily-*.dmg
-            */Widelands-daily-*.AppImage
-            */Widelands-daily-*.md5
-            artifacts.list
-      - name: Update Release Body
-        uses: tubone24/update_release@v1.3.1
         env:
-          TAG_NAME: "latest"
-          GITHUB_TOKEN: ${{ secrets.WIDELANDS_FORMAT_TOKEN }}
-        with:
-          is_append_body: true
-          body: |
-            ---
-            These builds are automatically generated from master. Changes since the last build are listed above.
-            The file `artifacts.list` lists the original installer names, which also contain the commit hash from which they were generated.
-
+          GH_TOKEN: "${{ secrets.WIDELANDS_FORMAT_TOKEN }}"
+        run: |
+          gh release delete latest --yes    || echo "No old release to delete"
+          git push --delete origin latest   || echo "No latest tag to delete"
+          git tag --force latest HEAD
+          git push --tags origin
+          
+          echo "These builds are automatically generated from master. " >> release_notes
+          echo "## Latest changes" >> release_notes
+          # Print changelog from last 10 commits
+          git log --pretty="- %h: %s (%an)" --no-decorate HEAD~10..HEAD >> release_notes
+          echo "<details><summary>Original filenames</summary><pre>" >> release_notes
+          cat artifacts.list >> release_notes
+          echo "</pre></details>" >> release_notes
+          
+          gh release create latest         \
+            --prerelease                   \
+            --notes-file release_notes     \
+            --title "Development Builds"   \
+            Widelands-daily-* artifacts.list

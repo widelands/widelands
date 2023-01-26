@@ -142,6 +142,7 @@ Window::Window(Panel* const parent,
 	           kBottomBorderThickness);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
+	set_snap_target(true);
 	layout();
 	focus();
 
@@ -498,6 +499,7 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 		is_minimal() ? restore() : minimize();
 	} else if (btn == SDL_BUTTON_LEFT) {
 		dragging_ = true;
+		moved_by_user_ = true;
 		drag_start_win_x_ = get_x();
 		drag_start_win_y_ = get_y();
 		drag_start_mouse_x_ = get_x() + get_lborder() + mx;
@@ -674,7 +676,6 @@ bool Window::handle_mousemove(
 			}
 
 			{  //  Snap to other Panels.
-				const bool SOWO = parent->get_snap_windows_only_when_overlapping();
 				const int32_t right = left + w;
 				const int32_t bot = top + h;
 
@@ -687,14 +688,14 @@ bool Window::handle_mousemove(
 						int32_t const other_bot = other_top + snap_target->get_h();
 
 						if (other_top <= bot && other_bot >= top) {
-							if (!SOWO || left <= other_right) {
+							{
 								const int32_t distance = abs(left - other_right);
 								if (distance < nearest_snap_distance_x) {
 									nearest_snap_distance_x = distance;
 									new_left = other_right;
 								}
 							}
-							if (!SOWO || right >= other_left) {
+							{
 								const int32_t distance = abs(right - other_left);
 								if (distance < nearest_snap_distance_x) {
 									nearest_snap_distance_x = distance;
@@ -703,14 +704,14 @@ bool Window::handle_mousemove(
 							}
 						}
 						if (other_left <= right && other_right >= left) {
-							if (!SOWO || top <= other_bot) {
+							{
 								const int32_t distance = abs(top - other_bot);
 								if (distance < nearest_snap_distance_y) {
 									nearest_snap_distance_y = distance;
 									new_top = other_bot;
 								}
 							}
-							if (!SOWO || bot >= other_top) {
+							{
 								const int32_t distance = abs(bot - other_top);
 								if (distance < nearest_snap_distance_y) {
 									nearest_snap_distance_y = distance;

@@ -142,7 +142,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	load_or_save_.select_by_name(parent.game().save_handler().get_cur_filename());
 
 	center_to_parent();
-	move_to_top();
+	set_flag(UI::Panel::pf_always_on_top, true);
 
 	if (type_ == Type::kSave) {
 		filename_editbox_.focus();
@@ -150,7 +150,6 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 		load_or_save_.table().focus();
 	}
 	pause_game(true);
-	set_thinks(false);
 	layout();
 
 	initialization_complete();

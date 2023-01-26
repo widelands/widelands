@@ -143,6 +143,7 @@ inline static std::string theme_addon_template_dir(const std::string& name) {
 // Sorted list of all add-ons mapped to whether they are currently enabled
 using AddOnState = std::pair<std::shared_ptr<AddOnInfo>, bool>;
 extern std::vector<AddOnState> g_addons;
+const AddOnInfo* find_addon(const std::string& name);
 
 extern const std::unordered_map<std::string, std::string> kDifficultyIcons;
 extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;

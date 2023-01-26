@@ -20,7 +20,7 @@
 
 #include <memory>
 
-#include "base/multithreading.h"
+#include "base/mutex.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"

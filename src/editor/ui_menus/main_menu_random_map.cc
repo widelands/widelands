@@ -546,22 +546,21 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	Widelands::Map* map = egbase.mutable_map();
 
 	// TODO(Nordfriese): Perhaps support add-ons in the future?
-	// Any new units defined by add-ons can not be taken into account when generating a
-	// map currently. And if add-ons modify the default units, they may no longer satisfy
-	// the map generator's assumptions. It is probably safer to just disable them all.
+	// Any new units defined by add-ons, and any modifications made to the default units,
+	// can not be taken into account when generating a map currently.
 
 	if (eia != nullptr) {
-		egbase.create_loader_ui({"editor"}, true, "", editor_splash_image(), false);
+		egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage, false);
 		eia->cleanup_for_load();
 
 		egbase.enabled_addons().clear();
-		// egbase.init_addons(true);
+		egbase.init_addons(true);
 
 		// cleanup_for_load() deleted the world and tribes – reload them now
 		EditorInteractive::load_world_units(eia, egbase);
 	} else {
 		egbase.enabled_addons().clear();
-		// egbase.init_addons(true);
+		egbase.init_addons(true);
 
 		egbase.cleanup_for_load();
 	}
@@ -695,6 +694,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 			sp->set_scenario(false);
 			sp->set_player_number(plnum);
 			sp->set_peaceful_mode(false);
+			sp->set_fogless(false);
 			sp->set_custom_starting_positions(false);
 
 			for (unsigned p = 0; p < nr_players; ++p) {

@@ -20,7 +20,7 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
-#include "base/multithreading.h"
+#include "base/mutex.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "graphic/game_renderer.h"

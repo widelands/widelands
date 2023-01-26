@@ -18,10 +18,15 @@ jobs:
       with:
         fetch-depth: 0
         persist-credentials: false
+    - name: Installing python
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.x
     - name: Installing dependencies
       run: |
         sudo apt-get update
         sudo apt-get install gettext transifex-client translate-toolkit appstream desktop-file-utils
+        pip install pyformat
     - name: Synchronizing translations
       run: |
         echo "${{ secrets.TXAUTH }}" > ~/.transifexrc

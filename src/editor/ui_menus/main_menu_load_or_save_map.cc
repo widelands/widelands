@@ -121,7 +121,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	display_mode_.selected.connect([this]() { fill_table(); });
 	table_.cancel.connect([this]() { die(); });
 
-	move_to_top();
+	set_flag(UI::Panel::pf_always_on_top, true);
 }
 
 bool MainMenuLoadOrSaveMap::compare_players(uint32_t rowa, uint32_t rowb) {

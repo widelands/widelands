@@ -12,7 +12,7 @@
 # millimarg, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021,2023
 # Elisabeth Jäger, 2015
 # wl-zocker, 2014-2015
 # wl-zocker, 2015
@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-07 02:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: wl-zocker, 2014-2015\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021,2023\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -463,39 +463,45 @@ msgstr "Wenn du einen bestimmten Soldaten wegschicken willst, klicke einfach auf
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
-" can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr "Lass mich dir noch erklären, was die Zahlen in der Statuszeile über dem Militärgebäude bedeuten. Dort können bis zu drei Zahlen stehen, z. B. „1 (+5) Soldaten (+2)“."
+" can contain an arrow and up to three numbers, e.g. ‘↑ 1 (+5) soldier (+2)’."
+msgstr "Lass mich dir noch erklären, was die Zahlen in der Statuszeile über dem Militärgebäude bedeuten. Dort können ein Pfeil und bis zu drei Zahlen stehen, z. B. „↑ 1 (+5) Soldaten (+2)“."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
+msgid ""
+"The arrow shows whether the building is set to prefer heroes (upwards arrow)"
+" or rookies (downwards arrow)."
+msgstr "Der Pfeil zeigt an ob das Gebäude so eingestellt ist, dass es Helden (Pfeil nach Oben) oder Anfänger (Pfeil nach Unten) bevorzugt."
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:204
 msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
 msgstr "Die erste Zahl beschreibt, wie viele Soldaten aktuell in diesem Gebäude sind. In diesem Beispiel ist nur noch ein Soldat im Gebäude (jedes Militärgebäude muss immer von mindestens einem Soldaten bewacht werden)."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:204
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
 msgstr "Die zweite Zahl sagt dir, wie viele zusätzlichen Soldaten in diesem Gebäude stationiert, aber im Moment außerhalb sind. Die fünf Soldaten greifen möglicherweise gerade einen Feind an. Sie werden zurückkommen, wenn sie erfolgreich waren."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:206
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
 msgstr "Die dritte Zahl gibt die Anzahl der fehlenden Soldaten an. Von den acht Soldaten (1 + 5 + 2), die du hier haben möchtest, sind zwei vielleicht gestorben. Sie werden, wenn möglich, mit neuen Soldaten aus deinem Lagerhaus ersetzt."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:212
 msgid "Dismantle your sentry"
 msgstr "Reiße deinen Wachposten ab"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:214
 msgid "Dismantling military buildings"
 msgstr "Militärgebäude abreißen"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:214
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
@@ -503,7 +509,7 @@ msgid ""
 " building."
 msgstr "Du kannst die Anzahl der Soldaten nur auf eins reduzieren. Der letzte Soldat wird nie aus seinem Gebäude herauskommen (außer wenn es angegriffen wird). Wenn du all deine Soldaten anderswo haben möchtest, musst du das Gebäude abreißen oder zerstören."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:216
 msgid ""
 "However, destroying a military building is always linked with a risk: the "
 "land is still yours, but it is no longer protected. Any enemy that builds "
@@ -514,32 +520,32 @@ msgid ""
 "enemies."
 msgstr "Wie auch immer, das Zerstören eines Militärgebäudes ist immer mit einem Risiko verbunden: Das Land gehört immer noch dir, aber es ist nicht mehr geschützt. Jeder Feind, der seine eigenen Militärgebäude baut, kann dieses Land ohne einen Kampf einnehmen und deine Gebäude niederbrennen. Außerdem können einige Teile deines Gebietes unter dem Nebel des Krieges verborgen werden. Du solltest daher nur Militärgebäude im Inneren deines Gebietes abreißen, wo du vor Feinden sicher bist."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:216
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
 msgstr "Hast du deinen Wachposten gesehen? Da er nur wenige Soldaten beherbergen kann und neben einer stärkeren Barriere steht, ist er ziemlich nutzlos."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid "Dismantle it."
 msgstr "Reiße ihn ab."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
 msgstr "Du kannst diese Gelegenheit auch nutzen, um dich mit den anderen Optionen vertraut zu machen: der Helden-/Neulinge-Einstellung und der Soldatenkapazität."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:226
 msgid "Soldiers, dismissed!"
 msgstr "Soldaten, wegtreten!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:228
 msgid "Dismantle your north-western sentry"
 msgstr "Reiße den nordwestlichen Wachposten ab"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid ""
 "You can control the number of soldiers stationed at a military site with the"
 " arrow buttons. If you want to get even your last soldier out, you will have"
@@ -547,59 +553,59 @@ msgid ""
 "which will make it vulnerable to hostile attacks."
 msgstr "Du kannst die Anzahl der Soldaten in einem Militärgebäude mit den Pfeilen kontrollieren. Wenn du auch noch deinen letzten Soldaten woanders benötigst, musst du das Gebäude zerstören. Es wird dann aber dein Gebiet nicht mehr länger bewachen und dadurch für feindliche Angriffe verwundbar machen."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:230
 msgid "Dismantle your sentry in the north-west, next to the barrier."
 msgstr "Reiße den Wachposten im Nordwesten (neben der Barriere) ab."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:248
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:236
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:249
 msgid "Enhance Your Fortress"
 msgstr "Erweitere deine Festung"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:237
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:238
 msgid "Enhancing Buildings"
 msgstr "Gebäude erweitern"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:239
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
 msgstr "Sehr gut. Jetzt weißt du, wie du deine Soldaten von Orten, wo du sie nicht brauchst, zurückziehen kannst. Jetzt ist es an der Zeit, dir zu erklären, wie du deine Front verstärken kannst."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:239
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:240
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
 msgstr "Deine Festung ist bereits sehr stark und erobert viel Land. Aber es gibt ein noch größeres Gebäude: die Zitadelle."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:240
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
 msgstr "Zitadellen können nicht direkt gebaut werden. Stattdessen musst du zuerst eine Festung bauen und sie dann zu einer Zitadelle erweitern. Klicke dazu auf die Festung und dann auf die Schaltfläche „Erweitern zur Zitadelle“."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:242
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
 msgstr "Deine Soldaten werden die Festung während der Bauarbeiten verlassen. Das bedeutet, dass deine Festung vorübergehend ihren militärischen Einfluss verlieren wird, wie ich es vorhin beschrieben habe."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:243
 msgid "Enhance your fortress to a citadel now."
 msgstr "Erweitere nun deine Festung zu einer Zitadelle."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:250
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:251
 msgid "Enhance your fortress to a citadel"
 msgstr "Erweitere deine Festung zu einer Zitadelle"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:251
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:252
 msgid "Enhance your fortress to a mighty citadel."
 msgstr "Erweitere deine Festung zu einer mächtigen Zitadelle."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:252
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:253
 msgid ""
 "The citadel can house 12 soldiers, and it is the biggest military building "
 "the Barbarians can build. It also costs a lot of resources and takes a long "
@@ -607,15 +613,15 @@ msgid ""
 "like constricted points or mountains."
 msgstr "Diese Zitadelle kann 12 Krieger aufnehmen und ist das größte Militärgebäude, das die Barbaren bauen können. Sie kostet außerdem eine Menge Rohstoffe und braucht lange, um gebaut zu werden. Sie ist am besten geeignet, um strategisch wichtige Punkte wie enge Übergänge oder Berge zu schützen."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:259
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:260
 msgid "Defeat your Enemy"
 msgstr "Besiege deinen Feind"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:261
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:262
 msgid "Defeat the Enemy"
 msgstr "Besiege den Feind"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
 msgid ""
 "Great work, the citadel is finished. But what’s that? A hostile tribe has "
 "settled next to us while the citadel was under construction! Do you see how "
@@ -624,44 +630,44 @@ msgid ""
 "defeat the enemy!"
 msgstr "Großartige Arbeit, die Zitadelle ist fertig. Aber was ist das? Ein feindlicher Stamm hat neben uns gesiedelt, während unsere Zitadelle noch im Bau war! Siehst du, wie sie uns einen Teil unseres Landes weggenommen haben? Und unser Holzfäller hat seine Hütte verloren. Das meinte ich. Lass uns unser Land zurückholen und den Feind besiegen!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:274
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:275
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
 msgstr "Um ein Gebäude anzugreifen, klicke auf seine Tür, wähle die Anzahl der Soldaten, die angreifen sollen, und sende sie mit der Schaltfläche „Angriff starten“ los."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
 msgstr "Deine Soldaten werden aus allen Militärgebäuden in der Nähe kommen. Die Verteidiger werden ebenso von den nahen Militärgebäuden kommen und deine Truppe abfangen."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:265
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
 msgstr "Greife alle Militärgebäude des Gegners an, erobere sie und zerstöre sein Hauptquartier."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:270
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:271
 msgid "Defeat Your Enemy"
 msgstr "Besiege deinen Feind"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:272
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:273
 msgid "Defeat the enemy tribe"
 msgstr "Besiege den feindlichen Stamm"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:273
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:274
 msgid "Defeat the nearby enemy."
 msgstr "Besiege den nahen Feind."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:281
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:280
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:282
 msgid "Conclusion"
 msgstr "Zusammenfassung"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:283
 msgid ""
 "Thank you for playing this tutorial. I hope you enjoyed it and you learned "
 "how to create and train soldiers, how to control where they go and how to "
@@ -669,14 +675,14 @@ msgid ""
 "Having trained soldiers is a huge advantage."
 msgstr "Danke, dass du dieses Einführungsspiel gespielt hast. Ich hoffe, du hattest Spaß und hast gelernt, wie Krieger erschaffen und ausgebildet werden, wie du sie steuern und letztendlich einen Feind besiegen kannst. Hast du gesehen, wie einfach du deinen Feind besiegen konntest? Ausgebildete Krieger sind ein großer Vorteil."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:283
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:284
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
 msgstr "Aber ein Krieg ist teuer und nicht immer der Weg zum Erfolg. Wenn du ein neues Spiel startest, kannst du auch friedliche Siegbedingungen wählen. Du solltest sie definitiv ausprobieren, es lohnt sich."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:285
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "

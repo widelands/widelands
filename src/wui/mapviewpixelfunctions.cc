@@ -160,6 +160,10 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 	Widelands::TCoords<> result_triangle(Widelands::Coords::null(), Widelands::TriangleIndex::D);
 
 	//  Find out which of the 4 possible triangles (x, y) is in.
+	screen_y_base += kTriangleHeight;
+	row_number = (row_number + mapheight - 1) % mapheight;
+	next_row_number = (row_number + 1) % mapheight;
+	slash = !slash;
 	if (slash) {
 		int32_t Y_a = screen_y_base - kTriangleHeight -
 		              map[Widelands::Coords((right_col == 0 ? mapwidth : right_col) - 1, row_number)]

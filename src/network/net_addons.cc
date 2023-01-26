@@ -43,6 +43,7 @@
 #include "base/i18n.h"
 #include "base/math.h"
 #include "base/md5.h"
+#include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
 #include "graphic/image_cache.h"
@@ -290,7 +291,7 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 	}
 
 	std::string message;
-	for (; initialized_;) {
+	while (initialized_) {
 		std::string line = read_line();
 		if (line.empty()) {
 			break;
@@ -300,6 +301,12 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 	}
 
 	if (message.empty()) {
+		if (is_uploading_addon_) {
+			throw WLWarning("",
+			                "Connection interrupted (%s). Please note that you can not upload updates "
+			                "for an add-on more often than every three days.",
+			                strerror(errno));
+		}
 		throw WLWarning("", "Connection interrupted (%s)", strerror(errno));
 	}
 	throw WLWarning("", "Connection interrupted (%s). Reason: %s", strerror(errno), message.c_str());
@@ -366,6 +373,7 @@ struct CrashGuard {
 		assert(net_.initialized_);
 		assert(net_.network_active_);
 		net_.network_active_ = false;
+		net_.is_uploading_addon_ = false;
 		if (!ok_) {
 			net_.quit_connection();
 		}
@@ -497,9 +505,8 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 		a.icon = g_image_cache->get(kAddOnCategories.at(a.category).icon);
 	} else {
 		g_fs->ensure_directory_exists(kTempFileDir);
-		const std::string path =
-		   kTempFileDir + FileSystem::file_separator() + a.internal_name + ".icon" +
-		   std::to_string(std::time(nullptr)) /* for disambiguation */ + kTempFileExtension;
+		const std::string path = kTempFileDir + FileSystem::file_separator() + timestring() +
+		                         ".icon." + a.internal_name + kTempFileExtension;
 		read_file(icon_file_size, path);
 		check_checksum(path, icon_checksum);
 		a.icon = g_image_cache->get(path);
@@ -740,6 +747,7 @@ void NetAddons::upload_addon(const std::string& name,
 		init_fn("", gather_addon_content(dir, "", content));
 	}
 
+	is_uploading_addon_ = true;
 	CrashGuard guard(*this);
 	std::string send = kCmdSubmit;
 	send += ' ';
@@ -884,8 +892,8 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 		send += '\n';
 		write_to_server(send);
 
-		std::string temp_dirname =
-		   kTempFileDir + FileSystem::file_separator() + name + ".screenshots" + kTempFileExtension;
+		std::string temp_dirname = kTempFileDir + FileSystem::file_separator() + timestring() +
+		                           ".screenshots." + name + kTempFileExtension;
 		g_fs->ensure_directory_exists(temp_dirname);
 		std::string output = temp_dirname + FileSystem::file_separator() + screenie;
 

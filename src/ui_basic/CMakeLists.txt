@@ -77,7 +77,6 @@ wl_library(ui_basic
     graphic_color
     graphic_fonthandler
     graphic_functions
-    graphic_image_cache
     graphic_mouse_cursor
     graphic_playercolor
     graphic_styles
