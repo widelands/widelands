@@ -77,8 +77,8 @@ public:
 		pf_child_die = 1 << 4,     ///< a child needs to die
 		pf_visible = 1 << 5,       ///< render the panel
 		pf_can_focus = 1 << 6,     ///< can receive the keyboard focus
-		/// children should snap only when overlapping the snap target
-		pf_snap_windows_only_when_overlapping = 1 << 7,
+		// This panel will always be displayed on top of other panels.
+		pf_always_on_top = 1 << 7,
 		/// children should snap to the edges of this panel
 		pf_dock_windows_to_edges = 1 << 8,
 		/// whether any change in the desired size should propagate to the actual size
@@ -91,6 +91,8 @@ public:
 		pf_logic_think = 1 << 12,
 		// Do not draw any tooltips and stuff
 		pf_hide_all_overlays = 1 << 13,
+		// Other panels will snap to this one.
+		pf_snap_target = 1 << 14,
 	};
 
 	Panel(Panel* nparent,
@@ -111,11 +113,22 @@ public:
 
 	void free_children();
 
+	bool get_flag(unsigned flag) const {
+		return (flags_ & flag) != 0;
+	}
+	void set_flag(unsigned flag, bool on) {
+		if (on) {
+			flags_ |= flag;
+		} else {
+			flags_ &= ~flag;
+		}
+	}
+
 	// Checks whether this panel will be deleted in the next think cycle.
 	// This check is used to stop panels from thinking and performing other
 	// activities to prevent undesired side-effects.
 	bool is_dying() const {
-		return (flags_ & pf_die) != 0u;
+		return get_flag(pf_die);
 	}
 
 	// Modal
@@ -147,8 +160,12 @@ public:
 	virtual void move_inside_parent();
 	virtual void layout();
 
-	void set_layout_toplevel(bool ltl);
-	bool get_layout_toplevel() const;
+	void set_layout_toplevel(bool ltl) {
+		set_flag(pf_layout_toplevel, ltl);
+	}
+	bool get_layout_toplevel() const {
+		return get_flag(pf_layout_toplevel);
+	}
 
 	void get_desired_size(int* w, int* h) const;
 
@@ -171,8 +188,11 @@ public:
 
 	Vector2i to_parent(const Vector2i&) const;
 
-	virtual bool is_snap_target() const {
-		return false;
+	bool is_snap_target() const {
+		return get_flag(pf_snap_target);
+	}
+	void set_snap_target(bool on) {
+		set_flag(pf_snap_target, on);
 	}
 	uint16_t get_border_snap_distance() const {
 		return border_snap_distance_;
@@ -186,12 +206,8 @@ public:
 	void set_panel_snap_distance(uint8_t const value) {
 		panel_snap_distance_ = value;
 	}
-	bool get_snap_windows_only_when_overlapping() const {
-		return (flags_ & pf_snap_windows_only_when_overlapping) != 0u;
-	}
-	void set_snap_windows_only_when_overlapping(bool on = true);
 	bool get_dock_windows_to_edges() const {
-		return (flags_ & pf_dock_windows_to_edges) != 0u;
+		return get_flag(pf_dock_windows_to_edges);
 	}
 	void set_dock_windows_to_edges(bool on = true);
 	void set_inner_size(int nw, int nh);
@@ -242,7 +258,7 @@ public:
 
 	// Drawing, visibility
 	bool is_visible() const {
-		return (flags_ & pf_visible) != 0u;
+		return get_flag(pf_visible);
 	}
 	void set_visible(bool on);
 
@@ -256,11 +272,11 @@ public:
 		// Overridden only by InteractiveBase
 	}
 
-	void set_logic_think() {
-		flags_ |= pf_logic_think;
+	void set_logic_think(bool on = true) {
+		set_flag(pf_logic_think, on);
 	}
-	void set_hide_all_overlays() {
-		flags_ |= pf_hide_all_overlays;
+	void set_hide_all_overlays(bool on = true) {
+		set_flag(pf_hide_all_overlays, on);
 	}
 
 	Vector2i get_mouse_position() const;
@@ -288,12 +304,14 @@ public:
 	/// http://lists.libsdl.org/pipermail/sdl-libsdl.org/2008-March/064560.html
 	bool get_key_state(SDL_Scancode) const;
 
-	void set_handle_mouse(bool yes);
+	void set_handle_mouse(bool yes) {
+		set_flag(pf_handle_mouse, yes);
+	}
 	void grab_mouse(bool grab);
 
 	void set_can_focus(bool yes);
 	bool get_can_focus() const {
-		return (flags_ & pf_can_focus) != 0u;
+		return get_flag(pf_can_focus);
 	}
 	bool has_focus() const {
 		return (get_can_focus() && parent_->focus_ == this);
@@ -305,14 +323,10 @@ public:
 	}
 
 	void set_top_on_click(bool const on) {
-		if (on) {
-			flags_ |= pf_top_on_click;
-		} else {
-			flags_ &= ~pf_top_on_click;
-		}
+		set_flag(pf_top_on_click, on);
 	}
 	bool get_top_on_click() const {
-		return (flags_ & pf_top_on_click) != 0u;
+		return get_flag(pf_top_on_click);
 	}
 
 	static void set_allow_user_input(bool const t) {
@@ -399,11 +413,7 @@ protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
 	void set_handle_textinput(bool const on = true) {
-		if (on) {
-			flags_ |= pf_handle_textinput;
-		} else {
-			flags_ &= ~pf_handle_textinput;
-		}
+		set_flag(pf_handle_textinput, on);
 	}
 
 	/*
@@ -416,15 +426,13 @@ protected:
 	// If this is set to 'true', this panel ad its children will never receive keypresses (do_key) or
 	// textinput (do_textinput).
 	void set_handle_keypresses(bool const on) {
-		if (on) {
-			flags_ |= pf_handle_keypresses;
-		} else {
-			flags_ &= ~pf_handle_keypresses;
-		}
+		set_flag(pf_handle_keypresses, on);
 	}
 
 	// Defines if think() should be called repeatedly. This is true on construction.
-	void set_thinks(bool yes);
+	void set_thinks(bool yes) {
+		set_flag(pf_thinks, yes);
+	}
 
 	bool keyboard_free() {
 		return (focus_) == nullptr;
@@ -470,25 +478,26 @@ protected:
 	void do_redraw_now(bool handle_input = true,
 	                   const std::string& message_to_display = std::string());
 
+public:
+	virtual bool check_handles_mouse(int32_t /* x */, int32_t /* y */) {
+		return get_flag(pf_handle_mouse);
+	}
+
 private:
 	bool initialized_{false};
-
-	bool handles_mouse() const {
-		return (flags_ & pf_handle_mouse) != 0;
-	}
 
 	bool handles_keypresses() const {
 		if (get_parent() != nullptr && !get_parent()->handles_keypresses()) {
 			return false;
 		}
-		return (flags_ & pf_handle_keypresses) != 0;
+		return get_flag(pf_handle_keypresses);
 	}
 
 	bool handles_textinput() const {
-		return (flags_ & pf_handle_textinput) != 0;
+		return get_flag(pf_handle_textinput);
 	}
 	bool thinks() const {
-		return (flags_ & pf_thinks) != 0;
+		return get_flag(pf_thinks);
 	}
 
 	void check_child_death();
@@ -580,17 +589,8 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };
 
-inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {
-	flags_ &= ~pf_snap_windows_only_when_overlapping;
-	if (on) {
-		flags_ |= pf_snap_windows_only_when_overlapping;
-	}
-}
 inline void Panel::set_dock_windows_to_edges(const bool on) {
-	flags_ &= ~pf_dock_windows_to_edges;
-	if (on) {
-		flags_ |= pf_dock_windows_to_edges;
-	}
+	set_flag(pf_dock_windows_to_edges, on);
 }
 
 /**

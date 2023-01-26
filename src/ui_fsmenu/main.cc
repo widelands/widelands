@@ -330,8 +330,6 @@ void MainMenu::set_labels() {
 		Section& global_s = get_config_section();
 		set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 		set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
-		set_snap_windows_only_when_overlapping(
-		   global_s.get_bool("snap_windows_only_when_overlapping", false));
 		set_dock_windows_to_edges(global_s.get_bool("dock_windows_to_edges", false));
 	}
 

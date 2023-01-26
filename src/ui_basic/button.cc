@@ -62,6 +62,7 @@ Button::Button  //  Common constructor
      title_image_(title_image),
      button_style_(init_style) {
 	set_thinks(false);
+	set_snap_target(true);
 	set_can_focus(enabled_);
 }
 
