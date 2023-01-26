@@ -144,12 +144,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      translation_info_(&box_interface_hbox_, 0, 0, 100, 20, UI::PanelStyle::kFsMenu),
 
      // Windows options
-     snap_win_overlap_only_(&box_interface_,
-                            UI::PanelStyle::kFsMenu,
-                            Vector2i::zero(),
-                            _("Snap windows only when overlapping"),
-                            "",
-                            0),
      dock_windows_to_edges_(&box_interface_,
                             UI::PanelStyle::kFsMenu,
                             Vector2i::zero(),
@@ -350,7 +344,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_.add(&sb_maxfps_);
 	box_interface_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
 
-	box_interface_.add(&snap_win_overlap_only_, UI::Box::Resizing::kFullSize);
 	box_interface_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
 	box_interface_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
 	box_interface_.add(&sb_dis_panel_);
@@ -443,7 +436,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	tooltip_accessibility_mode_.set_state(opt.tooltip_accessibility_mode);
 
 	// Windows options
-	snap_win_overlap_only_.set_state(opt.snap_win_overlap_only);
 	dock_windows_to_edges_.set_state(opt.dock_windows_to_edges);
 	animate_map_panning_.set_state(opt.animate_map_panning);
 
@@ -750,7 +742,6 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.tooltip_accessibility_mode = tooltip_accessibility_mode_.get_state();
 
 	// Windows options
-	os_.snap_win_overlap_only = snap_win_overlap_only_.get_state();
 	os_.dock_windows_to_edges = dock_windows_to_edges_.get_state();
 	os_.animate_map_panning = animate_map_panning_.get_state();
 	os_.panel_snap_distance = sb_dis_panel_.get_value();
@@ -832,7 +823,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.tooltip_accessibility_mode = opt_section_.get_bool("tooltip_accessibility_mode", false);
 
 	// Windows options
-	opt.snap_win_overlap_only = opt_section_.get_bool("snap_windows_only_when_overlapping", false);
 	opt.dock_windows_to_edges = opt_section_.get_bool("dock_windows_to_edges", false);
 	opt.animate_map_panning = opt_section_.get_bool("animate_map_panning", true);
 	opt.panel_snap_distance = opt_section_.get_int("panel_snap_distance", 0);
@@ -882,7 +872,6 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("tooltip_accessibility_mode", opt.tooltip_accessibility_mode);
 
 	// Windows options
-	opt_section_.set_bool("snap_windows_only_when_overlapping", opt.snap_win_overlap_only);
 	opt_section_.set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
 	opt_section_.set_bool("animate_map_panning", opt.animate_map_panning);
 	opt_section_.set_int("panel_snap_distance", opt.panel_snap_distance);

@@ -43,6 +43,7 @@ Box::Box(Panel* const parent,
      orientation_(orientation),
 
      inner_spacing_(inner_spacing) {
+	set_snap_target(true);
 }
 
 /**

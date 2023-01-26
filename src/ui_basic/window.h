@@ -94,9 +94,6 @@ public:
 	}
 	virtual void restore();
 	virtual void minimize();
-	bool is_snap_target() const override {
-		return true;
-	}
 
 	bool is_pinned() const {
 		return pinned_;
@@ -107,6 +104,11 @@ public:
 	}
 	Button* get_button_pin() {
 		return button_pin_;
+	}
+
+	/** Whether the user ever moved the window. */
+	[[nodiscard]] bool moved_by_user() const {
+		return moved_by_user_;
 	}
 
 	// Drawing and event handlers
@@ -159,6 +161,7 @@ private:
 	bool is_minimal_{false};
 	uint32_t oldh_;  // if it is minimized, this is the old height
 	bool dragging_{false};
+	bool moved_by_user_{false};
 	int32_t drag_start_win_x_{0};
 	int32_t drag_start_win_y_{0};
 	int32_t drag_start_mouse_x_{0};
