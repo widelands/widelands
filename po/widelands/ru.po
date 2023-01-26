@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-16 09:46+0000\n"
+"POT-Creation-Date: 2023-01-22 04:15+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -295,21 +295,21 @@ msgstr "Дек"
 
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
-#: ../../src/editor/editorinteractive.cc:92
+#: ../../src/editor/editorinteractive.cc:98
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:95
 #: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
 msgstr "Главное меню"
 
-#: ../../src/editor/editorinteractive.cc:93
+#: ../../src/editor/editorinteractive.cc:99
 #: ../../src/wui/interactive_gamebase.cc:96
 msgctxt "hotkey"
 msgid "Esc"
 msgstr "Esc"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
-#: ../../src/editor/editorinteractive.cc:107
+#: ../../src/editor/editorinteractive.cc:113
 #: ../../src/wlapplication_options.cc:433
 msgid "Tools"
 msgstr "Инструменты"
@@ -320,59 +320,59 @@ msgstr "Инструменты"
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
-#: ../../src/editor/editorinteractive.cc:123
+#: ../../src/editor/editorinteractive.cc:129
 #: ../../src/wui/interactive_gamebase.cc:80
 msgid "Show / Hide"
 msgstr "Показать/Скрыть"
 
-#: ../../src/editor/editorinteractive.cc:136
+#: ../../src/editor/editorinteractive.cc:142
 msgid "Tool size"
 msgstr "Размер инструмента"
 
-#: ../../src/editor/editorinteractive.cc:151
+#: ../../src/editor/editorinteractive.cc:157
 #: ../../src/wlapplication_options.cc:425
 msgid "Undo"
 msgstr "Отменить"
 
-#: ../../src/editor/editorinteractive.cc:156
+#: ../../src/editor/editorinteractive.cc:162
 #: ../../src/wlapplication_options.cc:429
 msgid "Redo"
 msgstr "Повторить"
 
-#: ../../src/editor/editorinteractive.cc:168
+#: ../../src/editor/editorinteractive.cc:174
 #: ../../src/wui/buildingwindow.cc:436 ../../src/wui/interactive_player.cc:234
 msgid "Help"
 msgstr "Помощь"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:198
+#: ../../src/editor/editorinteractive.cc:204
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
 #: ../../src/ui_fsmenu/main.cc:416 ../../src/wlapplication_options.cc:411
 msgid "New Map"
 msgstr "Новая карта"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:207
+#: ../../src/editor/editorinteractive.cc:213
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:808
 #: ../../src/wlapplication_options.cc:416
 msgid "New Random Map"
 msgstr "Новая случайная карта"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:215
+#: ../../src/editor/editorinteractive.cc:221
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
 #: ../../src/ui_fsmenu/main.cc:421
 msgid "Load Map"
 msgstr "Загрузить карту"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:223
+#: ../../src/editor/editorinteractive.cc:229
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:53
 msgid "Save Map"
 msgstr "Сохранить Карту"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:231
+#: ../../src/editor/editorinteractive.cc:237
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:62
 #: ../../src/wlapplication_options.cc:421
@@ -380,33 +380,38 @@ msgid "Map Options"
 msgstr "Параметры карты"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:236
+#: ../../src/editor/editorinteractive.cc:242
+msgid "Publish Map Online…"
+msgstr ""
+
+#. * TRANSLATORS: An entry in the editor's main menu
+#: ../../src/editor/editorinteractive.cc:246
 msgid "Exit Editor"
 msgstr "Выход из редактора"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:274
+#: ../../src/editor/editorinteractive.cc:287
 msgid "Change height"
 msgstr "Изменить высоту местности"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
-#: ../../src/editor/editorinteractive.cc:277
+#: ../../src/editor/editorinteractive.cc:290
 msgid "Change the terrain height"
 msgstr "Изменить высоту местности"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:284
+#: ../../src/editor/editorinteractive.cc:297
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Random height"
 msgstr "Случайная высота местности"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
-#: ../../src/editor/editorinteractive.cc:287
+#: ../../src/editor/editorinteractive.cc:300
 msgid "Set the terrain height to random values"
 msgstr "Установите высоту местности в случайные значения"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:294
+#: ../../src/editor/editorinteractive.cc:307
 #: ../../src/editor/ui_menus/field_info_window.cc:139
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
 #: ../../src/wui/minimap.cc:157
@@ -414,35 +419,35 @@ msgid "Terrain"
 msgstr "Ландшафт"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
-#: ../../src/editor/editorinteractive.cc:297
+#: ../../src/editor/editorinteractive.cc:310
 msgid "Change the map’s terrain"
 msgstr "Изменить ландшафт"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:305
+#: ../../src/editor/editorinteractive.cc:318
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:61
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Объекты"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
-#: ../../src/editor/editorinteractive.cc:308
+#: ../../src/editor/editorinteractive.cc:321
 msgid "Add or remove immovables"
 msgstr "Добавить или удалить статичные объекты"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:315
+#: ../../src/editor/editorinteractive.cc:328
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:46
 msgid "Animals"
 msgstr "Животные"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
-#: ../../src/editor/editorinteractive.cc:318
+#: ../../src/editor/editorinteractive.cc:331
 msgid "Add or remove animals"
 msgstr "Добавить или удалить животных"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:326
+#: ../../src/editor/editorinteractive.cc:339
 #: ../../src/editor/ui_menus/field_info_window.cc:220
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:113
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
@@ -452,73 +457,73 @@ msgid "Resources"
 msgstr "Ресурсы"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
-#: ../../src/editor/editorinteractive.cc:329
+#: ../../src/editor/editorinteractive.cc:342
 msgid "Set or change resources"
 msgstr "Установить или изменить ресурсы"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:333
+#: ../../src/editor/editorinteractive.cc:346
 msgid "Port spaces"
 msgstr "Места для порта"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
-#: ../../src/editor/editorinteractive.cc:336
+#: ../../src/editor/editorinteractive.cc:349
 msgid "Add or remove port spaces"
 msgstr "Добавление или удаление мест для порта"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:344
+#: ../../src/editor/editorinteractive.cc:357
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:686
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:162
 msgid "Players"
 msgstr "Игроки"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:347
+#: ../../src/editor/editorinteractive.cc:360
 msgid "Set number of players and their names, tribes and starting positions"
 msgstr "Установите количество игроков и их имена, племена и стартовые позиции"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:351
+#: ../../src/editor/editorinteractive.cc:364
 msgid "Map origin"
 msgstr "Источник карты"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
-#: ../../src/editor/editorinteractive.cc:354
+#: ../../src/editor/editorinteractive.cc:367
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "Задайте позицию с координатами (0, 0). Это будет левый верхний угол сгенерированной миникарты."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:362
+#: ../../src/editor/editorinteractive.cc:375
 msgid "Map size"
 msgstr "Размер карты"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:365
+#: ../../src/editor/editorinteractive.cc:378
 msgid "Change the map’s size"
 msgstr "Изменить размер карты"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:369
+#: ../../src/editor/editorinteractive.cc:382
 msgid "Information"
 msgstr "Информация"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
-#: ../../src/editor/editorinteractive.cc:372
+#: ../../src/editor/editorinteractive.cc:385
 msgid "Click on a field to show information about it"
 msgstr "Щелкнуть на поле, чтобы показать информацию о нем"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:376
+#: ../../src/editor/editorinteractive.cc:389
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:487
 msgid "Tool History"
 msgstr "История инструмента"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
-#: ../../src/editor/editorinteractive.cc:379
+#: ../../src/editor/editorinteractive.cc:392
 msgid "Restore previous tool settings"
 msgstr "Восстановить исходные настройки инструмента"
 
@@ -528,12 +533,12 @@ msgstr "Восстановить исходные настройки инстр�
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../src/editor/editorinteractive.cc:448
+#: ../../src/editor/editorinteractive.cc:461
 #: ../../src/wui/interactive_gamebase.cc:265
 msgid "Hide Building Spaces"
 msgstr "Скрыть места под здания"
 
-#: ../../src/editor/editorinteractive.cc:448
+#: ../../src/editor/editorinteractive.cc:461
 #: ../../src/ui_fsmenu/options.cc:260
 #: ../../src/wui/interactive_gamebase.cc:265
 msgid "Show Building Spaces"
@@ -543,15 +548,15 @@ msgstr "Показать места под здания"
 #. show maximum
 #. * building spaces that will be available if all immovables (trees, rocks,
 #. etc.) are removed
-#: ../../src/editor/editorinteractive.cc:455
+#: ../../src/editor/editorinteractive.cc:468
 msgid "Hide Maximum Building Spaces"
 msgstr "Скрыть все возможные места под строительство."
 
-#: ../../src/editor/editorinteractive.cc:456
+#: ../../src/editor/editorinteractive.cc:469
 msgid "Show Maximum Building Spaces"
 msgstr "Показать все возможные места под строительство."
 
-#: ../../src/editor/editorinteractive.cc:459
+#: ../../src/editor/editorinteractive.cc:472
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
@@ -559,81 +564,81 @@ msgstr "Включите, чтобы увидеть какого максима�
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../src/editor/editorinteractive.cc:465
+#: ../../src/editor/editorinteractive.cc:478
 msgid "Hide Grid"
 msgstr "Скрыть сетку"
 
-#: ../../src/editor/editorinteractive.cc:465
+#: ../../src/editor/editorinteractive.cc:478
 msgid "Show Grid"
 msgstr "Показать сетку"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
-#: ../../src/editor/editorinteractive.cc:473
+#: ../../src/editor/editorinteractive.cc:486
 msgid "Hide Immovables"
 msgstr "Скрыть статичные объекты"
 
-#: ../../src/editor/editorinteractive.cc:473
+#: ../../src/editor/editorinteractive.cc:486
 msgid "Show Immovables"
 msgstr "Показать статичные объекты"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../src/editor/editorinteractive.cc:478
+#: ../../src/editor/editorinteractive.cc:491
 msgid "Hide Animals"
 msgstr "Скрыть животных"
 
-#: ../../src/editor/editorinteractive.cc:478
+#: ../../src/editor/editorinteractive.cc:491
 msgid "Show Animals"
 msgstr "Показать животных"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../src/editor/editorinteractive.cc:484
+#: ../../src/editor/editorinteractive.cc:497
 msgid "Hide Resources"
 msgstr "Скрыть ресурсы"
 
-#: ../../src/editor/editorinteractive.cc:484
+#: ../../src/editor/editorinteractive.cc:497
 msgid "Show Resources"
 msgstr "Показать ресурсы"
 
-#: ../../src/editor/editorinteractive.cc:527
+#: ../../src/editor/editorinteractive.cc:540
 msgid "Unsupported Format"
 msgstr "Формат не поддерживается"
 
-#: ../../src/editor/editorinteractive.cc:528
+#: ../../src/editor/editorinteractive.cc:541
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Не удается загрузить файл «%s». Возможно формат файла несовместим."
 
-#: ../../src/editor/editorinteractive.cc:600
+#: ../../src/editor/editorinteractive.cc:613
 msgid "Exit Editor Confirmation"
 msgstr "Подтверждение выхода из редактора"
 
-#: ../../src/editor/editorinteractive.cc:600
+#: ../../src/editor/editorinteractive.cc:613
 msgid "Unsaved Map"
 msgstr "Карта не сохранена"
 
-#: ../../src/editor/editorinteractive.cc:601
+#: ../../src/editor/editorinteractive.cc:614
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Карта не была сохранена, вы действительно хотите выйти?"
 
-#: ../../src/editor/editorinteractive.cc:602
+#: ../../src/editor/editorinteractive.cc:615
 msgid "Are you sure you wish to exit the editor?"
 msgstr "Вы уверены, что хотите выйти из редактора?"
 
-#: ../../src/editor/editorinteractive.cc:1096 ../../src/logic/addons.cc:47
+#: ../../src/editor/editorinteractive.cc:1109 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:357 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1333
 #: ../../src/ui_fsmenu/addons/manager.cc:1344
-#: ../../src/ui_fsmenu/addons/manager.cc:1394
-#: ../../src/ui_fsmenu/addons/manager.cc:1441
-#: ../../src/ui_fsmenu/addons/manager.cc:1519
-#: ../../src/ui_fsmenu/addons/manager.cc:1588
+#: ../../src/ui_fsmenu/addons/manager.cc:1395
+#: ../../src/ui_fsmenu/addons/manager.cc:1443
+#: ../../src/ui_fsmenu/addons/manager.cc:1521
+#: ../../src/ui_fsmenu/addons/manager.cc:1590
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:560
@@ -646,7 +651,7 @@ msgstr "Вы уверены, что хотите выйти из редакто�
 msgid "Error"
 msgstr "Ошибка"
 
-#: ../../src/editor/editorinteractive.cc:1098 ../../src/ui_fsmenu/main.cc:233
+#: ../../src/editor/editorinteractive.cc:1111 ../../src/ui_fsmenu/main.cc:233
 #: ../../src/wlapplication.cc:1637
 #, c-format
 msgid ""
@@ -658,13 +663,13 @@ msgid ""
 "Please add this information to your report."
 msgstr "Обнаружена ошибка. Сообщение об ошибке:\n\n%1$s\n\nПожалуйста, сообщите нам о проблеме, чтобы мы могли улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt в Windows). Вы используете версию %2$s.\nПожалуйста, добавьте эту информацию в ваш отчёт."
 
-#: ../../src/editor/editorinteractive.cc:1132
+#: ../../src/editor/editorinteractive.cc:1145
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Загрузка карты “%s”…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1154
+#: ../../src/editor/editorinteractive.cc:1167
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:112
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:583
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
@@ -673,17 +678,80 @@ msgid "No Name"
 msgstr "Без имени"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1157
+#: ../../src/editor/editorinteractive.cc:1170
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:113
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:584
-#: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:368
+#: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:367
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../../src/editor/editorinteractive.cc:1181
+#: ../../src/editor/editorinteractive.cc:1194
 msgid "Loading world…"
 msgstr "Загрузка мира..."
+
+#: ../../src/editor/editorinteractive.cc:1394
+msgid "Publish Map"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:1395
+#, c-format
+msgid ""
+"Are you certain that you want to publish this map online?\n"
+"\n"
+"Name: %1$s\n"
+"Internal name: %2$s\n"
+"Author: %3$s\n"
+"Description: %4$s\n"
+"Hint: %5$s\n"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:1419
+msgid "Login Error"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:1424
+msgid "Uploading Add-On…"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:1425
+msgid "Saving map…"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:1444
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:309
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:364
+msgid "Error Saving Map!"
+msgstr "Ошибка сохранения карты!"
+
+#: ../../src/editor/editorinteractive.cc:1450
+msgid "Packaging add-on…"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:1500
+msgid "Add-On Generation Error"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:1501
+msgid "The add-on could not be written to the disk."
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:1508
+#: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
+msgid "Uploading…"
+msgstr "Загружается"
+
+#: ../../src/editor/editorinteractive.cc:1514
+msgid "Upload Error"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:1536
+msgid "Success"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:1537
+msgid "The add-on was uploaded successfully."
+msgstr ""
 
 #: ../../src/editor/map_generator.cc:754
 msgid "Random Player"
@@ -894,7 +962,7 @@ msgid "Author: %s"
 msgstr "Автор: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
-#: ../../src/ui_fsmenu/addons/packager_box.cc:282
+#: ../../src/ui_fsmenu/addons/packager_box.cc:284
 #: ../../src/ui_fsmenu/main.cc:455 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
@@ -925,7 +993,7 @@ msgstr "Ошибка!"
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:78
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:278
-#: ../../src/ui_fsmenu/addons/packager_box.cc:208 ../../src/wui/mapdata.cc:186
+#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:186
 msgid "My Maps"
 msgstr "Мои карты"
 
@@ -965,7 +1033,7 @@ msgstr "Экран"
 #: ../../src/editor/ui_menus/player_menu.cc:78
 #: ../../src/ui_basic/color_chooser.cc:258
 #: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:46
-#: ../../src/ui_fsmenu/addons/login_box.cc:52
+#: ../../src/ui_fsmenu/addons/login_box.cc:54
 #: ../../src/ui_fsmenu/addons/manager.cc:250
 #: ../../src/ui_fsmenu/addons/packager.cc:109
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:175
@@ -989,7 +1057,7 @@ msgstr "OK"
 #: ../../src/ui_basic/color_chooser.cc:267
 #: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:55
 #: ../../src/ui_fsmenu/addons/contact.cc:55
-#: ../../src/ui_fsmenu/addons/login_box.cc:60
+#: ../../src/ui_fsmenu/addons/login_box.cc:63
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:191
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:470
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:62
@@ -1023,7 +1091,7 @@ msgid "Click player to remove"
 msgstr "Нажмите на игрока для удаления"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:425
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:66
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:89
 #: ../../src/wui/economy_options_window.cc:679
@@ -1037,7 +1105,7 @@ msgstr "Отказаться от предложенного состава ко
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 #: ../../src/ui_fsmenu/addons/packager.cc:75
-#: ../../src/ui_fsmenu/addons/packager_box.cc:146
+#: ../../src/ui_fsmenu/addons/packager_box.cc:148
 #: ../../src/wui/quicknavigation.cc:202
 msgid "+"
 msgstr "+"
@@ -1068,7 +1136,7 @@ msgid "Authors:"
 msgstr "Авторы:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:365
-#: ../../src/ui_fsmenu/addons/packager.cc:148
+#: ../../src/ui_fsmenu/addons/packager.cc:147
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:77
 msgid "Description:"
 msgstr "Описание:"
@@ -1373,11 +1441,6 @@ msgstr "Ошибка при создании каталога ‘%s’."
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Файл с названием «%s» уже существует. Перезаписать?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:309
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:364
-msgid "Error Saving Map!"
-msgstr "Ошибка сохранения карты!"
-
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:339
 msgid "Saving the map…"
 msgstr "Сохранение карты...."
@@ -1453,7 +1516,7 @@ msgstr "Игрок %u"
 
 #. * TRANSLATORS: Header for campaign tribe
 #: ../../src/editor/ui_menus/player_menu.cc:184
-#: ../../src/ui_fsmenu/addons/packager_box.cc:464
+#: ../../src/ui_fsmenu/addons/packager_box.cc:466
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 #: ../../src/ui_fsmenu/campaigndetails.cc:55
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:213
@@ -2533,7 +2596,7 @@ msgstr "возможна добыча"
 msgid "unwalkable"
 msgstr "непроходимая"
 
-#: ../../src/logic/mutable_addon.cc:233
+#: ../../src/logic/mutable_addon.cc:235
 #, c-format
 msgid ""
 "A map file is invalid:\n"
@@ -3623,18 +3686,18 @@ msgid ""
 "frequently."
 msgstr "Ваше сообщение было отправлено команде разработчиков Widelands. Мы ответим вам при первой же возможности. Не забывайте проверять ваш почтовый ящик на нашем сайте почаще."
 
-#: ../../src/ui_fsmenu/addons/login_box.cc:36
+#: ../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
 msgstr "Логин"
 
-#: ../../src/ui_fsmenu/addons/login_box.cc:68
+#: ../../src/ui_fsmenu/addons/login_box.cc:72
 #: ../../src/ui_fsmenu/addons/manager.cc:224
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:183
 #: ../../src/ui_fsmenu/training_wheel_options.cc:119
 msgid "Reset"
 msgstr "Сброс"
 
-#: ../../src/ui_fsmenu/addons/login_box.cc:74
+#: ../../src/ui_fsmenu/addons/login_box.cc:81
 #: ../../src/ui_fsmenu/login_box.cc:59
 #, c-format
 msgid ""
@@ -3643,11 +3706,11 @@ msgid ""
 "profile page."
 msgstr "Для того чтобы использовать зарегистрированную учетную запись, вам необходима учетная запись на веб-сайте Widelands. Войдите в %s и установите пароль для онлайн-игр на странице вашего профиля."
 
-#: ../../src/ui_fsmenu/addons/login_box.cc:81
+#: ../../src/ui_fsmenu/addons/login_box.cc:93
 msgid "Username:"
 msgstr "Имя пользователя:"
 
-#: ../../src/ui_fsmenu/addons/login_box.cc:86
+#: ../../src/ui_fsmenu/addons/login_box.cc:100
 #: ../../src/ui_fsmenu/login_box.cc:52
 msgid "Password:"
 msgstr "Пароль:"
@@ -4151,18 +4214,18 @@ msgstr "Загрузить"
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Вы действительно хотите загрузить дополнение ‘%s’ на сервер?"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1366
+#: ../../src/ui_fsmenu/addons/manager.cc:1367
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "‘%s’ загружается…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1373
-#: ../../src/ui_fsmenu/addons/manager.cc:1427
-#: ../../src/ui_fsmenu/addons/manager.cc:1489
+#: ../../src/ui_fsmenu/addons/manager.cc:1374
+#: ../../src/ui_fsmenu/addons/manager.cc:1429
+#: ../../src/ui_fsmenu/addons/manager.cc:1491
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1395
+#: ../../src/ui_fsmenu/addons/manager.cc:1396
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -4171,12 +4234,12 @@ msgid ""
 "%2$s"
 msgstr "Дополнение  ‘%1$s’ не может быть загружено на сервер.\nСообщение об ошибке:\n%2$s "
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1407
+#: ../../src/ui_fsmenu/addons/manager.cc:1409
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Скачивается '%s'..."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1443
+#: ../../src/ui_fsmenu/addons/manager.cc:1445
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -4185,7 +4248,7 @@ msgid ""
 "%2$s"
 msgstr "Не удалось загрузить дополнение \"%1$s\" с сервера. Установка/обновление были пропущены.\n\nСообщение об ошибке:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1520
+#: ../../src/ui_fsmenu/addons/manager.cc:1522
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -4194,7 +4257,7 @@ msgid ""
 "%2$s"
 msgstr "Перевод для дополнения ‘%1$s’ не может быть загружен с сервера. Установка/обновление перевода пропущено.\nСообщение об ошибке:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1589
+#: ../../src/ui_fsmenu/addons/manager.cc:1591
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "Необходимое дополнение \"%s\" не найдено на сервере."
@@ -4208,7 +4271,7 @@ msgid "New add-on"
 msgstr "Новое дополнение"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:84
-#: ../../src/ui_fsmenu/addons/packager_box.cc:164
+#: ../../src/ui_fsmenu/addons/packager_box.cc:166
 #: ../../src/wui/quicknavigation.cc:300
 msgid "–"
 msgstr "–"
@@ -4226,50 +4289,50 @@ msgstr "Откатить изменения"
 msgid "Save changes"
 msgstr "Сохранить изменения"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:112
+#: ../../src/ui_fsmenu/addons/packager.cc:111
 msgid "Writing Add-Ons…"
 msgstr "Сохранить дополнение"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:114
+#: ../../src/ui_fsmenu/addons/packager.cc:113
 msgid "Please be patient while your changes are written."
 msgstr "Идёт сохранение. Пожалуйста, подождите."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:133
+#: ../../src/ui_fsmenu/addons/packager.cc:132
 msgid "Name:"
 msgstr "Название: "
 
-#: ../../src/ui_fsmenu/addons/packager.cc:138
+#: ../../src/ui_fsmenu/addons/packager.cc:137
 msgid "Author:"
 msgstr "Автор: "
 
-#: ../../src/ui_fsmenu/addons/packager.cc:143
+#: ../../src/ui_fsmenu/addons/packager.cc:142
 #: ../../src/ui_fsmenu/tech_info.cc:67
 msgid "Version:"
 msgstr "Версия: "
 
-#: ../../src/ui_fsmenu/addons/packager.cc:312
+#: ../../src/ui_fsmenu/addons/packager.cc:311
 msgid "New Add-On"
 msgstr "Новое дополнение"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:313
+#: ../../src/ui_fsmenu/addons/packager.cc:312
 msgid "Enter the name for the new add-on."
 msgstr "Назовите новое дополнение."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:315
+#: ../../src/ui_fsmenu/addons/packager.cc:314
 msgid "Category"
 msgstr "Категория"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:336
-#: ../../src/ui_fsmenu/addons/packager.cc:352
-#: ../../src/ui_fsmenu/addons/packager.cc:357
-#: ../../src/ui_fsmenu/addons/packager_box.cc:387
-#: ../../src/ui_fsmenu/addons/packager_box.cc:403
-#: ../../src/ui_fsmenu/addons/packager_box.cc:409
+#: ../../src/ui_fsmenu/addons/packager.cc:335
+#: ../../src/ui_fsmenu/addons/packager.cc:351
+#: ../../src/ui_fsmenu/addons/packager.cc:356
+#: ../../src/ui_fsmenu/addons/packager_box.cc:389
+#: ../../src/ui_fsmenu/addons/packager_box.cc:405
+#: ../../src/ui_fsmenu/addons/packager_box.cc:411
 msgid "Invalid Name"
 msgstr "Недопустимое название"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:337
-#: ../../src/ui_fsmenu/addons/packager_box.cc:389
+#: ../../src/ui_fsmenu/addons/packager.cc:336
+#: ../../src/ui_fsmenu/addons/packager_box.cc:391
 #, c-format
 msgid ""
 "This name is invalid. Reason: %s\n"
@@ -4277,26 +4340,26 @@ msgid ""
 "Please choose a different name."
 msgstr "Имя недействительно по следующей причине: %s\n\nВыберете другое имя."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:352
+#: ../../src/ui_fsmenu/addons/packager.cc:351
 msgid "An add-on with this internal name already exists."
 msgstr "Дополнение с таким названием уже есть."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:357
+#: ../../src/ui_fsmenu/addons/packager.cc:356
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
 msgstr "Дополнение с этим названием было недавно удалено. Сохраните свои правки, прежде чем его использовать снова."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:383
+#: ../../src/ui_fsmenu/addons/packager.cc:382
 msgid "Delete Add-on"
 msgstr "Удалить дополнение"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:385
+#: ../../src/ui_fsmenu/addons/packager.cc:384
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
 msgstr "Вы уверены, что хотите удалить дополнение '%s'?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:386
+#: ../../src/ui_fsmenu/addons/packager.cc:385
 #, c-format
 msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
@@ -4304,7 +4367,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr "Вы и правда собираетесь удалить локальное дополнение \"%s\"?\n\nУчтите, что потом оно может стать недоступным для загрузки с сервера."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:407
+#: ../../src/ui_fsmenu/addons/packager.cc:406
 #, c-format
 msgid ""
 "If you quit the packager now, all changes to the following %u add-on will be"
@@ -4317,25 +4380,25 @@ msgstr[1] "Если вы сейчас выйдете из упаковщика �
 msgstr[2] "Если вы сейчас выйдете из упаковщика все изменения в следующих %u дополнениях будут потеряны."
 msgstr[3] "Если вы сейчас выйдете из упаковщика все изменения в следующих %u дополнениях будут потеряны."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:416
-#: ../../src/ui_fsmenu/addons/packager.cc:443
-#: ../../src/ui_fsmenu/addons/packager.cc:468
+#: ../../src/ui_fsmenu/addons/packager.cc:415
+#: ../../src/ui_fsmenu/addons/packager.cc:442
+#: ../../src/ui_fsmenu/addons/packager.cc:467
 #, c-format
 msgid ""
 "%1$s\n"
 "· %2$s"
 msgstr "%1$s\n· %2$s"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:419
+#: ../../src/ui_fsmenu/addons/packager.cc:418
 msgid "Quit Packager"
 msgstr "Быстрый упаковщик"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:434
+#: ../../src/ui_fsmenu/addons/packager.cc:433
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
 msgstr "Вы действительно хотите отменить все правки в дополнении \"%s\"?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:438
+#: ../../src/ui_fsmenu/addons/packager.cc:437
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
@@ -4345,16 +4408,16 @@ msgstr[1] "Вы действительно хотите отменить пра�
 msgstr[2] "Вы действительно хотите отменить правки в следующих %u дополнениях?"
 msgstr[3] "Вы действительно хотите отменить правки в следующих %u дополнениях?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:447
+#: ../../src/ui_fsmenu/addons/packager.cc:446
 msgid "Discard Changes"
 msgstr "Отменить правки"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:459
+#: ../../src/ui_fsmenu/addons/packager.cc:458
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
 msgstr "Вы действительно хотите занести все правки дополнения \"%s\" на диск?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:463
+#: ../../src/ui_fsmenu/addons/packager.cc:462
 #, c-format
 msgid ""
 "Do you really want to commit all changes to the following %u add-on to disk?"
@@ -4366,31 +4429,31 @@ msgstr[1] "Вы действительно хотите сохранить из�
 msgstr[2] "Вы действительно хотите сохранить изменения в следующих %u дополнениях на диск?"
 msgstr[3] "Вы действительно хотите сохранить изменения в следующих %u дополнениях на диск?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:472
+#: ../../src/ui_fsmenu/addons/packager.cc:471
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
 msgstr "Внимание: Если вы вручную отредактировали какие-либо файлы в этом дополнении, ваши изменения могут быть перезаписаны!"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:475
+#: ../../src/ui_fsmenu/addons/packager.cc:474
 msgid "Confirm Saving"
 msgstr "Подтвердить сохранение"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:529
+#: ../../src/ui_fsmenu/addons/packager.cc:528
 msgid "Invalid Version"
 msgstr "Версия недействительна"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:530
+#: ../../src/ui_fsmenu/addons/packager.cc:529
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
 msgstr "Версия \"%1$s\" недействительна. Дополнение \"%2$s\" не будет сохранено."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:539
+#: ../../src/ui_fsmenu/addons/packager.cc:538
 msgid "Error Writing Addon"
 msgstr "Ошибка записи дополнения"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:540
+#: ../../src/ui_fsmenu/addons/packager.cc:539
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
@@ -4415,74 +4478,74 @@ msgstr "Символ ‘%c’ недопустим"
 msgid "Filename may not contain ‘%s’"
 msgstr "В названии файла не должно быть  ‘%s’"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:147
+#: ../../src/ui_fsmenu/addons/packager_box.cc:149
 msgid "Add selected map"
 msgstr "Добавить выбранную карту"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:155
+#: ../../src/ui_fsmenu/addons/packager_box.cc:157
 msgid "*"
 msgstr "*"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:156
+#: ../../src/ui_fsmenu/addons/packager_box.cc:158
 msgid "Create subdirectory"
 msgstr "Создать вложенный каталог"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:165
+#: ../../src/ui_fsmenu/addons/packager_box.cc:167
 msgid "Remove selected map or directory"
 msgstr "Удалить выбранную карту или каталог"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:185
+#: ../../src/ui_fsmenu/addons/packager_box.cc:187
 msgid ""
 "The selected internal directory name is used multiple times. All directories"
 " with the same internal name will also share the same display name."
 msgstr "Выбранное имя внутреннего каталога используется несколько раз. Все каталоги с одинаковым внутренним именем также будут использовать одно и то же отображаемое имя."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:190
+#: ../../src/ui_fsmenu/addons/packager_box.cc:192
 msgid "Directory Display Name"
 msgstr "Отображаемое имя каталога"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:199
+#: ../../src/ui_fsmenu/addons/packager_box.cc:201
 msgid "Directory Tree"
 msgstr "Дерево каталогов"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:272
+#: ../../src/ui_fsmenu/addons/packager_box.cc:274
 #: ../../src/ui_fsmenu/main.cc:445
 #, c-format
 msgid "Name: %s"
 msgstr "Название: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:275
+#: ../../src/ui_fsmenu/addons/packager_box.cc:277
 #: ../../src/ui_fsmenu/main.cc:448 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
 msgstr "Размеры: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:278
+#: ../../src/ui_fsmenu/addons/packager_box.cc:280
 #: ../../src/ui_fsmenu/main.cc:450 ../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:279
+#: ../../src/ui_fsmenu/addons/packager_box.cc:281
 #: ../../src/ui_fsmenu/main.cc:389 ../../src/ui_fsmenu/main.cc:452
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Players: %s"
 msgstr "Игроки: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:310
+#: ../../src/ui_fsmenu/addons/packager_box.cc:312
 msgid "Top-level directory"
 msgstr "Каталог верхнего уровня"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:375
+#: ../../src/ui_fsmenu/addons/packager_box.cc:377
 msgid "New Directory"
 msgstr "Новый каталог"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:376
+#: ../../src/ui_fsmenu/addons/packager_box.cc:378
 msgid "Enter the name for the new directory."
 msgstr "Введите название каталога."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:396
+#: ../../src/ui_fsmenu/addons/packager_box.cc:398
 #, c-format
 msgid ""
 "Directories may not use the extension ‘%s’.\n"
@@ -4490,37 +4553,37 @@ msgid ""
 "Please choose a different name."
 msgstr "У директорий не может быть расширения ‘%s’.\n\nПодберите другое имя."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:409
+#: ../../src/ui_fsmenu/addons/packager_box.cc:411
 msgid "A directory with this name already exists."
 msgstr "Каталог с таким названием уже есть."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:425
+#: ../../src/ui_fsmenu/addons/packager_box.cc:427
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
 msgstr "Вы уверены, что хотите удалить каталог '%s' со всем его содержимым?"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:427
+#: ../../src/ui_fsmenu/addons/packager_box.cc:429
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
 msgstr "Вы уверены, что хотите удалить карту '%s'?"
 
 #. * TRANSLATORS: Header for campaign difficulty
-#: ../../src/ui_fsmenu/addons/packager_box.cc:475
+#: ../../src/ui_fsmenu/addons/packager_box.cc:477
 #: ../../src/ui_fsmenu/campaign_select.cc:47
 #: ../../src/ui_fsmenu/campaigndetails.cc:59
 #: ../../src/ui_fsmenu/scenario_select.cc:68
 msgid "Difficulty"
 msgstr "Уровень сложности"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:484
+#: ../../src/ui_fsmenu/addons/packager_box.cc:486
 msgid "Difficulty:"
 msgstr "Сложность: "
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:509
+#: ../../src/ui_fsmenu/addons/packager_box.cc:511
 msgid "The campaigns difficulty. One word."
 msgstr "Сложность кампании одним словом."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:510
+#: ../../src/ui_fsmenu/addons/packager_box.cc:512
 msgid "Short description, which will be appended to the difficulty."
 msgstr "Краткое описание того, что вас ждет."
 
@@ -5061,10 +5124,6 @@ msgstr "Загрузить снимка для ‘%s’"
 #: ../../src/wui/savegametable.cc:258
 msgid "Description"
 msgstr "Описание"
-
-#: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
-msgid "Uploading…"
-msgstr "Загружается"
 
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #, c-format
