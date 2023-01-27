@@ -19,6 +19,7 @@
 #ifndef WL_LOGIC_SAVE_HANDLER_H
 #define WL_LOGIC_SAVE_HANDLER_H
 
+#include <cstdint>
 #include <optional>
 
 #include "io/filesystem/filesystem.h"
