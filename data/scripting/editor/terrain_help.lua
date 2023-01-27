@@ -53,9 +53,9 @@ return {
 
       -- TRANSLATORS: A header in the editor help
       result = result ..
-               vspace(styles.dimension("help_terrain_tree_header_space_before")) ..
+               vspace(styles.get_size("help_terrain_tree_header_space_before")) ..
                h2(_("Probability of trees growing")) ..
-               vspace(styles.dimension("help_terrain_tree_header_space_after"))
+               vspace(styles.get_size("help_terrain_tree_header_space_after"))
 
       if (tree_string ~="") then
          result = result .. tree_string

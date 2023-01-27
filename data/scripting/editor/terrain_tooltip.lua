@@ -34,7 +34,7 @@ return {
       if (tree_string ~="") then
       -- TRANSLATORS: A header in the editor help
          result = h3(_("Probability of trees growing")) ..
-                  vspace(styles.dimension("help_terrain_tree_header_space_after")) ..
+                  vspace(styles.get_size("help_terrain_tree_header_space_after")) ..
                   p(tree_string)
       else
          result = result .. h3(_("No trees will grow here."))

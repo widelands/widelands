@@ -8,7 +8,7 @@
 include "scripting/richtext.lua"
 include "scripting/help.lua"
 
-local icon_gap = styles.dimension("editor_tooltip_icon_gap")
+local icon_gap = styles.get_size("editor_tooltip_icon_gap")
 
 return {
    func = function(tree_name)
@@ -32,7 +32,7 @@ return {
 
       -- TRANSLATORS: A header in the editor help. Terrains preferred by a type of tree.
       result = h3(_("Preferred terrains")) ..
-               vspace(styles.dimension("help_terrain_tree_header_space_after")) ..
+               vspace(styles.get_size("help_terrain_tree_header_space_after")) ..
                p(result)
       pop_textdomain()
       return {

@@ -9,7 +9,7 @@
 include "scripting/richtext.lua"
 include "scripting/help.lua"
 
-local gap = styles.dimension("editor_tooltip_icon_gap")
+local gap = styles.get_size("editor_tooltip_icon_gap")
 
 return {
    func = function(mo_type, ...)

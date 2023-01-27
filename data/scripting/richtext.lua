@@ -97,7 +97,7 @@ end
 --    :returns: the size of the default gap
 
 function default_gap()
-   return styles.dimension("text_default_gap")
+   return styles.get_size("text_default_gap")
 end
 
 
@@ -145,7 +145,7 @@ end
 --    :returns: a vspace tag with the standard gap size for in-game messages
 
 function msg_vspace()
-   return vspace(styles.dimension("ingame_message_gap"))
+   return vspace(styles.get_size("ingame_message_gap"))
 end
 
 -- RST
@@ -296,7 +296,7 @@ function inline_header(header, text)
    return
       -- TODO(tothxa): Could this be a paragraph style, or would it be confusing
       --               that only the heading font is defined in the style?
-      div("width=100%", vspace(styles.dimension("text_space_before_inline_header"))) ..
+      div("width=100%", vspace(styles.get_size("text_space_before_inline_header"))) ..
       div("width=100%", styles.as_font_from_p("ingame_heading_3", header .. " ") ..
       styles.as_font_from_p(_p_style_, text))
 end
@@ -749,7 +749,7 @@ end
 --    :align: center
 --
 -- Please try to avoid hardcoding colors and non-default spacing and sizes. Best practice is to use
--- `styles.color()` to get color values and `styles.dimension()` to get values for spacing and
+-- `styles.color()` to get color values and `styles.get_size()` to get values for spacing and
 -- other sizes from the style manager whenever possible.
 --
 -- :ref:`Return to index<richtext.lua>`

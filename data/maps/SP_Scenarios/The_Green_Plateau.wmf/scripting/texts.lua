@@ -48,9 +48,9 @@ obj_defeat_jomo = {
 -- Messages to the User
 -- =====================
 
-mb_w = styles.dimension("map_plateau_message_w")
-mb_h = styles.dimension("map_plateau_message_h")
-mb_y = styles.dimension("map_plateau_message_pos_y")
+mb_w = styles.get_size("map_plateau_message_w")
+mb_h = styles.get_size("map_plateau_message_h")
+mb_y = styles.get_size("map_plateau_message_pos_y")
 
 briefing_1_the_forbidden_island = {
    title = _("First Briefing"),

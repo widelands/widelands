@@ -155,14 +155,14 @@ end
 function campaign_message_box(message, sleeptime)
    message.show_instantly = message.show_instantly or false
    message.scroll_back = message.scroll_back or false
-   message.h = message.h or styles.dimension("campaign_message_box_default_h")
-   message.w = message.w or styles.dimension("campaign_message_box_default_w")
+   message.h = message.h or styles.get_size("campaign_message_box_default_h")
+   message.w = message.w or styles.get_size("campaign_message_box_default_w")
 
    if message.position then
       local window = wl.ui.MapView()
       if string.find(message.position,"top") then
          -- Set it a bit lower than 0 to prevent overlap with top texts
-         message.posy = styles.dimension("campaign_message_box_top_pos_y")
+         message.posy = styles.get_size("campaign_message_box_top_pos_y")
       elseif string.find(message.position, "bottom") then
          message.posy = window.height - message.h
       else
@@ -262,7 +262,7 @@ function new_objectives(...)
 
    return
       div("width=100%",
-         vspace(styles.dimension("ingame_space_before_objective")) ..
+         vspace(styles.get_size("ingame_space_before_objective")) ..
          div("float=left padding_r=" .. default_gap(), p(img("images/wui/menus/objectives.png"))) ..
          styles.as_paragraph("ingame_objectives_heading", objectives_header) ..
          text

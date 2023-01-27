@@ -16,9 +16,9 @@ return {
 
       -- TRANSLATORS: A header in the editor help. Terrains preferred by a type of tree.
       result = result ..
-               vspace(styles.dimension("help_terrain_tree_header_space_before")) ..
+               vspace(styles.get_size("help_terrain_tree_header_space_before")) ..
                h2(_("Preferred terrains")) ..
-               vspace(styles.dimension("help_terrain_tree_header_space_after")) ..
+               vspace(styles.get_size("help_terrain_tree_header_space_after")) ..
                terrain_affinity_help(tree)
 
       pop_textdomain()

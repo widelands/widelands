@@ -395,37 +395,37 @@ StyleManager::StyleManager() {
 	check_completeness("colors", colors_.size(), static_cast<size_t>(UI::ColorStyle::kUnknown));
 
 	// Sizes
-	element_table = table->get_table("dimensions");
-	add_dimension(UI::StyledSize::kTextDefaultGap, *element_table, "text_default_gap");
-	add_dimension(UI::StyledSize::kTextSpaceBeforeInlineHeader, *element_table,
-	              "text_space_before_inline_header");
-	add_dimension(UI::StyledSize::kIngameMessageGap, *element_table, "ingame_message_gap");
-	add_dimension(
+	element_table = table->get_table("styled_sizes");
+	add_styled_size(UI::StyledSize::kTextDefaultGap, *element_table, "text_default_gap");
+	add_styled_size(UI::StyledSize::kTextSpaceBeforeInlineHeader, *element_table,
+	                "text_space_before_inline_header");
+	add_styled_size(UI::StyledSize::kIngameMessageGap, *element_table, "ingame_message_gap");
+	add_styled_size(
 	   UI::StyledSize::kIngameSpaceBeforeObjective, *element_table, "ingame_space_before_objective");
-	add_dimension(UI::StyledSize::kIngameSpaceBeforeImmovableIcon, *element_table,
-	              "ingame_space_before_immovable_icon");
-	add_dimension(UI::StyledSize::kHelpTerrainTreeHeaderSpaceBefore, *element_table,
-	              "help_terrain_tree_header_space_before");
-	add_dimension(UI::StyledSize::kHelpTerrainTreeHeaderSpaceAfter, *element_table,
-	              "help_terrain_tree_header_space_after");
-	add_dimension(UI::StyledSize::kEditorTooltipIconGap, *element_table, "editor_tooltip_icon_gap");
-	add_dimension(UI::StyledSize::kCampaignMessageBoxDefaultH, *element_table,
-	              "campaign_message_box_default_h");
-	add_dimension(UI::StyledSize::kCampaignMessageBoxDefaultW, *element_table,
-	              "campaign_message_box_default_w");
-	add_dimension(
+	add_styled_size(UI::StyledSize::kIngameSpaceBeforeImmovableIcon, *element_table,
+	                "ingame_space_before_immovable_icon");
+	add_styled_size(UI::StyledSize::kHelpTerrainTreeHeaderSpaceBefore, *element_table,
+	                "help_terrain_tree_header_space_before");
+	add_styled_size(UI::StyledSize::kHelpTerrainTreeHeaderSpaceAfter, *element_table,
+	                "help_terrain_tree_header_space_after");
+	add_styled_size(UI::StyledSize::kEditorTooltipIconGap, *element_table, "editor_tooltip_icon_gap");
+	add_styled_size(UI::StyledSize::kCampaignMessageBoxDefaultH, *element_table,
+	                "campaign_message_box_default_h");
+	add_styled_size(UI::StyledSize::kCampaignMessageBoxDefaultW, *element_table,
+	                "campaign_message_box_default_w");
+	add_styled_size(
 	   UI::StyledSize::kCampaignMessageBoxTopPosY, *element_table, "campaign_message_box_top_pos_y");
-	add_dimension(
+	add_styled_size(
 	   UI::StyledSize::kCampaignFri02PoemIndent, *element_table, "campaign_fri02_poem_indent");
-	add_dimension(
+	add_styled_size(
 	   UI::StyledSize::kSPScenarioPlateauMessageBoxH, *element_table, "map_plateau_message_h");
-	add_dimension(
+	add_styled_size(
 	   UI::StyledSize::kSPScenarioPlateauMessageBoxW, *element_table, "map_plateau_message_w");
-	add_dimension(UI::StyledSize::kSPScenarioPlateauMessageBoxPosY, *element_table,
-	              "map_plateau_message_pos_y");
-	add_dimension(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
+	add_styled_size(UI::StyledSize::kSPScenarioPlateauMessageBoxPosY, *element_table,
+	                "map_plateau_message_pos_y");
+	add_styled_size(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
 	check_completeness(
-	   "dimensions", dimensions_.size(), static_cast<size_t>(UI::StyledSize::kUIDefaultPadding));
+	   "styled_sizes", styled_sizes_.size(), static_cast<size_t>(UI::StyledSize::kUIDefaultPadding));
 }
 
 // Return functions for the styles
@@ -526,17 +526,17 @@ const RGBColor& StyleManager::color(std::string name) const {
 	return color(color_keys_.at(name));
 }
 
-int StyleManager::dimension(UI::StyledSize id) const {
-	assert(dimensions_.count(id) == 1);
-	return dimensions_.at(id);
+int StyleManager::styled_size(UI::StyledSize id) const {
+	assert(styled_sizes_.count(id) == 1);
+	return styled_sizes_.at(id);
 }
 
-int StyleManager::dimension(std::string name) const {
-	if (dimension_keys_.count(name) != 1) {
+int StyleManager::styled_size(std::string name) const {
+	if (styled_size_keys_.count(name) != 1) {
 		log_warn("Undefined styled size requested: %s", name.c_str());
 		return 0;
 	}
-	return dimension(dimension_keys_.at(name));
+	return styled_size(styled_size_keys_.at(name));
 }
 
 int StyleManager::minimum_font_size() const {
@@ -671,7 +671,7 @@ void StyleManager::add_color(UI::ColorStyle id, const LuaTable& table, const std
 	color_keys_.emplace(std::make_pair(key, id));
 }
 
-void StyleManager::add_dimension(UI::StyledSize id, const LuaTable& table, const std::string& key) {
-	dimensions_.emplace(std::make_pair(id, table.get_int(key)));
-	dimension_keys_.emplace(std::make_pair(key, id));
+void StyleManager::add_styled_size(UI::StyledSize id, const LuaTable& table, const std::string& key) {
+	styled_sizes_.emplace(std::make_pair(id, table.get_int(key)));
+	styled_size_keys_.emplace(std::make_pair(key, id));
 }

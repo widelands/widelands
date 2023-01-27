@@ -1009,7 +1009,7 @@ return {
       unknown = {73, 64, 55}
    },
 
-   dimensions = {
+   styled_sizes = {
       text_default_gap = ingame_padding,
       text_space_before_inline_header = 8,
       ingame_message_gap = 8,

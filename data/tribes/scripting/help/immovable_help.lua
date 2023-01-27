@@ -35,7 +35,7 @@ function immovable_help_string(tribe, immovable_description)
       result = h2(_("Purpose")) ..
          li_object(immovable_description.name, helptexts.purpose)
    elseif image ~= "" then
-      result = p(vspace(styles.dimension("ingame_space_before_immovable_icon")) ..
+      result = p(vspace(styles.get_size("ingame_space_before_immovable_icon")) ..
                  img(immovable_description.icon_name))
    end
 

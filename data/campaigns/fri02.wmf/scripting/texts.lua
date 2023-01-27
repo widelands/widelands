@@ -324,7 +324,7 @@ supply_murilius_9 = {
       .. new_objectives(obj_scout),
 }
 
-local indent = styles.dimension("campaign_fri02_poem_indent")
+local indent = styles.get_size("campaign_fri02_poem_indent")
 
 expansion_hint = {
    title =_("The Scout Discovered Something"),

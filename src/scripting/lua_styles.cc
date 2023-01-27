@@ -199,19 +199,19 @@ static int L_color(lua_State* L) {
 }
 
 /* RST
-.. function:: dimension(style_name)
+.. function:: get_size(style_name)
 
-   Return the given styled dimension.
+   Return the given styled size.
 
    :type style_name: class:`string`
-   :arg style_name: name of the styled dimension to get.
+   :arg style_name: name of the styled size to get.
 
-   :returns: The integer value of the dimension, or 0 if no styled dimension is defined
-             with the given `style_name`.
+   :returns: The integer value of the size, or 0 if no styled size is defined with the given
+             `style_name`.
 */
-static int L_dimension(lua_State* L) {
+static int L_get_size(lua_State* L) {
 	const std::string style_name(luaL_checkstring(L, 1));
-	const int result = g_style_manager->dimension(style_name);
+	const int result = g_style_manager->styled_size(style_name);
 	lua_pushinteger(L, result);
 	return 1;
 }
@@ -224,7 +224,7 @@ const static struct luaL_Reg styles[] = {{"as_font", &L_as_font},
                                          {"close_p", &L_close_p},
                                          {"as_font_from_p", &L_as_font_from_p},
                                          {"color", &L_color},
-                                         {"dimension", &L_dimension},
+                                         {"get_size", &L_get_size},
                                          {nullptr, nullptr}};
 
 void luaopen_styles(lua_State* L) {
