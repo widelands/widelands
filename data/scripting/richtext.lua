@@ -345,13 +345,13 @@ end
 
 
 -- RST
--- .. function:: close_p(t)
+-- .. function:: close_p()
 --
 --    Closes a paragraph.
 --
 --    :returns: The closing tags for a paragraph
 
-function close_p(t)
+function close_p()
    return styles.close_p(_p_style_)
 end
 
