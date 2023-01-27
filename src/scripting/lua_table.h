@@ -183,8 +183,8 @@ public:
 
 	/// Returns the corresponding value with the given 'key' if it exists,
 	/// otherwise returns 'default_value'.
-	template <typename KeyType> int get_int_with_default(
-	   const KeyType& key, const int default_value) const {
+	template <typename KeyType>
+	int get_int_with_default(const KeyType& key, const int default_value) const {
 		return has_key(key) ? get_int(key) : default_value;
 	}
 
@@ -201,8 +201,8 @@ public:
 
 	/// Returns the corresponding value with the given 'key' if it exists,
 	/// otherwise returns 'default_value'.
-	template <typename KeyType> bool get_bool_with_default(
-	   const KeyType& key, const bool default_value) const {
+	template <typename KeyType>
+	bool get_bool_with_default(const KeyType& key, const bool default_value) const {
 		return has_key(key) ? get_bool(key) : default_value;
 	}
 

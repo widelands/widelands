@@ -127,8 +127,7 @@ UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::stri
 		   "Font size %d too small for %s, must be at least 1!", size, table_key.c_str());
 	}
 	return new UI::FontStyleInfo(style_table->get_string("face"),
-	                             read_rgb_color(*style_table->get_table("color")),
-	                             size,
+	                             read_rgb_color(*style_table->get_table("color")), size,
 	                             style_table->get_bool_with_default("bold", false),
 	                             style_table->get_bool_with_default("italic", false),
 	                             style_table->get_bool_with_default("underline", false),
@@ -408,7 +407,8 @@ StyleManager::StyleManager() {
 	                "help_terrain_tree_header_space_before");
 	add_styled_size(UI::StyledSize::kHelpTerrainTreeHeaderSpaceAfter, *element_table,
 	                "help_terrain_tree_header_space_after");
-	add_styled_size(UI::StyledSize::kEditorTooltipIconGap, *element_table, "editor_tooltip_icon_gap");
+	add_styled_size(
+	   UI::StyledSize::kEditorTooltipIconGap, *element_table, "editor_tooltip_icon_gap");
 	add_styled_size(UI::StyledSize::kCampaignMessageBoxDefaultH, *element_table,
 	                "campaign_message_box_default_h");
 	add_styled_size(UI::StyledSize::kCampaignMessageBoxDefaultW, *element_table,
@@ -671,7 +671,9 @@ void StyleManager::add_color(UI::ColorStyle id, const LuaTable& table, const std
 	color_keys_.emplace(std::make_pair(key, id));
 }
 
-void StyleManager::add_styled_size(UI::StyledSize id, const LuaTable& table, const std::string& key) {
+void StyleManager::add_styled_size(UI::StyledSize id,
+                                   const LuaTable& table,
+                                   const std::string& key) {
 	styled_sizes_.emplace(std::make_pair(id, table.get_int(key)));
 	styled_size_keys_.emplace(std::make_pair(key, id));
 }
