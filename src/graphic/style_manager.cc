@@ -118,21 +118,6 @@ RGBAColor read_rgba_color(const LuaTable& table) {
 	return RGBAColor(rgbacolor[0], rgbacolor[1], rgbacolor[2], rgbacolor[3]);
 }
 
-// Read optional bool value from LuaTable
-bool read_bool(const LuaTable& table, const std::string& key) {
-	return table.has_key(key) ? table.get_bool(key) : false;
-}
-
-// Read optional int value from LuaTable
-int read_int(const LuaTable& table, const std::string& key) {
-	return table.has_key(key) ? table.get_int(key) : 0;
-}
-
-// Read optional string value from LuaTable
-std::string read_string(const LuaTable& table, const std::string& key) {
-	return table.has_key(key) ? table.get_string(key) : "";
-}
-
 // Read font style from LuaTable
 UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
@@ -141,21 +126,26 @@ UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::stri
 		throw wexception(
 		   "Font size %d too small for %s, must be at least 1!", size, table_key.c_str());
 	}
-	return new UI::FontStyleInfo(
-	   style_table->get_string("face"), read_rgb_color(*style_table->get_table("color")), size,
-	   read_bool(*style_table, "bold"), read_bool(*style_table, "italic"),
-	   read_bool(*style_table, "underline"), read_bool(*style_table, "shadow"));
+	return new UI::FontStyleInfo(style_table->get_string("face"),
+	                             read_rgb_color(*style_table->get_table("color")),
+	                             size,
+	                             style_table->get_bool_with_default("bold", false),
+	                             style_table->get_bool_with_default("italic", false),
+	                             style_table->get_bool_with_default("underline", false),
+	                             style_table->get_bool_with_default("shadow", false));
 }
 
 // Read paragraph style from LuaTable
 UI::ParagraphStyleInfo* read_paragraph_style(const LuaTable& parent_table,
                                              const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
-	return new UI::ParagraphStyleInfo(
-	   read_font_style(*style_table, "font"), read_string(*style_table, "align"),
-	   read_string(*style_table, "valign"), read_int(*style_table, "indent"),
-	   read_int(*style_table, "spacing"), read_int(*style_table, "space_before"),
-	   read_int(*style_table, "space_after"));
+	return new UI::ParagraphStyleInfo(read_font_style(*style_table, "font"),
+	                                  get_string_with_default(*style_table, "align", ""),
+	                                  get_string_with_default(*style_table, "valign", ""),
+	                                  style_table->get_int_with_default("indent", 0),
+	                                  style_table->get_int_with_default("spacing", 0),
+	                                  style_table->get_int_with_default("space_before", 0),
+	                                  style_table->get_int_with_default("space_after", 0));
 }
 
 // Read image filename and RGBA color from LuaTable
