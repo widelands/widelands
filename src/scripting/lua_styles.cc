@@ -26,6 +26,8 @@ namespace LuaStyles {
 :mod:`styles`
 =============
 
+.. versionadded:: 1.2
+
 .. module:: styles
    :synopsis: Provides helper functions for text formatting using themeable styles
 
@@ -105,7 +107,7 @@ static int L_as_p_with_attr(lua_State* L) {
 }
 
 /* RST
-.. function:: open_p()
+.. function:: open_p(style)
 
    Return richtext formatting to start a paragraph with the given style.
 
@@ -122,7 +124,7 @@ static int L_open_p(lua_State* L) {
 }
 
 /* RST
-.. function:: open_p_with_attr(attributes)
+.. function:: open_p_with_attr(style, attributes)
 
    Return richtext formatting to start a paragraph with the given style and extra attributes.
 
@@ -142,7 +144,7 @@ static int L_open_p_with_attr(lua_State* L) {
 }
 
 /* RST
-.. function:: close_p()
+.. function:: close_p(style)
 
    Return richtext formatting to close a paragraph of the given style.
 

@@ -275,7 +275,7 @@ end
 -- RST
 -- .. function:: fs_color(text)
 --
---    *Deprecated*. Use `set_fs_style()` instead.
+--    .. deprecated:: 1.2 Use `set_fs_style()` instead.
 --
 --    Returns the given text wrapped in a font tag for the
 --    default color that is used for texts in the main menu.
