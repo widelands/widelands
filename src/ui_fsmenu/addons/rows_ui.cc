@@ -29,7 +29,7 @@
 #include "ui_fsmenu/addons/remote_interaction.h"
 #include "wlapplication_options.h"
 
-namespace FsMenu::AddOnsUI {
+namespace AddOnsUI {
 
 namespace {
 
@@ -525,4 +525,4 @@ bool RemoteAddOnRow::upgradeable() const {
 	return upgrade_.enabled();
 }
 
-}  // namespace FsMenu::AddOnsUI
+}  // namespace AddOnsUI

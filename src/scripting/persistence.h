@@ -19,6 +19,8 @@
 #ifndef WL_SCRIPTING_PERSISTENCE_H
 #define WL_SCRIPTING_PERSISTENCE_H
 
+#include <cstdint>
+
 #include "scripting/lua.h"
 
 class FileRead;

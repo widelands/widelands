@@ -70,7 +70,7 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
 
 std::vector<AddOnState> g_addons;
 
-static const AddOnInfo* find_addon(const std::string& name) {
+const AddOnInfo* find_addon(const std::string& name) {
 	for (const auto& pair : g_addons) {
 		if (pair.first->internal_name == name) {
 			return pair.first.get();

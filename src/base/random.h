@@ -20,6 +20,7 @@
 #define WL_BASE_RANDOM_H
 
 #include <cassert>
+#include <cstdint>
 #include <string>
 
 extern const uint32_t rng_sbox[256];

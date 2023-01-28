@@ -100,6 +100,7 @@ private:
 	bool is_admin_{false};
 	size_t cached_remotes_{0U};
 	std::string server_descname_;
+	bool is_uploading_addon_{false};
 };
 
 }  // namespace AddOns

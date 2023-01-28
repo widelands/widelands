@@ -19,6 +19,7 @@ local function open_and_close_sound_options(dropdown)
    sleep(5000)
 
    window = wl.ui.MapView().windows.sound_options_menu
+   sleep(5000)
    assert_not_nil(window, "Failed to open sound options window")
    window:close()
 

@@ -133,6 +133,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	list_->set_linked_dropdown(this);
 
 	list_->set_visible(false);
+	list_->set_flag(UI::Panel::pf_always_on_top, true);
 	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
 	display_button_.sigclicked.connect([this]() {
 		toggle_list();
