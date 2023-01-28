@@ -368,7 +368,7 @@ msgstr "Opcions del mapa"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:242
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Publica el mapa en línia…"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:246
@@ -678,7 +678,7 @@ msgstr "Es carrega el món…"
 
 #: ../../src/editor/editorinteractive.cc:1394
 msgid "Publish Map"
-msgstr ""
+msgstr "Publica el mapa"
 
 #: ../../src/editor/editorinteractive.cc:1395
 #, c-format
@@ -690,19 +690,19 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr ""
+msgstr "Esteu segur que voleu publicar el mapa en línia?\n\nNom: %1$s\nNom intern: %2$s\nAutor: %3$s\nDescripció: %4$s\nConsell: %5$s\n"
 
 #: ../../src/editor/editorinteractive.cc:1419
 msgid "Login Error"
-msgstr ""
+msgstr "Error d'inici de sessió"
 
 #: ../../src/editor/editorinteractive.cc:1424
 msgid "Uploading Add-On…"
-msgstr ""
+msgstr "Es carrega el complement…"
 
 #: ../../src/editor/editorinteractive.cc:1425
 msgid "Saving map…"
-msgstr ""
+msgstr "Es desa el mapa…"
 
 #: ../../src/editor/editorinteractive.cc:1444
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:309
@@ -712,15 +712,15 @@ msgstr "S’ha produït un error mentre es desava el mapa!"
 
 #: ../../src/editor/editorinteractive.cc:1450
 msgid "Packaging add-on…"
-msgstr ""
+msgstr "S'empaqueta el complement…"
 
 #: ../../src/editor/editorinteractive.cc:1500
 msgid "Add-On Generation Error"
-msgstr ""
+msgstr "Error de generació del complement"
 
 #: ../../src/editor/editorinteractive.cc:1501
 msgid "The add-on could not be written to the disk."
-msgstr ""
+msgstr "No s'ha pogut escriure el complement al disc."
 
 #: ../../src/editor/editorinteractive.cc:1508
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
@@ -729,15 +729,15 @@ msgstr "Es va pujant…"
 
 #: ../../src/editor/editorinteractive.cc:1514
 msgid "Upload Error"
-msgstr ""
+msgstr "Error de càrrega"
 
 #: ../../src/editor/editorinteractive.cc:1536
 msgid "Success"
-msgstr ""
+msgstr "Èxit"
 
 #: ../../src/editor/editorinteractive.cc:1537
 msgid "The add-on was uploaded successfully."
-msgstr ""
+msgstr "S'ha publicat el complement correctament."
 
 #: ../../src/editor/map_generator.cc:754
 msgid "Random Player"
