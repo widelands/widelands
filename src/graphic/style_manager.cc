@@ -33,7 +33,7 @@ const std::string kDefaultTemplate("templates/default/");
 static std::string g_template_dir;
 static std::map<std::string, std::unique_ptr<StyleManager>> g_style_managers;
 StyleManager* g_style_manager(nullptr);  // points to an entry in `g_style_managers`
-StyleManager* default_style(nullptr);    // points to the default style in `g_style_managers`
+static StyleManager* default_style(nullptr);    // points to the default style in `g_style_managers`
 
 const std::string& template_dir() {
 	return g_template_dir;
