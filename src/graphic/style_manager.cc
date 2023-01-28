@@ -18,6 +18,7 @@
 
 #include "graphic/style_manager.h"
 
+#include <cassert>
 #include <memory>
 
 #include "base/log.h"
@@ -32,6 +33,7 @@ const std::string kDefaultTemplate("templates/default/");
 static std::string g_template_dir;
 static std::map<std::string, std::unique_ptr<StyleManager>> g_style_managers;
 StyleManager* g_style_manager(nullptr);  // points to an entry in `g_style_managers`
+StyleManager* default_style(nullptr);    // points to the default style in `g_style_managers`
 
 const std::string& template_dir() {
 	return g_template_dir;
@@ -40,6 +42,9 @@ void set_template_dir(std::string dir) {
 	if (dir.empty()) {
 		// Empty string means "use default"
 		dir = kDefaultTemplate;
+	} else if (default_style == nullptr) {
+		// The default template must be loaded first to provide fallback values if needed
+		set_template_dir("");
 	}
 
 	if (dir.back() != '/') {
@@ -68,6 +73,10 @@ void set_template_dir(std::string dir) {
 	} else {
 		g_style_manager = new StyleManager();
 		g_style_managers[g_template_dir] = std::unique_ptr<StyleManager>(g_style_manager);
+		if (default_style == nullptr) {
+			assert(g_template_dir == kDefaultTemplate);
+			default_style = g_style_manager;
+		}
 	}
 }
 
@@ -651,8 +660,19 @@ void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelS
 void StyleManager::add_font_style(UI::FontStyle font_key,
                                   const LuaTable& table,
                                   const std::string& table_key) {
-	fontstyles_.emplace(std::make_pair(
-	   font_key, std::unique_ptr<UI::FontStyleInfo>(read_font_style(table, table_key))));
+	UI::FontStyleInfo* fontstyle;
+	if (table.has_key(table_key)) {
+		fontstyle = read_font_style(table, table_key);
+	} else {
+		if (default_style == nullptr) {
+			throw wexception("The default template does not have font style '%s'", table_key.c_str());
+		}
+		assert(g_template_dir != kDefaultTemplate);
+
+		// We can fall back on the default template
+		fontstyle = new UI::FontStyleInfo(default_style->font_style(font_key));
+	}
+	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<UI::FontStyleInfo>(fontstyle)));
 	fontstyle_keys_.emplace(std::make_pair(table_key, font_key));
 }
 
