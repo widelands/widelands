@@ -142,7 +142,8 @@ void MainMenuSaveMap::clicked_ok() {
 		Widelands::Map* map = eia().egbase().mutable_map();
 		if (map->get_name() == _("No Name")) {
 			std::string::size_type const filename_size = filename.at(0).size();
-			map->set_name(4 <= filename_size && ends_with(filename.at(0), kWidelandsMapExtension, false) ?
+			map->set_name(4 <= filename_size &&
+			                    ends_with(filename.at(0), kWidelandsMapExtension, false) ?
                           filename.at(0).substr(0, filename_size - 4) :
                           filename.at(0));
 		}

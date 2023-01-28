@@ -50,8 +50,8 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 	settings_.set_scenario(scenario);
 	if (!preconfigured_) {
 		assert(!settings_.settings().tribes.empty());
-		settings_.set_map(
-		   mapdata->name, mapdata->filenames.at(0), mapdata->theme, mapdata->background, mapdata->nrplayers);
+		settings_.set_map(mapdata->name, mapdata->filenames.at(0), mapdata->theme,
+		                  mapdata->background, mapdata->nrplayers);
 	}
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 

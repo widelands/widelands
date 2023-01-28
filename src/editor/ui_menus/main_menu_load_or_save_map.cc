@@ -223,7 +223,8 @@ void MainMenuLoadOrSaveMap::fill_table() {
 			MapData new_md = MapData::create_directory(mapfilename);
 			bool found = false;
 			for (MapData& md : maps_data_) {
-				if (md.maptype == MapData::MapType::kDirectory && md.localized_name == new_md.localized_name) {
+				if (md.maptype == MapData::MapType::kDirectory &&
+				    md.localized_name == new_md.localized_name) {
 					found = true;
 					md.add(new_md);
 					break;
