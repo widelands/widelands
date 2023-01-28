@@ -267,10 +267,10 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 				continue;
 			}
 			my_maps_.add(
-			   entry.first.localized_name, entry.first.filename, nullptr, false,
+			   entry.first.localized_name, entry.first.filenames.at(0), nullptr, false,
 			   format("%s<br>%s<br>%s<br>%s<br>%s",
 			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			             .as_font_tag(entry.first.filename),
+			             .as_font_tag(entry.first.filenames.at(0)),
 			          format(_("Name: %s"),
 			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                    .as_font_tag(entry.first.localized_name)),
