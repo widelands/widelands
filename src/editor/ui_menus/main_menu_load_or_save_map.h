@@ -43,7 +43,7 @@ protected:
 	virtual void clicked_ok() = 0;
 	void toggle_mapnames();
 	// Sets the current dir and updates labels.
-	virtual void set_current_directory(const std::string& filename) = 0;
+	virtual void set_current_directory(const std::vector<std::string>& filenames) = 0;
 	void layout() override;
 	void fill_table();
 
@@ -89,7 +89,7 @@ protected:
 
 	// Settings data
 	const std::string basedir_;
-	std::string curdir_;
+	std::vector<std::string> curdir_;
 	bool include_addon_maps_;
 };
 

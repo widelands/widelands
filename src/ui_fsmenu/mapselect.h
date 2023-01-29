@@ -80,7 +80,7 @@ private:
 	Widelands::Map::ScenarioTypes scenario_types_;
 
 	const std::string basedir_;
-	std::string curdir_;
+	std::vector<std::string> curdir_;
 
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;
