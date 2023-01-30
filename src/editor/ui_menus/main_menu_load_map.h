@@ -31,7 +31,7 @@ struct MainMenuLoadMap : public MainMenuLoadOrSaveMap {
 protected:
 	void clicked_ok() override;
 	// Sets the current dir and updates labels.
-	void set_current_directory(const std::string& filename) override;
+	void set_current_directory(const std::vector<std::string>& filenames) override;
 
 private:
 	void entry_selected();

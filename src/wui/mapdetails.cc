@@ -122,7 +122,7 @@ void MapDetails::layout() {
 bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool render_minimap) {
 	clear();
 	name_ = mapdata.name;
-	last_map_ = mapdata.filename;
+	last_map_ = mapdata.filenames.at(0);
 	bool loadable = true;
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
@@ -201,7 +201,7 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 			} else {
 				egbase_.cleanup_for_load();
 				std::unique_ptr<Widelands::MapLoader> ml(
-				   egbase_.mutable_map()->get_correct_loader(mapdata.filename));
+				   egbase_.mutable_map()->get_correct_loader(mapdata.filenames.at(0)));
 				try {
 					if (ml != nullptr &&
 					    0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {

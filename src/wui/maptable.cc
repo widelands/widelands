@@ -58,7 +58,7 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 			if (type == MapData::DisplayType::kFilenames) {
 				set_column_title(1, _("Filename"));
 				te.set_picture(1, g_image_cache->get(picture),
-				               FileSystem::filename_without_ext(mapdata.filename.c_str()));
+				               FileSystem::filename_without_ext(mapdata.filenames.at(0).c_str()));
 			} else {
 				set_column_title(1, _("Map Name"));
 				if (type == MapData::DisplayType::kMapnames) {
