@@ -151,16 +151,28 @@ public:
 
 private:
 	using PanelStyleMap = std::map<UI::PanelStyle, std::unique_ptr<const UI::PanelStyleInfo>>;
-	void add_button_style(UI::ButtonStyle style, const LuaTable& table, const std::string& parent, const std::string& key);
-	void add_slider_style(UI::SliderStyle style, const LuaTable& table, const std::string& parent, const std::string& key);
+	void add_button_style(UI::ButtonStyle style,
+	                      const LuaTable& table,
+	                      const std::string& parent,
+	                      const std::string& key);
+	void add_slider_style(UI::SliderStyle style,
+	                      const LuaTable& table,
+	                      const std::string& parent,
+	                      const std::string& key);
 	void add_editbox_style(UI::PanelStyle style, const LuaTable& table, const std::string& key);
-	void add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table, const std::string& parent, const std::string& key);
-	void add_progressbar_style(UI::PanelStyle style, const LuaTable& table /*, const std::string& key */);
+	void add_tabpanel_style(UI::TabPanelStyle style,
+	                        const LuaTable& table,
+	                        const std::string& parent,
+	                        const std::string& key);
+	void add_progressbar_style(UI::PanelStyle style,
+	                           const LuaTable& table /*, const std::string& key */);
 	void add_table_style(UI::PanelStyle style, const LuaTable& table /*, const std::string& key */);
 	void set_statistics_plot_style(const LuaTable& table /*, const std::string& key */);
 	void set_building_statistics_style(const LuaTable& table /*, const std::string& key */);
-	void add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table /*, const std::string& key */);
-	void add_window_style(UI::WindowStyle style, const LuaTable& table /*, const std::string& key */);
+	void add_ware_info_style(UI::WareInfoStyle style,
+	                         const LuaTable& table /*, const std::string& key */);
+	void add_window_style(UI::WindowStyle style,
+	                      const LuaTable& table /*, const std::string& key */);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 	void add_font_style(UI::FontStyle font, const LuaTable& table, const std::string& key);
 	void

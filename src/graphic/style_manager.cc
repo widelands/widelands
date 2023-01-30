@@ -123,8 +123,10 @@ void fail_if_doing_default_style(std::string style_type, std::string style_name)
 }
 
 // Get the subtable for 'section' safely from 'table', allowing fallback if it is missing
-std::unique_ptr<LuaTable>
-try_section_or_empty(LuaInterface& lua, const LuaTable& table, std::string section, std::string parent = "") {
+std::unique_ptr<LuaTable> try_section_or_empty(LuaInterface& lua,
+                                               const LuaTable& table,
+                                               std::string section,
+                                               std::string parent = "") {
 	if (table.has_key(section)) {
 		return table.get_table(section);
 	} else {
@@ -186,10 +188,9 @@ UI::PanelStyleInfo* read_panel_style(const LuaTable& table) {
 	if (rgbcolor.size() != 3) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
-	return new UI::PanelStyleInfo(
-	   image.empty() ? nullptr : g_image_cache->get(image),
-	   RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0),
-	   table.get_int_with_default("margin", 0));
+	return new UI::PanelStyleInfo(image.empty() ? nullptr : g_image_cache->get(image),
+	                              RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0),
+	                              table.get_int_with_default("margin", 0));
 }
 
 // Read text panel style from LuaTable
@@ -602,13 +603,15 @@ std::string StyleManager::color_tag(const std::string& text, const RGBColor& col
 }
 
 // Fill the maps
-void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table,
-                                    const std::string& parent, const std::string& key) {
+void StyleManager::add_button_style(UI::ButtonStyle style,
+                                    const LuaTable& table,
+                                    const std::string& parent,
+                                    const std::string& key) {
 	UI::ButtonStyleInfo* b_style;
 	if (table.has_key(key)) {
 		std::unique_ptr<LuaTable> bst = table.get_table(key);
 		b_style = new UI::ButtonStyleInfo(read_text_panel_style(*(bst->get_table("enabled"))),
-	                                     read_text_panel_style(*(bst->get_table("disabled"))));
+		                                  read_text_panel_style(*(bst->get_table("disabled"))));
 	} else {
 		fail_if_doing_default_style("button style", format("%s.%s", parent, key));
 		b_style = new UI::ButtonStyleInfo(default_style->button_style(style));
@@ -616,8 +619,10 @@ void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table
 	buttonstyles_.insert(std::make_pair(style, std::unique_ptr<const UI::ButtonStyleInfo>(b_style)));
 }
 
-void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table,
-                                    const std::string& parent, const std::string& key) {
+void StyleManager::add_slider_style(UI::SliderStyle style,
+                                    const LuaTable& table,
+                                    const std::string& parent,
+                                    const std::string& key) {
 	UI::TextPanelStyleInfo* s_style;
 	if (table.has_key(key)) {
 		s_style = read_text_panel_style(*table.get_table(key));
@@ -628,7 +633,8 @@ void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table
 	sliderstyles_.insert(std::make_pair(style, std::unique_ptr<UI::TextPanelStyleInfo>(s_style)));
 }
 
-void StyleManager::add_editbox_style(UI::PanelStyle style, const LuaTable& table,
+void StyleManager::add_editbox_style(UI::PanelStyle style,
+                                     const LuaTable& table,
                                      const std::string& key) {
 	UI::TextPanelStyleInfo* eb_style;
 	if (table.has_key(key)) {
@@ -640,8 +646,10 @@ void StyleManager::add_editbox_style(UI::PanelStyle style, const LuaTable& table
 	editboxstyles_.insert(std::make_pair(style, std::unique_ptr<UI::TextPanelStyleInfo>(eb_style)));
 }
 
-void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table,
-                                      const std::string& parent, const std::string& key) {
+void StyleManager::add_tabpanel_style(UI::TabPanelStyle style,
+                                      const LuaTable& table,
+                                      const std::string& parent,
+                                      const std::string& key) {
 	UI::PanelStyleInfo* tp_style;
 	if (table.has_key(key)) {
 		tp_style = read_panel_style(*table.get_table(key));
@@ -750,7 +758,8 @@ void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
 		fail_if_doing_default_style("paragraph style", table_key);
 		p_style = new UI::ParagraphStyleInfo(default_style->paragraph_style(style));
 	}
-	paragraphstyles_.emplace(std::make_pair(style, std::unique_ptr<UI::ParagraphStyleInfo>(p_style)));
+	paragraphstyles_.emplace(
+	   std::make_pair(style, std::unique_ptr<UI::ParagraphStyleInfo>(p_style)));
 	paragraphstyle_keys_.emplace(std::make_pair(table_key, style));
 }
 
