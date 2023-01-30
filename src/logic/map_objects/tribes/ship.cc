@@ -865,8 +865,9 @@ void Ship::start_battle(Game& game, const Battle new_battle) {
 	if (target->descr().type() == MapObjectType::SHIP) {
 		Ship& enemy_ship = dynamic_cast<Ship&>(*target);
 		enemy_ship.send_message(game, _("Naval Attack"), _("Enemy Ship Attacking"),
-		                          format(_("Your ship ‘%s’ is under attack from an enemy warship."), enemy_ship.get_shipname()),
-		                          "images/wui/ship/ship_attack.png");
+		                        format(_("Your ship ‘%s’ is under attack from an enemy warship."),
+		                               enemy_ship.get_shipname()),
+		                        "images/wui/ship/ship_attack.png");
 		enemy_ship.start_battle(game, Battle(this, {}, false));
 	}
 }
@@ -889,9 +890,9 @@ void Ship::battle_update(Game& game) {
 	assert(target_port == nullptr || current_battle.is_first);
 
 	Battle* other_battle = (target_ship == nullptr) ? nullptr : &target_ship->battles_.back();
-	assert(other_battle == nullptr ||
-	       (other_battle->opponent.get(game) == this && other_battle->is_first != current_battle.is_first &&
-	        other_battle->phase == current_battle.phase));
+	assert(other_battle == nullptr || (other_battle->opponent.get(game) == this &&
+	                                   other_battle->is_first != current_battle.is_first &&
+	                                   other_battle->phase == current_battle.phase));
 
 	auto set_phase = [&game, &current_battle, other_battle](Battle::Phase new_phase) {
 		current_battle.phase = new_phase;
@@ -902,18 +903,20 @@ void Ship::battle_update(Game& game) {
 		}
 	};
 	auto fight = [this, &current_battle, other_battle, &game, target_ship]() {
-		current_battle.pending_damage = target_ship == nullptr ?
-                            1 :  // Ports always take 1 point
-		                      (game.logic_rand() % 100 < descr().attack_accuracy_) ?
-                            (descr().min_attack_ +
-		                       (game.logic_rand() % (descr().max_attack_ - descr().min_attack_))) *
-		                         (100 - target_ship->descr().defense_) / 100 :
-                            0;
+		current_battle.pending_damage =
+		   target_ship == nullptr ?
+            1 :  // Ports always take 1 point
+		      (game.logic_rand() % 100 < descr().attack_accuracy_) ?
+            (descr().min_attack_ +
+		       (game.logic_rand() % (descr().max_attack_ - descr().min_attack_))) *
+		         (100 - target_ship->descr().defense_) / 100 :
+            0;
 		if (other_battle != nullptr) {
 			other_battle->pending_damage = current_battle.pending_damage;
 		}
 	};
-	auto damage = [this, &game, set_phase, &current_battle, other_battle, target_ship](Battle::Phase next) {
+	auto damage = [this, &game, set_phase, &current_battle, other_battle,
+	               target_ship](Battle::Phase next) {
 		if (target_ship->hitpoints_ > current_battle.pending_damage) {
 			target_ship->hitpoints_ -= current_battle.pending_damage;
 			set_phase(next);
