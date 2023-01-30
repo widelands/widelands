@@ -863,7 +863,11 @@ void Ship::start_battle(Game& game, const Battle new_battle) {
 
 	// Summon someone to the defence
 	if (target->descr().type() == MapObjectType::SHIP) {
-		dynamic_cast<Ship&>(*target).start_battle(game, Battle(this, {}, false));
+		Ship& enemy_ship = dynamic_cast<Ship&>(*target);
+		enemy_ship.send_message(game, _("Naval Attack"), _("Enemy Ship Attacking"),
+		                          format(_("Your ship ‘%s’ is under attack from an enemy warship."), enemy_ship.get_shipname()),
+		                          "images/wui/ship/ship_attack.png");
+		enemy_ship.start_battle(game, Battle(this, {}, false));
 	}
 }
 
