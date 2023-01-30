@@ -339,6 +339,7 @@ void ShipWindow::think() {
 	                                 (ship->get_attack_target(ibase_.egbase())->descr().type() !=
 	                                     Widelands::MapObjectType::PORTDOCK ||
 	                                  warship_soldiers_display_->count_soldiers() > 0U));
+	btn_warship_stay_->set_enabled(can_act);
 
 	display_->clear();
 	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
