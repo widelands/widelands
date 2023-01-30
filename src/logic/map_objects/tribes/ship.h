@@ -371,8 +371,8 @@ protected:
 		Serial ware_economy_serial_{kInvalidSerial};
 		Serial worker_economy_serial_{kInvalidSerial};
 		uint32_t destination_{0U};
-		uint32_t capacity_{0U};
-		uint32_t warship_soldier_capacity_{0U};
+		Quantity capacity_{0U};
+		Quantity warship_soldier_capacity_{0U};
 		int32_t hitpoints_{0};
 		ShipStates ship_state_{ShipStates::kTransport};
 		ShipType ship_type_{ShipType::kTransport};

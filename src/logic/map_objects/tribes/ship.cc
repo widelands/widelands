@@ -830,7 +830,7 @@ void Ship::warship_command(Game& game,
 
 	case WarshipCommand::kAttack:
 		if (MapObject* target = get_attack_target(game); target != nullptr) {
-			assert((target->descr().type() == MapObjectType::PORTDOCK) ^ parameters.empty());
+			assert(target->descr().type() != MapObjectType::PORTDOCK || !parameters.empty());
 			start_battle(game, Battle(target, parameters, true));
 		}
 		return;
@@ -871,8 +871,8 @@ constexpr uint8_t kPortUnderAttackDefendersSearchRadius = 10;
 constexpr uint32_t kAttackAnimationDuration = 2000;
 
 void Ship::battle_update(Game& game) {
-	Battle& b = battles_.back();
-	MapObject* target = b.opponent.get(game);
+	Battle& current_battle = battles_.back();
+	MapObject* target = current_battle.opponent.get(game);
 	if (target == nullptr) {
 		battles_.pop_back();
 		start_task_idle(game, descr().main_animation(), 100);
@@ -882,23 +882,23 @@ void Ship::battle_update(Game& game) {
 	upcast(Ship, target_ship, target);
 	upcast(PortDock, target_port, target);
 	assert((target_ship == nullptr) ^ (target_port == nullptr));
-	assert(target_port == nullptr || b.is_first);
+	assert(target_port == nullptr || current_battle.is_first);
 
 	Battle* other_battle = (target_ship == nullptr) ? nullptr : &target_ship->battles_.back();
-	assert(!other_battle ||
-	       (other_battle->opponent.get(game) == this && other_battle->is_first != b.is_first &&
-	        other_battle->phase == b.phase));
+	assert(other_battle == nullptr ||
+	       (other_battle->opponent.get(game) == this && other_battle->is_first != current_battle.is_first &&
+	        other_battle->phase == current_battle.phase));
 
-	auto set_phase = [&game, &b, other_battle](Battle::Phase p) {
-		b.phase = p;
-		b.time_of_last_action = game.get_gametime();
+	auto set_phase = [&game, &current_battle, other_battle](Battle::Phase new_phase) {
+		current_battle.phase = new_phase;
+		current_battle.time_of_last_action = game.get_gametime();
 		if (other_battle != nullptr) {
-			other_battle->phase = p;
-			other_battle->time_of_last_action = b.time_of_last_action;
+			other_battle->phase = new_phase;
+			other_battle->time_of_last_action = current_battle.time_of_last_action;
 		}
 	};
-	auto fight = [this, &b, other_battle, &game, target_ship]() {
-		b.pending_damage = target_ship == nullptr ?
+	auto fight = [this, &current_battle, other_battle, &game, target_ship]() {
+		current_battle.pending_damage = target_ship == nullptr ?
                             1 :  // Ports always take 1 point
 		                      (game.logic_rand() % 100 < descr().attack_accuracy_) ?
                             (descr().min_attack_ +
@@ -906,12 +906,12 @@ void Ship::battle_update(Game& game) {
 		                         (100 - target_ship->descr().defense_) / 100 :
                             0;
 		if (other_battle != nullptr) {
-			other_battle->pending_damage = b.pending_damage;
+			other_battle->pending_damage = current_battle.pending_damage;
 		}
 	};
-	auto damage = [this, &game, set_phase, &b, other_battle, target_ship](Battle::Phase next) {
-		if (target_ship->hitpoints_ > b.pending_damage) {
-			target_ship->hitpoints_ -= b.pending_damage;
+	auto damage = [this, &game, set_phase, &current_battle, other_battle, target_ship](Battle::Phase next) {
+		if (target_ship->hitpoints_ > current_battle.pending_damage) {
+			target_ship->hitpoints_ -= current_battle.pending_damage;
 			set_phase(next);
 		} else {
 			target_ship->send_message(game, _("Ship Sunk"), _("Ship Destroyed"),
@@ -922,12 +922,12 @@ void Ship::battle_update(Game& game) {
 			target_ship->battles_.clear();
 			battles_.pop_back();
 		}
-		b.pending_damage = 0;
+		current_battle.pending_damage = 0;
 		other_battle->pending_damage = 0;
 	};
 
-	if (!b.is_first) {
-		switch (b.phase) {
+	if (!current_battle.is_first) {
+		switch (current_battle.phase) {
 		case Battle::Phase::kDefenderAttacking:
 			// Our turn is over, now it's the enemy's turn.
 			damage(Battle::Phase::kAttackersTurn);
@@ -948,7 +948,7 @@ void Ship::battle_update(Game& game) {
 		NEVER_HERE();
 	}
 
-	switch (b.phase) {
+	switch (current_battle.phase) {
 	case Battle::Phase::kDefendersTurn:
 	case Battle::Phase::kDefenderAttacking:
 		// Idle until the opponent's turn is over.
@@ -995,7 +995,7 @@ void Ship::battle_update(Game& game) {
 		if (target_ship != nullptr) {
 			// Our turn is over, now it's the enemy's turn.
 			damage(Battle::Phase::kDefendersTurn);
-		} else if (b.pending_damage > 0) {
+		} else if (current_battle.pending_damage > 0) {
 			// The naval assault was successful. Now unload the soldiers.
 			// From the ship's perspective, the attack was a success.
 			Warehouse& warehouse = *target_port->get_warehouse();
