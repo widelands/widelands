@@ -48,7 +48,10 @@ public:
 	        const MapData::DisplayType& init_displaytype);
 
 	/// For directories
-	MapData(const std::string& init_filename, const std::string& init_localized_name);
+	MapData(const std::string& init_filenames, const std::string& init_localized_name);
+
+	/// Add a second directory path to this directory entry.
+	void add(const MapData& md);
 
 	/// The localized name of the parent directory
 	static std::string parent_name();
@@ -67,7 +70,7 @@ public:
 	[[nodiscard]] bool compare_players(const MapData& other) const;
 	[[nodiscard]] bool compare_size(const MapData& other) const;
 
-	std::string filename;
+	std::vector<std::string> filenames;
 	std::string name;
 	std::string localized_name;
 	MapAuthorData authors;
