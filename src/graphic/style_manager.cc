@@ -111,6 +111,29 @@ std::string resolve_template_image_filename(const std::string& path) {
 }
 
 namespace {
+
+// Shorthand helper function to make sure falling back to the default style is possible,
+// or raise an exception if it is not
+void fail_if_doing_default_style(std::string style_type, std::string style_name) {
+	if (default_style == nullptr) {
+		throw wexception(
+		   "The default template does not have %s '%s'", style_type.c_str(), style_name.c_str());
+	}
+	assert(g_template_dir != kDefaultTemplate);
+}
+
+// Get the subtable for 'section' safely from 'table', allowing fallback if it is missing
+std::unique_ptr<LuaTable>
+try_section_or_empty(LuaInterface& lua, const LuaTable& table, std::string section, std::string parent = "") {
+	if (table.has_key(section)) {
+		return table.get_table(section);
+	} else {
+		std::string name = parent.empty() ? section : format("%s.%s", parent, section);
+		fail_if_doing_default_style("section", name);
+		return lua.empty_table();
+	}
+}
+
 // Read RGB(A) color from LuaTable
 RGBColor read_rgb_color(const LuaTable& table) {
 	std::vector<int> rgbcolor = table.array_entries<int>();
@@ -166,7 +189,7 @@ UI::PanelStyleInfo* read_panel_style(const LuaTable& table) {
 	return new UI::PanelStyleInfo(
 	   image.empty() ? nullptr : g_image_cache->get(image),
 	   RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0),
-	   table.has_key<std::string>("margin") ? table.get_int("margin") : 0);
+	   table.get_int_with_default("margin", 0));
 }
 
 // Read text panel style from LuaTable
@@ -198,44 +221,59 @@ StyleManager::StyleManager() {
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(lua.run_script(format("%1%init.lua", template_dir())));
 
+	std::string section;
+	std::string sub;
+	std::unique_ptr<LuaTable> element_table;
+	std::unique_ptr<LuaTable> style_table;
+
 	// Buttons
-	std::unique_ptr<LuaTable> element_table = table->get_table("buttons");
-	std::unique_ptr<LuaTable> style_table = element_table->get_table("fsmenu");
-	add_button_style(UI::ButtonStyle::kFsMenuMenu, *style_table->get_table("menu"));
-	add_button_style(UI::ButtonStyle::kFsMenuPrimary, *style_table->get_table("primary"));
-	add_button_style(UI::ButtonStyle::kFsMenuSecondary, *style_table->get_table("secondary"));
-	style_table = element_table->get_table("wui");
-	add_button_style(UI::ButtonStyle::kWuiMenu, *style_table->get_table("menu"));
-	add_button_style(UI::ButtonStyle::kWuiPrimary, *style_table->get_table("primary"));
-	add_button_style(UI::ButtonStyle::kWuiSecondary, *style_table->get_table("secondary"));
-	add_button_style(UI::ButtonStyle::kWuiBuildingStats, *style_table->get_table("building_stats"));
+	section = "buttons";
+	element_table = try_section_or_empty(lua, *table, section);
+	sub = "fsmenu";
+	style_table = try_section_or_empty(lua, *element_table, sub, section);
+	add_button_style(UI::ButtonStyle::kFsMenuMenu, *style_table, sub, "menu");
+	add_button_style(UI::ButtonStyle::kFsMenuPrimary, *style_table, sub, "primary");
+	add_button_style(UI::ButtonStyle::kFsMenuSecondary, *style_table, sub, "secondary");
+	sub = "wui";
+	style_table = try_section_or_empty(lua, *element_table, sub, section);
+	add_button_style(UI::ButtonStyle::kWuiMenu, *style_table, sub, "menu");
+	add_button_style(UI::ButtonStyle::kWuiPrimary, *style_table, sub, "primary");
+	add_button_style(UI::ButtonStyle::kWuiSecondary, *style_table, sub, "secondary");
+	add_button_style(UI::ButtonStyle::kWuiBuildingStats, *style_table, sub, "building_stats");
 	check_completeness(
 	   "buttons", buttonstyles_.size(), static_cast<size_t>(UI::ButtonStyle::kWuiBuildingStats));
 
 	// Sliders
-	element_table = table->get_table("sliders");
-	style_table = element_table->get_table("fsmenu");
-	add_slider_style(UI::SliderStyle::kFsMenu, *style_table->get_table("menu"));
-	style_table = element_table->get_table("wui");
-	add_slider_style(UI::SliderStyle::kWuiLight, *style_table->get_table("light"));
-	add_slider_style(UI::SliderStyle::kWuiDark, *style_table->get_table("dark"));
+	section = "sliders";
+	element_table = try_section_or_empty(lua, *table, section);
+	sub = "fsmenu";
+	style_table = try_section_or_empty(lua, *element_table, sub, section);
+	add_slider_style(UI::SliderStyle::kFsMenu, *style_table, sub, "menu");
+	sub = "wui";
+	style_table = try_section_or_empty(lua, *element_table, sub, section);
+	add_slider_style(UI::SliderStyle::kWuiLight, *style_table, sub, "light");
+	add_slider_style(UI::SliderStyle::kWuiDark, *style_table, sub, "dark");
 	check_completeness(
 	   "sliders", sliderstyles_.size(), static_cast<size_t>(UI::SliderStyle::kWuiDark));
 
 	// Tabpanels
-	element_table = table->get_table("tabpanels");
-	style_table = element_table->get_table("fsmenu");
-	add_tabpanel_style(UI::TabPanelStyle::kFsMenu, *style_table->get_table("menu"));
-	style_table = element_table->get_table("wui");
-	add_tabpanel_style(UI::TabPanelStyle::kWuiLight, *style_table->get_table("light"));
-	add_tabpanel_style(UI::TabPanelStyle::kWuiDark, *style_table->get_table("dark"));
+	section = "tabpanels";
+	element_table = try_section_or_empty(lua, *table, section);
+	sub = "fsmenu";
+	style_table = try_section_or_empty(lua, *element_table, sub, section);
+	add_tabpanel_style(UI::TabPanelStyle::kFsMenu, *style_table, sub, "menu");
+	sub = "wui";
+	style_table = try_section_or_empty(lua, *element_table, sub, section);
+	add_tabpanel_style(UI::TabPanelStyle::kWuiLight, *style_table, sub, "light");
+	add_tabpanel_style(UI::TabPanelStyle::kWuiDark, *style_table, sub, "dark");
 	check_completeness(
 	   "tabpanels", tabpanelstyles_.size(), static_cast<size_t>(UI::TabPanelStyle::kWuiDark));
 
 	// Editboxes
-	element_table = table->get_table("editboxes");
-	add_editbox_style(UI::PanelStyle::kFsMenu, *element_table->get_table("fsmenu"));
-	add_editbox_style(UI::PanelStyle::kWui, *element_table->get_table("wui"));
+	section = "editboxes";
+	element_table = try_section_or_empty(lua, *table, section);
+	add_editbox_style(UI::PanelStyle::kFsMenu, *element_table, "fsmenu");
+	add_editbox_style(UI::PanelStyle::kWui, *element_table, "wui");
 	check_completeness(
 	   "editboxes", editboxstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
@@ -350,7 +388,8 @@ StyleManager::StyleManager() {
 	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kUnknown));
 
 	// Paragraphs
-	element_table = table->get_table("paragraphs");
+	section = "paragraphs";
+	element_table = try_section_or_empty(lua, *table, section);
 	add_paragraph_style(UI::ParagraphStyle::kReadmeTitle, *element_table, "readme_title");
 	add_paragraph_style(UI::ParagraphStyle::kAboutTitle, *element_table, "about_title");
 	add_paragraph_style(UI::ParagraphStyle::kIngameSubtitle, *element_table, "ingame_subtitle");
@@ -372,7 +411,8 @@ StyleManager::StyleManager() {
 	   "paragraphs", paragraphstyles_.size(), static_cast<size_t>(UI::ParagraphStyle::kUnknown));
 
 	// Colors
-	element_table = table->get_table("colors");
+	section = "colors";
+	element_table = try_section_or_empty(lua, *table, section);
 	add_color(UI::ColorStyle::kCampaignBarbarianThron, *element_table, "campaign_bar_thron");
 	add_color(UI::ColorStyle::kCampaignBarbarianBoldreth, *element_table, "campaign_bar_boldreth");
 	add_color(UI::ColorStyle::kCampaignBarbarianKhantrukh, *element_table, "campaign_bar_khantrukh");
@@ -403,7 +443,8 @@ StyleManager::StyleManager() {
 	check_completeness("colors", colors_.size(), static_cast<size_t>(UI::ColorStyle::kUnknown));
 
 	// Sizes
-	element_table = table->get_table("styled_sizes");
+	section = "styled_sizes";
+	element_table = try_section_or_empty(lua, *table, section);
 	add_styled_size(UI::StyledSize::kTextDefaultGap, *element_table, "text_default_gap");
 	add_styled_size(UI::StyledSize::kTextSpaceBeforeInlineHeader, *element_table,
 	                "text_space_before_inline_header");
@@ -561,26 +602,54 @@ std::string StyleManager::color_tag(const std::string& text, const RGBColor& col
 }
 
 // Fill the maps
-void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table) {
-	buttonstyles_.insert(
-	   std::make_pair(style, std::unique_ptr<const UI::ButtonStyleInfo>(new UI::ButtonStyleInfo(
-	                            read_text_panel_style(*table.get_table("enabled")),
-	                            read_text_panel_style(*table.get_table("disabled"))))));
+void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table,
+                                    const std::string& parent, const std::string& key) {
+	UI::ButtonStyleInfo* b_style;
+	if (table.has_key(key)) {
+		std::unique_ptr<LuaTable> bst = table.get_table(key);
+		b_style = new UI::ButtonStyleInfo(read_text_panel_style(*(bst->get_table("enabled"))),
+	                                     read_text_panel_style(*(bst->get_table("disabled"))));
+	} else {
+		fail_if_doing_default_style("button style", format("%s.%s", parent, key));
+		b_style = new UI::ButtonStyleInfo(default_style->button_style(style));
+	}
+	buttonstyles_.insert(std::make_pair(style, std::unique_ptr<const UI::ButtonStyleInfo>(b_style)));
 }
 
-void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table) {
-	sliderstyles_.insert(
-	   std::make_pair(style, std::unique_ptr<UI::TextPanelStyleInfo>(read_text_panel_style(table))));
+void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table,
+                                    const std::string& parent, const std::string& key) {
+	UI::TextPanelStyleInfo* s_style;
+	if (table.has_key(key)) {
+		s_style = read_text_panel_style(*table.get_table(key));
+	} else {
+		fail_if_doing_default_style("slider style", format("%s.%s", parent, key));
+		s_style = new UI::TextPanelStyleInfo(default_style->slider_style(style));
+	}
+	sliderstyles_.insert(std::make_pair(style, std::unique_ptr<UI::TextPanelStyleInfo>(s_style)));
 }
 
-void StyleManager::add_editbox_style(UI::PanelStyle style, const LuaTable& table) {
-	editboxstyles_.insert(
-	   std::make_pair(style, std::unique_ptr<UI::TextPanelStyleInfo>(read_text_panel_style(table))));
+void StyleManager::add_editbox_style(UI::PanelStyle style, const LuaTable& table,
+                                     const std::string& key) {
+	UI::TextPanelStyleInfo* eb_style;
+	if (table.has_key(key)) {
+		eb_style = read_text_panel_style(*table.get_table(key));
+	} else {
+		fail_if_doing_default_style("editbox style", key);
+		eb_style = new UI::TextPanelStyleInfo(default_style->editbox_style(style));
+	}
+	editboxstyles_.insert(std::make_pair(style, std::unique_ptr<UI::TextPanelStyleInfo>(eb_style)));
 }
 
-void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table) {
-	tabpanelstyles_.insert(
-	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_panel_style(table))));
+void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table,
+                                      const std::string& parent, const std::string& key) {
+	UI::PanelStyleInfo* tp_style;
+	if (table.has_key(key)) {
+		tp_style = read_panel_style(*table.get_table(key));
+	} else {
+		fail_if_doing_default_style("tabpanel style", format("%s.%s", parent, key));
+		tp_style = new UI::PanelStyleInfo(*default_style->tabpanel_style(style));
+	}
+	tabpanelstyles_.insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(tp_style)));
 }
 
 void StyleManager::add_progressbar_style(UI::PanelStyle style, const LuaTable& table) {
@@ -664,12 +733,7 @@ void StyleManager::add_font_style(UI::FontStyle font_key,
 	if (table.has_key(table_key)) {
 		fontstyle = read_font_style(table, table_key);
 	} else {
-		if (default_style == nullptr) {
-			throw wexception("The default template does not have font style '%s'", table_key.c_str());
-		}
-		assert(g_template_dir != kDefaultTemplate);
-
-		// We can fall back on the default template
+		fail_if_doing_default_style("font style", table_key);
 		fontstyle = new UI::FontStyleInfo(default_style->font_style(font_key));
 	}
 	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<UI::FontStyleInfo>(fontstyle)));
@@ -679,21 +743,36 @@ void StyleManager::add_font_style(UI::FontStyle font_key,
 void StyleManager::add_paragraph_style(UI::ParagraphStyle style,
                                        const LuaTable& table,
                                        const std::string& table_key) {
-	paragraphstyles_.emplace(std::make_pair(
-	   style, std::unique_ptr<UI::ParagraphStyleInfo>(read_paragraph_style(table, table_key))));
+	UI::ParagraphStyleInfo* p_style;
+	if (table.has_key(table_key)) {
+		p_style = read_paragraph_style(table, table_key);
+	} else {
+		fail_if_doing_default_style("paragraph style", table_key);
+		p_style = new UI::ParagraphStyleInfo(default_style->paragraph_style(style));
+	}
+	paragraphstyles_.emplace(std::make_pair(style, std::unique_ptr<UI::ParagraphStyleInfo>(p_style)));
 	paragraphstyle_keys_.emplace(std::make_pair(table_key, style));
 }
 
 void StyleManager::add_color(UI::ColorStyle id, const LuaTable& table, const std::string& key) {
-	const std::unique_ptr<LuaTable> color_table(table.get_table(key));
-	const RGBColor color = read_rgb_color(*color_table);
-	colors_.emplace(std::make_pair(id, color));
+	if (table.has_key(key)) {
+		const std::unique_ptr<LuaTable> color_table(table.get_table(key));
+		colors_.emplace(std::make_pair(id, read_rgb_color(*color_table)));
+	} else {
+		fail_if_doing_default_style("color style", key);
+		colors_.emplace(std::make_pair(id, default_style->color(id)));
+	}
 	color_keys_.emplace(std::make_pair(key, id));
 }
 
 void StyleManager::add_styled_size(UI::StyledSize id,
                                    const LuaTable& table,
                                    const std::string& key) {
-	styled_sizes_.emplace(std::make_pair(id, table.get_int(key)));
+	if (table.has_key(key)) {
+		styled_sizes_.emplace(std::make_pair(id, table.get_int(key)));
+	} else {
+		fail_if_doing_default_style("styled size", key);
+		styled_sizes_.emplace(std::make_pair(id, default_style->styled_size(id)));
+	}
 	styled_size_keys_.emplace(std::make_pair(key, id));
 }
