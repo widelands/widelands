@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -233,7 +233,6 @@ msgstr "Mou el mapa quan el cursor estigui prop de la vora de la pantalla."
 #: ../../src/wlapplication_messages.cc:188
 #: ../../src/wlapplication_messages.cc:191
 #: ../../src/wlapplication_messages.cc:206
-#: ../../src/wlapplication_messages.cc:215
 msgid "[true|false*]"
 msgstr "[true|false*]"
 
@@ -405,42 +404,36 @@ msgid ""
 msgstr "Mou una finestra a la vora del panell quan la vora estigui a una distància «n» del costat d’un panell."
 
 #: ../../src/wlapplication_messages.cc:216
-msgid ""
-"Only move a window to the edge of a panel if the window is overlapping with "
-"the panel."
-msgstr "Mou només una finestra a la vora del panell si la finestra està superposada amb el panell."
-
-#: ../../src/wlapplication_messages.cc:219
 msgid "Enable verbose debug messages"
 msgstr "Habilita els missatges de depuració descriptius."
 
-#: ../../src/wlapplication_messages.cc:219
+#: ../../src/wlapplication_messages.cc:216
 msgid "Others:"
 msgstr "Altres:"
 
-#: ../../src/wlapplication_messages.cc:221
+#: ../../src/wlapplication_messages.cc:218
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
 msgstr "Mostra una llista de com s’han traduït totes les cadenes. Això ajuda a buscar errors en les traduccions."
 
-#: ../../src/wlapplication_messages.cc:224
+#: ../../src/wlapplication_messages.cc:221
 msgid "Only print version and exit."
 msgstr "Només mostra la versió i surt."
 
-#: ../../src/wlapplication_messages.cc:225
+#: ../../src/wlapplication_messages.cc:222
 msgid "Show this help."
 msgstr "Mostra aquesta ajuda."
 
-#: ../../src/wlapplication_messages.cc:226
+#: ../../src/wlapplication_messages.cc:223
 msgid "Show this help with all available config options."
 msgstr "Mostra aquesta ajuda amb totes les opcions de configuració disponibles."
 
-#: ../../src/wlapplication_messages.cc:227
+#: ../../src/wlapplication_messages.cc:224
 msgid "<save.wgf>/<replay.wry>"
 msgstr "<save.wgf>/<replay.wry>"
 
-#: ../../src/wlapplication_messages.cc:228
+#: ../../src/wlapplication_messages.cc:225
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
@@ -448,12 +441,12 @@ msgid ""
 msgstr " Carrega directament la desada o repetició. Útil per l’associació de fitxers amb extensions .wgf/.wry. No funciona amb altres opcions. Vegeu també --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:255
+#: ../../src/wlapplication_messages.cc:252
 #, c-format
 msgid "This is Widelands version %s"
 msgstr "Aquesta és la versió %s del Widelands."
 
-#: ../../src/wlapplication_messages.cc:313
+#: ../../src/wlapplication_messages.cc:310
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"
