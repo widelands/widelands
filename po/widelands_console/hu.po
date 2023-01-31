@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -245,7 +245,6 @@ msgstr "Térkép mozgatása amikor az egérmutató a kép szélén van."
 #: ../../src/wlapplication_messages.cc:188
 #: ../../src/wlapplication_messages.cc:191
 #: ../../src/wlapplication_messages.cc:206
-#: ../../src/wlapplication_messages.cc:215
 msgid "[true|false*]"
 msgstr "[true|false*]"
 
@@ -417,42 +416,36 @@ msgid ""
 msgstr "Ablakok tálcához igazítása a megadott távolságon belül."
 
 #: ../../src/wlapplication_messages.cc:216
-msgid ""
-"Only move a window to the edge of a panel if the window is overlapping with "
-"the panel."
-msgstr "Ablakok tálcához igazítása csak átfedés esetén. (igen/nem)"
-
-#: ../../src/wlapplication_messages.cc:219
 msgid "Enable verbose debug messages"
 msgstr "Bővebb hibakeresési üzenetek használata."
 
-#: ../../src/wlapplication_messages.cc:219
+#: ../../src/wlapplication_messages.cc:216
 msgid "Others:"
 msgstr "Egyéb:"
 
-#: ../../src/wlapplication_messages.cc:221
+#: ../../src/wlapplication_messages.cc:218
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
 msgstr "Minden szöveg kiírása a fordítás betöltésekor a fordítás miatti hibák könnyebb azonosítása érdekében."
 
-#: ../../src/wlapplication_messages.cc:224
+#: ../../src/wlapplication_messages.cc:221
 msgid "Only print version and exit."
 msgstr "Csak a verzió kiírása."
 
-#: ../../src/wlapplication_messages.cc:225
+#: ../../src/wlapplication_messages.cc:222
 msgid "Show this help."
 msgstr "Ennek a súgónak a megjelenítése."
 
-#: ../../src/wlapplication_messages.cc:226
+#: ../../src/wlapplication_messages.cc:223
 msgid "Show this help with all available config options."
 msgstr "Súgó megjelenítése minden elérhető beállítással."
 
-#: ../../src/wlapplication_messages.cc:227
+#: ../../src/wlapplication_messages.cc:224
 msgid "<save.wgf>/<replay.wry>"
 msgstr "<mentés.wgf>/<visszajátszás.wry>"
 
-#: ../../src/wlapplication_messages.cc:228
+#: ../../src/wlapplication_messages.cc:225
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
@@ -460,12 +453,12 @@ msgid ""
 msgstr "A megadott mentés vagy visszajátszás közvetlen betöltése. A .wgf/.wry fájltípus hozzárendeléséhez használható. Más beállításokkal együtt nem működik. Lásd még: --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:255
+#: ../../src/wlapplication_messages.cc:252
 #, c-format
 msgid "This is Widelands version %s"
 msgstr "Ez a Widelands %s verziója"
 
-#: ../../src/wlapplication_messages.cc:313
+#: ../../src/wlapplication_messages.cc:310
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

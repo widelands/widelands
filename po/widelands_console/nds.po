@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -233,7 +233,6 @@ msgstr "Kaart-Sicht verschuven, wenn de Muuswieser dicht bi de Billschirm-Rand i
 #: ../../src/wlapplication_messages.cc:188
 #: ../../src/wlapplication_messages.cc:191
 #: ../../src/wlapplication_messages.cc:206
-#: ../../src/wlapplication_messages.cc:215
 msgid "[true|false*]"
 msgstr "[jau|nee*]"
 
@@ -405,42 +404,36 @@ msgid ""
 msgstr "Een Fenster word to de Rann vun eenem Paneel sett, wenn sien Rann nich wieder as `n` vun de Rann vun de Paneel weg is."
 
 #: ../../src/wlapplication_messages.cc:216
-msgid ""
-"Only move a window to the edge of a panel if the window is overlapping with "
-"the panel."
-msgstr "Schuuv een Fenster blot dann an de Rann vun een Paneel, wenn se övernanner liggen."
-
-#: ../../src/wlapplication_messages.cc:219
 msgid "Enable verbose debug messages"
 msgstr "Unbannig völe Narichten utgeven"
 
-#: ../../src/wlapplication_messages.cc:219
+#: ../../src/wlapplication_messages.cc:216
 msgid "Others:"
 msgstr "Wat ’t sünst noch so gifft:"
 
-#: ../../src/wlapplication_messages.cc:221
+#: ../../src/wlapplication_messages.cc:218
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
 msgstr "All Texten bi’m Översetten utgeven. Dat hülpt daarbi, Fehlers in de Översetten to finnen."
 
-#: ../../src/wlapplication_messages.cc:224
+#: ../../src/wlapplication_messages.cc:221
 msgid "Only print version and exit."
 msgstr "Blot Versioon utgeven un ennen."
 
-#: ../../src/wlapplication_messages.cc:225
+#: ../../src/wlapplication_messages.cc:222
 msgid "Show this help."
 msgstr "Deese Hülp wiesen."
 
-#: ../../src/wlapplication_messages.cc:226
+#: ../../src/wlapplication_messages.cc:223
 msgid "Show this help with all available config options."
 msgstr "Deese Hülp un all de Instellens, wat ’t gifft, wiesen."
 
-#: ../../src/wlapplication_messages.cc:227
+#: ../../src/wlapplication_messages.cc:224
 msgid "<save.wgf>/<replay.wry>"
 msgstr "<Sekert.wgf>/<Upteken.wry>"
 
-#: ../../src/wlapplication_messages.cc:228
+#: ../../src/wlapplication_messages.cc:225
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
@@ -448,12 +441,12 @@ msgid ""
 msgstr "Stracks dat geven sekert Speel of Upteken laden. Gadelk för .wgf-/.wry-Dateinaam-Verknüppens. Anner Instellens worden nich annohmen. Kiek ok an: --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:255
+#: ../../src/wlapplication_messages.cc:252
 #, c-format
 msgid "This is Widelands version %s"
 msgstr "Dat is Widelands-Versioon %s"
 
-#: ../../src/wlapplication_messages.cc:313
+#: ../../src/wlapplication_messages.cc:310
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

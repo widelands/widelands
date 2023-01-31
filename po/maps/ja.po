@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-04 20:42+0000\n"
+"POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: tamanegi, 2018-2019\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
@@ -723,11 +723,11 @@ msgid ""
 "long, long way to conquere all the islands. Good luck!"
 msgstr ""
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:8
 msgid "Island Hopping"
 msgstr "島跳び"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:9
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:10
 msgid ""
 "A special tournament in Atlantean culture is the so-called ‘Island Hopping’,"
 " where two or more groups try to reach the center island as fast as "

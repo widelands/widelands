@@ -59,7 +59,7 @@ MapSelect::MapSelect(MenuCapsule& m,
      basedir_(kMapsDir),
      settings_(settings),
      ctrl_(ctrl) {
-	curdir_ = basedir_;
+	curdir_ = {basedir_};
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
 	} else {
@@ -233,7 +233,7 @@ void MapSelect::clicked_ok() {
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 
 	if (mapdata.width == 0u) {
-		curdir_ = mapdata.filename;
+		curdir_ = mapdata.filenames;
 		fill_table();
 	} else if (!ok_.enabled()) {
 		return;
@@ -296,12 +296,17 @@ void MapSelect::fill_table() {
 	// This is the normal case
 
 	//  Fill it with all files we find in all directories.
-	FilenameSet files = g_fs->list_directory(curdir_);
+	assert(!curdir_.empty());
+	FilenameSet files;
+	for (const std::string& dir : curdir_) {
+		FilenameSet f = g_fs->list_directory(dir);
+		files.insert(f.begin(), f.end());
+	}
 
 	// If we are not at the top of the map directory hierarchy (we're not talking
 	// about the absolute filesystem top!) we manually add ".."
-	if (curdir_ != basedir_) {
-		maps_data_.push_back(MapData::create_parent_dir(curdir_));
+	if (curdir_.at(0) != basedir_) {
+		maps_data_.push_back(MapData::create_parent_dir(curdir_.at(0)));
 	} else {
 		// In the toplevel directory we also need to include add-on maps
 		for (auto& addon : AddOns::g_addons) {
@@ -401,7 +406,20 @@ void MapSelect::fill_table() {
 			if ((strcmp(fs_filename, ".") == 0) || (strcmp(fs_filename, "..") == 0)) {
 				continue;
 			}
-			maps_data_.push_back(MapData::create_directory(mapfilename));
+
+			MapData new_md = MapData::create_directory(mapfilename);
+			bool found = false;
+			for (MapData& md : maps_data_) {
+				if (md.maptype == MapData::MapType::kDirectory &&
+				    md.localized_name == new_md.localized_name) {
+					found = true;
+					md.add(new_md);
+					break;
+				}
+			}
+			if (!found) {
+				maps_data_.push_back(new_md);
+			}
 		}
 	}
 

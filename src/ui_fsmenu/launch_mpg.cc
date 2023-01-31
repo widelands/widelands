@@ -162,7 +162,7 @@ void LaunchMPG::clicked_select_map_callback(const MapData* map, const bool scena
 	}
 
 	settings_.set_scenario(scenario);
-	settings_.set_map(map->name, map->filename, map->theme, map->background, map->nrplayers);
+	settings_.set_map(map->name, map->filenames.at(0), map->theme, map->background, map->nrplayers);
 
 	map_changed();
 	update_win_conditions();

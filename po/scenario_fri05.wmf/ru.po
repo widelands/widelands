@@ -30,64 +30,71 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Кажется, вы не прошли предыдущий сценарий. Если продолжите, стартовые "
+"условия у вас будут хуже, чем могли бы быть. Советуем завершить предыдущий "
+"сценарий и потом уже взяться за этот."
 
 #: ../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2978
 #: ../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
-msgstr ""
+msgstr "Гельголанд"
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
 #: ../../data/campaigns/fri05.wmf/scripting/init_p2.lua:13
 msgid "København"
-msgstr ""
+msgstr "Копенгаген"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:34
 msgid "%1$d× %2$s"
-msgstr ""
+msgstr "%1$d× %2$s"
 
 #. TRANSLATORS: The placeholders are ware lists in a trade description, e.g.
 #. "2× Fish and 1× Honey → 1× Granite"
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:41
 msgid "%1$s → %2$s"
-msgstr ""
+msgstr "%1$s → %2$s"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:47
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:204
 msgid "Trade"
-msgstr ""
+msgstr "торговля"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:48
 msgid ""
 "You can not mine resources or quarry rocks on this island. Instead, you can "
 "trade local produce against other types of wares."
 msgstr ""
+"На этом острове вы не сможете добывать ресурсы или ломать камни. Вместо "
+"этого вы можете выменивать вашу продукцию на другие виды товаров."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:49
 msgid ""
 "Any wares stored in a port will be traded. The trade prices are indicated by"
 " the following chart."
 msgstr ""
+"Любые товары, хранящиеся в порту, будут проданы. Рыночные цены указаны на "
+"следующем графике."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:56
 msgid "Defeat the invaders"
-msgstr ""
+msgstr "Победите захватчиков"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:58
 msgid "Defeat Atterdag’s Forces."
-msgstr ""
+msgstr "Разгромите армию Аттердага."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:59
 msgid "Destroy all the enemy’s buildings."
-msgstr ""
+msgstr "Разрушить все здания противника."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:65
 msgid "Block the bottleneck"
-msgstr ""
+msgstr "Заблокируйте узкое место"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:67
 msgid "Block the Bottleneck."
-msgstr ""
+msgstr "Заблокировать узкое место"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:68
 msgid ""
@@ -95,48 +102,51 @@ msgid ""
 "military buildings, so the enemy cannot get past before you’re ready for the"
 " attack."
 msgstr ""
+"Защитите узкий проход к востоку от Нагорья несколькими большими военными "
+"зданиями, чтобы враг не смог добраться до вас, до того как вы будете готовы "
+"к атаке."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:74
 msgid "Wood production"
-msgstr ""
+msgstr "Производство древесины"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:76
 msgid "Secure your Wood Production."
-msgstr ""
+msgstr "Обеспечьте производство древесины."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:77
 msgid "Build at least three woodcutter’s houses."
-msgstr ""
+msgstr "Постройте по крайней мере три дома лесоруба."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:78
 msgid "Build at least four forester’s houses."
-msgstr ""
+msgstr "Постройте по крайней мере четыре дома лесника."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:84
 msgid "The Uplands"
-msgstr ""
+msgstr "Нагорья"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:86
 msgid "Use the Uplands Wisely."
-msgstr ""
+msgstr "Используйте возвышенности с умом."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:87
 msgid "Relocate your industry to the Uplands."
-msgstr ""
+msgstr "Переместите производство на возвышенность."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:96
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:106
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:116
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:126
 msgid "Introduction"
-msgstr ""
+msgstr "Введение"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:107
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:117
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:127
 msgid "Welcome back!"
-msgstr ""
+msgstr "С возвращением!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:99
@@ -144,6 +154,9 @@ msgid ""
 "Home at last! I cannot put into words the joy I feel at seeing my homelands "
 "again… nor the impatience at being so close and yet so far away."
 msgstr ""
+"Наконец-то дома! Не могу выразить словами ту радость, которую я испытываю, "
+"снова увидев свою родину... и нетерпение оттого, что я так близко и в то же "
+"время так далеко."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:102
@@ -156,6 +169,13 @@ msgid ""
 "will inspire his soldiers to fight as hard as my own troops will strive to "
 "reclaim our home."
 msgstr ""
+"На этот раз море было спокойным и мы быстро вернулись на юг. Мы с Хеннек "
+"провели большую часть пути, стоя на носу корабля и с нетерпением ожидая "
+"возвращения. Ребауд сначала стоял на корме и смотрел назад так же, как мы "
+"смотрели вперед. Очевидно, он любит свой новый дом так же сильно, как я свой"
+" старый. Я уверен, что желание вернуться домой живыми и с победой вдохновит "
+"его солдат не оставать в сражении от моих воинов, сремящихся вернуть свой "
+"дом."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:109
@@ -164,6 +184,9 @@ msgid ""
 "joyous laughter and excited anticipation of our return turned into a somber "
 "mood as we prepared for battle."
 msgstr ""
+"Настроение на нашем корабле становилось все более напряженным по мере того, "
+"как мы приближались к знакомым водам. Радостный смех и предвкушение "
+"возвращения сменились мрачным настроением, когда мы готовились к битве."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:112
@@ -172,6 +195,8 @@ msgid ""
 "island Sylt and knew we’d land on Föhr on the evening of that same day. But "
 "then –"
 msgstr ""
+"И вот, наконец, настал этот день. Мы увидели северную оконечность острова "
+"Зюльт и поняли, что причалим к Фёре вечером того же дня. Но потом –"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:119
@@ -180,6 +205,10 @@ msgid ""
 "being no more careful than a cabin boy. Over the course of the months since "
 "we had left Föhr, we had neglected to pay attention to the calendar."
 msgstr ""
+"Мы допустили одну из самых элементарных ошибок, и покрыли себя позором, "
+"прояв не больше осторожности, чем зелёный юнга. В течение нескольких "
+"месяцев, прошедших с момента отплытия с Фёра, мы не обращали внимания на "
+"календарь."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:122
@@ -190,6 +219,11 @@ msgid ""
 "storms that always blow at this time of year have sent many a careless "
 "sailor to a watery grave."
 msgstr ""
+"Сегодня День всех святых, второй день ноября, и каждый ребенок в этих местах"
+" знает, что ни одному капитану, если только он не выжил из ума, не придет в "
+"голову поднимать паруса в следующую за этим днём неделю. С незапамятных "
+"времен исключительно сильные штормы, которые всегда дуют в это время года, "
+"упокоили многих неосторожных моряков на дне морском."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:129
@@ -200,6 +234,11 @@ msgid ""
 "hope – it is obviously a sign that our perilous endeavour is blessed by the "
 "saints."
 msgstr ""
+"Только величайшая удача спасла нас. Наши корабли почти не пострадали, ни "
+"один моряк не погиб в волнах. Если бы кто рассказал мне такое, я бы не "
+"поверил, но я сам был свидетелем этого. Наше невероятное спасение наполнило "
+"меня надеждой – должно быть это знак того, что наше опасное начинание "
+"благословлено святыми."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:132
@@ -211,6 +250,12 @@ msgid ""
 "hospitality, and the chance to rest and refresh ourselves before the battle "
 "will make a difference. Some of them might even join our cause."
 msgstr ""
+"Шторм отклонил наш корабль примерно на два дня пути от намеченного курса. К "
+"счастью, я помню эти воды, так что эта неприятность невелика. Когда шторм "
+"утих, мы очутились недалеко от острова Гельголанд и решили высадиться. "
+"Островитяне хорошо известны своим гостеприимством, а возможность отдохнуть и"
+" подкрепиться перед битвой будет иметь большое значение. Некоторые из "
+"местных могли бы даже присоединиться к нашему делу."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:136
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:143
@@ -219,12 +264,12 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:164
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:171
 msgid "Greetings"
-msgstr ""
+msgstr "Приветствие"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:137
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:151
 msgid "Welcome to Helgoland!"
-msgstr ""
+msgstr "Добро пожаловать на Гельголанд!"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 5
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:139
@@ -235,10 +280,14 @@ msgid ""
 "and despite these hard times I am pleased and honoured to receive such "
 "illustrious guests."
 msgstr ""
+"Мир Вам, и добро пожаловать на Гельголанд! Ваша слава опережает вас, Клаус "
+"Лембек, всеми любимый лорд Фёра, и Ребауд, которого барды называют Смелым, "
+"Отважным и Могучим. Я Окке Кетельсен, старейшина Гельголанда, и, несмотря на"
+" эти трудные времена, я рад и польщен визитом таких выдающихся гостей."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:144
 msgid "Hospitality"
-msgstr ""
+msgstr "Гостеприимство"
 
 #. TRANSLATORS: Reebaud – Introduction 6
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:146
