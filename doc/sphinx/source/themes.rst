@@ -127,6 +127,7 @@ This Lua script returns a table with descriptions for all UI elements. The table
 * **minimap_icon_frame** (RGB): The color for the frame of minimap previews in the Choose Map/Savegame screens.
 * **background_focused** (RGBA): The color for the focus overlays of the focused UI element.
 * **background_semi_focused** (RGBA): The color for the focus overlays of the focused UI element's parent elements.
+* **focus_border_thickness** (int): Thickness of the focus overlays of the focused UI element.
 * **windows** (table): Style definitons for `windows`_
 * **buttons** (table): Style definitons for `buttons`_
 * **sliders** (table): Style definitons for `sliders`_
@@ -140,6 +141,9 @@ This Lua script returns a table with descriptions for all UI elements. The table
 * **tables** (table): Style definitons for `tables`_
 * **wareinfo** (table): Style definitons for `ware statistics`_ windows
 * **fonts** (table): Style definitons for all `fonts`_ commonly used in Widelands
+* **paragraphs** (table): Style definitons for all `paragraph styles`_ commonly used in Widelands .. versionadded:: 1.2
+* **colors** (table): Style definitons for RGB `colors`_ .. versionadded:: 1.2
+* **styled_sizes** (table): Definitons for UI element `sizes`_ and text spacing .. versionadded:: 1.2
 
 RGB colors are arrays with three entries representing the red, green, and blue components (in this order).
 RGBA colors are arrays with four entries representing the red, green, blue, and alpha components (in this order).
@@ -149,6 +153,10 @@ Example:
 
    minimap_icon_frame = {255, 220, 0},
    background_focused = {240, 240, 240, 200},
+
+Since version 1.2, it is no longer required to specify all styles in a theme. The corresponding
+style from the default theme will be used for omitted styles. However, if a style is included,
+its definition must be complete. Individual elements still cannot be overridden separately.
 
 windows
 ~~~~~~~
@@ -263,4 +271,101 @@ Some of the above style tables define custom fonts. Additionally, there is a ``f
 * **wui_message_heading**: Headings for in-game inbox messages
 * **wui_message_paragraph**: Text of in-game inbox messages
 * **wui_game_speed_and_coordinates**: Time, speed and coordinates strings in the game/editor info panel
+* **unknown**: Used when a Lua script requests a font style not included in this list .. versionadded:: 1.2
+
+paragraphs
+~~~~~~~~~~
+
+.. versionadded:: 1.2
+
+A paragraph style definition must contain a :ref:`font definition table<theme_fonts>` ``font``.
+
+Optional elements:
+
+* **align** (string): The horizontal alignment of the paragraph, possible values: ``left`` (default), ``center`` or ``middle``, ``right``
+* **valign** (string): The vertical alignment of the paragraph, possible values: ``top`` (default), ``center`` or ``middle``, ``bottom``
+* **indent** (int): Adds an indentation to the first line of the paragraph
+* **spacing** (int): Vertical line spacing as a pixel value
+* **space_before** (int): Padding to be used above the paragraph
+* **space_after** (int): Padding to be used below the paragraph
+
+**Note:** Paddings of consecutive paragraphs are added, not collapsed.
+
+The ``paragraphs`` table defines paragraph styles used mostly by the help texts and scenarios:
+
+* **readme_title**: Used for the name of the game in the About window
+* **about_title**: Used for the titles of the tab pages in the About window
+* **ingame_subtitle**: Used for the subtitles in the tab pages in the About window
+* **authors_heading_1**: Used for level 1 headings in the Developers tab in the About window
+* **ingame_heading_1**: Used for level 1 headings
+* **ingame_objectives_heading**: Used in scenario message boxes for the titles of new objectives
+* **ingame_heading_2**: Used for level 2 headings
+* **ingame_heading_3**: Used for level 3 headings
+* **ingame_heading_4**: Used for level 4 headings
+* **ingame_text**: The default paragraph style
+* **ingame_sparse**: Paragraph style with increased padding between paragraphs
+* **ingame_image_line**: Used in the Encyclopedia helptexts for consumed items and dependencies
+* **ingame_lore_author**: Used for the lore author texts in the Encyclopedia
+* **about_text**: The default paragraph style in the About window
+* **about_sparse**: Paragraph style with increased padding between paragraphs in the About window
+* **unknown**: Used when a Lua script requests a paragraph style not included in this list
+
+colors
+~~~~~~
+
+.. versionadded:: 1.2
+
+The ``colors`` table contains subtables of RGB colors:
+
+* **campaign_bar_thron**: Text colour for Thron's speech box titles in the Barbarian campaign
+* **campaign_bar_boldreth**: Text colour for Boldreth's speech box titles in the Barbarian campaign
+* **campaign_bar_khantrukh**: Text colour for Khantrukh's speech box titles in the Barbarian campaign
+* **campaign_emp_lutius**: Text colour for Lutius's speech box titles in the Empire campaign
+* **campaign_emp_amalea**: Text colour for Amalea's speech box titles in the Empire campaign
+* **campaign_emp_saledus**: Text colour for Saledus's speech box titles in the Empire campaign
+* **campaign_emp_marcus**: Text colour for Marcus's speech box titles in the Empire campaign
+* **campaign_emp_julia**: Text colour for Julia's speech box titles in the Empire campaign
+* **campaign_atl_jundlina**: Text colour for Jundlina's speech box titles in the Atlantean campaign
+* **campaign_atl_sidolus**: Text colour for Sidolus's speech box titles in the Atlantean campaign
+* **campaign_atl_loftomor**: Text colour for Loftomor's speech box titles in the Atlantean campaign
+* **campaign_atl_colionder**: Text colour for Colionder's speech box titles in the Atlantean campaign
+* **campaign_atl_opol**: Text colour for Opol's speech box titles in the Atlantean campaign
+* **campaign_atl_ostur**: Text colour for Ostur's speech box titles in the Atlantean campaign
+* **campaign_atl_kalitath**: Text colour for Kalitath's speech box titles in the Atlantean campaign
+* **campaign_fri_reebaud**: Text colour for Reebaud's speech box titles in the Frisian campaign
+* **campaign_fri_hauke**: Text colour for Hauke's speech box titles in the Frisian campaign
+* **campaign_fri_maukor**: Text colour for Maukor's speech box titles in the Frisian campaign
+* **campaign_fri_murilius**: Text colour for Murilius's speech box titles in the Frisian campaign
+* **campaign_fri_claus**: Text colour for Claus Lembeck's speech box titles in the Frisian campaign
+* **campaign_fri_henneke**: Text colour for Henneke's speech box titles in the Frisian campaign
+* **campaign_fri_iniucundus**: Text colour for Iniucundus's speech box titles in the Frisian campaign
+* **campaign_fri_angadthur**: Text colour for Angadthur's speech box titles in the Frisian campaign
+* **campaign_fri_amazon**: Text colour for the amazon's speech box titles in the Frisian campaign
+* **campaign_fri_ketelsen**: Text colour for Ketelsen's speech box titles in the Frisian campaign
+* **map_river_advisor**: Text colour for the advisor's speech box titles in the Along the River SP scenario
+* **unknown**: Used when a Lua script requests a color not included in this list
+
+styled_sizes
+~~~~~~~~~~~~
+
+.. versionadded:: 1.2
+
+The ``styled_sizes`` table contains integer values to be used for paddings and UI element sizes:
+
+* **text_default_gap**: Default size for extra separator spacing in texts
+* **text_space_before_inline_header**: Padding to be used above text lines containing an inline level 3 heading
+* **ingame_message_gap**: Padding between sections in status reports sent by win condition scripts
+* **ingame_space_before_objective**: Padding above new objective icon in scenario message boxes
+* **ingame_space_before_immovable_icon**: Padding above the icons of the immovables in the Immovable help in the Encyclopedia
+* **help_terrain_tree_header_space_before**: Extra padding above the headers of tree and terrain help texts
+* **help_terrain_tree_header_space_after**: Extra padding below the headers of tree and terrain help texts
+* **editor_tooltip_icon_gap**: Gap between the terrain, immovable and animal icons in the editor tooltips
+* **campaign_message_box_default_h**: Default height of campaign message boxes
+* **campaign_message_box_default_w**: Default width of campaign message boxes
+* **campaign_message_box_top_pos_y**: Default y position of campaign message boxes with `top` alignment
+* **campaign_fri02_poem_indent**: The indentation of the poem in the second scenario in the Frisian campaign
+* **map_plateau_message_w**: Message box width used by the SP scenario The Green Plateau
+* **map_plateau_message_h**: Message box height used by the SP scenario The Green Plateau
+* **map_plateau_message_pos_y**: The y position of the message boxes in the SP scenario The Green Plateau
+* **ui_default_padding**: default size for padding between UI elements
 
