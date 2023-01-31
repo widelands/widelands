@@ -718,15 +718,16 @@ void StyleManager::set_building_statistics_style(const LuaTable& table) {
 		status_font = read_font_style(table, "statistics_font");
 	} else {
 		fail_if_doing_default_style("section", "building_statistics.statistics_font");
-		status_font = new UI::FontStyleInfo(default_style->building_statistics_style().statistics_font());
+		status_font =
+		   new UI::FontStyleInfo(default_style->building_statistics_style().statistics_font());
 	}
 
 	if (table.has_key("statistics_window")) {
 		std::unique_ptr<LuaTable> window_table = table.get_table("statistics_window");
 		std::unique_ptr<LuaTable> fonts_table = window_table->get_table("fonts");
-	   button_font = read_font_style(*fonts_table, "button_font");
+		button_font = read_font_style(*fonts_table, "button_font");
 		details_font = read_font_style(*fonts_table, "details_font");
-	   editbox_margin = window_table->get_int("editbox_margin");
+		editbox_margin = window_table->get_int("editbox_margin");
 	} else {
 		fail_if_doing_default_style("section", "building_statistics.statistics_window");
 		const UI::BuildingStatisticsStyleInfo& fallback = default_style->building_statistics_style();
@@ -760,7 +761,7 @@ void StyleManager::set_building_statistics_style(const LuaTable& table) {
 
 	building_statistics_style_.reset(new UI::BuildingStatisticsStyleInfo(
 	   button_font, details_font, editbox_margin, census_font, status_font, construction_color,
-		neutral_color, low_color, medium_color, high_color, low_alt_color, medium_alt_color,
+	   neutral_color, low_color, medium_color, high_color, low_alt_color, medium_alt_color,
 	   high_alt_color));
 }
 
@@ -805,9 +806,9 @@ void StyleManager::add_dropdown_style(UI::PanelStyle style,
 }
 
 void StyleManager::add_scrollbar_style(UI::PanelStyle style,
-                                      const LuaTable& table,
-                                      const std::string& parent,
-                                      const std::string& key) {
+                                       const LuaTable& table,
+                                       const std::string& parent,
+                                       const std::string& key) {
 	UI::PanelStyleInfo* sb_style;
 	if (table.has_key(key)) {
 		sb_style = read_panel_style(*table.get_table(key));
