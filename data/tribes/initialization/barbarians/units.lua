@@ -1157,7 +1157,7 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Performance helptext for a barbarian production site: Lumberjack_s Hut
                pgettext("barbarians_building", "The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again."):bformat(ngettext("%d second", "%d seconds", 17):bformat(17)),
                -- TRANSLATORS: Performance helptext for a barbarian production site: Lumberjack_s Hut
-               pgettext("barbarians_building", "He rests in the hut for %s."):bformat(ngettext("%d second", "%d seconds", 20):bformat(20))
+               pgettext("barbarians_building", "Afterwards he rests in the hut for %s."):bformat(ngettext("%d second", "%d seconds", 20):bformat(20))
             }
          }
       },
@@ -1455,7 +1455,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Barracks
             purpose = pgettext("barbarians_building", "Equips recruits and trains them as soldiers."),
             -- TRANSLATORS: Performance helptext for a barbarian production site: Barracks
-            performance = pgettext("barbarians_building", "The barracks needs %s on average to recruit one soldier."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
+            performance = pgettext("barbarians_building", "The barracks need %s on average to recruit one soldier."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
          }
       },
 
