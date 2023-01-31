@@ -279,25 +279,32 @@ StyleManager::StyleManager() {
 	   "editboxes", editboxstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Dropdowns
-	element_table = table->get_table("dropdowns");
-	style_table = element_table->get_table("fsmenu");
-	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu"), &dropdownstyles_);
-	style_table = element_table->get_table("wui");
-	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu"), &dropdownstyles_);
+	section = "dropdowns";
+	element_table = try_section_or_empty(lua, *table, section);
+	sub = "fsmenu";
+	style_table = try_section_or_empty(lua, *element_table, sub, section);
+	add_dropdown_style(UI::PanelStyle::kFsMenu, *style_table, sub, "menu");
+	sub = "wui";
+	style_table = try_section_or_empty(lua, *element_table, sub, section);
+	add_dropdown_style(UI::PanelStyle::kWui, *style_table, sub, "menu");
 	check_completeness(
 	   "dropdowns", dropdownstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Scrollbars
-	element_table = table->get_table("scrollbars");
-	style_table = element_table->get_table("fsmenu");
-	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu"), &scrollbarstyles_);
-	style_table = element_table->get_table("wui");
-	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu"), &scrollbarstyles_);
+	section = "scrollbars";
+	element_table = try_section_or_empty(lua, *table, section);
+	sub = "fsmenu";
+	style_table = try_section_or_empty(lua, *element_table, sub, section);
+	add_scrollbar_style(UI::PanelStyle::kFsMenu, *style_table, sub, "menu");
+	sub = "wui";
+	style_table = try_section_or_empty(lua, *element_table, sub, section);
+	add_scrollbar_style(UI::PanelStyle::kWui, *style_table, sub, "menu");
 	check_completeness(
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Building statistics etc. for map objects
-	set_building_statistics_style(*table->get_table("building_statistics"));
+	element_table = try_section_or_empty(lua, *table, "building_statistics");
+	set_building_statistics_style(*element_table);
 
 	// Progress bars
 	element_table = table->get_table("progressbar");
@@ -687,21 +694,74 @@ void StyleManager::set_statistics_plot_style(const LuaTable& table) {
 }
 
 void StyleManager::set_building_statistics_style(const LuaTable& table) {
-	std::unique_ptr<LuaTable> window_table = table.get_table("statistics_window");
-	std::unique_ptr<LuaTable> colors_table = table.get_table("colors");
-	std::unique_ptr<LuaTable> fonts_table = window_table->get_table("fonts");
+	UI::FontStyleInfo* census_font;
+	UI::FontStyleInfo* status_font;
+	UI::FontStyleInfo* button_font;
+	UI::FontStyleInfo* details_font;
+	int editbox_margin;
+	RGBColor construction_color;
+	RGBColor neutral_color;
+	RGBColor low_color;
+	RGBColor medium_color;
+	RGBColor high_color;
+	RGBColor low_alt_color;
+	RGBColor medium_alt_color;
+	RGBColor high_alt_color;
+
+	if (table.has_key("census_font")) {
+		census_font = read_font_style(table, "census_font");
+	} else {
+		fail_if_doing_default_style("section", "building_statistics.census_font");
+		census_font = new UI::FontStyleInfo(default_style->building_statistics_style().census_font());
+	}
+	if (table.has_key("statistics_font")) {
+		status_font = read_font_style(table, "statistics_font");
+	} else {
+		fail_if_doing_default_style("section", "building_statistics.statistics_font");
+		status_font = new UI::FontStyleInfo(default_style->building_statistics_style().statistics_font());
+	}
+
+	if (table.has_key("statistics_window")) {
+		std::unique_ptr<LuaTable> window_table = table.get_table("statistics_window");
+		std::unique_ptr<LuaTable> fonts_table = window_table->get_table("fonts");
+	   button_font = read_font_style(*fonts_table, "button_font");
+		details_font = read_font_style(*fonts_table, "details_font");
+	   editbox_margin = window_table->get_int("editbox_margin");
+	} else {
+		fail_if_doing_default_style("section", "building_statistics.statistics_window");
+		const UI::BuildingStatisticsStyleInfo& fallback = default_style->building_statistics_style();
+		button_font = new UI::FontStyleInfo(fallback.building_statistics_button_font());
+		details_font = new UI::FontStyleInfo(fallback.building_statistics_details_font());
+		editbox_margin = fallback.editbox_margin();
+	}
+
+	if (table.has_key("colors")) {
+		std::unique_ptr<LuaTable> colors_table = table.get_table("colors");
+		construction_color = read_rgb_color(*colors_table->get_table("construction"));
+		neutral_color = read_rgb_color(*colors_table->get_table("neutral"));
+		low_color = read_rgb_color(*colors_table->get_table("low"));
+		medium_color = read_rgb_color(*colors_table->get_table("medium"));
+		high_color = read_rgb_color(*colors_table->get_table("high"));
+		low_alt_color = read_rgb_color(*colors_table->get_table("low_alt"));
+		medium_alt_color = read_rgb_color(*colors_table->get_table("medium_alt"));
+		high_alt_color = read_rgb_color(*colors_table->get_table("high_alt"));
+	} else {
+		fail_if_doing_default_style("section", "building_statistics.colors");
+		const UI::BuildingStatisticsStyleInfo& fallback = default_style->building_statistics_style();
+		construction_color = fallback.construction_color();
+		neutral_color = fallback.neutral_color();
+		low_color = fallback.low_color();
+		medium_color = fallback.medium_color();
+		high_color = fallback.high_color();
+		low_alt_color = fallback.alternative_low_color();
+		medium_alt_color = fallback.alternative_medium_color();
+		high_alt_color = fallback.alternative_high_color();
+	}
+
 	building_statistics_style_.reset(new UI::BuildingStatisticsStyleInfo(
-	   read_font_style(*fonts_table, "button_font"), read_font_style(*fonts_table, "details_font"),
-	   window_table->get_int("editbox_margin"), read_font_style(table, "census_font"),
-	   read_font_style(table, "statistics_font"),
-	   read_rgb_color(*colors_table->get_table("construction")),
-	   read_rgb_color(*colors_table->get_table("neutral")),
-	   read_rgb_color(*colors_table->get_table("low")),
-	   read_rgb_color(*colors_table->get_table("medium")),
-	   read_rgb_color(*colors_table->get_table("high")),
-	   read_rgb_color(*colors_table->get_table("low_alt")),
-	   read_rgb_color(*colors_table->get_table("medium_alt")),
-	   read_rgb_color(*colors_table->get_table("high_alt"))));
+	   button_font, details_font, editbox_margin, census_font, status_font, construction_color,
+		neutral_color, low_color, medium_color, high_color, low_alt_color, medium_alt_color,
+	   high_alt_color));
 }
 
 void StyleManager::add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table) {
@@ -730,8 +790,32 @@ void StyleManager::add_window_style(UI::WindowStyle style, const LuaTable& table
 	             table.get_string("button_unminimize"), table.get_string("button_close")))));
 }
 
-void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map) {
-	map->insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_panel_style(table))));
+void StyleManager::add_dropdown_style(UI::PanelStyle style,
+                                      const LuaTable& table,
+                                      const std::string& parent,
+                                      const std::string& key) {
+	UI::PanelStyleInfo* dd_style;
+	if (table.has_key(key)) {
+		dd_style = read_panel_style(*table.get_table(key));
+	} else {
+		fail_if_doing_default_style("dropdown style", format("%s.%s", parent, key));
+		dd_style = new UI::PanelStyleInfo(*default_style->dropdown_style(style));
+	}
+	dropdownstyles_.insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(dd_style)));
+}
+
+void StyleManager::add_scrollbar_style(UI::PanelStyle style,
+                                      const LuaTable& table,
+                                      const std::string& parent,
+                                      const std::string& key) {
+	UI::PanelStyleInfo* sb_style;
+	if (table.has_key(key)) {
+		sb_style = read_panel_style(*table.get_table(key));
+	} else {
+		fail_if_doing_default_style("scrollbar style", format("%s.%s", parent, key));
+		sb_style = new UI::PanelStyleInfo(*default_style->scrollbar_style(style));
+	}
+	scrollbarstyles_.insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(sb_style)));
 }
 
 void StyleManager::add_font_style(UI::FontStyle font_key,

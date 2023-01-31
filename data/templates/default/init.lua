@@ -392,7 +392,7 @@ return {
       }
    },
 
-   -- Map census and statistics, and building statistics window
+   -- Map census and status, and building statistics window
    building_statistics = {
       census_font = {
          color = wui_font_color, -- Default color
@@ -401,7 +401,7 @@ return {
          bold = true,
          shadow = true
       },
-      statistics_font = {
+      statistics_font = { -- Also known as status
          color = wui_font_color, -- Default color
          face = "condensed",
          size = wui_font_size,
