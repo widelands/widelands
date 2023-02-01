@@ -345,8 +345,8 @@ The ``colors`` table contains subtables of RGB colors:
 * **map_river_advisor**: Text colour for the advisor's speech box titles in the Along the River SP scenario
 * **unknown**: Used when a Lua script requests a color not included in this list
 
-styled_sizes
-~~~~~~~~~~~~
+sizes
+~~~~~
 
 .. versionadded:: 1.2
 
