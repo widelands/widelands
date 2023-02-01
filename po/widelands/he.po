@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-28 03:03+0000\n"
+"POT-Creation-Date: 2023-01-31 03:01+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015\n"
 "Language-Team: Hebrew (http://www.transifex.com/widelands/widelands/language/he/)\n"
@@ -656,7 +656,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:112
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:583
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
-#: ../../src/logic/map.h:226 ../../src/wui/mapdata.cc:49
+#: ../../src/logic/map.h:226 ../../src/wui/mapdata.cc:50
 msgid "No Name"
 msgstr ""
 
@@ -702,8 +702,8 @@ msgid "Saving map…"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1444
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:309
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:364
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:310
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:365
 msgid "Error Saving Map!"
 msgstr ""
 
@@ -974,33 +974,33 @@ msgid "Error!"
 msgstr ""
 
 #. * TRANSLATORS: Directory name for user maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:78
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:278
-#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:186
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:81
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
+#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:193
 msgid "My Maps"
 msgstr ""
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:80
-#: ../../src/wui/mapdata.cc:180
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:83
+#: ../../src/wui/mapdata.cc:187
 msgid "Multiplayer Scenarios"
 msgstr ""
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:82
-#: ../../src/wui/mapdata.cc:183
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:85
+#: ../../src/wui/mapdata.cc:190
 msgid "Singleplayer Scenarios"
 msgstr ""
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:84
-#: ../../src/wui/mapdata.cc:189
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:87
+#: ../../src/wui/mapdata.cc:196
 msgid "Downloaded Maps"
 msgstr ""
 
 #. * TRANSLATORS: The folder that a file will be saved to.
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:87
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:278
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:90
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
 #, c-format
 msgid "Current directory: %s"
 msgstr ""
@@ -1399,16 +1399,16 @@ msgid "Make Directory"
 msgstr ""
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:162
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:163
 #: ../../src/ui_fsmenu/internet_lobby.cc:506
 msgid "unnamed"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:171
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:172
 msgid "A file or directory with that name already exists."
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:172
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:173
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:186
 msgid "Error Creating Directory!"
 msgstr ""
@@ -1418,17 +1418,17 @@ msgstr ""
 msgid "Error while creating directory ‘%s’."
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:307
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:308
 #: ../../src/wui/game_main_menu_save_game.cc:283
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:339
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:340
 msgid "Saving the map…"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:357
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:358
 msgid "Map saved"
 msgstr ""
 
@@ -5839,20 +5839,20 @@ msgstr ""
 msgid "Filter by balancing status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:469
+#: ../../src/ui_fsmenu/mapselect.cc:487
 msgid "Balanced & Unbalanced"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:469
+#: ../../src/ui_fsmenu/mapselect.cc:487
 msgid "Show both balanced and unbalanced maps"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:474
+#: ../../src/ui_fsmenu/mapselect.cc:492
 msgctxt "balancing"
 msgid "Unspecified"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:475
+#: ../../src/ui_fsmenu/mapselect.cc:493
 msgid "The map does not specify whether it is balanced"
 msgstr ""
 
@@ -9000,17 +9000,17 @@ msgstr ""
 msgid "Players form teams of four players each"
 msgstr ""
 
-#: ../../src/wui/mapdata.cc:50 ../../src/wui/mapdata.cc:78
+#: ../../src/wui/mapdata.cc:51 ../../src/wui/mapdata.cc:79
 msgid "No Author"
 msgstr ""
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:166 ../../src/wui/savegametable.cc:126
+#: ../../src/wui/mapdata.cc:173 ../../src/wui/savegametable.cc:126
 msgid "parent"
 msgstr ""
 
 #. * TRANSLATORS: This label is shown when a folder is empty
-#: ../../src/wui/mapdata.cc:172
+#: ../../src/wui/mapdata.cc:179
 msgid "empty"
 msgstr ""
 

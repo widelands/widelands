@@ -299,6 +299,13 @@ msgid ""
 " Assuming you don’t mind if I ask and that this question does not appear "
 "impertinent, I would like to know if we can help you in any way."
 msgstr ""
+"Мир тебе Окке Кетельсен, и спасибо за дружеское приветствие! Приятно "
+"высадиться на остров, на котором нам не приходится сразу же с кем-то "
+"воевать. Впрочем, твоё приветствие до странности коротко. А поскольку слова "
+"твои, насомненно, теплы, я заключаю, что с вами приключилась какая-то беда. "
+"Осмелюсь предположить, что не встречу возражения, если спрошу, и надеюсь, "
+"что мой вопрос не покажется дерзким: дай мне знать, если мы можем помочь вам"
+" чем-нибудь."
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 7
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:153
@@ -306,18 +313,20 @@ msgid ""
 "You are remarkably astute. Indeed we have a problem, and you can see it "
 "right over there."
 msgstr ""
+"Вы удивительно проницательны. Действительно, у нас есть проблема, и вы "
+"можете увидеть ее своими глазами."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:158
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:165
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:172
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:184
 msgid "Enemies"
-msgstr ""
+msgstr "Враги"
 
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:160
 msgid "Danes! Does Atterdag’s thirst for conquest reach this far then?"
-msgstr ""
+msgstr "Даны! Неужели жажда завоеваний Аттердага зашла так далеко?"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 9
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:167
@@ -325,6 +334,8 @@ msgid ""
 "It does. I see that you recognize this enemy, and I would be interested in "
 "hearing how you met – though I imagine it will not have gone well for them!"
 msgstr ""
+"О да. Вижу, что вам знаком этот враг, и мне было бы интересно услышать, как "
+"вы встретились – хотя я предполагаю, что для них это было не к добру!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:174
@@ -335,6 +346,11 @@ msgid ""
 "fact, we were sailing to Föhr to drive the invaders out once and for all "
 "when a storm blew us off our course and to Helgoland."
 msgstr ""
+"К моему великому огорчению, это предположение неверно. Для краткости я скажу"
+" только, что Аттердаг вторгся в Фёр с такой мощной силой, что я был вынужден"
+" покинуть остров и попросить Ребауда помочь мне вернуть его. На самом деле, "
+"мы плыли к Фёру, чтобы изгнать захватчиков раз и навсегда, когда шторм сбил "
+"нас с курса и отправил на Гельголанд."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:177
@@ -343,12 +359,15 @@ msgid ""
 "fight this enemy. A warm-up battle, so to speak – I am looking forward to "
 "it!"
 msgstr ""
+"Быть может это не случайность, а вмешательство небес. Мы с радостью поможем "
+"вам бороться с этим врагом. Для нас он послужит, так сказать, разминкой – я "
+"с нетерпением жду её!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:196
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:203
 msgid "War Preparations"
-msgstr ""
+msgstr "Подготовка к войне"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:186
@@ -358,6 +377,10 @@ msgid ""
 "enormous force of Danish soldiers, and even your mighty soldiers will not be"
 " able to defeat them all."
 msgstr ""
+"Ваш энтузиазм согревает меня в той же степени, в какой ваше тяжелое "
+"положение вызывает мое сочувствие. Но враги более могущественны, чем могут "
+"показаться – они привели с собой огромную армию, и даже ваши могучие воины "
+"не смогут победить их всех."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:189
@@ -366,6 +389,9 @@ msgid ""
 "farmers, we do not have the expertise or economy to support a drawn-out "
 "battle. Your expertise in this area would be much appreciated."
 msgstr ""
+"Наш остров не привык к такого рода войнам. Мы рыбаки и фермеры, у нас нет "
+"опыта, а наше хозяйство не способно поддерживать долгие сражения. Мы были бы"
+" очень признательны за ваш опыт в этой области."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:192
@@ -373,10 +399,12 @@ msgid ""
 "But first let me give you a clear picture of our small island by showing you"
 " around."
 msgstr ""
+"Но сначала позвольте мне дать вам четкое представление о нашем маленьком "
+"острове, показав его окрестности."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:197
 msgid "Economy"
-msgstr ""
+msgstr "Экономика"
 
 #. TRANSLATORS: Henneke Lembeck – Trade 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:199
@@ -386,6 +414,10 @@ msgid ""
 "any trees, and no places where you could mine iron and other minerals! How "
 "do you come by?"
 msgstr ""
+"Как же вы здесь выживаете? Эти скалы выглядят впечатляюще, но я не понимаю, "
+"как вы могли бы добывать их для строительства каменных домов. Я почти не "
+"вижу деревьев и никаких мест, где можно было бы добывать железо и другие "
+"минералы! Как вы их добываете?"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:206
@@ -398,6 +430,14 @@ msgid ""
 " I will take care of the rest. This chart indicates how many goods of which "
 "sorts we usually trade."
 msgstr ""
+"С помощью торговли. Мы продаем зерно, рыбу и другие товары на материк и "
+"покупаем там руду и гранит. Давайте распределим обязанности в соответствии с"
+" тем, что каждый из нас делает лучше всего: вы берете на себя "
+"ответственность за реорганизацию нашей экономики для войны и подготовку "
+"наших людей к сражениям, а я организую импорт товаров в любом количестве, "
+"которое вам потребуется. Просто оставьте товары для продажи в портах, а об "
+"остальном я позабочусь. Эта диаграмма показывает, сколькими товарами каких "
+"сортов мы обычно торгуем."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:212
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:225
@@ -406,11 +446,11 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:265
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:276
 msgid "Planning the War"
-msgstr ""
+msgstr "Планирование войны"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:213
 msgid "Use the Uplands wisely"
-msgstr ""
+msgstr "Используйте возвышенности с умом."
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:215
@@ -419,6 +459,9 @@ msgid ""
 " woefully unguarded. We must plan ahead tactically, because I agree that "
 "this battle will not be won quickly."
 msgstr ""
+"Сначала о главном. У этого города отличная позиция для обороны, но в нём "
+"совсем нет охраны. Нужно продумывать тактику заранее, ведь я, как и вы, "
+"считаю, что эта битва не будет выиграна быстро."
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:218
@@ -432,10 +475,19 @@ msgid ""
 "advance. Of course we’d be cut off from the ports and the trade routes, so "
 "we should try to avoid getting to this point."
 msgstr ""
+"На возвышенность есть только один проход: вот эта, расположенная рядом с "
+"центром города ложбина. Давайте построим там все наши важные "
+"производственные здания. Несколько крепостей, расположенных близко друг к "
+"другу прямо на её южной оконечности, сделают завоевание этого обширного "
+"плато практически невозможным. Даже если врагу удастся захватить все "
+"низменности, мы, вероятно, сможем продержаться там годами, при условии, что "
+"заранее накопим достаточное количество припасов на возвышенностях. Правда в "
+"таком случае, мы окажемся отрезаны от портов и торговых путей, поэтому нужно"
+" постараться избежать такого исхода."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:226
 msgid "Fortify the narrow"
-msgstr ""
+msgstr "Укрепите проход"
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:228
@@ -450,6 +502,16 @@ msgid ""
 " unwise to build anything at all north of the pass, as it would be "
 "dangerously exposed."
 msgstr ""
+"Однако нашей самой неотложной заботой должно быть обеспечение безопасности "
+"этого прохода вблизи нашего самого северного порта. Наш враг должен пройти "
+"через это узкое место, чтобы добраться до нас, но так же верно и обратное. "
+"Если мы будем осторожны, то сможем удерживать врага в этой точке в течение "
+"длительного времени, пока не будем готовы начать нашу контратаку. Однако "
+"проход слишком узок, чтобы его можно было укрепить так же легко, как "
+"Нагорье. Мы должны построить здесь как можно больше крепостей, расположенных"
+" вплотную друг к другу, чтобы помешать врагу захватить какую-либо землю. "
+"Было бы неразумно вообще что-либо строить к северу от перевала, такие "
+"сооружения будут беззащитны."
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:231
@@ -460,10 +522,15 @@ msgid ""
 "otherwise, will be in constant danger of being burnt down during a Danish "
 "incursion."
 msgstr ""
+"В зависимости от того, сколько строительных материалов мы сможем накопить, "
+"возможно, было бы разумно снести некоторые из здешних зданий, чтобы "
+"освободить место для еще большего количества укреплений. В любом случае, все"
+" здания в этом районе, военные или нет, будут находиться под постоянной "
+"угрозой сожженния во время датского вторжения."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:239
 msgid "Wood supply"
-msgstr ""
+msgstr "Добыча древесины"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:241
@@ -472,6 +539,9 @@ msgid ""
 "buildings. Besides their strategic value they offer lots of space for "
 "construction, of which the lower island is somewhat short."
 msgstr ""
+"Как правильно отмечает Ребауд, Нагорье - лучшее место для новых зданий. "
+"Помимо своей стратегической ценности, на нём много мест для строительства, "
+"тогда как на нижнем острове их не хватает."
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:244
@@ -482,6 +552,12 @@ msgid ""
 "for wood, so we must secure our wood production at once before all our wood "
 "has been used up by the smokeries and charcoal burners!"
 msgstr ""
+"Что касается того, что и в каком порядке строить, у меня есть возражения. "
+"Для нас важны военные сооружения, но гораздо важнее в первую очередь "
+"обеспечить необходимым нашу строительную отрасль. На острове нет лесорубов, "
+"и мы не можем полагаться на торговлю древесиной, поэтому нужно немедленно "
+"наладить её производство, пока всё наше дерево не сожжено коптильщиками и "
+"углежогами!"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:247
@@ -492,10 +568,16 @@ msgid ""
 " down here and relocate some of the farms to the Uplands. Farms, reed farms,"
 " and berry farms do not depend on fertile land quite as much as trees do."
 msgstr ""
+"Земля не выглядит плодородной, поэтому нам нужно будет выделить гораздо "
+"больше места для лесоразведения, чем мне хотелось бы. Низменности кажутся "
+"немного более плодородными, поэтому, возможно, было бы разумно построить "
+"здесь дома лесников и дровосеков и перенести некоторые фермы на Нагорье. "
+"Фермы, тростниковые фермы и ягодники не так сильно зависят от плодородия "
+"земли, как деревья."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:255
 msgid "Long-term strategy"
-msgstr ""
+msgstr "Долгосрочная стратегия"
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:257
@@ -507,6 +589,13 @@ msgid ""
 "provide enough weapons and armour as well as food for our soldiers. Needless"
 " to say, a pair of training sites and a barracks are also essential."
 msgstr ""
+"Торговля успешно началась. Теперь нам нужно будет спланировать наши найм и "
+"обучение. Производство основных продуктов питания и металла у нас есть, но, "
+"похоже, оно растет бессистемно и его не хватит для удовлетворения наших "
+"потребностей. Нам потребуются более многочисленные и более совершенные "
+"производства, чтобы обеспечить наших солдат достаточным количеством оружия и"
+" доспехов, а также продовольствия. Излишне говорить, что пара тренировочных "
+"площадок и казарма также необходимы."
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:260
@@ -518,6 +607,12 @@ msgid ""
 "expensive, and we will need to mark out a large amount of space purely to "
 "produce wares to sell."
 msgstr ""
+"И нам постоянно нужно будет следить за заготовкой товаров, пригодных для "
+"торговли. Я попрошу Окке Кетельсена закупать только те товары, которые "
+"действительно нужны нашей экономике, чтобы мы не тратили впустую ни одного "
+"ресурса, но от нас зависит, сможем ли мы обеспечить достаточное количество "
+"товаров. Все эти торговые маршруты очень дороги, и нам нужно будет выделить "
+"немало места исключительно для производства товаров на продажу."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
