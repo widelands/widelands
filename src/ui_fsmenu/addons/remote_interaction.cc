@@ -576,7 +576,9 @@ bool AdminDialog::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_RETURN:
-			ok();
+			if (ok_.enabled()) {
+				ok();
+			}
 			return true;
 		case SDLK_ESCAPE:
 			die();

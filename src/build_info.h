@@ -19,6 +19,7 @@
 #ifndef WL_BUILD_INFO_H
 #define WL_BUILD_INFO_H
 
+#include <cstdint>
 #include <string>
 
 constexpr uint16_t kWidelandsCopyrightStart = 2002;

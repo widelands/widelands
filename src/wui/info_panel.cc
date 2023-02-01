@@ -129,8 +129,7 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, in
 InfoPanel::InfoPanel(InteractiveBase& ib)
    : UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
      ibase_(ib),
-
-     // will be set later by the IBase
+     snap_target_panel_(&ibase_, UI::PanelStyle::kWui, 0, 0, 0, 0),
      toggle_mode_(this,
                   "mode",
                   0,
@@ -171,7 +170,9 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                   UI::Align::kRight),
 
      draw_real_time_(get_config_bool("game_clock", true)) {
+	set_flag(UI::Panel::pf_always_on_top, true);
 	text_fps_.set_handle_mouse(true);
+	snap_target_panel_.set_snap_target(true);
 	int mode = get_config_int("toolbar_pos", 0);
 	on_top_ = ((mode & DisplayMode::kCmdSwap) != 0);
 	if ((mode & (DisplayMode::kOnMouse_Visible | DisplayMode::kOnMouse_Hidden)) != 0) {
@@ -253,7 +254,7 @@ void InfoPanel::set_toolbar(MainToolbar& t) {
 	layout();
 }
 
-inline bool InfoPanel::is_mouse_over_panel() const {
+inline bool InfoPanel::is_mouse_over_panel(int32_t x, int32_t y) const {
 	uint8_t h;
 	switch (display_mode_) {
 	case DisplayMode::kMinimized:
@@ -265,9 +266,8 @@ inline bool InfoPanel::is_mouse_over_panel() const {
 		h = MainToolbar::kButtonSize;
 		break;
 	}
-	return last_mouse_pos_.x >= 0 && last_mouse_pos_.x <= get_w() &&
-	       (on_top_ ? (last_mouse_pos_.y >= 0 && last_mouse_pos_.y <= h) :
-                     (last_mouse_pos_.y <= get_h() && last_mouse_pos_.y >= get_h() - h));
+	return x >= 0 && x <= get_w() &&
+	       (on_top_ ? (y >= 0 && y <= h) : (y <= get_h() && y >= get_h() - h));
 }
 
 void InfoPanel::set_textareas_visibility(bool v) {
@@ -317,6 +317,22 @@ bool InfoPanel::handle_mousepress(uint8_t /*btn*/, int32_t x, int32_t y) {
 bool InfoPanel::handle_mouserelease(uint8_t /*btn*/, int32_t x, int32_t y) {
 	last_mouse_pos_ = Vector2i(x, y);
 	return is_mouse_over_panel();
+}
+
+bool InfoPanel::check_handles_mouse(int32_t x, int32_t y) {
+	last_mouse_pos_ = Vector2i(x, y);
+	if (is_mouse_over_panel() || display_mode_ == DisplayMode::kOnMouse_Visible) {
+		return true;
+	}
+
+	for (Panel* p = get_first_child(); p != nullptr; p = p->get_next_sibling()) {
+		if (x >= p->get_x() && y >= p->get_y() && x < p->get_x() + p->get_w() &&
+		    y < p->get_y() + p->get_h() && p->check_handles_mouse(x - p->get_x(), y - p->get_y())) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 size_t InfoPanel::index_of(const MessagePreview* mp) const {
@@ -472,6 +488,18 @@ void InfoPanel::think() {
 		// Refresh real time on every tick
 		update_time_speed_string();
 	}
+
+	for (UI::Panel* p = ibase_.get_first_child(); p != nullptr; p = p->get_next_sibling()) {
+		if (!p->get_flag(UI::Panel::pf_always_on_top) && p->get_x() < snap_target_panel_.get_w() &&
+		    (on_top_ ? (p->get_y() < snap_target_panel_.get_y() + snap_target_panel_.get_h()) :
+                     (p->get_y() + p->get_h() > snap_target_panel_.get_y()))) {
+			if (UI::Window* w = dynamic_cast<UI::Window*>(p); w != nullptr && !w->moved_by_user()) {
+				w->set_pos(Vector2i(
+				   w->get_x(), on_top_ ? snap_target_panel_.get_y() + snap_target_panel_.get_h() :
+                                     snap_target_panel_.get_y() - w->get_h()));
+			}
+		}
+	}
 }
 
 void InfoPanel::layout() {
@@ -526,6 +554,13 @@ void InfoPanel::layout() {
 			m->set_pos(Vector2i((get_w() - m->get_w()) / 2, message_offset));
 		}
 	}
+
+	snap_target_panel_.set_pos(Vector2i(0, toggle_mode_.get_y()));
+	snap_target_panel_.set_size(
+	   (display_mode_ == DisplayMode::kMinimized || display_mode_ == DisplayMode::kOnMouse_Hidden) ?
+         toggle_mode_.get_w() :
+         w,
+	   toggle_mode_.get_h());
 }
 
 void InfoPanel::draw(RenderTarget& r) {

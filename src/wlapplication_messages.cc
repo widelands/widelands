@@ -212,9 +212,6 @@ void fill_parameter_vector() {
 		_("Move a window to the edge of the panel when the edge of the window comes within "
 		  "a distance of `n` from the edge of the panel."),
 		true},
-	  {"", "snap_windows_only_when_overlapping", _("[true|false*]"),
-		_("Only move a window to the edge of a panel if the window is overlapping with the panel."),
-		true},
 	  /// Others
 	  {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},
 	  {"", "verbose-i18n", "",

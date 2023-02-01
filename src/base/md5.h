@@ -21,6 +21,7 @@
 #define WL_BASE_MD5_H
 
 #include <cassert>
+#include <cstdint>
 #include <cstring>
 #include <string>
 

@@ -1,3 +1,5 @@
+# Automatically created by Widelands 1.2~git26046 (d454059@island_hopping_fix) Release
+
 [global]
 packet_version="2"
 
@@ -6,21 +8,29 @@ name="Sanuel"
 tribe="atlanteans"
 ai=
 closeable="false"
+team="0"
+random="false"
 
 [player_2]
 name="Marchin"
 tribe="atlanteans"
 ai=
 closeable="false"
+team="0"
+random="false"
 
 [player_3]
 name="Xamixilus"
 tribe="atlanteans"
 ai=
 closeable="true"
+team="0"
+random="false"
 
 [player_4]
 name="Trera"
 tribe="atlanteans"
 ai=
 closeable="true"
+team="0"
+random="false"
