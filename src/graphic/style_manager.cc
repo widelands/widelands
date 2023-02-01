@@ -335,11 +335,11 @@ StyleManager::StyleManager() {
 	} else {
 		fail_if_doing_default_style("section", section);
 		const UI::StatisticsPlotStyleInfo& fallback = default_style->statistics_plot_style();
-		statistics_plot_style_.reset(new UI::StatisticsPlotStyleInfo(
-		   new UI::FontStyleInfo(fallback.x_tick_font()),
-		   new UI::FontStyleInfo(fallback.y_min_value_font()),
-		   new UI::FontStyleInfo(fallback.y_max_value_font()),
-		   fallback.axis_line_color(), fallback.zero_line_color()));
+		statistics_plot_style_.reset(
+		   new UI::StatisticsPlotStyleInfo(new UI::FontStyleInfo(fallback.x_tick_font()),
+		                                   new UI::FontStyleInfo(fallback.y_min_value_font()),
+		                                   new UI::FontStyleInfo(fallback.y_max_value_font()),
+		                                   fallback.axis_line_color(), fallback.zero_line_color()));
 	}
 
 	// Ware info in warehouses, construction actions etc.
@@ -719,7 +719,9 @@ void StyleManager::add_tabpanel_style(UI::TabPanelStyle style,
 	tabpanelstyles_.insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(tp_style)));
 }
 
-void StyleManager::add_progressbar_style(UI::PanelStyle style, const LuaTable& table, const std::string& key) {
+void StyleManager::add_progressbar_style(UI::PanelStyle style,
+                                         const LuaTable& table,
+                                         const std::string& key) {
 	UI::ProgressbarStyleInfo* pb_style;
 	if (table.has_key(key)) {
 		std::unique_ptr<LuaTable> style_table = table.get_table(key);
@@ -736,7 +738,9 @@ void StyleManager::add_progressbar_style(UI::PanelStyle style, const LuaTable& t
 	   std::make_pair(style, std::unique_ptr<const UI::ProgressbarStyleInfo>(pb_style)));
 }
 
-void StyleManager::add_table_style(UI::PanelStyle style, const LuaTable& table, const std::string& key) {
+void StyleManager::add_table_style(UI::PanelStyle style,
+                                   const LuaTable& table,
+                                   const std::string& key) {
 	UI::TableStyleInfo* t_style;
 	if (table.has_key(key)) {
 		std::unique_ptr<LuaTable> style_table = table.get_table(key);
@@ -835,59 +839,61 @@ void StyleManager::set_building_statistics_style(const LuaTable& table) {
 	   high_alt_color));
 }
 
-void StyleManager::add_ware_info_style(
-   UI::WareInfoStyle style, const LuaTable& table, const std::string& key) {
+void StyleManager::add_ware_info_style(UI::WareInfoStyle style,
+                                       const LuaTable& table,
+                                       const std::string& key) {
 	UI::WareInfoStyleInfo* wi_style;
 	if (table.has_key(key)) {
 		std::unique_ptr<LuaTable> style_table = table.get_table(key);
 		std::unique_ptr<LuaTable> fonts_table = style_table->get_table("fonts");
 		std::unique_ptr<LuaTable> colors_table = style_table->get_table("colors");
 		wi_style = new UI::WareInfoStyleInfo(
-	      read_font_style(*fonts_table, "header"), read_font_style(*fonts_table, "info"),
-	      g_image_cache->get(style_table->get_string("icon_background_image")),
-	      read_rgb_color(*colors_table->get_table("icon_frame")),
-	      read_rgb_color(*colors_table->get_table("icon_background")),
-	      read_rgb_color(*colors_table->get_table("info_background")));
+		   read_font_style(*fonts_table, "header"), read_font_style(*fonts_table, "info"),
+		   g_image_cache->get(style_table->get_string("icon_background_image")),
+		   read_rgb_color(*colors_table->get_table("icon_frame")),
+		   read_rgb_color(*colors_table->get_table("icon_background")),
+		   read_rgb_color(*colors_table->get_table("info_background")));
 	} else {
 		fail_if_doing_default_style("ware info style", key);
 		const UI::WareInfoStyleInfo& fallback = default_style->ware_info_style(style);
-		wi_style = new UI::WareInfoStyleInfo(
-		   new UI::FontStyleInfo(fallback.header_font()), new UI::FontStyleInfo(fallback.info_font()),
-		   fallback.icon_background_image(), fallback.icon_frame(), fallback.icon_background(),
-		   fallback.info_background());
+		wi_style = new UI::WareInfoStyleInfo(new UI::FontStyleInfo(fallback.header_font()),
+		                                     new UI::FontStyleInfo(fallback.info_font()),
+		                                     fallback.icon_background_image(), fallback.icon_frame(),
+		                                     fallback.icon_background(), fallback.info_background());
 	}
 	ware_info_styles_.insert(
 	   std::make_pair(style, std::unique_ptr<const UI::WareInfoStyleInfo>(wi_style)));
 }
 
-void StyleManager::add_window_style(
-   UI::WindowStyle style, const LuaTable& table, const std::string& key) {
+void StyleManager::add_window_style(UI::WindowStyle style,
+                                    const LuaTable& table,
+                                    const std::string& key) {
 	UI::WindowStyleInfo* w_style;
 	if (table.has_key(key)) {
 		std::unique_ptr<LuaTable> style_table = table.get_table(key);
 		w_style = new UI::WindowStyleInfo(
-	      read_rgba_color(*style_table->get_table("window_border_focused")),
-	      read_rgba_color(*style_table->get_table("window_border_unfocused")),
-	      g_image_cache->get(style_table->get_string("border_top")),
-	      g_image_cache->get(style_table->get_string("border_bottom")),
-	      g_image_cache->get(style_table->get_string("border_right")),
-	      g_image_cache->get(style_table->get_string("border_left")),
-	      g_image_cache->get(style_table->get_string("background")),
-		   style_table->get_string("button_pin"),
-	      style_table->get_string("button_unpin"), style_table->get_string("button_minimize"),
-	      style_table->get_string("button_unminimize"), style_table->get_string("button_close"));
+		   read_rgba_color(*style_table->get_table("window_border_focused")),
+		   read_rgba_color(*style_table->get_table("window_border_unfocused")),
+		   g_image_cache->get(style_table->get_string("border_top")),
+		   g_image_cache->get(style_table->get_string("border_bottom")),
+		   g_image_cache->get(style_table->get_string("border_right")),
+		   g_image_cache->get(style_table->get_string("border_left")),
+		   g_image_cache->get(style_table->get_string("background")),
+		   style_table->get_string("button_pin"), style_table->get_string("button_unpin"),
+		   style_table->get_string("button_minimize"), style_table->get_string("button_unminimize"),
+		   style_table->get_string("button_close"));
 	} else {
 		fail_if_doing_default_style("window style", key);
 		w_style = new UI::WindowStyleInfo(default_style->window_style(style));
-/*
-		const UI::WindowStyleInfo& fallback = default_style->window_style(style);
-		w_style = new UI::WindowStyleInfo(
-		   fallback.window_border_focused(), fallback.window_border_unfocused(),
-		   fallback.border_top(), fallback.border_bottom(), fallback.border_right(),
-		   fallback.border_left(), fallback.background(), fallback.button_pin(),
-		   fallback.button_unpin(), fallback.button_minimize(), fallback.button_unminimize(),
-		   fallback.button_close());
-*/
+		/*
+		      const UI::WindowStyleInfo& fallback = default_style->window_style(style);
+		      w_style = new UI::WindowStyleInfo(
+		         fallback.window_border_focused(), fallback.window_border_unfocused(),
+		         fallback.border_top(), fallback.border_bottom(), fallback.border_right(),
+		         fallback.border_left(), fallback.background(), fallback.button_pin(),
+		         fallback.button_unpin(), fallback.button_minimize(), fallback.button_unminimize(),
+		         fallback.button_close());
+		*/
 	}
 	window_styles_.insert(
 	   std::make_pair(style, std::unique_ptr<const UI::WindowStyleInfo>(w_style)));
