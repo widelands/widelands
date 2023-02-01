@@ -1312,7 +1312,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Micro Brewery
             purpose = pgettext("barbarians_building", "Produces beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines."),
             -- TRANSLATORS: Performance helptext for a barbarian production site: Micro Brewery
-            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce beer in about %s on average."):bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
+            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce beer in about %s on average."):bformat(ngettext("%d second", "%d seconds", 64):bformat(64))
          }
       },
       {
@@ -1326,7 +1326,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian production site: Brewery
             lore_author = pgettext("barbarians_building", "First verse of the drinking song ‘Way of the Barbarian’"),
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Brewery
-            purpose = pgettext("building", "Produces beer to keep the miners strong and happy.")
+            purpose = pgettext("building", "Produces beer to keep the miners strong and happy."),
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Brewery
+            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce strong beer in about %s on average."):bformat(ngettext("%d second", "%d seconds", 64):bformat(64))
          }
       },
       {
@@ -1337,7 +1339,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian production site: Tavern
             lore_author = pgettext("barbarians_building", "Menu of the tavern ‘Ye Ol’ Bronze Axe’"),
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
-            purpose = pgettext("building", "Prepares rations to feed the scouts and miners.")
+            purpose = pgettext("building", "Prepares rations to feed the scouts and miners."),
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Tavern
+            performance = pgettext("barbarians_building", "The tavern can produce one ration in %s on average, if the supply is steady."):bformat(ngettext("%d second", "%d seconds", 37):bformat(37))
          }
       },
       {
@@ -1348,7 +1352,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian production site: Inn
             lore_author = pgettext("barbarians_building", "Chef’s recommendation in ‘The Singing Master Miner’"),
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Inn
-            purpose = pgettext("building", "Prepares rations for scouts and rations and snacks to feed the miners in the basic and deep mines.")
+            purpose = pgettext("building", "Prepares rations for scouts and rations and snacks to feed the miners in the basic and deep mines."),
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Inn
+            performance = pgettext("barbarians_building", "The inn can produce one ration in %1$s and one snack in %2$s on average, if the supply is steady."):bformat(ngettext("%d second", "%d seconds", 37):bformat(37), ngettext("%d second", "%d seconds", 41):bformat(41))
          }
       },
       {
@@ -1359,7 +1365,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian production site: Big Inn
             lore_author = pgettext("barbarians_building", "Menu of ‘The Laughing Barbarian’"),
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Big Inn
-            purpose = pgettext("barbarians_building", "Prepares rations for scouts and rations, snacks and meals to feed all miners.")
+            purpose = pgettext("barbarians_building", "Prepares rations for scouts and rations, snacks and meals to feed all miners."),
+            -- TRANSLATORS: Performance helptext for a barbarian production site: Big Inn
+            performance = pgettext("barbarians_building", "The big inn can produce one ration in %1$s, one snack in %2$s and one meal in %3$s on average, if the supply is steady."):bformat(ngettext("%d second", "%d seconds", 37):bformat(37), ngettext("%d second", "%d seconds", 41):bformat(41), ngettext("%d second", "%d seconds", 44):bformat(44))
          }
       },
       {
