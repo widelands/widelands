@@ -273,8 +273,8 @@ Some of the above style tables define custom fonts. Additionally, there is a ``f
 * **wui_game_speed_and_coordinates**: Time, speed and coordinates strings in the game/editor info panel
 * **unknown**: Used when a Lua script requests a font style not included in this list .. versionadded:: 1.2
 
-paragraphs
-~~~~~~~~~~
+paragraph styles
+~~~~~~~~~~~~~~~~
 
 .. versionadded:: 1.2
 
