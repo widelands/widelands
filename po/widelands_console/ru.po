@@ -6,7 +6,7 @@
 # Anton Khabarov <2233009@gmail.com>, 2016,2018
 # nskdmitry, 2021-2022
 # GunChleoc, 2020
-# berry <igory.ygr200@gmail.com>, 2021
+# Blueberryy <igory.ygr200@gmail.com>, 2021
 # Vasiliy Anosov <basil.snowman@gmail.com>, 2021
 # Viktor S <awsswa59@gmail.com>, 2018,2020
 # Yuriy Sokolov <lention@mail.ru>, 2015,2022
@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -243,7 +243,6 @@ msgstr "Сдвигать обзор, когда курсор близок к к�
 #: ../../src/wlapplication_messages.cc:188
 #: ../../src/wlapplication_messages.cc:191
 #: ../../src/wlapplication_messages.cc:206
-#: ../../src/wlapplication_messages.cc:215
 msgid "[true|false*]"
 msgstr "[true|false*]"
 
@@ -415,42 +414,36 @@ msgid ""
 msgstr "Переместите окно к краю панели, когда край окна находится на расстоянии \"n\" от края панели."
 
 #: ../../src/wlapplication_messages.cc:216
-msgid ""
-"Only move a window to the edge of a panel if the window is overlapping with "
-"the panel."
-msgstr "Перемещайте окно к краю панели только в том случае, если окно перекрывается с панелью."
-
-#: ../../src/wlapplication_messages.cc:219
 msgid "Enable verbose debug messages"
 msgstr "Включить подробные отладочные сообщения"
 
-#: ../../src/wlapplication_messages.cc:219
+#: ../../src/wlapplication_messages.cc:216
 msgid "Others:"
 msgstr "Прочее:"
 
-#: ../../src/wlapplication_messages.cc:221
+#: ../../src/wlapplication_messages.cc:218
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
 msgstr "Вывести все строки по факту перевода. Это поможет в поиске багов в интернационализации игры."
 
-#: ../../src/wlapplication_messages.cc:224
+#: ../../src/wlapplication_messages.cc:221
 msgid "Only print version and exit."
 msgstr "Вывести версию игры и выйти."
 
-#: ../../src/wlapplication_messages.cc:225
+#: ../../src/wlapplication_messages.cc:222
 msgid "Show this help."
 msgstr "Показать справку."
 
-#: ../../src/wlapplication_messages.cc:226
+#: ../../src/wlapplication_messages.cc:223
 msgid "Show this help with all available config options."
 msgstr "Показать справку со всеми доступными параметрами."
 
-#: ../../src/wlapplication_messages.cc:227
+#: ../../src/wlapplication_messages.cc:224
 msgid "<save.wgf>/<replay.wry>"
 msgstr "<save.wgf>/<replay.wry>"
 
-#: ../../src/wlapplication_messages.cc:228
+#: ../../src/wlapplication_messages.cc:225
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
@@ -458,12 +451,12 @@ msgid ""
 msgstr "Загрузить данную сохраненную игру или переиграть её. Работает с расширениями файлов .wgf/.wrpl. Не работает с другими опциями. Также смотрите --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:255
+#: ../../src/wlapplication_messages.cc:252
 #, c-format
 msgid "This is Widelands version %s"
 msgstr "Это версия Widelands %s"
 
-#: ../../src/wlapplication_messages.cc:313
+#: ../../src/wlapplication_messages.cc:310
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

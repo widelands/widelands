@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: GunChleoc, 2016\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
@@ -235,7 +235,6 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:188
 #: ../../src/wlapplication_messages.cc:191
 #: ../../src/wlapplication_messages.cc:206
-#: ../../src/wlapplication_messages.cc:215
 msgid "[true|false*]"
 msgstr ""
 
@@ -407,42 +406,36 @@ msgid ""
 msgstr ""
 
 #: ../../src/wlapplication_messages.cc:216
-msgid ""
-"Only move a window to the edge of a panel if the window is overlapping with "
-"the panel."
-msgstr ""
-
-#: ../../src/wlapplication_messages.cc:219
 msgid "Enable verbose debug messages"
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:219
+#: ../../src/wlapplication_messages.cc:216
 msgid "Others:"
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:221
+#: ../../src/wlapplication_messages.cc:218
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:224
+#: ../../src/wlapplication_messages.cc:221
 msgid "Only print version and exit."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:225
+#: ../../src/wlapplication_messages.cc:222
 msgid "Show this help."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:226
+#: ../../src/wlapplication_messages.cc:223
 msgid "Show this help with all available config options."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:227
+#: ../../src/wlapplication_messages.cc:224
 msgid "<save.wgf>/<replay.wry>"
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:228
+#: ../../src/wlapplication_messages.cc:225
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
@@ -450,12 +443,12 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:255
+#: ../../src/wlapplication_messages.cc:252
 #, c-format
 msgid "This is Widelands version %s"
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:313
+#: ../../src/wlapplication_messages.cc:310
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"
