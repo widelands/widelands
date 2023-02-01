@@ -80,7 +80,6 @@ enum class StyledSize {
 	kTextDefaultGap,
 	kTextSpaceBeforeInlineHeader,
 	kIngameMessageGap,
-	kIngameSpaceBeforeObjective,
 	kIngameSpaceBeforeImmovableIcon,
 	kHelpTerrainTreeHeaderSpaceBefore,
 	kHelpTerrainTreeHeaderSpaceAfter,

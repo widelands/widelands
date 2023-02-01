@@ -509,8 +509,6 @@ StyleManager::StyleManager() {
 	add_styled_size(UI::StyledSize::kTextSpaceBeforeInlineHeader, *element_table,
 	                "text_space_before_inline_header");
 	add_styled_size(UI::StyledSize::kIngameMessageGap, *element_table, "ingame_message_gap");
-	add_styled_size(
-	   UI::StyledSize::kIngameSpaceBeforeObjective, *element_table, "ingame_space_before_objective");
 	add_styled_size(UI::StyledSize::kIngameSpaceBeforeImmovableIcon, *element_table,
 	                "ingame_space_before_immovable_icon");
 	add_styled_size(UI::StyledSize::kHelpTerrainTreeHeaderSpaceBefore, *element_table,

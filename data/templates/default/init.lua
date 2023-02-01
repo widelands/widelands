@@ -870,8 +870,9 @@ return {
             size = 18,
             bold = true,
          },
-         space_before = ingame_heading_space_before_small,
-         space_after = ingame_heading_space_after,
+         space_before = 3 * ingame_padding,
+         space_after = 0,
+         valign = "center",
       },
       ingame_heading_2 = {
          font = {
@@ -1013,7 +1014,6 @@ return {
       text_default_gap = ingame_padding,
       text_space_before_inline_header = 8,
       ingame_message_gap = 8,
-      ingame_space_before_objective = 18,
       ingame_space_before_immovable_icon = 14,
       help_terrain_tree_header_space_before = 12,
       help_terrain_tree_header_space_after = 3,

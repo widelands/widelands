@@ -261,12 +261,9 @@ function new_objectives(...)
    pop_textdomain()
 
    return
-      div("width=100%",
-         vspace(styles.get_size("ingame_space_before_objective")) ..
-         div("float=left padding_r=" .. default_gap(), p(img("images/wui/menus/objectives.png"))) ..
-         styles.as_paragraph("ingame_objectives_heading", objectives_header) ..
-         text
-      )
+      styles.as_paragraph("ingame_objectives_heading",
+         img("images/wui/menus/objectives.png") ..  space() ..  objectives_header) ..
+      text
 end
 
 
