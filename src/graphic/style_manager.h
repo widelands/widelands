@@ -164,15 +164,12 @@ private:
 	                        const LuaTable& table,
 	                        const std::string& parent,
 	                        const std::string& key);
-	void add_progressbar_style(UI::PanelStyle style,
-	                           const LuaTable& table /*, const std::string& key */);
-	void add_table_style(UI::PanelStyle style, const LuaTable& table /*, const std::string& key */);
-	void set_statistics_plot_style(const LuaTable& table /*, const std::string& key */);
+	void add_progressbar_style(UI::PanelStyle style, const LuaTable& table, const std::string& key);
+	void add_table_style(UI::PanelStyle style, const LuaTable& table, const std::string& key);
+	void set_statistics_plot_style(const LuaTable& table);
 	void set_building_statistics_style(const LuaTable& table);
-	void add_ware_info_style(UI::WareInfoStyle style,
-	                         const LuaTable& table /*, const std::string& key */);
-	void add_window_style(UI::WindowStyle style,
-	                      const LuaTable& table /*, const std::string& key */);
+	void add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table, const std::string& key);
+	void add_window_style(UI::WindowStyle style, const LuaTable& table, const std::string& key);
 	void add_dropdown_style(UI::PanelStyle style,
 	                        const LuaTable& table,
 	                        const std::string& parent,
