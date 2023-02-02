@@ -28,10 +28,10 @@ namespace UI {
 enum class ParagraphStyle {
 
 	/************************************************************************************
-	/*
-	/* Don't forget to update doc/sphinx/source/themes.rst when you add or remove styles!
-	/*
-	/************************************************************************************
+	 *
+	 * Don't forget to update doc/sphinx/source/themes.rst when you add or remove styles!
+	 *
+	 ************************************************************************************/
 
 	kReadmeTitle,
 	kAboutTitle,
