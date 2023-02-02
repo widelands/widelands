@@ -363,9 +363,12 @@ The ``styled_sizes`` table contains integer values to be used for paddings and U
 * **campaign_message_box_default_h**: Default height of campaign message boxes
 * **campaign_message_box_default_w**: Default width of campaign message boxes
 * **campaign_message_box_top_pos_y**: Default y position of campaign message boxes with `top` alignment
+* **campaign_message_box_size_step**: Step size for the helper functions that allow changing the width or height of campaign message boxes in a controlled way
+* **campaign_message_box_h_min**: The minimum height of campaign message boxes that the helper function can set
+* **campaign_message_box_h_max**: The minimum height of campaign message boxes that the helper function can set
+* **campaign_message_box_w_min**: The maximum width of campaign message boxes that the helper function can set
+* **campaign_message_box_w_max**: The maximum width of campaign message boxes that the helper function can set
 * **campaign_fri02_poem_indent**: The indentation of the poem in the second scenario in the Frisian campaign
-* **map_plateau_message_w**: Message box width used by the SP scenario The Green Plateau
-* **map_plateau_message_h**: Message box height used by the SP scenario The Green Plateau
 * **map_plateau_message_pos_y**: The y position of the message boxes in the SP scenario The Green Plateau
 * **ui_default_padding**: default size for padding between UI elements
 

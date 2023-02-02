@@ -76,6 +76,12 @@ enum class ColorStyle {
 	kUnknown
 };
 
+/**************************************************************************************
+/*
+/* Don't forget to update doc/sphinx/source/themes.rst when you add or remove styles!
+/*
+/**************************************************************************************
+
 enum class StyledSize {
 	kTextDefaultGap,
 	kTextSpaceBeforeInlineHeader,
