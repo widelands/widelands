@@ -525,14 +525,14 @@ StyleManager::StyleManager() {
 	   UI::StyledSize::kCampaignMessageBoxTopPosY, *element_table, "campaign_message_box_top_pos_y");
 	add_styled_size(UI::StyledSize::kCampaignMessageBoxSizeStep, *element_table,
 	                "campaign_message_box_size_step");
-	add_styled_size(UI::StyledSize::kCampaignMessageBoxMinH, *element_table,
-	                "campaign_message_box_h_min");
-	add_styled_size(UI::StyledSize::kCampaignMessageBoxMaxH, *element_table,
-	                "campaign_message_box_h_max");
-	add_styled_size(UI::StyledSize::kCampaignMessageBoxMinW, *element_table,
-	                "campaign_message_box_w_min");
-	add_styled_size(UI::StyledSize::kCampaignMessageBoxMaxW, *element_table,
-	                "campaign_message_box_w_max");
+	add_styled_size(
+	   UI::StyledSize::kCampaignMessageBoxMinH, *element_table, "campaign_message_box_h_min");
+	add_styled_size(
+	   UI::StyledSize::kCampaignMessageBoxMaxH, *element_table, "campaign_message_box_h_max");
+	add_styled_size(
+	   UI::StyledSize::kCampaignMessageBoxMinW, *element_table, "campaign_message_box_w_min");
+	add_styled_size(
+	   UI::StyledSize::kCampaignMessageBoxMaxW, *element_table, "campaign_message_box_w_max");
 	add_styled_size(
 	   UI::StyledSize::kCampaignFri02PoemIndent, *element_table, "campaign_fri02_poem_indent");
 	add_styled_size(UI::StyledSize::kSPScenarioPlateauMessageBoxPosY, *element_table,
