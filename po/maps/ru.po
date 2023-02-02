@@ -7,7 +7,7 @@
 # Alexander Bikmeyev <bikmeyev@gmail.com>, 2016
 # CupIvan <mail@cupivan.ru>, 2019
 # nskdmitry, 2021-2022
-# Yuriy Sokolov <lention@mail.ru>, 2015,2022
+# Yuriy Sokolov <lention@mail.ru>, 2015,2022-2023
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2017-2018
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-04 20:42+0000\n"
+"POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022-2023\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -304,14 +304,14 @@ msgstr "Клаус и Хеннеке Лембеки наконец-то добр
 
 #: ../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
-msgstr ""
+msgstr "Освобождение"
 
 #: ../../data/campaigns/fri05.wmf/elemental:10
 msgid ""
 "Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
 "for battle against the invaders. They must gather allies and plan their "
 "strategy, but the foe is never far away…"
-msgstr ""
+msgstr "Наконец-то вернувшись в Северную Фризию, Клаус, Хеннеке и Ребауд готовятся к битве с захватчиками. Они должны собрать союзников и спланировать свою стратегию, но враг никогда не бывает далеко…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -729,11 +729,11 @@ msgid ""
 "long, long way to conquere all the islands. Good luck!"
 msgstr ">Где победа? В тысячах миль отсюда.< [Порги и Бесс] Вам предстоит долгий-долгий путь к завоеванию всех островов. Удачи!"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:8
 msgid "Island Hopping"
 msgstr "Захват островов"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:9
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:10
 msgid ""
 "A special tournament in Atlantean culture is the so-called ‘Island Hopping’,"
 " where two or more groups try to reach the center island as fast as "

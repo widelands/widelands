@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:27+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
@@ -48,25 +48,28 @@ msgid ""
 "Island Hopping is a traditional tournament in Atlantean culture. The rules "
 "of the game are simple: you start with a headquarters on an island. When you"
 " finish a castle at the end of the first island, you are granted a second "
-"headquarters on a second island, which will contain all wares from your "
-"first headquarters."
-msgstr "島跳びはアトランティスの文化における伝統的なトーナメント競技です。ルールはシンプルです。あなたは島にある本拠地からスタートします。その島の端に城を建設すると、二番目の島に二番目の本拠地が与えられます。その際、前の本拠地にあった全ての物資は新しい本拠地に移動されます。"
+"headquarters on a second island, which will get all wares, workers and "
+"soldiers transferred from your headquarters and warehouses on the first "
+"island."
+msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
 "If you finish a castle in the target area on the second island, you will get"
-" a third headquarters on the third island. You must build a castle at the "
-"center of the third island and hold it for 20 minutes to win the game."
-msgstr "二番目の島の目的エリアに城を建設すると、今度は三番目の島に本拠地を与えられます。三番目の島の中央に城を建て、それを 20 分維持できたらゲームに勝利できます。"
+" a third headquarters on the third island with all wares, workers and "
+"soldiers getting transferred from your previous headquarters and warehouses "
+"again. You must build a castle at the center of the third island and hold it"
+" for 20 minutes to win the game."
+msgstr ""
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:21
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:22
 msgid ""
 "Whenever you finish an island, you will get bonus wares, depending on how "
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
 msgstr "島を突破するごとにボーナスとして物資がもらえます。ボーナスはあなたの前に何人のプレイヤーが先に突破しているかによって変わります。早く突破するほど、もらえる物資の量は少なくなります。ボーナスの詳細については下に記述があります。"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:24
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:25
 msgid ""
 "The point is that the first island only provides rocks and trees, the second"
 " only meadows and resources. The economies you leave behind will continue to"
@@ -74,79 +77,79 @@ msgid ""
 " new island."
 msgstr "最初の島には岩と木しか無いこと、二番目の島には牧草地と資源しかないことがポイントです。前の島に残した経済はその後も動きつづけますが、物資を回収できるのは次の島に移るタイミングだけです。"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:27
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:29
 msgid "Finally, be careful not to waste your quartz and diamonds."
 msgstr "最後になりますが、水晶とダイヤモンドの浪費は避けましょう。"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:29
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:31
 msgid "Finish Rewards"
 msgstr "突破ボーナス"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:30
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:32
 msgid "First Island"
 msgstr "最初の島"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:31
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:36
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:33
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:38
 msgid "1st to finish"
 msgstr "１番"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:32
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:37
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:34
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:39
 msgid "2nd to finish"
 msgstr "２番"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:33
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:38
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:35
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:40
 msgid "3rd to finish"
 msgstr "３番"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:34
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:39
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:36
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:41
 msgid "4th to finish"
 msgstr "４番"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:35
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:37
 msgid "Second Island"
 msgstr "二番目の島"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:43
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the first to reach Island number %2$i."
 msgstr "%1$s が一番手で %2$i つめの島に到達しました。"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:44
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the second to reach Island number %2$i."
 msgstr "%1$s が二番手で %2$i つめの島に到達しました。"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:45
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:47
 msgid "%1$s was the third to reach Island number %2$i."
 msgstr "%1$s が三番手で %2$i つめの島に到達しました。"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:48
 msgid "%1$s was the fourth to reach Island number %2$i."
 msgstr "%1$s が四番手で %2$i つめの島に到達しました。"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:48
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:50
 msgid "The reward for this feat amounts to:"
 msgstr "この順位の報酬は以下のようになります:"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:51
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:53
 #, lua-format
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr "%s が丘の王となりました。20 分の間丘を維持できれば勝利となります。"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:53
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
 #, lua-format
 msgid "%s lost control of the hill."
 msgstr "%s が丘の支配権を失いました。"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:54
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:56
 msgid "%1$s has been King of the Hill for %2$s!"
 msgstr "%1$s が %2$s の間丘の王でありつづけています！"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:57
 #, lua-format
 msgid "%s has won the game. Congratulations!"
 msgstr "%s の勝利です。おめでとうございます！"
