@@ -22,7 +22,7 @@ end
 --                           Texts - No logic here
 -- =======================================================================
 
-local objective_message_height = 550
+local objective_message_height = messagebox_h_step(3)
 
 -- ===========
 -- objectives

@@ -48,8 +48,8 @@ obj_defeat_jomo = {
 -- Messages to the User
 -- =====================
 
-mb_w = styles.get_size("map_plateau_message_w")
-mb_h = styles.get_size("map_plateau_message_h")
+mb_w = messagebox_w_step(-1)
+mb_h = messagebox_h_step(-2)
 mb_y = styles.get_size("map_plateau_message_pos_y")
 
 briefing_1_the_forbidden_island = {

@@ -87,9 +87,12 @@ enum class StyledSize {
 	kCampaignMessageBoxDefaultH,
 	kCampaignMessageBoxDefaultW,
 	kCampaignMessageBoxTopPosY,
+	kCampaignMessageBoxSizeStep,
+	kCampaignMessageBoxMinH,
+	kCampaignMessageBoxMaxH,
+	kCampaignMessageBoxMinW,
+	kCampaignMessageBoxMaxW,
 	kCampaignFri02PoemIndent,
-	kSPScenarioPlateauMessageBoxH,
-	kSPScenarioPlateauMessageBoxW,
 	kSPScenarioPlateauMessageBoxPosY,
 	kUIDefaultPadding
 };

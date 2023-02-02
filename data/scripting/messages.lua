@@ -207,6 +207,42 @@ end
 
 
 -- RST
+-- .. function:: messagebox_h_step(steps)
+--
+--    Helper function to get a height for a messagebox that is changed relative to the default
+--    in a way that can still follow the scaling of themes.
+--
+--    :arg steps: The number of steps by which to increase or decrease the height
+--    :type steps: signed int
+
+function messagebox_h_step(steps)
+   local rv = styles.get_size("campaign_message_box_default_h") +
+              steps * styles.get_size("campaign_message_box_size_step")
+   rv = math.max(rv, styles.get_size("campaign_message_box_h_min"))
+   rv = math.min(rv, styles.get_size("campaign_message_box_h_max"))
+   return rv
+end
+
+
+-- RST
+-- .. function:: messagebox_w_step(steps)
+--
+--    Helper function to get a width for a messagebox that is changed relative to the default
+--    in a way that can still follow the scaling of themes.
+--
+--    :arg steps: The number of steps by which to increase or decrease the width
+--    :type steps: signed int
+
+function messagebox_w_step(steps)
+   local rv = styles.get_size("campaign_message_box_default_w") +
+              steps * styles.get_size("campaign_message_box_size_step")
+   rv = math.max(rv, styles.get_size("campaign_message_box_w_min"))
+   rv = math.min(rv, styles.get_size("campaign_message_box_w_max"))
+   return rv
+end
+
+
+-- RST
 -- .. function:: add_campaign_objective(objective)
 --
 --    Adds an objective to a campaign.
