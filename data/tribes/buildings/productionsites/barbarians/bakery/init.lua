@@ -53,9 +53,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = pgettext("barbarians_building", "baking pitta bread"),
          actions = {
+            -- time total: 20.8 + 2 * (20 + 3.6) = 68 sec
             "return=skipped unless economy needs barbarians_bread",
             "consume=water:3 wheat:3",
-            "sleep=duration:20s",
+            "sleep=duration:20s800ms",
             "animate=working duration:20s",
             "produce=barbarians_bread",
             "animate=working duration:20s",

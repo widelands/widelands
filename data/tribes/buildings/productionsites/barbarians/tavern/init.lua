@@ -76,11 +76,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _("preparing a ration"),
          actions = {
-             -- time total: 33
+            -- time total: 23.4 + 10 + 3.6 = 37 sec
             "return=skipped unless economy needs ration",
             "consume=barbarians_bread,fish,meat",
             "playsound=sound/barbarians/taverns/tavern priority:80%",
-            "animate=working duration:23s",
+            "animate=working duration:23s400ms",
             "sleep=duration:10s",
             "produce=ration"
          },
