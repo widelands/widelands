@@ -2,10 +2,6 @@ project (widelands)
 
 cmake_minimum_required (VERSION 3.5)
 cmake_policy(VERSION 3.5)
-if(COMMAND cmake_policy)
-  # https://cmake.org/cmake/help/latest/policy/CMP0003.html
-  cmake_policy(SET CMP0003 NEW)
-endif(COMMAND cmake_policy)
 
 message(STATUS "Using CMake version ${CMAKE_VERSION}")
 
@@ -456,7 +452,7 @@ IF (WIN32)
     set(BROTLI brotlidec brotlicommon brotlienc)
     set(SDL_MIXER_EXTRA_LIBS ssp)
     set(SDL_EXTRA_LIBS mingw32 dxerr8)
-    set(SDL_IMG_EXTRA_LIBS jbig deflate Lerc jxl hwy sharpyuv webp)
+    set(SDL_IMG_EXTRA_LIBS webp jbig deflate Lerc jxl hwy sharpyuv)
     add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -D__USE_MINGW_ANSI_STDIO)
     if (CMAKE_SIZEOF_VOID_P EQUAL 4)
       set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
