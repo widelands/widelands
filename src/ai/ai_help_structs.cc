@@ -971,7 +971,8 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
                                          uint32_t cs,
                                          uint32_t land,
                                          uint32_t oland,
-                                         uint32_t o60l)
+                                         uint32_t o60l
+                                         uint32_t ds)
    : team_number(tc),
      players_power(pp),
      old_players_power(op),
@@ -980,7 +981,8 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
 
      players_land(land),
      old_players_land(oland),
-     old60_players_land(o60l) {
+     old60_players_land(o60l),
+     players_diplomacy_score(ds) {
 }
 
 // Inserting/updating data
@@ -992,7 +994,7 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
 // - old = 15 mins ago
 // - old60 = 60 mins ago
 // e.g. players_power / old_players_power / old60_players_power
-// we recieve also player and team numbers to figure out if we are enemies, or in the team
+// we receive also player and team numbers to figure out if we are enemies, or in the team
 void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            Widelands::PlayerNumber opn,
                            Widelands::TeamNumber mytn,
@@ -1003,11 +1005,12 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            uint32_t cs,
                            uint32_t land,
                            uint32_t oland,
-                           uint32_t o60l) {
+                           uint32_t o60l,
+                           uint32_t ds) {
 	if (all_stats.count(opn) == 0) {
 		this_player_number = pn;
 		this_player_team = mytn;
-		all_stats.insert(std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l)));
+		all_stats.insert(std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l, ds)));
 	} else {
 		all_stats[opn].players_power = pp;
 		all_stats[opn].old_players_power = op;
@@ -1015,7 +1018,8 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 		all_stats[opn].players_casualities = cs;
 		all_stats[opn].players_land = land;
 		all_stats[opn].old_players_land = oland;
-		all_stats[opn].old60_players_land = oland;
+		all_stats[opn].old60_players_land = o601;
+		all_stats[opn].players_diplomacy_score = ds;
 		assert(this_player_number == pn);
 		if (this_player_team != mytn) {
 			verb_log_dbg("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);

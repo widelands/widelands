@@ -836,7 +836,8 @@ private:
 		           uint32_t cs,
 		           uint32_t land,
 		           uint32_t oland,
-		           uint32_t o60l);
+		           uint32_t o60l,
+				   uint32_t ds);
 
 		Widelands::TeamNumber team_number = 0U;
 		uint32_t players_power = 0U;
@@ -847,6 +848,7 @@ private:
 		uint32_t players_land = 0U;
 		uint32_t old_players_land = 0U;
 		uint32_t old60_players_land = 0U;
+		uint32_t players_diplomacy_score = 0U;
 	};
 
 public:
@@ -862,7 +864,8 @@ public:
 	         uint32_t cs,
 	         uint32_t land,
 	         uint32_t oland,
-	         uint32_t o60l);
+	         uint32_t o60l,
+	         uint32_t ds);
 	void remove_stat(Widelands::PlayerNumber pn);
 	void recalculate_team_power();
 

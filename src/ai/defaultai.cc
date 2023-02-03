@@ -3330,13 +3330,17 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 // Dealing with diplomacy actions
 void DefaultAI::diplomacy_actions(const Time& gametime) {
 
+	// don't do any diplomacy for the first 10 + x minutes to avoid click races for allies
+	if (gametime < Time((10 + RNG::static_rand(10)) * 60 * 1000)) {
+		return;
+	}
+
 	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
 		if (pda.other == player_number()) {
 			// TODO(Nordfriese): The AI just makes a random choice every time.
 			// In the future, make more strategic decision here. Add asking for alliance
-			bool accept = RNG::static_rand(5) == 0;
-			// don't accept any diplomacy for the first 10 + x minutes to avoid click races for allies
-			accept &= gametime > Time((10 + RNG::static_rand(10)) * 60 * 1000);
+			// basically accept only 20% but if player is seen lately accept 50/50
+			bool accept = RNG::static_rand(5) == 0 || (RNG::static_rand(2) && player_statistics.player_seen_lately(pda.sender, gametime));
 			// only accept if asking player is stronger (based on mil power and land)
 			accept &= player_statistics.get_player_power(pda.sender) *
 			             (player_statistics.get_player_land(pda.sender) / 100) >
@@ -6720,6 +6724,35 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 
 	// Collecting statistics and saving them in player_statistics object
 	const Widelands::Player* me = game().get_player(pn);
+
+	const uint32_t vsize = genstats.at(j - 1).miltary_strength.size();
+	uint32_t me_strength = 0;
+	uint32_t me_land = 0;
+	uint32_t me_old_strength = 0;
+	uint32_t me_old60_strength = 0;
+	uint32_t me_old_land = 0;
+	uint32_t me_old60_land = 0;
+	uint32_t me_cass = 0;
+	if (vsize > 0) {
+		me_strength = genstats.at(pn - 1).miltary_strength.back();
+		me_land = genstats.at(pn - 1).land_size.back();
+		me_cass = genstats.at(pn - 1).nr_casualties.back();
+
+		if (vsize > 21) {
+			me_old_strength = genstats.at(pn - 1).miltary_strength[vsize - 20];
+			me_old_land = genstats.at(pn - 1).land_size[vsize - 20];
+		} else {
+			me_old_strength = genstats.at(pn - 1).miltary_strength[0];
+			me_old_land = genstats.at(pn - 1).land_size[0];
+		}
+		if (vsize > 91) {
+			me_old60_strength = genstats.at(pn - 1).miltary_strength[vsize - 90];
+			me_old60_land = genstats.at(pn - 1).land_size[vsize - 90];
+		} else {
+			me_old60_strength = genstats.at(pn - 1).miltary_strength[0];
+			me_old60_land = genstats.at(pn - 1).land_size[0];
+		}
+	}
 	for (Widelands::PlayerNumber j = 1; j <= nr_players; ++j) {
 		const Widelands::Player* this_player = game().get_player(j);
 		if (this_player != nullptr) {
@@ -6754,9 +6787,49 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					}
 				}
 
+				// determine the diplomacy score of each player
+				int16_t diplo_score = 0;
+				int16_t inputs[kFNeuronBitSize] = {0};
+				inputs[1] = RNG::static_rand(5) == 0 ? 2 : -2;
+				inputs[2] = RNG::static_rand(std::abs(management_data.get_military_number_at(181) / 10)) == 0 ? 3 : -3;
+				inputs[3] = cur_strength > me_strength ? 2 : -1;
+				inputs[4] = cur_strength > old_strength ? 3 : -3;
+				inputs[5] = cur_strength > old60_strength ? 1 : -5;
+				inputs[6] = cur_land > me_land ? 2 : -1;
+				inputs[7] = cur_land > old60_land ? 1 : -8;
+				inputs[8] = cur_land > old_land ? 3 : -3;
+				inputs[9] = cur_strength > 2 * me_strength ? 5 : 0;
+				inputs[10] = cur_strength > 2 * old_strength ? 4 : -1;
+				inputs[11] = cur_strength > 2 * old60_strength ? 2 : -3;
+				inputs[12] = cur_land > 2 * me_land ? 4 : 0;
+				inputs[13] = cur_land > 2 * old60_land ? 2 : -4;
+				inputs[14] = cur_land > 2 * old_land ? 4 : -2;
+				inputs[15] = cur_strength + (cur_land / std::abs(management_data.get_military_number_at(182) / 10)) >
+				              me_strength + (me_land / std::abs(management_data.get_military_number_at(182) / 10)) ?
+							  5 : -5;
+				inputs[16] = cur_strength + (cur_land / std::abs(management_data.get_military_number_at(183) / 5) >
+				              me_strength + (me_land / std::abs(management_data.get_military_number_at(183) / 5)) ?
+							  5 : -5;
+				inputs[17] = old_strength + (old_land / std::abs(management_data.get_military_number_at(182) / 10)) >
+				              me_old_strength + (me_old_land / std::abs(management_data.get_military_number_at(182) / 10)) ?
+							  2 : -2;
+				inputs[18] = old60_strength + (old60_land / std::abs(management_data.get_military_number_at(184) / 7)) >
+				              me_old60_strength + (me_old60_land / std::abs(management_data.get_military_number_at(184) / 7)) ?
+							  2 : -2;
+				inputs[19] = me_cass > cass ? 2 : -1;
+				inputs[20] = this_player->team_number() == 0 ? 7 : 0;
+				inputs[21] = this_player->team_number() == 0 ? std::abs(management_data.get_military_number_at(185) / 10) : 0;
+				inputs[22] = 3;
+
+				for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
+					if (management_data.f_neuron_pool[28].get_position(i)) {
+						diplo_score += inputs[i];
+					}
+				}
+
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(),
 				                      cur_strength, old_strength, old60_strength, cass, cur_land,
-				                      old_land, old60_land);
+				                      old_land, old60_land, diplo_score);
 			} catch (const std::out_of_range&) {
 				verb_log_warn_time(gametime, "ComputerPlayer(%d): genstats entry missing - size :%d\n",
 				                   static_cast<unsigned int>(player_number()),
