@@ -1411,7 +1411,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Charcoal Kiln
             purpose = pgettext("amazons_building", "Burns logs into charcoal."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Charcoal Kiln
-            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_seconds(121))
+            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(2,1))
          }
       },
       {
