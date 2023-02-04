@@ -1371,7 +1371,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Furnace
             purpose = pgettext("amazons_building", "Smelts gold dust into gold ingots using charcoal."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Furnace
-            performance = pgettext("amazons_building", "The furnace can produce one gold ingot in %s on average if the supply is steady."):bformat(format_seconds(72))
+            performance = pgettext("amazons_building", "The furnace can produce one gold ingot in %s on average if the supply is steady."):bformat(format_minutes_seconds(1, 12))
          }
       },
       {
@@ -1427,7 +1427,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Chocolate Brewery
             purpose = pgettext("amazons_building", "Brews chocolate for soldier training."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Chocolate Brewery
-            performance = pgettext("amazons_building", "The chocolate brewery needs %s on average to brew one mug of chocolate."):bformat(format_seconds(60))
+            performance = pgettext("amazons_building", "The chocolate brewery needs %s on average to brew one mug of chocolate."):bformat(format_minutes(1))
          }
       },
       {
