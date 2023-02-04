@@ -1946,7 +1946,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Barracks
             purpose = pgettext("frisians_building", "Equips recruits and trains them as soldiers."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Barracks
-            performance = pgettext("frisians_building", "The barracks needs %s on average to recruit one soldier."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
+            performance = pgettext("frisians_building", "The barracks need %s on average to recruit one soldier."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
          }
       },
 
