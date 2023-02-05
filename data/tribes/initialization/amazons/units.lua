@@ -1298,7 +1298,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for an amazon production site: Hunter-Gatherer's Hut
             note = pgettext("amazons_building", "The hunter-gatherer’s hut needs animals or fish to hunt or catch within the work area."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Hunter-Gatherer's Hut
-            performance = pgettext("amazons_building", "The hunter-gatherer pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 34):bformat(34))
+            performance = pgettext("amazons_building", "The hunter-gatherer pauses %s before going to work again."):bformat(format_seconds(34))
 
          }
       },
@@ -1314,7 +1314,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for an amazon production site: Liana Cutter's Hut
             note = pgettext("amazons_building", "The liana cutter harvests liana from fully matured trees within the work area which are not being used as lookouts."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Liana Cutter's Hut
-            performance = pgettext("amazons_building", "The liana cutter rests %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 30):bformat(34))
+            performance = pgettext("amazons_building", "The liana cutter rests %s before going to work again."):bformat(format_seconds(30))
          }
       },
       {
@@ -1349,7 +1349,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Scout's Hut
             purpose = pgettext("amazons_building", "Explores unknown territory."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Scout's Hut
-            performance = pgettext("amazons_building", "The scout pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
+            performance = pgettext("amazons_building", "The scout pauses %s before going to work again."):bformat(format_seconds(30))
          }
       },
 
@@ -1371,7 +1371,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Furnace
             purpose = pgettext("amazons_building", "Smelts gold dust into gold ingots using charcoal."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Furnace
-            performance = pgettext("amazons_building", "The furnace can produce one gold ingot in %s on average if the supply is steady."):bformat(ngettext("%d second", "%d seconds", 72):bformat(72))
+            performance = pgettext("amazons_building", "The furnace can produce one gold ingot in %s on average if the supply is steady."):bformat(format_minutes_seconds(1, 12))
          }
       },
       {
@@ -1411,7 +1411,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Charcoal Kiln
             purpose = pgettext("amazons_building", "Burns logs into charcoal."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Charcoal Kiln
-            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(ngettext("%d second", "%d seconds", 121):bformat(121))
+            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(2,1))
          }
       },
       {
@@ -1427,7 +1427,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Chocolate Brewery
             purpose = pgettext("amazons_building", "Brews chocolate for soldier training."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Chocolate Brewery
-            performance = pgettext("amazons_building", "The chocolate brewery needs %s on average to brew one mug of chocolate."):bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
+            performance = pgettext("amazons_building", "The chocolate brewery needs %s on average to brew one mug of chocolate."):bformat(format_minutes(1))
          }
       },
       {
@@ -1436,7 +1436,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Food Preserver
             purpose = pgettext("amazons_building", "Prepares rations to feed the scouts and the workers digging for gold dust and granite."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Food Preserver
-            performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(ngettext("%d second", "%d seconds", 17):bformat(17))
+            performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(format_seconds(17))
          }
       },
       {
@@ -1445,7 +1445,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Initiation Site
             purpose = pgettext("amazons_building", "Equips recruits and trains them as soldiers."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Initiation Site
-            performance = pgettext("amazons_building", "The initiation site needs %s on average to recruit one soldier."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
+            performance = pgettext("amazons_building", "The initiation site needs %s on average to recruit one soldier."):bformat(format_seconds(30))
          }
       },
       {
@@ -1494,7 +1494,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Stone Mine
             purpose = pgettext("amazons_building", "Digs granite out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Stone Mine
-            performance = pgettext("amazons_building", "The stone mine can produce one slab of granite in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(ngettext("%d second", "%d seconds", 32):bformat(32))
+            performance = pgettext("amazons_building", "The stone mine can produce one slab of granite in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_seconds(32))
          }
       },
       {
