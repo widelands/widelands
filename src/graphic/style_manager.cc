@@ -515,8 +515,8 @@ StyleManager::StyleManager() {
 	                "wui_text_space_before_inline_header");
 	add_styled_size(UI::StyledSize::kWuiSpaceBeforeImmovableIcon, *element_table,
 	                "wui_space_before_immovable_icon");
-	add_styled_size(UI::StyledSize::kWinConditionMessageGap, *element_table,
-	                "win_condition_message_gap");
+	add_styled_size(
+	   UI::StyledSize::kWinConditionMessageGap, *element_table, "win_condition_message_gap");
 	add_styled_size(UI::StyledSize::kHelpTerrainTreeHeaderSpaceBefore, *element_table,
 	                "help_terrain_tree_header_space_before");
 	add_styled_size(UI::StyledSize::kHelpTerrainTreeHeaderSpaceAfter, *element_table,
