@@ -289,7 +289,7 @@ Optional elements:
 * **space_before** (int): Padding to be used above the paragraph
 * **space_after** (int): Padding to be used below the paragraph
 
-**Note:** Paddings of consecutive paragraphs are added, not collapsed.
+.. note:: Paddings of consecutive paragraphs are added, not collapsed.
 
 The ``paragraphs`` table defines paragraph styles used mostly by the help texts and scenarios:
 
