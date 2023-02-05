@@ -6889,9 +6889,9 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(),
 				                      cur_strength, old_strength, old60_strength, cass, cur_land,
 				                      old_land, old60_land, diplo_score);
-				verb_log_dbg_time(
-				   gametime, "For player(%d), the player(%d) has the diploscore: %d\n",
-				   static_cast<unsigned int>(pn), static_cast<unsigned int>(j), diplo_score);
+				verb_log_dbg_time(gametime, "For player(%d), the player(%d) has the diploscore: %d\n",
+				                  static_cast<unsigned int>(pn), static_cast<unsigned int>(j),
+				                  diplo_score);
 			} catch (const std::out_of_range&) {
 				verb_log_warn_time(gametime, "ComputerPlayer(%d): genstats entry missing - size :%d\n",
 				                   static_cast<unsigned int>(player_number()),
