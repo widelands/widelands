@@ -297,7 +297,7 @@ function new_objectives(...)
    pop_textdomain()
 
    return
-      styles.as_paragraph("ingame_objectives_heading",
+      styles.as_paragraph("wui_objectives_heading",
          img("images/wui/menus/objectives.png") ..  space() ..  objectives_header) ..
       text
 end

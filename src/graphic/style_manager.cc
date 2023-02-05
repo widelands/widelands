@@ -452,20 +452,22 @@ StyleManager::StyleManager() {
 	element_table = try_section_or_empty(lua, *table, section);
 	add_paragraph_style(UI::ParagraphStyle::kReadmeTitle, *element_table, "readme_title");
 	add_paragraph_style(UI::ParagraphStyle::kAboutTitle, *element_table, "about_title");
-	add_paragraph_style(UI::ParagraphStyle::kIngameSubtitle, *element_table, "ingame_subtitle");
+	add_paragraph_style(UI::ParagraphStyle::kAboutSubtitle, *element_table, "about_subtitle");
 	add_paragraph_style(UI::ParagraphStyle::kAuthorsHeading1, *element_table, "authors_heading_1");
-	add_paragraph_style(UI::ParagraphStyle::kIngameHeading1, *element_table, "ingame_heading_1");
+	add_paragraph_style(UI::ParagraphStyle::kFsHeading1, *element_table, "fs_heading_1");
+	add_paragraph_style(UI::ParagraphStyle::kFsHeading2, *element_table, "fs_heading_2");
+	add_paragraph_style(UI::ParagraphStyle::kFsHeading3, *element_table, "fs_heading_3");
+	add_paragraph_style(UI::ParagraphStyle::kFsHeading4, *element_table, "fs_heading_4");
+	add_paragraph_style(UI::ParagraphStyle::kFsText, *element_table, "fs_text");
 	add_paragraph_style(
-	   UI::ParagraphStyle::kIngameObjectivesHeading, *element_table, "ingame_objectives_heading");
-	add_paragraph_style(UI::ParagraphStyle::kIngameHeading2, *element_table, "ingame_heading_2");
-	add_paragraph_style(UI::ParagraphStyle::kIngameHeading3, *element_table, "ingame_heading_3");
-	add_paragraph_style(UI::ParagraphStyle::kIngameHeading4, *element_table, "ingame_heading_4");
-	add_paragraph_style(UI::ParagraphStyle::kIngameText, *element_table, "ingame_text");
-	add_paragraph_style(UI::ParagraphStyle::kIngameSparse, *element_table, "ingame_sparse");
-	add_paragraph_style(UI::ParagraphStyle::kIngameImageLine, *element_table, "ingame_image_line");
-	add_paragraph_style(UI::ParagraphStyle::kIngameLoreAuthor, *element_table, "ingame_lore_author");
-	add_paragraph_style(UI::ParagraphStyle::kAboutText, *element_table, "about_text");
-	add_paragraph_style(UI::ParagraphStyle::kAboutSparse, *element_table, "about_sparse");
+	   UI::ParagraphStyle::kWuiObjectivesHeading, *element_table, "wui_objectives_heading");
+	add_paragraph_style(UI::ParagraphStyle::kWuiHeading1, *element_table, "wui_heading_1");
+	add_paragraph_style(UI::ParagraphStyle::kWuiHeading2, *element_table, "wui_heading_2");
+	add_paragraph_style(UI::ParagraphStyle::kWuiHeading3, *element_table, "wui_heading_3");
+	add_paragraph_style(UI::ParagraphStyle::kWuiHeading4, *element_table, "wui_heading_4");
+	add_paragraph_style(UI::ParagraphStyle::kWuiText, *element_table, "wui_text");
+	add_paragraph_style(UI::ParagraphStyle::kWuiImageLine, *element_table, "wui_image_line");
+	add_paragraph_style(UI::ParagraphStyle::kWuiLoreAuthor, *element_table, "wui_lore_author");
 	add_paragraph_style(UI::ParagraphStyle::kUnknown, *element_table, "unknown");
 	check_completeness(
 	   "paragraphs", paragraphstyles_.size(), static_cast<size_t>(UI::ParagraphStyle::kUnknown));
@@ -505,12 +507,16 @@ StyleManager::StyleManager() {
 	// Sizes
 	section = "styled_sizes";
 	element_table = try_section_or_empty(lua, *table, section);
-	add_styled_size(UI::StyledSize::kTextDefaultGap, *element_table, "text_default_gap");
-	add_styled_size(UI::StyledSize::kTextSpaceBeforeInlineHeader, *element_table,
-	                "text_space_before_inline_header");
-	add_styled_size(UI::StyledSize::kIngameMessageGap, *element_table, "ingame_message_gap");
-	add_styled_size(UI::StyledSize::kIngameSpaceBeforeImmovableIcon, *element_table,
-	                "ingame_space_before_immovable_icon");
+	add_styled_size(UI::StyledSize::kFsTextDefaultGap, *element_table, "fs_text_default_gap");
+	add_styled_size(UI::StyledSize::kFsTextSpaceBeforeInlineHeader, *element_table,
+	                "fs_text_space_before_inline_header");
+	add_styled_size(UI::StyledSize::kWuiTextDefaultGap, *element_table, "wui_text_default_gap");
+	add_styled_size(UI::StyledSize::kWuiTextSpaceBeforeInlineHeader, *element_table,
+	                "wui_text_space_before_inline_header");
+	add_styled_size(UI::StyledSize::kWuiSpaceBeforeImmovableIcon, *element_table,
+	                "wui_space_before_immovable_icon");
+	add_styled_size(UI::StyledSize::kWinConditionMessageGap, *element_table,
+	                "win_condition_message_gap");
 	add_styled_size(UI::StyledSize::kHelpTerrainTreeHeaderSpaceBefore, *element_table,
 	                "help_terrain_tree_header_space_before");
 	add_styled_size(UI::StyledSize::kHelpTerrainTreeHeaderSpaceAfter, *element_table,

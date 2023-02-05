@@ -1,7 +1,7 @@
 include "scripting/richtext.lua"
 
 function p_sp(text)
-   return styles.as_paragraph("about_sparse", text)
+   return p(vspace() .. text)
 end
 
 push_textdomain("texts")

@@ -31,18 +31,29 @@ local wui_font_color = {255, 255, 0}
 local wui_font_face = "sans"
 local wui_font_size = 14
 
-local ingame_font_face = "sans"
+local fs_text_padding = 6
+local fs_text_space_before = 0
+local fs_text_space_after = fs_text_padding
+local fs_heading_space_before_big = 2 * fs_text_padding
+local fs_heading_space_before_small = fs_text_padding
+local fs_heading_space_after = 2 * fs_text_padding
+local fs_heading_color = {209, 209, 209}
 local about_title_color = {47, 145, 49}
-local ingame_heading_color = {209, 209, 209}
-local ingame_text_color = wui_font_color
-local ingame_padding = 6
-local ingame_text_space_before = 0
-local ingame_text_space_after = ingame_padding
-local ingame_heading_space_before_big = 2 * ingame_padding
-local ingame_heading_space_before_small = ingame_padding
-local ingame_heading_space_after = 2 * ingame_padding
 
+local wui_text_padding = 6
+local wui_text_space_before = 0
+local wui_text_space_after = wui_text_padding
+local wui_heading_space_before_big = 2 * wui_text_padding
+local wui_heading_space_before_small = wui_text_padding
+local wui_heading_space_after = 2 * wui_text_padding
+local wui_heading_color = {209, 209, 209}
 local campaign_leader_color = about_title_color
+
+local h1_font_size = 18
+local h2_font_size = 14
+local h3_font_size = 13
+local h4_font_size = 12
+local p_font_size = 12
 
 local unknown_font_color = {209, 45, 45}
 local unknown_font_face = "sans"
@@ -815,151 +826,171 @@ return {
          font = {
             color = about_title_color,
             -- should be "Widelands/Widelands.ttf", but it's not possible to pass font filename here
-            face = ingame_font_face,
+            face = fs_font_face,
             size = 38,
          },
          align = "center",
          valign = "center",
          space_before = 0,
-         space_after = ingame_text_space_after,
+         space_after = fs_text_space_after,
       },
       about_title = {
          font = {
             color = about_title_color,
-            face = ingame_font_face,
+            face = fs_font_face,
             size = 28,
          },
          align = "center",
-         space_before = ingame_text_space_before,
-         space_after = ingame_text_space_after,
+         space_before = fs_text_space_before,
+         space_after = fs_text_space_after,
       },
-      ingame_subtitle = {
+      about_subtitle = {
          font = {
-            color = ingame_heading_color,
-            face = ingame_font_face,
+            color = fs_heading_color,
+            face = fs_font_face,
             size = 14,
             italic = true,
          },
          align = "center",
-         space_before = ingame_text_space_before,
-         space_after = ingame_text_space_after,
+         space_before = fs_text_space_before,
+         space_after = fs_text_space_after,
       },
       authors_heading_1 = {
          font = {
             color = {244, 161, 49},
-            face = ingame_font_face,
+            face = fs_font_face,
             size = 24,
          },
-         space_before = ingame_heading_space_before_big,
-         space_after = ingame_heading_space_after,
+         space_before = fs_heading_space_before_big,
+         space_after = fs_heading_space_after,
       },
-      ingame_heading_1 = {
+      fs_heading_1 = {
          font = {
-            color = ingame_heading_color,
-            face = ingame_font_face,
-            size = 18,
+            color = fs_heading_color,
+            face = fs_font_face,
+            size = h1_font_size,
             bold = true,
          },
-         space_before = ingame_heading_space_before_big,
-         space_after = ingame_heading_space_after,
+         space_before = fs_heading_space_before_big,
+         space_after = fs_heading_space_after,
       },
-      ingame_objectives_heading = {
+      fs_heading_2 = {
          font = {
-            color = ingame_heading_color,
-            face = ingame_font_face,
-            size = 18,
+            color = fs_heading_color,
+            face = fs_font_face,
+            size = h2_font_size,
             bold = true,
          },
-         space_before = 3 * ingame_padding,
+         space_before = fs_heading_space_before_big,
+         space_after = fs_heading_space_after,
+      },
+      fs_heading_3 = {
+         font = {
+            color = fs_heading_color,
+            face = fs_font_face,
+            size = h3_font_size,
+         },
+         space_before = fs_heading_space_before_small,
+         space_after = fs_heading_space_after,
+      },
+      fs_heading_4 = {
+         font = {
+            color = fs_heading_color,
+            face = fs_font_face,
+            size = h4_font_size,
+            italic = true,
+         },
+         space_before = fs_text_space_before,
+         space_after = fs_text_space_after,
+      },
+      fs_text = {
+         font = {
+            color = fs_font_color,
+            face = fs_font_face,
+            size = p_font_size,
+         },
+         space_before = fs_text_space_before,
+         space_after = fs_text_space_after,
+      },
+      wui_objectives_heading = {
+         font = {
+            color = wui_heading_color,
+            face = wui_font_face,
+            size = h1_font_size,
+            bold = true,
+         },
+         space_before = 3 * wui_text_padding,
          space_after = 0,
          valign = "center",
       },
-      ingame_heading_2 = {
+      wui_heading_1 = {
          font = {
-            color = ingame_heading_color,
-            face = ingame_font_face,
-            size = 14,
+            color = wui_heading_color,
+            face = wui_font_face,
+            size = h1_font_size,
             bold = true,
          },
-         space_before = ingame_heading_space_before_big,
-         space_after = ingame_heading_space_after,
+         space_before = wui_heading_space_before_big,
+         space_after = wui_heading_space_after,
       },
-      ingame_heading_3 = {
+      wui_heading_2 = {
          font = {
-            color = ingame_heading_color,
-            face = ingame_font_face,
-            size = 13,
+            color = wui_heading_color,
+            face = wui_font_face,
+            size = h2_font_size,
+            bold = true,
          },
-         space_before = ingame_heading_space_before_small,
-         space_after = ingame_heading_space_after,
+         space_before = wui_heading_space_before_big,
+         space_after = wui_heading_space_after,
       },
-      ingame_heading_4 = {
+      wui_heading_3 = {
          font = {
-            color = ingame_heading_color,
-            face = ingame_font_face,
-            size = 12,
+            color = wui_heading_color,
+            face = wui_font_face,
+            size = h3_font_size,
+         },
+         space_before = wui_heading_space_before_small,
+         space_after = wui_heading_space_after,
+      },
+      wui_heading_4 = {
+         font = {
+            color = wui_heading_color,
+            face = wui_font_face,
+            size = h4_font_size,
             italic = true,
          },
-         space_before = ingame_text_space_before,
-         space_after = ingame_text_space_after,
+         space_before = wui_text_space_before,
+         space_after = wui_text_space_after,
       },
-      ingame_text = {
+      wui_text = {
          font = {
-            color = ingame_text_color,
-            face = ingame_font_face,
-            size = 12,
+            color = wui_font_color,
+            face = wui_font_face,
+            size = p_font_size,
          },
-         space_before = ingame_text_space_before,
-         space_after = ingame_text_space_after,
+         space_before = wui_text_space_before,
+         space_after = wui_text_space_after,
       },
-      ingame_sparse = {
+      wui_image_line = {
          font = {
-            color = ingame_text_color,
-            face = ingame_font_face,
-            size = 12,
+            color = wui_font_color,
+            face = wui_font_face,
+            size = p_font_size,
          },
-         space_before = ingame_text_space_before + ingame_padding,
-         space_after = ingame_text_space_after,
+         space_before = wui_text_space_before + wui_text_padding,
+         space_after = wui_text_space_after + wui_text_padding,
       },
-      ingame_image_line = {
+      wui_lore_author = {
          font = {
-            color = ingame_text_color,
-            face = ingame_font_face,
-            size = 12,
-         },
-         space_before = ingame_text_space_before + ingame_padding,
-         space_after = ingame_text_space_after + ingame_padding,
-      },
-      ingame_lore_author = {
-         font = {
-            color = ingame_text_color,
-            face = ingame_font_face,
+            color = wui_font_color,
+            face = wui_font_face,
             size = 10,
             italic = true,
          },
          align = "right",
-         space_before = ingame_text_space_before,
-         space_after = ingame_text_space_after + 3,
+         space_before = wui_text_space_before,
+         space_after = wui_text_space_after + 3,
       },
-      about_text = {
-         font = {
-            color = fs_font_color,
-            face = fs_font_face,
-            size = 12,
-         },
-         space_before = ingame_text_space_before,
-         space_after = ingame_text_space_after,
-      },
-      about_sparse = {
-         font = {
-            color = fs_font_color,
-            face = fs_font_face,
-            size = 12,
-         },
-         space_before = ingame_text_space_before + ingame_padding,
-         space_after = ingame_text_space_after,
-      },
-
 
       -- Returned when lookup by name fails.
       -- Make this stand out to help debugging
@@ -1011,10 +1042,12 @@ return {
    },
 
    styled_sizes = {
-      text_default_gap = ingame_padding,
-      text_space_before_inline_header = 8,
-      ingame_message_gap = 8,
-      ingame_space_before_immovable_icon = 14,
+      fs_text_default_gap = fs_text_padding,
+      fs_text_space_before_inline_header = 8,
+      wui_text_default_gap = wui_text_padding,
+      wui_text_space_before_inline_header = 8,
+      wui_space_before_immovable_icon = 14,
+      win_condition_message_gap = 8,
       help_terrain_tree_header_space_before = 12,
       help_terrain_tree_header_space_after = 3,
       editor_tooltip_icon_gap = 2,

@@ -83,10 +83,12 @@ enum class ColorStyle {
  **************************************************************************************/
 
 enum class StyledSize {
-	kTextDefaultGap,
-	kTextSpaceBeforeInlineHeader,
-	kIngameMessageGap,
-	kIngameSpaceBeforeImmovableIcon,
+	kFsTextDefaultGap,
+	kFsTextSpaceBeforeInlineHeader,
+	kWuiTextDefaultGap,
+	kWuiTextSpaceBeforeInlineHeader,
+	kWuiSpaceBeforeImmovableIcon,
+	kWinConditionMessageGap,
 	kHelpTerrainTreeHeaderSpaceBefore,
 	kHelpTerrainTreeHeaderSpaceAfter,
 	kEditorTooltipIconGap,

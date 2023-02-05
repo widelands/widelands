@@ -97,7 +97,7 @@ end
 --    :returns: the size of the default gap
 
 function default_gap()
-   return styles.get_size("text_default_gap")
+   return styles.get_size(_style_prefix_ .. "text_default_gap")
 end
 
 
@@ -140,12 +140,12 @@ end
 -- RST
 -- .. function:: msg_vspace()
 --
---    Adds a standard vertical space for in-game messages.
+--    Adds a standard vertical space for win condition status messages.
 --
---    :returns: a vspace tag with the standard gap size for in-game messages
+--    :returns: a vspace tag with the standard gap size
 
 function msg_vspace()
-   return vspace(styles.get_size("ingame_message_gap"))
+   return vspace(styles.get_size("win_condition_message_gap"))
 end
 
 -- RST
@@ -192,7 +192,42 @@ end
 --    :returns: A paragraph with text formatted as subtitle.
 
 function subtitle(text)
-   return styles.as_paragraph("ingame_subtitle", text)
+   return styles.as_paragraph("about_subtitle", text)
+end
+
+
+-- Variable to store current style for normal paragraphs
+if (_style_prefix_ == nil) then
+   _style_prefix_ = "wui_"
+end
+
+-- RST
+-- .. function:: set_fs_style(enable)
+--
+--    Change the style for text headings and normal paragraphs between the in-game and the main
+--    menu styles.
+--
+--    :arg enable: If evaluates to `true`, then the main menu text style will be used for normal
+--                 paragraphs, otherwise the in-game style.
+
+function set_fs_style(enable)
+   if enable then
+      _style_prefix_ = "fs_"
+   else
+      _style_prefix_ = "wui_"
+   end
+end
+
+
+-- RST
+-- .. function:: fs_color(text)
+--
+--    .. deprecated:: 1.2 Use `set_fs_style()` instead.
+--
+--    Returns the given text wrapped in a font tag for the
+--    default color that is used for texts in the main menu.
+function fs_color(text)
+   return "<font color=FFDC00>" .. text .. "</font>"
 end
 
 
@@ -210,7 +245,7 @@ function h1(text_or_color, text)
    else
       t = text_or_color
    end
-   return styles.as_paragraph("ingame_heading_1", t)
+   return styles.as_paragraph(_style_prefix_ .. "heading_1", t)
 end
 
 
@@ -222,7 +257,7 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h2(text)
-   return styles.as_paragraph("ingame_heading_2", text)
+   return styles.as_paragraph(_style_prefix_ .. "heading_2", text)
 end
 
 
@@ -234,7 +269,7 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h3(text)
-   return styles.as_paragraph("ingame_heading_3", text)
+   return styles.as_paragraph(_style_prefix_ .. "heading_3", text)
 end
 
 
@@ -246,42 +281,9 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h4(text)
-   return styles.as_paragraph("ingame_heading_4", text)
+   return styles.as_paragraph(_style_prefix_ .. "heading_4", text)
 end
 
-
--- Variable to store current style for normal paragraphs
-if (_p_style_ == nil) then
-   _p_style_ = "ingame_text"
-end
-
--- RST
--- .. function:: set_fs_style(enable)
---
---    Change the style for normal paragraphs between the in-game and the main menu styles.
---
---    :arg enable: If evaluates to `true`, then the main menu text style will be used for normal
---                 paragraphs, otherwise the in-game style.
-
-function set_fs_style(enable)
-   if enable then
-      _p_style_ = "about_text"
-   else
-      _p_style_ = "ingame_text"
-   end
-end
-
-
--- RST
--- .. function:: fs_color(text)
---
---    .. deprecated:: 1.2 Use `set_fs_style()` instead.
---
---    Returns the given text wrapped in a font tag for the
---    default color that is used for texts in the main menu.
-function fs_color(text)
-   return "<font color=FFDC00>" .. text .. "</font>"
-end
 
 -- RST
 -- .. function:: inline_header(header, text)
@@ -296,9 +298,11 @@ function inline_header(header, text)
    return
       -- TODO(tothxa): Could this be a paragraph style, or would it be confusing
       --               that only the heading font is defined in the style?
-      div("width=100%", vspace(styles.get_size("text_space_before_inline_header"))) ..
-      div("width=100%", styles.as_font_from_p("ingame_heading_3", header .. " ") ..
-      styles.as_font_from_p(_p_style_, text))
+      div("width=100%",
+          vspace(styles.get_size(_style_prefix_ .. "text_space_before_inline_header"))) ..
+      div("width=100%",
+          styles.as_font_from_p(_style_prefix_ .. "heading_3", header .. " ") ..
+          styles.as_font_from_p(_style_prefix_ .. "text", text))
 end
 
 
@@ -316,9 +320,9 @@ end
 
 function p(text_or_attributes, text)
    if text then
-      return styles.as_p_with_attr(_p_style_, text_or_attributes, text)
+      return styles.as_p_with_attr(_style_prefix_ .. "text", text_or_attributes, text)
    else
-      return styles.as_paragraph(_p_style_, text_or_attributes)
+      return styles.as_paragraph(_style_prefix_ .. "text", text_or_attributes)
    end
 end
 
@@ -337,9 +341,9 @@ end
 
 function open_p(attributes)
    if attributes then
-      return styles.open_p_with_attr(_p_style_, attributes)
+      return styles.open_p_with_attr(_style_prefix_ .. "text", attributes)
    else
-      return styles.open_p(_p_style_)
+      return styles.open_p(_style_prefix_ .. "text")
    end
 end
 
@@ -352,7 +356,7 @@ end
 --    :returns: The closing tags for a paragraph
 
 function close_p()
-   return styles.close_p(_p_style_)
+   return styles.close_p(_style_prefix_ .. "text")
 end
 
 
@@ -376,11 +380,12 @@ end
 
 function p_font(p_or_font_attributes, text_or_font_attributes, text)
    if text then
-      return styles.as_p_with_attr(_p_style_, p_or_font_attributes, font(text_or_font_attributes, text))
+      return p(p_or_font_attributes, font(text_or_font_attributes, text))
    else
-      return styles.as_p(_p_style_, font(p_or_font_attributes, text_or_font_attributes))
+      return p(font(p_or_font_attributes, text_or_font_attributes))
    end
 end
+
 
 -- RST
 -- :ref:`Return to index<richtext.lua>`

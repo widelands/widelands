@@ -14,8 +14,8 @@ include "scripting/help.lua"
 function consumed_items_line(text, images)
    return
       div("width=100%",
-         div("width=50%", styles.as_paragraph("ingame_sparse", text .. space())) ..
-         div("width=*", styles.as_p_with_attr("ingame_image_line", "align=right", images))
+         div("width=50%", p(vspace() .. text .. space())) ..
+         div("width=*", styles.as_p_with_attr("wui_image_line", "align=right", images))
       )
 end
 
@@ -67,7 +67,7 @@ function plot_size_line(size, size_only)
       end
       -- TRANSLATORS: Size of a map immovable
       if text ~= "" then
-         text = p(styles.as_font_from_p("ingame_heading_3", text))
+         text = p(styles.as_font_from_p("wui_heading_3", text))
       end
       return text
    else
@@ -96,7 +96,7 @@ function plot_size_line(size, size_only)
       end
    -- TRANSLATORS: Space on the map required for building a building there
       text = p(join_sentences(
-         styles.as_font_from_p("ingame_heading_3", _("Space required:")),
+         styles.as_font_from_p("wui_heading_3", _("Space required:")),
          text))
       return div("width=100%", div("float=right padding_l=" .. default_gap(), p(img(image)))) .. text
    end
@@ -126,7 +126,7 @@ function dependencies(items, text)
       images = images .. img("images/richtext/arrow-right.png") ..  img(v.icon_name)
    end
    return div("width=100%",
-              styles.as_paragraph("ingame_image_line", images .. space() .. text))
+              styles.as_paragraph("wui_image_line", images .. space() .. text))
 end
 
 

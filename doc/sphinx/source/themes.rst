@@ -295,19 +295,21 @@ The ``paragraphs`` table defines paragraph styles used mostly by the help texts 
 
 * **readme_title**: Used for the name of the game in the About window
 * **about_title**: Used for the titles of the tab pages in the About window
-* **ingame_subtitle**: Used for the subtitles in the tab pages in the About window
+* **about_subtitle**: Used for the subtitles in the tab pages in the About window
 * **authors_heading_1**: Used for level 1 headings in the Developers tab in the About window
-* **ingame_heading_1**: Used for level 1 headings
-* **ingame_objectives_heading**: Used in scenario message boxes for the titles of new objectives
-* **ingame_heading_2**: Used for level 2 headings
-* **ingame_heading_3**: Used for level 3 headings
-* **ingame_heading_4**: Used for level 4 headings
-* **ingame_text**: The default paragraph style
-* **ingame_sparse**: Paragraph style with increased padding between paragraphs
-* **ingame_image_line**: Used in the Encyclopedia helptexts for consumed items and dependencies
-* **ingame_lore_author**: Used for the lore author texts in the Encyclopedia
-* **about_text**: The default paragraph style in the About window
-* **about_sparse**: Paragraph style with increased padding between paragraphs in the About window
+* **fs_heading_1**: Used for level 1 headings in the main menu
+* **fs_heading_2**: Used for level 2 headings in the main menu
+* **fs_heading_3**: Used for level 3 headings in the main menu
+* **fs_heading_4**: Used for level 4 headings in the main menu
+* **fs_text**: The default paragraph style in the About window
+* **wui_objectives_heading**: Used in scenario message boxes for the titles of new objectives
+* **wui_heading_1**: Used for level 1 headings in-game/in-editor
+* **wui_heading_2**: Used for level 2 headings in-game/in-editor
+* **wui_heading_3**: Used for level 3 headings in-game/in-editor
+* **wui_heading_4**: Used for level 4 headings in-game/in-editor
+* **wui_text**: The default paragraph style in-game/in-editor
+* **wui_image_line**: Used in the Encyclopedia helptexts for consumed items and dependencies
+* **wui_lore_author**: Used for the lore author texts in the Encyclopedia
 * **unknown**: Used when a Lua script requests a paragraph style not included in this list
 
 colors
@@ -352,11 +354,12 @@ sizes
 
 The ``styled_sizes`` table contains integer values to be used for paddings and UI element sizes:
 
-* **text_default_gap**: Default size for extra separator spacing in texts
-* **text_space_before_inline_header**: Padding to be used above text lines containing an inline level 3 heading
-* **ingame_message_gap**: Padding between sections in status reports sent by win condition scripts
-* **ingame_space_before_objective**: Padding above new objective icon in scenario message boxes
-* **ingame_space_before_immovable_icon**: Padding above the icons of the immovables in the Immovable help in the Encyclopedia
+* **fs_text_default_gap**: Default size for extra separator spacing in texts in the About window
+* **fs_text_space_before_inline_header**: Padding to be used above text lines containing an inline level 3 heading in the About window
+* **wui_text_default_gap**: Default size for extra separator spacing in texts in-game and in-editor
+* **wui_text_space_before_inline_header**: Padding to be used above text lines containing an inline level 3 heading in-game and in-editor
+* **wui_space_before_immovable_icon**: Padding above the icons of the immovables in the Immovable help in the Encyclopedia
+* **win_condition_message_gap**: Padding between sections in status reports sent by win condition scripts
 * **help_terrain_tree_header_space_before**: Extra padding above the headers of tree and terrain help texts
 * **help_terrain_tree_header_space_after**: Extra padding below the headers of tree and terrain help texts
 * **editor_tooltip_icon_gap**: Gap between the terrain, immovable and animal icons in the editor tooltips
