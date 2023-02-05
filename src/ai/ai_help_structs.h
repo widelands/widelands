@@ -837,7 +837,7 @@ private:
 		           uint32_t land,
 		           uint32_t oland,
 		           uint32_t o60l,
-				   uint32_t ds);
+				   int32_t ds);
 
 		Widelands::TeamNumber team_number = 0U;
 		uint32_t players_power = 0U;
@@ -848,7 +848,7 @@ private:
 		uint32_t players_land = 0U;
 		uint32_t old_players_land = 0U;
 		uint32_t old60_players_land = 0U;
-		uint32_t players_diplomacy_score = 0U;
+		int32_t players_diplomacy_score = 0U;
 	};
 
 public:
@@ -865,7 +865,7 @@ public:
 	         uint32_t land,
 	         uint32_t oland,
 	         uint32_t o60l,
-	         uint32_t ds);
+	         int32_t ds);
 	void remove_stat(Widelands::PlayerNumber pn);
 	void recalculate_team_power();
 
@@ -881,7 +881,10 @@ public:
 	uint32_t get_enemies_average_power();
 	uint32_t get_enemies_average_land();
 	uint32_t get_enemies_max_power();
+	uint32_t get_max_power();
 	uint32_t get_enemies_max_land();
+	uint32_t get_max_land();
+	int32_t get_diplo_score(Widelands::PlayerNumber pn);
 	uint32_t get_old_visible_enemies_power(const Time&);
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
 	bool strong_enough(Widelands::PlayerNumber pl);

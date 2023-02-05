@@ -971,8 +971,8 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
                                          uint32_t cs,
                                          uint32_t land,
                                          uint32_t oland,
-                                         uint32_t o60l
-                                         uint32_t ds)
+                                         uint32_t o60l,
+                                         int32_t ds)
    : team_number(tc),
      players_power(pp),
      old_players_power(op),
@@ -1006,7 +1006,7 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            uint32_t land,
                            uint32_t oland,
                            uint32_t o60l,
-                           uint32_t ds) {
+                           int32_t ds) {
 	if (all_stats.count(opn) == 0) {
 		this_player_number = pn;
 		this_player_team = mytn;
@@ -1018,7 +1018,7 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 		all_stats[opn].players_casualities = cs;
 		all_stats[opn].players_land = land;
 		all_stats[opn].old_players_land = oland;
-		all_stats[opn].old60_players_land = o601;
+		all_stats[opn].old60_players_land = o60l;
 		all_stats[opn].players_diplomacy_score = ds;
 		assert(this_player_number == pn);
 		if (this_player_team != mytn) {
@@ -1122,6 +1122,14 @@ uint32_t PlayersStrengths::get_player_power(Widelands::PlayerNumber pn) {
 	return 0;
 }
 
+// This is the diplomatic score of a player
+int32_t PlayersStrengths::get_diplo_score(Widelands::PlayerNumber pn) {
+	if (all_stats.count(pn) > 0) {
+		return all_stats[pn].players_diplomacy_score;
+	}
+	return 0;
+}
+
 // This is the land size owned by player
 uint32_t PlayersStrengths::get_player_land(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
@@ -1188,6 +1196,22 @@ uint32_t PlayersStrengths::get_enemies_max_land() {
 		if (get_is_enemy(item.first)) {
 			land = std::max<uint32_t>(land, item.second.players_land);
 		}
+	}
+	return land;
+}
+
+uint32_t PlayersStrengths::get_max_power() {
+	uint32_t power = 0;
+	for (auto& item : all_stats) {
+		power = std::max<uint32_t>(power, item.second.players_power);
+	}
+	return power;
+}
+
+uint32_t PlayersStrengths::get_max_land() {
+	uint32_t land = 0;
+	for (auto& item : all_stats) {
+		land = std::max<uint32_t>(land, item.second.players_land);
 	}
 	return land;
 }
