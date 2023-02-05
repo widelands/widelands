@@ -837,7 +837,7 @@ private:
 		           uint32_t land,
 		           uint32_t oland,
 		           uint32_t o60l,
-				   int32_t ds);
+		           int32_t ds);
 
 		Widelands::TeamNumber team_number = 0U;
 		uint32_t players_power = 0U;

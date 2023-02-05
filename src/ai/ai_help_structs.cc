@@ -1010,7 +1010,8 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 	if (all_stats.count(opn) == 0) {
 		this_player_number = pn;
 		this_player_team = mytn;
-		all_stats.insert(std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l, ds)));
+		all_stats.insert(
+		   std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l, ds)));
 	} else {
 		all_stats[opn].players_power = pp;
 		all_stats[opn].old_players_power = op;
