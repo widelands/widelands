@@ -1,10 +1,14 @@
+# Automatically created by Widelands 1.2~git26046 (d454059@island_hopping_fix) Release
+
 [global]
 packet_version="1"
 map_w="192"
 map_h="192"
 nr_players="4"
-world="greenland"
 name=_"Island Hopping"
-author="SirVer,Nasenbaer"
+author="SirVer,Nasenbaer,hessenfarmer"
 descr=_"A special tournament in Atlantean culture is the so-called ‘Island Hopping’, where two or more groups try to reach the center island as fast as possible, to be the first erecting a castle on the top of the central mountain."
-tags="official,balanced"
+hint=
+theme="summer"
+tags="balanced,official"
+addons=

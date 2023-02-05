@@ -19,6 +19,7 @@
 #ifndef WL_GRAPHIC_TEXT_TEXTSTREAM_H
 #define WL_GRAPHIC_TEXT_TEXTSTREAM_H
 
+#include <cstdint>
 #include <string>
 
 namespace RT {

@@ -11729,445 +11729,445 @@ msgstr "Апулум"
 #: ../../data/tribes/initialization/empire/units.lua:2303
 msgctxt "warehousename"
 msgid "Aquæ Granni"
-msgstr ""
+msgstr "Акве Гранни"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2305
 msgctxt "warehousename"
 msgid "Aquæ Helveticæ"
-msgstr ""
+msgstr "Акве Гельветике"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2307
 msgctxt "warehousename"
 msgid "Aquæ Mattiacorum"
-msgstr ""
+msgstr "Акве Маттиакорум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2309
 msgctxt "warehousename"
 msgid "Aquæ Sulis"
-msgstr ""
+msgstr "Акве Сулис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2311
 msgctxt "warehousename"
 msgid "Aquileia"
-msgstr ""
+msgstr "Аквилея"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2313
 msgctxt "warehousename"
 msgid "Aquincum"
-msgstr ""
+msgstr "Аквинкум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2315
 msgctxt "warehousename"
 msgid "Aræ Flaviæ"
-msgstr ""
+msgstr "Аре Флавия"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2317
 msgctxt "warehousename"
 msgid "Argentoratum"
-msgstr ""
+msgstr "Аргенторатум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2319
 msgctxt "warehousename"
 msgid "Ariminum"
-msgstr ""
+msgstr "Ариминум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2321
 msgctxt "warehousename"
 msgid "Ascrivium"
-msgstr ""
+msgstr "Аскривиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2323
 msgctxt "warehousename"
 msgid "Asturica Augusta"
-msgstr ""
+msgstr "Астурика Августа"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2325
 msgctxt "warehousename"
 msgid "Atuatuca Tungrorum"
-msgstr ""
+msgstr "Атватука Тунгрорум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2327
 msgctxt "warehousename"
 msgid "Augusta Raurica"
-msgstr ""
+msgstr "Августа Раврика"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2329
 msgctxt "warehousename"
 msgid "Augusta Taurinorum"
-msgstr ""
+msgstr "Августа Тавринорум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2331
 msgctxt "warehousename"
 msgid "Augusta Treverorum"
-msgstr ""
+msgstr "Августа Треверорум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2333
 msgctxt "warehousename"
 msgid "Augusta Vindelicorum"
-msgstr ""
+msgstr "Августа Винделикорум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2335
 msgctxt "warehousename"
 msgid "Aurelia Aquensis"
-msgstr ""
+msgstr "Аврелия Аквенсис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2337
 msgctxt "warehousename"
 msgid "Aventicum"
-msgstr ""
+msgstr "Авентикум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2339
 msgctxt "warehousename"
 msgid "Belum"
-msgstr ""
+msgstr "Белум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2341
 msgctxt "warehousename"
 msgid "Biriciana"
-msgstr ""
+msgstr "Бирициана"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2343
 msgctxt "warehousename"
 msgid "Blestium"
-msgstr ""
+msgstr "Блестиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2345
 msgctxt "warehousename"
 msgid "Bonames"
-msgstr ""
+msgstr "Бонамес"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2347
 msgctxt "warehousename"
 msgid "Bonna"
-msgstr ""
+msgstr "Бонна"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2349
 msgctxt "warehousename"
 msgid "Bononia"
-msgstr ""
+msgstr "Бонония"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2351
 msgctxt "warehousename"
 msgid "Borbetomagus"
-msgstr ""
+msgstr "Борметомагус"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2353
 msgctxt "warehousename"
 msgid "Bovium"
-msgstr ""
+msgstr "Бовиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2355
 msgctxt "warehousename"
 msgid "Bracara Augusta"
-msgstr ""
+msgstr "Бракара Августа"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2357
 msgctxt "warehousename"
 msgid "Brigantium"
-msgstr ""
+msgstr "Бригантиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2359
 msgctxt "warehousename"
 msgid "Burgodunum"
-msgstr ""
+msgstr "Бургодунум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2361
 msgctxt "warehousename"
 msgid "Cæsaraugusta"
-msgstr ""
+msgstr "Цезаравгуста"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2363
 msgctxt "warehousename"
 msgid "Cæsarea"
-msgstr ""
+msgstr "Цезария"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2365
 msgctxt "warehousename"
 msgid "Cæsaromagus"
-msgstr ""
+msgstr "Цезаромагус"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2367
 msgctxt "warehousename"
 msgid "Calisia"
-msgstr ""
+msgstr "Калисия"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2369
 msgctxt "warehousename"
 msgid "Calleva Atrebatum"
-msgstr ""
+msgstr "Каллева Атребатум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2371
 msgctxt "warehousename"
 msgid "Camulodunum"
-msgstr ""
+msgstr "Камулодунум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2373
 msgctxt "warehousename"
 msgid "Carnuntum"
-msgstr ""
+msgstr "Карнунтум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2375
 msgctxt "warehousename"
 msgid "Castra Batavar"
-msgstr ""
+msgstr "Кастра Батавар"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2377
 msgctxt "warehousename"
 msgid "Castra Legionis"
-msgstr ""
+msgstr "Кастра Легионис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2379
 msgctxt "warehousename"
 msgid "Castra Regina"
-msgstr ""
+msgstr "Кастра Регина"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2381
 msgctxt "warehousename"
 msgid "Castra Vetera"
-msgstr ""
+msgstr "Кастра Ветера"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2383
 msgctxt "warehousename"
 msgid "Cibalæ"
-msgstr ""
+msgstr "Цибала"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2385
 msgctxt "warehousename"
 msgid "Clausentum"
-msgstr ""
+msgstr "Клавсентум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2387
 msgctxt "warehousename"
 msgid "Colonia Agrippina"
-msgstr ""
+msgstr "Колония Агриппина"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2389
 msgctxt "warehousename"
 msgid "Colonia Narbo Martius"
-msgstr ""
+msgstr "Колония Нарбо Мартиус"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2391
 msgctxt "warehousename"
 msgid "Colonia Ulpia Traiana"
-msgstr ""
+msgstr "Колония Ульпия Траяна"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2393
 msgctxt "warehousename"
 msgid "Comagenis"
-msgstr ""
+msgstr "Комагенис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2395
 msgctxt "warehousename"
 msgid "Complutum"
-msgstr ""
+msgstr "Сомплутум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2397
 msgctxt "warehousename"
 msgid "Concangis"
-msgstr ""
+msgstr "Конкангис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2399
 msgctxt "warehousename"
 msgid "Condate"
-msgstr ""
+msgstr "Кондата"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2401
 msgctxt "warehousename"
 msgid "Confloenta"
-msgstr ""
+msgstr "Конфлоэнта"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2403
 msgctxt "warehousename"
 msgid "Constantinopolis"
-msgstr ""
+msgstr "Константинополис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2405
 msgctxt "warehousename"
 msgid "Coria"
-msgstr ""
+msgstr "Кория"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2407
 msgctxt "warehousename"
 msgid "Corinium Dobunnorum"
-msgstr ""
+msgstr "Кориниум Добуннорум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2409
 msgctxt "warehousename"
 msgid "Coriovallum"
-msgstr ""
+msgstr "Кориоваллум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2411
 msgctxt "warehousename"
 msgid "Cosa"
-msgstr ""
+msgstr "Коза"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2413
 msgctxt "warehousename"
 msgid "Curia Rætorum"
-msgstr ""
+msgstr "Курия Реторум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2415
 msgctxt "warehousename"
 msgid "Danum"
-msgstr ""
+msgstr "Данум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2417
 msgctxt "warehousename"
 msgid "Deva Victrix"
-msgstr ""
+msgstr "Дева Виктрикс"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2419
 msgctxt "warehousename"
 msgid "Divodurum"
-msgstr ""
+msgstr "Диводурум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2421
 msgctxt "warehousename"
 msgid "Dubris"
-msgstr ""
+msgstr "Дубрис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2423
 msgctxt "warehousename"
 msgid "Durnovaria"
-msgstr ""
+msgstr "Дурновария"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2425
 msgctxt "warehousename"
 msgid "Durocobrivis"
-msgstr ""
+msgstr "Дурокобривис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2427
 msgctxt "warehousename"
 msgid "Durocornovium"
-msgstr ""
+msgstr "Дурокорновиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2429
 msgctxt "warehousename"
 msgid "Duroliponte"
-msgstr ""
+msgstr "Дуролипонта"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2431
 msgctxt "warehousename"
 msgid "Durovigutum"
-msgstr ""
+msgstr "Дуровигутум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2433
 msgctxt "warehousename"
 msgid "Eboracum"
-msgstr ""
+msgstr "Эборакум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2435
 msgctxt "warehousename"
 msgid "Emerita Augusta"
-msgstr ""
+msgstr "Эмерита Августа"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2437
 msgctxt "warehousename"
 msgid "Florentia"
-msgstr ""
+msgstr "Флоренция"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2439
 msgctxt "warehousename"
 msgid "Forum Hadriani"
-msgstr ""
+msgstr "Форум Гадриани"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2441
 msgctxt "warehousename"
 msgid "Forum Livii"
-msgstr ""
+msgstr "Форум Ливии"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2443
 msgctxt "warehousename"
 msgid "Gerulata"
-msgstr ""
+msgstr "Герулата"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2445
 msgctxt "warehousename"
 msgid "Gerunda"
-msgstr ""
+msgstr "Герунда"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2447
 msgctxt "warehousename"
 msgid "Gesoriacum"
-msgstr ""
+msgstr "Гезориакум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2449
 msgctxt "warehousename"
 msgid "Gorsium"
-msgstr ""
+msgstr "Горсиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2451
@@ -12179,13 +12179,13 @@ msgstr "Адрианополис"
 #: ../../data/tribes/initialization/empire/units.lua:2453
 msgctxt "warehousename"
 msgid "Isca Augusta"
-msgstr ""
+msgstr "Иска Августа"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2455
 msgctxt "warehousename"
 msgid "Isca Dumnoniorum"
-msgstr ""
+msgstr "Иска Думнониорум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2457
@@ -12197,61 +12197,61 @@ msgstr "Италика"
 #: ../../data/tribes/initialization/empire/units.lua:2459
 msgctxt "warehousename"
 msgid "Iulia Aemona"
-msgstr ""
+msgstr "Юлия Эмона"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2461
 msgctxt "warehousename"
 msgid "Iulia Romula Hispalis"
-msgstr ""
+msgstr "Юлия Ромула Хиспалис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2463
 msgctxt "warehousename"
 msgid "Iuvavum"
-msgstr ""
+msgstr "Ювавум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2465
 msgctxt "warehousename"
 msgid "Lactodurum"
-msgstr ""
+msgstr "Лактодурум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2467
 msgctxt "warehousename"
 msgid "Lagentium"
-msgstr ""
+msgstr "Лагентиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2469
 msgctxt "warehousename"
 msgid "Lauri"
-msgstr ""
+msgstr "Лаври"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2471
 msgctxt "warehousename"
 msgid "Lentia"
-msgstr ""
+msgstr "Лентия"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2473
 msgctxt "warehousename"
 msgid "Letocetum"
-msgstr ""
+msgstr "Летоцетум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2475
 msgctxt "warehousename"
 msgid "Lindinis"
-msgstr ""
+msgstr "Линдинис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2477
 msgctxt "warehousename"
 msgid "Lindum Colonia"
-msgstr ""
+msgstr "Линдум Колония"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2479
@@ -12263,67 +12263,67 @@ msgstr "Лондиний"
 #: ../../data/tribes/initialization/empire/units.lua:2481
 msgctxt "warehousename"
 msgid "Lopodunum"
-msgstr ""
+msgstr "Лоподунум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2483
 msgctxt "warehousename"
 msgid "Lousonna"
-msgstr ""
+msgstr "Лоусонна"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2485
 msgctxt "warehousename"
 msgid "Lucus Augusta"
-msgstr ""
+msgstr "Лукус Августа"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2487
 msgctxt "warehousename"
 msgid "Lugdunum"
-msgstr ""
+msgstr "Лугдунум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2489
 msgctxt "warehousename"
 msgid "Lugdunum Batavorum"
-msgstr ""
+msgstr "Лугдунум Батоворум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2491
 msgctxt "warehousename"
 msgid "Luguvalium"
-msgstr ""
+msgstr "Лугувалиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2493
 msgctxt "warehousename"
 msgid "Lutetia Parisiorum"
-msgstr ""
+msgstr "Лютеция Паризиорум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2495
 msgctxt "warehousename"
 msgid "Mamucium"
-msgstr ""
+msgstr "Мамуциум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2497
 msgctxt "warehousename"
 msgid "Marsonia"
-msgstr ""
+msgstr "Марсония"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2499
 msgctxt "warehousename"
 msgid "Massa"
-msgstr ""
+msgstr "Масса"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2501
 msgctxt "warehousename"
 msgid "Matilo"
-msgstr ""
+msgstr "Матило"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2503
@@ -12335,343 +12335,343 @@ msgstr "Медиолан"
 #: ../../data/tribes/initialization/empire/units.lua:2505
 msgctxt "warehousename"
 msgid "Modoetia"
-msgstr ""
+msgstr "Модоеция"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2507
 msgctxt "warehousename"
 msgid "Mogontiacum"
-msgstr ""
+msgstr "Магонтиакум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2509
 msgctxt "warehousename"
 msgid "Moridunum"
-msgstr ""
+msgstr "Моридунум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2511
 msgctxt "warehousename"
 msgid "Mursa"
-msgstr ""
+msgstr "Мурса"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2513
 msgctxt "warehousename"
 msgid "Naissus"
-msgstr ""
+msgstr "Наиссус"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2515
 msgctxt "warehousename"
 msgid "Nemausus"
-msgstr ""
+msgstr "Немавсус"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2517
 msgctxt "warehousename"
 msgid "Nicopolis ad Istrum"
-msgstr ""
+msgstr "Никополис ад Иструм"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2519
 msgctxt "warehousename"
 msgid "Nicopolis ad Nestum"
-msgstr ""
+msgstr "Никополис ад Нестум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2521
 msgctxt "warehousename"
 msgid "Nida"
-msgstr ""
+msgstr "Нида"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2523
 msgctxt "warehousename"
 msgid "Nigrum Pullum"
-msgstr ""
+msgstr "Нигрум Пуллум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2525
 msgctxt "warehousename"
 msgid "Norba Cæsarina"
-msgstr ""
+msgstr "Норба Цезарина"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2527
 msgctxt "warehousename"
 msgid "Novæ"
-msgstr ""
+msgstr "Нова"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2529
 msgctxt "warehousename"
 msgid "Novæsium"
-msgstr ""
+msgstr "Новазиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2531
 msgctxt "warehousename"
 msgid "Noviodunum"
-msgstr ""
+msgstr "Новиодунум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2533
 msgctxt "warehousename"
 msgid "Noviomagus"
-msgstr ""
+msgstr "Новиомагус"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2535
 msgctxt "warehousename"
 msgid "Olicana"
-msgstr ""
+msgstr "Оликана"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2537
 msgctxt "warehousename"
 msgid "Ovilava"
-msgstr ""
+msgstr "Овилава"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2539
 msgctxt "warehousename"
 msgid "Palma"
-msgstr ""
+msgstr "Пальма"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2541
 msgctxt "warehousename"
 msgid "Partiscum"
-msgstr ""
+msgstr "Партискум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2543
 msgctxt "warehousename"
 msgid "Pistoria"
-msgstr ""
+msgstr "Пистория"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2545
 msgctxt "warehousename"
 msgid "Placentia"
-msgstr ""
+msgstr "Плацентия"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2547
 msgctxt "warehousename"
 msgid "Poetovium"
-msgstr ""
+msgstr "Поэтовиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2549
 msgctxt "warehousename"
 msgid "Pomaria"
-msgstr ""
+msgstr "Помария"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2551
 msgctxt "warehousename"
 msgid "Pompælo"
-msgstr ""
+msgstr "Помпело"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2553
 msgctxt "warehousename"
 msgid "Pompeii"
-msgstr ""
+msgstr "Помпели"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2555
 msgctxt "warehousename"
 msgid "Pons Aelius"
-msgstr ""
+msgstr "Понс Элиус"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2557
 msgctxt "warehousename"
 msgid "Pons Drusi"
-msgstr ""
+msgstr "Понс Друзи"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2559
 msgctxt "warehousename"
 msgid "Portus Lemanis"
-msgstr ""
+msgstr "Портус Леманис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2561
 msgctxt "warehousename"
 msgid "Prætorium Agrippinæ"
-msgstr ""
+msgstr "Преториум Агриппина"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2563
 msgctxt "warehousename"
 msgid "Ragusium"
-msgstr ""
+msgstr "Рагузиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2565
 msgctxt "warehousename"
 msgid "Ratæ Corieltauvorum"
-msgstr ""
+msgstr "Рате Кориелтауворум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2567
 msgctxt "warehousename"
 msgid "Regium Lepidi"
-msgstr ""
+msgstr "Региум Лепиди"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2569
 msgctxt "warehousename"
 msgid "Regulbium"
-msgstr ""
+msgstr "Регулбиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2571
 msgctxt "warehousename"
 msgid "Rigomagus"
-msgstr ""
+msgstr "Ригомагус"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2573
 msgctxt "warehousename"
 msgid "Roma"
-msgstr ""
+msgstr "Рома"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2575
 msgctxt "warehousename"
 msgid "Rutupiæ"
-msgstr ""
+msgstr "Рутупия"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2577
 msgctxt "warehousename"
 msgid "Salernum"
-msgstr "Салерн"
+msgstr "Салернум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2579
 msgctxt "warehousename"
 msgid "Salona"
-msgstr ""
+msgstr "Салона"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2581
 msgctxt "warehousename"
 msgid "Savaria"
-msgstr ""
+msgstr "Савария"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2583
 msgctxt "warehousename"
 msgid "Scalabis"
-msgstr ""
+msgstr "Скалабис"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2585
 msgctxt "warehousename"
 msgid "Singidunum"
-msgstr ""
+msgstr "Сингидунум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2587
 msgctxt "warehousename"
 msgid "Sirmium"
-msgstr ""
+msgstr "Сирмиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2589
 msgctxt "warehousename"
 msgid "Siscia"
-msgstr ""
+msgstr "Сисция"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2591
 msgctxt "warehousename"
 msgid "Sopiane"
-msgstr ""
+msgstr "Сопиана"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2593
 msgctxt "warehousename"
 msgid "Sorviodurum"
-msgstr ""
+msgstr "Сорвиодурум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2595
 msgctxt "warehousename"
 msgid "Sostra"
-msgstr ""
+msgstr "Состра"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2597
 msgctxt "warehousename"
 msgid "Storgosia"
-msgstr ""
+msgstr "Сторгозия"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2599
 msgctxt "warehousename"
 msgid "Sumelocenna"
-msgstr ""
+msgstr "Сумелоценна"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2601
 msgctxt "warehousename"
 msgid "Tarraco"
-msgstr ""
+msgstr "Таррако"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2603
 msgctxt "warehousename"
 msgid "Theranda"
-msgstr ""
+msgstr "Теранда"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2605
 msgctxt "warehousename"
 msgid "Tibiscum"
-msgstr ""
+msgstr "Тибискум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2607
 msgctxt "warehousename"
 msgid "Traiectum"
-msgstr ""
+msgstr "Траектум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2609
 msgctxt "warehousename"
 msgid "Traiectum ad Mosam"
-msgstr ""
+msgstr "Траектум ад Мозам"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2611
 msgctxt "warehousename"
 msgid "Traiectum ad Nicrem"
-msgstr ""
+msgstr "Траектум ад Никрем"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2613
 msgctxt "warehousename"
 msgid "Turicum"
-msgstr ""
+msgstr "Турикум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2615
 msgctxt "warehousename"
 msgid "Urbs Aurelianorum"
-msgstr ""
+msgstr "Урбс Аурелианорум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2617
 msgctxt "warehousename"
 msgid "Valentia Edetanorum"
-msgstr ""
+msgstr "Валентия Эдетанорум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2619
@@ -12683,49 +12683,49 @@ msgstr "Венеция"
 #: ../../data/tribes/initialization/empire/units.lua:2621
 msgctxt "warehousename"
 msgid "Venta Belgarum"
-msgstr ""
+msgstr "Вента Белгарум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2623
 msgctxt "warehousename"
 msgid "Venta Silurum"
-msgstr ""
+msgstr "Вента Силурум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2625
 msgctxt "warehousename"
 msgid "Verulamium"
-msgstr ""
+msgstr "Веруламиум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2627
 msgctxt "warehousename"
 msgid "Vesontio"
-msgstr ""
+msgstr "Везонтио"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2629
 msgctxt "warehousename"
 msgid "Viminacium"
-msgstr ""
+msgstr "Виминациум"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2631
 msgctxt "warehousename"
 msgid "Vindobona"
-msgstr ""
+msgstr "Виндобона"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2633
 msgctxt "warehousename"
 msgid "Vindonissa"
-msgstr ""
+msgstr "Виндонисса"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
 #: ../../data/tribes/initialization/empire/units.lua:2635
 msgctxt "warehousename"
 msgid "Vinovia"
-msgstr ""
+msgstr "Виновия"
 
 #. TRANSLATORS: Productivity label on an empire building if there is 1 worker
 #. missing
@@ -14711,441 +14711,441 @@ msgstr "Ткацкая фабрика тратив в среднем %s на п�
 #: ../../data/tribes/initialization/frisians/units.lua:2210
 msgctxt "warehousename"
 msgid "Aalkersem"
-msgstr ""
+msgstr "Аалкерсем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2212
 msgctxt "warehousename"
 msgid "Äfkebel"
-msgstr ""
+msgstr "Эфкебель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2214
 msgctxt "warehousename"
 msgid "Ämelsbel"
-msgstr ""
+msgstr "Эмельсбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2216
 msgctxt "warehousename"
 msgid "A Nääs"
-msgstr ""
+msgstr "А Неэс"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2218
 msgctxt "warehousename"
 msgid "Ārichsem"
-msgstr ""
+msgstr "Арихсем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2220
 msgctxt "warehousename"
 msgid "Baamst"
-msgstr ""
+msgstr "Баамст"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2222
 msgctxt "warehousename"
 msgid "Beergem"
-msgstr ""
+msgstr "Беергем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2224
 msgctxt "warehousename"
 msgid "Borigsem"
-msgstr ""
+msgstr "Боригсем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2226
 msgctxt "warehousename"
 msgid "Bousbel"
-msgstr ""
+msgstr "Бусбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2228
 msgctxt "warehousename"
 msgid "Bräist"
-msgstr ""
+msgstr "Брейст"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2230
 msgctxt "warehousename"
 msgid "Bualigsem"
-msgstr ""
+msgstr "Буалигсем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2232
 msgctxt "warehousename"
 msgid "Deesbel"
-msgstr ""
+msgstr "Дизбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2234
 msgctxt "warehousename"
 msgid "Doogebel"
-msgstr ""
+msgstr "Дугебель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2236
 msgctxt "warehousename"
 msgid "Dunsem"
-msgstr ""
+msgstr "Дансем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2238
 msgctxt "warehousename"
 msgid "E Hoorne"
-msgstr ""
+msgstr "Э Хоорне"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2240
 msgctxt "warehousename"
 msgid "Emst"
-msgstr ""
+msgstr "Эмст"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2242
 msgctxt "warehousename"
 msgid "Fåålst"
-msgstr ""
+msgstr "Фоолст"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2244
 msgctxt "warehousename"
 msgid "Friedrichstääd"
-msgstr ""
+msgstr "Фридрихстад"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2246
 msgctxt "warehousename"
 msgid "Gaarding"
-msgstr ""
+msgstr "Гардинг"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2248
 msgctxt "warehousename"
 msgid "Haatst"
-msgstr ""
+msgstr "Хааст"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2250
 msgctxt "warehousename"
 msgid "Hoorbel"
-msgstr ""
+msgstr "Хорбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2252
 msgctxt "warehousename"
 msgid "Hoorst"
-msgstr ""
+msgstr "Хорст"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2254
 msgctxt "warehousename"
 msgid "Hörnem"
-msgstr ""
+msgstr "Хернем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2256
 msgctxt "warehousename"
 msgid "Hüsem"
-msgstr ""
+msgstr "Хусем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2258
 msgctxt "warehousename"
 msgid "Iibel"
-msgstr ""
+msgstr "Иибель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2260
 msgctxt "warehousename"
 msgid "Imensteed"
-msgstr ""
+msgstr "Именстид"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2262
 msgctxt "warehousename"
 msgid "Kååting"
-msgstr ""
+msgstr "Коатинг"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2264
 msgctxt "warehousename"
 msgid "Kairem"
-msgstr ""
+msgstr "Кайрем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2266
 msgctxt "warehousename"
 msgid "Klangsbel"
-msgstr ""
+msgstr "Клангсбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2268
 msgctxt "warehousename"
 msgid "Kläntem"
-msgstr ""
+msgstr "Клентем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2270
 msgctxt "warehousename"
 msgid "Klasbel"
-msgstr ""
+msgstr "Класбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2272
 msgctxt "warehousename"
 msgid "Kuurlem"
-msgstr ""
+msgstr "Курлем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2274
 msgctxt "warehousename"
 msgid "Läitjholem"
-msgstr ""
+msgstr "Ляйтжолем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2276
 msgctxt "warehousename"
 msgid "Madlem"
-msgstr ""
+msgstr "Мадлем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2278
 msgctxt "warehousename"
 msgid "Mälst"
-msgstr ""
+msgstr "Мелст"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2280
 msgctxt "warehousename"
 msgid "Mönkebel"
-msgstr ""
+msgstr "Менкебель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2282
 msgctxt "warehousename"
 msgid "Moosbel"
-msgstr ""
+msgstr "Мусбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2284
 msgctxt "warehousename"
 msgid "Muasem"
-msgstr ""
+msgstr "Муасем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2286
 msgctxt "warehousename"
 msgid "Naibel"
-msgstr ""
+msgstr "Наибель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2288
 msgctxt "warehousename"
 msgid "Neebel"
-msgstr ""
+msgstr "Небель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2290
 msgctxt "warehousename"
 msgid "Njiblem"
-msgstr ""
+msgstr "Нджиблем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2292
 msgctxt "warehousename"
 msgid "Noorst"
-msgstr ""
+msgstr "Норст"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2294
 msgctxt "warehousename"
 msgid "Olersem"
-msgstr ""
+msgstr "Олерсем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2296
 msgctxt "warehousename"
 msgid "Odenbel"
-msgstr ""
+msgstr "Оденбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2298
 msgctxt "warehousename"
 msgid "Ödersem"
-msgstr ""
+msgstr "Эдерсем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2300
 msgctxt "warehousename"
 msgid "Popenbel"
-msgstr ""
+msgstr "Попенбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2302
 msgctxt "warehousename"
 msgid "Raantem"
-msgstr ""
+msgstr "Раантем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2304
 msgctxt "warehousename"
 msgid "Reinsbel"
-msgstr ""
+msgstr "Рейнсбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2306
 msgctxt "warehousename"
 msgid "Rikesbel"
-msgstr ""
+msgstr "Рикесбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2308
 msgctxt "warehousename"
 msgid "Risem"
-msgstr ""
+msgstr "Рисем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2310
 msgctxt "warehousename"
 msgid "Seebel"
-msgstr ""
+msgstr "Сибель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2312
 msgctxt "warehousename"
 msgid "Snootebel"
-msgstr ""
+msgstr "Сноутебель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2314
 msgctxt "warehousename"
 msgid "Söleraanj"
-msgstr ""
+msgstr "Селераанж"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2316
 msgctxt "warehousename"
 msgid "Strükem"
-msgstr ""
+msgstr "Струкем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2318
 msgctxt "warehousename"
 msgid "Tååting"
-msgstr ""
+msgstr "Тоотинг"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2320
 msgctxt "warehousename"
 msgid "Taning"
-msgstr ""
+msgstr "Танинг"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2322
 msgctxt "warehousename"
 msgid "Teedenbel"
-msgstr ""
+msgstr "Тиденбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2324
 msgctxt "warehousename"
 msgid "Tinem"
-msgstr ""
+msgstr "Тинем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2326
 msgctxt "warehousename"
 msgid "Toorpem"
-msgstr ""
+msgstr "Тоорпем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2328
 msgctxt "warehousename"
 msgid "Ülwelsbel"
-msgstr ""
+msgstr "Ульвельсбель"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2330
 msgctxt "warehousename"
 msgid "Wiisem"
-msgstr ""
+msgstr "Вийсем"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2332
 msgctxt "warehousename"
 msgid "A Wik"
-msgstr ""
+msgstr "А Вик"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2334
 msgctxt "warehousename"
 msgid "Witjdün"
-msgstr ""
+msgstr "Витждун"
 
 #. TRANSLATORS: Productivity label on a frisian building if there is 1 worker
 #. missing

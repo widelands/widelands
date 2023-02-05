@@ -19,6 +19,7 @@
 #ifndef WL_BASE_TIME_STRING_H
 #define WL_BASE_TIME_STRING_H
 
+#include <cstdint>
 #include <string>
 
 /// Get a string representation conforming to ISO 8601 of the current time (in

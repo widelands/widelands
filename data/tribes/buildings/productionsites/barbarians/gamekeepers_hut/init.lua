@@ -54,8 +54,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 53 sec
             "callworker=release",
-            "sleep=duration:52s500ms"
+            "sleep=duration:53s"
          }
       },
    },
