@@ -6874,9 +6874,9 @@ void DefaultAI::update_player_stat(const Time& gametime) {
                             10 :
                             0;
 				inputs[0] = cur_land < player_statistics.get_max_land() &&
-				                   player_statistics.get_max_land() < cur_land + me_land ?
-                            5 :
-                            -5;
+				                  player_statistics.get_max_land() < cur_land + me_land ?
+                           5 :
+                           -5;
 
 				for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 					if (management_data.f_neuron_pool[28].get_position(i)) {
