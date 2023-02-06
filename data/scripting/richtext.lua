@@ -196,7 +196,7 @@ function subtitle(text)
 end
 
 
--- Variable to store current style for normal paragraphs
+-- Variable to store current style for text headings and normal paragraphs
 if (_style_prefix_ == nil) then
    _style_prefix_ = "wui_"
 end
@@ -296,8 +296,6 @@ end
 
 function inline_header(header, text)
    return
-      -- TODO(tothxa): Could this be a paragraph style, or would it be confusing
-      --               that only the heading font is defined in the style?
       div("width=100%",
           vspace(styles.get_size(_style_prefix_ .. "text_space_before_inline_header"))) ..
       div("width=100%",
