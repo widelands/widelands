@@ -6776,8 +6776,6 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 		const Widelands::Player* this_player = game().get_player(j);
 		if (this_player != nullptr) {
 			try {
-				const uint32_t vsize = genstats.at(j - 1).miltary_strength.size();
-
 				uint32_t cur_strength = 0;
 				uint32_t cur_land = 0;
 				uint32_t old_strength = 0;
@@ -6875,7 +6873,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				                   player_statistics.get_max_power() < cur_strength + me_strength ?
                             10 :
                             0;
-				inputs[32] = cur_land < player_statistics.get_max_land() &&
+				inputs[0] = cur_land < player_statistics.get_max_land() &&
 				                   player_statistics.get_max_land() < cur_land + me_land ?
                             5 :
                             -5;
