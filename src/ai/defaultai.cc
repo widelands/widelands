@@ -6806,82 +6806,85 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 
 				// determine the diplomacy score of each player
 				int32_t diplo_score = 0;
-				int16_t inputs[kFNeuronBitSize] = {0};
-				inputs[1] = RNG::static_rand(5) == 0 ? 2 : -2;
-				inputs[2] =
-				   RNG::static_rand(std::abs(management_data.get_military_number_at(181)) / 10) == 0 ?
-                  3 :
-                  -3;
-				inputs[3] = cur_strength > me_strength ? 2 : -1;
-				inputs[4] = cur_strength > old_strength ? 3 : -3;
-				inputs[5] = cur_strength > old60_strength ? 1 : -5;
-				inputs[6] = cur_land > me_land ? 2 : -1;
-				inputs[7] = cur_land > old60_land ? 1 : -5;
-				inputs[8] = cur_land > old_land ? 3 : -3;
-				inputs[9] = cur_strength > 2 * me_strength ? 5 : 0;
-				inputs[10] = cur_strength > 2 * old_strength ? 4 : -1;
-				inputs[11] = cur_strength > 2 * old60_strength ? 2 : -3;
-				inputs[12] = cur_land > 2 * me_land ? 4 : 0;
-				inputs[13] = cur_land > 2 * old60_land ? 2 : -4;
-				inputs[14] = cur_land > 2 * old_land ? 4 : -2;
-				inputs[15] =
-				   cur_strength +
-				            (cur_land / (std::abs(management_data.get_military_number_at(182)) / 10)) >
-				         me_strength +
-				            (me_land / (std::abs(management_data.get_military_number_at(182)) / 10)) ?
-                  5 :
-                  -5;
-				inputs[16] =
-				   cur_strength +
-				            (cur_land / (std::abs(management_data.get_military_number_at(183)) / 5)) >
-				         me_strength +
-				            (me_land / (std::abs(management_data.get_military_number_at(183)) / 5)) ?
-                  5 :
-                  -5;
-				inputs[17] =
-				   old_strength +
-				            (old_land / (std::abs(management_data.get_military_number_at(182)) / 10)) >
-				         me_old_strength +
-				            (me_old_land /
-				             (std::abs(management_data.get_military_number_at(182)) / 10)) ?
-                  2 :
-                  -2;
-				inputs[18] =
-				   old60_strength +
-				            (old60_land / (std::abs(management_data.get_military_number_at(184)) / 7)) >
-				         me_old60_strength +
-				            (me_old60_land /
-				             (std::abs(management_data.get_military_number_at(184)) / 7)) ?
-                  2 :
-                  -2;
-				inputs[19] = me_cass > cass ? 2 : -1;
-				inputs[20] = this_player->team_number() == 0 ? 7 : 0;
-				inputs[21] = this_player->team_number() == 0 ?
-                            (std::abs(management_data.get_military_number_at(185)) / 10) :
-                            0;
-				inputs[22] = 3;
-				inputs[23] = cur_strength >= player_statistics.get_max_power() ? -10 : 8;
-				inputs[24] = cur_land >= player_statistics.get_max_land() ? -4 : 1;
-				inputs[25] = player_statistics.get_diplo_score(j) > 0 ? 3 : 0;
-				inputs[26] = player_statistics.get_diplo_score(j) > 5 ? 3 : 0;
-				inputs[27] = cur_strength >= player_statistics.get_max_power() ?
-                            -(std::abs(management_data.get_military_number_at(197)) / 10) :
-                            (std::abs(management_data.get_military_number_at(197)) / 10);
-				inputs[28] = cur_land >= player_statistics.get_max_land() ? -7 : 2;
-				inputs[29] = gametime < Time((30 + RNG::static_rand(20)) * 60 * 1000) ? -5 : 0;
-				inputs[30] = gametime < Time((60 + RNG::static_rand(30)) * 60 * 1000) ? -5 : 0;
-				inputs[31] = cur_strength < player_statistics.get_max_power() &&
-				                   player_statistics.get_max_power() < cur_strength + me_strength ?
-                            10 :
-                            0;
-				inputs[0] = cur_land < player_statistics.get_max_land() &&
-				                  player_statistics.get_max_land() < cur_land + me_land ?
-                           5 :
-                           -5;
+				// we need to be sure all magic numbers have been initialized
+				if (gametime > 5000) {
+					int16_t inputs[kFNeuronBitSize] = {0};
+					inputs[1] = RNG::static_rand(5) == 0 ? 2 : -2;
+					inputs[2] =
+					   RNG::static_rand(std::abs(management_data.get_military_number_at(181)) / 10) == 0 ?
+			  3 :
+			  -3;
+					inputs[3] = cur_strength > me_strength ? 2 : -1;
+					inputs[4] = cur_strength > old_strength ? 3 : -3;
+					inputs[5] = cur_strength > old60_strength ? 1 : -5;
+					inputs[6] = cur_land > me_land ? 2 : -1;
+					inputs[7] = cur_land > old60_land ? 1 : -5;
+					inputs[8] = cur_land > old_land ? 3 : -3;
+					inputs[9] = cur_strength > 2 * me_strength ? 5 : 0;
+					inputs[10] = cur_strength > 2 * old_strength ? 4 : -1;
+					inputs[11] = cur_strength > 2 * old60_strength ? 2 : -3;
+					inputs[12] = cur_land > 2 * me_land ? 4 : 0;
+					inputs[13] = cur_land > 2 * old60_land ? 2 : -4;
+					inputs[14] = cur_land > 2 * old_land ? 4 : -2;
+					inputs[15] =
+					   cur_strength +
+						    (cur_land / (std::abs(management_data.get_military_number_at(182)) / 10)) >
+						 me_strength +
+						    (me_land / (std::abs(management_data.get_military_number_at(182)) / 10)) ?
+			  5 :
+			  -5;
+					inputs[16] =
+					   cur_strength +
+						    (cur_land / (std::abs(management_data.get_military_number_at(183)) / 5)) >
+						 me_strength +
+						    (me_land / (std::abs(management_data.get_military_number_at(183)) / 5)) ?
+			  5 :
+			  -5;
+					inputs[17] =
+					   old_strength +
+						    (old_land / (std::abs(management_data.get_military_number_at(182)) / 10)) >
+						 me_old_strength +
+						    (me_old_land /
+						     (std::abs(management_data.get_military_number_at(182)) / 10)) ?
+			  2 :
+			  -2;
+					inputs[18] =
+					   old60_strength +
+						    (old60_land / (std::abs(management_data.get_military_number_at(184)) / 7)) >
+						 me_old60_strength +
+						    (me_old60_land /
+						     (std::abs(management_data.get_military_number_at(184)) / 7)) ?
+			  2 :
+			  -2;
+					inputs[19] = me_cass > cass ? 2 : -1;
+					inputs[20] = this_player->team_number() == 0 ? 7 : 0;
+					inputs[21] = this_player->team_number() == 0 ?
+				    (std::abs(management_data.get_military_number_at(185)) / 10) :
+				    0;
+					inputs[22] = 3;
+					inputs[23] = cur_strength >= player_statistics.get_max_power() ? -10 : 8;
+					inputs[24] = cur_land >= player_statistics.get_max_land() ? -4 : 1;
+					inputs[25] = player_statistics.get_diplo_score(j) > 0 ? 3 : 0;
+					inputs[26] = player_statistics.get_diplo_score(j) > 5 ? 3 : 0;
+					inputs[27] = cur_strength >= player_statistics.get_max_power() ?
+				    -(std::abs(management_data.get_military_number_at(197)) / 10) :
+				    (std::abs(management_data.get_military_number_at(197)) / 10);
+					inputs[28] = cur_land >= player_statistics.get_max_land() ? -7 : 2;
+					inputs[29] = gametime < Time((30 + RNG::static_rand(20)) * 60 * 1000) ? -5 : 0;
+					inputs[30] = gametime < Time((60 + RNG::static_rand(30)) * 60 * 1000) ? -5 : 0;
+					inputs[31] = cur_strength < player_statistics.get_max_power() &&
+							   player_statistics.get_max_power() < cur_strength + me_strength ?
+				    10 :
+				    0;
+					inputs[0] = cur_land < player_statistics.get_max_land() &&
+							  player_statistics.get_max_land() < cur_land + me_land ?
+				   5 :
+				   -5;
 
-				for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
-					if (management_data.f_neuron_pool[28].get_position(i)) {
-						diplo_score += inputs[i];
+					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
+						if (management_data.f_neuron_pool[28].get_position(i)) {
+							diplo_score += inputs[i];
+						}
 					}
 				}
 
