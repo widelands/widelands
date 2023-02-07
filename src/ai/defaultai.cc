@@ -6842,7 +6842,8 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				   old_strength +
 				            (old_land / (std::abs(management_data.get_military_number_at(182)) / 10)) >
 				         me_old_strength +
-				            (me_old_land / (std::abs(management_data.get_military_number_at(182)) / 10)) ?
+				            (me_old_land /
+				             (std::abs(management_data.get_military_number_at(182)) / 10)) ?
                   2 :
                   -2;
 				inputs[18] =
