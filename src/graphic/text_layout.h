@@ -25,6 +25,7 @@
 #include "graphic/color.h"
 #include "graphic/styles/font_style.h"
 #include "graphic/styles/panel_styles.h"
+#include "graphic/styles/paragraph_style.h"
 #include "graphic/text/rendered_text.h"
 
 /**
@@ -41,7 +42,7 @@ int text_height(const UI::FontStyleInfo& style, float scale = 1.0f);
 int text_height(UI::FontStyle style, float scale = 1.0f);
 
 /**
- * Checks it the given string is RichText or not. Does not do validity checking.
+ * Checks if the given string is RichText or not. Does not do validity checking.
  */
 inline bool is_richtext(const std::string& text) {
 	return text.compare(0, 3, "<rt") == 0;
@@ -65,6 +66,9 @@ std::string as_richtext_paragraph(const std::string& text,
                                   const UI::FontStyleInfo& style,
                                   UI::Align align = UI::Align::kLeft);
 std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style);
+
+std::string as_font_tag(UI::FontStyle style, const std::string& text);
+std::string as_font_tag(const std::string& text, UI::FontStyle style);
 
 std::string as_listitem(const std::string&, UI::FontStyle style);
 
@@ -113,5 +117,24 @@ std::string as_content(const std::string& txt, UI::PanelStyle style);
 
 std::string
 as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey, UI::PanelStyle);
+
+/// Insert vertical space. Returns an empty string if gap is zero or negative.
+[[nodiscard]] std::string as_vspace(int gap);
+
+/// Format 'text' with paragraph style 'style'
+std::string as_paragraph_style(UI::ParagraphStyle style, const std::string& text);
+
+/// Format 'text' with paragraph style 'style' with optional 'attributes' to be included
+/// in the paragraph tag. (Font attributes can be changed in a nested font tag.)
+std::string as_paragraph_style(UI::ParagraphStyle style,
+                               const std::string& attributes,
+                               const std::string& text);
+
+/// Return opening paragraph and font tags for formatting with paragraph style 'style'.
+/// The optional 'attributes' will be included in the paragraph tag.
+std::string open_paragraph_style(UI::ParagraphStyle style, const std::string& attributes = "");
+
+/// Return closing font and paragraph tags for formatting as plain paragraph.
+std::string close_paragraph_style(UI::ParagraphStyle style);
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_LAYOUT_H

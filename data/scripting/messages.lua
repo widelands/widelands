@@ -155,14 +155,14 @@ end
 function campaign_message_box(message, sleeptime)
    message.show_instantly = message.show_instantly or false
    message.scroll_back = message.scroll_back or false
-   message.h = message.h or 400
-   message.w = message.w or 450
+   message.h = message.h or styles.get_size("campaign_message_box_default_h")
+   message.w = message.w or styles.get_size("campaign_message_box_default_w")
 
    if message.position then
       local window = wl.ui.MapView()
       if string.find(message.position,"top") then
          -- Set it a bit lower than 0 to prevent overlap with top texts
-         message.posy = 25
+         message.posy = styles.get_size("campaign_message_box_top_pos_y")
       elseif string.find(message.position, "bottom") then
          message.posy = window.height - message.h
       else
@@ -203,6 +203,42 @@ function campaign_message_box(message, sleeptime)
    end
 
    if sleeptime then sleep(sleeptime) end
+end
+
+
+-- RST
+-- .. function:: messagebox_h_step(steps)
+--
+--    Helper function to get a height for a messagebox that is changed relative to the default
+--    in a way that can still follow the scaling of themes.
+--
+--    :arg steps: The number of steps by which to increase or decrease the height
+--    :type steps: signed int
+
+function messagebox_h_step(steps)
+   local rv = styles.get_size("campaign_message_box_default_h") +
+              steps * styles.get_size("campaign_message_box_size_step")
+   rv = math.max(rv, styles.get_size("campaign_message_box_h_min"))
+   rv = math.min(rv, styles.get_size("campaign_message_box_h_max"))
+   return rv
+end
+
+
+-- RST
+-- .. function:: messagebox_w_step(steps)
+--
+--    Helper function to get a width for a messagebox that is changed relative to the default
+--    in a way that can still follow the scaling of themes.
+--
+--    :arg steps: The number of steps by which to increase or decrease the width
+--    :type steps: signed int
+
+function messagebox_w_step(steps)
+   local rv = styles.get_size("campaign_message_box_default_w") +
+              steps * styles.get_size("campaign_message_box_size_step")
+   rv = math.max(rv, styles.get_size("campaign_message_box_w_min"))
+   rv = math.min(rv, styles.get_size("campaign_message_box_w_max"))
+   return rv
 end
 
 
@@ -261,12 +297,9 @@ function new_objectives(...)
    pop_textdomain()
 
    return
-      div("width=100%",
-         vspace(18) ..
-         div("float=left padding_r=6", p(img("images/wui/menus/objectives.png"))) ..
-         p_font("", "size=18 bold=1 color=D1D1D1",  vspace(6) .. objectives_header) ..
-         vspace(1) .. text
-      )
+      styles.as_paragraph("wui_objectives_heading",
+         img("images/wui/menus/objectives.png") ..  space() ..  objectives_header) ..
+      text
 end
 
 

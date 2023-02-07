@@ -3,13 +3,13 @@
 -- =========================
 
 function reebaud(title, text)
-   return speech("map:reebaud.png", "55BB55", title, text)
+   return speech("map:reebaud.png", styles.color("campaign_fri_reebaud"), title, text)
 end
 function hauke(title, text)
-   return speech("map:hauke.png", "7799BB", title, text)
+   return speech("map:hauke.png", styles.color("campaign_fri_hauke"), title, text)
 end
 function murilius(title, text)
-   return speech("map:murilius.png", "BB7755", title, text)
+   return speech("map:murilius.png", styles.color("campaign_fri_murilius"), title, text)
 end
 
 -- =======================================================================
@@ -324,6 +324,8 @@ supply_murilius_9 = {
       .. new_objectives(obj_scout),
 }
 
+local indent = styles.get_size("campaign_fri02_poem_indent")
+
 expansion_hint = {
    title =_("The Scout Discovered Something"),
    body=hauke(_("Our scout returned"),
@@ -331,16 +333,16 @@ expansion_hint = {
       _([[Chieftain Reebaud! Our scout just returned. He has found a poem in the strange tongue this Proconsul speaks. With some difficulty, I have translated it into our language. If I did not mistranslate, it runs as follows:]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
-      space(10) .. (_([[How many sites where soldiers stay,]]))
+      space(indent) .. (_([[How many sites where soldiers stay,]]))
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
-      space(10) .. (_([[How many sites where thou hold’st sway,]]))
+      space(indent) .. (_([[How many sites where thou hold’st sway,]]))
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
-      space(10) .. (_([[Though not their whereabouts sees he]]))
+      space(indent) .. (_([[Though not their whereabouts sees he]]))
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
-      space(10) .. (_([[Who’s ordering around here thee!]]))
+      space(indent) .. (_([[Who’s ordering around here thee!]]))
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Expansion hint
       _([[I don’t know what it means, but I’m sure it’s important. Perhaps you can make some sense of it.]]))

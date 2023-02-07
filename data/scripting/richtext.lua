@@ -90,32 +90,63 @@ end
 
 
 -- RST
--- .. function:: space(gap)
+-- .. function:: default_gap()
+--
+--    Looks up the size of the default gap in the style library.
+--
+--    :returns: the size of the default gap
+
+function default_gap()
+   return styles.get_size(_style_prefix_ .. "text_default_gap")
+end
+
+
+-- RST
+-- .. function:: space([gap])
 --
 --    Adds a horizontal space
 --
 --    :arg gap: the size of the space as pixels.
+--              If omitted, the default gap size will be used.
 --
 --    :returns: a space tag
 
 function space(gap)
+   if gap == nil then
+      gap = default_gap()
+   end
    return "<space gap="..gap..">"
 end
 
 
 -- RST
--- .. function:: vspace(gap)
+-- .. function:: vspace([gap])
 --
 --    Adds a vertical space
 --
 --    :arg gap: the size of the space as pixels.
+--              If omitted, the default gap size will be used.
 --
 --    :returns: a vspace tag
 
 function vspace(gap)
+   if gap == nil then
+      gap = default_gap()
+   end
    return "<vspace gap="..gap..">"
 end
 
+
+-- RST
+-- .. function:: msg_vspace()
+--
+--    Adds a standard vertical space for win condition status messages.
+--
+--    :returns: a vspace tag with the standard gap size
+
+function msg_vspace()
+   return vspace(styles.get_size("win_condition_message_gap"))
+end
 
 -- RST
 -- :ref:`Return to index<richtext.lua>`
@@ -129,13 +160,74 @@ end
 -- RST
 -- .. function:: title(font_face, text)
 --
+--    Returns a paragraph formatted as a title heading. Use this only for the
+--    name of the game.
+--
+--    :returns: A paragraph with text formatted as title.
+
+function title(font_face, text)
+   return styles.as_paragraph("readme_title", font("face=".. font_face, text))
+end
+
+
+-- RST
+-- .. function:: pagetitle(text)
+--
 --    Returns a paragraph formatted as a title heading. Use this on the top of
 --    your document only.
 --
 --    :returns: A paragraph with text formatted as title.
 
-function title(font_face, text)
-   return p_font("align=center", "size=38 face=".. font_face .. " color=2F9131", text)
+function pagetitle(text)
+   return styles.as_paragraph("about_title", text)
+end
+
+
+-- RST
+-- .. function:: subtitle(text)
+--
+--    Returns a paragraph formatted as a subtitle under a title heading.
+--    Use this only after title() or pagetitle().
+--
+--    :returns: A paragraph with text formatted as subtitle.
+
+function subtitle(text)
+   return styles.as_paragraph("about_subtitle", text)
+end
+
+
+-- Variable to store current style for text headings and normal paragraphs
+if (_style_prefix_ == nil) then
+   _style_prefix_ = "wui_"
+end
+
+-- RST
+-- .. function:: set_fs_style(enable)
+--
+--    Change the style for text headings and normal paragraphs between the in-game and the main
+--    menu styles.
+--
+--    :arg enable: If evaluates to `true`, then the main menu text style will be used for normal
+--                 paragraphs, otherwise the in-game style.
+
+function set_fs_style(enable)
+   if enable then
+      _style_prefix_ = "fs_"
+   else
+      _style_prefix_ = "wui_"
+   end
+end
+
+
+-- RST
+-- .. function:: fs_color(text)
+--
+--    .. deprecated:: 1.2 Use `set_fs_style()` instead.
+--
+--    Returns the given text wrapped in a font tag for the
+--    default color that is used for texts in the main menu.
+function fs_color(text)
+   return "<font color=FFDC00>" .. text .. "</font>"
 end
 
 
@@ -147,11 +239,13 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h1(text_or_color, text)
+   local t
    if text then
-      return p_font("", "size=18 bold=1 color=".. text_or_color, vspace(12) .. text .. vspace(1))
+      t = font("color=".. text_or_color, text)
    else
-      return p_font("", "size=18 bold=1 color=D1D1D1", vspace(12) .. text_or_color .. vspace(1))
+      t = text_or_color
    end
+   return styles.as_paragraph(_style_prefix_ .. "heading_1", t)
 end
 
 
@@ -163,7 +257,7 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h2(text)
-   return p_font("", "size=14 bold=1 color=D1D1D1", vspace(12) .. text .. vspace(1))
+   return styles.as_paragraph(_style_prefix_ .. "heading_2", text)
 end
 
 
@@ -175,7 +269,7 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h3(text)
-   return p_font("", "size=13 color=D1D1D1", vspace(6) .. text .. vspace(1))
+   return styles.as_paragraph(_style_prefix_ .. "heading_3", text)
 end
 
 
@@ -187,7 +281,7 @@ end
 --    :returns: A paragraph with text formatted as heading.
 
 function h4(text)
-   return p_font("", "size=12 italic=1 color=D1D1D1", text)
+   return styles.as_paragraph(_style_prefix_ .. "heading_4", text)
 end
 
 
@@ -202,9 +296,11 @@ end
 
 function inline_header(header, text)
    return
-      div("width=100%", vspace(8)) ..
-      div("width=100%", font("size=13 color=D1D1D1", header .. " ") ..
-      font("size=12", text))
+      div("width=100%",
+          vspace(styles.get_size(_style_prefix_ .. "text_space_before_inline_header"))) ..
+      div("width=100%",
+          styles.as_font_from_p(_style_prefix_ .. "heading_3", header .. " ") ..
+          styles.as_font_from_p(_style_prefix_ .. "text", text))
 end
 
 
@@ -222,20 +318,10 @@ end
 
 function p(text_or_attributes, text)
    if text then
-      return open_p(text_or_attributes) .. text .. close_p()
+      return styles.as_p_with_attr(_style_prefix_ .. "text", text_or_attributes, text)
    else
-      return open_p() .. text_or_attributes .. close_p()
+      return styles.as_paragraph(_style_prefix_ .. "text", text_or_attributes)
    end
-end
-
-
--- RST
--- .. function:: fs_color(text)
---
---    Returns the given text wrapped in a font tag for the
---    default color that is used for texts in the main menu.
-function fs_color(text)
-   return "<font color=FFDC00>" .. text .. "</font>"
 end
 
 
@@ -253,22 +339,22 @@ end
 
 function open_p(attributes)
    if attributes then
-      return ("<p %s>"):format(attributes) .. "<font size=12>"
+      return styles.open_p_with_attr(_style_prefix_ .. "text", attributes)
    else
-      return "<p><font size=12>"
+      return styles.open_p(_style_prefix_ .. "text")
    end
 end
 
 
 -- RST
--- .. function:: close_p(t)
+-- .. function:: close_p()
 --
 --    Closes a paragraph.
 --
 --    :returns: The closing tags for a paragraph
 
-function close_p(t)
-   return vspace(6) .. "</font>" .. vspace(6)  .. "</p>"
+function close_p()
+   return styles.close_p(_style_prefix_ .. "text")
 end
 
 
@@ -292,11 +378,12 @@ end
 
 function p_font(p_or_font_attributes, text_or_font_attributes, text)
    if text then
-      return ("<p %s>"):format(p_or_font_attributes) .. "<font " .. text_or_font_attributes .. ">" .. text .. close_p()
+      return p(p_or_font_attributes, font(text_or_font_attributes, text))
    else
-      return "<p><font " .. p_or_font_attributes .. ">" .. text_or_font_attributes .. close_p()
+      return p(font(p_or_font_attributes, text_or_font_attributes))
    end
 end
+
 
 -- RST
 -- :ref:`Return to index<richtext.lua>`
@@ -321,7 +408,6 @@ end
 function font(attributes, text)
    return ("<font %s>"):format(attributes) .. text .. "</font>"
 end
-
 
 -- RST
 -- .. function:: b(text)
@@ -399,11 +485,16 @@ end
 --    :returns: a p tag containing the formatted text
 
 function li(text_or_symbol, text)
+   local symbol
+   local t
    if text then
-      return div(p(text_or_symbol)) .. div(p(space(6))) .. div("width=*", p(text .. vspace(6)))
+      symbol = text_or_symbol
+      t = text
    else
-      return div(p("•")) .. div(p(space(6))) .. div("width=*", p(text_or_symbol .. vspace(6)))
+      symbol ="•"
+      t = text_or_symbol
    end
+   return div(p(symbol)) .. div(p(space())) .. div("width=*", p(t .. vspace()))
 end
 
 
@@ -437,7 +528,7 @@ end
 function li_image(imagepath, text)
    return
       div("width=100%",
-         div("float=left padding_r=6", p(img(imagepath))) ..
+         div("float=left padding_r=" .. default_gap(), p(img(imagepath))) ..
          p(text)
       )
 end
@@ -465,7 +556,7 @@ function li_object(name, text, playercolor)
    end
    return
       div("width=100%",
-         div("float=left padding_r=6", p(image)) ..
+         div("float=left padding_r=" .. default_gap(), p(image)) ..
          p(text)
       )
 end
@@ -659,5 +750,9 @@ end
 --    :scale: 100
 --    :alt: sample rendering
 --    :align: center
+--
+-- Please try to avoid hardcoding colors and non-default spacing and sizes. Best practice is to use
+-- `styles.color()` to get color values and `styles.get_size()` to get values for spacing and
+-- other sizes from the style manager whenever possible.
 --
 -- :ref:`Return to index<richtext.lua>`

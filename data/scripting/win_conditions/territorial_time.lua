@@ -68,7 +68,7 @@ local r = {
             else
                msg = msg .. format_remaining_time(remaining_time_minutes)
             end
-            msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
+            msg = msg .. msg_vspace() .. game_status.body .. territory_status(fields, "has")
             send_to_inbox(player, game_status.title, msg, {popup = show_popup})
          end
          pop_textdomain()
@@ -81,7 +81,7 @@ local r = {
          while game.time <= ((max_time - 5) * 60 * 1000) and count_factions(plrs) > 1 and territory_points.remaining_time > 0 do
             remaining_time, show_popup = notification_remaining_time(max_time, remaining_time)
             if territory_points.remaining_time == 1201 then
-               msg = format_remaining_time(remaining_time) .. vspace(8) .. game_status.body .. territory_status(fields, "has")
+               msg = format_remaining_time(remaining_time) .. msg_vspace() .. game_status.body .. territory_status(fields, "has")
                broadcast(plrs, game_status.title, msg, {popup = show_popup})
             end
          end
