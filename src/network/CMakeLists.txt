@@ -47,10 +47,11 @@ wl_library(network
     base_math
     base_md5
     base_random
+    base_time_string
     build_info
     chat
     game_io
-    graphic_image_cache
+    graphic
     io_fileread
     io_filesystem
     io_stream

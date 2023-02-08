@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2023
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -297,6 +297,17 @@ msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
 msgstr "Claus un Henneke Lembeck sünd uplest im Noorden ankomen. Aver könen se Reebaud övertügen, hüm Hülp to schicken?"
+
+#: ../../data/campaigns/fri05.wmf/elemental:8
+msgid "Reconquest"
+msgstr "Dat Torüggnehmen"
+
+#: ../../data/campaigns/fri05.wmf/elemental:10
+msgid ""
+"Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
+"for battle against the invaders. They must gather allies and plan their "
+"strategy, but the foe is never far away…"
+msgstr "Uplest torügg in Noordfreeskland bereiden sik Claus, Henneke un Reebaud up de Slacht tegen de Indringers vör. Se mutten Frünnen finnen un hör Taktik planen, aver de Feind is nie wied weg …"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -714,11 +725,11 @@ msgid ""
 "long, long way to conquere all the islands. Good luck!"
 msgstr ">Waar is dat? Dusend Mielen vun hier.< [Porgy un Bess] Du muttst wied, wied gahn, um all de Inseln intonehmen. Vööl Glück!"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:8
 msgid "Island Hopping"
 msgstr "Insel-Jumpen"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:9
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:10
 msgid ""
 "A special tournament in Atlantean culture is the so-called ‘Island Hopping’,"
 " where two or more groups try to reach the center island as fast as "

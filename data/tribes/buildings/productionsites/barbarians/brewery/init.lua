@@ -37,9 +37,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because ...
          descname = _("brewing strong beer"),
          actions = {
+            -- time total: 30.4 + 30 + 3.6 = 64 sec
             "return=skipped unless economy needs beer_strong",
             "consume=water wheat",
-            "sleep=duration:30s",
+            "sleep=duration:30s400ms",
             "animate=working duration:30s",
             "produce=beer_strong"
          }

@@ -81,7 +81,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      include_addon_maps_(addons) {
 
 	g_fs->ensure_directory_exists(basedir_);
-	curdir_ = basedir_;
+	curdir_ = {basedir_};
 
 	main_box_.add(&table_and_details_box_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(padding_);
@@ -121,7 +121,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	display_mode_.selected.connect([this]() { fill_table(); });
 	table_.cancel.connect([this]() { die(); });
 
-	move_to_top();
+	set_flag(UI::Panel::pf_always_on_top, true);
 }
 
 bool MainMenuLoadOrSaveMap::compare_players(uint32_t rowa, uint32_t rowb) {
@@ -148,20 +148,26 @@ void MainMenuLoadOrSaveMap::layout() {
 /**
  * fill the file list
  */
+// TODO(Nordfriese): Code duplication with FsMenu::MapSelect::fill_table
 void MainMenuLoadOrSaveMap::fill_table() {
 	table_.clear();
 	maps_data_.clear();
 
 	//  Fill it with all files we find.
-	FilenameSet files = g_fs->list_directory(curdir_);
+	assert(!curdir_.empty());
+	FilenameSet files;
+	for (const std::string& dir : curdir_) {
+		FilenameSet f = g_fs->list_directory(dir);
+		files.insert(f.begin(), f.end());
+	}
 
 	// If we are not at the top of the map directory hierarchy (we're not talking
 	// about the absolute filesystem top!) we manually add ".."
-	if (curdir_ != basedir_) {
-		maps_data_.push_back(MapData::create_parent_dir(curdir_));
+	if (curdir_.at(0) != basedir_) {
+		maps_data_.push_back(MapData::create_parent_dir(curdir_.at(0)));
 	} else {
 		if (files.empty()) {
-			maps_data_.push_back(MapData::create_empty_dir(curdir_));
+			maps_data_.push_back(MapData::create_empty_dir(curdir_.at(0)));
 		}
 		// In the toplevel directory we also need to include add-on maps –
 		// but only in the load screen, not in the save screen!
@@ -213,7 +219,20 @@ void MainMenuLoadOrSaveMap::fill_table() {
 			if ((strcmp(fs_filename, ".") == 0) || (strcmp(fs_filename, "..") == 0)) {
 				continue;
 			}
-			maps_data_.push_back(MapData::create_directory(mapfilename));
+
+			MapData new_md = MapData::create_directory(mapfilename);
+			bool found = false;
+			for (MapData& md : maps_data_) {
+				if (md.maptype == MapData::MapType::kDirectory &&
+				    md.localized_name == new_md.localized_name) {
+					found = true;
+					md.add(new_md);
+					break;
+				}
+			}
+			if (!found) {
+				maps_data_.push_back(new_md);
+			}
 		}
 	}
 

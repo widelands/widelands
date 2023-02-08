@@ -19,6 +19,7 @@
 #ifndef WL_LOGIC_GENERIC_SAVE_HANDLER_H
 #define WL_LOGIC_GENERIC_SAVE_HANDLER_H
 
+#include <cstdint>
 #include <functional>
 
 #include "io/filesystem/filesystem.h"

@@ -12,7 +12,7 @@ scold_player = {
       p(_([[I am sorry, but will I have to tear this down again. We might need the space here later on. If I am too slow for you, you might want to play a real game and just find everything out for yourself. Otherwise, please bear with me, I am not the youngest and quickest anymore.]])
       )
    ),
-   h = 150,
+   h = styles.get_size("campaign_message_box_h_min"),
    show_instantly = true
 }
 
@@ -90,8 +90,8 @@ lumberjack_message_01 = {
       li_object("barbarians_lumberjacks_hut",
          _([[There you go. Now, let me show you how to make a lumberjack’s hut and how to connect it with a road. There is a sweet spot for a lumberjack right next to those trees. I’ll describe the steps I will take and then demonstrate them.]]), plr.color)
    ),
-   h = 250,
-   w = 350
+   h = messagebox_h_step(-3),
+   w = messagebox_w_step(-2)
 }
 
 lumberjack_message_02 = {
@@ -102,8 +102,8 @@ lumberjack_message_02 = {
          _([[First, I’ll left-click on the symbol where I want the lumberjack’s hut to be built. A window will appear where I can choose between buildings.]]), plr.color) ..
       li_image("images/wui/overlays/small.png", _([[The lumberjack’s hut is a small building, so I will then go on to select the small buildings tab. Then I’ll choose the lumberjack’s hut.]]))
    ),
-   h = 300,
-   w = 350
+   h = messagebox_h_step(-2),
+   w = messagebox_w_step(-2)
 }
 
 lumberjack_message_03a = {
@@ -113,8 +113,8 @@ lumberjack_message_03a = {
       li_image("images/wui/fieldaction/menu_tab_buildroad.png", _([[That won’t do yet. I still need to connect the lumberjack’s hut to the rest of my road network. After ordering the construction site, I was automatically put into road building mode, so all I have to do is click on the blue flag in front of my headquarters.]]))
    ),
    show_instantly = true,
-   h = 200,
-   w = 350
+   h = messagebox_h_step(-4),
+   w = messagebox_w_step(-2)
 }
 
 lumberjack_message_03b = {
@@ -125,8 +125,8 @@ lumberjack_message_03b = {
          _([[That won’t do yet. I still need to connect the lumberjack’s hut to the rest of my road network. You have disabled the option ‘Start building road after placing a flag’ (to change that, choose ‘Options’ in the Widelands main menu). Therefore, I have entered the road building mode manually. I will tell you later how to do that. To build the road, all I have to do now is click on the blue flag in front of my headquarters.]]))
    ),
    show_instantly = true,
-   h = 250,
-   w = 350
+   h = messagebox_h_step(-3),
+   w = messagebox_w_step(-2)
 }
 
 lumberjack_message_04 = {
@@ -136,8 +136,8 @@ lumberjack_message_04 = {
       li_object("barbarians_builder",
          _([[Now watch closely while a builder leaves the headquarters and goes to the construction site. Also, a carrier will take position in between the two blue flags and carry wares from one blue flag to the other.]]), plr.color)
    ),
-   h = 200,
-   w = 350
+   h = messagebox_h_step(-4),
+   w = messagebox_w_step(-2)
 }
 
 obj_lumberjack_place_flag = {
@@ -149,8 +149,8 @@ obj_lumberjack_place_flag = {
       li(_([[Build a blue flag now in the middle of the road that connects your headquarters to your lumberjack’s hut.]])) ..
       li_image("images/wui/fieldaction/menu_build_flag.png",_([[To build the flag, click on the yellow flag symbol in between the two blue flags we just placed and then click on the build flag symbol.]]))
    ),
-   h = 300,
-   w = 350
+   h = messagebox_h_step(-2),
+   w = messagebox_w_step(-2)
 }
 lumberjack_message_05 = {
    title = _("Placing Another Flag"),
@@ -159,8 +159,8 @@ lumberjack_message_05 = {
       li_object("barbarians_carrier",
          _([[Nice how they are working, isn’t it? But the poor carrier has a very long way to go. We can make it easier for him (and more efficient for us) by placing another blue flag on the road. You try it this time.]]), plr.color)
    ),
-   h = 450,
-   w = 350
+   h = messagebox_h_step(1),
+   w = messagebox_w_step(-2)
 }
 
 lumberjack_message_06 = {
@@ -171,8 +171,8 @@ lumberjack_message_06 = {
          _([[I wanted to teach you how to build new flags, but it seems you have already found out on your own. Well done!]])) ..
       p(_([[Now you have split the road in two parts with a carrier each. This means less work for him and higher efficiency for us. You should therefore always place as many flags as possible on your roads.]]))
    ),
-   h = 250,
-   w = 350
+   h = messagebox_h_step(-3),
+   w = messagebox_w_step(-2)
 }
 
 obj_lumberjack_progress = {
@@ -182,8 +182,8 @@ obj_lumberjack_progress = {
    body = objective_text(_("Let’s see the progress"),
       li(_([[Click on the construction site to have a look at it.]]))
    ),
-   h = 300,
-   w = 350
+   h = messagebox_h_step(-2),
+   w = messagebox_w_step(-2)
 }
 lumberjack_message_07a = {
    title = _("The Construction Site"),
@@ -192,8 +192,8 @@ lumberjack_message_07a = {
       h1(_("Let’s see the progress")) ..
       li_object("barbarians_builder", _([[If you click on the construction site, a window will open. You can see the wares that are still missing grayed out. You can also see the progress of this construction site.]]), plr.color)
    ),
-   h = 450,
-   w = 350
+   h = messagebox_h_step(1),
+   w = messagebox_w_step(-2)
 }
 
 lumberjack_message_07b = {
@@ -204,8 +204,8 @@ lumberjack_message_07b = {
          _([[This button toggles showing the building’s work area. When the lumberjack leaves the building to look for trees to fell, he will only look for them within this area. Let me show you how perfect this spot is.]])) ..
       p(_([[Close the construction site window when you have seen enough.]]))
    ),
-   h = 250,
-   w = 350
+   h = messagebox_h_step(-3),
+   w = messagebox_w_step(-2)
 }
 
 lumberjack_message_08 = {
@@ -217,8 +217,8 @@ lumberjack_message_08 = {
          _([[If you want things to go faster, simply use the %1$s key on your keyboard to increase the game speed. You can use %2$s to make the game slower again.]]):bformat(wl.ui.get_shortcut("game_speed_up"), wl.ui.get_shortcut("game_speed_down"))) ..
          p(_([[Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s.]]):bformat(wl.ui.get_shortcut("game_speed_up_fast"), wl.ui.get_shortcut("game_speed_down_fast"), wl.ui.get_shortcut("game_speed_up_slow"), wl.ui.get_shortcut("game_speed_down_slow")))
    ),
-   h = 200,
-   w = 350
+   h = messagebox_h_step(-4),
+   w = messagebox_w_step(-2)
 }
 
 lumberjack_message_09 = {
@@ -227,8 +227,8 @@ lumberjack_message_09 = {
    body = (
       li_object("barbarians_lumberjacks_hut", _([[Excellent. The lumberjack’s hut is done. A lumberjack will now move in and start chopping down trees, so our log income is secured for now. Now on to the granite.]]), plr.color)
    ),
-   h = 200,
-   w = 350
+   h = messagebox_h_step(-4),
+   w = messagebox_w_step(-2)
 }
 
 -- ==================
@@ -253,7 +253,7 @@ tell_about_move = {
       li_object("greenland_rocks6",
          _([[Granite can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]))
    ),
-   h = 450,
+   h = messagebox_h_step(1),
 }
 
 obj_moving_minimap = {
@@ -277,8 +277,8 @@ tell_about_minimap_1 = {
       -- TRANSLATORS it = the minimap
       li_arrow(_([[I will open it for you.]]))
    ),
-   w = 350,
-   h = 250,
+   w = messagebox_w_step(-2),
+   h = messagebox_h_step(-3),
 }
 
 tell_about_minimap_2 = {
@@ -290,14 +290,14 @@ tell_about_minimap_2 = {
          .. [[You can directly jump to any field by left-clicking on it. ]]
          .. [[You can also toggle buildings, roads, flags and player indicators on and off inside the minimap.]]))
    ),
-   h = 450,
+   h = messagebox_h_step(1),
 }
 
 congratulate_and_on_to_quarry = {
    title = _("Onward to the Quarry"),
    body = li_object("greenland_rocks6",_([[Great. Now about that quarry…]])),
-   h = 200,
-   w = 250
+   h = messagebox_h_step(-4),
+   w = messagebox_w_step(-4)
 }
 
 -- ======
@@ -343,7 +343,7 @@ talk_about_roadbuilding_00a = {
       explain_abort_roadbuilding ..
       p(_([[Now, about this road. Remember: we are already in road building mode since you just ordered the quarry. You can either make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]]))
    ),
-   h = 300,
+   h = messagebox_h_step(-2),
    show_instantly = true
 }
 
@@ -356,7 +356,7 @@ talk_about_roadbuilding_00b = {
       explain_abort_roadbuilding ..
       p(_([[Now, about this road. I’ll enter the road building mode and then make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]]))
    ),
-   h = 300,
+   h = messagebox_h_step(-2),
    show_instantly = true
 }
 
@@ -365,8 +365,8 @@ talk_about_roadbuilding_01 = {
    field = road_building_field,
    title = _("Road Building"),
    body = li_object("barbarians_flag", _([[Or, you can directly click the flag where the road should end, like so:]]), plr.color),
-   h = 200,
-   w = 250
+   h = messagebox_h_step(-4),
+   w = messagebox_w_step(-4)
 }
 
 obj_build_road_to_quarry = {
@@ -389,7 +389,7 @@ talk_about_roadbuilding_02 = {
       li_image("images/wui/overlays/road_building_red.png", _([[The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.]])) ..
       p(_([[Keep the slopes in mind while placing roads and use them to your advantage. Also, try to keep roads as short as possible and always remember to place as many flags as you can on road segments to share the load better.]]))
    ),
-   h = 450
+   h = messagebox_h_step(1)
 }
 
 quarry_not_connected = {
@@ -397,8 +397,8 @@ quarry_not_connected = {
    body = (
       li_object("barbarians_carrier", _([[Your workers do not like to walk across country. You have to build a road from your headquarters to the construction site so that carriers can transport wares.]]), plr.color)
    ),
-   w = 350,
-   h = 250
+   w = messagebox_w_step(-2),
+   h = messagebox_h_step(-3)
 }
 
 quarry_illegally_destroyed = {
@@ -407,8 +407,8 @@ quarry_illegally_destroyed = {
       li_object("barbarians_quarry", _([[It seems like you destroyed a construction site for a quarry we wanted to build. Luckily, we still have enough logs left this time, so you can simply build another one.]]), plr.color) ..
       li_arrow(_([[You can also reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you will have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]]))
    ),
-   w = 350,
-   h = 250
+   w = messagebox_w_step(-2),
+   h = messagebox_h_step(-3)
 }
 
 obj_build_the_second_quarry = {
@@ -426,7 +426,7 @@ build_second_quarry = {
    body = (
       li_object("barbarians_quarry", _([[When there are many rocks, you can consider building another quarry. This will make the granite production faster.]]), plr.color)
    ),
-   h = 300
+   h = messagebox_h_step(-2)
 }
 
 -- ===================
@@ -441,8 +441,8 @@ census_and_statistics_00 = {
       p(_([[Let me enable the census for you.]]))
    ),
    position = "topright",
-   h = 300,
-   w = 350
+   h = messagebox_h_step(-2),
+   w = messagebox_w_step(-2)
 }
 
 obj_show_statistics = {
@@ -461,8 +461,7 @@ census_and_statistics_01 = {
          p(_([[In addition to the buildings’ census, you can also activate status labels on them. This will display information about the productivity of buildings or the progress of construction sites.]])))
    ),
    position = "topright",
-   h = 400,
-   w = 350
+   w = messagebox_w_step(-2)
 }
 
 census_and_statistics_02 = {
@@ -471,8 +470,8 @@ census_and_statistics_02 = {
       li_object("barbarians_quarry", _([[Now we know what’s going on. Let’s wait for the quarries to finish.]]), plr.color)
    ),
    position = "topright",
-   h = 150,
-   w = 250
+   h = styles.get_size("campaign_message_box_h_min"),
+   w = messagebox_w_step(-4)
 }
 
 -- ========
@@ -519,8 +518,7 @@ closing_msg_window_00 = {
    body = (
       li_image("images/wui/menus/message_old.png",_([[Excellent. Now we need to focus on other things.]]))
    ),
-   h = 400,
-   w = 350
+   w = messagebox_w_step(-2)
 }
 
 closing_msg_window_01 = {
@@ -530,8 +528,8 @@ closing_msg_window_01 = {
    body = (
       li_object("barbarians_quarry", _([[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their work areas the next time they try to do some work.]]), plr.color)
    ),
-   h = 250,
-   w = 350
+   h = messagebox_h_step(-3),
+   w = messagebox_w_step(-2)
 }
 
 obj_destroy_quarries = {
@@ -551,8 +549,7 @@ destroy_quarries_message = {
    body = (
       li_image("images/wui/menus/message_new.png", _([[You received some messages. See how the button at the bottom of the screen has changed appearance?]]))
    ),
-   h = 400,
-   w = 350
+   w = messagebox_w_step(-2)
 }
 
 -- =========
@@ -586,8 +583,8 @@ military_building_finished = {
       li_object("barbarians_tower",
          p(_([[Great. Do you see how your territory has grown since your soldiers entered your new military building?]])), plr.color)
    ),
-   h = 300,
-   w = 350
+   h = messagebox_h_step(-2),
+   w = messagebox_w_step(-2)
 }
 
 -- ==========
@@ -608,5 +605,5 @@ conclude_tutorial = {
       h1(p("align=center", u("widelands.org")))
    ),
    allow_next_scenario = true,
-   h = 450
+   h = messagebox_h_step(1)
 }

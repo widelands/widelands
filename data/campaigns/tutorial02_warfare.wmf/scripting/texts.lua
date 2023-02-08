@@ -10,12 +10,7 @@ local empire_tribe = wl.Game():get_tribe_description("empire")
 local empire_soldier = wl.Game():get_worker_description(empire_tribe.soldier)
 
 function h2_image(imagepath, text)
-   return
-      div("width=100%",
-         div(p(vspace(12) .. img(imagepath) .. space(6))) ..
-         div(p(space(6))) ..
-         div("width=*", h2(text))
-      )
+   return h2(img(imagepath) .. space() .. text)
 end
 
 -- =============
@@ -29,7 +24,7 @@ introduction = {
       p(_([[In this scenario, I’m going to tell you about soldiers, their training and their profession: warfare. Although Widelands is about building up, not burning down, there is an enemy you sometimes have to defeat. Yet warfare is mainly focused on economics, not on military strategies, and its mechanics deserve explanation.]])) ..
       p(_([[I’ve set up a small village that contains the most important buildings. You also have enough wares, so you do not have to take care of your weapons production. In a real game, you will not have this luxury.]]))
    ),
-   h = 300
+   h = messagebox_h_step(-2)
 }
 
 abilities = {
@@ -92,7 +87,7 @@ battlearena2 = {
       li_image("tribes/workers/barbarians/soldier/evade_level0.png", _([[No red dots means that the soldier is not trained, so he has level 0. All your new recruits have this.]])) ..
       li_image("tribes/workers/barbarians/soldier/evade_level1.png", _([[With every successful training step, your soldier becomes stronger. This is indicated by a red dot. This soldier is on level 1 in evade training.]])) ..
       li_image("tribes/workers/barbarians/soldier/evade_level2.png", _([[When your soldier has reached the highest possible level (in this case level 2), this is indicated by a white background color.]])),
-   h = 450
+   h = messagebox_h_step(1)
 }
 
 trainingcamp1 = {
@@ -178,7 +173,7 @@ scouting3 = {
       p(_([[You can use the minimap to see the exploration’s progress.]])) ..
       p(_([[Don’t forget that scouting is hard work and as such cannot be done without provision of food.]]))
    ),
-   h = 250
+   h = messagebox_h_step(-3)
 }
 heroes_rookies = {
    position = "topright",
@@ -199,7 +194,8 @@ soldier_capacity = {
       h1(_("Adjusting the number of soldiers")) ..
       p(_([[There is another way how you can control the strength of a military building: by the number of soldiers stationed there. Just click on the arrow buttons to decrease or increase the desired number of soldiers. Every building has a maximum capacity. In case of the barrier, it is five, for example.]])) ..
       p(_([[If you wish to send a certain soldier away, you can simply click on it. It will then be replaced by another soldier.]])) ..
-      p(_([[Let me also describe what the numbers in the status string mean. This string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’.]])) ..
+      p(_([[Let me also describe what the numbers in the status string mean. This string can contain an arrow and up to three numbers, e.g. ‘↑ 1 (+5) soldier (+2)’.]])) ..
+      li(_([[The arrow shows whether the building is set to prefer heroes (upwards arrow) or rookies (downwards arrow).]])) ..
       li(_([[The first number describes how many soldiers are currently in this building. In this example, only one soldier is left inside (each military building is always guarded by at least one soldier).]])) ..
       li(_([[The second number tells you how many additional soldiers reside in this building, but are currently outside. The five soldiers may be attacking an enemy. They will return when they have been successful.]])) ..
       li(_([[The third number indicates the missing soldiers. From the eight soldiers (1 + 5 + 2) you wish to have here, two may have died. They will be replaced by new soldiers from your warehouse, if possible.]]))

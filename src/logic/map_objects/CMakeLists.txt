@@ -151,7 +151,6 @@ wl_library(logic_map_objects
     graphic_animation
     graphic_color
     graphic_fonthandler
-    graphic_image_cache
     graphic_image_io
     graphic_surface
     graphic_text_layout

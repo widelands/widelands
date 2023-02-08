@@ -19,6 +19,7 @@
 #ifndef WL_LOGIC_MAP_REVISION_H
 #define WL_LOGIC_MAP_REVISION_H
 
+#include <cstdint>
 #include <string>
 
 namespace Widelands {

@@ -30,7 +30,7 @@ MapData::MapData(const std::string& init_filename,
                  const std::string& init_author,
                  const MapData::MapType& init_maptype,
                  const MapData::DisplayType& init_displaytype)
-   : filename(init_filename),
+   : filenames({init_filename}),
      name(init_localized_name),
      localized_name(init_localized_name),
      authors(init_author),
@@ -39,13 +39,14 @@ MapData::MapData(const std::string& init_filename,
      height(0),
      maptype(init_maptype),
      displaytype(init_displaytype) {
+	assert(!filenames.empty());
 }
 
 MapData::MapData(const Widelands::Map& map,
                  const std::string& init_filename,
                  const MapData::MapType& init_maptype,
                  const MapData::DisplayType& init_displaytype)
-   : MapData(init_filename,
+   : MapData({init_filename},
              _("No Name"),
              map.get_author().empty() ? _("No Author") : map.get_author(),
              init_maptype,
@@ -93,8 +94,8 @@ bool MapData::compare_names(const MapData& other) const {
 	std::string other_name;
 	switch (displaytype) {
 	case MapData::DisplayType::kFilenames:
-		this_name = filename;
-		other_name = other.filename;
+		this_name = filenames.at(0);
+		other_name = other.filenames.at(0);
 		break;
 
 	case MapData::DisplayType::kMapnames:
@@ -139,6 +140,12 @@ bool MapData::compare_size(const MapData& other) const {
 	return height < other.height;
 }
 
+void MapData::add(const MapData& md) {
+	assert(maptype == MapType::kDirectory);
+	assert(md.maptype == MapType::kDirectory);
+	filenames.insert(filenames.end(), md.filenames.begin(), md.filenames.end());
+}
+
 // static
 MapData MapData::create_parent_dir(const std::string& current_dir) {
 	std::string filename = FileSystem::fs_dirname(current_dir);
@@ -157,7 +164,7 @@ MapData MapData::create_parent_dir(const std::string& current_dir) {
 			}
 		}
 	}
-	return MapData(filename, parent_name());
+	return MapData({filename}, parent_name());
 }
 
 // static
@@ -181,13 +188,13 @@ MapData MapData::create_directory(const std::string& directory) {
 	} else if (directory == "maps/SP_Scenarios") {
 		/** TRANSLATORS: Directory name for SP Scenarios in map selection */
 		localized_name = _("Singleplayer Scenarios");
-	} else if (directory == "maps/My_Maps") {
+	} else if (directory == kMapsDir + "/" + kMyMapsDir) {
 		/** TRANSLATORS: Directory name for user maps in map selection */
 		localized_name = _("My Maps");
-	} else if (directory == "maps/Downloaded") {
+	} else if (directory == kMapsDir + "/" + kDownloadedMapsDir) {
 		/** TRANSLATORS: Directory name for downloaded maps in map selection */
 		localized_name = _("Downloaded Maps");
-	} else if (directory.compare(0, kAddOnDir.size(), kAddOnDir) == 0) {
+	} else if (starts_with(directory, kAddOnDir)) {
 		std::string addon = directory.substr(kAddOnDir.size() + 1);
 		addon = addon.substr(0, addon.find('/'));
 		std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(addon));
@@ -204,5 +211,5 @@ MapData MapData::create_directory(const std::string& directory) {
 			}
 		}
 	}
-	return MapData(directory, localized_name);
+	return MapData({directory}, localized_name);
 }

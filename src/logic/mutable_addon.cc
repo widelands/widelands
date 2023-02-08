@@ -23,6 +23,7 @@
 #include <string>
 
 #include "base/i18n.h"
+#include "base/time_string.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
@@ -112,6 +113,7 @@ MutableAddOn::MutableAddOn(const AddOnInfo& a)
      min_wl_version_(a.min_wl_version),
      max_wl_version_(a.max_wl_version),
      category_(a.category),
+     force_sync_safe_(false),
      directory_(kAddOnDir + FileSystem::file_separator() + internal_name_) {
 }
 
@@ -134,8 +136,8 @@ void MutableAddOn::setup_temp_dir() {
 	// then delete the original add-on directory and move it over.
 	if (g_fs->file_exists(directory_)) {
 		backup_path_ = directory_;
-		directory_ =
-		   kTempFileDir + FileSystem::file_separator() + internal_name_ + kTempFileExtension;
+		directory_ = kTempFileDir + FileSystem::file_separator() + timestring() + ".autogen." +
+		             internal_name_ + kTempFileExtension;
 		if (g_fs->file_exists(directory_)) {
 			g_fs->fs_unlink(directory_);
 		}
@@ -190,6 +192,7 @@ bool MutableAddOn::write_to_disk() {
 	s.set_string("requires", requirements);
 	s.set_string("min_wl_version", min_wl_version_);
 	s.set_string("max_wl_version", max_wl_version_);
+	s.set_bool("sync_safe", force_sync_safe_);
 
 	p.write(profile_path().c_str(), false);
 

@@ -23,7 +23,7 @@
 #include <memory>
 #include <set>
 
-#include "base/multithreading.h"
+#include "base/mutex.h"
 #include "base/string.h"
 #include "base/vector.h"
 #include "scripting/lua.h"
@@ -181,6 +181,13 @@ public:
 		return static_cast<int>(value);
 	}
 
+	/// Returns the corresponding value with the given 'key' if it exists,
+	/// otherwise returns 'default_value'.
+	template <typename KeyType>
+	int get_int_with_default(const KeyType& key, const int default_value) const {
+		return has_key(key) ? get_int(key) : default_value;
+	}
+
 	template <typename KeyType> bool get_bool(const KeyType& key) const {
 		get_existing_table_value(key);
 		if (!lua_isboolean(L_, -1)) {
@@ -190,6 +197,13 @@ public:
 		const bool rv = lua_toboolean(L_, -1);
 		lua_pop(L_, 1);
 		return rv;
+	}
+
+	/// Returns the corresponding value with the given 'key' if it exists,
+	/// otherwise returns 'default_value'.
+	template <typename KeyType>
+	bool get_bool_with_default(const KeyType& key, const bool default_value) const {
+		return has_key(key) ? get_bool(key) : default_value;
 	}
 
 	template <typename KeyType>

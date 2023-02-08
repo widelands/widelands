@@ -12,7 +12,7 @@ wl_library(graphic_toolbar_imageset
     toolbar_imageset.cc
     toolbar_imageset.h
   DEPENDS
-    graphic_image_cache
+    graphic
     graphic_surface
     scripting_lua_table
 )
@@ -40,8 +40,8 @@ wl_library(graphic_playercolor
     playercolor.h
   DEPENDS
     base
+    graphic
     graphic_color
-    graphic_image_cache
     graphic_surface
     io_filesystem
 )
@@ -76,17 +76,6 @@ wl_library(graphic_image_io
     io_fileread
     io_filesystem
     io_stream
-)
-
-wl_library(graphic_image_cache
-  SRCS
-    image_cache.cc
-    image_cache.h
-  DEPENDS
-    base
-    base_macros
-    graphic_image_io
-    graphic_surface
 )
 
 wl_library(graphic_sdl_utils
@@ -269,7 +258,7 @@ wl_library(graphic_fonthandler
   DEPENDS
     base
     base_macros
-    graphic_image_cache
+    graphic
     graphic_text
 )
 
@@ -286,7 +275,6 @@ wl_library(graphic_text_layout
     graphic_styles
     graphic_text
     graphic_fonthandler
-    graphic_styles
 )
 
 wl_library(graphic_wordwrap
@@ -316,7 +304,6 @@ wl_library(graphic_mouse_cursor
   DEPENDS
     base_geometry
     graphic
-    graphic_image_cache
     graphic_image_io
     io_filesystem
 )
@@ -343,6 +330,8 @@ wl_library(graphic
     graphic.h
     note_graphic_resolution_changed.h
     hyperlink.h
+    image_cache.cc
+    image_cache.h
     style_manager.cc
     style_manager.h
     rendertarget.cc
@@ -354,6 +343,7 @@ wl_library(graphic
     base
     base_exceptions
     base_geometry
+    base_macros
     base_scoped_timer
     base_times
     build_info
@@ -363,7 +353,6 @@ wl_library(graphic
     graphic_color
     graphic_draw_programs
     graphic_gl_utils
-    graphic_image_cache
     graphic_image_io
     graphic_render_queue
     graphic_styles

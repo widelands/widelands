@@ -26,7 +26,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/addons/manager.h"
 
-namespace FsMenu::AddOnsUI {
+namespace AddOnsUI {
 
 ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
                                                std::shared_ptr<AddOns::AddOnInfo> info,
@@ -142,4 +142,4 @@ void ScreenshotUploadWindow::think() {
 	UI::Window::think();
 }
 
-}  // namespace FsMenu::AddOnsUI
+}  // namespace AddOnsUI

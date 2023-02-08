@@ -85,6 +85,7 @@ Slider::Slider(Panel* const parent,
      bar_size_(bar_size),
      cursor_size_(cursor_size) {
 	set_thinks(false);
+	set_snap_target(true);
 	set_can_focus(enabled_);
 	calculate_cursor_position();
 	calculate_big_step();

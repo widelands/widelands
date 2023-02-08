@@ -44,7 +44,7 @@
 
 class EditorTool;
 
-std::string editor_splash_image();
+extern const std::string kEditorSplashImage;
 
 /**
  * This is the EditorInteractive. It is like the InteractivePlayer class,
@@ -186,6 +186,7 @@ private:
 		kLoadMap,
 		kSaveMap,
 		kMapOptions,
+		kUploadAsAddOn,
 		kExitEditor,
 	};
 
@@ -245,6 +246,8 @@ private:
 	void toggle_grid();
 
 	void update_tool_history_window();
+
+	void publish_map();
 
 	//  state variables
 	bool need_save_{false};

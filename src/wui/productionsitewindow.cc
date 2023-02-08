@@ -43,27 +43,28 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
                                            bool avoid_fastclick,
                                            bool workarea_preview_wanted)
    : BuildingWindow(parent, reg, ps, avoid_fastclick), production_site_(&ps) {
-	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
-	   [this](const Widelands::NoteBuilding& note) {
-		   if (is_dying_) {
-			   return;
-		   }
-		   Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
-		   if (production_site == nullptr) {
-			   return;
-		   }
-		   if (note.serial == production_site->serial()) {
-			   switch (note.action) {
-			   case Widelands::NoteBuilding::Action::kWorkersChanged:
-				   update_worker_table(production_site);
-				   worker_table_selection_changed();
-				   break;
-			   default:
-				   break;
-			   }
-		   }
-	   });
 	init(avoid_fastclick, workarea_preview_wanted);
+}
+
+void ProductionSiteWindow::on_building_note(const Widelands::NoteBuilding& note) {
+	if (is_dying_) {
+		return;
+	}
+	Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
+	if (production_site == nullptr || note.serial != production_site->serial()) {
+		return;
+	}
+
+	switch (note.action) {
+	case Widelands::NoteBuilding::Action::kWorkersChanged:
+		update_worker_table(production_site);
+		worker_table_selection_changed();
+		break;
+	default:
+		break;
+	}
+
+	BuildingWindow::on_building_note(note);
 }
 
 void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {

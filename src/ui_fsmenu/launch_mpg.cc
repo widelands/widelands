@@ -162,7 +162,7 @@ void LaunchMPG::clicked_select_map_callback(const MapData* map, const bool scena
 	}
 
 	settings_.set_scenario(scenario);
-	settings_.set_map(map->name, map->filename, map->theme, map->background, map->nrplayers);
+	settings_.set_map(map->name, map->filenames.at(0), map->theme, map->background, map->nrplayers);
 
 	map_changed();
 	update_win_conditions();
@@ -290,9 +290,11 @@ void LaunchMPG::refresh() {
 	ok_.set_enabled(settings_.can_launch());
 
 	update_peaceful_mode();
+	update_fogless();
 	update_custom_starting_positions();
 	custom_starting_positions_.set_state(settings_.get_custom_starting_positions());
 	peaceful_.set_state(settings_.is_peaceful_mode());
+	fogless_.set_state(settings_.is_fogless());
 
 	if (!settings_.can_change_map() && !init_win_condition_label()) {
 		try {

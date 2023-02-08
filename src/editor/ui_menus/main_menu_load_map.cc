@@ -50,27 +50,30 @@ void MainMenuLoadMap::clicked_ok() {
 		return;
 	}
 	const MapData& mapdata = maps_data_[table_.get_selected()];
-	if (g_fs->is_directory(mapdata.filename) &&
-	    !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filename)) {
-		set_current_directory(mapdata.filename);
+	assert(!mapdata.filenames.empty());
+	if (g_fs->is_directory(mapdata.filenames.at(0)) &&
+	    !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filenames.at(0))) {
+		set_current_directory(mapdata.filenames);
 		fill_table();
 	} else {
+		assert(mapdata.filenames.size() == 1);
 		// Prevent description notes from reaching a subscriber
 		// other than the one they're meant for
 		egbase_.delete_world_and_tribes();
 
 		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
-		eia.egbase().create_loader_ui({"editor"}, true, "", editor_splash_image(), false);
-		eia.load(mapdata.filename);
+		eia.egbase().create_loader_ui({"editor"}, true, "", kEditorSplashImage, false);
+		eia.load(mapdata.filenames.at(0));
 		// load() will delete us.
 		eia.egbase().remove_loader_ui();
 	}
 }
 
-void MainMenuLoadMap::set_current_directory(const std::string& filename) {
-	curdir_ = filename;
+void MainMenuLoadMap::set_current_directory(const std::vector<std::string>& filenames) {
+	assert(!filenames.empty());
+	curdir_ = filenames;
 
-	std::string display_dir = curdir_.substr(basedir_.size());
+	std::string display_dir = curdir_.at(0).substr(basedir_.size());
 	if (starts_with(display_dir, "/")) {
 		display_dir = display_dir.substr(1);
 	}

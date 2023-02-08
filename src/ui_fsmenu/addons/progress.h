@@ -24,11 +24,11 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
-namespace FsMenu::AddOnsUI {
+namespace AddOnsUI {
 
 class ProgressIndicatorWindow : public UI::Window {
 public:
-	ProgressIndicatorWindow(UI::Panel* parent, const std::string& title);
+	ProgressIndicatorWindow(UI::Panel* parent, UI::WindowStyle style, const std::string& title);
 	~ProgressIndicatorWindow() override = default;
 
 	void set_message_1(const std::string& msg) {
@@ -51,6 +51,6 @@ private:
 	UI::ProgressBar progress_;
 };
 
-}  // namespace FsMenu::AddOnsUI
+}  // namespace AddOnsUI
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_PROGRESS_H

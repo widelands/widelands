@@ -5,7 +5,7 @@
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Boese Kaiser, 2022
-# C138, 2021
+# C138, 2021,2023
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
 # David D, 2021-2022
 # GunChleoc, 2016
@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-16 09:46+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: David D, 2021-2022\n"
+"Last-Translator: C138, 2021,2023\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -128,7 +128,7 @@ msgstr "Collecteurs"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr ""
+msgstr "Vous obtenez des points pour des marchandises précieuses dans vos entrepôts. Le joueur ayant obtenu le score le plus élevé après %s gagne la partie."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
@@ -193,14 +193,6 @@ msgstr "Jeu sans fin"
 #: ../../data/scripting/win_conditions/endless_game.lua:16
 msgid "This is an endless game without rules."
 msgstr "Ceci est une partie sans fin ni règles."
-
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:14
-msgid "Endless Game (no fog)"
-msgstr "Jeu sans fin (aucun brouillard)"
-
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
-msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr "C'est un jeu sans fin, sans règles. Le brouillard de guerre est désactivé."
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"

@@ -20,7 +20,6 @@
 #define WL_BASE_MULTITHREADING_H
 
 #include <memory>
-#include <mutex>
 #include <thread>
 
 #include "notifications/note_ids.h"
@@ -100,43 +99,5 @@ template <typename R, typename F, F f, typename... Args> R wrapper(Args... args)
 	return WrapperImpl<F, f>::wrap(args...);
 }
 }  // namespace multithreading_impl
-
-/* Ensures that critical pieces of code are executed by only one thread at a time.
- * More precisely: If n pieces of code C1,…,Cn are structured like this:
- *    {
- *        MutexLock m(...);
- *        do_something();
- *    }
- * Then there will never, at any given time, two threads T1 and T2
- * be running any pieces Cx and Cy (1 <= x,y <= n) concurrently.
- * Each thread may, of course, call Cx from within Cy without problems.
- *
- * Use MutexLocks sparingly. They are there to safeguard bottlenecks in the
- * code where concurrency must not be allowed, at the cost of performance.
- */
-class MutexLock {
-public:
-	// Which mutex to lock. Each entry corresponds to a different mutex.
-	enum class ID : uint32_t {
-		kLogicFrame,
-		kObjects,
-		kCommands,
-		kMessages,
-		kIBaseVisualizations,
-		kI18N,
-		kLua,
-		kLog
-	};
-
-	static ID create_custom_mutex();
-	explicit MutexLock(ID);
-	explicit MutexLock(ID, const std::function<void()>& run_while_waiting);
-	~MutexLock();
-
-private:
-	ID id_;
-	static ID last_custom_mutex_;
-	static std::mutex s_mutex_;
-};
 
 #endif  // end of include guard: WL_BASE_MULTITHREADING_H

@@ -9,16 +9,16 @@
 # Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Kiibakun, 2015
 # Madkat Here, 2016,2021
-# Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021,2023
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
 # Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-01-16 09:46+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Madkat Here, 2016,2021\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021,2023\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -191,14 +191,6 @@ msgstr "Juego sin fin"
 msgid "This is an endless game without rules."
 msgstr "Éste es un juego sin fin sin reglas."
 
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:14
-msgid "Endless Game (no fog)"
-msgstr "Juego Interminable (sin niebla)"
-
-#: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
-msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr "Este es un juego interminable sin reglas. La niebla de guerra está deshabilitada."
-
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
 msgstr "Cazador de Sedes"
@@ -281,14 +273,14 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr ""
+msgstr "Cada jugador o equipo intentará conseguir más de la mitad del área del mapa. El ganador será el jugador o equipo que sea capaz de mantener ese área por al menos 20 minutos, o el que tenga más territorio tras %s, cualquiera que ocurra primero. Si el modo pacífico es seleccionado el partido termina cuando un jugador tiene mas territorio que cada otro jugador puede ganar."
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
 msgid_plural "%1% days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% día"
+msgstr[1] "%1% días"
+msgstr[2] "%1% días"
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:358
 msgid "%1% hour"
@@ -300,21 +292,21 @@ msgstr[2] "%1% horas"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% minuto"
+msgstr[1] "%1% minutos"
+msgstr[2] "%1% minutos"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:364
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s, y %3$s"
 
 #. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
 #. and 30 minutes"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:367
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:371
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s y %2$s"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:394
@@ -375,7 +367,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr ""
+msgstr "Como gnomo de madera que eres te gustan los bosques grandes, así que tu tarea es tener más arboles en tu territorio que cualquier otro jugador. La partida terminará tras %s. El que tenga más arboles en ese momento ganará la partida."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"

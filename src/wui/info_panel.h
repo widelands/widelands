@@ -84,11 +84,14 @@ public:
 	bool handle_mouserelease(uint8_t, int32_t, int32_t) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
+	bool check_handles_mouse(int32_t x, int32_t y) override;
+
 private:
 	friend class MessagePreview;
 
 	InteractiveBase& ibase_;
 	InteractivePlayer* iplayer_{nullptr};
+	UI::Panel snap_target_panel_;
 
 	bool on_top_{false};
 
@@ -104,7 +107,10 @@ private:
 	void rebuild_dropdown();
 
 	Vector2i last_mouse_pos_{-1, -1};
-	bool is_mouse_over_panel() const;
+	bool is_mouse_over_panel(int32_t x, int32_t y) const;
+	bool is_mouse_over_panel() const {
+		return is_mouse_over_panel(last_mouse_pos_.x, last_mouse_pos_.y);
+	}
 	void set_textareas_visibility(bool);
 
 	void update_time_speed_string();

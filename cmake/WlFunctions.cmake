@@ -170,7 +170,7 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_SDL2_IMAGE)
     if (OPTION_BUILD_WINSTATIC)
-      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Image jpeg tiff webp lzma ${SDL_IMG_EXTRA_LIBS})
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Image jpeg tiff lzma ${SDL_IMG_EXTRA_LIBS})
     else()
       target_link_libraries(${NAME} SDL2::Image)
     endif()

@@ -125,28 +125,29 @@ void MainMenuSaveMap::clicked_ok() {
 	if (!ok_.enabled()) {
 		return;
 	}
-	std::string filename = editbox_.text();
-	std::string complete_filename;
+	std::vector<std::string> filename = {editbox_.text()};
+	std::vector<std::string> complete_filename;
 
 	if (filename.empty() && table_.has_selection()) {  //  Maybe a directory is selected.
-		complete_filename = filename = maps_data_[table_.get_selected()].filename;
+		complete_filename = filename = maps_data_[table_.get_selected()].filenames;
 	} else {
-		complete_filename = curdir_ + FileSystem::file_separator() + filename;
+		complete_filename = {curdir_.at(0) + FileSystem::file_separator() + filename.at(0)};
 	}
 
-	if (g_fs->is_directory(complete_filename) &&
-	    !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
+	if (g_fs->is_directory(complete_filename.at(0)) &&
+	    !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename.at(0))) {
 		set_current_directory(complete_filename);
 		fill_table();
 	} else {  //  Ok, save this map
 		Widelands::Map* map = eia().egbase().mutable_map();
 		if (map->get_name() == _("No Name")) {
-			std::string::size_type const filename_size = filename.size();
-			map->set_name(4 <= filename_size && ends_with(filename, kWidelandsMapExtension, false) ?
-                          filename.substr(0, filename_size - 4) :
-                          filename);
+			std::string::size_type const filename_size = filename.at(0).size();
+			map->set_name(4 <= filename_size &&
+			                    ends_with(filename.at(0), kWidelandsMapExtension, false) ?
+                          filename.at(0).substr(0, filename_size - 4) :
+                          filename.at(0));
 		}
-		if (save_map(filename, !get_config_bool("nozip", false))) {
+		if (save_map(filename.at(0), !get_config_bool("nozip", false))) {
 			die();
 		} else {
 			table_.focus();
@@ -164,7 +165,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 	while (open_dialogue) {
 		open_dialogue = false;
 		if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-			std::string fullname = curdir_ + FileSystem::file_separator() + md.get_dirname();
+			std::string fullname = curdir_.at(0) + FileSystem::file_separator() + md.get_dirname();
 			// Trim it for preceding/trailing whitespaces in user input
 			trim(fullname);
 			if (g_fs->file_exists(fullname)) {
@@ -175,9 +176,8 @@ void MainMenuSaveMap::clicked_make_directory() {
 				open_dialogue = true;
 			} else {
 				try {
-					g_fs->ensure_directory_exists(curdir_);
 					//  Create directory.
-					g_fs->make_directory(fullname);
+					g_fs->ensure_directory_exists(fullname);
 				} catch (const FileError& e) {
 					log_err("directory creation failed in MainMenuSaveMap::"
 					        "clicked_make_directory: %s\n",
@@ -232,7 +232,7 @@ void MainMenuSaveMap::clicked_item() {
 		const MapData& mapdata = maps_data_[table_.get_selected()];
 		if (mapdata.maptype != MapData::MapType::kDirectory) {
 			editbox_.set_text(
-			   FileSystem::fs_filename(maps_data_[table_.get_selected()].filename.c_str()));
+			   FileSystem::fs_filename(maps_data_[table_.get_selected()].filenames.at(0).c_str()));
 			edit_box_changed();
 		}
 	}
@@ -245,7 +245,7 @@ void MainMenuSaveMap::double_clicked_item() {
 	assert(table_.has_selection());
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		set_current_directory(mapdata.filename);
+		set_current_directory(mapdata.filenames);
 		fill_table();
 	} else {
 		clicked_ok();
@@ -271,11 +271,12 @@ void MainMenuSaveMap::reset_editbox_or_die(const std::string& current_filename) 
 	}
 }
 
-void MainMenuSaveMap::set_current_directory(const std::string& filename) {
-	curdir_ = filename;
+void MainMenuSaveMap::set_current_directory(const std::vector<std::string>& filenames) {
+	assert(!filenames.empty());
+	curdir_ = filenames;
 	directory_info_.set_text(
 	   /** TRANSLATORS: The folder that a file will be saved to. */
-	   format(_("Current directory: %s"), (_("My Maps") + curdir_.substr(basedir_.size()))));
+	   format(_("Current directory: %s"), (_("My Maps") + curdir_.at(0).substr(basedir_.size()))));
 }
 
 void MainMenuSaveMap::layout() {
@@ -300,7 +301,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	}
 
 	//  Append directory name.
-	const std::string complete_filename = curdir_ + FileSystem::file_separator() + filename;
+	const std::string complete_filename = curdir_.at(0) + FileSystem::file_separator() + filename;
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
@@ -335,7 +336,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
-	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image(), false);
+	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage, false);
 	Notifications::publish(UI::NoteLoadingMessage(_("Saving the map…")));
 
 	// Try saving the map.

@@ -203,16 +203,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 				   const Widelands::Coords coords = building->get_position();
 				   // Check whether the window is wanted
 				   if (wanted_building_windows_.count(coords.hash()) == 1) {
-					   const WantedBuildingWindow& wanted_building_window =
-					      *wanted_building_windows_.at(coords.hash());
-					   UI::UniqueWindow* building_window =
-					      show_building_window(coords, true, wanted_building_window.show_workarea);
-					   building_window->set_pos(wanted_building_window.window_position);
-					   if (wanted_building_window.minimize) {
-						   building_window->minimize();
-					   }
-					   building_window->set_pinned(wanted_building_window.pin);
-					   wanted_building_windows_.erase(coords.hash());
+					   wanted_building_windows_.at(coords.hash())->warp_done = true;
 				   }
 			   }
 		   } break;
@@ -238,8 +229,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
-	set_snap_windows_only_when_overlapping(
-	   global_s.get_bool("snap_windows_only_when_overlapping", false));
 	set_dock_windows_to_edges(global_s.get_bool("dock_windows_to_edges", false));
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
@@ -854,6 +843,24 @@ void InteractiveBase::think() {
 				   _("Waterway length: %1$u / %2$u"), steps, egbase().map().get_waterway_max_length()));
 			}
 		}
+	}
+
+	for (auto it = wanted_building_windows_.begin(); it != wanted_building_windows_.end();) {
+		if (!it->second->warp_done) {
+			++it;
+			continue;
+		}
+
+		UI::UniqueWindow* building_window = show_building_window(
+		   Widelands::Coords::unhash(it->first), true, it->second->show_workarea);
+
+		building_window->set_pos(it->second->window_position);
+		if (it->second->minimize) {
+			building_window->minimize();
+		}
+		building_window->set_pinned(it->second->pin);
+
+		it = wanted_building_windows_.erase(it);
 	}
 }
 
@@ -1616,7 +1623,7 @@ void InteractiveBase::add_wanted_building_window(const Widelands::Coords& coords
                                                  bool was_minimal,
                                                  bool was_pinned) {
 	wanted_building_windows_.insert(std::make_pair(
-	   coords.hash(), std::unique_ptr<const WantedBuildingWindow>(new WantedBuildingWindow(
+	   coords.hash(), std::unique_ptr<WantedBuildingWindow>(new WantedBuildingWindow(
 	                     point, was_minimal, was_pinned, has_workarea_preview(coords)))));
 }
 

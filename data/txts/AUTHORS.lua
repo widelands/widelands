@@ -2,6 +2,7 @@ include "txts/format_authors.lua"
 include "txts/developers.lua"
 
 push_textdomain("texts")
+set_fs_style(true)
 
 -- Uses structured data to format authors
 function list_authors()
@@ -14,20 +15,21 @@ function list_authors()
             result = result .. h2_authors(entry["subheading"])
          end
          for k, member in ipairs(entry["members"])  do
-            result = result .. p(img(category["image"]) .. " " .. member)
+            result = result .. p("valign=center", img(category["image"]) .. " " .. member)
          end
       end
-      result = result .. p(vspace(6))
    end
    return result
 end
 
 -- Main script
 local r = {
-   rt(fs_color(
-      p_font("align=center", "size=28 color=2F9131", _("Widelands Development Team")) ..
+   rt(div("width=100%",
+      pagetitle(_("Widelands Development Team")) ..
       list_authors()
    ))
 }
+
+set_fs_style(false)
 pop_textdomain()
 return r

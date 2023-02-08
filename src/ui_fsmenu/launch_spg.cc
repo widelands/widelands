@@ -50,13 +50,14 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 	settings_.set_scenario(scenario);
 	if (!preconfigured_) {
 		assert(!settings_.settings().tribes.empty());
-		settings_.set_map(
-		   mapdata->name, mapdata->filename, mapdata->theme, mapdata->background, mapdata->nrplayers);
+		settings_.set_map(mapdata->name, mapdata->filenames.at(0), mapdata->theme,
+		                  mapdata->background, mapdata->nrplayers);
 	}
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	update_win_conditions();
 	update_peaceful_mode();
+	update_fogless();
 	update_custom_starting_positions();
 	update_warn_desyncing_addon();
 	update();
@@ -66,6 +67,7 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 
 void LaunchSPG::update() {
 	peaceful_.set_state(settings_.is_peaceful_mode());
+	fogless_.set_state(settings_.is_fogless());
 	if (preconfigured_) {
 		map_details_.update(&settings_, *game_->mutable_map());
 		ok_.set_enabled(true);

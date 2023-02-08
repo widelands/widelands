@@ -26,6 +26,7 @@
 #include "graphic/styles/button_style.h"
 #include "graphic/styles/font_style.h"
 #include "graphic/styles/panel_styles.h"
+#include "graphic/styles/paragraph_style.h"
 #include "graphic/styles/progress_bar_style.h"
 #include "graphic/styles/statistics_plot_style.h"
 #include "graphic/styles/table_style.h"
@@ -34,13 +35,83 @@
 #include "graphic/styles/window_style.h"
 #include "scripting/lua_table.h"
 
+extern const std::string kDefaultTemplate;
 const std::string& template_dir();
 void set_template_dir(std::string);
+inline bool is_using_default_theme() {
+	return template_dir() == kDefaultTemplate;
+}
 
-// Load the specified image. If it does not exist,
-// print a warning and use a fallback image.
-// `path` is relative to the template directory.
-const Image& load_safe_template_image(const std::string& path);
+namespace UI {
+
+enum class ColorStyle {
+	kCampaignBarbarianThron,
+	kCampaignBarbarianBoldreth,
+	kCampaignBarbarianKhantrukh,
+	kCampaignEmpireLutius,
+	kCampaignEmpireAmalea,
+	kCampaignEmpireSaledus,
+	kCampaignEmpireMarcus,
+	kCampaignEmpireJulia,
+	kCampaignAtlanteanJundlina,
+	kCampaignAtlanteanSidolus,
+	kCampaignAtlanteanLoftomor,
+	kCampaignAtlanteanColionder,
+	kCampaignAtlanteanOpol,
+	kCampaignAtlanteanOstur,
+	kCampaignAtlanteanKalitath,
+	kCampaignFrisianReebaud,
+	kCampaignFrisianHauke,
+	kCampaignFrisianMaukor,
+	kCampaignFrisianMurilius,
+	kCampaignFrisianClaus,
+	kCampaignFrisianHenneke,
+	kCampaignFrisianIniucundus,
+	kCampaignFrisianAngadthur,
+	kCampaignFrisianAmazon,
+	kCampaignFrisianKetelsen,
+	kSPScenarioRiverAdvisor,
+
+	// Returned when lookup by name fails
+	kUnknown
+};
+
+/**************************************************************************************
+ *
+ * Don't forget to update doc/sphinx/source/themes.rst when you add or remove styles!
+ *
+ **************************************************************************************/
+
+enum class StyledSize {
+	kFsTextDefaultGap,
+	kFsTextSpaceBeforeInlineHeader,
+	kWuiTextDefaultGap,
+	kWuiTextSpaceBeforeInlineHeader,
+	kWuiSpaceBeforeImmovableIcon,
+	kWinConditionMessageGap,
+	kHelpTerrainTreeHeaderSpaceBefore,
+	kHelpTerrainTreeHeaderSpaceAfter,
+	kEditorTooltipIconGap,
+	kCampaignMessageBoxDefaultH,
+	kCampaignMessageBoxDefaultW,
+	kCampaignMessageBoxTopPosY,
+	kCampaignMessageBoxSizeStep,
+	kCampaignMessageBoxMinH,
+	kCampaignMessageBoxMaxH,
+	kCampaignMessageBoxMinW,
+	kCampaignMessageBoxMaxW,
+	kCampaignFri02PoemIndent,
+	kSPScenarioPlateauMessageBoxPosY,
+	kUIDefaultPadding
+};
+
+}  // namespace UI
+
+/** Try to resolve an image file path relative to the
+ * active theme or the template directory or the data directory, in this order.
+ * Returns a fallback image path on failure.
+ */
+std::string resolve_template_image_filename(const std::string& path);
 
 class StyleManager {
 public:
@@ -61,6 +132,18 @@ public:
 	[[nodiscard]] const UI::WareInfoStyleInfo& ware_info_style(UI::WareInfoStyle) const;
 	[[nodiscard]] const UI::WindowStyleInfo& window_style(UI::WindowStyle) const;
 	[[nodiscard]] const UI::FontStyleInfo& font_style(UI::FontStyle style) const;
+	[[nodiscard]] const UI::ParagraphStyleInfo& paragraph_style(UI::ParagraphStyle style) const;
+	[[nodiscard]] const RGBColor& color(UI::ColorStyle id) const;
+	[[nodiscard]] int styled_size(UI::StyledSize id) const;
+
+	// Look up by name for Lua.
+	// If there is no style defined with the given name, then log it as warning and return a style
+	// that makes the erroneously formatted text stand out.
+	[[nodiscard]] const UI::FontStyleInfo& font_style(std::string name) const;
+	[[nodiscard]] const UI::ParagraphStyleInfo& paragraph_style(std::string name) const;
+	[[nodiscard]] const RGBColor& color(std::string name) const;
+	// Returns 0 if 'name' is not defined.
+	[[nodiscard]] int styled_size(std::string name) const;
 
 	// Special elements
 	[[nodiscard]] int minimum_font_size() const;
@@ -78,18 +161,38 @@ public:
 
 private:
 	using PanelStyleMap = std::map<UI::PanelStyle, std::unique_ptr<const UI::PanelStyleInfo>>;
-	void add_button_style(UI::ButtonStyle style, const LuaTable& table);
-	void add_slider_style(UI::SliderStyle style, const LuaTable& table);
-	void add_editbox_style(UI::PanelStyle style, const LuaTable& table);
-	void add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table);
-	void add_progressbar_style(UI::PanelStyle style, const LuaTable& table);
-	void add_table_style(UI::PanelStyle style, const LuaTable& table);
+	void add_button_style(UI::ButtonStyle style,
+	                      const LuaTable& table,
+	                      const std::string& parent,
+	                      const std::string& key);
+	void add_slider_style(UI::SliderStyle style,
+	                      const LuaTable& table,
+	                      const std::string& parent,
+	                      const std::string& key);
+	void add_editbox_style(UI::PanelStyle style, const LuaTable& table, const std::string& key);
+	void add_tabpanel_style(UI::TabPanelStyle style,
+	                        const LuaTable& table,
+	                        const std::string& parent,
+	                        const std::string& key);
+	void add_progressbar_style(UI::PanelStyle style, const LuaTable& table, const std::string& key);
+	void add_table_style(UI::PanelStyle style, const LuaTable& table, const std::string& key);
 	void set_statistics_plot_style(const LuaTable& table);
 	void set_building_statistics_style(const LuaTable& table);
-	void add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table);
-	void add_window_style(UI::WindowStyle style, const LuaTable& table);
-	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
+	void add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table, const std::string& key);
+	void add_window_style(UI::WindowStyle style, const LuaTable& table, const std::string& key);
+	void add_dropdown_style(UI::PanelStyle style,
+	                        const LuaTable& table,
+	                        const std::string& parent,
+	                        const std::string& key);
+	void add_scrollbar_style(UI::PanelStyle style,
+	                         const LuaTable& table,
+	                         const std::string& parent,
+	                         const std::string& key);
 	void add_font_style(UI::FontStyle font, const LuaTable& table, const std::string& key);
+	void
+	add_paragraph_style(UI::ParagraphStyle style, const LuaTable& table, const std::string& key);
+	void add_color(UI::ColorStyle id, const LuaTable& table, const std::string& key);
+	void add_styled_size(UI::StyledSize id, const LuaTable& table, const std::string& key);
 
 	std::map<UI::ButtonStyle, std::unique_ptr<const UI::ButtonStyleInfo>> buttonstyles_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::TextPanelStyleInfo>> editboxstyles_;
@@ -101,7 +204,14 @@ private:
 	int minimum_font_size_, focus_border_thickness_;
 	RGBColor minimap_icon_frame_;
 	RGBAColor focused_color_, semi_focused_color_;
+	std::map<std::string, UI::ColorStyle> color_keys_;
+	std::map<UI::ColorStyle, RGBColor> colors_;
+	std::map<std::string, UI::StyledSize> styled_size_keys_;
+	std::map<UI::StyledSize, int> styled_sizes_;
+	std::map<std::string, UI::FontStyle> fontstyle_keys_;
 	std::map<UI::FontStyle, std::unique_ptr<const UI::FontStyleInfo>> fontstyles_;
+	std::map<std::string, UI::ParagraphStyle> paragraphstyle_keys_;
+	std::map<UI::ParagraphStyle, std::unique_ptr<const UI::ParagraphStyleInfo>> paragraphstyles_;
 	std::unique_ptr<const UI::BuildingStatisticsStyleInfo> building_statistics_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::ProgressbarStyleInfo>> progressbar_styles_;
 	std::unique_ptr<const UI::StatisticsPlotStyleInfo> statistics_plot_style_;

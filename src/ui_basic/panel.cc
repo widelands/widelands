@@ -257,7 +257,7 @@ void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 		// handle input, and we gray out the user interface to indicate this.
 
 		rt.tile(Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()),
-		        &load_safe_template_image("loadscreens/ending.png"), Vector2i(0, 0));
+		        g_image_cache->get("loadscreens/ending.png"), Vector2i(0, 0));
 
 		draw_game_tip(rt, Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()), message, 2);
 	}
@@ -270,7 +270,7 @@ void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 		// overlay message we ignore user input and don't draw tooltips any more either.
 		// When deciding which panel gets to draw a tooltip (if allowed), modal panels and
 		// their children take precedence over a (potentially non-modal) toplevel panel.
-		if (message.empty() && (flags_ & pf_hide_all_overlays) == 0) {
+		if (message.empty() && !get_flag(pf_hide_all_overlays)) {
 			if (modal_ != nullptr) {
 				modal_.load()->do_tooltip();
 			} else if (is_modal()) {
@@ -414,7 +414,7 @@ int Panel::do_run() {
 	// so we continue refreshing the graphics while we wait.
 	if (logic_thread_locked_ != LogicThreadState::kEndingConfirmed && logic_thread_running_) {
 		logic_thread_locked_ = LogicThreadState::kEndingRequested;
-		while (((flags_ & pf_logic_think) != 0u) && logic_thread_running_ &&
+		while (get_flag(pf_logic_think) && logic_thread_running_ &&
 		       logic_thread_locked_ != LogicThreadState::kEndingConfirmed) {
 			const uint32_t start_time = SDL_GetTicks();
 
@@ -543,22 +543,6 @@ void Panel::update_desired_size() {
 }
 
 /**
- * Set whether this panel acts as a layouting toplevel.
- *
- * Typically, only true for \ref Window.
- */
-void Panel::set_layout_toplevel(bool ltl) {
-	flags_ &= ~pf_layout_toplevel;
-	if (ltl) {
-		flags_ |= pf_layout_toplevel;
-	}
-}
-
-bool Panel::get_layout_toplevel() const {
-	return (flags_ & pf_layout_toplevel) != 0u;
-}
-
-/**
  * Interpret \p pt as a point in the interior of this panel,
  * and translate it into the interior coordinate system of the parent
  * and return the result.
@@ -627,6 +611,14 @@ void Panel::move_to_top() {
 	if (parent_ == nullptr) {
 		return;
 	}
+	/* If all siblings above us are permanently on top, skip. */
+	bool all_on_top = true;
+	for (Panel* p = parent_->first_child_; p != this && all_on_top; p = p->next_) {
+		all_on_top &= p->get_flag(pf_always_on_top);
+	}
+	if (all_on_top) {
+		return;
+	}
 
 	// unlink
 	if (prev_ != nullptr) {
@@ -655,14 +647,12 @@ void Panel::move_to_top() {
  * Makes the panel visible or invisible
  */
 void Panel::set_visible(bool const on) {
-	if (((flags_ & pf_visible) > 1) == on) {
+	if (get_flag(pf_visible) == on) {
 		return;
 	}
 
-	flags_ &= ~pf_visible;
-	if (on) {
-		flags_ |= pf_visible;
-	} else if ((parent_ != nullptr) && parent_->focus_ == this) {
+	set_flag(pf_visible, on);
+	if (!on && (parent_ != nullptr) && parent_->focus_ == this) {
 		parent_->focus_ = nullptr;
 	}
 	if (parent_ != nullptr) {
@@ -777,6 +767,10 @@ void Panel::do_think() {
 		return;
 	}
 
+	if (get_flag(pf_always_on_top)) {
+		move_to_top();
+	}
+
 	if (thinks()) {
 		think();
 
@@ -789,7 +783,7 @@ void Panel::do_think() {
 	}
 
 	// think() may have called die()
-	if ((flags_ & pf_die) != 0u) {
+	if (get_flag(pf_die)) {
 		return;
 	}
 
@@ -979,21 +973,6 @@ std::deque<Panel*> Panel::gather_focusable_children() {
 }
 
 /**
- * Enable/Disable mouse handling by this panel
- * Default is enabled. Note that when mouse handling is disabled, child panels
- * don't receive mouse events either.
- *
- * \param yes true if the panel should receive mouse events
- */
-void Panel::set_handle_mouse(bool const yes) {
-	if (yes) {
-		flags_ |= pf_handle_mouse;
-	} else {
-		flags_ &= ~pf_handle_mouse;
-	}
-}
-
-/**
  * Enable/Disable mouse grabbing. If a panel grabs the mouse, all mouse
  * related events will be sent directly to that panel.
  * You should only grab the mouse as a response to a mouse event (e.g.
@@ -1014,15 +993,9 @@ void Panel::grab_mouse(bool const grab) {
  * Set if this panel can receive the keyboard focus
  */
 void Panel::set_can_focus(bool const yes) {
-
-	if (yes) {
-		flags_ |= pf_can_focus;
-	} else {
-		flags_ &= ~pf_can_focus;
-
-		if ((parent_ != nullptr) && parent_->focus_ == this) {
-			parent_->focus_ = nullptr;
-		}
+	set_flag(pf_can_focus, yes);
+	if (!yes && (parent_ != nullptr) && parent_->focus_ == this) {
+		parent_->focus_ = nullptr;
 	}
 }
 
@@ -1056,20 +1029,6 @@ void Panel::focus(const bool topcaller) {
 }
 
 /**
- * Enables/Disables calling think() during the event loop.
- * The default is enabled.
- *
- * \param yes true if the panel's think function should be called
- */
-void Panel::set_thinks(bool const yes) {
-	if (yes) {
-		flags_ |= pf_thinks;
-	} else {
-		flags_ &= ~pf_thinks;
-	}
-}
-
-/**
  * Cause this panel to be removed on the next frame.
  * Use this for a panel that needs to destroy itself after a button has
  * been pressed (e.g. non-modal dialogs).
@@ -1078,11 +1037,11 @@ void Panel::set_thinks(bool const yes) {
 void Panel::die() {
 	initialized_ = false;
 
-	flags_ &= ~pf_visible;
-	flags_ |= pf_die;
+	set_flag(pf_visible, false);
+	set_flag(pf_die, true);
 
 	for (Panel* p = parent_; p != nullptr; p = p->parent_) {
-		p->flags_ |= pf_child_die;
+		p->set_flag(pf_child_die, true);
 		if (p == modal_) {
 			break;
 		}
@@ -1129,15 +1088,15 @@ void Panel::check_child_death() {
 		Panel* p = next;
 		next = p->next_;
 
-		if ((p->flags_ & pf_die) != 0u) {
+		if (p->get_flag(pf_die)) {
 			p->do_delete();
 			p = nullptr;
-		} else if ((p->flags_ & pf_child_die) != 0u) {
+		} else if (p->get_flag(pf_child_die)) {
 			p->check_child_death();
 		}
 	}
 
-	flags_ &= ~pf_child_die;
+	set_flag(pf_child_die, false);
 }
 
 /**
@@ -1238,13 +1197,12 @@ void Panel::find_all_children_at(const int16_t x,
 inline Panel* Panel::child_at_mouse_cursor(int32_t const x, int32_t const y, Panel* child) {
 
 	for (; child != nullptr; child = child->next_) {
-		if (!child->handles_mouse() || !child->is_visible()) {
+		if (!child->is_visible() || x >= child->x_ + static_cast<int32_t>(child->w_) ||
+		    x < child->x_ || y >= child->y_ + static_cast<int32_t>(child->h_) || y < child->y_ ||
+		    !child->check_handles_mouse(x - child->x_, y - child->y_)) {
 			continue;
 		}
-		if (x < child->x_ + static_cast<int32_t>(child->w_) && x >= child->x_ &&
-		    y < child->y_ + static_cast<int32_t>(child->h_) && y >= child->y_) {
-			break;
-		}
+		break;
 	}
 
 	if ((mousein_child_ != nullptr) && mousein_child_ != child) {
@@ -1301,7 +1259,7 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	}
 	x -= lborder_;
 	y -= tborder_;
-	if ((flags_ & pf_top_on_click) != 0u) {
+	if (get_flag(pf_top_on_click)) {
 		move_to_top();
 	}
 
@@ -1323,13 +1281,11 @@ bool Panel::do_mousewheel(int32_t x, int32_t y, uint16_t modstate, Vector2i rel_
 
 	// Check if a child-panel is beneath the mouse and processes the event
 	for (Panel* child = first_child_; child != nullptr; child = child->next_) {
-		if (!child->handles_mouse() || !child->is_visible()) {
-			continue;
-		}
-		if (rel_mouse_pos.x >= child->x_ + static_cast<int32_t>(child->w_) ||
+		if (!child->is_visible() || rel_mouse_pos.x >= child->x_ + static_cast<int32_t>(child->w_) ||
 		    rel_mouse_pos.x < child->x_ ||
 		    rel_mouse_pos.y >= child->y_ + static_cast<int32_t>(child->h_) ||
-		    rel_mouse_pos.y < child->y_) {
+		    rel_mouse_pos.y < child->y_ ||
+		    !child->check_handles_mouse(x - child->x_, y - child->y_)) {
 			continue;
 		}
 		// Found a child at the position

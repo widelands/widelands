@@ -220,6 +220,25 @@ MainMenu::MainMenu(const bool skip_init)
 	initialization_complete();
 }
 
+void MainMenu::main_loop() {
+	for (;;) {
+		try {
+			run<int>();
+			return;  // We only get here though normal termination by the user.
+		} catch (const std::exception& e) {
+			// This is the outermost wrapper within the GUI and should not normally be reachable.
+			show_messagebox(
+			   _("Error!"),
+			   format(
+			      _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
+			        "this problem to help us improve Widelands. You will find related messages in the "
+			        "standard output (stdout.txt on Windows). You are using version %2$s.\n"
+			        "Please add this information to your report."),
+			      e.what(), build_ver_details()));
+		}
+	}
+}
+
 Widelands::Game* MainMenu::create_safe_game(const bool show_error) {
 	try {
 		return new Widelands::Game;
@@ -239,15 +258,22 @@ Widelands::Game* MainMenu::create_safe_game(const bool show_error) {
 void MainMenu::update_template() {
 	UI::Panel::update_template();
 
-	splashscreen_ = &load_safe_template_image("loadscreens/splash.jpg");
-	title_image_ = &load_safe_template_image("loadscreens/logo.png");
+	splashscreen_ = g_image_cache->get("loadscreens/splash.jpg");
+	title_image_ = g_image_cache->get("loadscreens/logo.png");
 
 	images_.clear();
 	for (const std::string& img : g_fs->list_directory(template_dir() + "loadscreens/mainmenu")) {
 		images_.push_back(img);
 	}
+	if (images_.empty() && !is_using_default_theme()) {
+		log_warn("No main menu backgrounds found, using fallback images");
+		for (const std::string& img :
+		     g_fs->list_directory(kDefaultTemplate + "loadscreens/mainmenu")) {
+			images_.push_back(img);
+		}
+	}
 	if (images_.empty()) {
-		log_warn("No main menu backgrounds found, using fallback image");
+		log_warn("No main menu backgrounds found in default theme, using fallback image");
 		images_.emplace_back("images/logos/wl-ico-128.png");
 	}
 
@@ -304,8 +330,6 @@ void MainMenu::set_labels() {
 		Section& global_s = get_config_section();
 		set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 		set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
-		set_snap_windows_only_when_overlapping(
-		   global_s.get_bool("snap_windows_only_when_overlapping", false));
 		set_dock_windows_to_edges(global_s.get_bool("dock_windows_to_edges", false));
 	}
 
@@ -407,7 +431,7 @@ void MainMenu::set_labels() {
 			}
 		}
 		if (last_edited != nullptr) {
-			filename_for_continue_editing_ = last_edited->first.filename;
+			filename_for_continue_editing_ = last_edited->first.filenames.at(0);
 			editor_.add(
 			   _("Continue Editing"), MenuTarget::kEditorContinue, nullptr, false,
 			   format("%s<br>%s<br>%s<br>%s<br>%s",

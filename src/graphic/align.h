@@ -19,6 +19,7 @@
 #ifndef WL_GRAPHIC_ALIGN_H
 #define WL_GRAPHIC_ALIGN_H
 
+#include <cstdint>
 #include <string>
 
 #include "base/rect.h"

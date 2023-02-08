@@ -53,7 +53,6 @@ public:
 		bool sdl_cursor;
 
 		// Windows options
-		bool snap_win_overlap_only;
 		bool dock_windows_to_edges;
 		int32_t panel_snap_distance;
 		int32_t border_snap_distance;
@@ -162,7 +161,6 @@ private:
 	UI::Checkbox tooltip_accessibility_mode_;
 	UI::MultilineTextarea translation_info_;
 
-	UI::Checkbox snap_win_overlap_only_;
 	UI::Checkbox dock_windows_to_edges_;
 	UI::Checkbox animate_map_panning_;
 	UI::SpinBox sb_dis_panel_;
