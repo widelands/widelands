@@ -294,7 +294,7 @@ void InteractiveBase::rebuild_mapview_menu() {
                                                               _("Show Quick Navigation"),
 		                 MapviewMenuEntry::kQuicknav,
 		                 g_image_cache->get("images/wui/menus/quicknav.png"), false, "",
-		                 shortcut_string_for(KeyboardShortcut::kCommonQuicknavGUI, false));
+		                 shortcut_string_for(KeyboardShortcut::kInGameQuicknavGUI, false));
 	}
 
 	/** TRANSLATORS: An entry in the game's map view menu */
@@ -1735,7 +1735,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			toggle_minimap();
 			return true;
 		}
-		if (egbase().is_game() && matches_shortcut(KeyboardShortcut::kCommonQuicknavGUI, code)) {
+		if (egbase().is_game() && matches_shortcut(KeyboardShortcut::kInGameQuicknavGUI, code)) {
 			toggle_quicknav();
 			return true;
 		}

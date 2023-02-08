@@ -125,7 +125,6 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonZoomIn,
 	kCommonZoomOut,
 	kCommonZoomReset,
-	kCommonQuicknavGUI,
 	kCommonQuicknavPrev,
 	kCommonQuicknavNext,
 	kCommon_End = kCommonQuicknavNext,
@@ -194,23 +193,7 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameSpeedDownFast,
 	kInGameSpeedReset,
 	kInGameScrollToHQ,
-	kInGameMessagesGoto,
-	kInGameMessagesFilterAll,
-	kInGameMessagesFilterGeologists,
-	kInGameMessagesFilterEconomy,
-	kInGameMessagesFilterSeafaring,
-	kInGameMessagesFilterWarfare,
-	kInGameMessagesFilterScenario,
-	kInGameSeafaringstatsGotoShip,
-	kInGameSeafaringstatsWatchShip,
-	kInGameSeafaringstatsOpenShipWindow,
-	kInGameSeafaringstatsOpenShipWindowAndGoto,
-	kInGameSeafaringstatsFilterAll,
-	kInGameSeafaringstatsFilterIdle,
-	kInGameSeafaringstatsFilterShipping,
-	kInGameSeafaringstatsFilterExpWait,
-	kInGameSeafaringstatsFilterExpScout,
-	kInGameSeafaringstatsFilterExpPortspace,
+	kInGameQuicknavGUI,
 	kInGameQuicknavSet1,
 	kInGameQuicknavGoto1,
 	kInGameQuicknavSet2,
@@ -229,7 +212,32 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameQuicknavGoto8,
 	kInGameQuicknavSet9,
 	kInGameQuicknavGoto9,
-	kInGame_End = kInGameQuicknavGoto9,
+	kInGame_Main_End = kInGameQuicknavGoto9,
+
+	kInGameMessages_Begin = kInGame_Main_End + 1,
+	kInGameMessagesGoto = kInGameMessagesBegin,
+	kInGameMessagesFilterAll,
+	kInGameMessagesFilterGeologists,
+	kInGameMessagesFilterEconomy,
+	kInGameMessagesFilterSeafaring,
+	kInGameMessagesFilterWarfare,
+	kInGameMessagesFilterScenario,
+	kInGameMessages_End = kInGameFilterScenario,
+
+	kInGameSeafaringstats_Begin = kInGameMessages_End + 1,
+	kInGameSeafaringstatsGotoShip = kInGameSeafaringstats_End,
+	kInGameSeafaringstatsWatchShip,
+	kInGameSeafaringstatsOpenShipWindow,
+	kInGameSeafaringstatsOpenShipWindowAndGoto,
+	kInGameSeafaringstatsFilterAll,
+	kInGameSeafaringstatsFilterIdle,
+	kInGameSeafaringstatsFilterShipping,
+	kInGameSeafaringstatsFilterExpWait,
+	kInGameSeafaringstatsFilterExpScout,
+	kInGameSeafaringstatsFilterExpPortspace,
+	kInGameSeafaringstats_End = kInGameSeafaringstatsFilterExpPortspace,
+
+	kInGame_End = kInGameSeafaringstats_End,
 
 	kFastplace_Begin = kInGame_End + 1,
 	kFastplace_End = kFastplace_Begin + 127,  // Arbitrary limit of 128 fastplace shortcuts.
@@ -254,6 +262,21 @@ bool set_shortcut(KeyboardShortcut id, SDL_Keysym code, KeyboardShortcut* confli
 
 /** Look up the keysym assigned to a given shortcut ID. */
 SDL_Keysym get_shortcut(KeyboardShortcut);
+
+/**
+ * Get a formatted list of the current keyboard shortcuts with descriptions in the given range.
+ * @param start ID of the first shortcut to be included
+ * @param end ID of the last shortcut to be included
+ * @param prefix An optional prefix that will be removed from the descriptions
+ */
+std::string get_shortcut_range_help(
+   const KeyboardShortcut start, const KeyboardShortcut end, const std::string prefix = "");
+
+/** Get the formatted help of the current in game keyboard shortcuts including headers. */
+std::string get_ingame_shortcut_help();
+
+/** Get the formatted help of the current editor keyboard shortcuts including headers. */
+std::string get_editor_shortcut_help();
 
 /** Look up the hardcoded default keysym for a given shortcut ID. */
 SDL_Keysym get_default_shortcut(KeyboardShortcut);
