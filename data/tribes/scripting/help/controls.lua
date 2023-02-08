@@ -195,6 +195,12 @@ local r = {
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(wl.ui.get_shortcut("game_sfstats_watch")), _("Watch the selected ship"))
          )
+
+..
+vspace(20)
+..
+wl.ui.get_ingame_shortcut_help()
+
 }
 pop_textdomain()
 return r

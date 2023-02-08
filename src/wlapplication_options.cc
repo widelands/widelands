@@ -771,14 +771,13 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 };
 
 std::string get_shortcut_range_help(const KeyboardShortcut start, const KeyboardShortcut end, const std::string prefix) {
-	std::string rv = "<p>";
-	for (i = static_cast<uint16_t>(start), i <= static_cast<uint16_t>(end), ++i) {
+	std::string rv;
+	for (uint16_t i = static_cast<uint16_t>(start); i <= static_cast<uint16_t>(end); ++i) {
 		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
 		// TODO(tothxa): Will need formatting function in text_layout.h, like function dl() in
 		// richtext.lua. Also the ":" needs to be translatable, like in txts/help/common_helptexts.lua
 		rv += format("<p><font bold=1>%s:</font> %s</p>", shortcut_string_for(id, true), to_string(id));
 	}
-	rv += "</p>";
 	return rv;
 }
 
@@ -804,7 +803,6 @@ std::string get_editor_shortcut_help() {
 	std::string rv("<p>Keyboard Shortcuts</p><vspace gap=12>");
 	rv += get_shortcut_range_help(KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
 	rv += get_shortcut_range_help(KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditor_End);
-	rv += get_shortcut_range_help(  );
 	return rv;
 }
 

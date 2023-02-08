@@ -54,6 +54,12 @@ local r = {
                                -- TRANSLATORS: This is the helptext for an access key combination.
                                _("Set map elements to the value selected by ‘Set Value’"))
       )
+
+..
+vspace(20)
+..
+wl.ui.get_editor_shortcut_help()
+
 }
 pop_textdomain()
 return r
