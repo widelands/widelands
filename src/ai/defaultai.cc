@@ -6810,8 +6810,8 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				if (gametime > Time(30000)) {
 					int16_t inputs[kFNeuronBitSize] = {0};
 					inputs[1] = RNG::static_rand(5) == 0 ? 2 : -2;
-					inputs[2] = RNG::static_rand(std::abs(management_data.get_military_number_at(181)) /
-					                             10) == 0 ?
+					inputs[2] = RNG::static_rand((std::abs(management_data.get_military_number_at(181)) /
+					                             10) + 1) == 0 ?
                               3 :
                               -3;
 					inputs[3] = cur_strength > me_strength ? 2 : -1;
