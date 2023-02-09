@@ -6827,36 +6827,21 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					inputs[13] = cur_land > 2 * old60_land ? 2 : -4;
 					inputs[14] = cur_land > 2 * old_land ? 4 : -2;
 					inputs[15] =
-					   cur_strength + (cur_land /
-					                   (std::abs(management_data.get_military_number_at(182)) / 10)) >
-					         me_strength +
-					            (me_land /
-					             (std::abs(management_data.get_military_number_at(182)) / 10)) ?
-                     5 :
-                     -5;
+					   (cur_strength * std::abs(management_data.get_military_number_at(182) / 10)) + cur_land >
+					         (me_strength * std::abs(management_data.get_military_number_at(182) / 10)) +
+					            me_land ? 5 : -5;
 					inputs[16] =
-					   cur_strength + (cur_land /
-					                   (std::abs(management_data.get_military_number_at(183)) / 5)) >
-					         me_strength +
-					            (me_land / (std::abs(management_data.get_military_number_at(183)) / 5)) ?
-                     5 :
-                     -5;
+					   (cur_strength * std::abs(management_data.get_military_number_at(183) / 5)) + cur_land >
+					         (me_strength * std::abs(management_data.get_military_number_at(183) / 5)) +
+					            me_land ? 5 : -5;
 					inputs[17] =
-					   old_strength + (old_land /
-					                   (std::abs(management_data.get_military_number_at(182)) / 10)) >
-					         me_old_strength +
-					            (me_old_land /
-					             (std::abs(management_data.get_military_number_at(182)) / 10)) ?
-                     2 :
-                     -2;
+					   (old_strength * std::abs(management_data.get_military_number_at(182) / 10)) + old_land >
+					         (me_old_strength * std::abs(management_data.get_military_number_at(182) / 10)) +
+					            me_old_land ? 2 : -2;
 					inputs[18] =
-					   old60_strength + (old60_land /
-					                     (std::abs(management_data.get_military_number_at(184)) / 7)) >
-					         me_old60_strength +
-					            (me_old60_land /
-					             (std::abs(management_data.get_military_number_at(184)) / 7)) ?
-                     2 :
-                     -2;
+					   (old60_strength * std::abs(management_data.get_military_number_at(184) / 7)) + old60_land >
+					         (me_old60_strength * std::abs(management_data.get_military_number_at(184) / 7)) +
+					            me_old60_land ? 2 : -2;
 					inputs[19] = me_cass > cass ? 2 : -1;
 					inputs[20] = this_player->team_number() == 0 ? 7 : 0;
 					inputs[21] = this_player->team_number() == 0 ?
