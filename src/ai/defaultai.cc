@@ -6806,8 +6806,8 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 
 				// determine the diplomacy score of each player
 				int32_t diplo_score = 0;
-				// we need to be sure all magic numbers have been initialized
-				if (gametime > Time(5000)) {
+				// we need to be sure all magic numbers have been initialized so wait 30s
+				if (gametime > Time(30000)) {
 					int16_t inputs[kFNeuronBitSize] = {0};
 					inputs[1] = RNG::static_rand(5) == 0 ? 2 : -2;
 					inputs[2] = RNG::static_rand(std::abs(management_data.get_military_number_at(181)) /
