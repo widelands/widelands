@@ -27,6 +27,13 @@
 namespace UI {
 
 enum class ButtonStyle {
+
+	/************************************************************************************
+	 *
+	 * Don't forget to update doc/sphinx/source/themes.rst when you add or remove styles!
+	 *
+	 ************************************************************************************/
+
 	kFsMenuMenu,
 	kFsMenuPrimary,
 	kFsMenuSecondary,

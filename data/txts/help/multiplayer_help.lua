@@ -3,7 +3,8 @@ include "scripting/richtext.lua"
 return {
    func = function()
       push_textdomain("texts")
-      local r = rt(fs_color(
+      set_fs_style(true)
+      local r = rt(
          h1(_("Multiplayer Game Setup")) ..
          p(_("You are in the multiplayer launch game menu.")) ..
 
@@ -23,7 +24,8 @@ return {
 
          h2(_("Map details")) ..
          p(_("You can see information about the selected map or savegame on the right-hand side. A button next to the map name allows the host to change to a different map. Furthermore, the host is able to set a specific win condition, and finally can start the game as soon as all players are set up."))
-      ))
+      )
+      set_fs_style(false)
       pop_textdomain()
       return r
    end

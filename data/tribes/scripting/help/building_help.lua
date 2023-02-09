@@ -249,7 +249,7 @@ function building_help_general_string(tribe, building_description)
    if helptexts["lore_author"] ~= nil then
       lore_author = helptexts["lore_author"]
    end
-   result = result .. div("width=100%", p_font("align=right", "size=10 italic=1", lore_author .. vspace(3)))
+   result = result .. div("width=100%", styles.as_paragraph("wui_lore_author", lore_author))
 
    result = result .. h2(_("General"))
    result = result .. h3(_("Purpose:"))

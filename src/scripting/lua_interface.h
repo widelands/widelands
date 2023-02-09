@@ -38,6 +38,9 @@ public:
 	// Runs 'script' and returns the table it returned.
 	virtual std::unique_ptr<LuaTable> run_script(const std::string& path);
 
+	// Returns an empty table.
+	std::unique_ptr<LuaTable> empty_table();
+
 protected:
 	lua_State* lua_state_;
 };
