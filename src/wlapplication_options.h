@@ -132,6 +132,7 @@ enum class KeyboardShortcut : uint16_t {
 	kEditor_Begin = kCommon_End + 1,
 	kEditorNewMap = kEditor_Begin,
 	kEditorNewRandomMap,
+	kEditorUploadMap,
 	kEditorMapOptions,
 	kEditorUndo,
 	kEditorRedo,

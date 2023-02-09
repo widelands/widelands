@@ -230,6 +230,11 @@ void EditorInteractive::add_main_menu() {
 	              g_image_cache->get("images/wui/editor/menus/save_map.png"), false, "",
 	              shortcut_string_for(KeyboardShortcut::kCommonSave, false));
 
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("Publish Map Online…"), MainMenuEntry::kUploadAsAddOn,
+	              g_image_cache->get("images/wui/editor/menus/upload.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kEditorUploadMap, false));
+
 	menu_windows_.mapoptions.open_window = [this] {
 		new MainMenuMapOptions(*this, menu_windows_.mapoptions);
 	};
@@ -237,10 +242,6 @@ void EditorInteractive::add_main_menu() {
 	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions,
 	              g_image_cache->get("images/wui/editor/menus/map_options.png"), false, "",
 	              shortcut_string_for(KeyboardShortcut::kEditorMapOptions, false));
-
-	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("Publish Map Online…"), MainMenuEntry::kUploadAsAddOn,
-	              g_image_cache->get("images/wui/editor/menus/upload.png"));
 
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor,
@@ -913,6 +914,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorNewRandomMap, code)) {
 			menu_windows_.newrandommap.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorUploadMap, code)) {
+			publish_map();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorMapOptions, code)) {
