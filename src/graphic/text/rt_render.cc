@@ -1503,6 +1503,7 @@ public:
 		space_ = a["gap"].get_int(std::numeric_limits<uint16_t>::max());
 	}
 	void emit_nodes(std::vector<RenderNode*>& nodes) override {
+		new_node(nodes, new NewlineNode(this, nodestyle_));
 		new_node(nodes, new SpaceNode(this, nodestyle_, 0, space_));
 		new_node(nodes, new NewlineNode(this, nodestyle_));
 	}

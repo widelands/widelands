@@ -24,6 +24,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_globals.h"
 #include "scripting/lua_path.h"
+#include "scripting/lua_styles.h"
 #include "scripting/lua_table.h"
 #include "scripting/lua_ui.h"
 #include "scripting/run_script.h"
@@ -72,6 +73,7 @@ LuaInterface::LuaInterface() {
 
 	// And helper methods.
 	LuaPath::luaopen_path(lua_state_);
+	LuaStyles::luaopen_styles(lua_state_);
 
 	// Also push the "wl" and the "hooks" table.
 	lua_newtable(lua_state_);
@@ -95,4 +97,11 @@ void LuaInterface::interpret_string(const std::string& cmd) {
 
 std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& path) {
 	return ::run_script(lua_state_, g_fs->fix_cross_file(path), g_fs);
+}
+
+std::unique_ptr<LuaTable> LuaInterface::empty_table() {
+	lua_newtable(lua_state_);
+	std::unique_ptr<LuaTable> rv(new LuaTable(lua_state_));
+	lua_pop(lua_state_, 1);
+	return rv;
 }

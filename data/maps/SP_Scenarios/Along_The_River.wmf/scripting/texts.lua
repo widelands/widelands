@@ -3,7 +3,7 @@
 -- =======================================================================
 -- Formats message box with objectives.
 function advisor(title, text)
-   return speech("map:advisor.png", "EEBB00", title, text)
+   return speech("map:advisor.png", styles.color("map_river_advisor"), title, text)
 end
 
 briefing_intro = {

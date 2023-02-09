@@ -15,8 +15,11 @@ return {
       local result = li_object(tree.name, "")
 
       -- TRANSLATORS: A header in the editor help. Terrains preferred by a type of tree.
-      result = result .. vspace(3) .. h2(vspace(12) .. _("Preferred terrains")) .. vspace(3)
-      result = result .. terrain_affinity_help(tree)
+      result = result ..
+               vspace(styles.get_size("help_terrain_tree_header_space_before")) ..
+               h2(_("Preferred terrains")) ..
+               vspace(styles.get_size("help_terrain_tree_header_space_after")) ..
+               terrain_affinity_help(tree)
 
       pop_textdomain()
       return {

@@ -35,7 +35,8 @@ function immovable_help_string(tribe, immovable_description)
       result = h2(_("Purpose")) ..
          li_object(immovable_description.name, helptexts.purpose)
    elseif image ~= "" then
-      result = p(vspace(14) .. img(immovable_description.icon_name))
+      result = p(vspace(styles.get_size("wui_space_before_immovable_icon")) ..
+                 img(immovable_description.icon_name))
    end
 
    if helptexts.note ~= nil then

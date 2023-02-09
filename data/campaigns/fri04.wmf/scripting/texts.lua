@@ -3,19 +3,19 @@
 -- =========================
 
 function claus(title, text)
-   return speech ("map:claus.png", "1CC200", title, text)
+   return speech ("map:claus.png", styles.color("campaign_fri_claus"), title, text)
 end
 function henneke(title, text)
-   return speech ("map:henneke.png", "F7FF00", title, text)
+   return speech ("map:henneke.png", styles.color("campaign_fri_henneke"), title, text)
 end
 function reebaud(title, text)
-   return speech("map:reebaud.png", "55BB55", title, text)
+   return speech("map:reebaud.png", styles.color("campaign_fri_reebaud"), title, text)
 end
 function iniucundus(title, text)
-   return speech ("map:iniucundus.png", "FF0059", title, text)
+   return speech ("map:iniucundus.png", styles.color("campaign_fri_iniucundus"), title, text)
 end
 function amazon(title, text)
-   return speech ("map:amazon.png", "6C0097", title, text)
+   return speech ("map:amazon.png", styles.color("campaign_fri_amazon"), title, text)
 end
 
 -- =======================================================================

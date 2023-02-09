@@ -77,6 +77,10 @@ FontStyleInfo::Face FontStyleInfo::string_to_face(const std::string& init_face) 
 }
 
 std::string FontStyleInfo::as_font_tag(const std::string& text) const {
+	return format("%s%s</font>", as_font_open(), text);
+}
+
+std::string FontStyleInfo::as_font_open() const {
 	std::string optionals;
 	if (bold_) {
 		optionals += " bold=1";
@@ -90,8 +94,8 @@ std::string FontStyleInfo::as_font_tag(const std::string& text) const {
 	if (underline_) {
 		optionals += " underline=1";
 	}
-	return format("<font face=%s size=%d color=%s%s>%s</font>", face_to_string(), size_,
-	              color_.hex_value(), optionals, text);
+	return format(
+	   "<font face=%s size=%d color=%s%s>", face_to_string(), size_, color_.hex_value(), optionals);
 }
 
 FontStyleInfo::Face FontStyleInfo::face() const {

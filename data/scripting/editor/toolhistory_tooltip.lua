@@ -9,6 +9,8 @@
 include "scripting/richtext.lua"
 include "scripting/help.lua"
 
+local gap = styles.get_size("editor_tooltip_icon_gap")
+
 return {
    func = function(mo_type, ...)
       push_textdomain("widelands_editor")
@@ -16,13 +18,13 @@ return {
       for i,name in ipairs{...} do
          if mo_type == "terrain" then
             local descr = wl.Editor():get_terrain_description(name)
-            result = result .. img(descr.representative_image) ..space(2)
+            result = result .. img(descr.representative_image) .. space(gap)
 
          elseif mo_type == "critter" then
-            result = result .. img_object(name) ..space(2)
+            result = result .. img_object(name) .. space(gap)
 
          elseif mo_type == "immovable" then
-            result = result .. img_object(name) ..space(2)
+            result = result .. img_object(name) .. space(gap)
 
          end
       end

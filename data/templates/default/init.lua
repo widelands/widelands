@@ -31,6 +31,34 @@ local wui_font_color = {255, 255, 0}
 local wui_font_face = "sans"
 local wui_font_size = 14
 
+local fs_text_padding = 6
+local fs_text_space_before = 0
+local fs_text_space_after = fs_text_padding
+local fs_heading_space_before_big = 2 * fs_text_padding
+local fs_heading_space_before_small = fs_text_padding
+local fs_heading_space_after = 2 * fs_text_padding
+local fs_heading_color = {209, 209, 209}
+local about_title_color = {47, 145, 49}
+
+local wui_text_padding = 6
+local wui_text_space_before = 0
+local wui_text_space_after = wui_text_padding
+local wui_heading_space_before_big = 2 * wui_text_padding
+local wui_heading_space_before_small = wui_text_padding
+local wui_heading_space_after = 2 * wui_text_padding
+local wui_heading_color = {209, 209, 209}
+local campaign_leader_color = about_title_color
+
+local h1_font_size = 18
+local h2_font_size = 14
+local h3_font_size = 13
+local h4_font_size = 12
+local p_font_size = 12
+
+local unknown_font_color = {209, 45, 45}
+local unknown_font_face = "sans"
+local unknown_font_size = 16
+
 local default_wui_font = {
    color = wui_font_color,
    face = wui_font_face,
@@ -375,7 +403,7 @@ return {
       }
    },
 
-   -- Map census and statistics, and building statistics window
+   -- Map census and status, and building statistics window
    building_statistics = {
       census_font = {
          color = wui_font_color, -- Default color
@@ -384,7 +412,7 @@ return {
          bold = true,
          shadow = true
       },
-      statistics_font = {
+      statistics_font = { -- Also known as status
          color = wui_font_color, -- Default color
          face = "condensed",
          size = wui_font_size,
@@ -780,5 +808,259 @@ return {
          bold = true,
          shadow = true
       },
+
+      -- Returned when lookup by name fails.
+      -- Make this stand out to help debugging
+      unknown = {
+         color = unknown_font_color,
+         face = unknown_font_face,
+         size = unknown_font_size,
+         bold = true,
+      }
    },
+
+   paragraphs = {
+      -- Campaign and help texts
+      readme_title = {
+         -- this is used for the "Widelands" title
+         font = {
+            color = about_title_color,
+            -- should be "Widelands/Widelands.ttf", but it's not possible to pass font filename here
+            face = fs_font_face,
+            size = 38,
+         },
+         align = "center",
+         valign = "center",
+         space_before = 0,
+         space_after = fs_text_space_after,
+      },
+      about_title = {
+         font = {
+            color = about_title_color,
+            face = fs_font_face,
+            size = 28,
+         },
+         align = "center",
+         space_before = fs_text_space_before,
+         space_after = fs_text_space_after,
+      },
+      about_subtitle = {
+         font = {
+            color = fs_heading_color,
+            face = fs_font_face,
+            size = 14,
+            italic = true,
+         },
+         align = "center",
+         space_before = fs_text_space_before,
+         space_after = fs_text_space_after,
+      },
+      authors_heading_1 = {
+         font = {
+            color = {244, 161, 49},
+            face = fs_font_face,
+            size = 24,
+         },
+         space_before = fs_heading_space_before_big,
+         space_after = fs_heading_space_after,
+      },
+      fs_heading_1 = {
+         font = {
+            color = fs_heading_color,
+            face = fs_font_face,
+            size = h1_font_size,
+            bold = true,
+         },
+         space_before = fs_heading_space_before_big,
+         space_after = fs_heading_space_after,
+      },
+      fs_heading_2 = {
+         font = {
+            color = fs_heading_color,
+            face = fs_font_face,
+            size = h2_font_size,
+            bold = true,
+         },
+         space_before = fs_heading_space_before_big,
+         space_after = fs_heading_space_after,
+      },
+      fs_heading_3 = {
+         font = {
+            color = fs_heading_color,
+            face = fs_font_face,
+            size = h3_font_size,
+         },
+         space_before = fs_heading_space_before_small,
+         space_after = fs_heading_space_after,
+      },
+      fs_heading_4 = {
+         font = {
+            color = fs_heading_color,
+            face = fs_font_face,
+            size = h4_font_size,
+            italic = true,
+         },
+         space_before = fs_text_space_before,
+         space_after = fs_text_space_after,
+      },
+      fs_text = {
+         font = {
+            color = fs_font_color,
+            face = fs_font_face,
+            size = p_font_size,
+         },
+         space_before = fs_text_space_before,
+         space_after = fs_text_space_after,
+      },
+      wui_objectives_heading = {
+         font = {
+            color = wui_heading_color,
+            face = wui_font_face,
+            size = h1_font_size,
+            bold = true,
+         },
+         space_before = 3 * wui_text_padding,
+         space_after = 0,
+         valign = "center",
+      },
+      wui_heading_1 = {
+         font = {
+            color = wui_heading_color,
+            face = wui_font_face,
+            size = h1_font_size,
+            bold = true,
+         },
+         space_before = wui_heading_space_before_big,
+         space_after = wui_heading_space_after,
+      },
+      wui_heading_2 = {
+         font = {
+            color = wui_heading_color,
+            face = wui_font_face,
+            size = h2_font_size,
+            bold = true,
+         },
+         space_before = wui_heading_space_before_big,
+         space_after = wui_heading_space_after,
+      },
+      wui_heading_3 = {
+         font = {
+            color = wui_heading_color,
+            face = wui_font_face,
+            size = h3_font_size,
+         },
+         space_before = wui_heading_space_before_small,
+         space_after = wui_heading_space_after,
+      },
+      wui_heading_4 = {
+         font = {
+            color = wui_heading_color,
+            face = wui_font_face,
+            size = h4_font_size,
+            italic = true,
+         },
+         space_before = wui_text_space_before,
+         space_after = wui_text_space_after,
+      },
+      wui_text = {
+         font = {
+            color = wui_font_color,
+            face = wui_font_face,
+            size = p_font_size,
+         },
+         space_before = wui_text_space_before,
+         space_after = wui_text_space_after,
+      },
+      wui_image_line = {
+         font = {
+            color = wui_font_color,
+            face = wui_font_face,
+            size = p_font_size,
+         },
+         space_before = wui_text_space_before + wui_text_padding,
+         space_after = wui_text_space_after + wui_text_padding,
+      },
+      wui_lore_author = {
+         font = {
+            color = wui_font_color,
+            face = wui_font_face,
+            size = 10,
+            italic = true,
+         },
+         align = "right",
+         space_before = wui_text_space_before,
+         space_after = wui_text_space_after + 3,
+      },
+
+      -- Returned when lookup by name fails.
+      -- Make this stand out to help debugging
+      unknown = {
+         font = {
+            color = unknown_font_color,
+            face = unknown_font_face,
+            size = unknown_font_size,
+            italic = true,
+         },
+         space_before = unknown_font_size,
+         space_after = unknown_font_size,
+      },
+   },
+
+   colors = {
+      campaign_bar_thron = campaign_leader_color,
+      campaign_bar_boldreth = {255, 0, 0},
+      campaign_bar_khantrukh = {128, 128, 255},
+
+      campaign_emp_lutius = campaign_leader_color,
+      campaign_emp_amalea = {255, 0, 0},
+      campaign_emp_saledus = {143, 145, 49},
+      campaign_emp_marcus = {17, 117, 175},
+      campaign_emp_julia = {208, 208, 208},
+
+      campaign_atl_jundlina = campaign_leader_color,
+      campaign_atl_sidolus = {255, 26, 48},
+      campaign_atl_loftomor = {253, 213, 61},
+      campaign_atl_colionder = {51, 169, 253},
+      campaign_atl_opol = {255, 63, 251},
+      campaign_atl_ostur = {55, 95, 252},
+      campaign_atl_kalitath = {255, 0, 0},
+
+      campaign_fri_reebaud = {85, 187, 85},
+      campaign_fri_hauke = {119, 153, 187},
+      campaign_fri_maukor = {153, 0, 0},
+      campaign_fri_murilius = {187, 119, 85},
+      campaign_fri_claus = {28, 194, 0},
+      campaign_fri_henneke = {247, 255, 0},
+      campaign_fri_iniucundus = {255, 0, 89},
+      campaign_fri_angadthur = {0, 22, 255},
+      campaign_fri_amazon = {108, 0, 151},
+      campaign_fri_ketelsen = {68, 85, 204},
+
+      map_river_advisor = {238, 187, 0},
+
+      unknown = {73, 64, 55}
+   },
+
+   styled_sizes = {
+      fs_text_default_gap = fs_text_padding,
+      fs_text_space_before_inline_header = 8,
+      wui_text_default_gap = wui_text_padding,
+      wui_text_space_before_inline_header = 8,
+      wui_space_before_immovable_icon = 14,
+      win_condition_message_gap = 8,
+      help_terrain_tree_header_space_before = 12,
+      help_terrain_tree_header_space_after = 3,
+      editor_tooltip_icon_gap = 2,
+      campaign_message_box_default_h = 400,
+      campaign_message_box_default_w = 450,
+      campaign_message_box_top_pos_y = 25,
+      campaign_message_box_size_step = 50,
+      campaign_message_box_h_min = 150,
+      campaign_message_box_h_max = 600,
+      campaign_message_box_w_min = 200,
+      campaign_message_box_w_max = 500,
+      campaign_fri02_poem_indent = 10,
+      map_plateau_message_pos_y = 1,
+      ui_default_padding = 4,
+   }
 }
