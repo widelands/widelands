@@ -775,12 +775,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #undef QUICKNAV
 };
 
-std::string get_shortcut_range_help(const KeyboardShortcut start,
-                                    const KeyboardShortcut end,
-                                    const std::string prefix) {
+std::string get_shortcut_range_help(const KeyboardShortcut start, const KeyboardShortcut end) {
 	std::string rv;
 
-	// TRANSLATORS: The generic hotkey format
+	/** TRANSLATORS: The generic hotkey format */
 	const std::string fmt(pgettext("hotkey", "%s:"));
 
 	for (uint16_t i = static_cast<uint16_t>(start); i <= static_cast<uint16_t>(end); ++i) {
@@ -797,11 +795,9 @@ std::string get_ingame_shortcut_help() {
 	rv +=
 	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_Main_End);
 	rv += get_shortcut_range_help(
-	   KeyboardShortcut::kInGameMessages_Begin, KeyboardShortcut::kInGameMessages_End
-	   /* "Messages: " */);
+	   KeyboardShortcut::kInGameMessages_Begin, KeyboardShortcut::kInGameMessages_End);
 	rv += get_shortcut_range_help(
-	   KeyboardShortcut::kInGameSeafaringstats_Begin, KeyboardShortcut::kInGameSeafaringstats_End
-	   /* "Seafaring: " */);
+	   KeyboardShortcut::kInGameSeafaringstats_Begin, KeyboardShortcut::kInGameSeafaringstats_End);
 
 	// TODO(tothxa): Including Fastplace would be nice
 
