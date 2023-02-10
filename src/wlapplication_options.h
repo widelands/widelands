@@ -246,6 +246,7 @@ enum class KeyboardShortcut : uint16_t {
 	k_End = kFastplace_End
 };
 
+KeyboardShortcut operator+(const KeyboardShortcut& id, int i);
 KeyboardShortcut& operator++(KeyboardShortcut& id);
 
 /** Check whether a given shortcut is reserved for a fastplace shortcut slot. */

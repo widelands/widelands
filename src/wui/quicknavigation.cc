@@ -91,17 +91,12 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 	auto check_landmark = [this, key](const uint8_t i) {
 		// This function assumes that the shortcut entries are ordered
 		// Set1,Goto1,Set2,Goto2,Set3,Goto3,etc
-		if (matches_shortcut(static_cast<KeyboardShortcut>(
-		                        static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i),
-		                     key)) {
+		if (matches_shortcut(KeyboardShortcut::kInGameQuicknavSet1 + 2 * i, key)) {
 			set_landmark_to_current(i);
 			return true;
 		}
 		if (landmarks_[i].set &&
-		    matches_shortcut(
-		       static_cast<KeyboardShortcut>(
-		          static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i),
-		       key)) {
+		    matches_shortcut(KeyboardShortcut::kInGameQuicknavGoto1 + 2 * i, key)) {
 			goto_landmark(i);
 			return true;
 		}
@@ -243,10 +238,7 @@ void QuickNavigationWindow::rebuild() {
 		   i < kQuicknavSlots ?
             as_tooltip_text_with_hotkey(
 		         _("Go to this landmark"),
-		         shortcut_string_for(
-		            static_cast<KeyboardShortcut>(
-		               static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i),
-		            true),
+		         shortcut_string_for(KeyboardShortcut::kInGameQuicknavGoto1 + 2 * i, true),
 		         UI::PanelStyle::kWui) :
             _("Go to this landmark"));
 		b->set_enabled(q.landmarks()[i].set);
@@ -284,10 +276,7 @@ void QuickNavigationWindow::rebuild() {
 		   i < kQuicknavSlots ?
             as_tooltip_text_with_hotkey(
 		         _("Set this landmark to the current map view location"),
-		         shortcut_string_for(
-		            static_cast<KeyboardShortcut>(
-		               static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i),
-		            true),
+		         shortcut_string_for(KeyboardShortcut::kInGameQuicknavSet1 + 2 * i, true),
 		         UI::PanelStyle::kWui) :
             _("Set this landmark to the current map view location"));
 		b->sigclicked.connect([&q, i]() { q.set_landmark_to_current(i); });

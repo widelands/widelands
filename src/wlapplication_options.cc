@@ -666,87 +666,87 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_g),
                          "game_msg_goto",
-                         []() { return _("Messages: Go to Location"); })},
+                         []() { return _("Go to Location"); })},
    {KeyboardShortcut::kInGameMessagesFilterAll,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_0, KMOD_ALT),
                          "game_msg_filter_all",
-                         []() { return _("Messages: Show All"); })},
+                         []() { return _("Show All"); })},
    {KeyboardShortcut::kInGameMessagesFilterGeologists,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_1, KMOD_ALT),
                          "game_msg_filter_geo",
-                         []() { return _("Messages: Show Geologists’ Messages"); })},
+                         []() { return _("Show Geologists’ Messages"); })},
    {KeyboardShortcut::kInGameMessagesFilterEconomy,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_2, KMOD_ALT),
                          "game_msg_filter_eco",
-                         []() { return _("Messages: Show Economy Messages"); })},
+                         []() { return _("Show Economy Messages"); })},
    {KeyboardShortcut::kInGameMessagesFilterSeafaring,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_3, KMOD_ALT),
                          "game_msg_filter_seafaring",
-                         []() { return _("Messages: Show Seafaring Messages"); })},
+                         []() { return _("Show Seafaring Messages"); })},
    {KeyboardShortcut::kInGameMessagesFilterWarfare,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_4, KMOD_ALT),
                          "game_msg_filter_warfare",
-                         []() { return _("Messages: Show Military Messages"); })},
+                         []() { return _("Show Military Messages"); })},
    {KeyboardShortcut::kInGameMessagesFilterScenario,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_5, KMOD_ALT),
                          "game_msg_filter_scenario",
-                         []() { return _("Messages: Show Scenario Messages"); })},
+                         []() { return _("Show Scenario Messages"); })},
    {KeyboardShortcut::kInGameSeafaringstatsGotoShip,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_j),
                          "game_sfstats_goto",
-                         []() { return _("Seafaring: Go to Ship"); })},
+                         []() { return _("Go to Ship"); })},
    {KeyboardShortcut::kInGameSeafaringstatsWatchShip,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_f),
                          "game_sfstats_watch",
-                         []() { return _("Seafaring: Watch Ship"); })},
+                         []() { return _("Watch Ship"); })},
    {KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_o),
                          "game_sfstats_open",
-                         []() { return _("Seafaring: Open Ship Window"); })},
+                         []() { return _("Open Ship Window"); })},
    {KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_o, KMOD_SHIFT),
                          "game_sfstats_open_goto",
-                         []() { return _("Seafaring: Open Ship Window And Go to Ship"); })},
+                         []() { return _("Open Ship Window And Go to Ship"); })},
    {KeyboardShortcut::kInGameSeafaringstatsFilterAll,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_0, KMOD_SHIFT),
                          "game_sfstats_filter_all",
-                         []() { return _("Seafaring: Show All Ships"); })},
+                         []() { return _("Show All Ships"); })},
    {KeyboardShortcut::kInGameSeafaringstatsFilterIdle,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_1, KMOD_SHIFT),
                          "game_sfstats_filter_idle",
-                         []() { return _("Seafaring: Show Idle Ships"); })},
+                         []() { return _("Show Idle Ships"); })},
    {KeyboardShortcut::kInGameSeafaringstatsFilterShipping,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_2, KMOD_SHIFT),
                          "game_sfstats_filter_ship",
-                         []() { return _("Seafaring: Show Transport Ships"); })},
+                         []() { return _("Show Transport Ships"); })},
    {KeyboardShortcut::kInGameSeafaringstatsFilterExpWait,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_3, KMOD_SHIFT),
                          "game_sfstats_filter_wait",
-                         []() { return _("Seafaring: Show Waiting Expeditions"); })},
+                         []() { return _("Show Waiting Expeditions"); })},
    {KeyboardShortcut::kInGameSeafaringstatsFilterExpScout,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_4, KMOD_SHIFT),
                          "game_sfstats_filter_scout",
-                         []() { return _("Seafaring: Show Scouting Expeditions"); })},
+                         []() { return _("Show Scouting Expeditions"); })},
    {KeyboardShortcut::kInGameSeafaringstatsFilterExpPortspace,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_5, KMOD_SHIFT),
                          "game_sfstats_filter_port",
-                         []() { return _("Seafaring: Show Expeditions with Port Spaces"); })},
+                         []() { return _("Show Expeditions with Port Spaces"); })},
    {KeyboardShortcut::kInGameQuicknavGUI,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_v),
@@ -775,31 +775,39 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #undef QUICKNAV
 };
 
+KeyboardShortcut operator+(const KeyboardShortcut& id, const int i) {
+	return static_cast<KeyboardShortcut>(static_cast<uint16_t>(id) + i);
+}
+
 KeyboardShortcut& operator++(KeyboardShortcut& id) {
-	id = static_cast<KeyboardShortcut>(static_cast<uint16_t>(id) + 1);
+	id = id + 1;
 	return id;
 }
 
 std::string get_shortcut_range_help(const KeyboardShortcut start, const KeyboardShortcut end) {
-	std::string rv;
-
 	/** TRANSLATORS: The generic hotkey format */
 	const std::string fmt(pgettext("hotkey", "%s:"));
 
+	std::string rv;
 	for (KeyboardShortcut id = start; id <= end; ++id) {
-		rv += as_definition_line(format(fmt, shortcut_string_for(id, true)), to_string(id));
+		rv += as_definition_line(
+		         format(fmt, shortcut_string_for(id, true)), shortcuts_.at(id).descname());
 	}
 	return rv;
 }
 
 std::string get_ingame_shortcut_help() {
-	// TODO(tothxa): just a stub for now
-	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, "Keyboard Shortcuts"));
+	// TODO(tothxa): work in progress
+	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Keyboard Shortcuts")));
 	rv += get_shortcut_range_help(KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
 	rv +=
 	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_Main_End);
+
+	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Message Window"));
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kInGameMessages_Begin, KeyboardShortcut::kInGameMessages_End);
+
+	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Ship Statistics"));
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kInGameSeafaringstats_Begin, KeyboardShortcut::kInGameSeafaringstats_End);
 
@@ -809,7 +817,7 @@ std::string get_ingame_shortcut_help() {
 }
 
 std::string get_editor_shortcut_help() {
-	// TODO(tothxa): just a stub for now
+	// TODO(tothxa): work in progress
 	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, "Keyboard Shortcuts"));
 	rv += get_shortcut_range_help(KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
 	rv += get_shortcut_range_help(KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditor_End);
@@ -862,7 +870,16 @@ const std::string& get_fastplace_group_name(const KeyboardShortcut id) {
 }
 
 std::string to_string(const KeyboardShortcut id) {
-	return shortcuts_.at(id).descname();
+	if (id < KeyboardShortcut::kInGameMessages_Begin ||
+	    id > KeyboardShortcut::kInGameSeafaringstats_End) {
+		return shortcuts_.at(id).descname();
+	}
+	const std::string fmt = id < KeyboardShortcut::kInGameSeafaringstats_Begin ?
+	   /** TRANSLATORS: prefix for message window shortcuts in keyboard options */
+	   pgettext("hotkey", "Messages: %s") :
+	   /** TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard options */
+	   pgettext("hotkey", "Seafaring: %s");
+	return format(fmt, shortcuts_.at(id).descname());
 }
 
 SDL_Keysym get_default_shortcut(const KeyboardShortcut id) {
@@ -1013,9 +1030,8 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 }
 
 std::string matching_fastplace_shortcut(const SDL_Keysym key, const std::string& tribename) {
-	for (int i = static_cast<int>(KeyboardShortcut::kFastplace_Begin);
-	     i < static_cast<int>(KeyboardShortcut::kFastplace_End); ++i) {
-		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
+	for (KeyboardShortcut id = KeyboardShortcut::kFastplace_Begin;
+	     id < KeyboardShortcut::kFastplace_End; ++id) {
 		if (matches_shortcut(id, key)) {
 			const KeyboardShortcutInfo& info = shortcuts_.at(id);
 			const auto it = info.fastplace.find(tribename);
@@ -1163,8 +1179,7 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 static void init_fastplace_shortcuts(const bool force_defaults) {
 	int counter = 0;
 	for (KeyboardShortcut k = KeyboardShortcut::kFastplace_Begin;
-	     k <= KeyboardShortcut::kFastplace_End;
-	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+	     k <= KeyboardShortcut::kFastplace_End; ++k) {
 		if (force_defaults) {
 			shortcuts_.erase(k);
 		} else if (shortcuts_.count(k) != 0u) {
@@ -1192,9 +1207,8 @@ void init_fastplace_default_shortcuts(
 	std::set<std::string> used_keys;
 #endif
 
-	for (int i = static_cast<int>(KeyboardShortcut::kFastplace_Begin);
-	     i < static_cast<int>(KeyboardShortcut::kFastplace_End); ++i) {
-		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
+	for (KeyboardShortcut id = KeyboardShortcut::kFastplace_Begin;
+	     id < KeyboardShortcut::kFastplace_End; ++id) {
 		KeyboardShortcutInfo& info = shortcuts_.at(id);
 
 #ifndef NDEBUG
@@ -1222,8 +1236,7 @@ void init_fastplace_default_shortcuts(
 
 void init_shortcuts(const bool force_defaults) {
 	init_fastplace_shortcuts(force_defaults);
-	for (KeyboardShortcut k = KeyboardShortcut::k_Begin; k <= KeyboardShortcut::k_End;
-	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+	for (KeyboardShortcut k = KeyboardShortcut::k_Begin; k <= KeyboardShortcut::k_End; ++k) {
 		shortcuts_.at(k).current_shortcut = get_default_shortcut(k);
 		if (force_defaults) {
 			write_shortcut(k, shortcuts_.at(k).current_shortcut);

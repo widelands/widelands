@@ -277,14 +277,12 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	auto create_tab = [this, add_key](const std::string& title,
 	                                  const KeyboardShortcut shortcut_start,
 	                                  const KeyboardShortcut shortcut_end) {
-		const uint16_t s1 = static_cast<uint16_t>(shortcut_start);
-		const uint16_t s2 = static_cast<uint16_t>(shortcut_end);
-		assert(s1 < s2);
+		assert(shortcut_start < shortcut_end);
 		UI::Box* b =
 		   new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 		b->set_force_scrolling(true);
-		for (uint16_t k = s1; k <= s2; ++k) {
-			add_key(*b, static_cast<KeyboardShortcut>(k));
+		for (KeyboardShortcut k = shortcut_start; k <= shortcut_end; ++k) {
+			add_key(*b, k);
 		}
 		tabs_.add(title, title, b, "");
 		boxes_.push_back(b);
