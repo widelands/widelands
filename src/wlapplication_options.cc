@@ -777,18 +777,20 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 
 std::string get_shortcut_range_help(const KeyboardShortcut start, const KeyboardShortcut end, const std::string prefix) {
 	std::string rv;
+
+	// TRANSLATORS: The generic hotkey format
+	const std::string fmt(pgettext("hotkey", "%s:"));
+
 	for (uint16_t i = static_cast<uint16_t>(start); i <= static_cast<uint16_t>(end); ++i) {
 		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
-		// TODO(tothxa): Will need formatting function in text_layout.h, like function dl() in
-		// richtext.lua. Also the ":" needs to be translatable, like in txts/help/common_helptexts.lua
-		rv += format("<p><font bold=1>%s:</font> %s</p>", shortcut_string_for(id, true), to_string(id));
+		rv += as_definition_line(format(fmt, shortcut_string_for(id, true)), to_string(id));
 	}
 	return rv;
 }
 
 std::string get_ingame_shortcut_help() {
 	//TODO(tothxa): just a stub for now
-	std::string rv("<p>Keyboard Shortcuts</p><vspace gap=12>");
+	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, "Keyboard Shortcuts"));
 	rv += get_shortcut_range_help(KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
 	rv += get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_Main_End);
 	rv += get_shortcut_range_help(KeyboardShortcut::kInGameMessages_Begin,
@@ -805,7 +807,7 @@ std::string get_ingame_shortcut_help() {
 
 std::string get_editor_shortcut_help() {
 	//TODO(tothxa): just a stub for now
-	std::string rv("<p>Keyboard Shortcuts</p><vspace gap=12>");
+	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, "Keyboard Shortcuts"));
 	rv += get_shortcut_range_help(KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
 	rv += get_shortcut_range_help(KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditor_End);
 	return rv;
