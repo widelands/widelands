@@ -110,6 +110,8 @@ enum class KeyboardShortcut : uint16_t {
 	kCommon_Begin = kMainMenu_End + 1,
 	kCommonFullscreen = kCommon_Begin,
 	kCommonScreenshot,
+	kCommonDebugConsole,
+	kCommonCheatMode,
 	kCommonSave,
 	kCommonLoad,
 	kCommonExit,

@@ -359,6 +359,16 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_F11),
                          "screenshot",
                          []() { return _("Take Screenshot"); })},
+   {KeyboardShortcut::kCommonDebugConsole,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
+                         keysym(SDLK_SPACE, kDefaultCtrlModifier | KMOD_SHIFT),
+                         "debugconsole",
+                         []() { return _("Open the Debug Console (only in debug-builds)"); })},
+   {KeyboardShortcut::kCommonCheatMode,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
+                         keysym(SDLK_BACKSPACE, kDefaultCtrlModifier | KMOD_SHIFT),
+                         "cheatmode",
+                         []() { return _("Toggle Cheat Mode (only in debug-builds)"); })},
    {KeyboardShortcut::kCommonSave,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_s, kDefaultCtrlModifier),
@@ -803,10 +813,12 @@ std::string get_ingame_shortcut_help() {
 	rv +=
 	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_Main_End);
 
+	/** TRANSLATORS: Heading in "Controls" help */
 	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Message Window"));
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kInGameMessages_Begin, KeyboardShortcut::kInGameMessages_End);
 
+	/** TRANSLATORS: Heading in "Controls" help */
 	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Ship Statistics"));
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kInGameSeafaringstats_Begin, KeyboardShortcut::kInGameSeafaringstats_End);

@@ -1747,32 +1747,26 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 
-		switch (code.sym) {
 #ifndef NDEBUG  //  only in debug builds
-		case SDLK_SPACE:
-			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
-				GameChatMenu::create_script_console(
-				   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
-				return true;
+		if (matches_shortcut(KeyboardShortcut::kCommonDebugConsole, code)) {
+			GameChatMenu::create_script_console(
+			   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonCheatMode, code)) {
+			if (cheat_mode_enabled_) {
+				cheat_mode_enabled_ = false;
+			} else if (!omnipotent()) {
+				broadcast_cheating_message();
+				cheat_mode_enabled_ = true;
 			}
-			break;
-		case SDLK_BACKSPACE:
-			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
-				if (cheat_mode_enabled_) {
-					cheat_mode_enabled_ = false;
-				} else if (!omnipotent()) {
-					broadcast_cheating_message();
-					cheat_mode_enabled_ = true;
-				}
-				return true;
-			}
-			break;
+			return true;
+		}
 #endif
-		case SDLK_TAB:
+
+		if (code.sym == SDLK_TAB) {
 			toolbar()->focus();
 			return true;
-		default:
-			break;
 		}
 	}
 
