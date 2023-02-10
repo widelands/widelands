@@ -246,6 +246,8 @@ enum class KeyboardShortcut : uint16_t {
 	k_End = kFastplace_End
 };
 
+KeyboardShortcut& operator++(KeyboardShortcut& id);
+
 /** Check whether a given shortcut is reserved for a fastplace shortcut slot. */
 inline bool is_fastplace(const KeyboardShortcut id) {
 	return id >= KeyboardShortcut::kFastplace_Begin && id <= KeyboardShortcut::kFastplace_End;
@@ -269,7 +271,7 @@ SDL_Keysym get_shortcut(KeyboardShortcut);
  * @param start ID of the first shortcut to be included
  * @param end ID of the last shortcut to be included
  */
-std::string get_shortcut_range_help(const KeyboardShortcut start, const KeyboardShortcut end);
+std::string get_shortcut_range_help(KeyboardShortcut start, KeyboardShortcut end);
 
 /** Get the formatted help of the current in game keyboard shortcuts including headers. */
 std::string get_ingame_shortcut_help();

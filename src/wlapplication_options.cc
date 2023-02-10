@@ -775,14 +775,18 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #undef QUICKNAV
 };
 
+KeyboardShortcut& operator++(KeyboardShortcut& id) {
+      id = static_cast<KeyboardShortcut>(static_cast<uint16_t>(id) + 1);
+      return id;
+}
+
 std::string get_shortcut_range_help(const KeyboardShortcut start, const KeyboardShortcut end) {
 	std::string rv;
 
 	/** TRANSLATORS: The generic hotkey format */
 	const std::string fmt(pgettext("hotkey", "%s:"));
 
-	for (uint16_t i = static_cast<uint16_t>(start); i <= static_cast<uint16_t>(end); ++i) {
-		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
+	for (KeyboardShortcut id = start; id <= end; ++id) {
 		rv += as_definition_line(format(fmt, shortcut_string_for(id, true)), to_string(id));
 	}
 	return rv;
