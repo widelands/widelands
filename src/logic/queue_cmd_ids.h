@@ -98,7 +98,9 @@ enum class QueueCommandTypes : uint8_t {
 	kLuaCoroutine,
 	kCalculateStatistics,
 	kExpeditionConfig,
-	kPickCustomStartingPosition,  // 135
+	kPickCustomStartingPosition,
+	kShipRefit,
+	kWarshipCommand,  // 137
 
 	kCallEconomyBalance = 200,
 	kDeleteMessage,

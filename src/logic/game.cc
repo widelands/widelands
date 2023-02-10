@@ -1163,6 +1163,18 @@ void Game::send_player_sink_ship(const Ship& ship) {
 	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
+void Game::send_player_refit_ship(const Ship& ship, const ShipType t) {
+	send_player_command(
+	   new CmdShipRefit(get_gametime(), ship.get_owner()->player_number(), ship.serial(), t));
+}
+
+void Game::send_player_warship_command(const Ship& ship,
+                                       const WarshipCommand cmd,
+                                       const std::vector<uint32_t>& parameters) {
+	send_player_command(new CmdWarshipCommand(
+	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), cmd, parameters));
+}
+
 void Game::send_player_cancel_expedition_ship(const Ship& ship) {
 	send_player_command(new CmdShipCancelExpedition(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));

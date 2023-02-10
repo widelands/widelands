@@ -53,6 +53,8 @@ private:
 		kExpeditionWaiting,
 		kExpeditionScouting,
 		kExpeditionPortspaceFound,
+		kWarship,
+		kRefitting,
 		kAll
 	};
 
@@ -143,6 +145,8 @@ private:
 	UI::Button scouting_btn_;
 	UI::Button portspace_btn_;
 	UI::Button shipping_btn_;
+	UI::Button warship_btn_;
+	UI::Button refitting_btn_;
 	ShipFilterStatus ship_filter_{ShipFilterStatus::kAll};
 	// Navigation buttons
 	UI::Box navigation_box_;

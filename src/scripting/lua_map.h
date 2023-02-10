@@ -1412,6 +1412,7 @@ public:
 	int get_last_portdock(lua_State* L);
 	int get_destination(lua_State* L);
 	int get_state(lua_State* L);
+	int get_type(lua_State* L);
 	int get_scouting_direction(lua_State* L);
 	int set_scouting_direction(lua_State* L);
 	int get_island_explore_direction(lua_State* L);
@@ -1427,6 +1428,7 @@ public:
 	int get_workers(lua_State* L);
 	int build_colonization_port(lua_State* L);
 	int make_expedition(lua_State* L);
+	int refit(lua_State* L);
 
 	/*
 	 * C methods

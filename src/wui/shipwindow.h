@@ -28,6 +28,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
+#include "wui/attack_window.h"
 #include "wui/interactive_base.h"
 #include "wui/itemwaresdisplay.h"
 
@@ -47,11 +48,13 @@ public:
 private:
 	void think() override;
 	void update_destination_button(const Widelands::Ship* ship);
+	std::vector<Widelands::Soldier*> get_soldiers() const;
 
 	UI::Button* make_button(UI::Panel* parent,
 	                        const std::string& name,
 	                        const std::string& title,
 	                        const std::string& picname,
+	                        bool flat_when_disabled,
 	                        const std::function<void()>& callback);
 	void set_button_visibility();
 	void no_port_error_message();
@@ -60,21 +63,27 @@ private:
 	void act_rename();
 	void act_destination();
 	void act_sink();
+	void act_refit();
 	void act_debug();
 	void act_cancel_expedition();
 	void act_scout_towards(Widelands::WalkingDir);
 	void act_construct_port();
 	void act_explore_island(Widelands::IslandExploreDirection);
+	void act_warship_attack();
+	void act_warship_retreat();
 
 	InteractiveBase& ibase_;
 	Widelands::OPtr<Widelands::Ship> ship_;
 
 	UI::Box vbox_;
 	UI::Box navigation_box_;
+	UI::Box warship_controls_;
+	UI::Panel* warship_capacity_control_;
 	UI::EditBox* name_field_;
 	UI::Button* btn_goto_;
 	UI::Button* btn_destination_;
 	UI::Button* btn_sink_;
+	UI::Button* btn_refit_;
 	UI::Button* btn_debug_;
 	UI::Button* btn_cancel_expedition_;
 	UI::Button* btn_explore_island_cw_;
@@ -82,7 +91,11 @@ private:
 	// format: DIRECTION - 1, as 0 is normally the current location.
 	UI::Button* btn_scout_[Widelands::LAST_DIRECTION];
 	UI::Button* btn_construct_port_;
+	UI::Button* btn_warship_stay_;
+	UI::Button* btn_warship_attack_;
+	UI::Button* btn_warship_retreat_;
 	ItemWaresDisplay* display_;
+	AttackPanel* warship_soldiers_display_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
 };
