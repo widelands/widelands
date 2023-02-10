@@ -53,6 +53,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
@@ -451,6 +452,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh->register_songs("music", Songset::kIngame);
 	g_sh->register_songs("music", Songset::kCustom);
 
+	set_template_dir("");
 	initialize_g_addons();
 
 	// Register the click sound for UI::Panel.
@@ -551,7 +553,11 @@ void WLApplication::initialize_g_addons() {
 			}
 		}
 	}
-	AddOns::update_ui_theme(AddOns::UpdateThemeAction::kLoadFromConfig);
+	try {
+		AddOns::update_ui_theme(AddOns::UpdateThemeAction::kLoadFromConfig);
+	} catch (const std::exception& e) {
+		log_err("Failed to load add-on theme: %s", e.what());
+	}
 }
 
 static void init_one_player_from_template(unsigned p,

@@ -45,8 +45,7 @@ if not campaign_data then
       -- TRANSLATORS: Message title for a piece of information
       title = _("Note"),
       body = p(_([[You appear not to have completed the previous mission. You may still play this scenario, but you will be at a disadvantage. I recommend that you complete the previous scenario first and then restart this mission.]])),
-      w = 450,
-      h = 150,
+      h = styles.get_size("campaign_message_box_h_min"),
    })
    campaign_data = {}
 end

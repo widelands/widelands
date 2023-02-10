@@ -24,6 +24,8 @@
 #include "base/i18n.h"
 #include "build_info.h"
 #include "graphic/font_handler.h"
+#include "graphic/style_manager.h"
+#include "graphic/styles/paragraph_style.h"
 #include "ui_basic/button.h"
 #include "wlapplication.h"
 #include "wlapplication_mousewheel_options.h"
@@ -117,11 +119,23 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 #undef ADD_CONTENT
 
 	const bool mirror = UI::g_fh->fontset()->is_rtl();
-	add_space(kSpacing);
-	add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsGameSetupHeadings,
-	                     _("Technical Info"), UI::Align::kCenter),
-	    UI::Box::Resizing::kFullSize);
-	add_space(2 * kSpacing);
+	const UI::ParagraphStyleInfo& title_style =
+	   g_style_manager->paragraph_style(UI::ParagraphStyle::kAboutTitle);
+	int space = title_style.space_before();
+	if (space > 0) {
+		add_space(space);
+	}
+	UI::Textarea* title =
+	   new UI::Textarea(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsGameSetupHeadings,
+	                    _("Technical Info"), UI::Align::kCenter);
+	add(title, UI::Box::Resizing::kFullSize);
+	if (t == TechInfoBox::Type::kAbout) {
+		title->set_style_override(title_style.font());
+	}
+	space = title_style.space_after();
+	if (space > 0) {
+		add_space(space);
+	}
 
 	std::string report;
 	for (const ContentT& c : content) {

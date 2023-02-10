@@ -627,6 +627,11 @@ msgid ""
 " may need to take some chances, and use superior tactics to compensate for "
 "this disadvantage."
 msgstr ""
+"Нехватка места на Гельголанде по-прежнему вызывает беспокойство. Места, "
+"пожалуй, хватит, чтобы обучить немалое количество солдат за короткое время, "
+"но подготовка армий нужного размера займёт целую вечность! Похоже нам "
+"придется рисковать и использовать изощрённую тактику, чтобы компенсировать "
+"этот недостаток."
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:271
@@ -638,10 +643,17 @@ msgid ""
 "in the east, or if we are to be truly bold we could dike around the whole "
 "western coast of the island to attack the enemy from two sides at once!"
 msgstr ""
+"Однако, если вы счиаете такой подход рискованным, у нас есть ещё одна "
+"возможность: увеличить остров. Поскольку теперь у нас есть постоянный запас "
+"бревен, мы можем построить дамбы и волнорезы, чтобы отвоевать землю для "
+"строительства у моря. Когда мы будем готовы атаковать, мы можем даже "
+"использовать это как способ обойти узкое место на востоке, или, если мы "
+"достаточно храбры для этого, мы могли бы обойти все западное побережье "
+"острова, чтобы атаковать врага сразу с двух сторон!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:277
 msgid "Good luck!"
-msgstr ""
+msgstr "Удачи!"
 
 #. TRANSLATORS: Ocke Ketelsen – Getting Started 4
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:279
@@ -649,14 +661,16 @@ msgid ""
 "I am heartened by your forwardness. Let us all hasten to our separate tasks,"
 " and may fortune smile on us!"
 msgstr ""
+"Я воодушевлен твоей прямотой. Пусть каждый займётся своим делом, и да "
+"улыбнется нам удача!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:283
 msgid "Wood Supply"
-msgstr ""
+msgstr "Производство дерева"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:284
 msgid "Wood supply is ensured"
-msgstr ""
+msgstr "Снабжение древесиной налажено"
 
 #. TRANSLATORS: Henneke Lembeck – Wood Supply
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:286
@@ -665,6 +679,9 @@ msgid ""
 "time before we have a steady supply of logs, but the immediate problem has "
 "been averted."
 msgstr ""
+"Наши лесники и лесорубы взялись за работу. Пройдет некоторое время, прежде "
+"чем у нас будет постоянный запас бревен, но на данный момент проблема "
+"решена."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:290
 msgid "Pass Secured"

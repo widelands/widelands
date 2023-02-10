@@ -3,22 +3,22 @@
 -- =======================================================================
 
 function jundlina(title, text)
-   return speech("map:princess.png", "2F9131", title, text)
+   return speech("map:princess.png", styles.color("campaign_atl_jundlina"), title, text)
 end
 function loftomor(text)
-   return speech("map:loftomor.png", "FDD53D", "Loftomor", text)
+   return speech("map:loftomor.png", styles.color("campaign_atl_loftomor"), "Loftomor", text)
 end
 function sidolus(text)
-   return speech("map:sidolus.png", "FF1A30", "Sidolus", text)
+   return speech("map:sidolus.png", styles.color("campaign_atl_sidolus"), "Sidolus", text)
 end
 function colionder(text)
-   return speech("map:colionder.png", "33A9FD", "Colionder", text)
+   return speech("map:colionder.png", styles.color("campaign_atl_colionder"), "Colionder", text)
 end
 function opol(text)
-   return speech("map:opol.png", "FF3FFB", "Opol", text)
+   return speech("map:opol.png", styles.color("campaign_atl_opol"), "Opol", text)
 end
 function ostur(text)
-   return speech("map:ostur.png", "375FFC", "Ostur", text)
+   return speech("map:ostur.png", styles.color("campaign_atl_ostur"), "Ostur", text)
 end
 
 -- =======================================================================

@@ -23,6 +23,13 @@
 
 namespace UI {
 enum class FontStyle {
+
+	/************************************************************************************
+	 *
+	 * Don't forget to update doc/sphinx/source/themes.rst when you add or remove styles!
+	 *
+	 ************************************************************************************/
+
 	kChatMessage,
 	kChatPlayername,
 	kChatServer,
@@ -56,7 +63,10 @@ enum class FontStyle {
 	kWuiMessageHeading,
 	kWuiMessageParagraph,
 	kFsMenuWindowTitle,
-	kWuiWindowTitle
+	kWuiWindowTitle,
+
+	// Returned when lookup by name fails
+	kUnknown
 };
 
 struct FontStyleInfo {
@@ -71,7 +81,11 @@ struct FontStyleInfo {
 	                       bool init_shadow);
 	FontStyleInfo(const FontStyleInfo& other);
 
+	/** Add enclosing richtext font tags to the given text to format it according to this style */
 	[[nodiscard]] std::string as_font_tag(const std::string& text) const;
+
+	/** Return opening richtext font tag for this style */
+	[[nodiscard]] std::string as_font_open() const;
 
 	[[nodiscard]] Face face() const;
 	void make_condensed();
