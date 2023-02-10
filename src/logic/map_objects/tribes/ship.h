@@ -25,6 +25,7 @@
 #include "economy/shippingitem.h"
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/tribes/shipstates.h"
 
 namespace Widelands {
 
@@ -71,6 +72,8 @@ public:
 		return ship_names_;
 	}
 
+	const uint32_t max_hitpoints_, min_attack_, max_attack_, defense_, attack_accuracy_;
+
 private:
 	DirAnimations sail_anims_;
 	Quantity default_capacity_;
@@ -80,8 +83,6 @@ private:
 };
 
 constexpr int32_t kShipInterval = 1500;
-
-constexpr uint32_t kInvalidDestination = std::numeric_limits<uint32_t>::max();
 
 /**
  * Ships belong to a player and to an economy. The usually are in a (unique)
@@ -95,18 +96,19 @@ struct Ship : Bob {
 	~Ship() override = default;
 
 	// Returns the fleet the ship is a part of.
-	ShipFleet* get_fleet() const;
+	[[nodiscard]] ShipFleet* get_fleet() const;
 
-	PortDock* get_destination() const {
-		return destination_;
+	[[nodiscard]] PortDock* get_destination(EditorGameBase& e) const {
+		return destination_.get(e);
 	}
-	void set_destination(Game&, PortDock*);
+	void set_destination(EditorGameBase&, PortDock*);
+	bool is_on_destination_dock() const;
 
 	// Returns the last visited portdock of this ship or nullptr if there is none or
 	// the last visited was removed.
-	PortDock* get_lastdock(EditorGameBase& egbase) const;
+	[[nodiscard]] PortDock* get_lastdock(EditorGameBase& egbase) const;
 
-	Economy* get_economy(WareWorker type) const {
+	[[nodiscard]] Economy* get_economy(WareWorker type) const {
 		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
 	void set_economy(const Game&, Economy* e, WareWorker);
@@ -120,50 +122,42 @@ struct Ship : Bob {
 	void start_task_movetodock(Game&, PortDock&);
 	void start_task_expedition(Game&);
 
+	struct Battle {
+		enum class Phase : uint8_t {
+			kNotYetStarted = 0,
+			kAttackerMovingTowardsOpponent = 1,
+			kAttackersTurn = 2,
+			kDefendersTurn = 3,
+			kAttackerAttacking = 4,
+			kDefenderAttacking = 5,
+		};
+
+		Battle(MapObject* o, const std::vector<uint32_t>& a, bool f)
+		   : opponent(o), attack_soldier_serials(a), is_first(f) {
+		}
+
+		OPtr<MapObject> opponent;
+		std::vector<uint32_t> attack_soldier_serials;
+		Time time_of_last_action;
+		uint32_t pending_damage{0U};
+		Phase phase{Phase::kNotYetStarted};
+		bool is_first;
+	};
+	void start_battle(Game&, Battle);
+
 	uint32_t calculate_sea_route(EditorGameBase&, PortDock&, Path* = nullptr) const;
 
 	void log_general_info(const EditorGameBase&) const override;
 
-	uint32_t get_nritems() const {
+	[[nodiscard]] uint32_t get_nritems() const {
 		return items_.size();
 	}
-	const ShippingItem& get_item(uint32_t idx) const {
+	[[nodiscard]] const ShippingItem& get_item(uint32_t idx) const {
 		return items_[idx];
 	}
 
 	void add_item(Game&, const ShippingItem&);
 	bool withdraw_item(Game&, PortDock&);
-
-	// A ship with task expedition can be in four states: kExpeditionWaiting, kExpeditionScouting,
-	// kExpeditionPortspaceFound or kExpeditionColonizing in the first states, the owning player of
-	// this ship
-	// can give direction change commands to change the direction of the moving ship / send the ship
-	// in a
-	// direction. Once the ship is on its way, it is in kExpeditionScouting state. In the backend, a
-	// click
-	// on a direction begins to the movement into that direction until a coast is reached or the user
-	// cancels the direction through a direction change.
-	//
-	// The kExpeditionWaiting state means, that an event happend and thus the ship stopped and waits
-	// for a
-	// new command by the owner. An event leading to a kExpeditionWaiting state can be:
-	// * expedition is ready to start
-	// * new island appeared in vision range (only outer ring of vision range has to be checked due
-	// to the
-	//   always ongoing movement).
-	// * island was completely surrounded
-	//
-	// The kExpeditionPortspaceFound state means, that a port build space was found.
-	//
-	enum class ShipStates : uint8_t {
-		kTransport = 0,
-		kExpeditionWaiting = 1,
-		kExpeditionScouting = 2,
-		kExpeditionPortspaceFound = 3,
-		kExpeditionColonizing = 4,
-		kSinkRequest = 8,
-		kSinkAnimation = 9
-	};
 
 	/// \returns the current state the ship is in
 	[[nodiscard]] ShipStates get_ship_state() const {
@@ -246,10 +240,59 @@ struct Ship : Bob {
 		capacity_ = c;
 	}
 
+	[[nodiscard]] MapObject* get_attack_target(const EditorGameBase& e) const {
+		return expedition_ != nullptr ? expedition_->attack_target.get(e) : nullptr;
+	}
+	[[nodiscard]] bool has_battle() const {
+		return !battles_.empty();
+	}
+
+	[[nodiscard]] bool can_be_attacked() const;
+	[[nodiscard]] bool can_attack() const;
+	[[nodiscard]] bool is_attackable_enemy_warship(const Bob&) const;
+	[[nodiscard]] uint32_t get_hitpoints() const {
+		return hitpoints_;
+	}
+	[[nodiscard]] uint32_t get_warship_soldier_capacity() const {
+		return warship_soldier_capacity_;
+	}
+	[[nodiscard]] uint32_t min_warship_soldier_capacity() const;
+
+	/**
+	 * Execute a warship command.
+	 * For a kAttack against a port, `parameters` contains the serials of the soldiers to send.
+	 * For a kAttack against a ship, `parameters` is ignored.
+	 * For a kSetCapacity, `parameters` must contain exactly one value to specify the new capacity.
+	 * For a kRetreat, `parameters` must be empty.
+	 */
+	void warship_command(Game& game, WarshipCommand cmd, const std::vector<uint32_t>& parameters);
+
+	static void warship_soldier_callback(
+	   Game& game, Request& req, DescriptionIndex di, Worker* worker, PlayerImmovable& immovable);
+
+	[[nodiscard]] ShipType get_ship_type() const {
+		return ship_type_;
+	}
+	[[nodiscard]] ShipType get_pending_refit() const {
+		return pending_refit_;
+	}
+	[[nodiscard]] bool can_refit(ShipType) const;
+	[[nodiscard]] inline bool is_refitting() const {
+		return get_pending_refit() != get_ship_type();
+	}
+	void refit(Game&, ShipType);
+
+	// Editor only
+	void set_ship_type(EditorGameBase& egbase, ShipType t);
+	void set_warship_soldier_capacity(uint32_t c) {
+		assert(c <= capacity_);
+		warship_soldier_capacity_ = c;
+	}
+
 protected:
-	void draw(const EditorGameBase&,
+	void draw(const EditorGameBase& egbase,
 	          const InfoToDraw& info_to_draw,
-	          const Vector2f& point_on_dst,
+	          const Vector2f& field_on_dst,
 	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
@@ -266,14 +309,18 @@ private:
 	void ship_wakeup(Game&);
 
 	bool ship_update_transport(Game&, State&);
-	void ship_update_expedition(Game&, State&);
+	bool ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
+	void battle_update(Game&);
+	void update_warship_soldier_request(Game& game);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 	bool check_port_space_still_available(Game&);
 
 	bool init_fleet(EditorGameBase&);
 	void set_fleet(ShipFleet* fleet);
+
+	PortDock* find_nearest_port(Game& game);
 
 	void send_message(Game& game,
 	                  const std::string& title,
@@ -287,9 +334,12 @@ private:
 	OPtr<PortDock> lastdock_;
 	std::vector<ShippingItem> items_;
 	ShipStates ship_state_{ShipStates::kTransport};
+	ShipType ship_type_{ShipType::kTransport};
+	ShipType pending_refit_{ShipType::kTransport};
 	std::string shipname_;
 
-	PortDock* destination_{nullptr};
+	OPtr<PortDock> destination_{nullptr};
+	std::unique_ptr<Request> warship_soldier_request_;
 
 	struct Expedition {
 		~Expedition();
@@ -300,17 +350,21 @@ private:
 		WalkingDir scouting_direction;
 		Coords exploration_start;
 		IslandExploreDirection island_explore_direction;
+		OPtr<MapObject> attack_target;
 		Economy* ware_economy;  // Owned by Player
 		Economy* worker_economy;
 	};
 	std::unique_ptr<Expedition> expedition_;
 
+	std::vector<Battle> battles_;
+	uint32_t hitpoints_;
+
 	Quantity capacity_;
+	Quantity warship_soldier_capacity_;
 
 	// saving and loading
 protected:
 	struct Loader : Bob::Loader {
-		Loader() = default;
 
 		const Task* get_task(const std::string& name) override;
 
@@ -323,11 +377,18 @@ protected:
 		Serial ware_economy_serial_{kInvalidSerial};
 		Serial worker_economy_serial_{kInvalidSerial};
 		uint32_t destination_{0U};
-		uint32_t capacity_{0U};
+		Quantity capacity_{0U};
+		Quantity warship_soldier_capacity_{0U};
+		int32_t hitpoints_{0};
 		ShipStates ship_state_{ShipStates::kTransport};
+		ShipType ship_type_{ShipType::kTransport};
+		ShipType pending_refit_{ShipType::kTransport};
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
+		std::vector<Battle> battles_;
 		std::vector<ShippingItem::Loader> items_;
+		Serial expedition_attack_target_serial_{0U};
+		std::vector<Serial> battle_serials_;
 	};
 
 public:

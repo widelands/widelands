@@ -37,8 +37,12 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/findbob.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/requirements.h"
+#include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapastar.h"
@@ -122,12 +126,63 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 
 }  // namespace
 
+struct FindBobDefender : public FindBob {
+	explicit FindBobDefender(const PortDock& pd) : dock_(pd) {
+	}
+	bool accept(Bob* b) const override {
+		if (b->descr().type() != MapObjectType::SHIP) {
+			return false;
+		}
+		const Ship& s = dynamic_cast<const Ship&>(*b);
+		return s.get_ship_type() == ShipType::kWarship &&
+		       (s.owner().player_number() == dock_.owner().player_number() ||
+		        (dock_.owner().team_number() > 0 &&
+		         s.owner().team_number() == dock_.owner().team_number())) &&
+		       !s.has_battle();
+	}
+
+private:
+	const PortDock& dock_;
+};
+
+struct FindNodeAttackTarget {
+	explicit FindNodeAttackTarget(const Widelands::Ship& s) : ship_(s) {
+	}
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& f) const {
+		if (ship_.owner().get_vision(egbase.map().get_index(f)) != VisibleState::kVisible) {
+			return false;
+		}
+
+		if (ship_.get_nritems() > 0 && f.field->get_immovable() != nullptr &&
+		    f.field->get_immovable()->descr().type() == MapObjectType::PORTDOCK &&
+		    ship_.owner().is_hostile(
+		       dynamic_cast<const PortDock&>(*f.field->get_immovable()).owner())) {
+			return true;
+		}
+
+		for (const Bob* b = f.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
+			if (ship_.is_attackable_enemy_warship(*b)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+private:
+	const Widelands::Ship& ship_;
+};
+
 /**
  * The contents of 'table' are documented in
  * /data/tribes/ships/atlanteans/init.lua
  */
 ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
    : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table),
+     max_hitpoints_(table.get_int("hitpoints")),
+     min_attack_(table.get_int("min_attack")),
+     max_attack_(table.get_int("max_attack")),
+     defense_(table.get_int("defense")),
+     attack_accuracy_(table.get_int("attack_accuracy")),
      default_capacity_(table.has_key("capacity") ? table.get_int("capacity") : 20),
      ship_names_(table.get_table("names")->array_entries<std::string>()) {
 	// Read the sailing animations
@@ -144,8 +199,9 @@ Bob& ShipDescr::create_object() const {
 
 Ship::Ship(const ShipDescr& gdescr)
    : Bob(gdescr),
-
-     capacity_(gdescr.get_default_capacity()) {
+     hitpoints_(gdescr.max_hitpoints_),
+     capacity_(gdescr.get_default_capacity()),
+     warship_soldier_capacity_(capacity_) {
 }
 
 PortDock* Ship::get_lastdock(EditorGameBase& egbase) const {
@@ -284,6 +340,59 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		}
 	}
 
+	if (has_battle()) {
+		return battle_update(game);
+	}
+
+	if (is_refitting()) {
+		assert(!fleet_);
+		if (PortDock* d = destination_.get(game)) {
+			const Map& map = game.map();
+			FCoords position = map.get_fcoords(get_position());
+			if (position.field->get_immovable() != d) {
+				start_task_movetodock(game, *d);
+			} else {
+				// Arrived at destination, now unload and refit
+				set_destination(game, nullptr);
+				Warehouse* wh = d->get_warehouse();
+				for (ShippingItem& si : items_) {
+					/* Since the items may not have been in transit properly,
+					 * force their reception instead of doing it the normal way.
+					 */
+					WareInstance* ware;
+					Worker* worker;
+					si.get(game, &ware, &worker);
+					if (worker == nullptr) {
+						assert(ware != nullptr);
+						wh->receive_ware(game, game.descriptions().safe_ware_index(ware->descr().name()));
+						ware->remove(game);
+					} else {
+						assert(ware == nullptr);
+						worker->set_economy(nullptr, wwWARE);
+						worker->set_economy(nullptr, wwWORKER);
+						worker->set_position(game, wh->get_position());
+						wh->incorporate_worker(game, worker);
+					}
+				}
+				items_.clear();
+				ship_type_ = pending_refit_;
+				warship_soldier_request_.reset();
+				if (ship_type_ == ShipType::kWarship) {
+					start_task_expedition(game);
+					set_destination(game, d);
+				} else {
+					exp_cancel(game);
+				}
+			}
+		} else {
+			// Destination vanished, try to find a new one
+			const ShipType t = pending_refit_;
+			pending_refit_ = ship_type_;
+			refit(game, t);
+		}
+		return;
+	}
+
 	switch (ship_state_) {
 	case ShipStates::kTransport:
 		if (ship_update_transport(game, state)) {
@@ -293,7 +402,9 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 	case ShipStates::kExpeditionPortspaceFound:
 	case ShipStates::kExpeditionScouting:
 	case ShipStates::kExpeditionWaiting:
-		ship_update_expedition(game, state);
+		if (ship_update_expedition(game, state)) {
+			return;
+		}
 		break;
 	case ShipStates::kExpeditionColonizing:
 		break;
@@ -319,39 +430,39 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	const Map& map = game.map();
 
-	if (destination_ == nullptr) {
+	if (destination_.get(game) == nullptr) {
 		// The ship has no destination, so let it sleep
 		ship_update_idle(game, state);
 		return true;
 	}
 
 	FCoords position = map.get_fcoords(get_position());
-	if (position.field->get_immovable() == destination_) {
-		if (lastdock_ != destination_) {
-			molog(game.get_gametime(), "ship_update: Arrived at dock %u\n", destination_->serial());
-			lastdock_ = destination_;
+	if (position.field->get_immovable() == destination_.get(game)) {
+		if (lastdock_ != destination_.get(game)) {
+			molog(game.get_gametime(), "ship_update: Arrived at dock %u\n", destination_.serial());
+			lastdock_ = destination_.get(game);
 		}
-		while (withdraw_item(game, *destination_)) {
+		while (withdraw_item(game, *destination_.get(game))) {
 		}
 
-		destination_->ship_arrived(game, *this);  // This will also set the destination
+		destination_.get(game)->ship_arrived(game, *this);  // This will also set the destination
 
-		if (destination_ != nullptr) {
-			start_task_movetodock(game, *destination_);
+		if (destination_.get(game) != nullptr) {
+			start_task_movetodock(game, *destination_.get(game));
 		} else {
 			start_task_idle(game, descr().main_animation(), 250);
 		}
 		return true;
 	}
 
-	molog(game.get_gametime(), "ship_update: Go to dock %u\n", destination_->serial());
+	molog(game.get_gametime(), "ship_update: Go to dock %u\n", destination_.serial());
 
 	PortDock* lastdock = lastdock_.get(game);
-	if ((lastdock != nullptr) && lastdock != destination_) {
+	if (lastdock != nullptr && lastdock != destination_.get(game)) {
 		molog(game.get_gametime(), "ship_update: Have lastdock %u\n", lastdock->serial());
 
 		Path path;
-		if (fleet_->get_path(*lastdock, *destination_, path)) {
+		if (fleet_->get_path(*lastdock, *destination_.get(game), path)) {
 			uint32_t closest_idx = std::numeric_limits<uint32_t>::max();
 			uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
 			Coords closest_target(Coords::null());
@@ -402,24 +513,95 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 		lastdock_ = nullptr;
 	}
 
-	start_task_movetodock(game, *destination_);
+	start_task_movetodock(game, *destination_.get(game));
 	return true;
 }
 
-/// updates a ships tasks in expedition mode
-void Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
+/// updates a ships tasks in expedition mode; returns whether tasks were updated
+bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	Map* map = game.mutable_map();
 
 	assert(expedition_);
+	const FCoords position = get_position();
 
 	// Update the knowledge of the surrounding fields
-	FCoords position = get_position();
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		expedition_->swimmable[dir - 1] =
 		   ((map->get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM) != 0);
 	}
 
-	if (ship_state_ == ShipStates::kExpeditionScouting) {
+	if (get_ship_type() == ShipType::kWarship) {
+		// Look for nearby enemy warships and ports we can attack. We prefer the closest
+		// attackable object. Attacking warships takes precedent over attacking ports.
+		// Ports can only be attacked if we have any soldiers on board.
+		const MapObject* old_target = expedition_->attack_target.get(game);
+		MapObject* new_target = nullptr;
+		std::vector<Coords> candidates;
+		uint32_t distance = descr().vision_range();
+		map->find_reachable_fields(game, Area<FCoords>(get_position(), distance), &candidates,
+		                           CheckStepDefault(MOVECAPS_SWIM), FindNodeAttackTarget(*this));
+		for (const Coords& c : candidates) {
+			const uint32_t d = map->calc_distance(get_position(), c);
+			if (d <= distance) {
+				bool found = false;
+				Field& f = (*map)[c];
+				for (Bob* b = f.get_first_bob(); b != nullptr; b = b->get_next_bob()) {
+					if (is_attackable_enemy_warship(*b)) {
+						new_target = b;
+						found = true;
+						break;
+					}
+				}
+				if (!found && f.get_immovable() != nullptr &&
+				    f.get_immovable()->descr().type() == MapObjectType::PORTDOCK) {
+					new_target = f.get_immovable();
+					found = true;
+				}
+				assert(found);
+				distance = d;
+			}
+		}
+		if (new_target != old_target) {
+			expedition_->attack_target = new_target;
+			if (new_target != nullptr) {
+				set_ship_state_and_notify(
+				   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
+				if (new_target->descr().type() == MapObjectType::SHIP) {
+					send_message(game, _("Enemy Ship"), _("Enemy Ship Spotted"),
+					             _("A warship spotted an enemy ship."),
+					             new_target->descr().icon_filename());
+				} else {
+					send_message(
+					   game, _("Enemy Port"), _("Enemy Port Found"),
+					   _("A warship spotted an enemy port."),
+					   dynamic_cast<PortDock*>(new_target)->get_warehouse()->descr().icon_filename());
+				}
+			}
+		}
+	}
+
+	if (PortDock* dest = destination_.get(game); dest != nullptr) {
+		// Sail to the destination port if we're not there yet.
+		if (position.field->get_immovable() != dest) {
+			start_task_movetodock(game, *dest);
+			return true;
+		}
+		// We're on the destination dock. Load soldiers and wait for orders.
+		set_ship_state_and_notify(
+		   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
+		if (warship_soldier_request_ == nullptr) {
+			warship_soldier_request_.reset(new Request(*dest->get_warehouse(),
+			                                           owner().tribe().soldier(),
+			                                           Ship::warship_soldier_callback, wwWORKER));
+		}
+		update_warship_soldier_request(game);
+		start_task_idle(game, descr().main_animation(), 250);
+		return true;
+	}
+
+	warship_soldier_request_.reset();  // Clear the request when not in port
+
+	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
 		// Check surrounding fields for port buildspaces
 		std::vector<Coords> temp_port_buildspaces;
 		MapRegion<Area<Coords>> mr(*map, Area<Coords>(position, descr().vision_range()));
@@ -464,6 +646,457 @@ void Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	} else if (ship_state_ == ShipStates::kExpeditionPortspaceFound) {
 		check_port_space_still_available(game);
 	}
+
+	return false;  // Continue with the regular expedition updates
+}
+
+void Ship::update_warship_soldier_request(Game& /* game */) {
+	if (warship_soldier_request_ == nullptr) {
+		return;
+	}
+	warship_soldier_request_->set_count(get_nritems() > get_warship_soldier_capacity() ?
+                                          0 :
+                                          get_warship_soldier_capacity() - get_nritems());
+}
+
+// static
+void Ship::warship_soldier_callback(Game& game,
+                                    Request& req,
+                                    DescriptionIndex /* di */,
+                                    Worker* worker,
+                                    PlayerImmovable& immovable) {
+	Warehouse& warehouse = dynamic_cast<Warehouse&>(immovable);
+	PortDock* dock = warehouse.get_portdock();
+	assert(dock != nullptr);
+
+	for (const Coords& c : dock->get_positions(game)) {
+		for (Bob* b = game.map()[c].get_first_bob(); b != nullptr; b = b->get_next_bob()) {
+			if (b->descr().type() == MapObjectType::SHIP) {
+				upcast(Ship, ship, b);
+				if (ship->warship_soldier_request_.get() == &req) {
+					assert(ship->get_owner() == dock->get_owner());
+					assert(ship->get_ship_type() == ShipType::kWarship);
+
+					ship->molog(game.get_gametime(), "%s %u embarked on warship",
+					            worker->descr().name().c_str(), worker->serial());
+
+					worker->set_location(nullptr);
+					worker->start_task_shipping(game, nullptr);
+
+					ship->add_item(game, ShippingItem(*worker));
+					ship->update_warship_soldier_request(game);
+
+					return;
+				}
+			}
+		}
+	}
+
+	verb_log_info_time(game.get_gametime(), "%s %u missed his assigned warship at dock %s",
+	                   worker->descr().name().c_str(), worker->serial(),
+	                   warehouse.get_warehouse_name().c_str());
+	// The soldier is in the port now, ready to get some new assignment by the economy.
+}
+
+bool Ship::is_attackable_enemy_warship(const Bob& b) const {
+	if (b.descr().type() != MapObjectType::SHIP) {
+		return false;
+	}
+	const Ship& s = dynamic_cast<const Ship&>(b);
+	return s.can_be_attacked() && owner().is_hostile(s.owner());
+}
+
+bool Ship::can_be_attacked() const {
+	// Only warships can be attacked, but not if they're already engaged in battle
+	// against any other ship. Ships attacking a port CAN be attacked though.
+	return get_ship_type() == ShipType::kWarship &&
+	       std::all_of(battles_.begin(), battles_.end(), [this](const Battle& battle) {
+		       const MapObject* opponent = battle.opponent.get(owner().egbase());
+		       return opponent == nullptr || opponent->descr().type() == MapObjectType::PORTDOCK;
+	       });
+}
+
+bool Ship::can_attack() const {
+	return get_ship_type() == Widelands::ShipType::kWarship && !has_battle() &&
+	       get_attack_target(owner().egbase()) != nullptr;
+}
+
+bool Ship::can_refit(const ShipType type) const {
+	return !is_refitting() && !has_battle() && type != ship_type_;
+}
+
+#ifndef NDEBUG
+void Ship::set_ship_type(EditorGameBase& egbase, ShipType t) {
+	assert(!egbase.is_game());
+	ship_type_ = t;
+	pending_refit_ = ship_type_;
+}
+#else
+void Ship::set_ship_type(EditorGameBase& /* egbase */, ShipType t) {
+	ship_type_ = t;
+	pending_refit_ = ship_type_;
+}
+#endif
+
+void Ship::refit(Game& game, const ShipType type) {
+	if (!can_refit(type)) {
+		molog(game.get_gametime(), "Requested refit to %d not possible", static_cast<int>(type));
+		return;
+	}
+
+	if (destination_.get(game) != nullptr) {
+		send_signal(game, "wakeup");
+	} else if (PortDock* dest = find_nearest_port(game); dest != nullptr) {
+		set_destination(game, dest);
+	} else {
+		molog(game.get_gametime(), "Attempted refit to %d but no ports in fleet",
+		      static_cast<int>(type));
+		return;
+	}
+
+	pending_refit_ = type;
+
+	// Already remove the ship from the fleet
+	if (fleet_ != nullptr) {
+		fleet_->remove_ship(game, this);
+		assert(fleet_ == nullptr);
+	}
+}
+
+PortDock* Ship::find_nearest_port(Game& game) {
+	const bool in_fleet = fleet_ != nullptr;
+	Economy* eco_ware = ware_economy_;
+	Economy* eco_worker = worker_economy_;
+
+	if (!in_fleet) {
+		init_fleet(game);
+		assert(fleet_ != nullptr);
+	}
+
+	PortDock* nearest = nullptr;
+	int32_t dist = 0;
+	for (PortDock* pd : fleet_->get_ports()) {
+		Path path;
+		int32_t d = -1;
+		calculate_sea_route(game, *pd, &path);
+		game.map().calc_cost(path, &d, nullptr);
+		assert(d >= 0);
+		if (nearest == nullptr || d < dist) {
+			dist = d;
+			nearest = pd;
+		}
+	}
+
+	if (!in_fleet) {
+		fleet_->remove_ship(game, this);
+		assert(fleet_ == nullptr);
+		set_economy(game, eco_ware, wwWARE);
+		set_economy(game, eco_worker, wwWORKER);
+	}
+
+	return nearest;
+}
+
+bool Ship::is_on_destination_dock() const {
+	if (const PortDock* dest = destination_.get(owner().egbase()); dest != nullptr) {
+		return get_position().field->get_immovable() == dest;
+	}
+	return false;
+}
+
+uint32_t Ship::min_warship_soldier_capacity() const {
+	return is_on_destination_dock() ? 0U : get_nritems();
+}
+
+void Ship::warship_command(Game& game,
+                           const WarshipCommand cmd,
+                           const std::vector<uint32_t>& parameters) {
+	if (get_ship_type() != ShipType::kWarship) {
+		return;
+	}
+
+	switch (cmd) {
+	case WarshipCommand::kSetCapacity: {
+		assert(parameters.size() == 1);
+		warship_soldier_capacity_ =
+		   std::max(std::min(parameters.back(), get_capacity()), min_warship_soldier_capacity());
+		update_warship_soldier_request(game);
+
+		// If we have too many soldiers on board now, unload the extras.
+		PortDock* dest = destination_.get(game);
+		while (get_nritems() > warship_soldier_capacity_) {
+			assert(dest != nullptr);
+			dest->shipping_item_arrived(game, items_.back());
+			items_.pop_back();
+		}
+
+		return;
+	}
+
+	case WarshipCommand::kAttack:
+		if (MapObject* target = get_attack_target(game); target != nullptr) {
+			assert(target->descr().type() != MapObjectType::PORTDOCK || !parameters.empty());
+			start_battle(game, Battle(target, parameters, true));
+		}
+		return;
+
+	case WarshipCommand::kRetreat:
+		assert(parameters.empty());
+		if (destination_.get(game) == nullptr) {
+			if (PortDock* dest = find_nearest_port(game); dest != nullptr) {
+				set_destination(game, dest);
+			} else {
+				molog(game.get_gametime(), "Attempted retreat but no ports in fleet");
+			}
+		}
+		return;
+	}
+
+	throw wexception("Invalid warship command %d", static_cast<int>(cmd));
+}
+
+void Ship::start_battle(Game& game, const Battle new_battle) {
+	MapObject* target = new_battle.opponent.get(game);
+	if (target == nullptr) {
+		return;
+	}
+
+	battles_.emplace_back(new_battle);
+	if (!new_battle.is_first) {
+		return;
+	}
+
+	// Summon someone to the defence
+	if (target->descr().type() == MapObjectType::SHIP) {
+		Ship& enemy_ship = dynamic_cast<Ship&>(*target);
+		enemy_ship.send_message(game, _("Naval Attack"), _("Enemy Ship Attacking"),
+		                        format(_("Your ship ‘%s’ is under attack from an enemy warship."),
+		                               enemy_ship.get_shipname()),
+		                        "images/wui/ship/ship_attack.png");
+		enemy_ship.start_battle(game, Battle(this, {}, false));
+	}
+}
+
+constexpr uint8_t kPortUnderAttackDefendersSearchRadius = 10;
+constexpr uint32_t kAttackAnimationDuration = 2000;
+
+void Ship::battle_update(Game& game) {
+	Battle& current_battle = battles_.back();
+	MapObject* target = current_battle.opponent.get(game);
+	if (target == nullptr) {
+		battles_.pop_back();
+		start_task_idle(game, descr().main_animation(), 100);
+		return;
+	}
+
+	upcast(Ship, target_ship, target);
+	upcast(PortDock, target_port, target);
+	assert((target_ship == nullptr) ^ (target_port == nullptr));
+	assert(target_port == nullptr || current_battle.is_first);
+
+	Battle* other_battle = (target_ship == nullptr) ? nullptr : &target_ship->battles_.back();
+	assert(other_battle == nullptr || (other_battle->opponent.get(game) == this &&
+	                                   other_battle->is_first != current_battle.is_first &&
+	                                   other_battle->phase == current_battle.phase));
+
+	auto set_phase = [&game, &current_battle, other_battle](Battle::Phase new_phase) {
+		current_battle.phase = new_phase;
+		current_battle.time_of_last_action = game.get_gametime();
+		if (other_battle != nullptr) {
+			other_battle->phase = new_phase;
+			other_battle->time_of_last_action = current_battle.time_of_last_action;
+		}
+	};
+	auto fight = [this, &current_battle, other_battle, &game, target_ship]() {
+		if (target_ship == nullptr) {
+			current_battle.pending_damage = 1;                             // Ports always take 1 point
+		} else if (game.logic_rand() % 100 < descr().attack_accuracy_) {  // Hit
+			uint32_t attack_strength =
+			   (game.logic_rand() % (descr().max_attack_ - descr().min_attack_));
+			attack_strength += descr().min_attack_;
+			current_battle.pending_damage =
+			   attack_strength * (100 - target_ship->descr().defense_) / 100;
+		} else {  // Miss
+			current_battle.pending_damage = 0;
+		}
+
+		if (other_battle != nullptr) {
+			other_battle->pending_damage = current_battle.pending_damage;
+		}
+	};
+	auto damage = [this, &game, set_phase, &current_battle, other_battle,
+	               target_ship](Battle::Phase next) {
+		if (target_ship->hitpoints_ > current_battle.pending_damage) {
+			target_ship->hitpoints_ -= current_battle.pending_damage;
+			set_phase(next);
+		} else {
+			target_ship->send_message(game, _("Ship Sunk"), _("Ship Destroyed"),
+			                          _("An enemy ship has destroyed your warship."),
+			                          "images/wui/ship/ship_attack.png");
+			target_ship->set_ship_state_and_notify(
+			   ShipStates::kSinkRequest, NoteShip::Action::kDestinationChanged);
+			target_ship->battles_.clear();
+			battles_.pop_back();
+		}
+		current_battle.pending_damage = 0;
+		other_battle->pending_damage = 0;
+	};
+
+	if (!current_battle.is_first) {
+		switch (current_battle.phase) {
+		case Battle::Phase::kDefenderAttacking:
+			// Our turn is over, now it's the enemy's turn.
+			damage(Battle::Phase::kAttackersTurn);
+			start_task_idle(game, descr().main_animation(), 100);
+			return;
+
+		case Battle::Phase::kDefendersTurn:
+			fight();
+			set_phase(Battle::Phase::kDefenderAttacking);
+			start_task_idle(game, descr().main_animation(),
+			                kAttackAnimationDuration);  // TODO(Nordfriese): proper animation
+			return;
+
+		default:
+			// Idle until the enemy tells us it's our turn now.
+			return start_task_idle(game, descr().main_animation(), 100);
+		}
+		NEVER_HERE();
+	}
+
+	switch (current_battle.phase) {
+	case Battle::Phase::kDefendersTurn:
+	case Battle::Phase::kDefenderAttacking:
+		// Idle until the opponent's turn is over.
+		return start_task_idle(game, descr().main_animation(), 100);
+
+	case Battle::Phase::kNotYetStarted:
+		set_phase(Battle::Phase::kAttackerMovingTowardsOpponent);
+		FALLS_THROUGH;
+	case Battle::Phase::kAttackerMovingTowardsOpponent: {
+		// Move towards the opponent.
+		Coords dest;
+		bool exact_match_required;
+		if (target_ship != nullptr) {
+			exact_match_required = false;
+			dest = target_ship->get_position();
+		} else {
+			exact_match_required = true;
+			dest = target_port->get_positions(game).back();
+		}
+		if (dest == get_position() ||
+		    (!exact_match_required && game.map().calc_distance(get_position(), dest) < 2)) {
+			// Already there, start the fight in the next act.
+			set_phase(Battle::Phase::kAttackersTurn);
+			return start_task_idle(game, descr().main_animation(), 100);
+		}
+
+		Path path;
+		if (game.map().findpath(get_position(), dest, 0, path, CheckStepDefault(MOVECAPS_SWIM)) < 0) {
+			molog(game.get_gametime(), "Could not find a path to opponent %u from %dx%d to %dx%d",
+			      target->serial(), get_position().x, get_position().y, dest.x, dest.y);
+			battles_.pop_back();
+			return start_task_idle(game, descr().main_animation(), 100);
+		}
+		int steps = path.get_nsteps();
+		if (!exact_match_required) {
+			assert(steps > 1);
+			steps--;
+		}
+		start_task_movepath(game, path, descr().get_sail_anims(), false, steps);
+		return;
+	}
+
+	case Battle::Phase::kAttackerAttacking:
+		if (target_ship != nullptr) {
+			// Our turn is over, now it's the enemy's turn.
+			damage(Battle::Phase::kDefendersTurn);
+		} else if (current_battle.pending_damage > 0) {
+			// The naval assault was successful. Now unload the soldiers.
+			// From the ship's perspective, the attack was a success.
+			Warehouse& warehouse = *target_port->get_warehouse();
+			warehouse.send_message(game, Message::Type::kWarfareUnderAttack, _("Naval Attack"),
+			                       "images/wui/ship/ship_attack.png", _("Enemy Ship Attacking"),
+			                       _("Your port is under attack from an enemy warship."), false,
+			                       Duration(60 * 1000) /* throttle timeout in milliseconds */,
+			                       5 /* throttle radius */);
+
+			/* We can't drop off soldiers directly at the base flag as this would interfere
+			 * with battle code. Drop off at the directly adjacent fields instead.
+			 */
+			std::vector<Coords> suitable_coords;
+			for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+				Coords coords;
+				game.map().get_neighbour(warehouse.base_flag().get_position(), dir, &coords);
+				const Field& f = game.map()[coords];
+				if ((f.nodecaps() & MOVECAPS_WALK) != 0) {
+					suitable_coords.push_back(coords);
+				}
+			}
+			assert(!suitable_coords.empty());
+
+			assert(!battles_.back().attack_soldier_serials.empty());
+			for (Serial serial : battles_.back().attack_soldier_serials) {
+				auto it = std::find_if(items_.begin(), items_.end(), [serial](const ShippingItem& si) {
+					return si.get_object_serial() == serial;
+				});
+				if (it == items_.end()) {
+					continue;
+				}
+
+				Worker* worker;
+				it->get(game, nullptr, &worker);
+				if (worker == nullptr || worker->descr().type() != MapObjectType::SOLDIER) {
+					continue;
+				}
+
+				it->set_location(game, nullptr);
+				it->end_shipping(game);
+				worker->set_position(
+				   game, suitable_coords.at(game.logic_rand() % suitable_coords.size()));
+
+				worker->reset_tasks(game);
+				dynamic_cast<Soldier&>(*worker).start_task_attack(game, warehouse, false);
+
+				items_.erase(it);
+			}
+
+			battles_.pop_back();
+		} else {
+			// Summon someone to the port's defense, if possible.
+			std::vector<Bob*> defenders;
+			game.map().find_reachable_bobs(
+			   game, Area<FCoords>(get_position(), kPortUnderAttackDefendersSearchRadius), &defenders,
+			   CheckStepDefault(MOVECAPS_SWIM), FindBobDefender(*target_port));
+			Bob* nearest = nullptr;
+			uint32_t distance = 0;
+			for (Bob* candidate : defenders) {
+				const uint32_t d = game.map().calc_distance(candidate->get_position(), get_position());
+				if (nearest == nullptr || d < distance) {
+					nearest = candidate;
+					distance = d;
+				}
+			}
+			if (nearest != nullptr) {
+				// Let the best candidate launch an attack against us. This
+				// suspends the current battle until the new fight is over.
+				dynamic_cast<Ship&>(*nearest).start_battle(game, Battle(this, {}, true));
+			}
+			// Since ports can't defend themselves on their own, start the next round at once.
+			set_phase(Battle::Phase::kAttackersTurn);
+		}
+		start_task_idle(game, descr().main_animation(), 100);
+		return;
+
+	case Battle::Phase::kAttackersTurn:
+		fight();
+		set_phase(Battle::Phase::kAttackerAttacking);
+		start_task_idle(game, descr().main_animation(),
+		                kAttackAnimationDuration);  // TODO(Nordfriese): proper animation
+		return;
+	}
+
+	NEVER_HERE();
 }
 
 void Ship::ship_update_idle(Game& game, Bob::State& state) {
@@ -575,7 +1208,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					expedition_->exploration_start = get_position();
 				} else {
 					// Check whether the island was completely surrounded
-					if (get_position() == expedition_->exploration_start) {
+					if (ship_type_ != ShipType::kWarship &&
+					    get_position() == expedition_->exploration_start) {
 						set_ship_state_and_notify(
 						   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 						send_message(game,
@@ -642,12 +1276,14 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		set_ship_state_and_notify(
 		   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 		start_task_idle(game, descr().main_animation(), kShipInterval);
-		// Send a message to the player, that a new coast was reached
-		send_message(game,
-		             /** TRANSLATORS: A ship has discovered land */
-		             _("Land Ahoy!"), _("Coast Reached"),
-		             _("An expedition ship reached a coast and is waiting for further commands."),
-		             "images/wui/ship/ship_scout_ne.png");
+		if (ship_type_ != ShipType::kWarship) {
+			// Send a message to the player, that a new coast was reached
+			send_message(game,
+			             /** TRANSLATORS: A ship has discovered land */
+			             _("Land Ahoy!"), _("Coast Reached"),
+			             _("An expedition ship reached a coast and is waiting for further commands."),
+			             "images/wui/ship/ship_scout_ne.png");
+		}
 		return;
 	}
 	case ShipStates::kExpeditionColonizing: {
@@ -773,9 +1409,11 @@ void Ship::set_economy(const Game& game, Economy* e, WareWorker type) {
 	}
 }
 
-void Ship::set_destination(Game& game, PortDock* dock) {
+void Ship::set_destination(EditorGameBase& egbase, PortDock* dock) {
 	destination_ = dock;
-	send_signal(game, "wakeup");
+	if (upcast(Game, g, &egbase)) {
+		send_signal(*g, "wakeup");
+	}
 	Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
 }
 
@@ -875,13 +1513,16 @@ void Ship::start_task_expedition(Game& game) {
 	expedition_->scouting_direction = WalkingDir::IDLE;
 	expedition_->exploration_start = Coords(0, 0);
 	expedition_->island_explore_direction = IslandExploreDirection::kClockwise;
+	expedition_->attack_target = nullptr;
 	expedition_->ware_economy = get_owner()->create_economy(wwWARE);
 	expedition_->worker_economy = get_owner()->create_economy(wwWORKER);
 
 	// We are no longer in any other economy, but instead are an economy of our
 	// own.
-	fleet_->remove_ship(game, this);
-	assert(fleet_ == nullptr);
+	if (fleet_ != nullptr) {
+		fleet_->remove_ship(game, this);
+		assert(fleet_ == nullptr);
+	}
 
 	set_economy(game, expedition_->ware_economy, wwWARE);
 	set_economy(game, expedition_->worker_economy, wwWORKER);
@@ -898,23 +1539,32 @@ void Ship::start_task_expedition(Game& game) {
 		}
 	}
 
-	// Send a message to the player, that an expedition is ready to go
-	send_message(game,
-	             /** TRANSLATORS: Ship expedition ready */
-	             pgettext("ship", "Expedition"), _("Expedition Ready"),
-	             _("An expedition ship is waiting for your commands."),
-	             "images/wui/buildings/start_expedition.png");
+	// Send a message to the player that an expedition is ready to go
+	if (ship_type_ == ShipType::kWarship) {
+		send_message(game,
+		             /** TRANSLATORS: Warship ready */
+		             pgettext("ship", "Warship"), _("Warship Ready"),
+		             _("A warship is waiting for your commands."),
+		             "images/wui/buildings/start_expedition.png");
+	} else {
+		send_message(game,
+		             /** TRANSLATORS: Ship expedition ready */
+		             pgettext("ship", "Expedition"), _("Expedition Ready"),
+		             _("An expedition ship is waiting for your commands."),
+		             "images/wui/buildings/start_expedition.png");
+	}
 	Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
 }
 
 /// Initializes / changes the direction of scouting to @arg direction
 /// @note only called via player command
-void Ship::exp_scouting_direction(Game& /* game */, WalkingDir scouting_direction) {
+void Ship::exp_scouting_direction(Game& game, WalkingDir scouting_direction) {
 	assert(expedition_);
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
 	expedition_->scouting_direction = scouting_direction;
 	expedition_->island_exploration = false;
+	set_destination(game, nullptr);
 }
 
 WalkingDir Ship::get_scouting_direction() const {
@@ -952,13 +1602,14 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 /// Initializes / changes the direction the island exploration in @arg island_explore_direction
 /// direction
 /// @note only called via player command
-void Ship::exp_explore_island(Game& /* game */, IslandExploreDirection island_explore_direction) {
+void Ship::exp_explore_island(Game& game, IslandExploreDirection island_explore_direction) {
 	assert(expedition_);
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
 	expedition_->island_explore_direction = island_explore_direction;
 	expedition_->scouting_direction = WalkingDir::IDLE;
 	expedition_->island_exploration = true;
+	set_destination(game, nullptr);
 }
 
 IslandExploreDirection Ship::get_island_explore_direction() const {
@@ -1044,64 +1695,131 @@ void Ship::sink_ship(Game& game) {
 	ship_wakeup(game);
 }
 
+constexpr int kShipHealthBarWidth = 13 * 2;
+
 void Ship::draw(const EditorGameBase& egbase,
                 const InfoToDraw& info_to_draw,
-                const Vector2f& point_on_dst,
+                const Vector2f& field_on_dst,
                 const Widelands::Coords& coords,
                 const float scale,
                 RenderTarget* dst) const {
-	Bob::draw(egbase, info_to_draw, point_on_dst, coords, scale, dst);
+	Bob::draw(egbase, info_to_draw, field_on_dst, coords, scale, dst);
 
 	// Show ship name and current activity
 	std::string statistics_string;
 	if ((info_to_draw & InfoToDraw::kStatistics) != 0) {
-		switch (ship_state_) {
-		case (ShipStates::kTransport):
-			if (destination_ == nullptr) {
-				/** TRANSLATORS: This is a ship state. The ship is ready
-				 * to transport wares, but has nothing to do. */
-				statistics_string = pgettext("ship_state", "Empty");
-			} else if (fleet_->get_schedule().is_busy(*this)) {
-				statistics_string =
-				   /** TRANSLATORS: This is a ship state. The ship is currently
-				    * transporting wares to a specific destination port. */
-				   format(pgettext("ship_state", "Shipping to %s"),
-				          destination_->get_warehouse()->get_warehouse_name());
-			} else {
-				statistics_string =
-				   /** TRANSLATORS: This is a ship state. The ship is currently sailing
-				    * to a specific destination port without transporting wares. */
-				   format(pgettext("ship_state", "Sailing to %s"),
-				          destination_->get_warehouse()->get_warehouse_name());
+		if (has_battle()) {
+			statistics_string = pgettext("ship_state", "Fighting");
+		} else if (is_refitting()) {
+			switch (pending_refit_) {
+			case ShipType::kTransport:
+				statistics_string = pgettext("ship_state", "Refitting to Transport Ship");
+				break;
+			case ShipType::kWarship:
+				statistics_string = pgettext("ship_state", "Refitting to Warship");
+				break;
 			}
-			break;
-		case (ShipStates::kExpeditionWaiting):
-			/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */
-			statistics_string = pgettext("ship_state", "Waiting");
-			break;
-		case (ShipStates::kExpeditionScouting):
-			/** TRANSLATORS: This is a ship state. An expedition is scouting for port spaces. */
-			statistics_string = pgettext("ship_state", "Scouting");
-			break;
-		case (ShipStates::kExpeditionPortspaceFound):
-			/** TRANSLATORS: This is a ship state. An expedition has found a port space. */
-			statistics_string = pgettext("ship_state", "Port Space Found");
-			break;
-		case (ShipStates::kExpeditionColonizing):
-			/** TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
-			 * port. */
-			statistics_string = pgettext("ship_state", "Founding a Colony");
-			break;
-		case (ShipStates::kSinkRequest):
-		case (ShipStates::kSinkAnimation):
-			break;
+		} else {
+			if (ship_type_ == ShipType::kWarship) {
+				// TODO(Nordfriese): maybe show more state here
+				statistics_string = pgettext("ship_state", "Warship");
+			} else {
+				switch (ship_state_) {
+				case (ShipStates::kTransport): {
+					PortDock* dest = destination_.get(egbase);
+					if (dest == nullptr) {
+						/** TRANSLATORS: This is a ship state. The ship is ready
+						 * to transport wares, but has nothing to do. */
+						statistics_string = pgettext("ship_state", "Empty");
+					} else if (fleet_->get_schedule().is_busy(*this)) {
+						statistics_string =
+						   /** TRANSLATORS: This is a ship state. The ship is currently
+						    * transporting wares to a specific destination port. */
+						   format(pgettext("ship_state", "Shipping to %s"),
+						          dest->get_warehouse()->get_warehouse_name());
+					} else {
+						statistics_string =
+						   /** TRANSLATORS: This is a ship state. The ship is currently sailing
+						    * to a specific destination port without transporting wares. */
+						   format(pgettext("ship_state", "Sailing to %s"),
+						          dest->get_warehouse()->get_warehouse_name());
+					}
+					break;
+				}
+				case (ShipStates::kExpeditionWaiting):
+					/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */
+					statistics_string = pgettext("ship_state", "Waiting");
+					break;
+				case (ShipStates::kExpeditionScouting):
+					/** TRANSLATORS: This is a ship state. An expedition is scouting for port spaces. */
+					statistics_string = pgettext("ship_state", "Scouting");
+					break;
+				case (ShipStates::kExpeditionPortspaceFound):
+					/** TRANSLATORS: This is a ship state. An expedition has found a port space. */
+					statistics_string = pgettext("ship_state", "Port Space Found");
+					break;
+				case (ShipStates::kExpeditionColonizing):
+					/** TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to
+					 * build a port. */
+					statistics_string = pgettext("ship_state", "Founding a Colony");
+					break;
+				case (ShipStates::kSinkRequest):
+				case (ShipStates::kSinkAnimation):
+					break;
+				}
+			}
 		}
 		statistics_string = StyleManager::color_tag(
 		   statistics_string, g_style_manager->building_statistics_style().medium_color());
 	}
 
-	do_draw_info(info_to_draw, richtext_escape(shipname_), statistics_string,
-	             calc_drawpos(egbase, point_on_dst, scale), scale, dst);
+	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
+	do_draw_info(info_to_draw, shipname_, statistics_string, point_on_dst, scale, dst);
+
+	if ((info_to_draw & InfoToDraw::kSoldierLevels) != 0 &&
+	    (ship_type_ == ShipType::kWarship || hitpoints_ < descr().max_hitpoints_)) {
+		// TODO(Nordfriese): Common code with Soldier::draw_info_icon
+		const RGBColor& color = owner().get_playercolor();
+		const uint16_t color_sum = color.r + color.g + color.b;
+
+		const Vector2i draw_position = point_on_dst.cast<int>();
+
+		// The frame gets a slight tint of player color
+		const Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
+		                         kShipHealthBarWidth * 2 * scale, 5 * scale);
+		dst->fill_rect(energy_outer, color);
+		dst->brighten_rect(energy_outer, 230 - color_sum / 3);
+
+		// Adjust health to current animation tick
+		uint32_t health_to_show = hitpoints_;
+		if (has_battle() &&
+		    battles_.back().phase == (battles_.back().is_first ? Battle::Phase::kDefenderAttacking :
+                                                               Battle::Phase::kAttackerAttacking)) {
+			uint32_t pending_damage =
+			   battles_.back().pending_damage *
+			   (owner().egbase().get_gametime() - battles_.back().time_of_last_action).get() /
+			   kAttackAnimationDuration;
+			if (pending_damage > health_to_show) {
+				health_to_show = 0;
+			} else {
+				health_to_show -= pending_damage;
+			}
+		}
+
+		// Now draw the health bar itself
+		const int health_width =
+		   2 * (kShipHealthBarWidth - 1) * health_to_show / descr().max_hitpoints_;
+
+		Recti energy_inner(draw_position + Vector2i(-kShipHealthBarWidth + 1, 1) * scale,
+		                   health_width * scale, 3 * scale);
+		Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
+		                        (2 * (kShipHealthBarWidth - 1) - health_width) * scale, 3 * scale);
+
+		const RGBColor complement_color =
+		   color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
+		dst->fill_rect(energy_inner, color);
+		dst->fill_rect(energy_complement, complement_color);
+	}
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) const {
@@ -1117,10 +1835,10 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	                lastdock_.get(egbase)->get_positions(egbase)[0].y)
 	            .c_str() :
             "-");
-	if (destination_ != nullptr) {
-		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d) %s\n", destination_->serial(),
-		      destination_->get_positions(egbase)[0].x, destination_->get_positions(egbase)[0].y,
-		      destination_->get_warehouse()->get_warehouse_name().c_str());
+	if (PortDock* dest = destination_.get(egbase); dest != nullptr) {
+		molog(egbase.get_gametime(), "Has destination %u (%3dx%3d) %s\n", dest->serial(),
+		      dest->get_positions(egbase)[0].x, dest->get_positions(egbase)[0].y,
+		      dest->get_warehouse()->get_warehouse_name().c_str());
 	} else {
 		molog(egbase.get_gametime(), "No destination\n");
 	}
@@ -1128,7 +1846,8 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "In state: %u (%s)\n", static_cast<unsigned int>(ship_state_),
 	      (expedition_) ? "expedition" : "transportation");
 
-	if ((destination_ != nullptr) && get_position().field->get_immovable() == destination_) {
+	if (destination_.get(egbase) != nullptr &&
+	    get_position().field->get_immovable() == destination_.get(egbase)) {
 		molog(egbase.get_gametime(), "Currently in destination portdock\n");
 	}
 
@@ -1190,7 +1909,11 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 12;
+/* Changelog:
+ * 12 - v1.1
+ * 13 - Added warships and naval warfare.
+ */
+constexpr uint8_t kCurrentPacketVersion = 13;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship") {
@@ -1200,7 +1923,8 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 }
 
 void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
-	if (packet_version == kCurrentPacketVersion) {
+	// TODO(Nordfriese): Savegame compatibility v1.1
+	if (packet_version >= 12 && packet_version <= kCurrentPacketVersion) {
 		Bob::Loader::load(fr);
 		// Economy
 		ware_economy_serial_ = fr.unsigned_32();
@@ -1208,12 +1932,16 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 
 		// The state the ship is in
 		ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
+		ship_type_ =
+		   (packet_version >= 13) ? static_cast<ShipType>(fr.unsigned_8()) : ShipType::kTransport;
+		pending_refit_ = (packet_version >= 13) ? static_cast<ShipType>(fr.unsigned_8()) : ship_type_;
 
 		// Expedition specific data
-		if (ship_state_ == ShipStates::kExpeditionScouting ||
-		    ship_state_ == ShipStates::kExpeditionWaiting ||
-		    ship_state_ == ShipStates::kExpeditionPortspaceFound ||
-		    ship_state_ == ShipStates::kExpeditionColonizing) {
+		switch (ship_state_) {
+		case ShipStates::kExpeditionScouting:
+		case ShipStates::kExpeditionWaiting:
+		case ShipStates::kExpeditionPortspaceFound:
+		case ShipStates::kExpeditionColonizing: {
 			expedition_.reset(new Expedition());
 			// Currently seen port build spaces
 			expedition_->seen_port_buildspaces.clear();
@@ -1234,12 +1962,30 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			// Whether the exploration is done clockwise or counter clockwise
 			expedition_->island_explore_direction =
 			   static_cast<IslandExploreDirection>(fr.unsigned_8());
-		} else {
+			expedition_attack_target_serial_ = ((packet_version >= 13) ? fr.unsigned_32() : 0);
+		} break;
+
+		default:
 			ship_state_ = ShipStates::kTransport;
+			break;
 		}
+
+		for (uint8_t i = (packet_version >= 13) ? fr.unsigned_8() : 0; i != 0U; --i) {
+			const bool first = fr.unsigned_8() != 0U;
+			battle_serials_.push_back(fr.unsigned_32());
+			battles_.emplace_back(nullptr, std::vector<uint32_t>(), first);
+			battles_.back().phase = static_cast<Battle::Phase>(fr.unsigned_8());
+			battles_.back().pending_damage = fr.unsigned_32();
+			for (size_t j = fr.unsigned_32(); j > 0U; --j) {
+				battles_.back().attack_soldier_serials.push_back(fr.unsigned_32());
+			}
+			battles_.back().time_of_last_action = Time(fr);
+		}
+		hitpoints_ = (packet_version >= 13) ? fr.unsigned_32() : -1;
 
 		shipname_ = fr.c_string();
 		capacity_ = fr.unsigned_32();
+		warship_soldier_capacity_ = (packet_version >= 13) ? fr.unsigned_32() : capacity_;
 		lastdock_ = fr.unsigned_32();
 		destination_ = fr.unsigned_32();
 
@@ -1261,6 +2007,15 @@ void Ship::Loader::load_pointers() {
 		ship.lastdock_ = &mol().get<PortDock>(lastdock_);
 	}
 	ship.destination_ = destination_ != 0u ? &mol().get<PortDock>(destination_) : nullptr;
+
+	if (expedition_attack_target_serial_ != 0U) {
+		expedition_->attack_target = &mol().get<MapObject>(expedition_attack_target_serial_);
+	}
+	for (uint32_t i = 0; i < battle_serials_.size(); ++i) {
+		if (battle_serials_[i] != 0U) {
+			battles_[i].opponent = &mol().get<Ship>(battle_serials_[i]);
+		}
+	}
 
 	ship.items_.resize(items_.size());
 	for (uint32_t i = 0; i < items_.size(); ++i) {
@@ -1289,11 +2044,15 @@ void Ship::Loader::load_finish() {
 
 	// restore the state the ship is in
 	ship.ship_state_ = ship_state_;
+	ship.ship_type_ = ship_type_;
+	ship.pending_refit_ = pending_refit_;
+	ship.hitpoints_ = (hitpoints_ < 0) ? ship.descr().max_hitpoints_ : hitpoints_;
 
 	// restore the  ship id and name
 	ship.shipname_ = shipname_;
 
 	ship.capacity_ = capacity_;
+	ship.warship_soldier_capacity_ = warship_soldier_capacity_;
 
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {
@@ -1303,6 +2062,7 @@ void Ship::Loader::load_finish() {
 	} else {
 		assert(ship_state_ == ShipStates::kTransport);
 	}
+	ship.battles_ = battles_;
 
 	// Workers load code set their economy to the economy of their location
 	// (which is a PlayerImmovable), that means that workers on ships do not get
@@ -1320,7 +2080,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= 12 && packet_version <= kCurrentPacketVersion) {
 			try {
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
@@ -1355,6 +2115,8 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 
 	// state the ship is in
 	fw.unsigned_8(static_cast<uint8_t>(ship_state_));
+	fw.unsigned_8(static_cast<uint8_t>(ship_type_));
+	fw.unsigned_8(static_cast<uint8_t>(pending_refit_));
 
 	// expedition specific data
 	if (state_is_expedition()) {
@@ -1375,12 +2137,27 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		write_coords_32(&fw, expedition_->exploration_start);
 		// Whether the exploration is done clockwise or counter clockwise
 		fw.unsigned_8(static_cast<uint8_t>(expedition_->island_explore_direction));
+		fw.unsigned_32(mos.get_object_file_index_or_zero(expedition_->attack_target.get(egbase)));
 	}
+	fw.unsigned_8(battles_.size());
+	for (const Battle& b : battles_) {
+		fw.unsigned_8(b.is_first ? 1 : 0);
+		fw.unsigned_32(mos.get_object_file_index_or_zero(b.opponent.get(egbase)));
+		fw.unsigned_8(static_cast<uint8_t>(b.phase));
+		fw.unsigned_32(b.pending_damage);
+		fw.unsigned_32(b.attack_soldier_serials.size());
+		for (Serial s : b.attack_soldier_serials) {
+			fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(s)));
+		}
+		b.time_of_last_action.save(fw);
+	}
+	fw.unsigned_32(hitpoints_);
 
 	fw.string(shipname_);
 	fw.unsigned_32(capacity_);
+	fw.unsigned_32(warship_soldier_capacity_);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(lastdock_.get(egbase)));
-	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_.get(egbase)));
 
 	fw.unsigned_32(items_.size());
 	for (ShippingItem& shipping_item : items_) {

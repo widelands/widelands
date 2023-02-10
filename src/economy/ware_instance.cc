@@ -115,7 +115,7 @@ PlayerImmovable* IdleWareSupply::get_position(Game& game) {
 	}
 
 	if (upcast(Ship, ship, loc)) {
-		if (PortDock* pd = ship->get_destination()) {
+		if (PortDock* pd = ship->get_destination(game)) {
 			return pd;
 		}
 		return ship->get_fleet()->get_arbitrary_dock();

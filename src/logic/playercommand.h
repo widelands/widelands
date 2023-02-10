@@ -404,6 +404,57 @@ private:
 	Serial serial{0U};
 };
 
+struct CmdShipRefit : public PlayerCommand {
+	CmdShipRefit() = default;  // For savegame loading
+	CmdShipRefit(const Time& t, PlayerNumber const p, Serial s, ShipType ss)
+	   : PlayerCommand(t, p), serial_(s), type_(ss) {
+	}
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kShipRefit;
+	}
+
+	explicit CmdShipRefit(StreamRead&);
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Serial serial_{0U};
+	ShipType type_{ShipType::kTransport};
+};
+
+struct CmdWarshipCommand : public PlayerCommand {
+	CmdWarshipCommand() = default;  // For savegame loading
+	CmdWarshipCommand(const Time& t,
+	                  PlayerNumber const p,
+	                  Serial s,
+	                  WarshipCommand c,
+	                  const std::vector<uint32_t>& params)
+	   : PlayerCommand(t, p), serial_(s), parameters_(params), cmd_(c) {
+	}
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kWarshipCommand;
+	}
+
+	explicit CmdWarshipCommand(StreamRead&);
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Serial serial_{0U};
+	std::vector<uint32_t> parameters_;
+	WarshipCommand cmd_{WarshipCommand::kRetreat};
+};
+
 struct CmdShipScoutDirection : public PlayerCommand {
 	CmdShipScoutDirection() = default;  // For savegame loading
 	CmdShipScoutDirection(const Time& t, PlayerNumber const p, Serial s, WalkingDir direction)

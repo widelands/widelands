@@ -49,12 +49,17 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
      map_(iplayer_.player().egbase().map()),
      target_building_(&target_bld),
      target_coordinates_(target_coords),
-     lastupdate_(0),
 
+<<<<<<< HEAD
      mainbox_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
      linebox_(&mainbox_, UI::PanelStyle::kWui, "line_box", 0, 0, UI::Box::Horizontal),
      columnbox_(&linebox_, UI::PanelStyle::kWui, "column_box", 0, 0, UI::Box::Vertical),
      bottombox_(&mainbox_, UI::PanelStyle::kWui, "bottom_box", 0, 0, UI::Box::Horizontal) {
+=======
+     mainbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     attack_panel_(mainbox_, iplayer_, true, [this]() { return get_max_attackers(); }),
+     bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
+>>>>>>> 88e24db525 (Naval warfare baseplate implementation)
 	const unsigned serial = serial_;
 	living_attack_windows_[serial] = this;
 	target_bld.removed.connect([serial](unsigned /* index */) {
@@ -63,24 +68,44 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
 			it->second->die();
 		}
 	});
-	const std::vector<Widelands::Soldier*> all_attackers = get_max_attackers();
 
-	init_slider(all_attackers);
-	init_soldier_lists(all_attackers);
+	mainbox_.add(&attack_panel_, UI::Box::Resizing::kExpandBoth);
 	init_bottombox();
 
-	attack_button_->sigclicked.connect([this]() { act_attack(); });
-	set_fastclick_panel(attack_button_.get());
+	attack_panel_.act_attack.connect([this]() { act_attack(); });
+	set_fastclick_panel(attack_panel_.attack_button_.get());
 	set_center_panel(&mainbox_);
 
 	// Update the list of soldiers now to avoid a flickering window in the next tick
-	update(false);
+	attack_panel_.update(false);
 
 	center_to_parent();
 	if (fastclick) {
 		warp_mouse_to_fastclick_panel();
 	}
 	initialization_complete();
+}
+
+AttackPanel::AttackPanel(UI::Panel& parent,
+                         InteractivePlayer& iplayer,
+                         bool can_attack,
+                         std::function<std::vector<Widelands::Soldier*>()> get_max_attackers)
+   : UI::Box(&parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     iplayer_(iplayer),
+     get_max_attackers_(get_max_attackers),
+     lastupdate_(0),
+
+     linebox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     columnbox_(&linebox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical) {
+
+	const std::vector<Widelands::Soldier*> all_attackers = get_max_attackers_();
+
+	init_slider(all_attackers, can_attack);
+	init_soldier_lists(all_attackers);
+
+	if (can_attack) {
+		attack_button_->sigclicked.connect([this]() { act_attack(); });
+	}
 }
 
 AttackWindow::~AttackWindow() {
@@ -112,40 +137,40 @@ std::vector<Widelands::Soldier*> AttackWindow::get_max_attackers() {
 	return v;
 }
 
-std::unique_ptr<UI::HorizontalSlider> AttackWindow::add_slider(UI::Box& parent,
-                                                               uint32_t width,
-                                                               uint32_t height,
-                                                               uint32_t min,
-                                                               uint32_t max,
-                                                               uint32_t initial,
-                                                               char const* hint) {
+std::unique_ptr<UI::HorizontalSlider> AttackPanel::add_slider(UI::Box& parent,
+                                                              uint32_t width,
+                                                              uint32_t height,
+                                                              uint32_t min,
+                                                              uint32_t max,
+                                                              uint32_t initial,
+                                                              char const* hint) {
 	std::unique_ptr<UI::HorizontalSlider> result(new UI::HorizontalSlider(
 	   &parent, "slider", 0, 0, width, height, min, max, initial, UI::SliderStyle::kWuiLight, hint));
 	parent.add(result.get());
 	return result;
 }
 
-UI::Textarea& AttackWindow::add_text(UI::Box& parent,
-                                     const std::string& str,
-                                     UI::Align alignment,
-                                     const UI::FontStyle style) {
+UI::Textarea& AttackPanel::add_text(UI::Box& parent,
+                                    const std::string& str,
+                                    UI::Align alignment,
+                                    const UI::FontStyle style) {
 	UI::Textarea& result =
 	   *new UI::Textarea(&parent, UI::PanelStyle::kWui, "label", style, str, UI::Align::kLeft);
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
 	return result;
 }
 
-template <typename T>
-UI::Button* add_button(AttackWindow* a,
+template <typename ParentWidget, typename StringOrImage, typename Functor>
+UI::Button* add_button(ParentWidget* widget,
                        UI::Box& parent,
                        const std::string& name,
-                       const T& text_or_image,
-                       void (AttackWindow::*fn)(),
+                       const StringOrImage& text_or_image,
+                       Functor functor,
                        UI::ButtonStyle style,
                        const std::string& tooltip_text) {
 	UI::Button* button =
 	   new UI::Button(&parent, name, 8, 8, 34, 34, style, text_or_image, tooltip_text);
-	button->sigclicked.connect([a, fn]() { (a->*fn)(); });
+	button->sigclicked.connect([widget, functor]() { (widget->*functor)(); });
 	parent.add(button);
 	return button;
 }
@@ -153,14 +178,18 @@ UI::Button* add_button(AttackWindow* a,
 /*
  * Update available soldiers
  */
+void AttackPanel::think() {
+	if ((iplayer_.egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
+		update(false);
+	}
+
+	UI::Box::think();
+}
+
 void AttackWindow::think() {
 	if (!iplayer_.player().is_seeing(iplayer_.egbase().map().get_index(target_coordinates_)) &&
 	    !iplayer_.player().see_all()) {
 		die();  // The target building no longer exists.
-	}
-
-	if ((iplayer_.egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
-		update(false);
 	}
 
 	UI::UniqueWindow::think();
@@ -171,7 +200,7 @@ static inline std::string slider_heading(uint32_t num_attackers) {
 	return format(ngettext("%u soldier", "%u soldiers", num_attackers), num_attackers);
 }
 
-void AttackWindow::update(bool action_on_panel) {
+void AttackPanel::update(bool action_on_panel) {
 	MutexLock m(MutexLock::ID::kObjects);
 
 	lastupdate_ = iplayer_.egbase().get_gametime();
@@ -183,7 +212,7 @@ void AttackWindow::update(bool action_on_panel) {
 	assert(attacking_soldiers_.get());
 	assert(remaining_soldiers_.get());
 
-	std::vector<Widelands::Soldier*> all_attackers = get_max_attackers();
+	std::vector<Widelands::Soldier*> all_attackers = get_max_attackers_();
 	const int max_attackers = all_attackers.size();
 
 	// Update number of available soldiers
@@ -240,7 +269,8 @@ void AttackWindow::update(bool action_on_panel) {
 	more_soldiers_->set_title(std::to_string(max_attackers));
 }
 
-void AttackWindow::init_slider(const std::vector<Widelands::Soldier*>& all_attackers) {
+void AttackPanel::init_slider(const std::vector<Widelands::Soldier*>& all_attackers,
+                              bool can_attack) {
 	const size_t max_attackers = all_attackers.size();
 
 	soldiers_text_.reset(&add_text(columnbox_, slider_heading(max_attackers > 0 ? 1 : 0),
@@ -249,28 +279,30 @@ void AttackWindow::init_slider(const std::vector<Widelands::Soldier*>& all_attac
 	   columnbox_, 210, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
 	soldiers_slider_->changed.connect([this]() { update(false); });
 
-	mainbox_.add(&linebox_, UI::Box::Resizing::kFullSize);
-	less_soldiers_.reset(add_button(this, linebox_, "less", "0", &AttackWindow::send_less_soldiers,
+	add(&linebox_, UI::Box::Resizing::kFullSize);
+	less_soldiers_.reset(add_button(this, linebox_, "less", "0", &AttackPanel::send_less_soldiers,
 	                                UI::ButtonStyle::kWuiSecondary,
 	                                _("Send less soldiers. Hold down Ctrl to send no soldiers")));
 	linebox_.add(&columnbox_);
 	more_soldiers_.reset(
 	   add_button(this, linebox_, "more", std::to_string(max_attackers),
-	              &AttackWindow::send_more_soldiers, UI::ButtonStyle::kWuiSecondary,
+	              &AttackPanel::send_more_soldiers, UI::ButtonStyle::kWuiSecondary,
 	              _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible")));
 	linebox_.add_space(kSpacing);
-	attack_button_.reset(add_button(
-	   this, linebox_, "attack", g_image_cache->get("images/wui/buildings/menu_attack.png"),
-	   &AttackWindow::act_attack, UI::ButtonStyle::kWuiPrimary, _("Start attack")));
-	linebox_.add(attack_button_.get());
+	if (can_attack) {
+		attack_button_.reset(add_button(
+		   this, linebox_, "attack", g_image_cache->get("images/wui/buildings/menu_attack.png"),
+		   &AttackPanel::act_attack, UI::ButtonStyle::kWuiPrimary, _("Start attack")));
+		linebox_.add(attack_button_.get());
+	}
 
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > 0);
 }
 
-void AttackWindow::init_soldier_lists(const std::vector<Widelands::Soldier*>& all_attackers) {
-	attacking_soldiers_.reset(new ListOfSoldiers(&mainbox_, this, 0, 0, 30, 30));
-	remaining_soldiers_.reset(new ListOfSoldiers(&mainbox_, this, 0, 0, 30, 30));
+void AttackPanel::init_soldier_lists(const std::vector<Widelands::Soldier*>& all_attackers) {
+	attacking_soldiers_.reset(new ListOfSoldiers(this, this, 0, 0, 30, 30));
+	remaining_soldiers_.reset(new ListOfSoldiers(this, this, 0, 0, 30, 30));
 	attacking_soldiers_->set_complement(remaining_soldiers_.get());
 	remaining_soldiers_->set_complement(attacking_soldiers_.get());
 	for (const auto& s : all_attackers) {
@@ -280,7 +312,7 @@ void AttackWindow::init_soldier_lists(const std::vector<Widelands::Soldier*>& al
 	const std::string tooltip_format("<p>%s%s%s</p>");
 	{
 		UI::Textarea& txt =
-		   add_text(mainbox_, _("Attackers:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
+		   add_text(*this, _("Attackers:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
 		// Needed so we can get tooltips
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(format(
@@ -291,12 +323,12 @@ void AttackWindow::init_soldier_lists(const std::vector<Widelands::Soldier*>& al
 		      _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kWuiTooltip),
 		   as_listitem(_("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
 		               UI::FontStyle::kWuiTooltip)));
-		mainbox_.add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
+		add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
 	{
 		UI::Textarea& txt =
-		   add_text(mainbox_, _("Not attacking:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
+		   add_text(*this, _("Not attacking:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(format(
 		   tooltip_format,
@@ -306,7 +338,7 @@ void AttackWindow::init_soldier_lists(const std::vector<Widelands::Soldier*>& al
 		      _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kWuiTooltip),
 		   as_listitem(_("Hold down Shift to add all soldiers up to the one you’re pointing at"),
 		               UI::FontStyle::kWuiTooltip)));
-		mainbox_.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
+		add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 }
 
@@ -345,8 +377,8 @@ void AttackWindow::act_attack() {
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* building = target_building_.get(iplayer_.egbase());
 	if (building != nullptr) {
-		iplayer_.game().send_player_enemyflagaction(
-		   building->base_flag(), iplayer_.player_number(), soldiers(), get_allow_conquer());
+		iplayer_.game().send_player_enemyflagaction(building->base_flag(), iplayer_.player_number(),
+		                                            attack_panel_.soldiers(), get_allow_conquer());
 		iplayer_.map_view()->mouse_to_field(building->get_position(), MapView::Transition::Jump);
 	}
 	die();
@@ -363,23 +395,23 @@ void AttackWindow::act_debug() {
 	show_field_debug(iplayer_, iplayer_.egbase().map().get_fcoords(target_coordinates_));
 }
 
-void AttackWindow::send_less_soldiers() {
+void AttackPanel::send_less_soldiers() {
 	assert(soldiers_slider_.get());
 	soldiers_slider_->set_value(
 	   (SDL_GetModState() & KMOD_CTRL) != 0 ? 0 : soldiers_slider_->get_value() - 1);
 }
 
-void AttackWindow::send_more_soldiers() {
+void AttackPanel::send_more_soldiers() {
 	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) != 0 ?
                                   soldiers_slider_->get_max_value() :
                                   soldiers_slider_->get_value() + 1);
 }
 
-size_t AttackWindow::count_soldiers() const {
+size_t AttackPanel::count_soldiers() const {
 	return attacking_soldiers_->count_soldiers();
 }
 
-std::vector<Widelands::Serial> AttackWindow::soldiers() const {
+std::vector<Widelands::Serial> AttackPanel::soldiers() const {
 	std::vector<Widelands::Serial> result;
 	for (const auto& s : attacking_soldiers_->get_soldiers()) {
 		result.push_back(s->serial());
@@ -390,6 +422,7 @@ std::vector<Widelands::Serial> AttackWindow::soldiers() const {
 constexpr int kSoldierIconWidth = 32;
 constexpr int kSoldierIconHeight = 30;
 
+<<<<<<< HEAD
 AttackWindow::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
                                              AttackWindow* parent_box,
                                              int32_t const x,
@@ -398,12 +431,22 @@ AttackWindow::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
                                              int const h,
                                              bool restrict_rows)
    : UI::Panel(parent, UI::PanelStyle::kWui, "list_of_soldiers", x, y, w, h),
+=======
+AttackPanel::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
+                                            AttackPanel* parent_box,
+                                            int32_t const x,
+                                            int32_t const y,
+                                            int const w,
+                                            int const h,
+                                            bool restrict_rows)
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
+>>>>>>> 88e24db525 (Naval warfare baseplate implementation)
      restricted_row_number_(restrict_rows),
      attack_box_(parent_box) {
 	update_desired_size();
 }
 
-bool AttackWindow::ListOfSoldiers::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
+bool AttackPanel::ListOfSoldiers::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn != SDL_BUTTON_LEFT || (other_ == nullptr)) {
 		return UI::Panel::handle_mousepress(btn, x, y);
 	}
@@ -434,11 +477,11 @@ bool AttackWindow::ListOfSoldiers::handle_mousepress(uint8_t btn, int32_t x, int
 	return true;
 }
 
-void AttackWindow::ListOfSoldiers::handle_mousein(bool /*inside*/) {
+void AttackPanel::ListOfSoldiers::handle_mousein(bool /*inside*/) {
 	set_tooltip(std::string());
 }
 
-bool AttackWindow::ListOfSoldiers::handle_mousemove(
+bool AttackPanel::ListOfSoldiers::handle_mousemove(
    uint8_t /*state*/, int32_t x, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	if (const Widelands::Soldier* soldier = soldier_at(x, y)) {
 		set_tooltip(format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"),
@@ -453,11 +496,11 @@ bool AttackWindow::ListOfSoldiers::handle_mousemove(
 }
 
 // whole window
-bool AttackWindow::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+bool AttackPanel::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	return soldiers_slider_->handle_mousewheel(x, y, modstate);
 }
 
-Widelands::Extent AttackWindow::ListOfSoldiers::size() const {
+Widelands::Extent AttackPanel::ListOfSoldiers::size() const {
 	const size_t nr_soldiers = count_soldiers();
 	size_t rows = nr_soldiers / current_size_;
 	if (nr_soldiers == 0 || rows * current_size_ < nr_soldiers) {
@@ -469,14 +512,14 @@ Widelands::Extent AttackWindow::ListOfSoldiers::size() const {
 	return Widelands::Extent(current_size_, rows);
 }
 
-void AttackWindow::ListOfSoldiers::update_desired_size() {
+void AttackPanel::ListOfSoldiers::update_desired_size() {
 	current_size_ = std::max(
 	   1, restricted_row_number_ ? get_h() / kSoldierIconHeight : get_w() / kSoldierIconWidth);
 	const Widelands::Extent e = size();
 	set_desired_size(e.w * kSoldierIconWidth, e.h * kSoldierIconHeight);
 }
 
-const Widelands::Soldier* AttackWindow::ListOfSoldiers::soldier_at(int32_t x, int32_t y) const {
+const Widelands::Soldier* AttackPanel::ListOfSoldiers::soldier_at(int32_t x, int32_t y) const {
 	if (x < 0 || y < 0 || soldiers_.empty()) {
 		return nullptr;
 	}
@@ -492,19 +535,19 @@ const Widelands::Soldier* AttackWindow::ListOfSoldiers::soldier_at(int32_t x, in
 	return static_cast<unsigned int>(index) < soldiers_.size() ? soldiers_[index] : nullptr;
 }
 
-void AttackWindow::ListOfSoldiers::add(const Widelands::Soldier* s) {
+void AttackPanel::ListOfSoldiers::add(const Widelands::Soldier* s) {
 	soldiers_.push_back(s);
 	update_desired_size();
 }
 
-void AttackWindow::ListOfSoldiers::remove(const Widelands::Soldier* s) {
+void AttackPanel::ListOfSoldiers::remove(const Widelands::Soldier* s) {
 	const auto it = std::find(soldiers_.begin(), soldiers_.end(), s);
 	assert(it != soldiers_.end());
 	soldiers_.erase(it);
 	update_desired_size();
 }
 
-void AttackWindow::ListOfSoldiers::draw(RenderTarget& dst) {
+void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 	const size_t nr_soldiers = soldiers_.size();
 	int32_t column = 0;
 	int32_t row = 0;
@@ -545,15 +588,15 @@ UI::Window& AttackWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::Map
 				a->do_not_conquer_->set_state(destroy == 0);
 			}
 
-			for (const Widelands::Soldier* s : a->attacking_soldiers_->get_soldiers()) {
-				a->attacking_soldiers_->remove(s);
-				a->remaining_soldiers_->add(s);
+			for (const Widelands::Soldier* s : a->attack_panel_.attacking_soldiers_->get_soldiers()) {
+				a->attack_panel_.attacking_soldiers_->remove(s);
+				a->attack_panel_.remaining_soldiers_->add(s);
 			}
 			for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 				const Widelands::Soldier* s = &mol.get<Widelands::Soldier>(fr.unsigned_32());
-				if (a->remaining_soldiers_->contains(s)) {
-					a->remaining_soldiers_->remove(s);
-					a->attacking_soldiers_->add(s);
+				if (a->attack_panel_.remaining_soldiers_->contains(s)) {
+					a->attack_panel_.remaining_soldiers_->remove(s);
+					a->attack_panel_.attacking_soldiers_->add(s);
 				}
 				/* Since the attack window only updates a soldier list every 500 ms, it is
 				 * possible for the saved list of soldiers to send to contain a soldier
@@ -577,8 +620,8 @@ void AttackWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) const {
 
 	fw.unsigned_8(do_not_conquer_ && !do_not_conquer_->get_state() ? 1 : 0);
 
-	fw.unsigned_32(attacking_soldiers_->get_soldiers().size());
-	for (const Widelands::Soldier* s : attacking_soldiers_->get_soldiers()) {
+	fw.unsigned_32(attack_panel_.attacking_soldiers_->get_soldiers().size());
+	for (const Widelands::Soldier* s : attack_panel_.attacking_soldiers_->get_soldiers()) {
 		fw.unsigned_32(mos.get_object_file_index(*s));
 	}
 }

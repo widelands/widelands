@@ -175,6 +175,10 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdShipPortName(des);
 	case QueueCommandTypes::kFleetTargets:
 		return new CmdFleetTargets(des);
+	case QueueCommandTypes::kShipRefit:
+		return new CmdShipRefit(des);
+	case QueueCommandTypes::kWarshipCommand:
+		return new CmdWarshipCommand(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
@@ -957,6 +961,108 @@ void CmdEvictWorker::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }
 
+/*** Cmd_ShipRefit ***/
+CmdShipRefit::CmdShipRefit(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+	type_ = static_cast<ShipType>(des.unsigned_8());
+}
+
+void CmdShipRefit::execute(Game& game) {
+	upcast(Ship, ship, game.objects().get_object(serial_));
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		ship->refit(game, type_);
+	}
+}
+
+void CmdShipRefit::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial_);
+	ser.unsigned_8(static_cast<uint8_t>(type_));
+}
+
+constexpr uint16_t kCurrentPacketVersionShipRefit = 1;
+
+void CmdShipRefit::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionShipRefit) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial_ = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
+			type_ = static_cast<ShipType>(fr.unsigned_8());
+		} else {
+			throw UnhandledVersionError(
+			   "CmdShipRefit", packet_version, kCurrentPacketVersionShipRefit);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("Ship refit: %s", e.what());
+	}
+}
+void CmdShipRefit::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionShipRefit);
+	PlayerCommand::write(fw, egbase, mos);
+
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_8(static_cast<uint8_t>(type_));
+}
+
+/*** Cmd_WarshipCommand ***/
+CmdWarshipCommand::CmdWarshipCommand(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+	cmd_ = static_cast<WarshipCommand>(des.unsigned_8());
+	for (uint32_t i = des.unsigned_32(); i > 0U; --i) {
+		parameters_.push_back(des.signed_32());
+	}
+}
+
+void CmdWarshipCommand::execute(Game& game) {
+	upcast(Ship, ship, game.objects().get_object(serial_));
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		ship->warship_command(game, cmd_, parameters_);
+	}
+}
+
+void CmdWarshipCommand::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial_);
+	ser.unsigned_8(static_cast<uint8_t>(cmd_));
+	ser.unsigned_32(parameters_.size());
+	for (uint32_t p : parameters_) {
+		ser.unsigned_32(p);
+	}
+}
+
+constexpr uint16_t kCurrentPacketVersionWarshipCommand = 1;
+
+void CmdWarshipCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionWarshipCommand) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial_ = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
+			cmd_ = static_cast<WarshipCommand>(fr.unsigned_8());
+			for (uint32_t i = fr.unsigned_32(); i > 0U; --i) {
+				parameters_.push_back(fr.signed_32());
+			}
+		} else {
+			throw UnhandledVersionError(
+			   "CmdWarshipCommand", packet_version, kCurrentPacketVersionWarshipCommand);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("Warship command: %s", e.what());
+	}
+}
+void CmdWarshipCommand::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionWarshipCommand);
+	PlayerCommand::write(fw, egbase, mos);
+
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_8(static_cast<uint8_t>(cmd_));
+	fw.unsigned_32(parameters_.size());
+	for (uint32_t p : parameters_) {
+		fw.unsigned_32(p);
+	}
+}
+
 /*** Cmd_ShipScoutDirection ***/
 CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
@@ -966,10 +1072,10 @@ CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des)
 
 void CmdShipScoutDirection::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if ((ship != nullptr) && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		if (!(ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting)) {
 			log_warn_time(
 			   game.get_gametime(),
 			   " %1d:ship on %3dx%3d received scout command but not in "
@@ -1029,8 +1135,8 @@ CmdShipConstructPort::CmdShipConstructPort(StreamRead& des)
 
 void CmdShipConstructPort::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if ((ship != nullptr) && ship->get_owner()->player_number() == sender()) {
-		if (ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		if (ship->get_ship_state() != Widelands::ShipStates::kExpeditionPortspaceFound) {
 			log_warn_time(game.get_gametime(),
 			              " %1d:ship on %3dx%3d received build port command but "
 			              "not in kExpeditionPortspaceFound status (expedition: %s), ignoring...\n",
@@ -1088,10 +1194,10 @@ CmdShipExploreIsland::CmdShipExploreIsland(StreamRead& des)
 
 void CmdShipExploreIsland::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if ((ship != nullptr) && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		if (!(ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting)) {
 			log_warn_time(
 			   game.get_gametime(),
 			   " %1d:ship on %3dx%3d received explore island command "

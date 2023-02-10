@@ -812,7 +812,7 @@ private:
 Bob::Task const Soldier::taskAttack = {"attack", static_cast<Bob::Ptr>(&Soldier::attack_update),
                                        nullptr, static_cast<Bob::Ptr>(&Soldier::attack_pop), true};
 
-void Soldier::start_task_attack(Game& game, Building& building) {
+void Soldier::start_task_attack(Game& game, Building& building, bool allow_retreat) {
 	push_task(game, taskAttack);
 	State& state = top_state();
 	state.objvar1 = &building;
@@ -820,7 +820,9 @@ void Soldier::start_task_attack(Game& game, Building& building) {
 	state.ivar2 = 0;  // The return state 1=go home 2=go back in known land
 	state.ivar3 = 0;  // Counts how often the soldier is blocked in a row
 
-	state.ivar1 |= CF_RETREAT_WHEN_INJURED;
+	if (allow_retreat) {
+		state.ivar1 |= CF_RETREAT_WHEN_INJURED;
+	}
 	set_retreat_health(kRetreatWhenHealthDropsBelowThisPercentage * get_max_health() / 100);
 
 	// Injured soldiers are not allowed to attack
@@ -1003,16 +1005,15 @@ void Soldier::attack_update(Game& game, State& state) {
 		defenders += soldiers.size();
 	}
 
-	if ((enemy == nullptr) || (get_retreat_health() > get_current_health() && defenders > 0)) {
+	const bool consider_retreat = (state.ivar1 & CF_RETREAT_WHEN_INJURED) != 0 && defenders > 0 &&
+	                              get_retreat_health() > get_current_health();
+	if (enemy == nullptr || consider_retreat) {
 		// Injured soldiers will try to return to safe site at home.
-		if (get_retreat_health() > get_current_health()) {
-			assert(state.ivar1 & CF_RETREAT_WHEN_INJURED);
-			if (defenders != 0u) {
-				molog(game.get_gametime(), " [attack] badly injured (%d), retreating...\n",
-				      get_current_health());
-				state.coords = Coords::null();
-				state.objvar1 = nullptr;
-			}
+		if (consider_retreat) {
+			molog(game.get_gametime(), " [attack] badly injured (%d), retreating...\n",
+			      get_current_health());
+			state.coords = Coords::null();
+			state.objvar1 = nullptr;
 		}
 		// The old militarysite gets replaced by a new one, so if "enemy" is not
 		// valid anymore, we either "conquered" the new building, or it was
