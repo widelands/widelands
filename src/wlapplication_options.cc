@@ -776,8 +776,8 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 };
 
 KeyboardShortcut& operator++(KeyboardShortcut& id) {
-      id = static_cast<KeyboardShortcut>(static_cast<uint16_t>(id) + 1);
-      return id;
+	id = static_cast<KeyboardShortcut>(static_cast<uint16_t>(id) + 1);
+	return id;
 }
 
 std::string get_shortcut_range_help(const KeyboardShortcut start, const KeyboardShortcut end) {
