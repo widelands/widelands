@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-04 03:15+0000\n"
+"POT-Creation-Date: 2023-02-07 02:56+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017,2019-2021\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
@@ -123,7 +123,7 @@ msgstr ""
 #. Performance helptext for a barbarian production site: Ax Workshop, part 1
 #. pgettext("barbarians_building", "If all needed wares are delivered in time,
 #. this building can produce each type of ax in about %s on
-#. average."):bformat(ngettext("%d second", "%d seconds", 57):bformat(57)),
+#. average."):bformat(format_seconds(57)),
 #. Performance helptext for a barbarian production site: Ax Workshop, part 2
 #. pgettext("barbarians_building", "All three weapons take the same time for
 #. making, but the required raw materials vary.")
@@ -1148,84 +1148,6 @@ msgid ""
 "The hunter-gatherer’s hut needs animals or fish to hunt or catch within the "
 "work area."
 msgstr ""
-
-#: ../../data/tribes/initialization/amazons/units.lua:1301
-#: ../../data/tribes/initialization/amazons/units.lua:1317
-#: ../../data/tribes/initialization/amazons/units.lua:1352
-#: ../../data/tribes/initialization/amazons/units.lua:1374
-#: ../../data/tribes/initialization/amazons/units.lua:1414
-#: ../../data/tribes/initialization/amazons/units.lua:1430
-#: ../../data/tribes/initialization/amazons/units.lua:1439
-#: ../../data/tribes/initialization/amazons/units.lua:1448
-#: ../../data/tribes/initialization/amazons/units.lua:1497
-#: ../../data/tribes/initialization/barbarians/units.lua:1142
-#: ../../data/tribes/initialization/barbarians/units.lua:1158
-#: ../../data/tribes/initialization/barbarians/units.lua:1160
-#: ../../data/tribes/initialization/barbarians/units.lua:1177
-#: ../../data/tribes/initialization/barbarians/units.lua:1192
-#: ../../data/tribes/initialization/barbarians/units.lua:1207
-#: ../../data/tribes/initialization/barbarians/units.lua:1220
-#: ../../data/tribes/initialization/barbarians/units.lua:1233
-#: ../../data/tribes/initialization/barbarians/units.lua:1274
-#: ../../data/tribes/initialization/barbarians/units.lua:1289
-#: ../../data/tribes/initialization/barbarians/units.lua:1302
-#: ../../data/tribes/initialization/barbarians/units.lua:1315
-#: ../../data/tribes/initialization/barbarians/units.lua:1331
-#: ../../data/tribes/initialization/barbarians/units.lua:1344
-#: ../../data/tribes/initialization/barbarians/units.lua:1357
-#: ../../data/tribes/initialization/barbarians/units.lua:1370
-#: ../../data/tribes/initialization/barbarians/units.lua:1415
-#: ../../data/tribes/initialization/barbarians/units.lua:1431
-#: ../../data/tribes/initialization/barbarians/units.lua:1450
-#: ../../data/tribes/initialization/barbarians/units.lua:1466
-#: ../../data/tribes/initialization/barbarians/units.lua:1481
-#: ../../data/tribes/initialization/barbarians/units.lua:1529
-#: ../../data/tribes/initialization/barbarians/units.lua:1544
-#: ../../data/tribes/initialization/barbarians/units.lua:1559
-#: ../../data/tribes/initialization/barbarians/units.lua:1574
-#: ../../data/tribes/initialization/barbarians/units.lua:1587
-#: ../../data/tribes/initialization/barbarians/units.lua:1600
-#: ../../data/tribes/initialization/barbarians/units.lua:1613
-#: ../../data/tribes/initialization/barbarians/units.lua:1626
-#: ../../data/tribes/initialization/barbarians/units.lua:1639
-#: ../../data/tribes/initialization/barbarians/units.lua:1652
-#: ../../data/tribes/initialization/barbarians/units.lua:1673
-#: ../../data/tribes/initialization/barbarians/units.lua:1692
-#: ../../data/tribes/initialization/frisians/units.lua:1564
-#: ../../data/tribes/initialization/frisians/units.lua:1592
-#: ../../data/tribes/initialization/frisians/units.lua:1603
-#: ../../data/tribes/initialization/frisians/units.lua:1618
-#: ../../data/tribes/initialization/frisians/units.lua:1644
-#: ../../data/tribes/initialization/frisians/units.lua:1670
-#: ../../data/tribes/initialization/frisians/units.lua:1685
-#: ../../data/tribes/initialization/frisians/units.lua:1700
-#: ../../data/tribes/initialization/frisians/units.lua:1715
-#: ../../data/tribes/initialization/frisians/units.lua:1742
-#: ../../data/tribes/initialization/frisians/units.lua:1757
-#: ../../data/tribes/initialization/frisians/units.lua:1792
-#: ../../data/tribes/initialization/frisians/units.lua:1827
-#: ../../data/tribes/initialization/frisians/units.lua:1851
-#: ../../data/tribes/initialization/frisians/units.lua:1864
-#: ../../data/tribes/initialization/frisians/units.lua:1877
-#: ../../data/tribes/initialization/frisians/units.lua:1901
-#: ../../data/tribes/initialization/frisians/units.lua:1925
-#: ../../data/tribes/initialization/frisians/units.lua:1949
-#: ../../data/tribes/initialization/frisians/units.lua:1997
-#: ../../data/tribes/initialization/frisians/units.lua:2006
-#: ../../data/tribes/initialization/frisians/units.lua:2015
-#: ../../data/tribes/initialization/frisians/units.lua:2024
-#: ../../data/tribes/initialization/frisians/units.lua:2033
-#: ../../data/tribes/initialization/frisians/units.lua:2042
-#: ../../data/tribes/initialization/frisians/units.lua:2051
-#: ../../data/tribes/initialization/frisians/units.lua:2060
-#: ../../data/tribes/initialization/frisians/units.lua:2179
-#: ../../data/tribes/scripting/help/time_strings.lua:26
-#: ../../data/tribes/scripting/help/time_strings.lua:62
-#, lua-format
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d sekund"
-msgstr[1] "%d sekunder"
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Hunter-
 #. Gatherer's Hut
@@ -6718,10 +6640,11 @@ msgstr "Tilbereder rationer til spejdere og rationer og mellemmåltider til fød
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1357
+#, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"The inn can produce one ration in %1$s and one snack in %2$s on average, if "
-"the supply is steady."
+"The inn can produce one ration in %s and one snack in %s on average, if the "
+"supply is steady."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Big Inn
@@ -6748,10 +6671,11 @@ msgstr "Tilbereder rationer til spejdere og rationer, mellemmåltider og måltid
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1370
+#, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"The big inn can produce one ration in %1$s, one snack in %2$s and one meal "
-"in %3$s on average, if the supply is steady."
+"The big inn can produce one ration in %s, one snack in %s and one meal in %s"
+" on average, if the supply is steady."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Charcoal Kiln
@@ -7217,24 +7141,15 @@ msgid ""
 "initial level."
 msgstr "Barbarernes soldater kan ikke træne i forsvar og forbliver på det niveau de starter på."
 
-#: ../../data/tribes/initialization/barbarians/units.lua:1673
-#: ../../data/tribes/initialization/barbarians/units.lua:1692
-#: ../../data/tribes/scripting/help/time_strings.lua:42
-#: ../../data/tribes/scripting/help/time_strings.lua:61
-#, lua-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] "%d minut"
-msgstr[1] "%d minutter"
-
 #. TRANSLATORS: Performance helptext for a barbarian training site: Battle
 #. Arena
 #: ../../data/tribes/initialization/barbarians/units.lua:1673
+#, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train evade "
-"for one soldier from 0 to the highest level in %1$s and %2$s on average."
-msgstr "Hvis alle krævede varer leveres i tide, så kan en kamparena træne undvigelse for en soldat fra 0 til det højeste niveau på %1$s og %2$s i gennemsnit."
+"for one soldier from 0 to the highest level in %s on average."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a barbarian training site: Training Camp
 #: ../../data/tribes/initialization/barbarians/units.lua:1680
@@ -7268,12 +7183,12 @@ msgstr "Udstyrer soldaterne med alle de nødvendige våben og rustningsdele."
 #. TRANSLATORS: Performance helptext for a barbarian training site: Training
 #. Camp
 #: ../../data/tribes/initialization/barbarians/units.lua:1692
+#, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a training camp can train one new"
-" soldier in attack and health to the final level in %1$s and %2$s on "
-"average."
-msgstr "Hvis alle krævede varer leveres i tide, så kan en træningslejr træne en ny soldat i angreb og helbred til det højeste niveau på %1$s og %2$s i gennemsnit."
+" soldier in attack and health to the final level in %s on average."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Sentry
 #: ../../data/tribes/initialization/barbarians/units.lua:1701
@@ -16019,6 +15934,22 @@ msgstr ""
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
 msgstr "Om Widelands"
+
+#: ../../data/tribes/scripting/help/time_strings.lua:26
+#: ../../data/tribes/scripting/help/time_strings.lua:62
+#, lua-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d sekund"
+msgstr[1] "%d sekunder"
+
+#: ../../data/tribes/scripting/help/time_strings.lua:42
+#: ../../data/tribes/scripting/help/time_strings.lua:61
+#, lua-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minut"
+msgstr[1] "%d minutter"
 
 #: ../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"
