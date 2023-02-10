@@ -903,14 +903,18 @@ void Ship::battle_update(Game& game) {
 		}
 	};
 	auto fight = [this, &current_battle, other_battle, &game, target_ship]() {
-		current_battle.pending_damage =
-		   target_ship == nullptr ?
-            1 :  // Ports always take 1 point
-		      (game.logic_rand() % 100 < descr().attack_accuracy_) ?
-            (descr().min_attack_ +
-		       (game.logic_rand() % (descr().max_attack_ - descr().min_attack_))) *
-		         (100 - target_ship->descr().defense_) / 100 :
-            0;
+		if (target_ship == nullptr) {
+			current_battle.pending_damage = 1;  // Ports always take 1 point
+		} else if (game.logic_rand() % 100 < descr().attack_accuracy_) {  // Hit
+			uint32_t attack_strength =
+			   (game.logic_rand() % (descr().max_attack_ - descr().min_attack_));
+			attack_strength += descr().min_attack_;
+			current_battle.pending_damage =
+			   attack_strength * (100 - target_ship->descr().defense_) / 100;
+		} else {  // Miss
+			current_battle.pending_damage = 0;
+		}
+
 		if (other_battle != nullptr) {
 			other_battle->pending_damage = current_battle.pending_damage;
 		}

@@ -153,17 +153,17 @@ UI::Textarea& AttackPanel::add_text(UI::Box& parent,
 	return result;
 }
 
-template <typename A, typename T, typename F>
-UI::Button* add_button(A* a,
+template <typename ParentWidget, typename StringOrImage, typename Functor>
+UI::Button* add_button(ParentWidget* widget,
                        UI::Box& parent,
                        const std::string& name,
-                       const T& text_or_image,
-                       F fn,
+                       const StringOrImage& text_or_image,
+                       Functor functor,
                        UI::ButtonStyle style,
                        const std::string& tooltip_text) {
 	UI::Button* button =
 	   new UI::Button(&parent, name, 8, 8, 34, 34, style, text_or_image, tooltip_text);
-	button->sigclicked.connect([a, fn]() { (a->*fn)(); });
+	button->sigclicked.connect([widget, functor]() { (widget->*functor)(); });
 	parent.add(button);
 	return button;
 }

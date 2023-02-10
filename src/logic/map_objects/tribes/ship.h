@@ -259,7 +259,14 @@ struct Ship : Bob {
 	}
 	[[nodiscard]] uint32_t min_warship_soldier_capacity() const;
 
-	void warship_command(Game&, WarshipCommand, const std::vector<uint32_t>& parameters);
+	/**
+	 * Execute a warship command.
+	 * For a kAttack against a port, `parameters` contains the serials of the soldiers to send.
+	 * For a kAttack against a ship, `parameters` is ignored.
+	 * For a kSetCapacity, `parameters` must contain exactly one value to specify the new capacity.
+	 * For a kRetreat, `parameters` must be empty.
+	 */
+	void warship_command(Game& game, WarshipCommand cmd, const std::vector<uint32_t>& parameters);
 
 	static void warship_soldier_callback(
 	   Game& game, Request& req, DescriptionIndex di, Worker* worker, PlayerImmovable& immovable);
