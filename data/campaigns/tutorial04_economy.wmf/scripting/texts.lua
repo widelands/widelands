@@ -14,7 +14,7 @@ intro1 = {
       p(_([[Building your economy up and making it work well and grow is the main part of Widelands. But you can’t control the workers directly – they will follow the general conditions you set.]])) ..
       p(_([[This is what I’ll show you in this tutorial: what actions can you take to define those general conditions?]]))
    ),
-   h = 300
+   h = messagebox_h_step(-2)
 }
 
 intro2 = {
@@ -27,7 +27,7 @@ intro2 = {
          p(_([[But one day, you discovered a barren wasteland with abandoned buildings in the east. A strange aura came from there, and no one wanted to set foot there. But the border could not be left undefended, and so you constructed three fortresses.]])) ..
          p(_([[You had not been prepared for war, and you have to hurry now to build up an army.]])), plr.color)
    ),
-   h = 300
+   h = messagebox_h_step(-2)
 }
 
 tavern_burnt_down = {
@@ -38,8 +38,8 @@ tavern_burnt_down = {
       li_object("destroyed_building",
          _([[Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper accidentally dropped a torch. She is fine, but we could not extinguish the fire in time.]]), plr.color)
    ),
-   w = 300,
-   h = 250
+   w = messagebox_w_step(-3),
+   h = messagebox_h_step(-3)
 }
 
 obj_open_building_stats = {
@@ -90,7 +90,7 @@ explain_building_stats = {
       li(_([[If you don’t have any building of a particular building type, it will be shown greyed out.]])) ..
       p(_([[This is enough explanation for now. Now try it out yourself.]]))
    ),
-   h = 500,
+   h = messagebox_h_step(2),
 }
 
 reopen_building_stats = {
@@ -100,8 +100,8 @@ reopen_building_stats = {
          _([[You have closed the building statistics window. I didn’t notice that you switched to the medium buildings to look up the number of taverns. Would you please be so nice and show it to me?]]))
    ),
    show_instantly = true,
-   w = 300,
-   h = 250
+   w = messagebox_w_step(-3),
+   h = messagebox_h_step(-3)
 }
 
 obj_reopen_building_stats = {
@@ -170,7 +170,7 @@ position = "topright",
       p(_([[The third tab tells you that there are no rations left in your headquarters – that’s not good!]]))
    ),
    show_instantly = true,
-   h = 250
+   h = messagebox_h_step(-3)
 }
 
 reopen_stock_menu = {
@@ -180,8 +180,8 @@ reopen_stock_menu = {
          _([[You have closed the stock window, but I have not yet finished with my explanation. Would you please reopen it and choose the first tab?]]))
    ),
    show_instantly = true,
-   w = 300,
-   h = 250
+   w = messagebox_w_step(-3),
+   h = messagebox_h_step(-3)
 }
 
 obj_reopen_stock_menu = {
@@ -203,8 +203,8 @@ reopen_stock_menu2 = {
          _([[You have closed the stock window, but I have not yet finished with my explanation. Would you please reopen it and choose the third tab?]]))
    ),
    show_instantly = true,
-   w = 300,
-   h = 250
+   w = messagebox_w_step(-3),
+   h = messagebox_h_step(-3)
 }
 obj_reopen_stock_menu2 = {
    name = "open_stock_menu_again2",
@@ -257,7 +257,7 @@ ware_encyclopedia = {
          _([[Of course, it is difficult to remember all of my remarks and advice. For example, you might ask yourself: ‘Why do we need rations to get soldiers?’]]), plr.color) ..
       p(_([[When you’ve played a lot, you will know all these things by heart. But until then or if you’re unsure about your tribe’s needs and abilities and how its buildings and workers operate, you can look it up easily in our tribe-specific in-game help and encyclopedia.]]))
    ),
-   h = 450,
+   h = messagebox_h_step(1),
    show_instantly = true,
 }
 
@@ -286,7 +286,7 @@ explain_encyclopedia = {
       div("width=100%", div("float=left padding_r=18 padding_t=5 padding_l=4",p(img("images/wui/stats/genstats_nrbuildings.png"))) .. p(_([[The ‘Buildings’ tab contains all the necessary information about the buildings of your tribe.]]))) ..
       div("width=100%", div("float=left padding_r=18 padding_t=5 padding_l=4",p(img("tribes/immovables/wheatfield/ripe/menu.png"))) .. p(_([[Finally, the ‘Immovables’ tab shows information about the specific immovables that your tribe’s workers can place on the map.]])))
    ),
-   h = 500,
+   h = messagebox_h_step(2),
    show_instantly = true,
 }
 
@@ -297,8 +297,8 @@ reopen_encyclopedia = {
          _([[You have closed the encyclopedia window, but I didn’t notice that you were trying to find out which wares are needed to recruit a soldier. Would you please reopen it and do so?]]))
    ),
    show_instantly = true,
-   w = 300,
-   h = 250
+   w = messagebox_w_step(-3),
+   h = messagebox_h_step(-3)
 }
 
 obj_reopen_encyclopedia = {
@@ -342,7 +342,7 @@ ware_stats1 = {
    body = (
       li_image("images/wui/menus/statistics_wares.png", _([[Let’s have a look at how our wares production is doing.]]))
    ),
-   h = 250
+   h = messagebox_h_step(-3)
 }
 
 obj_switch_ware_stats_tab_to_third = {
@@ -361,7 +361,7 @@ ware_stats2 = {
       p(_([[In this window, you can select wares to see how their production or consumption has changed over time. Try it out with some wares.]])) ..
       li_image("images/wui/stats/menu_tab_wares_econ_health.png", _([[I’ll continue as soon as you click on the third tab (‘Economy health’).]]))
    ),
-   h = 350,
+   h = messagebox_h_step(-1),
    show_instantly = true
 }
 
@@ -382,7 +382,7 @@ ware_stats3 = {
       li_image("images/wui/stats/menu_tab_wares_econ_health.png",
          _([[In this tab, you can see the difference between production and consumption, called ‘economy health’. You can see at one glance which one of those two is higher for the selected ware, that means whether the amount increases or decreases.]]))
    ),
-   h = 350,
+   h = messagebox_h_step(-1),
    show_instantly = true
 }
 
@@ -394,7 +394,7 @@ obj_close_ware_stats = {
       li_arrow(_([[The stock tab shows you how many wares you have. Compare the information from the four tabs to understand the correlation.]])) ..
       li(_([[When you have finished, close the ware statistics window.]]))
    ),
-   h = 250
+   h = messagebox_h_step(-3)
 }
 ware_stats4 = {
    position = "topright",
@@ -414,8 +414,8 @@ reopen_ware_stats1 = {
          _([[You have closed the ware statistics window, but I have not yet finished with my explanation. Would you please reopen it and choose the third tab?]]))
    ),
    show_instantly = true,
-   w = 300,
-   h = 250
+   w = messagebox_w_step(-3),
+   h = messagebox_h_step(-3)
 }
 
 obj_reopen_ware_stats1 = {
@@ -437,8 +437,8 @@ reopen_ware_stats2 = {
          _([[You have closed the ware statistics window, but I have not yet finished with my explanation. Would you please reopen it and choose the fourth tab?]]))
    ),
    show_instantly = true,
-   w = 300,
-   h = 250
+   w = messagebox_w_step(-3),
+   h = messagebox_h_step(-3)
 }
 
 obj_reopen_ware_stats2 = {
@@ -472,7 +472,7 @@ economy_settings1 = {
       -- Yup, that's indeed the correct icon
       li_image("images/wui/stats/genstats_nrwares.png", _([[This is the icon.]]))
    ),
-   h = 350
+   h = messagebox_h_step(-1),
 }
 
 economy_settings2 = {
@@ -529,7 +529,7 @@ economy_settings5 = {
       li_image(wl.Game():get_ware_description("marble_column").icon_name,
          _([[Now let’s try it out: the current target quantity for marble columns is 10. Increase it to be prepared in case you will have to build up your fortifications quickly.]]))
    ),
-   h = 500,
+   h = messagebox_h_step(2),
 }
 
 obj_bring_marble_columns_to_front = {
@@ -555,7 +555,7 @@ warehouse_preference_settings = {
          p(_([[Normally, produced wares are brought to the closest warehouse if they are not needed elsewhere. In this case, this means our headquarters. But we would like to have them in the warehouse near our fortresses.]])) ..
          p(_([[Every warehouse has four buttons to set the preference. If you move your mouse pointer over them, you will see tooltips that explain what the buttons do.]])), plr.color)
    ),
-   h = 500
+   h = messagebox_h_step(2),
 }
 
 conclusion = {
@@ -569,5 +569,5 @@ conclusion = {
       p(_([[This was the last tutorial I had prepared for you. I’ve now taught you everything I know. There are still secrets hidden in this world even I don’t know about. I will now search for a quiet place to spend my sunset years. If you have still questions, the Widelands community will surely help you. You can find it at:]])) ..
       h1(p("align=center", u("widelands.org"))),
    allow_next_scenario = true,
-   h = 450
+   h = messagebox_h_step(1),
 }

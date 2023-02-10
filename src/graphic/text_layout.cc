@@ -91,6 +91,14 @@ void newlines_to_richtext(std::string& text) {
 	replace_all(text, "\n", "<br>");
 }
 
+std::string as_font_tag(UI::FontStyle style, const std::string& text) {
+	return g_style_manager->font_style(style).as_font_tag(text);
+}
+
+std::string as_font_tag(const std::string& text, UI::FontStyle style) {
+	return as_font_tag(style, text);
+}
+
 /// Bullet list item
 std::string as_listitem(const std::string& txt, UI::FontStyle style) {
 	const UI::FontStyleInfo& font_style = g_style_manager->font_style(style);
@@ -120,8 +128,8 @@ std::string as_editor_richtext_paragraph(const std::string& text, const UI::Font
 }
 
 std::string as_game_tip(const std::string& txt) {
-	return format("<rt><p align=center>%s</p></rt>",
-	              g_style_manager->font_style(UI::FontStyle::kFsMenuGameTip).as_font_tag(txt));
+	return format(
+	   "<rt><p align=center>%s</p></rt>", as_font_tag(UI::FontStyle::kFsMenuGameTip, txt));
 }
 
 std::string as_mapobject_message(const std::string& image,
@@ -132,27 +140,23 @@ std::string as_mapobject_message(const std::string& image,
 	assert(!txt.empty());
 	const std::string image_type = g_image_cache->has(image) ? "src" : "object";
 	if (player_color != nullptr) {
-		return format(
-		   "<div padding_r=10><p><img width=%d %s=%s color=%s></p></div>"
-		   "<div width=*><p>%s</p></div>",
-		   width, image_type, image, player_color->hex_value(),
-		   g_style_manager->font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(txt));
+		return format("<div padding_r=10><p><img width=%d %s=%s color=%s></p></div>"
+		              "<div width=*><p>%s</p></div>",
+		              width, image_type, image, player_color->hex_value(),
+		              as_font_tag(UI::FontStyle::kWuiMessageParagraph, txt));
 	}
 	return format("<div padding_r=10><p><img width=%d %s=%s></p></div>"
 	              "<div width=*><p>%s</p></div>",
-	              width, image_type, image,
-	              g_style_manager->font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(txt));
+	              width, image_type, image, as_font_tag(UI::FontStyle::kWuiMessageParagraph, txt));
 }
 
 std::string as_message(const std::string& heading, const std::string& body) {
-	return (format(
-	   "<rt><p>%s<br></p><vspace gap=6>%s</rt>",
-	   g_style_manager->font_style(UI::FontStyle::kWuiMessageHeading).as_font_tag(heading),
-	   (is_paragraph(body) || is_div(body) ?
-          body :
-          format(
-	          "<p>%s</p>",
-	          g_style_manager->font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(body)))));
+	return (
+	   format("<rt><p>%s<br></p><vspace gap=6>%s</rt>",
+	          as_font_tag(UI::FontStyle::kWuiMessageHeading, heading),
+	          (is_paragraph(body) || is_div(body) ?
+                 body :
+                 format("<p>%s</p>", as_font_tag(UI::FontStyle::kWuiMessageParagraph, body)))));
 }
 
 std::string
@@ -189,16 +193,16 @@ std::string as_heading_with_content(const std::string& header,
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return format("<p>%s%s %s</p>", (is_first ? "" : "<vspace gap=9>"),
-		              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-		                 .as_font_tag(noescape ? header : richtext_escape(header)),
-		              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-		                 .as_font_tag(noescape ? content : richtext_escape(content)));
+		              as_font_tag(UI::FontStyle::kFsMenuInfoPanelHeading,
+		                          noescape ? header : richtext_escape(header)),
+		              as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+		                          noescape ? content : richtext_escape(content)));
 	case UI::PanelStyle::kWui:
 		return format("<p>%s%s %s</p>", (is_first ? "" : "<vspace gap=6>"),
-		              g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading)
-		                 .as_font_tag(noescape ? header : richtext_escape(header)),
-		              g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelParagraph)
-		                 .as_font_tag(noescape ? content : richtext_escape(content)));
+		              as_font_tag(UI::FontStyle::kWuiInfoPanelHeading,
+		                          noescape ? header : richtext_escape(header)),
+		              as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph,
+		                          noescape ? content : richtext_escape(content)));
 	}
 	NEVER_HERE();
 }
@@ -207,12 +211,10 @@ std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_fir
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return format("<p>%s%s</p>", (is_first ? "" : "<vspace gap=9>"),
-		              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-		                 .as_font_tag(richtext_escape(txt)));
+		              as_font_tag(UI::FontStyle::kFsMenuInfoPanelHeading, richtext_escape(txt)));
 	case UI::PanelStyle::kWui:
 		return format("<p>%s%s</p>", (is_first ? "" : "<vspace gap=6>"),
-		              g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading)
-		                 .as_font_tag(richtext_escape(txt)));
+		              as_font_tag(UI::FontStyle::kWuiInfoPanelHeading, richtext_escape(txt)));
 	}
 	NEVER_HERE();
 }
@@ -221,12 +223,10 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return format("<p><vspace gap=2>%s</p>",
-		              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-		                 .as_font_tag(richtext_escape(txt)));
+		              as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph, richtext_escape(txt)));
 	case UI::PanelStyle::kWui:
 		return format("<p><vspace gap=2>%s</p>",
-		              g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelParagraph)
-		                 .as_font_tag(richtext_escape(txt)));
+		              as_font_tag(UI::FontStyle::kWuiInfoPanelParagraph, richtext_escape(txt)));
 	}
 	NEVER_HERE();
 }
@@ -235,12 +235,34 @@ std::string as_tooltip_text_with_hotkey(const std::string& text,
                                         const std::string& hotkey,
                                         const UI::PanelStyle style) {
 	return format("<rt><p>%s %s</p></rt>",
-	              g_style_manager
-	                 ->font_style(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
-                                                                 UI::FontStyle::kFsTooltip)
-	                 .as_font_tag(text),
-	              g_style_manager
-	                 ->font_style(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHotkey :
-                                                                 UI::FontStyle::kFsTooltipHotkey)
-	                 .as_font_tag("(" + hotkey + ")"));
+	              as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
+                                                             UI::FontStyle::kFsTooltip,
+	                          text),
+	              as_font_tag(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHotkey :
+                                                             UI::FontStyle::kFsTooltipHotkey,
+	                          "(" + hotkey + ")"));
+}
+
+std::string as_vspace(const int gap) {
+	if (gap <= 0) {
+		return "";
+	}
+	return format("<vspace gap=%d>", gap);
+}
+
+std::string as_paragraph_style(UI::ParagraphStyle style, const std::string& text) {
+	return g_style_manager->paragraph_style(style).as_paragraph(text);
+}
+
+std::string
+as_paragraph_style(UI::ParagraphStyle style, const std::string& attrib, const std::string& text) {
+	return g_style_manager->paragraph_style(style).as_paragraph(text, attrib);
+}
+
+std::string open_paragraph_style(UI::ParagraphStyle style, const std::string& attrib) {
+	return g_style_manager->paragraph_style(style).open_paragraph(attrib);
+}
+
+std::string close_paragraph_style(UI::ParagraphStyle style) {
+	return g_style_manager->paragraph_style(style).close_paragraph();
 }

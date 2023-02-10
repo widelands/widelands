@@ -299,7 +299,7 @@
 --
 --             performance = {
 --                -- Performance helptext for a barbarian production site: Ax Workshop, part 1
---                pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(ngettext("%d second", "%d seconds", 57):bformat(57)),
+--                pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(format_seconds(57)),
 --                -- Performance helptext for a barbarian production site: Ax Workshop, part 2
 --                pgettext("barbarians_building", "All three weapons take the same time for making, but the required raw materials vary.")
 --             }

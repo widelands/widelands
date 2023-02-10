@@ -107,8 +107,7 @@ function terrain_affinity_help(immovable_description)
          result = result .. li_image(v.terrain.representative_image,
                (wl.Editor ~= nil and linkify_encyclopedia_object(v.terrain) or v.terrain.descname) .. "<br>" ..
                -- TRANSLATORS: Help text - Probability to grow for an immovable
-               (_("%2.1f%%")):bformat(100 * v.probability)
-            ) .. vspace(6)
+               (_("%2.1f%%")):bformat(100 * v.probability))
       end
    end
    pop_textdomain()

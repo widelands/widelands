@@ -69,6 +69,7 @@ wl_library(ui_fsmenu
     graphic_fonthandler
     graphic_mouse_cursor
     graphic_playercolor
+    graphic_styles
     graphic_surface
     graphic_text
     graphic_text_layout

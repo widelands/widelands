@@ -48,11 +48,14 @@ return {
       local tree_string = ""
       for k,v in ipairs(tree_list) do
          tree_string = tree_string .. li_object(v.tree.name,
-            linkify_encyclopedia_object(v.tree) .. ("<br>%2.1f%%"):bformat(100 * v.probability)) .. vspace(3)
+            linkify_encyclopedia_object(v.tree) .. ("<br>%2.1f%%"):bformat(100 * v.probability))
       end
 
       -- TRANSLATORS: A header in the editor help
-      result = result .. vspace(3) .. h2(vspace(12) .. _("Probability of trees growing")) .. vspace(3)
+      result = result ..
+               vspace(styles.get_size("help_terrain_tree_header_space_before")) ..
+               h2(_("Probability of trees growing")) ..
+               vspace(styles.get_size("help_terrain_tree_header_space_after"))
 
       if (tree_string ~="") then
          result = result .. tree_string

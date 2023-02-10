@@ -11,6 +11,14 @@ include "scripting/help.lua"
 --  *************** Basic helper functions ****************
 --  =======================================================
 
+function consumed_items_line(text, images)
+   return
+      div("width=100%",
+         div("width=50%", p(vspace() .. text .. space())) ..
+         div("width=*", styles.as_p_with_attr("wui_image_line", "align=right", images))
+      )
+end
+
 -- RST
 -- .. function:: image_line(image, count[, text = nil])
 --
@@ -30,11 +38,7 @@ function image_line(image, count, text)
       images = images .. img(image)
    end
 
-   return
-      div("width=100%",
-         div("width=50%", p(vspace(6) .. text .. space(6))) ..
-         div("width=*", p("align=right", vspace(6) .. images .. vspace(12)))
-      )
+   return consumed_items_line(text, images)
 end
 
 -- RST
@@ -63,7 +67,7 @@ function plot_size_line(size, size_only)
       end
       -- TRANSLATORS: Size of a map immovable
       if text ~= "" then
-         text = p(font("size=13 color=D1D1D1", text))
+         text = p(styles.as_font_from_p("wui_heading_3", text))
       end
       return text
    else
@@ -91,8 +95,10 @@ function plot_size_line(size, size_only)
          return ""
       end
    -- TRANSLATORS: Space on the map required for building a building there
-      text = p(join_sentences(font("size=13 color=D1D1D1", _("Space required:")), text))
-      return div("width=100%", div("float=right padding_l=6", p(img(image)))) .. text
+      text = p(join_sentences(
+         styles.as_font_from_p("wui_heading_3", _("Space required:")),
+         text))
+      return div("width=100%", div("float=right padding_l=" .. default_gap(), p(img(image)))) .. text
    end
 end
 
@@ -119,8 +125,8 @@ function dependencies(items, text)
    for k,v in ipairs({table.unpack(items,2)}) do
       images = images .. img("images/richtext/arrow-right.png") ..  img(v.icon_name)
    end
-   return
-      div("width=100%", p(vspace(6) .. images .. space(6) .. text .. vspace(12)))
+   return div("width=100%",
+              styles.as_paragraph("wui_image_line", images .. space() .. text))
 end
 
 
@@ -262,12 +268,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
             image_counter = image_counter + 1
          end
       end
-      consumed_items_string =
-         div("width=100%",
-            div("width=50%", p(vspace(6) .. text .. space(6))) ..
-            div("width=*", p("align=right", vspace(6) .. images .. vspace(12)))
-         )
-         .. consumed_items_string
+      consumed_items_string = consumed_items_line(text, images) .. consumed_items_string
    end
    if (consumed_items_counter > 0) then
       local consumed_header = ""

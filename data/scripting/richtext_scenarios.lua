@@ -31,7 +31,9 @@ include "scripting/richtext.lua"
 --
 --    :arg img: name of the image to use for this speaker
 --    :type img: :class:`string`
---    :arg clr: a valid 6 char hex color to use for the name of this speaker
+--    :arg clr: A valid 6 char hex color to use for the name of this speaker.
+--              Best practice is to use `styles.color()` to get a color value from the style
+--              manager whenever possible.
 --    :type clr: :class:`string`
 --    :arg title: Title of this text. Use empty string if you don't want any.
 --    :type title: :class:`string`

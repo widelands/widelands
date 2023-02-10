@@ -3,25 +3,25 @@
 -- =========================
 
 function lutius(title, text)
-   return speech("map:Lutius.png", "2F9131", title, text)
+   return speech("map:Lutius.png", styles.color("campaign_emp_lutius"), title, text)
 end
 function saledus2(title, text)
-   return speech("map:Saledus2.png", "8F9131", title, text)
+   return speech("map:Saledus2.png", styles.color("campaign_emp_saledus"), title, text)
 end
 function saledus3(title, text)
-   return speech("map:Saledus3.png", "8F9131", title, text)
+   return speech("map:Saledus3.png", styles.color("campaign_emp_saledus"), title, text)
 end
 function saledus4(title, text)
-   return speech("map:Saledus2.png", "8F9131", title, text)
+   return speech("map:Saledus2.png", styles.color("campaign_emp_saledus"), title, text)
 end
 function amalea1(title, text)
-   return speech("map:Amalea.png", "AF7511", title, text)
+   return speech("map:Amalea.png", styles.color("campaign_emp_amalea"), title, text)
 end
 function amalea2(title, text)
-   return speech("map:Amalea2.png", "AF7511", title, text)
+   return speech("map:Amalea2.png", styles.color("campaign_emp_amalea"), title, text)
 end
 function amalea3(title, text)
-   return speech("map:Amalea3.png", "AF7511", title, text)
+   return speech("map:Amalea3.png", styles.color("campaign_emp_amalea"), title, text)
 end
 
 function holy_shrine(text, image)
