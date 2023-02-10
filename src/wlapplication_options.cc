@@ -775,7 +775,9 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #undef QUICKNAV
 };
 
-std::string get_shortcut_range_help(const KeyboardShortcut start, const KeyboardShortcut end, const std::string prefix) {
+std::string get_shortcut_range_help(const KeyboardShortcut start,
+                                    const KeyboardShortcut end,
+                                    const std::string prefix) {
 	std::string rv;
 
 	// TRANSLATORS: The generic hotkey format
@@ -789,16 +791,17 @@ std::string get_shortcut_range_help(const KeyboardShortcut start, const Keyboard
 }
 
 std::string get_ingame_shortcut_help() {
-	//TODO(tothxa): just a stub for now
+	// TODO(tothxa): just a stub for now
 	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, "Keyboard Shortcuts"));
 	rv += get_shortcut_range_help(KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
-	rv += get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_Main_End);
-	rv += get_shortcut_range_help(KeyboardShortcut::kInGameMessages_Begin,
-	                              KeyboardShortcut::kInGameMessages_End
-	                              /* "Messages: " */);
-	rv += get_shortcut_range_help(KeyboardShortcut::kInGameSeafaringstats_Begin,
-	                              KeyboardShortcut::kInGameSeafaringstats_End
-	                              /* "Seafaring: " */);
+	rv +=
+	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_Main_End);
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kInGameMessages_Begin, KeyboardShortcut::kInGameMessages_End
+	   /* "Messages: " */);
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kInGameSeafaringstats_Begin, KeyboardShortcut::kInGameSeafaringstats_End
+	   /* "Seafaring: " */);
 
 	// TODO(tothxa): Including Fastplace would be nice
 
@@ -806,7 +809,7 @@ std::string get_ingame_shortcut_help() {
 }
 
 std::string get_editor_shortcut_help() {
-	//TODO(tothxa): just a stub for now
+	// TODO(tothxa): just a stub for now
 	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, "Keyboard Shortcuts"));
 	rv += get_shortcut_range_help(KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
 	rv += get_shortcut_range_help(KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditor_End);

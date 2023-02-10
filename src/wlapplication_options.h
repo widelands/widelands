@@ -270,8 +270,9 @@ SDL_Keysym get_shortcut(KeyboardShortcut);
  * @param end ID of the last shortcut to be included
  * @param prefix An optional prefix that will be removed from the descriptions
  */
-std::string get_shortcut_range_help(
-   const KeyboardShortcut start, const KeyboardShortcut end, const std::string prefix = "");
+std::string get_shortcut_range_help(const KeyboardShortcut start,
+                                    const KeyboardShortcut end,
+                                    const std::string prefix = "");
 
 /** Get the formatted help of the current in game keyboard shortcuts including headers. */
 std::string get_ingame_shortcut_help();
