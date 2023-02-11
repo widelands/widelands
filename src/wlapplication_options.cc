@@ -884,10 +884,10 @@ std::string get_ingame_shortcut_help() {
 	return rv;
 }
 
-std::vector<fastplace_shortcut> get_active_fastplace_shortcuts(const std::string& tribe) {
-	std::vector<fastplace_shortcut> rv;
+std::vector<FastplaceShortcut> get_active_fastplace_shortcuts(const std::string& tribe) {
+	std::vector<FastplaceShortcut> rv;
 	for (KeyboardShortcut id = KeyboardShortcut::kFastplace_Begin;
-	     id < KeyboardShortcut::kFastplace_End; ++id) {
+	     id <= KeyboardShortcut::kFastplace_End; ++id) {
 		if (get_shortcut(id).sym == SDLK_UNKNOWN) {
 			continue;
 		}
@@ -896,7 +896,7 @@ std::vector<fastplace_shortcut> get_active_fastplace_shortcuts(const std::string
 		if (it == fastplace.end()) {
 			continue;
 		}
-		rv.emplace_back(fastplace_shortcut{shortcut_string_for(id, true), it->second});
+		rv.emplace_back(FastplaceShortcut{shortcut_string_for(id, true), it->second});
 	}
 	return rv;
 }
@@ -1163,7 +1163,7 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 
 std::string matching_fastplace_shortcut(const SDL_Keysym key, const std::string& tribename) {
 	for (KeyboardShortcut id = KeyboardShortcut::kFastplace_Begin;
-	     id < KeyboardShortcut::kFastplace_End; ++id) {
+	     id <= KeyboardShortcut::kFastplace_End; ++id) {
 		if (matches_shortcut(id, key)) {
 			const KeyboardShortcutInfo& info = shortcuts_.at(id);
 			const auto it = info.fastplace.find(tribename);
@@ -1340,7 +1340,7 @@ void init_fastplace_default_shortcuts(
 #endif
 
 	for (KeyboardShortcut id = KeyboardShortcut::kFastplace_Begin;
-	     id < KeyboardShortcut::kFastplace_End; ++id) {
+	     id <= KeyboardShortcut::kFastplace_End; ++id) {
 		KeyboardShortcutInfo& info = shortcuts_.at(id);
 
 #ifndef NDEBUG

@@ -346,13 +346,13 @@ std::string get_related_hotkeys_help(KeyboardShortcut first,
 /** Get the formatted help of the current in game keyboard shortcuts including headers. */
 std::string get_ingame_shortcut_help();
 
-struct fastplace_shortcut {
+struct FastplaceShortcut {
 	std::string hotkey;
 	std::string building;
 };
 
 /** Get the current fastplace shortcuts for tribe. */
-std::vector<fastplace_shortcut> get_active_fastplace_shortcuts(const std::string& tribe);
+std::vector<FastplaceShortcut> get_active_fastplace_shortcuts(const std::string& tribe);
 
 /** Get the formatted help of the current editor keyboard shortcuts including headers. */
 std::string get_editor_shortcut_help();

@@ -854,13 +854,13 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 
 std::string InteractivePlayer::get_fastplace_help() {
 	const Widelands::TribeDescr& tribe = player().tribe();
-	std::vector<fastplace_shortcut> fp_sc_v = get_active_fastplace_shortcuts(tribe.name());
+	std::vector<FastplaceShortcut> fp_sc_v = get_active_fastplace_shortcuts(tribe.name());
 	if (fp_sc_v.empty()) {
 		return "";
 	}
 
 	std::string rv;
-	for (fastplace_shortcut fp_sc : fp_sc_v) {
+	for (FastplaceShortcut fp_sc : fp_sc_v) {
 		Widelands::DescriptionIndex bi = egbase().descriptions().building_index(fp_sc.building);
 		if (tribe.has_building(bi)) {
 			rv += as_definition_line(fp_sc.hotkey, tribe.get_building_descr(bi)->descname());
