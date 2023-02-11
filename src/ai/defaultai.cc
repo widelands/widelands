@@ -3340,12 +3340,10 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
 		if (pda.other == mypn) {
-			// TODO(Nordfriese): The AI just makes a random choice every time.
-			// In the future, make more strategic decision here. Add asking for alliance
-			// basically accept only 20% but if player is seen lately accept 50/50
+			// basically deny 50% but not if player is seen lately
 			bool accept =
-			   RNG::static_rand(1) == 0 || player_statistics.player_seen_lately(pda.sender, gametime);
-			// only accept if asking player is stronger (based on mil power and land)
+			   RNG::static_rand(2) == 0 || player_statistics.player_seen_lately(pda.sender, gametime);
+			// only accept if asking player has enough diplo score
 			accept &= player_statistics.get_diplo_score(pda.sender) > 5;
 
 			game().send_player_diplomacy(pda.other,
@@ -3359,6 +3357,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	}
 	for (Widelands::PlayerNumber opn = 1; opn <= game().map().get_nrplayers(); ++opn) {
 		const Widelands::Player* other_player = game().get_player(opn);
+		// other player needs to exist and different from me 
+		// we need to be still alive and we don't have send a request in last 10 minutes
 		if (other_player != nullptr && opn != mypn && !me->is_defeated() &&
 		    !player_statistics.player_diplo_requested_lately(opn, gametime)) {
 			if (player_statistics.get_diplo_score(opn) >=
