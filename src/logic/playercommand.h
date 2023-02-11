@@ -452,7 +452,7 @@ struct CmdWarshipCommand : public PlayerCommand {
 private:
 	Serial serial_{0U};
 	std::vector<uint32_t> parameters_;
-	WarshipCommand cmd_{WarshipCommand::kRetreat};
+	WarshipCommand cmd_{WarshipCommand::kAttack};
 };
 
 struct CmdShipScoutDirection : public PlayerCommand {
@@ -525,6 +525,32 @@ struct CmdShipExploreIsland : public PlayerCommand {
 private:
 	Serial serial{0U};
 	IslandExploreDirection island_explore_direction{IslandExploreDirection::kNotSet};
+};
+
+struct CmdShipSetDestination : public PlayerCommand {
+	CmdShipSetDestination() = default;  // For savegame loading
+	CmdShipSetDestination(const Time& t,
+	                     PlayerNumber const p,
+	                     Serial s,
+	                     Serial dest)
+	   : PlayerCommand(t, p), serial_(s), destination_(dest) {
+	}
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kShipSetDestination;
+	}
+
+	explicit CmdShipSetDestination(StreamRead&);
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Serial serial_{0U};
+	Serial destination_{0U};
 };
 
 struct CmdShipSink : public PlayerCommand {

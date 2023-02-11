@@ -354,6 +354,11 @@ public:
 		return *filtered_entries[BaseDropdown::get_selected()];
 	}
 
+	const Entry& at(size_t index) const {
+		assert(index < unfiltered_entries.size());
+		return unfiltered_entries.at(index).value;
+	}
+
 	/// Select the entry if it exists. Does not trigger the 'selected' signal.
 	void select(const Entry& entry) {
 		for (uint32_t i = 0; i < filtered_entries.size(); ++i) {
