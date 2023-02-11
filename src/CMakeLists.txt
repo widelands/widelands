@@ -1,9 +1,12 @@
-include(CheckCXXSourceCompiles)
-# _nl_msg_cat_cntr is a glibc/libintl speciality and not available on all systems (e.g. not in musl libc)
-if(Intl_FOUND)
-set(CMAKE_REQUIRED_LIBRARIES intl)
-endif(Intl_FOUND)
-check_cxx_source_compiles("extern \"C\" int _nl_msg_cat_cntr; int main(void) { ++_nl_msg_cat_cntr; return 0; }" HAS_NL_MSG_CAT_CNTR)
+if (CMAKE_SYSTEM MATCHES "Linux")
+    # _nl_msg_cat_cntr is a glibc/libintl speciality and not available on all systems (e.g. not in musl libc)
+    # it is used in i18n.cc surrounded by #ifdef __linux__, so checking is only required on linux systems
+    include(CheckCXXSourceCompiles)
+    if(Intl_FOUND)
+        set(CMAKE_REQUIRED_LIBRARIES intl)
+    endif(Intl_FOUND)
+    check_cxx_source_compiles("extern \"C\" int _nl_msg_cat_cntr; int main(void) { ++_nl_msg_cat_cntr; return 0; }" HAS_NL_MSG_CAT_CNTR)
+endif (CMAKE_SYSTEM MATCHES "Linux")
 
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
