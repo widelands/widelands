@@ -881,8 +881,23 @@ std::string get_ingame_shortcut_help() {
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kInGameSeafaringstats_Begin, KeyboardShortcut::kInGameSeafaringstats_End);
 
-	// TODO(tothxa): Including Fastplace would be nice
+	return rv;
+}
 
+std::vector<fastplace_shortcut> get_active_fastplace_shortcuts(const std::string& tribe) {
+	std::vector<fastplace_shortcut> rv;
+	for (KeyboardShortcut id = KeyboardShortcut::kFastplace_Begin;
+	     id < KeyboardShortcut::kFastplace_End; ++id) {
+		if (get_shortcut(id).sym == SDLK_UNKNOWN) {
+			continue;
+		}
+		auto fastplace = get_fastplace_shortcuts(id);
+		auto it = fastplace.find(tribe);
+		if (it == fastplace.end()) {
+			continue;
+		}
+		rv.emplace_back(fastplace_shortcut {shortcut_string_for(id, true), it->second});
+	}
 	return rv;
 }
 
