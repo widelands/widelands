@@ -22,7 +22,6 @@
 
 #include "base/log.h"
 #include "base/macros.h"
-#include "graphic/text_layout.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "scripting/globals.h"
