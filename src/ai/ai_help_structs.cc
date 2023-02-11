@@ -1083,6 +1083,14 @@ void PlayersStrengths::set_last_time_seen(const Time& seentime, Widelands::Playe
 	all_stats[pn].last_time_seen = seentime;
 }
 
+// When we send a diplo request, we use this to store the time
+void PlayersStrengths::set_last_time_requested(const Time& requesttime, Widelands::PlayerNumber pn) {
+	if (all_stats.count(pn) == 0) {
+		return;
+	}
+	all_stats[pn].last_time_requested = requesttime;
+}
+
 bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number) {
 	// So this is me
 	if (other_player_number == this_player_number) {
@@ -1113,6 +1121,19 @@ bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const Time
 		return false;
 	}
 	return all_stats[pn].last_time_seen + Duration(2U * 60U * 1000U) > gametime;
+}
+
+// Has a diplo request been rejected in the lat 10 minutes
+bool PlayersStrengths::player_diplo_requested_lately(Widelands::PlayerNumber pn, const Time& gametime) {
+	if (all_stats.count(pn) == 0) {
+		// Should happen only rarely so we print a warning here
+		verb_log_warn("AI %d: player has no statistics yet\n", this_player_number);
+		return false;
+	}
+	if (all_stats[pn].last_time_requested.is_invalid()) {
+		return false;
+	}
+	return all_stats[pn].last_time_requested + Duration(10U * 60U * 1000U) > gametime;
 }
 
 // This is the strength of a player

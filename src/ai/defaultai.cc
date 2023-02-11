@@ -3359,9 +3359,10 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	}
 	for (Widelands::PlayerNumber opn = 1; opn <= game().map().get_nrplayers(); ++opn) {
 		const Widelands::Player* other_player = game().get_player(opn);
-		if (other_player != nullptr && opn != mypn && !me->is_defeated()) {
+		if (other_player != nullptr && opn != mypn && !me->is_defeated() && !player_statistics.player_diplo_requested_lately(opn, gametime)) {
 			if (player_statistics.get_diplo_score(opn) >=
 			    8 + std::abs(management_data.get_military_number_at(195) / 10)) {
+				player_statistics.set_last_time_requested(gametime, opn);
 				if (other_player->team_number() == 0) {
 					game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
 				} else if (other_player->team_number() != me->team_number()) {

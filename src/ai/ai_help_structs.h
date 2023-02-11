@@ -845,6 +845,7 @@ private:
 		uint32_t old60_players_power = 0U;
 		uint32_t players_casualities = 0U;
 		Time last_time_seen = Time();  // never seen
+		Time last_time_requested = Time();  // never denied a diplo request
 		uint32_t players_land = 0U;
 		uint32_t old_players_land = 0U;
 		uint32_t old60_players_land = 0U;
@@ -889,7 +890,9 @@ public:
 	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
 	bool strong_enough(Widelands::PlayerNumber pl);
 	void set_last_time_seen(const Time&, Widelands::PlayerNumber);
+	void set_last_time_requested(const Time&, Widelands::PlayerNumber);
 	bool player_seen_lately(Widelands::PlayerNumber, const Time&);
+	bool player_diplo_requested_lately(Widelands::PlayerNumber, const Time&);
 	bool get_is_enemy(Widelands::PlayerNumber);
 	uint8_t enemies_seen_lately_count(const Time&);
 	bool any_enemy_seen_lately(const Time&);
