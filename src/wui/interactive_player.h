@@ -89,7 +89,7 @@ public:
 	void edit_pinned_note(const Widelands::FCoords& c);
 
 	/** Get the richtext formatted help of the current fastplace shortcuts for the player
-       including a header. */
+	    including a header. */
 	std::string get_fastplace_help();
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0

@@ -896,7 +896,7 @@ std::vector<fastplace_shortcut> get_active_fastplace_shortcuts(const std::string
 		if (it == fastplace.end()) {
 			continue;
 		}
-		rv.emplace_back(fastplace_shortcut {shortcut_string_for(id, true), it->second});
+		rv.emplace_back(fastplace_shortcut{shortcut_string_for(id, true), it->second});
 	}
 	return rv;
 }
