@@ -846,16 +846,16 @@ std::string get_ingame_shortcut_help() {
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonMinimap);
 	/** TRANSLATORS: This is an access key combination. */
 	rv += as_definition_line(pgettext("hotkey", "Arrow keys"),
-	   /** TRANSLATORS: This is the helptext for an access key combination. */
-	   _("Move the map"));
+	                         /** TRANSLATORS: This is the helptext for an access key combination. */
+	                         _("Move the map"));
 	/** TRANSLATORS: This is an access key combination. */
 	rv += as_definition_line(pgettext("hotkey", "Ctrl + Arrow keys"),
-	   /** TRANSLATORS: This is the helptext for an access key combination. */
-	   _("Move the map fast"));
+	                         /** TRANSLATORS: This is the helptext for an access key combination. */
+	                         _("Move the map fast"));
 	/** TRANSLATORS: This is an access key combination. */
 	rv += as_definition_line(pgettext("hotkey", "Shift + Arrow keys"),
-	   /** TRANSLATORS: This is the helptext for an access key combination. */
-	   _("Move the map slowly"));
+	                         /** TRANSLATORS: This is the helptext for an access key combination. */
+	                         _("Move the map slowly"));
 	rv += get_shortcut_help_line(KeyboardShortcut::kInGameScrollToHQ);
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavPrev);
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavNext);
@@ -921,19 +921,21 @@ std::string get_editor_shortcut_help() {
 
 	// Mouse controls for tools are included here because they belong to the Tools section
 	/** TRANSLATORS: This is an access key combination. */
-	rv += as_definition_line(pgettext("hotkey", "Click"),
-	    /** TRANSLATORS: This is the helptext for an access key combination. */
-	    _("Place new elements on the map, or increase map elements by the value selected by "
-	      "‘Increase/Decrease value’"));
+	rv += as_definition_line(
+	   pgettext("hotkey", "Click"),
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   _("Place new elements on the map, or increase map elements by the value selected by "
+	     "‘Increase/Decrease value’"));
 	/** TRANSLATORS: This is an access key combination. */
-	rv += as_definition_line(pgettext("hotkey", "Shift + Click"),
-	    /** TRANSLATORS: This is the helptext for an access key combination. */
-	    _("Remove elements from the map, or decrease map elements by the value selected by "
-	      "‘Increase/Decrease value’"));
+	rv += as_definition_line(
+	   pgettext("hotkey", "Shift + Click"),
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   _("Remove elements from the map, or decrease map elements by the value selected by "
+	     "‘Increase/Decrease value’"));
 	/** TRANSLATORS: This is an access key combination. */
 	rv += as_definition_line(pgettext("hotkey", "Ctrl + Click"),
-	    /** TRANSLATORS: This is the helptext for an access key combination. */
-	    _("Set map elements to the value selected by ‘Set Value’"));
+	                         /** TRANSLATORS: This is the helptext for an access key combination. */
+	                         _("Set map elements to the value selected by ‘Set Value’"));
 
 	return rv;
 }
