@@ -363,12 +363,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                          keysym(SDLK_SPACE, kDefaultCtrlModifier | KMOD_SHIFT),
                          "debugconsole",
-                         []() { return _("Open the Debug Console (only in debug-builds)"); })},
+                         []() { return _("Open the Debug Console (only in debug builds)"); })},
    {KeyboardShortcut::kCommonCheatMode,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                          keysym(SDLK_BACKSPACE, kDefaultCtrlModifier | KMOD_SHIFT),
                          "cheatmode",
-                         []() { return _("Toggle Cheat Mode (only in debug-builds)"); })},
+                         []() { return _("Toggle Cheat Mode (only in debug builds)"); })},
    {KeyboardShortcut::kCommonSave,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_s, kDefaultCtrlModifier),
@@ -440,7 +440,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    {KeyboardShortcut::kEditorTools, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                          keysym(SDLK_t),
                                                          "editor_tools",
-                                                         []() { return _("Tools"); })},
+                                                         []() { return _("Toggle Tools Menu"); })},
    {KeyboardShortcut::kEditorChangeHeight,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_h, KMOD_SHIFT),
@@ -794,24 +794,45 @@ KeyboardShortcut& operator++(KeyboardShortcut& id) {
 	return id;
 }
 
-std::string get_shortcut_range_help(const KeyboardShortcut start, const KeyboardShortcut end) {
-	/** TRANSLATORS: The generic hotkey format */
-	const std::string fmt(pgettext("hotkey", "%s:"));
+std::string get_shortcut_help_line(const KeyboardShortcut id, const std::string& description) {
+	return as_definition_line(shortcut_string_for(id, true),
+	                          description.empty() ? shortcuts_.at(id).descname() : description);
+}
 
+std::string get_shortcut_range_help(const KeyboardShortcut start, const KeyboardShortcut end) {
 	std::string rv;
 	for (KeyboardShortcut id = start; id <= end; ++id) {
-		rv += as_definition_line(
-		         format(fmt, shortcut_string_for(id, true)), shortcuts_.at(id).descname());
+		rv += get_shortcut_help_line(id);
 	}
 	return rv;
 }
 
+std::string get_related_hotkeys_help(
+   const KeyboardShortcut first, const int step, const int n_keys, const std::string& description) {
+	/** TRANSLATORS: Separator for a list of hotkeys  */
+	const std::string separator_format(pgettext("hotkey", "%1$s / %2$s"));
+
+	std::string keys_list;
+	std::string current;
+	for (int i = 0; i < n_keys; ++i) {
+		current = shortcut_string_for(first + i * step, true);
+		if (i == 0) {
+			keys_list = current;
+		} else {
+			keys_list = format(separator_format, keys_list, current);
+		}
+	}
+	return as_definition_line(keys_list, description);
+}
+
 std::string get_ingame_shortcut_help() {
+
 	// TODO(tothxa): work in progress
+
 	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Keyboard Shortcuts")));
 	rv += get_shortcut_range_help(KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
 	rv +=
-	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_Main_End);
+	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGameMain_End);
 
 	/** TRANSLATORS: Heading in "Controls" help */
 	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Message Window"));
@@ -829,10 +850,38 @@ std::string get_ingame_shortcut_help() {
 }
 
 std::string get_editor_shortcut_help() {
-	// TODO(tothxa): work in progress
 	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, "Keyboard Shortcuts"));
-	rv += get_shortcut_range_help(KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
-	rv += get_shortcut_range_help(KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditor_End);
+
+	// First common ones need customized descriptions
+	/** TRANSLATORS: This is the helptext for an access key combination. */
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonLoad, _("Load Map"));
+	/** TRANSLATORS: This is the helptext for an access key combination. */
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonSave, _("Save Map"));
+	/** TRANSLATORS: This is the helptext for an access key combination. */
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonExit, _("Exit Editor"));
+
+	rv += get_shortcut_range_help(
+	         KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditorMain_End);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonMinimap);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavPrev);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavNext);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonBuildhelp);
+	rv += get_shortcut_range_help(
+	         KeyboardShortcut::kEditorShowHide_Begin, KeyboardShortcut::kEditorShowHide_End);
+
+	// Needs customized description
+	/** TRANSLATORS: This is the helptext for an access key combination. */
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonEncyclopedia, _("Help"));
+
+	rv += get_shortcut_range_help(KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
+
+	/** TRANSLATORS: Heading in the editor keyboard shortcuts help */
+	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, pgettext("editor", "Tools"));
+	rv += get_shortcut_range_help(
+	         KeyboardShortcut::kEditorTools_Begin, KeyboardShortcut::kEditorTools_End);
+	/** TRANSLATORS: This is the helptext for an access key combination. */
+	rv += get_related_hotkeys_help(KeyboardShortcut::kEditorToolsize1, 1, 10, _("Change tool size"));
+
 	return rv;
 }
 

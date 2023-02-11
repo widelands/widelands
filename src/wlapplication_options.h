@@ -108,25 +108,33 @@ enum class KeyboardShortcut : uint16_t {
 	kMainMenu_End = kMainMenuQuit,
 
 	kCommon_Begin = kMainMenu_End + 1,
-	kCommonFullscreen = kCommon_Begin,
-	kCommonScreenshot,
-	kCommonDebugConsole,
-	kCommonCheatMode,
+
+	// These will get different descriptions for the in-game and in-editor help
+	kCommonLoad = kCommon_Begin,
 	kCommonSave,
-	kCommonLoad,
 	kCommonExit,
+	kCommonEncyclopedia,
+
+	// These can be inserted as one block in the in-game and in-editor help
+	kCommonGeneral_Begin,
+	kCommonZoomIn = kCommonGeneral_Begin,
+	kCommonZoomOut,
+	kCommonZoomReset,
 	kCommonTextCut,
 	kCommonTextCopy,
 	kCommonTextPaste,
 	kCommonSelectAll,
 	kCommonDeleteItem,
 	kCommonTooltipAccessibilityMode,
-	kCommonEncyclopedia,
+	kCommonFullscreen,
+	kCommonScreenshot,
+	kCommonDebugConsole,
+	kCommonCheatMode,
+	kCommonGeneral_End = kCommonCheatMode,
+
+	// These will be moved to related items in the in-game and in-editor help
 	kCommonBuildhelp,
 	kCommonMinimap,
-	kCommonZoomIn,
-	kCommonZoomOut,
-	kCommonZoomReset,
 	kCommonQuicknavPrev,
 	kCommonQuicknavNext,
 	kCommon_End = kCommonQuicknavNext,
@@ -136,9 +144,25 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorNewRandomMap,
 	kEditorUploadMap,
 	kEditorMapOptions,
+
 	kEditorUndo,
 	kEditorRedo,
-	kEditorTools,
+	kEditorMain_End = kEditorRedo,
+
+	// Insert Toggle Minimap and Quicknav Prev/Next from Common here in the help
+
+	// Insert Toggle Buildhelp from Common here in the help
+	kEditorShowHide_Begin = kEditorMain_End + 1,
+	kEditorShowhideMaximumBuildhelp = kEditorShowHide_Begin,
+	kEditorShowhideGrid,
+	kEditorShowhideImmovables,
+	kEditorShowhideCritters,
+	kEditorShowhideResources,
+	kEditorShowHide_End = kEditorShowhideResources,
+
+	// This will be a separate section in the help
+	kEditorTools_Begin = kEditorShowHide_End + 1,
+	kEditorTools = kEditorTools_Begin,
 	kEditorChangeHeight,
 	kEditorRandomHeight,
 	kEditorTerrain,
@@ -151,11 +175,9 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorMapSize,
 	kEditorPlayers,
 	kEditorToolHistory,
-	kEditorShowhideGrid,
-	kEditorShowhideImmovables,
-	kEditorShowhideCritters,
-	kEditorShowhideResources,
-	kEditorShowhideMaximumBuildhelp,
+	kEditorTools_End = kEditorToolHistory,
+
+	// These will be grouped to one line in the in-editor help
 	kEditorToolsize1,
 	kEditorToolsize2,
 	kEditorToolsize3,
@@ -169,24 +191,21 @@ enum class KeyboardShortcut : uint16_t {
 	kEditor_End = kEditorToolsize10,
 
 	kInGame_Begin = kEditor_End + 1,
-	kInGameSoundOptions = kInGame_Begin,
-	kInGameRestart,
-	kInGameChat,
-	kInGamePinnedNote,
+	kInGameRestart = kInGame_Begin,
+	kInGameSoundOptions,
+
 	kInGameMessages,
 	kInGameObjectives,
 	kInGameDiplomacy,
-	kInGameShowhideCensus,
-	kInGameShowhideStats,
-	kInGameShowhideSoldiers,
-	kInGameShowhideBuildings,
-	kInGameShowhideWorkareas,
+	kInGameChat,
+
 	kInGameStatsGeneral,
 	kInGameStatsWares,
 	kInGameStatsBuildings,
 	kInGameStatsStock,
 	kInGameStatsSoldiers,
 	kInGameStatsSeafaring,
+
 	kInGamePause,
 	kInGameSpeedUp,
 	kInGameSpeedUpSlow,
@@ -195,8 +214,24 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameSpeedDownSlow,
 	kInGameSpeedDownFast,
 	kInGameSpeedReset,
+	kInGameMain_End = kInGameSpeedReset,
+
+	// Insert Toggle Buildhelp from Common here in the Encyclopedia
+	kInGameShowHide_Begin = kInGameMain_End + 1,
+	kInGameShowhideCensus = kInGameShowHide_Begin,
+	kInGameShowhideStats,
+	kInGameShowhideSoldiers,
+	kInGameShowhideBuildings,
+	kInGameShowhideWorkareas,
+	kInGameShowHide_End = kInGameShowhideWorkareas,
+
+	// Insert Toggle Minimap from Common here in the Encyclopedia
+	kInGamePinnedNote,
 	kInGameScrollToHQ,
+	// Insert QuicknavPrev/Next from Common here in the Encyclopedia
 	kInGameQuicknavGUI,
+
+	// These will be grouped to two lines in the Encyclopedia
 	kInGameQuicknavSet1,
 	kInGameQuicknavGoto1,
 	kInGameQuicknavSet2,
@@ -215,9 +250,10 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameQuicknavGoto8,
 	kInGameQuicknavSet9,
 	kInGameQuicknavGoto9,
-	kInGame_Main_End = kInGameQuicknavGoto9,
 
-	kInGameMessages_Begin = kInGame_Main_End + 1,
+	// These have their own sections in the Encyclopedia
+
+	kInGameMessages_Begin,
 	kInGameMessagesGoto = kInGameMessages_Begin,
 	kInGameMessagesFilterAll,
 	kInGameMessagesFilterGeologists,
@@ -270,11 +306,29 @@ bool set_shortcut(KeyboardShortcut id, SDL_Keysym code, KeyboardShortcut* confli
 SDL_Keysym get_shortcut(KeyboardShortcut);
 
 /**
+ * Get a keyboard shortcut richtext formatted as a definition line.
+ * @param id The ID of the shortcut to format.
+ * @param description The description for the shortcut. If empty, the default description will be
+ *                    used.
+ */
+std::string get_shortcut_help_line(KeyboardShortcut id, const std::string& description = "");
+
+/**
  * Get a formatted list of the current keyboard shortcuts with descriptions in the given range.
  * @param start ID of the first shortcut to be included
  * @param end ID of the last shortcut to be included
  */
 std::string get_shortcut_range_help(KeyboardShortcut start, KeyboardShortcut end);
+
+/**
+ * Get a formatted definition line for multiple keyboard shortcuts combined
+ * @param first ID of the first shortcut to be included
+ * @param step Increment between IDs to be included
+ * @param n_keys Number of shortcuts to be included
+ * @param description The common description for the shortcuts.
+ */
+std::string get_related_hotkeys_help(
+   KeyboardShortcut first, int step, int n_keys, const std::string& description);
 
 /** Get the formatted help of the current in game keyboard shortcuts including headers. */
 std::string get_ingame_shortcut_help();
