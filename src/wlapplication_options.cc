@@ -920,14 +920,14 @@ std::string get_editor_shortcut_help() {
 	rv += get_related_hotkeys_help(KeyboardShortcut::kEditorToolsize1, 1, 10, _("Change tool size"));
 
 	// Mouse controls for tools are included here because they belong to the Tools section
-	/** TRANSLATORS: This is an access key combination. */
 	rv += as_definition_line(
+	   /** TRANSLATORS: This is an access key combination. */
 	   pgettext("hotkey", "Click"),
 	   /** TRANSLATORS: This is the helptext for an access key combination. */
 	   _("Place new elements on the map, or increase map elements by the value selected by "
 	     "‘Increase/Decrease value’"));
-	/** TRANSLATORS: This is an access key combination. */
 	rv += as_definition_line(
+	   /** TRANSLATORS: This is an access key combination. */
 	   pgettext("hotkey", "Shift + Click"),
 	   /** TRANSLATORS: This is the helptext for an access key combination. */
 	   _("Remove elements from the map, or decrease map elements by the value selected by "
