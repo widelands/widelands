@@ -845,7 +845,7 @@ private:
 		uint32_t old60_players_power = 0U;
 		uint32_t players_casualities = 0U;
 		Time last_time_seen = Time();  // never seen
-		Time last_time_requested = Time();  // never denied a diplo request
+		Time last_time_requested = Time();  // never sent a diplo request
 		uint32_t players_land = 0U;
 		uint32_t old_players_land = 0U;
 		uint32_t old60_players_land = 0U;

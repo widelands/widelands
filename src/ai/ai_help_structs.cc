@@ -1123,7 +1123,7 @@ bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const Time
 	return all_stats[pn].last_time_seen + Duration(2U * 60U * 1000U) > gametime;
 }
 
-// Has a diplo request been rejected in the lat 10 minutes
+// Has a diplo request been sent in the last 10 minutes
 bool PlayersStrengths::player_diplo_requested_lately(Widelands::PlayerNumber pn, const Time& gametime) {
 	if (all_stats.count(pn) == 0) {
 		// Should happen only rarely so we print a warning here
