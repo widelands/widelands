@@ -59,7 +59,7 @@ enum class ShipType : uint8_t {
 
 enum class WarshipCommand : uint8_t {
 	kAttack = 1,
-	kRetreat = 2,
+	// 2 was kRetreat, removed
 	kSetCapacity = 3,
 };
 
