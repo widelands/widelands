@@ -1084,7 +1084,8 @@ void PlayersStrengths::set_last_time_seen(const Time& seentime, Widelands::Playe
 }
 
 // When we send a diplo request, we use this to store the time
-void PlayersStrengths::set_last_time_requested(const Time& requesttime, Widelands::PlayerNumber pn) {
+void PlayersStrengths::set_last_time_requested(const Time& requesttime,
+                                               Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) == 0) {
 		return;
 	}
@@ -1124,7 +1125,8 @@ bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const Time
 }
 
 // Has a diplo request been sent in the last 10 minutes
-bool PlayersStrengths::player_diplo_requested_lately(Widelands::PlayerNumber pn, const Time& gametime) {
+bool PlayersStrengths::player_diplo_requested_lately(Widelands::PlayerNumber pn,
+                                                     const Time& gametime) {
 	if (all_stats.count(pn) == 0) {
 		// Should happen only rarely so we print a warning here
 		verb_log_warn("AI %d: player has no statistics yet\n", this_player_number);
