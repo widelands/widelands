@@ -657,7 +657,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    {KeyboardShortcut::kInGamePause, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                                                          keysym(SDLK_PAUSE),
                                                          "game_pause",
-                                                         []() { return _("Pause"); })},
+                                                         []() { return _("Pause The Game"); })},
    {KeyboardShortcut::kInGameScrollToHQ,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_HOME),
@@ -681,32 +681,32 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_0, KMOD_ALT),
                          "game_msg_filter_all",
-                         []() { return _("Show All"); })},
+                         []() { return _("Show All Messages"); })},
    {KeyboardShortcut::kInGameMessagesFilterGeologists,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_1, KMOD_ALT),
                          "game_msg_filter_geo",
-                         []() { return _("Show Geologists’ Messages"); })},
+                         []() { return _("Show Geologists’ Messages Only"); })},
    {KeyboardShortcut::kInGameMessagesFilterEconomy,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_2, KMOD_ALT),
                          "game_msg_filter_eco",
-                         []() { return _("Show Economy Messages"); })},
+                         []() { return _("Show Economy Messages Only"); })},
    {KeyboardShortcut::kInGameMessagesFilterSeafaring,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_3, KMOD_ALT),
                          "game_msg_filter_seafaring",
-                         []() { return _("Show Seafaring Messages"); })},
+                         []() { return _("Show Seafaring Messages Only"); })},
    {KeyboardShortcut::kInGameMessagesFilterWarfare,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_4, KMOD_ALT),
                          "game_msg_filter_warfare",
-                         []() { return _("Show Military Messages"); })},
+                         []() { return _("Show Military Messages Only"); })},
    {KeyboardShortcut::kInGameMessagesFilterScenario,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_5, KMOD_ALT),
                          "game_msg_filter_scenario",
-                         []() { return _("Show Scenario Messages"); })},
+                         []() { return _("Show Scenario Messages Only"); })},
    {KeyboardShortcut::kInGameSeafaringstatsGotoShip,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_j),
@@ -828,20 +828,55 @@ std::string get_related_hotkeys_help(const KeyboardShortcut first,
 }
 
 std::string get_ingame_shortcut_help() {
-
-	// TODO(tothxa): work in progress
-
 	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Keyboard Shortcuts")));
-	rv += get_shortcut_range_help(KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
+
+	// First common ones need customized descriptions
+	/** TRANSLATORS: This is the helptext for an access key combination. */
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonLoad, _("Load Game"));
+	/** TRANSLATORS: This is the helptext for an access key combination. */
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonSave, _("Save Game"));
+	/** TRANSLATORS: This is the helptext for an access key combination. */
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonExit, _("Exit Game"));
+
 	rv +=
 	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGameMain_End);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonBuildhelp);
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kInGameShowHide_Begin, KeyboardShortcut::kInGameShowHide_End);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonMinimap);
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Arrow keys"),
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   _("Move the map"));
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Ctrl + Arrow keys"),
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   _("Move the map fast"));
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Shift + Arrow keys"),
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   _("Move the map slowly"));
+	rv += get_shortcut_help_line(KeyboardShortcut::kInGameScrollToHQ);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavPrev);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavNext);
+	rv += get_related_hotkeys_help(
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   KeyboardShortcut::kInGameQuicknavSet1, 2, 9, _("Remember current location"));
+	rv += get_related_hotkeys_help(
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   KeyboardShortcut::kInGameQuicknavGoto1, 2, 9, _("Go to previously remembered location"));
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kInGameClosing_Begin, KeyboardShortcut::kInGameClosing_End);
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonEncyclopedia);
 
-	/** TRANSLATORS: Heading in "Controls" help */
+	/** TRANSLATORS: Section heading in "Controls" help */
 	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Message Window"));
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kInGameMessages_Begin, KeyboardShortcut::kInGameMessages_End);
 
-	/** TRANSLATORS: Heading in "Controls" help */
+	/** TRANSLATORS: Section heading in "Controls" help */
 	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Ship Statistics"));
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kInGameSeafaringstats_Begin, KeyboardShortcut::kInGameSeafaringstats_End);
@@ -852,7 +887,7 @@ std::string get_ingame_shortcut_help() {
 }
 
 std::string get_editor_shortcut_help() {
-	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, "Keyboard Shortcuts"));
+	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Keyboard Shortcuts")));
 
 	// First common ones need customized descriptions
 	/** TRANSLATORS: This is the helptext for an access key combination. */
@@ -864,19 +899,18 @@ std::string get_editor_shortcut_help() {
 
 	rv +=
 	   get_shortcut_range_help(KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditorMain_End);
-	rv += get_shortcut_help_line(KeyboardShortcut::kCommonMinimap);
-	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavPrev);
-	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavNext);
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonBuildhelp);
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kEditorShowHide_Begin, KeyboardShortcut::kEditorShowHide_End);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonMinimap);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavPrev);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavNext);
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
 
 	// Needs customized description
 	/** TRANSLATORS: This is the helptext for an access key combination. */
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonEncyclopedia, _("Help"));
-
-	rv += get_shortcut_range_help(
-	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
 
 	/** TRANSLATORS: Heading in the editor keyboard shortcuts help */
 	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, pgettext("editor", "Tools"));
@@ -884,6 +918,22 @@ std::string get_editor_shortcut_help() {
 	   KeyboardShortcut::kEditorTools_Begin, KeyboardShortcut::kEditorTools_End);
 	/** TRANSLATORS: This is the helptext for an access key combination. */
 	rv += get_related_hotkeys_help(KeyboardShortcut::kEditorToolsize1, 1, 10, _("Change tool size"));
+
+	// Mouse controls for tools are included here because they belong to the Tools section
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Click"),
+	    /** TRANSLATORS: This is the helptext for an access key combination. */
+	    _("Place new elements on the map, or increase map elements by the value selected by "
+	      "‘Increase/Decrease value’"));
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Shift + Click"),
+	    /** TRANSLATORS: This is the helptext for an access key combination. */
+	    _("Remove elements from the map, or decrease map elements by the value selected by "
+	      "‘Increase/Decrease value’"));
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Ctrl + Click"),
+	    /** TRANSLATORS: This is the helptext for an access key combination. */
+	    _("Set map elements to the value selected by ‘Set Value’"));
 
 	return rv;
 }

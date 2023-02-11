@@ -41,53 +41,6 @@ function help_format_hotkey(hotkey)
    return pgettext("hotkey", "%s:"):bformat(hotkey)
 end
 
-function help_toggle_building_spaces_hotkey()
-   push_textdomain("texts")
-   local r =
-      -- TRANSLATORS: This is the helptext for an access key combination.
-      dl(help_format_hotkey(wl.ui.get_shortcut("buildhelp")), _("Toggle building spaces"))
-   pop_textdomain()
-   return r
-end
-
-function help_screenshot_hotkey()
-   push_textdomain("texts")
-   local r =
-      -- TRANSLATORS: This is the helptext for an access key combination.
-      dl(help_format_hotkey(wl.ui.get_shortcut("screenshot")), _("Take a screenshot"))
-   pop_textdomain()
-   return r
-end
-
-function help_toggle_fullscreen_hotkey()
-   push_textdomain("texts")
-   local r =
-      -- TRANSLATORS: This is the helptext for an access key combination.
-      dl(help_format_hotkey(wl.ui.get_shortcut("fullscreen")), _("Toggle fullscreen (if supported by the OS)"))
-   pop_textdomain()
-   return r
-end
-
-function help_open_debug_console_hotkey()
-   push_textdomain("texts")
-   local r =
-      -- TRANSLATORS: This is an access key combination.
-      dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Shift + Space")),
-                            -- TRANSLATORS: This is the helptext for an access key combination.
-                            _("Show the debug console (only in debug-builds)"))
-   pop_textdomain()
-   return r
-end
-
-function help_toggle_minimap_hotkey()
-   push_textdomain("texts")
-   local r =
-      -- TRANSLATORS: This is the helptext for an access key combination.
-      dl(help_format_hotkey(wl.ui.get_shortcut("minimap")), _("Toggle minimap"))
-   pop_textdomain()
-   return r
-end
-
 function help_set_landmarks_hotkeys()
    push_textdomain("texts")
    local r = wl.ui.get_shortcut("game_quicknav_set_1")

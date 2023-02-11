@@ -144,14 +144,10 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorNewRandomMap,
 	kEditorUploadMap,
 	kEditorMapOptions,
-
-	kEditorUndo,
-	kEditorRedo,
-	kEditorMain_End = kEditorRedo,
-
-	// Insert Toggle Minimap and Quicknav Prev/Next from Common here in the help
+	kEditorMain_End = kEditorMapOptions,
 
 	// Insert Toggle Buildhelp from Common here in the help
+
 	kEditorShowHide_Begin = kEditorMain_End + 1,
 	kEditorShowhideMaximumBuildhelp = kEditorShowHide_Begin,
 	kEditorShowhideGrid,
@@ -159,6 +155,9 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorShowhideCritters,
 	kEditorShowhideResources,
 	kEditorShowHide_End = kEditorShowhideResources,
+
+	// Insert Toggle Minimap, Quicknav Prev/Next, the general section and Encyclopedia/Help
+	// from Common here in the help
 
 	// This will be a separate section in the help
 	kEditorTools_Begin = kEditorShowHide_End + 1,
@@ -175,7 +174,9 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorMapSize,
 	kEditorPlayers,
 	kEditorToolHistory,
-	kEditorTools_End = kEditorToolHistory,
+	kEditorUndo,
+	kEditorRedo,
+	kEditorTools_End = kEditorRedo,
 
 	// These will be grouped to one line in the in-editor help
 	kEditorToolsize1,
@@ -206,17 +207,18 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameStatsSoldiers,
 	kInGameStatsSeafaring,
 
-	kInGamePause,
 	kInGameSpeedUp,
 	kInGameSpeedUpSlow,
 	kInGameSpeedUpFast,
 	kInGameSpeedDown,
 	kInGameSpeedDownSlow,
 	kInGameSpeedDownFast,
+	kInGamePause,
 	kInGameSpeedReset,
 	kInGameMain_End = kInGameSpeedReset,
 
 	// Insert Toggle Buildhelp from Common here in the Encyclopedia
+
 	kInGameShowHide_Begin = kInGameMain_End + 1,
 	kInGameShowhideCensus = kInGameShowHide_Begin,
 	kInGameShowhideStats,
@@ -226,10 +228,10 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameShowHide_End = kInGameShowhideWorkareas,
 
 	// Insert Toggle Minimap from Common here in the Encyclopedia
-	kInGamePinnedNote,
+
 	kInGameScrollToHQ,
+
 	// Insert QuicknavPrev/Next from Common here in the Encyclopedia
-	kInGameQuicknavGUI,
 
 	// These will be grouped to two lines in the Encyclopedia
 	kInGameQuicknavSet1,
@@ -251,30 +253,38 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameQuicknavSet9,
 	kInGameQuicknavGoto9,
 
+	// Make these a section to make it easier to add more
+	kInGameClosing_Begin,
+	kInGameQuicknavGUI = kInGameClosing_Begin,
+	kInGamePinnedNote,
+	kInGameClosing_End = kInGamePinnedNote,
+
+	// Insert the general section and Encyclopedia from Common here in the help
+
 	// These have their own sections in the Encyclopedia
 
 	kInGameMessages_Begin,
-	kInGameMessagesGoto = kInGameMessages_Begin,
-	kInGameMessagesFilterAll,
+	kInGameMessagesFilterAll = kInGameMessages_Begin,
 	kInGameMessagesFilterGeologists,
 	kInGameMessagesFilterEconomy,
 	kInGameMessagesFilterSeafaring,
 	kInGameMessagesFilterWarfare,
 	kInGameMessagesFilterScenario,
-	kInGameMessages_End = kInGameMessagesFilterScenario,
+	kInGameMessagesGoto,
+	kInGameMessages_End = kInGameMessagesGoto,
 
 	kInGameSeafaringstats_Begin = kInGameMessages_End + 1,
-	kInGameSeafaringstatsGotoShip = kInGameSeafaringstats_Begin,
-	kInGameSeafaringstatsWatchShip,
-	kInGameSeafaringstatsOpenShipWindow,
-	kInGameSeafaringstatsOpenShipWindowAndGoto,
-	kInGameSeafaringstatsFilterAll,
+	kInGameSeafaringstatsFilterAll = kInGameSeafaringstats_Begin,
 	kInGameSeafaringstatsFilterIdle,
 	kInGameSeafaringstatsFilterShipping,
 	kInGameSeafaringstatsFilterExpWait,
 	kInGameSeafaringstatsFilterExpScout,
 	kInGameSeafaringstatsFilterExpPortspace,
-	kInGameSeafaringstats_End = kInGameSeafaringstatsFilterExpPortspace,
+	kInGameSeafaringstatsGotoShip,
+	kInGameSeafaringstatsWatchShip,
+	kInGameSeafaringstatsOpenShipWindow,
+	kInGameSeafaringstatsOpenShipWindowAndGoto,
+	kInGameSeafaringstats_End = kInGameSeafaringstatsOpenShipWindowAndGoto,
 
 	kInGame_End = kInGameSeafaringstats_End,
 
