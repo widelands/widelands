@@ -327,8 +327,10 @@ std::string get_shortcut_range_help(KeyboardShortcut start, KeyboardShortcut end
  * @param n_keys Number of shortcuts to be included
  * @param description The common description for the shortcuts.
  */
-std::string get_related_hotkeys_help(
-   KeyboardShortcut first, int step, int n_keys, const std::string& description);
+std::string get_related_hotkeys_help(KeyboardShortcut first,
+                                     int step,
+                                     int n_keys,
+                                     const std::string& description);
 
 /** Get the formatted help of the current in game keyboard shortcuts including headers. */
 std::string get_ingame_shortcut_help();

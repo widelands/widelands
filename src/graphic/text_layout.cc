@@ -270,6 +270,5 @@ std::string close_paragraph_style(UI::ParagraphStyle style) {
 std::string as_definition_line(const std::string& term, const std::string& description) {
 	return as_paragraph_style(UI::ParagraphStyle::kWuiText,
 	                          format("<font bold=1>%s</font> %s",
-	                                 format(pgettext("definitionterm", "%s:"), term),
-	                                 description));
+	                                 format(pgettext("definitionterm", "%s:"), term), description));
 }

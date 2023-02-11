@@ -807,8 +807,10 @@ std::string get_shortcut_range_help(const KeyboardShortcut start, const Keyboard
 	return rv;
 }
 
-std::string get_related_hotkeys_help(
-   const KeyboardShortcut first, const int step, const int n_keys, const std::string& description) {
+std::string get_related_hotkeys_help(const KeyboardShortcut first,
+                                     const int step,
+                                     const int n_keys,
+                                     const std::string& description) {
 	/** TRANSLATORS: Separator for a list of hotkeys  */
 	const std::string separator_format(pgettext("hotkey", "%1$s / %2$s"));
 
@@ -860,25 +862,26 @@ std::string get_editor_shortcut_help() {
 	/** TRANSLATORS: This is the helptext for an access key combination. */
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonExit, _("Exit Editor"));
 
-	rv += get_shortcut_range_help(
-	         KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditorMain_End);
+	rv +=
+	   get_shortcut_range_help(KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditorMain_End);
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonMinimap);
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavPrev);
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonQuicknavNext);
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonBuildhelp);
 	rv += get_shortcut_range_help(
-	         KeyboardShortcut::kEditorShowHide_Begin, KeyboardShortcut::kEditorShowHide_End);
+	   KeyboardShortcut::kEditorShowHide_Begin, KeyboardShortcut::kEditorShowHide_End);
 
 	// Needs customized description
 	/** TRANSLATORS: This is the helptext for an access key combination. */
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonEncyclopedia, _("Help"));
 
-	rv += get_shortcut_range_help(KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
 
 	/** TRANSLATORS: Heading in the editor keyboard shortcuts help */
 	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, pgettext("editor", "Tools"));
 	rv += get_shortcut_range_help(
-	         KeyboardShortcut::kEditorTools_Begin, KeyboardShortcut::kEditorTools_End);
+	   KeyboardShortcut::kEditorTools_Begin, KeyboardShortcut::kEditorTools_End);
 	/** TRANSLATORS: This is the helptext for an access key combination. */
 	rv += get_related_hotkeys_help(KeyboardShortcut::kEditorToolsize1, 1, 10, _("Change tool size"));
 
@@ -935,11 +938,12 @@ std::string to_string(const KeyboardShortcut id) {
 	    id > KeyboardShortcut::kInGameSeafaringstats_End) {
 		return shortcuts_.at(id).descname();
 	}
-	const std::string fmt = id < KeyboardShortcut::kInGameSeafaringstats_Begin ?
-	   /** TRANSLATORS: prefix for message window shortcuts in keyboard options */
-	   pgettext("hotkey", "Messages: %s") :
-	   /** TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard options */
-	   pgettext("hotkey", "Seafaring: %s");
+	const std::string fmt =
+	   id < KeyboardShortcut::kInGameSeafaringstats_Begin ?
+         /** TRANSLATORS: prefix for message window shortcuts in keyboard options */
+         pgettext("hotkey", "Messages: %s") :
+         /** TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard options */
+         pgettext("hotkey", "Seafaring: %s");
 	return format(fmt, shortcuts_.at(id).descname());
 }
 
