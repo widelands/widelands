@@ -861,7 +861,7 @@ std::string InteractivePlayer::get_fastplace_help() {
 
 	std::string rv;
 	for (FastplaceShortcut fp_sc : fp_sc_v) {
-		Widelands::DescriptionIndex bi = egbase().descriptions().building_index(fp_sc.building);
+		const Widelands::DescriptionIndex bi = egbase().descriptions().building_index(fp_sc.building);
 		if (tribe.has_building(bi)) {
 			rv += as_definition_line(fp_sc.hotkey, tribe.get_building_descr(bi)->descname());
 		}
