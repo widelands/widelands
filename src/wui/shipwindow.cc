@@ -23,6 +23,7 @@
 #include "economy/ware_instance.h"
 #include "graphic/animation/animation_manager.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
@@ -307,11 +308,12 @@ void ShipWindow::no_port_error_message() {
 
 void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 	const Widelands::EditorGameBase& egbase = ibase_.egbase();
+	const Widelands::CheckStepDefault checkstep(Widelands::MOVECAPS_SWIM);
 	const Widelands::PortDock* dest_dock = ship->get_destination_port(egbase);
 	const Widelands::Ship* dest_ship = ship->get_destination_ship(egbase);
 	const Widelands::PinnedNote* dest_note = ship->get_destination_note(egbase);
 
-	// Create destination dropdown
+	// Populate destination dropdown if anything changed since last think
 	std::vector<Widelands::PortDock*> all_ports;
 	std::vector<Widelands::Ship*> all_ships;
 	std::vector<Widelands::PinnedNote*> all_notes;
@@ -325,7 +327,12 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 			all_ships.push_back(dynamic_cast<Widelands::Ship*>(egbase.objects().get_object(serial)));
 		}
 	}
-	// NOCOM labels!
+	for (Widelands::OPtr<Widelands::PinnedNote> optr : ship->owner().all_pinned_notes()) {
+		Widelands::PinnedNote* note = optr.get(egbase);
+		if (note != nullptr && checkstep.reachable_dest(egbase.map(), note->get_position())) {
+			all_notes.push_back(note);
+		}
+	}
 
 	bool needs_update = (set_destination_->size() != all_ports.size() + all_ships.size() + all_notes.size() + 1);
 	if (!needs_update) {
