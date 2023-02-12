@@ -3361,8 +3361,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		// we need to be still alive and we don't have send a request in last 10 minutes
 		if (other_player != nullptr && opn != mypn && !me->is_defeated() &&
 		    !player_statistics.player_diplo_requested_lately(opn, gametime)) {
-			if (player_statistics.get_diplo_score(opn) >=
-			    8 + std::abs(management_data.get_military_number_at(195) / 10)) {
+			if (player_statistics.get_diplo_score(opn) >= 18) {
 				player_statistics.set_last_time_requested(gametime, opn);
 				if (other_player->team_number() == 0) {
 					game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
