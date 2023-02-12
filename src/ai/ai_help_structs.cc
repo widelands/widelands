@@ -1135,7 +1135,7 @@ bool PlayersStrengths::player_diplo_requested_lately(Widelands::PlayerNumber pn,
 	if (all_stats[pn].last_time_requested.is_invalid()) {
 		return false;
 	}
-	Duration request_interval = (RNG::static_rand(std::abs(all_stats[pn].players_diplomacy_score)) + 5) * 60U * 1000U;
+	Duration request_interval = Duration((RNG::static_rand(std::abs(all_stats[pn].players_diplomacy_score)) + 5) * 60U * 1000U);
 	return all_stats[pn].last_time_requested + request_interval > gametime;
 }
 

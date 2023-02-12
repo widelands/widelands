@@ -6728,7 +6728,7 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	return supplied == bo.inputs.size();
 }
 
-// TODO(tiborb): - should be called from scheduler, once in 60s is enough
+// Update player statistics including diplomacy scores
 void DefaultAI::update_player_stat(const Time& gametime) {
 	if (player_statistics.get_update_time() > Time(0) &&
 	    player_statistics.get_update_time() + Duration(15 * 1000) > gametime) {
@@ -6809,7 +6809,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				int32_t diplo_score = 0;
 				// we need to be sure all magic numbers have been initialized so wait 30s
 				if (gametime > Time(30000)) {
-					int16_t inputs[kFNeuronBitSize] = {0};
+					int16_t inputs[2 * kFNeuronBitSize] = {0};
 					inputs[1] = RNG::static_rand(5) == 0 ? 2 : -2;
 					inputs[2] =
 					   RNG::static_rand((std::abs(management_data.get_military_number_at(181)) / 10) +
@@ -6859,15 +6859,15 @@ void DefaultAI::update_player_stat(const Time& gametime) {
                      2 :
                      -2;
 					inputs[19] = me_cass > cass ? 2 : -1;
-					inputs[20] = this_player->team_number() == 0 ? 7 : 0;
+					inputs[20] = this_player->team_number() == 0 ? 4 : -3;
 					inputs[21] = this_player->team_number() == 0 ?
                                (std::abs(management_data.get_military_number_at(185)) / 10) :
-                               0;
+                               -(std::abs(management_data.get_military_number_at(185)) / 10);
 					inputs[22] = 3;
 					inputs[23] = cur_strength >= player_statistics.get_max_power() ? -10 : 8;
 					inputs[24] = cur_land >= player_statistics.get_max_land() ? -4 : 1;
-					inputs[25] = player_statistics.get_diplo_score(j) > 0 ? 3 : 0;
-					inputs[26] = player_statistics.get_diplo_score(j) > 5 ? 3 : 0;
+					inputs[25] = player_statistics.get_diplo_score(j) > 0 ? 5 : -1;
+					inputs[26] = player_statistics.get_diplo_score(j) > 5 ? 3 : -2;
 					inputs[27] = cur_strength >= player_statistics.get_max_power() ?
                                -(std::abs(management_data.get_military_number_at(197)) / 10) :
                                (std::abs(management_data.get_military_number_at(197)) / 10);
@@ -6882,10 +6882,37 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					                  player_statistics.get_max_land() < cur_land + me_land ?
                               5 :
                               -5;
+					inputs[32] = cur_strength * 3 + cur_land < player_statistics.get_max_power() * 3 +
+					              player_statistics.get_max_land() &&
+					                   player_statistics.get_max_power() * 3 +
+									   player_statistics.get_max_land() < (cur_strength + me_strength) * 3 +
+									   cur_land + me_land ? 5 : -5;
+					inputs[33] = cur_strength * 2 + cur_land < player_statistics.get_max_power() * 2 +
+					              player_statistics.get_max_land() &&
+					                   player_statistics.get_max_power() * 2 +
+									   player_statistics.get_max_land() < (cur_strength + me_strength) * 2 +
+									   cur_land + me_land ? 4 : 0;
+					inputs[34] = this_player->team_number() == me->team_number() ? 2 : -2;
+					inputs[35] = this_player->team_number() == me->team_number() ? 1 : -3;
+					inputs[36] = player_statistics.get_diplo_score(j) > 10 ? 2 : -2;
+					inputs[37] = player_statistics.get_is_enemy(j) && player_statistics.player_seen_lately(j, gametime) &&
+					              !player_statistics.strong_enough(pn) ? 10 : -10;
+					inputs[38] = player_statistics.get_is_enemy(j) && player_statistics.player_seen_lately(j, gametime) &&
+					              !player_statistics.strong_enough(pn) ? 5 : -5;
+					inputs[39] = player_statistics.strong_enough(pn) ? -10 : 2;
+					inputs[40] = player_statistics.strong_enough(pn) ? -5 : 2;
+					inputs[41] = player_statistics.get_is_enemy(j) && player_statistics.player_seen_lately(j, gametime) &&
+					              player_statistics.enemies_seen_lately_count(gametime) > 1 ? 5 : 0;
+					inputs[42] = player_statistics.get_is_enemy(j) && player_statistics.player_seen_lately(j, gametime) &&
+					              player_statistics.enemies_seen_lately_count(gametime) > 1 ? 3 : -2;
+					
 
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (management_data.f_neuron_pool[28].get_position(i)) {
 							diplo_score += inputs[i];
+						}
+						if (management_data.f_neuron_pool[29].get_position(i)) {
+							diplo_score += inputs[i + kFNeuronBitSize];
 						}
 					}
 				}
