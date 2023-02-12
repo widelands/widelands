@@ -43,6 +43,7 @@
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
@@ -1861,6 +1862,15 @@ void Player::set_muted(DescriptionIndex di, bool mute) {
 
 bool Player::is_attack_forbidden(PlayerNumber who) const {
 	return forbid_attack_.find(who) != forbid_attack_.end();
+}
+
+void Player::register_pinned_note(PinnedNote* note) {
+	assert(pinned_notes_.count(note) == 0);
+	pinned_notes_.insert(note);
+}
+void Player::unregister_pinned_note(PinnedNote* note) {
+	assert(pinned_notes_.count(note) == 1);
+	pinned_notes_.erase(note);
 }
 
 void Player::add_soldier(unsigned h, unsigned a, unsigned d, unsigned e) {
