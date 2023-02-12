@@ -1124,7 +1124,7 @@ bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const Time
 	return all_stats[pn].last_time_seen + Duration(2U * 60U * 1000U) > gametime;
 }
 
-// Has a diplo request been sent in the last 10 minutes
+// Has a diplo request been sent in the last 5 + X minutes
 bool PlayersStrengths::player_diplo_requested_lately(Widelands::PlayerNumber pn,
                                                      const Time& gametime) {
 	if (all_stats.count(pn) == 0) {
@@ -1135,7 +1135,8 @@ bool PlayersStrengths::player_diplo_requested_lately(Widelands::PlayerNumber pn,
 	if (all_stats[pn].last_time_requested.is_invalid()) {
 		return false;
 	}
-	return all_stats[pn].last_time_requested + Duration(10U * 60U * 1000U) > gametime;
+	Duration request_interval = (RNG::static_rand(std::abs(all_stats[pn].players_diplomacy_score)) + 5) * 60U * 1000U;
+	return all_stats[pn].last_time_requested + request_interval > gametime;
 }
 
 // This is the strength of a player

@@ -3358,7 +3358,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	for (Widelands::PlayerNumber opn = 1; opn <= game().map().get_nrplayers(); ++opn) {
 		const Widelands::Player* other_player = game().get_player(opn);
 		// other player needs to exist and different from me
-		// we need to be still alive and we don't have send a request in last 10 minutes
+		// we need to be still alive and we don't have send a request in last 5 + X minutes
 		if (other_player != nullptr && opn != mypn && !me->is_defeated() &&
 		    !player_statistics.player_diplo_requested_lately(opn, gametime)) {
 			if (player_statistics.get_diplo_score(opn) >= 18) {
