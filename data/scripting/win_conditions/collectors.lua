@@ -95,13 +95,13 @@ local r = {
 
    -- Send all players the momentary game state
    local function _send_state(remaining_time, plrs, show_popup)
-      local msg = format_remaining_time(remaining_time) .. vspace(8) .. game_status.body
+      local msg = format_remaining_time(remaining_time) .. msg_vspace() .. game_status.body
 
       -- Points for players without team
       for idx, plr in ipairs(plrs) do
          if (plr.team == 0) then
             local points, pstat = _calc_points({plr})
-            msg = msg .. vspace(8) .. pstat
+            msg = msg .. msg_vspace() .. pstat
          end
       end
       -- Team points
@@ -111,7 +111,7 @@ local r = {
          local message = h1((_("Status for Team %d")):format(idx))
             .. pstat
             .. h2(ngettext("Team Total: %i point", "Team Total: %i points", points)):format(points)
-         msg = msg .. vspace(8) .. message
+         msg = msg .. msg_vspace() .. message
       end
       pop_textdomain()
 

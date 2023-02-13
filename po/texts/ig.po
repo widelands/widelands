@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Igbo (http://www.transifex.com/widelands/widelands/language/ig/)\n"
@@ -36,86 +36,86 @@ msgstr ""
 msgid "Widelands Development Team"
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:7
+#: ../../data/txts/LICENSE.lua:12
 msgid "Licensing information for Widelands"
 msgstr ""
 
 #. TRANSLATORS: Placeholder is copyright end year
-#: ../../data/txts/LICENSE.lua:9
+#: ../../data/txts/LICENSE.lua:14
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:18
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:25
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:22
+#: ../../data/txts/LICENSE.lua:27
 msgid "This game comes as-is and without any warranty."
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:28
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
 msgstr ""
 
-#: ../../data/txts/README.lua:8
+#: ../../data/txts/README.lua:9
 msgid "an open source strategy game"
 msgstr ""
 
-#: ../../data/txts/README.lua:10
+#: ../../data/txts/README.lua:11
 msgid "Check out the Widelands project homepage:"
 msgstr ""
 
-#: ../../data/txts/README.lua:11
+#: ../../data/txts/README.lua:12
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
 msgstr ""
 
-#: ../../data/txts/README.lua:12
+#: ../../data/txts/README.lua:13
 msgid "Status"
 msgstr ""
 
-#: ../../data/txts/README.lua:13
+#: ../../data/txts/README.lua:14
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
 "more in multiplayer with others. Still, there is always more work to be done"
@@ -124,75 +124,75 @@ msgid ""
 " language or creating new maps – get in touch on our homepage."
 msgstr ""
 
-#: ../../data/txts/README.lua:15
+#: ../../data/txts/README.lua:16
 msgid "Widelands Help"
 msgstr ""
 
 #. TRANSLATORS: %1% is a key on the keyboard
-#: ../../data/txts/README.lua:17
+#: ../../data/txts/README.lua:18
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
 msgstr ""
 
 #. TRANSLATORS: This is a key on the keyboard
-#: ../../data/txts/README.lua:19
+#: ../../data/txts/README.lua:20
 msgid "F1"
 msgstr ""
 
-#: ../../data/txts/README.lua:22
+#: ../../data/txts/README.lua:23
 msgid "Reporting Bugs"
 msgstr ""
 
-#: ../../data/txts/README.lua:23
+#: ../../data/txts/README.lua:24
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr ""
 
-#: ../../data/txts/README.lua:25
+#: ../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
 msgstr ""
 
-#: ../../data/txts/README.lua:27
+#: ../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
 msgstr ""
 
-#: ../../data/txts/README.lua:28
+#: ../../data/txts/README.lua:29
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
 
-#: ../../data/txts/README.lua:29
+#: ../../data/txts/README.lua:30
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
 
-#: ../../data/txts/README.lua:30
+#: ../../data/txts/README.lua:31
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
 msgstr ""
 
-#: ../../data/txts/README.lua:31
+#: ../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
 msgstr ""
 
-#: ../../data/txts/README.lua:32
+#: ../../data/txts/README.lua:33
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
 
-#: ../../data/txts/README.lua:33
+#: ../../data/txts/README.lua:34
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
 msgstr ""
 
-#: ../../data/txts/TRANSLATORS.lua:25
+#: ../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
 msgstr ""
 
@@ -426,66 +426,66 @@ msgstr ""
 msgid "%1% / %2%"
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:7
+#: ../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:8
+#: ../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:10
+#: ../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:11
+#: ../../data/txts/help/multiplayer_help.lua:12
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:12
+#: ../../data/txts/help/multiplayer_help.lua:13
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:13
+#: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:15
+#: ../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:16
+#: ../../data/txts/help/multiplayer_help.lua:17
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:17
+#: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:18
+#: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:19
+#: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:20
+#: ../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:21
+#: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
@@ -493,17 +493,17 @@ msgid ""
 "with) and the tribe and team for computer players."
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:22
+#: ../../data/txts/help/multiplayer_help.lua:23
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:24
+#: ../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
 msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:25
+#: ../../data/txts/help/multiplayer_help.lua:26
 msgid ""
 "You can see information about the selected map or savegame on the right-hand"
 " side. A button next to the map name allows the host to change to a "

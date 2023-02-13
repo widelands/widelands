@@ -3,13 +3,13 @@
 -- =========================
 
 function thron(title, text)
-   return speech("map:chieftain.png", "2F9131", title, text)
+   return speech("map:chieftain.png", styles.color("campaign_bar_thron"), title, text)
 end
 function khantrukh(title, text)
-   return speech("map:khantrukh.png", "8080FF", title, text)
+   return speech("map:khantrukh.png", styles.color("campaign_bar_khantrukh"), title, text)
 end
 function boldreth(title, text)
-   return speech("map:boldreth.png", "FF0000", title, text)
+   return speech("map:boldreth.png", styles.color("campaign_bar_boldreth"), title, text)
 end
 
 -- =======================================================================

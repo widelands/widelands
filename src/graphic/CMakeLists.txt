@@ -275,7 +275,6 @@ wl_library(graphic_text_layout
     graphic_styles
     graphic_text
     graphic_fonthandler
-    graphic_styles
 )
 
 wl_library(graphic_wordwrap
