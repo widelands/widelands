@@ -54,7 +54,7 @@ wl.Descriptions():new_productionsite_type {
             -- time total: 28 + 5 * (7.8 + 3.6) + 10 = 95 sec
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=meal wine",
-            "sleep=duration:28s",
+            "sleep=duration:29s",
             "call=mine_produce_marble",
             "call=mine_produce_granite",
             "call=mine_produce_marble",
