@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-31 03:01+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Per-Henrik Kvalnes <perhenrik.kvalnes@gmail.com, 2020\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/widelands/widelands/language/nb/)\n"
@@ -65,18 +65,18 @@ msgstr "Det er ingen trær i nærheten av din startposisjon. Derfor før du ekst
 msgid "Status"
 msgstr "Status"
 
-#: ../../data/scripting/messages.lua:257
+#: ../../data/scripting/messages.lua:293
 msgid "New Objective"
 msgstr "Nytt oppdrag"
 
-#: ../../data/scripting/messages.lua:259
+#: ../../data/scripting/messages.lua:295
 msgid "New Objectives"
 msgstr "Nye oppdrag"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
 #. space here.
-#: ../../data/scripting/richtext.lua:580
+#: ../../data/scripting/richtext.lua:671
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
@@ -84,14 +84,14 @@ msgstr ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:608 ../../src/base/i18n.cc:407
+#: ../../data/scripting/richtext.lua:699 ../../src/base/i18n.cc:407
 #, c-format
 msgid "%1$s & %2$s"
 msgstr ""
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:610 ../../src/base/i18n.cc:411
+#: ../../data/scripting/richtext.lua:701 ../../src/base/i18n.cc:411
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s eller %2$s"
@@ -100,7 +100,7 @@ msgstr "%1$s eller %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:612 ../../data/scripting/richtext.lua:617
+#: ../../data/scripting/richtext.lua:703 ../../data/scripting/richtext.lua:708
 #: ../../src/base/i18n.cc:415 ../../src/base/i18n.cc:424
 #: ../../src/logic/addons.cc:203
 #, c-format
@@ -110,13 +110,13 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: X hours and Y minutes
-#: ../../data/scripting/richtext.lua:614 ../../src/base/i18n.cc:419
+#: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:419
 #: ../../src/ui_basic/spinbox.cc:484
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s og %2$s"
 
-#: ../../data/scripting/richtext_scenarios.lua:50
+#: ../../data/scripting/richtext_scenarios.lua:52
 #, lua-format
 msgid "“%s”"
 msgstr ""
@@ -631,12 +631,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
 #: ../../src/ui_fsmenu/launch_mpg.cc:311 ../../src/ui_fsmenu/main.cc:249
-#: ../../src/wlapplication.cc:1635
+#: ../../src/wlapplication.cc:1641
 msgid "Error"
 msgstr "Feil"
 
 #: ../../src/editor/editorinteractive.cc:1111 ../../src/ui_fsmenu/main.cc:233
-#: ../../src/wlapplication.cc:1637
+#: ../../src/wlapplication.cc:1643
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -2854,7 +2854,7 @@ msgid "Checking map"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:144 ../../src/network/gamehost.cc:523
-#: ../../src/ui_fsmenu/launch_spg.cc:171 ../../src/wlapplication.cc:744
+#: ../../src/ui_fsmenu/launch_spg.cc:171 ../../src/wlapplication.cc:750
 msgid "Preparing game…"
 msgstr ""
 
@@ -3597,7 +3597,7 @@ msgstr "Om Widelands"
 msgid "Lua Error"
 msgstr "Lua-feil"
 
-#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:122
+#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:130
 msgid "Technical Info"
 msgstr ""
 
@@ -4250,7 +4250,7 @@ msgid "Author:"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:142
-#: ../../src/ui_fsmenu/tech_info.cc:67
+#: ../../src/ui_fsmenu/tech_info.cc:69
 msgid "Version:"
 msgstr ""
 
@@ -5468,7 +5468,7 @@ msgstr "Kallenavn:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:668
+#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:674
 msgid "nobody"
 msgstr "ingen"
 
@@ -6432,87 +6432,87 @@ msgstr "Forfattere"
 msgid "You"
 msgstr "Du"
 
-#: ../../src/ui_fsmenu/tech_info.cc:71
+#: ../../src/ui_fsmenu/tech_info.cc:73
 msgid "MacOS"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:73
+#: ../../src/ui_fsmenu/tech_info.cc:75
 msgid "Windows (64 bit)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:75
+#: ../../src/ui_fsmenu/tech_info.cc:77
 msgid "Windows (32 bit)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:77
+#: ../../src/ui_fsmenu/tech_info.cc:79
 msgid "Linux"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:79
+#: ../../src/ui_fsmenu/tech_info.cc:81
 msgid "FreeBSD"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:81
+#: ../../src/ui_fsmenu/tech_info.cc:83
 msgid "Unix"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:83
+#: ../../src/ui_fsmenu/tech_info.cc:85
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:85
+#: ../../src/ui_fsmenu/tech_info.cc:87
 msgid "Operating System:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:86
+#: ../../src/ui_fsmenu/tech_info.cc:88
 msgid "Compiled with SDL version:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:93
+#: ../../src/ui_fsmenu/tech_info.cc:95
 msgid "Using SDL version:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:98
+#: ../../src/ui_fsmenu/tech_info.cc:100
 msgid "SDL video driver:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:102
+#: ../../src/ui_fsmenu/tech_info.cc:104
 msgid "SDL horizontal scroll:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:103
+#: ../../src/ui_fsmenu/tech_info.cc:105
 msgid "assuming inverted"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:107
+#: ../../src/ui_fsmenu/tech_info.cc:109
 msgid "Locale:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:108
+#: ../../src/ui_fsmenu/tech_info.cc:110
 msgid "Home Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:109
+#: ../../src/ui_fsmenu/tech_info.cc:111
 msgid "Configuration File:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:110
+#: ../../src/ui_fsmenu/tech_info.cc:112
 msgid "Data Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:111
+#: ../../src/ui_fsmenu/tech_info.cc:113
 msgid "Locale Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:113
+#: ../../src/ui_fsmenu/tech_info.cc:115
 msgid "Executable Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:142
+#: ../../src/ui_fsmenu/tech_info.cc:156
 msgid "Copy"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:143
+#: ../../src/ui_fsmenu/tech_info.cc:157
 msgid "Copy the technical report to the clipboard"
 msgstr ""
 
@@ -6538,60 +6538,60 @@ msgstr "Velg alle"
 msgid "Unmark All"
 msgstr "Fjern alle"
 
-#: ../../src/wlapplication.cc:786
+#: ../../src/wlapplication.cc:792
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:787 ../../src/wlapplication.cc:792
+#: ../../src/wlapplication.cc:793 ../../src/wlapplication.cc:798
 #: ../../src/wui/savegameloader.cc:119
 msgid "Error message:"
 msgstr "Feilmelding:"
 
-#: ../../src/wlapplication.cc:788
+#: ../../src/wlapplication.cc:794
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1288
+#: ../../src/wlapplication.cc:1294
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1293
+#: ../../src/wlapplication.cc:1299
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1448
+#: ../../src/wlapplication.cc:1454
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1569
+#: ../../src/wlapplication.cc:1575
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1587
+#: ../../src/wlapplication.cc:1593
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1613
+#: ../../src/wlapplication.cc:1619
 msgid "Incompatible"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1650
+#: ../../src/wlapplication.cc:1656
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1650
+#: ../../src/wlapplication.cc:1656
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1653
+#: ../../src/wlapplication.cc:1659
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6605,7 +6605,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1662
+#: ../../src/wlapplication.cc:1668
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6615,11 +6615,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1694
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1689
+#: ../../src/wlapplication.cc:1695
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
