@@ -73,6 +73,8 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 71 + 71 + 10 = 152 sec
             "call=mine_granite",
             "call=mine_marble",
             "return=skipped"
@@ -82,9 +84,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _("mining granite"),
          actions = {
+            -- time: 14.6 + 4 * (10.5 + 3.6) = 71 sec
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=ration wine",
-            "sleep=duration:18s",
+            "sleep=duration:14s600ms",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_marble",
@@ -96,9 +99,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
          descname = _("mining marble"),
          actions = {
+            -- time: 14.6 + 4 * (10.5 + 3.6) = 71 sec
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=wine ration",
-            "sleep=duration:18s",
+            "sleep=duration:14s600ms",
             "call=a_mine_produce_marble",
             "call=a_mine_produce_marble",
             "call=a_mine_produce_granite",
