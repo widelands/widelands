@@ -135,14 +135,10 @@
 #define PRIuS PRIu32
 #endif
 #else
-#if __WORDSIZE == 64
-#define PRIuS "lu"
-#else
-#if defined(__WORDSIZE32_SIZE_ULONG) && __WORDSIZE32_SIZE_ULONG
+#if SIZE_MAX == UINT64_MAX
 #define PRIuS "lu"
 #else
 #define PRIuS "u"
-#endif
 #endif
 #endif
 
