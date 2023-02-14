@@ -428,7 +428,8 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	const Map& map = game.map();
 
 	MapObject* destination_object = destination_.get(game);
-	assert(destination_object == nullptr || destination_object->descr().type() == MapObjectType::PORTDOCK);
+	assert(destination_object == nullptr ||
+	       destination_object->descr().type() == MapObjectType::PORTDOCK);
 	PortDock* destination = dynamic_cast<PortDock*>(destination_object);
 
 	if (destination == nullptr) {
@@ -594,7 +595,8 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 			// We're on the destination dock. Load soldiers, heal, and wait for orders.
 			constexpr Duration kHealInterval(1000);
-			if (hitpoints_ < descr().max_hitpoints_ && game.get_gametime() - last_heal_time_ >= kHealInterval) {
+			if (hitpoints_ < descr().max_hitpoints_ &&
+			    game.get_gametime() - last_heal_time_ >= kHealInterval) {
 				last_heal_time_ = game.get_gametime();
 				hitpoints_ = std::min(descr().max_hitpoints_, hitpoints_ + descr().heal_per_second_);
 			}
@@ -604,8 +606,8 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 			if (warship_soldier_request_ == nullptr) {
 				warship_soldier_request_.reset(new Request(*dest->get_warehouse(),
-					                                       owner().tribe().soldier(),
-					                                       Ship::warship_soldier_callback, wwWORKER));
+				                                           owner().tribe().soldier(),
+				                                           Ship::warship_soldier_callback, wwWORKER));
 			}
 			update_warship_soldier_request(game);
 
@@ -617,7 +619,8 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		case MapObjectType::PINNED_NOTE: {
 			Bob* dest = dynamic_cast<Bob*>(destination_object);
 
-			if (map->calc_distance(position, dest->get_position()) <= (dest->descr().type() == MapObjectType::SHIP ? 4 : 1)) {
+			if (map->calc_distance(position, dest->get_position()) <=
+			    (dest->descr().type() == MapObjectType::SHIP ? 4 : 1)) {
 				// Already there, idle and await further orders.
 				start_task_idle(game, descr().main_animation(), 250);
 				return true;
@@ -625,7 +628,8 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 			// Sail to the destination ship/note if we're not there yet.
 			Path path;
-			if (map->findpath(position, dest->get_position(), 0, path, CheckStepDefault(MOVECAPS_SWIM)) < 0) {
+			if (map->findpath(
+			       position, dest->get_position(), 0, path, CheckStepDefault(MOVECAPS_SWIM)) < 0) {
 				molog(game.get_gametime(), "No path to destination ship/note found!");
 				set_destination(game, nullptr);
 				break;
@@ -851,7 +855,8 @@ PortDock* Ship::find_nearest_port(Game& game) {
 
 bool Ship::is_on_destination_dock() const {
 	const MapObject* dest = destination_.get(owner().egbase());
-	return dest != nullptr && dest->descr().type() == MapObjectType::PORTDOCK && get_position().field->get_immovable() == dest;
+	return dest != nullptr && dest->descr().type() == MapObjectType::PORTDOCK &&
+	       get_position().field->get_immovable() == dest;
 }
 
 uint32_t Ship::min_warship_soldier_capacity() const {
@@ -1468,45 +1473,53 @@ bool Ship::has_destination() const {
 	return destination_.get(owner().egbase()) != nullptr;
 }
 PortDock* Ship::get_destination_port(EditorGameBase& e) const {
-	if (MapObject* mo = destination_.get(e); mo != nullptr && mo->descr().type() == MapObjectType::PORTDOCK) {
+	if (MapObject* mo = destination_.get(e);
+	    mo != nullptr && mo->descr().type() == MapObjectType::PORTDOCK) {
 		return dynamic_cast<PortDock*>(mo);
 	}
 	return nullptr;
 }
 Ship* Ship::get_destination_ship(EditorGameBase& e) const {
-	if (MapObject* mo = destination_.get(e); mo != nullptr && mo->descr().type() == MapObjectType::SHIP) {
+	if (MapObject* mo = destination_.get(e);
+	    mo != nullptr && mo->descr().type() == MapObjectType::SHIP) {
 		return dynamic_cast<Ship*>(mo);
 	}
 	return nullptr;
 }
 PinnedNote* Ship::get_destination_note(EditorGameBase& e) const {
-	if (MapObject* mo = destination_.get(e); mo != nullptr && mo->descr().type() == MapObjectType::PINNED_NOTE) {
+	if (MapObject* mo = destination_.get(e);
+	    mo != nullptr && mo->descr().type() == MapObjectType::PINNED_NOTE) {
 		return dynamic_cast<PinnedNote*>(mo);
 	}
 	return nullptr;
 }
 
 const PortDock* Ship::get_destination_port(const EditorGameBase& e) const {
-	if (const MapObject* mo = destination_.get(e); mo != nullptr && mo->descr().type() == MapObjectType::PORTDOCK) {
+	if (const MapObject* mo = destination_.get(e);
+	    mo != nullptr && mo->descr().type() == MapObjectType::PORTDOCK) {
 		return dynamic_cast<const PortDock*>(mo);
 	}
 	return nullptr;
 }
 const Ship* Ship::get_destination_ship(const EditorGameBase& e) const {
-	if (const MapObject* mo = destination_.get(e); mo != nullptr && mo->descr().type() == MapObjectType::SHIP) {
+	if (const MapObject* mo = destination_.get(e);
+	    mo != nullptr && mo->descr().type() == MapObjectType::SHIP) {
 		return dynamic_cast<const Ship*>(mo);
 	}
 	return nullptr;
 }
 const PinnedNote* Ship::get_destination_note(const EditorGameBase& e) const {
-	if (const MapObject* mo = destination_.get(e); mo != nullptr && mo->descr().type() == MapObjectType::PINNED_NOTE) {
+	if (const MapObject* mo = destination_.get(e);
+	    mo != nullptr && mo->descr().type() == MapObjectType::PINNED_NOTE) {
 		return dynamic_cast<const PinnedNote*>(mo);
 	}
 	return nullptr;
 }
 
 void Ship::set_destination(EditorGameBase& egbase, MapObject* dest) {
-	assert(dest == nullptr || dest->descr().type() == MapObjectType::PORTDOCK || dest->descr().type() == MapObjectType::SHIP || dest->descr().type() == MapObjectType::PINNED_NOTE);
+	assert(dest == nullptr || dest->descr().type() == MapObjectType::PORTDOCK ||
+	       dest->descr().type() == MapObjectType::SHIP ||
+	       dest->descr().type() == MapObjectType::PINNED_NOTE);
 
 	destination_ = dest;
 
@@ -1845,16 +1858,17 @@ void Ship::draw(const EditorGameBase& egbase,
 						   format(pgettext("ship_state", "Sailing to %s"),
 						          dynamic_cast<const PinnedNote*>(dest)->get_text());
 					} else {
-						const std::string& wh_name = dynamic_cast<const PortDock*>(dest)->get_warehouse()->get_warehouse_name();
+						const std::string& wh_name =
+						   dynamic_cast<const PortDock*>(dest)->get_warehouse()->get_warehouse_name();
 						if (fleet_->get_schedule().is_busy(*this)) {
 							statistics_string =
 							   /** TRANSLATORS: This is a ship state. The ship is currently
-								* transporting wares to a specific destination port. */
+							    * transporting wares to a specific destination port. */
 							   format(pgettext("ship_state", "Shipping to %s"), wh_name);
 						} else {
 							statistics_string =
 							   /** TRANSLATORS: This is a ship state. The ship is currently sailing
-								* to a specific destination port without transporting wares. */
+							    * to a specific destination port without transporting wares. */
 							   format(pgettext("ship_state", "Sailing to %s"), wh_name);
 						}
 					}
@@ -1952,8 +1966,10 @@ void Ship::draw(const EditorGameBase& egbase,
 			for (unsigned row = 0; row < n_rows; ++row) {
 				const unsigned cols_in_row = (row + 1 < n_rows ? n_cols : last_row_cols);
 				for (unsigned col = 0; col < cols_in_row; ++col) {
-					Recti rect(draw_position.x + ((col - cols_in_row * 0.5f) * kBonusIconSize + 1.f) * scale, draw_position.y + (7.f + row * kBonusIconSize) * scale,
-							(kBonusIconSize - 2.f) * scale, (kBonusIconSize - 2.f) * scale);
+					Recti rect(
+					   draw_position.x + ((col - cols_in_row * 0.5f) * kBonusIconSize + 1.f) * scale,
+					   draw_position.y + (7.f + row * kBonusIconSize) * scale,
+					   (kBonusIconSize - 2.f) * scale, (kBonusIconSize - 2.f) * scale);
 					dst->fill_rect(rect, color);
 					dst->draw_rect(rect, complement_color);
 				}
@@ -2157,7 +2173,9 @@ void Ship::Loader::load_pointers() {
 	}
 	if (destination_ != 0u) {
 		MapObject& mo = mol().get<MapObject>(destination_);
-		assert(mo.descr().type() == MapObjectType::PORTDOCK || mo.descr().type() == MapObjectType::SHIP || mo.descr().type() == MapObjectType::PINNED_NOTE);
+		assert(mo.descr().type() == MapObjectType::PORTDOCK ||
+		       mo.descr().type() == MapObjectType::SHIP ||
+		       mo.descr().type() == MapObjectType::PINNED_NOTE);
 		ship.destination_ = &mo;
 	} else {
 		ship.destination_ = nullptr;
