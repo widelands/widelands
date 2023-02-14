@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -45,86 +45,86 @@ msgstr "Kääntäjät"
 msgid "Widelands Development Team"
 msgstr "Widelands-kehittäjät"
 
-#: ../../data/txts/LICENSE.lua:7
+#: ../../data/txts/LICENSE.lua:12
 msgid "Licensing information for Widelands"
 msgstr "Widelands-pelin lisenssi"
 
 #. TRANSLATORS: Placeholder is copyright end year
-#: ../../data/txts/LICENSE.lua:9
+#: ../../data/txts/LICENSE.lua:14
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr "Copyright 2002 - %1% Widelands-kehittäjätiimi."
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Tämä peli on vapaata ohjelmistoa (FOSS), lisenssinä GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:18
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Löydät lisätietoa vapaista FOSS ohjelmistoista ja GPL-lisenssistä osoitteesta: %s"
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Sieltä löydät linsenssitekstin sekä muuta tietoa vapaista ohjelmistoista."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "GPL-lisenssiteksti löytyy myös Widelands-paketista."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Linux-käyttöjärjerstelmässä teksti löytyy COPYING -nimisestä tiedostosta, joka puolestaan löytyy asennuspuun juurihakemistosta (usein ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Windows-käyttöjärjestelmässä lisenssi löytyy COPYING.txt -nimisestä tiedostosta. Asennushakemiston löydät Widelands Start -valikon avulla."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:25
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "MacOS:n alla lisenssiteksti löytyy COPYING -nimisestä tiedostosta, joka löytyy veppisivulta lataamastasi asennuspaketista."
 
-#: ../../data/txts/LICENSE.lua:22
+#: ../../data/txts/LICENSE.lua:27
 msgid "This game comes as-is and without any warranty."
 msgstr "Tämä peli tulee sellaisena kuin se on ja ilman minkäänlaista takuuta."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:28
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
 msgstr "Lisätietoa ja tukea voit etsiä ja saada osoitteesta %1% (Kotisivut, Wiki, Keskustelupalsta kysymyksille tai yleiselle tuelle), %2% (Bugiraportointijärjestelmä), ja %3% (Käännökset)."
 
-#: ../../data/txts/README.lua:8
+#: ../../data/txts/README.lua:9
 msgid "an open source strategy game"
 msgstr "Avoimen lähdekoodin strategiapeli"
 
-#: ../../data/txts/README.lua:10
+#: ../../data/txts/README.lua:11
 msgid "Check out the Widelands project homepage:"
 msgstr "Widelands-projektin kotisivut:"
 
-#: ../../data/txts/README.lua:11
+#: ../../data/txts/README.lua:12
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
 msgstr "Widelands jaetaan GNU General Public License (GPL) -lisenssillä. Lisätietoa tiedostossa ‘COPYING’."
 
-#: ../../data/txts/README.lua:12
+#: ../../data/txts/README.lua:13
 msgid "Status"
 msgstr "Tila"
 
-#: ../../data/txts/README.lua:13
+#: ../../data/txts/README.lua:14
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
 "more in multiplayer with others. Still, there is always more work to be done"
@@ -133,75 +133,75 @@ msgid ""
 " language or creating new maps – get in touch on our homepage."
 msgstr "Widelands on sangen toimiva peli, ja hauska erityisesti moninpelinä. Peliä voi kuitenkinkehittää edelleen. Jos haluat piirtää grafiikkaa, säveltää pelimusiikkia, tehdä uusia karttoja, ohjelmoida uusia ominaisuuksia tai parantaa käännöksiä -- tule kotisivullemme."
 
-#: ../../data/txts/README.lua:15
+#: ../../data/txts/README.lua:16
 msgid "Widelands Help"
 msgstr "Widelands-ohje"
 
 #. TRANSLATORS: %1% is a key on the keyboard
-#: ../../data/txts/README.lua:17
+#: ../../data/txts/README.lua:18
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
 msgstr "Saat apua pelaamiseen tai karttamuokkaimeen, kun napsautat \"help\" -painiketta tai painat %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
-#: ../../data/txts/README.lua:19
+#: ../../data/txts/README.lua:20
 msgid "F1"
 msgstr "F1"
 
-#: ../../data/txts/README.lua:22
+#: ../../data/txts/README.lua:23
 msgid "Reporting Bugs"
 msgstr "Vikaraportit"
 
-#: ../../data/txts/README.lua:23
+#: ../../data/txts/README.lua:24
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Jos törmäät bugiin, kerro siitä meidän bugiraportointijärjestelmällemme:"
 
-#: ../../data/txts/README.lua:25
+#: ../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
 msgstr "Toivomme sinun littävän raporttiin riittävät taustatiedot virheen paikantamiseksi. Kerro meille:"
 
-#: ../../data/txts/README.lua:27
+#: ../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
 msgstr "Yksityiskohtaiset ohjeet bugin liipaisemiseen, jos pystyt."
 
-#: ../../data/txts/README.lua:28
+#: ../../data/txts/README.lua:29
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "Mitä piti tapahtua ja mitä tapahtui."
 
-#: ../../data/txts/README.lua:29
+#: ../../data/txts/README.lua:30
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr "Mitä Widelandsin versiota käytät? (joko julkaisun tai kehitysversion numero)"
 
-#: ../../data/txts/README.lua:30
+#: ../../data/txts/README.lua:31
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
 msgstr "Kerro, mitä käyttöjärjestelmää käytät; jotkin bugit ovat alustariippuvaisia."
 
-#: ../../data/txts/README.lua:31
+#: ../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
 msgstr "Mitä karttaa pelasit kun ongelma ilmeni."
 
-#: ../../data/txts/README.lua:32
+#: ../../data/txts/README.lua:33
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
 msgstr "Jos bugi koskee jotain virheellisesti piirtyvää, liitä kuvaruutukaappauksia jos voit."
 
-#: ../../data/txts/README.lua:33
+#: ../../data/txts/README.lua:34
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
 msgstr "Voit liittää pelitallenteen, jos sellainen helpottaa ongelman toistamista."
 
-#: ../../data/txts/TRANSLATORS.lua:25
+#: ../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
 msgstr "Kääntäjät"
 
@@ -435,66 +435,66 @@ msgstr "Pienkartta päälle/pois"
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../data/txts/help/multiplayer_help.lua:7
+#: ../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
 msgstr "Moninpeliasetukset"
 
-#: ../../data/txts/help/multiplayer_help.lua:8
+#: ../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
 msgstr "Olet moninpelin käynnistysvalikossa."
 
-#: ../../data/txts/help/multiplayer_help.lua:10
+#: ../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
 msgstr "Asiakasasetukset"
 
-#: ../../data/txts/help/multiplayer_help.lua:11
+#: ../../data/txts/help/multiplayer_help.lua:12
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
 msgstr "Vasemmalla ovat kaikki asiakkaat, myös sinä. Voit valita roolisi nimimerkkisi vieressä olevalla painikkeella. Vaihtoehdot ovat:"
 
-#: ../../data/txts/help/multiplayer_help.lua:12
+#: ../../data/txts/help/multiplayer_help.lua:13
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr "Pelaaja, jonka väri vastaa lipun väriä. Jos useampi asiakas valitsee saman värin, nämä asiakkaat jakavat pelaajan hallinnan (\"jaettu valtakunta -tila\")."
 
-#: ../../data/txts/help/multiplayer_help.lua:13
+#: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
 msgstr "Sivustakatsojatilassa näet kaiken, mutta et voi hallita mitään pelaajaa"
 
-#: ../../data/txts/help/multiplayer_help.lua:15
+#: ../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
 msgstr "Pelaaja-asetukset"
 
-#: ../../data/txts/help/multiplayer_help.lua:16
+#: ../../data/txts/help/multiplayer_help.lua:17
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
 msgstr "Keskellä ovat pelaajien asetukset. Ennen kuin peli voi alkaa, jokisen pelaajan täyyy olla yksi seuraavista:"
 
-#: ../../data/txts/help/multiplayer_help.lua:17
+#: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
 msgstr "Liitetty yhteen tai useampaan asiakkaaseen (katso \"Asiakasasetukset\")."
 
-#: ../../data/txts/help/multiplayer_help.lua:18
+#: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
 msgstr "Liitetty tietokoneen hallitsemaan pelaajaan. Pelaajan vaikeustaso näkyy kuvan naamasta sekä hiiren ollessa valitun pelaajan päällä."
 
-#: ../../data/txts/help/multiplayer_help.lua:19
+#: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
 msgstr "Aseta jaetuksi aloituspaikaksi toisen pelaajan kanssa."
 
-#: ../../data/txts/help/multiplayer_help.lua:20
+#: ../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
 msgstr "Suljettu."
 
-#: ../../data/txts/help/multiplayer_help.lua:21
+#: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
@@ -502,17 +502,17 @@ msgid ""
 "with) and the tribe and team for computer players."
 msgstr "Vain peliä isännöivä taho voi säätää kolmea jälkimmäistä asetusta klikkaamalla pelaajan ‘Tyyppi’ painiketta. Isännöivät palaajat voivat myös asettaa jokaisen pelaajan alkuasetelman (rakennukset, tuotteet ja työntekijät, joilla pelaaja aloittaa) ja heimon sekä joukkueen tekoälypelaajille."
 
-#: ../../data/txts/help/multiplayer_help.lua:22
+#: ../../data/txts/help/multiplayer_help.lua:23
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
 msgstr "Jokainen pelaajaan liitetty asiakas (joka ei ole sivustakatsoja) voi asettaa oman pelaajan heimon ja joukkueen."
 
-#: ../../data/txts/help/multiplayer_help.lua:24
+#: ../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
 msgstr "Kartan tiedot"
 
-#: ../../data/txts/help/multiplayer_help.lua:25
+#: ../../data/txts/help/multiplayer_help.lua:26
 msgid ""
 "You can see information about the selected map or savegame on the right-hand"
 " side. A button next to the map name allows the host to change to a "

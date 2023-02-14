@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
@@ -43,86 +43,86 @@ msgstr "Překladatelé"
 msgid "Widelands Development Team"
 msgstr "Vývojový tým Widelands"
 
-#: ../../data/txts/LICENSE.lua:7
+#: ../../data/txts/LICENSE.lua:12
 msgid "Licensing information for Widelands"
 msgstr "Licenční informace pro Widelands"
 
 #. TRANSLATORS: Placeholder is copyright end year
-#: ../../data/txts/LICENSE.lua:9
+#: ../../data/txts/LICENSE.lua:14
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr "Copyright 2002 - %1% Widelands Development Team."
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Tato hra je svobodným a otevřeným softwarem (FOSS), registrovaným pod GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:18
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Více informací o FOSS a GPL je k dispozici na následujících stránkách: %s"
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Najdeš tam úplný text licence i další informace o filozofii a právních záležitostech."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Dále připojujeme GPL jako textový dokument i k Widelands."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "V Linuxu lze soubor COPYING najít v hlavním adresáři zdrojového kódu nebo samostatného binárního balíčku, nebo v instalačním adresáři (např. ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Ve Windows lze soubor COPYING.txt najít v instalačním adresáři a v položce Widelands v nabídce Start je odkaz na tento soubor."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:25
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "V případě Mac OS X lze najít soubor COPYING v archivu staženém z internetové stránky."
 
-#: ../../data/txts/LICENSE.lua:22
+#: ../../data/txts/LICENSE.lua:27
 msgid "This game comes as-is and without any warranty."
 msgstr "Hra je vydávána jak-je a bez jakékoliv záruky."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:28
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
 msgstr "Pro více informací a podporu lze navštívit stránky %1% (Stránky, Wiki, Fórum na dotazy nebo obecnou podporu), %2% (Hlášení chyb) a %3% (Překlady)."
 
-#: ../../data/txts/README.lua:8
+#: ../../data/txts/README.lua:9
 msgid "an open source strategy game"
 msgstr "strategická hra s otevřenými zdrojovými kódy"
 
-#: ../../data/txts/README.lua:10
+#: ../../data/txts/README.lua:11
 msgid "Check out the Widelands project homepage:"
 msgstr "Navštiv domovskou stránku projektu Widelands:"
 
-#: ../../data/txts/README.lua:11
+#: ../../data/txts/README.lua:12
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
 msgstr "Hra Widelands je registrována pod GNU General Public License (GPL). Více informací lze získat v souboru \"COPYING\"."
 
-#: ../../data/txts/README.lua:12
+#: ../../data/txts/README.lua:13
 msgid "Status"
 msgstr "Stav"
 
-#: ../../data/txts/README.lua:13
+#: ../../data/txts/README.lua:14
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
 "more in multiplayer with others. Still, there is always more work to be done"
@@ -131,75 +131,75 @@ msgid ""
 " language or creating new maps – get in touch on our homepage."
 msgstr "Hra Widelands je po stránce herních funkcí téměř dokončena a nabízí pobavení jak pro osamocené hráče, tak pro více hráčů ve společné hře. Přesto je po všech stránkách stále v procesu vývoje, na kterém se podílí její příznivci vytvářením nové grafiky, hledáním chyb, přidáváním nových funkcí, překladem do různých jazyků a vytvářením map. Pokud budeš chtít také přispět k jejímu vývoji, můžeš navštívit naši domovskou stránku."
 
-#: ../../data/txts/README.lua:15
+#: ../../data/txts/README.lua:16
 msgid "Widelands Help"
 msgstr "Nápověda hry Widelands"
 
 #. TRANSLATORS: %1% is a key on the keyboard
-#: ../../data/txts/README.lua:17
+#: ../../data/txts/README.lua:18
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
 msgstr "Nápovědu ke hře nebo editoru zobrazíš tlačítkem nápovědy umístěným v nabídce na spodní straně obrazovky nebo stiskem %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
-#: ../../data/txts/README.lua:19
+#: ../../data/txts/README.lua:20
 msgid "F1"
 msgstr "F1"
 
-#: ../../data/txts/README.lua:22
+#: ../../data/txts/README.lua:23
 msgid "Reporting Bugs"
 msgstr "Hlášení chyb"
 
-#: ../../data/txts/README.lua:23
+#: ../../data/txts/README.lua:24
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Pokud narazíš na chybu, zapiš ji prosím na náš seznam zaznamenaných chyb:"
 
-#: ../../data/txts/README.lua:25
+#: ../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
 msgstr "Prosím specifikuj dostatek souvisejících informací. Zejména:"
 
-#: ../../data/txts/README.lua:27
+#: ../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
 msgstr "Podrobný postup jak chybu vyvolat, je-li to možné."
 
-#: ../../data/txts/README.lua:28
+#: ../../data/txts/README.lua:29
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "Co mělo být očekávanou odezvou na provedenou akci a co se ve skutečnosti stalo."
 
-#: ../../data/txts/README.lua:29
+#: ../../data/txts/README.lua:30
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr "Kterou verzi Widelands používáš (tj. buď pořadové číslo aktualizace nebo ověřovací ID, pokud používáš vývojovou verzi nebo denní aktualizaci)."
 
-#: ../../data/txts/README.lua:30
+#: ../../data/txts/README.lua:31
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
 msgstr "Poskytni prosím také informaci, na jakém operačním systému je Widelands spuštěn, protože některé chyby mohou být specifické pro daný systém."
 
-#: ../../data/txts/README.lua:31
+#: ../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
 msgstr "Při hraní které mapy se chyba objevila."
 
-#: ../../data/txts/README.lua:32
+#: ../../data/txts/README.lua:33
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
 msgstr "Pokud se chyba týká vadného zobrazení nebo to pomůže k jejímu lepšímu pochopení, přilož prosím jeden či více printscreenů."
 
-#: ../../data/txts/README.lua:33
+#: ../../data/txts/README.lua:34
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
 msgstr "Pokud máš k dispozici uloženou hru nebo záznam, na kterých lze problém ukázat (může jít například o pád hry, kdy nevíme, co ho působí), můžeš je přiložit také. Pro více informací se prosím podívej do sekce záznamů níže."
 
-#: ../../data/txts/TRANSLATORS.lua:25
+#: ../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
 msgstr "Widelands překladatelé"
 
@@ -433,66 +433,66 @@ msgstr "Přepnout zobrazení minimapy"
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../data/txts/help/multiplayer_help.lua:7
+#: ../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
 msgstr "Nastavení hry více hráčů"
 
-#: ../../data/txts/help/multiplayer_help.lua:8
+#: ../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
 msgstr "Jsi v menu spuštění hry více hráčů."
 
-#: ../../data/txts/help/multiplayer_help.lua:10
+#: ../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
 msgstr "Nastavení klienta"
 
-#: ../../data/txts/help/multiplayer_help.lua:11
+#: ../../data/txts/help/multiplayer_help.lua:12
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
 msgstr "Vlevo je seznam všech klientů včetně tebe. Můžeš nastavit svou roli tlačítkem vedle tvé přezdívky. Dostupné role jsou:"
 
-#: ../../data/txts/help/multiplayer_help.lua:12
+#: ../../data/txts/help/multiplayer_help.lua:13
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr "Hráč a barva jeho vlajky. Pokud si více hráčů zvolí stejnou barvu, sdílí společně ovládání (\"mód sdíleného království\")."
 
-#: ../../data/txts/help/multiplayer_help.lua:13
+#: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
 msgstr "Mód diváka znamená, že vidíš vše, ale nemůžeš ovládat žádného hráče"
 
-#: ../../data/txts/help/multiplayer_help.lua:15
+#: ../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
 msgstr "Nastavení hráče"
 
-#: ../../data/txts/help/multiplayer_help.lua:16
+#: ../../data/txts/help/multiplayer_help.lua:17
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
 msgstr "Uprostřed se nachází nastavení typu hráče. Aby mohla být hra zahájena, každý z hráčů musí mít nastavenu jednu z možností:"
 
-#: ../../data/txts/help/multiplayer_help.lua:17
+#: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
 msgstr "Připojeno k jednomu nebo více klientům (viz. \"Nastavení klientů\")."
 
-#: ../../data/txts/help/multiplayer_help.lua:18
+#: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
 msgstr "Připojeno k počítačovému hráči (obličej na obrázku stejně jako text při najetí kurzoru myši, vyjadřují sílu aktuálně vybraného počítačového hráče)."
 
-#: ../../data/txts/help/multiplayer_help.lua:19
+#: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
 msgstr "Nastaveno jako sdílená počáteční pozice s jiným hráčem."
 
-#: ../../data/txts/help/multiplayer_help.lua:20
+#: ../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
 msgstr "Zavřeno."
 
-#: ../../data/txts/help/multiplayer_help.lua:21
+#: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
@@ -500,17 +500,17 @@ msgid ""
 "with) and the tribe and team for computer players."
 msgstr "Jednu z posledních tří možností může nastavit pouze hostitel, kliknutím na tlačítko \"Typ\" u každého z hráčů. Hostitel může také nastavovat startovní podmínky u všech hráčů (budovy, zboží a pracovníky, které hráči na začátku hry dostanou) a u počítačových hráčů navíc i kmen a tým ."
 
-#: ../../data/txts/help/multiplayer_help.lua:22
+#: ../../data/txts/help/multiplayer_help.lua:23
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
 msgstr "Každý klient připojený k hráči (který není divák), může pro zvoleného hráče nastavit kmen a tým."
 
-#: ../../data/txts/help/multiplayer_help.lua:24
+#: ../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
 msgstr "Podrobnosti mapy"
 
-#: ../../data/txts/help/multiplayer_help.lua:25
+#: ../../data/txts/help/multiplayer_help.lua:26
 msgid ""
 "You can see information about the selected map or savegame on the right-hand"
 " side. A button next to the map name allows the host to change to a "
