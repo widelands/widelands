@@ -1806,7 +1806,7 @@ wl.Descriptions():new_tribe {
                pgettext("empire_building", "Carves marble and granite out of the rock in mountain terrain.")
             },
             -- TRANSLATORS: Performance helptext for an empire production site: Marble Mine
-            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce marble in %s and granite in %s on average."):bformat(format_seconds(19), format_seconds(19))
+            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce marble in %s and granite in %s on average."):bformat(format_seconds(37), format_seconds(37))
          }
       },
       {
@@ -1829,7 +1829,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an empire production site: Deep Marble Mine
             purpose = pgettext("empire_building", "Carves marble and granite out of the rock in mountain terrain."),
             -- TRANSLATORS: Performance helptext for an empire production site: Deep Marble Mine
-            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce marble in %s and granite in %s on average."):bformat(format_seconds(19), format_seconds(19))
+            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce marble in %s and granite in %s on average."):bformat(format_seconds(32), format_seconds(46))
          }
       },
       {

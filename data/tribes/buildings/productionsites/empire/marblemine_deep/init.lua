@@ -51,7 +51,7 @@ wl.Descriptions():new_productionsite_type {
          descname = _("mining marble"),
          actions = {
             -- "return=skipped" causes 10 sec delay
-            -- time total: 28 + 5 * (7.8 + 3.6) + 10 = 95 sec
+            -- time total: 29 + 5 * (7.8 + 3.6) + 10 = 96 sec
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=meal wine",
             "sleep=duration:29s",
