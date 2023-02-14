@@ -916,6 +916,19 @@ void Ship::start_battle(Game& game, const Battle new_battle) {
 	}
 }
 
+/** Onboard soldiers add a bonus onto the base attack strength, expressed in percent. */
+unsigned Ship::get_sea_attack_soldier_bonus(const EditorGameBase& egbase) const {
+	unsigned attack_bonus = 0;
+	for (const ShippingItem& si : items_) {
+		Worker* worker;
+		si.get(egbase, nullptr, &worker);
+		if (worker != nullptr && worker->descr().type() == MapObjectType::SOLDIER) {
+			attack_bonus += dynamic_cast<Soldier*>(worker)->get_total_level() + 1;
+		}
+	}
+	return attack_bonus;
+}
+
 constexpr uint8_t kPortUnderAttackDefendersSearchRadius = 10;
 constexpr uint32_t kAttackAnimationDuration = 2000;
 
@@ -953,6 +966,9 @@ void Ship::battle_update(Game& game) {
 			uint32_t attack_strength =
 			   (game.logic_rand() % (descr().max_attack_ - descr().min_attack_));
 			attack_strength += descr().min_attack_;
+
+			attack_strength += attack_strength * get_sea_attack_soldier_bonus(game) / 100;
+
 			current_battle.pending_damage =
 			   attack_strength * (100 - target_ship->descr().defense_) / 100;
 		} else {  // Miss
@@ -1780,7 +1796,7 @@ void Ship::sink_ship(Game& game) {
 	ship_wakeup(game);
 }
 
-constexpr int kShipHealthBarWidth = 13 * 2;
+constexpr int kShipHealthBarWidth = 30;
 
 void Ship::draw(const EditorGameBase& egbase,
                 const InfoToDraw& info_to_draw,
@@ -1917,6 +1933,32 @@ void Ship::draw(const EditorGameBase& egbase,
 		   color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
 		dst->fill_rect(energy_inner, color);
 		dst->fill_rect(energy_complement, complement_color);
+
+		// Now soldier strength bonus indicators
+		constexpr unsigned kBonusIconSize = 6;
+		constexpr unsigned kMaxRows = 16;
+		const unsigned bonus = get_sea_attack_soldier_bonus(egbase);
+		if (bonus > 0) {
+			unsigned n_cols = std::min(2 * kShipHealthBarWidth / kBonusIconSize, bonus);
+			unsigned n_rows = std::min(kMaxRows - 1, bonus / n_cols);
+			if (n_cols * n_rows < bonus) {
+				++n_rows;
+			}
+			while (n_cols * n_rows < bonus) {
+				++n_cols;
+			}
+			const unsigned last_row_cols = n_cols - (n_cols * n_rows - bonus);
+
+			for (unsigned row = 0; row < n_rows; ++row) {
+				const unsigned cols_in_row = (row + 1 < n_rows ? n_cols : last_row_cols);
+				for (unsigned col = 0; col < cols_in_row; ++col) {
+					Recti rect(draw_position.x + ((col - cols_in_row * 0.5f) * kBonusIconSize + 1.f) * scale, draw_position.y + (7.f + row * kBonusIconSize) * scale,
+							(kBonusIconSize - 2.f) * scale, (kBonusIconSize - 2.f) * scale);
+					dst->fill_rect(rect, color);
+					dst->draw_rect(rect, complement_color);
+				}
+			}
+		}
 	}
 }
 
