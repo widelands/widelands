@@ -612,8 +612,9 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			update_warship_soldier_request(game);
 
 			start_task_idle(game, descr().main_animation(), 250);
+
 			return true;
-		} break;
+		}
 
 		case MapObjectType::SHIP:
 		case MapObjectType::PINNED_NOTE: {
@@ -647,8 +648,9 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 				truncated.append(*map, path[i]);
 			}
 			start_task_movepath(game, truncated, descr().get_sail_anims());
+
 			return true;
-		} break;
+		}
 
 		default:
 			NEVER_HERE();
@@ -1991,16 +1993,16 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	                lastdock_.get(egbase)->get_positions(egbase)[0].y)
 	            .c_str() :
             "-");
-	if (const PortDock* dest = get_destination_port(egbase); dest != nullptr) {
-		molog(egbase.get_gametime(), "Has destination port %u (%3dx%3d) %s\n", dest->serial(),
-		      dest->get_positions(egbase)[0].x, dest->get_positions(egbase)[0].y,
-		      dest->get_warehouse()->get_warehouse_name().c_str());
-	} else if (const Ship* dest = get_destination_ship(egbase); dest != nullptr) {
-		molog(egbase.get_gametime(), "Has destination ship %u (%3dx%3d) %s\n", dest->serial(),
-		      dest->get_position().x, dest->get_position().y, dest->get_shipname().c_str());
-	} else if (const PinnedNote* dest = get_destination_note(egbase); dest != nullptr) {
-		molog(egbase.get_gametime(), "Has destination note %u (%3dx%3d) %s\n", dest->serial(),
-		      dest->get_position().x, dest->get_position().y, dest->get_text().c_str());
+	if (const PortDock* dock = get_destination_port(egbase); dock != nullptr) {
+		molog(egbase.get_gametime(), "Has destination port %u (%3dx%3d) %s\n", dock->serial(),
+		      dock->get_positions(egbase)[0].x, dock->get_positions(egbase)[0].y,
+		      dock->get_warehouse()->get_warehouse_name().c_str());
+	} else if (const Ship* ship = get_destination_ship(egbase); ship != nullptr) {
+		molog(egbase.get_gametime(), "Has destination ship %u (%3dx%3d) %s\n", ship->serial(),
+		      ship->get_position().x, ship->get_position().y, ship->get_shipname().c_str());
+	} else if (const PinnedNote* note = get_destination_note(egbase); note != nullptr) {
+		molog(egbase.get_gametime(), "Has destination note %u (%3dx%3d) %s\n", note->serial(),
+		      note->get_position().x, note->get_position().y, note->get_text().c_str());
 	} else {
 		molog(egbase.get_gametime(), "No destination\n");
 	}
