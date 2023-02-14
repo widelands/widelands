@@ -1987,6 +1987,27 @@ std::string Player::pick_warehousename(bool port) {
 }
 
 /**
+ * Remove name from remaining names (if present)
+ */
+void Player::reserve_shipname(const std::string& name) {
+	for (auto it = remaining_shipnames_.begin(); it != remaining_shipnames_.end(); ++it) {
+		if (*it == name) {
+			remaining_shipnames_.erase(it);
+			return;
+		}
+	}
+}
+
+void Player::reserve_warehousename(const std::string& name) {
+	for (auto it = remaining_warehousenames_.begin(); it != remaining_warehousenames_.end(); ++it) {
+		if (*it == name) {
+			remaining_warehousenames_.erase(it);
+			return;
+		}
+	}
+}
+
+/**
  * Read remaining ship names from the given file
  *
  * \param fr source stream
