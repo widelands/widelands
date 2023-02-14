@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: ks k, 2018,2020\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -20,12 +20,12 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:12
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:14
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:56
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:60
 msgid "The Forbidden Island"
 msgstr "금단의 섬"
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:15
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:57
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:61
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -64,20 +64,20 @@ msgstr "조모를 물리치기"
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
 msgstr "조모를 물리치십시오. 그는 군인들의 식량 공급을 돌보고 있습니다."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:52
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:56
 msgid "First Briefing"
 msgstr "첫번째 보고"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:62
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:73
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:66
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
 msgid "Second Briefing"
 msgstr "두번째 보고"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:66
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:70
 msgid "An Ancient Castle"
 msgstr "고대의 성"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:67
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:71
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
@@ -85,7 +85,7 @@ msgid ""
 "craft."
 msgstr "오 신이시여! 우리의 정찰대 중 한 명이 오래된 고원의 중심에 있는 거대한 성을 발견했습니다. 그 성은 꽤 오래되었고 외국식으로 지어진 것 같습니다. 이것이 야만인의 기술이 아니라는 것은 꽤 명백합니다."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:68
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:72
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
@@ -93,17 +93,17 @@ msgid ""
 "we capture it. It will be the key to our reign over this island!"
 msgstr "– 그 성을 지배하고 있는 군벌인 – 라니싸가 아직 우리의 움직임을 발견하지 못하길 바랍니다. 어쩌면 더 큰 싸움 없이 저 거대한 건물을 정복할 기회가 있을지도 모릅니다! 하지만, 우리가 그것을 반드시 함락해야만 합니다. 그것은 이 섬을 지배하는 우리의 통치의 열쇠가 될 것입니다!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:81
 msgid "Ancient Castle Captured"
 msgstr "고대 성이 함락되었습니다"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:78
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:82
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
 msgstr "훌륭합니다! 우리 군대는 마침내 라니싸와 그녀의 군인들을 물리쳤습니다. 그 고대의 성은 우리의 것입니다!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:79
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:83
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -116,46 +116,46 @@ msgid ""
 "care of those infrastructures so we can cut off our enemies’ food supply."
 msgstr "그 성의 가장 높은 탑에서 얼마나 멀리까지 볼 수 있는지 놀랍습니다. 우리는 섬 전체를 볼 수 있습니다. 그래서 이제 나는 라니싸가 왜 우리를 보지 못하고 준비하지 않았는지 궁금합니다. 그렇게 되더라도, 어떤 일들은 결코 빛을 발하지 못할 것입니다. 현재 유일하게 중요한 문제는 적군이 여전히 남아 있다는 것입니다. 우리는 성의 북쪽과 동쪽에서 에르윈이 자리잡은 적의 위치를 발견했습니다. 그는 강력한 군벌로 알려져 있으며, 확실히 가장 강한 전사들을 지휘하고있습니다. 남쪽에서는 젊은 군벌인 조모가 지키고 있는 식량 기반 시설이 눈에 띄었습니다. 그리고 우리는 적의 식량 공급을 차단할 수 있도록 그러한 기반 시설을 관리해야 합니다."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:84
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:88
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:97
 msgid "Another Briefing"
 msgstr "또 다른 보고"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:88
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:92
 msgid "Erwyn Defeated"
 msgstr "에르윈 패배"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:89
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
 " less strong warlord on this island!"
 msgstr "대단합니다! 에르윈은 마지막 건물이 불타는 것을 보고 포기했습니다. 그것은이 섬에서 덜 강력한 군벌이 되었습니다!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:97
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:101
 msgid "Jomo Defeated"
 msgstr "조모 패배"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:98
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
 msgstr "대단합니다! 조모는 그의 마지막 건물들이 불타는 것을 보고 포기했습니다. 이 섬에서 군벌은 한 명으로 줄었습니다!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:106
 msgid "Last Briefing"
 msgstr "최종 보고"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:106
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:110
 msgid "Victory!"
 msgstr "승리!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:107
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:111
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
 msgstr "드디어! 이 섬은 완전히 우리 것입니다. 이제 우리는 군벌들보다 더 잘 방어해야 합니다."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:108
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:112
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

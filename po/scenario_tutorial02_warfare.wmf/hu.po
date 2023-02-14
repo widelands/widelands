@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-07 02:53+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -25,15 +25,15 @@ msgstr ""
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:26
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:21
 msgid "Introduction"
 msgstr "Bevezetés"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:28
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:23
 msgid "Soldiers, Training and Warfare"
 msgstr "Katonák, fejlesztés és háború"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:29
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:24
 msgid ""
 "In this scenario, I’m going to tell you about soldiers, their training and "
 "their profession: warfare. Although Widelands is about building up, not "
@@ -42,18 +42,18 @@ msgid ""
 "deserve explanation."
 msgstr "Ebben a küldetésben a katonákról fogok mesélni, a kiképzésükről és a szakmájukról: a hadviselésről. Bár a Widelands az építkezésről szól, nem a rombolásról, van egy ellenség, amelyet néha le kell győznöd. Viszont a hadviselés főleg a gazdaságra épül, nem a katonai stratégiára, és a működése magyarázatot igényel."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:30
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:25
 msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
 msgstr "Készítettem neked egy kis falut, ami tartalmazza a legfontosabb épületeket. Van elég árukészleted is, hogy ne kelljen foglalkoznod a fegyverek készítésével. Egy igazi játékban nem lesz ilyen jó dolgod."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:32
 msgid "Soldiers’ abilities"
 msgstr "Katonák képességei"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:34
 msgid ""
 "New soldiers are created differently from normal workers: recruits will walk"
 " from a warehouse (or your headquarters) to the barracks where they will "
@@ -61,7 +61,7 @@ msgid ""
 " not use armor, they only need an ax."
 msgstr "Az új katonák a dolgozóktól eltérően készülnek: az újoncok a raktárból (vagy a főhadiszállásról) a laktanyába mennek, ahol az alapkiképzés után katonákká válnak. Az alapszintű barbár katonáknak nincs páncélja, csak egy fejszére van szükségük."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
 "Take a look at the soldiers that are on their way to our military buildings."
 " They look different from normal workers: they have a health bar over their "
@@ -71,30 +71,30 @@ msgid ""
 msgstr "Nézd meg a katonákat, akik úton vannak a katonai épületekbe. Különböznek a dolgozóktól: a fejük fölött egy életerősáv van, ami a megmaradt életerejüket mutatja, afölött pedig négy szimbólum mutatja az adott katona fejlettségi szintjét négy különböző kategóriában: Életerő, Támadás, Védelem és Kitérés"
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
 msgstr "Egy teljesen felfejlesztett barbár katona Életerő szintje %1%, Támadás szintje %2%, Védelem szintje %3%, és a Kitérés szintje %4%. Ez így egy igazán félelmetes harcos! Az egyes képességek jelentése a következő:"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:38
 msgid "Health:"
 msgstr "Életerő:"
 
 #. TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
 msgstr "Egy katona teljes életereje. A barbár katonák %1% életerővel kezdenek, és minden szinten %2% további életerőt kapnak."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:41
 msgid "Attack:"
 msgstr "Támadás:"
 
 #. TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:48
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
 msgid ""
 "The amount of damage a soldier will inflict on the enemy when an attack is "
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
@@ -102,13 +102,13 @@ msgid ""
 "he gains %2% damage points."
 msgstr "A sérülés mértéke, melyet a katona egy sikeres támadás esetén okoz az ellenségnek. Egy 0. támadásszintű barbár katona kb. %1% életerőpontnyi sérülést okoz, ha találatot mér az ellenfelére. Minden támadásszinttel további %2% életerőponttal nő az okozott sérülés."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
 msgid "Defense:"
 msgstr "Védelem:"
 
 #. TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:48
 msgid ""
 "The defense is the percentage that is subtracted from the attack value. The "
 "Barbarians cannot train in this skill and therefore have always defense "
@@ -117,35 +117,35 @@ msgid ""
 "Barbarian will lose 3500·%2%%% = %3% health."
 msgstr "A védelem az a százalék érték, amennyivel csökken a kapott találatok által okozott sérülés. A barbároknak nem fejleszthető ez a képessége, így a védelmi szintjük mindig 0, ami azt jelenti, hogy a sérülés mindig %1%%%-kal alacsonyabb az ellenség támadásértékénél. Pl. ha egy 3500 támadásértékű ellenség találatot mér egy barbár katonára, akkor a barbár 3500·%2%%% = %3% életerőpontot veszít."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:54
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"
 msgstr "Kitérés:"
 
 #. TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:52
 msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
 msgstr "A kitérés annak a valószínűségét jelenti, hogy a katona ki tud térni egy támadás elől. Egy 0. szintű barbárnak %1%%% esélye van elkerülni egy támadást, ami %2%%%-os lépésekben nő minden kitérési szinttel."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:79
 msgid "The Battle Arena"
 msgstr "A Harci Aréna"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:64
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:59
 msgid "Now I have talked about training and levels. Let me elaborate on that."
 msgstr "Most, hogy beszéltem a kiképzésről és a szintekről, hadd fejtsem ki bővebben!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:65
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
 msgstr "Egy újonnan toborzott katonának nincs tapasztalata, és nem harcol valami jól. Hogy erősebbé tedd, építs kiképzőhelyeket."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:66
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
@@ -153,135 +153,135 @@ msgid ""
 "a real game, you should have a good infrastructure before you build it."
 msgstr "Ezeknek a kiképzőhelyeknek az egyike a harci aréna. Ez egy nagy és drága épület, ami a katonák kitérését fejleszti. Mivel a katonák igencsak megéheznek kiképzés közben, ennek az épületnek sok élelmiszerre és erős sörre van szüksége. Éles játékban jó infrastruktúrával kell rendelkezned, mielőtt megépíted."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 msgid "To see evade training in action, build a battle arena."
 msgstr "Hogy lásd a kitérés fejlesztését élőben, építs egy harci arénát!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:68
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
 "While we’re waiting for the battle arena, you’ll probably notice some "
 "soldiers walking around. They are automatically exchanged from time to time."
 " I’ll teach you about that later."
 msgstr "Amíg arra várunk, hogy elkészüljön a harci aréna, valószínűleg feltűnt neked néhány, a környékén mászkáló katona. Ők időről időre automatikusan kicserélődnek. Erről is tanítalak majd később."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "Battle Arena"
 msgstr "Harci aréna"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "Build a battle arena"
 msgstr "Építs egy harci arénát!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
 msgid "Build a battle arena. It is a big building."
 msgstr "Építs egy harci arénát! Ez egy nagy épület."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using %1$s and %2$s."
 msgstr "Az építkezés el fog tartani egy ideig, úgyhogy akár meg is változtathatod a játék sebességét a %1$s és %2$s billentyűkkel."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:81
 msgid "The Battle Arena Has Been Constructed"
 msgstr "A Harci Aréna Megépült"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:82
 msgid ""
 "Very good. Our battle arena has been finished, and the soldiers are already "
 "walking towards it."
 msgstr "Nagyon jó. A harci arénánk elkészült és a katonák már masíroznak is felé."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
 msgstr "A szükséges árukat is szállítják már. A sikeres kiképzéshez erős sörre, pitára és halra vagy húsra van szükség."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:90
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:85
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
 msgstr "Ha érdekelnek további információk, nézd meg az épület súgóját, amit az épületablakban a kérdőjelre kattintva érhetsz el."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
 msgstr "Azt, hogy a katonáid milyen szintre jutottak el a kiképzésben, az ikonjaikon látod. Piros pontok jelzik a szinteket:"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
 msgstr "Ha nincs piros pont, akkor a katona nincs fejlesztve, a szintje 0. Minden új katona ilyen."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:88
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
 msgstr "Egy katona minden sikeres kiképzési lépéssel tovább erősödik. Ezt egy piros pont jelöli. Ennek a katonának a kitérési szintje 1."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:94
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
 msgstr "Ha egy katona elérte a lehető legmagasabb szintet (ebben az esetben a 2.-t), azt az ikon fehér háttere jelzi."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:100
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:95
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:115
 msgid "The Training Camp"
 msgstr "A kiképzőtábor"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:98
 msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
 msgstr "Van egy második kiképzőhely: a kiképzőtábor. Ez szintén egy nagy épület és hogy kiegészítse a harci arénát, a támadást és az életerőt fejleszti (ne feledd, a barbár katonáknak nem lehet fejleszteni a védelmét)."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:104
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:114
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid "Build a training camp."
 msgstr "Építs egy kiképzőtábort!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "Training Camp"
 msgstr "Kiképzőtábor"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:112
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid "Build a training camp"
 msgstr "Építs egy kiképzőtábort!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:113
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
 msgstr "A harci aréna csak a katonák kitérését fejleszti. Ahhoz, hogy a lehető legerősebb katonáid legyenek, egy kiképzőtábor építésére is szükséged lesz, ami fejleszti a támadásukat és az életerejüket."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:122
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:117
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
 msgstr "Nagyszerű, elkészült a kiképzőtáborunk is. Most már semmi sem állíthat meg abban, hogy a világ legerősebb katonáit képezzük ki!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:123
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:118
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
 msgstr "Ahhoz, hogy fejleszthesd őket a kiképzőtáborban, katonáiknak szüksége van élelmiszerre, mint a harci arénában, de erős sörre nincs. Helyette különböző fejszékre van szükségük a támadás fejlesztéséhez és sisakokra az életerő fejlesztéséhez."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:124
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
 msgstr "Ez a felszerelés a kovácsműhelyekben készül szénből, vasból és néha aranyból. Erről a barbár hadjárat második küldetésében fogsz többet tanulni."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:125
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
 msgid ""
 "You should also keep in mind that each of the tribes in Widelands has its "
 "own way of training, so the buildings and wares are different. Also, the "
@@ -290,127 +290,127 @@ msgid ""
 "attack of %2%."
 msgstr "Ne feledd, hogy a Widelandsben a különböző törzseknek mind saját kiképzési módszere van, ezért az épületek és a felhasznált áruk különböznek. Ezen kívül a képességek szintjei is különböznek: egy birodalmi katona 0. szintű támadási értéke %1%, míg egy barbáré ugyanezen a szinten csak %2%."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:138
 msgid "Scout’s Hut"
 msgstr "Felderítő kunyhója"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
 msgid "Explore Your Surroundings"
 msgstr "Fedezd fel a környéket!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
 msgid ""
 "Large parts of the map haven’t been explored yet. It might be a good idea to"
 " know which direction is best for expanding our empire."
 msgstr "A térkép nagy része nincs még felfedezve. Nem árt tudni, hogy melyik irányba érdemes terjeszkednie a birodalmunknak."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
 msgstr "Hagyatkozhatsz a szerencsére és terjeszkedhetsz találomra is, de ez veszélyes lehet. Biztonságosabb, ha egy felderítőt küldesz ki, hogy felfedezze a térkép eddig ismeretlen részeit. Hátha talál egy arannyal teli hegységet…"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 msgid "We will need a scout’s hut to start exploring. It is a small building."
 msgstr "Szükségünk lesz egy felderítő kunyhóra, hogy elkezdhessük a felfedezést. Ez egy kis épület."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid "Build a scout’s hut."
 msgstr "Építs egy felderítő kunyhót!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:140
 msgid "Build a scout’s hut"
 msgstr "Építs egy felderítő kunyhót!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
 msgid ""
 "It’s good to know your surroundings. A scout will explore unseen parts of "
 "the map for you."
 msgstr "Soha nem árt ismerni a környékedet. A felderítő átkutatja a térkép eddig ismeretlen részét a számodra."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:142
 msgid "Build a Scout’s Hut."
 msgstr "Építs egy felderítő kunyhót!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
 msgid "Scout is ready"
 msgstr "A felderítő készen áll"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
 msgid "Ready to go!"
 msgstr "Indulásra készen!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
 msgstr "Nagyszerű! Felépült a felderítő kunyhója. Amíg a felderítő beköltözik, tanuljunk kicsit róla!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:152
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
 msgstr "Először is vinnie kell magával elemózsiát a felfedezőútjaira. Szerencsére van is néhány harapnivaló a raktárunkban."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid ""
 "When provided with food, he will walk randomly around the area. You should "
 "follow his movement before fog of war hides what he saw."
 msgstr "Ha kap elég ételt, akkor véletlenszerűen bejárja a vidéket. Érdemes figyelni, hogy merre jár, mielőtt a háború köde elrejti, amit látott."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Scout"
 msgstr "Felderítő"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid "Explore the map"
 msgstr "Fedezd fel a térképet!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
 msgid "Wait for the scout to explore unseen areas."
 msgstr "Várd meg, amíg a felderítő felfedezi az eddig ismeretlen területeket!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:163
 msgid "Observe your scout."
 msgstr "Figyeld a felderítődet!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
 msgid "Scout made progress"
 msgstr "A felderítés eredménye"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:171
 msgid "New horizons?"
 msgstr "Új láthatárok?"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:172
 msgid ""
 "As you can see, scouts can go quite far. The good news is that there are no "
 "enemies around."
 msgstr "Mint látod, a felderítők nagyon nagy távolságokat járnak be. A jó hír az, hogy sehol nincs ellenség."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:173
 msgid "You can use the minimap to see the exploration’s progress."
 msgstr "A kistérképen követheted a felderítés eredményét."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
 msgstr "Ne feledd, hogy a felderítés nehéz munka, ezért szükség van hozzá élelmiszer ellátmányra."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
 msgid "Heroes and Rookies"
 msgstr "Hősök és Újoncok"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
 msgstr "Amíg a katonáid kiképzésen vannak, hadd mutassam meg, hogyan vezényelheted őket!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:184
 msgid ""
 "In every military building, you can set the preference for heroes (trained "
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
@@ -418,29 +418,29 @@ msgid ""
 "what you saw earlier."
 msgstr "Minden katonai épületben be tudod állítani, hogy a hősöket (felfejlesztett katonákat) vagy az újoncokat részesítse előnyben. Időről időre egy katona elhagyja az épületet, hogy egy erősebb vagy gyengébb katona automatikusan felváltsa – ezt láttuk korábban."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
 msgstr "A kezdeti beállítás függ az épület típusától. A barbároknál az őrház az egyetlen, ami alaphelyzetben az újoncokat részesíti előnyben. Érdemes ezt a beállítást a mindenkori helyzetnek megfelelően megváltoztatni."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:186
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
 msgstr "Amikor szabad területen terjeszkedsz, nyugodtan beállíthatod az épületeidet, hogy az újoncokat részesítsék előnyben. Ha viszont támadásra készülsz, akkor küldj hősöket a kiinduló területre. Az ellenségtől zsákmányolt épületek mindig a hősöket részesítik előnyben."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:192
 msgid "Soldier capacity"
 msgstr "Katona férőhelyek"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:194
 msgid "Adjusting the number of soldiers"
 msgstr "Katonák számának beállítása"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:195
 msgid ""
 "There is another way how you can control the strength of a military "
 "building: by the number of soldiers stationed there. Just click on the arrow"
@@ -449,54 +449,54 @@ msgid ""
 "example."
 msgstr "Van még egy módja egy katonai épület erejének beállítására: az itt állomásozó katonák száma. Kattints a szám melletti le/fel nyíl gombokra a férőhelyek beállításához. Minden épülettípushoz meg van határozva az elhelyezhető katonák maximális száma. Pl. a határőrházban legfeljebb öt katona fér el."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:196
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
 msgstr "Ha el szeretnél küldeni egy katonát, csak rá kell kattintanod. Ekkor egy másik fogja felváltani ezen a helyen."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
 " can contain an arrow and up to three numbers, e.g. ‘↑ 1 (+5) soldier (+2)’."
 msgstr ""
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid ""
 "The arrow shows whether the building is set to prefer heroes (upwards arrow)"
 " or rookies (downwards arrow)."
 msgstr ""
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:204
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
 msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
 msgstr "Az első szám azt mutatja, hogy most hány katona tartózkodik az épületben. A példában csak egy katona maradt (minden katonai épületet legalább egy katonának őriznie kell)."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
 msgstr "A második szám azt mutatja, hogy hány további katona van az épületben elszállásolva, akik most éppen kint járnak. A példabeli kint lévő öt katona pl. az ellenséget támadhatja. A csata végén vissza fognak térni."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
 msgstr "A harmadik szám mutatja, hogy hány katona hiányzik az épületből. A példában a nyolc katona közül, akiket kértél erre a helyre (1 + 5 + 2), 2 eleshetett az ütközetben. Az ő helyükre újak fognak jönni a raktáraidból, ha tudnak."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:212
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 msgid "Dismantle your sentry"
 msgstr "Bontsd le az őrházat!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:214
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
 msgid "Dismantling military buildings"
 msgstr "Katonai épületek lebontása"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
@@ -504,7 +504,7 @@ msgid ""
 " building."
 msgstr "A katonák számát csak egyig csökkentheted. Az utolsó katona soha nem hagyja el az épületet (csak amikor az ellenség már magát az épületet támadja). Ha máshová szeretnéd áthelyezni a katonádat, akkor le kell bontanod, vagy meg kell semmisítened az épületet."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:216
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
 "However, destroying a military building is always linked with a risk: the "
 "land is still yours, but it is no longer protected. Any enemy that builds "
@@ -515,32 +515,32 @@ msgid ""
 "enemies."
 msgstr "Viszont egy katonai épület felszámolásának mindig veszélye van: az általa ellenőrzött terület ugyan a tiéd marad, de védtelen lesz. Ha az ellenség a közelbe épít egy katonai épületet, akkor harc nélkül megszerzi a védtelen területet, és az itt álló épületeid elégnek. Ezenkívül az őrizetlen területet elrejtheti a háború köde. Ezért általában csak az ellenségtől távol, mélyen a biztonságos hátországodban érdemes katonai építményeket lebontani."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:212
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
 msgstr "Láttad az őrházadat? Mivel nem fér el benne sok katona, és egy erősebb határőrház mellett van, így nem sok haszna van."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:214
 msgid "Dismantle it."
 msgstr "Bontsd le!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
 msgstr "Használjuk ki ezt az alkalmat arra is, hogy megismerkedjünk a további beállításokkal: a hősök/újoncok előnyben részesítésével és a helyek számával."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:226
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 msgid "Soldiers, dismissed!"
 msgstr "Katonák, lelépni!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:223
 msgid "Dismantle your north-western sentry"
 msgstr "Bontsd le az északnyugati őrházadat!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:224
 msgid ""
 "You can control the number of soldiers stationed at a military site with the"
 " arrow buttons. If you want to get even your last soldier out, you will have"
@@ -548,59 +548,59 @@ msgid ""
 "which will make it vulnerable to hostile attacks."
 msgstr "Egy katonai épületben állomásozó katonák számát a nyíl gombokkal állíthatod be. Ha a legutolsó katonát is el szeretnéd hozni, akkor le kell bontani, vagy meg kell semmisíteni az épületet. Ebben az esetben viszont nem védi többé a területedet, ami így ki lesz szolgáltatva az ellenségnek."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:230
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
 msgid "Dismantle your sentry in the north-west, next to the barrier."
 msgstr "Bontsd le az északnyugati őrházat, a határőrház mellett!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:236
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:249
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:231
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:244
 msgid "Enhance Your Fortress"
 msgstr "Fejleszd az erődödet!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:233
 msgid "Enhancing Buildings"
 msgstr "Épületek fejlesztése"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:239
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:234
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
 msgstr "Rendben. Most már tudod, hogy hogyan vond vissza a katonáidat onnan, ahol nincs rájuk szükség. Ideje megtanulnod, hogyan erősítsd meg a frontvonaladat."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:240
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
 msgstr "Az erődöd már most is nagyon erős és nagy területet ural. De van egy ennél is nagyobb katonai épület: a fellegvár."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:236
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
 msgstr "Fellegvárat nem tudsz közvetlenül építeni, ehelyett először egy erődöt kell építened, és azt továbbfejleszteni fellegvárrá. Ehhez kattints az erődre, és válaszd ki a továbbfejlesztés fellegvárrá gombot!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:237
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
 msgstr "A katonáid elhagyják az erődöt, amíg az építkezés folyik. Ez egyben azt is jelenti, hogy az erőd elveszti katonai befolyását, ahogy korábban szó volt róla."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:243
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:238
 msgid "Enhance your fortress to a citadel now."
 msgstr "Most fejleszd az erődödet fellegvárrá!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:251
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:246
 msgid "Enhance your fortress to a citadel"
 msgstr "Fejleszd az erődödet fellegvárrá!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:252
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:247
 msgid "Enhance your fortress to a mighty citadel."
 msgstr "Fejleszd az erődödet félelmetes fellegvárrá!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:253
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:248
 msgid ""
 "The citadel can house 12 soldiers, and it is the biggest military building "
 "the Barbarians can build. It also costs a lot of resources and takes a long "
@@ -608,15 +608,15 @@ msgid ""
 "like constricted points or mountains."
 msgstr "A fellegvárba 12 katona fér, és ez a legnagyobb katonai épület, amit a barbárok építeni tudnak. Nagyon sok nyersanyagot igényel és sokáig tart a felépítése. Arra a legalkalmasabb, hogy a stratégiailag fontos pontokat őrizze, pl. a szűk hegyi átjárókat."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:260
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:255
 msgid "Defeat your Enemy"
 msgstr "Győzd le az ellenségedet!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:257
 msgid "Defeat the Enemy"
 msgstr "Az ellenség legyőzése"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:258
 msgid ""
 "Great work, the citadel is finished. But what’s that? A hostile tribe has "
 "settled next to us while the citadel was under construction! Do you see how "
@@ -625,44 +625,44 @@ msgid ""
 "defeat the enemy!"
 msgstr "Nagyszerű munka, a fellegvár elkészült. De mi ez? Egy ellenséges törzs letelepedett mellénk amíg a fellegvár épült! Látod, hogy elvették a területünk egy részét? És a favágónk elveszítette a munkahelyét. Erről beszéltem. Szerezzük vissza a földünket és győzzük le az ellenséget!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:275
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:259
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:270
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
 msgstr "Egy épület megtámadásához kattints az ajtajára, válaszd ki a küldeni kívánt katonák számát és kattints a „Támadás” gombra!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:259
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
 msgstr "A katonáid az összes közeli katonai épületből elindulnak. Hasonlóan, a védők is elindulnak az ellenség közeli katonai épületeiből, hogy feltartóztassák az erőidet."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:265
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:260
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
 msgstr "Támadd meg és foglald el az ellenség összes katonai létesítményét, a főhadiszállást pedig rombold le!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:266
 msgid "Defeat Your Enemy"
 msgstr "Győzd le az ellenségedet!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:273
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:268
 msgid "Defeat the enemy tribe"
 msgstr "Az ellenséges törzs legyőzése"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:274
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:269
 msgid "Defeat the nearby enemy."
 msgstr "Győzd le a közeli ellenséget!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:280
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:275
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:277
 msgid "Conclusion"
 msgstr "Befejezés"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:283
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:278
 msgid ""
 "Thank you for playing this tutorial. I hope you enjoyed it and you learned "
 "how to create and train soldiers, how to control where they go and how to "
@@ -670,14 +670,14 @@ msgid ""
 "Having trained soldiers is a huge advantage."
 msgstr "Köszönöm, hogy végigjátszottad ezt az oktatójátékot. Remélem tetszett, és megtanultad belőle, hogy hogyan toborozz és fejlessz katonákat, hogyan irányítsd, hogy hová menjenek, és hogyan győzd le az ellenséget. Láttad, milyen könnyen letaroltad az ellenséget? A jól felfejlesztett katonák hatalmas előnyt jelentenek."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
 msgstr "De a háború drága, és nem mindig ez az út vezet a győzelemhez. Amikor új játékot indítasz, békés játékmódok közül is válogathatsz. Mindenképpen javaslom, hogy próbáld ki ezeket is, mert ezek is nagyon érdekesek."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:285
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:280
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
