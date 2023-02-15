@@ -6882,30 +6882,45 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					                  player_statistics.get_max_land() < cur_land + me_land ?
                               5 :
                               -5;
-					inputs[32] = cur_strength * 3 + cur_land < player_statistics.get_max_power() * 3 +
-					              player_statistics.get_max_land() &&
-					                   player_statistics.get_max_power() * 3 +
-									   player_statistics.get_max_land() < (cur_strength + me_strength) * 3 +
-									   cur_land + me_land ? 5 : -5;
-					inputs[33] = cur_strength * 2 + cur_land < player_statistics.get_max_power() * 2 +
-					              player_statistics.get_max_land() &&
-					                   player_statistics.get_max_power() * 2 +
-									   player_statistics.get_max_land() < (cur_strength + me_strength) * 2 +
-									   cur_land + me_land ? 4 : 0;
+					inputs[32] =
+					   cur_strength * 3 + cur_land < player_statistics.get_max_power() * 3 +
+					                                    player_statistics.get_max_land() &&
+					         player_statistics.get_max_power() * 3 + player_statistics.get_max_land() <
+					            (cur_strength + me_strength) * 3 + cur_land + me_land ?
+                     5 :
+                     -5;
+					inputs[33] =
+					   cur_strength * 2 + cur_land < player_statistics.get_max_power() * 2 +
+					                                    player_statistics.get_max_land() &&
+					         player_statistics.get_max_power() * 2 + player_statistics.get_max_land() <
+					            (cur_strength + me_strength) * 2 + cur_land + me_land ?
+                     4 :
+                     0;
 					inputs[34] = this_player->team_number() == me->team_number() ? 2 : -2;
 					inputs[35] = this_player->team_number() == me->team_number() ? 1 : -3;
 					inputs[36] = player_statistics.get_diplo_score(j) > 10 ? 2 : -2;
-					inputs[37] = player_statistics.get_is_enemy(j) && player_statistics.player_seen_lately(j, gametime) &&
-					              !player_statistics.strong_enough(pn) ? 10 : -10;
-					inputs[38] = player_statistics.get_is_enemy(j) && player_statistics.player_seen_lately(j, gametime) &&
-					              !player_statistics.strong_enough(pn) ? 5 : -5;
+					inputs[37] = player_statistics.get_is_enemy(j) &&
+					                   player_statistics.player_seen_lately(j, gametime) &&
+					                   !player_statistics.strong_enough(pn) ?
+                               10 :
+                               -10;
+					inputs[38] = player_statistics.get_is_enemy(j) &&
+					                   player_statistics.player_seen_lately(j, gametime) &&
+					                   !player_statistics.strong_enough(pn) ?
+                               5 :
+                               -5;
 					inputs[39] = player_statistics.strong_enough(pn) ? -10 : 2;
 					inputs[40] = player_statistics.strong_enough(pn) ? -5 : 2;
-					inputs[41] = player_statistics.get_is_enemy(j) && player_statistics.player_seen_lately(j, gametime) &&
-					              player_statistics.enemies_seen_lately_count(gametime) > 1 ? 5 : 0;
-					inputs[42] = player_statistics.get_is_enemy(j) && player_statistics.player_seen_lately(j, gametime) &&
-					              player_statistics.enemies_seen_lately_count(gametime) > 1 ? 3 : -2;
-					
+					inputs[41] = player_statistics.get_is_enemy(j) &&
+					                   player_statistics.player_seen_lately(j, gametime) &&
+					                   player_statistics.enemies_seen_lately_count(gametime) > 1 ?
+                               5 :
+                               0;
+					inputs[42] = player_statistics.get_is_enemy(j) &&
+					                   player_statistics.player_seen_lately(j, gametime) &&
+					                   player_statistics.enemies_seen_lately_count(gametime) > 1 ?
+                               3 :
+                               -2;
 
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (management_data.f_neuron_pool[28].get_position(i)) {
