@@ -30,6 +30,7 @@ echo "* slackware Slackware"
 echo "* mageia    Mageia"
 echo "* debian    Debian/Ubuntu/Mint"
 echo "* solus     Solus"
+echo "* void      Void"
 echo " "
 echo "BSD:"
 echo "* freebsd   FreeBSD"
@@ -85,6 +86,8 @@ if [ -z "$DISTRO" ]; then
       DISTRO="solus"
    elif [ -f /etc/arch-release ]; then
       DISTRO="arch"
+   elif grep void /etc/os-release > /dev/null 2>&1; then
+     DISTRO="void"
    elif brew --prefix > /dev/null 2>&1; then
      DISTRO="homebrew"
    fi
@@ -191,6 +194,11 @@ elif [ "$DISTRO" = "solus" ]; then
    sudo eopkg install $@ git gettext glew-devel libicu-devel libpng-devel sdl2-devel \
     sdl2-image-devel sdl2-mixer-devel sdl2-ttf-devel python zlib-minizip-devel
    asio_not_packaged "Solus" "sudo" || exit 1
+
+elif [ "$DISTRO" = "void" ]; then
+   echo "Installing dependencies for Void..."
+   sudo xbps-install $@ asio git gcc make cmake gettext glew-devel icu-devel SDL2-devel \
+     SDL2_ttf-devel SDL2_image-devel SDL2_mixer-devel minizip-devel pkg-config
 
 elif [ -z "$DISTRO" ]; then
    echo "ERROR. Unable to detect your operating system."

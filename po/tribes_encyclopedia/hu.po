@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-07 02:56+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2023\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -15251,7 +15251,7 @@ msgid "Direct build cost:"
 msgstr "Közvetlen építési költség:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:503
-#: ../../data/tribes/scripting/help/immovable_help.lua:58
+#: ../../data/tribes/scripting/help/immovable_help.lua:59
 msgid "Build cost:"
 msgstr "Építési költség:"
 
@@ -15795,84 +15795,84 @@ msgid "Watch the selected ship"
 msgstr "A kiválasztott hajó figyelése"
 
 #. TRANSLATORS: Size of a map immovablee
-#: ../../data/tribes/scripting/help/format_help.lua:56
+#: ../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
 msgstr "Kicsi"
 
 #. TRANSLATORS: Size of a map immovable
-#: ../../data/tribes/scripting/help/format_help.lua:59
+#: ../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
 msgstr "Közepes"
 
 #. TRANSLATORS: Size of a map immovable
-#: ../../data/tribes/scripting/help/format_help.lua:62
+#: ../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
 msgstr "Nagy"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:72
+#: ../../data/tribes/scripting/help/format_help.lua:76
 msgid "Mine plot"
 msgstr "Bányahely"
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:76
+#: ../../data/tribes/scripting/help/format_help.lua:80
 msgid "Port plot"
 msgstr "Kikötőhely"
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:80
+#: ../../data/tribes/scripting/help/format_help.lua:84
 msgid "Small plot"
 msgstr "Kis hely"
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:84
+#: ../../data/tribes/scripting/help/format_help.lua:88
 msgid "Medium plot"
 msgstr "Közepes hely"
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:88
+#: ../../data/tribes/scripting/help/format_help.lua:92
 msgid "Big plot"
 msgstr "Nagy hely"
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:94
+#: ../../data/tribes/scripting/help/format_help.lua:99
 msgid "Space required:"
 msgstr "Szükséges hely:"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-#: ../../data/tribes/scripting/help/format_help.lua:148
-#: ../../data/tribes/scripting/help/format_help.lua:242
+#: ../../data/tribes/scripting/help/format_help.lua:154
+#: ../../data/tribes/scripting/help/format_help.lua:248
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
 #. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/format_help.lua:164
-#: ../../data/tribes/scripting/help/format_help.lua:174
+#: ../../data/tribes/scripting/help/format_help.lua:170
+#: ../../data/tribes/scripting/help/format_help.lua:180
 #, lua-format
 msgid "%s to %s (%s EP)"
 msgstr "%s erre: %s (%s TP)"
 
-#: ../../data/tribes/scripting/help/format_help.lua:250
+#: ../../data/tribes/scripting/help/format_help.lua:256
 #, lua-format
 msgid "%s and"
 msgstr "%s és"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by
 #. a productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:277
+#: ../../data/tribes/scripting/help/format_help.lua:278
 msgid "Wares and workers consumed:"
 msgstr "Elfogyasztott áruk és munkások:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:280
+#: ../../data/tribes/scripting/help/format_help.lua:281
 msgid "Workers consumed:"
 msgstr "Elfogyasztott munkások:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:284
+#: ../../data/tribes/scripting/help/format_help.lua:285
 msgid "Wares consumed:"
 msgstr "Elfogyasztott áruk:"
 
@@ -15882,32 +15882,32 @@ msgstr "Elfogyasztott áruk:"
 msgid "Purpose"
 msgstr "Rendeltetés:"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:42
+#: ../../data/tribes/scripting/help/immovable_help.lua:43
 #: ../../data/tribes/scripting/help/worker_help.lua:143
 msgid "Note"
 msgstr "Megjegyzés"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:57
+#: ../../data/tribes/scripting/help/immovable_help.lua:58
 msgid "Requirements"
 msgstr "Szükséges hozzá:"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:61
+#: ../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
 msgstr "Méret"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:65
+#: ../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
 msgstr "A munkások és az állatok át tudnak haladni az ilyen tereptárgyat tartalmazó mezőkön."
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:67
+#: ../../data/tribes/scripting/help/immovable_help.lua:68
 msgid "Workers and animals can’t walk across fields with this immovable."
 msgstr "A munkások és az állatok nem tudnak áthaladni az ilyen tereptárgyat tartalmazó mezőkön."
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:73
+#: ../../data/tribes/scripting/help/immovable_help.lua:74
 msgid "Becomes"
 msgstr "Lesz belőle:"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:99
+#: ../../data/tribes/scripting/help/immovable_help.lua:100
 msgid "Preferred Terrains"
 msgstr "Kedvelt terepek:"
 
