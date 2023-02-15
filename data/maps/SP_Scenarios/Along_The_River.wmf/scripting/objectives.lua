@@ -7,7 +7,7 @@ obj_defeat_red = {
    title = _("Defeat Törver"),
    number = 1,
    body = objective_text(_("Defeat the Armies of Törver"),
-      li_image("map:banner_plr_02.png", _([[Törver is the enemy in the north, who is fighting under the red banner.]]))
+      li_image("map:banner_plr_02.png", _([[Törver is the enemy in the North, who is fighting under the red banner.]]))
    ),
 }
 
@@ -25,7 +25,7 @@ obj_conquer_pirate_sentry = {
    title = _("Conquer pirate sentry"),
    number = 1,
    body = objective_text(_("Conquer the Pirate Sentry"),
-      li_image("tribes/buildings/militarysites/barbarians/sentry/menu.png", _([[Conquer the pirate sentry near the brook to the east. Hopefully we will find out what happened to the gold in this area.]]))
+      li_image("tribes/buildings/militarysites/barbarians/sentry/menu.png", _([[Conquer the pirate sentry near the brook to the East. Hopefully we will find out what happened to the gold in this area.]]))
    ),
 }
 
