@@ -3343,8 +3343,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			// accept if diploscore high, else accept only 50% but not if player is seen lately
 			bool accept = player_statistics.get_diplo_score(pda.sender) >= 18 ||
 			              ((player_statistics.player_seen_lately(pda.sender, gametime) ||
-						  RNG::static_rand(2) == 0) && 
-						   player_statistics.get_diplo_score(pda.sender) > 5);
+			                RNG::static_rand(2) == 0) &&
+			               player_statistics.get_diplo_score(pda.sender) > 5);
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
