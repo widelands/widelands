@@ -3,7 +3,7 @@ Please fill out the relevant sections below and delete the rest.
 **Type of change**
 Bugfix / New feature / Refactoring / ...
 
-**Issues(s) closed**
+**Issue(s) closed**
 Fixes #...
 
 If the bug/feature does not appear on the issue tracker: a clear and concise description of what your change does *and why it is desirable*.

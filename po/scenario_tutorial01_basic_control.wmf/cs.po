@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
 "Last-Translator: Antonín Jehlář, 2022\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
@@ -669,7 +669,7 @@ msgstr "Když už tu je tolik skal, můžeš zvážit stavbu dalšího lomu. To 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:468
 msgid "Census and Status"
 msgstr "Popisy budov a stav"
 
@@ -718,36 +718,36 @@ msgid ""
 "the progress of construction sites."
 msgstr "Kromě popisů budov můžeš také nechat zobrazit popisy jejich stav. Dojde tak k zobrazení informace o produktivitě u každé budovy, nebo informace o průběhu stavby u každého staveniště."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:470
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
 msgstr "Teď už víme, jak to chodí. Počkejme, než budou lomy hotové."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Archive all messages in your inbox"
 msgstr "Archivovat všechny přijaté zprávy"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:485
 msgid "Archive Your Inbox Messages"
 msgstr "Archivuj své příchozí zprávy"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:486
 msgid "Archive all your messages in your inbox now."
 msgstr "Archivuj všechny své přijaté zprávy."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:487
 msgid ""
 "Keep clicking the ‘Archive selected message’ button until all messages have "
 "been archived and the list is empty."
 msgstr "Klikej na tlačítko \"Archivovat vybrané zprávy\" dokud máš nearchivované zprávy a tvůj seznam není prázdný."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:488
 #, lua-format
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press %s to select them all."
 msgstr "Také můžeš podržet Ctrl nebo Shift a vybrat více zpráv nebo stisknout %s a vybrat je všechny."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 #, lua-format
 msgid ""
 "You can toggle the message window by pressing ‘%s’ or clicking the second "
@@ -755,29 +755,29 @@ msgid ""
 "will be marked for you automatically."
 msgstr "Můžeš přepínat zobrazení okna zpráv pomocí klávesové zkratky „%s“ nebo kliknutím na druhou ikonu zprava v nabídce ve spodní části obrazovky. Nové zprávy jsou automaticky označeny nepřečteným statusem."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
 msgstr "Okno se zprávami je klíčem k zajištění štěstí tvého kmene. V průběhu skutečné hry budeš dostávat spoustu zpráv. Neztrácej přehled a snaž se, aby tvoje schránka byla vždy prázdná."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:496
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:495
 msgid "Messages"
 msgstr "Zprávy"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:496
 msgid "Introducing Messages"
 msgstr "Představení zpráv"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:499
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:498
 msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
 "attacks on your tribe, won or lost military buildings, resources found…"
 msgstr "Ahoj, to jsem zase já! Tentokrát jsem ti poslal zprávu. Widelands tě prostřednictvím zpráv informuje o důležitých událostech: prázdné doly, útoky na tvůj kmen, zisk nebo ztráta vojenských budov, nálezu surovin…"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:499
 msgid ""
 "The message window can be toggled by the second button from the right at the"
 " bottom of the screen. This button will also change appearance whenever new "
@@ -785,42 +785,42 @@ msgid ""
 "receive a new message."
 msgstr "Okno zpráv lze zapnout druhým tlačítkem zprava ve spodní části obrazovky. Toto tlačítko změní svůj vzhled vždy, když je k dispozici nová zpráva, dojde také k přehrání zvukového upozornění."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:500
 msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages:"
 msgstr "V tuto chvíli máš již dvě zprávy. Tuto právě přečtenou a první, která tě informovala, že k tvému hospodářství byla přidána nová hlavní budova. Pojďme se podívat, jak zprávy archivovat:"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:507
 msgid "Close the messages window"
 msgstr "Zavřít okno zpráv"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:509
 msgid "Close the Messages Window"
 msgstr "Zavřít okno zpráv"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:510
 msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
 msgstr "Všechna okna ve Widelands (s výjimkou příběhových oken s tlačítkem „OK“) mohou být zavřena tak, že se na ně klikne pravým tlačítkem. Zobrazení některých oken lze také přepínat pomocí tlačítek nabídky ve spodní části obrazovky."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:511
 msgid "Close the messages window now by right-clicking into it."
 msgstr "Zavři okno se zprávami tak, že na ně klikneš pravým tlačítkem."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:518
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:527
 msgid "Closing Windows"
 msgstr "Zavírání oken"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:519
 msgid "Excellent. Now we need to focus on other things."
 msgstr "Výborně. Teď se můžeme soustředit na další úkoly."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:529
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
@@ -828,70 +828,70 @@ msgid ""
 "the next time they try to do some work."
 msgstr "Výborně! Nyní se podíváme na to, jak zprávy fungují ve skutečné hře, můžeme? Za tímto účelem vezmu chudákům kameníkům všechno kamení v lomech. Jakmile se pokusí jít pracovat, každý zvlášť pošle zprávu, že už ve své pracovní oblasti nemůže žádné najít."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:539
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:537
 msgid "Destroy the two quarries"
 msgstr "Znič dva lomy"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:541
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:539
 msgid "Destroy the Quarries"
 msgstr "Znič lomy"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:542
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:540
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
 msgstr "Protože jsou naše lomy teď už k ničemu, můžeš je nechat zbořit a místo později využít pro jinou stavbu."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:543
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:541
 msgid ""
 "There are two different ways of destroying a building: burning down and "
 "dismantling. Try them both out on your quarries."
 msgstr "Jsou dva způsoby zbourání budovy: zničit budovu spálením a její rozebrání. Vyzkoušej si oba dva způsoby na svých lomech."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:544
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:542
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
 msgstr "Zničení lomu spálením: Je nejrychlejším způsobem uvolnění místa. Zatímco dělníci stihnou budovu opustit, suroviny jsou ztraceny."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:545
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:543
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr "Rozebrání lomu: Z hlavní budovy přijde stavitel, aby lom rozebral kousek po kousku. Tak získáš zpět nějaké suroviny, které mohou být použity na jinou stavbu."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:550
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:548
 msgid "Messages Arrived!"
 msgstr "Přišla ti zpráva!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:552
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:550
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
 msgstr "Byly ti doručeny zprávy. Podívej se, jak se tlačítko ve spodní části obrazovky změnilo."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:561
 msgid "Expand your territory"
 msgstr "Rozšiř své území"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:566
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:563
 msgid "Make your Territory Grow"
 msgstr "Rozšiř své území"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:567
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
 msgid ""
 "Build a military building on your border. Choose the one you like most."
 msgstr "Postav vojenskou budovu na své hranici. Můžeš si vybrat tu, která se ti líbí."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:565
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build a bigger "
 "military building."
 msgstr "Strážnice je jediná vojenská budova, která se vejde na malé stavební místo. Pokud dřevorubec udělá dost místa, můžeš postavit i nějakou větší vojenskou budovu."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:566
 msgid ""
 "Remember that big buildings (green icon) cannot be built on small (red) or "
 "medium (yellow) building plots, but buildings can be built on a building "
@@ -899,11 +899,11 @@ msgid ""
 " mind when you search for a suitable place."
 msgstr "Pamatuj na to, že velké budovy mohou být postaveny jedině na velkých stavebních místech (zelené), ale ne na středních (žluté) nebo malých (červené). Naopak, budovy lze postavit na místě, které poskytuje více místa, než budova vyžaduje. Pamatuj na to vždy, když budeš hledat vhodné místo na stavbu."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:573
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:570
 msgid "Expanding Your Territory!"
 msgstr "Rozšiřování tvého území!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:576
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:573
 msgid ""
 "There is one more thing I’d like to teach you now: Expanding your territory."
 " The place that we started with around our headquarters is barely enough for"
@@ -912,7 +912,7 @@ msgid ""
 "territory."
 msgstr "Je tu jedna další věc, kterou bych tě chtěl teď naučit: Rozšiřování tvého území. Oblast okolo naší hlavní budovy, se kterou jsme začali, je stěží dostačující pro stavební rozvoj a navíc nemáme přístup k horám, které potřebujeme na těžbu nerostů a uhlí. Proto je potřeba naše území rozšířit."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:577
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:574
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of four different military "
@@ -923,59 +923,59 @@ msgid ""
 "farther than others."
 msgstr "Rozšiřování je jednoduché, prostě postavíš vojenskou budovu na okraji svého území. Barbaři mají na výběr ze čtyř vojenských budov: strážnice, hradba, věž a pevnost. Čím větší je budova, tím dražší je její stavba, tím více okolního území obsadí a tím větší má posádku. Budovy se také liší svým dohledem, budovy s věží dohlédnou dále než ostatní."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:578
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:575
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell you more about military buildings in another tutorial."
 msgstr "Jakmile je vojenská budova obsazena posádkou, rozšíří tvé území. Více si o vojenských budovách povíme až v dalším tutoriálu."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:583
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:580
 msgid "Military Site Occupied"
 msgstr "Vojenská budova obsazena"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:585
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:582
 msgid "Your territory has just grown!"
 msgstr "Tvoje území se právě rozšířilo!"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:587
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:584
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
 msgstr "Skvělé. Vidíš, jak se tvé území rozšířilo, jen co tví vojáci obsadili tvou novou vojenskou budovu?"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:598
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:600
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:595
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:597
 msgid "Conclusion"
 msgstr "Shrnutí"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:602
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:599
 msgid ""
 "This concludes the first tutorial. In order to learn more about the game, I "
 "suggest to play one of the other tutorials. Each of them covers a different "
 "topic."
 msgstr "Tímto končí první tutoriál. Pro snazší zvládnutí hry navrhuji zkusit další tutoriály. Každý z nich se zaměřuje na jiné téma."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:603
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:600
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
 msgstr "Ale protože už umíš Widelands ovládat, můžeš taky začít hrát (a nebo pokračovat zde) a objevovat hru po vlastní ose."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:604
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:601
 msgid "To leave this game and return to the main menu:"
 msgstr "K ukončení hry a návratu do hlavní nabídky:"
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:605
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:602
 msgid ""
 "Click on the ‘Main Menu’ button on the very left at the bottom of the "
 "screen."
 msgstr "Klikni na úplně levé tlačítko \"Hlavní nabídka\" nabídky ve spodní části obrazovky."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:606
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:603
 msgid "Then click on the ‘Exit Game’ entry."
 msgstr "Pak klikni na \"Ukončit hru\"."
 
-#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:607
+#: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:604
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
