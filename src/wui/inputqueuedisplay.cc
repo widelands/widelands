@@ -298,7 +298,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	if (can_act_) {
 		collapse_.sigclicked.connect([this]() {
 			*collapsed_ = is_collapsed() ? BuildingWindow::CollapsedState::kExpanded :
-			   BuildingWindow::CollapsedState::kCollapsed;
+                                        BuildingWindow::CollapsedState::kCollapsed;
 		});
 
 		b_decrease_desired_fill_.sigclicked.connect([this]() {
