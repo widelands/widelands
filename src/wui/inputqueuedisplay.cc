@@ -97,8 +97,16 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      bool show_only,
                                      bool has_priority,
                                      bool* collapsed)
-   : InputQueueDisplay(
-        parent, ib, bld, q.get_type(), q.get_index(), &q, nullptr, show_only, has_priority, collapsed) {
+   : InputQueueDisplay(parent,
+                       ib,
+                       bld,
+                       q.get_type(),
+                       q.get_index(),
+                       &q,
+                       nullptr,
+                       show_only,
+                       has_priority,
+                       collapsed) {
 }
 InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      InteractiveBase& ib,

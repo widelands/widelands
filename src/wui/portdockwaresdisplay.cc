@@ -203,8 +203,10 @@ private:
 };
 
 /// Create a panel that displays the wares and the builder waiting for the expedition to start.
-UI::Box*
-create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, InteractiveGameBase& igb, bool* collapsed) {
+UI::Box* create_portdock_expedition_display(UI::Panel* parent,
+                                            Warehouse& wh,
+                                            InteractiveGameBase& igb,
+                                            bool* collapsed) {
 	UI::Box& box = *new UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	ensure_box_can_hold_input_queues(box);
 

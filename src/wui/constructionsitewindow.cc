@@ -168,8 +168,8 @@ void ConstructionSiteWindow::add_wares_queues(Widelands::ConstructionSite* const
 		Widelands::WaresQueue* ware = construction_site->get_consume_waresqueue(i);
 		// only display the queue if it requests at least one item and is not yet completed
 		if (ware->get_max_size() > 0 && ware->get_filled() <= ware->get_max_size()) {
-			box.add(new InputQueueDisplay(&box, *ibase(), *construction_site, *ware, false, true,
-			        priority_collapsed()),
+			box.add(new InputQueueDisplay(
+			           &box, *ibase(), *construction_site, *ware, false, true, priority_collapsed()),
 			        UI::Box::Resizing::kFullSize);
 		}
 	}
@@ -192,15 +192,17 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		assert(ps->ware_queues.size() == prodsite->input_wares().size());
 		ensure_box_can_hold_input_queues(*settings_box);
 		for (const auto& pair : prodsite->input_wares()) {
-			InputQueueDisplay* queue = new InputQueueDisplay(
-			   settings_box.get(), *ibase(), *construction_site, Widelands::wwWARE, pair.first, priority_collapsed());
+			InputQueueDisplay* queue =
+			   new InputQueueDisplay(settings_box.get(), *ibase(), *construction_site,
+			                         Widelands::wwWARE, pair.first, priority_collapsed());
 			settings_box->add(queue, UI::Box::Resizing::kFullSize);
 			cs_ware_queues_.push_back(queue);
 		}
 		assert(ps->worker_queues.size() == prodsite->input_workers().size());
 		for (const auto& pair : prodsite->input_workers()) {
-			InputQueueDisplay* queue = new InputQueueDisplay(
-			   settings_box.get(), *ibase(), *construction_site, Widelands::wwWORKER, pair.first, priority_collapsed());
+			InputQueueDisplay* queue =
+			   new InputQueueDisplay(settings_box.get(), *ibase(), *construction_site,
+			                         Widelands::wwWORKER, pair.first, priority_collapsed());
 			settings_box->add(queue, UI::Box::Resizing::kFullSize);
 			cs_ware_queues_.push_back(queue);
 		}
