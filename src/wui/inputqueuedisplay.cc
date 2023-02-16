@@ -299,11 +299,6 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 		collapse_.sigclicked.connect([this]() {
 			*collapsed_ = is_collapsed() ? BuildingWindow::CollapsedState::kExpanded :
 			   BuildingWindow::CollapsedState::kCollapsed;
-			recurse([](InputQueueDisplay& i) {
-				if (i.can_act_) {
-					i.set_collapsed();
-				}
-			});
 		});
 
 		b_decrease_desired_fill_.sigclicked.connect([this]() {
@@ -346,7 +341,6 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	} else {
 		collapse_.set_visible(false);
 		*collapsed_ = BuildingWindow::CollapsedState::kCollapsed;
-		set_collapsed();
 	}
 
 	set_tooltip(type_ == Widelands::wwWARE ?
@@ -358,8 +352,6 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 		assert(queue_ != nullptr);
 		hide_from_view();
 	}
-
-	set_collapsed();
 
 	// Do not call think() yet, it might deadlock
 }
@@ -616,6 +608,9 @@ void InputQueueDisplay::set_collapsed() {
 	b_increase_desired_fill_.set_visible(!is_collapsed() && !show_only_);
 	b_decrease_real_fill_.set_visible(!is_collapsed() && ibase_.omnipotent());
 	b_increase_real_fill_.set_visible(!is_collapsed() && ibase_.omnipotent());
+	collapse_.set_tooltip(is_collapsed() ? _("Show controls") : _("Hide controls"));
+	collapse_.set_pic(g_image_cache->get(is_collapsed() ? "images/ui_basic/scrollbar_right.png" :
+                                                         "images/ui_basic/scrollbar_left.png"));
 }
 
 inline Widelands::ProductionsiteSettings::InputQueueSetting*
@@ -678,9 +673,7 @@ void InputQueueDisplay::think() {
 		priority_.set_tooltip(priority_tooltip(priority_.get_value()));
 	}
 
-	collapse_.set_tooltip(is_collapsed() ? _("Show controls") : _("Hide controls"));
-	collapse_.set_pic(g_image_cache->get(is_collapsed() ? "images/ui_basic/scrollbar_right.png" :
-                                                         "images/ui_basic/scrollbar_left.png"));
+	set_collapsed();
 }
 
 static const RGBAColor kPriorityColors[] = {RGBAColor(0, 0, 255, 127), RGBAColor(63, 127, 255, 127),
