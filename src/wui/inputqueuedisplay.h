@@ -153,7 +153,7 @@ private:
 	UI::Panel spacer_;
 	const Widelands::WarePriority* slider_was_moved_;
 
-	bool* collapsed_;
+	bool* collapsed_;  ///< Owned by the window creating the input queue
 
 	size_t nr_icons_;
 	std::vector<UI::Icon*> icons_;

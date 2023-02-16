@@ -155,7 +155,7 @@ private:
 
 	bool showing_workarea_;
 	bool avoid_fastclick_;
-	bool* priority_collapsed_;
+	bool* priority_collapsed_;  ///< Owned by the BuildingWindow::Registry
 
 	UI::Button* expeditionbtn_;
 	UI::Button* mute_this_;
