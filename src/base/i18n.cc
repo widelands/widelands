@@ -46,10 +46,6 @@
 #endif
 #endif
 
-CLANG_DIAG_RESERVED_IDENTIFIER_OFF
-extern int _nl_msg_cat_cntr;
-CLANG_DIAG_RESERVED_IDENTIFIER_ON
-
 namespace i18n {
 
 /// A stack of textdomains. On entering a new textdomain, the old one gets
@@ -374,9 +370,6 @@ void set_locale(const std::string& name) {
 		// maybe, do another check with the return value (?)
 		locale = lang;
 	}
-
-	/* Finally make changes known.  */
-	++_nl_msg_cat_cntr;
 #endif
 
 	SETLOCALE(LC_ALL, "");  //  call to libintl
