@@ -727,8 +727,9 @@ UI::Window& BuildingWindow::load(FileRead& fr, InteractiveBase& ib) {
 			BuildingWindow& bw = dynamic_cast<BuildingWindow&>(
 			   *ib.show_building_window(Widelands::Coords(x, y), true, workarea));
 			bw.tabs_->activate(fr.unsigned_8());
+			// TODO(tothxa): Savegame compatibility v1.2
 			if (packet_version >= 2) {
-				bw.set_priority_collapsed(fr.unsigned_8() != 0u);
+				bw.set_priority_collapsed(static_cast<BuildingWindow::CollapsedState>(fr.unsigned_8()));
 			}
 			return bw;
 		}
@@ -745,5 +746,5 @@ void BuildingWindow::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) c
 	fw.signed_32(building_position_.y);
 	fw.unsigned_8(showing_workarea_ ? 1 : 0);
 	fw.unsigned_8(tabs_->active());
-	fw.unsigned_8(*priority_collapsed_ ? 1 : 0);
+	fw.unsigned_8(static_cast<uint8_t>(*priority_collapsed_));
 }

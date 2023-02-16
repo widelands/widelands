@@ -41,13 +41,15 @@ struct BuildingWindow : public UI::UniqueWindow {
 		Width = 4 * 34  //  4 normally sized buttons
 	};
 
+	enum class CollapsedState : uint8_t { kExpanded, kCollapsed };
+
 	struct Registry : public UI::UniqueWindow::Registry {
-		bool priority_collapsed{false};
+		CollapsedState priority_collapsed{CollapsedState::kExpanded};
 	};
-	void set_priority_collapsed(bool collapse) {
+	void set_priority_collapsed(CollapsedState collapse) {
 		*priority_collapsed_ = collapse;
 	}
-	bool* priority_collapsed() const {
+	CollapsedState* priority_collapsed() const {
 		return priority_collapsed_;
 	}
 
@@ -155,7 +157,7 @@ private:
 
 	bool showing_workarea_;
 	bool avoid_fastclick_;
-	bool* priority_collapsed_;  ///< Owned by the BuildingWindow::Registry
+	CollapsedState* priority_collapsed_;  ///< Owned by the BuildingWindow::Registry
 
 	UI::Button* expeditionbtn_;
 	UI::Button* mute_this_;

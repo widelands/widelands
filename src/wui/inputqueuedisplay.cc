@@ -96,7 +96,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      Widelands::InputQueue& q,
                                      bool show_only,
                                      bool has_priority,
-                                     bool* collapsed)
+                                     BuildingWindow::CollapsedState* collapsed)
    : InputQueueDisplay(parent,
                        ib,
                        bld,
@@ -113,7 +113,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      Widelands::ConstructionSite& csite,
                                      Widelands::WareWorker ww,
                                      Widelands::DescriptionIndex di,
-                                     bool* collapsed)
+                                     BuildingWindow::CollapsedState* collapsed)
    : InputQueueDisplay(parent,
                        ib,
                        csite,
@@ -162,7 +162,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      Widelands::ProductionsiteSettings* s,
                                      bool show_only,
                                      bool has_priority,
-                                     bool* collapsed)
+                                     BuildingWindow::CollapsedState* collapsed)
    : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      ibase_(ib),
      can_act_(!show_only && ibase_.can_act(bld.owner().player_number())),
@@ -297,7 +297,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 
 	if (can_act_) {
 		collapse_.sigclicked.connect([this]() {
-			*collapsed_ = !*collapsed_;
+			*collapsed_ = is_collapsed() ? BuildingWindow::CollapsedState::kExpanded :
+			   BuildingWindow::CollapsedState::kCollapsed;
 			recurse([](InputQueueDisplay& i) {
 				if (i.can_act_) {
 					i.set_collapsed();
@@ -344,7 +345,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 		});
 	} else {
 		collapse_.set_visible(false);
-		*collapsed_ = true;
+		*collapsed_ = BuildingWindow::CollapsedState::kCollapsed;
 		set_collapsed();
 	}
 
@@ -609,12 +610,12 @@ void InputQueueDisplay::clicked_real_fill(const int8_t delta) {
 }
 
 void InputQueueDisplay::set_collapsed() {
-	priority_.set_visible(has_priority_ && !*collapsed_);
-	spacer_.set_visible(!has_priority_ && !*collapsed_);
-	b_decrease_desired_fill_.set_visible(!*collapsed_ && !show_only_);
-	b_increase_desired_fill_.set_visible(!*collapsed_ && !show_only_);
-	b_decrease_real_fill_.set_visible(!*collapsed_ && ibase_.omnipotent());
-	b_increase_real_fill_.set_visible(!*collapsed_ && ibase_.omnipotent());
+	priority_.set_visible(has_priority_ && !is_collapsed());
+	spacer_.set_visible(!has_priority_ && !is_collapsed());
+	b_decrease_desired_fill_.set_visible(!is_collapsed() && !show_only_);
+	b_increase_desired_fill_.set_visible(!is_collapsed() && !show_only_);
+	b_decrease_real_fill_.set_visible(!is_collapsed() && ibase_.omnipotent());
+	b_increase_real_fill_.set_visible(!is_collapsed() && ibase_.omnipotent());
 }
 
 inline Widelands::ProductionsiteSettings::InputQueueSetting*
@@ -677,9 +678,9 @@ void InputQueueDisplay::think() {
 		priority_.set_tooltip(priority_tooltip(priority_.get_value()));
 	}
 
-	collapse_.set_tooltip(*collapsed_ ? _("Show controls") : _("Hide controls"));
-	collapse_.set_pic(g_image_cache->get(*collapsed_ ? "images/ui_basic/scrollbar_right.png" :
-                                                      "images/ui_basic/scrollbar_left.png"));
+	collapse_.set_tooltip(is_collapsed() ? _("Show controls") : _("Hide controls"));
+	collapse_.set_pic(g_image_cache->get(is_collapsed() ? "images/ui_basic/scrollbar_right.png" :
+                                                         "images/ui_basic/scrollbar_left.png"));
 }
 
 static const RGBAColor kPriorityColors[] = {RGBAColor(0, 0, 255, 127), RGBAColor(63, 127, 255, 127),
@@ -688,7 +689,7 @@ static const RGBAColor kPriorityColors[] = {RGBAColor(0, 0, 255, 127), RGBAColor
 
 void InputQueueDisplay::draw(RenderTarget& r) {
 	// Draw priority indicator
-	if (has_priority_ && !*collapsed_) {
+	if (has_priority_ && !is_collapsed()) {
 		const int x = hbox_.get_x() + priority_.get_x();
 		for (size_t i = 0; i < 5; ++i) {
 			r.fill_rect(Recti(x + i * kButtonSize, hbox_.get_y() + kButtonSize * 2 / 5, kButtonSize,
@@ -738,7 +739,7 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 	}
 
 	// Draw priority indicator
-	if (has_priority_ && *collapsed_) {
+	if (has_priority_ && is_collapsed()) {
 		const size_t p = priority_to_index(queue_ != nullptr ? b->get_priority(type_, index_) :
                                                              get_setting()->priority);
 		const int w = kButtonSize / 5;

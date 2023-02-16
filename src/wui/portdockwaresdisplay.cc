@@ -206,7 +206,7 @@ private:
 UI::Box* create_portdock_expedition_display(UI::Panel* parent,
                                             Warehouse& wh,
                                             InteractiveGameBase& igb,
-                                            bool* collapsed) {
+                                            BuildingWindow::CollapsedState* collapsed) {
 	UI::Box& box = *new UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	ensure_box_can_hold_input_queues(box);
 

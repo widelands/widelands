@@ -20,6 +20,7 @@
 #define WL_WUI_PORTDOCKWARESDISPLAY_H
 
 #include "ui_basic/box.h"
+#include "wui/buildingwindow.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
 
@@ -35,6 +36,6 @@ AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
 UI::Box* create_portdock_expedition_display(UI::Panel* parent,
                                             Widelands::Warehouse& wh,
                                             InteractiveGameBase&,
-                                            bool* priority_collapsed);
+                                            BuildingWindow::CollapsedState* priority_collapsed);
 
 #endif  // end of include guard: WL_WUI_PORTDOCKWARESDISPLAY_H
