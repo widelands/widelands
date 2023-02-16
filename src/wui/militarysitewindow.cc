@@ -24,7 +24,7 @@
 static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.png";
 
 MilitarySiteWindow::MilitarySiteWindow(InteractiveBase& parent,
-                                       UI::UniqueWindow::Registry& reg,
+                                       BuildingWindow::Registry& reg,
                                        Widelands::MilitarySite& ms,
                                        bool avoid_fastclick,
                                        bool workarea_preview_wanted)

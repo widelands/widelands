@@ -41,6 +41,16 @@ struct BuildingWindow : public UI::UniqueWindow {
 		Width = 4 * 34  //  4 normally sized buttons
 	};
 
+	struct Registry : public UI::UniqueWindow::Registry {
+		bool priority_collapsed{false};
+	};
+	void set_priority_collapsed(bool collapse) {
+		*priority_collapsed_ = collapse;
+	}
+	bool* priority_collapsed() const {
+		return priority_collapsed_;
+	}
+
 	UI::Panel::SaveType save_type() const override {
 		return UI::Panel::SaveType::kBuildingWindow;
 	}
@@ -51,14 +61,14 @@ protected:
 	// This constructor allows setting a building description for the help button independent of the
 	// base building
 	BuildingWindow(InteractiveBase& parent,
-	               UI::UniqueWindow::Registry& reg,
+	               Registry& reg,
 	               Widelands::Building&,
 	               const Widelands::BuildingDescr&,
 	               bool avoid_fastclick);
 
 public:
 	BuildingWindow(InteractiveBase& parent,
-	               UI::UniqueWindow::Registry& reg,
+	               Registry& reg,
 	               Widelands::Building&,
 	               bool avoid_fastclick);
 
@@ -145,6 +155,7 @@ private:
 
 	bool showing_workarea_;
 	bool avoid_fastclick_;
+	bool* priority_collapsed_;
 
 	UI::Button* expeditionbtn_;
 	UI::Button* mute_this_;

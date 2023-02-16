@@ -87,13 +87,15 @@ public:
 	                  Widelands::Building&,
 	                  Widelands::InputQueue&,
 	                  bool show_only,
-	                  bool has_priority);
+	                  bool has_priority,
+	                  bool* collapsed);
 	// For constructionsite settings
 	InputQueueDisplay(UI::Panel* parent,
 	                  InteractiveBase&,
 	                  Widelands::ConstructionSite&,
 	                  Widelands::WareWorker,
-	                  Widelands::DescriptionIndex);
+	                  Widelands::DescriptionIndex,
+	                  bool* collapsed);
 
 	~InputQueueDisplay() override = default;
 
@@ -115,7 +117,8 @@ private:
 	                  Widelands::InputQueue*,
 	                  Widelands::ProductionsiteSettings*,
 	                  bool,
-	                  bool);
+	                  bool,
+	                  bool*);
 
 	InteractiveBase& ibase_;
 	bool can_act_, show_only_, has_priority_;
@@ -139,7 +142,7 @@ private:
 	void set_desired_fill(unsigned fill);
 	void clicked_real_fill(int8_t delta);
 	void set_priority(const Widelands::WarePriority&);
-	void set_collapsed(bool);
+	void set_collapsed();
 
 	const Image& max_fill_indicator_;
 
@@ -150,7 +153,7 @@ private:
 	UI::Panel spacer_;
 	const Widelands::WarePriority* slider_was_moved_;
 
-	bool collapsed_;
+	bool* collapsed_;
 
 	size_t nr_icons_;
 	std::vector<UI::Icon*> icons_;
