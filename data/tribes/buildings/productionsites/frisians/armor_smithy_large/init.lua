@@ -58,7 +58,7 @@ wl.Descriptions():new_productionsite_type {
          descname = _("working"),
          actions = {
             -- "return=skipped" causes 10 sec delay
-            -- time total: 59 + 59 + 69 + 59 + 59 + 10 = 315 sec
+            -- time total: 60.8 + 60.8 + 70.8 + 60.8 + 60.8 + 10 = 324 sec
             "call=produce_s3",
             "call=produce_s4",
             "call=produce_hg",
@@ -71,10 +71,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because ...
          descname = _("forging a broadsword"),
          actions = {
-            -- time: 22.4 + 24 + 9 + 3.6 = 59 sec
+            -- time: 24.2 + 24 + 9 + 3.6 = 60.8 sec
             "return=skipped unless economy needs sword_broad",
             "consume=coal iron:2 gold",
-            "sleep=duration:22s400ms",
+            "sleep=duration:24s200ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:24s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -86,10 +86,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword because ...
          descname = _("forging a double-edged sword"),
          actions = {
-            -- time: 22.4 + 24 + 9 + 3.6 = 59 sec
+            -- time: 24.2 + 24 + 9 + 3.6 = 60.8 sec
             "return=skipped unless economy needs sword_double",
             "consume=coal:2 iron:2 gold",
-            "sleep=duration:22s400ms",
+            "sleep=duration:24s200ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:24s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -101,10 +101,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet because ...
          descname = _("forging a golden helmet"),
          actions = {
-            -- time total: 28.4 + 37 + 3.6 = 69 sec
+            -- time: 30.2 + 37 + 3.6 = 70.8 sec
             "return=skipped unless economy needs helmet_golden",
             "consume=coal:2 iron:2 gold",
-            "sleep=duration:28s400ms",
+            "sleep=duration:30s200ms",
             "animate=working duration:37s",
             "produce=helmet_golden"
          },
