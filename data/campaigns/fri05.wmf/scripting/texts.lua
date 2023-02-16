@@ -307,7 +307,7 @@ victory_1 = {
       _([[They are defeated! Thank you, thank you for your help. We could never have beaten them by ourselves. Our town did not even sustain any major damage – on the contrary, you have expanded it far beyond its former bounds.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Ocke Ketelsen – Victory 1
-      _([[My people and I will never be able to repay the debt we owe you. I will send all the soldiers you have trained along with you to aid your in your quest to liberate your own home. If there is anything else we can do for you, now or forevermore, you need only ask and we will be yours to command.]]))
+      _([[My people and I will never be able to repay the debt we owe you. I will send all the soldiers you have trained along with you to aid you in your quest to liberate your own home. If there is anything else we can do for you, now or forevermore, you need only ask and we will be yours to command.]]))
 }
 
 victory_2 = {
