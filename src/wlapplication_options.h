@@ -147,8 +147,8 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorSave,  // alias of kCommonSave
 	kEditorUploadMap,
 	kEditorMapOptions,
-	kEditorExit,  // alias of kCommonExit
-	kEditorHelp,  // alias of kCommonEncyclopedia
+	kEditorExit,               // alias of kCommonExit
+	kEditorHelp,               // alias of kCommonEncyclopedia
 	kEditorShowhideBuildhelp,  // alias of kCommonBuildhelp
 	kEditorShowhideMaximumBuildhelp,
 	kEditorShowhideGrid,

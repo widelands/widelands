@@ -799,49 +799,46 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 };
 
 static const std::map<KeyboardShortcut, KeyboardShortcutAlias> shortcut_aliases_ = {
-	{KeyboardShortcut::kEditorLoad,
-	 /** TRANSLATORS: This is the helptext for an access key combination. */
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonLoad, gettext_noop("Load Map"))},
-	{KeyboardShortcut::kEditorSave,
-	 /** TRANSLATORS: This is the helptext for an access key combination. */
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonSave, gettext_noop("Save Map"))},
-	{KeyboardShortcut::kEditorExit,
-	 /** TRANSLATORS: This is the helptext for an access key combination. */
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonExit, gettext_noop("Exit Editor"))},
-	{KeyboardShortcut::kEditorHelp,
-	 /** TRANSLATORS: This is the helptext for an access key combination. */
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonEncyclopedia, gettext_noop("Help"))},
+   {KeyboardShortcut::kEditorLoad,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonLoad, gettext_noop("Load Map"))},
+   {KeyboardShortcut::kEditorSave,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonSave, gettext_noop("Save Map"))},
+   {KeyboardShortcut::kEditorExit,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonExit, gettext_noop("Exit Editor"))},
+   {KeyboardShortcut::kEditorHelp,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonEncyclopedia, gettext_noop("Help"))},
 
-	{KeyboardShortcut::kEditorShowhideBuildhelp,
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonBuildhelp)},
-	{KeyboardShortcut::kEditorMinimap,
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonMinimap)},
-	{KeyboardShortcut::kEditorQuicknavPrev,
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavPrev)},
-	{KeyboardShortcut::kEditorQuicknavNext,
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavNext)},
+   {KeyboardShortcut::kEditorShowhideBuildhelp,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonBuildhelp)},
+   {KeyboardShortcut::kEditorMinimap, KeyboardShortcutAlias(KeyboardShortcut::kCommonMinimap)},
+   {KeyboardShortcut::kEditorQuicknavPrev,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavPrev)},
+   {KeyboardShortcut::kEditorQuicknavNext,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavNext)},
 
-	{KeyboardShortcut::kInGameLoad,
-	 /** TRANSLATORS: This is the helptext for an access key combination. */
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonLoad, gettext_noop("Load Game"))},
-	{KeyboardShortcut::kInGameSave,
-	 /** TRANSLATORS: This is the helptext for an access key combination. */
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonSave, gettext_noop("Save Game"))},
-	{KeyboardShortcut::kInGameExit,
-	 /** TRANSLATORS: This is the helptext for an access key combination. */
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonExit, gettext_noop("Exit Game"))},
-	{KeyboardShortcut::kInGameEncyclopedia,
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonEncyclopedia)},
+   {KeyboardShortcut::kInGameLoad,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonLoad, gettext_noop("Load Game"))},
+   {KeyboardShortcut::kInGameSave,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonSave, gettext_noop("Save Game"))},
+   {KeyboardShortcut::kInGameExit,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonExit, gettext_noop("Exit Game"))},
+   {KeyboardShortcut::kInGameEncyclopedia,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonEncyclopedia)},
 
-	{KeyboardShortcut::kInGameShowhideBuildhelp,
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonBuildhelp)},
-	{KeyboardShortcut::kInGameMinimap,
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonMinimap)},
-	{KeyboardShortcut::kInGameQuicknavPrev,
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavPrev)},
-	{KeyboardShortcut::kInGameQuicknavNext,
-	 KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavNext)}
-};
+   {KeyboardShortcut::kInGameShowhideBuildhelp,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonBuildhelp)},
+   {KeyboardShortcut::kInGameMinimap, KeyboardShortcutAlias(KeyboardShortcut::kCommonMinimap)},
+   {KeyboardShortcut::kInGameQuicknavPrev,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavPrev)},
+   {KeyboardShortcut::kInGameQuicknavNext,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavNext)}};
 
 // Keyboard control additional help texts
 namespace SpecialHelpEntries {
@@ -876,11 +873,10 @@ std::string help_quicknav() {
 }  // namespace SpecialHelpEntries
 
 static const std::map<KeyboardShortcut, const std::function<std::string()>>
-   controls_special_entries_ {
-	{KeyboardShortcut::kEditor_Special_MapMove, SpecialHelpEntries::help_move_map},
-	{KeyboardShortcut::kInGame_Special_MapMove, SpecialHelpEntries::help_move_map},
-	{KeyboardShortcut::kInGame_Special_Quicknav, SpecialHelpEntries::help_quicknav}
-};
+   controls_special_entries_{
+      {KeyboardShortcut::kEditor_Special_MapMove, SpecialHelpEntries::help_move_map},
+      {KeyboardShortcut::kInGame_Special_MapMove, SpecialHelpEntries::help_move_map},
+      {KeyboardShortcut::kInGame_Special_Quicknav, SpecialHelpEntries::help_quicknav}};
 
 bool is_real(const KeyboardShortcut id) {
 	if (auto it = shortcut_aliases_.find(id); it != shortcut_aliases_.end()) {
@@ -902,14 +898,14 @@ KeyboardShortcut& operator++(KeyboardShortcut& id) {
 }
 
 std::string get_shortcut_help_line(const KeyboardShortcut id) {
-	if (auto it = controls_special_entries_.find(id) ; it != controls_special_entries_.end()) {
+	if (auto it = controls_special_entries_.find(id); it != controls_special_entries_.end()) {
 		return it->second();
 	}
 
 	KeyboardShortcut real_id = id;
 	std::string description;
 
-	if (auto it = shortcut_aliases_.find(id) ; it != shortcut_aliases_.end()) {
+	if (auto it = shortcut_aliases_.find(id); it != shortcut_aliases_.end()) {
 		// This is an alias
 		real_id = it->second.real_shortcut;
 		description = it->second.descname();
@@ -952,8 +948,8 @@ std::string get_related_hotkeys_help(const KeyboardShortcut first,
 
 std::string get_ingame_shortcut_help() {
 	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Keyboard Shortcuts")));
-	rv += get_shortcut_range_help(KeyboardShortcut::kInGame_Begin,
-	                              KeyboardShortcut::kInGameMain_End);
+	rv +=
+	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGameMain_End);
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
 
