@@ -114,17 +114,17 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      Widelands::WareWorker type,
                                      Widelands::DescriptionIndex ware_or_worker_index,
                                      BuildingWindow::CollapsedState* collapsed)
-   : InputQueueDisplay(parent,
-                       interactive_base,
-                       constructionsite,
-                       type,
-                       ware_or_worker_index,
-                       nullptr,
-                       dynamic_cast<Widelands::ProductionsiteSettings*>(
-                          constructionsite.get_settings()),
-                       false,
-                       true,
-                       collapsed) {
+   : InputQueueDisplay(
+        parent,
+        interactive_base,
+        constructionsite,
+        type,
+        ware_or_worker_index,
+        nullptr,
+        dynamic_cast<Widelands::ProductionsiteSettings*>(constructionsite.get_settings()),
+        false,
+        true,
+        collapsed) {
 }
 
 static inline std::string create_tooltip(const bool increase) {
