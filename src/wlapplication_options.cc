@@ -843,9 +843,53 @@ static const std::map<KeyboardShortcut, KeyboardShortcutAlias> shortcut_aliases_
 	 KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavNext)}
 };
 
-bool is_alias(const KeyboardShortcut id) {
-	auto it = shortcut_aliases_.find(id);
-	return it != shortcut_aliases_.end();
+// Keyboard control additional help texts
+namespace SpecialHelpEntries {
+
+std::string help_move_map() {
+	std::string rv;
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Arrow keys"),
+	                         /** TRANSLATORS: This is the helptext for an access key combination. */
+	                         _("Move the map"));
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Ctrl + Arrow keys"),
+	                         /** TRANSLATORS: This is the helptext for an access key combination. */
+	                         _("Move the map fast"));
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Shift + Arrow keys"),
+	                         /** TRANSLATORS: This is the helptext for an access key combination. */
+	                         _("Move the map slowly"));
+	return rv;
+}
+
+std::string help_quicknav() {
+	std::string rv = get_related_hotkeys_help(
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   KeyboardShortcut::kInGameQuicknavSet1, 2, 9, _("Remember current location"));
+	rv += get_related_hotkeys_help(
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   KeyboardShortcut::kInGameQuicknavGoto1, 2, 9, _("Go to previously remembered location"));
+	return rv;
+}
+
+}  // namespace SpecialHelpEntries
+
+static const std::map<KeyboardShortcut, const std::function<std::string()>>
+   controls_special_entries_ {
+	{KeyboardShortcut::kEditor_Special_MapMove, SpecialHelpEntries::help_move_map},
+	{KeyboardShortcut::kInGame_Special_MapMove, SpecialHelpEntries::help_move_map},
+	{KeyboardShortcut::kInGame_Special_Quicknav, SpecialHelpEntries::help_quicknav}
+};
+
+bool is_real(const KeyboardShortcut id) {
+	if (auto it = shortcut_aliases_.find(id); it != shortcut_aliases_.end()) {
+		return false;
+	}
+	if (auto it = controls_special_entries_.find(id); it != controls_special_entries_.end()) {
+		return false;
+	}
+	return true;
 }
 
 KeyboardShortcut operator+(const KeyboardShortcut& id, const int i) {
@@ -858,6 +902,10 @@ KeyboardShortcut& operator++(KeyboardShortcut& id) {
 }
 
 std::string get_shortcut_help_line(const KeyboardShortcut id) {
+	if (auto it = controls_special_entries_.find(id) ; it != controls_special_entries_.end()) {
+		return it->second();
+	}
+
 	KeyboardShortcut real_id = id;
 	std::string description;
 
@@ -905,29 +953,7 @@ std::string get_related_hotkeys_help(const KeyboardShortcut first,
 std::string get_ingame_shortcut_help() {
 	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Keyboard Shortcuts")));
 	rv += get_shortcut_range_help(KeyboardShortcut::kInGame_Begin,
-	                              KeyboardShortcut::kInGame_BeforeMapMoveKeys);
-	/** TRANSLATORS: This is an access key combination. */
-	rv += as_definition_line(pgettext("hotkey", "Arrow keys"),
-	                         /** TRANSLATORS: This is the helptext for an access key combination. */
-	                         _("Move the map"));
-	/** TRANSLATORS: This is an access key combination. */
-	rv += as_definition_line(pgettext("hotkey", "Ctrl + Arrow keys"),
-	                         /** TRANSLATORS: This is the helptext for an access key combination. */
-	                         _("Move the map fast"));
-	/** TRANSLATORS: This is an access key combination. */
-	rv += as_definition_line(pgettext("hotkey", "Shift + Arrow keys"),
-	                         /** TRANSLATORS: This is the helptext for an access key combination. */
-	                         _("Move the map slowly"));
-	rv += get_shortcut_range_help(KeyboardShortcut::kInGame_AfterMapMoveKeys,
-	                              KeyboardShortcut::kInGame_BeforeQuicknavSet);
-	rv += get_related_hotkeys_help(
-	   /** TRANSLATORS: This is the helptext for an access key combination. */
-	   KeyboardShortcut::kInGameQuicknavSet1, 2, 9, _("Remember current location"));
-	rv += get_related_hotkeys_help(
-	   /** TRANSLATORS: This is the helptext for an access key combination. */
-	   KeyboardShortcut::kInGameQuicknavGoto1, 2, 9, _("Go to previously remembered location"));
-	rv += get_shortcut_range_help(
-	   KeyboardShortcut::kInGameClosing_Begin, KeyboardShortcut::kInGameClosing_End);
+	                              KeyboardShortcut::kInGameMain_End);
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
 
@@ -997,7 +1023,7 @@ std::string get_editor_shortcut_help() {
 }
 
 void unset_shortcut(const KeyboardShortcut id) {
-	assert(!is_alias(id));
+	assert(is_real(id));
 	set_shortcut(id, keysym(SDLK_UNKNOWN), nullptr);
 }
 
@@ -1043,7 +1069,7 @@ const std::string& get_fastplace_group_name(const KeyboardShortcut id) {
 }
 
 std::string to_string(const KeyboardShortcut id) {
-	assert(!is_alias(id));
+	assert(is_real(id));
 	if (id < KeyboardShortcut::kInGameMessages_Begin ||
 	    id > KeyboardShortcut::kInGameSeafaringstats_End) {
 		return shortcuts_.at(id).descname();
@@ -1058,12 +1084,12 @@ std::string to_string(const KeyboardShortcut id) {
 }
 
 SDL_Keysym get_default_shortcut(const KeyboardShortcut id) {
-	assert(!is_alias(id));
+	assert(is_real(id));
 	return shortcuts_.at(id).default_shortcut;
 }
 
 static void write_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
-	assert(!is_alias(id));
+	assert(is_real(id));
 	set_config_int("keyboard_sym", shortcuts_.at(id).internal_name, code.sym);
 	set_config_int("keyboard_mod", shortcuts_.at(id).internal_name, code.mod);
 }
@@ -1080,7 +1106,7 @@ static bool shared_scope(const std::set<KeyboardShortcutInfo::Scope>& scopes,
 }
 
 bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShortcut* conflict) {
-	assert(!is_alias(id));
+	assert(is_real(id));
 	const std::set<KeyboardShortcutInfo::Scope>& scopes = shortcuts_.at(id).scopes;
 
 	for (auto& pair : shortcuts_) {
@@ -1099,7 +1125,7 @@ bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShor
 }
 
 SDL_Keysym get_shortcut(const KeyboardShortcut id) {
-	assert(!is_alias(id));
+	assert(is_real(id));
 	return shortcuts_.at(id).current_shortcut;
 }
 
@@ -1416,7 +1442,7 @@ void init_fastplace_default_shortcuts(
 void init_shortcuts(const bool force_defaults) {
 	init_fastplace_shortcuts(force_defaults);
 	for (KeyboardShortcut k = KeyboardShortcut::k_Begin; k <= KeyboardShortcut::k_End; ++k) {
-		if (is_alias(k)) {
+		if (!is_real(k)) {
 			continue;
 		}
 		shortcuts_.at(k).current_shortcut = get_default_shortcut(k);

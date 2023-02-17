@@ -155,9 +155,10 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorShowhideImmovables,
 	kEditorShowhideCritters,
 	kEditorShowhideResources,
-	kEditorMinimap,       // alias of kCommonMinimap
-	kEditorQuicknavPrev,  // alias of kCommonQuicknavPrev
-	kEditorQuicknavNext,  // alias of kCommonQuicknavNext
+	kEditorMinimap,           // alias of kCommonMinimap
+	kEditor_Special_MapMove,  // special entries for map movement with arrow keys
+	kEditorQuicknavPrev,      // alias of kCommonQuicknavPrev
+	kEditorQuicknavNext,      // alias of kCommonQuicknavNext
 	kEditorMain_End = kEditorQuicknavNext,
 
 	// This will be a separate section in the help
@@ -228,14 +229,15 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameShowhideBuildings,
 	kInGameShowhideWorkareas,
 
-	kInGameMinimap,  // alias of kCommonMinimap
-	kInGame_BeforeMapMoveKeys = kInGameMinimap,
-	// Map movement with arrow keys will be inserted here
-	kInGame_AfterMapMoveKeys = kInGame_BeforeMapMoveKeys + 1,
-	kInGameScrollToHQ = kInGame_AfterMapMoveKeys,
-	kInGameQuicknavPrev,  // alias of kCommonQuicknavPrev
-	kInGameQuicknavNext,  // alias of kCommonQuicknavNext
-	kInGame_BeforeQuicknavSet = kInGameQuicknavNext,
+	kInGameMinimap,           // alias of kCommonMinimap
+	kInGame_Special_MapMove,  // special entries for map movement with arrow keys
+	kInGameScrollToHQ,
+	kInGameQuicknavPrev,       // alias of kCommonQuicknavPrev
+	kInGameQuicknavNext,       // alias of kCommonQuicknavNext
+	kInGame_Special_Quicknav,  // special entries with grouped quicknav set/goto shortcuts
+	kInGameQuicknavGUI,
+	kInGamePinnedNote,
+	kInGameMain_End = kInGamePinnedNote,
 
 	// These will be grouped to two lines in the Encyclopedia
 	kInGameQuicknavSet1,
@@ -256,14 +258,6 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameQuicknavGoto8,
 	kInGameQuicknavSet9,
 	kInGameQuicknavGoto9,
-
-	// Make these a section to make it easier to add more
-	kInGameClosing_Begin,
-	kInGameQuicknavGUI = kInGameClosing_Begin,
-	kInGamePinnedNote,
-	kInGameClosing_End = kInGamePinnedNote,
-
-	// Insert the general section from Common here in the help
 
 	// These have their own sections in the Encyclopedia
 
@@ -302,12 +296,16 @@ KeyboardShortcut operator+(const KeyboardShortcut& id, int i);
 KeyboardShortcut& operator++(KeyboardShortcut& id);
 
 /**
- * Check whether the given shortcut is only an alias.
- * Aliases are only used for help generation to simplify inserting common shortcuts,
- * and cannot be used for retrieving the actual key combination. This function should
- * be used when iterating over KeyboardShortcut ranges.
+ * Check whether the given shortcut can be used for setting and retrieving the
+ * actual key combination.
+ *
+ * This function should be used when iterating over KeyboardShortcut ranges.
+ *
+ * Not "real" shortcuts are aliases and special entries, that are only used for
+ * help generation to simplify inserting common shortcuts and other related
+ * help entries at the right place.
  */
-bool is_alias(KeyboardShortcut id);
+bool is_real(KeyboardShortcut id);
 
 /** Check whether a given shortcut is reserved for a fastplace shortcut slot. */
 inline bool is_fastplace(const KeyboardShortcut id) {
