@@ -282,7 +282,9 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		   new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 		b->set_force_scrolling(true);
 		for (KeyboardShortcut k = shortcut_start; k <= shortcut_end; ++k) {
-			add_key(*b, k);
+			if (!is_alias(k)) {
+				add_key(*b, k);
+			}
 		}
 		tabs_.add(title, title, b, "");
 		boxes_.push_back(b);

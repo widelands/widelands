@@ -143,25 +143,25 @@ enum class KeyboardShortcut : uint16_t {
 	kEditor_Begin = kCommon_End + 1,
 	kEditorNewMap = kEditor_Begin,
 	kEditorNewRandomMap,
+	kEditorLoad,  // alias of kCommonLoad
+	kEditorSave,  // alias of kCommonSave
 	kEditorUploadMap,
 	kEditorMapOptions,
-	kEditorMain_End = kEditorMapOptions,
-
-	// Insert Toggle Buildhelp from Common here in the help
-
-	kEditorShowHide_Begin = kEditorMain_End + 1,
-	kEditorShowhideMaximumBuildhelp = kEditorShowHide_Begin,
+	kEditorExit,  // alias of kCommonExit
+	kEditorHelp,  // alias of kCommonEncyclopedia
+	kEditorShowhideBuildhelp,  // alias of kCommonBuildhelp
+	kEditorShowhideMaximumBuildhelp,
 	kEditorShowhideGrid,
 	kEditorShowhideImmovables,
 	kEditorShowhideCritters,
 	kEditorShowhideResources,
-	kEditorShowHide_End = kEditorShowhideResources,
-
-	// Insert Toggle Minimap, Quicknav Prev/Next, the general section and Encyclopedia/Help
-	// from Common here in the help
+	kEditorMinimap,       // alias of kCommonMinimap
+	kEditorQuicknavPrev,  // alias of kCommonQuicknavPrev
+	kEditorQuicknavNext,  // alias of kCommonQuicknavNext
+	kEditorMain_End = kEditorQuicknavNext,
 
 	// This will be a separate section in the help
-	kEditorTools_Begin = kEditorShowHide_End + 1,
+	kEditorTools_Begin = kEditorMain_End + 1,
 	kEditorTools = kEditorTools_Begin,
 	kEditorChangeHeight,
 	kEditorRandomHeight,
@@ -193,8 +193,12 @@ enum class KeyboardShortcut : uint16_t {
 	kEditor_End = kEditorToolsize10,
 
 	kInGame_Begin = kEditor_End + 1,
-	kInGameRestart = kInGame_Begin,
-	kInGameSoundOptions,
+	kInGameSoundOptions = kInGame_Begin,
+	kInGameSave,  // alias of kCommonSave
+	kInGameLoad,  // alias of kCommonLoad
+	kInGameRestart,
+	kInGameExit,          // alias of kCommonExit
+	kInGameEncyclopedia,  // alias of kCommonEncyclopedia
 
 	kInGameMessages,
 	kInGameObjectives,
@@ -216,23 +220,22 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameSpeedDownFast,
 	kInGamePause,
 	kInGameSpeedReset,
-	kInGameMain_End = kInGameSpeedReset,
 
-	// Insert Toggle Buildhelp from Common here in the Encyclopedia
-
-	kInGameShowHide_Begin = kInGameMain_End + 1,
-	kInGameShowhideCensus = kInGameShowHide_Begin,
+	kInGameShowhideBuildhelp,  // alias of kCommonBuildhelp
+	kInGameShowhideCensus,
 	kInGameShowhideStats,
 	kInGameShowhideSoldiers,
 	kInGameShowhideBuildings,
 	kInGameShowhideWorkareas,
-	kInGameShowHide_End = kInGameShowhideWorkareas,
 
-	// Insert Toggle Minimap from Common here in the Encyclopedia
-
-	kInGameScrollToHQ,
-
-	// Insert QuicknavPrev/Next from Common here in the Encyclopedia
+	kInGameMinimap,  // alias of kCommonMinimap
+	kInGame_BeforeMapMoveKeys = kInGameMinimap,
+	// Map movement with arrow keys will be inserted here
+	kInGame_AfterMapMoveKeys = kInGame_BeforeMapMoveKeys + 1,
+	kInGameScrollToHQ = kInGame_AfterMapMoveKeys,
+	kInGameQuicknavPrev,  // alias of kCommonQuicknavPrev
+	kInGameQuicknavNext,  // alias of kCommonQuicknavNext
+	kInGame_BeforeQuicknavSet = kInGameQuicknavNext,
 
 	// These will be grouped to two lines in the Encyclopedia
 	kInGameQuicknavSet1,
@@ -260,7 +263,7 @@ enum class KeyboardShortcut : uint16_t {
 	kInGamePinnedNote,
 	kInGameClosing_End = kInGamePinnedNote,
 
-	// Insert the general section and Encyclopedia from Common here in the help
+	// Insert the general section from Common here in the help
 
 	// These have their own sections in the Encyclopedia
 
@@ -298,6 +301,14 @@ enum class KeyboardShortcut : uint16_t {
 KeyboardShortcut operator+(const KeyboardShortcut& id, int i);
 KeyboardShortcut& operator++(KeyboardShortcut& id);
 
+/**
+ * Check whether the given shortcut is only an alias.
+ * Aliases are only used for help generation to simplify inserting common shortcuts,
+ * and cannot be used for retrieving the actual key combination. This function should
+ * be used when iterating over KeyboardShortcut ranges.
+ */
+bool is_alias(KeyboardShortcut id);
+
 /** Check whether a given shortcut is reserved for a fastplace shortcut slot. */
 inline bool is_fastplace(const KeyboardShortcut id) {
 	return id >= KeyboardShortcut::kFastplace_Begin && id <= KeyboardShortcut::kFastplace_End;
@@ -316,13 +327,8 @@ bool set_shortcut(KeyboardShortcut id, SDL_Keysym code, KeyboardShortcut* confli
 /** Look up the keysym assigned to a given shortcut ID. */
 SDL_Keysym get_shortcut(KeyboardShortcut);
 
-/**
- * Get a keyboard shortcut richtext formatted as a definition line.
- * @param id The ID of the shortcut to format.
- * @param description The description for the shortcut. If empty, the default description will be
- *                    used.
- */
-std::string get_shortcut_help_line(KeyboardShortcut id, const std::string& description = "");
+/** Get a richtext formatted help entry for the given keyboard shortcut. */
+std::string get_shortcut_help_line(KeyboardShortcut id);
 
 /**
  * Get a formatted list of the current keyboard shortcuts with descriptions in the given range.
