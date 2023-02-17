@@ -91,36 +91,37 @@ void ensure_box_can_hold_input_queues(UI::Box& b) {
 }
 
 InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
-                                     InteractiveBase& ib,
-                                     Widelands::Building& bld,
-                                     Widelands::InputQueue& q,
+                                     InteractiveBase& interactive_base,
+                                     Widelands::Building& building,
+                                     Widelands::InputQueue& queue,
                                      bool show_only,
                                      bool has_priority,
                                      BuildingWindow::CollapsedState* collapsed)
    : InputQueueDisplay(parent,
-                       ib,
-                       bld,
-                       q.get_type(),
-                       q.get_index(),
-                       &q,
+                       interactive_base,
+                       building,
+                       queue.get_type(),
+                       queue.get_index(),
+                       &queue,
                        nullptr,
                        show_only,
                        has_priority,
                        collapsed) {
 }
 InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
-                                     InteractiveBase& ib,
-                                     Widelands::ConstructionSite& csite,
-                                     Widelands::WareWorker ww,
-                                     Widelands::DescriptionIndex di,
+                                     InteractiveBase& interactive_base,
+                                     Widelands::ConstructionSite& constructionsite,
+                                     Widelands::WareWorker type,
+                                     Widelands::DescriptionIndex ware_or_worker_index,
                                      BuildingWindow::CollapsedState* collapsed)
    : InputQueueDisplay(parent,
-                       ib,
-                       csite,
-                       ww,
-                       di,
+                       interactive_base,
+                       constructionsite,
+                       type,
+                       ware_or_worker_index,
                        nullptr,
-                       dynamic_cast<Widelands::ProductionsiteSettings*>(csite.get_settings()),
+                       dynamic_cast<Widelands::ProductionsiteSettings*>(
+                          constructionsite.get_settings()),
                        false,
                        true,
                        collapsed) {
@@ -154,25 +155,25 @@ static inline std::string create_tooltip(const bool increase) {
 }
 
 InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
-                                     InteractiveBase& ib,
-                                     Widelands::Building& bld,
-                                     Widelands::WareWorker ww,
-                                     Widelands::DescriptionIndex idx,
-                                     Widelands::InputQueue* q,
-                                     Widelands::ProductionsiteSettings* s,
+                                     InteractiveBase& interactive_base,
+                                     Widelands::Building& building,
+                                     Widelands::WareWorker type,
+                                     Widelands::DescriptionIndex ware_or_worker_index,
+                                     Widelands::InputQueue* queue,
+                                     Widelands::ProductionsiteSettings* settings,
                                      bool show_only,
                                      bool has_priority,
                                      BuildingWindow::CollapsedState* collapsed)
    : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-     ibase_(ib),
-     can_act_(!show_only && ibase_.can_act(bld.owner().player_number())),
+     ibase_(interactive_base),
+     can_act_(!show_only && ibase_.can_act(building.owner().player_number())),
      show_only_(show_only),
-     has_priority_(has_priority && ww == Widelands::wwWARE),
-     building_(&bld),
-     type_(ww),
-     index_(idx),
-     queue_(q),
-     settings_(s),
+     has_priority_(has_priority && type == Widelands::wwWARE),
+     building_(&building),
+     type_(type),
+     index_(ware_or_worker_index),
+     queue_(queue),
+     settings_(settings),
      max_fill_indicator_(*g_image_cache->get("images/wui/buildings/max_fill_indicator.png")),
      vbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      hbox_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
@@ -231,7 +232,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                4,
                has_priority_ ? priority_to_index(settings_ != nullptr ?
                                                     settings_->ware_queues.at(index_).priority :
-                                                    bld.get_priority(type_, index_)) :
+                                                    building.get_priority(type_, index_)) :
                                2,
                UI::SliderStyle::kWuiLight,
                "",
@@ -269,8 +270,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	for (size_t i = 0; i < nr_icons_; ++i) {
 		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, 0, 0, kButtonSize, kButtonSize,
 		                         type_ == Widelands::wwWARE ?
-                                  bld.owner().tribe().get_ware_descr(index_)->icon() :
-                                  bld.owner().tribe().get_worker_descr(index_)->icon());
+                                  building.owner().tribe().get_ware_descr(index_)->icon() :
+                                  building.owner().tribe().get_worker_descr(index_)->icon());
 		hbox_.add(icons_[i]);
 	}
 
@@ -344,8 +345,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	}
 
 	set_tooltip(type_ == Widelands::wwWARE ?
-                  bld.owner().tribe().get_ware_descr(index_)->descname() :
-                  bld.owner().tribe().get_worker_descr(index_)->descname());
+                  building.owner().tribe().get_ware_descr(index_)->descname() :
+                  building.owner().tribe().get_worker_descr(index_)->descname());
 
 	if (nr_icons_ == 0) {
 		// Can happen when this is a dropout queue that has already been emptied.
