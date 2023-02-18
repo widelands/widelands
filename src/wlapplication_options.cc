@@ -446,11 +446,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_r, kDefaultCtrlModifier),
                          "editor_new_random_map",
                          gettext_noop("New Random Map"))},
-   {KeyboardShortcut::kEditorUploadMap,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_u, kDefaultCtrlModifier),
-                         "editor_upload_map",
-                         gettext_noop("Publish Map Online"))},
+   {KeyboardShortcut::kEditorUploadMap, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                             keysym(SDLK_u, kDefaultCtrlModifier),
+                                                             "editor_upload_map",
+                                                             gettext_noop("Publish Map Online"))},
    {KeyboardShortcut::kEditorMapOptions,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_o, kDefaultCtrlModifier),
@@ -504,11 +503,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                         keysym(SDLK_i, KMOD_SHIFT),
                                                         "editor_info",
                                                         gettext_noop("Info Tool"))},
-   {KeyboardShortcut::kEditorMapOrigin,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_0, KMOD_SHIFT),
-                         "editor_map_origin",
-                         gettext_noop("Map Origin Tool"))},
+   {KeyboardShortcut::kEditorMapOrigin, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                             keysym(SDLK_0, KMOD_SHIFT),
+                                                             "editor_map_origin",
+                                                             gettext_noop("Map Origin Tool"))},
    {KeyboardShortcut::kEditorMapSize, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                            keysym(SDLK_z, KMOD_SHIFT),
                                                            "editor_map_size",
@@ -608,21 +606,19 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_a),
                          "game_stats_general",
                          gettext_noop("General Statistics"))},
-   {KeyboardShortcut::kInGameStatsWares,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_p),
-                         "game_stats_wares",
-                         gettext_noop("Ware Statistics"))},
+   {KeyboardShortcut::kInGameStatsWares, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                              keysym(SDLK_p),
+                                                              "game_stats_wares",
+                                                              gettext_noop("Ware Statistics"))},
    {KeyboardShortcut::kInGameStatsBuildings,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_b),
                          "game_stats_buildings",
                          gettext_noop("Building Statistics"))},
-   {KeyboardShortcut::kInGameStatsStock,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_i),
-                         "game_stats_stock",
-                         gettext_noop("Stock Inventory"))},
+   {KeyboardShortcut::kInGameStatsStock, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                              keysym(SDLK_i),
+                                                              "game_stats_stock",
+                                                              gettext_noop("Stock Inventory"))},
    {KeyboardShortcut::kInGameStatsSoldiers,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_x),
@@ -676,11 +672,10 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_PAGEUP, kDefaultCtrlModifier),
                          "game_speed_up_fast",
                          gettext_noop("Increase Game Speed by 10×"))},
-   {KeyboardShortcut::kInGameSpeedReset,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_PAUSE, KMOD_SHIFT),
-                         "game_speed_reset",
-                         gettext_noop("Reset Game Speed"))},
+   {KeyboardShortcut::kInGameSpeedReset, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                              keysym(SDLK_PAUSE, KMOD_SHIFT),
+                                                              "game_speed_reset",
+                                                              gettext_noop("Reset Game Speed"))},
    {KeyboardShortcut::kInGamePause, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                                                          keysym(SDLK_PAUSE),
                                                          "game_pause",
@@ -794,11 +789,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #define QUICKNAV(i)                                                                                \
 	{KeyboardShortcut::kInGameQuicknavSet##i,                                                       \
 	 KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},                                     \
-	                      keysym(SDLK_##i, kDefaultCtrlModifier),                                   \
-	                      "game_quicknav_set_" #i, "Set Landmark #" #i)},                           \
-	{KeyboardShortcut::kInGameQuicknavGoto##i,                                                      \
-	 KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_##i),                   \
-		                   "game_quicknav_goto_" #i, "Go To Landmark #" #i)                          \
+	                      keysym(SDLK_##i, kDefaultCtrlModifier), "game_quicknav_set_" #i,          \
+	                      "Set Landmark #" #i)},                                                    \
+	{                                                                                               \
+		KeyboardShortcut::kInGameQuicknavGoto##i,                                                    \
+		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_##i),              \
+		                        "game_quicknav_goto_" #i, "Go To Landmark #" #i)                     \
 	}
    QUICKNAV(1),
    QUICKNAV(2),
