@@ -807,6 +807,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #undef QUICKNAV
 };
 
+bool is_real(const KeyboardShortcut id) {
+	auto it = shortcuts_.find(id);
+	return it != shortcuts_.end();
+}
+
 static const std::map<KeyboardShortcut, KeyboardShortcutAlias> shortcut_aliases_ = {
    {KeyboardShortcut::kEditorLoad,
     /** TRANSLATORS: This is the helptext for an access key combination. */
@@ -891,16 +896,6 @@ static const std::map<KeyboardShortcut, const std::function<std::string()>>
                              {KeyboardShortcut::kInGame_Special_MapMove, help_move_map},
                              {KeyboardShortcut::kInGame_Special_Quicknav, help_quicknav}};
 
-bool is_real(const KeyboardShortcut id) {
-	if (auto it = shortcut_aliases_.find(id); it != shortcut_aliases_.end()) {
-		return false;
-	}
-	if (auto it = controls_special_entries_.find(id); it != controls_special_entries_.end()) {
-		return false;
-	}
-	return true;
-}
-
 // Help formatting functions
 namespace {
 
@@ -917,6 +912,7 @@ std::string get_shortcut_help_line(const KeyboardShortcut id) {
 		real_id = it->second.real_shortcut;
 		description = it->second.descname();
 	} else {
+		assert(is_real(id));
 		// Not using to_string(), because we don't want the prefixes for
 		// message- and ship window shortcuts.
 		description = shortcuts_.at(id).descname();
