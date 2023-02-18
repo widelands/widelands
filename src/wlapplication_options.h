@@ -294,6 +294,7 @@ enum class KeyboardShortcut : uint16_t {
 
 KeyboardShortcut operator+(const KeyboardShortcut& id, int i);
 KeyboardShortcut& operator++(KeyboardShortcut& id);
+uint16_t operator-(const KeyboardShortcut& id, const KeyboardShortcut& base);
 
 /**
  * Check whether the given shortcut can be used for setting and retrieving the
