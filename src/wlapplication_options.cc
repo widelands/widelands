@@ -887,10 +887,9 @@ std::string help_quicknav() {
 }  // namespace
 
 static const std::map<KeyboardShortcut, const std::function<std::string()>>
-   controls_special_entries_{
-      {KeyboardShortcut::kEditor_Special_MapMove, help_move_map},
-      {KeyboardShortcut::kInGame_Special_MapMove, help_move_map},
-      {KeyboardShortcut::kInGame_Special_Quicknav, help_quicknav}};
+   controls_special_entries_{{KeyboardShortcut::kEditor_Special_MapMove, help_move_map},
+                             {KeyboardShortcut::kInGame_Special_MapMove, help_move_map},
+                             {KeyboardShortcut::kInGame_Special_Quicknav, help_quicknav}};
 
 bool is_real(const KeyboardShortcut id) {
 	if (auto it = shortcut_aliases_.find(id); it != shortcut_aliases_.end()) {
