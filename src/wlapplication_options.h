@@ -325,28 +325,6 @@ bool set_shortcut(KeyboardShortcut id, SDL_Keysym code, KeyboardShortcut* confli
 /** Look up the keysym assigned to a given shortcut ID. */
 SDL_Keysym get_shortcut(KeyboardShortcut);
 
-/** Get a richtext formatted help entry for the given keyboard shortcut. */
-std::string get_shortcut_help_line(KeyboardShortcut id);
-
-/**
- * Get a formatted list of the current keyboard shortcuts with descriptions in the given range.
- * @param start ID of the first shortcut to be included
- * @param end ID of the last shortcut to be included
- */
-std::string get_shortcut_range_help(KeyboardShortcut start, KeyboardShortcut end);
-
-/**
- * Get a formatted definition line for multiple keyboard shortcuts combined
- * @param first ID of the first shortcut to be included
- * @param step Increment between IDs to be included
- * @param n_keys Number of shortcuts to be included
- * @param description The common description for the shortcuts.
- */
-std::string get_related_hotkeys_help(KeyboardShortcut first,
-                                     int step,
-                                     int n_keys,
-                                     const std::string& description);
-
 /** Get the formatted help of the current in game keyboard shortcuts including headers. */
 std::string get_ingame_shortcut_help();
 

@@ -121,6 +121,15 @@ void set_config_string(const std::string& section,
 
 constexpr char kFastplaceNameSeparator = '$';
 
+KeyboardShortcut operator+(const KeyboardShortcut& id, const int i) {
+	return static_cast<KeyboardShortcut>(static_cast<uint16_t>(id) + i);
+}
+
+KeyboardShortcut& operator++(KeyboardShortcut& id) {
+	id = id + 1;
+	return id;
+}
+
 struct KeyboardShortcutInfo {
 	enum class Scope {
 		kGlobal,  // special value that intersects with all other scopes
@@ -153,7 +162,7 @@ struct KeyboardShortcutAlias {
 	KeyboardShortcutAlias(const KeyboardShortcut real, const std::string& desc_override = "")
 	   : real_shortcut(real), descname_override(desc_override) {
 	}
-	std::string descname() const {
+	[[nodiscard]] std::string descname() const {
 		return descname_override.empty() ? to_string(real_shortcut) : _(descname_override);
 	}
 };
@@ -841,7 +850,7 @@ static const std::map<KeyboardShortcut, KeyboardShortcutAlias> shortcut_aliases_
     KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavNext)}};
 
 // Keyboard control additional help texts
-namespace SpecialHelpEntries {
+namespace {
 
 std::string help_move_map() {
 	std::string rv;
@@ -860,6 +869,11 @@ std::string help_move_map() {
 	return rv;
 }
 
+std::string get_related_hotkeys_help(KeyboardShortcut first,
+                                     int step,
+                                     int n_keys,
+                                     const std::string& description);
+
 std::string help_quicknav() {
 	std::string rv = get_related_hotkeys_help(
 	   /** TRANSLATORS: This is the helptext for an access key combination. */
@@ -870,13 +884,13 @@ std::string help_quicknav() {
 	return rv;
 }
 
-}  // namespace SpecialHelpEntries
+}  // namespace
 
 static const std::map<KeyboardShortcut, const std::function<std::string()>>
    controls_special_entries_{
-      {KeyboardShortcut::kEditor_Special_MapMove, SpecialHelpEntries::help_move_map},
-      {KeyboardShortcut::kInGame_Special_MapMove, SpecialHelpEntries::help_move_map},
-      {KeyboardShortcut::kInGame_Special_Quicknav, SpecialHelpEntries::help_quicknav}};
+      {KeyboardShortcut::kEditor_Special_MapMove, help_move_map},
+      {KeyboardShortcut::kInGame_Special_MapMove, help_move_map},
+      {KeyboardShortcut::kInGame_Special_Quicknav, help_quicknav}};
 
 bool is_real(const KeyboardShortcut id) {
 	if (auto it = shortcut_aliases_.find(id); it != shortcut_aliases_.end()) {
@@ -888,14 +902,8 @@ bool is_real(const KeyboardShortcut id) {
 	return true;
 }
 
-KeyboardShortcut operator+(const KeyboardShortcut& id, const int i) {
-	return static_cast<KeyboardShortcut>(static_cast<uint16_t>(id) + i);
-}
-
-KeyboardShortcut& operator++(KeyboardShortcut& id) {
-	id = id + 1;
-	return id;
-}
+// Help formatting functions
+namespace {
 
 std::string get_shortcut_help_line(const KeyboardShortcut id) {
 	if (auto it = controls_special_entries_.find(id); it != controls_special_entries_.end()) {
@@ -945,6 +953,8 @@ std::string get_related_hotkeys_help(const KeyboardShortcut first,
 	}
 	return as_definition_line(keys_list, description);
 }
+
+}  // namespace
 
 std::string get_ingame_shortcut_help() {
 	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Keyboard Shortcuts")));
