@@ -30,6 +30,7 @@ jobs:
         mkdir ~/txcli
         pushd ~/txcli
         curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+        echo "PATH=$PATH" >> $GITHUB_ENV
         popd
     - name: Synchronizing translations
       run: |
