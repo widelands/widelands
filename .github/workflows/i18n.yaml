@@ -25,8 +25,12 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install gettext transifex-client translate-toolkit appstream desktop-file-utils
+        sudo apt-get install gettext translate-toolkit appstream desktop-file-utils
         pip install pyformat
+        mkdir ~/txcli
+        pushd ~/txcli
+        curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+        popd
     - name: Synchronizing translations
       run: |
         echo "${{ secrets.TXAUTH }}" > ~/.transifexrc
