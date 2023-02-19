@@ -1,206 +1,207 @@
 [main]
 host = https://www.transifex.com
 
-[widelands.appdata]
+[o:widelands:p:widelands:r:appdata]
 file_filter = xdg/translations/<lang>.json
 source_file = xdg/translations/appdata.json
 source_lang = en
-type = KEYVALUEJSON
+type        = KEYVALUEJSON
 
-[widelands.editor]
+[o:widelands:p:widelands:r:editor]
 file_filter = po/widelands_editor/<lang>.po
 source_file = po/widelands_editor/widelands_editor.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.maps]
-file_filter = po/maps/<lang>.po
-source_file = po/maps/maps.pot
-source_lang = en
-type = PO
-
-[widelands.map_plateau]
+[o:widelands:p:widelands:r:map_plateau]
 file_filter = po/map_the_green_plateau.wmf/<lang>.po
 source_file = po/map_the_green_plateau.wmf/map_the_green_plateau.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.map_river]
+[o:widelands:p:widelands:r:map_river]
 file_filter = po/map_along_the_river.wmf/<lang>.po
 source_file = po/map_along_the_river.wmf/map_along_the_river.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.mp_scenario_island_hopping]
+[o:widelands:p:widelands:r:maps]
+file_filter = po/maps/<lang>.po
+source_file = po/maps/maps.pot
+source_lang = en
+type        = PO
+
+[o:widelands:p:widelands:r:mp_scenario_island_hopping]
 file_filter = po/mp_scenario_island_hopping.wmf/<lang>.po
 source_file = po/mp_scenario_island_hopping.wmf/mp_scenario_island_hopping.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.mp_scenario_smugglers]
+[o:widelands:p:widelands:r:mp_scenario_smugglers]
 file_filter = po/mp_scenario_smugglers.wmf/<lang>.po
 source_file = po/mp_scenario_smugglers.wmf/mp_scenario_smugglers.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_atl01]
+[o:widelands:p:widelands:r:scenario_atl01]
 file_filter = po/scenario_atl01.wmf/<lang>.po
 source_file = po/scenario_atl01.wmf/scenario_atl01.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_atl02]
+[o:widelands:p:widelands:r:scenario_atl02]
 file_filter = po/scenario_atl02.wmf/<lang>.po
 source_file = po/scenario_atl02.wmf/scenario_atl02.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_bar01]
+[o:widelands:p:widelands:r:scenario_bar01]
 file_filter = po/scenario_bar01.wmf/<lang>.po
 source_file = po/scenario_bar01.wmf/scenario_bar01.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_bar02]
+[o:widelands:p:widelands:r:scenario_bar02]
 file_filter = po/scenario_bar02.wmf/<lang>.po
 source_file = po/scenario_bar02.wmf/scenario_bar02.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_dummy]
+[o:widelands:p:widelands:r:scenario_dummy]
 file_filter = po/scenario_dummy.wmf/<lang>.po
 source_file = po/scenario_dummy.wmf/scenario_dummy.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_emp01]
+[o:widelands:p:widelands:r:scenario_emp01]
 file_filter = po/scenario_emp01.wmf/<lang>.po
 source_file = po/scenario_emp01.wmf/scenario_emp01.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_emp02]
+[o:widelands:p:widelands:r:scenario_emp02]
 file_filter = po/scenario_emp02.wmf/<lang>.po
 source_file = po/scenario_emp02.wmf/scenario_emp02.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_emp03]
+[o:widelands:p:widelands:r:scenario_emp03]
 file_filter = po/scenario_emp03.wmf/<lang>.po
 source_file = po/scenario_emp03.wmf/scenario_emp03.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_emp04]
+[o:widelands:p:widelands:r:scenario_emp04]
 file_filter = po/scenario_emp04.wmf/<lang>.po
 source_file = po/scenario_emp04.wmf/scenario_emp04.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_fri01]
+[o:widelands:p:widelands:r:scenario_fri01]
 file_filter = po/scenario_fri01.wmf/<lang>.po
 source_file = po/scenario_fri01.wmf/scenario_fri01.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_fri02]
+[o:widelands:p:widelands:r:scenario_fri02]
 file_filter = po/scenario_fri02.wmf/<lang>.po
 source_file = po/scenario_fri02.wmf/scenario_fri02.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_fri03]
+[o:widelands:p:widelands:r:scenario_fri03]
 file_filter = po/scenario_fri03.wmf/<lang>.po
 source_file = po/scenario_fri03.wmf/scenario_fri03.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_fri04]
+[o:widelands:p:widelands:r:scenario_fri04]
 file_filter = po/scenario_fri04.wmf/<lang>.po
 source_file = po/scenario_fri04.wmf/scenario_fri04.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_fri05]
+[o:widelands:p:widelands:r:scenario_fri05]
 file_filter = po/scenario_fri05.wmf/<lang>.po
 source_file = po/scenario_fri05.wmf/scenario_fri05.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_tutorial01_basic_control]
+[o:widelands:p:widelands:r:scenario_tutorial01_basic_control]
 file_filter = po/scenario_tutorial01_basic_control.wmf/<lang>.po
 source_file = po/scenario_tutorial01_basic_control.wmf/scenario_tutorial01_basic_control.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_tutorial02_warfare]
+[o:widelands:p:widelands:r:scenario_tutorial02_warfare]
 file_filter = po/scenario_tutorial02_warfare.wmf/<lang>.po
 source_file = po/scenario_tutorial02_warfare.wmf/scenario_tutorial02_warfare.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_tutorial03_seafaring]
+[o:widelands:p:widelands:r:scenario_tutorial03_seafaring]
 file_filter = po/scenario_tutorial03_seafaring.wmf/<lang>.po
 source_file = po/scenario_tutorial03_seafaring.wmf/scenario_tutorial03_seafaring.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.scenario_tutorial04_economy]
+[o:widelands:p:widelands:r:scenario_tutorial04_economy]
 file_filter = po/scenario_tutorial04_economy.wmf/<lang>.po
 source_file = po/scenario_tutorial04_economy.wmf/scenario_tutorial04_economy.wmf.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.texts]
+[o:widelands:p:widelands:r:texts]
 file_filter = po/texts/<lang>.po
 source_file = po/texts/texts.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.training_wheels]
+[o:widelands:p:widelands:r:training_wheels]
 file_filter = po/training_wheels/<lang>.po
 source_file = po/training_wheels/training_wheels.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.translators]
+[o:widelands:p:widelands:r:translators]
 file_filter = data/i18n/locales/<lang>.json
 source_file = data/i18n/locales/locales_translators.json
 source_lang = en
-type = KEYVALUEJSON
+type        = KEYVALUEJSON
 
-[widelands.tribes]
+[o:widelands:p:widelands:r:tribes]
 file_filter = po/tribes/<lang>.po
 source_file = po/tribes/tribes.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.tribes_encyclopedia]
+[o:widelands:p:widelands:r:tribes_encyclopedia]
 file_filter = po/tribes_encyclopedia/<lang>.po
 source_file = po/tribes_encyclopedia/tribes_encyclopedia.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.widelands]
+[o:widelands:p:widelands:r:widelands]
 file_filter = po/widelands/<lang>.po
 source_file = po/widelands/widelands.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.widelands_console]
+[o:widelands:p:widelands:r:widelands_console]
 file_filter = po/widelands_console/<lang>.po
 source_file = po/widelands_console/widelands_console.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.win_conditions]
+[o:widelands:p:widelands:r:win_conditions]
 file_filter = po/win_conditions/<lang>.po
 source_file = po/win_conditions/win_conditions.pot
 source_lang = en
-type = PO
+type        = PO
 
-[widelands.world]
+[o:widelands:p:widelands:r:world]
 file_filter = po/world/<lang>.po
 source_file = po/world/world.pot
 source_lang = en
-type = PO
+type        = PO
+

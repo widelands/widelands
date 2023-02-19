@@ -14,6 +14,7 @@
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
 # Sebastian Janus <sebek89@gmail.com>, 2015
+# Sergiusz NA, 2023
 # Sylwia Studzińska <sanuspg@gmail.com>, 2019
 # Szymon Gackowski <szymon.gackowski@gmail.com>, 2016
 # Tomasz Kozłowski, 2022
@@ -26,7 +27,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022\n"
+"Last-Translator: Sergiusz NA, 2023\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -382,7 +383,7 @@ msgstr "Opcje mapy"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:242
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Opublikuj Mapę Online"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:246
@@ -628,7 +629,7 @@ msgstr "Mapa nie została zapisana, czy na pewno chcesz wyjść?"
 
 #: ../../src/editor/editorinteractive.cc:615
 msgid "Are you sure you wish to exit the editor?"
-msgstr ""
+msgstr "Czy na pewno chcesz wyjść z edytora?"
 
 #: ../../src/editor/editorinteractive.cc:1109 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
@@ -692,7 +693,7 @@ msgstr "Wczytywanie świata…"
 
 #: ../../src/editor/editorinteractive.cc:1394
 msgid "Publish Map"
-msgstr ""
+msgstr "Opublikuj Mapę"
 
 #: ../../src/editor/editorinteractive.cc:1395
 #, c-format
@@ -704,19 +705,19 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr ""
+msgstr "Jesteś pewny, że chcesz opublikować tę mapę online?\n\nNazwa: %1$s\nNazwa wewnętrzna: %2$s\nAutor: %3$s\nOpis: %4$s\nWskazówka: %5$s\n"
 
 #: ../../src/editor/editorinteractive.cc:1419
 msgid "Login Error"
-msgstr ""
+msgstr "Błąd Logowania"
 
 #: ../../src/editor/editorinteractive.cc:1424
 msgid "Uploading Add-On…"
-msgstr ""
+msgstr "Przesyłanie Dodatku..."
 
 #: ../../src/editor/editorinteractive.cc:1425
 msgid "Saving map…"
-msgstr ""
+msgstr "Zapisywanie mapy..."
 
 #: ../../src/editor/editorinteractive.cc:1444
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:310
@@ -726,15 +727,15 @@ msgstr "Błąd podczas zapisywania mapy!"
 
 #: ../../src/editor/editorinteractive.cc:1450
 msgid "Packaging add-on…"
-msgstr ""
+msgstr "Pakownie dodatku..."
 
 #: ../../src/editor/editorinteractive.cc:1500
 msgid "Add-On Generation Error"
-msgstr ""
+msgstr "Błąd Generowania Dodatku"
 
 #: ../../src/editor/editorinteractive.cc:1501
 msgid "The add-on could not be written to the disk."
-msgstr ""
+msgstr "Dodatek nie mógł zostać zapisany na dysku."
 
 #: ../../src/editor/editorinteractive.cc:1508
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
@@ -743,15 +744,15 @@ msgstr "Przesyłanie..."
 
 #: ../../src/editor/editorinteractive.cc:1514
 msgid "Upload Error"
-msgstr ""
+msgstr "Błąd Przesyłania"
 
 #: ../../src/editor/editorinteractive.cc:1536
 msgid "Success"
-msgstr ""
+msgstr "Sukces"
 
 #: ../../src/editor/editorinteractive.cc:1537
 msgid "The add-on was uploaded successfully."
-msgstr ""
+msgstr "Dodatek został przesłany pomyślnie."
 
 #: ../../src/editor/map_generator.cc:754
 msgid "Random Player"
@@ -1242,7 +1243,7 @@ msgstr "Tworzenie pustej mapy..."
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:63
 #: ../../src/logic/addons.cc:58
 msgid "Map Generator"
-msgstr ""
+msgstr "Generator Map"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:80
 #: ../../src/wui/gamedetails.cc:167
@@ -1310,7 +1311,7 @@ msgstr "Liczba losowa:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:206
 msgid "Generate a new random number"
-msgstr ""
+msgstr "Wygeneruj nową liczbę losową"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:208
 msgid "Map ID:"
@@ -1378,7 +1379,7 @@ msgid ""
 "The map generator could not produce a good-enough map with the provided "
 "settings. This map will probably need extensive editing to be playable. "
 "Consider creating a new map with different parameters."
-msgstr ""
+msgstr "Generator map nie mógł stworzyć wystarczająco dobrej mapy na podstawie podanych parametrów. Ta mapa prawdopodobnie będzie wymagała obszernej edycji, aby była grywalna. Rozważ stworzenie nowej mapy z innymi parametrami."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:689
 msgid "The Widelands Random Map Generator"
