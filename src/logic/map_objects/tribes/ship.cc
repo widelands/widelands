@@ -1492,7 +1492,8 @@ void Ship::set_destination(EditorGameBase& egbase, MapObject* dest) {
 	if (upcast(Game, g, &egbase)) {
 		send_signal(*g, "wakeup");
 	}
-	Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
+
+	set_ship_state_and_notify(ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
 }
 
 void Ship::add_item(Game& game, const ShippingItem& item) {

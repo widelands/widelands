@@ -307,11 +307,11 @@ void ShipWindow::no_port_error_message() {
 }
 
 void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
-	const Widelands::EditorGameBase& egbase = ibase_.egbase();
-	const Widelands::CheckStepDefault checkstep(Widelands::MOVECAPS_SWIM);
-	const Widelands::PortDock* dest_dock = ship->get_destination_port(egbase);
-	const Widelands::Ship* dest_ship = ship->get_destination_ship(egbase);
-	const Widelands::PinnedNote* dest_note = ship->get_destination_note(egbase);
+	Widelands::EditorGameBase& egbase = ibase_.egbase();
+	Widelands::CheckStepDefault checkstep(Widelands::MOVECAPS_SWIM);
+	Widelands::PortDock* dest_dock = ship->get_destination_port(egbase);
+	Widelands::Ship* dest_ship = ship->get_destination_ship(egbase);
+	Widelands::PinnedNote* dest_note = ship->get_destination_note(egbase);
 
 	// Populate destination dropdown if anything changed since last think
 	std::vector<Widelands::PortDock*> all_ports;
@@ -338,19 +338,22 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 	if (!needs_update) {
 		size_t i = 0;
 		for (Widelands::PortDock* pd : all_ports) {
-			if (set_destination_->at(++i) != pd) {
+			const auto& entry = set_destination_->at(++i);
+			if (entry.value != pd || entry.name != pd->get_warehouse()->get_warehouse_name()) {
 				needs_update = true;
 				break;
 			}
 		}
 		for (Widelands::Ship* temp_ship : all_ships) {
-			if (set_destination_->at(++i) != temp_ship) {
+			const auto& entry = set_destination_->at(++i);
+			if (entry.value != temp_ship || entry.name != temp_ship->get_shipname()) {
 				needs_update = true;
 				break;
 			}
 		}
 		for (Widelands::PinnedNote* note : all_notes) {
-			if (set_destination_->at(++i) != note) {
+			const auto& entry = set_destination_->at(++i);
+			if (entry.value != note || entry.name != note->get_text()) {
 				needs_update = true;
 				break;
 			}
@@ -371,6 +374,16 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 			set_destination_->add(note->get_text(), note,
 				g_animation_manager->get_animation(note->owner().tribe().pinned_note_animation()).representative_image(&note->get_rgb())
 			, note == dest_note);
+		}
+	} else if (!set_destination_->is_expanded()) {
+		if (dest_dock != nullptr) {
+			set_destination_->select(dest_dock);
+		} else if (dest_ship != nullptr) {
+			set_destination_->select(dest_ship);
+		} else if (dest_note != nullptr) {
+			set_destination_->select(dest_note);
+		} else {
+			set_destination_->select(nullptr);
 		}
 	}
 

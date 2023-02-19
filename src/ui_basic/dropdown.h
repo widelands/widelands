@@ -264,6 +264,15 @@ private:
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.
 template <typename Entry> class Dropdown : public BaseDropdown {
 public:
+	class ExtendedEntry {
+	public:
+		const std::string name;
+		const Entry value;
+		const Image* img;
+		const std::string tooltip;
+		const std::string hotkey;
+	};
+
 	using HotkeyFunction = std::function<void(Entry)>;
 	/// \param parent             the parent panel
 	/// \param name               a name so that we can reference the dropdown via Lua
@@ -354,9 +363,9 @@ public:
 		return *filtered_entries[BaseDropdown::get_selected()];
 	}
 
-	const Entry& at(size_t index) const {
+	const ExtendedEntry& at(size_t index) const {
 		assert(index < unfiltered_entries.size());
-		return unfiltered_entries.at(index).value;
+		return unfiltered_entries.at(index);
 	}
 
 	/// Select the entry if it exists. Does not trigger the 'selected' signal.
@@ -377,15 +386,6 @@ public:
 	}
 
 private:
-	class ExtendedEntry {
-	public:
-		const std::string name;
-		const Entry value;
-		const Image* img;
-		const std::string tooltip;
-		const std::string hotkey;
-	};
-
 	void save_selected_entry(uint32_t index) override {
 		selected_entry_ = index < filtered_entries.size() ? *filtered_entries[index] : Entry{};
 	}
