@@ -791,6 +791,11 @@ void InteractiveBase::game_logic_think() {
 	last_frame_realtime_ = SDL_GetTicks();
 	last_frame_gametime_ = egbase().get_gametime();
 
+	if (previous_frame_gametime_ > last_frame_gametime_) {
+		assert(!egbase().is_game());  // In the editor, time can run backwards sometimes.
+		last_frame_gametime_ = previous_frame_gametime_;
+	}
+
 	const uint64_t realtime_step =
 	   std::max<uint64_t>(last_frame_realtime_ - previous_frame_realtime_, 1);
 

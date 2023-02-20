@@ -3,7 +3,7 @@
 # 
 # Translators:
 # Adam Piggott, 2017
-# Andi Chandler <andi@gowling.com>, 2016,2019
+# Andi Chandler <andi@gowling.com>, 2016,2019,2023
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: Andi Chandler <andi@gowling.com>, 2016,2019\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>, 2016,2019,2023\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -348,7 +348,7 @@ msgstr "Dead Tree"
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:7
 msgid "Felled Tree"
-msgstr ""
+msgstr "Felled Tree"
 
 #: ../../data/world/immovables/trees/larch/mature/init.lua:9
 msgid "Larch (Mature)"
@@ -1012,19 +1012,19 @@ msgstr "Ice Floes 2"
 
 #: ../../data/world/terrains/winter/taiga1/init.lua:5
 msgid "Taiga 1"
-msgstr ""
+msgstr "Taiga 1"
 
 #: ../../data/world/terrains/winter/taiga2/init.lua:5
 msgid "Taiga 2"
-msgstr ""
+msgstr "Taiga 2"
 
 #: ../../data/world/terrains/winter/taiga3/init.lua:5
 msgid "Taiga 3"
-msgstr ""
+msgstr "Taiga 3"
 
 #: ../../data/world/terrains/winter/tundra/init.lua:5
 msgid "Tundra"
-msgstr ""
+msgstr "Tundra"
 
 #: ../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"

@@ -1018,7 +1018,7 @@ msgstr "Jelenlegi könyvtár: %s"
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:65
 msgid "Display"
-msgstr "Megjelenítés:"
+msgstr "Megjelenítés"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:76
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:249
@@ -6400,7 +6400,7 @@ msgstr "Oktatójáték neve"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:129
 msgid "The number of this scenario in the campaign"
-msgstr "A küldetések száma ebben a hadjáratban"
+msgstr "A küldetés sorszáma a hadjáratban"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:130
 msgid "Scenario Name"
@@ -7178,12 +7178,12 @@ msgstr "Hajózás: Expedíciók kikötőhelynél"
 #: ../../src/wlapplication_options.cc:754
 #, c-format
 msgid "Set Landmark #%d"
-msgstr "#%d. helyszín rögzítése"
+msgstr "%d. helyszín rögzítése"
 
 #: ../../src/wlapplication_options.cc:759
 #, c-format
 msgid "Go To Landmark #%d"
-msgstr "#%d. helyszínre ugrás"
+msgstr "%d. helyszínre ugrás"
 
 #: ../../src/wlapplication_options.cc:995
 msgctxt "hotkey"
@@ -9144,27 +9144,27 @@ msgstr ""
 
 #: ../../src/wui/quicknavigation.cc:203
 msgid "Add a new landmark"
-msgstr ""
+msgstr "Helyszín hozzáadása"
 
 #: ../../src/wui/quicknavigation.cc:245 ../../src/wui/quicknavigation.cc:251
 msgid "Go to this landmark"
-msgstr ""
+msgstr "Ugrás a helyszínre"
 
 #: ../../src/wui/quicknavigation.cc:259
 msgid "View this landmark in a watch window"
-msgstr ""
+msgstr "Helyszín figyelése kis ablakban"
 
 #: ../../src/wui/quicknavigation.cc:276
 msgid "Unset this landmark"
-msgstr ""
+msgstr "Helyszín elfelejtése"
 
 #: ../../src/wui/quicknavigation.cc:286 ../../src/wui/quicknavigation.cc:292
 msgid "Set this landmark to the current map view location"
-msgstr ""
+msgstr "Jelenlegi helyszín megjegyzése"
 
 #: ../../src/wui/quicknavigation.cc:300
 msgid "Remove this landmark"
-msgstr ""
+msgstr "Helyszín törlése"
 
 #: ../../src/wui/savegamedeleter.cc:52
 msgid "Confirm Deleting File"
