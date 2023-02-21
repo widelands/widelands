@@ -1484,7 +1484,7 @@ const PinnedNote* Ship::get_destination_note(const EditorGameBase& e) const {
 	return nullptr;
 }
 
-void Ship::set_destination(EditorGameBase& egbase, MapObject* dest) {
+void Ship::set_destination(EditorGameBase& egbase, MapObject* dest, bool is_playercommand) {
 	assert(dest == nullptr || dest->descr().type() == MapObjectType::PORTDOCK || dest->descr().type() == MapObjectType::SHIP || dest->descr().type() == MapObjectType::PINNED_NOTE);
 
 	destination_ = dest;
@@ -1493,8 +1493,9 @@ void Ship::set_destination(EditorGameBase& egbase, MapObject* dest) {
 		send_signal(*g, "wakeup");
 	}
 
-	if (expedition_ != nullptr) {
-		set_ship_state_and_notify(ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
+	if (is_playercommand) {
+		assert(ship_state_ != ShipStates::kTransport);
+		set_ship_state_and_notify(dest == nullptr ? ShipStates::kExpeditionWaiting : ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
 	}
 }
 

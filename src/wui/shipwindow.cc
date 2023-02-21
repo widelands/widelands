@@ -683,7 +683,7 @@ void ShipWindow::act_set_destination() {
 	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_ship_set_destination(*ship, dest);
 	} else {
-		ship->set_destination(ibase_.egbase(), dest);
+		ship->set_destination(ibase_.egbase(), dest, true);
 	}
 }
 
