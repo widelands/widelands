@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>, 2021\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
@@ -20,12 +20,12 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:12
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:14
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:56
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:60
 msgid "The Forbidden Island"
 msgstr "Забраненият остров"
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:15
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:57
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:61
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -64,20 +64,20 @@ msgstr "Победете Джомо"
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
 msgstr "Победете Джомо. Той се грижи за запасите от храна на войниците."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:52
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:56
 msgid "First Briefing"
 msgstr "Първи инструктаж"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:62
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:73
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:66
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
 msgid "Second Briefing"
 msgstr "Втори инструктаж"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:66
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:70
 msgid "An Ancient Castle"
 msgstr "Древен замък"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:67
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:71
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
@@ -85,7 +85,7 @@ msgid ""
 "craft."
 msgstr "О, Богове! Един от разузнавачите ни е забелязал величествен замък в средата на старото плато. Замъкът трябва да е много стар и изглежда е построен в някакъв чуждестранен стил. Очевидно е, че това не е създадено от варвари."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:68
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:72
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
@@ -93,17 +93,17 @@ msgid ""
 "we capture it. It will be the key to our reign over this island!"
 msgstr "Да се надяваме, че Ланиса – военачалникът, владеещ замъка – не е разкрила действията ни досега. Може би имаме шанс да превземем тази величествена сграда без голяма битка! Важно е, обаче, да я превземем. Тя ще бъде ключът към нашето господство над този остров!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:81
 msgid "Ancient Castle Captured"
 msgstr "Древният замък е превзет"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:78
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:82
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
 msgstr "Чудесно! Войниците ни най-после победиха Ланиса и нейната войска. Древният замък е наш!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:79
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:83
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -116,46 +116,46 @@ msgid ""
 "care of those infrastructures so we can cut off our enemies’ food supply."
 msgstr "Невероятно е колко много да се види от най-високата кула на замъка. Можем да наблюдаваме целия остров. Сега се чудя защо Ланиса не ни е видяла и не се е подготвила. Както и да е, някои въпроси ще останат без отговор. Важното сега са останалите вражески войници. Открихме вражески позиции на Ъруин на север и изток от замъка. Той е прочут като силен военачалник и определено командва най-силните войници. На юг забелязахме няколко места за производство на храна, охранявани от Джомо – по-млад военачалник – и трябва да се разправим с него, за да отрежем запасите от храна на врага ни."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:84
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:88
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:97
 msgid "Another Briefing"
 msgstr "Още един инструктаж"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:88
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:92
 msgid "Erwyn Defeated"
 msgstr "Ъруин е победен"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:89
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
 " less strong warlord on this island!"
 msgstr "Страхотно! Ъруин се предаде когато видя как последните му сгради рухват. Един силен военачалник по-малко на този остров!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:97
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:101
 msgid "Jomo Defeated"
 msgstr "Джомо е победен"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:98
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
 msgstr "Страхотно! Джомо се предаде когато видя как последните му сгради рухват. Един силен военачалник по-малко на този остров!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:106
 msgid "Last Briefing"
 msgstr "Последен инструктаж"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:106
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:110
 msgid "Victory!"
 msgstr "Победа!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:107
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:111
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
 msgstr "Най-после! Островът е наш. Сега само трябва да го защитаваме по-добре от военачалниците."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:108
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:112
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

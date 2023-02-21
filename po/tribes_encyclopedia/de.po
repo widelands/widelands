@@ -16,7 +16,7 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023
 # Venatrix, 2015
 # Elisabeth Jäger, 2015-2016
 # Hybrid Dog, 2015
@@ -27,9 +27,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -140,7 +140,7 @@ msgstr "Die Holzfällerinnen der Amazonen fällen die Bäume und Dschungelbewahr
 #. Performance helptext for a barbarian production site: Ax Workshop, part 1
 #. pgettext("barbarians_building", "If all needed wares are delivered in time,
 #. this building can produce each type of ax in about %s on
-#. average."):bformat(ngettext("%d second", "%d seconds", 57):bformat(57)),
+#. average."):bformat(format_seconds(57)),
 #. Performance helptext for a barbarian production site: Ax Workshop, part 2
 #. pgettext("barbarians_building", "All three weapons take the same time for
 #. making, but the required raw materials vary.")
@@ -1166,70 +1166,6 @@ msgid ""
 "work area."
 msgstr "Die Jagd- und Sammelhütte braucht Tiere oder Fische zum Jagen oder Fangen innerhalb ihres Arbeitsbereichs."
 
-#: ../../data/tribes/initialization/amazons/units.lua:1301
-#: ../../data/tribes/initialization/amazons/units.lua:1317
-#: ../../data/tribes/initialization/amazons/units.lua:1352
-#: ../../data/tribes/initialization/amazons/units.lua:1374
-#: ../../data/tribes/initialization/amazons/units.lua:1414
-#: ../../data/tribes/initialization/amazons/units.lua:1430
-#: ../../data/tribes/initialization/amazons/units.lua:1439
-#: ../../data/tribes/initialization/amazons/units.lua:1448
-#: ../../data/tribes/initialization/amazons/units.lua:1497
-#: ../../data/tribes/initialization/barbarians/units.lua:1142
-#: ../../data/tribes/initialization/barbarians/units.lua:1157
-#: ../../data/tribes/initialization/barbarians/units.lua:1173
-#: ../../data/tribes/initialization/barbarians/units.lua:1188
-#: ../../data/tribes/initialization/barbarians/units.lua:1203
-#: ../../data/tribes/initialization/barbarians/units.lua:1229
-#: ../../data/tribes/initialization/barbarians/units.lua:1270
-#: ../../data/tribes/initialization/barbarians/units.lua:1285
-#: ../../data/tribes/initialization/barbarians/units.lua:1298
-#: ../../data/tribes/initialization/barbarians/units.lua:1311
-#: ../../data/tribes/initialization/barbarians/units.lua:1403
-#: ../../data/tribes/initialization/barbarians/units.lua:1419
-#: ../../data/tribes/initialization/barbarians/units.lua:1438
-#: ../../data/tribes/initialization/barbarians/units.lua:1467
-#: ../../data/tribes/initialization/barbarians/units.lua:1515
-#: ../../data/tribes/initialization/barbarians/units.lua:1573
-#: ../../data/tribes/initialization/barbarians/units.lua:1612
-#: ../../data/tribes/initialization/barbarians/units.lua:1659
-#: ../../data/tribes/initialization/barbarians/units.lua:1678
-#: ../../data/tribes/initialization/frisians/units.lua:1564
-#: ../../data/tribes/initialization/frisians/units.lua:1592
-#: ../../data/tribes/initialization/frisians/units.lua:1603
-#: ../../data/tribes/initialization/frisians/units.lua:1618
-#: ../../data/tribes/initialization/frisians/units.lua:1644
-#: ../../data/tribes/initialization/frisians/units.lua:1670
-#: ../../data/tribes/initialization/frisians/units.lua:1685
-#: ../../data/tribes/initialization/frisians/units.lua:1700
-#: ../../data/tribes/initialization/frisians/units.lua:1715
-#: ../../data/tribes/initialization/frisians/units.lua:1742
-#: ../../data/tribes/initialization/frisians/units.lua:1757
-#: ../../data/tribes/initialization/frisians/units.lua:1792
-#: ../../data/tribes/initialization/frisians/units.lua:1827
-#: ../../data/tribes/initialization/frisians/units.lua:1851
-#: ../../data/tribes/initialization/frisians/units.lua:1864
-#: ../../data/tribes/initialization/frisians/units.lua:1877
-#: ../../data/tribes/initialization/frisians/units.lua:1901
-#: ../../data/tribes/initialization/frisians/units.lua:1925
-#: ../../data/tribes/initialization/frisians/units.lua:1949
-#: ../../data/tribes/initialization/frisians/units.lua:1997
-#: ../../data/tribes/initialization/frisians/units.lua:2006
-#: ../../data/tribes/initialization/frisians/units.lua:2015
-#: ../../data/tribes/initialization/frisians/units.lua:2024
-#: ../../data/tribes/initialization/frisians/units.lua:2033
-#: ../../data/tribes/initialization/frisians/units.lua:2042
-#: ../../data/tribes/initialization/frisians/units.lua:2051
-#: ../../data/tribes/initialization/frisians/units.lua:2060
-#: ../../data/tribes/initialization/frisians/units.lua:2179
-#: ../../data/tribes/scripting/help/time_strings.lua:26
-#: ../../data/tribes/scripting/help/time_strings.lua:62
-#, lua-format
-msgid "%d second"
-msgid_plural "%d seconds"
-msgstr[0] "%d Sekunde"
-msgstr[1] "%d Sekunden"
-
 #. TRANSLATORS: Performance helptext for an amazon production site: Hunter-
 #. Gatherer's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1301
@@ -1686,7 +1622,7 @@ msgstr "Baut Schiffe zur Kolonisierung anderer Länder und zum Warentransport zw
 #. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1616
 #: ../../data/tribes/initialization/atlanteans/units.lua:2016
-#: ../../data/tribes/initialization/barbarians/units.lua:1790
+#: ../../data/tribes/initialization/barbarians/units.lua:1804
 #: ../../data/tribes/initialization/empire/units.lua:2261
 #: ../../data/tribes/initialization/frisians/units.lua:2188
 msgctxt "building"
@@ -1702,7 +1638,7 @@ msgstr "„Verfluche nicht den Bauarbeiter, dem das Baumaterial fehlt.“"
 #. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1618
 #: ../../data/tribes/initialization/atlanteans/units.lua:2018
-#: ../../data/tribes/initialization/barbarians/units.lua:1792
+#: ../../data/tribes/initialization/barbarians/units.lua:1806
 #: ../../data/tribes/initialization/empire/units.lua:2263
 #: ../../data/tribes/initialization/frisians/units.lua:2190
 msgctxt "building"
@@ -1716,7 +1652,7 @@ msgstr "Sprichwort, gemeinhin benutzt für unmögliche Aufgaben aller Art"
 #. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1620
 #: ../../data/tribes/initialization/atlanteans/units.lua:2020
-#: ../../data/tribes/initialization/barbarians/units.lua:1794
+#: ../../data/tribes/initialization/barbarians/units.lua:1808
 #: ../../data/tribes/initialization/empire/units.lua:2265
 #: ../../data/tribes/initialization/frisians/units.lua:2192
 msgctxt "building"
@@ -1730,7 +1666,7 @@ msgstr "Ein neues Gebäude wird auf dieser Baustelle gebaut."
 #. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1627
 #: ../../data/tribes/initialization/atlanteans/units.lua:2027
-#: ../../data/tribes/initialization/barbarians/units.lua:1801
+#: ../../data/tribes/initialization/barbarians/units.lua:1815
 #: ../../data/tribes/initialization/empire/units.lua:2272
 #: ../../data/tribes/initialization/frisians/units.lua:2199
 msgctxt "building"
@@ -1744,7 +1680,7 @@ msgstr "„Neue Wege entstehen, wenn man bereit ist, Altvertrautes abzureißen.�
 #. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1629
 #: ../../data/tribes/initialization/atlanteans/units.lua:2029
-#: ../../data/tribes/initialization/barbarians/units.lua:1803
+#: ../../data/tribes/initialization/barbarians/units.lua:1817
 #: ../../data/tribes/initialization/empire/units.lua:2274
 #: ../../data/tribes/initialization/frisians/units.lua:2201
 msgctxt "building"
@@ -1758,7 +1694,7 @@ msgstr "Sprichwort"
 #. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1631
 #: ../../data/tribes/initialization/atlanteans/units.lua:2031
-#: ../../data/tribes/initialization/barbarians/units.lua:1805
+#: ../../data/tribes/initialization/barbarians/units.lua:1819
 #: ../../data/tribes/initialization/empire/units.lua:2276
 #: ../../data/tribes/initialization/frisians/units.lua:2203
 msgctxt "building"
@@ -4019,7 +3955,7 @@ msgstr "Holzfäller der Atlanter zum Gebrauch von Sägen"
 #. TRANSLATORS: Purpose helptext for a frisian production site: Forester's
 #. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1503
-#: ../../data/tribes/initialization/barbarians/units.lua:1169
+#: ../../data/tribes/initialization/barbarians/units.lua:1173
 #: ../../data/tribes/initialization/empire/units.lua:1290
 #: ../../data/tribes/initialization/frisians/units.lua:1588
 msgctxt "building"
@@ -4128,7 +4064,7 @@ msgstr "Weissagung der Fischzüchter"
 #. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1555
-#: ../../data/tribes/initialization/barbarians/units.lua:1199
+#: ../../data/tribes/initialization/barbarians/units.lua:1203
 #: ../../data/tribes/initialization/empire/units.lua:1332
 #: ../../data/tribes/initialization/frisians/units.lua:1599
 msgctxt "building"
@@ -4161,7 +4097,7 @@ msgstr "Ein Jäger, der einem Fischer antwortet"
 #. TRANSLATORS: Purpose helptext for an empire production site: Well
 #. TRANSLATORS: Purpose helptext for a frisian production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1569
-#: ../../data/tribes/initialization/barbarians/units.lua:1227
+#: ../../data/tribes/initialization/barbarians/units.lua:1231
 #: ../../data/tribes/initialization/empire/units.lua:1353
 #: ../../data/tribes/initialization/frisians/units.lua:1642
 msgctxt "building"
@@ -4231,7 +4167,7 @@ msgstr "Du musst diese Flagge mit einem Kundschafterhaus verbinden, bevor du ein
 #. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1597
-#: ../../data/tribes/initialization/barbarians/units.lua:1241
+#: ../../data/tribes/initialization/barbarians/units.lua:1245
 #: ../../data/tribes/initialization/empire/units.lua:1373
 #: ../../data/tribes/initialization/frisians/units.lua:1740
 msgctxt "building"
@@ -4378,7 +4314,7 @@ msgstr "Der Vorsitzende der Bäckergilde"
 #. Burner's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1665
-#: ../../data/tribes/initialization/barbarians/units.lua:1376
+#: ../../data/tribes/initialization/barbarians/units.lua:1388
 #: ../../data/tribes/initialization/empire/units.lua:1580
 #: ../../data/tribes/initialization/frisians/units.lua:1666
 #: ../../data/tribes/initialization/frisians/units.lua:1849
@@ -4415,7 +4351,7 @@ msgstr "Eine dunkle Stimme aus der Köhlerei"
 #. Works
 #. TRANSLATORS: Purpose helptext for an empire production site: Smelting Works
 #: ../../data/tribes/initialization/atlanteans/units.lua:1679
-#: ../../data/tribes/initialization/barbarians/units.lua:1388
+#: ../../data/tribes/initialization/barbarians/units.lua:1400
 #: ../../data/tribes/initialization/empire/units.lua:1599
 msgctxt "building"
 msgid "Smelts iron ore into iron and gold ore into gold."
@@ -4441,7 +4377,7 @@ msgstr "Ein Mitglied der Schmelzergilde"
 #. Workshop
 #. TRANSLATORS: Purpose helptext for an empire production site: Toolsmithy
 #: ../../data/tribes/initialization/atlanteans/units.lua:1690
-#: ../../data/tribes/initialization/barbarians/units.lua:1399
+#: ../../data/tribes/initialization/barbarians/units.lua:1411
 #: ../../data/tribes/initialization/empire/units.lua:1618
 msgctxt "building"
 msgid "Forges all the tools that your workers need."
@@ -4684,9 +4620,9 @@ msgstr "Erster Teil des Architekturalmanachs der Atlanter"
 #. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1818
-#: ../../data/tribes/initialization/barbarians/units.lua:1528
-#: ../../data/tribes/initialization/barbarians/units.lua:1543
-#: ../../data/tribes/initialization/barbarians/units.lua:1558
+#: ../../data/tribes/initialization/barbarians/units.lua:1542
+#: ../../data/tribes/initialization/barbarians/units.lua:1557
+#: ../../data/tribes/initialization/barbarians/units.lua:1572
 #: ../../data/tribes/initialization/empire/units.lua:1851
 #: ../../data/tribes/initialization/empire/units.lua:1874
 #: ../../data/tribes/initialization/frisians/units.lua:2013
@@ -4726,9 +4662,9 @@ msgstr "Lied der Gilde der Bergleute"
 #. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1832
-#: ../../data/tribes/initialization/barbarians/units.lua:1571
-#: ../../data/tribes/initialization/barbarians/units.lua:1584
-#: ../../data/tribes/initialization/barbarians/units.lua:1597
+#: ../../data/tribes/initialization/barbarians/units.lua:1585
+#: ../../data/tribes/initialization/barbarians/units.lua:1598
+#: ../../data/tribes/initialization/barbarians/units.lua:1611
 #: ../../data/tribes/initialization/empire/units.lua:1893
 #: ../../data/tribes/initialization/empire/units.lua:1914
 #: ../../data/tribes/initialization/frisians/units.lua:2031
@@ -4746,9 +4682,9 @@ msgstr "Fördert Eisenerz aus bergigem Gelände."
 #. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1846
-#: ../../data/tribes/initialization/barbarians/units.lua:1610
-#: ../../data/tribes/initialization/barbarians/units.lua:1623
-#: ../../data/tribes/initialization/barbarians/units.lua:1636
+#: ../../data/tribes/initialization/barbarians/units.lua:1624
+#: ../../data/tribes/initialization/barbarians/units.lua:1637
+#: ../../data/tribes/initialization/barbarians/units.lua:1650
 #: ../../data/tribes/initialization/empire/units.lua:1935
 #: ../../data/tribes/initialization/empire/units.lua:1956
 #: ../../data/tribes/initialization/frisians/units.lua:2049
@@ -4950,7 +4886,7 @@ msgstr "‘Weisheit des Kampfes’ der Soldatenkameradschaft"
 #. TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1983
-#: ../../data/tribes/initialization/barbarians/units.lua:1755
+#: ../../data/tribes/initialization/barbarians/units.lua:1769
 #: ../../data/tribes/initialization/empire/units.lua:2229
 #: ../../data/tribes/initialization/frisians/units.lua:2153
 msgctxt "building"
@@ -4983,7 +4919,7 @@ msgstr "Traditionelles Lied der Fährleute"
 #. TRANSLATORS: Purpose helptext for an empire production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1999
-#: ../../data/tribes/initialization/barbarians/units.lua:1769
+#: ../../data/tribes/initialization/barbarians/units.lua:1783
 #: ../../data/tribes/initialization/empire/units.lua:2252
 #: ../../data/tribes/initialization/frisians/units.lua:2166
 msgctxt "building"
@@ -6155,8 +6091,8 @@ msgstr "„Steil aufragend wie die Hänge des Kal’mavrath, prächtig wie das f
 #. TRANSLATORS: Lore author helptext for a barbarian military site: Barrier
 #. TRANSLATORS: Lore author helptext for a barbarian military site: Tower
 #: ../../data/tribes/initialization/barbarians/units.lua:1088
-#: ../../data/tribes/initialization/barbarians/units.lua:1702
 #: ../../data/tribes/initialization/barbarians/units.lua:1716
+#: ../../data/tribes/initialization/barbarians/units.lua:1730
 msgctxt "barbarians_building"
 msgid "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard"
 msgstr "Ballade „Der Kampf um Kal’mavrath“, von Hakhor dem Barden"
@@ -6207,7 +6143,7 @@ msgstr "„Ich ziehe die Planken eines Schiffes jeder noch so starken Festung vo
 #. TRANSLATORS: Lore author helptext for a barbarian warehouse: Port
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Shipyard
 #: ../../data/tribes/initialization/barbarians/units.lua:1121
-#: ../../data/tribes/initialization/barbarians/units.lua:1767
+#: ../../data/tribes/initialization/barbarians/units.lua:1781
 msgctxt "barbarians_building"
 msgid "Captain Thanlas the Elder,<br>Explorer"
 msgstr "Kapitän Thanlas der Ältere,<br>Entdecker"
@@ -6285,7 +6221,7 @@ msgstr "Die Holzfällerhütte braucht Bäume innerhalb ihres Arbeitsbereichs."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site:
 #. Lumberjack_s Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1157
+#: ../../data/tribes/initialization/barbarians/units.lua:1158
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -6293,8 +6229,16 @@ msgid ""
 "reach the destination and go home again."
 msgstr "Der Holzfäller braucht %s, um einen Baum zu fällen, ohne Berücksichtigung der Zeit, die er braucht, um sein Ziel zu erreichen und wieder heimzukehren."
 
+#. TRANSLATORS: Performance helptext for a barbarian production site:
+#. Lumberjack_s Hut
+#: ../../data/tribes/initialization/barbarians/units.lua:1160
+#, lua-format
+msgctxt "barbarians_building"
+msgid "Afterwards he rests in the hut for %s."
+msgstr "Danch ruht er in der Hütte für %s."
+
 #. TRANSLATORS: Lore helptext for a barbarian production site: Ranger's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1165
+#: ../../data/tribes/initialization/barbarians/units.lua:1169
 msgctxt "barbarians_building"
 msgid ""
 "‘He who can grow two trees where normally only one will grow exceeds the "
@@ -6303,13 +6247,13 @@ msgstr "„Wer zwei Bäume wachsen lassen kann, wo bisher nur einer wächst, der
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Ranger's
 #. Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1167
+#: ../../data/tribes/initialization/barbarians/units.lua:1171
 msgctxt "barbarians_building"
 msgid "Chat’Karuth in a conversation with a Ranger"
 msgstr "Chat’Karuth im Gespräch mit einem Förster"
 
 #. TRANSLATORS: Note helptext for a barbarian production site: Ranger's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1171
+#: ../../data/tribes/initialization/barbarians/units.lua:1175
 msgctxt "barbarians_building"
 msgid ""
 "The ranger’s hut needs free space within the work area to plant the trees."
@@ -6317,7 +6261,7 @@ msgstr "Die Försterhütte braucht freien Raum innerhalb ihres Arbeitsbereichs, 
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Ranger's
 #. Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1173
+#: ../../data/tribes/initialization/barbarians/units.lua:1177
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -6326,14 +6270,14 @@ msgid ""
 msgstr "Der Förster braucht %s, um einen Baum zu Pflanzen, ohne Berücksichtigung der Zeit, die er braucht, um sein Ziel zu erreichen und heimzukehren."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Fisher's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1180
+#: ../../data/tribes/initialization/barbarians/units.lua:1184
 msgctxt "barbarians_building"
 msgid "‘What do you mean, my fish ain’t fresh?!’"
 msgstr "„Was soll das heißen, mein Fisch ist nicht frisch?!“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Fisher's
 #. Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1182
+#: ../../data/tribes/initialization/barbarians/units.lua:1186
 msgctxt "barbarians_building"
 msgid ""
 "Frequent response of a barbarian fisherman,<br>often followed by an "
@@ -6341,26 +6285,26 @@ msgid ""
 msgstr "Häufige Antwort eines Fischers der Barbaren,<br>oft gefolgt von einem fröhlichen Handgemenge"
 
 #. TRANSLATORS: Purpose helptext for production site: Fisher's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1184
+#: ../../data/tribes/initialization/barbarians/units.lua:1188
 msgctxt "barbarians_building"
 msgid "Fishes on the coast near the fisher’s hut."
 msgstr "Fischt an der Küste nahe der Fischerhütte."
 
 #. TRANSLATORS: Note helptext for production site: Fisher's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1186
+#: ../../data/tribes/initialization/barbarians/units.lua:1190
 msgctxt "barbarians_building"
 msgid "The fisher’s hut needs water full of fish within the work area."
 msgstr "Die Fischerhütte braucht Wasser mit Fischen innerhalb ihres Arbeitsbereichs."
 
 #. TRANSLATORS: Performance helptext for production site: Fisher's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1188
+#: ../../data/tribes/initialization/barbarians/units.lua:1192
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The fisher pauses %s before going to work again."
 msgstr "Der Fischer pausiert %s, bevor er weiterarbeitet."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Hunter's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1195
+#: ../../data/tribes/initialization/barbarians/units.lua:1199
 msgctxt "barbarians_building"
 msgid ""
 "‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
@@ -6369,20 +6313,20 @@ msgstr "„Still wie ein Panther,<br>flink wie ein Wiesel,<br>schnell wie ein Pf
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Hunter's
 #. Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1197
+#: ../../data/tribes/initialization/barbarians/units.lua:1201
 msgctxt "barbarians_building"
 msgid "‘The Art of Hunting’"
 msgstr "„Die Kunst des Jagens“"
 
 #. TRANSLATORS: Note helptext for a barbarian production site: Hunter's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1201
+#: ../../data/tribes/initialization/barbarians/units.lua:1205
 msgctxt "barbarians_building"
 msgid "The hunter’s hut needs animals to hunt within the work area."
 msgstr "Die Jagdhütte braucht Tiere innerhalb ihres Arbeitsbereichs."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Hunter's
 #. Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1203
+#: ../../data/tribes/initialization/barbarians/units.lua:1207
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The hunter pauses %s before going to work again."
@@ -6390,7 +6334,7 @@ msgstr "Der Jäger pausiert %s, bevor er weiterarbeitet."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Gamekeeper's
 #. Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1210
+#: ../../data/tribes/initialization/barbarians/units.lua:1214
 msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>as we love to cook and eat them.’"
@@ -6398,25 +6342,26 @@ msgstr "„Er mag alle Tiere und sie zu hegen,<br>wie wir es lieben, sie zu vers
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site:
 #. Gamekeeper's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1212
+#: ../../data/tribes/initialization/barbarians/units.lua:1216
 msgctxt "barbarians_building"
 msgid "Barbarian nursery rhyme"
 msgstr "Kinderreim der Barbaren"
 
 #. TRANSLATORS: Purpose helptext for production site: Gamekeeper's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1214
+#: ../../data/tribes/initialization/barbarians/units.lua:1218
 msgctxt "barbarians_building"
 msgid "Releases animals into the wild to steady the meat production."
 msgstr "Züchtet Wildtiere, um die Fleischproduktion sicherzustellen."
 
 #. TRANSLATORS: Performance helptext for production site: Gamekeeper's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1216
+#: ../../data/tribes/initialization/barbarians/units.lua:1220
+#, lua-format
 msgctxt "barbarians_building"
-msgid "The gamekeeper pauses 52.5 seconds before going to work again."
-msgstr "Der Wildhüter pausiert 52,5 Sekunden, bevor er weiterarbeitet."
+msgid "The gamekeeper pauses %s before going to work again."
+msgstr "Der Wildhüter pausiert %s, bevor er weiterarbeitet."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Well
-#: ../../data/tribes/initialization/barbarians/units.lua:1223
+#: ../../data/tribes/initialization/barbarians/units.lua:1227
 msgctxt "barbarians_building"
 msgid ""
 "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
@@ -6424,7 +6369,7 @@ msgid ""
 msgstr "„Oh wie süß ist der Quell des Lebens,<br> der vom Himmel herab kommt <br> und die Erde trinken lässt.“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Well
-#: ../../data/tribes/initialization/barbarians/units.lua:1225
+#: ../../data/tribes/initialization/barbarians/units.lua:1229
 msgctxt "barbarians_building"
 msgid ""
 "Song written by Sigurd the Bard when the first rain fell after the Great "
@@ -6432,13 +6377,13 @@ msgid ""
 msgstr "Lied, geschrieben von Sigurd dem Barden, als das erste Mal Regen nach der großen Dürre fiel, im 21. Jahr der Regentschaft Chat’Karuths."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Well
-#: ../../data/tribes/initialization/barbarians/units.lua:1229
+#: ../../data/tribes/initialization/barbarians/units.lua:1233
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The carrier needs %s to get one bucket full of water."
 msgstr "Der Träger braucht %s, um einen Eimer Wasser zu holen."
 
-#: ../../data/tribes/initialization/barbarians/units.lua:1235
+#: ../../data/tribes/initialization/barbarians/units.lua:1239
 msgctxt "barbarians_building"
 msgid ""
 "You need to connect this flag to a scout’s hut before you can send a scout "
@@ -6446,7 +6391,7 @@ msgid ""
 msgstr "Du musst diese Flagge mit einer Kundschafterhütte verbinden, bevor du einen Kundschafter hierher senden kannst."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Scout's Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1237
+#: ../../data/tribes/initialization/barbarians/units.lua:1241
 msgctxt "barbarians_building"
 msgid ""
 "‘Behind the next hill there might be wealth and happiness but also hostility"
@@ -6455,13 +6400,13 @@ msgstr "„Hinter dem nächsten Hügel mögen Reichtum und Glück oder auch Fein
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Scout's
 #. Hut
-#: ../../data/tribes/initialization/barbarians/units.lua:1239
+#: ../../data/tribes/initialization/barbarians/units.lua:1243
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe"
 msgstr "Chat’Karuth,<br>bei der Vereidigung der ersten Kundschaftertruppe"
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Wood Hardener
-#: ../../data/tribes/initialization/barbarians/units.lua:1250
+#: ../../data/tribes/initialization/barbarians/units.lua:1254
 msgctxt "barbarians_building"
 msgid ""
 "‘Then he hit the door with his ax and, behold,<br>the door only trembled, "
@@ -6470,7 +6415,7 @@ msgstr "„Da schlug er mit der Axt gegen die Holztür,<br>doch derweil die Tür
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Wood
 #. Hardener
-#: ../../data/tribes/initialization/barbarians/units.lua:1253
+#: ../../data/tribes/initialization/barbarians/units.lua:1257
 msgctxt "barbarians_building"
 msgid ""
 "Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor "
@@ -6479,7 +6424,7 @@ msgstr "Legende über den Streit zwischen den Brüdern Harthor und Manthor,<br>e
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Wood
 #. Hardener
-#: ../../data/tribes/initialization/barbarians/units.lua:1255
+#: ../../data/tribes/initialization/barbarians/units.lua:1259
 msgctxt "barbarians_building"
 msgid ""
 "Hardens logs by fire into blackwood, which is used to construct robust "
@@ -6487,27 +6432,27 @@ msgid ""
 msgstr "Härtet Stämme mit Feuer zu Hartholz, mit dem robuste Gebäude gebaut werden."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Reed Yard
-#: ../../data/tribes/initialization/barbarians/units.lua:1262
+#: ../../data/tribes/initialization/barbarians/units.lua:1266
 msgctxt "barbarians_building"
 msgid "‘We grow roofs’"
 msgstr "„Wir züchten Dächer.“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Reed
 #. Yard
-#: ../../data/tribes/initialization/barbarians/units.lua:1264
+#: ../../data/tribes/initialization/barbarians/units.lua:1268
 msgctxt "barbarians_building"
 msgid "Slogan of the Guild of Gardeners"
 msgstr "Motto der Reetbauernzunft"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Reed Yard
-#: ../../data/tribes/initialization/barbarians/units.lua:1266
+#: ../../data/tribes/initialization/barbarians/units.lua:1270
 msgctxt "barbarians_building"
 msgid ""
 "Cultivates reed that serves two different purposes for the Barbarian tribe."
 msgstr "Baut Reet an, das den Barbaren für zwei verschiedene Dinge nützt."
 
 #. TRANSLATORS: Note helptext for a barbarian production site: Reed Yard
-#: ../../data/tribes/initialization/barbarians/units.lua:1268
+#: ../../data/tribes/initialization/barbarians/units.lua:1272
 msgctxt "barbarians_building"
 msgid ""
 "Reed is the traditional material for roofing, and it is woven into the "
@@ -6516,21 +6461,21 @@ msgstr "Reet ist das traditionelle Material zum Dachdecken und es wird zu sehr w
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Reed
 #. Yard
-#: ../../data/tribes/initialization/barbarians/units.lua:1270
+#: ../../data/tribes/initialization/barbarians/units.lua:1274
 #, lua-format
 msgctxt "barbarians_building"
 msgid "A reed yard can produce a sheaf of reed in about %s on average."
 msgstr "Ein Reethof kann ein Bündel Reet in durchschnittlich %s herstellen."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Lime Kiln
-#: ../../data/tribes/initialization/barbarians/units.lua:1277
+#: ../../data/tribes/initialization/barbarians/units.lua:1281
 msgctxt "barbarians_building"
 msgid "‘Forming new stone from old with fire and water.’"
 msgstr "„Ich mache mit Hilfe von Feuer und Wasser neue Steine.“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Lime
 #. Kiln
-#: ../../data/tribes/initialization/barbarians/units.lua:1279
+#: ../../data/tribes/initialization/barbarians/units.lua:1283
 msgctxt "barbarians_building"
 msgid ""
 "Ragnald the Child’s answer to the question, what he’s doing in the dirt. His"
@@ -6538,7 +6483,7 @@ msgid ""
 msgstr "Die Antwort von Ragnald dem Kind auf die Frage, was er im Schmutz mache. Seine „neuen Steine“ sind jetzt ein wichtiger Baustoff."
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Lime Kiln
-#: ../../data/tribes/initialization/barbarians/units.lua:1281
+#: ../../data/tribes/initialization/barbarians/units.lua:1285
 msgctxt "barbarians_building"
 msgid ""
 "Processes granite to make ‘grout’, a substance that solidifies and so "
@@ -6546,7 +6491,7 @@ msgid ""
 msgstr "Verarbeitet Stein, um daraus „Mörtel“ zu machen, einem Werkstoff, um Mauerwerk zu härten und zu verstärken."
 
 #. TRANSLATORS: Note helptext for a barbarian production site: Lime Kiln
-#: ../../data/tribes/initialization/barbarians/units.lua:1283
+#: ../../data/tribes/initialization/barbarians/units.lua:1287
 msgctxt "barbarians_building"
 msgid ""
 "The lime kiln’s output will only go to construction sites that need it. "
@@ -6555,7 +6500,7 @@ msgstr "Das produzierte Material der Kalkbrennerei wird nur zu Baustellen transp
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Lime
 #. Kiln
-#: ../../data/tribes/initialization/barbarians/units.lua:1285
+#: ../../data/tribes/initialization/barbarians/units.lua:1289
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -6564,7 +6509,7 @@ msgid ""
 msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Gebäude Mörtel in durchschnittlich %s herstellen."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Bakery
-#: ../../data/tribes/initialization/barbarians/units.lua:1292
+#: ../../data/tribes/initialization/barbarians/units.lua:1296
 msgctxt "barbarians_building"
 msgid ""
 "‘He who has enough bread will never be too tired to dig the ore and wield "
@@ -6572,7 +6517,7 @@ msgid ""
 msgstr "„Wer genügend Brot hat, dessen Arm wird nie müde werden das Erz zu schürfen und die Axt zu schwingen.“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Bakery
-#: ../../data/tribes/initialization/barbarians/units.lua:1294
+#: ../../data/tribes/initialization/barbarians/units.lua:1298
 msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship "
@@ -6580,13 +6525,13 @@ msgid ""
 msgstr "Khantarakh, „Die moderne Barbarenwirtschaft“,<br>3. Kuhhaut „Handwerk und Gewerbe“"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Bakery
-#: ../../data/tribes/initialization/barbarians/units.lua:1296
+#: ../../data/tribes/initialization/barbarians/units.lua:1300
 msgctxt "barbarians_building"
 msgid "Bakes pitta bread for soldiers and miners alike."
 msgstr "Bäckt Fladenbrot sowohl für Krieger als auch für Bergleute."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Bakery
-#: ../../data/tribes/initialization/barbarians/units.lua:1298
+#: ../../data/tribes/initialization/barbarians/units.lua:1302
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -6595,7 +6540,7 @@ msgid ""
 msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Gebäude ein Fladenbrot in durchschnittlich %s herstellen."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Micro Brewery
-#: ../../data/tribes/initialization/barbarians/units.lua:1305
+#: ../../data/tribes/initialization/barbarians/units.lua:1309
 msgctxt "barbarians_building"
 msgid ""
 "‘Let the first one drive away the hunger, the second one put you at ease; "
@@ -6604,14 +6549,14 @@ msgstr "„Lass das erste deinen Hunger stillen, das zweite dir die Nervosität 
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Micro
 #. Brewery
-#: ../../data/tribes/initialization/barbarians/units.lua:1307
+#: ../../data/tribes/initialization/barbarians/units.lua:1311
 msgctxt "barbarians_building"
 msgid "Widespread toast among miners"
 msgstr "Verbreiteter Trinkspruch bei Bergleuten"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Micro
 #. Brewery
-#: ../../data/tribes/initialization/barbarians/units.lua:1309
+#: ../../data/tribes/initialization/barbarians/units.lua:1313
 msgctxt "barbarians_building"
 msgid ""
 "Produces beer of the lower grade. This beer is a vital component of the "
@@ -6620,7 +6565,7 @@ msgstr "Braut Bier einfacher Qualität. Dieses Bier ist eine entscheidende Kompo
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Micro
 #. Brewery
-#: ../../data/tribes/initialization/barbarians/units.lua:1311
+#: ../../data/tribes/initialization/barbarians/units.lua:1315
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -6629,7 +6574,7 @@ msgid ""
 msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Gebäude Bier in durchschnittlich %s herstellen."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Brewery
-#: ../../data/tribes/initialization/barbarians/units.lua:1318
+#: ../../data/tribes/initialization/barbarians/units.lua:1322
 msgctxt "barbarians_building"
 msgid ""
 "‘When the Barbarian was created,<br>this was the first thing that he "
@@ -6638,27 +6583,36 @@ msgid ""
 msgstr "„Als die Götter den Barbaren schufen,<br>hörte man ihn auch gleich rufen:<br>‚Kämpfen soll ich wie ein Stier?<br>Dann schafft gefälligst auch noch Bier!‘“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Brewery
-#: ../../data/tribes/initialization/barbarians/units.lua:1323
+#: ../../data/tribes/initialization/barbarians/units.lua:1327
 msgctxt "barbarians_building"
 msgid "First verse of the drinking song ‘Way of the Barbarian’"
 msgstr "Erste Strophe des Trinkliedes „So ist der Barbar“"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Brewery
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
-#: ../../data/tribes/initialization/barbarians/units.lua:1325
+#: ../../data/tribes/initialization/barbarians/units.lua:1329
 #: ../../data/tribes/initialization/empire/units.lua:1475
 msgctxt "building"
 msgid "Produces beer to keep the miners strong and happy."
 msgstr "Stellt Bier her, um die Bergleute bei Laune zu halten."
 
+#. TRANSLATORS: Performance helptext for a barbarian production site: Brewery
+#: ../../data/tribes/initialization/barbarians/units.lua:1331
+#, lua-format
+msgctxt "barbarians_building"
+msgid ""
+"If all needed wares are delivered in time, this building can produce strong "
+"beer in about %s on average."
+msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Gebäude Starkbier in durchschnittlich %s herstellen."
+
 #. TRANSLATORS: Lore helptext for a barbarian production site: Tavern
-#: ../../data/tribes/initialization/barbarians/units.lua:1332
+#: ../../data/tribes/initialization/barbarians/units.lua:1338
 msgctxt "barbarians_building"
 msgid "‘Fresh from the countryside: Bread, fish or game to go.’"
 msgstr "„Jeden Tag frische Fische, Wildhaxen und Fladenbrot. Alle Speisen auch außer Haus.“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Tavern
-#: ../../data/tribes/initialization/barbarians/units.lua:1334
+#: ../../data/tribes/initialization/barbarians/units.lua:1340
 msgctxt "barbarians_building"
 msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
 msgstr "Menü der Taverne „De alde Bronzeaxt“"
@@ -6666,35 +6620,52 @@ msgstr "Menü der Taverne „De alde Bronzeaxt“"
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
 #. TRANSLATORS: Purpose helptext for an empire production site: Tavern
 #. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
-#: ../../data/tribes/initialization/barbarians/units.lua:1336
+#: ../../data/tribes/initialization/barbarians/units.lua:1342
 #: ../../data/tribes/initialization/empire/units.lua:1536
 #: ../../data/tribes/initialization/frisians/units.lua:1923
 msgctxt "building"
 msgid "Prepares rations to feed the scouts and miners."
 msgstr "Bereitet Rationen für die Kundschafter und Bergleute zu."
 
+#. TRANSLATORS: Performance helptext for a barbarian production site: Tavern
+#: ../../data/tribes/initialization/barbarians/units.lua:1344
+#, lua-format
+msgctxt "barbarians_building"
+msgid ""
+"The tavern can produce one ration in %s on average, if the supply is steady."
+msgstr "Die Taverne kann eine Ration in durchschnittlich %s herstellen, wenn für stetig Nachschub gesorgt ist."
+
 #. TRANSLATORS: Lore helptext for a barbarian production site: Inn
-#: ../../data/tribes/initialization/barbarians/units.lua:1343
+#: ../../data/tribes/initialization/barbarians/units.lua:1351
 msgctxt "barbarians_building"
 msgid "‘Miner’s Delight: Pitta bread with fish or meat, comes with one beer.’"
 msgstr "„Bergmannsteller: Fladenbrot mit wahlweise Fisch oder Fleisch, dazu ein Bier.“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Inn
-#: ../../data/tribes/initialization/barbarians/units.lua:1345
+#: ../../data/tribes/initialization/barbarians/units.lua:1353
 msgctxt "barbarians_building"
 msgid "Chef’s recommendation in ‘The Singing Master Miner’"
 msgstr "Empfehlung des Hauses im „Singenden Steiger“"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Inn
-#: ../../data/tribes/initialization/barbarians/units.lua:1347
+#: ../../data/tribes/initialization/barbarians/units.lua:1355
 msgctxt "building"
 msgid ""
 "Prepares rations for scouts and rations and snacks to feed the miners in the"
 " basic and deep mines."
 msgstr "Bereitet die Rationen und Snacks für die Kundschafter und Bergleute in den Minen und tiefen Minen zu."
 
+#. TRANSLATORS: Performance helptext for a barbarian production site: Inn
+#: ../../data/tribes/initialization/barbarians/units.lua:1357
+#, lua-format
+msgctxt "barbarians_building"
+msgid ""
+"The inn can produce one ration in %s and one snack in %s on average, if the "
+"supply is steady."
+msgstr "Das Wirtshaus kann durchschnittlich eine Ration in  %s und einen Snack in %s herstellen, wenn für stetig Nachschub gesorgt ist."
+
 #. TRANSLATORS: Lore helptext for a barbarian production site: Big Inn
-#: ../../data/tribes/initialization/barbarians/units.lua:1354
+#: ../../data/tribes/initialization/barbarians/units.lua:1364
 msgctxt "barbarians_building"
 msgid ""
 "‘Seasonal fish and game specialties served with pitta bread.<br>Choose from "
@@ -6702,21 +6673,30 @@ msgid ""
 msgstr "„Feine Fisch- und Fleischvariationen der Saison an Fladenbrot.<br>Wählen Sie aus einer vorzüglichen Auswahl regionaler Braukunsterzeugnisse.“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Big Inn
-#: ../../data/tribes/initialization/barbarians/units.lua:1356
+#: ../../data/tribes/initialization/barbarians/units.lua:1366
 msgctxt "barbarians_building"
 msgid "Menu of ‘The Laughing Barbarian’"
 msgstr "Speisekarte im „Lachenden Barbaren“"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Big Inn
-#: ../../data/tribes/initialization/barbarians/units.lua:1358
+#: ../../data/tribes/initialization/barbarians/units.lua:1368
 msgctxt "barbarians_building"
 msgid ""
 "Prepares rations for scouts and rations, snacks and meals to feed all "
 "miners."
 msgstr "Bereitet die Rationen, Snacks und Mahlzeiten für die Kundschafter und Bergleute zu."
 
+#. TRANSLATORS: Performance helptext for a barbarian production site: Big Inn
+#: ../../data/tribes/initialization/barbarians/units.lua:1370
+#, lua-format
+msgctxt "barbarians_building"
+msgid ""
+"The big inn can produce one ration in %s, one snack in %s and one meal in %s"
+" on average, if the supply is steady."
+msgstr "Die Gaststätte kann durchschnittlich eine Ration in  %s,  einen Snack in %s und eine Mahlzeit in %s herstellen, wenn für stetig Nachschub gesorgt ist."
+
 #. TRANSLATORS: Lore helptext for a barbarian production site: Charcoal Kiln
-#: ../../data/tribes/initialization/barbarians/units.lua:1365
+#: ../../data/tribes/initialization/barbarians/units.lua:1377
 msgctxt "barbarians_building"
 msgid ""
 "‘What’s the work of a charcoal burner?<br>He’s the tribe’s most plodding "
@@ -6728,13 +6708,13 @@ msgstr "„Des Köhlers Werk ist Müh’ und Plag’.<br>Viel Stämme schlepp ic
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Charcoal
 #. Kiln
-#: ../../data/tribes/initialization/barbarians/units.lua:1374
+#: ../../data/tribes/initialization/barbarians/units.lua:1386
 msgctxt "barbarians_building"
 msgid "Song of the charcoal burners"
 msgstr "Lied der Köhler"
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Smelting Works
-#: ../../data/tribes/initialization/barbarians/units.lua:1383
+#: ../../data/tribes/initialization/barbarians/units.lua:1395
 msgctxt "barbarians_building"
 msgid ""
 "‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
@@ -6743,20 +6723,20 @@ msgstr "„Aus unscheinbarem Geröll fertigen sie glänzendes Gold und schimmern
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Smelting
 #. Works
-#: ../../data/tribes/initialization/barbarians/units.lua:1386
+#: ../../data/tribes/initialization/barbarians/units.lua:1398
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen"
 msgstr "Chat’Karuth<br>in einer Rede vor dem 5. Kongress der Handwerksmeister"
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Metal Workshop
-#: ../../data/tribes/initialization/barbarians/units.lua:1395
+#: ../../data/tribes/initialization/barbarians/units.lua:1407
 msgctxt "barbarians_building"
 msgid "‘We make it work!’"
 msgstr "„Wir bringen es zum Laufen!“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Metal
 #. Workshop
-#: ../../data/tribes/initialization/barbarians/units.lua:1397
+#: ../../data/tribes/initialization/barbarians/units.lua:1409
 msgctxt "barbarians_building"
 msgid ""
 "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
@@ -6764,7 +6744,7 @@ msgid ""
 msgstr "Inschrift auf der Türschwelle der nun zerstörten Alten Esse in Harradsheim, der ältesten bekannten Schmiede."
 
 #. TRANSLATORS: Note helptext for a barbarian production site: Metal Workshop
-#: ../../data/tribes/initialization/barbarians/units.lua:1401
+#: ../../data/tribes/initialization/barbarians/units.lua:1413
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian metal workshop is the basic production site in a series of "
@@ -6774,7 +6754,7 @@ msgstr "Die Werkzeugschmiede der Barbaren ist die erste Produktionsstätte in ei
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Metal
 #. Workshop
-#: ../../data/tribes/initialization/barbarians/units.lua:1403
+#: ../../data/tribes/initialization/barbarians/units.lua:1415
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -6784,8 +6764,8 @@ msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Ge
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Warmill
 #. TRANSLATORS: Lore helptext for a barbarian production site: Ax Workshop
-#: ../../data/tribes/initialization/barbarians/units.lua:1410
-#: ../../data/tribes/initialization/barbarians/units.lua:1429
+#: ../../data/tribes/initialization/barbarians/units.lua:1422
+#: ../../data/tribes/initialization/barbarians/units.lua:1441
 msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
@@ -6795,8 +6775,8 @@ msgstr "„Die neue Axt eines Kriegers weckt das Beste in dem, der sie trägt �
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Warmill
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Ax
 #. Workshop
-#: ../../data/tribes/initialization/barbarians/units.lua:1412
-#: ../../data/tribes/initialization/barbarians/units.lua:1431
+#: ../../data/tribes/initialization/barbarians/units.lua:1424
+#: ../../data/tribes/initialization/barbarians/units.lua:1443
 msgctxt "barbarians_building"
 msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
@@ -6804,13 +6784,13 @@ msgid ""
 msgstr "Ein altes Barbarensprichwort,<br> das besagt, dass man manche Risiken eingehen muss."
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Warmill
-#: ../../data/tribes/initialization/barbarians/units.lua:1414
+#: ../../data/tribes/initialization/barbarians/units.lua:1426
 msgctxt "barbarians_building"
 msgid "Produces all the axes that the Barbarians use for warfare."
 msgstr "Stellt alle Äxte her, die die Barbaren für die Kriegsführung brauchen."
 
 #. TRANSLATORS: Note helptext for a barbarian production site: Warmill
-#: ../../data/tribes/initialization/barbarians/units.lua:1416
+#: ../../data/tribes/initialization/barbarians/units.lua:1428
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
@@ -6821,8 +6801,8 @@ msgstr "Die Waffenschmiede der Barbaren ist die am meisten fortgeschrittene Prod
 #. part 1
 #. TRANSLATORS: Performance helptext for a barbarian production site: Ax
 #. Workshop
-#: ../../data/tribes/initialization/barbarians/units.lua:1419
-#: ../../data/tribes/initialization/barbarians/units.lua:1438
+#: ../../data/tribes/initialization/barbarians/units.lua:1431
+#: ../../data/tribes/initialization/barbarians/units.lua:1450
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -6832,7 +6812,7 @@ msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Ge
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Warmill,
 #. part 2
-#: ../../data/tribes/initialization/barbarians/units.lua:1421
+#: ../../data/tribes/initialization/barbarians/units.lua:1433
 msgctxt "barbarians_building"
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
@@ -6840,13 +6820,13 @@ msgid ""
 msgstr "Alle Waffen brauchen zur Herstellung die gleiche Zeit, aber der Verbrauch an Grundstoffen steigt von Stufe zu Stufe. Die letzten beiden benötigen sogar Gold."
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Ax Workshop
-#: ../../data/tribes/initialization/barbarians/units.lua:1433
+#: ../../data/tribes/initialization/barbarians/units.lua:1445
 msgctxt "barbarians_building"
 msgid "Produces axes, sharp axes and broad axes."
 msgstr "Stellt Äxte, scharfe Äxte und Breitäxte her."
 
 #. TRANSLATORS: Note helptext for a barbarian production site: Ax Workshop
-#: ../../data/tribes/initialization/barbarians/units.lua:1435
+#: ../../data/tribes/initialization/barbarians/units.lua:1447
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
@@ -6856,7 +6836,7 @@ msgstr "Die Axtschmiede der Barbaren ist die mittlere Produktionsstätte in eine
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Ax
 #. Workshop
-#: ../../data/tribes/initialization/barbarians/units.lua:1440
+#: ../../data/tribes/initialization/barbarians/units.lua:1452
 msgctxt "barbarians_building"
 msgid ""
 "All three weapons take the same time for making, but the required raw "
@@ -6864,7 +6844,7 @@ msgid ""
 msgstr "Alle drei Waffen benötigen die gleiche Zeit zur Herstellung, aber die benötigten Grundstoffe unterscheiden sich."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Barracks
-#: ../../data/tribes/initialization/barbarians/units.lua:1448
+#: ../../data/tribes/initialization/barbarians/units.lua:1460
 msgctxt "barbarians_building"
 msgid ""
 "‘Don’t ask what your tribe can do for you, ask what you can do for your "
@@ -6872,19 +6852,26 @@ msgid ""
 msgstr "„Frage nicht, was dein Stamm für dich tun kann, frage, was du für deinen Stamm tun kannst!“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Barracks
-#: ../../data/tribes/initialization/barbarians/units.lua:1450
+#: ../../data/tribes/initialization/barbarians/units.lua:1462
 msgctxt "barbarians_building"
 msgid "Famous barbarian recruitment poster"
 msgstr "Bekanntes Rekrutierungsplakat der Barbaren"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Barracks
-#: ../../data/tribes/initialization/barbarians/units.lua:1452
+#: ../../data/tribes/initialization/barbarians/units.lua:1464
 msgctxt "barbarians_building"
 msgid "Equips recruits and trains them as soldiers."
 msgstr "Bewaffnet Rekruten und bildet sie zu Kriegern aus."
 
+#. TRANSLATORS: Performance helptext for a barbarian production site: Barracks
+#: ../../data/tribes/initialization/barbarians/units.lua:1466
+#, lua-format
+msgctxt "barbarians_building"
+msgid "The barracks need %s on average to recruit one soldier."
+msgstr "Die Kaserne benötigt durchschnittlich %s, um einen Krieger zu rekrutieren."
+
 #. TRANSLATORS: Lore helptext for a barbarian production site: Cattle Farm
-#: ../../data/tribes/initialization/barbarians/units.lua:1461
+#: ../../data/tribes/initialization/barbarians/units.lua:1475
 msgctxt "barbarians_building"
 msgid ""
 "‘The smart leader builds roads, while the really wise leader breeds cattle.’"
@@ -6892,7 +6879,7 @@ msgstr "„Der kluge Häuptling baut Straßen, doch der wahrhaft weise Häuptlin
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Cattle
 #. Farm
-#: ../../data/tribes/initialization/barbarians/units.lua:1463
+#: ../../data/tribes/initialization/barbarians/units.lua:1477
 msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and "
@@ -6900,14 +6887,14 @@ msgid ""
 msgstr "Khantarakh, „Die moderne Barbarenwirtschaft“,<br>5. Kuhhaut „Verkehr und Logistik“"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Cattle Farm
-#: ../../data/tribes/initialization/barbarians/units.lua:1465
+#: ../../data/tribes/initialization/barbarians/units.lua:1479
 msgctxt "barbarians_building"
 msgid "Breeds strong oxen for adding them to the transportation system."
 msgstr "Züchtet starke Ochsen, die beim Transport der Waren helfen."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Cattle
 #. Farm
-#: ../../data/tribes/initialization/barbarians/units.lua:1467
+#: ../../data/tribes/initialization/barbarians/units.lua:1481
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -6916,7 +6903,7 @@ msgid ""
 msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann dieses Gebäude einen Ochsen in durchschnittlich %s züchten."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Farm
-#: ../../data/tribes/initialization/barbarians/units.lua:1474
+#: ../../data/tribes/initialization/barbarians/units.lua:1488
 msgctxt "barbarians_building"
 msgid ""
 "‘See the crop fields from here to the horizons. They are a huge, heaving, "
@@ -6925,27 +6912,27 @@ msgid ""
 msgstr "„Sieh die Weizenfelder, von hier bis zum Horizont. Ein großes, wogendes, goldenes Meer.<br>Oh Korn, Quelle des Wohlstands, Seele des Bieres, Kraft unserer Krieger!“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Farm
-#: ../../data/tribes/initialization/barbarians/units.lua:1477
+#: ../../data/tribes/initialization/barbarians/units.lua:1491
 msgctxt "barbarians_building"
 msgid "Line from the harvesting song ‘The Wealth of the Fields’"
 msgstr "Zeile aus dem Erntelied „Reichtum der Felder“"
 
 #. TRANSLATORS: Purpose helptext for production site: Farm
 #. TRANSLATORS: Purpose helptext for an empire production site: Farm
-#: ../../data/tribes/initialization/barbarians/units.lua:1479
+#: ../../data/tribes/initialization/barbarians/units.lua:1493
 #: ../../data/tribes/initialization/empire/units.lua:1704
 msgctxt "building"
 msgid "Sows and harvests wheat."
 msgstr "Sät und erntet Weizen."
 
 #. TRANSLATORS: Performance helptext for production site: Farm
-#: ../../data/tribes/initialization/barbarians/units.lua:1481
+#: ../../data/tribes/initialization/barbarians/units.lua:1495
 msgctxt "barbarians_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of wheat."
 msgstr "Der Bauer braucht für Aussaat und Ernte von Weizen durchschnittlich %1%."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Helm Smithy
-#: ../../data/tribes/initialization/barbarians/units.lua:1488
+#: ../../data/tribes/initialization/barbarians/units.lua:1502
 msgctxt "barbarians_building"
 msgid ""
 "‘The helmets forgéd by this smithy<br>Are widely known for looking pithy.’"
@@ -6953,13 +6940,13 @@ msgstr "„Vom Häuptling bis zum kleinsten Krieger –<br>ein jeder trägt den 
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Helm
 #. Smithy
-#: ../../data/tribes/initialization/barbarians/units.lua:1490
+#: ../../data/tribes/initialization/barbarians/units.lua:1504
 msgctxt "barbarians_building"
 msgid "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"
 msgstr "Werbung für „Harraths Hübsche Helme“ in Al’thunran"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Helm Smithy
-#: ../../data/tribes/initialization/barbarians/units.lua:1492
+#: ../../data/tribes/initialization/barbarians/units.lua:1506
 msgctxt "barbarians_building"
 msgid ""
 "Forges helmets that are used for training soldiers’ health in the training "
@@ -6967,14 +6954,14 @@ msgid ""
 msgstr "Schmiedet Helme, die zur Lebenspunkteverbesserung im Ausbildungslager benötigt werden."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Granite Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1501
+#: ../../data/tribes/initialization/barbarians/units.lua:1515
 msgctxt "barbarians_building"
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
 msgstr "„Ich kann mit Unmengen von Granit umgehen, aber nicht mit deinem leeren Geschwätz!“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Granite
 #. Mine, part 1
-#: ../../data/tribes/initialization/barbarians/units.lua:1504
+#: ../../data/tribes/initialization/barbarians/units.lua:1518
 msgctxt "barbarians_building"
 msgid ""
 "This phrase was the reply Rimbert the miner – later known as Rimbert the "
@@ -6984,7 +6971,7 @@ msgstr "Dieser Satz war die Antwort von Rimbert dem Bergmann – später bekannt
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Granite
 #. Mine, part 2
-#: ../../data/tribes/initialization/barbarians/units.lua:1506
+#: ../../data/tribes/initialization/barbarians/units.lua:1520
 msgctxt "barbarians_building"
 msgid ""
 "The same man had all the 244 granite blocks ready only a week later, and "
@@ -6992,20 +6979,20 @@ msgid ""
 msgstr "Derselbe Mann fertigte innerhalb einer Woche alle 244 Granitblöcke, die heute noch den Schutzdamm der Stadt verstärken."
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Granite Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1509
+#: ../../data/tribes/initialization/barbarians/units.lua:1523
 msgctxt "barbarians_building"
 msgid "Carves granite out of the rock in mountain terrain."
 msgstr "Schlägt Stein aus den Granitvorkommen in den Bergen."
 
 #. TRANSLATORS: 'It' is a mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1512
+#: ../../data/tribes/initialization/barbarians/units.lua:1526
 msgctxt "barbarians_building"
 msgid "It cannot be enhanced."
 msgstr "Kann nicht erweitert werden."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Granite
 #. Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1515
+#: ../../data/tribes/initialization/barbarians/units.lua:1529
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -7016,9 +7003,9 @@ msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Stein in durchsc
 #. TRANSLATORS: Lore helptext for production site: Coal Mine, part 1
 #. TRANSLATORS: Lore helptext for production site: Deep Coal Mine, part 1
 #. TRANSLATORS: Lore helptext for production site: Deeper Coal Mine, part 1
-#: ../../data/tribes/initialization/barbarians/units.lua:1523
-#: ../../data/tribes/initialization/barbarians/units.lua:1538
-#: ../../data/tribes/initialization/barbarians/units.lua:1553
+#: ../../data/tribes/initialization/barbarians/units.lua:1537
+#: ../../data/tribes/initialization/barbarians/units.lua:1552
+#: ../../data/tribes/initialization/barbarians/units.lua:1567
 msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black "
@@ -7028,9 +7015,9 @@ msgstr "Vor Ewigkeiten beschäftigten sich die Barbaren mit den Bergen und entde
 #. TRANSLATORS: Lore helptext for production site: Coal Mine, part 2
 #. TRANSLATORS: Lore helptext for production site: Deep Coal Mine
 #. TRANSLATORS: Lore helptext for production site: Deeper Coal Mine, part 2
-#: ../../data/tribes/initialization/barbarians/units.lua:1525
-#: ../../data/tribes/initialization/barbarians/units.lua:1540
-#: ../../data/tribes/initialization/barbarians/units.lua:1555
+#: ../../data/tribes/initialization/barbarians/units.lua:1539
+#: ../../data/tribes/initialization/barbarians/units.lua:1554
+#: ../../data/tribes/initialization/barbarians/units.lua:1569
 msgctxt "barbarians_building"
 msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
@@ -7038,36 +7025,24 @@ msgid ""
 msgstr "Holz mag für ein heimisches Feuer, das dich warm hält, gut genug sein; aber um mit Eisen oder Gold zu arbeiten, gibt es keine andere Möglichkeit als Kohle."
 
 #. TRANSLATORS: Performance helptext for production site: Coal Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1530
-msgctxt "barbarians_building"
-msgid ""
-"If the food supply is steady, this mine can produce coal in 32.5 seconds on "
-"average."
-msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Kohle in durchschnittlich 32,5 Sekunden herstellen."
-
 #. TRANSLATORS: Performance helptext for production site: Deep Coal Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1545
-msgctxt "barbarians_building"
-msgid ""
-"If the food supply is steady, this mine can produce coal in 19.5 seconds on "
-"average."
-msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Kohle in durchschnittlich 19,5 Sekunden herstellen."
-
 #. TRANSLATORS: Performance helptext for production site: Deeper Coal Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1560
+#: ../../data/tribes/initialization/barbarians/units.lua:1544
+#: ../../data/tribes/initialization/barbarians/units.lua:1559
+#: ../../data/tribes/initialization/barbarians/units.lua:1574
+#, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"If the food supply is steady, this mine can produce coal in 14.4 seconds on "
-"average."
-msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Kohle in durchschnittlich 14,4 Sekunden herstellen."
+"If the food supply is steady, this mine can produce coal in %s on average."
+msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Kohle in durchschnittlich %s herstellen."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a barbarian production site: Deep Iron Mine
 #. TRANSLATORS: Lore helptext for a barbarian production site: Deeper Iron
 #. Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1567
-#: ../../data/tribes/initialization/barbarians/units.lua:1580
-#: ../../data/tribes/initialization/barbarians/units.lua:1593
+#: ../../data/tribes/initialization/barbarians/units.lua:1581
+#: ../../data/tribes/initialization/barbarians/units.lua:1594
+#: ../../data/tribes/initialization/barbarians/units.lua:1607
 msgctxt "barbarians_building"
 msgid ""
 "‘I look at my own pick wearing away day by day and I realize why my work is "
@@ -7080,16 +7055,22 @@ msgstr "„Wenn ich sehe, wie sich meine eigene Spitzhacke tagtäglich weiter ab
 #. Iron Mine
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Deeper
 #. Iron Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1569
-#: ../../data/tribes/initialization/barbarians/units.lua:1582
-#: ../../data/tribes/initialization/barbarians/units.lua:1595
+#: ../../data/tribes/initialization/barbarians/units.lua:1583
+#: ../../data/tribes/initialization/barbarians/units.lua:1596
+#: ../../data/tribes/initialization/barbarians/units.lua:1609
 msgctxt "barbarians_building"
 msgid "Quote from an anonymous miner."
 msgstr "Zitat eines anonymen Bergmanns."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Iron
 #. Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1573
+#. TRANSLATORS: Performance helptext for a barbarian production site: Deep
+#. Iron Mine
+#. TRANSLATORS: Performance helptext for a barbarian production site: Deeper
+#. Iron Mine
+#: ../../data/tribes/initialization/barbarians/units.lua:1587
+#: ../../data/tribes/initialization/barbarians/units.lua:1600
+#: ../../data/tribes/initialization/barbarians/units.lua:1613
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -7097,31 +7078,13 @@ msgid ""
 "average."
 msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Eisenerz in durchschnittlich %s herstellen."
 
-#. TRANSLATORS: Performance helptext for a barbarian production site: Deep
-#. Iron Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1586
-msgctxt "barbarians_building"
-msgid ""
-"If the food supply is steady, this mine can produce iron ore in 39.5 seconds"
-" on average."
-msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Eisenerz in durchschnittlich 39,5 Sekunden herstellen."
-
-#. TRANSLATORS: Performance helptext for a barbarian production site: Deeper
-#. Iron Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1599
-msgctxt "barbarians_building"
-msgid ""
-"If the food supply is steady, this mine can produce iron ore in 17.6 seconds"
-" on average."
-msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Eisenerz in durchschnittlich 17,6 Sekunden herstellen."
-
 #. TRANSLATORS: Lore helptext for a barbarian production site: Gold Mine
 #. TRANSLATORS: Lore helptext for a barbarian production site: Deep Gold Mine
 #. TRANSLATORS: Lore helptext for a barbarian production site: Deeper Gold
 #. Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1606
-#: ../../data/tribes/initialization/barbarians/units.lua:1619
-#: ../../data/tribes/initialization/barbarians/units.lua:1632
+#: ../../data/tribes/initialization/barbarians/units.lua:1620
+#: ../../data/tribes/initialization/barbarians/units.lua:1633
+#: ../../data/tribes/initialization/barbarians/units.lua:1646
 msgctxt "barbarians_building"
 msgid ""
 "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
@@ -7134,16 +7097,20 @@ msgstr "„Weich und geschmeidig.<br> Und doch von Wetter und Zeit unberührt.<b
 #. Gold Mine
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Deeper
 #. Gold Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1608
-#: ../../data/tribes/initialization/barbarians/units.lua:1621
-#: ../../data/tribes/initialization/barbarians/units.lua:1634
+#: ../../data/tribes/initialization/barbarians/units.lua:1622
+#: ../../data/tribes/initialization/barbarians/units.lua:1635
+#: ../../data/tribes/initialization/barbarians/units.lua:1648
 msgctxt "barbarians_building"
 msgid ""
 "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
 msgstr "Auszug aus „Unsere unterirdischen Schätze“,<br>einem traditionellen Barbarenlied."
 
 #. TRANSLATORS: Performance helptext for production site: Gold Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1612
+#. TRANSLATORS: Performance helptext for production site: Deep Gold Mine
+#. TRANSLATORS: Performance helptext for production site: Deeper Gold Mine
+#: ../../data/tribes/initialization/barbarians/units.lua:1626
+#: ../../data/tribes/initialization/barbarians/units.lua:1639
+#: ../../data/tribes/initialization/barbarians/units.lua:1652
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -7151,24 +7118,8 @@ msgid ""
 "average."
 msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Golderz in durchschnittlich %s herstellen."
 
-#. TRANSLATORS: Performance helptext for production site: Deep Gold Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1625
-msgctxt "barbarians_building"
-msgid ""
-"If the food supply is steady, this mine can produce gold ore in 19.5 seconds"
-" on average."
-msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Golderz in durchschnittlich 19,5 Sekunden herstellen."
-
-#. TRANSLATORS: Performance helptext for production site: Deeper Gold Mine
-#: ../../data/tribes/initialization/barbarians/units.lua:1638
-msgctxt "barbarians_building"
-msgid ""
-"If the food supply is steady, this mine can produce gold ore in 18.5 seconds"
-" on average."
-msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Golderz in durchschnittlich 18,5 Sekunden herstellen."
-
 #. TRANSLATORS: Lore helptext for a barbarian training site: Battle Arena
-#: ../../data/tribes/initialization/barbarians/units.lua:1647
+#: ../../data/tribes/initialization/barbarians/units.lua:1661
 msgctxt "barbarians_building"
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
@@ -7176,21 +7127,21 @@ msgstr "„Der beste Freund in der Schlacht ist der feindliche Schlag, der dich 
 
 #. TRANSLATORS: Lore author helptext for a barbarian training site: Battle
 #. Arena
-#: ../../data/tribes/initialization/barbarians/units.lua:1649
+#: ../../data/tribes/initialization/barbarians/units.lua:1663
 msgctxt "barbarians_building"
 msgid "Said to originate from Neidhardt, the famous trainer."
 msgstr "Stammt angeblich von Neidhardt, dem berühmten Ausbilder."
 
 #. TRANSLATORS: Purpose helptext for a barbarian training site: Battle Arena,
 #. part 1
-#: ../../data/tribes/initialization/barbarians/units.lua:1652
+#: ../../data/tribes/initialization/barbarians/units.lua:1666
 msgctxt "barbarians_building"
 msgid "Trains soldiers in ‘Evade’."
 msgstr "Bildet Krieger im „Ausweichen“ aus."
 
 #. TRANSLATORS: Purpose helptext for a barbarian training site: Battle Arena,
 #. part 2
-#: ../../data/tribes/initialization/barbarians/units.lua:1654
+#: ../../data/tribes/initialization/barbarians/units.lua:1668
 msgctxt "barbarians_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
@@ -7199,35 +7150,26 @@ msgstr "„Ausweichen“ erhöht die Wahrscheinlichkeit, dass der Soldat nicht v
 
 #. TRANSLATORS: Note helptext for a barbarian training site: Battle Arena
 #. TRANSLATORS: Note helptext for a barbarian building: Training Camp
-#: ../../data/tribes/initialization/barbarians/units.lua:1657
-#: ../../data/tribes/initialization/barbarians/units.lua:1676
+#: ../../data/tribes/initialization/barbarians/units.lua:1671
+#: ../../data/tribes/initialization/barbarians/units.lua:1690
 msgctxt "barbarians_building"
 msgid ""
 "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
 "initial level."
 msgstr "Die Krieger der Barbaren können nicht in „Verteidigung“ ausgebildet werden und bleiben bei ihrer Anfangsstufe."
 
-#: ../../data/tribes/initialization/barbarians/units.lua:1659
-#: ../../data/tribes/initialization/barbarians/units.lua:1678
-#: ../../data/tribes/scripting/help/time_strings.lua:42
-#: ../../data/tribes/scripting/help/time_strings.lua:61
-#, lua-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] "%d Minute"
-msgstr[1] "%d Minuten"
-
 #. TRANSLATORS: Performance helptext for a barbarian training site: Battle
 #. Arena
-#: ../../data/tribes/initialization/barbarians/units.lua:1659
+#: ../../data/tribes/initialization/barbarians/units.lua:1673
+#, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train evade "
-"for one soldier from 0 to the highest level in %1$s and %2$s on average."
-msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann eine Arena das Ausweichen eines Kriegers von 0 bis zur höchsten Stufe in durchschnittlich %1$s und %2$s ausbilden."
+"for one soldier from 0 to the highest level in %s on average."
+msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann eine Arena das Ausweichen eines Kriegers von 0 bis zur höchsten Stufe in durchschnittlich %s ausbilden."
 
 #. TRANSLATORS: Lore helptext for a barbarian training site: Training Camp
-#: ../../data/tribes/initialization/barbarians/units.lua:1666
+#: ../../data/tribes/initialization/barbarians/units.lua:1680
 msgctxt "barbarians_building"
 msgid ""
 "‘He who is strong shall neither forgive nor forget, but revenge injustice "
@@ -7236,37 +7178,37 @@ msgstr "„Wer stark ist, wird weder vergeben noch vergessen, sondern erlittenes
 
 #. TRANSLATORS: Lore author helptext for a barbarian training site: Training
 #. Camp
-#: ../../data/tribes/initialization/barbarians/units.lua:1668
+#: ../../data/tribes/initialization/barbarians/units.lua:1682
 msgctxt "barbarians_building"
 msgid "Chief Chat’Karuth in a speech to his army."
 msgstr "Häuptling Chat’Karuth in einer Rede vor seiner Armee."
 
 #. TRANSLATORS: Purpose helptext for a barbarian training site: Training Camp,
 #. part 1
-#: ../../data/tribes/initialization/barbarians/units.lua:1671
+#: ../../data/tribes/initialization/barbarians/units.lua:1685
 msgctxt "barbarians_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr "Bildet Krieger im „Angriff“ aus und verbessert die „Lebenspunkte“."
 
 #. TRANSLATORS: Purpose helptext for a barbarian training site: Training Camp,
 #. part 2
-#: ../../data/tribes/initialization/barbarians/units.lua:1673
+#: ../../data/tribes/initialization/barbarians/units.lua:1687
 msgctxt "barbarians_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
 msgstr "Stattet die Krieger mit allen nötigen Waffen und Rüstungsgegenständen aus."
 
 #. TRANSLATORS: Performance helptext for a barbarian training site: Training
 #. Camp
-#: ../../data/tribes/initialization/barbarians/units.lua:1678
+#: ../../data/tribes/initialization/barbarians/units.lua:1692
+#, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a training camp can train one new"
-" soldier in attack and health to the final level in %1$s and %2$s on "
-"average."
-msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann ein Ausbildungslager einen neuen Krieger in Angriff und Lebenspunkten zur höchsten Stufe in durchschnittlich %1$s und %2$s ausbilden."
+" soldier in attack and health to the final level in %s on average."
+msgstr "Wenn alle benötigten Waren rechtzeitig geliefert werden, kann ein Ausbildungslager einen neuen Krieger in Angriff und Lebenspunkten zur höchsten Stufe in durchschnittlich %s ausbilden."
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Sentry
-#: ../../data/tribes/initialization/barbarians/units.lua:1687
+#: ../../data/tribes/initialization/barbarians/units.lua:1701
 msgctxt "barbarians_building"
 msgid ""
 "‘The log cabin was so small that two men could hardly live there. But we "
@@ -7275,7 +7217,7 @@ msgid ""
 msgstr "„Die Blockhütte war so eng, dass man darin kaum zu zweit hausen konnte. Aber wir waren jung und unbeschwert. Wir genossen unsere Freiheit und die Verantwortung als Außenposten.“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian military site: Sentry
-#: ../../data/tribes/initialization/barbarians/units.lua:1689
+#: ../../data/tribes/initialization/barbarians/units.lua:1703
 msgctxt "barbarians_building"
 msgid "Boldreth,<br>about his time as young soldier"
 msgstr "Boldreth,<br>über seine Zeit als junger Krieger"
@@ -7285,11 +7227,11 @@ msgstr "Boldreth,<br>über seine Zeit als junger Krieger"
 #. TRANSLATORS: Purpose helptext for a barbarian military site: Tower
 #. TRANSLATORS: Purpose helptext for a barbarian military site: Fortress
 #. TRANSLATORS: Purpose helptext for a barbarian military site: Citadel
-#: ../../data/tribes/initialization/barbarians/units.lua:1691
-#: ../../data/tribes/initialization/barbarians/units.lua:1704
+#: ../../data/tribes/initialization/barbarians/units.lua:1705
 #: ../../data/tribes/initialization/barbarians/units.lua:1718
-#: ../../data/tribes/initialization/barbarians/units.lua:1731
-#: ../../data/tribes/initialization/barbarians/units.lua:1744
+#: ../../data/tribes/initialization/barbarians/units.lua:1732
+#: ../../data/tribes/initialization/barbarians/units.lua:1745
+#: ../../data/tribes/initialization/barbarians/units.lua:1758
 msgctxt "barbarians_building"
 msgid "Garrisons soldiers to expand your territory."
 msgstr "Beherbergt Krieger, um dein Gebiet zu erweitern."
@@ -7299,11 +7241,11 @@ msgstr "Beherbergt Krieger, um dein Gebiet zu erweitern."
 #. TRANSLATORS: Note helptext for a barbarian military site: Tower
 #. TRANSLATORS: Note helptext for a barbarian military site: Fortress
 #. TRANSLATORS: Note helptext for a barbarian military site: Citadel
-#: ../../data/tribes/initialization/barbarians/units.lua:1693
-#: ../../data/tribes/initialization/barbarians/units.lua:1706
+#: ../../data/tribes/initialization/barbarians/units.lua:1707
 #: ../../data/tribes/initialization/barbarians/units.lua:1720
-#: ../../data/tribes/initialization/barbarians/units.lua:1733
-#: ../../data/tribes/initialization/barbarians/units.lua:1746
+#: ../../data/tribes/initialization/barbarians/units.lua:1734
+#: ../../data/tribes/initialization/barbarians/units.lua:1747
+#: ../../data/tribes/initialization/barbarians/units.lua:1760
 msgctxt "barbarians_building"
 msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
@@ -7312,7 +7254,7 @@ msgid ""
 msgstr "Wenn du nur wenige Krieger hast, die neue Militärgebäude besetzen können, benutze die Schaltfläche mit dem nach unten zeigenden Pfeil, um die Kapazität in diesem Gebäude zu verringern. Du kannst auch auf einen Krieger klicken, um ihn wegzuschicken (er wird, wenn möglich, ersetzt werden)."
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Barrier
-#: ../../data/tribes/initialization/barbarians/units.lua:1700
+#: ../../data/tribes/initialization/barbarians/units.lua:1714
 msgctxt "barbarians_building"
 msgid ""
 "‘When we looked down to the valley from our newly established barrier, we "
@@ -7320,7 +7262,7 @@ msgid ""
 msgstr "„Als wir am Ende des Tages von unserer neu errichteten Barriere ins Tal blickten, spürten wir, dass der Geist unserer Väter mit uns war.“"
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Tower
-#: ../../data/tribes/initialization/barbarians/units.lua:1714
+#: ../../data/tribes/initialization/barbarians/units.lua:1728
 msgctxt "barbarians_building"
 msgid ""
 "‘From the height of our tower we could see far into enemy territory. The "
@@ -7329,7 +7271,7 @@ msgid ""
 msgstr "„Von der Höhe unseres Wachturms konnten wir weit ins feindliche Gebiet blicken. Der Feind war gut aufgestellt, doch wir bemerkten auch einige Schwachstellen in ihrer Abwehr.“"
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Fortress
-#: ../../data/tribes/initialization/barbarians/units.lua:1727
+#: ../../data/tribes/initialization/barbarians/units.lua:1741
 msgctxt "barbarians_building"
 msgid ""
 "‘This stronghold made from blackwood and stones will be a hard nut to crack "
@@ -7337,13 +7279,13 @@ msgid ""
 msgstr "„An diesem Bollwerk aus Hartholz und Stein werden sie sich die Zähne ausbeißen.“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian military site: Fortress
-#: ../../data/tribes/initialization/barbarians/units.lua:1729
+#: ../../data/tribes/initialization/barbarians/units.lua:1743
 msgctxt "barbarians_building"
 msgid "Berthron,<br>chief military adviser of Chat’Karuth"
 msgstr "Berthron,<br>Oberster Militärberater von Chat’Karuth"
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Citadel
-#: ../../data/tribes/initialization/barbarians/units.lua:1740
+#: ../../data/tribes/initialization/barbarians/units.lua:1754
 msgctxt "barbarians_building"
 msgid ""
 "‘The Citadel of Adlen surely is the finest masterpiece of Barbarian "
@@ -7352,7 +7294,7 @@ msgid ""
 msgstr "„Die Zitadelle von Adlen ist sicherlich das Meisterwerk barbarischer Baukunst. Noch nie wurde etwas so Starkes und Großes und gleichzeitig so Schönes in so kurzer Zeit erbaut.“"
 
 #. TRANSLATORS: Lore author helptext for a barbarian military site: Citadel
-#: ../../data/tribes/initialization/barbarians/units.lua:1742
+#: ../../data/tribes/initialization/barbarians/units.lua:1756
 msgctxt "barbarians_building"
 msgid ""
 "Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"
@@ -7361,7 +7303,7 @@ msgstr "Colintan, Architekt der Zitadelle von Adlen,<br>bei der Eröffnungsrede"
 #. TRANSLATORS: Note helptext for production site: Ferry Yard
 #. TRANSLATORS: Note helptext for an empire production site: Ferry Yard
 #. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
-#: ../../data/tribes/initialization/barbarians/units.lua:1757
+#: ../../data/tribes/initialization/barbarians/units.lua:1771
 #: ../../data/tribes/initialization/empire/units.lua:2231
 #: ../../data/tribes/initialization/frisians/units.lua:2155
 msgctxt "building"
@@ -7369,7 +7311,7 @@ msgid "Needs water nearby."
 msgstr "Braucht offenes Gewässer in der Nähe."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Shipyard
-#: ../../data/tribes/initialization/barbarians/units.lua:1764
+#: ../../data/tribes/initialization/barbarians/units.lua:1778
 msgctxt "barbarians_building"
 msgid ""
 "‘When I saw the Saxnot for the first time, her majestic dragon head already "
@@ -7378,7 +7320,7 @@ msgid ""
 msgstr "„Als ich die Saxnot zum ersten Mal sah ragte ihr Drachenkopf bereits majestätisch in den Himmel und der Meister brachte gerade das Rahsegel an.<br>Es war das prächtigste Schiff, das ich jemals gesehen hatte.“"
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Weaving Mill
-#: ../../data/tribes/initialization/barbarians/units.lua:1776
+#: ../../data/tribes/initialization/barbarians/units.lua:1790
 msgctxt "barbarians_building"
 msgid ""
 "‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>But a noble "
@@ -7387,7 +7329,7 @@ msgstr "„Geschmeide und Tand ist des Barbaren Sache nicht.<br>Doch ein prächt
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Weaving
 #. Mill
-#: ../../data/tribes/initialization/barbarians/units.lua:1779
+#: ../../data/tribes/initialization/barbarians/units.lua:1793
 msgctxt "barbarians_building"
 msgid ""
 "Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and "
@@ -7395,2142 +7337,2142 @@ msgid ""
 msgstr "Khantarakh, „Die moderne Barbarenwirtschaft“,<br>9. Kuhhaut „Seefahrt und Eroberung“"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Weaving Mill
-#: ../../data/tribes/initialization/barbarians/units.lua:1781
+#: ../../data/tribes/initialization/barbarians/units.lua:1795
 msgctxt "barbarians_building"
 msgid "Weaves cloth out of reed."
 msgstr "Webt Stoff aus Reet."
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1812
+#: ../../data/tribes/initialization/barbarians/units.lua:1826
 msgctxt "warehousename"
 msgid "Al’Fjord"
 msgstr "Al’Fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1814
+#: ../../data/tribes/initialization/barbarians/units.lua:1828
 msgctxt "warehousename"
 msgid "Al’Sund"
 msgstr "Al’Sund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1816
+#: ../../data/tribes/initialization/barbarians/units.lua:1830
 msgctxt "warehousename"
 msgid "Al’Thaug"
 msgstr "Al’Thaug"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1818
+#: ../../data/tribes/initialization/barbarians/units.lua:1832
 msgctxt "warehousename"
 msgid "Al’ta"
 msgstr "Al’ta"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1820
+#: ../../data/tribes/initialization/barbarians/units.lua:1834
 msgctxt "warehousename"
 msgid "Al’dal"
 msgstr "Al’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1822
+#: ../../data/tribes/initialization/barbarians/units.lua:1836
 msgctxt "warehousename"
 msgid "Al’ver"
 msgstr "Al’ver"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1824
+#: ../../data/tribes/initialization/barbarians/units.lua:1838
 msgctxt "warehousename"
 msgid "An’dey"
 msgstr "An’dey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1826
+#: ../../data/tribes/initialization/barbarians/units.lua:1840
 msgctxt "warehousename"
 msgid "Ar’mark"
 msgstr "Ar’mark"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1828
+#: ../../data/tribes/initialization/barbarians/units.lua:1842
 msgctxt "warehousename"
 msgid "Ar’dal"
 msgstr "Ar’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1830
+#: ../../data/tribes/initialization/barbarians/units.lua:1844
 msgctxt "warehousename"
 msgid "Asker"
 msgstr "Asker"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1832
+#: ../../data/tribes/initialization/barbarians/units.lua:1846
 msgctxt "warehousename"
 msgid "As’ral"
 msgstr "As’ral"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1834
+#: ../../data/tribes/initialization/barbarians/units.lua:1848
 msgctxt "warehousename"
 msgid "As’Kvoll"
 msgstr "As’Kvoll"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1836
+#: ../../data/tribes/initialization/barbarians/units.lua:1850
 msgctxt "warehousename"
 msgid "As’key"
 msgstr "As’key"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1838
+#: ../../data/tribes/initialization/barbarians/units.lua:1852
 msgctxt "warehousename"
 msgid "As’nes"
 msgstr "As’nes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1840
+#: ../../data/tribes/initialization/barbarians/units.lua:1854
 msgctxt "warehousename"
 msgid "Au’kra"
 msgstr "Au’kra"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1842
+#: ../../data/tribes/initialization/barbarians/units.lua:1856
 msgctxt "warehousename"
 msgid "Au’re"
 msgstr "Au’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1844
+#: ../../data/tribes/initialization/barbarians/units.lua:1858
 msgctxt "warehousename"
 msgid "Au’land"
 msgstr "Au’land"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1846
+#: ../../data/tribes/initialization/barbarians/units.lua:1860
 msgctxt "warehousename"
 msgid "Au’skog"
 msgstr "Au’skog"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1848
+#: ../../data/tribes/initialization/barbarians/units.lua:1862
 msgctxt "warehousename"
 msgid "Au’tevoll"
 msgstr "Au’tevoll"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1850
+#: ../../data/tribes/initialization/barbarians/units.lua:1864
 msgctxt "warehousename"
 msgid "Au’trheim"
 msgstr "Au’trheim"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1852
+#: ../../data/tribes/initialization/barbarians/units.lua:1866
 msgctxt "warehousename"
 msgid "Av’rey"
 msgstr "Av’rey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1854
+#: ../../data/tribes/initialization/barbarians/units.lua:1868
 msgctxt "warehousename"
 msgid "Bærum"
 msgstr "Bærum"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1856
+#: ../../data/tribes/initialization/barbarians/units.lua:1870
 msgctxt "warehousename"
 msgid "Bal’fjord"
 msgstr "Bal’fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1858
+#: ../../data/tribes/initialization/barbarians/units.lua:1872
 msgctxt "warehousename"
 msgid "Ba’ble"
 msgstr "Ba’ble"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1860
+#: ../../data/tribes/initialization/barbarians/units.lua:1874
 msgctxt "warehousename"
 msgid "Ba’rdu"
 msgstr "Ba’rdu"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1862
+#: ../../data/tribes/initialization/barbarians/units.lua:1876
 msgctxt "warehousename"
 msgid "Bat’fjord"
 msgstr "Bat’fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1864
+#: ../../data/tribes/initialization/barbarians/units.lua:1878
 msgctxt "warehousename"
 msgid "B’iarn"
 msgstr "B’iarn"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1866
+#: ../../data/tribes/initialization/barbarians/units.lua:1880
 msgctxt "warehousename"
 msgid "Berl’vog"
 msgstr "Berl’vog"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1868
+#: ../../data/tribes/initialization/barbarians/units.lua:1882
 msgctxt "warehousename"
 msgid "Bindal"
 msgstr "Bindal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1870
+#: ../../data/tribes/initialization/barbarians/units.lua:1884
 msgctxt "warehousename"
 msgid "Birk’nes"
 msgstr "Birk’nes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1872
+#: ../../data/tribes/initialization/barbarians/units.lua:1886
 msgctxt "warehousename"
 msgid "Bjer’Kreim"
 msgstr "Bjer’Kreim"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1874
+#: ../../data/tribes/initialization/barbarians/units.lua:1888
 msgctxt "warehousename"
 msgid "Bjer’Fjord’n"
 msgstr "Bjer’Fjord’n"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1876
+#: ../../data/tribes/initialization/barbarians/units.lua:1890
 msgctxt "warehousename"
 msgid "Bo’do"
 msgstr "Bo’do"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1878
+#: ../../data/tribes/initialization/barbarians/units.lua:1892
 msgctxt "warehousename"
 msgid "Bok’n"
 msgstr "Bok’n"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1880
+#: ../../data/tribes/initialization/barbarians/units.lua:1894
 msgctxt "warehousename"
 msgid "Bom’lo"
 msgstr "Bom’lo"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1882
+#: ../../data/tribes/initialization/barbarians/units.lua:1896
 msgctxt "warehousename"
 msgid "Bremanger"
 msgstr "Bremanger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1884
+#: ../../data/tribes/initialization/barbarians/units.lua:1898
 msgctxt "warehousename"
 msgid "Bren’ey"
 msgstr "Bren’ey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1886
+#: ../../data/tribes/initialization/barbarians/units.lua:1900
 msgctxt "warehousename"
 msgid "B’gland"
 msgstr "B’gland"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1888
+#: ../../data/tribes/initialization/barbarians/units.lua:1902
 msgctxt "warehousename"
 msgid "B’kle"
 msgstr "B’kle"
 
 #. TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
-#: ../../data/tribes/initialization/barbarians/units.lua:1890
+#: ../../data/tribes/initialization/barbarians/units.lua:1904
 msgctxt "warehousename"
 msgid "Damack"
 msgstr "Damack"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1892
+#: ../../data/tribes/initialization/barbarians/units.lua:1906
 msgctxt "warehousename"
 msgid "Danna"
 msgstr "Danna"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1894
+#: ../../data/tribes/initialization/barbarians/units.lua:1908
 msgctxt "warehousename"
 msgid "Do’vre"
 msgstr "Do’vre"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1896
+#: ../../data/tribes/initialization/barbarians/units.lua:1910
 msgctxt "warehousename"
 msgid "D’rammen"
 msgstr "D’rammen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1898
+#: ../../data/tribes/initialization/barbarians/units.lua:1912
 msgctxt "warehousename"
 msgid "D’rangedal"
 msgstr "D’rangedal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1900
+#: ../../data/tribes/initialization/barbarians/units.lua:1914
 msgctxt "warehousename"
 msgid "D’rey"
 msgstr "D’rey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1902
+#: ../../data/tribes/initialization/barbarians/units.lua:1916
 msgctxt "warehousename"
 msgid "Ei’dfjord"
 msgstr "Ei’dfjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1904
+#: ../../data/tribes/initialization/barbarians/units.lua:1918
 msgctxt "warehousename"
 msgid "Ei’dskog"
 msgstr "Ei’dskog"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1906
+#: ../../data/tribes/initialization/barbarians/units.lua:1920
 msgctxt "warehousename"
 msgid "Ei’dsvoll"
 msgstr "Ei’dsvoll"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1908
+#: ../../data/tribes/initialization/barbarians/units.lua:1922
 msgctxt "warehousename"
 msgid "Ei’g’rsund"
 msgstr "Ei’g’rsund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1910
+#: ../../data/tribes/initialization/barbarians/units.lua:1924
 msgctxt "warehousename"
 msgid "Elv’rum"
 msgstr "Elv’rum"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1912
+#: ../../data/tribes/initialization/barbarians/units.lua:1926
 msgctxt "warehousename"
 msgid "En’Bakk"
 msgstr "En’Bakk"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1914
+#: ../../data/tribes/initialization/barbarians/units.lua:1928
 msgctxt "warehousename"
 msgid "Eng’rdal"
 msgstr "Eng’rdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1916
+#: ../../data/tribes/initialization/barbarians/units.lua:1930
 msgctxt "warehousename"
 msgid "Et’ne"
 msgstr "Et’ne"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1918
+#: ../../data/tribes/initialization/barbarians/units.lua:1932
 msgctxt "warehousename"
 msgid "Et’Nedal"
 msgstr "Et’Nedal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1920
+#: ../../data/tribes/initialization/barbarians/units.lua:1934
 msgctxt "warehousename"
 msgid "Ev’nes"
 msgstr "Ev’nes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1922
+#: ../../data/tribes/initialization/barbarians/units.lua:1936
 msgctxt "warehousename"
 msgid "Ev’je"
 msgstr "Ev’je"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1924
+#: ../../data/tribes/initialization/barbarians/units.lua:1938
 msgctxt "warehousename"
 msgid "Eyer"
 msgstr "Eyer"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1926
+#: ../../data/tribes/initialization/barbarians/units.lua:1940
 msgctxt "warehousename"
 msgid "Eygard’n"
 msgstr "Eygard’n"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1928
+#: ../../data/tribes/initialization/barbarians/units.lua:1942
 msgctxt "warehousename"
 msgid "Eystre"
 msgstr "Eystre"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1930
+#: ../../data/tribes/initialization/barbarians/units.lua:1944
 msgctxt "warehousename"
 msgid "Færdr"
 msgstr "Færdr"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1932
+#: ../../data/tribes/initialization/barbarians/units.lua:1946
 msgctxt "warehousename"
 msgid "Farsund"
 msgstr "Farsund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1934
+#: ../../data/tribes/initialization/barbarians/units.lua:1948
 msgctxt "warehousename"
 msgid "Foske"
 msgstr "Foske"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1936
+#: ../../data/tribes/initialization/barbarians/units.lua:1950
 msgctxt "warehousename"
 msgid "F’dje"
 msgstr "F’dje"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1938
+#: ../../data/tribes/initialization/barbarians/units.lua:1952
 msgctxt "warehousename"
 msgid "F’tjar"
 msgstr "F’tjar"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1940
+#: ../../data/tribes/initialization/barbarians/units.lua:1954
 msgctxt "warehousename"
 msgid "F’jaler"
 msgstr "F’jaler"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1942
+#: ../../data/tribes/initialization/barbarians/units.lua:1956
 msgctxt "warehousename"
 msgid "Fjord"
 msgstr "Fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1944
+#: ../../data/tribes/initialization/barbarians/units.lua:1958
 msgctxt "warehousename"
 msgid "Flo"
 msgstr "Flo"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1946
+#: ../../data/tribes/initialization/barbarians/units.lua:1960
 msgctxt "warehousename"
 msgid "Flakstad"
 msgstr "Flakstad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1948
+#: ../../data/tribes/initialization/barbarians/units.lua:1962
 msgctxt "warehousename"
 msgid "Flatang’r"
 msgstr "Flatang’r"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1950
+#: ../../data/tribes/initialization/barbarians/units.lua:1964
 msgctxt "warehousename"
 msgid "Flek’fjord"
 msgstr "Flek’fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1952
+#: ../../data/tribes/initialization/barbarians/units.lua:1966
 msgctxt "warehousename"
 msgid "Fl’sberg"
 msgstr "Fl’sberg"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1954
+#: ../../data/tribes/initialization/barbarians/units.lua:1968
 msgctxt "warehousename"
 msgid "Folldal"
 msgstr "Folldal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1956
+#: ../../data/tribes/initialization/barbarians/units.lua:1970
 msgctxt "warehousename"
 msgid "Frogn"
 msgstr "Frogn"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1958
+#: ../../data/tribes/initialization/barbarians/units.lua:1972
 msgctxt "warehousename"
 msgid "Fr’land"
 msgstr "Fr’land"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1960
+#: ../../data/tribes/initialization/barbarians/units.lua:1974
 msgctxt "warehousename"
 msgid "Frosta"
 msgstr "Frosta"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1962
+#: ../../data/tribes/initialization/barbarians/units.lua:1976
 msgctxt "warehousename"
 msgid "Freya"
 msgstr "Freya"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1964
+#: ../../data/tribes/initialization/barbarians/units.lua:1978
 msgctxt "warehousename"
 msgid "Fyr’sdal"
 msgstr "Fyr’sdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1966
+#: ../../data/tribes/initialization/barbarians/units.lua:1980
 msgctxt "warehousename"
 msgid "Gamvik"
 msgstr "Gamvik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1968
+#: ../../data/tribes/initialization/barbarians/units.lua:1982
 msgctxt "warehousename"
 msgid "Gausdal"
 msgstr "Gausdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1970
+#: ../../data/tribes/initialization/barbarians/units.lua:1984
 msgctxt "warehousename"
 msgid "Gild’skol"
 msgstr "Gild’skol"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1972
+#: ../../data/tribes/initialization/barbarians/units.lua:1986
 msgctxt "warehousename"
 msgid "Gi’ske"
 msgstr "Gi’ske"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1974
+#: ../../data/tribes/initialization/barbarians/units.lua:1988
 msgctxt "warehousename"
 msgid "G’jemnes"
 msgstr "G’jemnes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1976
+#: ../../data/tribes/initialization/barbarians/units.lua:1990
 msgctxt "warehousename"
 msgid "Gjerdrum"
 msgstr "Gjerdrum"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1978
+#: ../../data/tribes/initialization/barbarians/units.lua:1992
 msgctxt "warehousename"
 msgid "Gjerst’d"
 msgstr "Gjerst’d"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1980
+#: ../../data/tribes/initialization/barbarians/units.lua:1994
 msgctxt "warehousename"
 msgid "G’jesdal"
 msgstr "G’jesdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1982
+#: ../../data/tribes/initialization/barbarians/units.lua:1996
 msgctxt "warehousename"
 msgid "Gjovik"
 msgstr "Gjovik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1984
+#: ../../data/tribes/initialization/barbarians/units.lua:1998
 msgctxt "warehousename"
 msgid "Glopp’n"
 msgstr "Glopp’n"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1986
+#: ../../data/tribes/initialization/barbarians/units.lua:2000
 msgctxt "warehousename"
 msgid "Gol"
 msgstr "Gol"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1988
+#: ../../data/tribes/initialization/barbarians/units.lua:2002
 msgctxt "warehousename"
 msgid "Gran"
 msgstr "Gran"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1990
+#: ../../data/tribes/initialization/barbarians/units.lua:2004
 msgctxt "warehousename"
 msgid "Gra’ne"
 msgstr "Gra’ne"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1992
+#: ../../data/tribes/initialization/barbarians/units.lua:2006
 msgctxt "warehousename"
 msgid "Gr’tangen"
 msgstr "Gr’tangen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1994
+#: ../../data/tribes/initialization/barbarians/units.lua:2008
 msgctxt "warehousename"
 msgid "Grimst’d"
 msgstr "Grimst’d"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1996
+#: ../../data/tribes/initialization/barbarians/units.lua:2010
 msgctxt "warehousename"
 msgid "Grong"
 msgstr "Grong"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:1998
+#: ../../data/tribes/initialization/barbarians/units.lua:2012
 msgctxt "warehousename"
 msgid "Grue"
 msgstr "Grue"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2000
+#: ../../data/tribes/initialization/barbarians/units.lua:2014
 msgctxt "warehousename"
 msgid "G’len"
 msgstr "G’len"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2002
+#: ../../data/tribes/initialization/barbarians/units.lua:2016
 msgctxt "warehousename"
 msgid "Ho"
 msgstr "Ho"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2004
+#: ../../data/tribes/initialization/barbarians/units.lua:2018
 msgctxt "warehousename"
 msgid "H’dsel"
 msgstr "H’dsel"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2006
+#: ../../data/tribes/initialization/barbarians/units.lua:2020
 msgctxt "warehousename"
 msgid "Hæg’bost’d"
 msgstr "Hæg’bost’d"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2008
+#: ../../data/tribes/initialization/barbarians/units.lua:2022
 msgctxt "warehousename"
 msgid "H’lden"
 msgstr "H’lden"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2010
+#: ../../data/tribes/initialization/barbarians/units.lua:2024
 msgctxt "warehousename"
 msgid "H’mar"
 msgstr "H’mar"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2012
+#: ../../data/tribes/initialization/barbarians/units.lua:2026
 msgctxt "warehousename"
 msgid "H’marey"
 msgstr "H’marey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2014
+#: ../../data/tribes/initialization/barbarians/units.lua:2028
 msgctxt "warehousename"
 msgid "H’merfest"
 msgstr "H’merfest"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2016
+#: ../../data/tribes/initialization/barbarians/units.lua:2030
 msgctxt "warehousename"
 msgid "H’reid"
 msgstr "H’reid"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2018
+#: ../../data/tribes/initialization/barbarians/units.lua:2032
 msgctxt "warehousename"
 msgid "H’rstad"
 msgstr "H’rstad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2020
+#: ../../data/tribes/initialization/barbarians/units.lua:2034
 msgctxt "warehousename"
 msgid "Hasvik"
 msgstr "Hasvik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2022
+#: ../../data/tribes/initialization/barbarians/units.lua:2036
 msgctxt "warehousename"
 msgid "Hattfjelldal"
 msgstr "Hattfjelldal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2024
+#: ../../data/tribes/initialization/barbarians/units.lua:2038
 msgctxt "warehousename"
 msgid "Haug’sund"
 msgstr "Haug’sund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2026
+#: ../../data/tribes/initialization/barbarians/units.lua:2040
 msgctxt "warehousename"
 msgid "Heim"
 msgstr "Heim"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2028
+#: ../../data/tribes/initialization/barbarians/units.lua:2042
 msgctxt "warehousename"
 msgid "H’mnes"
 msgstr "H’mnes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2030
+#: ../../data/tribes/initialization/barbarians/units.lua:2044
 msgctxt "warehousename"
 msgid "Hems’dal"
 msgstr "Hems’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2032
+#: ../../data/tribes/initialization/barbarians/units.lua:2046
 msgctxt "warehousename"
 msgid "H’rey"
 msgstr "H’rey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2034
+#: ../../data/tribes/initialization/barbarians/units.lua:2048
 msgctxt "warehousename"
 msgid "H’roy"
 msgstr "H’roy"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2036
+#: ../../data/tribes/initialization/barbarians/units.lua:2050
 msgctxt "warehousename"
 msgid "Hitra"
 msgstr "Hitra"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2038
+#: ../../data/tribes/initialization/barbarians/units.lua:2052
 msgctxt "warehousename"
 msgid "Hjartdal"
 msgstr "Hjartdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2040
+#: ../../data/tribes/initialization/barbarians/units.lua:2054
 msgctxt "warehousename"
 msgid "Hjelm’land"
 msgstr "Hjelm’land"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2042
+#: ../../data/tribes/initialization/barbarians/units.lua:2056
 msgctxt "warehousename"
 msgid "Hol"
 msgstr "Hol"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2044
+#: ../../data/tribes/initialization/barbarians/units.lua:2058
 msgctxt "warehousename"
 msgid "Hole"
 msgstr "Hole"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2046
+#: ../../data/tribes/initialization/barbarians/units.lua:2060
 msgctxt "warehousename"
 msgid "Holm’strand"
 msgstr "Holm’strand"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2048
+#: ../../data/tribes/initialization/barbarians/units.lua:2062
 msgctxt "warehousename"
 msgid "Hol’Talen"
 msgstr "Hol’Talen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2050
+#: ../../data/tribes/initialization/barbarians/units.lua:2064
 msgctxt "warehousename"
 msgid "Horten"
 msgstr "Horten"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2052
+#: ../../data/tribes/initialization/barbarians/units.lua:2066
 msgctxt "warehousename"
 msgid "H’yanger"
 msgstr "H’yanger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2054
+#: ../../data/tribes/initialization/barbarians/units.lua:2068
 msgctxt "warehousename"
 msgid "H’ylandet"
 msgstr "H’ylandet"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2056
+#: ../../data/tribes/initialization/barbarians/units.lua:2070
 msgctxt "warehousename"
 msgid "H’rdal"
 msgstr "H’rdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2058
+#: ../../data/tribes/initialization/barbarians/units.lua:2072
 msgctxt "warehousename"
 msgid "Hustadvik"
 msgstr "Hustadvik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2060
+#: ../../data/tribes/initialization/barbarians/units.lua:2074
 msgctxt "warehousename"
 msgid "H’valer"
 msgstr "H’valer"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2062
+#: ../../data/tribes/initialization/barbarians/units.lua:2076
 msgctxt "warehousename"
 msgid "Hyll’stad"
 msgstr "Hyll’stad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2064
+#: ../../data/tribes/initialization/barbarians/units.lua:2078
 msgctxt "warehousename"
 msgid "Ib’stad"
 msgstr "Ib’stad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2066
+#: ../../data/tribes/initialization/barbarians/units.lua:2080
 msgctxt "warehousename"
 msgid "Ind’rey"
 msgstr "Ind’rey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2068
+#: ../../data/tribes/initialization/barbarians/units.lua:2082
 msgctxt "warehousename"
 msgid "Ind’re"
 msgstr "Ind’re"
 
 #. TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
-#: ../../data/tribes/initialization/barbarians/units.lua:2070
+#: ../../data/tribes/initialization/barbarians/units.lua:2084
 msgctxt "warehousename"
 msgid "Ir Kal’Tur"
 msgstr "Ir Kal’Tur"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2072
+#: ../../data/tribes/initialization/barbarians/units.lua:2086
 msgctxt "warehousename"
 msgid "Iv’land"
 msgstr "Iv’land"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2074
+#: ../../data/tribes/initialization/barbarians/units.lua:2088
 msgctxt "warehousename"
 msgid "J’vnaker"
 msgstr "J’vnaker"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2076
+#: ../../data/tribes/initialization/barbarians/units.lua:2090
 msgctxt "warehousename"
 msgid "K’fjord"
 msgstr "K’fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2078
+#: ../../data/tribes/initialization/barbarians/units.lua:2092
 msgctxt "warehousename"
 msgid "Kar’sjok"
 msgstr "Kar’sjok"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2080
+#: ../../data/tribes/initialization/barbarians/units.lua:2094
 msgctxt "warehousename"
 msgid "Karls’y"
 msgstr "Karls’y"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2082
+#: ../../data/tribes/initialization/barbarians/units.lua:2096
 msgctxt "warehousename"
 msgid "Karm’y"
 msgstr "Karm’y"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2084
+#: ../../data/tribes/initialization/barbarians/units.lua:2098
 msgctxt "warehousename"
 msgid "Kot’keino"
 msgstr "Kot’keino"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2086
+#: ../../data/tribes/initialization/barbarians/units.lua:2100
 msgctxt "warehousename"
 msgid "K’nn"
 msgstr "K’nn"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2088
+#: ../../data/tribes/initialization/barbarians/units.lua:2102
 msgctxt "warehousename"
 msgid "Kl’pp"
 msgstr "Kl’pp"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2090
+#: ../../data/tribes/initialization/barbarians/units.lua:2104
 msgctxt "warehousename"
 msgid "K’ngsberg"
 msgstr "K’ngsberg"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2092
+#: ../../data/tribes/initialization/barbarians/units.lua:2106
 msgctxt "warehousename"
 msgid "K’ngsvinger"
 msgstr "K’ngsvinger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2094
+#: ../../data/tribes/initialization/barbarians/units.lua:2108
 msgctxt "warehousename"
 msgid "Krag’re"
 msgstr "Krag’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2096
+#: ../../data/tribes/initialization/barbarians/units.lua:2110
 msgctxt "warehousename"
 msgid "Kr’dsherad"
 msgstr "Kr’dsherad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2098
+#: ../../data/tribes/initialization/barbarians/units.lua:2112
 msgctxt "warehousename"
 msgid "Kvæfjord"
 msgstr "Kvæfjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2100
+#: ../../data/tribes/initialization/barbarians/units.lua:2114
 msgctxt "warehousename"
 msgid "Kvæn’ngen"
 msgstr "Kvæn’ngen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2102
+#: ../../data/tribes/initialization/barbarians/units.lua:2116
 msgctxt "warehousename"
 msgid "Kvam"
 msgstr "Kvam"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2104
+#: ../../data/tribes/initialization/barbarians/units.lua:2118
 msgctxt "warehousename"
 msgid "Kvin’sdal"
 msgstr "Kvin’sdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2106
+#: ../../data/tribes/initialization/barbarians/units.lua:2120
 msgctxt "warehousename"
 msgid "Kvin’Herad"
 msgstr "Kvin’Herad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2108
+#: ../../data/tribes/initialization/barbarians/units.lua:2122
 msgctxt "warehousename"
 msgid "Kvit’seid"
 msgstr "Kvit’seid"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2110
+#: ../../data/tribes/initialization/barbarians/units.lua:2124
 msgctxt "warehousename"
 msgid "Kvit’Sey"
 msgstr "Kvit’Sey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2112
+#: ../../data/tribes/initialization/barbarians/units.lua:2126
 msgctxt "warehousename"
 msgid "Lærdal"
 msgstr "Lærdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2114
+#: ../../data/tribes/initialization/barbarians/units.lua:2128
 msgctxt "warehousename"
 msgid "Larvik"
 msgstr "Larvik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2116
+#: ../../data/tribes/initialization/barbarians/units.lua:2130
 msgctxt "warehousename"
 msgid "Lav’ngen"
 msgstr "Lav’ngen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2118
+#: ../../data/tribes/initialization/barbarians/units.lua:2132
 msgctxt "warehousename"
 msgid "L’besby"
 msgstr "L’besby"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2120
+#: ../../data/tribes/initialization/barbarians/units.lua:2134
 msgctxt "warehousename"
 msgid "L’rfjord"
 msgstr "L’rfjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2122
+#: ../../data/tribes/initialization/barbarians/units.lua:2136
 msgctxt "warehousename"
 msgid "L’ka"
 msgstr "L’ka"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2124
+#: ../../data/tribes/initialization/barbarians/units.lua:2138
 msgctxt "warehousename"
 msgid "L’sja"
 msgstr "L’sja"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2126
+#: ../../data/tribes/initialization/barbarians/units.lua:2140
 msgctxt "warehousename"
 msgid "L’vanger"
 msgstr "L’vanger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2128
+#: ../../data/tribes/initialization/barbarians/units.lua:2142
 msgctxt "warehousename"
 msgid "Lier"
 msgstr "Lier"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2130
+#: ../../data/tribes/initialization/barbarians/units.lua:2144
 msgctxt "warehousename"
 msgid "L’rne"
 msgstr "L’rne"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2132
+#: ../../data/tribes/initialization/barbarians/units.lua:2146
 msgctxt "warehousename"
 msgid "Lil’hammer"
 msgstr "Lil’hammer"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2134
+#: ../../data/tribes/initialization/barbarians/units.lua:2148
 msgctxt "warehousename"
 msgid "Lil’sand"
 msgstr "Lil’sand"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2136
+#: ../../data/tribes/initialization/barbarians/units.lua:2150
 msgctxt "warehousename"
 msgid "Lil’strom"
 msgstr "Lil’strom"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2138
+#: ../../data/tribes/initialization/barbarians/units.lua:2152
 msgctxt "warehousename"
 msgid "Lind’snes"
 msgstr "Lind’snes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2140
+#: ../../data/tribes/initialization/barbarians/units.lua:2154
 msgctxt "warehousename"
 msgid "L’dingen"
 msgstr "L’dingen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2142
+#: ../../data/tribes/initialization/barbarians/units.lua:2156
 msgctxt "warehousename"
 msgid "Lom"
 msgstr "Lom"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2144
+#: ../../data/tribes/initialization/barbarians/units.lua:2158
 msgctxt "warehousename"
 msgid "Loppa"
 msgstr "Loppa"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2146
+#: ../../data/tribes/initialization/barbarians/units.lua:2160
 msgctxt "warehousename"
 msgid "Lar’nskog"
 msgstr "Lar’nskog"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2148
+#: ../../data/tribes/initialization/barbarians/units.lua:2162
 msgctxt "warehousename"
 msgid "L’ten"
 msgstr "L’ten"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2150
+#: ../../data/tribes/initialization/barbarians/units.lua:2164
 msgctxt "warehousename"
 msgid "Lund"
 msgstr "Lund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2152
+#: ../../data/tribes/initialization/barbarians/units.lua:2166
 msgctxt "warehousename"
 msgid "Lunner"
 msgstr "Lunner"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2154
+#: ../../data/tribes/initialization/barbarians/units.lua:2168
 msgctxt "warehousename"
 msgid "L’rey"
 msgstr "L’rey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2156
+#: ../../data/tribes/initialization/barbarians/units.lua:2170
 msgctxt "warehousename"
 msgid "L’ster"
 msgstr "L’ster"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2158
+#: ../../data/tribes/initialization/barbarians/units.lua:2172
 msgctxt "warehousename"
 msgid "L’ngdal"
 msgstr "L’ngdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2160
+#: ../../data/tribes/initialization/barbarians/units.lua:2174
 msgctxt "warehousename"
 msgid "L’ngen"
 msgstr "L’ngen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2162
+#: ../../data/tribes/initialization/barbarians/units.lua:2176
 msgctxt "warehousename"
 msgid "Mal’Selv"
 msgstr "Mal’Selv"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2164
+#: ../../data/tribes/initialization/barbarians/units.lua:2178
 msgctxt "warehousename"
 msgid "Mal’vik"
 msgstr "Mal’vik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2166
+#: ../../data/tribes/initialization/barbarians/units.lua:2180
 msgctxt "warehousename"
 msgid "Mar’ker"
 msgstr "Mar’ker"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2168
+#: ../../data/tribes/initialization/barbarians/units.lua:2182
 msgctxt "warehousename"
 msgid "Mas’fjordn"
 msgstr "Mas’fjordn"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2170
+#: ../../data/tribes/initialization/barbarians/units.lua:2184
 msgctxt "warehousename"
 msgid "Mos’y"
 msgstr "Mos’y"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2172
+#: ../../data/tribes/initialization/barbarians/units.lua:2186
 msgctxt "warehousename"
 msgid "M’lhus"
 msgstr "M’lhus"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2174
+#: ../../data/tribes/initialization/barbarians/units.lua:2188
 msgctxt "warehousename"
 msgid "M’ley"
 msgstr "M’ley"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2176
+#: ../../data/tribes/initialization/barbarians/units.lua:2190
 msgctxt "warehousename"
 msgid "Mer’ker"
 msgstr "Mer’ker"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2178
+#: ../../data/tribes/initialization/barbarians/units.lua:2192
 msgctxt "warehousename"
 msgid "Midt’re"
 msgstr "Midt’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2180
+#: ../../data/tribes/initialization/barbarians/units.lua:2194
 msgctxt "warehousename"
 msgid "Midt’lemark"
 msgstr "Midt’lemark"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2182
+#: ../../data/tribes/initialization/barbarians/units.lua:2196
 msgctxt "warehousename"
 msgid "Mod’al’en"
 msgstr "Mod’al’en"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2184
+#: ../../data/tribes/initialization/barbarians/units.lua:2198
 msgctxt "warehousename"
 msgid "Modum"
 msgstr "Modum"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2186
+#: ../../data/tribes/initialization/barbarians/units.lua:2200
 msgctxt "warehousename"
 msgid "M’lde"
 msgstr "M’lde"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2188
+#: ../../data/tribes/initialization/barbarians/units.lua:2202
 msgctxt "warehousename"
 msgid "Mos’kenes"
 msgstr "Mos’kenes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2190
+#: ../../data/tribes/initialization/barbarians/units.lua:2204
 msgctxt "warehousename"
 msgid "Mos’s"
 msgstr "Mos’s"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2192
+#: ../../data/tribes/initialization/barbarians/units.lua:2206
 msgctxt "warehousename"
 msgid "Næreysund"
 msgstr "Næreysund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2194
+#: ../../data/tribes/initialization/barbarians/units.lua:2208
 msgctxt "warehousename"
 msgid "Namsos"
 msgstr "Namsos"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2196
+#: ../../data/tribes/initialization/barbarians/units.lua:2210
 msgctxt "warehousename"
 msgid "Nams’skogan"
 msgstr "Nams’skogan"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2198
+#: ../../data/tribes/initialization/barbarians/units.lua:2212
 msgctxt "warehousename"
 msgid "Nan’stad"
 msgstr "Nan’stad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2200
+#: ../../data/tribes/initialization/barbarians/units.lua:2214
 msgctxt "warehousename"
 msgid "Nar’vik"
 msgstr "Nar’vik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2202
+#: ../../data/tribes/initialization/barbarians/units.lua:2216
 msgctxt "warehousename"
 msgid "Nes"
 msgstr "Nes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2204
+#: ../../data/tribes/initialization/barbarians/units.lua:2218
 msgctxt "warehousename"
 msgid "N’sbyen"
 msgstr "N’sbyen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2206
+#: ../../data/tribes/initialization/barbarians/units.lua:2220
 msgctxt "warehousename"
 msgid "Nesna"
 msgstr "Nesna"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2208
+#: ../../data/tribes/initialization/barbarians/units.lua:2222
 msgctxt "warehousename"
 msgid "Nesod’n"
 msgstr "Nesod’n"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2210
+#: ../../data/tribes/initialization/barbarians/units.lua:2224
 msgctxt "warehousename"
 msgid "Nes’by"
 msgstr "Nes’by"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2212
+#: ../../data/tribes/initialization/barbarians/units.lua:2226
 msgctxt "warehousename"
 msgid "Nis’dal"
 msgstr "Nis’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2214
+#: ../../data/tribes/initialization/barbarians/units.lua:2228
 msgctxt "warehousename"
 msgid "Nit’dal"
 msgstr "Nit’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2216
+#: ../../data/tribes/initialization/barbarians/units.lua:2230
 msgctxt "warehousename"
 msgid "Nome"
 msgstr "Nome"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2218
+#: ../../data/tribes/initialization/barbarians/units.lua:2232
 msgctxt "warehousename"
 msgid "Nord’Aurdal"
 msgstr "Nord’Aurdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2220
+#: ../../data/tribes/initialization/barbarians/units.lua:2234
 msgctxt "warehousename"
 msgid "Nord’fron"
 msgstr "Nord’fron"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2222
+#: ../../data/tribes/initialization/barbarians/units.lua:2236
 msgctxt "warehousename"
 msgid "Nord’kapp"
 msgstr "Nord’kapp"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2224
+#: ../../data/tribes/initialization/barbarians/units.lua:2238
 msgctxt "warehousename"
 msgid "Nord’odal"
 msgstr "Nord’odal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2226
+#: ../../data/tribes/initialization/barbarians/units.lua:2240
 msgctxt "warehousename"
 msgid "Nord’Reisa"
 msgstr "Nord’Reisa"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2228
+#: ../../data/tribes/initialization/barbarians/units.lua:2242
 msgctxt "warehousename"
 msgid "Nord’re"
 msgstr "Nord’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2230
+#: ../../data/tribes/initialization/barbarians/units.lua:2244
 msgctxt "warehousename"
 msgid "No’re"
 msgstr "No’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2232
+#: ../../data/tribes/initialization/barbarians/units.lua:2246
 msgctxt "warehousename"
 msgid "Notod’n"
 msgstr "Notod’n"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2234
+#: ../../data/tribes/initialization/barbarians/units.lua:2248
 msgctxt "warehousename"
 msgid "Ok’snes"
 msgstr "Ok’snes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2236
+#: ../../data/tribes/initialization/barbarians/units.lua:2250
 msgctxt "warehousename"
 msgid "Omli"
 msgstr "Omli"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2238
+#: ../../data/tribes/initialization/barbarians/units.lua:2252
 msgctxt "warehousename"
 msgid "Omot"
 msgstr "Omot"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2240
+#: ../../data/tribes/initialization/barbarians/units.lua:2254
 msgctxt "warehousename"
 msgid "Op’dal"
 msgstr "Op’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2242
+#: ../../data/tribes/initialization/barbarians/units.lua:2256
 msgctxt "warehousename"
 msgid "Or’kland"
 msgstr "Or’kland"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2244
+#: ../../data/tribes/initialization/barbarians/units.lua:2258
 msgctxt "warehousename"
 msgid "Or’land"
 msgstr "Or’land"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2246
+#: ../../data/tribes/initialization/barbarians/units.lua:2260
 msgctxt "warehousename"
 msgid "Or’sta"
 msgstr "Or’sta"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2248
+#: ../../data/tribes/initialization/barbarians/units.lua:2262
 msgctxt "warehousename"
 msgid "Osen"
 msgstr "Osen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2250
+#: ../../data/tribes/initialization/barbarians/units.lua:2264
 msgctxt "warehousename"
 msgid "Os"
 msgstr "Os"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2252
+#: ../../data/tribes/initialization/barbarians/units.lua:2266
 msgctxt "warehousename"
 msgid "Os’lo"
 msgstr "Os’lo"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2254
+#: ../../data/tribes/initialization/barbarians/units.lua:2268
 msgctxt "warehousename"
 msgid "Ost’rey"
 msgstr "Ost’rey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2256
+#: ../../data/tribes/initialization/barbarians/units.lua:2270
 msgctxt "warehousename"
 msgid "Ost’re"
 msgstr "Ost’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2258
+#: ../../data/tribes/initialization/barbarians/units.lua:2272
 msgctxt "warehousename"
 msgid "Ov’rhala"
 msgstr "Ov’rhala"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2260
+#: ../../data/tribes/initialization/barbarians/units.lua:2274
 msgctxt "warehousename"
 msgid "Ov’re"
 msgstr "Ov’re"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2262
+#: ../../data/tribes/initialization/barbarians/units.lua:2276
 msgctxt "warehousename"
 msgid "Pors’nger"
 msgstr "Pors’nger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2264
+#: ../../data/tribes/initialization/barbarians/units.lua:2278
 msgctxt "warehousename"
 msgid "Pors’grun"
 msgstr "Pors’grun"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2266
+#: ../../data/tribes/initialization/barbarians/units.lua:2280
 msgctxt "warehousename"
 msgid "Rode"
 msgstr "Rode"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2268
+#: ../../data/tribes/initialization/barbarians/units.lua:2282
 msgctxt "warehousename"
 msgid "Ræl’ngen"
 msgstr "Ræl’ngen"
 
 #. TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
-#: ../../data/tribes/initialization/barbarians/units.lua:2270
+#: ../../data/tribes/initialization/barbarians/units.lua:2284
 msgctxt "warehousename"
 msgid "Rænt"
 msgstr "Rænt"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2272
+#: ../../data/tribes/initialization/barbarians/units.lua:2286
 msgctxt "warehousename"
 msgid "Rak’stad"
 msgstr "Rak’stad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2274
+#: ../../data/tribes/initialization/barbarians/units.lua:2288
 msgctxt "warehousename"
 msgid "Rana"
 msgstr "Rana"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2276
+#: ../../data/tribes/initialization/barbarians/units.lua:2290
 msgctxt "warehousename"
 msgid "Rand’berg"
 msgstr "Rand’berg"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2278
+#: ../../data/tribes/initialization/barbarians/units.lua:2292
 msgctxt "warehousename"
 msgid "Rauma"
 msgstr "Rauma"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2280
+#: ../../data/tribes/initialization/barbarians/units.lua:2294
 msgctxt "warehousename"
 msgid "Ren’dlen"
 msgstr "Ren’dlen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2282
+#: ../../data/tribes/initialization/barbarians/units.lua:2296
 msgctxt "warehousename"
 msgid "Ren’bu"
 msgstr "Ren’bu"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2284
+#: ../../data/tribes/initialization/barbarians/units.lua:2298
 msgctxt "warehousename"
 msgid "Rin’dal"
 msgstr "Rin’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2286
+#: ../../data/tribes/initialization/barbarians/units.lua:2300
 msgctxt "warehousename"
 msgid "Rin’gbu"
 msgstr "Rin’gbu"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2288
+#: ../../data/tribes/initialization/barbarians/units.lua:2302
 msgctxt "warehousename"
 msgid "Rin’grike"
 msgstr "Rin’grike"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2290
+#: ../../data/tribes/initialization/barbarians/units.lua:2304
 msgctxt "warehousename"
 msgid "Rin’gsker"
 msgstr "Rin’gsker"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2292
+#: ../../data/tribes/initialization/barbarians/units.lua:2306
 msgctxt "warehousename"
 msgid "Ris’r"
 msgstr "Ris’r"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2294
+#: ../../data/tribes/initialization/barbarians/units.lua:2308
 msgctxt "warehousename"
 msgid "R’dey"
 msgstr "R’dey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2296
+#: ../../data/tribes/initialization/barbarians/units.lua:2310
 msgctxt "warehousename"
 msgid "Rol’Lag"
 msgstr "Rol’Lag"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2298
+#: ../../data/tribes/initialization/barbarians/units.lua:2312
 msgctxt "warehousename"
 msgid "R’ros"
 msgstr "R’ros"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2300
+#: ../../data/tribes/initialization/barbarians/units.lua:2314
 msgctxt "warehousename"
 msgid "Rest"
 msgstr "Rest"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2302
+#: ../../data/tribes/initialization/barbarians/units.lua:2316
 msgctxt "warehousename"
 msgid "Reyr’Vik"
 msgstr "Reyr’Vik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2304
+#: ../../data/tribes/initialization/barbarians/units.lua:2318
 msgctxt "warehousename"
 msgid "Sal’ngen"
 msgstr "Sal’ngen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2306
+#: ../../data/tribes/initialization/barbarians/units.lua:2320
 msgctxt "warehousename"
 msgid "Sal’tdal"
 msgstr "Sal’tdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2308
+#: ../../data/tribes/initialization/barbarians/units.lua:2322
 msgctxt "warehousename"
 msgid "Samn’nger"
 msgstr "Samn’nger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2310
+#: ../../data/tribes/initialization/barbarians/units.lua:2324
 msgctxt "warehousename"
 msgid "Sand’fjord"
 msgstr "Sand’fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2312
+#: ../../data/tribes/initialization/barbarians/units.lua:2326
 msgctxt "warehousename"
 msgid "Sand’e"
 msgstr "Sand’e"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2314
+#: ../../data/tribes/initialization/barbarians/units.lua:2328
 msgctxt "warehousename"
 msgid "Sand’nes"
 msgstr "Sand’nes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2316
+#: ../../data/tribes/initialization/barbarians/units.lua:2330
 msgctxt "warehousename"
 msgid "Sarpsb’rg"
 msgstr "Sarpsb’rg"
 
 #. TRANSLATORS: This Barbarian warehouse is named after a barbarian town.
-#: ../../data/tribes/initialization/barbarians/units.lua:2318
+#: ../../data/tribes/initialization/barbarians/units.lua:2332
 msgctxt "warehousename"
 msgid "Sars’tun"
 msgstr "Sars’tun"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2320
+#: ../../data/tribes/initialization/barbarians/units.lua:2334
 msgctxt "warehousename"
 msgid "Sauda"
 msgstr "Sauda"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2322
+#: ../../data/tribes/initialization/barbarians/units.lua:2336
 msgctxt "warehousename"
 msgid "Sel’bu"
 msgstr "Sel’bu"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2324
+#: ../../data/tribes/initialization/barbarians/units.lua:2338
 msgctxt "warehousename"
 msgid "Sel’jord"
 msgstr "Sel’jord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2326
+#: ../../data/tribes/initialization/barbarians/units.lua:2340
 msgctxt "warehousename"
 msgid "Sel"
 msgstr "Sel"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2328
+#: ../../data/tribes/initialization/barbarians/units.lua:2342
 msgctxt "warehousename"
 msgid "Sen’ja"
 msgstr "Sen’ja"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2330
+#: ../../data/tribes/initialization/barbarians/units.lua:2344
 msgctxt "warehousename"
 msgid "Sig’dal"
 msgstr "Sig’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2332
+#: ../../data/tribes/initialization/barbarians/units.lua:2346
 msgctxt "warehousename"
 msgid "Sil’jan"
 msgstr "Sil’jan"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2334
+#: ../../data/tribes/initialization/barbarians/units.lua:2348
 msgctxt "warehousename"
 msgid "Sir’dal"
 msgstr "Sir’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2336
+#: ../../data/tribes/initialization/barbarians/units.lua:2350
 msgctxt "warehousename"
 msgid "Skaun"
 msgstr "Skaun"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2338
+#: ../../data/tribes/initialization/barbarians/units.lua:2352
 msgctxt "warehousename"
 msgid "Skien"
 msgstr "Skien"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2340
+#: ../../data/tribes/initialization/barbarians/units.lua:2354
 msgctxt "warehousename"
 msgid "Skipt’vet"
 msgstr "Skipt’vet"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2342
+#: ../../data/tribes/initialization/barbarians/units.lua:2356
 msgctxt "warehousename"
 msgid "Skjok"
 msgstr "Skjok"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2344
+#: ../../data/tribes/initialization/barbarians/units.lua:2358
 msgctxt "warehousename"
 msgid "Skjer’vey"
 msgstr "Skjer’vey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2346
+#: ../../data/tribes/initialization/barbarians/units.lua:2360
 msgctxt "warehousename"
 msgid "Smola"
 msgstr "Smola"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2348
+#: ../../data/tribes/initialization/barbarians/units.lua:2362
 msgctxt "warehousename"
 msgid "Snosa"
 msgstr "Snosa"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2350
+#: ../../data/tribes/initialization/barbarians/units.lua:2364
 msgctxt "warehousename"
 msgid "Sog’ndal"
 msgstr "Sog’ndal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2352
+#: ../../data/tribes/initialization/barbarians/units.lua:2366
 msgctxt "warehousename"
 msgid "Sok’ndal"
 msgstr "Sok’ndal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2354
+#: ../../data/tribes/initialization/barbarians/units.lua:2368
 msgctxt "warehousename"
 msgid "Sola"
 msgstr "Sola"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2356
+#: ../../data/tribes/initialization/barbarians/units.lua:2370
 msgctxt "warehousename"
 msgid "Sol’nd"
 msgstr "Sol’nd"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2358
+#: ../../data/tribes/initialization/barbarians/units.lua:2372
 msgctxt "warehousename"
 msgid "Som’na"
 msgstr "Som’na"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2360
+#: ../../data/tribes/initialization/barbarians/units.lua:2374
 msgctxt "warehousename"
 msgid "Son’dre"
 msgstr "Son’dre"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2362
+#: ../../data/tribes/initialization/barbarians/units.lua:2376
 msgctxt "warehousename"
 msgid "Sor’aur’dal"
 msgstr "Sor’aur’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2364
+#: ../../data/tribes/initialization/barbarians/units.lua:2378
 msgctxt "warehousename"
 msgid "Sor’fold"
 msgstr "Sor’fold"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2366
+#: ../../data/tribes/initialization/barbarians/units.lua:2380
 msgctxt "warehousename"
 msgid "Sor’fron"
 msgstr "Sor’fron"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2368
+#: ../../data/tribes/initialization/barbarians/units.lua:2382
 msgctxt "warehousename"
 msgid "Sor’dal"
 msgstr "Sor’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2370
+#: ../../data/tribes/initialization/barbarians/units.lua:2384
 msgctxt "warehousename"
 msgid "Sor’reisa"
 msgstr "Sor’reisa"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2372
+#: ../../data/tribes/initialization/barbarians/units.lua:2386
 msgctxt "warehousename"
 msgid "Sor’tland"
 msgstr "Sor’tland"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2374
+#: ../../data/tribes/initialization/barbarians/units.lua:2388
 msgctxt "warehousename"
 msgid "Sor’var’nger"
 msgstr "Sor’var’nger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2376
+#: ../../data/tribes/initialization/barbarians/units.lua:2390
 msgctxt "warehousename"
 msgid "Stad"
 msgstr "Stad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2378
+#: ../../data/tribes/initialization/barbarians/units.lua:2392
 msgctxt "warehousename"
 msgid "Stange"
 msgstr "Stange"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2380
+#: ../../data/tribes/initialization/barbarians/units.lua:2394
 msgctxt "warehousename"
 msgid "Stav’nger"
 msgstr "Stav’nger"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2382
+#: ../../data/tribes/initialization/barbarians/units.lua:2396
 msgctxt "warehousename"
 msgid "St’gen"
 msgstr "St’gen"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2384
+#: ../../data/tribes/initialization/barbarians/units.lua:2398
 msgctxt "warehousename"
 msgid "St’nkjer"
 msgstr "St’nkjer"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2386
+#: ../../data/tribes/initialization/barbarians/units.lua:2400
 msgctxt "warehousename"
 msgid "Stjor’dal"
 msgstr "Stjor’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2388
+#: ../../data/tribes/initialization/barbarians/units.lua:2402
 msgctxt "warehousename"
 msgid "Stord"
 msgstr "Stord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2390
+#: ../../data/tribes/initialization/barbarians/units.lua:2404
 msgctxt "warehousename"
 msgid "Stor’Elvdal"
 msgstr "Stor’Elvdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2392
+#: ../../data/tribes/initialization/barbarians/units.lua:2406
 msgctxt "warehousename"
 msgid "Stor’Fjord"
 msgstr "Stor’Fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2394
+#: ../../data/tribes/initialization/barbarians/units.lua:2408
 msgctxt "warehousename"
 msgid "Stranda"
 msgstr "Stranda"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2396
+#: ../../data/tribes/initialization/barbarians/units.lua:2410
 msgctxt "warehousename"
 msgid "Strand"
 msgstr "Strand"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2398
+#: ../../data/tribes/initialization/barbarians/units.lua:2412
 msgctxt "warehousename"
 msgid "Stryn"
 msgstr "Stryn"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2400
+#: ../../data/tribes/initialization/barbarians/units.lua:2414
 msgctxt "warehousename"
 msgid "Sula"
 msgstr "Sula"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2402
+#: ../../data/tribes/initialization/barbarians/units.lua:2416
 msgctxt "warehousename"
 msgid "Suldal"
 msgstr "Suldal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2404
+#: ../../data/tribes/initialization/barbarians/units.lua:2418
 msgctxt "warehousename"
 msgid "Sun’dal"
 msgstr "Sun’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2406
+#: ../../data/tribes/initialization/barbarians/units.lua:2420
 msgctxt "warehousename"
 msgid "Sun’fjord"
 msgstr "Sun’fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2408
+#: ../../data/tribes/initialization/barbarians/units.lua:2422
 msgctxt "warehousename"
 msgid "Surn’dal"
 msgstr "Surn’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2410
+#: ../../data/tribes/initialization/barbarians/units.lua:2424
 msgctxt "warehousename"
 msgid "Sveio"
 msgstr "Sveio"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2412
+#: ../../data/tribes/initialization/barbarians/units.lua:2426
 msgctxt "warehousename"
 msgid "Syk’lven"
 msgstr "Syk’lven"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2414
+#: ../../data/tribes/initialization/barbarians/units.lua:2428
 msgctxt "warehousename"
 msgid "Tana"
 msgstr "Tana"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2416
+#: ../../data/tribes/initialization/barbarians/units.lua:2430
 msgctxt "warehousename"
 msgid "Thronsand"
 msgstr "Thronsand"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2418
+#: ../../data/tribes/initialization/barbarians/units.lua:2432
 msgctxt "warehousename"
 msgid "Thronsund"
 msgstr "Thronsund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2420
+#: ../../data/tribes/initialization/barbarians/units.lua:2434
 msgctxt "warehousename"
 msgid "Time"
 msgstr "Time"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2422
+#: ../../data/tribes/initialization/barbarians/units.lua:2436
 msgctxt "warehousename"
 msgid "T’ngvol"
 msgstr "T’ngvol"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2424
+#: ../../data/tribes/initialization/barbarians/units.lua:2438
 msgctxt "warehousename"
 msgid "Ti’n"
 msgstr "Ti’n"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2426
+#: ../../data/tribes/initialization/barbarians/units.lua:2440
 msgctxt "warehousename"
 msgid "Tjeld’sund"
 msgstr "Tjeld’sund"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2428
+#: ../../data/tribes/initialization/barbarians/units.lua:2442
 msgctxt "warehousename"
 msgid "Toke"
 msgstr "Toke"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2430
+#: ../../data/tribes/initialization/barbarians/units.lua:2444
 msgctxt "warehousename"
 msgid "Tolga"
 msgstr "Tolga"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2432
+#: ../../data/tribes/initialization/barbarians/units.lua:2446
 msgctxt "warehousename"
 msgid "Tonsberg"
 msgstr "Tonsberg"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2434
+#: ../../data/tribes/initialization/barbarians/units.lua:2448
 msgctxt "warehousename"
 msgid "Træna"
 msgstr "Træna"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2436
+#: ../../data/tribes/initialization/barbarians/units.lua:2450
 msgctxt "warehousename"
 msgid "Tromso"
 msgstr "Tromso"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2438
+#: ../../data/tribes/initialization/barbarians/units.lua:2452
 msgctxt "warehousename"
 msgid "Tr’ndheim"
 msgstr "Tr’ndheim"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2440
+#: ../../data/tribes/initialization/barbarians/units.lua:2454
 msgctxt "warehousename"
 msgid "Tr’sil"
 msgstr "Tr’sil"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2442
+#: ../../data/tribes/initialization/barbarians/units.lua:2456
 msgctxt "warehousename"
 msgid "Tved’strand"
 msgstr "Tved’strand"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2444
+#: ../../data/tribes/initialization/barbarians/units.lua:2458
 msgctxt "warehousename"
 msgid "T’dal"
 msgstr "T’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2446
+#: ../../data/tribes/initialization/barbarians/units.lua:2460
 msgctxt "warehousename"
 msgid "Tynset"
 msgstr "Tynset"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2448
+#: ../../data/tribes/initialization/barbarians/units.lua:2462
 msgctxt "warehousename"
 msgid "Tys’nes"
 msgstr "Tys’nes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2450
+#: ../../data/tribes/initialization/barbarians/units.lua:2464
 msgctxt "warehousename"
 msgid "Tys’vær"
 msgstr "Tys’vær"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2452
+#: ../../data/tribes/initialization/barbarians/units.lua:2466
 msgctxt "warehousename"
 msgid "Ul’nsaker"
 msgstr "Ul’nsaker"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2454
+#: ../../data/tribes/initialization/barbarians/units.lua:2468
 msgctxt "warehousename"
 msgid "Ul’nsvang"
 msgstr "Ul’nsvang"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2456
+#: ../../data/tribes/initialization/barbarians/units.lua:2470
 msgctxt "warehousename"
 msgid "Ul’stein"
 msgstr "Ul’stein"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2458
+#: ../../data/tribes/initialization/barbarians/units.lua:2472
 msgctxt "warehousename"
 msgid "Ul’vik"
 msgstr "Ul’vik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2460
+#: ../../data/tribes/initialization/barbarians/units.lua:2474
 msgctxt "warehousename"
 msgid "Uts’ra"
 msgstr "Uts’ra"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2462
+#: ../../data/tribes/initialization/barbarians/units.lua:2476
 msgctxt "warehousename"
 msgid "Vadso"
 msgstr "Vadso"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2464
+#: ../../data/tribes/initialization/barbarians/units.lua:2478
 msgctxt "warehousename"
 msgid "Værey"
 msgstr "Værey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2466
+#: ../../data/tribes/initialization/barbarians/units.lua:2480
 msgctxt "warehousename"
 msgid "Vogo"
 msgstr "Vogo"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2468
+#: ../../data/tribes/initialization/barbarians/units.lua:2482
 msgctxt "warehousename"
 msgid "V’gan"
 msgstr "V’gan"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2470
+#: ../../data/tribes/initialization/barbarians/units.lua:2484
 msgctxt "warehousename"
 msgid "V’ksdal"
 msgstr "V’ksdal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2472
+#: ../../data/tribes/initialization/barbarians/units.lua:2486
 msgctxt "warehousename"
 msgid "V’ler"
 msgstr "V’ler"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2474
+#: ../../data/tribes/initialization/barbarians/units.lua:2488
 msgctxt "warehousename"
 msgid "Vale"
 msgstr "Vale"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2476
+#: ../../data/tribes/initialization/barbarians/units.lua:2490
 msgctxt "warehousename"
 msgid "Vang"
 msgstr "Vang"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2478
+#: ../../data/tribes/initialization/barbarians/units.lua:2492
 msgctxt "warehousename"
 msgid "Van’lven"
 msgstr "Van’lven"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2480
+#: ../../data/tribes/initialization/barbarians/units.lua:2494
 msgctxt "warehousename"
 msgid "Vardo"
 msgstr "Vardo"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2482
+#: ../../data/tribes/initialization/barbarians/units.lua:2496
 msgctxt "warehousename"
 msgid "Vef’sn"
 msgstr "Vef’sn"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2484
+#: ../../data/tribes/initialization/barbarians/units.lua:2498
 msgctxt "warehousename"
 msgid "Vega"
 msgstr "Vega"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2486
+#: ../../data/tribes/initialization/barbarians/units.lua:2500
 msgctxt "warehousename"
 msgid "Veg’rshei"
 msgstr "Veg’rshei"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2488
+#: ../../data/tribes/initialization/barbarians/units.lua:2502
 msgctxt "warehousename"
 msgid "Ven’Sla"
 msgstr "Ven’Sla"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2490
+#: ../../data/tribes/initialization/barbarians/units.lua:2504
 msgctxt "warehousename"
 msgid "Ver’dal"
 msgstr "Ver’dal"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2492
+#: ../../data/tribes/initialization/barbarians/units.lua:2506
 msgctxt "warehousename"
 msgid "V’stby"
 msgstr "V’stby"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2494
+#: ../../data/tribes/initialization/barbarians/units.lua:2508
 msgctxt "warehousename"
 msgid "V’stnes"
 msgstr "V’stnes"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2496
+#: ../../data/tribes/initialization/barbarians/units.lua:2510
 msgctxt "warehousename"
 msgid "V’stre"
 msgstr "V’stre"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2498
+#: ../../data/tribes/initialization/barbarians/units.lua:2512
 msgctxt "warehousename"
 msgid "V’stvogey"
 msgstr "V’stvogey"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2500
+#: ../../data/tribes/initialization/barbarians/units.lua:2514
 msgctxt "warehousename"
 msgid "Vev’lstad"
 msgstr "Vev’lstad"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2502
+#: ../../data/tribes/initialization/barbarians/units.lua:2516
 msgctxt "warehousename"
 msgid "Vik"
 msgstr "Vik"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2504
+#: ../../data/tribes/initialization/barbarians/units.lua:2518
 msgctxt "warehousename"
 msgid "Vind’fjord"
 msgstr "Vind’fjord"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2506
+#: ../../data/tribes/initialization/barbarians/units.lua:2520
 msgctxt "warehousename"
 msgid "Vin’je"
 msgstr "Vin’je"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2508
+#: ../../data/tribes/initialization/barbarians/units.lua:2522
 msgctxt "warehousename"
 msgid "V’lda"
 msgstr "V’lda"
 
 #. TRANSLATORS: This Barbarian warehouse is inspired by a Norwegian town name.
-#: ../../data/tribes/initialization/barbarians/units.lua:2510
+#: ../../data/tribes/initialization/barbarians/units.lua:2524
 msgctxt "warehousename"
 msgid "Vos"
 msgstr "Vos"
 
 #. TRANSLATORS: Productivity label on a barbarian building if there is 1
 #. worker missing
-#: ../../data/tribes/initialization/barbarians/units.lua:2516
+#: ../../data/tribes/initialization/barbarians/units.lua:2530
 msgctxt "barbarians"
 msgid "Worker missing"
 msgstr "Ein Arbeiter fehlt"
 
 #. TRANSLATORS: Productivity label on a barbarian building if there is 1
 #. worker coming
-#: ../../data/tribes/initialization/barbarians/units.lua:2518
+#: ../../data/tribes/initialization/barbarians/units.lua:2532
 msgctxt "barbarians"
 msgid "Worker is coming"
 msgstr "Arbeiter kommt"
 
 #. TRANSLATORS: Productivity label on a barbarian building if there is more
 #. than 1 worker missing. If you need plural forms here, please let us know.
-#: ../../data/tribes/initialization/barbarians/units.lua:2520
+#: ../../data/tribes/initialization/barbarians/units.lua:2534
 msgctxt "barbarians"
 msgid "Workers missing"
 msgstr "Arbeiter fehlen"
 
 #. TRANSLATORS: Productivity label on a barbarian building if there is more
 #. than 1 worker coming. If you need plural forms here, please let us know.
-#: ../../data/tribes/initialization/barbarians/units.lua:2522
+#: ../../data/tribes/initialization/barbarians/units.lua:2536
 msgctxt "barbarians"
 msgid "Workers are coming"
 msgstr "Arbeiter kommen"
 
 #. TRANSLATORS: Productivity label on a barbarian building if there is 1
 #. experienced worker missing
-#: ../../data/tribes/initialization/barbarians/units.lua:2524
+#: ../../data/tribes/initialization/barbarians/units.lua:2538
 msgctxt "barbarians"
 msgid "Expert missing"
 msgstr "Meister fehlt"
@@ -9538,14 +9480,14 @@ msgstr "Meister fehlt"
 #. TRANSLATORS: Productivity label on a barbarian building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
 #. let us know.
-#: ../../data/tribes/initialization/barbarians/units.lua:2526
+#: ../../data/tribes/initialization/barbarians/units.lua:2540
 msgctxt "barbarians"
 msgid "Experts missing"
 msgstr "Meister fehlen"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/barbarians/units.lua:2540
+#: ../../data/tribes/initialization/barbarians/units.lua:2554
 msgctxt "barbarians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
@@ -9553,7 +9495,7 @@ msgstr[0] "%1% Krieger (+%2%)"
 msgstr[1] "%1% Krieger (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/barbarians/units.lua:2542
+#: ../../data/tribes/initialization/barbarians/units.lua:2556
 msgctxt "barbarians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
@@ -9563,7 +9505,7 @@ msgstr[1] "%1% Krieger"
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
 #. number of soldier slots in the building
-#: ../../data/tribes/initialization/barbarians/units.lua:2544
+#: ../../data/tribes/initialization/barbarians/units.lua:2558
 msgctxt "barbarians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
@@ -9572,7 +9514,7 @@ msgstr[1] "%1%(+%2%) Krieger (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/barbarians/units.lua:2546
+#: ../../data/tribes/initialization/barbarians/units.lua:2560
 msgctxt "barbarians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
@@ -14374,7 +14316,7 @@ msgstr "Bewaffnet Rekruten und bildet sie zu Kriegern aus."
 #: ../../data/tribes/initialization/frisians/units.lua:1949
 #, lua-format
 msgctxt "frisians_building"
-msgid "The barracks needs %s on average to recruit one soldier."
+msgid "The barracks need %s on average to recruit one soldier."
 msgstr "Die Kaserne benötigt durchschnittlich %s, um einen Krieger zu rekrutieren."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Reindeer Farm
@@ -15321,7 +15263,7 @@ msgid "Direct build cost:"
 msgstr "Kosten für das direkte Bauen:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:503
-#: ../../data/tribes/scripting/help/immovable_help.lua:58
+#: ../../data/tribes/scripting/help/immovable_help.lua:59
 msgid "Build cost:"
 msgstr "Baukosten:"
 
@@ -15865,84 +15807,84 @@ msgid "Watch the selected ship"
 msgstr "Beobachte das ausgewählte Schiff"
 
 #. TRANSLATORS: Size of a map immovablee
-#: ../../data/tribes/scripting/help/format_help.lua:56
+#: ../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
 msgstr "Klein"
 
 #. TRANSLATORS: Size of a map immovable
-#: ../../data/tribes/scripting/help/format_help.lua:59
+#: ../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
 msgstr "Mittel"
 
 #. TRANSLATORS: Size of a map immovable
-#: ../../data/tribes/scripting/help/format_help.lua:62
+#: ../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
 msgstr "Groß"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:72
+#: ../../data/tribes/scripting/help/format_help.lua:76
 msgid "Mine plot"
 msgstr "Minenbauplatz"
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:76
+#: ../../data/tribes/scripting/help/format_help.lua:80
 msgid "Port plot"
 msgstr "Hafenbauplatz"
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:80
+#: ../../data/tribes/scripting/help/format_help.lua:84
 msgid "Small plot"
 msgstr "Kleiner Bauplatz"
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:84
+#: ../../data/tribes/scripting/help/format_help.lua:88
 msgid "Medium plot"
 msgstr "Mittelgroßer Bauplatz"
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:88
+#: ../../data/tribes/scripting/help/format_help.lua:92
 msgid "Big plot"
 msgstr "Großer Bauplatz"
 
 #. TRANSLATORS: Space on the map required for building a building there
-#: ../../data/tribes/scripting/help/format_help.lua:94
+#: ../../data/tribes/scripting/help/format_help.lua:99
 msgid "Space required:"
 msgstr "Benötigter Platz:"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-#: ../../data/tribes/scripting/help/format_help.lua:148
-#: ../../data/tribes/scripting/help/format_help.lua:242
+#: ../../data/tribes/scripting/help/format_help.lua:154
+#: ../../data/tribes/scripting/help/format_help.lua:248
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
 #. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/format_help.lua:164
-#: ../../data/tribes/scripting/help/format_help.lua:174
+#: ../../data/tribes/scripting/help/format_help.lua:170
+#: ../../data/tribes/scripting/help/format_help.lua:180
 #, lua-format
 msgid "%s to %s (%s EP)"
 msgstr "%s zu %s (%s EP)"
 
-#: ../../data/tribes/scripting/help/format_help.lua:250
+#: ../../data/tribes/scripting/help/format_help.lua:256
 #, lua-format
 msgid "%s and"
 msgstr "%s und"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by
 #. a productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:277
+#: ../../data/tribes/scripting/help/format_help.lua:278
 msgid "Wares and workers consumed:"
 msgstr "Benötigte Waren und Arbeiter:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:280
+#: ../../data/tribes/scripting/help/format_help.lua:281
 msgid "Workers consumed:"
 msgstr "Benötigte Arbeiter:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:284
+#: ../../data/tribes/scripting/help/format_help.lua:285
 msgid "Wares consumed:"
 msgstr "Benötigte Waren:"
 
@@ -15952,32 +15894,32 @@ msgstr "Benötigte Waren:"
 msgid "Purpose"
 msgstr "Zweck"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:42
+#: ../../data/tribes/scripting/help/immovable_help.lua:43
 #: ../../data/tribes/scripting/help/worker_help.lua:143
 msgid "Note"
 msgstr "Hinweis"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:57
+#: ../../data/tribes/scripting/help/immovable_help.lua:58
 msgid "Requirements"
 msgstr "Voraussetzungen"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:61
+#: ../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
 msgstr "Größe"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:65
+#: ../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
 msgstr "Arbeiter und Tiere können über Felder mit diesem Objekt gehen."
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:67
+#: ../../data/tribes/scripting/help/immovable_help.lua:68
 msgid "Workers and animals can’t walk across fields with this immovable."
 msgstr "Arbeiter und Tiere können nicht über Felder mit diesem Objekt gehen."
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:73
+#: ../../data/tribes/scripting/help/immovable_help.lua:74
 msgid "Becomes"
 msgstr "Wird zu"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:99
+#: ../../data/tribes/scripting/help/immovable_help.lua:100
 msgid "Preferred Terrains"
 msgstr "Bevorzugte Gelände"
 
@@ -16009,6 +15951,22 @@ msgstr "Unbewegliche Objekte (Welt)"
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
 msgstr "Über Widelands"
+
+#: ../../data/tribes/scripting/help/time_strings.lua:26
+#: ../../data/tribes/scripting/help/time_strings.lua:62
+#, lua-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d Sekunde"
+msgstr[1] "%d Sekunden"
+
+#: ../../data/tribes/scripting/help/time_strings.lua:42
+#: ../../data/tribes/scripting/help/time_strings.lua:61
+#, lua-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d Minute"
+msgstr[1] "%d Minuten"
 
 #: ../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"

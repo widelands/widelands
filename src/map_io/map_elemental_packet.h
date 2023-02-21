@@ -19,6 +19,7 @@
 #ifndef WL_MAP_IO_MAP_ELEMENTAL_PACKET_H
 #define WL_MAP_IO_MAP_ELEMENTAL_PACKET_H
 
+#include <cstdint>
 #include <string>
 #include <vector>
 

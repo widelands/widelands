@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2016-03-24 07:33+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Georgian (http://www.transifex.com/widelands/widelands/language/ka/)\n"
@@ -193,25 +193,25 @@ msgid "%1%x %2%"
 msgstr ""
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:55
-#: ../../data/scripting/editor/terrain_tooltip.lua:35
+#: ../../data/scripting/editor/terrain_help.lua:57
+#: ../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
 msgstr ""
 
-#: ../../data/scripting/editor/terrain_help.lua:60
-#: ../../data/scripting/editor/terrain_tooltip.lua:37
+#: ../../data/scripting/editor/terrain_help.lua:63
+#: ../../data/scripting/editor/terrain_tooltip.lua:40
 msgid "No trees will grow here."
 msgstr ""
 
 #: ../../data/scripting/editor/terrain_tooltip.lua:25
-#: ../../data/scripting/editor/tree_tooltip.lua:22
+#: ../../data/scripting/editor/tree_tooltip.lua:25
 #, lua-format
 msgid "%2.1f%%"
 msgstr ""
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
-#: ../../data/scripting/editor/tree_help.lua:18
-#: ../../data/scripting/editor/tree_tooltip.lua:31
+#: ../../data/scripting/editor/tree_help.lua:20
+#: ../../data/scripting/editor/tree_tooltip.lua:34
 msgid "Preferred terrains"
 msgstr ""

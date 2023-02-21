@@ -1,13 +1,14 @@
 include "txts/help/common_helptexts.lua"
 
 push_textdomain("texts")
+set_fs_style(true)
 
 local r = {
-   rt(fs_color(
-      p_font("align=center", "size=38 face=Widelands/Widelands.ttf color=2F9131", img("images/logos/wl-ico-32.png") .. "Widelands") ..
-      p_font("align=center", "size=14 italic=1 color=D1D1D1", _("an open source strategy game")) ..
+   rt(
+      title("Widelands/Widelands.ttf", img("images/logos/wl-ico-32.png") .. " Widelands") ..
+      subtitle(_("an open source strategy game")) ..
       help_introduction() ..
-      p(vspace(3)) .. inline_header(_("Check out the Widelands project homepage:"), a("widelands.org", "url", "https://www.widelands.org")) .. p(vspace(3)) ..
+      p(vspace()) .. inline_header(_("Check out the Widelands project homepage:"), a("widelands.org", "url", "https://www.widelands.org")) .. p(vspace()) ..
       p(_("Widelands is licensed under the GNU General Public License (GPL). For more information, see the file ‘COPYING’.")) ..
       h2(_("Status")) ..
       p(_("Widelands is nearly feature complete and is much fun to play alone and even more in multiplayer with others. Still, there is always more work to be done in all areas. If you are interested in contributing – be it by making graphics, fixing bugs or adding new features, translating the game into your language or creating new maps – get in touch on our homepage.")) ..
@@ -32,7 +33,9 @@ local r = {
           li(_("If the bug concerns something not being displayed correctly or if it helps demonstrate the issue, please include one or more screenshots.")) ..
           li(_("If you have a save game or replay demonstrating the issue (for instance crashes where it can be hard to tell exactly what is triggering it), please include that too. For more information, see the section on Replays below."))) ..
       help_replays()
-   ))
+   )
 }
+
+set_fs_style(false)
 pop_textdomain()
 return r

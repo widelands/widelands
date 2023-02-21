@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2021\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -19,12 +19,12 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:12
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:14
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:56
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:60
 msgid "The Forbidden Island"
 msgstr "De verbodene Insel"
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:15
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:57
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:61
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -63,20 +63,20 @@ msgstr "Manntje Jomo"
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
 msgstr "Manntje Jomo. He kümmert sik um de Spiesen för de Soldaten."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:52
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:56
 msgid "First Briefing"
 msgstr "Eerste körte Instruksje"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:62
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:73
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:66
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
 msgid "Second Briefing"
 msgstr "Tweede körte Instruksje"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:66
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:70
 msgid "An Ancient Castle"
 msgstr "Een steenolles Slött"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:67
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:71
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
@@ -84,7 +84,7 @@ msgid ""
 "craft."
 msgstr "Bi de Gotten! Eener vun uns’ Bespejers hett een machtigs Slött in de Midde vun de Ollen Flackland funnen. Dat Slött mutt steenold wesen un is in butenlandsker Aard baut. Dat is wisse keene Wille Künst."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:68
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:72
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
@@ -92,17 +92,17 @@ msgid ""
 "we capture it. It will be the key to our reign over this island!"
 msgstr "Hopentlik hett uns Laniss’ – de Kummandantin, de dat Slött kuntrolleert – noch nich funnen. Villicht könen wi deesen gewaltigen Boo sünner grote Slachten innehmen! Wi mutten ’t driest innehmen. ’t is de Slötel tum Seggen över deese Insel!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:81
 msgid "Ancient Castle Captured"
 msgstr "Steenolles Slött innohmen"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:78
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:82
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
 msgstr "Hunnert! Uns’ Soldateree hett Laniss’ un hör Soldaten ennelk manntjet. Dat steenolle Slött hört to uns!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:79
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:83
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -115,46 +115,46 @@ msgid ""
 "care of those infrastructures so we can cut off our enemies’ food supply."
 msgstr "’t is nich to glöven, wo wied man vun de hoogsten Toorn im Slött sehn kann. Wi könen de ganze Insel sehn. Wunnerlik, dat Laniss’ uns nich sehn un sik för uns rüst hett. Aver egaal, mennig Dingen blieven man unbegriepelk. Wichtig is blot, dat de övrigen Soldatereen noch daar sünd. Wi hebben im Noorden un Oosten vum Slött Stellungen vun Feinden unner Erwin funnen. He is een gewaltiger Kummandant un hett wiss de starksten Soldaten. Im Süden hebben wi de Spiesen-Weertskupp vun Jomo – een junger Kummandant – funnen, um de wi uns kümmern mutten, um de Spiesen-Versörgung vun uns’ Feinden to unnerbreken."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:84
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:88
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:97
 msgid "Another Briefing"
 msgstr "Noch eene körte Instruksje"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:88
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:92
 msgid "Erwyn Defeated"
 msgstr "Erwin is manntjet"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:89
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
 " less strong warlord on this island!"
 msgstr "Hunnert! Erwin hett upgeven as he siene lesten Husen ofbrannen sach. Dat is een machtiger Kummandant minner up de Insel!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:97
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:101
 msgid "Jomo Defeated"
 msgstr "Jomo is manntjet"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:98
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
 msgstr "Hunnert! Jomo hett upgeven as he siene lesten Husen ofbrannen sach. Dat is een Kummandant minner up de Insel!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:106
 msgid "Last Briefing"
 msgstr "Leste körte Instruksje"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:106
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:110
 msgid "Victory!"
 msgstr "Sieg!"
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:107
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:111
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
 msgstr "Uplest! De Insel hört uns all tosamen. Nu mutten wi se blot beter verdedigen, as de annern Kummandanten ’t daan hebben."
 
-#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:108
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:112
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

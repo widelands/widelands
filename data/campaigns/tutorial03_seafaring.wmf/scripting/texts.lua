@@ -15,7 +15,7 @@ intro_south = {
       p(_([[Welcome back. In this tutorial, you are going to learn the most important things about seafaring, that is ships, ports, and expedition.]])) ..
       p(_([[But let me first give you an overview about your territory: here in the south, you have a whole economy with almost everything you need.]]))
    ),
-   h = 250
+   h = messagebox_h_step(-3)
 }
 
 intro_north = {
@@ -27,7 +27,7 @@ intro_north = {
       p(_([[We have tried to build a road, but the mountain is too wide and too steep. We therefore have only one possibility: we need to establish a sea lane between these two parts.]])) ..
       p(_([[But I don’t want to rush you: you have just arrived here and you would probably like to have a closer look at your camp. I will also take a short break and be back soon.]]))
    ),
-   h = 350
+   h = messagebox_h_step(-1)
 }
 
 tell_about_port = {
@@ -38,7 +38,7 @@ tell_about_port = {
       p(_([[For everything you do on the high seas, you need a port at the shore. Ports are like headquarters: they can store wares, workers and soldiers. The soldiers inside will automatically come out when an enemy attacks the port.]])) ..
       p(_([[Additionally, ports offer the possibility of transporting wares via ships. When you click on the port you already have, you will notice two additional tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They are waiting for a ship to transport them to another port. Currently, there are none because we have not yet built a second port. So let’s change this!]]))
    ),
-   h = 350
+   h = messagebox_h_step(-1)
 }
 
 tell_about_port_building = {
@@ -121,7 +121,7 @@ function shipyard_production(shipname)
          li_arrow(_([[You need to stop your shipyard when you have enough ships. Otherwise, your shipwright will consume all your logs and spidercloth, producing dozens of ships.]])) ..
          li_image("images/ui_basic/stop.png", _([[This is the icon for stopping production. You will find it in the building window.]]))
       ),
-      h = 250
+      h = messagebox_h_step(-3)
    }
    pop_textdomain()
    return r
@@ -136,7 +136,7 @@ expedition1 = {
       p(_([[As you surely have already noticed, there is no iron in the mountain in the west. We have plenty of coal and gold ore, but without iron ore, we cannot produce any tools.]])) ..
       p(_([[Although it might take long and be expensive and not without dangers – who knows what monsters live in the sea? – I see no other possibility: we will have to undertake an expedition to the unknown seas.]]))
    ),
-   h = 300
+   h = messagebox_h_step(-2)
 }
 
 expedition2 = {
@@ -247,7 +247,7 @@ ferry_1 = {
       p(_([[Ships have the advantage that they can carry large quantities of wares and workers at a time, but unfortunately their destinations are limited to a handful of spaces suited for a port.]])) ..
       p(_([[Look at this valley here in the far south. We have found a mountain with gold down here and would like to mine ores from it as well. But the streams separating it from our main colony are too wide to build bridges and too narrow for ships to pass them. Our roads would have to take long curves, which slows down ware transport a lot.]]))
    ),
-   h = 350
+   h = messagebox_h_step(-1)
 }
 
 ferry_2 = {
@@ -283,7 +283,7 @@ ferry_3 = {
       p(_([[Also note that waterways, unlike roads, may not be built quite as long as you want them to. Every map has a length restriction for waterways. On this map, this is 5 tiles.]])) ..
       p(_([[Always keep in mind that ferries do not transport workers. You can use them to speed up ware transport, but they can never entirely replace roads.]]))
    ),
-   h = 350
+   h = messagebox_h_step(-1)
 }
 
 ferry_4 = {
@@ -293,7 +293,7 @@ ferry_4 = {
       h1(_("Waterways")) ..
       p(_([[Allow me to show you how to build a waterway…]]))
    ),
-   h = 150
+   h = styles.get_size("campaign_message_box_h_min")
 }
 
 ferry_5 = {
@@ -327,7 +327,7 @@ ferry_6 = {
       p(_([[Never forget that these rowboats are too small to carry workers. You can use them as shortcuts for ware transport within parts of your territory, but not to claim regions you can reach neither by road nor by ship. Never cut all your roads between two places connected by waterways unless you are certain no worker will ever have to walk there.]])) ..
       p(_([[And if your waterways present a significant shortcut between your road networks, your economy will tend to send many wares over the waterway. As a waterway can hold only one ferry – unlike roads, which receive a second carrier if they are very busy –, and as they often tend to be rather longer than the two or three fields recommended for roads, there is always a risk of waterways becoming severe bottlenecks in your economy. Try to build several of them in parallel to distribute the strain. If this is not possible, it is in some cases even more efficient not to use waterways.]]))
    ),
-   h = 450
+   h = messagebox_h_step(1)
 }
 
 ferry_yard_production = {
@@ -338,7 +338,7 @@ ferry_yard_production = {
       p(_([[Do remember to stop your ferry yard when you don’t need any new ferries to be produced. As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]])) ..
       li_image("images/ui_basic/stop.png", _([[This is the icon for stopping production. You will find it in the building window.]]))
    ),
-   h = 250
+   h = messagebox_h_step(-3)
 }
 
 congratulation = {
@@ -351,5 +351,5 @@ congratulation = {
       p(_([[As always, you can continue playing and practice a bit more on this map if you like, or get your captain’s license ready and try out your new skills in a real game…]]))
    ),
    allow_next_scenario = true,
-   h = 250
+   h = messagebox_h_step(-3)
 }

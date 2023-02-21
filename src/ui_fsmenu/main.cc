@@ -431,7 +431,7 @@ void MainMenu::set_labels() {
 			}
 		}
 		if (last_edited != nullptr) {
-			filename_for_continue_editing_ = last_edited->first.filename;
+			filename_for_continue_editing_ = last_edited->first.filenames.at(0);
 			editor_.add(
 			   _("Continue Editing"), MenuTarget::kEditorContinue, nullptr, false,
 			   format("%s<br>%s<br>%s<br>%s<br>%s",

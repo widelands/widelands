@@ -6,23 +6,23 @@ include "scripting/richtext_scenarios.lua"
 
 -- TODO(Nordfriese): Need new images for them all
 function claus(title, text)
-   return speech ("map:claus.png", "1CC200", title, text)
+   return speech ("map:claus.png", styles.color("campaign_fri_claus"), title, text)
 end
 function henneke(title, text)
-   return speech ("map:henneke.png", "F7FF00", title, text)
+   return speech ("map:henneke.png", styles.color("campaign_fri_henneke"), title, text)
 end
 function reebaud(title, text)
-   return speech ("map:reebaud.png", "55BB55", title, text)
+   return speech ("map:reebaud.png", styles.color("campaign_fri_reebaud"), title, text)
 end
 function ketelsen(title, text)
-   return speech ("map:ketelsen.png", "4455CC", title, text)
+   return speech ("map:ketelsen.png", styles.color("campaign_fri_ketelsen"), title, text)
 end
 
 -- =======================================================================
 --                           Texts - No logic here
 -- =======================================================================
 
-local objective_message_height = 550
+local objective_message_height = messagebox_h_step(3)
 
 -- ===========
 -- objectives
@@ -307,7 +307,7 @@ victory_1 = {
       _([[They are defeated! Thank you, thank you for your help. We could never have beaten them by ourselves. Our town did not even sustain any major damage – on the contrary, you have expanded it far beyond its former bounds.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Ocke Ketelsen – Victory 1
-      _([[My people and I will never be able to repay the debt we owe you. I will send all the soldiers you have trained along with you to aid your in your quest to liberate your own home. If there is anything else we can do for you, now or forevermore, you need only ask and we will be yours to command.]]))
+      _([[My people and I will never be able to repay the debt we owe you. I will send all the soldiers you have trained along with you to aid you in your quest to liberate your own home. If there is anything else we can do for you, now or forevermore, you need only ask and we will be yours to command.]]))
 }
 
 victory_2 = {

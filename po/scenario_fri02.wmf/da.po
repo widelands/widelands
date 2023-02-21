@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2021\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
@@ -211,25 +211,25 @@ msgstr "Forstå digtet spejderen har fundet i Imperiet"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:91
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:334
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:336
 msgid "How many sites where soldiers stay,"
 msgstr "Hvor mange steder hvor soldater opholder sig,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:92
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:339
 msgid "How many sites where thou hold’st sway,"
 msgstr "Hvor mange steder, hvor du holder stand, svajer,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:93
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:342
 msgid "Though not their whereabouts sees he"
 msgstr "Skønt ikke deres ophold ser ham"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:94
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:345
 msgid "Who’s ordering around here thee!"
 msgstr "Hvem bestiller her omkring dig!"
 
@@ -821,16 +821,16 @@ msgstr ""
 "Vedrørende udvidelse – Jeg tænker det er begrænset hvor meget han kan "
 "kontrollere os. Måske vi kan sende en spion ud og holde øje med ham ..."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:328
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "The Scout Discovered Something"
 msgstr "Spejderen opdagede noget"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:329
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:331
 msgid "Our scout returned"
 msgstr "Vores spejder returnerede"
 
 #. TRANSLATORS: Hauke – Expansion hint
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:333
 msgid ""
 "Chieftain Reebaud! Our scout just returned. He has found a poem in the "
 "strange tongue this Proconsul speaks. With some difficulty, I have "
@@ -843,7 +843,7 @@ msgstr ""
 "oversættelsen, så lyder det således:"
 
 #. TRANSLATORS: Hauke – Expansion hint
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:348
 msgid ""
 "I don’t know what it means, but I’m sure it’s important. Perhaps you can "
 "make some sense of it."
@@ -851,21 +851,21 @@ msgstr ""
 "Jeg ved ikke hvad det betyder, men jeg er sikker på, at det er vigtigt. "
 "Måske kan du få mening i det."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:351
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:361
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:353
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:363
 msgid "The Empire is Angry"
 msgstr "Imperiet er vrede"
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:353
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:362
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:355
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:364
 msgid "Hostes Imperii estis!"
 msgstr "Hostes Imperii estis!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player destroyed the warehouse
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:355
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:357
 msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "destroying the beautiful building we presented you with!"
@@ -874,14 +874,14 @@ msgstr ""
 "ødelægge denne smukke bygning vi har tilbudt jer!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:358
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:367
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:360
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:369
 msgid "You are enemies of the Empire, and I shall treat you as such!"
 msgstr "Du er en fjende af Imperiet, og jeg skal behandle dig som sådan!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player built forbidden
 #. military buildings
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:364
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:366
 msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "basely wasting your precious resources on expansion!"
@@ -889,16 +889,16 @@ msgstr ""
 "Barbarerne! I har nægtet mit tilbud om venskab på sletteste vis ved at "
 "spilde jeres værdifulde ressourcer på ekspansion!"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:370
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:372
 msgid "Two Enemies"
 msgstr "To fjender"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:371
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:373
 msgid "Defeat the enemies!"
 msgstr "Besejr fjenderne!"
 
 #. TRANSLATORS: Reebaud – defeat both enemies
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:373
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:375
 msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
@@ -908,7 +908,7 @@ msgstr ""
 "her."
 
 #. TRANSLATORS: Reebaud – defeat both enemies
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:376
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:378
 msgid ""
 "The barbarian tribe he mentioned is also a threat. I don’t want to share "
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
@@ -918,19 +918,19 @@ msgstr ""
 "dette land med nogen, da deling kun fører til konflikter og kampe, som vi så"
 " i vores gamle hjem. Vi må også besejre barbarerne."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:380
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:382
 msgid "The Empire is Grateful"
 msgstr "Imperiet er taknemmelig"
 
 #. TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:382
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:384
 msgid "Salvete amici Imperii!"
 msgstr "Salvete amici Imperii!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:384
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:386
 msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
@@ -941,7 +941,7 @@ msgstr ""
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
 #. choice
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:387
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:389
 msgid ""
 "Now I permit you to assist us in conquering the barbarians, who live in a "
 "sheltered valley northwest to us. I charge you, expand along the northern "
@@ -953,18 +953,18 @@ msgstr ""
 "del af bjergene, der omslutter denne forpost; du vil finde barbarerne der – "
 "angrib dem! Vi vil afvise angreb startet af fjenden."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:391
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:393
 msgid "The Reward For Your Service"
 msgstr "Belønningen for din tjeneste"
 
 #. TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:393
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:395
 msgid "Amici Imperii"
 msgstr "Amici Imperii"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:395
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:397
 msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
@@ -973,7 +973,7 @@ msgstr ""
 "belønnet med Imperiets venskab!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:398
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:400
 msgid ""
 "I propose you start by sending legates to the Capital, so as to discover the"
 " most recent political activities. Once there, you can receive instructions "
@@ -987,16 +987,16 @@ msgstr ""
 "hvilken tribut hovedstaden kræver af dig, og selvfølgelig, hvem der skal "
 "være konge over din stamme."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:401
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:403
 msgid "Another Enemy"
 msgstr "Endnu en fjende"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:402
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:404
 msgid "Defeat the Empire!"
 msgstr "Besejr Imperiet"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:404
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:406
 msgid ""
 "Did I understand him correctly? After all we have done for him, after so "
 "many of my soldiers have laid down their lives for his sake, he wants us to "
@@ -1009,7 +1009,7 @@ msgstr ""
 " en belønning?"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:407
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:409
 msgid ""
 "We will punish this self-proclaimed Proconsul for his treachery! I shall "
 "burn down his entire colony, and kill every single person in his realm. He "
@@ -1019,16 +1019,16 @@ msgstr ""
 "brænde hele hans koloni ned, og dræbe alle i hans område. Han vil komme til "
 "at fortryde, at han fornærmede vores stamme."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory"
 msgstr "Sejr"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:412
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:414
 msgid "Victory!"
 msgstr "Sejr!"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:414
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
@@ -1036,11 +1036,11 @@ msgstr ""
 "Vi har besejret vores fjender! Nu vil ingen anden stamme forsøge at bosætte "
 "sig her. Vi er sikker, og vi kan endelig leve i fred."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:415
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:417
 msgid "Congratulations"
 msgstr "Tillykke"
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:418
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
