@@ -307,6 +307,7 @@ void ShipWindow::no_port_error_message() {
 }
 
 void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
+	is_updating_destination_dropdown_ = true;
 	Widelands::EditorGameBase& egbase = ibase_.egbase();
 	Widelands::CheckStepDefault checkstep(Widelands::MOVECAPS_SWIM);
 	Widelands::PortDock* dest_dock = ship->get_destination_port(egbase);
@@ -386,6 +387,8 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 			set_destination_->select(nullptr);
 		}
 	}
+
+	is_updating_destination_dropdown_ = false;
 
 	// Update Go To Destination button
 	if (dest_dock != nullptr) {
@@ -674,6 +677,10 @@ void ShipWindow::act_explore_island(Widelands::IslandExploreDirection direction)
 }
 
 void ShipWindow::act_set_destination() {
+	if (is_updating_destination_dropdown_) {
+		return;
+	}
+
 	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
