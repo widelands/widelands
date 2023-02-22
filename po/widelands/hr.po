@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-02-16 02:46+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2016\n"
 "Language-Team: Croatian (http://www.transifex.com/widelands/widelands/language/hr/)\n"
@@ -85,14 +85,14 @@ msgstr ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:699 ../../src/base/i18n.cc:407
+#: ../../data/scripting/richtext.lua:699 ../../src/base/i18n.cc:400
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:701 ../../src/base/i18n.cc:411
+#: ../../data/scripting/richtext.lua:701 ../../src/base/i18n.cc:404
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s ili %2$s"
@@ -102,7 +102,7 @@ msgstr "%1$s ili %2$s"
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/richtext.lua:703 ../../data/scripting/richtext.lua:708
-#: ../../src/base/i18n.cc:415 ../../src/base/i18n.cc:424
+#: ../../src/base/i18n.cc:408 ../../src/base/i18n.cc:417
 #: ../../src/logic/addons.cc:203
 #, c-format
 msgid "%1$s, %2$s"
@@ -111,7 +111,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: X hours and Y minutes
-#: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:419
+#: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:412
 #: ../../src/ui_basic/spinbox.cc:484
 #, c-format
 msgid "%1$s and %2$s"
@@ -166,7 +166,7 @@ msgstr ""
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:434
+#: ../../src/base/i18n.cc:427
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr ""

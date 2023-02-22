@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-19 02:46+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: tiu lau, 2022\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/widelands/teams/35159/pt_BR/)\n"
@@ -58,9 +58,8 @@ msgstr "Derrote o exército de Töver"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
-"Törver is the enemy in the north, who is fighting under the red banner."
+"Törver is the enemy in the North, who is fighting under the red banner."
 msgstr ""
-"Törver é o inimigo no norte, que está lutando sob a bandeira vermelha."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
@@ -86,11 +85,9 @@ msgstr "Conquiste o Sentinela Pirata"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
 msgid ""
-"Conquer the pirate sentry near the brook to the east. Hopefully we will find"
+"Conquer the pirate sentry near the brook to the East. Hopefully we will find"
 " out what happened to the gold in this area."
 msgstr ""
-"Conquiste a sentinela pirata perto do riacho ao leste. espero que "
-"descubramos o que aconteceu com o ouro desta área "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
