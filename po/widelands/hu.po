@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-02-16 02:46+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2023\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -93,14 +93,14 @@ msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:699 ../../src/base/i18n.cc:407
+#: ../../data/scripting/richtext.lua:699 ../../src/base/i18n.cc:400
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:701 ../../src/base/i18n.cc:411
+#: ../../data/scripting/richtext.lua:701 ../../src/base/i18n.cc:404
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s vagy %2$s"
@@ -110,7 +110,7 @@ msgstr "%1$s vagy %2$s"
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/richtext.lua:703 ../../data/scripting/richtext.lua:708
-#: ../../src/base/i18n.cc:415 ../../src/base/i18n.cc:424
+#: ../../src/base/i18n.cc:408 ../../src/base/i18n.cc:417
 #: ../../src/logic/addons.cc:203
 #, c-format
 msgid "%1$s, %2$s"
@@ -119,7 +119,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: X hours and Y minutes
-#: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:419
+#: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:412
 #: ../../src/ui_basic/spinbox.cc:484
 #, c-format
 msgid "%1$s and %2$s"
@@ -174,7 +174,7 @@ msgstr ","
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:434
+#: ../../src/base/i18n.cc:427
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr "%1% %2%"
@@ -1018,7 +1018,7 @@ msgstr "Jelenlegi könyvtár: %s"
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:65
 msgid "Display"
-msgstr "Megjelenítés:"
+msgstr "Megjelenítés"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:76
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:249
@@ -6400,7 +6400,7 @@ msgstr "Oktatójáték neve"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:129
 msgid "The number of this scenario in the campaign"
-msgstr "A küldetések száma ebben a hadjáratban"
+msgstr "A küldetés sorszáma a hadjáratban"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:130
 msgid "Scenario Name"
@@ -7178,12 +7178,12 @@ msgstr "Hajózás: Expedíciók kikötőhelynél"
 #: ../../src/wlapplication_options.cc:754
 #, c-format
 msgid "Set Landmark #%d"
-msgstr "#%d. helyszín rögzítése"
+msgstr "%d. helyszín rögzítése"
 
 #: ../../src/wlapplication_options.cc:759
 #, c-format
 msgid "Go To Landmark #%d"
-msgstr "#%d. helyszínre ugrás"
+msgstr "%d. helyszínre ugrás"
 
 #: ../../src/wlapplication_options.cc:995
 msgctxt "hotkey"
@@ -9144,27 +9144,27 @@ msgstr ""
 
 #: ../../src/wui/quicknavigation.cc:203
 msgid "Add a new landmark"
-msgstr ""
+msgstr "Helyszín hozzáadása"
 
 #: ../../src/wui/quicknavigation.cc:245 ../../src/wui/quicknavigation.cc:251
 msgid "Go to this landmark"
-msgstr ""
+msgstr "Ugrás a helyszínre"
 
 #: ../../src/wui/quicknavigation.cc:259
 msgid "View this landmark in a watch window"
-msgstr ""
+msgstr "Helyszín figyelése kis ablakban"
 
 #: ../../src/wui/quicknavigation.cc:276
 msgid "Unset this landmark"
-msgstr ""
+msgstr "Helyszín elfelejtése"
 
 #: ../../src/wui/quicknavigation.cc:286 ../../src/wui/quicknavigation.cc:292
 msgid "Set this landmark to the current map view location"
-msgstr ""
+msgstr "Jelenlegi helyszín megjegyzése"
 
 #: ../../src/wui/quicknavigation.cc:300
 msgid "Remove this landmark"
-msgstr ""
+msgstr "Helyszín törlése"
 
 #: ../../src/wui/savegamedeleter.cc:52
 msgid "Confirm Deleting File"
