@@ -1495,6 +1495,11 @@ void Ship::set_destination(EditorGameBase& egbase, MapObject* dest, bool is_play
 
 	if (is_playercommand) {
 		assert(ship_state_ != ShipStates::kTransport);
+		assert(expedition_ != nullptr);
+
+		expedition_->scouting_direction = WalkingDir::IDLE;
+		expedition_->island_exploration = false;
+
 		set_ship_state_and_notify(dest == nullptr ? ShipStates::kExpeditionWaiting : ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
 	}
 }
