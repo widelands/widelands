@@ -1501,6 +1501,8 @@ void Ship::set_destination(EditorGameBase& egbase, MapObject* dest, bool is_play
 		expedition_->island_exploration = false;
 
 		set_ship_state_and_notify(dest == nullptr ? ShipStates::kExpeditionWaiting : ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
+	} else {
+		Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
 	}
 }
 
