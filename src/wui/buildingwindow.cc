@@ -730,6 +730,9 @@ UI::Window& BuildingWindow::load(FileRead& fr, InteractiveBase& ib) {
 			// TODO(tothxa): Savegame compatibility v1.2
 			if (packet_version >= 2) {
 				bw.set_priority_collapsed(static_cast<BuildingWindow::CollapsedState>(fr.unsigned_8()));
+			} else {
+				// Shouldn't be necessary, but making it explicit only makes it safer.
+				bw.set_priority_collapsed(BuildingWindow::CollapsedState::kExpanded);
 			}
 			return bw;
 		}
