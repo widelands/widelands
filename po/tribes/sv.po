@@ -1510,7 +1510,7 @@ msgstr "Guldgrävarstugans huvudsakliga åder är tömd. Förvänta dig starkt m
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Hunter-Gatherer’s Hut"
-msgstr "Jägarhydda"
+msgstr "Djurfångarhydda"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
@@ -1542,7 +1542,7 @@ msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
 " game or fish in her work area."
-msgstr "Jägaren/samlaren som jobbar i denna jägarhydda kan inte hitta mer vilt eller fisk inom sitt arbetsområde."
+msgstr "Djurfångaren som jobbar i denna hydda kan inte hitta mer vilt eller fisk inom sitt arbetsområde."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
@@ -8999,7 +8999,7 @@ msgstr "Guldsmältare"
 #: ../../data/tribes/workers/amazons/hunter_gatherer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Hunter-Gatherer"
-msgstr "Jägare och samlare"
+msgstr "Djurfångare"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_master/init.lua:8

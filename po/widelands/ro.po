@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-16 02:46+0000\n"
+"POT-Creation-Date: 2023-02-22 02:57+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tarța Vasile-Florin <florin13t@gmail.com>, 2016\n"
 "Language-Team: Romanian (http://www.transifex.com/widelands/widelands/language/ro/)\n"
@@ -599,23 +599,23 @@ msgid ""
 "incompatible."
 msgstr "Widelands nu a putut încarca fişierul \"%s\". Formatul fişierului este incompatibil"
 
-#: ../../src/editor/editorinteractive.cc:613
+#: ../../src/editor/editorinteractive.cc:606
 msgid "Exit Editor Confirmation"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:613
+#: ../../src/editor/editorinteractive.cc:606
 msgid "Unsaved Map"
 msgstr "Hartă nesalvată"
 
-#: ../../src/editor/editorinteractive.cc:614
+#: ../../src/editor/editorinteractive.cc:607
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Harta nu a fost salvată, vrei să închizi?"
 
-#: ../../src/editor/editorinteractive.cc:615
+#: ../../src/editor/editorinteractive.cc:608
 msgid "Are you sure you wish to exit the editor?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1109 ../../src/logic/addons.cc:47
+#: ../../src/editor/editorinteractive.cc:1102 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1333
@@ -636,7 +636,7 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1111 ../../src/ui_fsmenu/main.cc:233
+#: ../../src/editor/editorinteractive.cc:1104 ../../src/ui_fsmenu/main.cc:233
 #: ../../src/wlapplication.cc:1643
 #, c-format
 msgid ""
@@ -648,14 +648,14 @@ msgid ""
 "Please add this information to your report."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1145
+#: ../../src/editor/editorinteractive.cc:1138
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Se încarcă harta “%s”…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1167
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:112
+#: ../../src/editor/editorinteractive.cc:1160
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:113
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:583
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
 #: ../../src/logic/map.h:226 ../../src/wui/mapdata.cc:50
@@ -663,23 +663,23 @@ msgid "No Name"
 msgstr "Fără nume"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1170
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:113
+#: ../../src/editor/editorinteractive.cc:1163
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:114
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:584
 #: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:367
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: ../../src/editor/editorinteractive.cc:1194
+#: ../../src/editor/editorinteractive.cc:1187
 msgid "Loading world…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1394
+#: ../../src/editor/editorinteractive.cc:1387
 msgid "Publish Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1395
+#: ../../src/editor/editorinteractive.cc:1388
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -691,50 +691,50 @@ msgid ""
 "Hint: %5$s\n"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1419
+#: ../../src/editor/editorinteractive.cc:1412
 msgid "Login Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1424
+#: ../../src/editor/editorinteractive.cc:1417
 msgid "Uploading Add-On…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1425
+#: ../../src/editor/editorinteractive.cc:1418
 msgid "Saving map…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1444
+#: ../../src/editor/editorinteractive.cc:1437
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:310
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:365
 msgid "Error Saving Map!"
 msgstr "Eroare la salvarea hărții"
 
-#: ../../src/editor/editorinteractive.cc:1450
+#: ../../src/editor/editorinteractive.cc:1443
 msgid "Packaging add-on…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1500
+#: ../../src/editor/editorinteractive.cc:1493
 msgid "Add-On Generation Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1501
+#: ../../src/editor/editorinteractive.cc:1494
 msgid "The add-on could not be written to the disk."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1508
+#: ../../src/editor/editorinteractive.cc:1501
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
 msgid "Uploading…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1514
+#: ../../src/editor/editorinteractive.cc:1507
 msgid "Upload Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1536
+#: ../../src/editor/editorinteractive.cc:1529
 msgid "Success"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1537
+#: ../../src/editor/editorinteractive.cc:1530
 msgid "The add-on was uploaded successfully."
 msgstr ""
 
@@ -3503,15 +3503,15 @@ msgstr ""
 msgid "No matches"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:294
+#: ../../src/ui_basic/panel.cc:295
 msgid "Please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:424
+#: ../../src/ui_basic/panel.cc:425
 msgid "Game ending – please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/progresswindow.cc:77
+#: ../../src/ui_basic/progresswindow.cc:78
 msgid "Loading…"
 msgstr "Încărcare"
 
@@ -8622,31 +8622,31 @@ msgstr "Anulează mărire"
 msgid "Zoom –"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:833
+#: ../../src/wui/interactive_base.cc:838
 #, c-format
 msgid "Road length: %1$u (%2$u)"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:835
+#: ../../src/wui/interactive_base.cc:840
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:840
+#: ../../src/wui/interactive_base.cc:845
 #, c-format
 msgid "Road length: %u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:843
+#: ../../src/wui/interactive_base.cc:848
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1725
+#: ../../src/wui/interactive_base.cc:1730
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1729
+#: ../../src/wui/interactive_base.cc:1734
 msgid "Screenshot saved"
 msgstr ""
 
