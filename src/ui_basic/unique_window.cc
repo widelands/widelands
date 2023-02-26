@@ -142,6 +142,11 @@ void UniqueWindow::save_position() {
 	}
 }
 
+void UniqueWindow::set_pos(Vector2i new_pos) {
+	UI::Panel::set_pos(new_pos);
+	save_position();
+}
+
 /**
  * Restore latest position, or move so that it is inside the parent panel.
  */
