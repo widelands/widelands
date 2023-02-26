@@ -74,6 +74,9 @@ struct UniqueWindow : public Window {
 	             const std::string& title);
 	~UniqueWindow() override;
 
+	void save_position();
+	void move_inside_parent() override;
+
 	bool get_usedefaultpos() const {
 		return usedefaultpos_;
 	}
