@@ -75,7 +75,7 @@ struct UniqueWindow : public Window {
 	~UniqueWindow() override;
 
 	void save_position();
-	void set_pos(Vector2i) override;
+	void set_pos(Vector2i new_pos) override;
 	void move_inside_parent() override;
 
 	bool get_usedefaultpos() const {

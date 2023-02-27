@@ -344,6 +344,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 		*collapsed_ = BuildingWindow::CollapsedState::kCollapsed;
 	}
 
+	set_collapsed();
+
 	set_tooltip(type_ == Widelands::wwWARE ?
                   building.owner().tribe().get_ware_descr(index_)->descname() :
                   building.owner().tribe().get_worker_descr(index_)->descname());
