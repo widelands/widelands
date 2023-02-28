@@ -40,10 +40,7 @@ jobs:
       with:
         fetch-depth: 1
     - name: Installing dependencies
-      run: |
-        # https://github.com/actions/runner-images/issues/7192
-        echo 'APT::Get::Always-Include-Phased-Updates "false";' | sudo tee /etc/apt/apt.conf.d/99-phased-updates
-        sh ./.github/scripts/install_deps.sh
+      run: sh ./.github/scripts/install_deps.sh
     - name: Test
       run: |
         ./cmake/codecheck/run_tests.py
@@ -93,10 +90,7 @@ jobs:
       with:
         fetch-depth: 1
     - name: Installing dependencies
-      run: |
-        # https://github.com/actions/runner-images/issues/7192
-        echo 'APT::Get::Always-Include-Phased-Updates "false";' | sudo tee /etc/apt/apt.conf.d/99-phased-updates
-        sh ./.github/scripts/install_deps.sh
+      run: sh ./.github/scripts/install_deps.sh
     - name: CMake
       run: |
         echo "Will use $(nproc) cores."
@@ -180,10 +174,7 @@ jobs:
       with:
         fetch-depth: 1
     - name: Installing dependencies
-      run: |
-        # https://github.com/actions/runner-images/issues/7192
-        echo 'APT::Get::Always-Include-Phased-Updates "false";' | sudo tee /etc/apt/apt.conf.d/99-phased-updates
-        sh ./.github/scripts/install_deps.sh
+      run: sh ./.github/scripts/install_deps.sh
     - name: Compile
       run: |
         if [ "${CXX:0:1}" == "c" ]
@@ -384,10 +375,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Installing dependencies
-      run: |
-        # https://github.com/actions/runner-images/issues/7192
-        echo 'APT::Get::Always-Include-Phased-Updates "false";' | sudo tee /etc/apt/apt.conf.d/99-phased-updates
-        sh ./.github/scripts/install_deps.sh
+      run: sh ./.github/scripts/install_deps.sh
     - name: Compile
       run: |
         if [ "${CXX:0:1}" == "c" ]
