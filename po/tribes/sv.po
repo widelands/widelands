@@ -1667,7 +1667,7 @@ msgstr "göra ett rep"
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Scout’s Hut"
-msgstr "Spejarkoja"
+msgstr "Scouthydda"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
@@ -1790,7 +1790,7 @@ msgstr "göra ett träspjut"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:193
 msgid "making a stone-tipped spear"
-msgstr "göra ett stenspetsat spjut"
+msgstr "göra ett stenspetsat träspjut"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1807,7 +1807,7 @@ msgstr "Stenbrytarkoja"
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:34
 msgid "cutting granite"
-msgstr "bryta granit"
+msgstr "hugga granit"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
@@ -1873,7 +1873,7 @@ msgctxt "amazons_building"
 msgid ""
 "This stone mine’s main vein is exhausted. Expect strongly diminished returns"
 " on investment. You should consider dismantling or destroying it."
-msgstr "Denna stengruvas huvudsakliga åder är uttömd. Förvänta starkt minskat utbyte från dina investeringar. Du borde överväga att demontera eller förstöra den."
+msgstr "Denna stengruvas huvudsakliga åder är uttömd. Förvänta dig starkt minskat utbyte från dina investeringar. Du borde överväga att demontera eller förstöra den."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
@@ -1933,7 +1933,7 @@ msgstr "plantera ut fisk"
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:54
 msgid "releasing game"
-msgstr "släpper spel"
+msgstr "släppa ut djur"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:8
@@ -1964,7 +1964,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "Skogshuggaren som utgår från denna skogshuggarkoja hittar inga träd i sitt arbetsområde. Du borde överväga att demontera eller förstöra byggnaden eller bygga en djungelbevararhydda."
+msgstr "Skogshuggaren som utgår från denna skogshuggarkoja kan inte hitta några träd inom sitt arbetsområde. Du borde överväga att demontera eller rasera byggnaden eller bygga en djungelbevararhydda."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2121,7 +2121,7 @@ msgstr "bryta diamanter"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:153
 msgid "No Crystals"
-msgstr "Inga Kristaller"
+msgstr "Inga kristaller"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:154
 msgid "Main Crystal Vein Exhausted"
@@ -3418,7 +3418,7 @@ msgstr "Sågverk"
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:8
 msgctxt "empire_building"
 msgid "Scout’s House"
-msgstr "Spejarbostad"
+msgstr "Spanarbostad"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:8
@@ -3570,7 +3570,7 @@ msgstr "Fiskodling"
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:97
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:97
 msgid "No Ponds"
-msgstr "Inga Dammar"
+msgstr "Inga dammar"
 
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:98
 msgid "Out of Fish Ponds"
@@ -3589,7 +3589,7 @@ msgstr "Fiskaren som jobbar på den här fiskodlingen kan inte hitta några fisk
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:8
 msgctxt "frisians_building"
 msgid "Large Armor Smithy"
-msgstr "Stor Vapensmedja"
+msgstr "Stor vapensmedja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because
 #. ...
@@ -9659,7 +9659,7 @@ msgstr "Rekryt"
 #: ../../data/tribes/workers/empire/scout/init.lua:8
 msgctxt "empire_worker"
 msgid "Scout"
-msgstr "Spejare"
+msgstr "Spanare"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/shepherd/init.lua:8

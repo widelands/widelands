@@ -7,14 +7,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014
 # GunChleoc, 2014
-# Tóth András <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:27+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,7 +56,7 @@ msgid ""
 "headquarters on a second island, which will get all wares, workers and "
 "soldiers transferred from your headquarters and warehouses on the first "
 "island."
-msgstr ""
+msgstr "A szigetugrás egy hagyományos verseny az atlantiszi kultúrában. A játék szabályai egyszerűek: Egy szigeten kezdesz egy főhadiszállással. Ha befejezel egy várat az első sziget végén, akkor egy második szigeten kapsz egy második főhadiszállást, melybe minden áru, munkás és katona átkerül az első szigeten álló főhadiszállásodból és raktáraidból."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -65,7 +65,7 @@ msgid ""
 "soldiers getting transferred from your previous headquarters and warehouses "
 "again. You must build a castle at the center of the third island and hold it"
 " for 20 minutes to win the game."
-msgstr ""
+msgstr "Ha befejezel egy várat a második sziget célterületén, kapsz egy harmadik főhadiszállást a harmadik szigeten, melybe ismét átkerül minden áru, munkás és katona az előző két szigeten álló főhadiszállásaidból és raktáraidból. A játék megnyeréséhez fel kell építened, és 20 percig meg kell tartanod egy várat a harmadik sziget közepén."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:22
 msgid ""

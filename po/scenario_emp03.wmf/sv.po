@@ -5,6 +5,7 @@
 # Translators:
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2019
 # Niklas Nordgren, 2022
+# D M <kamera001dm@gmail.com>, 2023
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Niklas Nordgren, 2022\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2023\n"
 "Language-Team: Swedish (https://www.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,14 +27,14 @@ msgstr "Bygg din första utpost"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:47
 msgid "First Outpost"
-msgstr "Första Utpost"
+msgstr "Första utposten"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
-"Bygg en utpost över den gula hussymbolen öster om dina provisoriska "
+"Bygg en utpost över den gula hussymbolen öster om ditt provisoriska "
 "högkvarter."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:54
@@ -49,7 +50,7 @@ msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
-"Bygg ett stenbrott vid de rikliga mängderna stenar för att avtäcka fler "
+"Bygg ett stenbrott vid de rikliga mängderna av klippor för att frigöra fler "
 "byggnadsytor och få några värdefulla resurser."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
@@ -66,32 +67,32 @@ msgid ""
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr ""
-"Bygg en skogshuggarbostad,ett sågverk och ett stenhuggeri så fort det finns "
-"tillräckligt med plats för dem. Detta kommer att färdigställa den "
+"Bygg en skogshuggarbostad, ett sågverk och ett stenhuggeri så fort det finns"
+" tillräckligt med plats för dem. Detta kommer att färdigställa den "
 "grundläggande försörjningskedjan av byggnadsmaterial."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
-msgstr "Sänk efterfrågan efter marmorpelare till 4"
+msgstr "Sänk efterfrågan på marmorpelare till 4"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower Demand for Marble Columns"
-msgstr "Sänk Efterfrågan efter Marmorpelare"
+msgstr "Sänk efterfrågan på marmorpelare"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:75
 msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
-"Sänk efterfrågan efter marmorpelare i ekonomiinställningarna till fyra. "
-"Detta kommer att hjälpa till att spara marmor åt byggnader."
+"Sänk efterfrågan på marmorpelare i ekonomiinställningarna till fyra. Detta "
+"kommer att hjälpa till att spara marmor åt byggnader."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
-"Minns att du kan komma åt ekonomiinställningarna genom att klicka på valfri "
-"flagga."
+"Kom ihåg att du kan komma åt ekonomiinställningarna genom att klicka på "
+"valfri flagga."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:82
 msgid "Find a port space on the small island"
@@ -99,15 +100,15 @@ msgstr "Hitta ett hamnutrymme på den lilla ön"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:84
 msgid "Port Space"
-msgstr "Hamnutrymme"
+msgstr "Hamnplats"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Search for a port space in order to regain access to the sea."
-msgstr "Leta efter ett hamnutrymme för att återfå havstillgång."
+msgstr "Leta efter hamnplats för att återigen få tillgång till havet."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:91
 msgid "Build a port and a shipyard on the Island"
-msgstr "Bygg en hamn och ett skeppsvarv på Ön"
+msgstr "Bygg en hamn och ett skeppsvarv på ön"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Ship Industry"
@@ -115,7 +116,7 @@ msgstr "Fartygsindustrin"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Build a port to set sail from this island."
-msgstr "Bygg en hamn för att ta till sjöss ifrån den här ön."
+msgstr "Bygg en hamn för att sätta segel från den här ön."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Build a shipyard to produce the ships to sail on."
@@ -137,7 +138,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:109
 msgid "Produce cloth for building our first ship"
-msgstr "Producera tyg för att bygga vårt första skepp."
+msgstr "Producera tyg för att bygga vårt första skepp"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Cloth Production"
@@ -157,7 +158,7 @@ msgstr "Bygg 2 hamnar på avlägsna öar"
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:121
 msgid "Build two Expedition Ports"
-msgstr "Bygg två Expeditionshamnar"
+msgstr "Bygg två expeditionshamnar"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
@@ -170,12 +171,12 @@ msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
-"Skicka ett skepp norrut för samla in information om Barbarerna. Försök att "
-"bygga en hamn på ön och grunda en utpost."
+"Skicka ett skepp norrut för att samla in information om Barbarerna. Försök "
+"att bygga en hamn på ön och grunda en utpost."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:129
 msgid "Produce gold to send out expeditions"
-msgstr "Producera guld för att utsända expeditioner"
+msgstr "Producera guld för att sända ut expeditioner"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Gold Production"
@@ -193,7 +194,7 @@ msgstr "Besegra Barbarerna"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Enemy"
-msgstr "Besegra Fienden"
+msgstr "Besegra fienden"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
@@ -205,7 +206,7 @@ msgstr "Utforska vidare och bygg hamnar"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
-msgstr "Utforska Fler Öar och Leta efter Hamnutrymmen"
+msgstr "Utforska fler öar och leta efter hamnplatser"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:150
 msgid ""
@@ -284,6 +285,9 @@ msgid ""
 "taking in more and more water. We would be glad to survive this black night "
 "with barely more than our lives."
 msgstr ""
+"Vårt skepp är allvarligt skadat. Masten har vält överbord och skrovet tar in"
+" mer och mer vatten. Vi kan vara glada om vi överlever denna svarta natt med"
+" enbart våra liv i behåll."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:206
 msgid "Shipwrecked Again"
@@ -309,6 +313,8 @@ msgid ""
 "It really seems as if we have landed on a very small island with little "
 "space."
 msgstr ""
+"Det verkar verkligen som att vi har landstigit på en väldigt liten ö med "
+"bara lite utrymme."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:218
@@ -399,7 +405,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
-msgstr ""
+msgstr "Amaleas plan"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:270
 msgid "Amalea smiles…"
@@ -526,6 +532,10 @@ msgid ""
 "further to discover the whole island. Let’s try to find such a valuable "
 "construction site."
 msgstr ""
+"Problemet är att en hamn är en byggnad som behöver en mycket speciell plats "
+"för att kunna byggas. Så medan vi bygger upp vår ekonomi ska vi också "
+"samtidigt fortsätta expandera för att utforska hela ön. Låt oss försöka "
+"hitta en sådan värdefull byggnadsplats."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:346
 msgid "A Step Closer to Getting Home"
@@ -605,7 +615,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
-msgstr ""
+msgstr "Sjöfart återigen möjlig"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:389
@@ -708,6 +718,8 @@ msgstr ""
 msgid ""
 "But the problem is that for sending out an expedition, we need some gold."
 msgstr ""
+"Men problemet är att om vi ska kunna sända ut en expedition så behöver vi "
+"guld."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:444
@@ -751,7 +763,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:471
 msgid "Amalea’s Luck"
-msgstr ""
+msgstr "Amaleas tur"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:472
 msgid "Amalea is really proud of the achievements…"
@@ -774,7 +786,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Amalea är nöjd"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:484
 msgid "Amalea is content that we will manage all our challenges"
@@ -848,6 +860,8 @@ msgid ""
 "Now that our fleet is growing and growing we should discover the complete "
 "region. Let’s try to find more land and eventually get more resources."
 msgstr ""
+"Nu när vår flotta växer och växer borde vi utforska hela regionen. Låt oss "
+"försöka hitta mer land och kanske också få mer resurser."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:519
@@ -907,7 +921,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:549
 msgid "Victory is Ours"
-msgstr ""
+msgstr "Segern är vår"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:550
 msgid "Saledus is cheering…"
@@ -998,7 +1012,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:597
 msgid "Train Faster, Train Harder"
-msgstr ""
+msgstr "Träna snabbare, träna hårdare"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:598
 msgid "Saledus is demanding some discipline"
@@ -1020,7 +1034,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:608
 msgid "Training Infrastructure is Needed"
-msgstr ""
+msgstr "Infrastruktur för träning behövs"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:609
 msgid "Saledus has security concerns"
@@ -1033,6 +1047,9 @@ msgid ""
 " important to increase the number of our soldiers as fast as we can. And we "
 "should train them well to improve their fighting abilities."
 msgstr ""
+"Ers höghet, vi måste träna några av vårt folk att tjänstgöra i vår mäktiga "
+"arme. Det är viktigt att öka antalet soldater så snabbt vi kan och vi ska "
+"träna dem väl för att förbättra deras stridsförmågor."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:613
 msgid ""
