@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Niklas Nordgren, 2022
+# D M <kamera001dm@gmail.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-19 02:46+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Niklas Nordgren, 2022\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2023\n"
 "Language-Team: Swedish (https://www.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +25,7 @@ msgstr ""
 msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
 msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
 msgstr[0] "%1% enhet %2% har tagits till din '%3%' byggnad."
-msgstr[1] "%1% enheter %2% har tagits till din '%3%' byggnad."
+msgstr[1] "%1% enheter %2% har transporterats till din '%3%' byggnad."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
@@ -35,7 +36,8 @@ msgstr "Transport"
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
 msgstr ""
-"Fyra spadar till för att ta bort träsken har ihopsamlats i lagerbyggnaden."
+"Fyra spadar att användas för att ta bort träsken har samlats ihop i "
+"magasinet."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
@@ -47,8 +49,8 @@ msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."
 msgstr ""
-"Fyra fler spadar till för att ta bort träsken har ihopsamlats i "
-"lagerbyggnaden."
+"Ytterligare fyra spadar för att ta bort träsken har samlats ihop i "
+"magasinet."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
 msgid "Defeat Törver"
@@ -56,12 +58,12 @@ msgstr "Besegra Törver"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
 msgid "Defeat the Armies of Törver"
-msgstr "Besegra Törvers Arméer"
+msgstr "Besegra Törvers arméer"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
-"Törver is the enemy in the north, who is fighting under the red banner."
-msgstr "Törver är fienden i norr, som strider under den röda fanan."
+"Törver is the enemy in the North, who is fighting under the red banner."
+msgstr "Törver är fienden i norr som strider med rött baner."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
@@ -69,15 +71,15 @@ msgstr "Bygg en hamn"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
 msgid "Build a Port in the North"
-msgstr "Bygg en Hamn i Norr "
+msgstr "Bygg en hamn i norr "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
 msgid ""
 "We should build a port in Törver’s former land to be ready to send an "
 "expedition as soon as we found out how to build ships."
 msgstr ""
-"Vi borde bygga en hamn i Törvers forna land för att vara redo att sckicka en"
-" expedition så snart vi kommer på hur man bygger skepp."
+"Vi borde bygga en hamn i Törvers forna land för att vara redo att skicka en "
+"expedition så snart vi kommer på hur man bygger skepp."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
 msgid "Conquer pirate sentry"
@@ -85,23 +87,23 @@ msgstr "Ta över piraternas vaktpost"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
 msgid "Conquer the Pirate Sentry"
-msgstr "Ta över Piratvaktposten"
+msgstr "Ta över piratvaktposten"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
 msgid ""
-"Conquer the pirate sentry near the brook to the east. Hopefully we will find"
+"Conquer the pirate sentry near the brook to the East. Hopefully we will find"
 " out what happened to the gold in this area."
 msgstr ""
-"Ta över piratvaktposten nära bäcken i öst. Förhoppningsvis får vi reda på "
-"vad som hände med guldet här."
+"Erövra piraternas vaktpost nära bäcken i öster. Förhoppningsvis kan vi komma"
+" på vad som hände med guldet i området."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
-msgstr "Bygg lagerbyggnad"
+msgstr "Bygg ett magasin"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
-msgstr "Bygg en Lagerbyggnad nära Piratvaktposten"
+msgstr "Bygg ett magasin nära piratvaktposten"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
@@ -109,30 +111,30 @@ msgid ""
 "will need it as a basis for further exploration. Furthermore we could use it"
 " to store some gold that we will mine from the surrounding hills."
 msgstr ""
-"Bygg en lagerbyggnad nära den övertagna piratvaktposten vid bäcken. Vi "
-"kommer att behöva det för att ha en bas för vidare utforskning. Vi kan också"
-" använda den till att lagra guld som vi utgräver ur de omkringliggande "
-"kullarna."
+"Bygg ett magasin nära den övertagna piratvaktposten vid bäcken. Vi kommer "
+"att behöva det för att ha en bas för vidare utforskning. Vi kan också "
+"använda det till att lagra guld som vi bryter i de omkringliggande kullarna."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
 msgid "Bring shovels"
-msgstr "Ta dit spadar"
+msgstr "Transportera spadar"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
 msgid "Bring Four Shovels to the new Warehouse"
-msgstr "Ta Fyra Spadar till den nya Lagerbyggnaden"
+msgstr "Transportera fyra spadar till det nya magasinet"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
-msgstr "De kommer att ges ut till volontärer för att torrlägga träsken."
+msgstr "De kommer att lämnas ut till volontärer för att torrlägga träsken."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
 msgid ""
 "They will be handed out to additional volunteers for drying up the swamps."
 msgstr ""
-"De kommer att ges ut till ytterligare volontärer för att torrlägga träsken."
+"De kommer att lämnas ut till ytterligare volontärer för att torrlägga "
+"träsken."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
@@ -141,7 +143,7 @@ msgstr "Besegra piraterna"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:63
 msgid "Defeat the Pirates"
-msgstr "Besegra Piraterna"
+msgstr "Besegra piraterna"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:64
 msgid ""
@@ -152,15 +154,15 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
-msgstr "Befria vår spejare från piraterna"
+msgstr "Befria vår spanare från piraterna"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
-msgstr "Ta över Högborgen på Ön"
+msgstr "Erövra högborgen på ön"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
-msgstr "Spejaren hålls fånge här."
+msgstr "Spanaren hålls fången här."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
 msgid "Defeat Hjalmar"
@@ -168,7 +170,7 @@ msgstr "Besegra Hjalmar"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
 msgid "Defeat the Armies of Hjalmar"
-msgstr "Besegra Hjalmars Arméer"
+msgstr "Besegra Hjalmars arméer"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
 msgid ""
@@ -184,7 +186,7 @@ msgstr "Besegra Runar"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
 msgid "Defeat the Armies of Runar"
-msgstr "Besegra Runars Arméer"
+msgstr "Besegra Runars arméer"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
 msgid ""
@@ -214,11 +216,11 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
 msgid "Your Advisor"
-msgstr "Din Rådgivare"
+msgstr "Din rådgivare"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
 msgid "Along the River"
-msgstr "Längs med Floden"
+msgstr "Längs med floden"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
 msgid "Sire, let me inform you about the surrounding tribes."
@@ -230,6 +232,9 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
+"Norrifrån hotas vi av en krigförande stam som leds av krigsherren Törver och"
+" som snabbt bygger upp sina arméer. De kan snart vara för starka för att "
+"kunna besegras."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -266,7 +271,7 @@ msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
 msgstr ""
-"Situationen ser rätt farlig ut och jag rådgiver att vi lägger våra "
+"Situationen ser rätt farlig ut och mitt råd är att vi lägger våra "
 "ansträngningar på att bygga upp en stark armé."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
@@ -279,18 +284,22 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"Ers höghet. Visserligen skulle våra soldater möta vilken fiende som helst "
+"utan minsta fruktan men fienden i norr är fortfarande starkare än alla våra "
+"arméer tillsammans. Vi måste undvika en konflikt tills vi är starka nog att "
+"besegra dem."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
 "Be patient and recognize that a strong army is indispensable in this "
 "situation. Törver has a very bad reputation."
 msgstr ""
-"Var tålmodig och inse att en stark armé är ofrånkomlig i vår situation. "
-"Törver har ett väldigt dåligt rykte."
+"Var tålmodig och inse att en stark armé är oumbärlig i vår situation. Törver"
+" har ett väldigt dåligt rykte."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
-msgstr ""
+msgstr "Fara i norr"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -307,7 +316,7 @@ msgid ""
 "strengthen our armies."
 msgstr ""
 "Vi kan inte undvika att attackera deras arméer för evigt. Om vi lyckas "
-"besegra vår fiende i norr, kommer vi utöka vårt territorium och finna mer "
+"besegra vår fiende i norr kommer vi utöka vårt territorium och finna mer "
 "resurser för att förstärka våra arméer."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
@@ -318,7 +327,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
 msgid "On the good way"
-msgstr "På den bra vägen"
+msgstr "På den goda vägen"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:47
 msgid ""
@@ -327,9 +336,9 @@ msgid ""
 "easily. In a desperate move Törver has called in a group of hardened "
 "mercenaries."
 msgstr ""
-"Ers höghet, striden med Törver fortgår ärevördigt och vi har redan slagit "
-"den största delen av hans armé. Men den här fienden kommer inte bli lätt "
-"besegrad. I desperation har Törver nu kallat in en grupp förhärdade "
+"Ers höghet, striden mot Törver fortgår ärevördigt och vi har redan besegrat "
+"den största delen av hans armé. Men den här fienden kommer inte att besegras"
+" enkelt. I desperation har Törver nu kallat in en grupp förhärdade "
 "legoknektar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
@@ -342,6 +351,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Ers höghet, nu när vi har erövrat Törvers land kan vi dra nytta av deras "
+"förträffliga tillgång till de intilliggande stora sjöarna. En hamn i norr "
+"kommer att ge oss bättre möjligheter att få kontakt med andra stammar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -349,19 +361,21 @@ msgid ""
 "ships. Unfortunately, the texts are written in a language that is unknown to"
 " us. Our wise men will try to translate these descriptions."
 msgstr ""
-"I Törvers högkvarter hittade vi papper med beskrivningar av skeppsbygge. "
+"I Törvers högkvarter hittade vi dokument med beskrivningar av skeppsbygge. "
 "Oturligt nog är de skrivna på ett för oss oförståeligt språk. Våra vise män "
-"försöker översätta dessa beskrivningar."
+"ska försöka översätta dessa dokument."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
-msgstr "Letande efter guld"
+msgstr "Sökande efter guld"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
 msgid ""
 "Sire, our men have located an isolated enemy pirate sentry. The abandoned "
 "huts indicate that there is gold nearby."
-msgstr "Ers höghet, våra män har upptäckt en isolerad fientlig piratvaktpost."
+msgstr ""
+"Ers höghet, våra män har upptäckt en isolerad fientlig piratvaktpost. De "
+"övergivna hyddorna indikerar att det finns guld i omgivningarna."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
 msgid ""
@@ -386,8 +400,8 @@ msgid ""
 "transported to our headquarters."
 msgstr ""
 "Ers höghet, vi har hittat 25 enheter guldmalm i piratvaktposten. De kan ha "
-"blivit plundrade från guldutgrävarhyddorna i närheten. Denna guldmalm kommer"
-" att tas till våra högkvarter."
+"blivit plundrade från guldgrävarhyddorna i närheten. Denna guldmalm kommer "
+"att transporteras till våra högkvarter."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -398,7 +412,7 @@ msgid ""
 msgstr ""
 "Med vår lyckade expansion in i detta område bör vi fundera på att bygga en "
 "lagerbyggnad rakt sydväst om vaktposten för att vidare utforska det här "
-"området. Det finns en bra byggplats bara tre steg ifrån vaktposten."
+"området. Det finns en bra byggnadsyta bara tre steg ifrån vaktposten."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
@@ -412,6 +426,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Ers höghet, det blöta vädret har skapat träsk längs med bäcken i öster och "
+"vi kan inte komma över dem. De måste tas bort innan vi kan fortsätta. Om du "
+"får hit nog med spadar till det nya magasinet kommer volontärer att dika ur "
+"träsken."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -419,6 +437,10 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Ers höghet, alla spadar har nu delats ut men om vi fortsätter i denna takten"
+" kommer inte träsken att vara borttagna förrän nästa regnperiod. Om du kan "
+"transportera fler spadar till det nya magasinet kommer flera volontärer att "
+"hjälpa till."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -426,21 +448,21 @@ msgid ""
 "and finish them off. Maybe there are even more treasures hidden in their "
 "territory."
 msgstr ""
-"Ers höghet, nu när vi har tillgång till piraternas gömställe, borde vi ta "
+"Ers höghet, nu när vi har tillgång till piraternas gömställe borde vi ta "
 "över det och göra slut på dem. Det kanske finns fler skatter gömda i deras "
 "territorium."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
-msgstr "Piraterna blev besegrade."
+msgstr "Piraterna besegrades."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:101
 msgid ""
 "Sire, we have defeated the pirates. They have hidden some gold in their last"
 " bastion which is now being transferred to our headquarters."
 msgstr ""
-"Ers höghet, vi har besegrat piraterna. De har gömt guld i deras sista "
-"fästning vilket nu överförs till våra högkvarter."
+"Ers höghet, vi har besegrat piraterna. De har gömt guld i sin sista fästning"
+" vilket nu transporteras till våra högkvarter."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
 msgid "Pirates are regrouping"
@@ -454,7 +476,7 @@ msgid ""
 "mighty enemy in front of us."
 msgstr ""
 "Ers höghet, som resultat av våra attacker mot piraterna har de börjat "
-"omgruppera med pirater från andra stammar. e kan återfå mycket av deras "
+"omgruppera med pirater från andra stammar. De kan återfå mycket av sin "
 "förlorade styrka. Våra krympande lager av resurser kan bli ett problem med "
 "en så mäktig fiende framför oss."
 
@@ -468,7 +490,7 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
-"Ers höghet, tack vare våra framgångsrika försök att driva ut piraterna, har "
+"Ers höghet, tack vare våra framgångsrika försök att driva ut piraterna har "
 "många av dem flytt i små båtar. Det är inte känt åt vilket håll de har "
 "flytt."
 
@@ -482,13 +504,13 @@ msgid ""
 "decipher the strange language in Törver’s descriptions that we had found in "
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
-"Ers höghet, efter mycket studie och forskande har våra vise män äntligen "
-"lyckats tyda det främmande språket i beskrivningarna vi fann i Törvers "
-"högkvarter. Från och med nu kan vi byga skeppsvarv."
+"Ers höghet, efter långa studier och mycket forskande har våra vise män "
+"äntligen lyckats tyda det främmande språket i beskrivningarna vi fann i "
+"Törvers högkvarter. Från och med nu kan vi bygga skeppsvarv."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
-msgstr "Vår spejare har blivit tillfångatagen."
+msgstr "Vår spanare har blivit tillfångatagen."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
 msgid ""
@@ -496,7 +518,7 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
-"Ers höghet, en av våra spejare har blivit tillfångatagen av piraterna och "
+"Ers höghet, en av våra spanare har blivit tillfångatagen av piraterna och "
 "tagen till deras ö. Han är den enda som kan vägen genom träsken mot Hjalmar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
@@ -511,7 +533,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
-msgstr "Ön tagen."
+msgstr "Ön erövrad"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
 msgid ""
@@ -519,19 +541,19 @@ msgid ""
 "It turns out that the pirates have left a large amount of gold, beer, and "
 "weapons on the island."
 msgstr ""
-"Ers höghet, våra soldater har tagit över ön och lyckats befria spejaren. Det"
-" visar sig att piraterna har lämnat en stor mängd guld, öl, och vapen på ön."
+"Ers höghet, våra soldater har erövrat ön och lyckats befria spanaren. Det "
+"visar sig att piraterna har lämnat en stor mängd guld, öl och vapen på ön."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
-msgstr "Spejaren kommer tillbaka"
+msgstr "Spanaren kommer tillbaka"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
 msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
-"Ers höghet, vå spejare har återvänt till vårt territorium, och han har visat"
+"Ers höghet, vår spanare har återvänt till vårt territorium och han har visat"
 " oss vägen genom träsken till Hjalmar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
@@ -544,7 +566,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
-msgstr "Den sista gränsen"
+msgstr "Det sista gränsområdet"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
 msgid ""
@@ -553,13 +575,15 @@ msgid ""
 "prepared for the heaviest battle in their lifetime."
 msgstr ""
 "Ers höghet, vi har nästan besegrat alla arméer och närmar oss nu vår sista "
-"fiende. De har väntat sig oss länge och kommer att ha förberett sig på den "
-"viktigaste striden i deras livstid."
+"fiende. De har insett under lång tid att vi kommer och är väl förberedda för"
+" sitt livs tyngsta strid."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
 "Make sure that our armies are at full strength and then act decisively."
-msgstr "Säkerställ att våra arméer så starka de kan vara och agera tveklöst."
+msgstr ""
+"Säkerställ att våra arméer är så starka de kan vara och agera utan minsta "
+"tvekan."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"
@@ -576,9 +600,9 @@ msgid ""
 "your loving people."
 msgstr ""
 "Du har lyckats med alla mål och har besegrat alla våra fiender. Du har inte "
-"bara tagit över våra konkurrerande stammar, men du har också fångat ditt "
+"bara besegrat våra konkurrerande stammar utan du har också fångat ditt "
 "älskande folks hjärtan."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."
-msgstr "Ditt namn kommer att ihågkommas i all framtid."
+msgstr "Ditt namn kommer finnas i folkets minne i all framtid."
