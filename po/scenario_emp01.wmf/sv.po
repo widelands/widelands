@@ -3,6 +3,7 @@
 # 
 # Translators:
 # D M <kamera001dm@gmail.com>, 2017
+# D M <kamera001dm@gmail.com>, 2023
 # GunChleoc, 2014
 # Hilding Kåstad <hilding.kastad@gmail.com>, 2015
 msgid ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2017\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2023\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -118,7 +119,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr "Med en arme av 150 men fick jag i uppdrag att patrullera längs vår norra gräns, vilken ligger nära Galdinbergen i en storslagen, vacker och uråldrig skog. Snart mötte vi en barbarstam som till att börja med var vänlig. Några av våra män handlade till och med med dem och deras barn kom till oss för att beundra våra rena och snygga uniformer och vapen."
+msgstr "Med en arme av 150 män fick jag i uppdrag att patrullera längs vår norra gräns, vilken ligger nära Galdinbergen i en storslagen, vacker och uråldrig skog. Snart mötte vi en barbarstam som till att börja med var vänlig. Några av våra män handlade till och med med dem och deras barn kom till oss för att beundra våra rena och snygga uniformer och vapen."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -184,7 +185,7 @@ msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr "Vi steg i land på en okänd kust och fick fridfull vila under palmerna som växte vid stranden. Men allt är inte bra. Sanningen är: när jag vaknade denna morgon såg jag inget annat än sand runt omkring oss."
+msgstr "Vi steg i land på en okänd kust och fick fridfull vila under palmerna som växte vid stranden. Men allt är inte bra. Sanningen är att när jag vaknade denna morgon såg jag inget annat än sand runt omkring oss."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:117
