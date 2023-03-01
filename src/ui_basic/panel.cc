@@ -49,6 +49,7 @@ Recti Panel::tooltip_fixed_rect_ = Recti(0, 0, 0, 0);
 // events are ignored and not passed on to any widget. This is only useful
 // for scripts that want to show off functionality without the user interfering.
 bool Panel::allow_user_input_ = true;
+bool Panel::allow_fastclick_ = true;
 FxId Panel::click_fx_ = kNoSoundEffect;
 
 inline static bool tooltip_accessibility_mode() {
