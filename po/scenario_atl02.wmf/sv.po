@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# D M <kamera001dm@gmail.com>, 2023
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2023\n"
 "Language-Team: Swedish (https://www.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +33,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:687
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:735
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: To be used in placeholders for switching texts according to
 #. current leader
@@ -47,35 +51,40 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:568
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:637
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:49
 msgid "Find a place to build a port"
-msgstr ""
+msgstr "Hitta en plats där en hamn kan byggas"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:51
 msgid "Find Portspace"
-msgstr ""
+msgstr "Hitta hamnplats"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:52
 msgid ""
 "To set foot on this island, we must first find a building space where a port"
 " can be built. Explore the nearby coast line to find such a building plot."
 msgstr ""
+"För att slå läger på denna ö måste vi först hitta en byggnadsyta där en hamn"
+" kan byggas. Utforska den närliggande kustlinjen för att hitta en sådan "
+"byggnadsyta."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:53
 msgid ""
 "After the port is built we should cancel the other ship’s expedition, to "
 "unload its wares as well."
 msgstr ""
+"När hamnen är byggd bör vi avsluta de andra skeppens expeditioner för att "
+"istället lasta av även deras varor."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:58
 msgid "Ensure the supply of construction materials"
-msgstr ""
+msgstr "Säkra tillförseln av byggnadsmaterial"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:60
 msgid "Establish Basic Production Chain"
-msgstr ""
+msgstr "Etablera grundläggande produktionskedja"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:61
 msgid ""
@@ -83,14 +92,17 @@ msgid ""
 " might or might not be needed depending on how fast the trees are growing "
 "around us. Find the balance."
 msgstr ""
+"VI kommer att behöva minst ett stenbrott, några skogshuggare och ett "
+"sågverk. En skogvaktare kan eventuellt behövas, beroende på hur snabbt "
+"träden växer runt omkring oss. Hitta balansen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:66
 msgid "Build tools quickly"
-msgstr ""
+msgstr "Tillverka verktyg snabbt"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:68
 msgid "Make New Tools"
-msgstr ""
+msgstr "Gör nya verktyg"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:69
 msgid ""
@@ -100,14 +112,19 @@ msgid ""
 "prerequisite for success on the island. Don’t forget to build a smelting "
 "works as well."
 msgstr ""
+"De flesta av våra verktyg har förlorats i skeppstragedin. Vårt folk kommer "
+"inte kunna fullfölja sina uppgifter utan ordentliga verktyg. Som tur är har "
+"vi fortfarande en del järnmalm och gott om kol. Bygg en verktygssmedja "
+"eftersom det är en förutsättning för att lyckas på ön. Glöm inte att också "
+"bygga ett smältverk."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
-msgstr ""
+msgstr "Sök efter resurser i bergen"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:76
 msgid "Build Mines"
-msgstr ""
+msgstr "Bygg gruvor"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:77
 msgid ""
@@ -115,14 +132,17 @@ msgid ""
 "be replenished soon. Explore the mountains and build at least one mine of "
 "each type to mine coal, iron and gold."
 msgstr ""
+"Nu när vi kan göra verktyg igen behöver snart vårt förråd av gruvresurser "
+"fyllas på. Utforska bergen och bygg minst en gruva av varje sort för att "
+"bryta kol, järn och guld."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:82
 msgid "Explore the surroundings"
-msgstr ""
+msgstr "Utforska omgivningarna"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:84
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Utforska dina omgivningar"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:85
 msgid ""
@@ -130,14 +150,17 @@ msgid ""
 "the others on this island are friends or foes, so we need to tread "
 "carefully. Explore the island by building at least one house for a scout."
 msgstr ""
+"Vi är ganska säkra på att vi inte är ensamma på ön. Vi vet inte om de andra "
+"på ön är vänner eller fiender så vi måsta gå varsamt framåt. Utforska ön "
+"genom att bygga minst ett hus för en spanare."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
-msgstr ""
+msgstr "Expandera ditt territorium"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:92
 msgid "Expand Territory"
-msgstr ""
+msgstr "Expandera territorium"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:93
 msgid ""
@@ -145,14 +168,17 @@ msgid ""
 "Expand our territory by building military buildings. Build some guardhouses "
 "and at least one tower for its larger view range."
 msgstr ""
+"Nu när vår bosättning växer behöver vi mer plats för byggnader. Expandera "
+"vårt territorium genom att bygga militärbyggnader. Bygg några vaktstugor och"
+" minst ett torn för dess längre utsikt."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Bygg en spindelodling och ett väveri."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Spindeltygproduktion"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:101
 msgid ""
@@ -161,6 +187,10 @@ msgid ""
 "all buildings that consume spidercloth, not forgetting the construction "
 "sites."
 msgstr ""
+"Vi behöver omgående spindeltyg eftersom det börjar ta slut. Det är därför "
+"absolut nödvändigt att spara varenda bit vi fortfarande har. Minska "
+"tillförseln till alla byggnader som konsumerar spindeltyg och glöm inte "
+"byggarbetsplatserna."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:102
 msgid ""
@@ -168,20 +198,25 @@ msgid ""
 "spidercloth to be built. Additionally, we need a spider farm and a weaving "
 "mill."
 msgstr ""
+"Under alla omständigheter måste vi därefter bygga en majsodling, då den "
+"behöver spindeltyg för att byggas. Dessutom behöver vi en spindelodling och "
+"ett väveri."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:107
 msgid "Build a trading post"
-msgstr ""
+msgstr "Bygg en handelsplats"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:109
 msgid "Upgrade Scout’s House To Trading Post"
-msgstr ""
+msgstr "Uppgradera spanarstugan till handelsplats"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:110
 msgid ""
 "To be able to pay the tributes to Kalitath, and to maintain contact with "
 "Jundlina, we need to enhance our scout’s house to a trading post."
 msgstr ""
+"För att kunna betala för Kalitaths hyllningar och behålla kontakten med "
+"Jundlina måste vi bygga ut vår spanarstuga till en handelsplats."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:115
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:128
@@ -269,6 +304,8 @@ msgid ""
 "And we need to have a scout’s house to not lose track of what is going on at"
 " the Barbarians’ territory."
 msgstr ""
+"Och vi måste ha en spanarstuga för att inte tappa greppet om vad som pågår "
+"på Barbarernas territorium."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:158
 msgid "Worship Satul and consecrate priestesses"
@@ -479,6 +516,8 @@ msgid ""
 "This will take more time, but we can reuse some of its materials. Also, I "
 "want a scout deployed and exploring at all times."
 msgstr ""
+"Detta kommer att ta längre tid men vi kan återanvända en del av dess "
+"material. Jag vill också att en spanare anställs, som hela tiden utforskar."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -600,6 +639,8 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. "
 "Hopefully our scout will get us some information soon."
 msgstr ""
+"Sidolus, jag håller med om att detta är väldigt oroande. Vi måste ta reda på"
+" mer. Förhoppningsvis kan vår spanare snart ge oss lite information."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:360
@@ -607,6 +648,8 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. We "
 "definitely need to send out a scout to gather some information."
 msgstr ""
+"Sidolus, jag håller med om att detta är väldigt oroande. Vi måste ta reda på"
+" mer. Vi måste definitivt skicka ut en spanare för att samla in information."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:366
 msgid "Allies?"
@@ -838,6 +881,12 @@ msgid ""
 "Barbarian any more, I want you to ensure we have a scout out there to gather"
 " information."
 msgstr ""
+"Må Satul väma dig, Loftomor. Detta är verkligen en bra idé så jag ger dig "
+"uppdraget att bygga ett tempel värt att dyrka vår gud. Fram tills vi är "
+"färdiga att be för Satuls styrka måste vi hålla ett öga på vår prinsessa och"
+" barbaren. Vi borde stoppa vår köpmans leveranser för att inte slösa bort "
+"några fler varor till denna barbar och jag vill att du säkerställer att vi "
+"har en spanare där ute som samlar information."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:536
 msgid "Temple Completed"
@@ -906,6 +955,11 @@ msgid ""
 "issue now and forever on this island. There is no other way to live here in "
 "peace than to defeat them."
 msgstr ""
+"Sidolus, de lät mig inte gå. Jag mötte vår spanare och han lyckades hjälpa "
+"mig att smyga ut när jag insåg att de höll mig fången efter att jag "
+"uttryckte vissa bekymmer över våra tidigare avtal. Så vi måste lösa "
+"barbarproblemet på denna ö nu och för all framtid. Det finns ingen annan väg"
+" för att kunna leva här i fred än att besegra dem."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:584
 msgid "Jundlina Is Relieved"
@@ -996,6 +1050,9 @@ msgid ""
 "First you need to upgrade our scout’s house to a trading post. Then you need"
 " to send the demanded tributes of gold, iron, coal, and logs."
 msgstr ""
+"Först måste du uppgradera våran spanarstuga till en handelsplats. Sedan "
+"måste du skicka den förväntade hyllningen innehållande guld, järn, kol och "
+"stockar."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:630
 msgid "Trading Post Built"
@@ -1215,13 +1272,13 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr ""
+msgstr "Spanarstuga"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:76
 msgid "scouting"
-msgstr ""
+msgstr "utforska"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:8
@@ -1299,6 +1356,8 @@ msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
 msgstr ""
+"Du måste ansluta denna flagga till en spanarstuga innan du kan skicka hit en"
+" spanare."
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
 #. House
@@ -1325,6 +1384,7 @@ msgstr ""
 msgctxt "atlanteans_worker"
 msgid "A trader is a scout who needs a horse to transport the wares."
 msgstr ""
+"En handelsman är en spanare som behöver en häst för transporten av varor."
 
 #. TRANSLATORS: Purpose helptext for an atlantean worker: Satul's Initiate
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:43

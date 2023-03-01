@@ -7988,7 +7988,7 @@ msgstr "Út elvetése"
 
 #: ../../src/wui/fieldaction.cc:652
 msgid "Go to road"
-msgstr ""
+msgstr "Vissza a félkész úthoz"
 
 #: ../../src/wui/fieldaction.cc:660
 msgid "Cancel road and start building waterway"
@@ -8004,7 +8004,7 @@ msgstr "Vízi út elvetése"
 
 #: ../../src/wui/fieldaction.cc:678
 msgid "Go to waterway"
-msgstr ""
+msgstr "Vissza a félkész vízi úthoz"
 
 #: ../../src/wui/fieldaction.cc:681
 msgid "Cancel waterway and start building road"
@@ -8873,7 +8873,7 @@ msgstr "Kompok"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../src/wui/map_tags.cc:58
 msgid "The map allows building ferries, ferry yards and waterways"
-msgstr ""
+msgstr "A térképen használhatók kompok, vízi utak és csónakkészítő műhelyek"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:61

@@ -58,7 +58,7 @@ msgstr "Besegra Törver"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
 msgid "Defeat the Armies of Törver"
-msgstr "Besegra Törvers Arméer"
+msgstr "Besegra Törvers arméer"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
@@ -154,7 +154,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
-msgstr "Befria vår spejare från piraterna"
+msgstr "Befria vår spanare från piraterna"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
@@ -162,7 +162,7 @@ msgstr "Erövra högborgen på ön"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
-msgstr "Spejaren hålls fången här."
+msgstr "Spanaren hålls fången här."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
 msgid "Defeat Hjalmar"
@@ -336,9 +336,9 @@ msgid ""
 "easily. In a desperate move Törver has called in a group of hardened "
 "mercenaries."
 msgstr ""
-"Ers höghet, striden med Törver fortgår ärevördigt och vi har redan slagit "
-"den största delen av hans armé. Men den här fienden kommer inte bli lätt "
-"besegrad. I desperation har Törver nu kallat in en grupp förhärdade "
+"Ers höghet, striden mot Törver fortgår ärevördigt och vi har redan besegrat "
+"den största delen av hans armé. Men den här fienden kommer inte att besegras"
+" enkelt. I desperation har Törver nu kallat in en grupp förhärdade "
 "legoknektar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
@@ -412,7 +412,7 @@ msgid ""
 msgstr ""
 "Med vår lyckade expansion in i detta område bör vi fundera på att bygga en "
 "lagerbyggnad rakt sydväst om vaktposten för att vidare utforska det här "
-"området. Det finns en bra byggplats bara tre steg ifrån vaktposten."
+"området. Det finns en bra byggnadsyta bara tre steg ifrån vaktposten."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
@@ -490,7 +490,7 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
-"Ers höghet, tack vare våra framgångsrika försök att driva ut piraterna, har "
+"Ers höghet, tack vare våra framgångsrika försök att driva ut piraterna har "
 "många av dem flytt i små båtar. Det är inte känt åt vilket håll de har "
 "flytt."
 
@@ -510,7 +510,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
-msgstr "Vår spejare har blivit tillfångatagen."
+msgstr "Vår spanare har blivit tillfångatagen."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
 msgid ""
@@ -518,7 +518,7 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
-"Ers höghet, en av våra spejare har blivit tillfångatagen av piraterna och "
+"Ers höghet, en av våra spanare har blivit tillfångatagen av piraterna och "
 "tagen till deras ö. Han är den enda som kan vägen genom träsken mot Hjalmar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
@@ -533,7 +533,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
-msgstr "Ön tagen."
+msgstr "Ön erövrad"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
 msgid ""
@@ -541,19 +541,19 @@ msgid ""
 "It turns out that the pirates have left a large amount of gold, beer, and "
 "weapons on the island."
 msgstr ""
-"Ers höghet, våra soldater har erövrat ön och lyckats befria spejaren. Det "
+"Ers höghet, våra soldater har erövrat ön och lyckats befria spanaren. Det "
 "visar sig att piraterna har lämnat en stor mängd guld, öl och vapen på ön."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
-msgstr "Spejaren kommer tillbaka"
+msgstr "Spanaren kommer tillbaka"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
 msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
-"Ers höghet, vår spejare har återvänt till vårt territorium och han har visat"
+"Ers höghet, vår spanare har återvänt till vårt territorium och han har visat"
 " oss vägen genom träsken till Hjalmar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
