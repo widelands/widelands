@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# D M <kamera001dm@gmail.com>, 2023
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2023\n"
 "Language-Team: Swedish (https://www.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -171,12 +175,13 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Send a Scout to Spy on the Empire"
-msgstr ""
+msgstr "Skicka en spejare för att spionera på Imperiet"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:83
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
 msgstr ""
+"Bygg en spejarbostad nära gränsen för att ta reda på Imperiets hemligheter."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:88
 msgid "Decipher the poem"
@@ -184,7 +189,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Understand the Poem the Scout has Found in the Empire"
-msgstr ""
+msgstr "Förstå dikten som spejaren hittade i Imperiet"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:91
@@ -327,6 +332,8 @@ msgid ""
 "My scouts no longer report any signs of living creatures nearby. We will "
 "start building our new home here."
 msgstr ""
+"Mina spejare rapporterar inte längre några tecken på levande varelser i "
+"närheten. Vi kommer påbörja bygget av vårt nya hem här."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:163
@@ -360,6 +367,9 @@ msgid ""
 "to behold but not suited for buildings. Let’s find out what we can discover "
 "in the south."
 msgstr ""
+"Spejarna rapporterade att markerna norröver är grovhuggna kullar, vackra att"
+" betrakta men inte lämpade för byggnader. Låt oss ta reda på vad vi kan "
+"upptäcka i söder."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:179
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:188
@@ -684,14 +694,17 @@ msgid ""
 "As for expansion – I wonder how strictly he can possibly control us. Perhaps"
 " we should send a scout to spy on him…"
 msgstr ""
+"När det gäller expansion – jag undrar hur strikt han möjligen kan "
+"kontrollera oss. Kanske vi skulle skicka en spejare för att spionera på "
+"honom..."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "The Scout Discovered Something"
-msgstr ""
+msgstr "Spejaren upptäckte någonting"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:331
 msgid "Our scout returned"
-msgstr ""
+msgstr "Vår spejare återvände"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:333
@@ -701,6 +714,10 @@ msgid ""
 "translated it into our language. If I did not mistranslate, it runs as "
 "follows:"
 msgstr ""
+"Hövding Reebaud! Vår spejare kom just tillbaka. Han har hittat en dikt på "
+"det konstiga språk denna prokonsul talar. Med vissa svårigheter har jag "
+"översatt det till vårat språk. Om jag inte har översatt den fel lyder den "
+"som följer:"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:348

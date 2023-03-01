@@ -4,7 +4,7 @@
 # Translators:
 # Daniel Nylander <po@danielnylander.se>, 2005
 # D M <kamera001dm@gmail.com>, 2017
-# D M <kamera001dm@gmail.com>, 2021
+# D M <kamera001dm@gmail.com>, 2021,2023
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2018
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-02-19 02:46+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2021\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -320,7 +320,7 @@ msgctxt "amazons_ware"
 msgid ""
 "A small bite to keep the workers digging for gold dust and granite strong "
 "and working. The scout also consumes rations on her scouting trips."
-msgstr ""
+msgstr "En liten tugga för att hålla arbetarna som gräver efter guldstoft och granit starka och arbetande. Scouten äter också matbitar under sina upptäcktsfärder."
 
 #. TRANSLATORS: Helptext for an amazon ware: Ration, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:250
@@ -1246,7 +1246,7 @@ msgctxt "amazons_building"
 msgid ""
 "You need to connect this flag to a scout’s hut before you can send a scout "
 "here."
-msgstr ""
+msgstr "Du måste ansluta denna flagga till en scouthydda innan du kan skicka en scout hit."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Scout's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1350
@@ -1260,7 +1260,7 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "The scout pauses %s before going to work again."
-msgstr ""
+msgstr "Scouten pausar %s innan arbetet återupptas."
 
 #. TRANSLATORS: Lore author helptext for an amazon production site: Rope
 #. Weaver's Booth
@@ -1407,7 +1407,7 @@ msgctxt "amazons_building"
 msgid ""
 "Prepares rations to feed the scouts and the workers digging for gold dust "
 "and granite."
-msgstr ""
+msgstr "Tillagar matbitar för att mätta scouterna och arbetarna som gräver efter guldstoft och granit."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Food
 #. Preserver
@@ -2983,7 +2983,7 @@ msgid ""
 "Fish is one of the biggest food resources of the Atlanteans. It has to be "
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
-msgstr "Fisk är en av Atlanternas viktigaste matresurser. Den måste rökas i ett rökeri innan den levereras till gruvor, träningsplatser och spejare."
+msgstr "Fisk är en av Atlanternas viktigaste matresurser. Den måste rökas i ett rökeri innan den levereras till gruvor, träningsplatser och spanare."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Smoked Fish
 #: ../../data/tribes/initialization/atlanteans/units.lua:501
@@ -3071,7 +3071,7 @@ msgid ""
 "This tasty bread is made in bakeries out of cornmeal, blackroot flour and "
 "water. It is appreciated as basic food by miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
-msgstr "Detta välsmakande bröd bakas i bagerier av majsmjöl, svartrotsmjöl och vatten. Det uppskattas som basföda för gruvarbetare, spejare och soldater i träningsanläggningar (labyrint och fånghåla)."
+msgstr "Detta välsmakande bröd bakas i bagerier av majsmjöl, svartrotsmjöl och vatten. Det uppskattas som basföda för gruvarbetare, spanare och soldater i träningsanläggningar (labyrint och fånghåla)."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Quartz
 #: ../../data/tribes/initialization/atlanteans/units.lua:589
@@ -4144,7 +4144,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "Du måste ansluta denna flagga till en spanarstuga innan du kan skicka hit en spanare."
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
 #. House
@@ -4178,7 +4178,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1603
 msgctxt "atlanteans_building"
 msgid "A scout answering a soldier"
-msgstr ""
+msgstr "En spanare svarar en soldat"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an empire production site: Sawmill
@@ -4215,7 +4215,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Smokes meat and fish to feed the scouts and miners and to train soldiers in "
 "the dungeon and labyrinth."
-msgstr ""
+msgstr "Röker kött och fisk för att mätta spanarna och gruvarbetarna och för att träna soldaterna i fängelsehålan och labyrinten."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site:  Smokery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1627
@@ -4266,7 +4266,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1650
 msgctxt "atlanteans_building"
 msgid "Bakes bread to feed the scouts and miners and to train soldiers."
-msgstr "Bakar bröd för att förse spejare och gruvarbetare med mat och för att träna soldater."
+msgstr "Bakar bröd för att förse spanare och gruvarbetare med mat och för att träna soldater."
 
 #. TRANSLATORS: Note helptext for an atlantean production site: Bakery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1652
@@ -5946,7 +5946,7 @@ msgstr "Sår ute på fälten."
 #: ../../data/tribes/initialization/barbarians/units.lua:668
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
-msgstr ""
+msgstr "Bakar pitabröd åt gruvarbetarna, soldaterna och spejarna."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Brewer
 #: ../../data/tribes/initialization/barbarians/units.lua:675
@@ -6373,7 +6373,7 @@ msgctxt "barbarians_building"
 msgid ""
 "You need to connect this flag to a scout’s hut before you can send a scout "
 "here."
-msgstr ""
+msgstr "Du måste ansluta denna flagga till en spejarkoja innan du kan skicka en spejare hit."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Scout's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1241
@@ -6388,7 +6388,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1243
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe"
-msgstr ""
+msgstr "Chat’Karuth<br>vid edsavläggningsceremonin för den första spejartruppen"
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Wood Hardener
 #: ../../data/tribes/initialization/barbarians/units.lua:1254
@@ -10436,14 +10436,14 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1370
 msgctxt "empire_building"
 msgid "A belated scout’s report"
-msgstr ""
+msgstr "En försenad spanares rapport"
 
 #: ../../data/tribes/initialization/empire/units.lua:1371
 msgctxt "empire_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "Du måste ansluta denna flagga till en spanarbostad innan du kan skicka hit en spanare."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10707,7 +10707,7 @@ msgctxt "empire_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
 "mines."
-msgstr ""
+msgstr "Tillagar matbitar för spanare och matbitar och måltider för att mätta gruvarbetarna i våra gruvor."
 
 #. TRANSLATORS: Performance helptext for an empire production site: Inn
 #: ../../data/tribes/initialization/empire/units.lua:1559
@@ -12853,7 +12853,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "Fisk röks i ett rökeri. Rökt fisk konsumeras sedan av tränande soldater eller görs om till matbitar och måltider åt gruvarbetare och spejare."
 
 #. TRANSLATORS: Helptext for a frisian ware: Smoked Meat
 #: ../../data/tribes/initialization/frisians/units.lua:273
@@ -12861,7 +12861,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "Kött röks i ett rökeri. Rökt kött konsumeras sedan av tränande soldater eller görs om till matbitar och måltider åt gruvarbetare och spejare."
 
 #. TRANSLATORS: Helptext for a frisian ware: Ration, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:285
@@ -13258,7 +13258,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:816
 msgctxt "frisians_worker"
 msgid "Prepares rations and meals for miners and scouts."
-msgstr ""
+msgstr "Tillagar matbitar och måltider åt gruvarbetare och spejare."
 
 #. TRANSLATORS: Helptext for a frisian worker: Geologist
 #: ../../data/tribes/initialization/frisians/units.lua:826
@@ -13878,14 +13878,14 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1737
 msgctxt "frisians_building"
 msgid "The spokesman of the scouts’ labor union"
-msgstr ""
+msgstr "Talesmannen för spejarnas fackförbund."
 
 #: ../../data/tribes/initialization/frisians/units.lua:1738
 msgctxt "frisians_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "Du måste ansluta denna flagga till en spejarbostad innan du kan skicka hit en spejare."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Scout's
 #. House
@@ -13893,7 +13893,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The scout pauses %s before going to work again."
-msgstr ""
+msgstr "Spejaren pausar %s innan arbetet påbörjas igen."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1751
@@ -14270,7 +14270,7 @@ msgctxt "frisians_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
 "mines."
-msgstr ""
+msgstr "Förbereder matbitar för spejare och matbitar och måltider för att mätta gruvarbetarna i alla gruvor."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Barracks
 #: ../../data/tribes/initialization/frisians/units.lua:1943
@@ -15304,7 +15304,7 @@ msgstr "%s eller bättre"
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
 #: ../../data/tribes/scripting/help/building_help.lua:697
 msgid "Worker uses:"
-msgstr ""
+msgstr "Arbetare använder:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
@@ -15354,7 +15354,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/building_help.lua:796
 #: ../../data/tribes/scripting/help/ware_help.lua:60
 msgid "Ware produced:"
-msgstr ""
+msgstr "Vara producerad:"
 
 #. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
 #. productionsite
@@ -15762,7 +15762,7 @@ msgstr ""
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:142
 msgid "Show scouting expeditions"
-msgstr ""
+msgstr "Visa utforskningsexpeditioner"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:144
@@ -15974,7 +15974,7 @@ msgstr "Producent"
 #. consumes a ware
 #: ../../data/tribes/scripting/help/ware_help.lua:125
 msgid "Consumer"
-msgstr ""
+msgstr "Förbrukare"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
@@ -15985,7 +15985,7 @@ msgstr ""
 #. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:53
 msgid "Worker recruited:"
-msgstr ""
+msgstr "Arbetare rekryterad:"
 
 #. TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can
 #. work
