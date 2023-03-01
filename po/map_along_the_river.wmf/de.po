@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-02-19 02:46+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -62,8 +62,8 @@ msgstr "Besiege die Armeen von Törver"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
-"Törver is the enemy in the north, who is fighting under the red banner."
-msgstr "Törver ist der Feind im Norden, der unter dem roten Banner kämpft."
+"Törver is the enemy in the North, who is fighting under the red banner."
+msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
@@ -92,11 +92,9 @@ msgstr "Erobere den Piratenwachposten"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
 msgid ""
-"Conquer the pirate sentry near the brook to the east. Hopefully we will find"
+"Conquer the pirate sentry near the brook to the East. Hopefully we will find"
 " out what happened to the gold in this area."
 msgstr ""
-"Erobere den Piratenwachposten in der Nähe des Bachs im Osten. Hoffentlich "
-"finden wir heraus was mit dem Gold aus der Gegend passiert ist."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
