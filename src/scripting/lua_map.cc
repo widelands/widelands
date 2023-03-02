@@ -7026,11 +7026,27 @@ int LuaShip::get_debug_worker_economy(lua_State* L) {
    .. attribute:: destination
 
       (RO) Either :const:`nil` if there is no current destination, otherwise
-      the :class:`PortDock`.
+      the :class:`PortDock` or :class:`Ship`.
 */
 // UNTESTED
 int LuaShip::get_destination(lua_State* L) {
-	return upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_destination(get_egbase(L)));
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Ship* ship = get(L, egbase);
+
+	if (Widelands::PortDock* pd = ship->get_destination_port(egbase); pd != nullptr) {
+		return upcasted_map_object_to_lua(L, pd);
+	}
+	if (Widelands::Ship* s = ship->get_destination_ship(egbase); s != nullptr) {
+		return upcasted_map_object_to_lua(L, s);
+	}
+#if 0  // TODO(Nordfriese): Pinned notes don't have a Lua class yet
+	if (Widelands::PinnedNote* note = ship->get_destination_note(egbase); note != nullptr) {
+		return upcasted_map_object_to_lua(L, note);
+	}
+#endif
+
+	lua_pushnil(L);
+	return 1;
 }
 
 /* RST

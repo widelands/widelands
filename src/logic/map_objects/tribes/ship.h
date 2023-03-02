@@ -29,6 +29,7 @@
 
 namespace Widelands {
 
+class PinnedNote;
 struct ShipFleet;
 
 // This can't be part of the Ship class because of forward declaration in game.h
@@ -98,11 +99,16 @@ struct Ship : Bob {
 	// Returns the fleet the ship is a part of.
 	[[nodiscard]] ShipFleet* get_fleet() const;
 
-	[[nodiscard]] PortDock* get_destination(EditorGameBase& e) const {
-		return destination_.get(e);
-	}
-	void set_destination(EditorGameBase&, PortDock*);
-	bool is_on_destination_dock() const;
+	/* A ship's destination can be a port, or another ship, or a pinned note (or nullptr). */
+	void set_destination(EditorGameBase& egbase, MapObject* dest, bool is_playercommand = false);
+	[[nodiscard]] PortDock* get_destination_port(EditorGameBase& e) const;
+	[[nodiscard]] Ship* get_destination_ship(EditorGameBase& e) const;
+	[[nodiscard]] PinnedNote* get_destination_note(EditorGameBase& e) const;
+	[[nodiscard]] const PortDock* get_destination_port(const EditorGameBase& e) const;
+	[[nodiscard]] const Ship* get_destination_ship(const EditorGameBase& e) const;
+	[[nodiscard]] const PinnedNote* get_destination_note(const EditorGameBase& e) const;
+	[[nodiscard]] bool is_on_destination_dock() const;
+	[[nodiscard]] bool has_destination() const;
 
 	// Returns the last visited portdock of this ship or nullptr if there is none or
 	// the last visited was removed.
@@ -338,7 +344,7 @@ private:
 	ShipType pending_refit_{ShipType::kTransport};
 	std::string shipname_;
 
-	OPtr<PortDock> destination_{nullptr};
+	OPtr<MapObject> destination_{nullptr};
 	std::unique_ptr<Request> warship_soldier_request_;
 
 	struct Expedition {

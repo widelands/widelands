@@ -100,7 +100,8 @@ enum class QueueCommandTypes : uint8_t {
 	kExpeditionConfig,
 	kPickCustomStartingPosition,
 	kShipRefit,
-	kWarshipCommand,  // 137
+	kWarshipCommand,
+	kShipSetDestination,  // 138
 
 	kCallEconomyBalance = 200,
 	kDeleteMessage,

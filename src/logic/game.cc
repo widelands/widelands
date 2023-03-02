@@ -1171,6 +1171,11 @@ void Game::send_player_ship_explore_island(const Ship& ship, IslandExploreDirect
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
+void Game::send_player_ship_set_destination(const Ship& ship, const MapObject* dest) {
+	send_player_command(new CmdShipSetDestination(
+	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), dest == nullptr ? 0 : dest->serial()));
+}
+
 void Game::send_player_sink_ship(const Ship& ship) {
 	send_player_command(
 	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));

@@ -105,17 +105,24 @@ void IdleWareSupply::set_economy(Economy* const e) {
  */
 PlayerImmovable* IdleWareSupply::get_position(Game& game) {
 	MapObject* const loc = ware_.get_location(game);
+	assert(loc != nullptr);
 
-	if (upcast(PlayerImmovable, playerimmovable, loc)) {
-		return playerimmovable;
+	if (loc->descr().type() > MapObjectType::IMMOVABLE) {
+		if (upcast(PlayerImmovable, playerimmovable, loc); playerimmovable != nullptr) {
+			return playerimmovable;
+		}
 	}
 
-	if (upcast(Worker, worker, loc)) {
-		return worker->get_location(game);
+	if (loc->descr().type() >= MapObjectType::WORKER) {
+		if (upcast(Worker, worker, loc); worker != nullptr) {
+			return worker->get_location(game);
+		}
 	}
 
-	if (upcast(Ship, ship, loc)) {
-		if (PortDock* pd = ship->get_destination(game)) {
+	if (loc->descr().type() == MapObjectType::SHIP) {
+		upcast(Ship, ship, loc);
+		assert(ship != nullptr);
+		if (PortDock* pd = ship->get_destination_port(game); pd != nullptr) {
 			return pd;
 		}
 		return ship->get_fleet()->get_arbitrary_dock();

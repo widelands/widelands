@@ -328,8 +328,7 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 		case Widelands::ShipType::kTransport:
 			switch (state) {
 			case Widelands::ShipStates::kTransport:
-				if (ship.get_destination(iplayer().egbase()) != nullptr &&
-				    ship.get_fleet()->get_schedule().is_busy(ship)) {
+				if (ship.has_destination() && ship.get_fleet()->get_schedule().is_busy(ship)) {
 					status = ShipFilterStatus::kShipping;
 				} else {
 					status = ShipFilterStatus::kIdle;
