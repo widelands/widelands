@@ -218,9 +218,7 @@ public:
 	[[nodiscard]] const std::string& get_warehouse_name() const {
 		return warehouse_name_;
 	}
-	void set_warehouse_name(const std::string& name) {
-		warehouse_name_ = name;
-	}
+	void set_warehouse_name(const std::string& name);
 
 	void log_general_info(const EditorGameBase&) const override;
 
