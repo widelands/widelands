@@ -73,7 +73,11 @@ public:
 		return ship_names_;
 	}
 
-	const uint32_t max_hitpoints_, min_attack_, max_attack_, defense_, attack_accuracy_;
+	const uint32_t max_hitpoints_;
+	const uint32_t min_attack_;
+	const uint32_t max_attack_;
+	const uint32_t defense_;
+	const uint32_t attack_accuracy_;
 
 private:
 	DirAnimations sail_anims_;
@@ -253,6 +257,7 @@ struct Ship : Bob {
 	[[nodiscard]] bool has_battle() const {
 		return !battles_.empty();
 	}
+	[[nodiscard]] unsigned get_sea_attack_soldier_bonus(const EditorGameBase& egbase) const;
 
 	[[nodiscard]] bool can_be_attacked() const;
 	[[nodiscard]] bool can_attack() const;
