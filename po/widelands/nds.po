@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-02-22 02:57+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -88,14 +88,14 @@ msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:699 ../../src/base/i18n.cc:407
+#: ../../data/scripting/richtext.lua:699 ../../src/base/i18n.cc:400
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:701 ../../src/base/i18n.cc:411
+#: ../../data/scripting/richtext.lua:701 ../../src/base/i18n.cc:404
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s of %2$s"
@@ -105,7 +105,7 @@ msgstr "%1$s of %2$s"
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/richtext.lua:703 ../../data/scripting/richtext.lua:708
-#: ../../src/base/i18n.cc:415 ../../src/base/i18n.cc:424
+#: ../../src/base/i18n.cc:408 ../../src/base/i18n.cc:417
 #: ../../src/logic/addons.cc:203
 #, c-format
 msgid "%1$s, %2$s"
@@ -114,7 +114,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: X hours and Y minutes
-#: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:419
+#: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:412
 #: ../../src/ui_basic/spinbox.cc:484
 #, c-format
 msgid "%1$s and %2$s"
@@ -169,7 +169,7 @@ msgstr ","
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:434
+#: ../../src/base/i18n.cc:427
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr "%1% %2%"
@@ -602,23 +602,23 @@ msgid ""
 "incompatible."
 msgstr "Widelands kunn de Datei »%s« nich laden. Dat Formaat is openbaar nich verdragelk."
 
-#: ../../src/editor/editorinteractive.cc:613
+#: ../../src/editor/editorinteractive.cc:606
 msgid "Exit Editor Confirmation"
 msgstr "Bewarker würrelk verlaten?"
 
-#: ../../src/editor/editorinteractive.cc:613
+#: ../../src/editor/editorinteractive.cc:606
 msgid "Unsaved Map"
 msgstr "Nich sekert Kaart"
 
-#: ../../src/editor/editorinteractive.cc:614
+#: ../../src/editor/editorinteractive.cc:607
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "De Kaart is nich sekert worden. Willst du würrelk ofbreken?"
 
-#: ../../src/editor/editorinteractive.cc:615
+#: ../../src/editor/editorinteractive.cc:608
 msgid "Are you sure you wish to exit the editor?"
 msgstr "Willst du de Bewarker würrelk verlaten?"
 
-#: ../../src/editor/editorinteractive.cc:1109 ../../src/logic/addons.cc:47
+#: ../../src/editor/editorinteractive.cc:1102 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1333
@@ -639,7 +639,7 @@ msgstr "Willst du de Bewarker würrelk verlaten?"
 msgid "Error"
 msgstr "Fehler"
 
-#: ../../src/editor/editorinteractive.cc:1111 ../../src/ui_fsmenu/main.cc:233
+#: ../../src/editor/editorinteractive.cc:1104 ../../src/ui_fsmenu/main.cc:233
 #: ../../src/wlapplication.cc:1643
 #, c-format
 msgid ""
@@ -651,14 +651,14 @@ msgid ""
 "Please add this information to your report."
 msgstr "Een Fehler is uptreden. De Fehler-Naricht is:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst mehr Narichten över dat Probleem in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s.\nBidde föög deese Informatioon to de Fehler-Mellen hento."
 
-#: ../../src/editor/editorinteractive.cc:1145
+#: ../../src/editor/editorinteractive.cc:1138
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Lade Kaart »%s« …"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1167
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:112
+#: ../../src/editor/editorinteractive.cc:1160
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:113
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:583
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
 #: ../../src/logic/map.h:226 ../../src/wui/mapdata.cc:50
@@ -666,23 +666,23 @@ msgid "No Name"
 msgstr "Keen Naam"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1170
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:113
+#: ../../src/editor/editorinteractive.cc:1163
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:114
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:584
 #: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:367
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Nüms"
 
-#: ../../src/editor/editorinteractive.cc:1194
+#: ../../src/editor/editorinteractive.cc:1187
 msgid "Loading world…"
 msgstr "Lade de Welt …"
 
-#: ../../src/editor/editorinteractive.cc:1394
+#: ../../src/editor/editorinteractive.cc:1387
 msgid "Publish Map"
 msgstr "Kaart publik maken"
 
-#: ../../src/editor/editorinteractive.cc:1395
+#: ../../src/editor/editorinteractive.cc:1388
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -694,50 +694,50 @@ msgid ""
 "Hint: %5$s\n"
 msgstr "Willst du deese Kaart würrelk im Internett publik maken?\n\nNaam: %1$s\nVerwieders-Naam: %2$s\nSchriever: %3$s\nBeschrieven: %4$s\nTipp: %5$s\n"
 
-#: ../../src/editor/editorinteractive.cc:1419
+#: ../../src/editor/editorinteractive.cc:1412
 msgid "Login Error"
 msgstr "Fehler bi’m Anmellen"
 
-#: ../../src/editor/editorinteractive.cc:1424
+#: ../../src/editor/editorinteractive.cc:1417
 msgid "Uploading Add-On…"
 msgstr "Lade Verwiedern up …"
 
-#: ../../src/editor/editorinteractive.cc:1425
+#: ../../src/editor/editorinteractive.cc:1418
 msgid "Saving map…"
 msgstr "Sekere de Kaart …"
 
-#: ../../src/editor/editorinteractive.cc:1444
+#: ../../src/editor/editorinteractive.cc:1437
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:310
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:365
 msgid "Error Saving Map!"
 msgstr "Fehler bi’n Kaart sekern!"
 
-#: ../../src/editor/editorinteractive.cc:1450
+#: ../../src/editor/editorinteractive.cc:1443
 msgid "Packaging add-on…"
 msgstr "Pack dat Verwiedern …"
 
-#: ../../src/editor/editorinteractive.cc:1500
+#: ../../src/editor/editorinteractive.cc:1493
 msgid "Add-On Generation Error"
 msgstr "Fehler bi’m Verwiedern-Maken"
 
-#: ../../src/editor/editorinteractive.cc:1501
+#: ../../src/editor/editorinteractive.cc:1494
 msgid "The add-on could not be written to the disk."
 msgstr "Dat Verwiedern kunn nich up de Fastplatt schrieven worden."
 
-#: ../../src/editor/editorinteractive.cc:1508
+#: ../../src/editor/editorinteractive.cc:1501
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
 msgid "Uploading…"
 msgstr "Lade up …"
 
-#: ../../src/editor/editorinteractive.cc:1514
+#: ../../src/editor/editorinteractive.cc:1507
 msgid "Upload Error"
 msgstr "Fehler bi’m Upladen"
 
-#: ../../src/editor/editorinteractive.cc:1536
+#: ../../src/editor/editorinteractive.cc:1529
 msgid "Success"
 msgstr "Erfolg"
 
-#: ../../src/editor/editorinteractive.cc:1537
+#: ../../src/editor/editorinteractive.cc:1530
 msgid "The add-on was uploaded successfully."
 msgstr "Dat Verwiedern is upladen worden."
 
@@ -3494,15 +3494,15 @@ msgstr "Nich utköort"
 msgid "No matches"
 msgstr "Nix funnen"
 
-#: ../../src/ui_basic/panel.cc:294
+#: ../../src/ui_basic/panel.cc:295
 msgid "Please wait…"
 msgstr "Bidde wachten …"
 
-#: ../../src/ui_basic/panel.cc:424
+#: ../../src/ui_basic/panel.cc:425
 msgid "Game ending – please wait…"
 msgstr "Speel ennt – bidde wachten …"
 
-#: ../../src/ui_basic/progresswindow.cc:77
+#: ../../src/ui_basic/progresswindow.cc:78
 msgid "Loading…"
 msgstr "Lade …"
 
@@ -8591,31 +8591,31 @@ msgstr "Vergrotern torüggsetten"
 msgid "Zoom –"
 msgstr "Verkleenern"
 
-#: ../../src/wui/interactive_base.cc:833
+#: ../../src/wui/interactive_base.cc:838
 #, c-format
 msgid "Road length: %1$u (%2$u)"
 msgstr "Straatenlängde: %1$u (%2$u)"
 
-#: ../../src/wui/interactive_base.cc:835
+#: ../../src/wui/interactive_base.cc:840
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
 msgstr "Priellängde: %1$u (%2$u) / %3$u"
 
-#: ../../src/wui/interactive_base.cc:840
+#: ../../src/wui/interactive_base.cc:845
 #, c-format
 msgid "Road length: %u"
 msgstr "Straatenlängde: %u"
 
-#: ../../src/wui/interactive_base.cc:843
+#: ../../src/wui/interactive_base.cc:848
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
 msgstr "Priellängde: %1$u / %2$u"
 
-#: ../../src/wui/interactive_base.cc:1725
+#: ../../src/wui/interactive_base.cc:1730
 msgid "Failed saving screenshot!"
 msgstr "Billschirmfoto to sekern fehlslagen!"
 
-#: ../../src/wui/interactive_base.cc:1729
+#: ../../src/wui/interactive_base.cc:1734
 msgid "Screenshot saved"
 msgstr "Billschirmfoto sekert"
 

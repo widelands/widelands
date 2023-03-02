@@ -336,6 +336,13 @@ public:
 		return allow_user_input_;
 	}
 
+	static void set_allow_fastclick(bool const t) {
+		allow_fastclick_ = t;
+	}
+	static bool allow_fastclick() {
+		return allow_fastclick_;
+	}
+
 	void set_tooltip(const std::string&);
 	const std::string& tooltip() const {
 		return tooltip_;
@@ -572,6 +579,7 @@ private:
 	static Vector2i tooltip_fixed_pos_;
 	static Recti tooltip_fixed_rect_;
 	static bool allow_user_input_;
+	static bool allow_fastclick_;
 
 	static FxId click_fx_;
 

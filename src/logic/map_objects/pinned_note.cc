@@ -90,6 +90,11 @@ void PinnedNote::draw(const EditorGameBase& egbase,
                       const Coords& coords,
                       float scale,
                       RenderTarget* dst) const {
+	if (get_owner() == nullptr) {
+		// Note not yet fully initialized, can happen during creation
+		return;
+	}
+
 	if (egbase.is_game()) {
 		const InteractivePlayer* ipl = dynamic_cast<const Game&>(egbase).get_ipl();
 		if (ipl != nullptr) {

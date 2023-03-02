@@ -25,10 +25,15 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install gettext transifex-client translate-toolkit appstream desktop-file-utils
+        sudo apt-get install gettext translate-toolkit appstream desktop-file-utils
         pip install pyformat
+        mkdir $HOME/txcli
+        pushd $HOME/txcli
+        curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+        popd
     - name: Synchronizing translations
       run: |
+        export PATH="$HOME/txcli:$PATH"
         echo "${{ secrets.TXAUTH }}" > ~/.transifexrc
         git config --global user.name "The Widelands Translations Bot"
         git config --global user.email "bunnybot@widelands.org"

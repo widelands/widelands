@@ -95,6 +95,7 @@ private:
 	UI::Button* btn_warship_stay_;
 	UI::Button* btn_warship_attack_;
 	UI::Dropdown<Widelands::OPtr<Widelands::MapObject>>* set_destination_;
+	bool is_updating_destination_dropdown_{false};
 	ItemWaresDisplay* display_;
 	AttackPanel* warship_soldiers_display_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;

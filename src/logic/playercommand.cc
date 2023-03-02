@@ -1255,7 +1255,7 @@ CmdShipSetDestination::CmdShipSetDestination(StreamRead& des)
 void CmdShipSetDestination::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial_));
 	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
-		ship->set_destination(game, game.objects().get_object(destination_));
+		ship->set_destination(game, game.objects().get_object(destination_), true);
 	}
 }
 

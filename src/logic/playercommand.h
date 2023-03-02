@@ -529,7 +529,10 @@ private:
 
 struct CmdShipSetDestination : public PlayerCommand {
 	CmdShipSetDestination() = default;  // For savegame loading
-	CmdShipSetDestination(const Time& t, PlayerNumber const p, Serial s, Serial dest)
+	CmdShipSetDestination(const Time& t,
+	                     PlayerNumber const p,
+	                     Serial s,
+	                     Serial dest)
 	   : PlayerCommand(t, p), serial_(s), destination_(dest) {
 	}
 

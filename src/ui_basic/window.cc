@@ -246,7 +246,7 @@ void Window::move_out_of_the_way() {
  * Moves the mouse to the child panel that is activated as fast click panel
  */
 void Window::warp_mouse_to_fastclick_panel() {
-	if (fastclick_panel_ != nullptr) {
+	if (fastclick_panel_ != nullptr && Panel::allow_fastclick()) {
 		Vector2i pt(fastclick_panel_->get_w() / 2, fastclick_panel_->get_h() / 2);
 		UI::Panel* p = fastclick_panel_;
 
