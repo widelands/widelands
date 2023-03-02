@@ -62,6 +62,7 @@ ProgressWindow::ProgressWindow(UI::Panel* parent,
      crop_(crop) {
 	// As long as this window exists and is visible, no tooltips will be drawn.
 	set_hide_all_overlays();
+	Panel::set_allow_fastclick(false);
 
 	if (parent == nullptr) {
 		graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
@@ -85,6 +86,8 @@ ProgressWindow::~ProgressWindow() {
 	for (SDL_Event event : event_buffer_) {
 		SDL_PushEvent(&event);
 	}
+
+	Panel::set_allow_fastclick(true);
 }
 
 inline const UI::ProgressbarStyleInfo& ProgressWindow::progress_style() const {

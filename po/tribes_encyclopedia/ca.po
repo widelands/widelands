@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-02-19 02:46+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Juanjo, 2015-2023\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -6640,12 +6640,11 @@ msgstr "Elabora racions per als exploradors i miners de les mines bàsiques. Tam
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1357
-#, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"The inn can produce one ration in %s and one snack in %s on average, if the "
-"supply is steady."
-msgstr "L'hostal pot produir una ració cada %s i un aperitiu cada %s de mitjana si té els subministraments adequats."
+"The inn can produce one ration in %1$s and one snack in %2$s on average, if "
+"the supply is steady."
+msgstr "L'hostal pot produir una ració cada %1$s i un aperitiu cada %2$s de mitjana si té els subministraments adequats."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1364
@@ -6671,12 +6670,11 @@ msgstr "Elabora racions per alimentar els exploradors i racions, aperitius i àp
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1370
-#, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"The big inn can produce one ration in %s, one snack in %s and one meal in %s"
-" on average, if the supply is steady."
-msgstr "L'hostal gran pot produir una ració cada %s, un aperitiu cada %s i un àpat cada %s de mitjana si té els subministraments adequats."
+"The big inn can produce one ration in %1$s, one snack in %2$s and one meal "
+"in %3$s on average, if the supply is steady."
+msgstr "L'hostal gran pot produir una ració cada %1$s, un aperitiu cada %2$s i un àpat cada %3$s de mitjana si té els subministraments adequats."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Charcoal Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1377
