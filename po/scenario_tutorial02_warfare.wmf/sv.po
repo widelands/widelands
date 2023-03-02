@@ -3,7 +3,7 @@
 # 
 # Translators:
 # D M <kamera001dm@gmail.com>, 2017
-# D M <kamera001dm@gmail.com>, 2021
+# D M <kamera001dm@gmail.com>, 2021,2023
 # GunChleoc, 2018
 # Fredrik Pettersson <luno@iaofredde.net>, 2006
 # GunChleoc, 2014
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2021\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,7 +162,7 @@ msgstr "Medan vi väntar på stridsarenan kommer du troligtvis att se några sol
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "Battle Arena"
-msgstr ""
+msgstr "Stridsarena"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "Build a battle arena"
@@ -176,7 +176,7 @@ msgstr "Bygg en stridsarena. Det är en stor byggnad."
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using %1$s and %2$s."
-msgstr ""
+msgstr "Eftersom byggnationen kommer att ta lite tid kan du ändra spelets hastighet med %1$s och %2$s."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:81
 msgid "The Battle Arena Has Been Constructed"
@@ -244,7 +244,7 @@ msgstr "Bygg ett träningsläger."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "Training Camp"
-msgstr ""
+msgstr "Träningsläger"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid "Build a training camp"
@@ -284,117 +284,117 @@ msgid ""
 "ability levels cannot be compared: an Imperial soldier has a base attack of "
 "%1% at level 0, while a Barbarian soldier at the same level only has a base "
 "attack of %2%."
-msgstr ""
+msgstr "Kom också ihåg att var och en av stammarna i Widelands har sitt eget sätt att träna, så byggnaderna och varorna är olika. Nivåerna på de olika förmågorna kan heller inte jämföras. En imperiesoldat har en grundattack på %1% på nivå 0 medan en barbarsoldat på samma nivå bara har en grundattack på %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:138
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Spejarkoja"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Utforska dina omgivningar"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
 msgid ""
 "Large parts of the map haven’t been explored yet. It might be a good idea to"
 " know which direction is best for expanding our empire."
-msgstr ""
+msgstr "Stora delar av kartan har ännu inte utforskats. Det kan vara en bra ide att veta åt vilket håll det vore bäst att utvidga vårt imperium."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
-msgstr ""
+msgstr "Du kan prova din lycka och expandera slumpmässigt men du tar då en risk. Det är säkrare att använda en spejare för att utforska okända delar av kartan. Tänk om han hittar berg fulla med guld."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 msgid "We will need a scout’s hut to start exploring. It is a small building."
-msgstr ""
+msgstr "Vi behöver en spejarkoja för att påbörja utforskningen. Det är en liten byggnad."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid "Build a scout’s hut."
-msgstr ""
+msgstr "Bygg en spejarkoja."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:140
 msgid "Build a scout’s hut"
-msgstr ""
+msgstr "Bygg en spejarkoja."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
 msgid ""
 "It’s good to know your surroundings. A scout will explore unseen parts of "
 "the map for you."
-msgstr ""
+msgstr "Det är bra att känna till sina omgivningar. En spejare kommer att utforska osedda delar av kartan åt dig."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:142
 msgid "Build a Scout’s Hut."
-msgstr ""
+msgstr "Bygg en spejarkoja."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
 msgid "Scout is ready"
-msgstr ""
+msgstr "Spejaren är redo"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
 msgid "Ready to go!"
-msgstr ""
+msgstr "Redo för att ge sig av!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Bra gjort! Din spejarkoja har byggts. Medan vår spanare flyttar in kan vil lära oss lite mer om honom."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:152
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr ""
+msgstr "Till att börja med, han kommer att behöva ta med sig lite mat på sin upptäcktsfärd. Som tur är har vi några matbitar i vårt magasin."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid ""
 "When provided with food, he will walk randomly around the area. You should "
 "follow his movement before fog of war hides what he saw."
-msgstr ""
+msgstr "När han förses med mat kommer han att vandra omkring slumpmässigt. Du bör följa hans förflyttningar innan krigsdimma döljer vad han såg."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Scout"
-msgstr ""
+msgstr "Spejare"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
 msgid "Explore the map"
-msgstr ""
+msgstr "Utforska kartan"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
 msgid "Wait for the scout to explore unseen areas."
-msgstr ""
+msgstr "Vänta på att spejaren utforskar osedda områden."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:163
 msgid "Observe your scout."
-msgstr ""
+msgstr "Observera din spejare."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
 msgid "Scout made progress"
-msgstr ""
+msgstr "Spejaren gjorde framsteg"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:171
 msgid "New horizons?"
-msgstr ""
+msgstr "Nya horisonter?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:172
 msgid ""
 "As you can see, scouts can go quite far. The good news is that there are no "
 "enemies around."
-msgstr ""
+msgstr "Som du kan se kan spejaren gå ganska långt. Den goda nyheten är att inga fiender finns i närheten."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:173
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr ""
+msgstr "Du kan använda minikartan för att se hur utforskandet fortskrider."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
-msgstr ""
+msgstr "Glöm inte att utforskning är hårt arbete och därför inte kan göras utan tillgång till mat."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
@@ -455,13 +455,13 @@ msgstr "Om du vill skicka iväg en speciell soldat är det bara att klicka på d
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
 " can contain an arrow and up to three numbers, e.g. ‘↑ 1 (+5) soldier (+2)’."
-msgstr ""
+msgstr "Låt mig också beskriva vad siffrorna i statusraden betyder. Raden kan innehålla en pil och upp till tre nummer, t ex ‘↑ 1 (+5) soldat (+2)’."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid ""
 "The arrow shows whether the building is set to prefer heroes (upwards arrow)"
 " or rookies (downwards arrow)."
-msgstr ""
+msgstr "Pilen visar om byggnaden är inställd på att föredra hjältar (pil uppåt) eller nybörjare (pil nedåt)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
 msgid ""
@@ -530,7 +530,7 @@ msgstr "Du kan också nyttja denna chans för att bekanta dig med de andra inst�
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:221
 msgid "Soldiers, dismissed!"
-msgstr ""
+msgstr "Soldater, avskedade!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:223
 msgid "Dismantle your north-western sentry"
