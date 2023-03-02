@@ -74,6 +74,12 @@ function count_workers_in_warehouses(worker)
    return rv
 end
 
+-- Retrieve ship names from end of first scenario
+campaign_data = game:read_campaign_data("atlanteans", "atl01")
+if not campaign_data then
+   campaign_data = { shipnames = {} }
+end
+
 -- ====================
 -- Starting the main thread
 -- ====================

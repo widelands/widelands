@@ -240,6 +240,13 @@ function check_for_ships()
         sleep(8234)
    end
 
+   -- The next scenario starts with these ships, so we save their names for continuity
+   local persist = { shipnames = {} }
+   for i,ship in ipairs(p1:get_ships()) do
+      persist.shipnames[i] = ship.shipname
+   end
+   wl.Game():save_campaign_data("atlanteans", "atl01", persist)
+
    -- Success
    msg_boxes(scenario_won)
    p1:mark_scenario_as_solved("atl01.wmf")
