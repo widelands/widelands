@@ -15,6 +15,7 @@ wl.Descriptions():new_ship_type {
    max_attack   = 10000,
    defense         =  5,
    attack_accuracy = 60,
+   heal_per_second = 100,
 
    spritesheets = {
       idle = {

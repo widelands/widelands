@@ -184,6 +184,7 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
      max_attack_(table.get_int("max_attack")),
      defense_(table.get_int("defense")),
      attack_accuracy_(table.get_int("attack_accuracy")),
+     heal_per_second_(table.get_int("heal_per_second")),
      default_capacity_(table.has_key("capacity") ? table.get_int("capacity") : 20),
      ship_names_(table.get_table("names")->array_entries<std::string>()) {
 	// Read the sailing animations
@@ -591,7 +592,14 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 				return true;
 			}
 
-			// We're on the destination dock. Load soldiers and wait for orders.
+			// We're on the destination dock. Load soldiers, heal, and wait for orders.
+			constexpr Duration kHealInterval(1000);
+			if (hitpoints_ < descr().max_hitpoints_ &&
+			    game.get_gametime() - last_heal_time_ >= kHealInterval) {
+				last_heal_time_ = game.get_gametime();
+				hitpoints_ = std::min(descr().max_hitpoints_, hitpoints_ + descr().heal_per_second_);
+			}
+
 			set_ship_state_and_notify(
 			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 
@@ -948,6 +956,7 @@ void Ship::battle_update(Game& game) {
 			uint32_t attack_strength =
 			   (game.logic_rand() % (descr().max_attack_ - descr().min_attack_));
 			attack_strength += descr().min_attack_;
+
 			current_battle.pending_damage =
 			   attack_strength * (100 - target_ship->descr().defense_) / 100;
 		} else {  // Miss
@@ -2021,8 +2030,9 @@ Load / Save implementation
 /* Changelog:
  * 12 - v1.1
  * 13 - Added warships and naval warfare.
+ * 14 - Added healing.
  */
-constexpr uint8_t kCurrentPacketVersion = 13;
+constexpr uint8_t kCurrentPacketVersion = 14;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship") {
@@ -2091,6 +2101,9 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			battles_.back().time_of_last_action = Time(fr);
 		}
 		hitpoints_ = (packet_version >= 13) ? fr.unsigned_32() : -1;
+		if (packet_version >= 14) {
+			last_heal_time_ = Time(fr);
+		}
 
 		shipname_ = fr.c_string();
 		capacity_ = fr.unsigned_32();
@@ -2162,6 +2175,7 @@ void Ship::Loader::load_finish() {
 	ship.ship_type_ = ship_type_;
 	ship.pending_refit_ = pending_refit_;
 	ship.hitpoints_ = (hitpoints_ < 0) ? ship.descr().max_hitpoints_ : hitpoints_;
+	ship.last_heal_time_ = last_heal_time_;
 
 	// restore the  ship id and name
 	ship.shipname_ = shipname_;
@@ -2267,6 +2281,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		b.time_of_last_action.save(fw);
 	}
 	fw.unsigned_32(hitpoints_);
+	last_heal_time_.save(fw);
 
 	fw.string(shipname_);
 	fw.unsigned_32(capacity_);
