@@ -39,6 +39,7 @@ class Node;
 namespace Widelands {
 
 struct Path;
+class PinnedNote;
 struct PlayerImmovable;
 class TrainingSite;
 struct Road;
@@ -601,6 +602,12 @@ public:
 	uint32_t count_soldiers_d(unsigned) const;
 	uint32_t count_soldiers_e(unsigned) const;
 
+	void register_pinned_note(PinnedNote* note);
+	void unregister_pinned_note(PinnedNote* note);
+	[[nodiscard]] const std::set<OPtr<PinnedNote>>& all_pinned_notes() const {
+		return pinned_notes_;
+	}
+
 	bool is_muted(DescriptionIndex di) const {
 		return muted_building_types_.count(di) != 0u;
 	}
@@ -675,6 +682,7 @@ private:
 
 	PlayerBuildingStats building_stats_;
 	std::vector<SoldierStatistics> soldier_stats_;
+	std::set<OPtr<PinnedNote>> pinned_notes_;
 
 	std::string name_;                     // Player name
 	std::string ai_;                       /**< Name of preferred AI implementation */

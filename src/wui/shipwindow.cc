@@ -21,7 +21,10 @@
 #include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
+#include "graphic/animation/animation_manager.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
@@ -54,9 +57,9 @@ constexpr const char* const kImgRefitTransport = "images/wui/ship/ship_refit_tra
 constexpr const char* const kImgRefitWarship = "images/wui/ship/ship_refit_warship.png";
 constexpr const char* const kImgWarshipStay = "images/wui/ship/ship_stay.png";
 constexpr const char* const kImgWarshipAttack = "images/wui/ship/ship_attack.png";
-constexpr const char* const kImgWarshipRetreat = "images/wui/ship/ship_retreat.png";
 
 constexpr int kPadding = 5;
+constexpr int kButtonSize = 34;
 }  // namespace
 
 ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelands::Ship* ship)
@@ -163,6 +166,12 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	               kImgWarshipAttack, false, [this]() { act_warship_attack(); });
 	warship_controls_.add(btn_warship_attack_);
 
+	set_destination_ = new UI::Dropdown<Widelands::OPtr<Widelands::MapObject>>(&navigation_box_,
+	         "set_destination", 0, 0, 200, 8, kButtonSize, _("Destination"),
+	         UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
+	set_destination_->selected.connect([this]() { act_set_destination(); });
+	navigation_box_.add(set_destination_, UI::Box::Resizing::kFullSize);
+
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	// Bottom buttons
@@ -177,11 +186,6 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	   make_button(buttons, "refit", "", kImgRefitTransport, false, [this]() { act_refit(); });
 	buttons->add(btn_refit_);
 	buttons->add_space(kPadding);
-
-	btn_warship_retreat_ =
-	   make_button(buttons, "war_retreat", _("Retreat to an own port"), kImgWarshipRetreat, false,
-	               [this]() { act_warship_retreat(); });
-	buttons->add(btn_warship_retreat_);
 
 	btn_cancel_expedition_ =
 	   make_button(buttons, "cancel_expedition", _("Cancel the Expedition"), kImgCancelExpedition,
@@ -238,7 +242,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	// Init button visibility
 	navigation_box_.set_visible(false);
 	btn_cancel_expedition_->set_enabled(false);
-	update_destination_button(ship);
+	update_destination_buttons(ship);
 
 	initialization_complete();
 }
@@ -277,7 +281,6 @@ void ShipWindow::set_button_visibility() {
 		display_->set_visible(!warship_display);
 	}
 
-	btn_warship_retreat_->set_visible(is_warship);
 	btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
 	warship_controls_.set_visible(ibase_.egbase().is_game() && is_warship);
 	warship_capacity_control_->set_visible(is_warship);
@@ -303,13 +306,109 @@ void ShipWindow::no_port_error_message() {
 	}
 }
 
-void ShipWindow::update_destination_button(const Widelands::Ship* ship) {
-	Widelands::PortDock* destination = ship->get_destination(ibase_.egbase());
-	btn_destination_->set_enabled(destination != nullptr);
-	btn_destination_->set_tooltip(
-	   destination == nullptr ? _("Go to destination") :
-                               /** TRANSLATORS: Placeholder is the name of the destination port */
-         format(_("Go to destination (%s)"), destination->get_warehouse()->get_warehouse_name()));
+void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
+	is_updating_destination_dropdown_ = true;
+	Widelands::EditorGameBase& egbase = ibase_.egbase();
+	Widelands::CheckStepDefault checkstep(Widelands::MOVECAPS_SWIM);
+	Widelands::PortDock* dest_dock = ship->get_destination_port(egbase);
+	Widelands::Ship* dest_ship = ship->get_destination_ship(egbase);
+	Widelands::PinnedNote* dest_note = ship->get_destination_note(egbase);
+
+	// Populate destination dropdown if anything changed since last think
+	std::vector<Widelands::PortDock*> all_ports;
+	std::vector<Widelands::Ship*> all_ships;
+	std::vector<Widelands::PinnedNote*> all_notes;
+	for (const Widelands::Player::BuildingStats& port : ship->owner().get_building_statistics(ship->owner().tribe().port())) {
+		if (!port.is_constructionsite) {
+			all_ports.push_back(dynamic_cast<const Widelands::Warehouse*>(egbase.map()[port.pos].get_immovable())->get_portdock());
+		}
+	}
+	for (Widelands::Serial serial : ship->owner().ships()) {
+		if (serial != ship->serial()) {
+			all_ships.push_back(dynamic_cast<Widelands::Ship*>(egbase.objects().get_object(serial)));
+		}
+	}
+	for (Widelands::OPtr<Widelands::PinnedNote> optr : ship->owner().all_pinned_notes()) {
+		Widelands::PinnedNote* note = optr.get(egbase);
+		if (note != nullptr && checkstep.reachable_dest(egbase.map(), note->get_position())) {
+			all_notes.push_back(note);
+		}
+	}
+
+	bool needs_update = (set_destination_->size() != all_ports.size() + all_ships.size() + all_notes.size() + 1);
+	if (!needs_update) {
+		size_t i = 0;
+		for (Widelands::PortDock* pd : all_ports) {
+			const auto& entry = set_destination_->at(++i);
+			if (entry.value != pd || entry.name != pd->get_warehouse()->get_warehouse_name()) {
+				needs_update = true;
+				break;
+			}
+		}
+		for (Widelands::Ship* temp_ship : all_ships) {
+			const auto& entry = set_destination_->at(++i);
+			if (entry.value != temp_ship || entry.name != temp_ship->get_shipname()) {
+				needs_update = true;
+				break;
+			}
+		}
+		for (Widelands::PinnedNote* note : all_notes) {
+			const auto& entry = set_destination_->at(++i);
+			if (entry.value != note || entry.name != note->get_text()) {
+				needs_update = true;
+				break;
+			}
+		}
+	}
+
+	if (needs_update) {
+		set_destination_->clear();
+		set_destination_->add(_("(none)"), nullptr, nullptr, !ship->has_destination());
+
+		for (Widelands::PortDock* pd : all_ports) {
+			set_destination_->add(pd->get_warehouse()->get_warehouse_name(), pd, pd->get_warehouse()->descr().icon(), pd == dest_dock);
+		}
+		for (Widelands::Ship* temp_ship : all_ships) {
+			set_destination_->add(temp_ship->get_shipname(), temp_ship, temp_ship->descr().icon(), temp_ship == dest_ship);
+		}
+		for (Widelands::PinnedNote* note : all_notes) {
+			set_destination_->add(note->get_text(), note,
+				g_animation_manager->get_animation(note->owner().tribe().pinned_note_animation()).representative_image(&note->get_rgb())
+			, note == dest_note);
+		}
+	} else if (!set_destination_->is_expanded()) {
+		if (dest_dock != nullptr) {
+			set_destination_->select(dest_dock);
+		} else if (dest_ship != nullptr) {
+			set_destination_->select(dest_ship);
+		} else if (dest_note != nullptr) {
+			set_destination_->select(dest_note);
+		} else {
+			set_destination_->select(nullptr);
+		}
+	}
+
+	is_updating_destination_dropdown_ = false;
+
+	// Update Go To Destination button
+	if (dest_dock != nullptr) {
+		btn_destination_->set_enabled(true);
+		btn_destination_->set_tooltip(format(_("Go to destination (%s)"), dest_dock->get_warehouse()->get_warehouse_name()));
+		return;
+	}
+	if (dest_ship != nullptr) {
+		btn_destination_->set_enabled(true);
+		btn_destination_->set_tooltip(format(_("Go to destination (%s)"), dest_ship->get_shipname()));
+		return;
+	}
+	if (dest_note != nullptr) {
+		btn_destination_->set_enabled(true);
+		btn_destination_->set_tooltip(format(_("Go to destination (%s)"), dest_note->get_text()));
+		return;
+	}
+
+	btn_destination_->set_enabled(false);
+	btn_destination_->set_tooltip(_("Go to destination"));
 }
 
 void ShipWindow::think() {
@@ -322,7 +421,7 @@ void ShipWindow::think() {
 	set_title(ship->get_shipname());
 	const bool can_act = ibase_.can_act(ship->owner().player_number());
 
-	update_destination_button(ship);
+	update_destination_buttons(ship);
 	btn_sink_->set_enabled(can_act);
 
 	btn_refit_->set_pic(g_image_cache->get(ship->get_ship_type() == Widelands::ShipType::kWarship ?
@@ -398,7 +497,7 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
                                     bool flat_when_disabled,
                                     const std::function<void()>& callback) {
 	UI::Button* btn = new UI::Button(
-	   parent, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, g_image_cache->get(picname), title);
+	   parent, name, 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu, g_image_cache->get(picname), title);
 	if (flat_when_disabled) {
 		btn->set_disable_style(UI::ButtonDisableStyle::kMonochrome | UI::ButtonDisableStyle::kFlat);
 	}
@@ -434,9 +533,19 @@ void ShipWindow::act_destination() {
 	if (ship == nullptr) {
 		return;
 	}
-	if (Widelands::PortDock* destination = ship->get_destination(ibase_.egbase())) {
+
+	if (Widelands::PortDock* destination = ship->get_destination_port(ibase_.egbase()); destination != nullptr) {
 		ibase_.map_view()->scroll_to_field(
 		   destination->get_warehouse()->get_position(), MapView::Transition::Smooth);
+		return;
+	}
+	if (Widelands::Ship* destination = ship->get_destination_ship(ibase_.egbase()); destination != nullptr) {
+		ibase_.map_view()->scroll_to_field(destination->get_position(), MapView::Transition::Smooth);
+		return;
+	}
+	if (Widelands::PinnedNote* destination = ship->get_destination_note(ibase_.egbase()); destination != nullptr) {
+		ibase_.map_view()->scroll_to_field(destination->get_position(), MapView::Transition::Smooth);
+		return;
 	}
 }
 
@@ -479,14 +588,6 @@ void ShipWindow::act_warship_attack() {
 	}
 	ibase_.game().send_player_warship_command(
 	   *ship, Widelands::WarshipCommand::kAttack, warship_soldiers_display_->soldiers());
-}
-
-void ShipWindow::act_warship_retreat() {
-	Widelands::Ship* ship = ship_.get(ibase_.egbase());
-	if (ship == nullptr) {
-		return;
-	}
-	ibase_.game().send_player_warship_command(*ship, Widelands::WarshipCommand::kRetreat, {});
 }
 
 /// Show debug info
@@ -572,6 +673,24 @@ void ShipWindow::act_explore_island(Widelands::IslandExploreDirection direction)
 		game->send_player_ship_explore_island(*ship, direction);
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+	}
+}
+
+void ShipWindow::act_set_destination() {
+	if (is_updating_destination_dropdown_) {
+		return;
+	}
+
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
+
+	Widelands::MapObject* dest = set_destination_->get_selected().get(ibase_.egbase());
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_ship_set_destination(*ship, dest);
+	} else {
+		ship->set_destination(ibase_.egbase(), dest, true);
 	}
 }
 

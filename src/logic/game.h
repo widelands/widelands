@@ -297,13 +297,14 @@ public:
 	                                 bool allow_conquer);
 	void send_player_mark_object_for_removal(PlayerNumber, Immovable&, bool);
 
-	void send_player_ship_scouting_direction(const Ship&, WalkingDir);
-	void send_player_ship_construct_port(const Ship&, Coords);
-	void send_player_ship_explore_island(const Ship&, IslandExploreDirection);
-	void send_player_sink_ship(const Ship&);
-	void send_player_refit_ship(const Ship&, ShipType);
-	void send_player_warship_command(const Ship&,
-	                                 WarshipCommand,
+	void send_player_ship_scouting_direction(const Ship& ship, WalkingDir direction);
+	void send_player_ship_construct_port(const Ship& ship, Coords coords);
+	void send_player_ship_explore_island(const Ship& ship, IslandExploreDirection direction);
+	void send_player_ship_set_destination(const Ship& ship, const MapObject* dest);
+	void send_player_sink_ship(const Ship& ship);
+	void send_player_refit_ship(const Ship& ship, ShipType t);
+	void send_player_warship_command(const Ship& ship,
+	                                 WarshipCommand cmd,
 	                                 const std::vector<uint32_t>& parameters);
 	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);

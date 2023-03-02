@@ -303,7 +303,7 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 		for (ShippingItem& si : ship->items_) {
 			if (si.destination_dock_.serial() == dock->serial()) {
 				sslog("found a shippingitem on %s\n", ship->get_shipname().c_str());
-				si.destination_dock_ = ship->get_destination(game);
+				si.destination_dock_ = ship->get_destination_port(game);
 			}
 		}
 	}
@@ -333,7 +333,7 @@ void ShippingSchedule::ship_added(Game& game, Ship& s) {
 		sslog("Is a warship, won't create a plan.\n\n");
 		return;
 	}
-	assert(!s.get_destination(game));
+	assert(s.get_destination_port(game) == nullptr);
 	plans_[&s] = ShipPlan();
 	last_actual_duration_recalculation_[&s] = game.get_gametime();
 	if (fleet_.get_ports().empty()) {
@@ -381,7 +381,7 @@ void ShippingSchedule::port_added(Game& game, PortDock& dock) {
 	// All ships are most likely panicking because they have
 	// no destination. Send them all to the new port.
 	for (Ship* ship : fleet_.get_ships()) {
-		assert(!ship->get_destination(game));
+		assert(ship->get_destination_port(game) == nullptr);
 		sslog("Rerouting %s there\n", ship->get_shipname().c_str());
 		ship->set_destination(game, &dock);
 		for (ShippingItem& si : ship->items_) {
@@ -991,7 +991,7 @@ Duration ShippingSchedule::update(Game& game) {
 		if (plans_[ship].empty()) {
 			sslog("No orders left, setting to idle\n");
 			ship->set_destination(game, nullptr);
-		} else if (plans_[ship].front().dock != ship->get_destination(game)) {
+		} else if (plans_[ship].front().dock != ship->get_destination_port(game)) {
 			PortDock* dest = plans_[ship].front().dock.get(game);
 			ship->set_destination(game, dest);
 			sslog("Rerouted to %u %s\n", dest->serial(),

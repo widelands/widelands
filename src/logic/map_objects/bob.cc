@@ -894,13 +894,19 @@ bool Bob::check_node_blocked(Game& game, const FCoords& field, bool /* commit */
  * This will update the owner's viewing area.
  */
 void Bob::set_owner(Player* const player) {
-	if ((owner_ != nullptr) && (position_.field != nullptr)) {
-		owner_.load()->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
+	Player* old_owner = owner_.load();
+
+	if (old_owner != nullptr && position_.field != nullptr) {
+		old_owner->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
+
 	owner_ = player;
-	if ((owner_ != nullptr) && (position_.field != nullptr)) {
-		owner_.load()->see_area(Area<FCoords>(get_position(), descr().vision_range()));
+
+	if (player != nullptr && position_.field != nullptr) {
+		player->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
+
+	owner_changed(old_owner, player);
 }
 
 /**
