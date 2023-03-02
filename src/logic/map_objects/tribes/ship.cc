@@ -173,6 +173,11 @@ bool Ship::init(EditorGameBase& egbase) {
 	return true;
 }
 
+void Ship::set_shipname(const std::string& name) {
+	shipname_ = name;
+	get_owner()->reserve_shipname(name);
+}
+
 /**
  * Create the initial singleton @ref ShipFleet to which we belong.
  * The fleet code will automatically merge us into a larger

@@ -174,9 +174,8 @@ struct Ship : Bob {
 	[[nodiscard]] const std::string& get_shipname() const {
 		return shipname_;
 	}
-	void set_shipname(const std::string& name) {
-		shipname_ = name;
-	}
+
+	void set_shipname(const std::string& name);
 
 	/// \returns whether the ship is currently on an expedition
 	[[nodiscard]] bool state_is_expedition() const {
