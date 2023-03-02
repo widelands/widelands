@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master, workflow_improvements ]
+    branches: [ master ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -509,7 +509,7 @@ jobs:
           git push --delete origin latest   || echo "No latest tag to delete"
           git tag --force latest HEAD
           git push --tags origin
-
+          
           echo "These builds are automatically generated from master. " >> release_notes
           echo "## Latest changes" >> release_notes
           # Print changelog from last 10 commits
@@ -517,7 +517,7 @@ jobs:
           echo "<details><summary>Original filenames</summary><pre>" >> release_notes
           cat artifacts.list >> release_notes
           echo "</pre></details>" >> release_notes
-
+          
           gh release create latest         \
             --prerelease                   \
             --notes-file release_notes     \
