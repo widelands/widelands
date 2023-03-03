@@ -141,7 +141,7 @@ SDL_GLContext initialize(
 		log_info("Using glewInit workaround for Wayland\n");
 	} else
 #endif
-	if (err != GLEW_OK) {
+	   if (err != GLEW_OK) {
 		log_err("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
 		        glewGetErrorString(err));
 		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
