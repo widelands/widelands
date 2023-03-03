@@ -51,6 +51,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 37 + 41 + 44 = 122 sec
             "call=produce_ration",
             "call=produce_snack",
             "call=produce_meal",
