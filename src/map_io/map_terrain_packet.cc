@@ -60,7 +60,8 @@ void MapTerrainPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				f.set_terrain_d(smap[fr.unsigned_8()]);
 			}
 		} else if (packet_version == kCurrentPacketVersion) {
-			std::map<DescriptionIndex /* index in binary */, DescriptionIndex /* actual index */> mappings;
+			std::map<DescriptionIndex /* index in binary */, DescriptionIndex /* actual index */>
+			   mappings;
 			MapIndex const max_index = map.max_index();
 			for (MapIndex i = 0; i < max_index; ++i) {
 				Field& f = map[i];
@@ -68,14 +69,20 @@ void MapTerrainPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				uint16_t saved_index = fr.unsigned_16();
 				auto lookup = mappings.find(saved_index);
 				if (lookup == mappings.end()) {
-					lookup = mappings.emplace(saved_index, egbase.mutable_descriptions()->load_terrain(fr.string())).first;
+					lookup =
+					   mappings
+					      .emplace(saved_index, egbase.mutable_descriptions()->load_terrain(fr.string()))
+					      .first;
 				}
 				f.set_terrain_r(lookup->second);
 
 				saved_index = fr.unsigned_16();
 				lookup = mappings.find(saved_index);
 				if (lookup == mappings.end()) {
-					lookup = mappings.emplace(saved_index, egbase.mutable_descriptions()->load_terrain(fr.string())).first;
+					lookup =
+					   mappings
+					      .emplace(saved_index, egbase.mutable_descriptions()->load_terrain(fr.string()))
+					      .first;
 				}
 				f.set_terrain_d(lookup->second);
 			}
