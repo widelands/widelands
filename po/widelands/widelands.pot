@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-03-04 02:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -79,14 +79,14 @@ msgstr ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:699 ../../src/base/i18n.cc:407
+#: ../../data/scripting/richtext.lua:699 ../../src/base/i18n.cc:400
 #, c-format
 msgid "%1$s & %2$s"
 msgstr ""
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:701 ../../src/base/i18n.cc:411
+#: ../../data/scripting/richtext.lua:701 ../../src/base/i18n.cc:404
 #, c-format
 msgid "%1$s or %2$s"
 msgstr ""
@@ -96,7 +96,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/richtext.lua:703 ../../data/scripting/richtext.lua:708
-#: ../../src/base/i18n.cc:415 ../../src/base/i18n.cc:424
+#: ../../src/base/i18n.cc:408 ../../src/base/i18n.cc:417
 #: ../../src/logic/addons.cc:203
 #, c-format
 msgid "%1$s, %2$s"
@@ -105,7 +105,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: X hours and Y minutes
-#: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:419
+#: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:412
 #: ../../src/ui_basic/spinbox.cc:484
 #, c-format
 msgid "%1$s and %2$s"
@@ -157,7 +157,7 @@ msgstr ""
 
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:434
+#: ../../src/base/i18n.cc:427
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr ""
@@ -568,23 +568,23 @@ msgid ""
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:613
+#: ../../src/editor/editorinteractive.cc:606
 msgid "Exit Editor Confirmation"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:613
+#: ../../src/editor/editorinteractive.cc:606
 msgid "Unsaved Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:614
+#: ../../src/editor/editorinteractive.cc:607
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:615
+#: ../../src/editor/editorinteractive.cc:608
 msgid "Are you sure you wish to exit the editor?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1109 ../../src/logic/addons.cc:47
+#: ../../src/editor/editorinteractive.cc:1102 ../../src/logic/addons.cc:47
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1333
@@ -605,7 +605,7 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1111 ../../src/ui_fsmenu/main.cc:233
+#: ../../src/editor/editorinteractive.cc:1104 ../../src/ui_fsmenu/main.cc:233
 #: ../../src/wlapplication.cc:1643
 #, c-format
 msgid ""
@@ -619,14 +619,14 @@ msgid ""
 "Please add this information to your report."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1145
+#: ../../src/editor/editorinteractive.cc:1138
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1167
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:112
+#: ../../src/editor/editorinteractive.cc:1160
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:113
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:583
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
 #: ../../src/logic/map.h:226 ../../src/wui/mapdata.cc:50
@@ -634,23 +634,23 @@ msgid "No Name"
 msgstr ""
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1170
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:113
+#: ../../src/editor/editorinteractive.cc:1163
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:114
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:584
 #: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:367
 msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1194
+#: ../../src/editor/editorinteractive.cc:1187
 msgid "Loading world…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1394
+#: ../../src/editor/editorinteractive.cc:1387
 msgid "Publish Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1395
+#: ../../src/editor/editorinteractive.cc:1388
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -662,50 +662,50 @@ msgid ""
 "Hint: %5$s\n"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1419
+#: ../../src/editor/editorinteractive.cc:1412
 msgid "Login Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1424
+#: ../../src/editor/editorinteractive.cc:1417
 msgid "Uploading Add-On…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1425
+#: ../../src/editor/editorinteractive.cc:1418
 msgid "Saving map…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1444
+#: ../../src/editor/editorinteractive.cc:1437
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:310
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:365
 msgid "Error Saving Map!"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1450
+#: ../../src/editor/editorinteractive.cc:1443
 msgid "Packaging add-on…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1500
+#: ../../src/editor/editorinteractive.cc:1493
 msgid "Add-On Generation Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1501
+#: ../../src/editor/editorinteractive.cc:1494
 msgid "The add-on could not be written to the disk."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1508
+#: ../../src/editor/editorinteractive.cc:1501
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
 msgid "Uploading…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1514
+#: ../../src/editor/editorinteractive.cc:1507
 msgid "Upload Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1536
+#: ../../src/editor/editorinteractive.cc:1529
 msgid "Success"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1537
+#: ../../src/editor/editorinteractive.cc:1530
 msgid "The add-on was uploaded successfully."
 msgstr ""
 
@@ -1640,7 +1640,7 @@ msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:171
+#: ../../src/graphic/gl/initialize.cc:176
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
@@ -1648,8 +1648,8 @@ msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:175
-#: ../../src/graphic/gl/initialize.cc:188
+#: ../../src/graphic/gl/initialize.cc:180
+#: ../../src/graphic/gl/initialize.cc:193
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
@@ -1657,37 +1657,37 @@ msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:185
+#: ../../src/graphic/gl/initialize.cc:190
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
 msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:216
-#: ../../src/graphic/gl/initialize.cc:236
+#: ../../src/graphic/gl/initialize.cc:221
+#: ../../src/graphic/gl/initialize.cc:241
 msgid "Widelands won’t work because your graphics driver is too old."
 msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:219
+#: ../../src/graphic/gl/initialize.cc:224
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
 msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:239
+#: ../../src/graphic/gl/initialize.cc:244
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
 msgstr ""
 
-#: ../../src/graphic/gl/initialize.cc:255
+#: ../../src/graphic/gl/initialize.cc:260
 msgid "OpenGL"
 msgstr ""
 
-#: ../../src/graphic/gl/initialize.cc:302
+#: ../../src/graphic/gl/initialize.cc:307
 msgid "Shading Language"
 msgstr ""
 
@@ -2201,88 +2201,88 @@ msgstr ""
 msgid "Can’t find any more resources!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:455
+#: ../../src/logic/map_objects/tribes/ship.cc:460
 msgid "Port Space"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:455
+#: ../../src/logic/map_objects/tribes/ship.cc:460
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:456
+#: ../../src/logic/map_objects/tribes/ship.cc:461
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:579
+#: ../../src/logic/map_objects/tribes/ship.cc:584
 msgid "Island Circumnavigated"
 msgstr ""
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:579
+#: ../../src/logic/map_objects/tribes/ship.cc:584
 msgctxt "ship"
 msgid "Waiting"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:580
+#: ../../src/logic/map_objects/tribes/ship.cc:585
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:643
+#: ../../src/logic/map_objects/tribes/ship.cc:648
 msgid "Coast Reached"
 msgstr ""
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:643
+#: ../../src/logic/map_objects/tribes/ship.cc:648
 msgid "Land Ahoy!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:644
+#: ../../src/logic/map_objects/tribes/ship.cc:649
 msgid "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:695
+#: ../../src/logic/map_objects/tribes/ship.cc:700
 msgid "New port construction site is gone"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:695
+#: ../../src/logic/map_objects/tribes/ship.cc:700
 msgid "Port Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:696
+#: ../../src/logic/map_objects/tribes/ship.cc:701
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:752
+#: ../../src/logic/map_objects/tribes/ship.cc:757
 msgid "No Port Can Be Built"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:752
+#: ../../src/logic/map_objects/tribes/ship.cc:757
 msgid "Port Space Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:753
+#: ../../src/logic/map_objects/tribes/ship.cc:758
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:899
+#: ../../src/logic/map_objects/tribes/ship.cc:904
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:899
+#: ../../src/logic/map_objects/tribes/ship.cc:904
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:900
+#: ../../src/logic/map_objects/tribes/ship.cc:905
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1058
+#: ../../src/logic/map_objects/tribes/ship.cc:1063
 #: ../../src/wui/seafaring_statistics_menu.cc:244
 msgctxt "ship_state"
 msgid "Empty"
@@ -2290,7 +2290,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1063
+#: ../../src/logic/map_objects/tribes/ship.cc:1068
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -2298,28 +2298,28 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1069
+#: ../../src/logic/map_objects/tribes/ship.cc:1074
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1075
+#: ../../src/logic/map_objects/tribes/ship.cc:1080
 #: ../../src/wui/seafaring_statistics_menu.cc:248
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1079
+#: ../../src/logic/map_objects/tribes/ship.cc:1084
 #: ../../src/wui/seafaring_statistics_menu.cc:250
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1083
+#: ../../src/logic/map_objects/tribes/ship.cc:1088
 #: ../../src/wui/seafaring_statistics_menu.cc:252
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2327,7 +2327,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1088
+#: ../../src/logic/map_objects/tribes/ship.cc:1093
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
@@ -2424,15 +2424,15 @@ msgstr ""
 
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much space
 #. * available)
-#: ../../src/logic/map_objects/tribes/warehouse.cc:643
+#: ../../src/logic/map_objects/tribes/warehouse.cc:648
 msgid "Waterway"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:644
+#: ../../src/logic/map_objects/tribes/warehouse.cc:649
 msgid "Waterway destroyed"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:645
+#: ../../src/logic/map_objects/tribes/warehouse.cc:650
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr ""
 
@@ -3410,15 +3410,15 @@ msgstr ""
 msgid "No matches"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:294
+#: ../../src/ui_basic/panel.cc:295
 msgid "Please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:424
+#: ../../src/ui_basic/panel.cc:425
 msgid "Game ending – please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/progresswindow.cc:77
+#: ../../src/ui_basic/progresswindow.cc:78
 msgid "Loading…"
 msgstr ""
 
@@ -8479,31 +8479,31 @@ msgstr ""
 msgid "Zoom –"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:833
+#: ../../src/wui/interactive_base.cc:838
 #, c-format
 msgid "Road length: %1$u (%2$u)"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:835
+#: ../../src/wui/interactive_base.cc:840
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:840
+#: ../../src/wui/interactive_base.cc:845
 #, c-format
 msgid "Road length: %u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:843
+#: ../../src/wui/interactive_base.cc:848
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1725
+#: ../../src/wui/interactive_base.cc:1730
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1729
+#: ../../src/wui/interactive_base.cc:1734
 msgid "Screenshot saved"
 msgstr ""
 

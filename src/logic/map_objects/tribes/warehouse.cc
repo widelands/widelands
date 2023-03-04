@@ -520,7 +520,7 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	Player* player = get_owner();
 
 	init_containers(*player);
-	set_warehouse_name(player->pick_warehousename(descr().get_isport()));
+	warehouse_name_ = player->pick_warehousename(descr().get_isport());
 
 	set_seeing(true);
 
@@ -582,6 +582,11 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	}
 	cleanup_in_progress_ = false;
 	return true;
+}
+
+void Warehouse::set_warehouse_name(const std::string& name) {
+	warehouse_name_ = name;
+	get_owner()->reserve_warehousename(name);
 }
 
 void Warehouse::init_containers(const Player& player) {

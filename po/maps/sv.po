@@ -3,7 +3,7 @@
 # 
 # Translators:
 # D M <kamera001dm@gmail.com>, 2017
-# D M <kamera001dm@gmail.com>, 2021
+# D M <kamera001dm@gmail.com>, 2021,2023
 # GunChleoc, 2014
 # Martin Eriksson <nils.martin.andreas@gmail.com>, 2021
 msgid ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2021\n"
+"Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,13 +32,13 @@ msgstr "Efter att ha landat på en märklig ö nära Atlantis försöker de rest
 
 #: ../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "Kämpar för ett nytt hem igen"
 
 #: ../../data/campaigns/atl02.wmf/elemental:10
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "Efter den snabba flykten från den sjunkande ön ställs atlanterna omkring Jundlina inför nya utmaningar."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -289,24 +289,24 @@ msgstr "Reebaud och hans stam lever lyckligt uppe i norr. Samtidigt är ländern
 
 #: ../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
-msgstr ""
+msgstr "Två vänner återförenade"
 
 #: ../../data/campaigns/fri04.wmf/elemental:10
 msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
-msgstr ""
+msgstr "Claus och Henneke har slutligen tagit sig upp till norr men kommer de att kunna övertyga Reebaud att skicka hjälp?"
 
 #: ../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
-msgstr ""
+msgstr "Återerövring"
 
 #: ../../data/campaigns/fri05.wmf/elemental:10
 msgid ""
 "Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
 "for battle against the invaders. They must gather allies and plan their "
 "strategy, but the foe is never far away…"
-msgstr ""
+msgstr "Tillbaka i Norra Frisia till sist. Claus, Henneke, och Reebaud förbereder sig för strid mot inkräktarna. De måsta samla allierade och planera sin strategi, men fienden är aldrig långt borta..."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -824,7 +824,7 @@ msgstr "Ett mystiskt land, fullt av olika landskap, som genomskärs av en handfu
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
-msgstr ""
+msgstr "Längsmed floden"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""
@@ -835,7 +835,7 @@ msgid ""
 "developments of better equipped armies. Tough times are on the brink of "
 "emerging, and you should heed the words of your wise advisors, or fade into "
 "oblivion like the others."
-msgstr ""
+msgstr "Det är ön där solen knappt kan ses under vintern och där våren spolar bort alla minnen av det förflutna. Konstiga spänningar ha utvecklats mellan öns invånare och många själviska härskare har dragit fördelar av kaoset. Det vidskepliga folket verkar inte vara något hinder för utvecklingen av bättre utrustade arméer. Hårda tider håller på att växa fram och du bör lyssna på på orden från dina visa rådgivare eller blekna i glömska som de andra."
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"

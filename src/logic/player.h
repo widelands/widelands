@@ -592,6 +592,10 @@ public:
 	[[nodiscard]] std::string pick_shipname();
 	[[nodiscard]] std::string pick_warehousename(bool port);
 
+	// Remove name from the list of remaining names
+	void reserve_shipname(const std::string& name);
+	void reserve_warehousename(const std::string& name);
+
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	uint32_t count_soldiers() const;
