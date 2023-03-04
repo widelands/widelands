@@ -131,14 +131,17 @@ SDL_GLContext initialize(
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	// LeakSanitizer reports a memory leak which is triggered somewhere above this line, probably
-	// coming from the gaphics drivers
+	// coming from the graphics drivers
 
+#ifdef GLEW_ERROR_NO_GLX_DISPLAY
 	// err == GLEW_ERROR_NO_GLX_DISPLAY is a workaround for crash on wayland
 	// https://github.com/nigels-com/glew/issues/172
 	if (err == GLEW_ERROR_NO_GLX_DISPLAY &&
 	    std::strcmp(SDL_GetCurrentVideoDriver(), "wayland") == 0) {
 		log_info("Using glewInit workaround for Wayland\n");
-	} else if (err != GLEW_OK) {
+	} else
+#endif
+	   if (err != GLEW_OK) {
 		log_err("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
 		        glewGetErrorString(err));
 		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
