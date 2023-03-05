@@ -1841,7 +1841,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Tailor's Shop
             purpose = pgettext("building", "Equips fur garments with iron or gold to produce good armor."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Tailor's Shop
-            performance = pgettext("frisians_building", "The tailor’s shop needs %1$s on average to produce one studded fur garment and %2$s on average to produce one golden fur garment."):bformat(format_seconds(54), format_seconds(54))
+            performance = pgettext("frisians_building", "The tailor’s shop needs %1$s on average to produce one studded fur garment and %2$s on average to produce one golden fur garment."):bformat(format_minutes_seconds(1, 48), format_minutes_seconds(1, 48))
          }
       },
       {
@@ -1893,7 +1893,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Honey Bread Bakery
             purpose = pgettext("frisians_building", "Bakes honey bread out of barley, water and honey to feed miners in deep mines and soldiers in advanced training."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Honey Bread Bakery
-            performance = pgettext("frisians_building", "The honey bread bakery needs %1$s on average to produce one loaf of bread and %2$s on average to produce one loaf of honey bread."):bformat(format_seconds(44), format_seconds(49))
+            performance = pgettext("frisians_building", "The honey bread bakery needs %1$s on average to produce one loaf of bread and %2$s on average to produce one loaf of honey bread."):bformat(format_minutes_seconds(2, 22), format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1919,7 +1919,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Mead Brewery
             purpose = pgettext("frisians_building", "Brews beer out of barley and water. It also brews mead, which is beer refined with honey. Mead is consumed by experienced soldiers."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Mead Brewery
-            performance = pgettext("frisians_building", "The mead brewery needs %1$s on average to brew one mug of beer and %2$s on average to brew one mug of mead."):bformat(format_minutes_seconds(1, 4), format_minutes_seconds(1, 9))
+            performance = pgettext("frisians_building", "The mead brewery needs %1$s on average to brew one mug of beer and %2$s on average to brew one mug of mead."):bformat(format_minutes_seconds(3, 22), format_minutes_seconds(1, 41))
          }
       },
       {
