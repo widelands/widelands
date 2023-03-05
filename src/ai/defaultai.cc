@@ -3341,10 +3341,14 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
 		if (pda.other == mypn) {
 			// accept if diploscore high, else accept only 50% but not if player is seen lately
-			bool accept = player_statistics.get_diplo_score(pda.sender) >= 18 ||
-			              ((player_statistics.player_seen_lately(pda.sender, gametime) ||
-			                RNG::static_rand(2) == 0) &&
-			               player_statistics.get_diplo_score(pda.sender) > 5);
+			bool accept = false;
+			if (player_statistics.get_diplo_score(pda.sender) >= 18) {
+				accept = true;
+			} else if (player_statistics.get_diplo_score(pda.sender) > 5 &&
+			          (player_statistics.player_seen_lately(pda.sender, gametime) ||
+			           RNG::static_rand(2) == 0)) {
+				accept = true;
+			}
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
@@ -3357,22 +3361,22 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	}
 	for (Widelands::PlayerNumber opn = 1; opn <= game().map().get_nrplayers(); ++opn) {
 		const Widelands::Player* other_player = game().get_player(opn);
-		// other player needs to exist and different from me
+		// other player needs to exist and different from us
 		// we need to be still alive and we don't have send a request in last 5 + X minutes
-		if (other_player != nullptr && opn != mypn && !me->is_defeated() &&
-		    !player_statistics.player_diplo_requested_lately(opn, gametime)) {
-			if (player_statistics.get_diplo_score(opn) >= 18) {
-				player_statistics.set_last_time_requested(gametime, opn);
-				if (other_player->team_number() == 0) {
-					game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
-				} else if (other_player->team_number() != me->team_number()) {
-					game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kJoin, opn);
-				}
+		if (other_player == nullptr || opn == mypn || me->is_defeated() ||
+		    player_statistics.player_diplo_requested_lately(opn, gametime)) {
+			continue;
+		}
+		if (player_statistics.get_diplo_score(opn) >= 18) {
+			player_statistics.set_last_time_requested(gametime, opn);
+			if (other_player->team_number() == 0) {
+				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
+			} else if (other_player->team_number() != me->team_number()) {
+				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kJoin, opn);
 			}
-			if (player_statistics.get_diplo_score(opn) < -10 &&
-			    other_player->team_number() == me->team_number()) {
-				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kLeaveTeam, opn);
-			}
+		} else if (player_statistics.get_diplo_score(opn) < -10 &&
+			other_player->team_number() == me->team_number()) {
+			game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kLeaveTeam, opn);
 		}
 	}
 }
@@ -6862,7 +6866,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					inputs[20] = this_player->team_number() == 0 ? 4 : -1;
 					inputs[21] = this_player->team_number() == 0 ?
                                (std::abs(management_data.get_military_number_at(185)) / 10) :
-                               -(std::abs(management_data.get_military_number_at(185)) / 10);
+                               -(std::abs(management_data.get_military_number_at(185)) / 20);
 					inputs[22] = 3;
 					inputs[23] = cur_strength >= player_statistics.get_max_power() ? -10 : 8;
 					inputs[24] = cur_land >= player_statistics.get_max_land() ? -4 : 1;
