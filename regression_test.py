@@ -47,6 +47,7 @@ class WidelandsTestCase(unittest.TestCase):
     path_to_widelands_binary = None
     keep_output_around = False
     ignore_error_code = False
+    timeout = []
 
     def __init__(self, test_script, **wlargs):
         unittest.TestCase.__init__(self)
@@ -106,7 +107,7 @@ class WidelandsTestCase(unittest.TestCase):
             stdout_file.write("\n")
 
             widelands = subprocess.Popen(
-                    args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    self.timeout + args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             while 1:
                 line = widelands.stdout.readline()
                 if not line:
@@ -119,7 +120,8 @@ class WidelandsTestCase(unittest.TestCase):
         return stdout_filename
 
     def runTest(self):
-        out("\n  Running Widelands ... ")
+        out("\nStarting test case {}\n".format(self._test_script))
+        out("  Running Widelands ... ")
         stdout_filename = self.run_widelands(self._wlargs, 0)
         stdout = open(stdout_filename, "r").read()
         self.verify_success(stdout, stdout_filename)
@@ -152,6 +154,9 @@ class WidelandsTestCase(unittest.TestCase):
         else:
             common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
                     self.run_dir, stdout_filename, stdout)
+            if self.widelands_returncode >= 124:
+                out("TIMED OUT.\n")
+                self.assertTrue(False, "The test timed out. {}".format(common_msg))
             if self.widelands_returncode == 1 and self.ignore_error_code:
                 out("IGNORING error code 1\n")
             else:
@@ -191,6 +196,10 @@ def parse_args():
         help = "Assume success on return code 1, to allow running the tests "
         "without ASan reporting false positives."
     )
+    p.add_argument("-t", "--timeout", type=str, default = "10m",
+        help = "Set the timeout duration for test cases. Default is 10 minutes. "
+        "See 'man 1 timeout' for more information."
+    )
 
     args = p.parse_args()
 
@@ -208,11 +217,11 @@ def parse_args():
 
 def discover_loadgame_tests(regexp, suite):
     """Add all tests using --loadgame to the 'suite'."""
-    for fixture in glob(os.path.join("test", "save", "*")):
+    for fixture in sorted(glob(os.path.join("test", "save", "*"))):
         if not os.path.isdir(fixture):
             continue
-        savegame = glob(os.path.join(fixture, "*.wgf"))[0]
-        for test_script in glob(os.path.join(fixture, "test*.lua")):
+        savegame = sorted(glob(os.path.join(fixture, "*.wgf")))[0]
+        for test_script in sorted(glob(os.path.join(fixture, "test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
             suite.addTest(
@@ -221,10 +230,10 @@ def discover_loadgame_tests(regexp, suite):
 
 def discover_scenario_tests(regexp, suite):
     """Add all tests using --scenario to the 'suite'."""
-    for wlmap in glob(os.path.join("test", "maps", "*")):
+    for wlmap in sorted(glob(os.path.join("test", "maps", "*"))):
         if not os.path.isdir(wlmap):
             continue
-        for test_script in glob(os.path.join(wlmap, "scripting", "test*.lua")):
+        for test_script in sorted(glob(os.path.join(wlmap, "scripting", "test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
             suite.addTest(
@@ -233,10 +242,10 @@ def discover_scenario_tests(regexp, suite):
 
 def discover_editor_tests(regexp, suite):
     """Add all tests needing --editor to the 'suite'."""
-    for wlmap in glob(os.path.join("test", "maps", "*")):
+    for wlmap in sorted(glob(os.path.join("test", "maps", "*"))):
         if not os.path.isdir(wlmap):
             continue
-        for test_script in glob(os.path.join(wlmap, "scripting", "editor_test*.lua")):
+        for test_script in sorted(glob(os.path.join(wlmap, "scripting", "editor_test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
             suite.addTest(
@@ -252,7 +261,13 @@ def main():
     WidelandsTestCase.keep_output_around = args.keep_around
     WidelandsTestCase.ignore_error_code = args.ignore_error_code
 
-    all_files = [os.path.basename(filename) for filename in glob("test/test_*.py") ]
+    if shutil.which("timeout"):
+        WidelandsTestCase.timeout = ["timeout", args.timeout]
+    else:
+        out("'timeout' command not found, test cases may run indefinitely.\n")
+        out("Install GNU coreutils for timeout support.\n\n")
+
+    all_files = [os.path.basename(filename) for filename in sorted(glob("test/test_*.py")) ]
     if args.regexp:
         all_files = [filename for filename in all_files if re.search(args.regexp, filename) ]
 
