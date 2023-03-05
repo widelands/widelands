@@ -3345,8 +3345,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			if (player_statistics.get_diplo_score(pda.sender) >= 18) {
 				accept = true;
 			} else if (player_statistics.get_diplo_score(pda.sender) > 5 &&
-			          (player_statistics.player_seen_lately(pda.sender, gametime) ||
-			           RNG::static_rand(2) == 0)) {
+			           (player_statistics.player_seen_lately(pda.sender, gametime) ||
+			            RNG::static_rand(2) == 0)) {
 				accept = true;
 			}
 
@@ -3375,7 +3375,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kJoin, opn);
 			}
 		} else if (player_statistics.get_diplo_score(opn) < -10 &&
-			other_player->team_number() == me->team_number()) {
+		           other_player->team_number() == me->team_number()) {
 			game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kLeaveTeam, opn);
 		}
 	}
@@ -6930,16 +6930,28 @@ void DefaultAI::update_player_stat(const Time& gametime) {
                                3 :
                                -2;
 					inputs[43] = player_statistics.strong_enough(j) &&
-					             !player_statistics.player_seen_lately(j, gametime) ? -10 : 4;
-					inputs[44] = player_statistics.strong_enough(j) && cur_strength >= player_statistics.get_max_power() ? -8 : 0;
+					                   !player_statistics.player_seen_lately(j, gametime) ?
+                               -10 :
+                               4;
+					inputs[44] = player_statistics.strong_enough(j) &&
+					                   cur_strength >= player_statistics.get_max_power() ?
+                               -8 :
+                               0;
 					inputs[45] = player_statistics.strong_enough(j) ? -10 : 2;
 					inputs[46] = me_buildings < buildings ? 3 : -3;
-					inputs[47] = me_buildings <  buildings ? 4 : -1;
+					inputs[47] = me_buildings < buildings ? 4 : -1;
 					inputs[48] = me_buildings + me_land < buildings + cur_land ? 3 : -3;
 					inputs[49] = me_buildings + me_land < buildings + cur_land ? 4 : -1;
-					inputs[50] = player_statistics.members_in_team(this_player->team_number()) >= nr_players / 2 ? -10 : 2; 
-					inputs[51] = player_statistics.members_in_team(this_player->team_number()) == nr_players - 1 ? -10 : 2;
-					inputs[52] = player_statistics.members_in_team(this_player->team_number()) > 2 ? -10 : 2;
+					inputs[50] =
+					   player_statistics.members_in_team(this_player->team_number()) >= nr_players / 2 ?
+                     -10 :
+                     2;
+					inputs[51] =
+					   player_statistics.members_in_team(this_player->team_number()) == nr_players - 1 ?
+                     -10 :
+                     2;
+					inputs[52] =
+					   player_statistics.members_in_team(this_player->team_number()) > 2 ? -10 : 2;
 
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (management_data.f_neuron_pool[28].get_position(i)) {

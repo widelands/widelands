@@ -906,7 +906,7 @@ private:
 
 	// Number of team, sum of players' strength
 	std::map<Widelands::TeamNumber, uint32_t> team_powers;
-	// Number of team, number of members 
+	// Number of team, number of members
 	std::map<Widelands::TeamNumber, uint8_t> team_members;
 
 	Time update_time;
