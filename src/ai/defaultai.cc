@@ -6859,7 +6859,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
                      2 :
                      -2;
 					inputs[19] = me_cass > cass ? 2 : -1;
-					inputs[20] = this_player->team_number() == 0 ? 4 : -3;
+					inputs[20] = this_player->team_number() == 0 ? 4 : -1;
 					inputs[21] = this_player->team_number() == 0 ?
                                (std::abs(management_data.get_military_number_at(185)) / 10) :
                                -(std::abs(management_data.get_military_number_at(185)) / 10);
@@ -6896,19 +6896,19 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					            (cur_strength + me_strength) * 2 + cur_land + me_land ?
                      4 :
                      0;
-					inputs[34] = this_player->team_number() == me->team_number() ? 2 : -2;
-					inputs[35] = this_player->team_number() == me->team_number() ? 1 : -3;
+					inputs[34] = this_player->team_number() == me->team_number() ? 5 : -5;
+					inputs[35] = this_player->team_number() == me->team_number() ? 3 : -3;
 					inputs[36] = player_statistics.get_diplo_score(j) > 10 ? 2 : -2;
 					inputs[37] = player_statistics.get_is_enemy(j) &&
 					                   player_statistics.player_seen_lately(j, gametime) &&
 					                   !player_statistics.strong_enough(pn) ?
                                10 :
-                               -10;
+                               -2;
 					inputs[38] = player_statistics.get_is_enemy(j) &&
 					                   player_statistics.player_seen_lately(j, gametime) &&
 					                   !player_statistics.strong_enough(pn) ?
                                5 :
-                               -5;
+                               0;
 					inputs[39] = player_statistics.strong_enough(pn) ? -10 : 2;
 					inputs[40] = player_statistics.strong_enough(pn) ? -5 : 2;
 					inputs[41] = player_statistics.get_is_enemy(j) &&
