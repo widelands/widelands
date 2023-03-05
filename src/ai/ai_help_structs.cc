@@ -1046,6 +1046,7 @@ void PlayersStrengths::remove_stat(const Widelands::PlayerNumber pn) {
 // After statistics for team members are updated, this calculation is needed
 void PlayersStrengths::recalculate_team_power() {
 	team_powers.clear();
+	team_members.clear();
 	for (auto& item : all_stats) {
 		if (item.second.team_number > 0) {  // is a member of a team
 			if (team_powers.count(item.second.team_number) > 0) {
@@ -1053,6 +1054,7 @@ void PlayersStrengths::recalculate_team_power() {
 			} else {
 				team_powers[item.second.team_number] = item.second.players_power;
 			}
+			team_members[item.second.team_number] += 1;
 		}
 	}
 }
@@ -1073,6 +1075,11 @@ uint8_t PlayersStrengths::enemies_seen_lately_count(const Time& gametime) {
 		}
 	}
 	return count;
+}
+
+// Returns count of members in team
+uint8_t PlayersStrengths::members_in_team(Widelands::TeamNumber tn) {
+	return team_members[tn];
 }
 
 // When we see enemy, we use this to store the time

@@ -6756,10 +6756,12 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 	uint32_t me_old_land = 0;
 	uint32_t me_old60_land = 0;
 	uint32_t me_cass = 0;
+	uint32_t me_buildings = 0;
 	if (vsize > 0) {
 		me_strength = genstats.at(pn - 1).miltary_strength.back();
 		me_land = genstats.at(pn - 1).land_size.back();
 		me_cass = genstats.at(pn - 1).nr_casualties.back();
+		me_buildings = genstats.at(pn - 1).nr_buildings.back();
 
 		if (vsize > 21) {
 			me_old_strength = genstats.at(pn - 1).miltary_strength[vsize - 20];
@@ -6788,10 +6790,12 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				uint32_t old_land = 0;
 				uint32_t old60_land = 0;
 				uint32_t cass = 0;
+				uint32_t buildings = 0;
 				if (vsize > 0) {
 					cur_strength = genstats.at(j - 1).miltary_strength.back();
 					cur_land = genstats.at(j - 1).land_size.back();
 					cass = genstats.at(j - 1).nr_casualties.back();
+					buildings = genstats.at(j - 1).nr_buildings.back();
 
 					if (vsize > 21) {
 						old_strength = genstats.at(j - 1).miltary_strength[vsize - 20];
@@ -6925,6 +6929,17 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					                   player_statistics.enemies_seen_lately_count(gametime) > 1 ?
                                3 :
                                -2;
+					inputs[43] = player_statistics.strong_enough(j) &&
+					             !player_statistics.player_seen_lately(j, gametime) ? -10 : 4;
+					inputs[44] = player_statistics.strong_enough(j) && cur_strength >= player_statistics.get_max_power() ? -8 : 0;
+					inputs[45] = player_statistics.strong_enough(j) ? -10 : 2;
+					inputs[46] = me_buildings < buildings ? 3 : -3;
+					inputs[47] = me_buildings <  buildings ? 4 : -1;
+					inputs[48] = me_buildings + me_land < buildings + cur_land ? 3 : -3;
+					inputs[49] = me_buildings + me_land < buildings + cur_land ? 4 : -1;
+					inputs[50] = player_statistics.members_in_team(this_player->team_number()) >= nr_players / 2 ? -10 : 2; 
+					inputs[51] = player_statistics.members_in_team(this_player->team_number()) == nr_players - 1 ? -10 : 2;
+					inputs[52] = player_statistics.members_in_team(this_player->team_number()) > 2 ? -10 : 2;
 
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (management_data.f_neuron_pool[28].get_position(i)) {

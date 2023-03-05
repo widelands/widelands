@@ -895,6 +895,7 @@ public:
 	bool player_diplo_requested_lately(Widelands::PlayerNumber, const Time&);
 	bool get_is_enemy(Widelands::PlayerNumber);
 	uint8_t enemies_seen_lately_count(const Time&);
+	uint8_t members_in_team(Widelands::TeamNumber tn);
 	bool any_enemy_seen_lately(const Time&);
 	void set_update_time(const Time&);
 	const Time& get_update_time();
@@ -905,6 +906,8 @@ private:
 
 	// Number of team, sum of players' strength
 	std::map<Widelands::TeamNumber, uint32_t> team_powers;
+	// Number of team, number of members 
+	std::map<Widelands::TeamNumber, uint8_t> team_members;
 
 	Time update_time;
 	Widelands::PlayerNumber this_player_number;
