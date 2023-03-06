@@ -6947,6 +6947,15 @@ void DefaultAI::update_player_stat(const Time& gametime) {
                      2;
 					inputs[52] =
 					   player_statistics.members_in_team(this_player->team_number()) > 2 ? -10 : 2;
+					inputs[53] = 
+					   player_statistics.members_in_team(me->team_number()) > 1 &&
+					     this_player->team_number() != me->team_number() ? -5 : 5;
+					inputs[54] = 
+					   player_statistics.members_in_team(me->team_number()) > 2 &&
+					     this_player->team_number() != me->team_number() ? -10 : 0;
+					inputs[55] = 
+					   player_statistics.members_in_team(me->team_number()) > 1 &&
+					     this_player->team_number() != me->team_number() ? -7 : 2;
 
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (management_data.f_neuron_pool[28].get_position(i)) {
