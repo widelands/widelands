@@ -3341,9 +3341,9 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
 		if (pda.other == mypn) {
 			// accept if diploscore high, else accept only 50%
-			bool accept = player_statistics.get_diplo_score(pda.sender) >= 20 ||
-			              (player_statistics.get_diplo_score(pda.sender) > 5 &&
-			               RNG::static_rand(2) == 0);
+			bool accept =
+			   player_statistics.get_diplo_score(pda.sender) >= 20 ||
+			   (player_statistics.get_diplo_score(pda.sender) > 5 && RNG::static_rand(2) == 0);
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
