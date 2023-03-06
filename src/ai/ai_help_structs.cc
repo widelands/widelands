@@ -1054,7 +1054,7 @@ void PlayersStrengths::recalculate_team_power() {
 			} else {
 				team_powers[item.second.team_number] = item.second.players_power;
 			}
-			team_members[item.second.team_number] += 1;
+			++team_members[item.second.team_number];
 		}
 	}
 }

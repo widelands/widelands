@@ -3340,15 +3340,10 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
 		if (pda.other == mypn) {
-			// accept if diploscore high, else accept only 50% but not if player is seen lately
-			bool accept = false;
-			if (player_statistics.get_diplo_score(pda.sender) >= 18) {
-				accept = true;
-			} else if (player_statistics.get_diplo_score(pda.sender) > 5 &&
-			           (player_statistics.player_seen_lately(pda.sender, gametime) ||
-			            RNG::static_rand(2) == 0)) {
-				accept = true;
-			}
+			// accept if diploscore high, else accept only 50%
+			bool accept = player_statistics.get_diplo_score(pda.sender) >= 20 ||
+			              (player_statistics.get_diplo_score(pda.sender) > 5 &&
+			               RNG::static_rand(2) == 0);
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
@@ -3367,7 +3362,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		    player_statistics.player_diplo_requested_lately(opn, gametime)) {
 			continue;
 		}
-		if (player_statistics.get_diplo_score(opn) >= 18) {
+		if (player_statistics.get_diplo_score(opn) >= 20) {
 			player_statistics.set_last_time_requested(gametime, opn);
 			if (other_player->team_number() == 0) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
@@ -6910,7 +6905,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					inputs[37] = player_statistics.get_is_enemy(j) &&
 					                   player_statistics.player_seen_lately(j, gametime) &&
 					                   !player_statistics.strong_enough(pn) ?
-                               10 :
+                               8 :
                                -2;
 					inputs[38] = player_statistics.get_is_enemy(j) &&
 					                   player_statistics.player_seen_lately(j, gametime) &&
