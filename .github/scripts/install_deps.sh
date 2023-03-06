@@ -14,7 +14,6 @@ if [ "${GITHUB_JOB}" = "testsuite" ]; then
   ADD_PKG_LIST="
     ${CXX} \
     libwayland-egl1-mesa  \
-    linux-generic \
     mesa-utils  \
     xserver-xorg  \
     xserver-xorg-core \
