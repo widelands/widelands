@@ -34,6 +34,15 @@ else:
     def bytes_to_str(bytes):
         return str(bytes)
 
+has_timeout = "TimeoutExpired" in dir(subprocess)
+
+if "monotonic" in dir(time):
+    get_time = time.monotonic
+elif "perf_counter" in dir(time):
+    get_time = time.perf_counter
+else:
+    get_time = time.time
+
 def datadir():
     return os.path.join(os.path.dirname(__file__), "data")
 
@@ -109,17 +118,20 @@ class WidelandsTestCase(unittest.TestCase):
               stdout_file.write(" ")
             stdout_file.write("\n")
 
-            start_time = time.monotonic()
+            start_time = get_time()
             widelands = subprocess.Popen(
                     args, shell=False, stdout=stdout_file, stderr=subprocess.STDOUT)
-            try:
-                widelands.communicate(timeout = self.timeout)
-            except subprocess.TimeoutExpired:
-                widelands.kill()
+            if has_timeout:
+                try:
+                    widelands.communicate(timeout = self.timeout)
+                except subprocess.TimeoutExpired:
+                    widelands.kill()
+                    widelands.communicate()
+                    self.wl_timed_out = True
+                    stdout_file.write("\nTimed out.\n")
+            else:
                 widelands.communicate()
-                self.wl_timed_out = True
-                stdout_file.write("\nTimed out.\n")
-            end_time = time.monotonic()
+            end_time = get_time()
             stdout_file.flush()
             self.duration = datetime.timedelta(seconds = end_time - start_time)
             stdout_file.write("\nReturned from Widelands in {}, return code is {:d}\n".format(
@@ -205,9 +217,13 @@ def parse_args():
         help = "Assume success on return code 1, to allow running the tests "
         "without ASan reporting false positives."
     )
-    p.add_argument("-t", "--timeout", type=float, default = "10",
-        help = "Set the timeout duration for test cases in minutes. Default is 10 minutes."
-    )
+    if has_timeout:
+        p.add_argument("-t", "--timeout", type=float, default = "10",
+            help = "Set the timeout duration for test cases in minutes. Default is 10 minutes."
+        )
+    else:
+        p.epilog = "Python version does not support timeout. -t, --timeout is disabled. " \
+                   "Python >=3.3 is required for timeout support."
 
     args = p.parse_args()
 
@@ -268,7 +284,11 @@ def main():
     WidelandsTestCase.do_use_random_directory = not args.nonrandom
     WidelandsTestCase.keep_output_around = args.keep_around
     WidelandsTestCase.ignore_error_code = args.ignore_error_code
-    WidelandsTestCase.timeout = args.timeout * 60
+    if has_timeout:
+        WidelandsTestCase.timeout = args.timeout * 60
+    else:
+        out("Python version does not support timeout on subprocesses,\n"
+            "test cases may run indefinitely.\n\n")
 
     all_files = [os.path.basename(filename) for filename in sorted(glob("test/test_*.py")) ]
     if args.regexp:
