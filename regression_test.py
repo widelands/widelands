@@ -229,13 +229,19 @@ def parse_args():
 
     if args.binary is None:
         potential_binaries = (
-            glob("widelands") +
-            glob("src/widelands") +
-            glob("../*/src/widelands")
+            glob(os.path.join(os.curdir, "widelands")) +
+            glob(os.path.join(os.path.dirname(__file__), "widelands")) +
+            glob(os.path.join("src", "widelands")) +
+            glob(os.path.join("..", "*", "src", "widelands"))
         )
-        if not potential_binaries:
+        if potential_binaries:
+            args.binary = potential_binaries[0]
+        elif "which" in dir(shutil):
+            args.binary = shutil.which("widelands")
+
+        if args.binary is None:
             p.error("No widelands binary found. Please specify with -b.")
-        args.binary = potential_binaries[0]
+
     return args
 
 
