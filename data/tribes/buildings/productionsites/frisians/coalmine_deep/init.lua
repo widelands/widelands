@@ -62,9 +62,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _("mining coal"),
          actions = {
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 29.9 + 7 * (8.7 + 3.6) + 10 = 126 sec
             "return=skipped unless economy needs coal",
             "consume=meal",
-            "sleep=duration:39s900ms",
+            "sleep=duration:29s900ms",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
