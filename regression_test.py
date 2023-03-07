@@ -49,7 +49,7 @@ class WidelandsTestCase(unittest.TestCase):
     path_to_widelands_binary = None
     keep_output_around = False
     ignore_error_code = False
-    timeout = []
+    timeout = 600
 
     def __init__(self, test_script, **wlargs):
         unittest.TestCase.__init__(self)
@@ -71,6 +71,7 @@ class WidelandsTestCase(unittest.TestCase):
             else:
                 os.makedirs(self.run_dir)
         self.widelands_returncode = 0
+        self.wl_timed_out = False
 
     def run(self, result=None):
         self.currentResult = result # remember result for use in tearDown
@@ -110,15 +111,16 @@ class WidelandsTestCase(unittest.TestCase):
 
             start_time = time.monotonic()
             widelands = subprocess.Popen(
-                    self.timeout + args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            while 1:
-                line = widelands.stdout.readline()
-                if not line:
-                    break
-                stdout_file.write(bytes_to_str(line))
-                stdout_file.flush()
-            widelands.communicate()
+                    args, shell=False, stdout=stdout_file, stderr=subprocess.STDOUT)
+            try:
+                widelands.communicate(timeout = self.timeout)
+            except subprocess.TimeoutExpired:
+                widelands.kill()
+                widelands.communicate()
+                self.wl_timed_out = True
+                stdout_file.write("\nTimed out.\n")
             end_time = time.monotonic()
+            stdout_file.flush()
             self.duration = datetime.timedelta(seconds = end_time - start_time)
             stdout_file.write("\nReturned from Widelands in {}, return code is {:d}\n".format(
                 self.duration, widelands.returncode))
@@ -161,7 +163,7 @@ class WidelandsTestCase(unittest.TestCase):
         else:
             common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
                     self.run_dir, stdout_filename, stdout)
-            if self.widelands_returncode >= 124:
+            if self.wl_timed_out:
                 out("  TIMED OUT.\n")
                 self.assertTrue(False, "The test timed out. {}".format(common_msg))
             if self.widelands_returncode == 1 and self.ignore_error_code:
@@ -203,9 +205,8 @@ def parse_args():
         help = "Assume success on return code 1, to allow running the tests "
         "without ASan reporting false positives."
     )
-    p.add_argument("-t", "--timeout", type=str, default = "10m",
-        help = "Set the timeout duration for test cases. Default is 10 minutes. "
-        "See 'man 1 timeout' for more information."
+    p.add_argument("-t", "--timeout", type=float, default = "10",
+        help = "Set the timeout duration for test cases in minutes. Default is 10 minutes."
     )
 
     args = p.parse_args()
@@ -267,12 +268,7 @@ def main():
     WidelandsTestCase.do_use_random_directory = not args.nonrandom
     WidelandsTestCase.keep_output_around = args.keep_around
     WidelandsTestCase.ignore_error_code = args.ignore_error_code
-
-    if shutil.which("timeout"):
-        WidelandsTestCase.timeout = ["timeout", args.timeout]
-    else:
-        out("'timeout' command not found, test cases may run indefinitely.\n")
-        out("Install GNU coreutils for timeout support.\n\n")
+    WidelandsTestCase.timeout = args.timeout * 60
 
     all_files = [os.path.basename(filename) for filename in sorted(glob("test/test_*.py")) ]
     if args.regexp:
