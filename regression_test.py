@@ -11,6 +11,8 @@ import sys
 import tempfile
 import unittest
 import platform
+import time
+import datetime
 
 #Python2/3 compat code for iterating items
 try:
@@ -106,6 +108,7 @@ class WidelandsTestCase(unittest.TestCase):
               stdout_file.write(" ")
             stdout_file.write("\n")
 
+            start_time = time.monotonic()
             widelands = subprocess.Popen(
                     self.timeout + args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             while 1:
@@ -115,13 +118,16 @@ class WidelandsTestCase(unittest.TestCase):
                 stdout_file.write(bytes_to_str(line))
                 stdout_file.flush()
             widelands.communicate()
-            stdout_file.write("\nReturned from Widelands, return code is %d\n" % widelands.returncode)
+            end_time = time.monotonic()
+            self.duration = datetime.timedelta(seconds = end_time - start_time)
+            stdout_file.write("\nReturned from Widelands in {}, return code is {:d}\n".format(
+                self.duration, widelands.returncode))
             self.widelands_returncode = widelands.returncode
         return stdout_filename
 
     def runTest(self):
         out("\nStarting test case {}\n".format(self._test_script))
-        out("  Running Widelands ... ")
+        out("  Running Widelands ...\n")
         stdout_filename = self.run_widelands(self._wlargs, 0)
         stdout = open(stdout_filename, "r").read()
         self.verify_success(stdout, stdout_filename)
@@ -132,7 +138,7 @@ class WidelandsTestCase(unittest.TestCase):
         while not all(savegame_done.values()):
             for savegame in sorted(savegame_done):
                 if not savegame_done[savegame]: break
-            out("  Loading savegame: {} ... ".format(savegame))
+            out("  Loading savegame: {} ...\n".format(savegame))
             stdout_filename = self.run_widelands({ "loadgame": os.path.join(
                 self.run_dir, "save", "{}.wgf".format(savegame))}, which_time)
             which_time += 1
@@ -144,21 +150,22 @@ class WidelandsTestCase(unittest.TestCase):
             self.verify_success(stdout, stdout_filename)
 
     def verify_success(self, stdout, stdout_filename):
+        out("    Elapsed time: {}\n".format(self.duration))
         # Catch instabilities with SDL in CI environment
         if self.widelands_returncode == 2:
             print("SDL initialization failed. TEST SKIPPED.")
             with open(stdout_filename, 'r') as stdout_file:
                 for line in stdout_file.readlines():
                     print(line.strip())
-            out("SKIPPED.\n")
+            out("  SKIPPED.\n")
         else:
             common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
                     self.run_dir, stdout_filename, stdout)
             if self.widelands_returncode >= 124:
-                out("TIMED OUT.\n")
+                out("  TIMED OUT.\n")
                 self.assertTrue(False, "The test timed out. {}".format(common_msg))
             if self.widelands_returncode == 1 and self.ignore_error_code:
-                out("IGNORING error code 1\n")
+                out("  IGNORING error code 1\n")
             else:
                 self.assertTrue(self.widelands_returncode == 0,
                     "Widelands exited abnormally. {}".format(common_msg)
@@ -169,7 +176,7 @@ class WidelandsTestCase(unittest.TestCase):
             self.assertFalse("lua_errors.cc" in stdout,
                 "Not all tests pass. {}.".format(common_msg)
             )
-            out("done.\n")
+            out("  done.\n")
         if self.keep_output_around:
             out("    stdout: {}\n".format(stdout_filename))
 
