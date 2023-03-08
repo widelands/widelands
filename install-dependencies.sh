@@ -39,6 +39,7 @@ echo " "
 echo "Windows:"
 echo "* msys32    MSys 32bit"
 echo "* msys64    MSys 64bit"
+echo "* vcpkg     MSVC"
 echo " "
 echo "Mac:"
 echo "*homebrew   Homebrew"
@@ -161,7 +162,7 @@ elif [ "$DISTRO" = "mageia" ]; then
 
 elif [ "$DISTRO" = "debian" ]; then
    echo "Installing dependencies for Debian/Ubuntu Linux, Linux Mint..."
-   sudo apt install $@ git cmake g++ gcc gettext libasio-dev libglew-dev libpng-dev libsdl2-dev \
+   sudo apt-get install $@ git cmake g++ gcc gettext libasio-dev libglew-dev libpng-dev libsdl2-dev \
     libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev libminizip-dev
 
 elif [ "$DISTRO" = "freebsd" ]; then
@@ -199,6 +200,12 @@ elif [ "$DISTRO" = "void" ]; then
    echo "Installing dependencies for Void..."
    sudo xbps-install $@ asio git gcc make cmake gettext glew-devel icu-devel SDL2-devel \
      SDL2_ttf-devel SDL2_image-devel SDL2_mixer-devel minizip-devel pkg-config
+
+elif [ "$DISTRO" = "vcpkg" ]; then
+   echo "Installing dependencies for vcpkg..."
+   vcpkg install --disable-metrics $@ asio gettext libpng icu glbinding sdl2 sdl2-ttf \
+     sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 \
+     harfbuzz opusfile libwebp
 
 elif [ -z "$DISTRO" ]; then
    echo "ERROR. Unable to detect your operating system."

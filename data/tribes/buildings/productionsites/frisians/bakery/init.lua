@@ -79,9 +79,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = _("baking bread"),
          actions = {
+            -- time total: 20.4 + 20 + 3.6 = 44 sec
             "return=skipped unless economy needs bread_frisians or workers need experience",
             "consume=water barley",
-            "sleep=duration:20s",
+            "sleep=duration:20s400ms",
             "animate=working duration:20s",
             "produce=bread_frisians"
          },

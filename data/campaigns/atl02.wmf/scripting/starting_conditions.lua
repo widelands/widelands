@@ -11,8 +11,22 @@
    p1:forbid_buildings{"atlanteans_scouts_house", "atlanteans_temple_of_satul"}
    p1:allow_workers("all")
 
+   if #campaign_data.shipnames > 2 then
+      local lost_ship = math.random(3)
+      if lost_ship == 1 then
+         campaign_data.shipnames[1] = campaign_data.shipnames[3]
+      else
+         if lost_ship == 2 then
+            campaign_data.shipnames[2] = campaign_data.shipnames[3]
+         end
+      end
+   end
+
    local sf = map.player_slots[1].starting_field
    local ship = p1:place_ship(map:get_field(41,0))
+   if campaign_data.shipnames[1] then
+      ship.shipname = campaign_data.shipnames[1]
+   end
    ship.capacity = 110
    ship:make_expedition({
       atlanteans_fishbreeder = 1,
@@ -36,6 +50,9 @@
       })
 
    ship = p1:place_ship(map:get_field(44,0))
+   if campaign_data.shipnames[2] then
+      ship.shipname = campaign_data.shipnames[2]
+   end
    ship.capacity = 110
    ship:make_expedition({
       iron_ore = 29,

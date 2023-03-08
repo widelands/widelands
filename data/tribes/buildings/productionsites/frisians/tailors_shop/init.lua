@@ -52,6 +52,8 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 49 + 49 + 10 = 108 sec
             "call=weave_studded",
             "call=weave_gold",
             "return=skipped"
@@ -61,10 +63,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing studded fur garment because ...
          descname = _("sewing studded fur garment"),
          actions = {
-            -- time total: 50 + 3.6
+            -- time: 20.4 + 25 + 3.6 = 49 sec
             "return=skipped unless economy needs fur_garment_studded",
             "consume=fur_garment iron",
-            "sleep=duration:25s",
+            "sleep=duration:20s400ms",
             "animate=working duration:25s",
             "produce=fur_garment_studded"
          },
@@ -73,10 +75,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment because ...
          descname = _("sewing golden fur garment"),
          actions = {
-            -- time total: 50 + 3.6
+            -- time: 20.4 + 25 + 3.6 = 49 sec
             "return=skipped unless economy needs fur_garment_golden",
             "consume=fur_garment iron gold",
-            "sleep=duration:25s",
+            "sleep=duration:20s400ms",
             "animate=working duration:25s",
             "produce=fur_garment_golden"
          },
