@@ -168,7 +168,6 @@ jobs:
       ASAN_OPTIONS: 'detect_leaks=0'
       LSAN_OPTIONS: 'suppressions=${{ github.workspace }}/asan_3rd_party_leaks'
       CXX: '${{ matrix.compiler }}'
-      CONF: '${{ matrix.config }}'
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -208,7 +207,7 @@ jobs:
     - name: Testsuite
       run: |
         TIMEOUT=""
-        if [ "$CONF" = "Debug" ]
+        if [ "${{ matrix.config }}" = "Debug" ]
         then
           TIMEOUT="-t 20"
         fi
