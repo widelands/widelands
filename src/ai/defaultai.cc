@@ -3343,7 +3343,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			// accept if diploscore high, else accept only 50%
 			bool accept =
 			   player_statistics.get_diplo_score(pda.sender) >= 20 ||
-			   (player_statistics.get_diplo_score(pda.sender) > 5 && RNG::static_rand(2) == 0);
+			   (player_statistics.get_diplo_score(pda.sender) > 10 && RNG::static_rand(2) == 0);
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
@@ -3352,6 +3352,9 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
                                           (accept ? Widelands::DiplomacyAction::kAcceptJoin :
                                                     Widelands::DiplomacyAction::kRefuseJoin)),
 			                             pda.sender);
+			verb_log_dbg_time(gametime, "Player(%d), %s the invitation of player (%d) with diploscore: %d\n",
+				                  static_cast<unsigned int>(pda.other), accept ? "accepts" : "denies", static_cast<unsigned int>(pda.sender),
+				                  player_statistics.get_diplo_score(pda.sender));
 		}
 	}
 	for (Widelands::PlayerNumber opn = 1; opn <= game().map().get_nrplayers(); ++opn) {
@@ -3362,7 +3365,10 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		    player_statistics.player_diplo_requested_lately(opn, gametime)) {
 			continue;
 		}
-		if (player_statistics.get_diplo_score(opn) >= 30) {
+		if (player_statistics.get_diplo_score(opn) >= 30) && other_player->team_number() != me->team_number() {
+			verb_log_dbg_time(gametime, "Player(%d), invites player (%d) with diploscore: %d\n",
+				                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(opn),
+				                  player_statistics.get_diplo_score(opn));
 			player_statistics.set_last_time_requested(gametime, opn);
 			if (other_player->team_number() == 0) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
@@ -6867,7 +6873,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
                                (std::abs(management_data.get_military_number_at(185)) / 10) :
                                -(std::abs(management_data.get_military_number_at(185)) / 20);
 					inputs[22] = 3;
-					inputs[23] = cur_strength >= player_statistics.get_max_power() ? -10 : 8;
+					inputs[23] = cur_strength >= player_statistics.get_max_power() ? -10 : 4;
 					inputs[24] = cur_land >= player_statistics.get_max_land() ? -4 : 1;
 					inputs[25] = player_statistics.get_diplo_score(j) > 0 ? 5 : -1;
 					inputs[26] = player_statistics.get_diplo_score(j) > 5 ? 3 : -2;
@@ -6878,11 +6884,13 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					inputs[29] = gametime < Time((30 + RNG::static_rand(20)) * 60 * 1000) ? -5 : 0;
 					inputs[30] = gametime < Time((60 + RNG::static_rand(30)) * 60 * 1000) ? -5 : 0;
 					inputs[31] = cur_strength < player_statistics.get_max_power() &&
-					                   player_statistics.get_max_power() < cur_strength + me_strength ?
-                               10 :
+					                   player_statistics.get_max_power() < cur_strength + me_strength &&
+									   me_strength < player_statistics.get_max_power() ?
+                               8 :
                                0;
 					inputs[0] = cur_land < player_statistics.get_max_land() &&
-					                  player_statistics.get_max_land() < cur_land + me_land ?
+					                  player_statistics.get_max_land() < cur_land + me_land &&
+									  me_land < player_statistics.get_max_land() ?
                               5 :
                               -5;
 					inputs[32] =
@@ -6959,6 +6967,10 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					                   this_player->team_number() != me->team_number() ?
                                -7 :
                                2;
+					inputs[56] = me_strength >= player_statistics.get_max_power() ? -6 : 4;
+					inputs[57] = me_strength >= player_statistics.get_max_power() ?
+                               -(std::abs(management_data.get_military_number_at(197)) / 10) :
+                               (std::abs(management_data.get_military_number_at(197)) / 10);
 
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (management_data.f_neuron_pool[28].get_position(i)) {
