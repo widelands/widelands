@@ -6661,7 +6661,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The inn can produce one ration in %1$s and one snack in %2$s on average, if "
 "the supply is steady."
-msgstr ""
+msgstr "Das Wirtshaus kann durchschnittlich eine Ration in %1$s und einen Snack in %2$s herstellen, wenn für stetig Nachschub gesorgt ist."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1364
@@ -6691,7 +6691,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The big inn can produce one ration in %1$s, one snack in %2$s and one meal "
 "in %3$s on average, if the supply is steady."
-msgstr ""
+msgstr "Die Gaststätte kann durchschnittlich eine Ration in %1$s,  einen Snack in %2$s und eine Mahlzeit in %3$s herstellen, wenn für stetig Nachschub gesorgt ist."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Charcoal Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1377

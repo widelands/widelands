@@ -50,9 +50,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
          descname = _("mining marble"),
          actions = {
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 29 + 5 * (7.8 + 3.6) + 10 = 96 sec
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=meal wine",
-            "sleep=duration:40s",
+            "sleep=duration:29s",
             "call=mine_produce_marble",
             "call=mine_produce_granite",
             "call=mine_produce_marble",
