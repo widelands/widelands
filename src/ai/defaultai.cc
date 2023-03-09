@@ -3368,18 +3368,17 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		}
 		if (player_statistics.get_diplo_score(opn) >= 30 &&
 		    other_player->team_number() != me->team_number()) {
-				verb_log_dbg_time(gametime, "Player(%d), invites player (%d) with diploscore: %d\n",
-				                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(opn),
-				                  player_statistics.get_diplo_score(opn));
-				player_statistics.set_last_time_requested(gametime, opn);
-				if (other_player->team_number() == 0) {
-					game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
-				} else if (other_player->team_number() != me->team_number()) {
-					game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kJoin, opn);
-				}
+			verb_log_dbg_time(gametime, "Player(%d), invites player (%d) with diploscore: %d\n",
+			                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(opn),
+			                  player_statistics.get_diplo_score(opn));
+			player_statistics.set_last_time_requested(gametime, opn);
+			if (other_player->team_number() == 0) {
+				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
+			} else if (other_player->team_number() != me->team_number()) {
+				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kJoin, opn);
 			}
-		else if (player_statistics.get_diplo_score(opn) < -15 &&
-		         other_player->team_number() == me->team_number()) {
+		} else if (player_statistics.get_diplo_score(opn) < -15 &&
+		           other_player->team_number() == me->team_number()) {
 			game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kLeaveTeam, opn);
 		}
 	}
