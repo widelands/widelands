@@ -50,9 +50,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _("mining gold"),
          actions = {
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 30.2 + 3 * (13 + 3.6) + 10 = 90 sec
             "return=skipped unless economy needs gold_ore",
             "consume=meal wine",
-            "sleep=duration:40s",
+            "sleep=duration:30s200ms",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

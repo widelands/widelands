@@ -205,11 +205,54 @@ jobs:
         build/src/website/wl_map_object_info temp_web || [ $? -eq 2 ]
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
     - name: Testsuite
-      run: ./regression_test.py -b build/src/widelands
+      run: |
+        TIMEOUT=""
+        if [ "${{ matrix.config }}" = "Debug" ]
+        then
+          TIMEOUT="-t 20"
+        fi
+        ./regression_test.py -b build/src/widelands $TIMEOUT
+
+  vcpkg-packages:
+    # If the vcpkg cache is not present, build packages and populate the cache
+    # Then the windows-msvc jobs can install dependencies faster
+    strategy:
+      matrix:
+        arch: [x64, x86]
+    name: Build vcpkg packages for ${{ matrix.arch }}
+    runs-on: windows-2022
+    outputs:
+      vcpkg_key: ${{ steps.prepare.outputs.vcpkg_key }}
+    env:
+      VCPKG_ROOT: C:\vcpkg
+      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg/bincache
+      VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Create cache directory
+      id: prepare
+      run: |
+        mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
+        cd ${{ env.VCPKG_ROOT }}
+        HEAD=$(git rev-parse --short HEAD)
+        echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${HEAD}" >> $GITHUB_OUTPUT
+      shell: bash
+    - name: Restore vcpkg and its artifacts.
+      uses: actions/cache@v3
+      with:
+        path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+        key: |
+          ${{ steps.prepare.outputs.vcpkg_key }}-${{ matrix.arch }}
+    - name: Building packages
+      run: ./install-dependencies.sh vcpkg --triplet=${{ env.VCPKG_TARGET_TRIPLET }}
+      shell: bash
 
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style, vcpkg-packages]
     strategy:
       matrix:
         config: [Debug, Release]
@@ -230,19 +273,19 @@ jobs:
       id: prepare
       run: |
         mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
-        cd ${{ env.VCPKG_ROOT }}
-        echo "head=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       shell: bash
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v3
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: |
-          ${{ hashFiles( '.github/workflows/build.yaml' ) }}-${{ steps.prepare.outputs.head }}-${{ matrix.arch }}
+          ${{needs.vcpkg-packages.outputs.vcpkg_key}}-${{ matrix.arch }}
     - name: Installing dependencies
       run: |
         choco install innosetup
-        vcpkg install --disable-metrics --triplet=${{ env.VCPKG_TARGET_TRIPLET }} asio gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp
+        # Cache should have been populated by vcpkg-packages job
+        ./install-dependencies.sh vcpkg --triplet=${{ env.VCPKG_TARGET_TRIPLET }}
+      shell: bash
     - name: Configure MSVC development console
       uses: ilammy/msvc-dev-cmd@v1
       with:
