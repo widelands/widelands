@@ -3366,8 +3366,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		    player_statistics.player_diplo_requested_lately(opn, gametime)) {
 			continue;
 		}
-		if (player_statistics.get_diplo_score(opn) >= 30)
-			&&other_player->team_number() != me->team_number() {
+		if (player_statistics.get_diplo_score(opn) >= 30 &&
+		    other_player->team_number() != me->team_number()) {
 				verb_log_dbg_time(gametime, "Player(%d), invites player (%d) with diploscore: %d\n",
 				                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(opn),
 				                  player_statistics.get_diplo_score(opn));
