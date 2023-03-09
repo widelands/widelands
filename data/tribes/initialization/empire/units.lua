@@ -1801,10 +1801,10 @@ wl.Descriptions():new_tribe {
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Marble Mine
             lore_author = pgettext("empire_building", "Imperial proverb"),
-            purpose = {
-               -- TRANSLATORS: Purpose helptext for an empire production site: Marble Mine
-               pgettext("empire_building", "Carves marble and granite out of the rock in mountain terrain.")
-            }
+            -- TRANSLATORS: Purpose helptext for an empire production site: Marble Mine
+            purpose = pgettext("empire_building", "Carves marble and granite out of the rock in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Marble Mine
+            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce marble in %1$s and granite in %2$s on average."):bformat(format_seconds(37), format_seconds(37))
          }
       },
       {
@@ -1825,7 +1825,9 @@ wl.Descriptions():new_tribe {
                "History of the Empire, Part VI on the return of Lutius to Fremil"
             ),
             -- TRANSLATORS: Purpose helptext for an empire production site: Deep Marble Mine
-            purpose = pgettext("empire_building", "Carves marble and granite out of the rock in mountain terrain.")
+            purpose = pgettext("empire_building", "Carves marble and granite out of the rock in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Deep Marble Mine
+            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce marble in %1$s and granite in %2$s on average."):bformat(format_seconds(32), format_seconds(48))
          }
       },
       {
@@ -1848,7 +1850,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an empire production site: Coal Mine
             lore_author = pgettext("empire_building", "Excerpt from the Encyclopædia Imperica"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
-            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Coal Mine
+            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce coal in %s on average."):bformat(format_seconds(32))
          }
       },
       {
@@ -1872,6 +1876,8 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("empire_building", "Excerpt from the Encyclopædia Imperica"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
             purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Deep Coal Mine
+            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce coal in %s on average."):bformat(format_seconds(19))
          }
       },
       {
@@ -1890,7 +1896,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an empire production site: Iron Mine
             lore_author = pgettext("empire_building", "A proverb that is vehemently disputed by iron miners"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
-            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Iron Mine
+            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce iron ore in %s on average."):bformat(format_seconds(32))
          }
       },
       {
@@ -1911,7 +1919,9 @@ wl.Descriptions():new_tribe {
                "Amalea on the importance of always looking for more resources"
             ),
             -- TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
-            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Deep Iron Mine
+            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce iron ore in %s on average."):bformat(format_seconds(23))
          }
       },
       {
@@ -1932,7 +1942,9 @@ wl.Descriptions():new_tribe {
                "Amalea receiving the first geologist report of gold on the small island"
             ),
             -- TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
-            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Gold Mine
+            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce gold ore in %s on average."):bformat(format_seconds(46))
          }
       },
       {
@@ -1953,7 +1965,9 @@ wl.Descriptions():new_tribe {
                "General Trepidus Egenus Attenuatus on motivating soldiers"
             ),
             -- TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
-            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Gold Mine
+            performance = pgettext("empire_building", "If the food supply is steady, this mine can produce gold ore in %s on average."):bformat(format_seconds(30))
          }
       },
 

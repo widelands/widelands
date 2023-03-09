@@ -7,16 +7,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Frank Tang <roadtang@gmail.com>, 2015
 # GunChleoc, 2015
-# Jiawei Sun, 2022
+# 92373a9a734415f33212259453a6274d_77ab48e, 2022
 # Roy Luo <1598359376@qq.com>, 2020-2021
 # liu lizhi <xingzuo88@qq.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-22 02:57+0000\n"
+"POT-Creation-Date: 2023-03-04 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Jiawei Sun, 2022\n"
+"Last-Translator: 92373a9a734415f33212259453a6274d_77ab48e, 2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1692,7 +1692,7 @@ msgstr "互相配合的玩家"
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:171
+#: ../../src/graphic/gl/initialize.cc:176
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
@@ -1701,8 +1701,8 @@ msgstr " Widelands无法正常工作，因为我们检测不到shading language 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:175
-#: ../../src/graphic/gl/initialize.cc:188
+#: ../../src/graphic/gl/initialize.cc:180
+#: ../../src/graphic/gl/initialize.cc:193
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
@@ -1711,7 +1711,7 @@ msgstr "读取显卡信息时出现未知的问题。"
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:185
+#: ../../src/graphic/gl/initialize.cc:190
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
 msgstr "因无法检测 OpenGL 版本，故游戏无法启动。"
@@ -1719,15 +1719,15 @@ msgstr "因无法检测 OpenGL 版本，故游戏无法启动。"
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:216
-#: ../../src/graphic/gl/initialize.cc:236
+#: ../../src/graphic/gl/initialize.cc:221
+#: ../../src/graphic/gl/initialize.cc:241
 msgid "Widelands won’t work because your graphics driver is too old."
 msgstr "显卡驱动程序过于陈旧，导致游戏无法运行。"
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:219
+#: ../../src/graphic/gl/initialize.cc:224
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
 msgstr ""
@@ -1735,16 +1735,16 @@ msgstr ""
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:239
+#: ../../src/graphic/gl/initialize.cc:244
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
 msgstr ""
 
-#: ../../src/graphic/gl/initialize.cc:255
+#: ../../src/graphic/gl/initialize.cc:260
 msgid "OpenGL"
 msgstr "OpenGL"
 
-#: ../../src/graphic/gl/initialize.cc:302
+#: ../../src/graphic/gl/initialize.cc:307
 msgid "Shading Language"
 msgstr ""
 
@@ -2269,89 +2269,89 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "找不到更多资源！"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:455
+#: ../../src/logic/map_objects/tribes/ship.cc:460
 msgid "Port Space"
 msgstr "港口空间"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:455
+#: ../../src/logic/map_objects/tribes/ship.cc:460
 msgid "Port Space Found"
 msgstr "找到港口空间"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:456
+#: ../../src/logic/map_objects/tribes/ship.cc:461
 msgid "An expedition ship found a new port build space."
 msgstr "一艘探险船发现了一个新的港口建造空间。"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:579
+#: ../../src/logic/map_objects/tribes/ship.cc:584
 msgid "Island Circumnavigated"
 msgstr "环岛航行"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:579
+#: ../../src/logic/map_objects/tribes/ship.cc:584
 msgctxt "ship"
 msgid "Waiting"
 msgstr "等待"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:580
+#: ../../src/logic/map_objects/tribes/ship.cc:585
 msgid "An expedition ship sailed around its island without any events."
 msgstr " 一艘探险船绕岛航行，没有发生任何事件。 "
 
-#: ../../src/logic/map_objects/tribes/ship.cc:643
+#: ../../src/logic/map_objects/tribes/ship.cc:648
 msgid "Coast Reached"
 msgstr "到达海岸"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:643
+#: ../../src/logic/map_objects/tribes/ship.cc:648
 msgid "Land Ahoy!"
 msgstr " 着陆啊！ "
 
-#: ../../src/logic/map_objects/tribes/ship.cc:644
+#: ../../src/logic/map_objects/tribes/ship.cc:649
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "一艘探险船到达海岸正在等待下一步的命令。"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:695
+#: ../../src/logic/map_objects/tribes/ship.cc:700
 msgid "New port construction site is gone"
 msgstr "新港口建设工地即将完工"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:695
+#: ../../src/logic/map_objects/tribes/ship.cc:700
 msgid "Port Lost!"
 msgstr "港口丢失"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:696
+#: ../../src/logic/map_objects/tribes/ship.cc:701
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "卸货失败，探险取消。"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:752
+#: ../../src/logic/map_objects/tribes/ship.cc:757
 msgid "No Port Can Be Built"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:752
+#: ../../src/logic/map_objects/tribes/ship.cc:757
 msgid "Port Space Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:753
+#: ../../src/logic/map_objects/tribes/ship.cc:758
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:899
+#: ../../src/logic/map_objects/tribes/ship.cc:904
 msgctxt "ship"
 msgid "Expedition"
 msgstr "探险"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:899
+#: ../../src/logic/map_objects/tribes/ship.cc:904
 msgid "Expedition Ready"
 msgstr "探险远征准备就绪"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:900
+#: ../../src/logic/map_objects/tribes/ship.cc:905
 msgid "An expedition ship is waiting for your commands."
 msgstr "一艘探险船正等待着你的命令。"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1058
+#: ../../src/logic/map_objects/tribes/ship.cc:1063
 #: ../../src/wui/seafaring_statistics_menu.cc:244
 msgctxt "ship_state"
 msgid "Empty"
@@ -2359,7 +2359,7 @@ msgstr "空的"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1063
+#: ../../src/logic/map_objects/tribes/ship.cc:1068
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
@@ -2367,7 +2367,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1069
+#: ../../src/logic/map_objects/tribes/ship.cc:1074
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
@@ -2375,7 +2375,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1075
+#: ../../src/logic/map_objects/tribes/ship.cc:1080
 #: ../../src/wui/seafaring_statistics_menu.cc:248
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2383,14 +2383,14 @@ msgstr "等待"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1079
+#: ../../src/logic/map_objects/tribes/ship.cc:1084
 #: ../../src/wui/seafaring_statistics_menu.cc:250
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "侦察"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1083
+#: ../../src/logic/map_objects/tribes/ship.cc:1088
 #: ../../src/wui/seafaring_statistics_menu.cc:252
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2399,7 +2399,7 @@ msgstr "找到港口空间"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1088
+#: ../../src/logic/map_objects/tribes/ship.cc:1093
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "建立殖民地"
@@ -2502,15 +2502,15 @@ msgstr "一个新的仓库已添加到你的经济系统。"
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
 #. * available)
-#: ../../src/logic/map_objects/tribes/warehouse.cc:643
+#: ../../src/logic/map_objects/tribes/warehouse.cc:648
 msgid "Waterway"
 msgstr "水路"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:644
+#: ../../src/logic/map_objects/tribes/warehouse.cc:649
 msgid "Waterway destroyed"
 msgstr "水路被摧毁"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:645
+#: ../../src/logic/map_objects/tribes/warehouse.cc:650
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr " 为了在给你们的新码头腾出空间修建船坞，一条水道不得不被摧毁。 "
 
