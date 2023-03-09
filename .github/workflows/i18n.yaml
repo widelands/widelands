@@ -19,7 +19,7 @@ jobs:
         fetch-depth: 0
         persist-credentials: false
     - name: Installing python
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
         python-version: 3.x
     - name: Installing dependencies

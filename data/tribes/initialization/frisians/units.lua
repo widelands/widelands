@@ -1789,7 +1789,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Blacksmithy
             purpose = pgettext("building", "Forges tools to equip new workers."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Blacksmithy
-            performance = pgettext("frisians_building", "The blacksmith needs %s on average to produce one tool."):bformat(format_minutes_seconds(1, 7))
+            performance = pgettext("frisians_building", "The blacksmith needs %s on average to produce one tool."):bformat(format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1800,7 +1800,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Small Armor Smithy
             lore_author = pgettext("frisians_building", "A blacksmith pointing out his influence on soldier training"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Small Armor Smithy
-            purpose = pgettext("frisians_building", "Produces basic weapons and helmets for the soldiers.")
+            purpose = pgettext("frisians_building", "Produces basic weapons and helmets for the soldiers."),
+            -- TRANSLATORS: Performance helptext for a frisian production site: Small Armor Smithy
+            performance = pgettext("frisians_building", "If all needed wares are delivered in time, this building can produce one short sword in %1$s on average, one long sword in %2$s on average and one helmet in %3$s on average."):bformat(format_minutes_seconds(4, 14), format_minutes_seconds(2, 7), format_minutes_seconds(4, 14))
          }
       },
       {
@@ -1811,7 +1813,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Large Armor Smithy
             lore_author = pgettext("frisians_building", "A master blacksmith refusing to forge anything but the most sophisticated helmets and weapons"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Large Armor Smithy
-            purpose = pgettext("frisians_building", "Produces advanced weapons and golden helmets for the soldiers.")
+            purpose = pgettext("frisians_building", "Produces advanced weapons and golden helmets for the soldiers."),
+            -- TRANSLATORS: Performance helptext for a frisian production site: Large Armor Smithy
+            performance = pgettext("frisians_building", "If all needed wares are delivered in time, this building can produce one broadswordsword in %1$s on average, one double-edged sword in %2$s on average and one golden helmet in %3$s on average."):bformat(format_minutes_seconds(2, 42), format_minutes_seconds(2, 42), format_minutes_seconds(5, 24))
          }
       },
       {
@@ -1835,7 +1839,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Tailor's Shop
             lore_author = pgettext("frisians_building", "A trainer scolding a soldier"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Tailor's Shop
-            purpose = pgettext("building", "Equips fur garments with iron or gold to produce good armor.")
+            purpose = pgettext("building", "Equips fur garments with iron or gold to produce good armor."),
+            -- TRANSLATORS: Performance helptext for a frisian production site: Tailor's Shop
+            performance = pgettext("frisians_building", "The tailor’s shop needs %1$s on average to produce one studded fur garment and %2$s on average to produce one golden fur garment."):bformat(format_minutes_seconds(1, 48), format_minutes_seconds(1, 48))
          }
       },
       {
@@ -1874,7 +1880,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Bakery
             purpose = pgettext("frisians_building", "Bakes bread out of barley and water to feed miners and soldiers."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Bakery
-            performance = pgettext("frisians_building", "The bakery needs %s on average to produce one loaf of bread."):bformat(format_seconds(40))
+            performance = pgettext("frisians_building", "The bakery needs %s on average to produce one loaf of bread."):bformat(format_seconds(44))
          }
       },
       {
@@ -1885,7 +1891,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Honey Bread Bakery
             lore_author = pgettext("frisians_building", "A trainer in conversation with a baker"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Honey Bread Bakery
-            purpose = pgettext("frisians_building", "Bakes honey bread out of barley, water and honey to feed miners in deep mines and soldiers in advanced training.")
+            purpose = pgettext("frisians_building", "Bakes honey bread out of barley, water and honey to feed miners in deep mines and soldiers in advanced training."),
+            -- TRANSLATORS: Performance helptext for a frisian production site: Honey Bread Bakery
+            performance = pgettext("frisians_building", "The honey bread bakery needs %1$s on average to produce one loaf of bread and %2$s on average to produce one loaf of honey bread."):bformat(format_minutes_seconds(2, 22), format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1898,7 +1906,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Brewery
             purpose = pgettext("frisians_building", "Brews beer for miners and soldier training."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Brewery
-            performance = pgettext("frisians_building", "The brewery needs %s on average to brew one mug of beer."):bformat(format_minutes(1))
+            performance = pgettext("frisians_building", "The brewery needs %s on average to brew one mug of beer."):bformat(format_minutes_seconds(1, 4))
          }
       },
       {
@@ -1909,7 +1917,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Mead Brewery
             lore_author = pgettext("frisians_building", "Slogan over a mead brewery"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Mead Brewery
-            purpose = pgettext("frisians_building", "Brews beer out of barley and water. It also brews mead, which is beer refined with honey. Mead is consumed by experienced soldiers.")
+            purpose = pgettext("frisians_building", "Brews beer out of barley and water. It also brews mead, which is beer refined with honey. Mead is consumed by experienced soldiers."),
+            -- TRANSLATORS: Performance helptext for a frisian production site: Mead Brewery
+            performance = pgettext("frisians_building", "The mead brewery needs %1$s on average to brew one mug of beer and %2$s on average to brew one mug of mead."):bformat(format_minutes_seconds(3, 22), format_minutes_seconds(1, 41))
          }
       },
       {
@@ -1994,7 +2004,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Rock Mine
             purpose = pgettext("building", "Digs granite out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Rock Mine
-            performance = pgettext("frisians_building", "If the food supply is steady, the rock mine can produce two blocks of granite in %s on average."):bformat(format_minutes_seconds(1, 25))
+            performance = pgettext("frisians_building", "If the food supply is steady, the rock mine can produce granite in %s on average."):bformat(format_seconds(46))
          }
       },
       {
@@ -2003,7 +2013,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Rock Mine
             purpose = pgettext("building", "Digs granite out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Deep Rock Mine
-            performance = pgettext("frisians_building", "If the food supply is steady, the deep rock mine can produce three blocks of granite in %s on average."):bformat(format_minutes_seconds(1, 16))
+            performance = pgettext("frisians_building", "If the food supply is steady, the deep rock mine can produce granite in %s on average."):bformat(format_seconds(18))
          }
       },
       {
@@ -2012,7 +2022,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
             purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Coal Mine
-            performance = pgettext("frisians_building", "If the food supply is steady, the coal mine can produce two pieces of coal in %s on average."):bformat(format_minutes_seconds(1, 25))
+            performance = pgettext("frisians_building", "If the food supply is steady, the coal mine can produce coal in %s on average."):bformat(format_seconds(41))
          }
       },
       {
@@ -2021,7 +2031,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
             purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Deep Coal Mine
-            performance = pgettext("frisians_building", "If the food supply is steady, the deep coal mine can produce four pieces of coal in %s on average."):bformat(format_minutes_seconds(1, 16))
+            performance = pgettext("frisians_building", "If the food supply is steady, the deep coal mine can produce coal in %s on average."):bformat(format_seconds(18))
          }
       },
       {
@@ -2030,7 +2040,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
             purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Iron Mine
-            performance = pgettext("frisians_building", "If the food supply is steady, the iron mine can produce one piece of iron ore in %s on average."):bformat(format_minutes_seconds(1, 5))
+            performance = pgettext("frisians_building", "If the food supply is steady, the iron mine can produce one piece of iron ore in %s on average."):bformat(format_minutes_seconds(1, 9))
          }
       },
       {
@@ -2039,7 +2049,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
             purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Deep Iron Mine
-            performance = pgettext("frisians_building", "If the food supply is steady, the deep iron mine can produce two pieces of iron ore in %s on average."):bformat(format_minutes_seconds(1, 16))
+            performance = pgettext("frisians_building", "If the food supply is steady, the deep iron mine can produce iron ore in %s on average."):bformat(format_seconds(21))
          }
       },
       {
@@ -2048,7 +2058,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
             purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Gold Mine
-            performance = pgettext("frisians_building", "If the food supply is steady, the gold mine can produce one piece of gold ore in %s on average."):bformat(format_minutes_seconds(1, 5))
+            performance = pgettext("frisians_building", "If the food supply is steady, the gold mine can produce one piece of gold ore in %s on average."):bformat(format_minutes_seconds(1, 9))
          }
       },
       {
@@ -2057,7 +2067,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
             purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Deep Gold Mine
-            performance = pgettext("frisians_building", "If the food supply is steady, the deep gold mine can produce two pieces of gold ore in %s on average."):bformat(format_minutes_seconds(1, 16))
+            performance = pgettext("frisians_building", "If the food supply is steady, the deep gold mine can produce gold ore in %s on average."):bformat(format_seconds(24))
          }
       },
 
