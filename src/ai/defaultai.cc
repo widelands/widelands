@@ -3370,23 +3370,26 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			if (other_player->team_number() == 0) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
 				player_statistics.set_last_time_requested(gametime, opn);
-				verb_log_dbg_time(gametime, "Player(%d), invites player (%d) to join with diploscore: %d\n",
-			                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(opn),
-			                  player_statistics.get_diplo_score(opn));
+				verb_log_dbg_time(gametime,
+				                  "Player(%d), invites player (%d) to join with diploscore: %d\n",
+				                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(opn),
+				                  player_statistics.get_diplo_score(opn));
 			} else if (other_player->team_number() != me->team_number()) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kJoin, opn);
 				player_statistics.set_last_time_requested(gametime, opn);
-				verb_log_dbg_time(gametime, "Player(%d), requests player (%d) to join with diploscore: %d\n",
-			                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(opn),
-			                  player_statistics.get_diplo_score(opn));
+				verb_log_dbg_time(gametime,
+				                  "Player(%d), requests player (%d) to join with diploscore: %d\n",
+				                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(opn),
+				                  player_statistics.get_diplo_score(opn));
 			}
 		} else if (player_statistics.get_diplo_score(opn) < -15 &&
 		           other_player->team_number() == me->team_number() &&
-				   other_player->team_number() != 0) {
+		           other_player->team_number() != 0) {
 			game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kLeaveTeam, opn);
-			verb_log_dbg_time(gametime, "Player(%d), leaves team (%d) of player (%d) with diploscore: %d\n",
-			                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(other_player->team_number()), static_cast<unsigned int>(opn),
-			                  player_statistics.get_diplo_score(opn));
+			verb_log_dbg_time(
+			   gametime, "Player(%d), leaves team (%d) of player (%d) with diploscore: %d\n",
+			   static_cast<unsigned int>(mypn), static_cast<unsigned int>(other_player->team_number()),
+			   static_cast<unsigned int>(opn), player_statistics.get_diplo_score(opn));
 		}
 	}
 }
