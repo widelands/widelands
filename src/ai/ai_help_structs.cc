@@ -973,7 +973,7 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
                                          uint32_t oland,
                                          uint32_t o60l,
                                          int32_t ds,
-										 uint32_t bld)
+                                         uint32_t bld)
    : team_number(tc),
      players_power(pp),
      old_players_power(op),
@@ -984,7 +984,7 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
      old_players_land(oland),
      old60_players_land(o60l),
      players_diplomacy_score(ds),
-	 players_buildings(bld) {
+     players_buildings(bld) {
 }
 
 // Inserting/updating data
@@ -1009,7 +1009,7 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            uint32_t oland,
                            uint32_t o60l,
                            int32_t ds,
-						   uint32_t bld) {
+                           uint32_t bld) {
 	if (all_stats.count(opn) == 0) {
 		this_player_number = pn;
 		this_player_team = mytn;

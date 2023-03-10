@@ -838,7 +838,7 @@ private:
 		           uint32_t oland,
 		           uint32_t o60l,
 		           int32_t ds,
-				   uint32_t bld);
+		           uint32_t bld);
 
 		Widelands::TeamNumber team_number = 0U;
 		uint32_t players_power = 0U;
@@ -869,7 +869,7 @@ public:
 	         uint32_t oland,
 	         uint32_t o60l,
 	         int32_t ds,
-			 uint32_t bld);
+	         uint32_t bld);
 	void remove_stat(Widelands::PlayerNumber pn);
 	void recalculate_team_power();
 
