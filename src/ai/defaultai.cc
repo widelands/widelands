@@ -3342,8 +3342,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		if (pda.other == mypn) {
 			// accept if diploscore high, else accept only 50%
 			bool accept =
-			   player_statistics.get_diplo_score(pda.sender) >= 20 ||
-			   (player_statistics.get_diplo_score(pda.sender) > 10 && RNG::static_rand(2) == 0);
+			   player_statistics.get_diplo_score(pda.sender) >= 30 ||
+			   (player_statistics.get_diplo_score(pda.sender) > 20 && RNG::static_rand(2) == 0);
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
@@ -3366,7 +3366,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		    player_statistics.player_diplo_requested_lately(opn, gametime)) {
 			continue;
 		}
-		if (player_statistics.get_diplo_score(opn) >= 30) {
+		if (player_statistics.get_diplo_score(opn) >= 40) {
 			if (other_player->team_number() == 0) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
 				player_statistics.set_last_time_requested(gametime, opn);
@@ -6831,6 +6831,11 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				// we need to be sure all magic numbers have been initialized so wait 30s
 				if (gametime > Time(30000)) {
 					int16_t inputs[2 * kFNeuronBitSize] = {0};
+					inputs[0] = cur_land < player_statistics.get_max_land() &&
+					                  player_statistics.get_max_land() < cur_land + me_land &&
+					                  me_land < player_statistics.get_max_land() ?
+                              5 :
+                              -5;
 					inputs[1] = RNG::static_rand(5) == 0 ? 2 : -2;
 					inputs[2] =
 					   RNG::static_rand((std::abs(management_data.get_military_number_at(181)) / 10) +
@@ -6900,11 +6905,6 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					                   me_strength < player_statistics.get_max_power() ?
                                8 :
                                0;
-					inputs[0] = cur_land < player_statistics.get_max_land() &&
-					                  player_statistics.get_max_land() < cur_land + me_land &&
-					                  me_land < player_statistics.get_max_land() ?
-                              5 :
-                              -5;
 					inputs[32] =
 					   cur_strength * 3 + cur_land < player_statistics.get_max_power() * 3 +
 					                                    player_statistics.get_max_land() &&
@@ -6979,10 +6979,38 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					                   this_player->team_number() != me->team_number() ?
                                -7 :
                                2;
-					inputs[56] = me_strength >= player_statistics.get_max_power() ? -6 : 4;
+					inputs[56] = me_strength >= player_statistics.get_max_power() ? -8 : 0;
 					inputs[57] = me_strength >= player_statistics.get_max_power() ?
                                -(std::abs(management_data.get_military_number_at(197)) / 10) :
-                               (std::abs(management_data.get_military_number_at(197)) / 10);
+                               (std::abs(management_data.get_military_number_at(197)) / 20);
+					inputs[58] = cur_strength < player_statistics.get_max_power() &&
+					              me_strength < player_statistics.get_max_power() ?
+                               5 :
+                               -5;
+					inputs[59] = buildings < player_statistics.get_max_buildings() &&
+					                  player_statistics.get_max_buildings() < buildings + me_buildings &&
+					                  me_buildings < player_statistics.get_max_buildings() ?
+                              4 :
+                              -4;
+					inputs[60] = buildings < player_statistics.get_max_buildings() &&
+					              me_buildings < player_statistics.get_max_buildings() ?
+                               5 :
+                               -2;
+					inputs[61] =
+					   buildings * 3 + cur_land < player_statistics.get_max_buildings() * 3 +
+					                                    player_statistics.get_max_land() &&
+					         player_statistics.get_max_buildings() * 3 + player_statistics.get_max_land() <
+					            (buildings + me_buildings) * 3 + cur_land + me_land ?
+                               5 :
+                               -5;
+					inputs[62] =
+					   buildings * 2 + cur_land < player_statistics.get_max_buildings() * 2 +
+					                                    player_statistics.get_max_land() &&
+					         player_statistics.get_max_buildings() * 2 + player_statistics.get_max_land() <
+					            (buildings + me_buildings) * 2 + cur_land + me_land ?
+                               4 :
+                               0;
+					 inputs[63] = me_buildings >= player_statistics.get_max_buildings() ? -6 : 0;
 
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (management_data.f_neuron_pool[28].get_position(i)) {
@@ -6996,7 +7024,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(),
 				                      cur_strength, old_strength, old60_strength, cass, cur_land,
-				                      old_land, old60_land, diplo_score);
+				                      old_land, old60_land, diplo_score, buildings);
 				verb_log_dbg_time(gametime, "For player(%d), the player(%d) has the diploscore: %d\n",
 				                  static_cast<unsigned int>(pn), static_cast<unsigned int>(j),
 				                  diplo_score);

@@ -972,7 +972,8 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
                                          uint32_t land,
                                          uint32_t oland,
                                          uint32_t o60l,
-                                         int32_t ds)
+                                         int32_t ds,
+										 uint32_t bld)
    : team_number(tc),
      players_power(pp),
      old_players_power(op),
@@ -982,7 +983,8 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
      players_land(land),
      old_players_land(oland),
      old60_players_land(o60l),
-     players_diplomacy_score(ds) {
+     players_diplomacy_score(ds),
+	 players_buildings(bld) {
 }
 
 // Inserting/updating data
@@ -1006,12 +1008,13 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            uint32_t land,
                            uint32_t oland,
                            uint32_t o60l,
-                           int32_t ds) {
+                           int32_t ds,
+						   uint32_t bld) {
 	if (all_stats.count(opn) == 0) {
 		this_player_number = pn;
 		this_player_team = mytn;
 		all_stats.insert(
-		   std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l, ds)));
+		   std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l, ds, bld)));
 	} else {
 		all_stats[opn].players_power = pp;
 		all_stats[opn].old_players_power = op;
@@ -1021,6 +1024,7 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 		all_stats[opn].old_players_land = oland;
 		all_stats[opn].old60_players_land = o60l;
 		all_stats[opn].players_diplomacy_score = ds;
+		all_stats[opn].players_buildings = bld;
 		assert(this_player_number == pn);
 		if (this_player_team != mytn) {
 			verb_log_dbg("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
@@ -1248,6 +1252,14 @@ uint32_t PlayersStrengths::get_max_land() {
 		land = std::max<uint32_t>(land, item.second.players_land);
 	}
 	return land;
+}
+
+uint32_t PlayersStrengths::get_max_buildings() {
+	uint32_t buildings = 0;
+	for (auto& item : all_stats) {
+		buildings = std::max<uint32_t>(buildings, item.second.players_buildings);
+	}
+	return buildings;
 }
 
 uint32_t PlayersStrengths::get_old_player_power(Widelands::PlayerNumber pn) {
