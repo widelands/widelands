@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-03-04 02:52+0000\n"
+"POT-Creation-Date: 2023-03-07 03:08+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -1692,7 +1692,7 @@ msgstr "대화형 선수"
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:176
+#: ../../src/graphic/gl/initialize.cc:179
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
@@ -1701,8 +1701,8 @@ msgstr "우리는 음영 언어 버전을 감지할 수 없었기 때문에 와�
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:180
-#: ../../src/graphic/gl/initialize.cc:193
+#: ../../src/graphic/gl/initialize.cc:183
+#: ../../src/graphic/gl/initialize.cc:196
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
@@ -1711,7 +1711,7 @@ msgstr "그래픽 드라이버에서 정보를 읽는 데 알 수 없는 문제�
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:190
+#: ../../src/graphic/gl/initialize.cc:193
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
 msgstr "오픈지엘 버전을 감지할 수 없어서 와이드랜드가가 작동하지 않습니다."
@@ -1719,15 +1719,15 @@ msgstr "오픈지엘 버전을 감지할 수 없어서 와이드랜드가가 작
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:221
-#: ../../src/graphic/gl/initialize.cc:241
+#: ../../src/graphic/gl/initialize.cc:224
+#: ../../src/graphic/gl/initialize.cc:244
 msgid "Widelands won’t work because your graphics driver is too old."
 msgstr "그래픽 드라이버가 너무 오래되었기 때문에 와이드랜드가 작동하지 않습니다."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:224
+#: ../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
 msgstr "%1$u 버전은 %2$u.%3$u 버전 이상이어야 합니다."
@@ -1735,16 +1735,16 @@ msgstr "%1$u 버전은 %2$u.%3$u 버전 이상이어야 합니다."
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:244
+#: ../../src/graphic/gl/initialize.cc:247
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
 msgstr "%1$s 은(는) %2$u.%3$u 버전 이상이어야 합니다."
 
-#: ../../src/graphic/gl/initialize.cc:260
+#: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
 msgstr "오픈지엘"
 
-#: ../../src/graphic/gl/initialize.cc:307
+#: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
 msgstr "그림자 언어"
 
