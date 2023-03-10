@@ -7,6 +7,7 @@
 # heidi.wenger, 2022
 # Jukka Pakarinen, 2016-2020
 # Markus <markus@hallfors.com>, 2015
+# Oi Suomi On! <oisuomion@protonmail.com>, 2023
 # Teppo Mäenpää <teppo@runbox.com>, 2020
 msgid ""
 msgstr ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Atte Timonen, 2022\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -562,7 +563,7 @@ msgid ""
 "Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr ""
+msgstr "Lautat rakennetaan telakoilla, yksi soutuvene kustantaa kaksi tukkia ja yhden palan kangasta, rakentuen nopeasti. Lauttatelakka on keskikokoinen rakennus joka tulee rakentaa lähelle rantaa. "
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."

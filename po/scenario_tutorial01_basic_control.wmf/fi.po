@@ -9,6 +9,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2020
+# Oi Suomi On! <oisuomion@protonmail.com>, 2023
 # Teppo Mäenpää <teppo@runbox.com>, 2020
 msgid ""
 msgstr ""
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Atte Timonen, 2022\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -400,7 +401,7 @@ msgstr "Pienkartan käyttäminen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:274
 msgid "Very good. And now about the minimap."
-msgstr ""
+msgstr "Oikein mallikasta. Ja nyt hiukan pienkartasta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #, lua-format
