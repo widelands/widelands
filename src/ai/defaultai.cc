@@ -3378,7 +3378,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kJoin, opn);
 				player_statistics.set_last_time_requested(gametime, opn);
 				verb_log_dbg_time(gametime,
-				                  "Player(%d), requests player (%d) to join with diploscore: %d\n",
+				                  "Player(%d), requests to join player (%d) with diploscore: %d\n",
 				                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(opn),
 				                  player_statistics.get_diplo_score(opn));
 			}
