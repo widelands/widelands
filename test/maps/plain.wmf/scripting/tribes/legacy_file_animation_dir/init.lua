@@ -5,7 +5,7 @@ wl.Descriptions():new_worker_type {
    name = "barbarians_legacy_file_animation_dir",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "File Animation"),
-   icon = dirname .. "menu.png",
+   icon = dirname .. "../file_animation/" .. "menu.png",
    vision_range = 2,
 
    buildcost = {}, -- This will give the worker the property "buildable"

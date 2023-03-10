@@ -5,7 +5,7 @@ wl.Descriptions():new_productionsite_type {
    name = "barbarians_legacy_spritesheet_animation_dir",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Spritesheet Animation"),
-   icon = dirname .. "menu.png",
+   icon = dirname .. "../spritesheet_animation/" .. "menu.png",
    size = "medium",
 
    buildcost = {
