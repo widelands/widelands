@@ -3340,12 +3340,12 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 	// if we are defeated or the last one in a team leave team
 	if (me->team_number() != 0 &&
-	    (player_statistics.members_in_team(me->team_number()) == 1 ||
-	       me->is_defeated())) {
+	    (player_statistics.members_in_team(me->team_number()) == 1 || me->is_defeated())) {
 		game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kLeaveTeam, 0 /* ignored */);
 		verb_log_dbg_time(
 			   gametime, "AI Diplomacy: Player(%d), leaves team (%d) as last one.\n",
-			   static_cast<unsigned int>(mypn), static_cast<unsigned int>(me->team_number()));
+		                  static_cast<unsigned int>(mypn),
+		                  static_cast<unsigned int>(me->team_number()));
 	}
 
 	bool request_accepted = false;
