@@ -6982,7 +6982,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
                      -10 :
                      0;
 					inputs[51] =
-					   player_statistics.members_in_team(this_player->team_number()) == nr_players - 1 ?
+					   player_statistics.members_in_team(this_player->team_number()) == player_statistics.players_active() - 1 ?
                      -10 :
                      0;
 					inputs[52] =
