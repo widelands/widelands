@@ -27,7 +27,7 @@
 
 struct ProductionSiteWindow : public BuildingWindow {
 	ProductionSiteWindow(InteractiveBase& parent,
-	                     UI::UniqueWindow::Registry& reg,
+	                     BuildingWindow::Registry& reg,
 	                     Widelands::ProductionSite&,
 	                     bool avoid_fastclick,
 	                     bool workarea_preview_wanted);

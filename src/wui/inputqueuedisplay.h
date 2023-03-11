@@ -27,6 +27,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/slider.h"
+#include "wui/buildingwindow.h"
 
 namespace UI {
 
@@ -83,17 +84,19 @@ class InputQueueDisplay : public UI::Box {
 public:
 	// For real input queues
 	InputQueueDisplay(UI::Panel* parent,
-	                  InteractiveBase&,
-	                  Widelands::Building&,
-	                  Widelands::InputQueue&,
+	                  InteractiveBase& interactive_base,
+	                  Widelands::Building& building,
+	                  Widelands::InputQueue& queue,
 	                  bool show_only,
-	                  bool has_priority);
+	                  bool has_priority,
+	                  BuildingWindow::CollapsedState* collapsed);
 	// For constructionsite settings
 	InputQueueDisplay(UI::Panel* parent,
-	                  InteractiveBase&,
-	                  Widelands::ConstructionSite&,
-	                  Widelands::WareWorker,
-	                  Widelands::DescriptionIndex);
+	                  InteractiveBase& interactive_base,
+	                  Widelands::ConstructionSite& constructionsite,
+	                  Widelands::WareWorker type,
+	                  Widelands::DescriptionIndex ware_or_worker_index,
+	                  BuildingWindow::CollapsedState* collapsed);
 
 	~InputQueueDisplay() override = default;
 
@@ -107,15 +110,16 @@ protected:
 
 private:
 	// Common constructor
-	InputQueueDisplay(UI::Panel*,
-	                  InteractiveBase&,
-	                  Widelands::Building&,
-	                  Widelands::WareWorker,
-	                  Widelands::DescriptionIndex,
-	                  Widelands::InputQueue*,
-	                  Widelands::ProductionsiteSettings*,
-	                  bool,
-	                  bool);
+	InputQueueDisplay(UI::Panel* parent,
+	                  InteractiveBase& interactive_base,
+	                  Widelands::Building& building,
+	                  Widelands::WareWorker type,
+	                  Widelands::DescriptionIndex ware_or_worker_index,
+	                  Widelands::InputQueue* queue,
+	                  Widelands::ProductionsiteSettings* settings,
+	                  bool show_only,
+	                  bool has_priority,
+	                  BuildingWindow::CollapsedState* collapsed);
 
 	InteractiveBase& ibase_;
 	bool can_act_, show_only_, has_priority_;
@@ -139,7 +143,12 @@ private:
 	void set_desired_fill(unsigned fill);
 	void clicked_real_fill(int8_t delta);
 	void set_priority(const Widelands::WarePriority&);
-	void set_collapsed(bool);
+	bool is_collapsed() {
+		return *collapsed_ == BuildingWindow::CollapsedState::kCollapsed;
+	}
+
+	// Update elements according to collapsed state
+	void set_collapsed();
 
 	const Image& max_fill_indicator_;
 
@@ -150,7 +159,7 @@ private:
 	UI::Panel spacer_;
 	const Widelands::WarePriority* slider_was_moved_;
 
-	bool collapsed_;
+	BuildingWindow::CollapsedState* collapsed_;  ///< Owned by the window creating the input queue
 
 	size_t nr_icons_;
 	std::vector<UI::Icon*> icons_;

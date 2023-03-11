@@ -21,3 +21,7 @@
 UI::UniqueWindow::Registry& UniqueWindowHandler::get_registry(const std::string& name) {
 	return registries_[name];
 }
+BuildingWindow::Registry&
+UniqueWindowHandler::get_building_window_registry(const std::string& name) {
+	return building_window_registries_[name];
+}
