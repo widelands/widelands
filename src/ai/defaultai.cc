@@ -3355,6 +3355,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			bool accept =
 			   player_statistics.get_diplo_score(pda.sender) >= 30 ||
 			   (player_statistics.get_diplo_score(pda.sender) > 20 && RNG::static_rand(2) == 0);
+			accept = accept && player_statistics.members_in_team(pda.sender) < player_statistics.players_active() - 1 &&
+			         player_statistics.members_in_team(mypn) < player_statistics.players_active() - 1 ;
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
@@ -6978,13 +6980,13 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					inputs[50] =
 					   player_statistics.members_in_team(this_player->team_number()) >= nr_players / 2 ?
                      -10 :
-                     2;
+                     0;
 					inputs[51] =
 					   player_statistics.members_in_team(this_player->team_number()) == nr_players - 1 ?
                      -10 :
-                     2;
+                     0;
 					inputs[52] =
-					   player_statistics.members_in_team(this_player->team_number()) > 2 ? -10 : 2;
+					   player_statistics.members_in_team(this_player->team_number()) > 2 ? -10 : 0;
 					inputs[53] = player_statistics.members_in_team(me->team_number()) > 1 &&
 					                   this_player->team_number() != me->team_number() ?
                                -5 :
@@ -7043,7 +7045,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(),
 				                      cur_strength, old_strength, old60_strength, cass, cur_land,
-				                      old_land, old60_land, diplo_score, buildings);
+				                      old_land, old60_land, diplo_score, buildings, this_player->is_defeated());
 				verb_log_dbg_time(gametime, "AI Diplomacy: For player(%d), the player(%d) has the diploscore: %d\n",
 				                  static_cast<unsigned int>(pn), static_cast<unsigned int>(j),
 				                  diplo_score);

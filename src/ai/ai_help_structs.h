@@ -838,7 +838,8 @@ private:
 		           uint32_t oland,
 		           uint32_t o60l,
 		           int32_t ds,
-		           uint32_t bld);
+		           uint32_t bld,
+				   bool def);
 
 		Widelands::TeamNumber team_number = 0U;
 		uint32_t players_power = 0U;
@@ -852,6 +853,7 @@ private:
 		uint32_t old60_players_land = 0U;
 		int32_t players_diplomacy_score = 0U;
 		uint32_t players_buildings = 0U;
+		bool defeated = false;
 	};
 
 public:
@@ -869,7 +871,8 @@ public:
 	         uint32_t oland,
 	         uint32_t o60l,
 	         int32_t ds,
-	         uint32_t bld);
+	         uint32_t bld,
+			 bool def);
 	void remove_stat(Widelands::PlayerNumber pn);
 	void recalculate_team_power();
 
@@ -900,6 +903,7 @@ public:
 	bool get_is_enemy(Widelands::PlayerNumber);
 	uint8_t enemies_seen_lately_count(const Time&);
 	uint8_t members_in_team(Widelands::TeamNumber tn);
+	uint8_t players_active();
 	bool any_enemy_seen_lately(const Time&);
 	void set_update_time(const Time&);
 	const Time& get_update_time();
@@ -912,6 +916,8 @@ private:
 	std::map<Widelands::TeamNumber, uint32_t> team_powers;
 	// Number of team, number of members
 	std::map<Widelands::TeamNumber, uint8_t> team_members;
+	// number of active players (not defeated)
+	uint8_t active_players_;
 
 	Time update_time;
 	Widelands::PlayerNumber this_player_number;

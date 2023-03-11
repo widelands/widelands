@@ -973,18 +973,19 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
                                          uint32_t oland,
                                          uint32_t o60l,
                                          int32_t ds,
-                                         uint32_t bld)
+                                         uint32_t bld,
+                                         bool def)
    : team_number(tc),
      players_power(pp),
      old_players_power(op),
      old60_players_power(o60p),
      players_casualities(cs),
-
      players_land(land),
      old_players_land(oland),
      old60_players_land(o60l),
      players_diplomacy_score(ds),
-     players_buildings(bld) {
+     players_buildings(bld),
+     defeated(def) {
 }
 
 // Inserting/updating data
@@ -1009,12 +1010,13 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            uint32_t oland,
                            uint32_t o60l,
                            int32_t ds,
-                           uint32_t bld) {
+                           uint32_t bld,
+                           bool def) {
 	if (all_stats.count(opn) == 0) {
 		this_player_number = pn;
 		this_player_team = mytn;
 		all_stats.insert(
-		   std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l, ds, bld)));
+		   std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l, ds, bld, def)));
 	} else {
 		all_stats[opn].players_power = pp;
 		all_stats[opn].old_players_power = op;
@@ -1025,6 +1027,7 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 		all_stats[opn].old60_players_land = o60l;
 		all_stats[opn].players_diplomacy_score = ds;
 		all_stats[opn].players_buildings = bld;
+		all_stats[opn].defeated = def;
 		assert(this_player_number == pn);
 		if (this_player_team != mytn) {
 			verb_log_dbg("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
@@ -1051,6 +1054,7 @@ void PlayersStrengths::remove_stat(const Widelands::PlayerNumber pn) {
 void PlayersStrengths::recalculate_team_power() {
 	team_powers.clear();
 	team_members.clear();
+	active_players_ = 0U;
 	for (auto& item : all_stats) {
 		if (item.second.team_number > 0) {  // is a member of a team
 			if (team_powers.count(item.second.team_number) > 0) {
@@ -1060,7 +1064,11 @@ void PlayersStrengths::recalculate_team_power() {
 			}
 			++team_members[item.second.team_number];
 		}
+		if (!item.second.defeated) {
+			++active_players_;
+		}
 	}
+	verb_log_dbg("AI: %d players are active\n", active_players_);
 }
 
 // This just goes over information about all enemies and where they were seen the last time
@@ -1084,6 +1092,11 @@ uint8_t PlayersStrengths::enemies_seen_lately_count(const Time& gametime) {
 // Returns count of members in team
 uint8_t PlayersStrengths::members_in_team(Widelands::TeamNumber tn) {
 	return team_members[tn];
+}
+
+// Returns number of active players
+uint8_t PlayersStrengths::players_active() {
+	return active_players_;
 }
 
 // When we see enemy, we use this to store the time
