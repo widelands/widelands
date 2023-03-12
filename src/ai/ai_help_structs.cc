@@ -1056,6 +1056,10 @@ void PlayersStrengths::recalculate_team_power() {
 	team_members.clear();
 	active_players_ = 0U;
 	for (auto& item : all_stats) {
+		if (item.second.defeated) {
+			continue;
+		}
+		++active_players_;
 		if (item.second.team_number > 0) {  // is a member of a team
 			if (team_powers.count(item.second.team_number) > 0) {
 				team_powers[item.second.team_number] += item.second.players_power;
@@ -1063,9 +1067,6 @@ void PlayersStrengths::recalculate_team_power() {
 				team_powers[item.second.team_number] = item.second.players_power;
 			}
 			++team_members[item.second.team_number];
-		}
-		if (!item.second.defeated) {
-			++active_players_;
 		}
 	}
 	verb_log_dbg("AI: %d players are active\n", active_players_);
