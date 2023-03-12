@@ -6792,7 +6792,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 	uint32_t me_old60_land = 0;
 	uint32_t me_cass = 0;
 	uint32_t me_buildings = 0;
-	if (vsize > 0) {
+	if (vsize > 0 && !me->is_defeated()) {
 		me_strength = genstats.at(pn - 1).miltary_strength.back();
 		me_land = genstats.at(pn - 1).land_size.back();
 		me_cass = genstats.at(pn - 1).nr_casualties.back();
@@ -6817,6 +6817,12 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 	for (Widelands::PlayerNumber j = 1; j <= nr_players; ++j) {
 		const Widelands::Player* this_player = game().get_player(j);
 		if (this_player != nullptr) {
+			if (this_player->is_defeated() || me->is_defeated()) {
+				// setting all AI Player stats to zero and diploscore to -20
+				player_statistics.add(pn, j, me->team_number(), this_player->team_number(), 0,
+				                      0, 0, 0, 0, 0, 0, -20, 0, this_player->is_defeated());
+				continue;
+			}
 			try {
 				uint32_t cur_strength = 0;
 				uint32_t cur_land = 0;
@@ -6851,7 +6857,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				// determine the diplomacy score of each player
 				int32_t diplo_score = 0;
 				// we need to be sure all magic numbers have been initialized so wait 30s
-				if (gametime > Time(30000)) {
+				if (gametime > Time(30000 && pn != j)) {
 					int16_t inputs[2 * kFNeuronBitSize] = {0};
 					inputs[0] = cur_land < player_statistics.get_max_land() &&
 					                  player_statistics.get_max_land() < cur_land + me_land &&
@@ -7060,9 +7066,6 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 			// Well, under some circumstances it is possible we have stat for this player and he does
 			// not exist anymore
 			player_statistics.remove_stat(j);
-			verb_log_dbg_time(
-				   gametime, "AI Diplomacy: The player(%d) has been removed from stats.\n",
-				   static_cast<unsigned int>(j));
 		}
 	}
 
