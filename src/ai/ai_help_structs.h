@@ -903,6 +903,7 @@ public:
 	bool get_is_enemy(Widelands::PlayerNumber);
 	uint8_t enemies_seen_lately_count(const Time&);
 	uint8_t members_in_team(Widelands::TeamNumber tn);
+	uint32_t team_power(Widelands::TeamNumber tn);
 	const uint8_t players_active();
 	bool any_enemy_seen_lately(const Time&);
 	void set_update_time(const Time&);
@@ -910,12 +911,12 @@ public:
 
 private:
 	// This is the core part of this struct
-	std::map<Widelands::PlayerNumber, PlayerStat> all_stats;
+	std::map<Widelands::PlayerNumber, PlayerStat> all_stats_;
 
 	// Number of team, sum of players' strength
-	std::map<Widelands::TeamNumber, uint32_t> team_powers;
+	std::map<Widelands::TeamNumber, uint32_t> team_powers_;
 	// Number of team, number of members
-	std::map<Widelands::TeamNumber, uint8_t> team_members;
+	std::map<Widelands::TeamNumber, uint8_t> team_members_;
 	// number of active players (not defeated)
 	uint8_t active_players_;
 
