@@ -7045,7 +7045,8 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					}
 				}
 
-				player_statistics.add(pn, j, me->team_number(), this_player->team_number(), old_land,
+				player_statistics.add(pn, j, me->team_number(), this_player->team_number(), cur_strength,
+				                      old_strength, old60_strength, cass, cur_land, old_land,
 				                      old60_land, diplo_score, buildings, this_player->is_defeated());
 				verb_log_dbg_time(
 				   gametime, "AI Diplomacy: For player(%d), the player(%d) has the diploscore: %d\n",
@@ -7059,6 +7060,9 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 			// Well, under some circumstances it is possible we have stat for this player and he does
 			// not exist anymore
 			player_statistics.remove_stat(j);
+			verb_log_dbg_time(
+				   gametime, "AI Diplomacy: The player(%d) has been removed from stats.\n",
+				   static_cast<unsigned int>(j));
 		}
 	}
 
