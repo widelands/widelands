@@ -3350,10 +3350,11 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			bool accept =
 			   player_statistics.get_diplo_score(pda.sender) >= 30 ||
 			   (player_statistics.get_diplo_score(pda.sender) > 20 && RNG::static_rand(2) == 0);
+			// accept only if not resulting in a team win and if we are not defeated
 			accept =
 			   accept && player_statistics.members_in_team(
 			                pda.action == Widelands::DiplomacyAction::kInvite ? pda.sender : mypn) <
-			                player_statistics.players_active() - 1;
+			                player_statistics.players_active() - 1 && !me->is_defeated();
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
@@ -3372,7 +3373,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			}
 		}
 	}
-	if (request_accepted) {
+	if (request_accepted || me->is_defeated()) {
 		return;
 	}
 
@@ -3380,7 +3381,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		const Widelands::Player* other_player = game().get_player(opn);
 		// other player needs to exist and different from us
 		// we need to be still alive and we don't have send a request in last 5 + X minutes
-		if (other_player == nullptr || opn == mypn || me->is_defeated() ||
+		if (other_player == nullptr || opn == mypn ||
 		    player_statistics.player_diplo_requested_lately(opn, gametime)) {
 			continue;
 		}
