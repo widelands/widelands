@@ -3355,9 +3355,9 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			   player_statistics.get_diplo_score(pda.sender) >= 30 ||
 			   (player_statistics.get_diplo_score(pda.sender) > 20 && RNG::static_rand(2) == 0);
 			accept = accept &&
-			         player_statistics.members_in_team(pda.sender) <
-			            player_statistics.players_active() - 1 &&
-			         player_statistics.members_in_team(mypn) < player_statistics.players_active() - 1;
+			         player_statistics.members_in_team(
+			            pda.action == Widelands::DiplomacyAction::kInvite ? pda.sender : mypn) <
+			         player_statistics.players_active() - 1;
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
