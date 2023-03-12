@@ -1148,9 +1148,9 @@ void DefaultAI::late_initialization() {
 	                                                   "flag warehouse Update"));
 
 	// don't do any diplomacy for the first 10 + x minutes to avoid click races for allies
-	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time((10 + RNG::static_rand(10)) * 60 * 1000)),
-	                                                   SchedulerTaskId::kDiplomacy, 7,
-	                                                   "diplomacy actions"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(
+	   std::max<Time>(gametime, Time((10 + RNG::static_rand(10)) * 60 * 1000)),
+	   SchedulerTaskId::kDiplomacy, 7, "diplomacy actions"));
 
 	const Widelands::Map& map = game().map();
 
@@ -3351,10 +3351,11 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			   player_statistics.get_diplo_score(pda.sender) >= 30 ||
 			   (player_statistics.get_diplo_score(pda.sender) > 20 && RNG::static_rand(2) == 0);
 			// accept only if not resulting in a team win and if we are not defeated
-			accept =
-			   accept && player_statistics.members_in_team(
-			                pda.action == Widelands::DiplomacyAction::kInvite ? pda.sender : mypn) <
-			                player_statistics.players_active() - 1 && !me->is_defeated();
+			accept = accept &&
+			         player_statistics.members_in_team(
+			            pda.action == Widelands::DiplomacyAction::kInvite ? pda.sender : mypn) <
+			            player_statistics.players_active() - 1 &&
+			         !me->is_defeated();
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
@@ -7045,9 +7046,10 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					}
 				}
 
-				player_statistics.add(pn, j, me->team_number(), this_player->team_number(), cur_strength,
-				                      old_strength, old60_strength, cass, cur_land, old_land,
-				                      old60_land, diplo_score, buildings, this_player->is_defeated());
+				player_statistics.add(pn, j, me->team_number(), this_player->team_number(),
+				                      cur_strength, old_strength, old60_strength, cass, cur_land,
+				                      old_land, old60_land, diplo_score, buildings,
+				                      this_player->is_defeated());
 				verb_log_dbg_time(
 				   gametime, "AI Diplomacy: For player(%d), the player(%d) has the diploscore: %d\n",
 				   static_cast<unsigned int>(pn), static_cast<unsigned int>(j), diplo_score);
@@ -7060,9 +7062,8 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 			// Well, under some circumstances it is possible we have stat for this player and he does
 			// not exist anymore
 			player_statistics.remove_stat(j);
-			verb_log_dbg_time(
-				   gametime, "AI Diplomacy: The player(%d) has been removed from stats.\n",
-				   static_cast<unsigned int>(j));
+			verb_log_dbg_time(gametime, "AI Diplomacy: The player(%d) has been removed from stats.\n",
+			                  static_cast<unsigned int>(j));
 		}
 	}
 
