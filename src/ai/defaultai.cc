@@ -6820,8 +6820,8 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 		if (this_player != nullptr) {
 			if (this_player->is_defeated() || me->is_defeated()) {
 				// setting all AI Player stats to zero and diploscore to -20
-				player_statistics.add(pn, j, me->team_number(), this_player->team_number(), 0,
-				                      0, 0, 0, 0, 0, 0, -20, 0, this_player->is_defeated());
+				player_statistics.add(pn, j, me->team_number(), this_player->team_number(), 0, 0, 0, 0,
+				                      0, 0, 0, -20, 0, this_player->is_defeated());
 				continue;
 			}
 			try {
