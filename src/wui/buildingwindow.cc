@@ -49,7 +49,7 @@ constexpr const char* const kImgMuteAll = "images/wui/buildings/menu_mute_all.pn
 constexpr const char* const kImgUnmuteAll = "images/wui/buildings/menu_unmute_all.png";
 
 BuildingWindow::BuildingWindow(InteractiveBase& parent,
-                               UI::UniqueWindow::Registry& reg,
+                               BuildingWindow::Registry& reg,
                                Widelands::Building& b,
                                const Widelands::BuildingDescr& descr,
                                bool avoid_fastclick)
@@ -63,6 +63,7 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
      building_position_(b.get_position()),
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
+     priority_collapsed_(&reg.priority_collapsed),
      expeditionbtn_(nullptr),
      mute_this_(nullptr),
      mute_all_(nullptr) {
@@ -71,7 +72,7 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
 }
 
 BuildingWindow::BuildingWindow(InteractiveBase& parent,
-                               UI::UniqueWindow::Registry& reg,
+                               BuildingWindow::Registry& reg,
                                Widelands::Building& b,
                                bool avoid_fastclick)
    : BuildingWindow(parent, reg, b, b.descr(), avoid_fastclick) {
@@ -89,6 +90,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		case Widelands::NoteBuilding::Action::kChanged:
 			if (!is_dying_) {
 				const std::string active_tab = tabs_->tabs()[tabs_->active()]->get_name();
+				save_position();
 				NoteThreadSafeFunction::instantiate(
 				   [this, active_tab]() {
 					   init(true, showing_workarea_);
@@ -715,17 +717,24 @@ void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {
 	expeditionbtn_->set_enabled(true);
 }
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 UI::Window& BuildingWindow::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersion) {
 			const int32_t x = fr.signed_32();
 			const int32_t y = fr.signed_32();
 			const bool workarea = fr.unsigned_8() != 0u;
 			BuildingWindow& bw = dynamic_cast<BuildingWindow&>(
 			   *ib.show_building_window(Widelands::Coords(x, y), true, workarea));
 			bw.tabs_->activate(fr.unsigned_8());
+			// TODO(tothxa): Savegame compatibility v1.2
+			if (packet_version >= 2) {
+				bw.set_priority_collapsed(static_cast<BuildingWindow::CollapsedState>(fr.unsigned_8()));
+			} else {
+				// Shouldn't be necessary, but making it explicit only makes it safer.
+				bw.set_priority_collapsed(BuildingWindow::CollapsedState::kExpanded);
+			}
 			return bw;
 		}
 		throw Widelands::UnhandledVersionError(
@@ -741,4 +750,5 @@ void BuildingWindow::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) c
 	fw.signed_32(building_position_.y);
 	fw.unsigned_8(showing_workarea_ ? 1 : 0);
 	fw.unsigned_8(tabs_->active());
+	fw.unsigned_8(static_cast<uint8_t>(*priority_collapsed_));
 }

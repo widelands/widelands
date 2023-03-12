@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-19 02:46+0000\n"
+"POT-Creation-Date: 2023-03-07 03:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Juanjo, 2015-2023\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1606,8 +1606,8 @@ msgstr "Construeix vaixells per comerciar i per a la colonització per la via ma
 #: ../../data/tribes/initialization/amazons/units.lua:1616
 #: ../../data/tribes/initialization/atlanteans/units.lua:2016
 #: ../../data/tribes/initialization/barbarians/units.lua:1804
-#: ../../data/tribes/initialization/empire/units.lua:2261
-#: ../../data/tribes/initialization/frisians/units.lua:2188
+#: ../../data/tribes/initialization/empire/units.lua:2275
+#: ../../data/tribes/initialization/frisians/units.lua:2198
 msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
 msgstr "«No maldiguis el constructor que ha fet curt amb els materials de construcció»."
@@ -1622,8 +1622,8 @@ msgstr "«No maldiguis el constructor que ha fet curt amb els materials de const
 #: ../../data/tribes/initialization/amazons/units.lua:1618
 #: ../../data/tribes/initialization/atlanteans/units.lua:2018
 #: ../../data/tribes/initialization/barbarians/units.lua:1806
-#: ../../data/tribes/initialization/empire/units.lua:2263
-#: ../../data/tribes/initialization/frisians/units.lua:2190
+#: ../../data/tribes/initialization/empire/units.lua:2277
+#: ../../data/tribes/initialization/frisians/units.lua:2200
 msgctxt "building"
 msgid "Proverb widely used for impossible tasks of any kind"
 msgstr "Proverbi usat per tasques impossibles de qualsevol mena"
@@ -1636,8 +1636,8 @@ msgstr "Proverbi usat per tasques impossibles de qualsevol mena"
 #: ../../data/tribes/initialization/amazons/units.lua:1620
 #: ../../data/tribes/initialization/atlanteans/units.lua:2020
 #: ../../data/tribes/initialization/barbarians/units.lua:1808
-#: ../../data/tribes/initialization/empire/units.lua:2265
-#: ../../data/tribes/initialization/frisians/units.lua:2192
+#: ../../data/tribes/initialization/empire/units.lua:2279
+#: ../../data/tribes/initialization/frisians/units.lua:2202
 msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "En aquest lloc es construeix un edifici."
@@ -1650,8 +1650,8 @@ msgstr "En aquest lloc es construeix un edifici."
 #: ../../data/tribes/initialization/amazons/units.lua:1627
 #: ../../data/tribes/initialization/atlanteans/units.lua:2027
 #: ../../data/tribes/initialization/barbarians/units.lua:1815
-#: ../../data/tribes/initialization/empire/units.lua:2272
-#: ../../data/tribes/initialization/frisians/units.lua:2199
+#: ../../data/tribes/initialization/empire/units.lua:2286
+#: ../../data/tribes/initialization/frisians/units.lua:2209
 msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
 msgstr "«Quan intentis destruir un camí, n’apareixeran de nous»."
@@ -1664,8 +1664,8 @@ msgstr "«Quan intentis destruir un camí, n’apareixeran de nous»."
 #: ../../data/tribes/initialization/amazons/units.lua:1629
 #: ../../data/tribes/initialization/atlanteans/units.lua:2029
 #: ../../data/tribes/initialization/barbarians/units.lua:1817
-#: ../../data/tribes/initialization/empire/units.lua:2274
-#: ../../data/tribes/initialization/frisians/units.lua:2201
+#: ../../data/tribes/initialization/empire/units.lua:2288
+#: ../../data/tribes/initialization/frisians/units.lua:2211
 msgctxt "building"
 msgid "Proverb"
 msgstr "Proverbi"
@@ -1678,8 +1678,8 @@ msgstr "Proverbi"
 #: ../../data/tribes/initialization/amazons/units.lua:1631
 #: ../../data/tribes/initialization/atlanteans/units.lua:2031
 #: ../../data/tribes/initialization/barbarians/units.lua:1819
-#: ../../data/tribes/initialization/empire/units.lua:2276
-#: ../../data/tribes/initialization/frisians/units.lua:2203
+#: ../../data/tribes/initialization/empire/units.lua:2290
+#: ../../data/tribes/initialization/frisians/units.lua:2213
 msgctxt "building"
 msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
@@ -4300,7 +4300,7 @@ msgstr "Eslògan del gremi de flequers"
 #: ../../data/tribes/initialization/barbarians/units.lua:1388
 #: ../../data/tribes/initialization/empire/units.lua:1580
 #: ../../data/tribes/initialization/frisians/units.lua:1666
-#: ../../data/tribes/initialization/frisians/units.lua:1849
+#: ../../data/tribes/initialization/frisians/units.lua:1855
 msgctxt "building"
 msgid "Burns logs into charcoal."
 msgstr "Crema troncs per produir carbó."
@@ -4606,10 +4606,10 @@ msgstr "Primera part de l’almanac atlant d’arquitectura"
 #: ../../data/tribes/initialization/barbarians/units.lua:1542
 #: ../../data/tribes/initialization/barbarians/units.lua:1557
 #: ../../data/tribes/initialization/barbarians/units.lua:1572
-#: ../../data/tribes/initialization/empire/units.lua:1851
-#: ../../data/tribes/initialization/empire/units.lua:1874
-#: ../../data/tribes/initialization/frisians/units.lua:2013
-#: ../../data/tribes/initialization/frisians/units.lua:2022
+#: ../../data/tribes/initialization/empire/units.lua:1853
+#: ../../data/tribes/initialization/empire/units.lua:1878
+#: ../../data/tribes/initialization/frisians/units.lua:2023
+#: ../../data/tribes/initialization/frisians/units.lua:2032
 msgctxt "building"
 msgid "Digs coal out of the ground in mountain terrain."
 msgstr "Extreu carbó del terra en terreny muntanyós."
@@ -4648,10 +4648,10 @@ msgstr "Cançó del gremi de miners"
 #: ../../data/tribes/initialization/barbarians/units.lua:1585
 #: ../../data/tribes/initialization/barbarians/units.lua:1598
 #: ../../data/tribes/initialization/barbarians/units.lua:1611
-#: ../../data/tribes/initialization/empire/units.lua:1893
-#: ../../data/tribes/initialization/empire/units.lua:1914
-#: ../../data/tribes/initialization/frisians/units.lua:2031
-#: ../../data/tribes/initialization/frisians/units.lua:2040
+#: ../../data/tribes/initialization/empire/units.lua:1899
+#: ../../data/tribes/initialization/empire/units.lua:1922
+#: ../../data/tribes/initialization/frisians/units.lua:2041
+#: ../../data/tribes/initialization/frisians/units.lua:2050
 msgctxt "building"
 msgid "Digs iron ore out of the ground in mountain terrain."
 msgstr "Extreu mineral de ferro del terra en terreny muntanyós."
@@ -4668,10 +4668,10 @@ msgstr "Extreu mineral de ferro del terra en terreny muntanyós."
 #: ../../data/tribes/initialization/barbarians/units.lua:1624
 #: ../../data/tribes/initialization/barbarians/units.lua:1637
 #: ../../data/tribes/initialization/barbarians/units.lua:1650
-#: ../../data/tribes/initialization/empire/units.lua:1935
-#: ../../data/tribes/initialization/empire/units.lua:1956
-#: ../../data/tribes/initialization/frisians/units.lua:2049
-#: ../../data/tribes/initialization/frisians/units.lua:2058
+#: ../../data/tribes/initialization/empire/units.lua:1945
+#: ../../data/tribes/initialization/empire/units.lua:1968
+#: ../../data/tribes/initialization/frisians/units.lua:2059
+#: ../../data/tribes/initialization/frisians/units.lua:2068
 msgctxt "building"
 msgid "Digs gold ore out of the ground in mountain terrain."
 msgstr "Extreu mineral d’or del terra en terreny muntanyós."
@@ -4870,8 +4870,8 @@ msgstr "«La saviesa de la lluita» del gremi de guerrers"
 #. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1983
 #: ../../data/tribes/initialization/barbarians/units.lua:1769
-#: ../../data/tribes/initialization/empire/units.lua:2229
-#: ../../data/tribes/initialization/frisians/units.lua:2153
+#: ../../data/tribes/initialization/empire/units.lua:2243
+#: ../../data/tribes/initialization/frisians/units.lua:2163
 msgctxt "building"
 msgid "Builds ferries."
 msgstr "Construeix transbordadors."
@@ -4903,8 +4903,8 @@ msgstr "Cançó tradicional dels capitans de transbordadors"
 #. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1999
 #: ../../data/tribes/initialization/barbarians/units.lua:1783
-#: ../../data/tribes/initialization/empire/units.lua:2252
-#: ../../data/tribes/initialization/frisians/units.lua:2166
+#: ../../data/tribes/initialization/empire/units.lua:2266
+#: ../../data/tribes/initialization/frisians/units.lua:2176
 msgctxt "building"
 msgid ""
 "Constructs ships that are used for overseas colonization and for trading "
@@ -6605,7 +6605,7 @@ msgstr "Menú de la taverna «La vella destral»"
 #. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1342
 #: ../../data/tribes/initialization/empire/units.lua:1536
-#: ../../data/tribes/initialization/frisians/units.lua:1923
+#: ../../data/tribes/initialization/frisians/units.lua:1933
 msgctxt "building"
 msgid "Prepares rations to feed the scouts and miners."
 msgstr "Elabora racions per alimentar els exploradors i els miners."
@@ -7285,8 +7285,8 @@ msgstr "Colintan, cap de planificació de la ciutadella d’Adlen,<br>durant la 
 #. TRANSLATORS: Note helptext for an empire production site: Ferry Yard
 #. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
 #: ../../data/tribes/initialization/barbarians/units.lua:1771
-#: ../../data/tribes/initialization/empire/units.lua:2231
-#: ../../data/tribes/initialization/frisians/units.lua:2155
+#: ../../data/tribes/initialization/empire/units.lua:2245
+#: ../../data/tribes/initialization/frisians/units.lua:2165
 msgctxt "building"
 msgid "Needs water nearby."
 msgstr "Necessita estar prop de l’aigua."
@@ -10639,8 +10639,8 @@ msgstr "En el vi hi ha la veritat."
 #. Mine
 #: ../../data/tribes/initialization/empire/units.lua:1515
 #: ../../data/tribes/initialization/empire/units.lua:1723
-#: ../../data/tribes/initialization/empire/units.lua:1849
-#: ../../data/tribes/initialization/empire/units.lua:1872
+#: ../../data/tribes/initialization/empire/units.lua:1851
+#: ../../data/tribes/initialization/empire/units.lua:1876
 msgctxt "empire_building"
 msgid "Excerpt from the Encyclopædia Imperica"
 msgstr "Extracte de l’Encyclopædia Imperica"
@@ -11042,11 +11042,23 @@ msgstr "Qui fa mal escrivint al vent, li fa mal el marbre."
 #. TRANSLATORS: Purpose helptext for an empire production site: Marble Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Marble
 #. Mine
-#: ../../data/tribes/initialization/empire/units.lua:1806
+#: ../../data/tribes/initialization/empire/units.lua:1805
 #: ../../data/tribes/initialization/empire/units.lua:1828
 msgctxt "empire_building"
 msgid "Carves marble and granite out of the rock in mountain terrain."
 msgstr "Talla marbre i granit de les roques de la muntanya."
+
+#. TRANSLATORS: Performance helptext for an empire production site: Marble
+#. Mine
+#. TRANSLATORS: Performance helptext for an empire production site: Deep
+#. Marble Mine
+#: ../../data/tribes/initialization/empire/units.lua:1807
+#: ../../data/tribes/initialization/empire/units.lua:1830
+msgctxt "empire_building"
+msgid ""
+"If the food supply is steady, this mine can produce marble in %1$s and "
+"granite in %2$s on average."
+msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina pot cavar per aconseguir marbre cada %1$s i granit cada %2$s de mitjana."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11075,7 +11087,7 @@ msgstr "Història de l’Imperi, part VI sobre el retorn d’en Lutius a Fremil"
 #. Classical Latin quote meaning:
 #. "Coal is revived from the dead, it turns from black to red, creates embers,
 #. and as it falls apart, it becomes ashes."
-#: ../../data/tribes/initialization/empire/units.lua:1839
+#: ../../data/tribes/initialization/empire/units.lua:1841
 msgid ""
 "Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas generat, "
 "et dum resolvitur, cinerea."
@@ -11086,11 +11098,22 @@ msgstr "Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas gener
 #. "Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas
 #. generat,
 #. et dum resolvitur, cinerea."
-#: ../../data/tribes/initialization/empire/units.lua:1845
+#: ../../data/tribes/initialization/empire/units.lua:1847
 msgid ""
 "Coal is revived from the dead, it turns from black to red, creates embers, "
 "and as it falls apart, it becomes ashes."
 msgstr "El carbó reviu de la mort i de negre torna a vermell, fa brasa i, conforme es va trencant, es converteix en cendra."
+
+#. TRANSLATORS: Performance helptext for an empire production site: Coal Mine
+#. TRANSLATORS: Performance helptext for an empire production site: Deep Coal
+#. Mine
+#: ../../data/tribes/initialization/empire/units.lua:1855
+#: ../../data/tribes/initialization/empire/units.lua:1880
+#, lua-format
+msgctxt "empire_building"
+msgid ""
+"If the food supply is steady, this mine can produce coal in %s on average."
+msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina pot cavar per aconseguir carbó cada %s de mitjana."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11098,7 +11121,7 @@ msgstr "El carbó reviu de la mort i de negre torna a vermell, fa brasa i, confo
 #. "For there are more types of fire: for coal and flame are different, and
 #. the type
 #. that gives light, all of them are fire."
-#: ../../data/tribes/initialization/empire/units.lua:1862
+#: ../../data/tribes/initialization/empire/units.lua:1866
 msgid ""
 "Non enim est una species ignis: nam diversum est carbo et flamma, et lux "
 "specie, cum unumquodque horum sit ignis."
@@ -11109,7 +11132,7 @@ msgstr "Non enim est una species ignis: nam diversum est carbo et flamma, et lux
 #. "Non enim est una species ignis: nam diversum est carbo et flamma, et lux
 #. specie,
 #. cum unumquodque horum sit ignis."
-#: ../../data/tribes/initialization/empire/units.lua:1868
+#: ../../data/tribes/initialization/empire/units.lua:1872
 msgid ""
 "For there are more types of fire: for coal and flame are different, and the "
 "type that gives light, all of them are fire."
@@ -11119,41 +11142,53 @@ msgstr "Perquè hi ha més tipus de foc: el carbó i la flama són diferents, pe
 #. fonts.
 #. Classical Latin quote meaning:
 #. "Iron is sharpened by iron."
-#: ../../data/tribes/initialization/empire/units.lua:1884
+#: ../../data/tribes/initialization/empire/units.lua:1890
 msgid "Ferrum ferro acuitur."
 msgstr "Ferrum ferro acuitur."
 
 #. TRANSLATORS: Lore helptext for an empire production site: Iron Mine
 #. Translation for the classical Latin quote:
 #. "Ferrum ferro acuitur."
-#: ../../data/tribes/initialization/empire/units.lua:1888
+#: ../../data/tribes/initialization/empire/units.lua:1894
 msgid "Iron is sharpened by iron."
 msgstr "El ferro s’afila amb ferro."
 
 #. TRANSLATORS: Lore author helptext for an empire production site: Iron Mine
-#: ../../data/tribes/initialization/empire/units.lua:1891
+#: ../../data/tribes/initialization/empire/units.lua:1897
 msgctxt "empire_building"
 msgid "A proverb that is vehemently disputed by iron miners"
 msgstr "Proverbi disputat vehementment pels miners de ferro"
+
+#. TRANSLATORS: Performance helptext for an empire production site: Iron Mine
+#. TRANSLATORS: Performance helptext for an empire production site: Deep Iron
+#. Mine
+#: ../../data/tribes/initialization/empire/units.lua:1901
+#: ../../data/tribes/initialization/empire/units.lua:1924
+#, lua-format
+msgctxt "empire_building"
+msgid ""
+"If the food supply is steady, this mine can produce iron ore in %s on "
+"average."
+msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina pot cavar per aconseguir mineral de ferro cada %s de mitjana."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
 #. Classical Latin quote meaning:
 #. "By constant use an iron ring is worn away."
-#: ../../data/tribes/initialization/empire/units.lua:1903
+#: ../../data/tribes/initialization/empire/units.lua:1911
 msgid "Ferreus assiduo consumitur annulus usu."
 msgstr "Ferreus assiduo consumitur annulus usu."
 
 #. TRANSLATORS: Lore helptext for an empire production site: Deep Iron Mine
 #. Translation for the classical Latin quote:
 #. "Ferreus assiduo consumitur annulus usu."
-#: ../../data/tribes/initialization/empire/units.lua:1907
+#: ../../data/tribes/initialization/empire/units.lua:1915
 msgid "By constant use an iron ring is worn away."
 msgstr "Una anella de ferro es desgasta amb l’ús constant."
 
 #. TRANSLATORS: Lore author helptext for an empire production site: Deep Iron
 #. Mine
-#: ../../data/tribes/initialization/empire/units.lua:1911
+#: ../../data/tribes/initialization/empire/units.lua:1919
 msgctxt "empire_building"
 msgid "Amalea on the importance of always looking for more resources"
 msgstr "L’Amalea sobre la importància de buscar sempre més recursos"
@@ -11162,42 +11197,52 @@ msgstr "L’Amalea sobre la importància de buscar sempre més recursos"
 #. fonts.
 #. Classical Latin quote meaning:
 #. "Gold discovered and all the better for being so."
-#: ../../data/tribes/initialization/empire/units.lua:1924
+#: ../../data/tribes/initialization/empire/units.lua:1934
 msgid "Aurum irrepertum et sic melius situm."
 msgstr "Aurum irrepertum et sic melius situm."
 
 #. TRANSLATORS: Lore helptext for an empire production site: Gold Mine
 #. Translation for the classical Latin quote:
 #. "Aurum irrepertum et sic melius situm."
-#: ../../data/tribes/initialization/empire/units.lua:1928
+#: ../../data/tribes/initialization/empire/units.lua:1938
 msgid "Gold discovered and all the better for being so."
 msgstr "S’ha descobert or i millor per ser-ho."
 
 #. TRANSLATORS: Lore author helptext for an empire production site: Gold Mine
-#: ../../data/tribes/initialization/empire/units.lua:1932
+#: ../../data/tribes/initialization/empire/units.lua:1942
 msgctxt "empire_building"
 msgid ""
 "Amalea receiving the first geologist report of gold on the small island"
 msgstr "L’Amalea rebent el primer geòleg informant d’or en una petita illa"
 
+#. TRANSLATORS: Performance helptext for an empire production site: Gold Mine
+#: ../../data/tribes/initialization/empire/units.lua:1947
+#: ../../data/tribes/initialization/empire/units.lua:1970
+#, lua-format
+msgctxt "empire_building"
+msgid ""
+"If the food supply is steady, this mine can produce gold ore in %s on "
+"average."
+msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina pot cavar per aconseguir mineral d’or cada %s de mitjana."
+
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
 #. Classical Latin quote meaning:
 #. "Gold has conquered the fear of death."
-#: ../../data/tribes/initialization/empire/units.lua:1945
+#: ../../data/tribes/initialization/empire/units.lua:1957
 msgid "Formidinem mortis vicit aurum."
 msgstr "Formidinem mortis vicit aurum."
 
 #. TRANSLATORS: Lore helptext for an empire production site: Deep Gold Mine
 #. Translation for the classical Latin quote:
 #. "Formidinem mortis vicit aurum."
-#: ../../data/tribes/initialization/empire/units.lua:1949
+#: ../../data/tribes/initialization/empire/units.lua:1961
 msgid "Gold has conquered the fear of death."
 msgstr "L’or ha conquerit la por a la mort."
 
 #. TRANSLATORS: Lore author helptext for an empire production site: Deep Gold
 #. Mine
-#: ../../data/tribes/initialization/empire/units.lua:1953
+#: ../../data/tribes/initialization/empire/units.lua:1965
 msgctxt "empire_building"
 msgid "General Trepidus Egenus Attenuatus on motivating soldiers"
 msgstr "General Trepidus Egenus Attenuatus sobre com motivar els soldats"
@@ -11208,7 +11253,7 @@ msgstr "General Trepidus Egenus Attenuatus sobre com motivar els soldats"
 #. "[The People of the Empire] who once handed out all [power], now restrains
 #. itself
 #. and anxiously hopes for just two things: bread and games."
-#: ../../data/tribes/initialization/empire/units.lua:1969
+#: ../../data/tribes/initialization/empire/units.lua:1983
 msgid ""
 "Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius "
 "optat, panem et circenses."
@@ -11219,14 +11264,14 @@ msgstr "Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxiu
 #. "Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius
 #. optat,
 #. panem et circenses."
-#: ../../data/tribes/initialization/empire/units.lua:1975
+#: ../../data/tribes/initialization/empire/units.lua:1989
 msgid ""
 "[The People of the Empire] who once handed out all [power], now restrains "
 "itself and anxiously hopes for just two things: bread and games."
 msgstr "[La gent de l’Imperi] que una vegada tenia tot [el poder], ara es frenen ells mateixos i espera ansiosament dues coses: pa i jocs."
 
 #. TRANSLATORS: Lore author helptext for an empire training site: Arena
-#: ../../data/tribes/initialization/empire/units.lua:1979
+#: ../../data/tribes/initialization/empire/units.lua:1993
 msgctxt "empire_building"
 msgid "History of the Empire, Part X – the decline"
 msgstr "Història de l’Imperi, part X – el declivi"
@@ -11234,8 +11279,8 @@ msgstr "Història de l’Imperi, part X – el declivi"
 #. TRANSLATORS: Purpose helptext for an empire training site: Arena, part 1
 #. TRANSLATORS: Purpose helptext for an empire training site: Colosseum, part
 #. 1
-#: ../../data/tribes/initialization/empire/units.lua:1982
-#: ../../data/tribes/initialization/empire/units.lua:2007
+#: ../../data/tribes/initialization/empire/units.lua:1996
+#: ../../data/tribes/initialization/empire/units.lua:2021
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Evade’."
 msgstr "Entrena soldats en evasió."
@@ -11243,8 +11288,8 @@ msgstr "Entrena soldats en evasió."
 #. TRANSLATORS: Purpose helptext for an empire training site: Arena, part 2
 #. TRANSLATORS: Purpose helptext for an empire training site: Colosseum, part
 #. 2
-#: ../../data/tribes/initialization/empire/units.lua:1984
-#: ../../data/tribes/initialization/empire/units.lua:2009
+#: ../../data/tribes/initialization/empire/units.lua:1998
+#: ../../data/tribes/initialization/empire/units.lua:2023
 msgctxt "empire_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
@@ -11254,9 +11299,9 @@ msgstr "Com més alt sigui el nivell d’evasió, major és la probabilitat d’
 #. TRANSLATORS: Note helptext for an empire training site: Arena
 #. TRANSLATORS: Note helptext for an empire training site: Colosseum
 #. TRANSLATORS: Note helptext for an empire training site: Training Camp
-#: ../../data/tribes/initialization/empire/units.lua:1987
-#: ../../data/tribes/initialization/empire/units.lua:2012
-#: ../../data/tribes/initialization/empire/units.lua:2039
+#: ../../data/tribes/initialization/empire/units.lua:2001
+#: ../../data/tribes/initialization/empire/units.lua:2026
+#: ../../data/tribes/initialization/empire/units.lua:2053
 msgctxt "empire_building"
 msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
@@ -11267,19 +11312,19 @@ msgstr "Els soldats imperials no es poden entrenar en defensa i no poden millora
 #. fonts.
 #. Classical Latin quote meaning:
 #. "Hail Cæsar! Those who are about to die greet you!"
-#: ../../data/tribes/initialization/empire/units.lua:1997
+#: ../../data/tribes/initialization/empire/units.lua:2011
 msgid "Ave Cæsar! Morituri te salutant!"
 msgstr "Ave Cæsar! Morituri te salutant!"
 
 #. TRANSLATORS: Lore helptext for an empire training site: Colosseum
 #. Translation for the classical Latin quote:
 #. "Ave Cæsar! Morituri te salutant!"
-#: ../../data/tribes/initialization/empire/units.lua:2001
+#: ../../data/tribes/initialization/empire/units.lua:2015
 msgid "Hail Cæsar! Those who are about to die greet you!"
 msgstr "Ave, Cèsar! Els que van a morir et saluden!"
 
 #. TRANSLATORS: Lore author helptext for an empire training site: Colosseum
-#: ../../data/tribes/initialization/empire/units.lua:2004
+#: ../../data/tribes/initialization/empire/units.lua:2018
 msgctxt "empire_building"
 msgid "Greeting from the gladiators to the emperor"
 msgstr "Salutació dels gladiadors a l’emperador"
@@ -11288,34 +11333,34 @@ msgstr "Salutació dels gladiadors a l’emperador"
 #. fonts.
 #. Classical Latin quote meaning:
 #. "Fortune helps the strong."
-#: ../../data/tribes/initialization/empire/units.lua:2022
+#: ../../data/tribes/initialization/empire/units.lua:2036
 msgid "Fortes fortuna adiuvat."
 msgstr "Fortes fortuna adiuvat."
 
 #. TRANSLATORS: Lore helptext for an empire training site: Training Camp
 #. Translation for the classical Latin quote:
 #. "Fortes fortuna adiuvat."
-#: ../../data/tribes/initialization/empire/units.lua:2026
+#: ../../data/tribes/initialization/empire/units.lua:2040
 msgid "Fortune helps the strong."
 msgstr "La fortuna ajuda als forts."
 
 #. TRANSLATORS: Lore author helptext for an empire training site: Training
 #. Camp
-#: ../../data/tribes/initialization/empire/units.lua:2030
+#: ../../data/tribes/initialization/empire/units.lua:2044
 msgctxt "empire_building"
 msgid "Trainer to soldiers who questioned the need for higher level training"
 msgstr "Entrenador als soldats que pregunten si cal arribar a un nivell d’entrenament més alt"
 
 #. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
 #. part 1
-#: ../../data/tribes/initialization/empire/units.lua:2034
+#: ../../data/tribes/initialization/empire/units.lua:2048
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr "Entrena soldats en atac i en salut."
 
 #. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
 #. part 2
-#: ../../data/tribes/initialization/empire/units.lua:2036
+#: ../../data/tribes/initialization/empire/units.lua:2050
 msgctxt "empire_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
 msgstr "Equipa els soldats amb les armes i armadures que necessitin."
@@ -11324,19 +11369,19 @@ msgstr "Equipa els soldats amb les armes i armadures que necessitin."
 #. fonts.
 #. Classical Latin quote meaning:
 #. "An eagle doesn’t catch flies."
-#: ../../data/tribes/initialization/empire/units.lua:2051
+#: ../../data/tribes/initialization/empire/units.lua:2065
 msgid "Aquila non captat muscas."
 msgstr "Aquila non captat muscas."
 
 #. TRANSLATORS: Lore helptext for an empire military site: Blockhouse
 #. Translation for the classical Latin quote:
 #. "Aquila non captat muscas."
-#: ../../data/tribes/initialization/empire/units.lua:2055
+#: ../../data/tribes/initialization/empire/units.lua:2069
 msgid "An eagle doesn’t catch flies."
 msgstr "Una àguila no caça mosques."
 
 #. TRANSLATORS: Lore author helptext for an empire military site: Blockhouse
-#: ../../data/tribes/initialization/empire/units.lua:2059
+#: ../../data/tribes/initialization/empire/units.lua:2073
 msgctxt "empire_building"
 msgid ""
 "General Passerus Claudius Pedestrus on why he didn’t order the destruction "
@@ -11350,13 +11395,13 @@ msgstr "General Passerus Claudius Pedestrus sobre per què no va ordenar la dest
 #. TRANSLATORS: Purpose helptext for an empire military site: Tower
 #. TRANSLATORS: Purpose helptext for an empire military site: Fortress
 #. TRANSLATORS: Purpose helptext for an empire military site: Castle
-#: ../../data/tribes/initialization/empire/units.lua:2063
-#: ../../data/tribes/initialization/empire/units.lua:2087
-#: ../../data/tribes/initialization/empire/units.lua:2112
-#: ../../data/tribes/initialization/empire/units.lua:2136
-#: ../../data/tribes/initialization/empire/units.lua:2160
-#: ../../data/tribes/initialization/empire/units.lua:2181
-#: ../../data/tribes/initialization/empire/units.lua:2204
+#: ../../data/tribes/initialization/empire/units.lua:2077
+#: ../../data/tribes/initialization/empire/units.lua:2101
+#: ../../data/tribes/initialization/empire/units.lua:2126
+#: ../../data/tribes/initialization/empire/units.lua:2150
+#: ../../data/tribes/initialization/empire/units.lua:2174
+#: ../../data/tribes/initialization/empire/units.lua:2195
+#: ../../data/tribes/initialization/empire/units.lua:2218
 msgctxt "empire_building"
 msgid "Garrisons soldiers to expand your territory."
 msgstr "Allotja soldats que defensen i expandeixen el territori controlat."
@@ -11368,13 +11413,13 @@ msgstr "Allotja soldats que defensen i expandeixen el territori controlat."
 #. TRANSLATORS: Note helptext for an empire military site: Tower
 #. TRANSLATORS: Note helptext for an empire military site: Fortress
 #. TRANSLATORS: Note helptext for an empire military site: Castle
-#: ../../data/tribes/initialization/empire/units.lua:2065
-#: ../../data/tribes/initialization/empire/units.lua:2089
-#: ../../data/tribes/initialization/empire/units.lua:2114
-#: ../../data/tribes/initialization/empire/units.lua:2138
-#: ../../data/tribes/initialization/empire/units.lua:2162
-#: ../../data/tribes/initialization/empire/units.lua:2183
-#: ../../data/tribes/initialization/empire/units.lua:2206
+#: ../../data/tribes/initialization/empire/units.lua:2079
+#: ../../data/tribes/initialization/empire/units.lua:2103
+#: ../../data/tribes/initialization/empire/units.lua:2128
+#: ../../data/tribes/initialization/empire/units.lua:2152
+#: ../../data/tribes/initialization/empire/units.lua:2176
+#: ../../data/tribes/initialization/empire/units.lua:2197
+#: ../../data/tribes/initialization/empire/units.lua:2220
 msgctxt "empire_building"
 msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
@@ -11386,21 +11431,21 @@ msgstr "Si disposeu de pocs soldats per ocupar els edificis militars nous, cliqu
 #. fonts.
 #. Classical Latin quote meaning:
 #. "Who watches the watchmen?"
-#: ../../data/tribes/initialization/empire/units.lua:2075
+#: ../../data/tribes/initialization/empire/units.lua:2089
 msgid "Quis custodiet ipsos custodes?"
 msgstr "Quis custodiet ipsos custodes?"
 
 #. TRANSLATORS: Lore helptext for an empire production site: Sentry
 #. Translation for the classical Latin quote:
 #. "Quis custodiet ipsos custodes?"
-#: ../../data/tribes/initialization/empire/units.lua:2079
+#: ../../data/tribes/initialization/empire/units.lua:2093
 msgid "Who watches the watchmen?"
 msgstr "Qui vigila els vigilants?"
 
 #. TRANSLATORS: Lore author helptext for an empire production site: Sentry
 #. (the Limes was the border defence system of fortifications of the Roman
 #. Empire)
-#: ../../data/tribes/initialization/empire/units.lua:2084
+#: ../../data/tribes/initialization/empire/units.lua:2098
 msgctxt "empire_building"
 msgid ""
 "Saledus warning Lutius that sentries are not adequate protection for the "
@@ -11413,7 +11458,7 @@ msgstr "En Saledus avisant en Lutius que no és adequat protegir les limes amb g
 #. "Two were stationed on the other side of the city than the camp: one over
 #. the river, the other by
 #. the river above the camp."
-#: ../../data/tribes/initialization/empire/units.lua:2100
+#: ../../data/tribes/initialization/empire/units.lua:2114
 msgid ""
 "Binæ contra urbem a castris station erant, una ultra flumen, altera eis "
 "flumen supra castra."
@@ -11423,14 +11468,14 @@ msgstr "Binæ contra urbem a castris station erant, una ultra flumen, altera eis
 #. Translation for the classical Latin quote:
 #. "Binæ contra urbem a castris station erant, una ultra flumen, altera eis
 #. flumen supra castra."
-#: ../../data/tribes/initialization/empire/units.lua:2104
+#: ../../data/tribes/initialization/empire/units.lua:2118
 msgid ""
 "Two were stationed on the other side of the city than the camp: one over the"
 " river, the other by the river above the camp."
 msgstr "Dues estaven a l’altra part de la ciutat i no pas al camp: una damunt el riu i l’altra al costat del riu damunt el camp."
 
 #. TRANSLATORS: Lore author helptext for an empire military site: Outpost
-#: ../../data/tribes/initialization/empire/units.lua:2109
+#: ../../data/tribes/initialization/empire/units.lua:2123
 msgctxt "empire_building"
 msgid ""
 "History of the Empire, Part III, preparation for the battle of Uliginosium"
@@ -11440,19 +11485,19 @@ msgstr "Història de l’Imperi, part III, la preparació de la batalla de l’U
 #. fonts.
 #. Classical Latin quote meaning:
 #. "The die is cast!"
-#: ../../data/tribes/initialization/empire/units.lua:2124
+#: ../../data/tribes/initialization/empire/units.lua:2138
 msgid "Alea iacta est!"
 msgstr "Alea iacta est!"
 
 #. TRANSLATORS: Lore helptext for an empire military site: Barrier
 #. Translation for the classical Latin quote:
 #. "Alea iacta est!"
-#: ../../data/tribes/initialization/empire/units.lua:2128
+#: ../../data/tribes/initialization/empire/units.lua:2142
 msgid "The die is cast!"
 msgstr "El dau ja s’ha llençat!"
 
 #. TRANSLATORS: Lore author helptext for an empire military site: Barrier
-#: ../../data/tribes/initialization/empire/units.lua:2132
+#: ../../data/tribes/initialization/empire/units.lua:2146
 msgctxt "empire_building"
 msgid ""
 "Rebel general Certus Ignavus Fidelius upon entering the limits of Fremil to "
@@ -11463,19 +11508,19 @@ msgstr "El general rebal Certus Ignavus Fidelius quan entrava als límits de Fre
 #. fonts.
 #. Classical Latin quote meaning:
 #. "I came, I saw, I conquered!"
-#: ../../data/tribes/initialization/empire/units.lua:2148
+#: ../../data/tribes/initialization/empire/units.lua:2162
 msgid "Veni, Vidi, Vici!"
 msgstr "Veni, vidi, vici!"
 
 #. TRANSLATORS: Lore helptext for an empire military site: Tower
 #. Translation for the classical Latin quote:
 #. "Veni, Vidi, Vici!"
-#: ../../data/tribes/initialization/empire/units.lua:2152
+#: ../../data/tribes/initialization/empire/units.lua:2166
 msgid "I came, I saw, I conquered!"
 msgstr "Vaig arribar, vaig veure i vagi vèncer!"
 
 #. TRANSLATORS: Lore author helptext for an empire military site: Tower
-#: ../../data/tribes/initialization/empire/units.lua:2156
+#: ../../data/tribes/initialization/empire/units.lua:2170
 msgctxt "empire_building"
 msgid ""
 "General Claudius Cæcus Cessus reporting a quick victory over the Barbarians "
@@ -11486,19 +11531,19 @@ msgstr "General Claudius Cæcus Cessus informant d’una victòria ràpida contr
 #. fonts.
 #. Classical Latin quote meaning:
 #. "If you want peace, prepare for war."
-#: ../../data/tribes/initialization/empire/units.lua:2172
+#: ../../data/tribes/initialization/empire/units.lua:2186
 msgid "Si vis pacem, para bellum."
 msgstr "Si vis pacem, para bellum."
 
 #. TRANSLATORS: Lore helptext for an empire production site: Fortress
 #. Translation for the classical Latin quote:
 #. "Si vis pacem, para bellum."
-#: ../../data/tribes/initialization/empire/units.lua:2176
+#: ../../data/tribes/initialization/empire/units.lua:2190
 msgid "If you want peace, prepare for war."
 msgstr "Si voleu pau, prepareu-vos per la guerra."
 
 #. TRANSLATORS: Lore author helptext for an empire military site: Fortress
-#: ../../data/tribes/initialization/empire/units.lua:2179
+#: ../../data/tribes/initialization/empire/units.lua:2193
 msgctxt "empire_building"
 msgid "Saledus arguing with Amalea"
 msgstr "En Saledus discutint amb l’Amalea"
@@ -11507,19 +11552,19 @@ msgstr "En Saledus discutint amb l’Amalea"
 #. fonts.
 #. Adaptation of a classical Latin quote meaning:
 #. "Furthermore, I think that Al’thunran must be destroyed!"
-#: ../../data/tribes/initialization/empire/units.lua:2193
+#: ../../data/tribes/initialization/empire/units.lua:2207
 msgid "Ceterum autem censeo Althunranam esse delendam!"
 msgstr "Ceterum autem censeo Althunranam esse delendam!"
 
 #. TRANSLATORS: Lore helptext for an empire military site: Castle
 #. Translation for the adapted classical Latin quote:
 #. "Ceterum autem censeo Althunranam esse delendam!"
-#: ../../data/tribes/initialization/empire/units.lua:2197
+#: ../../data/tribes/initialization/empire/units.lua:2211
 msgid "Furthermore, I think that Al’thunran must be destroyed!"
 msgstr "A més a més, crec que s’ha de destruir l’Al’thunran!"
 
 #. TRANSLATORS: Lore author helptext for an empire military site: Castle
-#: ../../data/tribes/initialization/empire/units.lua:2201
+#: ../../data/tribes/initialization/empire/units.lua:2215
 msgctxt "empire_building"
 msgid "Saledus in the Senate, urging final victory over the Barbarians"
 msgstr "En Saledus al Senat, demanant la victòria final contra els bàrbars"
@@ -11528,19 +11573,19 @@ msgstr "En Saledus al Senat, demanant la victòria final contra els bàrbars"
 #. fonts.
 #. Classical Latin quote meaning:
 #. "Who crossed seas does not fear rivers."
-#: ../../data/tribes/initialization/empire/units.lua:2218
+#: ../../data/tribes/initialization/empire/units.lua:2232
 msgid "Non terretur fluminibus, qui maria transiit."
 msgstr "Non terretur fluminibus, qui maria transiit."
 
 #. TRANSLATORS: Lore helptext for an empire production site: Ferry Yard
 #. Translation for the classical Latin quote:
 #. "Non terretur fluminibus, qui maria transiit."
-#: ../../data/tribes/initialization/empire/units.lua:2222
+#: ../../data/tribes/initialization/empire/units.lua:2236
 msgid "Who crossed seas does not fear rivers."
 msgstr "Qui ha creuat mars no tem els rius."
 
 #. TRANSLATORS: Lore author helptext for an empire production site: Ferry Yard
-#: ../../data/tribes/initialization/empire/units.lua:2226
+#: ../../data/tribes/initialization/empire/units.lua:2240
 msgctxt "empire_building"
 msgid "Amalea on the need for ferries after the reconstruction of Fremil"
 msgstr "L’Amalea sobre la necessitat de disposar de transbordadors després de la reconstrucció de Fremil"
@@ -11549,1116 +11594,1116 @@ msgstr "L’Amalea sobre la necessitat de disposar de transbordadors després de
 #. fonts.
 #. Classical Latin quote meaning:
 #. "Don’t put everything on the same ship."
-#: ../../data/tribes/initialization/empire/units.lua:2241
+#: ../../data/tribes/initialization/empire/units.lua:2255
 msgid "Uni navi ne committas omnia."
 msgstr "Uni navi ne committas omnia."
 
 #. TRANSLATORS: Lore helptext for an empire production site: Shipyard
 #. Translation for the classical Latin quote:
 #. "Uni navi ne committas omnia."
-#: ../../data/tribes/initialization/empire/units.lua:2245
+#: ../../data/tribes/initialization/empire/units.lua:2259
 msgid "Don’t put everything on the same ship."
 msgstr "No ho poseu tot al mateix vaixell."
 
 #. TRANSLATORS: Lore author helptext for an empire production site: Shipyard
-#: ../../data/tribes/initialization/empire/units.lua:2249
+#: ../../data/tribes/initialization/empire/units.lua:2263
 msgctxt "empire_building"
 msgid "A shipwright lamenting when he was instructed to stop working"
 msgstr "Un mestre d’aixa lamentant que se li ordenés parar de treballar"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2283
+#: ../../data/tribes/initialization/empire/units.lua:2297
 msgctxt "warehousename"
 msgid "Abila"
 msgstr "Abila"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2285
+#: ../../data/tribes/initialization/empire/units.lua:2299
 msgctxt "warehousename"
 msgid "Ad Flexum"
 msgstr "Ad Flexum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2287
+#: ../../data/tribes/initialization/empire/units.lua:2301
 msgctxt "warehousename"
 msgid "Aelia Capitolina"
 msgstr "Aelia Capitolina"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2289
+#: ../../data/tribes/initialization/empire/units.lua:2303
 msgctxt "warehousename"
 msgid "Aeminium"
 msgstr "Aeminium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2291
+#: ../../data/tribes/initialization/empire/units.lua:2305
 msgctxt "warehousename"
 msgid "Aequum"
 msgstr "Aequum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2293
+#: ../../data/tribes/initialization/empire/units.lua:2307
 msgctxt "warehousename"
 msgid "Ala"
 msgstr "Ala"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2295
+#: ../../data/tribes/initialization/empire/units.lua:2309
 msgctxt "warehousename"
 msgid "Albanianis"
 msgstr "Albanianis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2297
+#: ../../data/tribes/initialization/empire/units.lua:2311
 msgctxt "warehousename"
 msgid "Ambianum"
 msgstr "Ambianum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2299
+#: ../../data/tribes/initialization/empire/units.lua:2313
 msgctxt "warehousename"
 msgid "Andautonia"
 msgstr "Andautonia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2301
+#: ../../data/tribes/initialization/empire/units.lua:2315
 msgctxt "warehousename"
 msgid "Apulum"
 msgstr "Apulum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2303
+#: ../../data/tribes/initialization/empire/units.lua:2317
 msgctxt "warehousename"
 msgid "Aquæ Granni"
 msgstr "Aquæ Granni"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2305
+#: ../../data/tribes/initialization/empire/units.lua:2319
 msgctxt "warehousename"
 msgid "Aquæ Helveticæ"
 msgstr "Aquæ Helveticæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2307
+#: ../../data/tribes/initialization/empire/units.lua:2321
 msgctxt "warehousename"
 msgid "Aquæ Mattiacorum"
 msgstr "Aquæ Mattiacorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2309
+#: ../../data/tribes/initialization/empire/units.lua:2323
 msgctxt "warehousename"
 msgid "Aquæ Sulis"
 msgstr "Aquæ Sulis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2311
+#: ../../data/tribes/initialization/empire/units.lua:2325
 msgctxt "warehousename"
 msgid "Aquileia"
 msgstr "Aquileia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2313
+#: ../../data/tribes/initialization/empire/units.lua:2327
 msgctxt "warehousename"
 msgid "Aquincum"
 msgstr "Aquincum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2315
+#: ../../data/tribes/initialization/empire/units.lua:2329
 msgctxt "warehousename"
 msgid "Aræ Flaviæ"
 msgstr "Aræ Flaviæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2317
+#: ../../data/tribes/initialization/empire/units.lua:2331
 msgctxt "warehousename"
 msgid "Argentoratum"
 msgstr "Argentoratum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2319
+#: ../../data/tribes/initialization/empire/units.lua:2333
 msgctxt "warehousename"
 msgid "Ariminum"
 msgstr "Ariminum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2321
+#: ../../data/tribes/initialization/empire/units.lua:2335
 msgctxt "warehousename"
 msgid "Ascrivium"
 msgstr "Ascrivium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2323
+#: ../../data/tribes/initialization/empire/units.lua:2337
 msgctxt "warehousename"
 msgid "Asturica Augusta"
 msgstr "Asturica Augusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2325
+#: ../../data/tribes/initialization/empire/units.lua:2339
 msgctxt "warehousename"
 msgid "Atuatuca Tungrorum"
 msgstr "Atuatuca Tungrorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2327
+#: ../../data/tribes/initialization/empire/units.lua:2341
 msgctxt "warehousename"
 msgid "Augusta Raurica"
 msgstr "Augusta Raurica"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2329
+#: ../../data/tribes/initialization/empire/units.lua:2343
 msgctxt "warehousename"
 msgid "Augusta Taurinorum"
 msgstr "Augusta Taurinorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2331
+#: ../../data/tribes/initialization/empire/units.lua:2345
 msgctxt "warehousename"
 msgid "Augusta Treverorum"
 msgstr "Augusta Treverorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2333
+#: ../../data/tribes/initialization/empire/units.lua:2347
 msgctxt "warehousename"
 msgid "Augusta Vindelicorum"
 msgstr "Augusta Vindelicorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2335
+#: ../../data/tribes/initialization/empire/units.lua:2349
 msgctxt "warehousename"
 msgid "Aurelia Aquensis"
 msgstr "Aurelia Aquensis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2337
+#: ../../data/tribes/initialization/empire/units.lua:2351
 msgctxt "warehousename"
 msgid "Aventicum"
 msgstr "Aventicum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2339
+#: ../../data/tribes/initialization/empire/units.lua:2353
 msgctxt "warehousename"
 msgid "Belum"
 msgstr "Belum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2341
+#: ../../data/tribes/initialization/empire/units.lua:2355
 msgctxt "warehousename"
 msgid "Biriciana"
 msgstr "Biriciana"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2343
+#: ../../data/tribes/initialization/empire/units.lua:2357
 msgctxt "warehousename"
 msgid "Blestium"
 msgstr "Blestium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2345
+#: ../../data/tribes/initialization/empire/units.lua:2359
 msgctxt "warehousename"
 msgid "Bonames"
 msgstr "Bonames"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2347
+#: ../../data/tribes/initialization/empire/units.lua:2361
 msgctxt "warehousename"
 msgid "Bonna"
 msgstr "Bonna"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2349
+#: ../../data/tribes/initialization/empire/units.lua:2363
 msgctxt "warehousename"
 msgid "Bononia"
 msgstr "Bononia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2351
+#: ../../data/tribes/initialization/empire/units.lua:2365
 msgctxt "warehousename"
 msgid "Borbetomagus"
 msgstr "Borbetomagus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2353
+#: ../../data/tribes/initialization/empire/units.lua:2367
 msgctxt "warehousename"
 msgid "Bovium"
 msgstr "Bovium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2355
+#: ../../data/tribes/initialization/empire/units.lua:2369
 msgctxt "warehousename"
 msgid "Bracara Augusta"
 msgstr "Bracara Augusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2357
+#: ../../data/tribes/initialization/empire/units.lua:2371
 msgctxt "warehousename"
 msgid "Brigantium"
 msgstr "Brigantium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2359
+#: ../../data/tribes/initialization/empire/units.lua:2373
 msgctxt "warehousename"
 msgid "Burgodunum"
 msgstr "Burgodunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2361
+#: ../../data/tribes/initialization/empire/units.lua:2375
 msgctxt "warehousename"
 msgid "Cæsaraugusta"
 msgstr "Cæsaraugusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2363
+#: ../../data/tribes/initialization/empire/units.lua:2377
 msgctxt "warehousename"
 msgid "Cæsarea"
 msgstr "Cæsarea"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2365
+#: ../../data/tribes/initialization/empire/units.lua:2379
 msgctxt "warehousename"
 msgid "Cæsaromagus"
 msgstr "Cæsaromagus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2367
+#: ../../data/tribes/initialization/empire/units.lua:2381
 msgctxt "warehousename"
 msgid "Calisia"
 msgstr "Calisia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2369
+#: ../../data/tribes/initialization/empire/units.lua:2383
 msgctxt "warehousename"
 msgid "Calleva Atrebatum"
 msgstr "Calleva Atrebatum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2371
+#: ../../data/tribes/initialization/empire/units.lua:2385
 msgctxt "warehousename"
 msgid "Camulodunum"
 msgstr "Camulodunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2373
+#: ../../data/tribes/initialization/empire/units.lua:2387
 msgctxt "warehousename"
 msgid "Carnuntum"
 msgstr "Carnuntum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2375
+#: ../../data/tribes/initialization/empire/units.lua:2389
 msgctxt "warehousename"
 msgid "Castra Batavar"
 msgstr "Castra Batavar"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2377
+#: ../../data/tribes/initialization/empire/units.lua:2391
 msgctxt "warehousename"
 msgid "Castra Legionis"
 msgstr "Castra Legionis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2379
+#: ../../data/tribes/initialization/empire/units.lua:2393
 msgctxt "warehousename"
 msgid "Castra Regina"
 msgstr "Castra Regina"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2381
+#: ../../data/tribes/initialization/empire/units.lua:2395
 msgctxt "warehousename"
 msgid "Castra Vetera"
 msgstr "Castra Vetera"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2383
+#: ../../data/tribes/initialization/empire/units.lua:2397
 msgctxt "warehousename"
 msgid "Cibalæ"
 msgstr "Cibalæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2385
+#: ../../data/tribes/initialization/empire/units.lua:2399
 msgctxt "warehousename"
 msgid "Clausentum"
 msgstr "Clausentum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2387
+#: ../../data/tribes/initialization/empire/units.lua:2401
 msgctxt "warehousename"
 msgid "Colonia Agrippina"
 msgstr "Colonia Agrippina"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2389
+#: ../../data/tribes/initialization/empire/units.lua:2403
 msgctxt "warehousename"
 msgid "Colonia Narbo Martius"
 msgstr "Colonia Narbo Martius"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2391
+#: ../../data/tribes/initialization/empire/units.lua:2405
 msgctxt "warehousename"
 msgid "Colonia Ulpia Traiana"
 msgstr "Colonia Ulpia Traiana"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2393
+#: ../../data/tribes/initialization/empire/units.lua:2407
 msgctxt "warehousename"
 msgid "Comagenis"
 msgstr "Comagenis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2395
+#: ../../data/tribes/initialization/empire/units.lua:2409
 msgctxt "warehousename"
 msgid "Complutum"
 msgstr "Complutum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2397
+#: ../../data/tribes/initialization/empire/units.lua:2411
 msgctxt "warehousename"
 msgid "Concangis"
 msgstr "Concangis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2399
+#: ../../data/tribes/initialization/empire/units.lua:2413
 msgctxt "warehousename"
 msgid "Condate"
 msgstr "Condate"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2401
+#: ../../data/tribes/initialization/empire/units.lua:2415
 msgctxt "warehousename"
 msgid "Confloenta"
 msgstr "Confloenta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2403
+#: ../../data/tribes/initialization/empire/units.lua:2417
 msgctxt "warehousename"
 msgid "Constantinopolis"
 msgstr "Constantinopolis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2405
+#: ../../data/tribes/initialization/empire/units.lua:2419
 msgctxt "warehousename"
 msgid "Coria"
 msgstr "Coria"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2407
+#: ../../data/tribes/initialization/empire/units.lua:2421
 msgctxt "warehousename"
 msgid "Corinium Dobunnorum"
 msgstr "Corinium Dobunnorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2409
+#: ../../data/tribes/initialization/empire/units.lua:2423
 msgctxt "warehousename"
 msgid "Coriovallum"
 msgstr "Coriovallum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2411
+#: ../../data/tribes/initialization/empire/units.lua:2425
 msgctxt "warehousename"
 msgid "Cosa"
 msgstr "Cosa"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2413
+#: ../../data/tribes/initialization/empire/units.lua:2427
 msgctxt "warehousename"
 msgid "Curia Rætorum"
 msgstr "Curia Rætorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2415
+#: ../../data/tribes/initialization/empire/units.lua:2429
 msgctxt "warehousename"
 msgid "Danum"
 msgstr "Danum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2417
+#: ../../data/tribes/initialization/empire/units.lua:2431
 msgctxt "warehousename"
 msgid "Deva Victrix"
 msgstr "Deva Victrix"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2419
+#: ../../data/tribes/initialization/empire/units.lua:2433
 msgctxt "warehousename"
 msgid "Divodurum"
 msgstr "Divodurum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2421
+#: ../../data/tribes/initialization/empire/units.lua:2435
 msgctxt "warehousename"
 msgid "Dubris"
 msgstr "Dubris"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2423
+#: ../../data/tribes/initialization/empire/units.lua:2437
 msgctxt "warehousename"
 msgid "Durnovaria"
 msgstr "Durnovaria"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2425
+#: ../../data/tribes/initialization/empire/units.lua:2439
 msgctxt "warehousename"
 msgid "Durocobrivis"
 msgstr "Durocobrivis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2427
+#: ../../data/tribes/initialization/empire/units.lua:2441
 msgctxt "warehousename"
 msgid "Durocornovium"
 msgstr "Durocornovium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2429
+#: ../../data/tribes/initialization/empire/units.lua:2443
 msgctxt "warehousename"
 msgid "Duroliponte"
 msgstr "Duroliponte"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2431
+#: ../../data/tribes/initialization/empire/units.lua:2445
 msgctxt "warehousename"
 msgid "Durovigutum"
 msgstr "Durovigutum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2433
+#: ../../data/tribes/initialization/empire/units.lua:2447
 msgctxt "warehousename"
 msgid "Eboracum"
 msgstr "Eboracum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2435
+#: ../../data/tribes/initialization/empire/units.lua:2449
 msgctxt "warehousename"
 msgid "Emerita Augusta"
 msgstr "Emerita Augusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2437
+#: ../../data/tribes/initialization/empire/units.lua:2451
 msgctxt "warehousename"
 msgid "Florentia"
 msgstr "Florentia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2439
+#: ../../data/tribes/initialization/empire/units.lua:2453
 msgctxt "warehousename"
 msgid "Forum Hadriani"
 msgstr "Forum Hadriani"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2441
+#: ../../data/tribes/initialization/empire/units.lua:2455
 msgctxt "warehousename"
 msgid "Forum Livii"
 msgstr "Forum Livii"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2443
+#: ../../data/tribes/initialization/empire/units.lua:2457
 msgctxt "warehousename"
 msgid "Gerulata"
 msgstr "Gerulata"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2445
+#: ../../data/tribes/initialization/empire/units.lua:2459
 msgctxt "warehousename"
 msgid "Gerunda"
 msgstr "Gerunda"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2447
+#: ../../data/tribes/initialization/empire/units.lua:2461
 msgctxt "warehousename"
 msgid "Gesoriacum"
 msgstr "Gesoriacum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2449
+#: ../../data/tribes/initialization/empire/units.lua:2463
 msgctxt "warehousename"
 msgid "Gorsium"
 msgstr "Gorsium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2451
+#: ../../data/tribes/initialization/empire/units.lua:2465
 msgctxt "warehousename"
 msgid "Hadrianopolis"
 msgstr "Hadrianopolis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2453
+#: ../../data/tribes/initialization/empire/units.lua:2467
 msgctxt "warehousename"
 msgid "Isca Augusta"
 msgstr "Isca Augusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2455
+#: ../../data/tribes/initialization/empire/units.lua:2469
 msgctxt "warehousename"
 msgid "Isca Dumnoniorum"
 msgstr "Isca Dumnoniorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2457
+#: ../../data/tribes/initialization/empire/units.lua:2471
 msgctxt "warehousename"
 msgid "Italica"
 msgstr "Italica"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2459
+#: ../../data/tribes/initialization/empire/units.lua:2473
 msgctxt "warehousename"
 msgid "Iulia Aemona"
 msgstr "Iulia Aemona"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2461
+#: ../../data/tribes/initialization/empire/units.lua:2475
 msgctxt "warehousename"
 msgid "Iulia Romula Hispalis"
 msgstr "Iulia Romula Hispalis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2463
+#: ../../data/tribes/initialization/empire/units.lua:2477
 msgctxt "warehousename"
 msgid "Iuvavum"
 msgstr "Iuvavum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2465
+#: ../../data/tribes/initialization/empire/units.lua:2479
 msgctxt "warehousename"
 msgid "Lactodurum"
 msgstr "Lactodurum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2467
+#: ../../data/tribes/initialization/empire/units.lua:2481
 msgctxt "warehousename"
 msgid "Lagentium"
 msgstr "Lagentium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2469
+#: ../../data/tribes/initialization/empire/units.lua:2483
 msgctxt "warehousename"
 msgid "Lauri"
 msgstr "Lauri"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2471
+#: ../../data/tribes/initialization/empire/units.lua:2485
 msgctxt "warehousename"
 msgid "Lentia"
 msgstr "Lentia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2473
+#: ../../data/tribes/initialization/empire/units.lua:2487
 msgctxt "warehousename"
 msgid "Letocetum"
 msgstr "Letocetum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2475
+#: ../../data/tribes/initialization/empire/units.lua:2489
 msgctxt "warehousename"
 msgid "Lindinis"
 msgstr "Lindinis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2477
+#: ../../data/tribes/initialization/empire/units.lua:2491
 msgctxt "warehousename"
 msgid "Lindum Colonia"
 msgstr "Lindum Colonia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2479
+#: ../../data/tribes/initialization/empire/units.lua:2493
 msgctxt "warehousename"
 msgid "Londinium"
 msgstr "Londinium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2481
+#: ../../data/tribes/initialization/empire/units.lua:2495
 msgctxt "warehousename"
 msgid "Lopodunum"
 msgstr "Lopodunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2483
+#: ../../data/tribes/initialization/empire/units.lua:2497
 msgctxt "warehousename"
 msgid "Lousonna"
 msgstr "Lousonna"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2485
+#: ../../data/tribes/initialization/empire/units.lua:2499
 msgctxt "warehousename"
 msgid "Lucus Augusta"
 msgstr "Lucus Augusta"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2487
+#: ../../data/tribes/initialization/empire/units.lua:2501
 msgctxt "warehousename"
 msgid "Lugdunum"
 msgstr "Lugdunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2489
+#: ../../data/tribes/initialization/empire/units.lua:2503
 msgctxt "warehousename"
 msgid "Lugdunum Batavorum"
 msgstr "Lugdunum Batavorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2491
+#: ../../data/tribes/initialization/empire/units.lua:2505
 msgctxt "warehousename"
 msgid "Luguvalium"
 msgstr "Luguvalium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2493
+#: ../../data/tribes/initialization/empire/units.lua:2507
 msgctxt "warehousename"
 msgid "Lutetia Parisiorum"
 msgstr "Lutetia Parisiorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2495
+#: ../../data/tribes/initialization/empire/units.lua:2509
 msgctxt "warehousename"
 msgid "Mamucium"
 msgstr "Mamucium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2497
+#: ../../data/tribes/initialization/empire/units.lua:2511
 msgctxt "warehousename"
 msgid "Marsonia"
 msgstr "Marsonia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2499
+#: ../../data/tribes/initialization/empire/units.lua:2513
 msgctxt "warehousename"
 msgid "Massa"
 msgstr "Massa"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2501
+#: ../../data/tribes/initialization/empire/units.lua:2515
 msgctxt "warehousename"
 msgid "Matilo"
 msgstr "Matilo"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2503
+#: ../../data/tribes/initialization/empire/units.lua:2517
 msgctxt "warehousename"
 msgid "Mediolanum"
 msgstr "Mediolanum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2505
+#: ../../data/tribes/initialization/empire/units.lua:2519
 msgctxt "warehousename"
 msgid "Modoetia"
 msgstr "Modoetia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2507
+#: ../../data/tribes/initialization/empire/units.lua:2521
 msgctxt "warehousename"
 msgid "Mogontiacum"
 msgstr "Mogontiacum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2509
+#: ../../data/tribes/initialization/empire/units.lua:2523
 msgctxt "warehousename"
 msgid "Moridunum"
 msgstr "Moridunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2511
+#: ../../data/tribes/initialization/empire/units.lua:2525
 msgctxt "warehousename"
 msgid "Mursa"
 msgstr "Mursa"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2513
+#: ../../data/tribes/initialization/empire/units.lua:2527
 msgctxt "warehousename"
 msgid "Naissus"
 msgstr "Naissus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2515
+#: ../../data/tribes/initialization/empire/units.lua:2529
 msgctxt "warehousename"
 msgid "Nemausus"
 msgstr "Nemausus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2517
+#: ../../data/tribes/initialization/empire/units.lua:2531
 msgctxt "warehousename"
 msgid "Nicopolis ad Istrum"
 msgstr "Nicopolis ad Istrum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2519
+#: ../../data/tribes/initialization/empire/units.lua:2533
 msgctxt "warehousename"
 msgid "Nicopolis ad Nestum"
 msgstr "Nicopolis ad Nestum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2521
+#: ../../data/tribes/initialization/empire/units.lua:2535
 msgctxt "warehousename"
 msgid "Nida"
 msgstr "Nida"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2523
+#: ../../data/tribes/initialization/empire/units.lua:2537
 msgctxt "warehousename"
 msgid "Nigrum Pullum"
 msgstr "Nigrum Pullum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2525
+#: ../../data/tribes/initialization/empire/units.lua:2539
 msgctxt "warehousename"
 msgid "Norba Cæsarina"
 msgstr "Norba Cæsarina"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2527
+#: ../../data/tribes/initialization/empire/units.lua:2541
 msgctxt "warehousename"
 msgid "Novæ"
 msgstr "Novæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2529
+#: ../../data/tribes/initialization/empire/units.lua:2543
 msgctxt "warehousename"
 msgid "Novæsium"
 msgstr "Novæsium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2531
+#: ../../data/tribes/initialization/empire/units.lua:2545
 msgctxt "warehousename"
 msgid "Noviodunum"
 msgstr "Noviodunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2533
+#: ../../data/tribes/initialization/empire/units.lua:2547
 msgctxt "warehousename"
 msgid "Noviomagus"
 msgstr "Noviomagus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2535
+#: ../../data/tribes/initialization/empire/units.lua:2549
 msgctxt "warehousename"
 msgid "Olicana"
 msgstr "Olicana"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2537
+#: ../../data/tribes/initialization/empire/units.lua:2551
 msgctxt "warehousename"
 msgid "Ovilava"
 msgstr "Ovilava"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2539
+#: ../../data/tribes/initialization/empire/units.lua:2553
 msgctxt "warehousename"
 msgid "Palma"
 msgstr "Palma"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2541
+#: ../../data/tribes/initialization/empire/units.lua:2555
 msgctxt "warehousename"
 msgid "Partiscum"
 msgstr "Partiscum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2543
+#: ../../data/tribes/initialization/empire/units.lua:2557
 msgctxt "warehousename"
 msgid "Pistoria"
 msgstr "Pistoria"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2545
+#: ../../data/tribes/initialization/empire/units.lua:2559
 msgctxt "warehousename"
 msgid "Placentia"
 msgstr "Placentia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2547
+#: ../../data/tribes/initialization/empire/units.lua:2561
 msgctxt "warehousename"
 msgid "Poetovium"
 msgstr "Poetovium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2549
+#: ../../data/tribes/initialization/empire/units.lua:2563
 msgctxt "warehousename"
 msgid "Pomaria"
 msgstr "Pomaria"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2551
+#: ../../data/tribes/initialization/empire/units.lua:2565
 msgctxt "warehousename"
 msgid "Pompælo"
 msgstr "Pompælo"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2553
+#: ../../data/tribes/initialization/empire/units.lua:2567
 msgctxt "warehousename"
 msgid "Pompeii"
 msgstr "Pompeii"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2555
+#: ../../data/tribes/initialization/empire/units.lua:2569
 msgctxt "warehousename"
 msgid "Pons Aelius"
 msgstr "Pons Aelius"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2557
+#: ../../data/tribes/initialization/empire/units.lua:2571
 msgctxt "warehousename"
 msgid "Pons Drusi"
 msgstr "Pons Drusi"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2559
+#: ../../data/tribes/initialization/empire/units.lua:2573
 msgctxt "warehousename"
 msgid "Portus Lemanis"
 msgstr "Portus Lemanis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2561
+#: ../../data/tribes/initialization/empire/units.lua:2575
 msgctxt "warehousename"
 msgid "Prætorium Agrippinæ"
 msgstr "Prætorium Agrippinæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2563
+#: ../../data/tribes/initialization/empire/units.lua:2577
 msgctxt "warehousename"
 msgid "Ragusium"
 msgstr "Ragusium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2565
+#: ../../data/tribes/initialization/empire/units.lua:2579
 msgctxt "warehousename"
 msgid "Ratæ Corieltauvorum"
 msgstr "Ratæ Corieltauvorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2567
+#: ../../data/tribes/initialization/empire/units.lua:2581
 msgctxt "warehousename"
 msgid "Regium Lepidi"
 msgstr "Regium Lepidi"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2569
+#: ../../data/tribes/initialization/empire/units.lua:2583
 msgctxt "warehousename"
 msgid "Regulbium"
 msgstr "Regulbium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2571
+#: ../../data/tribes/initialization/empire/units.lua:2585
 msgctxt "warehousename"
 msgid "Rigomagus"
 msgstr "Rigomagus"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2573
+#: ../../data/tribes/initialization/empire/units.lua:2587
 msgctxt "warehousename"
 msgid "Roma"
 msgstr "Roma"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2575
+#: ../../data/tribes/initialization/empire/units.lua:2589
 msgctxt "warehousename"
 msgid "Rutupiæ"
 msgstr "Rutupiæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2577
+#: ../../data/tribes/initialization/empire/units.lua:2591
 msgctxt "warehousename"
 msgid "Salernum"
 msgstr "Salernum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2579
+#: ../../data/tribes/initialization/empire/units.lua:2593
 msgctxt "warehousename"
 msgid "Salona"
 msgstr "Salona"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2581
+#: ../../data/tribes/initialization/empire/units.lua:2595
 msgctxt "warehousename"
 msgid "Savaria"
 msgstr "Savaria"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2583
+#: ../../data/tribes/initialization/empire/units.lua:2597
 msgctxt "warehousename"
 msgid "Scalabis"
 msgstr "Scalabis"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2585
+#: ../../data/tribes/initialization/empire/units.lua:2599
 msgctxt "warehousename"
 msgid "Singidunum"
 msgstr "Singidunum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2587
+#: ../../data/tribes/initialization/empire/units.lua:2601
 msgctxt "warehousename"
 msgid "Sirmium"
 msgstr "Sirmium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2589
+#: ../../data/tribes/initialization/empire/units.lua:2603
 msgctxt "warehousename"
 msgid "Siscia"
 msgstr "Siscia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2591
+#: ../../data/tribes/initialization/empire/units.lua:2605
 msgctxt "warehousename"
 msgid "Sopiane"
 msgstr "Sopiane"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2593
+#: ../../data/tribes/initialization/empire/units.lua:2607
 msgctxt "warehousename"
 msgid "Sorviodurum"
 msgstr "Sorviodurum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2595
+#: ../../data/tribes/initialization/empire/units.lua:2609
 msgctxt "warehousename"
 msgid "Sostra"
 msgstr "Sostra"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2597
+#: ../../data/tribes/initialization/empire/units.lua:2611
 msgctxt "warehousename"
 msgid "Storgosia"
 msgstr "Storgosia"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2599
+#: ../../data/tribes/initialization/empire/units.lua:2613
 msgctxt "warehousename"
 msgid "Sumelocenna"
 msgstr "Sumelocenna"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2601
+#: ../../data/tribes/initialization/empire/units.lua:2615
 msgctxt "warehousename"
 msgid "Tarraco"
 msgstr "Tarraco"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2603
+#: ../../data/tribes/initialization/empire/units.lua:2617
 msgctxt "warehousename"
 msgid "Theranda"
 msgstr "Theranda"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2605
+#: ../../data/tribes/initialization/empire/units.lua:2619
 msgctxt "warehousename"
 msgid "Tibiscum"
 msgstr "Tibiscum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2607
+#: ../../data/tribes/initialization/empire/units.lua:2621
 msgctxt "warehousename"
 msgid "Traiectum"
 msgstr "Traiectum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2609
+#: ../../data/tribes/initialization/empire/units.lua:2623
 msgctxt "warehousename"
 msgid "Traiectum ad Mosam"
 msgstr "Traiectum ad Mosam"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2611
+#: ../../data/tribes/initialization/empire/units.lua:2625
 msgctxt "warehousename"
 msgid "Traiectum ad Nicrem"
 msgstr "Traiectum ad Nicrem"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2613
+#: ../../data/tribes/initialization/empire/units.lua:2627
 msgctxt "warehousename"
 msgid "Turicum"
 msgstr "Turicum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2615
+#: ../../data/tribes/initialization/empire/units.lua:2629
 msgctxt "warehousename"
 msgid "Urbs Aurelianorum"
 msgstr "Urbs Aurelianorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2617
+#: ../../data/tribes/initialization/empire/units.lua:2631
 msgctxt "warehousename"
 msgid "Valentia Edetanorum"
 msgstr "Valentia Edetanorum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2619
+#: ../../data/tribes/initialization/empire/units.lua:2633
 msgctxt "warehousename"
 msgid "Venetiæ"
 msgstr "Venetiæ"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2621
+#: ../../data/tribes/initialization/empire/units.lua:2635
 msgctxt "warehousename"
 msgid "Venta Belgarum"
 msgstr "Venta Belgarum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2623
+#: ../../data/tribes/initialization/empire/units.lua:2637
 msgctxt "warehousename"
 msgid "Venta Silurum"
 msgstr "Venta Silurum"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2625
+#: ../../data/tribes/initialization/empire/units.lua:2639
 msgctxt "warehousename"
 msgid "Verulamium"
 msgstr "Verulamium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2627
+#: ../../data/tribes/initialization/empire/units.lua:2641
 msgctxt "warehousename"
 msgid "Vesontio"
 msgstr "Vesontio"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2629
+#: ../../data/tribes/initialization/empire/units.lua:2643
 msgctxt "warehousename"
 msgid "Viminacium"
 msgstr "Viminacium"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2631
+#: ../../data/tribes/initialization/empire/units.lua:2645
 msgctxt "warehousename"
 msgid "Vindobona"
 msgstr "Vindobona"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2633
+#: ../../data/tribes/initialization/empire/units.lua:2647
 msgctxt "warehousename"
 msgid "Vindonissa"
 msgstr "Vindonissa"
 
 #. TRANSLATORS: This Empire warehouse is named after a Roman town
-#: ../../data/tribes/initialization/empire/units.lua:2635
+#: ../../data/tribes/initialization/empire/units.lua:2649
 msgctxt "warehousename"
 msgid "Vinovia"
 msgstr "Vinovia"
 
 #. TRANSLATORS: Productivity label on an empire building if there is 1 worker
 #. missing
-#: ../../data/tribes/initialization/empire/units.lua:2641
+#: ../../data/tribes/initialization/empire/units.lua:2655
 msgctxt "empire"
 msgid "Worker missing"
 msgstr "Fa falta un treballador"
 
 #. TRANSLATORS: Productivity label on an empire building if there is 1 worker
 #. coming
-#: ../../data/tribes/initialization/empire/units.lua:2643
+#: ../../data/tribes/initialization/empire/units.lua:2657
 msgctxt "empire"
 msgid "Worker is coming"
 msgstr "Està venint un treballador"
 
 #. TRANSLATORS: Productivity label on an empire building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
-#: ../../data/tribes/initialization/empire/units.lua:2645
+#: ../../data/tribes/initialization/empire/units.lua:2659
 msgctxt "empire"
 msgid "Workers missing"
 msgstr "Fan falta treballadors"
 
 #. TRANSLATORS: Productivity label on an empire building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
-#: ../../data/tribes/initialization/empire/units.lua:2647
+#: ../../data/tribes/initialization/empire/units.lua:2661
 msgctxt "empire"
 msgid "Workers are coming"
 msgstr "Estan venint treballadors"
 
 #. TRANSLATORS: Productivity label on an empire building if there is 1
 #. experienced worker missing
-#: ../../data/tribes/initialization/empire/units.lua:2649
+#: ../../data/tribes/initialization/empire/units.lua:2663
 msgctxt "empire"
 msgid "Expert missing"
 msgstr "Fa falta un expert"
@@ -12666,14 +12711,14 @@ msgstr "Fa falta un expert"
 #. TRANSLATORS: Productivity label on an empire building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
 #. know.
-#: ../../data/tribes/initialization/empire/units.lua:2651
+#: ../../data/tribes/initialization/empire/units.lua:2665
 msgctxt "empire"
 msgid "Experts missing"
 msgstr "Fan falta experts"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/empire/units.lua:2665
+#: ../../data/tribes/initialization/empire/units.lua:2679
 msgctxt "empire_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
@@ -12681,7 +12726,7 @@ msgstr[0] "%1% soldat (+%2%)"
 msgstr[1] "%1% soldats (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/empire/units.lua:2667
+#: ../../data/tribes/initialization/empire/units.lua:2681
 msgctxt "empire_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
@@ -12691,7 +12736,7 @@ msgstr[1] "%1% soldats"
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
 #. of soldier slots in the building
-#: ../../data/tribes/initialization/empire/units.lua:2669
+#: ../../data/tribes/initialization/empire/units.lua:2683
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
@@ -12700,7 +12745,7 @@ msgstr[1] "%1%(+%2%) soldats (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/empire/units.lua:2671
+#: ../../data/tribes/initialization/empire/units.lua:2685
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
@@ -13695,7 +13740,7 @@ msgstr "Remou el fang del terra i amb aigua n’obté argila. L’argila s’emp
 #. House
 #. TRANSLATORS: Lore helptext for a frisian production site: Charcoal Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1662
-#: ../../data/tribes/initialization/frisians/units.lua:1845
+#: ../../data/tribes/initialization/frisians/units.lua:1851
 msgctxt "frisians_building"
 msgid ""
 "No other tribe has ever mastered the art of charcoal burning as we have!"
@@ -13706,7 +13751,7 @@ msgstr "Cap clan ha dominat l’art de les carboneres com nosaltres!"
 #. TRANSLATORS: Lore author helptext for a frisian production site: Charcoal
 #. Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1664
-#: ../../data/tribes/initialization/frisians/units.lua:1847
+#: ../../data/tribes/initialization/frisians/units.lua:1853
 msgctxt "frisians_building"
 msgid "The inventor of the Frisian charcoal kiln"
 msgstr "L’inventor del kiln de carbó frisó."
@@ -14017,9 +14062,19 @@ msgctxt "frisians_building"
 msgid "Produces basic weapons and helmets for the soldiers."
 msgstr "Produeix armes bàsiques i cascos pels soldats."
 
+#. TRANSLATORS: Performance helptext for a frisian production site: Small
+#. Armor Smithy
+#: ../../data/tribes/initialization/frisians/units.lua:1805
+msgctxt "frisians_building"
+msgid ""
+"If all needed wares are delivered in time, this building can produce one "
+"short sword in %1$s on average, one long sword in %2$s on average and one "
+"helmet in %3$s on average."
+msgstr "Si s'entreguen tots els béns necessaris a temps, aquest edifici pot produir una espasa curta cada %1$s de mitjana, una espasa llarga cada %2$s de mitjana i un casc cada %3$s de mitjana."
+
 #. TRANSLATORS: Lore helptext for a frisian production site: Large Armor
 #. Smithy
-#: ../../data/tribes/initialization/frisians/units.lua:1810
+#: ../../data/tribes/initialization/frisians/units.lua:1812
 msgctxt "frisians_building"
 msgid ""
 "Of course I could still forge short and long swords, but it is beneath my "
@@ -14028,7 +14083,7 @@ msgstr "Com no, podem forjar espases curtes i espases llargues, però preocupar-
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Large
 #. Armor Smithy
-#: ../../data/tribes/initialization/frisians/units.lua:1812
+#: ../../data/tribes/initialization/frisians/units.lua:1814
 msgctxt "frisians_building"
 msgid ""
 "A master blacksmith refusing to forge anything but the most sophisticated "
@@ -14037,13 +14092,23 @@ msgstr "Un mestre forjador que refusa forjar armes senzilles i que només vol co
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Large Armor
 #. Smithy
-#: ../../data/tribes/initialization/frisians/units.lua:1814
+#: ../../data/tribes/initialization/frisians/units.lua:1816
 msgctxt "frisians_building"
 msgid "Produces advanced weapons and golden helmets for the soldiers."
 msgstr "Produeix armes avançades i cascos daurats pels soldats."
 
+#. TRANSLATORS: Performance helptext for a frisian production site: Large
+#. Armor Smithy
+#: ../../data/tribes/initialization/frisians/units.lua:1818
+msgctxt "frisians_building"
+msgid ""
+"If all needed wares are delivered in time, this building can produce one "
+"broadswordsword in %1$s on average, one double-edged sword in %2$s on "
+"average and one golden helmet in %3$s on average."
+msgstr "Si s'entreguen tots els béns necessaris a temps, aquest edifici pot produir un sabre cada %1$s de mitjana, una espasa de doble fil cada %2$s de mitjana i un casc daurat cada %3$s de mitjana."
+
 #. TRANSLATORS: Lore helptext for a frisian production site: Sewing Room
-#: ../../data/tribes/initialization/frisians/units.lua:1821
+#: ../../data/tribes/initialization/frisians/units.lua:1825
 msgctxt "frisians_building"
 msgid ""
 "You soldiers think a good sword is everything, but where would you be if you"
@@ -14052,27 +14117,27 @@ msgstr "Els soldats creuen que una bona espasa ho és tot, però on estaríeu se
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Sewing
 #. Room
-#: ../../data/tribes/initialization/frisians/units.lua:1823
+#: ../../data/tribes/initialization/frisians/units.lua:1827
 msgctxt "frisians_building"
 msgid "A seamstress scolding a soldier for disrespecting her profession"
 msgstr "Una costurera reganyant un soldat per no respectar la seva professió"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Sewing Room
-#: ../../data/tribes/initialization/frisians/units.lua:1825
+#: ../../data/tribes/initialization/frisians/units.lua:1829
 msgctxt "building"
 msgid "Sews fur garments out of reindeer fur."
 msgstr "Cus vestits de pell amb pells de ren."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Sewing
 #. Room
-#: ../../data/tribes/initialization/frisians/units.lua:1827
+#: ../../data/tribes/initialization/frisians/units.lua:1831
 #, lua-format
 msgctxt "frisians_building"
 msgid "The sewing room needs %s on average to produce one fur garment."
 msgstr "El taller de costura necessita %s de mitjana per produir un vestit de pell."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Tailor's Shop
-#: ../../data/tribes/initialization/frisians/units.lua:1834
+#: ../../data/tribes/initialization/frisians/units.lua:1838
 msgctxt "frisians_building"
 msgid ""
 "Don’t complain if these garments are too heavy – they’re not supposed to be "
@@ -14081,27 +14146,36 @@ msgstr "No us queixeu si els vestits pesen massa. No estan pensats per ser lleug
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Tailor's
 #. Shop
-#: ../../data/tribes/initialization/frisians/units.lua:1836
+#: ../../data/tribes/initialization/frisians/units.lua:1840
 msgctxt "frisians_building"
 msgid "A trainer scolding a soldier"
 msgstr "Un entrenador recriminant un soldat"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Tailor's Shop
-#: ../../data/tribes/initialization/frisians/units.lua:1838
+#: ../../data/tribes/initialization/frisians/units.lua:1842
 msgctxt "building"
 msgid "Equips fur garments with iron or gold to produce good armor."
 msgstr "Equipa vestits de pell amb ferro o or per produir bones armadures."
 
+#. TRANSLATORS: Performance helptext for a frisian production site: Tailor's
+#. Shop
+#: ../../data/tribes/initialization/frisians/units.lua:1844
+msgctxt "frisians_building"
+msgid ""
+"The tailor’s shop needs %1$s on average to produce one studded fur garment "
+"and %2$s on average to produce one golden fur garment."
+msgstr "El taller del sastre necessita %1$s de mitjana per a produir un vestit de pell tatxonat i %2$s de mitjana per a produir un vestit de pell amb or."
+
 #. TRANSLATORS: Performance helptext for a frisian production site: Charcoal
 #. Kiln
-#: ../../data/tribes/initialization/frisians/units.lua:1851
+#: ../../data/tribes/initialization/frisians/units.lua:1857
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
 msgstr "El kiln de carbó necessita %s de mitjana per produir una unitat de carbó."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Smokery
-#: ../../data/tribes/initialization/frisians/units.lua:1858
+#: ../../data/tribes/initialization/frisians/units.lua:1864
 msgctxt "frisians_building"
 msgid ""
 "Miners and soldiers are so picky… But who am I to complain, as I make my "
@@ -14109,13 +14183,13 @@ msgid ""
 msgstr "Els miners i soldats són molt peculiars. Però qui sóc jo, per queixar-me d’ells quan em guanyo la vida preparant el seu menjar?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Smokery
-#: ../../data/tribes/initialization/frisians/units.lua:1860
+#: ../../data/tribes/initialization/frisians/units.lua:1866
 msgctxt "frisians_building"
 msgid "A smoker explaining his profession"
 msgstr "Un fumador explicant la seva professió"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Smokery
-#: ../../data/tribes/initialization/frisians/units.lua:1862
+#: ../../data/tribes/initialization/frisians/units.lua:1868
 msgctxt "frisians_building"
 msgid ""
 "Smokes fish and meat using logs. Only smoked meat and fish are good enough "
@@ -14123,32 +14197,32 @@ msgid ""
 msgstr "Fuma peix i carn amb foc fet a partir de troncs. Els miners i soldats volen aquest tipus de menjar preparat."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Smokery
-#: ../../data/tribes/initialization/frisians/units.lua:1864
+#: ../../data/tribes/initialization/frisians/units.lua:1870
 #, lua-format
 msgctxt "frisians_building"
 msgid "The smokery needs %s on average to smoke two fish or two meat."
 msgstr "El fumador necessita %s de mitjana per fumar dos peixos o dues peces de carn."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1871
+#: ../../data/tribes/initialization/frisians/units.lua:1877
 msgctxt "frisians_building"
 msgid "Why shouldn’t my bread taste good? It’s only barley and water!"
 msgstr "Per què el meu pa no hauria de tenir bon sabor? Només és ordi i aigua!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1873
+#: ../../data/tribes/initialization/frisians/units.lua:1879
 msgctxt "frisians_building"
 msgid "A baker"
 msgstr "Un flequer"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1875
+#: ../../data/tribes/initialization/frisians/units.lua:1881
 msgctxt "frisians_building"
 msgid "Bakes bread out of barley and water to feed miners and soldiers."
 msgstr "Forneja pa a partir d’ordi i aigua per alimentar miners i soldats."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1877
+#: ../../data/tribes/initialization/frisians/units.lua:1883
 #, lua-format
 msgctxt "frisians_building"
 msgid "The bakery needs %s on average to produce one loaf of bread."
@@ -14156,7 +14230,7 @@ msgstr "La fleca necessita %s de mitjana per produir una peça de pa."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Honey Bread
 #. Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1884
+#: ../../data/tribes/initialization/frisians/units.lua:1890
 msgctxt "frisians_building"
 msgid ""
 "Rookies will say that vengeance is sweet. Heroes will say that honey bread "
@@ -14165,81 +14239,99 @@ msgstr "Els novells diuen que la venjança és dolça. Els herois diuen que el p
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Honey
 #. Bread Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1886
+#: ../../data/tribes/initialization/frisians/units.lua:1892
 msgctxt "frisians_building"
 msgid "A trainer in conversation with a baker"
 msgstr "Un entrenador conversant amb el flequer"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Honey Bread
 #. Bakery
-#: ../../data/tribes/initialization/frisians/units.lua:1888
+#: ../../data/tribes/initialization/frisians/units.lua:1894
 msgctxt "frisians_building"
 msgid ""
 "Bakes honey bread out of barley, water and honey to feed miners in deep "
 "mines and soldiers in advanced training."
 msgstr "Cou pa amb mel a partir d’ordi, aigua i mel per alimentar els miners de les mines profundes i els soldats en entrenaments avançats."
 
+#. TRANSLATORS: Performance helptext for a frisian production site: Honey
+#. Bread Bakery
+#: ../../data/tribes/initialization/frisians/units.lua:1896
+msgctxt "frisians_building"
+msgid ""
+"The honey bread bakery needs %1$s on average to produce one loaf of bread "
+"and %2$s on average to produce one loaf of honey bread."
+msgstr "La fleca de pa dolç amb mel necessita %1$s de mitjana per a produir una barra de pa i %2$s de mitjana per a produir una barra de pa dolç amb mel."
+
 #. TRANSLATORS: Lore helptext for a frisian production site: Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1895
+#: ../../data/tribes/initialization/frisians/units.lua:1903
 msgctxt "frisians_building"
 msgid ""
 "I know no single master miner who’ll ever work without a nice pint of beer!"
 msgstr "No conec un sol mestre miner que treballi sense una bona pinta de cervesa!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1897
+#: ../../data/tribes/initialization/frisians/units.lua:1905
 msgctxt "frisians_building"
 msgid "A brewer boasting about the importance of his profession"
 msgstr "Un cerveser presumint de la importància de la seva professió"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1899
+#: ../../data/tribes/initialization/frisians/units.lua:1907
 msgctxt "frisians_building"
 msgid "Brews beer for miners and soldier training."
 msgstr "Elabora cervesa pels miners i l’entrenament dels soldats."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1901
+#: ../../data/tribes/initialization/frisians/units.lua:1909
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brewery needs %s on average to brew one mug of beer."
 msgstr "El cerveser necessita %s de mitjana per elaborar una gerra de cervesa."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Mead Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1908
+#: ../../data/tribes/initialization/frisians/units.lua:1916
 msgctxt "frisians_building"
 msgid "If you like beer, you’ve never tasted mead."
 msgstr "Si us agrada la cervesa és perquè mai heu tastat l’aiguamel."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Mead
 #. Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1910
+#: ../../data/tribes/initialization/frisians/units.lua:1918
 msgctxt "frisians_building"
 msgid "Slogan over a mead brewery"
 msgstr "Cartell d’una cerveseria d’aiguamel"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Mead Brewery
-#: ../../data/tribes/initialization/frisians/units.lua:1912
+#: ../../data/tribes/initialization/frisians/units.lua:1920
 msgctxt "frisians_building"
 msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
 "refined with honey. Mead is consumed by experienced soldiers."
 msgstr "Fermenta cervesa a partir d’ordi i aigua. També fermenta aiguamel, cervesa refinada amb mel. L’aiguamel la consumeixen soldats amb experiència."
 
+#. TRANSLATORS: Performance helptext for a frisian production site: Mead
+#. Brewery
+#: ../../data/tribes/initialization/frisians/units.lua:1922
+msgctxt "frisians_building"
+msgid ""
+"The mead brewery needs %1$s on average to brew one mug of beer and %2$s on "
+"average to brew one mug of mead."
+msgstr "La cerveseria d'aiguamel necessita %1$s de mitjana per a elaborar una gerra de cervesa i %2$s de mitjana per a elaborar una gerra d'aiguamel."
+
 #. TRANSLATORS: Lore helptext for a frisian production site: Tavern
-#: ../../data/tribes/initialization/frisians/units.lua:1919
+#: ../../data/tribes/initialization/frisians/units.lua:1929
 msgctxt "frisians_building"
 msgid "Nothing but fruit all day… Couldn’t you hurry up a bit?"
 msgstr "Res més que fruita tot el dia… No podríeu anar més de pressa?"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Tavern
-#: ../../data/tribes/initialization/frisians/units.lua:1921
+#: ../../data/tribes/initialization/frisians/units.lua:1931
 msgctxt "frisians_building"
 msgid "Hungry customers in times of a shortage of smoked fish and meat"
 msgstr "Clients famolencs en temps d’escassedat de carn i peix fumats"
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Tavern
-#: ../../data/tribes/initialization/frisians/units.lua:1925
+#: ../../data/tribes/initialization/frisians/units.lua:1935
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -14248,7 +14340,7 @@ msgid ""
 msgstr "La taverna pot produir una ració cada %s de mitjana si es manté el subministrament de productes de manera adequada; si no, tardarà un 50%% més de temps."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Drinking Hall
-#: ../../data/tribes/initialization/frisians/units.lua:1932
+#: ../../data/tribes/initialization/frisians/units.lua:1942
 msgctxt "frisians_building"
 msgid ""
 "All I need to be happy is a slice of honey bread with some smoked meat and a"
@@ -14257,13 +14349,13 @@ msgstr "Tot el que necessito per ser feliç és una llesca de pa dolç amb carn 
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Drinking
 #. Hall
-#: ../../data/tribes/initialization/frisians/units.lua:1934
+#: ../../data/tribes/initialization/frisians/units.lua:1944
 msgctxt "frisians_building"
 msgid "A master miner to the landlady"
 msgstr "Un mestre miner a la patrona"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Drinking Hall
-#: ../../data/tribes/initialization/frisians/units.lua:1936
+#: ../../data/tribes/initialization/frisians/units.lua:1946
 msgctxt "frisians_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
@@ -14271,7 +14363,7 @@ msgid ""
 msgstr "Elabora racions per alimentar els exploradors i àpats per alimentar els miners."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Barracks
-#: ../../data/tribes/initialization/frisians/units.lua:1943
+#: ../../data/tribes/initialization/frisians/units.lua:1953
 msgctxt "frisians_building"
 msgid ""
 "You have thirty seconds to learn the basics of swordfighting and how to stay"
@@ -14282,26 +14374,26 @@ msgid ""
 msgstr "Disposeu de trenta segons per aprendre les bases de la lluita amb espases i romandre viu al final de la lluita. Una tercera part del temps ja l’heu perdut només amb la presentació! Millor em presteu atenció per aprofitar el que queda. Aquí teniu l’espasa curta que han forjat els nostres ferrers. S’ha acabat el temps, ocupeu les vostres sentinelles!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Barracks
-#: ../../data/tribes/initialization/frisians/units.lua:1945
+#: ../../data/tribes/initialization/frisians/units.lua:1955
 msgctxt "frisians_building"
 msgid "A trainer greeting the new recruits"
 msgstr "Un entrenador saludant els nous reclutes"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Barracks
-#: ../../data/tribes/initialization/frisians/units.lua:1947
+#: ../../data/tribes/initialization/frisians/units.lua:1957
 msgctxt "frisians_building"
 msgid "Equips recruits and trains them as soldiers."
 msgstr "Equipa i entrena els reclutes per convertir-los en soldats."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Barracks
-#: ../../data/tribes/initialization/frisians/units.lua:1949
+#: ../../data/tribes/initialization/frisians/units.lua:1959
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks need %s on average to recruit one soldier."
 msgstr "El quarter necessita %s de mitjana per reclutar un soldat."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Reindeer Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1958
+#: ../../data/tribes/initialization/frisians/units.lua:1968
 msgctxt "frisians_building"
 msgid ""
 "Who says a beast of burden cannot be useful for other things than transport?"
@@ -14309,14 +14401,14 @@ msgstr "Qui diu que una bèstia de càrrega no pot ser útil per altres tasques 
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Reindeer
 #. Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1960
+#: ../../data/tribes/initialization/frisians/units.lua:1970
 msgctxt "frisians_building"
 msgid ""
 "The reindeer breeder who first proposed using reindeer fur for clothing"
 msgstr "El criador de rens que proposà usar la pell dels rens per fer-ne vestits"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Reindeer Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1962
+#: ../../data/tribes/initialization/frisians/units.lua:1972
 msgctxt "frisians_building"
 msgid ""
 "Breeds strong reindeer for adding them to the transportation system. Also "
@@ -14324,7 +14416,7 @@ msgid ""
 msgstr "Cria rens forts per afegir al sistema de transport. També en destina per obtenir-ne pell, que després es transformarà en armadures i teles."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Reindeer Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1964
+#: ../../data/tribes/initialization/frisians/units.lua:1974
 msgctxt "frisians_building"
 msgid ""
 "If the supply is steady, the reindeer farm produces one meat after producing"
@@ -14332,7 +14424,7 @@ msgid ""
 msgstr "Si el subministrament es manté constant, la granja de rens produeix una peça de carn per cada tres peces de pell."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1971
+#: ../../data/tribes/initialization/frisians/units.lua:1981
 msgctxt "frisians_building"
 msgid ""
 "No frost, no heat; no rain, no drought; no rats, no locusts; naught can "
@@ -14340,7 +14432,7 @@ msgid ""
 msgstr "Sense gelades, sense onades de calor, sense pluja, sense sequeres, sense rates, sense llagostes… res podrà destruir la meva collita."
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1973
+#: ../../data/tribes/initialization/frisians/units.lua:1983
 msgctxt "frisians_building"
 msgid ""
 "A farmer’s reply when asked by his chieftain why he was planting such a "
@@ -14348,25 +14440,25 @@ msgid ""
 msgstr "Un granger responent al seu cabdill per què plantava un gra de creixement tan lent."
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1975
+#: ../../data/tribes/initialization/frisians/units.lua:1985
 msgctxt "building"
 msgid "Sows and harvests barley."
 msgstr "Sembra i recull ordi."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Farm
-#: ../../data/tribes/initialization/frisians/units.lua:1977
+#: ../../data/tribes/initialization/frisians/units.lua:1987
 msgctxt "frisians_building"
 msgid "The farm needs free space within the work area to plant seeds."
 msgstr "La masoveria necessita espai lliure per sembrar dins la seva àrea de treball."
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
-#: ../../data/tribes/initialization/frisians/units.lua:1984
+#: ../../data/tribes/initialization/frisians/units.lua:1994
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
 msgstr "Construeix espigons a prop per guanyar terrenys nous al mar."
 
 #. TRANSLATORS: Note helptext for a frisian production site: Diker's House
-#: ../../data/tribes/initialization/frisians/units.lua:1986
+#: ../../data/tribes/initialization/frisians/units.lua:1996
 msgctxt "frisians_building"
 msgid ""
 "The diker will terraform the land around each breakwater he builds several "
@@ -14377,52 +14469,52 @@ msgstr "El constructor de dics arreglarà la terra al voltant de cada espigó qu
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Rock Mine
-#: ../../data/tribes/initialization/frisians/units.lua:1995
-#: ../../data/tribes/initialization/frisians/units.lua:2004
+#: ../../data/tribes/initialization/frisians/units.lua:2005
+#: ../../data/tribes/initialization/frisians/units.lua:2014
 msgctxt "building"
 msgid "Digs granite out of the ground in mountain terrain."
 msgstr "Extreu peces de granit en terrenys muntanyosos."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Rock Mine
-#: ../../data/tribes/initialization/frisians/units.lua:1997
+#: ../../data/tribes/initialization/frisians/units.lua:2007
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
-"If the food supply is steady, the rock mine can produce two blocks of "
-"granite in %s on average."
-msgstr "Si se li subministren els aliments necessaris adequadament, la mina de roques pot cavar per aconseguir dos blocs de granit cada %s de mitjana."
+"If the food supply is steady, the rock mine can produce granite in %s on "
+"average."
+msgstr "Si se li subministren els aliments necessaris adequadament, la mina de roques pot cavar per aconseguir granit cada %s de mitjana."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Rock
 #. Mine
-#: ../../data/tribes/initialization/frisians/units.lua:2006
+#: ../../data/tribes/initialization/frisians/units.lua:2016
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
-"If the food supply is steady, the deep rock mine can produce three blocks of"
-" granite in %s on average."
-msgstr "Si se li subministren els aliments necessaris adequadament, la mina de roques profunda pot cavar per aconseguir tres blocs de granit cada %s de mitjana."
+"If the food supply is steady, the deep rock mine can produce granite in %s "
+"on average."
+msgstr "Si se li subministren els aliments necessaris adequadament, la mina de roques profunda pot cavar per aconseguir granit cada %s de mitjana."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Coal Mine
-#: ../../data/tribes/initialization/frisians/units.lua:2015
+#: ../../data/tribes/initialization/frisians/units.lua:2025
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
-"If the food supply is steady, the coal mine can produce two pieces of coal "
-"in %s on average."
-msgstr "Si se li subministren els aliments necessaris adequadament, la mina de carbó pot cavar per aconseguir dues unitats de carbó cada %s de mitjana."
+"If the food supply is steady, the coal mine can produce coal in %s on "
+"average."
+msgstr "Si se li subministren els aliments necessaris adequadament, la mina de carbó pot cavar per aconseguir carbó cada %s de mitjana."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Coal
 #. Mine
-#: ../../data/tribes/initialization/frisians/units.lua:2024
+#: ../../data/tribes/initialization/frisians/units.lua:2034
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
-"If the food supply is steady, the deep coal mine can produce four pieces of "
-"coal in %s on average."
-msgstr "Si se li subministren els aliments necessaris adequadament, la mina de carbó profunda pot cavar per aconseguir quatre unitats de carbó cada %s de mitjana."
+"If the food supply is steady, the deep coal mine can produce coal in %s on "
+"average."
+msgstr "Si se li subministren els aliments necessaris adequadament, la mina de carbó profunda pot cavar per aconseguir carbó cada %s de mitjana."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Iron Mine
-#: ../../data/tribes/initialization/frisians/units.lua:2033
+#: ../../data/tribes/initialization/frisians/units.lua:2043
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -14432,16 +14524,16 @@ msgstr "Si se li subministren els aliments necessaris adequadament, la mina de f
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Iron
 #. Mine
-#: ../../data/tribes/initialization/frisians/units.lua:2042
+#: ../../data/tribes/initialization/frisians/units.lua:2052
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
-"If the food supply is steady, the deep iron mine can produce two pieces of "
-"iron ore in %s on average."
-msgstr "Si se li subministren els aliments necessaris adequadament, la mina de ferro profunda pot cavar per aconseguir dues unitats de mineral de ferro cada %s de mitjana."
+"If the food supply is steady, the deep iron mine can produce iron ore in %s "
+"on average."
+msgstr "Si se li subministren els aliments necessaris adequadament, la mina de ferro profunda pot cavar per aconseguir mineral de ferro cada %s de mitjana."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Gold Mine
-#: ../../data/tribes/initialization/frisians/units.lua:2051
+#: ../../data/tribes/initialization/frisians/units.lua:2061
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -14451,16 +14543,16 @@ msgstr "Si se li subministren els aliments necessaris adequadament, la mina d’
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Gold
 #. Mine
-#: ../../data/tribes/initialization/frisians/units.lua:2060
+#: ../../data/tribes/initialization/frisians/units.lua:2070
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
-"If the food supply is steady, the deep gold mine can produce two pieces of "
-"gold ore in %s on average."
-msgstr "Si se li subministren els aliments necessaris adequadament, la mina d’or profunda pot cavar per aconseguir dues unitats de mineral d’or cada %s de mitjana."
+"If the food supply is steady, the deep gold mine can produce gold ore in %s "
+"on average."
+msgstr "Si se li subministren els aliments necessaris adequadament, la mina d'or profunda pot cavar per aconseguir mineral d'or cada %s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a frisian training site: Training Camp
-#: ../../data/tribes/initialization/frisians/units.lua:2069
+#: ../../data/tribes/initialization/frisians/units.lua:2079
 msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
@@ -14471,14 +14563,14 @@ msgstr "Estigueu quiets, escolteu amb atenció i no us apunyaleu entre vosaltres
 #. Camp
 #. TRANSLATORS: Lore author helptext for a frisian training site: Training
 #. Arena
-#: ../../data/tribes/initialization/frisians/units.lua:2071
-#: ../../data/tribes/initialization/frisians/units.lua:2084
+#: ../../data/tribes/initialization/frisians/units.lua:2081
+#: ../../data/tribes/initialization/frisians/units.lua:2094
 msgctxt "frisians_building"
 msgid "A trainer training a soldier"
 msgstr "Un entrenador entrenant un soldat"
 
 #. TRANSLATORS: Purpose helptext for a frisian training site: Training Camp
-#: ../../data/tribes/initialization/frisians/units.lua:2073
+#: ../../data/tribes/initialization/frisians/units.lua:2083
 msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack up to level 3 as well as in Defense and Health to "
@@ -14486,7 +14578,7 @@ msgid ""
 msgstr "Entrena els soldats en atac fins al tercer nivell i en defensa i salut fins al nivell 1. Equipa els soldats amb les armes i armadures que necessitin."
 
 #. TRANSLATORS: Note helptext for a frisian training site: Training Camp
-#: ../../data/tribes/initialization/frisians/units.lua:2075
+#: ../../data/tribes/initialization/frisians/units.lua:2085
 msgctxt "frisians_building"
 msgid ""
 "Frisian soldiers cannot train in Evade and will remain at their initial "
@@ -14494,7 +14586,7 @@ msgid ""
 msgstr "Els soldats frisons no poden entrenar-se en evasió i tots mantindran el seu nivell inicial."
 
 #. TRANSLATORS: Lore helptext for a frisian training site: Training Arena
-#: ../../data/tribes/initialization/frisians/units.lua:2082
+#: ../../data/tribes/initialization/frisians/units.lua:2092
 msgctxt "frisians_building"
 msgid ""
 "Now that you have two swords, there’s more of a risk you’ll accidentally "
@@ -14503,7 +14595,7 @@ msgid ""
 msgstr "Ara que teniu dues espases, hi ha més risc que us apunyaleu per accident, però si arribeu a fer-ho, segur que millorareu en la mestria d’aquest art."
 
 #. TRANSLATORS: Purpose helptext for a frisian training site: Training Arena
-#: ../../data/tribes/initialization/frisians/units.lua:2086
+#: ../../data/tribes/initialization/frisians/units.lua:2096
 msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack, Defense and Health to the final level. Equips the"
@@ -14511,7 +14603,7 @@ msgid ""
 msgstr "Entrena els soldats en atac, defensa i salut fins al nivell màxim. Equipa els soldats amb les armes i armadures que necessitin."
 
 #. TRANSLATORS: Note helptext for a frisian training site: Training Arena
-#: ../../data/tribes/initialization/frisians/units.lua:2088
+#: ../../data/tribes/initialization/frisians/units.lua:2098
 msgctxt "frisians_building"
 msgid ""
 "Trains only soldiers who have been trained to the maximum level by the "
@@ -14525,12 +14617,12 @@ msgstr "Entrena només els soldats que ja s’han entrenat fins al màxim nivell
 #. TRANSLATORS: Purpose helptext for a frisian military site: Outpost
 #. TRANSLATORS: Purpose helptext for a frisian military site: Tower
 #. TRANSLATORS: Purpose helptext for a frisian military site: Fortress
-#: ../../data/tribes/initialization/frisians/units.lua:2097
-#: ../../data/tribes/initialization/frisians/units.lua:2106
-#: ../../data/tribes/initialization/frisians/units.lua:2115
-#: ../../data/tribes/initialization/frisians/units.lua:2124
-#: ../../data/tribes/initialization/frisians/units.lua:2133
-#: ../../data/tribes/initialization/frisians/units.lua:2142
+#: ../../data/tribes/initialization/frisians/units.lua:2107
+#: ../../data/tribes/initialization/frisians/units.lua:2116
+#: ../../data/tribes/initialization/frisians/units.lua:2125
+#: ../../data/tribes/initialization/frisians/units.lua:2134
+#: ../../data/tribes/initialization/frisians/units.lua:2143
+#: ../../data/tribes/initialization/frisians/units.lua:2152
 msgctxt "frisians_building"
 msgid "Garrisons soldiers to expand your territory."
 msgstr "Allotja soldats que defensen i expandeixen el territori controlat."
@@ -14541,12 +14633,12 @@ msgstr "Allotja soldats que defensen i expandeixen el territori controlat."
 #. TRANSLATORS: Note helptext for a frisian military site: Outpost
 #. TRANSLATORS: Note helptext for a frisian military site: Tower
 #. TRANSLATORS: Note helptext for a frisian military site: Fortress
-#: ../../data/tribes/initialization/frisians/units.lua:2099
-#: ../../data/tribes/initialization/frisians/units.lua:2108
-#: ../../data/tribes/initialization/frisians/units.lua:2117
-#: ../../data/tribes/initialization/frisians/units.lua:2126
-#: ../../data/tribes/initialization/frisians/units.lua:2135
-#: ../../data/tribes/initialization/frisians/units.lua:2144
+#: ../../data/tribes/initialization/frisians/units.lua:2109
+#: ../../data/tribes/initialization/frisians/units.lua:2118
+#: ../../data/tribes/initialization/frisians/units.lua:2127
+#: ../../data/tribes/initialization/frisians/units.lua:2136
+#: ../../data/tribes/initialization/frisians/units.lua:2145
+#: ../../data/tribes/initialization/frisians/units.lua:2154
 msgctxt "frisians_building"
 msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
@@ -14555,7 +14647,7 @@ msgid ""
 msgstr "Si disposeu de pocs soldats per ocupar els edificis militars nous, cliqueu la fletxa descendent per reduir el nombre de soldats desitjats. També podeu clicar un soldat per fer-lo sortir de l’edifici."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Shipyard
-#: ../../data/tribes/initialization/frisians/units.lua:2162
+#: ../../data/tribes/initialization/frisians/units.lua:2172
 msgctxt "frisians_building"
 msgid ""
 "This house may be called a shipyard, but my ships are rather longer than one"
@@ -14563,7 +14655,7 @@ msgid ""
 msgstr "Quina cosa més bonica són els vaixells que dansen per les aigües portats pel vent!"
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Shipyard
-#: ../../data/tribes/initialization/frisians/units.lua:2164
+#: ../../data/tribes/initialization/frisians/units.lua:2174
 msgctxt "frisians_building"
 msgid ""
 "A shipwright who only constructed toy ships after being chid that his ships "
@@ -14571,7 +14663,7 @@ msgid ""
 msgstr "Un mestre d’aixa que només construïa vaixells de joguina després que algú li critiqués que els seus vaixells eren massa petits"
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Weaving Mill
-#: ../../data/tribes/initialization/frisians/units.lua:2173
+#: ../../data/tribes/initialization/frisians/units.lua:2183
 msgctxt "frisians_building"
 msgid ""
 "Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For "
@@ -14580,20 +14672,20 @@ msgstr "Pell de ren i junc per les teulades<br>Amb això tenim teles teixides i 
 
 #. TRANSLATORS: Lore author helptext for a frisian production site: Weaving
 #. Mill
-#: ../../data/tribes/initialization/frisians/units.lua:2175
+#: ../../data/tribes/initialization/frisians/units.lua:2185
 msgctxt "frisians_building"
 msgid "A seamstress’ work song"
 msgstr "La cançó d’una costurera"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Weaving Mill
-#: ../../data/tribes/initialization/frisians/units.lua:2177
+#: ../../data/tribes/initialization/frisians/units.lua:2187
 msgctxt "building"
 msgid "Sews cloth for ship sails out of reed and reindeer fur."
 msgstr "Teixeix teles per les veles dels vaixells amb juncs i pells de rens."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Weaving
 #. Mill
-#: ../../data/tribes/initialization/frisians/units.lua:2179
+#: ../../data/tribes/initialization/frisians/units.lua:2189
 #, lua-format
 msgctxt "frisians_building"
 msgid "The weaving mill needs %s on average to produce one piece of cloth."
@@ -14601,476 +14693,476 @@ msgstr "El taller de teixir necessita %s de mitjana per produir una peça de tel
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2210
+#: ../../data/tribes/initialization/frisians/units.lua:2220
 msgctxt "warehousename"
 msgid "Aalkersem"
 msgstr "Aalkersem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2212
+#: ../../data/tribes/initialization/frisians/units.lua:2222
 msgctxt "warehousename"
 msgid "Äfkebel"
 msgstr "Äfkebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2214
+#: ../../data/tribes/initialization/frisians/units.lua:2224
 msgctxt "warehousename"
 msgid "Ämelsbel"
 msgstr "Ämelsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2216
+#: ../../data/tribes/initialization/frisians/units.lua:2226
 msgctxt "warehousename"
 msgid "A Nääs"
 msgstr "A Nääs"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2218
+#: ../../data/tribes/initialization/frisians/units.lua:2228
 msgctxt "warehousename"
 msgid "Ārichsem"
 msgstr "Ārichsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2220
+#: ../../data/tribes/initialization/frisians/units.lua:2230
 msgctxt "warehousename"
 msgid "Baamst"
 msgstr "Baamst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2222
+#: ../../data/tribes/initialization/frisians/units.lua:2232
 msgctxt "warehousename"
 msgid "Beergem"
 msgstr "Beergem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2224
+#: ../../data/tribes/initialization/frisians/units.lua:2234
 msgctxt "warehousename"
 msgid "Borigsem"
 msgstr "Borigsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2226
+#: ../../data/tribes/initialization/frisians/units.lua:2236
 msgctxt "warehousename"
 msgid "Bousbel"
 msgstr "Bousbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2228
+#: ../../data/tribes/initialization/frisians/units.lua:2238
 msgctxt "warehousename"
 msgid "Bräist"
 msgstr "Bräist"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2230
+#: ../../data/tribes/initialization/frisians/units.lua:2240
 msgctxt "warehousename"
 msgid "Bualigsem"
 msgstr "Bualigsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2232
+#: ../../data/tribes/initialization/frisians/units.lua:2242
 msgctxt "warehousename"
 msgid "Deesbel"
 msgstr "Deesbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2234
+#: ../../data/tribes/initialization/frisians/units.lua:2244
 msgctxt "warehousename"
 msgid "Doogebel"
 msgstr "Doogebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2236
+#: ../../data/tribes/initialization/frisians/units.lua:2246
 msgctxt "warehousename"
 msgid "Dunsem"
 msgstr "Dunsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2238
+#: ../../data/tribes/initialization/frisians/units.lua:2248
 msgctxt "warehousename"
 msgid "E Hoorne"
 msgstr "E Hoorne"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2240
+#: ../../data/tribes/initialization/frisians/units.lua:2250
 msgctxt "warehousename"
 msgid "Emst"
 msgstr "Emst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2242
+#: ../../data/tribes/initialization/frisians/units.lua:2252
 msgctxt "warehousename"
 msgid "Fåålst"
 msgstr "Fåålst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2244
+#: ../../data/tribes/initialization/frisians/units.lua:2254
 msgctxt "warehousename"
 msgid "Friedrichstääd"
 msgstr "Friedrichstääd"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2246
+#: ../../data/tribes/initialization/frisians/units.lua:2256
 msgctxt "warehousename"
 msgid "Gaarding"
 msgstr "Gaarding"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2248
+#: ../../data/tribes/initialization/frisians/units.lua:2258
 msgctxt "warehousename"
 msgid "Haatst"
 msgstr "Haatst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2250
+#: ../../data/tribes/initialization/frisians/units.lua:2260
 msgctxt "warehousename"
 msgid "Hoorbel"
 msgstr "Hoorbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2252
+#: ../../data/tribes/initialization/frisians/units.lua:2262
 msgctxt "warehousename"
 msgid "Hoorst"
 msgstr "Hoorst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2254
+#: ../../data/tribes/initialization/frisians/units.lua:2264
 msgctxt "warehousename"
 msgid "Hörnem"
 msgstr "Hörnem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2256
+#: ../../data/tribes/initialization/frisians/units.lua:2266
 msgctxt "warehousename"
 msgid "Hüsem"
 msgstr "Hüsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2258
+#: ../../data/tribes/initialization/frisians/units.lua:2268
 msgctxt "warehousename"
 msgid "Iibel"
 msgstr "Iibel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2260
+#: ../../data/tribes/initialization/frisians/units.lua:2270
 msgctxt "warehousename"
 msgid "Imensteed"
 msgstr "Imensteed"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2262
+#: ../../data/tribes/initialization/frisians/units.lua:2272
 msgctxt "warehousename"
 msgid "Kååting"
 msgstr "Kååting"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2264
+#: ../../data/tribes/initialization/frisians/units.lua:2274
 msgctxt "warehousename"
 msgid "Kairem"
 msgstr "Kairem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2266
+#: ../../data/tribes/initialization/frisians/units.lua:2276
 msgctxt "warehousename"
 msgid "Klangsbel"
 msgstr "Klangsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2268
+#: ../../data/tribes/initialization/frisians/units.lua:2278
 msgctxt "warehousename"
 msgid "Kläntem"
 msgstr "Kläntem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2270
+#: ../../data/tribes/initialization/frisians/units.lua:2280
 msgctxt "warehousename"
 msgid "Klasbel"
 msgstr "Klasbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2272
+#: ../../data/tribes/initialization/frisians/units.lua:2282
 msgctxt "warehousename"
 msgid "Kuurlem"
 msgstr "Kuurlem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2274
+#: ../../data/tribes/initialization/frisians/units.lua:2284
 msgctxt "warehousename"
 msgid "Läitjholem"
 msgstr "Läitjholem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2276
+#: ../../data/tribes/initialization/frisians/units.lua:2286
 msgctxt "warehousename"
 msgid "Madlem"
 msgstr "Madlem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2278
+#: ../../data/tribes/initialization/frisians/units.lua:2288
 msgctxt "warehousename"
 msgid "Mälst"
 msgstr "Mälst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2280
+#: ../../data/tribes/initialization/frisians/units.lua:2290
 msgctxt "warehousename"
 msgid "Mönkebel"
 msgstr "Mönkebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2282
+#: ../../data/tribes/initialization/frisians/units.lua:2292
 msgctxt "warehousename"
 msgid "Moosbel"
 msgstr "Moosbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2284
+#: ../../data/tribes/initialization/frisians/units.lua:2294
 msgctxt "warehousename"
 msgid "Muasem"
 msgstr "Muasem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2286
+#: ../../data/tribes/initialization/frisians/units.lua:2296
 msgctxt "warehousename"
 msgid "Naibel"
 msgstr "Naibel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2288
+#: ../../data/tribes/initialization/frisians/units.lua:2298
 msgctxt "warehousename"
 msgid "Neebel"
 msgstr "Neebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2290
+#: ../../data/tribes/initialization/frisians/units.lua:2300
 msgctxt "warehousename"
 msgid "Njiblem"
 msgstr "Njiblem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2292
+#: ../../data/tribes/initialization/frisians/units.lua:2302
 msgctxt "warehousename"
 msgid "Noorst"
 msgstr "Noorst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2294
+#: ../../data/tribes/initialization/frisians/units.lua:2304
 msgctxt "warehousename"
 msgid "Olersem"
 msgstr "Olersem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2296
+#: ../../data/tribes/initialization/frisians/units.lua:2306
 msgctxt "warehousename"
 msgid "Odenbel"
 msgstr "Odenbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2298
+#: ../../data/tribes/initialization/frisians/units.lua:2308
 msgctxt "warehousename"
 msgid "Ödersem"
 msgstr "Ödersem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2300
+#: ../../data/tribes/initialization/frisians/units.lua:2310
 msgctxt "warehousename"
 msgid "Popenbel"
 msgstr "Popenbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2302
+#: ../../data/tribes/initialization/frisians/units.lua:2312
 msgctxt "warehousename"
 msgid "Raantem"
 msgstr "Raantem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2304
+#: ../../data/tribes/initialization/frisians/units.lua:2314
 msgctxt "warehousename"
 msgid "Reinsbel"
 msgstr "Reinsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2306
+#: ../../data/tribes/initialization/frisians/units.lua:2316
 msgctxt "warehousename"
 msgid "Rikesbel"
 msgstr "Rikesbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2308
+#: ../../data/tribes/initialization/frisians/units.lua:2318
 msgctxt "warehousename"
 msgid "Risem"
 msgstr "Risem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2310
+#: ../../data/tribes/initialization/frisians/units.lua:2320
 msgctxt "warehousename"
 msgid "Seebel"
 msgstr "Seebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2312
+#: ../../data/tribes/initialization/frisians/units.lua:2322
 msgctxt "warehousename"
 msgid "Snootebel"
 msgstr "Snootebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2314
+#: ../../data/tribes/initialization/frisians/units.lua:2324
 msgctxt "warehousename"
 msgid "Söleraanj"
 msgstr "Söleraanj"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2316
+#: ../../data/tribes/initialization/frisians/units.lua:2326
 msgctxt "warehousename"
 msgid "Strükem"
 msgstr "Strükem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2318
+#: ../../data/tribes/initialization/frisians/units.lua:2328
 msgctxt "warehousename"
 msgid "Tååting"
 msgstr "Tååting"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2320
+#: ../../data/tribes/initialization/frisians/units.lua:2330
 msgctxt "warehousename"
 msgid "Taning"
 msgstr "Taning"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2322
+#: ../../data/tribes/initialization/frisians/units.lua:2332
 msgctxt "warehousename"
 msgid "Teedenbel"
 msgstr "Teedenbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2324
+#: ../../data/tribes/initialization/frisians/units.lua:2334
 msgctxt "warehousename"
 msgid "Tinem"
 msgstr "Tinem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2326
+#: ../../data/tribes/initialization/frisians/units.lua:2336
 msgctxt "warehousename"
 msgid "Toorpem"
 msgstr "Toorpem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2328
+#: ../../data/tribes/initialization/frisians/units.lua:2338
 msgctxt "warehousename"
 msgid "Ülwelsbel"
 msgstr "Ülwelsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2330
+#: ../../data/tribes/initialization/frisians/units.lua:2340
 msgctxt "warehousename"
 msgid "Wiisem"
 msgstr "Wiisem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2332
+#: ../../data/tribes/initialization/frisians/units.lua:2342
 msgctxt "warehousename"
 msgid "A Wik"
 msgstr "A Wik"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
-#: ../../data/tribes/initialization/frisians/units.lua:2334
+#: ../../data/tribes/initialization/frisians/units.lua:2344
 msgctxt "warehousename"
 msgid "Witjdün"
 msgstr "Witjdün"
 
 #. TRANSLATORS: Productivity label on a frisian building if there is 1 worker
 #. missing
-#: ../../data/tribes/initialization/frisians/units.lua:2340
+#: ../../data/tribes/initialization/frisians/units.lua:2350
 msgctxt "frisians"
 msgid "Worker missing"
 msgstr "Fa falta un treballador"
 
 #. TRANSLATORS: Productivity label on a frisian building if there is 1 worker
 #. coming
-#: ../../data/tribes/initialization/frisians/units.lua:2342
+#: ../../data/tribes/initialization/frisians/units.lua:2352
 msgctxt "frisians"
 msgid "Worker is coming"
 msgstr "Està venint un treballador"
 
 #. TRANSLATORS: Productivity label on a frisian building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
-#: ../../data/tribes/initialization/frisians/units.lua:2344
+#: ../../data/tribes/initialization/frisians/units.lua:2354
 msgctxt "frisians"
 msgid "Workers missing"
 msgstr "Fan falta treballadors"
 
 #. TRANSLATORS: Productivity label on a frisian building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
-#: ../../data/tribes/initialization/frisians/units.lua:2346
+#: ../../data/tribes/initialization/frisians/units.lua:2356
 msgctxt "frisians"
 msgid "Workers are coming"
 msgstr "Estan venint treballadors"
 
 #. TRANSLATORS: Productivity label on a frisian building if there is 1
 #. experienced worker missing
-#: ../../data/tribes/initialization/frisians/units.lua:2348
+#: ../../data/tribes/initialization/frisians/units.lua:2358
 msgctxt "frisians"
 msgid "Expert missing"
 msgstr "Fa falta un expert"
@@ -15078,14 +15170,14 @@ msgstr "Fa falta un expert"
 #. TRANSLATORS: Productivity label on a frisian building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
 #. know.
-#: ../../data/tribes/initialization/frisians/units.lua:2350
+#: ../../data/tribes/initialization/frisians/units.lua:2360
 msgctxt "frisians"
 msgid "Experts missing"
 msgstr "Fan falta experts"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/frisians/units.lua:2364
+#: ../../data/tribes/initialization/frisians/units.lua:2374
 msgctxt "frisians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
@@ -15093,7 +15185,7 @@ msgstr[0] "%1% soldat (+%2%)"
 msgstr[1] "%1% soldats (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/frisians/units.lua:2366
+#: ../../data/tribes/initialization/frisians/units.lua:2376
 msgctxt "frisians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
@@ -15103,7 +15195,7 @@ msgstr[1] "%1% soldats"
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
 #. number of soldier slots in the building
-#: ../../data/tribes/initialization/frisians/units.lua:2368
+#: ../../data/tribes/initialization/frisians/units.lua:2378
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
@@ -15112,7 +15204,7 @@ msgstr[1] "%1%(+%2%) soldats (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/frisians/units.lua:2370
+#: ../../data/tribes/initialization/frisians/units.lua:2380
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"

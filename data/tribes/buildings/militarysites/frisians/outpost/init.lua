@@ -6,6 +6,7 @@ wl.Descriptions():new_militarysite_type {
    name = "frisians_outpost",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Outpost"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -23,8 +24,6 @@ wl.Descriptions():new_militarysite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {45, 68},
          frames = 4,
          columns = 2,
@@ -34,8 +33,6 @@ wl.Descriptions():new_militarysite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {45, 68}
       }
    },

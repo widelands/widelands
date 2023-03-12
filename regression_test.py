@@ -10,7 +10,6 @@ import subprocess
 import sys
 import tempfile
 import unittest
-import platform
 import time
 import datetime
 
