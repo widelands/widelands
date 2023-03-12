@@ -902,7 +902,7 @@ public:
 	bool player_diplo_requested_lately(Widelands::PlayerNumber, const Time&);
 	bool get_is_enemy(Widelands::PlayerNumber);
 	uint8_t enemies_seen_lately_count(const Time&);
-	uint8_t members_in_team(Widelands::TeamNumber tn);
+	const uint8_t members_in_team(Widelands::TeamNumber tn);
 	uint8_t players_active();
 	bool any_enemy_seen_lately(const Time&);
 	void set_update_time(const Time&);
