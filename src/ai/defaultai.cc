@@ -1147,7 +1147,8 @@ void DefaultAI::late_initialization() {
 	                                                   SchedulerTaskId::kWarehouseFlagDist, 5,
 	                                                   "flag warehouse Update"));
 
-	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(40 * 1000)),
+	// don't do any diplomacy for the first 10 + x minutes to avoid click races for allies
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time((10 + RNG::static_rand(10)) * 60 * 1000)),
 	                                                   SchedulerTaskId::kDiplomacy, 7,
 	                                                   "diplomacy actions"));
 
@@ -3329,11 +3330,6 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 
 // Dealing with diplomacy actions
 void DefaultAI::diplomacy_actions(const Time& gametime) {
-
-	// don't do any diplomacy for the first 10 + x minutes to avoid click races for allies
-	if (gametime < Time((10 + RNG::static_rand(10)) * 60 * 1000)) {
-		return;
-	}
 
 	const Widelands::PlayerNumber mypn = player_number();
 	const Widelands::Player* me = game().get_player(mypn);
