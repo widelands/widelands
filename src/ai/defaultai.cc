@@ -3333,10 +3333,11 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 	const Widelands::PlayerNumber mypn = player_number();
 	const Widelands::Player* me = game().get_player(mypn);
+	const bool me_def = me->is_defeated();
 
 	// if we are defeated or the last one in a team leave team
 	if (me->team_number() != 0 &&
-	    (player_statistics.members_in_team(me->team_number()) == 1 || me->is_defeated())) {
+	    (player_statistics.members_in_team(me->team_number()) == 1 || me_def)) {
 		game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kLeaveTeam, 0 /* ignored */);
 		verb_log_dbg_time(gametime, "AI Diplomacy: Player(%d), leaves team (%d) as last one.\n",
 		                  static_cast<unsigned int>(mypn),
@@ -3355,7 +3356,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			         player_statistics.members_in_team(
 			            pda.action == Widelands::DiplomacyAction::kInvite ? pda.sender : mypn) <
 			            player_statistics.players_active() - 1 &&
-			         !me->is_defeated();
+			         !me_def;
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
@@ -3374,7 +3375,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			}
 		}
 	}
-	if (request_accepted || me->is_defeated()) {
+	if (request_accepted || me_def) {
 		return;
 	}
 
@@ -6783,6 +6784,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 
 	// Collecting statistics and saving them in player_statistics object
 	const Widelands::Player* me = game().get_player(pn);
+	const bool me_def = me->is_defeated();
 
 	const uint32_t vsize = genstats.at(pn - 1).miltary_strength.size();
 	uint32_t me_strength = 0;
@@ -6793,7 +6795,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 	uint32_t me_old60_land = 0;
 	uint32_t me_cass = 0;
 	uint32_t me_buildings = 0;
-	if (vsize > 0 && !me->is_defeated()) {
+	if (vsize > 0 && !me_def) {
 		me_strength = genstats.at(pn - 1).miltary_strength.back();
 		me_land = genstats.at(pn - 1).land_size.back();
 		me_cass = genstats.at(pn - 1).nr_casualties.back();
@@ -6818,10 +6820,11 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 	for (Widelands::PlayerNumber j = 1; j <= nr_players; ++j) {
 		const Widelands::Player* this_player = game().get_player(j);
 		if (this_player != nullptr) {
-			if (this_player->is_defeated() || me->is_defeated()) {
+			bool player_def = this_player->is_defeated();
+			if (player_def || me_def) {
 				// setting all AI Player stats to zero and diploscore to -20
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(), 0,
-				                      0, 0, 0, 0, 0, 0, -20, 0, this_player->is_defeated());
+				                      0, 0, 0, 0, 0, 0, -20, 0, player_def);
 				continue;
 			}
 			try {
@@ -7055,7 +7058,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(),
 				                      cur_strength, old_strength, old60_strength, cass, cur_land,
 				                      old_land, old60_land, diplo_score, buildings,
-				                      this_player->is_defeated());
+				                      player_def);
 				verb_log_dbg_time(
 				   gametime, "AI Diplomacy: For player(%d), the player(%d) has the diploscore: %d\n",
 				   static_cast<unsigned int>(pn), static_cast<unsigned int>(j), diplo_score);
