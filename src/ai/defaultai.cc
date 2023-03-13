@@ -3398,8 +3398,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			     player_statistics.members_in_team(me->team_number()) <
 			        player_statistics.players_active() - 1) ||
 			    (player_statistics.members_in_team(other_player->team_number()) ==
-			       player_statistics.players_active() - 1 &&
-				 me->team_number() != other_player->team_number())) {
+			        player_statistics.players_active() - 1 &&
+			     me->team_number() != other_player->team_number())) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
 				player_statistics.set_last_time_requested(gametime, opn);
 				verb_log_dbg_time(
