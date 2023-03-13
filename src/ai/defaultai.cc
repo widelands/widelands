@@ -1147,10 +1147,14 @@ void DefaultAI::late_initialization() {
 	                                                   SchedulerTaskId::kWarehouseFlagDist, 5,
 	                                                   "flag warehouse Update"));
 
-	// don't do any diplomacy for the first 10 + x minutes to avoid click races for allies
-	taskPool.push_back(std::make_shared<SchedulerTask>(
-	   std::max<Time>(gametime, Time((10 + RNG::static_rand(10)) * 60 * 1000)),
-	   SchedulerTaskId::kDiplomacy, 7, "diplomacy actions"));
+	if (game().diplomacy_allowed()) {
+		// don't do any diplomacy for the first 10 + x minutes to avoid click races for allies,
+		// and allow statistics to settle after loading game
+		taskPool.push_back(std::make_shared<SchedulerTask>(
+		   std::max<Time>(
+		      gametime + kStatUpdateInterval * 5, Time((10 + RNG::static_rand(10)) * 60 * 1000)),
+		   SchedulerTaskId::kDiplomacy, 7, "diplomacy actions"));
+	}
 
 	const Widelands::Map& map = game().map();
 
