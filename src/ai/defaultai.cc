@@ -6946,7 +6946,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
                                (std::abs(management_data.get_military_number_at(197)) / 10);
 					inputs[28] = cur_land >= player_statistics.get_max_land() ? -7 : 2;
 					inputs[29] = gametime < Time((30 + RNG::static_rand(20)) * 60 * 1000) ? -5 : 0;
-					inputs[30] = gametime < Time((60 + RNG::static_rand(30)) * 60 * 1000) ? -5 : 0;
+					inputs[30] = gametime < Time((60 + RNG::static_rand(30)) * 60 * 1000) ? -3 : 0;
 					inputs[31] = cur_strength < player_statistics.get_max_power() &&
 					                   player_statistics.get_max_power() < cur_strength + me_strength &&
 					                   me_strength < player_statistics.get_max_power() ?
