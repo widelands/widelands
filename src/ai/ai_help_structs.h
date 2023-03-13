@@ -904,7 +904,7 @@ public:
 	uint8_t enemies_seen_lately_count(const Time&);
 	uint8_t members_in_team(Widelands::TeamNumber tn);
 	uint32_t team_power(Widelands::TeamNumber tn);
-	const uint8_t players_active();
+	uint8_t players_active() const;
 	bool any_enemy_seen_lately(const Time&);
 	void set_update_time(const Time&);
 	const Time& get_update_time();

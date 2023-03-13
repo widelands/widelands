@@ -1101,7 +1101,7 @@ uint32_t PlayersStrengths::team_power(Widelands::TeamNumber tn) {
 }
 
 // Returns number of active players
-const uint8_t PlayersStrengths::players_active() {
+uint8_t PlayersStrengths::players_active() const {
 	return active_players_;
 }
 
