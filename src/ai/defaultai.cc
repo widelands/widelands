@@ -7063,6 +7063,9 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 							diplo_score += inputs[i + kFNeuronBitSize];
 						}
 					}
+					verb_log_dbg_time(
+					   gametime, "AI Diplomacy: For player(%d), the player(%d) has the diploscore: %d\n",
+					   static_cast<unsigned int>(pn), static_cast<unsigned int>(j), diplo_score);
 				}
 
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(),
