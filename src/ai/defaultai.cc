@@ -3353,8 +3353,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		if (pda.other == mypn) {
 			// accept if diploscore high, else accept only 50%
 			bool accept =
-			   player_statistics.get_diplo_score(pda.sender) >= 30 ||
-			   (player_statistics.get_diplo_score(pda.sender) > 20 && RNG::static_rand(2) == 0);
+			   player_statistics.get_diplo_score(pda.sender) >= 25 ||
+			   (player_statistics.get_diplo_score(pda.sender) > 15 && RNG::static_rand(2) == 0);
 			// accept only if not resulting in a team win and if we are not defeated
 			accept = accept &&
 			         player_statistics.members_in_team(
@@ -3391,7 +3391,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		    player_statistics.player_diplo_requested_lately(opn, gametime)) {
 			continue;
 		}
-		if (player_statistics.get_diplo_score(opn) >= 40) {
+		if (player_statistics.get_diplo_score(opn) >= 35) {
 			if (((other_player->team_number() == 0 ||
 			      player_statistics.team_power(me->team_number()) >
 			         player_statistics.team_power(other_player->team_number())) &&
