@@ -6871,7 +6871,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				// determine the diplomacy score of each player
 				int32_t diplo_score = 0;
 				// we need to be sure all magic numbers have been initialized so wait 30s
-				if (gametime > Time(30000) && pn != j) {
+				if (game().diplomacy_allowed() && gametime > Time(30000) && pn != j) {
 					int16_t inputs[2 * kFNeuronBitSize] = {0};
 					inputs[0] = cur_land < player_statistics.get_max_land() &&
 					                  player_statistics.get_max_land() < cur_land + me_land &&
