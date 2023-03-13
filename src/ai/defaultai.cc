@@ -3388,9 +3388,11 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			continue;
 		}
 		if (player_statistics.get_diplo_score(opn) >= 40) {
-			if (other_player->team_number() == 0 ||
+			if (((other_player->team_number() == 0 ||
 			    player_statistics.team_power(me->team_number()) >
-			       player_statistics.team_power(other_player->team_number()) ||
+			       player_statistics.team_power(other_player->team_number())) && 
+				   player_statistics.members_in_team(me->team_number()) <
+				   player_statistics.players_active() - 1) ||
 				   player_statistics.members_in_team(other_player->team_number()) ==
 				   player_statistics.players_active() - 1) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
