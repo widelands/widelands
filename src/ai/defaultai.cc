@@ -6997,26 +6997,26 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					inputs[49] = me_buildings + me_land < buildings + cur_land ? 4 : -1;
 					inputs[50] =
 					   player_statistics.members_in_team(this_player->team_number()) >= nr_players / 2 ?
-                     -10 :
-                     0;
+                     -4 :
+                     1;
 					inputs[51] = player_statistics.members_in_team(this_player->team_number()) ==
 					                   player_statistics.players_active() - 1 ?
-                               -10 :
+                               -5 :
                                0;
 					inputs[52] =
-					   player_statistics.members_in_team(this_player->team_number()) > 2 ? -10 : 0;
+					   player_statistics.members_in_team(this_player->team_number()) > 2 ? -3 : 2;
 					inputs[53] = player_statistics.members_in_team(me->team_number()) > 1 &&
 					                   this_player->team_number() != me->team_number() ?
                                -5 :
-                               5;
+                               1;
 					inputs[54] = player_statistics.members_in_team(me->team_number()) > 2 &&
 					                   this_player->team_number() != me->team_number() ?
-                               -10 :
+                               -6 :
                                0;
 					inputs[55] = player_statistics.members_in_team(me->team_number()) > 1 &&
 					                   this_player->team_number() != me->team_number() ?
-                               -7 :
-                               2;
+                               -4 :
+                               1;
 					inputs[56] = me_strength >= player_statistics.get_max_power() ? -8 : 0;
 					inputs[57] = me_strength >= player_statistics.get_max_power() ?
                                -(std::abs(management_data.get_military_number_at(197)) / 10) :
