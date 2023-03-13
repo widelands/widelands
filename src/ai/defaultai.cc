@@ -3404,8 +3404,12 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				player_statistics.set_last_time_requested(gametime, opn);
 				verb_log_dbg_time(
 				   gametime,
-				   "AI Diplomacy: Player(%d) of team (%d) with team power (%d), invites player (%d) of team (%d) with team power (%d) to join with diploscore: %d\n",
-				   static_cast<unsigned int>(mypn), me->team_number(), player_statistics.team_power(me->team_number()), static_cast<unsigned int>(opn), other_player->team_number(), player_statistics.team_power(other_player->team_number()),
+				   "AI Diplomacy: Player(%d) of team (%d) with team power (%d), invites player (%d) of "
+				   "team (%d) with team power (%d) to join with diploscore: %d\n",
+				   static_cast<unsigned int>(mypn), me->team_number(),
+				   player_statistics.team_power(me->team_number()), static_cast<unsigned int>(opn),
+				   other_player->team_number(),
+				   player_statistics.team_power(other_player->team_number()),
 				   player_statistics.get_diplo_score(opn));
 			} else if (other_player->team_number() != me->team_number()) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kJoin, opn);
