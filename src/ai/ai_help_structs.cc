@@ -1102,8 +1102,8 @@ uint32_t PlayersStrengths::team_power(Widelands::TeamNumber tn) {
 }
 
 // Make the decision whether own or player's team is better
-Widelands::DiplomacyAction PlayersStrengths::join_or_invite(
-   const Widelands::PlayerNumber pl, const Time& gametime) {
+Widelands::DiplomacyAction PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pl,
+                                                            const Time& gametime) {
 	const Widelands::TeamNumber other_tn = all_stats_[pl].team_number;
 	if (this_player_number == pl || active_players_ < 3 || this_player_team == other_tn) {
 		return Widelands::DiplomacyAction::kRefuseJoin;
@@ -1150,11 +1150,11 @@ Widelands::DiplomacyAction PlayersStrengths::join_or_invite(
 
 	if (other_alone) {
 		if (other_team_sc - static_cast<int>(RNG::static_rand(10)) <= my_team_sc) {
-			verb_log_dbg_time(
-			   gametime,
-			   "AI Diplomacy: Player(%d) with team score (%d) declines to invite player (%d) with diploscore %d\n",
-			   static_cast<unsigned int>(this_player_number), my_team_sc, static_cast<unsigned int>(pl),
-			   other_team_sc);
+			verb_log_dbg_time(gametime,
+			                  "AI Diplomacy: Player(%d) with team score (%d) declines to invite "
+			                  "player (%d) with diploscore %d\n",
+			                  static_cast<unsigned int>(this_player_number), my_team_sc,
+			                  static_cast<unsigned int>(pl), other_team_sc);
 			return Widelands::DiplomacyAction::kRefuseJoin;
 		}
 	} else {
@@ -1162,12 +1162,12 @@ Widelands::DiplomacyAction PlayersStrengths::join_or_invite(
 	}
 
 	if (!can_invite || !can_join) {
-		verb_log_dbg_time(
-		   gametime,
-		   "AI Diplomacy: Player(%d) with team score (%d) considers %s player (%d) with team score %d\n",
-		   static_cast<unsigned int>(this_player_number), my_team_sc,
-		   can_invite ? "inviting" : "requesting to join",
-		   static_cast<unsigned int>(pl), other_team_sc);
+		verb_log_dbg_time(gametime,
+		                  "AI Diplomacy: Player(%d) with team score (%d) considers %s player (%d) "
+		                  "with team score %d\n",
+		                  static_cast<unsigned int>(this_player_number), my_team_sc,
+		                  can_invite ? "inviting" : "requesting to join",
+		                  static_cast<unsigned int>(pl), other_team_sc);
 	}
 	return my_team_sc < other_team_sc ? join : invite;
 }

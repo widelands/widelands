@@ -912,8 +912,8 @@ public:
 
 	// Decide which is both possible and desirable. May return kRefuseJoin to indicate
 	// that neither is possible, or the possible action is not desirable.
-	[[nodiscard]] Widelands::DiplomacyAction join_or_invite(
-	   Widelands::PlayerNumber pl, const Time& gametime);
+	[[nodiscard]] Widelands::DiplomacyAction join_or_invite(Widelands::PlayerNumber pl,
+	                                                        const Time& gametime);
 
 private:
 	// This is the core part of this struct
