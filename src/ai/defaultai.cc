@@ -6878,9 +6878,9 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				// we need to be sure all magic numbers have been initialized so wait 30s
 				if (game().diplomacy_allowed() && gametime > Time(30000) && pn != j) {
 					int16_t inputs[2 * kFNeuronBitSize] = {0};
-					inputs[0] = cur_land < player_statistics.get_max_land() &&
-					                  player_statistics.get_max_land() < cur_land + me_land &&
-					                  me_land < player_statistics.get_max_land() ?
+					inputs[0] = player_statistics.get_player_land(j) < player_statistics.get_max_land() &&
+					                  player_statistics.get_max_land() < player_statistics.get_player_land(j) + player_statistics.get_player_land(pn) &&
+					                  player_statistics.get_player_land(pn) < player_statistics.get_max_land() ?
                               5 :
                               -5;
 					inputs[1] = RNG::static_rand(5) == 0 ? 2 : -2;
@@ -6937,33 +6937,33 @@ void DefaultAI::update_player_stat(const Time& gametime) {
                                (std::abs(management_data.get_military_number_at(185)) / 10) :
                                -(std::abs(management_data.get_military_number_at(185)) / 20);
 					inputs[22] = 3;
-					inputs[23] = cur_strength >= player_statistics.get_max_power() ? -10 : 4;
-					inputs[24] = cur_land >= player_statistics.get_max_land() ? -4 : 1;
+					inputs[23] = player_statistics.get_player_power(j) >= player_statistics.get_max_power() ? -10 : 4;
+					inputs[24] = player_statistics.get_player_land(j) >= player_statistics.get_max_land() ? -4 : 1;
 					inputs[25] = player_statistics.get_diplo_score(j) > 0 ? 5 : -1;
 					inputs[26] = player_statistics.get_diplo_score(j) > 5 ? 3 : -2;
-					inputs[27] = cur_strength >= player_statistics.get_max_power() ?
+					inputs[27] = player_statistics.get_player_power(j) >= player_statistics.get_max_power() ?
                                -(std::abs(management_data.get_military_number_at(197)) / 10) :
                                (std::abs(management_data.get_military_number_at(197)) / 10);
-					inputs[28] = cur_land >= player_statistics.get_max_land() ? -7 : 2;
+					inputs[28] = player_statistics.get_player_land(j) >= player_statistics.get_max_land() ? -7 : 2;
 					inputs[29] = gametime < Time((30 + RNG::static_rand(20)) * 60 * 1000) ? -5 : 0;
 					inputs[30] = gametime < Time((60 + RNG::static_rand(30)) * 60 * 1000) ? -3 : 0;
-					inputs[31] = cur_strength < player_statistics.get_max_power() &&
-					                   player_statistics.get_max_power() < cur_strength + me_strength &&
-					                   me_strength < player_statistics.get_max_power() ?
+					inputs[31] = player_statistics.get_player_power(j) < player_statistics.get_max_power() &&
+					                   player_statistics.get_max_power() < player_statistics.get_player_power(j) + player_statistics.get_player_power(pn) &&
+					                   player_statistics.get_player_power(pn) < player_statistics.get_max_power() ?
                                8 :
                                0;
 					inputs[32] =
-					   cur_strength * 3 + cur_land < player_statistics.get_max_power() * 3 +
+					   player_statistics.get_player_power(j) * 3 + player_statistics.get_player_land(j) < player_statistics.get_max_power() * 3 +
 					                                    player_statistics.get_max_land() &&
 					         player_statistics.get_max_power() * 3 + player_statistics.get_max_land() <
-					            (cur_strength + me_strength) * 3 + cur_land + me_land ?
+					            (player_statistics.get_player_power(j) + player_statistics.get_player_power(pn)) * 3 + player_statistics.get_player_land(j) + player_statistics.get_player_land(pn) ?
                      5 :
                      -5;
 					inputs[33] =
-					   cur_strength * 2 + cur_land < player_statistics.get_max_power() * 2 +
+					   player_statistics.get_player_power(j) * 2 + player_statistics.get_player_land(j) < player_statistics.get_max_power() * 2 +
 					                                    player_statistics.get_max_land() &&
 					         player_statistics.get_max_power() * 2 + player_statistics.get_max_land() <
-					            (cur_strength + me_strength) * 2 + cur_land + me_land ?
+					            (player_statistics.get_player_power(j) + player_statistics.get_player_power(pn)) * 2 + player_statistics.get_player_land(j) + player_statistics.get_player_land(pn) ?
                      4 :
                      0;
 					inputs[34] = this_player->team_number() == me->team_number() ? 5 : -5;
@@ -6996,7 +6996,7 @@ void DefaultAI::update_player_stat(const Time& gametime) {
                                -10 :
                                4;
 					inputs[44] = player_statistics.strong_enough(j) &&
-					                   cur_strength >= player_statistics.get_max_power() ?
+					                   player_statistics.get_player_power(j) >= player_statistics.get_max_power() ?
                                -8 :
                                0;
 					inputs[45] = player_statistics.strong_enough(j) ? -10 : 2;
@@ -7026,12 +7026,12 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					                   this_player->team_number() != me->team_number() ?
                                -4 :
                                1;
-					inputs[56] = me_strength >= player_statistics.get_max_power() ? -8 : 0;
-					inputs[57] = me_strength >= player_statistics.get_max_power() ?
+					inputs[56] = player_statistics.get_player_power(pn) >= player_statistics.get_max_power() ? -8 : 0;
+					inputs[57] = player_statistics.get_player_power(pn) >= player_statistics.get_max_power() ?
                                -(std::abs(management_data.get_military_number_at(197)) / 10) :
                                (std::abs(management_data.get_military_number_at(197)) / 20);
-					inputs[58] = cur_strength < player_statistics.get_max_power() &&
-					                   me_strength < player_statistics.get_max_power() ?
+					inputs[58] = player_statistics.get_player_power(j) < player_statistics.get_max_power() &&
+					                   player_statistics.get_player_power(pn) < player_statistics.get_max_power() ?
                                5 :
                                -5;
 					inputs[59] =
@@ -7044,18 +7044,18 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					                   me_buildings < player_statistics.get_max_buildings() ?
                                5 :
                                -2;
-					inputs[61] = buildings * 3 + cur_land < player_statistics.get_max_buildings() * 3 +
+					inputs[61] = buildings * 3 + player_statistics.get_player_land(j) < player_statistics.get_max_buildings() * 3 +
 					                                           player_statistics.get_max_land() &&
 					                   player_statistics.get_max_buildings() * 3 +
 					                         player_statistics.get_max_land() <
-					                      (buildings + me_buildings) * 3 + cur_land + me_land ?
+					                      (buildings + me_buildings) * 3 + player_statistics.get_player_land(j) + player_statistics.get_player_land(pn) ?
                                5 :
                                -5;
-					inputs[62] = buildings * 2 + cur_land < player_statistics.get_max_buildings() * 2 +
+					inputs[62] = buildings * 2 + player_statistics.get_player_land(j) < player_statistics.get_max_buildings() * 2 +
 					                                           player_statistics.get_max_land() &&
 					                   player_statistics.get_max_buildings() * 2 +
 					                         player_statistics.get_max_land() <
-					                      (buildings + me_buildings) * 2 + cur_land + me_land ?
+					                      (buildings + me_buildings) * 2 + player_statistics.get_player_land(j) + player_statistics.get_player_land(pn) ?
                                4 :
                                0;
 					inputs[63] = me_buildings >= player_statistics.get_max_buildings() ? -6 : 0;
