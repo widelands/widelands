@@ -6969,32 +6969,24 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					inputs[34] = this_player->team_number() == me->team_number() ? 5 : -5;
 					inputs[35] = this_player->team_number() == me->team_number() ? 3 : -3;
 					inputs[36] = player_statistics.get_diplo_score(j) > 10 ? 2 : -2;
-					inputs[37] = player_statistics.get_is_enemy(j) &&
-					                   player_statistics.player_seen_lately(j, gametime) &&
-					                   !player_statistics.strong_enough(pn) ?
-                               8 :
-                               -2;
-					inputs[38] = player_statistics.get_is_enemy(j) &&
-					                   player_statistics.player_seen_lately(j, gametime) &&
-					                   !player_statistics.strong_enough(pn) ?
-                               5 :
-                               0;
+					inputs[37] = (player_statistics.get_is_enemy(j) ? 2 : 1) *
+					                (player_statistics.player_seen_lately(j, gametime) &&
+					                 !player_statistics.strong_enough(pn) ? 4 : -1);
+					inputs[38] = (player_statistics.get_is_enemy(j) ? 2 : 1) *
+					                (player_statistics.player_seen_lately(j, gametime) &&
+					                 !player_statistics.strong_enough(pn) ? 3 : 0);
 					inputs[39] = player_statistics.strong_enough(pn) ? -10 : 2;
 					inputs[40] = player_statistics.strong_enough(pn) ? -5 : 2;
-					inputs[41] = player_statistics.get_is_enemy(j) &&
-					                   player_statistics.player_seen_lately(j, gametime) &&
-					                   player_statistics.enemies_seen_lately_count(gametime) > 1 ?
-                               5 :
-                               0;
-					inputs[42] = player_statistics.get_is_enemy(j) &&
-					                   player_statistics.player_seen_lately(j, gametime) &&
-					                   player_statistics.enemies_seen_lately_count(gametime) > 1 ?
-                               3 :
-                               -2;
+					inputs[41] = (player_statistics.get_is_enemy(j) ? 2 : 1) *
+					              (player_statistics.player_seen_lately(j, gametime) &&
+					               player_statistics.enemies_seen_lately_count(gametime) > 1 ? 3 : 0);
+					inputs[42] = (player_statistics.get_is_enemy(j) ? 2 : 1) *
+					              (player_statistics.player_seen_lately(j, gametime) &&
+					               player_statistics.enemies_seen_lately_count(gametime) > 1 ? 2 : -1);
 					inputs[43] = player_statistics.strong_enough(j) &&
 					                   !player_statistics.player_seen_lately(j, gametime) ?
-                               -10 :
-                               4;
+                               -5 :
+                               2;
 					inputs[44] = player_statistics.strong_enough(j) &&
 					                   player_statistics.get_player_power(j) >= player_statistics.get_max_power() ?
                                -8 :
