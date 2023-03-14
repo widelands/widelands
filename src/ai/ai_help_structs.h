@@ -910,6 +910,11 @@ public:
 	void set_update_time(const Time&);
 	const Time& get_update_time();
 
+	// Decide which is both possible and desirable. May return kRefuseJoin to indicate
+	// that neither is possible, or the possible action is not desirable.
+	[[nodiscard]] Widelands::DiplomacyAction join_or_invite(
+	   Widelands::PlayerNumber pl, const Time& gametime);
+
 private:
 	// This is the core part of this struct
 	std::map<Widelands::PlayerNumber, PlayerStat> all_stats_;

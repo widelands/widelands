@@ -3392,26 +3392,16 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			continue;
 		}
 		if (player_statistics.get_diplo_score(opn) >= 35) {
-			if (((other_player->team_number() == 0 ||
-			      player_statistics.team_power(me->team_number()) >
-			         player_statistics.team_power(other_player->team_number())) &&
-			     player_statistics.members_in_team(me->team_number()) <
-			        player_statistics.players_active() - 1) ||
-			    (player_statistics.members_in_team(other_player->team_number()) ==
-			        player_statistics.players_active() - 1 &&
-			     me->team_number() != other_player->team_number())) {
+			Widelands::DiplomacyAction action = player_statistics.join_or_invite(opn, gametime);
+			if (action == Widelands::DiplomacyAction::kInvite) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kInvite, opn);
 				player_statistics.set_last_time_requested(gametime, opn);
 				verb_log_dbg_time(
 				   gametime,
-				   "AI Diplomacy: Player(%d) of team (%d) with team power (%d), invites player (%d) of "
-				   "team (%d) with team power (%d) to join with diploscore: %d\n",
-				   static_cast<unsigned int>(mypn), me->team_number(),
-				   player_statistics.team_power(me->team_number()), static_cast<unsigned int>(opn),
-				   other_player->team_number(),
-				   player_statistics.team_power(other_player->team_number()),
+				   "AI Diplomacy: Player(%d) invites player (%d) to join with diploscore: %d\n",
+				   static_cast<unsigned int>(mypn), static_cast<unsigned int>(opn),
 				   player_statistics.get_diplo_score(opn));
-			} else if (other_player->team_number() != me->team_number()) {
+			} else if (action == Widelands::DiplomacyAction::kJoin) {
 				game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kJoin, opn);
 				player_statistics.set_last_time_requested(gametime, opn);
 				verb_log_dbg_time(
@@ -3420,6 +3410,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				   static_cast<unsigned int>(mypn), static_cast<unsigned int>(opn),
 				   player_statistics.get_diplo_score(opn));
 			}
+			// may do nothing
 		} else if (player_statistics.get_diplo_score(opn) < -15 &&
 		           other_player->team_number() == me->team_number() &&
 		           other_player->team_number() != 0) {
