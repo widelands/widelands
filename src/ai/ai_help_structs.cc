@@ -1104,10 +1104,15 @@ uint32_t PlayersStrengths::team_power(Widelands::TeamNumber tn) {
 // Make the decision whether own or player's team is better
 Widelands::DiplomacyAction PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pl,
                                                             const Time& gametime) {
-	const Widelands::TeamNumber other_tn = all_stats_[pl].team_number;
-	if (this_player_number == pl || active_players_ < 3 || this_player_team == other_tn) {
+	if (this_player_number == pl || active_players_ < 3) {
 		return Widelands::DiplomacyAction::kRefuseJoin;
 	}
+
+	const Widelands::TeamNumber other_tn = all_stats_[pl].team_number;
+	if (this_player_team != 0 && this_player_team == other_tn) {
+		return Widelands::DiplomacyAction::kRefuseJoin;
+	}
+
 	int my_team_sc = 0;
 	int other_team_sc = 0;
 	bool me_alone = false;
