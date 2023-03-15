@@ -1096,57 +1096,58 @@ uint8_t PlayersStrengths::members_in_team(Widelands::TeamNumber tn) {
 	return team_members_[tn];
 }
 
+bool PlayersStrengths::get_is_alone(const Widelands::PlayerNumber pn) {
+	const Widelands::TeamNumber tn = all_stats_[pn].team_number;
+	return tn == 0 || members_in_team(tn) == 1;
+}
+
+// Returns the average diploscore of the members in the given team,
+// excluding the given player
+int32_t PlayersStrengths::get_team_average_score(const Widelands::TeamNumber tn,
+                                                 const Widelands::PlayerNumber exclude_pn) {
+	if (tn == 0 || members_in_team(tn) < 2) {
+		return 0;
+	}
+
+	int32_t team_sc = 0;
+   uint8_t excluded = 0;
+	for (auto& item : all_stats_) {
+		if (item.second.team_number != tn || item.second.defeated) {
+			continue;
+		}
+		if (item.first == exclude_pn) {
+			++excluded;
+			continue;
+		}
+		team_sc += item.second.players_diplomacy_score;
+	}
+	return team_sc / (members_in_team(tn) - excluded);
+}
+
 // Returns power of a team
 uint32_t PlayersStrengths::team_power(Widelands::TeamNumber tn) {
 	return team_powers_[tn];
 }
 
 // Make the decision whether own or player's team is better
-void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pl,
+void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
                                       Widelands::Game& game,
                                       const Time& gametime) {
-	if (this_player_number == pl || active_players_ < 3) {
+	if (this_player_number == pn || active_players_ < 3 ||
+	    players_in_same_team(this_player_number, pn)) {
 		return;
 	}
 
-	const Widelands::TeamNumber other_tn = all_stats_[pl].team_number;
-	if (this_player_team != 0 && this_player_team == other_tn) {
-		return;
-	}
-
+	const Widelands::TeamNumber other_tn = all_stats_[pn].team_number;
 	const bool can_invite = members_in_team(this_player_team) < active_players_ - 1;
 	const bool can_join = members_in_team(other_tn) < active_players_ - 1;
-	const bool me_alone = this_player_team == 0 || members_in_team(this_player_team) == 1;
-	const bool other_alone = other_tn == 0 || members_in_team(other_tn) == 1;
+	const bool me_alone = get_is_alone(this_player_number);
+	const bool other_alone = get_is_alone(pn);
 
-	int my_team_sc = 0;
-	int other_team_sc = 0;
-	if (other_alone) {
-		other_team_sc = get_diplo_score(pl);
-	}
-
-	if (!me_alone || !other_alone) {
-		for (auto& item : all_stats_) {
-			if (item.first == pl || item.first == this_player_number || item.second.team_number == 0 ||
-			    item.second.defeated) {
-				continue;
-			}
-			if (can_invite && item.second.team_number == this_player_team) {
-				my_team_sc += item.second.players_diplomacy_score;
-			}
-			if (can_join && item.second.team_number == other_tn) {
-				other_team_sc += item.second.players_diplomacy_score;
-			}
-		}
-	}
-	if (!me_alone) {
-		my_team_sc /= members_in_team(this_player_team) - 1;
-	}
-	if (other_alone) {
-		other_team_sc -= RNG::static_rand(10);
-	} else {
-		other_team_sc /= members_in_team(other_tn) - 1;
-	}
+	const int my_team_sc = me_alone ? 0 : get_team_average_score(this_player_team, this_player_number);
+	const int other_team_sc = other_alone ?
+                             get_diplo_score(pn) - static_cast<int>(RNG::static_rand(10)) :
+                             get_team_average_score(other_tn, pn);
 	const std::string myts_s = me_alone ? "" : format(" with team score %d", my_team_sc);
 	const std::string ots_s = other_alone ? "" : format(" and team score %d", other_team_sc);
 
@@ -1164,7 +1165,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pl,
 				                  "AI Diplomacy: Player(%d)%s cannot invite player (%d) with "
 				                  "diploscore %d\n",
 				                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
-				                  static_cast<unsigned int>(pl), get_diplo_score(pl));
+				                  static_cast<unsigned int>(pn), get_diplo_score(pn));
 				return;
 			}
 		} else {  // Other has team, or own team is less desirable than other player alone
@@ -1173,7 +1174,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pl,
 				                  "AI Diplomacy: Player(%d)%s cannot request to join player (%d) with "
 				                  "diploscore %d%s\n",
 				                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
-				                  static_cast<unsigned int>(pl), get_diplo_score(pl), ots_s.c_str());
+				                  static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
 				return;
 			}
 
@@ -1181,9 +1182,9 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pl,
 			   gametime,
 			   "AI Diplomacy: Player(%d)%s requests to join player (%d) with diploscore %d%s\n",
 			   static_cast<unsigned int>(this_player_number), myts_s.c_str(),
-			   static_cast<unsigned int>(pl), get_diplo_score(pl), ots_s.c_str());
-			game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kJoin, pl);
-			set_last_time_requested(gametime, pl);
+			   static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
+			game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kJoin, pn);
+			set_last_time_requested(gametime, pn);
 			return;
 		}
 	} else {  // Own team is more desirable
@@ -1192,7 +1193,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pl,
 			                  "AI Diplomacy: Player(%d)%s declines to invite player (%d) with "
 			                  "diploscore %d\n",
 			                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
-			                  static_cast<unsigned int>(pl), get_diplo_score(pl));
+			                  static_cast<unsigned int>(pn), get_diplo_score(pn));
 			return;
 		}
 		if (!can_invite) {
@@ -1200,7 +1201,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pl,
 			                  "AI Diplomacy: Player(%d)%s cannot invite player (%d) with diploscore "
 			                  "%d%s\n",
 			                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
-			                  static_cast<unsigned int>(pl), get_diplo_score(pl), ots_s.c_str());
+			                  static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
 			return;
 		}
 		invite = true;  // Handle in fall through with above
@@ -1210,9 +1211,9 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pl,
 		verb_log_dbg_time(
 		   gametime, "AI Diplomacy: Player(%d)%s invites player (%d) to join with diploscore %d%s\n",
 		   static_cast<unsigned int>(this_player_number), myts_s.c_str(),
-		   static_cast<unsigned int>(pl), get_diplo_score(pl), ots_s.c_str());
-		game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kInvite, pl);
-		set_last_time_requested(gametime, pl);
+		   static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
+		game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kInvite, pn);
+		set_last_time_requested(gametime, pn);
 		return;
 	}
 

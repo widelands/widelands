@@ -904,6 +904,9 @@ public:
 	[[nodiscard]] bool get_is_enemy(Widelands::PlayerNumber);
 	[[nodiscard]] uint8_t enemies_seen_lately_count(const Time&);
 	[[nodiscard]] uint8_t members_in_team(Widelands::TeamNumber tn);
+	[[nodiscard]] bool get_is_alone(Widelands::PlayerNumber pn);
+	[[nodiscard]] int32_t get_team_average_score(Widelands::TeamNumber tn,
+                                                Widelands::PlayerNumber exclude_pn = 0);
 	[[nodiscard]] uint32_t team_power(Widelands::TeamNumber tn);
 	[[nodiscard]] uint8_t players_active() const;
 	[[nodiscard]] bool any_enemy_seen_lately(const Time&);
@@ -913,7 +916,7 @@ public:
 	// Decide which of inviting or requesting to join is both possible and desirable, and do the
 	// chosen action. May choose to do nothing, if neither is possible, or the possible action is
 	// not desirable.
-	void join_or_invite(Widelands::PlayerNumber pl, Widelands::Game& game, const Time& gametime);
+	void join_or_invite(Widelands::PlayerNumber pn, Widelands::Game& game, const Time& gametime);
 
 private:
 	// This is the core part of this struct
