@@ -95,6 +95,13 @@ public:
 	virtual void restore();
 	virtual void minimize();
 
+	[[nodiscard]] ZOrder get_z() const override {
+		if (is_pinned()) {
+			return std::max(Panel::ZOrder::kPinned, NamedPanel::get_z());
+		}
+		return NamedPanel::get_z();
+	}
+
 	bool is_pinned() const {
 		return pinned_;
 	}
