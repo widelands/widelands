@@ -1102,79 +1102,119 @@ uint32_t PlayersStrengths::team_power(Widelands::TeamNumber tn) {
 }
 
 // Make the decision whether own or player's team is better
-Widelands::DiplomacyAction PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pl,
-                                                            const Time& gametime) {
+void PlayersStrengths::join_or_invite(
+   const Widelands::PlayerNumber pl, Widelands::Game& game, const Time& gametime) {
 	if (this_player_number == pl || active_players_ < 3) {
-		return Widelands::DiplomacyAction::kRefuseJoin;
+		return;
 	}
 
 	const Widelands::TeamNumber other_tn = all_stats_[pl].team_number;
 	if (this_player_team != 0 && this_player_team == other_tn) {
-		return Widelands::DiplomacyAction::kRefuseJoin;
-	}
-
-	int my_team_sc = 0;
-	int other_team_sc = 0;
-	bool me_alone = false;
-	bool other_alone = false;
-
-	if (other_tn == 0 || members_in_team(other_tn) == 1) {
-		other_team_sc = get_diplo_score(pl);
-		other_alone = true;
-	}
-	if (this_player_team == 0 || members_in_team(this_player_team) == 1) {
-		if (other_alone) {
-			return Widelands::DiplomacyAction::kInvite;
-		}
-		me_alone = true;
+		return;
 	}
 
 	const bool can_invite = members_in_team(this_player_team) < active_players_ - 1;
 	const bool can_join = members_in_team(other_tn) < active_players_ - 1;
-	const Widelands::DiplomacyAction invite =
-	   can_invite ? Widelands::DiplomacyAction::kInvite : Widelands::DiplomacyAction::kRefuseJoin;
-	const Widelands::DiplomacyAction join =
-	   can_join ? Widelands::DiplomacyAction::kJoin : Widelands::DiplomacyAction::kRefuseJoin;
+	const bool me_alone = this_player_team == 0 || members_in_team(this_player_team) == 1;
+	const bool other_alone = other_tn == 0 || members_in_team(other_tn) == 1;
 
-	for (auto& item : all_stats_) {
-		if (item.first == pl || item.first == this_player_number || item.second.team_number == 0 ||
-		    item.second.defeated) {
-			continue;
-		}
-		if (can_invite && item.second.team_number == this_player_team) {
-			my_team_sc += item.second.players_diplomacy_score;
-		}
-		if (can_join && item.second.team_number == other_tn) {
-			other_team_sc += item.second.players_diplomacy_score;
-		}
+	int my_team_sc = 0;
+	int other_team_sc = 0;
+	if (other_alone) {
+		other_team_sc = get_diplo_score(pl);
 	}
 
+	if (!me_alone || !other_alone) {
+		for (auto& item : all_stats_) {
+			if (item.first == pl || item.first == this_player_number || item.second.team_number == 0 ||
+				 item.second.defeated) {
+				continue;
+			}
+			if (can_invite && item.second.team_number == this_player_team) {
+				my_team_sc += item.second.players_diplomacy_score;
+			}
+			if (can_join && item.second.team_number == other_tn) {
+				other_team_sc += item.second.players_diplomacy_score;
+			}
+		}
+	}
 	if (!me_alone) {
 		my_team_sc /= members_in_team(this_player_team) - 1;
 	}
-
 	if (other_alone) {
-		if (other_team_sc - static_cast<int>(RNG::static_rand(10)) <= my_team_sc) {
-			verb_log_dbg_time(gametime,
-			                  "AI Diplomacy: Player(%d) with team score (%d) declines to invite "
-			                  "player (%d) with diploscore %d\n",
-			                  static_cast<unsigned int>(this_player_number), my_team_sc,
-			                  static_cast<unsigned int>(pl), other_team_sc);
-			return Widelands::DiplomacyAction::kRefuseJoin;
-		}
+		other_team_sc -= RNG::static_rand(10);
 	} else {
 		other_team_sc /= members_in_team(other_tn) - 1;
 	}
 
-	if (!can_invite || !can_join) {
-		verb_log_dbg_time(gametime,
-		                  "AI Diplomacy: Player(%d) with team score (%d) considers %s player (%d) "
-		                  "with team score %d\n",
-		                  static_cast<unsigned int>(this_player_number), my_team_sc,
-		                  can_invite ? "inviting" : "requesting to join",
-		                  static_cast<unsigned int>(pl), other_team_sc);
+	bool invite = false;  // Only to check fall through case
+
+	if (my_team_sc < other_team_sc) {
+		if (other_alone && (me_alone || my_team_sc > static_cast<int>(RNG::static_rand(20)))) {
+			// If we're both alone, we try to be polite and invite.
+			// Or if we have a good enough team, we won't leave it for a lone player, but we try to
+			// recruit.
+			if (can_invite) {
+				invite = true;  // Will fall through
+			} else {
+				verb_log_dbg_time(gametime,
+				                  "AI Diplomacy: Player(%d) with team score (%d) cannot invite player "
+				                  "(%d) with diploscore %d\n",
+				                  static_cast<unsigned int>(this_player_number), my_team_sc,
+				                  static_cast<unsigned int>(pl), get_diplo_score(pl));
+				return;
+			}
+		} else {  // Other has team, or own team is less desirable than other player alone
+			if (!can_join) {
+				const std::string ots_s = other_alone ? "" : format(" and team score %d", other_team_sc);
+				verb_log_dbg_time(gametime,
+				                  "AI Diplomacy: Player(%d) with team score (%d) cannot request to "
+				                  "join player (%d) with diploscore %d%s\n",
+				                  static_cast<unsigned int>(this_player_number), my_team_sc,
+				                  static_cast<unsigned int>(pl), get_diplo_score(pl), ots_s.c_str());
+				return;
+			}
+
+			verb_log_dbg_time(
+			   gametime,
+			   "AI Diplomacy: Player(%d), requests to join player (%d) with diploscore: %d\n",
+			   static_cast<unsigned int>(this_player_number), static_cast<unsigned int>(pl),
+			   get_diplo_score(pl));
+			game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kJoin, pl);
+			set_last_time_requested(gametime, pl);
+			return;
+		}
+	} else {  // Own team is more desirable
+		if (other_alone) {
+			verb_log_dbg_time(gametime,
+			                  "AI Diplomacy: Player(%d) with team score (%d) declines to invite "
+			                  "player (%d) with diploscore %d\n",
+			                  static_cast<unsigned int>(this_player_number), my_team_sc,
+			                  static_cast<unsigned int>(pl), get_diplo_score(pl));
+			return;
+		}
+		if (!can_invite) {
+			verb_log_dbg_time(gametime,
+			                  "AI Diplomacy: Player(%d) with team score (%d) cannot invite player "
+			                  "(%d) with diploscore %d and team score %d",
+			                  static_cast<unsigned int>(this_player_number), my_team_sc,
+			                  static_cast<unsigned int>(pl), get_diplo_score(pl), other_team_sc);
+			return;
+		}
+		invite = true;  // Handle in fall through with above
 	}
-	return my_team_sc < other_team_sc ? join : invite;
+
+	if (invite) {
+		verb_log_dbg_time(
+		   gametime, "AI Diplomacy: Player(%d) invites player (%d) to join with diploscore: %d\n",
+		   static_cast<unsigned int>(this_player_number), static_cast<unsigned int>(pl),
+		   get_diplo_score(pl));
+		game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kInvite, pl);
+		set_last_time_requested(gametime, pl);
+		return;
+	}
+
+	NEVER_HERE();
 }
 
 // Returns number of active players
