@@ -1102,8 +1102,9 @@ uint32_t PlayersStrengths::team_power(Widelands::TeamNumber tn) {
 }
 
 // Make the decision whether own or player's team is better
-void PlayersStrengths::join_or_invite(
-   const Widelands::PlayerNumber pl, Widelands::Game& game, const Time& gametime) {
+void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pl,
+                                      Widelands::Game& game,
+                                      const Time& gametime) {
 	if (this_player_number == pl || active_players_ < 3) {
 		return;
 	}
@@ -1127,7 +1128,7 @@ void PlayersStrengths::join_or_invite(
 	if (!me_alone || !other_alone) {
 		for (auto& item : all_stats_) {
 			if (item.first == pl || item.first == this_player_number || item.second.team_number == 0 ||
-				 item.second.defeated) {
+			    item.second.defeated) {
 				continue;
 			}
 			if (can_invite && item.second.team_number == this_player_team) {
@@ -1208,8 +1209,8 @@ void PlayersStrengths::join_or_invite(
 	if (invite) {
 		verb_log_dbg_time(
 		   gametime, "AI Diplomacy: Player(%d)%s invites player (%d) to join with diploscore %d%s\n",
-		   static_cast<unsigned int>(this_player_number), myts_s.c_str(), static_cast<unsigned int>(pl),
-		   get_diplo_score(pl), ots_s.c_str());
+		   static_cast<unsigned int>(this_player_number), myts_s.c_str(),
+		   static_cast<unsigned int>(pl), get_diplo_score(pl), ots_s.c_str());
 		game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kInvite, pl);
 		set_last_time_requested(gametime, pl);
 		return;
