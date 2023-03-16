@@ -907,7 +907,7 @@ public:
 	[[nodiscard]] uint8_t members_in_team(Widelands::TeamNumber tn);
 	[[nodiscard]] bool get_is_alone(Widelands::PlayerNumber pn);
 	[[nodiscard]] int32_t get_team_average_score(Widelands::TeamNumber tn,
-                                                Widelands::PlayerNumber exclude_pn = 0);
+	                                             Widelands::PlayerNumber exclude_pn = 0);
 	[[nodiscard]] uint32_t team_power(Widelands::TeamNumber tn);
 	[[nodiscard]] uint8_t players_active() const;
 	[[nodiscard]] bool any_enemy_seen_lately(const Time&);

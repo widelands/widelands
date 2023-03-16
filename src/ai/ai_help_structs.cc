@@ -1110,7 +1110,7 @@ int32_t PlayersStrengths::get_team_average_score(const Widelands::TeamNumber tn,
 	}
 
 	int32_t team_sc = 0;
-   uint8_t excluded = 0;
+	uint8_t excluded = 0;
 	for (auto& item : all_stats_) {
 		if (item.second.team_number != tn || item.second.defeated) {
 			continue;
@@ -1144,10 +1144,11 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 	const bool me_alone = get_is_alone(this_player_number);
 	const bool other_alone = get_is_alone(pn);
 
-	const int my_team_sc = me_alone ? 0 : get_team_average_score(this_player_team, this_player_number);
+	const int my_team_sc =
+	   me_alone ? 0 : get_team_average_score(this_player_team, this_player_number);
 	const int other_team_sc = other_alone ?
-                             get_diplo_score(pn) - static_cast<int>(RNG::static_rand(10)) :
-                             get_team_average_score(other_tn, pn);
+                                get_diplo_score(pn) - static_cast<int>(RNG::static_rand(10)) :
+                                get_team_average_score(other_tn, pn);
 	const std::string myts_s = me_alone ? "" : format(" with team score %d", my_team_sc);
 	const std::string ots_s = other_alone ? "" : format(" and team score %d", other_team_sc);
 
