@@ -7055,36 +7055,36 @@ void DefaultAI::update_player_stat(const Time& gametime) {
                      5 :
                      -5;
 					inputs[59] =
-					   buildings < player_statistics.get_max_buildings() &&
-					         player_statistics.get_max_buildings() < buildings + me_buildings &&
-					         me_buildings < player_statistics.get_max_buildings() ?
+					  player_statistics.get_player_buildings(j) < player_statistics.get_max_buildings() &&
+					         player_statistics.get_max_buildings() < player_statistics.get_player_buildings(j) + player_statistics.get_player_buildings(pn) &&
+					         player_statistics.get_player_buildings(pn) < player_statistics.get_max_buildings() ?
                      4 :
                      -4;
-					inputs[60] = buildings < player_statistics.get_max_buildings() &&
-					                   me_buildings < player_statistics.get_max_buildings() ?
+					inputs[60] = player_statistics.get_player_buildings(j) < player_statistics.get_max_buildings() &&
+					                   player_statistics.get_player_buildings(pn) < player_statistics.get_max_buildings() ?
                                5 :
                                -2;
-					inputs[61] = buildings * 3 + player_statistics.get_player_land(j) <
+					inputs[61] = player_statistics.get_player_buildings(j) * 3 + player_statistics.get_player_land(j) <
 					                      player_statistics.get_max_buildings() * 3 +
 					                         player_statistics.get_max_land() &&
 					                   player_statistics.get_max_buildings() * 3 +
 					                         player_statistics.get_max_land() <
-					                      (buildings + me_buildings) * 3 +
+					                      (player_statistics.get_player_buildings(j) + player_statistics.get_player_buildings(pn)) * 3 +
 					                         player_statistics.get_player_land(j) +
 					                         player_statistics.get_player_land(pn) ?
                                5 :
                                -5;
-					inputs[62] = buildings * 2 + player_statistics.get_player_land(j) <
+					inputs[62] = player_statistics.get_player_buildings(j) * 2 + player_statistics.get_player_land(j) <
 					                      player_statistics.get_max_buildings() * 2 +
 					                         player_statistics.get_max_land() &&
 					                   player_statistics.get_max_buildings() * 2 +
 					                         player_statistics.get_max_land() <
-					                      (buildings + me_buildings) * 2 +
+					                      (player_statistics.get_player_buildings(j) + player_statistics.get_player_buildings(pn)) * 2 +
 					                         player_statistics.get_player_land(j) +
 					                         player_statistics.get_player_land(pn) ?
                                4 :
                                0;
-					inputs[63] = me_buildings >= player_statistics.get_max_buildings() ? -6 : 0;
+					inputs[63] = player_statistics.get_player_buildings(pn) >= player_statistics.get_max_buildings() ? -6 : 0;
 
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (management_data.f_neuron_pool[28].get_position(i)) {

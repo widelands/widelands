@@ -884,6 +884,7 @@ public:
 	[[nodiscard]] uint32_t get_player_land(Widelands::PlayerNumber pn);
 	[[nodiscard]] uint32_t get_old_player_land(Widelands::PlayerNumber pn);
 	[[nodiscard]] uint32_t get_old60_player_land(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_player_buildings(Widelands::PlayerNumber pn);
 	[[nodiscard]] uint32_t get_visible_enemies_power(const Time&);
 	[[nodiscard]] uint32_t get_enemies_average_power();
 	[[nodiscard]] uint32_t get_enemies_average_land();

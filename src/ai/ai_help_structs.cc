@@ -1300,6 +1300,14 @@ uint32_t PlayersStrengths::get_player_power(Widelands::PlayerNumber pn) {
 	return 0;
 }
 
+// Amount of buildings of a player
+uint32_t PlayersStrengths::get_player_buildings(Widelands::PlayerNumber pn) {
+	if (all_stats_.count(pn) > 0) {
+		return all_stats_[pn].players_buildings;
+	}
+	return 0;
+}
+
 Widelands::TeamNumber PlayersStrengths::get_team_number(const Widelands::PlayerNumber pn) {
 	return all_stats_[pn].team_number;
 }
