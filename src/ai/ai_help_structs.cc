@@ -1299,6 +1299,10 @@ uint32_t PlayersStrengths::get_player_power(Widelands::PlayerNumber pn) {
 	return 0;
 }
 
+Widelands::TeamNumber PlayersStrengths::get_team_number(const Widelands::PlayerNumber pn) {
+	return all_stats_[pn].team_number;
+}
+
 // This is the diplomatic score of a player
 int32_t PlayersStrengths::get_diplo_score(Widelands::PlayerNumber pn) {
 	if (all_stats_.count(pn) > 0) {

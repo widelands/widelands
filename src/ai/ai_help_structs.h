@@ -892,6 +892,7 @@ public:
 	[[nodiscard]] uint32_t get_enemies_max_land();
 	[[nodiscard]] uint32_t get_max_land();
 	[[nodiscard]] uint32_t get_max_buildings();
+	[[nodiscard]] Widelands::TeamNumber get_team_number(Widelands::PlayerNumber pn);
 	[[nodiscard]] int32_t get_diplo_score(Widelands::PlayerNumber pn);
 	[[nodiscard]] uint32_t get_old_visible_enemies_power(const Time&);
 	[[nodiscard]] bool players_in_same_team(Widelands::PlayerNumber pl1,
