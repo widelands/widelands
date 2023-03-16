@@ -92,14 +92,15 @@ public:
 		// Other panels will snap to this one.
 		pf_snap_target = 1 << 14,
 	};
+
 	/** The Z ordering of overlapping panels; highest value is always on top. */
 	enum class ZOrder : uint8_t {
 		kAlwaysInBackground = 0,  ///< Always in the background.
-		kDefault = 5,             ///< No special handling.
-		kPinned = 10,             ///< Pinned by the user.
-		kInfoPanel = 20,          ///< The info panel and toolbar.
-		kFullscreenWindow = 30,   ///< A fullscreen window.
-		kDropdown = 50,           ///< Dropdown lists.
+		kDefault = 8,             ///< No special handling.
+		kPinned = 16,             ///< Pinned by the user.
+		kInfoPanel = 32,          ///< The info panel and toolbar.
+		kFullscreenWindow = 64,   ///< A fullscreen window.
+		kDropdown = 128,          ///< Dropdown lists.
 	};
 
 	Panel(Panel* nparent,
