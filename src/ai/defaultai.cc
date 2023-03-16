@@ -3337,30 +3337,51 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 	const Widelands::PlayerNumber mypn = player_number();
 	const Widelands::Player* me = game().get_player(mypn);
+	const Widelands::TeamNumber mytn = me->team_number();
 	const bool me_def = me->is_defeated();
+	const bool me_alone = player_statistics.get_is_alone(mypn);
 
 	// if we are defeated or the last one in a team leave team
-	if (me->team_number() != 0 &&
-	    (player_statistics.members_in_team(me->team_number()) == 1 || me_def)) {
+	if (me->team_number() != 0 && (me_alone || me_def)) {
 		game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kLeaveTeam, 0 /* ignored */);
-		verb_log_dbg_time(gametime, "AI Diplomacy: Player(%d), leaves team (%d) as last one.\n",
+		verb_log_dbg_time(gametime, "AI Diplomacy: Player(%d) leaves team (%d) as %s.\n",
 		                  static_cast<unsigned int>(mypn),
-		                  static_cast<unsigned int>(me->team_number()));
+		                  static_cast<unsigned int>(mytn),
+		                  me_alone ? "last one" : "defeated");
 	}
+
+	const int32_t my_team_score = me_alone ? 0 : player_statistics.get_team_average_score(mytn, mypn);
+	const std::string myts_s = me_alone ? "" : format(" with team score %d", my_team_score);
 
 	bool request_accepted = false;
 	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
 		if (pda.other == mypn) {
+			const int32_t diploscore = player_statistics.get_diplo_score(pda.sender);
+			const Widelands::TeamNumber other_tn = player_statistics.get_team_number(pda.sender);
+
 			// accept if diploscore high, else accept only 50%
 			bool accept =
-			   player_statistics.get_diplo_score(pda.sender) >= 25 ||
-			   (player_statistics.get_diplo_score(pda.sender) > 15 && RNG::static_rand(2) == 0);
+			   diploscore >= std::max(my_team_score, 25) ||
+			   (diploscore > std::max(my_team_score / 2, 15) && RNG::static_rand(2) == 0);
+
 			// accept only if not resulting in a team win and if we are not defeated
 			accept = accept &&
-			         player_statistics.members_in_team(
-			            pda.action == Widelands::DiplomacyAction::kInvite ? pda.sender : mypn) <
+			         std::max<uint8_t>(1, player_statistics.members_in_team(
+			            pda.action == Widelands::DiplomacyAction::kInvite ? other_tn : mytn)) <
 			            player_statistics.players_active() - 1 &&
 			         !me_def;
+
+			std::string other_team_score_str;
+			if (pda.action == Widelands::DiplomacyAction::kInvite && accept && !me_alone) {
+					const bool other_alone = player_statistics.get_is_alone(pda.sender);
+					const int32_t ots = other_alone ?
+                                   diploscore - static_cast<uint32_t>(RNG::static_rand(10)) :
+                                   player_statistics.get_team_average_score(other_tn);
+					if (!other_alone) {
+						other_team_score_str = format(" and team score %d", ots);
+					}
+					accept = ots > my_team_score;
+			}
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
@@ -3371,9 +3392,15 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			                             pda.sender);
 			verb_log_dbg_time(
 			   gametime,
-			   "AI Diplomacy: Player(%d), %s the invitation of player (%d) with diploscore: %d\n",
-			   static_cast<unsigned int>(pda.other), accept ? "accepts" : "denies",
-			   static_cast<unsigned int>(pda.sender), player_statistics.get_diplo_score(pda.sender));
+			   "AI Diplomacy: Player(%d)%s %s %s player (%d) with diploscore %d%s\n",
+			   static_cast<unsigned int>(pda.other),
+			   myts_s.c_str(),
+			   accept ? "accepts" : "denies",
+				pda.action == Widelands::DiplomacyAction::kInvite ? "the invitation of" : "to join",
+			   static_cast<unsigned int>(pda.sender),
+			   diploscore,
+			   other_team_score_str.c_str());
+
 			if (accept) {
 				request_accepted = true;
 			}
@@ -3394,12 +3421,12 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		if (player_statistics.get_diplo_score(opn) >= 35) {
 			player_statistics.join_or_invite(opn, game(), gametime);  // may do nothing
 		} else if (player_statistics.get_diplo_score(opn) < -15 &&
-		           other_player->team_number() == me->team_number() &&
+		           other_player->team_number() == mytn &&
 		           other_player->team_number() != 0) {
 			game().send_player_diplomacy(mypn, Widelands::DiplomacyAction::kLeaveTeam, opn);
 			verb_log_dbg_time(
 			   gametime,
-			   "AI Diplomacy: Player(%d), leaves team (%d) of player (%d) with diploscore: %d\n",
+			   "AI Diplomacy: Player(%d) leaves team (%d) of player (%d) with diploscore: %d\n",
 			   static_cast<unsigned int>(mypn), static_cast<unsigned int>(other_player->team_number()),
 			   static_cast<unsigned int>(opn), player_statistics.get_diplo_score(opn));
 		}
