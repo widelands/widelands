@@ -3426,7 +3426,9 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		           other_player->team_number() == mytn && other_player->team_number() != 0) {
 			if (player_statistics.members_in_team(mytn) > 2) {
 				const int32_t team_vs_this = my_team_score + player_statistics.get_diplo_score(opn);
-				if (team_vs_this > 0 || (team_vs_this > -10 && RNG::static_rand(8) > 0)) {
+				if ((team_vs_this > 0 && player_statistics.members_in_team(mytn) > 3) ||
+				    (team_vs_this > -10 &&
+				     RNG::static_rand(player_statistics.members_in_team(mytn) * 2 - 2) > 0)) {
 					verb_log_dbg_time(
 					   gametime,
 					   "AI Diplomacy: Player(%d) tolerates player (%d) with diploscore %d in team (%d)%s\n",
