@@ -3358,9 +3358,9 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		plan_priority = me_alone ? 0 : std::numeric_limits<int32_t>::max();
 		if (g_verbose) {
 			planned_log_append_text = me_alone ? " as last one" : " as defeated";
-			/* verb_ */ log_dbg_time(
-			  gametime, "AI Diplomacy: Player(%d) plans to leave team with priority %d",
-			  static_cast<unsigned int>(mypn), plan_priority);
+			/* verb_ */ log_dbg_time(gametime,
+			                         "AI Diplomacy: Player(%d) plans to leave team with priority %d",
+			                         static_cast<unsigned int>(mypn), plan_priority);
 		}
 	}
 
@@ -3376,9 +3376,9 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 		plan_priority = -my_team_score;
 		if (g_verbose) {
 			planned_log_append_text = myts_s;
-			/* verb_ */ log_dbg_time(
-			  gametime, "AI Diplomacy: Player(%d) plans to leave team with priority %d",
-			  static_cast<unsigned int>(mypn), plan_priority);
+			/* verb_ */ log_dbg_time(gametime,
+			                         "AI Diplomacy: Player(%d) plans to leave team with priority %d",
+			                         static_cast<unsigned int>(mypn), plan_priority);
 		}
 	}
 
@@ -3405,8 +3405,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				          static_cast<unsigned int>(player_statistics.get_worst_ally()),
 				          player_statistics.get_worst_ally());
 				/* verb_ */ log_dbg_time(
-				  gametime, "AI Diplomacy: Player(%d) plans to leave team with priority %d",
-				  static_cast<unsigned int>(mypn), plan_priority);
+				   gametime, "AI Diplomacy: Player(%d) plans to leave team with priority %d",
+				   static_cast<unsigned int>(mypn), plan_priority);
 			}
 		}
 	}
@@ -3421,7 +3421,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			int32_t priority = 0;
 
 			// We may still decide to stay if a strong enough player wants to join
-			const bool plan_to_leave = have_plan && planned_action == Widelands::DiplomacyAction::kLeaveTeam;
+			const bool plan_to_leave =
+			   have_plan && planned_action == Widelands::DiplomacyAction::kLeaveTeam;
 
 			// consider only if we are not defeated and if not resulting in a team win
 			bool accept =
@@ -3462,7 +3463,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 			if (!accept) {
 				verb_log_dbg_time(
-				   gametime, "AI Diplomacy: Player(%d)%s denies the %s of player (%d) with diploscore %d%s\n",
+				   gametime,
+				   "AI Diplomacy: Player(%d)%s denies the %s of player (%d) with diploscore %d%s\n",
 				   static_cast<unsigned int>(pda.other), myts_s.c_str(),
 				   pda.action == Widelands::DiplomacyAction::kInvite ? "invitation" : "join request",
 				   static_cast<unsigned int>(pda.sender), diploscore, other_team_score_str.c_str());
@@ -3474,7 +3476,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			} else {
 				if (have_plan) {
 					verb_log_dbg_time(
-					   gametime, "AI Diplomacy: Player(%d) replaces plan: old priority: %d, new priority: %d",
+					   gametime,
+					   "AI Diplomacy: Player(%d) replaces plan: old priority: %d, new priority: %d",
 					   static_cast<unsigned int>(mypn), plan_priority, priority);
 				}
 				planned_action = pda.action == Widelands::DiplomacyAction::kInvite ?
@@ -3486,11 +3489,11 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				plan_priority = priority;
 				if (g_verbose) {
 					planned_log_append_text = other_team_score_str;
-				   /* verb_ */ log_dbg_time(
-				      gametime,
+					/* verb_ */ log_dbg_time(
+					   gametime,
 					   "AI Diplomacy: Player(%d) plans to accept the %s of player (%d) with priority %d",
-				      static_cast<unsigned int>(mypn),
-				      pda.action == Widelands::DiplomacyAction::kInvite ? "invitation" : "join request",
+					   static_cast<unsigned int>(mypn),
+					   pda.action == Widelands::DiplomacyAction::kInvite ? "invitation" : "join request",
 					   pda.sender, plan_priority);
 				}
 			}
