@@ -1130,12 +1130,12 @@ int32_t PlayersStrengths::get_team_average_score(const Widelands::TeamNumber tn,
 		return 0;
 	}
 
-	assert(exclude_pn == 0 || get_team_numer(exclude_pn) == tn);
+	assert(exclude_pn == 0 || get_team_number(exclude_pn) == tn);
 	assert(team_scores_sum_.count(tn) == 1);
 
 	const bool exclude = exclude_pn != 0;
-	const int32_t team_sc = team_scores_sum_[tn] - exclude ? get_diplo_score(exclude_pn) : 0;
-	const uint8_t n_included = members_in_team(tn) - exclude ? 1 : 0;
+	const int32_t team_sc = team_scores_sum_[tn] - (exclude ? get_diplo_score(exclude_pn) : 0);
+	const uint8_t n_included = members_in_team(tn) - (exclude ? 1 : 0);
 	return team_sc / n_included;
 }
 
