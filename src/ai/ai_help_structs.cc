@@ -1074,8 +1074,8 @@ void PlayersStrengths::recalculate_team_power() {
 			}
 			++team_members_[item.second.team_number];
 
-			if(item.second.team_number == this_player_team &&
-			   item.second.players_diplomacy_score < worst_ally_score_) {
+			if (item.second.team_number == this_player_team &&
+			    item.second.players_diplomacy_score < worst_ally_score_) {
 				worst_ally_score_ = item.second.players_diplomacy_score;
 				worst_ally_ = item.first;
 			}
