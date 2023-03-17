@@ -1154,7 +1154,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 
 	bool invite = false;  // Only to check fall through case
 
-	if (my_team_sc < other_team_sc) {
+	if (my_team_sc < other_team_sc && can_join) {
 		if (other_alone && (me_alone || my_team_sc > static_cast<int>(RNG::static_rand(20)))) {
 			// If we're both alone, we try to be polite and invite.
 			// Or if we have a good enough team, we won't leave it for a lone player, but we try to
@@ -1170,15 +1170,6 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 				return;
 			}
 		} else {  // Other has team, or own team is less desirable than other player alone
-			if (!can_join) {
-				verb_log_dbg_time(gametime,
-				                  "AI Diplomacy: Player(%d)%s cannot request to join player (%d) with "
-				                  "diploscore %d%s\n",
-				                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
-				                  static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
-				return;
-			}
-
 			verb_log_dbg_time(
 			   gametime,
 			   "AI Diplomacy: Player(%d)%s requests to join player (%d) with diploscore %d%s\n",
@@ -1188,7 +1179,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 			set_last_time_requested(gametime, pn);
 			return;
 		}
-	} else {  // Own team is more desirable
+	} else {  // Own team is more desirable, or everyone else is teamed up against us
 		if (other_alone) {
 			verb_log_dbg_time(gametime,
 			                  "AI Diplomacy: Player(%d)%s declines to invite player (%d) with "
@@ -1197,14 +1188,8 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 			                  static_cast<unsigned int>(pn), get_diplo_score(pn));
 			return;
 		}
-		if (!can_invite) {
-			verb_log_dbg_time(gametime,
-			                  "AI Diplomacy: Player(%d)%s cannot invite player (%d) with diploscore "
-			                  "%d%s\n",
-			                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
-			                  static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
-			return;
-		}
+
+		// !other_alone means can_invite must be true
 		invite = true;  // Handle in fall through with above
 	}
 
