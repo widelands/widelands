@@ -3368,9 +3368,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 			// consider only if we are not defeated and if not resulting in a team win
 			bool accept = !me_def &&
-			              std::max<uint8_t>(
-			                 1, player_statistics.members_in_team(
-			                       pda.action == Widelands::DiplomacyAction::kInvite ? other_tn : mytn)) <
+			              player_statistics.members_in_team(
+			                 pda.action == Widelands::DiplomacyAction::kInvite ? other_tn : mytn) <
 			                 player_statistics.players_active() - 1;
 
 			// accept if diploscore high, else accept only 50%

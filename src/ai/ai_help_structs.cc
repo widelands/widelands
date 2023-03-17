@@ -1054,8 +1054,11 @@ void PlayersStrengths::remove_stat(const Widelands::PlayerNumber pn) {
 // After statistics for team members are updated, this calculation is needed
 void PlayersStrengths::recalculate_team_power() {
 	team_powers_.clear();
+	team_scores_sum_.clear();
 	team_members_.clear();
 	active_players_ = 0U;
+	worst_ally_ = 0;
+	worst_ally_score_ = 0;
 	for (auto& item : all_stats_) {
 		if (item.second.defeated) {
 			continue;
@@ -1064,10 +1067,20 @@ void PlayersStrengths::recalculate_team_power() {
 		if (item.second.team_number > 0) {  // is a member of a team
 			if (team_powers_.count(item.second.team_number) > 0) {
 				team_powers_[item.second.team_number] += item.second.players_power;
+				team_scores_sum_[item.second.team_number] += item.second.players_diplomacy_score;
 			} else {
 				team_powers_[item.second.team_number] = item.second.players_power;
+				team_scores_sum_[item.second.team_number] = item.second.players_diplomacy_score;
 			}
 			++team_members_[item.second.team_number];
+
+			if(item.second.team_number == this_player_team &&
+			   item.second.players_diplomacy_score < worst_ally_score_) {
+				worst_ally_score_ = item.second.players_diplomacy_score;
+				worst_ally_ = item.first;
+			}
+		} else {
+			team_members_[0] = 1;
 		}
 	}
 	verb_log_dbg("AI: %d players are active\n", active_players_);
@@ -1101,6 +1114,14 @@ bool PlayersStrengths::get_is_alone(const Widelands::PlayerNumber pn) {
 	return tn == 0 || members_in_team(tn) == 1;
 }
 
+Widelands::PlayerNumber PlayersStrengths::get_worst_ally() const {
+	return worst_ally_;
+}
+
+int32_t PlayersStrengths::get_worst_ally_score() const {
+	return worst_ally_score_;
+}
+
 // Returns the average diploscore of the members in the given team,
 // excluding the given player
 int32_t PlayersStrengths::get_team_average_score(const Widelands::TeamNumber tn,
@@ -1109,19 +1130,13 @@ int32_t PlayersStrengths::get_team_average_score(const Widelands::TeamNumber tn,
 		return 0;
 	}
 
-	int32_t team_sc = 0;
-	uint8_t excluded = 0;
-	for (auto& item : all_stats_) {
-		if (item.second.team_number != tn || item.second.defeated) {
-			continue;
-		}
-		if (item.first == exclude_pn) {
-			++excluded;
-			continue;
-		}
-		team_sc += item.second.players_diplomacy_score;
-	}
-	return team_sc / (members_in_team(tn) - excluded);
+	assert(exclude_pn == 0 || get_team_numer(exclude_pn) == tn);
+	assert(team_scores_sum_.count(tn) == 1);
+
+	const bool exclude = exclude_pn != 0;
+	const int32_t team_sc = team_scores_sum_[tn] - exclude ? get_diplo_score(exclude_pn) : 0;
+	const uint8_t n_included = members_in_team(tn) - exclude ? 1 : 0;
+	return team_sc / n_included;
 }
 
 // Returns power of a team
