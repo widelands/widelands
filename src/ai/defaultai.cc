@@ -3483,18 +3483,21 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 					   "AI Diplomacy: Player(%d) replaces plan: old priority: %d, new priority: %d",
 					   static_cast<unsigned int>(mypn), plan_priority, priority);
 					if (planned_action != Widelands::DiplomacyAction::kLeaveTeam) {
-						verb_log_dbg_time(
-						   gametime,
-						   "AI Diplomacy: Player(%d)%s denies the %s of player (%d) with diploscore %d%s\n",
-						   static_cast<unsigned int>(mypn), myts_s.c_str(),
-						   planned_action == Widelands::DiplomacyAction::kAcceptInvite ? "invitation" : "join request",
-						   static_cast<unsigned int>(planned_opn), planned_other_score,
-							planned_log_append_text.c_str());
-						game().send_player_diplomacy(mypn,
-						                             (planned_action == Widelands::DiplomacyAction::kAcceptInvite ?
-                                                   Widelands::DiplomacyAction::kRefuseInvite :
-                                                   Widelands::DiplomacyAction::kRefuseJoin),
-						                             planned_opn);
+						verb_log_dbg_time(gametime,
+						                  "AI Diplomacy: Player(%d)%s denies the %s of player (%d) with "
+						                  "diploscore %d%s\n",
+						                  static_cast<unsigned int>(mypn), myts_s.c_str(),
+						                  planned_action == Widelands::DiplomacyAction::kAcceptInvite ?
+                                       "invitation" :
+                                       "join request",
+						                  static_cast<unsigned int>(planned_opn), planned_other_score,
+						                  planned_log_append_text.c_str());
+						game().send_player_diplomacy(
+						   mypn,
+						   (planned_action == Widelands::DiplomacyAction::kAcceptInvite ?
+                         Widelands::DiplomacyAction::kRefuseInvite :
+                         Widelands::DiplomacyAction::kRefuseJoin),
+						   planned_opn);
 					}
 				}
 				planned_action = pda.action == Widelands::DiplomacyAction::kInvite ?
