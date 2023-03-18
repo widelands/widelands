@@ -852,7 +852,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 	return InteractiveGameBase::handle_key(down, code);
 }
 
-std::string InteractivePlayer::get_fastplace_help() {
+std::string InteractivePlayer::get_fastplace_help() const {
 	const Widelands::TribeDescr& tribe = player().tribe();
 	std::vector<FastplaceShortcut> fp_sc_v = get_active_fastplace_shortcuts(tribe.name());
 	if (fp_sc_v.empty()) {

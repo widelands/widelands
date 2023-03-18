@@ -1059,6 +1059,8 @@ static int L_get_shortcut(lua_State* L) {
 /* RST
 .. method:: get_ingame_shortcut_help()
 
+   .. versionadded:: 1.2
+
    Returns the list of current in-game keyboard shortcuts formatted as richtext.
 
    :returns: The richtext formatted list of shortcuts
@@ -1071,6 +1073,8 @@ static int L_get_ingame_shortcut_help(lua_State* L) {
 
 /* RST
 .. method:: get_fastplace_help()
+
+   .. versionadded:: 1.2
 
    Returns the list of current fastplace shortcuts for the current player formatted as richtext.
 
@@ -1088,6 +1092,8 @@ static int L_get_fastplace_help(lua_State* L) {
 
 /* RST
 .. method:: get_editor_shortcut_help()
+
+   .. versionadded:: 1.2
 
    Returns the list of current map editor keyboard shortcuts formatted as richtext.
 

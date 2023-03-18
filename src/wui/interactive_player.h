@@ -90,7 +90,7 @@ public:
 
 	/** Get the richtext formatted help of the current fastplace shortcuts for the player
 	    including a header. */
-	std::string get_fastplace_help();
+	std::string get_fastplace_help() const;
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// Indicate the given screen pixel to the player by painting an arrow. Use this for pointing the
