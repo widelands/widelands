@@ -3337,6 +3337,8 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 
 // Dealing with diplomacy actions
 void DefaultAI::diplomacy_actions(const Time& gametime) {
+	// Make sure we use reasonably up to date stats
+	update_player_stat(gametime);
 
 	const Widelands::PlayerNumber mypn = player_number();
 	const Widelands::Player* me = game().get_player(mypn);
