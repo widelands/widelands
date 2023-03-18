@@ -3389,10 +3389,11 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 	// Check for undesirable teammates
 	if (planned_action == kNoAction && player_statistics.get_worst_ally_score() < -15) {
-		const int32_t team_vs_worst = my_team_score + player_statistics.get_worst_ally_score();
-		if ((team_vs_worst > 0 && player_statistics.members_in_team(mytn) > 3) ||
-		    (team_vs_worst > -10 &&
-		     RNG::static_rand(player_statistics.members_in_team(mytn) * 2 - 2) > 0)) {
+		const uint8_t my_team_size = player_statistics.members_in_team(mytn);
+		const int32_t team_vs_worst =
+		   (my_team_size < 3 ? 0 : my_team_score) + player_statistics.get_worst_ally_score();
+		if ((team_vs_worst > 0 && my_team_size > 3) ||
+		    (team_vs_worst > -10 && RNG::static_rand(my_team_size * 2 - 2) > 0)) {
 			verb_log_dbg_time(gametime,
 			                  "AI Diplomacy: Player(%d) tolerates player (%d) with diploscore "
 			                  "%d in team (%d)%s\n",
