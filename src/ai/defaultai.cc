@@ -3349,7 +3349,6 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	   static_cast<Widelands::DiplomacyAction>(std::numeric_limits<uint8_t>::max());
 	constexpr int32_t kNoScore = std::numeric_limits<int32_t>::min();
 
-	bool have_plan = false;
 	int32_t plan_priority = 0;
 	Widelands::DiplomacyAction planned_action = kNoAction;
 	Widelands::PlayerNumber planned_opn = 0;
@@ -3362,7 +3361,6 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	// If defeated, just clean up by rejecting everything.
 	if (me->team_number() != 0 && (me_alone || me_def)) {
 		planned_action = Widelands::DiplomacyAction::kLeaveTeam;
-		have_plan = true;
 		plan_priority = me_alone ? 0 : std::numeric_limits<int32_t>::max();
 		if (g_verbose) {
 			planned_log_append_text = me_alone ? " as last one" : " as defeated";
@@ -3377,10 +3375,9 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	const std::string myts_s = me_alone ? "" : format(" with team score %d", my_team_score);
 
 	// Check desirability of current team
-	if (!have_plan && !me_alone && my_team_score < 0 &&
+	if (planned_action == kNoAction && !me_alone && my_team_score < 0 &&
 	    (my_team_score < -10 || RNG::static_rand(8) == 0)) {
 		planned_action = Widelands::DiplomacyAction::kLeaveTeam;
-		have_plan = true;
 		plan_priority = -my_team_score;
 		if (g_verbose) {
 			planned_log_append_text = myts_s;
@@ -3391,7 +3388,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	}
 
 	// Check for undesirable teammates
-	if (!have_plan && player_statistics.get_worst_ally_score() < -15) {
+	if (planned_action == kNoAction && player_statistics.get_worst_ally_score() < -15) {
 		const int32_t team_vs_worst = my_team_score + player_statistics.get_worst_ally_score();
 		if ((team_vs_worst > 0 && player_statistics.members_in_team(mytn) > 3) ||
 		    (team_vs_worst > -10 &&
@@ -3405,7 +3402,6 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			                  static_cast<unsigned int>(mytn), myts_s.c_str());
 		} else {
 			planned_action = Widelands::DiplomacyAction::kLeaveTeam;
-			have_plan = true;
 			plan_priority = std::max(0, -team_vs_worst);
 			if (g_verbose) {
 				planned_log_append_text =
@@ -3428,11 +3424,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			// We have to use team score changes to make it comparable with team leave priorities
 			int32_t priority = 0;
 
-			assert(!(planned_action == kNoAction && have_plan));
-
 			// We may still decide to stay if a strong enough player wants to join
-			const bool plan_to_leave =
-			   have_plan && planned_action == Widelands::DiplomacyAction::kLeaveTeam;
+			const bool plan_to_leave = planned_action == Widelands::DiplomacyAction::kLeaveTeam;
 
 			// consider only if we are not defeated and if not resulting in a team win
 			bool accept =
@@ -3469,7 +3462,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				}
 			}
 
-			accept = accept && (!have_plan || plan_priority < priority);
+			accept = accept && (planned_action == kNoAction || plan_priority < priority);
 
 			if (!accept) {
 				verb_log_dbg_time(
@@ -3484,7 +3477,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
                                              Widelands::DiplomacyAction::kRefuseJoin),
 				                             pda.sender);
 			} else {
-				if (have_plan) {
+				if (planned_action != kNoAction) {
 					verb_log_dbg_time(
 					   gametime,
 					   "AI Diplomacy: Player(%d) replaces plan: old priority: %d, new priority: %d",
@@ -3495,7 +3488,6 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
                                 Widelands::DiplomacyAction::kAcceptJoin;
 				planned_opn = pda.sender;
 				planned_other_score = diploscore;
-				have_plan = true;
 				plan_priority = priority;
 				if (g_verbose) {
 					planned_log_append_text = other_team_score_str;
@@ -3511,7 +3503,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	}
 
 	// Execute only one action that changes team line-ups
-	if (have_plan) {
+	if (planned_action != kNoAction) {
 		assert(planned_action == Widelands::DiplomacyAction::kLeaveTeam ||
 		       planned_action == Widelands::DiplomacyAction::kAcceptInvite ||
 		       planned_action == Widelands::DiplomacyAction::kAcceptJoin);
