@@ -1155,7 +1155,7 @@ void DefaultAI::late_initialization() {
 		taskPool.push_back(std::make_shared<SchedulerTask>(
 		   std::max<Time>(
 		      gametime + kStatUpdateInterval * 4 + Duration(RNG::static_rand(5 * 60) * 1000),
-			   Time((10 + RNG::static_rand(10)) * 60 * 1000)),
+		      Time((10 + RNG::static_rand(10)) * 60 * 1000)),
 		   SchedulerTaskId::kDiplomacy, 7, "diplomacy actions"));
 	}
 
@@ -3345,8 +3345,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	const bool me_alone = player_statistics.get_is_alone(mypn);
 
 	// TODO(tothxa): Check all uses whether it's safe to add an invalid value to the enum
-	constexpr Widelands::DiplomacyAction kNoAction = static_cast<Widelands::DiplomacyAction>(
-	                                                    std::numeric_limits<uint8_t>::max());
+	constexpr Widelands::DiplomacyAction kNoAction =
+	   static_cast<Widelands::DiplomacyAction>(std::numeric_limits<uint8_t>::max());
 	constexpr int32_t kNoScore = std::numeric_limits<int32_t>::min();
 
 	bool have_plan = false;
