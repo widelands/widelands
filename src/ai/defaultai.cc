@@ -545,7 +545,9 @@ void DefaultAI::think() {
 			break;
 		case SchedulerTaskId::kDiplomacy:
 			diplomacy_actions(gametime);
-			set_taskpool_task_time(gametime + kDiplomacyInterval, SchedulerTaskId::kDiplomacy);
+			set_taskpool_task_time(
+			   gametime + kDiplomacyInterval + Duration(RNG::static_rand(30) * 1000),
+			   SchedulerTaskId::kDiplomacy);
 			break;
 		case SchedulerTaskId::kUnset:
 			NEVER_HERE();
@@ -1152,7 +1154,8 @@ void DefaultAI::late_initialization() {
 		// and allow statistics to settle after loading game
 		taskPool.push_back(std::make_shared<SchedulerTask>(
 		   std::max<Time>(
-		      gametime + kStatUpdateInterval * 5, Time((10 + RNG::static_rand(10)) * 60 * 1000)),
+		      gametime + kStatUpdateInterval * 4 + Duration(RNG::static_rand(5 * 60) * 1000),
+			   Time((10 + RNG::static_rand(10)) * 60 * 1000)),
 		   SchedulerTaskId::kDiplomacy, 7, "diplomacy actions"));
 	}
 
@@ -3341,11 +3344,16 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	const bool me_def = me->is_defeated();
 	const bool me_alone = player_statistics.get_is_alone(mypn);
 
+	// TODO(tothxa): Check all uses whether it's safe to add an invalid value to the enum
+	constexpr Widelands::DiplomacyAction kNoAction = static_cast<Widelands::DiplomacyAction>(
+	                                                    std::numeric_limits<uint8_t>::max());
+	constexpr int32_t kNoScore = std::numeric_limits<int32_t>::min();
+
 	bool have_plan = false;
 	int32_t plan_priority = 0;
-	Widelands::DiplomacyAction planned_action;
+	Widelands::DiplomacyAction planned_action = kNoAction;
 	Widelands::PlayerNumber planned_opn = 0;
-	int32_t planned_other_score;
+	int32_t planned_other_score = kNoScore;
 	std::string planned_log_append_text;
 
 	// If we are defeated or the last one in a team, then leave team, but check pending requests
@@ -3403,7 +3411,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				planned_log_append_text =
 				   format("%s because of player (%d) with diploscore %d", myts_s,
 				          static_cast<unsigned int>(player_statistics.get_worst_ally()),
-				          player_statistics.get_worst_ally());
+				          player_statistics.get_worst_ally_score());
 				/* verb_ */ log_dbg_time(
 				   gametime, "AI Diplomacy: Player(%d) plans to leave team with priority %d",
 				   static_cast<unsigned int>(mypn), plan_priority);
@@ -3419,6 +3427,8 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 			// We have to use team score changes to make it comparable with team leave priorities
 			int32_t priority = 0;
+
+			assert(!(planned_action == kNoAction && have_plan));
 
 			// We may still decide to stay if a strong enough player wants to join
 			const bool plan_to_leave =
@@ -3518,6 +3528,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 				action_str = "invitation";
 				FALLS_THROUGH;
 			case Widelands::DiplomacyAction::kAcceptJoin:
+				assert(planned_other_score != kNoScore);
 				verb_log_dbg_time(
 				   gametime,
 				   "AI Diplomacy: Player(%d)%s accepts the %s of player (%d) with diploscore %d%s.\n",
