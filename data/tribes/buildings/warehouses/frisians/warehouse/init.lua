@@ -6,6 +6,7 @@ wl.Descriptions():new_warehouse_type {
    name = "frisians_warehouse",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Warehouse"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -24,8 +25,6 @@ wl.Descriptions():new_warehouse_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {50, 69},
          frames = 10,
          columns = 5,
@@ -35,8 +34,6 @@ wl.Descriptions():new_warehouse_type {
    },
    animations = {
       build = {
-         directory = dirname,
-         basename = "build",
          hotspot = {50, 69}
       }
    },

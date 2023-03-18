@@ -10,7 +10,8 @@ import subprocess
 import sys
 import tempfile
 import unittest
-import platform
+import time
+import datetime
 
 #Python2/3 compat code for iterating items
 try:
@@ -32,6 +33,15 @@ else:
     def bytes_to_str(bytes):
         return str(bytes)
 
+has_timeout = "TimeoutExpired" in dir(subprocess)
+
+if "monotonic" in dir(time):
+    get_time = time.monotonic
+elif "perf_counter" in dir(time):
+    get_time = time.perf_counter
+else:
+    get_time = time.time
+
 def datadir():
     return os.path.join(os.path.dirname(__file__), "data")
 
@@ -47,6 +57,7 @@ class WidelandsTestCase(unittest.TestCase):
     path_to_widelands_binary = None
     keep_output_around = False
     ignore_error_code = False
+    timeout = 600
 
     def __init__(self, test_script, **wlargs):
         unittest.TestCase.__init__(self)
@@ -68,6 +79,7 @@ class WidelandsTestCase(unittest.TestCase):
             else:
                 os.makedirs(self.run_dir)
         self.widelands_returncode = 0
+        self.wl_timed_out = False
 
     def run(self, result=None):
         self.currentResult = result # remember result for use in tearDown
@@ -105,21 +117,30 @@ class WidelandsTestCase(unittest.TestCase):
               stdout_file.write(" ")
             stdout_file.write("\n")
 
+            start_time = get_time()
             widelands = subprocess.Popen(
-                    args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            while 1:
-                line = widelands.stdout.readline()
-                if not line:
-                    break
-                stdout_file.write(bytes_to_str(line))
-                stdout_file.flush()
-            widelands.communicate()
-            stdout_file.write("\nReturned from Widelands, return code is %d\n" % widelands.returncode)
+                    args, shell=False, stdout=stdout_file, stderr=subprocess.STDOUT)
+            if has_timeout:
+                try:
+                    widelands.communicate(timeout = self.timeout)
+                except subprocess.TimeoutExpired:
+                    widelands.kill()
+                    widelands.communicate()
+                    self.wl_timed_out = True
+                    stdout_file.write("\nTimed out.\n")
+            else:
+                widelands.communicate()
+            end_time = get_time()
+            stdout_file.flush()
+            self.duration = datetime.timedelta(seconds = end_time - start_time)
+            stdout_file.write("\nReturned from Widelands in {}, return code is {:d}\n".format(
+                self.duration, widelands.returncode))
             self.widelands_returncode = widelands.returncode
         return stdout_filename
 
     def runTest(self):
-        out("\n  Running Widelands ... ")
+        out("\nStarting test case {}\n".format(self._test_script))
+        out("  Running Widelands ...\n")
         stdout_filename = self.run_widelands(self._wlargs, 0)
         stdout = open(stdout_filename, "r").read()
         self.verify_success(stdout, stdout_filename)
@@ -130,7 +151,7 @@ class WidelandsTestCase(unittest.TestCase):
         while not all(savegame_done.values()):
             for savegame in sorted(savegame_done):
                 if not savegame_done[savegame]: break
-            out("  Loading savegame: {} ... ".format(savegame))
+            out("  Loading savegame: {} ...\n".format(savegame))
             stdout_filename = self.run_widelands({ "loadgame": os.path.join(
                 self.run_dir, "save", "{}.wgf".format(savegame))}, which_time)
             which_time += 1
@@ -142,18 +163,22 @@ class WidelandsTestCase(unittest.TestCase):
             self.verify_success(stdout, stdout_filename)
 
     def verify_success(self, stdout, stdout_filename):
+        out("    Elapsed time: {}\n".format(self.duration))
         # Catch instabilities with SDL in CI environment
         if self.widelands_returncode == 2:
             print("SDL initialization failed. TEST SKIPPED.")
             with open(stdout_filename, 'r') as stdout_file:
                 for line in stdout_file.readlines():
                     print(line.strip())
-            out("SKIPPED.\n")
+            out("  SKIPPED.\n")
         else:
             common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
                     self.run_dir, stdout_filename, stdout)
+            if self.wl_timed_out:
+                out("  TIMED OUT.\n")
+                self.assertTrue(False, "The test timed out. {}".format(common_msg))
             if self.widelands_returncode == 1 and self.ignore_error_code:
-                out("IGNORING error code 1\n")
+                out("  IGNORING error code 1\n")
             else:
                 self.assertTrue(self.widelands_returncode == 0,
                     "Widelands exited abnormally. {}".format(common_msg)
@@ -164,7 +189,7 @@ class WidelandsTestCase(unittest.TestCase):
             self.assertFalse("lua_errors.cc" in stdout,
                 "Not all tests pass. {}.".format(common_msg)
             )
-            out("done.\n")
+            out("  done.\n")
         if self.keep_output_around:
             out("    stdout: {}\n".format(stdout_filename))
 
@@ -191,28 +216,41 @@ def parse_args():
         help = "Assume success on return code 1, to allow running the tests "
         "without ASan reporting false positives."
     )
+    if has_timeout:
+        p.add_argument("-t", "--timeout", type=float, default = "10",
+            help = "Set the timeout duration for test cases in minutes. Default is 10 minutes."
+        )
+    else:
+        p.epilog = "Python version does not support timeout. -t, --timeout is disabled. " \
+                   "Python >=3.3 is required for timeout support."
 
     args = p.parse_args()
 
     if args.binary is None:
         potential_binaries = (
-            glob("widelands") +
-            glob("src/widelands") +
-            glob("../*/src/widelands")
+            glob(os.path.join(os.curdir, "widelands")) +
+            glob(os.path.join(os.path.dirname(__file__), "widelands")) +
+            glob(os.path.join("src", "widelands")) +
+            glob(os.path.join("..", "*", "src", "widelands"))
         )
-        if not potential_binaries:
+        if potential_binaries:
+            args.binary = potential_binaries[0]
+        elif "which" in dir(shutil):
+            args.binary = shutil.which("widelands")
+
+        if args.binary is None:
             p.error("No widelands binary found. Please specify with -b.")
-        args.binary = potential_binaries[0]
+
     return args
 
 
 def discover_loadgame_tests(regexp, suite):
     """Add all tests using --loadgame to the 'suite'."""
-    for fixture in glob(os.path.join("test", "save", "*")):
+    for fixture in sorted(glob(os.path.join("test", "save", "*"))):
         if not os.path.isdir(fixture):
             continue
-        savegame = glob(os.path.join(fixture, "*.wgf"))[0]
-        for test_script in glob(os.path.join(fixture, "test*.lua")):
+        savegame = sorted(glob(os.path.join(fixture, "*.wgf")))[0]
+        for test_script in sorted(glob(os.path.join(fixture, "test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
             suite.addTest(
@@ -221,10 +259,10 @@ def discover_loadgame_tests(regexp, suite):
 
 def discover_scenario_tests(regexp, suite):
     """Add all tests using --scenario to the 'suite'."""
-    for wlmap in glob(os.path.join("test", "maps", "*")):
+    for wlmap in sorted(glob(os.path.join("test", "maps", "*"))):
         if not os.path.isdir(wlmap):
             continue
-        for test_script in glob(os.path.join(wlmap, "scripting", "test*.lua")):
+        for test_script in sorted(glob(os.path.join(wlmap, "scripting", "test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
             suite.addTest(
@@ -233,10 +271,10 @@ def discover_scenario_tests(regexp, suite):
 
 def discover_editor_tests(regexp, suite):
     """Add all tests needing --editor to the 'suite'."""
-    for wlmap in glob(os.path.join("test", "maps", "*")):
+    for wlmap in sorted(glob(os.path.join("test", "maps", "*"))):
         if not os.path.isdir(wlmap):
             continue
-        for test_script in glob(os.path.join(wlmap, "scripting", "editor_test*.lua")):
+        for test_script in sorted(glob(os.path.join(wlmap, "scripting", "editor_test*.lua"))):
             if regexp is not None and not re.search(regexp, test_script):
                 continue
             suite.addTest(
@@ -251,8 +289,13 @@ def main():
     WidelandsTestCase.do_use_random_directory = not args.nonrandom
     WidelandsTestCase.keep_output_around = args.keep_around
     WidelandsTestCase.ignore_error_code = args.ignore_error_code
+    if has_timeout:
+        WidelandsTestCase.timeout = args.timeout * 60
+    else:
+        out("Python version does not support timeout on subprocesses,\n"
+            "test cases may run indefinitely.\n\n")
 
-    all_files = [os.path.basename(filename) for filename in glob("test/test_*.py") ]
+    all_files = [os.path.basename(filename) for filename in sorted(glob("test/test_*.py")) ]
     if args.regexp:
         all_files = [filename for filename in all_files if re.search(args.regexp, filename) ]
 

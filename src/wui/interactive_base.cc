@@ -56,6 +56,7 @@
 #include "wlapplication_options.h"
 #include "wui/attack_window.h"
 #include "wui/building_statistics_menu.h"
+#include "wui/buildingwindow.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
 #include "wui/economy_options_window.h"
@@ -1638,8 +1639,8 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
 	upcast(Widelands::Building, building, immovable);
 	assert(building);
-	UI::UniqueWindow::Registry& registry =
-	   unique_windows().get_registry(format("building_%d", building->serial()));
+	BuildingWindow::Registry& registry =
+	   unique_windows().get_building_window_registry(format("building_%d", building->serial()));
 
 	switch (building->descr().type()) {
 	case Widelands::MapObjectType::CONSTRUCTIONSITE:

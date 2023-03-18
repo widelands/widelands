@@ -171,8 +171,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 			   std::make_pair(1.0f, std::unique_ptr<NonPackedMipMapEntry>(new NonPackedMipMapEntry(
 			                           table.get_table("pictures")->array_entries<std::string>()))));
 		} else {
-			// TODO(GunChleoc): When all animations have been converted, require that
-			// animation_directory is not empty.
 			add_available_scales(basename, animation_directory.empty() ?
                                            table.get_string("directory") :
                                            animation_directory);

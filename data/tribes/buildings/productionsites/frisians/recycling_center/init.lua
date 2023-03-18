@@ -6,6 +6,7 @@ wl.Descriptions():new_productionsite_type {
    name = "frisians_recycling_center",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Recycling Center"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -24,8 +25,6 @@ wl.Descriptions():new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {50, 70},
          frames = 10,
          columns = 5,
@@ -33,8 +32,6 @@ wl.Descriptions():new_productionsite_type {
          fps = 10
       },
       working_metal = {
-         directory = dirname,
-         basename = "working_metal",
          hotspot = {50, 71}, -- the whole animation is one pixel lower
          frames = 10,
          columns = 5,
@@ -42,8 +39,6 @@ wl.Descriptions():new_productionsite_type {
          fps = 10
       },
       working_fur = {
-         directory = dirname,
-         basename = "working_fur",
          hotspot = {50, 70},
          frames = 10,
          columns = 5,
@@ -53,8 +48,6 @@ wl.Descriptions():new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {50, 58}
       }
    },

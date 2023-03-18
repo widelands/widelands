@@ -27,7 +27,7 @@
  */
 struct WarehouseWindow : public BuildingWindow {
 	WarehouseWindow(InteractiveBase& parent,
-	                UI::UniqueWindow::Registry& reg,
+	                BuildingWindow::Registry& reg,
 	                Widelands::Warehouse&,
 	                bool avoid_fastclick,
 	                bool workarea_preview_wanted);

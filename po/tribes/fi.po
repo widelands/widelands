@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-04 03:15+0000\n"
+"POT-Creation-Date: 2023-03-13 02:46+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -936,31 +936,31 @@ msgid "Fortress"
 msgstr "Linnoitus"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:58
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:55
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your fortress."
 msgstr "Sotilaasi ovat miehittäneet linnoituksesi."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:60
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:57
 msgctxt "frisians_building"
 msgid "Your fortress discovered an aggressor."
 msgstr "Linnoituksesi on havainnut hyökkääjän."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:62
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:59
 msgctxt "frisians_building"
 msgid "Your fortress is under attack."
 msgstr "Linnoitustasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:64
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the fortress."
 msgstr "Vihollinen on päihittänyt sotilaasi linnoituksella."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:66
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:63
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
 msgstr "Sotilaasi ovat päihittäneet vihollisen linnoituksella."
@@ -972,31 +972,31 @@ msgid "Outpost"
 msgstr "Etuvartioasema"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:56
+#: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:53
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your outpost."
 msgstr "Sotilaasi ovat miehittäneet etuvartioasemasi."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:58
+#: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:55
 msgctxt "frisians_building"
 msgid "Your outpost discovered an aggressor."
 msgstr "Etuvartiostosi on havainnut hyökkääjän."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:60
+#: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:57
 msgctxt "frisians_building"
 msgid "Your outpost is under attack."
 msgstr "Etuvartiostoasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:62
+#: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:59
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the outpost."
 msgstr "Vihollinen on päihittänyt sotilaasi etuvartiostolla."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:64
+#: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:61
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the outpost."
 msgstr "Sotilaasi ovat päihittäneet vihollisen etuvartiostolla."
@@ -1008,31 +1008,31 @@ msgid "Sentinel"
 msgstr "Vahtimökki"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:54
+#: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:51
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your sentinel."
 msgstr "Sotilaasi ovat ottaneet haltuun vahtimökkisi."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:56
+#: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:53
 msgctxt "frisians_building"
 msgid "Your sentinel discovered an aggressor."
 msgstr "Vahtimökkisi on havainnut vihollisia."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:58
+#: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:55
 msgctxt "frisians_building"
 msgid "Your sentinel is under attack."
 msgstr "Vahtimökkiäsi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:60
+#: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:57
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the sentinel."
 msgstr "Vihollinen on päihittänyt sotilaasi vahtimökillä."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:62
+#: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:59
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the sentinel."
 msgstr "Sotilaasi ovat päihittäneet vihollisen vahtimökillä."
@@ -1044,31 +1044,31 @@ msgid "Tower"
 msgstr "Torni"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:59
+#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:56
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your tower."
 msgstr "Sotilaasi ovat ottaneet haltuun oman tornisi."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:61
+#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:58
 msgctxt "frisians_building"
 msgid "Your tower discovered an aggressor."
 msgstr "Tornisi on havainnut hyökkääjän."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:63
+#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:60
 msgctxt "frisians_building"
 msgid "Your tower is under attack."
 msgstr "Torniasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:65
+#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the tower."
 msgstr "Vihollinen on päihittänyt sotilaasi tornilla."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:67
+#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:64
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the tower."
 msgstr "Sotilaasi ovat päihittäneet vihollisen tornilla."
@@ -1080,31 +1080,31 @@ msgid "Wooden Tower"
 msgstr "Puutorni"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:63
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:60
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your wooden tower."
 msgstr "Sotilaasi ovat ottaneet haltuun puutornisi."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:65
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:62
 msgctxt "frisians_building"
 msgid "Your wooden tower discovered an aggressor."
 msgstr "Puutornisi on havainnut vihollisia."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:67
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:64
 msgctxt "frisians_building"
 msgid "Your wooden tower is under attack."
 msgstr "Puutorniasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:69
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:66
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the wooden tower."
 msgstr "Vihollinen on päihittänyt sotilaasi puutornilla."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:71
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:68
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the wooden tower."
 msgstr "Sotilaasi ovat päihittäneet vihollisen puutornilla."
@@ -1116,31 +1116,31 @@ msgid "High Wooden Tower"
 msgstr "Suurpuutorni"
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:43
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:40
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your high wooden tower."
 msgstr "Sotilaasi ovat ottaneet haltuun suurpuutornisi."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:45
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:42
 msgctxt "frisians_building"
 msgid "Your high wooden tower discovered an aggressor."
 msgstr "Suurpuutornisi on havainnut vihollisen."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:47
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:44
 msgctxt "frisians_building"
 msgid "Your high wooden tower is under attack."
 msgstr "Suurpuutorniasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:49
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:46
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the high wooden tower."
 msgstr "Vihollinen on päihittänyt sotilaasi suurpuutornilla."
 
 #. TRANSLATORS: Message sent by a Frisian military site
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:51
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:48
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the high wooden tower."
 msgstr "Sotilaasi ovat päihittäneet vihollisen suurpuutornilla."
@@ -1221,28 +1221,28 @@ msgstr "Cassavan istuttamo"
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:49
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:72
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:48
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:58
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:58
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:72
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:77
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:57
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:59
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:73
-#: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:59
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:81
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:56
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:56
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:56
-#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:69
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:64
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:79
-#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:72
-#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:58
-#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:87
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:52
+#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:54
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:66
+#: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:56
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:74
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:51
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:51
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:75
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:76
+#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:49
 msgid "working"
 msgstr "työskentelee"
 
@@ -1264,8 +1264,8 @@ msgstr "cassavan sadonkorjuu"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:65
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:75
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:74
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:100
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:93
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:78
 msgid "No Fields"
 msgstr "Ei peltoja"
 
@@ -1277,8 +1277,8 @@ msgstr "Ei peltoja"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:76
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:75
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:101
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:94
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:79
 msgid "Out of Fields"
 msgstr "Pellonpuutteessa"
 
@@ -1298,8 +1298,8 @@ msgstr "Cassava-juuren kasvattaja"
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
-#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:80
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
 msgid "baking bread"
 msgstr "Leivän leivonta"
 
@@ -1418,12 +1418,12 @@ msgstr "Ruoansäilöjä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:61
-#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:70
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:62
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:77
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:54
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:62
 msgid "preparing a ration"
 msgstr "Ruoka-annoksen valmistus"
 
@@ -1438,7 +1438,7 @@ msgstr "Sulattamo"
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:88
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:92
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:100
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:117
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:110
 msgid "smelting gold"
 msgstr "Kullan sulatus"
 
@@ -1471,12 +1471,12 @@ msgstr "Kullankaivuun sija"
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:67
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:86
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:91
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:56
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:72
 msgid "mining gold"
 msgstr "kullan louhinta"
 
@@ -1485,10 +1485,10 @@ msgstr "kullan louhinta"
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:96
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:85
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:102
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:81
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:104
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:95
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:98
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:90
 msgid "No Gold"
 msgstr "Ei kultaa"
 
@@ -1497,10 +1497,10 @@ msgstr "Ei kultaa"
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:88
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:97
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:86
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:103
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:105
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:105
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:91
 msgid "Main Gold Vein Exhausted"
 msgstr "Ensisijainen kultasuoni ehtynyt"
 
@@ -1569,11 +1569,11 @@ msgid "Jungle Preserver’s Hut"
 msgstr "Viidakonsuojelijan maja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
-#: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:51
+#: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:48
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:55
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:45
-#: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:49
 msgid "planting trees"
 msgstr "Puiden istutus"
 
@@ -1594,7 +1594,7 @@ msgstr "leikkaa liaaneja"
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:46
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:58
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:49
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:56
 msgid "No Trees"
 msgstr "Ei puita"
 
@@ -1684,8 +1684,8 @@ msgstr "Tiedustelijalähetin maja"
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:51
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:59
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:55
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:60
 msgid "scouting"
 msgstr "tutkii"
 
@@ -1701,7 +1701,7 @@ msgstr "Laivatelakka"
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:80
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:69
 msgid "constructing a ship"
 msgstr "Laivanrakennus"
 
@@ -1751,7 +1751,7 @@ msgstr "Viidakkoveitsen teko"
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:179
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
 msgid "making kitchen tools"
 msgstr "Keittiövälineiden teko"
 
@@ -1762,7 +1762,7 @@ msgstr "Keittiövälineiden teko"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:134
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:190
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
 msgid "making a hammer"
 msgstr "Vasaran teko"
 
@@ -1776,7 +1776,7 @@ msgstr "Taltan teko"
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
 msgid "making needles"
 msgstr "Neulojen valmistus"
 
@@ -1819,7 +1819,7 @@ msgstr "Graniitin leikkuu"
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:56
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:59
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:56
 msgid "No Rocks"
 msgstr "Kivipula"
 
@@ -1827,7 +1827,7 @@ msgstr "Kivipula"
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:57
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:70
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:57
 msgid "Out of Rocks"
 msgstr "Kivet lopussa"
 
@@ -1851,26 +1851,26 @@ msgstr "Kivikaivos"
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:103
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:83
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:110
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:91
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:103
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:114
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:98
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:56
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:75
 msgid "mining granite"
 msgstr "kiven louhinta"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:79
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:92
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:121
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:98
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:116
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:93
 msgid "No Granite"
 msgstr "Ei kelvollista kiveä"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:80
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:122
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:117
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:94
 msgid "Main Granite Vein Exhausted"
 msgstr "Graniittia ei löydy"
 
@@ -1903,7 +1903,7 @@ msgstr "Vedenkerääjän maja"
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:55
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:59
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:61
 msgid "No Water"
 msgstr "Kuivaa"
 
@@ -1911,7 +1911,7 @@ msgstr "Kuivaa"
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:60
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:62
 msgid "Out of Water"
 msgstr "Vesi lopussa"
 
@@ -1932,7 +1932,7 @@ msgstr "Erämaasuojelijan teltta"
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:63
 msgid "breeding fish"
 msgstr "Kalojen kasvatus"
 
@@ -1952,7 +1952,7 @@ msgstr "Puunpilkkojan maja"
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:37
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:49
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:40
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:47
 msgid "felling trees"
 msgstr "Puuunkaato"
 
@@ -1960,7 +1960,7 @@ msgstr "Puuunkaato"
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:47
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:59
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:50
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:57
 msgid "Out of Trees"
 msgstr "Ei puita"
 
@@ -2048,7 +2048,7 @@ msgstr "Miilu"
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:59
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:55
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:68
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:63
 msgid "producing coal"
 msgstr "Hiilen valmistus"
 
@@ -2068,13 +2068,13 @@ msgstr "Hiilikaivos"
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:68
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:65
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:89
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:100
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:56
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:74
 msgid "mining coal"
 msgstr "Hiilen kaivuu"
 
@@ -2082,10 +2082,10 @@ msgstr "Hiilen kaivuu"
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:104
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:96
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:86
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:103
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:83
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:118
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:105
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:113
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:92
 msgid "No Coal"
 msgstr "Ei hiiltä"
 
@@ -2093,10 +2093,10 @@ msgstr "Ei hiiltä"
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:105
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:97
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:87
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:104
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:84
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:119
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:98
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:86
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:114
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:93
 msgid "Main Coal Vein Exhausted"
 msgstr "Hiilen Pääesiintymä Ehtynyt"
 
@@ -2178,7 +2178,7 @@ msgstr "Kalankasvattajan talo"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:62
+#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:59
 msgid "No Fish"
 msgstr "Ei kalaa"
 
@@ -2186,7 +2186,7 @@ msgstr "Ei kalaa"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:60
 msgid "Out of Fish"
 msgstr "Ei kalavesiä"
 
@@ -2213,8 +2213,8 @@ msgstr "Kalastajatorppa"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:52
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:43
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:78
-#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:75
+#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:50
 msgid "fishing"
 msgstr "Kalastus"
 
@@ -2278,14 +2278,14 @@ msgstr "Metsästäjän Mökki"
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:39
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:57
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:42
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:49
 msgid "hunting"
 msgstr "Metsästys"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:48
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:51
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:70
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:67
 msgid "No Game"
 msgstr "Ei riistaa"
 
@@ -2293,7 +2293,7 @@ msgstr "Ei riistaa"
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:50
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:68
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:72
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:69
 msgid "Out of Game"
 msgstr "Riistaa ei löydy"
 
@@ -2320,12 +2320,12 @@ msgstr "Rautakaivos"
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:68
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:64
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:91
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:66
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:56
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:74
 msgid "mining iron"
 msgstr "Rautamalmin louhinta"
 
@@ -2333,10 +2333,10 @@ msgstr "Rautamalmin louhinta"
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:96
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:86
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:103
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:104
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:105
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:98
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:92
 msgid "No Iron"
 msgstr "Ei rautaa"
 
@@ -2344,10 +2344,10 @@ msgstr "Ei rautaa"
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:88
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:97
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:87
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:104
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:83
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:105
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:98
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:93
 msgid "Main Iron Vein Exhausted"
 msgstr "Rautamalmio Ehtynyt"
 
@@ -2384,7 +2384,7 @@ msgstr "Kivilouhos"
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:36
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:52
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:50
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:47
 msgid "quarrying granite"
 msgstr "Kivien hakkaus"
 
@@ -2432,8 +2432,8 @@ msgstr "Sulattamo"
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:79
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:87
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:91
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:104
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:97
 msgid "smelting iron"
 msgstr "Raudan sulatus"
 
@@ -2445,14 +2445,14 @@ msgstr "Savustamo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:69
-#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:86
 msgid "smoking meat"
 msgstr "Lihan savustus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:82
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:94
-#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:80
+#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:75
 msgid "smoking fish"
 msgstr "Kalan savustus"
 
@@ -2473,7 +2473,7 @@ msgstr "Työkaluseppä"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:98
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:168
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
 msgid "making a bread paddle"
 msgstr "Leipälapion teko"
 
@@ -2487,14 +2487,14 @@ msgstr "Ämpäriparin teko"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:92
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:131
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:110
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:201
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
 msgid "making fire tongs"
 msgstr "Pihtien teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:104
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:157
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
 msgid "making a fishing net"
 msgstr "Kalastusverkon teko"
 
@@ -2525,7 +2525,7 @@ msgstr "Sahan teko"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:188
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:209
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:194
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:113
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
 msgid "making a scythe"
 msgstr "Viikatteen teko"
 
@@ -2668,15 +2668,15 @@ msgid "Big Inn"
 msgstr "Majatalo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:74
-#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:84
 msgid "preparing a snack"
 msgstr "Välipalan valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:88
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:67
-#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:80
+#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:75
 msgid "preparing a meal"
 msgstr "Tuhdin aterian valmistus"
 
@@ -2850,7 +2850,7 @@ msgstr "Kypäräpaja"
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:78
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:123
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:120
 msgid "forging a helmet"
 msgstr "Kypärän valmistus"
 
@@ -2961,7 +2961,7 @@ msgstr "Ongen teko"
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:170
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:146
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:146
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
 msgid "making a hunting spear"
 msgstr "Metsästyskeihään teko"
 
@@ -2974,8 +2974,8 @@ msgstr "Pienpanimo"
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:65
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:57
-#: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:77
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:88
 msgid "brewing beer"
 msgstr "Oluen pano"
 
@@ -3005,13 +3005,13 @@ msgstr "Ruokotarha"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:48
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:61
 msgid "planting reed"
 msgstr "Ruoikon istutus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:56
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:72
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:69
 msgid "harvesting reed"
 msgstr "Ruoikon korjaus"
 
@@ -3170,7 +3170,7 @@ msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr "Hiilikaivos"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:108
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3183,7 +3183,7 @@ msgctxt "empire_building"
 msgid "Deep Coal Mine"
 msgstr "Keskisyvä hiilikaivos"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:86
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:88
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3246,7 +3246,7 @@ msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr "Kultakaivos"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:105
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:107
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3259,7 +3259,7 @@ msgctxt "empire_building"
 msgid "Deep Gold Mine"
 msgstr "Keskisyvä kultakaivos"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:86
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3293,7 +3293,7 @@ msgctxt "empire_building"
 msgid "Iron Mine"
 msgstr "Rautakaivos"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:108
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3306,7 +3306,7 @@ msgctxt "empire_building"
 msgid "Deep Iron Mine"
 msgstr "Keskisyvä rautakaivos"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:87
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3335,25 +3335,25 @@ msgid "Marble Mine"
 msgstr "Marmorikaivos"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:97
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:118
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:100
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:122
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:67
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:75
 msgid "mining marble"
 msgstr "Marmorin louhinta"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:144
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:148
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:93
 msgid "No Marble"
 msgstr "Ei marmoria"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:145
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:149
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:94
 msgid "Main Marble Vein Exhausted"
 msgstr "Paras Marmorisuoni Ehtynyt"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:147
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:151
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -3367,7 +3367,7 @@ msgctxt "empire_building"
 msgid "Deep Marble Mine"
 msgstr "Keskisyvä marmorikaivos"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:96
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -3475,7 +3475,7 @@ msgstr "Työkaluseppä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:86
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:135
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
 msgid "making a basket"
 msgstr "Korin teko"
 
@@ -3573,16 +3573,16 @@ msgctxt "frisians_building"
 msgid "Aqua Farm"
 msgstr "Vesiviljelmä"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:97
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:97
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:94
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:94
 msgid "No Ponds"
 msgstr "Ei Altaita"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:98
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:95
 msgid "Out of Fish Ponds"
 msgstr "Kala-altaat Lopussa"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:96
 msgctxt "frisians_building"
 msgid ""
 "The fisher working at this aqua farm can’t find any fish ponds in his work "
@@ -3599,19 +3599,19 @@ msgstr "Suuri Haarniskapaja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:70
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:67
 msgid "forging a broadsword"
 msgstr "Leveän miekan valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:82
 msgid "forging a double-edged sword"
 msgstr "Kaksiteräisen miekan valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:97
 msgid "forging a golden helmet"
 msgstr "Kultaisen kypärän valmistus"
 
@@ -3623,13 +3623,13 @@ msgstr "Pieni Haarniskapaja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a short sword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:93
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:90
 msgid "forging a short sword"
 msgstr "Lyhyen miekan valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long sword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:108
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:105
 msgid "forging a long sword"
 msgstr "Pitkän miekan valmistus"
 
@@ -3646,7 +3646,7 @@ msgid "Barracks"
 msgstr "Kasarmi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:72
+#: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:67
 msgctxt "frisians_building"
 msgid "recruiting soldier"
 msgstr "Sotilaan palkkaus"
@@ -3657,15 +3657,15 @@ msgctxt "frisians_building"
 msgid "Beekeeper’s House"
 msgstr "Mehiläistarha"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:60
 msgid "No Flowers"
 msgstr "Ei Kukkia"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
 msgid "Out of Flowers"
 msgstr "Kukat Lopussa"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeeper’s house can’t find any flowering "
@@ -3680,7 +3680,7 @@ msgid "Berry Farm"
 msgstr "Marjatarha"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
-#: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:50
 msgid "planting bushes"
 msgstr "Pensaiden istutus"
 
@@ -3692,12 +3692,12 @@ msgstr "Sepän paja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:88
 msgid "forging a felling ax"
 msgstr "Kaatokirveen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:100
 msgid "forging a pick"
 msgstr "Hakun valmistus"
 
@@ -3714,7 +3714,7 @@ msgid "Brick Kiln"
 msgstr "Tiiliuuni"
 
 #. TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
-#: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:71
+#: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:66
 msgid "burning bricks"
 msgstr "Tiilien poltto"
 
@@ -3726,20 +3726,20 @@ msgstr "Miilu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:68
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:65
 msgid "making a charcoal stack"
 msgstr "Puun hiillytys"
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:79
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:76
 msgid "collecting coal"
 msgstr "Puun keräys"
 
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:98
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:95
 msgid "Out of Clay Ponds"
 msgstr "Ei savipaikkoja"
 
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:96
 msgctxt "frisians_building"
 msgid ""
 "The charcoal burner working at this charcoal burner’s house can’t find any "
@@ -3761,20 +3761,20 @@ msgid "Clay Pit"
 msgstr "Savikaivanto"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:66
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:61
 msgid "making clay"
 msgstr "Saven teko"
 
 #. TRANSLATORS: Short for "No Level Ground" for clay pits
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:78
 msgid "No Ground"
 msgstr "Ei Maata"
 
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:79
 msgid "No Level Ground"
 msgstr "Ei Tasaista Maata"
 
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:80
 msgctxt "frisians_building"
 msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
@@ -3788,7 +3788,7 @@ msgctxt "frisians_building"
 msgid "Coal Mine"
 msgstr "Hiilikaivos"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:121
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:116
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3801,7 +3801,7 @@ msgctxt "frisians_building"
 msgid "Deep Coal Mine"
 msgstr "Keskisyvä hiilikaivos"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:95
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3816,19 +3816,19 @@ msgid "Fruit Collector’s House"
 msgstr "Hedelmänkerääjän Mökki"
 
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:50
 msgid "gathering berries"
 msgstr "Marjojen keräys"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:60
 msgid "No Bushes"
 msgstr "Ei Pensaikkoa"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
 msgid "Out of Berries"
 msgstr "Marjat lopussa"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
@@ -3864,16 +3864,16 @@ msgid "Farm"
 msgstr "Maatila"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:74
 msgid "planting barley"
 msgstr "Ohran istutus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:82
 msgid "harvesting barley"
 msgstr "Ohrasadon korjuu"
 
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
 msgctxt "frisians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -3891,7 +3891,7 @@ msgctxt "frisians_building"
 msgid "Fisher’s House"
 msgstr "Kalastajatorppa"
 
-#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:61
 msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -3916,7 +3916,7 @@ msgctxt "frisians_building"
 msgid "Gold Mine"
 msgstr "Kultakaivos"
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:107
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:101
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3929,7 +3929,7 @@ msgctxt "frisians_building"
 msgid "Deep Gold Mine"
 msgstr "Keskisyvä kultakaivos"
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:98
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:93
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3944,8 +3944,8 @@ msgid "Honey Bread Bakery"
 msgstr "Hunajaleipäleipomo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:67
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:76
 msgid "baking honey bread"
 msgstr "Hunajaleivän leivonta"
 
@@ -3956,7 +3956,7 @@ msgid "Hunter’s House"
 msgstr "Metsästäjän Mökki"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:74
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:71
 msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -3969,7 +3969,7 @@ msgctxt "frisians_building"
 msgid "Iron Mine"
 msgstr "Rautakaivos"
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:107
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:101
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3982,7 +3982,7 @@ msgctxt "frisians_building"
 msgid "Deep Iron Mine"
 msgstr "Keskisyvä rautakaivos"
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:95
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3997,8 +3997,8 @@ msgid "Mead Brewery"
 msgstr "Simapanimo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:67
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:76
 msgid "brewing mead"
 msgstr "Siman pano"
 
@@ -4008,7 +4008,7 @@ msgctxt "frisians_building"
 msgid "Quarry"
 msgstr "Kivilouhos"
 
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:58
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -4021,20 +4021,20 @@ msgid "Recycling Center"
 msgstr "Kierrätyskeskus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:94
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:87
 msgctxt "frisians_building"
 msgid "recycling fur"
 msgstr "Turkin kierrätys"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:105
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:98
 msgctxt "frisians_building"
 msgid "recycling iron"
 msgstr "Raudan kierrätys"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:116
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:109
 msgctxt "frisians_building"
 msgid "recycling iron and gold"
 msgstr "Raudan ja kullan kierrätys"
@@ -4045,7 +4045,7 @@ msgctxt "frisians_building"
 msgid "Reed Farm"
 msgstr "Ruokofarmi"
 
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:80
 msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
@@ -4059,14 +4059,14 @@ msgid "Reindeer Farm"
 msgstr "Poronhoitoalue"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing reindeer because ...
-#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:76
 msgctxt "frisians_building"
 msgid "rearing reindeer"
 msgstr "Porojen kasvatus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
-#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:92
-#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:103
+#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:87
+#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:98
 msgctxt "frisians_building"
 msgid "producing fur"
 msgstr "Turkin tuotto"
@@ -4077,7 +4077,7 @@ msgctxt "frisians_building"
 msgid "Rock Mine"
 msgstr "Kivikaivos"
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:124
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:119
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -4090,7 +4090,7 @@ msgctxt "frisians_building"
 msgid "Deep Rock Mine"
 msgstr "Keskisyvä Kivikaivos"
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:96
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -4111,7 +4111,7 @@ msgid "Sewing Room"
 msgstr "Ompeluhuone"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
-#: ../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:80
+#: ../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:75
 msgid "sewing fur garment"
 msgstr "Turkisvaatteen ompelu"
 
@@ -4135,13 +4135,13 @@ msgstr "Räätälin Puoti"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing studded fur garment
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:64
 msgid "sewing studded fur garment"
 msgstr "Niitoitetun turkisvaatteen ompelu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:79
+#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:76
 msgid "sewing golden fur garment"
 msgstr "Kultaisen turkisvaatteen ompelu"
 
@@ -4153,12 +4153,12 @@ msgstr "Krouvi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:95
+#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:90
 msgid "preparing only one ration"
 msgstr "Vain yhden ruoka-annoksen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:109
+#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:104
 msgid "preparing rations"
 msgstr "Ruoka-annosten valmistus"
 
@@ -4169,7 +4169,7 @@ msgid "Weaving Mill"
 msgstr "Kutomo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
-#: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:70
+#: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:65
 msgid "weaving cloth"
 msgstr "Kankaan kudonta"
 
@@ -4179,7 +4179,7 @@ msgctxt "frisians_building"
 msgid "Well"
 msgstr "Kaivo"
 
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:66
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:63
 msgctxt "frisians_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Kantaja työskentelee tällä kaivolla, mutta ei löydä kaivostaan vettä."
@@ -4190,7 +4190,7 @@ msgctxt "frisians_building"
 msgid "Woodcutter’s House"
 msgstr "Metsurin mökki"
 
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:58
 msgctxt "frisians_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
@@ -4214,8 +4214,8 @@ msgstr "Koulutusaukea"
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:82
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:42
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:66
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:81
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:80
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:76
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:75
 msgid "sleeping"
 msgstr "tauolla"
 
@@ -4573,46 +4573,46 @@ msgid "Training Arena"
 msgstr "Harjoitteluareena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:89
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:84
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "korottaa sotilaan hyökkäystaitoa tasolta 3 tasolle 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:104
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:99
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "korottaa sotilaan hyökkäystaitoa tasolta 4 tasolle 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:120
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:115
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr "korottaa sotilaan hyökkäystaitoa tasolta 5 tasolle 6"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:137
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:132
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "korottaa sotilaan puolustuskykyä tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:153
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:148
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "korottaa sotilaan terveyttä tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:174
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:171
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:169
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166
 msgctxt "frisians_building"
 msgid "No soldier to train!"
 msgstr "Ei sotilaita koulutettavaksi!"
 
 #. TRANSLATORS: Frisian training site tooltip when none of the present
 #. soldiers match the current training program
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:176
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:173
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:171
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:168
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
 msgstr "Tälle koulutustasolle ei löytynyt sotilasta!"
@@ -4624,31 +4624,31 @@ msgid "Training Camp"
 msgstr "Harjoitusleiri"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:88
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:83
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "korottaa sotilaan hyökkäystaitoa tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:103
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:98
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "korottaa sotilaan hyökkäystaitoa tasolta 1 tasolle 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:119
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:114
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "korottaa sotilaan hyökkäystaitoa tasolta 2 tasolle 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:135
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:130
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "korottaa sotilaan terveyttä tasolta 0 tasolle 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:150
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:145
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "korottaa sotilaan puolustuskykyä tasolta 0 tasolle 1"
@@ -7987,168 +7987,168 @@ msgid "Ship"
 msgstr "Ship-laiva"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:45
+#: ../../data/tribes/ships/frisians/init.lua:40
 msgctxt "shipname"
 msgid "Amrum"
 msgstr "Amrum"
 
 #. TRANSLATORS: This frisian ship is named after a no longer existing island
 #. in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:47
+#: ../../data/tribes/ships/frisians/init.lua:42
 msgctxt "shipname"
 msgid "Alt-Nordstrand"
 msgstr "Pohjoisranta"
 
 #. TRANSLATORS: This frisian ship is named after a peninsula in Northern
 #. Frisia
-#: ../../data/tribes/ships/frisians/init.lua:49
+#: ../../data/tribes/ships/frisians/init.lua:44
 msgctxt "shipname"
 msgid "Eiderstedt"
 msgstr "Eiderstedt"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:51
+#: ../../data/tribes/ships/frisians/init.lua:46
 msgctxt "shipname"
 msgid "Föhr"
 msgstr "Föhr"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:53
+#: ../../data/tribes/ships/frisians/init.lua:48
 msgctxt "shipname"
 msgid "Gröde"
 msgstr "Gröde"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:55
+#: ../../data/tribes/ships/frisians/init.lua:50
 msgctxt "shipname"
 msgid "Habel"
 msgstr "Habel"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:57
+#: ../../data/tribes/ships/frisians/init.lua:52
 msgctxt "shipname"
 msgid "Hamburger Hallig"
 msgstr "Hamburger Hallig"
 
 #. TRANSLATORS: This frisian ship is named after an island in the North Sea
-#: ../../data/tribes/ships/frisians/init.lua:59
+#: ../../data/tribes/ships/frisians/init.lua:54
 msgctxt "shipname"
 msgid "Helgoland"
 msgstr "Helgomaa"
 
 #. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:61
+#: ../../data/tribes/ships/frisians/init.lua:56
 msgctxt "shipname"
 msgid "Hever"
 msgstr "Hever"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:63
+#: ../../data/tribes/ships/frisians/init.lua:58
 msgctxt "shipname"
 msgid "Hooge"
 msgstr "Hooge"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:65
+#: ../../data/tribes/ships/frisians/init.lua:60
 msgctxt "shipname"
 msgid "Japsand"
 msgstr "Japsand"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:67
+#: ../../data/tribes/ships/frisians/init.lua:62
 msgctxt "shipname"
 msgid "Kormoransand"
 msgstr "Kormoransand"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:69
+#: ../../data/tribes/ships/frisians/init.lua:64
 msgctxt "shipname"
 msgid "Langeneß"
 msgstr "Langeneß"
 
 #. TRANSLATORS: This frisian ship is named after a water body in Northern
 #. Frisia
-#: ../../data/tribes/ships/frisians/init.lua:71
+#: ../../data/tribes/ships/frisians/init.lua:66
 msgctxt "shipname"
 msgid "Norderaue"
 msgstr "Norderaue"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:73
+#: ../../data/tribes/ships/frisians/init.lua:68
 msgctxt "shipname"
 msgid "Norderoog"
 msgstr "Norderoog"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:75
+#: ../../data/tribes/ships/frisians/init.lua:70
 msgctxt "shipname"
 msgid "Norderoogsand"
 msgstr "Norderoogsand"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:77
+#: ../../data/tribes/ships/frisians/init.lua:72
 msgctxt "shipname"
 msgid "Nordstrand"
 msgstr "Pohjoisranta"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:79
+#: ../../data/tribes/ships/frisians/init.lua:74
 msgctxt "shipname"
 msgid "Nordstrandischmoor"
 msgstr "Nordstrandischmoor"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:81
+#: ../../data/tribes/ships/frisians/init.lua:76
 msgctxt "shipname"
 msgid "Oland"
 msgstr "Ahvenanmaa"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:83
+#: ../../data/tribes/ships/frisians/init.lua:78
 msgctxt "shipname"
 msgid "Pellworm"
 msgstr "Pellworm"
 
 #. TRANSLATORS: This frisian ship is named after a no longer existing island
 #. in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:85
+#: ../../data/tribes/ships/frisians/init.lua:80
 msgctxt "shipname"
 msgid "Strand"
 msgstr "Ranta"
 
 #. TRANSLATORS: This frisian ship is named after a water body in Northern
 #. Frisia
-#: ../../data/tribes/ships/frisians/init.lua:87
+#: ../../data/tribes/ships/frisians/init.lua:82
 msgctxt "shipname"
 msgid "Süderaue"
 msgstr "Süderaue"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:89
+#: ../../data/tribes/ships/frisians/init.lua:84
 msgctxt "shipname"
 msgid "Süderoog"
 msgstr "Süderoog"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:91
+#: ../../data/tribes/ships/frisians/init.lua:86
 msgctxt "shipname"
 msgid "Süderoogsand"
 msgstr "Süderoogsand"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:93
+#: ../../data/tribes/ships/frisians/init.lua:88
 msgctxt "shipname"
 msgid "Südfall"
 msgstr "Südfall"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:95
+#: ../../data/tribes/ships/frisians/init.lua:90
 msgctxt "shipname"
 msgid "Sylt"
 msgstr "Sylt"
 
 #. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:97
+#: ../../data/tribes/ships/frisians/init.lua:92
 msgctxt "shipname"
 msgid "Uthlande"
 msgstr "Uthlande"

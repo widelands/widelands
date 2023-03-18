@@ -6,6 +6,7 @@ wl.Descriptions():new_productionsite_type {
    name = "frisians_berry_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Berry Farm"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -21,8 +22,6 @@ wl.Descriptions():new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {40, 73},
          frames = 10,
          columns = 5,
@@ -32,8 +31,6 @@ wl.Descriptions():new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {40, 55}
       }
    },
