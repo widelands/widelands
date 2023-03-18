@@ -164,7 +164,8 @@ struct KeyboardShortcutAlias {
 	const KeyboardShortcut real_shortcut;
 	const std::string descname_override;  // Use gettext_noop() for the init value!
 
-	KeyboardShortcutAlias(const KeyboardShortcut real, const std::string& desc_override = std::string())
+	KeyboardShortcutAlias(const KeyboardShortcut real,
+	                      const std::string& desc_override = std::string())
 	   : real_shortcut(real), descname_override(desc_override) {
 	}
 	[[nodiscard]] std::string translated_descname() const {
