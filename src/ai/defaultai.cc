@@ -3361,7 +3361,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	// first.
 	// If alone, we may accept requests to join and cancel leaving.
 	// If defeated, just clean up by rejecting everything.
-	if (me->team_number() != 0 && (me_alone || me_def)) {
+	if (mytn != 0 && (me_alone || me_def)) {
 		planned_action = Widelands::DiplomacyAction::kLeaveTeam;
 		plan_priority = me_alone ? 0 : std::numeric_limits<int32_t>::max();
 		if (g_verbose) {
