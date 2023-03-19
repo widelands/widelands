@@ -98,6 +98,7 @@ public:
 		kAlwaysInBackground = 0,  ///< Always in the background.
 		kDefault = 8,             ///< No special handling.
 		kPinned = 16,             ///< Pinned by the user.
+		kConfirmation = 24,       ///< A confirmation prompt.
 		kInfoPanel = 32,          ///< The info panel and toolbar.
 		kFullscreenWindow = 64,   ///< A fullscreen window.
 		kDropdown = 128,          ///< Dropdown lists.
