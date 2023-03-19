@@ -3342,7 +3342,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 
 	const Widelands::PlayerNumber mypn = player_number();
 	const Widelands::Player* me = game().get_player(mypn);
-	const Widelands::TeamNumber mytn = me->team_number();
+	const Widelands::TeamNumber mytn = player_statistics.get_team_number(mypn);
 	const bool me_def = me->is_defeated();
 	const bool me_alone = player_statistics.get_is_alone(mypn);
 
