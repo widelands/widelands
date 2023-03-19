@@ -3554,7 +3554,6 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			}
 		}
 		game().send_player_diplomacy(mypn, planned_action, planned_opn);
-		player_statistics.recalculate_team_power();
 
 		// Team change invalidates statistics
 		return;
