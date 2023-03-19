@@ -1054,8 +1054,11 @@ void PlayersStrengths::remove_stat(const Widelands::PlayerNumber pn) {
 // After statistics for team members are updated, this calculation is needed
 void PlayersStrengths::recalculate_team_power() {
 	team_powers_.clear();
+	team_scores_sum_.clear();
 	team_members_.clear();
 	active_players_ = 0U;
+	worst_ally_ = 0;
+	worst_ally_score_ = 0;
 	for (auto& item : all_stats_) {
 		if (item.second.defeated) {
 			continue;
@@ -1064,10 +1067,20 @@ void PlayersStrengths::recalculate_team_power() {
 		if (item.second.team_number > 0) {  // is a member of a team
 			if (team_powers_.count(item.second.team_number) > 0) {
 				team_powers_[item.second.team_number] += item.second.players_power;
+				team_scores_sum_[item.second.team_number] += item.second.players_diplomacy_score;
 			} else {
 				team_powers_[item.second.team_number] = item.second.players_power;
+				team_scores_sum_[item.second.team_number] = item.second.players_diplomacy_score;
 			}
 			++team_members_[item.second.team_number];
+
+			if (item.second.team_number == this_player_team &&
+			    item.second.players_diplomacy_score < worst_ally_score_) {
+				worst_ally_score_ = item.second.players_diplomacy_score;
+				worst_ally_ = item.first;
+			}
+		} else {
+			team_members_[0] = 1;
 		}
 	}
 	verb_log_dbg("AI: %d players are active\n", active_players_);
@@ -1101,6 +1114,14 @@ bool PlayersStrengths::get_is_alone(const Widelands::PlayerNumber pn) {
 	return tn == 0 || members_in_team(tn) == 1;
 }
 
+Widelands::PlayerNumber PlayersStrengths::get_worst_ally() const {
+	return worst_ally_;
+}
+
+int32_t PlayersStrengths::get_worst_ally_score() const {
+	return worst_ally_score_;
+}
+
 // Returns the average diploscore of the members in the given team,
 // excluding the given player
 int32_t PlayersStrengths::get_team_average_score(const Widelands::TeamNumber tn,
@@ -1109,19 +1130,13 @@ int32_t PlayersStrengths::get_team_average_score(const Widelands::TeamNumber tn,
 		return 0;
 	}
 
-	int32_t team_sc = 0;
-	uint8_t excluded = 0;
-	for (auto& item : all_stats_) {
-		if (item.second.team_number != tn || item.second.defeated) {
-			continue;
-		}
-		if (item.first == exclude_pn) {
-			++excluded;
-			continue;
-		}
-		team_sc += item.second.players_diplomacy_score;
-	}
-	return team_sc / (members_in_team(tn) - excluded);
+	assert(exclude_pn == 0 || get_team_number(exclude_pn) == tn);
+	assert(team_scores_sum_.count(tn) == 1);
+
+	const bool exclude = exclude_pn != 0;
+	const int32_t team_sc = team_scores_sum_[tn] - (exclude ? get_diplo_score(exclude_pn) : 0);
+	const uint8_t n_included = members_in_team(tn) - (exclude ? 1 : 0);
+	return team_sc / n_included;
 }
 
 // Returns power of a team
@@ -1154,7 +1169,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 
 	bool invite = false;  // Only to check fall through case
 
-	if (my_team_sc < other_team_sc) {
+	if (my_team_sc < other_team_sc && can_join) {
 		if (other_alone && (me_alone || my_team_sc > static_cast<int>(RNG::static_rand(20)))) {
 			// If we're both alone, we try to be polite and invite.
 			// Or if we have a good enough team, we won't leave it for a lone player, but we try to
@@ -1170,15 +1185,6 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 				return;
 			}
 		} else {  // Other has team, or own team is less desirable than other player alone
-			if (!can_join) {
-				verb_log_dbg_time(gametime,
-				                  "AI Diplomacy: Player(%d)%s cannot request to join player (%d) with "
-				                  "diploscore %d%s\n",
-				                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
-				                  static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
-				return;
-			}
-
 			verb_log_dbg_time(
 			   gametime,
 			   "AI Diplomacy: Player(%d)%s requests to join player (%d) with diploscore %d%s\n",
@@ -1188,7 +1194,7 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 			set_last_time_requested(gametime, pn);
 			return;
 		}
-	} else {  // Own team is more desirable
+	} else {  // Own team is more desirable, or everyone else is teamed up against us
 		if (other_alone) {
 			verb_log_dbg_time(gametime,
 			                  "AI Diplomacy: Player(%d)%s declines to invite player (%d) with "
@@ -1197,14 +1203,8 @@ void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
 			                  static_cast<unsigned int>(pn), get_diplo_score(pn));
 			return;
 		}
-		if (!can_invite) {
-			verb_log_dbg_time(gametime,
-			                  "AI Diplomacy: Player(%d)%s cannot invite player (%d) with diploscore "
-			                  "%d%s\n",
-			                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
-			                  static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
-			return;
-		}
+
+		// !other_alone means can_invite must be true
 		invite = true;  // Handle in fall through with above
 	}
 

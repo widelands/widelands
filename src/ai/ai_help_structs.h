@@ -911,6 +911,8 @@ public:
 	                                             Widelands::PlayerNumber exclude_pn = 0);
 	[[nodiscard]] uint32_t team_power(Widelands::TeamNumber tn);
 	[[nodiscard]] uint8_t players_active() const;
+	[[nodiscard]] Widelands::PlayerNumber get_worst_ally() const;
+	[[nodiscard]] int32_t get_worst_ally_score() const;
 	[[nodiscard]] bool any_enemy_seen_lately(const Time&);
 	void set_update_time(const Time&);
 	const Time& get_update_time();
@@ -926,6 +928,8 @@ private:
 
 	// Number of team, sum of players' strength
 	std::map<Widelands::TeamNumber, uint32_t> team_powers_;
+	// Number of team, sum of players' diploscores
+	std::map<Widelands::TeamNumber, uint32_t> team_scores_sum_;
 	// Number of team, number of members
 	std::map<Widelands::TeamNumber, uint8_t> team_members_;
 	// number of active players (not defeated)
@@ -934,6 +938,11 @@ private:
 	Time update_time;
 	Widelands::PlayerNumber this_player_number;
 	Widelands::PlayerNumber this_player_team;
+
+	// Member of own team with lowest diploscore
+	Widelands::PlayerNumber worst_ally_;
+	// Lowest member diploscore in own team
+	int32_t worst_ally_score_;
 };
 
 // This is a wrapper around map of <Flag coords hash:distance from flag to nearest warehouse>
