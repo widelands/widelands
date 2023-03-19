@@ -1154,7 +1154,7 @@ void DefaultAI::late_initialization() {
 		// and allow statistics to settle after loading game
 		taskPool.push_back(std::make_shared<SchedulerTask>(
 		   std::max<Time>(
-		      gametime + kStatUpdateInterval * 4 + Duration(RNG::static_rand(5 * 60) * 1000),
+		      gametime + kStatUpdateInterval * 16 + Duration(RNG::static_rand(5 * 60) * 1000),
 		      Time((10 + RNG::static_rand(10)) * 60 * 1000)),
 		   SchedulerTaskId::kDiplomacy, 7, "diplomacy actions"));
 	}
