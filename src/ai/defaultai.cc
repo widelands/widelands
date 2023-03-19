@@ -3337,12 +3337,10 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 
 // Dealing with diplomacy actions
 void DefaultAI::diplomacy_actions(const Time& gametime) {
-	// Make sure we use reasonably up to date stats
-	update_player_stat(gametime);
 
 	const Widelands::PlayerNumber mypn = player_number();
 	const Widelands::Player* me = game().get_player(mypn);
-	const Widelands::TeamNumber mytn = player_statistics.get_team_number(mypn);
+	const Widelands::TeamNumber mytn = me->team_number();
 	const bool me_def = me->is_defeated();
 	const bool me_alone = player_statistics.get_is_alone(mypn);
 
@@ -3361,7 +3359,7 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 	// first.
 	// If alone, we may accept requests to join and cancel leaving.
 	// If defeated, just clean up by rejecting everything.
-	if (mytn != 0 && (me_alone || me_def)) {
+	if (me->team_number() != 0 && (me_alone || me_def)) {
 		planned_action = Widelands::DiplomacyAction::kLeaveTeam;
 		plan_priority = me_alone ? 0 : std::numeric_limits<int32_t>::max();
 		if (g_verbose) {
