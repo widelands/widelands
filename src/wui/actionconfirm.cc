@@ -179,6 +179,7 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	                         (checkbox_ != nullptr ? checkbox_->get_h() + padding : 0));
 	set_inner_size(main_box->get_w() + 2 * padding, main_box->get_h() + 2 * padding);
 
+	set_z(UI::Panel::ZOrder::kConfirmation);
 	center_to_parent();
 	cancelbtn->center_mouse();
 

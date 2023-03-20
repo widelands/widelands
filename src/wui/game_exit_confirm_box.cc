@@ -26,6 +26,7 @@ GameExitConfirmBox::GameExitConfirmBox(UI::Panel& p, InteractiveGameBase& i)
                         /** TRANSLATORS: Window label when "Exit game" has been pressed */
                         _("Exit Game Confirmation"),
                         _("Are you sure you wish to exit this game?")) {
+	set_z(UI::Panel::ZOrder::kConfirmation);
 }
 
 // TODO(GunChleoc): Arabic: Buttons need more height for Arabic
@@ -35,6 +36,7 @@ GameExitConfirmBox::GameExitConfirmBox(UI::Panel& parent,
                                        const std::string& message)
    : UI::WLMessageBox(&parent, UI::WindowStyle::kWui, title, message, MBoxType::kOkCancel),
      igb_(gb) {
+	set_z(UI::Panel::ZOrder::kConfirmation);
 }
 
 void GameExitConfirmBox::clicked_ok() {

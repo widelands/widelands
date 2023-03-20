@@ -608,14 +608,18 @@ int Panel::get_inner_h() const {
 /**
  * Make this panel the top-most panel in the parent's Z-order.
  */
-void Panel::move_to_top() {
+void Panel::move_to_top(const bool on_top_of_equal_z) {
 	if (parent_ == nullptr) {
 		return;
 	}
 	/* If all siblings above us are permanently on top, skip. */
 	bool all_on_top = true;
 	for (Panel* p = parent_->first_child_; p != this && all_on_top; p = p->next_) {
-		all_on_top &= p->get_flag(pf_always_on_top);
+		if (on_top_of_equal_z) {
+			all_on_top &= (static_cast<uint8_t>(p->get_z()) > static_cast<uint8_t>(get_z()));
+		} else {
+			all_on_top &= (static_cast<uint8_t>(p->get_z()) >= static_cast<uint8_t>(get_z()));
+		}
 	}
 	if (all_on_top) {
 		return;
@@ -768,9 +772,7 @@ void Panel::do_think() {
 		return;
 	}
 
-	if (get_flag(pf_always_on_top)) {
-		move_to_top();
-	}
+	move_to_top(false);
 
 	if (thinks()) {
 		think();
