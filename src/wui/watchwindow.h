@@ -19,9 +19,11 @@
 #ifndef WL_WUI_WATCHWINDOW_H
 #define WL_WUI_WATCHWINDOW_H
 
+#include <string>
+
 #include "logic/widelands_geometry.h"
 #include "ui_basic/button.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 #include "wui/mapview.h"
 
 class InteractiveGameBase;
@@ -29,8 +31,10 @@ namespace Widelands {
 class Game;
 }  // namespace Widelands
 
-struct WatchWindow : public UI::Window {
+struct WatchWindow : public UI::UniqueWindow {
 	WatchWindow(InteractiveGameBase& parent,
+	            const std::string& name,
+	            uint id,
 	            int32_t x,
 	            int32_t y,
 	            uint32_t w,
@@ -48,6 +52,10 @@ struct WatchWindow : public UI::Window {
 	}
 	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
 	static UI::Window& load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader&);
+
+	bool handle_key(bool down, SDL_Keysym code) override {
+		return map_view_.handle_key(down, code);
+	}
 
 private:
 	static constexpr size_t kViews = 5;
@@ -80,6 +88,7 @@ private:
 	uint8_t cur_index_{0U};
 	UI::Button* view_btns_[kViews];
 	std::vector<WatchWindow::View> views_;
+	uint id_;
 };
 
 WatchWindow* show_watch_window(InteractiveGameBase&, const Widelands::Coords&);
