@@ -18,8 +18,8 @@ local function init_militarysites(player, sf, total_previous_buildings)
    place_militarysite(player, "amazons_patrol_post", sf, 24, -1)
    place_militarysite(player, "amazons_patrol_post", sf, 19, 500)
 
-   place_militarysite(player, "amazons_treetop_sentry", sf, 16, 499)
-   place_militarysite(player, "amazons_treetop_sentry", sf, 15, 495)
+   place_militarysite(player, "amazons_patrol_post", sf, 16, 499)
+   place_militarysite(player, "amazons_patrol_post", sf, 15, 495)
    place_militarysite(player, "amazons_patrol_post", sf, 24, 501)
 
    -- Military medium

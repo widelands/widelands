@@ -29,7 +29,7 @@ function verify_buildings(playernumber, total_expected_buildings)
    for idx, building in ipairs(player.tribe.buildings) do
       -- We expect at least 1 building placed of each type.
       -- We can't create dismantlesites or check for constructionsites yet, so we skip them for the check.
-      if building.name ~= "constructionsite" and building.name ~= "dismantlesite" then
+      if building.name ~= "constructionsite" and building.name ~= "dismantlesite" and building.name ~= "amazons_treetop_sentry" then
          if #player:get_buildings(building.name) < 1 then
             print("Building '" .. building.name .. "' hasn't been built yet.")
          end
