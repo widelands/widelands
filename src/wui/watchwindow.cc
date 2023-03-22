@@ -68,7 +68,15 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          uint32_t const w,
                          uint32_t const h,
                          bool const init_single_window)
-   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, name, &parent.unique_windows().get_registry(name), x, y, w, h, _("Watch")),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      name,
+                      &parent.unique_windows().get_registry(name),
+                      x,
+                      y,
+                      w,
+                      h,
+                      _("Watch")),
      parent_(parent),
      map_view_(this, game().map(), 0, 0, 200, 166),
      last_visit_(game().get_gametime()),
@@ -383,7 +391,8 @@ WatchWindow* show_watch_window(InteractiveGameBase& parent, const Widelands::Coo
 	}
 
 	const uint id = get_next_free_watch_window_id();
-	auto* window = new WatchWindow(parent, format("watch_%d", id), id, 250 + 20 * id, 150 + 20 * id, 200, 200, false);
+	auto* window = new WatchWindow(
+	   parent, format("watch_%d", id), id, 250 + 20 * id, 150 + 20 * id, 200, 200, false);
 	window->add_view(coords);
 	return window;
 }
