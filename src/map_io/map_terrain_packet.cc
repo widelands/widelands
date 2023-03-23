@@ -28,7 +28,8 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+// We need to keep compatibility with older maps around indefinitely.
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void MapTerrainPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 	FileRead fr;
@@ -37,7 +38,7 @@ void MapTerrainPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 	const Map& map = egbase.map();
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version == 1) {
 			uint16_t const nr_terrains = fr.unsigned_16();
 
 			using TerrainIdMap = std::map<const uint16_t, DescriptionIndex>;
@@ -58,6 +59,33 @@ void MapTerrainPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				f.set_terrain_r(smap[fr.unsigned_8()]);
 				f.set_terrain_d(smap[fr.unsigned_8()]);
 			}
+		} else if (packet_version == kCurrentPacketVersion) {
+			std::map<DescriptionIndex /* index in binary */, DescriptionIndex /* actual index */>
+			   mappings;
+			MapIndex const max_index = map.max_index();
+			for (MapIndex i = 0; i < max_index; ++i) {
+				Field& f = map[i];
+
+				uint16_t saved_index = fr.unsigned_16();
+				auto lookup = mappings.find(saved_index);
+				if (lookup == mappings.end()) {
+					lookup =
+					   mappings
+					      .emplace(saved_index, egbase.mutable_descriptions()->load_terrain(fr.string()))
+					      .first;
+				}
+				f.set_terrain_r(lookup->second);
+
+				saved_index = fr.unsigned_16();
+				lookup = mappings.find(saved_index);
+				if (lookup == mappings.end()) {
+					lookup =
+					   mappings
+					      .emplace(saved_index, egbase.mutable_descriptions()->load_terrain(fr.string()))
+					      .first;
+				}
+				f.set_terrain_d(lookup->second);
+			}
 		} else {
 			throw UnhandledVersionError("MapTerrainPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -67,31 +95,29 @@ void MapTerrainPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 }
 
 void MapTerrainPacket::write(FileSystem& fs, EditorGameBase& egbase) {
-
 	FileWrite fw;
-
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	//  This is a bit more complicated saved so that the order of loading of the
-	//  terrains at run time does not matter. This is slow like hell.
 	const Map& map = egbase.map();
-	const Descriptions& descriptions = egbase.descriptions();
-	DescriptionIndex const nr_terrains = descriptions.terrains().size();
-	fw.unsigned_16(nr_terrains);
+	std::set<DescriptionIndex> written_terrains;
+	const MapIndex max_index = map.max_index();
 
-	std::map<const char* const, DescriptionIndex> smap;
-	for (DescriptionIndex i = 0; i < nr_terrains; ++i) {
-		const char* const name = descriptions.get_terrain_descr(i)->name().c_str();
-		smap[name] = i;
-		fw.unsigned_16(i);
-		fw.c_string(name);
-	}
-
-	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i) {
-		Field& f = map[i];
-		fw.unsigned_8(smap[descriptions.get_terrain_descr(f.terrain_r())->name().c_str()]);
-		fw.unsigned_8(smap[descriptions.get_terrain_descr(f.terrain_d())->name().c_str()]);
+		const Field& f = map[i];
+		const DescriptionIndex tr = f.terrain_r();
+		const DescriptionIndex td = f.terrain_d();
+
+		fw.unsigned_16(tr);
+		if (written_terrains.count(tr) == 0) {
+			written_terrains.insert(tr);
+			fw.string(egbase.descriptions().get_terrain_descr(tr)->name());
+		}
+
+		fw.unsigned_16(td);
+		if (written_terrains.count(td) == 0) {
+			written_terrains.insert(td);
+			fw.string(egbase.descriptions().get_terrain_descr(td)->name());
+		}
 	}
 
 	fw.write(fs, "binary/terrain");
