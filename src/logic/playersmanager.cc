@@ -94,9 +94,9 @@ const PlayerEndStatus* PlayersManager::get_player_end_status(PlayerNumber player
 }
 
 void PlayersManager::add_player_end_status(const PlayerEndStatus& status, bool change_existing) {
-	assert(status.player > 0 && status.player <= number_of_players_);
-	if (players_end_status_.size() < number_of_players_) {
-		players_end_status_.resize(number_of_players_);
+	assert(status.player > 0 && status.player <= kMaxPlayers);
+	if (players_end_status_.size() < kMaxPlayers) {
+		players_end_status_.resize(kMaxPlayers);
 	}
 
 	{
@@ -111,10 +111,14 @@ void PlayersManager::add_player_end_status(const PlayerEndStatus& status, bool c
 	if (change_existing || egbase_.get_igbase() == nullptr) {
 		return;
 	}
+	uint8_t players_reported = 0;
 	for (const PlayerEndStatus& s : players_end_status_) {
-		if (s.player == 0) {
-			return;
+		if (s.player != 0) {
+			players_reported++;
 		}
+	}
+	if (players_reported != number_of_players_) {
+		return;
 	}
 	egbase_.get_igbase()->show_game_summary();
 }
