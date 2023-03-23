@@ -203,8 +203,10 @@ private:
 };
 
 /// Create a panel that displays the wares and the builder waiting for the expedition to start.
-UI::Box*
-create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, InteractiveGameBase& igb) {
+UI::Box* create_portdock_expedition_display(UI::Panel* parent,
+                                            Warehouse& wh,
+                                            InteractiveGameBase& igb,
+                                            BuildingWindow::CollapsedState* collapsed) {
 	UI::Box& box = *new UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	ensure_box_can_hold_input_queues(box);
 
@@ -214,7 +216,7 @@ create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, Interactive
 	                      .get_ship_descr(wh.get_owner()->tribe().ship())
 	                      ->get_default_capacity();
 	for (InputQueue* wq : wh.get_portdock()->expedition_bootstrap()->queues(false)) {
-		InputQueueDisplay* iqd = new InputQueueDisplay(&box, igb, wh, *wq, false, true);
+		InputQueueDisplay* iqd = new InputQueueDisplay(&box, igb, wh, *wq, false, true, collapsed);
 		box.add(iqd, UI::Box::Resizing::kFullSize);
 		capacity -= wq->get_max_size();
 	}

@@ -38,7 +38,7 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
-                                           UI::UniqueWindow::Registry& reg,
+                                           BuildingWindow::Registry& reg,
                                            Widelands::ProductionSite& ps,
                                            bool avoid_fastclick,
                                            bool workarea_preview_wanted)
@@ -81,9 +81,9 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		ensure_box_can_hold_input_queues(*prod_box);
 
 		for (Widelands::InputQueue* queue : inputqueues) {
-			prod_box->add(
-			   new InputQueueDisplay(prod_box, *ibase(), *production_site, *queue, false, true),
-			   UI::Box::Resizing::kFullSize);
+			prod_box->add(new InputQueueDisplay(prod_box, *ibase(), *production_site, *queue, false,
+			                                    true, priority_collapsed()),
+			              UI::Box::Resizing::kFullSize);
 		}
 
 		get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), prod_box, _("Wares"));

@@ -23,7 +23,7 @@
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
 DismantleSiteWindow::DismantleSiteWindow(InteractiveBase& parent,
-                                         UI::UniqueWindow::Registry& reg,
+                                         BuildingWindow::Registry& reg,
                                          Widelands::DismantleSite& ds,
                                          bool avoid_fastclick)
    : BuildingWindow(parent, reg, ds, avoid_fastclick), dismantle_site_(&ds) {
@@ -50,12 +50,14 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 	// Add the wares queue
 	for (uint32_t i = 0; i < dismantle_site->nr_dropout_waresqueues(); ++i) {
 		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site,
-		                                 *dismantle_site->get_dropout_waresqueue(i), true, false),
+		                                 *dismantle_site->get_dropout_waresqueue(i), true, false,
+		                                 priority_collapsed()),
 		           UI::Box::Resizing::kFullSize);
 	}
 	for (uint32_t i = 0; i < dismantle_site->nr_consume_waresqueues(); ++i) {
 		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site,
-		                                 *dismantle_site->get_consume_waresqueue(i), true, false),
+		                                 *dismantle_site->get_consume_waresqueue(i), true, false,
+		                                 priority_collapsed()),
 		           UI::Box::Resizing::kFullSize);
 	}
 

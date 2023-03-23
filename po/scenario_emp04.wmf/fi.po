@@ -6,6 +6,7 @@
 # Jukka Pakarinen, 2020
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
 # Atte Timonen, 2022
+# Oi Suomi On! <oisuomion@protonmail.com>, 2023
 # 
 msgid ""
 msgstr ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Atte Timonen, 2022\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +24,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/starting_conditions.lua:39
 msgid "Fremil"
-msgstr ""
+msgstr "Fremil"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:43
 msgid "Dismantle the unproductive buildings"

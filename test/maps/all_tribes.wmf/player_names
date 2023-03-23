@@ -28,8 +28,8 @@ ai="empty"
 closeable="false"
 
 [player_5]
-name="Available5"
-tribe=
+name="Amazons"
+tribe="amazons"
 ai="empty"
 closeable="false"
 

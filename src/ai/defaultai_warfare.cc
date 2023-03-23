@@ -32,7 +32,6 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 
 	Widelands::PlayerNumber const pn = player_number();
 
-	update_player_stat(gametime);
 	// defining treshold ratio of own_strength/enemy's strength
 	uint32_t treshold_ratio = 90 + management_data.get_military_number_at(5) / 5;
 	if (type_ == AiType::kNormal) {
@@ -951,9 +950,6 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 		militarysites.pop_front();
 		return false;
 	}
-
-	// Make sure we have statistics about our enemies up-to-date
-	update_player_stat(gametime);
 
 	// Inform if we are above ai type limit.
 	if (militarysites.front().bo->total_count() > militarysites.front().bo->cnt_limit_by_aimode) {

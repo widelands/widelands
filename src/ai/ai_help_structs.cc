@@ -20,6 +20,7 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <limits>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -971,16 +972,21 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
                                          uint32_t cs,
                                          uint32_t land,
                                          uint32_t oland,
-                                         uint32_t o60l)
+                                         uint32_t o60l,
+                                         int32_t ds,
+                                         uint32_t bld,
+                                         bool def)
    : team_number(tc),
      players_power(pp),
      old_players_power(op),
      old60_players_power(o60p),
      players_casualities(cs),
-
      players_land(land),
      old_players_land(oland),
-     old60_players_land(o60l) {
+     old60_players_land(o60l),
+     players_diplomacy_score(ds),
+     players_buildings(bld),
+     defeated(def) {
 }
 
 // Inserting/updating data
@@ -992,7 +998,7 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
 // - old = 15 mins ago
 // - old60 = 60 mins ago
 // e.g. players_power / old_players_power / old60_players_power
-// we recieve also player and team numbers to figure out if we are enemies, or in the team
+// we receive also player and team numbers to figure out if we are enemies, or in the team
 void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            Widelands::PlayerNumber opn,
                            Widelands::TeamNumber mytn,
@@ -1003,28 +1009,35 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
                            uint32_t cs,
                            uint32_t land,
                            uint32_t oland,
-                           uint32_t o60l) {
-	if (all_stats.count(opn) == 0) {
+                           uint32_t o60l,
+                           int32_t ds,
+                           uint32_t bld,
+                           bool def) {
+	if (all_stats_.count(opn) == 0) {
 		this_player_number = pn;
 		this_player_team = mytn;
-		all_stats.insert(std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l)));
+		all_stats_.insert(
+		   std::make_pair(opn, PlayerStat(pltn, pp, op, o60p, cs, land, oland, o60l, ds, bld, def)));
 	} else {
-		all_stats[opn].players_power = pp;
-		all_stats[opn].old_players_power = op;
-		all_stats[opn].old60_players_power = o60p;
-		all_stats[opn].players_casualities = cs;
-		all_stats[opn].players_land = land;
-		all_stats[opn].old_players_land = oland;
-		all_stats[opn].old60_players_land = oland;
+		all_stats_[opn].players_power = pp;
+		all_stats_[opn].old_players_power = op;
+		all_stats_[opn].old60_players_power = o60p;
+		all_stats_[opn].players_casualities = cs;
+		all_stats_[opn].players_land = land;
+		all_stats_[opn].old_players_land = oland;
+		all_stats_[opn].old60_players_land = o60l;
+		all_stats_[opn].players_diplomacy_score = ds;
+		all_stats_[opn].players_buildings = bld;
+		all_stats_[opn].defeated = def;
 		assert(this_player_number == pn);
 		if (this_player_team != mytn) {
 			verb_log_dbg("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
 			this_player_team = mytn;
 		}
-		if (all_stats[opn].team_number != pltn) {
+		if (all_stats_[opn].team_number != pltn) {
 			verb_log_dbg("%2d: Team changed for player %d: %d -> %d\n", pn, opn,
-			             all_stats[opn].team_number, pltn);
-			all_stats[opn].team_number = pltn;
+			             all_stats_[opn].team_number, pltn);
+			all_stats_[opn].team_number = pltn;
 		}
 	}
 }
@@ -1032,29 +1045,50 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 // Very tiny possibility that player that has a statistics info here
 // does not exist anymore
 void PlayersStrengths::remove_stat(const Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) > 0) {
+	if (all_stats_.count(pn) > 0) {
 		verb_log_dbg("%d: AI: Erasing statistics for player %d\n", this_player_number, pn);
-		all_stats.erase(pn);
+		all_stats_.erase(pn);
 	}
 }
 
 // After statistics for team members are updated, this calculation is needed
 void PlayersStrengths::recalculate_team_power() {
-	team_powers.clear();
-	for (auto& item : all_stats) {
+	team_powers_.clear();
+	team_scores_sum_.clear();
+	team_members_.clear();
+	active_players_ = 0U;
+	worst_ally_ = 0;
+	worst_ally_score_ = 0;
+	for (auto& item : all_stats_) {
+		if (item.second.defeated) {
+			continue;
+		}
+		++active_players_;
 		if (item.second.team_number > 0) {  // is a member of a team
-			if (team_powers.count(item.second.team_number) > 0) {
-				team_powers[item.second.team_number] += item.second.players_power;
+			if (team_powers_.count(item.second.team_number) > 0) {
+				team_powers_[item.second.team_number] += item.second.players_power;
+				team_scores_sum_[item.second.team_number] += item.second.players_diplomacy_score;
 			} else {
-				team_powers[item.second.team_number] = item.second.players_power;
+				team_powers_[item.second.team_number] = item.second.players_power;
+				team_scores_sum_[item.second.team_number] = item.second.players_diplomacy_score;
 			}
+			++team_members_[item.second.team_number];
+
+			if (item.second.team_number == this_player_team &&
+			    item.second.players_diplomacy_score < worst_ally_score_) {
+				worst_ally_score_ = item.second.players_diplomacy_score;
+				worst_ally_ = item.first;
+			}
+		} else {
+			team_members_[0] = 1;
 		}
 	}
+	verb_log_dbg("AI: %d players are active\n", active_players_);
 }
 
 // This just goes over information about all enemies and where they were seen the last time
 bool PlayersStrengths::any_enemy_seen_lately(const Time& gametime) {
-	return std::any_of(all_stats.begin(), all_stats.end(), [this, &gametime](const auto& item) {
+	return std::any_of(all_stats_.begin(), all_stats_.end(), [this, &gametime](const auto& item) {
 		return get_is_enemy(item.first) && player_seen_lately(item.first, gametime);
 	});
 }
@@ -1062,7 +1096,7 @@ bool PlayersStrengths::any_enemy_seen_lately(const Time& gametime) {
 // Returns count of nearby enemies
 uint8_t PlayersStrengths::enemies_seen_lately_count(const Time& gametime) {
 	uint8_t count = 0;
-	for (auto& item : all_stats) {
+	for (auto& item : all_stats_) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
 			++count;
 		}
@@ -1070,12 +1104,143 @@ uint8_t PlayersStrengths::enemies_seen_lately_count(const Time& gametime) {
 	return count;
 }
 
-// When we see enemy, we use this to store the time
-void PlayersStrengths::set_last_time_seen(const Time& seentime, Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) == 0) {
+// Returns count of members in team
+uint8_t PlayersStrengths::members_in_team(Widelands::TeamNumber tn) {
+	return team_members_[tn];
+}
+
+bool PlayersStrengths::get_is_alone(const Widelands::PlayerNumber pn) {
+	const Widelands::TeamNumber tn = all_stats_[pn].team_number;
+	return tn == 0 || members_in_team(tn) == 1;
+}
+
+Widelands::PlayerNumber PlayersStrengths::get_worst_ally() const {
+	return worst_ally_;
+}
+
+int32_t PlayersStrengths::get_worst_ally_score() const {
+	return worst_ally_score_;
+}
+
+// Returns the average diploscore of the members in the given team,
+// excluding the given player
+int32_t PlayersStrengths::get_team_average_score(const Widelands::TeamNumber tn,
+                                                 const Widelands::PlayerNumber exclude_pn) {
+	if (tn == 0 || members_in_team(tn) < 2) {
+		return 0;
+	}
+
+	assert(exclude_pn == 0 || get_team_number(exclude_pn) == tn);
+	assert(team_scores_sum_.count(tn) == 1);
+
+	const bool exclude = exclude_pn != 0;
+	const int32_t team_sc = team_scores_sum_[tn] - (exclude ? get_diplo_score(exclude_pn) : 0);
+	const uint8_t n_included = members_in_team(tn) - (exclude ? 1 : 0);
+	return team_sc / n_included;
+}
+
+// Returns power of a team
+uint32_t PlayersStrengths::team_power(Widelands::TeamNumber tn) {
+	return team_powers_[tn];
+}
+
+// Make the decision whether own or player's team is better
+void PlayersStrengths::join_or_invite(const Widelands::PlayerNumber pn,
+                                      Widelands::Game& game,
+                                      const Time& gametime) {
+	if (this_player_number == pn || active_players_ < 3 ||
+	    players_in_same_team(this_player_number, pn)) {
 		return;
 	}
-	all_stats[pn].last_time_seen = seentime;
+
+	const Widelands::TeamNumber other_tn = all_stats_[pn].team_number;
+	const bool can_invite = members_in_team(this_player_team) < active_players_ - 1;
+	const bool can_join = members_in_team(other_tn) < active_players_ - 1;
+	const bool me_alone = get_is_alone(this_player_number);
+	const bool other_alone = get_is_alone(pn);
+
+	const int my_team_sc =
+	   me_alone ? 0 : get_team_average_score(this_player_team, this_player_number);
+	const int other_team_sc = other_alone ?
+                                get_diplo_score(pn) - static_cast<int>(RNG::static_rand(10)) :
+                                get_team_average_score(other_tn, pn);
+	const std::string myts_s = me_alone ? "" : format(" with team score %d", my_team_sc);
+	const std::string ots_s = other_alone ? "" : format(" and team score %d", other_team_sc);
+
+	bool invite = false;  // Only to check fall through case
+
+	if (my_team_sc < other_team_sc && can_join) {
+		if (other_alone && (me_alone || my_team_sc > static_cast<int>(RNG::static_rand(20)))) {
+			// If we're both alone, we try to be polite and invite.
+			// Or if we have a good enough team, we won't leave it for a lone player, but we try to
+			// recruit.
+			if (can_invite) {
+				invite = true;  // Will fall through
+			} else {
+				verb_log_dbg_time(gametime,
+				                  "AI Diplomacy: Player(%d)%s cannot invite player (%d) with "
+				                  "diploscore %d\n",
+				                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
+				                  static_cast<unsigned int>(pn), get_diplo_score(pn));
+				return;
+			}
+		} else {  // Other has team, or own team is less desirable than other player alone
+			verb_log_dbg_time(
+			   gametime,
+			   "AI Diplomacy: Player(%d)%s requests to join player (%d) with diploscore %d%s\n",
+			   static_cast<unsigned int>(this_player_number), myts_s.c_str(),
+			   static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
+			game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kJoin, pn);
+			set_last_time_requested(gametime, pn);
+			return;
+		}
+	} else {  // Own team is more desirable, or everyone else is teamed up against us
+		if (other_alone) {
+			verb_log_dbg_time(gametime,
+			                  "AI Diplomacy: Player(%d)%s declines to invite player (%d) with "
+			                  "diploscore %d\n",
+			                  static_cast<unsigned int>(this_player_number), myts_s.c_str(),
+			                  static_cast<unsigned int>(pn), get_diplo_score(pn));
+			return;
+		}
+
+		// !other_alone means can_invite must be true
+		invite = true;  // Handle in fall through with above
+	}
+
+	if (invite) {
+		verb_log_dbg_time(
+		   gametime, "AI Diplomacy: Player(%d)%s invites player (%d) to join with diploscore %d%s\n",
+		   static_cast<unsigned int>(this_player_number), myts_s.c_str(),
+		   static_cast<unsigned int>(pn), get_diplo_score(pn), ots_s.c_str());
+		game.send_player_diplomacy(this_player_number, Widelands::DiplomacyAction::kInvite, pn);
+		set_last_time_requested(gametime, pn);
+		return;
+	}
+
+	NEVER_HERE();
+}
+
+// Returns number of active players
+uint8_t PlayersStrengths::players_active() const {
+	return active_players_;
+}
+
+// When we see enemy, we use this to store the time
+void PlayersStrengths::set_last_time_seen(const Time& seentime, Widelands::PlayerNumber pn) {
+	if (all_stats_.count(pn) == 0) {
+		return;
+	}
+	all_stats_[pn].last_time_seen = seentime;
+}
+
+// When we send a diplo request, we use this to store the time
+void PlayersStrengths::set_last_time_requested(const Time& requesttime,
+                                               Widelands::PlayerNumber pn) {
+	if (all_stats_.count(pn) == 0) {
+		return;
+	}
+	all_stats_[pn].last_time_requested = requesttime;
 }
 
 bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number) {
@@ -1087,41 +1252,78 @@ bool PlayersStrengths::get_is_enemy(Widelands::PlayerNumber other_player_number)
 	if (this_player_team == 0) {
 		return true;
 	}
-	if (all_stats.count(other_player_number) == 0) {
+	if (all_stats_.count(other_player_number) == 0) {
 		// Should happen only rarely so we print a warning here
 		verb_log_warn("AI %d: player has no statistics yet for player %d\n", this_player_number,
 		              other_player_number);
 		return false;
 	}
 	// finally we compare my team number of the other player team number
-	return all_stats[other_player_number].team_number != this_player_team;
+	return all_stats_[other_player_number].team_number != this_player_team;
 }
 
 // Was the player seen less then 2 minutes ago
 bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const Time& gametime) {
-	if (all_stats.count(pn) == 0) {
+	if (all_stats_.count(pn) == 0) {
 		// Should happen only rarely so we print a warning here
 		verb_log_warn("AI %d: player has no statistics yet\n", this_player_number);
 		return false;
 	}
-	if (all_stats[pn].last_time_seen.is_invalid()) {
+	if (all_stats_[pn].last_time_seen.is_invalid()) {
 		return false;
 	}
-	return all_stats[pn].last_time_seen + Duration(2U * 60U * 1000U) > gametime;
+	return all_stats_[pn].last_time_seen + Duration(2U * 60U * 1000U) > gametime;
+}
+
+// Has a diplo request been sent in the last 5 + X minutes
+bool PlayersStrengths::player_diplo_requested_lately(Widelands::PlayerNumber pn,
+                                                     const Time& gametime) {
+	if (all_stats_.count(pn) == 0) {
+		// Should happen only rarely so we print a warning here
+		verb_log_warn("AI %d: player has no statistics yet\n", this_player_number);
+		return false;
+	}
+	if (all_stats_[pn].last_time_requested.is_invalid()) {
+		return false;
+	}
+
+	Duration request_interval = Duration(
+	   (RNG::static_rand(std::abs(all_stats_[pn].players_diplomacy_score) + 1) + 5) * 60U * 1000U);
+	return all_stats_[pn].last_time_requested + request_interval > gametime;
 }
 
 // This is the strength of a player
 uint32_t PlayersStrengths::get_player_power(Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) > 0) {
-		return all_stats[pn].players_power;
+	if (all_stats_.count(pn) > 0) {
+		return all_stats_[pn].players_power;
+	}
+	return 0;
+}
+
+// Amount of buildings of a player
+uint32_t PlayersStrengths::get_player_buildings(Widelands::PlayerNumber pn) {
+	if (all_stats_.count(pn) > 0) {
+		return all_stats_[pn].players_buildings;
+	}
+	return 0;
+}
+
+Widelands::TeamNumber PlayersStrengths::get_team_number(const Widelands::PlayerNumber pn) {
+	return all_stats_[pn].team_number;
+}
+
+// This is the diplomatic score of a player
+int32_t PlayersStrengths::get_diplo_score(Widelands::PlayerNumber pn) {
+	if (all_stats_.count(pn) > 0) {
+		return all_stats_[pn].players_diplomacy_score;
 	}
 	return 0;
 }
 
 // This is the land size owned by player
 uint32_t PlayersStrengths::get_player_land(Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) > 0) {
-		return all_stats[pn].players_land;
+	if (all_stats_.count(pn) > 0) {
+		return all_stats_[pn].players_land;
 	}
 	return 0;
 }
@@ -1129,7 +1331,7 @@ uint32_t PlayersStrengths::get_player_land(Widelands::PlayerNumber pn) {
 // Calculates the strength of the enemies seen within the last 2 minutes
 uint32_t PlayersStrengths::get_visible_enemies_power(const Time& gametime) {
 	uint32_t pw = 0;
-	for (auto& item : all_stats) {
+	for (auto& item : all_stats_) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
 			pw += item.second.players_power;
 		}
@@ -1140,7 +1342,7 @@ uint32_t PlayersStrengths::get_visible_enemies_power(const Time& gametime) {
 uint32_t PlayersStrengths::get_enemies_average_power() {
 	uint32_t sum = 0;
 	uint8_t count = 0;
-	for (auto& item : all_stats) {
+	for (auto& item : all_stats_) {
 		if (get_is_enemy(item.first)) {
 			sum += item.second.players_power;
 			++count;
@@ -1155,7 +1357,7 @@ uint32_t PlayersStrengths::get_enemies_average_power() {
 uint32_t PlayersStrengths::get_enemies_average_land() {
 	uint32_t sum = 0;
 	uint8_t count = 0;
-	for (auto& item : all_stats) {
+	for (auto& item : all_stats_) {
 		if (get_is_enemy(item.first)) {
 			sum += item.second.players_land;
 			++count;
@@ -1170,7 +1372,7 @@ uint32_t PlayersStrengths::get_enemies_average_land() {
 // Strength of stronger player
 uint32_t PlayersStrengths::get_enemies_max_power() {
 	uint32_t power = 0;
-	for (auto& item : all_stats) {
+	for (auto& item : all_stats_) {
 		if (get_is_enemy(item.first)) {
 			power = std::max<uint32_t>(power, item.second.players_power);
 		}
@@ -1180,7 +1382,7 @@ uint32_t PlayersStrengths::get_enemies_max_power() {
 
 uint32_t PlayersStrengths::get_enemies_max_land() {
 	uint32_t land = 0;
-	for (auto& item : all_stats) {
+	for (auto& item : all_stats_) {
 		if (get_is_enemy(item.first)) {
 			land = std::max<uint32_t>(land, item.second.players_land);
 		}
@@ -1188,39 +1390,63 @@ uint32_t PlayersStrengths::get_enemies_max_land() {
 	return land;
 }
 
+uint32_t PlayersStrengths::get_max_power() {
+	uint32_t power = 0;
+	for (auto& item : all_stats_) {
+		power = std::max<uint32_t>(power, item.second.players_power);
+	}
+	return power;
+}
+
+uint32_t PlayersStrengths::get_max_land() {
+	uint32_t land = 0;
+	for (auto& item : all_stats_) {
+		land = std::max<uint32_t>(land, item.second.players_land);
+	}
+	return land;
+}
+
+uint32_t PlayersStrengths::get_max_buildings() {
+	uint32_t buildings = 0;
+	for (auto& item : all_stats_) {
+		buildings = std::max<uint32_t>(buildings, item.second.players_buildings);
+	}
+	return buildings;
+}
+
 uint32_t PlayersStrengths::get_old_player_power(Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) > 0) {
-		return all_stats[pn].old_players_power;
+	if (all_stats_.count(pn) > 0) {
+		return all_stats_[pn].old_players_power;
 	}
 	return 0;
 }
 
 uint32_t PlayersStrengths::get_old60_player_power(Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) > 0) {
-		return all_stats[pn].old60_players_power;
+	if (all_stats_.count(pn) > 0) {
+		return all_stats_[pn].old60_players_power;
 	}
 	return 0;
 }
 
 uint32_t PlayersStrengths::get_old_player_land(Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) == 0) {
+	if (all_stats_.count(pn) == 0) {
 		verb_log_dbg(" AI %d: Players statistics are still empty\n", pn);
 		return 0;
 	}
-	return all_stats[pn].old_players_land;
+	return all_stats_[pn].old_players_land;
 }
 
 uint32_t PlayersStrengths::get_old60_player_land(Widelands::PlayerNumber pn) {
-	if (all_stats.count(pn) == 0) {
+	if (all_stats_.count(pn) == 0) {
 		verb_log_dbg(" AI %d: Players statistics are still empty\n", pn);
 		return 0;
 	}
-	return all_stats[pn].old60_players_land;
+	return all_stats_[pn].old60_players_land;
 }
 
 uint32_t PlayersStrengths::get_old_visible_enemies_power(const Time& gametime) {
 	uint32_t pw = 0;
-	for (auto& item : all_stats) {
+	for (auto& item : all_stats_) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
 			pw += item.second.old_players_power;
 		}
@@ -1232,12 +1458,12 @@ uint32_t PlayersStrengths::get_old_visible_enemies_power(const Time& gametime) {
 uint32_t PlayersStrengths::get_modified_player_power(Widelands::PlayerNumber pn) {
 	uint32_t result = 0;
 	Widelands::TeamNumber team = 0;
-	if (all_stats.count(pn) > 0) {
-		result = all_stats[pn].players_power;
-		team = all_stats[pn].team_number;
+	if (all_stats_.count(pn) > 0) {
+		result = all_stats_[pn].players_power;
+		team = all_stats_[pn].team_number;
 	}
-	if (team > 0 && team_powers.count(team) > 0) {
-		result = result + (team_powers[team] - result) / 3;
+	if (team > 0 && team_powers_.count(team) > 0) {
+		result = result + (team_powers_[team] - result) / 3;
 	}
 	return result;
 }
@@ -1245,19 +1471,19 @@ uint32_t PlayersStrengths::get_modified_player_power(Widelands::PlayerNumber pn)
 // Are the player in the same team
 bool PlayersStrengths::players_in_same_team(Widelands::PlayerNumber pl1,
                                             Widelands::PlayerNumber pl2) {
-	assert(all_stats.count(pl1) > 0);
-	assert(all_stats.count(pl2) > 0);
-	return pl1 != pl2 && all_stats.at(pl1).team_number > 0 &&
-	       all_stats.at(pl1).team_number == all_stats.at(pl2).team_number;
+	assert(all_stats_.count(pl1) > 0);
+	assert(all_stats_.count(pl2) > 0);
+	return pl1 != pl2 && all_stats_.at(pl1).team_number > 0 &&
+	       all_stats_.at(pl1).team_number == all_stats_.at(pl2).team_number;
 }
 
 bool PlayersStrengths::strong_enough(Widelands::PlayerNumber pl) {
-	if (all_stats.count(pl) == 0) {
+	if (all_stats_.count(pl) == 0) {
 		return false;
 	}
-	uint32_t my_strength = all_stats[pl].players_power;
+	uint32_t my_strength = all_stats_[pl].players_power;
 	uint32_t strongest_opponent_strength = 0;
-	for (const auto& item : all_stats) {
+	for (const auto& item : all_stats_) {
 		if (!players_in_same_team(item.first, pl) && pl != item.first) {
 			if (get_modified_player_power(item.first) > strongest_opponent_strength) {
 				strongest_opponent_strength = get_modified_player_power(item.first);

@@ -142,7 +142,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	load_or_save_.select_by_name(parent.game().save_handler().get_cur_filename());
 
 	center_to_parent();
-	set_flag(UI::Panel::pf_always_on_top, true);
+	set_z(UI::Panel::ZOrder::kFullscreenWindow);
 
 	if (type_ == Type::kSave) {
 		filename_editbox_.focus();
