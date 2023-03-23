@@ -22,6 +22,8 @@ local function init_militarysites(player, sf, total_previous_buildings)
    place_militarysite(player, "amazons_patrol_post", sf, 15, 495)
    place_militarysite(player, "amazons_patrol_post", sf, 24, 501)
 
+   place_militarysite(player, "amazons_treetop_sentry", sf, 0, 496)
+
    -- Military medium
    place_militarysite(player, "amazons_warriors_dwelling", sf, 9, 499)
    place_militarysite(player, "amazons_warriors_dwelling", sf, 6, 28)
@@ -37,7 +39,7 @@ local function init_militarysites(player, sf, total_previous_buildings)
    place_militarysite(player, "amazons_fortification", sf, 11, 28)
    place_militarysite(player, "amazons_fortification", sf, 507, 26)
 
-   return count_buildings(player, total_previous_buildings, 29)
+   return count_buildings(player, total_previous_buildings, 30)
 end
 
 
@@ -411,7 +413,7 @@ end
 -- Run the tests
 run(function()
    local playernumber = 5
-   local expected_number_of_buildings = 122
+   local expected_number_of_buildings = 123
 
    print("Placing buildings for Player 5")
    init_amazons(game.players[playernumber])

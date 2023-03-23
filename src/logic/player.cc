@@ -69,8 +69,20 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 	Widelands::FCoords c[4];  //  Big buildings occupy 4 locations.
 	c[0] = map.get_fcoords(location);
 	map.get_brn(c[0], &c[1]);
-	if (Widelands::BaseImmovable* const immovable = c[0].field->get_immovable()) {
-		immovable->remove(egbase);
+
+	Widelands::DescriptionIndex required_immovable = descr->get_built_over_immovable();
+	if (required_immovable == Widelands::INVALID_INDEX) {
+		if (Widelands::BaseImmovable* const immovable = c[0].field->get_immovable()) {
+			immovable->remove(egbase);
+		}
+	} else {
+		if (!c[0].field->get_immovable()->has_attribute(required_immovable)) {
+			// TODO(tothxa): ideally this should pick a matching immovable and place it
+			throw wexception(
+			   "Attempting to build %s at %dx%d - no immovable with required attribute %i found",
+			   descr->name().c_str(), location.x, location.y, required_immovable);
+		}
+		return;
 	}
 
 	size_t nr_locations = 1;
