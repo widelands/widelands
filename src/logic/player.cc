@@ -73,7 +73,7 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 	Widelands::BaseImmovable* main_immovable = c[0].field->get_immovable();
 
 	if (main_immovable != nullptr && (required_immovable_attr == Widelands::INVALID_INDEX ||
-	    !main_immovable->has_attribute(required_immovable_attr))) {
+	                                  !main_immovable->has_attribute(required_immovable_attr))) {
 		main_immovable->remove(egbase);
 		main_immovable = nullptr;
 	}
@@ -87,9 +87,9 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 			}
 		}
 		if (main_immovable == nullptr) {
-			throw wexception(
-			   "Attempting to build %s at %dx%d - cannot place any immovable with required attribute %i",
-			   descr->name().c_str(), location.x, location.y, required_immovable_attr);
+			throw wexception("Attempting to build %s at %dx%d - cannot place any immovable with "
+			                 "required attribute %i",
+			                 descr->name().c_str(), location.x, location.y, required_immovable_attr);
 		}
 	}
 
