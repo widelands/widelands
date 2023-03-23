@@ -615,6 +615,9 @@ void Panel::move_to_top(const bool on_top_of_equal_z) {
 	/* If all siblings above us are permanently on top, skip. */
 	bool all_on_top = true;
 	for (Panel* p = parent_->first_child_; p != this && all_on_top; p = p->next_) {
+		if (p == nullptr) {
+			continue;
+		}
 		if (on_top_of_equal_z) {
 			all_on_top &= (static_cast<uint8_t>(p->get_z()) > static_cast<uint8_t>(get_z()));
 		} else {
