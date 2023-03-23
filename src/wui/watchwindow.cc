@@ -40,12 +40,12 @@ constexpr Duration kRefreshInterval(5000);
 
 // Holds information for a view
 static WatchWindow* g_watch_window = nullptr;
-static std::set<uint> g_open_watch_windows;
+static std::set<uint16_t> g_open_watch_windows;
 
 namespace {
 
-uint get_next_free_watch_window_id() {
-	for (uint i = 0; i <= g_open_watch_windows.size(); ++i) {
+uint16_t get_next_free_watch_window_id() {
+	for (uint16_t i = 0; i <= g_open_watch_windows.size(); ++i) {
 		if (g_open_watch_windows.count(i) == 0) {
 			g_open_watch_windows.emplace(i);
 			return i;
@@ -62,7 +62,7 @@ Widelands::Game& WatchWindow::game() const {
 
 WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          const std::string& name,
-                         uint const id,
+                         uint16_t const id,
                          int32_t const x,
                          int32_t const y,
                          uint32_t const w,
@@ -390,7 +390,7 @@ WatchWindow* show_watch_window(InteractiveGameBase& parent, const Widelands::Coo
 		return g_watch_window;
 	}
 
-	const uint id = get_next_free_watch_window_id();
+	const uint16_t id = get_next_free_watch_window_id();
 	auto* window = new WatchWindow(
 	   parent, format("watch_%d", id), id, 250 + 20 * id, 150 + 20 * id, 200, 200, false);
 	window->add_view(coords);

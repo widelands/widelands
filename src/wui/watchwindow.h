@@ -34,7 +34,7 @@ class Game;
 struct WatchWindow : public UI::UniqueWindow {
 	WatchWindow(InteractiveGameBase& parent,
 	            const std::string& name,
-	            uint id,
+	            uint16_t id,
 	            int32_t x,
 	            int32_t y,
 	            uint32_t w,
@@ -88,7 +88,7 @@ private:
 	uint8_t cur_index_{0U};
 	UI::Button* view_btns_[kViews];
 	std::vector<WatchWindow::View> views_;
-	uint id_;
+	uint16_t id_;
 };
 
 WatchWindow* show_watch_window(InteractiveGameBase&, const Widelands::Coords&);
