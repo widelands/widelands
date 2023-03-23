@@ -185,7 +185,7 @@ void GameSummaryScreen::fill_data() {
 	// if not then the first line
 	uint32_t current_player_position = 0;
 
-	for (uintptr_t i = 1; i <= game_.player_manager()->get_number_of_players(); ++i) {
+	for (uintptr_t i = 1; i <= kMaxPlayers; ++i) {
 		const Widelands::PlayerEndStatus* pes = game_.player_manager()->get_player_end_status(i);
 		if (pes == nullptr) {
 			continue;
