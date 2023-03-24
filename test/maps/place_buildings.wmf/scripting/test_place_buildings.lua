@@ -42,7 +42,7 @@ run(function()
       end
    end
 
-   place(bdg_to_place.over, 40, y_trees_edge, force)
+   place(bdg_to_place.over, 40, y_trees_edge, false)
 
    sleep(1000)
 
