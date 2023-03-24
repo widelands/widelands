@@ -1,4 +1,4 @@
-sizes = { "big", "medium", "small", "over" }
+local sizes = { "big", "medium", "small", "over" }
 
 local y_coords = {
    0,   -- free
@@ -9,14 +9,16 @@ local y_coords = {
 
 local y_trees_edge = 42
 
-bdg_to_place = {
+local bdg_to_place = {
    big = "amazons_cassava_plantation",
    medium = "amazons_warriors_gathering",
    small = "amazons_patrol_post",
    over = "amazons_treetop_sentry"
 }
 
-local function place_buildings()
+run(function()
+   sleep(1000)
+
    local force
    for x,s in ipairs(sizes) do
       if s == "over" then
@@ -38,8 +40,8 @@ local function place_buildings()
    p1:place_building(bdg_to_place.over, map:get_field(40, y_trees_edge), false, false)
    p1:place_building(bdg_to_place.over, map:get_field(45, y_trees_edge), true, false)
 
+   sleep(1000)
+
    print("# All Tests passed.")
    wl.ui.MapView():close()
-end
-
-run(place_buildings)
+end)
