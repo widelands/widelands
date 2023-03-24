@@ -16,6 +16,16 @@ local bdg_to_place = {
    over = "amazons_treetop_sentry"
 }
 
+function place(building, x, y, force)
+   if not force then
+      p1:conquer(map:get_field(x + 2, y), 8)
+   end
+   local b = p1:place_building(building, map:get_field(x, y), false, force)
+   assert_equal(building, b.descr.name)
+   local cs = p1:place_building(building, map:get_field(x + 5, y), true, force)
+   assert_equal("constructionsite", cs.descr.name)
+end
+
 run(function()
    sleep(1000)
 
@@ -27,18 +37,12 @@ run(function()
         force = false
       end
       for j,y in ipairs(y_coords) do
-         if not force then
-            p1:conquer(map:get_field(10 * x + 2, y), 8)
-         end
-         p1:place_building(bdg_to_place[s], map:get_field(10 * x, y), false, force)
-         p1:place_building(bdg_to_place[s], map:get_field(10 * x + 5, y), true, force)
+         place(bdg_to_place[s], 10 * x, y, force)
          force = true
       end
    end
 
-   p1:conquer(map:get_field(42, y_trees_edge), 8)
-   p1:place_building(bdg_to_place.over, map:get_field(40, y_trees_edge), false, false)
-   p1:place_building(bdg_to_place.over, map:get_field(45, y_trees_edge), true, false)
+   place(bdg_to_place.over, 40, y_trees_edge, force)
 
    sleep(1000)
 
