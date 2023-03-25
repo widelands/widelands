@@ -1,0 +1,12 @@
+# Automatically created by Widelands 1.2~git26082 (fa28389@master) Release
+
+[global]
+packet_version="2"
+
+[player_1]
+name=
+tribe="amazons"
+ai=
+closeable="false"
+team="0"
+random="false"
