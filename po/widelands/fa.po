@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-03-13 02:46+0000\n"
+"POT-Creation-Date: 2023-03-22 02:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015\n"
 "Language-Team: Persian (http://www.transifex.com/widelands/widelands/language/fa/)\n"
@@ -7404,75 +7404,75 @@ msgstr ""
 msgid "Fastplace #%i"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:197
+#: ../../src/wui/actionconfirm.cc:198
 msgid "Destroy building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:198
+#: ../../src/wui/actionconfirm.cc:199
 msgid "Do you really want to destroy this building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:258
+#: ../../src/wui/actionconfirm.cc:259
 msgid "Dismantle building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:259
+#: ../../src/wui/actionconfirm.cc:260
 msgid "Do you really want to dismantle this building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:261 ../../src/wui/actionconfirm.cc:321
+#: ../../src/wui/actionconfirm.cc:262 ../../src/wui/actionconfirm.cc:322
 msgid "Preserve wares"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:263
+#: ../../src/wui/actionconfirm.cc:264
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:312
+#: ../../src/wui/actionconfirm.cc:313
 msgid "Enhance building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:316 ../../src/wui/actionconfirm.cc:319
+#: ../../src/wui/actionconfirm.cc:317 ../../src/wui/actionconfirm.cc:320
 msgid "Do you really want to enhance this building?"
 msgstr ""
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
-#: ../../src/wui/actionconfirm.cc:318
+#: ../../src/wui/actionconfirm.cc:319
 msgid "Be careful if the enemy is near!"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:325
+#: ../../src/wui/actionconfirm.cc:326
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:376
+#: ../../src/wui/actionconfirm.cc:377
 msgid "Sink the ship?"
 msgstr ""
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:378
+#: ../../src/wui/actionconfirm.cc:379
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:415
+#: ../../src/wui/actionconfirm.cc:416
 msgid "Cancel expedition?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:416
+#: ../../src/wui/actionconfirm.cc:417
 msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:455
+#: ../../src/wui/actionconfirm.cc:456
 msgid "Do you really want to give up and become a spectator?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:455
+#: ../../src/wui/actionconfirm.cc:456
 msgid "Resign?"
 msgstr ""
 
