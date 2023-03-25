@@ -18,7 +18,6 @@
 
 #include "wui/quicknavigation.h"
 
-#include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "ui_basic/editbox.h"
