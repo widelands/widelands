@@ -262,8 +262,7 @@ void QuickNavigationWindow::rebuild() {
 			show_watch_window(
 			   dynamic_cast<InteractiveGameBase&>(ibase_),
 			   MapviewPixelFunctions::calc_node_and_triangle(
-			      ibase_.egbase().map(),
-			      static_cast<int>(q.landmarks()[i].view.viewpoint.x),
+			      ibase_.egbase().map(), static_cast<int>(q.landmarks()[i].view.viewpoint.x),
 			      static_cast<int>(q.landmarks()[i].view.viewpoint.y))
 			      .node);
 		});
