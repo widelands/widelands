@@ -20,6 +20,7 @@
 #define WL_LOGIC_PLAYERSMANAGER_H
 
 #include <cassert>
+#include <map>
 
 #include "base/times.h"
 #include "graphic/playercolor.h"
@@ -29,7 +30,6 @@
 namespace Widelands {
 
 class EditorGameBase;
-class Player;
 class Player;
 
 /**
@@ -97,7 +97,7 @@ private:
 	Player* players_[kMaxPlayers];
 	EditorGameBase& egbase_;
 	uint8_t number_of_players_{0U};
-	std::vector<PlayerEndStatus> players_end_status_;
+	std::map<PlayerNumber, PlayerEndStatus> players_end_status_;
 };
 }  // namespace Widelands
 
