@@ -92,6 +92,9 @@ public:
 	void add_player_end_status(const PlayerEndStatus& status, bool change_existing = false);
 
 	[[nodiscard]] const PlayerEndStatus* get_player_end_status(PlayerNumber player) const;
+	[[nodiscard]] const std::map<PlayerNumber, PlayerEndStatus>& get_players_end_status() {
+		return players_end_status_;
+	}
 
 private:
 	Player* players_[kMaxPlayers];

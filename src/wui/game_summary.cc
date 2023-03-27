@@ -144,8 +144,8 @@ bool GameSummaryScreen::handle_mousepress(uint8_t btn, int32_t mx, int32_t my) {
 }
 
 bool GameSummaryScreen::compare_status(const uint32_t index1, const uint32_t index2) const {
-	assert(index1 >= 0 && index1 < game_.player_manager()->get_number_of_players());
-	assert(index2 >= 0 && index2 < game_.player_manager()->get_number_of_players());
+	assert(index1 < game_.player_manager()->get_number_of_players());
+	assert(index2 < game_.player_manager()->get_number_of_players());
 
 	const Widelands::PlayerEndStatus* p1 =
 	   game_.player_manager()->get_player_end_status(playernumbers_[index1]);
@@ -186,22 +186,24 @@ void GameSummaryScreen::fill_data() {
 	uint32_t i = 0;
 	playernumbers_.clear();
 
-	for (Widelands::PlayerNumber pn = 1; pn <= kMaxPlayers; ++pn) {
-		const Widelands::PlayerEndStatus* pes = game_.player_manager()->get_player_end_status(pn);
-		if (pes == nullptr) {
-			continue;
-		}
+	const std::map<Widelands::PlayerNumber, Widelands::PlayerEndStatus>& end_status_map =
+	   game_.player_manager()->get_players_end_status();
+	for (auto it: end_status_map) {
+		const Widelands::PlayerNumber pn = it.first;
+		const Widelands::PlayerEndStatus& pes = it.second;
+		assert(pn == pes.player);
+
 		playernumbers_.emplace_back(pn);
-		if ((ipl != nullptr) && pes->player == ipl->player_number()) {
+		if ((ipl != nullptr) && pes.player == ipl->player_number()) {
 			local_in_game = true;
-			local_won = pes->result == Widelands::PlayerEndResult::kWon;
+			local_won = pes.result == Widelands::PlayerEndResult::kWon;
 			current_player_position = i;
 		}
-		Widelands::Player* p = game_.get_player(pes->player);
+		Widelands::Player* p = game_.get_player(pn);
 		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(i);
 		// Player name & pic
 		const Image* player_image = playercolor_image(
-		   game_.player(pes->player).get_playercolor(), "images/players/genstats_player.png");
+		   game_.player(pn).get_playercolor(), "images/players/genstats_player.png");
 		assert(player_image);
 		te.set_picture(0, player_image, p->get_name());
 		// Team
@@ -210,7 +212,7 @@ void GameSummaryScreen::fill_data() {
 		te.set_string(1, teastr_);
 		// Status
 		std::string stat_str;
-		switch (pes->result) {
+		switch (pes.result) {
 		case Widelands::PlayerEndResult::kLost:
 			/** TRANSLATORS: This is shown in the game summary for the players who have lost. */
 			stat_str = _("Lost");
@@ -236,12 +238,11 @@ void GameSummaryScreen::fill_data() {
 		}
 		te.set_string(2, stat_str);
 		// Time
-		te.set_string(3, gametimestring(pes->time.get()));
+		te.set_string(3, gametimestring(pes.time.get()));
 		++i;
-		if (i == game_.player_manager()->get_number_of_players()) {
-			break;
-		}
 	}
+
+	assert(i == game_.player_manager()->get_number_of_players());
 
 	if (local_in_game) {
 		if (local_won) {
