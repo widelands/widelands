@@ -68,25 +68,55 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 	const Widelands::Map& map = egbase.map();
 	Widelands::FCoords c[4];  //  Big buildings occupy 4 locations.
 	c[0] = map.get_fcoords(location);
-	map.get_brn(c[0], &c[1]);
-	if (Widelands::BaseImmovable* const immovable = c[0].field->get_immovable()) {
-		immovable->remove(egbase);
+
+	Widelands::DescriptionIndex const required_immovable_attr = descr->get_built_over_immovable();
+	Widelands::BaseImmovable* main_immovable = c[0].field->get_immovable();
+
+	// Remove blocking immovable
+	if (main_immovable != nullptr && (required_immovable_attr == Widelands::INVALID_INDEX ||
+	                                  !main_immovable->has_attribute(required_immovable_attr))) {
+		main_immovable->remove(egbase);
+		main_immovable = nullptr;
+	}
+
+	// Place required immovable if not present
+	if (required_immovable_attr != Widelands::INVALID_INDEX && main_immovable == nullptr) {
+		for (Widelands::DescriptionIndex i = 0; i < egbase.descriptions().nr_immovables(); ++i) {
+			const Widelands::ImmovableDescr* imdesc = egbase.descriptions().get_immovable_descr(i);
+			if (imdesc->has_attribute(required_immovable_attr)) {
+				main_immovable = &egbase.create_immovable(c[0], i, nullptr);
+				break;
+			}
+		}
+		if (main_immovable == nullptr) {
+			throw wexception("Attempting to build %s at %dx%d - cannot place any immovable with "
+			                 "required attribute %i",
+			                 descr->name().c_str(), location.x, location.y, required_immovable_attr);
+		}
 	}
 
 	size_t nr_locations = 1;
 	if ((descr->get_size() & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
+		// Fortunately we don't have any big buildings that are built over immovables,
+		// so we can just clear the other fields.
+		assert(required_immovable_attr == Widelands::INVALID_INDEX);
 		nr_locations = 4;
 		map.get_trn(c[0], &c[1]);
 		map.get_tln(c[0], &c[2]);
 		map.get_ln(c[0], &c[3]);
 	}
+
 	for (size_t i = 0; i < nr_locations; ++i) {
 		//  Make sure that the player owns the area around.
 		egbase.conquer_area_no_building(Widelands::PlayerArea<Widelands::Area<Widelands::FCoords>>(
 		   player_number, Widelands::Area<Widelands::FCoords>(c[i], 1)));
 
-		if (Widelands::BaseImmovable* const immovable = c[i].field->get_immovable()) {
-			immovable->remove(egbase);
+		// We've just made sure that the main field is as the building needs it, so skip it.
+		// Only big buildings have more.
+		if (i > 0) {
+			if (Widelands::BaseImmovable* const immovable = c[i].field->get_immovable()) {
+				immovable->remove(egbase);
+			}
 		}
 	}
 }

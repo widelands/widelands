@@ -798,6 +798,11 @@ msgid ""
 "stronghold on Föhr has always been their only defence to speak of, so once "
 "you were gone he seized the entire area with ease."
 msgstr ""
+"С превеликой радостью! Как свидетельствуют мои торговые партнеры, жажда "
+"завоеваний Аттердага безгранична. После полного подчинения Фёра, он завоевал"
+" и все другие острова в окрестностях. Ваша крепость на Фёре была "
+"единственным стоящим внимания укреплением, поэтому, как только вы ушли, он с"
+" легкостью захватил всю территорию."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:330
@@ -808,6 +813,11 @@ msgid ""
 "said to have been executed for embezzling a bushel of grain. People are "
 "suffering, and will no doubt gladly join anyone who comes to free them."
 msgstr ""
+"По слухам, захватчики установили жестокие правила. Общеизвестно, что они "
+"прекратили всякую торговлю, и местные жители вынуждены отдавать данам "
+"половину всего, что они производят, в качестве дани. Половину! Говорят, что "
+"уже десятки человек были казнены за хищение корзины зерна. Люди страдают и, "
+"без сомнения, с радостью присоединятся к любому, кто придет их освободить."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:337
@@ -817,6 +827,10 @@ msgid ""
 " swear that the pirates were in fact Danish soldiers, and that their ships "
 "belong to the Danish fleet."
 msgstr ""
+"И кое-что ещё. Торговые суда, пытавшиеся уплыть на север от оккупированной "
+"территории, были взяты на абордаж и потоплены пиратами. Однако, как заверяют"
+" выжившие, пираты на самом деле были солдатами данов и их корабли "
+"принадлежат датскому флоту."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:340
@@ -827,6 +841,11 @@ msgid ""
 "would do that. Clearly he attempts to disguise this fact. Why would he do "
 "that, unless he believes this secret to be of strategical importance?"
 msgstr ""
+"Позволю себе высказать предположение: полагаю, что Аттердаг перевозит свои "
+"войска на острова из своей столицы с помощью кораблей. Наземный маршрут "
+"намного длиннее и сложнее, так что нетрудно понять, почему он выбрал другой "
+"путь. Очевидно, он пытается скрыть это. Зачем ему это делать, если только он"
+" не считает, что этот секрет имеет стратегическое значение?"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:343
@@ -853,7 +872,7 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:348
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:362
 msgid "Victory!"
-msgstr ""
+msgstr "Победа!"
 
 #. TRANSLATORS: Reebaud – Victory 5
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:350

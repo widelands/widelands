@@ -128,13 +128,7 @@ function traverse_economy(plr, flag)
             elseif n.immovable.descr.type_name == "constructionsite" or n.immovable.descr.type_name == "dismantlesite" then
                print(("IGNORING constructionsite/dismantlesite at %s"):format(tostring(n)))
             elseif n.immovable.descr.type_name:sub(-4) == "site" or n.immovable.descr.type_name == "warehouse" then
-               if n.immovable.descr.name == "amazons_treetop_sentry" then
-                  -- Can't be placed by lua
-                  -- Must be by name because built_over_immovable property isn't exposed to lua
-                  print("IGNORING treetop sentry")
-               else
-                  _discover_building(n.immovable)
-               end
+               _discover_building(n.immovable)
             else
                print("IGNORING immovable type: ", n.immovable.descr.type_name)
             end
