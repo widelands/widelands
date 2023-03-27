@@ -187,7 +187,7 @@ void GameSummaryScreen::fill_data() {
 	playernumbers_.clear();
 
 	const std::map<Widelands::PlayerNumber, Widelands::PlayerEndStatus>& end_status_map =
-	   game_.player_manager()->get_players_end_status();
+	   game_.player_manager()->get_all_players_end_status();
 	for (auto it : end_status_map) {
 		const Widelands::PlayerNumber pn = it.first;
 		const Widelands::PlayerEndStatus& pes = it.second;
