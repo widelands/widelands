@@ -19,6 +19,9 @@
 #ifndef WL_WUI_GAME_SUMMARY_H
 #define WL_WUI_GAME_SUMMARY_H
 
+#include <vector>
+
+#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/icon.h"
@@ -59,6 +62,7 @@ private:
 	UI::Button* continue_button_;
 	UI::Button* stop_button_;
 	UI::Table<uintptr_t const>* players_table_;
+	std::vector<Widelands::PlayerNumber> playernumbers_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_SUMMARY_H
