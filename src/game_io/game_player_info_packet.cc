@@ -185,7 +185,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver* /* 
 	const std::map<Widelands::PlayerNumber, Widelands::PlayerEndStatus>& end_status_map =
 	   game.player_manager()->get_all_players_end_status();
 	fw.unsigned_8(end_status_map.size());
-	for (auto it : end_status_map) {
+	for (const auto it : end_status_map) {
 		const Widelands::PlayerEndStatus& status = it.second;
 		fw.unsigned_8(status.player);
 		fw.unsigned_8(static_cast<uint8_t>(status.result));
