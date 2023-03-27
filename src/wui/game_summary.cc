@@ -147,8 +147,10 @@ bool GameSummaryScreen::compare_status(const uint32_t index1, const uint32_t ind
 	assert(index1 >= 0 && index1 < game_.player_manager()->get_number_of_players());
 	assert(index2 >= 0 && index2 < game_.player_manager()->get_number_of_players());
 
-	const Widelands::PlayerEndStatus* p1 = game_.player_manager()->get_player_end_status(playernumbers_[index1]);
-	const Widelands::PlayerEndStatus* p2 = game_.player_manager()->get_player_end_status(playernumbers_[index2]);
+	const Widelands::PlayerEndStatus* p1 =
+	   game_.player_manager()->get_player_end_status(playernumbers_[index1]);
+	const Widelands::PlayerEndStatus* p2 =
+	   game_.player_manager()->get_player_end_status(playernumbers_[index2]);
 
 	if (p1->result == p2->result) {
 		// We want to use the time as tie-breaker: The first player to lose sorts last
