@@ -100,7 +100,7 @@ void PlayersManager::add_player_end_status(const PlayerEndStatus& status, bool c
 	auto it = players_end_status_.find(pn);
 
 	if (it == players_end_status_.end()) {
-		players_end_status_.insert({pn, status});
+		players_end_status_.emplace(pn, status);
 	} else {
 		if (!change_existing) {
 			throw wexception("Player end status for player %d already reported", status.player);
