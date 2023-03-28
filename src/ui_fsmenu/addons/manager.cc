@@ -1183,7 +1183,7 @@ void AddOnsCtrl::update_dependency_errors() {
 					if (too_late && AddOns::order_matters(prev->category, next->category)) {
 						warn_requirements.push_back(format(
 						   _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
-							 "listed in the wrong order"),
+						     "listed in the wrong order"),
 						   addon->first->descname(), prev->descname(), search_result->first->descname()));
 					}
 				}
