@@ -87,34 +87,33 @@ Player* PlayersManager::add_player(PlayerNumber const player_number,
 }
 
 const PlayerEndStatus* PlayersManager::get_player_end_status(PlayerNumber player) const {
-	return (player == 0 || player - 1u >= players_end_status_.size() ||
-	        players_end_status_.at(player - 1).player != player) ?
-             nullptr :
-             &players_end_status_.at(player - 1);
+	auto it = players_end_status_.find(player);
+	if (it == players_end_status_.end()) {
+		return nullptr;
+	}
+	return &(it->second);
 }
 
 void PlayersManager::add_player_end_status(const PlayerEndStatus& status, bool change_existing) {
-	assert(status.player > 0 && status.player <= number_of_players_);
-	if (players_end_status_.size() < number_of_players_) {
-		players_end_status_.resize(number_of_players_);
-	}
+	assert(status.player > 0);
+	const PlayerNumber& pn = status.player;
+	auto it = players_end_status_.find(pn);
 
-	{
-		PlayerEndStatus& s = players_end_status_.at(status.player - 1);
-		if (!change_existing && s.player != 0) {
+	if (it == players_end_status_.end()) {
+		players_end_status_.emplace(pn, status);
+	} else {
+		if (!change_existing) {
 			throw wexception("Player end status for player %d already reported", status.player);
 		}
-		s = status;
+		it->second = status;
 	}
 
 	/* If all results have been gathered, show the summary screen. */
 	if (change_existing || egbase_.get_igbase() == nullptr) {
 		return;
 	}
-	for (const PlayerEndStatus& s : players_end_status_) {
-		if (s.player == 0) {
-			return;
-		}
+	if (players_end_status_.size() < number_of_players_) {
+		return;
 	}
 	egbase_.get_igbase()->show_game_summary();
 }
