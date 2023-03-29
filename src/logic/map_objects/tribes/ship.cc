@@ -58,6 +58,9 @@ namespace Widelands {
 
 namespace {
 
+constexpr unsigned kNearDestinationShipRadius = 4;
+constexpr unsigned kNearDestinationNoteRadius = 1;
+
 /// Returns true if 'coord' is not blocked by immovables
 /// Trees are allowed, because we don't want spreading forests to block portspaces from expeditions
 bool can_support_port(const FCoords& coord, BaseImmovable::Size max_immo_size) {
@@ -339,6 +342,34 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			send_signal(game, "fail");
 			pop_task(game);
 			return;
+		}
+	}
+
+	if (send_message_at_destination_) {
+		const MapObject* mo = destination_.get(game);
+		if (mo == nullptr) {  // Destination vanished.
+			send_message_at_destination_ = false;
+		} else {
+			bool arrived;
+			switch (mo->descr().type()) {
+			case MapObjectType::PORTDOCK:
+				arrived = get_position().field->get_immovable() == mo;
+				break;
+			case MapObjectType::SHIP:
+				arrived = game.map().calc_distance(get_position(), dynamic_cast<const Ship&>(*mo).get_position()) <= kNearDestinationShipRadius;
+				break;
+			case MapObjectType::PINNED_NOTE:
+				arrived = game.map().calc_distance(get_position(), dynamic_cast<const PinnedNote&>(*mo).get_position()) <= kNearDestinationNoteRadius;
+				break;
+			default:
+				NEVER_HERE();
+			}
+			if (arrived) {
+				send_message_at_destination_ = false;
+				send_message(game, _("Ship Arrived"), _("Ship Reached Destination"),
+				             _("Your ship has arrived at its destination."),
+				             descr().icon_filename());
+			}
 		}
 	}
 
@@ -626,7 +657,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			Bob* dest = dynamic_cast<Bob*>(destination_object);
 
 			if (map->calc_distance(position, dest->get_position()) <=
-			    (dest->descr().type() == MapObjectType::SHIP ? 4 : 1)) {
+			    (dest->descr().type() == MapObjectType::SHIP ? kNearDestinationShipRadius : kNearDestinationNoteRadius)) {
 				// Already there, idle and await further orders.
 				start_task_idle(game, descr().main_animation(), 250);
 				return true;
@@ -1514,6 +1545,7 @@ void Ship::set_destination(EditorGameBase& egbase, MapObject* dest, bool is_play
 	       dest->descr().type() == MapObjectType::PINNED_NOTE);
 
 	destination_ = dest;
+	send_message_at_destination_ = is_playercommand;
 
 	if (upcast(Game, g, &egbase)) {
 		send_signal(*g, "wakeup");
@@ -2050,7 +2082,7 @@ Load / Save implementation
 /* Changelog:
  * 12 - v1.1
  * 13 - Added warships and naval warfare.
- * 14 - Added healing.
+ * 14 - Added healing and send_message_at_destination_.
  */
 constexpr uint8_t kCurrentPacketVersion = 14;
 
@@ -2123,6 +2155,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 		hitpoints_ = (packet_version >= 13) ? fr.unsigned_32() : -1;
 		if (packet_version >= 14) {
 			last_heal_time_ = Time(fr);
+			send_message_at_destination_ = fr.unsigned_8() != 0;
 		}
 
 		shipname_ = fr.c_string();
@@ -2198,6 +2231,7 @@ void Ship::Loader::load_finish() {
 	ship.pending_refit_ = pending_refit_;
 	ship.hitpoints_ = (hitpoints_ < 0) ? ship.descr().max_hitpoints_ : hitpoints_;
 	ship.last_heal_time_ = last_heal_time_;
+	ship.send_message_at_destination_ = send_message_at_destination_;
 
 	// restore the  ship id and name
 	ship.shipname_ = shipname_;
@@ -2304,6 +2338,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	}
 	fw.unsigned_32(hitpoints_);
 	last_heal_time_.save(fw);
+	fw.unsigned_8(send_message_at_destination_ ? 1 : 0);
 
 	fw.string(shipname_);
 	fw.unsigned_32(capacity_);
