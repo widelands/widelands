@@ -144,14 +144,13 @@ bool GameSummaryScreen::handle_mousepress(uint8_t btn, int32_t mx, int32_t my) {
 }
 
 bool GameSummaryScreen::compare_status(const uint32_t index1, const uint32_t index2) const {
-	const uintptr_t a = (*players_table_)[index1];
-	const uintptr_t b = (*players_table_)[index2];
+	assert(index1 < game_.player_manager()->get_number_of_players());
+	assert(index2 < game_.player_manager()->get_number_of_players());
 
-	assert(a > 0 && a <= game_.player_manager()->get_number_of_players());
-	assert(b > 0 && b <= game_.player_manager()->get_number_of_players());
-
-	const Widelands::PlayerEndStatus* p1 = game_.player_manager()->get_player_end_status(a);
-	const Widelands::PlayerEndStatus* p2 = game_.player_manager()->get_player_end_status(b);
+	const Widelands::PlayerEndStatus* p1 =
+	   game_.player_manager()->get_player_end_status(playernumbers_[index1]);
+	const Widelands::PlayerEndStatus* p2 =
+	   game_.player_manager()->get_player_end_status(playernumbers_[index2]);
 
 	if (p1->result == p2->result) {
 		// We want to use the time as tie-breaker: The first player to lose sorts last
@@ -184,22 +183,27 @@ void GameSummaryScreen::fill_data() {
 	// This defines a row to be selected, current player,
 	// if not then the first line
 	uint32_t current_player_position = 0;
+	uint32_t i = 0;
+	playernumbers_.clear();
 
-	for (uintptr_t i = 1; i <= game_.player_manager()->get_number_of_players(); ++i) {
-		const Widelands::PlayerEndStatus* pes = game_.player_manager()->get_player_end_status(i);
-		if (pes == nullptr) {
-			continue;
-		}
-		if ((ipl != nullptr) && pes->player == ipl->player_number()) {
+	const std::map<Widelands::PlayerNumber, Widelands::PlayerEndStatus>& end_status_map =
+	   game_.player_manager()->get_all_players_end_status();
+	for (const auto& it : end_status_map) {
+		const Widelands::PlayerNumber& pn = it.first;
+		const Widelands::PlayerEndStatus& pes = it.second;
+		assert(pn == pes.player);
+
+		playernumbers_.emplace_back(pn);
+		if ((ipl != nullptr) && pes.player == ipl->player_number()) {
 			local_in_game = true;
-			local_won = pes->result == Widelands::PlayerEndResult::kWon;
-			current_player_position = i - 1;
+			local_won = pes.result == Widelands::PlayerEndResult::kWon;
+			current_player_position = i;
 		}
-		Widelands::Player* p = game_.get_player(pes->player);
+		Widelands::Player* p = game_.get_player(pn);
 		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(i);
 		// Player name & pic
 		const Image* player_image = playercolor_image(
-		   game_.player(pes->player).get_playercolor(), "images/players/genstats_player.png");
+		   game_.player(pn).get_playercolor(), "images/players/genstats_player.png");
 		assert(player_image);
 		te.set_picture(0, player_image, p->get_name());
 		// Team
@@ -208,7 +212,7 @@ void GameSummaryScreen::fill_data() {
 		te.set_string(1, teastr_);
 		// Status
 		std::string stat_str;
-		switch (pes->result) {
+		switch (pes.result) {
 		case Widelands::PlayerEndResult::kLost:
 			/** TRANSLATORS: This is shown in the game summary for the players who have lost. */
 			stat_str = _("Lost");
@@ -234,8 +238,11 @@ void GameSummaryScreen::fill_data() {
 		}
 		te.set_string(2, stat_str);
 		// Time
-		te.set_string(3, gametimestring(pes->time.get()));
+		te.set_string(3, gametimestring(pes.time.get()));
+		++i;
 	}
+
+	assert(i == game_.player_manager()->get_number_of_players());
 
 	if (local_in_game) {
 		if (local_won) {
@@ -266,9 +273,8 @@ void GameSummaryScreen::stop_clicked() {
 }
 
 void GameSummaryScreen::player_selected(uint32_t entry_index) {
-	const uintptr_t selected_player_index = (*players_table_)[entry_index];
 	const Widelands::PlayerEndStatus* player_status =
-	   game_.player_manager()->get_player_end_status(selected_player_index);
+	   game_.player_manager()->get_player_end_status(playernumbers_[entry_index]);
 
 	std::string info_str = parse_player_info(player_status->info);
 	info_area_->set_text(info_str);
