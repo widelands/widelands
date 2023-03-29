@@ -167,8 +167,6 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table,
    : Animation(table) {
 	try {
 		// Get image files
-		// TODO(GunChleoc): When all animations have been converted, require that animation_directory
-		// is not empty.
 		const std::string directory =
 		   animation_directory.empty() ? table.get_string("directory") : animation_directory;
 

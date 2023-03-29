@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-03-04 02:52+0000\n"
+"POT-Creation-Date: 2023-03-25 02:38+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2023\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
@@ -339,7 +339,7 @@ msgid "Redo"
 msgstr "Rehacer"
 
 #: ../../src/editor/editorinteractive.cc:174
-#: ../../src/wui/buildingwindow.cc:436 ../../src/wui/interactive_player.cc:234
+#: ../../src/wui/buildingwindow.cc:438 ../../src/wui/interactive_player.cc:234
 msgid "Help"
 msgstr "Ayuda"
 
@@ -1703,7 +1703,7 @@ msgstr "Jugador interactivo"
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:176
+#: ../../src/graphic/gl/initialize.cc:179
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
@@ -1712,8 +1712,8 @@ msgstr "Widelands no va a funcionar porque no podemos detectar la versión del l
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:180
-#: ../../src/graphic/gl/initialize.cc:193
+#: ../../src/graphic/gl/initialize.cc:183
+#: ../../src/graphic/gl/initialize.cc:196
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
@@ -1722,7 +1722,7 @@ msgstr "Hay un problema desconocido al leer la información del controlador de l
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:190
+#: ../../src/graphic/gl/initialize.cc:193
 msgid ""
 "Widelands won't work because we were unable to detect the OpenGL version."
 msgstr "Widelands no va a funcionar porque no podemos detectar la versión de OpenGL."
@@ -1730,15 +1730,15 @@ msgstr "Widelands no va a funcionar porque no podemos detectar la versión de Op
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:221
-#: ../../src/graphic/gl/initialize.cc:241
+#: ../../src/graphic/gl/initialize.cc:224
+#: ../../src/graphic/gl/initialize.cc:244
 msgid "Widelands won’t work because your graphics driver is too old."
 msgstr "Widelands no va a funcionar porque el controlador de tu tarjeta gráfica es demasiado antiguo."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:224
+#: ../../src/graphic/gl/initialize.cc:227
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
 msgstr "La versión de %1$u tiene que ser versión %2$u.%3$u o más nuevo."
@@ -1746,16 +1746,16 @@ msgstr "La versión de %1$u tiene que ser versión %2$u.%3$u o más nuevo."
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:244
+#: ../../src/graphic/gl/initialize.cc:247
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
 msgstr "El %1$s tiene que ser versión %2$u.%3$u o más nuevo"
 
-#: ../../src/graphic/gl/initialize.cc:260
+#: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
 msgstr "OpenGL"
 
-#: ../../src/graphic/gl/initialize.cc:307
+#: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
 msgstr "lenguaje de sombreado"
 
@@ -1979,11 +1979,11 @@ msgstr "Inicializando partida…"
 msgid "Creating player infrastructure…"
 msgstr "Creando infraestructura de jugador…"
 
-#: ../../src/logic/game.cc:647 ../../src/logic/player.cc:227
+#: ../../src/logic/game.cc:647 ../../src/logic/player.cc:257
 msgid "Missing starting position"
 msgstr "Posición inicial no disponible"
 
-#: ../../src/logic/game.cc:648 ../../src/logic/player.cc:228
+#: ../../src/logic/game.cc:648 ../../src/logic/player.cc:258
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -2597,19 +2597,19 @@ msgstr "Un archivo de mapa no es válido :\n%s"
 msgid "This objective has no description."
 msgstr "El objetivo no tiene descripción"
 
-#: ../../src/logic/player.cc:1956
+#: ../../src/logic/player.cc:1986
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "Barco %d"
 
-#: ../../src/logic/player.cc:1974
+#: ../../src/logic/player.cc:2004
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr "Puerto %d"
 
-#: ../../src/logic/player.cc:1974
+#: ../../src/logic/player.cc:2004
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
@@ -7447,75 +7447,75 @@ msgstr "%1$s%2$s"
 msgid "Fastplace #%i"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:197
+#: ../../src/wui/actionconfirm.cc:198
 msgid "Destroy building?"
 msgstr "¿Destruir edificio?"
 
-#: ../../src/wui/actionconfirm.cc:198
+#: ../../src/wui/actionconfirm.cc:199
 msgid "Do you really want to destroy this building?"
 msgstr "¿Realmente quieres destruir este edificio?"
 
-#: ../../src/wui/actionconfirm.cc:258
+#: ../../src/wui/actionconfirm.cc:259
 msgid "Dismantle building?"
 msgstr "¿Desarmar edificio?"
 
-#: ../../src/wui/actionconfirm.cc:259
+#: ../../src/wui/actionconfirm.cc:260
 msgid "Do you really want to dismantle this building?"
 msgstr "¿Realmente quieres desarmar este edificio?"
 
-#: ../../src/wui/actionconfirm.cc:261 ../../src/wui/actionconfirm.cc:321
+#: ../../src/wui/actionconfirm.cc:262 ../../src/wui/actionconfirm.cc:322
 msgid "Preserve wares"
 msgstr "Conservar productos"
 
-#: ../../src/wui/actionconfirm.cc:263
+#: ../../src/wui/actionconfirm.cc:264
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
 msgstr "Los productos que hay en el edificio van a ser retirados por el constructor, aumentando el tiempo para desarmarlo"
 
-#: ../../src/wui/actionconfirm.cc:312
+#: ../../src/wui/actionconfirm.cc:313
 msgid "Enhance building?"
 msgstr "¿Mejorar edificio?"
 
-#: ../../src/wui/actionconfirm.cc:316 ../../src/wui/actionconfirm.cc:319
+#: ../../src/wui/actionconfirm.cc:317 ../../src/wui/actionconfirm.cc:320
 msgid "Do you really want to enhance this building?"
 msgstr "¿Realmente quieres mejorar este edificio?"
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
-#: ../../src/wui/actionconfirm.cc:318
+#: ../../src/wui/actionconfirm.cc:319
 msgid "Be careful if the enemy is near!"
 msgstr "¡Ten cuidado si el enemigo está cerca!"
 
-#: ../../src/wui/actionconfirm.cc:325
+#: ../../src/wui/actionconfirm.cc:326
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
 msgstr "Los productos que hay en el edificio van a ser retirados por el constructor, aumentando el tiempo para mejorarlo"
 
-#: ../../src/wui/actionconfirm.cc:376
+#: ../../src/wui/actionconfirm.cc:377
 msgid "Sink the ship?"
 msgstr "¿Hundir el barco?"
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:378
+#: ../../src/wui/actionconfirm.cc:379
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr "¿Realmente quieres hundir %s?"
 
-#: ../../src/wui/actionconfirm.cc:415
+#: ../../src/wui/actionconfirm.cc:416
 msgid "Cancel expedition?"
 msgstr "¿Cancelar la expedición?"
 
-#: ../../src/wui/actionconfirm.cc:416
+#: ../../src/wui/actionconfirm.cc:417
 msgid "Do you really want to cancel the active expedition?"
 msgstr "¿Realmente quieres cancelar la expedición activa?"
 
-#: ../../src/wui/actionconfirm.cc:455
+#: ../../src/wui/actionconfirm.cc:456
 msgid "Do you really want to give up and become a spectator?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:455
+#: ../../src/wui/actionconfirm.cc:456
 msgid "Resign?"
 msgstr ""
 
@@ -7526,7 +7526,7 @@ msgstr "Ataque"
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
 #: ../../src/wui/attack_window.cc:171
-#: ../../src/wui/constructionsitewindow.cc:520
+#: ../../src/wui/constructionsitewindow.cc:524
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -7592,12 +7592,12 @@ msgstr "Destruir la meta"
 msgid "Destroy the target building instead of conquering it"
 msgstr ""
 
-#: ../../src/wui/attack_window.cc:334 ../../src/wui/buildingwindow.cc:408
+#: ../../src/wui/attack_window.cc:334 ../../src/wui/buildingwindow.cc:410
 #: ../../src/wui/shipwindow.cc:152
 msgid "Show Debug Window"
 msgstr "Mostrar Ventana de Depuración"
 
-#: ../../src/wui/attack_window.cc:338 ../../src/wui/buildingwindow.cc:424
+#: ../../src/wui/attack_window.cc:338 ../../src/wui/buildingwindow.cc:426
 msgid "Center view on this"
 msgstr "Centrar vista en esto"
 
@@ -7681,150 +7681,150 @@ msgstr "%1%/%2%"
 msgid "Lacking soldiers:"
 msgstr "Soldados faltantes:"
 
-#: ../../src/wui/buildingwindow.cc:202
+#: ../../src/wui/buildingwindow.cc:204
 msgid "Muted – click to unmute"
 msgstr "Silenciado – click para activar"
 
-#: ../../src/wui/buildingwindow.cc:203
+#: ../../src/wui/buildingwindow.cc:205
 msgid "Mute this building’s messages"
 msgstr "Silenciar los mensajes de este edificio"
 
-#: ../../src/wui/buildingwindow.cc:208
+#: ../../src/wui/buildingwindow.cc:210
 msgid "All buildings of this type are muted – click to unmute"
 msgstr "Todos los edificios de esta clase están silenciados – click para activar"
 
-#: ../../src/wui/buildingwindow.cc:212
+#: ../../src/wui/buildingwindow.cc:214
 msgid "Mute all buildings of this type"
 msgstr "Silenciar todos los edificios de esta clase"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:276
+#: ../../src/wui/buildingwindow.cc:278
 msgid "Continue"
 msgstr "Continuar"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:278
+#: ../../src/wui/buildingwindow.cc:280
 msgid "Stop"
 msgstr "Detener"
 
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:292
+#: ../../src/wui/buildingwindow.cc:294
 msgid "Stop producing indefinitely"
 msgstr ""
 
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:294
+#: ../../src/wui/buildingwindow.cc:296
 msgid "Produce indefinitely regardless of the economy’s needs"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:317
+#: ../../src/wui/buildingwindow.cc:319
 #, c-format
 msgid "Enhance to %s"
 msgstr "Mejorar a %s"
 
-#: ../../src/wui/buildingwindow.cc:320 ../../src/wui/fieldaction.cc:97
+#: ../../src/wui/buildingwindow.cc:322 ../../src/wui/fieldaction.cc:97
 msgid "Construction costs:"
 msgstr "Costos de construcción:"
 
-#: ../../src/wui/buildingwindow.cc:338
+#: ../../src/wui/buildingwindow.cc:340
 msgid "Destroy"
 msgstr "Destruir"
 
-#: ../../src/wui/buildingwindow.cc:353
+#: ../../src/wui/buildingwindow.cc:355
 msgid "Dismantle"
 msgstr "Desarmar"
 
-#: ../../src/wui/buildingwindow.cc:356
+#: ../../src/wui/buildingwindow.cc:358
 msgid "Returns:"
 msgstr "Devuelve:"
 
-#: ../../src/wui/buildingwindow.cc:417
+#: ../../src/wui/buildingwindow.cc:419
 msgid "Watch the scout"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:680
+#: ../../src/wui/buildingwindow.cc:682
 msgid "Hide work area"
 msgstr "Ocultar área de trabajo"
 
-#: ../../src/wui/buildingwindow.cc:683
+#: ../../src/wui/buildingwindow.cc:685
 msgid "Show work area"
 msgstr "Mostrar área de trabajo"
 
-#: ../../src/wui/buildingwindow.cc:708
-#: ../../src/wui/constructionsitewindow.cc:331
+#: ../../src/wui/buildingwindow.cc:710
+#: ../../src/wui/constructionsitewindow.cc:335
 msgid "Start an expedition"
 msgstr "Comenzar una expedición"
 
-#: ../../src/wui/buildingwindow.cc:712
+#: ../../src/wui/buildingwindow.cc:714
 msgid "Cancel the expedition"
 msgstr "Cancelar la expedición"
 
 #: ../../src/wui/constructionsitewindow.cc:149
-#: ../../src/wui/dismantlesitewindow.cc:64
+#: ../../src/wui/dismantlesitewindow.cc:66
 msgid "Building materials"
 msgstr "Materiales de construcción"
 
-#: ../../src/wui/constructionsitewindow.cc:220
+#: ../../src/wui/constructionsitewindow.cc:224
 msgid "Stop this building’s work after completion"
 msgstr "Para el trabajo de este edificio después de terminarlo"
 
-#: ../../src/wui/constructionsitewindow.cc:220
+#: ../../src/wui/constructionsitewindow.cc:224
 msgid "Stopped"
 msgstr "Detenido"
 
-#: ../../src/wui/constructionsitewindow.cc:258
+#: ../../src/wui/constructionsitewindow.cc:262
 #: ../../src/wui/soldierlist.cc:446
 msgid "Prefer heroes"
 msgstr "Preferir héroes"
 
-#: ../../src/wui/constructionsitewindow.cc:261
+#: ../../src/wui/constructionsitewindow.cc:265
 #: ../../src/wui/soldierlist.cc:443
 msgid "Prefer rookies"
 msgstr "Preferir novatos"
 
-#: ../../src/wui/constructionsitewindow.cc:290
+#: ../../src/wui/constructionsitewindow.cc:294
 #: ../../src/wui/warehousewindow.cc:149
 msgid "Normal policy"
 msgstr "Política normal"
 
-#: ../../src/wui/constructionsitewindow.cc:294
+#: ../../src/wui/constructionsitewindow.cc:298
 #: ../../src/wui/warehousewindow.cc:150
 msgid "Preferably store selected wares here"
 msgstr "Almacenar preferiblemente aquí las mercancías seleccionadas"
 
-#: ../../src/wui/constructionsitewindow.cc:298
+#: ../../src/wui/constructionsitewindow.cc:302
 #: ../../src/wui/warehousewindow.cc:151
 msgid "Do not store selected wares here"
 msgstr "No almacenar aquí las mercancías seleccionadas"
 
-#: ../../src/wui/constructionsitewindow.cc:302
+#: ../../src/wui/constructionsitewindow.cc:306
 #: ../../src/wui/warehousewindow.cc:152
 msgid "Remove selected wares from here"
 msgstr "Retirar de aquí las mercancías seleccionadas"
 
-#: ../../src/wui/constructionsitewindow.cc:321
+#: ../../src/wui/constructionsitewindow.cc:325
 msgid "Ware settings to apply after construction"
 msgstr "Configuración de productos para aplicar después de la construcción"
 
-#: ../../src/wui/constructionsitewindow.cc:324
+#: ../../src/wui/constructionsitewindow.cc:328
 msgid "Worker settings to apply after construction"
 msgstr "Configuración de trabajadores para aplicar después de la construcción"
 
-#: ../../src/wui/constructionsitewindow.cc:332
+#: ../../src/wui/constructionsitewindow.cc:336
 msgid "Start an expedition from this port after completion"
 msgstr "Comienza una expedición desde este puerto después de terminarlo"
 
-#: ../../src/wui/constructionsitewindow.cc:356
+#: ../../src/wui/constructionsitewindow.cc:360
 msgid "Settings to apply after construction"
 msgstr "Configuraciónes para aplicar después de la construcción"
 
-#: ../../src/wui/constructionsitewindow.cc:450
+#: ../../src/wui/constructionsitewindow.cc:454
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
 msgstr "Disminuye la capacidad. Mantén presionado Ctrl para fijar la capacidad al valor mínimo"
 
-#: ../../src/wui/constructionsitewindow.cc:460
+#: ../../src/wui/constructionsitewindow.cc:464
 #: ../../src/wui/soldiercapacitycontrol.cc:80
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
@@ -8549,118 +8549,118 @@ msgid "Priority: Very High"
 msgstr "Prioridad: Muy alta"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
-#: ../../src/wui/inputqueuedisplay.cc:124
+#: ../../src/wui/inputqueuedisplay.cc:136
 msgid "Increase the number of wares you want to be stored here"
 msgstr "Aumenta el número de productos que quieres que se almacenen aquí"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
-#: ../../src/wui/inputqueuedisplay.cc:126
+#: ../../src/wui/inputqueuedisplay.cc:138
 msgid "Decrease the number of wares you want to be stored here"
 msgstr "Disminuye el número de productos que deseas que se almacenen aquí"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../src/wui/inputqueuedisplay.cc:130
+#: ../../src/wui/inputqueuedisplay.cc:142
 msgid "Hold down Shift to increase all ware types at the same time"
 msgstr "Mantén Mayús para aumentar todos los productos al mismo tiempo"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../src/wui/inputqueuedisplay.cc:133
+#: ../../src/wui/inputqueuedisplay.cc:145
 msgid "Hold down Shift to decrease all ware types at the same time"
 msgstr "Mantén Mayús para disminuir todos los productos al mismo tiempo"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../src/wui/inputqueuedisplay.cc:138
+#: ../../src/wui/inputqueuedisplay.cc:150
 msgid "Hold down Ctrl to allow all of this ware"
 msgstr "Mantén Ctrl para permitir todo de este producto"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../src/wui/inputqueuedisplay.cc:141
+#: ../../src/wui/inputqueuedisplay.cc:153
 msgid "Hold down Ctrl to allow none of this ware"
 msgstr "Mantén Ctrl para no permitir nada de este producto"
 
-#: ../../src/wui/inputqueuedisplay.cc:193
+#: ../../src/wui/inputqueuedisplay.cc:206
 msgid "Remove ware"
 msgstr "Eliminar producto"
 
-#: ../../src/wui/inputqueuedisplay.cc:202
+#: ../../src/wui/inputqueuedisplay.cc:215
 msgid "Add ware"
 msgstr "Añadir producto"
 
-#: ../../src/wui/inputqueuedisplay.cc:667
+#: ../../src/wui/inputqueuedisplay.cc:614
 msgid "Hide controls"
 msgstr "Ocultar controles"
 
-#: ../../src/wui/inputqueuedisplay.cc:667
+#: ../../src/wui/inputqueuedisplay.cc:614
 msgid "Show controls"
 msgstr "Mostrar controles"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
-#: ../../src/wui/interactive_base.cc:134
+#: ../../src/wui/interactive_base.cc:135
 msgid "Map View"
 msgstr "Vista del Mapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:275
+#: ../../src/wui/interactive_base.cc:276
 msgid "Hide Minimap"
 msgstr "Ocultar Minimapa"
 
-#: ../../src/wui/interactive_base.cc:275
+#: ../../src/wui/interactive_base.cc:276
 msgid "Show Minimap"
 msgstr "Mostrar Minimapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:282
+#: ../../src/wui/interactive_base.cc:283
 msgid "Hide Quick Navigation"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:283
+#: ../../src/wui/interactive_base.cc:284
 msgid "Show Quick Navigation"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:290
+#: ../../src/wui/interactive_base.cc:291
 msgid "Zoom +"
 msgstr "Zoom +"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:295
+#: ../../src/wui/interactive_base.cc:296
 msgid "Reset zoom"
 msgstr "Reiniciar zoom"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:300
+#: ../../src/wui/interactive_base.cc:301
 msgid "Zoom –"
 msgstr "Zoom –"
 
-#: ../../src/wui/interactive_base.cc:838
+#: ../../src/wui/interactive_base.cc:839
 #, c-format
 msgid "Road length: %1$u (%2$u)"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:840
+#: ../../src/wui/interactive_base.cc:841
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:845
+#: ../../src/wui/interactive_base.cc:846
 #, c-format
 msgid "Road length: %u"
 msgstr "Distancia de camino: %u"
 
-#: ../../src/wui/interactive_base.cc:848
+#: ../../src/wui/interactive_base.cc:849
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1730
+#: ../../src/wui/interactive_base.cc:1731
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1734
+#: ../../src/wui/interactive_base.cc:1735
 msgid "Screenshot saved"
 msgstr ""
 
@@ -9803,7 +9803,7 @@ msgstr "Productos esperando ser embarcados"
 msgid "Workers waiting to embark"
 msgstr "Trabajadores esperando embarcar"
 
-#: ../../src/wui/warehousewindow.cc:323
+#: ../../src/wui/warehousewindow.cc:324
 msgid "Expedition"
 msgstr "Expedición"
 

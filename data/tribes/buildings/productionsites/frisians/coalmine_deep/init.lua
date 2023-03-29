@@ -6,13 +6,12 @@ wl.Descriptions():new_productionsite_type {
    name = "frisians_coalmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Deep Coal Mine"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "mine",
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {28, 74},
          frames = 10,
          columns = 5,
@@ -20,8 +19,6 @@ wl.Descriptions():new_productionsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {28, 74},
          frames = 10,
          columns = 5,
@@ -29,8 +26,6 @@ wl.Descriptions():new_productionsite_type {
          fps = 10
       },
       empty = {
-         directory = dirname,
-         basename = "empty",
          hotspot = {28, 74},
          frames = 10,
          columns = 5,
@@ -40,8 +35,6 @@ wl.Descriptions():new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {28, 57}
       }
    },

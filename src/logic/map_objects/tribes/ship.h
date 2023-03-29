@@ -78,6 +78,7 @@ public:
 	const uint32_t max_attack_;
 	const uint32_t defense_;
 	const uint32_t attack_accuracy_;
+	const uint32_t heal_per_second_;
 
 private:
 	DirAnimations sail_anims_;
@@ -369,6 +370,7 @@ private:
 
 	std::vector<Battle> battles_;
 	uint32_t hitpoints_;
+	Time last_heal_time_{0U};
 
 	Quantity capacity_;
 	Quantity warship_soldier_capacity_;
@@ -391,6 +393,7 @@ protected:
 		Quantity capacity_{0U};
 		Quantity warship_soldier_capacity_{0U};
 		int32_t hitpoints_{0};
+		Time last_heal_time_{0U};
 		ShipStates ship_state_{ShipStates::kTransport};
 		ShipType ship_type_{ShipType::kTransport};
 		ShipType pending_refit_{ShipType::kTransport};

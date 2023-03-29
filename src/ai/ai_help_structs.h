@@ -836,17 +836,24 @@ private:
 		           uint32_t cs,
 		           uint32_t land,
 		           uint32_t oland,
-		           uint32_t o60l);
+		           uint32_t o60l,
+		           int32_t ds,
+		           uint32_t bld,
+		           bool def);
 
 		Widelands::TeamNumber team_number = 0U;
 		uint32_t players_power = 0U;
 		uint32_t old_players_power = 0U;
 		uint32_t old60_players_power = 0U;
 		uint32_t players_casualities = 0U;
-		Time last_time_seen = Time();  // never seen
+		Time last_time_seen = Time();       // never seen
+		Time last_time_requested = Time();  // never sent a diplo request
 		uint32_t players_land = 0U;
 		uint32_t old_players_land = 0U;
 		uint32_t old60_players_land = 0U;
+		int32_t players_diplomacy_score = 0U;
+		uint32_t players_buildings = 0U;
+		bool defeated = false;
 	};
 
 public:
@@ -862,44 +869,80 @@ public:
 	         uint32_t cs,
 	         uint32_t land,
 	         uint32_t oland,
-	         uint32_t o60l);
+	         uint32_t o60l,
+	         int32_t ds,
+	         uint32_t bld,
+	         bool def);
 	void remove_stat(Widelands::PlayerNumber pn);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team
-	uint32_t get_modified_player_power(Widelands::PlayerNumber pn);
-	uint32_t get_player_power(Widelands::PlayerNumber pn);
-	uint32_t get_old_player_power(Widelands::PlayerNumber pn);
-	uint32_t get_old60_player_power(Widelands::PlayerNumber pn);
-	uint32_t get_player_land(Widelands::PlayerNumber pn);
-	uint32_t get_old_player_land(Widelands::PlayerNumber pn);
-	uint32_t get_old60_player_land(Widelands::PlayerNumber pn);
-	uint32_t get_visible_enemies_power(const Time&);
-	uint32_t get_enemies_average_power();
-	uint32_t get_enemies_average_land();
-	uint32_t get_enemies_max_power();
-	uint32_t get_enemies_max_land();
-	uint32_t get_old_visible_enemies_power(const Time&);
-	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
-	bool strong_enough(Widelands::PlayerNumber pl);
+	[[nodiscard]] uint32_t get_modified_player_power(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_player_power(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_old_player_power(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_old60_player_power(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_player_land(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_old_player_land(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_old60_player_land(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_player_buildings(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_visible_enemies_power(const Time&);
+	[[nodiscard]] uint32_t get_enemies_average_power();
+	[[nodiscard]] uint32_t get_enemies_average_land();
+	[[nodiscard]] uint32_t get_enemies_max_power();
+	[[nodiscard]] uint32_t get_max_power();
+	[[nodiscard]] uint32_t get_enemies_max_land();
+	[[nodiscard]] uint32_t get_max_land();
+	[[nodiscard]] uint32_t get_max_buildings();
+	[[nodiscard]] Widelands::TeamNumber get_team_number(Widelands::PlayerNumber pn);
+	[[nodiscard]] int32_t get_diplo_score(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_old_visible_enemies_power(const Time&);
+	[[nodiscard]] bool players_in_same_team(Widelands::PlayerNumber pl1,
+	                                        Widelands::PlayerNumber pl2);
+	[[nodiscard]] bool strong_enough(Widelands::PlayerNumber pl);
 	void set_last_time_seen(const Time&, Widelands::PlayerNumber);
-	bool player_seen_lately(Widelands::PlayerNumber, const Time&);
-	bool get_is_enemy(Widelands::PlayerNumber);
-	uint8_t enemies_seen_lately_count(const Time&);
-	bool any_enemy_seen_lately(const Time&);
+	void set_last_time_requested(const Time&, Widelands::PlayerNumber);
+	[[nodiscard]] bool player_seen_lately(Widelands::PlayerNumber, const Time&);
+	[[nodiscard]] bool player_diplo_requested_lately(Widelands::PlayerNumber, const Time&);
+	[[nodiscard]] bool get_is_enemy(Widelands::PlayerNumber);
+	[[nodiscard]] uint8_t enemies_seen_lately_count(const Time&);
+	[[nodiscard]] uint8_t members_in_team(Widelands::TeamNumber tn);
+	[[nodiscard]] bool get_is_alone(Widelands::PlayerNumber pn);
+	[[nodiscard]] int32_t get_team_average_score(Widelands::TeamNumber tn,
+	                                             Widelands::PlayerNumber exclude_pn = 0);
+	[[nodiscard]] uint32_t team_power(Widelands::TeamNumber tn);
+	[[nodiscard]] uint8_t players_active() const;
+	[[nodiscard]] Widelands::PlayerNumber get_worst_ally() const;
+	[[nodiscard]] int32_t get_worst_ally_score() const;
+	[[nodiscard]] bool any_enemy_seen_lately(const Time&);
 	void set_update_time(const Time&);
 	const Time& get_update_time();
 
+	// Decide which of inviting or requesting to join is both possible and desirable, and do the
+	// chosen action. May choose to do nothing, if neither is possible, or the possible action is
+	// not desirable.
+	void join_or_invite(Widelands::PlayerNumber pn, Widelands::Game& game, const Time& gametime);
+
 private:
 	// This is the core part of this struct
-	std::map<Widelands::PlayerNumber, PlayerStat> all_stats;
+	std::map<Widelands::PlayerNumber, PlayerStat> all_stats_;
 
 	// Number of team, sum of players' strength
-	std::map<Widelands::TeamNumber, uint32_t> team_powers;
+	std::map<Widelands::TeamNumber, uint32_t> team_powers_;
+	// Number of team, sum of players' diploscores
+	std::map<Widelands::TeamNumber, uint32_t> team_scores_sum_;
+	// Number of team, number of members
+	std::map<Widelands::TeamNumber, uint8_t> team_members_;
+	// number of active players (not defeated)
+	uint8_t active_players_;
 
 	Time update_time;
 	Widelands::PlayerNumber this_player_number;
 	Widelands::PlayerNumber this_player_team;
+
+	// Member of own team with lowest diploscore
+	Widelands::PlayerNumber worst_ally_;
+	// Lowest member diploscore in own team
+	int32_t worst_ally_score_;
 };
 
 // This is a wrapper around map of <Flag coords hash:distance from flag to nearest warehouse>

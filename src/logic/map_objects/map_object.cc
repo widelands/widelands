@@ -270,8 +270,6 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 	}
 
 	bool has_animations = false;
-	// TODO(GunChleoc): When all animations have been converted, require that animation_directory is
-	// not empty if the map object has animations.
 	const std::string animation_directory(
 	   table.has_key("animation_directory") ? table.get_string("animation_directory") : "");
 	if (table.has_key("animations")) {

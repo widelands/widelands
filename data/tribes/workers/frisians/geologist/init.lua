@@ -6,6 +6,7 @@ wl.Descriptions():new_worker_type {
    name = "frisians_geologist",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("frisians_worker", "Geologist"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -31,8 +32,6 @@ wl.Descriptions():new_worker_type {
 
    spritesheets = {
       walk = {
-         directory = dirname,
-         basename = "walk",
          fps = 15,
          frames = 10,
          columns = 5,
@@ -41,8 +40,6 @@ wl.Descriptions():new_worker_type {
          hotspot = {11, 23}
       },
       idle = {
-         directory = dirname,
-         basename = "idle",
          fps = 10,
          frames = 10,
          columns = 5,
@@ -50,8 +47,6 @@ wl.Descriptions():new_worker_type {
          hotspot = {8, 23}
       },
       hacking = {
-         directory = dirname,
-         basename = "hacking",
          fps = 10,
          frames = 10,
          columns = 5,
