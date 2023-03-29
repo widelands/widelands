@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Stephan Lutz <stephan-lutz@gmx.de>, 2022
+# C Jimmy, 2023
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
+"Last-Translator: C Jimmy, 2023\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,31 +56,36 @@ msgstr "Sidolus"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:49
 msgid "Find a place to build a port"
-msgstr ""
+msgstr "Trouvez un emplacement pour construire un port."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:51
 msgid "Find Portspace"
-msgstr ""
+msgstr "Trouvez la zone portuaire"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:52
 msgid ""
 "To set foot on this island, we must first find a building space where a port"
 " can be built. Explore the nearby coast line to find such a building plot."
 msgstr ""
+"Pour poser le pied sur cette île, il faut d'abord trouver un terrain "
+"constructible où l'on pourra installer un port. Explorez la côte voisine "
+"pour trouver un tel terrain."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:53
 msgid ""
 "After the port is built we should cancel the other ship’s expedition, to "
 "unload its wares as well."
 msgstr ""
+"Une fois le port construit, nous devrions annuler l'expédition de l'autre "
+"navire, afin de décharger également ses marchandises."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:58
 msgid "Ensure the supply of construction materials"
-msgstr ""
+msgstr "Assurez-vous de l'approvisionnement en matériaux de construction"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:60
 msgid "Establish Basic Production Chain"
-msgstr ""
+msgstr "Établissez une chaîne de production des matériaux de base"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:61
 msgid ""
@@ -87,14 +93,17 @@ msgid ""
 " might or might not be needed depending on how fast the trees are growing "
 "around us. Find the balance."
 msgstr ""
+"Nous aurons besoin d'au moins une carrière, de quelques bûcherons et d'une "
+"scierie. Un forestier peut être nécessaire ou non en fonction de la vitesse "
+"à laquelle les arbres poussent autour de nous. Trouvez l'équilibre."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:66
 msgid "Build tools quickly"
-msgstr ""
+msgstr "Créez rapidement des outils"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:68
 msgid "Make New Tools"
-msgstr ""
+msgstr "Fabriquez de nouveaux outils"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:69
 msgid ""
@@ -104,14 +113,19 @@ msgid ""
 "prerequisite for success on the island. Don’t forget to build a smelting "
 "works as well."
 msgstr ""
+"La plupart de nos outils ont été perdus dans la destruction du navire. Notre"
+" peuple ne pourra pas remplir ses fonctions sans les outils appropriés. "
+"Heureusement, il nous reste du minerai de fer et beaucoup de charbon. "
+"Construisez une forge à outils, car c'est la condition sine qua non pour "
+"réussir sur l'île. N'oubliez pas non plus de construire une fonderie."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
-msgstr ""
+msgstr "Trouvez des ressources dans les montagnes"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:76
 msgid "Build Mines"
-msgstr ""
+msgstr "Construisez des mines"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:77
 msgid ""
@@ -119,14 +133,18 @@ msgid ""
 "be replenished soon. Explore the mountains and build at least one mine of "
 "each type to mine coal, iron and gold."
 msgstr ""
+"Comme nous sommes à nouveau capables de fabriquer des outils, nos réserves "
+"de ressources minières devront bientôt être reconstituées. Explorez les "
+"montagnes et construisez au moins une mine de chaque type pour extraire du "
+"charbon, du fer et de l'or."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:82
 msgid "Explore the surroundings"
-msgstr ""
+msgstr "Explorez les environs"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:84
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Explorez les environs"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:85
 msgid ""
@@ -134,14 +152,18 @@ msgid ""
 "the others on this island are friends or foes, so we need to tread "
 "carefully. Explore the island by building at least one house for a scout."
 msgstr ""
+"Nous sommes à peu près sûrs de ne pas être seuls sur l'île. Nous ne savons "
+"pas si les autres habitants de l'île sont des amis ou des ennemis, c'est "
+"pourquoi nous devons agir avec prudence. Explorez l'île en construisant au "
+"moins une maison pour un éclaireur."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
-msgstr ""
+msgstr "Agrandissez votre territoire"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:92
 msgid "Expand Territory"
-msgstr ""
+msgstr "Agrandissez le territoire"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:93
 msgid ""
@@ -149,14 +171,18 @@ msgid ""
 "Expand our territory by building military buildings. Build some guardhouses "
 "and at least one tower for its larger view range."
 msgstr ""
+"Comme notre colonie s'agrandit, nous aurons besoin de plus d'espace pour "
+"tous les bâtiments. Élargissez notre territoire en construisant des "
+"bâtiments militaires. Construisez des postes de garde et au moins une tour "
+"pour bénéficier d'un champ de vision plus large."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Construire une Ferme aracnéïcole et un Moulin à tisser"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Production d'Étoffe de soie d'araignée"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:101
 msgid ""
@@ -165,6 +191,10 @@ msgid ""
 "all buildings that consume spidercloth, not forgetting the construction "
 "sites."
 msgstr ""
+"Nous avons un besoin urgent d'Étoffes de soie d'araignée, car nous en "
+"manquons. Il est donc essentiel de conserver tous les morceaux dont nous "
+"disposons encore. Suspendez l'apport de tous les bâtiments qui consomment de"
+" l'étoffe de soie d'araignée, sans oublier les chantiers de construction."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:102
 msgid ""
@@ -172,30 +202,36 @@ msgid ""
 "spidercloth to be built. Additionally, we need a spider farm and a weaving "
 "mill."
 msgstr ""
+"Ensuite, nous devons construire une ferme de toute urgence, car elle a "
+"besoin d'étoffe de soie d'araignée pour être construite. En outre, nous "
+"avons besoin d'une ferme aracnéïcole et d'un moulin à tisser."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:107
 msgid "Build a trading post"
-msgstr ""
+msgstr "Construisez un comptoir commercial"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:109
 msgid "Upgrade Scout’s House To Trading Post"
-msgstr ""
+msgstr "Améliorez la Maison d'éclaireur en comptoir commercial"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:110
 msgid ""
 "To be able to pay the tributes to Kalitath, and to maintain contact with "
 "Jundlina, we need to enhance our scout’s house to a trading post."
 msgstr ""
+"Pour pouvoir payer les tributs à Kalitath et rester en contact avec "
+"Jundlina, nous devons transformer notre maison d'éclaireur en comptoir "
+"commercial."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:115
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:128
 msgid "Pay all tributes to Kalitath"
-msgstr ""
+msgstr "Payez un tribut à Kalitath"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:117
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:130
 msgid "Send Trader To Kalitath"
-msgstr ""
+msgstr "Envoyez un marchand à Kalitath"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:118
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:131
@@ -203,63 +239,67 @@ msgid ""
 "We need to send the wares to Kalitath with our trader. He will pick them up "
 "as soon as a batch is ready in his trading post."
 msgstr ""
+"Nous devons envoyer les marchandises à Kalitath avec notre marchand. Il "
+"viendra les chercher dès qu'un lot sera prêt à son comptoir."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:132
 msgid "The following batches need to be delivered:"
-msgstr ""
+msgstr "Les quantités suivantes doivent être livrées :"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:120
 msgid "Five batches of five logs each."
-msgstr ""
+msgstr "Cinq lots de cinq bûches chacun."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:121
 msgid "Four batches of four lumps of coal each."
-msgstr ""
+msgstr "Quatre lots de quatre blocs de charbon chacun."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:122
 msgid "Three batches of three iron bars each."
-msgstr ""
+msgstr "Trois lots de trois barres de fer chacun."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:123
 msgid "Two batches of two gold bars each."
-msgstr ""
+msgstr "Deux lots de deux lingots d'or chacun."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:133
 msgid "Ten batches of five logs each."
-msgstr ""
+msgstr "Dix lots de cinq troncs chacun."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:134
 msgid "Eight batches of four lumps of coal each."
-msgstr ""
+msgstr "Huit lots de quatre blocs de charbon chacun."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:135
 msgid "Six batches of three iron bars each."
-msgstr ""
+msgstr "Six lots de trois barres de fer chacun."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:136
 msgid "Four batches of two gold bars each."
-msgstr ""
+msgstr "Quatre lots de deux lingots d'or chacun."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:141
 msgid "Defeat Maletus"
-msgstr ""
+msgstr "Battez Maletus"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:143
 msgid "Defeat Imperial Leader Maletus"
-msgstr ""
+msgstr "Battez le chef impérial Maletus"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:144
 msgid "We need to finish the Empire off to have a chance to build a new home."
 msgstr ""
+"Nous devons achever l'Empire pour avoir une chance de construire un nouveau "
+"foyer."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:149
 msgid "Build a temple to worship Satul"
-msgstr ""
+msgstr "Construisez un temple à la gloire de Satul"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:151
 msgid "Build Temple For Satul"
-msgstr ""
+msgstr "Édifiez un temple pour Satul"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:152
 msgid ""
@@ -267,47 +307,56 @@ msgid ""
 " he might show these Barbarians his might and our princess might come back "
 "to her senses."
 msgstr ""
+"Nous devons construire un temple pour Satul et le vénérer comme il se doit. "
+"Ainsi, il pourra montrer à ces barbares sa puissance et notre princesse "
+"pourra retrouver ses esprits."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:153
 msgid ""
 "And we need to have a scout’s house to not lose track of what is going on at"
 " the Barbarians’ territory."
 msgstr ""
+"Et nous avons besoin d'une maison d'éclaireur pour ne pas perdre de vue ce "
+"qui se passe sur le territoire des Barbares."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:158
 msgid "Worship Satul and consecrate priestesses"
-msgstr ""
+msgstr "Vénérer Satul et y consacrer des prêtresses"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:160
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:542
 msgid "Worship Satul"
-msgstr ""
+msgstr "Culte de Satul"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:161
 msgid "Now we need to worship Satul and consecrate at least two priestesses."
 msgstr ""
+"Nous devons maintenant vénérer Satul et lui consacrer au moins deux "
+"prêtresses."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:166
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:168
 msgid "Defeat Kalitath"
-msgstr ""
+msgstr "Battez Kalitath"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:169
 msgid ""
 "Now it’s time to finish off this annoying Barbarian. He has molested us far "
 "too long now."
 msgstr ""
+"Il est temps d'en finir avec cet agaçant barbare. Il a trop longtemps abusé "
+"de notre patience."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:178
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:740
 msgid "Defeated!"
-msgstr ""
+msgstr "Vaincu !"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:179
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:741
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:752
 msgid "Sidolus has bad news…"
-msgstr ""
+msgstr "Sidolus a de mauvaises nouvelles..."
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:181
@@ -316,12 +365,15 @@ msgid ""
 "couldn’t protect us from the enemy. They have destroyed our last warehouse. "
 "Thus we have lost this battle and our people is doomed!"
 msgstr ""
+"Aaaargh, Jundlina. Je ne sais pas comment cela a pu arriver, mais Satul n'a "
+"pas pu nous protéger de l'ennemi. Ils ont détruit notre dernier entrepôt. "
+"Nous avons donc perdu cette bataille et notre peuple est condamné !"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:182
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:744
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:755
 msgid "You Have Lost"
-msgstr ""
+msgstr "Vous avez perdu"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:745
@@ -330,14 +382,17 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Vous avez perdu et ne pouvez pas continuer à jouer. Nous espérons que vous "
+"aurez plus de chance en réessayant ce scénario. Cliquez sur OK pour revenir "
+"au menu principal."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:191
 msgid "The Princess’s Memoir"
-msgstr ""
+msgstr "Les mémoires de la princesse"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:192
 msgid "Jundlina writes her diary"
-msgstr ""
+msgstr "Jundlina rédige son journal intime"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:194
@@ -346,6 +401,10 @@ msgid ""
 "ships and make our escape, but the currents of the sinking island tested our"
 " new ships and their design."
 msgstr ""
+"Il s'en est fallu de peu pour que nous puissions nous échapper de l'île "
+"maudite : nous avons réussi à charger trois navires et à nous échapper, mais"
+" les courants de l'île en train de sombrer ont mis à l'épreuve nos nouveaux "
+"navires et leur conception."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:197
@@ -354,6 +413,9 @@ msgid ""
 "without much planning and so one of our ships ended up carrying most of the "
 "heavy wares in our possession."
 msgstr ""
+"And one failed the test: the last days of loading was done in chaos and "
+"without much planning and so one of our ships ended up carrying most of the "
+"heavy wares in our possession."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:200
@@ -362,6 +424,9 @@ msgid ""
 "was pulled below the sea level by Lutas’ forces and we lost most men and all"
 " wares it carried."
 msgstr ""
+"Le poids lourd et le courant fort étaient trop importants pour le navire et "
+"il a été tiré sous les eaux par les forces de Lutas et nous avons perdu la "
+"plupart des hommes et toutes les marchandises qu'il transportait."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:203
@@ -370,14 +435,17 @@ msgid ""
 "well, but they persisted. We escaped the island and began our smooth sailing"
 " to other coasts."
 msgstr ""
+"Nous avions tous très peur. Nous nous attendions à ce que les autres navires"
+" coulent aussi, mais ils ont résisté. Nous nous sommes échappés de l'île et "
+"avons commencé à naviguer sans encombre vers d'autres côtes."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:207
 msgid "New Hope"
-msgstr ""
+msgstr "Nouvel Espoir"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:208
 msgid "Jundlina continues"
-msgstr ""
+msgstr "Jundlina poursuit"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:210
@@ -385,6 +453,8 @@ msgid ""
 "Many weeks have passed and we did only see small islands not suitable for "
 "habitation and without any sign of being blessed by Satul, the fire god."
 msgstr ""
+"Plusieurs semaines se sont écoulées et nous n'avons vu que des petites îles "
+"non habitables et sans aucun signe de la présence de Satul, le dieu du feu."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:213
@@ -393,14 +463,17 @@ msgid ""
 "The black comes from the fiery mountain in the north of the island, the grey"
 " however comes from settlers."
 msgstr ""
+"Mais la nuit dernière, nous avons aperçu une nouvelle île. Nous avons vu de "
+"la fumée planer au-dessus d'elle. La fumée noire provient de la montagne "
+"enflammée au nord de l'île, quant à la fumée grise, elle provient de colons."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:217
 msgid "Planning For The Future"
-msgstr ""
+msgstr "Préparer l'Avenir"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:218
 msgid "Jundlina concludes"
-msgstr ""
+msgstr "Conclusion de Jundlina"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:220
@@ -409,6 +482,9 @@ msgid ""
 "do not know if the people there are friends or foes. We do not even know "
 "what tribe they might be from."
 msgstr ""
+"L'est de l'île est au moins habité, c'est certain. Nous ne savons pas si ces"
+" gens sont des amis ou des ennemis. Nous ne savons même pas de quelle tribu "
+"ils sont issus."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:223
@@ -417,6 +493,9 @@ msgid ""
 "ship of ours has sailed as far as we did for centuries. I can only hope they"
 " are friendly."
 msgstr ""
+"La seule chose dont nous sommes sûrs, c'est qu'il ne peut s'agir d'Atlantes,"
+" car aucun de nos navires n'a navigué aussi loin que nous pendant des "
+"siècles. Je ne peux qu'espérer qu'ils sont pacifiques."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:226
@@ -426,16 +505,21 @@ msgid ""
 "sail any further, and we must attempt to settle on this island as close as "
 "possible to our current position."
 msgstr ""
+"Nous n'avons plus beaucoup d'eau douce, notre nourriture commence à manquer "
+"et nous avons perdu tous nos outils et la plupart de nos matériaux de "
+"construction avec le troisième bateau. Nous ne pouvons pas nous permettre de"
+" naviguer plus loin, et nous devons tenter de nous installer sur cette île, "
+"le plus près possible de notre position actuelle."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:234
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:242
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:250
 msgid "Jundlina Gives Orders"
-msgstr ""
+msgstr "Jundlina donne ses ordres"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:235
 msgid "Jundlina decides"
-msgstr ""
+msgstr "Décisions de Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:237
@@ -444,10 +528,13 @@ msgid ""
 "plenty of iron ore, so a toolsmithy and a smelting works will quickly "
 "provide us with good tools."
 msgstr ""
+"Comme nous avons fondé un port ici, nous pouvons maintenant entamer notre "
+"développement. Nous avons encore beaucoup de minerai de fer. Une forge à "
+"outils et une fonderie nous fourniront rapidement de bons outils."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:243
 msgid "Jundlina demands"
-msgstr ""
+msgstr "Exigences de Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:245
@@ -456,10 +543,13 @@ msgid ""
 "of trees, we might not even need foresters. But we need stone, that much is "
 "certain!"
 msgstr ""
+"Cependant, nous devons faire attention à nos matériaux de construction : "
+"L'île est pleine d'arbres, nous n'aurons peut-être même pas besoin de "
+"forestiers. Mais nous avons besoin de pierres, c'est certain !"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:251
 msgid "Jundlina orders"
-msgstr ""
+msgstr "Ordres de Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:253
@@ -468,6 +558,9 @@ msgid ""
 "careful. We should build at least one tower so that we can see potential "
 "enemies before they see us."
 msgstr ""
+"Explorons aussi cette île et étendons notre territoire. Mais nous devons "
+"être prudents. Nous devons construire au moins une tour afin de voir les "
+"ennemis potentiels avant qu'ils ne nous voient."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:256
@@ -476,6 +569,9 @@ msgid ""
 "When we no longer need a building, we will dismantle it instead of burning "
 "it down."
 msgstr ""
+"Mais nous devons être prudents dans l'utilisation des pierres et autres "
+"matériaux précieux. Lorsque nous n'avons plus besoin d'un bâtiment, nous "
+"devons le démanteler au lieu de le brûler."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:259
@@ -483,12 +579,15 @@ msgid ""
 "This will take more time, but we can reuse some of its materials. Also, I "
 "want a scout deployed and exploring at all times."
 msgstr ""
+"Cela prendra plus de temps, mais nous pourrons réutiliser certains "
+"matériaux. De plus, je veux qu'un éclaireur soit déployé et en exploration à"
+" tout moment."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:270
 msgid "Opol Reports Serious Shortages"
-msgstr ""
+msgstr "Opol fait état de graves pénuries"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:273
@@ -499,18 +598,25 @@ msgid ""
 "most perilous case, for as you know, spidercloth is needed for many "
 "buildings."
 msgstr ""
+"Que Satul vous réchauffe, %s. En tant que plus important tisserand de la "
+"guilde, j'ai une mauvaise nouvelle à vous annoncer. Je viens de me rendre "
+"compte que nous n'avons plus de soie d'araignée. C'est un problème très "
+"grave, car comme vous le savez, la toile d'araignée est nécessaire à la "
+"construction de nombreux bâtiments."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:276
 msgid "We should build up a spidercloth production urgently."
 msgstr ""
+"Nous devrions mettre en place une production d'étoffe de soie d'araignée de "
+"toute urgence."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:280
 #, lua-format
 msgid "%s Replies"
-msgstr ""
+msgstr "%s réponses"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:283
@@ -519,10 +625,13 @@ msgid ""
 "but I understand the urgency. We need to build a complete spidercloth "
 "production instantly."
 msgstr ""
+"Que Satul vous réchauffe aussi, Opol. Je voulais retarder la production de "
+"soie d'araignée, mais je comprends l'urgence. Nous devons mettre en place "
+"une production complète de soie d'araignée immédiatement."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:295
 msgid "Opol Makes A Point"
-msgstr ""
+msgstr "Opol marque un point"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:298
@@ -533,13 +642,18 @@ msgid ""
 "needing spidercloth for completion, not completing one in time will result "
 "in a crisis that can never be resolved."
 msgstr ""
+"%s! Il semble qu'il y ait un autre problème encore plus urgent. Je crains "
+"que nous n'ayons pas encore construit de ferme pour nourrir nos araignées. "
+"Comme il s'agit de l'un des bâtiments nécessitant de la soie d'araignée pour"
+" être achevé, le fait de ne pas le faire à temps entraînera une crise qui ne"
+" pourra jamais être résolue."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:302
 #, lua-format
 msgid "%s Acknowledges"
-msgstr ""
+msgstr "%s Accuse réception"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:305
@@ -547,12 +661,14 @@ msgid ""
 "I see the risk, Opol. Thank you for reporting. We will build a farm "
 "immediately."
 msgstr ""
+"Je comprends d'où vient le problème, Opol. Merci d'avoir fait votre rapport."
+" Nous allons construire une ferme immédiatement."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:317
 msgid "Opol Reports Success"
-msgstr ""
+msgstr "Opol a bien transmis son rapport"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:320
@@ -563,6 +679,11 @@ msgid ""
 " finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
 " later on to make better tabards as well."
 msgstr ""
+"%s, que Satul vous réchauffe ! Le moulin à tisser et la ferme des araignées "
+"sont terminées et la guilde des tisserands peut reprendre son travail. Je "
+"vous promets que nous vous livrerons bientôt les meilleurs tissus et "
+"quelques tabards. Nous pourrons peut-être construire une filature d'or plus "
+"tard pour fabriquer de meilleurs tabards."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -570,7 +691,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:390
 #, lua-format
 msgid "%s Cheers"
-msgstr ""
+msgstr "%s Merci"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:327
@@ -578,11 +699,13 @@ msgid ""
 "This is good news indeed, Opol. You may go back to your work now, and may "
 "Satul warm you and the weavers’ guild!"
 msgstr ""
+"C'est une bonne nouvelle, Opol. Tu peux maintenant retourner à ton travail, "
+"et que Satul te réchauffe, toi et la guilde des tisserands !"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:336
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:351
 msgid "Sidolus Reports Foreign Inhabitants"
-msgstr ""
+msgstr "Sidolus signale la présence d'étrangers"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:339
@@ -592,11 +715,14 @@ msgid ""
 "land governed by foreigners, but we do not yet know what to expect from "
 "them."
 msgstr ""
+"Que Satul te réchauffe, Jundlina ! J'ai des nouvelles inquiétantes. Nous "
+"avons aperçu une terre gouvernée par des étrangers, mais nous ne savons pas "
+"encore à quoi nous attendre de leur part."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:342
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:357
 msgid "Jundlina Is Concerned"
-msgstr ""
+msgstr "Jundlina est inquiète"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:345
@@ -604,6 +730,8 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. "
 "Hopefully our scout will get us some information soon."
 msgstr ""
+"Sidolus, je suis d'accord, c'est très inquiétant. Nous devons en savoir "
+"plus. Espérons que notre éclaireur nous donnera bientôt des informations."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:360
@@ -611,10 +739,13 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. We "
 "definitely need to send out a scout to gather some information."
 msgstr ""
+"Sidolus, je suis d'accord, c'est très inquiétant. Nous devons en savoir "
+"plus. Nous devons absolument envoyer un éclaireur pour recueillir des "
+"informations."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:366
 msgid "Allies?"
-msgstr ""
+msgstr "Alliés ?"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:369
@@ -623,10 +754,13 @@ msgid ""
 " are in big trouble as they are at war with a mighty tribe in the north. "
 "They ask us for support."
 msgstr ""
+"Que Satul te réchauffe, Jundlina ! Nous avons pris contact avec les "
+"étrangers. Ils ont de gros problèmes, car ils sont en guerre avec une "
+"puissante tribu au nord. Ils nous demandent de les aider."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:372
 msgid "Jundlina Is Cautious"
-msgstr ""
+msgstr "Jundlina est prudente"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:375
@@ -635,10 +769,14 @@ msgid ""
 "see what we can do for them. However we should improve our own military "
 "strength to become independent of others."
 msgstr ""
+"Sidolus, comme nous avons besoin de tous les alliés possibles, nous devrions"
+" les aider. Voyons ce que nous pouvons faire pour eux. Cependant, nous "
+"devrions améliorer notre propre force militaire pour devenir indépendants "
+"des autres."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:383
 msgid "Building Material Ensured"
-msgstr ""
+msgstr "Matériau de construction assuré"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:386
@@ -646,6 +784,8 @@ msgstr ""
 msgid ""
 "May Satul warm you, %s! We have finished our supply of building materials."
 msgstr ""
+"Que Satul vous réchauffe, %s ! Nous avons terminé notre chaine "
+"d'approvisionnement en matériaux de construction."
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:393
@@ -654,10 +794,14 @@ msgid ""
 "sophisticated buildings to enlarge our economy. Please advise whenever you "
 "feel we are missing necessary buildings."
 msgstr ""
+"C'est une bonne nouvelle, Loftomor. Nous pouvons maintenant envisager de "
+"construire des bâtiments plus sophistiqués pour développer notre économie. "
+"N'hésitez pas à nous faire part de vos remarques si vous pensez qu'il nous "
+"manque des bâtiments."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:404
 msgid "Tool Supply Ensured"
-msgstr ""
+msgstr "Approvisionnement en outils assuré"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:407
@@ -666,13 +810,15 @@ msgid ""
 "%s, may Satul warm you! We have made some progress in building up our tool "
 "industry."
 msgstr ""
+"%s, que Satul vous réchauffe ! Nous avons fait des progrès dans la "
+"construction de notre chaine d'approvisionnement en outils."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:411
 #, lua-format
 msgid "%s Enchanted"
-msgstr ""
+msgstr "%s Enchanté"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:414
@@ -681,10 +827,14 @@ msgid ""
 "buildings we are going to build in our new home. But now we should really "
 "look to get some resources from the mountains."
 msgstr ""
+"C'est une bonne nouvelle, Loftomor. Cela nous permet de faire tourner tous "
+"les bâtiments que nous allons construire dans notre nouveau foyer. Mais "
+"maintenant, nous devrions vraiment chercher à obtenir des ressources des "
+"montagnes."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:426
 msgid "Mining Established"
-msgstr ""
+msgstr "Exploitation minière établie"
 
 #. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:429
@@ -693,13 +843,15 @@ msgid ""
 "%s, may Satul warm you! Another issue solved. We have found some resources "
 "and built a mine of each type."
 msgstr ""
+"%s, que Satul vous réchauffe ! Un autre problème est résolu. Nous avons "
+"trouvé des ressources et construit une mine de chaque type."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:433
 #, lua-format
 msgid "%s Is Excited"
-msgstr ""
+msgstr "%s est enthousiaste"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:436
@@ -708,11 +860,15 @@ msgid ""
 "But now we need to ensure we can feed them. We need to build up bakeries and"
 " smokeries and all buildings to supply them."
 msgstr ""
+"Bravo, Loftomor, bravo. Que Satul réchauffe nos forts et courageux mineurs. "
+"Mais maintenant, nous devons nous assurer que nous pouvons les nourrir. Nous"
+" devons construire des boulangeries, des fumoirs et tous les bâtiments "
+"nécessaires pour les approvisionner."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:445
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:484
 msgid "Tribute Delivered"
-msgstr ""
+msgstr "Hommage rendu"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:448
@@ -721,11 +877,14 @@ msgid ""
 "May Satul warm you, Kalitath! We have delivered all the wares you demanded. "
 "Now we expect our princess to return home."
 msgstr ""
+"Que Satul vous réchauffe, Kalitath ! Nous avons livré toutes les "
+"marchandises que vous demandiez. Nous attendons maintenant le retour de "
+"notre princesse."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:451
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:475
 msgid "Kalitath Appreciates Efforts"
-msgstr ""
+msgstr "Kalitath apprécie les efforts fournis"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:454
@@ -734,11 +893,14 @@ msgid ""
 "However don’t forget to help us defeat the troops of Maletus. Afterwards we "
 "might talk about your princess."
 msgstr ""
+"Sidolus, c'est une très bonne nouvelle. J'apprécie ce que votre peuple a "
+"fait. Mais n'oubliez pas de nous aider à vaincre les troupes de Maletus. "
+"Ensuite, nous pourrons parler de votre princesse."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:460
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:469
 msgid "Empire Defeated"
-msgstr ""
+msgstr "Empire vaincu"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:463
@@ -747,6 +909,8 @@ msgid ""
 "May Satul warm you, Kalitath! We have defeated the troops of the Empire in "
 "the north. Now we expect our princess to return home."
 msgstr ""
+"Que Satul te réchauffe, Kalitath ! Nous avons vaincu les troupes de l'Empire"
+" dans le nord. Nous attendons maintenant le retour de notre princesse."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:478
@@ -755,10 +919,13 @@ msgid ""
 "However don’t forget to fulfill your tribute within time. Afterwards we "
 "might talk about your princess."
 msgstr ""
+"Sidolus, c'est une très bonne nouvelle. J'apprécie ce que votre peuple a "
+"fait. Cependant, n'oubliez pas de vous acquitter de votre tribut dans les "
+"temps. Ensuite, nous pourrons parler de votre princesse."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:493
 msgid "Kalitath Acknowledges"
-msgstr ""
+msgstr "Kalitath prend acte"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:496
@@ -766,11 +933,13 @@ msgid ""
 "Sidolus, we appreciate this. But your princess and I already made plans for "
 "our common future on this island. She will explain it to you."
 msgstr ""
+"Sidolus, nous apprécions cela. Mais votre princesse et moi avons déjà "
+"planifié notre avenir commun sur cette île. Elle vous l'expliquera."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:499
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:573
 msgid "Jundlina Explains"
-msgstr ""
+msgstr "Jundlina explications"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:502
@@ -784,10 +953,18 @@ msgid ""
 "Barbarians. This includes learning about their gods and preparing to worship"
 " them."
 msgstr ""
+"Sidolus, pendant mon séjour chez les Barbares, j'ai beaucoup appris sur leur"
+" hospitalité et leur bravoure. Ils m'ont vraiment impressionné, leurs "
+"guerriers et leurs dieux semblaient très forts dans la bataille contre "
+"l'Empire. En particulier, leur chef Kalitath a été un très bon hôte et j'ai "
+"commencé à penser à unir nos tribus pour assurer un avenir pacifique sur "
+"cette île. Je veux donc que vous prépariez notre peuple à un mariage et à "
+"une coexistence pacifique avec les Barbares. Cela inclut de découvrir leurs "
+"dieux et de se préparer à les vénérer."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:505
 msgid "Kalitath Demands"
-msgstr ""
+msgstr "Kalitath demandes"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:508
@@ -797,14 +974,19 @@ msgid ""
 "So we will simply take your military buildings with our forces. Naturally "
 "you won’t have the right to do the same, for the sake of your princess."
 msgstr ""
+"Sidolus, suis maintenant les ordres de ta princesse. Entre-temps, nous "
+"pourrions décider que nous avons besoin d'une partie des terres que vous "
+"avez conquises pour notre avenir commun. Nous prendrons donc simplement vos "
+"bâtiments militaires avec nos forces. Bien entendu, vous n'aurez pas le "
+"droit de faire de même, pour le bien de votre princesse."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:514
 msgid "Heretics!"
-msgstr ""
+msgstr "Hérétiques !"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:515
 msgid "Sidolus is very sad"
-msgstr ""
+msgstr "Sidolus est très triste"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:517
@@ -813,10 +995,13 @@ msgid ""
 " this Barbarian. But I will never worship any Barbarian god. I can’t imagine"
 " how we could change her mind though."
 msgstr ""
+"Que Satul nous réchauffe tous. Notre princesse a été embrouillée lors de son"
+" emprisonnement par ce barbare. Mais je ne vénérerai jamais un dieu barbare."
+" Je ne vois pas comment nous pourrions la faire changer d'avis."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:520
 msgid "Attracting Satul’s Help"
-msgstr ""
+msgstr "Obtenir l'aide de Satul"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:523
@@ -827,10 +1012,16 @@ msgid ""
 "some priestesses, who might beg Satul to show his powers to the Barbarians "
 "and our princess."
 msgstr ""
+"Sidolus, je suis d'accord pour dire que nous ne devrions pas nous incliner "
+"devant un autre dieu que Satul. Mais nous pourrions avoir besoin de l'aide "
+"de ce dernier dans ce cas. Je suggère donc de construire un temple et de "
+"vénérer Satul en lui offrant des sacrifices exquis. Nous pourrions ainsi "
+"nommer des prêtresses qui supplieraient Satul de montrer ses pouvoirs aux "
+"Barbares et à notre princesse."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:526
 msgid "Build Temple"
-msgstr ""
+msgstr "Construisez un temple"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:529
@@ -842,10 +1033,17 @@ msgid ""
 "Barbarian any more, I want you to ensure we have a scout out there to gather"
 " information."
 msgstr ""
+"Que Satul vous réchauffe, Loftomor. C'est une très bonne idée. Je vous "
+"charge donc de construire un temple digne de vénérer notre dieu. Jusqu'à ce "
+"que nous soyons prêts à implorer le pouvoir de Satul, nous devrions garder "
+"un œil sur notre princesse et ce barbare. Nous devrions interrompre les "
+"livraisons de nos marchands pour ne plus gaspiller de marchandises au profit"
+" de ce barbare, et je veux que vous veilliez à ce que nous ayons un "
+"éclaireur sur place pour recueillir des informations."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:536
 msgid "Temple Completed"
-msgstr ""
+msgstr "Temple terminé"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:539
@@ -853,6 +1051,9 @@ msgid ""
 "May Satul warm you, Sidolus! My builders just completed the temple for "
 "Satul. Now we can start worshipping him and consecrating our priestesses."
 msgstr ""
+"Que Satul te réchauffe, Sidolus ! Mes bâtisseurs viennent d'achever le "
+"temple de Satul. Nous pouvons maintenant commencer à le vénérer et à sacrer "
+"nos prêtresses."
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:545
@@ -862,10 +1063,15 @@ msgid ""
 "for satisfying sacrifices. And don’t forget that the initiates who will "
 "serve Satul to become his priestesses need golden tabards and diamonds."
 msgstr ""
+"Que Satul vous réchauffe, Loftomor. Merci d'avoir construit un si grand "
+"temple. Nous devons maintenant apporter de la nourriture et nos objets les "
+"plus précieux au temple pour que les sacrifices soient satisfaisants. Et "
+"n'oubliez pas que les initiées qui serviront Satul pour devenir ses "
+"prêtresses ont besoin de tabards d'or et de diamants."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:552
 msgid "May Satul Warm Us"
-msgstr ""
+msgstr "Que Satul nous réchauffe"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:555
@@ -874,10 +1080,13 @@ msgid ""
 "for Satul’s pleasure. May he warm us and show his might to our princess and "
 "this barbaric tribe."
 msgstr ""
+"Nos prêtresses ont été consacrées et nous avons sacrifié nos plus belles "
+"marchandises pour le plaisir de Satul. Puisse-t-il nous réchauffer et "
+"montrer sa puissance à notre princesse et à cette tribu barbare."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:561
 msgid "Jundlina Arrives"
-msgstr ""
+msgstr "Jundlina approche"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:564
@@ -888,10 +1097,15 @@ msgid ""
 "would have meant servitude forever. And this is not what Atlanteans are made"
 " for."
 msgstr ""
+"Que Satul te réchauffe, Sidolus. Et qu'il me pardonne mon comportement "
+"hérétique. Le signe de sa puissance et la peur qui se lisait sur les visages"
+" des barbares me firent soudain reconnaître la vérité. J'ai eu tort de "
+"parler de paix et de coexistence, car cela aurait signifié la servitude pour"
+" toujours. Et ce n'est pas pour cela que les Atlantes sont faits."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:567
 msgid "Sidolus Relieved"
-msgstr ""
+msgstr "Sidolus soulagé"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:570
@@ -900,6 +1114,10 @@ msgid ""
 "trust you, as much as you will trust and be faithful to Satul. How come the "
 "Barbarians let you go?"
 msgstr ""
+"Que Satul vous réchauffe, Jundlina. Je suis heureux que vous soyez à nouveau"
+" ici. J'espère que nous pourrons vous faire confiance, autant que vous ferez"
+" confiance et serez fidèle à Satul. Comment se fait-il que les Barbares vous"
+" aient laissé partir ?"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:576
@@ -910,10 +1128,16 @@ msgid ""
 "issue now and forever on this island. There is no other way to live here in "
 "peace than to defeat them."
 msgstr ""
+"Sidolus, ils ne m'ont pas laissé partir. J'ai rencontré notre éclaireur et "
+"il a réussi à me faire sortir en douce, car je me suis rendu compte qu'ils "
+"me gardaient toujours en otage après que j'ai exprimé quelques craintes au "
+"sujet de notre précédent accord. Nous devons donc régler la question des "
+"barbares maintenant et pour toujours sur cette île. Il n'y a pas d'autre "
+"moyen de vivre en paix ici que de les vaincre."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:584
 msgid "Jundlina Is Relieved"
-msgstr ""
+msgstr "Jundlina est soulagée"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:587
@@ -921,6 +1145,8 @@ msgid ""
 "Praise Satul, we have founded a new home. I deeply regret I was weak in my "
 "belief. May Satul guide me better in the future."
 msgstr ""
+"Loué soit Satul, nous avons fondé un nouveau foyer. Je regrette profondément"
+" d'avoir été faible dans ma croyance. Que Satul me guide mieux à l'avenir."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:590
@@ -928,6 +1154,9 @@ msgid ""
 "Now it is time to celebrate but I expect we can’t relax long. We need to "
 "build up our society and our capability to explore the seas again."
 msgstr ""
+"L'heure est à la célébration, mais je pense que nous ne pourrons pas nous "
+"détendre longtemps. Nous devons renforcer notre société et notre capacité à "
+"explorer à nouveau les mers."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
@@ -939,11 +1168,11 @@ msgid ""
 "otherwise move on to the next mission."
 msgstr ""
 "Vous avez terminé cette mission. Vous pouvez continuer à jouer si vous le "
-"souhaitez, sinon passez à la mission suivante."
+"désirez, ou passer à la mission suivante."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:598
 msgid "Tribute Demand"
-msgstr ""
+msgstr "Demande de tribut"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:601
@@ -952,6 +1181,9 @@ msgid ""
 "really on our side, you should send us some gold and a couple of other wares"
 " on a regular basis."
 msgstr ""
+"Étrangers, nous avons besoin de recevoir un signe de votre bonne volonté. Si"
+" vous êtes vraiment de notre côté, vous devriez nous envoyer régulièrement "
+"de l'or et quelques autres marchandises."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:604
@@ -960,6 +1192,10 @@ msgid ""
 "real weapons like our axes, and not the sort of toothpicks you use. So feel "
 "free to send us 25 logs, 16 lumps of coal, 9 iron ingots and 4 gold bars."
 msgstr ""
+"Nous ne sommes intéressés que par les produits qui peuvent être utilisés "
+"pour forger des armes. Je veux dire de vraies armes, comme nos haches, et "
+"non les cure-dents que vous utilisez. N'hésitez donc pas à nous envoyer 25 "
+"bûches, 16 morceaux de charbon, 9 lingots de fer et 4 lingots d'or."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:607
@@ -967,14 +1203,17 @@ msgid ""
 "Oh, and I almost forgot this one. We demand to have your princess in our "
 "headquarters as well to coordinate our war plannings."
 msgstr ""
+"Oh, et j'ai failli oublier ceci. Nous demandons à ce que votre princesse "
+"soit également présente dans notre quartier général afin de coordonner nos "
+"plans de guerre."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:611
 msgid "Pitfall!"
-msgstr ""
+msgstr "Piège !"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:612
 msgid "Sidolus is upset"
-msgstr ""
+msgstr "Sidolus est contrarié"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:614
@@ -983,10 +1222,14 @@ msgid ""
 "is a trap to keep you as a hostage. And the demand itself is really an "
 "insult. I strongly recommend to decline this unsubstantiated claim."
 msgstr ""
+"Que Satul te réchauffe, Jundlina ! Ce comportement est vraiment barbare ! Je"
+" crains qu'il ne s'agisse d'un piège pour vous garder en otage. Et la "
+"demande elle-même est une véritable insulte. Je vous recommande vivement de "
+"refuser cette demande injustifiée."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:617
 msgid "Jundlina Concedes"
-msgstr ""
+msgstr "Jundlina se rend à l'évidence"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:620
@@ -995,6 +1238,9 @@ msgid ""
 "obey this demand. It is your obligation now to run our small people until I "
 "come back."
 msgstr ""
+"Sidolus, je suis d'accord avec vous. Cependant, je pense que nous n'avons "
+"pas le choix, nous devons donc nous soumettre à cette exigence. Vous avez "
+"maintenant le devoir de diriger notre peuple jusqu'à ce que je revienne."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:623
@@ -1002,10 +1248,13 @@ msgid ""
 "First you need to upgrade our scout’s house to a trading post. Then you need"
 " to send the demanded tributes of gold, iron, coal, and logs."
 msgstr ""
+"Tout d'abord, vous devez transformer la maison de notre éclaireur en "
+"comptoir commercial. Ensuite, vous devez envoyer les tributs demandés en or,"
+" en fer, en charbon et en rondins."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:630
 msgid "Trading Post Built"
-msgstr ""
+msgstr "Construction d'un comptoir"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:633
@@ -1013,10 +1262,13 @@ msgid ""
 "Sidolus, may Satul warm you! We have finished the new trading post. I hope "
 "this will allow Jundlina to return to us soon."
 msgstr ""
+"Sidolus, que Satul te réchauffe ! Nous avons terminé le nouveau comptoir "
+"commercial. J'espère que cela permettra à Jundlina de revenir bientôt parmi "
+"nous."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:636
 msgid "Sidolus Agrees"
-msgstr ""
+msgstr "Sidolus approuve"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:639
@@ -1024,6 +1276,9 @@ msgid ""
 "Well done, Loftomor, well done. May Satul warm our princess and our whole "
 "people. Now we need to begin sending goods to this Barbarian."
 msgstr ""
+"Bravo, Loftomor, bravo. Que Satul réchauffe notre princesse et notre peuple "
+"tout entier. Maintenant, nous devons commencer à envoyer des marchandises à "
+"ce barbare."
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:642
@@ -1031,6 +1286,9 @@ msgid ""
 "I think we should start with the deliveries we could afford the easiest. But"
 " we need to find more metals for sure."
 msgstr ""
+"Je pense que nous devrions commencer par les livraisons que nous pouvons "
+"nous permettre le plus facilement. Mais nous devons trouver plus de métaux, "
+"c'est certain."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:648
 msgid "Urgent Tribute Demand"
@@ -1221,7 +1479,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr "Maison d'éclaireur"
+msgstr "Cabane d'éclaireur"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65

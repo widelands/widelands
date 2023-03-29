@@ -230,16 +230,38 @@ void Window::layout() {
 }
 
 /**
- * Move the window out of the way so that the field bewlow it is visible
+ * Position the window near the clicked position, but keeping the clicked field visible
  */
 void Window::move_out_of_the_way() {
-	center_to_parent();
+	constexpr int32_t kClearance = 100;
 
-	const Vector2i mouse = get_mouse_position();
-	if (0 <= mouse.x && mouse.x < get_w() && 0 <= mouse.y && mouse.y < get_h()) {
-		set_pos(Vector2i(get_x(), get_y()) + Vector2i(0, (mouse.y < get_h() / 2 ? 1 : -1) * get_h()));
-		move_inside_parent();
+	const Panel* parent = get_parent();
+	assert(parent != nullptr);
+	const Vector2i mouse = parent->get_mouse_position();
+	const int pw = parent->get_inner_w();
+	const int ph = parent->get_inner_h();
+
+	int32_t nx = mouse.x;
+	int32_t ny = mouse.y;
+
+	if (get_w() < get_h()) {
+		if (mouse.x + kClearance + get_w() < pw || mouse.x < pw / 2) {
+			nx += kClearance;
+		} else {
+			nx -= get_w() + kClearance;
+		}
+		ny -= get_h() / 2;
+	} else {
+		if (mouse.y + kClearance + get_h() < ph || mouse.y < ph / 2) {
+			ny += kClearance;
+		} else {
+			ny -= get_h() + kClearance;
+		}
+		nx -= get_w() / 2;
 	}
+
+	set_pos(Vector2i(nx, ny));
+	move_inside_parent();
 }
 
 /**

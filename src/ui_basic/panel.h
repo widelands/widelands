@@ -77,8 +77,6 @@ public:
 		pf_child_die = 1 << 4,     ///< a child needs to die
 		pf_visible = 1 << 5,       ///< render the panel
 		pf_can_focus = 1 << 6,     ///< can receive the keyboard focus
-		// This panel will always be displayed on top of other panels.
-		pf_always_on_top = 1 << 7,
 		/// children should snap to the edges of this panel
 		pf_dock_windows_to_edges = 1 << 8,
 		/// whether any change in the desired size should propagate to the actual size
@@ -93,6 +91,17 @@ public:
 		pf_hide_all_overlays = 1 << 13,
 		// Other panels will snap to this one.
 		pf_snap_target = 1 << 14,
+	};
+
+	/** The Z ordering of overlapping panels; highest value is always on top. */
+	enum class ZOrder : uint8_t {
+		kAlwaysInBackground = 0,  ///< Always in the background.
+		kDefault = 8,             ///< No special handling.
+		kPinned = 16,             ///< Pinned by the user.
+		kConfirmation = 24,       ///< A confirmation prompt.
+		kInfoPanel = 32,          ///< The info panel and toolbar.
+		kFullscreenWindow = 64,   ///< A fullscreen window.
+		kDropdown = 128,          ///< Dropdown lists.
 	};
 
 	Panel(Panel* nparent,
@@ -254,7 +263,13 @@ public:
 		return last_child_;
 	}
 
-	void move_to_top();
+	void move_to_top(bool on_top_of_equal_z = true);
+	[[nodiscard]] virtual ZOrder get_z() const {
+		return z_order_;
+	}
+	void set_z(ZOrder z) {
+		z_order_ = z;
+	}
 
 	// Drawing, visibility
 	bool is_visible() const {
@@ -565,6 +580,7 @@ private:
 	uint8_t panel_snap_distance_{0U};
 	int desired_w_;
 	int desired_h_;
+	ZOrder z_order_{ZOrder::kDefault};
 
 	friend struct ModalGuard;
 

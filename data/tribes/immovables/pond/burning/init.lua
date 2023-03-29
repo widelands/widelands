@@ -6,6 +6,7 @@ wl.Descriptions():new_immovable_type {
    name = "pond_burning",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext ("immovable", "Burning Charcoal Stack"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
    programs = {
@@ -16,8 +17,6 @@ wl.Descriptions():new_immovable_type {
    },
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {19, 56},
          frames = 10,
          columns = 5,

@@ -12,6 +12,7 @@
 /data/datadirversion
 update.sh
 /widelands
+/widelands.exe
 wl_map*_info
 wl_create_spritesheet
 locale

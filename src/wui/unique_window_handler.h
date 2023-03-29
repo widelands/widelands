@@ -23,6 +23,7 @@
 
 #include "base/macros.h"
 #include "ui_basic/unique_window.h"
+#include "wui/buildingwindow.h"
 
 // Handles unique windows that should not close when their parents close. They
 // must have a unique name and their registry is owned by this class.
@@ -35,9 +36,11 @@ public:
 
 	// Returns the registry for 'name'.
 	UI::UniqueWindow::Registry& get_registry(const std::string& name);
+	BuildingWindow::Registry& get_building_window_registry(const std::string& name);
 
 private:
 	std::map<std::string, UI::UniqueWindow::Registry> registries_;
+	std::map<std::string, BuildingWindow::Registry> building_window_registries_;
 
 	DISALLOW_COPY_AND_ASSIGN(UniqueWindowHandler);
 };

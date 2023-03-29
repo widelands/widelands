@@ -9,6 +9,7 @@ wl.Descriptions():new_immovable_type{
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _("Red Umbrella Tree (Sapling)"),
    size = "small",
+   animation_directory = dirname,
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -19,7 +20,6 @@ wl.Descriptions():new_immovable_type{
    },
    spritesheets = {
       idle = {
-         directory = dirname,
          basename = "sapling",
          fps = 8,
          frames = 5,

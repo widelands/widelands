@@ -616,7 +616,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
-msgstr ""
+msgstr "Земляные работы"
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:268
@@ -685,11 +685,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:290
 msgid "Pass Secured"
-msgstr ""
+msgstr "Перевал защищён"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:291
 msgid "The pass is under guard"
-msgstr ""
+msgstr "Перевал взят под охрану"
 
 #. TRANSLATORS: Claus Lembeck – Pass Secured
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:293
@@ -697,14 +697,16 @@ msgid ""
 "Our soldiers have fortified the pass. Surely no enemy will get past them "
 "before we are ready."
 msgstr ""
+"Наши солдаты укрепили перевал. Конечно, ни один враг не пройдет мимо них до "
+"того, как мы будем готовы."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:297
 msgid "Uplands Colonized"
-msgstr ""
+msgstr "Нагорье освоено"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:298
 msgid "The Uplands have been settled"
-msgstr ""
+msgstr "Нагорье заселено"
 
 #. TRANSLATORS: Reebaud – Uplands Secured
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:300
@@ -713,6 +715,9 @@ msgid ""
 " forget to always keep a close eye on the ware exchange between the Lowlands"
 " and the Uplands and keep it to a minimum so as to avoid jams on the roads."
 msgstr ""
+"Нагорье становится нашим экономическим центром. Мы должны внимательно "
+"следить за тем, чтобы обмен товарами между низменностями и Нагорьем сводился"
+" к минимуму, иначе пробок на дорогах не ибежать."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:304
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:314
@@ -722,12 +727,12 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:354
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:361
 msgid "Victory"
-msgstr ""
+msgstr "Победа"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:315
 msgid "Enemy defeated"
-msgstr ""
+msgstr "Враг разбит!"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:307
@@ -736,6 +741,9 @@ msgid ""
 "beaten them by ourselves. Our town did not even sustain any major damage – "
 "on the contrary, you have expanded it far beyond its former bounds."
 msgstr ""
+"Они побеждены! Спасибо вам, спасибо вам за вашу помощь. Мы никогда не смогли"
+" бы победить их в одиночку. Нашему городу даже не был нанесен какой–либо "
+"серьезный ущерб - напротив, вы расширили его далеко за прежние пределы."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:310
@@ -752,6 +760,8 @@ msgid ""
 "You are very welcome, Ocke Ketelsen. Do not belittle your own part in this "
 "victory though, for we could not have achieved this by ourselves."
 msgstr ""
+"Добро пожаловать, Окке Кетельсен. Однако не принижайте свою собственную роль"
+" в этой победе, потому что мы не смогли бы добиться этого сами."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:320
@@ -764,12 +774,20 @@ msgid ""
 "that might be useful – any piece of tactical advice – any towns who might "
 "join us – please share this information with us."
 msgstr ""
+"И прими мою сердечную благодарность за обещание прислать своих солдат. Я и "
+"раньше понимал, что Аттердаг - грозный враг, но силы, с которыми мы сейчас "
+"столкнулись, превосходят все, что я видел за всю свою жизнь, а это, всего "
+"лишь, авангард! Мы должны постраться использовать любую возможность, и даже "
+"тогда я не так уверен в победе, как был раньше. Если ты знаешь о чем–нибудь,"
+" чем мы могли бы воспользоваться – какая-нибудь тактическая информация – "
+"например о  городах, желающих к нам присоединиться, - пожалуйста, поделись с"
+" нами этой информацией."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:325
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:335
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:355
 msgid "Know your enemy"
-msgstr ""
+msgstr "Знай своего врага."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:327
@@ -780,6 +798,11 @@ msgid ""
 "stronghold on Föhr has always been their only defence to speak of, so once "
 "you were gone he seized the entire area with ease."
 msgstr ""
+"С превеликой радостью! Как свидетельствуют мои торговые партнеры, жажда "
+"завоеваний Аттердага безгранична. После полного подчинения Фёра, он завоевал"
+" и все другие острова в окрестностях. Ваша крепость на Фёре была "
+"единственным стоящим внимания укреплением, поэтому, как только вы ушли, он с"
+" легкостью захватил всю территорию."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:330
@@ -790,6 +813,11 @@ msgid ""
 "said to have been executed for embezzling a bushel of grain. People are "
 "suffering, and will no doubt gladly join anyone who comes to free them."
 msgstr ""
+"По слухам, захватчики установили жестокие правила. Общеизвестно, что они "
+"прекратили всякую торговлю, и местные жители вынуждены отдавать данам "
+"половину всего, что они производят, в качестве дани. Половину! Говорят, что "
+"уже десятки человек были казнены за хищение корзины зерна. Люди страдают и, "
+"без сомнения, с радостью присоединятся к любому, кто придет их освободить."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:337
@@ -799,6 +827,10 @@ msgid ""
 " swear that the pirates were in fact Danish soldiers, and that their ships "
 "belong to the Danish fleet."
 msgstr ""
+"И кое-что ещё. Торговые суда, пытавшиеся уплыть на север от оккупированной "
+"территории, были взяты на абордаж и потоплены пиратами. Однако, как заверяют"
+" выжившие, пираты на самом деле были солдатами данов и их корабли "
+"принадлежат датскому флоту."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:340
@@ -809,6 +841,11 @@ msgid ""
 "would do that. Clearly he attempts to disguise this fact. Why would he do "
 "that, unless he believes this secret to be of strategical importance?"
 msgstr ""
+"Позволю себе высказать предположение: полагаю, что Аттердаг перевозит свои "
+"войска на острова из своей столицы с помощью кораблей. Наземный маршрут "
+"намного длиннее и сложнее, так что нетрудно понять, почему он выбрал другой "
+"путь. Очевидно, он пытается скрыть это. Зачем ему это делать, если только он"
+" не считает, что этот секрет имеет стратегическое значение?"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:343
@@ -822,11 +859,20 @@ msgid ""
 "ships, you can seize the islands and build a belt of inconquerable "
 "strongholds that block any enemy ship attempting to pass."
 msgstr ""
+"Я не знаю, сколько в точности солдат он может перевозить на кораблях из "
+"столицы на острова; но, думаю, их численность велика, так что было бы "
+"разумно прекратить это сообщение. Как вы знаете, эти два района соединяет "
+"единственный морской путь, который проходит через пролив под названием "
+"Каттегат. Этот пролив имеет ширину в несколько миль и усеян крошечными "
+"островками. Если ты сможешь добраться до туда, и избежишь столкновений с "
+"вражескими судами, то сможешь захватить острова и построить пояс непобедимых"
+" крепостей, которые блокируют любой вражеский корабль, рискнувший пройти "
+"через пролив."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:348
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:362
 msgid "Victory!"
-msgstr ""
+msgstr "Победа!"
 
 #. TRANSLATORS: Reebaud – Victory 5
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:350

@@ -55,7 +55,7 @@ function place_buildings(eco, plr)
             if count == 0 then
                up[#up+1] = worker
             elseif count > 1 and #up > 0 and not building.descr.type_name == "warehouse" then
-               for i = 1, count - 1 do 
+               for i = 1, count - 1 do
                   building:set_workers(up[i],1)
                end
                building:set_workers(worker,1)

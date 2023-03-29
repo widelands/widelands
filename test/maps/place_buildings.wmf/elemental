@@ -1,0 +1,13 @@
+# Automatically created by Widelands 1.2~git26082 (fa28389@master) Release
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="1"
+name=_"place_buildings"
+author="Unknown"
+descr=
+hint=
+tags="unbalanced"
+addons=

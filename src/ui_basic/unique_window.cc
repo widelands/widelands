@@ -46,6 +46,7 @@ void UniqueWindow::Registry::create() const {
  */
 void UniqueWindow::Registry::destroy() const {
 	if (window != nullptr) {
+		window->save_position();
 		window->die();
 	}
 }
@@ -60,6 +61,7 @@ void UniqueWindow::Registry::toggle() {
 			window->restore();
 			opened();
 		} else {
+			window->save_position();
 			window->die();
 			closed();
 			window = nullptr;
@@ -124,12 +126,50 @@ UniqueWindow::~UniqueWindow() {
 	if ((registry_ != nullptr) && (registry_->window != nullptr)) {
 		assert(registry_->window == this);
 
+		save_position();
 		registry_->window = nullptr;
-		registry_->x = get_x();
-		registry_->y = get_y();
-		registry_->valid_pos = true;
-
 		registry_->closed();
 	}
 }
+
+void UniqueWindow::save_position() {
+	if ((registry_ != nullptr) && (registry_->window != nullptr)) {
+		assert(registry_->window == this);
+
+		registry_->x = get_x();
+		registry_->y = get_y();
+		registry_->valid_pos = true;
+	}
+}
+
+void UniqueWindow::set_pos(Vector2i new_pos) {
+	UI::Panel::set_pos(new_pos);
+	save_position();
+}
+
+/**
+ * Restore latest position, or move so that it is inside the parent panel.
+ */
+void UniqueWindow::move_inside_parent() {
+	const Panel* parent = get_parent();
+	if (parent == nullptr) {
+		return;
+	}
+
+	if (registry_->valid_pos) {
+		constexpr int32_t kMinVisible = 100;
+
+		const bool top_visible = registry_->y < parent->get_inner_h() - kMinVisible;
+		const bool bottom_visible = registry_->y + get_h() > kMinVisible;
+		const bool left_visible = registry_->x < parent->get_inner_w() - kMinVisible;
+		const bool right_visible = registry_->x + get_w() > kMinVisible;
+
+		if (top_visible && bottom_visible && left_visible && right_visible) {
+			set_pos(Vector2i(registry_->x, registry_->y));
+			return;
+		}
+	}
+	Window::move_inside_parent();
+}
+
 }  // namespace UI
