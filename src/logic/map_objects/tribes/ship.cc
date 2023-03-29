@@ -356,10 +356,14 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 				arrived = get_position().field->get_immovable() == mo;
 				break;
 			case MapObjectType::SHIP:
-				arrived = game.map().calc_distance(get_position(), dynamic_cast<const Ship&>(*mo).get_position()) <= kNearDestinationShipRadius;
+				arrived = game.map().calc_distance(
+				             get_position(), dynamic_cast<const Ship&>(*mo).get_position()) <=
+				          kNearDestinationShipRadius;
 				break;
 			case MapObjectType::PINNED_NOTE:
-				arrived = game.map().calc_distance(get_position(), dynamic_cast<const PinnedNote&>(*mo).get_position()) <= kNearDestinationNoteRadius;
+				arrived = game.map().calc_distance(
+				             get_position(), dynamic_cast<const PinnedNote&>(*mo).get_position()) <=
+				          kNearDestinationNoteRadius;
 				break;
 			default:
 				NEVER_HERE();
@@ -367,8 +371,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			if (arrived) {
 				send_message_at_destination_ = false;
 				send_message(game, _("Ship Arrived"), _("Ship Reached Destination"),
-				             _("Your ship has arrived at its destination."),
-				             descr().icon_filename());
+				             _("Your ship has arrived at its destination."), descr().icon_filename());
 			}
 		}
 	}
@@ -657,7 +660,8 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			Bob* dest = dynamic_cast<Bob*>(destination_object);
 
 			if (map->calc_distance(position, dest->get_position()) <=
-			    (dest->descr().type() == MapObjectType::SHIP ? kNearDestinationShipRadius : kNearDestinationNoteRadius)) {
+			    (dest->descr().type() == MapObjectType::SHIP ? kNearDestinationShipRadius :
+                                                            kNearDestinationNoteRadius)) {
 				// Already there, idle and await further orders.
 				start_task_idle(game, descr().main_animation(), 250);
 				return true;
