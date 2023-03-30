@@ -349,6 +349,8 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		const MapObject* mo = destination_.get(game);
 		if (mo == nullptr) {  // Destination vanished.
 			send_message_at_destination_ = false;
+			send_message(game, _("Destination Gone"), _("Ship Destination Vanished"),
+			             _("Your ship’s destination has disappeared."), descr().icon_filename());
 		} else {
 			bool arrived;
 			switch (mo->descr().type()) {
