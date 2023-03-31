@@ -248,6 +248,9 @@ jobs:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: |
           ${{ steps.prepare.outputs.vcpkg_key }}-${{ matrix.arch }}
+        # TODO remove once vcpkg is fixed again
+        restore-keys: |
+          1e88a68ccec2eb374a6a1e02c4fb99951456cd8b4ecd9dc2c13050731ce736ad-
     - name: Building packages
       run: ./install-dependencies.sh vcpkg --triplet=${{ env.VCPKG_TARGET_TRIPLET }}
       shell: bash
@@ -285,6 +288,9 @@ jobs:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: |
           ${{needs.vcpkg-packages.outputs.vcpkg_key}}-${{ matrix.arch }}
+        # TODO remove once vcpkg is fixed again
+        restore-keys: |
+          1e88a68ccec2eb374a6a1e02c4fb99951456cd8b4ecd9dc2c13050731ce736ad-
     - name: Installing dependencies
       run: |
         choco install innosetup
