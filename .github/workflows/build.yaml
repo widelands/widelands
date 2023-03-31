@@ -237,6 +237,7 @@ jobs:
       run: |
         mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
         cd ${{ env.VCPKG_ROOT }}
+        git checkout $(cat ${{ github.workspace }}/.github/scripts/vcpkg_ref)
         HEAD=$(git rev-parse --short HEAD)
         echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${HEAD}" >> $GITHUB_OUTPUT
       shell: bash
@@ -273,6 +274,8 @@ jobs:
       id: prepare
       run: |
         mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
+        cd ${{ env.VCPKG_ROOT }}
+        git checkout $(cat ${{ github.workspace }}/.github/scripts/vcpkg_ref)
       shell: bash
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v3
