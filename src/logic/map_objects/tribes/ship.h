@@ -371,6 +371,7 @@ private:
 	std::vector<Battle> battles_;
 	uint32_t hitpoints_;
 	Time last_heal_time_{0U};
+	bool send_message_at_destination_{false};
 
 	Quantity capacity_;
 	Quantity warship_soldier_capacity_;
@@ -394,6 +395,7 @@ protected:
 		Quantity warship_soldier_capacity_{0U};
 		int32_t hitpoints_{0};
 		Time last_heal_time_{0U};
+		bool send_message_at_destination_{false};
 		ShipStates ship_state_{ShipStates::kTransport};
 		ShipType ship_type_{ShipType::kTransport};
 		ShipType pending_refit_{ShipType::kTransport};

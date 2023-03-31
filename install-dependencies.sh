@@ -204,7 +204,7 @@ elif [ "$DISTRO" = "void" ]; then
 elif [ "$DISTRO" = "vcpkg" ]; then
    echo "Installing dependencies for vcpkg..."
    vcpkg install --disable-metrics $@ asio gettext libpng icu glbinding sdl2 sdl2-ttf \
-     sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 \
+     sdl2-mixer[libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 \
      harfbuzz opusfile libwebp
 
 elif [ -z "$DISTRO" ]; then
