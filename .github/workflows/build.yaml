@@ -239,6 +239,7 @@ jobs:
         REF=$(cat .github/scripts/vcpkg_ref)
         cd ${{ env.VCPKG_ROOT }}
         # REF can be empty, a commit hash or a pull request
+        [ -n "$REF" ] && git fetch
         git checkout $REF || git pull origin $REF
         HEAD=$(git rev-parse --short HEAD)
         echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${HEAD}" >> $GITHUB_OUTPUT
@@ -279,6 +280,7 @@ jobs:
         REF=$(cat .github/scripts/vcpkg_ref)
         cd ${{ env.VCPKG_ROOT }}
         # REF can be empty, a commit hash or a pull request
+        [ -n "$REF" ] && git fetch
         git checkout $REF || git pull origin $REF
       shell: bash
     - name: Restore vcpkg and its artifacts.
