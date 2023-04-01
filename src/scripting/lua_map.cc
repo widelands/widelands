@@ -1828,8 +1828,8 @@ int LuaMap::do_get_field(lua_State* L, const uint32_t x, const uint32_t y) {
 		lua_pop(L, 1);             // S: args... - allfields
 		lua_pushuint32(L, index);  // S: args... - allfields - index
 		to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(x, y));
-		lua_settable(L, -3);       // S: args... - allfields
-		lua_geti(L, -1, index);    // S: args... - allfields - field
+		lua_settable(L, -3);     // S: args... - allfields
+		lua_geti(L, -1, index);  // S: args... - allfields - field
 	}
 
 	lua_remove(L, -2);  // S: args... - field
