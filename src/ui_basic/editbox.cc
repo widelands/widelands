@@ -194,7 +194,7 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t /*y*/) {
 		return true;
 	}
 #if HAS_PRIMARY_SELECTION_BUFFER
-	else if (btn == SDL_BUTTON_MIDDLE && SDL_HasPrimarySelectionText()) {
+	else if (btn == SDL_BUTTON_MIDDLE) {
 		/* Primary buffer is inserted without affecting cursor position, selection, and focus. */
 		const uint32_t old_caret_pos = m_->caret;
 		const uint32_t old_selection_start = m_->selection_start;
@@ -211,7 +211,11 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t /*y*/) {
 		    (old_selection_end <= new_caret_pos && new_caret_pos <= old_selection_start)) {
 			text_to_insert.clear();  // Can't paste into the active selection.
 		} else {
+			std::string old_text = m_->text;
 			handle_textinput(text_to_insert);
+			if (old_text == m_->text) {
+				text_to_insert.clear();  // Text wasn't pasted, perhaps too long.
+			}
 		}
 
 		m_->mode = old_mode;
