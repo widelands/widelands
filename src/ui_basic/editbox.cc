@@ -209,7 +209,7 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t /*y*/) {
 
 		if (old_mode == EditBoxImpl::Mode::kSelection &&
 		    ((old_selection_start <= new_caret_pos && new_caret_pos <= old_selection_end) ||
-		    (old_selection_end <= new_caret_pos && new_caret_pos <= old_selection_start))) {
+		     (old_selection_end <= new_caret_pos && new_caret_pos <= old_selection_start))) {
 			text_to_insert.clear();  // Can't paste into the active selection.
 		} else {
 			std::string old_text = m_->text;
