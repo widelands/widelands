@@ -236,9 +236,10 @@ jobs:
       id: prepare
       run: |
         mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
+        REF=$(cat .github/scripts/vcpkg_ref)
         cd ${{ env.VCPKG_ROOT }}
-        # VCPKG_REF is a repo variable and can be empty, a commit hash or a pull request
-        git checkout ${{ vars.VCPKG_REF }} || git pull origin ${{ vars.VCPKG_REF }}
+        # REF can be empty, a commit hash or a pull request
+        git checkout $REF || git pull origin $REF
         HEAD=$(git rev-parse --short HEAD)
         echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${HEAD}" >> $GITHUB_OUTPUT
       shell: bash
@@ -275,9 +276,10 @@ jobs:
       id: prepare
       run: |
         mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
+        REF=$(cat .github/scripts/vcpkg_ref)
         cd ${{ env.VCPKG_ROOT }}
-        # VCPKG_REF is a repo variable and can be empty, a commit hash or a pull request
-        git checkout ${{ vars.VCPKG_REF }} || git pull origin ${{ vars.VCPKG_REF }}
+        # REF can be empty, a commit hash or a pull request
+        git checkout $REF || git pull origin $REF
       shell: bash
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v3
