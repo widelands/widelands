@@ -1696,7 +1696,7 @@ int LuaMap::get_field(lua_State* L) {
 		report_error(L, "y coordinate out of range!");
 	}
 
-	return to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(x, y));
+	return do_get_field(L, x, y);
 }
 
 /* RST
@@ -1717,7 +1717,7 @@ int LuaMap::wrap_field(lua_State* L) {
 	const Widelands::Map& map = get_egbase(L).map();
 	map.normalize_coords(c);
 
-	return to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(c));
+	return do_get_field(L, c.x, c.y);
 }
 
 /* RST
@@ -1806,6 +1806,41 @@ int LuaMap::sea_route_exists(lua_State* L) {
  C METHODS
  ==========================================================
  */
+
+int LuaMap::do_get_field(lua_State* L, const uint32_t x, const uint32_t y) {
+	constexpr const char* kAllFieldsName = "__all_field_instances";
+	static std::set<const lua_State*> allocated;
+	static const uint32_t kMaxSize = Widelands::kMapDimensions.back();
+
+	if (allocated.count(L) == 0) {
+		lua_newtable(L);
+
+		// All indices here are 2 greater to avoid off-by-one errors when getting a key by index.
+		uint32_t key = 1;
+		for (uint32_t fx = 0; fx < kMaxSize; ++fx) {
+			for (uint32_t fy = 0; fy < kMaxSize; ++fy) {
+				lua_pushuint32(L, ++key);
+				to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(fx, fy));
+				lua_settable(L, -3);
+			}
+		}
+
+		lua_setglobal(L, kAllFieldsName);
+		lua_pop(L, 1);
+
+		allocated.insert(L);
+	}
+
+	lua_getglobal(L, kAllFieldsName);          // S: args... - allfields
+	lua_pushinteger(L, x * kMaxSize + y + 1);  // S: args... - allfields - index (+1, not +2)
+	lua_next(L, -2);                           // S: args... - allfields - index - field
+	lua_remove(L, -2);                         // S: args... - allfields - field
+	lua_remove(L, -2);                         // S: args... - field
+
+	assert(!lua_isnil(L, -1));
+	assert((*get_user_class<LuaMaps::LuaField>(L, -1))->coords() == Widelands::Coords(x, y));
+	return 1;
+}
 
 /* RST
 TribeDescription
