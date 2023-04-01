@@ -11058,7 +11058,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce marble in %1$s and "
 "granite in %2$s on average."
-msgstr ""
+msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert deeses Bargwark dör de Bank all %1$s Marmel un all %2$s Flint."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11113,7 +11113,7 @@ msgstr "Köhl word vun de Dood in ’t Leven torügg haalt, ’t gaht von Swaart
 msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert deeses Bargwark dör de Bank all %s Köhl."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11169,7 +11169,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert deeses Bargwark dör de Bank all %s Iesenkluut."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11223,7 +11223,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert deeses Bargwark dör de Bank all %s Goldkluut."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14070,7 +14070,7 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "short sword in %1$s on average, one long sword in %2$s on average and one "
 "helmet in %3$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen, produzeert deeses Huus dör de Bank in %1$s een Lüttes Sweert, in %2$s een Langes Sweert un in %3$s eenen Helm."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Large Armor
 #. Smithy
@@ -14105,7 +14105,7 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "broadswordsword in %1$s on average, one double-edged sword in %2$s on "
 "average and one golden helmet in %3$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen, produzeert deeses Huus dör de Bank in %1$s een Bredes Sweert, in %2$s een Tweesneidigs Sweert un in %3$s eenen Goldenen Helm."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1825
@@ -14164,7 +14164,7 @@ msgctxt "frisians_building"
 msgid ""
 "The tailor’s shop needs %1$s on average to produce one studded fur garment "
 "and %2$s on average to produce one golden fur garment."
-msgstr ""
+msgstr "De Sniederee bruukt dör de Bank %1$s, um eene Beslaane Fellkluft to produzeren, un %2$s, um eene Goldene Fellkluft to produzeren."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Charcoal
 #. Kiln
@@ -14260,7 +14260,7 @@ msgctxt "frisians_building"
 msgid ""
 "The honey bread bakery needs %1$s on average to produce one loaf of bread "
 "and %2$s on average to produce one loaf of honey bread."
-msgstr ""
+msgstr "De Hönnigbrood-Backeree bruukt dör de Bank %1$s, um een Brood to produzeren, un %2$s, um een Hönnigbrood to produzeren."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1903
@@ -14316,7 +14316,7 @@ msgctxt "frisians_building"
 msgid ""
 "The mead brewery needs %1$s on average to brew one mug of beer and %2$s on "
 "average to brew one mug of mead."
-msgstr ""
+msgstr "Dat Brauhuus bruukt dör de Bank %1$s, um een Kroog Beer to produzeren, un %2$s, um een Kroog Hönnigbeer to produzeren."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1929
@@ -14482,7 +14482,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the rock mine can produce granite in %s on "
 "average."
-msgstr ""
+msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert dat Stenen-Bargwark dör de Bank all %s Flint."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Rock
 #. Mine
@@ -14492,7 +14492,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep rock mine can produce granite in %s "
 "on average."
-msgstr ""
+msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert dat Deep Stenen-Bargwark dör de Bank all %s Flint."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Coal Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2025
@@ -14501,7 +14501,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the coal mine can produce coal in %s on "
 "average."
-msgstr ""
+msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert dat Köhle-Bargwark dör de Bank all %s Köhl."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Coal
 #. Mine
@@ -14511,7 +14511,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep coal mine can produce coal in %s on "
 "average."
-msgstr ""
+msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert dat Deep Köhle-Bargwark dör de Bank all %s Köhl."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Iron Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2043
@@ -14530,7 +14530,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce iron ore in %s "
 "on average."
-msgstr ""
+msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert dat Deep Iesen-Bargwark dör de Bank all %s Iesenkluut."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Gold Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2061
@@ -14549,7 +14549,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce gold ore in %s "
 "on average."
-msgstr ""
+msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert dat Deep Gold-Bargwark dör de Bank all %s Goldkluut."
 
 #. TRANSLATORS: Lore helptext for a frisian training site: Training Camp
 #: ../../data/tribes/initialization/frisians/units.lua:2079
