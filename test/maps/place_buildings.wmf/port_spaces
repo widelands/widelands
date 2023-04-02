@@ -1,0 +1,8 @@
+# Automatically created by Widelands 1.2~git26082 (fa28389@master) Release
+
+[global]
+packet_version="1"
+waterway_max_length="1"
+number_of_port_spaces="0"
+
+[port_spaces]

@@ -545,7 +545,9 @@ void DefaultAI::think() {
 			break;
 		case SchedulerTaskId::kDiplomacy:
 			diplomacy_actions(gametime);
-			set_taskpool_task_time(gametime + kDiplomacyInterval, SchedulerTaskId::kDiplomacy);
+			set_taskpool_task_time(
+			   gametime + kDiplomacyInterval + Duration(RNG::static_rand(30) * 1000),
+			   SchedulerTaskId::kDiplomacy);
 			break;
 		case SchedulerTaskId::kUnset:
 			NEVER_HERE();
@@ -1147,9 +1149,15 @@ void DefaultAI::late_initialization() {
 	                                                   SchedulerTaskId::kWarehouseFlagDist, 5,
 	                                                   "flag warehouse Update"));
 
-	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(40 * 1000)),
-	                                                   SchedulerTaskId::kDiplomacy, 7,
-	                                                   "diplomacy actions"));
+	if (game().diplomacy_allowed()) {
+		// don't do any diplomacy for the first 10 + x minutes to avoid click races for allies,
+		// and allow statistics to settle after loading game
+		taskPool.push_back(std::make_shared<SchedulerTask>(
+		   std::max<Time>(
+		      gametime + kStatUpdateInterval * 16 + Duration(RNG::static_rand(5 * 60) * 1000),
+		      Time((10 + RNG::static_rand(10)) * 60 * 1000)),
+		   SchedulerTaskId::kDiplomacy, 7, "diplomacy actions"));
+	}
 
 	const Widelands::Map& map = game().map();
 
@@ -3330,26 +3338,238 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 // Dealing with diplomacy actions
 void DefaultAI::diplomacy_actions(const Time& gametime) {
 
-	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
-		if (pda.other == player_number()) {
-			// TODO(Nordfriese): The AI just makes a random choice every time.
-			// In the future, make more strategic decision here. Add asking for alliance
-			bool accept = RNG::static_rand(5) == 0;
-			// don't accept any diplomacy for the first 10 + x minutes to avoid click races for allies
-			accept &= gametime > Time((10 + RNG::static_rand(10)) * 60 * 1000);
-			// only accept if asking player is stronger (based on mil power and land)
-			accept &= player_statistics.get_player_power(pda.sender) *
-			             (player_statistics.get_player_land(pda.sender) / 100) >
-			          player_statistics.get_player_power(player_number()) *
-			             (player_statistics.get_player_land(player_number()) / 100);
+	const Widelands::PlayerNumber mypn = player_number();
+	const Widelands::Player* me = game().get_player(mypn);
+	const Widelands::TeamNumber mytn = me->team_number();
+	const bool me_def = me->is_defeated();
+	const bool me_alone = player_statistics.get_is_alone(mypn);
 
-			game().send_player_diplomacy(pda.other,
-			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
-                                          (accept ? Widelands::DiplomacyAction::kAcceptInvite :
-                                                    Widelands::DiplomacyAction::kRefuseInvite) :
-                                          (accept ? Widelands::DiplomacyAction::kAcceptJoin :
-                                                    Widelands::DiplomacyAction::kRefuseJoin)),
-			                             pda.sender);
+	// TODO(tothxa): detect and handle team changes since last stats update
+
+	// TODO(tothxa): Check all uses whether it's safe to add an invalid value to the enum
+	constexpr Widelands::DiplomacyAction kNoAction =
+	   static_cast<Widelands::DiplomacyAction>(std::numeric_limits<uint8_t>::max());
+	constexpr int32_t kNoScore = std::numeric_limits<int32_t>::min();
+
+	int32_t plan_priority = 0;
+	Widelands::DiplomacyAction planned_action = kNoAction;
+	Widelands::PlayerNumber planned_opn = 0;
+	int32_t planned_other_score = kNoScore;
+	std::string planned_log_append_text;
+
+	// If we are defeated or the last one in a team, then leave team, but check pending requests
+	// first.
+	// If alone, we may accept requests to join and cancel leaving.
+	// If defeated, just clean up by rejecting everything.
+	if (me->team_number() != 0 && (me_alone || me_def)) {
+		planned_action = Widelands::DiplomacyAction::kLeaveTeam;
+		plan_priority = me_alone ? 0 : std::numeric_limits<int32_t>::max();
+		if (g_verbose) {
+			planned_log_append_text = me_alone ? " as last one" : " as defeated";
+			/* verb_ */ log_dbg_time(gametime,
+			                         "AI Diplomacy: Player(%d) plans to leave team with priority %d",
+			                         static_cast<unsigned int>(mypn), plan_priority);
+		}
+	}
+
+	const int32_t my_team_score =
+	   me_alone ? 0 : player_statistics.get_team_average_score(mytn, mypn);
+	const std::string myts_s = me_alone ? "" : format(" with team score %d", my_team_score);
+
+	// Check desirability of current team
+	if (planned_action == kNoAction && !me_alone && my_team_score < 0 &&
+	    (my_team_score < -10 || RNG::static_rand(8) == 0)) {
+		planned_action = Widelands::DiplomacyAction::kLeaveTeam;
+		plan_priority = -my_team_score;
+		if (g_verbose) {
+			planned_log_append_text = myts_s;
+			/* verb_ */ log_dbg_time(gametime,
+			                         "AI Diplomacy: Player(%d) plans to leave team with priority %d",
+			                         static_cast<unsigned int>(mypn), plan_priority);
+		}
+	}
+
+	// Check for undesirable teammates
+	if (planned_action == kNoAction && player_statistics.get_worst_ally_score() < -15) {
+		const uint8_t my_team_size = player_statistics.members_in_team(mytn);
+		const int32_t team_vs_worst =
+		   (my_team_size < 3 ? 0 : my_team_score) + player_statistics.get_worst_ally_score();
+		if ((team_vs_worst > 0 && my_team_size > 3) ||
+		    (team_vs_worst > -10 && RNG::static_rand(my_team_size * 2 - 2) > 0)) {
+			verb_log_dbg_time(gametime,
+			                  "AI Diplomacy: Player(%d) tolerates player (%d) with diploscore "
+			                  "%d in team (%d)%s\n",
+			                  static_cast<unsigned int>(mypn),
+			                  static_cast<unsigned int>(player_statistics.get_worst_ally()),
+			                  player_statistics.get_worst_ally_score(),
+			                  static_cast<unsigned int>(mytn), myts_s.c_str());
+		} else {
+			planned_action = Widelands::DiplomacyAction::kLeaveTeam;
+			plan_priority = std::max(0, -team_vs_worst);
+			if (g_verbose) {
+				planned_log_append_text =
+				   format("%s because of player (%d) with diploscore %d", myts_s,
+				          static_cast<unsigned int>(player_statistics.get_worst_ally()),
+				          player_statistics.get_worst_ally_score());
+				/* verb_ */ log_dbg_time(
+				   gametime, "AI Diplomacy: Player(%d) plans to leave team with priority %d",
+				   static_cast<unsigned int>(mypn), plan_priority);
+			}
+		}
+	}
+
+	// Decide pending requests
+	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
+		if (pda.other == mypn) {
+			const int32_t diploscore = player_statistics.get_diplo_score(pda.sender);
+			const Widelands::TeamNumber other_tn = player_statistics.get_team_number(pda.sender);
+
+			// We have to use team score changes to make it comparable with team leave priorities
+			int32_t priority = 0;
+
+			// We may still decide to stay if a strong enough player wants to join
+			const bool plan_to_leave = planned_action == Widelands::DiplomacyAction::kLeaveTeam;
+
+			// consider only if we are not defeated and if not resulting in a team win
+			bool accept =
+			   !me_def && player_statistics.members_in_team(
+			                 pda.action == Widelands::DiplomacyAction::kInvite ? other_tn : mytn) <
+			                 player_statistics.players_active() - 1;
+
+			// accept if diploscore high, else accept only 50%
+			accept =
+			   accept && (diploscore >= std::max(my_team_score, 25) ||
+			              (diploscore > std::max(my_team_score / 2, 15) && RNG::static_rand(2) == 0));
+
+			if (pda.action == Widelands::DiplomacyAction::kJoin && accept) {
+				// The amount by which this player would increase the team's average score
+				priority = diploscore / player_statistics.members_in_team(mytn);
+			}
+
+			std::string other_team_score_str;
+
+			if (pda.action == Widelands::DiplomacyAction::kInvite && accept) {
+				const bool other_alone = player_statistics.get_is_alone(pda.sender);
+				const int32_t ots = other_alone ?
+                                   diploscore - static_cast<uint32_t>(RNG::static_rand(10)) :
+                                   player_statistics.get_team_average_score(other_tn);
+				if (!other_alone && g_verbose) {
+					other_team_score_str = format(" and team score %d", ots);
+				}
+				const int32_t my_effective_ts = plan_to_leave ? 0 : my_team_score;
+				accept = ots > my_effective_ts;
+				priority = ots - my_effective_ts;
+				if (accept && plan_to_leave) {
+					// Replace plan to leave with accepting invite, which also leaves old team
+					plan_priority = 0;
+				}
+			}
+
+			accept = accept && (planned_action == kNoAction || plan_priority < priority);
+
+			if (!accept) {
+				verb_log_dbg_time(
+				   gametime,
+				   "AI Diplomacy: Player(%d)%s denies the %s of player (%d) with diploscore %d%s\n",
+				   static_cast<unsigned int>(pda.other), myts_s.c_str(),
+				   pda.action == Widelands::DiplomacyAction::kInvite ? "invitation" : "join request",
+				   static_cast<unsigned int>(pda.sender), diploscore, other_team_score_str.c_str());
+				game().send_player_diplomacy(pda.other,
+				                             (pda.action == Widelands::DiplomacyAction::kInvite ?
+                                             Widelands::DiplomacyAction::kRefuseInvite :
+                                             Widelands::DiplomacyAction::kRefuseJoin),
+				                             pda.sender);
+			} else {
+				if (planned_action != kNoAction) {
+					verb_log_dbg_time(
+					   gametime,
+					   "AI Diplomacy: Player(%d) replaces plan: old priority: %d, new priority: %d",
+					   static_cast<unsigned int>(mypn), plan_priority, priority);
+					if (planned_action != Widelands::DiplomacyAction::kLeaveTeam) {
+						verb_log_dbg_time(gametime,
+						                  "AI Diplomacy: Player(%d)%s denies the %s of player (%d) with "
+						                  "diploscore %d%s\n",
+						                  static_cast<unsigned int>(mypn), myts_s.c_str(),
+						                  planned_action == Widelands::DiplomacyAction::kAcceptInvite ?
+                                       "invitation" :
+                                       "join request",
+						                  static_cast<unsigned int>(planned_opn), planned_other_score,
+						                  planned_log_append_text.c_str());
+						game().send_player_diplomacy(
+						   mypn,
+						   (planned_action == Widelands::DiplomacyAction::kAcceptInvite ?
+                         Widelands::DiplomacyAction::kRefuseInvite :
+                         Widelands::DiplomacyAction::kRefuseJoin),
+						   planned_opn);
+					}
+				}
+				planned_action = pda.action == Widelands::DiplomacyAction::kInvite ?
+                                Widelands::DiplomacyAction::kAcceptInvite :
+                                Widelands::DiplomacyAction::kAcceptJoin;
+				planned_opn = pda.sender;
+				planned_other_score = diploscore;
+				plan_priority = priority;
+				if (g_verbose) {
+					planned_log_append_text = other_team_score_str;
+					/* verb_ */ log_dbg_time(
+					   gametime,
+					   "AI Diplomacy: Player(%d) plans to accept the %s of player (%d) with priority %d",
+					   static_cast<unsigned int>(mypn),
+					   pda.action == Widelands::DiplomacyAction::kInvite ? "invitation" : "join request",
+					   pda.sender, plan_priority);
+				}
+			}
+		}
+	}
+
+	// Execute only one action that changes team line-ups
+	if (planned_action != kNoAction) {
+		assert(planned_action == Widelands::DiplomacyAction::kLeaveTeam ||
+		       planned_action == Widelands::DiplomacyAction::kAcceptInvite ||
+		       planned_action == Widelands::DiplomacyAction::kAcceptJoin);
+		if (g_verbose) {
+			std::string action_str = "join request";
+			switch (planned_action) {
+			case Widelands::DiplomacyAction::kLeaveTeam:
+				verb_log_dbg_time(gametime, "AI Diplomacy: Player(%d) leaves team (%d)%s.\n",
+				                  static_cast<unsigned int>(mypn), static_cast<unsigned int>(mytn),
+				                  planned_log_append_text.c_str());
+				break;
+
+			case Widelands::DiplomacyAction::kAcceptInvite:
+				action_str = "invitation";
+				FALLS_THROUGH;
+			case Widelands::DiplomacyAction::kAcceptJoin:
+				assert(planned_other_score != kNoScore);
+				verb_log_dbg_time(
+				   gametime,
+				   "AI Diplomacy: Player(%d)%s accepts the %s of player (%d) with diploscore %d%s.\n",
+				   static_cast<unsigned int>(mypn), myts_s.c_str(), action_str.c_str(),
+				   static_cast<unsigned int>(planned_opn), planned_other_score,
+				   planned_log_append_text.c_str());
+				break;
+
+			default:
+				NEVER_HERE();
+			}
+		}
+		game().send_player_diplomacy(mypn, planned_action, planned_opn);
+
+		// Team change invalidates statistics
+		return;
+	}
+
+	// Look for players to invite or join
+	for (Widelands::PlayerNumber opn = 1; opn <= game().map().get_nrplayers(); ++opn) {
+		const Widelands::Player* other_player = game().get_player(opn);
+		// other player needs to exist and different from us
+		// we need to be still alive and we don't have send a request in last 5 + X minutes
+		if (other_player == nullptr || opn == mypn ||
+		    player_statistics.player_diplo_requested_lately(opn, gametime)) {
+			continue;
+		}
+		if (player_statistics.get_diplo_score(opn) >= 35) {
+			player_statistics.join_or_invite(opn, game(), gametime);  // may do nothing
 		}
 	}
 }
@@ -6705,7 +6925,7 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	return supplied == bo.inputs.size();
 }
 
-// TODO(tiborb): - should be called from scheduler, once in 60s is enough
+// Update player statistics including diplomacy scores
 void DefaultAI::update_player_stat(const Time& gametime) {
 	if (player_statistics.get_update_time() > Time(0) &&
 	    player_statistics.get_update_time() + Duration(15 * 1000) > gametime) {
@@ -6720,12 +6940,50 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 
 	// Collecting statistics and saving them in player_statistics object
 	const Widelands::Player* me = game().get_player(pn);
+	const bool me_def = me->is_defeated();
+
+	const uint32_t vsize = genstats.at(pn - 1).miltary_strength.size();
+	uint32_t me_strength = 0;
+	uint32_t me_land = 0;
+	uint32_t me_old_strength = 0;
+	uint32_t me_old60_strength = 0;
+	uint32_t me_old_land = 0;
+	uint32_t me_old60_land = 0;
+	uint32_t me_cass = 0;
+	uint32_t me_buildings = 0;
+	if (vsize > 0 && !me_def) {
+		me_strength = genstats.at(pn - 1).miltary_strength.back();
+		me_land = genstats.at(pn - 1).land_size.back();
+		me_cass = genstats.at(pn - 1).nr_casualties.back();
+		me_buildings = genstats.at(pn - 1).nr_buildings.back();
+
+		if (vsize > 21) {
+			me_old_strength = genstats.at(pn - 1).miltary_strength[vsize - 20];
+			me_old_land = genstats.at(pn - 1).land_size[vsize - 20];
+		} else {
+			me_old_strength = genstats.at(pn - 1).miltary_strength[0];
+			me_old_land = genstats.at(pn - 1).land_size[0];
+		}
+		if (vsize > 91) {
+			me_old60_strength = genstats.at(pn - 1).miltary_strength[vsize - 90];
+			me_old60_land = genstats.at(pn - 1).land_size[vsize - 90];
+		} else {
+			me_old60_strength = genstats.at(pn - 1).miltary_strength[0];
+			me_old60_land = genstats.at(pn - 1).land_size[0];
+		}
+	}
+
 	for (Widelands::PlayerNumber j = 1; j <= nr_players; ++j) {
 		const Widelands::Player* this_player = game().get_player(j);
 		if (this_player != nullptr) {
+			bool player_def = this_player->is_defeated();
+			if (player_def || me_def) {
+				// setting all AI Player stats to zero and diploscore to -20
+				player_statistics.add(pn, j, me->team_number(), this_player->team_number(), 0, 0, 0, 0,
+				                      0, 0, 0, -20, 0, player_def);
+				continue;
+			}
 			try {
-				const uint32_t vsize = genstats.at(j - 1).miltary_strength.size();
-
 				uint32_t cur_strength = 0;
 				uint32_t cur_land = 0;
 				uint32_t old_strength = 0;
@@ -6733,10 +6991,12 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 				uint32_t old_land = 0;
 				uint32_t old60_land = 0;
 				uint32_t cass = 0;
+				uint32_t buildings = 0;
 				if (vsize > 0) {
 					cur_strength = genstats.at(j - 1).miltary_strength.back();
 					cur_land = genstats.at(j - 1).land_size.back();
 					cass = genstats.at(j - 1).nr_casualties.back();
+					buildings = genstats.at(j - 1).nr_buildings.back();
 
 					if (vsize > 21) {
 						old_strength = genstats.at(j - 1).miltary_strength[vsize - 20];
@@ -6754,9 +7014,255 @@ void DefaultAI::update_player_stat(const Time& gametime) {
 					}
 				}
 
+				// determine the diplomacy score of each player
+				int32_t diplo_score = 0;
+				// we need to be sure all magic numbers have been initialized so wait 30s
+				if (game().diplomacy_allowed() && gametime > Time(30000) && pn != j) {
+					int16_t inputs[2 * kFNeuronBitSize] = {0};
+					inputs[0] =
+					   player_statistics.get_player_land(j) < player_statistics.get_max_land() &&
+					         player_statistics.get_max_land() <
+					            player_statistics.get_player_land(j) +
+					               player_statistics.get_player_land(pn) &&
+					         player_statistics.get_player_land(pn) < player_statistics.get_max_land() ?
+                     5 :
+                     -5;
+					inputs[1] = RNG::static_rand(5) == 0 ? 2 : -2;
+					inputs[2] =
+					   RNG::static_rand((std::abs(management_data.get_military_number_at(181)) / 10) +
+					                    1) == 0 ?
+                     3 :
+                     -3;
+					inputs[3] = cur_strength > me_strength ? 2 : -1;
+					inputs[4] = cur_strength > old_strength ? 3 : -3;
+					inputs[5] = cur_strength > old60_strength ? 1 : -5;
+					inputs[6] = cur_land > me_land ? 2 : -1;
+					inputs[7] = cur_land > old60_land ? 1 : -5;
+					inputs[8] = cur_land > old_land ? 3 : -3;
+					inputs[9] = cur_strength > 2 * me_strength ? 5 : 0;
+					inputs[10] = cur_strength > 2 * old_strength ? 4 : -1;
+					inputs[11] = cur_strength > 2 * old60_strength ? 2 : -3;
+					inputs[12] = cur_land > 2 * me_land ? 4 : 0;
+					inputs[13] = cur_land > 2 * old60_land ? 2 : -4;
+					inputs[14] = cur_land > 2 * old_land ? 4 : -2;
+					inputs[15] =
+					   (cur_strength * std::abs(management_data.get_military_number_at(182) / 10)) +
+					            cur_land >
+					         (me_strength * std::abs(management_data.get_military_number_at(182) / 10)) +
+					            me_land ?
+                     5 :
+                     -5;
+					inputs[16] =
+					   (cur_strength * std::abs(management_data.get_military_number_at(183) / 5)) +
+					            cur_land >
+					         (me_strength * std::abs(management_data.get_military_number_at(183) / 5)) +
+					            me_land ?
+                     5 :
+                     -5;
+					inputs[17] =
+					   (old_strength * std::abs(management_data.get_military_number_at(182) / 10)) +
+					            old_land >
+					         (me_old_strength *
+					          std::abs(management_data.get_military_number_at(182) / 10)) +
+					            me_old_land ?
+                     2 :
+                     -2;
+					inputs[18] =
+					   (old60_strength * std::abs(management_data.get_military_number_at(184) / 7)) +
+					            old60_land >
+					         (me_old60_strength *
+					          std::abs(management_data.get_military_number_at(184) / 7)) +
+					            me_old60_land ?
+                     2 :
+                     -2;
+					inputs[19] = me_cass > cass ? 2 : -1;
+					inputs[20] = this_player->team_number() == 0 ? 4 : -1;
+					inputs[21] = this_player->team_number() == 0 ?
+                               (std::abs(management_data.get_military_number_at(185)) / 10) :
+                               -(std::abs(management_data.get_military_number_at(185)) / 20);
+					inputs[22] = 3;
+					inputs[23] =
+					   player_statistics.get_player_power(j) >= player_statistics.get_max_power() ? -10 :
+                                                                                               4;
+					inputs[24] =
+					   player_statistics.get_player_land(j) >= player_statistics.get_max_land() ? -4 : 1;
+					inputs[25] = player_statistics.get_diplo_score(j) > 0 ? 5 : -1;
+					inputs[26] = player_statistics.get_diplo_score(j) > 5 ? 3 : -2;
+					inputs[27] =
+					   player_statistics.get_player_power(j) >= player_statistics.get_max_power() ?
+                     -(std::abs(management_data.get_military_number_at(197)) / 10) :
+                     (std::abs(management_data.get_military_number_at(197)) / 10);
+					inputs[28] =
+					   player_statistics.get_player_land(j) >= player_statistics.get_max_land() ? -7 : 2;
+					inputs[29] = gametime < Time((30 + RNG::static_rand(20)) * 60 * 1000) ? -5 : 0;
+					inputs[30] = gametime < Time((60 + RNG::static_rand(30)) * 60 * 1000) ? -3 : 0;
+					inputs[31] =
+					   player_statistics.get_player_power(j) < player_statistics.get_max_power() &&
+					         player_statistics.get_max_power() <
+					            player_statistics.get_player_power(j) +
+					               player_statistics.get_player_power(pn) &&
+					         player_statistics.get_player_power(pn) < player_statistics.get_max_power() ?
+                     8 :
+                     0;
+					inputs[32] =
+					   player_statistics.get_player_power(j) * 3 + player_statistics.get_player_land(j) <
+					            player_statistics.get_max_power() * 3 +
+					               player_statistics.get_max_land() &&
+					         player_statistics.get_max_power() * 3 + player_statistics.get_max_land() <
+					            (player_statistics.get_player_power(j) +
+					             player_statistics.get_player_power(pn)) *
+					                  3 +
+					               player_statistics.get_player_land(j) +
+					               player_statistics.get_player_land(pn) ?
+                     5 :
+                     -5;
+					inputs[33] =
+					   player_statistics.get_player_power(j) * 2 + player_statistics.get_player_land(j) <
+					            player_statistics.get_max_power() * 2 +
+					               player_statistics.get_max_land() &&
+					         player_statistics.get_max_power() * 2 + player_statistics.get_max_land() <
+					            (player_statistics.get_player_power(j) +
+					             player_statistics.get_player_power(pn)) *
+					                  2 +
+					               player_statistics.get_player_land(j) +
+					               player_statistics.get_player_land(pn) ?
+                     4 :
+                     0;
+					inputs[34] = this_player->team_number() == me->team_number() ? 5 : -5;
+					inputs[35] = this_player->team_number() == me->team_number() ? 3 : -3;
+					inputs[36] = player_statistics.get_diplo_score(j) > 10 ? 2 : -2;
+					inputs[37] = (player_statistics.get_is_enemy(j) ? 2 : 1) *
+					             (player_statistics.player_seen_lately(j, gametime) &&
+					                    !player_statistics.strong_enough(pn) ?
+                                4 :
+                                -1);
+					inputs[38] = (player_statistics.get_is_enemy(j) ? 2 : 1) *
+					             (player_statistics.player_seen_lately(j, gametime) &&
+					                    !player_statistics.strong_enough(pn) ?
+                                3 :
+                                0);
+					inputs[39] = player_statistics.strong_enough(pn) ? -10 : 2;
+					inputs[40] = player_statistics.strong_enough(pn) ? -5 : 2;
+					inputs[41] = (player_statistics.get_is_enemy(j) ? 2 : 1) *
+					             (player_statistics.player_seen_lately(j, gametime) &&
+					                    player_statistics.enemies_seen_lately_count(gametime) > 1 ?
+                                3 :
+                                0);
+					inputs[42] = (player_statistics.get_is_enemy(j) ? 2 : 1) *
+					             (player_statistics.player_seen_lately(j, gametime) &&
+					                    player_statistics.enemies_seen_lately_count(gametime) > 1 ?
+                                2 :
+                                -1);
+					inputs[43] = player_statistics.strong_enough(j) &&
+					                   !player_statistics.player_seen_lately(j, gametime) ?
+                               -5 :
+                               2;
+					inputs[44] =
+					   player_statistics.strong_enough(j) &&
+					         player_statistics.get_player_power(j) >= player_statistics.get_max_power() ?
+                     -8 :
+                     0;
+					inputs[45] = player_statistics.strong_enough(j) ? -10 : 2;
+					inputs[46] = me_buildings < buildings ? 3 : -3;
+					inputs[47] = me_buildings < buildings ? 4 : -1;
+					inputs[48] = me_buildings + me_land < buildings + cur_land ? 3 : -3;
+					inputs[49] = me_buildings + me_land < buildings + cur_land ? 4 : -1;
+					inputs[50] =
+					   player_statistics.members_in_team(this_player->team_number()) >= nr_players / 2 ?
+                     -4 :
+                     1;
+					inputs[51] = player_statistics.members_in_team(this_player->team_number()) ==
+					                   player_statistics.players_active() - 1 ?
+                               -5 :
+                               0;
+					inputs[52] =
+					   player_statistics.members_in_team(this_player->team_number()) > 2 ? -3 : 2;
+					inputs[53] = player_statistics.members_in_team(me->team_number()) > 1 &&
+					                   this_player->team_number() != me->team_number() ?
+                               -5 :
+                               1;
+					inputs[54] = player_statistics.members_in_team(me->team_number()) > 2 &&
+					                   this_player->team_number() != me->team_number() ?
+                               -6 :
+                               0;
+					inputs[55] = player_statistics.members_in_team(me->team_number()) > 1 &&
+					                   this_player->team_number() != me->team_number() ?
+                               -4 :
+                               1;
+					inputs[56] =
+					   player_statistics.get_player_power(pn) >= player_statistics.get_max_power() ? -8 :
+                                                                                                0;
+					inputs[57] =
+					   player_statistics.get_player_power(pn) >= player_statistics.get_max_power() ?
+                     -(std::abs(management_data.get_military_number_at(197)) / 10) :
+                     (std::abs(management_data.get_military_number_at(197)) / 20);
+					inputs[58] =
+					   player_statistics.get_player_power(j) < player_statistics.get_max_power() &&
+					         player_statistics.get_player_power(pn) < player_statistics.get_max_power() ?
+                     5 :
+                     -5;
+					inputs[59] = player_statistics.get_player_buildings(j) <
+					                      player_statistics.get_max_buildings() &&
+					                   player_statistics.get_max_buildings() <
+					                      player_statistics.get_player_buildings(j) +
+					                         player_statistics.get_player_buildings(pn) &&
+					                   player_statistics.get_player_buildings(pn) <
+					                      player_statistics.get_max_buildings() ?
+                               4 :
+                               -4;
+					inputs[60] = player_statistics.get_player_buildings(j) <
+					                      player_statistics.get_max_buildings() &&
+					                   player_statistics.get_player_buildings(pn) <
+					                      player_statistics.get_max_buildings() ?
+                               5 :
+                               -2;
+					inputs[61] = player_statistics.get_player_buildings(j) * 3 +
+					                         player_statistics.get_player_land(j) <
+					                      player_statistics.get_max_buildings() * 3 +
+					                         player_statistics.get_max_land() &&
+					                   player_statistics.get_max_buildings() * 3 +
+					                         player_statistics.get_max_land() <
+					                      (player_statistics.get_player_buildings(j) +
+					                       player_statistics.get_player_buildings(pn)) *
+					                            3 +
+					                         player_statistics.get_player_land(j) +
+					                         player_statistics.get_player_land(pn) ?
+                               5 :
+                               -5;
+					inputs[62] = player_statistics.get_player_buildings(j) * 2 +
+					                         player_statistics.get_player_land(j) <
+					                      player_statistics.get_max_buildings() * 2 +
+					                         player_statistics.get_max_land() &&
+					                   player_statistics.get_max_buildings() * 2 +
+					                         player_statistics.get_max_land() <
+					                      (player_statistics.get_player_buildings(j) +
+					                       player_statistics.get_player_buildings(pn)) *
+					                            2 +
+					                         player_statistics.get_player_land(j) +
+					                         player_statistics.get_player_land(pn) ?
+                               4 :
+                               0;
+					inputs[63] = player_statistics.get_player_buildings(pn) >=
+					                   player_statistics.get_max_buildings() ?
+                               -6 :
+                               0;
+
+					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
+						if (management_data.f_neuron_pool[28].get_position(i)) {
+							diplo_score += inputs[i];
+						}
+						if (management_data.f_neuron_pool[29].get_position(i)) {
+							diplo_score += inputs[i + kFNeuronBitSize];
+						}
+					}
+					verb_log_dbg_time(
+					   gametime, "AI Diplomacy: For player(%d), the player(%d) has the diploscore: %d\n",
+					   static_cast<unsigned int>(pn), static_cast<unsigned int>(j), diplo_score);
+				}
+
 				player_statistics.add(pn, j, me->team_number(), this_player->team_number(),
 				                      cur_strength, old_strength, old60_strength, cass, cur_land,
-				                      old_land, old60_land);
+				                      old_land, old60_land, diplo_score, buildings, player_def);
 			} catch (const std::out_of_range&) {
 				verb_log_warn_time(gametime, "ComputerPlayer(%d): genstats entry missing - size :%d\n",
 				                   static_cast<unsigned int>(player_number()),

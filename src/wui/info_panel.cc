@@ -170,7 +170,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                   UI::Align::kRight),
 
      draw_real_time_(get_config_bool("game_clock", true)) {
-	set_flag(UI::Panel::pf_always_on_top, true);
+	set_z(UI::Panel::ZOrder::kInfoPanel);
 	text_fps_.set_handle_mouse(true);
 	snap_target_panel_.set_snap_target(true);
 	int mode = get_config_int("toolbar_pos", 0);
@@ -490,7 +490,8 @@ void InfoPanel::think() {
 	}
 
 	for (UI::Panel* p = ibase_.get_first_child(); p != nullptr; p = p->get_next_sibling()) {
-		if (!p->get_flag(UI::Panel::pf_always_on_top) && p->get_x() < snap_target_panel_.get_w() &&
+		if (static_cast<uint8_t>(p->get_z()) < static_cast<uint8_t>(UI::Panel::ZOrder::kInfoPanel) &&
+		    p->get_x() < snap_target_panel_.get_w() &&
 		    (on_top_ ? (p->get_y() < snap_target_panel_.get_y() + snap_target_panel_.get_h()) :
                      (p->get_y() + p->get_h() > snap_target_panel_.get_y()))) {
 			if (UI::Window* w = dynamic_cast<UI::Window*>(p); w != nullptr && !w->moved_by_user()) {

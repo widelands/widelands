@@ -145,9 +145,9 @@ private:
 	static constexpr bool kAbsValue = true;
 	static constexpr int32_t kSpotsTooLittle = 15;
 	static constexpr Duration kManagementUpdateInterval{10 * 60 * 1000};
-	static constexpr Duration kStatUpdateInterval{60 * 1000};
+	static constexpr Duration kStatUpdateInterval{15 * 1000};
 	static constexpr Duration kFlagWarehouseUpdInterval{15 * 1000};
-	static constexpr Duration kDiplomacyInterval{30 * 1000};
+	static constexpr Duration kDiplomacyInterval{90 * 1000};
 
 	// common for defaultai.cc and defaultai_seafaring.cc
 	static constexpr Duration kExpeditionMinDuration{60 * 60 * 1000};
