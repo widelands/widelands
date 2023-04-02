@@ -257,6 +257,7 @@ struct Ship : Bob {
 	[[nodiscard]] bool has_battle() const {
 		return !battles_.empty();
 	}
+	[[nodiscard]] unsigned get_sea_attack_soldier_bonus(const EditorGameBase& egbase) const;
 
 	[[nodiscard]] bool can_be_attacked() const;
 	[[nodiscard]] bool can_attack() const;
