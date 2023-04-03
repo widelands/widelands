@@ -107,6 +107,8 @@ public:
 	/*
 	 * C methods
 	 */
+	int do_get_field(lua_State* L, uint32_t x, uint32_t y);
+
 private:
 };
 
