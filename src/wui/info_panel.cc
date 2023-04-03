@@ -175,7 +175,8 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
 	snap_target_panel_.set_snap_target(true);
 	int mode = get_config_int("toolbar_pos", 0);
 	on_top_ = !UI::main_toolbar_at_bottom();
-	if ((mode & (UI::ToolbarDisplayMode::kOnMouse_Visible | UI::ToolbarDisplayMode::kOnMouse_Hidden)) != 0) {
+	if ((mode & (UI::ToolbarDisplayMode::kOnMouse_Visible |
+	             UI::ToolbarDisplayMode::kOnMouse_Hidden)) != 0) {
 		display_mode_ = UI::ToolbarDisplayMode::kOnMouse_Visible;
 	} else if ((mode & UI::ToolbarDisplayMode::kMinimized) != 0) {
 		display_mode_ = UI::ToolbarDisplayMode::kMinimized;
@@ -189,7 +190,8 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
 void InfoPanel::rebuild_dropdown() {
 	toggle_mode_.clear();
 
-	toggle_mode_.add(_("Pin"), UI::ToolbarDisplayMode::kPinned, g_image_cache->get("wui/windows/pin.png"),
+	toggle_mode_.add(_("Pin"), UI::ToolbarDisplayMode::kPinned,
+	                 g_image_cache->get("wui/windows/pin.png"),
 	                 display_mode_ == UI::ToolbarDisplayMode::kPinned);
 	toggle_mode_.add(_("Follow mouse"), UI::ToolbarDisplayMode::kOnMouse_Visible,
 	                 g_image_cache->get("images/ui_basic/fsel.png"),
@@ -201,13 +203,14 @@ void InfoPanel::rebuild_dropdown() {
 	   display_mode_ == UI::ToolbarDisplayMode::kMinimized);
 
 	toggle_mode_.add(
-	   on_top_ ? _("Move panel to bottom") : _("Move panel to top"), UI::ToolbarDisplayMode::kCmdSwap,
+	   on_top_ ? _("Move panel to bottom") : _("Move panel to top"),
+	   UI::ToolbarDisplayMode::kCmdSwap,
 	   g_image_cache->get(on_top_ ? "wui/windows/maximize.png" : "wui/windows/minimize.png"));
 
 	toggle_mode_.selected.connect([this]() {
 		update_mode();
-		set_config_int(
-		   "toolbar_pos", on_top_ ? (display_mode_ | UI::ToolbarDisplayMode::kCmdSwap) : display_mode_);
+		set_config_int("toolbar_pos",
+		               on_top_ ? (display_mode_ | UI::ToolbarDisplayMode::kCmdSwap) : display_mode_);
 	});
 
 	layout();
@@ -557,11 +560,11 @@ void InfoPanel::layout() {
 	}
 
 	snap_target_panel_.set_pos(Vector2i(0, toggle_mode_.get_y()));
-	snap_target_panel_.set_size(
-	   (display_mode_ == UI::ToolbarDisplayMode::kMinimized || display_mode_ == UI::ToolbarDisplayMode::kOnMouse_Hidden) ?
-         toggle_mode_.get_w() :
-         w,
-	   toggle_mode_.get_h());
+	snap_target_panel_.set_size((display_mode_ == UI::ToolbarDisplayMode::kMinimized ||
+	                             display_mode_ == UI::ToolbarDisplayMode::kOnMouse_Hidden) ?
+                                  toggle_mode_.get_w() :
+                                  w,
+	                            toggle_mode_.get_h());
 }
 
 void InfoPanel::draw(RenderTarget& r) {
@@ -569,8 +572,9 @@ void InfoPanel::draw(RenderTarget& r) {
 		return;
 	}
 
-	const int h =
-	   display_mode_ == UI::ToolbarDisplayMode::kOnMouse_Hidden ? kSpacing : UI::main_toolbar_button_size();
+	const int h = display_mode_ == UI::ToolbarDisplayMode::kOnMouse_Hidden ?
+                    kSpacing :
+                    UI::main_toolbar_button_size();
 	r.brighten_rect(Recti(0, on_top_ ? 0 : get_h() - h, get_w(), h), -100);
 
 	r.draw_rect(Recti(0, on_top_ ? h : get_h() - h - 1, get_w(), 1), RGBColor(0, 0, 0));
