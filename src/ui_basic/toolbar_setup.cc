@@ -19,7 +19,7 @@
 #include "ui_basic/toolbar_setup.h"
 
 #include "graphic/style_manager.h"
-#include "wlapplication_options.cc"
+#include "wlapplication_options.h"
 
 namespace UI {
 
