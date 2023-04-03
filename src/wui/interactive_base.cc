@@ -53,6 +53,7 @@
 #include "network/gamehost.h"
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/toolbar_setup.h"
 #include "wlapplication_options.h"
 #include "wui/attack_window.h"
 #include "wui/building_statistics_menu.h"
@@ -128,9 +129,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
                   "dropdown_menu_mapview",
                   0,
                   0,
-                  MainToolbar::kButtonSize,
+                  UI::main_toolbar_button_size(),
                   10,
-                  MainToolbar::kButtonSize,
+                  UI::main_toolbar_button_size(),
                   /** TRANSLATORS: Title for the map view menu button in the game */
                   _("Map View"),
                   UI::DropdownType::kPictorialMenu,
@@ -450,7 +451,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 UI::UniqueWindow::Registry* window,
                                                 bool bind_default_toggle) {
 	UI::Button* button =
-	   new UI::Button(&toolbar_.box, name, 0, 0, MainToolbar::kButtonSize, MainToolbar::kButtonSize,
+	   new UI::Button(&toolbar_.box, name, 0, 0, UI::main_toolbar_button_size(), UI::main_toolbar_button_size(),
 	                  UI::ButtonStyle::kWuiPrimary,
 	                  g_image_cache->get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.box.add(button);
@@ -1481,7 +1482,7 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 
 // Repositions the chat overlay
 void InteractiveBase::resize_chat_overlay() {
-	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - MainToolbar::kButtonSize);
+	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - UI::main_toolbar_button_size());
 	chat_overlay_->recompute();
 }
 

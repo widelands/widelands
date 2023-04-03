@@ -29,6 +29,7 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "ui_basic/toolbar_setup.h"
 
 namespace UI {
 
@@ -237,9 +238,18 @@ void Window::move_out_of_the_way() {
 
 	const Panel* parent = get_parent();
 	assert(parent != nullptr);
+
+	// We have to do this because InfoPanel::think() pushes child windows off the toolbar, which
+	// messes up the fastclick position.
+	// We only care about the toolbar at the bottom because we prefer moving the window below the
+	// mouse pointer, so it never covers the toolbar at the top, but it may cover it at the bottom.
+	const int toolbar_bottom_h =
+	   (parent->get_parent() == nullptr &&  // Parent is main game window
+	    main_toolbar_at_bottom()) ? main_toolbar_button_size() : 0;
+
 	const Vector2i mouse = parent->get_mouse_position();
 	const int pw = parent->get_inner_w();
-	const int ph = parent->get_inner_h();
+	const int ph = parent->get_inner_h() - toolbar_bottom_h;
 
 	int32_t nx = mouse.x;
 	int32_t ny = mouse.y;
@@ -251,6 +261,10 @@ void Window::move_out_of_the_way() {
 			nx -= get_w() + kClearance;
 		}
 		ny -= get_h() / 2;
+		// move_inside_parent() doesn't consider the toolbar, so we have to do this here
+		if (ny + get_h() > ph) {
+			ny = ph - get_h();
+		}
 	} else {
 		if (mouse.y + kClearance + get_h() < ph || mouse.y < ph / 2) {
 			ny += kClearance;
@@ -260,8 +274,10 @@ void Window::move_out_of_the_way() {
 		nx -= get_w() / 2;
 	}
 
-	set_pos(Vector2i(nx, ny));
-	move_inside_parent();
+
+	// Don't use overridden functions in UniqueWindow, position is not final yet
+	Panel::set_pos(Vector2i(nx, ny));
+	Window::move_inside_parent();
 }
 
 /**
