@@ -10,7 +10,7 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Sergey Trofimov <sarg@sarg.org.ru>, 2021
-# Viktor S <awsswa59@gmail.com>, 2018-2020
+# Viktor Skachkov <awsswa59@gmail.com>, 2018-2020
 # Yuriy Sokolov <lention@mail.ru>, 2015,2022
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2019
@@ -21,7 +21,7 @@ msgstr ""
 "POT-Creation-Date: 2023-01-16 09:46+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022\n"
-"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
+"Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
