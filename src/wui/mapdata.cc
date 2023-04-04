@@ -134,10 +134,12 @@ bool MapData::compare_size(const MapData& other) const {
 	if (width == other.width && height == other.height) {
 		return compare_names(other);
 	}
-	if (width != other.width) {
-		return width < other.width;
+
+	if ((width * height) != (other.width * other.height)) {
+		return (width * height) < (other.width * other.height);
 	}
-	return height < other.height;
+
+	return width < other.width;
 }
 
 void MapData::add(const MapData& md) {
