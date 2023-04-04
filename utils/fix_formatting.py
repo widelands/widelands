@@ -18,7 +18,7 @@ import argparse
 import os
 import re
 import sys
-from subprocess import check_call
+from subprocess import check_call, CalledProcessError
 from file_utils import read_text_file, write_text_file, find_files
 
 import autoflake
