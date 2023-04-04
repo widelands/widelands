@@ -370,13 +370,16 @@ def build_frame_group_regions(frames):
 def do_optimize_greedy(frames):
     """Find a packing of the frame into frame groups.
 
-    Return list of lists of ((x, y), pic, pc_pic), one list for the blits of each frame.
+    Return list of lists of ((x, y), pic, pc_pic), one list for the
+    blits of each frame.
 
-    Frame groups are optimized together, either based on a simple region heuristic,
-    or with a slightly more complicated rectangle covering technique.
+    Frame groups are optimized together, either based on a simple region
+    heuristic, or with a slightly more complicated rectangle covering
+    technique.
 
-    We add frames to candidate frame groups greedily as long as the average cost per frame
-    decreases. As a heuristic, frames with high pixel overlap are combined first.
+    We add frames to candidate frame groups greedily as long as the
+    average cost per frame decreases. As a heuristic, frames with high
+    pixel overlap are combined first.
     """
     MAXREJECT = 10
     uncovered = [idx for idx in xrange(len(frames))]

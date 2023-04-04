@@ -4,7 +4,8 @@
 
 #include "file.h"
 
-and reports an error. The include should always be from the base dir upwards:
+and reports an error. The include should always be from the base dir
+upwards:
 
 #include "somedir/file.h"
 """

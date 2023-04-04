@@ -10,7 +10,6 @@ import sys
 
 def main():
     """Check whether all training wheels have defined their locks properly."""
-
     # Sanity check
     if not os.path.isdir('utils') or not os.path.isdir('data'):
         print('CWD is not the root of the repository.')

@@ -113,7 +113,6 @@ def load_hunspell_locales():
     Maps a list of generic locales to specific locales from available
     Hunspell dictionaries.
     """
-
     try:
         hunspell_result = subprocess.run(
             ['hunspell', '-D'], capture_output=True, text=True, check=True)

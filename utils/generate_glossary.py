@@ -6,7 +6,8 @@
 extracted glossaries are then used to fill gaps in the given Transifex
 glossary.
 
-You will need to have the Translate Toolkit installed in order for the extraction to work:
+You will need to have the Translate Toolkit installed in order for the
+extraction to work:
 http://toolkit.translatehouse.org/
 
 For Debian-based Linux: sudo apt-get install translate-toolkit
@@ -173,7 +174,6 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
 
     Uses poterminology from the Translate Toolkit to collect glossary entries for all files in 'po_dir' for the given 'only_locale'. If 'only_locale' = "all", processes all locales. Then reads the <input_glossary>, adds new entries that were obtained by the glossary generation if there are any gaps, and then writes the results to <output_glossary>.
     """
-
     # Find the locale files to process
     print('Locale: ' + only_locale)
     locales = []

@@ -214,7 +214,6 @@ def main():
 
     Call from src directory.
     """
-
     error_count = 0
 
     print('Tool to check for superfluous includes in header files. Call from src directory.')

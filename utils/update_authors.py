@@ -16,7 +16,6 @@ import sys
 
 def add_lua_array(values):
     """Creates an array."""
-
     text = '{'
     for value in values:
         if value.startswith('_("'):
@@ -31,12 +30,11 @@ def add_lua_array(values):
 def add_lua_table_key(key, value=None, **kwrds):
     """Adds a key to a table.
 
-    Surrounding brackets of the table have to be applied manually.
-    If given, the value(s) is/are applied also to the key.
+    Surrounding brackets of the table have to be applied manually. If
+    given, the value(s) is/are applied also to the key.
 
     Known kwrds: 'transl', if true a translation marker is added
     """
-
     transl = kwrds.get('transl', False)
     if key == '':
         print('At least a key must be given!')

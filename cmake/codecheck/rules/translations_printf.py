@@ -3,9 +3,11 @@
 """Checks that all translatable strings that have multiple printf placeholders
 have defined those as reversible.
 
-Checks that unordered, ordered and wildcard placeholders aren't mixed up in the same string.
+Checks that unordered, ordered and wildcard placeholders aren't mixed up
+in the same string.
 
-Checks that ngettext singular and plural strings have the same placeholders.
+Checks that ngettext singular and plural strings have the same
+placeholders.
 
 Checks that placeholders are numbered in ascending order.
 """
