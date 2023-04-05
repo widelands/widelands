@@ -20,6 +20,8 @@
 
 #include <set>
 
+#include <SDL_timer.h>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/rect.h"
@@ -60,6 +62,10 @@ Widelands::Game& WatchWindow::game() const {
 	return parent_.game();
 }
 
+WatchWindow::WatchWindowMapView::WatchWindowMapView(WatchWindow* parent, const Widelands::Map& map)
+   : MapView(parent, map, 0, 0, 200, 166), parent_window_(parent) {
+}
+
 WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          const std::string& name,
                          uint16_t const id,
@@ -78,7 +84,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
                       h,
                       _("Watch")),
      parent_(parent),
-     map_view_(this, game().map(), 0, 0, 200, 166),
+     map_view_(this, game().map()),
      last_visit_(game().get_gametime()),
      single_window_(init_single_window),
      id_(id) {
@@ -331,6 +337,39 @@ void WatchWindow::close_cur_view() {
 	toggle_buttons();
 }
 
+/* Allow closing by right click on mapview */
+bool WatchWindow::WatchWindowMapView::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
+	if (btn == SDL_BUTTON_RIGHT) {
+		view_moved_ = false;
+		dragging_start_time_ = SDL_GetTicks();
+	}
+	return MapView::handle_mousepress(btn, x, y);
+}
+bool WatchWindow::WatchWindowMapView::handle_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
+	if (btn == SDL_BUTTON_RIGHT && is_dragging()) {
+		if (!view_moved_) {
+			constexpr uint32_t kMaxClickDuration = 500;
+			const uint32_t release_time = SDL_GetTicks();
+			if (release_time > dragging_start_time_ &&
+			    release_time - dragging_start_time_ < kMaxClickDuration &&
+			    !parent_window_->is_pinned()) {
+				parent_window_->close_cur_view();
+			}
+		} else {
+			view_moved_ = false;
+		}
+	}
+	return MapView::handle_mouserelease(btn, x, y);
+}
+bool WatchWindow::WatchWindowMapView::handle_mousemove(
+   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
+	if ((state & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0) {
+		view_moved_ = true;
+	}
+	return MapView::handle_mousemove(state, x, y, xdiff, ydiff);
+}
+
+/***** Saving and loading *****/
 constexpr uint16_t kCurrentPacketVersion = 1;
 UI::Window& WatchWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
 	try {

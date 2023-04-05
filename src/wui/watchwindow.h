@@ -60,6 +60,20 @@ struct WatchWindow : public UI::UniqueWindow {
 private:
 	static constexpr size_t kViews = 5;
 
+	// Specialization of MapView
+	class WatchWindowMapView : public MapView {
+	public:
+		WatchWindowMapView(WatchWindow* parent, const Widelands::Map& map);
+		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+		bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+		bool
+		handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	private:
+		WatchWindow* parent_window_;
+		bool view_moved_{false};
+		uint32_t dragging_start_time_{0};
+	};
+
 	// Holds information for a view
 	struct View {
 		MapView::View view;
@@ -82,7 +96,7 @@ private:
 	void set_current_view(uint8_t idx, bool save_previous = true);
 
 	InteractiveGameBase& parent_;
-	MapView map_view_;
+	WatchWindowMapView map_view_;
 	Time last_visit_;
 	bool single_window_;
 	uint8_t cur_index_{0U};
