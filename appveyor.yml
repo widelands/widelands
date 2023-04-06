@@ -35,6 +35,7 @@ shallow_clone: false
 branches:
   only:
     - master
+    - fix-windows-logging
 
 skip_tags: true
 
