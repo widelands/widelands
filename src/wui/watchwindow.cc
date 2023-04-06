@@ -145,7 +145,9 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 	}
 	WatchWindow::View view;
 
-	map_view_.scroll_to_field(coords, MapView::Transition::Jump);
+	if (views_.size() < 1) {
+		map_view_.scroll_to_field(coords, MapView::Transition::Jump);
+	}
 
 	view.tracking = nullptr;
 	view.view = map_view_.view();
@@ -153,6 +155,11 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 
 	views_.push_back(view);
 	set_current_view(views_.size() - 1, views_.size() > 1);
+
+	if (views_.size() > 1) {
+		map_view_.scroll_to_field(coords, MapView::Transition::Jump);
+	}
+
 	if (single_window_) {
 		toggle_buttons();
 	}
