@@ -1,18 +1,21 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
+# Tóth András <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2017,2020
+# GunChleoc, 2014
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2017,2019-2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
+# Tóth András <txa-dev@posteo.hu>, 2021-2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-03-29 19:01+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"PO-Revision-Date: 2015-02-03 14:50+0000\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2023\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,82 +23,86 @@ msgstr ""
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/txts/AUTHORS.lua:27
-msgid "Developers"
-msgstr "Fejlesztők"
+#: ../../data/txts/ABOUT.lua:7
+msgid "Readme"
+msgstr "Útmutató"
 
-#: ../../data/txts/AUTHORS.lua:29
-msgid "Widelands Development Team"
-msgstr "Widelands fejlesztőcsapat"
-
-#: ../../data/txts/LICENSE.lua:6
+#: ../../data/txts/ABOUT.lua:11
 msgid "License"
 msgstr "Licenc"
 
-#: ../../data/txts/LICENSE.lua:8
+#: ../../data/txts/ABOUT.lua:15
+msgid "Developers"
+msgstr "Fejlesztők"
+
+#: ../../data/txts/ABOUT.lua:19
+msgid "Translators"
+msgstr "Fordítók"
+
+#: ../../data/txts/AUTHORS.lua:28
+msgid "Widelands Development Team"
+msgstr "Widelands fejlesztőcsapat"
+
+#: ../../data/txts/LICENSE.lua:12
 msgid "Licensing information for Widelands"
 msgstr "Licencelési információ a Widelandshez"
 
 #. TRANSLATORS: Placeholder is copyright end year
-#: ../../data/txts/LICENSE.lua:10
+#: ../../data/txts/LICENSE.lua:14
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr "Copyright 2002 - %1%, Widelands fejlesztőcsapat."
 
-#: ../../data/txts/LICENSE.lua:12
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Ez a játék szabad és nyílt forrású, rá a GNU General Public License (GPL) V2.0 vonatkozik."
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:18
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "További információkat találhatsz a szabad és nyílt forrású szoftverekről, valamint a GPL-ről, ha meglátogatod ezt a weboldalt: %s"
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Itt megtalálod a licenc teljes szövegét, illetve további tudnivalókat ennek filozófiájáról és jogi következményeiről. (A fordító megjegyzése: A GPL nemhivatalos magyar fordítása elérhető a http://gnu.hu/gpl.html webcímen.)"
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "A GPL-t szöveges dokumentumként is mellékeljük a Widelandsszel."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Linuxon a COPYING nevű fájlt megtalálod a forrás- vagy az önálló bináris csomag gyökerében, vagy pedig a telepítési könyvtárban (ami ilyesmi: „%1%”)."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Windowson a COPYING.txt nevű fájlt a telepítési könyvtárban találod, illetve a Widelands Start menüben lévő bejegyzése is tartalmaz egy parancsikont a fájlra."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:25
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "MacOS-en a COPYING nevű fájlt a honlapról letöltött archívumban találod."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:27
 msgid "This game comes as-is and without any warranty."
 msgstr "A játék jelen állapotában és garancia nélkül érkezik."
 
-#: ../../data/txts/LICENSE.lua:24
+#: ../../data/txts/LICENSE.lua:28
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
 msgstr "További információkért és segítségért keress minket a %1% (honlap, wiki, fórum a kérdéseknek illetve általános segítséghez), a %2% (hibakövető), vagy a %3% (fordítások) címen."
-
-#: ../../data/txts/README.lua:6
-msgid "Readme"
-msgstr "Útmutató"
 
 #: ../../data/txts/README.lua:9
 msgid "an open source strategy game"
@@ -192,13 +199,13 @@ msgid ""
 "include that too. For more information, see the section on Replays below."
 msgstr "Ha van egy játékmentésed vagy felvételed, ami szemlélteti a dolgot\n(például egy összeomlást, amelynek pontos okozóját nehéz megtalálni), \nkérjük, azt is mellékeld. További tudnivalókért lásd az alábbi,\nvisszajátszásokról szóló szakaszt."
 
-#: ../../data/txts/TRANSLATORS.lua:24
-msgid "Translators"
-msgstr "Fordítók"
-
 #: ../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
 msgstr "Widelands fordítók"
+
+#: ../../data/txts/developers.lua:3
+msgid "Add-Ons"
+msgstr "Bővítmények"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
@@ -297,6 +304,10 @@ msgid "Packagers"
 msgstr "Csomagkészítők"
 
 #: ../../data/txts/developers.lua:3
+msgid "Scripting"
+msgstr "Parancsfájlok"
+
+#: ../../data/txts/developers.lua:3
 msgid "Sound"
 msgstr "Hang"
 
@@ -321,12 +332,12 @@ msgid "ZetaOS"
 msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you've done)"
-msgstr "és még sokan mások (köszönjük mindenkinek)"
+msgid "and many, many more (thank you for everything you’ve done)"
+msgstr "és nagyon sokan mások (köszönünk minden segítséget)"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
-msgstr "nincs munkás"
+msgstr "betöltetlen pozíció"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -340,11 +351,11 @@ msgid ""
 " wiki there."
 msgstr "Ha dokumentációra vagy segítségre lenne szükséged a Widelandshez játékhoz vagy a térképszerkesztőhöz, bátran keresd fel honlapunkat itt: %s. Ott online segítséget találhatsz a Wikinkben."
 
-#: ../../data/txts/help/common_helptexts.lua:17
+#: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
 msgstr "Bevezetés"
 
-#: ../../data/txts/help/common_helptexts.lua:18
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer "
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -352,7 +363,7 @@ msgid ""
 "started through playable tutorials."
 msgstr "A Widelands egy szabad, nyílt forrású valós idejű stratégiai játék egyjátékos\nhadjáratokkal és többjátékos móddal. A játékot a Settlers II ihlette, ám annál\nlényegesen gazdagabb és mélyebb. Mégis könnyen elkezdhető az oktatójátékok\nsegítségével."
 
-#: ../../data/txts/help/common_helptexts.lua:19
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
 "In this game, you start out on a small piece of land with just a few "
 "resources. Using these, you’ll create an empire with many thousands of "
@@ -361,11 +372,11 @@ msgid ""
 "tribes."
 msgstr "Ebben a játékban egy kis darabka földön kezdesz mindössze néhány \nforrással. Ezek felhasználásával több ezer lelket számláló birodalmat \népíthetsz. Míg e célt eléred, fel kell állítanod egy gazdasági rendszert, \nfel kell fedezned a környező vidéket, és szembe kell nézned a veled versengő \ntörzsekkel."
 
-#: ../../data/txts/help/common_helptexts.lua:25
+#: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
 msgstr "Visszajátszások"
 
-#: ../../data/txts/help/common_helptexts.lua:26
+#: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
 "Widelands records every game you play in two files. One of these files has a"
 " .wrpl.wgf extension and contains an initial savegame. The other file has a "
@@ -374,7 +385,7 @@ msgid ""
 "will tell you the time you started the game."
 msgstr "A Widelands rögzíti minden játékodat, játékonként két fájlban. Ezek egyike\n.wrpl.wgf kiterjesztésű, és egy kezdeti játékmentést tartalmaz. A másik fájl\n.wrpl kiterjesztésű, és a játékosok által kiadott parancsokat tartalmazza, mint\npéldául egy út építése vagy egy ellenség megtámadása. A fájlnév maradék\nrészében a játék elkezdésének időpontja olvasható."
 
-#: ../../data/txts/help/common_helptexts.lua:27
+#: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -384,7 +395,7 @@ msgid ""
 "players has a different version of the game."
 msgstr "A főmenü „Felvétel megtekintése” lehetőségével egy korábbi játék pontos\nmenete nézhető vissza. Fontos azonban tudni, hogy a játék adatfájljaiban vagy\na Widelands futtatható állományában bekövetkező – akár kisebb – változások könnyen\nazt okozhatják, hogy a felvétel már nem lesz kompatibilis, nem lesz\n„szinkronban”. Ez hasonló ahhoz, amiként a hálózati játékok ún. deszinkronizációs\nproblémával küzdenek, amikor az egyik játékos más verziójú játékot használ."
 
-#: ../../data/txts/help/common_helptexts.lua:28
+#: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
@@ -394,7 +405,7 @@ msgid ""
 msgstr "A felvételek sokat segíthetnek a játék logikáját illető hibák felderítésében,\nígy hasznos lehet őket csatolni hibajelentésekhez. A felvételek fájljai a\n„%s” könyvtárban vannak Linuxon és Mac OS X-en.\nWindowson a Widelands telepítés „replays” alkönyvtárában találhatók."
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../data/txts/help/common_helptexts.lua:35
+#: ../../data/txts/help/common_helptexts.lua:41
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
@@ -402,90 +413,86 @@ msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/txts/help/common_helptexts.lua:42
-msgctxt "hotkey"
-msgid "Space"
-msgstr "Hely"
-
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
-msgstr "Épülethelyek megjelenítése/elrejtése"
+msgstr "Beépíthető helyek megjelenítése/elrejtése"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:49
-msgctxt "hotkey"
-msgid "Ctrl + F"
-msgstr "Ctrl + F"
-
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr "Teljes képernyős mód (ha támogatja az OS)"
+msgstr "Teljes képernyős mód (ha támogatja a számítógéped)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:56
+#: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "Kistérkép ki-/bekapcsolása"
 
-#: ../../data/txts/help/multiplayer_help.lua:7
+#: ../../data/txts/help/common_helptexts.lua:75
+#: ../../data/txts/help/common_helptexts.lua:84
+#: ../../data/txts/help/common_helptexts.lua:93
+msgid "%1% / %2%"
+msgstr "%1% / %2%"
+
+#: ../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
 msgstr "Többjátékos beállítások"
 
-#: ../../data/txts/help/multiplayer_help.lua:8
+#: ../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
 msgstr "A többjátékos mód beállító menüjében vagy."
 
-#: ../../data/txts/help/multiplayer_help.lua:10
+#: ../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
 msgstr "Ügyfélbeállítások"
 
-#: ../../data/txts/help/multiplayer_help.lua:11
+#: ../../data/txts/help/multiplayer_help.lua:12
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
 msgstr "Bal oldalon látható a résztvevők listája, téged is beleértve. Szerepedet a beceneved mögötti gombbal állíthatod be. A lehetséges szerepek:"
 
-#: ../../data/txts/help/multiplayer_help.lua:12
+#: ../../data/txts/help/multiplayer_help.lua:13
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr "Játékos, a megfelelő színű zászlóval. Ha egynél több résztvevő választja ugyanazon színt, akkor közösen irányítanak egy játékost („megosztott királyság mód”)."
 
-#: ../../data/txts/help/multiplayer_help.lua:13
+#: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "Megfigyelő mód, vagyis mindent láthatsz, de egy játékost sem sem tudsz irányítani. "
+msgstr "Megfigyelő mód, vagyis mindent láthatsz, de egy játékost sem tudsz irányítani."
 
-#: ../../data/txts/help/multiplayer_help.lua:15
+#: ../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
 msgstr "Játékosbeállítások"
 
-#: ../../data/txts/help/multiplayer_help.lua:16
+#: ../../data/txts/help/multiplayer_help.lua:17
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
 msgstr "Középen a játékosok beállításai láthatók. A játék megkezdéséhez minden játékosnak az alábbiak egyikének kell lennie:"
 
-#: ../../data/txts/help/multiplayer_help.lua:17
+#: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
 msgstr "Csatlakozva egy vagy több résztvevőhöz (lásd „Ügyfélbeállítások”)."
 
-#: ../../data/txts/help/multiplayer_help.lua:18
+#: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
 msgstr "Csatlakozva egy számítógépes játékoshoz (a képen látható arc és az egeret fölé mozgatva megjelenő szöveg mutatja az éppen kiválasztott számítógépes játékos erősségét)."
 
-#: ../../data/txts/help/multiplayer_help.lua:19
+#: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
 msgstr "Osztozva egy másik játékos kezdőpozíciójával."
 
-#: ../../data/txts/help/multiplayer_help.lua:20
+#: ../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
 msgstr "Kizárva."
 
-#: ../../data/txts/help/multiplayer_help.lua:21
+#: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
@@ -493,23 +500,88 @@ msgid ""
 "with) and the tribe and team for computer players."
 msgstr "Az utóbbi három csak a gazda ügyfélnél állítható be a játékos „típus” gombjára kattintva. A gazdák az egyes játékosok kezdeti feltételeit is megadhatják (az épületek halmazát, árukat és a kezdeti munkások számát), valamint törzset és a csapatot a gépi játékosoknak."
 
-#: ../../data/txts/help/multiplayer_help.lua:22
+#: ../../data/txts/help/multiplayer_help.lua:23
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
 msgstr "Minden játékoshoz kapcsolódó ügyfél (aki nem néző) beállíthatja a törzset és a csapatot ahhoz a játékoshoz."
 
-#: ../../data/txts/help/multiplayer_help.lua:24
+#: ../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
 msgstr "Térkép adatai"
 
-#: ../../data/txts/help/multiplayer_help.lua:25
+#: ../../data/txts/help/multiplayer_help.lua:26
 msgid ""
 "You can see information about the selected map or savegame on the right-hand"
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
 msgstr "A jobb oldalon a kiválasztott térképről vagy játékmentésről találsz információkat. A játék szervezője a térkép neve melletti gombbal választhat másik térképet. Továbbá a szervező megadhat egy játékcélt is, majd – ha minden játékos be lett állítva – elindíthatja a játékot."
+
+#: ../../data/txts/tips/amazons.lua:4
+msgid ""
+"Amazons love trees. Build enough jungle preserver’s huts to have enough of "
+"them."
+msgstr "Az amazonok szeretik a fákat. Építs elég dzsungel fenntartó kunyhót, hogy legyen sok nekik."
+
+#: ../../data/txts/tips/amazons.lua:8
+msgid ""
+"Rare woods are the backbone of an Amazon economy. Build rare tree "
+"plantations to plant the special trees for these woods."
+msgstr "A ritka fák alkotják az amazon gazdaság gerincét. Építs ritkafa ültetvényeket, amelyek elültetik a facsemetéket ezekhez a faanyagokhoz."
+
+#: ../../data/txts/tips/amazons.lua:12
+msgid ""
+"Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
+"to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
+"locations in advance."
+msgstr "A ritka fákat a favágókunyhókból fejleszett ritkafa vágó kunyhókban lakó tapasztalt favágók tudják kivágni. Ők viszont nem vágják ki a többi fát. Tervezd meg előre, hogy hová építed őket!"
+
+#: ../../data/txts/tips/amazons.lua:16
+msgid "Food is dried with charcoal fires. Ensure a steady supply."
+msgstr "Az élelmiszereket faszén tüzén szárítják. Biztosítsd a folyamatos ellátást!"
+
+#: ../../data/txts/tips/amazons.lua:20
+msgid ""
+"Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
+"this process."
+msgstr "A liánvágók liánt gyűjtenek a közeli fákról, de ettől még a fák sértetlenek maradnak."
+
+#: ../../data/txts/tips/amazons.lua:24
+msgid ""
+"Water is life for the Amazons. Water gatherers perform an important service "
+"to their tribe."
+msgstr "Az amazonok számára a víz az életet jelenti. A vízgyűjtők fontos szolgálatot látnak el a törzs számára."
+
+#: ../../data/txts/tips/amazons.lua:28
+msgid ""
+"Panning for gold requires a steady stream of water, better sourced as close "
+"as possible for efficiency and freshness."
+msgstr "Az aranymosáshoz folyamatos vízellátás szükséges, lehetőleg minél közelebbről a hatékonyság és frissesség érdekében."
+
+#: ../../data/txts/tips/amazons.lua:32
+msgid ""
+"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
+"is only released near trees uninhabited by sentries."
+msgstr "A vadonőrzők biztosítják, hogy mindig legyen vadászható vad és halászható hal. Vadakat csak olyan fák mellett tudnak szabadon engedni, amelynek lombjában nincs őrház."
+
+#: ../../data/txts/tips/amazons.lua:36
+msgid ""
+"Rare wood stock levels are monitored by rare tree plantations, and jungle "
+"masters will plant according to economic requirements."
+msgstr "A ritkafa ültetvények figyelik a ritkafák raktárkészletét, és a dzsungelmesterek a gazdaság igényei szerint ültetik a fákat."
+
+#: ../../data/txts/tips/amazons.lua:40
+msgid ""
+"Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
+"and lashing canoes together to form ships."
+msgstr "A kötél elengedhetetlen az erős épületekhez, tartós ruhákhoz és a kenuk összekötözéséhez, amivel a hajók készülnek."
+
+#: ../../data/txts/tips/amazons.lua:43
+msgid ""
+"Jungle masters learn their skills by working as jungle preservers before "
+"working in gardening centres or rare tree plantations."
+msgstr "A dzsungelmesterek dzsungelfenntartóként dolgozva szerzik meg a megfelelő tapasztalatot ahhoz, hogy kertészetben vagy ritkafa ültetvényen tudjanak dolgozni."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -550,69 +622,69 @@ msgid ""
 msgstr "A legtöbb fejlesztett épülethez tapasztalt munkások kellenek. Ne fejlessz tovább épületeket, hacsak nincsenek meg a szükséges munkásaid."
 
 #. TRANSLATORS: %s = URL to the Widelands website
-#: ../../data/txts/tips/editor.lua:7
+#: ../../data/txts/tips/editor.lua:8
 #, lua-format
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
 msgstr "A térképszerkesztőhöz segítséget és egy rövid bevezetőt találhatsz a Widelands Wikin itt: %s"
 
-#: ../../data/txts/tips/editor.lua:11
+#: ../../data/txts/tips/editor.lua:12
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr "Többféle állattípust is kiválaszhatsz ha nyomva tartod a Ctrl gombot kiválasztás során. Ha ezután rákattintasz a térképre, a kiválasztott állattípusok közül egy lesz elhelyezve."
 
-#: ../../data/txts/tips/editor.lua:15
+#: ../../data/txts/tips/editor.lua:16
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
 msgstr "Pont mint az állatoknál, egyszerre több mozdíthatatlant vagy talajtextúrát is kiválaszthatsz a Ctrl + egérkattintással."
 
-#: ../../data/txts/tips/editor.lua:19
+#: ../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
 msgstr "A Shift gomb nyomva tartásával az első alternatív eszköz kapcsol be. Ez a legtöbb esetben a normál eszköz ellentéte (például tárgyak elhelyezése helyett tárgyak törlését végzi)."
 
-#: ../../data/txts/tips/editor.lua:23
+#: ../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
 msgstr "Az Alt nyomva tartásával válthatsz a második alternatív eszközre (ha létezik)."
 
-#: ../../data/txts/tips/editor.lua:27
+#: ../../data/txts/tips/editor.lua:28
 msgid ""
-"The number keys (0 - 9) allow you to directly set the size of the selected "
-"area around your mouse cursor."
-msgstr "A számbillentyűk (0–9) lehetővé teszik, hogy közvetlenül megadd az egérkurzor körül kiválasztott terület nagyságát."
+"The keys %1% allow you to directly set the size of the selected area around "
+"your mouse cursor."
+msgstr "A %1% billentyűk lehetővé teszik, hogy közvetlenül megadd az egérkurzor körül kiválasztott terület nagyságát."
 
-#: ../../data/txts/tips/editor.lua:31
+#: ../../data/txts/tips/editor.lua:32
 msgid ""
-"Space key behaves like in normal game. It switches if building spaces are "
-"shown on or off."
-msgstr "A szóköz gomb hasonlóan működik, mint a normál játékban: ki-/bekapcsolja az épülethelyeket."
+"%1% behaves like in normal games: It switches if building spaces are shown "
+"on or off."
+msgstr "A „%1%” billentyű hasonlóan működik, mint a normál játékban: ki-/bekapcsolja a beépíthető helyeket"
 
-#: ../../data/txts/tips/editor.lua:35
+#: ../../data/txts/tips/editor.lua:36
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
 msgstr "Ha fákat helyezel el, használd a súgó gombot, hogy lásd hogy mely fák, mely terepen élik túl a legnagyobb eséllyel."
 
-#: ../../data/txts/tips/editor.lua:39
+#: ../../data/txts/tips/editor.lua:40
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
 msgstr "Ha nem adsz meg víz és hal nyersanyagokat, akkor az alapértelmezett mennyiség lesz használva."
 
-#: ../../data/txts/tips/editor.lua:43
+#: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
 msgstr "Olyan pontokra helyezhetsz közepes épületeket, ahol a lejtő nem meredekebb 1-esnél délkeleti irányban, és 2 pontos sugárban a pontok közti magasságkülönbség nem nagyobb 2-nél."
 
-#: ../../data/txts/tips/editor.lua:47
+#: ../../data/txts/tips/editor.lua:48
 msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
@@ -638,183 +710,158 @@ msgstr "A téglák előállításához gránitra lesz szükséged; a gránit ter
 msgid "Always build a forester’s house, so you will not run out of logs."
 msgstr "Mindig építs erdészházat, így nem fogysz ki farönkökből."
 
-#: ../../data/txts/tips/general_game.lua:6
+#: ../../data/txts/tips/general_game.lua:7
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
 msgstr "Az építkezés csak akkor kezdődhet el, ha vezet út az építési területre."
 
-#: ../../data/txts/tips/general_game.lua:10
+#: ../../data/txts/tips/general_game.lua:11
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
 msgstr "Mindig küldj geológusokat arra a területre, ahol kutat vagy bányát akarsz építeni."
 
-#: ../../data/txts/tips/general_game.lua:14
+#: ../../data/txts/tips/general_game.lua:15
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr "A területed különböző katonai épületekkel növelhető – például őrbódé, erőd, erődház stb."
+msgstr "A területed különböző katonai épületekkel növelhető – például őrbódé, őrház, erőd, stb."
 
-#: ../../data/txts/tips/general_game.lua:18
+#: ../../data/txts/tips/general_game.lua:19
 msgid "Miners will work only if supplied with food."
 msgstr "A bányák csak akkor működnek, ha ellátod őket élelemmel."
 
-#: ../../data/txts/tips/general_game.lua:22
+#: ../../data/txts/tips/general_game.lua:23
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr "Oszd az utakat rövidebb részekre zászlók kitűzésével. Ez felgyorsítja az áruszállítást."
 
 #. TRANSLATORS: %s = URL to the Widelands website
-#: ../../data/txts/tips/general_game.lua:27
+#: ../../data/txts/tips/general_game.lua:28
 #, lua-format
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
 msgstr "További kérdéseid vannak? A Gyakran Ismételt Kérdéseket, a wikit és persze a közösségi fórumokat a %s oldalon találod."
 
-#: ../../data/txts/tips/general_game.lua:31
+#: ../../data/txts/tips/general_game.lua:32
 msgid ""
-"Use the priority buttons in building windows to adjust delivery of a "
-"specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr "A prioritás gomb az építés ablakban arra való, hogy szabályozd a megadott termék szállítását. A Ctrl lenyomása kattintás közben az összes árut egyszerre fogja állítani."
+"Use the priority sliders in building windows to adjust delivery of a "
+"specific ware. Holding down Shift while clicking will adjust all wares at "
+"once."
+msgstr "Az épület ablakokban található prioritás csúszkákkal tudod szabályozni egy adott termék szállítását. Ha kattintás közben le van nyomva a Shift billentyű is, akkor az összes árut egyszerre állítod."
 
-#: ../../data/txts/tips/general_game.lua:35
+#: ../../data/txts/tips/general_game.lua:36
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr "A „Gazdaság beállításai” menüben meghatározhatod az áruk kívánt mennyiségét. Ez a zászló menüből érhető el."
 
-#: ../../data/txts/tips/general_game.lua:39
+#: ../../data/txts/tips/general_game.lua:40
 msgid ""
-"Manage your messages more efficiently: press ‘N’ for News to access the "
-"messages window, then use ‘G’ for Go To, and the Delete key to archive "
-"messages."
-msgstr "Kezeld üzeneteidet még hatékonyabban: használd az N billentyűt az üzenetek ablakának megjelenítéséhez, majd a G-t az ugráshoz, és a Delete-et az üzenet archiválásához."
+"Manage your messages more efficiently: press ‘%1%’ to access the messages "
+"window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
+msgstr "Kezeld üzeneteidet még hatékonyabban: használd az %1% billentyűt az üzenetek ablakának megjelenítéséhez, majd a %2% billentyűt a helyszínre ugráshoz, és a %3% billentyűt az üzenet archiválásához."
 
-#: ../../data/txts/tips/general_game.lua:43
-msgctxt "hotkey"
-msgid "1-9"
-msgstr "1-9"
-
-#: ../../data/txts/tips/general_game.lua:43
-msgctxt "hotkey"
-msgid "Ctrl+(1-9)"
-msgstr "Ctrl+(1-9)"
-
-#: ../../data/txts/tips/general_game.lua:43
+#: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
-msgstr ""
+msgstr "Jegyezd meg a fontos helyeket a %1% billentyűkkel, majd ugorj rájuk a %2% gombokkal."
 
-#: ../../data/txts/tips/general_game.lua:47
+#: ../../data/txts/tips/general_game.lua:49
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Ha nyomva tartod a Ctrl-t, miközben utat távolítasz el, akkor eltűnik minden zászló az első elágazásig."
 
-#: ../../data/txts/tips/general_game.lua:51
+#: ../../data/txts/tips/general_game.lua:53
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr ""
+msgstr "Az új katonákat a laktanyákban toborozzák. A képességeiket ezután a kiképzőhelyeken fejlesztik tovább."
 
-#: ../../data/txts/tips/general_game.lua:55
+#: ../../data/txts/tips/general_game.lua:57
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "Ha szeretsz veszélyesen élni, kihagyhatod a megerősítést, ha lenyomva tartod a Ctrl billentyűt, mialatt a Továbbfejlesztés, Lebontás vagy Megsemmisítés gombokra kattintasz."
 
-#: ../../data/txts/tips/general_game.lua:59
-msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr "Nyomd meg az I billentyűt raktárkészleteid gyors megjelenítéséhez."
+#: ../../data/txts/tips/general_game.lua:61
+#, lua-format
+msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
+msgstr "Nyomd meg az %s billentyűt raktárkészleteid gyors megjelenítéséhez."
 
-#: ../../data/txts/tips/general_game.lua:63
+#: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads. The "
-"supplies and demands of buildings are handled in its economy."
-msgstr "Egy gazdaság egy úthálózattal összekötött épületekből és zászlókból áll. Az épületek termékeit és szükségleteit azok saját gazdaságában kezelik."
+"An economy consists of all buildings and flags connected by roads, ferries, "
+"or ships. The supplies and demands of buildings are handled in their "
+"economy. A player can have more than one economy."
+msgstr "Egy gazdaság azon épületek és zászlók összességét jelenti, amelyeket utak, vízi utak és hajók kötnek össze. Az épületek termékeit és szükségleteit az őket tartalmazó gazdaság kezeli. Egy játékosnak lehet több gazdasága is."
 
-#: ../../data/txts/tips/general_game.lua:67
+#: ../../data/txts/tips/general_game.lua:69
+msgid ""
+"You can have more than one economy if their flags are not connected by any "
+"means of transportation. This is why the Configure Economy menu can only be "
+"accessed from flags and warehouses, not the player’s main menu."
+msgstr "Több gazdaságod is lehet egyszerre, ha ezeket nem köti össze semmilyen közlekedési útvonal. Ezért van az, hogy a „Gazdaság beállításai” menüt a zászlókra kattintva vagy a raktárak ablakaiból lehet elérni, nem a játékos általános menüjéből."
+
+#: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Néhány épületnek, mint a farmnak, nagyon kis munkaterülete van. Ha fák vagy utak veszik körbe, a termelés leáll."
+msgstr "Néhány épületnek, mint a földbirtoknak, nagyon kis munkaterülete van. Ha fák vagy utak veszik körbe, a termelés leáll."
 
-#: ../../data/txts/tips/general_game.lua:71
-msgctxt "hotkey"
-msgid "Ctrl+(+/-)"
-msgstr "Ctrl+(+/-)"
-
-#: ../../data/txts/tips/general_game.lua:71
-msgctxt "hotkey"
-msgid "Ctrl+0"
-msgstr "Ctrl+0"
-
-#: ../../data/txts/tips/general_game.lua:71
-msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:77
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
-"visited locations."
-msgstr ""
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
+msgstr "Az egér görgőjével vagy a %1%/%2% billentyűkkel tudod a képet nagyítani/kicsinyíteni. Nyomd meg a %3% billentyűt a nagyítás alaphelyzetbe állításához."
 
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Ctrl+(Page Up/Page Down)"
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Page Up/Page Down"
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Shift+(Page Up/Page Down)"
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:84
 msgid ""
-"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
-"adjust speed smoothly."
-msgstr ""
+"Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
+"locations."
+msgstr "A %1$s és a %2$s billentyűkkel vissza, illetve előre léphetsz a világ nemrégiben meglátogatott helyei között."
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:88
+msgid ""
+"Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
+"%5%/%6% will adjust speed smoothly."
+msgstr "A %1%/%2%billentyűkkel gyorsíthatod/lassíthatod az idő múlását. A %3%/%4% billentyűkkel gyorsan, a %5%/%6% billentyűkkel finoman változtathatod a sebességet."
+
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "kurzor"
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
-msgstr ""
+msgid "Ctrl + Arrow keys"
+msgstr "Ctrl + kurzor"
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:98
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
+msgstr "A %1% billentyűkkel tudod a térkép látható területét mozgatni. A %2% gyorsabban, a %3% lassabban mozgatja a térképet."
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
-msgid "Shift+Arrow keys"
-msgstr ""
+msgid "Shift + Arrow keys"
+msgstr "Shift + kurzor"
 
-#: ../../data/txts/tips/general_game.lua:87
+#: ../../data/txts/tips/general_game.lua:102
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr ""
+msgstr "Amikor egy épület megsemmisül, a benne lévő munkások keresnek egy közeli zászlót, ahonnan út vezet egy raktárba. Ha nincs a közelben ilyen zászló, akkor egy ideig vándorolnak, majd idővel elpusztulnak."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "A „Page up” és „Page down” gombokkal állíthatod be a számodra megfelelő sebességet, a valódi sebességet demokratikusan ez alapján választja a játék."
+msgstr "A „Page up” és „Page down” billentyűkkel állíthatod be az általad kért sebességet. A valódi sebességet a játékosok szavazatai határozzák meg demokratikus módon."
 
 #: ../../data/txts/tips/multiplayer.lua:8
 msgid ""
@@ -830,7 +877,7 @@ msgstr "Ha a csevegőüzenetet a „@játékosnév” kifejezéssel kezded, az �
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
-"If the game should crash, don't worry! The game will be saved automatically "
+"If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
 msgstr "Ha a játék összeomlana, ne aggódj!\nA játék automatikusan mentésre kerül, így újra betöltheted utána."
 
@@ -838,6 +885,6 @@ msgstr "Ha a játék összeomlana, ne aggódj!\nA játék automatikusan mentésr
 #: ../../data/txts/tips/singleplayer.lua:7
 #, lua-format
 msgid ""
-"Our computer players are too boring? Visit our website at %s and meet other "
+"Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "A mesterséges intelligencia ellen játszani túl unalmas? Látogasd meg weblapunkat a %s címen, ismerd meg a többi játékost, és játssz az Interneten!"

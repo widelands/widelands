@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -44,14 +43,14 @@ public:
 
 	// Returns the (singleton) instance of this class.
 	static BlitProgram& instance();
-	~BlitProgram();
+	~BlitProgram() = default;
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'gl_texture_image' to 'gl_dest_rect' in the currently bound framebuffer. All
 	// coordinates are in the OpenGL frame. The 'texture_mask' is used to selectively apply
 	// the 'blend'. This is used for blitting player colored images.
 	void draw(const Rectf& gl_dest_rect,
-	          const float z_value,
+	          float z_value,
 	          const BlitData& texture,
 	          const BlitData& mask,
 	          const RGBAColor& blend,
@@ -62,8 +61,8 @@ public:
 	// coordinates are in the OpenGL frame. The image is first converted to
 	// luminance, then all values are multiplied with blend.
 	void draw_monochrome(const Rectf& gl_dest_rect,
-	                     const float z_value,
-	                     const BlitData& blit_source,
+	                     float z_value,
+	                     const BlitData& texture,
 	                     const RGBAColor& blend);
 
 	// Draws a bunch of items at once.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -41,11 +40,7 @@ InputQueue::InputQueue(PlayerImmovable& init_owner,
      index_(init_index),
      max_size_(init_max_size),
      max_fill_(init_max_size),
-     type_(init_type),
-     consume_interval_(0),
-     request_(nullptr),
-     callback_fn_(nullptr),
-     callback_data_(nullptr) {
+     type_(init_type) {
 }
 
 void InputQueue::update() {
@@ -68,7 +63,7 @@ void InputQueue::update() {
 }
 
 void InputQueue::request_callback(Game& game,
-                                  Request&,
+                                  Request& r,
                                   DescriptionIndex const index,
                                   Worker* const worker,
                                   PlayerImmovable& target) {
@@ -79,11 +74,11 @@ void InputQueue::request_callback(Game& game,
 		type = wwWORKER;
 	}
 
-	InputQueue& iq = dynamic_cast<Building&>(target).inputqueue(index, type);
+	InputQueue& iq = dynamic_cast<Building&>(target).inputqueue(index, type, &r);
 
 	iq.entered(index, worker);
 
-	if (iq.callback_fn_) {
+	if (iq.callback_fn_ != nullptr) {
 		(*iq.callback_fn_)(game, &iq, index, worker, iq.callback_data_);
 	}
 }
@@ -118,7 +113,7 @@ void InputQueue::set_max_fill(Quantity size) {
 	update();
 }
 
-void InputQueue::set_consume_interval(const uint32_t time) {
+void InputQueue::set_consume_interval(const Duration& time) {
 	consume_interval_ = time;
 
 	update();
@@ -134,27 +129,24 @@ uint32_t InputQueue::get_missing() const {
 
 constexpr uint16_t kCurrentPacketVersion = 3;
 
-void InputQueue::read(FileRead& fr,
-                      Game& game,
-                      MapObjectLoader& mol,
-                      const TribesLegacyLookupTable& tribes_lookup_table) {
+void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
 		if (packet_version == kCurrentPacketVersion) {
 			if (fr.unsigned_8() == 0) {
 				assert(type_ == wwWARE);
-				index_ = owner().tribe().ware_index(tribes_lookup_table.lookup_ware(fr.c_string()));
+				index_ = game.descriptions().safe_ware_index(fr.c_string());
 			} else {
 				assert(type_ == wwWORKER);
-				index_ = owner().tribe().worker_index(tribes_lookup_table.lookup_worker(fr.c_string()));
+				index_ = game.descriptions().safe_worker_index(fr.c_string());
 			}
 			max_size_ = fr.unsigned_32();
 			max_fill_ = fr.signed_32();
-			consume_interval_ = fr.unsigned_32();
-			if (fr.unsigned_8()) {
+			consume_interval_ = Duration(fr);
+			if (fr.unsigned_8() != 0u) {
 				request_.reset(new Request(owner_, 0, InputQueue::request_callback, type_));
-				request_->read(fr, game, mol, tribes_lookup_table);
+				request_->read(fr, game, mol);
 			} else {
 				request_.reset();
 			}
@@ -164,7 +156,7 @@ void InputQueue::read(FileRead& fr,
 			throw UnhandledVersionError("InputQueue", packet_version, kCurrentPacketVersion);
 		}
 		//  Now Economy stuff. We have to add our filled items to the economy.
-		if (owner_.get_economy(type_)) {
+		if (owner_.get_economy(type_) != nullptr) {
 			add_to_economy(*owner_.get_economy(type_));
 		}
 	} catch (const GameDataError& e) {
@@ -174,6 +166,7 @@ void InputQueue::read(FileRead& fr,
 
 void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
+	assert(index_ != Widelands::INVALID_INDEX);
 
 	//  Owner and callback is not saved, but this should be obvious on load.
 	switch (type_) {
@@ -188,7 +181,7 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	}
 	fw.signed_32(max_size_);
 	fw.signed_32(max_fill_);
-	fw.signed_32(consume_interval_);
+	consume_interval_.save(fw);
 	if (request_) {
 		fw.unsigned_8(1);
 		request_->write(fw, game, mos);

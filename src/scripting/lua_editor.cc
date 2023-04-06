@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "scripting/lua_editor.h"
 
-#include "base/log.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "wui/interactive_player.h"
@@ -60,11 +58,9 @@ Player
 
 .. class:: Player
 
-   Child of: :class:`wl.bases.PlayerBase`
-
    This class represents one of the players in the editor.
-   Note that you cannot instantiate a class of this type directly, use the
-   :attr:`wl.Editor.players`.
+   Note that you cannot instantiate a class of this type directly, use
+   ``wl.Editor().players``.
 
 */
 const char LuaPlayer::className[] = "Player";

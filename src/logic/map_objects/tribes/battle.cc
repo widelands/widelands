@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,7 +20,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -35,21 +33,13 @@ namespace Widelands {
 
 namespace {
 BattleDescr g_battle_descr("battle", "Battle");
-}
+}  // namespace
 
 const BattleDescr& Battle::descr() const {
 	return g_battle_descr;
 }
 
-Battle::Battle()
-   : MapObject(&g_battle_descr),
-     first_(nullptr),
-     second_(nullptr),
-     creationtime_(0),
-     readyflags_(0),
-     damage_(0),
-     first_strikes_(true),
-     last_attack_hits_(false) {
+Battle::Battle() : MapObject(&g_battle_descr) {
 }
 
 Battle::Battle(Game& game, Soldier* first_soldier, Soldier* second_soldier)
@@ -94,11 +84,11 @@ bool Battle::init(EditorGameBase& egbase) {
 }
 
 void Battle::cleanup(EditorGameBase& egbase) {
-	if (first_) {
+	if (first_ != nullptr) {
 		first_->set_battle(dynamic_cast<Game&>(egbase), nullptr);
 		first_ = nullptr;
 	}
-	if (second_) {
+	if (second_ != nullptr) {
 		second_->set_battle(dynamic_cast<Game&>(egbase), nullptr);
 		second_ = nullptr;
 	}
@@ -123,11 +113,11 @@ void Battle::cancel(Game& game, Soldier& soldier) {
 	schedule_destroy(game);
 }
 
-bool Battle::locked(Game& game) {
-	if (!first_ || !second_) {
+bool Battle::locked(const Game& game) {
+	if ((first_ == nullptr) || (second_ == nullptr)) {
 		return false;
 	}
-	if (game.get_gametime() - creationtime_ < 1000) {
+	if (game.get_gametime() - creationtime_ < Duration(1000)) {
 		return true;  // don't change battles around willy-nilly
 	}
 	return first_->get_position() == second_->get_position();
@@ -174,7 +164,7 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	std::string what_anim;
 
 	// Apply pending damage
-	if (damage_ && oneReadyToFight) {
+	if ((damage_ != 0u) && oneReadyToFight) {
 		// Current attacker is last defender, so damage goes to current attacker
 		if (first_strikes_) {
 			first_->damage(damage_);
@@ -185,25 +175,26 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	}
 
 	if (soldier.get_current_health() < 1) {
-		molog("[battle] soldier %u lost the battle\n", soldier.serial());
+		molog(game.get_gametime(), "[battle] soldier %u lost the battle\n", soldier.serial());
 		soldier.get_owner()->count_casualty();
 		opponent(soldier)->get_owner()->count_kill();
 		soldier.start_task_die(game);
-		molog("[battle] waking up winner %d\n", opponent(soldier)->serial());
+		molog(game.get_gametime(), "[battle] waking up winner %d\n", opponent(soldier)->serial());
 		opponent(soldier)->send_signal(game, "wakeup");
 		return schedule_destroy(game);
 	}
 
-	if (!first_ || !second_) {
+	if ((first_ == nullptr) || (second_ == nullptr)) {
 		return soldier.skip_act();
 	}
 
 	// Here is a timeout to prevent battle freezes
-	if (waitingForOpponent && (game.get_gametime() - creationtime_) > 90 * 1000) {
+	if (waitingForOpponent && (game.get_gametime() - creationtime_) > Duration(90 * 1000)) {
 		molog(
+		   game.get_gametime(),
 		   "[battle] soldier %u waiting for opponent %u too long (%5d sec), cancelling battle...\n",
 		   soldier.serial(), opponent(soldier)->serial(),
-		   (game.get_gametime() - creationtime_) / 1000);
+		   (game.get_gametime() - creationtime_).get() / 1000);
 		cancel(game, soldier);
 		return;
 	}
@@ -256,8 +247,9 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// The function calculate_round inverts value of first_strikes_, so
 	// attacker will be the first_ when first_strikes_ = false and
 	// attacker will be second_ when first_strikes_ = true
-	molog("[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n", soldier.serial(),
-	      opponent(soldier)->serial(), this_soldier_is, first_strikes_, last_attack_hits_);
+	molog(game.get_gametime(), "[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n",
+	      soldier.serial(), opponent(soldier)->serial(), this_soldier_is,
+	      static_cast<int>(first_strikes_), static_cast<int>(last_attack_hits_));
 
 	bool shorten_animation = false;
 	if (this_soldier_is == 1) {
@@ -294,7 +286,8 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// If the soldier will die as soon as the animation is complete, don't
 	// show it for the full length to prevent overlooping (bug 1817664)
 	shorten_animation &= damage_ >= soldier.get_current_health();
-	molog("[battle] Starting animation %s for soldier %d\n", what_anim.c_str(), soldier.serial());
+	molog(game.get_gametime(), "[battle] Starting animation %s for soldier %d\n", what_anim.c_str(),
+	      soldier.serial());
 	soldier.start_task_idle(game, soldier.descr().get_rand_anim(game, what_anim, &soldier),
 	                        shorten_animation ? 850 : 1000);
 }
@@ -346,9 +339,9 @@ void Battle::Loader::load(FileRead& fr) {
 
 	Battle& battle = get<Battle>();
 
-	battle.creationtime_ = fr.signed_32();
+	battle.creationtime_ = Time(fr);
 	battle.readyflags_ = fr.unsigned_8();
-	battle.first_strikes_ = fr.unsigned_8();
+	battle.first_strikes_ = (fr.unsigned_8() != 0u);
 	battle.damage_ = fr.unsigned_32();
 	first_ = fr.unsigned_32();
 	second_ = fr.unsigned_32();
@@ -358,14 +351,14 @@ void Battle::Loader::load_pointers() {
 	Battle& battle = get<Battle>();
 	try {
 		MapObject::Loader::load_pointers();
-		if (first_) {
+		if (first_ != 0u) {
 			try {
 				battle.first_ = &mol().get<Soldier>(first_);
 			} catch (const WException& e) {
 				throw wexception("soldier 1 (%u): %s", first_, e.what());
 			}
 		}
-		if (second_) {
+		if (second_ != 0u) {
 			try {
 				battle.second_ = &mol().get<Soldier>(second_);
 			} catch (const WException& e) {
@@ -383,14 +376,14 @@ void Battle::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 
 	MapObject::save(egbase, mos, fw);
 
-	fw.signed_32(creationtime_);
+	creationtime_.save(fw);
 	fw.unsigned_8(readyflags_);
-	fw.unsigned_8(first_strikes_);
+	fw.unsigned_8(static_cast<uint8_t>(first_strikes_));
 	fw.unsigned_32(damage_);
 
 	// And now, the serials of the soldiers !
-	fw.unsigned_32(first_ ? mos.get_object_file_index(*first_) : 0);
-	fw.unsigned_32(second_ ? mos.get_object_file_index(*second_) : 0);
+	fw.unsigned_32(first_ != nullptr ? mos.get_object_file_index(*first_) : 0);
+	fw.unsigned_32(second_ != nullptr ? mos.get_object_file_index(*second_) : 0);
 }
 
 MapObject::Loader* Battle::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {

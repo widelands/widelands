@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,17 +21,12 @@
 #include <memory>
 
 #include "base/wexception.h"
+#include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/streamread.h"
 
 LayeredFileSystem* g_fs;
 LayeredFileSystem::LayeredFileSystem() : home_(nullptr) {
-}
-
-/**
- * Free all sub-filesystems
- */
-LayeredFileSystem::~LayeredFileSystem() {
 }
 
 /**
@@ -65,16 +59,16 @@ FilenameSet LayeredFileSystem::list_directory(const std::string& path) const {
 	// Check home system first
 	if (home_) {
 		files = home_->list_directory(path);
-		for (FilenameSet::iterator fnit = files.begin(); fnit != files.end(); ++fnit) {
-			results.insert(*fnit);
+		for (const std::string& file : files) {
+			results.insert(file);
 		}
 	}
 
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it) {
 		files = (*it)->list_directory(path);
 
-		for (FilenameSet::iterator fnit = files.begin(); fnit != files.end(); ++fnit) {
-			results.insert(*fnit);
+		for (const std::string& file : files) {
+			results.insert(file);
 		}
 	}
 	return results;
@@ -142,7 +136,7 @@ void* LayeredFileSystem::load(const std::string& fname, size_t& length) {
  */
 void LayeredFileSystem::write(const std::string& fname,
                               void const* const data,
-                              int32_t const length) {
+                              size_t const length) {
 	if (home_ && home_->is_writable()) {
 		return home_->write(fname, data, length);
 	}
@@ -241,8 +235,13 @@ FileSystem* LayeredFileSystem::make_sub_file_system(const std::string& dirname) 
 		}
 	}
 
-	throw wexception("LayeredFileSystem: unable to create sub filesystem for existing directory: %s",
-	                 paths_error_message(dirname).c_str());
+	try {
+		return &FileSystem::create(canonicalize_name(dirname));
+	} catch (const FileError&) {
+		throw FileNotFoundError(
+		   "LayeredFileSystem: unable to create sub filesystem for existing directory:",
+		   paths_error_message(dirname));
+	}
 }
 
 /**
@@ -327,5 +326,8 @@ std::string LayeredFileSystem::paths_error_message(const std::string& filename) 
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it) {
 		message += "\n    " + (*it)->get_basename() + FileSystem::file_separator() + filename;
 	}
+
+	message += "\n    " + canonicalize_name(filename);
+
 	return message;
 }

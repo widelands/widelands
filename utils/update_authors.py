@@ -19,7 +19,7 @@ def add_lua_array(values):
 
     text = '{'
     for value in values:
-        if value.startswith('_"'):
+        if value.startswith('_("'):
             # a translation marker has already been added
             text += value
         else:
@@ -49,10 +49,10 @@ def add_lua_table_key(key, value=None, **kwrds):
     else:
         # A value is present
         if transl:
-            return key + ' = _"' + value + '",'
+            return key + ' = _("' + value + '"),'
 
         if isinstance(value, list):
-            # To get translations, apply '_"foo"' manually to the list
+            # To get translations, apply '_("foo")' manually to the list
             return key + ' = ' + add_lua_array(value)
         else:
             return key + ' = "' + value + '",'
@@ -198,7 +198,7 @@ for category in developers:
                     members.append(m)
             if 'translate' in subcategory:
                 for m in subcategory['translate']:
-                    members.append('_"' + m + '",')
+                    members.append('_("' + m + '"),')
             lua_string += add_lua_table_key('members', members)
 
             lua_string += '},'  # entry

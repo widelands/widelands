@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,11 +21,10 @@
 #include <cassert>
 #include <memory>
 
-#include <boost/algorithm/string/replace.hpp>
-
+#include "base/log.h"
 #include "base/macros.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -42,7 +40,7 @@ NonPackedAnimation::MipMapEntry IMPLEMENTATION
 */
 
 NonPackedAnimation::NonPackedMipMapEntry::NonPackedMipMapEntry(std::vector<std::string> files)
-   : Animation::MipMapEntry(), image_files(std::move(files)) {
+   : image_files(std::move(files)) {
 	if (image_files.empty()) {
 		throw Widelands::GameDataError(
 		   "Animation without image files. For a scale of 1.0, the template should look similar to "
@@ -51,7 +49,7 @@ NonPackedAnimation::NonPackedMipMapEntry::NonPackedMipMapEntry(std::vector<std::
 	}
 
 	for (std::string image_file : image_files) {
-		boost::replace_last(image_file, ".png", "_pc.png");
+		replace_last(image_file, ".png", "_pc.png");
 		if (g_fs->file_exists(image_file)) {
 			has_playercolor_masks = true;
 			playercolor_mask_image_files.push_back(image_file);
@@ -74,7 +72,7 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 	if (image_files.empty()) {
 		throw Widelands::GameDataError("animation without image files.");
 	}
-	if (playercolor_mask_image_files.size() &&
+	if (!playercolor_mask_image_files.empty() &&
 	    playercolor_mask_image_files.size() != image_files.size()) {
 		throw Widelands::GameDataError(
 		   "animation has %" PRIuS " frames but playercolor mask has %" PRIuS
@@ -83,9 +81,9 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 	}
 
 	for (const std::string& filename : image_files) {
-		const Image* image = g_gr->images().get(filename);
-		if (frames.size() && (frames.front()->width() != image->width() ||
-		                      frames.front()->height() != image->height())) {
+		const Image* image = g_image_cache->get(filename);
+		if (!frames.empty() && (frames.front()->width() != image->width() ||
+		                        frames.front()->height() != image->height())) {
 			throw Widelands::GameDataError(
 			   "wrong size: (%u, %u) for file %s, should be (%u, %u) like the first frame",
 			   image->width(), image->height(), filename.c_str(), frames.front()->width(),
@@ -97,7 +95,7 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 	for (const std::string& filename : playercolor_mask_image_files) {
 		// TODO(unknown): Do not load playercolor mask as opengl texture or use it as
 		//     opengl texture.
-		const Image* pc_image = g_gr->images().get(filename);
+		const Image* pc_image = g_image_cache->get(filename);
 		if (frames.front()->width() != pc_image->width() ||
 		    frames.front()->height() != pc_image->height()) {
 			throw Widelands::GameDataError("playercolor mask %s has wrong size: (%u, %u), should "
@@ -137,7 +135,7 @@ NonPackedAnimation::NonPackedMipMapEntry::frame_textures(bool return_playercolor
 	     return_playercolor_masks ? playercolor_mask_image_files : image_files) {
 		std::unique_ptr<Texture> texture(new Texture(width(), height()));
 		texture->fill_rect(rect, RGBAColor(0, 0, 0, 0));
-		texture->blit(rect, *g_gr->images().get(filename), rect, 1., BlendMode::Copy);
+		texture->blit(rect, *g_image_cache->get(filename), rect, 1., BlendMode::Copy);
 		result.push_back(std::move(texture));
 	}
 	return result;
@@ -166,20 +164,16 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table,
 		// Get image files
 		if (table.has_key("pictures")) {
 			// TODO(GunChleoc): Old code - remove this option once conversion has been completed
+			assert(!table.get_table("pictures")->array_entries<std::string>().empty());
+			verb_log_dbg("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
+			             table.get_table("pictures")->array_entries<std::string>().front().c_str());
 			mipmaps_.insert(
 			   std::make_pair(1.0f, std::unique_ptr<NonPackedMipMapEntry>(new NonPackedMipMapEntry(
 			                           table.get_table("pictures")->array_entries<std::string>()))));
-			if (g_verbose) {
-				assert(!table.get_table("pictures")->array_entries<std::string>().empty());
-				log("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
-				    table.get_table("pictures")->array_entries<std::string>().front().c_str());
-			}
 		} else {
-			// TODO(GunChleoc): When all animations have been converted, require that
-			// animation_directory is not empty.
 			add_available_scales(basename, animation_directory.empty() ?
-			                                  table.get_string("directory") :
-			                                  animation_directory);
+                                           table.get_string("directory") :
+                                           animation_directory);
 		}
 
 		// Frames
@@ -228,9 +222,9 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	   dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(1.0f));
 	assert(!mipmap.image_files.empty());
 	const std::string& image_filename = mipmap.image_files[representative_frame()];
-	const Image* image = (mipmap.has_playercolor_masks && clr) ?
-	                        playercolor_image(*clr, image_filename) :
-	                        g_gr->images().get(image_filename);
+	const Image* image = (mipmap.has_playercolor_masks && (clr != nullptr)) ?
+                           playercolor_image(*clr, image_filename) :
+                           g_image_cache->get(image_filename);
 
 	const int w = image->width();
 	const int h = image->height();

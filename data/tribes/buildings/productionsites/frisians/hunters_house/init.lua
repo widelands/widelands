@@ -1,11 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_productionsite_type {
    name = "frisians_hunters_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Hunter’s House"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -21,8 +22,6 @@ tribes:new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {40, 69},
          frames = 10,
          columns = 5,
@@ -32,14 +31,11 @@ tribes:new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {40, 52}
       }
    },
 
    aihints = {
-      collects_ware_from_map = "meat",
       prohibited_till = 480
    },
 
@@ -50,7 +46,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-         descname = _"hunting",
+         descname = _("hunting"),
          actions = {
             "callworker=hunt",
             "sleep=duration:35s",
@@ -68,11 +64,13 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of Game" for a resource
-      title = _"No Game",
+      title = _("No Game"),
       -- TRANSLATORS: "Game" means animals that you can hunt
-      heading = _"Out of Game",
+      heading = _("Out of Game"),
       -- TRANSLATORS: "game" means animals that you can hunt
       message = pgettext("frisians_building", "The hunter working out of this hunter’s house can’t find any game in his work area."),
       productivity_threshold = 33
    },
 }
+
+pop_textdomain()

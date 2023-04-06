@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -26,15 +25,13 @@
 #include "logic/widelands_geometry.h"
 #include "ui_basic/textarea.h"
 
-using Widelands::Field;
-
 EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
    EditorInteractive& parent,
    EditorNoiseHeightTool& noise_tool,
    UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 300, 120, _("Random Height Options"), noise_tool),
      noise_tool_(noise_tool),
-     box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      lower_(&box_,
             0,
             0,
@@ -85,15 +82,16 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	upper_.changed.connect([this]() { update_upper(); });
 	set_to_.changed.connect([this]() { update_set_to(); });
 
-	UI::Textarea* label =
-	   new UI::Textarea(&box_, 0, 0, 0, 0, _("Random height"), UI::Align::kCenter);
+	UI::Textarea* label = new UI::Textarea(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0,
+	                                       0, 0, 0, _("Random height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
 	box_.add(&upper_);
 	box_.add(&lower_);
 
 	box_.add_space(2 * vspacing());
-	label = new UI::Textarea(&box_, 0, 0, 0, 0, _("Fixed height"), UI::Align::kCenter);
+	label = new UI::Textarea(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0,
+	                         _("Fixed height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
 	box_.add(&set_to_);
@@ -102,6 +100,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	                                                2 * label->get_h() + 7 * vspacing());
 
 	set_inner_size(box_.get_w() + 2 * hmargin(), box_.get_h() + 2 * vspacing());
+
+	initialization_complete();
 }
 
 void EditorToolNoiseHeightOptionsMenu::update_lower() {
@@ -143,4 +143,9 @@ void EditorToolNoiseHeightOptionsMenu::update_set_to() {
 	assert(set_to <= MAX_FIELD_HEIGHT);
 	noise_tool_.set_tool().set_interval(Widelands::HeightInterval(set_to, set_to));
 	select_correct_tool();
+}
+
+void EditorToolNoiseHeightOptionsMenu::update_window() {
+	lower_.set_value(noise_tool_.get_interval().min);
+	upper_.set_value(noise_tool_.get_interval().max);
 }

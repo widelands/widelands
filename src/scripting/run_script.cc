@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,6 +20,7 @@
 
 #include <memory>
 
+#include "base/multithreading.h"
 #include "io/filesystem/filesystem.h"
 #include "scripting/lua_table.h"
 
@@ -28,16 +28,15 @@ namespace {
 
 // Reads the 'filename' from the 'fs' and returns its content.
 std::string get_file_content(FileSystem* fs, const std::string& filename) {
-	if (!fs || !fs->file_exists(filename)) {
+	if ((fs == nullptr) || !fs->file_exists(filename)) {
 		throw LuaScriptNotExistingError(filename);
 	}
 	if (fs->is_directory(filename)) {
-		throw LuaScriptNotExistingError(
-		   (boost::format("%s is a directory") % filename.c_str()).str());
+		throw LuaScriptNotExistingError(format("%s is a directory", filename));
 	}
 	size_t length;
 	void* input_data = fs->load(filename, length);
-	const std::string data(static_cast<char*>(input_data));
+	std::string data(static_cast<char*>(input_data));
 	// make sure the input_data is freed
 	free(input_data);
 	return data;
@@ -46,6 +45,8 @@ std::string get_file_content(FileSystem* fs, const std::string& filename) {
 // Runs the 'content' as a lua script identified by 'identifier' in 'L'.
 std::unique_ptr<LuaTable>
 run_string_as_script(lua_State* L, const std::string& identifier, const std::string& content) {
+	MutexLock m(MutexLock::ID::kLua);
+
 	// Get the current value of __file__
 	std::string last_file;
 	lua_getglobal(L, "__file__");
@@ -86,7 +87,7 @@ run_string_as_script(lua_State* L, const std::string& identifier, const std::str
 }  // namespace
 
 int check_return_value_for_errors(lua_State* L, int rv) {
-	if (rv) {
+	if (rv != 0) {
 		const std::string err = luaL_checkstring(L, -1);
 		lua_pop(L, 1);
 		throw LuaError(err);

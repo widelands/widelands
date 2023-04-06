@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,6 +23,8 @@
 #include "ui_basic/unique_window.h"
 #include "wui/plot_area.h"
 
+class FileRead;
+class InteractiveBase;
 class InteractivePlayer;
 struct StatisticWaresDisplay;
 
@@ -37,21 +38,29 @@ public:
 	WareStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 	void set_time(int32_t);
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kWareStats;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 protected:
 	void layout() override;
 
 private:
-	UI::Box* main_box_;
-	UI::TabPanel* tab_panel_;
-	StatisticWaresDisplay* display_;
-	WuiPlotAreaSlider* slider_;
+	InteractivePlayer& iplayer_;
+	UI::Box* main_box_{nullptr};
+	UI::TabPanel* tab_panel_{nullptr};
+	StatisticWaresDisplay* display_{nullptr};
+	WuiPlotAreaSlider* slider_{nullptr};
 
 	WuiPlotArea* plot_production_;
 	WuiPlotArea* plot_consumption_;
 	WuiPlotArea* plot_stock_;
 	DifferentialPlotArea* plot_economy_;
-	std::vector<uint8_t> color_map_;  // Maps ware index to colors
+	std::map<Widelands::DescriptionIndex, uint8_t> color_map_;  // Maps ware index to colors
 	std::vector<bool> active_colors_;
+	std::list<Widelands::DescriptionIndex> active_indices_;
 
 	void cb_changed_to(Widelands::DescriptionIndex, bool);
 };

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,8 +20,7 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
+#include "base/string.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "io/fileread.h"
@@ -45,19 +43,13 @@ IFont* load_font(const std::string& face, int ptsize) {
 	}
 
 	SDL_RWops* ops = SDL_RWFromConstMem(memory->data(), memory->size());
-	if (!ops) {
+	if (ops == nullptr) {
 		throw BadFont("could not load font!: RWops Pointer invalid");
 	}
 
-	TTF_Font* font = TTF_OpenFontIndexRW(ops, true, ptsize, 0);
-	if (!font) {
-		throw BadFont((boost::format("could not load font!: %s") % TTF_GetError()).str());
-	}
-
-	if (!font) {
-		throw BadFont(
-		   (boost::format("Font loading error for %s, %i pts: %s") % face % ptsize % TTF_GetError())
-		      .str());
+	TTF_Font* font = TTF_OpenFontIndexRW(ops, 1, ptsize, 0);
+	if (font == nullptr) {
+		throw BadFont(format("Font loading error for %s, %i pts: %s", face, ptsize, TTF_GetError()));
 	}
 
 	return new SdlTtfFont(font, face, ptsize, memory.release());

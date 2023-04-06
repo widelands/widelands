@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -33,6 +32,7 @@ namespace RT {
 class FontCache;
 class Parser;
 class RenderNode;
+class TagHandler;
 
 struct RendererStyle {
 	RendererStyle(const std::string& font_face_,
@@ -59,24 +59,24 @@ using TagSet = std::set<std::string>;
 class Renderer {
 public:
 	// Ownership is not taken.
-	Renderer(ImageCache* image_cache, TextureCache* texture_cache, const UI::FontSets& fontsets);
+	Renderer(ImageCache* image_cache, TextureCache* texture_cache, const UI::FontSets* fontsets);
 	~Renderer();
 
 	// Render the given string in the given width. Restricts the allowed tags to
 	// the ones in TagSet.
 	std::shared_ptr<const UI::RenderedText>
-	render(const std::string&, uint16_t width, bool is_rtl, const TagSet& tagset = TagSet());
+	render(const std::string&, uint16_t width, bool is_rtl, const TagSet& allowed_tags = TagSet());
 
 private:
-	std::shared_ptr<RenderNode>
+	std::pair<RenderNode*, TagHandler*>
 	layout(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags);
 
 	std::unique_ptr<FontCache> font_cache_;
 	std::unique_ptr<Parser> parser_;
-	ImageCache* const image_cache_;      // Not owned.
-	TextureCache* const texture_cache_;  // Not owned.
-	const UI::FontSets& fontsets_;       // All fontsets
-	RendererStyle renderer_style_;       // Properties that all render nodes need to know about
+	ImageCache* const image_cache_;       // Not owned.
+	TextureCache* const texture_cache_;   // Not owned.
+	const UI::FontSets* const fontsets_;  // All fontsets
+	RendererStyle renderer_style_;        // Properties that all render nodes need to know about
 };
 }  // namespace RT
 

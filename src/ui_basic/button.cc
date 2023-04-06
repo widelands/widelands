@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -25,7 +24,6 @@
 #include <SDL_timer.h>
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -51,7 +49,7 @@ Button::Button  //  Common constructor
     const std::string& tooltip_text,
     UI::Button::VisualState init_state,
     ImageMode mode)
-   : NamedPanel(parent, name, x, y, w, h, tooltip_text),
+   : NamedPanel(parent, to_panel_style(init_style), name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
      enabled_(true),
@@ -62,10 +60,10 @@ Button::Button  //  Common constructor
      time_nextact_(0),
      title_(title_text),
      title_image_(title_image),
-     style_(&g_gr->styles().button_style(init_style)) {
+     button_style_(init_style) {
 	set_thinks(false);
-	// Don't allow focus
-	assert(!get_can_focus());
+	set_snap_target(true);
+	set_can_focus(enabled_);
 }
 
 /// For textual buttons. If h = 0, h will resize according to the font's height. If both h = 0 and w
@@ -92,22 +90,7 @@ Button::Button(Panel* const parent,
             tooltip_text,
             init_state,
             UI::Button::ImageMode::kShrink) {
-	if (h == 0) {
-		// Automatically resize for font height and give it a margin.
-		int new_width = get_w();
-		const int new_height =
-		   std::max(text_height(g_gr->styles().button_style(init_style).enabled().font()),
-		            text_height(g_gr->styles().button_style(init_style).disabled().font())) +
-		   4 * kButtonImageMargin;
-		if (w == 0) {
-			// Automatically resize for text width too.
-			new_width = std::max(text_width(title_, style_->enabled().font()),
-			                     text_width(title_, style_->disabled().font())) +
-			            8 * kButtonImageMargin;
-		}
-		set_desired_size(new_width, new_height);
-		set_size(new_width, new_height);
-	}
+	expand(w, h);
 }
 
 Button::Button  //  for pictorial buttons
@@ -125,9 +108,6 @@ Button::Button  //  for pictorial buttons
    : Button(parent, name, x, y, w, h, init_style, title_image, "", tooltip_text, init_state, mode) {
 }
 
-Button::~Button() {
-}
-
 /**
  * Sets a new picture for the Button.
  */
@@ -139,6 +119,24 @@ void Button::set_pic(const Image* pic) {
 	}
 
 	title_image_ = pic;
+}
+
+void Button::expand(int w, int h) {
+	if (h == 0) {
+		// Automatically resize for font height and give it a margin.
+		int new_width = get_w();
+		const int new_height = std::max(text_height(button_style().enabled().font()),
+		                                text_height(button_style().disabled().font())) +
+		                       4 * kButtonImageMargin;
+		if (w == 0) {
+			// Automatically resize for text width too.
+			new_width = std::max(text_width(title_, button_style().enabled().font()),
+			                     text_width(title_, button_style().disabled().font())) +
+			            8 * kButtonImageMargin;
+		}
+		set_desired_size(new_width, new_height);
+		set_size(new_width, new_height);
+	}
 }
 
 /**
@@ -174,6 +172,11 @@ void Button::set_enabled(bool const on) {
 		enabled_ = false;
 		highlighted_ = false;
 	}
+	set_can_focus(enabled_);
+}
+
+std::vector<Recti> Button::focus_overlay_rects() {
+	return Panel::focus_overlay_rects(2, 2, 0);
 }
 
 /**
@@ -181,15 +184,17 @@ void Button::set_enabled(bool const on) {
  */
 void Button::draw(RenderTarget& dst) {
 	const bool is_flat = (enabled_ && visual_state_ == VisualState::kFlat) ||
-	                     (!enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kFlat));
+	                     (!enabled_ &&
+	                      // Needs explicit cast to int to make clang-tidy happy.
+	                      (static_cast<int>(disable_style_ & ButtonDisableStyle::kFlat) != 0));
 	const bool is_permpressed =
 	   (enabled_ && visual_state_ == VisualState::kPermpressed) ||
-	   (!enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kPermpressed));
+	   (!enabled_ && (static_cast<int>(disable_style_ & ButtonDisableStyle::kPermpressed) != 0));
 	const bool is_monochrome =
-	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
+	   !enabled_ && (static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome) != 0);
 
 	const UI::TextPanelStyleInfo& style_to_use =
-	   is_monochrome ? style_->disabled() : style_->enabled();
+	   is_monochrome ? button_style().disabled() : button_style().enabled();
 
 	// Draw the background
 	draw_background(dst, style_to_use.background());
@@ -199,7 +204,7 @@ void Button::draw(RenderTarget& dst) {
 	}
 
 	//  If we've got a picture, draw it centered
-	if (title_image_) {
+	if (title_image_ != nullptr) {
 		if (image_mode_ == UI::Button::ImageMode::kUnscaled) {
 			if (!is_monochrome) {
 				dst.blit(Vector2i((get_w() - static_cast<int32_t>(title_image_->width())) / 2,
@@ -292,8 +297,11 @@ void Button::draw(RenderTarget& dst) {
 }
 
 void Button::think() {
-	assert(repeating_);
-	assert(pressed_);
+	if (!repeating_ || !pressed_) {
+		// race condition during initialization
+		return;
+	}
+
 	Panel::think();
 
 	if (highlighted_) {
@@ -310,6 +318,15 @@ void Button::think() {
 			//  longer be accessed.
 		}
 	}
+}
+
+bool Button::handle_key(bool down, SDL_Keysym code) {
+	if (down && code.sym == SDLK_RETURN && (SDL_GetModState() & KMOD_CTRL) == 0) {
+		play_click();
+		sigclicked();
+		return true;
+	}
+	return NamedPanel::handle_key(down, code);
 }
 
 /**
@@ -334,7 +351,7 @@ void Button::handle_mousein(bool const inside) {
 /**
  * Update the pressed status of the button
  */
-bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
+bool Button::handle_mousepress(uint8_t const btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn != SDL_BUTTON_LEFT) {
 		return false;
 	}
@@ -350,7 +367,7 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 	return true;
 }
 
-bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
+bool Button::handle_mouserelease(uint8_t const btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn != SDL_BUTTON_LEFT) {
 		return false;
 	}
@@ -371,7 +388,8 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 	return false;
 }
 
-bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
+bool Button::handle_mousemove(
+   const uint8_t /*state*/, int32_t /*x*/, int32_t /*y*/, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	return true;  // We handle this always by lighting up
 }
 
@@ -385,11 +403,15 @@ void Button::set_disable_style(UI::ButtonDisableStyle input_style) {
 
 void Button::set_perm_pressed(bool pressed) {
 	set_visual_state(pressed ? UI::Button::VisualState::kPermpressed :
-	                           UI::Button::VisualState::kRaised);
+                              UI::Button::VisualState::kRaised);
 }
 
 void Button::set_style(UI::ButtonStyle bstyle) {
-	style_ = &g_gr->styles().button_style(bstyle);
+	button_style_ = bstyle;
+}
+
+inline const UI::ButtonStyleInfo& Button::button_style() const {
+	return g_style_manager->button_style(button_style_);
 }
 
 void Button::toggle() {

@@ -1,11 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_productionsite_type {
    name = "frisians_smokery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Smokery"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -23,8 +24,6 @@ tribes:new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {50, 71},
          frames = 10,
          columns = 5,
@@ -32,8 +31,6 @@ tribes:new_productionsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {50, 71},
          frames = 10,
          columns = 5,
@@ -43,8 +40,6 @@ tribes:new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {50, 58}
       }
    },
@@ -69,7 +64,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=smoke_meat",
             "call=smoke_fish",
@@ -77,7 +72,7 @@ tribes:new_productionsite_type {
       },
       smoke_fish = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-         descname = _"smoking fish",
+         descname = _("smoking fish"),
          actions = {
             "return=skipped unless economy needs smoked_fish",
             "consume=fish:2 log",
@@ -88,7 +83,7 @@ tribes:new_productionsite_type {
       },
       smoke_meat = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
-         descname = _"smoking meat",
+         descname = _("smoking meat"),
          actions = {
             "return=skipped when site has fish:2 and economy needs smoked_fish",
             "return=skipped unless economy needs smoked_meat",
@@ -100,3 +95,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,30 +23,28 @@
 
 ///  Resize the map
 struct EditorResizeTool : public EditorTool {
-	EditorResizeTool(int16_t width, int16_t height)
-	   : EditorTool(*this, *this), width_(width), height_(height) {
+	EditorResizeTool(EditorInteractive& parent, int16_t width, int16_t height)
+	   : EditorTool(parent, *this, *this), width_(width), height_(height) {
 	}
 
 	/**
 	 * Change the map size
 	 */
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor/fsel_editor_resize.png");
+	[[nodiscard]] const Image* get_sel_impl() const override {
+		return g_image_cache->get("images/wui/editor/fsel_editor_resize.png");
 	}
 
-	bool has_size_one() const override {
+	[[nodiscard]] bool has_size_one() const override {
 		return true;
 	}
 
@@ -55,7 +52,7 @@ struct EditorResizeTool : public EditorTool {
 		width_ = w;
 	}
 
-	uint32_t get_width() {
+	[[nodiscard]] uint32_t get_width() const {
 		return width_;
 	}
 
@@ -63,8 +60,12 @@ struct EditorResizeTool : public EditorTool {
 		height_ = h;
 	}
 
-	uint32_t get_height() {
+	[[nodiscard]] uint32_t get_height() const {
 		return height_;
+	}
+
+	WindowID get_window_id() override {
+		return WindowID::Resize;
 	}
 
 private:

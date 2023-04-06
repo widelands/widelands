@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,32 +21,40 @@
 
 #include <memory>
 
-#include "logic/widelands.h"
-#include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_fsmenu/mapdetailsbox.h"
+#include "ui_fsmenu/menu.h"
 
 class GameController;
-struct GameSettingsProvider;
 class LuaInterface;
 
+namespace FsMenu {
+
+static constexpr double scale_factor = 1.3;
 /**
- * Fullscreen menu for setting map and mapsettings for single and multi player
- * games.
- *
+ * Menu for setting map and mapsettings for single- and multiplayer games.
  */
-class FullscreenMenuLaunchGame : public FullscreenMenuBase {
+class LaunchGame : public TwoColumnsFullNavigationMenu {
 public:
-	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*);
-	~FullscreenMenuLaunchGame() override;
+	LaunchGame(MenuCapsule&, GameSettingsProvider&, GameController*, bool preconfigured, bool mpg);
+	~LaunchGame() override;
+
+	GameSettingsProvider& settings() const {
+		return settings_;
+	}
+
+	/// Enables or disables the custom_starting_positions checkbox.
+	void update_custom_starting_positions();
+	void update_fogless();
 
 protected:
-	void clicked_ok() override;
-	void clicked_back() override;
+	std::unique_ptr<LuaInterface> lua_;
 
-	LuaInterface* lua_;
+	virtual void clicked_select_map() = 0;
+	virtual void clicked_select_savegame() = 0;
 
 	/// Initializes the label and tooltip for the win condition dropdown and returns 'true' if this
 	/// is a scenario or a savegame.
@@ -56,6 +63,8 @@ protected:
 
 	/// Enables or disables the peaceful mode checkbox.
 	void update_peaceful_mode();
+	/// Hides or shows the desync warning.
+	void update_warn_desyncing_addon();
 
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
@@ -66,6 +75,8 @@ protected:
 	void load_win_conditions(const std::set<std::string>& tags);
 	/// Remembers the win condition that is currently selected in the dropdown.
 	virtual void win_condition_selected() = 0;
+	/// The time limit for the win condition was changed.
+	void win_condition_duration_changed();
 	/// If the win condition in 'win_condition_script' can be played with the map tags,
 	/// parses the win condition and returns it as a std::unique_ptr<LuaTable>.
 	/// If this win condition can't be played with the map tags, returns a unique_ptr to nullptr.
@@ -73,21 +84,30 @@ protected:
 	                                                 const std::set<std::string>& tags) const;
 
 	void toggle_peaceful();
+	void toggle_fogless();
+	void toggle_custom_starting_positions();
+	bool should_write_replay() const;
 
-	uint32_t butw_;
-	uint32_t buth_;
+	void layout() override;
 
+	MapDetailsBox map_details_;
+	UI::Textarea configure_game_;
+	UI::Checkbox write_replay_;
+	UI::MultilineTextarea warn_desyncing_addon_;
 	UI::Dropdown<std::string> win_condition_dropdown_;
-	UI::Checkbox peaceful_;
+	UI::SpinBox win_condition_duration_;
+	UI::Checkbox peaceful_, fogless_, custom_starting_positions_;
+	UI::Button* choose_map_;
+	UI::Button* choose_savegame_;
 	std::string last_win_condition_;
-	UI::Button ok_, back_;
-	UI::Textarea title_;
-	GameSettingsProvider* settings_;
+
+	GameSettingsProvider& settings_;
 	GameController* ctrl_;
 
-	bool peaceful_mode_forbidden_;
+	bool peaceful_mode_forbidden_{false};
 
-	Widelands::PlayerNumber nr_players_;
+private:
+	void add_all_widgets();
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_GAME_H

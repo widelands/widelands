@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,7 +23,7 @@
 #include <string>
 #include <vector>
 
-#include "logic/widelands.h"
+#include "base/times.h"
 #include "sound/constants.h"
 
 namespace Widelands {
@@ -37,14 +36,12 @@ class MapObjectDescr;
 struct MapObjectProgram {
 	static constexpr const char* const kMainProgram = "main";
 
-	const std::string& name() const;
+	[[nodiscard]] const std::string& name() const;
 
 	explicit MapObjectProgram(const std::string& init_name);
 	virtual ~MapObjectProgram() = default;
 
 protected:
-	static constexpr unsigned kMaxProbability = 10000U;
-
 	/// Splits a string by separators.
 	/// \note This ignores empty elements, so do not use this for example to split
 	/// a string with newline characters into lines, because it would ignore empty
@@ -71,7 +68,7 @@ protected:
 	 */
 	static const std::pair<std::string, std::string>
 	read_key_value_pair(const std::string& input,
-	                    const char separator,
+	                    char separator,
 	                    const std::string& default_value = "",
 	                    const std::string& expected_key = "");
 
@@ -83,13 +80,6 @@ protected:
 	 * @return The duration in SDL ticks (milliseconds)
 	 */
 	static Duration read_duration(const std::string& input, const MapObjectDescr& descr);
-
-	/**
-	 * @brief Reads a percentage
-	 * @param input A percentage in the format 12%, 12.5% or 12.53%.
-	 * @return Scaled precentage as integer, where 100% corresponds to kMaxProbability.
-	 * */
-	static unsigned read_percent_to_int(const std::string& input);
 
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"
@@ -107,7 +97,7 @@ protected:
 		/// Animation ID
 		uint32_t animation = 0;
 		/// Animation duration before the next action will be called by the program.
-		Duration duration = 0;
+		Duration duration = Duration(0);
 	};
 	/// Parses the arguments for an animation action, e.g. { "working", "24000" }. If
 	/// 'is_idle_allowed' == false, throws a GameDataError if the animation is called "idle".

@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2019-10-30 09:26+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"PO-Revision-Date: 2016-03-24 07:33+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2020\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/scripting/editor/editor_controls.lua:11
-#: ../../data/scripting/editor/editor_help.lua:65
+#: ../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
 msgstr "Stüren"
 
@@ -33,11 +33,6 @@ msgid "Help"
 msgstr "Hülp"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:18
-msgctxt "hotkey"
-msgid "Esc"
-msgstr "Esc"
-
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
 msgstr "Höövdmenü wiesen of verbargen"
@@ -72,21 +67,11 @@ msgstr "Warktüüg för Informatioon"
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:32
-msgctxt "hotkey"
-msgid "Ctrl + L"
-msgstr "Strg + L"
-
-#: ../../data/scripting/editor/editor_controls.lua:32
 msgid "Load map"
 msgstr "Kaart laden"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:34
-msgctxt "hotkey"
-msgid "Ctrl + S"
-msgstr "Strg + S"
-
 #: ../../data/scripting/editor/editor_controls.lua:34
 msgid "Save map"
 msgstr "Kaart sekern"
@@ -97,11 +82,6 @@ msgstr "Warktüügkast"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:41
-msgctxt "hotkey"
-msgid "0-9"
-msgstr "0-9"
-
 #: ../../data/scripting/editor/editor_controls.lua:41
 msgid "Change tool size"
 msgstr "Warktüüg-Grött ännern"
@@ -143,49 +123,49 @@ msgstr "Klick an un drücke daar de Strg-Tast bi"
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr "Sett Kaart-Elementen up de »Fastmaken«-Weert fast"
 
-#: ../../data/scripting/editor/editor_help.lua:49
+#: ../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
 msgstr "Hülp tum Bewarker"
 
-#: ../../data/scripting/editor/editor_help.lua:54
+#: ../../data/scripting/editor/editor_help.lua:55
 msgid "General"
 msgstr "Allgemeen"
 
-#: ../../data/scripting/editor/editor_help.lua:59
-#: ../../data/scripting/editor/editor_introduction.lua:11
+#: ../../data/scripting/editor/editor_help.lua:60
+#: ../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
 msgstr "Inföhren"
 
-#: ../../data/scripting/editor/editor_help.lua:71
+#: ../../data/scripting/editor/editor_help.lua:72
 #: ../../data/scripting/editor/tips.lua:15
 msgid "Tips"
 msgstr "Tipps"
 
-#: ../../data/scripting/editor/editor_help.lua:81
+#: ../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
 msgstr "Landskuppen"
 
-#: ../../data/scripting/editor/editor_help.lua:88
+#: ../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
 msgstr "Bomen"
 
-#: ../../data/scripting/editor/editor_introduction.lua:9
+#: ../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
 msgstr "De Widelands-Bewarker"
 
-#: ../../data/scripting/editor/editor_introduction.lua:13
+#: ../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
 msgstr "De Bewarker is för Spelers berekent, de egene Kaarten för Widelands entwickeln willen."
 
-#: ../../data/scripting/editor/editor_introduction.lua:14
+#: ../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
 msgstr "Du süchst, dat deese Bewarker noch entwickelt word. As de Bewarker beter un beter word, word ok deeser Text langer un kumpleeter."
 
-#: ../../data/scripting/editor/editor_introduction.lua:17
+#: ../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
 msgstr "De Wiki hett eene lütte Inföhren, wo dat Kaarten-Maken gaht."
 
@@ -214,16 +194,25 @@ msgid "%1%x %2%"
 msgstr "%1% × %2%"
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:72
+#: ../../data/scripting/editor/terrain_help.lua:57
+#: ../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
 msgstr "Kans för Boom-Wassdoom"
 
-#: ../../data/scripting/editor/terrain_help.lua:77
+#: ../../data/scripting/editor/terrain_help.lua:63
+#: ../../data/scripting/editor/terrain_tooltip.lua:40
 msgid "No trees will grow here."
 msgstr "Hier wassen keene Bomen."
 
+#: ../../data/scripting/editor/terrain_tooltip.lua:25
+#: ../../data/scripting/editor/tree_tooltip.lua:25
+#, lua-format
+msgid "%2.1f%%"
+msgstr "%2.1f%%"
+
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
-#: ../../data/scripting/editor/tree_help.lua:19
+#: ../../data/scripting/editor/tree_help.lua:20
+#: ../../data/scripting/editor/tree_tooltip.lua:34
 msgid "Preferred terrains"
 msgstr "Vörtrucken Landskuppen"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2020 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,7 +21,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/pathfield.h"
@@ -34,7 +32,7 @@ struct MapAStarBase {
 	   : map(m), pathfields(m.pathfieldmgr_->allocate()), queue(type) {
 	}
 
-	bool empty() const {
+	[[nodiscard]] bool empty() const {
 		return queue.empty();
 	}
 	void pathto(Coords dest, Path& path) const;
@@ -43,7 +41,7 @@ protected:
 	Pathfield& pathfield(Coords where) {
 		return pathfields->fields[map.get_index(where, map.get_width())];
 	}
-	const Pathfield& pathfield(Coords where) const {
+	[[nodiscard]] const Pathfield& pathfield(Coords where) const {
 		return pathfields->fields[map.get_index(where, map.get_width())];
 	}
 
@@ -53,32 +51,33 @@ protected:
 };
 
 struct StepEvalAStar {
-	explicit StepEvalAStar(Coords target)
-	   : target_(target), estimator_bias_(0), conservative_(true), swim_(false) {
+	explicit StepEvalAStar(Coords target) : target_(target) {
 	}
 
 	int32_t estimate(Map& map, FCoords pos) const {
 		int32_t est = estimator_bias_;
-		if (conservative_)
+		if (conservative_) {
 			est += map.calc_cost_lowerbound(pos, target_);
-		else
+		} else {
 			est += map.calc_cost_estimate(pos, target_);
+		}
 		return est;
 	}
 
-	int32_t
-	stepcost(Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
-		if ((swim_ && !(to.field->nodecaps() & MOVECAPS_SWIM)) ||
-		    (!swim_ && !(to.field->nodecaps() & MOVECAPS_WALK)))
+	[[nodiscard]] int32_t stepcost(
+	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
+		if ((swim_ && ((to.field->nodecaps() & MOVECAPS_SWIM) == 0)) ||
+		    (!swim_ && ((to.field->nodecaps() & MOVECAPS_WALK) == 0))) {
 			return -1;
+		}
 
 		return map.calc_cost(from, dir);
 	}
 
 	Coords target_;
-	int32_t estimator_bias_;
-	bool conservative_;
-	bool swim_;
+	int32_t estimator_bias_{0};
+	bool conservative_{true};
+	bool swim_{false};
 };
 
 /**
@@ -150,8 +149,9 @@ template <typename StepEval> void MapAStar<StepEval>::push(Coords pos, int32_t c
  * @return true if a field was returned, or false if the search is over.
  */
 template <typename StepEval> bool MapAStar<StepEval>::step(FCoords& cur, int32_t& cost) {
-	if (queue.empty())
+	if (queue.empty()) {
 		return false;
+	}
 
 	Pathfield* curpf = queue.top();
 	queue.pop(curpf);
@@ -163,21 +163,23 @@ template <typename StepEval> bool MapAStar<StepEval>::step(FCoords& cur, int32_t
 	// avoid bias by using different orders when pathfinding
 	static const int8_t order1[] = {WALK_NW, WALK_NE, WALK_E, WALK_SE, WALK_SW, WALK_W};
 	static const int8_t order2[] = {WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E, WALK_NE};
-	int8_t const* direction = ((cur.x + cur.y) & 1) ? order1 : order2;
+	int8_t const* direction = ((cur.x + cur.y) & 1) != 0 ? order1 : order2;
 
 	// Check all the 6 neighbours
-	for (uint32_t i = 6; i; i--, direction++) {
+	for (uint32_t i = 6; i != 0u; i--, direction++) {
 		FCoords neighb(map.get_neighbour(cur, *direction));
 		Pathfield& neighbpf = pathfield(neighb);
 
 		// Field is closed already
-		if (neighbpf.cycle == pathfields->cycle && !neighbpf.heap_cookie.is_active())
+		if (neighbpf.cycle == pathfields->cycle && !neighbpf.heap_cookie.is_active()) {
 			continue;
+		}
 
 		int32_t stepcost = eval.stepcost(map, cur, cost, WalkingDir(*direction), neighb);
 
-		if (stepcost < 0)
+		if (stepcost < 0) {
 			continue;
+		}
 
 		int32_t newcost = cost + stepcost;
 

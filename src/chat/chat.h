@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,18 +20,21 @@
 #define WL_CHAT_CHAT_H
 
 #include <ctime>
+#include <functional>
 #include <string>
 
 #include "logic/widelands.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
+class ParticipantList;
+struct RGBColor;
+
 // A chat message as received in game.
 struct ChatMessage {
 	CAN_BE_SENT_AS_NOTE(NoteId::ChatMessage)
 
-	explicit ChatMessage(const std::string& message) : msg(message) {
-	}
+	explicit ChatMessage(const std::string& message);
 
 	// The (real-)time at which the message was received.
 	time_t time = std::time(nullptr);
@@ -62,7 +64,7 @@ struct ChatMessage {
 // Base classes must broadcast a ChatMessage as notification when a
 // new message is received.
 struct ChatProvider {
-	virtual ~ChatProvider();
+	virtual ~ChatProvider() = default;
 
 	// Send the given chat message. The message may or may not
 	// appear in subsequent calls to \ref get_messages.
@@ -72,7 +74,7 @@ struct ChatProvider {
 	// This list need not be stable or monotonic. In other words,
 	// subsequent calls to this functions may return a smaller or
 	// greater number of chat messages.
-	virtual const std::vector<ChatMessage>& get_messages() const = 0;
+	[[nodiscard]] virtual const std::vector<ChatMessage>& get_messages() const = 0;
 
 	// reimplemented e.g. in internet_gaming to silence the chat if in game.
 	// TODO(sirver): this does not belong here. The receiver of the
@@ -82,9 +84,21 @@ struct ChatProvider {
 	}
 
 	// The specific chat provider subclass might not have been set, e.g. due to an exception.
-	virtual bool has_been_set() const {
+	[[nodiscard]] virtual bool has_been_set() const {
 		return false;
 	}
+
+	// Access to user list to chat with. Might be nullptr
+	ParticipantList* participants_ = nullptr;
+
+	// The last recipient a message has been send to
+	std::string last_recipient_;
 };
+
+/**
+ * A function that looks up the player colour belonging to a given 1-based player number.
+ * May return \c nullptr to use a default server colour.
+ */
+using ChatColorForPlayer = std::function<const RGBColor*(int)>;
 
 #endif  // end of include guard:

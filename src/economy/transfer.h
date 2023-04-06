@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -50,13 +49,13 @@ struct Transfer {
 	Transfer(Game&, Worker&);
 	~Transfer();
 
-	Request* get_request() const {
+	[[nodiscard]] Request* get_request() const {
 		return request_;
 	}
 	void set_request(Request* req);
 	void set_destination(PlayerImmovable& imm);
 	PlayerImmovable* get_destination(Game& g);
-	uint32_t get_steps_left() const {
+	[[nodiscard]] uint32_t get_steps_left() const {
 		return route_.get_nrsteps();
 	}
 
@@ -65,11 +64,17 @@ struct Transfer {
 	void has_finished();
 	void has_failed();
 
-	struct ReadData {
-		uint32_t destination;
+	[[nodiscard]] WareInstance* get_ware() const {
+		return ware_;
+	}
+	[[nodiscard]] Worker* get_worker() const {
+		return worker_;
+	}
 
-		ReadData() : destination(0) {
-		}
+	struct ReadData {
+		uint32_t destination{0U};
+
+		ReadData() = default;
 	};
 
 	void read(FileRead& fr, ReadData& rd);

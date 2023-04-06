@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,13 +12,16 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/gl/fields_to_draw.h"
 
+#include <cstddef>
+#include <cstdlib>
+
+#include "base/log.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -109,11 +112,12 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 	assert(h_ > 0);
 
 	// Ensure that there is enough memory for the resize operation
-	size_t dimension = w_ * h_;
+	size_t dimension = static_cast<size_t>(w_) * h_;
 	const size_t max_dimension = fields_.max_size();
 	if (dimension > max_dimension) {
-		log("WARNING: Not enough memory allocated to redraw the whole map!\nWe recommend that you "
-		    "restart Widelands\n");
+		log_warn_time(egbase.get_gametime(),
+		              "Not enough memory allocated to redraw the whole map!\nWe recommend that you "
+		              "restart Widelands\n");
 		dimension = max_dimension;
 	}
 	// Now resize the vector
@@ -126,6 +130,7 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 			FieldsToDraw::Field& f = fields_[calculate_index(fx, fy)];
 
 			f.geometric_coords = Widelands::Coords(fx, fy);
+			f.obscured_by_slope = false;
 
 			f.ln_index = calculate_index(fx - 1, fy);
 			f.rn_index = calculate_index(fx + 1, fy);
@@ -160,10 +165,39 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 			const Widelands::PlayerNumber owned_by = f.fcoords.field->get_owned_by();
 			f.owner = owned_by != 0 ? egbase.get_player(owned_by) : nullptr;
 			f.is_border = f.fcoords.field->is_border();
-			f.seeing = Widelands::SeeUnseeNode::kVisible;
+			f.seeing = Widelands::VisibleState::kVisible;
 			f.road_e = f.fcoords.field->get_road(Widelands::WALK_E);
 			f.road_se = f.fcoords.field->get_road(Widelands::WALK_SE);
 			f.road_sw = f.fcoords.field->get_road(Widelands::WALK_SW);
+		}
+	}
+
+	// Check which slopes may obscure fields behind them
+	for (int32_t fy = min_fy_; fy <= max_fy_; ++fy) {
+		for (int32_t fx = min_fx_; fx <= max_fx_; ++fx) {
+			FieldsToDraw::Field& f = fields_[calculate_index(fx, fy)];
+			FieldsToDraw::Field* f0 = &f;
+			for (;;) {
+				if (!f0->all_neighbors_valid()) {
+					break;
+				}
+
+				FieldsToDraw::Field* f2 = &fields_[f0->trn_index];
+				FieldsToDraw::Field* f1 = &fields_[f2->ln_index];
+				f1->obscured_by_slope |= f.surface_pixel.y < f1->surface_pixel.y;
+				f2->obscured_by_slope |= f.surface_pixel.y < f2->surface_pixel.y;
+
+				if (!f1->all_neighbors_valid() || !f2->all_neighbors_valid()) {
+					break;
+				}
+
+				f0 = &fields_[f1->trn_index];
+				if (f.surface_pixel.y < f0->surface_pixel.y) {
+					f0->obscured_by_slope = true;
+				} else {
+					break;
+				}
+			}
 		}
 	}
 }

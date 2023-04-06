@@ -1,18 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016,2018
+# heidi.wenger, 2022
 # Jukka Pakarinen, 2016-2020
-# Markus Hällfors <markus@hallfors.com>, 2015
+# Markus <markus@hallfors.com>, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-05-21 10:09+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"PO-Revision-Date: 2015-02-03 14:49+0000\n"
+"Last-Translator: heidi.wenger, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,8 +110,9 @@ msgid "Afterwards, choose ‘Buildings’."
 msgstr "Sen jälkeen valitse ‘Rakennukset’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
-msgid "You can also use the hotkey ‘b’."
-msgstr "Voit myös käyttää pikanäppäintä ‘b’."
+#, lua-format
+msgid "You can also use the hotkey ‘%s’."
+msgstr "Voit myös käyttää pikanäppäintä ‘%s’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
@@ -254,10 +256,9 @@ msgid "Afterwards, choose ‘Stock’."
 msgstr "Sen jälkeen valitse ‘Varasto’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
-msgid ""
-"You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
-"quickly."
-msgstr "Voit myös käyttää pikanäppäintä ‘i’ (kuten ‘inventory’) päästäksesi ruutuun nopeasti."
+#, lua-format
+msgid "You can also use the hotkey ‘%s’ to access this window quickly."
+msgstr "Voit myös käyttää pikanäppäintä ‘%s’ asioidaksesi tässä ikkunassa nopeasti."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
@@ -419,8 +420,9 @@ msgid "Open it. You can access it via the button at the bottom of the screen."
 msgstr "Avaa se. Pääset siihen käsiksi ikkunan alareunan kuvakkeesta."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
-msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr "Vaihtoehtoisesti pääset siihen suoraan käsiksi ‘F1’ näppäimellä."
+#, lua-format
+msgid "Alternatively, you can access it directly with the ‘%s’ key."
+msgstr "Voit vaihtoehtoisesti asioida siinä suoraan käyttämällä ‘%s’ näppäintä."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -570,16 +572,16 @@ msgstr "Loistavaa. Meidän krouvimme ovat nyt rakennettu ja toimittavat meille r
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
-"tab, behind every ware, you can see ‘traffic lights’."
-msgstr "Tällä hetkellä kaikille kaivoksille toimitetaan ruoka-annoksia. Jos haluat priorisoida erityiskaivoksia, sinun täytyy yksinkertaisesti avata sen ruutu. Tuotteet välilehdellä, jokaisen tuotteen takana, voit nähdä ‘liikenne valot’."
+"tab, behind every ware, you can see a slider."
+msgstr "Tällä hetkellä, kaikki kaivokset saavat avuja säännöstellysti. Mikäli haluat ensisijaistaa erityisen tärkeän kaivoksen, avaa yksinkertaisesti vain sen ikkuna. Tarvikevälilehdessä, jokaisen tarvikkeen takana, näet liukurin. "
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
-"When you click on the red dot (low priority), the corresponding ware gets "
-"delivered less frequently. Green means that as many wares as possible should"
-" be delivered to this building, maybe because it produces something "
-"important."
-msgstr "Kun painat punaista pistettä (matala prioriteetti), vastaavaa tavaraa toimitetaan harvemmin. Vihreä tarkoittaa, että niin monta tuotetta kuin mahdollista pitäisi toimittaa kyseiseen rakennukseen, ehkä siksi, koska se tuottaa jotain tärkeää."
+"When you move the slider to the blue area on the left side (low priority), "
+"the corresponding ware gets delivered less frequently. Red (right side) "
+"means that as many wares as possible should be delivered to this building, "
+"maybe because it produces something important."
+msgstr "Kun siirrät liukuria siniselle alueelle vasemmalla puolella (vähäinen panostus), vastaava tarvike toimitetaan vähemmän usein. Punainen (oikea puoli) tarkoittaa, että niin monta tarviketta kuin aina vain mahdollista toimitetaan tähän rakennukseen, vaikkapa siksi, että se tuottaa jotakin tärkeätä."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""
@@ -760,7 +762,9 @@ msgstr "Ruutuun voi mennä klikkaamalla mitä tahansa omaa lippua."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:480
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
 msgid "Economy options"
 msgstr "Talousvalinnat"
 
@@ -816,36 +820,72 @@ msgid ""
 "available and both farms would have been able to start working right away."
 msgstr "Jos rakennat kaksi maatilaa, vain toinen niistä käy toimimaan välittöästi. Toisen pitää odottaa sen työntekijää, jolla ei ole viikatetta. Jos olet asettanut ennen sitä kohdemääräksi 2, viikatteita olisi saatavilla kaksi ja molemmat maatila pystyisi aloittamaan työt heti."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+msgid ""
+"Stockpiling wares is a double-edged sword. On the one hand, wares in stock "
+"are useful to buffer temporary fluctuations in your economy, which tend to "
+"occur all the time. On the other hand, any ware that is sitting around in a "
+"warehouse instead of being processed into something else is wasted. Finding "
+"the balance between wasteful stockpiling and just-in-time production in your"
+" supply chains is one of most profound challenges of perfecting your "
+"economy. When in doubt, lean towards having some extra reserves."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+msgid ""
+"To ease the process of switching between different economic situations, you "
+"can save and apply economy profiles at the bottom of the economy options "
+"window. A profile for stockpiling and one for efficiency are preset there."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+msgid ""
+"Most of the time, the economy options are a useful tool to ensure that "
+"resources are not wasted to produce wares your economy does not actually "
+"need. However, sometimes it can be useful to stockpile a ware in very large "
+"quantities. To achieve this, the economy options window allows you to set "
+"the target of a ware to infinite, so that it will always be produced."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
+msgid ""
+"The same button can also be found in the building window of production "
+"sites. There, it causes only this one site to produce indefinitely, "
+"regardless of the economy settings. This can be useful to arrange, for "
+"example, that more building materials are produced near the border even if "
+"there are plenty in stock far away in your homeland."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 msgid "Produce 20 marble columns"
 msgstr "Tuota 20 marmoripylvästä"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:516
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
 msgstr "Ollakseen varautunut ylimääräisiin linnoituksiin, sinun pitäisi tuottaa 20 marmoripylvästä."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
 msgstr "Kivenhakkaajasi ei tuota marmoripylväitä, jos niille ei ole tarvetta. Sinun täytyy kasvattaa niiden kohdemäärää."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
 msgstr "Tehdäksesi niin, klikkaa mitä tahansa lippua ja valitse ‘Muuta talouden asetuksia’. Tässä ruudussa voit valita kuinka monta kunkin tyyppistä tuotetta toivot sinulla olevan varastossa."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
 msgstr "Joskus saatat tarvita useita tuotteita saman aikaisesti ja nopeasti – nopeammin kuin niitä voidaan tuottaa. Sellaisessa tapauksessa, niitä on hyvä olla riittävästi varmuusvarastossa."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:527
 msgid ""
 "By changing the target quantity, you can therefore decide which wares/tools "
 "your resources (in this case: iron) should be turned into or whether you "
@@ -853,86 +893,86 @@ msgid ""
 "for."
 msgstr "Vaihtamalla kohdemäärää, voit siksi päättää mitä tuotteita/työkaluja sinun resurssit (tässä tapauksessa: rauta) pitäisi päyttää tai haluaisitko kenties säästää raudan ja odottaa kunnes tiedät mitä varten tarvitset sitä."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:528
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
 msgstr "Ainoat rakennukset, jotka kuluttavat tuotteita, noudattaa tätä asetusta. Rakennukset, jotka tuottavat tavaroita ilmaiseksi (esim. maatilasi tai kaivosi) tekevät töitä aina."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
 msgstr "Kokeillaampa nyt sitä: tämän hetkinen kohdemäärä marmopylväille on 10. Kasvata sitä valmistautuaksesi tilanteeseen, jossa sinun pitää rakentaa linnoitus nopeasti."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
 msgid "Bring 20 marble columns to the front line"
 msgstr "Tuo 20 marmoripylvästä etulinjaan"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:522
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:540
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
 msgstr "Tuo kaikki 20 marmoripylvästä varastoon lähelle etulinjaa."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
 msgstr "Saadaksesi sen aikaan, sinun täytyy tehdä kaksi asiaa. Ensiksi, aseta marmoripylväille varasto, jota suosit. Tulevaisuudessa kaikki tuotetut marmoripylväät tuodaan jatkossa sinne, jos mahdollista."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
 msgstr "Sitten sinun täytyy klikata poista painiketta, siirtääksesi marmoripylväät pois päämajoistasi."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:550
 msgid "Warehouse Preferences"
 msgstr "Varaston Suosiminen"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:534
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Bring the marble columns to the front line"
 msgstr "Tuo marmoripylväät etulinjaan"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:536
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
 msgstr "Marmoripylväiden tuotanto sujuu nyt hyvin, mutta olisi mainiota, jos ne olisi varastoitu sinne missä me niitä tarvitsemme."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:555
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
 msgstr "Normaalisti, tuotetut tuotteet tuodaan lähimpään varastoon, jos niitä ei tarvita muualla. Tässä tapauksessa se tarkoittaa meidän päämajojamme. Mutta haluaisimme ne varastoon lähelle linnoituksia."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:538
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
 msgstr "Jokaisessa varastossa on neljä painiketta suosimisen asettamiseen. Jos siirrät hiiren kohdistimen niiden päälle, näet työkaluvinkit, jotka selittävät mitä painike tekee."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:562
 msgid "Borders Secured"
 msgstr "Rajat Turvattu"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:546
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
 msgid "We’re safe now"
 msgstr "Olemme nyt turvassa"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:548
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
 msgstr "Mahtavaa- Meillä on nyt riittävästi marmoripylväitä, jotta hyökkääjän lähestyessä voimme rakentaa linnoituksemme. Mutta en usko, että se on tarpeen. Tähän mennessä vihollinen ei ole näyttäytynyt."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:549
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
 "I hope I could teach you how you can control the economy in Widelands. There"
 " are many options and they can be confusing at first. Even if you’ve only "
@@ -941,7 +981,7 @@ msgid ""
 "this tutorial and learn the rest!"
 msgstr "Toivonm että sain opetettua sinulle kuinka kontrolloida Widelandsin taloutta. Valintoja on paljon ja ne voivat olla aluksi hämmentäviä. Jos ymmärrät edes muutaman asian, sinun ei kannata luovuttaa. Kokeile niitä peleissä, perehdy niihin ja tutki eri mahdollisuuksia. Palaa sitten takaisin tähän opetuspeliin ja opettele sitten loput."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:551
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"
@@ -949,8 +989,3 @@ msgid ""
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
 msgstr "Tämä oli viimeinen opetuspeli, jonka olin valmistellut sinulle. Olen nyt opettanut sinulle kaikein minkä tiedän. Niiden lisäksi pelissä on silti piilotettuja salaisuuksia, joista minä en tidä mitään. Nyt aion etsiä itselleni hiljaisen paikan loppuelämäksi. Jos sinulla on vielä kysymyksiä, Widelands yhteisö varmastikin auttaa sinua. Löydät sen osoitteesta:"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

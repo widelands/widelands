@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -139,8 +138,7 @@ ScopedScissor::~ScopedScissor() {
 }  // namespace
 
 RenderQueue::RenderQueue()
-   : next_z_(1),
-     terrain_program_(new TerrainProgram()),
+   : terrain_program_(new TerrainProgram()),
      dither_program_(new DitherProgram()),
      workarea_program_(new WorkareaProgram()),
      grid_program_(new GridProgram()),
@@ -188,6 +186,11 @@ void RenderQueue::enqueue(const Item& given_item) {
 		item->key = make_key_blended(static_cast<uint64_t>(item->program_id), next_z_, extra_value);
 	}
 	++next_z_;
+}
+
+void RenderQueue::clear() {
+	opaque_items_.clear();
+	blended_items_.clear();
 }
 
 void RenderQueue::draw(const int screen_width, const int screen_height) {

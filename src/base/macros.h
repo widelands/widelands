@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,13 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_BASE_MACROS_H
 #define WL_BASE_MACROS_H
+
+#include <cinttypes>
 
 // Make sure that Visual C++ does not bark at __attribute__.
 #ifdef _MSC_VER
@@ -92,17 +93,29 @@
 #define FORMAT_WARNINGS_ON GCC_DIAG_ON("-Wformat")
 #endif
 
+// Couldn't we use `check_cxx_compiler_flag` in the cmake file instead?
+// https://cmake.org/cmake/help/latest/module/CheckCXXCompilerFlag.html
+
+// Older clang versions don't have "-Wreserved-identifier" either
+#define CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+#define CLANG_DIAG_RESERVED_IDENTIFIER_ON
+#ifdef __clang__
+#if __has_warning("-Wreserved-identifier")
+#undef CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+#undef CLANG_DIAG_RESERVED_IDENTIFIER_ON
+#define CLANG_DIAG_RESERVED_IDENTIFIER_OFF CLANG_DIAG_OFF("-Wreserved-identifier")
+#define CLANG_DIAG_RESERVED_IDENTIFIER_ON CLANG_DIAG_ON("-Wreserved-identifier")
+#endif
+#endif
+
 // disallow copying or assigning a class
 #define DISALLOW_COPY_AND_ASSIGN(TypeName)                                                         \
 	TypeName(const TypeName&) = delete;                                                             \
 	void operator=(const TypeName&) = delete
 
 // Wrapper macro around a dynamic_cast.
+// Keep in mind that dynamic_casts are performance-hungry, so use this sparingly please.
 #define upcast(type, identifier, source) type* const identifier = dynamic_cast<type*>(source)
-
-// Useful when you want to know if [typeid(source) == typeof(type)*], without
-// the side-effect upcast has of creating a new identifier which won't be used.
-#define is_a(type, source) (dynamic_cast<const type*>(source) != nullptr)
 
 // consistency check for printf arguments
 #ifdef __GNUC__
@@ -122,7 +135,11 @@
 #define PRIuS PRIu32
 #endif
 #else
+#if SIZE_MAX == UINT64_MAX
 #define PRIuS "lu"
+#else
+#define PRIuS "u"
+#endif
 #endif
 
 #endif  // end of include guard: WL_BASE_MACROS_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,13 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_BASE_MATH_H
 #define WL_BASE_MATH_H
+
+#include <string>
 
 namespace math {
 
@@ -42,6 +43,19 @@ template <typename T> T clamp(const T& val, const T& low, const T& high) {
 template <typename T> T sqr(const T& a) {
 	return a * a;
 }
+
+static constexpr unsigned k100PercentAsInt = 10000U;
+
+/**
+ * @brief Reads a percentage
+ * @param input A percentage in the format 12%, 12.5% or 12.53%.
+ * @return Scaled percentage as integer, where 100% corresponds to k100PercentAsInt.
+ * */
+unsigned read_percent_to_int(const std::string& input);
+
+// Wrappers around stoi/stoll with more verbose exceptions
+int to_int(const std::string&);
+int64_t to_long(const std::string&);
 
 }  // namespace math
 

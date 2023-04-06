@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -51,7 +50,7 @@ const std::string& ResourceDescription::editor_image(uint32_t const amount) cons
 	uint32_t bestmatch = 0;
 	int32_t min_diff = editor_pictures_[bestmatch].upper_limit - static_cast<int32_t>(amount);
 
-	assert(editor_pictures_.size());
+	assert(!editor_pictures_.empty());
 
 	for (uint32_t i = 1; i < editor_pictures_.size(); ++i) {
 		const int32_t diff = editor_pictures_[i].upper_limit - static_cast<int32_t>(amount);

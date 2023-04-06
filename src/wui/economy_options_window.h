@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -35,6 +34,11 @@
 
 const std::string kDefaultEconomyProfile = "Default";
 
+class InteractiveBase;
+namespace Widelands {
+class MapObjectLoader;
+}  // namespace Widelands
+
 // Used to indicate that a profile has been saved or deleted, so all open windows can update it
 struct NoteEconomyProfile {
 	NoteEconomyProfile(Widelands::Serial ware, Widelands::Serial worker)
@@ -45,10 +49,13 @@ struct NoteEconomyProfile {
 	CAN_BE_SENT_AS_NOTE(NoteId::EconomyProfile)
 };
 
-struct EconomyOptionsWindow : public UI::Window {
+class EconomyOptionsWindow : public UI::Window {
+public:
 	EconomyOptionsWindow(UI::Panel* parent,
+	                     Widelands::Descriptions* descriptions,
 	                     Widelands::Economy* ware_economy,
 	                     Widelands::Economy* worker_economy,
+	                     Widelands::WareWorker type,
 	                     bool can_act);
 	~EconomyOptionsWindow() override;
 
@@ -58,6 +65,14 @@ struct EconomyOptionsWindow : public UI::Window {
 		Targets workers;
 		bool undeletable = false;
 	};
+
+	// Create an economy options window for the given flag
+	static EconomyOptionsWindow& create(UI::Panel* parent,
+	                                    Widelands::Descriptions* descriptions,
+	                                    const Widelands::Flag& flag,
+	                                    Widelands::WareWorker type,
+	                                    bool can_act);
+	void activate_tab(Widelands::WareWorker type);
 
 	void create_target();
 	void do_create_target(const std::string&);
@@ -79,11 +94,17 @@ struct EconomyOptionsWindow : public UI::Window {
 
 	void close_save_profile_window();
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kConfigureEconomy;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window* load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader&);
+
 private:
 	struct TargetWaresDisplay : public AbstractWaresDisplay {
-		TargetWaresDisplay(UI::Panel* const parent,
-		                   int32_t const x,
-		                   int32_t const y,
+		TargetWaresDisplay(UI::Panel* parent,
+		                   int32_t x,
+		                   int32_t y,
 		                   Widelands::Serial serial,
 		                   Widelands::Player* player,
 		                   Widelands::WareWorker type,
@@ -92,7 +113,7 @@ private:
 		void set_economy(Widelands::Serial serial);
 
 	protected:
-		std::string info_for_ware(Widelands::DescriptionIndex const ware) override;
+		std::string info_for_ware(Widelands::DescriptionIndex ware) override;
 
 	private:
 		Widelands::Serial serial_;
@@ -112,7 +133,7 @@ private:
 		                    int32_t min_w);
 
 		void set_economy(Widelands::Serial serial);
-		void change_target(int amount);
+		void change_target(int delta);
 		void toggle_infinite();
 		void reset_target();
 		void update_desired_size() override;
@@ -150,7 +171,7 @@ private:
 	std::string applicable_target();
 	std::set<std::string> last_added_to_dropdown_;
 	void think() override;
-	uint32_t time_last_thought_;
+	Time time_last_thought_{0U};
 
 	struct SaveProfileWindow : public UI::Window {
 		SaveProfileWindow(UI::Panel* parent, EconomyOptionsWindow* eco);
@@ -159,7 +180,7 @@ private:
 		void update_save_enabled();
 		void table_selection_changed();
 		void update_table();
-		void save();
+		void save_profile();
 		void delete_selected();
 
 		void unset_parent();
@@ -182,7 +203,10 @@ private:
 	void update_profiles_needed(const std::string&);
 	void update_profiles_select(const std::string&);
 
-	SaveProfileWindow* save_profile_dialog_;
+	SaveProfileWindow* save_profile_dialog_{nullptr};
+	// Mutable to allow dynamic loading of the correct ware/worker indices in case an old savegame
+	// has been loaded
+	Widelands::Descriptions* descriptions_;
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H

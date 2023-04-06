@@ -2,8 +2,6 @@
 -- Mission thread
 -- ================
 
-local objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
-
 local function wait_for_quarry_road_connection(field, cs, objective)
    -- Wait till the construction site is connected to the headquarters
    sleep(10 * wl.Game().desired_speed)
@@ -39,23 +37,24 @@ end
 
 function starting_infos()
    -- So that the player cannot build anything here
-   map:place_immovable("debris00", second_quarry_field, "world")
+   map:place_immovable("debris00", second_quarry_field)
    reveal_concentric(plr, sf, 13, true, 80)
    sleep(1000)
 
    -- Welcome and teach objectives
-   local o = campaign_message_with_objective(initial_message_01, obj_initial_close_story_window)
-   set_objective_done(o, 100)
+   campaign_message_box(initial_message_01, 200)
+   objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
 
    wl.ui.MapView().buttons.objectives:click()
    while not wl.ui.MapView().windows.objectives do sleep(100) end
    while wl.ui.MapView().windows.objectives do sleep(100) end
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- plr:mark_training_wheel_as_solved("objectives")
    sleep(500)
 
    -- Teach building spaces
    campaign_message_box(initial_message_02, 200)
-   select_item_from_dropdown("dropdown_menu_showhide", 1)
-   select_item_from_dropdown("dropdown_menu_showhide", 1)
+   show_item_from_dropdown("dropdown_menu_showhide", 1)
    local o = campaign_message_with_objective(initial_message_03, obj_initial_toggle_building_spaces)
 
    -- Wait for buildhelp to come on
@@ -64,6 +63,8 @@ function starting_infos()
    end
    set_objective_done(o, 500)
    wl.ui.MapView():abort_road_building()
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- plr:mark_training_wheel_as_solved("building_spaces")
 
    build_lumberjack()
 end
@@ -112,7 +113,7 @@ function build_lumberjack()
 
    blocker:lift_blocks()
 
-   sleep(30000)
+   sleep(20000)
 
    if not (f.immovable and f.immovable.descr.type_name == "flag") then
       -- only show this if the user has not already built a flag
@@ -135,6 +136,9 @@ function build_lumberjack()
       campaign_message_box(lumberjack_message_06, 3 * 1000)
    end
 
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- plr:mark_training_wheel_as_solved("flags")
+
    local o = campaign_message_with_objective(lumberjack_message_07a, obj_lumberjack_progress)
    scroll_to_field(first_lumberjack_field)
    mouse_to_field(first_lumberjack_field)
@@ -152,7 +156,7 @@ function build_lumberjack()
    sleep(3000)
 
    campaign_message_box(lumberjack_message_08)
-   wl.ui.MapView().dropdowns["dropdown_menu_gamespeed"]:open()
+   show_item_from_dropdown("dropdown_menu_gamespeed", 1)
 
    sleep(20*1000) -- let the player experiment a bit with the window
 
@@ -165,7 +169,7 @@ end
 
 function learn_to_move()
    -- Teaching the user how to scroll on the map
-   local o = campaign_message_with_objective(tell_about_keyboard_move, obj_moving_keyboard)
+   local o = campaign_message_with_objective(tell_about_move, obj_moving)
 
    function _wait_for_move()
       local center_map_pixel = wl.ui.MapView().center_map_pixel
@@ -178,15 +182,12 @@ function learn_to_move()
    _wait_for_move()
    set_objective_done(o)
 
-   o = campaign_message_with_objective(tell_about_right_drag_move, obj_moving_right_drag)
-
-   _wait_for_move()
-   set_objective_done(o)
 
    -- Teach the minimap
    campaign_message_box(tell_about_minimap_1)
 
    -- Open the minimap
+   show_item_from_dropdown("dropdown_menu_mapview", 1)
    select_item_from_dropdown("dropdown_menu_mapview", 1)
    o = campaign_message_with_objective(tell_about_minimap_2, obj_moving_minimap)
 
@@ -285,6 +286,9 @@ function build_a_quarry()
    wait_for_quarry_road_connection(first_quarry_field, cs, o)
 
    second_quarry()
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- plr:mark_training_wheel_as_solved("logs")
+   -- plr:mark_training_wheel_as_solved("rocks")
 
    -- Interludium: talk about census and statistics
    census_and_statistics()
@@ -320,7 +324,7 @@ function second_quarry()
 end
 
 function census_and_statistics()
-   sleep(15000)
+   sleep(10000)
 
    local blocker = UserInputDisabler:new()
    close_windows()
@@ -332,6 +336,7 @@ function census_and_statistics()
 
    campaign_message_box(census_and_statistics_00)
 
+   show_item_from_dropdown("dropdown_menu_showhide", 2)
    select_item_from_dropdown("dropdown_menu_showhide", 2)
    sleep(200)
 
@@ -354,7 +359,7 @@ function messages()
    local old_gamespeed = wl.Game().desired_speed
    wl.Game().desired_speed = 1000
 
-   send_message(plr, teaching_about_messages.title, teaching_about_messages.body, teaching_about_messages, {heading = teaching_about_messages.heading})
+   send_to_inbox(plr, teaching_about_messages.title, teaching_about_messages.body, teaching_about_messages, {heading = teaching_about_messages.heading})
    local o = add_campaign_objective(obj_archive_all_messages)
 
    while #plr.inbox > 0 do sleep(200) end

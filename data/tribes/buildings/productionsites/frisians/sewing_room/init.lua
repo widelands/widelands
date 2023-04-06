@@ -1,14 +1,28 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_productionsite_type {
    name = "frisians_sewing_room",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Sewing Room"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_tailors_shop",
+
+   enhancement = {
+      name = "frisians_tailors_shop",
+      enhancement_cost = {
+         brick = 1,
+         granite = 2,
+         log = 2,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         granite = 1,
+         log = 1
+      }
+   },
 
    buildcost = {
       brick = 3,
@@ -23,8 +37,6 @@ tribes:new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {50, 82},
          frames = 10,
          columns = 5,
@@ -32,8 +44,6 @@ tribes:new_productionsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {50, 82},
          frames = 10,
          columns = 5,
@@ -43,8 +53,6 @@ tribes:new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {50, 64}
       }
    },
@@ -64,7 +72,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
-         descname = _"sewing fur garment",
+         descname = _("sewing fur garment"),
          actions = {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs fur_garment or workers need experience",
@@ -76,3 +84,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

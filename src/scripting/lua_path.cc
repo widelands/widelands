@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,18 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "scripting/lua_path.h"
 
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
-
 #include "base/macros.h"
+#include "base/string.h"
 #include "io/filesystem/layered_filesystem.h"
 
 namespace {
@@ -42,7 +38,7 @@ private:
 	std::string template_;
 	std::string format_;
 	std::string to_replace_;
-	uint32_t current_;
+	uint32_t current_{0U};
 	uint32_t max_;
 
 	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
@@ -51,9 +47,9 @@ private:
 /**
  * Implementation for NumberGlob.
  */
-NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
+NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template) {
 	int nchars = count(file_template.begin(), file_template.end(), '?');
-	format_ = "%0" + boost::lexical_cast<std::string>(nchars) + "i";
+	format_ = "%0" + as_string(nchars) + "i";
 
 	max_ = 1;
 	for (int i = 0; i < nchars; ++i) {
@@ -68,11 +64,9 @@ bool NumberGlob::next(std::string* s) {
 		return false;
 	}
 
-	if (max_) {
-		*s = boost::replace_last_copy(
-		   template_, to_replace_, (boost::format(format_) % current_).str());
-	} else {
-		*s = template_;
+	*s = template_;
+	if (max_ != 0u) {
+		replace_last(*s, to_replace_, format(format_, current_));
 	}
 	++current_;
 	return true;
@@ -197,14 +191,32 @@ static int L_list_directory(lua_State* L) {
    :returns: ``true`` if the given path is a directory.
 */
 static int L_is_directory(lua_State* L) {
-	lua_pushboolean(L, g_fs->is_directory(luaL_checkstring(L, -1)));
+	lua_pushboolean(L, static_cast<int>(g_fs->is_directory(luaL_checkstring(L, -1))));
 	return 1;
 }
 
-const static struct luaL_Reg path[] = {
-   {"basename", &L_basename},         {"dirname", &L_dirname},
-   {"list_files", &L_list_files},     {"list_directory", &L_list_directory},
-   {"is_directory", &L_is_directory}, {nullptr, nullptr}};
+/* RST
+.. function:: file_exists(filename)
+
+   Checks whether the given filename points to a file or directory.
+
+   :type filename: class:`string`
+   :arg filename: The filename to check.
+
+   :returns: ``true`` if the given path is a file or directory.
+*/
+static int L_file_exists(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(g_fs->file_exists(luaL_checkstring(L, -1))));
+	return 1;
+}
+
+const static struct luaL_Reg path[] = {{"basename", &L_basename},
+                                       {"dirname", &L_dirname},
+                                       {"list_files", &L_list_files},
+                                       {"list_directory", &L_list_directory},
+                                       {"is_directory", &L_is_directory},
+                                       {"file_exists", &L_file_exists},
+                                       {nullptr, nullptr}};
 
 void luaopen_path(lua_State* L) {
 	luaL_newlib(L, path);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,27 +12,25 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_WUI_MAPAUTHORDATA_H
 #define WL_WUI_MAPAUTHORDATA_H
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
+#include "base/string.h"
 #include "logic/map.h"
 
 /**
  * Author data for a map or scenario.
  */
 struct MapAuthorData {
-	const std::string& get_names() const {
+	[[nodiscard]] const std::string& get_names() const {
 		return names_;
 	}
-	size_t get_number() const {
+	[[nodiscard]] size_t get_number() const {
 		return number_;
 	}
 
@@ -41,7 +39,7 @@ struct MapAuthorData {
 		{
 			i18n::Textdomain td("maps");
 			const std::string loc_author_list = _(author_list);
-			boost::split(authors, loc_author_list, boost::is_any_of(","));
+			split(authors, loc_author_list, {','});
 		}
 		names_ = i18n::localize_list(authors, i18n::ConcatenateWith::AMPERSAND);
 		number_ = authors.size();

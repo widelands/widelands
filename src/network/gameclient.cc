@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -45,15 +44,21 @@
 #include "network/netclientproxy.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_protocol.h"
+#include "network/participantlist.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
+#include "ui_fsmenu/main.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
+
+struct AddOnsMismatchException : WLWarning {
+	explicit AddOnsMismatchException(const std::string& msg) : WLWarning("", "%s", msg.c_str()) {
+	}
+};
 
 struct GameClientImpl {
 	bool internet_;
@@ -64,8 +69,11 @@ struct GameClientImpl {
 
 	std::unique_ptr<NetClientInterface> net;
 
+	std::unique_ptr<ParticipantList> participants;
+
 	/// Currently active modal panel. Receives an end_modal on disconnect
 	UI::Panel* modal;
+	UI::Panel* panel_whose_mutex_needs_resetting_on_game_start;
 
 	/// Current game. Only non-null if a game is actually running.
 	Widelands::Game* game;
@@ -77,7 +85,7 @@ struct GameClientImpl {
 	bool server_is_waiting;
 
 	/// Data for the last time message we sent.
-	uint32_t lasttimestamp;
+	Time lasttimestamp;
 	uint32_t lasttimestamp_realtime;
 
 	/// The real target speed, in milliseconds per second.
@@ -89,22 +97,28 @@ struct GameClientImpl {
 	 */
 	uint32_t desiredspeed;
 
+	bool should_write_replay;
+
 	/// Backlog of chat messages
 	std::vector<ChatMessage> chatmessages;
 
 	/** File that is eventually transferred via the network if not found at the other side */
 	std::unique_ptr<NetTransferFile> file_;
 
-	void send_hello();
-	void send_player_command(Widelands::PlayerCommand*);
+	AddOns::AddOnsGuard addons_guard_;
 
-	bool run_map_menu(GameClient* parent);
+	// Whether disconnect() has been called previously.
+	bool disconnect_called_;
+
+	void send_hello() const;
+	void send_player_command(Widelands::PlayerCommand* /*pc*/) const;
+
 	void run_game(InteractiveGameBase* igb);
 
-	InteractiveGameBase* init_game(GameClient* parent, UI::ProgressWindow&);
+	InteractiveGameBase* init_game(GameClient* parent, UI::ProgressWindow& /*loader*/);
 };
 
-void GameClientImpl::send_hello() {
+void GameClientImpl::send_hello() const {
 	SendPacket s;
 	s.unsigned_8(NETCMD_HELLO);
 	s.unsigned_8(NETWORK_PROTOCOL_VERSION);
@@ -113,33 +127,12 @@ void GameClientImpl::send_hello() {
 	net->send(s);
 }
 
-void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
+void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) const {
 	SendPacket s;
 	s.unsigned_8(NETCMD_PLAYERCOMMAND);
-	s.signed_32(game->get_gametime());
+	s.unsigned_32(game->get_gametime().get());
 	pc->serialize(s);
 	net->send(s);
-}
-
-/**
- * Show and run() the fullscreen menu for setting map and mapsettings.
- *
- *  @return true to indicate that run is done.
- */
-bool GameClientImpl::run_map_menu(GameClient* parent) {
-	FullscreenMenuLaunchMPG lgm(parent, parent);
-	lgm.set_chat_provider(*parent);
-	modal = &lgm;
-	FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
-	modal = nullptr;
-	if (code == FullscreenMenuBase::MenuTarget::kBack) {
-		// if this is an internet game, tell the metaserver that client is back in the lobby.
-		if (internet_) {
-			InternetGaming::ref().set_game_done();
-		}
-		return true;
-	}
-	return false;
 }
 
 /**
@@ -148,12 +141,12 @@ bool GameClientImpl::run_map_menu(GameClient* parent) {
 InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressWindow& loader) {
 	modal = &loader;
 
-	game->step_loader_ui(_("Preparing game"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
-	game->set_game_controller(parent);
+	game->set_game_controller(parent->get_pointer());
 	uint8_t const pn = settings.playernum + 1;
 	game->save_handler().set_autosave_filename(
-	   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
+	   format("%s_netclient%u", kAutosavePrefix, static_cast<unsigned int>(pn)));
 	InteractiveGameBase* igb;
 	if (pn > 0) {
 		igb = new InteractivePlayer(*game, get_config_section(), pn, true, parent);
@@ -180,11 +173,10 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 
 	modal = igb;
 
-	game->run(settings.savegame ?
-	             Widelands::Game::StartGameType::kSaveGame :
-	             settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
-	                                 Widelands::Game::StartGameType::kMap,
-	          "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
+	game->run(settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
+	          settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
+                                 Widelands::Game::StartGameType::kMap,
+	          "", format("netclient_%d", static_cast<int>(settings.usernum)));
 
 	// if this is an internet game, tell the metaserver that the game is done.
 	if (internet_) {
@@ -194,11 +186,13 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	game = nullptr;
 }
 
-GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
+GameClient::GameClient(FsMenu::MenuCapsule& c,
+                       std::shared_ptr<GameController>& ptr,
+                       const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
                        bool internet,
                        const std::string& gamename)
-   : d(new GameClientImpl) {
+   : d(new GameClientImpl), capsule_(c), pointer_(ptr) {
 
 	d->internet_ = internet;
 
@@ -227,13 +221,21 @@ GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
 	d->settings.usernum = -2;
 	d->localplayername = playername;
 	d->modal = nullptr;
+	d->panel_whose_mutex_needs_resetting_on_game_start = nullptr;
+	d->should_write_replay = true;
 	d->game = nullptr;
 	d->realspeed = 0;
 	d->desiredspeed = 1000;
 	d->file_ = nullptr;
+	d->disconnect_called_ = false;
 
 	// Get the default win condition script
 	d->settings.win_condition_script = d->settings.win_condition_scripts.front();
+
+	d->participants.reset(new ParticipantList(&(d->settings), d->game, d->localplayername));
+	participants_ = d->participants.get();
+
+	run();
 }
 
 GameClient::~GameClient() {
@@ -246,49 +248,94 @@ GameClient::~GameClient() {
 }
 
 void GameClient::run() {
-
 	d->send_hello();
 	d->settings.multiplayer = true;
+	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, d->internet_);
 
-	// Fill the list of possible system messages
-	NetworkGamingMessages::fill_map();
-
-	if (d->run_map_menu(this)) {
-		return;  // did not select a Map ...
+	// The main menu's think() loop creates a mutex lock that would permanently block the Game
+	// from locking this mutex. So when the game starts we'll need to break the lock by force.
+	for (UI::Panel* p = d->modal; p != nullptr; p = p->get_parent()) {
+		if (p->is_modal()) {
+			d->panel_whose_mutex_needs_resetting_on_game_start = p;
+			return;
+		}
 	}
+	NEVER_HERE();
+}
 
+void GameClient::set_write_replay(bool replay) {
+	d->should_write_replay = replay;
+}
+
+void GameClient::do_run(RecvPacket& packet) {
 	d->server_is_waiting = true;
 
 	Widelands::Game game;
+	game.set_write_replay(d->should_write_replay);
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
+	game.logic_rand_seed(packet.unsigned_32());
 
+	game.enabled_addons().clear();
+	for (size_t i = packet.unsigned_32(); i != 0u; --i) {
+		const std::string name = packet.string();
+		bool found = false;
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.first->internal_name == name) {
+				game.enabled_addons().push_back(pair.first);
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			throw wexception("Add-on %s required by host not found", name.c_str());
+		}
+	}
+
+	capsule_.set_visible(false);
 	try {
 		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
 		if (has_players_tribe()) {
 			tipstexts.push_back(get_players_tribe());
 		}
-		UI::ProgressWindow& loader_ui = game.create_loader_ui(tipstexts, false);
+		UI::ProgressWindow& loader_ui = game.create_loader_ui(
+		   tipstexts, true, d->settings.map_theme, d->settings.map_background, true);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
+		if (d->panel_whose_mutex_needs_resetting_on_game_start != nullptr) {
+			d->panel_whose_mutex_needs_resetting_on_game_start->clear_current_think_mutex();
+			d->panel_whose_mutex_needs_resetting_on_game_start = nullptr;
+		}
 		d->run_game(igb);
 
-	} catch (...) {
-		WLApplication::emergency_save(game);
+	} catch (const WLWarning& e) {
+		WLApplication::emergency_save(&capsule_.menu(), game, e.what(), 1, true, false);
+		d->game = nullptr;
+	} catch (const std::exception& e) {
+		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
+		WLApplication::emergency_save(&parent, game, e.what());
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
-		// We will bounce back to the main menu, so we better log out
 		if (d->internet_) {
 			InternetGaming::ref().logout("CLIENT_CRASHED");
 		}
-		throw;
 	}
+	d->modal = nullptr;
+
+	// Quit
+	capsule_.die();
 }
 
 void GameClient::think() {
-	handle_network();
+	NoteThreadSafeFunction::instantiate([this]() { handle_network(); }, true, false);
 
-	if (d->game) {
+	while (!pending_player_commands_.empty()) {
+		MutexLock m(MutexLock::ID::kCommands);
+		do_send_player_command(pending_player_commands_.front());
+		pending_player_commands_.pop_front();
+	}
+
+	if (d->game != nullptr) {
 		// TODO(Klaus Halfmann): what kind of time tricks are done here?
 		if (d->realspeed == 0 || d->server_is_waiting) {
 			d->time.fastforward();
@@ -296,8 +343,7 @@ void GameClient::think() {
 			d->time.think(d->realspeed);
 		}
 
-		if (d->server_is_waiting &&
-		    d->game->get_gametime() == static_cast<uint32_t>(d->time.networktime())) {
+		if (d->server_is_waiting && d->game->get_gametime() == d->time.networktime()) {
 			send_time();
 			d->server_is_waiting = false;
 		} else if (d->game->get_gametime() != d->lasttimestamp) {
@@ -315,26 +361,30 @@ void GameClient::think() {
  * @param pc will always be deleted in the end.
  */
 void GameClient::send_player_command(Widelands::PlayerCommand* pc) {
+	pending_player_commands_.push_back(pc);
+}
+
+void GameClient::do_send_player_command(Widelands::PlayerCommand* pc) {
 	assert(d->game);
 
-	// TODDO(Klaus Halfmann)should this be an assert?
+	// TODO(Klaus Halfmann): should this be an assert?
 	if (pc->sender() == d->settings.playernum + 1)  //  allow command for current player only
 	{
-		log("[Client]: send playercommand at time %i\n", d->game->get_gametime());
+		verb_log_info("[Client]: enqueue playercommand at time %i\n", d->game->get_gametime().get());
 
 		d->send_player_command(pc);
 
 		d->lasttimestamp = d->game->get_gametime();
 		d->lasttimestamp_realtime = SDL_GetTicks();
 	} else {
-		log("[Client]: Playercommand is not for current player? %i\n", pc->sender());
+		log_warn("[Client]: Playercommand is not for current player? %i\n", pc->sender());
 	}
 
 	delete pc;
 }
 
-int32_t GameClient::get_frametime() {
-	return d->time.time() - d->game->get_gametime();
+Duration GameClient::get_frametime() {
+	return Time(d->time.time()) - d->game->get_gametime();
 }
 
 GameController::GameType GameClient::get_game_type() {
@@ -359,14 +409,14 @@ const GameSettings& GameClient::settings() {
 	return d->settings;
 }
 
-void GameClient::set_scenario(bool) {
+void GameClient::set_scenario(bool /*set*/) {
 }
 
 bool GameClient::can_change_map() {
 	return false;
 }
 
-bool GameClient::can_change_player_state(uint8_t const) {
+bool GameClient::can_change_player_state(uint8_t const /*number*/) {
 	return false;
 }
 
@@ -378,7 +428,7 @@ bool GameClient::can_change_player_team(uint8_t number) {
 	return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
 }
 
-bool GameClient::can_change_player_init(uint8_t) {
+bool GameClient::can_change_player_init(uint8_t /*number*/) {
 	return false;
 }
 
@@ -386,20 +436,37 @@ bool GameClient::can_launch() {
 	return false;
 }
 
-void GameClient::set_player_state(uint8_t, PlayerSettings::State) {
+void GameClient::set_player_state(uint8_t /*number*/, PlayerSettings::State /* state */) {
 	// client is not allowed to do this
 }
 
-void GameClient::set_player_ai(uint8_t, const std::string&, bool const /* random_ai */) {
+void GameClient::set_player_ai(uint8_t /*number*/,
+                               const std::string& /* ai */,
+                               bool const /* random_ai */) {
 	// client is not allowed to do this
 }
 
-void GameClient::next_player_state(uint8_t) {
+void GameClient::next_player_state(uint8_t /* state */) {
 	// client is not allowed to do this
 }
 
-void GameClient::set_map(const std::string&, const std::string&, uint32_t, bool) {
+void GameClient::set_map(const std::string& /*mapname*/,
+                         const std::string& /*mapfilename*/,
+                         const std::string& /*map_theme*/,
+                         const std::string& /*map_bg*/,
+                         uint32_t /*maxplayers*/,
+                         bool /*savegame*/) {
 	// client is not allowed to do this
+}
+
+void GameClient::send_cheating_info() {
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
+	packet.string("CHEAT");
+	packet.string(d->localplayername);
+	packet.string("");
+	packet.string("");
+	d->net->send(packet);
 }
 
 void GameClient::set_player_tribe(uint8_t number,
@@ -417,6 +484,20 @@ void GameClient::set_player_tribe(uint8_t number,
 	d->net->send(s);
 }
 
+void GameClient::set_player_color(const uint8_t number, const RGBColor& c) {
+	if ((number != d->settings.playernum)) {
+		return;
+	}
+
+	SendPacket s;
+	s.unsigned_8(NETCMD_SETTING_CHANGECOLOR);
+	s.unsigned_8(number);
+	s.unsigned_8(c.r);
+	s.unsigned_8(c.g);
+	s.unsigned_8(c.b);
+	d->net->send(s);
+}
+
 void GameClient::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	if ((number != d->settings.playernum)) {
 		return;
@@ -429,7 +510,7 @@ void GameClient::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	d->net->send(s);
 }
 
-void GameClient::set_player_closeable(uint8_t, bool) {
+void GameClient::set_player_closeable(uint8_t /*number*/, bool /*closeable*/) {
 	//  client is not allowed to do this
 }
 
@@ -457,12 +538,12 @@ void GameClient::set_player_init(uint8_t number, uint8_t initialization_index) {
 	d->net->send(s);
 }
 
-void GameClient::set_player_name(uint8_t, const std::string&) {
+void GameClient::set_player_name(uint8_t /*number*/, const std::string& /* name */) {
 	// until now the name is set before joining - if you allow a change in
 	// launchgame-menu, here properly should be a set_name function
 }
 
-void GameClient::set_player(uint8_t, const PlayerSettings&) {
+void GameClient::set_player(uint8_t /*number*/, const PlayerSettings& /* settings */) {
 	// do nothing here - the request for a positionchange is send in
 	// set_player_number(uint8_t) to the host.
 }
@@ -475,11 +556,36 @@ bool GameClient::is_peaceful_mode() {
 	return d->settings.peaceful;
 }
 
+void GameClient::set_fogless(bool fogless) {
+	d->settings.fogless = fogless;
+}
+
+bool GameClient::is_fogless() {
+	return d->settings.fogless;
+}
+
+void GameClient::set_custom_starting_positions(bool c) {
+	d->settings.custom_starting_positions = c;
+}
+
+bool GameClient::get_custom_starting_positions() {
+	return d->settings.custom_starting_positions;
+}
+
 std::string GameClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
 
-void GameClient::set_win_condition_script(const std::string&) {
+int32_t GameClient::get_win_condition_duration() {
+	return d->settings.win_condition_duration;
+}
+
+void GameClient::set_win_condition_script(const std::string& /* wc */) {
+	// Clients are not allowed to change this
+	NEVER_HERE();
+}
+
+void GameClient::set_win_condition_duration(const int32_t /* duration */) {
 	// Clients are not allowed to change this
 	NEVER_HERE();
 }
@@ -544,12 +650,15 @@ void GameClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 	player.state = static_cast<PlayerSettings::State>(packet.unsigned_8());
 	player.name = packet.string();
 	player.tribe = packet.string();
-	player.random_tribe = packet.unsigned_8() == 1;
+	player.random_tribe = (packet.unsigned_8() != 0u);
 	player.initialization_index = packet.unsigned_8();
 	player.ai = packet.string();
-	player.random_ai = packet.unsigned_8() == 1;
+	player.random_ai = (packet.unsigned_8() != 0u);
 	player.team = packet.unsigned_8();
 	player.shared_in = packet.unsigned_8();
+	player.color.r = packet.unsigned_8();
+	player.color.g = packet.unsigned_8();
+	player.color.b = packet.unsigned_8();
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
 }
 
@@ -560,12 +669,12 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 
 	// This might happen, if a users connects after the game starts.
 	if (number == d->settings.users.size()) {
-		d->settings.users.push_back(*new UserSettings());
+		d->settings.users.emplace_back();
 	}
 
 	d->settings.users.at(number).name = packet.string();
 	d->settings.users.at(number).position = packet.signed_32();
-	d->settings.users.at(number).ready = packet.unsigned_8() == 1;
+	d->settings.users.at(number).ready = (packet.unsigned_8() != 0u);
 
 	if (static_cast<int32_t>(number) == d->settings.usernum) {
 		d->localplayername = d->settings.users.at(number).name;
@@ -589,11 +698,11 @@ const std::vector<ChatMessage>& GameClient::get_messages() const {
 void GameClient::send_time() {
 	assert(d->game);
 
-	log("[Client]: sending timestamp: %i\n", d->game->get_gametime());
+	verb_log_info("[Client]: sending timestamp: %i", d->game->get_gametime().get());
 
 	SendPacket s;
 	s.unsigned_8(NETCMD_TIME);
-	s.signed_32(d->game->get_gametime());
+	s.unsigned_32(d->game->get_gametime().get());
 	d->net->send(s);
 
 	d->lasttimestamp = d->game->get_gametime();
@@ -605,7 +714,7 @@ void GameClient::sync_report_callback() {
 	if (d->net->is_connected()) {
 		SendPacket s;
 		s.unsigned_8(NETCMD_SYNCREPORT);
-		s.signed_32(d->game->get_gametime());
+		s.unsigned_32(d->game->get_gametime().get());
 		s.data(d->game->get_sync_hash().data, 16);
 		d->net->send(s);
 	}
@@ -635,17 +744,63 @@ void GameClient::handle_hello(RecvPacket& packet) {
 	}
 	d->settings.usernum = packet.unsigned_32();  // TODO(Klaus Halfmann): usernum is int8_t.
 	d->settings.playernum = -1;
+
+	d->addons_guard_.reset();
+	std::vector<AddOns::AddOnState> new_g_addons;
+	std::map<std::string, std::shared_ptr<AddOns::AddOnInfo>> disabled_installed_addons;
+	for (const auto& pair : AddOns::g_addons) {
+		disabled_installed_addons[pair.first->internal_name] = pair.first;
+	}
+	std::set<std::string> missing_addons;
+	std::map<std::string, std::pair<std::string /* installed */, std::string /* host */>>
+	   wrong_version_addons;
+	for (size_t i = packet.unsigned_32(); i != 0u; --i) {
+		const std::string name = packet.string();
+		disabled_installed_addons.erase(name);
+		const AddOns::AddOnVersion v = AddOns::string_to_version(packet.string());
+		AddOns::AddOnVersion found;
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.first->internal_name == name) {
+				found = pair.first->version;
+				new_g_addons.emplace_back(pair.first, true);
+				break;
+			}
+		}
+		if (found.empty()) {
+			missing_addons.insert(name);
+		} else if (found != v) {
+			wrong_version_addons[name] = std::make_pair(
+			   AddOns::version_to_string(found, false), AddOns::version_to_string(v, false));
+		}
+	}
+	if (!missing_addons.empty() || !wrong_version_addons.empty()) {
+		const size_t nr = missing_addons.size() + wrong_version_addons.size();
+		std::string message = format(
+		   ngettext("%u add-on mismatch detected:\n", "%u add-on mismatches detected:\n", nr), nr);
+		for (const std::string& name : missing_addons) {
+			message = format(_("%1$s\n· ‘%2$s’ required by host not found"), message, name);
+		}
+		for (const auto& pair : wrong_version_addons) {
+			message = format(_("%1$s\n· ‘%2$s’ installed at version %3$s but host uses version %4$s"),
+			                 message, pair.first, pair.second.first, pair.second.second);
+		}
+		throw AddOnsMismatchException(message);
+	}
+	for (const auto& pair : disabled_installed_addons) {
+		new_g_addons.emplace_back(pair.second, false);
+	}
+	AddOns::g_addons = new_g_addons;
 }
 
 /**
  * Give a pong for a ping
  */
-void GameClient::handle_ping(RecvPacket&) {
+void GameClient::handle_ping(RecvPacket& /* packet */) {
 	SendPacket s;
 	s.unsigned_8(NETCMD_PONG);
 	d->net->send(s);
 
-	log("[Client] Pong!\n");
+	verb_log_info("[Client] Pong!");
 }
 
 /**
@@ -654,10 +809,12 @@ void GameClient::handle_ping(RecvPacket&) {
 void GameClient::handle_setting_map(RecvPacket& packet) {
 	d->settings.mapname = packet.string();
 	d->settings.mapfilename = g_fs->FileSystem::fix_cross_file(packet.string());
-	d->settings.savegame = packet.unsigned_8() == 1;
-	d->settings.scenario = packet.unsigned_8() == 1;
-	log("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(),
-	    d->settings.mapfilename.c_str());
+	d->settings.map_theme = packet.string();
+	d->settings.map_background = packet.string();
+	d->settings.savegame = (packet.unsigned_8() != 0u);
+	d->settings.scenario = (packet.unsigned_8() != 0u);
+	verb_log_info("[Client] SETTING_MAP '%s' '%s'", d->settings.mapname.c_str(),
+	              d->settings.mapfilename.c_str());
 
 	// New map was set, so we clean up the buffer of a previously requested file
 	d->file_.reset(nullptr);
@@ -701,9 +858,9 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 		try {
 			g_fs->fs_rename(path, backup_file_name(path));
 		} catch (const FileError& e) {
-			log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
-			    "%s\n",
-			    e.what());
+			log_err("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+			        "%s\n",
+			        e.what());
 			// TODO(Arty): What now? It just means the next step will fail
 			// or possibly result in some corrupt file
 		}
@@ -718,7 +875,7 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 	d->file_->bytes = bytes;
 	d->file_->filename = path;
 	d->file_->md5sum = md5;
-	size_t position = path.rfind(g_fs->file_separator(), path.size() - 2);
+	size_t position = path.rfind(FileSystem::file_separator(), path.size() - 2);
 	if (position != std::string::npos) {
 		path.resize(position);
 		g_fs->ensure_directory_exists(path);
@@ -747,7 +904,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 
 	// TODO(Klaus Halfmann): read directly into FilePart?
 	if (packet.data(buf, size) != size) {
-		log("Readproblem. Will try to go on anyways\n");
+		log_warn("Readproblem. Will try to go on anyways\n");
 	}
 	memcpy(fp.part, &buf[0], size);
 	d->file_->parts.push_back(fp);
@@ -774,7 +931,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			++i;
 		}
 		// Now really write the file
-		fw.write(*g_fs, d->file_->filename.c_str());
+		fw.write(*g_fs, d->file_->filename);
 
 		// Check for consistence
 		FileRead fr;
@@ -795,14 +952,14 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			// Notify the players
 			s.reset();
 			s.unsigned_8(NETCMD_CHAT);
-			s.string(_("/me 's file failed md5 checksumming."));
+			s.string(_("/me ’s file failed md5 checksumming."));
 			d->net->send(s);
 			try {
 				g_fs->fs_unlink(d->file_->filename);
 			} catch (const FileError& e) {
-				log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
-				    "%s\n",
-				    e.what());
+				log_err("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+				        "%s\n",
+				        e.what());
 			}
 		}
 		// Check file for validity
@@ -831,9 +988,9 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 					g_fs->fs_rename(backup_file_name(d->file_->filename), d->file_->filename);
 				}
 			} catch (const FileError& e) {
-				log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
-				    "%s\n",
-				    e.what());
+				log_err("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+				        "%s\n",
+				        e.what());
 			}
 			s.reset();
 			s.unsigned_8(NETCMD_CHAT);
@@ -841,6 +998,8 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			           "I can not handle the file."));
 			d->net->send(s);
 		}
+		// Notify UI to refresh the map data
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 	}
 }
 
@@ -849,8 +1008,9 @@ void GameClient::handle_file_part(RecvPacket& packet) {
  */
 void GameClient::handle_setting_tribes(RecvPacket& packet) {
 	d->settings.tribes.clear();
-	for (uint8_t i = packet.unsigned_8(); i; --i) {
-		Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(packet.string());
+	Widelands::AllTribes all_tribes = Widelands::get_all_tribeinfos(nullptr);
+	for (uint8_t i = packet.unsigned_8(); i != 0u; --i) {
+		Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(packet.string(), all_tribes);
 
 		// Get initializations (we have to do this locally, for translations)
 		LuaInterface lua;
@@ -859,15 +1019,25 @@ void GameClient::handle_setting_tribes(RecvPacket& packet) {
 			std::string const initialization_script = packet.string();
 			std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
 			t->do_not_warn_about_unaccessed_keys();
+			// TODO(hessenfarmer): Needs to be pulled out as it is duplicated to tribe_basic_info.cc
 			std::set<std::string> tags;
+			std::set<std::string> incompatible_wc;
 			if (t->has_key("map_tags")) {
 				std::unique_ptr<LuaTable> tt = t->get_table("map_tags");
 				for (int key : tt->keys<int>()) {
 					tags.insert(tt->get_string(key));
 				}
 			}
-			info.initializations.push_back(Widelands::TribeBasicInfo::Initialization(
-			   initialization_script, t->get_string("descname"), t->get_string("tooltip"), tags));
+			if (t->has_key("incompatible_wc")) {
+				std::unique_ptr<LuaTable> w = t->get_table("incompatible_wc");
+				for (int key : w->keys<int>()) {
+					incompatible_wc.insert(w->get_string(key));
+				}
+			}
+			info.initializations.emplace_back(
+			   initialization_script, t->get_string("descname"), t->get_string("tooltip"), tags,
+			   incompatible_wc,
+			   !t->has_key("uses_map_starting_position") || t->get_bool("uses_map_starting_position"));
 		}
 		d->settings.tribes.push_back(info);
 	}
@@ -883,17 +1053,20 @@ void GameClient::handle_setting_allplayers(RecvPacket& packet) {
 	}
 	// Map changes are finished here
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
+	if (participants_ != nullptr) {
+		participants_->participants_updated();
+	}
 }
 
 /**
  *
  */
 void GameClient::handle_playercommand(RecvPacket& packet) {
-	if (!d->game) {
+	if (d->game == nullptr) {
 		throw DisconnectException("PLAYERCMD_WO_GAME");
 	}
 
-	int32_t const time = packet.signed_32();
+	const Time time(packet.unsigned_32());
 	Widelands::PlayerCommand& plcmd = *Widelands::PlayerCommand::deserialize(packet);
 	plcmd.set_duetime(time);
 	d->game->enqueue_command(&plcmd);
@@ -904,10 +1077,10 @@ void GameClient::handle_playercommand(RecvPacket& packet) {
  *
  */
 void GameClient::handle_syncrequest(RecvPacket& packet) {
-	if (!d->game) {
+	if (d->game == nullptr) {
 		throw DisconnectException("SYNCREQUEST_WO_GAME");
 	}
-	int32_t const time = packet.signed_32();
+	const Time time(packet.unsigned_32());
 	d->time.receive(time);
 	d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
 	d->game->report_sync_request();
@@ -921,7 +1094,7 @@ void GameClient::handle_chat(RecvPacket& packet) {
 	c.playern = packet.signed_16();
 	c.sender = packet.string();
 	c.msg = packet.string();
-	if (packet.unsigned_8()) {
+	if (packet.unsigned_8() != CHATTYPE_PUBLIC) {
 		c.recipient = packet.string();
 	}
 	d->chatmessages.push_back(c);
@@ -946,10 +1119,10 @@ void GameClient::handle_system_message(RecvPacket& packet) {
 /**
  *
  */
-void GameClient::handle_desync(RecvPacket&) {
-	log("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
-	    "information for debugging.\n");
-	if (d->game) {
+void GameClient::handle_desync(RecvPacket& /* packet */) {
+	log_err("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
+	        "information for debugging.\n");
+	if (d->game != nullptr) {
 		d->game->save_syncstream(true);
 		// We don't know our playernumber, so report as -1
 		d->game->report_desync(-1);
@@ -984,43 +1157,64 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	case NETCMD_SETTING_PLAYER: {
 		uint8_t player = packet.unsigned_8();
 		receive_one_player(player, packet);
+		if (participants_ != nullptr) {
+			participants_->participants_updated();
+		}
 	} break;
 	case NETCMD_SETTING_ALLUSERS: {
 		d->settings.users.resize(packet.unsigned_8());
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
 			receive_one_user(i, packet);
 		}
+		if (participants_ != nullptr) {
+			participants_->participants_updated();
+		}
 	} break;
 	case NETCMD_SETTING_USER: {
 		uint32_t user = packet.unsigned_32();
 		receive_one_user(user, packet);
+		if (participants_ != nullptr) {
+			participants_->participants_updated();
+		}
 	} break;
 	case NETCMD_SET_PLAYERNUMBER: {
 		int32_t number = packet.signed_32();
 		d->settings.playernum = number;
 		d->settings.users.at(d->settings.usernum).position = number;
+		if (participants_ != nullptr) {
+			participants_->participants_updated();
+		}
 	} break;
 	case NETCMD_WIN_CONDITION:
 		d->settings.win_condition_script = g_fs->FileSystem::fix_cross_file(packet.string());
 		break;
+	case NETCMD_WIN_CONDITION_DURATION:
+		d->settings.win_condition_duration = packet.signed_32();
+		break;
 	case NETCMD_PEACEFUL_MODE:
-		d->settings.peaceful = packet.unsigned_8();
+		d->settings.peaceful = (packet.unsigned_8() != 0u);
+		break;
+	case NETCMD_FOGLESS:
+		d->settings.fogless = (packet.unsigned_8() != 0u);
+		break;
+	case NETCMD_CUSTOM_STARTING_POSITIONS:
+		d->settings.custom_starting_positions = (packet.unsigned_8() != 0u);
 		break;
 	case NETCMD_LAUNCH:
-		if (!d->modal || d->game) {
+		if ((d->game != nullptr) || ((d->modal != nullptr) && d->modal->is_modal())) {
 			throw DisconnectException("UNEXPECTED_LAUNCH");
 		}
-		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+		do_run(packet);
 		break;
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();
-		log("[Client] speed: %u.%03u\n", d->realspeed / 1000, d->realspeed % 1000);
+		verb_log_info("[Client] speed: %u.%03u", d->realspeed / 1000, d->realspeed % 1000);
 		break;
 	case NETCMD_TIME:
-		d->time.receive(packet.signed_32());
+		d->time.receive(Time(packet.unsigned_32()));
 		break;
 	case NETCMD_WAIT:
-		log("[Client]: server is waiting.\n");
+		verb_log_info("[Client]: server is waiting.");
 		d->server_is_waiting = true;
 		break;
 	case NETCMD_PLAYERCOMMAND:
@@ -1048,17 +1242,24 @@ void GameClient::handle_network() {
 	}
 	try {
 		assert(d->net != nullptr);
-		// Check if the connection is still open
-		if (!d->net->is_connected()) {
-			disconnect("CONNECTION_LOST", "", false);
-			return;
-		}
 		// Process all available packets
 		std::unique_ptr<RecvPacket> packet = d->net->try_receive();
 		while (packet) {
 			handle_packet(*packet);
 			packet = d->net->try_receive();
 		}
+		// Check if the connection is still open
+		if (!d->net->is_connected()) {
+			disconnect("CONNECTION_LOST", "", false);
+			return;
+		}
+	} catch (const AddOnsMismatchException& e) {
+		disconnect("SOMETHING_WRONG", e.what());
+	} catch (const WLWarning& e) {
+		// disconnect() should have been called already, but just in case:
+		disconnect("SOMETHING_WRONG", e.what());
+		// the Warning is intended for the caller
+		throw;
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
 	} catch (const ProtocolException& e) {
@@ -1072,14 +1273,18 @@ void GameClient::disconnect(const std::string& reason,
                             const std::string& arg,
                             bool const sendreason,
                             bool const showmsg) {
-	log("[Client]: disconnect(%s, %s)\n", reason.c_str(), arg.c_str());
+	log_warn("[Client]: disconnect(%s, %s)", reason.c_str(), arg.c_str());
+	if (d->disconnect_called_) {
+		return;
+	}
+	d->disconnect_called_ = true;
 
 	assert(d->net != nullptr);
 	if (d->net->is_connected()) {
 		if (sendreason) {
 			SendPacket s;
 			s.unsigned_8(NETCMD_DISCONNECT);
-			s.unsigned_8(arg.size() < 1 ? 1 : 2);
+			s.unsigned_8(arg.empty() ? 1 : 2);
 			s.string(reason);
 			if (!arg.empty()) {
 				s.string(arg);
@@ -1090,34 +1295,28 @@ void GameClient::disconnect(const std::string& reason,
 		d->net->close();
 	}
 
-	bool const trysave = showmsg && d->game;
-
-	if (showmsg && d->modal) {  // can only show a message with a valid modal parent window
-		std::string msg;
-		if (arg.empty()) {
-			msg = NetworkGamingMessages::get_message(reason);
-		} else {
-			msg = NetworkGamingMessages::get_message(reason, arg);
+	if (showmsg) {
+		if (d->game != nullptr) {
+			if (reason == "KICKED" || reason == "SERVER_LEFT" || reason == "SERVER_CRASHED") {
+				throw WLWarning("", "%s",
+				                arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
+                                          NetworkGamingMessages::get_message(reason, arg).c_str());
+			}
+			throw wexception("%s", arg.empty() ?
+                                   NetworkGamingMessages::get_message(reason).c_str() :
+                                   NetworkGamingMessages::get_message(reason, arg).c_str());
 		}
-
-		if (trysave) {
-			/** TRANSLATORS: %s contains an error message. */
-			msg = (boost::format(_("%s An automatic savegame will be created.")) % msg).str();
-		}
-
-		UI::WLMessageBox mmb(
-		   d->modal, _("Disconnected from Host"), msg, UI::WLMessageBox::MBoxType::kOk);
-		mmb.run<UI::Panel::Returncodes>();
-	}
-
-	if (trysave) {
-		WLApplication::emergency_save(*d->game);
+		capsule_.menu().show_messagebox(
+		   _("Disconnected"),
+		   format(_("The connection with the host was lost for the following reason:\n%s"),
+		          (arg.empty() ? NetworkGamingMessages::get_message(reason) :
+                               NetworkGamingMessages::get_message(reason, arg))));
 	}
 
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
 	// double free.
-	if (d->modal) {
-		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	if (d->modal != nullptr) {
+		d->modal->die();
 	}
 	d->modal = nullptr;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,8 +20,8 @@
 #define WL_WUI_INTERACTIVE_BASE_H
 
 #include <memory>
+#include <optional>
 
-#include "graphic/toolbar_imageset.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
@@ -37,7 +36,12 @@
 #include "wui/minimap.h"
 #include "wui/quicknavigation.h"
 
+class InfoPanel;
+class MainToolbar;
 class UniqueWindowHandler;
+namespace Widelands {
+class MapObjectLoader;
+}  // namespace Widelands
 
 struct WorkareaPreview {
 	Widelands::Coords coords;
@@ -53,15 +57,25 @@ enum class RoadBuildingType { kRoad, kWaterway };
  */
 class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
+	// Available Display Flags
+	// a new flag also needs its corresponding checkbox in options
 	enum {
-		dfShowCensus = 1,         ///< show census report on buildings
-		dfShowStatistics = 2,     ///< show statistics report on buildings
-		dfShowSoldierLevels = 4,  ///< show level information above soldiers
-		dfShowWorkareaOverlap =
-		   8,          ///< highlight overlapping workareas when placing a constructionsite
-		dfDebug = 16,  ///< general debugging info
-		dfShowBuildings = 32,
+		dfShowCensus = 1,              ///< show census report on buildings
+		dfShowStatistics = 2,          ///< show statistics report on buildings
+		dfShowSoldierLevels = 4,       ///< show level information above soldiers
+		dfShowWorkareaOverlap = 8,     ///< highlight overlapping workareas when placing
+		                               //   a constructionsite
+		dfDebug = 16,                  ///< general debugging info
+		dfShowBuildings = 32,          ///<
+		dfShowBuildhelp = 64,          ///< show size of building spaces
+		dfShowMaximumBuildhelp = 128,  ///< show max size of building spaces
+		dfShowGrid = 256,              ///<
+		dfShowImmovables = 512,        ///< show trees, rocks etc.
+		dfShowBobs = 1024,             ///< show animals
+		dfShowResources = 2048,        ///< show water, coal etc. in editor
 	};
+	static constexpr int32_t kDefaultDisplayFlags =
+	   dfShowSoldierLevels | dfShowBuildings | dfShowWorkareaOverlap;
 
 	/// A build help overlay, i.e. small, big, mine, port ...
 	struct BuildhelpOverlay {
@@ -72,7 +86,7 @@ public:
 	// Manages all UniqueWindows.
 	UniqueWindowHandler& unique_windows();
 
-	InteractiveBase(Widelands::EditorGameBase&, Section& global_s);
+	InteractiveBase(Widelands::EditorGameBase&, Section& global_s, ChatProvider*);
 	~InteractiveBase() override;
 
 	Widelands::EditorGameBase& egbase() const {
@@ -88,10 +102,15 @@ public:
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
 
+	void game_logic_think() override;
 	void think() override;
 	double average_fps() const;
+	uint64_t average_real_gamespeed() const;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	virtual void postload();
+
+	void load_windows(FileRead&, Widelands::MapObjectLoader&);
+	void save_windows(FileWrite&, Widelands::MapObjectSaver&);
 
 	const Widelands::NodeAndTriangle<>& get_sel_pos() const {
 		return sel_.pos;
@@ -121,12 +140,12 @@ public:
 	void set_sel_freeze(const bool yes) {
 		sel_.freeze = yes;
 	}
-	void set_sel_radius(uint32_t);
+	virtual void set_sel_radius(uint32_t);
 
 	//  display flags
 	uint32_t get_display_flags() const;
 	void set_display_flags(uint32_t flags);
-	bool get_display_flag(uint32_t flag);
+	bool get_display_flag(uint32_t flag) const;
 	void set_display_flag(uint32_t flag, bool on);
 
 	//  road building
@@ -139,39 +158,76 @@ public:
 	void start_build_road(Widelands::Coords start, Widelands::PlayerNumber player, RoadBuildingType);
 	void abort_build_road();
 	void finish_build_road();
-	bool append_build_road(Widelands::Coords field);
+	bool append_build_road(Widelands::Coords field, bool is_preview);
+	[[nodiscard]] std::optional<Widelands::CoordPath>
+	try_append_build_road(Widelands::Coords field) const;
 	Widelands::Coords get_build_road_start() const;
 	Widelands::Coords get_build_road_end() const;
 	Widelands::CoordPath get_build_road_path() const;
 
-	virtual void cleanup_for_load() {
-	}
+	virtual void cleanup_for_load();
 
 	/**
 	 * Log a message to be displayed on screen
 	 */
-	void log_message(const std::string& message) const;
-	void log_message(const char* message) const {
-		log_message(std::string(message));
+	void log_message(const std::string& message, const std::string& tooltip = std::string()) const;
+	void log_message(const char* message, const char* tt = nullptr) const {
+		log_message(std::string(message), tt == nullptr ? std::string() : std::string(tt));
 	}
 
 	void toggle_minimap();
+	void toggle_quicknav();
 	// Toggles the buildhelp and calls rebuild_showhide_menu
 	void toggle_buildhelp();
 
-	// Returns the list of landmarks that have been mapped to the keys 0-9
-	const QuickNavigation::Landmark* landmarks();
+	QuickNavigation& quick_navigation() {
+		return quick_navigation_;
+	}
 
-	// Sets the landmark for the keyboard 'key' to 'point'
-	void set_landmark(size_t key, const MapView::View& view);
+	void add_wanted_building_window(const Widelands::Coords& coords,
+	                                Vector2i point,
+	                                bool was_minimal,
+	                                bool was_pinned);
+	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
+	                                       bool avoid_fastclick,
+	                                       bool workarea_preview_wanted);
+	UI::UniqueWindow& show_ship_window(Widelands::Ship* ship);
 
 	MapView* map_view() {
 		return &map_view_;
 	}
 
+	void info_panel_fast_forward_message_queue();
+
+	// This function should return true only in EditorInteractive
+	virtual bool omnipotent() const {
+		return cheat_mode_enabled_;
+	}
+	// These two functions should be overridden only by InteractiveGameBase
+	virtual Widelands::Game* get_game() const {
+		return nullptr;
+	}
+	virtual Widelands::Game& game() const {
+		NEVER_HERE();
+	}
+	// These three functions should be overridden only by InteractivePlayer
+	virtual bool can_see(Widelands::PlayerNumber) const {
+		return true;
+	}
+	virtual bool can_act(Widelands::PlayerNumber) const {
+		return omnipotent();
+	}
+	virtual Widelands::PlayerNumber player_number() const {
+		return 0;
+	}
+
+	bool extended_tooltip_accessibility_mode() const override {
+		return true;
+	}
+
 protected:
 	// For referencing the items in mapviewmenu_
-	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom };
+	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom, kQuicknav };
 
 	// Adds the mapviewmenu_ to the toolbar
 	void add_mapview_menu(MiniMapType minimap_type);
@@ -194,6 +250,7 @@ protected:
 	                               bool bind_default_toggle = false);
 
 	void hide_minimap();
+	void resize_minimap() const;
 
 	void mainview_move();
 
@@ -221,13 +278,16 @@ protected:
 
 	void draw_bridges(RenderTarget* dst,
 	                  const FieldsToDraw::Field* f,
-	                  uint32_t gametime,
+	                  const Time& gametime,
 	                  float scale) const;
-	void draw_road_building(FieldsToDraw::Field&);
+	void draw_road_building(RenderTarget* dst,
+	                        FieldsToDraw::Field& field,
+	                        const Time& gametime,
+	                        float scale) const;
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
-	const Image* get_sel_picture() {
+	const Image* get_sel_picture() const {
 		return sel_.pic;
 	}
 
@@ -238,9 +298,9 @@ protected:
 		return chat_overlay_;
 	}
 
-	UI::Box* toolbar() {
-		return &toolbar_.box;
-	}
+	ChatColorForPlayer color_functor() const;
+
+	UI::Box* toolbar();
 
 	// Returns the information which overlay text should currently be drawn.
 	// Returns InfoToDraw::kNone if not 'show'
@@ -261,12 +321,16 @@ protected:
 		}
 		const Widelands::PlayerNumber player;
 		Widelands::CoordPath path;
+		std::optional<Widelands::CoordPath> preview_path;
 		const RoadBuildingType type;
 		std::unique_ptr<WorkareaInfo> work_area;
-		std::map<Widelands::Coords, std::vector<uint8_t>> overlay_road_previews;
+		using PreviewPathMap = std::map<Widelands::Coords, std::vector<uint8_t>>;
+		PreviewPathMap overlay_road_previews;
+		PreviewPathMap overlay_roadpreview_previews;
 		std::map<Widelands::Coords, const Image*> overlay_steepness_indicators;
 	};
-	std::map<Widelands::Coords, std::vector<uint8_t>> road_building_preview_overlays() const;
+	RoadBuildingMode::PreviewPathMap road_building_preview_overlays() const;
+	RoadBuildingMode::PreviewPathMap road_building_preview_preview_overlays() const;
 	std::map<Widelands::Coords, const Image*> road_building_steepness_overlays() const;
 
 	/// Returns true if there is a workarea preview being shown at the given coordinates.
@@ -280,14 +344,23 @@ protected:
 
 	void set_toolbar_imageset(const ToolbarImageset& imageset);
 
+	ChatProvider* chat_provider_;
+
+	void broadcast_cheating_message() const;
+
 #ifndef NDEBUG  //  only in debug builds
 	UI::UniqueWindow::Registry debugconsole_;
 #endif
+
+	InfoPanel& info_panel_;
 
 private:
 	void play_sound_effect(const NoteSound& note) const;
 	void resize_chat_overlay();
 	void road_building_add_overlay();
+	void road_building_add_overlay(const Widelands::CoordPath& path,
+	                               RoadBuildingMode::PreviewPathMap& target,
+	                               bool steepness);
 	void road_building_remove_overlay();
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args);
@@ -296,14 +369,15 @@ private:
 	virtual void rebuild_showhide_menu() = 0;
 
 	struct SelData {
-		SelData(const bool Freeze = false,
-		        const bool Triangles = false,
-		        const Widelands::NodeAndTriangle<>& Pos =
-		           Widelands::NodeAndTriangle<>{
-		              Widelands::Coords(0, 0),
-		              Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)},
-		        const uint32_t Radius = 0,
-		        const Image* Pic = nullptr)
+		explicit SelData(const bool Freeze = false,
+		                 const bool Triangles = false,
+		                 const Widelands::NodeAndTriangle<>& Pos =
+		                    Widelands::NodeAndTriangle<>{
+		                       Widelands::Coords(0, 0),
+		                       Widelands::TCoords<>(Widelands::Coords(0, 0),
+		                                            Widelands::TriangleIndex::D)},
+		                 const uint32_t Radius = 0,
+		                 const Image* Pic = nullptr)
 		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), pic(Pic) {
 		}
 		bool freeze;     // don't change sel, even if mouse moves
@@ -313,37 +387,42 @@ private:
 		const Image* pic;
 	} sel_;
 
-	bool buildhelp_;
 	MapView map_view_;
 	ChatOverlay* chat_overlay_;
 
-	/// A horizontal menu bar embellished with background graphics
-	struct Toolbar : UI::Panel {
-		Toolbar(UI::Panel* parent);
+	struct WantedBuildingWindow {
+		explicit WantedBuildingWindow(const Vector2i& pos,
+		                              bool was_minimized,
+		                              bool was_pinned,
+		                              bool was_showing_workarea)
+		   : window_position(pos),
+		     minimize(was_minimized),
+		     pin(was_pinned),
+		     show_workarea(was_showing_workarea) {
+		}
+		const Vector2i window_position;
+		const bool minimize;
+		const bool pin;
+		const bool show_workarea;
 
-		/// Sets the actual size and position of the toolbar
-		void finalize();
-		void draw(RenderTarget& dst) override;
-		void change_imageset(const ToolbarImageset& images);
+		bool warp_done{false};
+	};
 
-		/// A row of buttons and dropdown menus
-		UI::Box box;
+	// Building coordinates, window position, whether the window was minimized
+	std::map<uint32_t, std::unique_ptr<WantedBuildingWindow>> wanted_building_windows_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 
-	private:
-		/// The set of background images
-		ToolbarImageset imageset;
-		/// How often the left and right images get repeated, calculated from the width of the box
-		int repeat;
-	} toolbar_;
+	MainToolbar& toolbar_;
 
 	// Map View menu on the toolbar
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
-	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
-	// delete it.
-	MiniMap* minimap_;
-	MiniMap::Registry minimap_registry_;
 	QuickNavigation quick_navigation_;
 
+public:
+	MiniMap::Registry minimap_registry_;
+	UI::UniqueWindow::Registry quicknav_registry_;
+
+private:
 	// The currently enabled work area previews
 	std::unordered_set<std::unique_ptr<WorkareaPreview>> workarea_previews_;
 	std::unique_ptr<Workareas> workareas_cache_;
@@ -353,14 +432,26 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
-	uint32_t lastframe_;        //  system time (milliseconds)
-	uint32_t frametime_;        //  in millseconds
-	uint32_t avg_usframetime_;  //  in microseconds!
+	uint64_t lastframe_;            //  system time (milliseconds)
+	uint64_t frametime_{0U};        //  in millseconds
+	uint64_t avg_usframetime_{0U};  //  in microseconds!
+
+	// For measuring actual game speed and how smoothly the game logic runs
+	uint64_t last_frame_realtime_{0U};
+	uint64_t previous_frame_realtime_{0U};
+	Time last_frame_gametime_{0U};
+	Time previous_frame_gametime_{0U};
+	uint64_t avg_actual_gamespeed_{0U};  // in microseconds gametime per second realtime
+	uint64_t last_target_gamespeed_{0U};
+	uint64_t gamespeed_last_change_time_{0U};
 
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
+
+	bool cheat_mode_enabled_{false};
+	bool screenshot_failed_{false};
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

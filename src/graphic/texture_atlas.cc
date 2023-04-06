@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -34,7 +33,7 @@ constexpr int kPadding = 1;
 
 }  // namespace
 
-TextureAtlas::Node::Node(const Recti& init_r) : used(false), r(init_r) {
+TextureAtlas::Node::Node(const Recti& init_r) : r(init_r) {
 }
 
 void TextureAtlas::Node::split(int item_w, int item_h) {
@@ -47,9 +46,6 @@ void TextureAtlas::Node::split(int item_w, int item_h) {
 	// Note: we do not change the size of the root. It is not needed
 	// for the remaining algorithm, but we use it to remember the
 	// size of the full canvas.
-}
-
-TextureAtlas::TextureAtlas() : next_index_(0) {
 }
 
 void TextureAtlas::add(const Image& texture) {
@@ -84,19 +80,20 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(
 		std::unique_ptr<Node> new_root(new Node(Recti(0, 0, root->r.w + delta_w, root->r.h)));
 		new_root->used = true;
 		new_root->right.reset(new Node(Recti(root->r.w, 0, delta_w, root->r.h)));
-		new_root->down.reset(root.release());
-		root.reset(new_root.release());
+		new_root->down = std::move(root);
+		root = std::move(new_root);
 	};
 
 	const auto grow_down = [&root](int delta_h) {
 		std::unique_ptr<Node> new_root(new Node(Recti(0, 0, root->r.w, root->r.h + delta_h)));
 		new_root->used = true;
 		new_root->down.reset(new Node(Recti(0, root->r.h, root->r.w, delta_h)));
-		new_root->right.reset(root.release());
-		root.reset(new_root.release());
+		new_root->right = std::move(root);
+		root = std::move(new_root);
 	};
 
-	std::vector<Block> packed, not_packed;
+	std::vector<Block> packed;
+	std::vector<Block> not_packed;
 	for (Block& block : blocks_) {
 		const int block_width = block.texture->width() + kPadding;
 		const int block_height = block.texture->height() + kPadding;
@@ -113,9 +110,9 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(
 			bool should_grow_right = can_grow_right && (root->r.h >= root->r.w + block_width);
 			bool should_grow_down = can_grow_down && (root->r.w >= root->r.h + block_height);
 
-			if (should_grow_right) {
+			if (should_grow_right) {  // NOLINT
 				grow_right(block_width);
-			} else if (should_grow_down) {
+			} else if (should_grow_down) {  // NOLINT
 				grow_down(block_height);
 			} else if (can_grow_right) {
 				grow_right(block_width);
@@ -124,7 +121,7 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(
 			}
 			fitting_node = find_node(root.get(), block_width, block_height);
 		}
-		if (fitting_node) {
+		if (fitting_node != nullptr) {
 			fitting_node->split(block_width, block_height);
 			block.node = fitting_node;
 			packed.push_back(block);
@@ -168,7 +165,7 @@ void TextureAtlas::pack(const int max_dimension,
 		       std::max(j.texture->width(), j.texture->height());
 	});
 
-	while (blocks_.size()) {
+	while (!blocks_.empty()) {
 		texture_atlases->emplace_back(
 		   pack_as_many_as_possible(max_dimension, texture_atlases->size(), pack_info));
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,10 +21,8 @@
 
 #include <queue>
 
+#include "base/times.h"
 #include "logic/queue_cmd_ids.h"
-
-class FileRead;
-class FileWrite;
 
 namespace Widelands {
 
@@ -65,22 +62,22 @@ constexpr uint32_t kCommandQueueBucketSize = 65536;  // Make this a power of two
  * the same for all parallel simulation.
  */
 struct Command {
-	explicit Command(const uint32_t init_duetime) : duetime_(init_duetime) {
+	explicit Command(const Time& init_duetime) : duetime_(init_duetime) {
 	}
-	virtual ~Command();
+	virtual ~Command() = default;
 
 	virtual void execute(Game&) = 0;
-	virtual QueueCommandTypes id() const = 0;
+	[[nodiscard]] virtual QueueCommandTypes id() const = 0;
 
-	uint32_t duetime() const {
+	[[nodiscard]] const Time& duetime() const {
 		return duetime_;
 	}
-	void set_duetime(uint32_t const t) {
+	void set_duetime(const Time& t) {
 		duetime_ = t;
 	}
 
 private:
-	uint32_t duetime_;
+	Time duetime_;
 };
 
 /**
@@ -91,7 +88,7 @@ private:
  * for all instances of a game to ensure parallel simulation.
  */
 struct GameLogicCommand : public Command {
-	explicit GameLogicCommand(uint32_t const init_duetime) : Command(init_duetime) {
+	explicit GameLogicCommand(const Time& init_duetime) : Command(init_duetime) {
 	}
 
 	// Write these commands to a file (for savegames)
@@ -116,12 +113,13 @@ class CmdQueue {
 		uint32_t serial;
 
 		bool operator<(const CmdItem& c) const {
-			if (cmd->duetime() != c.cmd->duetime())
+			if (cmd->duetime() != c.cmd->duetime()) {
 				return cmd->duetime() > c.cmd->duetime();
-			else if (category != c.category)
+			}
+			if (category != c.category) {
 				return category > c.category;
-			else
-				return serial > c.serial;
+			}
+			return serial > c.serial;
 		}
 	};
 
@@ -136,14 +134,14 @@ public:
 	// the internal time as well. the game_time_var represents the current game
 	// time, which we update and with which we must mess around (to run all
 	// queued cmd.s) and which we update (add the interval)
-	void run_queue(int32_t interval, uint32_t& game_time_var);
+	void run_queue(const Duration& interval, Time& game_time_var);
 
 	void flush();  // delete all commands in the queue now
 
 private:
 	Game& game_;
-	uint32_t nextserial_;
-	uint32_t ncmds_;
+	uint32_t nextserial_{0};
+	uint32_t ncmds_{0};
 	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
 	CommandsContainer cmds_;
 };

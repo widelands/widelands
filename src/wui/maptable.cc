@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 #include "wui/maptable.h"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
 
 MapTable::MapTable(
@@ -44,10 +43,10 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 		if (mapdata.maptype == MapData::MapType::kDirectory) {
 			te.set_string(0, "");
 			te.set_picture(
-			   1, g_gr->images().get("images/ui_basic/ls_dir.png"), mapdata.localized_name);
+			   1, g_image_cache->get("images/ui_basic/ls_dir.png"), mapdata.localized_name);
 			te.set_string(2, "");
 		} else {
-			te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
+			te.set_string(0, format("(%i)", mapdata.nrplayers));
 
 			std::string picture = "images/ui_basic/ls_wlmap.png";
 			if (mapdata.maptype == MapData::MapType::kScenario) {
@@ -58,18 +57,18 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 
 			if (type == MapData::DisplayType::kFilenames) {
 				set_column_title(1, _("Filename"));
-				te.set_picture(1, g_gr->images().get(picture),
-				               FileSystem::filename_without_ext(mapdata.filename.c_str()));
+				te.set_picture(1, g_image_cache->get(picture),
+				               FileSystem::filename_without_ext(mapdata.filenames.at(0).c_str()));
 			} else {
 				set_column_title(1, _("Map Name"));
 				if (type == MapData::DisplayType::kMapnames) {
-					te.set_picture(1, g_gr->images().get(picture), mapdata.name);
+					te.set_picture(1, g_image_cache->get(picture), mapdata.name);
 				} else {
-					te.set_picture(1, g_gr->images().get(picture), mapdata.localized_name);
+					te.set_picture(1, g_image_cache->get(picture), mapdata.localized_name);
 				}
 			}
 
-			te.set_string(2, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
+			te.set_string(2, format("%u x %u", mapdata.width, mapdata.height));
 		}
 	}
 	sort();

@@ -12,18 +12,18 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 #include "graphic/texture.h"
 
 #include <cassert>
+#include <cstddef>
 
 #include <SDL_surface.h>
 
-#include "base/log.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
 #include "graphic/gl/draw_line_program.h"
@@ -74,7 +74,7 @@ public:
 		glDeleteFramebuffers(1, &gl_framebuffer_id_);
 	}
 
-	GLuint id() const {
+	[[nodiscard]] GLuint id() const {
 		return gl_framebuffer_id_;
 	}
 
@@ -116,7 +116,7 @@ Texture::Texture(SDL_Surface* surface, bool intensity) : owns_texture_(false) {
 	// use freetype directly we might be able to avoid that.
 	uint8_t bpp = surface->format->BytesPerPixel;
 
-	if (surface->format->palette || width() != surface->w || height() != surface->h ||
+	if ((surface->format->palette != nullptr) || width() != surface->w || height() != surface->h ||
 	    (bpp != 3 && bpp != 4) || is_bgr_surface(*surface->format)) {
 		SDL_Surface* converted = empty_sdl_surface(width(), height());
 		assert(converted);
@@ -159,7 +159,9 @@ Texture::Texture(const GLuint texture, const Recti& subrect, int parent_w, int p
 
 Texture::~Texture() {
 	if (owns_texture_) {
-		Gl::State::instance().delete_texture(blit_data_.texture_id);
+		uint32_t texture_id = blit_data_.texture_id;
+		NoteThreadSafeFunction::instantiate(
+		   [texture_id]() { Gl::State::instance().delete_texture(texture_id); }, false);
 	}
 }
 
@@ -172,6 +174,8 @@ int Texture::height() const {
 }
 
 void Texture::init(uint16_t w, uint16_t h) {
+	assert(is_initializer_thread());
+
 	blit_data_ = {
 	   0,  // initialized below
 	   w,
@@ -196,6 +200,8 @@ void Texture::init(uint16_t w, uint16_t h) {
 }
 
 void Texture::lock() {
+	assert(is_initializer_thread());
+
 	if (blit_data_.texture_id == 0) {
 		return;
 	}
@@ -207,13 +213,15 @@ void Texture::lock() {
 		throw wexception("A surface that does not own its pixels can not be locked..");
 	}
 
-	pixels_.reset(new uint8_t[width() * height() * 4]);
+	pixels_.reset(new uint8_t[4ULL * width() * height()]);
 
 	Gl::State::instance().bind(GL_TEXTURE0, blit_data_.texture_id);
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels_.get());
 }
 
 void Texture::unlock(UnlockMode mode) {
+	assert(is_initializer_thread());
+
 	if (width() <= 0 || height() <= 0) {
 		return;
 	}
@@ -250,7 +258,7 @@ void Texture::set_pixel(uint16_t x, uint16_t y, const RGBAColor& color) {
 	*(reinterpret_cast<uint32_t*>(data)) = packed_color;
 }
 
-void Texture::setup_gl() {
+void Texture::setup_gl() const {
 	assert(blit_data_.texture_id != 0);
 	Gl::State::instance().bind_framebuffer(GlFramebuffer::instance().id(), blit_data_.texture_id);
 	glViewport(0, 0, width(), height());

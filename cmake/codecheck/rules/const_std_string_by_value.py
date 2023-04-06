@@ -8,6 +8,7 @@ construction/destruction.
 
 error_msg = 'const std::string must not be passed by value. Pass by reference!'
 
+strip_comments_and_strings = True
 regexp = r"""[\( ](?:const +std::string|std::string +const)(?: +[_a-zA-Z][_a-zA-Z0-9]*)?(?: *=.*)?(?:,(?: |$)|\))"""
 
 forbidden = [

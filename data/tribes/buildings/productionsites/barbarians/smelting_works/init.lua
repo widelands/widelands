@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_smelting_works",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Smelting Works"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -22,13 +22,13 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 44, 58 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 44, 58 },
       },
    },
@@ -53,7 +53,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=smelt_iron",
             "call=smelt_gold",
@@ -63,7 +63,7 @@ tribes:new_productionsite_type {
       -- 2 identical programs for iron to prevent unnecessary skipping penalty
       smelt_iron = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
-         descname = _"smelting iron",
+         descname = _("smelting iron"),
          actions = {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
@@ -76,7 +76,7 @@ tribes:new_productionsite_type {
       },
       smelt_iron_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
-         descname = _"smelting iron",
+         descname = _("smelting iron"),
          actions = {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
@@ -89,7 +89,7 @@ tribes:new_productionsite_type {
       },
       smelt_gold = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-         descname = _"smelting gold",
+         descname = _("smelting gold"),
          actions = {
             "return=skipped unless economy needs gold",
             "consume=coal gold_ore",
@@ -102,3 +102,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

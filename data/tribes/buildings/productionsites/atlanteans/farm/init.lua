@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Farm"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -21,10 +21,10 @@ tribes:new_productionsite_type {
       planks = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 74, 60 },
+         hotspot = { 86, 78 },
       },
    },
 
@@ -45,7 +45,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=plant",
             "call=harvest",
@@ -53,7 +53,7 @@ tribes:new_productionsite_type {
       },
       plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
-         descname = _"planting corn",
+         descname = _("planting corn"),
          actions = {
             "callworker=plant",
             "sleep=duration:10s"
@@ -61,7 +61,7 @@ tribes:new_productionsite_type {
       },
       harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
-         descname = _"harvesting corn",
+         descname = _("harvesting corn"),
          actions = {
             "callworker=harvest",
             "sleep=duration:4s"
@@ -70,9 +70,11 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
+      title = _("No Fields"),
+      heading = _("Out of Fields"),
       message = pgettext("atlanteans_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },
 }
+
+pop_textdomain()

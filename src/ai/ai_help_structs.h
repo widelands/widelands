@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2020 by the Widelands Development Team
+ * Copyright (C) 2009-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,17 +28,18 @@
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findnode.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
-
-class ProductionSite;
 class MilitarySite;
+class ProductionSite;
+}  // namespace Widelands
+
+namespace AI {
 
 enum class ExtendedBool : uint8_t { kUnset, kTrue, kFalse };
 
@@ -107,6 +107,7 @@ enum class SchedulerTaskId : uint8_t {
 	kManagementUpdate,
 	kUpdateStats,
 	kWarehouseFlagDist,
+	kDiplomacy,
 	kUnset
 };
 
@@ -121,28 +122,28 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 
 // TODO(tiborb): this should be replaced by command line switch
 constexpr int kFNeuronBitSize = 32;
-constexpr int kMutationRatePosition = 42;
 // This is expiration time for distance from a flag to nearest warehouse
-constexpr int kFlagDistanceExpirationPeriod = 120 * 1000;
+constexpr Duration kFlagDistanceExpirationPeriod(120 * 1000);
 // If the distance of flag-warehouse was not updated for this time, we presume that the flag
 // does not exist anymore and remove it
-constexpr int kOldFlagRemoveTime = 5 * 60 * 1000;
-
-constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
+constexpr Duration kOldFlagRemoveTime(5 * 60 * 1000);
 
 constexpr uint32_t kNoField = std::numeric_limits<uint32_t>::max();
 
-constexpr uint32_t kOneMinute = 60 * 1000;
-
-constexpr uint16_t kFarButReachable = 1000;
+constexpr uint16_t kWhFarButReachable = 250;
+constexpr uint16_t kWhNotReachable = 500;
 
 struct CheckStepRoadAI {
-	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);
+	CheckStepRoadAI(Widelands::Player* pl, uint8_t mc, bool oe);
 
-	bool allowed(const Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
-	bool reachable_dest(const Map&, const FCoords& dest) const;
+	[[nodiscard]] bool allowed(const Widelands::Map&,
+	                           Widelands::FCoords start,
+	                           Widelands::FCoords end,
+	                           int32_t dir,
+	                           Widelands::CheckStep::StepId) const;
+	[[nodiscard]] bool reachable_dest(const Widelands::Map&, const Widelands::FCoords& dest) const;
 
-	Player* player;
+	Widelands::Player* player;
 	uint8_t movecaps;
 	bool open_end;
 };
@@ -151,12 +152,16 @@ struct CheckStepRoadAI {
 // plus one step more to a field with own immovable. So that also flags and buildings are
 // included in resulting list
 struct CheckStepOwnTerritory {
-	CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe);
+	CheckStepOwnTerritory(Widelands::Player* pl, uint8_t mc, bool oe);
 
-	bool allowed(const Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
-	bool reachable_dest(const Map&, const FCoords& dest) const;
+	[[nodiscard]] bool allowed(const Widelands::Map&,
+	                           Widelands::FCoords start,
+	                           Widelands::FCoords end,
+	                           int32_t dir,
+	                           Widelands::CheckStep::StepId) const;
+	[[nodiscard]] bool reachable_dest(const Widelands::Map&, const Widelands::FCoords& dest) const;
 
-	Player* player;
+	Widelands::Player* player;
 	uint8_t movecaps;
 	bool open_end;
 };
@@ -164,12 +169,12 @@ struct CheckStepOwnTerritory {
 // We are looking for fields we can walk on
 // and owned by hostile player.
 struct FindNodeEnemy {
-	FindNodeEnemy(Player* p, Game& g);
+	FindNodeEnemy(Widelands::Player* p, Widelands::Game& g);
 
-	bool accept(const EditorGameBase&, const FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
-	Player* player;
-	Game& game;
+	Widelands::Player* player;
+	Widelands::Game& game;
 };
 
 // We are looking for buildings owned by hostile player
@@ -177,107 +182,111 @@ struct FindNodeEnemy {
 // this confuses the AI)
 
 struct FindNodeEnemiesBuilding {
-	FindNodeEnemiesBuilding(Player* p, Game& g);
+	FindNodeEnemiesBuilding(Widelands::Player* p, Widelands::Game& g);
 
-	bool accept(const EditorGameBase&, const FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
-	Player* player;
-	Game& game;
+	Widelands::Player* player;
+	Widelands::Game& game;
 };
 
 // We need to count walkable fields owned by enemy
 struct FindEnemyNodeWalkable {
-	FindEnemyNodeWalkable(Player* p, Game& g);
+	FindEnemyNodeWalkable(Widelands::Player* p, Widelands::Game& g);
 
-	bool accept(const EditorGameBase&, const FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
-	Player* player;
-	Game& game;
+	Widelands::Player* player;
+	Widelands::Game& game;
 };
 
 // Sometimes we need to know how many nodes our allies owns
 struct FindNodeAllyOwned {
-	FindNodeAllyOwned(Player* p, Game& g, PlayerNumber n);
+	FindNodeAllyOwned(Widelands::Player* p, Widelands::Game& g, Widelands::PlayerNumber n);
 
-	bool accept(const EditorGameBase&, const FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
-	Player* player;
-	Game& game;
-	PlayerNumber player_number;
+	Widelands::Player* player;
+	Widelands::Game& game;
+	Widelands::PlayerNumber player_number;
 };
 
 // When looking for unowned terrain to acquire, we must
 // pay speciall attention to fields where mines can be built.
 // Fields should be completely unowned
 struct FindNodeUnownedMineable {
-	FindNodeUnownedMineable(Player* p, Game& g, int32_t t = INVALID_INDEX);
+	FindNodeUnownedMineable(Widelands::Player* p,
+	                        Widelands::Game& g,
+	                        int32_t t = Widelands::INVALID_INDEX);
 
-	bool accept(const EditorGameBase&, const FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
-	Player* player;
-	Game& game;
+	Widelands::Player* player;
+	Widelands::Game& game;
 	int32_t ore_type;
 };
 
 // When looking for unowned terrain to acquire, we must
 // consider if any buildings (incl. mines) can be built on unowned land.
 struct FindNodeUnownedBuildable {
-	FindNodeUnownedBuildable(Player* p, Game& g);
+	FindNodeUnownedBuildable(Widelands::Player* p, Widelands::Game& g);
 
-	bool accept(const EditorGameBase&, const FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
-	Player* player;
-	Game& game;
+	Widelands::Player* player;
+	Widelands::Game& game;
 };
 
 // Unowned but walkable fields nearby
 struct FindNodeUnownedWalkable {
-	FindNodeUnownedWalkable(Player* p, Game& g);
+	FindNodeUnownedWalkable(Widelands::Player* p, Widelands::Game& g);
 
-	bool accept(const EditorGameBase&, const FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
-	Player* player;
-	Game& game;
+	Widelands::Player* player;
+	Widelands::Game& game;
 };
 
 // Looking only for mines-capable fields nearby
 // of specific type
 struct FindNodeMineable {
-	FindNodeMineable(Game& g, DescriptionIndex r);
+	FindNodeMineable(Widelands::Game& g, Widelands::DescriptionIndex r);
 
-	bool accept(const EditorGameBase&, const FCoords& fc) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const;
 
-	Game& game;
+	Widelands::Game& game;
 	int32_t res;
 };
 
 // Fishers and fishbreeders must be built near water
 struct FindNodeWater {
-	explicit FindNodeWater(const World& world);
+	explicit FindNodeWater(const Widelands::Descriptions& descriptions);
 
-	bool accept(const EditorGameBase&, const FCoords& coord) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&,
+	                          const Widelands::FCoords& coord) const;
 
 private:
-	const World& world_;
+	const Widelands::Descriptions& descriptions_;
 };
 
 // This is to be used for shipyards to make sure the water is wide enough
 // Open water is a field where all 6 adjacent triangles are water
 struct FindNodeOpenWater {
-	// 'world' is unused, but we need to fit the template.
-	explicit FindNodeOpenWater(const World& /* world */) {
+	// 'descriptions' is unused, but we need to fit the template.
+	explicit FindNodeOpenWater(const Widelands::Descriptions& /* descriptions */) {
 	}
 
-	bool accept(const EditorGameBase&, const FCoords& coord) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&,
+	                          const Widelands::FCoords& coord) const;
 };
 
 struct FindNodeWithFlagOrRoad {
-	bool accept(const EditorGameBase&, FCoords) const;
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, Widelands::FCoords) const;
 };
 
 // Accepts any field
 struct FindNodeAcceptAll {
-	bool accept(const EditorGameBase&, FCoords) const {
+	[[nodiscard]] bool accept(const Widelands::EditorGameBase&, Widelands::FCoords) const {
 		return true;
 	}
 };
@@ -290,17 +299,17 @@ struct NearFlag {
 		}
 	};
 	NearFlag();
-	NearFlag(const Flag* f, int32_t const c);
+	NearFlag(const Widelands::Flag* f, int32_t c);
 
 	bool operator<(const NearFlag& f) const {
 		return current_road_distance > f.current_road_distance;
 	}
 
-	bool operator==(Flag const* const f) const {
+	bool operator==(Widelands::Flag const* const f) const {
 		return flag == f;
 	}
 
-	Flag const* flag;
+	Widelands::Flag const* flag;
 	bool to_be_checked;
 	uint32_t current_road_distance;
 };
@@ -309,20 +318,20 @@ struct NearFlag {
 // used to count events within a time frame - duration_ (older ones are
 // stripped with strip_old function)
 struct EventTimeQueue {
-	EventTimeQueue();
+	EventTimeQueue() = default;
 
-	void push(uint32_t, uint32_t = std::numeric_limits<uint32_t>::max());
-	uint32_t count(uint32_t, uint32_t = std::numeric_limits<uint32_t>::max());
-	void strip_old(uint32_t);
+	void push(const Time&, uint32_t = std::numeric_limits<uint32_t>::max());
+	uint32_t count(const Time&, uint32_t = std::numeric_limits<uint32_t>::max());
+	void strip_old(const Time&);
 
 private:
-	const uint32_t duration_ = 20 * 60 * 1000;
+	const Duration duration_ = Duration(20 * 60 * 1000);
 	// FIFO container where newest goes to the front
-	std::deque<std::pair<uint32_t, uint32_t>> queue;
+	std::deque<std::pair<Time, uint32_t>> queue;
 };
 
 struct WalkableSpot {
-	Coords coords;
+	Widelands::Coords coords;
 	bool has_flag;
 
 	int32_t cost;
@@ -332,89 +341,120 @@ struct WalkableSpot {
 	int16_t neighbours[6];
 };
 
+// For counting immovables by associated building name or category on nearby fields
+struct ImmovableAttribute {
+	explicit ImmovableAttribute(const std::string& init_building_name,
+	                            BuildingAttribute init_building_attribute)
+	   : building_name(init_building_name), building_attribute(init_building_attribute) {
+	}
+
+	bool operator<(const ImmovableAttribute& other) const {
+		// We don't care about the sort order, we just need one so that we can stick it in a set
+		return building_attribute < other.building_attribute ||
+		       (building_attribute == other.building_attribute &&
+		        building_name < other.building_name);
+	}
+
+	const std::string building_name;
+	const BuildingAttribute building_attribute;
+};
+
 struct BuildableField {
 	explicit BuildableField(const Widelands::FCoords& fc);
 
+	// Preventing unintended copy construction (good idea?)
+	BuildableField(const BuildableField& temp_obj) = delete;
+	BuildableField& operator=(const BuildableField& temp_obj) = delete;
+
 	Widelands::FCoords coords;
 
-	uint32_t field_info_expiration;
+	Time field_info_expiration;
 
-	bool preferred;
-	bool enemy_nearby;
-	bool enemy_accessible_;
+	bool preferred{false};
+	bool enemy_nearby{false};
+	bool enemy_accessible_{false};
 
-	bool enemy_wh_nearby;
-	uint16_t unowned_land_nearby;
-	uint16_t enemy_owned_land_nearby;
-	uint16_t unowned_buildable_spots_nearby;
-	uint16_t unowned_portspace_vicinity_nearby;
-	uint16_t nearest_buildable_spot_nearby;
+	bool invalidated{false};
+
+	bool enemy_wh_nearby{false};
+	uint16_t unowned_land_nearby{0U};
+	uint16_t enemy_owned_land_nearby{0U};
+	uint16_t unowned_buildable_spots_nearby{0U};
+	uint16_t unowned_portspace_vicinity_nearby{0U};
+	uint16_t nearest_buildable_spot_nearby{0U};
 	// to identify that field is too close to border and no production building should be built there
-	bool near_border;
-	uint16_t unowned_mines_spots_nearby;
-	uint16_t unowned_iron_mines_nearby;
-	uint8_t trees_nearby;
-	uint8_t bushes_nearby;
-	uint8_t rocks_nearby;
-	int16_t water_nearby;
-	int16_t open_water_nearby;
-	int16_t distant_water;
-	int16_t fish_nearby;
-	int8_t critters_nearby;
-	ResourceAmount ground_water;  // used by wells
-	uint8_t space_consumers_nearby;
-	uint8_t rangers_nearby;
+	bool near_border{false};
+	uint16_t unowned_mines_spots_nearby{0U};
+	uint16_t unowned_iron_mines_nearby{0u};
+	// Immovables categorized by building name, so we can have multiple lumberjack/ranger types
+	std::map<std::string, uint8_t> immovables_by_name_nearby;
+	// Immovables categorized by building attribute, so other buildings can access the information
+	// (e.g. space consumers). Also used for the neurons.
+	std::map<BuildingAttribute, uint8_t> immovables_by_attribute_nearby;
+	int16_t water_nearby{-1};
+	int16_t open_water_nearby{-1};
+	int16_t distant_water{0};
+	int16_t fish_nearby{-1};
+	int8_t critters_nearby{-1};
+	Widelands::ResourceAmount ground_water{1};  // used by wells
+	uint8_t space_consumers_nearby{0U};
+	uint8_t rangers_nearby{0U};
 	// to manage the military better following variables exists:
-	// capacity of nearby buildings:
-	int16_t area_military_capacity;
+	// future soldier capacity of own nearby militarysites:
+	int16_t area_military_capacity{0};
+	int16_t future_area_military_capacity{0};
 	// distance to near buldings:
-	int16_t military_loneliness;
+	int16_t military_loneliness{1000};
+	int16_t future_military_loneliness{1000};
 	// count of military buildings in construction
 	// when making decision on new mulitary buildings it considers also
 	// unowned fields and mines, but this information is not quite correct as there
 	// are construction sites that will change this once they are built
-	int16_t military_in_constr_nearby;
+	int16_t military_in_constr_nearby{0};
 	// actual count of soldiers in nearby buldings
-	int16_t own_military_presence;
-	int16_t enemy_military_presence;
-	int16_t enemy_military_sites;  // Including unfinished
-	int16_t ally_military_presence;
+	int16_t own_military_presence{0};
+	int16_t enemy_military_presence{0};
+	int16_t enemy_military_sites{0};  // Including unfinished
+	int16_t ally_military_presence{0};
 	// stationed (manned) military buildings nearby
-	int16_t military_stationed;
-	// unconnected buildings nearby
-	bool unconnected_nearby;
-	int16_t military_unstationed;
-	int16_t own_non_military_nearby;
-	bool defense_msite_allowed;
-	Widelands::ExtendedBool is_portspace;
-	bool port_nearby;  // to increase priority if a port is nearby,
+	int16_t military_stationed{0};
+	uint32_t average_flag_dist_to_wh;
+	int16_t military_unstationed{0};
+	int16_t own_non_military_nearby{0};
+	bool defense_msite_allowed{false};
+	ExtendedBool is_portspace{ExtendedBool::kUnset};
+	bool port_nearby{false};  // to increase priority if a port is nearby,
 	// especially for new colonies
-	Widelands::ExtendedBool portspace_nearby;  // special fields intended for ports
-	int32_t max_buildcap_nearby;
+	ExtendedBool portspace_nearby{ExtendedBool::kUnset};  // special fields intended for ports
+	ExtendedBool shipyard_preferred;                      // special fields intended for shipyards
+	int32_t max_buildcap_nearby{0};
 	// It is not necessary to check resources (stones, fish...) too frequently as they do not change
 	// fast. This stores the time of the last check.
-	uint32_t last_resources_check_time;
-	int32_t military_score_;
-	bool inland;
-	uint16_t local_soldier_capacity;
-	bool is_militarysite;
+	Time last_resources_check_time;
+	int32_t military_score_{0};
+	bool inland{false};
+	uint16_t local_soldier_capacity{0U};
+	bool is_militarysite{false};
 
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
-	std::vector<uint8_t> collecting_producers_nearby;
-	// and for rangers, fishbreeders:
-	std::vector<uint8_t> supporters_nearby;
+	// <building index, amount>
+	std::map<Widelands::DescriptionIndex, uint8_t> supported_producers_nearby;
+	// <building index, amount>
+	std::map<Widelands::DescriptionIndex, uint8_t> buildings_nearby;
+	// and for rangers, fishbreeders: <building name, amount>
+	std::map<std::string, uint8_t> supporters_nearby;
 };
 
 struct MineableField {
 	explicit MineableField(const Widelands::FCoords& fc);
 
 	Widelands::FCoords coords;
-	uint32_t field_info_expiration;
-	bool preferred;
-	int32_t mines_nearby;
+	Time field_info_expiration;
+	bool preferred{false};
+	int32_t mines_nearby{0};
 	// this is to provide that a mine is not built on the edge of mine area
-	int32_t same_mine_fields_nearby;
+	int32_t same_mine_fields_nearby{0};
 };
 
 struct EconomyObserver {
@@ -422,8 +462,8 @@ struct EconomyObserver {
 
 	Widelands::Economy& economy;
 	std::deque<Widelands::Flag const*> flags;
-	uint32_t dismantle_grace_time;
-	uint32_t fields_block_last_time;
+	Time dismantle_grace_time;
+	Time fields_block_last_time;
 };
 
 struct BuildingObserver {
@@ -439,18 +479,13 @@ struct BuildingObserver {
 	};
 
 	int32_t total_count() const;
-	Widelands::AiModeBuildings aimode_limit_status() const;
-	bool buildable(Widelands::Player& p);
+	AiModeBuildings aimode_limit_status() const;
+	bool buildable(const Widelands::Player& p) const;
 
 	// Convenience functions for is_what
 	bool is(BuildingAttribute) const;
 	void set_is(BuildingAttribute);
 	void unset_is(BuildingAttribute);
-
-	// Building collects a ware from the map
-	bool has_collected_map_resource() const;
-	void set_collected_map_resource(const TribeDescr& tribe, const std::string& ware_name);
-	DescriptionIndex get_collected_map_resource() const;
 
 	char const* name;
 	Widelands::DescriptionIndex id;
@@ -458,21 +493,20 @@ struct BuildingObserver {
 
 	Type type;
 
-	Widelands::BuildingNecessity new_building;
+	BuildingNecessity new_building;
 	uint32_t new_building_overdue;
 	int32_t primary_priority;
 
-	bool expansion_type;       // military building used that can be used to control area
-	bool fighting_type;        // military building built near enemies
-	bool mountain_conqueror;   // military building built near mountains
-	uint32_t prohibited_till;  // do not build before (ms)
-	uint32_t forced_after;     // do not wait until ware is needed
+	bool expansion_type;      // military building used that can be used to control area
+	bool fighting_type;       // military building built near enemies
+	bool mountain_conqueror;  // military building built near mountains
+	Time prohibited_till;     // do not build before (ms)
+	Time forced_after;        // do not wait until ware is needed
 	uint8_t max_trainingsites_proportion;
 
 	uint16_t unconnected_count;  // to any warehouse (count of such buildings)
 
-	DescriptionIndex mines;  // type of resource it mines_
-	uint16_t mines_percent;  // % of res it can mine
+	Widelands::DescriptionIndex mines;  // type of resource it mines
 	uint32_t current_stats;
 
 	uint32_t basic_amount;  // basic amount for basic economy as defined in init.lua
@@ -488,9 +522,10 @@ struct BuildingObserver {
 	std::unordered_set<Widelands::DescriptionIndex> substitute_inputs;
 	int32_t substitutes_count;
 
-	std::set<DescriptionIndex> production_hints;
-
-	bool requires_supporters;
+	bool requires_supporters = false;
+	// For rangers, fishbreeders. The index is the productionsite's one. We remember both for faster
+	// retrieval
+	std::map<Widelands::DescriptionIndex, const Widelands::ProductionSiteDescr*> supported_producers;
 
 	// information needed for decision on new building construction
 	int16_t initial_preciousness;
@@ -505,27 +540,26 @@ struct BuildingObserver {
 
 	// used to track amount of wares produced by building
 	uint32_t stocklevel_count;
-	uint32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
-	uint32_t last_dismantle_time;
-	uint32_t construction_decision_time;
-	uint32_t last_building_built;
+	Time stocklevel_time;  // time when stocklevel_ was last time recalculated
+	Time last_dismantle_time;
+	Time construction_decision_time;
+	Time last_building_built;
 
 	uint32_t unoccupied_count;
 
 	bool build_material_shortage;
 
 private:
-	DescriptionIndex collected_map_resource;
 	std::set<BuildingAttribute> is_what;
 };
 
 struct ProductionSiteObserver {
 	Widelands::ProductionSite* site = nullptr;
-	uint32_t built_time = 0U;
-	uint32_t unoccupied_till = 0U;
-	uint32_t no_resources_since = kNever;
+	Time built_time = Time(0);
+	Time unoccupied_till = Time(0);
+	Time no_resources_since = Time();
 	bool upgrade_pending = false;
-	uint32_t dismantle_pending_since = kNever;
+	Time dismantle_pending_since = Time();
 	BuildingObserver* bo = nullptr;
 };
 
@@ -533,8 +567,8 @@ struct MilitarySiteObserver {
 	Widelands::MilitarySite* site;
 	BuildingObserver* bo;
 	uint16_t understaffed;
-	uint32_t last_change;  // to prevent switching the occupancy policy too fast
-	uint32_t built_time;
+	Time last_change;  // to prevent switching the occupancy policy too fast
+	Time built_time;
 };
 
 struct TrainingSiteObserver {
@@ -552,7 +586,7 @@ struct WarehouseSiteObserver {
 struct ShipObserver {
 	Widelands::Ship* ship;
 	bool waiting_for_command_ = false;
-	uint32_t last_command_time = 0;
+	Time last_command_time = Time(0);
 	bool escape_mode = false;
 
 	// direction by which the ship circumvents an island
@@ -578,11 +612,11 @@ struct EnemySiteObserver {
 	int32_t attack_soldiers_competency = 0;
 	int32_t defenders_strength = 0;
 	uint8_t stationed_soldiers = 0U;
-	uint32_t last_time_seen = 0U;
-	uint32_t last_tested = 0U;
+	Time last_time_seen = Time(0);
+	Time last_tested = Time(0);
 	int16_t score = 0;
-	Widelands::ExtendedBool mines_nearby = Widelands::ExtendedBool::kUnset;
-	uint32_t last_time_attacked = 0U;
+	ExtendedBool mines_nearby = ExtendedBool::kUnset;
+	Time last_time_attacked = Time(0);
 	uint32_t attack_counter = 0U;
 	uint16_t enemy_military_presence_in_region = 0U;
 	uint16_t enemy_military_sites_in_region = 0U;
@@ -591,14 +625,14 @@ struct EnemySiteObserver {
 // as all mines have 3 levels, AI does not know total count of mines per mined material
 // so this observer will be used for this
 struct MineTypesObserver {
-	MineTypesObserver();
+	MineTypesObserver() = default;
 
-	uint16_t total_count() const;
+	[[nodiscard]] uint16_t total_count() const;
 
-	uint16_t in_construction;
-	uint16_t finished;
-	bool is_critical;
-	uint16_t unoccupied;
+	uint16_t in_construction{0U};
+	uint16_t finished{0U};
+	bool is_critical{false};
+	uint16_t unoccupied{0U};
 };
 
 // This struct contains count of mineable fields grouped by ore/resource type
@@ -619,18 +653,20 @@ private:
 
 constexpr int kNeuronWeightLimit = 100;
 constexpr size_t kNeuronMaxPosition = 20;
-constexpr size_t kSecondParentProbability = 50;
+// This defines probability of taking DNA from second parent
+// Probably it would best to remove the 'crossbreeding' concept altogether
+constexpr size_t kSecondParentProbability = 500;
 
 // A bunch of parameters used for trainig AI (for calculation of fitness function result)
 constexpr int16_t kCurrentLandDivider = 2;
 constexpr int16_t kLandDeltaMultiplier = 1;
-constexpr int16_t kBonus = 1000;
-constexpr int16_t kAttackersMultiplier = 1;
-constexpr int16_t kAttackBonus = 100;
+constexpr int16_t kAttackersBonus = 3;
+constexpr int16_t kAttackBonus = 100;  // Bonus if the AI attacked at least once
 constexpr int16_t kTrainedSoldiersScore = 250;
 constexpr int16_t kConqueredWhBonus = 300;
-constexpr int16_t kStrengthMultiplier = 30;
+constexpr int16_t kStrengthMultiplier = 15;
 constexpr int16_t kPSitesRatioMultiplier = 1;
+constexpr int32_t kShipBonus = 1000;  // Bonus for each completed ship
 
 struct Neuron {
 	static int clip_weight_to_range(int w) {
@@ -642,16 +678,16 @@ struct Neuron {
 	Neuron(int8_t, uint8_t, uint16_t);
 	void recalculate();
 	void set_weight(int8_t w);
-	int8_t get_weight() {
+	[[nodiscard]] int8_t get_weight() const {
 		return weight;
 	}
 	int8_t get_result(size_t);
 	int8_t get_result_safe(int32_t, bool = false);
 	void set_type(uint8_t);
-	uint8_t get_type() {
+	[[nodiscard]] uint8_t get_type() const {
 		return type;
 	}
-	uint16_t get_id() {
+	[[nodiscard]] uint16_t get_id() const {
 		return id;
 	}
 
@@ -669,7 +705,7 @@ struct FNeuron {
 	bool get_result(bool, bool, bool, bool bool4 = true, bool bool5 = true);
 	bool get_position(uint8_t);
 	uint32_t get_int();
-	uint16_t get_id() {
+	[[nodiscard]] uint16_t get_id() const {
 		return id;
 	}
 
@@ -692,11 +728,11 @@ private:
 
 // This is to keep all data related to AI magic numbers
 struct ManagementData {
-	void mutate(PlayerNumber = 0);
-	void new_dna_for_persistent(uint8_t, Widelands::AiType);
+	void mutate(Widelands::PlayerNumber = 0);
+	void new_dna_for_persistent(uint8_t, AiType);
 	void copy_persistent_to_local();
-	void review(uint32_t gametime,
-	            PlayerNumber pn,
+	void review(const Time& gametime,
+	            Widelands::PlayerNumber pn,
 	            uint32_t land,
 	            uint32_t max_e_land,
 	            uint32_t old_land,
@@ -704,8 +740,10 @@ struct ManagementData {
 	            int16_t trained_soldiers,
 	            uint16_t strength,
 	            uint32_t existing_ps,
-	            uint32_t first_iron_mine_time);
-	void dump_data(PlayerNumber);
+	            const Time& first_iron_mine_time,
+	            uint16_t ships_count,
+	            uint16_t finished_mine_types);
+	void dump_data(Widelands::PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;
 		return next_neuron_id - 1;
@@ -724,9 +762,9 @@ struct ManagementData {
 		ai_training_mode_ = true;
 	}
 
-	int16_t get_military_number_at(uint8_t);
-	void set_military_number_at(uint8_t, int16_t);
-	MutatingIntensity do_mutate(uint8_t, int16_t);
+	[[nodiscard]] int16_t get_military_number_at(uint8_t) const;
+	void set_military_number_at(uint8_t, int16_t) const;
+	MutatingIntensity do_mutate(bool, int16_t);
 	int8_t shift_weight_value(int8_t, bool = true);
 	void test_consistency(bool = false);
 
@@ -735,54 +773,54 @@ struct ManagementData {
 	Widelands::Player::AiPersistentState* persistent_data;
 
 private:
-	void dump_output(Widelands::Player::AiPersistentState, PlayerNumber);
+	void dump_output(Widelands::Player::AiPersistentState, Widelands::PlayerNumber);
 
 	int32_t score = 1;
 	uint8_t primary_parent = 255;
 	uint16_t next_neuron_id = 0U;
 	uint16_t next_bi_neuron_id = 0U;
 	uint16_t performance_change = 0U;
-	Widelands::AiType ai_type = Widelands::AiType::kNormal;
+	AiType ai_type = AiType::kNormal;
 	bool ai_training_mode_ = false;
 	uint16_t pref_number_probability = 200;
-	AiDnaHandler ai_dna_handler;
+	Widelands::AiDnaHandler ai_dna_handler;
 };
 
 // this is used to count militarysites by their size
 struct MilitarySiteSizeObserver {
-	MilitarySiteSizeObserver();
+	MilitarySiteSizeObserver() = default;
 
-	uint16_t in_construction;
-	uint16_t finished;
+	uint16_t in_construction{0U};
+	uint16_t finished{0U};
 };
 
 // this represents a scheduler task
 struct SchedulerTask {
-	SchedulerTask(const uint32_t time,
-	              const Widelands::SchedulerTaskId t,
-	              const uint8_t p,
-	              const char* d);
+	SchedulerTask(const Time& time, SchedulerTaskId t, uint8_t p, const char* d);
 
 	bool operator<(const SchedulerTask& other) const;
 
-	uint32_t due_time;
-	Widelands::SchedulerTaskId id;
+	Time due_time;
+	SchedulerTaskId id;
 	// used to sort jobs when AI has to perform more jobs at once
 	uint8_t priority;
 	// used only for debug purposes
 	std::string descr;
+	uint32_t call_count;
+	double total_exec_time_ms;
+	double max_exec_time_ms;
 };
 
 // List of blocked fields with block time, with some accompanying functions
 struct BlockedFields {
-	void add(Coords coords, uint32_t till);
+	void add(Widelands::Coords coords, const Time& till);
 	uint32_t count();
-	void remove_expired(uint32_t gametime);
-	bool is_blocked(Coords coords);
+	void remove_expired(const Time& gametime);
+	bool is_blocked(Widelands::Coords coords);
 
 private:
 	// <hash of field coordinates, time till blocked>
-	std::map<uint32_t, uint32_t> blocked_fields_;
+	std::map<uint32_t, Time> blocked_fields_;
 };
 
 // This is a struct that stores strength of players, info on teams and provides some outputs from
@@ -798,17 +836,24 @@ private:
 		           uint32_t cs,
 		           uint32_t land,
 		           uint32_t oland,
-		           uint32_t o60l);
+		           uint32_t o60l,
+		           int32_t ds,
+		           uint32_t bld,
+		           bool def);
 
 		Widelands::TeamNumber team_number = 0U;
 		uint32_t players_power = 0U;
 		uint32_t old_players_power = 0U;
 		uint32_t old60_players_power = 0U;
 		uint32_t players_casualities = 0U;
-		uint32_t last_time_seen = 0U;
+		Time last_time_seen = Time();       // never seen
+		Time last_time_requested = Time();  // never sent a diplo request
 		uint32_t players_land = 0U;
 		uint32_t old_players_land = 0U;
 		uint32_t old60_players_land = 0U;
+		int32_t players_diplomacy_score = 0U;
+		uint32_t players_buildings = 0U;
+		bool defeated = false;
 	};
 
 public:
@@ -824,44 +869,80 @@ public:
 	         uint32_t cs,
 	         uint32_t land,
 	         uint32_t oland,
-	         uint32_t o60l);
+	         uint32_t o60l,
+	         int32_t ds,
+	         uint32_t bld,
+	         bool def);
 	void remove_stat(Widelands::PlayerNumber pn);
 	void recalculate_team_power();
 
 	// This is strength of player plus third of strength of other members of his team
-	uint32_t get_modified_player_power(Widelands::PlayerNumber pn);
-	uint32_t get_player_power(Widelands::PlayerNumber pn);
-	uint32_t get_old_player_power(Widelands::PlayerNumber pn);
-	uint32_t get_old60_player_power(Widelands::PlayerNumber pn);
-	uint32_t get_player_land(Widelands::PlayerNumber pn);
-	uint32_t get_old_player_land(Widelands::PlayerNumber pn);
-	uint32_t get_old60_player_land(Widelands::PlayerNumber pn);
-	uint32_t get_visible_enemies_power(uint32_t);
-	uint32_t get_enemies_average_power();
-	uint32_t get_enemies_average_land();
-	uint32_t get_enemies_max_power();
-	uint32_t get_enemies_max_land();
-	uint32_t get_old_visible_enemies_power(uint32_t);
-	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2);
-	bool strong_enough(Widelands::PlayerNumber pl);
-	void set_last_time_seen(uint32_t, Widelands::PlayerNumber);
-	bool player_seen_lately(Widelands::PlayerNumber, uint32_t);
-	bool get_is_enemy(Widelands::PlayerNumber);
-	uint8_t enemies_seen_lately_count(uint32_t);
-	bool any_enemy_seen_lately(uint32_t);
-	void set_update_time(uint32_t);
-	uint32_t get_update_time();
+	[[nodiscard]] uint32_t get_modified_player_power(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_player_power(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_old_player_power(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_old60_player_power(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_player_land(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_old_player_land(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_old60_player_land(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_player_buildings(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_visible_enemies_power(const Time&);
+	[[nodiscard]] uint32_t get_enemies_average_power();
+	[[nodiscard]] uint32_t get_enemies_average_land();
+	[[nodiscard]] uint32_t get_enemies_max_power();
+	[[nodiscard]] uint32_t get_max_power();
+	[[nodiscard]] uint32_t get_enemies_max_land();
+	[[nodiscard]] uint32_t get_max_land();
+	[[nodiscard]] uint32_t get_max_buildings();
+	[[nodiscard]] Widelands::TeamNumber get_team_number(Widelands::PlayerNumber pn);
+	[[nodiscard]] int32_t get_diplo_score(Widelands::PlayerNumber pn);
+	[[nodiscard]] uint32_t get_old_visible_enemies_power(const Time&);
+	[[nodiscard]] bool players_in_same_team(Widelands::PlayerNumber pl1,
+	                                        Widelands::PlayerNumber pl2);
+	[[nodiscard]] bool strong_enough(Widelands::PlayerNumber pl);
+	void set_last_time_seen(const Time&, Widelands::PlayerNumber);
+	void set_last_time_requested(const Time&, Widelands::PlayerNumber);
+	[[nodiscard]] bool player_seen_lately(Widelands::PlayerNumber, const Time&);
+	[[nodiscard]] bool player_diplo_requested_lately(Widelands::PlayerNumber, const Time&);
+	[[nodiscard]] bool get_is_enemy(Widelands::PlayerNumber);
+	[[nodiscard]] uint8_t enemies_seen_lately_count(const Time&);
+	[[nodiscard]] uint8_t members_in_team(Widelands::TeamNumber tn);
+	[[nodiscard]] bool get_is_alone(Widelands::PlayerNumber pn);
+	[[nodiscard]] int32_t get_team_average_score(Widelands::TeamNumber tn,
+	                                             Widelands::PlayerNumber exclude_pn = 0);
+	[[nodiscard]] uint32_t team_power(Widelands::TeamNumber tn);
+	[[nodiscard]] uint8_t players_active() const;
+	[[nodiscard]] Widelands::PlayerNumber get_worst_ally() const;
+	[[nodiscard]] int32_t get_worst_ally_score() const;
+	[[nodiscard]] bool any_enemy_seen_lately(const Time&);
+	void set_update_time(const Time&);
+	const Time& get_update_time();
+
+	// Decide which of inviting or requesting to join is both possible and desirable, and do the
+	// chosen action. May choose to do nothing, if neither is possible, or the possible action is
+	// not desirable.
+	void join_or_invite(Widelands::PlayerNumber pn, Widelands::Game& game, const Time& gametime);
 
 private:
 	// This is the core part of this struct
-	std::map<Widelands::PlayerNumber, PlayerStat> all_stats;
+	std::map<Widelands::PlayerNumber, PlayerStat> all_stats_;
 
 	// Number of team, sum of players' strength
-	std::map<Widelands::TeamNumber, uint32_t> team_powers;
+	std::map<Widelands::TeamNumber, uint32_t> team_powers_;
+	// Number of team, sum of players' diploscores
+	std::map<Widelands::TeamNumber, uint32_t> team_scores_sum_;
+	// Number of team, number of members
+	std::map<Widelands::TeamNumber, uint8_t> team_members_;
+	// number of active players (not defeated)
+	uint8_t active_players_;
 
-	uint32_t update_time;
-	PlayerNumber this_player_number;
-	PlayerNumber this_player_team;
+	Time update_time;
+	Widelands::PlayerNumber this_player_number;
+	Widelands::PlayerNumber this_player_team;
+
+	// Member of own team with lowest diploscore
+	Widelands::PlayerNumber worst_ally_;
+	// Lowest member diploscore in own team
+	int32_t worst_ally_score_;
 };
 
 // This is a wrapper around map of <Flag coords hash:distance from flag to nearest warehouse>
@@ -872,28 +953,28 @@ struct FlagWarehouseDistances {
 private:
 	struct FlagInfo {
 		FlagInfo();
-		FlagInfo(uint32_t, uint16_t, uint32_t);
+		FlagInfo(const Time&, uint16_t, uint32_t);
 		// Distance to a nearest warehouse expires, but in two stages
 		// This is complete expiration and such flag is treated as without distance to WH
-		uint32_t expiry_time;
+		Time expiry_time;
 		// When recalculating new distance, if the current information is younger than
 		// soft_expiry_time it is only decreased if new value is smaller After soft_expiry_time is
 		// updated in any case
-		uint32_t soft_expiry_time;
+		Time soft_expiry_time;
 		uint16_t distance;
 		// This is coords hash of nearest warehouse, not used by now
 		uint32_t nearest_warehouse;
 		// after building of new road, the distance information is updated not immediately so
 		// we prohibit current flag from another road building...
-		uint32_t new_road_prohibited_till;
+		Time new_road_prohibited_till;
 
-		bool update(uint32_t, uint16_t, uint32_t);
+		bool update(const Time&, uint16_t, uint32_t);
 		// Saying the road was built and when
-		void set_road_built(uint32_t);
+		void set_road_built(const Time&);
 		// Asking if road can be built from this flag (providing current gametime)
-		bool is_road_prohibited(uint32_t) const;
+		[[nodiscard]] bool is_road_prohibited(const Time&) const;
 		// get current distance (providing current gametime)
-		uint16_t get(uint32_t, uint32_t*) const;
+		uint16_t get(const Time&, uint32_t*) const;
 	};
 	std::map<uint32_t, FlagInfo> flags_map;
 
@@ -901,13 +982,13 @@ public:
 	// All these function uses lookup in flags_map so first argument is usually flag coords hash
 	bool set_distance(uint32_t flag_coords,
 	                  uint16_t distance,
-	                  uint32_t gametime,
+	                  const Time& gametime,
 	                  uint32_t nearest_warehouse);
-	int16_t get_distance(uint32_t flag_coords, uint32_t gametime, uint32_t* nw);
-	void set_road_built(uint32_t coords_hash, uint32_t gametime);
-	bool is_road_prohibited(uint32_t coords_hash, uint32_t gametime);
-	uint16_t count() const;
-	bool remove_old_flag(uint32_t gametime);
+	int16_t get_wh_distance(uint32_t flag_coords, const Time& gametime, uint32_t* nw);
+	void set_road_built(uint32_t coords_hash, const Time& gametime);
+	bool is_road_prohibited(uint32_t coords_hash, const Time& gametime);
+	[[nodiscard]] uint16_t count() const;
+	bool remove_old_flag(const Time& gametime);
 };
 
 // This is one-time structure - initiated and filled up when investigating possible roads to be
@@ -929,8 +1010,8 @@ struct FlagCandidates {
 		uint16_t possible_road_distance;
 		uint16_t cand_flag_distance_to_wh;
 		// Scoring is considering multiple things
-		int16_t score() const;
-		bool is_buildable() {
+		[[nodiscard]] int16_t score() const;
+		[[nodiscard]] bool is_buildable() const {
 			return possible_road_distance > 0;
 		}
 		bool operator<(const Candidate& other) const {
@@ -943,10 +1024,10 @@ private:
 	uint16_t start_flag_dist_to_wh;
 
 public:
-	const std::vector<Candidate>& flags() const {
+	[[nodiscard]] const std::vector<Candidate>& flags() const {
 		return flags_;
 	}
-	bool has_candidate(uint32_t) const;
+	[[nodiscard]] bool has_candidate(uint32_t) const;
 	void add_flag(uint32_t, bool, uint16_t, uint16_t);
 	bool set_cur_road_distance(uint32_t, uint16_t);
 	bool set_road_possible(uint32_t, uint16_t);
@@ -955,8 +1036,8 @@ public:
 	uint32_t count() {
 		return flags_.size();
 	}
-	FlagCandidates::Candidate* get_winner(const int16_t = 0);
+	FlagCandidates::Candidate* get_winner(int16_t = 0);
 };
-}  // namespace Widelands
+}  // namespace AI
 
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H

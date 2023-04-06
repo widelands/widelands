@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,10 +21,11 @@
 #include <SDL_mouse.h>
 #include <SDL_timer.h>
 
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_mousewheel_options.h"
 
 namespace UI {
 
@@ -47,24 +47,24 @@ Scrollbar::Scrollbar(Panel* const parent,
                      uint32_t const h,
                      UI::PanelStyle style,
                      bool const horiz)
-   : Panel(parent, x, y, w, h),
+   : Panel(parent, style, x, y, w, h),
      horizontal_(horiz),
-     force_draw_(false),
-     pos_(0),
-     singlestepsize_(1),
-     pagesize_(5),
+
      buttonsize_(kSize),
-     steps_(100),
-     pressed_(Area::None),
-     time_nextact_(0),
-     knob_grabdelta_(0),
-     pic_minus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_left.png" :
+
+     pic_minus_(g_image_cache->get(horiz ? "images/ui_basic/scrollbar_left.png" :
                                            "images/ui_basic/scrollbar_up.png")),
-     pic_plus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_right.png" :
-                                          "images/ui_basic/scrollbar_down.png")),
-     button_style_(g_gr->styles().scrollbar_style(style)) {
+     pic_plus_(g_image_cache->get(horiz ? "images/ui_basic/scrollbar_right.png" :
+                                          "images/ui_basic/scrollbar_down.png")) {
 	set_thinks(true);
 	layout();
+
+	// This is such a low-level UI element that we can safely mark it initialized immediately
+	initialization_complete();
+}
+
+inline const UI::PanelStyleInfo& Scrollbar::button_style() const {
+	return *g_style_manager->scrollbar_style(panel_style_);
 }
 
 /**
@@ -229,10 +229,10 @@ void Scrollbar::action(Area const area) {
 
 	switch (area) {
 	case Area::Minus:
-		diff = -singlestepsize_;
+		diff = -1 * singlestepsize_;
 		break;
 	case Area::MinusPage:
-		diff = -pagesize_;
+		diff = -1 * pagesize_;
 		break;
 	case Area::Plus:
 		diff = singlestepsize_;
@@ -250,7 +250,7 @@ void Scrollbar::action(Area const area) {
 }
 
 void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
-	draw_background(dst, r.cast<int>(), *button_style_);
+	draw_background(dst, r.cast<int>(), button_style());
 
 	// Draw the picture
 	const Image* pic = nullptr;
@@ -260,7 +260,7 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
 		pic = pic_plus_;
 	}
 
-	if (pic) {
+	if (pic != nullptr) {
 		double image_scale = std::min(1., std::min(static_cast<double>(r.w - 4) / pic->width(),
 		                                           static_cast<double>(r.h - 4) / pic->height()));
 		int blit_width = image_scale * pic->width();
@@ -403,8 +403,14 @@ void Scrollbar::think() {
 	}
 }
 
-bool Scrollbar::handle_mousewheel(uint32_t, int32_t, int32_t y) {
-	if (y < 0) {
+bool Scrollbar::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	// Only vertical scrollbars are used currently
+	int32_t change =
+	   get_mousewheel_change(MousewheelHandlerConfigID::kScrollbarVertical, x, y, modstate);
+	if (change == 0) {
+		return false;
+	}
+	if (change > 0) {
 		action(Area::Plus);
 	} else {
 		action(Area::Minus);
@@ -435,7 +441,7 @@ bool Scrollbar::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	}
 	return result;
 }
-bool Scrollbar::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
+bool Scrollbar::handle_mouserelease(const uint8_t btn, int32_t /*x*/, int32_t /*y*/) {
 	bool result = false;
 
 	switch (btn) {
@@ -456,7 +462,8 @@ bool Scrollbar::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 /**
  * Move the knob while pressed.
  */
-bool Scrollbar::handle_mousemove(uint8_t, int32_t const mx, int32_t const my, int32_t, int32_t) {
+bool Scrollbar::handle_mousemove(
+   uint8_t /*state*/, int32_t const mx, int32_t const my, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	if (pressed_ == Area::Knob) {
 		set_knob_pos((horizontal_ ? mx : my) - knob_grabdelta_);
 	}
@@ -504,6 +511,7 @@ void Scrollbar::layout() {
 	} else {
 		buttonsize_ = kSize;
 	}
+	set_can_focus(is_enabled());
 }
 
 }  // namespace UI

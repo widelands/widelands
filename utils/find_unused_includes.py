@@ -33,16 +33,15 @@ MACRO_CLASS_DEFINITION_REGEX = re.compile(r'^[A-Z_0-9]+\((\w+)\)$')
 FUNCTION_REGEX = re.compile(
     r'(^|.*\s+)([a-zA-Z_0-9][a-zA-Z_0-9]{2,})\(.*(\)|,).*')
 
-# Special regex for base/log.h
-HEADER_LOG_REGEX = re.compile(r'(void|bool)\s+(\w+)\(.*\);')
-
 # Header files with contents that are too hard to detect by regex
 FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
-                 'third_party/eris/lua.hpp', 'scripting/eris.h'}
+                 'third_party/eris/lua.hpp', 'scripting/eris.h',
+                 'base/format/abstract_node.h'}
 
 # Headers files with contents that need to be detected by functions
-DIFFICULT_FILES = {'graphic/build_texture_atlas.h',
-                   'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
+DIFFICULT_FILES = {'graphic/build_texture_atlas.h', 'base/string.h',
+                   'scripting/report_error.h', 'editor/tools/set_resources_tool.h',
+                   'wlapplication_options.h'}
 
 # Remove overgenerated symbols
 FUNCTION_EXCLUDES = {'_Pragma',
@@ -104,11 +103,6 @@ def find_classes(file_to_check, include_functions, special_regex, special_regex_
                     if not match.groups()[1] in FUNCTION_EXCLUDES:
                         classes.add(match.groups()[1])
 
-            if special_regex:
-                match = HEADER_LOG_REGEX.match(line)
-                if match and len(match.groups()) > special_regex_group:
-                    classes.add(match.groups()[special_regex_group])
-
     return classes
 
 
@@ -151,10 +145,6 @@ def check_file(file_to_check, include_functions):
             elif header_file in DIFFICULT_FILES:
                 # Search with function regex switched on
                 header_classes = find_classes(header_file, True, None, 0)
-            elif header_file == 'base/log.h':
-                # Search with special regex switched on
-                header_classes = find_classes(
-                    header_file, False, HEADER_LOG_REGEX, 1)
             else:
                 # Search with function regex switched on/off according to include_functions
                 header_classes = find_classes(
@@ -227,7 +217,7 @@ def main():
 
     error_count = 0
 
-    print('Tool to check for superfluous includes in header files. Call from src diectory.')
+    print('Tool to check for superfluous includes in header files. Call from src directory.')
     print('Checking...')
 
     for (dirpath, _, filenames) in os.walk('.'):
@@ -235,7 +225,7 @@ def main():
             full_path = os.path.join(dirpath, filename)
             hits = []
 
-            if filename.endswith('.h'):
+            if filename.endswith('.h') or filename.endswith('.hpp'):
                 hits = check_file(full_path, False)
                 forward_declarations = check_forward_declarations(full_path)
                 if forward_declarations:

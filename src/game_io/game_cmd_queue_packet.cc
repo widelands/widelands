@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "game_io/game_cmd_queue_packet.h"
 
 #include "base/macros.h"
+#include "base/mutex.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"
@@ -50,7 +50,7 @@ void GameCmdQueuePacket::read(FileSystem& fs, Game& game, MapObjectLoader* const
 			for (;;) {
 				uint32_t const packet_id = fr.unsigned_16();
 
-				if (!packet_id) {
+				if (packet_id == 0u) {
 					break;
 				}
 
@@ -64,7 +64,7 @@ void GameCmdQueuePacket::read(FileSystem& fs, Game& game, MapObjectLoader* const
 
 				item.cmd = &cmd;
 
-				cmdq.cmds_[cmd.duetime() % kCommandQueueBucketSize].push(item);
+				cmdq.cmds_[cmd.duetime().get() % kCommandQueueBucketSize].push(item);
 				++cmdq.ncmds_;
 			}
 		} else {
@@ -76,6 +76,11 @@ void GameCmdQueuePacket::read(FileSystem& fs, Game& game, MapObjectLoader* const
 }
 
 void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const os) {
+	// If the player would send a command while we're saving the queue,
+	// this function would get trapped in an endless loop.
+	// So all new commands are put on hold until we're done here.
+	MutexLock m(MutexLock::ID::kCommands);
+
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
@@ -90,12 +95,12 @@ void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const
 	// Write all commands
 
 	// Find all the items in the current cmdqueue
-	uint32_t time = game.get_gametime();
+	Time time = game.get_gametime();
 	size_t nhandled = 0;
 
 	while (nhandled < cmdq.ncmds_) {
 		// Make a copy, so we can pop stuff
-		std::priority_queue<CmdQueue::CmdItem> p = cmdq.cmds_[time % kCommandQueueBucketSize];
+		std::priority_queue<CmdQueue::CmdItem> p = cmdq.cmds_[time.get() % kCommandQueueBucketSize];
 
 		while (!p.empty()) {
 			const CmdQueue::CmdItem& it = p.top();
@@ -122,7 +127,7 @@ void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const
 			// DONE: next command
 			p.pop();
 		}
-		++time;
+		time.increment();
 	}
 
 	fw.unsigned_16(0);  // end of command queue

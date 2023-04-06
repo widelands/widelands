@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_helmsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Helm Smithy"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -23,23 +23,29 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 65, 83 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 65, 83 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 65, 83 },
       },
+   },
+
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 65, 83 }
+      },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 65, 83 },
-         fps = 20
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 65, 83 }
       },
    },
 
@@ -60,7 +66,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_helmet",
             "call=produce_helmet_mask",
@@ -69,7 +75,7 @@ tribes:new_productionsite_type {
       },
       produce_helmet = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
-         descname = _"forging a helmet",
+         descname = _("forging a helmet"),
          actions = {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs helmet",
@@ -82,7 +88,7 @@ tribes:new_productionsite_type {
       },
       produce_helmet_mask = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
-         descname = _"forging a mask",
+         descname = _("forging a mask"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs helmet_mask",
@@ -95,7 +101,7 @@ tribes:new_productionsite_type {
       },
       produce_helmet_warhelm = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
-         descname = _"forging a warhelm",
+         descname = _("forging a warhelm"),
          actions = {
             -- time total: 87 + 3.6
             "return=skipped unless economy needs helmet_warhelm",
@@ -108,3 +114,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

@@ -13,12 +13,9 @@
 --
 -- Warehouses are defined in
 -- ``data/tribes/buildings/warehouses/<tribe_name>/<building_name>/init.lua``.
--- The building will also need its help texts, which are defined in
--- ``data/tribes/buildings/warehouses/<tribe_name>/<building_name>/helptexts.lua``
-
-dirname = path.dirname(__file__)
-
--- RST
+-- The warehouse will also need its :ref:`help texts <lua_tribes_tribes_helptexts>`,
+-- which are defined in ``data/tribes/initialization/<tribe_name>/units.lua``
+--
 -- .. function:: new_warehouse_type{table}
 --
 --    This function adds the definition of a warehouse building to the engine.
@@ -39,21 +36,55 @@ dirname = path.dirname(__file__)
 --
 --    **destructible**
 --        *Optional. Default:* ``true``. Set this to ``false`` for headquarters.
+--
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("tribes")
+--
+--    dirname = path.dirname(__file__)
+--
+--    wl.Descriptions():new_warehouse_type {
+--       name = "atlanteans_headquarters",
+--       descname = pgettext("atlanteans_building", "Headquarters"),
+--       animation_directory = dirname,
+--       icon = dirname .. "menu.png",
+--       size = "big",
+--       destructible = false,
+--
+--       animations = {
+--          idle = {
+--             hotspot = { 81, 110 },
+--          },
+--       },
+--
+--       aihints = {},
+--
+--       heal_per_second = 220,
+--       conquers = 9,
+--    }
+--
+--    pop_textdomain()
 
-tribes:new_warehouse_type {
-   msgctxt = "atlanteans_building",
+push_textdomain("tribes")
+
+dirname = path.dirname(__file__)
+
+wl.Descriptions():new_warehouse_type {
    name = "atlanteans_headquarters",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Headquarters"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
    destructible = false,
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 81, 110 },
+         hotspot = { 84, 117 },
       },
    },
 
@@ -62,3 +93,5 @@ tribes:new_warehouse_type {
    heal_per_second = 220,
    conquers = 9,
 }
+
+pop_textdomain()

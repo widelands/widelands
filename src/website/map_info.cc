@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -34,11 +33,10 @@
 #include "website/json/json.h"
 #include "website/website_common.h"
 
-using namespace Widelands;
-
 int main(int argc, char** argv) {
+	set_testcase_logging_dir();
 	if (!(2 <= argc && argc <= 3)) {
-		log("Usage: %s <map file>\n", argv[0]);
+		log_err("Usage: %s <map file>\n", argv[0]);
 		return 1;
 	}
 
@@ -55,17 +53,21 @@ int main(int argc, char** argv) {
 		FileSystem* in_out_filesystem = &FileSystem::create(map_dir);
 		g_fs->add_file_system(in_out_filesystem);
 
-		EditorGameBase egbase(nullptr);
+		Widelands::EditorGameBase egbase(nullptr);
 		auto* map = egbase.mutable_map();
 		std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(map_file));
 
 		if (!ml) {
-			log("Cannot load map file.\n");
+			log_err("Cannot load map file.\n");
 			return 1;
 		}
 
-		ml->preload_map(true);
-		ml->load_map_complete(egbase, Widelands::MapLoader::LoadType::kScenario);
+		ml->preload_map(true, nullptr);
+		if (!map->required_addons().empty()) {
+			log_err("This map depends on add-ons!\n");
+			return 1;
+		}
+		ml->load_map_for_render(egbase, nullptr);
 
 		std::unique_ptr<Texture> minimap(
 		   draw_minimap(egbase, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
@@ -74,7 +76,7 @@ int main(int argc, char** argv) {
 		{
 			FileWrite fw;
 			save_to_png(minimap.get(), &fw, ColorType::RGBA);
-			fw.write(*in_out_filesystem, (map_file + ".png").c_str());
+			fw.write(*in_out_filesystem, map_file + ".png");
 		}
 
 		// Write JSON.
@@ -87,17 +89,18 @@ int main(int argc, char** argv) {
 			json->add_int("width", map->get_width());
 			json->add_int("height", map->get_height());
 			json->add_int("nr_players", map->get_nrplayers());
-			json->add_int("needs_widelands_version_after", map->needs_widelands_version_after());
+			json->add_string(
+			   "minimum_required_widelands_version", map->minimum_required_widelands_version());
 
 			const std::string world_name =
 			   dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();
 			json->add_string("world_name", world_name);
 			json->add_string("minimap", map_path + ".png");
-			json->write_to_file(*in_out_filesystem, (map_file + ".json").c_str());
+			json->write_to_file(*in_out_filesystem, map_file + ".json");
 		}
 		egbase.cleanup_objects();
 	} catch (std::exception& e) {
-		log("Exception: %s.\n", e.what());
+		log_err("Exception: %s.\n", e.what());
 		cleanup();
 		return 1;
 	}

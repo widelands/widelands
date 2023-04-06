@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2020 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -44,7 +43,8 @@ void Element::add_bool(const std::string& key, bool value) {
 
 void Element::add_double(const std::string& key, double value) {
 	if (key.empty()) {
-		keyless_values_.push_back(std::unique_ptr<LuaTree::Value>(new LuaTree::Boolean(value)));
+		keyless_values_.push_back(
+		   std::unique_ptr<LuaTree::Value>(new LuaTree::Boolean(value != 0.0)));
 	} else {
 		values_.push_back(
 		   std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::Double(value))));
@@ -110,7 +110,7 @@ std::string Element::keyless_values_as_string() const {
 }
 
 std::string Element::values_as_string(const std::string& tabs) const {
-	std::string result = "";
+	std::string result;
 	if (!values_.empty()) {
 		for (size_t i = 0; i < values_.size() - 1; ++i) {
 			const auto& element = values_.at(i);
@@ -130,7 +130,7 @@ std::string Element::values_as_string(const std::string& tabs) const {
 }
 
 std::string Element::children_as_string() const {
-	std::string result = "";
+	std::string result;
 	if (!children_.empty()) {
 		for (size_t i = 0; i < children_.size() - 1; ++i) {
 			result += children_.at(i)->as_string() + ",\n";
@@ -150,8 +150,8 @@ Object::Object(const std::string& key, int level) : LuaTree::Element(key, level)
 }
 
 std::string Object::as_string() const {
-	std::string result = "";
-	std::string tabs = "";
+	std::string result;
+	std::string tabs;
 	for (int i = 0; i < level_; ++i) {
 		tabs += tab_;
 	}

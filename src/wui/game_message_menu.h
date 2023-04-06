@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -31,21 +30,29 @@
 namespace Widelands {
 class Game;
 }  // namespace Widelands
+class InteractiveBase;
 class InteractivePlayer;
 
 ///  Shows the not already fulfilled objectives.
 struct GameMessageMenu : public UI::UniqueWindow {
 	GameMessageMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 
-	/// Shows a newly created message. Assumes that the message is not yet in
-	/// the list (the message was added to the queue after the last time think()
-	/// was executed. Toggles to inbox and autoselects the new entry unless the user
-	/// is currently multiselecting messages.
+	/* Shows a newly created message. If the message is not in the list already (the
+	 * message was added to the queue after the last time think() was executed), it
+	 * will be added to the beginning of the list. Toggles to inbox and autoselects
+	 * the new entry unless the user is currently multiselecting messages.
+	 */
 	void show_new_message(Widelands::MessageId, const Widelands::Message&);
 
 	enum class Mode { kInbox, kArchive };
 	void think() override;
 	bool handle_key(bool down, SDL_Keysym code) override;
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kMessages;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
 	enum Cols { ColTitle, ColType, ColStatus, ColTimeSent };
@@ -76,7 +83,7 @@ private:
 	UI::Button* archivebtn_;
 	UI::Button* togglemodebtn_;
 	UI::Button* centerviewbtn_;
-	Mode mode;
+	Mode mode{Mode::kInbox};
 	// Buttons for message types
 	UI::Button* geologistsbtn_;
 	UI::Button* economybtn_;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_MAP_OBJECTS_IMMOVABLE_H
 #define WL_LOGIC_MAP_OBJECTS_IMMOVABLE_H
 
+#include <atomic>
 #include <memory>
 
 #include "base/macros.h"
@@ -27,13 +27,9 @@
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/wareworker.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
-
-class TribesLegacyLookupTable;
-class WorldLegacyLookupTable;
 
 namespace Widelands {
 
@@ -44,7 +40,6 @@ class Immovable;
 class Map;
 class TerrainAffinity;
 class Worker;
-class World;
 struct Flag;
 struct ImmovableAction;
 struct ImmovableActionData;
@@ -103,7 +98,7 @@ struct BaseImmovable : public MapObject {
 	// fields a way to only draw themselves once. The 'point_on_dst' determines
 	// the point for the hotspot of the animation and 'scale' determines how big
 	// the immovable will be plotted.
-	virtual void draw(uint32_t gametime,
+	virtual void draw(const Time& gametime,
 	                  InfoToDraw info_to_draw,
 	                  const Vector2f& point_on_dst,
 	                  const Coords& coords,
@@ -127,57 +122,59 @@ class ImmovableDescr : public MapObjectDescr {
 public:
 	using Programs = std::map<std::string, ImmovableProgram*>;
 
-	/// World immovable
-	ImmovableDescr(const std::string& init_descname, const LuaTable&, const World& world);
-	/// Tribes immovable
-	ImmovableDescr(const std::string& init_descname, const LuaTable&, const Tribes& tribes);
+	/// Common constructor for tribes and world.
+	ImmovableDescr(const std::string& init_descname,
+	               const LuaTable&,
+	               const std::vector<std::string>& attribs,
+	               Descriptions& descriptions);
 	~ImmovableDescr() override;
 
-	int32_t get_size() const {
+	[[nodiscard]] int32_t get_size() const {
 		return size_;
 	}
-	ImmovableProgram const* get_program(const std::string&) const;
+	[[nodiscard]] ImmovableProgram const* get_program(const std::string&) const;
 
 	Immovable& create(EditorGameBase&,
 	                  const Coords&,
 	                  const Widelands::BuildingDescr* former_building_descr) const;
 
-	MapObjectDescr::OwnerType owner_type() const {
-		return owner_type_;
-	}
-
-	const Buildcost& buildcost() const {
+	[[nodiscard]] const Buildcost& buildcost() const {
 		return buildcost_;
 	}
 
-	// Returns the editor category, or nullptr if the immovable has no editor category
-	// (e.g. Tribe immovables never have one).
-	const EditorCategory* editor_category() const;
-
 	// A basic localized name for the immovable, used by trees
-	const std::string& species() const {
+	[[nodiscard]] const std::string& species() const {
 		return species_;
 	}
 
 	// Every immovable that can 'grow' needs to have terrain affinity defined,
 	// all others do not. Returns true if this one has it defined.
-	bool has_terrain_affinity() const;
+	[[nodiscard]] bool has_terrain_affinity() const;
 
 	// Returns the terrain affinity. If !has_terrain_affinity() this will return
 	// an undefined value.
-	const TerrainAffinity& terrain_affinity() const;
+	[[nodiscard]] const TerrainAffinity& terrain_affinity() const;
 
 	// Map object names that the immovable can transform/grow into
-	const std::set<std::pair<MapObjectType, std::string>>& becomes() const {
+	[[nodiscard]] const std::set<std::pair<MapObjectType, std::string>>& becomes() const {
 		return becomes_;
 	}
 
-protected:
-	int32_t size_;
-	Programs programs_;
+	// A set of all productionsites that gather this immovable or any of its future types
+	[[nodiscard]] const std::set<std::string> collected_by() const {
+		return collected_by_;
+	}
+	void add_collected_by(const Descriptions& descriptions,
+	                      const std::string& prodsite,
+	                      std::set<const ImmovableDescr*> recursion_protect = {});
 
-	/// Whether this ImmovableDescr belongs to a tribe or the world
-	const MapObjectDescr::OwnerType owner_type_;
+	void register_immovable_relation(const std::string&, const std::string&);
+	void add_became_from(const Descriptions& descriptions, const std::string&);
+
+protected:
+	Descriptions& descriptions_;
+	int32_t size_{BaseImmovable::NONE};
+	Programs programs_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
 	/// \see ActConstruct
@@ -185,17 +182,13 @@ protected:
 
 	std::string species_;
 	std::set<std::pair<MapObjectType, std::string>> becomes_;
+	std::set<std::string> became_from_;  // immovables that turn into this one
+	std::set<std::string> collected_by_;
 
 private:
-	// Common constructor functions for tribes and world.
-	ImmovableDescr(const std::string& init_descname,
-	               const LuaTable&,
-	               MapObjectDescr::OwnerType type);
-
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
 
-	EditorCategory* editor_category_;  // not owned.
 	std::unique_ptr<TerrainAffinity> terrain_affinity_;
 	DISALLOW_COPY_AND_ASSIGN(ImmovableDescr);
 };
@@ -210,9 +203,9 @@ class Immovable : public BaseImmovable {
 public:
 	/// If this immovable was created by a building, 'former_building_descr' can be set in order to
 	/// display information about it.
-	Immovable(const ImmovableDescr&,
-	          const Widelands::BuildingDescr* former_building_descr = nullptr);
-	~Immovable() override;
+	explicit Immovable(const ImmovableDescr&,
+	                   const Widelands::BuildingDescr* former_building_descr = nullptr);
+	~Immovable() override = default;
 
 	Coords get_position() const {
 		return position_;
@@ -223,40 +216,50 @@ public:
 	bool get_passable() const override;
 	void start_animation(const EditorGameBase&, uint32_t anim);
 
-	void program_step(Game& game, uint32_t const delay = 1) {
-		if (delay)
+	void program_step(Game& game, const Duration& delay = Duration(1)) {
+		assert(delay.is_valid());
+		if (delay.get() > 0) {
 			program_step_ = schedule_act(game, delay);
+		}
 		increment_program_pointer();
 	}
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
-	void draw(uint32_t gametime,
+	void draw(const Time& gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 
-	void switch_program(Game& game, const std::string& programname);
+	void switch_program(Game& game, const std::string& program_name);
 	bool construct_ware(Game& game, DescriptionIndex index);
 	bool construct_remaining_buildcost(Game& game, Buildcost* buildcost);
 
 	void set_action_data(ImmovableActionData* data);
 	template <typename T> T* get_action_data() {
-		if (!action_data_)
+		if (action_data_ == nullptr) {
 			return nullptr;
-		if (T* data = dynamic_cast<T*>(action_data_.get()))
+		}
+		if (T* data = dynamic_cast<T*>(action_data_.get()); data != nullptr) {
 			return data;
+		}
 		set_action_data(nullptr);
 		return nullptr;
 	}
 
-	void delay_growth(uint32_t ms) {
+	void delay_growth(Duration ms) {
 		growth_delay_ += ms;
 	}
 	bool apply_growth_delay(Game&);
+
+	bool is_marked_for_removal(PlayerNumber) const;
+	void set_marked_for_removal(PlayerNumber, bool mark);
+	const std::set<PlayerNumber>& get_marked_for_removal() const {
+		return marked_for_removal_;
+	}
 
 protected:
 	// The building type that created this immovable, if any.
@@ -264,11 +267,15 @@ protected:
 
 	Coords position_;
 
-	uint32_t anim_;
-	int32_t animstart_;
+	std::atomic<uint32_t> anim_{0U};
+	Time animstart_{0U};
 
-	const ImmovableProgram* program_;
-	uint32_t program_ptr_;  ///< index of next instruction to execute
+	const ImmovableProgram* program_{nullptr};
+	uint32_t program_ptr_{0U};  ///< index of next instruction to execute
+
+	// Whether a worker was told to remove this object ASAP.
+	// A set of all players who want this object gone.
+	std::set<PlayerNumber> marked_for_removal_;
 
 /* GCC 4.0 has problems with friend declarations: It doesn't allow
  * substructures of friend classes private access but we rely on this behaviour
@@ -279,15 +286,15 @@ protected:
  */
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 0)
 public:
-	uint32_t anim_construction_total_;
-	uint32_t anim_construction_done_;
-	uint32_t program_step_;
+	uint32_t anim_construction_total_{0U};
+	uint32_t anim_construction_done_{0U};
+	Time program_step_{0U};
 
 protected:
 #else
-	uint32_t anim_construction_total_;
-	uint32_t anim_construction_done_;
-	uint32_t program_step_;  ///< time of next step
+	std::atomic<uint32_t> anim_construction_total_{0U};
+	std::atomic<uint32_t> anim_construction_done_{0U};
+	Time program_step_{0U};  ///< time of next step
 #endif
 
 	/**
@@ -298,7 +305,7 @@ protected:
 	std::unique_ptr<ImmovableActionData> action_data_;
 
 private:
-	uint32_t growth_delay_;
+	Duration growth_delay_{0U};
 
 	// Load/save support
 protected:
@@ -315,11 +322,7 @@ public:
 	}
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader* load(EditorGameBase&,
-	                               MapObjectLoader&,
-	                               FileRead&,
-	                               const WorldLegacyLookupTable& world_lookup_table,
-	                               const TribesLegacyLookupTable& tribes_lookup_table);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 
 private:
 	/// If this immovable was created by a building, this can be set in order to display information
@@ -327,7 +330,7 @@ private:
 	void set_former_building(const BuildingDescr& building);
 
 	void increment_program_pointer();
-	void draw_construction(uint32_t gametime,
+	void draw_construction(const Time& gametime,
 	                       InfoToDraw info_to_draw,
 	                       const Vector2f& point_on_dst,
 	                       const Widelands::Coords& coords,
@@ -396,15 +399,15 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 private:
-	Economy* ware_economy_;
-	Economy* worker_economy_;
+	Economy* ware_economy_{nullptr};
+	Economy* worker_economy_{nullptr};
 
 	Workers workers_;
 
 	// load/save support
 protected:
 	struct Loader : BaseImmovable::Loader {
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&);
 	};

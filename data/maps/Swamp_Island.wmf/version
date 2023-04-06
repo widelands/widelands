@@ -1,11 +1,12 @@
-# Automatically created by Widelands bzr7905[trunk] (Debug)
+# Automatically created by Widelands 1.0~git25090[91caec3@master] (Debug)
 
 [global]
 map_source_url=
 map_release=
 map_creator_version="bzr7905[trunk]"
 map_version_major="0"
-map_version_minor="1"
-map_version_timestamp="1458572482"
+map_version_minor="2"
+map_version_timestamp="1608310278"
 packet_version="1"
 packet_compatibility="1"
+needs_widelands_version_after="20"

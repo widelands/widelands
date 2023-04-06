@@ -1,0 +1,13 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="144"
+map_h="144"
+nr_players="4"
+name=_"Crossing the Horizon"
+author=_"Kristin – edited by 3plus4i"
+descr=_"Man your ship and sail to the horizon."
+hint=_"This map is not winnable with the ‘Autocrat’ win condition."
+tags="2teams,artifacts,balanced,ffa,official,seafaring"
+theme="summer"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2020 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -43,7 +42,7 @@ void BaseRouteAStar::routeto(RoutingNode& to, IRoute& route) {
 	assert(mpf_cycle == (type_ == wwWARE ? to.mpf_cycle_ware : to.mpf_cycle_worker));
 
 	route.init(type_ == wwWARE ? to.mpf_realcost_ware : to.mpf_realcost_worker);
-	for (RoutingNode* node = &to; node;
+	for (RoutingNode* node = &to; node != nullptr;
 	     node = (type_ == wwWARE ? node->mpf_backlink_ware : node->mpf_backlink_worker)) {
 		route.insert_as_first(node);
 	}

@@ -1,5 +1,3 @@
-set_textdomain("tribes")
-
 test_descr = lunit.TestCase("Immovable descriptions test")
 function test_descr:test_instantiation_forbidden()
    assert_error("Cannot instantiate", function()
@@ -26,6 +24,10 @@ function test_descr:test_immovable_descr()
    assert_error("Wrong number of parameters: 3", function()
       egbase:get_immovable_description("XXX","YYY","ZZZ")
    end)
+end
+
+function test_descr:test_immovable_loading()
+   assert_equal("bush1", egbase:get_immovable_description("bush1").name)
 end
 
 function test_descr:test_immovable_species()
@@ -76,18 +78,6 @@ function test_descr:test_immovable_buildcost()
    assert_equal(16, total_cost(buildcost))
 end
 
-function test_descr:test_immovable_editor_category()
-   assert_equal("plants", egbase:get_immovable_description("bush1").editor_category.name)
-   assert_equal("Plants", egbase:get_immovable_description("bush1").editor_category.descname)
-   assert_equal(nil, egbase:get_immovable_description("cornfield_ripe").editor_category)
-   assert_equal("trees_deciduous", egbase:get_immovable_description(
-      "alder_summer_sapling").editor_category.name)
-   assert_equal("Deciduous Trees", egbase:get_immovable_description(
-      "alder_summer_sapling").editor_category.descname)
-   assert_equal("trees_deciduous", egbase:get_immovable_description(
-      "alder_summer_old").editor_category.name)
-end
-
 function test_descr:test_immovable_terrain_affinity()
    assert_equal(nil, egbase:get_immovable_description("bush1").terrain_affinity)
    assert_equal(nil, egbase:get_immovable_description("cornfield_ripe").terrain_affinity)
@@ -120,13 +110,6 @@ function test_descr:test_immovable_terrain_affinity()
    assert_equal(aff_alder_sapling["preferred_temperature"], aff_alder_old["preferred_temperature"])
    assert_equal(80, aff_mushroom_red_pole["preferred_temperature"])
    assert_equal(110, aff_umbrella_green_mature["preferred_temperature"])
-end
-
-function test_descr:test_immovable_owner_type()
-   assert_equal("world", egbase:get_immovable_description("bush1").owner_type)
-   assert_equal("tribe", egbase:get_immovable_description("cornfield_ripe").owner_type)
-   assert_equal("world", egbase:get_immovable_description("alder_summer_sapling").owner_type)
-   assert_equal("world", egbase:get_immovable_description("alder_summer_old").owner_type)
 end
 
 function test_descr:test_immovable_size()
@@ -253,7 +236,7 @@ function test_descr:test_isport()
    assert_equal(true, egbase:get_building_description("barbarians_port").is_port)
 end
 
-function test_descr:test_returned_wares()
+function test_descr:test_returns_on_dismantle()
    local total_cost = function(t)
       local cost = 0
       for name, count in pairs(t) do
@@ -261,12 +244,12 @@ function test_descr:test_returned_wares()
       end
       return cost
    end
-   assert_equal(1, total_cost(egbase:get_building_description("barbarians_sentry").returned_wares))
-   assert_equal(9, total_cost(egbase:get_building_description("barbarians_fortress").returned_wares))
-   assert_equal(0, total_cost(egbase:get_building_description("barbarians_citadel").returned_wares))
+   assert_equal(1, total_cost(egbase:get_building_description("barbarians_sentry").returns_on_dismantle))
+   assert_equal(9, total_cost(egbase:get_building_description("barbarians_fortress").returns_on_dismantle))
+   assert_equal(0, total_cost(egbase:get_building_description("barbarians_citadel").returns_on_dismantle))
 end
 
-function test_descr:test_returned_wares_enhanced()
+function test_descr:test_enhancement_returns_on_dismantle()
    local total_cost = function(t)
       local cost = 0
       for name, count in pairs(t) do
@@ -274,9 +257,9 @@ function test_descr:test_returned_wares_enhanced()
       end
       return cost
    end
-   assert_equal(0, total_cost(egbase:get_building_description("barbarians_sentry").returned_wares_enhanced))
-   assert_equal(0, total_cost(egbase:get_building_description("barbarians_fortress").returned_wares_enhanced))
-   assert_equal(10, total_cost(egbase:get_building_description("barbarians_citadel").returned_wares_enhanced))
+   assert_equal(0, total_cost(egbase:get_building_description("barbarians_sentry").enhancement_returns_on_dismantle))
+   assert_equal(0, total_cost(egbase:get_building_description("barbarians_fortress").enhancement_returns_on_dismantle))
+   assert_equal(10, total_cost(egbase:get_building_description("barbarians_citadel").enhancement_returns_on_dismantle))
 end
 
 function test_descr:test_size()
@@ -349,6 +332,154 @@ function test_descr:test_working_positions()
    assert_equal("barbarians_innkeeper", building_description.working_positions[2].name)
 end
 
+function test_descr:test_critter_support()
+   -- Barbarian Gamekeeper supports Barbarian Hunter
+   local site = egbase:get_building_description("barbarians_gamekeepers_hut")
+   local site_support = site.supported_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("barbarians_hunters_hut", site_support[1].name)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(0, #site.collected_bobs)
+   assert_equal(9, #site.created_bobs) -- Match critters placed by barbarians_gamekeeper
+
+   -- Barbarian Hunter is supported by Barbarian Gamekeeper
+   site = egbase:get_building_description("barbarians_hunters_hut")
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("barbarians_gamekeepers_hut", site_support[1].name)
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(15, #site.collected_bobs) -- Eatable critters
+   assert_equal(0, #site.created_bobs)
+
+   -- Empire Hunter has no support
+   site = egbase:get_building_description("empire_hunters_house")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(15, #site.collected_bobs) -- Eatable critters
+   assert_equal(0, #site.created_bobs)
+end
+
+function test_descr:test_ship_and_ferry_support()
+   -- Barbarian Shipyard has no support and creates 1 bob - a ship
+   local site = egbase:get_building_description("barbarians_shipyard")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(0, #site.collected_bobs)
+   local bobs = site.created_bobs
+   assert_equal(1, #bobs)
+   assert_equal("barbarians_ship", bobs[1].name)
+
+   -- Barbarian Ferry Yard has no support and creates 1 bob - a ferry
+   site = egbase:get_building_description("barbarians_ferry_yard")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(0, #site.collected_bobs)
+   bobs = site.created_bobs
+   assert_equal(1, #bobs)
+   assert_equal("barbarians_ferry", bobs[1].name)
+end
+
+function test_descr:test_immovable_support()
+   -- Barbarian Ranger supports Barbarian Lumberjack
+   local site = egbase:get_building_description("barbarians_rangers_hut")
+   local site_support = site.supported_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("barbarians_lumberjacks_hut", site_support[1].name)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(0, #site.collected_immovables)
+   assert_equal(22, #site.created_immovables) -- Trees in the world
+
+   -- Barbarian Lumberjack is supported by Barbarian Ranger
+   site = egbase:get_building_description("barbarians_lumberjacks_hut")
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("barbarians_rangers_hut", site_support[1].name)
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(34, #site.collected_immovables) -- Trees in the world
+   assert_equal(0, #site.created_immovables)
+
+   -- Barbarian Quarry has no support
+   site = egbase:get_building_description("barbarians_quarry")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(4*6, #site.collected_immovables) -- Rocks in the world
+   assert_equal(0, #site.created_immovables)
+
+   -- Barbarian Farm creates immovable, but has no dependencies
+   site = egbase:get_building_description("barbarians_farm")
+   site_support = site.supported_productionsites
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+
+   local immovables = site.created_immovables
+   assert_equal(1, #immovables)
+   assert_equal("wheatfield_ripe", immovables[1].name)
+   immovables = site.collected_immovables
+   assert_equal(1, #immovables)
+   assert_equal("wheatfield_ripe", immovables[1].name)
+
+   -- Sites with multiple dependencies
+   site = egbase:get_building_description("frisians_clay_pit")
+   site_support = site.supported_productionsites
+   assert_equal(2, #site_support)
+   assert_equal("frisians_aqua_farm", site_support[1].name)
+   assert_equal("frisians_charcoal_burners_house", site_support[2].name)
+   assert_equal(0, #site.supported_by_productionsites)
+
+   site = egbase:get_building_description("frisians_aqua_farm")
+   assert_equal(0, #site.supported_productionsites)
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("frisians_clay_pit", site_support[1].name)
+
+   site = egbase:get_building_description("frisians_charcoal_burners_house")
+   assert_equal(0, #site.supported_productionsites)
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("frisians_clay_pit", site_support[1].name)
+end
+
+
+function test_descr:test_resource_support()
+   -- Atlantean Fishbreeder supports Atlantean Fisher
+   local site = egbase:get_building_description("atlanteans_fishbreeders_house")
+   local site_support = site.supported_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("atlanteans_fishers_house", site_support[1].name)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(0, #site.collected_resources)
+   assert_equal(1, #site.created_resources)
+
+   -- Atlantean Fisher is supported by Atlantean Fishbreeder
+   site = egbase:get_building_description("atlanteans_fishers_house")
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("atlanteans_fishbreeders_house", site_support[1].name)
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(1, #site.collected_resources)
+   assert_equal(0, #site.created_resources)
+
+   -- Barbarian Fisher has no support
+   site = egbase:get_building_description("barbarians_fishers_hut")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(1, #site.collected_resources)
+   assert_equal(0, #site.created_resources)
+
+   -- Well
+   site = egbase:get_building_description("barbarians_well")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(1, #site.collected_resources)
+   assert_equal(0, #site.created_resources)
+
+   -- Mine
+   site = egbase:get_building_description("barbarians_goldmine_deeper")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(1, #site.collected_resources)
+   assert_equal(0, #site.created_resources)
+end
 
 --  =======================================================
 --  *************** MilitarySiteDescription ***************
@@ -395,34 +526,36 @@ end
 
 function test_descr:test_max_attack()
    assert_equal(nil, egbase:get_building_description("barbarians_battlearena").max_attack)
-   assert_equal(4, egbase:get_building_description("barbarians_trainingcamp").max_attack)
+   assert_equal(5, egbase:get_building_description("barbarians_trainingcamp").max_attack)
 end
 
 function test_descr:test_max_defense()
    assert_equal(nil, egbase:get_building_description("barbarians_battlearena").max_defense)
    assert_equal(nil, egbase:get_building_description("barbarians_trainingcamp").max_defense)
-   assert_equal(1, egbase:get_building_description("atlanteans_labyrinth").max_defense)
+   assert_equal(2, egbase:get_building_description("atlanteans_labyrinth").max_defense)
 end
 
 function test_descr:test_max_evade()
-   assert_equal(1, egbase:get_building_description("barbarians_battlearena").max_evade)
+   assert_equal(2, egbase:get_building_description("barbarians_battlearena").max_evade)
    assert_equal(nil, egbase:get_building_description("barbarians_trainingcamp").max_evade)
 end
 
 function test_descr:test_max_health()
    assert_equal(nil, egbase:get_building_description("barbarians_battlearena").max_health)
-   assert_equal(2, egbase:get_building_description("barbarians_trainingcamp").max_health)
+   assert_equal(3, egbase:get_building_description("barbarians_trainingcamp").max_health)
 end
 
 function test_descr:test_min_attack()
    assert_equal(nil, egbase:get_building_description("barbarians_battlearena").min_attack)
    assert_equal(0, egbase:get_building_description("barbarians_trainingcamp").min_attack)
+   assert_equal(3, egbase:get_building_description("frisians_training_arena").min_attack)
 end
 
 function test_descr:test_min_defense()
    assert_equal(nil, egbase:get_building_description("barbarians_battlearena").min_defense)
    assert_equal(nil, egbase:get_building_description("barbarians_trainingcamp").min_defense)
    assert_equal(0, egbase:get_building_description("atlanteans_labyrinth").min_defense)
+   assert_equal(1, egbase:get_building_description("frisians_training_arena").min_defense)
 end
 
 function test_descr:test_min_evade()
@@ -433,10 +566,18 @@ end
 function test_descr:test_min_health()
    assert_equal(nil, egbase:get_building_description("barbarians_battlearena").min_health)
    assert_equal(0, egbase:get_building_description("barbarians_trainingcamp").min_health)
+   assert_equal(1, egbase:get_building_description("frisians_training_arena").min_health)
 end
 
 function test_descr:test_type()
    assert_equal("trainingsite", egbase:get_building_description("barbarians_battlearena").descr.type_name)
+end
+
+function test_descr:test_trained_soldiers()
+   trained = egbase:get_building_description("barbarians_battlearena"):trained_soldiers("upgrade_soldier_evade_0")
+   assert_equal("Evade", trained[1])
+   assert_equal(0, trained[2])
+   assert_equal(1, trained[3])
 end
 
 

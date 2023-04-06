@@ -1,11 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_productionsite_type {
    name = "frisians_quarry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Quarry"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -21,8 +22,6 @@ tribes:new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {40, 71},
          frames = 10,
          columns = 5,
@@ -32,15 +31,11 @@ tribes:new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {40, 53}
       }
    },
 
-   aihints = {
-      collects_ware_from_map = "granite"
-   },
+   aihints = {},
 
    working_positions = {
       frisians_stonemason = 1
@@ -49,7 +44,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-         descname = _"quarrying granite",
+         descname = _("quarrying granite"),
          actions = {
             "callworker=cut_granite",
             "sleep=duration:17s500ms"
@@ -58,9 +53,11 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Rocks",
-      heading = _"Out of Rocks",
+      title = _("No Rocks"),
+      heading = _("Out of Rocks"),
       message = pgettext("frisians_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
       productivity_threshold = 75
    },
 }
+
+pop_textdomain()

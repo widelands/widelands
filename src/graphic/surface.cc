@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,12 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/surface.h"
+
+#include <cstddef>
+#include <cstdlib>
 
 #include "base/rect.h"
 #include "base/vector.h"
@@ -106,7 +108,7 @@ void Surface::fill_rect(const Rectf& rc, const RGBAColor& clr, BlendMode blend_m
 }
 
 void Surface::brighten_rect(const Rectf& rc, const int32_t factor) {
-	if (!factor) {
+	if (factor == 0) {
 		return;
 	}
 
@@ -126,7 +128,7 @@ void Surface::draw_line_strip(const std::vector<Vector2f>& points,
 
 	std::vector<DrawLineProgram::PerVertexData> vertices;
 	// Each line needs 2 triangles.
-	vertices.reserve(3 * 2 * points.size());
+	vertices.reserve(points.size() * 3 * 2);
 	tesselate_line_strip(width(), height(), color, line_width, points, &vertices);
 	do_draw_line_strip(std::move(vertices));
 }

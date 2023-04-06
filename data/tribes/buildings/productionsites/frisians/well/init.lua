@@ -1,11 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_productionsite_type {
    name = "frisians_well",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Well"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -21,8 +22,6 @@ tribes:new_productionsite_type {
 
    spritesheets = {
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {19, 33},
          frames = 10,
          columns = 5,
@@ -32,14 +31,11 @@ tribes:new_productionsite_type {
    },
    animations = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {19, 33}
       }
    },
 
    aihints = {
-      collects_ware_from_map = "water",
       basic_amount = 1
    },
 
@@ -50,11 +46,11 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "sleep=duration:20s",
             "animate=working duration:20s",
-            "mine=water radius:1 yield:100% when_empty:65%",
+            "mine=resource_water radius:1 yield:100% when_empty:65%",
             "produce=water",
          }
       },
@@ -62,9 +58,11 @@ tribes:new_productionsite_type {
 
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Water",
-      heading = _"Out of Water",
+      title = _("No Water"),
+      heading = _("Out of Water"),
       message = pgettext ("frisians_building", "The carrier working at this well can’t find any water in his well."),
       productivity_threshold = 33
    },
 }
+
+pop_textdomain()

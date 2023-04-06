@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 by the Widelands Development Team
+ * Copyright (C) 2013-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -30,7 +29,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 // Map compatibility information for the website
-constexpr int kCurrentNeedsWidelandsVersionAfter = 20;
+constexpr const char* const kCurrentMinimumRequiredWidelandsVersion = "1.2";
 
 void MapVersionPacket::read(FileSystem& fs,
                             EditorGameBase& egbase,
@@ -68,9 +67,16 @@ void MapVersionPacket::pre_read(FileSystem& fs, Map* map, bool skip, bool is_pos
 			map->map_version_.map_version_minor = globv.get_safe_int("map_version_minor");
 			uint32_t ts = static_cast<uint32_t>(globv.get_safe_int("map_version_timestamp"));
 			map->map_version_.map_version_timestamp = ts;
-			map->map_version_.needs_widelands_version_after =
-			   globv.get_int("needs_widelands_version_after", 0);
-			map->calculate_needs_widelands_version_after(is_post_one_world);
+
+			if (globv.has_val("minimum_required_widelands_version")) {
+				map->map_version_.minimum_required_widelands_version =
+				   globv.get_safe_string("minimum_required_widelands_version");
+			} else if (globv.has_val("needs_widelands_version_after")) {
+				map->map_version_.minimum_required_widelands_version = "build ";
+				map->map_version_.minimum_required_widelands_version +=
+				   std::to_string(globv.get_safe_int("needs_widelands_version_after") + 1);
+			}
+			map->calculate_minimum_required_widelands_version(is_post_one_world);
 		} else {
 			throw UnhandledVersionError("MapVersionPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -125,7 +131,7 @@ void MapVersionPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 	globs.set_int("map_version_timestamp", static_cast<uint32_t>(time(nullptr)));
 	globs.set_int("packet_version", kCurrentPacketVersion);
 	globs.set_int("packet_compatibility", kCurrentPacketVersion);
-	globs.set_int("needs_widelands_version_after", kCurrentNeedsWidelandsVersionAfter);
+	globs.set_string("minimum_required_widelands_version", kCurrentMinimumRequiredWidelandsVersion);
 
 	prof.write("version", false, fs);
 }

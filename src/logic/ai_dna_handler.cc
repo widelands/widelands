@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2017-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,13 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "logic/ai_dna_handler.h"
 
+#include "base/log.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -43,7 +43,8 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t>& military_numbers,
 	// AI files are in range 1-4
 	assert(slot > 0 && slot < 5);
 
-	const std::string full_filename = kAiDir + g_fs->file_separator() + std::string("ai_input_") +
+	const std::string full_filename = kAiDir + FileSystem::file_separator() +
+	                                  std::string("ai_input_") +
 	                                  std::to_string(static_cast<int>(slot)) + kAiExtension;
 
 	Profile prof;
@@ -87,11 +88,11 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t>& military_numbers,
 // This generates a new file with AI data in '.widelands/ai'
 void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t pn) {
 
-	const std::string full_filename = kAiDir + g_fs->file_separator() + std::string(timestring()) +
-	                                  std::string("_ai_player_") +
+	const std::string full_filename = kAiDir + FileSystem::file_separator() +
+	                                  std::string(timestring()) + std::string("_ai_player_") +
 	                                  std::to_string(static_cast<int>(pn)) + kAiExtension;
 
-	log(" %d: AI to be dumped to %s\n", pn, full_filename.c_str());
+	verb_log_dbg("AIPARSE %d: AI to be dumped to %s\n", pn, full_filename.c_str());
 
 	Profile prof;
 

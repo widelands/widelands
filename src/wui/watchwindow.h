@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004, 2008-2009, 2011-2013 by The Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,7 +20,6 @@
 #define WL_WUI_WATCHWINDOW_H
 
 #include "logic/widelands_geometry.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
 #include "wui/mapview.h"
@@ -29,7 +27,7 @@
 class InteractiveGameBase;
 namespace Widelands {
 class Game;
-}
+}  // namespace Widelands
 
 struct WatchWindow : public UI::Window {
 	WatchWindow(InteractiveGameBase& parent,
@@ -37,13 +35,19 @@ struct WatchWindow : public UI::Window {
 	            int32_t y,
 	            uint32_t w,
 	            uint32_t h,
-	            bool single_window_ = false);
+	            bool init_single_window = false);
 	~WatchWindow() override;
 
-	boost::signals2::signal<void(Vector2f)> warp_mainview;
+	Notifications::Signal<const Vector2f&> warp_mainview;
 
 	void add_view(Widelands::Coords);
 	void follow(Widelands::Bob* bob);
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kWatchWindow;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader&);
 
 private:
 	static constexpr size_t kViews = 5;
@@ -71,9 +75,9 @@ private:
 
 	InteractiveGameBase& parent_;
 	MapView map_view_;
-	uint32_t last_visit_;
+	Time last_visit_;
 	bool single_window_;
-	uint8_t cur_index_;
+	uint8_t cur_index_{0U};
 	UI::Button* view_btns_[kViews];
 	std::vector<WatchWindow::View> views_;
 };

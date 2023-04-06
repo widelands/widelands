@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -39,15 +38,14 @@ public:
 	/**
 	 * Closes the server.
 	 */
-	virtual ~NetHostInterface() {
-	}
+	virtual ~NetHostInterface() = default;
 
 	/**
 	 * Returns whether the given client is connected.
 	 * \param The id of the client to check.
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */
-	virtual bool is_connected(ConnectionId id) const = 0;
+	[[nodiscard]] virtual bool is_connected(ConnectionId id) const = 0;
 
 	/**
 	 * Closes the connection to the given client.

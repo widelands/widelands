@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -53,8 +52,7 @@ public:
 
 	LUNA_CLASS_HEAD(LuaPlayer);
 
-	LuaPlayer() : LuaBases::LuaPlayerBase() {
-	}
+	LuaPlayer() = default;
 	explicit LuaPlayer(Widelands::PlayerNumber n) : LuaBases::LuaPlayerBase(n) {
 	}
 	explicit LuaPlayer(lua_State* L) {
@@ -68,6 +66,7 @@ public:
 	int get_allowed_buildings(lua_State* L);
 	int get_objectives(lua_State* L);
 	int get_defeated(lua_State* L);
+	int get_resigned(lua_State* L);
 	int get_messages(lua_State* L);
 	int get_inbox(lua_State* L);
 	int get_color(lua_State* L);
@@ -76,11 +75,15 @@ public:
 	int set_team(lua_State* L);
 	int get_see_all(lua_State* L);
 	int set_see_all(lua_State* L);
+	int get_allow_additional_expedition_items(lua_State* L);
+	int set_allow_additional_expedition_items(lua_State* L);
+	int get_hidden_from_general_statistics(lua_State* L);
+	int set_hidden_from_general_statistics(lua_State* L);
 
 	/*
 	 * Lua methods
 	 */
-	int send_message(lua_State* L);
+	int send_to_inbox(lua_State* L);
 	int message_box(lua_State* L);
 	int sees_field(lua_State* L);
 	int seen_field(lua_State* L);
@@ -90,8 +93,16 @@ public:
 	int reveal_fields(lua_State* L);
 	int hide_fields(lua_State* L);
 	int mark_scenario_as_solved(lua_State* L);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+	int acquire_training_wheel_lock(lua_State* L);
+	int release_training_wheel_lock(lua_State* L);
+	int mark_training_wheel_as_solved(lua_State* L);
+	int run_training_wheel(lua_State* L);
+	int skip_training_wheel(lua_State* L);
+#endif
 	int get_ships(lua_State* L);
 	int get_buildings(lua_State* L);
+	int get_constructionsites(lua_State* L);
 	int get_suitability(lua_State* L);
 	int allow_workers(lua_State* L);
 	int switchplayer(lua_State* L);
@@ -107,6 +118,7 @@ private:
 	                         const Widelands::TribeDescr&,
 	                         std::vector<Widelands::DescriptionIndex>&);
 	int allow_forbid_buildings(lua_State* L, bool);
+	int do_get_buildings(lua_State* L, bool);
 };
 
 class LuaObjective : public LuaGameModuleClass {
@@ -115,17 +127,18 @@ class LuaObjective : public LuaGameModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaObjective);
 
-	~LuaObjective() override {
-	}
+	~LuaObjective() override = default;
 
-	explicit LuaObjective(const Widelands::Objective& n);
+	explicit LuaObjective(const Widelands::Objective& o);
 	LuaObjective() = default;
 	explicit LuaObjective(lua_State* L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State*) override;
 	void __unpersist(lua_State*) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * Properties
@@ -144,7 +157,9 @@ public:
 	 * Lua Methods
 	 */
 	int remove(lua_State* L);
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	int __eq(lua_State* L);
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * C Methods
@@ -152,24 +167,24 @@ public:
 	Widelands::Objective& get(lua_State*, Widelands::Game&);
 };
 
-class LuaMessage : public LuaGameModuleClass {
-	Widelands::PlayerNumber player_number_;
-	Widelands::MessageId message_id_;
+class LuaInboxMessage : public LuaGameModuleClass {
+	Widelands::PlayerNumber player_number_{0U};
+	Widelands::MessageId message_id_{0U};
 
 public:
-	LUNA_CLASS_HEAD(LuaMessage);
-	~LuaMessage() override {
-	}
+	LUNA_CLASS_HEAD(LuaInboxMessage);
+	~LuaInboxMessage() override = default;
 
-	explicit LuaMessage(uint8_t, Widelands::MessageId);
-	LuaMessage() : player_number_(0), message_id_(0) {
-	}
-	explicit LuaMessage(lua_State* L) {
+	explicit LuaInboxMessage(uint8_t, Widelands::MessageId);
+	LuaInboxMessage() = default;
+	explicit LuaInboxMessage(lua_State* L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State*) override;
 	void __unpersist(lua_State*) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * Properties
@@ -186,16 +201,18 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	int __eq(lua_State* L);
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * C Methods
 	 */
-	Widelands::Player& get_plr(lua_State* L, Widelands::Game& game);
+	Widelands::Player& get_plr(lua_State* L, const Widelands::Game& game) const;
 	const Widelands::Message& get(lua_State* L, Widelands::Game& game);
 };
 
 void luaopen_wlgame(lua_State*);
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_GAME_H
-}
+}  // namespace LuaGame

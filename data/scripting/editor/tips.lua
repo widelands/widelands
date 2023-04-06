@@ -12,7 +12,7 @@ end
 
 push_textdomain("widelands_editor")
 local r = {
-  title = _"Tips",
+  title = _("Tips"),
   text = text
 }
 pop_textdomain()

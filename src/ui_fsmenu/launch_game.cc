@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,78 +21,195 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/warning.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
-#include "logic/map_objects/map_object.h"
 #include "map_io/map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 
-FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const settings,
-                                                   GameController* const ctrl)
-   : FullscreenMenuBase(),
+namespace FsMenu {
 
-     // Values for alignment and size
-     butw_(get_w() / 4),
-     buth_(get_h() * 9 / 200),
+LaunchGame::LaunchGame(MenuCapsule& fsmm,
+                       GameSettingsProvider& settings,
+                       GameController* const ctrl,
+                       const bool preconfigured,
+                       const bool mpg)
+   : TwoColumnsFullNavigationMenu(fsmm, _("Launch Game")),
+     map_details_(&right_column_content_box_, kPadding),
 
-     win_condition_dropdown_(this,
+     configure_game_(&right_column_content_box_,
+                     UI::PanelStyle::kFsMenu,
+                     UI::FontStyle::kFsGameSetupHeadings,
+                     0,
+                     0,
+                     0,
+                     0,
+                     _("Configure this game"),
+                     UI::Align::kCenter),
+     write_replay_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Write Replay")),
+     warn_desyncing_addon_(
+        &right_column_content_box_,
+        0,
+        0,
+        10,
+        10,
+        UI::PanelStyle::kFsMenu,
+        format("<rt><p>%s</p></rt>",
+               g_style_manager->font_style(UI::FontStyle::kWarning)
+                  .as_font_tag(
+                     _("An enabled add-on is known to cause desyncs. No replay will be written."))),
+        UI::Align::kLeft,
+        UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     win_condition_dropdown_(&right_column_content_box_,
                              "dropdown_wincondition",
-                             get_w() * 7 / 10,
-                             get_h() * 4 / 10 + buth_,
-                             butw_,
+                             0,
+                             0,
+                             0,
                              10,  // max number of items
-                             buth_,
+                             standard_height_,
                              "",
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
-     peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
-     ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
-     back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
-     // Text labels
-     title_(this,
-            get_w() / 2,
-            get_h() / 25,
-            0,
-            0,
-            "",
-            UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+     win_condition_duration_(&right_column_content_box_,
+                             0,
+                             0,
+                             360,
+                             240,
+                             Widelands::kDefaultWinConditionDuration,
+                             15,        // 15 minutes minimum gametime
+                             512 * 60,  // 512 hours maximum gametime (arbitrary limit)
+                             UI::PanelStyle::kFsMenu,
+                             _("Playing time"),
+                             UI::SpinBox::Units::kMinutes,
+                             UI::SpinBox::Type::kBig,
+                             5,
+                             60),
+     peaceful_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
+     fogless_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("No fog of war")),
+     custom_starting_positions_(&right_column_content_box_,
+                                UI::PanelStyle::kFsMenu,
+                                Vector2i::zero(),
+                                _("Custom starting positions")),
+     choose_map_(mpg && settings.can_change_map() && !preconfigured ?
+                    new UI::Button(&right_column_content_box_,
+                                   "choose_map",
+                                   0,
+                                   0,
+                                   0,
+                                   ok_.get_h(),
+                                   UI::ButtonStyle::kFsMenuSecondary,
+                                   _("Change map…")) :
+                    nullptr),
+     choose_savegame_(mpg && settings.can_change_map() && !preconfigured ?
+                         new UI::Button(&right_column_content_box_,
+                                        "choose_savegame",
+                                        0,
+                                        0,
+                                        0,
+                                        ok_.get_h(),
+                                        UI::ButtonStyle::kFsMenuSecondary,
+                                        _("Change saved game…")) :
+                         nullptr),
+
      // Variables and objects used in the menu
      settings_(settings),
-     ctrl_(ctrl),
-     peaceful_mode_forbidden_(false),
-     nr_players_(0) {
+     ctrl_(ctrl) {
+	warn_desyncing_addon_.set_visible(false);
+	write_replay_.set_state(true);
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
+	win_condition_duration_.changed.connect([this]() { win_condition_duration_changed(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
-	back_.sigclicked.connect([this]() { clicked_back(); });
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	fogless_.changed.connect([this]() { toggle_fogless(); });
+	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
+	if (choose_map_ != nullptr) {
+		choose_map_->sigclicked.connect([this]() { clicked_select_map(); });
+	}
+	if (choose_savegame_ != nullptr) {
+		choose_savegame_->sigclicked.connect([this]() { clicked_select_savegame(); });
+	}
+	ok_.set_title(_("Start game"));
 
-	lua_ = new LuaInterface();
+	lua_.reset(new LuaInterface());
+	add_all_widgets();
 
-	title_.set_font_scale(scale_factor());
+	layout();
+
+	initialization_complete();
 }
 
-FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
-	delete lua_;
+LaunchGame::~LaunchGame() {
+	if (ctrl_ != nullptr) {
+		ctrl_->game_setup_aborted();
+	}
 }
 
-void FullscreenMenuLaunchGame::update_peaceful_mode() {
+void LaunchGame::add_all_widgets() {
+	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
+	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add(&write_replay_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&warn_desyncing_addon_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(4 * kPadding);
+	right_column_content_box_.add(&configure_game_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	right_column_content_box_.add_space(3 * kPadding);
+	right_column_content_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add(&win_condition_duration_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(3 * kPadding);
+	right_column_content_box_.add(&peaceful_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(3 * kPadding);
+	right_column_content_box_.add(&fogless_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(3 * kPadding);
+	right_column_content_box_.add(&custom_starting_positions_, UI::Box::Resizing::kFullSize);
+	if (choose_map_ != nullptr) {
+		right_column_content_box_.add_space(3 * kPadding);
+		right_column_content_box_.add(choose_map_, UI::Box::Resizing::kFullSize);
+	}
+	if (choose_savegame_ != nullptr) {
+		right_column_content_box_.add_space(3 * kPadding);
+		right_column_content_box_.add(choose_savegame_, UI::Box::Resizing::kFullSize);
+	}
+}
+
+void LaunchGame::layout() {
+	TwoColumnsFullNavigationMenu::layout();
+	win_condition_dropdown_.set_desired_size(0, standard_height_);
+
+	map_details_.set_max_size(0, right_column_box_.get_h() / 3);
+	map_details_.force_new_dimensions(right_column_width_, standard_height_);
+}
+
+void LaunchGame::update_warn_desyncing_addon() {
+	const bool has_desyncing_addon = std::any_of(
+	   AddOns::g_addons.begin(), AddOns::g_addons.end(),
+	   [](const AddOns::AddOnState& addon) { return addon.second && !addon.first->sync_safe; });
+
+	warn_desyncing_addon_.set_visible(has_desyncing_addon);
+	write_replay_.set_visible(!has_desyncing_addon);
+}
+
+bool LaunchGame::should_write_replay() const {
+	return write_replay_.is_visible() && write_replay_.get_state();
+}
+
+void LaunchGame::update_peaceful_mode() {
 	bool forbidden =
-	   peaceful_mode_forbidden_ || settings_->settings().scenario || settings_->settings().savegame;
-	peaceful_.set_enabled(!forbidden && settings_->can_change_map());
+	   peaceful_mode_forbidden_ || settings_.settings().scenario || settings_.settings().savegame;
+	peaceful_.set_enabled(!forbidden && settings_.can_change_map());
 	if (forbidden) {
 		peaceful_.set_state(false);
 	}
-	if (settings_->settings().scenario) {
+	if (settings_.settings().scenario) {
 		peaceful_.set_tooltip(_("The relations between players are set by the scenario"));
-	} else if (settings_->settings().savegame) {
+	} else if (settings_.settings().savegame) {
 		peaceful_.set_tooltip(_("The relations between players are set by the saved game"));
 	} else if (peaceful_mode_forbidden_) {
 		peaceful_.set_tooltip(_("The selected win condition does not allow peaceful matches"));
@@ -102,39 +218,97 @@ void FullscreenMenuLaunchGame::update_peaceful_mode() {
 	}
 }
 
-bool FullscreenMenuLaunchGame::init_win_condition_label() {
-	if (settings_->settings().scenario) {
+void LaunchGame::update_custom_starting_positions() {
+	const GameSettings& settings = settings_.settings();
+	const bool forbidden = settings.scenario || settings.savegame;
+	if (forbidden || !settings_.can_change_map()) {
+		custom_starting_positions_.set_enabled(false);
+		if (forbidden) {
+			custom_starting_positions_.set_state(false);
+		}
+	} else {
+		bool allowed = false;
+		for (const PlayerSettings& p : settings.players) {
+			if (p.state != PlayerSettings::State::kClosed && p.state != PlayerSettings::State::kOpen &&
+			    settings.get_tribeinfo(p.tribe)
+			       .initializations[p.initialization_index]
+			       .uses_map_starting_position) {
+				allowed = true;
+				break;
+			}
+		}
+		custom_starting_positions_.set_enabled(allowed);
+		if (!allowed) {
+			custom_starting_positions_.set_state(false);
+			custom_starting_positions_.set_tooltip(
+			   _("All selected starting conditions ignore the map’s starting positions"));
+			return;
+		}
+	}
+	if (settings_.settings().scenario) {
+		custom_starting_positions_.set_tooltip(_("The starting positions are set by the scenario"));
+	} else if (settings_.settings().savegame) {
+		custom_starting_positions_.set_tooltip(_("The starting positions are set by the saved game"));
+	} else {
+		custom_starting_positions_.set_tooltip(_(
+		   "Allow the players to choose their own starting positions at the beginning of the game"));
+	}
+}
+
+void LaunchGame::update_fogless() {
+	const GameSettings& settings = settings_.settings();
+	const bool forbidden = settings.scenario || settings.savegame;
+	if (forbidden || !settings_.can_change_map()) {
+		fogless_.set_enabled(false);
+		if (forbidden) {
+			fogless_.set_state(false);
+		}
+	} else {
+		fogless_.set_enabled(true);
+	}
+	if (settings_.settings().scenario) {
+		fogless_.set_tooltip(_("Player vision is set by the scenario"));
+	} else if (settings_.settings().savegame) {
+		fogless_.set_tooltip(_("Player vision is set by the saved game"));
+	} else {
+		fogless_.set_tooltip(_("Give all players permanent vision of the entire map"));
+	}
+}
+
+bool LaunchGame::init_win_condition_label() {
+	win_condition_duration_.set_visible(false);
+	if (settings_.settings().scenario) {
 		win_condition_dropdown_.set_enabled(false);
 		win_condition_dropdown_.set_label(_("Scenario"));
 		win_condition_dropdown_.set_tooltip(_("Win condition is set through the scenario"));
 		return true;
-	} else if (settings_->settings().savegame) {
+	}
+	if (settings_.settings().savegame) {
 		win_condition_dropdown_.set_enabled(false);
 		/** Translators: This is a game type */
 		win_condition_dropdown_.set_label(_("Saved Game"));
 		win_condition_dropdown_.set_tooltip(
 		   _("The game is a saved game – the win condition was set before."));
 		return true;
-	} else {
-		win_condition_dropdown_.set_enabled(settings_->can_change_map());
-		win_condition_dropdown_.set_label("");
-		win_condition_dropdown_.set_tooltip("");
-		return false;
 	}
+	win_condition_dropdown_.set_enabled(settings_.can_change_map());
+	win_condition_dropdown_.set_label("");
+	win_condition_dropdown_.set_tooltip("");
+	return false;
 }
 
 /**
  * Fill the dropdown with the available win conditions.
  */
-void FullscreenMenuLaunchGame::update_win_conditions() {
+void LaunchGame::update_win_conditions() {
 	if (!init_win_condition_label()) {
 		std::set<std::string> tags;
-		if (!settings_->settings().mapfilename.empty()) {
+		if (!settings_.settings().mapfilename.empty()) {
 			Widelands::Map map;
 			std::unique_ptr<Widelands::MapLoader> ml =
-			   map.get_correct_loader(settings_->settings().mapfilename);
+			   map.get_correct_loader(settings_.settings().mapfilename);
 			if (ml != nullptr) {
-				ml->preload_map(true);
+				ml->preload_map(true, nullptr);
 				tags = map.get_tags();
 			}
 		}
@@ -142,53 +316,62 @@ void FullscreenMenuLaunchGame::update_win_conditions() {
 	}
 }
 
-void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& tags) {
+void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 	win_condition_dropdown_.clear();
 	try {
 		// Make sure that the last win condition is still valid. If not, pick the first one
 		// available.
 		if (last_win_condition_.empty()) {
-			last_win_condition_ = settings_->settings().win_condition_scripts.front();
+			last_win_condition_ = settings_.settings().win_condition_scripts.front();
 		}
 		std::unique_ptr<LuaTable> t = win_condition_if_valid(last_win_condition_, tags);
-		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
+		for (const std::string& win_condition_script : settings_.settings().win_condition_scripts) {
 			if (t) {
 				break;
-			} else {
-				last_win_condition_ = win_condition_script;
-				t = win_condition_if_valid(last_win_condition_, tags);
 			}
+			last_win_condition_ = win_condition_script;
+			t = win_condition_if_valid(last_win_condition_, tags);
 		}
 
 		// Now fill the dropdown.
-		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
+		for (const std::string& win_condition_script : settings_.settings().win_condition_scripts) {
 			try {
 				t = win_condition_if_valid(win_condition_script, tags);
 				if (t) {
-					i18n::Textdomain td("win_conditions");
-					win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script, nullptr,
-					                            win_condition_script == last_win_condition_,
-					                            t->get_string("description"));
+					std::string name;
+					std::string desc;
+					// Prevent propagation of the textdomain
+					if (t->has_key("textdomain")) {
+						std::unique_ptr<i18n::GenericTextdomain> td(
+						   AddOns::create_textdomain_for_addon(t->get_string("textdomain")));
+						name = _(t->get_string("name"));
+						desc = t->get_string("description");
+					} else {
+						i18n::Textdomain td("win_conditions");
+						name = _(t->get_string("name"));
+						desc = t->get_string("description");
+					}
+					win_condition_dropdown_.add(name, win_condition_script, nullptr,
+					                            win_condition_script == last_win_condition_, desc);
 				}
 			} catch (LuaTableKeyError& e) {
-				log("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-				    e.what());
+				log_err("Launch Game: Error loading win condition: %s %s\n",
+				        win_condition_script.c_str(), e.what());
 			}
 		}
 	} catch (const std::exception& e) {
 		const std::string error_message =
-		   (boost::format(_("Unable to determine valid win conditions because the map '%s' "
-		                    "could not be loaded.")) %
-		    settings_->settings().mapfilename)
-		      .str();
+		   format(_("Unable to determine valid win conditions because the map ‘%s’ "
+		            "could not be loaded."),
+		          settings_.settings().mapfilename);
 		win_condition_dropdown_.set_errored(error_message);
-		log("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
+		log_err("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
 	}
 }
 
 std::unique_ptr<LuaTable>
-FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_condition_script,
-                                                 const std::set<std::string>& tags) const {
+LaunchGame::win_condition_if_valid(const std::string& win_condition_script,
+                                   const std::set<std::string>& tags) const {
 	bool is_usable = true;
 	std::unique_ptr<LuaTable> t;
 	try {
@@ -198,15 +381,15 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 		// Skip this win condition if the map doesn't have all the required tags
 		if (t->has_key("map_tags")) {
 			for (const std::string& map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
-				if (!tags.count(map_tag)) {
+				if (tags.count(map_tag) == 0u) {
 					is_usable = false;
 					break;
 				}
 			}
 		}
 	} catch (LuaTableKeyError& e) {
-		log("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-		    e.what());
+		log_err("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
+		        e.what());
 	}
 	if (!is_usable) {
 		t.reset(nullptr);
@@ -214,16 +397,19 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 	return t;
 }
 
-void FullscreenMenuLaunchGame::toggle_peaceful() {
-	settings_->set_peaceful_mode(peaceful_.get_state());
+void LaunchGame::win_condition_duration_changed() {
+	settings_.set_win_condition_duration(win_condition_duration_.get_value());
 }
 
-// Implemented by subclasses
-void FullscreenMenuLaunchGame::clicked_ok() {
-	NEVER_HERE();
+void LaunchGame::toggle_peaceful() {
+	settings_.set_peaceful_mode(peaceful_.get_state());
 }
 
-// Implemented by subclasses
-void FullscreenMenuLaunchGame::clicked_back() {
-	NEVER_HERE();
+void LaunchGame::toggle_fogless() {
+	settings_.set_fogless(fogless_.get_state());
 }
+
+void LaunchGame::toggle_custom_starting_positions() {
+	settings_.set_custom_starting_positions(custom_starting_positions_.get_state());
+}
+}  // namespace FsMenu

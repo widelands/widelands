@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2020 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -37,9 +36,8 @@ class ExpeditionBootstrap;
 
 class PortdockDescr : public MapObjectDescr {
 public:
-	PortdockDescr(char const* const init_name, char const* const init_descname);
-	~PortdockDescr() override {
-	}
+	PortdockDescr(char const* init_name, char const* init_descname);
+	~PortdockDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(PortdockDescr);
@@ -75,7 +73,7 @@ class PortDock : public PlayerImmovable {
 public:
 	const PortdockDescr& descr() const;
 
-	explicit PortDock(Warehouse* warehouse);
+	explicit PortDock(Warehouse* wh);
 	~PortDock() override;
 
 	void add_position(Widelands::Coords where);
@@ -100,10 +98,10 @@ public:
 	void add_neighbours(std::vector<RoutingNodeNeighbour>& neighbours);
 
 	void add_shippingitem(Game&, WareInstance&);
-	void update_shippingitem(Game&, WareInstance&);
+	void update_shippingitem(Game&, const WareInstance&);
 
 	void add_shippingitem(Game&, Worker&);
-	void update_shippingitem(Game&, Worker&);
+	void update_shippingitem(Game&, const Worker&);
 
 	void shipping_item_arrived(Game&, ShippingItem&);
 	void shipping_item_returned(Game&, ShippingItem&);
@@ -137,7 +135,8 @@ private:
 	friend struct ShippingSchedule;
 
 	// Does nothing - we do not show them on the map
-	void draw(uint32_t, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
+	void
+	draw(const Time&, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
 	}
 
 	void init_fleet(EditorGameBase& egbase);
@@ -148,12 +147,12 @@ private:
 
 	uint32_t calc_max_priority(const EditorGameBase&, const PortDock& dest) const;
 
-	ShipFleet* fleet_;
+	ShipFleet* fleet_{nullptr};
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
 	std::list<ShippingItem> waiting_;
-	bool expedition_ready_;
-	bool expedition_cancelling_;
+	bool expedition_ready_{false};
+	bool expedition_cancelling_{false};
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
 
@@ -161,14 +160,14 @@ private:
 protected:
 	class Loader : public PlayerImmovable::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&, uint8_t packet_version);
 		void load_pointers() override;
 		void load_finish() override;
 
 	private:
-		uint32_t warehouse_;
+		uint32_t warehouse_{0U};
 		std::vector<ShippingItem::Loader> waiting_;
 	};
 

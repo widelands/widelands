@@ -11,9 +11,10 @@ wl_library(graphic_animation
     spritesheet_animation.cc
     spritesheet_animation.h
   DEPENDS
+    base
     base_geometry
-    base_log
     base_macros
+    base_math
     graphic
     graphic_color
     graphic_playercolor

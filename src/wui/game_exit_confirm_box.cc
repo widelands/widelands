@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,14 +20,23 @@
 
 #include "base/i18n.h"
 
+GameExitConfirmBox::GameExitConfirmBox(UI::Panel& p, InteractiveGameBase& i)
+   : GameExitConfirmBox(p,
+                        i,
+                        /** TRANSLATORS: Window label when "Exit game" has been pressed */
+                        _("Exit Game Confirmation"),
+                        _("Are you sure you wish to exit this game?")) {
+	set_z(UI::Panel::ZOrder::kConfirmation);
+}
+
 // TODO(GunChleoc): Arabic: Buttons need more height for Arabic
-GameExitConfirmBox::GameExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb)
-   : UI::WLMessageBox(&parent,
-                      /** TRANSLATORS: Window label when "Exit game" has been pressed */
-                      _("Exit Game Confirmation"),
-                      _("Are you sure you wish to exit this game?"),
-                      MBoxType::kOkCancel),
+GameExitConfirmBox::GameExitConfirmBox(UI::Panel& parent,
+                                       InteractiveGameBase& gb,
+                                       const std::string& title,
+                                       const std::string& message)
+   : UI::WLMessageBox(&parent, UI::WindowStyle::kWui, title, message, MBoxType::kOkCancel),
      igb_(gb) {
+	set_z(UI::Panel::ZOrder::kConfirmation);
 }
 
 void GameExitConfirmBox::clicked_ok() {

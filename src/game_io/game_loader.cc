@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -32,6 +31,7 @@
 #include "game_io/game_player_info_packet.h"
 #include "game_io/game_preload_packet.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
@@ -61,83 +61,99 @@ int32_t GameLoader::preload_game(GamePreloadPacket& mp) {
  * Load the complete file
  */
 int32_t GameLoader::load_game(bool const multiplayer) {
-	ScopedTimer timer("GameLoader::load() took %ums");
+	ScopedTimer timer("GameLoader::load() took %ums", true);
 
 	assert(game_.has_loader_ui());
-	auto set_progress_message = [this](std::string text, unsigned step) {
-		game_.step_loader_ui(
-		   (boost::format(_("Loading game: %1$s (%2$u/%3$d)")) % text % step % 6).str());
+	auto set_progress_message = [](const std::string& text, unsigned step) {
+		Notifications::publish(
+		   UI::NoteLoadingMessage(format(_("Loading game: %1$s (%2$u/%3$d)"), text, step, 6)));
 	};
 	set_progress_message(_("Elemental data"), 1);
-	log("Game: Reading Preload Data ... ");
-	{
-		GamePreloadPacket p;
-		p.read(fs_, game_);
-	}
-	log("took %ums\n", timer.ms_since_last_query());
+	verb_log_info("Game: Reading Preload Data ... ");
+	GamePreloadPacket preload;
+	preload.read(fs_, game_);
 
-	log("Game: Reading Game Class Data ... ");
+	// Now that the preload data was read, we apply the add-ons.
+	// Note: Only world- and tribes-type add-ons are saved in savegames because those are the
+	// only ones where it makes a difference whether they are enabled during loading or not.
+	{
+		game_.enabled_addons().clear();
+		for (const auto& requirement : preload.required_addons()) {
+			bool found = false;
+			for (auto& pair : AddOns::g_addons) {
+				if (pair.first->internal_name == requirement.first) {
+					found = true;
+					if (pair.first->version != requirement.second) {
+						log_warn(
+						   "Savegame requires add-on '%s' at version %s but version %s is installed. "
+						   "They might be compatible, but this is not necessarily the case.\n",
+						   requirement.first.c_str(),
+						   AddOns::version_to_string(requirement.second).c_str(),
+						   AddOns::version_to_string(pair.first->version).c_str());
+					}
+					assert(pair.first->category == AddOns::AddOnCategory::kWorld ||
+					       pair.first->category == AddOns::AddOnCategory::kTribes ||
+					       pair.first->category == AddOns::AddOnCategory::kScript);
+					game_.enabled_addons().push_back(pair.first);
+					break;
+				}
+			}
+			if (!found) {
+				throw GameDataError("Add-on '%s' (version %s) required but not installed",
+				                    requirement.first.c_str(),
+				                    AddOns::version_to_string(requirement.second).c_str());
+			}
+		}
+	}
+
+	// This creates the map filesystem, giving us access to scenario-specific registries.
+	verb_log_info("Game: Reading Map Data ... ");
+	GameMapPacket map_packet;
+	map_packet.read(fs_, game_);
+
+	// This will load the descriptions in the correct order.
+	// By now, all units must have been registered.
+	// Do not request a description to be loaded before this call.
+	verb_log_info("Game: Reading Game Class Data ... ");
 	{
 		GameClassPacket p;
 		p.read(fs_, game_);
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Reading Map Data ... ");
-	GameMapPacket map_packet;
-	map_packet.read(fs_, game_);
-	log("Game: Reading Map Data took %ums\n", timer.ms_since_last_query());
-
-	// This has to be loaded after the map packet so that the map's filesystem will exist.
-	// The custom tribe scripts are saved when the map scripting packet is saved, but we need
-	// to load them as early as possible here.
-	if (fs_.file_exists("map/scripting/tribes/init.lua")) {
-		log("Game: Reading Scenario Tribes ... ");
-		game_.lua().run_script("map:scripting/tribes/init.lua");
-		log("Game: Reading Scenario Tribes took %ums\n", timer.ms_since_last_query());
-	}
-
-	// This also triggers loading the world and tribes, so we need a newline at the end of the log
-	// output
-	log("Game: Reading Player Info ...\n");
+	verb_log_info("Game: Reading Player Info ...\n");
 	{
 		GamePlayerInfoPacket p;
 		p.read(fs_, game_);
 	}
-	log("Game: Reading Player Info took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Calling read_complete()\n");
+	verb_log_info("Game: Calling read_complete()\n");
 	map_packet.read_complete(game_);
-	log("Game: read_complete took: %ums\n", timer.ms_since_last_query());
 
 	MapObjectLoader* const mol = map_packet.get_map_object_loader();
 
-	log("Game: Reading Player Economies Info ... ");
+	verb_log_info("Game: Reading Player Economies Info ... ");
 	set_progress_message(_("Economies"), 2);
 	{
 		GamePlayerEconomiesPacket p;
 		p.read(fs_, game_, mol);
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Reading ai persistent data ... ");
+	verb_log_info("Game: Reading ai persistent data ... ");
 	set_progress_message(_("AI"), 3);
 	{
 		GamePlayerAiPersistentPacket p;
 		p.read(fs_, game_, mol);
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Reading Command Queue Data ... ");
+	verb_log_info("Game: Reading Command Queue Data ... ");
 	set_progress_message(_("Command queue"), 4);
 	{
 		GameCmdQueuePacket p;
 		p.read(fs_, game_, mol);
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 
 	//  This must be after the command queue has been read.
-	log("Game: Parsing messages ... ");
+	verb_log_info("Game: Parsing messages ... ");
 	set_progress_message(_("Messages"), 5);
 	PlayerNumber const nr_players = game_.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game_, player) {
@@ -149,12 +165,12 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			// Renew MapObject connections
 			if (message->serial() > 0) {
 				MapObject* mo = game_.objects().get_object(message->serial());
-				mo->removed.connect(
-				   [player, message_id](unsigned) { player->message_object_removed(message_id); });
+				mo->removed.connect([player, message_id](unsigned /* serial */) {
+					player->message_object_removed(message_id);
+				});
 			}
 		}
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 
 	set_progress_message(_("Finishing"), 6);
 	// For compatibility hacks only
@@ -164,12 +180,9 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// In multiplayer games every client needs to create a new interactive
 	// player.
 	if (!multiplayer) {
-		log("Game: Reading Interactive Player Data ... ");
-		{
-			GameInteractivePlayerPacket p;
-			p.read(fs_, game_, mol);
-		}
-		log("took %ums\n", timer.ms_since_last_query());
+		verb_log_info("Game: Reading Interactive Player Data ... ");
+		GameInteractivePlayerPacket p;
+		p.read(fs_, game_, mol);
 	}
 
 	return 0;

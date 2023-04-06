@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,14 +26,15 @@
  * Status window for warehouses
  */
 struct WarehouseWindow : public BuildingWindow {
-	WarehouseWindow(InteractiveGameBase& parent,
-	                UI::UniqueWindow::Registry& reg,
+	WarehouseWindow(InteractiveBase& parent,
+	                BuildingWindow::Registry& reg,
 	                Widelands::Warehouse&,
 	                bool avoid_fastclick,
 	                bool workarea_preview_wanted);
 
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
+	void setup_name_field_editbox(UI::Box& vbox) override;
 
 	Widelands::OPtr<Widelands::Warehouse> warehouse_;
 

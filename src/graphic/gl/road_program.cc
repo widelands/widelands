@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,7 +20,6 @@
 
 #include <cassert>
 
-#include "base/log.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
@@ -40,9 +38,6 @@ RoadProgram::RoadProgram() {
 	u_texture_ = glGetUniformLocation(gl_program_.object(), "u_texture");
 }
 
-RoadProgram::~RoadProgram() {
-}
-
 void RoadProgram::add_road(const int renderbuffer_width,
                            const int renderbuffer_height,
                            const FieldsToDraw::Field& start,
@@ -52,10 +47,10 @@ void RoadProgram::add_road(const int renderbuffer_width,
                            const Direction direction,
                            uint32_t* gl_texture) {
 	// The thickness of the road in pixels on screen.
-	static constexpr float kRoadThicknessInPixels = 5.;
+	static constexpr float kRoadThicknessInPixels = 5.f;
 
 	// The overshot of the road in either direction in percent.
-	static constexpr float kRoadElongationInPercent = .1;
+	static constexpr float kRoadElongationInPercent = .1f;
 
 	const float delta_x = end.surface_pixel.x - start.surface_pixel.x;
 	const float delta_y = end.surface_pixel.y - start.surface_pixel.y;
@@ -81,10 +76,10 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	       road_type == Widelands::RoadSegment::kWaterway);
 	const Image& texture =
 	   road_type == Widelands::RoadSegment::kNormal ?
-	      visible_owner->tribe().road_textures().get_normal_texture(start.fcoords, direction) :
-	      road_type == Widelands::RoadSegment::kWaterway ?
-	      visible_owner->tribe().road_textures().get_waterway_texture(start.fcoords, direction) :
-	      visible_owner->tribe().road_textures().get_busy_texture(start.fcoords, direction);
+         visible_owner->tribe().road_textures().get_normal_texture(start.fcoords, direction) :
+	   road_type == Widelands::RoadSegment::kWaterway ?
+         visible_owner->tribe().road_textures().get_waterway_texture(start.fcoords, direction) :
+         visible_owner->tribe().road_textures().get_busy_texture(start.fcoords, direction);
 	if (*gl_texture == 0) {
 		*gl_texture = texture.blit_data().texture_id;
 	}
@@ -154,7 +149,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
 
 		// Road to right neighbor.
-		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
+		if (field.rn_index != FieldsToDraw::kInvalidIndex &&
+		    !(field.obscured_by_slope && fields_to_draw.at(field.rn_index).obscured_by_slope)) {
 			if (field.road_e != Widelands::RoadSegment::kNone &&
 			    field.road_e != Widelands::RoadSegment::kBridgeNormal &&
 			    field.road_e != Widelands::RoadSegment::kBridgeBusy) {
@@ -164,7 +160,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 		}
 
 		// Road to bottom right neighbor.
-		if (field.brn_index != FieldsToDraw::kInvalidIndex) {
+		if (field.brn_index != FieldsToDraw::kInvalidIndex &&
+		    !(field.obscured_by_slope && fields_to_draw.at(field.brn_index).obscured_by_slope)) {
 			if (field.road_se != Widelands::RoadSegment::kNone &&
 			    field.road_se != Widelands::RoadSegment::kBridgeNormal &&
 			    field.road_se != Widelands::RoadSegment::kBridgeBusy) {
@@ -175,7 +172,8 @@ void RoadProgram::draw(const int renderbuffer_width,
 		}
 
 		// Road to bottom left neighbor.
-		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+		if (field.bln_index != FieldsToDraw::kInvalidIndex &&
+		    !(field.obscured_by_slope && fields_to_draw.at(field.bln_index).obscured_by_slope)) {
 			if (field.road_sw != Widelands::RoadSegment::kNone &&
 			    field.road_sw != Widelands::RoadSegment::kBridgeNormal &&
 			    field.road_sw != Widelands::RoadSegment::kBridgeBusy) {

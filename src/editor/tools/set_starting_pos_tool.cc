@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -34,7 +33,7 @@ Widelands::NodeCaps set_starting_pos_tool_nodecaps(const Widelands::FCoords& c,
 	for (Widelands::PlayerNumber p = 1, last = current_player_ - 1;; ++p) {
 		for (; p <= last; ++p) {
 			if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-				if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS) {
+				if (map.calc_distance(sp, c) < Widelands::kMinSpaceAroundPlayers) {
 					return Widelands::NodeCaps::CAPS_NONE;
 				}
 			}
@@ -54,19 +53,19 @@ Widelands::NodeCaps set_starting_pos_tool_nodecaps(const Widelands::FCoords& c,
 
 }  // namespace
 
-EditorSetStartingPosTool::EditorSetStartingPosTool() : EditorTool(*this, *this, false) {
+EditorSetStartingPosTool::EditorSetStartingPosTool(EditorInteractive& parent)
+   : EditorTool(parent, *this, *this, false) {
 	current_player_ = 1;
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                    EditorInteractive&,
-                                                    EditorActionArgs*,
+                                                    EditorActionArgs* /* args */,
                                                     Widelands::Map* map) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map->get_width());
 	assert(0 <= center.node.y);
 	assert(center.node.y < map->get_height());
-	if (current_player_) {
+	if (current_player_ != 0) {
 		if (map->get_nrplayers() < current_player_) {
 			//  Mmh, my current player is not valid. Maybe the user has loaded a
 			//  new map while this tool was active. We set the new player to a

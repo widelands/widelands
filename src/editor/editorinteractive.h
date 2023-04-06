@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,16 +12,17 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_EDITOR_EDITORINTERACTIVE_H
 #define WL_EDITOR_EDITORINTERACTIVE_H
 
+#include <map>
 #include <memory>
 
+#include "editor/editor_category.h"
 #include "editor/tools/history.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/increase_resources_tool.h"
@@ -34,6 +35,7 @@
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_starting_pos_tool.h"
 #include "editor/tools/set_terrain_tool.h"
+#include "editor/tools/toolhistory_tool.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
@@ -42,6 +44,8 @@
 
 class EditorTool;
 
+extern const std::string kEditorSplashImage;
+
 /**
  * This is the EditorInteractive. It is like the InteractivePlayer class,
  * but for the Editor instead of the game
@@ -49,24 +53,35 @@ class EditorTool;
 class EditorInteractive : public InteractiveBase {
 public:
 	struct Tools {
-		Tools(const Widelands::Map& map)
+		explicit Tools(EditorInteractive& parent, const Widelands::Map& map)
 		   : current_pointer(&info),
-		     use_tool(EditorTool::First),
-		     increase_height(decrease_height, set_height),
-		     noise_height(set_height),
-		     place_immovable(delete_immovable),
-		     place_critter(delete_critter),
-		     increase_resources(decrease_resources, set_resources),
-		     set_port_space(unset_port_space),
-		     set_origin(),
-		     resize(map.get_width(), map.get_height()) {
+
+		     info(parent),
+		     set_height(parent),
+		     decrease_height(parent),
+		     increase_height(parent, decrease_height, set_height),
+		     noise_height(parent, set_height),
+		     set_terrain(parent),
+		     delete_immovable(parent),
+		     place_immovable(parent, delete_immovable),
+		     set_starting_pos(parent),
+		     delete_critter(parent),
+		     place_critter(parent, delete_critter),
+		     decrease_resources(parent),
+		     set_resources(parent),
+		     increase_resources(parent, decrease_resources, set_resources),
+		     unset_port_space(parent),
+		     set_port_space(parent, unset_port_space),
+		     set_origin(parent),
+		     resize(parent, map.get_width(), map.get_height()),
+		     tool_history(parent) {
 		}
-		EditorTool& current() const {
+		[[nodiscard]] EditorTool& current() const {
 			return *current_pointer;
 		}
 		using ToolVector = std::vector<EditorTool*>;
 		EditorTool* current_pointer;
-		EditorTool::ToolIndex use_tool;
+		EditorTool::ToolIndex use_tool{EditorTool::First};
 		EditorInfoTool info;
 		EditorSetHeightTool set_height;
 		EditorDecreaseHeightTool decrease_height;
@@ -81,16 +96,25 @@ public:
 		EditorDecreaseResourcesTool decrease_resources;
 		EditorSetResourcesTool set_resources;
 		EditorIncreaseResourcesTool increase_resources;
-		EditorSetPortSpaceTool set_port_space;
 		EditorUnsetPortSpaceTool unset_port_space;
+		EditorSetPortSpaceTool set_port_space;
 		EditorSetOriginTool set_origin;
 		EditorResizeTool resize;
+		EditorHistoryTool tool_history;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
-	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
-	// map and run 'script_to_run' directly after all initialization is done.
-	static void run_editor(const std::string& filename, const std::string& script_to_run);
+	enum class Init {
+		kLoadMapDirectly,  // load the given map file, then run the given script if any
+		kDefault,          // create new empty map
+		kNew,              // show New Map window
+		kRandom,           // show Random Map window
+		kLoad              // show Load Map window
+	};
+	static void run_editor(UI::Panel* error_message_parent,
+	                       EditorInteractive::Init,
+	                       const std::string& filename = "",
+	                       const std::string& script_to_run = "");
 
 	void load(const std::string& filename);
 	void cleanup_for_load() override;
@@ -101,6 +125,7 @@ public:
 
 	void map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle, bool draw);
 	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
+	void set_sel_radius(uint32_t) override;
 	void set_sel_radius_and_update_menu(uint32_t);
 	void stop_painting();
 
@@ -108,6 +133,7 @@ public:
 	bool handle_key(bool down, SDL_Keysym) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 	void draw(RenderTarget&) override;
 
 	void select_tool(EditorTool&, EditorTool::ToolIndex);
@@ -116,8 +142,12 @@ public:
 		return nullptr;
 	}
 
+	bool omnipotent() const override {
+		return true;
+	}
+
 	// action functions
-	void exit();
+	void exit(bool force = false);
 
 	void set_need_save(bool const t) {
 		need_save_ = t;
@@ -128,14 +158,25 @@ public:
 	// all tools should be reset. Otherwise, something else happened that
 	// requires the UI to be completely recalculated, for example the origin of
 	// the map has changed.
-	enum class MapWas {
-		kGloballyMutated,
-		kReplaced,
-	};
+	enum class MapWas { kGloballyMutated, kReplaced, kResized };
 	void map_changed(const MapWas& action);
 
 	// Access to the tools.
 	Tools* tools();
+
+	/// Access to the editor categories
+	const std::vector<std::unique_ptr<EditorCategory>>&
+	editor_categories(Widelands::MapObjectType type) const;
+
+	/// Ensure all world units have been loaded and fill editor categories
+	static void load_world_units(EditorInteractive*, Widelands::EditorGameBase&);
+
+	EditorHistory& history();
+
+	// Returns window for given tool if it's open, otherwise return nullptr
+	UI::UniqueWindow* get_open_tool_window(WindowID window_id);
+	UI::UniqueWindow::Registry& get_registry_for_window(WindowID window_id);
+	void restore_tool_configuration(const ToolConf& conf);
 
 private:
 	// For referencing the items in mainmenu_
@@ -145,6 +186,7 @@ private:
 		kLoadMap,
 		kSaveMap,
 		kMapOptions,
+		kUploadAsAddOn,
 		kExitEditor,
 	};
 
@@ -160,11 +202,21 @@ private:
 		kPlayers,
 		kMapOrigin,
 		kMapSize,
-		kFieldInfo
+		kFieldInfo,
+		kToolHistory,
 	};
 
 	// For referencing the items in showhidemenu_
-	enum class ShowHideEntry { kBuildingSpaces, kGrid, kAnimals, kImmovables, kResources };
+	enum class ShowHideEntry {
+		kBuildingSpaces,
+		kMaximumBuildingSpaces,
+		kGrid,
+		kAnimals,
+		kImmovables,
+		kResources
+	};
+
+	static void do_run_editor(EditorInteractive::Init, const std::string&, const std::string&);
 
 	// Adds the mainmenu_ to the toolbar
 	void add_main_menu();
@@ -183,6 +235,8 @@ private:
 
 	bool player_hears_field(const Widelands::Coords& coords) const override;
 
+	// Toggles the buildhelp for maximum building spaces and calls rebuild_showhide_menu
+	void toggle_maximum_buildhelp();
 	// Show / hide the resources overlays in the mapview
 	void toggle_resources();
 	// Show / hide the immovables in the mapview
@@ -191,10 +245,14 @@ private:
 	void toggle_bobs();
 	void toggle_grid();
 
+	void update_tool_history_window();
+
+	void publish_map();
+
 	//  state variables
-	bool need_save_;
+	bool need_save_{false};
 	uint32_t realtime_;
-	bool is_painting_;
+	bool is_painting_{false};
 
 	// All unique menu windows
 	struct EditorMenuWindows {
@@ -219,7 +277,11 @@ private:
 		UI::UniqueWindow::Registry resources;
 		UI::UniqueWindow::Registry players;
 		UI::UniqueWindow::Registry resizemap;
+		UI::UniqueWindow::Registry toolhistory;
 	} tool_windows_;
+
+	std::map<Widelands::MapObjectType, std::vector<std::unique_ptr<EditorCategory>>>
+	   editor_categories_;
 
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;
@@ -228,16 +290,21 @@ private:
 	// Show / Hide menu on the toolbar
 	UI::Dropdown<ShowHideEntry> showhidemenu_;
 
-	UI::Button* undo_;
-	UI::Button* redo_;
+	UI::Button* undo_{nullptr};
+	UI::Button* redo_{nullptr};
 
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
 
-	bool draw_resources_ = true;
-	bool draw_immovables_ = true;
-	bool draw_bobs_ = true;
-	bool draw_grid_ = true;
+	bool cleaning_up_ = false;
+	UI::UniqueWindow::Registry* registry_to_open_ = nullptr;
+
+	// Mapping between tools_ and tool_windows_
+	std::map<EditorTool*, UI::UniqueWindow::Registry*> tool_to_window_map_;
+
+	/// Set to true when tool settings are changed in tool window.
+	/// Set to false when the tool is used with the new settings.
+	bool tool_settings_changed_ = true;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

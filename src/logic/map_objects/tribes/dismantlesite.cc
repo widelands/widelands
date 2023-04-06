@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,6 +22,7 @@
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -39,8 +39,8 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
-                                       const Tribes& tribes)
-   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
+                                       Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, descriptions),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 }
@@ -61,7 +61,8 @@ IMPLEMENTATION
 ==============================
 */
 
-DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr) : PartiallyFinishedBuilding(gdescr) {
+DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr)
+   : PartiallyFinishedBuilding(gdescr), next_dropout_index_(0) {
 }
 
 DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
@@ -69,7 +70,7 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              const Coords& c,
                              Player* plr,
                              bool loading,
-                             FormerBuildings& former_buildings,
+                             const FormerBuildings& former_buildings,
                              const std::map<DescriptionIndex, Quantity>& preserved_wares)
    : PartiallyFinishedBuilding(gdescr), preserved_wares_(preserved_wares), next_dropout_index_(0) {
 	position_ = c;
@@ -83,7 +84,7 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
 	set_building(*cur_descr);
 
 	if (loading) {
-		Building::init(egbase);
+		PartiallyFinishedBuilding::init(egbase);
 	} else {
 		init(egbase);
 	}
@@ -92,14 +93,12 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
 void DismantleSite::cleanup(EditorGameBase& egbase) {
 	PartiallyFinishedBuilding::cleanup(egbase);
 
-	if (was_immovable_ && work_completed_ >= work_steps_) {
+	if ((was_immovable_ != nullptr) && work_completed_ >= work_steps_) {
 		// Put the old immovable in place again
 		for (const auto& pair : old_buildings_) {
-			if (!pair.second.empty()) {
-				egbase.create_immovable(position_, pair.first,
-				                        pair.second == "world" ? MapObjectDescr::OwnerType::kWorld :
-				                                                 MapObjectDescr::OwnerType::kTribe,
-				                        get_owner());
+			// 'false' means that this was built on top of an immovable, so we reinstate that immovable
+			if (!pair.second) {
+				egbase.create_immovable(position_, pair.first, get_owner());
 				break;
 			}
 		}
@@ -113,8 +112,8 @@ Print completion percentage.
 */
 void DismantleSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = g_gr->styles().color_tag((boost::format(_("%u%% dismantled")) % percent).str(),
-	                              g_gr->styles().building_statistics_style().construction_color());
+	*s = StyleManager::color_tag(format(_("%u%% dismantled"), percent),
+	                             g_style_manager->building_statistics_style().construction_color());
 }
 
 /*
@@ -151,17 +150,21 @@ const Buildcost DismantleSite::count_returned_wares(Building* building) {
 	Buildcost result;
 	DescriptionIndex first_idx = INVALID_INDEX;
 	for (const auto& pair : building->get_former_buildings()) {
-		if (pair.second.empty()) {
+		// 'true' means that this is an enhanced building
+		if (pair.second) {
 			first_idx = pair.first;
 			break;
 		}
 	}
 	assert(first_idx != INVALID_INDEX);
 	for (const auto& pair : building->get_former_buildings()) {
+		if (!pair.second) {
+			continue;
+		}
 		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(pair.first);
 		const Buildcost& return_wares = pair.first != first_idx ?
-		                                   former_descr->returned_wares_enhanced() :
-		                                   former_descr->returned_wares();
+                                         former_descr->enhancement_returns_on_dismantle() :
+                                         former_descr->returns_on_dismantle();
 
 		for (const auto& ware : return_wares) {
 			// TODO(GunChleoc): Once we have trading, we might want to return all wares again.
@@ -179,10 +182,7 @@ Construction sites only burn if some of the work has been completed.
 ===============
 */
 bool DismantleSite::burn_on_destroy() {
-	if (work_completed_ >= work_steps_) {
-		return false;  // completed, so don't burn
-	}
-	return true;
+	return work_completed_ < work_steps_;
 }
 
 /*
@@ -190,7 +190,7 @@ bool DismantleSite::burn_on_destroy() {
 Called by our builder to get instructions.
 ===============
 */
-bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
+bool DismantleSite::get_building_work(Game& game, Worker& worker, bool /*success*/) {
 	if (&worker != builder_.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine
 		// that is supposed to be enhanced. Make him return to a warehouse
@@ -205,7 +205,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		for (size_t i = next_dropout_index_; i != next_dropout_index_ || first_round;
 		     i = (i + 1) % nr_dropout_queues, first_round = false) {
 			WaresQueue& q = *dropout_wares_[i];
-			if (q.get_filled()) {
+			if (q.get_filled() != 0u) {
 				q.set_filled(q.get_filled() - 1);
 				q.set_max_size(q.get_max_size() - 1);
 				const WareDescr& wd = *owner().tribe().get_ware_descr(q.get_index());
@@ -218,29 +218,28 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		}
 	}
 
-	if (!work_steps_) {
+	if (work_steps_ == 0u) {
 		// Happens for building without buildcost. Complete the building immediately.
 		schedule_destroy(game);
 	}
 
 	// Check if one step has completed
-	if (static_cast<int32_t>(game.get_gametime() - work_steptime_) >= 0 && working_) {
+	if (game.get_gametime() >= work_steptime_ && working_) {
 		++work_completed_;
 
-		for (uint32_t i = 0; i < consume_wares_.size(); ++i) {
-			WaresQueue& wq = *consume_wares_[i];
-			if (!wq.get_filled()) {
+		for (WaresQueue* wq : consume_wares_) {
+			if (wq->get_filled() == 0u) {
 				continue;
 			}
 
-			wq.set_filled(wq.get_filled() - 1);
-			wq.set_max_size(wq.get_max_size() - 1);
+			wq->set_filled(wq->get_filled() - 1);
+			wq->set_max_size(wq->get_max_size() - 1);
 
 			// Update statistics
-			get_owner()->ware_produced(wq.get_index());
+			get_owner()->ware_produced(wq->get_index());
 
-			const WareDescr& wd = *owner().tribe().get_ware_descr(wq.get_index());
-			WareInstance& ware = *new WareInstance(wq.get_index(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(wq->get_index());
+			WareInstance& ware = *new WareInstance(wq->get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 
@@ -258,9 +257,9 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		   game, WALK_SE, worker.descr().get_right_walk_anims(false, &worker), true);
 		worker.set_location(nullptr);
 	} else if (!working_) {
-		work_steptime_ = game.get_gametime() + DISMANTLESITE_STEP_TIME;
+		work_steptime_ = game.get_gametime() + kDismantlesiteStepTime;
 		worker.start_task_idle(
-		   game, worker.descr().get_animation("work", &worker), DISMANTLESITE_STEP_TIME);
+		   game, worker.descr().get_animation("work", &worker), kDismantlesiteStepTime.get());
 
 		working_ = true;
 	}
@@ -272,17 +271,17 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 Draw it.
 ===============
 */
-void DismantleSite::draw(uint32_t gametime,
+void DismantleSite::draw(const Time& gametime,
                          const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          const Widelands::Coords& coords,
                          float scale,
                          RenderTarget* dst) {
-	uint32_t tanim = gametime - animstart_;
+	const Time tanim((gametime - animstart_).get());
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
-	if (was_immovable_) {
-		if (info_to_draw & InfoToDraw::kShowBuildings) {
+	if (was_immovable_ != nullptr) {
+		if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 			dst->blit_animation(
 			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
 		} else {
@@ -291,7 +290,7 @@ void DismantleSite::draw(uint32_t gametime,
 		}
 	} else {
 		// Draw the construction site marker
-		if (info_to_draw & InfoToDraw::kShowBuildings) {
+		if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 			dst->blit_animation(
 			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 		} else {
@@ -301,7 +300,7 @@ void DismantleSite::draw(uint32_t gametime,
 	}
 
 	// Blit bottom part of the animation according to dismantle progress
-	if (info_to_draw & InfoToDraw::kShowBuildings) {
+	if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 		dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
 		                    &player_color, 1.f, 100 - ((get_built_per64k() * 100) >> 16));
 	} else {

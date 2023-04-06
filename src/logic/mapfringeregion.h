@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -35,11 +34,12 @@ namespace Widelands {
 template <typename AreaType = Area<>> struct MapFringeRegion {
 	MapFringeRegion(const Map& map, AreaType area)
 	   : area_(area), remaining_in_phase_(area.radius), phase_(area.radius ? 6 : 0) {
-		for (typename AreaType::RadiusType r = area.radius; r; --r)
+		for (typename AreaType::RadiusType r = area.radius; r; --r) {
 			map.get_tln(area_, &area_);
+		}
 	}
 
-	const typename AreaType::CoordsType& location() const {
+	[[nodiscard]] const typename AreaType::CoordsType& location() const {
 		return area_;
 	}
 
@@ -68,7 +68,7 @@ template <typename AreaType = Area<>> struct MapFringeRegion {
 		phase_ = 6;
 	}
 
-	typename AreaType::RadiusType radius() const {
+	[[nodiscard]] typename AreaType::RadiusType radius() const {
 		return area_.radius;
 	}
 

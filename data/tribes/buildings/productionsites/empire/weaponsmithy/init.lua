@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_weaponsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Weapon Smithy"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -22,19 +22,32 @@ tribes:new_productionsite_type {
       marble_column = 2
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 44, 61 },
+         frames = 1,
+         rows = 1,
+         columns = 1,
+         hotspot = { 48, 65 },
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 44, 61 },
+         frames = 4,
+         columns = 4,
+         rows = 1,
+         hotspot = { 48, 65 },
+      },
+      unoccupied = {
+         frames = 1,
+         rows = 1,
+         columns = 1,
+         hotspot = { 48, 65 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 44, 61 },
-         fps = 2
+         fps = 2,
+         frames = 20,
+         columns = 10,
+         rows = 2,
+         hotspot = { 48, 65 },
       },
    },
 
@@ -56,7 +69,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_spear_wooden",
             "call=produce_spear",
@@ -67,7 +80,7 @@ tribes:new_productionsite_type {
       },
       produce_spear_wooden = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because ...
-         descname = _"forging a wooden spear",
+         descname = _("forging a wooden spear"),
          actions = {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs spear_wooden",
@@ -82,7 +95,7 @@ tribes:new_productionsite_type {
       },
       produce_spear = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-         descname = _"forging a spear",
+         descname = _("forging a spear"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear",
@@ -97,7 +110,7 @@ tribes:new_productionsite_type {
       },
       produce_spear_advanced = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear because ...
-         descname = _"forging an advanced spear",
+         descname = _("forging an advanced spear"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_advanced",
@@ -112,7 +125,7 @@ tribes:new_productionsite_type {
       },
       produce_spear_heavy = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because ...
-         descname = _"forging a heavy spear",
+         descname = _("forging a heavy spear"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_heavy",
@@ -127,7 +140,7 @@ tribes:new_productionsite_type {
       },
       produce_spear_war = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a war spear because ...
-         descname = _"forging a war spear",
+         descname = _("forging a war spear"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_war",
@@ -142,3 +155,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -36,6 +35,7 @@ class EditorInteractive;
  */
 struct MainMenuNewMap : public UI::UniqueWindow {
 	explicit MainMenuNewMap(EditorInteractive&, UI::UniqueWindow::Registry&);
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	EditorInteractive& eia();
@@ -43,7 +43,7 @@ private:
 	void clicked_cancel();
 	void fill_list();
 
-	int32_t margin_;
+	int32_t margin_{4};
 	int32_t box_width_;
 	UI::Box box_;
 	MapSizeBox map_size_box_;

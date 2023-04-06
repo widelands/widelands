@@ -1,14 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_immovable_type {
-   msgctxt = "immovable",
+wl.Descriptions():new_immovable_type {
    name = "reedfield_small",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Reed Field (small)"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
-   attributes = { "field" },
    programs = {
       main = {
          "animate=idle duration:28s",
@@ -16,10 +15,15 @@ tribes:new_immovable_type {
       }
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 23, 20 },
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 23, 20 }
       },
    }
 }
+
+pop_textdomain()

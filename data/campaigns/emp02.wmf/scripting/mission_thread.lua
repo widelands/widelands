@@ -219,6 +219,7 @@ function barbarians_thread()
       wl.Game().map:get_field(60, 48):region(6)
    )
    p1:reveal_fields(barbarians)
+   p2.hidden_from_general_statistics = false
    run(function() sleep(5000) p1:hide_fields(barbarians) end)
    wait_for_roadbuilding_and_scroll(wl.Game().map:get_field(59, 55))
 
@@ -247,7 +248,7 @@ function barbarians_thread()
       sleep(2343)
    end
    campaign_message_box(diary_page_9)
-   p1:allow_buildings{"empire_barracks", "empire_fortress"}
+   p1:allow_buildings{"empire_barracks", "empire_fortress", "empire_sheepfarm", "empire_weaving_mill"}
 
    o = add_campaign_objective(obj_remove_the_barbarians)
    -- Wait for the fortress to come up

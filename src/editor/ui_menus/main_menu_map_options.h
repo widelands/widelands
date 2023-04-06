@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -45,6 +44,7 @@ struct MainMenuMapOptions : public UI::UniqueWindow {
 	MainMenuMapOptions(EditorInteractive&, UI::UniqueWindow::Registry& registry);
 
 	void delete_suggested_team(SuggestedTeamsEntry*);
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	EditorInteractive& eia();
@@ -52,9 +52,15 @@ private:
 	void update();
 	void clicked_ok();
 	void clicked_cancel();
-	void add_tag_checkbox(UI::Box* box, const std::string& tag, const std::string& displ_name);
+	void add_tag_checkbox(UI::Box* parent, const std::string& tag);
 
-	const unsigned int padding_, indent_, labelh_, checkbox_space_, butw_, max_w_;
+	static constexpr unsigned padding_{4U};
+	static constexpr unsigned separator_{8U};
+	static constexpr unsigned indent_{10U};
+	static constexpr unsigned checkbox_space_{25U};
+	const unsigned labelh_;
+	const unsigned butw_;
+	const unsigned max_w_;
 
 	UI::Box tab_box_, buttons_box_;
 
@@ -73,6 +79,7 @@ private:
 	// Tag, Checkbox
 	std::map<std::string, UI::Checkbox*> tags_checkboxes_;
 	UI::Dropdown<std::string> balancing_dropdown_;
+	UI::Dropdown<std::string> theme_dropdown_;
 
 	UI::SpinBox* waterway_length_box_;
 	UI::Icon* waterway_length_warning_;
@@ -90,8 +97,7 @@ struct SuggestedTeamsEntry : public UI::Panel {
 	                    const Widelands::Map&,
 	                    unsigned w,
 	                    Widelands::SuggestedTeamLineup);
-	~SuggestedTeamsEntry() override {
-	}
+	~SuggestedTeamsEntry() override = default;
 
 	void layout() override;
 

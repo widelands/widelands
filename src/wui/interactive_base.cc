@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,31 +12,34 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "wui/interactive_base.h"
 
+#include <cstdlib>
 #include <memory>
 
 #include <SDL_timer.h>
-#include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/math.h"
+#include "base/multithreading.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_layout.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -44,16 +47,39 @@
 #include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h"
 #include "logic/widelands_geometry.h"
+#include "network/gameclient.h"
+#include "network/gamehost.h"
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
 #include "wlapplication_options.h"
+#include "wui/attack_window.h"
+#include "wui/building_statistics_menu.h"
+#include "wui/buildingwindow.h"
+#include "wui/constructionsitewindow.h"
+#include "wui/dismantlesitewindow.h"
+#include "wui/economy_options_window.h"
+#include "wui/encyclopedia_window.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
-#include "wui/logmessage.h"
+#include "wui/game_diplomacy_menu.h"
+#include "wui/game_message_menu.h"
+#include "wui/game_objectives_menu.h"
+#include "wui/info_panel.h"
 #include "wui/mapviewpixelfunctions.h"
+#include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
+#include "wui/seafaring_statistics_menu.h"
+#include "wui/shipwindow.h"
+#include "wui/soldier_statistics_menu.h"
+#include "wui/stock_menu.h"
+#include "wui/toolbar.h"
+#include "wui/trainingsitewindow.h"
 #include "wui/unique_window_handler.h"
+#include "wui/ware_statistics_menu.h"
+#include "wui/warehousewindow.h"
+#include "wui/watchwindow.h"
 
 namespace {
 
@@ -67,11 +93,11 @@ using Widelands::MapObject;
 using Widelands::TCoords;
 
 int caps_to_buildhelp(const Widelands::NodeCaps caps) {
-	if (caps & Widelands::BUILDCAPS_MINE) {
+	if ((caps & Widelands::BUILDCAPS_MINE) != 0) {
 		return Widelands::Field::Buildhelp_Mine;
 	}
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
-		if (caps & Widelands::BUILDCAPS_PORT) {
+		if ((caps & Widelands::BUILDCAPS_PORT) != 0) {
 			return Widelands::Field::Buildhelp_Port;
 		}
 		return Widelands::Field::Buildhelp_Big;
@@ -82,7 +108,7 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL) {
 		return Widelands::Field::Buildhelp_Small;
 	}
-	if (caps & Widelands::BUILDCAPS_FLAG) {
+	if ((caps & Widelands::BUILDCAPS_FLAG) != 0) {
 		return Widelands::Field::Buildhelp_Flag;
 	}
 	return Widelands::Field::Buildhelp_None;
@@ -90,102 +116,38 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 
 }  // namespace
 
-InteractiveBase::Toolbar::Toolbar(Panel* parent)
-   : UI::Panel(parent, 0, 0, parent->get_inner_w(), parent->get_inner_h()),
-     box(this, 0, 0, UI::Box::Horizontal),
-     repeat(0) {
-}
-
-void InteractiveBase::Toolbar::change_imageset(const ToolbarImageset& images) {
-	imageset = images;
-	finalize();
-}
-
-void InteractiveBase::Toolbar::finalize() {
-	// Set box size and get minimum height
-	int box_width, height;
-	box.get_desired_size(&box_width, &height);
-	box.set_size(box_width, height);
-
-	// Calculate repetition and width
-	repeat = 1;
-	int width = imageset.left->width() + imageset.center->width() + imageset.right->width();
-	while (width < box.get_w()) {
-		++repeat;
-		width += imageset.left->width() + imageset.right->width();
-	}
-	width += imageset.left_corner->width() + imageset.right_corner->width();
-
-	// Find the highest image
-	height = std::max(height, imageset.left_corner->height());
-	height = std::max(height, imageset.left->height());
-	height = std::max(height, imageset.center->height());
-	height = std::max(height, imageset.right->height());
-	height = std::max(height, imageset.right_corner->height());
-
-	// Set size and position
-	set_size(width, height);
-	set_pos(
-	   Vector2i((get_parent()->get_inner_w() - width) >> 1, get_parent()->get_inner_h() - height));
-	box.set_pos(Vector2i((get_w() - box.get_w()) / 2, get_h() - box.get_h()));
-
-	// Notify dropdowns
-	box.position_changed();
-}
-
-void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
-	int x = 0;
-	// Left corner
-	dst.blit(Vector2i(x, get_h() - imageset.left_corner->height()), imageset.left_corner);
-	x += imageset.left_corner->width();
-	// Repeat left
-	for (int i = 0; i < repeat; ++i) {
-		dst.blit(Vector2i(x, get_h() - imageset.left->height()), imageset.left);
-		x += imageset.left->width();
-	}
-	// Center
-	dst.blit(Vector2i(x, get_h() - imageset.center->height()), imageset.center);
-	x += imageset.center->width();
-	// Repeat right
-	for (int i = 0; i < repeat; ++i) {
-		dst.blit(Vector2i(x, get_h() - imageset.right->height()), imageset.right);
-		x += imageset.right->width();
-	}
-	// Right corner
-	dst.blit(Vector2i(x, get_h() - imageset.right_corner->height()), imageset.right_corner);
-}
-
-InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
-   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-     buildhelp_(false),
+InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, ChatProvider* c)
+   : UI::Panel(nullptr, UI::PanelStyle::kWui, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+     chat_provider_(c),
+     info_panel_(*new InfoPanel(*this)),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-     // Initialize chatoveraly before the toolbar so it is below
-     chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
-     toolbar_(this),
+     // Initialize chatoverlay before the toolbar so it is below
+     chat_overlay_(new ChatOverlay(this, color_functor(), 10, 25, get_w() / 2, get_h() - 25)),
+     toolbar_(*new MainToolbar(info_panel_)),
      mapviewmenu_(toolbar(),
                   "dropdown_menu_mapview",
                   0,
                   0,
-                  34U,
+                  MainToolbar::kButtonSize,
                   10,
-                  34U,
+                  MainToolbar::kButtonSize,
                   /** TRANSLATORS: Title for the map view menu button in the game */
                   _("Map View"),
                   UI::DropdownType::kPictorialMenu,
                   UI::PanelStyle::kWui,
-                  UI::ButtonStyle::kWuiPrimary),
+                  UI::ButtonStyle::kWuiPrimary,
+                  [this](MapviewMenuEntry t) { mapview_menu_selected(t); }),
      quick_navigation_(&map_view_),
+     minimap_registry_(the_egbase.is_game()),
      workareas_cache_(nullptr),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug | dfShowSoldierLevels | dfShowBuildings),
+     display_flags_(dfDebug | get_config_int("display_flags", kDefaultDisplayFlags)),
 #else
-     display_flags_(dfShowSoldierLevels | dfShowBuildings),
+     display_flags_(get_config_int("display_flags", kDefaultDisplayFlags)),
 #endif
      lastframe_(SDL_GetTicks()),
-     frametime_(0),
-     avg_usframetime_(0),
-     road_building_mode_(nullptr),
+
      unique_window_handler_(new UniqueWindowHandler()) {
 
 	// Load the buildhelp icons.
@@ -198,7 +160,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		const char* const* filename = filenames;
 
 		//  Special case for flag, which has a different formula for hotspot_y.
-		buildhelp_overlay->pic = g_gr->images().get(*filename);
+		buildhelp_overlay->pic = g_image_cache->get(*filename);
 		buildhelp_overlay->hotspot =
 		   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() - 1);
 
@@ -210,24 +172,50 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 			if (buildhelp_overlay == buildhelp_overlays_end) {
 				break;
 			}
-			buildhelp_overlay->pic = g_gr->images().get(*filename);
+			buildhelp_overlay->pic = g_image_cache->get(*filename);
 			buildhelp_overlay->hotspot =
 			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
 		}
 	}
 
 	resize_chat_overlay();
+	info_panel_.move_to_top();
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.new_width, message.new_height);
 		   map_view_.set_size(message.new_width, message.new_height);
+		   map_view_.pan_by(Vector2i((message.old_width - message.new_width) / 2,
+		                             (message.old_height - message.new_height) / 2),
+		                    MapView::Transition::Jump);
 		   resize_chat_overlay();
 		   finalize_toolbar();
+		   info_panel_.layout();
 		   mainview_move();
 	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
 	   [this](const NoteSound& note) { play_sound_effect(note); });
+	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
+	   [this](const Widelands::NoteBuilding& note) {
+		   switch (note.action) {
+		   case Widelands::NoteBuilding::Action::kFinishWarp: {
+			   if (upcast(
+			          Widelands::Building const, building, game().objects().get_object(note.serial))) {
+				   const Widelands::Coords coords = building->get_position();
+				   // Check whether the window is wanted
+				   if (wanted_building_windows_.count(coords.hash()) == 1) {
+					   wanted_building_windows_.at(coords.hash())->warp_done = true;
+				   }
+			   }
+		   } break;
+		   default:
+			   break;
+		   }
+	   });
+
+	quicknav_registry_.open_window = [this]() {
+		new QuickNavigationWindow(*this, quicknav_registry_);
+	};
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
@@ -242,8 +230,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
-	set_snap_windows_only_when_overlapping(
-	   global_s.get_bool("snap_windows_only_when_overlapping", false));
 	set_dock_windows_to_edges(global_s.get_bool("dock_windows_to_edges", false));
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
@@ -252,16 +238,24 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	setDefaultCommand([this](const std::vector<std::string>& str) { cmd_lua(str); });
 	addCommand("mapobject", [this](const std::vector<std::string>& str) { cmd_map_object(str); });
+
+	// Inform panel code that we have logic-related code
+	set_logic_think();
 }
 
 InteractiveBase::~InteractiveBase() {
 	if (road_building_mode_) {
 		abort_build_road();
 	}
+	RenderQueue::instance().clear();  // Cleanup spurious drawing commands
+}
+
+UI::Box* InteractiveBase::toolbar() {
+	return &toolbar_.box;
 }
 
 void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
-	mapviewmenu_.set_image(g_gr->images().get("images/wui/menus/toggle_minimap.png"));
+	mapviewmenu_.set_image(g_image_cache->get("images/wui/menus/toggle_minimap.png"));
 	toolbar()->add(&mapviewmenu_);
 
 	minimap_registry_.open_window = [this] { toggle_minimap(); };
@@ -273,33 +267,52 @@ void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
 }
 
 void InteractiveBase::rebuild_mapview_menu() {
+	const MapviewMenuEntry last_selection =
+	   mapviewmenu_.has_selection() ? mapviewmenu_.get_selected() : MapviewMenuEntry::kMinimap;
+
 	mapviewmenu_.clear();
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
 	                 MapviewMenuEntry::kMinimap,
-	                 g_gr->images().get("images/wui/menus/toggle_minimap.png"), false, "", "M");
+	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "",
+	                 shortcut_string_for(KeyboardShortcut::kCommonMinimap, false));
+
+	if (egbase().is_game()) {
+		/** TRANSLATORS: An entry in the game's map view menu */
+		mapviewmenu_.add(quicknav_registry_.window != nullptr ? _("Hide Quick Navigation") :
+                                                              _("Show Quick Navigation"),
+		                 MapviewMenuEntry::kQuicknav,
+		                 g_image_cache->get("images/wui/menus/quicknav.png"), false, "",
+		                 shortcut_string_for(KeyboardShortcut::kCommonQuicknavGUI, false));
+	}
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
-	                 g_gr->images().get("images/wui/menus/zoom_increase.png"), false, "",
-	                 pgettext("hotkey", "Ctrl++"));
+	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomIn, false));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
-	                 g_gr->images().get("images/wui/menus/zoom_reset.png"), false, "",
-	                 pgettext("hotkey", "Ctrl+0"));
+	                 g_image_cache->get("images/wui/menus/zoom_reset.png"), false, "",
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset, false));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
-	mapviewmenu_.add(_("Zoom -"), MapviewMenuEntry::kDecreaseZoom,
-	                 g_gr->images().get("images/wui/menus/zoom_decrease.png"), false, "",
-	                 pgettext("hotkey", "Ctrl+-"));
+	mapviewmenu_.add(_("Zoom –"), MapviewMenuEntry::kDecreaseZoom,
+	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut, false));
+
+	mapviewmenu_.select(last_selection);
 }
 
 void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	switch (entry) {
 	case MapviewMenuEntry::kMinimap: {
 		toggle_minimap();
+		mapviewmenu_.toggle();
+	} break;
+	case MapviewMenuEntry::kQuicknav: {
+		toggle_quicknav();
 		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kDecreaseZoom: {
@@ -310,7 +323,6 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 		map_view()->increase_zoom();
 		mapviewmenu_.toggle();
 	} break;
-
 	case MapviewMenuEntry::kResetZoom: {
 		map_view()->reset_zoom();
 		mapviewmenu_.toggle();
@@ -329,7 +341,9 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 
 bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords,
                                            const Widelands::Map* map) const {
-	if (!map) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
+	if (map == nullptr) {
 		for (const auto& preview : workarea_previews_) {
 			if (preview->coords == coords) {
 				return true;
@@ -359,10 +373,15 @@ UniqueWindowHandler& InteractiveBase::unique_windows() {
 
 void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 	sel_.pos = center;
+	if (in_road_building_mode()) {
+		append_build_road(sel_.pos.node, true);
+	}
 }
 
 void InteractiveBase::finalize_toolbar() {
 	toolbar_.finalize();
+	// prevent toolbar dropdowns from grabbing the Space button
+	focus();
 }
 
 /*
@@ -387,7 +406,7 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 	const auto display_flags = get_display_flags();
 	InfoToDraw info_to_draw = InfoToDraw::kNone;
 
-	if (display_flags & InteractiveBase::dfShowBuildings) {
+	if ((display_flags & InteractiveBase::dfShowBuildings) != 0u) {
 		info_to_draw = info_to_draw | InfoToDraw::kShowBuildings;
 	}
 
@@ -395,13 +414,13 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 		return info_to_draw;
 	}
 
-	if (display_flags & InteractiveBase::dfShowCensus) {
+	if ((display_flags & InteractiveBase::dfShowCensus) != 0u) {
 		info_to_draw = info_to_draw | InfoToDraw::kCensus;
 	}
-	if (display_flags & InteractiveBase::dfShowStatistics) {
+	if ((display_flags & InteractiveBase::dfShowStatistics) != 0u) {
 		info_to_draw = info_to_draw | InfoToDraw::kStatistics;
 	}
-	if (display_flags & InteractiveBase::dfShowSoldierLevels) {
+	if ((display_flags & InteractiveBase::dfShowSoldierLevels) != 0u) {
 		info_to_draw = info_to_draw | InfoToDraw::kSoldierLevels;
 	}
 
@@ -409,19 +428,16 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 }
 
 void InteractiveBase::unset_sel_picture() {
-	set_sel_picture(g_gr->images().get("images/ui_basic/fsel.png"));
+	set_sel_picture(g_image_cache->get("images/ui_basic/fsel.png"));
+	set_tooltip("");
 }
 
 bool InteractiveBase::buildhelp() const {
-	return buildhelp_;
+	return get_display_flag(dfShowBuildhelp);
 }
 
 void InteractiveBase::show_buildhelp(bool t) {
-	const bool old_value = buildhelp_;
-	buildhelp_ = t;
-	if (old_value != t) {
-		rebuild_showhide_menu();
-	}
+	set_display_flag(dfShowBuildhelp, t);
 }
 
 void InteractiveBase::toggle_buildhelp() {
@@ -434,10 +450,11 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 UI::UniqueWindow::Registry* window,
                                                 bool bind_default_toggle) {
 	UI::Button* button =
-	   new UI::Button(&toolbar_.box, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiPrimary,
-	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
+	   new UI::Button(&toolbar_.box, name, 0, 0, MainToolbar::kButtonSize, MainToolbar::kButtonSize,
+	                  UI::ButtonStyle::kWuiPrimary,
+	                  g_image_cache->get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.box.add(button);
-	if (window) {
+	if (window != nullptr) {
 		window->opened.connect([button] { button->set_perm_pressed(true); });
 		window->closed.connect([button] { button->set_perm_pressed(false); });
 
@@ -448,12 +465,19 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	return button;
 }
 
-std::map<Widelands::Coords, std::vector<uint8_t>>
+InteractiveBase::RoadBuildingMode::PreviewPathMap
 InteractiveBase::road_building_preview_overlays() const {
 	if (road_building_mode_) {
 		return road_building_mode_->overlay_road_previews;
 	}
-	return std::map<Widelands::Coords, std::vector<uint8_t>>();
+	return RoadBuildingMode::PreviewPathMap();
+}
+InteractiveBase::RoadBuildingMode::PreviewPathMap
+InteractiveBase::road_building_preview_preview_overlays() const {
+	if (road_building_mode_) {
+		return road_building_mode_->overlay_roadpreview_previews;
+	}
+	return RoadBuildingMode::PreviewPathMap();
 }
 std::map<Widelands::Coords, const Image*>
 InteractiveBase::road_building_steepness_overlays() const {
@@ -467,12 +491,14 @@ InteractiveBase::road_building_steepness_overlays() const {
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info,
                                     Widelands::Coords coords,
                                     std::map<Widelands::TCoords<>, uint32_t>& extra_data) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	workarea_previews_.insert(
 	   std::unique_ptr<WorkareaPreview>(new WorkareaPreview{coords, &workarea_info, extra_data}));
 	workareas_cache_.reset(nullptr);
 }
 
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	std::map<Widelands::TCoords<>, uint32_t> empty;
 	show_workarea(workarea_info, coords, empty);
 }
@@ -500,31 +526,35 @@ static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
 	bool outer = a <= 2 && b <= 2 && c <= 2;
 
 	if (medium) {
-		if (outer && inner) {
-			return 0;
-		} else if (inner) {
-			return 3;
-		} else if (outer) {
+		if (outer) {
+			if (inner) {
+				return 0;
+			}
 			return 1;
-		} else {
-			return 4;
 		}
-	} else if (outer) {
+		if (inner) {
+			return 3;
+		}
+		return 4;
+	}
+	if (outer) {
 		assert(!inner);
 		return 2;
-	} else {
-		assert(inner);
-		return 5;
 	}
+	assert(inner);
+	return 5;
 }
 
 Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	if (!workareas_cache_) {
 		workareas_cache_.reset(new Workareas());
 		for (const auto& preview : workarea_previews_) {
 			workareas_cache_->push_back(get_workarea_overlay(map, *preview));
 		}
 	}
+
 	return Workareas(*workareas_cache_);
 }
 
@@ -639,8 +669,10 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 }
 
 void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_additional) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	for (auto it = workarea_previews_.begin(); it != workarea_previews_.end(); ++it) {
-		if (it->get()->coords == coords && (is_additional ^ it->get()->data.empty())) {
+		if (it->get()->coords == coords && ((is_additional ^ it->get()->data.empty()) != 0)) {
 			workarea_previews_.erase(it);
 			workareas_cache_.reset(nullptr);
 			return;
@@ -657,47 +689,193 @@ void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_add
 void InteractiveBase::postload() {
 }
 
-void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
-	const auto rpo = road_building_preview_overlays();
-	const auto rinfo = rpo.find(field.fcoords);
-	if (rinfo != rpo.end()) {
-		for (uint8_t dir : rinfo->second) {
+void InteractiveBase::draw_road_building(RenderTarget* dst,
+                                         FieldsToDraw::Field& field,
+                                         const Time& gametime,
+                                         float scale) const {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+	if (road_building_mode_ == nullptr) {
+		return;
+	}
+
+	const bool show_extra_info = (SDL_GetModState() & KMOD_CTRL) != 0;
+
+	{
+		const RoadBuildingMode::PreviewPathMap rpo1 = road_building_preview_overlays();
+		const auto rinfo1 = rpo1.find(field.fcoords);
+		std::set<uint8_t> dirs;
+		if (rinfo1 != rpo1.end()) {
+			dirs.insert(rinfo1->second.begin(), rinfo1->second.end());
+		}
+		if (show_extra_info) {
+			const RoadBuildingMode::PreviewPathMap rpo2 = road_building_preview_preview_overlays();
+			const auto rinfo2 = rpo2.find(field.fcoords);
+			if (rinfo2 != rpo2.end()) {
+				dirs.insert(rinfo2->second.begin(), rinfo2->second.end());
+			}
+		}
+		for (uint8_t dir : dirs) {
 			switch (dir) {
 			case Widelands::WALK_E:
 				field.road_e = in_road_building_mode(RoadBuildingType::kRoad) ?
-				                  Widelands::RoadSegment::kNormal :
-				                  Widelands::RoadSegment::kWaterway;
+                              Widelands::RoadSegment::kNormal :
+                              Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SE:
 				field.road_se = in_road_building_mode(RoadBuildingType::kRoad) ?
-				                   Widelands::RoadSegment::kNormal :
-				                   Widelands::RoadSegment::kWaterway;
+                               Widelands::RoadSegment::kNormal :
+                               Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SW:
 				field.road_sw = in_road_building_mode(RoadBuildingType::kRoad) ?
-				                   Widelands::RoadSegment::kNormal :
-				                   Widelands::RoadSegment::kWaterway;
+                               Widelands::RoadSegment::kNormal :
+                               Widelands::RoadSegment::kWaterway;
 				break;
 			default:
 				throw wexception("Attempt to set road-building overlay for invalid direction %i", dir);
 			}
 		}
 	}
+
+	/* Check if a flag would be placed here. */
+	if (!show_extra_info) {
+		return;
+	}
+	if ((field.fcoords.field->nodecaps() & Widelands::BUILDCAPS_FLAG) == 0) {
+		return;
+	}
+
+	auto check_draw_flag = [this, scale, &field, dst,
+	                        &gametime](const std::vector<Widelands::Coords>& coords) {
+		const Widelands::Map& map = egbase().map();
+		const int ncoords = coords.size();
+		bool last_is_flag = false;
+		const bool start_to_end = (SDL_GetModState() & KMOD_SHIFT) != 0;
+		for (int i = start_to_end ? 0 : (ncoords - 1); i >= 0 && i < ncoords;
+		     i += (start_to_end ? 1 : -1)) {
+			if (coords.at(i) == field.fcoords) {
+				if ((i == 0 || i == ncoords - 1) || (!last_is_flag && i != 1 && i != ncoords - 2)) {
+					constexpr float kOpacity = 0.5f;
+					dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+					                    field.owner->tribe().flag_animation(), gametime, nullptr,
+					                    kOpacity);
+				}
+				return true;
+			}
+			last_is_flag =
+			   (i == 0 || i == ncoords - 1) ||
+			   (!last_is_flag && (map[coords.at(i)].nodecaps() & Widelands::BUILDCAPS_FLAG) != 0);
+		}
+		return false;
+	};
+	if (road_building_mode_->preview_path.has_value() &&
+	    check_draw_flag(road_building_mode_->preview_path.value().get_coords())) {
+		return;
+	}
+	check_draw_flag(road_building_mode_->path.get_coords());
 }
 
-/*
-===============
-Called once per frame by the UI code
-===============
-*/
-void InteractiveBase::think() {
-	egbase().think();  // Call game logic here. The game advances.
+void InteractiveBase::info_panel_fast_forward_message_queue() {
+	info_panel_.fast_forward_message_queue();
+}
 
+// Called one per logic frame by the logic thread's main loop.
+// This is where the actual game logic (and from it, the game
+// controller's and the AI's `think()` functions) are called.
+// Also updates the stats about the logic FPS and real gamespeed.
+void InteractiveBase::game_logic_think() {
+	static constexpr uint64_t kFilterTime = 1000;  // milliseconds for averaging
+
+	previous_frame_realtime_ = last_frame_realtime_;
+	previous_frame_gametime_ = last_frame_gametime_;
+	last_frame_realtime_ = SDL_GetTicks();
+	last_frame_gametime_ = egbase().get_gametime();
+
+	if (previous_frame_gametime_ > last_frame_gametime_) {
+		assert(!egbase().is_game());  // In the editor, time can run backwards sometimes.
+		last_frame_gametime_ = previous_frame_gametime_;
+	}
+
+	const uint64_t realtime_step =
+	   std::max<uint64_t>(last_frame_realtime_ - previous_frame_realtime_, 1);
+
+	double cur_speed = 1000.0 * (last_frame_gametime_ - previous_frame_gametime_).get();
+	cur_speed /= realtime_step;
+
+	uint64_t prev_avg_weight;
+
+	if (realtime_step > kFilterTime) {
+		// No need for filtering when updates are slow
+		prev_avg_weight = 0;
+	} else if (last_frame_realtime_ - gamespeed_last_change_time_ < kFilterTime) {
+		// Allow faster convergence after changing speed
+		prev_avg_weight =
+		   abs(avg_actual_gamespeed_ - cur_speed) > abs(last_target_gamespeed_ - cur_speed) ? 0 : 1;
+	} else {
+		prev_avg_weight = kFilterTime / realtime_step;
+	}
+
+	avg_actual_gamespeed_ =
+	   ((avg_actual_gamespeed_ * prev_avg_weight) + (cur_speed * 1000)) / (prev_avg_weight + 1);
+
+	if (egbase().is_game()) {
+		const uint64_t new_target = game().game_controller()->real_speed();
+		if (last_target_gamespeed_ != new_target) {
+			last_target_gamespeed_ = new_target;
+			gamespeed_last_change_time_ = last_frame_realtime_;
+		}
+	}
+
+	egbase().think();  // Call game logic here. The game advances.
+}
+
+void InteractiveBase::think() {
 	UI::Panel::think();
+	if (in_road_building_mode()) {
+		const size_t steps = get_build_road_path().get_nsteps();
+		if ((SDL_GetModState() & KMOD_CTRL) != 0 && road_building_mode_->preview_path.has_value()) {
+			const size_t preview_steps = road_building_mode_->preview_path.value().get_nsteps();
+			if (in_road_building_mode(RoadBuildingType::kRoad)) {
+				set_tooltip(format(_("Road length: %1$u (%2$u)"), steps, preview_steps));
+			} else {
+				set_tooltip(format(_("Waterway length: %1$u (%2$u) / %3$u"), steps, preview_steps,
+				                   egbase().map().get_waterway_max_length()));
+			}
+		} else {
+			if (in_road_building_mode(RoadBuildingType::kRoad)) {
+				set_tooltip(format(_("Road length: %u"), steps));
+			} else {
+				set_tooltip(format(
+				   _("Waterway length: %1$u / %2$u"), steps, egbase().map().get_waterway_max_length()));
+			}
+		}
+	}
+
+	for (auto it = wanted_building_windows_.begin(); it != wanted_building_windows_.end();) {
+		if (!it->second->warp_done) {
+			++it;
+			continue;
+		}
+
+		UI::UniqueWindow* building_window = show_building_window(
+		   Widelands::Coords::unhash(it->first), true, it->second->show_workarea);
+
+		building_window->set_pos(it->second->window_position);
+		if (it->second->minimize) {
+			building_window->minimize();
+		}
+		building_window->set_pinned(it->second->pin);
+
+		it = wanted_building_windows_.erase(it);
+	}
 }
 
 double InteractiveBase::average_fps() const {
 	return 1000.0 * 1000.0 / avg_usframetime_;
+}
+
+uint64_t InteractiveBase::average_real_gamespeed() const {
+	return avg_actual_gamespeed_ / 1000;
 }
 
 /*
@@ -705,7 +883,7 @@ double InteractiveBase::average_fps() const {
 Draw debug overlay when appropriate.
 ===============
 */
-void InteractiveBase::draw_overlay(RenderTarget& dst) {
+void InteractiveBase::draw_overlay(RenderTarget& /* rt */) {
 	// Timing
 	uint32_t curframe = SDL_GetTicks();
 
@@ -713,68 +891,20 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	avg_usframetime_ = ((avg_usframetime_ * 15) + (frametime_ * 1000)) / 16;
 	lastframe_ = curframe;
 
-	Game* game = dynamic_cast<Game*>(&egbase());
-
-	// This portion of code keeps the speed of game so that FPS are kept within
-	// range 13 - 15, this is used for training of AI
-	if (game != nullptr) {
-		if (game->is_auto_speed()) {
-			const uint32_t cur_fps = average_fps();
-			int32_t speed_diff = 0;
-			if (cur_fps < 13) {
-				speed_diff = -100;
-			}
-			if (cur_fps > 15) {
-				speed_diff = +100;
-			}
-			if (speed_diff != 0) {
-				if (GameController* const ctrl = game->game_controller()) {
-					if ((ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
-					    (ctrl->desired_speed() < 1000 && speed_diff > 0) ||
-					    (ctrl->desired_speed() > 29999 && speed_diff < 0)) {
-						ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
-					}
-				}
-			}
-		}
-	}
-
 	// Node information
-	std::string node_text("");
-	if (game == nullptr) {
-		// Always blit node information in the editor
-		static boost::format node_format("(%i, %i, %i)");
+	std::string node_text;
+	if (!egbase().is_game() || get_display_flag(dfDebug)) {
+		// Blit node information in the editor, and in debug mode also for games
 		const int32_t height = egbase().map()[sel_.pos.node].get_height();
-		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y % height).str();
-	} else if (get_display_flag(dfDebug)) {
-		// Blit node information for games in debug mode - we're not interested in the height
-		static boost::format node_format("(%i, %i)");
-		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
+		node_text = format("(%i, %i, %i)", sel_.pos.node.x, sel_.pos.node.y, height);
 	}
-	if (!node_text.empty()) {
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-		   as_richtext_paragraph(node_text, UI::FontStyle::kWuiGameSpeedAndCoordinates));
-		rendered_text->draw(
-		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
-	}
+	info_panel_.set_coords_string(node_text);
 
 	// In-game clock and FPS
-	if ((game != nullptr) && get_config_bool("game_clock", true)) {
-		// Blit in-game clock
-		const std::string gametime(gametimestring(egbase().get_gametime(), true));
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-		   as_richtext_paragraph(gametime, UI::FontStyle::kWuiGameSpeedAndCoordinates));
-		rendered_text->draw(dst, Vector2i(5, 5));
-
-		// Blit FPS when playing a game in debug mode
-		if (get_display_flag(dfDebug)) {
-			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-			rendered_text = UI::g_fh->render(
-			   as_richtext_paragraph((fps_format % (1000.0 / frametime_) % average_fps()).str(),
-			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
-			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
-		}
-	}
+	info_panel_.set_time_string(
+	   egbase().is_game() ? gametimestring(egbase().get_gametime().get(), true) : "");
+	info_panel_.set_fps_string(
+	   get_display_flag(dfDebug), cheat_mode_enabled_, 1000.0 / frametime_, average_fps());
 }
 
 void InteractiveBase::blit_overlay(RenderTarget* dst,
@@ -795,13 +925,19 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
                                          const Vector2i& hotspot,
                                          float scale,
                                          float opacity) {
+	if (field.obscured_by_slope) {
+		return;
+	}
 	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale, opacity);
 }
 
 void InteractiveBase::draw_bridges(RenderTarget* dst,
                                    const FieldsToDraw::Field* f,
-                                   uint32_t gametime,
+                                   const Time& gametime,
                                    float scale) const {
+	if (f->obscured_by_slope) {
+		return;
+	}
 	if (Widelands::is_bridge_segment(f->road_e)) {
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
 		                    f->owner->tribe().bridge_animation(
@@ -823,31 +959,31 @@ void InteractiveBase::draw_bridges(RenderTarget* dst,
 }
 
 void InteractiveBase::mainview_move() {
-	if (minimap_registry_.window) {
-		minimap_->set_view(map_view_.view_area().rect());
+	if (MiniMap* const minimap = minimap_registry_.get_window()) {
+		minimap->set_view(map_view_.view_area().rect());
 	}
 }
 
 // Open the minimap or close it if it's open
 void InteractiveBase::toggle_minimap() {
-	if (minimap_registry_.window) {
-		delete minimap_registry_.window;
-	} else {
-		minimap_ = new MiniMap(*this, &minimap_registry_);
-		minimap_->warpview.connect([this](const Vector2f& map_pixel) {
+	if (minimap_registry_.window == nullptr) {
+		// Don't store the MiniMap pointer, we can access it via 'minimap_registry_.get_window()'.
+		// A MiniMap is a UniqueWindow, its parent will delete it.
+		new MiniMap(*this, &minimap_registry_);
+		minimap_registry_.get_window()->warpview.connect([this](const Vector2f& map_pixel) {
 			map_view_.scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 		});
 		mainview_move();
+	} else {
+		delete minimap_registry_.window;
 	}
 	rebuild_mapview_menu();
 }
 
-const QuickNavigation::Landmark* InteractiveBase::landmarks() {
-	return quick_navigation_.landmarks();
-}
-
-void InteractiveBase::set_landmark(size_t key, const MapView::View& landmark_view) {
-	quick_navigation_.set_landmark(key, landmark_view);
+// Open the quicknav GUI or close it if it's open
+void InteractiveBase::toggle_quicknav() {
+	quicknav_registry_.toggle();
+	rebuild_mapview_menu();
 }
 
 /**
@@ -855,6 +991,12 @@ void InteractiveBase::set_landmark(size_t key, const MapView::View& landmark_vie
  */
 void InteractiveBase::hide_minimap() {
 	minimap_registry_.destroy();
+}
+
+void InteractiveBase::resize_minimap() const {
+	if (MiniMap* const minimap = minimap_registry_.get_window()) {
+		minimap->check_boundaries();
+	}
 }
 
 /*
@@ -872,7 +1014,11 @@ Change the display flags that modify the view of the map.
 ===============
 */
 void InteractiveBase::set_display_flags(uint32_t flags) {
+	const uint32_t old_value = display_flags_;
 	display_flags_ = flags;
+	if (old_value != display_flags_) {
+		rebuild_showhide_menu();
+	}
 }
 
 /*
@@ -880,8 +1026,8 @@ void InteractiveBase::set_display_flags(uint32_t flags) {
 Get and set one individual flag of the display flags.
 ===============
 */
-bool InteractiveBase::get_display_flag(uint32_t const flag) {
-	return display_flags_ & flag;
+bool InteractiveBase::get_display_flag(uint32_t const flag) const {
+	return (display_flags_ & flag) != 0u;
 }
 
 void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
@@ -892,7 +1038,128 @@ void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
 		display_flags_ |= flag;
 	}
 	if (old_value != display_flags_) {
-		rebuild_showhide_menu();
+		NoteThreadSafeFunction::instantiate([this]() { rebuild_showhide_menu(); }, false);
+	}
+}
+
+/*
+===============
+Saveloading support for open unique windows.
+===============
+*/
+constexpr uint16_t kCurrentPacketVersionUniqueWindows = 1;
+
+void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionUniqueWindows) {
+			for (;;) {
+				const UI::Panel::SaveType type = static_cast<UI::Panel::SaveType>(fr.unsigned_8());
+				if (type == UI::Panel::SaveType::kNone) {
+					break;
+				}
+
+				const int32_t x = fr.signed_32();
+				const int32_t y = fr.signed_32();
+				const bool pin = fr.unsigned_8() != 0u;
+				UI::Window* w = nullptr;
+
+				switch (type) {
+				case UI::Panel::SaveType::kBuildingWindow:
+					w = &BuildingWindow::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kShipWindow:
+					w = &ShipWindow::load(fr, *this, mol);
+					break;
+				case UI::Panel::SaveType::kWatchWindow:
+					w = &WatchWindow::load(fr, *this, mol);
+					break;
+				case UI::Panel::SaveType::kStockMenu:
+					w = &StockMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kGeneralStats:
+					w = &GeneralStatisticsMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kSoldierStats:
+					w = &SoldierStatisticsMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kWareStats:
+					w = &WareStatisticsMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kSeafaringStats:
+					w = &SeafaringStatisticsMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kBuildingStats:
+					w = &BuildingStatisticsMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kObjectives:
+					w = &GameObjectivesMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kDiplomacy:
+					w = &GameDiplomacyMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kMessages:
+					w = &GameMessageMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kMinimap:
+					w = &MiniMap::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kEncyclopedia:
+					w = &UI::EncyclopediaWindow::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kConfigureEconomy:
+					w = EconomyOptionsWindow::load(fr, *this, mol);
+					break;
+				case UI::Panel::SaveType::kAttackWindow:
+					w = &AttackWindow::load(fr, *this, mol);
+					break;
+				case UI::Panel::SaveType::kQuicknav:
+					w = &QuickNavigationWindow::load(fr, *this);
+					break;
+				default:
+					throw Widelands::GameDataError(
+					   "Invalid panel save type %u", static_cast<unsigned>(type));
+				}
+
+				if (w != nullptr) {
+					w->set_pinned(pin);
+					w->set_pos(Vector2i(x, y));
+					w->move_inside_parent();  // In case the game was loaded at a smaller resolution.
+				}
+			}
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Unique Windows", packet_version, kCurrentPacketVersionUniqueWindows);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("unique windows: %s", e.what());
+	}
+}
+
+void InteractiveBase::save_windows(FileWrite& fw, Widelands::MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionUniqueWindows);
+	for (UI::Panel* child = get_first_child(); child != nullptr; child = child->get_next_sibling()) {
+		const UI::Panel::SaveType t = child->save_type();
+		if (t != UI::Panel::SaveType::kNone) {
+			fw.unsigned_8(static_cast<uint8_t>(t));
+			fw.signed_32(child->get_x());
+			fw.signed_32(child->get_y());
+			fw.unsigned_8(dynamic_cast<UI::Window&>(*child).is_pinned() ? 1 : 0);
+			child->save(fw, mos);
+		}
+	}
+	fw.unsigned_8(0);
+}
+
+void InteractiveBase::cleanup_for_load() {
+	std::set<UI::Panel*> panels_to_kill;
+	for (UI::Panel* child = get_first_child(); child != nullptr; child = child->get_next_sibling()) {
+		if (dynamic_cast<UI::Window*>(child) != nullptr) {
+			panels_to_kill.insert(child);
+		}
+	}
+	for (UI::Panel* p : panels_to_kill) {
+		delete p;
 	}
 }
 
@@ -904,13 +1171,15 @@ Begin building a road
 void InteractiveBase::start_build_road(Coords road_start,
                                        Widelands::PlayerNumber const player,
                                        RoadBuildingType t) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	assert(!road_building_mode_);
 	road_building_mode_.reset(new RoadBuildingMode(player, road_start, t));
 
 	road_building_add_overlay();
-	set_sel_picture(g_gr->images().get(t == RoadBuildingType::kWaterway ?
-	                                      "images/ui_basic/fsel_waterwaybuilding.png" :
-	                                      "images/ui_basic/fsel_roadbuilding.png"));
+	set_sel_picture(g_image_cache->get(t == RoadBuildingType::kWaterway ?
+                                         "images/ui_basic/fsel_waterwaybuilding.png" :
+                                         "images/ui_basic/fsel_roadbuilding.png"));
 
 	if (t == RoadBuildingType::kWaterway) {
 		// Show workarea to visualise length limit
@@ -959,6 +1228,8 @@ Stop building the road
 ===============
 */
 void InteractiveBase::abort_build_road() {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	assert(road_building_mode_);
 	if (road_building_mode_->type == RoadBuildingType::kWaterway) {
 		assert(road_building_mode_->work_area);
@@ -981,6 +1252,8 @@ Finally build the road
 ===============
 */
 void InteractiveBase::finish_build_road() {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
 	assert(road_building_mode_);
 
 	if (road_building_mode_->type == RoadBuildingType::kWaterway) {
@@ -998,13 +1271,14 @@ void InteractiveBase::finish_build_road() {
 	const size_t length = road_building_mode_->path.get_nsteps();
 	if (road_building_mode_->type == RoadBuildingType::kWaterway &&
 	    length > egbase().map().get_waterway_max_length()) {
-		log("Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n", length,
-		    egbase().map().get_waterway_max_length());
-	} else if (length) {
+		log_warn_time(egbase().get_gametime(),
+		              "Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n",
+		              length, egbase().map().get_waterway_max_length());
+	} else if (length != 0u) {
 		upcast(Game, g, &egbase());
 
 		// Build the path as requested
-		if (g) {
+		if (g != nullptr) {
 			if (road_building_mode_->type == RoadBuildingType::kWaterway) {
 				g->send_player_build_waterway(
 				   road_building_mode_->player, *new Widelands::Path(road_building_mode_->path));
@@ -1024,7 +1298,7 @@ void InteractiveBase::finish_build_road() {
 			}
 		}
 
-		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
+		if (allow_user_input() && ((SDL_GetModState() & KMOD_CTRL) != 0)) {
 			//  place flags
 			const Map& map = egbase().map();
 			const std::vector<Coords>& c_vector = road_building_mode_->path.get_coords();
@@ -1032,14 +1306,14 @@ void InteractiveBase::finish_build_road() {
 			std::vector<Coords>::const_iterator const last = c_vector.end() - 2;
 
 			auto place_flag = [this, g](const Widelands::FCoords& coords) {
-				if (g) {
+				if (g != nullptr) {
 					g->send_player_build_flag(road_building_mode_->player, coords);
 				} else {
 					egbase().get_player(road_building_mode_->player)->build_flag(coords);
 				}
 			};
 
-			if (SDL_GetModState() & KMOD_SHIFT) {
+			if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 				//  start to end
 				for (std::vector<Coords>::const_iterator it = first; it <= last; ++it) {
 					place_flag(map.get_fcoords(*it));
@@ -1057,17 +1331,13 @@ void InteractiveBase::finish_build_road() {
 	unset_sel_picture();
 }
 
-/*
-===============
-If field is on the path, remove tail of path.
-Otherwise append if possible or return false.
-===============
-*/
-bool InteractiveBase::append_build_road(Coords const field) {
+std::optional<Widelands::CoordPath>
+InteractiveBase::try_append_build_road(const Widelands::Coords field) const {
 	assert(road_building_mode_);
 
 	const Map& map = egbase().map();
 	const Widelands::Player& player = egbase().player(road_building_mode_->player);
+	Widelands::CoordPath result_path = road_building_mode_->path;
 
 	{  //  find a path to the clicked-on node
 		Widelands::Path path;
@@ -1079,11 +1349,10 @@ bool InteractiveBase::append_build_road(Coords const field) {
 		} else {
 			cstep.add(Widelands::CheckStepRoad(player, Widelands::MOVECAPS_WALK));
 		}
-		if (map.findpath(
-		       road_building_mode_->path.get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0) {
-			return false;  // could not find a path
+		if (map.findpath(result_path.get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0) {
+			return std::nullopt;  // could not find a path
 		}
-		road_building_mode_->path.append(map, path);
+		result_path.append(map, path);
 	}
 
 	{
@@ -1094,7 +1363,7 @@ bool InteractiveBase::append_build_road(Coords const field) {
 		{
 			Widelands::CheckStepAnd cstep;
 			Widelands::CheckStepLimited clim;
-			for (const Coords& coord : road_building_mode_->path.get_coords()) {
+			for (const Coords& coord : result_path.get_coords()) {
 				clim.add_allowed_location(coord);
 			}
 			cstep.add(clim);
@@ -1102,21 +1371,48 @@ bool InteractiveBase::append_build_road(Coords const field) {
 				// Waterways (unlike roads) are strictly limited by the terrain around the edges
 				cstep.add(Widelands::CheckStepFerry(egbase()));
 			}
-			map.findpath(
-			   road_building_mode_->path.get_start(), field, 0, path, cstep, Map::fpBidiCost);
+			map.findpath(result_path.get_start(), field, 0, path, cstep, Map::fpBidiCost);
 		}
-		road_building_mode_->path.truncate(0);
-		road_building_mode_->path.append(map, path);
+		result_path.truncate(0);
+		result_path.append(map, path);
 	}
 
 	if (road_building_mode_->type == RoadBuildingType::kWaterway &&
-	    road_building_mode_->path.get_nsteps() > map.get_waterway_max_length()) {
-		road_building_mode_->path.truncate(map.get_waterway_max_length());
+	    result_path.get_nsteps() > map.get_waterway_max_length()) {
+		result_path.truncate(map.get_waterway_max_length());
+	}
+
+	return std::optional<Widelands::CoordPath>(result_path);
+}
+
+/*
+===============
+If field is on the path, remove tail of path.
+Otherwise append if possible or return false.
+===============
+*/
+bool InteractiveBase::append_build_road(Coords const field, bool is_preview) {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+
+	road_building_mode_->preview_path = std::nullopt;
+	std::optional<Widelands::CoordPath> path = try_append_build_road(field);
+
+	if (!path.has_value()) {
+		road_building_remove_overlay();
+		road_building_add_overlay();
+		return false;
+	}
+
+	if (is_preview) {
+		if (road_building_mode_->path.get_coords() != path.value().get_coords()) {
+			road_building_mode_->preview_path = path;
+		}
+	} else {
+		road_building_mode_->path = path.value();
 	}
 
 	road_building_remove_overlay();
 	road_building_add_overlay();
-
 	return true;
 }
 
@@ -1145,12 +1441,8 @@ Widelands::CoordPath InteractiveBase::get_build_road_path() const {
 	return road_building_mode_->path;
 }
 
-void InteractiveBase::log_message(const std::string& message) const {
-	// Send to linked receivers
-	LogMessage lm;
-	lm.msg = message;
-	lm.time = time(nullptr);
-	Notifications::publish(lm);
+void InteractiveBase::log_message(const std::string& message, const std::string& tooltip) const {
+	info_panel_.log_message(message, tooltip);
 }
 
 /**
@@ -1177,8 +1469,8 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 		               kSoundDistanceDivisor;
 
 		distance = (note.priority == kFxMaximumPriority) ?
-		              (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
-		              distance;
+                    (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
+                    distance;
 
 		if (distance < kSoundMaxDistance) {
 			g_sh->play_fx(note.type, note.fx, note.priority, note.allow_multiple,
@@ -1189,8 +1481,7 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 
 // Repositions the chat overlay
 void InteractiveBase::resize_chat_overlay() {
-	// 34 is the button height of the bottom menu
-	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - 34);
+	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - MainToolbar::kButtonSize);
 	chat_overlay_->recompute();
 }
 
@@ -1200,28 +1491,43 @@ Add road building data to the road overlay
 ===============
 */
 void InteractiveBase::road_building_add_overlay() {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	assert(road_building_mode_);
-	assert(road_building_mode_->overlay_road_previews.empty());
-	assert(road_building_mode_->overlay_steepness_indicators.empty());
 
+	if (road_building_mode_->preview_path.has_value()) {
+		road_building_add_overlay(road_building_mode_->preview_path.value(),
+		                          road_building_mode_->overlay_roadpreview_previews, false);
+	}
+	road_building_add_overlay(
+	   road_building_mode_->path, road_building_mode_->overlay_road_previews, true);
+}
+
+void InteractiveBase::road_building_add_overlay(const Widelands::CoordPath& path,
+                                                RoadBuildingMode::PreviewPathMap& target,
+                                                bool steepness) {
+	assert(target.empty());
 	const Map& map = egbase().map();
 
 	// preview of the road
-	const CoordPath::StepVector::size_type nr_steps = road_building_mode_->path.get_nsteps();
+	const CoordPath::StepVector::size_type nr_steps = path.get_nsteps();
 	for (CoordPath::StepVector::size_type idx = 0; idx < nr_steps; ++idx) {
-		Widelands::Direction dir = (road_building_mode_->path)[idx];
-		Coords c = road_building_mode_->path.get_coords()[idx];
+		Widelands::Direction dir = (path)[idx];
+		Coords c = path.get_coords()[idx];
 
 		if (dir < Widelands::WALK_E || dir > Widelands::WALK_SW) {
 			map.get_neighbour(c, dir, &c);
 			dir = Widelands::get_reverse_dir(dir);
 		}
-		road_building_mode_->overlay_road_previews.emplace(c, std::vector<uint8_t>());
-		road_building_mode_->overlay_road_previews[c].push_back(dir);
+		target.emplace(c, std::vector<uint8_t>());
+		target[c].push_back(dir);
 	}
 
 	// build hints
-	Widelands::FCoords endpos = map.get_fcoords(road_building_mode_->path.get_end());
+	if (!steepness) {
+		return;
+	}
+	assert(road_building_mode_->overlay_steepness_indicators.empty());
+	Widelands::FCoords endpos = map.get_fcoords(path.get_end());
 
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Widelands::FCoords neighb;
@@ -1232,8 +1538,7 @@ void InteractiveBase::road_building_add_overlay() {
 
 		if (road_building_mode_->type == RoadBuildingType::kWaterway) {
 			Widelands::CheckStepFerry checkstep(egbase());
-			if (!checkstep.reachable_dest(map, neighb) ||
-			    road_building_mode_->path.get_index(neighb) >= 0 ||
+			if (!checkstep.reachable_dest(map, neighb) || path.get_index(neighb) >= 0 ||
 			    !neighb.field->is_interior(road_building_mode_->player)) {
 				continue;
 			}
@@ -1242,28 +1547,28 @@ void InteractiveBase::road_building_add_overlay() {
 			Widelands::FCoords nb;
 			for (int32_t d = 1; d <= 6; ++d) {
 				map.get_neighbour(neighb, d, &nb);
-				if (nb != endpos && road_building_mode_->path.get_index(nb) >= 0 &&
+				if (nb != endpos && path.get_index(nb) >= 0 &&
 				    checkstep.allowed(map, neighb, nb, d, Widelands::CheckStep::StepId::stepNormal)) {
 					next_to = true;
 					break;
 				}
 			}
-			if (!next_to && road_building_mode_->path.get_nsteps() >= map.get_waterway_max_length()) {
+			if (!next_to && path.get_nsteps() >= map.get_waterway_max_length()) {
 				continue;  // exceeds length limit
 			}
-		} else if (!(caps & Widelands::MOVECAPS_WALK)) {
+		} else if ((caps & Widelands::MOVECAPS_WALK) == 0) {
 			continue;  // need to be able to walk there
 		}
 
 		//  can't build on robusts
 		const Widelands::BaseImmovable* imm = map.get_immovable(neighb);
-		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL &&
-		    (!(dynamic_cast<const Widelands::Flag*>(imm) ||
-		       (dynamic_cast<const Widelands::RoadBase*>(imm) &&
-		        (caps & Widelands::BUILDCAPS_FLAG))))) {
+		if ((imm != nullptr) && imm->get_size() >= Widelands::BaseImmovable::SMALL &&
+		    (!((dynamic_cast<const Widelands::Flag*>(imm) != nullptr) ||
+		       ((dynamic_cast<const Widelands::RoadBase*>(imm) != nullptr) &&
+		        ((caps & Widelands::BUILDCAPS_FLAG) != 0))))) {
 			continue;
 		}
-		if (road_building_mode_->path.get_index(neighb) >= 0) {
+		if (path.get_index(neighb) >= 0) {
 			continue;  // the road can't cross itself
 		}
 
@@ -1302,7 +1607,7 @@ void InteractiveBase::road_building_add_overlay() {
 				name = "images/wui/overlays/road_building_red.png";
 			}
 		}
-		road_building_mode_->overlay_steepness_indicators[neighb] = g_gr->images().get(name);
+		road_building_mode_->overlay_steepness_indicators[neighb] = g_image_cache->get(name);
 	}
 }
 
@@ -1312,9 +1617,107 @@ Remove road building data from road overlay
 ===============
 */
 void InteractiveBase::road_building_remove_overlay() {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	assert(road_building_mode_);
 	road_building_mode_->overlay_road_previews.clear();
+	road_building_mode_->overlay_roadpreview_previews.clear();
 	road_building_mode_->overlay_steepness_indicators.clear();
+}
+
+void InteractiveBase::add_wanted_building_window(const Widelands::Coords& coords,
+                                                 const Vector2i point,
+                                                 bool was_minimal,
+                                                 bool was_pinned) {
+	wanted_building_windows_.insert(std::make_pair(
+	   coords.hash(), std::unique_ptr<WantedBuildingWindow>(new WantedBuildingWindow(
+	                     point, was_minimal, was_pinned, has_workarea_preview(coords)))));
+}
+
+UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords& coord,
+                                                        bool avoid_fastclick,
+                                                        bool workarea_preview_wanted) {
+	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
+	upcast(Widelands::Building, building, immovable);
+	assert(building);
+	BuildingWindow::Registry& registry =
+	   unique_windows().get_building_window_registry(format("building_%d", building->serial()));
+
+	switch (building->descr().type()) {
+	case Widelands::MapObjectType::CONSTRUCTIONSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new ConstructionSiteWindow(*this, registry,
+			                           *dynamic_cast<Widelands::ConstructionSite*>(building),
+			                           avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
+	case Widelands::MapObjectType::DISMANTLESITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new DismantleSiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::MILITARYSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new MilitarySiteWindow(*this, registry, *dynamic_cast<Widelands::MilitarySite*>(building),
+			                       avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
+	case Widelands::MapObjectType::PRODUCTIONSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new ProductionSiteWindow(*this, registry,
+			                         *dynamic_cast<Widelands::ProductionSite*>(building),
+			                         avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
+	case Widelands::MapObjectType::TRAININGSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new TrainingSiteWindow(*this, registry, *dynamic_cast<Widelands::TrainingSite*>(building),
+			                       avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
+	case Widelands::MapObjectType::WAREHOUSE:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new WarehouseWindow(*this, registry, *dynamic_cast<Widelands::Warehouse*>(building),
+			                    avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
+	// TODO(sirver,trading): Add UI for market.
+	default:
+		log_err_time(egbase().get_gametime(), "Unable to show window for building '%s', type '%s'.\n",
+		             building->descr().name().c_str(), to_string(building->descr().type()).c_str());
+		NEVER_HERE();
+	}
+	NoteThreadSafeFunction::instantiate([&registry]() { registry.create(); }, true);
+	return registry.window;
+}
+
+UI::UniqueWindow& InteractiveBase::show_ship_window(Widelands::Ship* ship) {
+	UI::UniqueWindow::Registry& registry =
+	   unique_windows().get_registry(format("ship_%d", ship->serial()));
+	registry.open_window = [this, &registry, ship] { new ShipWindow(*this, registry, ship); };
+	registry.create();
+	return *registry.window;
+}
+
+ChatColorForPlayer InteractiveBase::color_functor() const {
+	return [this](int player_number) {
+		return (player_number > 0 &&
+		        player_number <= egbase().player_manager()->get_number_of_players()) ?
+                &egbase().player(player_number).get_playercolor() :
+                nullptr;
+	};
+}
+
+void InteractiveBase::broadcast_cheating_message() const {
+	if (get_game() == nullptr) {
+		return;  // Editor
+	}
+	if (upcast(GameHost, h, game().game_controller())) {
+		h->send_system_message_code(
+		   "CHEAT", player_number() != 0u ? game().player(player_number()).get_name() : "");
+	} else if (upcast(GameClient, c, game().game_controller())) {
+		c->send_cheating_info();
+	}
 }
 
 bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
@@ -1322,31 +1725,73 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		return true;
 	}
 
+	if (matches_shortcut(KeyboardShortcut::kCommonScreenshot, code)) {
+		// Screenshot taken by topmost handler, just show a notification
+		if (down) {
+			log_message(_("Failed saving screenshot!"));
+			screenshot_failed_ = true;
+		} else {
+			if (!screenshot_failed_) {
+				log_message(_("Screenshot saved"));
+			}
+			screenshot_failed_ = false;
+		}
+		return true;
+	}
+
 	if (down) {
-		switch (code.sym) {
-#ifndef NDEBUG  //  only in debug builds
-		case SDLK_F6:
-			GameChatMenu::create_script_console(
-			   this, debugconsole_, *DebugConsole::get_chat_provider());
-			return true;
-#endif
-		// Common shortcuts for InteractivePlayer, InteractiveSpectator and EditorInteractive
-		case SDLK_SPACE:
+		if (matches_shortcut(KeyboardShortcut::kCommonBuildhelp, code)) {
 			toggle_buildhelp();
 			return true;
-		case SDLK_m:
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonMinimap, code)) {
 			toggle_minimap();
+			return true;
+		}
+		if (egbase().is_game() && matches_shortcut(KeyboardShortcut::kCommonQuicknavGUI, code)) {
+			toggle_quicknav();
+			return true;
+		}
+
+		switch (code.sym) {
+#ifndef NDEBUG  //  only in debug builds
+		case SDLK_SPACE:
+			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
+				GameChatMenu::create_script_console(
+				   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
+				return true;
+			}
+			break;
+		case SDLK_BACKSPACE:
+			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
+				if (cheat_mode_enabled_) {
+					cheat_mode_enabled_ = false;
+				} else if (!omnipotent()) {
+					broadcast_cheating_message();
+					cheat_mode_enabled_ = true;
+				}
+				return true;
+			}
+			break;
+#endif
+		case SDLK_TAB:
+			toolbar()->focus();
 			return true;
 		default:
 			break;
 		}
 	}
 
-	return map_view_.handle_key(down, code);
+	if (map_view_.handle_key(down, code)) {
+		return true;
+	}
+	return UI::Panel::handle_key(down, code);
 }
 
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
-	const std::string cmd = boost::algorithm::join(args, " ");
+	const std::string cmd = join(args, " ");
+
+	broadcast_cheating_message();
 
 	DebugConsole::write("Starting Lua interpretation!");
 	try {
@@ -1367,11 +1812,11 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 		return;
 	}
 
-	uint32_t serial = boost::lexical_cast<uint32_t>(args[1]);
+	uint32_t serial = stoul(args[1]);
 	MapObject* obj = egbase().objects().get_object(serial);
 
-	if (!obj) {
-		DebugConsole::write(str(boost::format("No MapObject with serial number %1%") % serial));
+	if (obj == nullptr) {
+		DebugConsole::write(format("No MapObject with serial number %1%", serial));
 		return;
 	}
 

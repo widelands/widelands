@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2020 by the Widelands Development Team
+ * Copyright (C) 2012-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,164 +12,303 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "wlapplication_messages.h"
 
+#include <algorithm>
 #include <iostream>
-
-#include <boost/format.hpp>
+#include <regex>
 
 #include "base/i18n.h"
+#include "base/string.h"
 
-using std::endl;
+constexpr size_t kIndent = 23;
+constexpr size_t kTextWidth = 50;
+
+#ifndef _WIN32
+#ifdef USE_XDG
+static const std::string kDefaultHomedir = "~/.local/share/widelands";
+#else
+static const std::string kDefaultHomedir = "~/.widelands";
+#endif
+#else
+static const std::string kDefaultHomedir = "%USERPROFILE%\\.widelands";
+#endif
+
+/// Command line help
+/// Title: unindented text in the line above
+/// Key: the actual parameter
+/// Hint: text after =
+/// Help: Full text help
+/// Verbose: Filter some config options (--help vs. --help-all)
+static std::vector<Parameter> parameters;
+void fill_parameter_vector() {
+	i18n::Textdomain textdomain("widelands_console");
+	parameters =
+	{ {_("Usage:"), _("widelands <option0>=<value0> ... <optionN>=<valueN>"), "--", "", false},
+	  {"", _("widelands <save.wgf>/<replay.wry>"), "--", "", false},
+	  /// Paths
+	  {_("Options:"), "datadir", _("DIRNAME"),
+		_("Use the specified directory for the Widelands data files."), false},
+	  {"", "homedir", _("DIRNAME"),
+		format(_("Use the specified directory for Widelands config files, savegames, and replays. "
+		         "Default is `%s`."),
+		       kDefaultHomedir),
+		false},
+	  {"", "localedir", _("DIRNAME"),
+		_("Use the specified directory for the Widelands locale files."), false},
+	  {"", "language",
+		/** TRANSLATORS: The … is not used on purpose to increase readability on monospaced terminals
+		 */
+		_("[de_DE|sv_SE|...]"), _("Use the specified locale."), false},
+	  {"", "skip_check_datadir_version", "",
+		_("Do not check whether the data directory to use is "
+		  "compatible with this Widelands version."),
+		true},
+	  /// Game setup
+	  {"", "new_game_from_template", _("FILENAME"),
+		format(_("Create a new game directly with the settings configured in the given file. "
+		         "An example can be found in `%s`."),
+		       "data/templates/new_game_template"),
+		false},
+	  {"", "scenario", _("FILENAME"),
+		_("Start the map `FILENAME` directly as a singleplayer scenario."), false},
+	  {"", "loadgame", _("FILENAME"), _("Load the savegame `FILENAME` directly."), false},
+	  {"", "replay", _("FILENAME"), _("Load the replay `FILENAME` directly."), false},
+	  {"", "script", _("FILENAME"),
+		_("Run the given Lua script after initialization. Only valid with --scenario, --loadgame, or "
+		  "--editor."),
+		false},
+	  {"", "editor", "",
+		_("Start the Widelands map editor directly. You can add `=FILENAME` to directly load the map "
+		  "`FILENAME` in the editor."),
+		false},
+	  /// Misc
+	  {"", "nosound", "", _("Start the game with sound disabled."), false},
+	  {"", "fail-on-lua-error", "", _("Force Widelands to crash when a Lua error occurs."), false},
+	  {"", "replay_lifetime", _("n"), _("Delete replays automatically after `n` weeks."), true},
+	  {"", "ai_training", "",
+		_("Enable AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ for a full "
+		  "description of the AI training logic."),
+		true},
+	  {"", "auto_speed", "",
+		_("Constantly adjust the game speed automatically depending on AI delay. "
+		  "Only to be used for AI testing or training (in conjunction with --ai_training)."),
+		true},
+	  /// Saving options
+	  {_("Game options:"), _("Note: New values will be written to the config file."), "--", "",
+		false},
+	  {"", "autosave",
+		/** TRANSLATORS: A placeholder for a numerical value */
+		_("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Automatically save each `n` minutes."), false},
+	  {"", "rolling_autosave", _("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Use `n` files for rolling autosaves."), true},
+	  {"", "nozip", "", _("Do not save files as binary zip archives."), false},
+	  {"", "display_replay_filenames", _("[true*|false]"), _("Show filenames in the replay screen."),
+		true},
+	  {"", "editor_player_menu_warn_too_many_players", _("[true*|false]"),
+		_("Whether a warning should be shown in the editor if there are too many players."), true},
+	  /// Game options
+	  {"", "auto_roadbuild_mode", _("[true*|false]"),
+		_("Start building a road after placing a flag."), true},
+	  {"", "display_flags",
+		/** TRANSLATORS: The … character is not used on purpose to increase readability on monospaced
+		   terminals */
+		_("[...]"), _("Bitmask of display flags to set for new games."), true},
+#if 0  // TODO(matthiakl): Re-add training wheels code after v1.0
+	{"",
+	 "training_wheels",
+	 _("[true*|false]"),
+	 "",
+	 true
+	},
+#endif
+	  {"", "edge_scrolling",
+		/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+		/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
+		/** TRANSLATORS: * marks the default value */
+		_("[true|false*]"), _("Scroll when the mouse cursor is near the screen edge."), true},
+	  {"", "invert_movement", _("[true|false*]"), _("Invert click-and-drag map movement direction."),
+		true},
+	  {"", "numpad_diagonalscrolling", _("[true|false*]"),
+		_("Allow diagonal scrolling with the numeric keypad."), true},
+	  {"", "game_clock", _("[true|false*]"), _("Display system time in the info panel."), true},
+	  {"", "single_watchwin", _("[true|false*]"), _("Use single watchwindow mode."), true},
+	  {"", "transparent_chat", _("[true*|false]"),
+		_("Show in-game chat with transparent background."), true},
+	  {"", "toolbar_pos", _("[...]"), _("Bitmask to set the toolbar location and mode."), true},
+	  /// Networking
+	  {_("Networking:"), "write_syncstreams",
+		/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+		/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
+		/** TRANSLATORS: * marks the default value */
+		_("[true*|false]"),
+		/** TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are used in multiplayer
+		 */
+		/** TRANSLATORS: games to make sure that there is no mismatch between the players. */
+		_("Create syncstream dump files to help debug network games."), false},
+	  {"", "metaserver", _("URI"), _("Connect to a different metaserver for internet gaming."),
+		false},
+	  {"", "metaserverport", _("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Port number `n` of the metaserver for internet gaming."), false},
+	  {"", "servername", _("[...]"), _("The name of the last hosted game."), true},
+	  {"", "nickname", _("[...]"), _("The nickname used for LAN and online games."), true},
+	  {"", "realname", _("[...]"), _("Name of map author."), true},
+	  {"", "lasthost", _("[...]"), _("The last host connected to."), true},
+	  {"", "registered", _("[true|false*]"),
+		_("Whether the used metaserver login is for a registered user."), true},
+	  {"", "password_sha1", _("[...]"), _("The hashed password for online logins."), true},
+	  {"", "addon_server_ip", _("IP"),
+		_("Connect to a different server address from the add-ons manager."), false},
+	  {"", "addon_server_port", _("n"),
+		_("Connect to a different server port from the add-ons manager."), false},
+
+	  /// Interface options
+	  {_("Graphic options:"), "fullscreen", _("[true|false*]"),
+		_("Whether to use the whole display for the game screen."), false},
+	  {"", "maximized", _("[true|false*]"), _("Whether to start the game in a maximized window."),
+		false},
+	  {"", "xres",
+		/** TRANSLATORS: A placeholder for window width */
+		_("x"),
+		/** TRANSLATORS: `x` references a window width placeholder */
+		_("Width `x` of the window in pixel."), false},
+	  {"", "yres",
+		/** TRANSLATORS: A placeholder for window height */
+		_("y"),
+		/** TRANSLATORS: `y` references a window height placeholder */
+		_("Height `y` of the window in pixel."), false},
+	  {"", "inputgrab", _("[true|false*]"), _("Whether to grab the mouse input."), true},
+	  {"", "sdl_cursor", _("[true*|false]"), _("Whether to use the mouse cursor provided by SDL."),
+		true},
+	  {"", "tooltip_accessibility_mode", _("[true|false*]"), _("Whether to use sticky tooltips."),
+		true},
+	  {"", "maxfps", _("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Maximal optical framerate `n` of the game."), true},
+	  {"", "theme", _("DIRNAME"),
+		_("The path to the active UI theme, relative to the Widelands home directory."), false},
+	  /// Window options
+	  {_("Options for the internal window manager:"), "animate_map_panning", _("[true*|false]"),
+		_("Whether automatic map movements should be animated."), true},
+	  {"", "border_snap_distance", _("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Move a window to the edge of the screen when the edge of the window comes within a "
+		  "distance `n` from the edge of the screen."),
+		true},
+	  {"", "dock_windows_to_edges", _("[true|false*]"),
+		_("Eliminate a window’s border towards the edge of the screen when the edge of the window is "
+		  "next to the edge of the screen."),
+		true},
+	  {"", "panel_snap_distance", _("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Move a window to the edge of the panel when the edge of the window comes within "
+		  "a distance of `n` from the edge of the panel."),
+		true},
+	  /// Others
+	  {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},
+	  {"", "verbose-i18n", "",
+		_("Print all strings as they are translated. "
+		  "This helps with tracing down bugs with internationalization."),
+		true},
+	  {"", "version", "", _("Only print version and exit."), false},
+	  {"", "help", "", _("Show this help."), false},
+	  {"", "help-all", "", _("Show this help with all available config options."), false},
+	  {"", _("<save.wgf>/<replay.wry>"), "--",
+		_("Load the given savegame or replay directly. Useful for .wgf/.wry file extension "
+		  "association. Does not work with other options. Also see --loadgame/--replay."),
+		false} };
+}
+
+const std::vector<std::string> get_all_parameters() {
+	std::vector<std::string> result(parameters.size());
+	std::transform(parameters.begin(), parameters.end(), result.begin(),
+	               [](const Parameter& p) { return p.key_; });
+	return result;
+}
+
+bool is_parameter(const std::string& name) {
+	auto result = std::find_if(
+	   parameters.begin(), parameters.end(), [name](const Parameter& p) { return p.key_ == name; });
+	return result != parameters.end();
+}
 
 /**
  * Print usage information
  */
-void show_usage(const std::string& build_id, const std::string& build_type) {
-	i18n::Textdomain textdomain("widelands_console");  //  uses system standard language
+void show_usage(const std::string& build_ver_details, CmdLineVerbosity verbosity) {
+	i18n::Textdomain textdomain("widelands_console");
 
-	/** TRANSLATORS: %s = version information */
-	std::cout << (boost::format(_("This is Widelands Build %s")) %
-	              (boost::format("%s(%s)") % build_id % build_type).str())
-	                .str()
-	          << endl
-	          << endl;
-	std::cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>") << endl << endl;
-	std::cout << _("Options:") << endl << endl;
-	std::cout << _(" --<config-entry-name>=value overwrites any config file setting") << endl
-	          << _("                      Note: New value will be written to config file") << endl
-	          << endl
-	          << _(" --datadir=DIRNAME    Use specified directory for the widelands\n"
-	               "                      data files")
-	          << endl
-	          << _(" --homedir=DIRNAME    Use specified directory for widelands config\n"
-	               "                      files, savegames and replays")
-	          << endl
-#ifdef __linux__
-	          << _("                      Default is ~/.widelands") << endl
-#elif _WIN32
-	          << _("                      Default is %USERPROFILE%\\.widelands") << endl
-#endif
-	          << _(" --localedir=DIRNAME  Use specified directory for the widelands\n"
-	               "                      locale files")
-	          << endl
-	          << endl
-	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
-	             textdomain */
-	          << _(" --coredump=[true|false]\n"
-	               "                      Generates a core dump on segfaults instead of\n"
-	               "                      using the SDL")
-	          << endl
-	          << _(" --language=[de_DE|sv_SE|...]\n"
-	               "                      The locale to use.")
-	          << endl
-	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
-	             textdomain. */
-	          /** TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are used in
-	             multiplayer */
-	          /** TRANSLATORS: games to make sure that there is no mismatch between the players. */
-	          << _(" --write_syncstreams=[true|false]\n"
-	               "                      Create syncstream dump files to help debug network games.")
-	          << endl
-	          << _(" --autosave=[...]     Automatically save each n minutes") << endl
-	          << _(" --rolling_autosave=[...]\n"
-	               "                      Use this many files for rolling autosaves")
-	          << endl
-	          << _(" --metaserver=[...]\n"
-	               "                      Connect to a different metaserver for internet gaming.")
-	          << endl
-	          << _(" --metaserverport=[...]\n"
-	               "                      Port number of the metaserver for internet gaming.")
-	          << endl
-	          << endl
-	          << _(" --nosound            Starts the game with sound disabled.") << endl
-	          << endl
-	          << _(" --nozip              Do not save files as binary zip archives.") << endl
-	          << endl
-	          << _(" --editor             Directly starts the Widelands editor.\n"
-	               "                      You can add a =FILENAME to directly load\n"
-	               "                      the map FILENAME in editor.")
-	          << endl
-	          << _(" --ai_training        Enables AI training mode. See\n"
-	               "                      https://www.widelands.org/wiki/Ai%20Training/\n"
-	               "                      for a full description of the AI training logic.")
-	          << endl
-	          << _(" --auto_speed         In multiplayer games only, this will keep\n"
-	               "                      adjusting the game speed automatically,\n"
-	               "                      depending on FPS. Useful in conjunction with\n"
-	               "                      --ai_training.")
-	          << endl
-	          << _(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
-	               "                      map.")
-	          << endl
-	          << _(" --loadgame=FILENAME  Directly loads the savegame FILENAME.") << endl
-	          << _(" --script=FILENAME    Run the given Lua script after initialization.\n"
-	               "                      Only valid with --scenario, --loadgame, or --editor.")
-	          << endl
-	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
-	             textdomain */
-	          << _(" --auto_roadbuild_mode=[true|false]\n"
-	               "                      Whether to enter roadbuilding mode\n"
-	               "                      automatically after placing a flag that is\n"
-	               "                      not connected to a road.")
-	          << endl
-	          << endl
-	          << _("Graphic options:")
-	          << endl
-	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
-	             textdomain */
-	          << _(" --fullscreen=[true|false]\n"
-	               "                      Whether to use the whole display for the\n"
-	               "                      game screen.")
-	          << endl
-	          << _(" --xres=[...]         Width of the window in pixel.") << endl
-	          << _(" --yres=[...]         Height of the window in pixel.") << endl
-	          << _(" --maxfps=[5 ...]     Maximal optical framerate of the game.") << endl
-	          << endl
-	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
-	             textdomain */
-	          << _("Options for the internal window manager:") << endl
-	          << _(" --animate_map_panning=[yes|no]\n"
-	               "                      Should automatic map movements be animated.")
-	          << endl
-	          << _(" --border_snap_distance=[0 ...]\n"
-	               "                      Move a window to the edge of the screen\n"
-	               "                      when the edge of the window comes within\n"
-	               "                      this distance from the edge of the screen.")
-	          << endl
-	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
-	             textdomain */
-	          << _(" --dock_windows_to_edges=[true|false]\n"
-	               "                      Eliminate a window's border towards the\n"
-	               "                      edge of the screen when the edge of the\n"
-	               "                      window is next to the edge of the screen.")
-	          << endl
-	          << _(" --panel_snap_distance=[0 ...]\n"
-	               "                      Move a window to the edge of the panel when\n"
-	               "                      the edge of the window comes within this\n"
-	               "                      distance from the edge of the panel.")
-	          << endl
-	          << _(" --snap_windows_only_when_overlapping=[yes|no]\n"
-	               "                      Only move a window to the edge of a panel\n"
-	               "                      if the window is overlapping with the\n"
-	               "                      panel.")
-	          << endl
-	          << endl;
-	std::cout << _(" --verbose            Enable verbose debug messages") << endl << endl;
-	std::cout << _(" --help               Show this help") << endl << endl;
-	std::cout << _("Bug reports? Suggestions? Check out the project website:\n"
+	std::cout << std::string(kIndent + kTextWidth, '=')
+	          << std::endl
+	          /** TRANSLATORS: %s = version information */
+	          << format(_("This is Widelands version %s"), build_ver_details) << std::endl;
+
+	if (verbosity != CmdLineVerbosity::None) {
+		std::string indent_string = std::string(kIndent, ' ');
+		bool multiline = true;
+		for (const Parameter& param : parameters) {
+			if (verbosity != CmdLineVerbosity::All && param.is_verbose_) {
+				continue;
+			}
+
+			if (!param.title_.empty()) {
+				std::cout << std::endl << param.title_ << std::endl;
+			} else if (!multiline) {
+				// Space out single line entries
+				std::cout << std::endl;
+			}
+
+			std::string column = " ";
+			if (param.hint_ == "--") {
+				// option without dashes
+				column += param.key_;
+			} else {
+				column += std::string("--") + param.key_;
+				if (!param.hint_.empty()) {
+					column += std::string("=") + param.hint_;
+				}
+			}
+
+			std::cout << column;
+			if (param.help_.empty()) {
+				std::cout << std::endl;
+				continue;
+			}
+
+			multiline = column.size() >= kIndent;
+			if (multiline) {
+				std::cout << std::endl << indent_string;
+			} else {
+				std::cout << std::string(kIndent - column.size(), ' ');
+			}
+
+			std::string help = param.help_;
+			multiline |= help.size() > kTextWidth;
+			while (help.size() > kTextWidth) {
+				// Auto wrap lines wider than text width
+				size_t space_idx = help.rfind(' ', kTextWidth);
+				if (space_idx != std::string::npos) {
+					std::cout << help.substr(0, space_idx) << std::endl << indent_string;
+					help = help.substr(space_idx + 1);
+				} else {
+					break;
+				}
+			}
+			std::cout << help << std::endl;
+		}
+	}
+
+	std::cout << std::endl
+	          << _("Bug reports? Suggestions? Check out the project website:\n"
 	               "        https://www.widelands.org/\n\n"
 	               "Hope you enjoy this game!")
-	          << endl;
+	          << std::endl;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -42,6 +41,7 @@ struct Box : public Panel {
 	};
 
 	Box(Panel* parent,
+	    PanelStyle,
 	    int32_t x,
 	    int32_t y,
 	    uint32_t orientation,
@@ -60,9 +60,6 @@ struct Box : public Panel {
 	void add(Panel* panel, Resizing resizing = Resizing::kAlign, UI::Align align = UI::Align::kLeft);
 	void add_space(uint32_t space);
 	void add_inf_space();
-	bool is_snap_target() const override {
-		return true;
-	}
 
 	void set_min_desired_breadth(uint32_t min);
 	void set_inner_spacing(uint32_t size);
@@ -77,12 +74,11 @@ struct Box : public Panel {
 	Scrollbar* get_scrollbar() {
 		return scrollbar_.get();
 	}
-	void set_scrollbar_style(UI::PanelStyle);
 
 protected:
 	void layout() override;
 	void update_desired_size() override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
@@ -92,6 +88,8 @@ private:
 	void set_item_pos(uint32_t idx, int32_t pos);
 	void scrollbar_moved(int32_t);
 	void update_positions();
+	void on_death(Panel* p) override;
+	void on_visibility_changed() override;
 
 	// Don't resize beyond this size
 	int max_x_, max_y_;
@@ -117,11 +115,11 @@ private:
 		int assigned_var_depth;
 	};
 
-	bool scrolling_, force_scrolling_;
+	bool scrolling_{false};
+	bool force_scrolling_{false};
 	std::unique_ptr<Scrollbar> scrollbar_;
-	UI::PanelStyle scrollbar_style_;
 	uint32_t orientation_;
-	uint32_t mindesiredbreadth_;
+	uint32_t mindesiredbreadth_{0U};
 	uint32_t inner_spacing_;
 
 	std::vector<Item> items_;

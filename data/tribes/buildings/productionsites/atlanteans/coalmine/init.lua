@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_coalmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Coal Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
 
@@ -19,23 +19,21 @@ tribes:new_productionsite_type {
       planks = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 50, 56 },
+         hotspot = { 53, 61 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 50, 56 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 53, 61 },
       },
       empty = {
-         pictures = path.list_files(dirname .. "empty_??.png"),
-         hotspot = { 50, 56 },
+         hotspot = { 53, 61 },
       },
    },
 
    aihints = {
-      mines = "coal",
       prohibited_till = 910
    },
 
@@ -52,7 +50,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
-         descname = _"mining coal",
+         descname = _("mining coal"),
          actions = {
             -- time total: 105 + 7 x 3.6
             "return=skipped unless economy needs coal",
@@ -74,10 +72,10 @@ tribes:new_productionsite_type {
          },
       },
       mine_produce = {
-         descname = _"mining coal",
+         descname = _("mining coal"),
          actions = {
             "animate=working duration:10s",
-            "mine=coal radius:4 yield:100% when_empty:5%",
+            "mine=resource_coal radius:4 yield:100% when_empty:5%",
             "produce=coal",
          }
       },
@@ -93,9 +91,11 @@ tribes:new_productionsite_type {
 
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Coal",
-      heading = _"Main Coal Vein Exhausted",
+      title = _("No Coal"),
+      heading = _("Main Coal Vein Exhausted"),
       message =
          pgettext("atlanteans_building", "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

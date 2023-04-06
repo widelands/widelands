@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,8 +21,7 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
+#include "base/string.h"
 #include "logic/filesystem_constants.h"
 #include "map_io/map_loader.h"
 
@@ -39,19 +37,20 @@ struct WidelandsMapLoader : public MapLoader {
 	WidelandsMapLoader(FileSystem* fs, Map*);
 	~WidelandsMapLoader() override;
 
-	int32_t preload_map(bool) override;
+	int32_t preload_map(bool, AddOns::AddOnsList*) override;
 	int32_t load_map_complete(EditorGameBase&, MapLoader::LoadType load_type) override;
+	int32_t load_map_for_render(EditorGameBase&, AddOns::AddOnsList*) override;
 
 	MapObjectLoader* get_map_object_loader() {
 		return mol_.get();
 	}
 
-	static bool is_widelands_map(const std::string& filename) {
-		return boost::iends_with(filename, kWidelandsMapExtension);
+	static inline bool is_widelands_map(const std::string& filename) {
+		return ends_with(filename, kWidelandsMapExtension, false);
 	}
 
 	// If this was made pre one-world, the name of the world.
-	const std::string& old_world_name() const {
+	[[nodiscard]] const std::string& old_world_name() const {
 		return old_world_name_;
 	}
 

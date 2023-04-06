@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2020 by the Widelands Development Team
+ * Copyright (C) 2012-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -30,6 +29,7 @@ class BobDescr;
 
 class EditorInteractive;
 struct EditorToolAction;
+enum class WindowID;
 
 /// Class to save important and changeable properties of classes needed for actions
 // Implementations in editor_history.cc
@@ -46,10 +46,10 @@ struct EditorActionArgs {
 
 	uint32_t sel_radius;
 
-	int32_t change_by;                                     // resources, change height tools
+	int32_t change_by{0};                                  // resources, change height tools
 	std::list<Widelands::Field::Height> original_heights;  // change height tool
-	Widelands::DescriptionIndex current_resource;          // resources change tools
-	Widelands::ResourceAmount set_to;                      // resources change tools
+	Widelands::DescriptionIndex current_resource{0U};      // resources change tools
+	Widelands::ResourceAmount set_to{0U};                  // resources change tools
 	Widelands::Extent new_map_size;                        // resize tool
 
 	struct ResourceState {
@@ -68,7 +68,9 @@ struct EditorActionArgs {
 
 	std::list<EditorToolAction*> draw_actions;  // draw tool
 
-	uint32_t refcount;
+	uint32_t refcount{0U};
+
+	WindowID window_id;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_ACTION_ARGS_H

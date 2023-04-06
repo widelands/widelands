@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_shipyard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Shipyard"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    map_check = {"seafaring"},
@@ -23,23 +23,28 @@ tribes:new_productionsite_type {
       spidercloth = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 53, 66 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 53, 66 },
+         hotspot = { 56, 72 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 53, 66 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 56, 72 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 53, 66 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 56, 72 },
       }
+   },
+
+   spritesheets = {
+      build = {
+         frames = 5,
+         columns = 5,
+         rows = 1,
+         hotspot = { 56, 72 },
+      },
    },
 
    aihints = {
@@ -61,7 +66,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=ship on failure fail",
             "call=ship_preparation",
@@ -69,17 +74,19 @@ tribes:new_productionsite_type {
       },
       ship = {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
-         descname = _"constructing a ship",
+         descname = _("constructing a ship"),
          actions = {
             "construct=atlanteans_shipconstruction worker:buildship radius:6",
             "sleep=duration:20s",
          }
       },
       ship_preparation = {
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "animate=working duration:35s",
          }
       },
    },
 }
+
+pop_textdomain()

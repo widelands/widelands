@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,21 +12,19 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "wui/militarysitewindow.h"
 
-#include "graphic/graphic.h"
 #include "wui/soldiercapacitycontrol.h"
 #include "wui/soldierlist.h"
 
 static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.png";
 
-MilitarySiteWindow::MilitarySiteWindow(InteractiveGameBase& parent,
-                                       UI::UniqueWindow::Registry& reg,
+MilitarySiteWindow::MilitarySiteWindow(InteractiveBase& parent,
+                                       BuildingWindow::Registry& reg,
                                        Widelands::MilitarySite& ms,
                                        bool avoid_fastclick,
                                        bool workarea_preview_wanted)
@@ -35,10 +33,12 @@ MilitarySiteWindow::MilitarySiteWindow(InteractiveGameBase& parent,
 }
 
 void MilitarySiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
-	Widelands::MilitarySite* military_site = military_site_.get(igbase()->egbase());
+	Widelands::MilitarySite* military_site = military_site_.get(ibase()->egbase());
 	assert(military_site != nullptr);
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
-	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), *igbase(), *military_site), _("Soldiers"));
+	get_tabs()->add("soldiers", g_image_cache->get(pic_tab_military),
+	                create_soldier_list(*get_tabs(), *ibase(), *military_site), _("Soldiers"));
+
 	think();
+	initialization_complete();
 }

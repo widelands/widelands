@@ -29,6 +29,8 @@ wl_library(graphic_color
   SRCS
     color.h
     color.cc
+  DEPENDS
+    base
   USES_SDL2
 )
 
@@ -37,9 +39,9 @@ wl_library(graphic_playercolor
     playercolor.cc
     playercolor.h
   DEPENDS
+    base
     graphic
     graphic_color
-    graphic_image_cache
     graphic_surface
     io_filesystem
 )
@@ -52,11 +54,14 @@ wl_library(graphic_build_texture_atlas
     build_texture_atlas.h
     build_texture_atlas.cc
   DEPENDS
+    base
     graphic
     graphic_image_io
     graphic_surface
     graphic_texture_atlas
     io_filesystem
+    io_profile
+    logic_filesystem_constants
 )
 
 wl_library(graphic_image_io
@@ -67,21 +72,10 @@ wl_library(graphic_image_io
   USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
-    base_log
     graphic_surface
     io_fileread
     io_filesystem
     io_stream
-)
-
-wl_library(graphic_image_cache
-  SRCS
-    image_cache.cc
-    image_cache.h
-  DEPENDS
-    base_macros
-    graphic_image_io
-    graphic_surface
 )
 
 wl_library(graphic_sdl_utils
@@ -100,14 +94,12 @@ wl_library(graphic_gl_utils
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h
-  USES_BOOST_REGEX
   USES_SDL2
   USES_OPENGL
   DEPENDS
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
     base_macros
     graphic_text
     io_fileread
@@ -125,9 +117,9 @@ wl_library(graphic_surface
     texture.h
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
     base_geometry
-    base_log
     base_macros
     graphic_color
     graphic_draw_programs
@@ -161,7 +153,6 @@ wl_library(graphic_draw_programs
     base_macros
     base_geometry
     graphic_gl_utils
-    base_log
     graphic_color
 )
 
@@ -203,10 +194,11 @@ wl_library(graphic_minimap_renderer
     minimap_renderer.h
   DEPENDS
     base_geometry
-    base_macros
     economy
+    graphic_playercolor
     graphic_surface
     logic
+    logic_constants
     logic_map
     logic_map_objects
     wui_mapview_pixelfunctions
@@ -217,10 +209,12 @@ wl_library(graphic_fields_to_draw
     gl/fields_to_draw.cc
     gl/fields_to_draw.h
   DEPENDS
+    base
     base_geometry
     graphic
     graphic_gl_utils
     logic
+    logic_constants
     logic_map_objects
     logic_widelands_geometry
     wui_mapview_pixelfunctions
@@ -238,10 +232,10 @@ wl_library(graphic_terrain_programs
     gl/dither_program.h
     gl/workarea_program.cc
     gl/workarea_program.h
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_geometry
-    base_log
     base_macros
     graphic
     graphic_fields_to_draw
@@ -262,8 +256,9 @@ wl_library(graphic_fonthandler
     font_handler.cc
     font_handler.h
   DEPENDS
+    base
     base_macros
-    graphic_image_cache
+    graphic
     graphic_text
 )
 
@@ -272,6 +267,7 @@ wl_library(graphic_text_layout
     text_layout.cc
     text_layout.h
   DEPENDS
+    base
     graphic # TODO(Gunchleoc): For text_width safety only - rewrite that function
     graphic_align
     graphic_color
@@ -279,7 +275,6 @@ wl_library(graphic_text_layout
     graphic_styles
     graphic_text
     graphic_fonthandler
-    graphic_styles
 )
 
 wl_library(graphic_wordwrap
@@ -288,8 +283,8 @@ wl_library(graphic_wordwrap
     wordwrap.h
   USES_ICU
   DEPENDS
+    base
     base_geometry
-    base_log
     graphic
     graphic_align
     graphic_color
@@ -314,6 +309,18 @@ wl_library(graphic_mouse_cursor
 )
 
 
+# Misc high-level helper and convenience functions
+
+wl_library(graphic_functions
+  SRCS
+    graphic_functions.cc
+    graphic_functions.h
+  DEPENDS
+    graphic
+    graphic_fonthandler
+    graphic_text_layout
+)
+
 # Base library
 
 wl_library(graphic
@@ -321,6 +328,10 @@ wl_library(graphic
     default_resolution.h
     graphic.cc
     graphic.h
+    note_graphic_resolution_changed.h
+    hyperlink.h
+    image_cache.cc
+    image_cache.h
     style_manager.cc
     style_manager.h
     rendertarget.cc
@@ -329,11 +340,12 @@ wl_library(graphic
     road_segments.h
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
+    base_macros
     base_scoped_timer
+    base_times
     build_info
     graphic_align
     graphic_animation
@@ -341,7 +353,6 @@ wl_library(graphic
     graphic_color
     graphic_draw_programs
     graphic_gl_utils
-    graphic_image_cache
     graphic_image_io
     graphic_render_queue
     graphic_styles

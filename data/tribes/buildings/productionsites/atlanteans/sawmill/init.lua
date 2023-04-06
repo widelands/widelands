@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_sawmill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Sawmill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -18,16 +18,21 @@ tribes:new_productionsite_type {
       granite = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 53, 60 },
+         hotspot = { 60, 68 },
       },
+   },
+
+   spritesheets = {
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 53, 60 },
-         fps = 25
-      }
+         fps = 25,
+         frames = 19,
+         columns = 10,
+         rows = 2,
+         hotspot = { 60, 68 },
+      },
    },
 
    aihints = {
@@ -47,7 +52,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
-         descname = _"sawing logs",
+         descname = _("sawing logs"),
          actions = {
             "return=skipped unless economy needs planks",
             "consume=log:2",
@@ -59,3 +64,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

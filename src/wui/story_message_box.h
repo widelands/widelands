@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -35,13 +34,15 @@
  */
 struct StoryMessageBox : public UI::Window {
 	StoryMessageBox(Widelands::Game* game,
-	                const Widelands::Coords coords,
+	                Widelands::Coords coords,
 	                const std::string& title,
 	                const std::string& body,
 	                int32_t x,
 	                int32_t y,
 	                uint32_t w,
-	                uint32_t h);
+	                uint32_t h,
+	                bool modal,
+	                bool allow_next_scenario);
 
 protected:
 	/// Avoid being closed by right-click.
@@ -57,12 +58,15 @@ protected:
 private:
 	/// Get the game running again and close the window.
 	void clicked_ok();
+	void clicked_next_scenario();
+	void clicked_main_menu();
+	void resume_game();
 
 	// UI elements
 	UI::Box main_box_;
 	UI::Box button_box_;
 	UI::MultilineTextarea textarea_;
-	UI::Button ok_;
+	UI::Button ok_, next_scenario_, main_menu_;
 
 	const uint32_t desired_speed_;  // Remember the previous game speed
 	Widelands::Game* game_;         // For controlling the game speed

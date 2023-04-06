@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 by the Widelands Development Team
+ * Copyright (C) 2019-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -26,18 +25,24 @@
 /// An imageset for a horizontal toolbar
 struct ToolbarImageset {
 	ToolbarImageset();
-	ToolbarImageset(const LuaTable& table);
+	explicit ToolbarImageset(const LuaTable& table);
 
 	/// Will be painted beyond the left corner of the toolbar
-	const Image* left_corner;
+	const Image* bottom_left_corner;
 	/// Will be repeated between the left corner and the center
-	const Image* left;
+	const Image* bottom_left;
 	/// Will be painted at the center
-	const Image* center;
+	const Image* bottom_center;
 	/// Will be repeated between the right corner and the center
-	const Image* right;
+	const Image* bottom_right;
 	/// Will be painted beyond the right corner of the toolbar
-	const Image* right_corner;
+	const Image* bottom_right_corner;
+
+	const Image* top_left_corner;
+	const Image* top_left;
+	const Image* top_center;
+	const Image* top_right;
+	const Image* top_right_corner;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_TOOLBAR_IMAGESET_H

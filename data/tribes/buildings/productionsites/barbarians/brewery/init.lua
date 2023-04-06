@@ -1,31 +1,21 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_brewery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Brewery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
-   enhancement_cost = {
-      log = 3,
-      granite = 1,
-      reed = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      log = 1,
-      granite = 1
-   },
-
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 60, 59 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 60, 59 },
       },
    },
@@ -45,14 +35,17 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because ...
-         descname = _"brewing strong beer",
+         descname = _("brewing strong beer"),
          actions = {
+            -- time total: 30.4 + 30 + 3.6 = 64 sec
             "return=skipped unless economy needs beer_strong",
             "consume=water wheat",
-            "sleep=duration:30s",
+            "sleep=duration:30s400ms",
             "animate=working duration:30s",
             "produce=beer_strong"
          }
       },
    },
 }
+
+pop_textdomain()

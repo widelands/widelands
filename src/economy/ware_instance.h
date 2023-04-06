@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,18 +12,18 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_ECONOMY_WARE_INSTANCE_H
 #define WL_ECONOMY_WARE_INSTANCE_H
 
+#include <memory>
+
 #include "economy/transfer.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/ware_descr.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -54,10 +54,10 @@ class WareInstance : public MapObject {
 	MO_DESCR(WareDescr)
 
 public:
-	WareInstance(DescriptionIndex, const WareDescr* const);
+	WareInstance(DescriptionIndex, const WareDescr*);
 	~WareInstance() override;
 
-	MapObject* get_location(EditorGameBase& egbase) {
+	MapObject* get_location(const EditorGameBase& egbase) const {
 		return location_.get(egbase);
 	}
 	Economy* get_economy() const {
@@ -92,11 +92,11 @@ public:
 
 private:
 	ObjectPointer location_;
-	Economy* economy_;
+	Economy* economy_{nullptr};
 	DescriptionIndex descr_index_;
 
-	IdleWareSupply* supply_;
-	Transfer* transfer_;
+	std::unique_ptr<IdleWareSupply> supply_;
+	Transfer* transfer_{nullptr};
 	ObjectPointer transfer_nextstep_;  ///< cached PlayerImmovable, can be 0
 
 	// loading and saving stuff
@@ -120,8 +120,7 @@ public:
 	}
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader*
-	load(EditorGameBase&, MapObjectLoader&, FileRead&, const TribesLegacyLookupTable& lookup_table);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 };
 }  // namespace Widelands
 

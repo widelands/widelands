@@ -1,22 +1,39 @@
+/*
+ * Copyright (C) 2002-2023 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
 #ifndef WL_WUI_SAVEGAMELOADER_H
 #define WL_WUI_SAVEGAMELOADER_H
 
 #include <string>
 #include <vector>
 
+#include "base/string.h"
 #include "game_io/game_preload_packet.h"
 #include "wui/savegamedata.h"
 
 class SavegameLoader {
 public:
-	SavegameLoader(Widelands::Game& game);
-	virtual ~SavegameLoader() {
-	}
+	explicit SavegameLoader(Widelands::Game& game);
+	virtual ~SavegameLoader() = default;
 	std::vector<SavegameData> load_files(const std::string& directory);
 
 private:
-	virtual bool is_valid_gametype(const SavegameData& gamedata) const = 0;
-	virtual std::string get_savename(const std::string& gamefilename) const;
+	[[nodiscard]] virtual bool is_valid_gametype(const SavegameData& gamedata) const = 0;
 
 	void add_general_information(SavegameData& gamedata,
 	                             const Widelands::GamePreloadPacket& gpdp) const;
@@ -28,41 +45,51 @@ private:
 	void load_savegame_from_file(const std::string& gamefilename,
 	                             std::vector<SavegameData>& loaded_games) const;
 	void load(const std::string& to_be_loaded, std::vector<SavegameData>& loaded_games) const;
+	[[nodiscard]] virtual bool is_valid_savegame(const std::string& filename) const {
+		return ends_with(filename, kSavegameExtension);
+	}
 
 	Widelands::Game& game_;
 };
 
 class ReplayLoader : public SavegameLoader {
 public:
-	ReplayLoader(Widelands::Game& game);
+	explicit ReplayLoader(Widelands::Game& game);
 
 private:
-	bool is_valid_gametype(const SavegameData& gamedata) const override;
-	std::string get_savename(const std::string& gamefilename) const override;
+	[[nodiscard]] bool is_valid_savegame(const std::string& filename) const override {
+		return ends_with(filename, kReplayExtension);
+	}
+
+	[[nodiscard]] bool is_valid_gametype(const SavegameData& gamedata) const override;
 };
 
 class MultiPlayerLoader : public SavegameLoader {
 public:
-	MultiPlayerLoader(Widelands::Game& game);
+	explicit MultiPlayerLoader(Widelands::Game& game);
 
 private:
-	bool is_valid_gametype(const SavegameData& gamedata) const override;
+	[[nodiscard]] bool is_valid_gametype(const SavegameData& gamedata) const override;
 };
 
 class SinglePlayerLoader : public SavegameLoader {
 public:
-	SinglePlayerLoader(Widelands::Game& game);
+	explicit SinglePlayerLoader(Widelands::Game& game);
 
 private:
-	bool is_valid_gametype(const SavegameData& gamedata) const override;
+	[[nodiscard]] bool is_valid_gametype(const SavegameData& gamedata) const override;
 };
 
 class EverythingLoader : public SavegameLoader {
 public:
-	EverythingLoader(Widelands::Game& game);
+	explicit EverythingLoader(Widelands::Game& game);
 
 private:
-	bool is_valid_gametype(const SavegameData& gamedata) const override;
+	[[nodiscard]] bool is_valid_savegame(const std::string& filename) const override {
+		return ends_with(filename, kSavegameExtension) || ends_with(filename, kReplayExtension);
+	}
+
+	[[nodiscard]] bool is_valid_gametype(const SavegameData& gamedata) const override;
 };
 
 #endif  // WL_WUI_SAVEGAMELOADER_H

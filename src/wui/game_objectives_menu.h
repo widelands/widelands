@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,36 +12,47 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_WUI_GAME_OBJECTIVES_MENU_H
 #define WL_WUI_GAME_OBJECTIVES_MENU_H
 
+#include "logic/game.h"
+#include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {
 class Objective;
-}
-class InteractivePlayer;
+}  // namespace Widelands
+class InteractiveBase;
 
 ///  Shows the not already fulfilled objectives.
 class GameObjectivesMenu : public UI::UniqueWindow {
 public:
-	GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Registry&);
+	GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWindow::Registry&);
 	void think() override;
+	void draw(RenderTarget&) override;
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kObjectives;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
-	InteractivePlayer& iplayer() const;
+	InteractivePlayer& iplayer_;
 	void selected(uint32_t);
 
+	UI::Box objective_box_;
+
 	using ListType = UI::Listselect<const Widelands::Objective&>;
-	ListType list;
-	UI::MultilineTextarea objectivetext;
+	ListType objective_list_;
+	UI::MultilineTextarea objective_text_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_OBJECTIVES_MENU_H

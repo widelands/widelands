@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,16 +12,17 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "logic/map_objects/map_object_program.h"
 
-#include <boost/regex.hpp>
+#include <cstdlib>
+#include <regex>
 
-#include "io/filesystem/layered_filesystem.h"
+#include "base/log.h"
+#include "base/math.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
 #include "sound/sound_handler.h"
@@ -81,7 +82,7 @@ the tooltips:
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start doing something because ...
-         descname = _"doing something",
+         descname = _("doing something"),
          actions = {
             "call=program_name2",
             "call=program_name3",
@@ -122,7 +123,8 @@ const std::string& MapObjectProgram::name() const {
 std::vector<std::string> MapObjectProgram::split_string(const std::string& s,
                                                         const char* const separators) {
 	std::vector<std::string> result;
-	for (std::string::size_type pos = 0, endpos;
+	std::string::size_type endpos;
+	for (std::string::size_type pos = 0;
 	     (pos = s.find_first_not_of(separators, pos)) != std::string::npos; pos = endpos) {
 		endpos = s.find_first_of(separators, pos);
 		result.push_back(s.substr(pos, endpos - pos));
@@ -138,14 +140,15 @@ MapObjectProgram::read_int(const std::string& input, int min_value, int64_t max_
 	char* endp;
 	int64_t const value = strtol(input.c_str(), &endp, 0);
 	result = value;
-	if (*endp || static_cast<int64_t>(result) != value) {
+	if ((*endp != 0) || static_cast<int64_t>(result) != value) {
 		throw GameDataError("Expected a number but found \"%s\"", input.c_str());
 	}
 	if (value < min_value) {
 		throw GameDataError("Expected a number >= %d but found \"%s\"", min_value, input.c_str());
 	}
 	if (value > max_value) {
-		throw GameDataError("Expected a number <= %ld but found \"%s\"", max_value, input.c_str());
+		throw GameDataError(
+		   "Expected a number <= %" PRIi64 " but found \"%s\"", max_value, input.c_str());
 	}
 	return result;
 }
@@ -183,7 +186,7 @@ You can combine these units in descending order as you please. Examples:
 */
 Duration MapObjectProgram::read_duration(const std::string& input, const MapObjectDescr& descr) {
 	// Convert unit part into milliseconds
-	auto as_ms = [](Duration number, const std::string& unit) {
+	auto as_ms = [](uint32_t number, const std::string& unit) {
 		if (unit == "s") {
 			return number * 1000;
 		}
@@ -197,34 +200,34 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 	};
 
 	try {
-		boost::smatch match;
-		boost::regex one_unit("^(\\d+)(s|m|ms)$");
-		if (boost::regex_search(input, match, one_unit)) {
-			return as_ms(read_positive(match[1], endless()), match[2]);
+		std::smatch match;
+		std::regex one_unit("^(\\d+)(s|m|ms)$");
+		if (std::regex_search(input, match, one_unit)) {
+			return Duration(as_ms(read_positive(match[1], Duration().get()), match[2]));
 		}
-		boost::regex two_units("^(\\d+)(m|s)(\\d+)(s|ms)$");
-		if (boost::regex_search(input, match, two_units)) {
+		std::regex two_units("^(\\d+)(m|s)(\\d+)(s|ms)$");
+		if (std::regex_search(input, match, two_units)) {
 			if (match[2] == match[4]) {
 				std::string unit(match[2]);
 				throw GameDataError("has duplicate unit '%s'", unit.c_str());
 			}
-			const Duration part1 = as_ms(read_positive(match[1], endless()), match[2]);
-			const Duration part2 = as_ms(read_positive(match[3], endless()), match[4]);
+			const Duration part1(as_ms(read_positive(match[1], Duration().get()), match[2]));
+			const Duration part2(as_ms(read_positive(match[3], Duration().get()), match[4]));
 			return part1 + part2;
 		}
-		boost::regex three_units("^(\\d+)(m)(\\d+)(s)(\\d+)(ms)$");
-		if (boost::regex_search(input, match, three_units)) {
-			const Duration part1 = as_ms(read_positive(match[1], endless()), match[2]);
-			const Duration part2 = as_ms(read_positive(match[3], endless()), match[4]);
-			const Duration part3 = as_ms(read_positive(match[5], endless()), match[6]);
+		std::regex three_units("^(\\d+)(m)(\\d+)(s)(\\d+)(ms)$");
+		if (std::regex_search(input, match, three_units)) {
+			const Duration part1(as_ms(read_positive(match[1], Duration().get()), match[2]));
+			const Duration part2(as_ms(read_positive(match[3], Duration().get()), match[4]));
+			const Duration part3(as_ms(read_positive(match[5], Duration().get()), match[6]));
 			return part1 + part2 + part3;
 		}
 		// TODO(GunChleoc): Compatibility, remove unitless option after v1.0
-		boost::regex without_unit("^(\\d+)$");
-		if (boost::regex_match(input, without_unit)) {
-			log("WARNING: Duration '%s' without unit in %s's program is deprecated\n", input.c_str(),
-			    descr.name().c_str());
-			return read_positive(input, endless());
+		std::regex without_unit("^(\\d+)$");
+		if (std::regex_match(input, without_unit)) {
+			log_warn("Duration '%s' without unit in %s's program is deprecated", input.c_str(),
+			         descr.name().c_str());
+			return Duration(read_positive(input, Duration().get()));
 		}
 	} catch (const WException& e) {
 		throw GameDataError(
@@ -236,6 +239,7 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 	   input.c_str());
 }
 
+// Percent is implemented in base/math.h so that we can use it in animations too
 /* RST
 
 .. _map_object_programs_datatypes_percent:
@@ -254,27 +258,6 @@ Maximum value is ``100%``. Examples:
 * ``25.13%``
 
 */
-unsigned MapObjectProgram::read_percent_to_int(const std::string& input) {
-	boost::smatch match;
-	boost::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
-	if (boost::regex_search(input, match, re)) {
-		// Convert to range
-		uint64_t result =
-		   100U * std::stoul(match[1]) +
-		   (match[3].str().empty() ?
-		       0U :
-		       match[3].str().size() == 1 ? 10U * std::stoul(match[3]) : std::stoul(match[3]));
-
-		if (result > kMaxProbability) {
-			throw GameDataError(
-			   "Given percentage of '%s' is greater than the 100%% allowed", input.c_str());
-		}
-		return result;
-	}
-	throw GameDataError(
-	   "Wrong format for percentage '%s'. Must look like '25%%', '25.4%%' or '25.26%%'.",
-	   input.c_str());
-}
 
 MapObjectProgram::ProgramParseInput
 MapObjectProgram::parse_program_string(const std::string& line) {
@@ -292,7 +275,7 @@ MapObjectProgram::read_key_value_pair(const std::string& input,
 	const std::string key = input.substr(0, idx);
 
 	if (!expected_key.empty()) {
-		if (idx == input.npos) {
+		if (idx == std::string::npos) {
 			throw GameDataError("Empty value in '%s' for separator '%c'\n", input.c_str(), separator);
 		}
 		if (key != expected_key) {
@@ -301,7 +284,7 @@ MapObjectProgram::read_key_value_pair(const std::string& input,
 		}
 	}
 
-	return std::make_pair(key, idx == input.npos ? default_value : input.substr(idx + 1));
+	return std::make_pair(key, idx == std::string::npos ? default_value : input.substr(idx + 1));
 }
 
 /* RST
@@ -350,7 +333,7 @@ actions also have an animation associated with them that will be played instead,
 */
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
    const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
-	if (arguments.size() < 1 || arguments.size() > 2) {
+	if (arguments.empty() || arguments.size() > 2) {
 		throw GameDataError("Usage: animate=<animation_name> [duration:<duration>]");
 	}
 
@@ -372,9 +355,9 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 		} else if (item.second.empty()) {
 			// TODO(GunChleoc): Compatibility, remove this option after v1.0
 			result.duration = read_duration(item.first, descr);
-			log("WARNING: 'animate' program without parameter name is deprecated, please use "
-			    "'animate=<animation_name> duration:<duration>' in %s\n",
-			    descr.name().c_str());
+			log_warn("'animate' program without parameter name is deprecated, please use "
+			         "'animate=<animation_name> duration:<duration>' in %s\n",
+			         descr.name().c_str());
 		} else {
 			throw GameDataError("Unknown argument '%s'. Usage: <animation_name> [duration:<duration>]",
 			                    arguments.at(1).c_str());
@@ -426,7 +409,7 @@ playsound
       -- Production site
      produce_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
-         descname = _"forging an ax",
+         descname = _("forging an ax"),
          actions = {
             "return=skipped unless economy needs ax",
             "consume=coal iron",
@@ -456,17 +439,17 @@ MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments
 
 	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.at(1), ':');
 	if (item.first == "priority") {
-		result.priority = read_percent_to_int(item.second);
+		result.priority = math::read_percent_to_int(item.second);
 	} else if (item.second.empty()) {
 		if (item.first == "allow_multiple") {
 			result.allow_multiple = true;
 		} else {
 			// TODO(GunChleoc): Compatibility, remove this option after v1.0
-			result.priority = (read_positive(arguments.at(1)) * kMaxProbability * 2U) / 256;
-			log("WARNING: Deprecated usage in %s. Please convert playsound's 'priority' option to "
-			    "percentage, like this: "
-			    "playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]\n",
-			    descr.name().c_str());
+			result.priority = (read_positive(arguments.at(1)) * math::k100PercentAsInt * 2U) / 256;
+			log_warn("Deprecated usage in %s. Please convert playsound's 'priority' option to "
+			         "percentage, like this: "
+			         "playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]\n",
+			         descr.name().c_str());
 		}
 	} else {
 		throw GameDataError("Unknown argument '%s'. Usage: playsound=<sound_dir/sound_name> "

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,29 +12,30 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "ui_basic/listselect.h"
 
+#include <memory>
+
 #include <SDL_mouse.h>
 #include <SDL_timer.h>
 
-#include "base/log.h"
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_options.h"
 
 constexpr int kMargin = 2;
 constexpr int kHotkeyGap = 16;
+constexpr int kIndentStrength = 20;
 
 namespace UI {
 
@@ -43,6 +44,7 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
                                          const Image* init_pic,
                                          const std::string& tooltip_text,
                                          const std::string& hotkey_text,
+                                         const unsigned i,
                                          const TableStyleInfo& style)
    : name(init_name),
      entry_(init_entry),
@@ -50,10 +52,19 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
      tooltip(tooltip_text),
      name_alignment(i18n::has_rtl_character(init_name.c_str(), 20) ? Align::kRight : Align::kLeft),
      hotkey_alignment(i18n::has_rtl_character(hotkey_text.c_str(), 20) ? Align::kRight :
-                                                                         Align::kLeft) {
+                                                                         Align::kLeft),
+     indent(i) {
 	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
 	rendered_hotkey =
 	   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
+}
+
+inline BaseListselect::EntryRecord::~EntryRecord() {
+	// This ensures that the last instance of this smart pointer does
+	// not go out of scope in a thread that is not the main thread.
+	std::shared_ptr<const UI::RenderedText> r1 = rendered_name;
+	std::shared_ptr<const UI::RenderedText> r2 = rendered_hotkey;
+	NoteThreadSafeFunction::instantiate([r1, r2]() {}, false);
 }
 
 /**
@@ -72,27 +83,21 @@ BaseListselect::BaseListselect(Panel* const parent,
                                const uint32_t h,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
-   : Panel(parent, x, y, w, h),
-     widest_text_(0),
-     widest_hotkey_(0),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),
-     scrollpos_(0),
+   : Panel(parent, style, x, y, w, h),
+
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, 0, h, style),
+
      selection_(no_selection_index()),
-     last_click_time_(-10000),
+
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     table_style_(g_gr->styles().table_style(style)),
-     background_style_(selection_mode == ListselectLayout::kDropdown ?
-                          g_gr->styles().dropdown_style(style) :
-                          nullptr),
-     lineheight_(text_height(table_style_.enabled()) + kMargin),
-     notify_on_delete_(nullptr) {
+     lineheight_(text_height(table_style().enabled()) + kMargin) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
-		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");
+		check_pic_ = g_image_cache->get("images/ui_basic/list_selected.png");
 		max_pic_width_ = check_pic_->width();
 		int pic_h = check_pic_->height();
 		if (pic_h > lineheight_) {
@@ -110,9 +115,18 @@ BaseListselect::BaseListselect(Panel* const parent,
  */
 BaseListselect::~BaseListselect() {
 	clear();
-	if (notify_on_delete_) {
-		notify_on_delete_->notify_list_deleted();
+	if (linked_dropdown != nullptr) {
+		linked_dropdown->notify_list_deleted();
 	}
+}
+
+inline const UI::TableStyleInfo& BaseListselect::table_style() const {
+	return g_style_manager->table_style(panel_style_);
+}
+inline const UI::PanelStyleInfo* BaseListselect::background_style() const {
+	return selection_mode_ == ListselectLayout::kDropdown ?
+             g_style_manager->dropdown_style(panel_style_) :
+             nullptr;
 }
 
 /**
@@ -127,7 +141,7 @@ void BaseListselect::clear() {
 	scrollbar_.set_steps(1);
 	scrollpos_ = 0;
 	selection_ = no_selection_index();
-	last_click_time_ = -10000;
+	last_click_time_ = std::numeric_limits<uint32_t>::max();
 	last_selection_ = no_selection_index();
 }
 
@@ -143,11 +157,12 @@ void BaseListselect::add(const std::string& name,
                          const Image* pic,
                          bool const sel,
                          const std::string& tooltip_text,
-                         const std::string& hotkey) {
-	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, table_style_);
+                         const std::string& hotkey,
+                         const unsigned indent) {
+	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, indent, table_style());
 
 	int entry_height = lineheight_;
-	if (pic) {
+	if (pic != nullptr) {
 		int w = pic->width();
 		int h = pic->height();
 		entry_height = (h >= entry_height) ? h : entry_height;
@@ -225,6 +240,7 @@ void BaseListselect::select(const uint32_t i) {
 		entry_records_[i]->pic = check_pic_;
 	}
 	selection_ = i;
+	scroll_to_selection();
 
 	selected(selection_);
 }
@@ -234,7 +250,7 @@ void BaseListselect::select(const uint32_t i) {
  * selection
  */
 bool BaseListselect::has_selection() const {
-	return selection_ != no_selection_index();
+	return get_selected() != no_selection_index();
 }
 
 /**
@@ -245,7 +261,7 @@ bool BaseListselect::has_selection() const {
  */
 uint32_t BaseListselect::get_selected() const {
 	return selection_ < entry_records_.size() ? entry_records_[selection_]->entry_ :
-	                                            no_selection_index();
+                                               no_selection_index();
 }
 
 /**
@@ -290,7 +306,7 @@ int BaseListselect::calculate_desired_width() {
 	widest_text_ = 0;
 	widest_hotkey_ = 0;
 	for (const EntryRecord* er : entry_records_) {
-		const int current_text_width = er->rendered_name->width();
+		const int current_text_width = er->rendered_name->width() + (er->indent * kIndentStrength);
 		if (current_text_width > widest_text_) {
 			widest_text_ = current_text_width;
 		}
@@ -301,26 +317,31 @@ int BaseListselect::calculate_desired_width() {
 	}
 
 	// Add up the width
-	int text_width = widest_text_;
+	int txt_width = widest_text_;
 	if (widest_hotkey_ > 0) {
-		text_width += kHotkeyGap;
-		text_width += widest_hotkey_;
+		txt_width += kHotkeyGap;
+		txt_width += widest_hotkey_;
 	}
 
-	const int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
+	const int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
 	const int old_width = get_w();
-	return text_width + picw + 8 + old_width - get_eff_w();
+	return txt_width + picw + 8 + old_width - get_eff_w();
 }
 
 void BaseListselect::layout() {
-	scrollbar_.set_size(scrollbar_.get_w(), get_h());
-	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
-	scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
-	scrollbar_.set_singlestepsize(get_lineheight());
 	const int steps = entry_records_.size() * get_lineheight() - get_h();
 	scrollbar_.set_steps(steps);
-	if (scrollbar_.is_enabled() && selection_mode_ == ListselectLayout::kDropdown) {
-		scrollbar_.set_steps(steps + kMargin);
+	if (scrollbar_.is_enabled()) {
+		scrollbar_.set_size(Scrollbar::kSize, get_h());
+		scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+		scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
+		scrollbar_.set_singlestepsize(get_lineheight());
+		if (selection_mode_ == ListselectLayout::kDropdown) {
+			scrollbar_.set_steps(steps + kMargin);
+		}
+	} else {
+		// Prevent invisible child
+		scrollbar_.set_size(0, get_h());
 	}
 	// For dropdowns, autoincrease width
 	if (selection_mode_ == ListselectLayout::kDropdown) {
@@ -341,8 +362,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
-	if (background_style_ != nullptr) {
-		draw_background(dst, *background_style_);
+	if (const UI::PanelStyleInfo* s = background_style()) {
+		draw_background(dst, *s);
 	}
 
 	if (selection_mode_ == ListselectLayout::kDropdown) {
@@ -365,9 +386,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
 		const EntryRecord& er = *entry_records_[idx];
-		const int text_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
+		const int txt_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
 
-		int lineheight = std::max(get_lineheight(), text_height);
+		int lineheight = std::max(get_lineheight(), txt_height);
 
 		// Don't draw over the bottom edge
 		lineheight = std::min(eff_h - y, lineheight);
@@ -398,20 +419,22 @@ void BaseListselect::draw(RenderTarget& dst) {
 			}
 		}
 
-		int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
+		int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
 
 		// Now draw pictures
-		if (er.pic) {
-			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+		if (er.pic != nullptr) {
+			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
+                              get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
+                              kIndentStrength * er.indent + 1,
 			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);
 		}
 
 		// Fix vertical position for mixed font heights
-		if (get_lineheight() > text_height) {
-			point.y += (lineheight_ - text_height) / 2;
+		if (get_lineheight() > txt_height) {
+			point.y += (lineheight_ - txt_height) / 2;
 		} else {
-			point.y -= (text_height - lineheight_) / 2;
+			point.y -= (txt_height - lineheight_) / 2;
 		}
 
 		// Don't draw over the bottom edge
@@ -429,9 +452,11 @@ void BaseListselect::draw(RenderTarget& dst) {
 			} else if (widest_hotkey_ > 0) {
 				text_point.x += widest_hotkey_ + kHotkeyGap;
 			}
+			text_point.x -= kIndentStrength * er.indent;
 		} else {
 			hotkey_point.x = maxw - widest_hotkey_;
 			text_point.x += picw;
+			text_point.x += kIndentStrength * er.indent;
 		}
 
 		// Position the text and hotkey according to their alignment
@@ -448,6 +473,13 @@ void BaseListselect::draw(RenderTarget& dst) {
 			er.rendered_hotkey->draw(dst, hotkey_point, Recti(0, 0, maxw - widest_text_, lineheight),
 			                         UI::Align::kLeft, RenderedText::CropMode::kSelf);
 		}
+
+		// Highlight text of current filter
+		Recti highlight_rect = get_highlight_rect(er.name, text_point.x, y);
+		if (highlight_rect.w != 0) {
+			dst.brighten_rect(highlight_rect, -ms_darken_value * 2);
+		}
+
 		y += get_lineheight();
 		++idx;
 	}
@@ -456,14 +488,31 @@ void BaseListselect::draw(RenderTarget& dst) {
 /**
  * Handle mouse wheel events
  */
-bool BaseListselect::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	return scrollbar_.handle_mousewheel(which, x, y);
+bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	const uint32_t selected_idx = selection_index();
+	uint32_t max = size();
+	if (max > 0) {
+		--max;
+	} else {
+		return false;
+	}
+	if (y != 0 && matches_keymod(modstate, KMOD_NONE)) {
+		if (selected_idx > max) {
+			select(y < 0 ? 0 : max);
+		} else if (y > 0 && selected_idx > 0) {
+			select(selected_idx - 1);
+		} else if (y < 0 && selected_idx < max) {
+			select(selected_idx + 1);
+		}
+		return scrollbar_.handle_mousewheel(x, y, modstate);
+	}
+	return false;
 }
 
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
+bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t y) {
 	switch (btn) {
 
 	case SDL_BUTTON_LEFT: {
@@ -478,6 +527,11 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 
 		y = (y + scrollpos_) / get_lineheight();
 		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
+			if (selection_mode_ == ListselectLayout::kDropdown) {
+				set_visible(false);
+				linked_dropdown->disable_textinput();
+				return true;
+			}
 			return false;
 		}
 		play_click();
@@ -485,8 +539,8 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 		clicked();
 
 		if  //  check if doubleclicked
-		   (time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
-		    selection_ != no_selection_index()) {
+		   (time >= real_last_click_time && time - real_last_click_time < DOUBLE_CLICK_INTERVAL &&
+		    last_selection_ == selection_ && selection_ != no_selection_index()) {
 			double_clicked(selection_);
 		}
 
@@ -497,7 +551,8 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 	}
 }
 
-bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int32_t) {
+bool BaseListselect::handle_mousemove(
+   uint8_t /*state*/, int32_t /*x*/, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	y = (y + scrollpos_) / get_lineheight();
 	if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
 		set_tooltip("");
@@ -512,35 +567,80 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		uint32_t selected_idx;
+		switch (code.sym) {
+		case SDLK_BACKSPACE:
+			if (linked_dropdown != nullptr) {
+				linked_dropdown->delete_last_of_filter();
+				return true;
+			}
+			return UI::Panel::handle_key(down, code);
+		case SDLK_ESCAPE:
+		case SDLK_RETURN:
+			if (linked_dropdown != nullptr && (SDL_GetModState() & KMOD_CTRL) == 0) {
+				return linked_dropdown->handle_key(down, code);
+			}
+			return UI::Panel::handle_key(down, code);
+		default:
+			break;
+		}
+
+		bool handle = true;
+		uint32_t selected_idx = selection_index();
+		const uint32_t max = empty() ? 0 : size() - 1;
+		const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
 		switch (code.sym) {
 		case SDLK_DOWN:
-			selected_idx = selection_index() + 1;
-			if (selected_idx < size()) {
-				select(selected_idx);
+			if (!has_selection()) {
+				selected_idx = 0;
+			} else if (selected_idx < max) {
+				++selected_idx;
 			}
-			if ((selection_index() + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
-				int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
-				scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
-				scrollbar_.set_scrollpos(scrollpos_);
-			}
-			return true;
+			break;
 		case SDLK_UP:
-			selected_idx = selection_index();
-			if (selected_idx > 0) {
-				select(selected_idx - 1);
+			if (!has_selection()) {
+				selected_idx = max;
+			} else if (selected_idx > 0) {
+				--selected_idx;
 			}
-			if (selection_index() * get_lineheight() < scrollpos_) {
-				scrollpos_ = selection_index() * get_lineheight();
-				scrollbar_.set_scrollpos(scrollpos_);
-			}
-			return true;
+			break;
+		case SDLK_HOME:
+			selected_idx = 0;
+			break;
+		case SDLK_END:
+			selected_idx = max;
+			break;
+		case SDLK_PAGEDOWN:
+			selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
+			break;
+		case SDLK_PAGEUP:
+			selected_idx =
+			   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
+			break;
 		default:
+			handle = false;
 			break;  // not handled
 		}
+		assert((selected_idx <= max) ^ (selected_idx == no_selection_index()));
+		if (handle) {
+			select(selected_idx);
+			return true;
+		}
 	}
-
 	return UI::Panel::handle_key(down, code);
+}
+
+void BaseListselect::scroll_to_selection() {
+	if (!has_selection()) {
+		return;
+	}
+	if (selection_index() * get_lineheight() < scrollpos_) {
+		scrollpos_ = selection_index() * get_lineheight();
+		scrollbar_.set_scrollpos(scrollpos_);
+	} else if ((selection_index() + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
+		int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
+		scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
+		scrollbar_.set_scrollpos(scrollpos_);
+	}
 }
 
 /**
@@ -565,10 +665,41 @@ void BaseListselect::remove(const uint32_t i) {
  */
 void BaseListselect::remove(const char* const str) {
 	for (uint32_t i = 0; i < entry_records_.size(); ++i) {
-		if (!strcmp(entry_records_[i]->name.c_str(), str)) {
+		if (strcmp(entry_records_[i]->name.c_str(), str) == 0) {
 			remove(i);
 			return;
 		}
 	}
 }
+
+Recti BaseListselect::get_highlight_rect(const std::string& text, int x, int y) {
+
+	if (linked_dropdown == nullptr) {
+		return Recti();
+	}
+
+	std::string text2 = std::string(text);
+	// UI::g_fh::render ignores spaces at the beginning and end of a string.
+	replace_all(text2, " ", "_");
+
+	std::string filter = linked_dropdown->get_filter_text();
+	replace_all(filter, " ", "_");
+
+	std::size_t start = to_lower(text2).find(filter);
+	if (start == std::string::npos) {
+		return Recti();
+	}
+
+	std::shared_ptr<const UI::RenderedText> rendered_start = UI::g_fh->render(
+	   as_richtext_paragraph(richtext_escape(text2.substr(0, start)), table_style().enabled()));
+
+	std::shared_ptr<const UI::RenderedText> rendered_substring =
+	   UI::g_fh->render(as_richtext_paragraph(
+	      richtext_escape(text2.substr(start, filter.length())), table_style().enabled()));
+
+	Recti highlight_rect(x + rendered_start->width(), y, rendered_substring->width(), lineheight_);
+
+	return highlight_rect;
+}
+
 }  // namespace UI

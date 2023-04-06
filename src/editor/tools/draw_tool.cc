@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2020 by the Widelands Development Team
+ * Copyright (C) 2012-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -30,31 +29,28 @@ void EditorDrawTool::add_action(const EditorToolAction& ac, EditorActionArgs& ar
 
 int32_t
 EditorDrawTool::handle_click_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
-                                  EditorInteractive& /* parent */,
                                   EditorActionArgs* args,
                                   Widelands::Map* /* map */) {
 
-	for (std::list<EditorToolAction*>::iterator i = args->draw_actions.begin();
-	     i != args->draw_actions.end(); ++i) {
-		(*i)->tool.handle_click(static_cast<EditorTool::ToolIndex>((*i)->i), (*i)->center,
-		                        (*i)->parent, (*i)->args, &((*i)->map));
+	for (EditorToolAction* action : args->draw_actions) {
+		action->tool.handle_click(
+		   static_cast<EditorTool::ToolIndex>(action->i), action->center, action->args, &action->map);
 	}
 	return args->draw_actions.size();
 }
 
 int32_t
 EditorDrawTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
-                                 EditorInteractive& /* parent */,
                                  EditorActionArgs* args,
                                  Widelands::Map* /* map */) {
 	for (std::list<EditorToolAction*>::reverse_iterator i = args->draw_actions.rbegin();
 	     i != args->draw_actions.rend(); ++i) {
-		(*i)->tool.handle_undo(static_cast<EditorTool::ToolIndex>((*i)->i), (*i)->center,
-		                       (*i)->parent, (*i)->args, &((*i)->map));
+		(*i)->tool.handle_undo(
+		   static_cast<EditorTool::ToolIndex>((*i)->i), (*i)->center, (*i)->args, &((*i)->map));
 	}
 	return args->draw_actions.size();
 }
 
-EditorActionArgs EditorDrawTool::format_args_impl(EditorInteractive& parent) {
-	return EditorTool::format_args_impl(parent);
+EditorActionArgs EditorDrawTool::format_args_impl() {
+	return EditorTool::format_args_impl();
 }

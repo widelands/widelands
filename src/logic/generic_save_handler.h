@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_GENERIC_SAVE_HANDLER_H
 #define WL_LOGIC_GENERIC_SAVE_HANDLER_H
 
+#include <cstdint>
 #include <functional>
 
 #include "io/filesystem/filesystem.h"
@@ -53,11 +53,11 @@ public:
 
 	explicit GenericSaveHandler(std::function<void(FileSystem&)>
 	                               do_save,  // function that actually saves data to the filesystem
-	                            std::string complete_filename,
+	                            const std::string& complete_filename,
 	                            FileSystem::Type type)
 	   : do_save_(do_save),
 	     complete_filename_(complete_filename),
-	     dir_(FileSystem::fs_dirname(complete_filename.c_str())),
+	     dir_(FileSystem::fs_dirname(complete_filename)),
 	     filename_(FileSystem::fs_filename(complete_filename.c_str())),
 	     type_(type),
 	     error_(static_cast<Error>(1132)) {

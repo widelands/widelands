@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2002-2023 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
 #include "network/netclient.h"
 
 #include <memory>
@@ -9,10 +27,9 @@ std::unique_ptr<NetClient> NetClient::connect(const NetAddress& host) {
 	std::unique_ptr<NetClient> ptr(new NetClient(host));
 	if (ptr->is_connected()) {
 		return ptr;
-	} else {
-		ptr.reset();
-		return ptr;
 	}
+	ptr.reset();
+	return ptr;
 }
 
 NetClient::~NetClient() {
@@ -48,15 +65,17 @@ void NetClient::send(const SendPacket& packet, NetPriority priority) {
 
 NetClient::NetClient(const NetAddress& host) {
 
-	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
+	const asio::ip::tcp::endpoint destination(host.ip, host.port);
 
-	log("[NetClient]: Trying to connect to %s:%u ... ", host.ip.to_string().c_str(), host.port);
+	verb_log_info(
+	   "[NetClient]: Trying to connect to %s:%u ... ", host.ip.to_string().c_str(), host.port);
 	conn_ = BufferedConnection::connect(host);
 	if (conn_) {
-		log("success.\n");
+		verb_log_info("success.");
 		assert(is_connected());
 	} else {
-		log("failed.\n");
+		log_err(
+		   "[NetClient]: Trying to connect to %s:%u failed!", host.ip.to_string().c_str(), host.port);
 		assert(!is_connected());
 	}
 }

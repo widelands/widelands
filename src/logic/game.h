@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,6 +23,7 @@
 
 #include "base/md5.h"
 #include "base/random.h"
+#include "economy/flag_job.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
@@ -38,7 +38,7 @@ class GameController;
 namespace Widelands {
 
 /// How often are statistics to be sampled.
-constexpr uint32_t kStatisticsSampleTime = 30000;
+constexpr Duration kStatisticsSampleTime(30 * 1000);
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
 
@@ -53,6 +53,9 @@ enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
 class TrainingSite;
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+class TrainingWheels;
+#endif
 enum class StockPolicy;
 
 enum {
@@ -163,8 +166,12 @@ public:
 	Game();
 	~Game() override;
 
+	bool is_game() const override {
+		return true;
+	}
+
 	// life cycle
-	void set_game_controller(GameController*);
+	void set_game_controller(std::shared_ptr<GameController>);
 	GameController* game_controller();
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
@@ -174,25 +181,40 @@ public:
 
 	enum class StartGameType { kMap, kSinglePlayerScenario, kMultiPlayerScenario, kSaveGame };
 
-	bool run(StartGameType,
-	         const std::string& script_to_run,
-	         bool replay,
-	         const std::string& prefix_for_replays);
+	bool run(StartGameType, const std::string& script_to_run, const std::string& prefix_for_replays);
 
 	// Returns the upcasted lua interface.
 	LuaGameInterface& lua() override;
 
 	// Run a single player scenario directly via --scenario on the cmdline. Will
 	// run the 'script_to_run' after any init scripts of the map.
+	// `list_of_scenarios` is list of this scenario and – if applicable –
+	// all the subsequent scenarios in the campaign.
 	// Returns the result of run().
-	bool run_splayer_scenario_direct(const std::string& mapname, const std::string& script_to_run);
+	bool run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
+	                                 const std::string& script_to_run);
 
 	// Run a single player loaded game directly via --loadgame on the cmdline. Will
 	// run the 'script_to_run' directly after the game was loaded.
 	// Returns the result of run().
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
 
+	bool run_replay(const std::string& filename, const std::string& script_to_run);
+
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+	bool acquire_training_wheel_lock(const std::string& objective);
+	void release_training_wheel_lock();
+	void mark_training_wheel_as_solved(const std::string& objective);
+	void skip_training_wheel(const std::string& objective);
+	void run_training_wheel(const std::string& objective, bool force);
+
+	bool training_wheels_wanted() const;
+	std::string active_training_wheel() const;
+#endif
+
 	void postload() override;
+	void postload_addons_before_loading();
+	void check_legacy_addons_desync_magic();
 
 	void think() override;
 
@@ -204,11 +226,12 @@ public:
 	 * \return \c true if the game is completely loaded and running (or paused)
 	 * or \c false otherwise.
 	 */
-	bool is_loaded() {
+	bool is_loaded() const {
 		return state_ == gs_running;
 	}
 
 	void cleanup_for_load() override;
+	void full_cleanup() override;
 
 	// in-game logic
 	const CmdQueue& cmdqueue() const {
@@ -240,7 +263,7 @@ public:
 	void report_desync(int32_t playernumber);
 	Md5Checksum get_sync_hash() const;
 
-	void enqueue_command(Command* const);
+	void enqueue_command(Command*);
 
 	void send_player_command(Widelands::PlayerCommand*);
 
@@ -250,8 +273,9 @@ public:
 	void send_player_build_flag(int32_t, const Coords&);
 	void send_player_build_road(int32_t, Path&);
 	void send_player_build_waterway(int32_t, Path&);
-	void send_player_flagaction(Flag&);
+	void send_player_flagaction(Flag&, FlagJob::Type);
 	void send_player_start_stop_building(Building&);
+	void send_player_toggle_infinite_production(Building&);
 	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
 	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
@@ -260,23 +284,32 @@ public:
 	void send_player_evict_worker(Worker&);
 	void send_player_set_stock_policy(Building&, WareWorker, DescriptionIndex, StockPolicy);
 	void send_player_set_ware_priority(
-	   PlayerImmovable&, int32_t type, DescriptionIndex index, int32_t prio, bool is_cs = false);
+	   PlayerImmovable&, WareWorker, DescriptionIndex, const WarePriority&, bool is_cs = false);
 	void send_player_set_input_max_fill(
 	   PlayerImmovable&, DescriptionIndex index, WareWorker type, uint32_t, bool is_cs = false);
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(Building&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
-	void send_player_enemyflagaction(const Flag&, PlayerNumber, const std::vector<Serial>&);
+	void send_player_enemyflagaction(const Flag&,
+	                                 PlayerNumber,
+	                                 const std::vector<Serial>&,
+	                                 bool allow_conquer);
+	void send_player_mark_object_for_removal(PlayerNumber, Immovable&, bool);
 
-	void send_player_ship_scouting_direction(Ship&, WalkingDir);
-	void send_player_ship_construct_port(Ship&, Coords);
-	void send_player_ship_explore_island(Ship&, IslandExploreDirection);
-	void send_player_sink_ship(Ship&);
-	void send_player_cancel_expedition_ship(Ship&);
+	void send_player_ship_scouting_direction(const Ship&, WalkingDir);
+	void send_player_ship_construct_port(const Ship&, Coords);
+	void send_player_ship_explore_island(const Ship&, IslandExploreDirection);
+	void send_player_sink_ship(const Ship&);
+	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);
 	void send_player_toggle_mute(const Building&, bool all);
+	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
+	void send_player_pinned_note(
+	   PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del);
+	void send_player_ship_port_name(PlayerNumber p, Serial s, const std::string& name);
 
 	InteractivePlayer* get_ipl();
+	const InteractivePlayer* get_ipl() const;
 
 	SaveHandler& save_handler() {
 		return savehandler_;
@@ -303,9 +336,14 @@ public:
 
 	const std::string& get_win_condition_displayname() const;
 	void set_win_condition_displayname(const std::string& name);
+	int32_t get_win_condition_duration() const;
 
 	bool is_replay() const {
-		return replay_;
+		return !replay_filename_.empty();
+	}
+	const std::string& replay_filename() const {
+		assert(is_replay());
+		return replay_filename_;
 	}
 
 	bool is_ai_training_mode() const {
@@ -320,24 +358,58 @@ public:
 
 	void set_auto_speed(bool);
 
+	/**
+	 * Cause the game to proceed with this file directly after the current game ends.
+	 * A .wgf file will be loaded as a singleplayer savegame this way;
+	 * a map file will be loaded as a singleplayer scenario.
+	 */
+	void set_next_game_to_load(const std::string& file);
+
+	const std::list<std::string>& list_of_scenarios() const {
+		return list_of_scenarios_;
+	}
+
 	// TODO(sirver,trading): document these functions once the interface settles.
 	int propose_trade(const Trade& trade);
 	void accept_trade(int trade_id);
 	void cancel_trade(int trade_id);
 
+	struct PendingDiplomacyAction {
+		PlayerNumber sender;     ///< The player who initiated the action.
+		DiplomacyAction action;  ///< The action to perform.
+		PlayerNumber other;      ///< The other player affected, if any.
+
+		PendingDiplomacyAction(PlayerNumber p1, DiplomacyAction a, PlayerNumber p2)
+		   : sender(p1), action(a), other(p2) {
+		}
+
+		inline bool operator==(const PendingDiplomacyAction& pda) const {
+			return sender == pda.sender && action == pda.action && other == pda.other;
+		}
+	};
+	const std::list<PendingDiplomacyAction>& pending_diplomacy_actions() const {
+		return pending_diplomacy_actions_;
+	}
+	std::list<PendingDiplomacyAction>& pending_diplomacy_actions() {
+		return pending_diplomacy_actions_;
+	}
+
+	bool diplomacy_allowed() const {
+		return diplomacy_allowed_;
+	}
+	void set_diplomacy_allowed(bool d) {
+		diplomacy_allowed_ = d;
+	}
+
 private:
+	bool did_postload_addons_before_loading_{false};
+
 	void sync_reset();
 
 	MD5Checksum<StreamWrite> synchash_;
 
 	struct SyncWrapper : public StreamWrite {
-		SyncWrapper(Game& game, StreamWrite& target)
-		   : game_(game),
-		     target_(target),
-		     counter_(0),
-		     next_diskspacecheck_(0),
-		     syncstreamsave_(false),
-		     current_excerpt_id_(0) {
+		SyncWrapper(Game& game, StreamWrite& target) : game_(game), target_(target) {
 		}
 
 		~SyncWrapper() override;
@@ -357,14 +429,14 @@ private:
 	public:
 		Game& game_;
 		StreamWrite& target_;
-		uint32_t counter_;
-		uint32_t next_diskspacecheck_;
+		uint32_t counter_{0U};
+		uint32_t next_diskspacecheck_{0U};
 		std::unique_ptr<StreamWrite> dump_;
 		std::string dumpfname_;
-		bool syncstreamsave_;
+		bool syncstreamsave_{false};
 		// Use a cyclic buffer for storing parts of the syncstream
 		// Currently used buffer
-		size_t current_excerpt_id_;
+		size_t current_excerpt_id_{0U};
 		// (Arbitrary) count of buffers
 		// Syncreports seem to be requested from the network clients every game second so this
 		// buffer should be big enough to store the last 32 seconds of the game actions leading
@@ -375,41 +447,58 @@ private:
 		std::string excerpts_buffer_[kExcerptSize];
 	} syncwrapper_;
 
-	GameController* ctrl_;
+	void do_send_player_command(PlayerCommand*);
+	std::shared_ptr<GameController> ctrl_;
 
 	/// Whether a replay writer should be created.
 	/// Defaults to \c true, and should only be set to \c false for playing back
 	/// replays.
-	bool writereplay_;
+	bool writereplay_{true};
 
 	/// Whether a syncsteam file should be created.
 	/// Defaults to \c false, and can be set to true for network games. The file
 	/// is written only if \ref writereplay_ is true too.
-	bool writesyncstream_;
+	bool writesyncstream_{false};
 
-	bool ai_training_mode_;
-	bool auto_speed_;
+	bool ai_training_mode_{false};
+	bool auto_speed_{false};
 
-	int32_t state_;
+	int32_t state_{gs_notrunning};
 
 	RNG rng_;
 
 	CmdQueue cmdqueue_;
+	std::list<PlayerCommand*> pending_player_commands_;
 
 	SaveHandler savehandler_;
 
 	std::unique_ptr<ReplayWriter> replaywriter_;
 
-	uint32_t scenario_difficulty_;
+	uint32_t scenario_difficulty_{kScenarioDifficultyNotSet};
 
 	GeneralStatsVector general_stats_;
 	int next_trade_agreement_id_ = 1;
 	// Maps from trade agreement id to the agreement.
 	std::map<int, TradeAgreement> trade_agreements_;
 
+	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
+	bool diplomacy_allowed_{true};
+
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
-	bool replay_;
+
+	int32_t win_condition_duration_{kDefaultWinConditionDuration};
+
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+	std::unique_ptr<TrainingWheels> training_wheels_;
+	bool training_wheels_wanted_{false};
+#endif
+
+	/** Filename of the replay represented by this game, or empty if this is not a replay. */
+	std::string replay_filename_;
+
+	std::string next_game_to_load_;
+	std::list<std::string> list_of_scenarios_;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

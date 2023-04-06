@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -37,27 +36,27 @@ struct FontSet {
 	explicit FontSet(const std::string& fontset_name);
 
 	// The fontset's name
-	const std::string& name() const;
+	[[nodiscard]] const std::string& name() const;
 
 	/// All functions below return the path of the font file used for the given
 	/// style.
-	const std::string& serif() const;
-	const std::string& serif_bold() const;
-	const std::string& serif_italic() const;
-	const std::string& serif_bold_italic() const;
-	const std::string& sans() const;
-	const std::string& sans_bold() const;
-	const std::string& sans_italic() const;
-	const std::string& sans_bold_italic() const;
-	const std::string& condensed() const;
-	const std::string& condensed_bold() const;
-	const std::string& condensed_italic() const;
-	const std::string& condensed_bold_italic() const;
-	const std::string& representative_character() const;
+	[[nodiscard]] const std::string& serif() const;
+	[[nodiscard]] const std::string& serif_bold() const;
+	[[nodiscard]] const std::string& serif_italic() const;
+	[[nodiscard]] const std::string& serif_bold_italic() const;
+	[[nodiscard]] const std::string& sans() const;
+	[[nodiscard]] const std::string& sans_bold() const;
+	[[nodiscard]] const std::string& sans_italic() const;
+	[[nodiscard]] const std::string& sans_bold_italic() const;
+	[[nodiscard]] const std::string& condensed() const;
+	[[nodiscard]] const std::string& condensed_bold() const;
+	[[nodiscard]] const std::string& condensed_italic() const;
+	[[nodiscard]] const std::string& condensed_bold_italic() const;
+	[[nodiscard]] const std::string& representative_character() const;
 	// Some scripts need more vertical space than the default font, e.g. Arabic
-	uint16_t size_offset() const;
+	[[nodiscard]] uint16_t size_offset() const;
 	// Returns true iff the fontset's script is written from right to left.
-	bool is_rtl() const;
+	[[nodiscard]] bool is_rtl() const;
 
 private:
 	/// Parses font information for the given fontset name from Lua.
@@ -102,9 +101,9 @@ struct FontSets {
 	FontSets();
 
 	/// Get the fontset corresponding to the given selector.
-	const FontSet* get_fontset(UI::FontSets::Selector selector) const;
+	[[nodiscard]] const FontSet* get_fontset(UI::FontSets::Selector selector) const;
 	/// Get the fontset used by the given locale ISO code.
-	const FontSet* get_fontset(const std::string& locale) const;
+	[[nodiscard]] const FontSet* get_fontset(const std::string& locale) const;
 
 private:
 	// Maps locale ISO codes to fontset selectors.

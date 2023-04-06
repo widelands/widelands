@@ -1,5 +1,6 @@
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/build_info.cc.cmake ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../cmake/datadirversion.cmake ${CMAKE_CURRENT_SOURCE_DIR}/../data/datadirversion)
 
 # Catchall target to codecheck all files.
 add_custom_target(codecheck)
@@ -33,11 +34,20 @@ if (WIN32)
 	configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/win32/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
 	message (STATUS "Configured windows resource file")
 	set(WIN32_ICON_O ${CMAKE_CURRENT_BINARY_DIR}/wl_icon.o)
-	ADD_CUSTOM_COMMAND(OUTPUT ${WIN32_ICON_O}
-		COMMAND ${MINGW_PREFIX}windres
-			-o${WIN32_ICON_O}
-			-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
-  )
+	if(MSVC)
+		ADD_CUSTOM_COMMAND(OUTPUT ${WIN32_ICON_O}
+			COMMAND rc
+				/fo ${WIN32_ICON_O}
+				${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
+		)
+	else()
+		ADD_CUSTOM_COMMAND(OUTPUT ${WIN32_ICON_O}
+			COMMAND ${MINGW_PREFIX}windres
+				-o${WIN32_ICON_O}
+				-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
+		)
+	endif()
+
   wl_binary(widelands
     WIN32
     SRCS
@@ -59,6 +69,19 @@ else()
   )
 endif()
 
+if(OPTION_FORCE_EMBEDDED_MINIZIP)
+    # unset these two if they are cached
+    unset(MINIZIP_FOUND)
+    set(MINIZIP_STATIC_LIBRARIES "")
+else()
+   # If pkg-config is ever needed to find other libraries, move the include outside the if() block
+  include(FindPkgConfig)
+  if(PKG_CONFIG_FOUND)
+    pkg_check_modules(MINIZIP minizip)
+  endif()
+endif()
+
+add_subdirectory(third_party)
 add_subdirectory(ai)
 add_subdirectory(base)
 add_subdirectory(chat)
@@ -73,7 +96,6 @@ add_subdirectory(network)
 add_subdirectory(notifications)
 add_subdirectory(scripting)
 add_subdirectory(sound)
-add_subdirectory(third_party)
 add_subdirectory(ui_basic)
 add_subdirectory(ui_fsmenu)
 if (OPTION_BUILD_WEBSITE_TOOLS)
@@ -89,14 +111,14 @@ wl_library(widelands_ball_of_mud
     wlapplication.h
     wlapplication_messages.cc
     wlapplication_messages.h
-  USES_BOOST_REGEX
+  USES_ATOMIC
   USES_SDL2
   USES_SDL2_TTF
   DEPENDS
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
+    base_macros
     base_random
     base_time_string
     build_info
@@ -105,9 +127,9 @@ wl_library(widelands_ball_of_mud
     graphic_fonthandler
     graphic_mouse_cursor
     graphic_text
-    graphic_text_layout
     io_filesystem
     logic
+    logic_addons
     logic_exceptions
     logic_filesystem_constants
     logic_game_controller
@@ -118,13 +140,7 @@ wl_library(widelands_ball_of_mud
     network
     sound
     ui_basic
-    ui_fsmenu_gameloading
-    ui_fsmenu_loading_common
-    ui_fsmenu_main
-    ui_fsmenu_maploading
-    ui_fsmenu_misc
-    ui_fsmenu_network
-    ui_fsmenu_options
+    ui_fsmenu
     widelands_options
     wui
 )
@@ -133,11 +149,16 @@ wl_library(widelands_options
   SRCS
     wlapplication_options.cc
     wlapplication_options.h
+    wlapplication_mousewheel_options.cc
+    wlapplication_mousewheel_options.h
   DEPENDS
-    base_log
+    base
+    base_geometry
+    graphic_text_layout
     io_filesystem
     io_profile
     logic_filesystem_constants
+  USES_SDL2
 )
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
@@ -146,4 +167,5 @@ endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD
 
 if (WIN32)
   target_link_libraries(widelands_ball_of_mud wsock32)
+#  set_target_properties(widelands PROPERTIES LINK_FLAGS_RELEASE -s)
 endif (WIN32)

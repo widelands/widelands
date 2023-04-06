@@ -12,6 +12,7 @@ include "scripting/richtext_scenarios.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
 
+wl.Game().allow_diplomacy = false
 p1 = wl.Game().players[1]
 p2 = wl.Game().players[2]
 

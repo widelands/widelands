@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_IO_PROFILE_H
 #define WL_IO_PROFILE_H
 
+#include <atomic>
 #include <memory>
 
 #include "base/macros.h"
@@ -54,7 +54,7 @@ public:
 	friend class Profile;
 
 	struct Value {
-		Value(const std::string& name, const char* const value);
+		Value(const std::string& nname, const char* nval);
 		Value(const Value&);
 		Value(Value&& other) noexcept;
 
@@ -63,31 +63,41 @@ public:
 		Value& operator=(Value) noexcept;
 		Value& operator=(Value&& other) noexcept;
 
-		char const* get_name() const {
+		[[nodiscard]] char const* get_name() const {
 			return name_.c_str();
 		}
 
-		bool is_used() const;
+		[[nodiscard]] bool is_used() const;
 		void mark_used();
 
-		int32_t get_int() const;
-		uint32_t get_natural() const;
-		uint32_t get_positive() const;
-		bool get_bool() const;
-		char const* get_string() const {
+		[[nodiscard]] int32_t get_int() const;
+		[[nodiscard]] uint32_t get_natural() const;
+		[[nodiscard]] uint32_t get_positive() const;
+		[[nodiscard]] bool get_bool() const;
+		[[nodiscard]] char const* get_string() const;
+		[[nodiscard]] Vector2i get_point() const;
+
+		[[nodiscard]] char const* get_untranslated_string() const {
 			return value_.get();
 		}
-		char* get_string() {
+		char* get_untranslated_string() {
 			return value_.get();
 		}
-		Vector2i get_point() const;
 
 		void set_string(char const*);
+
+		[[nodiscard]] bool get_translate() const {
+			return translate_;
+		}
+		void set_translate(const bool t) {
+			translate_ = t;
+		}
 
 		friend void swap(Value& first, Value& second);
 
 	private:
 		bool used_;
+		bool translate_;
 		std::string name_;
 		std::unique_ptr<char[]> value_;
 
@@ -97,6 +107,20 @@ public:
 	using ValueList = std::vector<Value>;
 
 	Section(Profile*, const std::string& name);
+	Section(const Section& other) {
+		operator=(other);
+	}
+
+	Section& operator=(const Section& other) {
+		if (&other == this) {
+			return *this;
+		}
+		profile_ = other.profile_;
+		used_ = other.used_.load();
+		section_name_ = other.section_name_;
+		values_ = other.values_;
+		return *this;
+	}
 
 	/// \returns whether a value with the given name exists.
 	/// Does not mark the value as used.
@@ -104,14 +128,14 @@ public:
 
 	Value* get_val(char const* name);
 	Value* get_next_val(char const* name = nullptr);
-	uint32_t get_num_values() const {
+	[[nodiscard]] uint32_t get_num_values() const {
 		return values_.size();
 	}
 
-	char const* get_name() const;
+	[[nodiscard]] char const* get_name() const;
 	void set_name(const std::string&);
 
-	bool is_used() const;
+	[[nodiscard]] bool is_used() const;
 	void mark_used();
 
 	void check_used() const;
@@ -127,6 +151,7 @@ public:
 	uint32_t get_safe_natural(char const* name);
 	uint32_t get_safe_positive(char const* name);
 	bool get_safe_bool(const char* name);
+	const char* get_safe_untranslated_string(const char* name);
 	const char* get_safe_string(const char* name);
 	const char* get_safe_string(const std::string& name);
 
@@ -137,13 +162,22 @@ public:
 	void set_bool(char const* const name, bool const value) {
 		set_string(name, value ? "true" : "false");
 	}
-	void set_string(char const* name, char const* value);
-	void set_string_duplicate(char const* name, char const* value);
-	void set_string(char const* const name, const std::string& value) {
-		set_string(name, value.c_str());
+	void set_string(char const* name, char const* string);
+	void set_string_duplicate(char const* name, char const* string);
+	void set_string(char const* const name, const std::string& string) {
+		set_string(name, string.c_str());
 	}
-	void set_string_duplicate(char const* const name, const std::string& value) {
-		set_string_duplicate(name, value.c_str());
+	void set_string_duplicate(char const* const name, const std::string& string) {
+		set_string_duplicate(name, string.c_str());
+	}
+
+	void set_translated_string(char const* name, char const* string);
+	void set_translated_string_duplicate(char const* name, char const* string);
+	void set_translated_string(char const* const name, const std::string& string) {
+		set_translated_string(name, string.c_str());
+	}
+	void set_translated_string_duplicate(char const* const name, const std::string& string) {
+		set_translated_string_duplicate(name, string.c_str());
 	}
 
 	/// If a Value with this name already exists, update it with the given
@@ -155,7 +189,7 @@ public:
 
 private:
 	Profile* profile_;
-	bool used_;
+	std::atomic_bool used_;
 	std::string section_name_;
 	ValueList values_;
 };
@@ -190,13 +224,11 @@ public:
 	void error(char const*, ...) const __attribute__((format(printf, 2, 3)));
 	void check_used() const;
 
-	void read(const char* const filename,
-	          const char* const global_section = nullptr,
-	          FileSystem& = *g_fs);
-	void write(const char* const filename,
+	void read(const char* filename, const char* global_section = nullptr, FileSystem& = *g_fs);
+	void write(const char* filename,
 	           bool used_only = true,
 	           FileSystem& = *g_fs,
-	           const char* const comment = nullptr);
+	           const char* comment = nullptr);
 
 	Section* get_section(const std::string& name);
 	Section& get_safe_section(const std::string& name);

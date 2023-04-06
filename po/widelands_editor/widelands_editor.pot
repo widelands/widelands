@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-08-01 01:20+0000\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../data/scripting/editor/editor_controls.lua:11
-#: ../../data/scripting/editor/editor_help.lua:65
+#: ../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
 msgstr ""
 
@@ -29,11 +29,6 @@ msgid "Help"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:18
-msgctxt "hotkey"
-msgid "Esc"
-msgstr ""
-
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
 msgstr ""
@@ -65,20 +60,10 @@ msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change the key.
 #: ../../data/scripting/editor/editor_controls.lua:32
-msgctxt "hotkey"
-msgid "Ctrl + L"
-msgstr ""
-
-#: ../../data/scripting/editor/editor_controls.lua:32
 msgid "Load map"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-#: ../../data/scripting/editor/editor_controls.lua:34
-msgctxt "hotkey"
-msgid "Ctrl + S"
-msgstr ""
-
 #: ../../data/scripting/editor/editor_controls.lua:34
 msgid "Save map"
 msgstr ""
@@ -88,11 +73,6 @@ msgid "Tools"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-#: ../../data/scripting/editor/editor_controls.lua:41
-msgctxt "hotkey"
-msgid "0-9"
-msgstr ""
-
 #: ../../data/scripting/editor/editor_controls.lua:41
 msgid "Change tool size"
 msgstr ""
@@ -131,29 +111,29 @@ msgstr ""
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:49
+#: ../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:54
+#: ../../data/scripting/editor/editor_help.lua:55
 msgid "General"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:59
+#: ../../data/scripting/editor/editor_help.lua:60
 #: ../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:71
+#: ../../data/scripting/editor/editor_help.lua:72
 #: ../../data/scripting/editor/tips.lua:15
 msgid "Tips"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:81
+#: ../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"
 msgstr ""
 
-#: ../../data/scripting/editor/editor_help.lua:88
+#: ../../data/scripting/editor/editor_help.lua:89
 msgid "Trees"
 msgstr ""
 
@@ -201,15 +181,24 @@ msgid "%1%x %2%"
 msgstr ""
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:72
+#: ../../data/scripting/editor/terrain_help.lua:57
+#: ../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
 msgstr ""
 
-#: ../../data/scripting/editor/terrain_help.lua:77
+#: ../../data/scripting/editor/terrain_help.lua:63
+#: ../../data/scripting/editor/terrain_tooltip.lua:40
 msgid "No trees will grow here."
 msgstr ""
 
+#: ../../data/scripting/editor/terrain_tooltip.lua:25
+#: ../../data/scripting/editor/tree_tooltip.lua:25
+#, lua-format
+msgid "%2.1f%%"
+msgstr ""
+
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of tree.
-#: ../../data/scripting/editor/tree_help.lua:19
+#: ../../data/scripting/editor/tree_help.lua:20
+#: ../../data/scripting/editor/tree_tooltip.lua:34
 msgid "Preferred terrains"
 msgstr ""

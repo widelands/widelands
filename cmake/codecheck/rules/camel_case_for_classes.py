@@ -25,6 +25,12 @@ def evaluate_matches(lines, fn):
                 words.pop(1)
                 if len(words) < 2:
                     continue
+            if len(words) > 3 and words[-1] == '{' and words[-3] == ':':
+                # It is a "enum : uint8_t {" declaration. Remove the size
+                words.pop(-2)
+                words.pop(-2)
+                if len(words) <= 2:
+                    continue
         if words[0] in ['class', 'struct', 'enum'] and words[-1] != '{':
             continue
         if re.match(r'([A-Z][a-z0-9]*)+', words[1]):

@@ -1,11 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_warehouse_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_warehouse_type {
    name = "frisians_port",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Port"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "port",
    map_check = {"seafaring"},
@@ -29,8 +30,6 @@ tribes:new_warehouse_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {64, 117},
          frames = 10,
          columns = 5,
@@ -40,8 +39,6 @@ tribes:new_warehouse_type {
    },
    animations = {
       build = {
-         directory = dirname,
-         basename = "build",
          hotspot = {64, 117}
       }
    },
@@ -53,3 +50,5 @@ tribes:new_warehouse_type {
    conquers = 5,
    heal_per_second = 170,
 }
+
+pop_textdomain()

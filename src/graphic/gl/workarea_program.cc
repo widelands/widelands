@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,6 +22,17 @@
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "wui/mapviewpixelconstants.h"
+
+namespace std {
+
+// This hash function lets us use TCoords as keys in std::unordered_map.
+template <> struct hash<Widelands::TCoords<>> {
+	std::size_t operator()(const Widelands::TCoords<>& key) const {
+		return (static_cast<std::size_t>(key.node.hash()) << 1) ^ static_cast<std::size_t>(key.t);
+	}
+};
+
+}  // namespace std
 
 WorkareaProgram::WorkareaProgram() : cache_(nullptr) {
 	gl_program_.build("workarea");
@@ -193,29 +203,33 @@ void WorkareaProgram::draw(uint32_t texture_id,
 		outer_vertices_.reserve(estimate_outer);
 	}
 
-	auto emplace_triangle = [this, workarea, fields_to_draw](
+	std::unordered_map<Widelands::TCoords<>, RGBAColor> triangle_colors{};
+	for (const WorkareasEntry& wa_map : workarea) {
+		for (const WorkareaPreviewData& data : wa_map.first) {
+			RGBAColor color_to_apply = workarea_colors[data.index];
+			if (data.use_special_coloring) {
+				color_to_apply = apply_color_special(color_to_apply, RGBAColor(data.special_coloring));
+			}
+			triangle_colors[data.coords] = apply_color(triangle_colors[data.coords], color_to_apply);
+		}
+	}
+
+	auto emplace_triangle = [this, workarea, fields_to_draw, triangle_colors](
 	                           const FieldsToDraw::Field& field,
 	                           Widelands::TriangleIndex triangle_index) {
 		RGBAColor color(0, 0, 0, 0);
-		for (const WorkareasEntry& wa_map : workarea) {
-			for (const WorkareaPreviewData& data : wa_map.first) {
-				if (data.coords == Widelands::TCoords<>(field.fcoords, triangle_index)) {
-					RGBAColor color_to_apply = workarea_colors[data.index];
-					if (data.use_special_coloring) {
-						color_to_apply =
-						   apply_color_special(color_to_apply, RGBAColor(data.special_coloring));
-					}
-					color = apply_color(color, color_to_apply);
-				}
-			}
+		if (triangle_colors.count(Widelands::TCoords<>(field.fcoords, triangle_index)) != 0u) {
+			color = triangle_colors.at(Widelands::TCoords<>(field.fcoords, triangle_index));
 		}
 		if (color.a > 0) {
-			add_vertex(field, color, &vertices_);
-			add_vertex(fields_to_draw.at(field.brn_index), color, &vertices_);
-			add_vertex(
-			   fields_to_draw.at(triangle_index == Widelands::TriangleIndex::D ? field.bln_index :
-			                                                                     field.rn_index),
-			   color, &vertices_);
+			const FieldsToDraw::Field& f2 = fields_to_draw.at(field.brn_index);
+			const FieldsToDraw::Field& f3 = fields_to_draw.at(
+			   triangle_index == Widelands::TriangleIndex::D ? field.bln_index : field.rn_index);
+			if (!(field.obscured_by_slope && f2.obscured_by_slope && f3.obscured_by_slope)) {
+				add_vertex(field, color, &vertices_);
+				add_vertex(f2, color, &vertices_);
+				add_vertex(f3, color, &vertices_);
+			}
 		}
 	};
 

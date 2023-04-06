@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -36,13 +35,15 @@ struct MainMenuLoadOrSaveMap : public UI::UniqueWindow {
 	                      UI::UniqueWindow::Registry& registry,
 	                      const std::string& name,
 	                      const std::string& title,
+	                      bool addons,
+	                      bool show_empty_dirs = false,
 	                      const std::string& basedir = kMapsDir);
 
 protected:
 	virtual void clicked_ok() = 0;
 	void toggle_mapnames();
 	// Sets the current dir and updates labels.
-	virtual void set_current_directory(const std::string& filename) = 0;
+	virtual void set_current_directory(const std::vector<std::string>& filenames) = 0;
 	void layout() override;
 	void fill_table();
 
@@ -53,7 +54,10 @@ protected:
 	// Private variables first, because compiler would complain about initialization order otherwise
 private:
 	// Common padding between panels
-	int32_t const padding_;
+	int32_t const padding_{4};
+
+	// Whether to list empty directories
+	bool const show_empty_dirs_;
 
 	// Main vertical container for the UI elements
 	UI::Box main_box_;
@@ -67,6 +71,7 @@ protected:
 	std::vector<MapData> maps_data_;
 
 	// Side panel with details about the currently selected map
+	Widelands::EditorGameBase egbase_;
 	UI::Box map_details_box_;
 	MapDetails map_details_;
 
@@ -84,7 +89,8 @@ protected:
 
 	// Settings data
 	const std::string basedir_;
-	std::string curdir_;
+	std::vector<std::string> curdir_;
+	bool include_addon_maps_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_OR_SAVE_MAP_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -39,19 +38,18 @@ public:
 	//  TODO(unknown): This should be unnecessary. Make it so.
 	enum Type { DIR, ZIP };
 
-	virtual ~FileSystem() {
-	}
+	virtual ~FileSystem() = default;
 
 	// Returns all files and directories (full path) in the given directory 'directory'.
-	virtual FilenameSet list_directory(const std::string& directory) const = 0;
+	[[nodiscard]] virtual FilenameSet list_directory(const std::string& directory) const = 0;
 
-	virtual bool is_writable() const = 0;
-	virtual bool is_directory(const std::string& path) const = 0;
-	virtual bool file_exists(const std::string& path) const = 0;
+	[[nodiscard]] virtual bool is_writable() const = 0;
+	[[nodiscard]] virtual bool is_directory(const std::string& path) const = 0;
+	virtual bool file_exists(const std::string& path) const = 0;  // NOLINT not nodicard
 
 	virtual void* load(const std::string& fname, size_t& length) = 0;
 
-	virtual void write(const std::string& fname, void const* data, int32_t length) = 0;
+	virtual void write(const std::string& fname, void const* data, size_t length) = 0;
 	virtual void ensure_directory_exists(const std::string& fs_dirname) = 0;
 	// TODO(unknown): use this only from inside ensure_directory_exists()
 	virtual void make_directory(const std::string& fs_dirname) = 0;
@@ -97,13 +95,9 @@ public:
 	virtual std::string get_basename() = 0;
 
 	// basic path/filename manipulation
-	std::string fix_cross_file(const std::string&) const;
-	std::string canonicalize_name(const std::string& path) const;
-	bool is_path_absolute(const std::string& path) const;
-
-	/// Returns true if the filename is legal in all operating systems
-	static bool is_legal_filename(const std::string& filename);
-	static std::string illegal_filename_tooltip();
+	[[nodiscard]] std::string fix_cross_file(const std::string&) const;
+	[[nodiscard]] std::string canonicalize_name(const std::string& path) const;
+	[[nodiscard]] bool is_path_absolute(const std::string& path) const;
 
 	// Returns the path separator, i.e. \ on windows and / everywhere else.
 	static char file_separator();
@@ -112,7 +106,7 @@ public:
 	static std::string get_working_directory();
 
 	/// Given a filename, return the name with any path stripped off.
-	static const char* fs_filename(const char* n);
+	static const char* fs_filename(const char* p);
 
 	// Everything before the final separator (/ or \) in 'full_path'. The
 	// returned value is either the empty string or ends with a separator.
@@ -122,7 +116,7 @@ public:
 	static std::string filename_ext(const std::string& f);
 
 	/// Given a filename, return the name with any path or extension stripped off.
-	static std::string filename_without_ext(const char* n);
+	static std::string filename_without_ext(const char* p);
 	static std::string get_homedir();
 
 #ifdef USE_XDG
@@ -136,7 +130,8 @@ public:
 	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test'
 	/// returned 'true' for their filenames.
 	template <class UnaryPredicate>
-	FilenameSet filter_directory(const std::string& directory, UnaryPredicate test) const {
+	[[nodiscard]] [[nodiscard]] [[nodiscard]] [[nodiscard]] [[nodiscard]] FilenameSet
+	filter_directory(const std::string& directory, UnaryPredicate test) const {
 		FilenameSet result = list_directory(directory);
 		for (auto it = result.begin(); it != result.end();) {
 			if (!test(*it)) {
@@ -150,9 +145,9 @@ public:
 
 	/// Returns all files in the given 'directory' that match 'basename' followed by 1-3 numbers,
 	/// followed by '.', followed by 'extension'
-	std::vector<std::string> get_sequential_files(const std::string& directory,
-	                                              const std::string& basename,
-	                                              const std::string& extension) const;
+	[[nodiscard]] std::vector<std::string> get_sequential_files(const std::string& directory,
+	                                                            const std::string& basename,
+	                                                            const std::string& extension) const;
 
 	virtual unsigned long long disk_space() = 0;  // NOLINT
 

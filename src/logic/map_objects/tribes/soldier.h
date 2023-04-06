@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -36,13 +35,13 @@ class EditorGameBase;
 class Battle;
 
 struct SoldierLevelRange {
-	SoldierLevelRange();
-	SoldierLevelRange(const LuaTable&);
+	SoldierLevelRange() = default;
+	explicit SoldierLevelRange(const LuaTable&);
 	SoldierLevelRange(const SoldierLevelRange&) = default;
 	SoldierLevelRange& operator=(const SoldierLevelRange& other) = default;
 
 	bool matches(const Soldier* soldier) const;
-	bool matches(int32_t health, int32_t attack, int32_t defense, int32_t evade) const;
+	[[nodiscard]] bool matches(int32_t health, int32_t attack, int32_t defense, int32_t evade) const;
 
 	bool operator==(const SoldierLevelRange& other) const {
 		return min_health == other.min_health && min_attack == other.min_attack &&
@@ -51,14 +50,14 @@ struct SoldierLevelRange {
 		       max_defense == other.max_defense && max_evade == other.max_evade;
 	}
 
-	int32_t min_health;
-	int32_t min_attack;
-	int32_t min_defense;
-	int32_t min_evade;
-	int32_t max_health;
-	int32_t max_attack;
-	int32_t max_defense;
-	int32_t max_evade;
+	int32_t min_health = -1;
+	int32_t min_attack = -1;
+	int32_t min_defense = -1;
+	int32_t min_evade = -1;
+	int32_t max_health = -1;
+	int32_t max_attack = -1;
+	int32_t max_defense = -1;
+	int32_t max_evade = -1;
 };
 using SoldierAnimationsList = std::map<std::string, SoldierLevelRange>;
 
@@ -66,9 +65,8 @@ class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
 
-	SoldierDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
-	~SoldierDescr() override {
-	}
+	SoldierDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
+	~SoldierDescr() override = default;
 
 	uint32_t get_max_health_level() const {
 		return health_.max_level;
@@ -81,6 +79,10 @@ public:
 	}
 	uint32_t get_max_evade_level() const {
 		return evade_.max_level;
+	}
+	uint32_t get_max_total_level() const {
+		return get_max_health_level() + get_max_attack_level() + get_max_defense_level() +
+		       get_max_evade_level();
 	}
 
 	uint32_t get_base_health() const {
@@ -129,9 +131,13 @@ public:
 		return evade_.images[level];
 	}
 
+	uint16_t get_max_anim_height() const {
+		return max_anim_height_;
+	}
+
 	uint32_t get_rand_anim(Game& game, const std::string& name, const Soldier* soldier) const;
 
-	const DirAnimations& get_right_walk_anims(bool const ware, Worker* w) const override;
+	const DirAnimations& get_right_walk_anims(bool ware, Worker* w) const override;
 	uint32_t get_animation(const std::string& anim, const MapObject* mo = nullptr) const override;
 
 protected:
@@ -166,6 +172,8 @@ private:
 	SoldierAnimationsList evade_success_e_name_;
 	SoldierAnimationsList evade_failure_e_name_;
 	SoldierAnimationsList die_e_name_;
+
+	uint16_t max_anim_height_{0U};
 
 	// We can have per-level walking and idle anims
 	// NOTE: I expect no soldier will ever agree to carry a ware, so we don't provide animations for
@@ -219,20 +227,20 @@ public:
 	void set_defense_level(uint32_t);
 	void set_evade_level(uint32_t);
 	void set_retreat_health(uint32_t);
-	uint32_t get_level(TrainingAttribute) const;
-	uint32_t get_health_level() const {
+	unsigned get_level(TrainingAttribute) const;
+	unsigned get_health_level() const {
 		return health_level_;
 	}
-	uint32_t get_attack_level() const {
+	unsigned get_attack_level() const {
 		return attack_level_;
 	}
-	uint32_t get_defense_level() const {
+	unsigned get_defense_level() const {
 		return defense_level_;
 	}
-	uint32_t get_evade_level() const {
+	unsigned get_evade_level() const {
 		return evade_level_;
 	}
-	uint32_t get_total_level() const {
+	unsigned get_total_level() const {
 		return health_level_ + attack_level_ + defense_level_ + evade_level_;
 	}
 
@@ -240,12 +248,12 @@ public:
 	void init_auto_task(Game&) override;
 
 	Vector2f
-	calc_drawpos(const EditorGameBase& game, const Vector2f& field_on_dst, const float scale) const;
+	calc_drawpos(const EditorGameBase& game, const Vector2f& field_on_dst, float scale) const;
 
 	/// Draw this soldier
 	void draw(const EditorGameBase&,
 	          const InfoToDraw& info_to_draw,
-	          const Vector2f& point_on_dst,
+	          const Vector2f& field_on_dst,
 	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
@@ -256,22 +264,26 @@ public:
 	// true, the icon is drawn horizontally centered above Otherwise, the icon
 	// is drawn below and right of 'draw_position'.
 	void draw_info_icon(Vector2i draw_position,
-	                    const float scale,
-	                    const InfoMode draw_mode,
-	                    const InfoToDraw info_to_draw,
+	                    float scale,
+	                    InfoMode draw_mode,
+	                    InfoToDraw info_to_draw,
 	                    RenderTarget*) const;
 
-	uint32_t get_current_health() const {
+	unsigned get_current_health() const {
 		return current_health_;
 	}
-	uint32_t get_retreat_health() const {
+	void set_current_health(const unsigned h) {
+		current_health_ = h;
+	}
+
+	unsigned get_retreat_health() const {
 		return retreat_health_;
 	}
-	uint32_t get_max_health() const;
-	uint32_t get_min_attack() const;
-	uint32_t get_max_attack() const;
-	uint32_t get_defense() const;
-	uint32_t get_evade() const;
+	unsigned get_max_health() const;
+	unsigned get_min_attack() const;
+	unsigned get_max_attack() const;
+	unsigned get_defense() const;
+	unsigned get_evade() const;
 
 	const Image* get_health_level_pic() const {
 		return descr().get_health_level_pic(health_level_);
@@ -289,11 +301,11 @@ public:
 	int32_t get_training_attribute(TrainingAttribute attr) const override;
 
 	/// Sets a random animation of desired type and start playing it.
-	void start_animation(EditorGameBase&, const std::string& animname, uint32_t time);
+	void start_animation(EditorGameBase&, const std::string& animname, const Duration& time);
 
 	/// Heal quantity of health points instantly
-	void heal(uint32_t);
-	void damage(uint32_t);  /// Damage quantity of health points
+	void heal(unsigned);
+	void damage(unsigned);  /// Damage quantity of health points
 
 	void log_general_info(const EditorGameBase&) const override;
 
@@ -344,12 +356,12 @@ protected:
 	bool is_evict_allowed() override;
 
 private:
-	uint32_t current_health_;
-	uint32_t health_level_;
-	uint32_t attack_level_;
-	uint32_t defense_level_;
-	uint32_t evade_level_;
-	uint32_t retreat_health_;
+	unsigned current_health_;
+	unsigned health_level_;
+	unsigned attack_level_;
+	unsigned defense_level_;
+	unsigned evade_level_;
+	unsigned retreat_health_;
 
 	/// This is used to replicate walk for soldiers but only just before and
 	/// just after figthing in a battle, to draw soldier at proper position.
@@ -358,8 +370,8 @@ private:
 	/// the new states. I thought that it is cleaner to have this variable
 	/// separate.
 	CombatWalkingDir combat_walking_;
-	uint32_t combat_walkstart_;
-	uint32_t combat_walkend_;
+	Time combat_walkstart_;
+	Time combat_walkend_;
 
 	/**
 	 * If the soldier is involved in a challenge, it is assigned a battle
@@ -377,7 +389,7 @@ private:
 protected:
 	struct Loader : public Worker::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&) override;
 		void load_pointers() override;
@@ -386,7 +398,7 @@ protected:
 		const Task* get_task(const std::string& name) override;
 
 	private:
-		uint32_t battle_;
+		uint32_t battle_{0U};
 	};
 
 	Loader* create_loader() override;

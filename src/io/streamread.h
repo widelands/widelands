@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -38,9 +37,8 @@
  */
 class StreamRead {
 public:
-	explicit StreamRead() {
-	}
-	virtual ~StreamRead();
+	explicit StreamRead() = default;
+	virtual ~StreamRead() = default;
 
 	/**
 	 * Read a number of bytes from the stream.
@@ -53,7 +51,7 @@ public:
 	/**
 	 * \return \c true if the end of file / end of stream has been reached.
 	 */
-	virtual bool end_of_file() const = 0;
+	[[nodiscard]] virtual bool end_of_file() const = 0;
 
 	void data_complete(void* data, size_t size);
 
@@ -73,7 +71,7 @@ public:
 	///  read.
 	class DataError : public WException {
 	public:
-		DataError(char const* const fmt, ...) PRINTF_FORMAT(2, 3);
+		explicit DataError(char const* fmt, ...) PRINTF_FORMAT(2, 3);
 	};
 #define data_error(...) DataError(__VA_ARGS__)
 

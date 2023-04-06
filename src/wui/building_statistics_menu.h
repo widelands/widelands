@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,24 +20,21 @@
 #define WL_WUI_BUILDING_STATISTICS_MENU_H
 
 #include "graphic/color.h"
+#include "graphic/styles/building_statistics_style.h"
 #include "logic/map_objects/tribes/building.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_player.h"
 
-namespace {
-
-constexpr int kNoOfBuildingTabs = 5;
-
-}  // namespace
-
 /// This window shows statistics for all the buildings that the player owns.
 /// It also allows to jump through buildings on the map.
 struct BuildingStatisticsMenu : public UI::UniqueWindow {
+	static constexpr int kNoOfBuildingTabs = 5;
+
 	BuildingStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 	~BuildingStatisticsMenu() override;
 
@@ -47,22 +43,18 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 	/// Update state of current building buttons
 	void update();
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kBuildingStats;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 private:
 	/// Array indices for the tabs
 	enum BuildingTab { Small, Medium, Big, Mines, Ports };
 
 	/// Which building state to jump through
 	enum class JumpTarget { kOwned, kConstruction, kUnproductive };
-
-	/// Array indices for the navigation buttons
-	enum NavigationButton {
-		PrevOwned,
-		NextOwned,
-		PrevConstruction,
-		NextConstruction,
-		PrevUnproductive,
-		NextUnproductive
-	};
 
 	/// Initialize the buttons
 	void reset();
@@ -109,6 +101,8 @@ private:
 	/// Style
 	const UI::BuildingStatisticsStyleInfo& style_;
 
+	UI::Box main_box_;
+
 	/// UI tabs
 	UI::TabPanel tab_panel_;
 	UI::Box* tabs_[kNoOfBuildingTabs];
@@ -125,36 +119,29 @@ private:
 	/// Labels with buildings' productivity
 	std::vector<UI::Textarea*> productivity_labels_;
 
-	/// The buttons for stepping through buildings
-	UI::Panel navigation_panel_;
-	UI::Button* navigation_buttons_[6];
-	UI::Textarea building_name_;
-	UI::Textarea owned_label_;
-	UI::Textarea construction_label_;
-	UI::Box unproductive_box_;
-	UI::Textarea unproductive_label_;
-	UI::EditBox unproductive_percent_;
-	UI::Textarea unproductive_label2_;
-	UI::Textarea no_owned_label_;
-	UI::Textarea no_construction_label_;
-	UI::Textarea no_unproductive_label_;
+	/// At which percent to deem buildings as unproductive
+	int low_production_{33};
+
+	UI::Box hbox_owned_, hbox_construction_, hbox_unproductive_;
+	UI::Textarea label_name_, label_owned_, label_construction_, label_unproductive_,
+	   label_nr_owned_, label_nr_construction_, label_nr_unproductive_, label_threshold_;
+	UI::Button b_prev_owned_, b_next_owned_, b_prev_construction_, b_next_construction_,
+	   b_prev_unproductive_, b_next_unproductive_;
+	UI::SpinBox unproductive_threshold_;
 
 	/// The building type we are currently navigating
-	Widelands::DescriptionIndex current_building_type_;
+	Widelands::DescriptionIndex current_building_type_{Widelands::INVALID_INDEX};
 	/// The last building that was jumped to
-	int32_t last_building_index_;
+	int32_t last_building_index_{0};
 	/// The type of last building that was jumped to
-	Widelands::DescriptionIndex last_building_type_;
+	Widelands::DescriptionIndex last_building_type_{Widelands::INVALID_INDEX};
 	/// The last time the information in this Panel got updated
-	uint32_t lastupdate_;
+	Time lastupdate_{0U};
 	/// Whether the window was minimized the last time that think() was executed
-	uint32_t was_minimized_;
-
-	/// At which percent to deem buildings as unproductive
-	int low_production_;
+	bool was_minimized_{false};
 
 	/// Whether a building has been selected
-	bool has_selection_;
+	bool has_selection_{false};
 
 	/// The total number of building types available for all the tribes
 	const Widelands::DescriptionIndex nr_building_types_;

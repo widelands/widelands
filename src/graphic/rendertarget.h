@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,6 +22,7 @@
 #include <vector>
 
 #include "base/rect.h"
+#include "base/times.h"
 #include "graphic/align.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
@@ -54,8 +54,8 @@ public:
 	void set_window(const Recti& rc, const Vector2i& ofs);
 	bool enter_window(const Recti& rc, Recti* previous, Vector2i* prevofs);
 
-	int32_t width() const;
-	int32_t height() const;
+	[[nodiscard]] int32_t width() const;
+	[[nodiscard]] int32_t height() const;
 
 	void draw_line_strip(const std::vector<Vector2f>& points, const RGBColor& color, float width);
 	void draw_rect(const Recti&, const RGBColor&);
@@ -75,7 +75,7 @@ public:
 
 	void blitrect(const Vector2i& dst,
 	              const Image* image,
-	              const Recti& src,
+	              const Recti& rectangle,
 	              BlendMode blend_mode = BlendMode::UseAlpha);
 
 	// Blits the 'source_rect' from 'image' into the
@@ -110,22 +110,22 @@ public:
 	// The `opacity` parameter is ignored unless `player_color` is nullptr.
 	void blit_animation(const Vector2f& dst,
 	                    const Widelands::Coords& coords,
-	                    const float scale,
+	                    float scale,
 	                    uint32_t animation_id,
-	                    uint32_t time,
+	                    const Time& time,
 	                    const RGBColor* player_color = nullptr,
 	                    float opacity = 1.0f,
-	                    const int percent_from_bottom = 100);
+	                    int percent_from_bottom = 100);
 
 	void reset();
 
-	const Surface& get_surface() const {
+	[[nodiscard]] const Surface& get_surface() const {
 		return *surface_;
 	}
-	const Recti& get_rect() const {
+	[[nodiscard]] const Recti& get_rect() const {
 		return rect_;
 	}
-	const Vector2i& get_offset() const {
+	[[nodiscard]] const Vector2i& get_offset() const {
 		return offset_;
 	}
 

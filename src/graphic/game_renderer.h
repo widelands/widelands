@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2020 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,13 +20,13 @@
 #define WL_GRAPHIC_GAME_RENDERER_H
 
 #include "graphic/gl/fields_to_draw.h"
-#include "logic/map_objects/world/world.h"
+#include "logic/map_objects/descriptions.h"
 
 // Draw the terrain only.
 void draw_terrain(uint32_t gametime,
-                  const Widelands::World& world,
+                  const Widelands::Descriptions& descriptions,
                   const FieldsToDraw& fields_to_draw,
-                  const float scale,
+                  float scale,
                   const Workareas& workarea,
                   bool grid,
                   const Widelands::Player*,
@@ -36,7 +35,7 @@ void draw_terrain(uint32_t gametime,
 // Draw the border stones for 'field' if it is a border and 'visibility' is
 // correct.
 void draw_border_markers(const FieldsToDraw::Field& field,
-                         const float scale,
+                         float scale,
                          const FieldsToDraw& fields_to_draw,
                          RenderTarget* dst);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,18 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "ai/ai_hints.h"
 
 #include <memory>
+
+#include "base/log.h"
+#include "logic/game_data_error.h"
+
+namespace AI {
 
 /* RST
 AI Hints and Restrictions
@@ -60,7 +64,7 @@ make sure that you don't combine any incompatible features (for example,
 ``shipyard`` and ``mines`` don't combine).
 
 With the exception of the barracks and the building that produces carrier2
-(see: :ref:`lua_tribes_<tribename>.lua`), production of workers in production sites
+(see: :ref:`lua_tribes_tribes_units`), production of workers in production sites
 is not supported at this time.
 
 .. _ai_hints_common:
@@ -136,9 +140,9 @@ Production Sites
 ----------------
 
 **collects_ware_from_map**
-    The building will generate this ware from the map, e.g. a well mining the ``water`` ware,
-    or the hunter returning from the hunt with the ``meat`` ware. The same ware needs also to be
-    listed as the first one of the building's outputs, e.g.::
+    **DEPRECATED** The building will generate this ware from the map, e.g. a well mining the
+    ``water`` ware, or the hunter returning from the hunt with the ``meat`` ware. The same
+    ware needs also to be listed as the first one of the building's outputs, e.g.::
 
         aihints = {
             collects_ware_from_map = "meat"
@@ -154,12 +158,13 @@ Production Sites
     ``water`` (well).
 
 **mines**
-    The building will mine to obtain the given ware, e.g.::
+    **DEPRECATED** The building will mine to obtain the given ware, e.g.::
 
-        mines = "gold",
+        mines = "resource_gold",
 
 **mines_percent**
-    The percentage that a mine will mine of its resource before it needs enhancing, e.g.::
+    **DEPRECATED** The percentage that a mine will mine of its resource before it needs enhancing,
+    e.g.::
 
         mines_percent = 60,
 
@@ -194,7 +199,7 @@ Production Sites
         space_consumer = true,
 
 **supports_production_of**
-    This building will support the production of the given wares without producing
+    **DEPRECATED** This building will support the production of the given wares without producing
     it directly, e.g.::
 
         supports_production_of = { "fish" },
@@ -211,7 +216,9 @@ Production Sites
 
         requires_supporters = true,
 
-    For example if set for lumberjack, it will be built only if a renger is nearby.
+    For example if set for a frisian aqua farm, it will be built only if a clay pit producing the
+ponds is nearby.
+    **Note:** This hint shouldn't be used for lumberjacks due to internal AI mechanics
 
 **trainingsites_max_percent**
     The maximum percengate this training site will have among all training sites, e.g.::
@@ -225,9 +232,8 @@ Production Sites
 
 */
 
-BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
-   : mines_(table->has_key("mines") ? table->get_string("mines") : ""),
-     needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
+BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table, const std::string& building_name)
+   : needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
      space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
      expansion_(table->has_key("expansion") ? table->get_bool("expansion") : false),
      fighting_(table->has_key("fighting") ? table->get_bool("fighting") : false),
@@ -236,14 +242,10 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
      shipyard_(table->has_key("shipyard") ? table->get_bool("shipyard") : false),
      supports_seafaring_(
         table->has_key("supports_seafaring") ? table->get_bool("supports_seafaring") : false),
-     collects_ware_from_map_(table->has_key("collects_ware_from_map") ?
-                                table->get_string("collects_ware_from_map") :
-                                ""),
      prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till") : 0),
      basic_amount_(table->has_key("basic_amount") ? table->get_int("basic_amount") : 0),
      // 10 days default
      forced_after_(table->has_key("forced_after") ? table->get_int("forced_after") : 864000),
-     mines_percent_(table->has_key("mines_percent") ? table->get_int("mines_percent") : 100),
      very_weak_ai_limit_(
         table->has_key("very_weak_ai_limit") ? table->get_int("very_weak_ai_limit") : -1),
      weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
@@ -254,10 +256,21 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
                                    table->get_int("trainingsites_max_percent") :
                                    0) {
 	if (table->has_key("supports_production_of")) {
-		for (const std::string& ware_name :
-		     table->get_table("supports_production_of")->array_entries<std::string>()) {
-			supported_production_.insert(ware_name);
-		}
+		log_warn("%s: The 'supports_production_of' key in 'ai_hints' is no longer used",
+		         building_name.c_str());
+	}
+
+	if (table->has_key("collects_ware_from_map")) {
+		log_warn("%s: The 'collects_ware_from_map' key in 'ai_hints' is no longer used",
+		         building_name.c_str());
+	}
+
+	if (table->has_key("mines")) {
+		log_warn("%s: The 'mines' key in 'ai_hints' is no longer used", building_name.c_str());
+	}
+	if (table->has_key("mines_percent")) {
+		log_warn(
+		   "%s: The 'mines_percent' key in 'ai_hints' is no longer used", building_name.c_str());
 	}
 }
 
@@ -269,36 +282,16 @@ uint8_t BuildingHints::trainingsites_max_percent() const {
 	return trainingsites_max_percent_;
 }
 
-int16_t BuildingHints::get_ai_limit(const Widelands::AiType ai_type) const {
+int16_t BuildingHints::get_ai_limit(const AiType ai_type) const {
 	switch (ai_type) {
-	case Widelands::AiType::kVeryWeak:
+	case AiType::kVeryWeak:
 		return very_weak_ai_limit_;
-	case Widelands::AiType::kWeak:
+	case AiType::kWeak:
 		return weak_ai_limit_;
-	case Widelands::AiType::kNormal:
+	case AiType::kNormal:
 		return normal_ai_limit_;
 	}
 	NEVER_HERE();
-}
-
-// TODO(GunChleoc): WareDescr has a bare "preciousness" table that should be moved below a new
-// "aihints" table.
-void WareWorkerHints::read_preciousness(const std::string& name, const LuaTable& table) {
-	constexpr int kMaxRecommendedPreciousness = 50;
-	for (const std::string& key : table.keys<std::string>()) {
-		const int value = table.get_int(key);
-		if (value > 200) {
-			throw wexception("Preciousness of %d is far too high for ware/worker '%s' and tribe '%s'. "
-			                 "We recommend not going over %d.",
-			                 value, name.c_str(), key.c_str(), kMaxRecommendedPreciousness);
-		} else if (value > kMaxRecommendedPreciousness) {
-			log("WARNING: Preciousness of %d is a bit high for ware/worker '%s' and tribe '%s'. We "
-			    "recommend not going over %d.\n",
-			    value, name.c_str(), key.c_str(), kMaxRecommendedPreciousness);
-		}
-
-		preciousnesses_.insert(std::make_pair(key, value));
-	}
 }
 
 /// Returns the preciousness of the ware, or kInvalidWare if the tribe doesn't use the ware.
@@ -309,11 +302,21 @@ int WareWorkerHints::preciousness(const std::string& tribename) const {
 	return Widelands::kInvalidWare;
 }
 
-WareHints::WareHints(const std::string& ware_name, const LuaTable& table) : WareWorkerHints() {
-	read_preciousness(ware_name, table);
+void WareWorkerHints::set_preciousness(const std::string& ware_worker,
+                                       const std::string& tribename,
+                                       int p) {
+	constexpr int kMaxRecommendedPreciousness = 50;
+	if (p > 200) {
+		throw Widelands::GameDataError(
+		   "Preciousness of %d is far too high for ware/worker '%s' and tribe '%s'. "
+		   "We recommend not going over %d.",
+		   p, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
+	}
+	if (p > kMaxRecommendedPreciousness) {
+		log_warn("Preciousness of %d is a bit high for ware/worker '%s' and tribe '%s'. We "
+		         "recommend not going over %d.\n",
+		         p, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
+	}
+	preciousnesses_.insert(std::make_pair(tribename, p));
 }
-
-WorkerHints::WorkerHints(const std::string& worker_name, const LuaTable& table)
-   : WareWorkerHints() {
-	read_preciousness(worker_name, *table.get_table("preciousness"));
-}
+}  // namespace AI

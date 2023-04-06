@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -37,7 +36,7 @@ class Image;
  */
 class MouseCursor {
 public:
-	MouseCursor();
+	MouseCursor() = default;
 	~MouseCursor();
 
 	// Call initialize before first use
@@ -45,14 +44,14 @@ public:
 
 	// Enable/disable SDL mode
 	void set_use_sdl(bool init_use_sdl);
-	bool is_using_sdl() const;
+	[[nodiscard]] bool is_using_sdl() const;
 
 	// Switch between "normal" and "pressed" cursors
 	void change_cursor(bool is_pressed);
 
 	// Hide/show the cursor
 	void set_visible(bool visible);
-	bool is_visible() const;
+	[[nodiscard]] bool is_visible() const;
 
 	// Render the cursor (does nothing in SDL mode)
 	void draw(RenderTarget& rt, Vector2i position);

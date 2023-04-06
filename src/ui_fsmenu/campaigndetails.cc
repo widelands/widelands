@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2017-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,18 +12,18 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 #include "ui_fsmenu/campaigndetails.h"
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/scrollbar.h"
 
 CampaignDetails::CampaignDetails(Panel* parent)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      name_label_(this,
                  0,
                  0,
@@ -42,38 +42,33 @@ CampaignDetails::CampaignDetails(Panel* parent)
 }
 
 void CampaignDetails::update(const CampaignData& campaigndata) {
-	name_label_.set_text((boost::format("<rt>%s%s</rt>") %
-	                      /** TRANSLATORS: Header for campaign name */
-	                      as_heading(_("Campaign"), UI::PanelStyle::kFsMenu, true) %
-	                      as_content(campaigndata.descname, UI::PanelStyle::kFsMenu))
-	                        .str());
+	name_label_.set_text(format("<rt>%s%s</rt>",
+	                            /** TRANSLATORS: Header for campaign name */
+	                            as_heading(_("Campaign"), UI::PanelStyle::kFsMenu, true),
+	                            as_content(campaigndata.descname, UI::PanelStyle::kFsMenu)));
 
-	std::string description = "";
+	std::string description;
 
 	if (campaigndata.visible) {
-		description = (boost::format("%s%s") %
-		               /** TRANSLATORS: Header for campaign tribe */
-		               as_heading(_("Tribe"), UI::PanelStyle::kFsMenu) %
-		               as_content(campaigndata.tribename, UI::PanelStyle::kFsMenu))
-		                 .str();
-		description = (boost::format("%s%s") % description %
-		               /** TRANSLATORS: Header for campaign difficulty */
-		               as_heading(_("Difficulty"), UI::PanelStyle::kFsMenu))
-		                 .str();
-		description = (boost::format("%s%s") % description %
-		               as_content(campaigndata.difficulty_description, UI::PanelStyle::kFsMenu))
-		                 .str();
+		description = format("%s%s",
+		                     /** TRANSLATORS: Header for campaign tribe */
+		                     as_heading(_("Tribe"), UI::PanelStyle::kFsMenu),
+		                     as_content(campaigndata.tribename, UI::PanelStyle::kFsMenu));
+		description = format("%s%s", description,
+		                     /** TRANSLATORS: Header for campaign difficulty */
+		                     as_heading(_("Difficulty"), UI::PanelStyle::kFsMenu));
+		description =
+		   format("%s%s", description,
+		          as_content(campaigndata.difficulty_description, UI::PanelStyle::kFsMenu));
 
-		description = (boost::format("%s%s") % description %
-		               /** TRANSLATORS: Header for campaign description */
-		               as_heading(_("Description"), UI::PanelStyle::kFsMenu))
-		                 .str();
-		description = (boost::format("%s%s") % description %
-		               as_content(campaigndata.description, UI::PanelStyle::kFsMenu))
-		                 .str();
+		description = format("%s%s", description,
+		                     /** TRANSLATORS: Header for campaign description */
+		                     as_heading(_("Description"), UI::PanelStyle::kFsMenu));
+		description =
+		   format("%s%s", description, as_content(campaigndata.description, UI::PanelStyle::kFsMenu));
 	}
 
-	description = (boost::format("<rt>%s</rt>") % description).str();
+	description = format("<rt>%s</rt>", description);
 	descr_.set_text(description);
 	descr_.scroll_to_top();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,8 +20,10 @@
 
 #ifndef _WIN32
 #ifndef __APPLE__
+#if !defined(__linux__) || defined(__GLIBC__)
 
 #include <execinfo.h>
+#endif
 #endif
 #endif
 
@@ -30,16 +31,18 @@ std::string get_backtrace() {
 	std::string result("Backtrace:\n");
 #ifndef _WIN32
 #ifndef __APPLE__
+#if !defined(__linux__) || defined(__GLIBC__)
 #define BACKTRACE_STACKSIZE 24
 
 	void* stack[BACKTRACE_STACKSIZE];
 	size_t size = backtrace(stack, BACKTRACE_STACKSIZE);
 	char** const list = backtrace_symbols(stack, size);
-	for (char* const* it = list; size; --size, ++it) {
+	for (char* const* it = list; size != 0u; --size, ++it) {
 		result += *it;
 		result += '\n';
 	}
 	free(list);
+#endif
 #endif
 #endif
 	return result;

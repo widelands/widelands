@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -31,13 +30,12 @@ namespace Widelands {
 
 class MarketDescr : public BuildingDescr {
 public:
-	MarketDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
-	~MarketDescr() override {
-	}
+	MarketDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
+	~MarketDescr() override = default;
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	DescriptionIndex carrier() const {
+	[[nodiscard]] DescriptionIndex carrier() const {
 		return carrier_;
 	}
 
@@ -49,12 +47,12 @@ class Market : public Building {
 	MO_DESCR(MarketDescr)
 public:
 	explicit Market(const MarketDescr& descr);
-	~Market() override;
+	~Market() override = default;
 
 	void new_trade(int trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
 	void cancel_trade(int trade_id);
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 	void cleanup(EditorGameBase&) override;
 
 	void try_launching_batch(Game* game);
@@ -75,10 +73,10 @@ private:
 		std::vector<Worker*> workers;
 
 		// The number of individual wares in 'items', i.e. the sum of all '.second's.
-		int num_wares_per_batch() const;
+		[[nodiscard]] int num_wares_per_batch() const;
 
 		// True if the 'num_shipped_batches' equals the 'initial_num_batches'
-		bool fulfilled() const;
+		[[nodiscard]] bool fulfilled() const;
 	};
 
 	static void
@@ -87,7 +85,7 @@ private:
 	ware_arrived_callback(Game& g, InputQueue* q, DescriptionIndex ware, Worker* worker, void* data);
 
 	void ensure_wares_queue_exists(int ware_index);
-	bool is_ready_to_launch_batch(int trade_id);
+	bool is_ready_to_launch_batch(int trade_id) const;
 	void launch_batch(int trade_id, Game* game);
 
 	std::map<int, TradeOrder> trade_orders_;                  // Key is 'trade_id's.

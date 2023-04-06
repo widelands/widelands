@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,12 +20,12 @@
 
 #include "base/time_string.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "graphic/text_layout.h"
-#include "logic/map_objects/map_object.h"
+#include "logic/game_data_error.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 
 using Widelands::Message;
@@ -45,8 +44,13 @@ constexpr int kButtonSize = 34;
 constexpr int kMessageBodyY = kButtonSize + 3 * kPadding + kTableHeight;
 
 GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(
-        &plr, "messages", &registry, kWindowWidth, kWindowHeight, _("Messages: Inbox")),
+   : UI::UniqueWindow(&plr,
+                      UI::WindowStyle::kWui,
+                      "messages",
+                      &registry,
+                      kWindowWidth,
+                      kWindowHeight,
+                      _("Messages: Inbox")),
      message_body(this,
                   kPadding,
                   kMessageBodyY,
@@ -55,14 +59,11 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   UI::PanelStyle::kWui,
                   "",
                   UI::Align::kLeft,
-                  UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
-     mode(Mode::kInbox) {
+                  UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
 
 	list = new UI::Table<uintptr_t>(this, kPadding, kButtonSize + 2 * kPadding,
 	                                kWindowWidth - 2 * kPadding, kTableHeight, UI::PanelStyle::kWui,
 	                                UI::TableRows::kMulti);
-	list->selected.connect([this](uint32_t a) { selected(a); });
-	list->double_clicked.connect([this](uint32_t a) { double_clicked(a); });
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
 	list->add_column(60, pgettext("message", "Type"), "", UI::Align::kCenter);
 	list->add_column(60, _("Status"), "", UI::Align::kCenter);
@@ -76,34 +77,24 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	// Buttons for message types
 	geologistsbtn_ = new UI::Button(this, "filter_geologists_messages", kPadding, kPadding,
 	                                kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-	                                g_gr->images().get("images/wui/fieldaction/menu_geologist.png"));
-	geologistsbtn_->sigclicked.connect(
-	   [this]() { filter_messages(Widelands::Message::Type::kGeologists); });
+	                                g_image_cache->get("images/wui/fieldaction/menu_geologist.png"));
 
 	economybtn_ = new UI::Button(this, "filter_economy_messages", 2 * kPadding + kButtonSize,
 	                             kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-	                             g_gr->images().get("images/wui/stats/genstats_nrwares.png"));
-	economybtn_->sigclicked.connect(
-	   [this]() { filter_messages(Widelands::Message::Type::kEconomy); });
+	                             g_image_cache->get("images/wui/stats/genstats_nrwares.png"));
 
 	seafaringbtn_ =
 	   new UI::Button(this, "filter_seafaring_messages", 3 * kPadding + 2 * kButtonSize, kPadding,
 	                  kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-	                  g_gr->images().get("images/wui/buildings/start_expedition.png"));
-	seafaringbtn_->sigclicked.connect(
-	   [this]() { filter_messages(Widelands::Message::Type::kSeafaring); });
+	                  g_image_cache->get("images/wui/buildings/start_expedition.png"));
 
 	warfarebtn_ = new UI::Button(this, "filter_warfare_messages", 4 * kPadding + 3 * kButtonSize,
 	                             kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-	                             g_gr->images().get("images/wui/messages/messages_warfare.png"));
-	warfarebtn_->sigclicked.connect(
-	   [this]() { filter_messages(Widelands::Message::Type::kWarfare); });
+	                             g_image_cache->get("images/wui/messages/messages_warfare.png"));
 
 	scenariobtn_ = new UI::Button(this, "filter_scenario_messages", 5 * kPadding + 4 * kButtonSize,
 	                              kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-	                              g_gr->images().get("images/wui/menus/objectives.png"));
-	scenariobtn_->sigclicked.connect(
-	   [this]() { filter_messages(Widelands::Message::Type::kScenario); });
+	                              g_image_cache->get("images/wui/menus/objectives.png"));
 
 	message_filter_ = Widelands::Message::Type::kAllMessages;
 	set_filter_messages_tooltips();
@@ -112,25 +103,23 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	archivebtn_ = new UI::Button(this, "archive_or_restore_selected_messages", kPadding,
 	                             kWindowHeight - kPadding - kButtonSize, kButtonSize, kButtonSize,
 	                             UI::ButtonStyle::kWuiPrimary,
-	                             g_gr->images().get("images/wui/messages/message_archive.png"));
+	                             g_image_cache->get("images/wui/messages/message_archive.png"));
 	update_archive_button_tooltip();
-	archivebtn_->sigclicked.connect([this]() { archive_or_restore(); });
 
 	togglemodebtn_ = new UI::Button(
 	   this, "toggle_between_inbox_or_archive",
 	   archivebtn_->get_x() + archivebtn_->get_w() + kPadding, archivebtn_->get_y(), kButtonSize,
 	   kButtonSize, UI::ButtonStyle::kWuiPrimary,
-	   g_gr->images().get("images/wui/messages/message_archived.png"), _("Show Archive"));
-	togglemodebtn_->sigclicked.connect([this]() { toggle_mode(); });
+	   g_image_cache->get("images/wui/messages/message_archived.png"), _("Show Archive"));
 
-	centerviewbtn_ =
-	   new UI::Button(this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
-	                  archivebtn_->get_y(), kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary,
-	                  g_gr->images().get("images/wui/menus/goto.png"),
-	                  as_tooltip_text_with_hotkey(
-	                     /** TRANSLATORS: Tooltip in the messages window */
-	                     _("Center main mapview on location"), "g"));
-	centerviewbtn_->sigclicked.connect([this]() { center_view(); });
+	centerviewbtn_ = new UI::Button(
+	   this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
+	   archivebtn_->get_y(), kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary,
+	   g_image_cache->get("images/wui/menus/goto.png"),
+	   as_tooltip_text_with_hotkey(
+	      /** TRANSLATORS: Tooltip in the messages window */
+	      _("Center main mapview on location"),
+	      shortcut_string_for(KeyboardShortcut::kInGameMessagesGoto, true), UI::PanelStyle::kWui));
 	centerviewbtn_->set_enabled(false);
 
 	if (get_usedefaultpos()) {
@@ -148,8 +137,25 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	list->set_sort_column(ColTimeSent);
 	list->layout();
 
-	set_can_focus(true);
-	focus();
+	list->focus();
+
+	geologistsbtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kGeologists); });
+	economybtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kEconomy); });
+	seafaringbtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kSeafaring); });
+	warfarebtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kWarfare); });
+	scenariobtn_->sigclicked.connect(
+	   [this]() { filter_messages(Widelands::Message::Type::kScenario); });
+	list->selected.connect([this](uint32_t a) { selected(a); });
+	list->double_clicked.connect([this](uint32_t a) { double_clicked(a); });
+	archivebtn_->sigclicked.connect([this]() { archive_or_restore(); });
+	togglemodebtn_->sigclicked.connect([this]() { toggle_mode(); });
+	centerviewbtn_->sigclicked.connect([this]() { center_view(); });
+
+	initialization_complete();
 }
 
 /**
@@ -161,7 +167,7 @@ bool GameMessageMenu::compare_title(uint32_t a, uint32_t b) {
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
-	if (msga && msgb) {
+	if ((msga != nullptr) && (msgb != nullptr)) {
 		if (msga->title() == msgb->title()) {
 			return compare_time_sent(a, b);
 		}
@@ -179,7 +185,7 @@ bool GameMessageMenu::compare_status(uint32_t a, uint32_t b) {
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
-	if (msga && msgb) {
+	if ((msga != nullptr) && (msgb != nullptr)) {
 		if (msga->status() == msgb->status()) {
 			return compare_time_sent(a, b);
 		}
@@ -197,7 +203,7 @@ bool GameMessageMenu::compare_type(uint32_t a, uint32_t b) {
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
-	if (msga && msgb) {
+	if ((msga != nullptr) && (msgb != nullptr)) {
 		const Widelands::Message::Type cat_a = msga->message_type_category();
 		const Widelands::Message::Type cat_b = msgb->message_type_category();
 		if (cat_a == cat_b) {
@@ -216,7 +222,7 @@ bool GameMessageMenu::compare_time_sent(uint32_t a, uint32_t b) {
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
-	if (msga && msgb) {
+	if ((msga != nullptr) && (msgb != nullptr)) {
 		return msga->sent() > msgb->sent();
 	}
 	return false;  // shouldn't happen
@@ -241,11 +247,24 @@ void GameMessageMenu::show_new_message(MessageId const id, const Widelands::Mess
 	}
 
 	assert(iplayer().player().messages()[id] == &message);
-	assert(!list->find(id.value()));
 	Message::Status const status = message.status();
 	if ((mode == Mode::kArchive) != (status == Message::Status::kArchived)) {
 		toggle_mode();
 	}
+
+	if (auto* entry = list->find(id.value())) {
+		const uintptr_t e = reinterpret_cast<uintptr_t>(entry->entry());
+		for (uint32_t i = 0; i < list->size(); ++i) {
+			if (e == (*list)[i]) {
+				list->clear_selections();
+				list->scroll_to_item(i);
+				list->select(i);
+				return;
+			}
+		}
+		NEVER_HERE();
+	}
+
 	UI::Table<uintptr_t>::EntryRecord& te = list->add(id.value());
 	update_record(te, message);
 	list->sort();
@@ -264,7 +283,7 @@ void GameMessageMenu::think() {
 	uint32_t removed = 0;
 	const auto& sel = list->selections();
 	const uint32_t max_index = (sel.empty() ? 0 : *sel.rbegin());
-	for (uint32_t j = list->size(); j; --j) {
+	for (uint32_t j = list->size(); j != 0u; --j) {
 		MessageId id_((*list)[j - 1]);
 		if (Message const* const message = mq[id_]) {
 			if (should_be_hidden(*message)) {
@@ -292,14 +311,14 @@ void GameMessageMenu::think() {
 	for (const auto& temp_message : mq) {
 		MessageId const id = temp_message.first;
 		const Message& message = *temp_message.second;
-		if (!should_be_hidden(message) && !list->find(id.value())) {
+		if (!should_be_hidden(message) && (list->find(id.value()) == nullptr)) {
 			UI::Table<uintptr_t>::EntryRecord& er = list->add(id.value());
 			update_record(er, message);
 			list->sort();
 		}
 	}
 
-	if (list->size()) {
+	if (!list->empty()) {
 		if (!list->has_selection()) {
 			list->select(0);
 		}
@@ -315,13 +334,12 @@ void GameMessageMenu::think() {
 
 void GameMessageMenu::update_record(UI::Table<uintptr_t>::EntryRecord& er,
                                     const Widelands::Message& message) {
-	er.set_picture(ColType, g_gr->images().get(display_message_type_icon(message)));
+	er.set_picture(ColType, g_image_cache->get(display_message_type_icon(message)));
 	er.set_picture(
-	   ColStatus, g_gr->images().get(status_picture_filename[static_cast<int>(message.status())]));
+	   ColStatus, g_image_cache->get(status_picture_filename[static_cast<int>(message.status())]));
 	er.set_picture(ColTitle, message.icon(), message.title());
 
-	const uint32_t time = message.sent();
-	er.set_string(ColTimeSent, gametimestring(time));
+	er.set_string(ColTimeSent, gametimestring(message.sent().get()));
 }
 
 /*
@@ -339,7 +357,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 				game.send_player_command(new Widelands::CmdMessageSetStatusRead(
 				   game.get_gametime(), player.player_number(), id));
 			}
-			centerviewbtn_->set_enabled(message->position());
+			centerviewbtn_->set_enabled(bool(message->position()));
 			message_body.set_text(as_message(message->heading(), message->body()));
 			update_archive_button_tooltip();
 			return;
@@ -367,107 +385,45 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 	if (code.sym == SDLK_ESCAPE) {
 		return UI::Window::handle_key(true, code);
 	}
+
 	if (down) {
-		switch (code.sym) {
-		// Don't forget to change the tooltips if any of these get reassigned
-		case SDLK_g:
+		if (matches_shortcut(KeyboardShortcut::kCommonDeleteItem, code)) {
+			archive_or_restore();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesGoto, code)) {
 			if (centerviewbtn_->enabled()) {
 				center_view();
 			}
 			return true;
-
-		case SDLK_KP_0:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_0:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kAllMessages);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_1:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_1:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kGeologists);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_2:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_2:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kEconomy);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_3:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_3:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kSeafaring);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_4:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_4:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kWarfare);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_5:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_5:
-			if (code.mod & KMOD_ALT) {
-				filter_messages(Widelands::Message::Type::kScenario);
-				return true;
-			}
-			return false;
-
-		case SDLK_DELETE:
-			archive_or_restore();
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterAll, code)) {
+			filter_messages(Widelands::Message::Type::kAllMessages);
 			return true;
-		case SDLK_TAB:
-			// trigger some default handling here to avoid an endless loop
-			// (if not handled here then handling is passed down to the table 'list',
-			// but tables pass tab key handling back to their parents)
-			return UI::Panel::handle_key(down, code);
-		case SDL_SCANCODE_KP_PERIOD:
-		case SDLK_KP_PERIOD:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		default:
-			break;  // not handled
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterGeologists, code)) {
+			filter_messages(Widelands::Message::Type::kGeologists);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterEconomy, code)) {
+			filter_messages(Widelands::Message::Type::kEconomy);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterSeafaring, code)) {
+			filter_messages(Widelands::Message::Type::kSeafaring);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterWarfare, code)) {
+			filter_messages(Widelands::Message::Type::kWarfare);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessagesFilterScenario, code)) {
+			filter_messages(Widelands::Message::Type::kScenario);
+			return true;
 		}
 	}
 
-	return list->handle_key(down, code);
+	return UI::UniqueWindow::handle_key(down, code);
 }
 
 void GameMessageMenu::archive_or_restore() {
@@ -479,7 +435,7 @@ void GameMessageMenu::archive_or_restore() {
 
 	std::set<uint32_t> selections = list->selections();
 	for (const uint32_t index : selections) {
-		const uintptr_t selected_record = list->get(list->get_record(index));
+		const uintptr_t selected_record = UI::Table<uintptr_t>::get(list->get_record(index));
 		switch (mode) {
 		case Mode::kInbox:
 			// Archive highlighted message
@@ -569,7 +525,9 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip(as_tooltip_text_with_hotkey(
 		   /** TRANSLATORS: Tooltip in the messages window */
-		   _("Show all messages"), pgettext("hotkey", "Alt+0")));
+		   _("Show all messages"),
+		   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterAll, true),
+		   UI::PanelStyle::kWui));
 	}
 }
 
@@ -579,19 +537,29 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 void GameMessageMenu::set_filter_messages_tooltips() {
 	geologistsbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show geologists' messages only"), pgettext("hotkey", "Alt+1")));
+	   _("Show geologists’ messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterGeologists, true),
+	   UI::PanelStyle::kWui));
 	economybtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show economy messages only"), pgettext("hotkey", "Alt+2")));
+	   _("Show economy messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterEconomy, true),
+	   UI::PanelStyle::kWui));
 	seafaringbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show seafaring messages only"), pgettext("hotkey", "Alt+3")));
+	   _("Show seafaring messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterSeafaring, true),
+	   UI::PanelStyle::kWui));
 	warfarebtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show warfare messages only"), pgettext("hotkey", "Alt+4")));
+	   _("Show warfare messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterWarfare, true),
+	   UI::PanelStyle::kWui));
 	scenariobtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show scenario messages only"), pgettext("hotkey", "Alt+5")));
+	   _("Show scenario messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterScenario, true),
+	   UI::PanelStyle::kWui));
 }
 
 /**
@@ -629,15 +597,15 @@ void GameMessageMenu::toggle_mode() {
 	case Mode::kInbox:
 		mode = Mode::kArchive;
 		set_title(_("Messages: Archive"));
-		archivebtn_->set_pic(g_gr->images().get("images/wui/messages/message_restore.png"));
-		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_new.png"));
+		archivebtn_->set_pic(g_image_cache->get("images/wui/messages/message_restore.png"));
+		togglemodebtn_->set_pic(g_image_cache->get("images/wui/messages/message_new.png"));
 		togglemodebtn_->set_tooltip(_("Show Inbox"));
 		break;
 	case Mode::kArchive:
 		mode = Mode::kInbox;
 		set_title(_("Messages: Inbox"));
-		archivebtn_->set_pic(g_gr->images().get("images/wui/messages/message_archive.png"));
-		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_archived.png"));
+		archivebtn_->set_pic(g_image_cache->get("images/wui/messages/message_archive.png"));
+		togglemodebtn_->set_pic(g_image_cache->get("images/wui/messages/message_archived.png"));
 		togglemodebtn_->set_tooltip(_("Show Archive"));
 		break;
 	}
@@ -661,10 +629,9 @@ void GameMessageMenu::update_archive_button_tooltip() {
 			    * message.
 			    * DO NOT omit the placeholder in your translation.
 			    */
-			   (boost::format(ngettext("Restore the selected %d message",
-			                           "Restore the selected %d messages", no_selections)) %
-			    no_selections)
-			      .str();
+			   format(ngettext("Restore the selected %d message", "Restore the selected %d messages",
+			                   no_selections),
+			          no_selections);
 		} else {
 			/** TRANSLATORS: Tooltip in the messages window */
 			button_tooltip = _("Restore selected message");
@@ -677,16 +644,60 @@ void GameMessageMenu::update_archive_button_tooltip() {
 			    * message.
 			    * DO NOT omit the placeholder in your translation.
 			    */
-			   (boost::format(ngettext("Archive the selected %d message",
-			                           "Archive the selected %d messages", no_selections)) %
-			    no_selections)
-			      .str();
+			   format(ngettext("Archive the selected %d message", "Archive the selected %d messages",
+			                   no_selections),
+			          no_selections);
 		} else {
 			/** TRANSLATORS: Tooltip in the messages window */
 			button_tooltip = _("Archive selected message");
 		}
 		break;
 	}
-	/** TRANSLATORS: Del is the "Delete" key on the keyboard */
-	archivebtn_->set_tooltip(as_tooltip_text_with_hotkey(button_tooltip, pgettext("hotkey", "Del")));
+	archivebtn_->set_tooltip(as_tooltip_text_with_hotkey(
+	   button_tooltip, shortcut_string_for(KeyboardShortcut::kCommonDeleteItem, true),
+	   UI::PanelStyle::kWui));
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& GameMessageMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r = dynamic_cast<InteractivePlayer&>(ib).message_menu_;
+			r.create();
+			assert(r.window);
+			GameMessageMenu& m = dynamic_cast<GameMessageMenu&>(*r.window);
+			m.think();  // Fills the list
+			if ((m.mode == Mode::kInbox) ^ (fr.unsigned_8() == 1)) {
+				m.toggle_mode();
+			}
+			m.filter_messages(static_cast<Widelands::Message::Type>(fr.unsigned_8()));
+			size_t nr_sel = fr.unsigned_32();
+			if (nr_sel != 0u) {
+				for (; nr_sel != 0u; --nr_sel) {
+					m.list->multiselect(fr.unsigned_32(), true);
+				}
+				m.list->multiselect(fr.unsigned_32(), true);
+			}
+			return m;
+		}
+		throw Widelands::UnhandledVersionError(
+		   "Messages Menu", packet_version, kCurrentPacketVersion);
+
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("messages menu: %s", e.what());
+	}
+}
+void GameMessageMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(mode == Mode::kInbox ? 1 : 0);
+	fw.unsigned_8(static_cast<uint8_t>(message_filter_));
+	const size_t nr_sel = list->selections().size();
+	fw.unsigned_32(nr_sel);
+	if (nr_sel != 0u) {
+		for (const uint32_t& s : list->selections()) {
+			fw.unsigned_32(s);
+		}
+		fw.unsigned_32(list->selection_index());
+	}
 }

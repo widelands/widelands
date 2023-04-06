@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,7 +20,6 @@
 #define WL_MAP_IO_MAP_ROADDATA_PACKET_H
 
 #include "map_io/map_data_packet.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 /*
  * This parses the roads data (where it is, where it belongs to
@@ -30,11 +28,7 @@
 namespace Widelands {
 class MapRoaddataPacket {
 public:
-	void read(FileSystem&,
-	          EditorGameBase&,
-	          bool,
-	          MapObjectLoader&,
-	          const TribesLegacyLookupTable& tribes_lookup_table);
+	void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 };
 }  // namespace Widelands

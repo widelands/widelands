@@ -6,4 +6,5 @@ Widelands Scripting Reference
 
    core
    map_objects
+   themes
    autogen_toc_auxiliary

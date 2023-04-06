@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,7 +28,10 @@ namespace Widelands {
 
 constexpr uint32_t kCurrentPacketVersion = 2;
 
-void MapPlayerPositionPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader&) {
+void MapPlayerPositionPacket::read(FileSystem& fs,
+                                   EditorGameBase& egbase,
+                                   bool /* skip */,
+                                   MapObjectLoader& /* mol */) {
 	Profile prof;
 	prof.read("player_position", nullptr, fs);
 	Section& s = prof.get_safe_section("global");
@@ -47,8 +49,7 @@ void MapPlayerPositionPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 				try {
 					map->set_starting_pos(
 					   p,
-					   get_safe_coords((boost::format("player_%u") % static_cast<unsigned int>(p)).str(),
-					                   extent, &s));
+					   get_safe_coords(format("player_%u", static_cast<unsigned int>(p)), extent, &s));
 				} catch (const WException& e) {
 					throw GameDataError("player %u: %s", p, e.what());
 				}
@@ -62,7 +63,9 @@ void MapPlayerPositionPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 	}
 }
 
-void MapPlayerPositionPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
+void MapPlayerPositionPacket::write(FileSystem& fs,
+                                    EditorGameBase& egbase,
+                                    MapObjectSaver& /* mos */) {
 	Profile prof;
 	Section& s = prof.create_section("global");
 
@@ -72,8 +75,7 @@ void MapPlayerPositionPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 	const Map& map = egbase.map();
 	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		set_coords((boost::format("player_%u") % static_cast<unsigned int>(p)).str(),
-		           map.get_starting_pos(p), &s);
+		set_coords(format("player_%u", static_cast<unsigned int>(p)), map.get_starting_pos(p), &s);
 	}
 
 	prof.write("player_position", false, fs);

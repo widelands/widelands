@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_barracks",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Barracks"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -21,18 +21,15 @@ tribes:new_productionsite_type {
       grout = 1
    },
 
-   animations = {
-      idle = { -- TODO(GunChleoc): make animations
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 50, 38 },
-      },
-      build = { -- TODO(GunChleoc): make animations
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 50, 38 },
-      },
-      working = { -- TODO(GunChleoc): make animations
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 50, 38 },
+   animation_directory = dirname,
+   -- TODO(Nordfriese): Make animations.
+   animations = {idle = {hotspot = {55, 49}}},
+   spritesheets = {
+      build = {
+         hotspot = {55, 49},
+         frames = 3,
+         columns = 1,
+         rows = 3
       }
    },
 
@@ -56,12 +53,14 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
          descname = pgettext("barbarians_building", "recruiting soldier"),
          actions = {
+            -- time total: 30 sec
             "return=skipped unless economy needs barbarians_soldier",
             "consume=ax barbarians_recruit",
-            "sleep=duration:15s",
-            "animate=working duration:15s",
+            "sleep=duration:30s",
             "recruit=barbarians_soldier"
          }
       },
    }
 }
+
+pop_textdomain()

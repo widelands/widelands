@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_stonemasons_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Stonemason’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -20,14 +20,20 @@ tribes:new_productionsite_type {
       marble = 2
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 58, 61 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 63, 64 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 58, 61 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 63, 64 },
       },
    },
 
@@ -48,7 +54,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column because ...
-         descname = _"sculpting a marble column",
+         descname = _("sculpting a marble column"),
          actions = {
             "return=skipped unless economy needs marble_column",
             "consume=marble:2",
@@ -60,3 +66,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

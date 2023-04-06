@@ -17,6 +17,7 @@ run(function()
       end
    end
 
+   game.desired_speed = 5000
    sleep(1000)
 
    local b = p1:place_building("barbarians_barracks", map:get_field(25, 25), false, true)

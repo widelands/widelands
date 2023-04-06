@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,26 +28,23 @@
 class Factory {
 public:
 	virtual void push_player(lua_State* L, Widelands::PlayerNumber) = 0;
-	virtual ~Factory() {
-	}
+	virtual ~Factory() = default;
 };
 
 class GameFactory : public Factory {
 public:
-	~GameFactory() override {
-	}
+	~GameFactory() override = default;
 
 	void push_player(lua_State* L, Widelands::PlayerNumber plr) override;
 };
 
 class EditorFactory : public Factory {
 public:
-	~EditorFactory() override {
-	}
+	~EditorFactory() override = default;
 
 	void push_player(lua_State* L, Widelands::PlayerNumber plr) override;
 };
 
-Factory& get_factory(lua_State* const L);
+Factory& get_factory(lua_State* L);
 
 #endif  // end of include guard: WL_SCRIPTING_FACTORY_H

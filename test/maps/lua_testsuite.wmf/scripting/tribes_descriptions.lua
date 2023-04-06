@@ -1,5 +1,3 @@
-set_textdomain("tribes")
-
 test_descr = lunit.TestCase("Tribes descriptions test")
 
 --  =======================================================
@@ -13,9 +11,9 @@ function test_descr:test_tribe_descr()
 end
 
 function test_descr:test_descname()
-   assert_equal(_"Atlanteans", egbase:get_tribe_description("atlanteans").descname)
-   assert_equal(_"Barbarians", egbase:get_tribe_description("barbarians").descname)
-   assert_equal(_"Empire", egbase:get_tribe_description("empire").descname)
+   assert_equal(_("Atlanteans"), egbase:get_tribe_description("atlanteans").descname)
+   assert_equal(_("Barbarians"), egbase:get_tribe_description("barbarians").descname)
+   assert_equal(_("Empire"), egbase:get_tribe_description("empire").descname)
 end
 
 function test_descr:test_name()
@@ -46,6 +44,11 @@ function test_descr:test_get_buildings()
          assert_true(building.max_attack ~= nil or building.max_defense ~= nil or building.max_evade ~= nil or building.max_health ~= nil)
       end
    end
+end
+
+function test_descr:test_get_builder()
+   local tribe = egbase:get_tribe_description("atlanteans")
+   assert_equal("atlanteans_builder", tribe.builder)
 end
 
 function test_descr:test_get_carrier()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2020 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -37,56 +36,56 @@ ShippingItem::ShippingItem(Worker& worker) : object_(&worker) {
 }
 
 void ShippingItem::get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const {
-	if (ware) {
+	if (ware != nullptr) {
 		*ware = nullptr;
 	}
-	if (worker) {
+	if (worker != nullptr) {
 		*worker = nullptr;
 	}
 
 	MapObject* obj = object_.get(game);
-	if (!obj) {
+	if (obj == nullptr) {
 		return;
 	}
 
 	if (obj->descr().type() == MapObjectType::WARE) {
-		if (ware) {
+		if (ware != nullptr) {
 			*ware = dynamic_cast<WareInstance*>(obj);
 		}
 		return;
 	}
 
-	if (worker) {
+	if (worker != nullptr) {
 		*worker = dynamic_cast<Worker*>(obj);
 	}
 }
 
-void ShippingItem::set_economy(Game& game, Economy* e, WareWorker type) {
+void ShippingItem::set_economy(const Game& game, Economy* e, WareWorker type) const {
 	WareInstance* ware;
 	Worker* worker;
 	get(game, &ware, &worker);
 
-	if (ware && type == wwWARE) {
+	if ((ware != nullptr) && type == wwWARE) {
 		ware->set_economy(e);
 	}
-	if (worker) {
+	if (worker != nullptr) {
 		worker->set_economy(e, type);
 	}
 }
 
-void ShippingItem::set_location(Game& game, MapObject* obj) {
+void ShippingItem::set_location(Game& game, MapObject* obj) const {
 	WareInstance* ware;
 	Worker* worker;
 	get(game, &ware, &worker);
 
-	if (ware) {
+	if (ware != nullptr) {
 		if (upcast(Building, building, obj)) {
 			ware->enter_building(game, *building);
 		} else {
 			ware->set_location(game, obj);
 		}
 	}
-	if (worker) {
+	if (worker != nullptr) {
 		worker->set_location(dynamic_cast<PlayerImmovable*>(obj));
 		if (upcast(Building, building, obj)) {
 			worker->set_position(game, building->get_position());
@@ -94,16 +93,16 @@ void ShippingItem::set_location(Game& game, MapObject* obj) {
 	}
 }
 
-void ShippingItem::end_shipping(Game& game) {
+void ShippingItem::end_shipping(Game& game) const {
 	WareInstance* ware;
 	Worker* worker;
 	get(game, &ware, &worker);
 
-	if (ware) {
+	if (ware != nullptr) {
 		ware->update(game);
-		ware->schedule_act(game, 10);
+		ware->schedule_act(game, Duration(10));
 	}
-	if (worker) {
+	if (worker != nullptr) {
 		worker->end_shipping(game);
 	}
 }
@@ -119,12 +118,12 @@ void ShippingItem::update_destination(Game& game, PortDock& pd) {
 
 	PlayerImmovable* next = nullptr;
 
-	if (ware) {
+	if (ware != nullptr) {
 		next = ware->get_next_move_step(game);
 	}
-	if (worker) {
+	if (worker != nullptr) {
 		Transfer* transfer = worker->get_transfer();
-		if (transfer) {
+		if (transfer != nullptr) {
 			bool success;
 			next = transfer->get_next_step(&pd, success);
 		}
@@ -159,12 +158,12 @@ void ShippingItem::Loader::load(FileRead& fr) {
 	}
 }
 
-ShippingItem ShippingItem::Loader::get(MapObjectLoader& mol) {
+ShippingItem ShippingItem::Loader::get(MapObjectLoader& mol) const {
 	ShippingItem it;
 	if (serial_ != 0) {
 		it.object_ = &mol.get<MapObject>(serial_);
 		it.destination_dock_ =
-		   destination_serial_ ? &mol.get<PortDock>(destination_serial_) : nullptr;
+		   destination_serial_ != 0u ? &mol.get<PortDock>(destination_serial_) : nullptr;
 	}
 	return it;
 }

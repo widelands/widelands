@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,20 +21,19 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 class Economy;
 
 struct CmdCallEconomyBalance : public GameLogicCommand {
-	CmdCallEconomyBalance() : GameLogicCommand(0), timerid_(0) {
+	CmdCallEconomyBalance() : GameLogicCommand(Time()) {
 	}  ///< for load and save
 
-	CmdCallEconomyBalance(uint32_t starttime, Economy*, uint32_t timerid);
+	CmdCallEconomyBalance(const Time&, Economy*, uint32_t timerid);
 
 	void execute(Game&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kCallEconomyBalance;
 	}
 
@@ -44,8 +42,8 @@ struct CmdCallEconomyBalance : public GameLogicCommand {
 
 private:
 	OPtr<Flag> flag_;
-	WareWorker type_;
-	uint32_t timerid_;
+	WareWorker type_{wwWARE};
+	uint32_t timerid_{0U};
 };
 }  // namespace Widelands
 

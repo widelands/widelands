@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 /*
@@ -23,28 +22,26 @@
 
 #include "graphic/wordwrap.h"
 
+#include <cstddef>
 #include <memory>
 
+#include <ui_basic/mouse_constants.h>
 #include <unicode/unistr.h>
 
-#include "base/log.h"
+#include "base/string.h"
 #include "graphic/color.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
 #include "graphic/text_layout.h"
 
 namespace {
-std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
+inline std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
 	// UI Text is always bold due to historic reasons
-	static boost::format f(
-	   "<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
-	f % ptsize;
-	f % clr.hex_value();
-	f % richtext_escape(text);
-	return f.str();
+	return format(
+	   "<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>",
+	   ptsize, clr.hex_value(), richtext_escape(text));
 }
 
 int text_width(const std::string& text, int ptsize) {
@@ -64,12 +61,20 @@ int text_height(int ptsize) {
 
 namespace UI {
 
+constexpr int CARET_BLINKING_DELAY = 1000;
+constexpr int CURSOR_MOVEMENT_THRESHOLD = 200;
+
 WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)
-   : draw_caret_(false),
-     fontsize_(fontsize),
+   : fontsize_(fontsize),
      color_(color),
-     font_(RT::load_font(UI::g_fh->fontset()->sans_bold(), fontsize_)) {
+     font_(RT::load_font(UI::g_fh->fontset()->sans_bold(), fontsize_)),
+     caret_timer_("", true),
+     cursor_movement_timer_("", true) {
 	wrapwidth_ = gwrapwidth;
+	caret_ms_ = 0;
+	cursor_ms_ = 0;
+	caret_timer_.ms_since_last_query();
+	cursor_movement_timer_.ms_since_last_query();
 
 	if (wrapwidth_ < std::numeric_limits<uint32_t>::max()) {
 		if (wrapwidth_ < 2 * kLineMargin) {
@@ -265,8 +270,8 @@ bool WordWrap::line_fits(const std::string& text, uint32_t safety_margin) const 
 uint32_t WordWrap::width() const {
 	uint32_t calculated_width = 0;
 
-	for (uint32_t line = 0; line < lines_.size(); ++line) {
-		uint32_t linewidth = text_width(lines_[line].text, fontsize_);
+	for (const LineData& line : lines_) {
+		uint32_t linewidth = text_width(line.text, fontsize_);
 		if (linewidth > calculated_width) {
 			calculated_width = linewidth;
 		}
@@ -279,7 +284,24 @@ uint32_t WordWrap::width() const {
  * Compute the total height of the word-wrapped text.
  */
 uint32_t WordWrap::height() const {
-	return text_height(fontsize_) * (lines_.size()) + 2 * kLineMargin;
+	return lines_.size() * text_height(fontsize_) +
+	       2UL * kLineMargin;  // NOLINT silence bugprone-implicit-widening-of-multiplication-result
+}
+
+uint32_t WordWrap::line_index(int32_t y) const {
+	return std::min(size_t((y - 2 * kLineMargin) / text_height(fontsize_)), lines_.size() - 1);
+}
+uint32_t WordWrap::offset_of_line_at(int32_t y) const {
+	return line_offset(line_index(y));
+}
+std::string WordWrap::text_of_line_at(int32_t y) const {
+	size_t line_idx = line_index(y);
+	line_idx = std::min(line_idx, lines_.size() - 1);
+	return lines_[line_idx].text;
+}
+
+int WordWrap::text_width_of(std::string& text) const {
+	return text_width(text, fontsize_);
 }
 
 /**
@@ -287,7 +309,7 @@ uint32_t WordWrap::height() const {
  * appears in in the wrapped text, and also the @p pos within that line (as an offset).
  */
 void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) const {
-	assert(lines_.size());
+	assert(!lines_.empty());
 	assert(lines_[0].start == 0);
 
 	uint32_t min = 0;
@@ -321,14 +343,29 @@ uint32_t WordWrap::line_offset(uint32_t line) const {
  *
  * \note This also draws the caret, if any.
  */
-void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t caret) {
+void WordWrap::draw(RenderTarget& dst,
+                    Vector2i where,
+                    Align align,
+                    uint32_t caret,
+                    bool with_selection,
+                    uint32_t selection_start,
+                    uint32_t selection_end,
+                    uint32_t scrollbar_position,
+                    const std::string& caret_image_path) {
 	if (lines_.empty()) {
 		return;
 	}
 
-	uint32_t caretline, caretpos;
+	uint32_t caretline;
+	uint32_t caretpos;
+	uint32_t selection_start_line;
+	uint32_t selection_start_x;
+	uint32_t selection_end_line;
+	uint32_t selection_end_x;
 
 	calc_wrapped_pos(caret, caretline, caretpos);
+	calc_wrapped_pos(selection_start, selection_start_line, selection_start_x);
+	calc_wrapped_pos(selection_end, selection_end_line, selection_end_x);
 
 	++where.y;
 
@@ -351,18 +388,85 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 		UI::correct_for_align(alignment, rendered_text->width(), &point);
 		rendered_text->draw(dst, point);
 
+		if (with_selection) {
+			highlight_selection(dst, scrollbar_position, selection_start_line, selection_start_x,
+			                    selection_end_line, selection_end_x, fontheight, line, point);
+		}
+
 		if (draw_caret_ && line == caretline) {
 			std::string line_to_caret = lines_[line].text.substr(0, caretpos);
 			// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 			int caret_x = text_width(line_to_caret, fontsize_);
 
-			const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
+			const Image* caret_image = g_image_cache->get(caret_image_path);
 			Vector2i caretpt = Vector2i::zero();
 			caretpt.x = point.x + caret_x - caret_image->width() + kLineMargin;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
-			dst.blit(caretpt, caret_image);
+
+			if (caret_ms_ > CARET_BLINKING_DELAY || cursor_movement_active_) {
+				dst.blit(caretpt, caret_image);
+			}
+			if (caret_ms_ > 2 * CARET_BLINKING_DELAY) {
+				caret_ms_ = 0;
+			}
+			if (!cursor_movement_active_) {
+				caret_ms_ += caret_timer_.ms_since_last_query();
+			}
+
+			if (cursor_ms_ > CURSOR_MOVEMENT_THRESHOLD) {
+				cursor_movement_active_ = false;
+			}
+			if (cursor_movement_active_) {
+				cursor_ms_ += cursor_movement_timer_.ms_since_last_query();
+				caret_timer_.ms_since_last_query();
+			}
 		}
 	}
+}
+void WordWrap::highlight_selection(RenderTarget& dst,
+                                   uint32_t scrollbar_position,
+                                   uint32_t selection_start_line,
+                                   uint32_t selection_start_x,
+                                   uint32_t selection_end_line,
+                                   uint32_t selection_end_x,
+                                   const int fontheight,
+                                   uint32_t line,
+                                   const Vector2i& point) const {
+
+	Vector2i highlight_start = Vector2i::zero();
+	Vector2i highlight_end = Vector2i::zero();
+	if (line == selection_start_line) {
+		std::string text_before_selection = lines_[line].text.substr(0, selection_start_x);
+		highlight_start = Vector2i(text_width(text_before_selection, fontsize_) + point.x,
+		                           (line * fontheight) - scrollbar_position);
+
+		if (line == selection_end_line) {
+			size_t nr_characters = selection_end_x - selection_start_x;
+			std::string selected_text = lines_[line].text.substr(selection_start_x, nr_characters);
+			highlight_end = Vector2i(text_width(selected_text, fontsize_), fontheight);
+		} else {
+			std::string selected_text = lines_[line].text.substr(selection_start_x);
+			highlight_end = Vector2i(text_width(selected_text, fontsize_), fontheight);
+		}
+
+	} else if (line > selection_start_line && line < selection_end_line) {
+		highlight_start = Vector2i(point.x, (line * fontheight) - scrollbar_position);
+		highlight_end = Vector2i(text_width(lines_[line].text, fontsize_), fontheight);
+
+	} else if (line == selection_end_line) {
+		highlight_start = Vector2i(point.x, (line * fontheight) - scrollbar_position);
+		highlight_end =
+		   Vector2i(text_width(lines_[line].text.substr(0, selection_end_x), fontsize_), fontheight);
+	}
+	dst.brighten_rect(
+	   Recti(highlight_start, highlight_end.x, highlight_end.y), BUTTON_EDGE_BRIGHT_FACTOR);
+}
+
+void WordWrap::enter_cursor_movement_mode() {
+	cursor_movement_active_ = true;
+	cursor_ms_ = 0;
+	caret_ms_ = 1.5 * CARET_BLINKING_DELAY;
+	cursor_movement_timer_.ms_since_last_query();
 }
 
 /**
@@ -384,6 +488,10 @@ uint32_t WordWrap::quick_width(const std::string& text) const {
 		}
 	}
 	return result;
+}
+void WordWrap::focus() {
+	caret_ms_ = CARET_BLINKING_DELAY;
+	caret_timer_.ms_since_last_query();
 }
 
 }  // namespace UI

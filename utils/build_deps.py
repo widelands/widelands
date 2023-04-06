@@ -71,7 +71,6 @@ def extract_includes(srcdir, source):
 
 
 __USES_INCLUDES = defaultdict(str)
-__USES_INCLUDES['USES_BOOST_REGEX'] = r'<boost\/regex\.hpp>'
 __USES_INCLUDES['USES_OPENGL'] = r'(<glbinding\/\w+\.h>)|(<GL\/glew\.h>)'
 __USES_INCLUDES['USES_ICU'] = r'<unicode\/.+\.h>'
 __USES_INCLUDES['USES_INTL'] = r'"third_party\/gettext\/gettext\.h"'
@@ -81,6 +80,8 @@ __USES_INCLUDES['USES_SDL2_MIXER'] = r'<SDL_mixer\.h>'
 __USES_INCLUDES['USES_SDL2_TTF'] = r'<SDL_ttf\.h>'
 __USES_INCLUDES['USES_SDL2'] = r'(?!(<SDL_image\.h>|<SDL_mixer\.h>|<SDL_ttf\.h>))(<SDL.+\.h>)'
 __USES_INCLUDES['USES_ZLIB'] = r'"zlib\.h"'
+__USES_INCLUDES['USES_ATOMIC'] = r'<atomic>'
+__USES_INCLUDES['USES_MINIZIP'] = r'(<zip\.h>|<unzip\.h>)'
 
 
 def extract_uses_includes(srcdir, source):
@@ -192,7 +193,6 @@ def report_unused_sources(srcdir, sources, owners_of_src):
 
 
 def report_unmentioned_or_unnecessary_dependencies(srcdir, target, includes_by_src, uses_includes_by_src, owners_of_src):
-
     # Collect for DEPENDS
     target_includes = set()
     for src in target.srcs:

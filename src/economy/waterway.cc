@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -37,7 +36,7 @@ namespace Widelands {
 // dummy instance because MapObject needs a description
 namespace {
 const WaterwayDescr g_waterway_descr("waterway", "Waterway");
-}
+}  // namespace
 
 bool Waterway::is_waterway_descr(MapObjectDescr const* const descr) {
 	return descr == &g_waterway_descr;
@@ -72,18 +71,19 @@ void Waterway::link_into_flags(EditorGameBase& egbase, bool loading) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	if (!loading) {
-		if (is_a(Game, &egbase)) {
+		if (egbase.is_game()) {
 			request_ferry(egbase);
 		}
 	}
 }
 
 bool Waterway::notify_ware(Game& game, FlagId flag) {
-	return ferry_ && ferry_->notify_ware(game, flag);
+	Ferry* f = ferry_.get(game);
+	return (f != nullptr) && f->notify_ware(game, flag);
 }
 
 void Waterway::remove_worker(Worker& w) {
-	if (ferry_ == &w) {
+	if (ferry_.get(owner().egbase()) == &w) {
 		ferry_ = nullptr;
 		// Since waterways cannot have any other worker than their own ferry and since a
 		// ferry cannot be disassigned except by destroying its waterway, I assume that
@@ -94,13 +94,12 @@ void Waterway::remove_worker(Worker& w) {
 
 void Waterway::request_ferry(EditorGameBase& egbase) {
 	FerryFleet* fleet = new FerryFleet(get_owner());
-	fleet->request_ferry(egbase, this);
-	fleet->init(egbase);
+	fleet->init(egbase, this);
 }
 
-void Waterway::assign_carrier(Carrier& c, uint8_t) {
-	if (ferry_) {
-		ferry_->set_location(nullptr);
+void Waterway::assign_carrier(Carrier& c, uint8_t /* slot */) {
+	if (Ferry* f = ferry_.get(owner().egbase())) {
+		f->set_location(nullptr);
 	}
 	ferry_ = dynamic_cast<Ferry*>(&c);
 }
@@ -109,10 +108,11 @@ void Waterway::set_fleet(FerryFleet* fleet) {
 	if (fleet_ == fleet) {
 		return;
 	}
-	if (fleet_ && fleet) {
+	FerryFleet* old_fleet = fleet_.get(get_owner()->egbase());
+	if ((old_fleet != nullptr) && (fleet != nullptr)) {
 		// Only if the new fleet is non-null, to avoid problems in end-of-game cleanup
 		if (upcast(Game, game, &get_owner()->egbase())) {
-			fleet_->cancel_ferry_request(*game, this);
+			old_fleet->cancel_ferry_request(*game, this);
 		}
 	}
 	// This function should be called only by Fleet code, so we assume that the
@@ -146,13 +146,13 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 	path.truncate(index);
 	secondpath.trim_start(index);
 
-	molog("splitting waterway: first part:\n");
+	molog(game.get_gametime(), "splitting waterway: first part:\n");
 	for (const Coords& coords : path.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
-	molog("                    second part:\n");
+	molog(game.get_gametime(), "                    second part:\n");
 	for (const Coords& coords : secondpath.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
 
 	// change waterway size and reattach
@@ -176,11 +176,11 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 	// Initialize the new waterway
 	newww.init(game);
 
-	if (ferry_) {
-		assert(ferry_->get_location(game) == this);
+	if (Ferry* ferry = ferry_.get(game)) {
+		assert(ferry->get_location(game) == this);
 		// We assign the ferry to the waterway part it currently is on
 		bool other = true;
-		const Coords pos = ferry_->get_position();
+		const Coords pos = ferry->get_position();
 		Coords temp(flags_[FlagStart]->get_position());
 		for (uint32_t i = 0; i < path_.get_nsteps(); i++) {
 			if (temp == pos) {
@@ -191,17 +191,17 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 		}
 
 		if (other) {
-			molog("Assigning the ferry to the NEW waterway\n");
-			ferry_->set_destination(game, &newww);
+			molog(game.get_gametime(), "Assigning the ferry to the NEW waterway\n");
+			ferry->set_destination(game, &newww);
 			request_ferry(game);
 		} else {
-			molog("Assigning the ferry to the OLD waterway\n");
-			ferry_->set_destination(game, this);
+			molog(game.get_gametime(), "Assigning the ferry to the OLD waterway\n");
+			ferry->set_destination(game, this);
 			newww.request_ferry(game);
 		}
 	} else {
 		// this is needed to make sure the ferry finds the way correctly
-		fleet_->reroute_ferry_request(game, this, this);
+		fleet_.get(game)->reroute_ferry_request(game, this, this);
 		newww.request_ferry(game);
 	}
 
@@ -213,22 +213,23 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 void Waterway::cleanup(EditorGameBase& egbase) {
 	Economy::check_split(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	if (upcast(Game, game, &egbase)) {
-		if (ferry_ && egbase.objects().object_still_available(ferry_)) {
-			ferry_->set_destination(*game, nullptr);
+		if (Ferry* ferry = ferry_.get(egbase)) {
+			ferry->set_destination(*game, nullptr);
 		}
-		if (fleet_ && egbase.objects().object_still_available(fleet_)) {
+		if (FerryFleet* fleet = fleet_.get(egbase)) {
 			// Always call this, in case the fleet can disband now
-			fleet_->cancel_ferry_request(*game, this);
+			fleet->cancel_ferry_request(*game, this);
 		}
 	}
 	RoadBase::cleanup(egbase);
 }
 
 void Waterway::log_general_info(const EditorGameBase& egbase) const {
-	MapObject::log_general_info(egbase);
+	RoadBase::log_general_info(egbase);
 
-	molog("Ferry %u\n", ferry_ ? ferry_->serial() : 0);
-	molog("FerryFleet %u\n", fleet_ ? fleet_->serial() : 0);
+	molog(egbase.get_gametime(), "Ferry %u\n", ferry_.get(egbase) != nullptr ? ferry_.serial() : 0);
+	molog(egbase.get_gametime(), "FerryFleet %u\n",
+	      fleet_.get(egbase) != nullptr ? fleet_.serial() : 0);
 }
 
 }  // namespace Widelands

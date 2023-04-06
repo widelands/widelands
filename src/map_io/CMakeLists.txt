@@ -6,9 +6,8 @@ wl_library(map_io_map_loader
     s2map.cc
     s2map.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_scoped_timer
     io_fileread
@@ -27,10 +26,6 @@ wl_library(map_io
   SRCS
     coords_profile.cc
     coords_profile.h
-    tribes_legacy_lookup_table.cc
-    tribes_legacy_lookup_table.h
-    world_legacy_lookup_table.cc
-    world_legacy_lookup_table.h
     map_allowed_building_types_packet.cc
     map_allowed_building_types_packet.h
     map_allowed_worker_types_packet.cc
@@ -94,14 +89,14 @@ wl_library(map_io
     map_waterwaydata_packet.h
     map_wincondition_packet.cc
     map_wincondition_packet.h
+  USES_ATOMIC
   DEPENDS
+    base
     base_exceptions
-    base_log
     base_macros
     base_scoped_timer
     economy
     graphic
-    graphic_image_cache
     graphic_image_io
     graphic_minimap_renderer
     graphic_playercolor

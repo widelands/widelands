@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -102,13 +101,8 @@ void RequireOr::add(const Requirements& req) {
 }
 
 bool RequireOr::check(const MapObject& obj) const {
-	for (const Requirements& req : m) {
-		if (req.check(obj)) {
-			return true;
-		}
-	}
-
-	return false;
+	return std::any_of(
+	   m.begin(), m.end(), [&obj](const Requirements& req) { return req.check(obj); });
 }
 
 void RequireOr::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) const {
@@ -140,12 +134,8 @@ void RequireAnd::add(const Requirements& req) {
 }
 
 bool RequireAnd::check(const MapObject& obj) const {
-	for (const Requirements& req : m) {
-		if (!req.check(obj)) {
-			return false;
-		}
-	}
-	return true;
+	return std::all_of(
+	   m.begin(), m.end(), [&obj](const Requirements& req) { return req.check(obj); });
 }
 
 void RequireAnd::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) const {
@@ -177,23 +167,25 @@ bool RequireAttribute::check(const MapObject& obj) const {
 		int32_t const value = obj.get_training_attribute(at);
 
 		return value >= min && value <= max;
-	} else {
-		int32_t value = 0;
-		value += obj.get_training_attribute(TrainingAttribute::kHealth);
-		value += obj.get_training_attribute(TrainingAttribute::kAttack);
-		value += obj.get_training_attribute(TrainingAttribute::kDefense);
-		value += obj.get_training_attribute(TrainingAttribute::kEvade);
-		return value >= min && value <= max;
 	}
+	int32_t value = 0;
+	value += obj.get_training_attribute(TrainingAttribute::kHealth);
+	value += obj.get_training_attribute(TrainingAttribute::kAttack);
+	value += obj.get_training_attribute(TrainingAttribute::kDefense);
+	value += obj.get_training_attribute(TrainingAttribute::kEvade);
+	return value >= min && value <= max;
 }
 
-void RequireAttribute::write(FileWrite& fw, EditorGameBase&, MapObjectSaver&) const {
+void RequireAttribute::write(FileWrite& fw,
+                             EditorGameBase& /* egbase */,
+                             MapObjectSaver& /* mos */) const {
 	fw.unsigned_8(static_cast<uint8_t>(at));
 	fw.signed_32(min);
 	fw.signed_32(max);
 }
 
-static Requirements read_attribute(FileRead& fr, EditorGameBase&, MapObjectLoader&) {
+static Requirements
+read_attribute(FileRead& fr, EditorGameBase& /* egbase */, MapObjectLoader& /* mol */) {
 	// Get the training attribute and check if it is a valid enum member
 	// We use a temp value, because the static_cast to the enum might be undefined.
 	uint8_t temp_at = fr.unsigned_8();

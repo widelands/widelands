@@ -13,6 +13,8 @@ include "scripting/richtext_scenarios.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
 
+wl.Game().allow_diplomacy = false
+
 -- ==========
 -- Constants
 -- ==========

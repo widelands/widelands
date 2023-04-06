@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -30,12 +29,12 @@ GameChatMenu IMPLEMENTATION
 */
 
 GameChatMenu::GameChatMenu(UI::Panel* parent,
+                           ChatColorForPlayer fn,
                            UI::UniqueWindow::Registry& registry,
                            ChatProvider& chat,
                            const std::string& title)
-   : UI::UniqueWindow(parent, "chat", &registry, 440, 235, title),
-     chat_(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat, UI::PanelStyle::kWui),
-     close_on_send_(false) {
+   : UI::UniqueWindow(parent, UI::WindowStyle::kWui, "chat", &registry, 440, 235, title),
+     chat_(this, fn, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat, UI::PanelStyle::kWui) {
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
@@ -45,19 +44,23 @@ GameChatMenu::GameChatMenu(UI::Panel* parent,
 	chat_.aborted.connect([this]() { acknowledge(); });
 
 	enter_chat_message(close_on_send_);
+
+	initialization_complete();
 }
 
 GameChatMenu* GameChatMenu::create_chat_console(UI::Panel* parent,
+                                                ChatColorForPlayer fn,
                                                 UI::UniqueWindow::Registry& registry,
                                                 ChatProvider& chat) {
-	return new GameChatMenu(parent, registry, chat, _("Chat"));
+	return new GameChatMenu(parent, fn, registry, chat, _("Chat"));
 }
 
 #ifndef NDEBUG  //  only in debug builds
 GameChatMenu* GameChatMenu::create_script_console(UI::Panel* parent,
+                                                  ChatColorForPlayer fn,
                                                   UI::UniqueWindow::Registry& registry,
                                                   ChatProvider& chat) {
-	return new GameChatMenu(parent, registry, chat, _("Script Console"));
+	return new GameChatMenu(parent, fn, registry, chat, _("Script Console"));
 }
 #endif
 

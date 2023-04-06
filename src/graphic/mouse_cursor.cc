@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,7 +22,7 @@
 
 #include <SDL_events.h>
 
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -34,12 +33,9 @@ const int default_hotspot_x = 3, default_hotspot_y = 7;
 
 MouseCursor* g_mouse_cursor;
 
-MouseCursor::MouseCursor() {
-}
-
 void MouseCursor::initialize(bool init_use_sdl) {
-	default_cursor_ = g_gr->images().get(default_filename);
-	default_cursor_click_ = g_gr->images().get(default_click_filename);
+	default_cursor_ = g_image_cache->get(default_filename);
+	default_cursor_click_ = g_image_cache->get(default_click_filename);
 
 	default_cursor_sdl_surface_ = load_image_as_sdl_surface(default_filename, g_fs);
 	default_cursor_sdl_ =

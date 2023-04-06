@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,17 +22,20 @@
 #ifdef _WIN32
 #ifdef _MSC_VER
 #include <cstdio>
+#else
+#include <cstdint>
 #endif
 #endif
+#include <cstdlib>
 #include <cstring>
+#include <limits>
 
 #include <sys/stat.h>
 #ifdef _WIN32
-#include <boost/algorithm/string.hpp>
 #include <dos.h>
 #include <windows.h>
 #ifdef _MSC_VER
-#include <direct.h>
+#include <corecrt_io.h>
 #define S_ISDIR(x) ((x & _S_IFDIR) ? 1 : 0)
 #endif
 #else  // not _WIN32
@@ -46,6 +48,7 @@
 #endif
 
 #include "base/macros.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_filesystem.h"
@@ -84,7 +87,7 @@ FilenameSet RealFSImpl::list_directory(const std::string& path) const {
 #ifdef _WIN32
 	std::string buf;
 	struct _finddata_t c_file;
-	long hFile;
+	intptr_t hFile;
 
 	if (path.size())
 		buf = directory_ + '\\' + path + "\\*";
@@ -110,7 +113,7 @@ FilenameSet RealFSImpl::list_directory(const std::string& path) const {
 		std::string result = filename.substr(root_.size() + 1);
 
 		// Paths should not contain any windows line separators.
-		boost::replace_all(result, "\\", "/");
+		replace_all(result, "\\", "/");
 		results.insert(result);
 	} while (_findnext(hFile, &c_file) == 0);
 
@@ -122,7 +125,7 @@ FilenameSet RealFSImpl::list_directory(const std::string& path) const {
 	glob_t gl;
 	int32_t ofs;
 
-	if (path.size()) {
+	if (!path.empty()) {
 		if (is_path_absolute(path)) {
 			buf = path + "/*";
 			ofs = 0;
@@ -136,7 +139,7 @@ FilenameSet RealFSImpl::list_directory(const std::string& path) const {
 	}
 	std::set<std::string> results;
 
-	if (glob(buf.c_str(), 0, nullptr, &gl)) {
+	if (glob(buf.c_str(), 0, nullptr, &gl) != 0) {
 		return results;
 	}
 
@@ -182,9 +185,8 @@ FileSystem* RealFSImpl::make_sub_file_system(const std::string& path) {
 
 	if (fspath.is_directory_) {
 		return new RealFSImpl(fspath);
-	} else {
-		return new ZipFilesystem(fspath);
 	}
+	return new ZipFilesystem(fspath);
 }
 
 /**
@@ -199,9 +201,8 @@ FileSystem* RealFSImpl::create_sub_file_system(const std::string& path, Type con
 	if (fs == FileSystem::DIR) {
 		ensure_directory_exists(path);
 		return new RealFSImpl(fspath);
-	} else {
-		return new ZipFilesystem(fspath);
 	}
+	return new ZipFilesystem(fspath);
 }
 
 /**
@@ -262,8 +263,8 @@ void RealFSImpl::unlink_directory(const std::string& file) {
 	}
 
 	FilenameSet files = list_directory(file);
-	for (FilenameSet::iterator pname = files.begin(); pname != files.end(); ++pname) {
-		std::string filename = fs_filename(pname->c_str());
+	for (const std::string& unlinkme : files) {
+		std::string filename = fs_filename(unlinkme.c_str());
 		if (filename == "..") {
 			continue;
 		}
@@ -271,10 +272,10 @@ void RealFSImpl::unlink_directory(const std::string& file) {
 			continue;
 		}
 
-		if (is_directory(*pname)) {
-			unlink_directory(*pname);
+		if (is_directory(unlinkme)) {
+			unlink_directory(unlinkme);
 		} else {
-			unlink_file(*pname);
+			unlink_file(unlinkme);
 		}
 	}
 
@@ -307,7 +308,7 @@ void RealFSImpl::ensure_directory_exists(const std::string& dirname) {
 	// Make sure we always use "/" for splitting the directory, because
 	// directory names might be hardcoded in C++ or come from the file system.
 	// Calling canonicalize_name will take care of this working for all file systems.
-	boost::replace_all(clean_dirname, "\\", "/");
+	replace_all(clean_dirname, "\\", "/");
 #else
 	const std::string& clean_dirname = dirname;
 #endif
@@ -380,7 +381,7 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
 
 	try {
 		file = fopen(fullname.c_str(), "rb");
-		if (!file) {
+		if (file == nullptr) {
 			throw FileError("RealFSImpl::load", fullname, "could not open file for reading");
 		}
 
@@ -401,28 +402,33 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
 
 		// allocate a buffer and read the entire file into it
 		data = malloc(size + 1);  //  TODO(unknown): memory leak!
-		if (!data) {
+		if (data == nullptr) {
 			throw wexception(
 			   "RealFSImpl::load: memory allocation failed for reading file %s (%s) with size %" PRIuS
 			   "",
 			   fname.c_str(), fullname.c_str(), size);
 		}
 		int result = fread(data, size, 1, file);
-		if (size && (result != 1)) {
+		if ((size != 0u) && (result != 1)) {
 			throw wexception("RealFSImpl::load: read failed for %s (%s) with size %" PRIuS "",
 			                 fname.c_str(), fullname.c_str(), size);
 		}
 		static_cast<int8_t*>(data)[size] = 0;
 
-		fclose(file);
-		file = nullptr;
+		try {
+			fclose(file);
+			file = nullptr;
+		} catch (...) {
+			file = nullptr;
+			throw;
+		}
 
 		length = size;
 	} catch (...) {
-		if (file) {
+		if (file != nullptr) {
 			fclose(file);
 		}
-		if (data) {
+		if (data != nullptr) {
 			free(data);
 		}
 		throw;
@@ -440,21 +446,21 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
  */
 void RealFSImpl::write(const std::string& fname,
                        void const* const data,
-                       int32_t const length,
+                       size_t const length,
                        bool append) {
 	std::string fullname;
 
 	fullname = canonicalize_name(fname);
 
 	FILE* const f = fopen(fullname.c_str(), append ? "a" : "wb");
-	if (!f) {
+	if (f == nullptr) {
 		throw FileError("RealFSImpl::write", fullname, "could not open file for writing");
 	}
 
 	size_t const c = fwrite(data, length, 1, f);
 	fclose(f);
 
-	if (length && c != 1) {  // data might be 0 blocks long
+	if ((length != 0u) && c != 1) {  // data might be 0 blocks long
 		throw wexception("Write to %s (%s) failed", fname.c_str(), fullname.c_str());
 	}
 }
@@ -480,7 +486,7 @@ namespace {
 
 struct RealFSStreamRead : public StreamRead {
 	explicit RealFSStreamRead(const std::string& fname) : file_(fopen(fname.c_str(), "rb")) {
-		if (!file_) {
+		if (file_ == nullptr) {
 			throw FileError(
 			   "RealFSStreamRead::RealFSStreamRead", fname, "could not open file for reading");
 		}
@@ -494,8 +500,8 @@ struct RealFSStreamRead : public StreamRead {
 		return fread(read_data, 1, bufsize, file_);
 	}
 
-	bool end_of_file() const override {
-		return feof(file_);
+	[[nodiscard]] bool end_of_file() const override {
+		return feof(file_) != 0;
 	}
 
 private:
@@ -520,7 +526,7 @@ namespace {
 struct RealFSStreamWrite : public StreamWrite {
 	explicit RealFSStreamWrite(const std::string& fname) : filename_(fname) {
 		file_ = fopen(fname.c_str(), "wb");
-		if (!file_) {
+		if (file_ == nullptr) {
 			throw FileError(
 			   "RealFSStreamWrite::RealFSStreamWrite", fname, "could not open file for writing");
 		}
@@ -558,14 +564,15 @@ StreamWrite* RealFSImpl::open_stream_write(const std::string& fname) {
 unsigned long long RealFSImpl::disk_space() {  // NOLINT
 #ifdef _WIN32
 	ULARGE_INTEGER freeavailable;
-	return GetDiskFreeSpaceEx(canonicalize_name(directory_).c_str(), &freeavailable, 0, 0) ?
-	          // If more than 2G free space report that much
-	          freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :  // NOLINT
-	             freeavailable.LowPart :
-	          0;
+
+	return GetDiskFreeSpaceEx(root_.c_str(), &freeavailable, 0, 0) ?
+             // If more than 2G free space report that much
+             freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :  // NOLINT
+                                      freeavailable.LowPart :
+             0;
 #else
 	struct statvfs svfs;
-	if (statvfs(canonicalize_name(directory_).c_str(), &svfs) != -1) {
+	if (statvfs(root_.c_str(), &svfs) != -1) {
 		return static_cast<unsigned long long>(svfs.f_bsize) * svfs.f_bavail;  // NOLINT
 	}
 #endif

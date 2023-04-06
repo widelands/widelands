@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,10 +21,10 @@
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
@@ -36,7 +35,7 @@ struct ActionConfirm : public UI::Window {
 	ActionConfirm(InteractivePlayer& parent,
 	              const std::string& windowtitle,
 	              const std::string& message,
-	              Widelands::MapObject& map_object,
+	              Widelands::MapObject* map_object,
 	              // May be "", in which case no checkbox will be added
 	              const std::string& checkbox = "");
 
@@ -44,12 +43,11 @@ struct ActionConfirm : public UI::Window {
 		return dynamic_cast<InteractivePlayer&>(*get_parent());
 	}
 
-	virtual void think() = 0;
 	virtual void ok() = 0;
 
 protected:
 	Widelands::ObjectPointer object_;
-	UI::Checkbox* checkbox_;
+	UI::Checkbox* checkbox_{nullptr};
 };
 
 /**
@@ -126,29 +124,39 @@ struct ShipCancelExpeditionConfirm : public ActionConfirm {
 	void ok() override;
 };
 
+/**
+ * Confirmation dialog box for giving up.
+ */
+struct ResignConfirm : public ActionConfirm {
+	explicit ResignConfirm(InteractivePlayer& parent);
+
+	void think() override;
+	void ok() override;
+};
+
 ActionConfirm::ActionConfirm(InteractivePlayer& parent,
                              const std::string& windowtitle,
                              const std::string& message,
-                             Widelands::MapObject& map_object,
+                             Widelands::MapObject* map_object,
                              const std::string& checkbox)
-   : UI::Window(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
-     object_(&map_object),
-     checkbox_(nullptr) {
+   : UI::Window(
+        &parent, UI::WindowStyle::kWui, "building_action_confirm", 0, 0, 200, 120, windowtitle),
+     object_(map_object) {
 	const int padding = 6;
-	UI::Box* main_box = new UI::Box(this, padding, padding, UI::Box::Vertical);
-	UI::Box* button_box = new UI::Box(main_box, 0, 0, UI::Box::Horizontal);
+	UI::Box* main_box = new UI::Box(this, UI::PanelStyle::kWui, padding, padding, UI::Box::Vertical);
+	UI::Box* button_box = new UI::Box(main_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
 	   main_box, 0, 0, 200, 74, UI::PanelStyle::kWui, message, UI::Align::kCenter,
 	   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 
 	UI::Button* okbtn = new UI::Button(button_box, "ok", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
-	                                   g_gr->images().get("images/wui/menu_okay.png"));
+	                                   g_image_cache->get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect([this]() { ok(); });
 
 	UI::Button* cancelbtn =
 	   new UI::Button(button_box, "abort", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
-	                  g_gr->images().get("images/wui/menu_abort.png"));
+	                  g_image_cache->get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect([this]() { die(); });
 
 	button_box->add(
@@ -158,7 +166,7 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	   UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
 	main_box->add(textarea);
 	if (!checkbox.empty()) {
-		checkbox_ = new UI::Checkbox(main_box, Vector2i(0, 0), checkbox);
+		checkbox_ = new UI::Checkbox(main_box, UI::PanelStyle::kWui, Vector2i(0, 0), checkbox);
 		// tooltip and initial state will be set by the subclass constructor
 		main_box->add_space(padding);
 		main_box->add(checkbox_, UI::Box::Resizing::kFullSize);
@@ -166,12 +174,16 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	main_box->add_space(1.5 * padding);
 	main_box->add(button_box, UI::Box::Resizing::kFullSize);
 	button_box->set_size(textarea->get_w(), okbtn->get_h());
-	main_box->set_size(textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding +
-	                                         (checkbox_ ? checkbox_->get_h() + padding : 0));
+	main_box->set_size(
+	   textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding +
+	                         (checkbox_ != nullptr ? checkbox_->get_h() + padding : 0));
 	set_inner_size(main_box->get_w() + 2 * padding, main_box->get_h() + 2 * padding);
 
+	set_z(UI::Panel::ZOrder::kConfirmation);
 	center_to_parent();
 	cancelbtn->center_mouse();
+
+	initialization_complete();
 }
 
 /*
@@ -185,8 +197,8 @@ BulldozeConfirm::BulldozeConfirm(InteractivePlayer& parent,
    : ActionConfirm(parent,
                    _("Destroy building?"),
                    _("Do you really want to destroy this building?"),
-                   building),
-     todestroy_(todestroy ? todestroy : &building) {
+                   &building),
+     todestroy_(todestroy != nullptr ? todestroy : &building) {
 	// Nothing special to do
 }
 
@@ -200,8 +212,9 @@ void BulldozeConfirm::think() {
 	upcast(Widelands::Building, building, object_.get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(egbase));
 
-	if (!todestroy || !building || !iaplayer().can_act(building->owner().player_number()) ||
-	    !(building->get_playercaps() & Widelands::Building::PCap_Bulldoze)) {
+	if ((todestroy == nullptr) || (building == nullptr) ||
+	    !iaplayer().can_act(building->owner().player_number()) ||
+	    ((building->get_playercaps() & Widelands::Building::PCap_Bulldoze) == 0u)) {
 		die();
 	}
 }
@@ -214,9 +227,10 @@ void BulldozeConfirm::ok() {
 	upcast(Widelands::Building, building, object_.get(game));
 	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(game));
 
-	if (todestroy && building && iaplayer().can_act(building->owner().player_number()) &&
-	    (building->get_playercaps() & Widelands::Building::PCap_Bulldoze)) {
-		game.send_player_bulldoze(*todestroy, SDL_GetModState() & KMOD_CTRL);
+	if ((todestroy != nullptr) && (building != nullptr) &&
+	    iaplayer().can_act(building->owner().player_number()) &&
+	    ((building->get_playercaps() & Widelands::Building::PCap_Bulldoze) != 0u)) {
+		game.send_player_bulldoze(*todestroy, (SDL_GetModState() & KMOD_CTRL) != 0);
 	}
 
 	die();
@@ -244,9 +258,9 @@ DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Buildin
    : ActionConfirm(parent,
                    _("Dismantle building?"),
                    _("Do you really want to dismantle this building?"),
-                   building,
+                   &building,
                    should_allow_preserving_wares(building.descr()) ? _("Preserve wares") : "") {
-	if (checkbox_) {
+	if (checkbox_ != nullptr) {
 		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
 		                         "increasing the dismantling time"));
 		checkbox_->set_state(true);
@@ -262,8 +276,8 @@ void DismantleConfirm::think() {
 	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Building, building, object_.get(egbase));
 
-	if (!building || !iaplayer().can_act(building->owner().player_number()) ||
-	    !(building->get_playercaps() & Widelands::Building::PCap_Dismantle)) {
+	if ((building == nullptr) || !iaplayer().can_act(building->owner().player_number()) ||
+	    ((building->get_playercaps() & Widelands::Building::PCap_Dismantle) == 0u)) {
 		die();
 	}
 }
@@ -276,9 +290,9 @@ void DismantleConfirm::ok() {
 	upcast(Widelands::Building, building, object_.get(game));
 	upcast(Widelands::PlayerImmovable, todismantle, object_.get(game));
 
-	if (building && iaplayer().can_act(building->owner().player_number()) &&
-	    (building->get_playercaps() & Widelands::Building::PCap_Dismantle)) {
-		game.send_player_dismantle(*todismantle, checkbox_ && checkbox_->get_state());
+	if ((building != nullptr) && iaplayer().can_act(building->owner().player_number()) &&
+	    ((building->get_playercaps() & Widelands::Building::PCap_Dismantle) != 0u)) {
+		game.send_player_dismantle(*todismantle, (checkbox_ != nullptr) && checkbox_->get_state());
 		iaplayer().hide_workarea(building->get_position(), false);
 	}
 
@@ -298,16 +312,17 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
         parent,
         _("Enhance building?"),
         building.descr().type() == Widelands::MapObjectType::MILITARYSITE ?
-           (boost::format("%s\n\n%s") % _("Do you really want to enhance this building?") %
-            /** TRANSLATORS: Warning message when player wants to enhance a military building */
-            _("Be careful if the enemy is near!"))
-              .str() :
+           format(
+              "%s\n\n%s",
+              _("Do you really want to enhance this building?"),
+              /** TRANSLATORS: Warning message when player wants to enhance a military building */
+              _("Be careful if the enemy is near!")) :
            _("Do you really want to enhance this building?"),
-        building,
+        &building,
         should_allow_preserving_wares(building.descr()) ? _("Preserve wares") : ""),
      id_(id),
      still_under_construction_(still_under_construction) {
-	if (checkbox_) {
+	if (checkbox_ != nullptr) {
 		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
 		                         "increasing the enhancing time"));
 		checkbox_->set_state(true);
@@ -323,9 +338,9 @@ void EnhanceConfirm::think() {
 	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Building, building, object_.get(egbase));
 
-	if (!building || !iaplayer().can_act(building->owner().player_number()) ||
+	if ((building == nullptr) || !iaplayer().can_act(building->owner().player_number()) ||
 	    !(still_under_construction_ ||
-	      (building->get_playercaps() & Widelands::Building::PCap_Enhancable))) {
+	      ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) != 0u))) {
 		die();
 	}
 }
@@ -338,15 +353,16 @@ void EnhanceConfirm::ok() {
 
 	if (still_under_construction_) {
 		upcast(Widelands::ConstructionSite, cs, object_.get(game));
-		if (cs && iaplayer().can_act(cs->owner().player_number())) {
+		if ((cs != nullptr) && iaplayer().can_act(cs->owner().player_number())) {
 			game.send_player_enhance_building(
-			   *cs, cs->building().enhancement(), checkbox_ && checkbox_->get_state());
+			   *cs, cs->building().enhancement(), (checkbox_ != nullptr) && checkbox_->get_state());
 		}
 	} else {
 		upcast(Widelands::Building, building, object_.get(game));
-		if (building && iaplayer().can_act(building->owner().player_number()) &&
-		    (building->get_playercaps() & Widelands::Building::PCap_Enhancable)) {
-			game.send_player_enhance_building(*building, id_, checkbox_ && checkbox_->get_state());
+		if ((building != nullptr) && iaplayer().can_act(building->owner().player_number()) &&
+		    ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) != 0u)) {
+			game.send_player_enhance_building(
+			   *building, id_, (checkbox_ != nullptr) && checkbox_->get_state());
 		}
 	}
 
@@ -360,8 +376,8 @@ ShipSinkConfirm::ShipSinkConfirm(InteractivePlayer& parent, Widelands::Ship& shi
    : ActionConfirm(parent,
                    _("Sink the ship?"),
                    /** TRANSLATORS: %s is a ship name */
-                   (boost::format(_("Do you really want to sink %s?")) % ship.get_shipname()).str(),
-                   ship) {
+                   format(_("Do you really want to sink %s?"), ship.get_shipname()),
+                   &ship) {
 	// Nothing special to do
 }
 
@@ -372,7 +388,7 @@ void ShipSinkConfirm::think() {
 	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Ship, ship, object_.get(egbase));
 
-	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number())) {
+	if ((ship == nullptr) || !iaplayer().can_act(ship->get_owner()->player_number())) {
 		die();
 	}
 }
@@ -384,7 +400,7 @@ void ShipSinkConfirm::ok() {
 	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Ship, ship, object_.get(game));
 
-	if (ship && iaplayer().can_act(ship->get_owner()->player_number())) {
+	if ((ship != nullptr) && iaplayer().can_act(ship->get_owner()->player_number())) {
 		game.send_player_sink_ship(*ship);
 	}
 
@@ -399,7 +415,7 @@ ShipCancelExpeditionConfirm::ShipCancelExpeditionConfirm(InteractivePlayer& pare
    : ActionConfirm(parent,
                    _("Cancel expedition?"),
                    _("Do you really want to cancel the active expedition?"),
-                   ship) {
+                   &ship) {
 	// Nothing special to do
 }
 
@@ -410,7 +426,7 @@ void ShipCancelExpeditionConfirm::think() {
 	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Ship, ship, object_.get(egbase));
 
-	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number()) ||
+	if ((ship == nullptr) || !iaplayer().can_act(ship->get_owner()->player_number()) ||
 	    !ship->state_is_expedition()) {
 		die();
 	}
@@ -423,12 +439,40 @@ void ShipCancelExpeditionConfirm::ok() {
 	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Ship, ship, object_.get(game));
 
-	if (ship && iaplayer().can_act(ship->get_owner()->player_number()) &&
+	if ((ship != nullptr) && iaplayer().can_act(ship->get_owner()->player_number()) &&
 	    ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport &&
 	    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionColonizing) {
 		game.send_player_cancel_expedition_ship(*ship);
 	}
 
+	die();
+}
+
+/**
+ * Create the panels for confirmation.
+ */
+ResignConfirm::ResignConfirm(InteractivePlayer& parent)
+   : ActionConfirm(
+        parent, _("Resign?"), _("Do you really want to give up and become a spectator?"), nullptr) {
+	// Nothing special to do
+}
+
+/**
+ * Make sure the player is still in the game.
+ */
+void ResignConfirm::think() {
+	if (iaplayer().egbase().player_manager()->get_player_end_status(iaplayer().player_number()) !=
+	    nullptr) {
+		die();
+	}
+}
+
+/**
+ * The "Ok" button was clicked, so issue the command for resigning.
+ */
+void ResignConfirm::ok() {
+	iaplayer().game().send_player_diplomacy(
+	   iaplayer().player_number(), Widelands::DiplomacyAction::kResign, 0 /* ignored */);
 	die();
 }
 
@@ -495,4 +539,8 @@ void show_ship_sink_confirm(InteractivePlayer& player, Widelands::Ship& ship) {
  */
 void show_ship_cancel_expedition_confirm(InteractivePlayer& player, Widelands::Ship& ship) {
 	new ShipCancelExpeditionConfirm(player, ship);
+}
+
+void show_resign_confirm(InteractivePlayer& player) {
+	new ResignConfirm(player);
 }

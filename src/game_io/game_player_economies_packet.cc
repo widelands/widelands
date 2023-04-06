@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -44,7 +43,7 @@ bool write_expedition_ship_economy(Economy* economy,
                                    MapObjectSaver* const mos) {
 	for (Field const* field = &map[0]; field < &map[map.max_index()]; ++field) {
 		Bob* bob = field->get_first_bob();
-		while (bob) {
+		while (bob != nullptr) {
 			if (upcast(Ship const, ship, bob)) {
 				if (ship->get_economy(economy->type()) == economy) {
 					fw->unsigned_32(mos->get_object_file_index(*ship));
@@ -73,7 +72,7 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 			iterate_players_existing(p, nr_players, game, player) try {
 				const size_t num_economies = fr.unsigned_32();
 				for (uint32_t i = 0; i < num_economies; ++i) {
-					const WareWorker type = fr.unsigned_8() ? wwWORKER : wwWARE;
+					const WareWorker type = (fr.unsigned_8() != 0) ? wwWORKER : wwWARE;
 					const uint32_t serial = fr.unsigned_32();
 					const MapObject& mo = mol->get<MapObject>(serial);
 					if (upcast(const Flag, flag, &mo)) {

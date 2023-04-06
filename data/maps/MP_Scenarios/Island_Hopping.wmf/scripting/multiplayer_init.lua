@@ -14,6 +14,7 @@ push_textdomain("mp_scenario_island_hopping.wmf")
 
 game = wl.Game()
 map = game.map
+game.allow_diplomacy = false
 
 _nplayers_finished_island = {0, 0}
 _start_fields = {
@@ -98,7 +99,7 @@ function format_rewards(r)
    for name,count in pairs(r) do
       local ware_description = wl.Game():get_ware_description(name)
       -- TRANSLATORS: number + resource name, e.g. '1x Log'
-      rv[#rv + 1] = li(_"%1$dx %2$s":bformat(count, ware_description.descname))
+      rv[#rv + 1] = li(_("%1$dx %2$s"):bformat(count, ware_description.descname))
    end
    return table.concat(rv)
 end
@@ -206,10 +207,10 @@ function initialize()
    place_headquarters()
    disable_unused_buildings()
 
-   send_to_all(welcome_msg.body, welcome_msg.heading)
+   send_to_all_inboxes(welcome_msg.body, welcome_msg.heading)
    -- set the objective with the game type for all players
    -- TODO change this to a broadcast once individual game objectives have been implemented
-   game.players[1]:add_objective("win_conditions", _"Rules", rt(welcome_msg.body))
+   game.players[1]:add_objective("win_conditions", _("Rules"), rt(welcome_msg.body))
 
    for idx,plr in ipairs(game.players) do
       run(function() run_island(plr, 1) end)

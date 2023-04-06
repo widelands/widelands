@@ -147,6 +147,9 @@ LUA_API void eris_set_setting(lua_State *L, const char *name, int value);
  *     persisted data returned by persist(). Returns the unpersisted value.
  *     If only one value is given, the perms table is assumed to be empty.
  */
+#ifndef luaopen_eris_declaration
+#define luaopen_eris_declaration
 LUA_API int luaopen_eris(lua_State* L);
+#endif
 
 #endif

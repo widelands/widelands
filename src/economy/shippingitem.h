@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2020 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -39,8 +38,7 @@ class Worker;
  * encapsulated in this structure during shipping and the waiting time in the @ref PortDock.
  */
 struct ShippingItem {
-	ShippingItem() {
-	}
+	ShippingItem() = default;
 	explicit ShippingItem(WareInstance& ware);
 	explicit ShippingItem(Worker& worker);
 
@@ -49,14 +47,14 @@ struct ShippingItem {
 	// only interested in the ware if it is the one or the other.
 	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
-	void set_economy(Game&, Economy* e, WareWorker);
+	void set_economy(const Game&, Economy* e, WareWorker) const;
 	const PortDock* get_destination(Game&) const;
 
 	void remove(EditorGameBase&);
 
 	struct Loader {
 		void load(FileRead& fr);
-		ShippingItem get(MapObjectLoader& mol);
+		ShippingItem get(MapObjectLoader& mol) const;
 
 	private:
 		uint32_t serial_ = 0U;
@@ -72,10 +70,10 @@ private:
 	friend struct ShippingSchedule;
 
 	// Called when a port is reached. The item will act again on its own.
-	void end_shipping(Game&);
+	void end_shipping(Game&) const;
 
 	// Sets the location of this shippingitem, this could be a ship, a portdock or a warehouse.
-	void set_location(Game&, MapObject* obj);
+	void set_location(Game&, MapObject* obj) const;
 
 	// Updates destination_dock_.
 	void update_destination(Game&, PortDock&);

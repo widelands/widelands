@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,38 +20,29 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "scripting/lua_table.h"
+#include "ui_fsmenu/scenario_select.h"
+
+namespace FsMenu {
 
 /**
  * CampaignSelect UI
  * Loads a list of all visible campaigns
  */
-FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
-   : FullscreenMenuLoadMapOrGame(),
-     table_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-
-     // Main Title
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("Choose a campaign"),
-            UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+CampaignSelect::CampaignSelect(MenuCapsule& fsmm)
+   : TwoColumnsFullNavigationMenu(fsmm, _("Choose Campaign")),
+     table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Campaign description
-     campaign_details_(this),
-     campaigns_(campvis) {
+     campaign_details_(&right_column_content_box_) {
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
 
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
-	back_.sigclicked.connect([this]() { clicked_back(); });
-	table_.selected.connect([this](unsigned) { entry_selected(); });
-	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
+	table_.selected.connect([this](unsigned /* value */) { entry_selected(); });
+	table_.double_clicked.connect([this](unsigned /* value */) { clicked_ok(); });
+	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 
+	right_column_content_box_.add(&campaign_details_, UI::Box::Resizing::kExpandBoth);
 	/** TRANSLATORS: Campaign difficulty table header */
 	table_.add_column(45, _("Diff."), _("Difficulty"));
 	table_.add_column(130, _("Tribe"), _("Tribe Name"));
@@ -66,47 +56,33 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
 	layout();
 
 	table_.cancel.connect([this]() { clicked_back(); });
-}
 
-void FullscreenMenuCampaignSelect::layout() {
-	FullscreenMenuLoadMapOrGame::layout();
-	title_.set_pos(Vector2i(0, tabley_ / 3));
-	title_.set_size(get_w(), title_.get_h());
-	table_.set_size(tablew_, tableh_);
-	table_.set_pos(Vector2i(tablex_, tabley_));
-	campaign_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
-	campaign_details_.set_desired_size(
-	   get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
-	campaign_details_.set_pos(Vector2i(right_column_x_, tabley_));
+	initialization_complete();
 }
 
 /**
  * OK was clicked, after an entry of campaignlist got selected.
  */
-void FullscreenMenuCampaignSelect::clicked_ok() {
+void CampaignSelect::clicked_ok() {
 	if (!table_.has_selection()) {
 		return;
 	}
-	const CampaignData& campaign_data = *campaigns_->get_campaign(table_.get_selected());
-	if (!campaign_data.visible) {
+	CampaignData* campaign_data = campaigns_.get_campaign(table_.get_selected());
+	if (!campaign_data->visible) {
 		return;
 	}
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+	new ScenarioSelect(capsule_, campaign_data);
 }
 
-size_t FullscreenMenuCampaignSelect::get_campaign_index() const {
-	return table_.get_selected();
-}
-
-bool FullscreenMenuCampaignSelect::set_has_selection() {
+bool CampaignSelect::set_has_selection() {
 	const bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
 	return has_selection;
 }
 
-void FullscreenMenuCampaignSelect::entry_selected() {
+void CampaignSelect::entry_selected() {
 	if (set_has_selection()) {
-		const CampaignData& campaign_data = *campaigns_->get_campaign(table_.get_selected());
+		const CampaignData& campaign_data = *campaigns_.get_campaign(table_.get_selected());
 		ok_.set_enabled(campaign_data.visible);
 		campaign_details_.update(campaign_data);
 	}
@@ -115,11 +91,11 @@ void FullscreenMenuCampaignSelect::entry_selected() {
 /**
  * fill the campaign list
  */
-void FullscreenMenuCampaignSelect::fill_table() {
+void CampaignSelect::fill_table() {
 	table_.clear();
 
-	for (size_t i = 0; i < campaigns_->no_of_campaigns(); ++i) {
-		const CampaignData& campaign_data = *campaigns_->get_campaign(i);
+	for (size_t i = 0; i < campaigns_.no_of_campaigns(); ++i) {
+		const CampaignData& campaign_data = *campaigns_.get_campaign(i);
 
 		UI::Table<uintptr_t const>::EntryRecord& tableEntry = table_.add(i);
 		tableEntry.set_picture(0, campaign_data.difficulty_image);
@@ -128,19 +104,20 @@ void FullscreenMenuCampaignSelect::fill_table() {
 		tableEntry.set_disabled(!campaign_data.visible);
 	}
 
-	if (table_.size()) {
+	if (!table_.empty()) {
 		table_.sort();
 		table_.select(0);
 	}
 	set_has_selection();
 }
 
-bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
-	const CampaignData& r1 = *campaigns_->get_campaign(table_[rowa]);
-	const CampaignData& r2 = *campaigns_->get_campaign(table_[rowb]);
+bool CampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
+	const CampaignData& r1 = *campaigns_.get_campaign(table_[rowa]);
+	const CampaignData& r2 = *campaigns_.get_campaign(table_[rowb]);
 
 	if (r1.difficulty_level < r2.difficulty_level) {
 		return true;
 	}
 	return table_[rowa] < table_[rowb];
 }
+}  // namespace FsMenu

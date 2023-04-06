@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,28 +12,26 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "io/profile.h"
 
 #include <cstdarg>
+#include <cstdlib>
 #include <cstring>
-
-#include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "io/fileread.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filewrite.h"
 
-#define TRUE_WORDS 7
-static char const* trueWords[TRUE_WORDS] = {
+static char const* trueWords[] = {
    "true",
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
@@ -45,8 +43,7 @@ static char const* trueWords[TRUE_WORDS] = {
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
    _("on"), "1"};
 
-#define FALSE_WORDS 7
-static char const* falseWords[FALSE_WORDS] = {
+static char const* falseWords[] = {
    "false",
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
@@ -59,11 +56,12 @@ static char const* falseWords[FALSE_WORDS] = {
    _("off"), "0"};
 
 Section::Value::Value(const std::string& nname, const char* const nval)
-   : used_(false), name_(nname) {
+   : used_(false), translate_(false), name_(nname) {
 	set_string(nval);
 }
 
-Section::Value::Value(const Section::Value& o) : used_(o.used_), name_(o.name_) {
+Section::Value::Value(const Section::Value& o)
+   : used_(o.used_), translate_(o.translate_), name_(o.name_) {
 	set_string(o.value_.get());
 }
 
@@ -95,12 +93,12 @@ void Section::Value::mark_used() {
 int32_t Section::Value::get_int() const {
 	char* endp;
 	int64_t const i = strtol(value_.get(), &endp, 0);
-	if (*endp) {
-		throw wexception("%s: '%s' is not an integer", get_name(), get_string());
+	if (*endp != 0) {
+		throw wexception("%s: '%s' is not an integer", get_name(), get_untranslated_string());
 	}
-	int32_t const result = i;
+	int32_t const result = static_cast<int32_t>(i);
 	if (i != result) {
-		throw wexception("%s: '%s' is out of range", get_name(), get_string());
+		throw wexception("%s: '%s' is out of range", get_name(), get_untranslated_string());
 	}
 
 	return result;
@@ -109,8 +107,8 @@ int32_t Section::Value::get_int() const {
 uint32_t Section::Value::get_natural() const {
 	char* endp;
 	int64_t i = strtoll(value_.get(), &endp, 0);
-	if (*endp || i < 0) {
-		throw wexception("%s: '%s' is not natural", get_name(), get_string());
+	if ((*endp != 0) || i < 0) {
+		throw wexception("%s: '%s' is not natural", get_name(), get_untranslated_string());
 	}
 	return i;
 }
@@ -118,41 +116,45 @@ uint32_t Section::Value::get_natural() const {
 uint32_t Section::Value::get_positive() const {
 	char* endp;
 	int64_t i = strtoll(value_.get(), &endp, 0);
-	if (*endp || i < 1) {
-		throw wexception("%s: '%s' is not positive", get_name(), get_string());
+	if ((*endp != 0) || i < 1) {
+		throw wexception("%s: '%s' is not positive", get_name(), get_untranslated_string());
 	}
 	return i;
 }
 
 bool Section::Value::get_bool() const {
-	for (int32_t i = 0; i < TRUE_WORDS; ++i) {
-		if (boost::iequals(value_.get(), trueWords[i])) {
+	for (char const* word : trueWords) {
+		if (iequals(value_.get(), word)) {
 			return true;
 		}
 	}
-	for (int32_t i = 0; i < FALSE_WORDS; ++i) {
-		if (boost::iequals(value_.get(), falseWords[i])) {
+	for (char const* word : falseWords) {
+		if (iequals(value_.get(), word)) {
 			return false;
 		}
 	}
 
-	throw wexception("%s: '%s' is not a boolean value", get_name(), get_string());
+	throw wexception("%s: '%s' is not a boolean value", get_name(), get_untranslated_string());
+}
+
+char const* Section::Value::get_string() const {
+	return translate_ ? i18n::translate(value_.get()) : value_.get();
 }
 
 Vector2i Section::Value::get_point() const {
 	char* endp = value_.get();
 	int64_t const x = strtol(endp, &endp, 0);
 	int64_t const y = strtol(endp, &endp, 0);
-	if (*endp) {
-		throw wexception("%s: '%s' is not a Vector2i", get_name(), get_string());
+	if (*endp != 0) {
+		throw wexception("%s: '%s' is not a Vector2i", get_name(), get_untranslated_string());
 	}
 	if (x > std::numeric_limits<int32_t>::max()) {
-		throw wexception("%s: '%s' x coordinate too large (> %d)", get_name(), get_string(),
-		                 std::numeric_limits<int32_t>::max());
+		throw wexception("%s: '%s' x coordinate too large (> %d)", get_name(),
+		                 get_untranslated_string(), std::numeric_limits<int32_t>::max());
 	}
 	if (y > std::numeric_limits<int32_t>::max()) {
-		throw wexception("%s: '%s' y coordinate too large (> %d)", get_name(), get_string(),
-		                 std::numeric_limits<int32_t>::max());
+		throw wexception("%s: '%s' y coordinate too large (> %d)", get_name(),
+		                 get_untranslated_string(), std::numeric_limits<int32_t>::max());
 	}
 	return Vector2i(x, y);
 }
@@ -171,6 +173,7 @@ void swap(Section::Value& first, Section::Value& second) {
 	swap(first.name_, second.name_);
 	swap(first.value_, second.value_);
 	swap(first.used_, second.used_);
+	swap(first.translate_, second.translate_);
 }
 
 /*
@@ -221,12 +224,9 @@ void Section::check_used() const {
 }
 
 bool Section::has_val(char const* const name) const {
-	for (const Value& temp_value : values_) {
-		if (boost::iequals(temp_value.get_name(), name)) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(values_.begin(), values_.end(), [name](const Value& temp_value) {
+		return iequals(temp_value.get_name(), name);
+	});
 }
 
 /**
@@ -238,7 +238,7 @@ bool Section::has_val(char const* const name) const {
  */
 Section::Value* Section::get_val(char const* const name) {
 	for (Value& value : values_) {
-		if (boost::iequals(value.get_name(), name)) {
+		if (iequals(value.get_name(), name)) {
 			value.mark_used();
 			return &value;
 		}
@@ -256,7 +256,7 @@ Section::Value* Section::get_val(char const* const name) {
 Section::Value* Section::get_next_val(char const* const name) {
 	for (Value& value : values_) {
 		if (!value.is_used()) {
-			if (!name || boost::iequals(value.get_name(), name)) {
+			if ((name == nullptr) || iequals(value.get_name(), name)) {
 				value.mark_used();
 				return &value;
 			}
@@ -267,7 +267,7 @@ Section::Value* Section::get_next_val(char const* const name) {
 
 Section::Value& Section::create_val(char const* const name, char const* const value) {
 	for (Value& temp_value : values_) {
-		if (boost::iequals(temp_value.get_name(), name)) {
+		if (iequals(temp_value.get_name(), name)) {
 			temp_value.set_string(value);
 			return temp_value;
 		}
@@ -286,7 +286,7 @@ Section::Value& Section::create_val_duplicate(char const* const name, char const
  */
 int32_t Section::get_safe_int(char const* const name) {
 	Value* const v = get_val(name);
-	if (!v) {
+	if (v == nullptr) {
 		throw wexception("[%s]: missing integer key '%s'", get_name(), name);
 	}
 	return v->get_int();
@@ -296,18 +296,16 @@ int32_t Section::get_safe_int(char const* const name) {
 uint32_t Section::get_safe_natural(char const* const name) {
 	if (Value* const v = get_val(name)) {
 		return v->get_natural();
-	} else {
-		throw wexception("[%s]: missing natural key '%s'", get_name(), name);
 	}
+	throw wexception("[%s]: missing natural key '%s'", get_name(), name);
 }
 
 /// Return the positive value of the given key or throw an exception.
 uint32_t Section::get_safe_positive(char const* const name) {
 	if (Value* const v = get_val(name)) {
 		return v->get_positive();
-	} else {
-		throw wexception("[%s]: missing positive key '%s'", get_name(), name);
 	}
+	throw wexception("[%s]: missing positive key '%s'", get_name(), name);
 }
 
 /**
@@ -316,7 +314,7 @@ uint32_t Section::get_safe_positive(char const* const name) {
  */
 bool Section::get_safe_bool(char const* const name) {
 	Value* const v = get_val(name);
-	if (!v) {
+	if (v == nullptr) {
 		throw wexception("[%s]: missing boolean key '%s'", get_name(), name);
 	}
 	return v->get_bool();
@@ -328,10 +326,18 @@ bool Section::get_safe_bool(char const* const name) {
  */
 char const* Section::get_safe_string(char const* const name) {
 	Value* const v = get_val(name);
-	if (!v) {
+	if (v == nullptr) {
 		throw wexception("[%s]: missing key '%s'", get_name(), name);
 	}
 	return v->get_string();
+}
+
+char const* Section::get_safe_untranslated_string(char const* const name) {
+	Value* const v = get_val(name);
+	if (v == nullptr) {
+		throw wexception("[%s]: missing key '%s'", get_name(), name);
+	}
+	return v->get_untranslated_string();
 }
 
 /**
@@ -353,7 +359,7 @@ const char* Section::get_safe_string(const std::string& name) {
  */
 int32_t Section::get_int(char const* const name, int32_t const def) {
 	Value* const v = get_val(name);
-	if (!v) {
+	if (v == nullptr) {
 		return def;
 	}
 
@@ -403,7 +409,7 @@ uint32_t Section::get_positive(char const* const name, uint32_t const def) {
  */
 bool Section::get_bool(char const* const name, bool const def) {
 	Value* const v = get_val(name);
-	if (!v) {
+	if (v == nullptr) {
 		return def;
 	}
 
@@ -428,12 +434,12 @@ bool Section::get_bool(char const* const name, bool const def) {
  */
 char const* Section::get_string(char const* const name, char const* const def) {
 	Value const* const v = get_val(name);
-	return v ? v->get_string() : def;
+	return v != nullptr ? v->get_string() : def;
 }
 
 Vector2i Section::get_point(const char* const name, const Vector2i def) {
 	Value const* const v = get_val(name);
-	return v ? v->get_point() : def;
+	return v != nullptr ? v->get_point() : def;
 }
 
 /**
@@ -446,11 +452,11 @@ Vector2i Section::get_point(const char* const name, const Vector2i def) {
  */
 char const* Section::get_next_bool(char const* const name, bool* const value) {
 	Value* const v = get_next_val(name);
-	if (!v) {
+	if (v == nullptr) {
 		return nullptr;
 	}
 
-	if (value) {
+	if (value != nullptr) {
 		*value = v->get_bool();
 	}
 	return v->get_name();
@@ -473,6 +479,17 @@ void Section::set_string(char const* const name, char const* string) {
 
 void Section::set_string_duplicate(char const* const name, char const* const string) {
 	create_val_duplicate(name, string).mark_used();
+}
+
+void Section::set_translated_string(char const* const name, char const* string) {
+	Value& v = create_val(name, string);
+	v.mark_used();
+	v.set_translate(true);
+}
+void Section::set_translated_string_duplicate(char const* const name, char const* const string) {
+	Value& v = create_val_duplicate(name, string);
+	v.mark_used();
+	v.set_translate(true);
 }
 
 /*
@@ -531,7 +548,7 @@ void Profile::error(char const* const fmt, ...) const {
 	va_end(va);
 
 	if (error_level_ == err_log) {
-		log("[%s] %s\n", filename_.c_str(), buffer);
+		log_err("[%s] %s\n", filename_.c_str(), buffer);
 	} else {
 		throw wexception("[%s] %s", filename_.c_str(), buffer);
 	}
@@ -561,7 +578,7 @@ void Profile::check_used() const {
  */
 Section* Profile::get_section(const std::string& name) {
 	for (Section& temp_section : sections_) {
-		if (boost::iequals(temp_section.get_name(), name.c_str())) {
+		if (iequals(temp_section.get_name(), name)) {
 			temp_section.mark_used();
 			return &temp_section;
 		}
@@ -576,9 +593,8 @@ Section* Profile::get_section(const std::string& name) {
 Section& Profile::get_safe_section(const std::string& name) {
 	if (Section* const s = get_section(name)) {
 		return *s;
-	} else {
-		throw wexception("in \"%s\" section [%s] not found", filename_.c_str(), name.c_str());
 	}
+	throw wexception("in \"%s\" section [%s] not found", filename_.c_str(), name.c_str());
 }
 
 /**
@@ -602,7 +618,7 @@ Section& Profile::pull_section(char const* const name) {
 Section* Profile::get_next_section(char const* const name) {
 	for (Section& section : sections_) {
 		if (!section.is_used()) {
-			if (!name || boost::iequals(section.get_name(), name)) {
+			if ((name == nullptr) || iequals(section.get_name(), name)) {
 				section.mark_used();
 				return &section;
 			}
@@ -613,7 +629,7 @@ Section* Profile::get_next_section(char const* const name) {
 
 Section& Profile::create_section(char const* const name) {
 	for (Section& section : sections_) {
-		if (boost::iequals(section.get_name(), name)) {
+		if (iequals(section.get_name(), name)) {
 			return section;
 		}
 	}
@@ -626,7 +642,7 @@ Section& Profile::create_section_duplicate(char const* const name) {
 }
 
 inline char* skipwhite(char* p) {
-	while (*p && isspace(*p)) {
+	while ((*p != 0) && (isspace(*p) != 0)) {
 		++p;
 	}
 	return p;
@@ -634,7 +650,7 @@ inline char* skipwhite(char* p) {
 
 inline void rtrim(char* const str) {
 	for (char* p = strchr(str, '\0'); str < p; --p) {
-		if (!isspace(p[-1])) {
+		if (isspace(p[-1]) == 0) {
 			*p = 0;
 			break;
 		}
@@ -642,7 +658,7 @@ inline void rtrim(char* const str) {
 }
 
 inline void killcomments(char* p) {
-	while (*p) {
+	while (*p != 0) {
 		if (p[0] == '#') {
 			p[0] = '\0';
 			break;
@@ -666,7 +682,7 @@ void Profile::read(char const* const filename, char const* const global_section,
 		char* p = nullptr;
 		Section* s = nullptr;
 
-		bool reading_multiline = 0;
+		bool reading_multiline = false;
 		std::string data;
 		char* key = nullptr;
 		bool translate_line = false;
@@ -678,7 +694,7 @@ void Profile::read(char const* const filename, char const* const global_section,
 			}
 
 			p = skipwhite(p);
-			if (!p[0] || p[0] == '#') {
+			if ((p[0] == 0) || p[0] == '#') {
 				continue;
 			}
 
@@ -716,7 +732,7 @@ void Profile::read(char const* const filename, char const* const global_section,
 					tail = line;
 				} else {
 					tail = strchr(p, '=');
-					if (!tail) {
+					if (tail == nullptr) {
 						throw wexception("invalid syntax: %s", line);
 					}
 					*tail++ = '\0';
@@ -741,11 +757,11 @@ void Profile::read(char const* const filename, char const* const global_section,
 						++tail;
 					}
 				}
-				if (tail) {
+				if (tail != nullptr) {
 					char* const eot = tail + strlen(tail) - 1;
 					if (*eot == '\'' || *eot == '"') {
 						*eot = '\0';
-						if (*tail) {
+						if (*tail != 0) {
 							char* const eot2 = tail + strlen(tail) - 1;
 							if (*eot2 == '\'' || *eot2 == '"') {
 								reading_multiline = false;
@@ -755,21 +771,19 @@ void Profile::read(char const* const filename, char const* const global_section,
 					}
 
 					// ready to insert
-					if (!s) {
-						if (global_section) {
+					if (s == nullptr) {
+						if (global_section != nullptr) {
 							s = &create_section_duplicate(global_section);
 						} else {
 							throw wexception("key %s outside section", p);
 						}
 					}
+					assert(s);
+					data += tail;
 
-					if (translate_line && *tail) {
-						data += i18n::translate(tail);
-					} else {
-						data += tail;
-					}
-					if (s && !reading_multiline) {
-						s->create_val_duplicate(key, data.c_str());
+					if (!reading_multiline) {
+						Section::Value& result = s->create_val_duplicate(key, data.c_str());
+						result.set_translate(translate_line);
 						data.clear();
 					}
 				} else {
@@ -780,13 +794,13 @@ void Profile::read(char const* const filename, char const* const global_section,
 	} catch (const FileNotFoundError&) {
 		// It's no problem if the config file does not exist. (It'll get
 		// written on exit anyway)
-		log("There's no configuration file, using default values.\n");
+		log_warn("There's no configuration file, using default values.\n");
 	} catch (const std::exception& e) {
 		error("%s:%u: %s", filename, linenr, e.what());
 	}
 
 	//  Make sure that the requested global section exists, even if it is empty.
-	if (global_section && !get_section(global_section)) {
+	if ((global_section != nullptr) && (get_section(global_section) == nullptr)) {
 		create_section_duplicate(global_section);
 	}
 }
@@ -802,10 +816,9 @@ void Profile::write(char const* const filename,
                     char const* const comment) {
 	FileWrite fw;
 
-	fw.print_f(
-	   "# Automatically created by Widelands %s (%s)\n", build_id().c_str(), build_type().c_str());
+	fw.print_f("# Automatically created by Widelands %s\n", build_ver_details().c_str());
 
-	if (comment) {
+	if (comment != nullptr) {
 		fw.print_f("# %s\n", comment);
 	}
 
@@ -821,9 +834,9 @@ void Profile::write(char const* const filename,
 				continue;
 			}
 
-			char const* const str = temp_value.get_string();
+			char const* const str = temp_value.get_untranslated_string();
 
-			if (*str) {
+			if (*str != 0) {
 				uint32_t spaces = strlen(temp_value.get_name());
 				bool multiline = false;
 
@@ -835,14 +848,14 @@ void Profile::write(char const* const filename,
 
 				// Try to avoid _every_ possible way of
 				// getting inconsistent data
-				std::string tempstr("");
+				std::string tempstr;
 
 				if (multiline) {
 					// Show WL that a multilined text starts
 					tempstr += "\"";
 				}
 
-				for (char const* it = str; *it; ++it) {
+				for (char const* it = str; *it != 0; ++it) {
 					// No speach marks - they would break the format
 					switch (*it) {
 					case '"':
@@ -867,7 +880,8 @@ void Profile::write(char const* const filename,
 					tempstr += '"';
 				}
 
-				fw.print_f("%s=\"%s\"\n", temp_value.get_name(), tempstr.c_str());
+				fw.print_f("%s=%s\"%s\"\n", temp_value.get_name(),
+				           temp_value.get_translate() ? "_" : "", tempstr.c_str());
 			} else {
 				fw.print_f("%s=\n", temp_value.get_name());
 			}

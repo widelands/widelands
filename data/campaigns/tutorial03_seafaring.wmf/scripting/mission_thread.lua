@@ -81,6 +81,9 @@ function expedition()
       return false
    end
 
+   sleep(10000)
+   campaign_message_box(expedition2a)
+
    while not _ship_ready_for_expedition() do sleep(1000) end
    set_objective_done(o)
 
@@ -96,8 +99,8 @@ function expedition()
       while not successful do
          local idx = math.random(#fields)
          f = fields[idx]
-         if ((f.resource == "iron") and not f.immovable) then
-            map:place_immovable("atlanteans_resi_iron_2",f,"tribes")
+         if ((f.resource == "resource_iron") and not f.immovable) then
+            map:place_immovable("atlanteans_resi_iron_2", f)
             successful = true
          end
          table.remove(fields,idx)
@@ -166,7 +169,7 @@ end
 
 function waterways()
    sleep(5000)
-   map:place_immovable("atlanteans_resi_gold_2", gold_mine, "tribes")
+   map:place_immovable("atlanteans_resi_gold_2", gold_mine)
 
    campaign_message_box(ferry_1)
    sleep(1000)
@@ -176,7 +179,7 @@ function waterways()
    while not construction_started_region(area, "atlanteans_ferry_yard") do sleep(1000) end
    sleep(5000)
    -- place resource indicator again in case player preferred ships/exploring
-   map:place_immovable("atlanteans_resi_gold_2", gold_mine, "tribes")
+   map:place_immovable("atlanteans_resi_gold_2", gold_mine)
 
    campaign_message_box(ferry_3)
    sleep(500)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,12 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "wui/mapviewpixelfunctions.h"
+
+#include <cassert>
+#include <cstdlib>
 
 #include "base/vector.h"
 
@@ -55,17 +57,18 @@ MapviewPixelFunctions::calc_pix_difference(const Widelands::Map& map, Vector2f a
 float MapviewPixelFunctions::calc_pix_distance(const Widelands::Map& map, Vector2f a, Vector2f b) {
 	normalize_pix(map, &a);
 	normalize_pix(map, &b);
-	uint32_t dx = std::abs(a.x - b.x), dy = std::abs(a.y - b.y);
+	uint32_t dx = std::abs(a.x - b.x);
+	uint32_t dy = std::abs(a.y - b.y);
 	{
 		const uint32_t map_end_screen_x = get_map_end_screen_x(map);
 		if (dx > map_end_screen_x / 2) {
-			dx = -(dx - map_end_screen_x);
+			dx = map_end_screen_x - dx;
 		}
 	}
 	{
 		const uint32_t map_end_screen_y = get_map_end_screen_y(map);
 		if (dy > map_end_screen_y / 2) {
-			dy = -(dy - map_end_screen_y);
+			dy = map_end_screen_y - dy;
 		}
 	}
 	return dx + dy;
@@ -86,14 +89,14 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 	Widelands::Coords result_node;
 
 	const uint16_t col_number = x / (kTriangleWidth / 2);
-	uint16_t row_number = y / kTriangleHeight, next_row_number;
-	assert(row_number < mapheight);
+	int16_t row_number = (y + kHeightFactor * MAX_FIELD_HEIGHT) / kTriangleHeight;
+	int16_t next_row_number;
 	const uint32_t left_col = col_number / 2;
 	uint16_t right_col = (col_number + 1) / 2;
 	if (right_col == mapwidth) {
 		right_col = 0;
 	}
-	bool slash = (col_number + row_number) & 1;
+	bool slash = ((col_number + row_number) & 1) != 0;
 
 	//  Find out which two nodes the mouse is between in the y-dimension, taking
 	//  the height factor into account.
@@ -102,17 +105,18 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 	//  between them goes in the direction of the '/' character. When slash is
 	//  false, the edge goes in the direction of the '\' character.
 	uint16_t screen_y_base = row_number * kTriangleHeight;
-	int32_t upper_screen_dy,
-	   lower_screen_dy =
-	      screen_y_base -
-	      map[Widelands::Coords(slash ? right_col : left_col, row_number)].get_height() *
-	         kHeightFactor -
-	      y;
+	row_number %= mapheight;
+	int32_t upper_screen_dy;
+	int32_t lower_screen_dy =
+	   screen_y_base -
+	   map[Widelands::Coords(slash ? right_col : left_col, row_number)].get_height() *
+	      kHeightFactor -
+	   y;
 	for (;;) {
-		screen_y_base += kTriangleHeight;
-		next_row_number = row_number + 1;
-		if (next_row_number == mapheight) {
-			next_row_number = 0;
+		screen_y_base -= kTriangleHeight;
+		next_row_number = row_number - 1;
+		if (next_row_number < 0) {
+			next_row_number += mapheight;
 		}
 		upper_screen_dy = lower_screen_dy;
 		lower_screen_dy =
@@ -120,7 +124,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 		   map[Widelands::Coords(slash ? left_col : right_col, next_row_number)].get_height() *
 		      kHeightFactor -
 		   y;
-		if (lower_screen_dy < 0) {
+		if (lower_screen_dy > 0) {
 			row_number = next_row_number;
 			slash = !slash;
 		} else {
@@ -129,7 +133,10 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 	}
 
 	{  //  Calculate which of the 2 nodes (x, y) is closest to.
-		uint16_t upper_x, lower_x, upper_screen_dx, lower_screen_dx;
+		uint16_t upper_x;
+		uint16_t lower_x;
+		uint16_t upper_screen_dx;
+		uint16_t lower_screen_dx;
 		if (slash) {
 			upper_x = right_col;
 			lower_x = left_col;
@@ -153,6 +160,10 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 	Widelands::TCoords<> result_triangle(Widelands::Coords::null(), Widelands::TriangleIndex::D);
 
 	//  Find out which of the 4 possible triangles (x, y) is in.
+	screen_y_base += kTriangleHeight;
+	row_number = (row_number + mapheight - 1) % mapheight;
+	next_row_number = (row_number + 1) % mapheight;
+	slash = !slash;
 	if (slash) {
 		int32_t Y_a = screen_y_base - kTriangleHeight -
 		              map[Widelands::Coords((right_col == 0 ? mapwidth : right_col) - 1, row_number)]
@@ -160,7 +171,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 		                 kHeightFactor;
 		int32_t Y_b = screen_y_base - kTriangleHeight -
 		              map[Widelands::Coords(right_col, row_number)].get_height() * kHeightFactor;
-		int32_t ldy = Y_b - Y_a, pdy = Y_b - y;
+		int32_t ldy = Y_b - Y_a;
+		int32_t pdy = Y_b - y;
 		int32_t pdx = (col_number + 1) * (kTriangleWidth / 2) - x;
 		assert(pdx > 0);
 		if (pdy * kTriangleWidth > ldy * pdx) {
@@ -204,7 +216,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 		              map[Widelands::Coords(left_col + 1 == mapwidth ? 0 : left_col + 1, row_number)]
 		                    .get_height() *
 		                 kHeightFactor;
-		int32_t ldy = Y_b - Y_a, pdy = Y_b - y;
+		int32_t ldy = Y_b - Y_a;
+		int32_t pdy = Y_b - y;
 		int32_t pdx = (col_number + 2) * (kTriangleWidth / 2) - x;
 		assert(pdx > 0);
 		if (pdy * kTriangleWidth > ldy * pdx) {
@@ -251,6 +264,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
  */
 void MapviewPixelFunctions::normalize_pix(const Widelands::Map& map, Vector2f* p) {
 	const float map_end_screen_x = get_map_end_screen_x(map);
+	assert(map_end_screen_x > 0);
 	while (p->x >= map_end_screen_x) {
 		p->x -= map_end_screen_x;
 	}
@@ -258,6 +272,7 @@ void MapviewPixelFunctions::normalize_pix(const Widelands::Map& map, Vector2f* p
 		p->x += map_end_screen_x;
 	}
 	const float map_end_screen_y = get_map_end_screen_y(map);
+	assert(map_end_screen_y > 0);
 	while (p->y >= map_end_screen_y) {
 		p->y -= map_end_screen_y;
 	}

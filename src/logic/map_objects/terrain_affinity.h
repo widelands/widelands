@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -41,17 +40,17 @@ public:
 	explicit TerrainAffinity(const LuaTable& table, const std::string& immovable_name);
 
 	// Preferred temperature is in arbitrary units.
-	int preferred_temperature() const;
+	[[nodiscard]] int preferred_temperature() const;
 
 	// Preferred fertility, ranging from 0 to 1000.
-	int preferred_fertility() const;
+	[[nodiscard]] int preferred_fertility() const;
 
 	// Preferred humidity, ranging from 0 to 1000.
-	int preferred_humidity() const;
+	[[nodiscard]] int preferred_humidity() const;
 
 	// A value in [0, 99] that defines how well this can deal with non-ideal
 	// situations. Lower means it is less picky, i.e. it can deal better.
-	int pickiness() const;
+	[[nodiscard]] int pickiness() const;
 
 private:
 	const int preferred_fertility_;

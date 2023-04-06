@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -45,7 +44,7 @@ struct CritterAction {
 struct CritterProgram : public MapObjectProgram {
 	explicit CritterProgram(const std::string& program_name, const LuaTable& actions_table);
 
-	int32_t get_size() const {
+	[[nodiscard]] int32_t get_size() const {
 		return actions_.size();
 	}
 	const CritterAction& operator[](size_t const idx) const {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2020 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -39,20 +38,20 @@ JSON::Array* Element::add_array(const std::string& key) {
 }
 
 void Element::add_bool(const std::string& key, bool value) {
-	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Boolean(value))));
+	values_.emplace_back(key, std::unique_ptr<JSON::Value>(new JSON::Boolean(value)));
 }
 
 void Element::add_double(const std::string& key, double value) {
-	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Double(value))));
+	values_.emplace_back(key, std::unique_ptr<JSON::Value>(new JSON::Double(value)));
 }
 void Element::add_int(const std::string& key, int value) {
-	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Int(value))));
+	values_.emplace_back(key, std::unique_ptr<JSON::Value>(new JSON::Int(value)));
 }
 void Element::add_empty(const std::string& key) {
-	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Empty())));
+	values_.emplace_back(key, std::unique_ptr<JSON::Value>(new JSON::Empty()));
 }
 void Element::add_string(const std::string& key, const std::string& value) {
-	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::String(value))));
+	values_.emplace_back(key, std::unique_ptr<JSON::Value>(new JSON::String(value)));
 }
 
 void Element::write_to_file(FileSystem& fs, const std::string& filename) const {
@@ -66,7 +65,7 @@ std::string Element::as_string() const {
 }
 
 std::string Element::values_as_string(const std::string& tabs) const {
-	std::string result = "";
+	std::string result;
 	if (!values_.empty()) {
 		for (size_t i = 0; i < values_.size() - 1; ++i) {
 			const auto& element = values_.at(i);
@@ -86,7 +85,7 @@ std::string Element::values_as_string(const std::string& tabs) const {
 }
 
 std::string Element::children_as_string() const {
-	std::string result = "";
+	std::string result;
 	if (!children_.empty()) {
 		for (size_t i = 0; i < children_.size() - 1; ++i) {
 			result += children_.at(i)->as_string() + ",\n";
@@ -106,8 +105,8 @@ Object::Object(const std::string& key, int level) : JSON::Element(key, level) {
 }
 
 std::string Object::as_string() const {
-	std::string result = "";
-	std::string tabs = "";
+	std::string result;
+	std::string tabs;
 	for (int i = 0; i < level_; ++i) {
 		tabs += tab_;
 	}
@@ -125,8 +124,8 @@ Array::Array(const std::string& key, int level) : JSON::Element(key, level) {
 }
 
 std::string Array::as_string() const {
-	std::string result = "";
-	std::string tabs = "";
+	std::string result;
+	std::string tabs;
 	for (int i = 0; i < level_; ++i) {
 		tabs += tab_;
 	}

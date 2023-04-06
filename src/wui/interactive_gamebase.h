@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,22 +28,15 @@
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_base.h"
 
-struct ChatProvider;
-
 class InteractiveGameBase : public InteractiveBase {
 public:
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
 	                    bool multiplayer,
 	                    ChatProvider* chat_provider);
-	~InteractiveGameBase() override {
-	}
-	Widelands::Game* get_game() const;
-	Widelands::Game& game() const;
-
-	virtual bool can_see(Widelands::PlayerNumber) const = 0;
-	virtual bool can_act(Widelands::PlayerNumber) const = 0;
-	virtual Widelands::PlayerNumber player_number() const = 0;
+	~InteractiveGameBase() override = default;
+	Widelands::Game* get_game() const override;
+	Widelands::Game& game() const override;
 
 	// Only the 'InteractiveGameBase' has all information of what should be
 	// drawn into a map_view (i.e. which overlays are available). The
@@ -52,19 +44,14 @@ public:
 	// 'map_views', hence this function.
 	virtual void draw_map_view(MapView* given_map_view, RenderTarget* dst) = 0;
 
-	void set_sel_pos(Widelands::NodeAndTriangle<> const center) override;
+	void set_sel_pos(Widelands::NodeAndTriangle<> center) override;
 
 	virtual void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) = 0;
-	void add_wanted_building_window(const Widelands::Coords& coords,
-	                                const Vector2i point,
-	                                bool was_minimal,
-	                                bool was_pinned);
-	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
-	                                       bool avoid_fastclick,
-	                                       bool workarea_preview_wanted);
+
+	void show_watch_window(Widelands::Bob&);
+
 	bool try_show_ship_window();
-	void show_ship_window(Widelands::Ship* ship);
-	bool is_multiplayer() {
+	bool is_multiplayer() const {
 		return multiplayer_;
 	}
 
@@ -74,7 +61,7 @@ public:
 	bool show_game_client_disconnected();
 	void postload() override;
 	void start() override;
-	void toggle_mainmenu();
+	void rebuild_main_menu();
 
 protected:
 	// For referencing the items in showhidemenu_
@@ -95,17 +82,21 @@ protected:
 	// Adds the gamespeedmenu_ to the toolbar
 	void add_gamespeed_menu();
 
+	void add_diplomacy_menu();
 	// Adds a chat toolbar button and registers the chat console window
 	void add_chat_ui();
 
 	bool handle_key(bool down, SDL_Keysym code) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
 	void draw_overlay(RenderTarget&) override;
 
+public:
 	// All unique menu windows
 	struct GameMenuWindows {
 		UI::UniqueWindow::Registry sound_options;
 		UI::UniqueWindow::Registry savegame;
+		UI::UniqueWindow::Registry loadgame;
 
 		GeneralStatisticsMenu::Registry stats_general;
 		UI::UniqueWindow::Registry stats_wares;
@@ -117,7 +108,9 @@ protected:
 		UI::UniqueWindow::Registry help;
 	} menu_windows_;
 
-	ChatProvider* chat_provider_;
+	UI::UniqueWindow::Registry diplomacy_;
+
+protected:
 	UI::UniqueWindow::Registry chat_;
 	bool multiplayer_;
 
@@ -136,8 +129,13 @@ private:
 #endif
 		kOptions,
 		kSaveMap,
+		kLoadMap,
+		kRestartScenario,
 		kExitGame
 	};
+
+	bool can_restart_;
+	void handle_restart(bool force = false);
 
 	// For referencing the items in gamespeedmenu_
 	enum class GameSpeedEntry { kIncrease, kDecrease, kPause };
@@ -152,38 +150,18 @@ private:
 	void rebuild_gamespeed_menu();
 
 	// Increases the gamespeed
-	void increase_gamespeed(uint16_t speed);
+	void increase_gamespeed(uint16_t speed) const;
 	// Decreases the gamespeed
-	void decrease_gamespeed(uint16_t speed);
+	void decrease_gamespeed(uint16_t speed) const;
 	// Pauses / Unpauses the game and calls rebuild_gamespeed_menu
 	void toggle_game_paused();
 	// Resets the speed to 1x
-	void reset_gamespeed();
-
-	struct WantedBuildingWindow {
-		explicit WantedBuildingWindow(const Vector2i& pos,
-		                              bool was_minimized,
-		                              bool was_pinned,
-		                              bool was_showing_workarea)
-		   : window_position(pos),
-		     minimize(was_minimized),
-		     pin(was_pinned),
-		     show_workarea(was_showing_workarea) {
-		}
-		const Vector2i window_position;
-		const bool minimize;
-		const bool pin;
-		const bool show_workarea;
-	};
+	void reset_gamespeed() const;
 
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;
 	// Game speed menu on the toolbar
 	UI::Dropdown<GameSpeedEntry> gamespeedmenu_;
-
-	// Building coordinates, window position, whether the window was minimized
-	std::map<uint32_t, std::unique_ptr<const WantedBuildingWindow>> wanted_building_windows_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H

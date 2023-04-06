@@ -1,0 +1,12 @@
+# List of known memory leaks in 3rd party libraries which we do not want ASan to report.
+
+# SDL2
+leak:libSDL2
+
+# Eris
+leak:src/scripting/persistence.cc
+
+# Various graphics drivers and X11 stuff.
+leak:libdbus
+leak:libnvidia-glcore
+leak:radeonsi_dri

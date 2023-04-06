@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,7 +28,6 @@
  * Deletes the immovable at the given location
  */
 int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                     EditorInteractive& eia,
                                                      EditorActionArgs* args,
                                                      Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -37,9 +35,9 @@ int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::NodeAndTri
 	do {
 		if (upcast(Widelands::Immovable, immovable, mr.location().field->get_immovable())) {
 			args->old_immovable_types.push_back(immovable->descr().name());
-			immovable->remove(eia.egbase());  //  Delete no buildings or stuff.
+			immovable->remove(parent_.egbase());  //  Delete no buildings or stuff.
 		} else {
-			args->old_immovable_types.push_back("");
+			args->old_immovable_types.emplace_back("");
 		}
 	} while (mr.advance(*map));
 	return mr.radius() + 2;
@@ -47,12 +45,11 @@ int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::NodeAndTri
 
 int32_t EditorDeleteImmovableTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
    EditorActionArgs* args,
    Widelands::Map* map) {
-	return parent.tools()->place_immovable.handle_undo_impl(center, parent, args, map);
+	return parent_.tools()->place_immovable.handle_undo_impl(center, args, map);
 }
 
-EditorActionArgs EditorDeleteImmovableTool::format_args_impl(EditorInteractive& parent) {
-	return EditorTool::format_args_impl(parent);
+EditorActionArgs EditorDeleteImmovableTool::format_args_impl() {
+	return EditorTool::format_args_impl();
 }

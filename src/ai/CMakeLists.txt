@@ -5,9 +5,10 @@ wl_library(ai_hints
     ai_hints.cc
     ai_hints.h
   DEPENDS
-    base_log
+    base
     base_macros
     logic_constants
+    logic_exceptions
     scripting_lua_table
 )
 
@@ -23,15 +24,15 @@ wl_library(ai
     defaultai.h
   DEPENDS
     ai_hints
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_time_string
     economy
     logic
     logic_constants
     logic_commands
+    logic_game_controller
     logic_map
     logic_map_objects
 )

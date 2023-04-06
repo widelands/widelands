@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,9 +21,8 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"
-#include "graphic/graphic.h"
 
-inline EditorInteractive& EditorToolsizeMenu::eia() {
+inline EditorInteractive& EditorToolsizeMenu::eia() const {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
@@ -33,30 +31,25 @@ inline EditorInteractive& EditorToolsizeMenu::eia() {
  */
 EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                                        UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
-     textarea_(this, 5, 10, 240, 10, std::string(), UI::Align::kCenter),
-     increase_(this,
-               "incr",
-               get_inner_w() / 2 - 10,
-               25,
-               20,
-               20,
-               UI::ButtonStyle::kWuiSecondary,
-               g_gr->images().get("images/ui_basic/scrollbar_up.png")),
-     decrease_(this,
-               "decr",
-               get_inner_w() / 2 + 10,
-               25,
-               20,
-               20,
-               UI::ButtonStyle::kWuiSecondary,
-               g_gr->images().get("images/ui_basic/scrollbar_down.png")),
-     value_(0) {
-	increase_.sigclicked.connect([this]() { increase_radius(); });
-	decrease_.sigclicked.connect([this]() { decrease_radius(); });
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "toolsize_menu", &registry, 250, 30, _("Tool Size")),
+     spinbox_(this,
+              0,
+              0,
+              get_inner_w(),
+              80,
+              1,
+              1,
+              MAX_TOOL_AREA + 1,
+              UI::PanelStyle::kWui,
+              _("Current Size:"),
+              UI::SpinBox::Units::kNone,
+              UI::SpinBox::Type::kSmall) {
+	spinbox_.changed.connect([this]() { changed(); });
 
-	increase_.set_repeating(true);
-	decrease_.set_repeating(true);
+	set_inner_size(spinbox_.get_w() + 2 * kMargin, spinbox_.get_h() + 2 * kMargin);
+	spinbox_.set_pos(Vector2i(kMargin, kMargin));
+
 	update(parent.get_sel_radius());
 
 	if (eia().tools()->current().has_size_one()) {
@@ -66,25 +59,27 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
+
+	initialization_complete();
+}
+
+void EditorToolsizeMenu::changed() {
+	value_ = spinbox_.get_value() - 1;
+	eia().set_sel_radius(value_);
 }
 
 void EditorToolsizeMenu::update(uint32_t const val) {
 	value_ = val;
-	eia().set_sel_radius(val);
 	set_buttons_enabled(true);
-	textarea_.set_text((boost::format(_("Current Size: %u")) % (val + 1)).str());
 }
 
 void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
-	decrease_.set_enabled(enable && 0 < value_);
-	increase_.set_enabled(enable && value_ < MAX_TOOL_AREA);
-}
-
-void EditorToolsizeMenu::decrease_radius() {
-	assert(0 < eia().get_sel_radius());
-	update(eia().get_sel_radius() - 1);
-}
-void EditorToolsizeMenu::increase_radius() {
-	assert(eia().get_sel_radius() < MAX_TOOL_AREA);
-	update(eia().get_sel_radius() + 1);
+	int32_t sbval = value_ + 1;
+	if (enable) {
+		spinbox_.set_interval(1, MAX_TOOL_AREA + 1);
+		spinbox_.set_value(sbval);
+		eia().set_sel_radius(value_);
+	} else {
+		spinbox_.set_interval(sbval, sbval);
+	}
 }

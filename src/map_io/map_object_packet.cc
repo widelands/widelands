@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,6 +27,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/worker.h"
@@ -39,17 +39,13 @@
 namespace Widelands {
 
 MapObjectPacket::~MapObjectPacket() {
-	while (loaders.size()) {
+	while (!loaders.empty()) {
 		delete *loaders.begin();
 		loaders.erase(loaders.begin());
 	}
 }
 
-void MapObjectPacket::read(FileSystem& fs,
-                           EditorGameBase& egbase,
-                           MapObjectLoader& mol,
-                           const WorldLegacyLookupTable& world_lookup_table,
-                           const TribesLegacyLookupTable& tribes_lookup_table) {
+void MapObjectPacket::read(FileSystem& fs, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/mapobjects");
@@ -63,8 +59,7 @@ void MapObjectPacket::read(FileSystem& fs,
 			case 0:
 				return;
 			case MapObject::HeaderImmovable:
-				loaders.insert(
-				   Immovable::load(egbase, mol, fr, world_lookup_table, tribes_lookup_table));
+				loaders.insert(Immovable::load(egbase, mol, fr));
 				break;
 
 			case MapObject::HeaderBattle:
@@ -72,18 +67,22 @@ void MapObjectPacket::read(FileSystem& fs,
 				break;
 
 			case MapObject::HeaderCritter:
-				loaders.insert(Critter::load(egbase, mol, fr, world_lookup_table));
+				loaders.insert(Critter::load(egbase, mol, fr));
+				break;
+
+			case MapObject::HeaderPinnedNote:
+				loaders.insert(PinnedNote::load(egbase, mol, fr));
 				break;
 
 			case MapObject::HeaderWorker:
 				// We can't use the worker's savegame version, because some stuff is loaded before
 				// that
 				// packet version, and we removed the tribe name.
-				loaders.insert(Worker::load(egbase, mol, fr, tribes_lookup_table, packet_version));
+				loaders.insert(Worker::load(egbase, mol, fr, packet_version));
 				break;
 
 			case MapObject::HeaderWareInstance:
-				loaders.insert(WareInstance::load(egbase, mol, fr, tribes_lookup_table));
+				loaders.insert(WareInstance::load(egbase, mol, fr));
 				break;
 
 			case MapObject::HeaderShip:
@@ -139,9 +138,8 @@ void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSav
 
 	fw.unsigned_8(kCurrentPacketVersionMapObject);
 
-	std::vector<Serial> obj_serials = egbase.objects().all_object_serials_ordered();
-	for (std::vector<Serial>::iterator cit = obj_serials.begin(); cit != obj_serials.end(); ++cit) {
-		MapObject* pobj = egbase.objects().get_object(*cit);
+	for (const Serial ser : egbase.objects().all_object_serials_ordered()) {
+		MapObject* pobj = egbase.objects().get_object(ser);
 		assert(pobj);
 		MapObject& obj = *pobj;
 

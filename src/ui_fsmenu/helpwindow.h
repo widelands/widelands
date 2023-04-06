@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -26,20 +25,20 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
-namespace UI {
+namespace FsMenu {
 
 /**
  * Shows a help window with an OK button.
  * See data/txts/help/multiplayer_help.lua for an example Lua file.
  */
-class FullscreenHelpWindow : public Window {
+class HelpWindow : public UI::Window {
 public:
-	FullscreenHelpWindow(Panel* parent,
-	                     LuaInterface* lua,
-	                     const std::string& script_path,
-	                     const std::string& caption,
-	                     uint32_t width = 0,
-	                     uint32_t height = 0);
+	HelpWindow(Panel* parent,
+	           LuaInterface* lua,
+	           const std::string& script_path,
+	           const std::string& caption,
+	           uint32_t width = 0,
+	           uint32_t height = 0);
 
 	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
 
@@ -54,9 +53,9 @@ protected:
 	}
 
 private:
-	std::unique_ptr<MultilineTextarea> textarea_;
+	std::unique_ptr<UI::MultilineTextarea> textarea_;
 };
 
-}  // namespace UI
+}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_HELPWINDOW_H

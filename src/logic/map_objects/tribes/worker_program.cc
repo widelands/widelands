@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -107,8 +106,8 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 WorkerProgram::WorkerProgram(const std::string& init_name,
                              const LuaTable& actions_table,
                              const WorkerDescr& worker,
-                             const Tribes& tribes)
-   : MapObjectProgram(init_name), worker_(worker), tribes_(tribes) {
+                             Descriptions& descriptions)
+   : MapObjectProgram(init_name), worker_(worker), descriptions_(descriptions) {
 
 	for (const std::string& line : actions_table.array_entries<std::string>()) {
 		if (line.empty()) {
@@ -122,13 +121,13 @@ WorkerProgram::WorkerProgram(const std::string& init_name,
 			Worker::Action act;
 			uint32_t mapidx;
 
-			for (mapidx = 0; parsemap_[mapidx].name; ++mapidx) {
+			for (mapidx = 0; parsemap_[mapidx].name != nullptr; ++mapidx) {
 				if (parseinput.name == parsemap_[mapidx].name) {
 					break;
 				}
 			}
 
-			if (!parsemap_[mapidx].name) {
+			if (parsemap_[mapidx].name == nullptr) {
 				throw GameDataError(
 				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
@@ -173,7 +172,7 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 		throw wexception("Usage: createware=<ware type>");
 	}
 
-	const DescriptionIndex ware_index = tribes_.safe_ware_index(cmd[0]);
+	const DescriptionIndex ware_index = descriptions_.load_ware(cmd[0]);
 
 	act->function = &Worker::run_createware;
 	act->iparam1 = ware_index;
@@ -183,20 +182,21 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 /* RST
 mine
 ^^^^
-.. function:: mine=\<resource_name\> \<area\>
+.. function:: mine=\<resource_name\> radius:\<number\>
 
    :arg string resource_name: The map resource to mine, e.g. ``fish``.
 
-   :arg int area: The radius that is scanned for decreasing the map resource, e.g. ``1``.
+   :arg int radius: After the worker has found a spot, the radius that is scanned for decreasing the
+      map resource, e.g. ``1``.
 
    Mine on the current coordinates that the worker has walked to for resources decrease.
    Example::
 
       fish = {
-         "findspace=size:any radius:7 resource:fish",
+         "findspace=size:any radius:7 resource:resource_fish",
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net 192",
-         "mine=fish 1", -- Remove a fish in an area of 1
+         "mine=resource_fish radius:1", -- Remove a fish in an area of 1
          "animate=fishing duration:3s",
          "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
@@ -209,31 +209,54 @@ mine
  */
 void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 2) {
-		throw GameDataError("Usage: mine=<ware type> <workarea radius>");
+		throw GameDataError("Usage: mine=<resource_name> radius:<number>");
 	}
 
 	act->function = &Worker::run_mine;
-	act->sparam1 = cmd[0];
-	act->iparam1 = read_positive(cmd[1]);
+
+	if (read_key_value_pair(cmd[1], ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this option after v1.0
+		log_warn("'mine' program without parameter names is deprecated, please use "
+		         "'mine=<resource_name> radius:<number>' in %s\n",
+		         worker_.name().c_str());
+		act->sparam1 = cmd[0];
+		act->iparam1 = read_positive(cmd[1]);
+	} else {
+		for (const std::string& argument : cmd) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.first == "radius") {
+				act->iparam1 = read_positive(item.second);
+			} else if (item.second.empty()) {
+				act->sparam1 = item.first;
+			} else {
+				throw GameDataError(
+				   "Unknown parameter '%s'. Usage: mine=<resource_name> radius:<number>",
+				   item.first.c_str());
+			}
+		}
+	}
+	Notifications::publish(
+	   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 }
 
 /* RST
 breed
 ^^^^^
-.. function:: breed=\<resource_name\> \<area\>
+.. function:: breed=\<resource_name\> radius:\<number\>
 
    :arg string resource_name: The map resource to breed, e.g. ``fish``.
 
-   :arg int area: The radius that is scanned for increasing the map resource, e.g. ``1``.
+   :arg int radius: After the worker has found a spot, the radius that is scanned for increasing the
+      map resource, e.g. ``1``.
 
    Breed a resource on the current coordinates that the worker has walked to for
    resources increase. Example::
 
       breed = {
-         "findspace=size:any radius:7 breed resource:fish",
+         "findspace=size:any radius:7 breed resource:resource_fish",
          "walk=coords",
          "animate=freeing duration:3s",
-         "breed=fish 1", -- Add a fish in an area of 1
+         "breed=resource_fish radius:1", -- Add a fish in an area of 1
          "return"
       },
 */
@@ -243,22 +266,46 @@ breed
  */
 void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 2) {
-		throw GameDataError("Usage: breed=<ware type> <workarea radius>");
+		throw GameDataError("Usage: breed=<resource_name> radius:<number>");
 	}
 
 	act->function = &Worker::run_breed;
-	act->sparam1 = cmd[0];
-	act->iparam1 = read_positive(cmd[1]);
+
+	if (read_key_value_pair(cmd[1], ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this option after v1.0
+		log_warn("'breed' program without parameter names is deprecated, please use "
+		         "'breed=<resource_name> radius:<number>' in %s\n",
+		         worker_.name().c_str());
+		act->sparam1 = cmd[0];
+		act->iparam1 = read_positive(cmd[1]);
+	} else {
+		for (const std::string& argument : cmd) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.first == "radius") {
+				act->iparam1 = read_positive(item.second);
+			} else if (item.second.empty()) {
+				act->sparam1 = item.first;
+			} else {
+				throw GameDataError(
+				   "Unknown parameter '%s'. Usage: breed=<resource_name> radius:<number>",
+				   item.first.c_str());
+			}
+		}
+	}
+	Notifications::publish(
+	   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 }
 
 /* RST
 findobject
 ^^^^^^^^^^
 .. function:: findobject=radius:\<distance\> [type:\<map_object_type\>] [attrib:\<attribute\>]
+   [no_notify]
 
    :arg int radius: Search for an object within the given radius around the worker.
    :arg string type: The type of map object to search for. Defaults to ``immovable``.
    :arg string attrib: The attribute that the map object should possess.
+   :arg empty no_notify: Do not send a message to the player if this step fails.
 
    Find and select an object based on a number of predicates, which can be specified
    in arbitrary order. The object can then be used in other commands like ``walk``
@@ -288,21 +335,30 @@ findobject
 /**
  * iparam1 = radius predicate
  * iparam2 = attribute predicate (if >= 0)
+ * iparam3 = send message on failure (if != 0)
  * sparam1 = type
  */
 void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std::string>& cmd) {
 	act->function = &Worker::run_findobject;
 	act->iparam1 = -1;
 	act->iparam2 = -1;
+	act->iparam3 = 1;
 	act->sparam1 = "immovable";
 
 	// Parse predicates
 	for (const std::string& argument : cmd) {
+		if (argument == "no_notify") {
+			act->iparam3 = 0;
+			continue;
+		}
+
 		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 
 		if (item.first == "radius") {
 			act->iparam1 = read_positive(item.second);
 		} else if (item.first == "attrib") {
+			Notifications::publish(
+			   NoteMapObjectDescription(item.second, NoteMapObjectDescription::LoadType::kAttribute));
 			act->iparam2 = MapObjectDescr::get_attribute_id(item.second);
 		} else if (item.first == "type") {
 			act->sparam1 = item.second;
@@ -312,7 +368,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 	}
 
 	if (act->iparam2 >= 0) {
-		collected_attributes_.insert(
+		needed_attributes_.insert(
 		   std::make_pair(act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
 		                  act->iparam2));
 	}
@@ -324,7 +380,8 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 findspace
 ^^^^^^^^^
 .. function:: findspace=size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>]
-   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space] [terraform]
+   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space] [ferry]
+   [terraform:\<category\>] [no_notify]
 
    :arg string size: The size or building plot type of the free space.
       The possible values are:
@@ -356,18 +413,22 @@ findspace
       neighbors are also walkable (an exception is made if one of the neighboring
       fields is owned by this worker's location).
 
-   :arg empty terraform: Find only nodes where at least one adjacent triangle has
-      terrain that can be enhanced
+   :arg empty ferry: Find only fields reachable by a ferry.
+
+   :arg string terraform: Find only nodes where at least one adjacent triangle has
+      terrain that can be enhanced.
+
+   :arg empty no_notify: Do not send a message to the player if this step fails.
 
    Find a map field based on a number of predicates.
    The field can then be used in other commands like ``walk``. Examples::
 
       breed = {
          -- Find any field that can have fish in it for adding a fish to it below
-         "findspace=size:any radius:7 breed resource:fish",
+         "findspace=size:any radius:7 breed resource:resource_fish",
          "walk=coords",
          "animate=freeing duration:3s",
-         "breed=fish 1",
+         "breed=resource_fish 1",
          "return"
       },
 
@@ -395,13 +456,16 @@ findspace
 /**
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
- * iparam3 = whether the "space" flag is set
+ * iparam3 = Bitset of "space" (1st bit), "no_notify" (2nd bit), and "ferry" (3rd bit).
  * iparam4 = whether the "breed" flag is set
  * iparam5 = Immovable attribute id
  * iparam6 = Forester retries
- * iparam7 = whether the "terraform" flag is set
  * sparam1 = Resource
+ * sparamv = The terraform category (if any)
  */
+// TODO(Nordfriese): All boolean flags (space. breed, no_notify) should be placed in
+// just one iparam. Unfortunately there is no way to have saveloading versioning here.
+// Refactor this when we next break savegame compatibility completely.
 void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd) {
 	act->function = &Worker::run_findspace;
 	act->iparam1 = -1;
@@ -412,6 +476,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	act->iparam6 = 1;
 	act->iparam7 = 0;
 	act->sparam1 = "";
+	act->sparamv = {};
 
 	// Parse predicates
 	for (const std::string& argument : cmd) {
@@ -434,11 +499,15 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			} else if (item.first == "breed") {
 				act->iparam4 = 1;
 			} else if (item.first == "terraform") {
-				act->iparam7 = 1;
+				act->sparamv.push_back(item.second);
 			} else if (item.first == "resource") {
 				act->sparam1 = item.second;
 			} else if (item.first == "space") {
-				act->iparam3 = 1;
+				act->iparam3 |= 1 << 0;
+			} else if (item.first == "no_notify") {
+				act->iparam3 |= 1 << 1;
+			} else if (item.first == "ferry") {
+				act->iparam3 |= 1 << 2;
 			} else if (item.first == "avoid") {
 				act->iparam5 = MapObjectDescr::get_attribute_id(item.second);
 			} else if (item.first == "saplingsearches") {
@@ -460,6 +529,8 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	workarea_info_[act->iparam1].insert(" findspace");
 
 	if (!act->sparam1.empty()) {
+		Notifications::publish(
+		   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 		if (act->iparam4 == 1) {
 			// breeds
 			created_resources_.insert(act->sparam1);
@@ -505,7 +576,7 @@ walk
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
          -- 2. This will create an object for us if we don't have one yet
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:atlanteans_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
          "animate=work duration:500ms",
          "construct", -- 1. This will find a space for us if no object has been planted yet
@@ -551,7 +622,7 @@ void WorkerProgram::parse_animate(Worker::Action* act, const std::vector<std::st
 	// level-dependent soldier animations, or we want to write a worker program for a soldier,
 	// we will need to store the animation name as a string in an sparam
 	act->iparam1 = parameters.animation;
-	act->iparam2 = parameters.duration;
+	act->iparam2 = parameters.duration.get();
 }
 
 /* RST
@@ -610,6 +681,12 @@ void WorkerProgram::parse_callobject(Worker::Action* act, const std::vector<std:
 
 	act->function = &Worker::run_callobject;
 	act->sparam1 = cmd[0];
+
+	// TODO(Gunchleoc): We might need to dig into the called object's program too, but this is good
+	// enough for now.
+	if (!needed_attributes_.empty()) {
+		collected_attributes_.insert(needed_attributes_.begin(), needed_attributes_.end());
+	}
 }
 
 /* RST
@@ -617,8 +694,8 @@ plant
 ^^^^^
 .. function:: plant attrib:\<attribute\> [attrib:\<attribute\> ...] [unless object]
 
-   :arg string attrib\:\<attribute\>: Select at random any world immovable or immovable
-      of the worker's tribe that has this attribute.
+   :arg string attrib\:\<attribute\>: Select at random any immovable
+      that has this attribute.
 
    :arg empty unless object: Do not plant the immovable if it already exists at
       the current position.
@@ -649,7 +726,7 @@ plant
       buildship = {
          "walk=object-or-coords",
          -- Only create a shipconstruction if we don't already have one
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:barbarians_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
          "animate=work duration:500ms",
          "construct",
@@ -684,6 +761,8 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		}
 
 		const std::string attrib_name = read_key_value_pair(cmd[i], ':', "", "attrib").second;
+		Notifications::publish(
+		   NoteMapObjectDescription(attrib_name, NoteMapObjectDescription::LoadType::kAttribute));
 		act->sparamv.push_back(attrib_name);
 		// get_attribute_id will throw a GameDataError if the attribute doesn't exist.
 		created_attributes_.insert(
@@ -731,6 +810,8 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 	// Register created bobs
 	for (const std::string& bobname : act->sparamv) {
 		created_bobs_.insert(bobname);
+		Notifications::publish(
+		   NoteMapObjectDescription(bobname, NoteMapObjectDescription::LoadType::kObject));
 	}
 }
 
@@ -745,30 +826,34 @@ void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std:
 	if (cmd.size() > 1) {
 		throw wexception("buildferry takes no arguments");
 	}
+	// TODO(GunChleoc): API compatibility - remove after v1.0
+	log_warn("%s: Worker program 'buildferry' is deprecated. Use createbob=TRIBENAME_ferry instead.",
+	         worker_.name().c_str());
 	act->function = &Worker::run_buildferry;
 }
 
 /* RST
 terraform
 ^^^^^^^^^
-.. function:: terraform
+.. function:: terraform=\<category\>
 
    Turns the terrain of one of the triangles around the current node into its
    enhancement terrain. Example::
 
       terraform = {
-         "findspace=size:terraform radius:6",
+         "findspace=size:any radius:6 terraform:amazons",
          "walk=coords",
          "animate=dig duration:2s",
-         "terraform",
+         "terraform=amazons",
          "return"
       }
 */
 void WorkerProgram::parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() > 1) {
-		throw wexception("terraform takes no arguments");
+	if (cmd.size() != 1) {
+		throw wexception("Usage: terraform=<category>");
 	}
 	act->function = &Worker::run_terraform;
+	act->sparam1 = cmd[0];
 }
 
 /* RST
@@ -788,14 +873,20 @@ removeobject
          "return"
       }
 */
-void WorkerProgram::parse_removeobject(Worker::Action* act, const std::vector<std::string>&) {
+void WorkerProgram::parse_removeobject(Worker::Action* act,
+                                       const std::vector<std::string>& /* cmd */) {
 	act->function = &Worker::run_removeobject;
+	if (!needed_attributes_.empty()) {
+		collected_attributes_.insert(needed_attributes_.begin(), needed_attributes_.end());
+	}
 }
 
 /* RST
 repeatsearch
 ^^^^^^^^^^^^
-.. function:: repeatsearch=\<repetitions\> \<radius\> \<program_name\>
+.. function:: repeatsearch=\<program_name\> repetitions:\<number\> radius:\<number\>
+
+   :arg string program_name: The name of the program to repeatedly call from this program.
 
    :arg int repetitions: The number of times that the worker will move to a
       different spot on the map to execute ``program_name``. Used by geologists.
@@ -806,7 +897,7 @@ repeatsearch
    your ``program_name`` for some of the fields. Example::
 
       expedition = {
-         "repeatsearch=15 5 search"
+         "repeatsearch=search repetitions:15 radius:5"
       },
 */
 /**
@@ -816,13 +907,35 @@ repeatsearch
  */
 void WorkerProgram::parse_repeatsearch(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 3) {
-		throw GameDataError("Usage: repeatsearch=<repeat #> <radius> <subcommand>");
+		throw GameDataError("Usage: repeatsearch=<program_name> repetitions<number> radius:<number>");
 	}
 
 	act->function = &Worker::run_repeatsearch;
-	act->iparam1 = read_positive(cmd[0]);
-	act->iparam2 = read_positive(cmd[1]);
-	act->sparam1 = cmd[2];
+
+	if (read_key_value_pair(cmd[1], ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this option after v1.0
+		log_warn("'repeatsearch' program without parameter names is deprecated, please use "
+		         "'repeatsearch=<program_name> repetitions:<number> radius:<number>' in %s\n",
+		         worker_.name().c_str());
+		act->iparam1 = read_positive(cmd[0]);
+		act->iparam2 = read_positive(cmd[1]);
+		act->sparam1 = cmd[2];
+	} else {
+		for (const std::string& argument : cmd) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.first == "repetitions") {
+				act->iparam1 = read_positive(item.second);
+			} else if (item.first == "radius") {
+				act->iparam2 = read_positive(item.second);
+			} else if (item.second.empty()) {
+				act->sparam1 = item.first;
+			} else {
+				throw GameDataError("Unknown parameter '%s'. Usage: repeatsearch=<program_name> "
+				                    "repetitions:<number> radius:<number>",
+				                    item.first.c_str());
+			}
+		}
+	}
 }
 
 /* RST
@@ -853,16 +966,17 @@ void WorkerProgram::parse_findresources(Worker::Action* act, const std::vector<s
 /* RST
 scout
 ^^^^^
-.. function:: scout=\<radius\> \<time\>
+.. function:: scout=radius:\<number\> duration:\<duration\>
 
    :arg int radius: The radius of map fields for the scout to explore.
 
-   :arg int time: The time in milliseconds that the scout will spend scouting.
+   :arg duration duration: The time :ref:`map_object_programs_datatypes_duration` that the scout
+      will spend scouting.
 
    Sends a scout out to run around scouting the area. Example::
 
       scout = {
-         "scout=15 75000", -- Scout within a radius of 15 for 75 seconds
+         "scout=radius:15 duration:1m15s",
          "return"
       },
 */
@@ -872,12 +986,31 @@ scout
  */
 void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 2) {
-		throw GameDataError("Usage: scout=<radius> <time>");
+		throw GameDataError("Usage: scout=radius:<number> duration:<duration>");
 	}
-
-	act->iparam1 = read_positive(cmd[0]);
-	act->iparam2 = read_positive(cmd[1]);
 	act->function = &Worker::run_scout;
+
+	if (read_key_value_pair(cmd[0], ':').second.empty()) {
+		// TODO(GunChleoc): Compatibility, remove this option after v1.0
+		log_warn("'scout' program without parameter names is deprecated, please use "
+		         "'scout=radius:<number> duration:<duration>' in %s\n",
+		         worker_.name().c_str());
+		act->iparam1 = read_positive(cmd[0]);
+		act->iparam2 = read_positive(cmd[1]);
+	} else {
+		for (const std::string& argument : cmd) {
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+			if (item.first == "radius") {
+				act->iparam1 = read_positive(item.second);
+			} else if (item.first == "duration") {
+				act->iparam2 = read_duration(item.second, worker_).get();
+			} else {
+				throw GameDataError(
+				   "Unknown parameter '%s'. Usage: scout=radius:<number> duration:<duration>",
+				   item.first.c_str());
+			}
+		}
+	}
 }
 
 /* RST
@@ -906,7 +1039,7 @@ construct
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
          -- 2. This will create an object for us if we don't have one yet
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:atlanteans_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
          "animate=work duration:5s",
          -- 1. Add the current ware to the shipconstruction. This will find a space for us if no

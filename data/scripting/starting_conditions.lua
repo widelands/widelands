@@ -8,6 +8,13 @@ include "scripting/ui.lua"
 -- This script contains some convenience functions intended mainly for use
 -- in the Discovery and New World starting conditions.
 --
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scripting/starting_condition.lua"
+--
 
 -- =======================================================================
 --                             PUBLIC FUNCTIONS
@@ -22,8 +29,11 @@ include "scripting/ui.lua"
 --    This function returns immediately after calling.
 --
 --    :arg player: The player to move the view for
+--    :type player: :class:`~wl.game.Player`
 --    :arg sleeptime: The number of milliseconds to wait
---    :arg field: The `wl.map.Field` to center the view on
+--    :type sleeptime: :class:`integer`
+--    :arg field: The field to center the view on
+--    :type field: :class:`~wl.map.Field`
 --
 --    :returns: :const:`nil`
 function sleep_then_goto(player, sleeptime, field)
@@ -40,14 +50,16 @@ end
 --    given additional items on them. If called for the interactive
 --    player, centers the view on an arbitrary of these ships.
 --
---    :arg player: The `wl.game.Player` to use
---    :arg items: An array of tables with `ware_or_worker_name = amount` pairs. As many ships will
+--    :arg player: The player to use
+--    :type player: :class:`~wl.game.Player`
+--    :arg items: An :class:`array` of :class:`tables` with `ware_or_worker_name = amount` pairs. As many ships will
 --                be created as there are subtables, and the n-th ship created will load the
---                additional wares and workers defined in `items[n]`. The capacity of each ship will
+--                additional wares and workers defined in ``items[n]``. The capacity of each ship will
 --                be adjusted to accommodate the build cost of the player's tribe's port building
 --                plus one builder plus the number of additional items for this ship.
 --
 --    :returns: :const:`nil`
+
 function launch_expeditions(player, items)
    local fields = wl.Game().map:find_ocean_fields(#items)
 

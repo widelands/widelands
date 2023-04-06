@@ -1,47 +1,52 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_coalmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Deep Coal Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "barbarians_coalmine_deeper",
 
-   enhancement_cost = {
-      log = 4,
-      granite = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      log = 2,
-      granite = 1
+   enhancement = {
+      name = "barbarians_coalmine_deeper",
+      enhancement_cost = {
+         log = 4,
+         granite = 2
+      },
+      enhancement_return_on_dismantle = {
+         log = 2,
+         granite = 1
+      }
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 21, 37 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 21, 37 },
-      },
-      working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 21, 37 },
       },
       empty = {
-         pictures = path.list_files(dirname .. "empty_??.png"),
          hotspot = { 21, 37 },
       },
    },
 
-   aihints = {
-      mines = "coal",
-      mines_percent = 60
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 21, 37 }
+      },
+      working = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 21, 37 }
+      },
    },
+
+   aihints = {},
 
    working_positions = {
       barbarians_miner = 1,
@@ -55,22 +60,25 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
-         descname = _"mining coal",
+         descname = _("mining coal"),
          actions = {
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 29.6 + 4 * (9.5 + 3.6) + 10 = 92 sec
             "return=skipped unless economy needs coal",
             "consume=snack",
-            "sleep=duration:40s",
+            "sleep=duration:29s600ms",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
+            "return=skipped"
          }
       },
       mine_produce = {
-         descname = _"mining coal",
+         descname = _("mining coal"),
          actions = {
             "animate=working duration:9s500ms",
-            "mine=coal radius:2 yield:66.66% when_empty:5% experience_on_fail:17%",
+            "mine=resource_coal radius:2 yield:66.66% when_empty:5% experience_on_fail:17%",
             "produce=coal",
          }
       },
@@ -85,9 +93,11 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Coal",
-      heading = _"Main Coal Vein Exhausted",
+      title = _("No Coal"),
+      heading = _("Main Coal Vein Exhausted"),
       message =
          pgettext("barbarians_building", "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

@@ -1,14 +1,14 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_immovable_type {
-   msgctxt = "immovable",
+wl.Descriptions():new_immovable_type {
    name = "frisians_shipconstruction",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Ship Under Construction"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
-   attributes = { "shipconstruction" },
    programs = {
       main = {
          "construct=idle duration:5s decay_after:3m30s",
@@ -22,7 +22,6 @@ tribes:new_immovable_type {
    },
    spritesheets = {
       idle = {
-         directory = dirname,
          basename = "build",
          hotspot = {75, 141},
          frames = 6,
@@ -33,3 +32,5 @@ tribes:new_immovable_type {
       },
    }
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -39,6 +38,7 @@ struct Statebox : public Panel {
 	 * Pictorial Statebox
 	 */
 	Statebox(Panel* parent,
+	         PanelStyle,
 	         Vector2i,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string());
@@ -49,28 +49,35 @@ struct Statebox : public Panel {
 	 * Otherwise, it will take up multiple lines if necessary (automatic height).
 	 */
 	Statebox(Panel* parent,
+	         PanelStyle,
 	         Vector2i,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
 	         int width = 0);
 
-	boost::signals2::signal<void()> changed;
-	boost::signals2::signal<void(bool)> changedto;
-	boost::signals2::signal<void(bool)> clickedto;  // same as changedto but only called when clicked
+	Notifications::Signal<> changed;
+	Notifications::Signal<bool> changedto;
+	Notifications::Signal<bool> clickedto;  // same as changedto but only called when clicked
 
 	void set_enabled(bool enabled);
 
 	bool get_state() const {
-		return flags_ & Is_Checked;
+		return (flags_ & Is_Checked) != 0;
 	}
-	void set_state(bool on);
+	void set_state(bool on, bool send_signal = true);
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
+	void draw_overlay(RenderTarget&) override;
+	void update_template() override;
 
 	void handle_mousein(bool inside) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
+	bool handle_key(bool, SDL_Keysym) override;
+
+protected:
+	std::vector<Recti> focus_overlay_rects() override;
 
 private:
 	void layout() override;
@@ -86,8 +93,9 @@ private:
 	uint8_t flags_;
 	void set_flags(uint8_t const flags, bool const enable) {
 		flags_ &= ~flags;
-		if (enable)
+		if (enable) {
 			flags_ |= flags;
+		}
 	}
 	const Image* pic_graphics_;
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
@@ -108,10 +116,11 @@ struct Checkbox : public Statebox {
 	 * Text conventions: Sentence case for the 'tooltip_text'
 	 */
 	Checkbox(Panel* const parent,
+	         PanelStyle s,
 	         Vector2i const p,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string())
-	   : Statebox(parent, p, pic, tooltip_text) {
+	   : Statebox(parent, s, p, pic, tooltip_text) {
 	}
 
 	/**
@@ -123,11 +132,12 @@ struct Checkbox : public Statebox {
 	 * Text conventions: Sentence case both for the 'label_text' and the 'tooltip_text'
 	 */
 	Checkbox(Panel* const parent,
+	         PanelStyle s,
 	         Vector2i const p,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
 	         uint32_t width = 0)
-	   : Statebox(parent, p, label_text, tooltip_text, width) {
+	   : Statebox(parent, s, p, label_text, tooltip_text, width) {
 	}
 
 private:

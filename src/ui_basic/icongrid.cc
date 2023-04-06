@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -64,9 +63,14 @@ private:
 /**
  * Initialize the grid
  */
-IconGrid::IconGrid(
-   Panel* const parent, int32_t x, int32_t y, int32_t cellw, int32_t cellh, int32_t cols)
-   : Panel(parent, x, y, 0, 0), columns_(cols), cell_width_(cellw), cell_height_(cellh) {
+IconGrid::IconGrid(Panel* const parent,
+                   PanelStyle s,
+                   int32_t x,
+                   int32_t y,
+                   int32_t cellw,
+                   int32_t cellh,
+                   int32_t cols)
+   : Panel(parent, s, x, y, 0, 0), columns_(cols), cell_width_(cellw), cell_height_(cellh) {
 }
 
 /**
@@ -103,7 +107,7 @@ int32_t IconGrid::add(const std::string& name,
 	return idx;
 }
 
-void IconGrid::clicked_button(uint32_t idx) {
+void IconGrid::clicked_button(uint32_t idx) const {
 	icon_clicked(idx);
 	play_click();
 }

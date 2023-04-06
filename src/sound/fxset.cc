@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -34,7 +33,7 @@
  * \param random: Randomize the time last played a bit to prevent sound onslaught at game start
  */
 FXset::FXset(const std::string& path, uint32_t random) : last_used_(random % 2000) {
-	const std::string dirname = FileSystem::fs_dirname(path.c_str());
+	const std::string dirname = FileSystem::fs_dirname(path);
 	const std::string basename = FileSystem::fs_filename(path.c_str());
 	paths_ = g_fs->get_sequential_files(dirname, basename, "ogg");
 
@@ -99,7 +98,7 @@ Mix_Chunk* FXset::get_fx(uint32_t random) {
 void FXset::load_sound_file(const std::string& path) {
 	FileRead fr;
 	if (!fr.try_open(*g_fs, path)) {
-		log("WARNING: Could not open %s for reading!\n", path.c_str());
+		log_err("WARNING: Could not open %s for reading!\n", path.c_str());
 		return;
 	}
 
@@ -109,6 +108,6 @@ void FXset::load_sound_file(const std::string& path) {
 		assert(m);
 		fxs_.push_back(m);
 	} else {
-		log("FXset: loading sound effect file \"%s\" failed: %s\n", path.c_str(), Mix_GetError());
+		log_err("FXset: loading sound effect file \"%s\" failed: %s\n", path.c_str(), Mix_GetError());
 	}
 }

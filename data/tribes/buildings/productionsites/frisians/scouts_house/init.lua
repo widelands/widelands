@@ -1,15 +1,17 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_productionsite_type {
    name = "frisians_scouts_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Scout’s House"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {
+      brick = 1,
       granite = 1,
       log = 1,
       reed = 1
@@ -21,8 +23,6 @@ tribes:new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {40, 66},
          frames = 10,
          columns = 5,
@@ -32,8 +32,6 @@ tribes:new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {40, 60}
       }
    },
@@ -51,12 +49,21 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
-         descname = _"scouting",
+         descname = _("scouting"),
          actions = {
             "consume=ration",
             "sleep=duration:30s",
             "callworker=scout"
          }
       },
+      targeted_scouting = {
+         descname = _("scouting"),
+         actions = {
+            "consume=ration",
+            "callworker=targeted_scouting"
+         }
+      },
    },
 }
+
+pop_textdomain()

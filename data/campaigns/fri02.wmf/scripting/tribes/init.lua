@@ -1,11 +1,19 @@
-tribes = wl.Tribes()
-include "scripting/mapobjects.lua"
+-- ===================================
+--    Campaign Specific Data
+-- ===================================
 
-print_loading_message("Loading campaign-specific tribe units", function()
-   include "map:scripting/tribes/warehouse_empire.lua"
-end)
-
-tribes:add_custom_building {
-   tribename = "frisians",
-   buildingname = "frisians_warehouse_empire",
+return {
+   frisians = {
+      buildings = {
+         {
+            name = "frisians_warehouse_empire",
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
+                  pgettext("empire_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
+               }
+            }
+         }
+      }
+   }
 }

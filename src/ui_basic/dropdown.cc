@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2020 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,16 +12,18 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "ui_basic/dropdown.h"
 
 #include "base/i18n.h"
+#include "base/utf8.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
@@ -29,7 +31,7 @@
 namespace {
 int base_height(int button_dimension, UI::PanelStyle style) {
 	int result =
-	   std::max(button_dimension, text_height(g_gr->styles().table_style(style).enabled()) + 2);
+	   std::max(button_dimension, text_height(g_style_manager->table_style(style).enabled()) + 2);
 	return result;
 }
 }  // namespace
@@ -61,6 +63,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            UI::PanelStyle style,
                            ButtonStyle button_style)
    : UI::NamedPanel(parent,
+                    style,
                     name,
                     x,
                     y,
@@ -71,12 +74,10 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                     base_height(button_dimension, style)),
      id_(next_id_++),
      max_list_items_(max_list_items),
-     max_list_height_(std::numeric_limits<uint32_t>::max()),
-     list_offset_x_(0),
-     list_offset_y_(0),
+
      base_height_(base_height(button_dimension, style)),
-     mouse_tolerance_(50),
-     button_box_(this, 0, 0, UI::Box::Horizontal, w, get_h()),
+
+     button_box_(this, style, 0, 0, UI::Box::Horizontal, w, get_h()),
      push_button_(type == DropdownType::kTextual ?
                      new UI::Button(&button_box_,
                                     "dropdown_select",
@@ -85,15 +86,15 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                     button_dimension,
                                     get_h(),
                                     button_style,
-                                    g_gr->images().get("images/ui_basic/scrollbar_down.png")) :
+                                    g_image_cache->get("images/ui_basic/scrollbar_down.png")) :
                      nullptr),
      display_button_(&button_box_,
                      "dropdown_label",
                      0,
                      0,
-                     type == DropdownType::kTextual ?
-                        w - button_dimension :
-                        type == DropdownType::kTextualNarrow ? w : button_dimension,
+                     type == DropdownType::kTextual       ? w - button_dimension :
+                     type == DropdownType::kTextualNarrow ? w :
+                                                            button_dimension,
                      get_h(),
                      type == DropdownType::kTextual ?
                         (style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
@@ -102,9 +103,10 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                      label),
      label_(label),
      type_(type),
-     is_enabled_(true),
-     button_style_(button_style),
-     autoexpand_display_button_(false) {
+
+     button_style_(button_style)
+
+{
 	if (label.empty()) {
 		set_tooltip(pgettext("dropdown", "Select Item"));
 	} else {
@@ -118,30 +120,46 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		}
 	});
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) { layout(); });
+	   [this](const GraphicResolutionChanged& /* note */) { layout(); });
 
 	assert(max_list_items_ > 0);
 	// Hook into highest parent that we can get so that we can drop down outside the panel.
 	UI::Panel* list_parent = &display_button_;
-	while (list_parent->get_parent()) {
+	while (list_parent->get_parent() != nullptr) {
 		list_parent = list_parent->get_parent();
 	}
 	list_ =
 	   new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
-	list_->set_notify_on_delete(this);
+	list_->set_linked_dropdown(this);
 
 	list_->set_visible(false);
+	list_->set_z(UI::Panel::ZOrder::kDropdown);
 	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
-	display_button_.sigclicked.connect([this]() { toggle_list(); });
+	display_button_.sigclicked.connect([this]() {
+		toggle_list();
+		clear_filter();
+	});
 	if (push_button_ != nullptr) {
 		display_button_.set_perm_pressed(true);
 		button_box_.add(push_button_, UI::Box::Resizing::kFullSize);
-		push_button_->sigclicked.connect([this]() { toggle_list(); });
+		push_button_->sigclicked.connect([this]() {
+			toggle_list();
+			clear_filter();
+		});
 	}
 	button_box_.set_size(w, get_h());
-	list_->clicked.connect([this]() { set_value(); });
-	list_->clicked.connect([this]() { toggle_list(); });
+	list_->clicked.connect([this]() {
+		set_value();
+		clear_filter();
+	});
+
+	if (push_button_ != nullptr) {
+		push_button_->set_can_focus(false);
+	}
+	display_button_.set_can_focus(false);
+	list_->set_can_focus(false);
 	set_can_focus(true);
+
 	set_value();
 
 	const int serial = id_;  // Not a member variable, because when the lambda below is triggered we
@@ -153,13 +171,15 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		ancestor->position_changed.connect([serial] { layout_if_alive(serial); });
 	}
 	layout();
+
+	list_->initialization_complete();
 }
 
 BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
 	// So, we tell it to die.
-	if (list_) {
-		list_->set_notify_on_delete(nullptr);
+	if (list_ != nullptr) {
+		list_->set_linked_dropdown(nullptr);
 		list_->die();
 	}
 
@@ -171,6 +191,29 @@ BaseDropdown::~BaseDropdown() {
 void BaseDropdown::set_height(int height) {
 	max_list_height_ = height - base_height_;
 	layout();
+}
+
+int BaseDropdown::lineheight() const {
+	assert(list_ != nullptr);
+	return list_->get_lineheight();
+}
+
+std::vector<Recti> BaseDropdown::focus_overlay_rects() {
+	return Panel::focus_overlay_rects(2, 2, 0);
+}
+
+/*
+ * This function is part of an ugly hack to handle dropdowns in modal
+ * windows correctly. The problem is that our ListSelect's parent is the
+ * topmost parent panel there is. If the currently modal panel is not
+ * the topmost one, this would mean that input events are not passed to
+ * our list. This is fixed by using this function in the `panel.cc` code
+ * to pass events to an open dropdown list (if any) even if it is not a
+ * child of the currently modal panel (provided that we ourselves are a
+ * descendant of the modal panel).
+ */
+UI::Panel* BaseDropdown::get_open_dropdown() {
+	return (list_ != nullptr) && list_->is_visible() ? list_ : nullptr;
 }
 
 void BaseDropdown::layout() {
@@ -186,7 +229,7 @@ void BaseDropdown::layout() {
 	UI::Panel* parent = &display_button_;
 	int new_list_x = display_button_.get_x();
 	int new_list_y = display_button_.get_y();
-	while (parent->get_parent()) {
+	while (parent->get_parent() != nullptr) {
 		parent = parent->get_parent();
 		new_list_x += parent->get_x() + parent->get_lborder();
 		new_list_y += parent->get_y() + parent->get_tborder();
@@ -207,6 +250,14 @@ void BaseDropdown::layout() {
 		}
 	}
 
+	// Do not drop outside the screen if it fits in neither direction
+	if (new_list_x + list_offset_x_ < 0) {
+		list_offset_x_ = -new_list_x;
+	}
+	if (new_list_y + list_offset_y_ < 0) {
+		list_offset_y_ = -new_list_y;
+	}
+
 	list_->set_pos(Vector2i(new_list_x + list_offset_x_, new_list_y + list_offset_y_));
 
 	// Keep open list on top while dragging
@@ -224,7 +275,12 @@ void BaseDropdown::set_size(int nw, int nh) {
 	layout();
 }
 void BaseDropdown::set_desired_size(int nw, int nh) {
-	button_box_.set_desired_size(nw, nh);
+	if (push_button_ == nullptr) {
+		display_button_.set_desired_size(nw, nh);
+	} else {
+		display_button_.set_desired_size(nw - nh, nh);
+		push_button_->set_desired_size(nh, nh);
+	}
 	Panel::set_desired_size(nw, nh);
 	layout();
 }
@@ -247,10 +303,9 @@ void BaseDropdown::add(const std::string& name,
 
 	if (autoexpand_display_button_) {
 		/// Fit width of display button to make enough room for the entry's text
-		const std::string fitme =
-		   label_.empty() ? name : (boost::format(_("%1%: %2%")) % label_ % name).str();
+		const std::string fitme = label_.empty() ? name : format(_("%1%: %2%"), label_, name);
 		const int new_width =
-		   text_width(fitme, g_gr->styles().button_style(button_style_).enabled().font()) + 8;
+		   text_width(fitme, g_style_manager->button_style(button_style_).enabled().font()) + 8;
 		if (new_width > display_button_.get_w()) {
 			set_desired_size(get_w() + new_width - display_button_.get_w(), get_h());
 			set_size(get_w() + new_width - display_button_.get_w(), get_h());
@@ -261,6 +316,11 @@ void BaseDropdown::add(const std::string& name,
 
 bool BaseDropdown::has_selection() const {
 	return list_->has_selection();
+}
+
+void BaseDropdown::clear_selection() {
+	list_->select(BaseListselect::no_selection_index());
+	update();
 }
 
 uint32_t BaseDropdown::get_selected() const {
@@ -289,17 +349,17 @@ void BaseDropdown::set_image(const Image* image) {
 void BaseDropdown::set_tooltip(const std::string& text) {
 	tooltip_ = text;
 	display_button_.set_tooltip(tooltip_);
-	if (push_button_) {
+	if (push_button_ != nullptr) {
 		push_button_->set_tooltip(push_button_->enabled() ? tooltip_ : "");
 	}
 }
 
 void BaseDropdown::set_errored(const std::string& error_message) {
-	set_tooltip((boost::format(_("%1%: %2%")) % _("Error") % error_message).str());
+	set_tooltip(format(_("%1%: %2%"), _("Error"), error_message));
 	if (type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) {
 		set_label(_("Error"));
 	} else {
-		set_image(g_gr->images().get("images/ui_basic/different.png"));
+		set_image(g_image_cache->get("images/ui_basic/different.png"));
 	}
 }
 
@@ -311,7 +371,7 @@ void BaseDropdown::set_enabled(bool on) {
 		push_button_->set_tooltip(on ? tooltip_ : "");
 	}
 	display_button_.set_enabled(on);
-	list_->set_visible(false);
+	set_list_visibility(false);
 }
 
 void BaseDropdown::set_disable_style(UI::ButtonDisableStyle disable_style) {
@@ -347,57 +407,74 @@ uint32_t BaseDropdown::size() const {
 }
 
 void BaseDropdown::update() {
-	if (type_ == DropdownType::kPictorialMenu) {
+	if (type_ == DropdownType::kPictorialMenu || type_ == DropdownType::kTextualMenu) {
 		// Menus never change their main image and text
 		return;
 	}
 
 	const std::string name = list_->has_selection() ?
-	                            list_->get_selected_name() :
-	                            /** TRANSLATORS: Selection in Dropdown menus. */
-	                            pgettext("dropdown", "Not Selected");
+                               list_->get_selected_name() :
+                               /** TRANSLATORS: Selection in Dropdown menus. */
+                               pgettext("dropdown", "Not Selected");
 
 	if (type_ != DropdownType::kPictorial) {
 		if (label_.empty()) {
 			display_button_.set_title(name);
 		} else {
 			/** TRANSLATORS: Label: Value. */
-			display_button_.set_title((boost::format(_("%1%: %2%")) % label_ % (name)).str());
+			display_button_.set_title(format(_("%1%: %2%"), label_, name));
 		}
 		display_button_.set_tooltip(list_->has_selection() ? list_->get_selected_tooltip() :
-		                                                     tooltip_);
+                                                           tooltip_);
 	} else {
 		display_button_.set_pic(list_->has_selection() ?
-		                           list_->get_selected_image() :
-		                           g_gr->images().get("images/ui_basic/different.png"));
-		display_button_.set_tooltip((boost::format(_("%1%: %2%")) % label_ % name).str());
+                                 list_->get_selected_image() :
+                                 g_image_cache->get("images/ui_basic/different.png"));
+		display_button_.set_tooltip(format(_("%1%: %2%"), label_, name));
 	}
 }
 
 void BaseDropdown::set_value() {
-	update();
-	selected();
-	current_selection_ = list_->selection_index();
+	if (list_->has_selection()) {
+		current_selection_ = list_->selection_index();
+		save_selected_entry(current_selection_);
+		update();
+		close();
+		selected();
+	}
 }
 
 void BaseDropdown::toggle() {
-	set_list_visibility(!list_->is_visible());
+	set_list_visibility(!list_->is_visible(), is_mouse_away());
 }
 
-void BaseDropdown::set_list_visibility(bool open) {
+void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
+	if (!open) {
+		list_->select(current_selection_);
+		clear_filter();
+	}
 	if (!is_enabled_) {
 		list_->set_visible(false);
 		return;
 	}
 	list_->set_visible(open);
 	if (list_->is_visible()) {
+		enable_textinput();
 		list_->move_to_top();
 		focus();
-		set_mouse_pos(Vector2i(display_button_.get_x() + (display_button_.get_w() * 3 / 5),
-		                       display_button_.get_y() + (display_button_.get_h() * 2 / 5)));
-		if (type_ == DropdownType::kPictorialMenu && !has_selection() && !list_->empty()) {
+
+		Notifications::publish(NoteDropdown(id_));
+		if (move_mouse) {
+			set_mouse_pos(Vector2i(display_button_.get_x() + (display_button_.get_w() * 3 / 5),
+			                       display_button_.get_y() + (display_button_.get_h() * 2 / 5)));
+		}
+
+		if ((type_ == DropdownType::kPictorialMenu || type_ == DropdownType::kTextualMenu) &&
+		    !has_selection() && !list_->empty()) {
 			select(0);
 		}
+	} else {
+		disable_textinput();
 	}
 	if (type_ != DropdownType::kTextual) {
 		display_button_.set_perm_pressed(list_->is_visible());
@@ -407,21 +484,7 @@ void BaseDropdown::set_list_visibility(bool open) {
 }
 
 void BaseDropdown::toggle_list() {
-	if (!is_enabled_) {
-		list_->set_visible(false);
-		return;
-	}
-	list_->set_visible(!list_->is_visible());
-	if (type_ != DropdownType::kTextual) {
-		display_button_.set_perm_pressed(list_->is_visible());
-	}
-	if (list_->is_visible()) {
-		list_->move_to_top();
-		focus();
-		Notifications::publish(NoteDropdown(id_));
-	}
-	// Make sure that the list covers and deactivates the elements below it
-	set_layout_toplevel(list_->is_visible());
+	set_list_visibility(!list_->is_visible(), false);
 }
 
 void BaseDropdown::close() {
@@ -438,19 +501,26 @@ bool BaseDropdown::is_mouse_away() const {
 }
 
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
-	if (down) {
+	if (down && (SDL_GetModState() & KMOD_CTRL) == 0) {
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			if (list_->is_visible()) {
 				set_value();
-				return true;
+				// Check list visibility again, set_value() might have toggled it
+				if (list_->is_visible()) {
+					toggle_list();
+				}
+			} else {
+				set_list_visibility(true);
 			}
-			break;
+			return true;
 		case SDLK_ESCAPE:
-			if (list_->is_visible()) {
-				list_->select(current_selection_);
-				toggle_list();
+			if (is_expanded()) {
+				if (is_filtered()) {
+					clear_filter();
+				} else {
+					set_list_visibility(false);
+				}
 				return true;
 			}
 			break;
@@ -458,10 +528,36 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			break;  // not handled
 		}
 	}
-	if (list_->is_visible()) {
+	if (is_expanded()) {
 		return list_->handle_key(down, code);
 	}
-	return false;
+	return NamedPanel::handle_key(down, code);
+}
+void BaseDropdown::delete_last_of_filter() {
+	if (is_filtered()) {
+		size_t pos = current_filter_.size() - 1;
+		while (pos > 0 && Utf8::is_utf8_extended(current_filter_.at(pos))) {
+			pos--;
+		}
+
+		current_filter_.erase(pos);
+		apply_filter();
+	}
+}
+bool BaseDropdown::is_filtered() {
+	return !current_filter_.empty();
+}
+void BaseDropdown::disable_textinput() {
+	set_handle_textinput(false);
+	disable_sdl_textinput();
+}
+
+void BaseDropdown::enable_textinput() {
+	set_handle_textinput(true);
+}
+
+std::string BaseDropdown::get_filter_text() {
+	return current_filter_;
 }
 
 }  // namespace UI

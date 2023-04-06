@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,6 +21,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
@@ -33,10 +33,10 @@
 
 /// Common functions for loading or saving a game or replay.
 class LoadOrSaveGame {
-	friend class FullscreenMenuLoadGame;
+	friend class LoadGame;
 	friend struct GameMainMenuSaveGame;
 
-protected:
+public:
 	/// Choose which type of files to show
 	enum class FileType { kShowAll, kGameMultiPlayer, kGameSinglePlayer, kReplay };
 
@@ -44,11 +44,19 @@ protected:
 	LoadOrSaveGame(UI::Panel* parent,
 	               Widelands::Game& g,
 	               FileType filetype,
-	               UI::PanelStyle style,
-	               bool localize_autosave);
+	               UI::PanelStyle,
+	               UI::WindowStyle,
+	               bool localize_autosave,
+	               UI::Panel* table_parent = nullptr,
+	               UI::Panel* delete_button_parent = nullptr);
+
+	/// Make cppcheck happy
+	DISALLOW_COPY_AND_ASSIGN(LoadOrSaveGame);
 
 	/// Update gamedetails and tooltips and return information about the current selection
 	std::unique_ptr<SavegameData> entry_selected();
+
+	bool check_replay_compatibility(const SavegameData& sd);
 
 	/// Whether the table has a selection
 	bool has_selection() const;
@@ -80,7 +88,7 @@ protected:
 	/// Show confirmation window and delete the selected file(s)
 	void clicked_delete();
 
-	void change_directory_to(std::string& directory);
+	void change_directory_to(const std::string& directory);
 
 private:
 	/// Returns the savegame for the table entry at 'index'
@@ -90,7 +98,7 @@ private:
 	bool compare_save_time(uint32_t, uint32_t) const;
 	bool compare_map_name(uint32_t, uint32_t) const;
 
-	UI::Panel* parent_;
+	UI::WindowStyle window_style_;
 	UI::Box* table_box_;
 	FileType filetype_;
 

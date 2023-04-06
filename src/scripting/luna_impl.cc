@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "scripting/luna_impl.h"
 
-#include "base/log.h"
 #include "scripting/luna.h"
 
 /*
@@ -30,16 +28,17 @@
 static void instantiate_new_lua_class(lua_State* L) {
 	assert(lua_gettop(L) == 0);  // S:
 
-	std::string module, klass;
+	std::string module;
+	std::string klass;
 	UNPERS_STRING("module", module)
 	UNPERS_STRING("class", klass)
 
 	// get this classes instantiator
 	lua_getglobal(L, "wl");  //  S: wl
-	if (module != "") {
-		lua_getfield(L, -1, module.c_str());  // S: wl module
-	} else {
+	if (module.empty()) {
 		lua_pushvalue(L, -1);  // S: wl wl
+	} else {
+		lua_getfield(L, -1, module.c_str());  // S: wl module
 	}
 
 	const std::string instantiator = "__" + klass;

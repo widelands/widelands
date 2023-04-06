@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -32,19 +31,19 @@ struct IdleWorkerSupply : public Supply {
 	void set_economy(Economy*);
 	PlayerImmovable* get_position(Game&) override;
 
-	bool is_active() const override;
+	[[nodiscard]] bool is_active() const override;
 	SupplyProviders provider_type(Game*) const override;
-	bool has_storage() const override;
+	[[nodiscard]] bool has_storage() const override;
 	void get_ware_type(WareWorker& type, DescriptionIndex& ware) const override;
 	void send_to_storage(Game&, Warehouse* wh) override;
 
-	uint32_t nr_supplies(const Game&, const Request&) const override;
+	[[nodiscard]] uint32_t nr_supplies(const Game&, const Request&) const override;
 	WareInstance& launch_ware(Game&, const Request&) override;
 	Worker& launch_worker(Game&, const Request&) override;
 
 private:
 	Worker& worker_;
-	Economy* economy_;
+	Economy* economy_{nullptr};
 };
 }  // namespace Widelands
 

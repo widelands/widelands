@@ -1,25 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      sound_effect = {
-         path = "sound/hammering/hammering",
-         priority = 50
-      },
-      hotspot = { 12, 28 },
-      fps = 10
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {12, 28}, 10)
-add_directional_animation(animations, "walkload", dirname, "walkload", {12, 28}, 10)
-
-tribes:new_worker_type {
-   msgctxt = "atlanteans_worker",
+wl.Descriptions():new_worker_type {
    name = "atlanteans_shipwright",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Shipwright"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -31,7 +18,7 @@ tribes:new_worker_type {
    programs = {
       buildship = {
          "walk=object-or-coords",
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:atlanteans_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
          "animate=idle duration:500ms",
          "construct",
@@ -40,10 +27,10 @@ tribes:new_worker_type {
       },
       buildferry_1 = {
          -- checks whether water is available
-         "findspace=size:swim radius:5",
+         "findspace=size:swim radius:5 ferry",
       },
       buildferry_2 = {
-         "findspace=size:swim radius:5",
+         "findspace=size:swim radius:5 ferry",
          "walk=coords",
          "animate=idle duration:10s",
          "createbob=atlanteans_ferry",
@@ -51,5 +38,35 @@ tribes:new_worker_type {
       },
    },
 
-   animations = animations,
+   spritesheets = {
+        idle = {
+         sound_effect = {
+            path = "sound/hammering/hammering",
+            priority = "50%"
+         },
+         fps = 10,
+         frames = 92,
+         rows = 11,
+         columns = 9,
+         hotspot = { 11, 27 }
+      },
+        walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 25 }
+      },
+      walkload = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 24 }
+      },
+   },
 }
+
+pop_textdomain()

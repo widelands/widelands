@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -49,7 +48,10 @@ public:
 	        const MapData::DisplayType& init_displaytype);
 
 	/// For directories
-	MapData(const std::string& init_filename, const std::string& init_localized_name);
+	MapData(const std::string& init_filenames, const std::string& init_localized_name);
+
+	/// Add a second directory path to this directory entry.
+	void add(const MapData& md);
 
 	/// The localized name of the parent directory
 	static std::string parent_name();
@@ -64,16 +66,18 @@ public:
 	static MapData create_directory(const std::string& directory);
 
 	// Sorting functions to order by different categories.
-	bool compare_names(const MapData& other);
-	bool compare_players(const MapData& other);
-	bool compare_size(const MapData& other);
+	[[nodiscard]] bool compare_names(const MapData& other) const;
+	[[nodiscard]] bool compare_players(const MapData& other) const;
+	[[nodiscard]] bool compare_size(const MapData& other) const;
 
-	std::string filename;
+	std::vector<std::string> filenames;
 	std::string name;
 	std::string localized_name;
 	MapAuthorData authors;
 	std::string description;
 	std::string hint;
+	std::string theme;
+	std::string background;
 	uint32_t nrplayers;
 	uint32_t width;
 	uint32_t height;
@@ -81,6 +85,7 @@ public:
 	std::set<std::string> tags;
 	MapData::MapType maptype;
 	MapData::DisplayType displaytype;
+	AddOns::AddOnRequirements required_addons;
 };
 
 #endif  // end of include guard: WL_WUI_MAPDATA_H

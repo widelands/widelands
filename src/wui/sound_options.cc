@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 by the Widelands Development Team
+ * Copyright (C) 2019-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,13 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 #include "wui/sound_options.h"
 
 #include "base/i18n.h"
+#include "graphic/text_layout.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
@@ -48,13 +48,16 @@ public:
 	             const std::string& title,
 	             SoundType type,
 	             FxId representative_fx = kNoSoundEffect)
-	   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
-	     enable_(this, Vector2i::zero(), title),
+	   : UI::Box(parent,
+	             style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui,
+	             0,
+	             0,
+	             UI::Box::Horizontal),
 	     volume_(this,
 	             0,
 	             0,
 	             kSliderWidth,
-	             enable_.get_h(),
+	             kSpacing,
 	             0,
 	             g_sh->get_max_volume(),
 	             g_sh->get_volume(type),
@@ -62,6 +65,7 @@ public:
 	             /** TRANSLATORS: Tooltip for volume slider in sound options */
 	             _("Changes the volume. Click to hear a sample."),
 	             kCursorWidth),
+	     enable_(this, panel_style_, Vector2i::zero(), title),
 	     type_(type),
 	     fx_(representative_fx) {
 		set_inner_spacing(kSpacing);
@@ -103,10 +107,10 @@ private:
 		g_sh->set_volume(type_, value);
 	}
 
-	/// Enable / disable sound type
-	UI::Checkbox enable_;
 	/// Control the volume for the sound type
 	UI::HorizontalSlider volume_;
+	/// Enable / disable sound type
+	UI::Checkbox enable_;
 	/// The sound type to control
 	const SoundType type_;
 	/// Representative sound effect to play
@@ -118,24 +122,41 @@ constexpr int kSpacing = 12;
 }  // namespace
 
 SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
-   : UI::Box(&parent, 0, 0, UI::Box::Vertical) {
+   : UI::Box(&parent,
+             style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui,
+             0,
+             0,
+             UI::Box::Vertical),
+     custom_songset_(
+        this,
+        panel_style_,
+        {0, 0},
+        _("Play your own music in-game"),
+        richtext_escape(
+           _("You can play custom in-game music by placing your own music files in "
+             "‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
+             "two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and ‘.ogg’.")),
+        0) {
 
 	set_inner_spacing(kSpacing);
 
 	add(new SoundControl(this, style, pgettext("sound_options", "Music"), SoundType::kMusic));
 
 	add(new SoundControl(this, style, pgettext("sound_options", "Chat Messages"), SoundType::kChat,
-	                     g_sh->register_fx(SoundType::kChat, "sound/lobby_chat")));
+	                     SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")));
 
 	add(new SoundControl(this, style, pgettext("sound_options", "Game Messages"),
 	                     SoundType::kMessage,
-	                     g_sh->register_fx(SoundType::kMessage, "sound/message")));
+	                     SoundHandler::register_fx(SoundType::kMessage, "sound/message")));
 
 	add(new SoundControl(this, style, pgettext("sound_options", "User Interface"), SoundType::kUI));
 
-	add(new SoundControl(this, style, pgettext("sound_options", "Ambient Sounds"),
-	                     SoundType::kAmbient,
-	                     g_sh->register_fx(SoundType::kAmbient, "sound/create_construction_site")));
+	add(new SoundControl(
+	   this, style, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
+	   SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")));
+	add(&custom_songset_);
+	custom_songset_.set_state(g_sh->use_custom_songset());
+	custom_songset_.changedto.connect([](bool state) { g_sh->use_custom_songset(state); });
 
 	// TODO(GunChleoc): There's a bug (probably somewhere in Box, triggered in combination with
 	// Window::set_center_panel) that will hide the bottom SoundControl in GameOptionsSoundMenu if

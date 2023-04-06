@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -51,7 +50,7 @@ struct Pathfield {
 	uint16_t cycle;
 	uint8_t backlink;  //  how we got here (WALK_*)
 
-	int32_t cost(WareWorker) const {
+	[[nodiscard]] int32_t cost(WareWorker) const {
 		return real_cost + estim_cost;
 	}
 	Queue::Cookie& cookie(WareWorker) {
@@ -61,7 +60,7 @@ struct Pathfield {
 
 struct Pathfields {
 	std::unique_ptr<Pathfield[]> fields;
-	uint16_t cycle;
+	uint16_t cycle{0U};
 
 	explicit Pathfields(uint32_t nrfields);
 };
@@ -73,17 +72,17 @@ struct Pathfields {
  * which is required for pathfinding reentrancy.
  */
 struct PathfieldManager {
-	PathfieldManager();
+	PathfieldManager() = default;
 
 	void set_size(uint32_t nrfields);
 	std::shared_ptr<Pathfields> allocate();
 
 private:
-	void clear(const std::shared_ptr<Pathfields>& pf);
+	void clear(const std::shared_ptr<Pathfields>& pf) const;
 
 	using List = std::vector<std::shared_ptr<Pathfields>>;
 
-	uint32_t nrfields_;
+	uint32_t nrfields_{0U};
 	List list_;
 };
 }  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,26 +12,22 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "map_io/map_player_names_and_tribes_packet.h"
 
-#include <boost/algorithm/string/trim.hpp>
-
+#include "base/string.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/player.h"
 
 namespace Widelands {
 
 constexpr int32_t kCurrentPacketVersion = 2;
-
-MapPlayerNamesAndTribesPacket::~MapPlayerNamesAndTribesPacket() {
-}
 
 /*
  * Read Function
@@ -41,7 +37,7 @@ MapPlayerNamesAndTribesPacket::~MapPlayerNamesAndTribesPacket() {
 void MapPlayerNamesAndTribesPacket::read(FileSystem& fs,
                                          EditorGameBase& egbase,
                                          bool const skip,
-                                         MapObjectLoader&) {
+                                         MapObjectLoader& /* mol */) {
 	pre_read(fs, egbase.mutable_map(), skip);
 }
 
@@ -57,16 +53,16 @@ void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, boo
 		int32_t const packet_version = prof.get_safe_section("global").get_int("packet_version");
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+			i18n::Textdomain td("widelands");
 			PlayerNumber const nr_players = map->get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
-				Section& s = prof.get_safe_section(
-				   (boost::format("player_%u") % static_cast<unsigned int>(p)).str());
+				Section& s = prof.get_safe_section(format("player_%u", static_cast<unsigned int>(p)));
 
 				// Replace empty or standard player names with localized standard player name
 				std::string player_name = s.get_string("name", "");
 				if (player_name.empty() ||
-				    player_name == (boost::format("Player %u") % static_cast<unsigned int>(p)).str()) {
-					player_name = (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str();
+				    player_name == format("Player %u", static_cast<unsigned int>(p))) {
+					player_name = format(_("Player %u"), static_cast<unsigned int>(p));
 				}
 				map->set_scenario_player_name(p, player_name);
 				map->set_scenario_player_tribe(p, s.get_string("tribe", ""));
@@ -82,23 +78,25 @@ void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, boo
 	}
 }
 
-void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
+void MapPlayerNamesAndTribesPacket::write(FileSystem& fs,
+                                          EditorGameBase& egbase,
+                                          MapObjectSaver& /* mos */) {
 	Profile prof;
 
 	prof.create_section("global").set_int("packet_version", kCurrentPacketVersion);
 
+	i18n::Textdomain td("widelands");
 	const Map& map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		const std::string section_key =
-		   (boost::format("player_%u") % static_cast<unsigned int>(p)).str();
+		const std::string section_key = format("player_%u", static_cast<unsigned int>(p));
 
 		// Make sure that no player name is empty, and trim leading/trailing whitespaces.
 		std::string player_name = map.get_scenario_player_name(p);
-		boost::trim(player_name);
+		trim(player_name);
 
 		// Save default player names as empty
-		if (player_name == (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str()) {
+		if (player_name == format(_("Player %u"), static_cast<unsigned int>(p))) {
 			player_name = "";
 		}
 
@@ -107,6 +105,11 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 		s.set_string("tribe", map.get_scenario_player_tribe(p));
 		s.set_string("ai", map.get_scenario_player_ai(p));
 		s.set_bool("closeable", map.get_scenario_player_closeable(p));
+		// Only read by multiplayer loadgame, transfered over from the GamePlayerInfoPacket
+		s.set_int("team", egbase.get_player(p) != nullptr ? egbase.get_player(p)->team_number() : 0);
+		s.set_bool("random", egbase.get_player(p) != nullptr ?
+                              egbase.get_player(p)->has_random_tribe() :
+                              false);
 	}
 
 	prof.write("player_names", false, fs);

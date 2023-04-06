@@ -1,17 +1,21 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Jukka Pakarinen, 2020
+# Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
+# heidi.wenger, 2022
+# Atte Timonen, 2022
+# Oi Suomi On! <oisuomion@protonmail.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Jukka Pakarinen, 2020\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,6 +27,10 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
 msgstr "Suuri Myrskytulva (Automaattinen Tallenne)"
+
+#: ../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
+msgid "Langeneß"
+msgstr "Langeneß"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
@@ -37,13 +45,13 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
-"Rakenna ainakin yksi metsurin mökki ja kaksi metsänhoitajan mökkiä "
-"kaadettujen puiden tuotannon aloittamiseksi, ja ruokofarmi ruoikon "
-"kasvattamisen aloittamiseksi."
+"Rakenna ainakin yksi metsurin mökki ja kaksi metsänhoitajan mökkiä tukkien "
+"tuotannon aloittamiseksi, ja ruokofarmi ruoikon kasvattamisen "
+"aloittamiseksi."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
-msgstr "Aloita tuottamaan tiiliä"
+msgstr "Aloita tiilien tuotanto"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
@@ -99,12 +107,12 @@ msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr ""
-"Muista että voit asettaa tavoitemäärän useimmille näille tuotteille "
+"Muista että voit asettaa tavoitemäärän suurimmalle osalle näistä tuotteista "
 "talousasetuksistasi."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
-msgstr "Tuottaa ruokaa kaivostyöläisille"
+msgstr "Tuota ruokaa kaivostyöläisille"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
@@ -150,11 +158,11 @@ msgstr "Rakenna rautakaivos, sulattamo, sepän paja ja pieni haarniskapaja."
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
-msgstr "Käy palkkamaan sotilaita"
+msgstr "Aloita sotilaiden värvääminen"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
-msgstr "Palkkaa Sotilaita"
+msgstr "Sotilaiden värvääminen"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
@@ -170,7 +178,7 @@ msgstr "Laajenna Ja Paljasta"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr "Laajenna kauemmaksi ja paljasta lisää saarta."
+msgstr "Jatka laajentamista ja saaren tutkimista."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
@@ -194,9 +202,9 @@ msgid ""
 "and helmets."
 msgstr ""
 "Kouluta sotilas korkemmalle mahdolliselle tasolle. Sotilaita koulutetaan "
-"harjoitusleireillä ja harjoitteluareenoilla. Tarvitselle kultakaivoksen, "
-"räätälin puodin ompelemaan lujia vaatteita ja suuri haarniskapaja paremmille"
-" aseille ja kypärille."
+"harjoitusleireillä ja harjoitteluareenoilla. Tarvitsemme kultakaivoksen, "
+"räätälin puodin ompelemaan kestävämpiä vaatteita ja suuren haarniskapajan "
+"saadaksemme parempia aseita ja kypäriä."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
@@ -223,15 +231,15 @@ msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
-"Rakenna satama, kutomo ja telakka, minkä jälkeen aloita tutkimusmatka "
-"paetaksesi myrskytulvaa ennen kuin se hukuttaa saaren."
+"Rakenna satama, kutomo ja telakka, ja aloita sitten tutkimusmatka paetaksesi"
+" ennen kuin myrskytulva hukuttaa saaren."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
 msgstr ""
-"Voit rakentaa sataman joko saaren itäisimpään kärkeen tai paikkaan, jossa "
+"Voit rakentaa sataman joko saaren itäisimpään kärkeen, tai paikkaan jossa "
 "vihollisen päämaja sijaitsi."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
@@ -240,9 +248,9 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
-"Jos et valmistautunut tähän haasteeseen riittävästi ajoissa, voit ladata "
-"uudelleen skenaarion varmuuskopiosta, joka on automaattisesti luotu sinulle "
-"juuri ennen kuin saavutit vihollisen  päämajan."
+"Jos et valmistautunut tähän haasteeseen riittävän hyvin, voit ladata "
+"skenaarion uudelleen tallennustiedostosta, joka on luotu automaattisesti "
+"juuri ennen kuin saavutit vihollisen päämajan."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -262,8 +270,8 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
-"Terve tuloa kauniille Langenessin saarelle! Olen Reebaud, tämän "
-"koskemattoman saaren päällikkö."
+"Tervetuloa kauniille Langenessin saarelle! Olen Reebaud, tämän neitseellisen"
+" saaren päällikkö."
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
@@ -274,11 +282,10 @@ msgid ""
 "South… So I decided to lead my tribe away to start a quiet, peaceful life on"
 " this untouched island."
 msgstr ""
-"Heimoni ja minä olemme juuri saapuneet tänne mantereelta. Siellä oli "
-"taisteluja tanskalaisten kanssa pohjoisessa, schauenburgerien ja "
-"holsteinerien kanssa idässä ja etelässä... Päätin siksi johtaa heimoni pois "
-"aloittaaksemme hiljaisen ja rauhallisen elämän tällä koskemattomalla "
-"saarella."
+"Olemme juuri heimoni kanssa saapuneet tänne mantereelta. Taistelimme siellä "
+"tanskalaisten kanssa pohjoisessa, schauenburgerien ja holsteinerien kanssa "
+"idässä ja etelässä... Joten päätin johtaa heimoni muualle aloittaaksemme "
+"rauhaisan elämän tällä koskemattomalla saarella."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
@@ -290,8 +297,8 @@ msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
 msgstr ""
-"Tämä jos mikä on hyvä paikka aloittaa uuden kodin rakentamiseen. Ensiksi "
-"meidän tulee varmistaa vakaa perusrakennusmateriaalien toimitus."
+"Tämä jos mikä on hyvä paikka aloittaa uuden kodin rakentaminen. Ensinnäkin "
+"meidän tulee varmistaa vakaa perusrakennusmateriaalien tuotanto."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
@@ -299,7 +306,7 @@ msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
-"Olen pyytänyt Haukea, joka on yksi neuvonantajistani, tarkkailemaan "
+"Olen pyytänyt Haukea, joka on yksi neuvonantajistani, valvomaan "
 "siirtokuntamme rakentamista."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
@@ -321,10 +328,9 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
-"Kuten kaikki Vapaamieliset, rakennamme mökkimme pääasiassa tiilistä. "
-"Parantelemme niitä lisäämällä niihin kaadettuja puita ja graniittia. Katot "
-"ovat peitelty kaislanoljilla, luonnollisesti. Mikään ei sovellu sitä "
-"paremmin sateen pitämiseksi ulkona."
+"Kuten kaikki vapaamieliset, rakennamme mökkimme pääasiassa tiilistä. "
+"Parantelemme niitä lisäämällä niihin tukkeja ja graniittia. Katot on "
+"peitetty luonnollisesti kaisloilla. Mikään ei suojaa sitä paremmin sateelta."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -333,7 +339,7 @@ msgid ""
 "grow well on this island; better build at least two houses for foresters and"
 " one for a woodcutter."
 msgstr ""
-"Meidän pitäisi käydä pitämään huolta puutuotannosta. Puut eivät näytä "
+"Meidän pitäisi aloittaa käynnistämällä puun tuotanto. Puut eivät näytä "
 "kasvavan kovin hyvin tällä saarella; parempi rakentaa ainakin kaksi mökkiä "
 "metsänhoitajille ja yksi metsurille."
 
@@ -408,7 +414,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
-msgstr "Meidän ensimmäinen siirtokunta"
+msgstr "Ensimmäinen siirtokuntamme"
 
 #. TRANSLATORS: Reebaud – Introduction 5
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:179
@@ -1098,52 +1104,70 @@ msgstr ""
 "varten.Sen jälkeen voimme aloittaa tutkimusmatkan satamasta. Rukoile jumalia"
 " ja toimi nopeasti!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
 msgstr "Älä Unohda Sotilaita"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
 msgstr "Sotilaita satamaan!"
 
 #. TRANSLATORS: Reebaud – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:414
 #, lua-format
 msgid ""
-"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to %d soldier on "
-"our ship, if nobody minds being all crammed together. Let’s send our best "
-"men to the port when it’s completed, to get ready to embark when we set "
-"sail!"
+"I almost forgot in this haste – wherever we will land, we’ll need some "
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldier, if nobody minds being all crammed together. Let’s "
+"send some building supplies and our best men to the port when it’s "
+"completed, to get ready to embark when we set sail!"
 msgid_plural ""
-"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to %d soldiers on "
-"our ship, if nobody minds being all crammed together. Let’s send our best "
-"men to the port when it’s completed, to get ready to embark when we set "
-"sail!"
+"I almost forgot in this haste – wherever we will land, we’ll need some "
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldiers, if nobody minds being all crammed together. Let’s "
+"send some building supplies and our best men to the port when it’s "
+"completed, to get ready to embark when we set sail!"
 msgstr[0] ""
-"Melkein unohdin tässä kaikessa kiireessä – minne ikinä rantaudummekaan, "
-"tarvitsemme sotilaita turvaksemme ja laajentamaan uutta yhdyskuntaa. Tilaa "
-"on enintään %dsotilaalle laivassa, jos kukaan ei pidä pahakseen, että kaikki"
-" ahtautuvat sinne. Lähetetään sinne parhaita miehiämme, kun se on "
-"valmistunut, jotta he voivat astua laivaan, kun me nostamme purjeet!"
+"Lähes unohdin tässä kiireessä – milloin sitten rantaudummekaan, tulemme "
+"tarvitsemaan rakennusaineksia päästäksemme alkuun, sekä sotilaita turvaamaan"
+" ja laajentamaan uutta asutustamme. Jopa lastauksen jälkeen, laivassa "
+"pitäisi olla tarpeeksi vapaata tilaa uusille tarvikkeille ja työntekijöille."
+" Tämän päälle, tilaa riittänee enintään %d sotilaalle, mikäli ketään ei "
+"haittaa vieri vieressä oleminen. Lähetetäänpä hiukan tarvikkeita sekä "
+"parhaat miehemme satamaan rakentamisen tullessa päätökseensä, "
+"valmistautumaan lähtöön kun nostamme purjeet! "
 msgstr[1] ""
-"Melkein unohdin tässä kaikessa kiireessä – minne ikinä rantaudummekaan, "
-"tarvitsemme sotilaita turvaksemme ja laajentamaan uutta yhdyskuntaa. Tilaa "
-"on enintään %d sotilaalle laivassa, jos kukaan ei pidä pahakseen, että "
-"kaikki ahtautuvat sinne. Lähetetään sinne parhaita miehiämme, kun se on "
-"valmistunut, jotta he voivat astua laivaan, kun me nostamme purjeet!"
+"Lähes unohdin tässä kiireessä – milloin sitten rantaudummekaan, tulemme "
+"tarvitsemaan rakennusaineksia päästäksemme alkuun, sekä sotilaita turvaamaan"
+" ja laajentamaan uutta asutustamme. Jopa lastauksen jälkeen, laivassa "
+"pitäisi olla tarpeeksi vapaata tilaa uusille tarvikkeille ja työntekijöille."
+" Tämän päälle, tilaa riittänee %dsotilaalle, mikäli ketään ei haittaa vieri "
+"vieressä oleminen. Lähetetäänpä hiukan tarvikkeita sekä parhaat miehemme "
+"satamaan sen valmistuttua, valmistautumaan lähtöön kun nostamme purjeet! "
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:419
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
+msgid ""
+"All wares and workers that are loaded onto the expedition as well as some of"
+" the soldiers in the port will be carried over to the next scenario."
+msgstr ""
+"Kaikki tarvikkeet ja työntekijät jotka ovat tutkimusmatkalle mukaan "
+"lastatut, kuten myös jotkut sotilaista satamassa, viedään seuraavaan "
+"asetelmaan."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
 msgstr "Voitto"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
 msgstr "Pelastuimme!"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:424
 msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
@@ -1153,12 +1177,12 @@ msgstr ""
 "saarelta, ja olen vakuuttunut, että pystymme rakentamaan uuden kodin "
 "uudestaan paljon rauhallisempaan maailman kolkkaan."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:423
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
 msgstr "Onnittelut"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
@@ -1166,8 +1190,3 @@ msgstr ""
 "Olet selviytynyt tästä komennuksesta. Voit halutessasi siirtyä nyt "
 "seuraavaan skenaarioon ja auttaa meitä rakentamaan uuden kodin, kauas väärän"
 " ja kostonhimoisen jumalan ulottumattomiin"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"

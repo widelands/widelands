@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,7 +20,6 @@
 
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
-#include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 
@@ -85,7 +83,7 @@ void MapObjectLoader::load_finish_game(Game& g) {
 	}
 
 	while (!schedule_act_.empty()) {
-		schedule_act_.back()->schedule_act(g, 1);
+		schedule_act_.back()->schedule_act(g, Duration(1));
 		schedule_act_.pop_back();
 	}
 }

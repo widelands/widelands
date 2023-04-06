@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,6 +23,7 @@
 #include "chat/chat.h"
 #include "graphic/game_renderer.h"
 #include "graphic/mouse_cursor.h"
+#include "graphic/text_layout.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "ui_basic/textarea.h"
@@ -40,25 +40,33 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            bool const multiplayer,
                                            ChatProvider* chat_provider)
    : InteractiveGameBase(g, global_s, multiplayer, chat_provider) {
+	constexpr int kSpacing = 15;
 	add_main_menu();
 
-	add_toolbar_button("wui/menus/statistics_general", "general_stats", _("Statistics"),
-	                   &menu_windows_.stats_general, true);
+	add_toolbar_button(
+	   "wui/menus/statistics_general", "general_stats",
+	   as_tooltip_text_with_hotkey(_("Statistics"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameStatsGeneral, false),
+	                               UI::PanelStyle::kWui),
+	   &menu_windows_.stats_general, true);
 	menu_windows_.stats_general.open_window = [this] {
 		new GeneralStatisticsMenu(*this, menu_windows_.stats_general);
 	};
 
-	toolbar()->add_space(15);
+	toolbar()->add_space(kSpacing);
 
 	add_mapview_menu(MiniMapType::kStaticViewWindow);
 	add_showhide_menu();
 	add_gamespeed_menu();
 
-	toolbar()->add_space(15);
+	toolbar()->add_space(kSpacing);
 
 	if (is_multiplayer()) {
 		add_chat_ui();
+		toolbar()->add_space(kSpacing);
 	}
+
+	add_diplomacy_menu();
 
 	finalize_toolbar();
 
@@ -66,6 +74,8 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		node_action(node_and_triangle);
 	});
+
+	initialization_complete();
 }
 
 void InteractiveSpectator::draw(RenderTarget& dst) {
@@ -87,23 +97,36 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	auto* fields_to_draw =
 	   given_map_view->draw_terrain(the_game, nullptr, get_workarea_overlays(map), false, dst);
 	const float scale = 1.f / given_map_view->view().zoom;
-	const uint32_t gametime = the_game.get_gametime();
+	const Time& gametime = the_game.get_gametime();
 
 	const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
+		if (field.obscured_by_slope) {
+			continue;
+		}
 
 		draw_bridges(dst, &field, gametime, scale);
 		draw_border_markers(field, scale, *fields_to_draw, dst);
 
-		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
-		if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
-			imm->draw(gametime, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
-		}
+		{
+			MutexLock m(MutexLock::ID::kObjects);
+			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
+			if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
+				imm->draw(gametime, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
+				if (upcast(const Widelands::Immovable, i, imm)) {
+					if (!i->get_marked_for_removal().empty()) {
+						const Image* img = g_image_cache->get("images/wui/overlays/targeted.png");
+						blit_field_overlay(
+						   dst, field, img, Vector2i(img->width() / 2, img->height()), scale);
+					}
+				}
+			}
 
-		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
-		     bob = bob->get_next_bob()) {
-			bob->draw(the_game, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
+			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob != nullptr;
+			     bob = bob->get_next_bob()) {
+				bob->draw(the_game, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
+			}
 		}
 
 		// Draw build help.
@@ -141,7 +164,7 @@ Widelands::Player* InteractiveSpectator::get_player() const {
 	return nullptr;
 }
 
-bool InteractiveSpectator::player_hears_field(const Widelands::Coords&) const {
+bool InteractiveSpectator::player_hears_field(const Widelands::Coords& /*coords*/) const {
 	return true;
 }
 
@@ -153,10 +176,10 @@ void InteractiveSpectator::exit_btn() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
-bool InteractiveSpectator::can_see(Widelands::PlayerNumber) const {
+bool InteractiveSpectator::can_see(Widelands::PlayerNumber /* p */) const {
 	return true;
 }
-bool InteractiveSpectator::can_act(Widelands::PlayerNumber) const {
+bool InteractiveSpectator::can_act(Widelands::PlayerNumber /* p */) const {
 	return false;
 }
 Widelands::PlayerNumber InteractiveSpectator::player_number() const {
@@ -168,7 +191,8 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
  */
 void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	// Special case for buildings
-	if (is_a(Widelands::Building, egbase().map().get_immovable(node_and_triangle.node))) {
+	const Widelands::MapObject* mo = egbase().map().get_immovable(node_and_triangle.node);
+	if ((mo != nullptr) && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 		show_building_window(node_and_triangle.node, false, false);
 		return;
 	}

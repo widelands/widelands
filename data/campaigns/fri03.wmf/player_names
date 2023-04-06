@@ -1,0 +1,22 @@
+# Automatically created by Widelands 1.0~git25156[27a9c00@fri-03-new] (Debug)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Claus Lembeck"
+tribe="frisians"
+ai=
+closeable="false"
+
+[player_2]
+name="Angadthur"
+tribe="atlanteans"
+ai=
+closeable="false"
+
+[player_3]
+name="Marcus Caius Iniucundus"
+tribe="empire"
+ai=
+closeable="false"

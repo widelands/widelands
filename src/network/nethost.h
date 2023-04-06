@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -38,7 +37,7 @@ public:
 	 * \param port The port to listen on.
 	 * \return A pointer to a listening \c NetHost object or a nullptr if the connection failed.
 	 */
-	static std::unique_ptr<NetHost> listen(const uint16_t port);
+	static std::unique_ptr<NetHost> listen(uint16_t port);
 
 	/**
 	 * Closes the server.
@@ -46,7 +45,7 @@ public:
 	~NetHost() override;
 
 	// Inherited from NetHostInterface
-	bool is_connected(ConnectionId id) const override;
+	[[nodiscard]] bool is_connected(ConnectionId id) const override;
 	void close(ConnectionId id) override;
 	bool try_accept(ConnectionId* new_id) override;
 	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
@@ -68,7 +67,7 @@ private:
 	 * \return \c true if the server is listening, \c false otherwise.
 	 */
 	// Feel free to make this method public if you need it
-	bool is_listening() const;
+	[[nodiscard]] bool is_listening() const;
 
 	/**
 	 * Starts an asynchronous accept on the given acceptor.
@@ -77,9 +76,9 @@ private:
 	 * @param acceptor The acceptor we should be listening on.
 	 * @param pair A pair of the BufferedConnection for the new client and its socket.
 	 */
-	void start_accepting(
-	   boost::asio::ip::tcp::acceptor& acceptor,
-	   std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair);
+	void
+	start_accepting(asio::ip::tcp::acceptor& acceptor,
+	                std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*>& pair);
 
 	/**
 	 * Tries to listen on the given port.
@@ -95,25 +94,24 @@ private:
 	 * @param endpoint The IP version, transport protocol and port number we should listen on.
 	 * @return \c True iff the acceptor is listening now.
 	 */
-	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
-	                   const boost::asio::ip::tcp::endpoint& endpoint);
+	bool open_acceptor(asio::ip::tcp::acceptor* acceptor, const asio::ip::tcp::endpoint& endpoint);
 
 	/// A map linking client ids to the respective network connections.
 	/// Client ids not in this map should be considered invalid.
 	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
 	/// The next client id that will be used
-	NetHostInterface::ConnectionId next_id_;
-	/// An io_service needed by boost.asio. Primary needed for async operations.
-	boost::asio::io_service io_service_;
+	NetHostInterface::ConnectionId next_id_{1};
+	/// An io_service needed by asio. Primary needed for async operations.
+	asio::io_service io_service_;
 	/// The acceptor we get IPv4 connection requests to.
-	boost::asio::ip::tcp::acceptor acceptor_v4_;
+	asio::ip::tcp::acceptor acceptor_v4_;
 	/// The acceptor we get IPv6 connection requests to.
-	boost::asio::ip::tcp::acceptor acceptor_v6_;
+	asio::ip::tcp::acceptor acceptor_v6_;
 
 	/// Socket and unconnected BuffereConnection that will be used for accepting IPv4 connections
-	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v4_;
+	std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*> accept_pair_v4_;
 	/// Socket and unconnected BuffereConnection that will be used for accepting IPv6 connections
-	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v6_;
+	std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*> accept_pair_v6_;
 
 	/// A thread used to wait for connections on the acceptor.
 	std::thread asio_thread_;

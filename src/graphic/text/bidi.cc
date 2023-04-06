@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -505,13 +504,11 @@ bool is_rtl_character(UChar32 c) {
 	CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 	UBlockCode code = ublock_getCode(c);
 	CLANG_DIAG_ON("-Wdisabled-macro-expansion")
-	for (UI::FontSets::Selector script : kRTLScripts) {
-		assert(kRTLCodeBlocks.count(script) == 1);
-		if ((kRTLCodeBlocks.at(script).count(code) == 1)) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(
+	   kRTLScripts.begin(), kRTLScripts.end(), [code](UI::FontSets::Selector script) {
+		   assert(kRTLCodeBlocks.count(script) == 1);
+		   return kRTLCodeBlocks.at(script).count(code) != 0;
+	   });
 }
 
 // Helper function for make_ligatures.
@@ -567,14 +564,10 @@ bool has_rtl_character(const char* input, int32_t limit) {
 	return false;
 }
 
-// True if the strings do not contain Latin characters
+// True if the strings contain non-Latin characters
 bool has_rtl_character(std::vector<std::string> input) {
-	for (const std::string& string : input) {
-		if (has_rtl_character(string.c_str())) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(input.begin(), input.end(),
+	                   [](const std::string& string) { return has_rtl_character(string.c_str()); });
 }
 
 // Contracts glyphs into their ligatures
@@ -612,16 +605,17 @@ std::string make_ligatures(const char* input) {
 					--i;
 				}
 			} catch (const std::out_of_range& e) {
-				log("Error trying to fetch Arabic diacritic form: %s\n", e.what());
+				log_err("Error trying to fetch Arabic diacritic form: %s\n", e.what());
 				NEVER_HERE();
 			}
 		} else if (kArabicFinalChars.count(c) == 1) {  // All Arabic characters have a final form
 			try {
 				// Skip diacritics for position analysis
-				for (int k = i - 2; k >= 0 && kArabicDiacritics.count(previous); --k) {
+				for (int k = i - 2; k >= 0 && (kArabicDiacritics.count(previous) != 0u); --k) {
 					previous = parseme.charAt(k);
 				}
-				for (int k = i + 2; k < (parseme.length() - 1) && kArabicDiacritics.count(next); ++k) {
+				for (int k = i + 2; k < (parseme.length() - 1) && (kArabicDiacritics.count(next) != 0u);
+				     ++k) {
 					next = parseme.charAt(k);
 				}
 
@@ -632,13 +626,13 @@ std::string make_ligatures(const char* input) {
 					--i;
 					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
 					// Skip diacritics for position analysis
-					for (int k = i - 2; k >= 0 && kArabicDiacritics.count(previous); --k) {
+					for (int k = i - 2; k >= 0 && (kArabicDiacritics.count(previous) != 0u); --k) {
 						previous = parseme.charAt(k);
 					}
 				}
 				c = find_arabic_letter_form(c, previous, next);
 			} catch (const std::out_of_range& e) {
-				log("Error trying to fetch Arabic character form: %s\n", e.what());
+				log_err("Error trying to fetch Arabic character form: %s\n", e.what());
 				NEVER_HERE();
 			}
 		}
@@ -704,10 +698,6 @@ std::string icustring2string(const icu::UnicodeString& convertme) {
 	std::string result;
 	convertme.toUTF8String(result);
 	return result;
-}
-std::string icuchar2string(const UChar& convertme) {
-	const icu::UnicodeString temp(convertme);
-	return icustring2string(temp);
 }
 
 // True if a string contains a character from the script's code blocks

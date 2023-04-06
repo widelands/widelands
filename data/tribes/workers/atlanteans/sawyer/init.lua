@@ -1,21 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 5, 31 }
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {16, 31}, 10)
-add_directional_animation(animations, "walkload", dirname, "walk", {16, 31}, 10)
-
-
-tribes:new_worker_type {
-   msgctxt = "atlanteans_worker",
+wl.Descriptions():new_worker_type {
    name = "atlanteans_sawyer",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Sawyer"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -24,5 +15,31 @@ tribes:new_worker_type {
       saw = 1
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 5, 31 }
+      },
+   },
+
+   spritesheets = {
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 16, 31 }
+      },
+      walkload = {
+         basename = "walk",
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 16, 31 }
+      },
+   },
 }
+
+pop_textdomain()

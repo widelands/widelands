@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2020 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,47 +12,86 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "ui_fsmenu/about.h"
 
+#include <memory>
+
 #include "base/i18n.h"
+#include "base/log.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
+#include "ui_fsmenu/tech_info.h"
 
-FullscreenMenuAbout::FullscreenMenuAbout()
-   : FullscreenMenuBase(),
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("About Widelands"),
-            UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
-     close_(this, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
-     tabs_(this, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
-	tabs_.add_tab("txts/README.lua");
-	tabs_.add_tab("txts/LICENSE.lua");
-	tabs_.add_tab("txts/AUTHORS.lua");
-	tabs_.add_tab("txts/TRANSLATORS.lua");
-	close_.sigclicked.connect([this]() { clicked_back(); });
+namespace FsMenu {
+
+About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
+   : UI::UniqueWindow(&fsmm,
+                      UI::WindowStyle::kFsMenu,
+                      "about",
+                      &r,
+                      fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuAbout),
+                      fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout),
+                      _("About Widelands")),
+     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     tabs_(&box_, UI::TabPanelStyle::kFsMenu),
+     close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
+	try {
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> t(lua.run_script("txts/ABOUT.lua"));
+		for (const auto& entry : t->array_entries<std::unique_ptr<LuaTable>>()) {
+			try {
+				tabs_.add_tab(entry->get_string("name"), entry->get_string("script"));
+			} catch (LuaError& err) {
+				tabs_.add_tab(_("Lua Error"), "");
+				log_err("%s", err.what());
+			}
+		}
+	} catch (LuaError& err) {
+		tabs_.add_tab(_("Lua Error"), "");
+		log_err("%s", err.what());
+	}
+
+	TechInfoBox* infobox = new TechInfoBox(&tabs_, TechInfoBox::Type::kAbout);
+	tabs_.add_tab_without_script("info", _("Technical Info"), infobox);
+
+	close_.sigclicked.connect([this]() { die(); });
+
+	box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
+	box_.add_space(kPadding);
+	box_.add(&close_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	box_.add_space(kPadding);
+
+	do_not_layout_on_resolution_change();
+
 	layout();
+	tabs_.load_tab_contents();
+	center_to_parent();
+	initialization_complete();
 }
 
-void FullscreenMenuAbout::layout() {
-	// Values for alignment and size
-	butw_ = get_w() / 5;
-	buth_ = get_h() * 9 / 200;
-	hmargin_ = get_w() * 19 / 200;
-	tab_panel_width_ = get_inner_w() - 2 * hmargin_;
-	tab_panel_y_ = get_h() * 14 / 100;
-
-	title_.set_size(get_w(), title_.get_h());
-	title_.set_pos(Vector2i(0, buth_));
-	close_.set_size(butw_, buth_);
-	close_.set_pos(Vector2i(get_w() * 2 / 4 - butw_ / 2, get_inner_h() - hmargin_));
-	tabs_.set_pos(Vector2i(hmargin_, tab_panel_y_));
-	tabs_.set_size(tab_panel_width_, get_inner_h() - tab_panel_y_ - buth_ - hmargin_);
+bool About::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_RETURN:
+		case SDLK_ESCAPE:
+			die();
+			return true;
+		default:
+			break;
+		}
+	}
+	return UI::Window::handle_key(down, code);
 }
+
+void About::layout() {
+	UI::Window::layout();
+	if (!is_minimal()) {
+		box_.set_size(get_inner_w(), get_inner_h());
+	}
+}
+
+}  // namespace FsMenu

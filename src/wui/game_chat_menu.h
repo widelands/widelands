@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -32,14 +31,19 @@ struct GameChatMenu : public UI::UniqueWindow {
 	/**
 	 * Creates a default chat window for multiplayer games
 	 */
-	static GameChatMenu* create_chat_console(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&);
+	static GameChatMenu* create_chat_console(UI::Panel*,
+	                                         ChatColorForPlayer fn,
+	                                         UI::UniqueWindow::Registry&,
+	                                         ChatProvider&);
 
 #ifndef NDEBUG  //  only in debug builds
 	             /**
 	              * Creates a chat window only for scripting in debug mode
 	              */
-	static GameChatMenu*
-	create_script_console(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&);
+	static GameChatMenu* create_script_console(UI::Panel*,
+	                                           ChatColorForPlayer fn,
+	                                           UI::UniqueWindow::Registry&,
+	                                           ChatProvider&);
 #endif
 
 	/**
@@ -50,13 +54,17 @@ struct GameChatMenu : public UI::UniqueWindow {
 	bool enter_chat_message(bool close_on_send = true);
 
 private:
-	GameChatMenu(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&, const std::string& title);
+	GameChatMenu(UI::Panel*,
+	             ChatColorForPlayer fn,
+	             UI::UniqueWindow::Registry&,
+	             ChatProvider&,
+	             const std::string& title);
 
 	void restore() override;
 	void minimize() override;
 	void acknowledge();
 	GameChatPanel chat_;
-	bool close_on_send_;
+	bool close_on_send_{false};
 };
 
 #endif  // end of include guard: WL_WUI_GAME_CHAT_MENU_H

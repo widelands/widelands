@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 by the Widelands Development Team
+ * Copyright (C) 2019-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,21 +12,18 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/animation/spritesheet_animation.h"
 
 #include <cassert>
+#include <cstddef>
 #include <memory>
 
-#include <boost/algorithm/string/replace.hpp>
-
-#include "base/log.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
@@ -43,20 +40,15 @@ SpriteSheetAnimation::MipMapEntry IMPLEMENTATION
 SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::string& file,
                                                                      int init_rows,
                                                                      int init_columns)
-   : Animation::MipMapEntry(),
-     sheet(nullptr),
-     playercolor_mask_sheet(nullptr),
-     rows(init_rows),
+   : rows(init_rows),
      columns(init_columns),
-     w(0),
-     h(0),
-     sheet_file(file),
-     playercolor_mask_sheet_file("") {
+
+     sheet_file(file) {
 
 	assert(g_fs->file_exists(file));
 
 	playercolor_mask_sheet_file = file;
-	boost::replace_last(playercolor_mask_sheet_file, ".png", "_pc.png");
+	replace_last(playercolor_mask_sheet_file, ".png", "_pc.png");
 	if (g_fs->file_exists(playercolor_mask_sheet_file)) {
 		has_playercolor_masks = true;
 	} else {
@@ -71,10 +63,10 @@ void SpriteSheetAnimation::SpriteSheetMipMapEntry::ensure_graphics_are_loaded() 
 }
 
 void SpriteSheetAnimation::SpriteSheetMipMapEntry::load_graphics() {
-	sheet = g_gr->images().get(sheet_file);
+	sheet = g_image_cache->get(sheet_file);
 
 	if (!playercolor_mask_sheet_file.empty()) {
-		playercolor_mask_sheet = g_gr->images().get(playercolor_mask_sheet_file);
+		playercolor_mask_sheet = g_image_cache->get(playercolor_mask_sheet_file);
 
 		if (sheet->width() != playercolor_mask_sheet->width()) {
 			throw Widelands::GameDataError("animation sprite sheet has width %d but playercolor mask "
@@ -137,7 +129,7 @@ SpriteSheetAnimation::SpriteSheetMipMapEntry::frame_textures(bool return_playerc
 	std::vector<std::unique_ptr<const Texture>> result;
 	const Rectf rect(Vector2f::zero(), width(), height());
 	if (!return_playercolor_masks || has_playercolor_masks) {
-		const size_t no_of_frames = rows * columns;
+		const size_t no_of_frames = static_cast<size_t>(rows) * columns;
 		for (size_t i = 0; i < no_of_frames; ++i) {
 			std::unique_ptr<Texture> texture(new Texture(width(), height()));
 
@@ -175,8 +167,6 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table,
    : Animation(table) {
 	try {
 		// Get image files
-		// TODO(GunChleoc): When all animations have been converted, require that animation_directory
-		// is not empty.
 		const std::string directory =
 		   animation_directory.empty() ? table.get_string("directory") : animation_directory;
 
@@ -240,7 +230,7 @@ const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) con
 
 	Texture* rv = new Texture(w, h);
 	Rectf rect(Vector2f::zero(), w, h);
-	if (mipmap.has_playercolor_masks && clr) {
+	if (mipmap.has_playercolor_masks && (clr != nullptr)) {
 		rv->fill_rect(rect, RGBAColor(0, 0, 0, 0));
 		rv->blit_blended(rect, *mipmap.sheet, *mipmap.playercolor_mask_sheet,
 		                 Rectf(column * w, row * h, w, h), *clr);
@@ -255,7 +245,7 @@ void SpriteSheetAnimation::add_scale_if_files_present(const std::string& basenam
                                                       float scale_as_float,
                                                       const std::string& scale_as_string) {
 	const std::string path =
-	   directory + g_fs->file_separator() + basename + scale_as_string + ".png";
+	   directory + FileSystem::file_separator() + basename + scale_as_string + ".png";
 	if (g_fs->file_exists(path)) {
 		mipmaps_.insert(
 		   std::make_pair(scale_as_float, std::unique_ptr<SpriteSheetMipMapEntry>(

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,6 +20,7 @@
 
 #include <memory>
 
+#include "base/multithreading.h"
 #include "graphic/text/rt_render.h"
 #include "graphic/text/texture_cache.h"
 
@@ -70,28 +70,38 @@ public:
 	FontHandler(ImageCache* image_cache, const std::string& locale)
 	   : texture_cache_(new TextureCache(kTextureCacheSize)),
 	     render_cache_(new RenderCache(kRenderCacheSize)),
-	     fontsets_(),
 	     fontset_(fontsets_.get_fontset(locale)),
-	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
+	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), &fontsets_)),
 	     image_cache_(image_cache) {
+		assert(image_cache);
 	}
-	~FontHandler() override {
-	}
+	~FontHandler() override = default;
 
 	// This will render the 'text' with a width restriction of 'w'. If 'w' == 0, no restriction is
 	// applied.
 	std::shared_ptr<const UI::RenderedText> render(const std::string& text,
 	                                               uint16_t w = 0) override {
-		const std::string hash = boost::lexical_cast<std::string>(w) + text;
+		const std::string hash = as_string(w) + text;
 		std::shared_ptr<const RenderedText> rendered_text = render_cache_->get(hash);
 		if (rendered_text == nullptr) {
-			rendered_text =
-			   render_cache_->insert(hash, rt_renderer_->render(text, w, fontset()->is_rtl()));
+			// TODO(Nordfriese): There are two possibilities to make this function thread-safe.
+			// The one I chose here is to encapsulate this low-level rendering
+			// in a NoteThreadSafeFunction.
+			// Another way would be to instead encapsulate all high-level functions that render text.
+			// The second way would be much more performance-efficient, but this would clutter
+			// up the high-level UI code a lot with masses of NoteThreadSafeFunction.
+			NoteThreadSafeFunction::instantiate(
+			   [this, &text, &hash, &w]() {
+				   render_cache_->insert(hash, rt_renderer_->render(text, w, fontset()->is_rtl()));
+			   },
+			   true);
+			rendered_text = render_cache_->get(hash);
+			assert(rendered_text);
 		}
 		return rendered_text;
 	}
 
-	UI::FontSet const* fontset() const override {
+	[[nodiscard]] UI::FontSet const* fontset() const override {
 		return fontset_;
 	}
 
@@ -99,7 +109,7 @@ public:
 		fontset_ = fontsets_.get_fontset(locale);
 		texture_cache_->flush();
 		render_cache_->flush();
-		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontsets_));
+		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), &fontsets_));
 	}
 
 private:

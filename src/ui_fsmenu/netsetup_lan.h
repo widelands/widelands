@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,25 +12,27 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_UI_FSMENU_NETSETUP_LAN_H
 #define WL_UI_FSMENU_NETSETUP_LAN_H
 
+#include <memory>
+
+#include "logic/game_controller.h"
 #include "network/network_lan_promotion.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/load_map_or_game.h"
-
-class FullscreenMenuNetSetupLAN : public FullscreenMenuLoadMapOrGame {
+#include "ui_fsmenu/menu.h"
+namespace FsMenu {
+class NetSetupLAN : public TwoColumnsBasicNavigationMenu {
 public:
-	FullscreenMenuNetSetupLAN();
+	explicit NetSetupLAN(MenuCapsule&);
 
 	void think() override;
 
@@ -41,25 +43,20 @@ public:
 	 */
 	bool get_host_address(NetAddress* addr);
 
-	/**
-	 * \return the name chosen by the player
-	 */
-	const std::string& get_playername();
-
 protected:
-	void clicked_ok() override;
+	void clicked_ok();
 
 private:
 	void layout() override;
 
-	void game_selected(uint32_t);
-	void game_doubleclicked(uint32_t);
+	void game_selected(uint32_t index);
+	void game_doubleclicked(uint32_t index);
 
 	static void discovery_callback(int32_t, NetOpenGame const*, void*);
 
-	void game_opened(NetOpenGame const*);
-	void game_closed(NetOpenGame const*);
-	void game_updated(NetOpenGame const*);
+	void game_opened(NetOpenGame const* game);
+	void game_closed(NetOpenGame const* game);
+	void game_updated(NetOpenGame const* game);
 
 	void update_game_info(UI::Table<const NetOpenGame* const>::EntryRecord&, const NetGameInfo&);
 
@@ -69,9 +66,7 @@ private:
 	void clicked_hostgame();
 	void clicked_lasthost();
 
-	UI::Textarea title_;
-
-	UI::Box left_column_, right_column_;
+	std::shared_ptr<GameController> running_game_;
 
 	// Left Column
 	UI::Textarea label_opengames_;
@@ -89,5 +84,5 @@ private:
 
 	LanGameFinder discovery_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_NETSETUP_LAN_H

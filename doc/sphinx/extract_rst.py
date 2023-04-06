@@ -6,6 +6,8 @@ import os
 import os.path as p
 import re
 import sys
+import documentation_enhancements as doc_enh
+from make import builder_help
 
 ###################
 # inputs, outputs #
@@ -36,9 +38,12 @@ cpp_pairs = (
 # directories contain lua files of the same name (e.g. "init.lua").
 lua_dirs = (
     ('data/scripting', '', 'auxiliary'),
+    ('data/scripting/training_wheels', '', 'auxiliary'),
     ('data/scripting/win_conditions', '', 'auxiliary'),
     ('data/scripting/editor', '', 'lua_world_other'),
-    ('data/tribes', '', 'lua_tribes_defining'),
+    ('data/tribes/initialization/atlanteans', '', 'lua_tribes_defining'),
+    ('data/tribes/initialization/atlanteans/starting_conditions', '', 'lua_tribes_defining'),
+    ('data/campaigns/emp04.wmf/scripting/tribes', '', 'lua_tribes_defining'),
     ('data/tribes/scripting', '', 'lua_tribes_other'),
     ('data/tribes/scripting/mapobject_info', '', 'lua_tribes_other'),
     ('data/tribes/scripting/help', '', 'lua_tribes_other'),
@@ -71,11 +76,11 @@ lua_dirs = (
      ('data/world', '', 'lua_world_defining'),
      ('data/world/critters/badger',
      'critters', 'lua_world_units'),
-     ('data/world/immovables/bush1',
+     ('data/world/immovables/artifacts/artifact00',
      'immovables', 'lua_world_units'),
-     ('data/world/resources',
+     ('data/world/resources/coal',
      'resources', 'lua_world_units'),
-     ('data/world/terrains',
+     ('data/world/terrains/desert/beach',
      'terrains', 'lua_world_units'),
 )
 
@@ -106,6 +111,20 @@ def extract_rst_from_cpp(inname, outname=None):
     for r in res:
         r = r.expandtabs(4)
         output += r + '\n'
+
+    # Add string 'Child of: …'
+    output = doc_enh.add_child_of(output, outname)
+    if '-graphs' in sys.argv:
+        try:
+            builder = sys.argv[2]
+            if sys.argv[1] == '-graphs' and builder:
+                # Add dependency graph
+                output = doc_enh.add_dependency_graph(output, outname, builder)
+        except IndexError:
+            print('You must provide the sphinx-builder to make the links in graphs work correctly!')
+            print('Choose a builder out of', [n for n in builder_help], 'e.g. run:')
+            print("./extract_rst.py -graphs dirhtml")
+            sys.exit(1)
 
     if output.strip():
         out = sys.stdout
@@ -171,6 +190,7 @@ def replace_tocs(toc_rst_dict):
 
 if __name__ == '__main__':
     def main():
+        doc_enh.init(base_dir, cpp_pairs)
         for inf, outf in cpp_pairs:
             extract_rst_from_cpp(inf, outf)
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,9 +21,16 @@
 
 #include "scripting/lua.h"
 
+class FileRead;
+class FileWrite;
+
 namespace LuaGlobals {
 
 void luaopen_globals(lua_State*);
-}
+
+void read_textdomain_stack(FileRead&, const lua_State*);
+void write_textdomain_stack(FileWrite&, const lua_State*);
+
+}  // namespace LuaGlobals
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_GLOBALS_H

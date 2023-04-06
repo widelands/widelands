@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 // UI classes for real-time game debugging
@@ -21,14 +20,13 @@
 #include "wui/game_debug_ui.h"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
@@ -38,23 +36,10 @@
 #include "ui_basic/window.h"
 #include "wui/interactive_base.h"
 
-struct MapObjectDebugPanel : public UI::Panel, public Widelands::MapObject::LogSink {
-	MapObjectDebugPanel(UI::Panel& parent, const Widelands::EditorGameBase&, Widelands::MapObject&);
-	~MapObjectDebugPanel() override;
-
-	void log(const std::string& str) override;
-
-private:
-	const Widelands::EditorGameBase& egbase_;
-	Widelands::ObjectPointer object_;
-
-	UI::MultilineTextarea log_;
-};
-
 MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel& parent,
                                          const Widelands::EditorGameBase& egbase,
                                          Widelands::MapObject& obj)
-   : UI::Panel(&parent, 0, 0, 350, 200),
+   : UI::Panel(&parent, UI::PanelStyle::kWui, 0, 0, 350, 200),
      egbase_(egbase),
      object_(&obj),
      log_(this,
@@ -83,7 +68,7 @@ Append the string to the log textarea.
 ===============
 */
 void MapObjectDebugPanel::log(const std::string& str) {
-	log_.set_text((log_.get_text() + str).c_str());
+	log_.set_text((log_.get_text() + str));
 }
 
 /*
@@ -93,42 +78,20 @@ MapObjectDebugWindow
 
 ==============================================================================
 */
-
-/*
-MapObjectDebugWindow
---------------------
-The map object debug window is basically just a simple container for tabs
-that are provided by the map object itself via the virtual function
-collect_debug_tabs().
-*/
-struct MapObjectDebugWindow : public UI::Window {
-	MapObjectDebugWindow(InteractiveBase& parent, Widelands::MapObject&);
-
-	InteractiveBase& ibase() {
-		return dynamic_cast<InteractiveBase&>(*get_parent());
-	}
-
-	void think() override;
-
-private:
-	bool log_general_info_;
-	Widelands::ObjectPointer object_;
-	uint32_t serial_;
-	UI::TabPanel tabs_;
-};
-
 MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::MapObject& obj)
-   : UI::Window(&parent, "map_object_debug", 0, 0, 100, 100, ""),
-     log_general_info_(true),
+   : UI::Window(&parent, UI::WindowStyle::kWui, "map_object_debug", 0, 0, 100, 100, ""),
+
      object_(&obj),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
 
-	tabs_.add("debug", g_gr->images().get("images/wui/fieldaction/menu_debug.png"),
+	tabs_.add("debug", g_image_cache->get("images/wui/fieldaction/menu_debug.png"),
 	          new MapObjectDebugPanel(tabs_, parent.egbase(), obj));
 
 	set_center_panel(&tabs_);
+
+	initialization_complete();
 }
 
 /*
@@ -137,7 +100,7 @@ Remove self when the object disappears.
 ===============
 */
 void MapObjectDebugWindow::think() {
-	Widelands::EditorGameBase& egbase = ibase().egbase();
+	const Widelands::EditorGameBase& egbase = ibase().egbase();
 	if (Widelands::MapObject* const obj = object_.get(egbase)) {
 		if (log_general_info_) {
 			obj->log_general_info(egbase);
@@ -145,7 +108,7 @@ void MapObjectDebugWindow::think() {
 		}
 		UI::Window::think();
 	} else {
-		set_title((boost::format("DEAD: %u") % serial_).str());
+		set_title(format("DEAD: %u", serial_));
 	}
 }
 
@@ -167,31 +130,9 @@ FieldDebugWindow
 
 ==============================================================================
 */
-
-struct FieldDebugWindow : public UI::Window {
-	FieldDebugWindow(InteractiveBase& parent, Widelands::Coords);
-
-	InteractiveBase& ibase() {
-		return dynamic_cast<InteractiveBase&>(*get_parent());
-	}
-
-	void think() override;
-
-	void open_immovable();
-	void open_bob(uint32_t);
-
-private:
-	const Widelands::Map& map_;
-	Widelands::FCoords const coords_;
-
-	UI::MultilineTextarea ui_field_;
-	UI::Button ui_immovable_;
-	UI::Listselect<intptr_t> ui_bobs_;
-};
-
 FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords const coords)
    : /** TRANSLATORS: Title for a window that shows debug information for a field on the map */
-     UI::Window(&parent, "field_debug", 0, 60, 300, 400, _("Debug Field")),
+     UI::Window(&parent, UI::WindowStyle::kWui, "field_debug", 0, 60, 300, 400, _("Debug Field")),
      map_(parent.egbase().map()),
      coords_(map_.get_fcoords(coords)),
 
@@ -209,7 +150,9 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
 	assert(coords_.y < map_.get_height());
 	assert(&map_[0] <= coords_.field);
 	assert(coords_.field < &map_[0] + map_.max_index());
-	ui_bobs_.selected.connect([this](uint32_t a) { open_bob(a); });
+	ui_bobs_.double_clicked.connect([this](uint32_t a) { open_bob(a); });
+
+	initialization_complete();
 }
 
 /*
@@ -228,97 +171,92 @@ void FieldDebugWindow::think() {
 	   dynamic_cast<const InteractiveBase&>(*get_parent()).egbase();
 	{
 		Widelands::PlayerNumber const owner = coords_.field->get_owned_by();
-		str +=
-		   (boost::format("(%i, %i)\nheight: %u\nowner: %u\n") % coords_.x % coords_.y %
-		    static_cast<unsigned int>(coords_.field->get_height()) % static_cast<unsigned int>(owner))
-		      .str();
+		str += format("(%i, %i)\nheight: %u\nowner: %u\n", coords_.x, coords_.y,
+		              static_cast<unsigned int>(coords_.field->get_height()),
+		              static_cast<unsigned int>(owner));
 
-		if (owner) {
+		if (owner != 0u) {
 			Widelands::NodeCaps const buildcaps = egbase.player(owner).get_buildcaps(coords_);
-			if (buildcaps & Widelands::BUILDCAPS_BIG) {
+			if ((buildcaps & Widelands::BUILDCAPS_BIG) != 0) {
 				str += "  can build big building\n";
-			} else if (buildcaps & Widelands::BUILDCAPS_MEDIUM) {
+			} else if ((buildcaps & Widelands::BUILDCAPS_MEDIUM) != 0) {
 				str += "  can build medium building\n";
-			} else if (buildcaps & Widelands::BUILDCAPS_SMALL) {
+			} else if ((buildcaps & Widelands::BUILDCAPS_SMALL) != 0) {
 				str += "  can build small building\n";
 			}
-			if (buildcaps & Widelands::BUILDCAPS_FLAG) {
+			if ((buildcaps & Widelands::BUILDCAPS_FLAG) != 0) {
 				str += "  can place flag\n";
 			}
-			if (buildcaps & Widelands::BUILDCAPS_MINE) {
+			if ((buildcaps & Widelands::BUILDCAPS_MINE) != 0) {
 				str += "  can build mine\n";
 			}
-			if (buildcaps & Widelands::BUILDCAPS_PORT) {
+			if ((buildcaps & Widelands::BUILDCAPS_PORT) != 0) {
 				str += "  can build port\n";
 			}
 		}
 	}
-	if (coords_.field->nodecaps() & Widelands::MOVECAPS_WALK) {
+	if ((coords_.field->nodecaps() & Widelands::MOVECAPS_WALK) != 0) {
 		str += "is walkable\n";
 	}
-	if (coords_.field->nodecaps() & Widelands::MOVECAPS_SWIM) {
+	if ((coords_.field->nodecaps() & Widelands::MOVECAPS_SWIM) != 0) {
 		str += "is swimmable\n";
 	}
 	Widelands::MapIndex const i = coords_.field - &map_[0];
 	Widelands::PlayerNumber const nr_players = map_.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 		const Widelands::Player::Field& player_field = player->fields()[i];
-		str += (boost::format("Player %u:\n") % static_cast<unsigned int>(plnum)).str();
-		str += (boost::format("  military influence: %u\n") % player_field.military_influence).str();
+		str += format("Player %u:\n", static_cast<unsigned int>(plnum));
+		str += format("  military influence: %u\n", player_field.military_influence);
 
-		const Widelands::SeeUnseeNode vision = player_field.seeing;
-		str += (boost::format("  vision: %s\n") %
-		        (vision == Widelands::SeeUnseeNode::kVisible ?
-		            "revealed" :
-		            vision == Widelands::SeeUnseeNode::kPreviouslySeen ? "unseen" : "unexplored"))
-		          .str();
+		Widelands::Vision const vision = player_field.vision;
+		str += format("  vision: %u\n", vision.value());
 		{
-			Widelands::Time const time_last_surveyed =
+			Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];
 
-			if (time_last_surveyed != Widelands::never()) {
-				str += (boost::format("  D triangle last surveyed at %u: amount %u\n") %
-				        time_last_surveyed % static_cast<unsigned int>(player_field.resource_amounts.d))
-				          .str();
+			if (time_last_surveyed.is_valid()) {
+				str += format("  D triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
+				              static_cast<unsigned int>(player_field.resource_amounts.d));
 
 			} else {
 				str += "  D triangle never surveyed\n";
 			}
 		}
 		{
-			Widelands::Time const time_last_surveyed =
+			Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::R)];
 
-			if (time_last_surveyed != Widelands::never()) {
-				str += (boost::format("  R triangle last surveyed at %u: amount %u\n") %
-				        time_last_surveyed % static_cast<unsigned int>(player_field.resource_amounts.r))
-				          .str();
+			if (time_last_surveyed.is_valid()) {
+				str += format("  R triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
+				              static_cast<unsigned int>(player_field.resource_amounts.r));
 
 			} else {
 				str += "  R triangle never surveyed\n";
 			}
 		}
-		switch (vision) {
-		case Widelands::SeeUnseeNode::kUnexplored:
+
+		if (!vision.is_explored()) {
 			str += "  never seen\n";
-			break;
-		case Widelands::SeeUnseeNode::kPreviouslySeen: {
+		} else if (!vision.is_visible()) {
 			std::string animation_name = "(no animation)";
-			if (player_field.map_object_descr) {
+			if (player_field.map_object_descr != nullptr) {
 				animation_name = "(seen an animation)";
 			}
-			str += (boost::format("  last seen at %u:\n"
-			                      "    owner: %u\n"
-			                      "    immovable animation:\n%s\n"
-			                      "      ") %
-			        player_field.time_node_last_unseen %
-			        static_cast<unsigned int>(player_field.owner) % animation_name.c_str())
-			          .str();
-			break;
-		}
-		default:
-			str += "  visible\n";
-			break;
+			str += format("  last seen at %u:\n"
+			              "    owner: %u\n"
+			              "    immovable animation:\n%s\n"
+			              "      ",
+			              player_field.time_node_last_unseen.get(),
+			              static_cast<unsigned int>(player_field.owner), animation_name.c_str());
+		} else if (!vision.is_seen_by_us()) {
+			str += "  seen only by teammate(s)\n";
+		} else {
+			if (vision.is_revealed()) {
+				str += "  permanently revealed\n";
+			} else if (vision.is_hidden()) {
+				str += "  permanently hidden\n";
+			}
+			str += format("  seen %u times\n", vision.seers());
 		}
 	}
 	{
@@ -330,22 +268,23 @@ void FieldDebugWindow::think() {
 			const Widelands::ResourceAmount ramount = coords_.field->get_resources_amount();
 			const Widelands::ResourceAmount initial_amount = coords_.field->get_initial_res_amount();
 
-			str += (boost::format("Resource: %s\n") %
-			        ibase().egbase().world().get_resource(ridx)->name().c_str())
-			          .str();
+			str += format("Resource: %s\n",
+			              ibase().egbase().descriptions().get_resource_descr(ridx)->name().c_str());
 
-			str += (boost::format("  Amount: %i/%i\n") % static_cast<unsigned int>(ramount) %
-			        static_cast<unsigned int>(initial_amount))
-			          .str();
+			str += format("  Amount: %i/%i\n", static_cast<unsigned int>(ramount),
+			              static_cast<unsigned int>(initial_amount));
 		}
 	}
 
-	ui_field_.set_text(str.c_str());
+	if (str != text_) {
+		// Field properties changed -> update text_
+		ui_field_.set_text(str);
+		text_ = std::move(str);
+	}
 
 	// Immovable information
 	if (Widelands::BaseImmovable* const imm = coords_.field->get_immovable()) {
-		ui_immovable_.set_title(
-		   (boost::format("%s (%u)") % imm->descr().name().c_str() % imm->serial()).str());
+		ui_immovable_.set_title(format("%s (%u)", imm->descr().name(), imm->serial()));
 		ui_immovable_.set_enabled(true);
 	} else {
 		ui_immovable_.set_title("no immovable");
@@ -366,7 +305,7 @@ void FieldDebugWindow::think() {
 		for (std::vector<Widelands::Bob*>::iterator bob_iter = bobs.begin(); bob_iter != bobs.end();
 		     ++bob_iter) {
 
-			if ((*bob_iter) && mo && (*bob_iter)->serial() == mo->serial()) {
+			if (((*bob_iter) != nullptr) && (mo != nullptr) && (*bob_iter)->serial() == mo->serial()) {
 				// Remove from the bob list if we already
 				// have it in our list
 				toremove = true;
@@ -385,8 +324,8 @@ void FieldDebugWindow::think() {
 	}
 	// Add remaining
 	for (const Widelands::Bob* temp_bob : bobs) {
-		ui_bobs_.add((boost::format("%s (%u)") % temp_bob->descr().name() % temp_bob->serial()).str(),
-		             temp_bob->serial());
+		ui_bobs_.add(
+		   format("%s (%u)", temp_bob->descr().name(), temp_bob->serial()), temp_bob->serial());
 	}
 }
 

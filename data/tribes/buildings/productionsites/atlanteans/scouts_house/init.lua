@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_scouts_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Scout’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -17,15 +17,20 @@ tribes:new_productionsite_type {
       log = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 41, 44 },
+         hotspot = { 44, 49 },
       },
+   },
+
+   spritesheets = {
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 41, 44 },
-      }
+         frames = 3,
+         columns = 3,
+         rows = 1,
+         hotspot = { 44, 49 },
+      },
    },
 
    aihints = {},
@@ -42,7 +47,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
-         descname = _"scouting",
+         descname = _("scouting"),
          actions = {
             "consume=smoked_fish",
             "sleep=duration:30s",
@@ -52,5 +57,14 @@ tribes:new_productionsite_type {
             "callworker=scout"
          }
       },
+      targeted_scouting = {
+         descname = _("scouting"),
+         actions = {
+            "consume=smoked_fish,atlanteans_bread",
+            "callworker=targeted_scouting"
+         }
+      },
    },
 }
+
+pop_textdomain()

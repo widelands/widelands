@@ -90,13 +90,13 @@ will be the submodule name where this class is registered. For our example,
 Player would return ``"game"`` because it is defined in ``wl.game``.
 
 The class must also define two constructors, one that takes no arguments and
-is only used to create a empty class that is created for unpersisting. And a
+is only used to create an empty class that is created for unpersisting, and a
 second one that takes a ``lua_State *`` that is called when the construction
 is requested from Lua, that is if ``wl.game.Player()`` is called. Some (most?)
 classes can't be constructed from Lua and should then answer with
 ``report_error()``.
 
-En plus, a function ``__persist(lua_State *)`` and a function
+Additionally, a function ``__persist(lua_State *)`` and a function
 ``__unpersist(lua_State *)`` must be defined. They are discussed in the next
 section.
 

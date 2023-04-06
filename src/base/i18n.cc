@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,10 +12,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
+
+#define BASE_I18N_CC
 
 #include "base/i18n.h"
 
@@ -23,12 +24,14 @@
 #include <clocale>
 #endif
 
+#include <cstdlib>
 #include <map>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
+#include "base/string.h"
 #include "config.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 
 #ifdef __APPLE__
 #if LIBINTL_VERSION >= 0x001201
@@ -43,8 +46,6 @@
 #endif
 #endif
 
-extern int _nl_msg_cat_cntr;
-
 namespace i18n {
 
 /// A stack of textdomains. On entering a new textdomain, the old one gets
@@ -57,18 +58,46 @@ std::vector<std::pair<std::string, std::string>> textdomains;
 std::string env_locale;
 std::string locale;
 std::string localedir;
+std::string homedir;
+
+void log_i18n_off(const char* /*unused*/, const char* /*unused*/) {
+}
+void log_i18n_on(const char* type, const char* msg) {
+	log_dbg("%s: %s", type, msg);
+}
 
 }  // namespace
+
+static void (*log_i18n_if_desired_)(const char*, const char*) = log_i18n_off;
+
+void enable_verbose_i18n() {
+	log_i18n_if_desired_ = log_i18n_on;
+}
 
 /**
  * Translate a string with gettext
  */
 // TODO(unknown): Implement a workaround if gettext was not found
 char const* translate(char const* const str) {
+	log_i18n_if_desired_("gettext", str);
 	return gettext(str);
 }
 char const* translate(const std::string& str) {
-	return gettext(str.c_str());
+	return translate(str.c_str());
+}
+
+char const* pgettext_wrapper(const char* msgctxt, const char* msgid) {
+	log_i18n_if_desired_("pgettext", msgid);
+	return pgettext_expr(msgctxt, msgid);
+}
+char const* ngettext_wrapper(const char* singular, const char* plural, const int n) {
+	log_i18n_if_desired_("ngettext", singular);
+	return ngettext(singular, plural, n);
+}
+char const*
+npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n) {
+	log_i18n_if_desired_("npgettext", singular);
+	return npgettext_expr(msgctxt, singular, plural, n);
 }
 
 /**
@@ -82,6 +111,28 @@ const std::string& get_localedir() {
 	return localedir;
 }
 
+void set_homedir(const std::string& dname) {
+	homedir = dname;
+}
+
+const std::string& get_homedir() {
+	return homedir;
+}
+
+GenericTextdomain::GenericTextdomain() : lock_(MutexLock::ID::kI18N) {
+}
+GenericTextdomain::~GenericTextdomain() {
+	release_textdomain();
+}
+Textdomain::Textdomain(const std::string& name) {
+	grab_textdomain(name, get_localedir().c_str());
+}
+AddOnTextdomain::AddOnTextdomain(std::string addon, const int i18n_version) {
+	addon += '.';
+	addon += std::to_string(i18n_version);
+	grab_textdomain(addon, get_addon_locale_dir().c_str());
+}
+
 /**
  * Grab a given TextDomain. If a new one is grabbed, it is pushed on the stack.
  * On release, it is dropped and the previous one is re-grabbed instead.
@@ -90,15 +141,14 @@ const std::string& get_localedir() {
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
-void grab_textdomain(const std::string& domain) {
+void grab_textdomain(const std::string& domain, const char* ldir) {
 	char const* const dom = domain.c_str();
-	char const* const ldir = localedir.c_str();
 
 	bindtextdomain(dom, ldir);
 	bind_textdomain_codeset(dom, "UTF-8");
-	// log("textdomain %s @ %s\n", dom, ldir);
+	log_i18n_if_desired_("textdomain", (domain + " @ " + ldir).c_str());
 	textdomain(dom);
-	textdomains.push_back(std::make_pair(dom, ldir));
+	textdomains.emplace_back(dom, ldir);
 }
 
 /**
@@ -106,7 +156,7 @@ void grab_textdomain(const std::string& domain) {
  */
 void release_textdomain() {
 	if (textdomains.empty()) {
-		log("ERROR: trying to pop textdomain from empty stack");
+		log_err("trying to pop textdomain from empty stack");
 		return;
 	}
 	textdomains.pop_back();
@@ -151,6 +201,15 @@ void init_locale() {
 	SETLOCALE(LC_ALL, "C");
 	SETLOCALE(LC_MESSAGES, "");
 #endif
+}
+
+static std::string canonical_addon_locale_dir;
+const std::string& get_addon_locale_dir() {
+	if (canonical_addon_locale_dir.empty()) {
+		canonical_addon_locale_dir = g_fs->canonicalize_name(homedir + "/" + kAddOnLocaleDir);
+		assert(!canonical_addon_locale_dir.empty());
+	}
+	return canonical_addon_locale_dir;
 }
 
 /**
@@ -218,7 +277,7 @@ void set_locale(const std::string& name) {
 
 	std::string lang(name);
 
-	log("selected language: %s\n", lang.empty() ? "(system language)" : lang.c_str());
+	log_info("selected language: %s\n", lang.empty() ? "(system language)" : lang.c_str());
 
 #ifndef _WIN32
 #ifndef __AMIGAOS4__
@@ -236,7 +295,7 @@ void set_locale(const std::string& name) {
 	} else {
 		alt_str = lang;
 		// otherwise, try alternatives.
-		if (kAlternatives.count(lang)) {
+		if (kAlternatives.count(lang) != 0u) {
 			alt_str = kAlternatives.at(lang);
 		}
 	}
@@ -262,7 +321,7 @@ void set_locale(const std::string& name) {
 
 #ifdef __linux__
 	char* res = nullptr;
-	char const* encoding[] = {"", ".utf-8", "@euro", ".UTF-8"};
+	char const* encodings[] = {"", ".utf-8", "@euro", ".UTF-8"};
 	std::size_t found = alt_str.find(',', 0);
 	bool leave_while = false;
 	// try every possible combination of alternative and encoding
@@ -270,17 +329,15 @@ void set_locale(const std::string& name) {
 		std::string base_locale = alt_str.substr(0, int(found));
 		alt_str = alt_str.erase(0, int(found) + 1);
 
-		for (int j = 0; j < 4; ++j) {
-			std::string try_locale = base_locale + encoding[j];
+		for (char const* encoding : encodings) {
+			std::string try_locale = base_locale + encoding;
 			res = SETLOCALE(LC_MESSAGES, try_locale.c_str());
-			if (res) {
+			if (res != nullptr) {
 				locale = try_locale;
-				log("using locale %s\n", try_locale.c_str());
+				log_info("using locale %s\n", try_locale.c_str());
 				leave_while = true;
 				break;
-			} else {
-				// log("locale is not working: %s\n", try_locale.c_str());
-			}
+			}  // log("locale is not working: %s\n", try_locale.c_str());
 		}
 		if (leave_while) {
 			break;
@@ -293,8 +350,8 @@ void set_locale(const std::string& name) {
 		setenv("LANG", locale.c_str(), 1);
 		setenv("LANGUAGE", locale.c_str(), 1);
 	} else {
-		log("No corresponding locale found\n");
-		log(" - Set LANGUAGE, LANG and LC_ALL to '%s'\n", lang.c_str());
+		log_warn("No corresponding locale found\n");
+		log_warn(" - Set LANGUAGE, LANG and LC_ALL to '%s'\n", lang.c_str());
 
 		setenv("LANGUAGE", lang.c_str(), 1);
 		setenv("LANG", lang.c_str(), 1);
@@ -303,8 +360,8 @@ void set_locale(const std::string& name) {
 		try {
 			SETLOCALE(LC_MESSAGES, "en_US.utf8");  // set locale according to the env. variables
 			                                       // --> see  $ man 3 setlocale
-			log(" - Set system locale to 'en_US.utf8' to make '%s' accessible to libintl\n",
-			    lang.c_str());
+			log_warn(" - Set system locale to 'en_US.utf8' to make '%s' accessible to libintl\n",
+			         lang.c_str());
 		} catch (std::exception&) {
 			SETLOCALE(LC_MESSAGES, "");  // set locale according to the env. variables
 			                             // --> see  $ man 3 setlocale
@@ -313,9 +370,6 @@ void set_locale(const std::string& name) {
 		// maybe, do another check with the return value (?)
 		locale = lang;
 	}
-
-	/* Finally make changes known.  */
-	++_nl_msg_cat_cntr;
 #endif
 
 	SETLOCALE(LC_ALL, "");  //  call to libintl
@@ -343,24 +397,24 @@ std::string localize_list(const std::vector<std::string>& items, ConcatenateWith
 			if (listtype == ConcatenateWith::AMPERSAND) {
 				/** TRANSLATORS: Concatenate the last 2 items on a list. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = (boost::format(_("%1$s & %2$s")) % result % (*it)).str();
+				result = format(_("%1$s & %2$s"), result, (*it));
 			} else if (listtype == ConcatenateWith::OR) {
 				/** TRANSLATORS: Join the last 2 items on a list with "or". */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = (boost::format(_("%1$s or %2$s")) % result % (*it)).str();
+				result = format(_("%1$s or %2$s"), result, (*it));
 			} else if (listtype == ConcatenateWith::COMMA) {
 				/** TRANSLATORS: Join the last 2 items on a list with a comma. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = (boost::format(_("%1$s, %2$s")) % result % (*it)).str();
+				result = format(_("%1$s, %2$s"), result, (*it));
 			} else {
 				/** TRANSLATORS: Concatenate the last 2 items on a list. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = (boost::format(_("%1$s and %2$s")) % result % (*it)).str();
+				result = format(_("%1$s and %2$s"), result, (*it));
 			}
 		} else {
 			/** TRANSLATORS: Concatenate 2 items at in the middle of a list. */
 			/** TRANSLATORS: RTL languages might want to change the word order here. */
-			result = (boost::format(_("%1$s, %2$s")) % result % (*it)).str();
+			result = format(_("%1$s, %2$s"), result, (*it));
 		}
 	}
 	return result;
@@ -370,7 +424,7 @@ std::string join_sentences(const std::string& sentence1, const std::string& sent
 	i18n::Textdomain td("widelands");
 	/** TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably
 	 * want to lose the blank space here. */
-	return (boost::format(pgettext("sentence_separator", "%1% %2%")) % sentence1 % sentence2).str();
+	return format(pgettext("sentence_separator", "%1% %2%"), sentence1, sentence2);
 }
 
 }  // namespace i18n

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,20 +21,19 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/productionsite.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
 
 namespace Widelands {
 
 MarketDescr::MarketDescr(const std::string& init_descname,
                          const LuaTable& table,
-                         const Tribes& tribes)
-   : BuildingDescr(init_descname, MapObjectType::MARKET, table, tribes) {
-	i18n::Textdomain td("tribes");
+                         Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::MARKET, table, descriptions) {
 
-	DescriptionIndex const woi = tribes.worker_index(table.get_string("carrier"));
-	if (!tribes.worker_exists(woi)) {
+	DescriptionIndex const woi = descriptions.worker_index(table.get_string("carrier"));
+	if (!descriptions.worker_exists(woi)) {
 		throw wexception("The tribe does not define the worker in 'carrier'.");
 	}
 	carrier_ = woi;
@@ -61,9 +59,6 @@ bool Market::TradeOrder::fulfilled() const {
 
 // TODO(sirver,trading): This needs to implement 'set_economy'. Maybe common code can be shared.
 Market::Market(const MarketDescr& the_descr) : Building(the_descr) {
-}
-
-Market::~Market() {
 }
 
 void Market::new_trade(const int trade_id,
@@ -116,7 +111,11 @@ void Market::worker_arrived_callback(
 	NEVER_HERE();  // We should have found and handled a match by now.
 }
 
-void Market::ware_arrived_callback(Game& g, InputQueue*, DescriptionIndex, Worker*, void* data) {
+void Market::ware_arrived_callback(Game& g,
+                                   InputQueue* /* queue */,
+                                   DescriptionIndex /* index */,
+                                   Worker* /* worker */,
+                                   void* data) {
 	Market& market = *static_cast<Market*>(data);
 	market.try_launching_batch(&g);
 }
@@ -144,12 +143,12 @@ void Market::try_launching_batch(Game* game) {
 	}
 }
 
-bool Market::is_ready_to_launch_batch(const int trade_id) {
+bool Market::is_ready_to_launch_batch(const int trade_id) const {
 	const auto it = trade_orders_.find(trade_id);
 	if (it == trade_orders_.end()) {
 		return false;
 	}
-	auto& trade_order = it->second;
+	const auto& trade_order = it->second;
 	assert(!trade_order.fulfilled());
 
 	// Do we have all necessary wares for a batch?
@@ -185,7 +184,7 @@ void Market::launch_batch(const int trade_id, Game* game) {
 
 			// Give the carrier a ware.
 			WareInstance* ware =
-			   new WareInstance(item_pair.first, game->tribes().get_ware_descr(item_pair.first));
+			   new WareInstance(item_pair.first, game->descriptions().get_ware_descr(item_pair.first));
 			ware->init(*game);
 			carrier->set_carried_ware(*game, ware);
 
@@ -213,14 +212,14 @@ void Market::ensure_wares_queue_exists(int ware_index) {
 	wares_queue_[ware_index]->set_callback(Market::ware_arrived_callback, this);
 }
 
-InputQueue& Market::inputqueue(DescriptionIndex index, WareWorker ware_worker) {
+InputQueue& Market::inputqueue(DescriptionIndex index, WareWorker ware_worker, const Request* r) {
 	assert(ware_worker == wwWARE);
 	auto it = wares_queue_.find(index);
 	if (it != wares_queue_.end()) {
 		return *it->second;
 	}
 	// The parent will throw an exception.
-	return Building::inputqueue(index, ware_worker);
+	return Building::inputqueue(index, ware_worker, r);
 }
 
 void Market::cleanup(EditorGameBase& egbase) {
@@ -235,15 +234,16 @@ void Market::traded_ware_arrived(const int trade_id,
                                  Game* game) {
 	auto& trade_order = trade_orders_.at(trade_id);
 
-	WareInstance* ware = new WareInstance(ware_index, game->tribes().get_ware_descr(ware_index));
+	WareInstance* ware =
+	   new WareInstance(ware_index, game->descriptions().get_ware_descr(ware_index));
 	ware->init(*game);
 
 	// TODO(sirver,trading): This is a hack. We should have a worker that
 	// carriers stuff out. At the moment this assumes this market is barbarians
 	// (which is always correct right now), creates a carrier for each received
 	// ware to drop it off. The carrier then leaves the building and goes home.
-	const WorkerDescr& w_desc =
-	   *game->tribes().get_worker_descr(game->tribes().worker_index("barbarians_carrier"));
+	const WorkerDescr& w_desc = *game->descriptions().get_worker_descr(
+	   game->descriptions().worker_index("barbarians_carrier"));
 	auto& worker = w_desc.create(*game, get_owner(), this, position_);
 	worker.start_task_dropoff(*game, *ware);
 	++trade_order.received_traded_wares_in_this_batch;

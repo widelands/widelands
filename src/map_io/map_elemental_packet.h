@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,15 +12,16 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_MAP_IO_MAP_ELEMENTAL_PACKET_H
 #define WL_MAP_IO_MAP_ELEMENTAL_PACKET_H
 
+#include <cstdint>
 #include <string>
+#include <vector>
 
 #include "map_io/map_data_packet.h"
 
@@ -42,13 +43,13 @@ struct MapElementalPacket {
 	/// properly configured EditorGameBase object.
 	void pre_read(FileSystem&, Map*);
 
-	uint32_t get_version() {
+	[[nodiscard]] uint32_t get_version() const {
 		return version_;
 	}
 
 	/// If this map was created before the one_world merge was done, this returns
 	/// the old world name, otherwise "".
-	const std::string& old_world_name() const {
+	[[nodiscard]] const std::string& old_world_name() const {
 		return old_world_name_;
 	}
 

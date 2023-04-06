@@ -221,8 +221,8 @@ blackland = {
             name = "ashes",
             weight = 1,
             coast_terrains = { "ashes2" },
-            land_terrains = { "ashes" },
-            upper_terrains = { "ashes" },
+            land_terrains = { "ashes1" },
+            upper_terrains = { "ashes1" },
          },
       },
       wasteland = {
@@ -413,10 +413,10 @@ desert = {
             weight = 1,
             mountainfoot_terrains = { "mountainmeadow" },
             mountain_terrains = {
-               "mountain1", "mountain2", "mountain3", "mountain4"
+               "mountain1", "mountain2"
             },
             snow_terrains = {
-               "mountain1", "mountain2", "mountain3", "mountain4"
+               "mountain3", "mountain4"
             },
          }
       }
@@ -580,8 +580,8 @@ winterland = {
             name = "land",
             weight = 1,
             coast_terrains = { "winter_beach" },
-            land_terrains = { "tundra", "tundra2", "tundra3" },
-            upper_terrains = { "tundra", "tundra2", "tundra3" },
+            land_terrains = { "winter_taiga1", "winter_taiga2", "winter_taiga3" },
+            upper_terrains = { "winter_taiga1", "winter_taiga2", "winter_taiga3" },
          },
       },
       wasteland = {
@@ -589,7 +589,7 @@ winterland = {
             name = "wasteland",
             weight = 1,
             inner_terrains = { "tundra_taiga" },
-            outer_terrains = { "tundra" },
+            outer_terrains = { "winter_tundra", "snow" },
          },
       },
       mountains = {
@@ -597,11 +597,8 @@ winterland = {
             name = "mountains",
             weight = 1,
             mountainfoot_terrains = { "tundra_taiga" },
-            mountain_terrains = {
-               "winter_mountain1", "winter_mountain2",
-               "winter_mountain3", "winter_mountain4"
-            },
-            snow_terrains = { "snow" },
+            mountain_terrains = { "winter_mountain3", "winter_mountain4" },
+            snow_terrains = { "winter_mountain1", "winter_mountain2" },
          }
       }
    }, -- areas
@@ -721,8 +718,8 @@ winterland = {
 }
 
 return {
-   greenland = greenland,
-   blackland = blackland,
+   summer = greenland,
+   wasteland = blackland,
    desert = desert,
-   winterland = winterland,
+   winter = winterland
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,13 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "logic/game.h"
 
+#include <cstdlib>
 #include <memory>
 #include <string>
 
@@ -32,17 +32,20 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
 #include "economy/economy.h"
 #include "economy/portdock.h"
+#include "editor/editorinteractive.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
+#include "logic/addons.h"
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
@@ -59,13 +62,18 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
+#include "logic/replay_game_controller.h"
 #include "logic/single_player_game_controller.h"
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+#include "logic/training_wheels.h"
+#endif
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
+#include "wui/interactive_spectator.h"
 
 namespace Widelands {
 
@@ -79,7 +87,8 @@ Game::SyncWrapper::~SyncWrapper() {
 				g_fs->fs_unlink(dumpfname_);
 			} catch (const FileError& e) {
 				// not really a problem if deletion fails, but we'll log it
-				log("Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
+				log_warn_time(game_.get_gametime(), "Deleting syncstream file %s failed: %s\n",
+				              dumpfname_.c_str(), e.what());
 			}
 		}
 	}
@@ -94,18 +103,20 @@ void Game::SyncWrapper::start_dump(const std::string& fname) {
 
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
-	uint32_t time = game_.get_gametime();
-	log("[sync:%08u t=%6u]", counter_, time);
-	for (size_t i = 0; i < size; ++i)
-		log(" %02x", (static_cast<uint8_t const*>(sync_data))[i]);
-	log("\n");
+	const Time& time = game_.get_gametime();
+	log_dbg_time(game_.get_gametime(), "[sync:%08u t=%6u]", counter_, time.get());
+	for (size_t i = 0; i < size; ++i) {
+		log_dbg_time(game_.get_gametime(), " %02x", (static_cast<uint8_t const*>(sync_data))[i]);
+	}
+	log_dbg_time(game_.get_gametime(), "\n");
 #endif
 
 	if (dump_ != nullptr && static_cast<int32_t>(counter_ - next_diskspacecheck_) >= 0) {
 		next_diskspacecheck_ = counter_ + 16 * 1024 * 1024;
 
 		if (g_fs->disk_space() < kMinimumDiskSpace) {
-			log("Stop writing to syncstream file: disk is getting full.\n");
+			log_warn_time(
+			   game_.get_gametime(), "Stop writing to syncstream file: disk is getting full.\n");
 			dump_.reset();
 		}
 	}
@@ -114,7 +125,9 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 		try {
 			dump_->data(sync_data, size);
 		} catch (const WException&) {
-			log("Writing to syncstream file %s failed. Stop synctream dump.\n", dumpfname_.c_str());
+			log_warn_time(game_.get_gametime(),
+			              "Writing to syncstream file %s failed. Stop syncstream dump.\n",
+			              dumpfname_.c_str());
 			dump_.reset();
 		}
 		assert(current_excerpt_id_ < kExcerptSize);
@@ -127,30 +140,22 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 
 Game::Game()
    : EditorGameBase(new LuaGameInterface(this)),
-     forester_cache_(),
      syncwrapper_(*this, synchash_),
-     ctrl_(nullptr),
-     writereplay_(true),
-     writesyncstream_(false),
-     ai_training_mode_(false),
-     auto_speed_(false),
-     state_(gs_notrunning),
      cmdqueue_(*this),
-     scenario_difficulty_(kScenarioDifficultyNotSet),
      /** TRANSLATORS: Win condition for this game has not been set. */
-     win_condition_displayname_(_("Not set")),
-     replay_(false) {
+     win_condition_displayname_(_("Not set")) {
 	Economy::initialize_serial();
 }
 
-Game::~Game() {
+Game::~Game() {  // NOLINT
+	              // ReplayWriter needs this
 }
 
 void Game::sync_reset() {
 	syncwrapper_.counter_ = 0;
 
 	synchash_.reset();
-	log("[sync] Reset\n");
+	verb_log_info_time(get_gametime(), "[sync] Reset\n");
 }
 
 /**
@@ -161,9 +166,12 @@ void Game::sync_reset() {
 InteractivePlayer* Game::get_ipl() {
 	return dynamic_cast<InteractivePlayer*>(get_ibase());
 }
+const InteractivePlayer* Game::get_ipl() const {
+	return dynamic_cast<const InteractivePlayer*>(get_ibase());
+}
 
-void Game::set_game_controller(GameController* const ctrl) {
-	ctrl_ = ctrl;
+void Game::set_game_controller(std::shared_ptr<GameController> c) {
+	ctrl_ = c;
 }
 
 void Game::set_ai_training_mode(const bool mode) {
@@ -175,7 +183,7 @@ void Game::set_auto_speed(const bool mode) {
 }
 
 GameController* Game::game_controller() {
-	return ctrl_;
+	return ctrl_.get();
 }
 
 void Game::set_write_replay(bool const wr) {
@@ -202,90 +210,124 @@ void Game::save_syncstream(bool const save) {
 	syncwrapper_.syncstreamsave_ = save;
 }
 
-bool Game::run_splayer_scenario_direct(const std::string& mapname,
+void Game::postload_addons_before_loading() {
+	if (did_postload_addons_before_loading_) {
+		return;
+	}
+	did_postload_addons_before_loading_ = true;
+	delete_world_and_tribes();
+	mutable_descriptions()->ensure_tribes_are_registered();
+	postload_addons();
+}
+
+// TODO(Nordfriese): Needed for v1.0 savegame compatibility, remove after v1.1
+void Game::check_legacy_addons_desync_magic() {
+	bool needed = false;
+	for (const auto& a : enabled_addons()) {
+		if (a->category == AddOns::AddOnCategory::kWorld ||
+		    a->category == AddOns::AddOnCategory::kTribes) {
+			needed = true;
+			break;
+		}
+	}
+	if (!needed) {
+		postload_addons();
+		return;
+	}
+
+	did_postload_addons_before_loading_ = true;
+	did_postload_addons_ = false;
+
+	delete_world_and_tribes();
+	descriptions();
+
+	// Cyclic dependency. Can and must be gotten rid of when fixing the above TO-DO.
+	EditorInteractive::load_world_units(nullptr, *this);
+	load_all_tribes();
+
+	postload_addons();
+}
+
+bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
                                        const std::string& script_to_run) {
+	full_cleanup();
+	list_of_scenarios_ = list_of_scenarios;
+	assert(!list_of_scenarios_.empty());
 	// Replays can't handle scenarios
 	set_write_replay(false);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+	training_wheels_wanted_ = false;
+#endif
 
-	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
+	std::unique_ptr<MapLoader> maploader(
+	   mutable_map()->get_correct_loader(list_of_scenarios.front()));
 	if (!maploader) {
-		throw wexception("could not load \"%s\"", mapname.c_str());
+		throw wexception("could not load \"%s\"", list_of_scenarios.front().c_str());
 	}
 
-	create_loader_ui({"general_game"}, false);
+	// Need to do this first so we can set the theme and background.
+	maploader->preload_map(true, &enabled_addons());
 
-	step_loader_ui(_("Preloading map…"));
-	maploader->preload_map(true);
-	change_loader_ui_background(map().get_background());
+	create_loader_ui({"general_game"}, false /* no game tips in scenarios */,
+	                 map().get_background_theme(), map().get_background(), true);
 
-	step_loader_ui(_("Loading world…"));
-	world();
-	step_loader_ui(_("Loading tribes…"));
-	tribes();
+	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
-	// If the scenario has custrom tribe entites, load them.
-	const std::string custom_tribe_script = mapname + "/scripting/tribes/init.lua";
-	if (g_fs->file_exists(custom_tribe_script)) {
-		lua().run_script(custom_tribe_script);
-	}
+	// If the map is a scenario with custom tribe entites, load them too.
+	mutable_descriptions()->register_scenario_tribes(map().filesystem());
 
 	// We have to create the players here.
-	step_loader_ui(_("Creating players…"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		// If tribe name is empty, pick a random tribe
 		std::string tribe = map().get_scenario_player_tribe(p);
 		if (tribe.empty()) {
-			log("Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
-			const DescriptionIndex random = std::rand() % tribes().nrtribes();  // NOLINT
-			tribe = tribes().get_tribe_descr(random)->name();
+			verb_log_info_time(
+			   get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
+			const DescriptionIndex random = RNG::static_rand(descriptions().nr_tribes());
+			tribe = descriptions().get_tribe_descr(random)->name();
 		}
-		add_player(p, 0, tribe, map().get_scenario_player_name(p));
+		add_player(p, 0, kPlayerColors[p - 1], tribe, map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	win_condition_displayname_ = "Scenario";
 
 	set_ibase(new InteractivePlayer(*this, get_config_section(), 1, false));
 
-	step_loader_ui(_("Loading map…"));
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
-	set_game_controller(new SinglePlayerGameController(*this, true, 1));
+	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, 1));
 	try {
-		bool const result =
-		   run(StartGameType::kSinglePlayerScenario, script_to_run, false, "single_player");
-		delete ctrl_;
-		ctrl_ = nullptr;
+		bool const result = run(StartGameType::kSinglePlayerScenario, script_to_run, "single_player");
+		ctrl_.reset();
 		return result;
 	} catch (...) {
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		throw;
 	}
 }
 
 /**
  * Initialize the game based on the given settings.
- *
  */
 void Game::init_newgame(const GameSettings& settings) {
 	assert(has_loader_ui());
 
-	step_loader_ui(_("Preloading map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
-	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
-	assert(maploader != nullptr);
-	maploader->preload_map(settings.scenario);
-	change_loader_ui_background(map().get_background());
-
-	step_loader_ui(_("Loading world…"));
-	world();
-
-	step_loader_ui(_("Loading tribes…"));
-	tribes();
-
-	step_loader_ui(_("Creating players…"));
+	std::unique_ptr<MapLoader> maploader;
+	if (!settings.mapfilename.empty()) {
+		maploader = mutable_map()->get_correct_loader(settings.mapfilename);
+		assert(maploader);
+		maploader->preload_map(settings.scenario, &enabled_addons());
+		postload_addons_before_loading();
+	} else {
+		// TODO(matthiakl): Once random games support world Add-Ons, call
+		// postload_addons_before_loading() here as well
+		postload_addons();
+		did_postload_addons_before_loading_ = true;
+	}
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
@@ -295,14 +337,16 @@ void Game::init_newgame(const GameSettings& settings) {
 		if (playersettings.state == PlayerSettings::State::kClosed ||
 		    playersettings.state == PlayerSettings::State::kOpen) {
 			continue;
-		} else if (playersettings.state == PlayerSettings::State::kShared) {
+		}
+		if (playersettings.state == PlayerSettings::State::kShared) {
 			shared.push_back(playersettings);
 			shared_num.push_back(i + 1);
 			continue;
 		}
 
-		add_player(i + 1, playersettings.initialization_index, playersettings.tribe,
-		           playersettings.name, playersettings.team);
+		add_player(i + 1, playersettings.initialization_index, playersettings.color,
+		           playersettings.tribe, playersettings.name, playersettings.team);
+		get_player(i + 1)->set_random_tribe(playersettings.random_tribe);
 		get_player(i + 1)->set_ai(playersettings.ai);
 	}
 
@@ -313,14 +357,20 @@ void Game::init_newgame(const GameSettings& settings) {
 		   ->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	step_loader_ui(_("Loading map…"));
-	maploader->load_map_complete(*this, settings.scenario ?
-	                                       Widelands::MapLoader::LoadType::kScenario :
-	                                       Widelands::MapLoader::LoadType::kGame);
+	if (!settings.mapfilename.empty()) {
+		assert(maploader);
+		maploader->load_map_complete(*this, settings.scenario ?
+                                             Widelands::MapLoader::LoadType::kScenario :
+                                             Widelands::MapLoader::LoadType::kGame);
+	} else {
+		// Normally the map loader takes care of this, but if the map was
+		// previously created for us we need to call this manually
+		allocate_player_maps();
+	}
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		step_loader_ui(_("Initializing game…"));
+		Notifications::publish(UI::NoteLoadingMessage(_("Initializing game…")));
 		if (settings.peaceful) {
 			for (uint32_t i = 1; i < settings.players.size(); ++i) {
 				if (Player* p1 = get_player(i)) {
@@ -333,7 +383,30 @@ void Game::init_newgame(const GameSettings& settings) {
 				}
 			}
 		}
+		if (settings.custom_starting_positions) {
+			iterate_players_existing(p, map().get_nrplayers(), *this, pl) {
+				if (settings.get_tribeinfo(pl->tribe().name())
+				       .initializations[pl->initialization_index()]
+				       .uses_map_starting_position) {
+					pl->start_picking_custom_starting_position();
+				}
+			}
+		}
 
+		if (settings.fogless) {
+			Coords c;
+			iterate_players_existing(p, map().get_nrplayers(), *this, pl) {
+				c.x = 0;
+				for (; c.x < map().get_width(); ++c.x) {
+					c.y = 0;
+					for (; c.y < map().get_height(); ++c.y) {
+						pl->hide_or_reveal_field(c, HideOrRevealFieldMode::kReveal);
+					}
+				}
+			}
+		}
+
+		win_condition_duration_ = settings.win_condition_duration;
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
@@ -342,7 +415,7 @@ void Game::init_newgame(const GameSettings& settings) {
 			cr->resume();
 		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
-		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
+		enqueue_command(new CmdLuaCoroutine(get_gametime() + Duration(100), std::move(cr)));
 	} else {
 		win_condition_displayname_ = "Scenario";
 	}
@@ -357,22 +430,36 @@ void Game::init_newgame(const GameSettings& settings) {
 void Game::init_savegame(const GameSettings& settings) {
 	assert(has_loader_ui());
 
-	step_loader_ui(_("Preloading map…"));
+	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 	try {
 		GameLoader gl(settings.mapfilename, *this);
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
-		change_loader_ui_background(gpdp.get_background());
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		win_condition_duration_ = gpdp.get_win_condition_duration();
+
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+		training_wheels_wanted_ =
+		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
+			verb_log_dbg("Training wheel from savegame");
+		}
+#endif
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
 
-		step_loader_ui(_("Loading…"));
 		gl.load_game(settings.multiplayer);
+
+		// Discover the links between resources and geologist flags,
+		// dependencies of productionsites etc.
+		postload_addons();
+
 		// Players might have selected a different AI type
 		for (uint8_t i = 0; i < settings.players.size(); ++i) {
 			const PlayerSettings& playersettings = settings.players[i];
@@ -386,46 +473,96 @@ void Game::init_savegame(const GameSettings& settings) {
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
-	create_loader_ui({"general_game", "singleplayer"}, false);
+	full_cleanup();  // Reset and cleanup all values
+
 	int8_t player_nr;
-
-	step_loader_ui(_("Preloading map…"));
-
 	{
 		GameLoader gl(filename, *this);
 
 		Widelands::GamePreloadPacket gpdp;
+		// Need to do this first so we can set the theme and background
 		gl.preload_game(gpdp);
-		change_loader_ui_background(gpdp.get_background());
+
+		create_loader_ui({"general_game", "singleplayer"}, true, gpdp.get_background_theme(),
+		                 gpdp.get_background(), true);
+		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		win_condition_duration_ = gpdp.get_win_condition_duration();
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+		training_wheels_wanted_ =
+		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
+			verb_log_dbg("Training wheel from savegame");
+		}
+#endif
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
 
 		player_nr = gpdp.get_player_nr();
-		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
+		InteractivePlayer* ipl = new InteractivePlayer(*this, get_config_section(), player_nr, false);
+		set_ibase(ipl);
 
-		step_loader_ui(_("Loading…"));
 		gl.load_game();
+		postload_addons();
+
+		ipl->info_panel_fast_forward_message_queue();
 	}
 
 	// Store the filename for further saves
 	save_handler().set_current_filename(filename);
 
-	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
+	set_game_controller(std::make_shared<SinglePlayerGameController>(*this, true, player_nr));
 	try {
-		bool const result = run(StartGameType::kSaveGame, script_to_run, false, "single_player");
-		delete ctrl_;
-		ctrl_ = nullptr;
+		bool const result = run(StartGameType::kSaveGame, script_to_run, "single_player");
+		ctrl_.reset();
 		return result;
 	} catch (...) {
-		delete ctrl_;
-		ctrl_ = nullptr;
+		ctrl_.reset();
 		throw;
 	}
 }
+
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+bool Game::acquire_training_wheel_lock(const std::string& objective) {
+	if (training_wheels_ != nullptr) {
+		return training_wheels_->acquire_lock(objective);
+	}
+	return false;
+}
+void Game::release_training_wheel_lock() {
+	if (training_wheels_ != nullptr) {
+		training_wheels_->release_lock();
+	}
+}
+void Game::mark_training_wheel_as_solved(const std::string& objective) {
+	if (training_wheels_ == nullptr) {
+		training_wheels_.reset(new TrainingWheels(lua()));
+	}
+	training_wheels_->mark_as_solved(objective, training_wheels_wanted_);
+}
+void Game::run_training_wheel(const std::string& objective, bool force) {
+	if (training_wheels_ == nullptr) {
+		training_wheels_.reset(new TrainingWheels(lua()));
+	}
+	training_wheels_->run(objective, force);
+}
+void Game::skip_training_wheel(const std::string& objective) {
+	if (training_wheels_ != nullptr) {
+		training_wheels_->skip(objective, training_wheels_wanted_);
+	}
+}
+bool Game::training_wheels_wanted() const {
+	return training_wheels_wanted_;
+}
+std::string Game::active_training_wheel() const {
+	return training_wheels_ ? training_wheels_->current_objective() : "";
+}
+#endif
 
 /**
  * Called for every game after loading (from a savegame or just from a map
@@ -458,24 +595,53 @@ void Game::postload() {
  */
 bool Game::run(StartGameType const start_game_type,
                const std::string& script_to_run,
-               bool replay,
                const std::string& prefix_for_replays) {
 	assert(has_loader_ui());
 
-	replay_ = replay;
 	postload();
 
+	InteractivePlayer* ipl = get_ipl();
+
 	if (start_game_type != StartGameType::kSaveGame) {
+		// Check whether we need to disable replays because of add-ons.
+		// For savegames this has already been done by the game class packet.
+		if (writereplay_) {
+			for (const auto& a : enabled_addons()) {
+				if (!a->sync_safe) {
+					set_write_replay(false);
+					break;
+				}
+			}
+			if (writereplay_) {
+				// We need to check all enabled add-ons as well because enabled_addons() does
+				// not contain e.g. desync-prone starting condition or win condition add-ons.
+				for (const auto& pair : AddOns::g_addons) {
+					if (pair.second && !pair.first->sync_safe) {
+						set_write_replay(false);
+						break;
+					}
+				}
+			}
+		}
+
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == StartGameType::kMap) {
-			step_loader_ui(_("Creating player infrastructure…"));
+			/** TRANSLATORS: All players (plural) */
+			Notifications::publish(UI::NoteLoadingMessage(_("Creating player infrastructure…")));
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+			training_wheels_wanted_ =
+			   get_config_bool("training_wheels", true) && ipl && !ipl->is_multiplayer();
+#endif
 		} else {
 			// Is a scenario!
 			// Replays can't handle scenarios
 			set_write_replay(false);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+			training_wheels_wanted_ = false;
+#endif
 			iterate_players_existing_novar(p, nr_players, *this) {
 				if (!map().get_starting_pos(p)) {
 					throw WLWarning(_("Missing starting position"),
@@ -488,25 +654,25 @@ bool Game::run(StartGameType const start_game_type,
 			}
 		}
 
-		if (get_ipl()) {
+		if (ipl != nullptr) {
 			// Scroll map to starting position for new games.
 			// Loaded games are handled in GameInteractivePlayerPacket for single player, and in
 			// InteractiveGameBase::start() for multiplayer.
-			get_ipl()->map_view()->scroll_to_field(
-			   map().get_starting_pos(get_ipl()->player_number()), MapView::Transition::Jump);
+			ipl->map_view()->scroll_to_field(
+			   map().get_starting_pos(ipl->player_number()), MapView::Transition::Jump);
 		}
 
 		// Prepare the map, set default textures
-		mutable_map()->recalc_default_resources(world());
+		mutable_map()->recalc_default_resources(descriptions());
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players
 		iterate_player_numbers(p, nr_players) {
 			const Player* const plr = get_player(p);
 			const std::string no_name;
-			const std::string& player_tribe = plr ? plr->tribe().name() : no_name;
-			const std::string& player_name = plr ? plr->get_name() : no_name;
-			const std::string& player_ai = plr ? plr->get_ai() : no_name;
+			const std::string& player_tribe = plr != nullptr ? plr->tribe().name() : no_name;
+			const std::string& player_name = plr != nullptr ? plr->get_name() : no_name;
+			const std::string& player_ai = plr != nullptr ? plr->get_ai() : no_name;
 			mutable_map()->set_scenario_player_tribe(p, player_tribe);
 			mutable_map()->set_scenario_player_name(p, player_name);
 			mutable_map()->set_scenario_player_ai(p, player_ai);
@@ -518,28 +684,57 @@ bool Game::run(StartGameType const start_game_type,
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/init.lua"));
 		} else if (start_game_type == StartGameType::kMultiPlayerScenario) {
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
+		} else {
+			// Run all selected add-on scripts (not in scenarios)
+			for (const auto& addon : enabled_addons()) {
+				if (addon->category == AddOns::AddOnCategory::kScript) {
+					enqueue_command(new CmdLuaScript(
+					   get_gametime() + Duration(1), kAddOnDir + FileSystem::file_separator() +
+					                                    addon->internal_name +
+					                                    FileSystem::file_separator() + "init.lua"));
+				}
+			}
 		}
 
 		// Queue first statistics calculation
-		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
+		enqueue_command(new CmdCalculateStatistics(get_gametime() + Duration(1)));
 	}
 
-	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
-	                               start_game_type == StartGameType::kSaveGame)) {
-		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
+	dynamic_cast<InteractiveGameBase&>(*get_ibase()).rebuild_main_menu();
+
+	if (!script_to_run.empty()) {
+		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
 	}
+
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+	// We don't run the training wheel objectives in scenarios, but we want the objectives available
+	// for marking them as solved if a scenario teaches the same content.
+	if (training_wheels_wanted_) {
+		if (training_wheels_ == nullptr) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+		}
+		if (!training_wheels_->has_objectives()) {
+			// Nothing to do, so let's free the memory
+			training_wheels_.reset(nullptr);
+		} else {
+			// Just like with scenarios, replays will desync, so we switch them off.
+			set_write_replay(false);
+		}
+	}
+#endif
 
 	if (writereplay_ || writesyncstream_) {
 		// Derive a replay filename from the current time
-		const std::string fname = kReplayDir + g_fs->file_separator() + std::string(timestring()) +
-		                          std::string("_") + prefix_for_replays + kReplayExtension;
+		const std::string fname = kReplayDir + FileSystem::file_separator() +
+		                          std::string(timestring()) + std::string("_") + prefix_for_replays +
+		                          kReplayExtension;
 		if (writereplay_) {
-			log("Starting replay writer\n");
+			verb_log_info_time(get_gametime(), "Starting replay writer\n");
 
 			assert(!replaywriter_);
 			replaywriter_.reset(new ReplayWriter(*this, fname));
 
-			log("Replay writer has started\n");
+			verb_log_info_time(get_gametime(), "Replay writer has started\n");
 		}
 
 		if (writesyncstream_) {
@@ -547,9 +742,10 @@ bool Game::run(StartGameType const start_game_type,
 		}
 	}
 
-	sync_reset();
+	postload_addons();
 
-	load_graphics();
+	sync_reset();
+	Notifications::publish(UI::NoteLoadingMessage(_("Initializing…")));
 
 #ifdef _WIN32
 	//  Clear the event queue before starting game because we don't want
@@ -559,24 +755,94 @@ bool Game::run(StartGameType const start_game_type,
 		;
 #endif
 
-	g_sh->change_music("ingame", 1000);
+	g_sh->change_music(Songset::kIngame, 1000);
 
 	state_ = gs_running;
 
+	// Immediately progress the game by 1 tick before removing the loader UI
+	// to ensure that there is no black screen in the brief interval between
+	// the initialization and the loading of the initial scripts.
+	think();
 	remove_loader_ui();
+
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the
+	// user switched off the option
+	if (training_wheels_ != nullptr && training_wheels_wanted_) {
+		verb_log_dbg("Running training wheels. Current active is %s", active_training_wheel().c_str());
+		training_wheels_->run_objectives();
+	}
+#endif
 
 	get_ibase()->run<UI::Panel::Returncodes>();
 
 	state_ = gs_ending;
 
-	g_sh->change_music("menu", 1000);
+	g_sh->change_music(Songset::kMenu, 1000);
 
 	cleanup_objects();
 	set_ibase(nullptr);
 
 	state_ = gs_notrunning;
 
-	return true;
+	if (next_game_to_load_.empty()) {
+		return true;
+	}
+
+	const std::string load = next_game_to_load_;  // Pass-by-reference does have its disadvantages…
+
+	if (FileSystem::filename_ext(load) == kReplayExtension) {
+		return run_replay(load, script_to_run);
+	}
+	if (FileSystem::filename_ext(load) == kSavegameExtension) {
+		create_loader_ui(
+		   {"general_game"}, false, map().get_background_theme(), map().get_background(), true);
+		return run_load_game(load, script_to_run);
+	}
+
+	/* Load a scenario. This should be either the current one, or the next one if existent. */
+	assert(!list_of_scenarios_.empty());
+	std::list<std::string> list = list_of_scenarios_;
+	if (list.front() != load) {
+		list.pop_front();
+		assert(!list.empty());
+		assert(list.front() == load);
+	}
+	return run_splayer_scenario_direct(list, script_to_run);
+}
+
+bool Game::run_replay(const std::string& filename, const std::string& script_to_run) {
+	full_cleanup();
+	replay_filename_ = filename;
+
+	create_loader_ui(
+	   {"general_game"}, false, map().get_background_theme(), map().get_background(), true);
+	set_ibase(new InteractiveSpectator(*this, get_config_section()));
+
+	set_write_replay(false);
+	new ReplayGameController(*this);
+	save_handler().set_allow_saving(false);
+
+	return run(Widelands::Game::StartGameType::kSaveGame, script_to_run, "replay");
+}
+
+void Game::set_next_game_to_load(const std::string& file) {
+	next_game_to_load_ = file;
+}
+
+void Game::do_send_player_command(PlayerCommand* pc) {
+	// At this point, the command has not yet been distributed to the other
+	// clients, nor written to the replay. If multithreading has caused the
+	// command's duetime to lie in the past, we can just safely increase it.
+	if (pc->duetime() <= get_gametime()) {
+		const Time new_time = get_gametime() + Duration(1);
+		verb_log_info_time(get_gametime(),
+		                   "Increasing a PlayerCommand's duetime from %u to %u (delta %u)",
+		                   pc->duetime().get(), new_time.get(), (new_time - pc->duetime()).get());
+		pc->set_duetime(new_time);
+	}
+
+	ctrl_->send_player_command(pc);
 }
 
 /**
@@ -588,6 +854,12 @@ bool Game::run(StartGameType const start_game_type,
 void Game::think() {
 	assert(ctrl_);
 
+	while (!pending_player_commands_.empty()) {
+		MutexLock m(MutexLock::ID::kCommands);
+		do_send_player_command(pending_player_commands_.front());
+		pending_player_commands_.pop_front();
+	}
+
 	ctrl_->think();
 
 	if (state_ == gs_running) {
@@ -595,7 +867,7 @@ void Game::think() {
 		// computer and the fps if and when the game is saved - this is very bad
 		// for scenarios and even worse for the regression suite (which relies on
 		// the timings of savings.
-		cmdqueue().run_queue(ctrl_->get_frametime(), get_gametime_pointer());
+		cmdqueue().run_queue(Duration(ctrl_->get_frametime()), get_gametime_pointer());
 
 		// check if autosave is needed
 		savehandler_.think(*this);
@@ -615,8 +887,28 @@ void Game::cleanup_for_load() {
 
 	cmdqueue().flush();
 
+	pending_diplomacy_actions_.clear();
+	diplomacy_allowed_ = true;
+
 	// Statistics
 	general_stats_.clear();
+}
+
+void Game::full_cleanup() {
+	EditorGameBase::full_cleanup();
+
+	did_postload_addons_before_loading_ = false;
+	ctrl_.reset();
+	replaywriter_.reset();
+	writereplay_ = true;  // Not using `set_write_replay()` on purpose.
+	next_game_to_load_.clear();
+	list_of_scenarios_.clear();
+	replay_filename_.clear();
+	Economy::initialize_serial();
+
+	if (has_loader_ui()) {
+		remove_loader_ui();
+	}
 }
 
 /**
@@ -649,7 +941,8 @@ void Game::report_sync_request() {
  */
 void Game::report_desync(int32_t playernumber) {
 	if (syncwrapper_.dumpfname_.empty()) {
-		log("Error: A desync occurred but no filename for the syncstream has been set.");
+		log_err_time(get_gametime(),
+		             "Error: A desync occurred but no filename for the syncstream has been set.");
 		return;
 	}
 	// Replace .wss extension of syncstream file with .wse extension for syncstream extract
@@ -712,7 +1005,12 @@ uint32_t Game::logic_rand() {
  * across the network.
  */
 void Game::send_player_command(PlayerCommand* pc) {
-	ctrl_->send_player_command(pc);
+	MutexLock m(MutexLock::ID::kCommands);
+	if (is_logic_thread()) {
+		do_send_player_command(pc);
+	} else {
+		pending_player_commands_.push_back(pc);
+	}
 }
 
 /**
@@ -737,13 +1035,13 @@ void Game::send_player_bulldoze(PlayerImmovable& pi, bool const recurse) {
 	send_player_command(new CmdBulldoze(get_gametime(), pi.owner().player_number(), pi, recurse));
 }
 
-void Game::send_player_dismantle(PlayerImmovable& pi, bool kw) {
+void Game::send_player_dismantle(PlayerImmovable& pi, bool keep_wares) {
 	send_player_command(
-	   new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi, kw));
+	   new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi, keep_wares));
 }
 
 void Game::send_player_build(int32_t const pid, const Coords& coords, DescriptionIndex const id) {
-	assert(tribes().building_exists(id));
+	assert(descriptions().building_exists(id));
 	send_player_command(new CmdBuild(get_gametime(), pid, coords, id));
 }
 
@@ -759,13 +1057,18 @@ void Game::send_player_build_waterway(int32_t pid, Path& path) {
 	send_player_command(new CmdBuildWaterway(get_gametime(), pid, path));
 }
 
-void Game::send_player_flagaction(Flag& flag) {
-	send_player_command(new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag));
+void Game::send_player_flagaction(Flag& flag, FlagJob::Type t) {
+	send_player_command(new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag, t));
 }
 
 void Game::send_player_start_stop_building(Building& building) {
 	send_player_command(
 	   new CmdStartStopBuilding(get_gametime(), building.owner().player_number(), building));
+}
+
+void Game::send_player_toggle_infinite_production(Building& building) {
+	send_player_command(
+	   new CmdToggleInfiniteProduction(get_gametime(), building.owner().player_number(), building));
 }
 
 void Game::send_player_militarysite_set_soldier_preference(Building& building,
@@ -779,11 +1082,13 @@ void Game::send_player_start_or_cancel_expedition(Building& building) {
 	   new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building));
 }
 
-void Game::send_player_enhance_building(Building& building, DescriptionIndex const id, bool kw) {
+void Game::send_player_enhance_building(Building& building,
+                                        DescriptionIndex const id,
+                                        bool keep_wares) {
 	assert(building.descr().type() == MapObjectType::CONSTRUCTIONSITE ||
 	       building.owner().tribe().has_building(id));
-	send_player_command(
-	   new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id, kw));
+	send_player_command(new CmdEnhanceBuilding(
+	   get_gametime(), building.owner().player_number(), building, id, keep_wares));
 }
 
 void Game::send_player_evict_worker(Worker& worker) {
@@ -791,9 +1096,9 @@ void Game::send_player_evict_worker(Worker& worker) {
 }
 
 void Game::send_player_set_ware_priority(PlayerImmovable& imm,
-                                         int32_t const type,
-                                         DescriptionIndex const index,
-                                         int32_t const prio,
+                                         const WareWorker type,
+                                         const DescriptionIndex index,
+                                         const WarePriority& prio,
                                          bool cs) {
 	send_player_command(new CmdSetWarePriority(
 	   get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs));
@@ -827,36 +1132,38 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
-                                       const std::vector<Serial>& soldiers) {
+                                       const std::vector<Serial>& soldiers,
+                                       const bool allow_conquer) {
 	for (Widelands::Coords& coords : flag.get_building()->get_positions(*this)) {
 		if (player(who_attacks).is_seeing(Map::get_index(coords, map().get_width()))) {
-			send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
+			send_player_command(
+			   new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers, allow_conquer));
 			break;
 		}
 	}
 }
 
-void Game::send_player_ship_scouting_direction(Ship& ship, WalkingDir direction) {
+void Game::send_player_ship_scouting_direction(const Ship& ship, WalkingDir direction) {
 	send_player_command(new CmdShipScoutDirection(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
-void Game::send_player_ship_construct_port(Ship& ship, Coords coords) {
+void Game::send_player_ship_construct_port(const Ship& ship, Coords coords) {
 	send_player_command(new CmdShipConstructPort(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
-void Game::send_player_ship_explore_island(Ship& ship, IslandExploreDirection direction) {
+void Game::send_player_ship_explore_island(const Ship& ship, IslandExploreDirection direction) {
 	send_player_command(new CmdShipExploreIsland(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
-void Game::send_player_sink_ship(Ship& ship) {
+void Game::send_player_sink_ship(const Ship& ship) {
 	send_player_command(
 	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
-void Game::send_player_cancel_expedition_ship(Ship& ship) {
+void Game::send_player_cancel_expedition_ship(const Ship& ship) {
 	send_player_command(new CmdShipCancelExpedition(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
@@ -867,6 +1174,10 @@ void Game::send_player_expedition_config(PortDock& pd,
                                          bool add) {
 	send_player_command(
 	   new CmdExpeditionConfig(get_gametime(), pd.get_owner()->player_number(), pd, ww, di, add));
+}
+
+void Game::send_player_diplomacy(PlayerNumber p1, DiplomacyAction a, PlayerNumber p2) {
+	send_player_command(new CmdDiplomacy(get_gametime(), p1, a, p2));
 }
 
 void Game::send_player_propose_trade(const Trade& trade) {
@@ -887,6 +1198,19 @@ void Game::send_player_set_stock_policy(Building& imm,
 void Game::send_player_toggle_mute(const Building& b, bool all) {
 	send_player_command(
 	   new CmdToggleMuteMessages(get_gametime(), b.owner().player_number(), b, all));
+}
+
+void Game::send_player_mark_object_for_removal(PlayerNumber p, Immovable& mo, bool mark) {
+	send_player_command(new CmdMarkMapObjectForRemoval(get_gametime(), p, mo, mark));
+}
+
+void Game::send_player_pinned_note(
+   PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del) {
+	send_player_command(new CmdPinnedNote(get_gametime(), p, text, pos, rgb, del));
+}
+
+void Game::send_player_ship_port_name(PlayerNumber p, Serial s, const std::string& name) {
+	send_player_command(new CmdShipPortName(get_gametime(), p, s, name));
 }
 
 int Game::propose_trade(const Trade& trade) {
@@ -920,7 +1244,8 @@ int Game::propose_trade(const Trade& trade) {
 void Game::accept_trade(const int trade_id) {
 	auto it = trade_agreements_.find(trade_id);
 	if (it == trade_agreements_.end()) {
-		log("Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
+		log_warn_time(
+		   get_gametime(), "Game::accept_trade: Trade %d has vanished. Ignoring.\n", trade_id);
 		return;
 	}
 	const Trade& trade = it->second.trade;
@@ -971,6 +1296,9 @@ const std::string& Game::get_win_condition_displayname() const {
 void Game::set_win_condition_displayname(const std::string& name) {
 	win_condition_displayname_ = name;
 }
+int32_t Game::get_win_condition_duration() const {
+	return win_condition_duration_;
+}
 
 /**
  * Sample global statistics for the game.
@@ -986,7 +1314,7 @@ void Game::sample_statistics() {
 	std::vector<uint32_t> nr_msites_defeated;
 	std::vector<uint32_t> nr_civil_blds_lost;
 	std::vector<uint32_t> nr_civil_blds_defeated;
-	std::vector<uint32_t> miltary_strength;
+	std::vector<float> miltary_strength;
 	std::vector<uint32_t> nr_workers;
 	std::vector<uint32_t> nr_wares;
 	std::vector<uint32_t> productivity;
@@ -1016,36 +1344,46 @@ void Game::sample_statistics() {
 		}
 
 		// Get the immovable
-		if (upcast(Building, building, fc.field->get_immovable())) {
+		if (fc.field->get_immovable() != nullptr &&
+		    fc.field->get_immovable()->descr().type() >= MapObjectType::BUILDING) {
+			upcast(Building, building, fc.field->get_immovable());
 			if (building->get_position() == fc) {  // only count main location
 				uint8_t const player_index = building->owner().player_number() - 1;
 				++nr_buildings[player_index];
 
 				//  If it is a productionsite, add its productivity.
-				if (upcast(ProductionSite, productionsite, building)) {
+				if (building->descr().type() == MapObjectType::PRODUCTIONSITE ||
+				    building->descr().type() == MapObjectType::TRAININGSITE) {
 					++nr_production_sites[player_index];
-					productivity[player_index] += productionsite->get_statistics_percent();
+					productivity[player_index] +=
+					   dynamic_cast<const ProductionSite&>(*building).get_statistics_percent();
 				}
 			}
 		}
 
 		// Now, walk the bobs
-		for (Bob const* b = fc.field->get_first_bob(); b; b = b->get_next_bob()) {
-			if (upcast(Soldier const, s, b)) {
-				miltary_strength[s->owner().player_number() - 1] +=
-				   s->get_level(TrainingAttribute::kTotal) + 1;  //  So that level 0 also counts.
+		for (Bob const* b = fc.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
+			if (b->descr().type() != MapObjectType::SOLDIER) {
+				continue;
 			}
+
+			constexpr int kHeroValue = 19;
+			upcast(Soldier const, soldier, b);
+			assert(soldier != nullptr);
+			const float total_level = soldier->get_level(TrainingAttribute::kTotal);
+			const float max_level = std::max<float>(soldier->descr().get_max_total_level(), 1);
+			miltary_strength[soldier->owner().player_number() - 1] +=
+			   (total_level * total_level * kHeroValue) / (max_level * max_level) + 1.f;
 		}
 	}
 
 	//  Number of workers / wares / casualties / kills.
 	iterate_players_existing(p, nr_plrs, *this, plr) {
+		const TribeDescr& tribe = plr->tribe();
 		uint32_t wostock = 0;
 		uint32_t wastock = 0;
 
 		for (const auto& economy : plr->economies()) {
-			const TribeDescr& tribe = plr->tribe();
-
 			switch (economy.second->type()) {
 			case wwWARE:
 				for (const DescriptionIndex& ware_index : tribe.wares()) {
@@ -1054,9 +1392,14 @@ void Game::sample_statistics() {
 				break;
 			case wwWORKER:
 				for (const DescriptionIndex& worker_index : tribe.workers()) {
-					if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
-						wostock += economy.second->stock_ware_or_worker(worker_index);
+					if (worker_index == tribe.soldier()) {
+						continue;  // Ignore soldiers.
 					}
+					const WorkerDescr& d = *tribe.get_worker_descr(worker_index);
+					if (d.is_buildable() && d.buildcost().empty()) {
+						continue;  // Don't count free workers.
+					}
+					wostock += economy.second->stock_ware_or_worker(worker_index);
 				}
 				break;
 			}
@@ -1073,7 +1416,7 @@ void Game::sample_statistics() {
 
 	// Now, divide the statistics
 	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
-		if (productivity[i]) {
+		if (productivity[i] != 0u) {
 			productivity[i] /= nr_production_sites[i];
 		}
 	}
@@ -1102,7 +1445,7 @@ void Game::sample_statistics() {
 		general_stats_[i].nr_msites_defeated.push_back(nr_msites_defeated[i]);
 		general_stats_[i].nr_civil_blds_lost.push_back(nr_civil_blds_lost[i]);
 		general_stats_[i].nr_civil_blds_defeated.push_back(nr_civil_blds_defeated[i]);
-		general_stats_[i].miltary_strength.push_back(miltary_strength[i]);
+		general_stats_[i].miltary_strength.push_back(lroundf(miltary_strength[i]));
 		general_stats_[i].nr_workers.push_back(nr_workers[i]);
 		general_stats_[i].nr_wares.push_back(nr_wares[i]);
 		general_stats_[i].productivity.push_back(productivity[i]);

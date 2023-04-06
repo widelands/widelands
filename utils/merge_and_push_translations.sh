@@ -11,6 +11,13 @@
 # Exit as soon as any line in the bash script fails.
 set -e
 
+if [ -z "$1" ]
+then
+  push_target="https://github.com/widelands/widelands.git"
+else
+  push_target="$1"
+fi
+
 # Move up if we're not in the base directory.
 if [ -d "../utils" ]; then
 	pushd ..
@@ -35,7 +42,7 @@ fi
 
 # Checkout master and pull latest version
 git checkout master
-git pull https://github.com/widelands/widelands.git master
+git pull "$push_target" master
 
 # Double-check that it's clean
 STATUS="$(git status)"
@@ -51,25 +58,22 @@ echo "Working tree is clean, continuing"
 set -x
 
 # Pull translations from Transifex
-tx pull -a
-# We might need to force-pull translations during a release
-# tx pull -fa
+# tx pull -a
+# Force-pull translations because some would get skipped accidentally
+tx pull -fa
 
 # Update authors file
-utils/update_authors.py
-if [ $? -eq 0 ]
-then
+python3 utils/update_authors.py
+if [ $? -eq 0 ] ; then
   echo "Updated authors";
-
 else
   echo "Failed updating authors";
   exit 1;
 fi
 
 # Update appdata
-utils/update_appdata.py
-if [ $? -eq 0 ]
-then
+python3 utils/update_appdata.py
+if [ $? -eq 0 ] ; then
   echo "Updated appdata";
 else
   echo "Failed updating appdata";
@@ -77,12 +81,11 @@ else
 fi
 
 # Update catalogs
-utils/buildcat.py
+python3 utils/buildcat.py
 
 # Update statistics
-utils/update_translation_stats.py
-if [ $? -eq 0 ]
-then
+python3 utils/update_translation_stats.py
+if [ $? -eq 0 ] ; then
   echo "Updated translation stats";
 else
   echo "Failed to update translation stats";
@@ -90,8 +93,31 @@ else
 fi
 
 # Fix formatting for Lua
-python utils/fix_formatting.py --lua --dir data/i18n
-python utils/fix_formatting.py --lua --dir data/txts
+python3 utils/fix_formatting.py --lua --dir data/i18n
+python3 utils/fix_formatting.py --lua --dir data/txts
+
+# Undo one-liner diffs in po directory - these are pure timestamps with no other content
+set +x
+nrAdded=""
+nrDeleted=""
+for entry in $(git diff --numstat po); do
+  if [ -z "$nrAdded" ]
+  then
+    nrAdded=$entry
+  elif [ -z "$nrDeleted" ]
+  then
+    nrDeleted=$entry
+  else
+    if [[ $nrAdded == 1 ]] && [[ $nrDeleted == 1 ]]
+    then
+      echo "Skipping changes to $entry"
+      git checkout $entry
+    fi
+    nrAdded=""
+    nrDeleted=""
+  fi
+done
+set -x
 
 # Stage changes
 # - Translations
@@ -107,7 +133,7 @@ git add data/i18n/translation_stats.conf || true
 
 # Commit and push.
 git commit -m "Fetched translations and updated catalogs."
-git push https://github.com/widelands/widelands.git master
+git push "$push_target" master
 
 # Push catalogs to Transifex
 tx push -s

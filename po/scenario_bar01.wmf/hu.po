@@ -1,20 +1,22 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
+# Tóth András <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015-2016
+# Tóth András <txa-dev@posteo.hu>, 2021,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-04-23 19:21+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"PO-Revision-Date: 2015-02-03 14:30+0000\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,47 +27,47 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:22
 msgid "Build two ranger’s huts"
-msgstr "Építs két vadőr kunyhót"
+msgstr "Erdőőrkunyhók építése"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr "Építsd egy erdőőrkunyhót minden favágó kunyhó mellé."
+msgstr "Építsd egy erdőőrkunyhót minden favágó kunyhó mellé!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr "Természetesen, a fák lassan nőnek. Hogy biztosan elég farönköd legyen, vadőröket kell építened."
+msgstr "A fák önmaguktól csak lassan nőnek. Hogy biztosan elég farönköd legyen, erdőőrkunyhót kell építened."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
-msgstr "Terjeszkedj északkeletre, és építs egy kőfejtőt"
+msgstr "Terjeszkedj északkeletre, és építs egy kőfejtőt!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
-msgstr "Terjeszkedj északkeletre, a kövekig"
+msgstr "Terjeszkedés az északkeleti kövekig"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr "Építs katonai épületeket (mint az őrbódék vagy a határőrházak) a területed növeléséhez."
+msgstr "Építs katonai épületeket (őrházakat vagy határőrházakat) a területed növeléséhez!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr "Menj a tőled északkeletre fekvő kövekhez és építs ott egy kőfejtőt."
+msgstr "Érd el a tőled északkeletre fekvő köveket és építs ott egy kőfejtőt!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
-msgstr "Láss hozzá bányák építéséhez a hegyen"
+msgstr "Kezdj bányákat építeni a hegyen!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Build coal and iron mines"
-msgstr "Építs szén- és vasbányákat"
+msgstr "Szén- és vasércbányák építése"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Build a coal mine and an iron mine."
-msgstr "Építs egy szénbányát és vasércbányát."
+msgstr "Építs egy szénbányát és egy vasércbányát!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:43
 msgid ""
@@ -75,39 +77,39 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "Ehhez helyezz el egy zászlót a keletre lévő hegy oldalára! Figyelj, hogy hegyi terepre rakd, ne hegyi rétre! Ha az új zászlóra kattintasz, tudsz geológusokat küldeni ide. Mivel a zászló hegyen van, a geológusok érceket fognak keresni, más esetben vizet keresnének. Ezután építs bányát mindkét fajta nyersanyagnak, amit találnak! Válaszd a megfelelő bányákat:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "kevés szén"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
-msgstr "rengeteg szén"
+msgstr "sok szén"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "kevés vas"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
-msgstr "rengeteg vas"
+msgstr "sok vas"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "kevés arany"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
-msgstr "rengeteg arany"
+msgstr "sok arany"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "kevés gránit"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
-msgstr "rengeteg gránit"
+msgstr "sok gránit"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:52
 msgid "water"
@@ -115,21 +117,21 @@ msgstr "víz"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:53
 msgid "nothing was found here"
-msgstr "semmi nincs ott"
+msgstr "semmi nincs itt"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:54
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr "A bányák csak hegyi terepen építhetőek. A banyáknak megfelelő helyeket narancssárga bánya szimbólumok jelölik."
+msgstr "A bányák csak hegyi terepen építhetőek. Azokat a helyeket, ahová bánya építhető, narancssárga bánya szimbólumok jelölik."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
-msgstr "Lásd el bányászaidat élelemmel"
+msgstr "Lásd el bányászaidat élelemmel!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr "Építs egy vadászkunyhót, egy vadőrházat és egy kocsmát"
+msgstr "Építs egy vadászkunyhót, egy vadőrházat és egy kocsmát!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
@@ -140,21 +142,21 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Egy vadász elejti az állatokat, míg a vadőr megelőzi, hogy kihaljanak. A húst aztán egy kocsmában dolgozzák fel, bányászaidnak szánt étellé."
+msgstr "A vadászok elejtik az állatokat, míg a vadőrök gondoskodnak az utánpótlásukról. A húsból azután a kocsmákban készítenek a bányászaidnak megfelelő ételt."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr "Ez az első, de nem az utolsó példa olyan árura, amit finomítani kell mielőtt egy másik épületben használhatnád."
+msgstr "Ez az első, de nem az utolsó példa olyan árura, amit fel kell dolgozni, mielőtt egy másik épületben használhatnád."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
-msgstr "Süss kenyeret"
+msgstr "Süss kenyeret!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
-msgstr "Építs egy kutat, egy farmot és egy pékséget"
+msgstr "Építs egy kutat, egy földbirtokot és egy pékséget!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
@@ -163,39 +165,39 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Az élelmiszer-termelés további más módjai a halászok és a földbirtokok. A földbirtokokon termesztett búzához vízre van szükség, hogy a pékségben pitát készítsenek belőle, amit már meg lehet enni. Vizet kút építésével szerezhetsz. A jobb termelékenység érdekében olyan helyen építsd a kutat, ahol a geológusok vízforrást találtak."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
-msgstr "Finomítsd a kibányászott nyersanyagokat"
+msgstr "Dolgozd fel a kibányászott nyersanyagokat!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
-msgstr "Építs egy kohót"
+msgstr "Építs egy kohót!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr "A vasércet, amit bányászaid felszínre hoznak, nem lehet azonnal felhasználni – először ki kell nyerni belőle a vasat."
+msgstr "A vasércet, amit a bányászaid felszínre hoznak, nem lehet azonnal felhasználni – először ki kell nyerni belőle a vasat."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Enhance buildings and build a micro brewery"
-msgstr "Fejleszd épületeidet, és építs egy kis sörfőzdét"
+msgstr "Fejleszd az épületeidet, és építs egy kis sörfőzdét!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr "Fejleszd a bányát és a fogadót, és építs egy kis sörfőzdét."
+msgstr "Fejleszd a bányát és a fogadót, és építs egy kis sörfőzdét!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:87
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr "Fejleszd a szénbányát vagy a vasércbányát mély bányává, és fejleszd a fogadót vendéglővé."
+msgstr "Fejleszd a szénbányát vagy a vasércbányát mély bányává, és fejleszd a fogadót vendéglővé!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Also build a micro brewery."
-msgstr "Építs egy kis sörfőzdét is."
+msgstr "Építs egy kis sörfőzdét is!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
@@ -203,7 +205,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Egy normál bánya az elérhető nyersanyagoknak csak körülbelül a harmadát képes kiásni; ezért mély bányává kell fejleszteni, hogy továbbra is megfelelően működjön. Az épület fejlesztéséhez válaszd ki, és kattints a megfelelő gombra a megjelenő ablakon."
+msgstr "Egy normál bánya az elérhető nyersanyagoknak csak körülbelül a harmadát tudja kitermelni, ezután mély bányává kell fejleszteni ahhoz, hogy továbbra is megfelelően működjön. Egy épület fejlesztéséhez válaszd ki, és kattints a „Továbbfejlesztés” gombra a megjelenő ablakban."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
@@ -211,7 +213,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr "A sikeres munka nyomán a bányászok tapasztalattal gazdagodnak. Kellő tapasztalattal szakértőbb munkásokká válnak, akik nélkülözhetetlenek a fejlettebb épületekben. Ne fejlessz egy épületet, míg nincsen elég szakértő munkásod a fejlett épület működtetéséhez!"
+msgstr "A sikeres munka nyomán a bányászok tapasztalattal gazdagodnak. Kellő tapasztalattal magasabb szintű munkásokká válnak, akik nélkülözhetetlenek a fejlettebb épületekben. Ne fejlessz egy épületet, amíg nincsen elég tapasztalt munkásod a fejlett épület működtetéséhez!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
@@ -232,7 +234,7 @@ msgstr "Persze minden bányádat azonnal fejlesztheted, ha van elég munkásod �
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 msgid "Build a wood hardener"
-msgstr "Építs egy faedzőműhelyt"
+msgstr "Építs egy faedzőműhelyt!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:100
 msgid ""
@@ -245,65 +247,65 @@ msgstr "A nagyobb és jobb épületek – beleértve az összes katonait is – 
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
-msgstr "Építs ki egy mész- és széntermelő gazdaságot"
+msgstr "Építs ki egy mész- és széntermelő gazdaságot!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr ""
+msgstr "Mészégető kemence építése a kiszolgáló kúttal és faszénégető kemencével vagy szénbányával"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:109
 msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "A jobb épületekhez szükség lehet az edzett fán kívül még más fejlett anyagokra is. Ezek egyike a habarcs, amit gránit, víz és szén felhasználásával készítenek a mészégetőben."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr "Vizet úgy tudsz szerezni, hogy kutat építesz egy vízforráson, amit a geológusaid tudnak felfedezni, amikor odaküldöd őket egy zászlóhoz ami nem hegyen van."
+msgstr "Vizet úgy tudsz szerezni, hogy kutat építesz egy vízforráson, amit a geológusaid tudnak felfedezni, amikor odaküldöd őket egy olyan zászlóhoz, ami nem hegyen van."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:111
 msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr ""
+msgstr "Ahhoz, hogy geológust küldj vizet keresni, kattints egy zászlóra azon a területen, ahol keresni szeretnél, utána a „Geológus küldése a terület felderítésére” gombra!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr ""
+msgstr "Szénhez faszénégető kemence vagy szénbánya építésével tudsz jutni. A faszén égetése farönkökből lassú. Csak akkor építs faszénégető kemencét, ha nem találsz szenet."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr "Építs egy mészégető kemencét és egy kutat. Továbbá építs egy faszénégető kemencét vagy egy szénbányát, hogy a szénszükséglet biztosítva legyen."
+msgstr "Építs egy mészégető kemencét és egy kutat! Továbbá építs egy faszénégető kemencét vagy egy szénbányát, hogy a szénszükséglet biztosítva legyen!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 msgid "Build a reed yard"
-msgstr "Építs egy nádudvart"
+msgstr "Építs egy nádudvart!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "A fejlettebb épületekhez szükséges harmadik anyag a nád, mellyel a tetőt fedik. A nádat a kertész ülteti a nádudvarban."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 msgid "Build a cattle farm"
-msgstr "Építs egy marhafarmot"
+msgstr "Építs egy marhatelepet!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:130
 msgid ""
@@ -311,11 +313,11 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "Ha egy útszakaszon hosszú ideig nagy a forgalom, akkor egy hordár általában nem elég az áruk gyors szállításához. Ilyenkor torlódások alakulnak ki. Az ilyen útszakaszok ezért még egy hordárt alkalmaznak: egy ökröt, ami segít az áruszállításban. Ez megduplázza a szállítható áruk mennyiségét."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr "Az ökröket marhafarmokon tenyésztik búza és víz felhasználásával."
+msgstr "Az ökröket marhatelepeken tenyésztik búza és víz felhasználásával."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:141
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:153
@@ -378,7 +380,7 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr ""
+msgstr "Apám azt tanította, hogy vannak idők, amikor harcolni kell, és vannak idők, amikor meglapulni és várni, de nem elaludni és meghalni, mielőtt eljönne a mi időnk. Így hát én várakozok."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:186
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:199
@@ -394,7 +396,7 @@ msgstr "Thron a fejét rázza…"
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
-msgstr ""
+msgstr "A háború pedig csak tovább dúl. Egyre több testvérünk menekül el a fák alatti fővárosunkban tomboló kegyetlen háború elől."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:192
@@ -416,14 +418,14 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr ""
+msgstr "A mai napon a vadászaim az erdőben bujkáló férfiakat, asszonyokat és gyerekeket hoztak elém, akik próbáltak elmenekülni a háború, gyűlölködés és bosszú elől, amelyek az egymással harcoló törzsek között tombolnak, mint az ősi időkben, amikor nem voltunk többek ösztönök által vezérelt vadaknál. Egyik testvérem sem fogja tudni megszerezni és megtartani a fatrónt, egyik törzs sem lesz elég erős a másik legyőzéséhez. A mészárlásnak soha nem lesz vége, hacsak… ez lenne az? Amit apám tanított?"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr ""
+msgstr "Felkelni mindazok ellen, akik fenyegetik a puszta létünket is, még ha a saját vérünk lenne is az?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:211
 msgid "Thron is Considering the Future"
@@ -437,7 +439,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "Boldreth egyre elgyötörtebbnek tűnik, ahogy múlnak a napok. Társaim lelke sorvad, ahogy a hideg évszak közeleg, és mi még mindig csak kunyhókban és laktanyákban élünk. Nem szándékoztam ilyen sokáig itt, a vadonban tanyázni - de nem is hittem, hogy fivéreim ily sokáig időznek ezzel az értelmetlen harccal."
+msgstr "Boldreth egyre elgyötörtebbnek tűnik, ahogy múlnak a napok. Társaim lelke sorvad, ahogy a hideg évszak közeleg, és mi még mindig csak kunyhókban és laktanyákban élünk. Nem szándékoztam ilyen sokáig itt, a vadonban tanyázni – de nem is hittem, hogy fivéreim ily sokáig időznek ezzel az értelmetlen harccal."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
@@ -446,7 +448,7 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr ""
+msgstr "Eljött volna az ideje, hogy kicsit berendezkedjünk itt? Eljött volna az ideje, hogy mindazok, akik egységben élnek és gondolkoznak, új otthonra leljenek, pótolva mindazt, amit elvesztettünk? Legalább addig, amíg visszatérhetünk a helyre, amit valaha az otthonunknak hívtunk…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:222
 msgid "Somebody Comes up to You"
@@ -461,7 +463,7 @@ msgstr "Egy öreg ember azt mondja…"
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
-msgstr "Üdvözlégy, törzsfőnök. A nevem Khantrukh, és már sok telet megéltem. Kérlek, engedd, hogy átsegítselek tanácsaimmal e borús napokon."
+msgstr "Üdvöz légy, törzsfőnök! A nevem Khantrukh, és már sok telet megéltem. Kérlek, engedd, hogy átsegítselek tanácsaimmal e borús napokon."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:228
@@ -469,7 +471,7 @@ msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
-msgstr ""
+msgstr "Csak az istenek tudhatják, meddig kell még itt rejtőzködnünk. A harcosok azt remélik, hogy hamarosan eljön a nap, amikor győzedelmesen hazavonulhatunk, de én erősen kételkedem ebben. A nappalok pedig egyre hűvösebbek és rövidebbek…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:234
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:307
@@ -493,7 +495,7 @@ msgstr "Khantrukh megjegyzi…"
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr ""
+msgstr "Látom máris építettél egy kőfejtőt és két favágókunyhót. Ez jó kezdet, ha sokáig itt maradunk."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:240
@@ -508,7 +510,7 @@ msgstr "Ám sose feledd - ezek az erdők az örökségeink, amiket őseink bízt
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr ""
+msgstr "Így hát, ahhoz, hogy pótoljuk az általunk kivágott fákat, építenünk kell néhány erdőőrkunyhót is, lehetőleg a favágók közelében."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"
@@ -532,11 +534,11 @@ msgstr "Egy újabb álmatlan éjszakámon felmentem a dombra és a távolba figy
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
-msgstr ""
+msgstr "Állandó mementói annak, hogy miért kell itt rejtőzködnünk… és miért kell majd végül visszatérnünk!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "At the Tomb"
-msgstr "A nyughelynél"
+msgstr "A sírnál"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:266
@@ -544,14 +546,14 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr ""
+msgstr "Újra felmentem apám sírjához, a szentélyhez a Kal’mavrath fennséges csúcsa alatt. Csak álltam, és nem éreztem sem az órák lassú múlását, sem a sötét égből aláhulló komor eső hidegét…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:269
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me…"
-msgstr ""
+msgstr "Különös, búcsúzáshoz hasonló érzés járta át szívemet. Hosszú ideje először gondoltam arra, mit rejthet számomra a jövendő…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:277
 msgid "The Other Day"
@@ -566,7 +568,7 @@ msgstr "Thron azt mondja elgondolkodva…"
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer"
 " to home – to strike at the first sign of my brothers’ forces wavering."
-msgstr "Nemrég felkeresett engem Boldreth. Azt javasolta, költözzünk közelebb hazánkhoz – hogy rögtön lecsaphassunk, amint fivérem erői megingani látszanak."
+msgstr "Nemrég felkeresett engem Boldreth. Azt javasolta, költözzünk közelebb hazánkhoz – hogy rögtön lecsaphassunk, amint fivéreim erői megingani látszanak."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:283
@@ -575,7 +577,7 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr ""
+msgstr "De ha elnézek az erdő fölé, még mindig az égbe gomolygó sűrű füstöt látom a távolban. Tudom – túl korai még. Amire ő vágyik, az nem jöhet el még oly sokáig. Ha igaza is lenne talán, elrettent a vérontás gondolata, ami a túl korai hazatérést követné mindkét oldal számára…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:288
 msgid "The Oath"
@@ -608,7 +610,7 @@ msgstr "Ezennel megújítom eskümet - mindenáron megállítom ezt az őrülts�
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:435
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:446
 msgid "Your Loyal Companion"
-msgstr "A hű társad"
+msgstr "Hű társad"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:300
 msgid "Brave Boldreth steps to your side…"
@@ -621,7 +623,7 @@ msgid ""
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
 "to Al’thunran. Too long have we waited while our brethren have fought on the"
 " battlefield, and our axes and swords have turned rusty over time."
-msgstr ""
+msgstr "Hát hosszú maradásra készülnél ezen erdőkben, Thron? Valóban, látom az ebben rejlő bölcsességet, de szívem sajog az Al’thunranba való dicsőséges visszatérésért. Túl régóta vártunk, amíg testvéreink a harctéren küzdöttek. Harci fejszéink és kardjaink berozsdásodtak."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "Khantrukh joins in…"
@@ -646,7 +648,7 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr ""
+msgstr "Legkevésbé sem harcoshoz méltó munka, mégis, végre egy feladat! Thron, mit szólnál, ha a legtürelmetlenebb katonákkal közelebb merészkednénk a Kal’mavrath hatalmas hegyéhez? Hátha találunk néhány további kitermelhető sziklát az öregember örömére."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:325
 msgid "Khantrukh grumbles…"
@@ -655,7 +657,7 @@ msgstr "Khantrukh morog…"
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:327
 msgid "Old man? Disrespectful youth!"
-msgstr "Öreg? Tiszteletlen kölke!"
+msgstr "Öregember? Tiszteletlen kölke!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:333
@@ -675,7 +677,7 @@ msgstr "Boldreth felkiált…"
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
-msgstr "Nézz csak oda! Ott van keletre Kal'mavrath nagy hegye! Micsoda természeti kincsek rejtőzhetnek fenséges gyomrában!"
+msgstr "Nézz csak oda! Ott van keletre a Kal'mavrath nagy hegye! Micsoda természeti kincsek rejtőzhetnek fenséges gyomrában!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:344
@@ -721,7 +723,7 @@ msgstr "Boldreth bólint…"
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:370
 msgid "I have to hand it to you: you are right here, old man."
-msgstr "Ezt rád kell hagynom, ebben igazad van, öreg."
+msgstr "Meg kell hagynom, ebben igazad van, öreg."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:373
@@ -729,16 +731,16 @@ msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
-msgstr "Úgy látom, elég sok állat van itt az erdőben, vadásszunk le belőlük többet! És persze az emberek örülnének egy új kocsmának is – te, lehetne a neve \"Thron Büszkesége\" vagy ilyesmi, ha gondolod!"
+msgstr "Úgy látom, elég sok állat van itt az erdőben, vadásszunk le belőlük többet! És persze az emberek örülnének egy új kocsmának is – lehetne a neve \"Thron Büszkesége\" vagy ilyesmi, ha gondolod!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:379
 msgid "The elder jumps into the air…"
-msgstr "A vén felugrik a levegőbe…"
+msgstr "Az öreg tanácsos felpattan…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:381
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "A bölcsesség változatosságot tanácsol."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:384
@@ -746,7 +748,7 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr ""
+msgstr "A nagy hegytől északra hatalmas síkság terül el. Miért ne használnánk a természet e nagyszerű ajándékát földbirtok építésére? A magam részéről igencsak megkívántam egy kis frissen sült pitát…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:390
 msgid "Boldreth cheers up…"
@@ -762,7 +764,7 @@ msgstr "Vadászaink az erdőt járják, Thron."
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr "Ígérem, mire lemegy a nap, minden klán törzsfőnökéhez méltó pompás vacsorád lesz!"
+msgstr "Ígérem, mire lemegy a nap, az összes klán törzsfőnökéhez méltó pompás vacsorád lesz!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:400
 msgid "Khantrukh gazes over the plains…"
@@ -791,13 +793,13 @@ msgid ""
 "celebration, I noticed how much this tiny bit of home means to my people. "
 "Their songs filled the air until deep in the night, and they were in higher "
 "spirits still the day after."
-msgstr "Tegnap megnyílt egy kocsma embereinknek. Noha aligha van kedvem ünnepelni, felfigyeltem rá, mily sokat jelent nekik ez a talpalatnyi kis otthon. Dalaik késő éjszakáig betöltötték a levegőt, és még másnap is emelt lélekkel jártak."
+msgstr "Tegnap megnyílt egy kocsma embereinknek. Noha aligha van kedvem ünnepelni, felfigyeltem rá, mily sokat jelent nekik ez a talpalatnyi kis otthon. Dalaik késő éjszakáig betöltötték a levegőt, és még másnap is emelkedett lélekkel jártak."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:412
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
-msgstr "Talán lassan tényleg egy olyan helyet hozunk létre, amit... otthonnak hívhatunk."
+msgstr "Talán lassan tényleg egy olyan helyet hozunk létre, amit… otthonnak hívhatunk."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:417
 msgid "Boldreth remarks…"
@@ -810,7 +812,7 @@ msgid ""
 "bring what our brave miners gain for us into a more useful state. The iron "
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
-msgstr "Most, hogy bányáink is vannak, meg élelmünk is, amivel fenntarthatjuk működésüket, ideje használható formába önteni azt, amit bátor bányászaink felszínre hoznak. A vasércből vasat kell koholni, hogy abból a nekünk tetsző dolgokat kovácsolhassunk. A szénnel pedig forrón tarthatjuk az olvasztókemencét."
+msgstr "Most, hogy bányáink is vannak, meg élelmünk is, amivel fenntarthatjuk működésüket, ideje használható formába önteni azt, amit bátor bányászaink felszínre hoznak. A vasércből vasat kell olvasztani, hogy abból a nekünk tetsző dolgokat kovácsolhassunk. A szénnel pedig forrón tarthatjuk az olvasztókemencét."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:425
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:476
@@ -842,7 +844,7 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr "Amint épp látom, fogytán van az edzett fánk! Nem tehetjük harcosainkat omladozó viskókba, pláne nem ilyen veszélyes időkben, mint a mostani!"
+msgstr "Amint épp látom, fogytán van az edzett fánk! Nem helyezhetjük el harcosainkat omladozó viskókban, pláne nem ilyen veszélyes időkben, mint a mostani!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:441
@@ -858,7 +860,7 @@ msgstr "Boldreth mosolyog…"
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
-msgstr "Nos, öreg barátom, így már nem szabad, hogy erődítményeink összeomoljanak ellenségeink első csatakiáltásától! Most már biztonságosan terjeszkedhetünk!"
+msgstr "Nos, öreg barátom, így már erődítményeink nem fognak összeomlani ellenségeink első csatakiáltásától! Most már biztonságosan terjeszkedhetünk!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:452
@@ -866,7 +868,7 @@ msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
-msgstr "Mégsem ártana némi cementet is felhalmozni a további hadjáratunkra; így szükség esetén építhetnénk egy olyan erődöt, amilyet még nem látott a világ!"
+msgstr "Mégsem ártana felhalmozni némi habarcsot is a további hadjáratunkra. Így szükség esetén építhetnénk egy olyan erődöt, amilyet még nem látott a világ!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:458
 msgid "Khantrukh steps in…"
@@ -880,7 +882,7 @@ msgid ""
 "our roofs from becoming leaky! Maybe the young ones like spending their "
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
-msgstr "Szégyen, törzsfőnök! Az rendben van, hogy már tudunk cementet csinálni kitartó erődítményekhez és nagy épületekhez – de ettől a tetőink még beáznak! Lehet, hogy az ifjak szívesen töltik az éjszakát az esőben, de én nem tudok aludni, ha víz csepeg az arcomra!"
+msgstr "Ez szégyen, törzsfőnök! Az rendben van, hogy már tudunk habarcsot készíteni félelmetes erődítményekhez és nagy épületekhez – de ettől a tetőink még beáznak! Lehet, hogy az ifjak szívesen töltik az éjszakát az esőben, de én nem tudok aludni, ha víz csepeg az arcomra!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:463
@@ -896,7 +898,7 @@ msgstr "Khantrukh megkönnyebbültnek tűnik…"
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr "Csodás! Most már nem csepegnek a tetőink, és minden anyagunk megvan ahhoz, hogy akkora épületeket emeljünk, amekkorákat... amekkorákat csak jónak látunk!"
+msgstr "Csodás! Most már nem áznak be a tetőink, és minden anyagunk megvan ahhoz, hogy akkora épületeket emeljünk, amekkorákat... amekkorákat csak jónak látunk!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"
@@ -919,60 +921,60 @@ msgid ""
 "and they will do their work on the roads loyally and reliably."
 msgstr "Ezek csodálatos állatok: éppoly fürgék, mint az emberek, ugyanakkor sokkal erősebbek, és meglehetősen igénytelenek: mindössze búza és víz kell tenyésztésükhöz, cserébe ők hűséges és megbízható szolgák lesznek az utakon."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Mission Complete"
 msgstr "Küldetés teljesítve"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron speaks…"
 msgstr "Thron beszél…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
-msgstr "A minap Boldreth meghívott, hogy menjek el vele az új fogadóba. Jobb kedvem lesz tőle, azt mondta."
+msgstr "A minap Boldreth meghívott, hogy menjek el vele az új fogadóba. Jobb kedvem lesz tőle, mondta."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:492
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:493
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them"
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr "Mikor körülnéztem, hűséges arcokat láttam, melyek hitet sugároztak, hogy át tudom őket vezetni eme sötét napokon. De mielőtt hálálkodó vagy bátorító szavakat szólhattam volna, egyik harcosom rontott be a fogadóba. Messze kint járt az erdőben az elmúlt napokban, és látszott rajta, milyen meggyötört."
+msgstr "Amikor körülnéztem, hűséges arcokat láttam, melyek hitet sugároztak, hogy át tudom őket vezetni eme sötét napokon. De mielőtt hálálkodó vagy bátorító szavakat szólhattam volna, egyik harcosom rontott be a fogadóba. Messze kint járt az erdőben az elmúlt napokban, és látszott rajta, milyen meggyötört."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
-msgid "The news he brought changed everything…"
-msgstr "A hírek amit hozott megváltoztatott mindent…"
-
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
+msgid "The news he brought changed everything…"
+msgstr "A hír amit hozott megváltoztatott mindent…"
+
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "Victory"
 msgstr "Győzelem"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz tovább itt is, máskülönben folytasd a következő küldetéssel."
+msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz még tovább, máskülönben folytasd a következő küldetéssel!"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
 msgid "One Full Moon Night"
 msgstr "Egy teleholdas éjszakán"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:505
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr "Egy holdfényes éjszakán felmásztam a Kal'mavrath csúcsára."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:508
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
 "distance. It is incredible with how much passion my brethren fight this war."
@@ -980,16 +982,16 @@ msgid ""
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr "Amint a távolba tekintettem, még mindig karmazsin színben táncoló lángokat láttam. Hihetetlen, hogy fivéreim mily nagy hévvel vívják ezt a harcot. Félek a pillanattól, mikor viszontlátom Al'thunrant – egykor gyönyörű fővárosunkból nem marad más, csak romok és hamvak, mire odaérünk?"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:511
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Another Cold Day"
 msgstr "Egy újabb hideg nap"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
-msgstr "Thron aggódottnak nűnik…"
+msgstr "Thron aggódik…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
@@ -997,43 +999,38 @@ msgid ""
 msgstr "Nyakunkon a tél. Sokunk szenved a hidegtől, de ki kell tartanunk. A nap, melyen visszatérhetünk, nem lehet már messze – nem szabad messze lennie."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr "Fohászkodtam, hogy enyhüljön az idő, csakúgy, mint azért, hogy a háború valahára véget érjen."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:520
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr "Eddig, úgy tűnik, egyik kérésem se teljesült."
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
 msgstr "Egy barátságos falu csatlakozott hozzánk!"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr "Felfedeztünk egy falut barátságos és dolgos emberekkel, akiket lenyűgözött vagyonunk, technikánk és erőnk."
+msgstr "Felfedeztünk egy falut barátságos és dolgos emberekkel, akiket lenyűgözött vagyonunk, fejlettségünk és erőnk."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:530
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "Egyszerűen, de boldogan éltek, vadászatból és földművelésből. Eddig elkerülték őket a harcok, és nem is állnak készen rá."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:533
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:534
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""
+msgstr "De félnek, hogy az Al’thunran körül dúló háború véget vet nyugalmuknak. Ezért hát úgy határoztak, hogy csatlakoznak hozzánk, abban a reményben, hogy kölcsönösen hasznára válhatunk egymásnak."

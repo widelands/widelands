@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2020 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,76 +23,62 @@
 #include "base/wexception.h"
 #include "chat/chat.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/style_manager.h"
 #include "graphic/text/rt_errors.h"
 #include "sound/sound_handler.h"
 #include "wlapplication_options.h"
 #include "wui/chat_msg_layout.h"
-#include "wui/logmessage.h"
 
 /**
  * Time, in seconds, that chat messages are shown in the overlay.
  */
-static const int32_t CHAT_DISPLAY_TIME = 10;
-static const uint32_t MARGIN = 2;
+constexpr int32_t kChatDisplayTime = 10;
+constexpr uint32_t kMargin = 2;
 
 struct ChatOverlay::Impl {
-	bool transparent_;
-	ChatProvider* chat_;
-	bool havemessages_;
+	bool transparent_ = false;
+	ChatProvider* chat_ = nullptr;
+	bool havemessages_ = false;
+	ChatColorForPlayer color_functor_;
 
 	/// Reception time of oldest message
-	time_t oldest_;
-	time_t sound_played_;
+	time_t oldest_ = std::time(nullptr);
+	time_t sound_played_ = std::time(nullptr);
 
 	/// Layouted message list
 	std::string all_text_;
 
-	/// Log messages
-	std::vector<LogMessage> log_messages_;
-
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
-	std::unique_ptr<Notifications::Subscriber<LogMessage>> log_message_subscriber_;
 
 	FxId new_message_;
 
-	Impl()
-	   : transparent_(false),
-	     chat_(nullptr),
-	     havemessages_(false),
-	     oldest_(0),
-	     sound_played_(time(nullptr)),
-	     chat_message_subscriber_(
-	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recompute(); })),
-	     log_message_subscriber_(
-	        Notifications::subscribe<LogMessage>([this](const LogMessage& note) {
-		        log_messages_.push_back(note);
-		        recompute();
-	        })),
+	explicit Impl(ChatColorForPlayer fn)
+	   : color_functor_(fn),
+	     chat_message_subscriber_(Notifications::subscribe<ChatMessage>(
+	        [this](const ChatMessage& /* msg */) { recompute(); })),
 	     new_message_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 	}
 
 	void recompute();
 
 private:
-	bool has_chat_provider() {
+	[[nodiscard]] bool has_chat_provider() const {
 		// The chat provider might not have been assigned a specific subclass,
 		// e.g. if there was an exception thrown.
 		return (chat_ != nullptr && chat_->has_been_set());
 	}
 };
 
-ChatOverlay::ChatOverlay(
-   UI::Panel* const parent, int32_t const x, int32_t const y, int32_t const w, int32_t const h)
-   : UI::Panel(parent, x, y, w, h), m(new Impl()) {
+ChatOverlay::ChatOverlay(UI::Panel* const parent,
+                         ChatColorForPlayer fn,
+                         int32_t const x,
+                         int32_t const y,
+                         int32_t const w,
+                         int32_t const h)
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h), m(new Impl(fn)) {
 	m->transparent_ = get_config_bool("transparent_chat", true);
 
 	set_thinks(true);
-}
-
-ChatOverlay::~ChatOverlay() {
 }
 
 void ChatOverlay::set_chat_provider(ChatProvider& chat) {
@@ -106,7 +91,7 @@ void ChatOverlay::set_chat_provider(ChatProvider& chat) {
  */
 void ChatOverlay::think() {
 	if (m->havemessages_) {
-		if (time(nullptr) - m->oldest_ > CHAT_DISPLAY_TIME) {
+		if (time(nullptr) - m->oldest_ > kChatDisplayTime) {
 			m->recompute();
 		}
 	}
@@ -124,50 +109,23 @@ void ChatOverlay::Impl::recompute() {
 
 	havemessages_ = false;
 
-	// Parse the chat message list as well as the log message list
-	// and display them in chronological order
+	// Parse the chat message list and display them in chronological order
 	int32_t chat_idx = has_chat_provider() ? chat_->get_messages().size() - 1 : -1;
-	int32_t log_idx = log_messages_.empty() ? -1 : log_messages_.size() - 1;
 	std::string richtext;
 
-	while ((chat_idx >= 0 || log_idx >= 0)) {
-		if (chat_idx < 0 ||
-		    (log_idx >= 0 && chat_->get_messages()[chat_idx].time < log_messages_[log_idx].time)) {
-			// Log message is more recent
-			oldest_ = log_messages_[log_idx].time;
-			// Do some richtext formatting here
-			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = (boost::format("<p>%s</p>") % g_gr->styles()
-				                                            .font_style(UI::FontStyle::kChatServer)
-				                                            .as_font_tag(log_messages_[log_idx].msg))
-				              .str();
-			}
-			log_idx--;
-		} else if (log_idx < 0 || (chat_idx >= 0 && chat_->get_messages()[chat_idx].time >=
-		                                               log_messages_[log_idx].time)) {
-			// Chat message is more recent
-			oldest_ = chat_->get_messages()[chat_idx].time;
-			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = format_as_richtext(chat_->get_messages()[chat_idx]).append(richtext);
-			}
-			if (!chat_->sound_off() && sound_played_ < oldest_) {
-				g_sh->play_fx(SoundType::kChat, new_message_);
-				sound_played_ = oldest_;
-			}
-			chat_idx--;
-		} else {
-			NEVER_HERE();
+	while (chat_idx >= 0) {
+		// Chat message is more recent
+		oldest_ = chat_->get_messages()[chat_idx].time;
+		if (now - oldest_ < kChatDisplayTime) {
+			richtext =
+			   format_as_richtext(chat_->get_messages()[chat_idx], color_functor_).append(richtext);
 		}
+		if (!chat_->sound_off() && sound_played_ < oldest_) {
+			g_sh->play_fx(SoundType::kChat, new_message_);
+			sound_played_ = oldest_;
+		}
+		chat_idx--;
 		havemessages_ = true;
-	}
-
-	// Parse log messages to clear old ones
-	while (!log_messages_.empty()) {
-		if (log_messages_.front().time < now - CHAT_DISPLAY_TIME) {
-			log_messages_.erase(log_messages_.begin());
-		} else {
-			break;
-		}
 	}
 
 	if (havemessages_) {
@@ -192,7 +150,7 @@ void ChatOverlay::draw(RenderTarget& dst) {
 
 	// Background
 	const int32_t height = im->height() > get_h() ? get_h() : im->height();
-	const int32_t top = get_h() - height - 2 * MARGIN;
+	const int32_t top = get_h() - height - 2 * kMargin;
 	const int width = std::min<int>(get_w(), im->width());
 
 	if (!m->transparent_) {

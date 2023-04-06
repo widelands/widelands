@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2020 by the Widelands Development Team
+ * Copyright (C) 2015-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,6 +28,7 @@ namespace UI {
 
 struct SuggestedTeamsBox : public UI::Box {
 	SuggestedTeamsBox(Panel* parent,
+	                  PanelStyle,
 	                  int32_t x,
 	                  int32_t y,
 	                  uint32_t orientation,
@@ -36,7 +36,7 @@ struct SuggestedTeamsBox : public UI::Box {
 	                  int32_t indent,
 	                  int32_t max_x = 0,
 	                  int32_t max_y = 0);
-	~SuggestedTeamsBox();
+	~SuggestedTeamsBox() override = default;
 
 	void hide();
 	void show(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams);
@@ -46,7 +46,7 @@ private:
 	int32_t const indent_;
 	int32_t const label_height_;
 	UI::Textarea* suggested_teams_box_label_;
-	UI::Box* lineup_box_;
+	UI::Box* lineup_box_{nullptr};
 	std::vector<UI::Icon*> player_icons_;
 	std::vector<UI::Textarea*> vs_labels_;
 	std::vector<Widelands::SuggestedTeamLineup> suggested_teams_;

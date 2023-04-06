@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,19 +22,61 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 4;
+/**
+ * Changelog:
+ * 8: v1.1
+ * 9: Added RNG state
+ */
+constexpr uint16_t kCurrentPacketVersion = 9;
 
-void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
+void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
-			game.gametime_ = fr.unsigned_32();
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 8) {
+			game.gametime_ = Time(fr);
+			// TODO(Nordfriese): Savegame compatibility v1.1
+			if (packet_version >= 9) {
+				game.rng().read_state(fr);
+			}
 			game.scenario_difficulty_ = fr.unsigned_32();
+			if (fr.unsigned_8() == 0) {
+				game.set_write_replay(false);
+			}
+
+			game.list_of_scenarios_.clear();
+			for (size_t i = fr.unsigned_32(); i > 0; --i) {
+				game.list_of_scenarios_.push_back(fr.string());
+			}
+
+			/* This design is the fix for bug #4786. The order in which units are loaded is
+			 * stored in the savegame to allow recreating it exactly during loading without
+			 * having to always load all tribes. Otherwise, we'd get desyncs because the
+			 * dynamic load order is different during loading from starting a new game.
+			 */
+			game.postload_addons_before_loading();
+			for (size_t i = fr.unsigned_32(); i > 0; --i) {
+				/* This tells the descriptions manager to actually load the description
+				 * with the given name, e.g. "barbarians" or "frisians_well".
+				 * Takes care of legacy lookup and skipping already loaded units.
+				 */
+				Notifications::publish(
+				   NoteMapObjectDescription(fr.string(), NoteMapObjectDescription::LoadType::kObject));
+			}
+
+			game.diplomacy_allowed_ = (fr.unsigned_8() > 0);
+			game.pending_diplomacy_actions_.clear();
+			for (size_t i = fr.unsigned_32(); i > 0; --i) {
+				const PlayerNumber p1 = fr.unsigned_8();
+				const DiplomacyAction a = static_cast<DiplomacyAction>(fr.unsigned_8());
+				const PlayerNumber p2 = fr.unsigned_8();
+				game.pending_diplomacy_actions_.emplace_back(p1, a, p2);
+			}
 		} else {
 			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -47,7 +88,7 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 /*
  * Write Function
  */
-void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
+void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /* mos */) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
@@ -60,9 +101,29 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 
 	// EDITOR GAME CLASS
 	// Write gametime
-	fw.unsigned_32(game.gametime_);
+	game.gametime_.save(fw);
+	game.rng().write_state(fw);
 
 	fw.unsigned_32(game.scenario_difficulty_);
+	fw.unsigned_8((game.writereplay_ || game.is_replay()) ? 1 : 0);
+
+	fw.unsigned_32(game.list_of_scenarios_.size());
+	for (const std::string& s : game.list_of_scenarios_) {
+		fw.string(s);
+	}
+
+	fw.unsigned_32(game.descriptions().load_order().size());
+	for (const std::string& s : game.descriptions().load_order()) {
+		fw.string(s);
+	}
+
+	fw.unsigned_8(game.diplomacy_allowed_ ? 1 : 0);
+	fw.unsigned_32(game.pending_diplomacy_actions_.size());
+	for (const auto& a : game.pending_diplomacy_actions_) {
+		fw.unsigned_8(a.sender);
+		fw.unsigned_8(static_cast<uint8_t>(a.action));
+		fw.unsigned_8(a.other);
+	}
 
 	// TODO(sirver,trading): save/load trade_agreements and related data.
 

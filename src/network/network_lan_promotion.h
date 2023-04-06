@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -43,7 +42,7 @@ struct NetGameInfo {
 
 struct NetOpenGame {
 	NetOpenGame() = default;
-	explicit NetOpenGame(NetAddress init_address, NetGameInfo init_info)
+	explicit NetOpenGame(const NetAddress& init_address, const NetGameInfo& init_info)
 	   : address(init_address), info(init_info) {
 	}
 	NetAddress address;
@@ -90,7 +89,7 @@ protected:
 	 * \return How many bytes have been written to \c buf. If 0 is returned there either was no data
 	 *         available (check before with avail()) or there was some error (check with is_open())
 	 */
-	ssize_t receive(void* buf, size_t len, NetAddress* addr);
+	size_t receive(void* buf, size_t len, NetAddress* addr);
 
 	/**
 	 * Sends data to a specified address.
@@ -124,22 +123,21 @@ private:
 	 * \param version Whether a IPv4 or IPv6 socket should be opened.
 	 * \param port The port to listen on.
 	 */
-	void
-	start_socket(boost::asio::ip::udp::socket* socket, boost::asio::ip::udp version, uint16_t port);
+	void start_socket(asio::ip::udp::socket* socket, asio::ip::udp version, uint16_t port);
 
 	/**
 	 * Closes the given socket.
 	 * Does nothing if the socket already has been closed.
 	 * \param socket The socket to close.
 	 */
-	void close_socket(boost::asio::ip::udp::socket* socket);
+	void close_socket(asio::ip::udp::socket* socket);
 
 	/// No idea what this does. I think it is only really used when asynchronous operations are done.
-	boost::asio::io_service io_service;
+	asio::io_service io_service;
 	/// The socket for IPv4.
-	boost::asio::ip::udp::socket socket_v4;
+	asio::ip::udp::socket socket_v4;
 	/// The socket for IPv6.
-	boost::asio::ip::udp::socket socket_v6;
+	asio::ip::udp::socket socket_v6;
 	/// The found broadcast addresses for IPv4.
 	/// No addresses for v6, there is only one fixed address.
 	std::set<std::string> broadcast_addresses_v4;
@@ -181,7 +179,8 @@ struct LanGameFinder : LanBase {
 private:
 	std::list<std::unique_ptr<NetOpenGame>> opengames;
 
-	void (*callback)(int32_t, const NetOpenGame* const, void*);
+	void (*callback)(int32_t, const NetOpenGame* const, void*)  // linebreak to make codecheck happy
+	   {nullptr};
 	void* userdata;
 };
 

@@ -3,8 +3,8 @@ wl_library(logic_exceptions
     game_data_error.cc
     game_data_error.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
 )
 
 wl_library(logic_widelands_geometry
@@ -30,8 +30,12 @@ wl_library(logic_game_settings
     game_settings.h
     player_end_result.h
   DEPENDS
+    graphic_color
     io_filesystem
+    logic_addons
     logic_constants
+    logic_exceptions
+    logic_filesystem_constants
     logic_tribe_basic_info
     notifications
     scripting_lua_interface
@@ -44,8 +48,10 @@ wl_library(logic_single_player_game_settings
     single_player_game_settings_provider.h
   DEPENDS
     ai
+    base
     base_exceptions
-    base_i18n
+    base_random
+    graphic_playercolor
     logic_game_settings
     logic_tribe_basic_info
 )
@@ -60,6 +66,7 @@ wl_library(logic_game_controller
   USES_SDL2
   DEPENDS
     ai
+    base_times
     logic
     logic_commands
     logic_game_settings
@@ -70,6 +77,7 @@ wl_library(logic_game_controller
 
 wl_library(logic_constants
   SRCS
+    vision.h
     widelands.cc
     widelands.h
 )
@@ -80,12 +88,35 @@ wl_library(logic_filesystem_constants
     filesystem_constants.cc
 )
 
+wl_library(logic_addons
+  SRCS
+    addons.cc
+    addons.h
+    mutable_addon.cc
+    mutable_addon.h
+  DEPENDS
+    base
+    base_exceptions
+    base_math
+    base_time_string
+    build_info
+    graphic
+    graphic_text_layout
+    io_fileread
+    io_filesystem
+    io_profile
+    logic_filesystem_constants
+    logic_map
+    map_io
+    widelands_options
+)
+
 wl_library(logic_objectives
   SRCS
     objective.cc
     objective.h
   DEPENDS
-    base_i18n
+    base
 )
 
 
@@ -94,8 +125,7 @@ wl_library(logic_generic_save_handler
     generic_save_handler.h
     generic_save_handler.cc
   DEPENDS
-    base_i18n
-    base_log
+    base
     base_time_string
     io_filesystem
     logic_filesystem_constants
@@ -127,10 +157,10 @@ wl_library(logic_map
     path.h
     pathfield.cc
     pathfield.h
+  USES_ATOMIC
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_scoped_timer
     build_info
@@ -139,6 +169,8 @@ wl_library(logic_map
     graphic_playercolor
     io_fileread
     io_filesystem
+    logic
+    logic_addons
     logic_constants
     logic_exceptions
     logic_filesystem_constants
@@ -171,10 +203,10 @@ wl_library(logic_commands
     playercommand.cc
     playercommand.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
+    base_times
     economy # TODO(GunChleoc): Circular dependency
     graphic_text_layout
     io_fileread
@@ -190,6 +222,21 @@ wl_library(logic_commands
     scripting_coroutine
     scripting_logic # TODO(GunChleoc): Circular dependency
     scripting_lua_table
+    wui
+)
+
+
+wl_library(logic_training_wheels
+  SRCS
+    training_wheels.cc
+    training_wheels.h
+  DEPENDS
+    base
+    io_filesystem
+    io_profile
+    logic_filesystem_constants
+    scripting_lua_table
+    scripting_lua_interface
 )
 
 wl_library(logic
@@ -212,21 +259,22 @@ wl_library(logic
     replay.h
     save_handler.cc
     save_handler.h
-    see_unsee_node.h
     trade_agreement.h
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
+  USES_ATOMIC
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_md5
     base_random
     base_scoped_timer
     base_time_string
+    base_times
     build_info
     economy
+    editor  # TODO(Nordfriese): Needed only for an ugly temporary hack
     game_io
     graphic
     graphic_color
@@ -235,6 +283,7 @@ wl_library(logic
     io_filesystem
     io_profile
     io_stream
+    logic_addons
     logic_commands
     logic_constants
     logic_exceptions
@@ -245,6 +294,7 @@ wl_library(logic
     logic_map
     logic_map_objects
     logic_tribe_basic_info
+    logic_training_wheels
     logic_widelands_geometry
     map_io
     map_io_map_loader
@@ -256,6 +306,7 @@ wl_library(logic
     sound
     sound_constants
     ui_basic
+    ui_basic_loading_message
     widelands_options
     wui # TODO(GunChleoc): Circular dependency
     wui_game_tips

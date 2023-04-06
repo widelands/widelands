@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifndef WL_GRAPHIC_GL_UTILS_H
@@ -24,7 +23,6 @@
 #include <unordered_set>
 #include <vector>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/gl/system_headers.h"
@@ -43,7 +41,7 @@ public:
 	Program();
 	~Program();
 
-	GLuint object() const {
+	[[nodiscard]] GLuint object() const {
 		return program_object_;
 	}
 
@@ -65,13 +63,13 @@ template <typename T> class Buffer {
 public:
 	Buffer() {
 		glGenBuffers(1, &object_);
-		if (!object_) {
+		if (object_ == 0u) {
 			throw wexception("Could not create GL buffer.");
 		}
 	}
 
 	~Buffer() {
-		if (object_) {
+		if (object_ != 0u) {
 			glDeleteBuffers(1, &object_);
 		}
 	}
@@ -127,8 +125,8 @@ private:
 	std::unordered_map<GLuint, GLenum> texture_to_target_;
 	std::unordered_set<GLint> enabled_attrib_arrays_;
 	GLenum last_active_texture_;
-	GLuint current_framebuffer_;
-	GLuint current_framebuffer_texture_;
+	GLuint current_framebuffer_{0U};
+	GLuint current_framebuffer_texture_{0U};
 
 	State();
 
@@ -138,7 +136,7 @@ private:
 };
 
 // Calls glVertexAttribPointer.
-void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset);
+void vertex_attrib_pointer(int vertex_index, int num_items, int stride, size_t offset);
 
 // Swap order of rows in pixels, to compensate for the upside-down nature of the
 // OpenGL coordinate system.

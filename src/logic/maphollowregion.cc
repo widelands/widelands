@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,14 +23,14 @@ namespace Widelands {
 template <>
 MapHollowRegion<Area<>>::MapHollowRegion(const Map& map, const HollowArea<Area<>>& hollow_area)
    : hollow_area_(hollow_area),
-     phase_(Phase::kTop),
+
      delta_radius_(hollow_area.radius - hollow_area.hole_radius),
-     row_(0),
+
      rowwidth_(hollow_area.radius + 1),
-     rowpos_(0),
+
      left_(hollow_area) {
 	assert(hollow_area.hole_radius < hollow_area.radius);
-	for (uint16_t r = hollow_area.radius; r; --r) {
+	for (uint16_t r = hollow_area.radius; r != 0u; --r) {
 		map.get_tln(hollow_area_, &hollow_area_);
 	}
 	left_ = hollow_area_;
@@ -44,7 +43,7 @@ template <> bool MapHollowRegion<Area<>>::advance(const Map& map) {
 	++rowpos_;
 	if (rowpos_ < rowwidth_) {
 		map.get_rn(hollow_area_, &hollow_area_);
-		if ((phase_ & (Phase::kUpper | Phase::kLower)) && rowpos_ == delta_radius_) {
+		if (((phase_ & (Phase::kUpper | Phase::kLower)) != 0) && rowpos_ == delta_radius_) {
 			//  Jump over the hole.
 			const uint32_t holewidth = rowwidth_ - 2 * delta_radius_;
 			for (uint32_t i = 0; i < holewidth; ++i) {
@@ -66,7 +65,7 @@ template <> bool MapHollowRegion<Area<>>::advance(const Map& map) {
 			phase_ = Phase::kLower;
 		}
 
-		if (phase_ & (Phase::kTop | Phase::kUpper)) {
+		if ((phase_ & (Phase::kTop | Phase::kUpper)) != 0) {
 			map.get_bln(left_, &hollow_area_);
 			++rowwidth_;
 		} else {
@@ -74,7 +73,8 @@ template <> bool MapHollowRegion<Area<>>::advance(const Map& map) {
 			if (row_ > hollow_area_.radius) {
 				phase_ = Phase::kNone;
 				return true;  // early out
-			} else if (phase_ == Phase::kLower && row_ > hollow_area_.hole_radius) {
+			}
+			if (phase_ == Phase::kLower && row_ > hollow_area_.hole_radius) {
 				phase_ = Phase::kBottom;
 			}
 

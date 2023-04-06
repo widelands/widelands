@@ -15,7 +15,6 @@ _re_entry = re.compile('(\\S+?)\\s*=_?\\s*([^#]*)')
 
 
 class Section(object):
-
     def __init__(self, file, line):
         self.file = file
         self.line = line

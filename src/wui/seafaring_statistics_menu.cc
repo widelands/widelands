@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2017-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,15 +21,15 @@
 #include <memory>
 
 #include "economy/ship_fleet.h"
-#include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "ui_basic/box.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/shipwindow.h"
-#include "wui/watchwindow.h"
 
 inline InteractivePlayer& SeafaringStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -41,10 +40,29 @@ constexpr int kButtonSize = 34;
 
 SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                                                  UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&plr, "seafaring_statistics", &registry, 375, 375, _("Seafaring Statistics")),
-     main_box_(this, kPadding, kPadding, UI::Box::Vertical, get_inner_w(), get_inner_h(), kPadding),
-     filter_box_(
-        &main_box_, 0, 0, UI::Box::Horizontal, get_inner_w() - 2 * kPadding, kButtonSize, kPadding),
+   : UI::UniqueWindow(&plr,
+                      UI::WindowStyle::kWui,
+                      "seafaring_statistics",
+                      &registry,
+                      375,
+                      375,
+                      _("Seafaring Statistics")),
+     main_box_(this,
+               UI::PanelStyle::kWui,
+               kPadding,
+               kPadding,
+               UI::Box::Vertical,
+               get_inner_w(),
+               get_inner_h(),
+               kPadding),
+     filter_box_(&main_box_,
+                 UI::PanelStyle::kWui,
+                 0,
+                 0,
+                 UI::Box::Horizontal,
+                 get_inner_w() - 2 * kPadding,
+                 kButtonSize,
+                 kPadding),
      idle_btn_(&filter_box_,
                "filter_ship_idle",
                0,
@@ -85,9 +103,15 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                    kButtonSize,
                    UI::ButtonStyle::kWuiSecondary,
                    status_to_image(ShipFilterStatus::kShipping)),
-     ship_filter_(ShipFilterStatus::kAll),
-     navigation_box_(
-        &main_box_, 0, 0, UI::Box::Horizontal, get_inner_w() - 2 * kPadding, kButtonSize, kPadding),
+
+     navigation_box_(&main_box_,
+                     UI::PanelStyle::kWui,
+                     0,
+                     0,
+                     UI::Box::Horizontal,
+                     get_inner_w() - 2 * kPadding,
+                     kButtonSize,
+                     kPadding),
      watchbtn_(&navigation_box_,
                "seafaring_stats_watch_button",
                0,
@@ -95,27 +119,40 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                kButtonSize,
                kButtonSize,
                UI::ButtonStyle::kWuiPrimary,
-               g_gr->images().get("images/wui/menus/watch_follow.png"),
-               /** TRANSLATORS: Tooltip in the seafaring statistics window */
-               as_tooltip_text_with_hotkey(_("Watch the selected ship"), "w")),
-     openwindowbtn_(&navigation_box_,
-                    "seafaring_stats_watch_button",
-                    0,
-                    0,
-                    kButtonSize,
-                    kButtonSize,
-                    UI::ButtonStyle::kWuiPrimary,
-                    g_gr->images().get("images/ui_basic/fsel.png"),
-                    (boost::format("%s<br>%s") %
-                     as_tooltip_text_with_hotkey(
-                        /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                        _("Open the selected ship’s window"),
-                        "o") %
-                     as_tooltip_text_with_hotkey(
-                        /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                        _("Go to the selected ship and open its window"),
-                        pgettext("hotkey", "CTRL+o")))
-                       .str()),
+               g_image_cache->get("images/wui/menus/watch_follow.png"),
+               as_tooltip_text_with_hotkey(
+                  /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                  _("Watch the selected ship"),
+                  shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsWatchShip, true),
+                  UI::PanelStyle::kWui)),
+     openwindowbtn_(
+        &navigation_box_,
+        "seafaring_stats_open_ship_window_button",
+        0,
+        0,
+        kButtonSize,
+        kButtonSize,
+        UI::ButtonStyle::kWuiPrimary,
+        g_image_cache->get("images/ui_basic/fsel.png"),
+        format("<rt><p>%s %s<br>%s</p></rt>",
+               g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+                  .as_font_tag(
+                     /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                     _("Open the selected ship’s window")),
+               g_style_manager->font_style(UI::FontStyle::kWuiTooltipHotkey)
+                  .as_font_tag("(" +
+                               shortcut_string_for(
+                                  KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow, true) +
+                               ")"),
+               g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+                  .as_font_tag(
+                     /** TRANSLATORS: Tooltip in the seafaring statistics window, placeholder is a
+                         hotkey */
+                     format(_("(You can use %s to go to the selected ship and open its window.)"),
+                            g_style_manager->font_style(UI::FontStyle::kWuiTooltipHotkey)
+                               .as_font_tag(shortcut_string_for(
+                                  KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto,
+                                  true)))))),
      centerviewbtn_(&navigation_box_,
                     "seafaring_stats_center_main_mapview_button",
                     0,
@@ -123,15 +160,13 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     kButtonSize,
                     kButtonSize,
                     UI::ButtonStyle::kWuiPrimary,
-                    g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
+                    g_image_cache->get("images/wui/ship/menu_ship_goto.png"),
                     as_tooltip_text_with_hotkey(
                        /** TRANSLATORS: Tooltip in the seafaring statistics window */
                        _("Center the map on the selected ship"),
-                       "g")),
+                       shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsGotoShip, true),
+                       UI::PanelStyle::kWui)),
      table_(&main_box_, 0, 0, get_inner_w() - 2 * kPadding, 100, UI::PanelStyle::kWui) {
-
-	const Widelands::TribeDescr& tribe = iplayer().player().tribe();
-	colony_icon_ = tribe.get_worker_descr(tribe.builder())->icon();
 
 	// Buttons for ship states
 	main_box_.add(&filter_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -168,8 +203,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	centerviewbtn_.sigclicked.connect([this]() { center_view(); });
 
 	// Configure table
-	table_.selected.connect([this](unsigned) { selected(); });
-	table_.double_clicked.connect([this](unsigned) { double_clicked(); });
+	table_.selected.connect([this](unsigned /* index */) { selected(); });
+	table_.double_clicked.connect([this](unsigned /* index */) { double_clicked(); });
 	table_.add_column(
 	   0, pgettext("ship", "Name"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.add_column(230, pgettext("ship", "Status"));
@@ -186,18 +221,20 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 			   switch (note.action) {
 			   case Widelands::NoteShip::Action::kDestinationChanged:
 			   case Widelands::NoteShip::Action::kWaitingForCommand:
+			   case Widelands::NoteShip::Action::kNoPortLeft:
 			   case Widelands::NoteShip::Action::kGained:
 				   assert(note.ship != nullptr);
 				   update_ship(*note.ship);
-				   break;
+				   return;
 			   case Widelands::NoteShip::Action::kLost:
 				   remove_ship(note.ship->serial());
-				   break;
-			   default:
-				   NEVER_HERE();
+				   return;
 			   }
+			   NEVER_HERE();
 		   }
 	   });
+
+	initialization_complete();
 }
 
 const std::string
@@ -213,8 +250,6 @@ SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterSta
 		return pgettext("ship_state", "Scouting");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
 		return pgettext("ship_state", "Port Space Found");
-	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
-		return pgettext("ship_state", "Founding a Colony");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		return "All";  // The user shouldn't see this, so we don't localize
 	}
@@ -223,7 +258,7 @@ SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterSta
 
 const Image*
 SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStatus status) const {
-	std::string filename = "";
+	std::string filename;
 	switch (status) {
 	case SeafaringStatisticsMenu::ShipFilterStatus::kIdle:
 		filename = "images/wui/stats/ship_stats_idle.png";
@@ -240,13 +275,11 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionPortspaceFound:
 		filename = "images/wui/ship/ship_construct_port_space.png";
 		break;
-	case SeafaringStatisticsMenu::ShipFilterStatus::kExpeditionColonizing:
-		return colony_icon_;
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		filename = "images/wui/ship/ship_scout_ne.png";
 		break;
 	}
-	return g_gr->images().get(filename);
+	return g_image_cache->get(filename);
 }
 
 std::unique_ptr<const SeafaringStatisticsMenu::ShipInfo>
@@ -255,7 +288,7 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	ShipFilterStatus status = ShipFilterStatus::kAll;
 	switch (state) {
 	case Widelands::Ship::ShipStates::kTransport:
-		if (ship.get_destination() && ship.get_fleet()->get_schedule().is_busy(ship)) {
+		if ((ship.get_destination() != nullptr) && ship.get_fleet()->get_schedule().is_busy(ship)) {
 			status = ShipFilterStatus::kShipping;
 		} else {
 			status = ShipFilterStatus::kIdle;
@@ -268,10 +301,9 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 		status = ShipFilterStatus::kExpeditionScouting;
 		break;
 	case Widelands::Ship::ShipStates::kExpeditionPortspaceFound:
-		status = ShipFilterStatus::kExpeditionPortspaceFound;
-		break;
 	case Widelands::Ship::ShipStates::kExpeditionColonizing:
-		status = ShipFilterStatus::kExpeditionColonizing;
+		// We're grouping the "colonizing" status with the port space.
+		status = ShipFilterStatus::kExpeditionPortspaceFound;
 		break;
 	case Widelands::Ship::ShipStates::kSinkRequest:
 	case Widelands::Ship::ShipStates::kSinkAnimation:
@@ -356,98 +388,46 @@ void SeafaringStatisticsMenu::update_button_states() {
 
 bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
-		switch (code.sym) {
-		// Don't forget to change the tooltips if any of these get reassigned
-		case SDLK_g:
+		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsGotoShip, code)) {
 			center_view();
 			return true;
-		case SDLK_o:
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow, code)) {
 			open_ship_window();
 			return true;
-		case SDLK_w:
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto, code)) {
+			open_ship_window();
+			center_view();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsWatchShip, code)) {
 			watch_ship();
 			return true;
-
-		case SDLK_KP_0:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_0:
-			if (code.mod & KMOD_ALT) {
-				filter_ships(ShipFilterStatus::kAll);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_1:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_1:
-			if (code.mod & KMOD_ALT) {
-				filter_ships(ShipFilterStatus::kIdle);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_2:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_2:
-			if (code.mod & KMOD_ALT) {
-				filter_ships(ShipFilterStatus::kShipping);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_3:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_3:
-			if (code.mod & KMOD_ALT) {
-				filter_ships(ShipFilterStatus::kExpeditionWaiting);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_4:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_4:
-			if (code.mod & KMOD_ALT) {
-				filter_ships(ShipFilterStatus::kExpeditionScouting);
-				return true;
-			}
-			return false;
-
-		case SDLK_KP_5:
-			if (!(code.mod & KMOD_NUM)) {
-				return false;
-			}
-			FALLS_THROUGH;
-		case SDLK_5:
-			if (code.mod & KMOD_ALT) {
-				filter_ships(ShipFilterStatus::kExpeditionPortspaceFound);
-				return true;
-			}
-			return false;
-
-		case SDL_SCANCODE_KP_PERIOD:
-		case SDLK_KP_PERIOD:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		default:
-			break;  // not handled
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsFilterAll, code)) {
+			filter_ships(ShipFilterStatus::kAll);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsFilterIdle, code)) {
+			filter_ships(ShipFilterStatus::kIdle);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsFilterShipping, code)) {
+			filter_ships(ShipFilterStatus::kShipping);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsFilterExpWait, code)) {
+			filter_ships(ShipFilterStatus::kExpeditionWaiting);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsFilterExpScout, code)) {
+			filter_ships(ShipFilterStatus::kExpeditionScouting);
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameSeafaringstatsFilterExpPortspace, code)) {
+			filter_ships(ShipFilterStatus::kExpeditionPortspaceFound);
+			return true;
 		}
 	}
 
@@ -463,16 +443,14 @@ void SeafaringStatisticsMenu::center_view() {
 
 void SeafaringStatisticsMenu::watch_ship() {
 	if (table_.has_selection()) {
-		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
-		WatchWindow* window = show_watch_window(iplayer(), ship->get_position());
-		window->follow(ship);
+		iplayer().show_watch_window(*serial_to_ship(table_.get_selected()));
 	}
 }
 
 void SeafaringStatisticsMenu::open_ship_window() {
 	if (table_.has_selection()) {
 		// Move to ship if CTRL is prssed
-		if (SDL_GetModState() & KMOD_CTRL) {
+		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 			center_view();
 		}
 		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
@@ -488,8 +466,6 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 	case ShipFilterStatus::kExpeditionScouting:
 		toggle_filter_ships_button(scouting_btn_, status);
 		break;
-	// We're grouping the "colonizing" status with the port space.
-	case ShipFilterStatus::kExpeditionColonizing:
 	case ShipFilterStatus::kExpeditionPortspaceFound:
 		toggle_filter_ships_button(portspace_btn_, status);
 		break;
@@ -529,7 +505,9 @@ void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
 
 		button.set_tooltip(as_tooltip_text_with_hotkey(
 		   /** TRANSLATORS: Tooltip in the ship statistics window */
-		   _("Show all ships"), pgettext("hotkey", "Alt+0")));
+		   _("Show all ships"),
+		   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterAll, true),
+		   UI::PanelStyle::kWui));
 	}
 }
 
@@ -537,25 +515,34 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 
 	idle_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
-	   _("Show empty ships"), pgettext("hotkey", "Alt+1")));
+	   _("Show empty ships"),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterIdle, true),
+	   UI::PanelStyle::kWui));
 	shipping_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
-	   _("Show ships shipping wares and workers"), pgettext("hotkey", "Alt+2")));
+	   _("Show ships shipping wares and workers"),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterShipping, true),
+	   UI::PanelStyle::kWui));
 	waiting_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
-	   _("Show waiting expeditions"), pgettext("hotkey", "Alt+3")));
+	   _("Show waiting expeditions"),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterExpWait, true),
+	   UI::PanelStyle::kWui));
 	scouting_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
-	   _("Show scouting expeditions"), pgettext("hotkey", "Alt+4")));
+	   _("Show scouting expeditions"),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterExpScout, true),
+	   UI::PanelStyle::kWui));
 	portspace_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show expeditions that have found a port space or are founding a colony"),
-	   pgettext("hotkey", "Alt+5")));
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterExpPortspace, true),
+	   UI::PanelStyle::kWui));
 }
 
-bool SeafaringStatisticsMenu::satisfies_filter(const ShipInfo& info, ShipFilterStatus filter) {
-	return filter == info.status || (filter == ShipFilterStatus::kExpeditionPortspaceFound &&
-	                                 info.status == ShipFilterStatus::kExpeditionColonizing);
+inline bool SeafaringStatisticsMenu::satisfies_filter(const ShipInfo& info,
+                                                      ShipFilterStatus filter) {
+	return filter == info.status;
 }
 
 void SeafaringStatisticsMenu::fill_table() {
@@ -590,4 +577,31 @@ void SeafaringStatisticsMenu::fill_table() {
 		// Fix column width. Because no entries were added, the table didn't layout itself
 		table_.layout();
 	}
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& SeafaringStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_seafaring;
+			r.create();
+			assert(r.window);
+			SeafaringStatisticsMenu& m = dynamic_cast<SeafaringStatisticsMenu&>(*r.window);
+			m.filter_ships(static_cast<ShipFilterStatus>(fr.unsigned_8()));
+			m.table_.select(fr.unsigned_32());
+			return m;
+		}
+		throw Widelands::UnhandledVersionError(
+		   "Seafaring Statistics Menu", packet_version, kCurrentPacketVersion);
+
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("seafaring statistics menu: %s", e.what());
+	}
+}
+void SeafaringStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(static_cast<uint8_t>(ship_filter_));
+	fw.unsigned_32(table_.selection_index());
 }

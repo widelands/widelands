@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,64 +23,65 @@
 
 #include "logic/game_settings.h"
 #include "ui_basic/button.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/textarea.h"
 #include "ui_fsmenu/helpwindow.h"
 #include "ui_fsmenu/launch_game.h"
-#include "wui/suggested_teams_box.h"
+#include "ui_fsmenu/multiplayersetupgroup.h"
+#include "wui/game_chat_panel.h"
 
 struct ChatProvider;
-struct GameChatPanel;
-struct MultiPlayerSetupGroup;
+struct MapData;
+namespace Widelands {
+class Game;
+}  // namespace Widelands
+
+namespace FsMenu {
 
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player
  * games.
  *
  */
-class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
+class LaunchMPG : public LaunchGame {
 public:
-	FullscreenMenuLaunchMPG(GameSettingsProvider*, GameController*);
-	~FullscreenMenuLaunchMPG() override;
+	LaunchMPG(
+	   MenuCapsule&,
+	   GameSettingsProvider&,
+	   GameController&,
+	   ChatProvider&,
+	   bool game_done_on_cancel,
+	   const std::function<void()>& callback = []() {});
+	~LaunchMPG() override;
 
-	void set_chat_provider(ChatProvider&);
 	void think() override;
 	void refresh();
 
+	void clicked_select_map_callback(const MapData*, bool);
+
 protected:
 	void clicked_ok() override;
-	void clicked_back() override;
 
 private:
 	void layout() override;
-
-	void change_map_or_save();
-	void select_map();
-	void select_saved_game();
+	void clicked_select_map() override;
+	void clicked_select_savegame() override;
 	void win_condition_selected() override;
 
 	void set_scenario_values();
 	void load_previous_playerdata();
 	void load_map_info();
 	void help_clicked();
+	void map_changed();
 
-	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
-	// so we can have the SuggestedTeamsBox
-	int32_t const padding_;  // Common padding between panels
-	int32_t const indent_;   // Indent for elements below labels
-	int32_t const label_height_;
-	int32_t const right_column_x_;
+	std::function<void()> callback_;
+	bool game_done_on_cancel_;
 
-	UI::Button change_map_or_save_;
 	UI::Button help_button_;
-	UI::Textarea clients_, players_, map_, wincondition_type_;
-	UI::MultilineTextarea map_info_;
-	std::unique_ptr<UI::FullscreenHelpWindow> help_;
-	GameChatPanel* chat_;
-	MultiPlayerSetupGroup* mpsg_;
-	std::string filename_proof_;  // local variable to check state
 
-	UI::SuggestedTeamsBox* suggested_teams_box_;
+	std::unique_ptr<HelpWindow> help_;
+	MultiPlayerSetupGroup mpsg_;
+	std::unique_ptr<GameChatPanel> chat_;
+
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_MPG_H

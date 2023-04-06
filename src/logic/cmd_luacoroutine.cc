@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -35,27 +34,30 @@
 
 namespace Widelands {
 
-CmdLuaCoroutine::~CmdLuaCoroutine() {
-}
-
 void CmdLuaCoroutine::execute(Game& game) {
 	try {
 		int rv = cr_->resume();
 		const uint32_t sleeptime = cr_->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
-			game.enqueue_command(new Widelands::CmdLuaCoroutine(sleeptime, std::move(cr_)));
+			game.enqueue_command(new Widelands::CmdLuaCoroutine(Time(sleeptime), std::move(cr_)));
 		} else if (rv == LuaCoroutine::DONE) {
 			cr_.reset();
 		}
 	} catch (LuaError& e) {
-		log("Error in Lua Coroutine\n");
-		log("%s\n", e.what());
-		log("Send message to all players and pause game\n");
+		log_err_time(game.get_gametime(), "Error in Lua Coroutine\n");
+		log_err_time(game.get_gametime(), "%s\n", e.what());
+
+		if (g_fail_on_lua_error) {
+			log_err_time(game.get_gametime(), "Terminating Widelands.");
+			abort();
+		}
+
+		log_err_time(game.get_gametime(), "Send message to all players and pause game\n");
 		const std::string error_message = richtext_escape(e.what());
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			// Send message only to open player slots
 			Player* recipient = game.get_player(i);
-			if (recipient) {
+			if (recipient != nullptr) {
 				std::unique_ptr<Message> msg(new Widelands::Message(
 				   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",
 				   "images/ui_basic/menu_help.png", "Lua Coroutine Failed", error_message));

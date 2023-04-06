@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,9 +20,11 @@
 #define WL_UI_BASIC_TABLE_H
 
 #include <functional>
+#include <memory>
 #include <set>
 
 #include "graphic/align.h"
+#include "graphic/style_manager.h"
 #include "graphic/styles/font_style.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
@@ -44,7 +45,7 @@ enum class TableColumnType { kFixed, kFlexible };
  *    2. a pointer type or
  *    3. uintptr_t.
  */
-template <typename Entry> class Table {
+template <typename Entry> class Table : public Panel {
 public:
 	struct EntryRecord {};
 
@@ -55,11 +56,11 @@ public:
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle);
-	~Table();
+	~Table() override;
 
-	boost::signals2::signal<void()> cancel;
-	boost::signals2::signal<void(uint32_t)> selected;
-	boost::signals2::signal<void(uint32_t)> double_clicked;
+	Notifications::Signal<> cancel;
+	Notifications::Signal<uint32_t> selected;
+	Notifications::Signal<uint32_t> double_clicked;
 
 	/// A column that has a title is sortable (by clicking on the title).
 	///
@@ -76,14 +77,14 @@ public:
 
 	void clear();
 	void set_sort_column(uint8_t col);
-	uint8_t get_sort_colum() const;
+	uint8_t get_sort_column() const;
 	bool get_sort_descending() const;
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 	void remove_entry(Entry);
 
-	EntryRecord& add(void* const entry, bool const select_this = false);
+	EntryRecord& add(void* entry, bool select_this = false);
 
 	uint32_t size() const;
 	bool empty() const;
@@ -102,7 +103,7 @@ public:
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
-		char const* what() const noexcept override {
+		[[nodiscard]] char const* what() const noexcept override {
 			return "UI::Table<Entry>: No selection";
 		}
 	};
@@ -115,11 +116,15 @@ public:
 
 	uint32_t get_eff_w() const;
 
+	std::vector<Recti> focus_overlay_rects() override;
+
 	// Drawing and event handling
-	void draw(RenderTarget&);
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
-	bool handle_key(bool down, SDL_Keysym code);
+	void draw(RenderTarget&) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 };
 
 template <> class Table<void*> : public Panel {
@@ -131,21 +136,21 @@ public:
 		void set_picture(uint8_t col, const Image* pic, const std::string& str = std::string());
 		/// Text conventions: Title Case for the 'str'
 		void set_string(uint8_t col, const std::string& str);
-		const Image* get_picture(uint8_t col) const;
-		const std::string& get_string(uint8_t col) const;
-		void* entry() const {
+		[[nodiscard]] const Image* get_picture(uint8_t col) const;
+		[[nodiscard]] const std::string& get_string(uint8_t col) const;
+		[[nodiscard]] void* entry() const {
 			return entry_;
 		}
 
-		void set_font_style(const UI::FontStyleInfo& style) {
-			font_style_ = &style;
+		void set_font_style(const FontStyle style) {
+			font_style_.reset(new FontStyle(style));
 		}
 
-		const UI::FontStyleInfo* font_style() const {
-			return font_style_;
+		[[nodiscard]] const UI::FontStyleInfo* font_style() const {
+			return font_style_ ? &g_style_manager->font_style(*font_style_) : nullptr;
 		}
 
-		bool is_disabled() const {
+		[[nodiscard]] bool is_disabled() const {
 			return disabled_;
 		}
 		void set_disabled(bool disable) {
@@ -155,13 +160,13 @@ public:
 	private:
 		friend class Table<void*>;
 		void* entry_;
-		const UI::FontStyleInfo* font_style_;
+		std::unique_ptr<UI::FontStyle> font_style_;
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
 		};
 		std::vector<Data> data_;
-		bool disabled_;
+		bool disabled_{false};
 	};
 
 	Table(Panel* parent,
@@ -180,9 +185,9 @@ public:
 	 */
 	using CompareFn = std::function<bool(uint32_t, uint32_t)>;
 
-	boost::signals2::signal<void()> cancel;
-	boost::signals2::signal<void(uint32_t)> selected;
-	boost::signals2::signal<void(uint32_t)> double_clicked;
+	Notifications::Signal<> cancel;
+	Notifications::Signal<uint32_t> selected;
+	Notifications::Signal<uint32_t> double_clicked;
 
 	void add_column(uint32_t width,
 	                const std::string& title = std::string(),
@@ -191,17 +196,14 @@ public:
 	                TableColumnType column_type = TableColumnType::kFixed);
 
 	void set_column_title(uint8_t col, const std::string& title);
-	void set_column_tooltip(uint8_t col, const std::string& tooltip);
+	void set_column_tooltip(uint8_t col, const std::string& text);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
 
 	size_t number_of_columns() const;
 
 	void clear();
-	void set_sort_column(uint8_t const col) {
-		assert(col < columns_.size());
-		sort_column_ = col;
-	}
-	uint8_t get_sort_colum() const {
+	void set_sort_column(uint8_t col);
+	uint8_t get_sort_column() const {
 		return sort_column_;
 	}
 	bool get_sort_descending() const {
@@ -213,9 +215,9 @@ public:
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
-	void remove_entry(const void* const entry);
+	void remove_entry(const void* entry);
 
-	EntryRecord& add(void* entry = nullptr, bool const select_this = false);
+	EntryRecord& add(void* entry = nullptr, bool do_select = false);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -256,14 +258,15 @@ public:
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
-		char const* what() const noexcept override {
+		[[nodiscard]] char const* what() const noexcept override {
 			return "UI::Table<void *>: No selection";
 		}
 	};
 	void scroll_to_item(int32_t item);
 	EntryRecord& get_selected_record() const {
-		if (selection_ == no_selection_index())
+		if (selection_ == no_selection_index()) {
 			throw NoSelection();
+		}
 		assert(selection_ < entry_records_.size());
 		return *entry_records_.at(selection_);
 	}
@@ -284,52 +287,67 @@ public:
 
 	void layout() override;
 
+	std::vector<Recti> focus_overlay_rects() override;
+
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
+	bool handle_tooltip() override;
 
 private:
-	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
+	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b) const;
 	bool sort_helper(uint32_t a, uint32_t b);
+	void reposition_scrollbar();
+	size_t find_resizable_column_idx();
+	int total_columns_width();
+	void adjust_column_sizes(int all_columns_width, size_t resizeable_column_idx);
+	void update_scrollbar_filler();
 
 	struct Column {
 		Button* btn;
 		int width;
+		int original_width;
 		Align alignment;
 		CompareFn compare;
+		std::string user_tooltip;
+
+		void update_tooltip(bool sorted) const;
 	};
 	using Columns = std::vector<Column>;
 
 	static const int32_t ms_darken_value = -20;
 
 	Columns columns_;
-	int total_width_;
+	int total_width_{0};
 	int32_t lineheight_;
 	const uint32_t headerheight_;
-	const UI::PanelStyle style_;
 	const UI::ButtonStyle button_style_;
-	Scrollbar* scrollbar_;
+	Scrollbar* scrollbar_{nullptr};
 	// A disabled button that will fill the space above the scroll bar
 	UI::Button* scrollbar_filler_button_;
-	int32_t scrollpos_;  //  in pixels
+	int32_t scrollpos_{0};  //  in pixels
 	uint32_t selection_;
 	uint32_t last_multiselect_;  // Remembers last selected element in multiselect mode for keyboard
 	                             // navigation
 	std::set<uint32_t> multiselect_;
-	uint32_t last_click_time_;
+	uint32_t last_click_time_{std::numeric_limits<uint32_t>::max()};
 	uint32_t last_selection_;  // for double clicks
-	Columns::size_type sort_column_;
+	Columns::size_type sort_column_{0};
 	bool sort_descending_;
 	// This column will grow/shrink depending on the scrollbar being present
-	size_t flexible_column_;
+	size_t flexible_column_idx_;
 	bool is_multiselect_;
 
 	void header_button_clicked(Columns::size_type);
 	using EntryRecordVector = std::vector<EntryRecord*>;
 	EntryRecordVector entry_records_;
-	void set_scrollpos(int32_t pos);
+	void set_scrollpos(int32_t i);
+	bool is_mouse_in(const Vector2i& cursor_pos, const Vector2i& point, int column_width) const;
+	FontStyleInfo& get_column_fontstyle(const EntryRecord& er);
 };
 
 template <typename Entry> class Table<const Entry* const> : public Table<void*> {

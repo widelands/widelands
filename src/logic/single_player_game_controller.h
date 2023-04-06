@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2020 by the Widelands Development Team
+ * Copyright (C) 2015-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,7 +21,6 @@
 
 #include "ai/computer_player.h"
 #include "logic/game_controller.h"
-#include "logic/player_end_result.h"
 
 class SinglePlayerGameController : public GameController {
 public:
@@ -31,27 +29,29 @@ public:
 
 	void think() override;
 	void send_player_command(Widelands::PlayerCommand*) override;
-	int32_t get_frametime() override;
+	Duration get_frametime() override;
 	GameController::GameType get_game_type() override;
 	uint32_t real_speed() override;
 	uint32_t desired_speed() override;
 	void set_desired_speed(uint32_t speed) override;
 	bool is_paused() override;
 	void set_paused(bool paused) override;
-	void report_result(uint8_t player,
-	                   Widelands::PlayerEndResult result,
-	                   const std::string& info) override;
+	void
+	report_result(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string& info) override;
+	void set_write_replay(bool /* replay */) override {
+		NEVER_HERE();
+	}
 
 private:
 	Widelands::Game& game_;
 	bool use_ai_;
-	int32_t lastframe_;
-	int32_t time_;
+	uint32_t lastframe_;
+	Time time_;
 	uint32_t speed_;  ///< current game speed, in milliseconds per second
-	bool paused_;
-	uint32_t player_cmdserial_;
+	bool paused_{false};
+	uint32_t player_cmdserial_{0U};
 	Widelands::PlayerNumber local_;
-	std::vector<ComputerPlayer*> computerplayers_;
+	std::vector<AI::ComputerPlayer*> computerplayers_;
 };
 
 #endif  // end of include guard: WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H

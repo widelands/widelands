@@ -6,7 +6,8 @@
 			"entries":[
 				{
 					"members":[
-						"GunChleoc (Since 2016)",
+						"Benedikt Straub (Nordfriese) (Since 2022)",
+						"GunChleoc (2016 – 2022)",
 						"Holger Rapp (SirVer) (2001 – 2016)"
 					]
 				}
@@ -18,8 +19,8 @@
 			"entries":[
 				{
 					"subheading": "Graphics",
-					"translate":[
-						"vacant"
+					"members":[
+						"Tóth András (tothxa)"
 					]
 				},
 				{
@@ -29,9 +30,15 @@
 					]
 				},
 				{
-					"subheading": "Sound",
+					"subheading": "Scripting",
 					"members":[
-						"Jan Bruns (solatis)"
+						"Stephan Lutz (hessenfarmer)"
+					]
+				},
+				{
+					"subheading": "Sound",
+					"translate":[
+						"vacant"
 					]
 				},
 				{
@@ -121,7 +128,16 @@
 						"Antonino Siena (nifker)",
 						"Jonas Mörschbach (jmoerschbach)",
 						"Libor Pospíchal",
-						"Rikard Falkeborn"
+						"Rikard Falkeborn",
+						"Matthias Klimmek",
+						"Ryan Schmidt (ryandesign)",
+						"Stephan Lutz (hessenfarmer)",
+						"Arne Schauf (NativeException)",
+						"Tóth András",
+						"Akupar",
+						"Andy Alt (andy5995/arch_stanton)",
+						"Veracion",
+						"Pavol Gono"
 					]
 				}
 			]
@@ -226,7 +242,8 @@
 						"Benedikt Straub (Nordfriese)",
 						"Holloweye",
 						"Marwin",
-						"Asatarean"
+						"Asatarean",
+						"Philipp Klaus Krause (PkK)"
 					]
 				}
 			]
@@ -254,7 +271,8 @@
 					"subheading": "Atlanteans",
 					"members":[
 						"Holger Rapp (SirVer)",
-						"Peter Schwanemann (Nasenbaer)"
+						"Peter Schwanemann (Nasenbaer)",
+						"Stephan Lutz (hessenfarmer)"
 					]
 				},
 				{
@@ -303,7 +321,8 @@
 				{
 					"subheading": "Flatpak",
 					"members":[
-						"scx"
+						"scx",
+						"Tóth András"
 					]
 				},
 				{
@@ -324,7 +343,9 @@
 						"Tino Miegel (TinoM)",
 						"Alexander Kahl (Wolfpac)",
 						"Geodomus",
-						"Jari Hautio"
+						"Jari Hautio",
+						"Stephan Lutz (hessenfarmer)",
+						"Matthias Klimmek"
 					]
 				},
 				{
@@ -369,6 +390,25 @@
 			]
 		},
 		{
+			"heading": "Add-Ons",
+			"image": "images/ui_fsmenu/addon_authors.png",
+			"entries":[
+				{
+					"members":[
+						"Björn Burkhardt",
+						"Benedikt Straub (Nordfriese)",
+						"Stephan Lutz (hessenfarmer)",
+						"Ondřej (OIPUN)",
+						"Matthias Klimmek",
+						"king of nowhere",
+						"Markus Göpfert (MarkMcWire)",
+						"Yo...",
+						"kaputtnik"
+					]
+				}
+			]
+		},
+		{
 			"heading": "Former Elders",
 			"image": "images/players/genstats_player.png",
 			"entries":[
@@ -390,7 +430,8 @@
 				{
 					"subheading": "Sound",
 					"members":[
-						"Yannick Warnier"
+						"Yannick Warnier",
+						"Jan Bruns (solatis)"
 					]
 				},
 				{
@@ -413,7 +454,7 @@
 						"WorldSavior"
 					],
 					"translate":[
-						"and many, many more (thank you for everything you've done)"
+						"and many, many more (thank you for everything you’ve done)"
 					]
 				}
 			]

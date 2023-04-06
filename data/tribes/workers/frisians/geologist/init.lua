@@ -1,11 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_worker_type {
-   msgctxt = "frisians_worker",
+wl.Descriptions():new_worker_type {
    name = "frisians_geologist",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("frisians_worker", "Geologist"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -16,7 +17,7 @@ tribes:new_worker_type {
 
    programs = {
       expedition = {
-         "repeatsearch=15 5 search"
+         "repeatsearch=search repetitions:15 radius:5"
       },
       search = {
          "animate=hacking duration:3s",
@@ -31,8 +32,6 @@ tribes:new_worker_type {
 
    spritesheets = {
       walk = {
-         directory = dirname,
-         basename = "walk",
          fps = 15,
          frames = 10,
          columns = 5,
@@ -41,8 +40,6 @@ tribes:new_worker_type {
          hotspot = {11, 23}
       },
       idle = {
-         directory = dirname,
-         basename = "idle",
          fps = 10,
          frames = 10,
          columns = 5,
@@ -50,8 +47,6 @@ tribes:new_worker_type {
          hotspot = {8, 23}
       },
       hacking = {
-         directory = dirname,
-         basename = "hacking",
          fps = 10,
          frames = 10,
          columns = 5,
@@ -60,3 +55,5 @@ tribes:new_worker_type {
       },
    },
 }
+
+pop_textdomain()

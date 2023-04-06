@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,17 +26,22 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 
-void MapHeightsPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader&) {
+void MapHeightsPacket::read(FileSystem& fs,
+                            EditorGameBase& egbase,
+                            bool /* skip */,
+                            MapObjectLoader& /* mol */) {
 
 	FileRead fr;
 	fr.open(fs, "binary/heights");
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
-			const Map& map = egbase.map();
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersion) {
+			Map& map = *egbase.mutable_map();
+			map.max_field_height_diff_ =
+			   (packet_version < 2) ? kDefaultMaxFieldHeightDiff : fr.unsigned_8();
 			MapIndex const max_index = map.max_index();
 			for (MapIndex i = 0; i < max_index; ++i) {
 				map[i].set_height(fr.unsigned_8());
@@ -53,14 +57,13 @@ void MapHeightsPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObj
 /*
  * Write Function
  */
-void MapHeightsPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&)
-
-{
+void MapHeightsPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& /* mos */) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	const Map& map = egbase.map();
+	fw.unsigned_8(map.max_field_height_diff());
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i) {
 		fw.unsigned_8(map[i].get_height());

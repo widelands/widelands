@@ -1,17 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {}
-add_animation(animations, "idle", dirname, "idle", { 62, 48 })
-add_animation(animations, "build", dirname, "build", { 62, 48 })
-add_animation(animations, "unoccupied", dirname, "unoccupied", { 62, 48 })
-add_animation(animations, "working", dirname, "working", { 62, 48 })
-
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_shipyard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Shipyard"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    map_check = {"seafaring"},
@@ -28,7 +22,27 @@ tribes:new_productionsite_type {
       granite = 2
    },
 
-   animations = animations,
+   animation_directory = dirname,
+   animations = {
+      idle = {
+         hotspot = { 62, 48 },
+      },
+      unoccupied = {
+         hotspot = { 62, 48 },
+      },
+      working = {
+         hotspot = { 61, 47 },
+      },
+   },
+
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 61, 47 }
+      },
+   },
 
    aihints = {
       needs_water = true,
@@ -49,7 +63,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=ship on failure fail",
             "call=ship_preparation",
@@ -57,17 +71,19 @@ tribes:new_productionsite_type {
       },
       ship = {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
-         descname = _"constructing a ship",
+         descname = _("constructing a ship"),
          actions = {
             "construct=barbarians_shipconstruction worker:buildship radius:6",
             "sleep=duration:20s",
          }
       },
       ship_preparation = {
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "animate=working duration:35s",
          }
       },
    },
 }
+
+pop_textdomain()

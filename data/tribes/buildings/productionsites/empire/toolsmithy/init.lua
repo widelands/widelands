@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_toolsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Toolsmithy"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -20,14 +20,20 @@ tribes:new_productionsite_type {
       marble = 2
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 58, 61 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 63, 64 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 58, 61 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 63, 64 },
       },
    },
 
@@ -47,7 +53,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_felling_ax",
             "call=produce_basket",
@@ -65,7 +71,7 @@ tribes:new_productionsite_type {
       },
       produce_felling_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a felling ax because ...
-         descname = _"making a felling ax",
+         descname = _("making a felling ax"),
          actions = {
             "return=skipped unless economy needs felling_ax",
             "consume=iron log",
@@ -77,7 +83,7 @@ tribes:new_productionsite_type {
       },
       produce_basket = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-         descname = _"making a basket",
+         descname = _("making a basket"),
          actions = {
             "return=skipped unless economy needs basket",
             "consume=iron log",
@@ -89,7 +95,7 @@ tribes:new_productionsite_type {
       },
       produce_bread_paddle = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
-         descname = _"making a bread paddle",
+         descname = _("making a bread paddle"),
          actions = {
             "return=skipped unless economy needs bread_paddle",
             "consume=iron log",
@@ -101,7 +107,7 @@ tribes:new_productionsite_type {
       },
       produce_fire_tongs = {
          -- TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-         descname = _"making fire tongs",
+         descname = _("making fire tongs"),
          actions = {
             "return=skipped unless economy needs fire_tongs",
             "consume=iron log",
@@ -113,7 +119,7 @@ tribes:new_productionsite_type {
       },
       produce_fishing_rod = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because ...
-         descname = _"making a fishing rod",
+         descname = _("making a fishing rod"),
          actions = {
             "return=skipped unless economy needs fishing_rod",
             "consume=iron log",
@@ -125,7 +131,7 @@ tribes:new_productionsite_type {
       },
       produce_hammer = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-         descname = _"making a hammer",
+         descname = _("making a hammer"),
          actions = {
             "return=skipped unless economy needs hammer",
             "consume=iron log",
@@ -137,7 +143,7 @@ tribes:new_productionsite_type {
       },
       produce_hunting_spear = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
-         descname = _"making a hunting spear",
+         descname = _("making a hunting spear"),
          actions = {
             "return=skipped unless economy needs hunting_spear",
             "consume=iron log",
@@ -149,7 +155,7 @@ tribes:new_productionsite_type {
       },
       produce_kitchen_tools = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
-         descname = _"making kitchen tools",
+         descname = _("making kitchen tools"),
          actions = {
             "return=skipped unless economy needs kitchen_tools",
             "consume=iron log",
@@ -161,7 +167,7 @@ tribes:new_productionsite_type {
       },
       produce_pick = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-         descname = _"making a pick",
+         descname = _("making a pick"),
          actions = {
             "return=skipped unless economy needs pick",
             "consume=iron log",
@@ -173,7 +179,7 @@ tribes:new_productionsite_type {
       },
       produce_saw = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
-         descname = _"making a saw",
+         descname = _("making a saw"),
          actions = {
             "return=skipped unless economy needs saw",
             "consume=iron log",
@@ -185,7 +191,7 @@ tribes:new_productionsite_type {
       },
       produce_scythe = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-         descname = _"making a scythe",
+         descname = _("making a scythe"),
          actions = {
             "return=skipped unless economy needs scythe",
             "consume=iron log",
@@ -197,7 +203,7 @@ tribes:new_productionsite_type {
       },
       produce_shovel = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-         descname = _"making a shovel",
+         descname = _("making a shovel"),
          actions = {
             "return=skipped unless economy needs shovel",
             "consume=iron log",
@@ -209,3 +215,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

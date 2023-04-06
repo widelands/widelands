@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,37 +21,38 @@
 
 #include <memory>
 
+#include <unzip.h>
+#include <zip.h>
+
 #include "io/filesystem/filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "third_party/minizip/unzip.h"
-#include "third_party/minizip/zip.h"
 
 class ZipFilesystem : public FileSystem {
 public:
 	explicit ZipFilesystem(const std::string&);
-	~ZipFilesystem() override;
+	~ZipFilesystem() override = default;
 
-	bool is_writable() const override;
+	[[nodiscard]] bool is_writable() const override;
 
-	FilenameSet list_directory(const std::string& path) const override;
+	[[nodiscard]] FilenameSet list_directory(const std::string& path) const override;
 
-	bool is_directory(const std::string& path) const override;
-	bool file_exists(const std::string& path) const override;
+	[[nodiscard]] bool is_directory(const std::string& path) const override;
+	bool file_exists(const std::string& path) const override;  // NOLINT not nodicard
 
 	void* load(const std::string& fname, size_t& length) override;
 
-	void write(const std::string& fname, void const* data, int32_t length) override;
+	void write(const std::string& fname, void const* data, size_t length) override;
 	void ensure_directory_exists(const std::string& fs_dirname) override;
 	void make_directory(const std::string& fs_dirname) override;
 
 	StreamRead* open_stream_read(const std::string& fname) override;
 	StreamWrite* open_stream_write(const std::string& fname) override;
 
-	FileSystem* make_sub_file_system(const std::string& fs_dirname) override;
-	FileSystem* create_sub_file_system(const std::string& fs_dirname, Type) override;
-	void fs_unlink(const std::string& fs_filename) override;
-	void fs_rename(const std::string&, const std::string&) override;
+	FileSystem* make_sub_file_system(const std::string& path) override;
+	FileSystem* create_sub_file_system(const std::string& path, Type type) override;
+	void fs_unlink(const std::string& filename) override;
+	void fs_rename(const std::string& old_name, const std::string& new_name) override;
 
 	unsigned long long disk_space() override;  // NOLINT
 
@@ -79,7 +79,7 @@ private:
 		std::string strip_basename(const std::string& filename);
 
 		// Full path to the zip file.
-		const std::string& path() const;
+		[[nodiscard]] const std::string& path() const;
 
 		// Closes the file if it is open, reopens it for writing, and
 		// returns the minizip handle.
@@ -99,7 +99,7 @@ private:
 		// Closes 'path_' if it is opened.
 		void close();
 
-		State state_;
+		State state_{State::kIdle};
 
 		// E.g. "path/to/filename.zip"
 		std::string path_;
@@ -113,15 +113,15 @@ private:
 		std::string common_prefix_;
 
 		// File handles for zipping and unzipping.
-		zipFile write_handle_;
-		unzFile read_handle_;
+		zipFile write_handle_{nullptr};
+		unzFile read_handle_{nullptr};
 	};
 
 	struct ZipStreamRead : StreamRead {
 		explicit ZipStreamRead(const std::shared_ptr<ZipFile>& shared_data);
-		~ZipStreamRead() override;
+		~ZipStreamRead() override = default;
 		size_t data(void* data, size_t bufsize) override;
-		bool end_of_file() const override;
+		[[nodiscard]] bool end_of_file() const override;
 
 	private:
 		std::shared_ptr<ZipFile> zip_file_;
@@ -129,8 +129,8 @@ private:
 
 	struct ZipStreamWrite : StreamWrite {
 		explicit ZipStreamWrite(const std::shared_ptr<ZipFile>& shared_data);
-		~ZipStreamWrite() override;
-		void data(const void* const data, size_t size) override;
+		~ZipStreamWrite() override = default;
+		void data(const void* data, size_t size) override;
 
 	private:
 		std::shared_ptr<ZipFile> zip_file_;
@@ -139,6 +139,9 @@ private:
 	// Used for creating sub filesystems.
 	ZipFilesystem(const std::shared_ptr<ZipFile>& shared_data,
 	              const std::string& basedir_in_zip_file);
+
+	// Place current time in tm_zip struct
+	void set_time_info(tm_zip& time);
 
 	// The data shared between all zip filesystems with the same
 	// underlying zip file.

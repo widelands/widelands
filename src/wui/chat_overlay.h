@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2020 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,9 +21,8 @@
 
 #include <memory>
 
+#include "chat/chat.h"
 #include "ui_basic/panel.h"
-
-struct ChatProvider;
 
 /**
  * The overlay that displays all new chat messages for some timeout on the main window.
@@ -32,8 +30,9 @@ struct ChatProvider;
  * \see GameChatPanel, GameChatMenu
  */
 struct ChatOverlay : public UI::Panel {
-	ChatOverlay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h);
-	~ChatOverlay() override;
+	ChatOverlay(
+	   UI::Panel* parent, ChatColorForPlayer fn, int32_t x, int32_t y, int32_t w, int32_t h);
+	~ChatOverlay() override = default;
 
 	void set_chat_provider(ChatProvider&);
 	void draw(RenderTarget&) override;

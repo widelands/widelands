@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,21 +12,24 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "wui/mapview.h"
+
+#include <cstdlib>
 
 #include <SDL_timer.h>
 
 #include "base/macros.h"
 #include "base/math.h"
 #include "graphic/game_renderer.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/map_objects/world/world.h"
+#include "logic/map_objects/descriptions.h"
 #include "wlapplication.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -78,7 +81,7 @@ public:
 	   : start_(start), end_(end), dt_(dt) {
 	}
 
-	T value(const float time_ms) const {
+	[[nodiscard]] T value(const float time_ms) const {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
 		return mix(math::sqr(t) * (3.f - 2.f * t), start_, end_);
 	}
@@ -98,13 +101,12 @@ public:
 	   : first_(start, middle, dt / 2.f), second_(middle, end, dt / 2.f), dt_(dt) {
 	}
 
-	T value(const float time_ms) const {
+	[[nodiscard]] T value(const float time_ms) const {
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
 		if (t < 0.5f) {
 			return first_.value(t * dt_);
-		} else {
-			return second_.value((t - 0.5f) * dt_);
 		}
+		return second_.value((t - 0.5f) * dt_);
 	}
 
 private:
@@ -116,7 +118,7 @@ private:
 
 // TODO(sirver): Once c++14 is supported, make this a templated lambda inside
 // 'plan_map_transition'. For now it is a particularly ugly stand alone
-// function, but it allows us to parametrize over 'zoom_t' withouth a heap
+// function, but it allows us to parametrize over 'zoom_t' without a heap
 // allocation.
 template <typename T>
 void do_plan_map_transition(uint32_t start_time,
@@ -233,11 +235,10 @@ std::deque<MapView::TimestampedMouse> plan_mouse_transition(const MapView::Times
 	plan.push_back(start);
 	for (int i = 1; i < kNumKeyFrames - 2; i++) {
 		float dt = (kShortAnimationMs / kNumKeyFrames) * i;
-		plan.push_back(MapView::TimestampedMouse(
-		   static_cast<uint32_t>(std::lround(start.t + dt)), mouse_t.value(dt)));
+		plan.emplace_back(static_cast<uint32_t>(std::lround(start.t + dt)), mouse_t.value(dt));
 	}
-	plan.push_back(MapView::TimestampedMouse(
-	   static_cast<uint32_t>(std::lround(start.t + kShortAnimationMs)), target.cast<float>()));
+	plan.emplace_back(
+	   static_cast<uint32_t>(std::lround(start.t + kShortAnimationMs)), target.cast<float>());
 	return plan;
 }
 
@@ -295,17 +296,34 @@ bool MapView::ViewArea::contains_map_pixel(const Vector2f& map_pixel) const {
 	return std::abs(dist.x) <= (rect_.w / 2.f) && std::abs(dist.y) <= (rect_.h / 2.f);
 }
 
-MapView::MapView(
-   UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
-   : UI::Panel(parent, x, y, w, h),
-     animate_map_panning_(get_config_bool("animate_map_panning", true)),
-     map_(map),
-     view_(),
-     last_mouse_pos_(Vector2i::zero()),
-     dragging_(false) {
+bool MapView::View::zoom_near(float other_zoom) const {
+	constexpr float epsilon = 1e-5f;
+	return std::abs(zoom - other_zoom) < epsilon;
 }
 
-MapView::~MapView() {
+bool MapView::View::view_near(const View& other) const {
+	constexpr float epsilon = 1e-5f;
+	return zoom_near(other.zoom) && std::abs(viewpoint.x - other.viewpoint.x) < epsilon &&
+	       std::abs(viewpoint.y - other.viewpoint.y) < epsilon;
+}
+
+bool MapView::View::view_roughly_near(const View& other) const {
+	return zoom_near(other.zoom) &&
+	       std::abs(viewpoint.x - other.viewpoint.x) < g_gr->get_xres() / 2.f &&
+	       std::abs(viewpoint.y - other.viewpoint.y) < g_gr->get_yres() / 2.f;
+}
+
+MapView::MapView(
+   UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
+     animate_map_panning_(get_config_bool("animate_map_panning", true)),
+     map_(map),
+     last_mouse_pos_(Vector2i::zero()),
+
+     edge_scrolling_((parent != nullptr) &&
+                     (parent->get_parent() == nullptr) /* not in watch windows */ &&
+                     get_config_bool("edge_scrolling", false)),
+     invert_movement_(get_config_bool("invert_movement", false)) {
 }
 
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {
@@ -390,10 +408,16 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 		break;
 	}
 
-	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
+	// If zoom is 1x align to whole pixels to get pixel-perfect sprite rendering.
+	if (view_.zoom_near(1)) {
+		fields_to_draw_.reset(
+		   egbase, Vector2f(round(view_.viewpoint.x), round(view_.viewpoint.y)), view_.zoom, dst);
+	} else {
+		fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
+	}
 	const float scale = 1.f / view_.zoom;
-	::draw_terrain(
-	   egbase.get_gametime(), egbase.world(), fields_to_draw_, scale, workarea, grid, player, dst);
+	::draw_terrain(egbase.get_gametime().get(), egbase.descriptions(), fields_to_draw_, scale,
+	               workarea, grid, player, dst);
 	return &fields_to_draw_;
 }
 
@@ -456,16 +480,18 @@ const MapView::View& MapView::view() const {
 }
 
 void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
-	if (is_animating()) {
+	if (is_animating() || map_.get_width() == 0 || map_.get_height() == 0) {
 		return;
 	}
 	set_view({view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, transition);
 }
 
 void MapView::stop_dragging() {
-	WLApplication::get()->set_mouse_lock(false);
-	grab_mouse(false);
-	dragging_ = false;
+	if (dragging_) {
+		WLApplication::get()->set_mouse_lock(false);
+		grab_mouse(false);
+		dragging_ = false;
+	}
 }
 
 bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t const y) {
@@ -486,7 +512,7 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 	return false;
 }
 
-bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
+bool MapView::handle_mouserelease(const uint8_t btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn == SDL_BUTTON_RIGHT && dragging_) {
 		stop_dragging();
 		return true;
@@ -494,38 +520,90 @@ bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	return false;
 }
 
+constexpr int16_t kEdgeScrollingMargin = 40;
+constexpr int16_t kEdgeScrollingSpeedSlow = 2;
+constexpr int16_t kEdgeScrollingSpeedNormal = 20;
+constexpr int16_t kEdgeScrollingSpeedFast = 80;
+
 bool MapView::handle_mousemove(
    uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	last_mouse_pos_.x = x;
 	last_mouse_pos_.y = y;
 
 	if (dragging_) {
-		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
-			pan_by(Vector2i(xdiff, ydiff), Transition::Jump);
+		if ((state & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0) {
+			pan_by(Vector2i(invert_movement_ ? -xdiff : xdiff, invert_movement_ ? -ydiff : ydiff),
+			       Transition::Jump);
 		} else {
 			stop_dragging();
 		}
 	}
 
+	is_scrolling_x_ = edge_scrolling_ ? x < kEdgeScrollingMargin           ? -1 :
+	                                    x > get_w() - kEdgeScrollingMargin ? 1 :
+                                                                            0 :
+                                       0;
+	is_scrolling_y_ = edge_scrolling_ ? y < kEdgeScrollingMargin           ? -1 :
+	                                    y > get_h() - kEdgeScrollingMargin ? 1 :
+                                                                            0 :
+                                       0;
+
 	track_sel(Vector2i(x, y));
+
 	return false;
 }
 
-bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
-	if (which != 0) {
-		return false;
+void MapView::think() {
+	UI::Panel::think();
+	if (!dragging_ && (is_scrolling_x_ != 0 || is_scrolling_y_ != 0)) {
+		// We should be a child of the IBase
+		assert(get_parent());
+		assert(!get_parent()->get_parent());
+
+		const Vector2i mouse = get_parent()->get_mouse_position();
+		std::vector<UI::Panel*> all_children_at_mouse;
+		get_parent()->find_all_children_at(mouse.x, mouse.y, all_children_at_mouse);
+		assert(all_children_at_mouse.size() >
+		       1);  // At least we and the info panel overlay should be there
+		if (all_children_at_mouse.size() > 2) {
+			// Mouse is over another panel
+			return;
+		}
+
+		const int16_t speed = (SDL_GetModState() & KMOD_CTRL) != 0  ? kEdgeScrollingSpeedFast :
+		                      (SDL_GetModState() & KMOD_SHIFT) != 0 ? kEdgeScrollingSpeedSlow :
+                                                                    kEdgeScrollingSpeedNormal;
+		pan_by(Vector2i(is_scrolling_x_ * speed, is_scrolling_y_ * speed), Transition::Jump);
 	}
-	if ((get_config_bool("ctrl_zoom", false)) && !(SDL_GetModState() & KMOD_CTRL)) {
-		return false;
-	}
-	if (is_animating()) {
+}
+
+bool MapView::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	Vector2i change_2d =
+	   get_mousewheel_change_2D(MousewheelHandlerConfigID::kMapScroll, x, y, modstate);
+	if (change_2d != Vector2i::zero()) {
+		if (is_animating()) {
+			return true;
+		}
+		const uint16_t scroll_distance_y = g_gr->get_yres() / 20;
+		const uint16_t scroll_distance_x = g_gr->get_xres() / 20;
+		pan_by(Vector2i(change_2d.x * scroll_distance_x, change_2d.y * scroll_distance_y),
+		       Transition::Jump);
 		return true;
 	}
-	constexpr float kPercentPerMouseWheelTick = 0.02f;
-	float zoom = view_.zoom * static_cast<float>(std::pow(
-	                             1.f - math::sign(y) * kPercentPerMouseWheelTick, std::abs(y)));
-	zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
-	return true;
+
+	int32_t zoom_step = get_mousewheel_change(MousewheelHandlerConfigID::kZoom, x, y, modstate);
+	if (zoom_step != 0) {
+		if (is_animating()) {
+			return true;
+		}
+		static constexpr float kPercentPerMouseWheelTick = 0.02f;
+		float zoom =
+		   view_.zoom * static_cast<float>(std::pow(1.f - kPercentPerMouseWheelTick, zoom_step));
+		zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
+		return true;
+	}
+
+	return false;
 }
 
 void MapView::zoom_around(float new_zoom,
@@ -571,15 +649,18 @@ void MapView::zoom_around(float new_zoom,
 }
 
 void MapView::reset_zoom() {
-	zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 void MapView::increase_zoom() {
 	zoom_around(animation_target_view().view.zoom - kZoomPercentPerKeyPress,
-	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	            Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 void MapView::decrease_zoom() {
 	zoom_around(animation_target_view().view.zoom + kZoomPercentPerKeyPress,
-	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	            Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 
 bool MapView::is_dragging() const {
@@ -601,22 +682,34 @@ Widelands::NodeAndTriangle<> MapView::track_sel(const Vector2i& p) {
 bool MapView::scroll_map() {
 	const bool numpad_diagonalscrolling = get_config_bool("numpad_diagonalscrolling", false);
 	// arrow keys
-	const bool kUP = get_key_state(SDL_SCANCODE_UP);
-	const bool kDOWN = get_key_state(SDL_SCANCODE_DOWN);
-	const bool kLEFT = get_key_state(SDL_SCANCODE_LEFT);
-	const bool kRIGHT = get_key_state(SDL_SCANCODE_RIGHT);
+	const bool kUP = get_key_state(SDL_GetScancodeFromKey(SDLK_UP));
+	const bool kDOWN = get_key_state(SDL_GetScancodeFromKey(SDLK_DOWN));
+	const bool kLEFT = get_key_state(SDL_GetScancodeFromKey(SDLK_LEFT));
+	const bool kRIGHT = get_key_state(SDL_GetScancodeFromKey(SDLK_RIGHT));
 
 	// numpad keys
-	const bool kNumlockOff = !(SDL_GetModState() & KMOD_NUM);
-#define kNP(x) const bool kNP##x = kNumlockOff && get_key_state(SDL_SCANCODE_KP_##x);
+	const bool kNumlockOff = (SDL_GetModState() & KMOD_NUM) == 0;
+#define kNP(x)                                                                                     \
+	const bool kNP##x = kNumlockOff && get_key_state(SDL_GetScancodeFromKey(SDLK_KP_##x));
 	kNP(1) kNP(2) kNP(3) kNP(4) kNP(6) kNP(7) kNP(8) kNP(9)
 #undef kNP
 
 	   // set the scrolling distance
-	   const uint8_t denominator =
-	      ((SDL_GetModState() & KMOD_CTRL) ? 4 : (SDL_GetModState() & KMOD_SHIFT) ? 16 : 8);
-	const uint16_t scroll_distance_y = g_gr->get_yres() / denominator;
-	const uint16_t scroll_distance_x = g_gr->get_xres() / denominator;
+	   const uint16_t xres = g_gr->get_xres();
+	const uint16_t yres = g_gr->get_yres();
+
+	uint16_t scroll_distance_x = xres / 8;
+	uint16_t scroll_distance_y = yres / 8;
+
+	SDL_Keymod modstate = SDL_GetModState();
+	if ((modstate & KMOD_CTRL) != 0) {
+		scroll_distance_x = xres - scroll_distance_x;
+		scroll_distance_y = yres - scroll_distance_y;
+	} else if ((modstate & KMOD_SHIFT) != 0) {
+		scroll_distance_x = std::min(kTriangleWidth / view_.zoom, scroll_distance_x / 3.f);
+		scroll_distance_y = std::min(kTriangleHeight / view_.zoom, scroll_distance_y / 3.f);
+	}
+
 	int32_t distance_to_scroll_x = 0;
 	int32_t distance_to_scroll_y = 0;
 
@@ -649,35 +742,27 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	if (scroll_map()) {
 		return true;
 	}
-	if (!(code.mod & KMOD_CTRL)) {
-		return false;
-	}
 
-	switch (code.sym) {
-	case SDLK_KP_PLUS:
-	case SDLK_PLUS:
-	case SDLK_EQUALS:
-		increase_zoom();
-		return true;
-
-	case SDLK_KP_MINUS:
-	case SDLK_MINUS:
-		decrease_zoom();
-		return true;
-
-	case SDLK_KP_0:
-		if (!(code.mod & KMOD_NUM)) {
-			return false;
+	if (matches_shortcut(KeyboardShortcut::kCommonZoomIn, code)) {
+		if (!is_animating()) {
+			increase_zoom();
 		}
-		FALLS_THROUGH;
-	case SDLK_0:
-		reset_zoom();
 		return true;
-
-	default:
-		return false;
 	}
-	NEVER_HERE();
+	if (matches_shortcut(KeyboardShortcut::kCommonZoomOut, code)) {
+		if (!is_animating()) {
+			decrease_zoom();
+		}
+		return true;
+	}
+	if (matches_shortcut(KeyboardShortcut::kCommonZoomReset, code)) {
+		if (!is_animating()) {
+			reset_zoom();
+		}
+		return true;
+	}
+
+	return false;
 }
 
 MapView::TimestampedView MapView::animation_target_view() const {

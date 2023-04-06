@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,17 +12,16 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "editor/ui_menus/main_menu_map_options.h"
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "logic/note_map_options.h"
@@ -43,7 +42,13 @@ SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
                                          const Widelands::Map& map,
                                          unsigned w,
                                          Widelands::SuggestedTeamLineup t)
-   : UI::Panel(parent, 0, 0, w, kSuggestedTeamsUnitSize, _("Click player to remove")),
+   : UI::Panel(parent,
+               UI::PanelStyle::kWui,
+               0,
+               0,
+               w,
+               kSuggestedTeamsUnitSize,
+               _("Click player to remove")),
      map_(map),
      team_(std::move(t)),
      delete_(this,
@@ -77,7 +82,7 @@ UI::Button* SuggestedTeamsEntry::create_button(Widelands::PlayerNumber p) {
 	                  kSuggestedTeamsUnitSize, UI::ButtonStyle::kWuiSecondary,
 	                  playercolor_image(p, "images/players/player_position_menu.png"),
 	                  map_.get_scenario_player_name(p + 1), UI::Button::VisualState::kFlat);
-	b->sigclicked.connect([this, b, p]() {
+	b->sigclicked.connect([this, b]() {
 		auto teams_it = team_.begin();
 		for (std::vector<UI::Button*>& vector : buttons_) {
 			auto t = teams_it->begin();
@@ -136,7 +141,7 @@ UI::Dropdown<Widelands::PlayerNumber>* SuggestedTeamsEntry::create_dropdown(size
 		if (dd_index >= team_.size()) {
 			assert(dd_index == team_.size());
 			team_.push_back(Widelands::SuggestedTeam());
-			buttons_.push_back({});
+			buttons_.emplace_back();
 		}
 		team_[dd_index].push_back(player);
 		buttons_[dd_index].push_back(create_button(player));
@@ -203,6 +208,8 @@ void SuggestedTeamsEntry::update() {
 	}
 
 	layout();
+
+	initialization_complete();
 }
 
 constexpr uint16_t kMaxRecommendedWaterwayLengthLimit = 20;
@@ -211,16 +218,27 @@ constexpr uint16_t kMaxRecommendedWaterwayLengthLimit = 20;
  * Create all the buttons etc...
  */
 MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& registry)
-   : UI::UniqueWindow(
-        &parent, "map_options", &registry, 350, parent.get_inner_h() - 80, _("Map Options")),
-     padding_(4),
-     indent_(10),
-     labelh_(text_height(UI::FontStyle::kLabel) + 4),
-     checkbox_space_(25),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      "map_options",
+                      &registry,
+                      350,
+                      parent.get_inner_h() - 80,
+                      _("Map Options")),
+
+     labelh_(text_height(UI::FontStyle::kWuiLabel) + 4),
+
      butw_((get_inner_w() - 3 * padding_) / 2),
      max_w_(get_inner_w() - 2 * padding_),
-     tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     buttons_box_(&tab_box_, 0, 0, UI::Box::Horizontal),
+     tab_box_(this,
+              UI::PanelStyle::kWui,
+              padding_,
+              padding_,
+              UI::Box::Vertical,
+              max_w_,
+              get_inner_h(),
+              0),
+     buttons_box_(&tab_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      ok_(&buttons_box_,
          "ok",
          UI::g_fh->fontset()->is_rtl() ? padding_ : butw_ + 2 * padding_,
@@ -239,15 +257,49 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
              _("Cancel")),
      tabs_(&tab_box_, UI::TabPanelStyle::kWuiLight),
 
-     main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     inner_teams_box_(
-        &teams_box_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h() / 2),
+     main_box_(&tabs_,
+               UI::PanelStyle::kWui,
+               padding_,
+               padding_,
+               UI::Box::Vertical,
+               max_w_,
+               get_inner_h(),
+               0),
+     tags_box_(&tabs_,
+               UI::PanelStyle::kWui,
+               padding_,
+               padding_,
+               UI::Box::Vertical,
+               max_w_,
+               get_inner_h(),
+               0),
+     teams_box_(&tabs_,
+                UI::PanelStyle::kWui,
+                padding_,
+                padding_,
+                UI::Box::Vertical,
+                max_w_,
+                get_inner_h(),
+                0),
+     inner_teams_box_(&teams_box_,
+                      UI::PanelStyle::kWui,
+                      padding_,
+                      padding_,
+                      UI::Box::Vertical,
+                      max_w_,
+                      get_inner_h() / 2,
+                      kSuggestedTeamsUnitSize),
 
      name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
-     size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
+     size_(&main_box_,
+           UI::PanelStyle::kWui,
+           UI::FontStyle::kWuiLabel,
+           0,
+           0,
+           max_w_ - indent_,
+           labelh_,
+           ""),
      balancing_dropdown_(&tags_box_,
                          "dropdown_balancing",
                          0,
@@ -259,6 +311,17 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                          UI::DropdownType::kTextual,
                          UI::PanelStyle::kWui,
                          UI::ButtonStyle::kWuiSecondary),
+     theme_dropdown_(&tags_box_,
+                     "dropdown_theme",
+                     0,
+                     0,
+                     200,
+                     50,
+                     24,
+                     _("Theme"),
+                     UI::DropdownType::kTextual,
+                     UI::PanelStyle::kWui,
+                     UI::ButtonStyle::kWuiSecondary),
      new_suggested_team_(&teams_box_,
                          "new_suggested_team",
                          0,
@@ -276,6 +339,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tags_box_.set_size(max_w_, tabs_.get_inner_h() - 35);
 	teams_box_.set_size(max_w_, tabs_.get_inner_h() - 35);
 
+	// ### Main tab ###
+
 	// Calculate the overall remaining space for MultilineEditboxes.
 	uint32_t remaining_space = main_box_.get_inner_h() - 7 * labelh_ - 5 * indent_;
 
@@ -286,47 +351,92 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	   &main_box_, 0, 0, max_w_, remaining_space - hinth, UI::PanelStyle::kWui);
 	hint_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, hinth, UI::PanelStyle::kWui);
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map name:")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                               max_w_, labelh_, _("Map name:")));
 	main_box_.add(&name_);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Authors:")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                               max_w_, labelh_, _("Authors:")));
 	main_box_.add(&author_);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Description:")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                               max_w_, labelh_, _("Description:")));
 	main_box_.add(descr_);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Hint (optional):")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                               max_w_, labelh_, _("Hint (optional):")));
 	main_box_.add(hint_);
 	main_box_.add_space(indent_);
 
 	main_box_.add(&size_);
 	main_box_.add_space(indent_);
 
-	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Tags:")));
-	add_tag_checkbox(&tags_box_, "ffa", localize_tag("ffa"));
-	add_tag_checkbox(&tags_box_, "1v1", localize_tag("1v1"));
-	add_tag_checkbox(&tags_box_, "2teams", localize_tag("2teams"));
-	add_tag_checkbox(&tags_box_, "3teams", localize_tag("3teams"));
-	add_tag_checkbox(&tags_box_, "4teams", localize_tag("4teams"));
+	// ### Tags tab ###
 
-	balancing_dropdown_.set_autoexpand_display_button();
-	balancing_dropdown_.add(localize_tag("balanced"), "balanced");
-	balancing_dropdown_.add(localize_tag("unbalanced"), "unbalanced");
-	tags_box_.add(&balancing_dropdown_);
+	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui,
+	                               UI::FontStyle::kWuiInfoPanelHeading, 0, 0, max_w_, labelh_,
+	                               _("Tags:")));
 
-	tags_box_.add_space(labelh_);
+	tags_box_.add_space(padding_);
 
-	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
-	UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_);
-	waterway_length_warning_ = new UI::Icon(ww_box, g_gr->images().get("images/ui_basic/stop.png"));
+	UI::Textarea* team_tags_label =
+	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_,
+	                    /** TRANSLATORS: Header for suitable team line-up tags, like "Free for all",
+	                     * "Teams of 2", etc. */
+	                    labelh_, _("This map is suitable for:"));
+	team_tags_label->set_tooltip(
+	   _("Please add suggested team line-ups in the next tab for all selected options"));
+	team_tags_label->set_handle_mouse(true);
+	tags_box_.add(team_tags_label);
+	tags_box_.add_space(padding_);
+
+	add_tag_checkbox(&tags_box_, "ffa");
+	add_tag_checkbox(&tags_box_, "1v1");
+	add_tag_checkbox(&tags_box_, "2teams");
+	add_tag_checkbox(&tags_box_, "3teams");
+	add_tag_checkbox(&tags_box_, "4teams");
+
+	tags_box_.add_space(separator_);
+
+	add_tag_to_dropdown(&balancing_dropdown_, "balanced");
+	add_tag_to_dropdown(&balancing_dropdown_, "unbalanced");
+	balancing_dropdown_.set_tooltip(
+	   _("Mark whether the starting positions provide equal conditions for each player"));
+	tags_box_.add(&balancing_dropdown_, UI::Box::Resizing::kFullSize);
+
+	tags_box_.add_space(separator_);
+
+	const std::string theme_tooltip = _("Set the theme for the game loadscreens");
+	theme_dropdown_.add(pgettext("map_theme", "(none)"), "", nullptr, false, theme_tooltip);
+	for (const Widelands::Map::OldWorldInfo& owi : Widelands::Map::kOldWorldNames) {
+		theme_dropdown_.add(owi.descname(), owi.name, nullptr, false, theme_tooltip);
+	}
+	theme_dropdown_.set_tooltip(theme_tooltip);
+	tags_box_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
+
+	tags_box_.add_space(separator_);
+
+	UI::Textarea* ww_text =
+	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_,
+	                    labelh_, _("Ferry range:"));
+	std::string ww_tooltip = _("Enable ferries, waterways, and ferry yards on this map by setting"
+	                           " the maximum length of waterways for ferries");
+	ww_text->set_tooltip(ww_tooltip);
+	ww_text->set_handle_mouse(true);
+	tags_box_.add(ww_text);
+	UI::Box* ww_box =
+	   new UI::Box(&tags_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_);
+	ww_box->set_tooltip(ww_tooltip);
+	waterway_length_warning_ =
+	   new UI::Icon(ww_box, UI::PanelStyle::kWui, g_image_cache->get("images/ui_basic/stop.png"));
 	waterway_length_warning_->set_handle_mouse(true);
-	waterway_length_box_ =
-	   new UI::SpinBox(ww_box, 0, 0, max_w_ - waterway_length_warning_->get_w(), max_w_ * 2 / 3, 1,
-	                   1, std::numeric_limits<int32_t>::max(), UI::PanelStyle::kWui, std::string(),
-	                   UI::SpinBox::Units::kFields);
+	uint32_t ww_spinbox_w = max_w_ - waterway_length_warning_->get_w();
+	waterway_length_box_ = new UI::SpinBox(
+	   ww_box, 0, 0, ww_spinbox_w, ww_spinbox_w - padding_, 1, 1, 50, UI::PanelStyle::kWui,
+	   std::string(), UI::SpinBox::Units::kFields, UI::SpinBox::Type::kBig, 1, 5);
 	/** TRANSLATORS: Map Options: Waterways are disabled */
 	waterway_length_box_->add_replacement(1, _("Disabled"));
 	waterway_length_box_->changed.connect([this]() { update_waterway_length_warning(); });
@@ -336,7 +446,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tags_box_.add(ww_box, UI::Box::Resizing::kFullSize);
 	tags_box_.add_space(padding_);
 
-	inner_teams_box_.set_scrollbar_style(UI::PanelStyle::kWui);
+	// ### Teams tab ###
+
 	inner_teams_box_.set_force_scrolling(true);
 	for (const Widelands::SuggestedTeamLineup& team : parent.egbase().map().get_suggested_teams()) {
 		SuggestedTeamsEntry* ste = new SuggestedTeamsEntry(
@@ -348,32 +459,37 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	const unsigned nr_players = eia().egbase().map().get_nrplayers();
 	teams_box_.add(new UI::Textarea(
-	   &teams_box_, 0, 0, max_w_, labelh_,
-	   (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str()));
-	teams_box_.add_space(4);
-	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
+	   &teams_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_,
+	   format(ngettext("%u Player", "%u Players", nr_players), nr_players)));
+	teams_box_.add_space(padding_);
+	teams_box_.add(new UI::Textarea(&teams_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0,
+	                                0, max_w_, labelh_, _("Suggested Teams:")));
+	teams_box_.add_space(padding_);
 	teams_box_.add(&inner_teams_box_, UI::Box::Resizing::kFullSize);
+	teams_box_.add_space(padding_);
 	teams_box_.add(&new_suggested_team_, UI::Box::Resizing::kFullSize);
 	new_suggested_team_.sigclicked.connect([this]() {
 		SuggestedTeamsEntry* ste =
 		   new SuggestedTeamsEntry(this, &inner_teams_box_, eia().egbase().map(),
 		                           max_w_ - UI::Scrollbar::kSize, Widelands::SuggestedTeamLineup());
 		inner_teams_box_.add(ste);
-		inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
 		suggested_teams_entries_.push_back(ste);
 	});
 
-	buttons_box_.add(&ok_, UI::Box::Resizing::kFullSize);
+	// ### End of tab content definitions ###
+
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Box::Resizing::kFullSize);
 	buttons_box_.add_space(4);
-	buttons_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_, UI::Box::Resizing::kFullSize);
+
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
 	tab_box_.add_space(4);
 	tab_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
-	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/toggle_minimap.png"),
+	tabs_.add("main_map_options", g_image_cache->get("images/wui/menus/toggle_minimap.png"),
 	          &main_box_, _("Main Options"));
-	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_,
+	tabs_.add("map_tags", g_image_cache->get("images/ui_basic/checkbox_checked.png"), &tags_box_,
 	          _("Tags"));
-	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/tools/players.png"), &teams_box_,
+	tabs_.add("map_teams", g_image_cache->get("images/wui/editor/tools/players.png"), &teams_box_,
 	          _("Teams"));
 
 	set_center_panel(&tab_box_);
@@ -388,6 +504,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	}
 
 	balancing_dropdown_.selected.connect([this] { changed(); });
+	theme_dropdown_.selected.connect([this] { changed(); });
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
@@ -398,16 +515,17 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	name_.focus();
 	center_to_parent();
 	move_to_top();
+
+	initialization_complete();
 }
 
 void MainMenuMapOptions::update_waterway_length_warning() {
 	const uint32_t len = waterway_length_box_->get_value();
 	if (len > kMaxRecommendedWaterwayLengthLimit) {
-		waterway_length_warning_->set_icon(g_gr->images().get("images/ui_basic/stop.png"));
+		waterway_length_warning_->set_icon(g_image_cache->get("images/ui_basic/stop.png"));
 		waterway_length_warning_->set_tooltip(
-		   (boost::format(_("It is not recommended to permit waterway lengths greater than %u")) %
-		    kMaxRecommendedWaterwayLengthLimit)
-		      .str());
+		   format(_("It is not recommended to permit waterway lengths greater than %u"),
+		          kMaxRecommendedWaterwayLengthLimit));
 	} else {
 		waterway_length_warning_->set_icon(nullptr);
 		waterway_length_warning_->set_tooltip("");
@@ -422,7 +540,7 @@ void MainMenuMapOptions::update() {
 	const Widelands::Map& map = eia().egbase().map();
 	author_.set_text(map.get_author());
 	name_.set_text(map.get_name());
-	size_.set_text((boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str());
+	size_.set_text(format(_("Size: %1% x %2%"), map.get_width(), map.get_height()));
 	descr_->set_text(map.get_description());
 	hint_->set_text(map.get_hint());
 	waterway_length_box_->set_value(map.get_waterway_max_length());
@@ -433,7 +551,12 @@ void MainMenuMapOptions::update() {
 		tag.second->set_state(tags.count(tag.first) > 0);
 	}
 
-	balancing_dropdown_.select(tags.count("balanced") ? "balanced" : "unbalanced");
+	balancing_dropdown_.select(tags.count("balanced") != 0u ? "balanced" : "unbalanced");
+
+	theme_dropdown_.select(map.get_background_theme());
+	if (!theme_dropdown_.has_selection()) {
+		theme_dropdown_.select("");
+	}
 }
 
 /**
@@ -466,6 +589,7 @@ void MainMenuMapOptions::clicked_ok() {
 		}
 	}
 	map.add_tag(balancing_dropdown_.get_selected());
+	map.set_background_theme(theme_dropdown_.get_selected());
 	Notifications::publish(NoteMapOptions());
 	registry_.destroy();
 }
@@ -474,14 +598,23 @@ void MainMenuMapOptions::clicked_cancel() {
 	registry_.destroy();
 }
 
+bool MainMenuMapOptions::handle_key(bool down, SDL_Keysym code) {
+	if (down && code.sym == SDLK_RETURN) {
+		clicked_ok();
+		return true;
+	}
+	return UI::UniqueWindow::handle_key(down, code);
+}
+
 /*
  * Add a tag to the checkboxes
  */
-void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
-                                          const std::string& tag,
-                                          const std::string& displ_name) {
-	UI::Box* box = new UI::Box(parent, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i::zero(), displ_name);
+void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent, const std::string& tag) {
+	UI::Box* box = new UI::Box(
+	   parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
+	TagTexts l = localize_tag(tag);
+	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kWui, Vector2i::zero(), l.displayname);
+	cb->set_tooltip(l.tooltip);
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);
 	parent->add(box);
@@ -491,22 +624,11 @@ void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
 
 void MainMenuMapOptions::delete_suggested_team(SuggestedTeamsEntry* ste) {
 	inner_teams_box_.set_force_scrolling(false);
-	inner_teams_box_.clear();
-	const size_t nr = suggested_teams_entries_.size();
-	for (size_t i = 0; i < nr; ++i) {
-		if (suggested_teams_entries_[i] == ste) {
-			for (size_t j = i + 1; j < nr; ++j) {
-				inner_teams_box_.add(suggested_teams_entries_[j]);
-				inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
-				suggested_teams_entries_[j - 1] = suggested_teams_entries_[j];
-			}
-			suggested_teams_entries_.resize(nr - 1);
-			inner_teams_box_.set_force_scrolling(true);
-			return ste->die();
-		} else {
-			inner_teams_box_.add(suggested_teams_entries_[i]);
-			inner_teams_box_.add_space(kSuggestedTeamsUnitSize);
-		}
-	}
-	NEVER_HERE();
+
+	auto is_deleted_panel = [ste](SuggestedTeamsEntry* i) { return ste == i; };
+	suggested_teams_entries_.erase(std::remove_if(suggested_teams_entries_.begin(),
+	                                              suggested_teams_entries_.end(), is_deleted_panel),
+	                               suggested_teams_entries_.end());
+	ste->die();
+	inner_teams_box_.set_force_scrolling(true);
 }

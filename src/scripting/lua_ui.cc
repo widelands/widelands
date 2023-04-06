@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,12 +20,14 @@
 
 #include <SDL_mouse.h>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 
 namespace LuaUi {
@@ -81,6 +82,9 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+   METHOD(LuaPanel, indicate),
+#endif
    {nullptr, nullptr},
 };
 
@@ -149,11 +153,11 @@ int LuaPanel::get_dropdowns(lua_State* L) {
       (RO) An :class:`array` of all visible tabs inside this Panel.
 */
 static void put_all_tabs_into_table(lua_State* L, UI::Panel* g) {
-	if (!g) {
+	if (g == nullptr) {
 		return;
 	}
 
-	for (UI::Panel* f = g->get_first_child(); f; f = f->get_next_sibling()) {
+	for (UI::Panel* f = g->get_first_child(); f != nullptr; f = f->get_next_sibling()) {
 		put_all_tabs_into_table(L, f);
 
 		if (upcast(UI::TabPanel, t, f)) {
@@ -269,12 +273,12 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 	UI::Panel* cur = (*get_base_user_class<LuaPanel>(L, 2))->panel_;
 
 	Vector2i cp = Vector2i::zero();
-	while (cur && cur != panel_) {
+	while (cur != nullptr && cur != panel_) {
 		cp += cur->to_parent(Vector2i::zero());
 		cur = cur->get_parent();
 	}
 
-	if (!cur) {
+	if (cur == nullptr) {
 		report_error(L, "Widget is not a descendant!");
 	}
 
@@ -282,6 +286,45 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 	lua_pushint32(L, cp.y);
 	return 2;
 }
+
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+/* R#S#T
+   .. method:: indicate(on)
+
+      Show/Hide an arrow that points to this panel. You can only point to 1 panel at the same time.
+
+      :arg on: Whether to show or hide the arrow
+      :type on: :class:`boolean`
+*/
+// UNTESTED
+int LuaPanel::indicate(lua_State* L) {
+	assert(panel_);
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Expected 1 boolean");
+	}
+
+	InteractivePlayer* ipl = get_game(L).get_ipl();
+	if (ipl == nullptr) {
+		report_error(L, "This can only be called when there's an interactive player");
+	}
+
+	const bool on = luaL_checkboolean(L, -1);
+	if (on) {
+		int x = panel_->get_x() + panel_->get_w();
+		int y = panel_->get_y();
+		UI::Panel* parent = panel_->get_parent();
+		while (parent != nullptr) {
+			x += parent->get_x() + parent->get_lborder();
+			y += parent->get_y() + parent->get_tborder();
+			parent = parent->get_parent();
+		}
+		ipl->set_training_wheel_indicator_pos(Vector2i(x, y));
+	} else {
+		ipl->set_training_wheel_indicator_pos(Vector2i::invalid());
+	}
+	return 2;
+}
+#endif
 
 /*
  * C Functions
@@ -292,8 +335,6 @@ Button
 ------
 
 .. class:: Button
-
-   Child of: :class:`Panel`
 
    This represents a simple push button.
 */
@@ -328,7 +369,7 @@ int LuaButton::get_name(lua_State* L) {
       event in tutorials
 */
 int LuaButton::press(lua_State* /* L */) {
-	log("Pressing button '%s'\n", get()->get_name().c_str());
+	log_info("Pressing button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	return 0;
@@ -340,7 +381,7 @@ int LuaButton::press(lua_State* /* L */) {
       it.
 */
 int LuaButton::click(lua_State* /* L */) {
-	log("Clicking button '%s'\n", get()->get_name().c_str());
+	log_info("Clicking button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
@@ -357,19 +398,21 @@ Dropdown
 
 .. class:: Dropdown
 
-   Child of: :class:`Panel`
-
    This represents a dropdown menu.
 */
 const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    METHOD(LuaDropdown, open),
    METHOD(LuaDropdown, highlight_item),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+   METHOD(LuaDropdown, indicate_item),
+#endif
    METHOD(LuaDropdown, select),
    {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
    PROP_RO(LuaDropdown, name),
+   PROP_RO(LuaDropdown, expanded),
    PROP_RO(LuaDropdown, no_of_items),
    {nullptr, nullptr, nullptr},
 };
@@ -381,6 +424,16 @@ const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
 // Documented in parent Class
 int LuaDropdown::get_name(lua_State* L) {
 	lua_pushstring(L, get()->get_name());
+	return 1;
+}
+
+/* RST
+   .. attribute:: expanded
+
+      (RO) True if the dropdown's list is currently expanded.
+*/
+int LuaDropdown::get_expanded(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->is_expanded()));
 	return 1;
 }
 
@@ -403,7 +456,7 @@ int LuaDropdown::get_no_of_items(lua_State* L) {
       Open this dropdown menu.
 */
 int LuaDropdown::open(lua_State* /* L */) {
-	log("Opening dropdown '%s'\n", get()->get_name().c_str());
+	log_info("Opening dropdown '%s'\n", get()->get_name().c_str());
 	get()->set_list_visibility(true);
 	return 0;
 }
@@ -420,11 +473,11 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	unsigned int desired_item = luaL_checkuint32(L, -1);
 	if (desired_item < 1 || desired_item > get()->size()) {
 		report_error(L,
-		             "Attempted to highlight item %d on dropdown '%s'. Avaliable range for this "
+		             "Attempted to highlight item %d on dropdown '%s'. Available range for this "
 		             "dropdown is 1-%d.",
 		             desired_item, get()->get_name().c_str(), get()->size());
 	}
-	log("Highlighting item %d in dropdown '%s'\n", desired_item, get()->get_name().c_str());
+	log_info("Highlighting item %d in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 	// Open the dropdown
 	get()->set_list_visibility(true);
 
@@ -446,13 +499,67 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	return 0;
 }
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+/* R#S#T
+   .. method:: indicate_item(index)
+
+      :arg index: the index of the item to indicate, starting from ``1``
+      :type index: :class:`integer`
+
+      Show an arrow that points to an item in this dropdown. You can only point to 1 panel at the
+      same time.
+*/
+int LuaDropdown::indicate_item(lua_State* L) {
+	assert(panel_);
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Expected 1 int");
+	}
+
+	InteractivePlayer* ipl = get_game(L).get_ipl();
+	if (ipl == nullptr) {
+		report_error(L, "This can only be called when there's an interactive player");
+	}
+
+	size_t desired_item = luaL_checkuint32(L, -1);
+	if (desired_item < 1 || desired_item > get()->size()) {
+		report_error(L,
+		             "Attempted to indicate item %" PRIuS
+		             " on dropdown '%s'. Available range for this "
+		             "dropdown is 1-%d.",
+		             desired_item, get()->get_name().c_str(), get()->size());
+	}
+	log_info(
+	   "Indicating item %" PRIuS " in dropdown '%s'\n", desired_item, get()->get_name().c_str());
+
+	int x = panel_->get_x() + panel_->get_w();
+	int y = panel_->get_y();
+	UI::Panel* parent = panel_->get_parent();
+	while (parent != nullptr) {
+		x += parent->get_x() + parent->get_lborder();
+		y += parent->get_y() + parent->get_tborder();
+		parent = parent->get_parent();
+	}
+
+	// Open the dropdown
+	get()->set_list_visibility(true);
+
+	for (; desired_item <= get()->size(); ++desired_item) {
+		y -= get()->lineheight();
+	}
+
+	ipl->set_training_wheel_indicator_pos(Vector2i(x, y));
+
+	return 0;
+}
+#endif
+
 /* RST
    .. method:: select()
 
       Selects the currently highlighted item in this dropdown.
 */
 int LuaDropdown::select(lua_State* /* L */) {
-	log("Selecting current item in dropdown '%s'\n", get()->get_name().c_str());
+	log_info("Selecting current item in dropdown '%s'\n", get()->get_name().c_str());
 	SDL_Keysym code;
 	code.sym = SDLK_RETURN;
 	code.scancode = SDL_SCANCODE_RETURN;
@@ -471,8 +578,6 @@ Tab
 ------
 
 .. class:: Tab
-
-   Child of: :class:`Panel`
 
    A tab button.
 */
@@ -503,7 +608,7 @@ int LuaTab::get_name(lua_State* L) {
       (RO) Is this the currently active tab in this window?
 */
 int LuaTab::get_active(lua_State* L) {
-	lua_pushboolean(L, get()->active());
+	lua_pushboolean(L, static_cast<int>(get()->active()));
 	return 1;
 }
 
@@ -516,7 +621,7 @@ int LuaTab::get_active(lua_State* L) {
       Click this tab making it the active one.
 */
 int LuaTab::click(lua_State* /* L */) {
-	log("Clicking tab '%s'\n", get()->get_name().c_str());
+	log_info("Clicking tab '%s'\n", get()->get_name().c_str());
 	get()->activate();
 	return 0;
 }
@@ -530,8 +635,6 @@ Window
 ------
 
 .. class:: Window
-
-   Child of: :class:`Panel`
 
    This represents a Window.
 */
@@ -566,8 +669,8 @@ int LuaWindow::get_name(lua_State* L) {
       not use it any longer.
 */
 int LuaWindow::close(lua_State* /* L */) {
-	log("Closing window '%s'\n", get()->get_name().c_str());
-	delete panel_;
+	log_info("Closing window '%s'\n", get()->get_name().c_str());
+	panel_->die();
 	panel_ = nullptr;
 	return 0;
 }
@@ -581,8 +684,6 @@ MapView
 -------
 
 .. class:: MapView
-
-   Child of :class:`Panel`
 
    The map view is the main widget and the root of all panels. It is the big
    view of the map that is visible at all times while playing.
@@ -601,17 +702,22 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
-   PROP_RO(LuaMapView, average_fps),  PROP_RO(LuaMapView, center_map_pixel),
-   PROP_RW(LuaMapView, buildhelp),    PROP_RW(LuaMapView, census),
-   PROP_RW(LuaMapView, statistics),   PROP_RO(LuaMapView, is_building_road),
-   PROP_RO(LuaMapView, is_animating), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapView, average_fps),
+   PROP_RO(LuaMapView, center_map_pixel),
+   PROP_RW(LuaMapView, buildhelp),
+   PROP_RW(LuaMapView, census),
+   PROP_RW(LuaMapView, statistics),
+   PROP_RO(LuaMapView, is_building_road),
+   PROP_RO(LuaMapView, auto_roadbuilding_mode),
+   PROP_RO(LuaMapView, is_animating),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
 }
 
 void LuaMapView::__unpersist(lua_State* L) {
-	Widelands::Game& game = get_game(L);
+	const Widelands::Game& game = get_game(L);
 	panel_ = game.get_ibase();
 }
 
@@ -653,7 +759,7 @@ int LuaMapView::get_center_map_pixel(lua_State* L) {
       (RW) True if the buildhelp is show, false otherwise.
 */
 int LuaMapView::get_buildhelp(lua_State* L) {
-	lua_pushboolean(L, get()->buildhelp());
+	lua_pushboolean(L, static_cast<int>(get()->buildhelp()));
 	return 1;
 }
 int LuaMapView::set_buildhelp(lua_State* L) {
@@ -667,7 +773,7 @@ int LuaMapView::set_buildhelp(lua_State* L) {
       (RW) True if the census strings are shown on buildings, false otherwise
 */
 int LuaMapView::get_census(lua_State* L) {
-	lua_pushboolean(L, get()->get_display_flag(InteractiveBase::dfShowCensus));
+	lua_pushboolean(L, static_cast<int>(get()->get_display_flag(InteractiveBase::dfShowCensus)));
 	return 1;
 }
 int LuaMapView::set_census(lua_State* L) {
@@ -682,7 +788,7 @@ int LuaMapView::set_census(lua_State* L) {
       otherwise
 */
 int LuaMapView::get_statistics(lua_State* L) {
-	lua_pushboolean(L, get()->get_display_flag(InteractiveBase::dfShowStatistics));
+	lua_pushboolean(L, static_cast<int>(get()->get_display_flag(InteractiveBase::dfShowStatistics)));
 	return 1;
 }
 int LuaMapView::set_statistics(lua_State* L) {
@@ -696,7 +802,22 @@ int LuaMapView::set_statistics(lua_State* L) {
       (RO) Is the player currently in road/waterway building mode?
 */
 int LuaMapView::get_is_building_road(lua_State* L) {
-	lua_pushboolean(L, get()->in_road_building_mode());
+	lua_pushboolean(L, static_cast<int>(get()->in_road_building_mode()));
+	return 1;
+}
+
+/* RST
+   .. attribute:: auto_roadbuild_mode
+
+      (RO) Is the player using automatic road building mode?
+*/
+int LuaMapView::get_auto_roadbuilding_mode(lua_State* L) {
+	InteractivePlayer* ipl = get_game(L).get_ipl();
+	if (ipl == nullptr) {
+		lua_pushboolean(L, 0);
+	} else {
+		lua_pushboolean(L, static_cast<int>(ipl->auto_roadbuild_mode()));
+	}
 	return 1;
 }
 
@@ -706,9 +827,10 @@ int LuaMapView::get_is_building_road(lua_State* L) {
       (RO) True if this MapView is currently panning or zooming.
 */
 int LuaMapView::get_is_animating(lua_State* L) {
-	lua_pushboolean(L, get()->map_view()->is_animating());
+	lua_pushboolean(L, static_cast<int>(get()->map_view()->is_animating()));
 	return 1;
 }
+
 /*
  * Lua Functions
  */
@@ -723,7 +845,7 @@ int LuaMapView::get_is_animating(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::click(lua_State* L) {
-	const auto field = *get_user_class<LuaMaps::LuaField>(L, 2);
+	auto* const field = *get_user_class<LuaMaps::LuaField>(L, 2);
 	get()->map_view()->mouse_to_field(field->coords(), MapView::Transition::Jump);
 
 	// We fake the triangle here, since we only support clicking on Nodes from
@@ -758,7 +880,7 @@ int LuaMapView::start_road_building(lua_State* L) {
 	me->map_view()->mouse_to_field(starting_field, MapView::Transition::Jump);
 	me->start_build_road(starting_field, me->get_player()->player_number(),
 	                     lua_gettop(L) > 2 && luaL_checkboolean(L, 3) ? RoadBuildingType::kWaterway :
-	                                                                    RoadBuildingType::kRoad);
+                                                                       RoadBuildingType::kRoad);
 
 	return 0;
 }
@@ -840,8 +962,8 @@ int LuaMapView::scroll_to_field(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::is_visible(lua_State* L) {
-	lua_pushboolean(L, get()->map_view()->view_area().contains(
-	                      (*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
+	lua_pushboolean(L, static_cast<int>(get()->map_view()->view_area().contains(
+	                      (*get_user_class<LuaMaps::LuaField>(L, 2))->coords())));
 	return 1;
 }
 
@@ -912,12 +1034,31 @@ static int L_set_user_input_allowed(lua_State* L) {
    :rtype: :class:`boolean`
 */
 static int L_get_user_input_allowed(lua_State* L) {
-	lua_pushboolean(L, UI::Panel::allow_user_input());
+	lua_pushboolean(L, static_cast<int>(UI::Panel::allow_user_input()));
+	return 1;
+}
+
+/* RST
+.. method:: get_shortcut(name)
+
+   Returns the keyboard shortcut with the given name.
+
+   :returns: The human-readable and localized shortcut.
+   :rtype: :class:`string`
+*/
+static int L_get_shortcut(lua_State* L) {
+	const std::string name = luaL_checkstring(L, -1);
+	try {
+		lua_pushstring(L, shortcut_string_for(shortcut_from_string(name), true).c_str());
+	} catch (const WException& e) {
+		report_error(L, "Unable to query shortcut for '%s': %s", name.c_str(), e.what());
+	}
 	return 1;
 }
 
 const static struct luaL_Reg wlui[] = {{"set_user_input_allowed", &L_set_user_input_allowed},
                                        {"get_user_input_allowed", &L_get_user_input_allowed},
+                                       {"get_shortcut", &L_get_shortcut},
                                        {nullptr, nullptr}};
 
 void luaopen_wlui(lua_State* L) {

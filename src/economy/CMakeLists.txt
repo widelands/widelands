@@ -12,6 +12,7 @@ wl_library(economy
     ferry_fleet.h
     flag.cc
     flag.h
+    flag_job.h
     idleworkersupply.cc
     idleworkersupply.h
     iroute.h
@@ -48,6 +49,8 @@ wl_library(economy
     warehousesupply.h
     input_queue.cc
     input_queue.h
+    ware_priority.cc
+    ware_priority.h
     wares_queue.cc
     wares_queue.h
     waterway.cc
@@ -55,11 +58,13 @@ wl_library(economy
     workers_queue.cc
     workers_queue.h
   DEPENDS
+    base
     base_exceptions
-    base_log
     base_macros
+    base_times
     graphic
     io_fileread
+    io_stream
     logic
     logic_commands
     logic_constants

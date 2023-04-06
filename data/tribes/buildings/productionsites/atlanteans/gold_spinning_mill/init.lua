@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_gold_spinning_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Gold Spinning Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -19,14 +19,14 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 33, 64 },
+         hotspot = { 34, 74 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 33, 64 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 34, 74 },
       }
    },
 
@@ -45,7 +45,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
-         descname = _"spinning gold",
+         descname = _("spinning gold"),
          actions = {
             "return=skipped unless economy needs gold_thread",
             "consume=gold",
@@ -57,3 +57,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

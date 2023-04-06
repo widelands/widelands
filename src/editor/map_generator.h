@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -73,7 +72,8 @@ struct MapGenerator {
 
 	MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase);
 
-	void create_random_map();
+	// Returns true if everything went well and all players have a good starting position
+	bool create_random_map();
 
 private:
 	void generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
@@ -81,25 +81,25 @@ private:
 	                   RNG&,
 	                   MapGenAreaInfo::Terrain terrType);
 
-	void generate_resources(uint32_t const* const random1,
-	                        uint32_t const* const random2,
-	                        uint32_t const* const random3,
-	                        uint32_t const* const random4,
+	void generate_resources(uint32_t const* random1,
+	                        uint32_t const* random2,
+	                        uint32_t const* random3,
+	                        uint32_t const* random4,
 	                        const FCoords& fc);
 
 	uint8_t make_node_elevation(double elevation, const Coords&);
 
 	static uint32_t* generate_random_value_map(uint32_t w, uint32_t h, RNG& rng);
 
-	DescriptionIndex figure_out_terrain(uint32_t* const random2,
-	                                    uint32_t* const random3,
-	                                    uint32_t* const random4,
+	DescriptionIndex figure_out_terrain(const uint32_t* random2,
+	                                    const uint32_t* random3,
+	                                    const uint32_t* random4,
 	                                    const Coords& c0,
 	                                    const Coords& c1,
 	                                    const Coords& c2,
-	                                    uint32_t const h1,
-	                                    uint32_t const h2,
-	                                    uint32_t const h3,
+	                                    uint32_t h1,
+	                                    uint32_t h2,
+	                                    uint32_t h3,
 	                                    RNG& rng,
 	                                    MapGenAreaInfo::Terrain& terrType);
 

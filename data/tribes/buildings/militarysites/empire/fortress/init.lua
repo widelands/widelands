@@ -1,14 +1,29 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_militarysite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_militarysite_type {
    name = "empire_fortress",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Fortress"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-   enhancement = "empire_castle",
+
+   enhancement = {
+      name = "empire_castle",
+      enhancement_cost = {
+         planks = 5,
+         marble_column = 4,
+         marble = 4,
+         granite = 2
+      },
+      enhancement_return_on_dismantle = {
+         planks = 2,
+         marble_column = 2,
+         marble = 3,
+         granite = 1
+      }
+   },
 
    buildcost = {
       planks = 5,
@@ -25,15 +40,20 @@ tribes:new_militarysite_type {
       marble_column = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 90, 105 }
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 99, 113 }
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 90, 105 },
-      }
+         frames = 4,
+         columns = 4,
+         rows = 1,
+         hotspot = { 99, 113 }
+      },
    },
 
    aihints = {
@@ -49,10 +69,17 @@ tribes:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your soldiers have occupied your fortress.",
-      aggressor = _"Your fortress discovered an aggressor.",
-      attack = _"Your fortress is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the fortress.",
-      defeated_you = _"Your soldiers defeated the enemy at the fortress."
+      -- TRANSLATORS: Message sent by an Empire military site
+      occupied = pgettext("empire_building", "Your soldiers have occupied your fortress."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      aggressor = pgettext("empire_building", "Your fortress discovered an aggressor."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      attack = pgettext("empire_building", "Your fortress is under attack."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      defeated_enemy = pgettext("empire_building", "The enemy defeated your soldiers at the fortress."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      defeated_you = pgettext("empire_building", "Your soldiers defeated the enemy at the fortress.")
    },
 }
+
+pop_textdomain()

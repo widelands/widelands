@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -54,7 +53,7 @@ void MapFlagPacket::read(FileSystem& fs,
 			const Map& map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			Widelands::Extent const extent = map.extent();
-			iterate_Map_FCoords(map, extent, fc) if (fr.unsigned_8()) {
+			iterate_Map_FCoords(map, extent, fc) if (fr.unsigned_8() != 0u) {
 				PlayerNumber const owner = fr.unsigned_8();
 				if (!(0 < owner && owner <= nr_players)) {
 					throw GameDataError("Invalid player number: %i.", owner);
@@ -69,7 +68,7 @@ void MapFlagPacket::read(FileSystem& fs,
 						throw GameDataError("the node is owned by player %u", fc.field->get_owned_by());
 					}
 
-					for (Direction dir = 6; dir; --dir) {
+					for (Direction dir = 6; dir != 0u; --dir) {
 						FCoords n;
 						map.get_neighbour(fc, dir, &n);
 						try {
@@ -100,11 +99,11 @@ void MapFlagPacket::read(FileSystem& fs,
 					// Get economy from serial
 					Player* player = egbase.get_player(owner);
 					Economy* ware_economy = player->get_economy(ware_economy_serial);
-					if (!ware_economy) {
+					if (ware_economy == nullptr) {
 						ware_economy = player->create_economy(ware_economy_serial, wwWARE);
 					}
 					Economy* worker_economy = player->get_economy(worker_economy_serial);
-					if (!worker_economy) {
+					if (worker_economy == nullptr) {
 						worker_economy = player->create_economy(worker_economy_serial, wwWORKER);
 					}
 

@@ -19,7 +19,7 @@ class Packer(object):
                 b.node = self.split_node(node, b.w, b.h)
             else:
                 b.node = self.grow_node(b.w, b.h)
-            assert(b.node)
+            assert (b.node)
 
     def find_node(self, root, w, h):
         if root['used']:
@@ -56,7 +56,7 @@ class Packer(object):
         elif (can_grow_down):
             return self.grow_down(w, h)
         # Damn, no space for this. Should never happen.
-        assert(0)
+        assert (0)
 
     def grow_right(self, w, h):
         self.root = {
@@ -86,7 +86,6 @@ class Packer(object):
 
 
 class Block(object):
-
     def __init__(self, w, h):
         self.w = w
         self.h = h

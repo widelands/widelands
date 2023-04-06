@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,25 +21,20 @@
 
 #include "editor/tools/tool.h"
 
-// How much place should be left around a player position
-// where no other player can start
-#define MIN_PLACE_AROUND_PLAYERS 24
-
 /// Sets the starting position of players.
 struct EditorSetStartingPosTool : public EditorTool {
-	EditorSetStartingPosTool();
+	explicit EditorSetStartingPosTool(EditorInteractive& parent);
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
-	                          EditorInteractive&,
 	                          EditorActionArgs*,
 	                          Widelands::Map*) override;
-	const Image* get_sel_impl() const override {
+	[[nodiscard]] const Image* get_sel_impl() const override {
 		return playercolor_image(get_current_player() - 1, "images/players/player_position_menu.png");
 	}
 
-	Widelands::PlayerNumber get_current_player() const;
+	[[nodiscard]] Widelands::PlayerNumber get_current_player() const;
 	void set_current_player(int32_t);
-	bool has_size_one() const override {
+	[[nodiscard]] bool has_size_one() const override {
 		return true;
 	}
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,

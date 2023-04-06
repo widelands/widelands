@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 by the Widelands Development Team
+ * Copyright (C) 2019-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,9 +21,13 @@
 #include "base/i18n.h"
 #include "logic/map.h"
 
-MapSizeBox::MapSizeBox(
-   UI::Box& parent, const std::string& name, int spacing, int map_width, int map_height)
-   : UI::Box(&parent, 0, 0, UI::Box::Horizontal, 0, 0, spacing),
+MapSizeBox::MapSizeBox(UI::Box& parent,
+                       UI::PanelStyle s,
+                       const std::string& name,
+                       int spacing,
+                       int map_width,
+                       int map_height)
+   : UI::Box(&parent, s, 0, 0, UI::Box::Horizontal, 0, 0, spacing),
      width_(this,
             name + "_map_width",
             0,
@@ -34,8 +37,9 @@ MapSizeBox::MapSizeBox(
             24,
             _("Width"),
             UI::DropdownType::kTextual,
-            UI::PanelStyle::kWui,
-            UI::ButtonStyle::kWuiSecondary),
+            s,
+            s == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary :
+                                        UI::ButtonStyle::kFsMenuSecondary),
      height_(this,
              name + "_map_height",
              0,
@@ -45,8 +49,9 @@ MapSizeBox::MapSizeBox(
              24,
              _("Height"),
              UI::DropdownType::kTextual,
-             UI::PanelStyle::kWui,
-             UI::ButtonStyle::kWuiSecondary) {
+             s,
+             s == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary :
+                                         UI::ButtonStyle::kFsMenuSecondary) {
 	for (const int32_t& i : Widelands::kMapDimensions) {
 		width_.add(std::to_string(i), i);
 		height_.add(std::to_string(i), i);

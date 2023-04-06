@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,13 +28,15 @@
 class EditorInteractive;
 namespace Widelands {
 class CritterDescr;
-}
+}  // namespace Widelands
 
 struct EditorToolPlaceCritterOptionsMenu : public EditorToolOptionsMenu {
 	EditorToolPlaceCritterOptionsMenu(EditorInteractive&,
 	                                  EditorPlaceCritterTool&,
 	                                  UI::UniqueWindow::Registry&);
-	virtual ~EditorToolPlaceCritterOptionsMenu();
+	~EditorToolPlaceCritterOptionsMenu() override = default;
+
+	void update_window() override;
 
 private:
 	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>>

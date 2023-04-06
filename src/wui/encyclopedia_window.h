@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,7 +26,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
-#include "ui_basic/table.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 
@@ -36,19 +34,31 @@ class InteractiveBase;
 namespace UI {
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
-	EncyclopediaWindow(InteractiveBase&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
+	EncyclopediaWindow(InteractiveBase&, UI::UniqueWindow::Registry&, LuaInterface* lua);
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kEncyclopedia;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
 
 protected:
-	void init(InteractiveBase& parent, std::unique_ptr<LuaTable> table);
+	void init(std::unique_ptr<LuaTable> table);
+	void handle_hyperlink(const std::string& action) override;
 
+	InteractiveBase& parent_;
 	LuaInterface* const lua_;
 
 private:
 	struct EncyclopediaEntry {
-		EncyclopediaEntry(const std::string& init_script_path,
+		EncyclopediaEntry(const std::string& init_name,
+		                  const std::string& init_script_path,
 		                  const std::vector<std::string>& init_script_parameters)
-		   : script_path(init_script_path), script_parameters(init_script_parameters) {
+		   : name(init_name),
+		     script_path(init_script_path),
+		     script_parameters(init_script_parameters) {
 		}
+		const std::string name;
 		const std::string script_path;
 		const std::vector<std::string> script_parameters;
 	};

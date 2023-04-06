@@ -17,6 +17,7 @@ include "scripting/ui.lua"
 
 map = wl.Game().map
 mv = wl.ui.MapView()
+wl.Game().allow_diplomacy = false
 
 tavern_field = map:get_field(105, 44)
 warehouse_field = map:get_field(78, 67)

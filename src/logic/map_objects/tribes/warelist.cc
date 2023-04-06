@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -32,8 +31,8 @@ namespace Widelands {
  */
 WareList::~WareList() {
 	for (uint32_t id = 0; id < wares_.size(); ++id) {
-		if (wares_[id]) {
-			log("WareList: %i items of %i left.\n", wares_[id], id);
+		if (wares_[id] != 0u) {
+			log_warn("WareList: %i items of %i left.\n", wares_[id], id);
 		}
 	}
 }
@@ -42,7 +41,7 @@ WareList::~WareList() {
  * Add the given number of items (default = 1) to the storage.
  */
 void WareList::add(DescriptionIndex const i, const Quantity count) {
-	if (!count) {
+	if (count == 0u) {
 		return;
 	}
 
@@ -59,7 +58,7 @@ void WareList::add(const WareList& wl) {
 		wares_.reserve(nr_wares);
 	}
 	for (DescriptionIndex i = 0; i < nr_wares; ++i) {
-		if (wl.wares_[i]) {
+		if (wl.wares_[i] != 0u) {
 			add(i, wl.wares_[i]);
 		}
 	}
@@ -69,7 +68,7 @@ void WareList::add(const WareList& wl) {
  * Remove the given number of items (default = 1) from the storage.
  */
 void WareList::remove(DescriptionIndex const i, const Quantity count) {
-	if (!count) {
+	if (count == 0u) {
 		return;
 	}
 
@@ -81,7 +80,7 @@ void WareList::remove(DescriptionIndex const i, const Quantity count) {
 void WareList::remove(const WareList& wl) {
 	DescriptionIndex const nr_wares = wl.get_nrwareids();
 	for (DescriptionIndex i = 0; i < nr_wares; ++i) {
-		if (wl.wares_[i]) {
+		if (wl.wares_[i] != 0u) {
 			remove(i, wl.wares_[i]);
 		}
 	}
@@ -108,7 +107,7 @@ bool WareList::operator==(const WareList& wl) const {
 				return false;
 			}
 		} else {
-			if (count) {  // wl2 has 0 stock per definition
+			if (count != 0u) {  // wl2 has 0 stock per definition
 				return false;
 			}
 		}
@@ -116,7 +115,7 @@ bool WareList::operator==(const WareList& wl) const {
 	}
 
 	while (i < wares_.size()) {
-		if (wares_[i]) {  // wl1 has 0 stock per definition
+		if (wares_[i] != 0u) {  // wl1 has 0 stock per definition
 			return false;
 		}
 		++i;

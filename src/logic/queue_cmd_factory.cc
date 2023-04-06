@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -25,7 +24,6 @@
 #include "logic/cmd_incorporate.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/playercommand.h"
 
 namespace Widelands {
@@ -44,6 +42,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdFlagAction();
 	case QueueCommandTypes::kStartStopBuilding:
 		return *new CmdStartStopBuilding();
+	case QueueCommandTypes::kToggleInfiniteProduction:
+		return *new CmdToggleInfiniteProduction();
 	case QueueCommandTypes::kEnhanceBuilding:
 		return *new CmdEnhanceBuilding();
 	case QueueCommandTypes::kBulldoze:
@@ -108,6 +108,16 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdCallEconomyBalance();
 	case QueueCommandTypes::kToggleMuteMessages:
 		return *new CmdToggleMuteMessages();
+	case QueueCommandTypes::kMarkMapObjectForRemoval:
+		return *new CmdMarkMapObjectForRemoval();
+	case QueueCommandTypes::kDiplomacy:
+		return *new CmdDiplomacy();
+	case QueueCommandTypes::kPinnedNote:
+		return *new CmdPinnedNote();
+	case QueueCommandTypes::kShipPortName:
+		return *new CmdShipPortName();
+	case QueueCommandTypes::kPickCustomStartingPosition:
+		return *new CmdPickCustomStartingPosition();
 	case QueueCommandTypes::kDeleteMessage:  // Not a logic command
 	case QueueCommandTypes::kNetCheckSync:
 	case QueueCommandTypes::kReplaySyncWrite:

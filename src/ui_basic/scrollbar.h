@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -43,7 +42,7 @@ public:
 	          UI::PanelStyle style,
 	          bool horiz = false);
 
-	boost::signals2::signal<void(int32_t)> moved;
+	Notifications::Signal<int32_t> moved;
 
 	void set_steps(int32_t steps);
 	void set_singlestepsize(uint32_t singlestepsize);
@@ -63,7 +62,7 @@ public:
 	}
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mousewheel(uint32_t, int32_t, int32_t y) override;
+	bool handle_mousewheel(int32_t, int32_t y, uint16_t modstate) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void set_force_draw(bool const t) {
@@ -90,21 +89,22 @@ private:
 	handle_mousemove(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 
 	bool horizontal_;
-	bool force_draw_;  // draw this scrollbar, even if it can't do anything
+	bool force_draw_{false};  // draw this scrollbar, even if it can't do anything
 
-	uint32_t pos_;  ///< from 0 to range_ - 1
-	uint32_t singlestepsize_;
-	uint32_t pagesize_;
+	uint32_t pos_{0U};  ///< from 0 to range_ - 1
+	uint32_t singlestepsize_{1U};
+	uint32_t pagesize_{5U};
 	uint32_t buttonsize_;
-	uint32_t steps_;
+	uint32_t steps_{100U};
 
-	Area pressed_;  ///< area that the user clicked on (None if mouse is up)
-	uint32_t time_nextact_;
-	int32_t knob_grabdelta_;  ///< only while pressed_ == Knob
+	Area pressed_{Area::None};  ///< area that the user clicked on (None if mouse is up)
+	uint32_t time_nextact_{0U};
+	int32_t knob_grabdelta_{0};  ///< only while pressed_ == Knob
 
-	const Image* pic_minus_;                  ///< left/up
-	const Image* pic_plus_;                   ///< right/down
-	const UI::PanelStyleInfo* button_style_;  // Background color and texture. Not owned.
+	const Image* pic_minus_;  ///< left/up
+	const Image* pic_plus_;   ///< right/down
+
+	const UI::PanelStyleInfo& button_style() const;  // Background color and texture.
 };
 }  // namespace UI
 

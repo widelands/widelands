@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_FIELD_H
 #define WL_LOGIC_FIELD_H
 
+#include <atomic>
 #include <cassert>
 
 #include "base/wexception.h"
@@ -30,10 +30,11 @@
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
+constexpr int MAX_FIELD_HEIGHT = 60;
+
 namespace Widelands {
 
-#define MAX_FIELD_HEIGHT 60
-#define MAX_FIELD_HEIGHT_DIFF 5
+constexpr int kDefaultMaxFieldHeightDiff = 5;
 
 // Think, if we shouldn't call for each field a new() in map::set_size
 // and a delete
@@ -55,7 +56,8 @@ struct BaseImmovable;
 #pragma pack(push, 1)
 /// a field like it is represented in the game
 // TODO(unknown): This is all one evil hack :(
-struct Field {
+class Field {
+public:
 	friend class Map;
 	friend class Bob;
 	friend struct BaseImmovable;
@@ -88,28 +90,52 @@ struct Field {
 	};
 	static_assert(sizeof(ResourceAmounts) == 1, "assert(sizeof(ResourceAmounts) == 1) failed.");
 
-	Height get_height() const {
+	Field() : brightness(0), owner_info_and_selections(Widelands::neutral()) {
+	}
+
+	Field& operator=(const Field& other) {
+		if (&other == this) {
+			return *this;
+		}
+		bobs = other.bobs;
+		immovable = other.immovable;
+		caps = other.caps;
+		max_caps = other.max_caps;
+		road_east = other.road_east;
+		road_southeast = other.road_southeast;
+		road_southwest = other.road_southwest;
+		height = other.height;
+		brightness = other.brightness.load();
+		owner_info_and_selections = other.owner_info_and_selections.load();
+		resources = other.resources;
+		initial_res_amount = other.initial_res_amount;
+		res_amount = other.res_amount;
+		terrains = other.terrains;
+		return *this;
+	}
+
+	[[nodiscard]] Height get_height() const {
 		return height;
 	}
-	NodeCaps nodecaps() const {
+	[[nodiscard]] NodeCaps nodecaps() const {
 		return static_cast<NodeCaps>(caps);
 	}
-	NodeCaps maxcaps() const {
+	[[nodiscard]] NodeCaps maxcaps() const {
 		return static_cast<NodeCaps>(max_caps);
 	}
-	uint16_t get_caps() const {
+	[[nodiscard]] uint16_t get_caps() const {
 		return caps;
 	}
 
-	Terrains get_terrains() const {
+	[[nodiscard]] Terrains get_terrains() const {
 		return terrains;
 	}
 	// The terrain on the downward triangle
-	DescriptionIndex terrain_d() const {
+	[[nodiscard]] DescriptionIndex terrain_d() const {
 		return terrains.d;
 	}
 	// The terrain on the triangle to the right
-	DescriptionIndex terrain_r() const {
+	[[nodiscard]] DescriptionIndex terrain_r() const {
 		return terrains.r;
 	}
 	void set_terrains(const Terrains& i) {
@@ -118,10 +144,11 @@ struct Field {
 	void set_terrain(const TriangleIndex& t, DescriptionIndex const i)
 
 	{
-		if (t == TriangleIndex::D)
+		if (t == TriangleIndex::D) {
 			set_terrain_d(i);
-		else
+		} else {
 			set_terrain_r(i);
+		}
 	}
 	void set_terrain_d(DescriptionIndex const i) {
 		terrains.d = i;
@@ -130,10 +157,10 @@ struct Field {
 		terrains.r = i;
 	}
 
-	Bob* get_first_bob() const {
+	[[nodiscard]] Bob* get_first_bob() const {
 		return bobs;
 	}
-	const BaseImmovable* get_immovable() const {
+	[[nodiscard]] const BaseImmovable* get_immovable() const {
 		return immovable;
 	}
 	BaseImmovable* get_immovable() {
@@ -141,7 +168,7 @@ struct Field {
 	}
 
 	void set_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
-	int8_t get_brightness() const {
+	[[nodiscard]] int8_t get_brightness() const {
 		return brightness;
 	}
 
@@ -154,12 +181,12 @@ struct Field {
 		owner_info_and_selections = n | (owner_info_and_selections & ~Player_Number_Bitmask);
 	}
 
-	PlayerNumber get_owned_by() const {
+	[[nodiscard]] PlayerNumber get_owned_by() const {
 		assert((owner_info_and_selections & Player_Number_Bitmask) <= kMaxPlayers);
 		return owner_info_and_selections & Player_Number_Bitmask;
 	}
-	bool is_border() const {
-		return owner_info_and_selections & Border_Bitmask;
+	[[nodiscard]] bool is_border() const {
+		return (owner_info_and_selections & Border_Bitmask) != 0;
 	}
 
 	///
@@ -169,17 +196,18 @@ struct Field {
 	///
 	/// player_number must be in the range 1 .. Player_Number_Bitmask or the
 	/// behaviour is undefined.
-	bool is_interior(const PlayerNumber player_number) const {
+	[[nodiscard]] bool is_interior(const PlayerNumber player_number) const {
 		assert(0 < player_number);
 		assert(player_number <= Player_Number_Bitmask);
 		return player_number == (owner_info_and_selections & Owner_Info_Bitmask);
 	}
 
 	void set_border(const bool b) {
-		owner_info_and_selections = (owner_info_and_selections & ~Border_Bitmask) | (b << Border_Bit);
+		owner_info_and_selections =
+		   (owner_info_and_selections & ~Border_Bitmask) | (static_cast<int>(b) << Border_Bit);
 	}
 
-	RoadSegment get_road(uint8_t dir) const {
+	[[nodiscard]] RoadSegment get_road(uint8_t dir) const {
 		switch (dir) {
 		case WalkingDir::WALK_E:
 			return road_east;
@@ -209,14 +237,14 @@ struct Field {
 
 	// Resources can be set through Map::set_resources()
 	// TODO(unknown): This should return DescriptionIndex
-	DescriptionIndex get_resources() const {
+	[[nodiscard]] DescriptionIndex get_resources() const {
 		return resources;
 	}
-	ResourceAmount get_resources_amount() const {
+	[[nodiscard]] ResourceAmount get_resources_amount() const {
 		return res_amount;
 	}
 	// TODO(unknown): This should return uint8_t
-	ResourceAmount get_initial_res_amount() const {
+	[[nodiscard]] ResourceAmount get_initial_res_amount() const {
 		return initial_res_amount;
 	}
 
@@ -266,9 +294,9 @@ private:
 	RoadSegment road_southwest = RoadSegment::kNone;
 
 	Height height = 0U;
-	int8_t brightness = 0;
+	std::atomic<int8_t> brightness;
 
-	OwnerInfoAndSelectionsType owner_info_and_selections = Widelands::neutral();
+	std::atomic<OwnerInfoAndSelectionsType> owner_info_and_selections;
 
 	DescriptionIndex resources = INVALID_INDEX;  ///< Resource type on this field, if any
 	ResourceAmount initial_res_amount = 0U;      ///< Initial amount of resources

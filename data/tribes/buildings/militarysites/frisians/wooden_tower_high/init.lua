@@ -1,27 +1,18 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_militarysite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_militarysite_type {
    name = "frisians_wooden_tower_high",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "High Wooden Tower"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
    vision_range = 17,
 
-   enhancement_cost = {
-      log = 2,
-      reed = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      log = 1,
-   },
-
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {22, 72},
          frames = 4,
          columns = 2,
@@ -31,8 +22,6 @@ tribes:new_militarysite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {22, 72}
       }
    },
@@ -47,10 +36,17 @@ tribes:new_militarysite_type {
    prefer_heroes = false,
 
    messages = {
-      occupied = _"Your soldiers have occupied your high wooden tower.",
-      aggressor = _"Your high wooden tower discovered an aggressor.",
-      attack = _"Your high wooden tower is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the high wooden tower.",
-      defeated_you = _"Your soldiers defeated the enemy at the high wooden tower."
+      -- TRANSLATORS: Message sent by a Frisian military site
+      occupied = pgettext("frisians_building", "Your soldiers have occupied your high wooden tower."),
+      -- TRANSLATORS: Message sent by a Frisian military site
+      aggressor = pgettext("frisians_building", "Your high wooden tower discovered an aggressor."),
+      -- TRANSLATORS: Message sent by a Frisian military site
+      attack = pgettext("frisians_building", "Your high wooden tower is under attack."),
+      -- TRANSLATORS: Message sent by a Frisian military site
+      defeated_enemy = pgettext("frisians_building", "The enemy defeated your soldiers at the high wooden tower."),
+      -- TRANSLATORS: Message sent by a Frisian military site
+      defeated_you = pgettext("frisians_building", "Your soldiers defeated the enemy at the high wooden tower.")
    },
 }
+
+pop_textdomain()

@@ -1,36 +1,49 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      sound_effect = {
-         path = "sound/animals/coyote",
-         priority = 0.01
-      },
-      hotspot = { 10, 13 },
-      fps = 10,
-   },
-   eating = {
-      directory = dirname,
-      basename = "idle", -- TODO(Nordfriese): Make animation
-      hotspot = { 10, 13 },
-      fps = 10,
-   }
-}
-
-add_directional_animation(animations, "walk", dirname, "walk", {11, 14}, 20)
-
-world:new_critter_type{
+wl.Descriptions():new_critter_type{
    name = "fox",
-   descname = _ "Fox",
-   editor_category = "critters_carnivores",
-   attributes = { "eatable" },
+   descname = _("Fox"),
+   icon = dirname .. "menu.png",
+   animation_directory = dirname,
    programs = {
       remove = { "remove" },
    },
-   animations = animations,
    size = 4,
    reproduction_rate = 80,
    appetite = 70,
    carnivore = true,
+
+   spritesheets = {
+      idle = {
+         sound_effect = {
+            path = "sound/animals/coyote",
+            priority = "0.01%"
+         },
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 10, 13 }
+      },
+      eating = {
+         basename = "idle", -- TODO(Nordfriese): Make animation
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 10, 13 }
+      },
+      walk = {
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 11, 14 }
+      },
+   },
 }
+
+pop_textdomain()

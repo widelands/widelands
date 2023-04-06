@@ -10,7 +10,6 @@ wl_binary(wl_render_richtext
     render_richtext.cc
   USES_SDL2_TTF
   DEPENDS
-    base_log
     graphic
     graphic_image_io
     graphic_surface
@@ -25,8 +24,8 @@ wl_library(graphic_text_test_render
     render.cc
     render.h
   DEPENDS
-    base_i18n
-    graphic_image_cache
+    base
+    graphic
     graphic_text
     io_filesystem
 )

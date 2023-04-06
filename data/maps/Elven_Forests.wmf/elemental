@@ -10,6 +10,7 @@ author="Winterwind"
 descr=_"The breath-taking beauty of these emerald lands has lured many tribes into an attempt to take them for themselves."
 hint=
 tags="2teams,artifacts,balanced,ffa,official"
+theme="summer"
 
 [teams00]
 team1="0,1"

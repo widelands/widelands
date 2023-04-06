@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,7 +27,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_base.h"
 
 /**
  * Base class for all building windows.
@@ -42,24 +41,42 @@ struct BuildingWindow : public UI::UniqueWindow {
 		Width = 4 * 34  //  4 normally sized buttons
 	};
 
+	enum class CollapsedState : uint8_t { kExpanded, kCollapsed };
+
+	struct Registry : public UI::UniqueWindow::Registry {
+		CollapsedState priority_collapsed{CollapsedState::kExpanded};
+	};
+	void set_priority_collapsed(CollapsedState collapse) {
+		*priority_collapsed_ = collapse;
+	}
+	CollapsedState* priority_collapsed() const {
+		return priority_collapsed_;
+	}
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kBuildingWindow;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 protected:
 	// This constructor allows setting a building description for the help button independent of the
 	// base building
-	BuildingWindow(InteractiveGameBase& parent,
-	               UI::UniqueWindow::Registry& reg,
+	BuildingWindow(InteractiveBase& parent,
+	               Registry& reg,
 	               Widelands::Building&,
 	               const Widelands::BuildingDescr&,
 	               bool avoid_fastclick);
 
 public:
-	BuildingWindow(InteractiveGameBase& parent,
-	               UI::UniqueWindow::Registry& reg,
+	BuildingWindow(InteractiveBase& parent,
+	               Registry& reg,
 	               Widelands::Building&,
 	               bool avoid_fastclick);
 
 	~BuildingWindow() override;
 
-	InteractiveGameBase* igbase() const {
+	InteractiveBase* ibase() const {
 		return parent_;
 	}
 
@@ -70,10 +87,15 @@ protected:
 	virtual void init(bool avoid_fastclick, bool workarea_preview_wanted);
 	void die() override;
 
+	// Actions performed when a NoteBuilding is received.
+	virtual void on_building_note(const Widelands::NoteBuilding& note);
+
 	UI::TabPanel* get_tabs() {
 		return tabs_;
 	}
 
+	virtual void setup_name_field_editbox(UI::Box& /* vbox */) {
+	}
 	void act_bulldoze();
 	void act_dismantle();
 	void act_debug();
@@ -82,15 +104,17 @@ protected:
 	void toggle_workarea();
 	void configure_workarea_button();
 	void act_start_stop();
+	void act_produce_infinite();
 	void act_start_or_cancel_expedition();
 	void act_enhance(Widelands::DescriptionIndex, bool is_csite);
 	void clicked_goto();
 	void act_mute(bool all);
+	virtual void clicked_watch() {
+		// overridden by ProductionsiteWindow
+		NEVER_HERE();
+	}
 
-	void create_input_queue_panel(UI::Box*,
-	                              Widelands::Building&,
-	                              const Widelands::InputQueue&,
-	                              bool = false);
+	Widelands::Game* const game_;
 
 	bool is_dying_;
 
@@ -98,16 +122,15 @@ protected:
 		building_descr_for_help_ = d;
 	}
 
+	UI::Button* watch_button_;
+
 private:
 	void create_capsbuttons(UI::Box* buttons, Widelands::Building* building);
-
-	// Actions performed when a NoteBuilding is received.
-	void on_building_note(const Widelands::NoteBuilding& note);
 
 	// For ports only.
 	void update_expedition_button(bool expedition_was_canceled);
 
-	InteractiveGameBase* parent_;
+	InteractiveBase* parent_;
 
 	// The building that this window belongs to
 	Widelands::OPtr<Widelands::Building> building_;
@@ -134,6 +157,7 @@ private:
 
 	bool showing_workarea_;
 	bool avoid_fastclick_;
+	CollapsedState* priority_collapsed_;  ///< Owned by the BuildingWindow::Registry
 
 	UI::Button* expeditionbtn_;
 	UI::Button* mute_this_;

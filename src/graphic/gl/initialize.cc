@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,20 +12,19 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/gl/initialize.h"
 
 #include <csignal>
+#include <regex>
 
 #include <SDL_messagebox.h>
-#include <boost/algorithm/string.hpp>
-#include <boost/regex.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "graphic/gl/utils.h"
 #include "graphic/text/bidi.h"
@@ -36,7 +35,7 @@ SDL_GLContext initialize(
 #ifdef USE_GLBINDING
    const Trace& trace,
 #else
-   const Trace&,
+   const Trace& /* trace */,
 #endif
    SDL_Window* sdl_window,
    GLint* max_texture_size) {
@@ -49,6 +48,8 @@ SDL_GLContext initialize(
 
 	SDL_GLContext gl_context = SDL_GL_CreateContext(sdl_window);
 	SDL_GL_MakeCurrent(sdl_window, gl_context);
+
+	SDL_GL_SetSwapInterval(0);
 
 #ifdef USE_GLBINDING
 #ifndef GLBINDING3
@@ -63,18 +64,18 @@ SDL_GLContext initialize(
 		   glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
 		   {"glGetError"});
 		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
-			log("%s(", call.function->name());
+			log_dbg("%s(", call.function->name());
 			for (size_t i = 0; i < call.parameters.size(); ++i) {
-				log("%s", call.parameters[i]->asString().c_str());
+				log_dbg("%s", call.parameters[i]->asString().c_str());
 				if (i < call.parameters.size() - 1)
-					log(", ");
+					log_dbg(", ");
 			}
-			log(")");
+			log_dbg(")");
 			if (call.returnValue) {
-				log(" -> %s", call.returnValue->asString().c_str());
+				log_dbg(" -> %s", call.returnValue->asString().c_str());
 			}
 			const auto error = glGetError();
-			log(" [%s]\n", gl_error_to_string(error));
+			log_dbg(" [%s]\n", gl_error_to_string(error));
 			// The next few lines will terminate Widelands if there was any OpenGL
 			// error. This is useful for super aggressive debugging, but probably
 			// not for regular builds. Comment it in if you need to understand
@@ -99,22 +100,22 @@ SDL_GLContext initialize(
 		   glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
 		   {"glGetError"});
 		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
-			log("%s(", call.function->name());
+			log_dbg("%s(", call.function->name());
 			for (size_t i = 0; i < call.parameters.size(); ++i) {
 				FORMAT_WARNINGS_OFF
-				log("%p", call.parameters[i].get());
+				log_dbg("%p", call.parameters[i].get());
 				FORMAT_WARNINGS_ON
 				if (i < call.parameters.size() - 1)
-					log(", ");
+					log_dbg(", ");
 			}
-			log(")");
+			log_dbg(")");
 			if (call.returnValue) {
 				FORMAT_WARNINGS_OFF
-				log(" -> %p", call.returnValue.get());
+				log_dbg(" -> %p", call.returnValue.get());
 				FORMAT_WARNINGS_ON
 			}
 			const auto error = glGetError();
-			log(" [%s]\n", gl_error_to_string(error));
+			log_dbg(" [%s]\n", gl_error_to_string(error));
 			// The next few lines will terminate Widelands if there was any OpenGL
 			// error. This is useful for super aggressive debugging, but probably
 			// not for regular builds. Comment it in if you need to understand
@@ -130,23 +131,142 @@ SDL_GLContext initialize(
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	// LeakSanitizer reports a memory leak which is triggered somewhere above this line, probably
-	// coming from the gaphics drivers
+	// coming from the graphics drivers
 
-	if (err != GLEW_OK) {
-		log("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
-		    glewGetErrorString(err));
+#ifdef GLEW_ERROR_NO_GLX_DISPLAY
+	// err == GLEW_ERROR_NO_GLX_DISPLAY is a workaround for crash on wayland
+	// https://github.com/nigels-com/glew/issues/172
+	if (err == GLEW_ERROR_NO_GLX_DISPLAY &&
+	    std::strcmp(SDL_GetCurrentVideoDriver(), "wayland") == 0) {
+		log_info("Using glewInit workaround for Wayland\n");
+	} else
+#endif
+	   if (err != GLEW_OK) {
+		log_err("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
+		        glewGetErrorString(err));
 		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 	}
 #endif
 
-	log(
-	   "Graphics: OpenGL: Version \"%s\"\n", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+	// Show a basic SDL window with an error message, and log it too, then exit 1. Since font support
+	// does not exist for all languages, we show both the original and a localized text.
+	auto show_opengl_error_and_exit = [](const std::string& message,
+	                                     const std::string& localized_message) {
+		std::string display_message = message;
+		if (message != localized_message) {
+			display_message += "\n\n";
+			display_message +=
+			   (i18n::has_rtl_character(localized_message.c_str()) ?
+                i18n::line2bidi(i18n::make_ligatures(localized_message.c_str()).c_str()) :
+                localized_message);
+		}
+
+		log_err("%s\n", display_message.c_str());
+		SDL_ShowSimpleMessageBox(
+		   SDL_MESSAGEBOX_ERROR, "OpenGL Error", display_message.c_str(), nullptr);
+		exit(1);
+	};
+
+	// Exit because we couldn't detect the shading language version, so there must be a problem
+	// communicating with the graphics adapter.
+	auto handle_unreadable_opengl_shading_language = [show_opengl_error_and_exit]() {
+		show_opengl_error_and_exit(
+		   "Widelands won't work because we were unable to detect the shading language version.\n"
+		   "There is an unknown problem with reading the information from the graphics driver.",
+		   format("%s\n%s",
+		          /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+		             support is limited here, so do not use advanced typography **/
+		          _("Widelands won't work because we were unable to detect the shading language "
+		            "version."),
+		          /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+		             support is limited here, so do not use advanced typography **/
+		          _("There is an unknown problem with reading the information from the graphics "
+		            "driver.")));
+	};
+	auto handle_unreadable_opengl_version = [show_opengl_error_and_exit]() {
+		show_opengl_error_and_exit(
+		   "Widelands won't work because we were unable to detect the OpenGL version.\n"
+		   "There is an unknown problem with reading the information from the graphics driver.",
+		   format("%s\n%s",
+		          /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+		             support is limited here, so do not use advanced typography **/
+		          _("Widelands won't work because we were unable to detect the OpenGL version."),
+		          /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+		             support is limited here, so do not use advanced typography **/
+		          _("There is an unknown problem with reading the information from the graphics "
+		            "driver.")));
+	};
+	auto check_version = [show_opengl_error_and_exit](
+	                        const std::string& version_string, const std::string& name,
+	                        const std::string& descname, const int required_major_version,
+	                        const int required_minor_version, const std::function<void()>& error) {
+		std::vector<std::string> version_vector;
+		split(version_vector, version_string, {'.', ' '});
+		if (version_vector.size() >= 2) {
+			int major_version = 0;
+			int minor_version = 0;
+			try {
+				major_version = std::stoi(version_vector[0]);
+				minor_version = std::stoi(version_vector[1]);
+			} catch (...) {
+				error();
+			}
+			// The version has been detected properly. Exit if the version is too old.
+			if (major_version < required_major_version ||
+			    (major_version == required_major_version && minor_version < required_minor_version)) {
+				show_opengl_error_and_exit(
+				   format("Widelands won’t work because your graphics driver is too old.\n"
+				          "The %u version needs to be version %u.%u or newer.",
+				          name, required_major_version, required_minor_version),
+				   format("%s\n%s",
+				          /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
+				             Font support is limited here, so do not use advanced typography **/
+				          _("Widelands won’t work because your graphics driver is too old."),
+				          /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
+				             Font support is limited here, so do not use advanced typography **/
+				          format(_("The %1$u version needs to be version %2$u.%3$u or newer."),
+				                 descname, required_major_version, required_minor_version)));
+			}
+		} else {
+			// We don't have a minor version. Ensure that the string to compare is a valid integer
+			// before conversion
+			std::regex re("\\d+");
+			if (std::regex_match(version_string, re)) {
+				if (std::stol(version_string) < required_major_version + 1) {
+					show_opengl_error_and_exit(
+					   format("Widelands won’t work because your graphics driver is too old.\n"
+					          "The %s needs to be version %u.%u or newer.",
+					          name, required_major_version, required_minor_version),
+					   format(
+					      "%s\n%s",
+					      /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
+					         Font support is limited here, so do not use advanced typography **/
+					      _("Widelands won’t work because your graphics driver is too old."),
+					      /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
+					         Font support is limited here, so do not use advanced typography **/
+					      format(_("The %1$s needs to be version %2$u.%3$u or newer."), descname,
+					             required_major_version, required_minor_version)));
+				}
+			} else {
+				// We don't know how to interpret the version info
+				error();
+			}
+		}
+	};
+
+	const char* const opengl_version_string = reinterpret_cast<const char*>(glGetString(GL_VERSION));
+	if (opengl_version_string == nullptr) {
+		handle_unreadable_opengl_version();
+	}
+	log_info("Graphics: OpenGL: Version \"%s\"\n", opengl_version_string);
+	check_version(
+	   opengl_version_string, "OpenGL", _("OpenGL"), 2, 1, handle_unreadable_opengl_version);
 
 #define LOG_SDL_GL_ATTRIBUTE(x)                                                                    \
 	{                                                                                               \
 		int value;                                                                                   \
 		SDL_GL_GetAttribute(x, &value);                                                              \
-		log("Graphics: %s is %d\n", #x, value);                                                      \
+		log_info("Graphics: %s is %d\n", #x, value);                                                 \
 	}
 
 	LOG_SDL_GL_ATTRIBUTE(SDL_GL_RED_SIZE)
@@ -175,108 +295,20 @@ SDL_GLContext initialize(
 
 	GLboolean glBool;
 	glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
-	log("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
+	log_info(
+	   "Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
 
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
-	log("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
+	log_info("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
 
 	const char* const shading_language_version_string =
 	   reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
-	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
-
-	// Show a basic SDL window with an error message, and log it too, then exit 1. Since font support
-	// does not exist for all languages, we show both the original and a localized text.
-	auto show_opengl_error_and_exit = [](const std::string& message,
-	                                     const std::string& localized_message) {
-		std::string display_message = "";
-		if (message != localized_message) {
-			display_message =
-			   message + "\n\n" +
-			   (i18n::has_rtl_character(localized_message.c_str()) ?
-			       i18n::line2bidi(i18n::make_ligatures(localized_message.c_str()).c_str()) :
-			       localized_message);
-		} else {
-			display_message = message;
-		}
-
-		/** TRANSLATORS: Error message printed to console/command line/log file */
-		log(_("ERROR: %s\n"), display_message.c_str());
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error", display_message.c_str(), NULL);
-		exit(1);
-	};
-
-	// Exit because we couldn't detect the shading language version, so there must be a problem
-	// communicating with the graphics adapter.
-	auto handle_unreadable_opengl_shading_language = [show_opengl_error_and_exit]() {
-		show_opengl_error_and_exit(
-		   "Widelands won't work because we were unable to detect the shading language version.\n"
-		   "There is an unknown problem with reading the information from the graphics driver.",
-		   (boost::format("%s\n%s") %
-		    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-		       support is limited here, so do not use advanced typography **/
-		    _("Widelands won't work because we were unable to detect the shading language "
-		      "version.") %
-		    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-		       support is limited here, so do not use advanced typography **/
-		    _("There is an unknown problem with reading the information from the graphics "
-		      "driver."))
-		      .str());
-	};
-
-	// glGetString returned an error for the shading language
-	if (glGetString(GL_SHADING_LANGUAGE_VERSION) == 0) {
+	if (shading_language_version_string == nullptr) {
 		handle_unreadable_opengl_shading_language();
 	}
-
-	std::vector<std::string> shading_language_version_vector;
-	boost::split(
-	   shading_language_version_vector, shading_language_version_string, boost::is_any_of(". "));
-	if (shading_language_version_vector.size() >= 2) {
-		// The shading language version has been detected properly. Exit if the shading language
-		// version is too old.
-		const int major_shading_language_version =
-		   boost::lexical_cast<int>(shading_language_version_vector.front());
-		const int minor_shading_language_version =
-		   boost::lexical_cast<int>(shading_language_version_vector.at(1));
-		if (major_shading_language_version < 1 ||
-		    (major_shading_language_version == 1 && minor_shading_language_version < 20)) {
-			show_opengl_error_and_exit(
-			   "Widelands won’t work because your graphics driver is too old.\n"
-			   "The shading language needs to be version 1.20 or newer.",
-			   (boost::format("%s\n%s") %
-			    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-			       support is limited here, so do not use advanced typography **/
-			    _("Widelands won’t work because your graphics driver is too old.") %
-			    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-			       support is limited here, so do not use advanced typography **/
-			    _("The shading language needs to be version 1.20 or newer."))
-			      .str());
-		}
-	} else {
-		// We don't have a minor version. Ensure that the string to compare is a valid integer before
-		// conversion
-		boost::regex re("\\d+");
-		if (boost::regex_match(shading_language_version_string, re)) {
-			const int major_shading_language_version =
-			   boost::lexical_cast<int>(shading_language_version_string);
-			if (major_shading_language_version < 2) {
-				show_opengl_error_and_exit(
-				   "Widelands won’t work because your graphics driver is too old.\n"
-				   "The shading language needs to be version 1.20 or newer.",
-				   (boost::format("%s\n%s") %
-				    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-				       support is limited here, so do not use advanced typography **/
-				    _("Widelands won’t work because your graphics driver is too old.") %
-				    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-				       support is limited here, so do not use advanced typography **/
-				    _("The shading language needs to be version 1.20 or newer."))
-				      .str());
-			}
-		} else {
-			// We don't know how to interpret the shading language info
-			handle_unreadable_opengl_shading_language();
-		}
-	}
+	log_info("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
+	check_version(shading_language_version_string, "Shading Language", _("Shading Language"), 1, 20,
+	              handle_unreadable_opengl_shading_language);
 
 	glDrawBuffer(GL_BACK);
 

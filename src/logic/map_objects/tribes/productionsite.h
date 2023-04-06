@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -31,7 +30,6 @@
 
 namespace Widelands {
 
-class Request;
 class Soldier;
 class WorkerDescr;
 
@@ -52,64 +50,72 @@ public:
 	friend struct ProductionProgram;  // To add animations, outputs etc.
 
 	ProductionSiteDescr(const std::string& init_descname,
-	                    const std::string& msgctxt,
 	                    MapObjectType type,
 	                    const LuaTable& t,
-	                    const Tribes& tribes,
-	                    const World& world);
+	                    Descriptions& descriptions);
 	ProductionSiteDescr(const std::string& init_descname,
-	                    const std::string& msgctxt,
 	                    const LuaTable& t,
-	                    const Tribes& tribes,
-	                    const World& world);
+	                    Descriptions& descriptions);
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
 	// List of wares to register having economy checks. Parsed by the tribes during postload and must
 	// be nullptr after loading has finished
-	std::set<DescriptionIndex>* ware_demand_checks() const;
+	[[nodiscard]] std::set<DescriptionIndex>* ware_demand_checks() const;
 	// List of workers to register having economy checks. Parsed by the tribes during postload and
 	// must be nullptr after loading has finished
-	std::set<DescriptionIndex>* worker_demand_checks() const;
+	[[nodiscard]] std::set<DescriptionIndex>* worker_demand_checks() const;
 	// Clear ware and worker demand check info
 	void clear_demand_checks();
 
-	uint32_t nr_working_positions() const {
+	[[nodiscard]] uint32_t nr_working_positions() const {
 		uint32_t result = 0;
 		for (const auto& working_pos : working_positions()) {
 			result += working_pos.second;
 		}
 		return result;
 	}
-	const BillOfMaterials& working_positions() const {
+	[[nodiscard]] const BillOfMaterials& working_positions() const {
 		return working_positions_;
 	}
-	bool is_output_ware_type(const DescriptionIndex& i) const {
-		return output_ware_types_.count(i);
+	[[nodiscard]] bool is_output_ware_type(const DescriptionIndex& i) const {
+		return output_ware_types_.count(i) != 0u;
 	}
-	bool is_output_worker_type(const DescriptionIndex& i) const {
-		return output_worker_types_.count(i);
+	[[nodiscard]] bool is_output_worker_type(const DescriptionIndex& i) const {
+		return output_worker_types_.count(i) != 0u;
 	}
-	const BillOfMaterials& input_wares() const {
+	[[nodiscard]] const BillOfMaterials& input_wares() const {
 		return input_wares_;
 	}
-	const BillOfMaterials& input_workers() const {
+	[[nodiscard]] const BillOfMaterials& input_workers() const {
+		return input_workers_;
+	}
+	BillOfMaterials& mutable_input_wares() {
+		return input_wares_;
+	}
+	BillOfMaterials& mutable_input_workers() {
 		return input_workers_;
 	}
 	using Output = std::set<DescriptionIndex>;
-	const Output& output_ware_types() const {
+	[[nodiscard]] const Output& output_ware_types() const {
 		return output_ware_types_;
 	}
-	const Output& output_worker_types() const {
+	[[nodiscard]] const Output& output_worker_types() const {
 		return output_worker_types_;
 	}
+	/// Map objects that this production site needs nearby according to attribute, without removing
+	/// them from the map
+	[[nodiscard]] const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	needed_attributes() const {
+		return needed_attributes_;
+	}
 	/// Map objects that are collected from the map by this production site according to attribute
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	[[nodiscard]] const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
 	collected_attributes() const {
 		return collected_attributes_;
 	}
 	/// Map objects that are placed on the map by this production site according to attribute
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	[[nodiscard]] const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
 	created_attributes() const {
 		return created_attributes_;
 	}
@@ -117,16 +123,22 @@ public:
 	/// We only need the attributes during tribes initialization
 	void clear_attributes();
 
-	/// The resources that this production site needs to collect from the map
-	const std::set<std::string>& collected_resources() const {
+	struct CollectedResourceInfo {
+		unsigned max_percent;
+		unsigned depleted_chance;
+	};
+
+	/// The resources that this production site needs to collect from the map, the max percent it can
+	/// achieve, and the chance when depleted
+	[[nodiscard]] const std::map<std::string, CollectedResourceInfo>& collected_resources() const {
 		return collected_resources_;
 	}
 	/// The resources that this production site will place on the map
-	const std::set<std::string>& created_resources() const {
+	[[nodiscard]] const std::set<std::string>& created_resources() const {
 		return created_resources_;
 	}
 	/// The bobs (critters) that this production site needs to collect from the map
-	const std::set<std::string>& collected_bobs() const {
+	[[nodiscard]] const std::set<std::string>& collected_bobs() const {
 		return collected_bobs_;
 	}
 	/// Set that this production site needs to collect the given bob from the map
@@ -134,23 +146,31 @@ public:
 		collected_bobs_.insert(bobname);
 	}
 	/// The bobs (critters or workers) that this production site will place on the map
-	const std::set<std::string>& created_bobs() const {
+	[[nodiscard]] const std::set<std::string>& created_bobs() const {
 		return created_bobs_;
 	}
 	/// Set that this production site will place the given bob on the map
 	void add_created_bob(const std::string& bobname) {
 		created_bobs_.insert(bobname);
 	}
+	/// The immovables that this production site needs to be nearby
+	[[nodiscard]] const std::set<std::string>& needed_immovables() const {
+		return needed_immovables_;
+	}
 	/// The immovables that this production site needs to collect from the map
-	const std::set<std::string>& collected_immovables() const {
+	[[nodiscard]] const std::set<std::string>& collected_immovables() const {
 		return collected_immovables_;
+	}
+	/// Set that this production site makes use of the given immovable nearby
+	void add_needed_immovable(const std::string& immovablename) {
+		needed_immovables_.insert(immovablename);
 	}
 	/// Set that this production site needs to collect the given immovable from the map
 	void add_collected_immovable(const std::string& immovablename) {
 		collected_immovables_.insert(immovablename);
 	}
 	/// The immovables that this production site will place on the map
-	const std::set<std::string>& created_immovables() const {
+	[[nodiscard]] const std::set<std::string>& created_immovables() const {
 		return created_immovables_;
 	}
 	/// Set that this production site will place the given immovable on the map
@@ -158,29 +178,39 @@ public:
 		created_immovables_.insert(immovablename);
 	}
 
-	const ProductionProgram* get_program(const std::string&) const;
+	[[nodiscard]] const ProductionProgram* get_program(const std::string&) const;
 	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
-	const Programs& programs() const {
+	[[nodiscard]] const Programs& programs() const {
+		return programs_;
+	}
+	[[nodiscard]] Programs& mutable_programs() {
 		return programs_;
 	}
 
-	const std::string& out_of_resource_title() const {
+	[[nodiscard]] bool is_infinite_production_useful() const {
+		return is_infinite_production_useful_;
+	}
+	void set_infinite_production_useful(const bool u) {
+		is_infinite_production_useful_ = u;
+	}
+
+	[[nodiscard]] const std::string& out_of_resource_title() const {
 		return out_of_resource_title_;
 	}
 
-	const std::string& out_of_resource_heading() const {
+	[[nodiscard]] const std::string& out_of_resource_heading() const {
 		return out_of_resource_heading_;
 	}
 
-	const std::string& out_of_resource_message() const {
+	[[nodiscard]] const std::string& out_of_resource_message() const {
 		return out_of_resource_message_;
 	}
 
-	const std::string& resource_not_needed_message() const {
+	[[nodiscard]] const std::string& resource_not_needed_message() const {
 		return resource_not_needed_message_;
 	}
 
-	uint32_t out_of_resource_productivity_threshold() const {
+	[[nodiscard]] uint32_t out_of_resource_productivity_threshold() const {
 		return out_of_resource_productivity_threshold_;
 	}
 
@@ -197,22 +227,22 @@ public:
 	void add_supported_by_productionsite(const std::string& productionsite);
 	/// Returns whether this production site competes with the given 'productionsite' for map
 	/// resources.
-	bool competes_with_productionsite(const std::string& productionsite) const;
+	[[nodiscard]] bool competes_with_productionsite(const std::string& productionsite) const;
 	/// Returns whether this production site creates map resources or objects that the given
 	/// 'productionsite' needs.
-	bool supports_productionsite(const std::string& productionsite) const;
+	[[nodiscard]] bool supports_productionsite(const std::string& productionsite) const;
 	/// Returns whether the given 'productionsite' creates map resources or objects that this
 	/// production site needs.
-	bool is_supported_by_productionsite(const std::string& productionsite) const;
+	[[nodiscard]] bool is_supported_by_productionsite(const std::string& productionsite) const;
 	/// Returns the production sites that need a map resource or object that this production site
 	/// will place on the map.
-	std::set<std::string> supported_productionsites() const {
+	[[nodiscard]] std::set<std::string> supported_productionsites() const {
 		return supported_productionsites_;
 	}
-	/// Returns whether this production site needs map resources or objects that are created by a
-	/// different production site.
-	bool needs_supporters() const {
-		return !supported_by_productionsites_.empty();
+	/// Returns the production sites that create a map resource or object that this production site
+	/// needs.
+	[[nodiscard]] std::set<std::string> supported_by_productionsites() const {
+		return supported_by_productionsites_;
 	}
 
 protected:
@@ -221,6 +251,12 @@ protected:
 	}
 	void add_output_worker_type(DescriptionIndex index) {
 		output_worker_types_.insert(index);
+	}
+
+	/// Set that this production site needs to be placed near map objects with the given attribute
+	void
+	add_needed_attribute(std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
+		needed_attributes_.insert(attribute_info);
 	}
 
 	/// Set that this production site needs to collect map objects with the given attribute from the
@@ -235,8 +271,11 @@ protected:
 		created_attributes_.insert(attribute_info);
 	}
 	/// Set that this production site needs to collect the given resource from the map
-	void add_collected_resource(const std::string& resource) {
-		collected_resources_.insert(resource);
+	void add_collected_resource(const std::string& resource,
+	                            unsigned max_percent,
+	                            unsigned depleted_chance) {
+		collected_resources_.insert(
+		   std::make_pair(resource, CollectedResourceInfo{max_percent, depleted_chance}));
 	}
 	/// Set that this production site will place the given resource on the map
 	void add_created_resource(const std::string& resource) {
@@ -251,15 +290,18 @@ private:
 	BillOfMaterials input_workers_;
 	Output output_ware_types_;
 	Output output_worker_types_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> needed_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
-	std::set<std::string> collected_resources_;
+	std::map<std::string, CollectedResourceInfo> collected_resources_;
 	std::set<std::string> created_resources_;
 	std::set<std::string> collected_bobs_;
 	std::set<std::string> created_bobs_;
+	std::set<std::string> needed_immovables_;
 	std::set<std::string> collected_immovables_;
 	std::set<std::string> created_immovables_;
 	Programs programs_;
+	bool is_infinite_production_useful_;
 	std::string out_of_resource_title_;
 	std::string out_of_resource_heading_;
 	std::string out_of_resource_message_;
@@ -292,7 +334,6 @@ class ProductionSite : public Building {
 
 public:
 	explicit ProductionSite(const ProductionSiteDescr& descr);
-	~ProductionSite() override;
 
 	void log_general_info(const EditorGameBase&) const override;
 
@@ -302,31 +343,31 @@ public:
 	void set_stopped(bool);
 
 	struct WorkingPosition {
-		WorkingPosition(Request* const wr = nullptr, Worker* const w = nullptr)
+		explicit WorkingPosition(Request* const wr = nullptr, Worker* const w = nullptr)
 		   : worker_request(wr), worker(w) {
 		}
 		Request* worker_request;
-		Worker* worker;
+		OPtr<Worker> worker;
 	};
 
-	WorkingPosition const* working_positions() const {
-		return working_positions_;
+	[[nodiscard]] const std::vector<WorkingPosition>* working_positions() const {
+		return &working_positions_;
 	}
 
 	virtual bool has_workers(DescriptionIndex targetSite, Game& game);
-	uint8_t get_statistics_percent() {
+	[[nodiscard]] uint8_t get_statistics_percent() const {
 		return last_stat_percent_ / 10;
 	}
 
 	// receives the duration of the last period and the result (true if something was produced)
 	// and sets actual_percent_ to new value
-	void update_actual_statistics(uint32_t, bool);
+	void update_actual_statistics(Duration, bool);
 
-	uint8_t get_actual_statistics() {
+	[[nodiscard]] uint8_t get_actual_statistics() const {
 		return actual_percent_ / 10;
 	}
 
-	const std::string& production_result() const {
+	[[nodiscard]] const std::string& production_result() const {
 		return production_result_;
 	}
 
@@ -337,14 +378,16 @@ public:
 		production_result_ = text;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
+	std::pair<int32_t, int32_t> find_worker(OPtr<Worker>);
+	void try_replace_worker(const Game*, DescriptionIndex, WorkingPosition*);
 	void remove_worker(Worker&) override;
-	int warp_worker(EditorGameBase&, const WorkerDescr& wd);
+	bool warp_worker(EditorGameBase&, const WorkerDescr& wd, int32_t slot = -1);
 
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
@@ -352,13 +395,13 @@ public:
 	void set_economy(Economy*, WareWorker) override;
 
 	using InputQueues = std::vector<InputQueue*>;
-	const InputQueues& inputqueues() const {
+	[[nodiscard]] const InputQueues& inputqueues() const {
 		return input_queues_;
 	}
 
-	const std::vector<Worker*>& workers() const;
+	[[nodiscard]] const std::vector<Worker*>& workers() const;
 
-	bool can_start_working() const;
+	[[nodiscard]] bool can_start_working() const;
 
 	/// sends a message to the player e.g. if the building's resource can't be found
 	void notify_player(Game& game,
@@ -368,19 +411,32 @@ public:
 
 	void set_default_anim(const std::string&);
 
-	const BuildingSettings* create_building_settings() const override;
+	[[nodiscard]] std::unique_ptr<const BuildingSettings> create_building_settings() const override;
+
+	// This function forces the productionsite to interrupt whatever it is doing ASAP,
+	// and start the specified program immediately afterwards. If that program expects
+	// some extra data, this data needs to be provided as the third parameter.
+	void set_next_program_override(Game&, const std::string&, MapObject* extra_data);
+	// Returns `true` if `set_next_program_override()` has been called recently
+	// and the force-started program has not terminated yet.
+	[[nodiscard]] bool has_forced_state() const;
+
+	[[nodiscard]] bool infinite_production() const {
+		return infinite_production_;
+	}
+	void set_infinite_production(bool);
 
 protected:
 	void update_statistics_string(std::string* statistics) override;
 
 	void load_finish(EditorGameBase& egbase) override;
 
-protected:
 	struct State {
-		const ProductionProgram* program;  ///< currently running program
-		size_t ip;                         ///< instruction pointer
-		ProgramResult phase;               ///< micro-step index (instruction dependent)
-		uint32_t flags;                    ///< pfXXX flags
+		const ProductionProgram* program{nullptr};  ///< currently running program
+		size_t ip{0};                               ///< instruction pointer
+		ProgramResult phase{ProgramResult::kNone};  ///< micro-step index (instruction dependent)
+		enum StateFlags : uint32_t { kStateFlagIgnoreStopped = 1, kStateFlagHasExtraData = 2 };
+		uint32_t flags{0};  ///< pfXXX flags
 
 		/**
 		 * Instruction-dependent additional data.
@@ -390,8 +446,7 @@ protected:
 		Coords coord;
 		/*@}*/
 
-		State()
-		   : program(nullptr), ip(0), phase(ProgramResult::kNone), flags(0), coord(Coords::null()) {
+		State() : coord(Coords::null()) {
 		}
 	};
 
@@ -405,12 +460,12 @@ protected:
 	 */
 	virtual void find_and_start_next_program(Game&);
 
-	State& top_state() {
-		assert(stack_.size());
+	[[nodiscard]] State& top_state() {
+		assert(!stack_.empty());
 		return *stack_.rbegin();
 	}
-	State* get_state() {
-		return stack_.size() ? &*stack_.rbegin() : nullptr;
+	[[nodiscard]] State* get_state() {
+		return !stack_.empty() ? &*stack_.rbegin() : nullptr;
 	}
 	void program_act(Game&);
 
@@ -419,22 +474,27 @@ protected:
 	/// how long it should take to mine, given the particular circumstances,
 	/// and pass the result to the following animation command, to set the
 	/// duration.
-	void program_step(Game&, uint32_t delay = 10, ProgramResult phase = ProgramResult::kNone);
+	void program_step(Game&,
+	                  const Duration& delay = Duration(10),
+	                  ProgramResult phase = ProgramResult::kNone);
 
-	void program_start(Game&, const std::string& program_name);
+	void program_start(Game&,
+	                   const std::string& program_name,
+	                   bool force = false,
+	                   MapObject* extra_data = nullptr);
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
 
 	void format_statistics_string();
 	void try_start_working(Game&);
-	void set_post_timer(int32_t const t) {
+	void set_post_timer(const Duration& t) {
 		post_timer_ = t;
 	}
 
-protected:  // TrainingSite must have access to this stuff
-	WorkingPosition* working_positions_;
+	// TrainingSite must have access to this stuff
+	std::vector<WorkingPosition> working_positions_;
 
-	int32_t fetchfromflag_;  ///< Number of wares to fetch from flag
+	int32_t fetchfromflag_{0};  ///< Number of wares to fetch from flag
 
 	/// If a program has ended with the result Failed or Skipped, that program may not
 	/// start again until a certain time has passed. This is a map from program
@@ -445,21 +505,22 @@ protected:  // TrainingSite must have access to this stuff
 	FailedSkippedPrograms failed_skipped_programs_;
 
 	using Stack = std::vector<State>;
-	Stack stack_;           ///<  program stack
-	bool program_timer_;    ///< execute next instruction based on pointer
-	int32_t program_time_;  ///< timer time
-	int32_t post_timer_;    ///< Time to schedule after ends
+	Stack stack_;                ///<  program stack
+	bool program_timer_{false};  ///< execute next instruction based on pointer
+	Time program_time_{0U};      ///< timer time
+	Duration post_timer_{50U};   ///< Time to schedule after ends
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
 	InputQueues input_queues_;  ///< input queues for all inputs
-	uint16_t last_stat_percent_;
+	uint16_t last_stat_percent_{0U};
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
 	// 0-100)
-	uint32_t actual_percent_;  // basically this is percent * 10 to avoid floats
-	uint32_t last_program_end_time;
-	bool is_stopped_;
-	std::string default_anim_;  // normally "idle", "empty", if empty mine.
+	uint32_t actual_percent_{0U};  // basically this is percent * 10 to avoid floats
+	Time last_program_end_time{0U};
+	bool is_stopped_{false};
+	bool infinite_production_{false};
+	std::string default_anim_{"idle"};  // normally "idle", "empty", if empty mine.
 
 private:
 	enum class Trend { kUnchanged, kRising, kFalling };
@@ -467,7 +528,7 @@ private:
 	std::string statistics_string_on_changed_statistics_;
 	std::string production_result_;  // hover tooltip text
 
-	int32_t main_worker_;
+	int32_t main_worker_{-1};
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
@@ -481,13 +542,12 @@ private:
 struct Input {
 	Input(const DescriptionIndex& Ware, uint8_t const Max) : ware_(Ware), max_(Max) {
 	}
-	~Input() {
-	}
+	~Input() = default;
 
-	DescriptionIndex ware() const {
+	[[nodiscard]] DescriptionIndex ware() const {
 		return ware_;
 	}
-	uint8_t max() const {
+	[[nodiscard]] uint8_t max() const {
 		return max_;
 	}
 

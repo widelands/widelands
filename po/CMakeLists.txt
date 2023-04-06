@@ -14,8 +14,8 @@ macro(CreateLocale locale_name)
       add_custom_command (
 	OUTPUT ${CMAKE_BINARY_DIR}/locale/${locale_name}/LC_MESSAGES/${template_name}.mo
 	COMMAND cmake -E make_directory ${CMAKE_BINARY_DIR}/locale/${locale_name}/LC_MESSAGES
-	COMMAND msgmerge -q --no-wrap ${pofile} ${CMAKE_CURRENT_SOURCE_DIR}/${template_name}/${template_name}.pot -o ${CMAKE_CURRENT_BINARY_DIR}/${locale_name}_${template_name}.tmp.po
-	COMMAND msgfmt -o ${CMAKE_BINARY_DIR}/locale/${locale_name}/LC_MESSAGES/${template_name}.mo ${CMAKE_CURRENT_BINARY_DIR}/${locale_name}_${template_name}.tmp.po
+	COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} -q --no-wrap ${pofile} ${CMAKE_CURRENT_SOURCE_DIR}/${template_name}/${template_name}.pot -o ${CMAKE_CURRENT_BINARY_DIR}/${locale_name}_${template_name}.tmp.po
+	COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${CMAKE_BINARY_DIR}/locale/${locale_name}/LC_MESSAGES/${template_name}.mo ${CMAKE_CURRENT_BINARY_DIR}/${locale_name}_${template_name}.tmp.po
 	COMMAND cmake -E remove ${CMAKE_CURRENT_BINARY_DIR}/${locale_name}_${template_name}.tmp.po
         DEPENDS ${pofile}
         COMMENT "Generating translations for locale ${locale_name} category ${template_name}"

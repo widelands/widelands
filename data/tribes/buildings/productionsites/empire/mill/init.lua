@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -20,15 +20,32 @@ tribes:new_productionsite_type {
       marble = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 41, 87 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 44, 90 },
+      },
+      build = {
+         frames = 2,
+         columns = 2,
+         rows = 1,
+         hotspot = { 44, 90 },
+      },
+      unoccupied = {
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 44, 90 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 41, 87 },
-         fps = 25
+         fps = 15,
+         frames = 19,
+         columns = 10,
+         rows = 2,
+         hotspot = { 44, 90 },
       },
    },
 
@@ -47,7 +64,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
-         descname = _"grinding wheat",
+         descname = _("grinding wheat"),
          actions = {
             "return=skipped unless economy needs flour",
             "consume=wheat",
@@ -59,3 +76,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

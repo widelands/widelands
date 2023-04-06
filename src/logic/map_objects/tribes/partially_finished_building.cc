@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -30,13 +29,7 @@
 namespace Widelands {
 
 PartiallyFinishedBuilding::PartiallyFinishedBuilding(const BuildingDescr& gdescr)
-   : Building(gdescr),
-     building_(nullptr),
-     builder_request_(nullptr),
-     working_(false),
-     work_steptime_(0),
-     work_completed_(0),
-     work_steps_(0) {
+   : Building(gdescr) {
 }
 
 /*
@@ -51,7 +44,7 @@ void PartiallyFinishedBuilding::set_building(const BuildingDescr& building_descr
 }
 
 void PartiallyFinishedBuilding::cleanup(EditorGameBase& egbase) {
-	if (builder_request_) {
+	if (builder_request_ != nullptr) {
 		delete builder_request_;
 		builder_request_ = nullptr;
 	}
@@ -98,11 +91,11 @@ void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
 		}
 	}
 	Building::set_economy(e, type);
-	if (builder_request_ && type == builder_request_->get_type()) {
+	if ((builder_request_ != nullptr) && type == builder_request_->get_type()) {
 		builder_request_->set_economy(e);
 	}
 
-	if (e && type == wwWARE) {
+	if ((e != nullptr) && type == wwWARE) {
 		for (WaresQueue* temp_ware : dropout_wares_) {
 			temp_ware->add_to_economy(*e);
 		}
@@ -117,7 +110,7 @@ void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
 Issue a request for the builder.
 ===============
 */
-void PartiallyFinishedBuilding::request_builder(Game&) {
+void PartiallyFinishedBuilding::request_builder(Game& /* game */) {
 	assert(!builder_.is_set() && !builder_request_);
 
 	builder_request_ = new Request(*this, owner().tribe().builder(),
@@ -168,12 +161,12 @@ Return the completion "percentage", where 2^16 = completely built,
 */
 // TODO(unknown): should take gametime or so
 uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
-	const uint32_t time = owner().egbase().get_gametime();
+	const uint32_t time = owner().egbase().get_gametime().get();
 	uint32_t thisstep = 0;
 
-	uint32_t ts = build_step_time();
+	uint32_t ts = build_step_time().get();
 	if (working_) {
-		thisstep = ts - (work_steptime_ - time);
+		thisstep = ts - (work_steptime_.get() - time);
 		// The check below is necessary because we drive construction via
 		// the construction worker in get_building_work(), and there can be
 		// a small delay between the worker completing his job and requesting
@@ -184,11 +177,13 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
 	}
 	thisstep = (thisstep << 16) / ts;
 	uint32_t total = (thisstep + (work_completed_ << 16));
-	if (work_steps_) {
+	if (work_steps_ != 0u) {
 		total /= work_steps_;
 	}
 
-	assert(total <= (1 << 16));
+	// This assert is no longer true with a multithreaded race condition
+	// assert(total <= (1 << 16));
+	total = std::min<uint32_t>(total, 1 << 16);
 
 	return total;
 }
@@ -198,8 +193,11 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
 Called by transfer code when the builder has arrived on site.
 ===============
 */
-void PartiallyFinishedBuilding::request_builder_callback(
-   Game& game, Request& rq, DescriptionIndex, Worker* const w, PlayerImmovable& target) {
+void PartiallyFinishedBuilding::request_builder_callback(Game& game,
+                                                         Request& rq,
+                                                         DescriptionIndex /* index */,
+                                                         Worker* const w,
+                                                         PlayerImmovable& target) {
 	assert(w);
 
 	PartiallyFinishedBuilding& b = dynamic_cast<PartiallyFinishedBuilding&>(target);
@@ -210,6 +208,16 @@ void PartiallyFinishedBuilding::request_builder_callback(
 	b.builder_request_ = nullptr;
 
 	w->start_task_buildingwork(game);
-	b.set_seeing(true);
+}
+
+/*
+===============
+Override: Builders normally don't make (finished) buildings see.
+PartiallyFinishedBuilding is an exception.
+===============
+*/
+void PartiallyFinishedBuilding::add_worker(Worker& worker) {
+	Building::add_worker(worker);
+	set_seeing(true);
 }
 }  // namespace Widelands

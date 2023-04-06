@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,7 +26,6 @@
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/widelands_geometry.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -103,7 +101,7 @@ public:
 	void set_location(PlayerImmovable*);
 	void set_economy(Economy*, WareWorker);
 
-	WareInstance* get_carried_ware(EditorGameBase& egbase) {
+	WareInstance* get_carried_ware(const EditorGameBase& egbase) {
 		return carried_ware_.get(egbase);
 	}
 	WareInstance const* get_carried_ware(const EditorGameBase& egbase) const {
@@ -120,6 +118,8 @@ public:
 
 	bool wakeup_flag_capacity(Game&, Flag&);
 	bool wakeup_leave_building(Game&, Building&);
+
+	void set_current_experience(int32_t);
 
 	/// This should be called whenever the worker has done work that he gains
 	/// experience from. It may cause him to change his type so that he becomes
@@ -162,7 +162,7 @@ public:
 
 	void start_task_gowarehouse(Game&);
 	void start_task_dropoff(Game&, WareInstance&);
-	void start_task_releaserecruit(Game&, Worker&);
+	void start_task_releaserecruit(Game&, const Worker&);
 	void start_task_fetchfromflag(Game&);
 
 	bool start_task_waitforcapacity(Game&, Flag&);
@@ -182,7 +182,7 @@ protected:
 	virtual void draw_inner(const EditorGameBase& game,
 	                        const Vector2f& point_on_dst,
 	                        const Widelands::Coords& coords,
-	                        const float scale,
+	                        float scale,
 	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
 	          const InfoToDraw& info_to_draw,
@@ -267,14 +267,13 @@ private:
 	// List of places to visit (only if scout), plus a reminder to
 	// occasionally go just somewhere.
 	struct PlaceToScout {
-		PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
+		explicit PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
 		}
 		// The variable scoutme should not be accessed when randomwalk is true.
 		// Initializing the scoutme variable with an obviously-wrong value.
-		PlaceToScout() : randomwalk(true), scoutme(-32100, -32100) {
-		}
-		const bool randomwalk;
-		const Coords scoutme;
+		PlaceToScout() = default;
+		const bool randomwalk = true;
+		const Coords scoutme{-32100, -32100};
 	};
 	std::vector<PlaceToScout> scouts_worklist;
 
@@ -284,23 +283,23 @@ private:
 	void add_sites(Game& game,
 	               const Map& map,
 	               const Player& player,
-	               std::vector<ImmovableFound>& found_sites);
-	bool scout_random_walk(Game& game, const Map& map, State& state);
+	               const std::vector<ImmovableFound>& found_sites);
+	bool scout_random_walk(Game& game, const Map& map, const State& state);
 	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
-	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
-	Economy* worker_economy_;          ///< economy this worker is registered in
-	Economy* ware_economy_;            ///< economy this worker's wares are registered in
-	OPtr<WareInstance> carried_ware_;  ///< ware we are carrying
-	IdleWorkerSupply* supply_;         ///< supply while gowarehouse and not transfer
-	Transfer* transfer_;               ///< where we are currently being sent
-	int32_t current_exp_;              ///< current experience
+	OPtr<PlayerImmovable> location_;     ///< meta location of the worker
+	Economy* worker_economy_{nullptr};   ///< economy this worker is registered in
+	Economy* ware_economy_{nullptr};     ///< economy this worker's wares are registered in
+	OPtr<WareInstance> carried_ware_;    ///< ware we are carrying
+	IdleWorkerSupply* supply_{nullptr};  ///< supply while gowarehouse and not transfer
+	Transfer* transfer_{nullptr};        ///< where we are currently being sent
+	int32_t current_exp_{0};             ///< current experience
 
 	// saving and loading
 protected:
 	struct Loader : public Bob::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
 		virtual void load(FileRead&);
 		void load_pointers() override;
@@ -311,8 +310,8 @@ protected:
 		const MapObjectProgram* get_program(const std::string& name) override;
 
 	private:
-		uint32_t location_;
-		uint32_t carried_ware_;
+		uint32_t location_{0U};
+		uint32_t carried_ware_{0U};
 		Transfer::ReadData transfer_;
 	};
 
@@ -322,11 +321,8 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 	virtual void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&);
 
-	static MapObject::Loader* load(EditorGameBase&,
-	                               MapObjectLoader&,
-	                               FileRead&,
-	                               const TribesLegacyLookupTable& lookup_table,
-	                               uint8_t packet_version);
+	static MapObject::Loader*
+	load(EditorGameBase&, MapObjectLoader&, FileRead&, uint8_t packet_version);
 };
 }  // namespace Widelands
 

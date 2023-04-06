@@ -3,8 +3,9 @@ wl_library(wui_sound_options
     sound_options.cc
     sound_options.h
   DEPENDS
-    base_i18n
+    base
     graphic_styles
+    graphic_text_layout
     sound
     ui_basic
 )
@@ -21,37 +22,18 @@ wl_library(wui_chat_ui
     chat_msg_layout.cc
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
-    base_i18n
     chat
     graphic
-    graphic_color
     graphic_fonthandler
     graphic_playercolor
     graphic_text
     graphic_text_layout
-    logic
+    network
     sound
     ui_basic
     widelands_options
-    wui
-)
-
-wl_library(wui_economy_options
-  SRCS
-    economy_options_window.cc
-    economy_options_window.h
-  DEPENDS
-    economy
-    graphic
-    logic
-    logic_commands
-    logic_filesystem_constants
-    logic_map_objects
-    notifications
-    io_profile
-    ui_basic
-    wui_waresdisplay
 )
 
 wl_library(wui_mapview_pixelconstants
@@ -76,7 +58,7 @@ wl_library(wui_common_suggested_teams
     suggested_teams_box.cc
     suggested_teams_box.h
   DEPENDS
-    base_i18n
+    base
     graphic
     graphic_playercolor
     logic_constants
@@ -98,19 +80,24 @@ wl_library(wui_common_gamedetails
     savegameloader.cc
     savegameloader.h
   DEPENDS
-    base_i18n
-    base_log
+    base
+    base_macros
     base_time_string
+    build_info
     game_io
     graphic
     graphic_image_io
+    graphic_minimap_renderer
+    graphic_styles
     graphic_surface
     graphic_text_layout
     io_filesystem
     logic
+    logic_addons
     logic_constants
     logic_filesystem_constants
     logic_game_controller
+    map_io_map_loader
     ui_basic
 )
 
@@ -126,24 +113,21 @@ wl_library(wui_common_mapdetails
     map_tags.cc
     map_tags.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     graphic
+    graphic_minimap_renderer
     graphic_text_layout
     io_filesystem
+    io_profile
+    logic
+    logic_exceptions
+    logic_filesystem_constants
     logic_game_settings
     logic_map
+    map_io_map_loader
     ui_basic
     wui_common_suggested_teams
-)
-
-wl_library(wui_quicknavigation
-  SRCS
-    quicknavigation.cc
-    quicknavigation.h
-  DEPENDS
-    wui_mapview
 )
 
 wl_library(wui_mapview
@@ -173,8 +157,8 @@ wl_library(wui_waresdisplay
     waresdisplay.h
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
-    base_i18n
     graphic
     graphic_fonthandler
     graphic_text_layout
@@ -190,10 +174,14 @@ wl_library(wui_game_tips
     game_tips.h
   USES_SDL2
   DEPENDS
-    base_i18n
+    base
+    base_random
+    graphic_functions
     graphic
     graphic_fonthandler
-    graphic_text_layout
+    io_filesystem
+    logic_filesystem_constants
+    logic_tribe_basic_info
     scripting_lua_table
     scripting_lua_interface
     ui_basic
@@ -204,8 +192,8 @@ wl_library(wui
   SRCS
     actionconfirm.cc
     actionconfirm.h
-    attack_box.cc
-    attack_box.h
+    attack_window.cc
+    attack_window.h
     building_statistics_menu.cc
     building_statistics_menu.h
     buildingwindow.cc
@@ -216,6 +204,8 @@ wl_library(wui
     debugconsole.h
     dismantlesitewindow.cc
     dismantlesitewindow.h
+    economy_options_window.cc
+    economy_options_window.h
     encyclopedia_window.cc
     encyclopedia_window.h
     fieldaction.cc
@@ -224,6 +214,8 @@ wl_library(wui
     game_client_disconnected.h
     game_debug_ui.cc
     game_debug_ui.h
+    game_diplomacy_menu.cc
+    game_diplomacy_menu.h
     game_exit_confirm_box.cc
     game_exit_confirm_box.h
     game_main_menu_save_game.cc
@@ -240,6 +232,8 @@ wl_library(wui
     general_statistics_menu.h
     helpwindow.cc
     helpwindow.h
+    info_panel.cc
+    info_panel.h
     inputqueuedisplay.cc
     inputqueuedisplay.h
     interactive_base.cc
@@ -252,23 +246,20 @@ wl_library(wui
     interactive_spectator.h
     itemwaresdisplay.cc
     itemwaresdisplay.h
-    login_box.cc
-    login_box.h
-    logmessage.h
     militarysitewindow.cc
     militarysitewindow.h
     minimap.cc
     minimap.h
-    multiplayersetupgroup.cc
-    multiplayersetupgroup.h
-    playerdescrgroup.cc
-    playerdescrgroup.h
+    pinned_note.cc
+    pinned_note.h
     plot_area.cc
     plot_area.h
     portdockwaresdisplay.cc
     portdockwaresdisplay.h
     productionsitewindow.cc
     productionsitewindow.h
+    quicknavigation.cc
+    quicknavigation.h
     seafaring_statistics_menu.cc
     seafaring_statistics_menu.h
     shipwindow.cc
@@ -283,6 +274,8 @@ wl_library(wui
     stock_menu.h
     story_message_box.cc
     story_message_box.h
+    toolbar.cc
+    toolbar.h
     trainingsitewindow.cc
     trainingsitewindow.h
     tribal_encyclopedia.cc
@@ -298,10 +291,9 @@ wl_library(wui
   USES_SDL2
   DEPENDS
     ai
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
     base_macros
     base_math
     base_time_string
@@ -309,20 +301,25 @@ wl_library(wui
     economy
     game_io
     graphic
+    graphic_animation
     graphic_color
     graphic_fonthandler
     graphic_game_renderer
     graphic_minimap_renderer
     graphic_mouse_cursor
     graphic_playercolor
+    graphic_render_queue
+    graphic_styles
     graphic_surface
     graphic_text_layout
     graphic_toolbar_imageset
     io_filesystem
+    io_filesystem_illegal_filename_check
     io_profile
     logic
     logic_constants
     logic_commands
+    logic_exceptions
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
@@ -330,9 +327,8 @@ wl_library(wui
     logic_map
     logic_map_objects
     logic_objectives
-    logic_tribe_basic_info
     logic_widelands_geometry
-    map_io_map_loader
+    map_io
     network
     note_sound
     notifications
@@ -344,10 +340,8 @@ wl_library(wui
     widelands_options
     wui_chat_ui
     wui_common_gamedetails
-    wui_economy_options
     wui_mapview
     wui_mapview_pixelfunctions
-    wui_quicknavigation
     wui_sound_options
     wui_waresdisplay
 )

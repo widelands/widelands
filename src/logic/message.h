@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,15 +12,15 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_MESSAGE_H
 #define WL_LOGIC_MESSAGE_H
 
-#include "graphic/graphic.h"
+#include "base/times.h"
+#include "graphic/image_cache.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
@@ -59,7 +59,7 @@ struct Message {
 	 *                   Player::add_message_with_timeout(). Defaults to ""
 	 */
 	Message(Message::Type msgtype,
-	        uint32_t sent_time,
+	        const Time& sent_time,
 	        const std::string& init_title,
 	        const std::string& init_icon_filename,
 	        const std::string& init_heading,
@@ -72,7 +72,7 @@ struct Message {
 	     sub_type_(subt),
 	     title_(init_title),
 	     icon_filename_(init_icon_filename),
-	     icon_(g_gr->images().get(init_icon_filename)),
+	     icon_(g_image_cache->get(init_icon_filename)),
 	     heading_(init_heading),
 	     body_(init_body),
 	     sent_(sent_time),
@@ -81,37 +81,37 @@ struct Message {
 	     status_(s) {
 	}
 
-	Message::Type type() const {
+	[[nodiscard]] Message::Type type() const {
 		return type_;
 	}
-	const std::string& sub_type() const {
+	[[nodiscard]] const std::string& sub_type() const {
 		return sub_type_;
 	}
-	uint32_t sent() const {
+	[[nodiscard]] const Time& sent() const {
 		return sent_;
 	}
-	const std::string& title() const {
+	[[nodiscard]] const std::string& title() const {
 		return title_;
 	}
-	const std::string& icon_filename() const {
+	[[nodiscard]] const std::string& icon_filename() const {
 		return icon_filename_;
 	}
-	const Image* icon() const {
+	[[nodiscard]] const Image* icon() const {
 		return icon_;
 	}
-	const std::string& heading() const {
+	[[nodiscard]] const std::string& heading() const {
 		return heading_;
 	}
-	const std::string& body() const {
+	[[nodiscard]] const std::string& body() const {
 		return body_;
 	}
-	const Widelands::Coords& position() const {
+	[[nodiscard]] const Widelands::Coords& position() const {
 		return position_;
 	}
-	Widelands::Serial serial() const {
+	[[nodiscard]] Widelands::Serial serial() const {
 		return serial_;
 	}
-	Status status() const {
+	[[nodiscard]] Status status() const {
 		return status_;
 	}
 	Status set_status(Status const s) {
@@ -121,12 +121,12 @@ struct Message {
 	/**
 	 * Returns the main type for the message's sub type
 	 */
-	Message::Type message_type_category() const {
+	[[nodiscard]] Message::Type message_type_category() const {
 		if (type_ >= Widelands::Message::Type::kWarfare) {
 			return Widelands::Message::Type::kWarfare;
-
-		} else if (type_ >= Widelands::Message::Type::kEconomy &&
-		           type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
+		}
+		if (type_ >= Widelands::Message::Type::kEconomy &&
+		    type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
 			return Widelands::Message::Type::kEconomy;
 		}
 		return type_;
@@ -140,7 +140,7 @@ private:
 	const Image* icon_;  // Pointer to icon into picture stack
 	const std::string heading_;
 	const std::string body_;
-	uint32_t sent_;
+	Time sent_;
 	Widelands::Coords position_;
 	Widelands::Serial serial_;  // serial to map object
 	Status status_;

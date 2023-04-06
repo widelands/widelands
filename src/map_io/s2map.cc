@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,13 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "map_io/s2map.h"
 
+#include <cstddef>
 #include <iomanip>
 #include <iostream>
 #include <memory>
@@ -34,16 +34,14 @@
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "map_io/map_loader.h"
-#include "map_io/world_legacy_lookup_table.h"
 
 using std::cerr;
 using std::endl;
 using std::ios;
-using std::setiosflags;
 
 namespace {
 
@@ -62,10 +60,10 @@ struct S2MapDescrHeader {
 
 // Some basic checks to identify obviously invalid headers
 bool is_valid_header(const S2MapDescrHeader& header) {
-	if (strncmp(header.magic, "WORLD_V1.0", 10)) {
+	if (strncmp(header.magic, "WORLD_V1.0", 10) != 0) {
 		return false;
 	}
-	if (header.name[19]) {
+	if (header.name[19] != 0) {
 		return false;
 	}
 	if (header.w <= 0 || header.h <= 0) {
@@ -77,7 +75,7 @@ bool is_valid_header(const S2MapDescrHeader& header) {
 	if (header.nplayers < 0 || header.nplayers > 7) {
 		return false;
 	}
-	if (header.author[19]) {
+	if (header.author[19] != 0) {
 		return false;
 	}
 	return true;
@@ -226,11 +224,12 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	int32_t y = 0;
 	for (; y < height; ++y) {
 		uint8_t const* const ptr = reinterpret_cast<uint8_t*>(fr.data(width));
-		memcpy(section.get() + y * width, ptr, width);
+		memcpy(section.get() + static_cast<ptrdiff_t>(y) * width, ptr, width);
 		fr.data(dw - width);  // skip the alignment junk
 	}
 	while (y < dh) {
-		fr.data(dw);  // more alignment junk++ y;
+		fr.data(dw);  // more alignment junk
+		++y;
 	}
 
 	return section;
@@ -253,22 +252,19 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 /// terrain.
 class TerrainConverter {
 public:
-	TerrainConverter(const Widelands::World& world, const WorldLegacyLookupTable& lookup_table);
-	Widelands::DescriptionIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
+	explicit TerrainConverter(Widelands::Descriptions* descriptions);
+	[[nodiscard]] Widelands::DescriptionIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
-	const WorldLegacyLookupTable& world_legacy_lookup_table_;
-	const Widelands::World& world_;
+	Widelands::Descriptions* descriptions_;
 	const std::map<S2MapLoader::WorldType, std::vector<std::string>> table_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(TerrainConverter);
 };
 
-TerrainConverter::TerrainConverter(const Widelands::World& world,
-                                   const WorldLegacyLookupTable& lookup_table)
-   : world_legacy_lookup_table_(lookup_table),
-     world_(world),
+TerrainConverter::TerrainConverter(Widelands::Descriptions* descriptions)
+   : descriptions_(descriptions),
      table_{std::make_pair(
                S2MapLoader::WorldType::kGreenland,
                std::vector<std::string>{
@@ -352,30 +348,36 @@ Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType worl
 		break;  // unknown texture
 
 	default:
-		log("Unknown texture %x. Defaulting to water.\n", c);
+		log_warn("Unknown texture %x. Defaulting to water.\n", c);
 		c = 7;
 		break;
 	}
 
-	return world_.terrains().get_index(
-	   world_legacy_lookup_table_.lookup_terrain(table_.at(world)[c]));
+	const std::string& terrain_name = table_.at(world)[c];
+	try {
+		return descriptions_->load_terrain(terrain_name);
+	} catch (const WException&) {
+		throw wexception("world does not define terrain type %s, you cannot "
+		                 "play this settlers map",
+		                 terrain_name.c_str());
+	}
 }
 
 }  // namespace
 
 S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
-   : Widelands::MapLoader(filename, M), filename_(filename), worldtype_(WorldType::kGreenland) {
+   : Widelands::MapLoader(filename, M), filename_(filename) {
 }
 
 /// Load the header. The map will then return valid information when
 /// get_width(), get_nrplayers(), get_author() and so on are called.
-int32_t S2MapLoader::preload_map(bool const scenario) {
+int32_t S2MapLoader::preload_map(bool const scenario, AddOns::AddOnsList* /* addons */) {
 	assert(get_state() != State::kLoaded);
 
 	map_.cleanup();
 
 	FileRead fr;
-	fr.open(*g_fs, filename_.c_str());
+	fr.open(*g_fs, filename_);
 
 	load_s2mf_header(fr);
 
@@ -406,11 +408,13 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
  * Completely loads the map, loads the graphics and places all the objects.
  * From now on the Map* can't be set to another one.
  */
-int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoader::LoadType) {
+int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase,
+                                       MapLoader::LoadType /* type */) {
 	std::string timer_message = "S2MapLoader::load_map_complete() for '";
 	timer_message += map_.get_name();
 	timer_message += "' took %ums";
-	ScopedTimer timer(timer_message);
+	ScopedTimer timer(timer_message, true);
+	Notifications::publish(UI::NoteLoadingMessage(_("Loading map…")));
 
 	load_s2mf(egbase);
 
@@ -464,7 +468,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	uint8_t* pc;
 
 	FileRead fr;
-	fr.open(*g_fs, filename_.c_str());
+	fr.open(*g_fs, filename_);
 
 	load_s2mf_header(fr);
 	map_.set_size(map_.width_, map_.height_);
@@ -496,11 +500,10 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		throw wexception("Section 2 (Terrain 1) not found");
 	}
 
-	std::unique_ptr<WorldLegacyLookupTable> lookup_table(
-	   create_world_legacy_lookup_table(get_world_name(worldtype_)));
+	egbase.mutable_descriptions()->set_old_world_name(get_world_name(worldtype_));
 
-	const Widelands::World& world = egbase.world();
-	TerrainConverter terrain_converter(world, *lookup_table);
+	Widelands::Descriptions* descriptions = egbase.mutable_descriptions();
+	TerrainConverter terrain_converter(descriptions);
 
 	f = map_.fields_.get();
 	pc = section.get();
@@ -508,7 +511,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
-			if (c & 0x40) {
+			if ((c & 0x40) != 0) {
 				port_spaces_to_set_.insert(Widelands::Coords(x, y));
 			}
 			f->set_terrain_d(terrain_converter.lookup(worldtype_, c & 0x1f));
@@ -528,7 +531,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
 			// https://settlers2.net/documentation/world-map-file-format-wldswd/
-			if (c & 0x40) {
+			if ((c & 0x40) != 0) {
 				port_spaces_to_set_.insert(Widelands::Coords(x, y));
 			}
 			f->set_terrain_r(terrain_converter.lookup(worldtype_, c & 0x1f));
@@ -560,6 +563,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//   owner == 4 -> grey
 	//   owner == 6 -> green
 	//   owner == 6 -> orange
+	// TODO(hessenfarmer): this comment is not correct section 6 determines how the values of section
+	// 5 are to be interpreted. Solution is working more the less though
 	section = load_s2mf_section(fr, mapwidth, mapheight);
 	if (!section) {
 		throw wexception("Section 6 (Ways) not found");
@@ -623,7 +628,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				bobname = "duck";
 				break;
 			case 0x09:
-				bobname = "elk";
+				bobname = "moose";
 				break;  // original "donkey"
 			default:
 				cerr << "Unsupported animal: " << static_cast<int32_t>(section[i]) << endl;
@@ -631,10 +636,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			}
 
 			if (!bobname.empty()) {
-				Widelands::DescriptionIndex const idx = world.get_critter(bobname.c_str());
-				if (idx == Widelands::INVALID_INDEX) {
-					throw wexception("Missing bob type %s", bobname.c_str());
-				}
+				const Widelands::DescriptionIndex idx = descriptions->load_critter(bobname);
 				egbase.create_critter(Widelands::Coords(x, y), idx);
 			}
 		}
@@ -688,6 +690,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  0x49-4f == iron 1-7
 	//  0x41-47 == coal 1-7
 	//  0x59-5f == granite 1-7
+	// fish and ground water are ignored here as they are infinite in S2 and not in widelands
+	// fish an water are defaulted per terrain in widelands game, so it is safe to ignore them
 	section = load_s2mf_section(fr, mapwidth, mapheight);
 	if (!section) {
 		throw wexception("Section 12 (Resources) not found");
@@ -703,19 +707,19 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 			switch (value & 0xF8) {
 			case 0x40:
-				res = "coal";
+				res = "resource_coal";
 				amount = value & 7;
 				break;
 			case 0x48:
-				res = "iron";
+				res = "resource_iron";
 				amount = value & 7;
 				break;
 			case 0x50:
-				res = "gold";
+				res = "resource_gold";
 				amount = value & 7;
 				break;
-			case 0x59:
-				res = "granite";
+			case 0x58:
+				res = "resource_stones";
 				amount = value & 7;
 				break;
 			default:
@@ -725,11 +729,12 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			}
 
 			Widelands::DescriptionIndex nres = 0;
-			if (*res) {
-				nres = world.resource_index(res);
-				if (nres == Widelands::INVALID_INDEX) {
-					throw wexception("world does not define resource type %s, you can not "
-					                 "play settler maps here",
+			if (*res != 0) {
+				try {
+					nres = descriptions->load_resource(res);
+				} catch (const WException&) {
+					throw wexception("world does not define resource type %s, you cannot "
+					                 "play this settlers map",
 					                 res);
 				}
 			}
@@ -769,17 +774,18 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  Now try to convert the remaining stuff to Widelands-format. This will
 	//  read and construct the name of the old immovables before the one world
 	//  conversion. We will then convert them using the
-	//  OneWorldLegacyLookupTable.
-	// Puts an immovable with the 'old_immovable_name' onto the field 'locations'.
-	auto place_immovable = [&egbase, &lookup_table, &world](const Widelands::Coords& location,
-	                                                        const std::string& old_immovable_name) {
-		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
-		Widelands::DescriptionIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
-		if (idx == Widelands::INVALID_INDEX) {
-			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
+	//  Descriptions compatibility information for the old world name.
+	// Puts an immovable with the 'immovable_name' onto the field 'locations'.
+	auto place_immovable = [&egbase, descriptions](
+	                          const Widelands::Coords& location, const std::string& immovable_name) {
+		try {
+			const Widelands::DescriptionIndex idx = descriptions->load_immovable(immovable_name);
+			egbase.create_immovable(location, idx, nullptr /* owner */);
+		} catch (const WException&) {
+			throw wexception("world does not define immovable type %s, you cannot "
+			                 "play this settlers map",
+			                 immovable_name.c_str());
 		}
-		egbase.create_immovable(
-		   location, idx, Widelands::MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
 	};
 
 	uint8_t c;
@@ -1049,29 +1055,29 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	map_.recalc_whole_map(egbase);  //  to initialize buildcaps
 
 	const Widelands::PlayerNumber nr_players = map_.get_nrplayers();
-	log("Checking starting position for all %u players:\n", nr_players);
+	log_info("Checking starting position for all %u players:\n", nr_players);
 	iterate_player_numbers(p, nr_players) {
-		log("-> Player %u: ", p);
+		log_info("-> Player %u: ", p);
 
 		Widelands::Coords starting_pos = map_.get_starting_pos(p);
 		if (!starting_pos) {
 			//  Do not throw exception, else map will not be loadable in the
 			//  editor. Player initialization will keep track of wrong starting
 			//  positions.
-			log("Has no starting position.\n");
+			log_warn("Has no starting position.\n");
 			continue;
 		}
 		Widelands::FCoords fpos = map_.get_fcoords(starting_pos);
 
-		if (!(map_.get_max_nodecaps(egbase, fpos) & Widelands::BUILDCAPS_BIG)) {
-			log("wrong size - trying to fix it: ");
+		if ((map_.get_max_nodecaps(egbase, fpos) & Widelands::BUILDCAPS_BIG) == 0) {
+			log_warn("wrong size - trying to fix it: ");
 			bool fixed = false;
 
 			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 			   map_, Widelands::Area<Widelands::FCoords>(fpos, 3));
 			do {
-				if (map_.get_max_nodecaps(egbase, const_cast<Widelands::FCoords&>(mr.location())) &
-				    Widelands::BUILDCAPS_BIG) {
+				if ((map_.get_max_nodecaps(egbase, const_cast<Widelands::FCoords&>(mr.location())) &
+				     Widelands::BUILDCAPS_BIG) != 0) {
 					map_.set_starting_pos(p, mr.location());
 					fixed = true;
 					break;
@@ -1080,17 +1086,17 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 			// check whether starting position was fixed.
 			if (fixed) {
-				log("Fixed!\n");
+				log_info("Fixed!\n");
 			} else {
 				//  Do not throw exception, else map will not be loadable in
 				//  the editor. Player initialization will keep track of
 				//  wrong starting positions.
-				log("FAILED!\n");
-				log("   Invalid starting position, that could not be fixed.\n");
-				log("   Please try to fix it manually in the editor.\n");
+				log_err("FAILED!\n");
+				log_err("Invalid starting position, that could not be fixed.\n");
+				log_err("Please try to fix it manually in the editor.\n");
 			}
 		} else {
-			log("OK\n");
+			log_info("OK\n");
 		}
 	}
 }
@@ -1112,9 +1118,9 @@ void S2MapLoader::postload_set_port_spaces(const Widelands::EditorGameBase& egba
 			} while (!was_set && mr.advance(map_));
 		}
 		if (!was_set) {
-			log("FAILED! No port buildspace for (%i, %i) found!\n", fc.x, fc.y);
+			log_err("FAILED! No port buildspace for (%i, %i) found!\n", fc.x, fc.y);
 		} else {
-			log("SUCCESS! Port buildspace set for (%i, %i) \n", fc.x, fc.y);
+			log_info("SUCCESS! Port buildspace set for (%i, %i) \n", fc.x, fc.y);
 		}
 	}
 	map_.recalculate_allows_seafaring();

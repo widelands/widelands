@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -44,7 +43,7 @@ class Worker;
 
 class ExpeditionBootstrap {
 public:
-	explicit ExpeditionBootstrap(PortDock* const portdock);
+	explicit ExpeditionBootstrap(PortDock* portdock);
 	virtual ~ExpeditionBootstrap();
 
 	// Start bootstrapping an expedition. This will request all wares and workers.
@@ -69,15 +68,18 @@ public:
 	void set_economy(Economy* economy, WareWorker);
 
 	// Returns the wares and workers currently waiting for the expedition.
-	std::vector<InputQueue*> queues(bool all) const;
+	[[nodiscard]] std::vector<InputQueue*> queues(bool all) const;
 
 	// Returns the matching input queue for the given index and type.
-	InputQueue& inputqueue(DescriptionIndex index, WareWorker type, bool) const;
-	InputQueue* inputqueue(size_t additional_index) const;
-	InputQueue& first_empty_inputqueue(DescriptionIndex index, WareWorker type) const;
+	[[nodiscard]] InputQueue& inputqueue(DescriptionIndex index, WareWorker type, bool) const;
+	[[nodiscard]] InputQueue* inputqueue(size_t additional_index) const;
+	[[nodiscard]] InputQueue& inputqueue(const Request&) const;
 
 	void demand_additional_item(Game&, WareWorker, DescriptionIndex, bool);
-	size_t count_additional_queues() const;
+	[[nodiscard]] size_t count_additional_queues() const;
+
+	// Tests if all wares for the expedition have arrived. If so, informs the portdock.
+	void check_is_ready(Game& game);
 
 	// Delete all wares we currently handle.
 	void cleanup(EditorGameBase& egbase);
@@ -87,12 +89,8 @@ public:
 	 * The actual data is stored in the buildingdata
 	 * packet, and there in the warehouse data packet.
 	 */
-	void load(Warehouse& warehouse,
-	          FileRead& fr,
-	          Game& game,
-	          MapObjectLoader& mol,
-	          const TribesLegacyLookupTable& tribes_lookup_table,
-	          uint16_t version);
+	void
+	load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t version);
 
 	/** Save this into a file.
 	 *
@@ -104,9 +102,6 @@ public:
 private:
 	// Handles arriving workers and wares.
 	static void input_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void*);
-
-	// Tests if all wares for the expedition have arrived. If so, informs the portdock.
-	void is_ready(Game& game);
 
 	/** The Expedition is bootstapped here. */
 	PortDock* const portdock_;  // not owned

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2020 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,12 +27,12 @@ namespace JSON {
 struct Value {
 	Value() = default;
 	virtual ~Value() = default;
-	virtual std::string as_string() const = 0;
+	[[nodiscard]] virtual std::string as_string() const = 0;
 };
 
 struct Boolean : Value {
 	explicit Boolean(bool value);
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 
 private:
 	const bool bool_value;
@@ -41,7 +40,7 @@ private:
 
 struct Double : Value {
 	explicit Double(double value);
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 
 private:
 	const double double_value;
@@ -49,12 +48,12 @@ private:
 
 struct Empty : Value {
 	Empty() = default;
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 };
 
 struct Int : Value {
 	explicit Int(int value);
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 
 private:
 	const int int_value;
@@ -62,7 +61,7 @@ private:
 
 struct String : Value {
 	explicit String(const std::string& value);
-	std::string as_string() const override;
+	[[nodiscard]] std::string as_string() const override;
 
 private:
 	const std::string string_value;

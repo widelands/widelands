@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifndef WL_GRAPHIC_TEXTURE_H
@@ -31,7 +30,7 @@ class Texture : public Surface, public Image {
 public:
 	// Create a new surface from an SDL_Surface. If intensity is true, an GL_INTENSITY texture
 	// is created. Ownership is taken.
-	Texture(SDL_Surface* surface, bool intensity = false);
+	explicit Texture(SDL_Surface* surface, bool intensity = false);
 
 	// Create a new empty (that is randomly filled) Surface with the given
 	// dimensions.
@@ -39,16 +38,16 @@ public:
 
 	// Create a logical texture that is a 'subrect' (in Pixel) in
 	// another texture. Ownership of 'texture' is not taken.
-	Texture(const GLuint texture, const Recti& subrect, int parent_w, int parent_h);
+	Texture(GLuint texture, const Recti& subrect, int parent_w, int parent_h);
 
 	~Texture() override;
 
 	// Implements Surface
-	int width() const override;
-	int height() const override;
+	[[nodiscard]] int width() const override;
+	[[nodiscard]] int height() const override;
 
 	// Implements Image.
-	const BlitData& blit_data() const override;
+	[[nodiscard]] const BlitData& blit_data() const override;
 
 	enum UnlockMode {
 		/**
@@ -79,7 +78,7 @@ public:
 
 private:
 	// Configures OpenGL to draw to this surface.
-	void setup_gl();
+	void setup_gl() const;
 	void init(uint16_t w, uint16_t h);
 
 	// Implements surface.

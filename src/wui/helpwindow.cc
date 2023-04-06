@@ -1,5 +1,5 @@
-﻿/*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+/*
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -37,11 +36,12 @@ BuildingHelpWindow::BuildingHelpWindow(Panel* const parent,
                                        uint32_t width,
                                        uint32_t height)
    : UI::UniqueWindow(parent,
+                      UI::WindowStyle::kWui,
                       "help_window",
                       &reg,
                       width,
                       height,
-                      (boost::format(_("Help: %s")) % building_description.descname()).str()),
+                      format(_("Help: %s"), building_description.descname())),
      textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 10, UI::PanelStyle::kWui)) {
 	assert(tribe.has_building(tribe.building_index(building_description.name())) ||
 	       building_description.type() == Widelands::MapObjectType::MILITARYSITE);
@@ -57,6 +57,8 @@ BuildingHelpWindow::BuildingHelpWindow(Panel* const parent,
 	} catch (LuaError& err) {
 		textarea_->set_text(err.what());
 	}
+
+	initialization_complete();
 }
 
 }  // namespace UI

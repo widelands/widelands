@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_bakery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Bakery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -21,17 +21,16 @@ tribes:new_productionsite_type {
       granite = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 41, 58 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 41, 58 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 41, 58 },
       },
    },
@@ -54,9 +53,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = pgettext("barbarians_building", "baking pitta bread"),
          actions = {
+            -- time total: 20.8 + 2 * (20 + 3.6) = 68 sec
             "return=skipped unless economy needs barbarians_bread",
             "consume=water:3 wheat:3",
-            "sleep=duration:20s",
+            "sleep=duration:20s800ms",
             "animate=working duration:20s",
             "produce=barbarians_bread",
             "animate=working duration:20s",
@@ -65,3 +65,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

@@ -3,10 +3,16 @@
 /doc/sphinx/source/autogen*
 /doc/sphinx/source/auxiliary.rst
 
+# Local defaults for compile.sh
+.compile*
+
 # the compile.sh file creates some files, links and directories
 /build
+/auto_dependencies
+/data/datadirversion
 update.sh
 /widelands
+/widelands.exe
 wl_map*_info
 wl_create_spritesheet
 locale
@@ -24,6 +30,15 @@ VERSION
 # QT Creator settings
 CMakeLists.txt.user*
 
+# Visual Studio settings + VS Code
+/.vs
+/.vscode
+CMakeSettings.json
+
+# Profilers
+gmon.out
+
 # Validation checks
-po_validation
-clang-tidy.log
+/po_validation
+/clang-tidy.log
+/clangtidy

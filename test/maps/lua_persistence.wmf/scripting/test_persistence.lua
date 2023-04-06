@@ -25,16 +25,19 @@ function save_coroutine()
    a = { "Hallo", "Welt" }
    c = { func = function(a) return "I say " .. a .. "!" end }
    field = map:get_field(32,34)
-   tree = map:place_immovable("spruce_summer_old", field, "world")
-   removed_tree = map:place_immovable("alder_summer_old", map:get_field(34,34), "world")
+   tree = map:place_immovable("spruce_summer_old", field)
+   removed_tree = map:place_immovable("alder_summer_old", map:get_field(34,34))
    removed_tree:remove()
+
+   field.terd = "desert_beach"
+   field.terr = "hardground1"
 
    tribe_descr = game:get_tribe_description("atlanteans")
    building_descr = game:get_building_description("barbarians_lumberjacks_hut")
    ware_descr = game:get_ware_description("ax")
    worker_descr = game:get_worker_description("barbarians_lumberjack")
    immovable_descr = game:get_immovable_description("alder_summer_sapling")
-   resource_descr = game:get_resource_description("coal")
+   resource_descr = game:get_resource_description("resource_coal")
    terrain_descr = game:get_terrain_description("summer_meadow1")
 
    corout = coroutine.create(function()
@@ -52,8 +55,8 @@ function save_coroutine()
    objective = p:add_objective("lumber", "House", "Ship!")
    objective.done = true
 
-   p:send_message("dummy msg1", "dummy msg 1")
-   msg = p:send_message("hello nice", "World", {field = field })
+   p:send_to_inbox("dummy msg1", "dummy msg 1")
+   msg = p:send_to_inbox("hello nice", "World", {field = field })
    player_slot = map.player_slots[1]
 
    myset = Set:new{
@@ -98,12 +101,15 @@ function check_coroutine()
    assert_equal(34, field.y)
    assert_equal(tree, field.immovable)
 
+   assert_equal("desert_beach", field.terd)
+   assert_equal("hardground1", field.terr)
+
    assert_equal("atlanteans", tribe_descr.name)
    assert_equal("barbarians_lumberjacks_hut", building_descr.name)
    assert_equal("ax", ware_descr.name)
    assert_equal("barbarians_lumberjack", worker_descr.name)
    assert_equal("alder_summer_sapling", immovable_descr.name)
-   assert_equal("coal", resource_descr.name)
+   assert_equal("resource_coal", resource_descr.name)
    assert_equal("summer_meadow1", terrain_descr.name)
 
    assert_equal(global_value_1, false)

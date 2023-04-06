@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,56 +21,46 @@
 
 #include <memory>
 
-#include "graphic/playercolor.h"
 #include "logic/game_settings.h"
-#include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
 #include "ui_fsmenu/launch_game.h"
+#include "ui_fsmenu/singleplayersetupbox.h"
 
-struct PlayerDescriptionGroup;
+struct MapData;
+namespace Widelands {
+class Game;
+}  // namespace Widelands
 
-/**
- * Fullscreen menu for setting map and mapsettings for single and multi player
- * games.
- *
- * The menu has a lot dynamic user-interfaces, that are only shown in specific
- * cases:
- *    UI::Button select_map_  - only shown if the player has the right to
- *                               change the map.
- *
- */
-class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
+namespace FsMenu {
+
+class LaunchSPG : public LaunchGame {
 public:
-	FullscreenMenuLaunchSPG(GameSettingsProvider*, GameController* = nullptr);
-	~FullscreenMenuLaunchSPG() override;
-
-	void start() override;
+	LaunchSPG(MenuCapsule&,
+	          GameSettingsProvider&,
+	          std::shared_ptr<Widelands::Game>,
+	          const MapData* /* nullptr for preconfigured games */,
+	          bool scenario);
+	~LaunchSPG() override = default;
 
 protected:
 	void clicked_ok() override;
-	void clicked_back() override;
+	void clicked_select_map() override {
+		NEVER_HERE();  // not available in singleplayer
+	}
+	void clicked_select_savegame() override {
+		NEVER_HERE();  // not available in singleplayer
+	}
 
 private:
-	void layout() override;
-	void update(bool map_was_changed);
-
-	bool select_map();
 	void win_condition_selected() override;
-	void set_player_names_and_tribes();
-	void switch_to_position(uint8_t);
-	void safe_place_for_host(uint8_t);
+	void layout() override;
 
-	UI::Button select_map_;
-	UI::Button* pos_[kMaxPlayers];
-	UI::Textarea mapname_;
-	UI::Textarea name_, type_, team_, tribe_, init_, wincondition_type_;
-	PlayerDescriptionGroup* players_[kMaxPlayers];
-	std::string filename_;
-	std::string filename_proof_;  // local var. to check UI state
-	std::string player_save_name_[kMaxPlayers];
-	std::string player_save_tribe_[kMaxPlayers];
-	bool is_scenario_;
+	SinglePlayerSetupBox player_setup_;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
-};
 
+	void update();
+	void enforce_player_names_and_tribes(const Widelands::Map& map);
+	const bool preconfigured_;
+	std::shared_ptr<Widelands::Game> game_;
+};
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

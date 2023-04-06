@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,17 +12,16 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/text/rt_parse.h"
 
+#include <cstdlib>
 #include <memory>
 
-#include <boost/algorithm/string/replace.hpp>
-
+#include "base/string.h"
 #include "graphic/text/rt_errors_impl.h"
 #include "graphic/text/textstream.h"
 
@@ -48,15 +47,12 @@ std::string Attr::get_string() const {
 }
 
 bool Attr::get_bool() const {
-	if (value_ == "true" || value_ == "1" || value_ == "yes") {
-		return true;
-	}
-	return false;
+	return value_ == "true" || value_ == "1" || value_ == "yes";
 }
 
 RGBColor Attr::get_color() const {
 	if (value_.size() != 6) {
-		throw InvalidColor((boost::format("Could not parse '%s' as a color.") % value_).str());
+		throw InvalidColor(format("Could not parse '%s' as a color.", value_));
 	}
 
 	uint32_t clrn = strtol(value_.c_str(), nullptr, 16);
@@ -76,7 +72,7 @@ const Attr& AttrMap::operator[](const std::string& s) const {
 }
 
 bool AttrMap::has(const std::string& s) const {
-	return attrs_.count(s);
+	return attrs_.count(s) != 0u;
 }
 
 const std::string& Tag::name() const {
@@ -92,7 +88,7 @@ const Tag::ChildList& Tag::children() const {
 }
 
 Tag::~Tag() {
-	while (children_.size()) {
+	while (!children_.empty()) {
 		delete children_.back();
 		children_.pop_back();
 	}
@@ -119,9 +115,8 @@ void Tag::parse_closing_tag(TextStream& ts) {
 
 void Tag::parse_attribute(TextStream& ts, std::unordered_set<std::string>& allowed_attrs) {
 	std::string aname = ts.till_any("=");
-	if (!allowed_attrs.count(aname)) {
-		const std::string error_info =
-		   (boost::format("an allowed attribute for '%s' tag") % name_).str();
+	if (allowed_attrs.count(aname) == 0u) {
+		const std::string error_info = format("an allowed attribute for '%s' tag", name_);
 		throw SyntaxErrorImpl(ts.line(), ts.col(), error_info, aname, ts.peek(100));
 	}
 
@@ -138,9 +133,10 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 			ts.skip_ws();
 		}
 
-		size_t line = ts.line(), col = ts.col();
+		size_t line = ts.line();
+		size_t col = ts.col();
 		std::string text = ts.till_any("<");
-		if (text != "") {
+		if (!text.empty()) {
 			if (!tc.text_allowed) {
 				throw SyntaxErrorImpl(
 				   line, col, "no text, as only tags are allowed here", text, ts.peek(100));
@@ -157,10 +153,10 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 		col = ts.col();
 		size_t cpos = ts.pos();
 		child->parse(ts, tcs, allowed_tags);
-		if (!tc.allowed_children.count(child->name())) {
+		if (tc.allowed_children.count(child->name()) == 0u) {
 			throw SyntaxErrorImpl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
 		}
-		if (!allowed_tags.empty() && !allowed_tags.count(child->name())) {
+		if (!allowed_tags.empty() && (allowed_tags.count(child->name()) == 0u)) {
 			throw SyntaxErrorImpl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
 		}
 
@@ -184,14 +180,15 @@ void Tag::parse(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags)
 The Richtext Tags
 =================
 
-- :ref:`rt_tags_rt`
-- :ref:`rt_tags_div`
-- :ref:`rt_tags_br`
-- :ref:`rt_tags_space`
-- :ref:`rt_tags_vspace`
-- :ref:`rt_tags_p`
-- :ref:`rt_tags_font`
-- :ref:`rt_tags_img`
+* :ref:`rt_tags_rt`
+* :ref:`rt_tags_div`
+* :ref:`rt_tags_br`
+* :ref:`rt_tags_space`
+* :ref:`rt_tags_vspace`
+* :ref:`rt_tags_p`
+* :ref:`rt_tags_font`
+* :ref:`rt_tags_img`
+* :ref:`rt_tags_link`
 
 For an introduction to our richtext system including a code example, see :ref:`wlrichtext`.
 
@@ -235,6 +232,7 @@ Sub-tags
 * :ref:`rt_tags_font`
 * :ref:`rt_tags_p`
 * :ref:`rt_tags_vspace`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -252,6 +250,7 @@ Sub-tags
 		tc.allowed_children.insert("vspace");
 		tc.allowed_children.insert("font");
 		tc.allowed_children.insert("div");
+		tc.allowed_children.insert("link");
 		tc.text_allowed = false;
 		tc.has_closing_tag = true;
 		tag_constraints_["rt"] = tc;
@@ -286,6 +285,7 @@ Sub-tags
 * :ref:`rt_tags_font`
 * :ref:`rt_tags_p`
 * :ref:`rt_tags_vspace`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -305,6 +305,7 @@ Sub-tags
 		tc.allowed_children.insert("vspace");
 		tc.allowed_children.insert("font");
 		tc.allowed_children.insert("div");
+		tc.allowed_children.insert("link");
 
 		tc.text_allowed = false;
 		tc.has_closing_tag = true;
@@ -401,6 +402,7 @@ Sub-tags
 * :ref:`rt_tags_img`
 * :ref:`rt_tags_space`
 * :ref:`rt_tags_vspace`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -416,6 +418,7 @@ Sub-tags
 		tc.allowed_children.insert("br");
 		tc.allowed_children.insert("img");
 		tc.allowed_children.insert("div");
+		tc.allowed_children.insert("link");
 		tc.text_allowed = true;
 		tc.has_closing_tag = true;
 		tag_constraints_["p"] = tc;
@@ -451,6 +454,7 @@ Sub-tags
 * :ref:`rt_tags_p`
 * :ref:`rt_tags_space`
 * :ref:`rt_tags_vspace`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -470,10 +474,60 @@ Sub-tags
 		tc.allowed_children.insert("p");
 		tc.allowed_children.insert("font");
 		tc.allowed_children.insert("div");
+		tc.allowed_children.insert("link");
 		tc.allowed_children.insert("img");
 		tc.text_allowed = true;
 		tc.has_closing_tag = true;
 		tag_constraints_["font"] = tc;
+	}
+	{
+		/* RST
+.. _rt_tags_link:
+
+Link -- <link>
+--------------
+
+This tag defines a clickable hyperlink.
+
+Attributes
+^^^^^^^^^^
+
+* **type**: Mandatory. What kind of link. Can be "url" or "ui".
+* **target**: Mandatory. The URL to open or the UI widget to reference.
+* **action**: Mandatory for UI links: the action to perform. Not allowed for URLs.
+* **mouseover**: Optional. The mouseover text to show.
+
+Sub-tags
+^^^^^^^^
+
+* :ref:`rt_tags_br`
+* :ref:`rt_tags_div`
+* :ref:`rt_tags_font`
+* :ref:`rt_tags_img`
+* :ref:`rt_tags_p`
+* :ref:`rt_tags_space`
+* :ref:`rt_tags_vspace`
+* :ref:`rt_tags_link`
+
+:ref:`Return to tag index<rt_tags>`
+		*/
+		TagConstraint tc;
+		tc.allowed_attrs.insert("type");
+		tc.allowed_attrs.insert("target");
+		tc.allowed_attrs.insert("action");
+		tc.allowed_attrs.insert("mouseover");
+
+		tc.allowed_children.insert("br");
+		tc.allowed_children.insert("space");
+		tc.allowed_children.insert("vspace");
+		tc.allowed_children.insert("p");
+		tc.allowed_children.insert("font");
+		tc.allowed_children.insert("div");
+		tc.allowed_children.insert("link");
+		tc.allowed_children.insert("img");
+		tc.text_allowed = true;
+		tc.has_closing_tag = true;
+		tag_constraints_["link"] = tc;
 	}
 	{
 		/* RST
@@ -509,11 +563,8 @@ Attributes
 	}
 }
 
-Parser::~Parser() {
-}
-
 Tag* Parser::parse(std::string text, const TagSet& allowed_tags) {
-	boost::replace_all(text, "\\", "\\\\");  // Prevent crashes with \.
+	replace_all(text, "\\", "\\\\");  // Prevent crashes with \.
 
 	text_stream_.reset(new TextStream(text));
 

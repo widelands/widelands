@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_smokery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Smokery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -19,16 +19,22 @@ tribes:new_productionsite_type {
       granite = 3
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 53, 58 },
+         hotspot = { 54, 74 },
       },
+
+   },
+
+   spritesheets = {
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 53, 68 },
-         fps = 20
-      }
+         fps = 20,
+         frames = 5,
+         columns = 5,
+         rows = 1,
+         hotspot = { 54, 74 },
+      },
    },
 
    aihints = {
@@ -51,7 +57,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=smoke_fish",
             "call=smoke_meat",
@@ -60,7 +66,7 @@ tribes:new_productionsite_type {
       },
       smoke_meat = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
-         descname = _"smoking meat",
+         descname = _("smoking meat"),
          actions = {
             -- time total: 60
             "return=skipped unless economy needs smoked_meat",
@@ -73,7 +79,7 @@ tribes:new_productionsite_type {
       -- 2 identical programs for fish to prevent unnecessary skipping penalty
       smoke_fish = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-         descname = _"smoking fish",
+         descname = _("smoking fish"),
          actions = {
             -- time total: 60
             "return=skipped unless economy needs smoked_fish",
@@ -85,7 +91,7 @@ tribes:new_productionsite_type {
       },
       smoke_fish_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-         descname = _"smoking fish",
+         descname = _("smoking fish"),
          actions = {
             -- time total: 60
             "return=skipped unless economy needs smoked_fish",
@@ -97,3 +103,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

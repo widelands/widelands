@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,6 +27,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -50,20 +50,27 @@ AbstractWaresDisplay::AbstractWaresDisplay(
    int32_t hgap,
    int32_t vgap)
    :  // Size is set when add_warelist is called, as it depends on the type_.
-     UI::Panel(parent, x, y, 0, 0),
+     UI::Panel(parent, UI::PanelStyle::kWui, x, y, 0, 0),
      tribe_(tribe),
 
      type_(type),
      indices_(type_ == Widelands::wwWORKER ? tribe_.workers() : tribe_.wares()),
-     curware_(this, 0, get_inner_h() - 25, get_inner_w(), 20, "", UI::Align::kCenter),
+     curware_(this,
+              UI::PanelStyle::kWui,
+              UI::FontStyle::kWuiLabel,
+              0,
+              get_inner_h() - 25,
+              get_inner_w(),
+              20,
+              "",
+              UI::Align::kCenter),
 
      selectable_(selectable),
      horizontal_(horizontal),
      hgap_(hgap),
      vgap_(vgap),
      selection_anchor_(Widelands::INVALID_INDEX),
-     callback_function_(std::move(callback_function)),
-     min_free_vertical_space_(290) {
+     callback_function_(std::move(callback_function)) {
 	for (const Widelands::DescriptionIndex& index : indices_) {
 		selected_.insert(std::make_pair(index, false));
 		hidden_.insert(std::make_pair(index, false));
@@ -73,7 +80,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 	curware_.set_text(_("Stock"));
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) { recalc_desired_size(true); });
+	   [this](const GraphicResolutionChanged& /* note */) { recalc_desired_size(true); });
 
 	recalc_desired_size(false);
 }
@@ -123,9 +130,9 @@ void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
 		// TODO(GunChleoc): Window::on_resolution_changed_note can't shift these properly due to the
 		// changing dimensions.
 		UI::Panel* p = this;
-		while (p->get_parent()) {
+		while (p->get_parent() != nullptr) {
 			p = p->get_parent();
-			if (dynamic_cast<UI::Window*>(p)) {
+			if (dynamic_cast<UI::Window*>(p) != nullptr) {
 				p->layout();
 				return;
 			}
@@ -133,19 +140,20 @@ void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
 	}
 }
 
-bool AbstractWaresDisplay::handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t, int32_t) {
+bool AbstractWaresDisplay::handle_mousemove(
+   uint8_t state, int32_t x, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	const Widelands::DescriptionIndex index = ware_at_point(x, y);
 
 	curware_.set_fixed_width(get_inner_w());
 
 	curware_.set_text(index != Widelands::INVALID_INDEX ?
-	                     (type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(index)->descname() :
-	                                                     tribe_.get_ware_descr(index)->descname()) :
-	                     "");
+                        (type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(index)->descname() :
+                                                        tribe_.get_ware_descr(index)->descname()) :
+                        "");
 	if (selection_anchor_ != Widelands::INVALID_INDEX) {
 		// Ensure mouse button is still pressed as some
 		// mouse release events do not reach us
-		if (state ^ SDL_BUTTON_LMASK) {
+		if ((state ^ SDL_BUTTON_LMASK) != 0) {
 			// TODO(unknown): We should call another function that will not pass that events
 			// to our Panel superclass
 			handle_mouserelease(SDL_BUTTON_LEFT, x, y);
@@ -154,6 +162,12 @@ bool AbstractWaresDisplay::handle_mousemove(uint8_t state, int32_t x, int32_t y,
 		update_anchor_selection(x, y);
 	}
 	return true;
+}
+
+void AbstractWaresDisplay::handle_mousein(bool inside) {
+	if (!inside) {
+		finalize_anchor_selection();
+	}
 }
 
 bool AbstractWaresDisplay::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
@@ -184,24 +198,7 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 	if (btn != SDL_BUTTON_LEFT || selection_anchor_ == Widelands::INVALID_INDEX) {
 		return UI::Panel::handle_mouserelease(btn, x, y);
 	}
-
-	bool to_be_selected = !ware_selected(selection_anchor_);
-
-	for (const Widelands::DescriptionIndex& index : indices_) {
-		if (in_selection_[index]) {
-			if (to_be_selected) {
-				select_ware(index);
-			} else {
-				unselect_ware(index);
-			}
-		}
-	}
-
-	// Release anchor, empty selection
-	selection_anchor_ = Widelands::INVALID_INDEX;
-	for (auto& resetme : in_selection_) {
-		in_selection_[resetme.first] = false;
-	}
+	finalize_anchor_selection();
 	return true;
 }
 
@@ -321,6 +318,30 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 	}
 }
 
+void AbstractWaresDisplay::finalize_anchor_selection() {
+	if (selection_anchor_ == Widelands::INVALID_INDEX) {
+		return;
+	}
+
+	bool to_be_selected = !ware_selected(selection_anchor_);
+
+	for (const Widelands::DescriptionIndex& index : indices_) {
+		if (in_selection_[index]) {
+			if (to_be_selected) {
+				select_ware(index);
+			} else {
+				unselect_ware(index);
+			}
+		}
+	}
+
+	// Release anchor, empty selection
+	selection_anchor_ = Widelands::INVALID_INDEX;
+	for (auto& resetme : in_selection_) {
+		in_selection_[resetme.first] = false;
+	}
+}
+
 void AbstractWaresDisplay::layout() {
 	curware_.set_pos(Vector2i(0, get_inner_h() - 22));
 	curware_.set_size(get_inner_w(), 20);
@@ -413,16 +434,18 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 
 	//  draw a background
 	const UI::WareInfoStyleInfo& style =
-	   draw_selected ? g_gr->styles().ware_info_style(UI::WareInfoStyle::kHighlight) :
-	                   g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal);
+	   draw_selected ? g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
+                      g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 
 	uint16_t w = style.icon_background_image()->width();
 
 	const Vector2i p = ware_position(id);
 	dst.blit(p, style.icon_background_image());
+	dst.fill_rect(Recti(p.x, p.y, w, style.icon_background_image()->height()),
+	              draw_ware_background_overlay(id), BlendMode::Default);
 
 	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon() :
-	                                                   tribe_.get_ware_descr(id)->icon();
+                                                      tribe_.get_ware_descr(id)->icon();
 
 	dst.blit(p + Vector2i((w - kWareMenuPicWidth) / 2, 1), icon);
 
@@ -484,8 +507,81 @@ WaresDisplay::WaresDisplay(UI::Panel* const parent,
    : AbstractWaresDisplay(parent, x, y, tribe, type, selectable) {
 }
 
+StockMenuWaresDisplay::StockMenuWaresDisplay(UI::Panel* const parent,
+                                             const int32_t x,
+                                             const int32_t y,
+                                             const Widelands::Player& p,
+                                             const Widelands::WareWorker type)
+   : WaresDisplay(parent, x, y, p.tribe(), type, false), player_(p) {
+}
+
+std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionIndex di) {
+	std::string text = WaresDisplay::info_for_ware(di);
+	if (solid_icon_backgrounds_) {
+		return text;
+	}
+
+	const uint32_t current_amount = amount_of(di);
+	if (current_amount >= 1000) {
+		// Not enough space to show an indicator.
+		// This only happens with very large amounts where the trend is not super-important anyway…
+		return text;
+	}
+
+	// Indicate trend over the last 5 minutes
+	const std::vector<uint32_t>& history = get_type() == Widelands::wwWARE ?
+                                             *player_.get_ware_stock_statistics(di) :
+                                             *player_.get_worker_stock_statistics(di);
+	const size_t nr_entries = history.size();
+
+	if (nr_entries == 0u) {
+		// No records yet
+		return text;
+	}
+
+	const size_t kSampleEntriesForTrend = 5 * 60 * 1000 / Widelands::kStatisticsSampleTime.get();
+	const uint32_t last_amount =
+	   history[nr_entries < kSampleEntriesForTrend ? nr_entries - 1 :
+                                                    nr_entries - kSampleEntriesForTrend];
+
+	const UI::BuildingStatisticsStyleInfo& colors = g_style_manager->building_statistics_style();
+	const std::string indicator =
+	   current_amount < last_amount ?
+         StyleManager::color_tag(_("↓"), colors.alternative_low_color()) :
+	   current_amount > last_amount ?
+         StyleManager::color_tag(_("↑"), colors.alternative_high_color()) :
+         StyleManager::color_tag(_("="), colors.alternative_medium_color());
+	/** TRANSLATORS: The first placeholder is the stock amount of a ware/worker, and the second is an
+	 * icon indicating a trend. Very little space is available. */
+	return format(_("%1$s%2$s"), text, indicator);
+}
+
+RGBAColor
+StockMenuWaresDisplay::draw_ware_background_overlay(const Widelands::DescriptionIndex di) {
+	if (solid_icon_backgrounds_) {
+		return WaresDisplay::draw_ware_background_overlay(di);
+	}
+	if (get_type() == Widelands::wwWARE) {
+		if (!player_.tribe().get_ware_descr(di)->has_demand_check(player_.tribe().name())) {
+			return WaresDisplay::draw_ware_background_overlay(di);
+		}
+	} else {
+		if (!player_.tribe().get_worker_descr(di)->has_demand_check()) {
+			return WaresDisplay::draw_ware_background_overlay(di);
+		}
+	}
+
+	const uint32_t amount = amount_of(di);
+	const uint32_t target = player_.get_total_economy_target(get_type(), di);
+	const RGBColor& color =
+	   amount < target ? g_style_manager->building_statistics_style().alternative_low_color() :
+	   amount > target ? g_style_manager->building_statistics_style().alternative_high_color() :
+                        g_style_manager->building_statistics_style().alternative_medium_color();
+	return RGBAColor(color.r, color.g, color.b, 80);
+}
+
 RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::DescriptionIndex /* ware */) {
-	return g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).info_background();
+	return g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal).info_background();
 }
 
 WaresDisplay::~WaresDisplay() {
@@ -505,19 +601,23 @@ static const char* unit_suffixes[] = {
    _("%1%G")};
 std::string get_amount_string(uint32_t amount, bool cutoff1k) {
 	uint8_t size = 0;
-	while (amount >= (size || cutoff1k ? 1000 : 10000)) {
+	while (amount >= ((size != 0u) || cutoff1k ? 1000 : 10000)) {
 		amount /= 1000;
 		size++;
 	}
-	return (boost::format(unit_suffixes[size]) % amount).str();
+	return format(unit_suffixes[size], amount);
 }
 
-std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
-	int totalstock = 0;
+uint32_t WaresDisplay::amount_of(const Widelands::DescriptionIndex ware) {
+	uint32_t totalstock = 0;
 	for (const Widelands::WareList* warelist : warelists_) {
 		totalstock += warelist->stock(ware);
 	}
-	return get_amount_string(totalstock);
+	return totalstock;
+}
+
+std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
+	return get_amount_string(amount_of(ware));
 }
 
 /*
@@ -540,7 +640,8 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 	std::vector<Widelands::DescriptionIndex>::iterator j;
 	Widelands::TribeDescr::WaresOrder order = tribe.wares_order();
 
-	const UI::WareInfoStyleInfo& style = g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal);
+	const UI::WareInfoStyleInfo& style =
+	   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 
 	for (i = order.begin(); i != order.end(); ++i) {
 		for (j = i->begin(); j != i->end(); ++j) {

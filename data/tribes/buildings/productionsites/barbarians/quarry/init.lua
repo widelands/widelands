@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_quarry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Quarry"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -16,24 +16,26 @@ tribes:new_productionsite_type {
       log = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 45, 48 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 45, 48 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 45, 48 },
       },
    },
 
-   aihints = {
-      collects_ware_from_map = "granite"
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 45, 48 }
+      },
    },
+
+   aihints = {},
 
    working_positions = {
       barbarians_stonemason = 1
@@ -42,7 +44,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-         descname = _"quarrying granite",
+         descname = _("quarrying granite"),
          actions = {
             "callworker=cut_granite",
             "sleep=duration:17s500ms"
@@ -51,9 +53,11 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Rocks",
-      heading = _"Out of Rocks",
+      title = _("No Rocks"),
+      heading = _("Out of Rocks"),
       message = pgettext("barbarians_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
       productivity_threshold = 75
    },
 }
+
+pop_textdomain()

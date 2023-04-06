@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -54,23 +53,24 @@ struct BaseListselect : public Panel {
 	               ListselectLayout selection_mode = ListselectLayout::kPlain);
 	~BaseListselect() override;
 
-	boost::signals2::signal<void(uint32_t)> selected;
-	boost::signals2::signal<void(uint32_t)> double_clicked;
+	Notifications::Signal<uint32_t> selected;
+	Notifications::Signal<uint32_t> double_clicked;
 
 	void clear();
-	void sort(const uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
+	void sort(uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
 	/**
 	 * Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
 	 */
 	void add(const std::string& name,
-	         uint32_t value,
+	         uint32_t entry,
 	         const Image* pic,
-	         const bool select_this,
+	         bool select_this,
 	         const std::string& tooltip_text,
-	         const std::string& hotkey);
+	         const std::string& hotkey,
+	         unsigned indent);
 
 	void remove(uint32_t);
-	void remove(const char* name);
+	void remove(const char* str);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -115,18 +115,21 @@ struct BaseListselect : public Panel {
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 
-	void set_notify_on_delete(UI::BaseDropdown* d) {
-		notify_on_delete_ = d;
+	/* Ensure the selected entry is visible in the list. */
+	void scroll_to_selection();
+
+	void set_linked_dropdown(UI::BaseDropdown* d) {
+		linked_dropdown = d;
 	}
 
 private:
-	static const int32_t DOUBLE_CLICK_INTERVAL = 500;  // half a second
 	static const int32_t ms_darken_value = -20;
 
 	void set_scrollpos(int32_t);
+	Recti get_highlight_rect(const std::string& text, int x, int y);
 
 	struct EntryRecord {
 		explicit EntryRecord(const std::string& init_name,
@@ -134,7 +137,9 @@ private:
 		                     const Image* init_pic,
 		                     const std::string& tooltip_text,
 		                     const std::string& hotkey_text,
+		                     unsigned indent,
 		                     const UI::TableStyleInfo& style);
+		~EntryRecord();
 
 		const std::string name;
 		const uint32_t entry_;
@@ -142,28 +147,31 @@ private:
 		const std::string tooltip;
 		const Align name_alignment;
 		const Align hotkey_alignment;
+		const unsigned indent;
 		std::shared_ptr<const UI::RenderedText> rendered_name;
 		std::shared_ptr<const UI::RenderedText> rendered_hotkey;
 	};
 
 	int max_pic_width_;
-	int widest_text_;
-	int widest_hotkey_;
+	int widest_text_{0};
+	int widest_hotkey_{0};
 
 	std::deque<EntryRecord*> entry_records_;
 	Scrollbar scrollbar_;
-	uint32_t scrollpos_;  //  in pixels
+	uint32_t scrollpos_{0U};  //  in pixels
 	uint32_t selection_;
-	uint32_t last_click_time_;
+	uint32_t last_click_time_{std::numeric_limits<uint32_t>::max()};
 	uint32_t last_selection_;  // for double clicks
 	ListselectLayout selection_mode_;
 	const Image* check_pic_;
-	const UI::TableStyleInfo& table_style_;
-	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
+
+	const UI::TableStyleInfo& table_style() const;
+	const UI::PanelStyleInfo* background_style() const;  // Background color and texture
+
 	int lineheight_;
 	std::string current_tooltip_;
 
-	UI::BaseDropdown* notify_on_delete_;
+	UI::BaseDropdown* linked_dropdown{nullptr};
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {
@@ -182,9 +190,11 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string(),
-	         const std::string& hotkey = std::string()) {
+	         const std::string& hotkey = std::string(),
+	         const unsigned indent = 0) {
 		entry_cache_.push_back(value);
-		BaseListselect::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey);
+		BaseListselect::add(
+		   name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey, indent);
 	}
 
 	const Entry& operator[](uint32_t const i) const {
@@ -224,8 +234,9 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string(),
-	         const std::string& hotkey = std::string()) {
-		Base::add(name, &value, pic, select_this, tooltip_text, hotkey);
+	         const std::string& hotkey = std::string(),
+	         const unsigned indent = 0) {
+		Base::add(name, &value, pic, select_this, tooltip_text, hotkey, indent);
 	}
 
 	Entry& operator[](uint32_t const i) const {

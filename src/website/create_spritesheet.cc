@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2020 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,15 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include <cassert>
+#include <iostream>
 #include <memory>
-
-#include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -32,10 +30,12 @@
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/map_objects/world/critter.h"
-#include "logic/map_objects/world/world.h"
-#include "logic/widelands.h"
 #include "website/lua/lua_tree.h"
 #include "website/website_common.h"
 
@@ -126,8 +126,9 @@ void write_spritesheet(const std::vector<std::unique_ptr<const Texture>>& imgs,
                        int spritesheet_width,
                        int spritesheet_height,
                        FileSystem* out_filesystem) {
-	log("CREATING %d x %d spritesheet with %d columns, %" PRIuS " frames. Image size: %d x %d.\n",
-	    spritesheet_width, spritesheet_height, columns, imgs.size(), rect.w, rect.h);
+	log_info("CREATING %d x %d spritesheet with %d columns, %" PRIuS
+	         " frames. Image size: %d x %d.\n",
+	         spritesheet_width, spritesheet_height, columns, imgs.size(), rect.w, rect.h);
 	std::unique_ptr<Texture> spritesheet(new Texture(spritesheet_width, spritesheet_height));
 	spritesheet->fill_rect(
 	   Rectf(Vector2f::zero(), spritesheet_width, spritesheet_height), RGBAColor(0, 0, 0, 0));
@@ -141,13 +142,14 @@ void write_spritesheet(const std::vector<std::unique_ptr<const Texture>>& imgs,
 		const Texture* image = imgs[i].get();
 		const int x = col * rect.w;
 		const int y = row * rect.h;
-		log("Frame %" PRIuS " at: %d, %d, %d, %d\n", i, x, y, x + rect.w, y + rect.h);
+		log_info("Frame %" PRIuS " at: %d, %d, %d, %d\n", i, x, y, x + rect.w, y + rect.h);
 		spritesheet->blit(Rectf(x, y, rect.w, rect.h), *image, Rectf(rect.x, rect.y, rect.w, rect.h),
 		                  1., BlendMode::Copy);
 	}
 	std::unique_ptr<::StreamWrite> sw(out_filesystem->open_stream_write(filename));
 	save_to_png(spritesheet.get(), sw.get(), ColorType::RGBA);
-	log("Wrote spritesheet to %s/%s\n", out_filesystem->get_basename().c_str(), filename.c_str());
+	log_info(
+	   "Wrote spritesheet to %s/%s\n", out_filesystem->get_basename().c_str(), filename.c_str());
 }
 
 // Container for writing spritesheet files
@@ -168,36 +170,33 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
                                   const std::string& map_object_name,
                                   const std::string& animation_name,
                                   FileSystem* out_filesystem) {
-	const Widelands::Tribes& tribes = egbase.tribes();
-	const Widelands::World& world = egbase.world();
-	log("==========================================\n");
+	const Widelands::Descriptions& descriptions = egbase.descriptions();
+	log_info("==========================================\n");
 
 	bool is_fontier_or_flag_animation = false;
 	uint32_t frontier_or_flag_animation_id = 0;
 
 	// Get the map object
 	const Widelands::MapObjectDescr* descr = nullptr;
-	if (tribes.building_exists(tribes.building_index(map_object_name))) {
-		descr = tribes.get_building_descr(tribes.building_index(map_object_name));
-	} else if (tribes.ware_exists(tribes.ware_index(map_object_name))) {
-		descr = tribes.get_ware_descr(tribes.ware_index(map_object_name));
-	} else if (tribes.worker_exists(tribes.worker_index(map_object_name))) {
-		descr = tribes.get_worker_descr(tribes.worker_index(map_object_name));
-	} else if (tribes.immovable_exists(tribes.immovable_index(map_object_name))) {
-		descr = tribes.get_immovable_descr(tribes.immovable_index(map_object_name));
-	} else if (tribes.ship_exists(tribes.ship_index(map_object_name))) {
-		descr = tribes.get_ship_descr(tribes.ship_index(map_object_name));
-	} else if (world.get_immovable_index(map_object_name) != Widelands::INVALID_INDEX) {
-		descr = world.get_immovable_descr(world.get_immovable_index(map_object_name));
-	} else if (world.get_critter_descr(map_object_name)) {
-		descr = world.get_critter_descr(map_object_name);
+	if (descriptions.building_exists(descriptions.building_index(map_object_name))) {
+		descr = descriptions.get_building_descr(descriptions.building_index(map_object_name));
+	} else if (descriptions.ware_exists(descriptions.ware_index(map_object_name))) {
+		descr = descriptions.get_ware_descr(descriptions.ware_index(map_object_name));
+	} else if (descriptions.worker_exists(descriptions.worker_index(map_object_name))) {
+		descr = descriptions.get_worker_descr(descriptions.worker_index(map_object_name));
+	} else if (descriptions.immovable_exists(descriptions.immovable_index(map_object_name))) {
+		descr = descriptions.get_immovable_descr(descriptions.immovable_index(map_object_name));
+	} else if (descriptions.ship_exists(descriptions.ship_index(map_object_name))) {
+		descr = descriptions.get_ship_descr(descriptions.ship_index(map_object_name));
+	} else if (descriptions.get_critter_descr(map_object_name) != nullptr) {
+		descr = descriptions.get_critter_descr(map_object_name);
 	} else {
 		// Frontier and flag animations need special treatment
 		std::vector<std::string> map_object_name_vector;
-		boost::split(map_object_name_vector, map_object_name, boost::is_any_of("_"));
+		split(map_object_name_vector, map_object_name, {'_'});
 		if (map_object_name_vector.size() == 2) {
 			const Widelands::TribeDescr* tribe =
-			   tribes.get_tribe_descr(tribes.tribe_index(map_object_name_vector.front()));
+			   descriptions.get_tribe_descr(descriptions.tribe_index(map_object_name_vector.front()));
 			if (map_object_name_vector.back() == "frontier") {
 				is_fontier_or_flag_animation = true;
 				frontier_or_flag_animation_id = tribe->frontier_animation();
@@ -208,7 +207,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		}
 	}
 	if (!is_fontier_or_flag_animation && descr == nullptr) {
-		log("ABORTING. Unable to find map object for '%s'!\n", map_object_name.c_str());
+		log_err("ABORTING. Unable to find map object for '%s'!\n", map_object_name.c_str());
 		return;
 	}
 	assert(is_fontier_or_flag_animation || (descr->name() == map_object_name));
@@ -221,17 +220,17 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	if (!is_fontier_or_flag_animation) {
 		if (!descr->is_animation_known(animation_name) &&
 		    !descr->is_animation_known(animation_name + "_ne")) {
-			log("ABORTING. Unknown animation '%s' for '%s'\n", animation_name.c_str(),
-			    map_object_name.c_str());
+			log_err("ABORTING. Unknown animation '%s' for '%s'\n", animation_name.c_str(),
+			        map_object_name.c_str());
 			return;
 		}
 	}
 
 	// Representative animation for collecting global paramaters for the animation set
-	const Animation& representative_animation = g_gr->animations().get_animation(
+	const Animation& representative_animation = g_animation_manager->get_animation(
 	   is_fontier_or_flag_animation ?
-	      frontier_or_flag_animation_id :
-	      descr->get_animation(is_directional ? animation_name + "_ne" : animation_name, nullptr));
+         frontier_or_flag_animation_id :
+         descr->get_animation(is_directional ? animation_name + "_ne" : animation_name, nullptr));
 
 	const int nr_frames = representative_animation.nr_frames();
 
@@ -249,9 +248,9 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		}
 	}
 
-	log("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS " scales.\n",
-	    animation_name.c_str(), map_object_name.c_str(), nr_frames,
-	    representative_animation.available_scales().size());
+	log_info("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS " scales.\n",
+	         animation_name.c_str(), map_object_name.c_str(), nr_frames,
+	         representative_animation.available_scales().size());
 
 	const int columns = floor(sqrt(nr_frames));
 	int rows = 1;
@@ -264,9 +263,9 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		lua_animation->add_int("rows", rows);
 		lua_animation->add_int("columns", columns);
 	} else {
-		log("NOTE: Animation '%s' for '%s' has less than 2 images and doesn't need a "
-		    "spritesheet. Add it to the \"animations\" table.\n",
-		    animation_name.c_str(), map_object_name.c_str());
+		log_warn("NOTE: Animation '%s' for '%s' has less than 2 images and doesn't need a "
+		         "spritesheet. Add it to the \"animations\" table.\n",
+		         animation_name.c_str(), map_object_name.c_str());
 	}
 
 	const int representative_frame = representative_animation.representative_frame();
@@ -290,19 +289,17 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 					throw wexception(
 					   "Missing directional animation '%s\'", directional_animname.c_str());
 				}
-				const std::string filename_base = (boost::format("%s%s_%d") % animation_name %
-				                                   animation_direction_names[dir - 1] % scale)
-				                                     .str();
-				const Animation& directional_animation = g_gr->animations().get_animation(
+				const std::string filename_base =
+				   format("%s%s_%d", animation_name, animation_direction_names[dir - 1], scale);
+				const Animation& directional_animation = g_animation_manager->get_animation(
 				   descr->get_animation(directional_animname, nullptr));
 				spritesheets_to_write.emplace_back(
 				   new SpritesheetData(filename_base, directional_animation, scale));
 			}
 
 		} else {
-			spritesheets_to_write.emplace_back(
-			   new SpritesheetData((boost::format("%s_%d") % animation_name % scale).str(),
-			                       representative_animation, scale));
+			spritesheets_to_write.emplace_back(new SpritesheetData(
+			   format("%s_%d", animation_name, scale), representative_animation, scale));
 		}
 
 		// Find margins for trimming
@@ -358,8 +355,12 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		}
 	}
 
-	log("LUA CODE:\n%s\n", lua_animation->as_string().c_str());
-	log("Done!\n");
+	log_info("LUA CODE:");
+#ifdef _WIN32
+	log_info("%s", lua_animation->as_string().c_str());
+#endif
+	std::cout << lua_animation->as_string() << std::endl;
+	log_info("Done!\n");
 }
 
 }  // namespace
@@ -371,8 +372,9 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
  */
 
 int main(int argc, char** argv) {
+	set_testcase_logging_dir();
 	if (argc != 4) {
-		log("Usage: %s <mapobject_name> <animation_name> <existing-output-path>\n", argv[0]);
+		log_err("Usage: %s <mapobject_name> <animation_name> <existing-output-path>\n", argv[0]);
 		return 1;
 	}
 
@@ -384,10 +386,19 @@ int main(int argc, char** argv) {
 		initialize();
 		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		Widelands::EditorGameBase egbase(nullptr);
+
+		// Load a tribe to trigger registering the tribes
+		egbase.mutable_descriptions()->load_tribe("barbarians");
+
+		// Load the object for the animation
+		Notifications::publish(Widelands::NoteMapObjectDescription(
+		   map_object_name, Widelands::NoteMapObjectDescription::LoadType::kObject));
+		// Write spritesheet
 		write_animation_spritesheets(egbase, map_object_name, animation_name, out_filesystem.get());
+		// Cleanup
 		egbase.cleanup_objects();
 	} catch (std::exception& e) {
-		log("Exception: %s.\n", e.what());
+		log_err("Exception: %s.\n", e.what());
 		cleanup();
 		return 1;
 	}

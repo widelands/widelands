@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,22 +12,21 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "editor/ui_menus/tool_change_resources_options_menu.h"
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_resources_tool.h"
-#include "graphic/graphic.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 
 constexpr int kMaxValue = 63;
 
@@ -41,7 +40,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
    UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 370, 120, _("Resources"), increase_tool),
      increase_tool_(increase_tool),
-     box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      change_by_(&box_,
                 0,
                 0,
@@ -66,8 +65,9 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              _("Set amount to:"),
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
-     resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1),
-     cur_selection_(&box_, 0, 0, 0, 0, "", UI::Align::kCenter) {
+     resources_box_(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1),
+     cur_selection_(
+        &box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, "", UI::Align::kCenter) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/
@@ -87,11 +87,11 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 
 	// Add resource buttons
 	resources_box_.add_inf_space();
-	const Widelands::World& world = parent.egbase().world();
-	for (Widelands::DescriptionIndex i = 0; i < world.get_nr_resources(); ++i) {
-		const Widelands::ResourceDescription& resource = *world.get_resource(i);
-		radiogroup_.add_button(&resources_box_, Vector2i::zero(),
-		                       g_gr->images().get(resource.representative_image()),
+	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
+	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_resources(); ++i) {
+		const Widelands::ResourceDescription& resource = *descriptions.get_resource_descr(i);
+		radiogroup_.add_button(&resources_box_, UI::PanelStyle::kWui, Vector2i::zero(),
+		                       g_image_cache->get(resource.representative_image()),
 		                       resource.descname());
 		resources_box_.add(radiogroup_.get_first_button(), UI::Box::Resizing::kFillSpace);
 	}
@@ -101,7 +101,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	box_.add(&resources_box_, UI::Box::Resizing::kFullSize);
 	box_.set_size(box_.get_w(), box_.get_h() + 4 * vspacing() + resources_box_.get_h());
 
-	radiogroup_.set_state(increase_tool_.get_cur_res());
+	radiogroup_.set_state(increase_tool_.get_cur_res(), false);
 
 	radiogroup_.changed.connect([this]() { change_resource(); });
 	radiogroup_.clicked.connect([this]() { change_resource(); });
@@ -113,6 +113,8 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	box_.set_size(box_.get_w(), box_.get_h() + vspacing() + cur_selection_.get_h());
 	set_inner_size(get_inner_w(), box_.get_h() + 1 * vmargin());
 	update();
+
+	initialization_complete();
 }
 
 void EditorToolChangeResourcesOptionsMenu::update_change_by() {
@@ -151,7 +153,15 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
  */
 void EditorToolChangeResourcesOptionsMenu::update() {
 	cur_selection_.set_text(
-	   (boost::format(_("Current: %s")) %
-	    eia().egbase().world().get_resource(increase_tool_.set_tool().get_cur_res())->descname())
-	      .str());
+	   format(_("Current: %s"), eia()
+	                               .egbase()
+	                               .descriptions()
+	                               .get_resource_descr(increase_tool_.set_tool().get_cur_res())
+	                               ->descname()));
+}
+
+void EditorToolChangeResourcesOptionsMenu::update_window() {
+	radiogroup_.set_state(increase_tool_.get_cur_res(), false);
+	change_by_.set_value(increase_tool_.get_change_by());
+	set_to_.set_value(static_cast<int>(increase_tool_.set_tool().get_set_to()));
 }

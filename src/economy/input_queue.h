@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -43,13 +42,12 @@ public:
 	 * Destructor.
 	 * Does nothing currently.
 	 */
-	virtual ~InputQueue() {
-	}
+	virtual ~InputQueue() = default;
 
 	/**
 	 * The declaration of a callback function which can be registered to get notified
 	 * when wares or workers arrive at the building and should be added to the queue.
-	 * @param game The game the queue is part of.
+	 * @param g The game the queue is part of.
 	 * @param q The \c InputQueue the ware or worker should be added to.
 	 * @param ware The index of the ware or worker which arrived.
 	 * @param worker The worker which arrived, if the queue is a WorkersQueue.
@@ -62,7 +60,7 @@ public:
 	 * Returns the index of the ware or worker which is handled by the queue.
 	 * @return The DescriptionIndex of whatever is stored here.
 	 */
-	DescriptionIndex get_index() const {
+	[[nodiscard]] DescriptionIndex get_index() const {
 		return index_;
 	}
 
@@ -71,7 +69,7 @@ public:
 	 * This is a value which can be influenced by the player with the provided buttons.
 	 * @return The maximum number of wares or workers which should be here.
 	 */
-	Quantity get_max_fill() const {
+	[[nodiscard]] Quantity get_max_fill() const {
 		return max_fill_;
 	}
 
@@ -79,7 +77,7 @@ public:
 	 * Whether wares or workers are stored in this queue.
 	 * @return Whether wares or workers are stored in this queue.
 	 */
-	WareWorker get_type() const {
+	[[nodiscard]] WareWorker get_type() const {
 		return type_;
 	}
 
@@ -87,7 +85,7 @@ public:
 	 * The maximum size of the queue as defined by the building.
 	 * @return The maximum size.
 	 */
-	Quantity get_max_size() const {
+	[[nodiscard]] Quantity get_max_size() const {
 		return max_size_;
 	}
 
@@ -97,7 +95,7 @@ public:
 	 * be smaller than get_max_size().
 	 * @return The amount at this moment.
 	 */
-	virtual Quantity get_filled() const = 0;
+	[[nodiscard]] virtual Quantity get_filled() const = 0;
 
 	/**
 	 * The amount of missing wares or workers which have been requested
@@ -105,7 +103,7 @@ public:
 	 * This will never be larger than (get_max_fill()-get_filled()).
 	 * @return The amount at this moment.
 	 */
-	uint32_t get_missing() const;
+	[[nodiscard]] uint32_t get_missing() const;
 
 	/**
 	 * Clear the queue appropriately.
@@ -130,16 +128,16 @@ public:
 	/**
 	 * Add the wares in this queue to the given economy (used in accounting).
 	 * Implementing classes have to set the economy of the potential request.
-	 * @param The economy to add the wares or workers to.
+	 * @param e The economy to add the wares or workers to.
 	 */
 	virtual void add_to_economy(Economy& e) = 0;
 
 	/**
 	 * Change size of the queue.
 	 * This influences how many wares can be in here at maximum.
-	 * @param q The new maximum size.
+	 * @param size The new maximum size.
 	 */
-	void set_max_size(Quantity q);
+	void set_max_size(Quantity size);
 
 	/**
 	 * Change the number of wares that should be available in this queue.
@@ -148,9 +146,9 @@ public:
 	 * but if there are more wares than that in the queue, they will not get
 	 * lost (the building should drop them). This is the method called when the player
 	 * pressed the buttons in the gui.
-	 * @param q The maximum number of wares which should be stored here.
+	 * @param size The maximum number of wares which should be stored here.
 	 */
-	virtual void set_max_fill(Quantity q);
+	virtual void set_max_fill(Quantity size);
 
 	/**
 	 * Change fill status of the queue. This creates or removes wares as required.
@@ -165,16 +163,20 @@ public:
 	 * is consuming at full speed.
 	 *
 	 * This interval is merely a hint for the Supply/Request balancing code.
-	 * @param i The interval in ms.
+	 * @param time The interval in ms.
 	 */
-	void set_consume_interval(uint32_t i);
+	void set_consume_interval(const Duration& time);
 
 	/**
 	 * Returns the player owning the building containing this queue.
 	 * @return A reference to the owning player.
 	 */
-	const Player& owner() const {
+	[[nodiscard]] const Player& owner() const {
 		return owner_.owner();
+	}
+
+	[[nodiscard]] bool matches(const Request& r) const {
+		return request_.get() == &r;
 	}
 
 	/**
@@ -183,10 +185,7 @@ public:
 	 * @param game The game this queue will be part of.
 	 * @param mol The game/map loader that handles the lading. Required to pass to Request::read().
 	 */
-	void read(FileRead& f,
-	          Game& g,
-	          MapObjectLoader& mol,
-	          const TribesLegacyLookupTable& tribes_lookup_table);
+	void read(FileRead& fr, Game& game, MapObjectLoader& mol);
 
 	/**
 	 * Writes the state of this class.
@@ -194,7 +193,7 @@ public:
 	 * @param game The game this queue is part of.
 	 * @param mos The game/map saver that handles the saving. Required to pass to Request::write().
 	 */
-	void write(FileWrite& w, Game& g, MapObjectSaver& s);
+	void write(FileWrite& fw, Game& game, MapObjectSaver& mos);
 
 protected:
 	/**
@@ -210,21 +209,21 @@ protected:
 	 * Returns the mutable player owning the building containing this queue.
 	 * @return A pointer to the owning player.
 	 */
-	Player* get_owner() const {
+	[[nodiscard]] Player* get_owner() const {
 		return owner_.get_owner();
 	}
 
 	/**
 	 * Called when an item arrives at the owning building.
 	 * Most likely only one of \c i or \c w will be valid.
-	 * @param g The game the queue is part of.
+	 * @param game The game the queue is part of.
 	 * @param r The request for the ware or worker.
-	 * @param i The index of the arrived ware or worker.
-	 * @param w The arrived worker or \c nullptr.
-	 * @param b The building where the ware or worker arrived at.
+	 * @param index The index of the arrived ware or worker.
+	 * @param worker The arrived worker or \c nullptr.
+	 * @param target The building where the ware or worker arrived at.
 	 */
-	static void
-	request_callback(Game& g, Request& r, DescriptionIndex i, Worker* w, PlayerImmovable& b);
+	static void request_callback(
+	   Game& game, Request& r, DescriptionIndex index, Worker* worker, PlayerImmovable& target);
 
 	/**
 	 * Updates the request.
@@ -247,7 +246,7 @@ protected:
 	 * @param game The game this queue will be part of.
 	 * @param mol The game/map loader that handles the loading.
 	 */
-	virtual void read_child(FileRead& f, Game& g, MapObjectLoader& mol) = 0;
+	virtual void read_child(FileRead& fr, Game& game, MapObjectLoader& mol) = 0;
 
 	/**
 	 * Writes the state of the subclass.
@@ -255,7 +254,7 @@ protected:
 	 * @param game The game this queue is part of.
 	 * @param mos The game/map saver that handles the saving.
 	 */
-	virtual void write_child(FileWrite& w, Game& g, MapObjectSaver& s) = 0;
+	virtual void write_child(FileWrite& fw, Game& game, MapObjectSaver& s) = 0;
 
 	/// The building this queue is part of.
 	PlayerImmovable& owner_;
@@ -270,15 +269,15 @@ protected:
 	const WareWorker type_;
 
 	/// Time in ms between consumption at full speed.
-	uint32_t consume_interval_;
+	Duration consume_interval_{0U};
 
 	/// The currently pending request.
 	std::unique_ptr<Request> request_;
 
 	/// The function to call on fulfilled request.
-	CallbackFn* callback_fn_;
+	CallbackFn* callback_fn_{nullptr};
 	/// Unspecified data to pass to function.
-	void* callback_data_;
+	void* callback_data_{nullptr};
 };
 }  // namespace Widelands
 

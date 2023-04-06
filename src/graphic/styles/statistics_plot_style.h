@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2020 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -40,19 +39,19 @@ struct StatisticsPlotStyleInfo {
 	     zero_line_color_(init_zero_line_color) {
 	}
 
-	const UI::FontStyleInfo& x_tick_font() const {
-		return *x_tick_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& x_tick_font() const {
+		return *x_tick_font_;
 	}
-	const UI::FontStyleInfo& y_min_value_font() const {
-		return *y_min_value_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& y_min_value_font() const {
+		return *y_min_value_font_;
 	}
-	const UI::FontStyleInfo& y_max_value_font() const {
-		return *y_max_value_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& y_max_value_font() const {
+		return *y_max_value_font_;
 	}
-	const RGBColor& axis_line_color() const {
+	[[nodiscard]] const RGBColor& axis_line_color() const {
 		return axis_line_color_;
 	}
-	const RGBColor& zero_line_color() const {
+	[[nodiscard]] const RGBColor& zero_line_color() const {
 		return zero_line_color_;
 	}
 

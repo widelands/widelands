@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -36,19 +35,19 @@ public:
 	class ViewArea {
 	public:
 		// View in map pixels that is spanned by this.
-		const Rectf& rect() const {
+		[[nodiscard]] const Rectf& rect() const {
 			return rect_;
 		}
 
 		// Returns true if 'coords' is contained inside this view. Containing
 		// is defined as such that the shortest distance between the center of
 		// 'rect()' is smaller than (rect().w / 2, rect().h / 2).
-		bool contains(const Widelands::Coords& coords) const;
+		[[nodiscard]] bool contains(const Widelands::Coords& coords) const;
 
 		// Returns a map pixel 'p' such that rect().x <= p.x <= rect().x + rect().w similar
 		// for y. This requires that 'contains' would return true for 'coords', otherwise this will
 		// be an infinite loop.
-		Vector2f find_pixel_for_coordinates(const Widelands::Coords& coords) const;
+		[[nodiscard]] Vector2f find_pixel_for_coordinates(const Widelands::Coords& coords) const;
 
 	private:
 		friend class MapView;
@@ -56,7 +55,7 @@ public:
 		ViewArea(const Rectf& rect, const Widelands::Map& map);
 
 		// Returns true if 'map_pixel' is inside this view area.
-		bool contains_map_pixel(const Vector2f& map_pixel) const;
+		[[nodiscard]] bool contains_map_pixel(const Vector2f& map_pixel) const;
 
 		const Rectf rect_;
 		const Widelands::Map& map_;
@@ -68,22 +67,11 @@ public:
 		View() : View(Vector2f::zero(), 1.0f) {
 		}
 
-		bool zoom_near(float other_zoom) const {
-			constexpr float epsilon = 1e-5;
-			return std::abs(zoom - other_zoom) < epsilon;
-		}
+		[[nodiscard]] bool zoom_near(float other_zoom) const;
 
-		bool view_near(const View& other) const {
-			constexpr float epsilon = 1e-5;
-			return zoom_near(other.zoom) && std::abs(viewpoint.x - other.viewpoint.x) < epsilon &&
-			       std::abs(viewpoint.y - other.viewpoint.y) < epsilon;
-		}
+		[[nodiscard]] bool view_near(const View& other) const;
 
-		bool view_roughly_near(const View& other) const {
-			return zoom_near(other.zoom) &&
-			       std::abs(viewpoint.x - other.viewpoint.x) < g_gr->get_xres() / 2 &&
-			       std::abs(viewpoint.y - other.viewpoint.y) < g_gr->get_yres() / 2;
-		}
+		[[nodiscard]] bool view_roughly_near(const View& other) const;
 
 		// Mappixel of top-left pixel of this MapView.
 		Vector2f viewpoint;
@@ -103,33 +91,28 @@ public:
 	struct TimestampedMouse {
 		TimestampedMouse(uint32_t init_t, Vector2f init_pixel) : t(init_t), pixel(init_pixel) {
 		}
-		TimestampedMouse() : t(0), pixel(Vector2f::zero()) {
-		}
-		uint32_t t;
-		Vector2f pixel = Vector2f::zero();
+		TimestampedMouse() = default;
+		uint32_t t{0U};
+		Vector2f pixel{Vector2f::zero()};
 	};
 
-	MapView(UI::Panel* const parent,
-	        const Widelands::Map& map,
-	        const int32_t x,
-	        const int32_t y,
-	        const uint32_t w,
-	        const uint32_t h);
-	virtual ~MapView();
+	MapView(
+	   UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h);
+	~MapView() override = default;
 
 	// Called whenever the view changed, also during automatic animations.
-	boost::signals2::signal<void()> changeview;
+	Notifications::Signal<> changeview;
 
 	// Called whenever the view changed by a call to scroll_to_field or scroll_to_map_pixel, or by
 	// starting to drag the view.
 	// Note: This signal is called *before* the view actually starts to move.
-	boost::signals2::signal<void()> jump;
+	Notifications::Signal<> jump;
 
 	// Called when the user clicked on a field.
-	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&)> field_clicked;
+	Notifications::Signal<const Widelands::NodeAndTriangle<>&> field_clicked;
 
 	// Called when the field under the mouse cursor has changed.
-	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&)> track_selection;
+	Notifications::Signal<const Widelands::NodeAndTriangle<>&> track_selection;
 
 	// Defines if an animation should be immediate (one-frame) or nicely
 	// animated for the user to follow.
@@ -193,15 +176,16 @@ public:
 	                           RenderTarget* dst);
 
 	// Not overriden from UI::Panel, instead we expect to be passed the data through.
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
-	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
-	bool handle_key(bool down, SDL_Keysym code);
-
-private:
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
+	void think() override;
 	void stop_dragging();
 
+private:
 	// Returns the target view of the last entry in 'view_plans_' or (now,
 	// 'view_') if we are not animating.
 	TimestampedView animation_target_view() const;
@@ -211,7 +195,7 @@ private:
 	TimestampedMouse animation_target_mouse() const;
 
 	// Turns 'm' into the corresponding NodeAndTrinangle and calls 'track_selection'.
-	Widelands::NodeAndTriangle<> track_sel(const Vector2i& m);
+	Widelands::NodeAndTriangle<> track_sel(const Vector2i& p);
 
 	Vector2f to_panel(const Vector2f& map_pixel) const;
 	Vector2f to_map(const Vector2i& panel_pixel) const;
@@ -225,7 +209,12 @@ private:
 
 	View view_;
 	Vector2i last_mouse_pos_;
-	bool dragging_;
+	bool dragging_{false};
+
+	bool edge_scrolling_;
+	bool invert_movement_;
+	int8_t is_scrolling_x_{0};
+	int8_t is_scrolling_y_{0};
 
 	// The queue of plans to execute as animations.
 	std::deque<std::deque<TimestampedView>> view_plans_;

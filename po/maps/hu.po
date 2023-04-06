@@ -1,20 +1,25 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
+# Tóth András <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2018
 # GunChleoc, 2016
+# GunChleoc, 2014,2016
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
+# litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
+# Tóth András <txa-dev@posteo.hu>, 2021-2023
+# zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-05-22 17:15+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2023-01-28 03:03+0000\n"
+"PO-Revision-Date: 2015-02-02 13:53+0000\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2023\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,15 +37,25 @@ msgid ""
 "Atlanteans struggle to make a new home for themselves."
 msgstr "Miután a megmaradt atlantisziak egy rejtélyes szigeten kötnek ki Atlantisz közelében, nagy küzdelmek árán új otthont építenek maguknak."
 
+#: ../../data/campaigns/atl02.wmf/elemental:8
+msgid "Struggling For a New Home Again"
+msgstr "Küzdelem egy újabb otthonért"
+
+#: ../../data/campaigns/atl02.wmf/elemental:10
+msgid ""
+"After the quick escape from the drowning island, the Atlanteans around "
+"Jundlina are faced with new challenges."
+msgstr "Miután megmenekültek a süllyedő szigetről, a Jundlinát követő atlantisziak új kihívásokkal kerülnek szembe."
+
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
-msgstr "Egy hely, amit otthonnak hívunk"
+msgstr "Egy hely, amit otthonnak hívhatunk"
 
 #: ../../data/campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr "Ebben a küldetésben a magasabb szintű termelő épületek kerülnek bemutatásra."
+msgstr "Ebben a küldetésben a magasabb szintű termelő épületek és a bányászat kerülnek bemutatásra."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
@@ -50,37 +65,37 @@ msgstr "Ez a föld a miénk"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr "Ez az oktatójáték elmagyarázza a katonai és kiképzőépületek kezelését, és bemutatja a harcot."
+msgstr "Ez az oktatójáték elmagyarázza a katonai és a kiképző épületek kezelését, és bemutatja a harc menetét."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Könnyű."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Közepes."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Nehéz."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr ""
+msgstr "Kihívás."
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Második Birodalom"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "A barbárok bemutatása."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -98,17 +113,17 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Amikor Chat'Karuth meghalt, nagyon öreg, három erős és törekvő fiú apja és egy erős hadúr volt, olyan hadsereggel, amely bármelyik ellenséget képes legyőzni, amely szembe mer szállni az ősi erdővel. Dicső uralkodása után, Chat'Karuth a legidősebb fiára hagyta a trónt – ezzel magára haragítva másik két fiát. Az öreg hadúr tudta ezt. Ahogy az apja meghagyta neki, Thron elhagyta Al'thunran fővárosát, a korona otthonát a fák között, és visszavonta erőit a magas hegyekbe, ahol eltemette apját és megesküdött az Isteneknek, hogy egy nap visszatér és helyreállítja a rendet. Amíg testvérei vak háborút indítottak Thron és katonái ellen, akiket hátrahagyott, hogy megvédjék Al'thunran határát, a fiatal hadúr igyekezett maga mellé állítani nagyravágyó testvéreit, hogy a törzseket újra egy zászló alatt egyesíthesse."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "A száműzetés hónapjai"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr ""
+msgstr "A Birodalom bemutatása."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:75
@@ -123,17 +138,17 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Hat hónappal ezelőtt Lutiust – a Birodalom egy ifjú tábornokát – 150 katonával az északi erdőkön túli határvidékre küldték, ahol barbár törzsek léptek a Birodalom földjére. Feladata volt a Birodalom területének védelme. Kezdetben minden nyugodt volt. Még néhány barbár gyermekkel is elbeszélgetett, és egy békés életről álmodozott – egymás mellett élve ezzel az ősi törzzsel. Kezdte magát biztonságban érezni, és katonái egyre inkább figyelmen kívül hagyták a lehetséges ellenséget. Ezt lett a vesztük. Egy márciusi éjszakán 100 barbár gyalogos megtámadta a felkészületlen sereget, mire az teljesen szétzilálódott. Csak Lutius és egy maroknyi katonája menekült meg."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Hajsza a tűz után"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Az Atlantisziak bemutatása."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:98
@@ -143,35 +158,35 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Amikor istenük csalódott az atlantisziakban, és szigetüket elsüllyesztette, egy asszony igazságért és népe új esélyéért vívott küzdelme legendává lett. Jundlina, ki a megmaradt atlantisziakat a világ egy új részére, új jövőbe vezette, kora leghatalmasabb embere lett – de ezért nagy árat fizetett: emberségét és lelkét."
 
 #. TRANSLATORS: The name of a Frisian campaign
-#: ../../data/campaigns/campaigns.lua:107
+#: ../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Vízből tűzbe"
 
 #. TRANSLATORS: A short description of a campaign
-#: ../../data/campaigns/campaigns.lua:110
+#: ../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "A Frízek bemutatása."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
-#: ../../data/campaigns/campaigns.lua:115
+#: ../../data/campaigns/campaigns.lua:116
 msgid "Sailor (Tricky)"
-msgstr ""
+msgstr "Tengerész (Nehéz)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
-#: ../../data/campaigns/campaigns.lua:117
+#: ../../data/campaigns/campaigns.lua:118
 msgid "Steersman (Very Hard)"
-msgstr ""
+msgstr "Kormányos (Nagyon Nehéz)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
-#: ../../data/campaigns/campaigns.lua:119
+#: ../../data/campaigns/campaigns.lua:120
 msgid "Captain (Unreasonable)"
-msgstr ""
+msgstr "Kapitány (Lehetetlen)"
 
 #. TRANSLATORS: A long description of a campaign
-#: ../../data/campaigns/campaigns.lua:124
+#: ../../data/campaigns/campaigns.lua:125
 msgid ""
 "Living off the ocean is a constant struggle, and even more so for the "
 "inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
@@ -179,7 +194,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Az óceán melletti élet folyamatos küzdelem, és ez még inkább igaz a Jeges-tenger menti fríz lakosok esetén. A legutóbbi szökőár, amely emberemlékezet óta a legpusztítóbb volt, csak egy példa a nehézségekre, amelyekkel a frízek kénytelenek szembenézni – vagy egy jel az istenektől, hogy a frissen letelepedett törzsnek teljesen új otthont kell keresnie?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -191,7 +206,7 @@ msgstr "Senki"
 
 #: ../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
-msgstr "Még nem készült el."
+msgstr "Sajnáljuk, ezt a térképet még nem készítették el."
 
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
@@ -204,7 +219,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr "Lutius, miután elveszített egy fontos csatát a barbárok ellen, miáltal a Birodalom egy jelentős része elveszett, elhagyja Fremilt, hogy új életet kezdjen. De sorsa hajóját egy nagy viharba sodorja úgy, hogy az majdnem megsemmisül. Csak nagy szerencsével sikerül a sérült hajót egy ismeretlen, homokos parton kikötnie, és megmentenie embereit. Egyelőre."
+msgstr "Lutius, miután elveszített egy fontos csatát a barbárok ellen, miáltal a Birodalom egy jelentős része elveszett, elhagyja Fremilt, hogy új életet kezdjen. De a sors hajóját egy nagy viharba sodorja úgy, hogy az majdnem megsemmisül. Csak nagy szerencsével sikerül a sérült hajót egy ismeretlen, homokos parton kikötnie, és megmentenie embereit. Egyelőre."
 
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -220,13 +235,13 @@ msgstr "Végül megjavították a hajót, így Lutius és emberei folytatták ú
 
 #: ../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Neptunus bosszúja"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr "Úton hazafelé, hogy megvédjék a Birodalmat, Lutiust és legénységét meglepte az istenek akarata."
+msgstr "Úton hazafelé, hogy megvédjék a Birodalmat, Lutius és legénysége számára újabb meglepetést tartogatott az istenek akarata."
 
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
@@ -237,11 +252,11 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr "Miután hazatértek, Lutius és legénysége egy romokban álló gazdaságot talál. A gazdaság szűk keresztmetszeteinek megszüntetése a legfontosabb lépés a Birodalom dicsőségének helyreállításában."
+msgstr "Miután hazatértek, Lutius és legénysége egy romokban álló gazdaságot talál. A gazdaság szűk keresztmetszeteinek megszüntetése a legfontosabb lépés a Birodalom dicsőségének helyreállításához."
 
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr "A nagy vihardagály"
+msgstr "A nagy szökőár"
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -250,23 +265,55 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr "1362-ben, a Északi-Fríz-szigetek lakóinak csendes, békés életét az emberemlékezet legnagyobb vihardagálya zavarta meg: Szent Marcell áradása. Ez valóban csak még egy vihar, vagy jel az istenektől, hogy a fríz közösség már nem kívánatos Langeness szigetén?"
+msgstr "1362-ben, a Északi-Fríz-szigetek lakóinak csendes, békés életét az emberemlékezet óta legnagyobb szökőár zavarta meg: Szent Marcell áradása. Ez valóban csak egy újabb vihar lenne, vagy jel az istenektől, hogy a fríz közösség már nem kívánatos Langeness szigetén?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr "Ez a küldetés történelmi helyzetbe van helyezve, de a történet fikció."
+msgstr "Ez a küldetés történelmi helyzetbe van helyezve, de a történet a képzelet műve."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr "Egy jeges köszöntés"
+msgstr "Jeges fogadtatás"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr "Reebaud és a törzse megérkeztek Északra. De az érkezésük a fagyott sztyeppék és a hóval borított hegyek között minden csak nem biztató…"
+
+#: ../../data/campaigns/fri03.wmf/elemental:8
+msgid "Friends in Need"
+msgstr "Barátok bajban"
+
+#: ../../data/campaigns/fri03.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe are living happily in the North. Meanwhile, the "
+"countries they have left behind are all but peaceful, and an old friend is "
+"in desperate need for their help…"
+msgstr "Reebaud és törzse boldogan élnek északon. Eközben a hátrahagyott országaik egyáltalán nem békések, és egy régi barátnak kétségbeesett szüksége van a segítségükre…"
+
+#: ../../data/campaigns/fri04.wmf/elemental:8
+msgid "Two Friends Reunited"
+msgstr "Két barát újra együtt"
+
+#: ../../data/campaigns/fri04.wmf/elemental:10
+msgid ""
+"Claus and Henneke Lembeck have reached the North at last. But will they be "
+"able to convince Reebaud to send them aid?"
+msgstr "Claus és Henneke Lembeck végre megérkeztek északra. De vajon rá tudják-e venni Reebaudot, hogy segítséget nyújtson nekik?"
+
+#: ../../data/campaigns/fri05.wmf/elemental:8
+msgid "Reconquest"
+msgstr "Visszatérés"
+
+#: ../../data/campaigns/fri05.wmf/elemental:10
+msgid ""
+"Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
+"for battle against the invaders. They must gather allies and plan their "
+"strategy, but the foe is never far away…"
+msgstr "Végre újra Észak-Fríziában, Claus, Henneke és Reebaud felkészülnek, hogy szembe szállhassanak a betolakodókkal. Szövetségeseket kell gyűjteniük és haditervet készíteniük, de közben az ellenség is fenyeget…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -276,7 +323,7 @@ msgstr "Alapvető vezérlés"
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr "Ebben az oktatójátékban megtanulod, hogyan kell navigálni a Widelandsben, illetve, hogy miként lehet épületeket és utakat építeni."
+msgstr "Ebben az oktatójátékban megtanulsz eligazodni a Widelandsben, és megtanulod, hogy hogyan lehet épületeket és utakat építeni."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 msgid "Warfare"
@@ -287,7 +334,7 @@ msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr ""
+msgstr "Ebben az oktatójátékban megismered a hadviselés titkait: hogyan toborozhatsz katonákat, miként fejlesztheted őket, és hogyan vezetheted őket a harcban. A felderítéssel is megismerkedhetsz."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -297,7 +344,7 @@ msgstr "Hajózás"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "Ebben az oktatójátékban megismered a hajózást, azon belül a hajók és a kikötők kezelését valamint a kompok és víziutak használatát."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -311,7 +358,7 @@ msgstr "Ebben az oktatójátékban megtudod, milyen lehetőségeket kínál a Wi
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
-msgstr "Archipelago-tenger"
+msgstr "Finn-szigetvilág"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
@@ -322,26 +369,26 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr "Svédország és Finnország között fekszik egy szigetvilág. Ez a hihetetlen szépségű hely se nem föld, se nem tenger, hanem mindkettő. Néhány száz kilométeren belül, nem kevesebb mint 50.000 sziget és szigetecske található, a legtöbb nem nagyobb néhány holdnál. A klíma egész enyhe a szélességi fokhoz képest; a termesztés virágzik, a bogyókból sok van, és bőséges a hal. A hely kis lakossága sosem ismerte az éhínséget. Ti gazemberek nem tudtátok ezt a kis paradicsomot békén hagyni, ugye?"
+msgstr "Svédország és Finnország között fekszik egy szigetvilág. Ez a hihetetlen szépségű hely se nem föld, se nem tenger, hanem mindkettő. Néhány száz kilométeren belül, nem kevesebb mint 50.000 sziget és szigetecske található, a legtöbb nem nagyobb néhány holdnál. A klíma egész enyhe a szélességi fokhoz képest; a földművelés virágzik, bogyókból sok van, és bőséges a hal. A szigetvilág ritka lakossága sosem ismerte az éhínséget. De ti hódításra éhes gazemberek nem tudjátok ezt a kis paradicsomot békén hagyni…"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr "A nagy épülethelyek ritkák azokon a kis szigeteken. Mérlegeld a nagy épületek építését rajtuk. Néha nagy katonai épületekre lesz szükséged, hogy a következő szigetig terjeszkedj. Az MI rosszul fog teljesíteni."
+msgstr "A kis szigeteken ritkák a nagy épületeknek alkalmas helyek. Gondosan használd ki ezeket! Néha nagy katonai épületekre lesz szükséged, hogy a következő szigetig terjeszkedj. A mesterséges intelligencia nem tud jól játszani ezen a térképen."
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:8
+#: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
-msgstr ""
+msgstr "Astoria 2.R"
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:10
-msgid "Long, economic play in beautyfull land, try every player!!"
-msgstr ""
-
-#: ../../data/maps/Astoria 2.R.wmf/elemental:9
+#: ../../data/maps/Astoria_2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com – szerkesztette Nordfriese"
+
+#: ../../data/maps/Astoria_2.R.wmf/elemental:10
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr "Hosszú, gazdaságra épülő játék egy gyönyörű tájon. Próbálj ki minden játékost!"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -373,16 +420,16 @@ msgid ""
 "another confrontation."
 msgstr "Akár a természet legfurább alkotása, akár egy őrült (és sakkmániás) isten teremtménye, e hátborzongató csatatér két ellenfél újabb küzdelmére vár."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:8
+#: ../../data/maps/Comet_Island.wmf/elemental:8
 msgid "Comet Island"
 msgstr "Üstökös-sziget"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:9
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
+#: ../../data/maps/Comet_Island.wmf/elemental:9
+#: ../../data/maps/Glacier_Lake.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
 msgstr "Nasenbaer – szerkesztette: king_of_nowhere"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:10
+#: ../../data/maps/Comet_Island.wmf/elemental:10
 msgid ""
 "A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
 " you have not seen any reason to sail there, but yesterday a big fireball "
@@ -391,7 +438,7 @@ msgid ""
 "of this island before other tribes will follow."
 msgstr "Egy apró, névtelen sziget fekszik néhány mérföldre Gerion partjával szemben. Eddig nem volt okod rá, hogy odahajózz, de tegnap az égből alászállt egy nagy tűzgolyó, megérintve a sziget közepét. Vajon ez az Istenek jele lenne? Úgy hiszed, igen, és reméled, hogy néped megtalálja a sziget kincsét, mielőtt más népek követnének."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:11
+#: ../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
 "Red player is close to the ores, but has little fertile terrain. Yellow "
 "player has plenty of good land, but must move far from his starting position"
@@ -407,49 +454,45 @@ msgstr "Kráter"
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the"
 " crater. Two tribes are now fighting for the rich resources."
-msgstr "Minekutána egy mennykő csapódott egy maroknyi hegybe, az élet virul a kráterben. Két törzs most harcot vív a bő forrásokért."
+msgstr "Réges régen egy meteor csapódott egy kis hegységbe. Mára élet virul a kráterben. Két törzs vív most harcot a bőséges erőforrásokért."
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Átkelés a horizonton"
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
+msgid "Kristin – edited by 3plus4i"
+msgstr "Kristin – szerkesztette 3plus4i"
+
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Legénység a fedélzetre, és irány a horizont."
 
-#: ../../data/maps/Desert_Tournament.wmf/elemental:8
-msgid "Desert Tournament"
-msgstr "Sivatagi bajnokság"
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
+msgid "This map is not winnable with the ‘Autocrat’ win condition."
+msgstr "Ez a térkép nem megnyerhető Zsarnok játékmódban."
 
-#: ../../data/maps/Desert_Tournament.wmf/elemental:10
-msgid ""
-"Four tribes struggle with their nearest neighbor to be the first to reach "
-"the mountain of gold that promises riches beyond belief. But can the two "
-"remaining ones share the resources wisely?"
-msgstr "Négy törzs küzd a legközelebbi szomszédja oldalán, hogy az elsők legyenek, akik elérik az arany hegyét, ami hihetetlen gazdagságot ígér. De vajon a két megmaradt képes bölcsen megosztani a forrásokat?"
-
-#: ../../data/maps/Dolomites_v3.wmf/elemental:8
+#: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
-msgstr ""
+msgstr "Dolomitok 3.0"
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:10
+#: ../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
 "The jewel of the alps, the dolomites mountain range has been declared a "
 "world heritage site for its pristine beauty. This map is an as-faithful-as-"
-"reasonable reconstruction of the area delimited by Cortina d'Ampezzo in the "
+"reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Az Alpok ékköve, a Dolomitok hegyei ősi szépségük miatt a Világörökség részévé lettek nyilvánítva. Ez a térkép amennyire lehet – és ésszerű – hű újraalkotása a területnek, amelyet északkeletről a Cortina d'Ampezzo, délkeletről pedig a Canazei határol. Ha már egy életre-halálra szóló viadalra kell kelned az ellenségeiddel, akkor azt egy gyönyörű helyen is megteheted."
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:11
+#: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
-"- there is lot of flat ground on the mountains. Unfortunately, most of it is"
-" vertical. Use wisely the little building space you have. - A fortress at "
-"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
-" army. Use the terrain to your advantage - chop all trees and expand "
-"wherever you can; it's the only way to find all the precious farm spaces - "
-"suggested teams: red+orange+blue+violet"
-msgstr ""
+"The mountains have an abundance of flat ground. Unfortunately, most of it is"
+" vertical – use the little building space you have wisely. A fortress at the"
+" mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"army – use the terrain to your advantage. Chop all trees and expand wherever"
+" you can – it’s the only way to find all the precious farm spaces."
+msgstr "Sok lapos terület van a hegyeken. Sajnos a legtöbb függőleges. Használd bölcsen a kevés építési helyet! Egy erőd a keskeny hegyi átjárónál komoly akadály lehet egy ellenséges hadseregnek. Használd előnyödre a terepet! Vágd ki az összes fát, és terjeszkedj ahol csak tudsz – csak így találhatod meg a mezőgazdaság számára alkalmas létfontosságú helyeket."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -459,46 +502,46 @@ msgstr "Elf erdők"
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
-msgstr "E smaragdzöld erdők lélegzetelállító bája számos törzset csábított arra, hogy megpróbálják magukévá tenni a vidéket."
+msgstr "E smaragdzöld erdők lélegzetelállító bája számos törzset csábított arra, hogy megpróbálják maguknak megszerezni a vidéket."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
 msgid "Escher_Goose_Fish"
-msgstr ""
+msgstr "Escher: Levegő és víz"
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
-msgstr ""
+msgstr "Azonos kezdőfeltételek 3 játékos számára."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
+msgstr "v0.2"
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:10
+#: ../../data/maps/Europa.wmf/elemental:8
+msgid "Europa 1.2"
+msgstr "Európa 1.2"
+
+#: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
-"A huge europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
+"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Hatalmas Európa térkép. Kék = Svédország, Piros = Olaszország, Sárga = Spanyolország, Zöld = Törökország, Fekete = Oroszország, Narancs = Anglia, Lila = Franciaország, Fehér = Lengyelország"
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:8
-msgid "Europa 1.1"
-msgstr ""
-
-#: ../../data/maps/Fellowships_v2.wmf/elemental:8
+#: ../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
 msgstr "Közösségek"
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:10
+#: ../../data/maps/Fellowships.wmf/elemental:10
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
 msgstr "A hajók a legjobb társaid. A kezdőpontok hasonlóak, így a térkép igazságos."
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:11
+#: ../../data/maps/Fellowships.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
 "near the starting point – do you see it?"
-msgstr "Ez egy valamelyest technikás térkép, leginkább kettő vagy három emberi játékosnak felel meg. A szén nehezen fellelhető – fontold meg a gyártását. Van arany a kezdőpontnál – látod?"
+msgstr "Ez egy valamelyest technikás térkép, leginkább kettő vagy három emberi játékosnak felel meg. A szén nehezen fellelhető – fontold meg faszén égetését! Van arany a kezdőpont közelében – látod?"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
@@ -514,7 +557,7 @@ msgstr "A gyönyörű finn vidék, tavakkal, folyókkal, ősi erdőkkel és hegy
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr "A sárga játékosnak sokkal könnyebb kezdőpontja van, mint a másik kettőnek; ez a térkép 1v2 felállásra felel meg."
+msgstr "A sárga játékosnak sokkal könnyebb kezdőpontja van, mint a másik kettőnek; ezt a térképet ketten egy ellen felálláshoz javasoljuk."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
@@ -526,7 +569,7 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as"
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
-msgstr "Ez az istenek próbája? Vagy egy gonosz terv, amelyben te és a törzsed ezen szigeten ébred tűzzel és lávával körülvéve? Eddig úgy tűnt, egyedül vagy, de senki sem tudja, mi történne, ha még egy ellenséges törzzsel is találkoznál?"
+msgstr "Ez az istenek próbája? Vagy egy gonosz terv, amelyben te és a törzsed ezen a szigeten ébredtetek tűzzel és lávával körülvéve? Eddig úgy tűnt, egyedül vagy, de senki sem tudja, mi történne, ha még egy ellenséges törzzsel is találkoznál?"
 
 #: ../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -536,7 +579,7 @@ msgstr "Négy kastély"
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands…"
-msgstr "Erős várában védett négy hataloméhes hadúr igyekszik véghezvinni tervét, hogy ura legyen e földeknek…"
+msgstr "Négy hataloméhes hadúr erős vára biztonságában tervezgeti, hogyan uralhatná e vidéket…"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
@@ -552,30 +595,30 @@ msgstr "Minden törzset négy hatalmas hegy övez. Ki foglalja el őket előszö
 msgid ""
 "I: Water can be found along the river. II: Snowmen mark additional water "
 "sources. III: Each mountain contains only one resource."
-msgstr "I: vizet a folyó mellett találni. II: a hóemberek további vízforrásokat jelölnek. III: minden hegy csak egy nyersanyagot rejt."
+msgstr "I: Vizet a folyó mellett lehet találni. II: A hóemberek további vízforrásokat jelölnek. III: Minden hegy csak egy nyersanyagot rejt."
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:8
+#: ../../data/maps/Full_Moon.wmf/elemental:8
 msgid "Full Moon"
 msgstr "Telihold"
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:10
+#: ../../data/maps/Full_Moon.wmf/elemental:10
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr "Legyen az a legutóbbi napforduló, vagy holdkór, de valami a végső megpróbáltatásuk felé mozgatja ezeket a törzseket."
+msgstr "Legyen az a legutóbbi napforduló, vagy holdkór, de valami a végső megpróbáltatásuk felé hajtja ezeket a törzseket."
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
+#: ../../data/maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
 msgstr "Tengerszem"
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:10
+#: ../../data/maps/Glacier_Lake.wmf/elemental:10
 msgid ""
 "Your tribe has dwelt on this beautiful and lonely glacier lake for a long "
 "time. No one disturbed you and the resources were sufficient for your whole "
 "tribe, but a few months ago another tribe came over the mountains and "
 "settled down. And you are sure that there is only enough space for one "
 "tribe."
-msgstr "A törzsed már hosszú ideje ezen a gyönyörű, magányos gleccsertó vidékén időzik. Senki sem háborította a vidéket, és a nyersanyag is elég volt az egész törzsnek, de néhány hónapja a hegyeken átkelt egy másik törzs is, és letelepedett a környéken. Biztos vagy benne, hogy nem fér meg egymás mellett a két törzs."
+msgstr "A törzsed már hosszú ideje ennek a gyönyörű, magányos gleccsertónak a vidékén időzik. Senki sem háborgatta a vidéket, és a nyersanyag is elég volt az egész törzsnek, de néhány hónapja a hegyeken átkelt egy másik törzs is, és letelepedett a környéken. Biztos vagy benne, hogy csak egy törzsnek van itt elég hely."
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
@@ -591,10 +634,9 @@ msgstr "Jégháborúk"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr "Az ősz télbe váltott. Néhány dolog megfagyott, de a háború nem."
+msgstr "Az ősz télbe váltott. Sok minden befagyott, de a háború nem."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:11
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:11
 msgid "Start positions are clockwise"
 msgstr "Az óramutató járásával megegyező kezdőpozíciók"
 
@@ -609,11 +651,11 @@ msgid ""
 "neighbor has begun to expand."
 msgstr "Évszázadok óta békében él a törzsed a szomszédos szigettel. A béke azonban, úgy tűnik, véget ér, a szomszédod terjeszkedni kezd."
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:8
 msgid "Kings and Queens"
 msgstr "Királyok és királynők"
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:10
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
@@ -631,15 +673,15 @@ msgid ""
 "two hostile tribes have arrived at its shores…"
 msgstr "Ez a folyó, a legősibb erdők mélyén, régóta ismert szépségéről és idillikus nyugalmáról. Azonban most e szent tó partjára két ellenséges törzs érkezett…"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:8
+#: ../../data/maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"
 msgstr "Az utolsó védőbástya"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
+#: ../../data/maps/Last_Bastion.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
 msgstr "Még egy barbár – szerkesztette: king_of_nowhere"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
+#: ../../data/maps/Last_Bastion.wmf/elemental:10
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
 "sunlight heated up the Earth a thousandfold and melted glaciers and people "
@@ -652,7 +694,7 @@ msgid ""
 "living space is also a hard and small place to live."
 msgstr "A szeszélyes Istenek nem hallgatták meg imáinkat, helyette az ezerszer melegebb Nap felhevítette a földet, elolvasztotta a gleccsereket, és a tenger elárasztotta a vidéket. Most, a fenséges hegyekben, az utolsó darabka földön, két életben maradt törzs keresett menedéket. Noha az Istenek megkönyörültek rajtuk, és az időjárást hűvösebbre változtatták, a víz továbbra is emelkedik és emelkedik. Az utolsó biztonságos helyre, a legmagasabb hegyláncra – ahol az arany és a hely alig elegendő egy törzsnek – csak két szembemenő útvonal vezet. Légy nagyon óvatos… ez az utolsó föld kicsi, és nehéz életben maradni rajta."
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
+#: ../../data/maps/Last_Bastion.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
 msgstr "Ne feledkezz meg gondoskodni a fautánpótlásról – szükséged lesz rá."
 
@@ -664,29 +706,42 @@ msgstr "Az utolsó túlélők"
 msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
-msgstr "Négy törzs harcol az uralomért egy rideg területen. A nyersanyagok elszórtak a térképen."
+msgstr "Négy törzs harcol az uralomért egy rideg területen. Nyersanyagok csak elszórtan találhatók a térképen."
 
-#: ../../data/maps/Long, long v2.wmf/elemental:10 way
+#: ../../data/maps/Lesser_Ring.wmf/elemental:8
+msgid "Lesser Ring 1.2"
+msgstr "Hatalom Gyűrűje 1.2"
+
+#: ../../data/maps/Lesser_Ring.wmf/elemental:10
+msgid ""
+"A fair 8-player map with natural geographic features dividing land. The "
+"geographic features are meant to be somewhat realistic with rivers flowing "
+"from glaciers in the mountains through hills and flatlands into the sea. "
+"Gold is a much rarer resource compared to coal and iron. Different resources"
+" are often found at some distance to each other."
+msgstr "Igazságos térkép 8 játékos számára, ahol természetes földrajzi alakzatok tagolják a szárazföldet. Valósághűnek szánt táj, ahol a folyók a hegyi gleccserektől a dombságokon és síkságokon keresztül a tengerbe folynak. Az arany a szénnél és vasnál sokkal ritkább. A különböző nyersanyagok gyakran egymástól távol találhatók."
+
+#: ../../data/maps/Long_long_way.wmf/elemental:8
+msgid "Long, long way v2"
+msgstr "Hosszú-hosszú út v2"
+
+#: ../../data/maps/Long_long_way.wmf/elemental:10
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
-msgstr ""
+msgstr "„Az merre van?” – „Ezer mérföldre innen.” [Porgy és Bess] Hosszú, hosszú utat kell megtenned, hogy meghódítsd az összes szigetet. Sok szerencsét!"
 
-#: ../../data/maps/Long, long v2.wmf/elemental:8 way
-msgid "Long, long way v2"
-msgstr ""
-
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:8
 msgid "Island Hopping"
 msgstr "Szigetugrás"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:9
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:10
 msgid ""
 "A special tournament in Atlantean culture is the so-called ‘Island Hopping’,"
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr "Az atlantiszi kultúra egy sajátos versenye az úgynevezett „szigetugrás”, melynek során két vagy több csoport igyekszik eljutni a középső szigetre, minél gyorsabban, hogy elsőként építhessen egy várat a középső hegy tetejére."
+msgstr "Az atlantiszi kultúra egy sajátos versenye az úgynevezett „szigetugrás”, melynek során két vagy több csoport igyekszik eljutni a középső szigetre, minél gyorsabban, hogy elsőként építhessen várat a középső hegy tetejére."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
@@ -699,6 +754,18 @@ msgid ""
 " be the first to smuggle a certain number of wares?"
 msgstr "A régóta működő csempészútvonalaidon hirtelen nagy lett a forgalom: két másik törzs jelent meg, és versengés indult a csempészek között. Melyik csapat csempészik át hamarabb egy bizonyos mennyiségű árut?"
 
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:8
+msgid "Trident of Fire"
+msgstr "A tűz szigonya"
+
+#: ../../data/maps/MP_Scenarios/Trident_of_Fire.wmf/elemental:10
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "Három nagy vulkán környékén hat kedves sziget csalogatja a telepeseket, hogy ott kezdjenek új életet. Sivatagok és egy gyorsan gyarapodó erdő vár felfedezésre. De csak akkor lesz a törzsednek elég nyersanyaga versenyre kelni az ellenfeleiddel, ha tengeri nagyhatalommá fejlődsz."
+
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Titokzatos labirintus"
@@ -709,18 +776,18 @@ msgid ""
 "maze, and what can be found inside?"
 msgstr "Két nagy kérdés merül fel: ki készítette ezt a hihetetlenül nagy útvesztőt, és mit találni a belsejében?"
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:8
+#: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr ""
+msgstr "Fémek nélküli kihívás v2"
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:10
+#: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
 "This map is intended as a solo challenge for those very skilled players that"
-" find 1v6 against the AI too easy.  Blue player has no metal (except a bit "
-"of iron to kickstart your economy), so you have to rely on the 5% production"
-" of an empty mine. And you're still 1v6 (though of course you can remove "
-"some AI players to make it a bit easier). Good luck"
-msgstr ""
+" find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
+" of iron to kickstart your economy), so you have to rely on the 5% "
+"production of an empty mine. And you’re still 1 vs 6 (though of course you "
+"can remove some AI players to make it a bit easier). Good luck!"
+msgstr "Egyszemélyes kihívás a legtapasztaltabb játékosok számára, akiknek egyedül 6 számítógépes ellenfél ellen is túl könnyű már. A kék játékosnak nincsenek fémei (kivéve egy kevés vasat a gazdaság beindításához), úgyhogy a kiürült bánya 5%-os termelésére kell hagyatkoznod. És továbbra is 1 a 6 ellen. (Persze ki is kapcsolhatsz néhány ellenfelet, hogy kicsivel könnyebb legyen.) Sok szerencsét!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -731,7 +798,7 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr "Csak egy kis domb köti össze a térkép közepén a négy versengő törzset. Vezesd seregedet egyenesen a dombra, és építs egy hatalmas erődöt, hogy megmutasd felsőbbségedet!"
+msgstr "Csak a térkép közepén lévő kis domb köti össze a négy versengő törzset. Vezesd seregedet egyenesen a dombra, és építs egy hatalmas erődöt felsőbbséged jeléül!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
@@ -750,7 +817,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr "Minden játékosnak más akadálya van a terjeszkedésben, de mindig több módja van ezek megkerülésének. Noha a mesterséges intelligencia legyőzhető egyetlen hajó építése nélkül is, érdemes a játákosoknak előtérbe helyezniük a kikötőket és hajógyárakat – a felfedezőutak mindenkinek hasznosak, és gyakorta ez a legrövidebb út az aranykészletekhez."
+msgstr "Minden játékosnak más akadálya van a terjeszkedésben, de mindig több módja van ezek megkerülésének. Noha a mesterséges intelligencia legyőzhető egyetlen hajó építése nélkül is, érdemes a játékosoknak a kikötőket és hajóács műhelyeket előnyben részesíteniük – a felfedezőutak mindig hasznosak, és gyakran ez a leggyorsabb út az aranykészletekhez."
 
 #: ../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
@@ -762,17 +829,43 @@ msgid ""
 "handful of big rivers."
 msgstr "Misztikus vidék, különböző tájakkal, amiket hatalmas folyók választanak el."
 
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:8
-msgid "The Ancient Sun of Fire"
-msgstr "A tűz ősi fénye"
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr "A folyó mentén"
 
-#: ../../data/maps/Sun_of_Fire.wmf/elemental:10
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""
-"For hundreds of years, this island was kept as a sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now that a tribe had finally "
-"been barefaced enough to settle on the coast of that island, a lot of others"
-" followed in its wake."
-msgstr "Évszázadokon át ezt a szigetet az Istenek szentélyének tartották. Nem volt ember, aki valaha ide merészkedett volna. De most egy törzs elég arcátlan lett ahhoz, hogy kikössön a sziget partjainál, és ezután sokan követték."
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr "Ez az a vidék, ahol télen alig látni a napot, és ahol a tavaszi áradás elmossa a múlt minden emlékét. Különös feszültségek dúlták szét az itt élő közösségeket, a káoszt pedig több önző uralkodó is kihasználta. Úgy tűnik, a babonás nép nem állhat útjába a jól felszerelt hadseregek törekvéseinek. Nehéz idők küszöbén állunk, ezért ha nem követed bölcs tanácsadóid szavait, a többiekhez hasonlóan te is nyomtalanul odaveszel."
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "A zöld fennsík"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Egy szigeten állsz, amelyet fenséges hegyek díszítenek, közöttük pedig csodás és gazdag kincs rejtőzik – a Zöld Fennsík, amit nehéz meghódítani, de könnyű elveszíteni. Ha meg akarod szerezni, figyelj oda a többi klánra!"
+
+#: ../../data/maps/Sandy_Passes.wmf/elemental:9
+msgid "Sandy Passes"
+msgstr "Homokos átjárók"
+
+#: ../../data/maps/Sandy_Passes.wmf/elemental:11
+msgid ""
+"Four tribes struggle with their nearest neighbor to be the first to reach "
+"the mountain of gold that promises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr "Négy törzs küzd a legközelebbi szomszédjával, hogy az elsők legyenek, akik elérik az aranyhegyet, ami hihetetlen gazdagságot ígér. De vajon a két megmaradt törzs képes lesz bölcsen megosztozni az erőforrásokon?"
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"
@@ -783,7 +876,7 @@ msgid ""
 "It smells like swamp, it looks like swamp and it is a swamp. But it is the "
 "place you were born and where you’ve lived your whole life. If you don’t "
 "want to lose it, defend it!"
-msgstr "A szaga, mint egy mocsáré, és úgy is néz ki, mint egy mocsár. De ez az a hely, ahol születtél, és éltél egész életedben. Ha nem akarod elveszíteni, védd meg!"
+msgstr "A szaga, mint egy mocsáré, úgy is néz ki, mint egy mocsár, és tényleg egy mocsár. De ez az a hely, ahol születtél, és éltél egész életedben. Ha nem akarod elveszíteni, védd meg!"
 
 #: ../../data/maps/Swamp_Monks.wmf/elemental:8
 msgid "Swamp Monks"
@@ -793,7 +886,7 @@ msgstr "Mocsári remeték"
 msgid ""
 "It is said that the old war monks, living in the even older swamps, are the "
 "key to control over the whole island."
-msgstr "Azt mondják, a vén mocsarakban élő öreg harcos remeték a kulcsai a sziget teljes uralmának."
+msgstr "Azt mondják, a vén mocsarakban élő öreg harcos remeték a kulcsai a teljes sziget fölötti uralomnak."
 
 #: ../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
@@ -826,19 +919,7 @@ msgid ""
 "constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
-msgstr "Azt mondják, a távoli északra vezető áthatolhatatlan vidék elijesztette még a legelszántabb gyarmatosítókat és a legbátrabb harcosok legbátrabbjait is. A nagy és öreg erdőket, tele hatalmas ragadozókkal, lápokkal és dombokkal szabdalva, a rejtély homálya fedi. Kiknek sikerült visszatérni, óriási épületekről meséltek, faragott díszekkel, és arannyal, mely a vadon valamely fenséges hegyláncaiból származik. Emberöltők után immár csak néhány omladozó, mohos, benőtt rom maradt a régi dicső korból. Alakjukból csak gondolni lehet ősi alkotóik ügyességére. Senki sem tudja, miért tűntek el. Senki sem tudja. Azt mondják, immár nincs, mi a meggazdagodás útjában állna. De sokakat elragadnak a farkasok, elnyelnek a mocsarak… elfognak ellenséges törzsek."
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "A zöld fennsík"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Egy hatalmas hegyekkel zsúfolt szigeten állsz, ami csodás és gazdag kincset rejt a közepén - a zöld fennsíkot, amit nehéz meghódítani, de könnyű elveszíteni. Ha meg akarod szerezni, figyelj oda a többi klánra."
+msgstr "Azt mondják, a távoli északra vezető áthatolhatatlan vidék elijesztette még a legelszántabb gyarmatosítókat és a legbátrabb harcosok legbátrabbjait is. A nagy és öreg erdőket, tele hatalmas ragadozókkal, lápokkal és dombokkal szabdalva, a rejtély homálya fedi. Akiknek sikerült visszatérni, azok óriási épületekről meséltek, faragott díszekkel, és arannyal, ami valahol a vadonban található fenséges hegyláncokból származik. Emberöltők után immár csak néhány omladozó, mohos, fákkal benőtt rom maradt a régi dicső korból. Alakjukból csak felsejlik ősi alkotóik szakértelme. Senki sem tudja, miért tűntek el. Senki sem tudja. Azt beszélik, immár semmi sem állja el a gazdagsághoz vezető utat. De sokakat elragadnak a farkasok, elnyelnek a mocsarak… elfognak ellenséges törzsek."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
@@ -850,17 +931,17 @@ msgid ""
 " no other way but to occupy the land of your enemies."
 msgstr "Az istenek egy újabb furcsa kísérlete. Hogy elérd a túloldalt, nincs más választásod, mint elfoglalni az ellenségeid földjét."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:8
+#: ../../data/maps/The_Nile.wmf/elemental:8
 msgid "The Nile"
 msgstr "A Nílus"
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:10
+#: ../../data/maps/The_Nile.wmf/elemental:10
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
-msgstr "A folyó mindig biztosít élelmet és érintkezést. Ezúttal nyolc birodalom harcol a vidék uralmáért."
+msgstr "A folyó mindig élelmet és közlekedési útvonalat biztosított. Ezúttal nyolc birodalom harcol a vidék fölötti uralomért."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:11
+#: ../../data/maps/The_Nile.wmf/elemental:11
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
@@ -875,7 +956,7 @@ msgid ""
 "There is something mystical like a gray atmosphere around these three oases,"
 " which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
-msgstr "E három oázist valami rejtély övez, mint egy szürke légkör – és még senki nem jött rá. Talán te leszel az egyikük, de vigyázz, mert mások is keresik!"
+msgstr "E három oázist valami rejtély övezi, mint valami szürke köd – és még senki nem fejtette meg a titkát. Talán neked sikerül, de vigyázz, mert mások is keresik!"
 
 #: ../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:8
 msgid "The Pass Through the Mountains"
@@ -885,7 +966,7 @@ msgstr "Átkelés a hegyeken"
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr "Ezen a hegyvidéken két herceg telepedett le. Most, hogy területeiket bővítik, jutott tudomásukra, hogy nincsenek egyedül!"
+msgstr "Ezen a hegyvidéken két herceg telepedett le. Most területeiket bővítik, de még nem tudják, hogy nincsenek egyedül!"
 
 #: ../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
@@ -898,7 +979,7 @@ msgid ""
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr "Egy újabb olvadás köszöntött be. Három törzs keresett oltalmat a kemény tél elől a magas hegyek között. A napéjegyenlőségkor meghallgatták az orákulumot, és háborúzni kezdtek. Az egyetlen túlélő fel fogja áldozni ellenségei kincseit az ősi oltáron, épít ott egy ragyogó palotát, ezzel elnyerve az istenek kegyét és tiszteletét."
+msgstr "Egy újabb olvadás köszöntött be. Három törzs keresett oltalmat a kemény tél elől a magas hegyek között. A napforduló idején a jóslatra hallgatva háborúzni kezdtek. Az egyetlen túlélő fel fogja áldozni ellenségei kincseit az ősi oltáron, épít ott egy ragyogó palotát, ezzel elnyerve az istenek kegyét és tiszteletét."
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:8
 msgid "Three Warriors"
@@ -914,11 +995,11 @@ msgstr "Hatalmas hegyek osztják fel a vidéket három termékeny völgyre. De e
 msgid "Water can be found around the lakes."
 msgstr "Víz a tavak körül található."
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:8
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
 msgstr "Együtt erősek vagyunk"
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:10
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:10
 msgid ""
 "The four mighty harbors of the Craw Islands have been trading their goods "
 "among each other for ages. All of them needed resources that they could not "
@@ -929,34 +1010,22 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr "A Rák-szigetek négy nagy kikötője időtlen idők óta kereskedett egymással. Mindnyájuknak kellettek nyersanyagok, melyekkel nem rendelkeztek, cserébe olyat adtak, amije a másiknak nem volt. Erre a csereberére egy igen barátságos kereskedelem épült a négy kikötő és a Rák-szigetek népei között – egészen addig, míg utóbb két kikötő kizárólagos kereskedelmi szerződést nem kötött egymással, ugyanilyenbe kényszerítve ezzel a másik kettőt. Hirtelen úgy látszik, már csak idő kérdése, hogy a kikötők közötti első harcok szétzilálják a békét, mi oly sokáig tartott…"
+msgstr "A Rák-szigetek négy nagy kikötője időtlen idők óta kereskedett egymással. Mindnyájuknak kellettek nyersanyagok, melyekkel nem rendelkeztek, cserébe olyat adtak, amije a másiknak nem volt. Erre a csereberére egy igen barátságos kereskedelem épült a négy kikötő és a Rák-szigetek népei között – egészen addig, amíg nemrég két kikötő kizárólagos kereskedelmi szerződést nem kötött egymással, ugyanerre kényszerítve ezzel a másik kettőt. Hirtelen úgy látszik, már csak idő kérdése, hogy a kikötők közötti első harcok szétzilálják a békét, ami oly sokáig tartott…"
 
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:8
-msgid "Trident of Fire"
-msgstr "A tűz szigonya"
-
-#: ../../data/maps/Trident_of_Fire.wmf/elemental:10
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "Három nagy vulkán környékén hat kedves sziget csalogatja a telepeseket, hogy ott kezdjenek új életet. Sivatagok és egy gyorsan gyarapodó erdő vár felfedezésre. De ahhoz, hogy több forrásod legyen, mint ellenfeleidnek, törzsednek vízi hatalomra kell szert tennie."
-
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:8
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"
 msgstr "Ikerlagúnák"
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:10
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:10
 msgid ""
 "When the wind swelled up and the first dunes were formed on these abandoned "
 "twin lagoons, nobody could have expected that two tribes that are "
 "desperately searching for more resources to support their endlessly ongoing "
 "wars, would end up in this forgotten place at the same time and for the same"
 " well-known reason."
-msgstr "Mikor feltámadt a szél, és ezen elhagyott ikerlagúnák első dűnéit felhalmozta, még senki sem gondolta, hogy két törzs, mely reménytelenül kutat új források után véget nem érő háborúi táplálására, ugyanabban az időben és ugyanazzal a jól ismert céllal érkezik eme elfeledett helyre."
+msgstr "Amikor feltámadt a szél, és ezen elhagyott ikerlagúnák első dűnéit felhalmozta, még senki sem gondolta, hogy egyszer két törzs, reménytelenül kutatva új nyersanyagok után véget nem érő háborúik számára, ugyanabban az időben és ugyanazzal a jól ismert céllal érkezik majd meg eme elfeledett helyre."
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:11
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
@@ -970,7 +1039,13 @@ msgstr "Táncoló hullámok"
 msgid ""
 "Many beautiful, green islands await the ones brave enough to pass the "
 "thousand waves, twinkling in the sun."
-msgstr "Tengernyi gyönyörű zöld sziget várja a bátrakat, akik átkelnek az ezer hullámon, melyek csillognak a napfényben."
+msgstr "Tengernyi gyönyörű zöld sziget várja a bátrakat, akik átkelnek a napfényben csillogó ezer hullámon."
+
+#: ../../data/maps/Twinkling_Waves.wmf/elemental:11
+msgid ""
+"Take care not to build your ships in the lagoons. They cannot pass through "
+"the reefs to the main ocean, where your ports are located."
+msgstr "Ügyelj arra, hogy a hajóid ne a lagúnákban épüljenek, mert nem tudnak átkelni a zátonyokon a nyílt óceánra, ahol a kikötők vannak."
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"
@@ -1000,7 +1075,7 @@ msgid ""
 "beginning of days. When your tribe came to this place, you were sure that it"
 " offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
-msgstr "Olybá tűnik, mintha ezt a varázslatos völgyet már az idők kezdete óta bölények laknák. Mikor törzsed ideért, biztos voltál benne, hogy elég hellyel szolgál egy nyugodt élethez. De vajon békében tudsz-e élni szomszédaiddal?"
+msgstr "Olybá tűnik, mintha ezt a varázslatos völgyet már az idők kezdete óta bölények laknák. Amikor a törzsed ideért, biztos voltál benne, hogy elég helyet biztosít a nyugodt élethez. De vajon békében tudsz-e élni szomszédaiddal?"
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:11
 msgid ""
@@ -1009,4 +1084,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr "A középen lévő fekete játékos körbe van véve, nyersanyagok nélkül, így három különböző módja is van a térkép használatának: a fekete játékos nélkül normál 4 játékos térképként, egy fekete MI-vel, hogy megnehezítse a többi játékos terjeszkedését, vagy kihívásként a fekete játékosként a többi négy ellen (NAGYON nehéz)."
+msgstr "A középen lévő fekete játékos körbe van véve, nyersanyagok nélkül, így három különböző módja is van a térkép használatának: a fekete játékos nélkül normál 4 játékos térképként, egy fekete MI-vel, hogy megnehezítse a többi játékos terjeszkedését, vagy kihívásként a fekete játékosnak a többi négy ellen (NAGYON nehéz)."

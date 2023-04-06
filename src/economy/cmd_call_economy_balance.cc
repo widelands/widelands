@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -30,7 +29,7 @@
 
 namespace Widelands {
 
-CmdCallEconomyBalance::CmdCallEconomyBalance(uint32_t const starttime,
+CmdCallEconomyBalance::CmdCallEconomyBalance(const Time& starttime,
                                              Economy* const economy,
                                              uint32_t const timerid)
    : GameLogicCommand(starttime) {
@@ -62,11 +61,11 @@ void CmdCallEconomyBalance::read(FileRead& fr, EditorGameBase& egbase, MapObject
 		if (packet_version == kCurrentPacketVersion) {
 			GameLogicCommand::read(fr, egbase, mol);
 			uint32_t serial = fr.unsigned_32();
-			if (serial) {
+			if (serial != 0u) {
 				flag_ = &mol.get<Flag>(serial);
 			}
 			timerid_ = fr.unsigned_32();
-			type_ = fr.unsigned_8() ? wwWORKER : wwWARE;
+			type_ = fr.unsigned_8() != 0u ? wwWORKER : wwWARE;
 		} else {
 			throw UnhandledVersionError(
 			   "CmdCallEconomyBalance", packet_version, kCurrentPacketVersion);

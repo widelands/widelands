@@ -7,12 +7,11 @@
 -- TODO(sirver, trading): Add useful documentation here
 dirname = "test/maps/market_trading.wmf/" .. path.dirname(__file__)
 
-tribes:new_market_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_market_type {
    name = "barbarians_market",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Market"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -37,11 +36,9 @@ tribes:new_market_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 67, 80 },
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 67, 80 },
       }
    },

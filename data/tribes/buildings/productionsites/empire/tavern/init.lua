@@ -1,14 +1,26 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_tavern",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Tavern"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "empire_inn",
+
+   enhancement = {
+      name = "empire_inn",
+      enhancement_cost = {
+         planks = 2,
+         marble = 2,
+         marble_column = 1
+      },
+      enhancement_return_on_dismantle = {
+         planks = 1,
+         marble = 2
+      }
+   },
 
    buildcost = {
       planks = 2,
@@ -21,14 +33,20 @@ tribes:new_productionsite_type {
       marble = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 52, 58 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 46, 55 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 52, 58 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 46, 55 },
       },
    },
 
@@ -50,7 +68,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"preparing a ration",
+         descname = _("preparing a ration"),
          actions = {
             -- time total: 33
             "return=skipped unless economy needs ration",
@@ -64,3 +82,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_weaving_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Weaving Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -20,14 +20,14 @@ tribes:new_productionsite_type {
       planks = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 65, 69 },
+         hotspot = { 66, 71 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 65, 69 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 66, 71 },
       }
    },
 
@@ -50,7 +50,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_spidercloth",
             "call=produce_tabard",
@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
       },
       produce_spidercloth = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because ...
-         descname = _"weaving spidercloth",
+         descname = _("weaving spidercloth"),
          actions = {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs spidercloth",
@@ -72,7 +72,7 @@ tribes:new_productionsite_type {
       },
       produce_tabard = {
          -- TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-         descname = _"tailoring a tabard",
+         descname = _("tailoring a tabard"),
          actions = {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs tabard",
@@ -85,7 +85,7 @@ tribes:new_productionsite_type {
       },
       produce_tabard_golden = {
          -- TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard because ...
-         descname = _"tailoring a golden tabard",
+         descname = _("tailoring a golden tabard"),
          actions = {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs tabard_golden",
@@ -98,3 +98,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

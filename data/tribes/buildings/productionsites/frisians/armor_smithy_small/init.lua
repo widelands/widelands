@@ -1,14 +1,28 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_productionsite_type {
    name = "frisians_armor_smithy_small",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Small Armor Smithy"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_armor_smithy_large",
+
+   enhancement = {
+      name = "frisians_armor_smithy_large",
+      enhancement_cost = {
+         brick = 2,
+         granite = 1,
+         log = 1,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         brick = 2,
+         granite = 1
+      }
+   },
 
    buildcost = {
       brick = 3,
@@ -24,8 +38,6 @@ tribes:new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {50, 73},
          frames = 10,
          columns = 5,
@@ -33,8 +45,6 @@ tribes:new_productionsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {50, 73},
          frames = 10,
          columns = 5,
@@ -44,8 +54,6 @@ tribes:new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {50, 58}
       }
    },
@@ -66,22 +74,25 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 58.5 + 58.5 + 68.5 + 58.5 + 10 = 254 sec
             "call=produce_s1",
             "call=produce_s2",
             "call=produce_h",
             "call=produce_s2",
+            "return=skipped"
          },
       },
       produce_s1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a short sword because ...
-         descname = _"forging a short sword",
+         descname = _("forging a short sword"),
          actions = {
-            -- time total: 57 + 3.6
+            -- time: 21.9 + 24 + 9 + 3.6 = 58.5 sec
             "return=skipped unless economy needs sword_short",
             "consume=coal iron",
-            "sleep=duration:24s",
+            "sleep=duration:21s900ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:24s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -91,12 +102,12 @@ tribes:new_productionsite_type {
       },
       produce_s2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a long sword because ...
-         descname = _"forging a long sword",
+         descname = _("forging a long sword"),
          actions = {
-            -- time total: 57 + 3.6
+            -- time: 21.9 + 24 + 9 + 3.6 = 58.5 sec
             "return=skipped unless economy needs sword_long",
             "consume=coal iron:2",
-            "sleep=duration:24s",
+            "sleep=duration:21s900ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:24s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -106,12 +117,12 @@ tribes:new_productionsite_type {
       },
       produce_h = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
-         descname = _"forging a helmet",
+         descname = _("forging a helmet"),
          actions = {
-            -- time total: 67 + 3.6
+            -- time: 27.9 + 37 + 3.6 = 68.5 sec
             "return=skipped unless economy needs helmet",
             "consume=coal iron",
-            "sleep=duration:30s",
+            "sleep=duration:27s900ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:37s",
             "produce=helmet"
@@ -119,3 +130,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,13 +20,14 @@
 #define WL_EDITOR_UI_MENUS_TOOL_OPTIONS_MENU_H
 
 #include "editor/editorinteractive.h"
+#include "editor/tools/tool.h"
 #include "ui_basic/unique_window.h"
 
 struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	EditorToolOptionsMenu(EditorInteractive& parent,
 	                      UI::UniqueWindow::Registry&,
-	                      const uint32_t width,
-	                      const uint32_t height,
+	                      uint32_t width,
+	                      uint32_t height,
 	                      const std::string& title,
 	                      EditorTool& tool);
 
@@ -51,6 +51,12 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	}
 	uint32_t vmargin() const {
 		return spacing();
+	}
+
+	/**
+	 * Update window options to match tool settings
+	 */
+	virtual void update_window() {
 	}
 
 private:

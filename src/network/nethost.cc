@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2002-2023 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
 #include "network/nethost.h"
 
 #include <memory>
@@ -11,13 +29,12 @@ namespace {
  * \param acceptor The acceptor socket to get the IP version for.
  * \return Either 4 or 6, depending on the version of the given acceptor.
  */
-int get_ip_version(const boost::asio::ip::tcp::acceptor& acceptor) {
+int get_ip_version(const asio::ip::tcp::acceptor& acceptor) {
 	assert(acceptor.is_open());
-	if (acceptor.local_endpoint().protocol() == boost::asio::ip::tcp::v4()) {
+	if (acceptor.local_endpoint().protocol() == asio::ip::tcp::v4()) {
 		return 4;
-	} else {
-		return 6;
 	}
+	return 6;
 }
 }  // namespace
 
@@ -25,10 +42,9 @@ std::unique_ptr<NetHost> NetHost::listen(const uint16_t port) {
 	std::unique_ptr<NetHost> ptr(new NetHost(port));
 	if (ptr->is_listening()) {
 		return ptr;
-	} else {
-		ptr.reset();
-		return ptr;
 	}
+	ptr.reset();
+	return ptr;
 }
 
 NetHost::~NetHost() {
@@ -66,10 +82,10 @@ void NetHost::stop_listening() {
 	// The thread should be stopped now
 	assert(!asio_thread_.joinable());
 
-	static const auto do_stop = [](boost::asio::ip::tcp::acceptor& acceptor) {
-		boost::system::error_code ec;
+	static const auto do_stop = [](asio::ip::tcp::acceptor& acceptor) {
+		std::error_code ec;
 		if (acceptor.is_open()) {
-			log("[NetHost] Closing a listening IPv%d socket.\n", get_ip_version(acceptor));
+			verb_log_info("[NetHost] Closing a listening IPv%d socket.", get_ip_version(acceptor));
 			acceptor.close(ec);
 		}
 		// Ignore errors
@@ -129,7 +145,9 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet, NetPriority 
 	clients_.at(id)->send(priority, packet);
 }
 
-void NetHost::send(const std::vector<ConnectionId>& ids, const SendPacket& packet, NetPriority) {
+void NetHost::send(const std::vector<ConnectionId>& ids,
+                   const SendPacket& packet,
+                   NetPriority /*priority*/) {
 	for (ConnectionId id : ids) {
 		send(id, packet);
 	}
@@ -137,8 +155,8 @@ void NetHost::send(const std::vector<ConnectionId>& ids, const SendPacket& packe
 
 // This method is run within a thread
 void NetHost::start_accepting(
-   boost::asio::ip::tcp::acceptor& acceptor,
-   std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair) {
+   asio::ip::tcp::acceptor& acceptor,
+   std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*>& pair) {
 
 	if (!is_listening()) {
 		return;
@@ -149,60 +167,56 @@ void NetHost::start_accepting(
 		pair = BufferedConnection::create_unconnected();
 	}
 
-	acceptor.async_accept(
-	   *(pair.second), [this, &acceptor, &pair](const boost::system::error_code& ec) {
-		   if (!ec) {
-			   // No error occurred, so we have establish a (TCP) connection.
-			   // We can't say whether it is valid Widelands client yet
-			   pair.first->notify_connected();
-			   assert(pair.first->is_connected());
-			   std::lock_guard<std::mutex> lock(mutex_accept_);
-			   accept_queue_.push(std::move(pair.first));
-			   // pair.first is cleared by the std::move
-			   pair.second = nullptr;
-		   }
-		   // Wait for the next client
-		   start_accepting(acceptor, pair);
-	   });
+	acceptor.async_accept(*(pair.second), [this, &acceptor, &pair](const std::error_code& ec) {
+		if (!ec) {
+			// No error occurred, so we have establish a (TCP) connection.
+			// We can't say whether it is valid Widelands client yet
+			pair.first->notify_connected();
+			assert(pair.first->is_connected());
+			std::lock_guard<std::mutex> lock(mutex_accept_);
+			accept_queue_.push(std::move(pair.first));
+			// pair.first is cleared by the std::move
+			pair.second = nullptr;
+		}
+		// Wait for the next client
+		start_accepting(acceptor, pair);
+	});
 }
 
-NetHost::NetHost(const uint16_t port)
-   : clients_(), next_id_(1), io_service_(), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
+NetHost::NetHost(const uint16_t port) : acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
 
-	if (open_acceptor(
-	       &acceptor_v4_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))) {
-		log("[NetHost] Opening a listening IPv4 socket on TCP port %u\n", port);
+	if (open_acceptor(&acceptor_v4_, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))) {
+		verb_log_info("[NetHost] Opening a listening IPv4 socket on TCP port %u", port);
 	}
-	if (open_acceptor(
-	       &acceptor_v6_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v6(), port))) {
-		log("[NetHost] Opening a listening IPv6 socket on TCP port %u\n", port);
+	if (open_acceptor(&acceptor_v6_, asio::ip::tcp::endpoint(asio::ip::tcp::v6(), port))) {
+		verb_log_info("[NetHost] Opening a listening IPv6 socket on TCP port %u", port);
 	}
 
-	log("[NetHost] Starting to listen for network connections\n");
+	verb_log_info("[NetHost] Starting to listen for network connections");
 	start_accepting(acceptor_v4_, accept_pair_v4_);
 	start_accepting(acceptor_v6_, accept_pair_v6_);
 
 	asio_thread_ = std::thread([this]() {
-		log("[NetHost] Starting networking thread\n");
+		verb_log_info("[NetHost] Starting networking thread");
 		io_service_.run();
-		log("[NetHost] Stopping networking thread\n");
+		verb_log_info("[NetHost] Stopping networking thread");
 	});
 }
 
-bool NetHost::open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
-                            const boost::asio::ip::tcp::endpoint& endpoint) {
+bool NetHost::open_acceptor(asio::ip::tcp::acceptor* acceptor,
+                            const asio::ip::tcp::endpoint& endpoint) {
 	try {
 		acceptor->open(endpoint.protocol());
-		const boost::asio::socket_base::reuse_address option_reuse(true);
+		const asio::socket_base::reuse_address option_reuse(true);
 		acceptor->set_option(option_reuse);
-		if (endpoint.protocol() == boost::asio::ip::tcp::v6()) {
-			const boost::asio::ip::v6_only option_v6only(true);
+		if (endpoint.protocol() == asio::ip::tcp::v6()) {
+			const asio::ip::v6_only option_v6only(true);
 			acceptor->set_option(option_v6only);
 		}
 		acceptor->bind(endpoint);
-		acceptor->listen(boost::asio::socket_base::max_connections);
+		acceptor->listen(asio::socket_base::max_connections);
 		return true;
-	} catch (const boost::system::system_error&) {
+	} catch (const std::system_error&) {
 		return false;
 	}
 }

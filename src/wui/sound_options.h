@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 by the Widelands Development Team
+ * Copyright (C) 2019-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifndef WL_WUI_SOUND_OPTIONS_H
@@ -21,6 +20,7 @@
 
 #include "graphic/styles/text_panel_style.h"
 #include "ui_basic/box.h"
+#include "ui_basic/checkbox.h"
 
 /**
  * A box with all sound options.
@@ -28,6 +28,9 @@
  */
 struct SoundOptions : public UI::Box {
 	SoundOptions(UI::Panel& parent, UI::SliderStyle style);
+
+private:
+	UI::Checkbox custom_songset_;
 };
 
 #endif  // end of include guard: WL_WUI_SOUND_OPTIONS_H

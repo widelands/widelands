@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -37,6 +36,9 @@ const std::string kCampaignsDir = "campaigns";
 const std::string kWidelandsMapExtension = ".wmf";
 const std::string kS2MapExtension1 = ".swd";
 const std::string kS2MapExtension2 = ".wld";
+const std::string kMyMapsDir = "My_Maps";
+const std::string kDownloadedMapsDir = "Downloaded";
+const std::string kAddOnMapsDir = "AddOn_Maps";
 
 /// Filesystem names for temp files holding static data that needs to be accessible via filesystem
 /// Kept in a separate dir to avoid filesystem conflicts
@@ -52,16 +54,16 @@ constexpr double kTempBackupsKeepAroundTime = 24 * 60 * 60;
 
 /// Filesystem names and timeouts for replays
 const std::string kReplayDir = "replays";
-const std::string kReplayExtension = ".wrpl";
+const std::string kReplayExtension = ".wry";
 const std::string kSyncstreamExtension = ".wss";
 const std::string kSyncstreamExcerptExtension = ".wse";
-// The time in seconds for how long old replays/syncstreams should be kept
-// around, in seconds. Right now this is 4 weeks.
-constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
 
 /// Filesystem names and intervals for savegames
 const std::string kSaveDir = "save";
 const std::string kCampVisFile = "save/campaigns.conf";
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+constexpr const char* const kTrainingWheelsFile = "save/training_wheels.conf";
+#endif
 const std::string kSavegameExtension = ".wgf";
 const std::string kAutosavePrefix = "wl_autosave";
 // Default autosave interval in minutes
@@ -70,6 +72,14 @@ constexpr int kDefaultAutosaveInterval = 15;
 // Filesystem names for campaign data
 const std::string kCampaignDataDir = "campaigns";
 const std::string kCampaignDataExtension = ".wcd";
+
+// Filesystem names for add-ons
+const std::string kAddOnDir = "addons";
+const std::string kAddOnExtension = ".wad";
+const std::string kAddOnMainFile = "addon";
+const std::string kAddOnIconFile = "icon.png";
+const std::string kAddOnLocaleDir = "addons_i18n";
+const std::string kAddOnLocaleVersions = "addons_i18n_versions";
 
 /// Filesystem names for screenshots
 const std::string kScreenshotsDir = "screenshots";

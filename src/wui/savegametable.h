@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2002-2023 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
 #ifndef WL_WUI_SAVEGAMETABLE_H
 #define WL_WUI_SAVEGAMETABLE_H
 
@@ -18,6 +36,8 @@ protected:
 	const std::string find_game_type(const SavegameData& savegame) const;
 	void create_directory_entry(UI::Table<uintptr_t const>::EntryRecord& te,
 	                            const SavegameData& savegame);
+
+	UI::FontStyle tooltip_style_, tooltip_header_style_;
 
 private:
 	bool localize_autosave_;
@@ -59,7 +79,7 @@ public:
 	void set_show_filenames(bool show_filenames) override;
 
 private:
-	bool show_filenames_;
+	bool show_filenames_{false};
 	void add_columns() override;
 	void create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
 	                        const SavegameData& savegame) override;

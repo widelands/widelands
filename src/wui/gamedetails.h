@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2020 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,7 +21,7 @@
 
 #include <memory>
 
-#include "graphic/image.h"
+#include "graphic/texture.h"
 #include "logic/game_controller.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
@@ -32,7 +31,7 @@
 /**
  * Show a Panel with information about a savegame/replay file
  */
-class GameDetails : public UI::Box {
+class GameDetails : public UI::Panel {
 public:
 	enum class Mode { kSavegame, kReplay };
 
@@ -49,6 +48,10 @@ public:
 		return button_box_;
 	}
 
+	bool has_conflicts() const {
+		return has_conflicts_;
+	}
+
 private:
 	/// Layout the information on screen
 	void layout() override;
@@ -56,17 +59,21 @@ private:
 	void show(const SavegameData& gamedata);
 	void show(const std::vector<SavegameData>& gamedata);
 	void show_game_description(const SavegameData& gamedata);
-	void show_minimap(const SavegameData& gamedata);
+	std::string show_minimap(const SavegameData& gamedata);
 
-	const UI::PanelStyle style_;
 	const Mode mode_;
-	const int padding_;
+	const int padding_{4};
+	bool has_conflicts_{false};
 
+	UI::Box main_box_, descr_box_;
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
 	UI::Icon minimap_icon_;
-	std::unique_ptr<const Image> minimap_image_;
 	UI::Box* button_box_;
+
+	// Used to render map preview
+	std::string last_game_;
+	std::unordered_map<std::string, std::unique_ptr<const Texture>> minimap_cache_;
 };
 
 #endif  // end of include guard: WL_WUI_GAMEDETAILS_H

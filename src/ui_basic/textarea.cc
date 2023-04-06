@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,35 +12,36 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "ui_basic/textarea.h"
 
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text_layout.h"
 
 namespace UI {
 
 Textarea::Textarea(Panel* parent,
+                   PanelStyle s,
+                   FontStyle style,
                    int32_t x,
                    int32_t y,
                    uint32_t w,
                    uint32_t h,
                    const std::string& text,
                    Align align,
-                   const UI::FontStyleInfo& style,
                    LayoutMode layout_mode)
-   : Panel(parent, x, y, w, h),
+   : Panel(parent, s, x, y, w, h),
      layoutmode_(layout_mode),
      align_(align),
      text_(text),
-     style_(&style) {
+     font_style_(style),
+     font_style_override_(nullptr) {
 	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
@@ -49,22 +50,34 @@ Textarea::Textarea(Panel* parent,
 }
 
 Textarea::Textarea(Panel* parent,
+                   PanelStyle s,
+                   FontStyle style,
                    int32_t x,
                    int32_t y,
                    uint32_t w,
                    uint32_t h,
                    const std::string& text,
-                   Align align,
-                   const UI::FontStyleInfo& style)
-   : Textarea(parent, x, y, w, h, text, align, style, LayoutMode::AutoMove) {
+                   Align align)
+   : Textarea(parent, s, style, x, y, w, h, text, align, LayoutMode::AutoMove) {
 }
 
-Textarea::Textarea(Panel* parent, const std::string& text, Align align, const FontStyleInfo& style)
-   : Textarea(parent, 0, 0, 0, 0, text, align, style, LayoutMode::Layouted) {
+Textarea::Textarea(
+   Panel* parent, PanelStyle s, FontStyle style, const std::string& text, Align align)
+   : Textarea(parent, s, style, 0, 0, 0, 0, text, align, LayoutMode::Layouted) {
 }
 
-void Textarea::set_style(const FontStyleInfo& style) {
-	style_ = &style;
+inline const FontStyleInfo& Textarea::font_style() const {
+	return font_style_override_ != nullptr ? *font_style_override_ :
+                                            g_style_manager->font_style(font_style_);
+}
+
+void Textarea::set_style(const FontStyle style) {
+	font_style_ = style;
+	font_style_override_ = nullptr;
+	update();
+}
+void Textarea::set_style_override(const FontStyleInfo& style) {
+	font_style_override_ = &style;
 	update();
 }
 
@@ -73,13 +86,17 @@ void Textarea::set_font_scale(float scale) {
 	update();
 }
 
+void Textarea::update_template() {
+	update();  // update rendered_text_
+}
+
 void Textarea::update() {
 	if (layoutmode_ == LayoutMode::AutoMove) {
 		collapse();  // collapse() implicitly updates the size and position
 	}
 
-	FontStyleInfo scaled_style(*style_);
-	scaled_style.set_size(std::max(g_gr->styles().minimum_font_size(),
+	FontStyleInfo scaled_style(font_style());
+	scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),
 	                               static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
 	rendered_text_ = autofit_text(richtext_escape(text_), scaled_style, fixed_width_);
 
@@ -123,9 +140,9 @@ void Textarea::set_fixed_width(int w) {
 void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
 		Align alignment = mirror_alignment(align_, i18n::has_rtl_character(text_.c_str(), 20));
-		Vector2i anchor((alignment == Align::kCenter) ?
-		                   get_w() / 2 :
-		                   (alignment == UI::Align::kRight) ? get_w() : 0,
+		Vector2i anchor((alignment == Align::kCenter)    ? get_w() / 2 :
+		                (alignment == UI::Align::kRight) ? get_w() :
+                                                         0,
 		                0);
 		rendered_text_->draw(dst, anchor, alignment);
 	}
@@ -162,7 +179,8 @@ void Textarea::expand() {
 	int32_t y = get_y();
 
 	update_desired_size();
-	int w, h = 0;
+	int w;
+	int h = 0;
 	get_desired_size(&w, &h);
 
 	switch (align_) {
@@ -192,7 +210,7 @@ void Textarea::update_desired_size() {
 		h = rendered_text_->height();
 		// We want empty textareas to have height
 		if (text_.empty()) {
-			h = text_height(*style_, font_scale_);
+			h = text_height(font_style(), font_scale_);
 		}
 	}
 	set_desired_size(w, h);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,7 +21,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/map_object_program.h"
@@ -39,7 +37,6 @@ class ImmovableDescr;
 class ProductionSiteDescr;
 class ProductionSite;
 class Worker;
-class World;
 
 /// Ordered sequence of actions (at least 1). Has a name.
 struct ProductionProgram : public MapObjectProgram {
@@ -50,8 +47,17 @@ struct ProductionProgram : public MapObjectProgram {
 
 	/// Can be executed on a ProductionSite.
 	struct Action {
+		struct TrainingParameters {
+			TrainingParameters() = default;
+			static TrainingParameters parse(const std::vector<std::string>& arguments,
+			                                const std::string& action_name);
+
+			TrainingAttribute attribute{TrainingAttribute::kTotal};
+			unsigned level{INVALID_INDEX};
+		};
+
 		Action() = default;
-		virtual ~Action();
+		virtual ~Action() = default;
 		virtual void execute(Game&, ProductionSite&) const = 0;
 
 		/**
@@ -69,13 +75,13 @@ struct ProductionProgram : public MapObjectProgram {
 		 */
 		virtual void building_work_failed(Game&, ProductionSite&, Worker&) const;
 
-		const Groups& consumed_wares_workers() const {
+		[[nodiscard]] const Groups& consumed_wares_workers() const {
 			return consumed_wares_workers_;
 		}
-		const BillOfMaterials& produced_wares() const {
+		[[nodiscard]] const BillOfMaterials& produced_wares() const {
 			return produced_wares_;
 		}
-		const BillOfMaterials& recruited_workers() const {
+		[[nodiscard]] const BillOfMaterials& recruited_workers() const {
 			return recruited_workers_;
 		}
 
@@ -93,13 +99,13 @@ struct ProductionProgram : public MapObjectProgram {
 	static Groups parse_ware_type_groups(std::vector<std::string>::const_iterator begin,
 	                                     std::vector<std::string>::const_iterator end,
 	                                     const ProductionSiteDescr& descr,
-	                                     const Tribes& tribes);
+	                                     const Descriptions& descriptions);
 
 	/// Parse a ware or worker list with optional amounts and ensure that the building's outputs
 	/// match. Example: "fish:2".
 	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments,
 	                                               WareWorker ww,
-	                                               const Tribes& tribes);
+	                                               Descriptions& descriptions);
 
 	/// Returns from the program.
 	///
@@ -151,35 +157,35 @@ struct ProductionProgram : public MapObjectProgram {
 	/// is implicitly set to Completed.
 	struct ActReturn : public Action {
 		ActReturn(const std::vector<std::string>& arguments,
-		          const ProductionSiteDescr&,
-		          const Tribes& tribes);
+		          ProductionSiteDescr&,
+		          const Descriptions& descriptions);
 		~ActReturn() override;
 		void execute(Game&, ProductionSite&) const override;
 
 		struct Condition {
-			virtual ~Condition();
-			virtual bool evaluate(const ProductionSite&) const = 0;
-			virtual std::string description(const Tribes&) const = 0;
-			virtual std::string description_negation(const Tribes&) const = 0;
+			virtual ~Condition() = default;
+			[[nodiscard]] virtual bool evaluate(const ProductionSite&) const = 0;
+			[[nodiscard]] virtual std::string description(const Descriptions&) const = 0;
+			[[nodiscard]] virtual std::string description_negation(const Descriptions&) const = 0;
 		};
 		static Condition* create_condition(const std::vector<std::string>& arguments,
 		                                   std::vector<std::string>::const_iterator& begin,
 		                                   std::vector<std::string>::const_iterator& end,
-		                                   const ProductionSiteDescr&,
-		                                   const Tribes& tribes);
+		                                   ProductionSiteDescr&,
+		                                   const Descriptions& descriptions);
 
 		struct Negation : public Condition {
 			Negation(const std::vector<std::string>& arguments,
 			         std::vector<std::string>::const_iterator& begin,
 			         std::vector<std::string>::const_iterator& end,
-			         const ProductionSiteDescr& descr,
-			         const Tribes& tribes);
+			         ProductionSiteDescr& descr,
+			         const Descriptions& descriptions);
 			~Negation() override;
-			bool evaluate(const ProductionSite&) const override;
+			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.
-			std::string description(const Tribes&) const override;
+			[[nodiscard]] std::string description(const Descriptions&) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.
-			std::string description_negation(const Tribes&) const override;
+			[[nodiscard]] std::string description_negation(const Descriptions&) const override;
 
 		private:
 			Condition* const operand;
@@ -189,9 +195,10 @@ struct ProductionProgram : public MapObjectProgram {
 		struct EconomyNeedsWare : public Condition {
 			explicit EconomyNeedsWare(const DescriptionIndex& i) : ware_type(i) {
 			}
-			bool evaluate(const ProductionSite&) const override;
-			std::string description(const Tribes& tribes) const override;
-			std::string description_negation(const Tribes& tribes) const override;
+			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
+			[[nodiscard]] std::string description(const Descriptions& descriptions) const override;
+			[[nodiscard]] std::string
+			description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			DescriptionIndex ware_type;
@@ -201,9 +208,10 @@ struct ProductionProgram : public MapObjectProgram {
 		struct EconomyNeedsWorker : public Condition {
 			explicit EconomyNeedsWorker(const DescriptionIndex& i) : worker_type(i) {
 			}
-			bool evaluate(const ProductionSite&) const override;
-			std::string description(const Tribes& tribes) const override;
-			std::string description_negation(const Tribes& tribes) const override;
+			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
+			[[nodiscard]] std::string description(const Descriptions& descriptions) const override;
+			[[nodiscard]] std::string
+			description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			DescriptionIndex worker_type;
@@ -216,10 +224,11 @@ struct ProductionProgram : public MapObjectProgram {
 			SiteHas(std::vector<std::string>::const_iterator begin,
 			        std::vector<std::string>::const_iterator end,
 			        const ProductionSiteDescr& descr,
-			        const Tribes& tribes);
-			bool evaluate(const ProductionSite&) const override;
-			std::string description(const Tribes& tribes) const override;
-			std::string description_negation(const Tribes& tribes) const override;
+			        const Descriptions& descriptions);
+			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
+			[[nodiscard]] std::string description(const Descriptions& descriptions) const override;
+			[[nodiscard]] std::string
+			description_negation(const Descriptions& descriptions) const override;
 
 		private:
 			WareTypeGroup group;
@@ -228,9 +237,9 @@ struct ProductionProgram : public MapObjectProgram {
 		/// Tests whether any of the workers at the site needs experience to
 		/// become upgraded.
 		struct WorkersNeedExperience : public Condition {
-			bool evaluate(const ProductionSite&) const override;
-			std::string description(const Tribes&) const override;
-			std::string description_negation(const Tribes&) const override;
+			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
+			[[nodiscard]] std::string description(const Descriptions&) const override;
+			[[nodiscard]] std::string description_negation(const Descriptions&) const override;
 		};
 
 		using Conditions = std::vector<Condition*>;
@@ -272,10 +281,10 @@ struct ProductionProgram : public MapObjectProgram {
 	///       * If handling_method is None the called program continues normal,
 	///         but no statistics are calculated
 	struct ActCall : public Action {
-		ActCall(const std::vector<std::string>& arguments);
+		explicit ActCall(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
-		const std::string& program_name() const {
+		[[nodiscard]] const std::string& program_name() const {
 			return program_name_;
 		}
 
@@ -295,16 +304,17 @@ struct ProductionProgram : public MapObjectProgram {
 		ActCallWorker(const std::vector<std::string>& arguments,
 		              const std::string& production_program_name,
 		              ProductionSiteDescr*,
-		              const Tribes& tribes);
+		              const Descriptions& descriptions);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;
-		const std::string& program() const {
+		[[nodiscard]] const std::string& program() const {
 			return program_;
 		}
 
 	private:
 		std::string program_;
+		ProgramResult on_failure_{ProgramResult::kFailed};
 	};
 
 	/// Does nothing.
@@ -396,7 +406,7 @@ struct ProductionProgram : public MapObjectProgram {
 	struct ActConsume : public Action {
 		ActConsume(const std::vector<std::string>& arguments,
 		           const ProductionSiteDescr& descr,
-		           const Tribes& tribes);
+		           const Descriptions& descriptions);
 		void execute(Game&, ProductionSite&) const override;
 	};
 
@@ -418,7 +428,7 @@ struct ProductionProgram : public MapObjectProgram {
 	struct ActProduce : public Action {
 		ActProduce(const std::vector<std::string>& arguments,
 		           ProductionSiteDescr&,
-		           const Tribes& tribes);
+		           Descriptions& descriptions);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
@@ -441,43 +451,51 @@ struct ProductionProgram : public MapObjectProgram {
 	struct ActRecruit : public Action {
 		ActRecruit(const std::vector<std::string>& arguments,
 		           ProductionSiteDescr&,
-		           const Tribes& tribes);
+		           Descriptions& descriptions);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
 
 	struct ActMine : public Action {
 		ActMine(const std::vector<std::string>& arguments,
-		        const World&,
+		        Descriptions& descriptions,
 		        const std::string& production_program_name,
 		        ProductionSiteDescr*);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		DescriptionIndex resource_;
-		uint8_t workarea_;            // width/radius of mine
-		unsigned max_resources_;      // Can work up to this percent (of total mountain resources)
-		unsigned depleted_chance_;    // odds of finding resources from empty mine
-		unsigned experience_chance_;  // probability of training in _empty_ mines
+		DescriptionIndex resource_{INVALID_INDEX};
+		uint8_t workarea_;              // width/radius of mine
+		unsigned max_resources_;        // Can work up to this percent (of total mountain resources)
+		unsigned depleted_chance_;      // odds of finding resources from empty mine
+		unsigned experience_chance_;    // probability of training in _empty_ mines
+		bool notify_on_failure_{true};  // Send a message if no resources could be found.
 	};
 
 	struct ActCheckSoldier : public Action {
-		explicit ActCheckSoldier(const std::vector<std::string>& arguments);
-		void execute(Game&, ProductionSite&) const override;
+		explicit ActCheckSoldier(const std::vector<std::string>& arguments,
+		                         const ProductionSiteDescr& descr);
+		void execute(Game&, ProductionSite& ps) const override;
+
+		[[nodiscard]] TrainingParameters training() const {
+			return training_;
+		}
 
 	private:
-		TrainingAttribute attribute_;
-		uint8_t level_;
+		TrainingParameters training_;
 	};
 
 	struct ActTrain : public Action {
-		explicit ActTrain(const std::vector<std::string>& arguments);
-		void execute(Game&, ProductionSite&) const override;
+		explicit ActTrain(const std::vector<std::string>& arguments,
+		                  const ProductionSiteDescr& descr);
+		void execute(Game&, ProductionSite& ps) const override;
+
+		[[nodiscard]] TrainingParameters training() const {
+			return training_;
+		}
 
 	private:
-		TrainingAttribute attribute_;
-		uint8_t level_;
-		uint8_t target_level_;
+		TrainingParameters training_;
 	};
 
 	/// Plays a sound effect.
@@ -519,12 +537,13 @@ struct ProductionProgram : public MapObjectProgram {
 		ActConstruct(const std::vector<std::string>& arguments,
 		             const std::string& production_program_name,
 		             ProductionSiteDescr*,
-		             const Tribes& tribes);
+		             const Descriptions& descriptions);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;
 
-		const ImmovableDescr& get_construction_descr(const Tribes& tribes) const;
+		[[nodiscard]] const ImmovableDescr&
+		get_construction_descr(const Descriptions& descriptions) const;
 
 	private:
 		std::string objectname;
@@ -533,20 +552,27 @@ struct ProductionProgram : public MapObjectProgram {
 	};
 
 	ProductionProgram(const std::string& init_name,
-	                  const std::string& init_descname,
-	                  std::unique_ptr<LuaTable> actions_table,
-	                  const Tribes& tribes,
-	                  const World& world,
+	                  const LuaTable& program_table,
+	                  Descriptions& descriptions,
 	                  ProductionSiteDescr* building);
 
-	const std::string& descname() const;
+	[[nodiscard]] const std::string& descname() const;
 
-	size_t size() const;
-	const ProductionProgram::Action& operator[](size_t const idx) const;
+	[[nodiscard]] size_t size() const;
+	const ProductionProgram::Action& operator[](size_t idx) const;
 
-	const ProductionProgram::Groups& consumed_wares_workers() const;
-	const Buildcost& produced_wares() const;
-	const Buildcost& recruited_workers() const;
+	[[nodiscard]] const ProductionProgram::Groups& consumed_wares_workers() const;
+	[[nodiscard]] const Buildcost& produced_wares() const;
+	[[nodiscard]] const Buildcost& recruited_workers() const;
+	[[nodiscard]] const std::string& trained_attribute() const {
+		return trained_attribute_;
+	}
+	[[nodiscard]] uint8_t train_from_level() const {
+		return train_from_level_;
+	}
+	[[nodiscard]] uint8_t train_to_level() const {
+		return train_to_level_;
+	}
 	// Throws a GameDataError if we're trying to call an unknown program
 	void validate_calls(const ProductionSiteDescr& descr) const;
 
@@ -556,6 +582,9 @@ private:
 	ProductionProgram::Groups consumed_wares_workers_;
 	Buildcost produced_wares_;
 	Buildcost recruited_workers_;
+	std::string trained_attribute_;
+	uint8_t train_from_level_;
+	uint8_t train_to_level_;
 };
 }  // namespace Widelands
 

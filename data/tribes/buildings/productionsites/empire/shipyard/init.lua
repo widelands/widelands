@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_shipyard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Shipyard"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    map_check = {"seafaring"},
@@ -22,22 +22,31 @@ tribes:new_productionsite_type {
       cloth = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 50, 63 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 56, 58 },
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 50, 63 },
+         frames = 4,
+         columns = 4,
+         rows = 1,
+         hotspot = { 56, 58 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 50, 63 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 56, 58 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 50, 63 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 56, 58 },
       },
    },
 
@@ -60,7 +69,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=ship on failure fail",
             "call=ship_preparation",
@@ -68,17 +77,19 @@ tribes:new_productionsite_type {
       },
       ship = {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
-         descname = _"constructing a ship",
+         descname = _("constructing a ship"),
          actions = {
             "construct=empire_shipconstruction worker:buildship radius:6",
             "sleep=duration:20s",
          }
       },
       ship_preparation = {
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "animate=working duration:35s",
          }
       },
    },
 }
+
+pop_textdomain()

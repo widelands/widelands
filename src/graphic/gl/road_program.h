@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,7 +28,7 @@ class RoadProgram {
 public:
 	// Compiles the program. Throws on error.
 	RoadProgram();
-	~RoadProgram();
+	~RoadProgram() = default;
 
 	// Draws the roads. The dimensions of the renderbuffer are needed to convert from pixel to GL
 	// space.
@@ -57,8 +56,8 @@ private:
 	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
 	              float scale,
-	              const Widelands::RoadSegment road_type,
-	              const Direction direction,
+	              Widelands::RoadSegment road_type,
+	              Direction direction,
 	              uint32_t* gl_texture);
 
 	// The buffer that will contain 'vertices_' for rendering.

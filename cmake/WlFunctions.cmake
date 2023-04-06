@@ -5,8 +5,10 @@ macro(_parse_common_args ARGS)
     THIRD_PARTY  # Is a third party lib. Less warnings, no codecheck.
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
-    USES_BOOST_REGEX
+    USES_ATOMIC
+    USES_ICU
     USES_INTL
+    USES_MINIZIP
     USES_OPENGL
     USES_PNG
     USES_SDL2
@@ -14,7 +16,6 @@ macro(_parse_common_args ARGS)
     USES_SDL2_MIXER
     USES_SDL2_TTF
     USES_ZLIB
-    USES_ICU
   )
   set(ONE_VALUE_ARG )
   set(MULTI_VALUE_ARGS SRCS DEPENDS)
@@ -54,6 +55,9 @@ macro(_common_compile_tasks)
   endif()
 
   set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${WL_OPTIMIZE_FLAGS} ${WL_DEBUG_FLAGS}")
+  if (OPTION_BUILD_WINSTATIC AND NOT MSVC)
+    set(TARGET_LINK_FLAGS "-static")
+  endif()
 
   if(ARG_THIRD_PARTY)
     # Disable all warnings for third_party.
@@ -72,15 +76,38 @@ macro(_common_compile_tasks)
     # src/ is the base for all of our includes. The binary one is for generated files.
     wl_include_directories(${NAME} ${CMAKE_SOURCE_DIR}/src)
     wl_include_directories(${NAME} ${CMAKE_BINARY_DIR}/src)
+    if(MINIZIP_STATIC_LIBRARIES)
+      wl_include_directories(${NAME} ${MINIZIP_INCLUDE_DIRS})
+      target_compile_options(${NAME} PUBLIC ${MINIZIP_CFLAGS})
+      if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+        include(CheckCXXCompilerFlag)
+        check_cxx_compiler_flag("-Wno-reserved-id-macro" HAVE_FLAG)
+        if (HAVE_FLAG)
+          target_compile_options(${NAME} PUBLIC "-Wno-reserved-id-macro")
+        endif()
+      endif()
+    else()
+      wl_include_directories(${NAME} ${CMAKE_SOURCE_DIR}/src/third_party/minizip)
+    endif()
+  endif()
 
-    # Boost is practically the standard library, so we always add a search path
-    # to include it easily. Except for third party.
-    wl_include_system_directories(${NAME} ${Boost_INCLUDE_DIR})
+  if(ARG_USES_MINIZIP)
+      if(MINIZIP_STATIC_LIBRARIES)
+          target_link_libraries(${NAME} minizip)
+          message(STATUS "Link ${NAME} with minizip")
+      else()
+          target_link_libraries(${NAME} third_party_minizip)
+          message(STATUS "Link ${NAME} with third_party_minizip")
+      endif()
+  endif()
+
+  if(ARG_USES_ATOMIC AND NOT APPLE AND ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
+    # clang on linux needs explicit linkage against standard library atomic
+    target_link_libraries(${NAME} atomic)
   endif()
 
   if(ARG_USES_ZLIB)
-    wl_include_system_directories(${NAME} ${ZLIB_INCLUDE_DIRS})
-    target_link_libraries(${NAME} ${ZLIB_LIBRARY})
+    target_link_libraries(${NAME} ZLIB::ZLIB)
   endif()
 
   # OpenGL and GLEW are one thing for us. If you use the one, you also use the
@@ -89,9 +116,10 @@ macro(_common_compile_tasks)
   # And a few -D do not hurt anything.
   if(OPTION_USE_GLBINDING)
     add_definitions("-DUSE_GLBINDING")
-  else()
+  elseif(${CMAKE_VERSION} VERSION_LESS 3.9.0)
     add_definitions(${GLEW_EXTRA_DEFINITIONS})
   endif()
+
   if(ARG_USES_OPENGL)
     if(OPTION_USE_GLBINDING)
       # Early versions of glbinding defined GLBINDING_INCLUDES, newer use
@@ -102,67 +130,88 @@ macro(_common_compile_tasks)
       else()
         target_link_libraries(${NAME} glbinding::glbinding)
       endif()
-
-      target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
     else()
-      wl_include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
-      target_link_libraries(${NAME} ${GLEW_LIBRARY})
-      target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
+      if(${CMAKE_VERSION} VERSION_LESS 3.9.0)
+        wl_include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
+        target_link_libraries(${NAME} ${GLEW_LIBRARY})
+        target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
+      else()
+        if (OPTION_BUILD_WINSTATIC)
+          target_link_libraries(${NAME} GLEW::glew_s)
+        else()
+          target_link_libraries(${NAME} GLEW::GLEW)
+        endif()
+      endif()
+    endif()
+    if(NOT ${CMAKE_VERSION} VERSION_LESS 3.9.0)
+      target_link_libraries(${NAME} OpenGL::GL)
     endif()
   endif()
 
   if(ARG_USES_PNG)
-    wl_include_system_directories(${NAME} ${PNG_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${PNG_LIBRARY})
+    target_link_libraries(${NAME} PNG::PNG)
   endif()
 
   if(ARG_USES_SDL2)
-    if(TARGET SDL2::SDL2)
-      target_link_libraries(${NAME} SDL2::SDL2)
+    if (OPTION_BUILD_WINSTATIC)
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Main ${SDL_EXTRA_LIBS} intl iconv dinput8 shell32 setupapi advapi32 uuid version oleaut32 ole32 imm32 winmm gdi32 user32 ${BROTLI} ${ZSTD})
     else()
-      wl_include_system_directories(${NAME} ${SDL2_INCLUDE_DIRS})
-      target_link_libraries(${NAME} ${SDL2_LIBRARIES})
-    endif()
-    if(CMAKE_THREAD_LIBS_INIT)
-      target_link_libraries(${NAME} ${CMAKE_THREAD_LIBS_INIT})
+      target_link_libraries(${NAME} SDL2::Main)
     endif()
   endif()
 
   if(ARG_USES_SDL2_MIXER)
-    wl_include_system_directories(${NAME} ${SDL2MIXER_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2MIXER_LIBRARY})
+    if (OPTION_BUILD_WINSTATIC)
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Mixer opusfile opus FLAC vorbisfile vorbis ogg mpg123 shlwapi ${SDL_MIXER_EXTRA_LIBS})
+    else()
+      target_link_libraries(${NAME} SDL2::Mixer)
+    endif()
   endif()
 
   if(ARG_USES_SDL2_IMAGE)
-    wl_include_system_directories(${NAME} ${SDL2IMAGE_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2IMAGE_LIBRARY})
+    if (OPTION_BUILD_WINSTATIC)
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Image jpeg tiff lzma ${SDL_IMG_EXTRA_LIBS})
+    else()
+      target_link_libraries(${NAME} SDL2::Image)
+    endif()
   endif()
 
   if(ARG_USES_SDL2_TTF)
-    wl_include_system_directories(${NAME} ${SDL2TTF_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2TTF_LIBRARY})
+    if (OPTION_BUILD_WINSTATIC)
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::TTF freetype bz2 graphite2 usp10 dwrite harfbuzz ${ZSTD} freetype rpcrt4)
+    else()
+      target_link_libraries(${NAME} SDL2::TTF)
+    endif()
   endif()
 
   if (ARG_USES_INTL)
     # libintl is not used on all systems, so only include it, when we actually
     # found it.
-    if (INTL_FOUND)
-      wl_include_system_directories(${NAME} ${INTL_INCLUDE_DIR})
-      target_link_libraries(${NAME} ${INTL_LIBRARY})
+    if (Intl_FOUND)
+      wl_include_system_directories(${NAME} ${Intl_INCLUDE_DIRS})
+      if (OPTION_BUILD_WINSTATIC)
+        target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} ${Intl_LIBRARIES} iconv)
+      else()
+        target_link_libraries(${NAME} ${Intl_LIBRARIES})
+      endif()
     endif()
   endif()
 
-  if (ARG_USES_BOOST_REGEX)
-    target_link_libraries(${NAME} ${Boost_LIBRARIES})
-  endif()
-
   if(ARG_USES_ICU)
-    wl_include_system_directories(${NAME} ${ICU_INCLUDE_DIRS})
-    target_link_libraries(${NAME} ${ICU_LIBRARIES})
+    if(${CMAKE_VERSION} VERSION_LESS 3.9.0)
+      wl_include_system_directories(${NAME} ${ICU_INCLUDE_DIRS})
+      target_link_libraries(${NAME} ${ICU_LIBRARIES})
+    else()
+      target_link_libraries(${NAME} ICU::uc ICU::dt)
+    endif()
   endif()
 
   foreach(DEPENDENCY ${ARG_DEPENDS})
-    target_link_libraries(${NAME} ${DEPENDENCY})
+  if (OPTION_BUILD_WINSTATIC)
+    target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} ${DEPENDENCY})
+  else()
+  target_link_libraries(${NAME} ${DEPENDENCY})
+  endif()
   endforeach(DEPENDENCY)
 endmacro(_common_compile_tasks)
 
@@ -195,21 +244,8 @@ function(wl_test NAME)
 
   add_executable(${NAME} ${ARG_SRCS})
 
-  # If boost unit test library is linked dynamically, BOOST_TEST_DYN_LINK must be defined
-  string(REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-  if (NOT BOOST_STATIC_UNIT_TEST_LIB)
-    set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -DBOOST_TEST_DYN_LINK")
-  endif()
-  target_link_libraries(${NAME} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-
   # Tests need to link with SDL2 library without main.
-  set(SDL2_LIBRARIES_TEMP ${SDL2_LIBRARIES})
-  if (SDL2MAIN_LIBRARY)
-    list(REMOVE_ITEM SDL2_LIBRARIES_TEMP ${SDL2MAIN_LIBRARY})
-  else()
-    list(REMOVE_ITEM SDL2_LIBRARIES_TEMP -lSDL2main)
-  endif()
-  target_link_libraries(${NAME} ${SDL2_LIBRARIES_TEMP})
+  target_link_libraries(${NAME} SDL2::Core)
 
   _common_compile_tasks()
 
@@ -241,6 +277,7 @@ function(wl_run_codecheck NAME SRC)
         -DSRC=${ABSOLUTE_SRC}
         -DOUTPUT_FILE=${OUTPUT_FILE}
         -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}
+        -DWL_ROOT_DIR=${WL_ROOT_DIR}
         -P ${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.cmake
       DEPENDS ${ABSOLUTE_SRC}
       COMMENT "Checking ${SRC} with CodeCheck"
@@ -289,5 +326,5 @@ function(wl_binary NAME)
 
   #Quoting the CMake documentation on DESTINATION:
   #"If a relative path is given it is interpreted relative to the value of CMAKE_INSTALL_PREFIX"
-  install(TARGETS ${NAME} DESTINATION "." COMPONENT ExecutableFiles)
+  install(TARGETS ${NAME} DESTINATION "${WL_INSTALL_BINDIR}" COMPONENT ExecutableFiles)
 endfunction()

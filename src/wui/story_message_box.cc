@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,7 +28,7 @@
 
 namespace {
 constexpr int kPadding = 4;
-}
+}  // namespace
 
 StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                                  const Widelands::Coords coords,
@@ -38,12 +37,42 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                                  int32_t const x,
                                  int32_t const y,
                                  uint32_t const w,
-                                 uint32_t const h)
-   : UI::Window(game->get_ipl(), "story_message_box", x, y, w, h, title.c_str()),
-     main_box_(this, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
-     button_box_(&main_box_, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
-     textarea_(&main_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, body),
-     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
+                                 uint32_t const h,
+                                 bool modal,
+                                 bool allow_next_scenario)
+   : UI::Window(game->get_ipl(), UI::WindowStyle::kWui, "story_message_box", x, y, w, h, title),
+     main_box_(this, UI::PanelStyle::kWui, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
+     button_box_(
+        &main_box_, UI::PanelStyle::kWui, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
+     textarea_(&main_box_, 0, 0, 100, 50, UI::PanelStyle::kWui, body),
+     ok_(&button_box_,
+         "ok",
+         0,
+         0,
+         120,
+         0,
+         allow_next_scenario ? UI::ButtonStyle::kWuiSecondary : UI::ButtonStyle::kWuiPrimary,
+         _("OK")),
+     next_scenario_(&button_box_,
+                    "next",
+                    0,
+                    0,
+                    120,
+                    0,
+                    UI::ButtonStyle::kWuiPrimary,
+                    _("Next Mission"),
+                    _("Start the next mission now")),
+     main_menu_(&button_box_,
+                "mainmenu",
+                0,
+                0,
+                120,
+                0,
+                allow_next_scenario && game->list_of_scenarios().size() < 2 ?
+                   UI::ButtonStyle::kWuiPrimary :
+                   UI::ButtonStyle::kWuiSecondary,
+                _("Main Menu"),
+                _("Return to the main menu")),
      desired_speed_(game->game_controller()->desired_speed()),
      game_(game) {
 
@@ -61,9 +90,28 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 
 	main_box_.add(&textarea_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
+
 	button_box_.add_inf_space();
 	button_box_.add(&ok_);
 	button_box_.add_inf_space();
+
+	if (allow_next_scenario) {  // End of game
+		button_box_.add(&main_menu_);
+		button_box_.add_inf_space();
+		if (game->list_of_scenarios().size() > 1) {  // Next scenario can be started
+			button_box_.add(&next_scenario_);
+			button_box_.add_inf_space();
+			next_scenario_.sigclicked.connect([this]() { clicked_next_scenario(); });
+		} else {  // Last scenario in the campaign
+			next_scenario_.set_visible(false);
+		}
+		main_menu_.sigclicked.connect([this]() { clicked_main_menu(); });
+		ok_.set_tooltip(_("Continue playing this mission"));
+	} else {  // Normal message box, which has only the OK button
+		next_scenario_.set_visible(false);
+		main_menu_.set_visible(false);
+		button_box_.set_visible(modal);
+	}
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
@@ -72,20 +120,49 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	}
 	move_inside_parent();
 	textarea_.focus();
+
+	if (!modal) {
+		resume_game();
+	}
+
+	initialization_complete();
 }
 
 void StoryMessageBox::clicked_ok() {
+	set_visible(false);
+	set_thinks(false);
+
+	if (is_modal()) {
+		resume_game();
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+	} else {
+		die();
+	}
+}
+
+void StoryMessageBox::resume_game() {
 	// Manually force the game to reevaluate its current state, especially time information.
 	game_->game_controller()->think();
 	// Now get the game running again.
 	game_->game_controller()->set_desired_speed(desired_speed_);
 	game_->save_handler().set_allow_saving(true);
+}
 
-	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+void StoryMessageBox::clicked_next_scenario() {
+	assert(game_->list_of_scenarios().size() > 1);
+	auto it = game_->list_of_scenarios().begin();
+	++it;
+	game_->set_next_game_to_load(*it);
+
+	clicked_main_menu();
+}
+void StoryMessageBox::clicked_main_menu() {
+	clicked_ok();
+	get_topmost_forefather().end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
-	if (btn == SDL_BUTTON_RIGHT) {
+	if (btn == SDL_BUTTON_RIGHT && is_modal()) {
 		return true;
 	}
 
@@ -95,16 +172,21 @@ bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t m
 bool StoryMessageBox::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			clicked_ok();
+			if (next_scenario_.is_visible()) {
+				clicked_next_scenario();
+			} else if (main_menu_.is_visible()) {
+				clicked_main_menu();
+			} else {
+				clicked_ok();
+			}
 			return true;
 		case SDLK_ESCAPE:
 			clicked_ok();
-			return UI::Window::handle_key(down, code);
+			return true;
 		default:
 			break;  // not handled
 		}
 	}
-	return UI::Panel::handle_key(down, code);
+	return UI::Window::handle_key(down, code);
 }

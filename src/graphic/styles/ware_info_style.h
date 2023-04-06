@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2020 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -45,22 +44,22 @@ struct WareInfoStyleInfo {
 	     info_background_(init_info_background) {
 	}
 
-	const UI::FontStyleInfo& header_font() const {
-		return *header_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& header_font() const {
+		return *header_font_;
 	}
-	const UI::FontStyleInfo& info_font() const {
-		return *info_font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& info_font() const {
+		return *info_font_;
 	}
-	const Image* icon_background_image() const {
+	[[nodiscard]] const Image* icon_background_image() const {
 		return icon_background_image_;
 	}
-	const RGBColor& icon_frame() const {
+	[[nodiscard]] const RGBColor& icon_frame() const {
 		return icon_frame_;
 	}
-	const RGBColor& icon_background() const {
+	[[nodiscard]] const RGBColor& icon_background() const {
 		return icon_background_;
 	}
-	const RGBColor& info_background() const {
+	[[nodiscard]] const RGBColor& info_background() const {
 		return info_background_;
 	}
 

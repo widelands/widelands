@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -39,7 +38,7 @@ namespace Widelands {
 WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
                            DescriptionIndex const init_ware,
                            uint8_t const init_max_size)
-   : InputQueue(init_owner, init_ware, init_max_size, wwWORKER), workers_() {
+   : InputQueue(init_owner, init_ware, init_max_size, wwWORKER) {
 	if (index_ != INVALID_INDEX) {
 		update();
 	}
@@ -94,7 +93,7 @@ void WorkersQueue::entered(
 	update();
 }
 
-void WorkersQueue::remove_from_economy(Economy&) {
+void WorkersQueue::remove_from_economy(Economy& /*e*/) {
 	if (index_ != INVALID_INDEX) {
 		if (request_) {
 			request_.reset();
@@ -187,7 +186,7 @@ Worker* WorkersQueue::extract_worker() {
 
 constexpr uint16_t kCurrentPacketVersion = 3;
 
-void WorkersQueue::write_child(FileWrite& fw, Game&, MapObjectSaver& mos) {
+void WorkersQueue::write_child(FileWrite& fw, Game& /*g*/, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 	// Store references to the workers
 	fw.unsigned_32(workers_.size());
@@ -197,7 +196,7 @@ void WorkersQueue::write_child(FileWrite& fw, Game&, MapObjectSaver& mos) {
 	}
 }
 
-void WorkersQueue::read_child(FileRead& fr, Game&, MapObjectLoader& mol) {
+void WorkersQueue::read_child(FileRead& fr, Game& /*g*/, MapObjectLoader& mol) {
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
 		if (packet_version == kCurrentPacketVersion) {

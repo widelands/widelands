@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2020 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,40 +12,29 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "wui/itemwaresdisplay.h"
 
+#include "graphic/animation/animation_manager.h"
 #include "graphic/rendertarget.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "ui_basic/mouse_constants.h"
 
-namespace {
-
 constexpr int kMargin = 4;
-static const uint32_t IWD_HBorder = 10;
-static const uint32_t IWD_VBorder = 10;
-static const uint32_t IWD_DefaultItemsPerRow = 9;
-static const uint32_t IWD_ItemWidth = 14;
-static const uint32_t IWD_ItemHeight = 26;
-static const uint32_t IWD_WorkerBaseline =
-   2;  ///< Offset of anim center from bottom border of item rect
-static const uint32_t IWD_WareBaseLine = -6;
-
-}  // anonymous namespace
+constexpr int kHBorder = 8;
+constexpr int kVBorder = 8;
+constexpr int kItemWidth = 22;
+constexpr int kItemHeight = 28;
 
 /**
  * Create an ItemWaresDisplay with no items and zero capacity.
  */
 ItemWaresDisplay::ItemWaresDisplay(Panel* parent, const Widelands::Player& gplayer)
-   : Panel(parent, 0, 0, 0, 0),
-     player_(gplayer),
-     capacity_(0),
-     items_per_row_(IWD_DefaultItemsPerRow) {
+   : Panel(parent, UI::PanelStyle::kWui, 0, 0, 0, 0), player_(gplayer) {
 	recalc_desired_size();
 }
 
@@ -73,18 +62,35 @@ void ItemWaresDisplay::recalc_desired_size() {
 	uint32_t nrrows = (capacity_ + items_per_row_ - 1) / items_per_row_;
 	uint32_t rowitems = capacity_ >= items_per_row_ ? items_per_row_ : capacity_;
 
-	set_desired_size(2 * (IWD_HBorder + kMargin) + rowitems * IWD_ItemWidth,
-	                 2 * (IWD_VBorder + kMargin) + nrrows * IWD_ItemHeight);
+	set_desired_size(2 * (kHBorder + kMargin) + rowitems * kItemWidth,
+	                 2 * (kVBorder + kMargin) + nrrows * kItemHeight);
 }
 
 /**
  * Add an item to the end of the internal list.
  */
-void ItemWaresDisplay::add(bool worker, Widelands::DescriptionIndex index) {
-	Item it;
-	it.worker = worker;
-	it.index = index;
-	items_.push_back(it);
+void ItemWaresDisplay::add(Widelands::WareWorker type, Widelands::DescriptionIndex index) {
+	items_.emplace_back(type, index);
+}
+
+bool ItemWaresDisplay::handle_mousemove(
+   uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
+	const Item* i = at(x, y);
+	set_tooltip(i == nullptr ?
+                  std::string() :
+	            i->type == Widelands::wwWARE ?
+                  player_.egbase().descriptions().get_ware_descr(i->index)->descname() :
+                  player_.egbase().descriptions().get_worker_descr(i->index)->descname());
+	return true;
+}
+
+const ItemWaresDisplay::Item* ItemWaresDisplay::at(int32_t x, int32_t y) const {
+	x -= (kHBorder + kMargin);
+	y -= (kVBorder + kMargin);
+	x /= kItemWidth;
+	y /= kItemHeight;
+	int32_t index = y * items_per_row_ + x;
+	return (index >= 0 && index < static_cast<int32_t>(items_.size())) ? &items_.at(index) : nullptr;
 }
 
 void ItemWaresDisplay::draw(RenderTarget& dst) {
@@ -113,20 +119,22 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 		uint32_t row = idx / items_per_row_;
 		uint32_t col = idx % items_per_row_;
 
-		uint32_t x = IWD_HBorder / 2 + col * IWD_ItemWidth + kMargin;
-		uint32_t y = IWD_VBorder + row * IWD_ItemHeight + kMargin;
+		uint32_t x = kHBorder + col * kItemWidth + kMargin;
+		uint32_t y = kVBorder + row * kItemHeight + kMargin;
 
-		if (it.worker) {
-			y += IWD_WorkerBaseline;
+		if (it.type == Widelands::wwWORKER) {
 			constexpr float kZoom = 1.f;
-			dst.blit_animation(Vector2f(x + (IWD_ItemWidth / 2.f), y + (IWD_ItemHeight / 2.f)),
-			                   Widelands::Coords::null(), kZoom,
-			                   tribe.get_worker_descr(it.index)->main_animation(), 0,
+			const uint32_t anim_id = tribe.get_worker_descr(it.index)->main_animation();
+			const Animation& anim = g_animation_manager->get_animation(anim_id);
+			dst.blit_animation(Vector2f(x + anim.hotspot().x + (kItemWidth - anim.width()) / 2.f,
+			                            y + anim.hotspot().y + (kItemHeight - anim.height()) / 2.f),
+			                   Widelands::Coords::null(), kZoom, anim_id, Time(0),
 			                   &player().get_playercolor());
 		} else {
-			y += IWD_WareBaseLine;
-			if (tribe.get_ware_descr(it.index)->icon()) {
-				dst.blit(Vector2i(x, y), tribe.get_ware_descr(it.index)->icon());
+			if (const Image* icon = tribe.get_ware_descr(it.index)->icon(); icon != nullptr) {
+				dst.blit(Vector2i(x + (kItemWidth - icon->width()) / 2.f,
+				                  y + (kItemHeight - icon->height()) / 2.f),
+				         icon);
 			}
 		}
 	}

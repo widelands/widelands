@@ -1,25 +1,19 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_ware_type {
-   msgctxt = "ware",
+wl.Descriptions():new_ware_type {
    name = "fishing_rod",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Fishing Rod"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      barbarians = 1,
-      empire = 1
-   },
-   preciousness = {
-      barbarians = 0,
-      empire = 0
-   },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 4, 5 },
       },
    }
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,24 +12,26 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "economy/road.h"
 
+#include <cstddef>
+
+#include "base/log.h"
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -37,25 +39,16 @@ namespace Widelands {
 // dummy instance because MapObject needs a description
 namespace {
 const RoadDescr g_road_descr("road", "Road");
-}
+}  // namespace
 
 bool Road::is_road_descr(MapObjectDescr const* const descr) {
 	return descr == &g_road_descr;
 }
 
-Road::CarrierSlot::CarrierSlot()
-   : carrier(nullptr), carrier_request(nullptr), second_carrier(false) {
-}
-
 /**
  * Most of the actual work is done in init.
  */
-Road::Road() : RoadBase(g_road_descr), busy_(false), wallet_(0), last_wallet_charge_(0) {
-	CarrierSlot slot;
-	carrier_slots_.push_back(slot);
-	carrier_slots_.push_back(slot);
-	carrier_slots_[0].second_carrier = false;
-	carrier_slots_[1].second_carrier = true;
+Road::Road() : RoadBase(g_road_descr) {
 }
 
 /**
@@ -65,6 +58,18 @@ Road::~Road() {
 	for (CarrierSlot& slot : carrier_slots_) {
 		delete slot.carrier_request;
 	}
+}
+
+bool Road::init(EditorGameBase& egbase) {
+	if (get_owner() != nullptr) {  // Skip during loading
+		const size_t nr_slots = owner().tribe().carriers().size();
+		for (size_t i = 0; i < nr_slots; ++i) {
+			carrier_slots_.emplace_back();
+			carrier_slots_.back().carrier_type_id = i;
+		}
+	}
+
+	return RoadBase::init(egbase);
 }
 
 /**
@@ -105,7 +110,7 @@ void Road::cleanup(EditorGameBase& egbase) {
 	RoadBase::cleanup(egbase);
 }
 
-void Road::link_into_flags(EditorGameBase& egbase, bool) {
+void Road::link_into_flags(EditorGameBase& egbase, bool /* loading */) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWORKER);
@@ -115,7 +120,7 @@ void Road::link_into_flags(EditorGameBase& egbase, bool) {
 				// This happens after a road split. Tell the carrier what's going on.
 				carrier->set_location(this);
 				carrier->update_task_road(*game);
-			} else if (!slot.carrier_request && (!slot.second_carrier || busy_)) {
+			} else if ((slot.carrier_request == nullptr) && (slot.carrier_type_id == 0 || busy_)) {
 				// Normal carriers are requested at once, second carriers only for busy roads
 				request_carrier(slot);
 			}
@@ -134,7 +139,7 @@ void Road::set_economy(Economy* const e, WareWorker type) {
 	RoadBase::set_economy(e, type);
 	if (type == wwWORKER) {
 		for (CarrierSlot& slot : carrier_slots_) {
-			if (slot.carrier_request) {
+			if (slot.carrier_request != nullptr) {
 				slot.carrier_request->set_economy(e);
 			}
 		}
@@ -149,15 +154,17 @@ void Road::set_economy(Economy* const e, WareWorker type) {
  */
 void Road::request_carrier(CarrierSlot& slot) {
 	slot.carrier_request = new Request(
-	   *this, slot.second_carrier ? owner().tribe().carrier2() : owner().tribe().carrier(),
-	   request_carrier_callback, wwWORKER);
+	   *this, owner().tribe().carriers()[slot.carrier_type_id], request_carrier_callback, wwWORKER);
 }
 
 /**
  * The carrier has arrived successfully.
  */
-void Road::request_carrier_callback(
-   Game& game, Request& rq, DescriptionIndex, Worker* const w, PlayerImmovable& target) {
+void Road::request_carrier_callback(Game& game,
+                                    Request& rq,
+                                    DescriptionIndex /* index */,
+                                    Worker* const w,
+                                    PlayerImmovable& target) {
 	assert(w);
 
 	Road& road = dynamic_cast<Road&>(target);
@@ -178,7 +185,8 @@ void Road::request_carrier_callback(
 	 * Oops! We got a request_callback but don't have the request.
 	 * Try to send him home.
 	 */
-	log("Road(%u): got a request_callback but do not have the request\n", road.serial());
+	log_warn_time(game.get_gametime(),
+	              "Road(%u): got a request_callback but do not have the request\n", road.serial());
 	delete &rq;
 	w->start_task_gowarehouse(game);
 }
@@ -210,7 +218,7 @@ void Road::remove_worker(Worker& w) {
  * and should now be assigned to this road.
  */
 void Road::assign_carrier(Carrier& c, uint8_t slot) {
-	assert(slot <= 1);
+	assert(slot <= carrier_slots_.size());
 
 	// Send the worker home if it occupies our slot
 	CarrierSlot& s = carrier_slots_[slot];
@@ -251,13 +259,13 @@ void Road::postsplit(Game& game, Flag& flag) {
 	path.truncate(index);
 	secondpath.trim_start(index);
 
-	molog("splitting road: first part:\n");
+	molog(game.get_gametime(), "splitting road: first part:\n");
 	for (const Coords& coords : path.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
-	molog("                second part:\n");
+	molog(game.get_gametime(), "                second part:\n");
 	for (const Coords& coords : secondpath.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
 
 	// change road size and reattach
@@ -294,7 +302,8 @@ void Road::postsplit(Game& game, Flag& flag) {
 		// If he is in the building at our end flag or at the other road's
 		// end flag, he can be reassigned to the other road.
 		if (idx < 0) {
-			if (dynamic_cast<Building const*>(map.get_immovable(w->get_position()))) {
+			const MapObject* mo = map.get_immovable(w->get_position());
+			if ((mo != nullptr) && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 				Coords pos;
 				map.get_brn(w->get_position(), &pos);
 				if (pos == path.get_start()) {
@@ -316,8 +325,9 @@ void Road::postsplit(Game& game, Flag& flag) {
 				if (carrier == w) {
 					old_slot.carrier = nullptr;
 					for (CarrierSlot& new_slot : newroad.carrier_slots_) {
-						if (!new_slot.carrier.get(game) && !new_slot.carrier_request &&
-						    new_slot.second_carrier == old_slot.second_carrier) {
+						if ((new_slot.carrier.get(game) == nullptr) &&
+						    (new_slot.carrier_request == nullptr) &&
+						    new_slot.carrier_type_id == old_slot.carrier_type_id) {
 							upcast(Carrier, new_carrier, w);
 							new_slot.carrier = new_carrier;
 							break;
@@ -345,7 +355,8 @@ void Road::postsplit(Game& game, Flag& flag) {
 	//  _after_ the new road initializes, otherwise request routing might not
 	//  work correctly
 	for (CarrierSlot& slot : carrier_slots_) {
-		if (!slot.carrier.get(game) && !slot.carrier_request && (!slot.second_carrier || busy_)) {
+		if ((slot.carrier.get(game) == nullptr) && (slot.carrier_request == nullptr) &&
+		    (slot.carrier_type_id == 0 || busy_)) {
 			request_carrier(slot);
 		}
 	}
@@ -397,7 +408,8 @@ bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t
 		return false;
 	}
 
-	FCoords fr, fd;
+	FCoords fr;
+	FCoords fd;
 	switch (dir) {
 	case WALK_SW:
 		fd = field;
@@ -426,16 +438,16 @@ bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t
 	default:
 		NEVER_HERE();
 	}
-	return (egbase.world().terrain_descr(fd.field->terrain_d()).get_is() &
-	        TerrainDescription::Is::kUnwalkable) &&
-	       (egbase.world().terrain_descr(fr.field->terrain_r()).get_is() &
-	        TerrainDescription::Is::kUnwalkable);
+	return ((egbase.descriptions().get_terrain_descr(fd.field->terrain_d())->get_is() &
+	         TerrainDescription::Is::kUnwalkable) != 0) &&
+	       ((egbase.descriptions().get_terrain_descr(fr.field->terrain_r())->get_is() &
+	         TerrainDescription::Is::kUnwalkable) != 0);
 }
 
 /**
  * Update last_wallet_charge_ with the current gametime.
  */
-void Road::update_wallet_chargetime(Game& game) {
+void Road::update_wallet_chargetime(const Game& game) {
 	last_wallet_charge_ = game.get_gametime();
 }
 
@@ -443,24 +455,35 @@ void Road::update_wallet_chargetime(Game& game) {
  * Subtract maintenance cost, and check for demotion.
  */
 void Road::charge_wallet(Game& game) {
-	const uint32_t current_gametime = game.get_gametime();
+	const Time& current_gametime = game.get_gametime();
 	assert(last_wallet_charge_ <= current_gametime);
 
-	wallet_ -= carriers_count() * (current_gametime - last_wallet_charge_) / 1000;
+	wallet_ -= (((current_gametime - last_wallet_charge_) / 1000) * carriers_count()).get();
 	last_wallet_charge_ = current_gametime;
 
 	if (wallet_ < 0) {
 		wallet_ = 0;
 		if (busy_) {
 			// Demote the road
-			Carrier* const second_carrier = carrier_slots_[1].carrier.get(game);
-			if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
-				second_carrier->send_signal(game, "cancel");
-				// This signal is not handled in any special way. It will simply pop the task off the
-				// stack. The string "cancel" has been used to clarify the final goal we want to
-				// achieve, ie: cancelling the current task.
-				carrier_slots_[1].carrier = nullptr;
-				carrier_slots_[1].carrier_request = nullptr;
+			bool all_dismissed = true;
+			for (CarrierSlot& slot : carrier_slots_) {
+				if (slot.carrier_type_id == 0) {
+					continue;
+				}
+				if (Carrier* const c = slot.carrier.get(game)) {
+					if (c->top_state().task == &Carrier::taskRoad) {
+						c->send_signal(game, "cancel");
+						// This signal is not handled in any special way. It will simply pop the task off
+						// the stack. The string "cancel" has been used to clarify the final goal we want
+						// to achieve, ie: cancelling the current task.
+						slot.carrier = nullptr;
+						slot.carrier_request = nullptr;
+					} else {
+						all_dismissed = false;
+					}
+				}
+			}
+			if (all_dismissed) {
 				busy_ = false;
 				mark_map(game);
 			}
@@ -480,7 +503,7 @@ void Road::add_to_wallet(int32_t sum) {
  * Add carrying payment, and check for promotion.
  */
 void Road::pay_for_road(Game& game, uint8_t queue_length) {
-	wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
+	wallet_ += 2UL * (carriers_count() + 1) * (4UL * queue_length + path_.get_nsteps());
 	charge_wallet(game);
 
 	if (!busy_ && wallet_ > 1.5 * kRoadAnimalPrice) {
@@ -491,7 +514,8 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 		flags_[1]->propagate_promoted_road(this);
 		mark_map(game);
 		for (CarrierSlot& slot : carrier_slots_) {
-			if (!slot.carrier.get(game) && !slot.carrier_request && slot.second_carrier) {
+			if ((slot.carrier.get(game) == nullptr) && (slot.carrier_request == nullptr) &&
+			    slot.carrier_type_id > 0) {
 				request_carrier(slot);
 			}
 		}
@@ -509,6 +533,6 @@ void Road::pay_for_building() {
 
 void Road::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
-	molog("wallet: %i\n", wallet_);
+	molog(egbase.get_gametime(), "wallet: %i\n", wallet_);
 }
 }  // namespace Widelands

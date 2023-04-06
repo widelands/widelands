@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,15 +12,17 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_WUI_GENERAL_STATISTICS_MENU_H
 #define WL_WUI_GENERAL_STATISTICS_MENU_H
 
+#include <memory>
+
 #include "graphic/playercolor.h"
+#include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
@@ -34,31 +36,43 @@ struct GeneralStatisticsMenu : public UI::UniqueWindow {
 	// Custom registry, to store the selected_information as well.
 	struct Registry : public UI::UniqueWindow::Registry {
 		Registry()
-		   : UI::UniqueWindow::Registry(),
-		     selected_information(0),
-		     selected_players(true, kMaxPlayers),
-		     time(WuiPlotArea::TIME_GAME) {
+		   :
+
+		     selected_players(kMaxPlayers, true) {
 		}
 
-		int32_t selected_information;
+		int32_t selected_information{0};
 		std::vector<bool> selected_players;
-		WuiPlotArea::TIME time;
+		WuiPlotArea::TIME time{WuiPlotArea::TIME_GAME};
 	};
 
 	GeneralStatisticsMenu(InteractiveGameBase&, Registry&);
-	virtual ~GeneralStatisticsMenu();
+	~GeneralStatisticsMenu() override;
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kGeneralStats;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
 	Registry* my_registry_;
-	UI::Box box_;
+	UI::Box box_, player_buttons_box_;
 	WuiPlotArea plot_;
 	UI::Radiogroup radiogroup_;
-	int32_t selected_information_;
+	int32_t selected_information_{0};
 	UI::Button* cbs_[kMaxPlayers];
+	WuiPlotAreaSlider* slider_;
 	uint32_t ndatasets_;
+	Widelands::Game& game_;
+
+	void create_player_buttons();
+	std::unique_ptr<Notifications::Subscriber<Widelands::NotePlayerDetailsEvent>> subscriber_;
 
 	void cb_changed_to(int32_t);
 	void radiogroup_changed(int32_t);
+	void show_or_hide_plot(int32_t id, bool show);
+	void save_state_to_registry();
 };
 
 #endif  // end of include guard: WL_WUI_GENERAL_STATISTICS_MENU_H

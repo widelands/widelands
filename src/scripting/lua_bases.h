@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -41,16 +40,16 @@ class LuaEditorGameBase : public LuaBasesModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaEditorGameBase);
 
-	LuaEditorGameBase() {
-	}
+	LuaEditorGameBase() = default;
 	explicit LuaEditorGameBase(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'EditorGameBase' directly!");
 	}
-	~LuaEditorGameBase() override {
-	}
+	~LuaEditorGameBase() override = default;
 
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * Properties
@@ -62,7 +61,7 @@ public:
 	 * Lua methods
 	 */
 	int get_immovable_description(lua_State* L);
-	int tribe_immovable_exists(lua_State* L);
+	int immovable_exists(lua_State* L);
 	int get_building_description(lua_State* L);
 	int get_ship_description(lua_State* L);
 	int get_tribe_description(lua_State* L);
@@ -80,25 +79,24 @@ public:
 };
 
 class LuaPlayerBase : public LuaBasesModuleClass {
-	Widelands::PlayerNumber player_number_;
-	enum { NONE = -1 };
+	Widelands::PlayerNumber player_number_{0U};
 
 public:
 	LUNA_CLASS_HEAD(LuaPlayerBase);
 
-	LuaPlayerBase() : player_number_(NONE) {
-	}
-	explicit LuaPlayerBase(lua_State* L) : player_number_(NONE) {
+	LuaPlayerBase() = default;
+	explicit LuaPlayerBase(lua_State* L) : player_number_(0U) {
 		report_error(L, "Cannot instantiate a 'PlayerBase' directly!");
 	}
 	explicit LuaPlayerBase(Widelands::PlayerNumber n) {
 		player_number_ = n;
 	}
-	~LuaPlayerBase() override {
-	}
+	~LuaPlayerBase() override = default;
 
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * Properties
@@ -109,8 +107,10 @@ public:
 	/*
 	 * Lua methods
 	 */
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	int __eq(lua_State* L);
 	int __tostring(lua_State* L);
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 	int place_flag(lua_State* L);
 	int place_road(lua_State* L);
 	int place_building(lua_State* L);
@@ -122,10 +122,10 @@ public:
 	/*
 	 * C methods
 	 */
-	Widelands::Player& get(lua_State* L, Widelands::EditorGameBase&);
+	Widelands::Player& get(lua_State* L, const Widelands::EditorGameBase&) const;
 
 protected:
-	inline Widelands::PlayerNumber player_number() {
+	[[nodiscard]] inline Widelands::PlayerNumber player_number() const {
 		return player_number_;
 	}
 };

@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -32,33 +31,29 @@
 class Surface {
 public:
 	Surface() = default;
-	virtual ~Surface() {
-	}
+	virtual ~Surface() = default;
 
 	/// Dimensions.
-	virtual int width() const = 0;
-	virtual int height() const = 0;
+	[[nodiscard]] virtual int width() const = 0;
+	[[nodiscard]] virtual int height() const = 0;
 
 	/// This draws a part of 'texture'.
-	void blit(const Rectf& dst,
-	          const Image&,
-	          const Rectf& srcrc,
-	          const float opacity,
-	          BlendMode blend_mode);
+	void
+	blit(const Rectf& dst, const Image&, const Rectf& src_rect, float opacity, BlendMode blend_mode);
 
 	/// This draws a playercolor blended image.
 	void blit_blended(const Rectf& dst,
 	                  const Image& image,
 	                  const Image& texture_mask,
-	                  const Rectf& srcrc,
+	                  const Rectf& src_rect,
 	                  const RGBColor& blend);
 
 	/// This draws a grayed out version.
 	void
-	blit_monochrome(const Rectf& dst, const Image&, const Rectf& srcrc, const RGBAColor& multiplier);
+	blit_monochrome(const Rectf& dst, const Image&, const Rectf& src_rect, const RGBAColor& blend);
 
 	/// Draws a filled rect to the destination.
-	void fill_rect(const Rectf& dst, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
+	void fill_rect(const Rectf& rc, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
 
 	// Draw a 'width' pixel wide line to the destination. 'points' are taken by
 	// value on purpose.
@@ -93,6 +88,6 @@ private:
 /// Draws a rect (frame only) to the surface. The width of the surrounding line
 /// is 1 pixel, i.e. the transparent inner box of the drawn rectangle starts at
 /// (x+1, y+1) and has dimension (w - 2, h - 2).
-void draw_rect(const Rectf& rect, const RGBColor&, Surface* destination);
+void draw_rect(const Rectf& rc, const RGBColor&, Surface* surface);
 
 #endif  // end of include guard: WL_GRAPHIC_SURFACE_H

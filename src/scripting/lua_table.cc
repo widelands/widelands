@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,7 +22,7 @@
 
 #include "base/log.h"
 
-LuaTable::LuaTable(lua_State* L) : L_(L), warn_about_unaccessed_keys_(true) {
+LuaTable::LuaTable(lua_State* L) : mutex_lock_(MutexLock::ID::kLua), L_(L) {
 	// S: <table>
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
 	lua_pushvalue(L, -2);                                    // S: <table> this <table>
@@ -39,7 +38,10 @@ LuaTable::~LuaTable() {
 
 		for (const std::string& unused_key : unused_keys) {
 			// We must not throw in destructors as this can shadow other errors.
-			log("ERROR: Unused key \"%s\" in LuaTable. Please report as a bug.\n", unused_key.c_str());
+			if (!starts_with(unused_key, "UNUSED_")) {
+				log_warn(
+				   "Unused key \"%s\" in LuaTable. Please report as a bug.\n", unused_key.c_str());
+			}
 		}
 	}
 
@@ -58,7 +60,7 @@ void LuaTable::get_existing_table_value(const std::string& key) const {
 }
 
 void LuaTable::get_existing_table_value(const int key) const {
-	const std::string key_as_string = boost::lexical_cast<std::string>(key);
+	const std::string key_as_string = as_string(key);
 	lua_pushint32(L_, key);
 	check_if_key_was_in_table(key_as_string);
 }
@@ -107,7 +109,7 @@ template <> int LuaTable::get_value() const {
 	int is_num;
 	int return_value = lua_tointegerx(L_, -1, &is_num);
 	lua_pop(L_, 1);
-	if (!is_num) {
+	if (is_num == 0) {
 		throw LuaError("Could not convert value at top of the stack to integer.");
 	}
 	return return_value;
@@ -118,7 +120,6 @@ const std::string get_string_with_default(const LuaTable& table,
                                           const std::string& default_value) {
 	if (table.has_key(key)) {
 		return table.get_string(key);
-	} else {
-		return default_value;
 	}
+	return default_value;
 }

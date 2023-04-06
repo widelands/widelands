@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,11 +20,8 @@
 
 #include <cassert>
 
-FileRead::FileRead() : data_(nullptr), length_(0) {
-}
-
 FileRead::~FileRead() {
-	if (data_) {
+	if (data_ != nullptr) {
 		close();
 	}
 }
@@ -101,7 +97,7 @@ char* FileRead::c_string(const Pos& pos) {
 		throw FileBoundaryExceeded();
 	}
 	char* const result = data_ + i;
-	for (char* p = result; *p; ++p, ++i) {
+	for (char* p = result; *p != 0; ++p, ++i) {
 	}
 	++i;                      //  beyond the null
 	if (i > (length_ + 1)) {  // allow EOF as end marker for string
@@ -122,15 +118,14 @@ char* FileRead::read_line() {
 		return nullptr;
 	}
 	char* result = data_ + filepos_;
-	for (; data_[filepos_] && data_[filepos_] != '\n'; ++filepos_) {
+	for (; (data_[filepos_] != 0) && data_[filepos_] != '\n'; ++filepos_) {
 		if (data_[filepos_] == '\r') {
 			data_[filepos_] = '\0';
 			++filepos_;
 			if (data_[filepos_] == '\n') {
 				break;
-			} else {
-				throw typename StreamRead::DataError("CR not immediately followed by LF");
 			}
+			throw typename StreamRead::DataError("CR not immediately followed by LF");
 		}
 	}
 	data_[filepos_] = '\0';

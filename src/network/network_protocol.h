@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,7 +27,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 24,
+	NETWORK_PROTOCOL_VERSION = 30,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -68,7 +67,7 @@ enum {
  * packets (see \ref Deserializer, \ref RecvPacket, \ref SendPacket).
  * Every packet starts with a single-byte command code.
  */
-enum {
+enum : uint8_t {
 	NETCMD_UNUSED = 0,
 
 	/**
@@ -84,6 +83,8 @@ enum {
 	 * payload:
 	 * \li unsigned_8:  protocol version
 	 * \li unsigned_32: 0-based user number for the client
+	 * \li unsigned_32: number of enabled add-ons
+	 * \li for each enabled add-on: the add-on's name (string) and version (string)
 	 *
 	 * \note The host may override the client's chosen name in a subsequent
 	 * \ref NETCMD_SETTING_ALLPLAYERS or \ref NETCMD_SETTING_PLAYER packet.
@@ -212,6 +213,10 @@ enum {
 
 	/**
 	 * Sent by the host during game setup to indicate that the game starts.
+	 * The payload is:
+	 * \li unsigned_32 Random number generator seed
+	 * \li unsigned_32 Number of enabled add-ons
+	 * \li Each enabled add-on's internal name
 	 *
 	 * The client must load the map and setup the game. As soon as the game
 	 * is fully loaded, it must behave as if a \ref NETCMD_WAIT command had
@@ -321,7 +326,8 @@ enum {
 	 * \li signed_16:  playernumber - only used for colorization of messages.
 	 * \li string:     sender (may be empty to indicate system messages)
 	 * \li string:     the message
-	 * \li unsigned_8: whether this is a personal message (0 / 1)
+	 * \li unsigned_8: whether this is a public (CHATTYPE_PUBLIC), personal (CHATTYPE_PERSONAL),
+	 *                 or team (CHATTYPE_TEAM) message
 	 * \li string:     the recipient (only filled as personal message)
 	 */
 	NETCMD_CHAT = 21,
@@ -403,7 +409,7 @@ enum {
 
 	/**
 	 * During game setup, this is sent by the client to indicate that the
-	 * client wants to change a player's initialisation.
+	 * client wants to change a player's initialization.
 	 *
 	 * \li unsigned_8: number of the player
 	 * \li unsigned_8: index of the initialization
@@ -421,7 +427,7 @@ enum {
 	 * This is sent by the server to generate a clientsided translated system
 	 * chat message. Payload is:
 	 *
-	 * \li string:    Message code \see NetworkGamingMessages::fill_map()
+	 * \li string:    Message code \see src/network/network_gaming_messages.cc
 	 * \li string:    First attached string
 	 * \li string:    Second attached string
 	 * \li string:    Third attached string
@@ -437,9 +443,56 @@ enum {
 	NETCMD_PEACEFUL_MODE = 33,
 
 	/**
+	 * Sent by the host to toggle custom_starting_positions mode.
+	 *
+	 * Attached data is:
+	 * \li uint8_t: 1 if custom_starting_positions mode is enabled, 0 otherwise
+	 */
+	NETCMD_CUSTOM_STARTING_POSITIONS = 34,
+
+	/**
+	 * During game setup, this is sent by the client to indicate that the
+	 * client wants to change their color.
+	 *
+	 * \li unsigned_8: number of the player
+	 * \li unsigned_8: r
+	 * \li unsigned_8: g
+	 * \li unsigned_8: b
+	 */
+	NETCMD_SETTING_CHANGECOLOR = 35,
+
+	/**
+	 * Sent by the host to change the win condition duration.
+	 *
+	 * Attached data is:
+	 * \li signed_32: win condition duration in minutes
+	 */
+	NETCMD_WIN_CONDITION_DURATION = 36,
+
+	/**
+	 * Sent by the host to toggle fogless mode.
+	 *
+	 * Attached data is:
+	 * \li uint8_t: 1 if fogless mode is enabled, 0 otherwise
+	 */
+	NETCMD_FOGLESS = 37,
+
+	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability
 	 */
 	NETCMD_METASERVER_PING = 64
+};
+
+/**
+ * The type of the chat message transmitted in an NETCMD_CHAT packet.
+ */
+enum : uint8_t {
+	/// A public message to all players
+	CHATTYPE_PUBLIC = 0,
+	/// A private message to a single player
+	CHATTYPE_PERSONAL = 1,
+	/// A message to the sender's team
+	CHATTYPE_TEAM = 2
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_PROTOCOL_H

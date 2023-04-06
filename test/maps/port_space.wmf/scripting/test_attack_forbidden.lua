@@ -1,4 +1,6 @@
 run(function()
+   sleep(1000)
+
    -- Initially, no overrides exist
    assert_equal(false, p1:is_attack_forbidden(2))
    assert_equal(false, p2:is_attack_forbidden(1))

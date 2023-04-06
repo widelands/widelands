@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -25,7 +24,7 @@
 
 namespace Widelands {
 class Game;
-}
+}  // namespace Widelands
 
 /**
  * This class shows a game for somebody who is only a spectator.
@@ -50,8 +49,8 @@ private:
 	bool player_hears_field(const Widelands::Coords& coords) const override;
 
 	void exit_btn();
-	bool can_see(Widelands::PlayerNumber) const override;
-	bool can_act(Widelands::PlayerNumber) const override;
+	bool can_see(Widelands::PlayerNumber p) const override;
+	bool can_act(Widelands::PlayerNumber p) const override;
 	Widelands::PlayerNumber player_number() const override;
 	void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) override;
 };

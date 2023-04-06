@@ -4,7 +4,7 @@
 
 function send_building_lost_message(f)
    local message = building_lost(f.immovable.descr.name)
-   send_message(
+   send_to_inbox(
       p1,
       message.title,
       message.text,
@@ -92,8 +92,16 @@ function build_training()
    msg_boxes(training_story_end)
 end
 
+function toolsmith_hint()
+   while not check_for_buildings(p1, {
+      atlanteans_toolsmithy = 1,
+   }) do sleep(3478) end
+   msg_boxes(hint_for_toolsmith)
+end
+
 function build_heavy_industrys_and_mining()
    msg_boxes(heavy_industry_story)
+   run(toolsmith_hint)
 
    local o = add_campaign_objective(obj_make_heavy_industry_and_mining)
    while not check_for_buildings(p1, {
@@ -174,6 +182,8 @@ end
 function build_environment()
    msg_boxes(first_briefing_messages)
    local o = add_campaign_objective(obj_ensure_build_wares_production)
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- p1:run_training_wheel("objectives", false)
 
    expand_objective = add_campaign_objective(obj_expand)
 
@@ -229,6 +239,13 @@ function check_for_ships()
    while #p1:get_ships() < 3 do
         sleep(8234)
    end
+
+   -- The next scenario starts with these ships, so we save their names for continuity
+   local persist = { shipnames = {} }
+   for i,ship in ipairs(p1:get_ships()) do
+      persist.shipnames[i] = ship.shipname
+   end
+   wl.Game():save_campaign_data("atlanteans", "atl01", persist)
 
    -- Success
    msg_boxes(scenario_won)

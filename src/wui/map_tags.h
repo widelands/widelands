@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2020 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,13 +21,24 @@
 
 #include <string>
 
+#include "ui_basic/dropdown.h"
+
 /// Functions for localizing the known map tags.
 
 /// Returns true if this tag is known.
 bool tag_exists(const std::string& tag);
 
-/// If tag_exists, returns the localized tag.
-/// Otherwise, returns 'tag'
-const std::string localize_tag(const std::string& tag);
+/// Contains the localized name and tooltip for a map tag
+struct TagTexts {
+	std::string displayname;
+	std::string tooltip;
+};
+
+/// If tag_exists, returns the localized name and tooltip for it.
+/// Otherwise, returns 'tag' for 'displayname' and empty string for 'tooltip'
+const TagTexts localize_tag(const std::string& tag);
+
+/// Add an entry to 'dropdown' for 'tag' with the localized name and tooltip
+void add_tag_to_dropdown(UI::Dropdown<std::string>* dropdown, const std::string& tag);
 
 #endif  // end of include guard: WL_WUI_MAP_TAGS_H

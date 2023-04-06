@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2020 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -31,9 +30,15 @@ namespace UI {
  */
 struct Icon : public Panel {
 	/// Create a new icon with the given dimensions and position offset
-	Icon(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, const Image* picture_id);
+	Icon(Panel* parent,
+	     PanelStyle,
+	     int32_t x,
+	     int32_t y,
+	     int32_t w,
+	     int32_t h,
+	     const Image* picture_id);
 	/// Create a new icon with no offset. Dimentions are taken from 'picture_id'.
-	Icon(Panel* parent, const Image* picture_id);
+	Icon(Panel* parent, PanelStyle, const Image* picture_id);
 
 	void set_icon(const Image* picture_id);
 	const Image* icon() const {
@@ -48,11 +53,15 @@ struct Icon : public Panel {
 	void set_grey_out(bool g) {
 		grey_out_ = g;
 	}
+	void set_grey_out_color(const RGBAColor& c) {
+		grey_out_color_ = c;
+	}
 
 private:
 	const Image* pic_;
 	bool draw_frame_;
 	RGBColor framecolor_;
+	RGBAColor grey_out_color_;
 	bool grey_out_;
 };
 }  // namespace UI

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2020 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,6 +21,8 @@
 #include <SDL.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
@@ -29,10 +30,14 @@
 
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
+	set_initializer_thread();
 	i18n::set_locale("en");
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
+		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
+		// too frequent failures
+		log_err("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
+		exit(2);
 	}
 
 	g_fs = new LayeredFileSystem();
@@ -41,17 +46,17 @@ void initialize() {
 	// We don't really need graphics here, but we will get error messages
 	// when they aren't initialized
 	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
+	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false, false);
 }
 
 // Cleanup before program end
 void cleanup() {
-	if (g_gr) {
+	if (g_gr != nullptr) {
 		delete g_gr;
 		g_gr = nullptr;
 	}
 
-	if (g_fs) {
+	if (g_fs != nullptr) {
 		delete g_fs;
 		g_fs = nullptr;
 	}

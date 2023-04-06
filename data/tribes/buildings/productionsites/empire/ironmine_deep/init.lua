@@ -1,42 +1,39 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_ironmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Deep Iron Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
 
-   enhancement_cost = {
-      log = 4,
-      planks = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      log = 2,
-      planks = 1
-   },
+   animation_directory = dirname,
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 49, 61 },
-      },
-      working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 49, 61 },
-         fps = 10
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 51, 66 },
       },
       empty = {
-         pictures = path.list_files(dirname .. "empty_??.png"),
-         hotspot = { 49, 61 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 51, 66 }
+      },
+      working = {
+         fps = 10,
+         frames = 10,
+         columns = 10,
+         rows = 1,
+         hotspot = { 51, 66 }
       },
    },
 
-   aihints = {
-      mines = "iron"
-   },
+   aihints = {},
 
    working_positions = {
       empire_miner = 1,
@@ -51,22 +48,25 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
-         descname = _"mining iron",
+         descname = _("mining iron"),
          actions = {
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 27.6 + 4 * (10 + 3.6) + 10 = 92 sec
             "return=skipped unless economy needs iron_ore",
             "consume=meal beer",
-            "sleep=duration:39s",
+            "sleep=duration:27s600ms",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
+            "return=skipped"
          }
       },
       mine_produce = {
-         descname = _"mining iron",
+         descname = _("mining iron"),
          actions = {
             "animate=working duration:10s",
-            "mine=iron radius:2 yield:100% when_empty:5% experience_on_fail:2%",
+            "mine=resource_iron radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=iron_ore",
          }
       },
@@ -81,9 +81,11 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Iron",
-      heading = _"Main Iron Vein Exhausted",
+      title = _("No Iron"),
+      heading = _("Main Iron Vein Exhausted"),
       message =
          pgettext("empire_building", "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

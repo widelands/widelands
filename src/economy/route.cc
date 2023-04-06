@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -35,8 +34,6 @@ Route IMPLEMENTATION
 */
 
 namespace Widelands {
-Route::Route() : totalcost_(0) {
-}
 
 /**
  * Completely clear the route and initialize it
@@ -52,7 +49,7 @@ void Route::init(int32_t totalcost) {
  * idx == 0 is the start flag, idx == get_nrsteps() is the end flag.
  * Every route has at least one flag.
  */
-Flag& Route::get_flag(EditorGameBase& egbase, std::vector<Flag*>::size_type const idx) {
+Flag& Route::get_flag(EditorGameBase& egbase, std::vector<Flag*>::size_type const idx) const {
 	assert(idx < route_.size());
 	return *route_[idx].get(egbase);
 }
@@ -99,7 +96,7 @@ void Route::load_pointers(const LoadData& data, MapObjectLoader& mol) {
 	for (uint32_t i = 0; i < data.flags.size(); ++i) {
 		uint32_t const flag_serial = data.flags.size();
 		try {
-			route_.push_back(&mol.get<Flag>(flag_serial));
+			route_.emplace_back(&mol.get<Flag>(flag_serial));
 		} catch (const WException& e) {
 			throw wexception("Route flag #%u (%u): %s", i, flag_serial, e.what());
 		}

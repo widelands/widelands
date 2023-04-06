@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -96,11 +95,11 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
 					ww.cost_[0] = fr.unsigned_32();
 					ww.cost_[1] = fr.unsigned_32();
 					Path::StepVector::size_type const nr_steps = fr.unsigned_16();
-					if (!nr_steps) {
+					if (nr_steps == 0u) {
 						throw GameDataError("nr_steps = 0");
 					}
 					Path p(ww.flags_[0]->get_position());
-					for (Path::StepVector::size_type i = nr_steps; i; --i) {
+					for (Path::StepVector::size_type i = nr_steps; i != 0u; --i) {
 						try {
 							p.append(map, read_direction_8(&fr));
 						} catch (const WException& e) {
@@ -186,8 +185,10 @@ void MapWaterwaydataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 					fw.unsigned_8(path[i]);
 				}
 
-				fw.unsigned_32(r->fleet_ ? mos.get_object_file_index(*r->fleet_) : 0);
-				fw.unsigned_32(r->ferry_ ? mos.get_object_file_index(*r->ferry_) : 0);
+				FerryFleet* fleet = r->fleet_.get(egbase);
+				fw.unsigned_32(fleet != nullptr ? mos.get_object_file_index(*fleet) : 0);
+				Ferry* ferry = r->ferry_.get(egbase);
+				fw.unsigned_32(ferry != nullptr ? mos.get_object_file_index(*ferry) : 0);
 
 				mos.mark_object_as_saved(*r);
 			}

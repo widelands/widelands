@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-05-19 14:34+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"PO-Revision-Date: 2015-02-03 14:36+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,11 +20,11 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:20
 msgid "Build up a basic economy"
-msgstr "Bau eene eenfache Wirtschaft up"
+msgstr "Bau eene eenfache Weertskupp up"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr "Fang an, eenfache Baumaterialien to sammeln, un seker dat Lager."
+msgstr "Fang an, eenfachen Baukraam to sammeln, un seker dat Lager."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build a lumberjack’s hut"
@@ -53,11 +53,11 @@ msgstr "Du sallst ok bold eene Reitplanteree un eene Kalkbranneree bauen."
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:32
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:34
 msgid "Build up a small food economy"
-msgstr "Bau eene lütte Spiesen-Wirtschaft"
+msgstr "Bau eene lütte Spiesen-Weertskupp"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build up a basic food economy to provide your people with food."
-msgstr "Bau eene eenfache Spiesen-Wirtschaft, um diene Lüü mit Spiesen to versörgen."
+msgstr "Bau eene eenfache Spiesen-Weertskupp, um diene Lüü mit Spiesen to versörgen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build a fisher’s hut"
@@ -92,7 +92,7 @@ msgstr "Vergeet nich, eene Ossentüchteree to bauen"
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr "As diene Straten langer un diene Wirtschaft groter word, sallst du diene Ossen bruken, daarmit Waren fixer transporteert worden."
+msgstr "As diene Straten langer un diene Weertskupp groter word, sallst du diene Ossen bruken, daarmit Waren fixer transporteert worden."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:57
@@ -119,14 +119,14 @@ msgstr "Bau mehr Soldateree-Boen, um de Kuntrei um dien Raadhuus uttoförsken un
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:73
 msgid "Build a mining infrastructure"
-msgstr "Bau eene Bargwarks-Wirtschaft"
+msgstr "Bau eene Bargwarks-Weertskupp"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:74
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr "Vergroter dien Gewest bit to de Bargen, schick Schattsökers, um na Kluten un Köhl to söken, un bau eene Bargwarks-Wirtschaft mit Bargwarken, Kneipen, Smeltwarken un eener Metalldreihbank."
+msgstr "Vergroter dien Gewest bit to de Bargen, schick Schattsökers, um na Kluten un Köhl to söken, un bau eene Bargwarks-Weertskupp mit Bargwarken, Kneipen, Smeltwarken un eener Metalldreihbank."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:81
@@ -140,7 +140,7 @@ msgstr "Bau eene Schanz oostelk vun de Bargen."
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:87
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:89
 msgid "Build a training infrastructure"
-msgstr "Bau eene Övens-Wirtschaft"
+msgstr "Bau eene Övens-Weertskupp"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:90
 msgid "Build a barracks to train some basic soldiers."
@@ -182,7 +182,7 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr "Kraamhusen warken as dien Raadhuus, worden aver nich vun Soldaten verteidigt. 't is meestens klook, een Kraamhuus to bauen, wenn dien Gewest wasst un de Weg to dienem Raadhuus immer langer word."
+msgstr "Kraamhusen warken as dien Raadhuus, worden aver nich vun Soldaten verteidigt. ’t is meestens klook, een Kraamhuus to bauen, wenn dien Gewest wasst un de Weg to dienem Raadhuus immer langer word."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:108
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:110
@@ -232,7 +232,7 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr "Um eenen Feind antogriepen, klick de Döör vun eenem Soldateree-Boo vun dienem Feind an. Een Fenster kummt lett sük sehn, waar du utkören sallst, wo völe Soldaten angriepen sallen. Wenn du de Tahl sett hest, klick dat Krüüz (»Angriepen«) an."
+msgstr "Um eenen Feind antogriepen, klick de Döör vun eenem Soldateree-Boo vun dienem Feind an. Een Fenster kummt lett sik sehn, waar du utkören sallst, wo völe Soldaten angriepen sallen. Wenn du de Tahl sett hest, klick dat Krüüz (»Angriepen«) an."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:144
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:146
@@ -250,7 +250,7 @@ msgstr "Dicht bi de Heimaad"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
 msgstr "Troon is besörgt …"
 
@@ -260,7 +260,7 @@ msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr "In de lesten Dagen sünd wi dichter to uns' Höövdstadt komen. Mennig Lüü hebben sik uns al ansluten up uns' Loop un hör Hoop ins mi sett. Aver ick bün bang, dat wi nich machtig genoog sünd, tegen miene Bröörs Krieg to föhren."
+msgstr "In de lesten Dagen sünd wi dichter to uns’ Höövdstadt komen. Mennig Lüü hebben sik uns al ansluten up uns’ Loop un hör Hoop ins mi sett. Aver ick bün bang, dat wi nich machtig genoog sünd, tegen miene Bröörs Krieg to föhren."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:161
@@ -271,7 +271,7 @@ msgstr "Eerst maal maken wi bi de Grenzen vun de ollen Wald Rüst un maken all k
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
 msgstr "Noch een koller Dag"
 
@@ -303,7 +303,7 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr "Troon will gloven, dat Kalitat nich wieder kämpen will uns sik uns ansluten word, wenn wi komen, um Free un Gesetz weer na Alltunraan to bringen. Aver ick gloov dat nich. Kalitat is de Söhn vun eenem vun de machtigesten Offizeren, un deese Famielje hett sik nie geern vör Schatt-Karut un siener Fahn verbugen. Waarum also sall he Schatt-Karut sien Söhn helpen, sien Arv un de Throon intonehmen?"
+msgstr "Troon will gloven, dat Kalitat nich wieder kämpen will uns sik uns ansluten word, wenn wi komen, um Free un Gesetz weer na Alltunraan to brengen. Aver ick gloov dat nich. Kalitat is de Söhn vun eenem vun de machtigesten Offizeren, un deese Famielje hett sik nie geern vör Schatt-Karut un siener Fahn verbugen. Waarum also sall he Schatt-Karut sien Söhn helpen, sien Arv un de Throon intonehmen?"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:199
@@ -324,7 +324,7 @@ msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
-msgstr "Aver Troon will mi nich tohören. He will uns' Schanzen verwiedern bit tu de Grenzen vun Kalitat sien Gewest, um siene Soldateree mit siener to vereenen. Ick will uppassen, wat daar all passeert."
+msgstr "Aver Troon will mi nich tohören. He will uns’ Schanzen verwiedern bit tu de Grenzen vun Kalitat sien Gewest, um siene Soldateree mit siener to vereenen. Ick will uppassen, wat daar all passeert."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:192
 msgid "Thron is speaking confidently."
@@ -339,7 +339,7 @@ msgid ""
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
 "a good and defensible infrastructure. Still, I hope I will not walk alone on"
 " this mission, I hope Kalitath son of Kun will follow my call."
-msgstr "Miene Grenz-Lienje is bit tu de Waldrann vörrückt. Wi hebben eenen langen, kollen Winter un unbannig völe Mielen achter uns. De Schanz, wat wi bi Onduun baut hebben, gewährt uns Naschuuv an Lüü un Waren, un wenn ick eerst Alltunraan hebb, worden de twee Steden vun eener goden Wirtschaft verbunnen, wat sik ok good verteidigen lett. Aver ick hoop, dat ick dat nich alleen daan kregen mutt; ick hoop, dat Kalitat, Söhn vun Kuun, mienen Roop folgt."
+msgstr "Miene Grenz-Lienje is bit tu de Waldrann vörrückt. Wi hebben eenen langen, kollen Winter un unbannig völe Mielen achter uns. De Schanz, wat wi bi Onduun baut hebben, gewährt uns Naschuuv an Lüü un Waren, un wenn ick eerst Alltunraan hebb, worden de twee Steden vun eener goden Weertskupp verbunnen, wat sik ok good verteidigen lett. Aver ick hoop, dat ick dat nich alleen daan kregen mutt; ick hoop, dat Kalitat, Söhn vun Kuun, mienen Roop folgt."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:200
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:218
@@ -347,7 +347,7 @@ msgstr "Miene Grenz-Lienje is bit tu de Waldrann vörrückt. Wi hebben eenen lan
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
 msgstr "Troon seggt:"
 
@@ -377,7 +377,7 @@ msgid ""
 " a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
-msgstr "Deeser DÖNNER! Blot eener vun de Lüü, wat to Kalitat schickt wurr, is levig weerkomen. He hett de Naricht brocht, dat elkeen Treck vun uns' Soldatere mit hör eegen Blood betahlt word! Dat könen wi hüm nich dörgahn laten. Vun nu an gifft dat Krieg tüsken Kalitat un uns!"
+msgstr "Deeser DÖNNER! Blot eener vun de Lüü, wat to Kalitat schickt wurr, is levig weerkomen. He hett de Naricht brocht, dat elkeen Treck vun uns’ Soldatere mit hör eegen Blood betahlt word! Dat könen wi hüm nich dörgahn laten. Vun nu an gifft dat Krieg tüsken Kalitat un uns!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:217
 msgid "Renegade Fortification"
@@ -424,7 +424,7 @@ msgid ""
 "The number of quarrels and disputes keeps growing, and the winter has us "
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
-msgstr "Vanmörgen hebb ick Troon in Sörgen funnen. He is güstern Nacht vun siener Wacht laat torügg komen un hett sik an eenen Boom sett un över dat Lager kiekt. 't gifft alltied mehr Stried un Spiet hoer, un de Winter is hard. Wi mutten Spiesen lagern, um de kollen, langen Winter to överleven!"
+msgstr "Vanmörgen hebb ick Troon in Sörgen funnen. He is güstern Nacht vun siener Wacht laat torügg komen un hett sik an eenen Boom sett un över dat Lager kiekt. ’t gifft alltied mehr Stried un Spiet hoer, un de Winter is hard. Wi mutten Spiesen lagern, um de kollen, langen Winter to överleven!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:239
 msgid "The Advisor"
@@ -442,18 +442,18 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr "Boldreth hett Recht! Wi hebben nich genoog Spiesen, um eenen langen, kollen Winter to överleven. Wi mutten begünnen, eene Well, eene Jaggthütt un een Fisker-Huus to bauen. Un wenn wi genoog Rüümte hebben, sallen wi ok eene Buurderee un eene Backeree bauen! Eener vun uns' Buren is bannig klook – he hett dat daankregen, in deeser kollen Eer Weit antobauen."
+msgstr "Boldreth hett Recht! Wi hebben nich genoog Spiesen, um eenen langen, kollen Winter to överleven. Wi mutten begünnen, eene Well, eene Jaggthütt un een Fisker-Huus to bauen. Un wenn wi genoog Rüümte hebben, sallen wi ok eene Buurderee un eene Backeree bauen! Eener vun uns’ Buren is bannig klook – he hett dat daankregen, in deeser kollen Eer Weit antobauen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:248
 msgid "Food Economy Completed"
-msgstr "Spiesen-Wirtschaft kumpleet"
+msgstr "Spiesen-Weertskupp kumpleet"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:251
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
-msgstr "Kantruusk hett mi jüüst mellt, dat uns' Spiesen-Wirtschaft nu kumpleet is. Uplest mutt nüms vun uns mehr vör Hunger bang wesen."
+msgstr "Kantruusk hett mi jüüst mellt, dat uns’ Spiesen-Weertskupp nu kumpleet is. Uplest mutt nüms vun uns mehr vör Hunger bang wesen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:257
 msgid "Tracks"
@@ -466,7 +466,7 @@ msgid ""
 "settlement. He has instructed us to build a tower, to have a greater visual "
 "range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr "Troon hett mi seggt, dat he Sporen im Sneei im Noordoost vun uns' Dörp funnen hett. He hett uns anwiesen, eenen Toorn to bauen, um mehr vun de Gewest um uns rum to sehn un uns' Lüü vör unverwachten Angriffen to schütten."
+msgstr "Troon hett mi seggt, dat he Sporen im Sneei im Noordoost vun uns’ Dörp funnen hett. He hett uns anwiesen, eenen Toorn to bauen, um mehr vun de Gewest um uns rum to sehn un uns’ Lüü vör unverwachten Angriffen to schütten."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:266
 msgid "Further Exploration"
@@ -482,7 +482,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr "De eersten Schanzen, wat Troon hett bauen laten, sünd nu beschickt. Jüüst nu will he Vertrauen un Free to de Lüü bringen, well in de Müren vun uns' neje Stadt wohnen, wat wi »Onduun« benöhmt hebben. wat in de ollen Spraak »Se well wachten« hett. Aver Troon is noch nich tofree – un ick verstah siene Angst: De Walden sünd deep, un de Grenz vun Alltunraan is dicht bi. Ick bün mi seker, dat dat daar buten dusend slimmere Gefahren as de komsiken Sporen gifft."
+msgstr "De eersten Schanzen, wat Troon hett bauen laten, sünd nu beschickt. Jüüst nu will he Vertrauen un Free to de Lüü brengen, well in de Müren vun uns’ neje Stadt wohnen, wat wi »Onduun« benöhmt hebben. wat in de ollen Spraak »Se well wachten« hett. Aver Troon is noch nich tofree – un ick verstah siene Angst: De Walden sünd deep, un de Grenz vun Alltunraan is dicht bi. Ick bün mi seker, dat dat daar buten dusend slimmere Gefahren as de komsiken Sporen gifft."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:272
@@ -491,7 +491,7 @@ msgid ""
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr "Um mehr vun de Kuntri um uns rum to sehn, sallen wi wieder utförsken un mehr Wachen un Bespejers bruken, um de Grenz to beluren un up de Krieg vör uns' Drüppel uptopassen. DANN sünd wi vörbereidt, wenn Swierigkeiden komen un uns' Walden innehmen wullen."
+msgstr "Um mehr vun de Kuntri um uns rum to sehn, sallen wi wieder utförsken un mehr Wachen un Bespejers bruken, um de Grenz to beluren un up de Krieg vör uns’ Drüppel uptopassen. DANN sünd wi vörbereidt, wenn Swierigkeiden komen un uns’ Walden innehmen wullen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:278
 msgid "Mountains Found"
@@ -505,11 +505,11 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr "Ick hebb jüüst mit eenem Anföhrer vun uns' Soldateree snackt. He hett mi vertellt, dat dat im Noordoost un Oost vun uns' Gewest een paar Bargen gifft. Mit een bietje Glück gifft uns dat neje Kansen, um uns' Lüü better uttostafferen, denn wenn ick mi recht besinn, hebben de meesten Bargen in de West vun Alltunraan Köhl un Metallkluten."
+msgstr "Ick hebb jüüst mit eenem Anföhrer vun uns’ Soldateree snackt. He hett mi vertellt, dat dat im Noordoost un Oost vun uns’ Gewest een paar Bargen gifft. Mit een bietje Glück gifft uns dat neje Kansen, um uns’ Lüü better uttostafferen, denn wenn ick mi recht besinn, hebben de meesten Bargen in de West vun Alltunraan Köhl un Metallkluten."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:287
 msgid "Mining Economy Completed"
-msgstr "Bargwarks-Wirtschaft kumpleet"
+msgstr "Bargwarks-Weertskupp kumpleet"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:290
@@ -517,7 +517,7 @@ msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr "Mi is jüüst mellt worden, dat uns' Bargwark-Wirtschaft nu warkt. Dat sünd unbannig gode Narichten – ok wenn de slimmsten Upgaven noch komen mutten, nu dat uns' Smidden hör Bestes geven worden, um uns' Levens lichter to maken."
+msgstr "Mi is jüüst mellt worden, dat uns’ Bargwark-Weertskupp nu warkt. Dat sünd unbannig gode Narichten – ok wenn de slimmsten Upgaven noch komen mutten, nu dat uns’ Smidden hör Bestes geven worden, um uns’ Levens lichter to maken."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:295
 msgid "Fortress Needed"
@@ -545,11 +545,11 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr "Uplest! De Schanz is nu kumpleet, de Ingang to uns' Dörp is nu wull seker. In Tokunft sallen wi beter noch mehr Uppassen un Toorns bi de Passen bauen, aver eerst maal könen wi Aam halen."
+msgstr "Uplest! De Schanz is nu kumpleet, de Ingang to uns’ Dörp is nu wull seker. In Tokunft sallen wi beter noch mehr Uppassen un Toorns bi de Passen bauen, aver eerst maal könen wi Aam halen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:312
 msgid "Enhanced Economy and Training"
-msgstr "Betere Wirtschaft un Öven"
+msgstr "Betere Weertskupp un Öven"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:315
@@ -557,7 +557,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr "Uns' Bargwark-Wirtschaft löppt nu good, dat is düll! Aver dat gifft noch völe Lüü ins uns' Raadhuus, wat Upgaven kriegen wollen, also könen se uns' Soldaten helpen, sik up de Krieg, wat bold kummt, vörtobereiden."
+msgstr "Uns’ Bargwark-Weertskupp löppt nu good, dat is düll! Aver dat gifft noch völe Lüü ins uns’ Raadhuus, wat Upgaven kriegen wollen, also könen se uns’ Soldaten helpen, sik up de Krieg, wat bold kummt, vörtobereiden."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:318
@@ -569,19 +569,19 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr "Uns' Schattsökers hebben bannig völe Aders vun Iesenkluut, Köhl un sogaar Gold funnen. Wi sallen uns' Bargwarken utbauen, sobold uns' Bargwarkskeerls mehr Erfahrung hebben. Wi sallen mehr Bargwarken bauen, eene grotere Spiesen-Wirtschaft, um uns' Lüü alltied mit godem Eten to versörgen, un eene Wirtschaft, um mit de Kluten to warken. Un dat is noch nich all – de mesten vun uns' Soldaten sünd jung un hebben keene goden Wapen un keene Erfahrung. Wi mutten Övens-Boen bauen, um se up hör tokomen Upgaven vörtobereiden."
+msgstr "Uns’ Schattsökers hebben bannig völe Aders vun Iesenkluut, Köhl un sogaar Gold funnen. Wi sallen uns’ Bargwarken utbauen, sobold uns’ Bargwarkskeerls mehr Erfahrung hebben. Wi sallen mehr Bargwarken bauen, eene grotere Spiesen-Weertskupp, um uns’ Lüü alltied mit godem Eten to versörgen, un eene Weertskupp, um mit de Kluten to warken. Un dat is noch nich all – de mesten vun uns’ Soldaten sünd jung un hebben keene goden Wapen un keene Erfahrung. Wi mutten Övens-Boen bauen, um se up hör tokomen Upgaven vörtobereiden."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr "Miene Bröörs uns hör Soldaten sünd dood un hebben Füür un Verneelen achter sik laten. In keener Ruin hebb ick normale Lüü finnen könen, un ick hoop, dat se all ut deesem grausamen Slachtfeld utnaiht sünd un annerwaar een beters Leven begünnen hebben."
+msgstr "Miene Bröörs uns hör Soldaten sünd dood un hebben Füür un Verneelen achter sik laten. In keener Ruin hebb ick normaale Lüü finnen könen, un ick hoop, dat se all ut deesem grausamen Slachtfeld utnaiht sünd un annerwaar een beters Leven begünnen hebben."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -591,59 +591,54 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Nix is mehr över vun de Pracht, wat daar maal weer; vun de ollen Höövdstadt sünd nix as Ruinen över. Dat is trürig, aver verlichtert mi ok. Ick hebb nie hoopt, de olle Pracht vun Alltunraan weer to sehn – noch vör een paar Maanten hebb ick mi fraggt, of ick daar wull jemaals weer löpen düür. Nu is de olle Stadt weer in mienen Hannen, un ick will se natürelk mit all de Kraft vun mienen Lüü weer upbauen. Un bannig bold word se weer in hör ollen Pracht erstrahlen."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
 msgstr "Sieg"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Du hest de leste Rutfödderung in deeser Riege ofsloten. Wenn du willst, kannst du wiederspölen, anners de token Rutfödderungs-Riege anfangen."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
 msgstr "Soldateree-Angriff"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr "Se wees 't, de Offizeren sünd buten un kümmern sik um de Soldatereem un Boldreth sülvst föhrt de eerste Slacht an. Ick will an siener Sied rieden, um Alltunraan vun deesem Krieg freeitomaken un weer Free to uns' Höövdstadt to bringen."
+msgstr "Se wees ’t, de Offizeren sünd buten un kümmern sik um de Soldatereem un Boldreth sülvst föhrt de eerste Slacht an. Ick will an siener Sied rieden, um Alltunraan vun deesem Krieg freeitomaken un weer Free to uns’ Höövdstadt to brengen."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr "As de jung Sünn mörgen froh öber de Bomen upgaht, will ick de Angriep rieden laten. Am Avend wil ick mienen Sieg in de holten Saal vun de Kummandant fieren un een junges Lamm opfern, to de Ehr vun mienem Vader, well siene Oogen vandag up mi sett."
+msgstr "As de jung Sünn mörgen froh över de Bomen upgaht, will ick de Angriff rieden laten. Am Avend wil ick mienen Sieg in de holten Saal vun de Kummandant fieren un een junges Lamm opfern, to de Ehr vun mienem Vader, well siene Oogen vandag up mi sett."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
-msgstr "So wees 't!"
+msgstr "So wees ’t!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
 msgstr "Fixerer Transport"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
 msgstr "Kantruusk seggt:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr "Anföhrer, vergeet de armen Lastendragers nich. Uns' Straten worden langer un langer un de Last up hör Schullers word nich lichter. Wi sallen mehr Ossen tüchten, um hör Wark lichter to maken un dat Transporteren gauer."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "»%s«"
+msgstr "Anföhrer, vergeet de armen Lastendragers nich. Uns’ Straten worden langer un langer un de Last up hör Schullers word nich lichter. Wi sallen mehr Ossen tüchten, um hör Wark lichter to maken un dat Transporteren gauer."

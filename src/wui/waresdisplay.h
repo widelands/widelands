@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -39,14 +38,14 @@ using WaresOrderCoords = std::map<Widelands::DescriptionIndex, Widelands::Coords
 class AbstractWaresDisplay : public UI::Panel {
 public:
 	AbstractWaresDisplay(
-	   UI::Panel* const parent,
+	   UI::Panel* parent,
 	   int32_t x,
 	   int32_t y,
 	   const Widelands::TribeDescr&,
 	   Widelands::WareWorker type,
 	   bool selectable,
 	   CLANG_DIAG_OFF("-Wunknown-pragmas") CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-	      std::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
+	      std::function<void(Widelands::DescriptionIndex, bool)> callback_function = nullptr,
 	   CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false,
 	   int32_t hgap = 3,
@@ -54,6 +53,7 @@ public:
 
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	void handle_mousein(bool inside) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
@@ -71,10 +71,10 @@ public:
 		return type_;
 	}
 
-	int32_t get_hgap() {
+	int32_t get_hgap() const {
 		return hgap_;
 	}
-	int32_t get_vgap() {
+	int32_t get_vgap() const {
 		return vgap_;
 	}
 	void set_hgap(int32_t, bool = true);
@@ -108,6 +108,9 @@ protected:
 	virtual Vector2i ware_position(Widelands::DescriptionIndex) const;
 	void draw(RenderTarget&) override;
 	virtual void draw_ware(RenderTarget&, Widelands::DescriptionIndex);
+	virtual RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) {
+		return RGBAColor(0, 0, 0, 0);
+	}
 
 private:
 	using WareListVector = std::vector<const Widelands::WareList*>;
@@ -122,6 +125,7 @@ private:
 	 * selection of multiple wares by dragging.
 	 */
 	void update_anchor_selection(int32_t x, int32_t y);
+	void finalize_anchor_selection();
 
 	const Widelands::TribeDescr& tribe_;
 	Widelands::WareWorker type_;
@@ -149,7 +153,7 @@ private:
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
-	int32_t min_free_vertical_space_;
+	int32_t min_free_vertical_space_{290};
 };
 
 /*
@@ -160,7 +164,7 @@ must be valid while they are registered with this class.
 */
 class WaresDisplay : public AbstractWaresDisplay {
 public:
-	WaresDisplay(UI::Panel* const parent,
+	WaresDisplay(UI::Panel* parent,
 	             int32_t x,
 	             int32_t y,
 	             const Widelands::TribeDescr&,
@@ -173,11 +177,32 @@ public:
 	void remove_all_warelists();
 
 protected:
+	uint32_t amount_of(Widelands::DescriptionIndex);
 	std::string info_for_ware(Widelands::DescriptionIndex) override;
 
 private:
 	using WareListVector = std::vector<const Widelands::WareList*>;
 	WareListVector warelists_;
+};
+
+class StockMenuWaresDisplay : public WaresDisplay {
+public:
+	StockMenuWaresDisplay(UI::Panel* parent,
+	                      int32_t x,
+	                      int32_t y,
+	                      const Widelands::Player&,
+	                      Widelands::WareWorker type);
+
+	void set_solid_icon_backgrounds(const bool s) {
+		solid_icon_backgrounds_ = s;
+	}
+
+protected:
+	RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) override;
+	std::string info_for_ware(Widelands::DescriptionIndex) override;
+
+	const Widelands::Player& player_;
+	bool solid_icon_backgrounds_{true};
 };
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,

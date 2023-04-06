@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,7 +21,6 @@
 #include "graphic/align.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/animation_manager.h"
-#include "graphic/graphic.h"
 #include "graphic/surface.h"
 
 /**
@@ -74,10 +72,10 @@ void RenderTarget::set_window(const Recti& rc, const Vector2i& ofs) {
 bool RenderTarget::enter_window(const Recti& rc, Recti* previous, Vector2i* prevofs) {
 	Rectf newrect_f = rc.cast<float>();
 	if (clip(newrect_f)) {
-		if (previous) {
+		if (previous != nullptr) {
 			*previous = rect_;
 		}
-		if (prevofs) {
+		if (prevofs != nullptr) {
 			*prevofs = offset_;
 		}
 
@@ -87,9 +85,8 @@ bool RenderTarget::enter_window(const Recti& rc, Recti* previous, Vector2i* prev
 		rect_ = newrect;
 
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 /**
@@ -187,15 +184,16 @@ void RenderTarget::blit_monochrome(const Vector2i& dst,
  */
 void RenderTarget::blitrect(const Vector2i& dst,
                             const Image* image,
-                            const Recti& gsrcrc,
+                            const Recti& rectangle,
                             BlendMode blend_mode) {
-	assert(0 <= gsrcrc.x);
-	assert(0 <= gsrcrc.y);
+	assert(0 <= rectangle.x);
+	assert(0 <= rectangle.y);
 
 	// We want to use the given srcrc, but we must make sure that we are not
 	// blitting outside of the boundaries of 'image'.
-	Rectf source_rect(gsrcrc.x, gsrcrc.y, std::min<int32_t>(image->width() - gsrcrc.x, gsrcrc.w),
-	                  std::min<int32_t>(image->height() - gsrcrc.y, gsrcrc.h));
+	Rectf source_rect(rectangle.x, rectangle.y,
+	                  std::min<int32_t>(image->width() - rectangle.x, rectangle.w),
+	                  std::min<int32_t>(image->height() - rectangle.y, rectangle.h));
 	Rectf destination_rect(dst.x, dst.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
@@ -302,18 +300,18 @@ void RenderTarget::blit_animation(const Vector2f& dst,
                                   const Widelands::Coords& coords,
                                   const float scale,
                                   uint32_t animation_id,
-                                  uint32_t time,
+                                  const Time& time,
                                   const RGBColor* player_color,
                                   const float opacity,
                                   const int percent_from_bottom) {
-	const Animation& animation = g_gr->animations().get_animation(animation_id);
+	const Animation& animation = g_animation_manager->get_animation(animation_id);
 	assert(percent_from_bottom <= 100);
 	if (percent_from_bottom > 0) {
 		// Scaling for zoom and animation image size, then fit screen edges.
 		Rectf srcrc = animation.source_rectangle(percent_from_bottom, scale);
 		Rectf dstrc = animation.destination_rectangle(dst, srcrc, scale);
 		if (to_surface_geometry(&dstrc, &srcrc)) {
-			animation.blit(time, coords, srcrc, dstrc, player_color, surface_, scale, opacity);
+			animation.blit(time.get(), coords, srcrc, dstrc, player_color, surface_, scale, opacity);
 		}
 	}
 }
@@ -375,7 +373,7 @@ bool RenderTarget::clip(Rectf& r) const {
 	r.x += rect_.x;
 	r.y += rect_.y;
 
-	return r.w && r.h;
+	return (r.w != 0.0f) && (r.h != 0.0f);
 }
 
 /**

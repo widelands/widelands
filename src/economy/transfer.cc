@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,13 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "economy/transfer.h"
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -68,11 +68,11 @@ Transfer::Transfer(Game& game, Worker& w)
  * Cleanup.
  */
 Transfer::~Transfer() {
-	if (worker_) {
+	if (worker_ != nullptr) {
 		assert(!ware_);
 
 		worker_->cancel_task_transfer(game_);
-	} else if (ware_) {
+	} else if (ware_ != nullptr) {
 		ware_->cancel_transfer(game_);
 	}
 }
@@ -88,9 +88,10 @@ void Transfer::set_request(Request* req) {
 
 	if (&req->target() != destination_.get(game_)) {
 		if (destination_.is_set()) {
-			log("WARNING: Transfer::set_request req->target (%u) "
-			    "vs. destination (%u) mismatch\n",
-			    req->target().serial(), destination_.serial());
+			log_warn_time(game_.get_gametime(),
+			              "Transfer::set_request req->target (%u) "
+			              "vs. destination (%u) mismatch\n",
+			              req->target().serial(), destination_.serial());
 		}
 		destination_ = &req->target();
 	}
@@ -118,15 +119,15 @@ PlayerImmovable* Transfer::get_destination(Game& g) {
  */
 PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& success) {
 	assert((worker_ == nullptr) ^ (ware_ == nullptr));
-	const WareWorker type = worker_ ? wwWORKER : wwWARE;
-	if (!location || !location->get_economy(type)) {
+	const WareWorker type = worker_ != nullptr ? wwWORKER : wwWARE;
+	if ((location == nullptr) || (location->get_economy(type) == nullptr)) {
 		tlog("no location or economy -> fail\n");
 		success = false;
 		return nullptr;
 	}
 
 	PlayerImmovable* destination = destination_.get(location->get_economy(type)->owner().egbase());
-	if (!destination || destination->get_economy(type) != location->get_economy(type)) {
+	if ((destination == nullptr) || destination->get_economy(type) != location->get_economy(type)) {
 		tlog("destination disappeared or economy mismatch -> fail\n");
 		success = false;
 		return nullptr;
@@ -175,7 +176,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 		Flag& curflag(route_.get_flag(game_, 0));
 		Flag& nextflag(route_.get_flag(game_, 1));
 		if (type == wwWORKER ? curflag.get_road(nextflag) == nullptr :
-		                       curflag.get_roadbase(nextflag) == nullptr) {
+                             curflag.get_roadbase(nextflag) == nullptr) {
 			upcast(Warehouse, wh, curflag.get_building());
 			assert(wh);
 
@@ -188,28 +189,30 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 			if (location == wh) {
 				return pd;
 			}
-			if (location == &curflag || ware_) {
+			if (location == &curflag || (ware_ != nullptr)) {
 				return wh;
 			}
 			return &curflag;
 		}
 
-		if (ware_ && location == &curflag && route_.get_nrsteps() >= 2) {
+		if ((ware_ != nullptr) && location == &curflag && route_.get_nrsteps() >= 2) {
 			Flag& nextnextflag(route_.get_flag(game_, 2));
 			if (nextflag.get_roadbase(nextnextflag) == nullptr) {
-				assert(is_a(Warehouse, nextflag.get_building()));
+				assert(nextflag.get_building());
+				assert(nextflag.get_building()->descr().type() == MapObjectType::WAREHOUSE);
 				return nextflag.get_building();
 			}
 		}
 	}
 
 	// Now decide where we want to go
-	if (dynamic_cast<Flag const*>(location)) {
+	if ((location != nullptr) && location->descr().type() == Widelands::MapObjectType::FLAG) {
 		assert(&route_.get_flag(game_, 0) == location);
 
 		// special rule to get wares into buildings
-		if (ware_ && route_.get_nrsteps() == 1) {
-			if (dynamic_cast<Building const*>(destination)) {
+		if ((ware_ != nullptr) && route_.get_nrsteps() == 1) {
+			if ((destination != nullptr) &&
+			    destination->descr().type() >= Widelands::MapObjectType::BUILDING) {
 				assert(&route_.get_flag(game_, 1) == &destflag);
 
 				return destination;
@@ -232,12 +235,12 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
  * The caller might be destroyed, too.
  */
 void Transfer::has_finished() {
-	if (request_) {
+	if (request_ != nullptr) {
 		request_->transfer_finish(game_, *this);
 	} else {
 		PlayerImmovable* destination = destination_.get(game_);
 		assert(destination);
-		if (worker_) {
+		if (worker_ != nullptr) {
 			destination->receive_worker(game_, *worker_);
 			worker_ = nullptr;
 		} else {
@@ -255,7 +258,7 @@ void Transfer::has_finished() {
  * This Transfer object will be deleted.
  */
 void Transfer::has_failed() {
-	if (request_) {
+	if (request_ != nullptr) {
 		request_->transfer_fail(game_, *this);
 	} else {
 		delete this;
@@ -263,6 +266,9 @@ void Transfer::has_failed() {
 }
 
 void Transfer::tlog(char const* const fmt, ...) {
+	if (!g_verbose) {
+		return;
+	}
 	char buffer[1024];
 	va_list va;
 	char id;
@@ -272,10 +278,10 @@ void Transfer::tlog(char const* const fmt, ...) {
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (worker_) {
+	if (worker_ != nullptr) {
 		id = 'W';
 		serial = worker_->serial();
-	} else if (ware_) {
+	} else if (ware_ != nullptr) {
 		id = 'I';
 		serial = ware_->serial();
 	} else {
@@ -283,7 +289,7 @@ void Transfer::tlog(char const* const fmt, ...) {
 		serial = 0;
 	}
 
-	log("T%c(%u): %s", id, serial, buffer);
+	log_dbg_time(game_.get_gametime(), "T%c(%u): %s", id, serial, buffer);
 }
 
 /*
@@ -310,7 +316,7 @@ void Transfer::read(FileRead& fr, Transfer::ReadData& rd) {
 }
 
 void Transfer::read_pointers(MapObjectLoader& mol, const Widelands::Transfer::ReadData& rd) {
-	if (rd.destination) {
+	if (rd.destination != 0u) {
 		destination_ = &mol.get<PlayerImmovable>(rd.destination);
 	}
 }

@@ -1,46 +1,53 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_ax_workshop",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Ax Workshop"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "barbarians_warmill",
 
-   enhancement_cost = {
-      log = 1,
-      blackwood = 1,
-      granite = 2,
-      grout = 1,
-      reed = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      blackwood = 1,
-      granite = 1,
-      grout = 1
+   enhancement = {
+      name = "barbarians_warmill",
+      enhancement_cost = {
+         log = 1,
+         blackwood = 1,
+         granite = 2,
+         grout = 1,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         blackwood = 1,
+         granite = 1,
+         grout = 1
+      }
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 57, 76 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 57, 76 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 57, 76 },
+      },
+   },
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 57, 64 }
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 57, 76 },
-         fps = 10
-      },
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 57, 75 }
+      }
    },
 
    aihints = {
@@ -59,21 +66,24 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 3 * 57.667 + 10 = 183 sec
             "call=produce_ax",
             "call=produce_ax_sharp",
             "call=produce_ax_broad",
+            "return=skipped"
          }
       },
       produce_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
-         descname = _"forging an ax",
+         descname = _("forging an ax"),
          actions = {
-            -- time total: 57 + 3.6
+            -- time: 23.067 + 22 + 9 + 3.6 = 57.667 sec
             "return=skipped unless economy needs ax",
             "consume=coal iron",
-            "sleep=duration:26s",
+            "sleep=duration:23s067ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:22s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -83,12 +93,12 @@ tribes:new_productionsite_type {
       },
       produce_ax_sharp = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-         descname = _"forging a sharp ax",
+         descname = _("forging a sharp ax"),
          actions = {
-            -- time total: 57 + 3.6
+            -- time: 23.067 + 22 + 9 + 3.6 = 57.667 sec
             "return=skipped unless economy needs ax_sharp",
             "consume=coal iron:2",
-            "sleep=duration:26s",
+            "sleep=duration:23s067ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:22s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -98,12 +108,12 @@ tribes:new_productionsite_type {
       },
       produce_ax_broad = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-         descname = _"forging a broad ax",
+         descname = _("forging a broad ax"),
          actions = {
-            -- time total: 57 + 3.6
+            -- time: 23.067 + 22 + 9 + 3.6 = 57.667 sec
             "return=skipped unless economy needs ax_broad",
             "consume=coal:2 iron:2",
-            "sleep=duration:26s",
+            "sleep=duration:23s067ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:22s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -113,3 +123,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

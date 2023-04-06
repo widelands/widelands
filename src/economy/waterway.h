@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -33,8 +32,7 @@ public:
 	WaterwayDescr(char const* const init_name, char const* const init_descname)
 	   : RoadBaseDescr(init_name, init_descname, MapObjectType::WATERWAY) {
 	}
-	~WaterwayDescr() override {
-	}
+	~WaterwayDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(WaterwayDescr);
@@ -57,16 +55,16 @@ struct Waterway : public RoadBase {
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t) override;
 
-	const FerryFleet* get_fleet() const {
+	const OPtr<FerryFleet> get_fleet() const {
 		return fleet_;
 	}
-	FerryFleet* get_fleet() {
+	OPtr<FerryFleet> get_fleet() {
 		return fleet_;
 	}
-	const Ferry* get_ferry() const {
+	const OPtr<Ferry> get_ferry() const {
 		return ferry_;
 	}
-	Ferry* get_ferry() {
+	OPtr<Ferry> get_ferry() {
 		return ferry_;
 	}
 
@@ -87,8 +85,8 @@ private:
 
 	void request_ferry(EditorGameBase& egbase);
 
-	Ferry* ferry_;
-	FerryFleet* fleet_;
+	OPtr<Ferry> ferry_;
+	OPtr<FerryFleet> fleet_;
 };
 }  // namespace Widelands
 

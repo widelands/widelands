@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -36,8 +35,7 @@ namespace UI {
 class IFontHandler {
 public:
 	IFontHandler() = default;
-	virtual ~IFontHandler() {
-	}
+	virtual ~IFontHandler() = default;
 
 	/// Renders the given text into a set of images. The images are cached in a transient cache,
 	/// so we share the ownership. Will throw on error.
@@ -45,7 +43,7 @@ public:
 	                                                       uint16_t w = 0) = 0;
 
 	/// Returns the font handler's current FontSet
-	virtual UI::FontSet const* fontset() const = 0;
+	[[nodiscard]] virtual UI::FontSet const* fontset() const = 0;
 
 	/// Loads the FontSet for the currently active locale into the
 	/// font handler. This needs to be called after the language of the

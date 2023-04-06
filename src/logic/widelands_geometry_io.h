@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -75,8 +74,6 @@ Direction read_direction_8(StreamRead* fr);
 ///
 /// \throws direction_invalid if direction is > 6.
 Direction read_direction_8_allow_null(StreamRead* fr);
-
-MapIndex read_map_index_32(StreamRead* fr, MapIndex max);
 
 /// Read a Coords from the file. Use this when the result can only be a
 /// coordinate pair referring to a node.

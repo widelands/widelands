@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2020 by the Widelands Development Team
+ * Copyright (C) 2015-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,28 +12,26 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "logic/replay_game_controller.h"
 
+#include <memory>
+
 #include <SDL_timer.h>
 
 #include "logic/game.h"
+#include "logic/playersmanager.h"
 #include "logic/replay.h"
 #include "ui_basic/messagebox.h"
 #include "wui/interactive_base.h"
 
-ReplayGameController::ReplayGameController(Widelands::Game& game, const std::string& filename)
-   : game_(game),
-     lastframe_(SDL_GetTicks()),
-     time_(game_.get_gametime()),
-     speed_(1000),
-     paused_(false) {
-	game_.set_game_controller(this);
-	replayreader_.reset(new Widelands::ReplayReader(game_, filename));
+ReplayGameController::ReplayGameController(Widelands::Game& game)
+   : game_(game), lastframe_(SDL_GetTicks()), time_(game_.get_gametime()) {
+	game_.set_game_controller(std::shared_ptr<ReplayGameController>(this));
+	replayreader_.reset(new Widelands::ReplayReader(game_, game_.replay_filename()));
 }
 
 void ReplayGameController::think() {
@@ -50,7 +48,7 @@ void ReplayGameController::think() {
 
 	frametime = frametime * real_speed() / 1000;
 
-	time_ = game_.get_gametime() + frametime;
+	time_ = game_.get_gametime() + Duration(frametime);
 
 	if (replayreader_) {
 		while (Widelands::Command* const cmd = replayreader_->get_next_command(time_)) {
@@ -64,11 +62,11 @@ void ReplayGameController::think() {
 	}
 }
 
-void ReplayGameController::send_player_command(Widelands::PlayerCommand*) {
+void ReplayGameController::send_player_command(Widelands::PlayerCommand* /* command */) {
 	throw wexception("Trying to send a player command during replay");
 }
 
-int32_t ReplayGameController::get_frametime() {
+Duration ReplayGameController::get_frametime() {
 	return time_ - game_.get_gametime();
 }
 
@@ -98,7 +96,11 @@ void ReplayGameController::set_paused(bool const paused) {
 
 void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 	game.game_controller()->set_desired_speed(0);
-	UI::WLMessageBox mmb(game.get_ibase(), _("End of Replay"),
+
+	// Need to pull this out into a variable to make the includes script happy
+	InteractiveBase* i = game.get_ibase();
+	assert(i != nullptr);
+	UI::WLMessageBox mmb(i, UI::WindowStyle::kWui, _("End of Replay"),
 	                     _("The end of the replay has been reached and the game has "
 	                       "been paused. You may unpause the game and continue watching "
 	                       "if you want to."),
@@ -108,4 +110,17 @@ void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 
 Widelands::QueueCommandTypes ReplayGameController::CmdReplayEnd::id() const {
 	return Widelands::QueueCommandTypes::kReplayEnd;
+}
+
+void ReplayGameController::report_result(uint8_t p_nr,
+                                         Widelands::PlayerEndResult result,
+                                         const std::string& info) {
+	Widelands::PlayerEndStatus pes;
+	Widelands::Player* player = game_.get_player(p_nr);
+	assert(player != nullptr);
+	pes.player = player->player_number();
+	pes.time = game_.get_gametime();
+	pes.result = result;
+	pes.info = info;
+	game_.player_manager()->add_player_end_status(pes);
 }

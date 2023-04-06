@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,8 +20,7 @@
 
 #include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
-
+#include "base/string.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
@@ -30,6 +28,7 @@
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
+#include "scripting/lua_globals.h"
 #include "scripting/lua_map.h"
 #include "scripting/lua_root.h"
 #include "scripting/lua_table.h"
@@ -53,7 +52,7 @@ void setup_for_editor_and_game(lua_State* L, Widelands::EditorGameBase* g) {
 
 // Can run script also from the map.
 std::unique_ptr<LuaTable> run_script_maybe_from_map(lua_State* L, const std::string& path) {
-	if (boost::starts_with(path, "map:")) {
+	if (starts_with(path, "map:")) {
 		return run_script(L, path.substr(4), get_egbase(L).map().filesystem());
 	}
 	return run_script(L, path, g_fs);
@@ -71,9 +70,6 @@ LuaEditorInterface::LuaEditorInterface(Widelands::EditorGameBase* g)
 	lua_pushlightuserdata(
 	   lua_state_, reinterpret_cast<void*>(dynamic_cast<Factory*>(factory_.get())));
 	lua_setfield(lua_state_, LUA_REGISTRYINDEX, "factory");
-}
-
-LuaEditorInterface::~LuaEditorInterface() {
 }
 
 std::unique_ptr<LuaTable> LuaEditorInterface::run_script(const std::string& script) {
@@ -142,9 +138,6 @@ LuaGameInterface::LuaGameInterface(Widelands::Game* g) : factory_(new GameFactor
 	lua_setfield(lua_state_, LUA_REGISTRYINDEX, "factory");
 }
 
-LuaGameInterface::~LuaGameInterface() {
-}
-
 std::unique_ptr<LuaCoroutine> LuaGameInterface::read_coroutine(FileRead& fr) {
 	std::unique_ptr<LuaCoroutine> rv(new LuaCoroutine(nullptr));
 	rv->read(lua_state_, fr);
@@ -175,23 +168,28 @@ void LuaGameInterface::read_global_env(FileRead& fr,
 		   lua_state_, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);  // S: table key value globals_table
 		lua_pushvalue(lua_state_, -3);                        // S: table key value globals_table key
 		lua_gettable(lua_state_, -2);  // S: table key value globals_table value_in_globals
-		if (lua_compare(lua_state_, -1, -3, LUA_OPEQ)) {
+		if (lua_compare(lua_state_, -1, -3, LUA_OPEQ) != 0) {
 			lua_pop(lua_state_, 3);  // S: table key
 			continue;
-		} else {
-			// Make this a global value
-			lua_pop(lua_state_, 1);         // S: table key value globals_table
-			lua_pushvalue(lua_state_, -3);  // S: table key value globals_table key
-			lua_pushvalue(lua_state_, -3);  // S: table key value globals_table key value
-			lua_settable(lua_state_, -3);   // S: table key value globals_table
-			lua_pop(lua_state_, 2);         // S: table key
-		}
+		}                               // Make this a global value
+		lua_pop(lua_state_, 1);         // S: table key value globals_table
+		lua_pushvalue(lua_state_, -3);  // S: table key value globals_table key
+		lua_pushvalue(lua_state_, -3);  // S: table key value globals_table key value
+		lua_settable(lua_state_, -3);   // S: table key value globals_table
+		lua_pop(lua_state_, 2);         // S: table key
 	}
 
 	lua_pop(lua_state_, 1);  // pop the table returned by unpersist_object
 
 	// Clean out the garbage before returning.
 	lua_gc(lua_state_, LUA_GCCOLLECT, 0);
+}
+
+void LuaGameInterface::read_textdomain_stack(FileRead& fr) {
+	LuaGlobals::read_textdomain_stack(fr, lua_state_);
+}
+void LuaGameInterface::write_textdomain_stack(FileWrite& fw) {
+	LuaGlobals::write_textdomain_stack(fw, lua_state_);
 }
 
 uint32_t LuaGameInterface::write_global_env(FileWrite& fw, Widelands::MapObjectSaver& mos) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,25 +12,17 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "base/random.h"
 
-#include <random>
-
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
-#include <boost/uuid/uuid_io.hpp>
+#include <chrono>
 
 #include "base/wexception.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-
-RNG::RNG() : state0(0), state1(0) {
-}
 
 void RNG::seed(uint32_t s) {
 	state0 ^= state1;
@@ -98,13 +90,37 @@ void RNG::read_state(StreamRead& sr) {
 	state1 = sr.unsigned_32();
 }
 
-void RNG::write_state(StreamWrite& sw) {
+void RNG::write_state(StreamWrite& sw) const {
 	sw.unsigned_32(RNG_SAVE_MAGIC);
 	sw.unsigned_32(state0);
 	sw.unsigned_32(state1);
 }
 
+static RNG static_rng_(
+   std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now())
+      .time_since_epoch()
+      .count());
+uint32_t RNG::static_rand() {
+	return static_rng_.rand();
+}
+
 std::string generate_random_uuid() {
-	static boost::uuids::random_generator gen;
-	return boost::uuids::to_string(gen());
+	uint32_t values[4];
+	RNG temp_rng;
+	int64_t seed = clock();
+	for (uint32_t& val_ref : values) {
+		seed += std::chrono::time_point_cast<std::chrono::nanoseconds>(
+		           std::chrono::high_resolution_clock::now())
+		           .time_since_epoch()
+		           .count();
+		temp_rng.seed(seed % 0xfedcba98);
+		val_ref = temp_rng.rand();
+	}
+
+	char buffer[16 * 4 + 4 + 1];
+	snprintf(buffer, sizeof(buffer), "%04x%04x-%04x-%04x-%04x-%04x%04x%04x", values[0] & 0xffff,
+	         values[1] & 0xffff, values[2] & 0xffff, values[3] & 0xffff,
+	         (values[0] & 0xffff0000) >> 16, (values[1] & 0xffff0000) >> 16,
+	         (values[2] & 0xffff0000) >> 16, (values[3] & 0xffff0000) >> 16);
+	return buffer;
 }

@@ -59,6 +59,8 @@ function expand_south()
    campaign_message_box(supply_murilius_3)
    campaign_message_box(supply_murilius_4)
    campaign_message_box(supply_murilius_5)
+   p2.hidden_from_general_statistics = false
+   p3.hidden_from_general_statistics = false
    local placed = false
    local radius = 0
    while not placed do
@@ -216,7 +218,7 @@ function mining_issues()
    campaign_message_box(train_recycle_2)
    campaign_message_box(train_recycle_3)
    local o = add_campaign_objective(obj_train_recycle)
-   campaign_message_box(train_recycle_4)
+   if not (has_gold > 0) then campaign_message_box(train_recycle_4) end
    p1:allow_buildings {"frisians_recycling_center", "frisians_training_camp", "frisians_training_arena"}
    local has_miner = false
    while not has_miner do
@@ -318,6 +320,9 @@ function victory()
 end
 
 function mission_thread()
+
+   p2.hidden_from_general_statistics = true
+   p3.hidden_from_general_statistics = true
 
    campaign_message_box(intro_1)
    p3:conquer(p1_start, 8)

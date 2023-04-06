@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -25,48 +24,47 @@
 
 namespace {
 
-bool do_resolve(const boost::asio::ip::tcp& protocol,
+bool do_resolve(const asio::ip::tcp& protocol,
                 NetAddress* addr,
                 const std::string& hostname,
                 uint16_t port) {
 	assert(addr != nullptr);
 	try {
-		boost::asio::io_service io_service;
-		boost::asio::ip::tcp::resolver resolver(io_service);
-		boost::asio::ip::tcp::resolver::query query(
-		   protocol, hostname, boost::lexical_cast<std::string>(port));
-		boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
-		if (iter == boost::asio::ip::tcp::resolver::iterator()) {
+		asio::io_service io_service;
+		asio::ip::tcp::resolver resolver(io_service);
+		asio::ip::tcp::resolver::query query(protocol, hostname, as_string(port));
+		asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
+		if (iter == asio::ip::tcp::resolver::iterator()) {
 			// Resolution failed
-			log("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
-			    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
+			log_err("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
+			        ((protocol == asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
 			return false;
 		}
 		addr->ip = iter->endpoint().address();
 		addr->port = port;
-		log("Resolved network name '%s:%u' to %s\n", hostname.c_str(), port,
-		    addr->ip.to_string().c_str());
+		verb_log_info("Resolved network name '%s:%u' to %s", hostname.c_str(), port,
+		              addr->ip.to_string().c_str());
 		return true;
-	} catch (const boost::system::system_error& ec) {
+	} catch (const std::system_error& ec) {
 		// Resolution failed
-		log("Could not resolve network name '%s:%u' to %s-address: %s\n", hostname.c_str(), port,
-		    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"), ec.what());
+		log_err("Could not resolve network name '%s:%u' to %s-address: %s\n", hostname.c_str(), port,
+		        ((protocol == asio::ip::tcp::v4()) ? "IPv4" : "IPv6"), ec.what());
 		return false;
 	}
 }
 }  // namespace
 
 bool NetAddress::resolve_to_v4(NetAddress* addr, const std::string& hostname, uint16_t port) {
-	return do_resolve(boost::asio::ip::tcp::v4(), addr, hostname, port);
+	return do_resolve(asio::ip::tcp::v4(), addr, hostname, port);
 }
 
 bool NetAddress::resolve_to_v6(NetAddress* addr, const std::string& hostname, uint16_t port) {
-	return do_resolve(boost::asio::ip::tcp::v6(), addr, hostname, port);
+	return do_resolve(asio::ip::tcp::v6(), addr, hostname, port);
 }
 
 bool NetAddress::parse_ip(NetAddress* addr, const std::string& ip, uint16_t port) {
-	boost::system::error_code ec;
-	boost::asio::ip::address new_addr = boost::asio::ip::address::from_string(ip, ec);
+	std::error_code ec;
+	asio::ip::address new_addr = asio::ip::address::from_string(ip, ec);
 	if (ec) {
 		return false;
 	}
@@ -83,19 +81,19 @@ bool NetAddress::is_valid() const {
 	return port != 0 && !ip.is_unspecified();
 }
 
-CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncReportCallback cb)
+CmdNetCheckSync::CmdNetCheckSync(const Time& dt, SyncReportCallback cb)
    : Command(dt), callback_(std::move(cb)) {
 }
 
-void CmdNetCheckSync::execute(Widelands::Game&) {
+void CmdNetCheckSync::execute(Widelands::Game& /* game */) {
 	callback_();
 }
 
 NetworkTime::NetworkTime() {
-	reset(0);
+	reset(Time(0));
 }
 
-void NetworkTime::reset(int32_t const ntime) {
+void NetworkTime::reset(const Time& ntime) {
 	networktime_ = time_ = ntime;
 	lastframe_ = SDL_GetTicks();
 	latency_ = 0;
@@ -121,7 +119,7 @@ void NetworkTime::think(uint32_t const speed) {
 
 	delta = (delta * speed) / 1000;
 
-	int32_t const behind = networktime_ - time_;
+	int32_t const behind = networktime_.get() - time_.get();
 
 	// Play catch up
 	uint32_t speedup = 0;
@@ -143,23 +141,23 @@ void NetworkTime::think(uint32_t const speed) {
 		delta = behind;
 	}
 
-	time_ += delta;
+	time_.increment(Duration(delta));
 }
 
-int32_t NetworkTime::time() const {
+const Time& NetworkTime::time() const {
 	return time_;
 }
 
-int32_t NetworkTime::networktime() const {
+const Time& NetworkTime::networktime() const {
 	return networktime_;
 }
 
-void NetworkTime::receive(int32_t const ntime) {
+void NetworkTime::receive(const Time& ntime) {
 	if (ntime < networktime_) {
 		throw wexception("NetworkTime: Time appears to be running backwards.");
 	}
 
-	uint32_t const behind = networktime_ - time_;
+	uint32_t const behind = networktime_.get() - time_.get();
 
 	latency_ = behind < latency_ ? behind : ((latency_ * 7) + behind) / 8;
 
@@ -174,9 +172,6 @@ void NetworkTime::receive(int32_t const ntime) {
 }
 
 /*** class SendPacket ***/
-
-SendPacket::SendPacket() {
-}
 
 void SendPacket::data(const void* const packet_data, const size_t size) {
 	if (buffer.empty()) {
@@ -203,13 +198,14 @@ uint8_t* SendPacket::get_data() const {
 
 	uint32_t const length = buffer.size();
 
+	assert(length >= 2);
 	assert(length < 0x10000);
 
 	// update packet length
 	buffer[0] = length >> 8;
 	buffer[1] = length & 0xFF;
 
-	return &(buffer[0]);
+	return buffer.data();
 }
 
 /*** class RecvPacket ***/

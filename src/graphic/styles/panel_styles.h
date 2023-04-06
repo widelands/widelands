@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2017-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -33,17 +32,18 @@ struct PanelStyleInfo {
 	PanelStyleInfo(const Image* init_image, const RGBAColor& init_color, int init_margin)
 	   : margin_(init_margin), image_(init_image), color_(init_color) {
 	}
-	PanelStyleInfo(const PanelStyleInfo& other) : image_(other.image()), color_(other.color()) {
+	PanelStyleInfo(const PanelStyleInfo& other)
+	   : margin_(other.margin()), image_(other.image()), color_(other.color()) {
 	}
 
-	const RGBAColor& color() const {
+	[[nodiscard]] const RGBAColor& color() const {
 		return color_;
 	}
-	const Image* image() const {
+	[[nodiscard]] const Image* image() const {
 		return image_;
 	}
 
-	int margin() const {
+	[[nodiscard]] int margin() const {
 		return margin_;
 	}
 

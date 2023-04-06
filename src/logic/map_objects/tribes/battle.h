@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BATTLE_H
@@ -27,10 +26,9 @@ class Soldier;
 class BattleDescr : public MapObjectDescr {
 public:
 	BattleDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::BATTLE, init_name, init_descname, "") {
+	   : MapObjectDescr(MapObjectType::BATTLE, init_name, init_descname) {
 	}
-	~BattleDescr() override {
-	}
+	~BattleDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(BattleDescr);
@@ -64,7 +62,7 @@ public:
 	void cancel(Game&, Soldier&);
 
 	// Returns true if the battle should not be interrupted.
-	bool locked(Game&);
+	bool locked(const Game&);
 
 	// The two soldiers involved in this fight.
 	Soldier* first() {
@@ -96,35 +94,35 @@ private:
 
 	void calculate_round(Game&);
 
-	Soldier* first_;
-	Soldier* second_;
+	Soldier* first_ = nullptr;
+	Soldier* second_ = nullptr;
 
 	/**
 	 * Gametime when the battle was created.
 	 */
-	int32_t creationtime_;
+	Time creationtime_{0U};
 
 	/**
 	 * 1 if only the first soldier is ready, 2 if only the second soldier
 	 * is ready, 3 if both are ready.
 	 */
-	uint8_t readyflags_;
+	uint8_t readyflags_{0U};
 
 	/**
 	 * Damage pending to apply. Damage is applied at end of round so animations
 	 * can show current action.
 	 */
-	uint32_t damage_;
+	uint32_t damage_{0U};
 
 	/**
 	 * \c true if the first soldier is the next to strike.
 	 */
-	bool first_strikes_;
+	bool first_strikes_{true};
 
 	/**
 	 * \c true if the last turn attacker damaged his opponent
 	 */
-	bool last_attack_hits_;
+	bool last_attack_hits_{false};
 };
 }  // namespace Widelands
 

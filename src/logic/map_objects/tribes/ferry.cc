@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -31,8 +30,8 @@ namespace Widelands {
 
 FerryDescr::FerryDescr(const std::string& init_descname,
                        const LuaTable& table,
-                       const Tribes& tribes)
-   : CarrierDescr(init_descname, table, tribes, MapObjectType::FERRY) {
+                       Descriptions& descriptions)
+   : CarrierDescr(init_descname, table, descriptions, MapObjectType::FERRY) {
 }
 
 // When pathfinding, we _always_ use a CheckStepFerry to account for our very special movement
@@ -42,8 +41,7 @@ uint32_t FerryDescr::movecaps() const {
 	return MOVECAPS_SWIM | MOVECAPS_WALK;
 }
 
-Ferry::Ferry(const FerryDescr& ferry_descr)
-   : Carrier(ferry_descr), destination_(nullptr), unemployed_since_(0) {
+Ferry::Ferry(const FerryDescr& ferry_descr) : Carrier(ferry_descr) {
 }
 
 bool Ferry::init(EditorGameBase& egbase) {
@@ -52,7 +50,7 @@ bool Ferry::init(EditorGameBase& egbase) {
 }
 
 void Ferry::cleanup(EditorGameBase& e) {
-	if (fleet_) {
+	if (fleet_ != nullptr) {
 		fleet_->remove_ferry(e, this);
 	}
 	Carrier::cleanup(e);
@@ -62,32 +60,33 @@ const Bob::Task Ferry::taskUnemployed = {
    "unemployed", static_cast<Bob::Ptr>(&Ferry::unemployed_update), nullptr, nullptr, true};
 
 void Ferry::start_task_unemployed(Game& game) {
-	assert(unemployed_since_ == 0);
+	assert(unemployed_since_.get() == 0);
 	push_task(game, taskUnemployed);
 	unemployed_since_ = game.get_gametime();
 }
 
-constexpr uint32_t kUnemployedLifetime = 1000 * 60 * 10;  // 10 minutes
+constexpr Duration kUnemployedLifetime(1000 * 60 * 10);  // 10 minutes
 
-void Ferry::unemployed_update(Game& game, State&) {
-	if (get_signal().size()) {
-		molog("[unemployed]: interrupted by signal '%s'\n", get_signal().c_str());
+void Ferry::unemployed_update(Game& game, State& /* state */) {
+	if (!get_signal().empty()) {
+		molog(
+		   game.get_gametime(), "[unemployed]: interrupted by signal '%s'\n", get_signal().c_str());
 		if (get_signal() == "row") {
 			assert(destination_);
 			signal_handled();
-			unemployed_since_ = 0;
+			unemployed_since_ = Time(0);
 			pop_task(game);
 			push_task(game, taskRow);
-			return schedule_act(game, 10);
+			return schedule_act(game, Duration(10));
 		}
 	}
 	if (destination_) {
 		// Sometimes (e.g. when reassigned directly from waterway servicing),
 		// the 'row' signal is consumed before we can receive it
-		unemployed_since_ = 0;
+		unemployed_since_ = Time(0);
 		pop_task(game);
 		push_task(game, taskRow);
-		return schedule_act(game, 10);
+		return schedule_act(game, Duration(10));
 	}
 
 	assert(game.get_gametime() >= unemployed_since_);
@@ -102,16 +101,16 @@ void Ferry::unemployed_update(Game& game, State&) {
 		if (upcast(Flag, flag, pos.field->get_immovable())) {
 			// We are on a flag
 			if (flag->has_capacity()) {
-				molog("[unemployed]: dropping ware here\n");
+				molog(game.get_gametime(), "[unemployed]: dropping ware here\n");
 				flag->add_ware(game, *fetch_carried_ware(game));
 				return start_task_idle(game, descr().get_animation("idle", this), 50);
 			}
 		}
-		molog("[unemployed]: trying to find a flag\n");
+		molog(game.get_gametime(), "[unemployed]: trying to find a flag\n");
 		std::vector<ImmovableFound> flags;
-		if (!map.find_reachable_immovables(game, Area<FCoords>(pos, 4), &flags, CheckStepFerry(game),
-		                                   FindImmovableType(MapObjectType::FLAG))) {
-			molog("[unemployed]: no flag found at all\n");
+		if (map.find_reachable_immovables(game, Area<FCoords>(pos, 4), &flags, CheckStepFerry(game),
+		                                  FindImmovableType(MapObjectType::FLAG)) == 0u) {
+			molog(game.get_gametime(), "[unemployed]: no flag found at all\n");
 			// Fall through to the selection of a random nearby location
 		} else {
 			for (ImmovableFound& imm : flags) {
@@ -119,30 +118,31 @@ void Ferry::unemployed_update(Game& game, State&) {
 					if (flag->get_owner() == get_owner()) {
 						if (flag->has_capacity()) {
 							Path path(pos);
-							if (map.findpath(pos, flag->get_position(), 0, path, CheckStepFerry(game))) {
-								molog("[unemployed]: moving to nearby flag\n");
+							if (map.findpath(pos, flag->get_position(), 0, path, CheckStepFerry(game)) !=
+							    0) {
+								molog(game.get_gametime(), "[unemployed]: moving to nearby flag\n");
 								return start_task_movepath(
 								   game, path, descr().get_right_walk_anims(true, this));
 							}
-							molog("[unemployed]: unable to row to reachable flag!\n");
+							molog(game.get_gametime(), "[unemployed]: unable to row to reachable flag!\n");
 							return start_task_idle(game, descr().get_animation("idle", this), 50);
 						}
 					}
 				}
 			}
-			molog("[unemployed]: no nearby flag has capacity\n");
+			molog(game.get_gametime(), "[unemployed]: no nearby flag has capacity\n");
 			// If no flag with capacity is nearby, fall through to the selection of a random nearby
 			// location
 		}
 	}
 
 	bool move = true;
-	if (!(pos.field->nodecaps() & MOVECAPS_SWIM)) {
-		molog("[unemployed]: we are on shore\n");
-	} else if (pos.field->get_immovable()) {
-		molog("[unemployed]: we are on location\n");
-	} else if (pos.field->get_first_bob()->get_next_bob()) {
-		molog("[unemployed]: we are on another bob\n");
+	if ((pos.field->nodecaps() & MOVECAPS_SWIM) == 0) {
+		molog(game.get_gametime(), "[unemployed]: we are on shore\n");
+	} else if (pos.field->get_immovable() != nullptr) {
+		molog(game.get_gametime(), "[unemployed]: we are on location\n");
+	} else if (pos.field->get_first_bob()->get_next_bob() != nullptr) {
+		molog(game.get_gametime(), "[unemployed]: we are on another bob\n");
 	} else {
 		move = false;
 	}
@@ -152,12 +152,12 @@ void Ferry::unemployed_update(Game& game, State&) {
 		// row at most and how hard we'll try to find a nice new location.
 		Path path(pos);
 		for (uint8_t i = 0; i < 5; i++) {
-			if (map.findpath(pos, game.random_location(pos, 2), 0, path, CheckStepFerry(game))) {
+			if (map.findpath(pos, game.random_location(pos, 2), 0, path, CheckStepFerry(game)) != 0) {
 				return start_task_movepath(
 				   game, path, descr().get_right_walk_anims(does_carry_ware(), this));
 			}
 		}
-		molog("[unemployed]: no suitable locations to row to found\n");
+		molog(game.get_gametime(), "[unemployed]: no suitable locations to row to found\n");
 		return start_task_idle(game, descr().get_animation("idle", this), 50);
 	}
 
@@ -165,7 +165,7 @@ void Ferry::unemployed_update(Game& game, State&) {
 }
 
 bool Ferry::unemployed() {
-	return get_state(taskUnemployed) && !destination_;
+	return (get_state(taskUnemployed) != nullptr) && (destination_ == nullptr);
 }
 
 const Bob::Task Ferry::taskRow = {
@@ -178,7 +178,7 @@ void Ferry::start_task_row(Game& game, const Waterway& ww) {
 	send_signal(game, "row");
 }
 
-void Ferry::row_update(Game& game, State&) {
+void Ferry::row_update(Game& game, State& /* state */) {
 	if (!destination_) {
 		return pop_task(game);
 	}
@@ -186,16 +186,16 @@ void Ferry::row_update(Game& game, State&) {
 	const Map& map = game.map();
 
 	const std::string& signal = get_signal();
-	if (signal.size()) {
+	if (!signal.empty()) {
 		if (signal == "road" || signal == "fail" || signal == "row" || signal == "wakeup") {
-			molog("[row]: Got signal '%s' -> recalculate\n", signal.c_str());
+			molog(game.get_gametime(), "[row]: Got signal '%s' -> recalculate\n", signal.c_str());
 			signal_handled();
 		} else if (signal == "blocked") {
-			molog("[row]: Blocked by a battle\n");
+			molog(game.get_gametime(), "[row]: Blocked by a battle\n");
 			signal_handled();
 			return start_task_idle(game, descr().get_animation("idle", this), 900);
 		} else {
-			molog("[row]: Cancel due to signal '%s'\n", signal.c_str());
+			molog(game.get_gametime(), "[row]: Cancel due to signal '%s'\n", signal.c_str());
 			return pop_task(game);
 		}
 	}
@@ -212,25 +212,27 @@ void Ferry::row_update(Game& game, State&) {
 			return start_task_road(game);
 		}
 		// If we get here, the waterway was destroyed and we didn't notice
-		molog("[row]: Reached the destination (%3dx%3d) but it is no longer there\n",
+		molog(game.get_gametime(),
+		      "[row]: Reached the destination (%3dx%3d) but it is no longer there\n",
 		      get_position().x, get_position().y);
 		destination_.reset(nullptr);
 		return pop_task(game);
 	}
 
 	Path path(pos);
-	if (!map.findpath(pos, *destination_, 0, path, CheckStepFerry(game))) {
-		molog("[row]: Can't find a path to the waterway! Ferry at %3dx%3d, Waterway at %3dx%3d\n",
+	if (map.findpath(pos, *destination_, 0, path, CheckStepFerry(game)) == 0) {
+		molog(game.get_gametime(),
+		      "[row]: Can't find a path to the waterway! Ferry at %3dx%3d, Waterway at %3dx%3d\n",
 		      get_position().x, get_position().y, destination_->x, destination_->y);
 		// try again later
-		return schedule_act(game, 50);
+		return schedule_act(game, Duration(50));
 	}
 	return start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware(), this));
 }
 
 void Ferry::init_auto_task(Game& game) {
 	set_location(nullptr);
-	molog("init_auto_task: wait for employment\n");
+	molog(game.get_gametime(), "init_auto_task: wait for employment\n");
 	return start_task_unemployed(game);
 }
 
@@ -254,6 +256,7 @@ void Ferry::set_fleet(FerryFleet* fleet) {
 
 bool Ferry::init_fleet() {
 	assert(get_owner());
+	assert(fleet_ == nullptr);
 	EditorGameBase& egbase = get_owner()->egbase();
 	FerryFleet* fleet = new FerryFleet(get_owner());
 	fleet->add_ferry(this);
@@ -261,7 +264,7 @@ bool Ferry::init_fleet() {
 	return fleet->init(egbase);
 }
 
-Waterway* Ferry::get_destination(Game& game) const {
+Waterway* Ferry::get_destination(const Game& game) const {
 	if (!destination_) {
 		return nullptr;
 	}
@@ -271,7 +274,7 @@ Waterway* Ferry::get_destination(Game& game) const {
 void Ferry::set_destination(Game& game, Waterway* ww) {
 	destination_.reset(nullptr);
 	set_location(nullptr);
-	if (ww) {
+	if (ww != nullptr) {
 		start_task_row(game, *ww);
 	} else {
 		send_signal(game, "cancel");
@@ -307,14 +310,14 @@ void Ferry::Loader::load(FileRead& fr) {
 		uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			Ferry& ferry = get<Ferry>();
-			if (fr.unsigned_8()) {
+			if (fr.unsigned_8() != 0u) {
 				int16_t dest_x = fr.signed_16();
 				int16_t dest_y = fr.signed_16();
 				ferry.destination_.reset(new Coords(dest_x, dest_y));
 			} else {
 				ferry.destination_.reset(nullptr);
 			}
-			ferry.unemployed_since_ = fr.unsigned_32();
+			ferry.unemployed_since_ = Time(fr);
 			ferry.fleet_ = nullptr;
 		} else {
 			throw UnhandledVersionError("Ferry", packet_version, kCurrentPacketVersion);
@@ -333,7 +336,7 @@ void Ferry::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) 
 		fw.signed_16(destination_->x);
 		fw.signed_16(destination_->y);
 	}
-	fw.unsigned_32(unemployed_since_);
+	unemployed_since_.save(fw);
 }
 
 Ferry::Loader* Ferry::create_loader() {

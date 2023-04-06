@@ -18,7 +18,7 @@ function dismantle()
    end
    sleep(2000)
    p1:allow_buildings("all")
-   p1:forbid_buildings{"empire_farm", "empire_farm2", "empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2","empire_trainingcamp", "empire_colosseum", "empire_lumberjacks_house1", "empire_well1", "empire_foresters_house1"}
+   p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery","empire_trainingcamp", "empire_colosseum", "empire_lumberjacks_house1", "empire_well1", "empire_foresters_house1"}
    o.done = true
 
    campaign_message_box(amalea_3)
@@ -31,8 +31,7 @@ function farm_plans()
    local f = map:get_field(47, 10)
    local farmclick = false
    local count = 0
-   local o1 = add_campaign_objective(obj_click_farmbuilding)
-   o1.done = true
+   local o1 = nil
    while not (farmclick or p1.defeated or (f.owner == p1)) do
       if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
          farmclick = true
@@ -40,12 +39,14 @@ function farm_plans()
       count = count + 1
       if count == 1201 then
          campaign_message_box(amalea_18)
-         o1.done = false
+         o1 = add_campaign_objective(obj_click_farmbuilding)
       end
       sleep(500)
    end
 
-   o1.done = true
+   if o1 then
+      o1.done = true
+   end
    if not p1.defeated then
       campaign_message_box(amalea_2)
       local o = add_campaign_objective(obj_find_farm_plans)
@@ -64,7 +65,7 @@ function farm_plans()
       end
 
       o.done = true
-      p1:allow_buildings{"empire_farm", "empire_farm2"}
+      p1:allow_buildings{"empire_farm"}
       run (wheat_chain)
    end
 end
@@ -101,6 +102,7 @@ function clear_roads()
       end
       timer = timer + 1
       if timer == 100 and not p1.defeated then
+         o.body = obj_clear_roads_hint
          campaign_message_box(amalea_20)
       end
    end
@@ -440,7 +442,7 @@ function wheat_chain()
       o1.done = true
       julia_conquered = true
       p1:forbid_buildings{"empire_mill1", "empire_brewery1"}
-      p1:allow_buildings{"empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2"}
+      p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(saledus_2)
       campaign_message_box(julia_2)
       campaign_message_box(amalea_11)
@@ -454,7 +456,7 @@ function wheat_chain()
       hq[1]:set_wares("wheat", wheat)
       hq[1]:set_wares("wine", wine)
       p1:forbid_buildings{"empire_mill1", "empire_brewery1"}
-      p1:allow_buildings{"empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2"}
+      p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(julia_1)
 
       --remove all workers from p3 to avoid having them wandering around
@@ -499,10 +501,8 @@ function karma()
             "empire_stonemasons_house",
             "empire_sawmill",
             "empire_mill",
-            "empire_mill2",
             "empire_bakery",
             "empire_brewery",
-            "empire_brewery2",
             "empire_vineyard",
             "empire_winery",
             "empire_tavern",
@@ -585,6 +585,8 @@ function mission_thread()
    run(dismantle)
    run(farm_plans)
    run(check_defeat)
+   sleep(20000)
+   campaign_message_box(amalea_24)
 end
 
 run(mission_thread)

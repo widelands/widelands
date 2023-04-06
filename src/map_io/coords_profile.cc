@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,12 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "map_io/coords_profile.h"
+
+#include <cstdlib>
 
 #include "base/wexception.h"
 #include "io/profile.h"
@@ -36,7 +37,8 @@ Coords parse_coords(const std::string& name, const char* const coords, const Ext
 	//  not set starting positions in the editor. So check whether x, y < -1 so
 	//  the editor can load incomplete maps. For games the starting positions
 	//  will be checked in player initalisation anyway.
-	if (((x < 0 || extent.w <= x || y < 0 || extent.h <= y) && (x != -1 || y != -1)) || *endp) {
+	if (((x < 0 || extent.w <= x || y < 0 || extent.h <= y) && (x != -1 || y != -1)) ||
+	    (*endp != 0)) {
 		throw wexception("%s: \"%s\" is not a Coords on a map with size (%u, %u)", name.c_str(),
 		                 coords, extent.w, extent.h);
 	}
@@ -46,15 +48,17 @@ Coords parse_coords(const std::string& name, const char* const coords, const Ext
 }  // namespace
 
 void set_coords(const std::string& name, const Coords& value, Section* section) {
-	char buffer[sizeof("-32769 -32769")];
-	sprintf(buffer, "%i %i", value.x, value.y);
+	constexpr int size = sizeof("-32769 -32769");
+	char buffer[size];
+	// No need to check result as result should always fit
+	snprintf(buffer, size, "%i %i", value.x, value.y);
 	section->set_string(name.c_str(), buffer);
 }
 
 Coords
 get_coords(const std::string& name, const Extent& extent, const Coords& def, Section* section) {
 	const char* const v = section->get_string(name.c_str());
-	if (!v) {
+	if (v == nullptr) {
 		return def;
 	}
 

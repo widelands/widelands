@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,36 +20,43 @@
 
 #include <memory>
 
-#include "graphic/graphic.h"
+#include "base/log.h"
+#include "graphic/font_handler.h"
+#include "graphic/style_manager.h"
 #include "io/profile.h"
-#include "logic/editor_game_base.h"
 #include "logic/filesystem_constants.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "ui_basic/messagebox.h"
+#include "wui/interactive_base.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
 
 constexpr int kDesiredWidth = 216;
 
-EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
+EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
+                                           Widelands::Descriptions* descriptions,
                                            Widelands::Economy* ware_economy,
                                            Widelands::Economy* worker_economy,
+                                           Widelands::WareWorker type,
                                            bool can_act)
-   : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
-     main_box_(this, 0, 0, UI::Box::Vertical),
+   : UI::Window(parent, UI::WindowStyle::kWui, "economy_options", 0, 0, 0, 0, _("Economy options")),
+     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      ware_serial_(ware_economy->serial()),
      worker_serial_(worker_economy->serial()),
      player_(&ware_economy->owner()),
-     tabpanel_(this, UI::TabPanelStyle::kWuiDark),
+     tabpanel_(&main_box_, UI::TabPanelStyle::kWuiDark),
      ware_panel_(new EconomyOptionsPanel(
         &tabpanel_, this, ware_serial_, player_, can_act, Widelands::wwWARE, kDesiredWidth)),
      worker_panel_(new EconomyOptionsPanel(
         &tabpanel_, this, worker_serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
-     dropdown_box_(this, 0, 0, UI::Box::Horizontal),
+     dropdown_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      dropdown_(&dropdown_box_,
                "economy_profiles",
                0,
@@ -62,24 +68,24 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
                UI::DropdownType::kTextual,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiSecondary),
-     time_last_thought_(0),
-     save_profile_dialog_(nullptr) {
+
+     descriptions_(descriptions) {
 	set_center_panel(&main_box_);
 
-	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));
-	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
+	tabpanel_.add("wares", g_image_cache->get(pic_tab_wares), ware_panel_, _("Wares"));
+	tabpanel_.add("workers", g_image_cache->get(pic_tab_workers), worker_panel_, _("Workers"));
 
-	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons = new UI::Box(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	UI::Button* b = new UI::Button(
 	   buttons, "decrease_target_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-	   g_gr->images().get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
+	   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
 	b->sigclicked.connect([this] { change_target(-10); });
 	buttons->add(b);
 	b->set_repeating(true);
 	b->set_enabled(can_act);
 	buttons->add_space(6);
 	b = new UI::Button(buttons, "decrease_target", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/scrollbar_down.png"),
+	                   g_image_cache->get("images/ui_basic/scrollbar_down.png"),
 	                   _("Decrease target"));
 	b->sigclicked.connect([this] { change_target(-1); });
 	buttons->add(b);
@@ -88,7 +94,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	buttons->add_space(6);
 
 	b = new UI::Button(buttons, "toggle_infinite", 0, 0, 32, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/wui/menus/infinity.png"),
+	                   g_image_cache->get("images/wui/menus/infinity.png"),
 	                   _("Toggle infinite target"));
 	b->sigclicked.connect([this] { toggle_infinite(); });
 	buttons->add(b);
@@ -97,14 +103,14 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	buttons->add_space(6);
 
 	b = new UI::Button(buttons, "increase_target", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/scrollbar_up.png"), _("Increase target"));
+	                   g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase target"));
 	b->sigclicked.connect([this] { change_target(1); });
 	buttons->add(b);
 	b->set_repeating(true);
 	b->set_enabled(can_act);
 	buttons->add_space(6);
 	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/scrollbar_up_fast.png"),
+	                   g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"),
 	                   _("Increase target by 10"));
 	b->sigclicked.connect([this] { change_target(10); });
 	buttons->add(b);
@@ -121,7 +127,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	}
 
 	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-	                   g_gr->images().get("images/wui/menus/save_game.png"),
+	                   g_image_cache->get("images/wui/menus/save_game.png"),
 	                   _("Save target settings"));
 	b->sigclicked.connect([this] { create_target(); });
 	dropdown_box_.add_space(8);
@@ -144,12 +150,16 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 			   return;
 		   }
 		   read_targets();
-		   if (save_profile_dialog_) {
+		   if (save_profile_dialog_ != nullptr) {
 			   save_profile_dialog_->update_table();
 		   }
 	   });
 
 	read_targets();
+
+	activate_tab(type);
+
+	initialization_complete();
 }
 
 EconomyOptionsWindow::~EconomyOptionsWindow() {
@@ -159,9 +169,47 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	if (Widelands::Economy* e_wo = player_->get_economy(worker_serial_)) {
 		e_wo->set_options_window(nullptr);
 	}
-	if (save_profile_dialog_) {
+	if (save_profile_dialog_ != nullptr) {
 		save_profile_dialog_->unset_parent();
 	}
+}
+
+EconomyOptionsWindow& EconomyOptionsWindow::create(Panel* parent,
+                                                   Widelands::Descriptions* descriptions,
+                                                   const Widelands::Flag& flag,
+                                                   Widelands::WareWorker type,
+                                                   bool can_act) {
+	Widelands::Economy* ware_economy = flag.get_economy(Widelands::wwWARE);
+	Widelands::Economy* worker_economy = flag.get_economy(Widelands::wwWORKER);
+	EconomyOptionsWindow* window_open = nullptr;
+	if (ware_economy->get_options_window() != nullptr) {
+		EconomyOptionsWindow& window =
+		   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
+		window_open = &window;
+		window.activate_tab(type);
+		if (window.is_minimal()) {
+			window.restore();
+		}
+		window.move_to_top();
+	}
+	if (worker_economy->get_options_window() != nullptr) {
+		EconomyOptionsWindow& window =
+		   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
+		window_open = &window;
+		window.activate_tab(type);
+		if (window.is_minimal()) {
+			window.restore();
+		}
+		window.move_to_top();
+	}
+	if (window_open != nullptr) {
+		return *window_open;
+	}
+	return *new EconomyOptionsWindow(
+	   parent, descriptions, ware_economy, worker_economy, type, can_act);
+}
+void EconomyOptionsWindow::activate_tab(Widelands::WareWorker type) {
+	tabpanel_.activate(type == Widelands::WareWorker::wwWARE ? "wares" : "workers");
 }
 
 std::string EconomyOptionsWindow::localize_profile_name(const std::string& name) {
@@ -176,10 +224,10 @@ std::string EconomyOptionsWindow::localize_profile_name(const std::string& name)
 }
 
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
-	Widelands::Serial* serial = note.old_economy == ware_serial_ ?
-	                               &ware_serial_ :
-	                               note.old_economy == worker_serial_ ? &worker_serial_ : nullptr;
-	if (serial) {
+	Widelands::Serial* serial = note.old_economy == ware_serial_   ? &ware_serial_ :
+	                            note.old_economy == worker_serial_ ? &worker_serial_ :
+                                                                    nullptr;
+	if (serial != nullptr) {
 		switch (note.action) {
 		case Widelands::NoteEconomy::Action::kMerged: {
 			*serial = note.new_economy;
@@ -201,7 +249,8 @@ void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 }
 
 void EconomyOptionsWindow::layout() {
-	int w, h;
+	int w;
+	int h;
 	tabpanel_.get_desired_size(&w, &h);
 	main_box_.set_desired_size(w, h + 78);
 	update_desired_size();
@@ -256,9 +305,9 @@ EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIn
 	const Widelands::Quantity amount = economy->target_quantity(ware).permanent;
 	if (amount == Widelands::kEconomyTargetInfinity) {
 		/** TRANSLATORS: Infinite number of wares or workers */
-		return g_gr->styles().font_style(UI::FontStyle::kLabel).as_font_tag(_("∞"));
+		return g_style_manager->font_style(UI::FontStyle::kWuiLabel).as_font_tag(_("∞"));
 	}
-	return boost::lexical_cast<std::string>(amount);
+	return as_string(amount);
 }
 
 /**
@@ -271,7 +320,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
                                                                bool can_act,
                                                                Widelands::WareWorker type,
                                                                int32_t min_w)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      serial_(serial),
      player_(player),
      type_(type),
@@ -316,7 +365,7 @@ void EconomyOptionsWindow::reset_target() {
 
 void EconomyOptionsWindow::EconomyOptionsPanel::toggle_infinite() {
 	Widelands::Economy* economy = player_->get_economy(serial_);
-	if (!economy) {
+	if (economy == nullptr) {
 		return die();
 	}
 	assert(economy->type() == type_);
@@ -335,7 +384,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::toggle_infinite() {
 					new_quantity = is_wares ? economy_options_window_->get_predefined_targets()
 					                             .at(kDefaultEconomyProfile)
 					                             .wares.at(index) :
-					                          economy_options_window_->get_predefined_targets()
+                                         economy_options_window_->get_predefined_targets()
 					                             .at(kDefaultEconomyProfile)
 					                             .workers.at(index);
 				} else {
@@ -364,7 +413,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int delta) {
 		return;
 	}
 	Widelands::Economy* economy = player_->get_economy(serial_);
-	if (!economy) {
+	if (economy == nullptr) {
 		return die();
 	}
 	assert(economy->type() == type_);
@@ -414,24 +463,31 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 		if (display_.ware_selected(index) ||
 		    (!anything_selected && !display_.is_ware_hidden(index))) {
 			if (is_wares) {
+				auto setting = settings.wares.find(index);
+				if (setting == settings.wares.end()) {
+					continue;
+				}
 				game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index,
-				   settings.wares.at(index)));
+				   game.get_gametime(), player_->player_number(), serial_, index, setting->second));
 			} else {
+				auto setting = settings.workers.find(index);
+				if (setting == settings.workers.end()) {
+					continue;
+				}
 				game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index,
-				   settings.workers.at(index)));
+				   game.get_gametime(), player_->player_number(), serial_, index, setting->second));
 			}
 		}
 	}
 }
 
-constexpr unsigned kThinkInterval = 200;
+constexpr Duration kThinkInterval(200);
 
 void EconomyOptionsWindow::think() {
-	const uint32_t time = player_->egbase().get_gametime();
-	if (time - time_last_thought_ < kThinkInterval || !player_->get_economy(ware_serial_) ||
-	    !player_->get_economy(worker_serial_)) {
+	const Time& time = player_->egbase().get_gametime();
+	if (time - time_last_thought_ < kThinkInterval ||
+	    (player_->get_economy(ware_serial_) == nullptr) ||
+	    (player_->get_economy(worker_serial_) == nullptr)) {
 		// If our economy has been deleted, die() was already called, no need to do anything
 		return;
 	}
@@ -520,7 +576,7 @@ void EconomyOptionsWindow::SaveProfileWindow::update_save_enabled() {
 	if (text.empty() || text == kDefaultEconomyProfile) {
 		save_.set_enabled(false);
 		save_.set_tooltip(text.empty() ? _("The profile name cannot be empty") :
-		                                 _("The default profile cannot be overwritten"));
+                                       _("The default profile cannot be overwritten"));
 	} else {
 		save_.set_enabled(true);
 		save_.set_tooltip(_("Save the profile under this name"));
@@ -553,14 +609,14 @@ void EconomyOptionsWindow::SaveProfileWindow::update_table() {
 	layout();
 }
 
-void EconomyOptionsWindow::SaveProfileWindow::save() {
+void EconomyOptionsWindow::SaveProfileWindow::save_profile() {
 	const std::string name = profile_name_.text();
 	assert(!name.empty());
 	assert(name != kDefaultEconomyProfile);
 	for (const auto& pair : economy_options_->get_predefined_targets()) {
 		if (pair.first == name) {
 			UI::WLMessageBox m(
-			   this, _("Overwrite?"),
+			   this, UI::WindowStyle::kWui, _("Overwrite?"),
 			   _("A profile with this name already exists. Do you wish to replace it?"),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -596,7 +652,7 @@ void EconomyOptionsWindow::SaveProfileWindow::unset_parent() {
 }
 
 void EconomyOptionsWindow::SaveProfileWindow::think() {
-	if (!economy_options_) {
+	if (economy_options_ == nullptr) {
 		die();
 	}
 	UI::Window::think();
@@ -604,48 +660,59 @@ void EconomyOptionsWindow::SaveProfileWindow::think() {
 
 EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
                                                            EconomyOptionsWindow* eco)
-   : UI::Window(parent, "save_economy_options_profile", 0, 0, 0, 0, _("Save Profile")),
+   : UI::Window(parent,
+                UI::WindowStyle::kWui,
+                "save_economy_options_profile",
+                0,
+                0,
+                0,
+                0,
+                _("Save Profile")),
      economy_options_(eco),
-     main_box_(this, 0, 0, UI::Box::Vertical),
-     table_box_(&main_box_, 0, 0, UI::Box::Vertical),
+     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     table_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      table_(&table_box_, 0, 0, 460, 120, UI::PanelStyle::kWui),
-     buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-     profile_name_(&buttons_box_, 0, 0, 240, UI::PanelStyle::kWui),
+     buttons_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     profile_name_(&main_box_, 0, 0, 240, UI::PanelStyle::kWui),
      save_(&buttons_box_, "save", 0, 0, 80, 34, UI::ButtonStyle::kWuiPrimary, _("Save")),
      cancel_(&buttons_box_, "cancel", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
      delete_(&buttons_box_, "delete", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Delete")) {
 	table_.add_column(200, _("Existing Profiles"));
 	update_table();
 
-	table_.selected.connect([this](uint32_t) { table_selection_changed(); });
+	table_.selected.connect([this](uint32_t /* index */) { table_selection_changed(); });
 	profile_name_.changed.connect([this] { update_save_enabled(); });
-	profile_name_.ok.connect([this] { save(); });
+	profile_name_.ok.connect([this] { save_profile(); });
 	profile_name_.cancel.connect([this] { die(); });
-	save_.sigclicked.connect([this] { save(); });
+	save_.sigclicked.connect([this] { save_profile(); });
 	cancel_.sigclicked.connect([this] { die(); });
 	delete_.sigclicked.connect([this] { delete_selected(); });
 
 	table_box_.add(&table_, UI::Box::Resizing::kFullSize);
-	buttons_box_.add(&profile_name_, UI::Box::Resizing::kFullSize);
-	buttons_box_.add(&save_);
+
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &save_ : &delete_);
 	buttons_box_.add(&cancel_);
-	buttons_box_.add(&delete_);
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &delete_ : &save_);
+
 	main_box_.add(&table_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&profile_name_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 	set_center_panel(&main_box_);
 
 	table_selection_changed();
 	update_save_enabled();
+
+	initialization_complete();
 }
 
 EconomyOptionsWindow::SaveProfileWindow::~SaveProfileWindow() {
-	if (economy_options_) {
+	if (economy_options_ != nullptr) {
 		economy_options_->close_save_profile_window();
 	}
 }
 
 void EconomyOptionsWindow::create_target() {
-	if (save_profile_dialog_) {
+	if (save_profile_dialog_ != nullptr) {
 		// Already open
 		return;
 	}
@@ -660,18 +727,18 @@ void EconomyOptionsWindow::close_save_profile_window() {
 void EconomyOptionsWindow::do_create_target(const std::string& name) {
 	assert(!name.empty());
 	assert(name != kDefaultEconomyProfile);
-	const Widelands::Tribes& tribes = player_->egbase().tribes();
+	const Widelands::Descriptions& descriptions = player_->egbase().descriptions();
 	const Widelands::TribeDescr& tribe = player_->tribe();
 	Widelands::Economy* ware_economy = player_->get_economy(ware_serial_);
 	Widelands::Economy* worker_economy = player_->get_economy(worker_serial_);
 	PredefinedTargets t;
 	for (Widelands::DescriptionIndex di : tribe.wares()) {
-		if (tribes.get_ware_descr(di)->has_demand_check(tribe.name())) {
+		if (descriptions.get_ware_descr(di)->has_demand_check(tribe.name())) {
 			t.wares[di] = ware_economy->target_quantity(di).permanent;
 		}
 	}
 	for (Widelands::DescriptionIndex di : tribe.workers()) {
-		if (tribes.get_worker_descr(di)->has_demand_check()) {
+		if (descriptions.get_worker_descr(di)->has_demand_check()) {
 			t.workers[di] = worker_economy->target_quantity(di).permanent;
 		}
 	}
@@ -682,7 +749,7 @@ void EconomyOptionsWindow::do_create_target(const std::string& name) {
 }
 
 void EconomyOptionsWindow::save_targets() {
-	const Widelands::Tribes& tribes = player_->egbase().tribes();
+	const Widelands::Descriptions& descriptions = player_->egbase().descriptions();
 	Profile profile;
 
 	std::map<std::string, uint32_t> serials;
@@ -702,11 +769,12 @@ void EconomyOptionsWindow::save_targets() {
 		}
 		Section& section = profile.create_section(std::to_string(serials.at(pair.first)).c_str());
 		for (const auto& setting : pair.second.wares) {
-			section.set_natural(tribes.get_ware_descr(setting.first)->name().c_str(), setting.second);
+			section.set_natural(
+			   descriptions.get_ware_descr(setting.first)->name().c_str(), setting.second);
 		}
 		for (const auto& setting : pair.second.workers) {
 			section.set_natural(
-			   tribes.get_worker_descr(setting.first)->name().c_str(), setting.second);
+			   descriptions.get_worker_descr(setting.first)->name().c_str(), setting.second);
 		}
 	}
 
@@ -719,7 +787,7 @@ void EconomyOptionsWindow::save_targets() {
 
 	g_fs->ensure_directory_exists(kEconomyProfilesDir);
 	std::string complete_filename =
-	   kEconomyProfilesDir + g_fs->file_separator() + player_->tribe().name();
+	   kEconomyProfilesDir + FileSystem::file_separator() + player_->tribe().name();
 	profile.write(complete_filename.c_str(), false);
 
 	// Inform the windows of other economies of new and deleted profiles
@@ -728,20 +796,19 @@ void EconomyOptionsWindow::save_targets() {
 
 void EconomyOptionsWindow::read_targets() {
 	predefined_targets_.clear();
-	const Widelands::Tribes& tribes = player_->egbase().tribes();
 	const Widelands::TribeDescr& tribe = player_->tribe();
 
 	{
 		PredefinedTargets t;
 		t.undeletable = true;
 		for (Widelands::DescriptionIndex di : tribe.wares()) {
-			const Widelands::WareDescr* descr = tribes.get_ware_descr(di);
+			const Widelands::WareDescr* descr = descriptions_->get_ware_descr(di);
 			if (descr->has_demand_check(tribe.name())) {
 				t.wares.insert(std::make_pair(di, descr->default_target_quantity(tribe.name())));
 			}
 		}
 		for (Widelands::DescriptionIndex di : tribe.workers()) {
-			const Widelands::WorkerDescr* descr = tribes.get_worker_descr(di);
+			const Widelands::WorkerDescr* descr = descriptions_->get_worker_descr(di);
 			if (descr->has_demand_check()) {
 				t.workers.insert(std::make_pair(di, descr->default_target_quantity()));
 			}
@@ -750,12 +817,12 @@ void EconomyOptionsWindow::read_targets() {
 	}
 
 	std::string complete_filename =
-	   kEconomyProfilesDir + g_fs->file_separator() + player_->tribe().name();
+	   kEconomyProfilesDir + FileSystem::file_separator() + player_->tribe().name();
 	Profile profile;
 	profile.read(complete_filename.c_str());
 
 	Section* global_section = profile.get_section(kDefaultEconomyProfile);
-	if (global_section) {
+	if (global_section != nullptr) {
 		std::map<std::string, std::string> serials;
 		while (Section::Value* v = global_section->get_next_val()) {
 			serials.insert(std::make_pair(v->get_name(), v->get_string()));
@@ -766,13 +833,21 @@ void EconomyOptionsWindow::read_targets() {
 			PredefinedTargets t;
 			while (Section::Value* v = section->get_next_val()) {
 				const std::string name(v->get_name());
-				Widelands::DescriptionIndex di = tribes.ware_index(name);
-				if (di == Widelands::INVALID_INDEX) {
-					di = tribes.worker_index(name);
-					assert(di != Widelands::INVALID_INDEX);
-					t.workers.insert(std::make_pair(di, v->get_natural()));
-				} else {
-					t.wares.insert(std::make_pair(di, v->get_natural()));
+				try {
+					const std::pair<Widelands::WareWorker, Widelands::DescriptionIndex> wareworker =
+					   descriptions_->load_ware_or_worker(name);
+					assert(wareworker.second != Widelands::INVALID_INDEX);
+					switch (wareworker.first) {
+					case Widelands::WareWorker::wwWARE:
+						t.wares.insert(std::make_pair(wareworker.second, v->get_natural()));
+						break;
+					case Widelands::WareWorker::wwWORKER:
+						t.workers.insert(std::make_pair(wareworker.second, v->get_natural()));
+						break;
+					}
+				} catch (const Widelands::GameDataError&) {
+					log_warn("Unknown ware or worker '%s' in economy profile '%s'", name.c_str(),
+					         pair.second.c_str());
 				}
 			}
 			predefined_targets_.insert(std::make_pair(pair.second, t));
@@ -787,4 +862,48 @@ void EconomyOptionsWindow::read_targets() {
 	}
 
 	update_profiles();
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window*
+EconomyOptionsWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			const uint32_t flag_serial = fr.unsigned_32();
+			if (flag_serial == 0) {
+				return nullptr;
+			}
+			Widelands::Flag& flag = mol.get<Widelands::Flag>(flag_serial);
+			return &create(&ib, ib.egbase().mutable_descriptions(), flag,
+			               fr.unsigned_8() > 0 ? Widelands::wwWORKER : Widelands::wwWARE,
+			               ib.can_act(flag.owner().player_number()));
+		}
+		throw Widelands::UnhandledVersionError(
+		   "Economy Options Window", packet_version, kCurrentPacketVersion);
+
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("economy options window: %s", e.what());
+	}
+}
+void EconomyOptionsWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	Widelands::Economy* e_wa = player_->get_economy(ware_serial_);
+	Widelands::Economy* e_wo = player_->get_economy(worker_serial_);
+	if ((e_wa == nullptr) || (e_wo == nullptr)) {
+		fw.unsigned_32(0);
+		return;
+	}
+	Widelands::Flag* f = e_wa->get_arbitrary_flag(e_wo);
+	if (f == nullptr) {
+		log_warn("EconomyOptionsWindow::save: No flag exists in both economies (%u & %u)",
+		         ware_serial_, worker_serial_);
+		f = e_wa->get_arbitrary_flag();
+	}
+	if (f == nullptr) {
+		fw.unsigned_32(0);
+		return;
+	}
+	fw.unsigned_32(mos.get_object_file_index(*f));
+	fw.unsigned_8(tabpanel_.active());
 }

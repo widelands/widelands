@@ -1,11 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_productionsite_type {
    name = "frisians_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Farm"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -24,8 +25,6 @@ tribes:new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {91, 111},
          frames = 10,
          columns = 5,
@@ -33,8 +32,6 @@ tribes:new_productionsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {91, 111},
          frames = 10,
          columns = 5,
@@ -42,8 +39,6 @@ tribes:new_productionsite_type {
          fps = 10
       },
       build = {
-         directory = dirname,
-         basename = "build",
          hotspot = {91, 90},
          frames = 2,
          columns = 2,
@@ -52,8 +47,6 @@ tribes:new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {91, 90}
       }
    },
@@ -61,7 +54,6 @@ tribes:new_productionsite_type {
    aihints = {
       space_consumer = true,
       prohibited_till = 220,
-      supports_production_of = { "honey" }
    },
 
    working_positions = {
@@ -71,7 +63,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=plant_barley",
             "call=harvest_barley",
@@ -79,7 +71,7 @@ tribes:new_productionsite_type {
       },
       plant_barley = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-         descname = _"planting barley",
+         descname = _("planting barley"),
          actions = {
             "callworker=plant",
             "sleep=duration:10s"
@@ -87,7 +79,7 @@ tribes:new_productionsite_type {
       },
       harvest_barley = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-         descname = _"harvesting barley",
+         descname = _("harvesting barley"),
          actions = {
             "callworker=harvest",
             "animate=working duration:40s",
@@ -98,9 +90,11 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
+      title = _("No Fields"),
+      heading = _("Out of Fields"),
       message = pgettext ("frisians_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifndef WL_UI_BASIC_SLIDER_H
@@ -56,10 +55,6 @@ protected:
 	       int32_t bar_size);
 
 public:
-	bool is_snap_target() const override {
-		return true;
-	}
-
 	int32_t get_value() const {
 		return value_;
 	}
@@ -75,6 +70,13 @@ public:
 	void set_min_value(int32_t);
 
 	void set_enabled(bool enabled);
+
+	bool handle_key(bool, SDL_Keysym) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+
+	void set_cursor_fixed_height(int32_t h) {
+		cursor_fixed_height_ = h;
+	}
 
 protected:
 	void layout() override;
@@ -100,24 +102,27 @@ protected:
 	void bar_pressed(int32_t pointer, int32_t ofs);
 
 private:
-	void send_value_changed();
+	void calculate_big_step();
+	void send_value_changed() const;
 	void set_highlighted(bool highlighted);
 
 public:
-	boost::signals2::signal<void()> changed;
-	boost::signals2::signal<void(int32_t)> changedto;
+	Notifications::Signal<> changed;
+	Notifications::Signal<int32_t> changedto;
 
 private:
 	int32_t min_value_;  //  cursor values
 	int32_t max_value_;
 	int32_t value_;
-	int32_t relative_move_;
+	int32_t relative_move_{0};
+	int32_t big_step_{0};
 
-	bool highlighted_;  //  mouse over
-	bool pressed_;      //  the cursor is pressed
-	bool enabled_;      //  enabled widget
+	bool highlighted_{false};  //  mouse over
+	bool pressed_{false};      //  the cursor is pressed
+	bool enabled_;             //  enabled widget
 
-	const UI::PanelStyleInfo* cursor_style_;  // Cursor color and texture. Not owned.
+	const UI::SliderStyle cursor_style_;  // Cursor color and texture. Not owned.
+	const UI::PanelStyleInfo& cursor_style() const;
 
 protected:
 	int32_t x_gap_;  //  draw positions
@@ -126,6 +131,7 @@ protected:
 
 	int32_t cursor_pos_;   //  cursor position
 	int32_t cursor_size_;  //  cursor width
+	int32_t cursor_fixed_height_{-1};
 };
 
 /**
@@ -213,22 +219,26 @@ protected:
  * Slider, but rather embed it, as we need to re-size it and add the labels.
  */
 struct DiscreteSlider : public Panel {
-	DiscreteSlider(Panel* const parent,
-	               const int32_t x,
-	               const int32_t y,
-	               const uint32_t w,
-	               const uint32_t h,
+	DiscreteSlider(Panel* parent,
+	               int32_t x,
+	               int32_t y,
+	               uint32_t w,
+	               uint32_t h,
 	               const std::vector<std::string>& labels_in,
-	               uint32_t value_,
+	               uint32_t init_value,
 	               UI::SliderStyle style,
 	               const std::string& tooltip_text = std::string(),
-	               const uint32_t cursor_size = 20,
-	               const bool enabled = true);
+	               uint32_t cursor_size = 20,
+	               bool enabled = true);
 
 	void set_labels(const std::vector<std::string>&);
 
-	boost::signals2::signal<void()> changed;
-	boost::signals2::signal<void(int32_t)> changedto;
+	Notifications::Signal<> changed;
+	Notifications::Signal<int32_t> changedto;
+
+	Slider& get_slider() {
+		return slider;
+	}
 
 protected:
 	void draw(RenderTarget& dst) override;
@@ -236,7 +246,8 @@ protected:
 
 private:
 	// We need the style to initialize the slider, so it has to come first.
-	const UI::TextPanelStyleInfo& style;
+	const UI::SliderStyle style_;
+	const UI::TextPanelStyleInfo& style() const;
 
 protected:
 	HorizontalSlider slider;

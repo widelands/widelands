@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
+wl.Descriptions():new_worker_type {
    name = "barbarians_shipwright",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Shipwright"),
-   helptext_script = dirname .. "helptexts.lua",
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
@@ -18,7 +18,7 @@ tribes:new_worker_type {
    programs = {
       buildship = {
          "walk=object-or-coords",
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:barbarians_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
          "animate=work duration:500ms",
          "construct",
@@ -26,10 +26,10 @@ tribes:new_worker_type {
          "return"
       },
       buildferry_1 = {
-         "findspace=size:swim radius:5",
+         "findspace=size:swim radius:5 ferry",
       },
       buildferry_2 = {
-         "findspace=size:swim radius:5",
+         "findspace=size:swim radius:5 ferry",
          "walk=coords",
          "animate=work duration:10s",
          "createbob=barbarians_ferry",
@@ -67,8 +67,10 @@ tribes:new_worker_type {
          hotspot = { 12, 22 },
          sound_effect = {
             path = "sound/hammering/hammering",
-            priority = 50
+            priority = "50%"
          }
       },
    }
 }
+
+pop_textdomain()

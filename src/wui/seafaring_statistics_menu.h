@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2017-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -35,6 +34,12 @@ class InteractivePlayer;
 struct SeafaringStatisticsMenu : public UI::UniqueWindow {
 	SeafaringStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kSeafaringStats;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
 private:
 	/// For identifying the columns in the table.
 	enum Cols { ColName, ColStatus };
@@ -48,7 +53,6 @@ private:
 		kExpeditionWaiting,
 		kExpeditionScouting,
 		kExpeditionPortspaceFound,
-		kExpeditionColonizing,
 		kAll
 	};
 
@@ -131,7 +135,6 @@ private:
 	/// status.
 	bool satisfies_filter(const ShipInfo& info, ShipFilterStatus filter);
 
-	const Image* colony_icon_;
 	UI::Box main_box_;
 	// Buttons for ship states
 	UI::Box filter_box_;
@@ -140,7 +143,7 @@ private:
 	UI::Button scouting_btn_;
 	UI::Button portspace_btn_;
 	UI::Button shipping_btn_;
-	ShipFilterStatus ship_filter_;
+	ShipFilterStatus ship_filter_{ShipFilterStatus::kAll};
 	// Navigation buttons
 	UI::Box navigation_box_;
 	UI::Button watchbtn_;

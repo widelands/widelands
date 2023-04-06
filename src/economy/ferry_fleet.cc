@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2020 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,6 +20,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -55,7 +55,7 @@ const FerryFleetDescr& FerryFleet::descr() const {
  * instance, then add themselves \em before calling the \ref init function.
  * The FerryFleet takes care of merging with existing fleets, if any.
  */
-FerryFleet::FerryFleet(Player* player) : MapObject(&g_ferry_fleet_descr), act_pending_(false) {
+FerryFleet::FerryFleet(Player* player) : MapObject(&g_ferry_fleet_descr) {
 	owner_ = player;
 }
 
@@ -75,10 +75,18 @@ bool FerryFleet::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
 	if (empty()) {
-		molog("Empty fleet initialized; disband immediately\n");
+		molog(egbase.get_gametime(), "Empty fleet initialized; disband immediately\n");
 		remove(egbase);
 		return false;
 	}
+
+	return find_other_fleet(egbase);
+}
+
+bool FerryFleet::init(EditorGameBase& egbase, Waterway* waterway) {
+	MapObject::init(egbase);
+
+	request_ferry(egbase, waterway, egbase.get_gametime());
 
 	return find_other_fleet(egbase);
 }
@@ -91,8 +99,8 @@ struct StepEvalFindFerryFleet {
 	int32_t estimate(Map& /* map */, FCoords /* pos */) const {
 		return 0;
 	}
-	int32_t
-	stepcost(Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
+	[[nodiscard]] int32_t stepcost(
+	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
 		return checkstep_->allowed(map, from, to, dir, CheckStep::StepId::stepNormal) ? 1 : -1;
 	}
 
@@ -124,7 +132,7 @@ bool FerryFleet::find_other_fleet(EditorGameBase& egbase) {
 			if (type == MapObjectType::WATERWAY) {
 				upcast(Waterway, ww, imm);
 				if (ww->get_fleet() != this && ww->get_owner() == get_owner()) {
-					return ww->get_fleet()->merge(egbase, this);
+					return ww->get_fleet().get(egbase)->merge(egbase, this);
 				}
 			}
 		}
@@ -169,8 +177,9 @@ bool FerryFleet::merge(EditorGameBase& egbase, FerryFleet* other) {
 
 	while (!other->pending_ferry_requests_.empty()) {
 		auto pair = other->pending_ferry_requests_.begin();
-		uint32_t time = pair->first;
+		Time time = pair->first;
 		Waterway* ww = pair->second;
+		assert(ww->get_fleet() == other);
 		// set_fleet() tells the associated waterway to remove this request from the other fleet
 		ww->set_fleet(this);
 		pending_ferry_requests_.emplace(time, ww);
@@ -185,16 +194,13 @@ bool FerryFleet::merge(EditorGameBase& egbase, FerryFleet* other) {
 void FerryFleet::cleanup(EditorGameBase& egbase) {
 	while (!ferries_.empty()) {
 		Ferry* ferry = ferries_.back();
-		if (egbase.objects().object_still_available(ferry)) {
-			ferry->set_fleet(nullptr);
-		}
+		ferry->set_fleet(nullptr);
 		ferries_.pop_back();
 	}
 	while (!pending_ferry_requests_.empty()) {
 		auto pair = pending_ferry_requests_.begin();
-		if (egbase.objects().object_still_available(pair->second)) {
-			pair->second->set_fleet(nullptr);
-		}
+		assert(pair->second->get_fleet() == this);
+		pair->second->set_fleet(nullptr);
 		pending_ferry_requests_.erase(pair);
 	}
 
@@ -211,10 +217,10 @@ uint32_t FerryFleet::count_unattended_waterways() const {
 
 // Returns true of this waterway has a ferry or a ferry is on the way there
 bool FerryFleet::has_ferry(const Waterway& ww) const {
-	if (ww.get_ferry()) {
+	if (ww.get_ferry().get(owner().egbase()) != nullptr) {
 		return true;
 	}
-	assert(ww.get_fleet() == this);
+	assert(ww.get_fleet().get(owner().egbase()) == this);
 	for (const auto& pair : pending_ferry_requests_) {
 		if (pair.second == &ww) {
 			return false;
@@ -225,20 +231,31 @@ bool FerryFleet::has_ferry(const Waterway& ww) const {
 
 void FerryFleet::add_ferry(Ferry* ferry) {
 	ferries_.push_back(ferry);
+	assert(std::count(ferries_.begin(), ferries_.end(), ferry) == 1);
 	ferry->set_fleet(this);
 }
 
 void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
 	auto it = std::find(ferries_.begin(), ferries_.end(), ferry);
 	if (it == ferries_.end()) {
-		log("FerryFleet %u: Requested to remove ferry %u which is not in this fleet\n", serial(),
-		    ferry ? ferry->serial() : 0);
+		log_warn_time(egbase.get_gametime(),
+		              "FerryFleet %u: Requested to remove ferry %u which is not in this fleet\n",
+		              serial(), ferry ? ferry->serial() : 0);
 		return;
 	}
-	ferries_.erase(it);
+	while (it != ferries_.end()) {
+		ferries_.erase(it);
+		it = std::find(ferries_.begin(), ferries_.end(), ferry);
+		if (it != ferries_.end()) {
+			log_warn_time(egbase.get_gametime(),
+			              "FerryFleet %u: Multiple instances of ferry %u were in the ferry fleet",
+			              serial(), ferry->serial());
+		}
+	}
+	assert(std::count(ferries_.begin(), ferries_.end(), ferry) == 0);
 	ferry->set_fleet(nullptr);
 
-	if (ferry->get_location(egbase)) {
+	if (ferry->get_location(egbase) != nullptr) {
 		update(egbase);
 	}
 
@@ -252,7 +269,9 @@ void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
  * in the next call to act(). When a ferry is found, its destination will be set to the waterway.
  * Multiple requests will be treated first come first served.
  */
-void FerryFleet::request_ferry(EditorGameBase& egbase, Waterway* waterway, int32_t gametime) {
+void FerryFleet::request_ferry(const EditorGameBase& egbase,
+                               Waterway* waterway,
+                               const Time& gametime) {
 	for (const auto& pair : pending_ferry_requests_) {
 		if (pair.second == waterway) {
 			if (waterway->get_fleet() != this) {
@@ -262,16 +281,16 @@ void FerryFleet::request_ferry(EditorGameBase& egbase, Waterway* waterway, int32
 			return;
 		}
 	}
-	pending_ferry_requests_.emplace(gametime < 0 ? egbase.get_gametime() : gametime, waterway);
+	pending_ferry_requests_.emplace(
+	   gametime.is_invalid() ? egbase.get_gametime() : gametime, waterway);
 	waterway->set_fleet(this);
 }
 
 void FerryFleet::cancel_ferry_request(Game& game, Waterway* waterway) {
 	for (Ferry* ferry : ferries_) {
-		if (game.objects().object_still_available(ferry) &&
-		    ferry->get_destination(game) == waterway) {
+		if (ferry->get_destination(game) == waterway) {
 			ferry->set_destination(game, nullptr);
-			return;
+			break;
 		}
 	}
 	for (auto it = pending_ferry_requests_.begin(); it != pending_ferry_requests_.end(); ++it) {
@@ -300,7 +319,9 @@ void FerryFleet::reroute_ferry_request(Game& game, Waterway* oldww, Waterway* ne
 			return;
 		}
 	}
-	log("FerryFleet::reroute_ferry_request: received order to reroute inexistent request\n");
+	log_warn_time(
+	   game.get_gametime(),
+	   "FerryFleet::reroute_ferry_request: received order to reroute inexistent request\n");
 }
 
 bool FerryFleet::empty() const {
@@ -310,7 +331,7 @@ bool FerryFleet::empty() const {
 /**
  * Trigger an update of ferry scheduling
  */
-void FerryFleet::update(EditorGameBase& egbase, uint32_t tdelta) {
+void FerryFleet::update(EditorGameBase& egbase, const Duration& tdelta) {
 	if (act_pending_) {
 		return;
 	}
@@ -332,7 +353,7 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 	act_pending_ = false;
 
 	if (empty()) {
-		molog("FerryFleet::act: remove empty fleet\n");
+		molog(game.get_gametime(), "FerryFleet::act: remove empty fleet\n");
 		remove(game);
 		return;
 	}
@@ -341,11 +362,11 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 		// If we are here, most likely update() was called by a pending ferry request
 		// when there are no ferries yet or by a new ferry when we can't offer
 		// employment yet. We can't handle it now, so we reschedule the act()
-		molog("FerryFleet::act: inactive, retry later\n");
-		return update(game, 5000);
+		molog(game.get_gametime(), "FerryFleet::act: inactive, retry later\n");
+		return update(game, Duration(5000));
 	}
 
-	molog("FerryFleet::act\n");
+	molog(game.get_gametime(), "FerryFleet::act\n");
 
 	std::vector<Ferry*> idle_ferries;
 	for (Ferry* f : ferries_) {
@@ -366,11 +387,12 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 			   game.map().findpath(temp_ferry->get_position(), ww.base_flag().get_position(), 0, path,
 			                       CheckStepFerry(game));
 			if (f_distance < 0) {
-				log("FerryFleet(%u)::act: We have a ferry (%u at %dx%d) "
-				    "that can't reach one of our waterways (%u at %dx%d)!\n",
-				    serial_, temp_ferry->serial(), temp_ferry->get_position().x,
-				    temp_ferry->get_position().y, ww.serial(), ww.base_flag().get_position().x,
-				    ww.base_flag().get_position().y);
+				log_err_time(game.get_gametime(),
+				             "FerryFleet(%u)::act: We have a ferry (%u at %dx%d) "
+				             "that can't reach one of our waterways (%u at %dx%d)!\n",
+				             serial_, temp_ferry->serial(), temp_ferry->get_position().x,
+				             temp_ferry->get_position().y, ww.serial(), ww.base_flag().get_position().x,
+				             ww.base_flag().get_position().y);
 				continue;
 			}
 
@@ -388,37 +410,36 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 	}
 
 	if (!pending_ferry_requests_.empty()) {
-		molog("... there are %" PRIuS " waterways requesting a ferry we cannot satisfy yet\n",
+		molog(game.get_gametime(),
+		      "... there are %" PRIuS " waterways requesting a ferry we cannot satisfy yet\n",
 		      pending_ferry_requests_.size());
 		// try again later
-		return update(game, 5000);
+		return update(game, Duration(5000));
 	}
 }
 
 void FerryFleet::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
-	molog("%" PRIuS " ferries and %" PRIuS " waterways\n", ferries_.size(),
+	molog(egbase.get_gametime(), "%" PRIuS " ferries and %" PRIuS " waterways\n", ferries_.size(),
 	      pending_ferry_requests_.size());
 	for (const Ferry* f : ferries_) {
-		molog("* Ferry %u\n", f->serial());
+		molog(egbase.get_gametime(), "* Ferry %u\n", f->serial());
 	}
 	for (const auto& pair : pending_ferry_requests_) {
-		molog("* Waterway %u (requested at %u)\n", pair.second->serial(), pair.first);
+		molog(egbase.get_gametime(), "* Waterway %u (requested at %u)\n", pair.second->serial(),
+		      pair.first.get());
 	}
 }
 
 constexpr uint8_t kCurrentPacketVersion = 1;
-
-FerryFleet::Loader::Loader() {
-}
 
 void FerryFleet::Loader::load(FileRead& fr) {
 	MapObject::Loader::load(fr);
 
 	FerryFleet& fleet = get<FerryFleet>();
 
-	fleet.act_pending_ = fr.unsigned_8();
+	fleet.act_pending_ = (fr.unsigned_8() != 0u);
 
 	const uint32_t nrferries = fr.unsigned_32();
 	ferries_.resize(nrferries);
@@ -428,7 +449,7 @@ void FerryFleet::Loader::load(FileRead& fr) {
 
 	const uint32_t nrww = fr.unsigned_32();
 	for (uint32_t i = 0; i < nrww; ++i) {
-		const uint32_t gametime = fr.unsigned_32();
+		const Time gametime(fr);
 		const uint32_t serial = fr.unsigned_32();
 		pending_ferry_requests_.emplace(gametime, serial);
 	}
@@ -464,13 +485,13 @@ MapObject::Loader* FerryFleet::load(EditorGameBase& egbase, MapObjectLoader& mol
 		uint8_t const packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber owner_number = fr.unsigned_8();
-			if (!owner_number || owner_number > egbase.map().get_nrplayers()) {
+			if ((owner_number == 0u) || owner_number > egbase.map().get_nrplayers()) {
 				throw GameDataError("owner number is %u but there are only %u players", owner_number,
 				                    egbase.map().get_nrplayers());
 			}
 
 			Player* owner = egbase.get_player(owner_number);
-			if (!owner) {
+			if (owner == nullptr) {
 				throw GameDataError("owning player %u does not exist", owner_number);
 			}
 
@@ -490,7 +511,7 @@ void FerryFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 	fw.unsigned_8(HeaderFerryFleet);
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	fw.unsigned_8(owner_->player_number());
+	fw.unsigned_8(owner_.load()->player_number());
 
 	MapObject::save(egbase, mos, fw);
 
@@ -502,7 +523,7 @@ void FerryFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 	}
 	fw.unsigned_32(pending_ferry_requests_.size());
 	for (const auto& temp_ww : pending_ferry_requests_) {
-		fw.unsigned_32(temp_ww.first);
+		temp_ww.first.save(fw);
 		fw.unsigned_32(mos.get_object_file_index(*temp_ww.second));
 	}
 }

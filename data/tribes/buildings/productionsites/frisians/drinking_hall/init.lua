@@ -1,30 +1,17 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_productionsite_type {
    name = "frisians_drinking_hall",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Drinking Hall"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
 
-   enhancement_cost = {
-      brick = 1,
-      granite = 2,
-      log = 1,
-      reed = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      brick = 1,
-      granite = 1,
-      reed = 1
-   },
-
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {50, 82},
          frames = 10,
          columns = 5,
@@ -32,8 +19,6 @@ tribes:new_productionsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {50, 82},
          frames = 10,
          columns = 5,
@@ -43,8 +28,6 @@ tribes:new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {50, 72}
       }
    },
@@ -68,7 +51,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_ration",
             "call=produce_meal",
@@ -76,7 +59,7 @@ tribes:new_productionsite_type {
       },
       produce_ration = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"preparing a ration",
+         descname = _("preparing a ration"),
          actions = {
             -- time total: 33
             "return=skipped unless economy needs ration",
@@ -89,7 +72,7 @@ tribes:new_productionsite_type {
       },
       produce_meal = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
-         descname = _"preparing a meal",
+         descname = _("preparing a meal"),
          actions = {
             --time total: 40
             "return=skipped unless economy needs meal",
@@ -101,3 +84,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

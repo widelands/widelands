@@ -16,106 +16,44 @@ local wc_name = "Collectors"
 -- will be used as the key to fetch the translation in C++
 local wc_descname = _("Collectors")
 local wc_version = 2
-local wc_desc = _ (
+local wc_desc_placeholder = _(
    "You get points for precious wares in your warehouses. The player with " ..
-   "the highest number of wares at the end of 4 hours wins the game."
+   "the highest score after %s wins the game."
 )
-local wc_points = _"Points"
+-- TRANSLATORS: Will be inserted into "The player with the highest score after %s wins the game."
+local wc_desc = wc_desc_placeholder:bformat(_("the configured time limit"))
+local wc_points = "Points"
+-- This needs to be exactly like wc_points, but localized, because wc_points
+-- will be used as the key to fetch the translation in C++
+local wc_points_i18n = _("Points")
 local r = {
    name = wc_name,
    description = wc_desc,
+   configurable_time = true,
    peaceful_mode_allowed = true,
    func = function()
 
-   -- set the objective with the game type for all players
-   broadcast_objective("win_condition", wc_descname, wc_desc)
+   local game = wl.Game()
 
    -- set the maximum game time of 4 hours
-   local max_time = 4 * 60
+   local max_time = game.win_condition_duration
 
-   local game = wl.Game()
+   -- set the objective with the game type for all players
+   broadcast_objective("win_condition", wc_descname, wc_desc_placeholder:bformat(format_remaining_raw_time(max_time)))
+
    local plrs = wl.Game().players
+   local function _gather_teams(plrs)
    local teams = {}
-   for idx,plr in ipairs(plrs) do
-      if (plr.team ~= 0) then
-         if (teams[plr.team] == nil) then
-            teams[plr.team] = {}
+      for idx,plr in ipairs(plrs) do
+         if (plr.team ~= 0) then
+            if (teams[plr.team] == nil) then
+               teams[plr.team] = {}
+            end
+            table.insert(teams[plr.team], plr)
          end
-         table.insert(teams[plr.team], plr)
       end
+      return teams
    end
-
-   -- The list of wares that give points
-   local point_table = {
-      barbarians = {
-         gold = 3,
-         ax = 2,
-         ax_sharp = 3,
-         ax_broad = 4,
-         ax_bronze = 4,
-         ax_battle = 6,
-         ax_warriors = 10,
-         helmet = 2,
-         helmet_mask = 3,
-         helmet_warhelm = 6,
-      },
-      barbarians_order = {
-         "gold", "ax", "ax_sharp", "ax_broad", "ax_bronze", "ax_battle",
-         "ax_warriors", "helmet", "helmet_mask", "helmet_warhelm",
-      },
-
-      empire = {
-         gold = 3,
-         spear_wooden = 1,
-         spear = 3,
-         spear_advanced = 4,
-         spear_heavy = 7,
-         spear_war = 8,
-         armor_helmet = 2,
-         armor = 3,
-         armor_chain = 4,
-         armor_gilded = 8,
-      },
-      empire_order = {
-         "gold", "spear_wooden", "spear", "spear_advanced", "spear_heavy",
-         "spear_war", "armor_helmet", "armor", "armor_chain", "armor_gilded"
-      },
-
-      frisians = {
-         gold = 3,
-         sword_short = 2,
-         sword_long = 3,
-         sword_broad = 6,
-         sword_double = 7,
-         helmet = 2,
-         helmet_golden = 7,
-         fur_garment = 2,
-         fur_garment_studded = 3,
-         fur_garment_golden = 6,
-      },
-      frisians_order = {
-         "gold", "sword_short", "sword_long", "sword_broad", "sword_double",
-         "helmet", "helmet_golden", "fur_garment", "fur_garment_studded", "fur_garment_golden"
-      },
-
-      atlanteans = {
-         gold = 3,
-         trident_light = 2,
-         trident_long = 3,
-         trident_steel = 4,
-         trident_double = 7,
-         trident_heavy_double = 8,
-         shield_steel = 4,
-         shield_advanced = 7,
-         tabard = 1,
-         tabard_golden = 5,
-      },
-      atlanteans_order = {
-         "gold", "trident_light", "trident_long", "trident_steel",
-         "trident_double", "trident_heavy_double", "shield_steel",
-         "shield_advanced", "tabard", "tabard_golden"
-       },
-   }
 
    -- Calculate the momentary points for a list of players
    local function _calc_points(players)
@@ -124,25 +62,27 @@ local r = {
       local descr = ""
 
       for idx, plr in ipairs(players) do
-         local bs = array_combine(
-            plr:get_buildings(plr.tribe_name .. "_headquarters"), plr:get_buildings(plr.tribe_name .. "_warehouse"), plr:get_buildings(plr.tribe_name .. "_port")
-         )
+         local bs = {}
+         for name,allowed in pairs(plr.allowed_buildings) do
+            if wl.Game():get_building_description(name).type_name == "warehouse" then
+               bs = array_combine(bs, plr:get_buildings(name))
+            end
+         end
 
-         descr = descr .. h2((_"Status for %s"):format(plr.name))
+         descr = descr .. h2((_("Status for %s")):format(plr.name))
          local points = 0
-         for idx, ware in ipairs(point_table[plr.tribe_name .. "_order"]) do
-            local value = point_table[plr.tribe_name][ware]
+         for idx,pair in ipairs(plr.tribe.collectors_points_table) do
             local count = 0
             for idx,b in ipairs(bs) do
-               count = count + b:get_wares(ware)
+               count = count + b:get_wares(pair.ware)
             end
-            local lpoints = count * value
+            local lpoints = count * pair.points
             points = points + lpoints
 
-            local warename = wl.Game():get_ware_description(ware).descname
+            local warename = wl.Game():get_ware_description(pair.ware).descname
             -- TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-            descr = descr .. li(_"%1$s (%2$i P) x %3$i = %4$i P"):bformat(
-               warename, value, count, lpoints
+            descr = descr .. li(_("%1$s (%2$i P) x %3$i = %4$i P")):bformat(
+               warename, pair.points, count, lpoints
             )
          end
          descr = descr .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)
@@ -155,23 +95,25 @@ local r = {
 
    -- Send all players the momentary game state
    local function _send_state(remaining_time, plrs, show_popup)
-      local msg = format_remaining_time(remaining_time) .. vspace(8) .. game_status.body
+      local msg = format_remaining_time(remaining_time) .. msg_vspace() .. game_status.body
 
       -- Points for players without team
       for idx, plr in ipairs(plrs) do
          if (plr.team == 0) then
             local points, pstat = _calc_points({plr})
-            msg = msg .. vspace(8) .. pstat
+            msg = msg .. msg_vspace() .. pstat
          end
       end
       -- Team points
-      for idx, team in ipairs(teams) do
+      push_textdomain("win_conditions")
+      for idx, team in ipairs(_gather_teams(plrs)) do
          local points, pstat = _calc_points(team)
-         local message = h1((_"Status for Team %d"):format(idx))
+         local message = h1((_("Status for Team %d")):format(idx))
             .. pstat
             .. h2(ngettext("Team Total: %i point", "Team Total: %i points", points)):format(points)
-         msg = msg .. vspace(8) .. message
+         msg = msg .. msg_vspace() .. message
       end
+      pop_textdomain()
 
       broadcast(plrs, game_status.title, msg, {popup = show_popup})
    end
@@ -179,6 +121,7 @@ local r = {
    local function _game_over(plrs)
       local points = {}
       local win_points = 0
+      local teams = _gather_teams(plrs)
       for idx,plr in ipairs(plrs) do
          local player_points, pstat = _calc_points({plr})
          if (plr.team == 0) then
@@ -196,10 +139,10 @@ local r = {
          local lost_or_won = 0
          if (info[2] < win_points) then
             lost_or_won = 0
-            send_message(player, lost_game_over.title, lost_game_over.body, {popup = true})
+            send_to_inbox(player, lost_game_over.title, lost_game_over.body, {popup = true})
          else
             lost_or_won = 1
-            send_message(player, won_game_over.title, won_game_over.body, {popup = true})
+            send_to_inbox(player, won_game_over.title, won_game_over.body, {popup = true})
          end
          if (count_factions(plrs) > 1) then
             if (player.team == 0) then

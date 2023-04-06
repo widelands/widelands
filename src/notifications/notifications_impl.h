@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,21 +12,21 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_NOTIFICATIONS_NOTIFICATIONS_IMPL_H
 #define WL_NOTIFICATIONS_NOTIFICATIONS_IMPL_H
 
-#include "base/macros.h"
-
 #include <algorithm>
 #include <cassert>
 #include <list>
 #include <memory>
 #include <unordered_map>
+
+#include "base/macros.h"
+#include "base/mutex.h"
 
 namespace Notifications {
 
@@ -58,6 +58,7 @@ public:
 	// Creates a subscriber for 'T' with the given 'callback' and returns it.
 	template <typename T>
 	std::unique_ptr<Subscriber<T>> subscribe(std::function<void(const T&)> callback) {
+		MutexLock m(get_mutex(T::note_id()));
 		std::list<void*>& subscribers = note_id_to_subscribers_[T::note_id()];
 		auto new_subscriber =
 		   std::unique_ptr<Subscriber<T>>(new Subscriber<T>(next_subscriber_id_, callback));
@@ -69,6 +70,7 @@ public:
 
 	// Publishes 'message' to all subscribers.
 	template <typename T> void publish(const T& message) {
+		MutexLock m(get_mutex(T::note_id()));
 		for (void* p_subscriber : note_id_to_subscribers_[T::note_id()]) {
 			Subscriber<T>* subscriber = static_cast<Subscriber<T>*>(p_subscriber);
 			subscriber->callback_(message);
@@ -77,6 +79,8 @@ public:
 
 	// Unsubscribes 'subscriber'.
 	template <typename T> void unsubscribe(Subscriber<T>* subscriber) {
+		MutexLock m(get_mutex(T::note_id()));
+
 		std::list<void*>& subscribers = note_id_to_subscribers_.at(T::note_id());
 		auto subscribers_it = std::find_if(
 		   subscribers.begin(), subscribers.end(), [&subscriber](const void* p_subscriber) {
@@ -90,13 +94,23 @@ public:
 
 private:
 	// Private constructor for Singleton.
-	NotificationsManager();
+	NotificationsManager() = default;
 
 	// Checks that there are no more subscribers.
 	~NotificationsManager();
 
-	uint32_t next_subscriber_id_;
-	uint32_t num_subscribers_;
+	MutexLock::ID get_mutex(uint32_t id) {
+		const auto it = mutexes_.find(id);
+		if (it != mutexes_.end()) {
+			return it->second;
+		}
+		MutexLock::ID m = MutexLock::create_custom_mutex();
+		mutexes_.emplace(id, m);
+		return m;
+	}
+
+	uint32_t next_subscriber_id_{1};
+	uint32_t num_subscribers_{0U};
 
 	// Ideally we would like to keep a list<Subscriber<T>*> instead of void* to
 	// be typesafe. Unfortunately, C++ does not allow for an easy way. I could
@@ -104,6 +118,7 @@ private:
 	// since this framework should be as efficient as possible, I opted for
 	// using void* and casting instead.
 	std::unordered_map<uint32_t, std::list<void*>> note_id_to_subscribers_;
+	std::unordered_map<uint32_t, MutexLock::ID> mutexes_;
 
 	DISALLOW_COPY_AND_ASSIGN(NotificationsManager);
 };

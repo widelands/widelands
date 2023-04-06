@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,29 +22,28 @@
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "logic/field.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
 int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                  EditorInteractive& eia,
                                                   EditorActionArgs* args,
                                                   Widelands::Map* map) {
-	const Widelands::World& world = eia.egbase().world();
+	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		Widelands::ResourceAmount amount = args->set_to;
 		Widelands::ResourceAmount max_amount =
 		   args->current_resource != Widelands::kNoResource ?
-		      world.get_resource(args->current_resource)->max_amount() :
-		      0;
+            descriptions.get_resource_descr(args->current_resource)->max_amount() :
+            0;
 
 		if (amount > max_amount) {
 			amount = max_amount;
 		}
 
-		if (map->is_resource_valid(world, mr.location(), args->current_resource)) {
+		if (map->is_resource_valid(descriptions, mr.location(), args->current_resource)) {
 
 			args->original_resource.push_back(
 			   EditorActionArgs::ResourceState{mr.location(), mr.location().field->get_resources(),
@@ -59,13 +57,12 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::NodeAndTriang
 
 int32_t EditorSetResourcesTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
-   EditorInteractive& eia,
    EditorActionArgs* args,
    Widelands::Map* map) {
 	for (const auto& res : args->original_resource) {
 		Widelands::ResourceAmount amount = res.amount;
 		Widelands::ResourceAmount max_amount =
-		   eia.egbase().world().get_resource(args->current_resource)->max_amount();
+		   parent_.egbase().descriptions().get_resource_descr(args->current_resource)->max_amount();
 
 		if (amount > max_amount) {
 			amount = max_amount;
@@ -78,8 +75,8 @@ int32_t EditorSetResourcesTool::handle_undo_impl(
 	return args->sel_radius;
 }
 
-EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive& parent) {
-	EditorActionArgs a(parent);
+EditorActionArgs EditorSetResourcesTool::format_args_impl() {
+	EditorActionArgs a(parent_);
 	a.current_resource = cur_res_;
 	a.set_to = set_to_;
 	return a;
@@ -88,7 +85,7 @@ EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive& par
 Widelands::NodeCaps resource_tools_nodecaps(const Widelands::FCoords& fcoords,
                                             const Widelands::EditorGameBase& egbase,
                                             Widelands::DescriptionIndex resource) {
-	if (egbase.map().is_resource_valid(egbase.world(), fcoords, resource)) {
+	if (egbase.map().is_resource_valid(egbase.descriptions(), fcoords, resource)) {
 		return fcoords.field->nodecaps();
 	}
 	return Widelands::NodeCaps::CAPS_NONE;

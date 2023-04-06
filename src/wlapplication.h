@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,25 +28,35 @@
 #endif
 #endif
 
+#include <atomic>
 #include <map>
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 #include <SDL_events.h>
 #include <SDL_keyboard.h>
 
 #include "base/vector.h"
+#include "wlapplication_messages.h"
 
+namespace UI {
+class Panel;
+}  // namespace UI
 namespace Widelands {
 class Game;
-}
+}  // namespace Widelands
+
+/** Returns the widelands executable path. */
+std::string get_executable_directory(bool logdir = true);
 
 /// Thrown if a commandline parameter is faulty
 struct ParameterError : public std::runtime_error {
-	explicit ParameterError() : std::runtime_error("") {
+	explicit ParameterError(CmdLineVerbosity level, const std::string& text = "")
+	   : std::runtime_error(text), level_(level) {
 	}
-	explicit ParameterError(const std::string& text) : std::runtime_error(text) {
-	}
+
+	CmdLineVerbosity level_;
 };
 
 // Callbacks input events to the UI. All functions return true when the event
@@ -62,7 +71,9 @@ struct InputCallback {
 	bool (*mouse_move)(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool (*key)(bool down, SDL_Keysym code);
 	bool (*textinput)(const std::string& text);
-	bool (*mouse_wheel)(uint32_t which, int32_t x, int32_t y);
+	bool (*mouse_wheel)(const int32_t x,           // The number of horizontal scroll ticks
+	                    const int32_t y,           // The number of vertical scroll ticks
+	                    const uint16_t modstate);  // Modifier keys pressed at the time of the event
 };
 
 /// You know main functions, of course. This is the main struct.
@@ -128,20 +139,22 @@ struct InputCallback {
 // TODO(sirver): this class makes no sense for c++ - most of these should be
 // stand alone functions.
 struct WLApplication {
-	static WLApplication* get(int const argc = 0, char const** argv = nullptr);
+	static WLApplication* get(int argc = 0, char const** argv = nullptr);
 	~WLApplication();
 
 	void run();
 
+	static void initialize_g_addons();
+
 	/// \warning true if an external entity wants us to quit
-	bool should_die() const {
+	[[nodiscard]] bool should_die() const {
 		return should_die_;
 	}
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	bool get_key_state(SDL_Scancode const key) const {
-		return SDL_GetKeyboardState(nullptr)[key];
+	[[nodiscard]] bool get_key_state(SDL_Scancode const key) const {
+		return SDL_GetKeyboardState(nullptr)[key] != 0U;
 	}
 
 	// @{
@@ -149,13 +162,13 @@ struct WLApplication {
 	void set_input_grab(bool grab);
 
 	/// The mouse's current coordinates
-	Vector2i get_mouse_position() const {
+	[[nodiscard]] Vector2i get_mouse_position() const {
 		return mouse_position_;
 	}
 	//
 	/// Find out whether the mouse is currently pressed
-	bool is_mouse_pressed() const {
-		return SDL_GetMouseState(nullptr, nullptr);
+	[[nodiscard]] bool is_mouse_pressed() const {
+		return SDL_GetMouseState(nullptr, nullptr) != 0U;
 	}
 
 	/// Swap left and right mouse key?
@@ -165,30 +178,36 @@ struct WLApplication {
 
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
 	void set_mouse_lock(bool locked);
+	[[nodiscard]] bool is_mouse_locked() const {
+		return mouse_locked_;
+	}
 	// @}
 
-	// Refresh the graphics settings with the latest options.
-	void refresh_graphics();
+	[[nodiscard]] const std::string& get_datadir() const {
+		return datadir_;
+	}
+
+	// Handle the given pressed key. Returns true when key was
+	// handled.
+	bool handle_key(bool down, const SDL_Keycode& keycode, int modifiers);
+	void enable_handle_key(bool enable) {
+		handle_key_enabled_ = enable;
+	}
 
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
 
-	void mainmenu();
-	void mainmenu_tutorial();
-	void mainmenu_singleplayer();
-	void mainmenu_multiplayer();
-	void mainmenu_editor();
-
-	bool new_game();
-	bool load_game(std::string filename = "");
-	bool campaign_game();
-	void replay();
-	static void emergency_save(Widelands::Game&);
+	static void emergency_save(UI::Panel*,
+	                           Widelands::Game&,
+	                           const std::string& error,
+	                           uint8_t player = 1,
+	                           bool replace_ctrl = true,
+	                           bool ask_for_bug_report = true);
 
 private:
 	WLApplication(int argc, char const* const* argv);
 
-	bool poll_event(SDL_Event&);
+	bool poll_event(SDL_Event&) const;
 
 	bool init_settings();
 	void init_language();
@@ -207,11 +226,9 @@ private:
 	void cleanup_temp_backups(const std::string& dir);
 	void cleanup_temp_backups();
 
-	bool redirect_output(std::string path = "");
+	void init_and_run_game_from_template();
 
-	// Handle the given pressed key. Returns true when key was
-	// handled.
-	bool handle_key(bool down, const SDL_Keycode& keycode, int modifiers);
+	bool redirect_output(std::string path = "");
 
 	/**
 	 * The commandline, conveniently repackaged.
@@ -224,29 +241,28 @@ private:
 	/// --scenario or --loadgame.
 	std::string script_to_run_;
 
-	enum class GameType { kNone, kEditor, kReplay, kScenario, kLoadGame };
-	GameType game_type_;
+	enum class GameType { kNone, kEditor, kReplay, kScenario, kLoadGame, kFromTemplate };
+	GameType game_type_{GameType::kNone};
 
 	/// True if left and right mouse button should be swapped
-	bool mouse_swapped_;
+	bool mouse_swapped_{false};
 
 	/// When apple is involved, the middle mouse button is sometimes send, even
 	/// if it wasn't pressed. We try to revert this and this helps.
-	bool faking_middle_mouse_button_;
+	bool faking_middle_mouse_button_{false};
 
 	/// The current position of the mouse pointer
-	Vector2i mouse_position_;
+	Vector2i mouse_position_{Vector2i::zero()};
 
 	/// If true, the mouse cursor will \e not move with a mousemotion event:
 	/// instead, the map will be scrolled
-	bool mouse_locked_;
+	bool mouse_locked_{false};
 
-	/// If the mouse needs to be moved in warp_mouse(), this Vector2i is
-	/// used to cancel the resulting SDL_MouseMotionEvent.
-	Vector2i mouse_compensate_warp_;
+	/// Makes it possible to disable the fullscreen and screenshot shortcuts
+	bool handle_key_enabled_{true};
 
 	/// true if an external entity wants us to quit
-	bool should_die_;
+	std::atomic_bool should_die_{false};
 
 	std::string homedir_;
 #ifdef USE_XDG
@@ -254,7 +270,7 @@ private:
 #endif
 
 	/// flag indicating if stdout and stderr have been redirected
-	bool redirected_stdio_;
+	bool redirected_stdio_{false};
 
 	/// Absolute path to the data directory.
 	std::string datadir_;
@@ -264,7 +280,7 @@ private:
 	std::string localedir_;
 
 	/// Prevent toggling fullscreen on and off from flickering
-	uint32_t last_resolution_change_;
+	uint32_t last_resolution_change_{0U};
 
 	/// Holds this process' one and only instance of WLApplication, if it was
 	/// created already. nullptr otherwise.

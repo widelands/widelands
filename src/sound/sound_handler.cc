@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2020 by the Widelands Development Team
+ * Copyright (C) 2005-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -50,8 +49,7 @@ SoundHandler::SoundHandler()
                     {SoundType::kMessage, SoundOptions(kDefaultFxVolume, "message")},
                     {SoundType::kChat, SoundOptions(kDefaultFxVolume, "chat")},
                     {SoundType::kAmbient, SoundOptions(kDefaultFxVolume, "ambient")},
-                    {SoundType::kMusic, SoundOptions(kDefaultMusicVolume, "music")}},
-     fx_lock_(nullptr) {
+                    {SoundType::kMusic, SoundOptions(kDefaultMusicVolume, "music")}} {
 	// Ensure that we don't lose our config for when we start with sound the next time
 	read_config();
 
@@ -75,22 +73,24 @@ SoundHandler::SoundHandler()
 
 	SDL_version sdl_version;
 	SDL_GetVersion(&sdl_version);
-	log("**** SOUND REPORT ****\n");
-	log("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
-	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
+	log_info("**** SOUND REPORT ****\n");
+	log_info("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	         static_cast<unsigned int>(sdl_version.minor),
+	         static_cast<unsigned int>(sdl_version.patch));
 
 	// SDL 2.0.6 will crash due to an upstream bug:
 	// https://bugs.launchpad.net/ubuntu/+source/libsdl2/+bug/1722060
 	if (sdl_version.major == 2 && sdl_version.minor == 0 && sdl_version.patch == 6) {
-		log("Disabled sound due to a bug in SDL 2.0.6\n");
+		log_warn("Disabled sound due to a bug in SDL 2.0.6\n");
 		SoundHandler::disable_backend();
 	}
 
 	SDL_MIXER_VERSION(&sdl_version)
-	log("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
-	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
+	log_info("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	         static_cast<unsigned int>(sdl_version.minor),
+	         static_cast<unsigned int>(sdl_version.patch));
 
-	log("**** END SOUND REPORT ****\n");
+	log_info("**** END SOUND REPORT ****\n");
 
 	if (SoundHandler::is_backend_disabled()) {
 		return;
@@ -143,11 +143,13 @@ SoundHandler::~SoundHandler() {
 	songs_.clear();
 	fxs_.clear();
 
-	int numtimesopened, frequency, channels;
+	int numtimesopened;
+	int frequency;
+	int channels;
 	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
-	log("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
-	    numtimesopened == 1 ? "" : "s", frequency, format, channels, channels == 1 ? "" : "s");
+	log_info("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
+	         numtimesopened == 1 ? "" : "s", frequency, format, channels, channels == 1 ? "" : "s");
 
 	if (numtimesopened == 0) {
 		return;
@@ -156,19 +158,19 @@ SoundHandler::~SoundHandler() {
 	Mix_HaltChannel(-1);
 
 	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) {
-		log("SoundHandler: Audio error %s\n", SDL_GetError());
+		log_err("SoundHandler: Audio error %s\n", SDL_GetError());
 	}
 
-	log("SoundHandler: SDL_AUDIODRIVER %s\n", SDL_GetCurrentAudioDriver());
+	log_info("SoundHandler: SDL_AUDIODRIVER %s\n", SDL_GetCurrentAudioDriver());
 
 	if (numtimesopened != 1) {
-		log("SoundHandler: PROBLEM: sound device opened multiple times, trying to close");
+		log_warn("SoundHandler: PROBLEM: sound device opened multiple times, trying to close");
 	}
 	for (int i = 0; i < numtimesopened; ++i) {
 		Mix_CloseAudio();
 	}
 
-	if (fx_lock_) {
+	if (fx_lock_ != nullptr) {
 		SDL_DestroyMutex(fx_lock_);
 		fx_lock_ = nullptr;
 	}
@@ -179,12 +181,11 @@ SoundHandler::~SoundHandler() {
 
 /// Prints an error and disables and shuts down the sound system.
 void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
-	log("WARNING: Failed to initialize sound system: %s\n", msg);
+	log_warn("Failed to initialize sound system: %s\n", msg);
 	SoundHandler::disable_backend();
 	if (quit_sdl) {
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 	}
-	return;
 }
 
 /**
@@ -192,35 +193,13 @@ void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
  * the constructor.
  */
 void SoundHandler::read_config() {
-	// TODO(GunChleoc): Compatibility code to avoid getting bug reports about unread sections. Remove
-	// after Build 21.
-	if (get_config_section_ptr("sound") == nullptr) {
-		for (auto& option : sound_options_) {
-			switch (option.first) {
-			case SoundType::kMusic:
-				option.second.volume = get_config_int("music_volume", option.second.volume);
-				option.second.enabled = !get_config_bool("disable_music", !option.second.enabled);
-				break;
-			case SoundType::kChat:
-				option.second.volume = get_config_int("fx_volume", option.second.volume);
-				option.second.enabled = get_config_bool("sound_at_message", option.second.enabled);
-				break;
-			default:
-				option.second.volume = get_config_int("fx_volume", option.second.volume);
-				option.second.enabled = !get_config_bool("disable_fx", !option.second.enabled);
-				break;
-			}
-		}
-		save_config();
-	}
-
-	// This is the code that we want to keep
 	for (auto& option : sound_options_) {
 		option.second.volume =
-		   get_config_int("sound", ("volume_" + option.second.name).c_str(), option.second.volume);
+		   get_config_int("sound", "volume_" + option.second.name, option.second.volume);
 		option.second.enabled =
-		   get_config_bool("sound", ("enable_" + option.second.name).c_str(), option.second.enabled);
+		   get_config_bool("sound", "enable_" + option.second.name, option.second.enabled);
 	}
+	use_custom_songset_instead_ingame_ = get_config_bool("sound", "custom_ingame_music", false);
 }
 
 /// Save the current sound options to config cache
@@ -231,11 +210,12 @@ void SoundHandler::save_config() {
 		const bool enabled = option.second.enabled;
 
 		const std::string enable_name = "enable_" + name;
-		set_config_bool("sound", enable_name.c_str(), enabled);
+		set_config_bool("sound", enable_name, enabled);
 
 		const std::string volume_name = "volume_" + name;
-		set_config_int("sound", volume_name.c_str(), volume);
+		set_config_int("sound", volume_name, volume);
 	}
+	set_config_bool("sound", "custom_ingame_music", use_custom_songset_instead_ingame_);
 }
 
 /// Read the sound options from the cache and apply them
@@ -275,9 +255,8 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
 		fxs_[type].insert(
 		   std::make_pair(new_id, std::unique_ptr<FXset>(new FXset(fx_path, rng_.rand()))));
 		return new_id;
-	} else {
-		return fx_ids_[type].at(fx_path);
 	}
+	return fx_ids_[type].at(fx_path);
 }
 
 /**
@@ -379,7 +358,7 @@ void SoundHandler::play_fx(SoundType type,
 	}
 
 	if (fxs_[type].count(fx_id) == 0) {
-		log("SoundHandler: Sound effect %d does not exist!\n", fx_id);
+		log_err("SoundHandler: Sound effect %d does not exist!\n", fx_id);
 		return;
 	}
 
@@ -392,7 +371,7 @@ void SoundHandler::play_fx(SoundType type,
 	if (Mix_Chunk* const m = fxs_[type][fx_id]->get_fx(rng_.rand())) {
 		const int32_t chan = Mix_PlayChannel(-1, m, 0);
 		if (chan == -1) {
-			log("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());
+			log_err("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());
 		} else {
 			Mix_SetPanning(chan, kStereoRight - stereo_pos, stereo_pos);
 			Mix_SetDistance(chan, distance);
@@ -403,7 +382,7 @@ void SoundHandler::play_fx(SoundType type,
 			release_fx_lock();
 		}
 	} else {
-		log("SoundHandler: Sound effect %d exists but contains no files!\n", fx_id);
+		log_err("SoundHandler: Sound effect %d exists but contains no files!\n", fx_id);
 	}
 }
 
@@ -448,18 +427,19 @@ void SoundHandler::start_music(const std::string& songset_name) {
 		return;
 	}
 
-	if (Mix_PlayingMusic()) {
+	if (Mix_PlayingMusic() != 0) {
 		change_music(songset_name, kMinimumMusicFade);
 	}
 
 	if (songs_.count(songset_name) == 0) {
-		log("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
+		log_err("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
 	} else {
 		if (Mix_Music* const m = songs_[songset_name]->get_song(rng_.rand())) {
 			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
 		} else {
-			log("SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
+			log_err(
+			   "SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
 		}
 	}
 }
@@ -474,7 +454,7 @@ void SoundHandler::stop_music(int fadeout_ms) {
 		return;
 	}
 
-	if (Mix_PlayingMusic()) {
+	if (Mix_PlayingMusic() != 0) {
 		Mix_FadeOutMusic(std::max(fadeout_ms, kMinimumMusicFade));
 	}
 }
@@ -494,13 +474,29 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 	}
 
 	if (!songset_name.empty()) {
-		current_songset_ = songset_name;
+		if (songset_name == Songset::kIngame && use_custom_songset_instead_ingame_) {
+			current_songset_ = Songset::kCustom;
+		} else {
+			current_songset_ = songset_name;
+		}
 	}
 
-	if (Mix_PlayingMusic()) {
+	if (Mix_PlayingMusic() != 0) {
 		stop_music(fadeout_ms);
 	} else {
 		start_music(current_songset_);
+	}
+}
+bool SoundHandler::use_custom_songset() const {
+	return use_custom_songset_instead_ingame_;
+}
+
+void SoundHandler::use_custom_songset(bool on) {
+	use_custom_songset_instead_ingame_ = on;
+	if (current_songset_ == Songset::kIngame && on) {
+		change_music(Songset::kCustom);
+	} else if (current_songset_ == Songset::kCustom && !on) {
+		change_music(Songset::kIngame);
 	}
 }
 
@@ -538,7 +534,7 @@ void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 	switch (type) {
 	case SoundType::kMusic:
 		if (enable) {
-			if (!Mix_PlayingMusic()) {
+			if (Mix_PlayingMusic() == 0) {
 				start_music(current_songset_);
 			}
 		} else {
@@ -615,14 +611,14 @@ void SoundHandler::fx_finished_callback(int32_t const channel) {
 /// Lock the SDL mutex. Access to 'active_fx_' is protected by mutex because it can be accessed both
 /// from callbacks or from the main thread.
 void SoundHandler::lock_fx() {
-	if (fx_lock_) {
+	if (fx_lock_ != nullptr) {
 		SDL_LockMutex(fx_lock_);
 	}
 }
 
 /// Release the SDL mutex
 void SoundHandler::release_fx_lock() {
-	if (fx_lock_) {
+	if (fx_lock_ != nullptr) {
 		SDL_UnlockMutex(fx_lock_);
 	}
 }

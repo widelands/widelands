@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,20 +27,18 @@
 /// Unsets a buildspace for ports.
 class EditorUnsetPortSpaceTool : public EditorTool {
 public:
-	explicit EditorUnsetPortSpaceTool();
+	explicit EditorUnsetPortSpaceTool(EditorInteractive& parent);
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	const Image* get_sel_impl() const override {
-		return g_gr->images().get(FSEL_EUPS_FILENAME);
+	[[nodiscard]] const Image* get_sel_impl() const override {
+		return g_image_cache->get(FSEL_EUPS_FILENAME);
 	}
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
 	                                           const Widelands::EditorGameBase& egbase) override;
@@ -50,20 +47,18 @@ public:
 /// Sets a buildspace for ports.
 class EditorSetPortSpaceTool : public EditorTool {
 public:
-	explicit EditorSetPortSpaceTool(EditorUnsetPortSpaceTool&);
+	explicit EditorSetPortSpaceTool(EditorInteractive& parent, EditorUnsetPortSpaceTool&);
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	const Image* get_sel_impl() const override {
-		return g_gr->images().get(FSEL_ESPS_FILENAME);
+	[[nodiscard]] const Image* get_sel_impl() const override {
+		return g_image_cache->get(FSEL_ESPS_FILENAME);
 	}
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
 	                                           const Widelands::EditorGameBase& egbase) override;

@@ -18,6 +18,23 @@ player1 = egbase.players[1]
 player2 = egbase.players[2]
 player3 = egbase.players[3]
 
+-- TODO(GunChleoc): Editor does not conquer properly
+player1:place_building("barbarians_headquarters", map.player_slots[1].starting_field, false, true)
+
+-- For immovables_descriptions.lua
+local field = map:get_field(63,79)
+if (field.immovable == nil) then
+   map:place_immovable("bush1", field)
+end
+field = map:get_field(62,79)
+if (field.immovable == nil) then
+   map:place_immovable("alder_summer_sapling", field)
+end
+field = map:get_field(61,79)
+if (field.immovable == nil) then
+   map:place_immovable("alder_summer_old", field)
+end
+
 -- =================================
 -- Tests for the core functionality
 -- =================================
@@ -47,10 +64,6 @@ if not wl.editor then
 
    include "map:scripting/objectives.lua"
    include "map:scripting/messages.lua"
-
-   -- The functionality of UI scripting is identical but we only test it in game
-   -- though as it is cumbersome to make those tests work also in the editor.
-   include "map:scripting/ui.lua"
 else
    include "map:scripting/editor.lua"
    include "map:scripting/eplr_access.lua"
@@ -68,4 +81,13 @@ include "map:scripting/set.lua"
 -- Test Runner
 -- ============
 lunit:run()
-wl.ui.MapView():close()
+
+include "scripting/coroutine.lua"
+if wl.editor then
+   wl.ui.MapView():close()
+else
+   run(function()
+      sleep(1000)
+      wl.ui.MapView():close()
+   end)
+end

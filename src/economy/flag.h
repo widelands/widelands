@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -25,13 +24,13 @@
 #include <iterator>
 
 #include "base/macros.h"
+#include "economy/flag_job.h"
 #include "economy/routing_node.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/walkingdir.h"
 
 namespace Widelands {
-class Request;
 struct RoadBase;
 struct Road;
 struct Waterway;
@@ -40,10 +39,9 @@ class WareInstance;
 class FlagDescr : public MapObjectDescr {
 public:
 	FlagDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname, "") {
+	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname) {
 	}
-	~FlagDescr() override {
-	}
+	~FlagDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(FlagDescr);
@@ -83,7 +81,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	/// Create a new flag. Only specify an economy during saveloading.
 	/// Otherwise, a new economy will be created automatically if needed.
 	Flag(EditorGameBase&,
-	     Player* owner,
+	     Player* owning_player,
 	     const Coords&,
 	     Economy* ware_economy = nullptr,
 	     Economy* worker_economy = nullptr);
@@ -136,12 +134,12 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void detach_road(int32_t dir);
 
 	RoadBase* get_roadbase(Flag&);
-	Road* get_road(Flag&);
+	Road* get_road(Flag&) const;
 
 	bool is_dead_end() const;
 
 	bool has_capacity() const;
-	uint32_t total_capacity() {
+	uint32_t total_capacity() const {
 		return ware_capacity_;
 	}
 	uint32_t current_wares() const {
@@ -161,19 +159,29 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void call_carrier(Game&, WareInstance&, PlayerImmovable* nextstep);
 	void update_wares(Game&, Flag* other);
 
-	void remove_ware(EditorGameBase&, WareInstance* const);
-
-	void add_flag_job(Game&, DescriptionIndex workerware, const std::string& programname);
+	void remove_ware(EditorGameBase&, WareInstance*);
 
 	void log_general_info(const EditorGameBase&) const override;
+
+	/**
+	 * Clamp the maximal value of \ref PendingWare::priority.
+	 * After reaching this value, the pure FIFO approach is applied
+	 */
+	static constexpr uint8_t kMaxTransferPriority = 16;
+
+	void add_flag_job(Game&, FlagJob::Type);
+
+	void act(Game&, uint32_t) override;
+
+	void receive_worker(Game&, Worker&) override;
 
 protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
-	void draw(uint32_t gametime,
+	void draw(const Time& gametime,
 	          InfoToDraw info_to_draw,
-	          const Vector2f& point_on_dst,
+	          const Vector2f& field_on_dst,
 	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
@@ -193,30 +201,27 @@ private:
 		OPtr<PlayerImmovable> nextstep;  ///< next step that this ware is sent to
 	};
 
-	struct FlagJob {
-		Request* request;
-		std::string program;
-	};
-
 	Coords position_;
-	int32_t animstart_;
+	Time animstart_{0};
 
-	Building* building_;  ///< attached building (replaces road WALK_NW)
+	Building* building_{nullptr};  ///< attached building (replaces road WALK_NW)
 	RoadBase* roads_[WalkingDir::LAST_DIRECTION];
 
-	int32_t ware_capacity_;  ///< size of wares_ array
-	int32_t ware_filled_;    ///< number of wares currently on the flag
-	PendingWare* wares_;     ///< wares currently on the flag
+	int32_t ware_capacity_{8};                             ///< size of wares_ array
+	int32_t ware_filled_{0};                               ///< number of wares currently on the flag
+	PendingWare* wares_{new PendingWare[ware_capacity_]};  ///< wares currently on the flag
 
 	/// call_carrier() will always call a carrier when the destination is
 	/// the given flag
-	Flag* always_call_for_flag_;
+	Flag* always_call_for_flag_{nullptr};
 
 	using CapacityWaitQueue = std::deque<OPtr<Worker>>;
 	CapacityWaitQueue capacity_wait_;  ///< workers waiting for capacity
 
 	using FlagJobs = std::list<FlagJob>;
 	FlagJobs flag_jobs_;
+	bool act_pending_{false};
+	void do_schedule_act(Game&, const Duration&);
 };
 
 extern FlagDescr g_flag_descr;

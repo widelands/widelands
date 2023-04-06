@@ -7,16 +7,33 @@ wl_library(logic_map_objects_description_maintainer
     logic_constants
 )
 
+wl_library(logic_map_objects_description_manager
+  SRCS
+    description_manager.cc
+    description_manager.h
+  DEPENDS
+    base
+    base_macros
+    io_filesystem
+    logic_exceptions
+    logic_map_object_type
+    scripting_lua_interface
+    scripting_lua_table
+)
+
+
 wl_library(logic_tribe_basic_info
   SRCS
     tribes/tribe_basic_info.cc
     tribes/tribe_basic_info.h
   DEPENDS
-    base_i18n
+    base
+    io_filesystem
+    logic_addons
     logic_exceptions
+    logic_filesystem_constants
     scripting_lua_table
     scripting_lua_interface
-
 )
 
 wl_library(logic_map_objects
@@ -29,6 +46,10 @@ wl_library(logic_map_objects
     buildcost.h
     checkstep.cc
     checkstep.h
+    descriptions.cc
+    descriptions.h
+    descriptions_compatibility_table.cc
+    descriptions_compatibility_table.h
     findbob.cc
     findbob.h
     findimmovable.cc
@@ -44,6 +65,8 @@ wl_library(logic_map_objects
     map_object.h
     map_object_program.cc
     map_object_program.h
+    pinned_note.cc
+    pinned_note.h
     terrain_affinity.cc
     terrain_affinity.h
     tribes/attack_target.h
@@ -87,8 +110,6 @@ wl_library(logic_map_objects
     tribes/trainingsite.h
     tribes/tribe_descr.cc
     tribes/tribe_descr.h
-    tribes/tribes.cc
-    tribes/tribes.h
     tribes/ware_descr.cc
     tribes/ware_descr.h
     tribes/warehouse.cc
@@ -108,25 +129,23 @@ wl_library(logic_map_objects
     world/critter.cc
     world/critter.h
     world/critter_program.h
-    world/editor_category.cc
-    world/editor_category.h
     world/map_gen.cc
     world/map_gen.h
     world/resource_description.cc
     world/resource_description.h
     world/terrain_description.cc
     world/terrain_description.h
-    world/world.cc
-    world/world.h
-  USES_BOOST_REGEX
+  USES_SDL2
+  USES_ATOMIC
   DEPENDS
     ai_hints
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
     base_macros
     base_math
+    base_scoped_timer
+    base_times
     economy
     graphic
     graphic_animation
@@ -139,12 +158,16 @@ wl_library(logic_map_objects
     io_fileread
     io_filesystem
     logic # TODO(GunChleoc): Circular dependency
+    logic_addons
     logic_commands # TODO(GunChleoc): Circular dependency
     logic_constants
     logic_exceptions
+    logic_filesystem_constants
     logic_game_controller
     logic_map # TODO(GunChleoc): Circular dependency
+    logic_map_object_type
     logic_map_objects_description_maintainer
+    logic_map_objects_description_manager
     logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io
@@ -154,5 +177,16 @@ wl_library(logic_map_objects
     scripting_lua_table
     sound_constants
     sound
+    ui_basic_loading_message
+    wui
     wui_mapview_pixelconstants
+)
+
+wl_library(logic_map_object_type
+  SRCS
+    map_object_type.cc
+    map_object_type.h
+  DEPENDS
+    base_exceptions
+    notifications
 )

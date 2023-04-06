@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -26,20 +25,19 @@ namespace Widelands {
 template <> bool MapDifferenceRegion<Area<FCoords>>::advance(const Map& map) {
 	assert(1 <= direction_);
 	assert(direction_ <= 6);
-	if (remaining_in_edge_) {
+	if (remaining_in_edge_ != 0u) {
 		map.get_neighbour(area_, direction_, &area_);
 		--remaining_in_edge_;
 		return true;
-	} else {
-		if (!passed_corner_) {
-			passed_corner_ = true;
-			--direction_;
-			if (!direction_) {
-				direction_ = 6;
-			}
-			remaining_in_edge_ = area_.radius;
-			return advance(map);
+	}
+	if (!passed_corner_) {
+		passed_corner_ = true;
+		--direction_;
+		if (direction_ == 0u) {
+			direction_ = 6;
 		}
+		remaining_in_edge_ = area_.radius;
+		return advance(map);
 	}
 	return false;
 }

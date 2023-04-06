@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -36,27 +35,27 @@ template <typename T> struct Rect {
 	}
 
 	/// The Vector2i (x, y).
-	Vector2<T> origin() const {
+	[[nodiscard]] Vector2<T> origin() const {
 		return Vector2<T>(x, y);
 	}
 
 	/// The point (x + w, y + h).
-	Vector2<T> opposite_of_origin() const {
+	[[nodiscard]] Vector2<T> opposite_of_origin() const {
 		return Vector2<T>(x + w, y + h);
 	}
 
 	/// Returns true if this rectangle contains the given point.
 	/// The bottom and right borders of the rectangle are considered to be excluded.
-	template <typename PointType> bool contains(const Vector2<PointType>& pt) const {
+	template <typename PointType> [[nodiscard]] bool contains(const Vector2<PointType>& pt) const {
 		return T(pt.x) >= x && T(pt.x) < x + w && T(pt.y) >= y && T(pt.y) < y + h;
 	}
 
 	// The center point of 'r'.
-	Vector2f center() const {
+	[[nodiscard]] Vector2f center() const {
 		return Vector2f(x + w / 2.f, y + h / 2.f);
 	}
 
-	template <typename Type> Rect<Type> cast() const {
+	template <typename Type> [[nodiscard]] [[nodiscard]] Rect<Type> cast() const {
 		return Rect<Type>(Type(x), Type(y), Type(w), Type(h));
 	}
 

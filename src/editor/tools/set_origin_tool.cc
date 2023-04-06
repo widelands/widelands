@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2020 by the Widelands Development Team
+ * Copyright (C) 2009-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,18 +21,16 @@
 #include "editor/editorinteractive.h"
 
 int32_t EditorSetOriginTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                               EditorInteractive& eia,
                                                EditorActionArgs* /* args */,
                                                Widelands::Map* map) {
 	map->set_origin(center.node);
-	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
-	eia.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
+	parent_.map_changed(EditorInteractive::MapWas::kGloballyMutated);
+	parent_.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
 	return 0;
 }
 
 int32_t
 EditorSetOriginTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                      EditorInteractive& eia,
                                       EditorActionArgs* /* args */,
                                       Widelands::Map* map) {
 	Widelands::Coords nc(map->get_width() - center.node.x, map->get_height() - center.node.y);
@@ -46,11 +43,11 @@ EditorSetOriginTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands
 	}
 	map->normalize_coords(nc);
 	map->set_origin(nc);
-	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
-	eia.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
+	parent_.map_changed(EditorInteractive::MapWas::kGloballyMutated);
+	parent_.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
 	return 0;
 }
 
-EditorActionArgs EditorSetOriginTool::format_args_impl(EditorInteractive& eia) {
-	return EditorTool::format_args_impl(eia);
+EditorActionArgs EditorSetOriginTool::format_args_impl() {
+	return EditorTool::format_args_impl();
 }

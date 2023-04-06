@@ -1,11 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_trainingsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_trainingsite_type {
    name = "frisians_training_arena",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Training Arena"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -26,8 +27,6 @@ tribes:new_trainingsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {83, 90},
          frames = 10,
          columns = 5,
@@ -35,8 +34,6 @@ tribes:new_trainingsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {83, 90},
          frames = 10,
          columns = 5,
@@ -46,8 +43,6 @@ tribes:new_trainingsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {83, 71}
       }
    },
@@ -75,47 +70,10 @@ tribes:new_trainingsite_type {
       { name = "fur_garment_golden", amount = 2 },
    },
 
-   ["soldier attack"] = {
-      min_level = 3,
-      max_level = 5,
-      food = {
-         {"smoked_fish", "smoked_meat"},
-         {"mead"},
-         {"honey_bread"}
-      },
-      weapons = {
-         "sword_long",
-         "sword_broad",
-         "sword_double",
-      }
-   },
-   ["soldier health"] = {
-      min_level = 1,
-      max_level = 1,
-      food = {
-         {"smoked_fish", "smoked_meat"},
-         {"honey_bread", "mead"}
-      },
-      weapons = {
-         "helmet_golden",
-      }
-   },
-   ["soldier defense"] = {
-      min_level = 1,
-      max_level = 1,
-      food = {
-         {"smoked_fish", "smoked_meat"},
-         {"honey_bread", "mead"}
-      },
-      weapons = {
-         "fur_garment_golden",
-      }
-   },
-
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-         descname = _"sleeping",
+         descname = _("sleeping"),
          actions = {
             "sleep=duration:5s",
             "return=skipped",
@@ -125,30 +83,30 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
-            "checksoldier=soldier attack 3",
+            "checksoldier=soldier:attack level:3",
             "return=failed unless site has sword_long",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:10s800ms",
             "animate=working duration:12s",
-            "checksoldier=soldier attack 3", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:attack level:3", -- Because the soldier can be expelled by the player
             "consume=sword_long honey_bread,mead smoked_fish,smoked_meat",
-            "train=soldier attack 3 4"
+            "train=soldier:attack level:4"
          }
       },
       upgrade_soldier_attack_4 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 4 to level 5"),
          actions = {
-            "checksoldier=soldier attack 4",
+            "checksoldier=soldier:attack level:4",
             "return=failed unless site has sword_broad",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat:2",
             "sleep=duration:5s600ms",
             "animate=working duration:10s",
-            "checksoldier=soldier attack 4", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:attack level:4", -- Because the soldier can be expelled by the player
             "consume=sword_broad honey_bread,mead smoked_fish,smoked_meat:2",
-            "train=soldier attack 4 5",
+            "train=soldier:attack level:5",
             "produce=scrap_iron:2"
          }
       },
@@ -156,16 +114,16 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 5 to level 6"),
          actions = {
-            "checksoldier=soldier attack 5",
+            "checksoldier=soldier:attack level:5",
             "return=failed unless site has sword_double",
             "return=failed unless site has honey_bread",
             "return=failed unless site has mead",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:5s600ms",
             "animate=working duration:10s",
-            "checksoldier=soldier attack 5", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:attack level:5", -- Because the soldier can be expelled by the player
             "consume=sword_double honey_bread mead smoked_fish,smoked_meat",
-            "train=soldier attack 5 6",
+            "train=soldier:attack level:6",
             "produce=scrap_iron scrap_metal_mixed"
          }
       },
@@ -173,15 +131,15 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier defense from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier defense 1",
+            "checksoldier=soldier:defense level:1",
             "return=failed unless site has fur_garment_golden",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:10s800ms",
             "animate=working duration:12s",
-            "checksoldier=soldier defense 1", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:defense level:1", -- Because the soldier can be expelled by the player
             "consume=fur_garment_golden honey_bread,mead smoked_fish,smoked_meat",
-            "train=soldier defense 1 2",
+            "train=soldier:defense level:2",
             "produce=scrap_iron fur_garment_old"
          }
       },
@@ -189,20 +147,29 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier health from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier health 1",
+            "checksoldier=soldier:health level:1",
             "return=failed unless site has helmet_golden",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:10s800ms",
             "animate=working duration:12s",
-            "checksoldier=soldier health 1", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:health level:1", -- Because the soldier can be expelled by the player
             "consume=helmet_golden honey_bread,mead smoked_fish,smoked_meat",
-            "train=soldier health 1 2",
+            "train=soldier:health level:2",
             "produce=scrap_iron"
          }
       },
    },
 
    soldier_capacity = 6,
-   trainer_patience = 3
+   trainer_patience = 6,
+
+   messages = {
+      -- TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
+      no_soldier = pgettext("frisians_building", "No soldier to train!"),
+      -- TRANSLATORS: Frisian training site tooltip when none of the present soldiers match the current training program
+      no_soldier_for_level = pgettext("frisians_building", "No soldier found for this training level!"),
+   },
 }
+
+pop_textdomain()

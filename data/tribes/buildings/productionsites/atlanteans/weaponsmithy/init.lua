@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_weaponsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Weapon Smithy"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -22,14 +22,14 @@ tribes:new_productionsite_type {
       planks = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 50, 58 },
+         hotspot = { 56, 67 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 50, 58 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 56, 67 },
       }
    },
 
@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_trident_light",
             "call=produce_trident_long",
@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
       },
       produce_trident_light = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a light trident because ...
-         descname = _"forging a light trident",
+         descname = _("forging a light trident"),
          actions = {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs trident_light",
@@ -77,7 +77,7 @@ tribes:new_productionsite_type {
       },
       produce_trident_long = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a long trident because ...
-         descname = _"forging a long trident",
+         descname = _("forging a long trident"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_long",
@@ -92,7 +92,7 @@ tribes:new_productionsite_type {
       },
       produce_trident_steel = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a steel trident because ...
-         descname = _"forging a steel trident",
+         descname = _("forging a steel trident"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_steel",
@@ -107,7 +107,7 @@ tribes:new_productionsite_type {
       },
       produce_trident_double = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double trident because ...
-         descname = _"forging a double trident",
+         descname = _("forging a double trident"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_double",
@@ -122,7 +122,7 @@ tribes:new_productionsite_type {
       },
       produce_trident_heavy_double = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident because ...
-         descname = _"forging a heavy double trident",
+         descname = _("forging a heavy double trident"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_heavy_double",
@@ -137,3 +137,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

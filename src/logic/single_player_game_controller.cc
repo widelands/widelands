@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2020 by the Widelands Development Team
+ * Copyright (C) 2015-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -36,14 +35,13 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
      lastframe_(SDL_GetTicks()),
      time_(game_.get_gametime()),
      speed_(get_config_natural("speed_of_new_game", 1000)),
-     paused_(false),
-     player_cmdserial_(0),
+
      local_(local) {
 }
 
 SinglePlayerGameController::~SinglePlayerGameController() {
-	for (uint32_t i = 0; i < computerplayers_.size(); ++i) {
-		delete computerplayers_[i];
+	for (AI::ComputerPlayer* ai : computerplayers_) {
+		delete ai;
 	}
 	computerplayers_.clear();
 }
@@ -62,7 +60,7 @@ void SinglePlayerGameController::think() {
 
 	frametime = frametime * real_speed() / 1000;
 
-	time_ = game_.get_gametime() + frametime;
+	time_ = game_.get_gametime() + Duration(frametime);
 
 	if (use_ai_ && game_.is_loaded()) {
 		const Widelands::PlayerNumber nr_players = game_.map().get_nrplayers();
@@ -71,9 +69,9 @@ void SinglePlayerGameController::think() {
 			if (p > computerplayers_.size()) {
 				computerplayers_.resize(p);
 			}
-			if (!computerplayers_[p - 1]) {
+			if (computerplayers_[p - 1] == nullptr) {
 				computerplayers_[p - 1] =
-				   ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p);
+				   AI::ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p);
 			}
 			computerplayers_[p - 1]->think();
 		}
@@ -85,7 +83,7 @@ void SinglePlayerGameController::send_player_command(Widelands::PlayerCommand* p
 	game_.enqueue_command(pc);
 }
 
-int32_t SinglePlayerGameController::get_frametime() {
+Duration SinglePlayerGameController::get_frametime() {
 	return time_ - game_.get_gametime();
 }
 
@@ -118,7 +116,7 @@ void SinglePlayerGameController::report_result(uint8_t p_nr,
                                                const std::string& info) {
 	Widelands::PlayerEndStatus pes;
 	Widelands::Player* player = game_.get_player(p_nr);
-	assert(player);
+	assert(player != nullptr);
 	pes.player = player->player_number();
 	pes.time = game_.get_gametime();
 	pes.result = result;

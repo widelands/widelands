@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -57,31 +56,31 @@ public:
 	virtual ~Animation() = default;
 
 	/// The height of this animation.
-	int height() const;
+	[[nodiscard]] int height() const;
 	/// The width of this animation.
-	int width() const;
+	[[nodiscard]] int width() const;
 	/// The hotspot of this animation for aligning it on the map.
-	const Vector2i& hotspot() const;
+	[[nodiscard]] const Vector2i& hotspot() const;
 
 	/// The frame to be blitted for the given 'time'
-	uint32_t current_frame(uint32_t time) const;
+	[[nodiscard]] uint32_t current_frame(uint32_t time) const;
 
 	/// The size of the animation source images in pixels. Use 'percent_from_bottom' to crop the
 	/// animation.
-	Rectf source_rectangle(int percent_from_bottom, float scale) const;
+	[[nodiscard]] Rectf source_rectangle(int percent_from_bottom, float scale) const;
 
 	/// Calculates the destination rectangle for blitting the animation in pixels.
 	/// 'position' is where the top left corner of the animation will end up,
 	/// 'source_rect' is the rectangle calculated by source_rectangle,
 	/// 'scale' is the zoom scale.
-	Rectf
+	[[nodiscard]] Rectf
 	destination_rectangle(const Vector2f& position, const Rectf& source_rect, float scale) const;
 
 	/// The number of animation frames of this animation. Returns a positive integer.
-	uint16_t nr_frames() const;
+	[[nodiscard]] uint16_t nr_frames() const;
 
 	/// The number of milliseconds each frame will be displayed. Returns a positive integer.
-	uint32_t frametime() const;
+	[[nodiscard]] uint32_t frametime() const;
 
 	/// An image of the first frame, blended with the given player color.
 	/// The 'clr' is the player color used for blending - the parameter can be
@@ -106,25 +105,24 @@ public:
 	/// We need to expose these for the packed animation,
 	/// so that the create_spritesheet utility can use them.
 	/// Do not use otherwise.
-	std::vector<std::unique_ptr<const Texture>> frame_textures(float scale,
-	                                                           bool return_playercolor_masks) const;
+	[[nodiscard]] std::vector<std::unique_ptr<const Texture>>
+	frame_textures(float scale, bool return_playercolor_masks) const;
 
 	/// The scales for which this animation has exact images.
-	std::set<float> available_scales() const;
+	[[nodiscard]] std::set<float> available_scales() const;
 
 	/// Load animation images into memory for default scale.
 	void load_default_scale_and_sounds() const;
 
 	/// The frame to be shown in menus etc.
-	int representative_frame() const;
+	[[nodiscard]] int representative_frame() const;
 
 protected:
 	/// Animation data for a particular scale
 	struct MipMapEntry {
 
-		MipMapEntry();
-		virtual ~MipMapEntry() {
-		}
+		MipMapEntry() = default;
+		virtual ~MipMapEntry() = default;
 
 		/// Loads the graphics if they are not yet loaded.
 		virtual void ensure_graphics_are_loaded() const = 0;
@@ -141,15 +139,15 @@ protected:
 		                  float opacity) const = 0;
 
 		/// The width of this mipmap entry's textures
-		virtual int width() const = 0;
+		[[nodiscard]] virtual int width() const = 0;
 		/// The height of this mipmap entry's textures
-		virtual int height() const = 0;
+		[[nodiscard]] virtual int height() const = 0;
 
-		virtual std::vector<std::unique_ptr<const Texture>>
+		[[nodiscard]] virtual std::vector<std::unique_ptr<const Texture>>
 		frame_textures(bool return_playercolor_masks) const = 0;
 
 		/// Whether this texture set has player color masks provided
-		bool has_playercolor_masks;
+		bool has_playercolor_masks{false};
 	};
 
 	/// Register animations for the scales listed in kSupportedScales if available. The scale of 1.0
@@ -162,10 +160,10 @@ protected:
 	void trigger_sound(uint32_t time, const Widelands::Coords& coords) const;
 
 	/// Ensures that the graphics are loaded before returning the entry
-	const Animation::MipMapEntry& mipmap_entry(float scale) const;
+	[[nodiscard]] const Animation::MipMapEntry& mipmap_entry(float scale) const;
 
 	/// The number of textures this animation will play
-	uint16_t nr_frames_;
+	uint16_t nr_frames_{0U};
 
 	/// Reverse sort the zoom scales for faster lookup
 	struct MipMapCompare {
@@ -187,7 +185,7 @@ private:
 	                                        const std::string& scale_as_string) = 0;
 
 	/// Find the best scale for blitting at the given zoom 'scale'
-	float find_best_scale(float scale) const;
+	[[nodiscard]] float find_best_scale(float scale) const;
 
 	/// The frame to show in menus, in the in-game help etc.
 	int representative_frame_;
@@ -206,7 +204,7 @@ private:
 	/// How likely it is that the sound effect will be played
 	int32_t sound_priority_;
 	/// Whether the sound can be played by different map objects at the same time
-	bool sound_allow_multiple_;
+	bool sound_allow_multiple_{false};
 };
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_ANIMATION_H

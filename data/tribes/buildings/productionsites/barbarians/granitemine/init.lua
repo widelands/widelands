@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_granitemine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Granite Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
 
@@ -18,27 +18,32 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 42, 35 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 42, 35 },
-      },
-      working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 42, 35 },
       },
       empty = {
-         pictures = path.list_files(dirname .. "empty_??.png"),
          hotspot = { 42, 35 },
       },
    },
 
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 42, 35 }
+      },
+      working = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 42, 35 }
+      },
+   },
+
    aihints = {
-      mines = "stones",
       prohibited_till = 600
    },
 
@@ -53,20 +58,23 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-         descname = _"mining granite",
+         descname = _("mining granite"),
          actions = {
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 10.8 + 2 * (10 + 3.6) + 10 = 48 sec
             "return=skipped unless economy needs granite",
             "consume=ration",
-            "sleep=duration:20s",
+            "sleep=duration:10s800ms",
             "call=mine_produce",
             "call=mine_produce",
+            "return=skipped"
          }
       },
       mine_produce = {
-         descname = _"mining granite",
+         descname = _("mining granite"),
          actions = {
             "animate=working duration:10s",
-            "mine=stones radius:2 yield:100% when_empty:5% experience_on_fail:2%",
+            "mine=resource_stones radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=granite",
          }
       },
@@ -81,9 +89,11 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Granite",
-      heading = _"Main Granite Vein Exhausted",
+      title = _("No Granite"),
+      heading = _("Main Granite Vein Exhausted"),
       message =
          pgettext("barbarians_building", "This granite mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,30 +12,25 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/text/textstream.h"
 
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
-
+#include "base/string.h"
 #include "graphic/text/rt_errors_impl.h"
 
 namespace RT {
 
 struct EndOfTextImpl : public EndOfText {
 	EndOfTextImpl(size_t pos, const std::string& text)
-	   : EndOfText(
-	        (boost::format("Unexpected End of Text, starting at %1%. Text is: '%2%'") % pos % text)
-	           .str()) {
+	   : EndOfText(format("Unexpected End of Text, starting at %1%. Text is: '%2%'", pos, text)) {
 	}
 };
 
 void TextStream::consume(size_t cnt) {
-	while (cnt) {
+	while (cnt != 0u) {
 		if (text_[pos_] == '\n') {
 			++line_;
 			col_ = 0;
@@ -54,12 +49,12 @@ void TextStream::consume(size_t cnt) {
  * r* means skip_ws starting from the back of the string
  */
 void TextStream::skip_ws() {
-	while (pos_ < end_ && isspace(text_[pos_])) {
+	while (pos_ < end_ && (isspace(text_[pos_]) != 0)) {
 		consume(1);
 	}
 }
 void TextStream::rskip_ws() {
-	while (pos_ < end_ && isspace(text_[end_ - 1])) {
+	while (pos_ < end_ && (isspace(text_[end_ - 1]) != 0)) {
 		--end_;
 	}
 }
@@ -81,8 +76,7 @@ void TextStream::expect(std::string n, bool skip_whitespace) {
 	}
 
 	if (peek(n.size()) != n) {
-		throw SyntaxErrorImpl(
-		   line_, col_, (boost::format("'%s'") % n).str(), peek(n.size()), peek(100));
+		throw SyntaxErrorImpl(line_, col_, format("'%s'", n), peek(n.size()), peek(100));
 	}
 	consume(n.size());
 }
@@ -92,7 +86,6 @@ void TextStream::expect(std::string n, bool skip_whitespace) {
  * Return the substring we went over
  */
 std::string TextStream::till_any(std::string chars) {
-	// Boost should provide a function here, but I was unable to figure it out
 	// Sticking with a double loop because chars will likely be short
 	std::string rv;
 
@@ -100,8 +93,8 @@ std::string TextStream::till_any(std::string chars) {
 	size_t started_at = pos_;
 	bool found = false;
 	while (j < end_) {
-		for (size_t k = 0; k < chars.size(); ++k) {
-			if (chars[k] == text_[j]) {
+		for (char& ch : chars) {
+			if (ch == text_[j]) {
 				found = true;
 				break;
 			}
@@ -132,7 +125,7 @@ std::string TextStream::till_any(std::string chars) {
 	consume(j - started_at);
 
 	// Undo the extra \ that were inserted in Parser::parse to prevent crashes.
-	boost::replace_all(rv, "\\\\", "\\");
+	replace_all(rv, "\\\\", "\\");
 
 	return rv;
 }
@@ -161,9 +154,8 @@ std::string TextStream::parse_string() {
 		std::string rv = till_any(delim);
 		consume(1);
 		return rv;
-	} else {
-		return till_any(" \t>");
 	}
+	return till_any(" \t>");
 }
 
 /*

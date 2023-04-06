@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,10 +20,13 @@
 
 #include <memory>
 
+#include "base/multithreading.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_globals.h"
 #include "scripting/lua_path.h"
+#include "scripting/lua_styles.h"
 #include "scripting/lua_table.h"
+#include "scripting/lua_ui.h"
 #include "scripting/run_script.h"
 
 namespace {
@@ -71,6 +73,7 @@ LuaInterface::LuaInterface() {
 
 	// And helper methods.
 	LuaPath::luaopen_path(lua_state_);
+	LuaStyles::luaopen_styles(lua_state_);
 
 	// Also push the "wl" and the "hooks" table.
 	lua_newtable(lua_state_);
@@ -78,6 +81,9 @@ LuaInterface::LuaInterface() {
 
 	lua_newtable(lua_state_);
 	lua_setglobal(lua_state_, "hooks");
+
+	// Game tips need this to access hotkeys.
+	LuaUi::luaopen_wlui(lua_state_);
 }
 
 LuaInterface::~LuaInterface() {
@@ -91,4 +97,11 @@ void LuaInterface::interpret_string(const std::string& cmd) {
 
 std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& path) {
 	return ::run_script(lua_state_, g_fs->fix_cross_file(path), g_fs);
+}
+
+std::unique_ptr<LuaTable> LuaInterface::empty_table() {
+	lua_newtable(lua_state_);
+	std::unique_ptr<LuaTable> rv(new LuaTable(lua_state_));
+	lua_pop(lua_state_, 1);
+	return rv;
 }

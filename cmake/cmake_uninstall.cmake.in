@@ -1,0 +1,59 @@
+if(NOT EXISTS "@CMAKE_BINARY_DIR@/install_manifest.txt")
+  message(FATAL_ERROR "Cannot find install manifest: @CMAKE_BINARY_DIR@/install_manifest.txt")
+endif()
+
+# macro borrowed from https://github.com/xbmc/xbmc/commit/4c8efe4fc7e6bdb759c11a8e1dc6f2422e79bbaa
+# code by Wolfgang Schupp (https://github.com/wsnipex)
+macro(remove_empty_dirs)
+  list(REMOVE_DUPLICATES DIRECTORIES)
+  unset(PDIRECTORIES)
+  foreach(dir IN LISTS DIRECTORIES)
+    if(EXISTS ${dir})
+      file(GLOB _res ${dir}/*)
+      list(LENGTH _res _len)
+      if(_len EQUAL 0 AND EXISTS ${dir})
+        message(STATUS "Removing empty dir: ${dir}")
+        execute_process(
+          COMMAND ${CMAKE_COMMAND} -E remove_directory ${dir}
+          OUTPUT_VARIABLE rm_out
+          RESULT_VARIABLE rm_retval
+        )
+        if(NOT "${rm_retval}" STREQUAL 0)
+          message(FATAL_ERROR "Failed to remove directory: ${dir}")
+        endif()
+        get_filename_component(_pdir ${dir} DIRECTORY)
+        list(APPEND PDIRECTORIES ${_pdir})
+      endif()
+    endif()
+  endforeach()
+  list(LENGTH PDIRECTORIES _plen)
+  if(_plen GREATER 0)
+    set(DIRECTORIES ${PDIRECTORIES})
+    remove_empty_dirs()
+  endif()
+endmacro()
+
+file(STRINGS "@CMAKE_BINARY_DIR@/install_manifest.txt" files)
+set(DIRECTORIES "")
+foreach(file IN LISTS files)
+  get_filename_component(_dir "$ENV{DESTDIR}${file}" ABSOLUTE)
+  get_filename_component(_dir "${_dir}" DIRECTORY)
+  list(APPEND DIRECTORIES "${_dir}")
+  message(STATUS "Uninstalling $ENV{DESTDIR}${file}")
+  if(IS_SYMLINK "$ENV{DESTDIR}${file}" OR EXISTS "$ENV{DESTDIR}${file}")
+    exec_program(
+      "@CMAKE_COMMAND@" ARGS "-E remove \"$ENV{DESTDIR}${file}\""
+      OUTPUT_VARIABLE rm_out
+      RETURN_VALUE rm_retval
+      )
+    if(NOT "${rm_retval}" STREQUAL 0)
+      message(FATAL_ERROR "Problem when removing $ENV{DESTDIR}${file}")
+    endif()
+  else(IS_SYMLINK "$ENV{DESTDIR}${file}" OR EXISTS "$ENV{DESTDIR}${file}")
+    message(STATUS "File $ENV{DESTDIR}${file} does not exist.")
+  endif()
+endforeach()
+# delete empty dirs
+if(DIRECTORIES)
+  remove_empty_dirs(${DIRECTORIES})
+endif()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -38,7 +37,7 @@ struct Extent {
  */
 // TODO(sirver): This should go away and be replaced by Vector2i16.
 struct Coords {
-	Coords();
+	Coords() = default;
 	Coords(int16_t nx, int16_t ny);
 
 	/// Returns a special value indicating invalidity.
@@ -48,7 +47,7 @@ struct Coords {
 	static Coords unhash(uint32_t hash);
 
 	/// Hash coordinates to use them as keys in a container
-	uint32_t hash() const;
+	[[nodiscard]] uint32_t hash() const;
 
 	bool operator==(const Coords& other) const;
 	bool operator!=(const Coords& other) const;
@@ -56,23 +55,22 @@ struct Coords {
 		return std::forward_as_tuple(y, x) < std::forward_as_tuple(other.y, other.x);
 	}
 
-	operator bool() const;
+	// should be explicit to avoid accidental conversions to numbers
+	explicit operator bool() const;
 
 	// Move the coords to the 'new_origin'.
 	void reorigin(Coords new_origin, const Extent& extent);
 
-	int16_t x;
-	int16_t y;
+	int16_t x{0};
+	int16_t y{0};
 };
 static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 
-template <typename _CoordsType = Coords, typename _RadiusType = uint16_t>
-struct Area : public _CoordsType {
-	using CoordsType = _CoordsType;
-	using RadiusType = _RadiusType;
-	Area() {
-	}
-	Area(const CoordsType center, const RadiusType Radius) : CoordsType(center), radius(Radius) {
+template <typename CT = Coords, typename RT = uint16_t> struct Area : public CT {
+	using CoordsType = CT;
+	using RadiusType = RT;
+	Area() = default;
+	Area(const CoordsType center, const RadiusType rad) : CoordsType(center), radius(rad) {
 	}
 
 	bool operator==(const Area& other) const {
@@ -100,17 +98,19 @@ template <typename AreaType = Area<>> struct HollowArea : public AreaType {
 	typename AreaType::RadiusType hole_radius;
 };
 
-struct Field;
+class Field;
 
 struct FCoords : public Coords {
-	FCoords() : field(nullptr) {
-	}
+	FCoords() = default;
 	FCoords(const Coords& nc, Field* const nf) : Coords(nc), field(nf) {
 	}
-	Field* field;
+	Field* field{nullptr};
 };
 
-enum class TriangleIndex { D, R };
+enum class TriangleIndex {
+	D,  // Downward
+	R   // Right
+};
 
 // This uniquely indexes a single Triangle on the map. A Triangle is identified
 // by its owning node and the triangle index (down or right).
@@ -145,7 +145,7 @@ struct NodeAndTriangle {
 struct HeightInterval {
 	HeightInterval(const uint8_t Min, const uint8_t Max) : min(Min), max(Max) {
 	}
-	bool valid() const {
+	[[nodiscard]] bool valid() const {
 		return min <= max;
 	}
 

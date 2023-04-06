@@ -1,14 +1,29 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_productionsite_type {
    name = "frisians_tavern",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Tavern"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_drinking_hall",
+
+   enhancement = {
+      name = "frisians_drinking_hall",
+      enhancement_cost = {
+         brick = 1,
+         granite = 2,
+         log = 1,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         brick = 1,
+         granite = 1,
+         reed = 1
+      }
+   },
 
    buildcost = {
       brick = 3,
@@ -23,8 +38,6 @@ tribes:new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {50, 73},
          frames = 10,
          columns = 5,
@@ -32,8 +45,6 @@ tribes:new_productionsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {50, 73},
          frames = 10,
          columns = 5,
@@ -43,8 +54,6 @@ tribes:new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {50, 58}
       }
    },
@@ -70,7 +79,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_malus",
             "call=produce_bonus",
@@ -78,7 +87,7 @@ tribes:new_productionsite_type {
       },
       produce_malus = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"preparing only one ration",
+         descname = _("preparing only one ration"),
          actions = {
             -- time total: 49.5
             "return=skipped unless economy needs ration",
@@ -92,7 +101,7 @@ tribes:new_productionsite_type {
       },
       produce_bonus = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
-         descname = _"preparing rations",
+         descname = _("preparing rations"),
          actions = {
             -- time total: 66
             "return=skipped unless economy needs ration",
@@ -105,3 +114,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

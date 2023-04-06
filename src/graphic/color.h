@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,15 +26,16 @@
 struct RGBColor {
 	RGBColor(uint8_t R, uint8_t G, uint8_t B);
 	RGBColor(const RGBColor& other) = default;
+	explicit RGBColor(uint32_t);
 
 	// Initializes the color to black.
 	RGBColor();
 
 	// Returns this color in hex format.
-	std::string hex_value() const;
+	[[nodiscard]] std::string hex_value() const;
 
 	// Map this color to the given 'fmt'
-	uint32_t map(const SDL_PixelFormat& fmt) const;
+	[[nodiscard]] uint32_t map(const SDL_PixelFormat& fmt) const;
 
 	// Set it to the given 'clr' which is interpretes through 'fmt'.
 	void set(SDL_PixelFormat* fmt, uint32_t clr);
@@ -49,20 +49,20 @@ struct RGBColor {
 
 struct RGBAColor {
 	RGBAColor(uint8_t R, uint8_t G, uint8_t B, uint8_t A);
-	RGBAColor(uint32_t);
+	explicit RGBAColor(uint32_t);
 	RGBAColor(const RGBAColor& other) = default;
 
 	// Initializes the color to black.
 	RGBAColor();
 
 	// Initializes to opaque color.
-	RGBAColor(const RGBColor& c);
+	RGBAColor(const RGBColor& c);  // NOLINT allow implicit conversion
 
 	// Returns this color in hex format.
-	std::string hex_value() const;
+	[[nodiscard]] std::string hex_value() const;
 
 	// Map this color to the given 'fmt'
-	uint32_t map(const SDL_PixelFormat& fmt) const;
+	[[nodiscard]] uint32_t map(const SDL_PixelFormat& fmt) const;
 
 	// Set it to the given 'clr' which is interpretes through 'fmt'.
 	void set(const SDL_PixelFormat& fmt, uint32_t clr);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -39,20 +38,30 @@ enum class SoldierPreference : uint8_t {
 
 class MilitarySiteDescr : public BuildingDescr {
 public:
-	MilitarySiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
-	~MilitarySiteDescr() override {
-	}
+	MilitarySiteDescr(const std::string& init_descname,
+	                  const LuaTable& t,
+	                  Descriptions& descriptions);
+	~MilitarySiteDescr() override = default;
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	uint32_t get_conquers() const override {
+	[[nodiscard]] uint32_t get_conquers() const override {
 		return conquer_radius_;
 	}
-	Quantity get_max_number_of_soldiers() const {
+	void set_conquers(uint32_t c) {
+		conquer_radius_ = c;
+	}
+	[[nodiscard]] Quantity get_max_number_of_soldiers() const {
 		return num_soldiers_;
 	}
-	uint32_t get_heal_per_second() const {
+	void set_max_number_of_soldiers(Quantity q) {
+		num_soldiers_ = q;
+	}
+	[[nodiscard]] uint32_t get_heal_per_second() const {
 		return heal_per_second_;
+	}
+	void set_heal_per_second(uint32_t h) {
+		heal_per_second_ = h;
 	}
 
 	bool prefers_heroes_at_start_;
@@ -63,9 +72,9 @@ public:
 	std::string defeated_you_str_;
 
 private:
-	uint32_t conquer_radius_;
-	Quantity num_soldiers_;
-	uint32_t heal_per_second_;
+	uint32_t conquer_radius_{0U};
+	Quantity num_soldiers_{0U};
+	uint32_t heal_per_second_{0U};
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteDescr);
 };
 
@@ -105,7 +114,7 @@ public:
 		return soldier_preference_;
 	}
 
-	const BuildingSettings* create_building_settings() const override;
+	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 protected:
 	void conquer_area(EditorGameBase&);
@@ -113,7 +122,6 @@ protected:
 private:
 	void update_statistics_string(std::string*) override;
 
-	bool is_present(Soldier&) const;
 	static void
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
@@ -124,11 +132,10 @@ private:
 	bool update_upgrade_requirements();
 	void update_normal_soldier_request();
 	void update_upgrade_soldier_request();
-	bool incorporate_upgraded_soldier(EditorGameBase& game, Soldier& s);
+	bool incorporate_upgraded_soldier(EditorGameBase& egbase, Soldier& s);
 	Soldier* find_least_suited_soldier();
-	bool drop_least_suited_soldier(bool new_has_arrived, Soldier* s);
+	bool drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier* newguy);
 
-private:
 	// We can be attacked if we have stationed soldiers.
 	class AttackTarget : public Widelands::AttackTarget {
 	public:
@@ -139,8 +146,18 @@ private:
 		void enemy_soldier_approaches(const Soldier&) const override;
 		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
 
+		void set_allow_conquer(PlayerNumber p, bool c) const override {
+			allow_conquer_[p] = c;
+		}
+		bool get_allow_conquer(PlayerNumber p) const override {
+			auto it = allow_conquer_.find(p);
+			return it == allow_conquer_.end() || it->second;
+		}
+
 	private:
+		friend class MapBuildingdataPacket;
 		MilitarySite* const military_site_;
+		mutable std::map<PlayerNumber, bool> allow_conquer_;
 	};
 
 	class SoldierControl : public Widelands::SoldierControl {
@@ -148,14 +165,15 @@ private:
 		explicit SoldierControl(MilitarySite* military_site) : military_site_(military_site) {
 		}
 
-		std::vector<Soldier*> present_soldiers() const override;
-		std::vector<Soldier*> stationed_soldiers() const override;
-		Quantity min_soldier_capacity() const override;
-		Quantity max_soldier_capacity() const override;
-		Quantity soldier_capacity() const override;
+		[[nodiscard]] std::vector<Soldier*> present_soldiers() const override;
+		[[nodiscard]] std::vector<Soldier*> stationed_soldiers() const override;
+		[[nodiscard]] std::vector<Soldier*> associated_soldiers() const override;
+		[[nodiscard]] Quantity min_soldier_capacity() const override;
+		[[nodiscard]] Quantity max_soldier_capacity() const override;
+		[[nodiscard]] Quantity soldier_capacity() const override;
 		void set_soldier_capacity(Quantity capacity) override;
 		void drop_soldier(Soldier&) override;
-		int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
+		int incorporate_soldier(EditorGameBase& egbase, Soldier& s) override;
 
 	private:
 		MilitarySite* const military_site_;
@@ -167,13 +185,13 @@ private:
 	RequireAttribute soldier_upgrade_requirements_;     // This is used when exchanging soldiers.
 	std::unique_ptr<Request> normal_soldier_request_;   // filling the site
 	std::unique_ptr<Request> upgrade_soldier_request_;  // seeking for better soldiers
-	bool didconquer_;
+	bool didconquer_{false};
 	Quantity capacity_;
 
 	/**
 	 * Next gametime where we should heal something.
 	 */
-	int32_t nexthealtime_;
+	Time nexthealtime_{0U};
 
 	struct SoldierJob {
 		Soldier* soldier;
@@ -182,9 +200,14 @@ private:
 	};
 	std::vector<SoldierJob> soldierjobs_;
 	SoldierPreference soldier_preference_;
-	int32_t next_swap_soldiers_time_;
-	bool soldier_upgrade_try_;  // optimization -- if everybody is zero-level, do not downgrade
-	bool doing_upgrade_request_;
+	Time next_swap_soldiers_time_{0U};
+	bool soldier_upgrade_try_{
+	   false};  // optimization -- if everybody is zero-level, do not downgrade
+	bool doing_upgrade_request_{false};
+
+	static constexpr size_t kNoOfStatisticsStringCases = 4U;
+	std::vector<std::map<std::tuple<int, int, int>, std::string>> statistics_string_cache_{
+	   kNoOfStatisticsStringCases};
 };
 }  // namespace Widelands
 

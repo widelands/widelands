@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,9 +22,11 @@
 #include <memory>
 
 #include "io/profile.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/message_id.h"
 #include "logic/note_map_options.h"
 #include "ui_basic/button.h"
+#include "ui_basic/icon.h"
 #include "wui/interactive_gamebase.h"
 
 /**
@@ -63,12 +64,12 @@ public:
 	void set_player_number(uint32_t plrn);
 
 	// For load
-	void cleanup_for_load() override;
 	void postload() override;
 	void think() override;
 	void draw(RenderTarget& dst) override;
 
-	std::map<Widelands::Ship*, Widelands::Coords>& get_expedition_port_spaces() {
+	std::map<const Widelands::OPtr<Widelands::Ship>, Widelands::Coords>&
+	get_expedition_port_spaces() {
 		return expedition_port_spaces_;
 	}
 	bool has_expedition_port_space(const Widelands::Coords&) const;
@@ -76,8 +77,25 @@ public:
 	void set_flag_to_connect(const Widelands::Coords& location) {
 		flag_to_connect_ = location;
 	}
+	bool auto_roadbuild_mode() const {
+		return auto_roadbuild_mode_;
+	}
 
-	void popup_message(Widelands::MessageId, const Widelands::Message&);
+	void popup_message(Widelands::MessageId, const Widelands::Message&) const;
+
+	/** Open an attack box for the building at the given position, if applicable. */
+	UI::Window* show_attack_window(const Widelands::Coords&, bool fastclick);
+
+	void edit_pinned_note(const Widelands::FCoords& c);
+
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+	// Indicate the given screen pixel to the player by painting an arrow. Use this for pointing the
+	// payer to a UI::Panel. Set to Vector2i::invalid() to switch it off.
+	void set_training_wheel_indicator_pos(const Vector2i& pos);
+	// Indicate the given field coordinates to the player by painting an arrow. Set to
+	// FCoords::null() to switch it off.
+	void set_training_wheel_indicator_field(const Widelands::FCoords& field);
+#endif
 
 private:
 	// For referencing the items in statisticsmenu_
@@ -103,13 +121,36 @@ private:
 
 	// Statistics menu on the toolbar
 	UI::Dropdown<StatisticsMenuEntry> statisticsmenu_;
+
+	std::set<const Widelands::Game::PendingDiplomacyAction*> handled_diplomacy_actions_;
+
+public:
 	UI::UniqueWindow::Registry objectives_;
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;
 
+private:
 	const Image* grid_marker_pic_;
+	const Image* portspace_hint_pic_;
 
-	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+	// Arrow image for indicating a position for training wheels
+	const Image* training_wheel_indicator_pic_;
+	// Field position to indicate for training wheels
+	Widelands::FCoords training_wheel_indicator_field_;
+	// Arrow image for indicating a UI::Panel for training wheels
+	std::unique_ptr<UI::Icon> training_wheel_indicator_icon_;
+#endif
+
+	void draw_immovables_for_visible_field(const Widelands::EditorGameBase&,
+	                                       const FieldsToDraw::Field&,
+	                                       float scale,
+	                                       InfoToDraw,
+	                                       const Widelands::Player&,
+	                                       RenderTarget*,
+	                                       std::set<Widelands::Coords>&);
+
+	std::map<const Widelands::OPtr<Widelands::Ship>, Widelands::Coords> expedition_port_spaces_;
 
 	std::unique_ptr<Notifications::Subscriber<NoteMapOptions>> map_options_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;

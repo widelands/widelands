@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -31,25 +30,30 @@ class FileSystem;
 class FileWrite : public StreamWrite {
 public:
 	struct Pos {
-		Pos(size_t const p = 0) : pos(p) {
+		Pos(size_t const p = 0) : pos(p) {  // NOLINT allow implicit conversion
 		}
 
 		/// Returns a special value indicating invalidity.
 		static Pos null() {
-			return std::numeric_limits<size_t>::max();
+			return Pos(std::numeric_limits<size_t>::max());
 		}
 
-		bool is_null() const {
+		[[nodiscard]] bool operator==(const Pos& p) const {
+			return pos == p.pos;
+		}
+		[[nodiscard]] bool is_null() const {
 			return *this == null();
 		}
-		operator size_t() const {
+		operator size_t() const {  // NOLINT allow implicit conversion
 			return pos;
 		}
-		Pos operator++() {
-			return ++pos;
+		Pos& operator++() {
+			++pos;
+			return *this;
 		}
-		Pos operator+=(const Pos& other) {
-			return pos += other.pos;
+		Pos& operator+=(const Pos& other) {
+			pos += other.pos;
+			return *this;
 		}
 
 	private:
@@ -75,7 +79,7 @@ public:
 
 	/// Get the position that will be written to in the next write operation that
 	/// does not specify a position.
-	Pos get_pos() const;
+	[[nodiscard]] Pos get_pos() const;
 
 	/// Set the file pointer to a new location. The position can be beyond the
 	/// current end of file.
@@ -88,12 +92,12 @@ public:
 	void data(void const* src, size_t size) override;
 
 	/// Returns the current buffer. Use this for in_memory operations.
-	std::string get_data() const;
+	[[nodiscard]] std::string get_data() const;
 
 private:
-	char* data_;
-	size_t length_;
-	size_t max_size_;
+	char* data_{nullptr};
+	size_t length_{0U};
+	size_t max_size_{0U};
 	Pos filepos_;
 };
 

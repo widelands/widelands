@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,6 +21,8 @@
 #include <cassert>
 #include <memory>
 
+#include "base/log.h"
+#include "base/math.h"
 #include "base/vector.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
@@ -32,9 +33,6 @@
 const std::map<float, std::string> Animation::kSupportedScales{
    {0.5, "_0.5"}, {1, "_1"}, {2, "_2"}, {4, "_4"}};
 
-Animation::MipMapEntry::MipMapEntry() : has_playercolor_masks(false) {
-}
-
 Animation::Animation(const LuaTable& table)
    : representative_frame_(
         table.has_key("representative_frame") ? table.get_int("representative_frame") : 0),
@@ -42,15 +40,22 @@ Animation::Animation(const LuaTable& table)
      frametime_(table.has_key("fps") ? (1000 / get_positive_int(table, "fps")) : kFrameLength),
      play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false),
      sound_effect_(kNoSoundEffect),
-     sound_priority_(kFxPriorityLowest),
-     sound_allow_multiple_(false) {
+     sound_priority_(kFxPriorityLowest) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
 			sound_effect_ =
 			   SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
-			sound_priority_ = std::round(100 * sound_effects->get_double("priority"));
+
+			try {
+				sound_priority_ = math::read_percent_to_int(sound_effects->get_string("priority"));
+			} catch (const std::exception&) {
+				// TODO(GunChleoc): Compatibility, remove try-catch after v1.0
+				log_warn("Animation sound effect priority '%.2f' without percent symbol is deprecated",
+				         sound_effects->get_double("priority"));
+				sound_priority_ = std::round(100 * sound_effects->get_double("priority"));
+			}
 
 			if (sound_effects->has_key<std::string>("allow_multiple")) {
 				sound_allow_multiple_ = sound_effects->get_bool("allow_multiple");
@@ -77,7 +82,7 @@ const Animation::MipMapEntry& Animation::mipmap_entry(float scale) const {
 
 Rectf Animation::source_rectangle(const int percent_from_bottom, float scale) const {
 	const MipMapEntry& mipmap = mipmap_entry(find_best_scale(scale));
-	const float h = percent_from_bottom * mipmap.height() / 100;
+	const float h = percent_from_bottom * mipmap.height() / 100.f;
 	// Using floor for pixel perfect positioning
 	return Rectf(0.f, std::floor(mipmap.height() - h), mipmap.width(), h);
 }
@@ -116,8 +121,8 @@ const Vector2i& Animation::hotspot() const {
 uint32_t Animation::current_frame(uint32_t time) const {
 	if (nr_frames() > 1) {
 		return (play_once_ && time / frametime_ > static_cast<uint32_t>(nr_frames() - 1)) ?
-		          static_cast<uint32_t>(nr_frames() - 1) :
-		          time / frametime_ % nr_frames();
+                static_cast<uint32_t>(nr_frames() - 1) :
+                time / frametime_ % nr_frames();
 	}
 	return 0;
 }

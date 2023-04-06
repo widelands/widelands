@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,7 +23,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem.h"
 
-FileWrite::FileWrite() : data_(nullptr), length_(0), max_size_(0), filepos_(0) {
+FileWrite::FileWrite() : filepos_(0) {
 }
 
 FileWrite::~FileWrite() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -25,10 +24,7 @@
 
 namespace Widelands {
 
-Pathfields::Pathfields(uint32_t const nrfields) : fields(new Pathfield[nrfields]), cycle(0) {
-}
-
-PathfieldManager::PathfieldManager() : nrfields_(0) {
+Pathfields::Pathfields(uint32_t const nrfields) : fields(new Pathfield[nrfields]) {
 }
 
 void PathfieldManager::set_size(uint32_t const nrfields) {
@@ -43,7 +39,7 @@ std::shared_ptr<Pathfields> PathfieldManager::allocate() {
 	for (std::shared_ptr<Pathfields>& pathfield : list_) {
 		if (pathfield.use_count() == 1) {
 			++pathfield->cycle;
-			if (!pathfield->cycle) {
+			if (pathfield->cycle == 0u) {
 				clear(pathfield);
 			}
 			return pathfield;
@@ -60,7 +56,7 @@ std::shared_ptr<Pathfields> PathfieldManager::allocate() {
 	return pf;
 }
 
-void PathfieldManager::clear(const std::shared_ptr<Pathfields>& pf) {
+void PathfieldManager::clear(const std::shared_ptr<Pathfields>& pf) const {
 	for (uint32_t i = 0; i < nrfields_; ++i) {
 		pf->fields[i].cycle = 0;
 	}

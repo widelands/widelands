@@ -1,97 +1,21 @@
-wl_library(ui_fsmenu_options
-  SRCS
-    options.cc
-    options.h
-  DEPENDS
-    base_exceptions
-    base_i18n
-    base_log
-    graphic
-    graphic_fonthandler
-    graphic_mouse_cursor
-    graphic_text
-    graphic_text_layout
-    io_filesystem
-    logic_filesystem_constants
-    scripting_lua_interface
-    scripting_lua_table
-    ui_basic
-    ui_fsmenu_base
-    sound
-    widelands_ball_of_mud
-    widelands_options
-    wui_sound_options
-)
+add_subdirectory(addons)
 
-wl_library(ui_fsmenu_base
+wl_library(ui_fsmenu
   SRCS
-    base.cc
-    base.h
-  DEPENDS
-    ui_basic
-)
-
-wl_library(ui_fsmenu_helpwindow
-  SRCS
+    about.cc
+    about.h
+    campaigndetails.cc
+    campaigndetails.h
+    campaigns.cc
+    campaigns.h
+    campaign_select.cc
+    campaign_select.h
     helpwindow.cc
     helpwindow.h
-  USES_SDL2
-  DEPENDS
-    base_i18n
-    graphic
-    scripting_coroutine
-    scripting_lua_table
-    scripting_lua_interface
-    ui_basic
-)
-
-
-wl_library(ui_fsmenu_main
-  SRCS
-    main.cc
-    main.h
-  DEPENDS
-    base_i18n
-    build_info
-    logic
-    logic_filesystem_constants
-    ui_basic
-    ui_fsmenu_main_menu
-    wui_common_gamedetails
-)
-
-wl_library(ui_fsmenu_main_menu
-  SRCS
-    main_menu.cc
-    main_menu.h
-  DEPENDS
-    ui_basic
-    ui_fsmenu_base
-)
-
-wl_library(ui_fsmenu_loading_common
-  SRCS
-    load_map_or_game.cc
-    load_map_or_game.h
-    multiplayer.cc
-    multiplayer.h
-    singleplayer.cc
-    singleplayer.h
-  DEPENDS
-    base_i18n
-    base_random
-    graphic
-    io_filesystem
-    network
-    ui_basic
-    ui_fsmenu_base
-    ui_fsmenu_main_menu
-    widelands_options
-    wui
-)
-
-wl_library(ui_fsmenu_gameloading
-  SRCS
+    internet_lobby.cc
+    internet_lobby.h
+    keyboard_options.cc
+    keyboard_options.h
     launch_game.cc
     launch_game.h
     launch_mpg.cc
@@ -100,101 +24,83 @@ wl_library(ui_fsmenu_gameloading
     launch_spg.h
     loadgame.cc
     loadgame.h
-  DEPENDS
-    base_exceptions
-    base_i18n
-    graphic
-    graphic_playercolor
-    io_filesystem
-    io_profile
-    logic
-    logic_constants
-    logic_game_controller
-    logic_game_settings
-    logic_map
-    logic_map_objects
-    logic_tribe_basic_info
-    map_io_map_loader
-    scripting_lua_interface
-    scripting_lua_table
-    ui_basic
-    ui_fsmenu_base
-    ui_fsmenu_helpwindow
-    ui_fsmenu_loading_common
-    ui_fsmenu_maploading
-    widelands_options
-    wui
-    wui_chat_ui
-    wui_common_gamedetails
-    wui_common_suggested_teams
-)
-
-wl_library(ui_fsmenu_maploading
-  SRCS
-    campaigndetails.cc
-    campaigndetails.h
-    campaigns.cc
-    campaigns.h
-    campaign_select.cc
-    campaign_select.h
+    login_box.cc
+    login_box.h
+    mapdetailsbox.cc
+    mapdetailsbox.h
     mapselect.cc
     mapselect.h
+    main.cc
+    main.h
+    menu.h
+    menu.cc
+    mousewheel_options.cc
+    mousewheel_options.h
+    mousewheel_report.cc
+    mousewheel_report.h
+    multiplayersetupgroup.cc
+    multiplayersetupgroup.h
+    netsetup_lan.cc
+    netsetup_lan.h
+    options.cc
+    options.h
+    random_game.cc
+    random_game.h
     scenariodetails.cc
     scenariodetails.h
     scenario_select.cc
     scenario_select.h
+    singleplayerdropdown.cc
+    singleplayerdropdown.h
+    singleplayersetupbox.cc
+    singleplayersetupbox.h
+    tech_info.cc
+    tech_info.h
+    training_wheel_options.cc
+    training_wheel_options.h
   DEPENDS
+    ai
+    base
     base_exceptions
-    base_i18n
-    base_log
+    base_random
+    build_info
+    editor
     graphic
     graphic_fonthandler
+    graphic_mouse_cursor
+    graphic_playercolor
+    graphic_styles
     graphic_surface
+    graphic_text
     graphic_text_layout
     io_filesystem
     io_profile
+    logic
+    logic_addons
     logic_filesystem_constants
-    logic_game_controller
     logic_game_settings
+    logic_game_controller
+    logic_map
+    logic_map_objects
+    logic_single_player_game_settings
+    logic_training_wheels
     logic_tribe_basic_info
     map_io_map_loader
+    network
+    scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu_loading_common
-    wui_common_mapdetails
-)
-
-wl_library(ui_fsmenu_network
-  SRCS
-    internet_lobby.cc
-    internet_lobby.h
-    netsetup_lan.cc
-    netsetup_lan.h
-  DEPENDS
-    base_i18n
-    base_log
-    base_random
-    build_info
-    graphic
-    graphic_text_layout
-    network
     sound
-    ui_basic
-    ui_fsmenu_base
-    ui_fsmenu_loading_common
+    third_party_sha1
+    ui_addons
+    widelands_ball_of_mud
     widelands_options
+    wui
     wui_chat_ui
-)
-
-wl_library(ui_fsmenu_misc
-  SRCS
-    about.cc
-    about.h
-    intro.cc
-    intro.h
-  DEPENDS
-    base_i18n
-    ui_basic
-    ui_fsmenu_base
+    wui_common_mapdetails
+    wui_common_gamedetails
+    wui_common_suggested_teams
+    wui_sound_options
+  USES_SDL2
 )

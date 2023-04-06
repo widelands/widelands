@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,7 +20,9 @@
 #define WL_LOGIC_PLAYERSMANAGER_H
 
 #include <cassert>
+#include <map>
 
+#include "base/times.h"
 #include "graphic/playercolor.h"
 #include "logic/player_end_result.h"
 #include "logic/widelands.h"
@@ -29,7 +30,6 @@
 namespace Widelands {
 
 class EditorGameBase;
-class Player;
 class Player;
 
 /**
@@ -42,9 +42,9 @@ class Player;
  * \e resign_reason : The reason for resigning (forfeit, disconnection, ..) (string)
  */
 struct PlayerEndStatus {
-	PlayerNumber player;
-	PlayerEndResult result;
-	uint32_t time;
+	PlayerNumber player = 0;
+	PlayerEndResult result = PlayerEndResult::kUndefined;
+	Time time;
 	std::string info;
 };
 
@@ -64,15 +64,16 @@ public:
 	 */
 	Player* add_player(PlayerNumber,
 	                   uint8_t initialization_index,
+	                   const RGBColor&,
 	                   const std::string& tribe,
 	                   const std::string& name,
 	                   TeamNumber team = 0);
-	Player* get_player(int32_t n) const {
+	[[nodiscard]] Player* get_player(int32_t n) const {
 		assert(1 <= n);
 		assert(n <= kMaxPlayers);
 		return players_[n - 1];
 	}
-	const Player& player(int32_t n) const {
+	[[nodiscard]] const Player& player(int32_t n) const {
 		assert(1 <= n);
 		assert(n <= kMaxPlayers);
 		return *players_[n - 1];
@@ -81,29 +82,25 @@ public:
 	/**
 	 * \return the number of players (human or ai)
 	 */
-	uint8_t get_number_of_players() {
+	[[nodiscard]] uint8_t get_number_of_players() const {
 		return number_of_players_;
 	}
 
-	const std::vector<PlayerEndStatus>& get_players_end_status() {
+	/**
+	 * Adds or sets the player status for a player that left the game.
+	 */
+	void add_player_end_status(const PlayerEndStatus& status, bool change_existing = false);
+
+	[[nodiscard]] const PlayerEndStatus* get_player_end_status(PlayerNumber player) const;
+	[[nodiscard]] const std::map<PlayerNumber, PlayerEndStatus>& get_all_players_end_status() {
 		return players_end_status_;
 	}
-
-	/**
-	 * Adds a new player status for a player that left the game.
-	 */
-	void add_player_end_status(const PlayerEndStatus& status);
-
-	/**
-	 * Changes an already existing player end status
-	 */
-	void set_player_end_status(const PlayerEndStatus& status);
 
 private:
 	Player* players_[kMaxPlayers];
 	EditorGameBase& egbase_;
-	uint8_t number_of_players_;
-	std::vector<PlayerEndStatus> players_end_status_;
+	uint8_t number_of_players_{0U};
+	std::map<PlayerNumber, PlayerEndStatus> players_end_status_;
 };
 }  // namespace Widelands
 

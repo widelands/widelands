@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -39,15 +38,16 @@ Widelands::NodeCaps port_tool_nodecaps(const Widelands::FCoords& c, const Widela
 
 }  // namespace
 
-EditorSetPortSpaceTool::EditorSetPortSpaceTool(EditorUnsetPortSpaceTool& the_unset_tool)
-   : EditorTool(the_unset_tool, the_unset_tool) {
+EditorSetPortSpaceTool::EditorSetPortSpaceTool(EditorInteractive& parent,
+                                               EditorUnsetPortSpaceTool& the_unset_tool)
+   : EditorTool(parent, the_unset_tool, the_unset_tool) {
 }
 
-EditorUnsetPortSpaceTool::EditorUnsetPortSpaceTool() : EditorTool(*this, *this) {
+EditorUnsetPortSpaceTool::EditorUnsetPortSpaceTool(EditorInteractive& parent)
+   : EditorTool(parent, *this, *this) {
 }
 
 int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                  EditorInteractive& eia,
                                                   EditorActionArgs* args,
                                                   Widelands::Map* map) {
 	assert(0 <= center.node.x);
@@ -62,9 +62,9 @@ int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTriang
 	do {
 		//  check if field is valid
 		if (port_tool_nodecaps(mr.location(), *map) != Widelands::NodeCaps::CAPS_NONE) {
-			map->set_port_space(eia.egbase(), mr.location(), true);
+			map->set_port_space(parent_.egbase(), mr.location(), true);
 			Widelands::Area<Widelands::FCoords> a(mr.location(), 0);
-			map->recalc_for_field_area(eia.egbase(), a);
+			map->recalc_for_field_area(parent_.egbase(), a);
 			++nr;
 		}
 	} while (mr.advance(*map));
@@ -80,14 +80,12 @@ EditorSetPortSpaceTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoords
 
 int32_t EditorSetPortSpaceTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
    EditorActionArgs* args,
    Widelands::Map* map) {
-	return parent.tools()->unset_port_space.handle_click_impl(center, parent, args, map);
+	return parent_.tools()->unset_port_space.handle_click_impl(center, args, map);
 }
 
 int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                    EditorInteractive& eia,
                                                     EditorActionArgs* args,
                                                     Widelands::Map* map) {
 	assert(0 <= center.node.x);
@@ -101,10 +99,10 @@ int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTria
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		//  check if field is valid
-		if (port_tool_nodecaps(mr.location(), *map)) {
-			map->set_port_space(eia.egbase(), mr.location(), false);
+		if (port_tool_nodecaps(mr.location(), *map) != 0u) {
+			map->set_port_space(parent_.egbase(), mr.location(), false);
 			Widelands::Area<Widelands::FCoords> a(mr.location(), 0);
-			map->recalc_for_field_area(eia.egbase(), a);
+			map->recalc_for_field_area(parent_.egbase(), a);
 			++nr;
 		}
 	} while (mr.advance(*map));
@@ -114,10 +112,9 @@ int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTria
 
 int32_t EditorUnsetPortSpaceTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
    EditorActionArgs* args,
    Widelands::Map* map) {
-	return parent.tools()->set_port_space.handle_click_impl(center, parent, args, map);
+	return parent_.tools()->set_port_space.handle_click_impl(center, args, map);
 }
 
 Widelands::NodeCaps

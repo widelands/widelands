@@ -71,12 +71,25 @@ end
 
 function select_item_from_dropdown(name, item)
    local blocker = UserInputDisabler:new()
-
-   wl.ui.MapView().dropdowns[name]:highlight_item(item)
-   sleep(5000)
    wl.ui.MapView().dropdowns[name]:select()
    sleep(3000)
+   blocker:lift_blocks()
+end
 
+function open_item_from_dropdown(name, item)
+   wl.ui.MapView().dropdowns[name]:open(item)
+end
+
+function show_item_from_dropdown(name, item)
+   local blocker = UserInputDisabler:new()
+   local ind = wl.ui.MapView().dropdowns[name].no_of_items
+   wl.ui.MapView().dropdowns[name]:highlight_item(ind)
+   sleep(500)
+   while ind >= item do
+      wl.ui.MapView().dropdowns[name]:highlight_item(ind)
+      ind = ind - 1
+      sleep(300)
+   end
    blocker:lift_blocks()
 end
 

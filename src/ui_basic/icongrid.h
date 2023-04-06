@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -31,18 +30,19 @@ namespace UI {
  * bottom).
  */
 struct IconGrid : public Panel {
-	IconGrid(Panel* parent, int32_t x, int32_t y, int32_t cellw, int32_t cellh, int32_t cols);
+	IconGrid(
+	   Panel* parent, PanelStyle, int32_t x, int32_t y, int32_t cellw, int32_t cellh, int32_t cols);
 
-	boost::signals2::signal<void(int32_t)> icon_clicked;
-	boost::signals2::signal<void(int32_t)> mouseout;
-	boost::signals2::signal<void(int32_t)> mousein;
+	Notifications::Signal<int32_t> icon_clicked;
+	Notifications::Signal<int32_t> mouseout;
+	Notifications::Signal<int32_t> mousein;
 
 	int32_t
 	add(const std::string& name, const Image* pic, void* data, const std::string& tooltip_text = "");
 	void* get_data(int32_t idx);
 
 private:
-	void clicked_button(uint32_t);
+	void clicked_button(uint32_t) const;
 
 	struct Item {
 		void* data;

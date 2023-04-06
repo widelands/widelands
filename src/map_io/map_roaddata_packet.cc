@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -42,8 +41,7 @@ constexpr uint16_t kCurrentPacketVersion = 5;
 void MapRoaddataPacket::read(FileSystem& fs,
                              EditorGameBase& egbase,
                              bool const skip,
-                             MapObjectLoader& mol,
-                             const TribesLegacyLookupTable& tribes_lookup_table) {
+                             MapObjectLoader& mol) {
 	if (skip) {
 		return;
 	}
@@ -75,7 +73,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 
 					road.set_owner(egbase.get_player(player_index));
 					road.wallet_ = fr.unsigned_32();
-					road.last_wallet_charge_ = fr.unsigned_32();
+					road.last_wallet_charge_ = Time(fr);
 					road.busy_ = fr.unsigned_8() > 1;
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
@@ -99,11 +97,11 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					road.cost_[0] = fr.unsigned_32();
 					road.cost_[1] = fr.unsigned_32();
 					Path::StepVector::size_type const nr_steps = fr.unsigned_16();
-					if (!nr_steps) {
+					if (nr_steps == 0u) {
 						throw GameDataError("nr_steps = 0");
 					}
 					Path p(road.flags_[0]->get_position());
-					for (Path::StepVector::size_type i = nr_steps; i; --i) {
+					for (Path::StepVector::size_type i = nr_steps; i != 0u; --i) {
 						try {
 							p.append(map, read_direction_8(&fr));
 						} catch (const WException& e) {
@@ -118,11 +116,12 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					road.link_into_flags(game, true);
 
 					uint32_t const count = fr.unsigned_32();
-					if (!count) {
+					if (count == 0u) {
 						throw GameDataError("no carrier slot");
 					}
 
 					for (uint32_t i = 0; i < count; ++i) {
+						road.carrier_slots_.emplace_back();
 						Carrier* carrier = nullptr;
 						Request* carrier_request = nullptr;
 
@@ -136,29 +135,23 @@ void MapRoaddataPacket::read(FileSystem& fs,
 							carrier = nullptr;
 						}
 
-						if (fr.unsigned_8()) {
+						if (fr.unsigned_8() != 0u) {
 							(carrier_request =
 							    new Request(road, 0, Road::request_carrier_callback, wwWORKER))
-							   ->read(fr, game, mol, tribes_lookup_table);
+							   ->read(fr, game, mol);
 						} else {
 							carrier_request = nullptr;
 						}
-						bool const carrier_type = fr.unsigned_32() == 2;
 
-						if (i < road.carrier_slots_.size() &&
-						    road.carrier_slots_[i].second_carrier == carrier_type) {
-							assert(!road.carrier_slots_[i].carrier.get(egbase));
+						const uint32_t carrier_type_id = fr.unsigned_32();
+						assert(carrier_type_id > 0);
+						road.carrier_slots_[i].carrier_type_id = carrier_type_id - 1;
 
-							road.carrier_slots_[i].carrier = carrier;
-							if (carrier || carrier_request) {
-								delete road.carrier_slots_[i].carrier_request;
-								road.carrier_slots_[i].carrier_request = carrier_request;
-							}
-						} else {
-							delete carrier_request;
-							if (carrier) {
-								carrier->reset_tasks(dynamic_cast<Game&>(egbase));
-							}
+						assert(!road.carrier_slots_[i].carrier.get(egbase));
+						road.carrier_slots_[i].carrier = carrier;
+						if ((carrier != nullptr) || (carrier_request != nullptr)) {
+							delete road.carrier_slots_[i].carrier_request;
+							road.carrier_slots_[i].carrier_request = carrier_request;
 						}
 					}
 
@@ -194,7 +187,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				fw.unsigned_8(r->owner().player_number());
 
 				fw.unsigned_32(r->wallet_);
-				fw.unsigned_32(r->last_wallet_charge_);
+				r->last_wallet_charge_.save(fw);
 
 				fw.unsigned_8(r->busy_ ? 2 : 1);
 
@@ -227,13 +220,13 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 						fw.unsigned_32(0);
 					}
 
-					if (temp_slot.carrier_request) {
+					if (temp_slot.carrier_request != nullptr) {
 						fw.unsigned_8(1);
 						temp_slot.carrier_request->write(fw, dynamic_cast<Game&>(egbase), mos);
 					} else {
 						fw.unsigned_8(0);
 					}
-					fw.unsigned_32(temp_slot.second_carrier ? 2 : 1);
+					fw.unsigned_32(1u + temp_slot.carrier_type_id);
 				}
 				mos.mark_object_as_saved(*r);
 			}

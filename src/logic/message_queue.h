@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,6 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/mutex.h"
 #include "logic/message.h"
 #include "logic/message_id.h"
 
@@ -35,37 +35,40 @@ struct MessageQueue {
 	friend class MapPlayersMessagesPacket;
 
 	MessageQueue() {
+		MutexLock m(MutexLock::ID::kMessages);
 		counts_[static_cast<int>(Message::Status::kNew)] = 0;
 		counts_[static_cast<int>(Message::Status::kRead)] = 0;
 		counts_[static_cast<int>(Message::Status::kArchived)] = 0;
 	}
 
-	~MessageQueue() {
-	}
+	~MessageQueue() = default;
 
 	//  Make some selected inherited members public.
 	//  TODO(sirver): This is weird design. Instead pass out a const ref& to
 	//  'messages_'?
-	MessageMap::const_iterator begin() const {
+	[[nodiscard]] MessageMap::const_iterator begin() const {
 		return messages_.begin();
 	}
-	MessageMap::const_iterator end() const {
+	[[nodiscard]] MessageMap::const_iterator end() const {
 		return messages_.end();
 	}
-	size_t count(uint32_t const i) const {
+	[[nodiscard]] size_t count(uint32_t const i) const {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		return messages_.count(MessageId(i));
 	}
 
 	/// \returns a pointer to the message if it exists, otherwise nullptr.
 	Message const* operator[](const MessageId& id) const {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		const auto it = messages_.find(MessageId(id));
 		return it != end() ? it->second.get() : nullptr;
 	}
 
 	/// \returns the number of messages with the given status.
-	uint32_t nr_messages(Message::Status const status) const {
+	[[nodiscard]] uint32_t nr_messages(Message::Status const status) const {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		assert(static_cast<int>(status) < 3);
 		return counts_[static_cast<int>(status)];
@@ -75,6 +78,7 @@ struct MessageQueue {
 	///
 	/// The loading code calls this function to add messages form the map file.
 	MessageId add_message(std::unique_ptr<Message> message) {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		assert(static_cast<int>(message->status()) < 3);
 		++counts_[static_cast<int>(message->status())];
@@ -85,6 +89,7 @@ struct MessageQueue {
 
 	/// Sets the status of the message with the given id, if it exists.
 	void set_message_status(const MessageId& id, Message::Status const status) {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		assert(static_cast<int>(status) < 3);
 		const auto it = messages_.find(id);
@@ -101,6 +106,7 @@ struct MessageQueue {
 	/// Delete the message with the given id so that it no longer exists.
 	/// Assumes that a message with the given id exists.
 	void delete_message(const MessageId& id) {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		const auto it = messages_.find(id);
 		if (it == messages_.end()) {
@@ -109,7 +115,7 @@ struct MessageQueue {
 			// So we assume here that the message was removed from an earlier delete cmd.
 			return;
 		}
-		Message& message = *it->second;
+		const Message& message = *it->second;
 		assert(static_cast<int>(message.status()) < 3);
 		assert(counts_[static_cast<int>(message.status())]);
 		--counts_[static_cast<int>(message.status())];
@@ -117,14 +123,15 @@ struct MessageQueue {
 		assert_counts();
 	}
 
-	MessageId current_message_id() const {
+	[[nodiscard]] MessageId current_message_id() const {
 		return current_message_id_;
 	}
 
 	/// \returns whether all messages with id 1, 2, 3, ..., current_message_id
 	/// exist. This should be the case when messages have been loaded from a map
 	/// file/savegame but the simulation has not started to run yet.
-	bool is_continuous() const {
+	[[nodiscard]] bool is_continuous() const {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		return current_message_id().value() == messages_.size();
 	}
@@ -135,6 +142,7 @@ private:
 	/// around by clearing the queue before the saved messages are loaded into
 	/// it.
 	void clear() {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		current_message_id_ = MessageId::null();
 		counts_[static_cast<int>(Message::Status::kNew)] = 0;
@@ -155,6 +163,7 @@ private:
 	uint32_t counts_[3];
 
 	void assert_counts() const {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert(messages_.size() == counts_[static_cast<int>(Message::Status::kNew)] +
 		                              counts_[static_cast<int>(Message::Status::kRead)] +
 		                              counts_[static_cast<int>(Message::Status::kArchived)]);

@@ -15,8 +15,7 @@ scripts:
   be included in automatically generated maps if you want.
 
 Critters, immovables, resources and terrains are defined in their respective
-``init.lua`` script files - each world element has its own except for the
-terrains, which have a common ``init.lua`` file.
+``init.lua`` and ``register.lua`` script files.
 
 .. toctree::
    :maxdepth: 3

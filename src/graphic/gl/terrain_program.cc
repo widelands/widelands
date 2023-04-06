@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,12 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/gl/terrain_program.h"
+
+#include <atomic>
 
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
@@ -105,30 +106,30 @@ void TerrainProgram::draw(
 			continue;
 		}
 
-		// Down triangle.
-		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
-			const Widelands::DescriptionIndex terrain =
-			   player && !player->see_all() ?
-			      player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.d :
-			      field.fcoords.field->terrain_d();
-			const Vector2f texture_offset =
-			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
-			add_vertex(fields_to_draw.at(current_index), texture_offset);
-			add_vertex(fields_to_draw.at(field.bln_index), texture_offset);
-			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
-		}
-
 		// Right triangle.
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::DescriptionIndex terrain =
-			   player && !player->see_all() ?
-			      player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.r :
-			      field.fcoords.field->terrain_r();
+			   (player != nullptr) && !player->see_all() ?
+               player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.load().r :
+               field.fcoords.field->terrain_r();
 			const Vector2f texture_offset =
 			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
 			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
 			add_vertex(fields_to_draw.at(field.rn_index), texture_offset);
+		}
+
+		// Down triangle.
+		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+			const Widelands::DescriptionIndex terrain =
+			   (player != nullptr) && !player->see_all() ?
+               player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.load().d :
+               field.fcoords.field->terrain_d();
+			const Vector2f texture_offset =
+			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
+			add_vertex(fields_to_draw.at(current_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.bln_index), texture_offset);
+			add_vertex(fields_to_draw.at(field.brn_index), texture_offset);
 		}
 	}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,12 +28,12 @@ namespace Widelands {
 /*************************************************************************/
 /*                         Router Implementation                         */
 /*************************************************************************/
-Router::Router(const ResetCycleFn& reset) : reset_(reset), mpf_cycle(0) {
+Router::Router(const ResetCycleFn& reset) : reset_(reset) {
 }
 
 uint32_t Router::assign_cycle() {
 	++mpf_cycle;
-	if (!mpf_cycle) {  // reset all cycle fields
+	if (mpf_cycle == 0u) {  // reset all cycle fields
 		reset_();
 		++mpf_cycle;
 	}
@@ -75,13 +74,13 @@ bool Router::find_route(RoutingNode& start,
 
 	while (RoutingNode* current = astar.step()) {
 		if (cost_cutoff >= 0 && (type == wwWARE ? current->mpf_realcost_ware :
-		                                          current->mpf_realcost_worker) > cost_cutoff) {
+                                                current->mpf_realcost_worker) > cost_cutoff) {
 			return false;
 		}
 
 		if (current == &end) {
 			// found our goal
-			if (route) {
+			if (route != nullptr) {
 				astar.routeto(end, *route);
 			}
 			return true;

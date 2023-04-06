@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,13 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
 #define WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
+
+#include <memory>
 
 #include "base/i18n.h"
 #include "ui_basic/box.h"
@@ -33,10 +34,15 @@ class InteractiveGameBase;
 /// Displays a warning if the filename to be saved to already esists
 struct SaveWarnMessageBox;
 
-/// A window that lets the user save the current game and delete savegames.
+/**
+ * A window that lets the user save the current game and delete savegames.
+ * Note that this window is always modal.
+ */
 struct GameMainMenuSaveGame : public UI::UniqueWindow {
+	enum class Type { kSave, kLoadSavegame, kLoadReplay };
+
 	friend struct SaveWarnMessageBox;
-	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry);
+	GameMainMenuSaveGame(InteractiveGameBase&, UI::UniqueWindow::Registry& registry, Type);
 
 	void fill_list();
 	void select_by_name(const std::string& name);
@@ -66,7 +72,9 @@ private:
 	void pause_game(bool paused);
 
 	// UI coordinates and spacers
-	int32_t const padding_;  // Common padding between panels
+	int32_t const padding_{4};  // Common padding between panels
+
+	const Type type_;
 
 	UI::Box main_box_;
 	UI::Box info_box_;

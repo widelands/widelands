@@ -17,7 +17,7 @@ run(function()
    -- plant a tree inside the street to the right of the lumberjack hut
 
    assert_equal(nil, map:get_field(23,3).immovable)
-   map:place_immovable("oak_summer_old", map:get_field(23,3), "world")
+   map:place_immovable("oak_summer_old", map:get_field(23,3))
    assert_not_equal(nil, map:get_field(23,3).immovable)
 
    -- set logs and woodcutters to "remove from here" in the port

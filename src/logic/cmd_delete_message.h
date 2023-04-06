@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2020 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -35,12 +34,12 @@ namespace Widelands {
 /// and if not, warn and recreate it. Such redundancy would also waste space in
 /// the savegame.
 struct CmdDeleteMessage : public Command {
-	CmdDeleteMessage(uint32_t const t, PlayerNumber const p, const MessageId& m)
+	CmdDeleteMessage(const Time& t, PlayerNumber const p, const MessageId& m)
 	   : Command(t), player(p), message(m) {
 	}
 
 	void execute(Game& game) override;
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kDeleteMessage;
 	}
 

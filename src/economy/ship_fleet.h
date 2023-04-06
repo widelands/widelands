@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2020 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -38,16 +37,15 @@ struct RoutingNodeNeighbour;
 class ShipFleetDescr : public MapObjectDescr {
 public:
 	ShipFleetDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::SHIP_FLEET, init_name, init_descname, "") {
+	   : MapObjectDescr(MapObjectType::SHIP_FLEET, init_name, init_descname) {
 	}
-	~ShipFleetDescr() override {
-	}
+	~ShipFleetDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(ShipFleetDescr);
 };
 
-constexpr int32_t kFleetInterval = 4000;
+constexpr Duration kFleetInterval(4000);
 constexpr uint32_t kRouteNotCalculated = std::numeric_limits<uint32_t>::max();
 
 /**
@@ -70,11 +68,10 @@ constexpr uint32_t kRouteNotCalculated = std::numeric_limits<uint32_t>::max();
  */
 struct ShipFleet : MapObject {
 	struct PortPath {
-		int32_t cost;
+		int32_t cost{-1};
 		std::shared_ptr<Path> path;
 
-		PortPath() : cost(-1) {
-		}
+		PortPath() = default;
 	};
 
 	const ShipFleetDescr& descr() const;
@@ -82,7 +79,7 @@ struct ShipFleet : MapObject {
 	explicit ShipFleet(Player* player);
 
 	PortDock* get_dock(Flag& flag) const;
-	PortDock* get_dock(EditorGameBase&, Coords) const;
+	PortDock* get_dock(const EditorGameBase&, Coords) const;
 	PortDock* get_arbitrary_dock() const;
 	void set_economy(Economy* e, WareWorker);
 
@@ -113,7 +110,7 @@ struct ShipFleet : MapObject {
 		return schedule_;
 	}
 
-	std::vector<Ship*>& get_ships() {
+	const std::vector<Ship*>& get_ships() const {
 		return ships_;
 	}
 	std::vector<PortDock*>& get_ports() {
@@ -137,22 +134,16 @@ private:
 	std::vector<Ship*> ships_;
 	std::vector<PortDock*> ports_;
 
-	bool act_pending_;
+	bool act_pending_{false};
 
-	/**
-	 * Store all pairs shortest paths between port docks
-	 *
-	 * Let i < j, then the path from ports_[i] to ports_[j] is stored in
-	 * portpaths_[binom(j,2) + i]
-	 */
-	std::vector<PortPath> portpaths_;
+	std::map<std::pair<Serial, Serial>, PortPath> port_paths_;
 
 	ShippingSchedule schedule_;
 
 	// saving and loading
 protected:
 	struct Loader : MapObject::Loader {
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&);
 		void load_pointers() override;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2020 by the Widelands Development Team
+ * Copyright (C) 2015-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,20 +12,23 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "logic/single_player_game_settings_provider.h"
 
+#include <cstdlib>
+
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "base/random.h"
 #include "base/wexception.h"
+#include "graphic/playercolor.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
-	s.tribes = Widelands::get_all_tribeinfos();
+	s.tribes = Widelands::get_all_tribeinfos(nullptr);
 	s.scenario = false;
 	s.multiplayer = false;
 	s.playernum = 0;
@@ -47,20 +50,20 @@ bool SinglePlayerGameSettingsProvider::can_change_player_state(uint8_t number) {
 	return ((!s.scenario) && (number != s.playernum));
 }
 
-bool SinglePlayerGameSettingsProvider::can_change_player_tribe(uint8_t) {
+bool SinglePlayerGameSettingsProvider::can_change_player_tribe(uint8_t /*number*/) {
 	return !s.scenario;
 }
 
-bool SinglePlayerGameSettingsProvider::can_change_player_init(uint8_t) {
+bool SinglePlayerGameSettingsProvider::can_change_player_init(uint8_t /*number*/) {
 	return !s.scenario;
 }
 
-bool SinglePlayerGameSettingsProvider::can_change_player_team(uint8_t) {
+bool SinglePlayerGameSettingsProvider::can_change_player_team(uint8_t /*number*/) {
 	return !s.scenario;
 }
 
 bool SinglePlayerGameSettingsProvider::can_launch() {
-	return s.mapname.size() != 0 && s.players.size() >= 1;
+	return !s.mapname.empty() && !s.players.empty();
 }
 
 std::string SinglePlayerGameSettingsProvider::get_map() {
@@ -75,39 +78,59 @@ void SinglePlayerGameSettingsProvider::set_peaceful_mode(bool peace) {
 	s.peaceful = peace;
 }
 
+bool SinglePlayerGameSettingsProvider::is_fogless() {
+	return s.fogless;
+}
+
+void SinglePlayerGameSettingsProvider::set_fogless(bool fogless) {
+	s.fogless = fogless;
+}
+
+bool SinglePlayerGameSettingsProvider::get_custom_starting_positions() {
+	return s.custom_starting_positions;
+}
+
+void SinglePlayerGameSettingsProvider::set_custom_starting_positions(bool c) {
+	s.custom_starting_positions = c;
+}
+
 void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
                                                const std::string& mapfilename,
+                                               const std::string& map_theme,
+                                               const std::string& map_bg,
                                                uint32_t const maxplayers,
                                                bool const savegame) {
 	s.mapname = mapname;
 	s.mapfilename = mapfilename;
 	s.savegame = savegame;
-
-	uint32_t oldplayers = s.players.size();
+	s.map_background = map_bg;
+	s.map_theme = map_theme;
 	s.players.resize(maxplayers);
 
-	while (oldplayers < maxplayers) {
-		PlayerSettings& player = s.players[oldplayers];
+	set_player_number(0);
+	for (uint32_t player_nr = 0; player_nr < maxplayers; ++player_nr) {
+		PlayerSettings& player = s.players[player_nr];
 		player.state =
-		   (oldplayers == 0) ? PlayerSettings::State::kHuman : PlayerSettings::State::kComputer;
+		   (player_nr == 0) ? PlayerSettings::State::kHuman : PlayerSettings::State::kComputer;
 		player.tribe = s.tribes.at(0).name;
 		player.random_tribe = false;
 		player.initialization_index = 0;
-		player.name = (boost::format(_("Player %u")) % (oldplayers + 1)).str();
+		player.name = format(_("Player %u"), (player_nr + 1));
 		player.team = 0;
+		player.color = kPlayerColors[player_nr];
 		// Set default computerplayer ai type
 		if (player.state == PlayerSettings::State::kComputer) {
-			const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
+			const AI::ComputerPlayer::ImplementationVector& impls =
+			   AI::ComputerPlayer::get_implementations();
 			if (impls.size() > 1) {
 				player.ai = impls.at(0)->name;
 				player.random_ai = false;
 			}
 			// If AI player then set tribe to random
 			if (!s.scenario) {
-				set_player_tribe(oldplayers, "", true);
+				set_player_tribe(player_nr, "", true);
 			}
 		}
-		++oldplayers;
 	}
 }
 
@@ -138,9 +161,10 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 		return;
 	}
 
-	const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
+	const AI::ComputerPlayer::ImplementationVector& impls =
+	   AI::ComputerPlayer::get_implementations();
 	if (impls.size() > 1) {
-		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
+		AI::ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		do {
 			++it;
 			if ((*(it - 1))->name == s.players[number].ai) {
@@ -154,9 +178,9 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 			s.players[number].random_ai = true;
 			do {
 				// Choose a random AI
-				uint8_t random = (std::rand() % impls.size());  // NOLINT
+				uint8_t random = RNG::static_rand(impls.size());
 				it = impls.begin() + random;
-			} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
+			} while ((*it)->type == AI::ComputerPlayer::Implementation::Type::kEmpty);
 		}
 		s.players[number].ai = (*it)->name;
 	}
@@ -175,10 +199,14 @@ void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number,
 	PlayerSettings& player = s.players[number];
 	player.random_tribe = random_tribe;
 
-	if (random_tribe) {
+	while (random_tribe) {
 		uint8_t num_tribes = s.tribes.size();
-		uint8_t random = (std::rand() % num_tribes);  // NOLINT
+		uint8_t random = RNG::static_rand(num_tribes);
 		actual_tribe = s.tribes.at(random).name;
+		if (player.state != PlayerSettings::State::kComputer ||
+		    s.get_tribeinfo(actual_tribe).suited_for_ai) {
+			break;
+		}
 	}
 
 	for (const Widelands::TribeBasicInfo& tmp_tribe : s.tribes) {
@@ -213,11 +241,19 @@ void SinglePlayerGameSettingsProvider::set_player_team(uint8_t number, Widelands
 	}
 }
 
-void SinglePlayerGameSettingsProvider::set_player_closeable(uint8_t, bool) {
+void SinglePlayerGameSettingsProvider::set_player_color(const uint8_t number, const RGBColor& c) {
+	if (number < s.players.size()) {
+		s.players[number].color = c;
+	}
+}
+
+void SinglePlayerGameSettingsProvider::set_player_closeable(uint8_t /*number*/,
+                                                            bool /*closeable*/) {
 	// nothing to do
 }
 
-void SinglePlayerGameSettingsProvider::set_player_shared(PlayerSlot, Widelands::PlayerNumber) {
+void SinglePlayerGameSettingsProvider::set_player_shared(PlayerSlot /*number*/,
+                                                         Widelands::PlayerNumber /*shared*/) {
 	// nothing to do
 }
 
@@ -239,11 +275,30 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 		return;
 	}
 	PlayerSettings const position = settings().players.at(number);
-	PlayerSettings const player = settings().players.at(settings().playernum);
+	// Ensure that old player number isn't out of range when we switch to a map with less players
+	const uint8_t old_number =
+	   settings().playernum < static_cast<int>(settings().players.size()) ? settings().playernum : 0;
+	PlayerSettings const player = settings().players.at(old_number);
 	if (number < settings().players.size() && (position.state == PlayerSettings::State::kOpen ||
+	                                           position.state == PlayerSettings::State::kClosed ||
 	                                           position.state == PlayerSettings::State::kComputer)) {
+
+		// swap player but keep player name and, if unchanged from the default, colour
+		bool new_uses_default_colour = s.players[old_number].color == kPlayerColors[old_number];
+		bool old_uses_default_colour = s.players[number].color == kPlayerColors[number];
 		set_player(number, player);
+		set_player_name(number, position.name);
+
 		set_player(settings().playernum, position);
+		set_player_name(settings().playernum, player.name);
+
+		if (old_uses_default_colour) {
+			set_player_color(old_number, kPlayerColors[old_number]);
+		}
+		if (new_uses_default_colour) {
+			set_player_color(number, kPlayerColors[number]);
+		}
+
 		s.playernum = number;
 	}
 }
@@ -254,4 +309,12 @@ std::string SinglePlayerGameSettingsProvider::get_win_condition_script() {
 
 void SinglePlayerGameSettingsProvider::set_win_condition_script(const std::string& wc) {
 	s.win_condition_script = wc;
+}
+
+int32_t SinglePlayerGameSettingsProvider::get_win_condition_duration() {
+	return s.win_condition_duration;
+}
+
+void SinglePlayerGameSettingsProvider::set_win_condition_duration(const int32_t duration) {
+	s.win_condition_duration = duration;
 }

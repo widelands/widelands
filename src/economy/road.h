@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -32,8 +31,7 @@ public:
 	explicit RoadDescr(char const* const init_name, char const* const init_descname)
 	   : RoadBaseDescr(init_name, init_descname, MapObjectType::ROAD) {
 	}
-	~RoadDescr() override {
-	}
+	~RoadDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(RoadDescr);
@@ -58,25 +56,26 @@ struct Road : public RoadBase {
 
 	explicit Road();
 	~Road() override;
+	bool init(EditorGameBase&) override;
 
 	static Road& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
 
 	// A CarrierSlot can store a carrier.
 	struct CarrierSlot {
-		CarrierSlot();
+		CarrierSlot() = default;
 
 		OPtr<Carrier> carrier;
-		Request* carrier_request;
-		bool second_carrier;
+		Request* carrier_request{nullptr};
+		uint8_t carrier_type_id{std::numeric_limits<uint8_t>::max()};
 	};
 
 	void postsplit(Game&, Flag&) override;
 
-	void update_wallet_chargetime(Game& game);
+	void update_wallet_chargetime(const Game& game);
 	void charge_wallet(Game& game);
 	int32_t wallet() const;
 	void add_to_wallet(int32_t sum);
-	void pay_for_road(Game& game, uint8_t wares_count);
+	void pay_for_road(Game& game, uint8_t queue_length);
 	void pay_for_building();
 
 	void set_economy(Economy*, WareWorker) override;
@@ -104,13 +103,13 @@ private:
 
 	void link_into_flags(EditorGameBase&, bool = false) override;
 
-	bool busy_;
+	bool busy_{false};
 	/// Counter that is incremented when a ware does not get a carrier for this
 	/// road immediately and decremented over time.
-	int32_t wallet_;
+	int32_t wallet_{0};
 
 	/// holds the gametime when wallet_ was last charged
-	uint32_t last_wallet_charge_;
+	Time last_wallet_charge_{0U};
 
 	void request_carrier(CarrierSlot&);
 	static void

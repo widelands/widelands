@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,7 +20,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "scripting/eris.h"
@@ -204,6 +202,8 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "ticks",
                                            "push_textdomain",
                                            "pop_textdomain",
+                                           "npgettext",
+                                           "styles",
                                            nullptr};
 
 /**
@@ -231,13 +231,13 @@ uint32_t persist_object(lua_State* L, FileWrite& fw, Widelands::MapObjectSaver& 
 	add_iterator_function_to_not_persist(L, "ipairs", i++);
 
 	// And finally the globals.
-	for (int j = 0; kPersistentGlobals[j]; ++j) {
+	for (int j = 0; kPersistentGlobals[j] != nullptr; ++j) {
 		add_object_to_not_persist(L, kPersistentGlobals[j], i++);
 	}
 
 	// The next few lines make eris error messages much more useful, but make
 	// eris much slower too. Only enable if you need more debug information.
-	lua_pushboolean(L, true);
+	lua_pushboolean(L, 1);
 	eris_set_setting(L, "path", lua_gettop(L));
 	lua_pop(L, 1);
 
@@ -273,7 +273,7 @@ void unpersist_object(lua_State* L, FileRead& fr, Widelands::MapObjectLoader& mo
 	add_iterator_function_to_not_unpersist(L, "pairs", i++);
 	add_iterator_function_to_not_unpersist(L, "ipairs", i++);
 
-	for (int j = 0; kPersistentGlobals[j]; ++j) {
+	for (int j = 0; kPersistentGlobals[j] != nullptr; ++j) {
 		add_object_to_not_unpersist(L, kPersistentGlobals[j], i++);
 	}
 

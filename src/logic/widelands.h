@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,6 +27,8 @@ namespace Widelands {
 
 //  Type definitions for the game logic.
 using MilitaryInfluence = uint16_t;
+
+constexpr int32_t kDefaultWinConditionDuration = 4 * 60;
 
 /// 5 bits used, so 0 .. 31
 /// Data type must match kMaxPlayers in graphics/playercolor.h
@@ -66,18 +67,6 @@ using ResourceAmount = uint8_t;  /// 4 bits used, so 0 .. 15.
 
 using Quantity = uint32_t;  // e.g. the number of a type of ware in a warehouse.
 
-using Vision = uint16_t;
-
-using Time = int32_t;  // TODO(unknown): should be unsigned
-inline Time never() {
-	return 0xffffffff;
-}
-
-using Duration = uint32_t;
-inline Duration endless() {
-	return 0xffffffff;
-}
-
 using Serial = uint32_t;  /// Serial number for MapObject.
 constexpr Serial kInvalidSerial = std::numeric_limits<uint32_t>::max();
 
@@ -102,6 +91,21 @@ struct SoldierStrength {
 using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
 // Recommended teams to play against each other
 using SuggestedTeamLineup = std::vector<SuggestedTeam>;
+
+/** Describes diplomatic relation actions between players. */
+enum class DiplomacyAction : uint8_t {
+	/* Do not change the order, indices are stored in savegames. */
+	kJoin = 0,      ///< Request to join another player's team.
+	kAcceptJoin,    ///< Accept another player's request to join your team.
+	kRefuseJoin,    ///< Refuse another player's request to join your team.
+	kInvite,        ///< Invite another player to join your team.
+	kAcceptInvite,  ///< Accept another player's invitation.
+	kRefuseInvite,  ///< Decline another player's invitation.
+	kLeaveTeam,     ///< Leave the current team and become teamless.
+	kResign,        ///< Resign and become a spectator.
+	kRetractJoin,   ///< Retract a previous joining request.
+	kRetractInvite  ///< Retract a previous invitation.
+};
 
 }  // namespace Widelands
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2020 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,6 +23,13 @@
 
 namespace UI {
 enum class FontStyle {
+
+	/************************************************************************************
+	 *
+	 * Don't forget to update doc/sphinx/source/themes.rst when you add or remove styles!
+	 *
+	 ************************************************************************************/
+
 	kChatMessage,
 	kChatPlayername,
 	kChatServer,
@@ -37,21 +43,30 @@ enum class FontStyle {
 	kFsMenuInfoPanelHeading,
 	kFsMenuInfoPanelParagraph,
 	kFsMenuIntro,
-	kFsMenuTitle,
 	kFsMenuTranslationInfo,
+	kItalic,
 	kDisabled,
-	kLabel,
-	kTooltipHeader,
-	kTooltipHotkey,
-	kTooltip,
+	kFsMenuLabel,
+	kWuiLabel,
+	kFsTooltipHeader,
+	kFsTooltipHotkey,
+	kFsTooltip,
+	kWuiTooltipHeader,
+	kWuiTooltipHotkey,
+	kWuiTooltip,
 	kWarning,
+	kGameSummaryTitle,
 	kWuiAttackBoxSliderLabel,
 	kWuiGameSpeedAndCoordinates,
 	kWuiInfoPanelHeading,
 	kWuiInfoPanelParagraph,
 	kWuiMessageHeading,
 	kWuiMessageParagraph,
-	kWuiWindowTitle
+	kFsMenuWindowTitle,
+	kWuiWindowTitle,
+
+	// Returned when lookup by name fails
+	kUnknown
 };
 
 struct FontStyleInfo {
@@ -64,27 +79,31 @@ struct FontStyleInfo {
 	                       bool init_italic,
 	                       bool init_underline,
 	                       bool init_shadow);
-	explicit FontStyleInfo(const FontStyleInfo& other);
+	FontStyleInfo(const FontStyleInfo& other);
 
-	std::string as_font_tag(const std::string& text) const;
+	/** Add enclosing richtext font tags to the given text to format it according to this style */
+	[[nodiscard]] std::string as_font_tag(const std::string& text) const;
 
-	Face face() const;
+	/** Return opening richtext font tag for this style */
+	[[nodiscard]] std::string as_font_open() const;
+
+	[[nodiscard]] Face face() const;
 	void make_condensed();
 
-	const RGBColor& color() const;
+	[[nodiscard]] const RGBColor& color() const;
 	void set_color(const RGBColor& new_color);
 
-	int size() const;
+	[[nodiscard]] int size() const;
 	void set_size(int new_size);
 
-	bool bold() const;
-	bool italic() const;
-	bool underline() const;
-	bool shadow() const;
+	[[nodiscard]] bool bold() const;
+	[[nodiscard]] bool italic() const;
+	[[nodiscard]] bool underline() const;
+	[[nodiscard]] bool shadow() const;
 
 private:
-	static Face string_to_face(const std::string& face_);
-	const std::string face_to_string() const;
+	static Face string_to_face(const std::string& init_face);
+	[[nodiscard]] const std::string face_to_string() const;
 
 	Face face_;
 	RGBColor color_;

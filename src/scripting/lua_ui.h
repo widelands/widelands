@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -42,21 +41,20 @@ public:
 
 class LuaPanel : public LuaUiModuleClass {
 protected:
-	UI::Panel* panel_;
+	UI::Panel* panel_{nullptr};
 
 public:
 	LUNA_CLASS_HEAD(LuaPanel);
 
-	LuaPanel() : panel_(nullptr) {
-	}
+	LuaPanel() = default;
 	explicit LuaPanel(UI::Panel* p) : panel_(p) {
 	}
 	explicit LuaPanel(lua_State* L) : panel_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
-	~LuaPanel() override {
-	}
+	~LuaPanel() override = default;
 
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override {
 		report_error(L, "Trying to persist a User Interface Panel which is not supported!");
 	}
@@ -64,6 +62,7 @@ public:
 		report_error(L, "Trying to unpersist a User Interface Panel which is "
 		                "not supported!");
 	}
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * Properties
@@ -85,6 +84,9 @@ public:
 	 * Lua Methods
 	 */
 	int get_descendant_position(lua_State* L);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+	int indicate(lua_State* L);
+#endif
 
 	/*
 	 * C Methods
@@ -95,14 +97,12 @@ class LuaButton : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaButton);
 
-	LuaButton() : LuaPanel() {
-	}
+	LuaButton() = default;
 	explicit LuaButton(UI::Panel* p) : LuaPanel(p) {
 	}
 	explicit LuaButton(lua_State* L) : LuaPanel(L) {
 	}
-	~LuaButton() override {
-	}
+	~LuaButton() override = default;
 
 	/*
 	 * Properties
@@ -119,7 +119,7 @@ public:
 	 * C Methods
 	 */
 	UI::Button* get() {
-		return static_cast<UI::Button*>(panel_);
+		return dynamic_cast<UI::Button*>(panel_);
 	}
 };
 
@@ -127,19 +127,18 @@ class LuaDropdown : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaDropdown);
 
-	LuaDropdown() : LuaPanel() {
-	}
+	LuaDropdown() = default;
 	explicit LuaDropdown(UI::Panel* p) : LuaPanel(p) {
 	}
 	explicit LuaDropdown(lua_State* L) : LuaPanel(L) {
 	}
-	~LuaDropdown() override {
-	}
+	~LuaDropdown() override = default;
 
 	/*
 	 * Properties
 	 */
 	int get_name(lua_State* L);
+	int get_expanded(lua_State* L);
 	int get_no_of_items(lua_State* L);
 
 	/*
@@ -147,13 +146,14 @@ public:
 	 */
 	int open(lua_State* L);
 	int highlight_item(lua_State* L);
+	int indicate_item(lua_State* L);
 	int select(lua_State* L);
 
 	/*
 	 * C Methods
 	 */
 	UI::BaseDropdown* get() {
-		return static_cast<UI::BaseDropdown*>(panel_);
+		return dynamic_cast<UI::BaseDropdown*>(panel_);
 	}
 };
 
@@ -161,14 +161,12 @@ class LuaTab : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaTab);
 
-	LuaTab() : LuaPanel() {
-	}
+	LuaTab() = default;
 	explicit LuaTab(UI::Panel* p) : LuaPanel(p) {
 	}
 	explicit LuaTab(lua_State* L) : LuaPanel(L) {
 	}
-	virtual ~LuaTab() {
-	}
+	~LuaTab() override = default;
 
 	/*
 	 * Properties
@@ -185,7 +183,7 @@ public:
 	 * C Methods
 	 */
 	UI::Tab* get() {
-		return static_cast<UI::Tab*>(panel_);
+		return dynamic_cast<UI::Tab*>(panel_);
 	}
 };
 
@@ -193,14 +191,12 @@ class LuaWindow : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaWindow);
 
-	LuaWindow() : LuaPanel() {
-	}
+	LuaWindow() = default;
 	explicit LuaWindow(UI::Panel* p) : LuaPanel(p) {
 	}
 	explicit LuaWindow(lua_State* L) : LuaPanel(L) {
 	}
-	virtual ~LuaWindow() {
-	}
+	~LuaWindow() override = default;
 
 	/*
 	 * Properties
@@ -216,7 +212,7 @@ public:
 	 * C Methods
 	 */
 	UI::Window* get() {
-		return static_cast<UI::Window*>(panel_);
+		return dynamic_cast<UI::Window*>(panel_);
 	}
 };
 
@@ -224,17 +220,17 @@ class LuaMapView : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaMapView);
 
-	LuaMapView() : LuaPanel() {
-	}
+	LuaMapView() = default;
 	explicit LuaMapView(MapView* p) : LuaPanel(p) {
 	}
 	explicit LuaMapView(lua_State* L);
-	~LuaMapView() override {
-	}
+	~LuaMapView() override = default;
 
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State*) override {
 	}
 	void __unpersist(lua_State* L) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * Properties
@@ -248,6 +244,7 @@ public:
 	int get_statistics(lua_State* L);
 	int set_statistics(lua_State* L);
 	int get_is_building_road(lua_State* L);
+	int get_auto_roadbuilding_mode(lua_State* L);
 	int get_is_animating(lua_State*);
 
 	/*
@@ -267,7 +264,7 @@ public:
 	 * C Methods
 	 */
 	InteractiveBase* get() {
-		return static_cast<InteractiveBase*>(panel_);
+		return dynamic_cast<InteractiveBase*>(panel_);
 	}
 };
 

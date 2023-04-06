@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "logic/map_objects/world/critter.h"
 
 #include <cmath>
+#include <cstddef>
 #include <memory>
 
 #include "base/wexception.h"
@@ -28,10 +28,8 @@
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/map_object_program.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/world/world.h"
-#include "map_io/world_legacy_lookup_table.h"
+#include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/world/critter_program.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -79,7 +77,7 @@ Remove this critter
 
 ==============================
 */
-bool Critter::run_remove(Game& game, State& state, const CritterAction&) {
+bool Critter::run_remove(Game& game, State& state, const CritterAction& /* action */) {
 	++state.ivar1;
 	// Bye, bye cruel world
 	schedule_destroy(game);
@@ -96,16 +94,15 @@ bool Critter::run_remove(Game& game, State& state, const CritterAction&) {
 
 CritterDescr::CritterDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           const World& world)
+                           const std::vector<std::string>& attribs)
    : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
-     editor_category_(nullptr),
      size_(table.get_int("size")),
      carnivore_(table.has_key("carnivore") && table.get_bool("carnivore")),
-     appetite_(0),
+
      reproduction_rate_(table.get_int("reproduction_rate")) {
 	assign_directional_animation(&walk_anims_, "walk");
 
-	add_attributes(table.get_table("attributes")->array_entries<std::string>());
+	add_attributes(attribs);
 
 	if (size_ < 1 || size_ > 10) {
 		throw GameDataError(
@@ -147,20 +144,10 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 			throw wexception("Parse error in program %s: %s", program_name.c_str(), e.what());
 		}
 	}
-	const DescriptionIndex editor_category_index =
-	   world.editor_critter_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index == Widelands::INVALID_INDEX) {
-		throw GameDataError(
-		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
-	}
-	editor_category_ = world.editor_critter_categories().get_mutable(editor_category_index);
-}
-
-CritterDescr::~CritterDescr() {
 }
 
 bool CritterDescr::is_swimming() const {
-	const static uint32_t swimming_attribute = get_attribute_id("swimming");
+	const static uint32_t swimming_attribute = get_attribute_id("swimming", true);
 	return has_attribute(swimming_attribute);
 }
 
@@ -181,10 +168,6 @@ uint32_t CritterDescr::movecaps() const {
 	return is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;
 }
 
-const EditorCategory* CritterDescr::editor_category() const {
-	return editor_category_;
-}
-
 /*
 ==============================================================================
 
@@ -201,7 +184,7 @@ Critter::Critter(const CritterDescr& critter_descr) : Bob(critter_descr), creati
 }
 
 bool Critter::init(EditorGameBase& egbase) {
-	if (is_a(Game, &egbase)) {
+	if (egbase.is_game()) {
 		// in editor, assume t0 as creation time so bobs don't die of old age right away when the
 		// actual game starts
 		creation_time_ = egbase.get_gametime();
@@ -234,8 +217,8 @@ void Critter::start_task_program(Game& game, const std::string& programname) {
 }
 
 void Critter::program_update(Game& game, State& state) {
-	if (get_signal().size()) {
-		molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
+	if (!get_signal().empty()) {
+		molog(game.get_gametime(), "[program]: Interrupted by signal '%s'\n", get_signal().c_str());
 		return pop_task(game);
 	}
 
@@ -276,15 +259,15 @@ constexpr uint32_t kMinCritterLifetime = 20 * 60 * 1000;
 constexpr uint32_t kMaxCritterLifetime = 10 * 60 * 60 * 1000;
 
 void Critter::roam_update(Game& game, State& state) {
-	if (get_signal().size()) {
+	if (!get_signal().empty()) {
 		return pop_task(game);
 	}
 
 	// alternately move and idle
-	Time idle_time_min = 1000;
-	Time idle_time_rnd = kCritterMaxIdleTime;
+	uint32_t idle_time_min = 1000;
+	uint32_t idle_time_rnd = kCritterMaxIdleTime;
 
-	if (state.ivar1) {
+	if (state.ivar1 != 0) {
 		state.ivar1 = 0;
 		// lots of magic numbers for reasonable weighting of various nearby animals
 		uint32_t roaming_dist = 24;
@@ -315,7 +298,7 @@ void Critter::roam_update(Game& game, State& state) {
 	}
 	state.ivar1 = 1;
 
-	const uint32_t age = game.get_gametime() - creation_time_;
+	const uint32_t age = (game.get_gametime() - creation_time_).get();
 	const uint32_t reproduction_rate = descr().get_reproduction_rate();
 
 	{  // chance to die
@@ -337,14 +320,14 @@ void Critter::roam_update(Game& game, State& state) {
 		if (game.logic_rand() % kMinCritterLifetime <
 		    d * kMinCritterLifetime * nearby_critters1 * nearby_critters1 * nearby_critters2) {
 			// :(
-			molog("Goodbye world :(\n");
+			molog(game.get_gametime(), "Goodbye world :(\n");
 			return schedule_destroy(game);
 		}
 	}
 
 	std::vector<Critter*> candidates_for_eating;
 	bool can_eat_immovable = false;
-	if (descr().is_herbivore() && get_position().field->get_immovable()) {
+	if (descr().is_herbivore() && (get_position().field->get_immovable() != nullptr)) {
 		for (uint32_t a : descr().food_plants()) {
 			if (get_position().field->get_immovable()->descr().has_attribute(a)) {
 				can_eat_immovable = true;
@@ -358,7 +341,7 @@ void Critter::roam_update(Game& game, State& state) {
 	bool foundme = false;
 	std::vector<Critter*> all_critters_on_field;
 	all_critters_on_field.push_back(this);  // not caught by the following loop
-	for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob()) {
+	for (Bob* b = get_position().field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
 		assert(b);
 		if (b == this) {
 			assert(!foundme);
@@ -399,11 +382,11 @@ void Critter::roam_update(Game& game, State& state) {
 				assert(can_eat_immovable);
 				upcast(Immovable, imm, get_position().field->get_immovable());
 				assert(imm);
-				molog("Yummy, I love a %s...\n", imm->descr().name().c_str());
-				imm->delay_growth(descr().get_size() * 2000);
+				molog(game.get_gametime(), "Yummy, I love a %s...\n", imm->descr().name().c_str());
+				imm->delay_growth(Duration(descr().get_size() * 2000));
 			} else {
 				Critter* food = candidates_for_eating[idx];
-				molog("Yummy, I love a %s...\n", food->descr().name().c_str());
+				molog(game.get_gametime(), "Yummy, I love a %s...\n", food->descr().name().c_str());
 				// find hunting partners
 				int32_t attacker_strength = 0;
 				int32_t defender_strength = 0;
@@ -430,19 +413,20 @@ void Critter::roam_update(Game& game, State& state) {
 				                                                          // and only if S >= N
 				const double weighted_success_chance =
 				   S <= -N ? 0.0 :
-				             S >= N ? 1.0 :
-				                      -(std::log(S * S + 1) - 2 * S * std::atan(S) - kPi * S -
-				                        std::log(N * N + 1) + N * (2 * std::atan(N) - kPi)) /
-				                         (2 * N * kPi);
-				molog("    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S,
+				   S >= N  ? 1.0 :
+                         -(std::log(S * S + 1) - 2 * S * std::atan(S) - kPi * S -
+                          std::log(N * N + 1) + N * (2 * std::atan(N) - kPi)) /
+				               (2 * N * kPi);
+				molog(game.get_gametime(),
+				      "    *** [total strength %d] vs [prey %d] *** success chance %lf\n", S,
 				      defender_strength, weighted_success_chance);
 				assert(weighted_success_chance >= 0.0);
 				assert(weighted_success_chance <= 1.0);
 				if (game.logic_rand() % (N != 0 ? N : 1) < weighted_success_chance * N) {
-					molog("    SUCCESS :)\n");
+					molog(game.get_gametime(), "    SUCCESS :)\n");
 					food->remove(game);
 				} else {
-					molog("    failed :(\n");
+					molog(game.get_gametime(), "    failed :(\n");
 					skipped = true;
 				}
 			}
@@ -478,8 +462,8 @@ void Critter::roam_update(Game& game, State& state) {
 		assert(weighted_population >= population_size_2);
 		if ((game.logic_rand() % (reproduction_rate * reproduction_rate)) *
 		       std::exp2(weighted_population - mating_partners - 1) <
-		    reproduction_rate * reproduction_rate * weighted_population) {
-			molog("A cute little %s cub :)\n", descr().name().c_str());
+		    static_cast<uint64_t>(reproduction_rate) * reproduction_rate * weighted_population) {
+			molog(game.get_gametime(), "A cute little %s cub :)\n", descr().name().c_str());
 			game.create_critter(get_position(), descr().name());
 		}
 	}
@@ -508,10 +492,7 @@ Load / Save implementation
 
 // We need to bump this packet version every time we rename a critter, so that the world legacy
 // lookup table will work.
-constexpr uint8_t kCurrentPacketVersion = 3;
-
-Critter::Loader::Loader() {
-}
+constexpr uint8_t kCurrentPacketVersion = 4;
 
 const Bob::Task* Critter::Loader::get_task(const std::string& name) {
 	if (name == "roam") {
@@ -524,14 +505,11 @@ const Bob::Task* Critter::Loader::get_task(const std::string& name) {
 }
 
 const MapObjectProgram* Critter::Loader::get_program(const std::string& name) {
-	Critter& critter = get<Critter>();
+	const Critter& critter = get<Critter>();
 	return critter.descr().get_program(name);
 }
 
-MapObject::Loader* Critter::load(EditorGameBase& egbase,
-                                 MapObjectLoader& mol,
-                                 FileRead& fr,
-                                 const WorldLegacyLookupTable& lookup_table) {
+MapObject::Loader* Critter::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -540,25 +518,15 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 		uint8_t const packet_version = fr.unsigned_8();
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
-			const std::string critter_owner = fr.c_string();
-			std::string critter_name = fr.c_string();
-			const CritterDescr* descr = nullptr;
-
-			if (critter_owner == "world") {
-				critter_name = lookup_table.lookup_critter(critter_name, packet_version);
-				descr = egbase.world().get_critter_descr(critter_name);
-			} else {
-				throw GameDataError(
-				   "Tribes don't have critters %s/%s", critter_owner.c_str(), critter_name.c_str());
+			if (packet_version < 4) {
+				fr.c_string();  // Consume obsolete owner type (world/tribes)
 			}
 
-			if (!descr) {
-				throw GameDataError(
-				   "undefined critter %s/%s", critter_owner.c_str(), critter_name.c_str());
-			}
+			const CritterDescr* descr = egbase.descriptions().get_critter_descr(
+			   egbase.mutable_descriptions()->load_critter(fr.c_string()));
 
 			Critter& critter = dynamic_cast<Critter&>(descr->create_object());
-			critter.creation_time_ = packet_version >= 3 ? fr.unsigned_32() : 0;
+			critter.creation_time_ = packet_version >= 3 ? Time(fr) : Time(0);
 			loader->init(egbase, mol, critter);
 			loader->load(fr);
 		} else {
@@ -575,12 +543,8 @@ void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderCritter);
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	const std::string save_owner = descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
-	                                  "" :  // Tribes don't have critters
-	                                  "world";
-	fw.c_string(save_owner);
 	fw.c_string(descr().name());
-	fw.unsigned_32(creation_time_);
+	creation_time_.save(fw);
 
 	Bob::save(egbase, mos, fw);
 }

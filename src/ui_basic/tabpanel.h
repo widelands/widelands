@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,6 +21,7 @@
 
 #include <memory>
 
+#include "graphic/styles/font_style.h"
 #include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 
@@ -39,6 +39,7 @@ constexpr int kTabPanelButtonHeight = 34;
 struct TabPanel;
 struct Tab : public NamedPanel {
 	friend struct TabPanel;
+	friend class FileViewPanel;
 
 	/** If title is not empty, this will be a textual tab.
 	 *  In that case, pic will need to be the rendered title
@@ -46,16 +47,21 @@ struct Tab : public NamedPanel {
 	 * Text conventions: Title Case for the 'title', Sentence case for the 'gtooltip'
 	 */
 	Tab(TabPanel* parent,
+	    PanelStyle,
 	    size_t id,
 	    int32_t x,
+	    FontStyle,
 	    const std::string& name,
 	    const std::string& title,
 	    const Image* pic,
-	    const std::string& gtooltip,
-	    Panel* gpanel);
+	    const std::string& tooltip_text,
+	    Panel* contents);
 
 	bool active();
 	void activate();
+
+	void set_title(const std::string&);
+	void update_template() override;
 
 private:
 	// Leave handling the mouse move to the TabPanel.
@@ -69,6 +75,8 @@ private:
 	uint32_t id;
 
 	const Image* pic;
+	FontStyle font_style_;
+	std::string title_;
 	std::shared_ptr<const UI::RenderedText> rendered_title;
 	std::string tooltip;
 	Panel* panel;
@@ -112,20 +120,25 @@ struct TabPanel : public Panel {
 	const TabList& tabs() const;
 	void activate(uint32_t idx);
 	void activate(const std::string&);
-	uint32_t active() {
+	uint32_t active() const {
 		return active_;
 	}
 	// Removes the last tab if the 'tabname' matches. Returns whether a tab was removed.
 	// We use the tabname as a safety precaution to prevent acidentally removing the wrong tab.
 	bool remove_last_tab(const std::string& tabname);
 
-	boost::signals2::signal<void()> sigclicked;
+	Notifications::Signal<> sigclicked;
+
+	bool handle_key(bool, SDL_Keysym) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
 protected:
 	void layout() override;
 	void update_desired_size() override;
 
-	UI::TabPanelStyle style_;
+	UI::TabPanelStyle tab_style_;
+
+	std::vector<Recti> focus_overlay_rects() override;
 
 private:
 	// Common adding function for textual and pictorial tabs
@@ -133,7 +146,7 @@ private:
 	                 const std::string& title,
 	                 const Image* pic,
 	                 const std::string& tooltip,
-	                 Panel* contents);
+	                 Panel* panel);
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
@@ -146,10 +159,11 @@ private:
 	size_t find_tab(int32_t x, int32_t y) const;
 
 	TabList tabs_;
-	size_t active_;     ///< index of the currently active tab
-	size_t highlight_;  ///< index of the highlighted button
+	size_t active_{0U};  ///< index of the currently active tab
+	size_t highlight_;   ///< index of the highlighted button
 
-	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
+	const UI::TabPanelStyle background_style_;  // Background color and texture. Not owned.
+	const UI::PanelStyleInfo& background_style() const;
 };
 }  // namespace UI
 

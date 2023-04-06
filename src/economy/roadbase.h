@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -32,10 +31,9 @@ struct Carrier;
 class RoadBaseDescr : public MapObjectDescr {
 public:
 	RoadBaseDescr(char const* const init_name, char const* const init_descname, MapObjectType mot)
-	   : MapObjectDescr(mot, init_name, init_descname, "") {
+	   : MapObjectDescr(mot, init_name, init_descname) {
 	}
-	~RoadBaseDescr() override {
-	}
+	~RoadBaseDescr() override = default;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(RoadBaseDescr);
@@ -56,7 +54,7 @@ struct RoadBase : public PlayerImmovable {
 
 	enum FlagId { FlagStart = 0, FlagEnd = 1 };
 
-	RoadBase(const RoadBaseDescr& d);
+	explicit RoadBase(const RoadBaseDescr& d);
 
 	Flag& get_flag(FlagId const flag) const {
 		return *flags_[flag];
@@ -88,10 +86,11 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 	/** The road is drawn by the terrain renderer via marked fields. */
-	void draw(uint32_t, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
+	void
+	draw(const Time&, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
 	}
 
-	void set_path(EditorGameBase&, const Path&);
+	void set_path(const EditorGameBase&, const Path&);
 
 	void mark_map(EditorGameBase&);
 	void unmark_map(EditorGameBase&);
@@ -110,8 +109,8 @@ protected:
 	/// cost for walking this road (0 = from start to end, 1 = from end to start)
 	int32_t cost_[2];
 
-	Path path_;            ///< path goes from start to end
-	uint32_t idle_index_;  ///< index into path where carriers should idle
+	Path path_;                ///< path goes from start to end
+	uint32_t idle_index_{0U};  ///< index into path where carriers should idle
 };
 }  // namespace Widelands
 

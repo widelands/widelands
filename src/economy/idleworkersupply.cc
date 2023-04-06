@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -35,7 +34,7 @@ namespace Widelands {
 /**
  * Automatically register with the worker's economy.
  */
-IdleWorkerSupply::IdleWorkerSupply(Worker& w) : worker_(w), economy_(nullptr) {
+IdleWorkerSupply::IdleWorkerSupply(Worker& w) : worker_(w) {
 	set_economy(w.get_economy(wwWORKER));
 }
 
@@ -51,10 +50,13 @@ IdleWorkerSupply::~IdleWorkerSupply() {
  */
 void IdleWorkerSupply::set_economy(Economy* const e) {
 	if (economy_ != e) {
-		if (economy_) {
+		if (economy_ != nullptr) {
 			economy_->remove_supply(*this);
 		}
-		if ((economy_ = e)) {
+
+		economy_ = e;
+
+		if (economy_ != nullptr) {
 			economy_->add_supply(*this);
 		}
 	}
@@ -67,12 +69,12 @@ bool IdleWorkerSupply::is_active() const {
 	return true;
 }
 
-SupplyProviders IdleWorkerSupply::provider_type(Game*) const {
+SupplyProviders IdleWorkerSupply::provider_type(Game* /* game */) const {
 	return SupplyProviders::kFlagOrRoad;
 }
 
 bool IdleWorkerSupply::has_storage() const {
-	return worker_.get_transfer();
+	return worker_.get_transfer() != nullptr;
 }
 
 void IdleWorkerSupply::get_ware_type(WareWorker& type, DescriptionIndex& ware) const {
@@ -92,20 +94,20 @@ uint32_t IdleWorkerSupply::nr_supplies(const Game& game, const Request& req) con
 	if (req.get_type() == wwWORKER &&
 	    (req.get_index() == worker_.descr().worker_index() ||
 	     (!req.get_exact_match() && worker_.descr().can_act_as(req.get_index()))) &&
-	    !worker_.get_carried_ware(game) && req.get_requirements().check(worker_)) {
+	    (worker_.get_carried_ware(game) == nullptr) && req.get_requirements().check(worker_)) {
 		return 1;
 	}
 	return 0;
 }
 
-WareInstance& IdleWorkerSupply::launch_ware(Game&, const Request&) {
+WareInstance& IdleWorkerSupply::launch_ware(Game& /* game */, const Request& /* req */) {
 	throw wexception("IdleWorkerSupply::launch_ware() makes no sense.");
 }
 
 /**
  * No need to explicitly launch the worker.
  */
-Worker& IdleWorkerSupply::launch_worker(Game&, const Request& req) {
+Worker& IdleWorkerSupply::launch_worker(Game& /* game */, const Request& req) {
 	if (req.get_type() != wwWORKER) {
 		throw wexception("IdleWorkerSupply: not a worker request");
 	}

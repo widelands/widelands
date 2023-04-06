@@ -1,17 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# D M <hunter12@home.se>, 2017
+# D M <kamera001dm@gmail.com>, 2017
+# D M <kamera001dm@gmail.com>, 2021
 # GunChleoc, 2016,2018
+# Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021
 # GunChleoc, 2014
+# Martin Eriksson <nils.martin.andreas@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-04-12 17:32+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"PO-Revision-Date: 2015-02-03 14:36+0000\n"
+"Last-Translator: Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +29,7 @@ msgstr "Bygg upp en grundläggande ekonomi"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:21
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr "Börja samla ihop grundläggande byggnadsmaterial, och befäst bosättningen."
+msgstr "Börja samla grundläggande byggnadsmaterial och befäst bosättningen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build a lumberjack’s hut"
@@ -55,11 +58,11 @@ msgstr "Du bör så småningom också bygga ett vassfält och ett kalkbränneri.
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:32
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:34
 msgid "Build up a small food economy"
-msgstr "Bygg upp en liten matekonomi"
+msgstr "Bygg upp en liten livsmedelsekonomi"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build up a basic food economy to provide your people with food."
-msgstr "Bygg upp en grundläggande matekonomi för att förse ditt folk med mat."
+msgstr "Bygg upp en grundläggande livsmedelsekonomi för att förse ditt folk med mat"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build a fisher’s hut"
@@ -94,7 +97,7 @@ msgstr "Kom ihåg att bygga en boskapsgård"
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr "Nu när ditt vägnät blir längre och din ekonomi blir större skulle du ha stor nytta av oxar som kan hjälpa till med att transportera varor snabbare."
+msgstr "Nu när dina vägar blir allt längre och din ekonomi växer, så skulle du ha stor nytta av oxar som kan hjälpa till med att transportera varor snabbare."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:55
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:57
@@ -105,7 +108,7 @@ msgstr "Bygg ett torn"
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr "Bygg ett torn vid nordöstra gränsen av ditt territorium för att se långt och för att skydda ditt folk mot plötsliga angrepp av fienden."
+msgstr "Bygg ett torn vid nordöstra gränsen av ditt territorium för att få en större överblick, och för att skydda ditt folk mot plötsliga angrepp av fienden."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:63
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:65
@@ -116,7 +119,7 @@ msgstr "Utforska vidare"
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr "Bygg fler militära byggnader för att utforska området runt huvudkvarteret och för att säkra folkets trygghet."
+msgstr "Bygg fler militära byggnader för att utforska området omkring högkvarteret och för att säkra tryggheten hos ditt folk."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:73
@@ -128,7 +131,7 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr "Utöka ditt territorium till bergen, skicka geologer för att söka efter malm och kol och bygg en gruvekonomi med gruvor, krogar, smältverk och metallverkstäder."
+msgstr "Utöka ditt territorium till bergen, skicka geologer för att söka efter malm och kol, och bygg en gruvekonomi med gruvor, krogar, smältverk och metallverkstäder."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:79
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:81
@@ -146,11 +149,11 @@ msgstr "Bygg en träningsinfrastruktur"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:90
 msgid "Build a barracks to train some basic soldiers."
-msgstr "Bygg en kasern för att träna några nya soldater."
+msgstr "Bygg en kasern för att träna några nya soldater"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr "Bygg en stridsarena och ett träningsläger på bergens västra sida."
+msgstr "Bygg en stridsarena och ett träningsläger väster om bergen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:92
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:122
@@ -160,14 +163,14 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr "Bygg ut din metallverkstad till en yxverkstad för att producera vapen och bygg en andra metallverkstad för att säkra verktygsproduktionen. När smeden når sin nästa nivå (mästersmed) kan även yxverkstaden byggas ut till en vapenverkstad, viken kommer att producera ytterligare vapentyper."
+msgstr "Uppgradera din metallverkstad till en yxverkstad för att producera vapen, och bygg en till metallverkstad för att säkra produktionen av verktyg. När smeden når sin nästa nivå (mästersmed) kan även yxverkstaden uppgraderas till en vapenverkstad, vilken kommer att producera ytterligare typer av vapen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:130
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr "Bygg en hjälmsmedja på bergens västra sida för att förse dina soldater med bättre skydd."
+msgstr "Bygg en hjälmsmedja väster om bergen för att förse dina soldater med bättre rustningar."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:101
@@ -203,11 +206,11 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr "Kaserner tränar nya soldater, medan träningsanläggningar som träningsläger och stridsarenor används för att träna soldaternas olika attribut. Dessa attribut är viktiga i strider och ju bättre en soldat är desto större blir chansen att vinna en strid."
+msgstr "Kaserner tränar nya soldater, medan träningsanläggningar som träningsläger och stridsarenor används för att träna soldaternas olika egenskaper. Dessa egenskaper är viktiga i strid, och ju bättre en soldat är, desto större blir chansen att vinna en strid."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid "The attributes are: health, attack, defense and evade."
-msgstr "Attributen är: hälsa, attack, försvar och undvika."
+msgstr "Egenskaperna är: hälsa, attack, försvar och att väja undan."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:121
@@ -226,7 +229,7 @@ msgstr "Krossa Kalitaths armé"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:138
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr "Förgör Kalitaths armé och expandera ditt territorium österut."
+msgstr "Förgör Kalitaths armé och utvidga ditt territorium österut."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:139
 msgid ""
@@ -252,7 +255,7 @@ msgstr "Nästan hemma"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
 msgstr "Thron verkar bekymrad..."
 
@@ -273,7 +276,7 @@ msgstr "Nu får vi vila vid kanten av den gamla skogen och förbereda oss för v
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:191
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Another Cold Day"
 msgstr "Ännu en kall dag"
 
@@ -294,7 +297,7 @@ msgstr "Tvivel"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:176
 msgid "Boldreth is shaking his head…"
-msgstr "Boldreth skakar sitt huvud..."
+msgstr "Boldreth skakar på huvudet..."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:178
@@ -305,7 +308,7 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr "Thron vill gärna tro att Kalitath har tröttnat på striderna och kommer vilja ansluta till oss när vi väl marscherar för att återställa lag och ordning till Al'thunran. Men det tror jag knappast. Kalitath är son till en av de mäktigaste generalerna i våra trupper och hans familj gillade aldrig riktigt tanken på att buga inför Chat'Karuths baner. Varför skulle han marschera tillsammans med Chat'Karuths son för att återta hans arvsrätt och tronen?"
+msgstr "Thron vill gärna tro att Kalitath har tröttnat på att strida och kommer vilja ansluta till oss när vi väl marscherar för att återställa lag och ordning i Al'thunran. Men det tror jag knappast. Kalitath är son till en av de mäktigaste generalerna i våra trupper och hans familj gillade aldrig riktigt tanken på att buga inför Chat'Karuths baner. Varför skulle han marschera tillsammans med Chat'Karuths son för att återta hans arvsrätt och tronen?"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:199
@@ -349,7 +352,7 @@ msgstr "Mina gränser har flyttats fram till skogskanten. Vi har en lång och h�
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:305
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Thron says:"
 msgstr "Thron säger:"
 
@@ -362,7 +365,7 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr ""
+msgstr "Jag har sänt ut män för att möta Kalitath i hans fästning. Han har barrikaderat huvudstadens tidigare huvudingång och försöker bygga upp en belägringsmur runt Al'thunran. Han kommer inte att låta någon komma vare sig in i eller ut ur staden medan belägringen håller stånd. Än så länge har han inte svarat på några av mina meddelanden. Men jag kommer inte spilla någon tid medan jag väntar. Jag kommer att fortsätta träna mina soldater och förbereda oss för strid."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Your Loyal Companion"
@@ -379,7 +382,7 @@ msgid ""
 " a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
-msgstr "Den SKITHÖGEN! Bara en man ur vår gränspatrull kom tillbaka vid liv. Han bar med sig ett meddelande från Kalitath, där han säger att han kommer straffa alla rörelser våra trupper gör med deras eget blod! Vi kan inte godta detta beteende. Från och med nu råder krig mellan oss och Kalitath!"
+msgstr "Den SKITSTÖVELN! Bara en enda man i vår gränspatrull kom tillbaka vid liv. Han bar med sig ett meddelande från Kalitath, där han säger att han kommer straffa alla våra trupper med deras eget blod vid minsta rörelse! Vi kan inte godta detta beteende. Från och med nu råder krig mellan oss och Kalitath!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:217
 msgid "Renegade Fortification"
@@ -393,7 +396,7 @@ msgid ""
 "but I don’t care now. Shall he flee and be forgotten for all times as a "
 "tribal leader that would not bow before the wooden throne, that is mine to "
 "take now."
-msgstr "Förrädaren har lämnat sina arméer att dö i sina befästningar, när han såg att han inte skulle kunna hålla mina styrkor tillbaka. Kalitath försvann i kalabaliken, men jag bryr mig inte om det nu. Låt honom fly och bli ihågkommen för all framtid som en stamledare som vägrade buga för trätronen, vilken kommer att bli min nu."
+msgstr "Förrädaren lämnade sina arméer ensamma att dö när han såg att han inte skulle kunna hålla mina styrkor tillbaka. Kalitath försvann i kalabaliken, men jag bryr mig inte om det nu. Låt honom fly och bli ihågkommen för all framtid som en stamledare som vägrade buga för trätronen, som nu kommer att bli min."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:223
@@ -403,7 +406,7 @@ msgid ""
 "men. Now that he has fled, their hunger has caused some of his younger "
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
-msgstr "Vidare förde striden med sig en stor fördel för oss: Hela året var Kalitath så upptagen av att kriga att han inte brydde sig om att lagra nog med mat åt alla sina män. Nu när han har flytt har hungern fått några av hans yngre anhängare till att desertera. Den här gruppen besitter starka befästningar på den centrala ringmuren."
+msgstr "Dessutom förde hans flykt med sig en stor fördel för oss: Hela året var Kalitath så upptagen av att kriga att han inte brydde sig om att lagra nog med mat åt alla sina män. Nu när han har flytt så har hungern fått några av hans yngre anhängare att desertera. Den här gruppen besitter starka befästningar på den centrala ringmuren."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:226
@@ -412,7 +415,7 @@ msgid ""
 "of my brothers are in chaos and have barely noticed the new danger that is "
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
-msgstr "Men det finns fler nyheter: Mina spejare berättade att mina bröders två stridande stammar är i kaos och de har knappt märkt den nya faran som snart kommer att drabba dem. De skulle väl knappast bry sig ändå, även om de såg det, förblindade av raseri och hat som de är. Det finns ingen sans alls kvar i dem, vad jag kan se."
+msgstr "Men det kommer fler nyheter: Mina spejare berättade att mina bröders två ursinniga stammar befinner sig i kaos, och de har knappt lagt märke till den nya faran som snart kommer att drabba dem. Fast de skulle nog knappast bry sig ändå även om de lade märke till det, förblindade av raseri och hat som de är. Det finns ingen sans alls kvar i dem, vad jag kan se."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:231
 msgid "Winter Ahead"
@@ -455,7 +458,7 @@ msgstr "Matekonomi färdig"
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
-msgstr "Khantrukh berättade precis att vår grundläggande matekonomi är uppbyggd. Slutligen behöver ingen av oss frukta svält längre."
+msgstr "Khantrukh berättade precis att vår grundläggande livsmedelsekonomi har byggts upp framgångsrikt. Äntligen behöver ingen av oss frukta svält längre."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:257
 msgid "Tracks"
@@ -468,7 +471,7 @@ msgid ""
 "settlement. He has instructed us to build a tower, to have a greater visual "
 "range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr "Thron talade om för mig att han upptäckte spår i snön nordost om vår bosättning. Han har instruerat oss att bygga ett torn med syfte att kunna se längre i området omkring oss, för att kunna skydda vårt folk mot plötsliga attacker."
+msgstr "Thron talade om för mig att han upptäckte spår i snön nordost om vår bosättning. Han har gett oss instruktioner att bygga ett torn med syfte att få en större överblick runt vårt högkvarter så att vi kan skydda vårt folk mot plötsliga attacker."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:266
 msgid "Further Exploration"
@@ -484,7 +487,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr "Den första fortifikationen som Thron beordrade har just blivit färdigställd. För tillfället försöker han skapa tillit och tro hos dem som lever innanför gränserna till vår nya bostadsort, som vi döpte till 'Ondun', vilket på vårt forntida språk betydde 'de som väntar'. Men Thron är inte nöjd än, och jag har full förståelse för hans fruktan. Skogarna är djupa och gränsen till Al’thunran ligger inte långt bort. Jag är säker på att det finns tusentals faror där ute som är värre än de okända spåren."
+msgstr "Den första fortifikationen som Thron beordrade har just blivit färdigställd. För tillfället försöker han skapa tillit och tro hos dem som lever innanför gränserna till vår nya bostadsort, som vi döpte till 'Ondun', vilket på vårt forntida språk betydde 'de som väntar'. Men Thron är ännu inte nöjd –  och jag har full förståelse för hans fruktan. Skogarna är djupa och gränsen till Al’thunran ligger nära. Jag är säker på att det finns tusentals faror där ute som är värre än de okända spåren."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:272
@@ -493,7 +496,7 @@ msgid ""
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr "För att få bättre kunskap om området runt omkring oss borde vi utforska längre bort och sätta fler vakter och spanare på att övervaka gränsområdet och hålla ett öga på de krig som rasar runt knuten. SEDAN kommer vi att vara förberedda när väl bekymren försöker inta vår skog."
+msgstr "För att få en bättre överblick över området runt omkring oss så borde vi utforska längre bort, och sända fler vakter och spejare för att övervaka gränsområdet och hålla ett öga på de krig som rasar runt knuten. SEDAN kommer vi att vara förberedda när bekymren hotar att sänka sig över våra skogar."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:278
 msgid "Mountains Found"
@@ -507,7 +510,7 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr "Jag har just pratat med ledaren för vår patrull. Han talade om att de hittade några berg i ostlig och nordostlig riktning från vårt territorium. Med lite tur kan detta ge oss en chans att upprusta våra män, för som jag kommer ihåg det finns det kol och en del malm i de flesta av bergen väster om Al’thunran."
+msgstr "Jag har just talat med ledaren för vår patrull. Han berättade att de hittade några berg nordost och öster om vårt territorium. Med lite tur kan detta ge oss en chans att återupprusta våra män, för som jag minns det finns det kol och en del malm i de flesta av bergen väster om Al’thunran."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:287
 msgid "Mining Economy Completed"
@@ -519,7 +522,7 @@ msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr "Jag fick precis höra att vår gruvdrift har kommit igång. Nyheten gladde mig mycket - även om den svåraste tiden står för dörren kommer i alla fall våra smeder kunna göra sitt allra bästa för att göra våra liv lättare."
+msgstr "Jag fick precis höra att vår gruvdrift har kommit igång. Nyheten gladde mig mycket – även om den svåraste tiden står för dörren så kommer i alla fall våra smeder kunna göra sitt allra bästa för att göra våra liv lättare."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:295
 msgid "Fortress Needed"
@@ -534,7 +537,7 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr "Boldreth och jag utforskade just området runt runt de tre bergen. Ett stort strategiskt problem med området verkar vara att det finns två stora passager – ett norr om och ett söder om det centrala berget. Dessa passager är relativt svåra att kontrollera så för mig verkar det som vi bara har en möjlighet för att säkra bergen mot våra fiender: vi måste bygga en fästning öster om bergen!"
+msgstr "Boldreth och jag utforskade just området runt de tre bergen. Ett stort strategiskt problem med området verkar vara att det finns två stora passager – en norr om och en söder om det centrala berget. Dessa passager är ganska svåra att kontrollera, så för mig verkar det som vi bara har en möjlighet för att säkra bergen mot våra fiender: vi måste bygga en fästning öster om bergen!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:304
 msgid "Fortress Completed"
@@ -547,7 +550,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr "Äntligen! Fästningen har just blivit klar så ingången till vår bosättning bör för stunden vara säkrad. I framtiden behöver vi kanske bygga några fler fortifikationer, som fort och torn, i dessa passager, men för tillfället kan vi andas ut."
+msgstr "Äntligen! Fästningen har just blivit färdigbyggd, så ingången till vår bosättning bör för stunden vara säkrad. I framtiden behöver vi kanske tänka på att bygga några fler fortifikationer, som fort och torn, i dessa passager, men för tillfället kan vi andas ut."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:312
 msgid "Enhanced Economy and Training"
@@ -571,10 +574,10 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr "Våra geologer fann många fler fyndigheter med järnmalm, kol, och till och med guldmalm. Vi borde bygga ut våra nuvarande gruvor så snart som våra gruvarbetare har mer erfarenhet. Vi borde också bygga några fler gruvor, en större matinfrastruktur för att säkra en konstant mattillgång och en mer utbyggd förädlingsekonomi. Men det är ändå inte allt - de flesta av våra soldater är rätt unga, och de har varken bra vapen eller god träning. Vi borde bygga träningsplatser för att förbereda dem inför deras framtida uppgifter."
+msgstr "Våra geologer hittade många fler fyndigheter med järnmalm, kol, och till och med guld. Vi borde uppgradera våra nuvarande gruvor så snart våra gruvarbetare får mer erfarenhet. Vi borde också bygga några fler gruvor, en större matinfrastruktur för att alltid kunna förse våra män med tillräckligt med mat, och föra vår förädlingsekonomi framåt. Men det är ändå inte allt – de flesta av våra soldater är rätt unga och de har varken bra vapen eller god träning. Vi borde bygga träningsplatser för att förbereda dem inför deras framtida uppgifter."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -583,7 +586,7 @@ msgid ""
 msgstr "Mina bröder och deras soldater ligger döda och de lämnade eld och förödelse efter sig. Ingenstans bland ruinerna kunde jag hitta män eller kvinnor ur civilbefolkningen, så jag kan bara hoppas att de flydde från detta grymma slagfält och startade ett bättre liv någon annanstans."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -593,22 +596,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Inget finns kvar av den skönhet jag kommer ihåg, bara ruiner återstår av den gamla huvudstaden. Jag är sorgsen men också lättad. Jag förväntade mig aldrig att få se Al’thunrans gamla skönhet igen – för bara några månader sedan undrade jag om jag över huvud taget skulle få möjligheten att sätta mina fötter där igen. Nu är den gamla staden tillbaka i mina händer igen och jag kommer inte att tveka att återuppbygga den med hjälp av all den styrka mitt folk besitter. Jag kan knappt bärga mig för att få se den igen i sin forna glans."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
 msgstr "Seger"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Du har slutfört det sista uppdraget i Barbarernas handledningsfälttåg. Du kan fortsätta spela om du vill, eller hoppa vidare till nästa fälttåg."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid "Military Assault"
 msgstr "Militärt anfall"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:341
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -616,7 +619,7 @@ msgid ""
 msgstr "Så får det bli. Generalerna har gått ut för att ställa upp trupperna och Bolreth kommer själv att leda det första anfallet. Jag ska rida vid hans sida för att göra Al'thunran fritt från detta krig och återupprätta freden i vår huvudstad."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -625,27 +628,22 @@ msgid ""
 msgstr "När den späda solen stiger över träden imorgon ska jag blåsa till anfall. I skymningen kommer jag att fira segern i krigsherrens högkvarter och offra ett nyfött lamm för att hedra min far, vars ögon är fästa på mig idag."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:347
 msgid "So be it!"
 msgstr "Så får det bli!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "Faster Transportation"
 msgstr "Snabbare transporter"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Khantrukh says:"
 msgstr "Khantrukh talar:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:355
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
 msgstr "Hövding, tänk på de stackars bärarna. Våra vägar blir längre och längre och bördan på deras axlar blir inte lättare. Vi borde avla fler oxar för att underlätta för dem, och för att effektivisera våra transporter."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""

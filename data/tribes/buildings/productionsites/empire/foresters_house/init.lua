@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_foresters_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Forester’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -19,16 +19,18 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 52, 54 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 54, 56 },
       },
    },
 
    aihints = {
       space_consumer = true,
-      supports_production_of = { "log" },
       very_weak_ai_limit = 2,
       weak_ai_limit = 4
    },
@@ -40,7 +42,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
-         descname = _"planting trees",
+         descname = _("planting trees"),
          actions = {
             "callworker=plant",
             "sleep=duration:10s"
@@ -48,3 +50,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

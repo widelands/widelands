@@ -12,16 +12,15 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 #include "graphic/gl/utils.h"
 
 #include <cassert>
+#include <cstddef>
 #include <memory>
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -83,12 +82,12 @@ public:
 	explicit Shader(GLenum type);
 	~Shader();
 
-	GLuint object() const {
+	[[nodiscard]] GLuint object() const {
 		return shader_object_;
 	}
 
 	// Compiles 'source'. Throws an exception on error.
-	void compile(const char* source);
+	void compile(const char* source) const;
 
 private:
 	const GLenum type_;
@@ -98,31 +97,31 @@ private:
 };
 
 Shader::Shader(GLenum type) : type_(type), shader_object_(glCreateShader(type)) {
-	if (!shader_object_) {
+	if (shader_object_ == 0u) {
 		throw wexception("Could not create %s shader.", shader_to_string(type).c_str());
 	}
 }
 
 Shader::~Shader() {
-	if (shader_object_) {
+	if (shader_object_ != 0u) {
 		glDeleteShader(shader_object_);
 	}
 }
 
-void Shader::compile(const char* source) {
+void Shader::compile(const char* source) const {
 	glShaderSource(shader_object_, 1, &source, nullptr);
 
 	glCompileShader(shader_object_);
 	GLint compiled;
 	glGetShaderiv(shader_object_, GL_COMPILE_STATUS, &compiled);
-	if (!compiled) {
+	if (compiled == 0) {
 		GLint infoLen = 0;
 		glGetShaderiv(shader_object_, GL_INFO_LOG_LENGTH, &infoLen);
 		if (infoLen > 1) {
 			std::unique_ptr<char[]> infoLog(new char[infoLen]);
 			CLANG_DIAG_OFF("-Wunknown-pragmas")
 			CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-			glGetShaderInfoLog(shader_object_, infoLen, NULL, infoLog.get());
+			glGetShaderInfoLog(shader_object_, infoLen, nullptr, infoLog.get());
 			CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 			CLANG_DIAG_ON("-Wunknown-pragmas")
 			throw wexception(
@@ -132,13 +131,13 @@ void Shader::compile(const char* source) {
 }
 
 Program::Program() : program_object_(glCreateProgram()) {
-	if (!program_object_) {
+	if (program_object_ == 0u) {
 		throw wexception("Could not create GL program.");
 	}
 }
 
 Program::~Program() {
-	if (program_object_) {
+	if (program_object_ != 0u) {
 		glDeleteProgram(program_object_);
 	}
 }
@@ -160,7 +159,7 @@ void Program::build(const std::string& program_name) {
 	// Check the link status
 	GLint linked;
 	glGetProgramiv(program_object_, GL_LINK_STATUS, &linked);
-	if (!linked) {
+	if (linked == 0) {
 		GLint infoLen = 0;
 		glGetProgramiv(program_object_, GL_INFO_LOG_LENGTH, &infoLen);
 
@@ -168,7 +167,7 @@ void Program::build(const std::string& program_name) {
 			std::unique_ptr<char[]> infoLog(new char[infoLen]);
 			CLANG_DIAG_OFF("-Wunknown-pragmas")
 			CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-			glGetProgramInfoLog(program_object_, infoLen, NULL, infoLog.get());
+			glGetProgramInfoLog(program_object_, infoLen, nullptr, infoLog.get());
 			CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 			CLANG_DIAG_ON("-Wunknown-pragmas")
 			throw wexception("Error linking:\n%s", infoLog.get());
@@ -176,8 +175,7 @@ void Program::build(const std::string& program_name) {
 	}
 }
 
-State::State()
-   : last_active_texture_(NONE), current_framebuffer_(0), current_framebuffer_texture_(0) {
+State::State() : last_active_texture_(NONE) {
 }
 
 void State::bind(const GLenum target, const GLuint texture) {
@@ -244,12 +242,12 @@ void State::bind_framebuffer(const GLuint framebuffer, const GLuint texture) {
 
 void State::enable_vertex_attrib_array(std::unordered_set<GLint> entries) {
 	for (const auto e : entries) {
-		if (!enabled_attrib_arrays_.count(e)) {
+		if (enabled_attrib_arrays_.count(e) == 0u) {
 			glEnableVertexAttribArray(e);
 		}
 	}
 	for (const auto e : enabled_attrib_arrays_) {
-		if (!entries.count(e)) {
+		if (entries.count(e) == 0u) {
 			glDisableVertexAttribArray(e);
 		}
 	}
@@ -262,14 +260,14 @@ State& State::instance() {
 	return binder;
 }
 
-void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset) {
+void vertex_attrib_pointer(int vertex_index, int num_items, int stride, size_t offset) {
 	glVertexAttribPointer(
 	   vertex_index, num_items, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(offset));
 }
 
 void swap_rows(const int width, const int height, const int pitch, const int bpp, uint8_t* pixels) {
 	uint8_t* begin_row = pixels;
-	uint8_t* end_row = pixels + pitch * (height - 1);
+	uint8_t* end_row = pixels + static_cast<ptrdiff_t>(pitch) * (height - 1);
 	while (begin_row < end_row) {
 		for (int x = 0; x < width * bpp; ++x) {
 			std::swap(begin_row[x], end_row[x]);

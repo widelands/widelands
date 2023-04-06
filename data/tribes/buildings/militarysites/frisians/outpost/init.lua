@@ -1,11 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_militarysite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_militarysite_type {
    name = "frisians_outpost",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Outpost"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -23,8 +24,6 @@ tribes:new_militarysite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {45, 68},
          frames = 4,
          columns = 2,
@@ -34,8 +33,6 @@ tribes:new_militarysite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {45, 68}
       }
    },
@@ -52,10 +49,17 @@ tribes:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your soldiers have occupied your outpost.",
-      aggressor = _"Your outpost discovered an aggressor.",
-      attack = _"Your outpost is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the outpost.",
-      defeated_you = _"Your soldiers defeated the enemy at the outpost."
+      -- TRANSLATORS: Message sent by a Frisian military site
+      occupied = pgettext("frisians_building", "Your soldiers have occupied your outpost."),
+      -- TRANSLATORS: Message sent by a Frisian military site
+      aggressor = pgettext("frisians_building", "Your outpost discovered an aggressor."),
+      -- TRANSLATORS: Message sent by a Frisian military site
+      attack = pgettext("frisians_building", "Your outpost is under attack."),
+      -- TRANSLATORS: Message sent by a Frisian military site
+      defeated_enemy = pgettext("frisians_building", "The enemy defeated your soldiers at the outpost."),
+      -- TRANSLATORS: Message sent by a Frisian military site
+      defeated_you = pgettext("frisians_building", "Your soldiers defeated the enemy at the outpost.")
    },
 }
+
+pop_textdomain()

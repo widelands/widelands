@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -34,8 +33,7 @@ enum class StockPolicy;
 
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
-	ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {
-	}
+	ConstructionsiteInformation() = default;
 
 	/// Draw the partly finished constructionsite
 	void draw(const Vector2f& point_on_dst,
@@ -45,13 +43,13 @@ struct ConstructionsiteInformation {
 	          const RGBColor& player_color,
 	          RenderTarget* dst) const;
 
-	const BuildingDescr*
-	   becomes;  // Also works as a marker telling whether there is a construction site.
-	const BuildingDescr* was;  // only valid if "becomes" is an enhanced building.
+	const BuildingDescr* becomes{
+	   nullptr};  // Also works as a marker telling whether there is a construction site.
+	const BuildingDescr* was{nullptr};  // only valid if "becomes" is an enhanced building.
 	std::vector<const BuildingDescr*>
 	   intermediates;  // If we enhance a building while it's still under construction
-	uint32_t totaltime;
-	uint32_t completedtime;
+	Duration totaltime{0U};
+	Duration completedtime{0U};
 };
 
 /*
@@ -74,13 +72,14 @@ The ConstructionSite's idling animation is the basic construction site marker.
 */
 class ConstructionSiteDescr : public BuildingDescr {
 public:
-	ConstructionSiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
-	~ConstructionSiteDescr() override {
-	}
+	ConstructionSiteDescr(const std::string& init_descname,
+	                      const LuaTable& t,
+	                      Descriptions& descriptions);
+	~ConstructionSiteDescr() override = default;
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
 
-	FxId creation_fx() const;
+	[[nodiscard]] FxId creation_fx() const;
 
 private:
 	const FxId creation_fx_;
@@ -91,8 +90,6 @@ private:
 class ConstructionSite : public PartiallyFinishedBuilding {
 	friend class MapBuildingdataPacket;
 
-	static const uint32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
-
 	MO_DESCR(ConstructionSiteDescr)
 
 public:
@@ -102,7 +99,7 @@ public:
 		return info_;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 
 	void set_building(const BuildingDescr&) override;
 	const BuildingDescr& building() const {
@@ -131,20 +128,21 @@ public:
 	}
 	void apply_settings(const BuildingSettings&);
 
-	void enhance(Game&);
+	void enhance(const Game&);
 
 	void add_dropout_wares(const std::map<DescriptionIndex, Quantity>&);
 
 protected:
 	void update_statistics_string(std::string* statistics_string) override;
 
-	uint32_t build_step_time() const override {
-		return CONSTRUCTIONSITE_STEP_TIME;
+	static constexpr Duration kConstructionsiteStepTime{30000};
+	const Duration& build_step_time() const override {
+		return kConstructionsiteStepTime;
 	}
 
 	static void wares_queue_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void* data);
 
-	void draw(uint32_t gametime,
+	void draw(const Time& gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,
@@ -152,9 +150,9 @@ protected:
 	          RenderTarget* dst) override;
 
 private:
-	int32_t fetchfromflag_;  // # of wares to fetch from flag
+	int32_t fetchfromflag_{0};  // # of wares to fetch from flag
 
-	bool builder_idle_;                 // used to determine whether the builder is idle
+	bool builder_idle_{false};          // used to determine whether the builder is idle
 	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
 
 	std::map<DescriptionIndex, uint8_t> additional_wares_;

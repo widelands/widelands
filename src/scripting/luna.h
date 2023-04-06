@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -64,6 +63,7 @@
 
 #include <cstring>
 
+#include "base/macros.h"
 #include "scripting/lua.h"
 #include "scripting/luna_impl.h"
 
@@ -72,10 +72,13 @@
  */
 class LunaClass {
 public:
-	virtual ~LunaClass() {
-	}
+	virtual ~LunaClass() = default;
+
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	virtual void __persist(lua_State*) = 0;
 	virtual void __unpersist(lua_State*) = 0;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
+
 	virtual const char* get_modulename() = 0;
 };
 
@@ -111,8 +114,9 @@ void register_class(lua_State* const L,
 	register_properties_in_metatable<T, T>(L);
 	register_methods_in_metatable<T, T>(L);
 
-	if (!return_metatable)
+	if (!return_metatable) {
 		lua_pop(L, 1);  // remove the Metatable
+	}
 }
 /**
  * Makes the first class a children of the second. Make sure that T is really a

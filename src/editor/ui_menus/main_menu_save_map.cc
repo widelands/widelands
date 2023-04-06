@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,11 +21,14 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
+#include "io/filesystem/illegal_filename_check.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -47,7 +49,8 @@ inline EditorInteractive& MainMenuSaveMap::eia() {
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                                  UI::UniqueWindow::Registry& registry,
                                  Registry& map_options_registry)
-   : MainMenuLoadOrSaveMap(parent, registry, "save_map_menu", _("Save Map"), "maps/My_Maps"),
+   : MainMenuLoadOrSaveMap(
+        parent, registry, "save_map_menu", _("Save Map"), false, true, "maps/My_Maps"),
      map_options_registry_(map_options_registry),
      edit_options_(&map_details_box_,
                    "edit_options",
@@ -57,7 +60,14 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                    0,
                    UI::ButtonStyle::kWuiPrimary,
                    _("Map Options")),
-     editbox_label_(&table_footer_box_, 0, 0, 0, 0, _("Filename:")),
+     editbox_label_(&table_footer_box_,
+                    UI::PanelStyle::kWui,
+                    UI::FontStyle::kWuiLabel,
+                    0,
+                    0,
+                    0,
+                    0,
+                    _("Filename:")),
      editbox_(&table_footer_box_, 0, 0, 0, UI::PanelStyle::kWui),
      make_directory_(&table_footer_box_,
                      "make_directory",
@@ -67,7 +77,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                      0,
                      UI::ButtonStyle::kWuiSecondary,
                      _("Make Directory")),
-     illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
+     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()) {
 	set_current_directory(curdir_);
 
 	map_details_box_.add(&edit_options_, UI::Box::Resizing::kFullSize);
@@ -76,8 +86,10 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	table_footer_box_.add_space(0);
 	table_footer_box_.add(&make_directory_);
 
-	table_.selected.connect([this](unsigned) { clicked_item(); });
-	table_.double_clicked.connect([this](unsigned) { double_clicked_item(); });
+	fill_table();
+
+	table_.selected.connect([this](unsigned /* value */) { clicked_item(); });
+	table_.double_clicked.connect([this](unsigned /* value */) { double_clicked_item(); });
 	table_.cancel.connect([this]() { die(); });
 	table_.set_can_focus(true);
 
@@ -95,26 +107,15 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	make_directory_.sigclicked.connect([this]() { clicked_make_directory(); });
 	edit_options_.sigclicked.connect([this]() { clicked_edit_options(); });
 
-	// We always want the current map's data here
-	const Widelands::Map& map = parent.egbase().map();
-	MapData::MapType maptype;
-
-	if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-	    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
-		maptype = MapData::MapType::kScenario;
-	} else {
-		maptype = MapData::MapType::kNormal;
-	}
-
-	MapData mapdata(map, "", maptype, MapData::DisplayType::kMapnames);
-
-	map_details_.update(mapdata, false);
-
 	subscriber_ = Notifications::subscribe<NoteMapOptions>(
-	   [this](const NoteMapOptions&) { update_map_options(); });
+	   [this](const NoteMapOptions& /* note */) { update_map_options(); });
 
-	fill_table();
 	layout();
+
+	// We always want the current map's data here
+	update_map_options();
+
+	initialization_complete();
 }
 
 /**
@@ -124,28 +125,29 @@ void MainMenuSaveMap::clicked_ok() {
 	if (!ok_.enabled()) {
 		return;
 	}
-	std::string filename = editbox_.text();
-	std::string complete_filename;
+	std::vector<std::string> filename = {editbox_.text()};
+	std::vector<std::string> complete_filename;
 
-	if (filename == "" && table_.has_selection()) {  //  Maybe a directory is selected.
-		complete_filename = filename = maps_data_[table_.get_selected()].filename;
+	if (filename.empty() && table_.has_selection()) {  //  Maybe a directory is selected.
+		complete_filename = filename = maps_data_[table_.get_selected()].filenames;
 	} else {
-		complete_filename = curdir_ + g_fs->file_separator() + filename;
+		complete_filename = {curdir_.at(0) + FileSystem::file_separator() + filename.at(0)};
 	}
 
-	if (g_fs->is_directory(complete_filename.c_str()) &&
-	    !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
+	if (g_fs->is_directory(complete_filename.at(0)) &&
+	    !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename.at(0))) {
 		set_current_directory(complete_filename);
 		fill_table();
 	} else {  //  Ok, save this map
 		Widelands::Map* map = eia().egbase().mutable_map();
 		if (map->get_name() == _("No Name")) {
-			std::string::size_type const filename_size = filename.size();
-			map->set_name(4 <= filename_size && boost::iends_with(filename, kWidelandsMapExtension) ?
-			                 filename.substr(0, filename_size - 4) :
-			                 filename);
+			std::string::size_type const filename_size = filename.at(0).size();
+			map->set_name(4 <= filename_size &&
+			                    ends_with(filename.at(0), kWidelandsMapExtension, false) ?
+                          filename.at(0).substr(0, filename_size - 4) :
+                          filename.at(0));
 		}
-		if (save_map(filename, !get_config_bool("nozip", false))) {
+		if (save_map(filename.at(0), !get_config_bool("nozip", false))) {
 			die();
 		} else {
 			table_.focus();
@@ -163,28 +165,26 @@ void MainMenuSaveMap::clicked_make_directory() {
 	while (open_dialogue) {
 		open_dialogue = false;
 		if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-			std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
+			std::string fullname = curdir_.at(0) + FileSystem::file_separator() + md.get_dirname();
 			// Trim it for preceding/trailing whitespaces in user input
-			boost::trim(fullname);
+			trim(fullname);
 			if (g_fs->file_exists(fullname)) {
 				const std::string s = _("A file or directory with that name already exists.");
-				UI::WLMessageBox mbox(
-				   this, _("Error Creating Directory!"), s, UI::WLMessageBox::MBoxType::kOk);
+				UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Creating Directory!"), s,
+				                      UI::WLMessageBox::MBoxType::kOk);
 				mbox.run<UI::Panel::Returncodes>();
 				open_dialogue = true;
 			} else {
 				try {
-					g_fs->ensure_directory_exists(curdir_);
 					//  Create directory.
-					g_fs->make_directory(fullname);
+					g_fs->ensure_directory_exists(fullname);
 				} catch (const FileError& e) {
-					log("directory creation failed in MainMenuSaveMap::"
-					    "clicked_make_directory: %s\n",
-					    e.what());
-					const std::string s =
-					   (boost::format(_("Error while creating directory ‘%s’.")) % fullname).str();
-					UI::WLMessageBox mbox(
-					   this, _("Error Creating Directory!"), s, UI::WLMessageBox::MBoxType::kOk);
+					log_err("directory creation failed in MainMenuSaveMap::"
+					        "clicked_make_directory: %s\n",
+					        e.what());
+					const std::string s = format(_("Error while creating directory ‘%s’."), fullname);
+					UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Creating Directory!"), s,
+					                      UI::WLMessageBox::MBoxType::kOk);
 					mbox.run<UI::Panel::Returncodes>();
 				}
 				fill_table();
@@ -206,8 +206,8 @@ void MainMenuSaveMap::update_map_options() {
 
 	const std::string old_name = map_details_.name();
 
-	if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-	    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+	if (((map.scenario_types() & Widelands::Map::MP_SCENARIO) != 0u) ||
+	    ((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0u)) {
 		maptype = MapData::MapType::kScenario;
 	} else {
 		maptype = MapData::MapType::kNormal;
@@ -215,7 +215,9 @@ void MainMenuSaveMap::update_map_options() {
 
 	MapData mapdata(map, editbox_.text(), maptype, MapData::DisplayType::kMapnames);
 
-	map_details_.update(mapdata, false);
+	// TODO(GunChleoc): Trying to render the minimap while saving results in endless loop - probably
+	// because we're trying to load the map again there.
+	map_details_.update(mapdata, false, false);
 	if (old_name == editbox_.text()) {
 		editbox_.set_text(map_details_.name());
 		edit_box_changed();
@@ -230,7 +232,7 @@ void MainMenuSaveMap::clicked_item() {
 		const MapData& mapdata = maps_data_[table_.get_selected()];
 		if (mapdata.maptype != MapData::MapType::kDirectory) {
 			editbox_.set_text(
-			   FileSystem::fs_filename(maps_data_[table_.get_selected()].filename.c_str()));
+			   FileSystem::fs_filename(maps_data_[table_.get_selected()].filenames.at(0).c_str()));
 			edit_box_changed();
 		}
 	}
@@ -243,7 +245,7 @@ void MainMenuSaveMap::double_clicked_item() {
 	assert(table_.has_selection());
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		set_current_directory(mapdata.filename);
+		set_current_directory(mapdata.filenames);
 		fill_table();
 	} else {
 		clicked_ok();
@@ -256,7 +258,7 @@ void MainMenuSaveMap::double_clicked_item() {
  */
 void MainMenuSaveMap::edit_box_changed() {
 	// Prevent the user from creating nonsense file names, like e.g. ".." or "...".
-	const bool is_legal_filename = FileSystem::is_legal_filename(editbox_.text());
+	const bool is_legal_filename = FileSystemHelper::is_legal_filename(editbox_.text());
 	ok_.set_enabled(is_legal_filename);
 	editbox_.set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 }
@@ -269,12 +271,12 @@ void MainMenuSaveMap::reset_editbox_or_die(const std::string& current_filename) 
 	}
 }
 
-void MainMenuSaveMap::set_current_directory(const std::string& filename) {
-	curdir_ = filename;
+void MainMenuSaveMap::set_current_directory(const std::vector<std::string>& filenames) {
+	assert(!filenames.empty());
+	curdir_ = filenames;
 	directory_info_.set_text(
 	   /** TRANSLATORS: The folder that a file will be saved to. */
-	   (boost::format(_("Current directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
-	      .str());
+	   format(_("Current directory: %s"), (_("My Maps") + curdir_.at(0).substr(basedir_.size()))));
 }
 
 void MainMenuSaveMap::layout() {
@@ -291,23 +293,22 @@ void MainMenuSaveMap::layout() {
  */
 bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	// Trim it for preceding/trailing whitespaces in user input
-	boost::trim(filename);
+	trim(filename);
 
 	//  OK, first check if the extension matches (ignoring case).
-	if (!boost::iends_with(filename, kWidelandsMapExtension)) {
+	if (!ends_with(filename, kWidelandsMapExtension, false)) {
 		filename += kWidelandsMapExtension;
 	}
 
 	//  Append directory name.
-	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
+	const std::string complete_filename = curdir_.at(0) + FileSystem::file_separator() + filename;
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
-		const std::string s =
-		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
-		    FileSystem::fs_filename(filename.c_str()))
-		      .str();
-		UI::WLMessageBox mbox(this, _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+		const std::string s = format(_("A file with the name ‘%s’ already exists. Overwrite?"),
+		                             FileSystem::fs_filename(filename.c_str()));
+		UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Saving Map!"), s,
+		                      UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 			return false;
 		}
@@ -335,8 +336,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
-	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
-	egbase.step_loader_ui(_("Saving the map…"));
+	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage, false);
+	Notifications::publish(UI::NoteLoadingMessage(_("Saving the map…")));
 
 	// Try saving the map.
 	GenericSaveHandler gsh(
@@ -360,15 +361,12 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	}
 
 	std::string msg = gsh.localized_formatted_result_message();
-	UI::WLMessageBox mbox(this, _("Error Saving Map!"), msg, UI::WLMessageBox::MBoxType::kOk);
+	UI::WLMessageBox mbox(
+	   this, UI::WindowStyle::kWui, _("Error Saving Map!"), msg, UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
 
 	// If only the backup failed (likely just because of a file lock),
 	// then leave the dialog open for the player to try with a new filename.
-	if (error == GenericSaveHandler::Error::kBackupFailed) {
-		return false;
-	}
-
 	// In the other error cases close the dialog.
-	return true;
+	return error != GenericSaveHandler::Error::kBackupFailed;
 }

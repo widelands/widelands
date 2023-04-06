@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,9 +22,12 @@
 #include "economy/wares_queue.h"
 #include "logic/map_objects/tribes/building.h"
 
-namespace Widelands {
+namespace LuaMaps {
+class LuaConstructionSite;
+class LuaDismantleSite;
+}  // namespace LuaMaps
 
-class Request;
+namespace Widelands {
 
 /*
 PartiallyFinishedBuilding
@@ -37,9 +39,11 @@ dismantlesites.
 class PartiallyFinishedBuilding : public Building {
 	friend class MapBuildingdataPacket;
 	friend struct MapBuildingPacket;
+	friend class LuaMaps::LuaConstructionSite;
+	friend class LuaMaps::LuaDismantleSite;
 
 public:
-	explicit PartiallyFinishedBuilding(const BuildingDescr& building_descr);
+	explicit PartiallyFinishedBuilding(const BuildingDescr& gdescr);
 
 	virtual void set_building(const BuildingDescr&);
 
@@ -74,15 +78,17 @@ public:
 	static void
 	request_builder_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
+	void add_worker(Worker&) override;
+
 private:
 	void request_builder(Game&);
 
-	virtual uint32_t build_step_time() const = 0;
+	virtual const Duration& build_step_time() const = 0;
 
 protected:
-	const BuildingDescr* building_;  // type of building that was or will become
+	const BuildingDescr* building_{nullptr};  // type of building that was or will become
 
-	Request* builder_request_;
+	Request* builder_request_{nullptr};
 	OPtr<Worker> builder_;
 
 	using Wares = std::vector<WaresQueue*>;
@@ -90,10 +96,10 @@ protected:
 	                       // (dismantlesites)
 	Wares dropout_wares_;  // additional items to drop out immediately
 
-	bool working_;             // true if the builder is currently working
-	uint32_t work_steptime_;   // time when next step is completed
-	uint32_t work_completed_;  // how many steps have we done so far?
-	uint32_t work_steps_;      // how many steps (= wares) until we're done?
+	bool working_{false};          // true if the builder is currently working
+	Time work_steptime_{0U};       // time when next step is completed
+	uint32_t work_completed_{0U};  // how many steps have we done so far?
+	uint32_t work_steps_{0U};      // how many steps (= wares) until we're done?
 };
 }  // namespace Widelands
 

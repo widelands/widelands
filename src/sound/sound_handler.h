@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2020 by the Widelands Development Team
+ * Copyright (C) 2005-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -30,6 +29,7 @@
 
 #include <SDL_mutex.h>
 
+#include "base/macros.h"
 #include "base/random.h"
 #include "sound/constants.h"
 #include "sound/fxset.h"
@@ -187,22 +187,26 @@ public:
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
 	void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade);
+	void use_custom_songset(bool on);
+	[[nodiscard]] bool use_custom_songset() const;
 
-	const std::string current_songset() const;
+	[[nodiscard]] const std::string current_songset() const;
 
-	bool is_sound_enabled(SoundType type) const;
+	[[nodiscard]] bool is_sound_enabled(SoundType type) const;
 	void set_enable_sound(SoundType type, bool enable);
-	int32_t get_volume(SoundType type) const;
+	[[nodiscard]] int32_t get_volume(SoundType type) const;
 	void set_volume(SoundType type, int32_t volume);
 
-	int32_t get_max_volume() const;
+	[[nodiscard]] int32_t get_max_volume() const;
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(SoundHandler);
+
 	void read_config();
 
 	FxId do_register_fx(SoundType type, const std::string& fx_path);
 
-	void initialization_error(const char* const msg, bool quit_sdl);
+	void initialization_error(const char* msg, bool quit_sdl);
 
 	bool play_or_not(SoundType type, FxId fx_id, uint16_t priority, bool allow_multiple);
 	void start_music(const std::string& songset_name);
@@ -215,15 +219,14 @@ private:
 
 	/// Contains options for a sound type or the music
 	struct SoundOptions {
-		explicit SoundOptions(int vol, const std::string& savename)
-		   : enabled(true), volume(vol), name(savename) {
+		explicit SoundOptions(int vol, const std::string& savename) : volume(vol), name(savename) {
 			assert(!savename.empty());
 			assert(vol >= 0);
 			assert(vol <= MIX_MAX_VOLUME);
 		}
 
 		/// Whether the user wants to hear this type of sound
-		bool enabled;
+		bool enabled{true};
 		/// Volume for sound effects or music (from 0 to get_max_volume())
 		int volume;
 		/// Name for saving
@@ -258,7 +261,7 @@ private:
 	RNG rng_;
 
 	/// Protects access to active_fx_ between callbacks and main code.
-	SDL_mutex* fx_lock_;
+	SDL_mutex* fx_lock_{nullptr};
 
 	/**
 	 * Can sounds be played?
@@ -266,6 +269,7 @@ private:
 	 * called. false = can be played
 	 */
 	static bool backend_is_disabled_;
+	bool use_custom_songset_instead_ingame_;
 };
 
 extern SoundHandler* g_sh;

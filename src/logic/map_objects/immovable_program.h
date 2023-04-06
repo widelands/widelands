@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -34,7 +33,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	class Action {
 	public:
 		Action() = default;
-		virtual ~Action();
+		virtual ~Action() = default;
 		virtual void execute(Game&, Immovable&) const = 0;
 
 	private:
@@ -60,7 +59,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	public:
 		ActAnimate(const std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
-		uint32_t animation() const {
+		[[nodiscard]] uint32_t animation() const {
 			return parameters.animation;
 		}
 
@@ -78,7 +77,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	private:
 		std::string type_name_;
 		bool bob_;
-		uint8_t probability_;
+		unsigned probability_;
 	};
 
 	/// Like ActTransform but the probability is determined by the suitability.
@@ -97,7 +96,7 @@ struct ImmovableProgram : public MapObjectProgram {
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		uint8_t probability_;
+		unsigned probability_;
 	};
 
 	class ActSeed : public Action {
@@ -106,8 +105,8 @@ struct ImmovableProgram : public MapObjectProgram {
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string type_name;
-		uint8_t probability;
+		std::string type_name_;
+		unsigned probability_;
 	};
 
 	/// Plays a sound effect.
@@ -150,10 +149,10 @@ struct ImmovableProgram : public MapObjectProgram {
 		ActConstruct(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
-		Duration buildtime() const {
+		[[nodiscard]] Duration buildtime() const {
 			return buildtime_;
 		}
-		Duration decaytime() const {
+		[[nodiscard]] Duration decaytime() const {
 			return decaytime_;
 		}
 
@@ -171,10 +170,9 @@ struct ImmovableProgram : public MapObjectProgram {
 	                 const std::vector<std::string>& lines,
 	                 ImmovableDescr& immovable);
 
-	~ImmovableProgram() {
-	}
+	~ImmovableProgram() override = default;
 
-	size_t size() const {
+	[[nodiscard]] size_t size() const {
 		return actions_.size();
 	}
 	const Action& operator[](size_t const idx) const {
@@ -187,21 +185,19 @@ private:
 };
 
 struct ImmovableActionData {
-	ImmovableActionData() {
-	}
-	virtual ~ImmovableActionData() {
-	}
+	ImmovableActionData() = default;
+	virtual ~ImmovableActionData() = default;
 
-	virtual const char* name() const = 0;
+	[[nodiscard]] virtual const char* name() const = 0;
 	virtual void save(FileWrite& fw, Immovable& imm) const = 0;
 
-	static ImmovableActionData* load(FileRead& fr, Immovable& imm, const std::string& name);
+	static ImmovableActionData* load(FileRead& fr, const Immovable& imm, const std::string& name);
 };
 
 struct ActConstructData : ImmovableActionData {
-	const char* name() const override;
+	[[nodiscard]] const char* name() const override;
 	void save(FileWrite& fw, Immovable& imm) const override;
-	static ActConstructData* load(FileRead& fr, Immovable& imm);
+	static ActConstructData* load(FileRead& fr, const Immovable& imm);
 
 	Buildcost delivered;
 };

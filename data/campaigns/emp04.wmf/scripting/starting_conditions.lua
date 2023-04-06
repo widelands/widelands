@@ -12,7 +12,7 @@ field_mill = map:get_field(18, 184)
 place_building_in_region(p3, "empire_mill", {field_mill})
 
 field_warehouse = map:get_field(21, 186)
-place_building_in_region(p3, "empire_temple_of_vesta", {field_warehouse}, {workers = {empire_carrier = 0, empire_recruit = 0}, wares = {wheat = 200}, soldiers = {[{0,0,0,0}] = 3}})
+place_building_in_region(p3, "empire_temple_of_vesta", {field_warehouse}, {workers = {empire_carrier = 0, empire_recruit = 0}, wares = {wheat = 200}, soldiers = {[{0,0,0,0}] = 3}}).warehousename = ""
 
    r1 = p3:place_road("normal", field_warehouse.immovable.flag, "l", "tl", true)
    r2 = p3:place_road("normal", field_mill.immovable.flag, "tr", "r", true)
@@ -36,13 +36,13 @@ prefilled_buildings(p1,
       empire_geologist = 1,
    }
    }
-)
+)[1].warehousename = _("Fremil");
 
 -- Lower resources to zero in starting region (to cope with default ressources)
 for x=7, 42 do
    for y=10, 50 do
       local field = map:get_field(x,y)
-      if field.resource == "fish" or field.resource == "water" then
+      if field.resource == "resource_fish" or field.resource == "resource_water" then
          field.resource_amount = 0
       end
    end
@@ -77,7 +77,7 @@ place_building_in_region(p1, "empire_foresters_house1", {map:get_field(19, 10)})
 place_building_in_region(p1, "empire_foresters_house1", {map:get_field(19, 18)})
 
 -- Mines
-place_building_in_region(p1, "empire_ironmine", {map:get_field(33, 14)})
+place_building_in_region(p1, "empire_ironmine", {map:get_field(32, 14)})
 place_building_in_region(p1, "empire_coalmine", {map:get_field(24, 45)})
 place_building_in_region(p1, "empire_coalmine", {map:get_field(31, 48)})
 place_building_in_region(p1, "empire_goldmine", sf:region(25))

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2020 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,6 +27,13 @@
 namespace UI {
 
 enum class ButtonStyle {
+
+	/************************************************************************************
+	 *
+	 * Don't forget to update doc/sphinx/source/themes.rst when you add or remove styles!
+	 *
+	 ************************************************************************************/
+
 	kFsMenuMenu,
 	kFsMenuPrimary,
 	kFsMenuSecondary,
@@ -36,6 +42,8 @@ enum class ButtonStyle {
 	kWuiSecondary,
 	kWuiBuildingStats
 };
+
+PanelStyle to_panel_style(ButtonStyle);
 
 struct ButtonStyleInfo {
 	ButtonStyleInfo(const UI::TextPanelStyleInfo* init_enabled,
@@ -47,11 +55,11 @@ struct ButtonStyleInfo {
 	     disabled_(new UI::TextPanelStyleInfo(other.disabled())) {
 	}
 
-	const UI::TextPanelStyleInfo& enabled() const {
-		return *enabled_.get();
+	[[nodiscard]] const UI::TextPanelStyleInfo& enabled() const {
+		return *enabled_;
 	}
-	const UI::TextPanelStyleInfo& disabled() const {
-		return *disabled_.get();
+	[[nodiscard]] const UI::TextPanelStyleInfo& disabled() const {
+		return *disabled_;
 	}
 
 private:

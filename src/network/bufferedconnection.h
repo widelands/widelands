@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_NETWORK_BUFFEREDCONNECTION_H
 #define WL_NETWORK_BUFFEREDCONNECTION_H
 
+#include <map>
 #include <memory>
 #include <mutex>
 #include <thread>
@@ -67,7 +67,7 @@ public:
 		 * \note The Peeker instance does not own the given connection. It is the responsible of the
 		 *       caller to make sure the given instance stays valid.
 		 */
-		Peeker(BufferedConnection* conn);
+		explicit Peeker(BufferedConnection* conn);
 
 		/**
 		 * Checks whether a relay command can be read from the buffer.
@@ -108,7 +108,7 @@ public:
 		BufferedConnection* conn_;
 
 		/// The position of the next peek.
-		size_t peek_pointer_;
+		size_t peek_pointer_{0U};
 	};
 
 	/**
@@ -124,7 +124,7 @@ public:
 	 * called. \return A pair with a pointer to an unconnected \c BufferedConnection object and a
 	 * pointer to the internal socket.
 	 */
-	static std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>
+	static std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*>
 	create_unconnected();
 
 	/**
@@ -143,7 +143,7 @@ public:
 	 * Returns whether the connection is established.
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */
-	bool is_connected() const;
+	[[nodiscard]] bool is_connected() const;
 
 	/**
 	 * Closes the connection.
@@ -171,17 +171,17 @@ public:
 	 * Receive a string.
 	 * \warning Calling this method is only safe when peek_string() returned \c true.
 	 *          Otherwise the behavior of this method is undefined.
-	 * \param out The variable to write the value to.
+	 * \param str The variable to write the value to.
 	 */
-	void receive(std::string* out);
+	void receive(std::string* str);
 
 	/**
 	 * Receive a RecvPacket.
 	 * \warning Calling this method is only safe when peek_recvpacket() returned \c true.
 	 *          Otherwise the behavior of this method is undefined.
-	 * \param out The variable to write the value to.
+	 * \param packet The variable to write the value to.
 	 */
-	void receive(RecvPacket* out);
+	void receive(RecvPacket* packet);
 
 	// Temporary method, will be removed when display of RTT measurements are implemented.
 	// Removes a message from type kRoundTripTimeResponse from the buffer.
@@ -305,18 +305,18 @@ private:
 	 * Reduces the send buffer of the given socket to only contain 20 packets.
 	 * @param socket The socket to modify.
 	 */
-	static void reduce_send_buffer(boost::asio::ip::tcp::socket& socket);
+	static void reduce_send_buffer(asio::ip::tcp::socket& socket);
 
 	/// The buffers that are waiting to be send.
 	/// The map key is the priority of the packets stored in the queue.
 	/// Each packet in the queue is a vector of uint8_t.
 	std::map<uint8_t, std::queue<std::vector<uint8_t>>> buffers_to_send_;
 
-	/// An io_service needed by boost.asio. Primarily needed for asynchronous operations.
-	boost::asio::io_service io_service_;
+	/// An io_service needed by asio. Primarily needed for asynchronous operations.
+	asio::io_service io_service_;
 
 	/// The socket that connects us to the host.
-	boost::asio::ip::tcp::socket socket_;
+	asio::ip::tcp::socket socket_;
 
 	/// Buffer for arriving data. We need to store it until we have enough
 	/// to return the required type.
@@ -331,7 +331,7 @@ private:
 	/// Protects receive_buffer_
 	std::mutex mutex_receive_;
 	/// Whether we are currently sending something, used within start_sending()
-	bool currently_sending_;
+	bool currently_sending_{false};
 };
 
 #endif  // end of include guard: WL_NETWORK_BUFFEREDCONNECTION_H

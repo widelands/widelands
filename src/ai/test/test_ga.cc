@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,62 +12,50 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 // Unittests related to Genetic Algorithm
 
-#include <boost/test/unit_test.hpp>
-
-#ifdef _WIN32
-#include "base/log.h"
-#endif
 #include "ai/ai_help_structs.h"
-#include "base/macros.h"
+#include "base/test.h"
 
-// Triggered by BOOST_AUTO_TEST_CASE
-CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-CLANG_DIAG_OFF("-Wused-but-marked-unused")
+TESTSUITE_START(ai_ga)
 
-using namespace Widelands;
-
-BOOST_AUTO_TEST_SUITE(ai_ga)
-
-// Neuron presents a curve, of integers in range (0-20) (21 values)
-BOOST_AUTO_TEST_CASE(neuron) {
-	Neuron n1 = Neuron(-50, 0, 0);
-	BOOST_CHECK_EQUAL(n1.get_id(), 0);
-	BOOST_CHECK_EQUAL(n1.get_weight(), -50);
-	BOOST_CHECK_EQUAL(n1.get_result(10), -25);
-	BOOST_CHECK_EQUAL(n1.get_result(20), -50);
-	BOOST_CHECK_EQUAL(n1.get_result_safe(100), -50);
+// AI::Neuron presents a curve, of integers in range (0-20) (21 values)
+TESTCASE(neuron) {
+	AI::Neuron n1 = AI::Neuron(-50, 0, 0);
+	check_equal(n1.get_id(), 0);
+	check_equal(n1.get_weight(), -50);
+	check_equal(n1.get_result(10), -25);
+	check_equal(n1.get_result(20), -50);
+	check_equal(n1.get_result_safe(100), -50);
 }
 
-BOOST_AUTO_TEST_CASE(neuron_updated_weight) {
-	Neuron n1 = Neuron(-50, 0, 0);
+TESTCASE(neuron_updated_weight) {
+	AI::Neuron n1 = AI::Neuron(-50, 0, 0);
 	n1.set_weight(50);
 	n1.recalculate();
-	BOOST_CHECK_EQUAL(n1.get_id(), 0);
-	BOOST_CHECK_EQUAL(n1.get_weight(), 50);
-	BOOST_CHECK_EQUAL(n1.get_result(10), 25);
-	BOOST_CHECK_EQUAL(n1.get_result_safe(100), 50);
+	check_equal(n1.get_id(), 0);
+	check_equal(n1.get_weight(), 50);
+	check_equal(n1.get_result(10), 25);
+	check_equal(n1.get_result_safe(100), 50);
 }
 
-// FNeuron is uint32_t that serves as 32 bools, that can be set and get independently
-BOOST_AUTO_TEST_CASE(fneuron_position) {
-	FNeuron fn = FNeuron(0, 0);
-	BOOST_CHECK_EQUAL(fn.get_int(), 0);  // Initialized as 0, so must be still 0
+// AI::FNeuron is uint32_t that serves as 32 bools, that can be set and get independently
+TESTCASE(fneuron_position) {
+	AI::FNeuron fn = AI::FNeuron(0, 0);
+	check_equal(fn.get_int(), 0u);  // Initialized as 0, so must be still 0
 	const bool val0 = fn.get_position(0);
 	const bool val1 = fn.get_position(1);
-	BOOST_CHECK_EQUAL(fn.get_position(0), val0);
+	check_equal(fn.get_position(0), val0);
 	fn.flip_bit(0);
-	BOOST_CHECK_EQUAL(!fn.get_position(0), val0);
-	BOOST_CHECK_EQUAL(fn.get_position(1), val1);  // should not be changed
-	BOOST_CHECK(fn.get_int() != 0);               // Initialized as 0, so now must be different
-	fn.flip_bit(0);                               // reverting back
-	BOOST_CHECK_EQUAL(fn.get_int(), 0);
+	check_equal(!fn.get_position(0), val0);
+	check_equal(fn.get_position(1), val1);  // should not be changed
+	check_equal(fn.get_int() != 0, true);   // Initialized as 0, so now must be different
+	fn.flip_bit(0);                         // reverting back
+	check_equal(fn.get_int(), 0);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()

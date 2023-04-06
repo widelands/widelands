@@ -1,6 +1,9 @@
 # Widelands
 
-[![Build Status Travis-CI](https://travis-ci.org/widelands/widelands.svg?branch=master)](https://travis-ci.org/widelands/widelands) [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands) ![Code Quality](https://github.com/widelands/widelands/workflows/Formatting%20your%20code/badge.svg) ![Build](https://github.com/gunchleoc/widelands/workflows/Build/badge.svg) [![Mirrored on Launchpad](https://github.com/widelands/widelands/workflows/Launchpad%20Mirror/badge.svg)](https://code.launchpad.net/~widelands-dev/widelands/trunk)
+[![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands)
+[![Code Quality](https://github.com/widelands/widelands/workflows/Formatting%20your%20code/badge.svg)](https://github.com/widelands/widelands/actions?query=workflow%3A%22Formatting+your+code%22)
+[![Build](https://github.com/widelands/widelands/workflows/Build/badge.svg)](https://github.com/widelands/widelands/actions?query=workflow%3ABuild)
+[![Mirrored on Launchpad](https://github.com/widelands/widelands/workflows/Launchpad%20Mirror/badge.svg)](https://code.launchpad.net/~widelands-dev/widelands/trunk)
 
 Widelands is a free, open source real-time strategy game with singleplayer campaigns and a multiplayer mode.
 The game was inspired by Settlers II™ (© Bluebyte) but has significantly more variety and depth to it.
@@ -8,7 +11,7 @@ The game was inspired by Settlers II™ (© Bluebyte) but has significantly more
 ![Widelands Screenshot](https://www.widelands.org/static/img/welcome.jpg)
 
 
-## License [![License](https://img.shields.io/github/license/widelands/widelands.svg?color=blue)](LICENCE)
+## License [![License](https://img.shields.io/github/license/widelands/widelands.svg?color=blue)](COPYING)
 
 GPL v2+. Some assets are released under various Creative Commons licenses – see the respective folders.
 
@@ -18,23 +21,23 @@ On how to download Widelands, see https://www.widelands.org/wiki/Download/
 
 ## Compiling
 
-We support compiling Widelands for Linux, Windows under MSys2, and MacOs with GCC >= 4.8 or Clang/LLVM >= 3.4, though it might work with other compilers too. We have more detailed documentation available at: https://www.widelands.org/wiki/BuildingWidelands/
+We support compiling Widelands for Linux, Windows under MSys2 and MSVC, and MacOS with GCC >= 7 or Clang/LLVM >= 7, though it might work with other compilers too. We have more detailed documentation available at: https://www.widelands.org/wiki/BuildingWidelands/
 
 
 ### Dependencies
 
 You will need to install the following dependencies:
 
-*  [libSDL](http://www.libsdl.org/) >=2.0
-*  [libSDL_image](http://www.libsdl.org/projects/SDL_image)
-*  [libSDL_mixer](http://www.libsdl.org/projects/SDL_mixer) >= 2.0
-*  [libSDL_ttf](http://www.libsdl.org/projects/SDL_ttf) >= 2.0
-*  [gettext](http://www.gnu.org/software/gettext/gettext.html)
+*  [libSDL](https://www.libsdl.org/) >=2.0
+*  [libSDL_image](https://www.libsdl.org/projects/SDL_image)
+*  [libSDL_mixer](https://www.libsdl.org/projects/SDL_mixer) >= 2.0
+*  [libSDL_ttf](https://www.libsdl.org/projects/SDL_ttf) >= 2.0
+*  [gettext](https://www.gnu.org/software/gettext/gettext.html)
 * libiconv (on same mirrors as gettext)
-*  [zlib](http://www.zlib.net/)
+*  [zlib](https://www.zlib.net/)
 *  [libpng](http://www.libpng.org/pub/png/libpng.html)
-*  [Boost](http://www.boost.org/) >= 1.48
-*  [Python](http://www.python.org) >= 1.5.2
+*  [Asio](https://think-async.com/Asio/)
+*  [Python](https://www.python.org) >= 1.5.2
 *  [libglew](http://glew.sourceforge.net) or [glbinding](https://glbinding.org/)
 
 
@@ -101,12 +104,14 @@ Note that CMake options are prefixed with `-D`. These are the available options:
 | `OPTION_BUILD_TRANSLATIONS` | `ON`/`OFF` | `ON` | Build translations |
 | `OPTION_BUILD_CODECHECK` | `ON`/`OFF` | `ON` | Build codecheck. Only available in Debug builds. |
 | `OPTION_BUILD_WEBSITE_TOOLS` | `ON`/`OFF` | `ON` | Build website-related tools |
-| `OPTION_BUILD_TESTS` | `ON`/`OFF` | `ON` | Build Boost tests |
+| `OPTION_BUILD_TESTS` | `ON`/`OFF` | `ON` | Build unit tests |
 | `CMAKE_INSTALL_PREFIX` | A directory | See [CMake documentation](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) | Define the target directory for the "install" target, e.g. `-DCMAKE_INSTALL_PREFIX=~/widelands-install`. |
+| `WL_INSTALL_BINDIR` | A directory | `${CMAKE_INSTALL_PREFIX}/games` | Define the destination of executables files (if installing) |
 | `WL_VERSION` | A version string | Autodetected from git/bzr, or set by adding a `VERSION` file | Define the Widelands version |
 | `USE_XDG` | `ON`/`OFF` | `ON` | Follow XDG-Basedir specification. Only available on Linux. |
 | `OPTION_USE_GLBINDING` | `ON`/`OFF` | `OFF` | Use glbinding instead of GLEW |
 | `OPTION_GLEW_STATIC` | `ON`/`OFF` | `OFF` | Use static GLEW Library |
+| `OPTION_FORCE_EMBEDDED_MINIZIP` | `ON`/`OFF` | `OFF` | Used embedded minizip sources (skip checking for installed minizip library) |
 
 #### make/ninja targets
 
@@ -115,7 +120,7 @@ You can add targets to the `make` or `ninja` command, e.g. `make lang` to build 
 | Name | Function |
 | --- | --- |
 | `ALL` or no target | Compile everything, up to executable with the settings from the `cmake` call |
-| `codecheck` | Run the codechecks (currently broken) |
+| `codecheck` | Run the codechecks |
 | `doc` | Generate Doxygen documentation. Currently only with Build Type Debug, but this is easily changed if necessary. |
 | `install` | Install into the target dir, this is `/usr/local` per default (you need root privileges!) unless you change it (see CMake options above) |
 | `lang` | Generate the translations |
@@ -129,6 +134,12 @@ We have some instructions on how to use Git to help you if you're new to GitHub:
 The master branch and open pull requests will be formatted automatically by a GitHub action that runs `clang-format`. When you push to an open pull request, the formatting changes will be pushed back to the branch after about four minutes. Don't forget to run 'git pull' before you push again. Formatting is only triggered the first time you push *after* you opened the PR.
 
 You need to enable *local and third-party actions* in the Actions tab of your fork's settings to enable automatic formatting. If you disable actions, no formatting will take place on your branches.
+
+In order to ensure that our continuous integration suite will work properly for branches in your fork, it is strongly recommended that you create a personal access token for our formatting action:
+1. Create a Personal Access Token in your **profile** (https://github.com/settings/tokens). Select the scope `Repo → public_repo` for the new token. The token's note does not matter (use e.g. "Widelands Formatting Bot"). Copy the token's hash.
+2. Create a secret in your **widelands fork** (`https://github.com/<username>/widelands/settings/secrets`). The secret must be named `WIDELANDS_FORMAT_TOKEN`. Its value must be the hash of the token you just created.
+
+More information about [Personal Access Tokens may be found here](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token). More information about [secrets may be found here](https://docs.github.com/en/free-pro-team@latest/github/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets).
 
 We follow the [Google Styleguide](https://google.github.io/styleguide/cppguide.html).
 
@@ -166,8 +177,8 @@ For helping with issue management, see https://www.widelands.org/wiki/TriagingBu
 | utils | Diverse utilities: Building translations, code formatting, packaging Mac & Windows, ... |
 
 
-## Obtaining Travis and MS-Windows builds
+## Obtaining MacOS and MS-Windows builds and testsuite runs
 
-Travis builds are triggered for all pull requests and for new pushes to the `master` branch. If you want to get a build without making a pull request, temporarily add the name of your branch to the `branches` section in `.travis.yml`. This will not work if the branch is in a fork though.
+All pushes to master will be built on AppVeyor. Pull request branches are deployed for MS-Windows using a GitHub action. To obtain MS-Windows builds if you do not wish to open a pull request, temporarily add the name of your branch to the `branches` section in `appveyor.yml`. This will not work if the branch is in a fork though.
 
-All pushes to master will be built on AppVeyor. Pull request branches are deployed for MS-Windows using a GitHub action. To obtain MS-Windows builds if you do not wish to open a pull request, temporarily add the name of your branch to the `branches` section in `appveyor.yml`. This also does not work for branches in forks.
+All pull request branches as well as master are additionally deployed for MacOS, and a testsuite checks them under various compilers. To obtain MacOS builds or testsuite results, temporarily add the name of your branch to the `branches` section in `.github/workflows/build.yaml`. This *does* work for branches in forks as well.

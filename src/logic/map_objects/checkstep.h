@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -41,24 +40,23 @@ struct CheckStep {
 
 private:
 	struct BaseCapsule {
-		virtual ~BaseCapsule() {
-		}
-		virtual bool allowed(
+		virtual ~BaseCapsule() = default;
+		[[nodiscard]] virtual bool allowed(
 		   const Map&, const FCoords& start, const FCoords& end, int32_t dir, StepId id) const = 0;
-		virtual bool reachable_dest(const Map&, const FCoords& dest) const = 0;
+		[[nodiscard]] virtual bool reachable_dest(const Map&, const FCoords& dest) const = 0;
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
-		Capsule(const T& init_op) : op(init_op) {
+		Capsule(const T& init_op) : op(init_op) {  // NOLINT allow implicit conversion
 		}
 
-		bool allowed(const Map& map,
-		             const FCoords& start,
-		             const FCoords& end,
-		             int32_t const dir,
-		             StepId const id) const override {
+		[[nodiscard]] bool allowed(const Map& map,
+		                           const FCoords& start,
+		                           const FCoords& end,
+		                           int32_t const dir,
+		                           StepId const id) const override {
 			return op.allowed(map, start, end, dir, id);
 		}
-		bool reachable_dest(const Map& map, const FCoords& dest) const override {
+		[[nodiscard]] bool reachable_dest(const Map& map, const FCoords& dest) const override {
 			return op.reachable_dest(map, dest);
 		}
 
@@ -72,18 +70,20 @@ private:
 public:
 	CheckStep();
 
-	template <typename T> CheckStep(const T& op) : capsule(new Capsule<T>(op)) {
+	template <typename T>
+	CheckStep(const T& op)  // NOLINT allow implicit conversion
+	   : capsule(new Capsule<T>(op)) {
 	}
 
 	/**
 	 * \return \c true true if moving from start to end (single step in the given
 	 * direction) is allowed.
 	 */
-	bool allowed(const Map& map,
-	             const FCoords& start,
-	             const FCoords& end,
-	             int32_t const dir,
-	             StepId const id) const {
+	[[nodiscard]] bool allowed(const Map& map,
+	                           const FCoords& start,
+	                           const FCoords& end,
+	                           int32_t const dir,
+	                           StepId const id) const {
 		return capsule->allowed(map, start, end, dir, id);
 	}
 
@@ -91,7 +91,7 @@ public:
 	 * \return \c true if the destination field can be reached at all
 	 * (e.g. return false for land-based bobs when dest is in water).
 	 */
-	bool reachable_dest(const Map& map, const FCoords& dest) const {
+	[[nodiscard]] bool reachable_dest(const Map& map, const FCoords& dest) const {
 		return capsule->reachable_dest(map, dest);
 	}
 };
@@ -103,12 +103,12 @@ public:
 struct CheckStepAnd {
 	void add(const CheckStep& sub);
 
-	bool allowed(const Map&,
-	             const FCoords& start,
-	             const FCoords& end,
-	             int32_t dir,
-	             CheckStep::StepId id) const;
-	bool reachable_dest(const Map&, const FCoords& dest) const;
+	[[nodiscard]] bool allowed(const Map&,
+	                           const FCoords& start,
+	                           const FCoords& end,
+	                           int32_t dir,
+	                           CheckStep::StepId id) const;
+	[[nodiscard]] bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:
 	std::vector<CheckStep> subs;
@@ -122,12 +122,12 @@ private:
  * bobs moving onto the shore).
  */
 struct CheckStepDefault {
-	CheckStepDefault(uint8_t const movecaps) : movecaps_(movecaps) {
+	explicit CheckStepDefault(uint8_t const movecaps) : movecaps_(movecaps) {
 	}
 
-	bool allowed(
+	[[nodiscard]] bool allowed(
 	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
-	bool reachable_dest(const Map&, const FCoords& dest) const;
+	[[nodiscard]] bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:
 	uint8_t movecaps_;
@@ -139,12 +139,12 @@ private:
  * A ferry can travel on an edge if and only if both adjacent triangles are water.
  */
 struct CheckStepFerry {
-	CheckStepFerry(const EditorGameBase& egbase) : egbase_(egbase) {
+	explicit CheckStepFerry(const EditorGameBase& egbase) : egbase_(egbase) {
 	}
 
-	bool allowed(
-	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
-	bool reachable_dest(const Map&, const FCoords& dest) const;
+	[[nodiscard]] bool allowed(
+	   const Map&, const FCoords& from, const FCoords& to, int32_t dir, CheckStep::StepId) const;
+	[[nodiscard]] bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:
 	const EditorGameBase& egbase_;
@@ -160,9 +160,9 @@ struct CheckStepWalkOn {
 	   : movecaps_(movecaps), onlyend_(onlyend) {
 	}
 
-	bool allowed(
+	[[nodiscard]] bool allowed(
 	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
-	bool reachable_dest(const Map&, FCoords dest) const;
+	[[nodiscard]] bool reachable_dest(const Map&, FCoords dest) const;
 
 private:
 	uint8_t movecaps_;
@@ -181,9 +181,9 @@ struct CheckStepRoad {
 	   : player_(player), movecaps_(movecaps) {
 	}
 
-	bool allowed(
+	[[nodiscard]] bool allowed(
 	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
-	bool reachable_dest(const Map&, const FCoords& dest) const;
+	[[nodiscard]] bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:
 	const Player& player_;
@@ -198,9 +198,9 @@ struct CheckStepLimited {
 	void add_allowed_location(const Coords& c) {
 		allowed_locations_.insert(c);
 	}
-	bool allowed(
+	[[nodiscard]] bool allowed(
 	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
-	bool reachable_dest(const Map&, FCoords dest) const;
+	[[nodiscard]] bool reachable_dest(const Map&, FCoords dest) const;
 
 private:
 	// The ordering of the set does not matter, as long as it is system

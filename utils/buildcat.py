@@ -40,6 +40,7 @@ MAINPOTS = [
                      '../../data/txts/tips/*.tip']),
     ('widelands/widelands', [
         '../../src/wlapplication.cc',
+        '../../src/wlapplication_options.cc',
         '../../src/*/*.cc',
         '../../src/*/*/*.cc',
         '../../src/*/*/*/*.cc',
@@ -60,6 +61,9 @@ MAINPOTS = [
     ('win_conditions/win_conditions', [
         '../../data/scripting/win_conditions/*.lua',
     ]),
+    ('training_wheels/training_wheels', [
+        '../../data/scripting/training_wheels/*.lua',
+    ]),
     ('world/world', [
         '../../data/world/*.lua',
         '../../data/world/*/*.lua',
@@ -69,8 +73,8 @@ MAINPOTS = [
         '../../data/world/*/*/*/*/*/*.lua',
     ]),
     ('tribes/tribes', [
-        '../../data/tribes/scripting/starting_conditions/*/*.lua',
-        '../../data/tribes/*.lua',
+        '../../data/tribes/initialization/*/military_capacity.lua',
+        '../../data/tribes/initialization/*/starting_conditions/*.lua',
         '../../data/tribes/economy_profiles/*',
         '../../data/tribes/*/init.lua',
         '../../data/tribes/*/*/init.lua',
@@ -79,13 +83,8 @@ MAINPOTS = [
         '../../data/tribes/*/*/*/*/*/init.lua',
     ]),
     ('tribes_encyclopedia/tribes_encyclopedia', [
+        '../../data/tribes/initialization/*/units.lua',
         '../../data/tribes/scripting/help/*.lua',
-        '../../data/tribes/*/helptexts.lua',
-        '../../data/tribes/*/*/helptexts.lua',
-        '../../data/tribes/*/*/*/helptexts.lua',
-        '../../data/tribes/*/*/*/*/helptexts.lua',
-        '../../data/tribes/*/*/*/*/*/helptexts.lua',
-        '../../data/tribes/*/resi/helptexts/*.lua',
     ]),
     ('widelands_editor/widelands_editor', [
         '../../data/scripting/editor/*.lua',
@@ -112,10 +111,11 @@ ITERATIVEPOTS = [
       '../../data/campaigns/%(name)s/objective',
       '../../data/campaigns/%(name)s/scripting/*.lua',
       '../../data/campaigns/%(name)s/scripting/*/*.lua',
+      '../../data/campaigns/%(name)s/scripting/*/*/*.lua',
       ]
      ),
-    ('map_%(name)s/map_%(name)s', 'data/maps/',
-     ['../../data/maps/%(name)s/scripting/*.lua', ]
+    ('map_%(name)s/map_%(name)s', 'data/maps/SP_Scenarios',
+     ['../../data/maps/SP_Scenarios/%(name)s/scripting/*.lua', ]
      ),
     ('mp_scenario_%(name)s/mp_scenario_%(name)s', 'data/maps/MP_Scenarios/',
      ['../../data/maps/MP_Scenarios/%(name)s/scripting/*.lua', ]
@@ -242,7 +242,7 @@ def run_xgettext(infiles, outfile, opts):
     xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" %
                                 (opts, outfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
     try:
-        for fname in infiles:
+        for fname in sorted(infiles):
             xgettext.stdin.write(os.path.normpath(fname) + '\n')
         xgettext.stdin.close()
     except IOError as err_msg:

@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "widelands.exe (src\\widelands.exe)",
+      "name": "widelands.exe (src\\widelands.exe)",
+      "args": [
+        "--datadir=..\\..\\..\\data"
+      ]
+    }
+  ]
+}

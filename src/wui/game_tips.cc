@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,47 +12,45 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "wui/game_tips.h"
 
+#include <cstdlib>
 #include <memory>
 
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
+#include "base/random.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/graphic_functions.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_layout.h"
+#include "io/filesystem/filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
-#define BG_IMAGE "images/loadscreens/tips_bg.png"
-
-constexpr int kTextPadding = 48;
-
-GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names)
-   : lastUpdated_(0),
-     updateAfter_(0),
-     progressWindow_(progressWindow),
-     registered_(false),
-     lastTip_(0) {
+GameTips::GameTips(UI::ProgressWindow& progressWindow,
+                   const std::vector<std::string>& names,
+                   const Widelands::AllTribes& t)
+   : progressWindow_(progressWindow) {
 	// Loading the "texts" locale for translating the tips
 	i18n::Textdomain textdomain("texts");
 
-	for (uint8_t i = 0; i < names.size(); ++i) {
-		load_tips(names[i]);
+	for (const std::string& name : names) {
+		load_tips(name, t);
 	}
 
 	if (!tips_.empty()) {
 		// add visualization only if any tips are loaded
 		progressWindow_.add_visualization(this);
 		registered_ = true;
-		lastTip_ = tips_.size();
+		last_tip_ = tips_.size();
 	}
 }
 
@@ -61,10 +59,23 @@ GameTips::~GameTips() {
 }
 
 /// Loads tips out of \var name
-void GameTips::load_tips(const std::string& name) {
+void GameTips::load_tips(const std::string& name, const Widelands::AllTribes& t) {
 	try {
 		LuaInterface lua;
-		std::unique_ptr<LuaTable> table(lua.run_script("txts/tips/" + name + ".lua"));
+		std::string filename = "txts/tips/";
+		filename += name;
+		filename += ".lua";
+		for (const Widelands::TribeBasicInfo& tribe : t) {
+			if (tribe.name == name) {
+				if (tribe.script.compare(0, kAddOnDir.size(), kAddOnDir) == 0) {
+					filename = FileSystem::fs_dirname(tribe.script);
+					filename += FileSystem::file_separator();
+					filename += "tips.lua";
+				}
+				break;
+			}
+		}
+		std::unique_ptr<LuaTable> table(lua.run_script(filename));
 		std::unique_ptr<LuaTable> tip_table;
 		for (const int key : table->keys<int>()) {
 			tip_table = table->get_table(key);
@@ -74,26 +85,24 @@ void GameTips::load_tips(const std::string& name) {
 			tips_.push_back(tip);
 		}
 	} catch (LuaError& err) {
-		log("Error loading tips script for %s:\n%s\n", name.c_str(), err.what());
+		log_err("Error loading tips script for %s:\n%s\n", name.c_str(), err.what());
 		// No further handling necessary - tips do not impact game
 	}
 }
 
-void GameTips::update(bool repaint) {
+void GameTips::update(RenderTarget& rt, const Recti& bounds) {
 	uint32_t ticks = SDL_GetTicks();
-	if (ticks >= (lastUpdated_ + updateAfter_)) {
-		const uint32_t next = std::rand() % tips_.size();  // NOLINT
-		if (next == lastTip_) {
-			lastTip_ = (next + 1) % tips_.size();
+	if (ticks >= (last_updated_ + update_after_)) {
+		const uint32_t next = RNG::static_rand(tips_.size());
+		if (next == last_tip_) {
+			last_tip_ = (next + 1) % tips_.size();
 		} else {
-			lastTip_ = next;
+			last_tip_ = next;
 		}
-		show_tip(next);
-		lastUpdated_ = SDL_GetTicks();
-		updateAfter_ = tips_[next].interval * 1000;
-	} else if (repaint) {
-		show_tip(lastTip_);
+		last_updated_ = SDL_GetTicks();
+		update_after_ = tips_[next].interval * 1000;
 	}
+	show_tip(rt, bounds, last_tip_);
 }
 
 void GameTips::stop() {
@@ -103,18 +112,6 @@ void GameTips::stop() {
 	}
 }
 
-void GameTips::show_tip(int32_t index) {
-	RenderTarget& rt = *g_gr->get_render_target();
-
-	const Image* pic_background = g_gr->images().get(BG_IMAGE);
-	const int w = pic_background->width();
-	const int h = pic_background->height();
-	Vector2i pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
-	rt.blit(pt, pic_background);
-
-	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_game_tip(tips_[index].text), w - 2 * kTextPadding);
-	pt = Vector2i((g_gr->get_xres() - rendered_text->width()) / 2,
-	              (g_gr->get_yres() - rendered_text->height()) / 2);
-	rendered_text->draw(rt, pt);
+void GameTips::show_tip(RenderTarget& rt, const Recti& bounds, int32_t index) {
+	draw_game_tip(rt, bounds, tips_[index].text);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "editor/ui_menus/main_menu_load_map.h"
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "editor/editorinteractive.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map_io/widelands_map_loader.h"
@@ -30,50 +30,64 @@
  * Create all the buttons etc...
  */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
-   : MainMenuLoadOrSaveMap(parent, registry, "load_map_menu", _("Load Map")) {
+   : MainMenuLoadOrSaveMap(parent, registry, "load_map_menu", _("Load Map"), true) {
 	set_current_directory(curdir_);
 
-	table_.selected.connect([this](unsigned) { entry_selected(); });
-	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
+	table_.selected.connect([this](unsigned /* value */) { entry_selected(); });
+	table_.double_clicked.connect([this](unsigned /* value */) { clicked_ok(); });
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	cancel_.sigclicked.connect([this]() { die(); });
 
 	fill_table();
 	layout();
+
+	initialization_complete();
 }
 
 void MainMenuLoadMap::clicked_ok() {
-	assert(ok_.enabled());
-	assert(table_.has_selection());
+	if (!ok_.enabled() || !table_.has_selection()) {
+		return;
+	}
 	const MapData& mapdata = maps_data_[table_.get_selected()];
-	if (g_fs->is_directory(mapdata.filename) &&
-	    !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filename)) {
-		set_current_directory(mapdata.filename);
+	assert(!mapdata.filenames.empty());
+	if (g_fs->is_directory(mapdata.filenames.at(0)) &&
+	    !Widelands::WidelandsMapLoader::is_widelands_map(mapdata.filenames.at(0))) {
+		set_current_directory(mapdata.filenames);
 		fill_table();
 	} else {
+		assert(mapdata.filenames.size() == 1);
+		// Prevent description notes from reaching a subscriber
+		// other than the one they're meant for
+		egbase_.delete_world_and_tribes();
+
 		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
-		eia.egbase().create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
-		eia.load(mapdata.filename);
+		eia.egbase().create_loader_ui({"editor"}, true, "", kEditorSplashImage, false);
+		eia.load(mapdata.filenames.at(0));
 		// load() will delete us.
 		eia.egbase().remove_loader_ui();
 	}
 }
 
-void MainMenuLoadMap::set_current_directory(const std::string& filename) {
-	curdir_ = filename;
+void MainMenuLoadMap::set_current_directory(const std::vector<std::string>& filenames) {
+	assert(!filenames.empty());
+	curdir_ = filenames;
 
-	std::string display_dir = curdir_.substr(basedir_.size());
-	if (boost::starts_with(display_dir, "/")) {
+	std::string display_dir = curdir_.at(0).substr(basedir_.size());
+	if (starts_with(display_dir, "/")) {
 		display_dir = display_dir.substr(1);
 	}
-	if (boost::starts_with(display_dir, "My_Maps")) {
-		boost::replace_first(display_dir, "My_Maps", _("My Maps"));
-	} else if (boost::starts_with(display_dir, "MP_Scenarios")) {
-		boost::replace_first(display_dir, "MP_Scenarios", _("Multiplayer Scenarios"));
+	if (starts_with(display_dir, "My_Maps")) {
+		replace_first(display_dir, "My_Maps", _("My Maps"));
+	} else if (starts_with(display_dir, "MP_Scenarios")) {
+		replace_first(display_dir, "MP_Scenarios", _("Multiplayer Scenarios"));
+	} else if (starts_with(display_dir, "SP_Scenarios")) {
+		replace_first(display_dir, "MP_Scenarios", _("Singleplayer Scenarios"));
+	} else if (starts_with(display_dir, "Downloaded")) {
+		replace_first(display_dir, "Downloaded", _("Downloaded Maps"));
 	}
 	/** TRANSLATORS: The folder that a file will be saved to. */
-	directory_info_.set_text((boost::format(_("Current directory: %s")) % display_dir).str());
+	directory_info_.set_text(format(_("Current directory: %s"), display_dir));
 }
 
 /**
@@ -81,11 +95,12 @@ void MainMenuLoadMap::set_current_directory(const std::string& filename) {
  */
 void MainMenuLoadMap::entry_selected() {
 	bool has_selection = table_.has_selection();
-	ok_.set_enabled(has_selection);
 	if (!has_selection) {
+		ok_.set_enabled(false);
 		map_details_.clear();
 	} else {
-		map_details_.update(maps_data_[table_.get_selected()],
-		                    display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized);
+		ok_.set_enabled(map_details_.update(
+		   maps_data_[table_.get_selected()],
+		   display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized, true));
 	}
 }

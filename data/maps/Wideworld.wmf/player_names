@@ -1,22 +1,22 @@
-# Automatically created by Widelands bzr7905[trunk] (Debug)
+# Automatically created by Widelands 1.0~git25124[86b440b@master] (Release)
 
 [global]
 packet_version="2"
 
 [player_1]
-name="Player 1"
+name=
 tribe="barbarians"
 ai=
 closeable="false"
 
 [player_2]
-name="Player 2"
+name=
 tribe="barbarians"
 ai=
 closeable="false"
 
 [player_3]
-name="Player 3"
+name=
 tribe="barbarians"
 ai=
 closeable="false"

@@ -1,7 +1,5 @@
 /*
- * Thanks to Ulrich Drepper for the md5sum example code
- *
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,15 +12,16 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
+// Thanks to Ulrich Drepper for the md5sum example code.
 
 #ifndef WL_BASE_MD5_H
 #define WL_BASE_MD5_H
 
 #include <cassert>
+#include <cstdint>
 #include <cstring>
 #include <string>
 
@@ -44,7 +43,7 @@ struct Md5Ctx {
 struct Md5Checksum {
 	uint8_t data[16];
 
-	std::string str() const;
+	[[nodiscard]] std::string str() const;
 
 	bool operator==(const Md5Checksum& o) const {
 		return memcmp(data, o.data, sizeof(data)) == 0;
@@ -72,16 +71,16 @@ void md5_process_block(void const* buffer, uint32_t len, Md5Ctx*);
  */
 template <typename Base> class MD5Checksum : public Base {
 public:
-	MD5Checksum() {
+	MD5Checksum() : sum({0}) {
 		reset();
 	}
-	explicit MD5Checksum(const MD5Checksum& other)
+	MD5Checksum(const MD5Checksum& other)
 	   : Base(), can_handle_data(other.can_handle_data), sum(other.sum), ctx(other.ctx) {
 	}
 
 	/// Reset the checksumming machinery to its initial state.
 	void reset() {
-		can_handle_data = 1;
+		can_handle_data = true;
 		ctx.A = 0x67452301;
 		ctx.B = 0xefcdab89;
 		ctx.C = 0x98badcfe;
@@ -95,7 +94,7 @@ public:
 	///
 	/// \param newdata data to compute chksum for
 	/// \param size size of data
-	void data(const void* const newdata, const size_t size) {
+	void data(const void* const newdata, const size_t size) override {
 		assert(can_handle_data);
 		md5_process_bytes(newdata, size, &ctx);
 	}
@@ -104,7 +103,7 @@ public:
 	/// After this, no more data may be written to the checksum.
 	void finish_checksum() {
 		assert(can_handle_data);
-		can_handle_data = 0;
+		can_handle_data = false;
 		md5_finish_ctx(&ctx, sum.data);
 	}
 
@@ -112,7 +111,7 @@ public:
 	/// before this function.
 	///
 	/// \return a pointer to an array of 16 bytes containing the checksum.
-	const Md5Checksum& get_checksum() const {
+	[[nodiscard]] const Md5Checksum& get_checksum() const {
 		assert(!can_handle_data);
 		return sum;
 	}
@@ -123,7 +122,11 @@ private:
 	Md5Ctx ctx;
 };
 
-class _DummyMD5Base {};
-using SimpleMD5Checksum = MD5Checksum<_DummyMD5Base>;
+class DummyMD5Base {
+public:
+	virtual ~DummyMD5Base() = default;
+	virtual void data(const void*, size_t) = 0;
+};
+using SimpleMD5Checksum = MD5Checksum<DummyMD5Base>;
 
 #endif  // end of include guard: WL_BASE_MD5_H

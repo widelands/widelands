@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,13 +21,11 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/log.h"
-#include "graphic/graphic.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
-#include "logic/player.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/button.h"
@@ -36,22 +33,39 @@
 #include "ui_basic/slider.h"
 #include "wui/interactive_player.h"
 
-#define PLOT_HEIGHT 145
-#define NR_BASE_DATASETS 11
+constexpr int kPlotHeight = 145;
+constexpr int kNrBaseDatasets = 12;
 
 GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
                                              GeneralStatisticsMenu::Registry& registry)
-   : UI::UniqueWindow(&parent, "statistics_menu", &registry, 440, 400, _("General Statistics")),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      "statistics_menu",
+                      &registry,
+                      440,
+                      400,
+                      _("General Statistics")),
      my_registry_(&registry),
-     box_(this, 0, 0, UI::Box::Vertical, 0, 0, 5),
+     box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, 5),
+     player_buttons_box_(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1),
      plot_(&box_,
            0,
            0,
            430,
-           PLOT_HEIGHT,
-           Widelands::kStatisticsSampleTime,
+           kPlotHeight,
+           Widelands::kStatisticsSampleTime.get(),
            WuiPlotArea::Plotmode::kAbsolute),
-     selected_information_(0) {
+
+     game_(*parent.get_game()),
+     subscriber_(Notifications::subscribe<Widelands::NotePlayerDetailsEvent>(
+        [this](const Widelands::NotePlayerDetailsEvent& note) {
+	        if (note.event ==
+	            Widelands::NotePlayerDetailsEvent::Event::kGeneralStatisticsVisibilityChanged) {
+		        save_state_to_registry();
+		        create_player_buttons();
+		        initialization_complete();
+	        }
+        })) {
 	assert(my_registry_);
 
 	selected_information_ = my_registry_->selected_information;
@@ -60,14 +74,19 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	box_.set_border(5, 5, 5, 5);
 
 	// Setup plot data
-	Widelands::Game& game = *parent.get_game();
-	const Widelands::Game::GeneralStatsVector& genstats = game.get_general_statistics();
-	const Widelands::Game::GeneralStatsVector::size_type general_statistics_size = genstats.size();
+	const Widelands::Game::GeneralStatsVector& genstats = game_.get_general_statistics();
+	const Widelands::Game::GeneralStatsVector::size_type general_statistics_size =
+	   game_.map().get_nrplayers();
+	if (genstats.size() != general_statistics_size) {
+		// Create first data point
+		game_.sample_statistics();
+	}
 
 	// Is there a hook dataset?
-	ndatasets_ = NR_BASE_DATASETS;
-	std::unique_ptr<LuaTable> hook = game.lua().get_hook("custom_statistic");
-	std::string cs_name, cs_pic;
+	ndatasets_ = kNrBaseDatasets;
+	std::unique_ptr<LuaTable> hook = game_.lua().get_hook("custom_statistic");
+	std::string cs_name;
+	std::string cs_pic;
 	if (hook) {
 		i18n::Textdomain td("win_conditions");
 		hook->do_not_warn_about_unaccessed_keys();
@@ -77,7 +96,11 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	}
 
 	for (Widelands::Game::GeneralStatsVector::size_type i = 0; i < general_statistics_size; ++i) {
-		const RGBColor& color = kPlayerColors[i];
+		const Widelands::Player* p = parent.game().get_player(i + 1);
+		const RGBColor& color = p != nullptr ? p->get_playercolor() :
+                                             // The plot is always invisible if this player doesn't
+                                             // exist, but we need to assign a color anyway
+                                             kPlayerColors[i];
 		plot_.register_plot_data(i * ndatasets_ + 0, &genstats[i].land_size, color);
 		plot_.register_plot_data(i * ndatasets_ + 1, &genstats[i].nr_workers, color);
 		plot_.register_plot_data(i * ndatasets_ + 2, &genstats[i].nr_buildings, color);
@@ -88,11 +111,12 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		plot_.register_plot_data(i * ndatasets_ + 7, &genstats[i].nr_msites_lost, color);
 		plot_.register_plot_data(i * ndatasets_ + 8, &genstats[i].nr_msites_defeated, color);
 		plot_.register_plot_data(i * ndatasets_ + 9, &genstats[i].nr_civil_blds_lost, color);
-		plot_.register_plot_data(i * ndatasets_ + 10, &genstats[i].miltary_strength, color);
+		plot_.register_plot_data(i * ndatasets_ + 10, &genstats[i].nr_civil_blds_defeated, color);
+		plot_.register_plot_data(i * ndatasets_ + 11, &genstats[i].miltary_strength, color);
 		if (hook) {
-			plot_.register_plot_data(i * ndatasets_ + 11, &genstats[i].custom_statistic, color);
+			plot_.register_plot_data(i * ndatasets_ + 12, &genstats[i].custom_statistic, color);
 		}
-		if (game.get_player(i + 1)) {  // Show area plot
+		if (game_.get_player(i + 1) != nullptr) {  // Show area plot
 			plot_.show_plot(i * ndatasets_ + selected_information_, my_registry_->selected_players[i]);
 		}
 	}
@@ -102,112 +126,148 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	// Setup Widgets
 	box_.add(&plot_);
 
-	UI::Box* hbox1 = new UI::Box(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1);
+	create_player_buttons();
+	box_.add(&player_buttons_box_, UI::Box::Resizing::kFullSize);
 
-	uint32_t plr_in_game = 0;
-	Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
-	iterate_players_existing_novar(p, nr_players, game)++ plr_in_game;
-
-	iterate_players_existing_const(p, nr_players, game, player) {
-		const Image* player_image = playercolor_image(p - 1, "images/players/genstats_player.png");
-		assert(player_image);
-		UI::Button& cb =
-		   *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25, UI::ButtonStyle::kWuiMenu,
-		                   player_image, player->get_name().c_str());
-		cb.sigclicked.connect([this, p]() { cb_changed_to(p); });
-		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
-
-		cbs_[p - 1] = &cb;
-
-		hbox1->add(&cb, UI::Box::Resizing::kFillSpace);
-	}
-	else  //  player nr p does not exist
-	   cbs_[p - 1] = nullptr;
-
-	box_.add(hbox1, UI::Box::Resizing::kFullSize);
-
-	UI::Box* hbox2 = new UI::Box(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1);
+	UI::Box* hbox2 = new UI::Box(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
 	UI::Radiobutton* btn;
 
 	const Vector2i zero = Vector2i::zero();
 
-	radiogroup_.add_button(
-	   hbox2, zero, g_gr->images().get("images/wui/stats/genstats_landsize.png"), _("Land"), &btn);
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_landsize.png"), _("Land"),
+	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
-	                       g_gr->images().get("images/wui/stats/genstats_nrworkers.png"),
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_nrworkers.png"),
 	                       _("Workers"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
-	                       g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"),
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"),
 	                       _("Buildings"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(
-	   hbox2, zero, g_gr->images().get("images/wui/stats/genstats_nrwares.png"), _("Wares"), &btn);
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_nrwares.png"), _("Wares"),
+	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
-	                       g_gr->images().get("images/wui/stats/genstats_productivity.png"),
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_productivity.png"),
 	                       _("Productivity"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
-	                       g_gr->images().get("images/wui/stats/genstats_casualties.png"),
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_casualties.png"),
 	                       _("Casualties"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(
-	   hbox2, zero, g_gr->images().get("images/wui/stats/genstats_kills.png"), _("Kills"), &btn);
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_kills.png"), _("Kills"),
+	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
-	                       g_gr->images().get("images/wui/stats/genstats_msites_lost.png"),
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_msites_lost.png"),
 	                       _("Military buildings lost"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
-	                       g_gr->images().get("images/wui/stats/genstats_msites_defeated.png"),
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_msites_defeated.png"),
 	                       _("Military buildings defeated"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
-	                       g_gr->images().get("images/wui/stats/genstats_civil_blds_lost.png"),
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_civil_blds_lost.png"),
 	                       _("Civilian buildings lost"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
-	                       g_gr->images().get("images/wui/stats/genstats_militarystrength.png"),
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_civil_blds_defeated.png"),
+	                       _("Civilian buildings destroyed"), &btn);
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
+
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_militarystrength.png"),
 	                       _("Military"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	if (hook) {
-		radiogroup_.add_button(hbox2, zero, g_gr->images().get(cs_pic), cs_name.c_str(), &btn);
+		radiogroup_.add_button(
+		   hbox2, UI::PanelStyle::kWui, zero, g_image_cache->get(cs_pic), cs_name, &btn);
 		hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 	}
 
-	radiogroup_.set_state(selected_information_);
+	radiogroup_.set_state(selected_information_, false);
 	radiogroup_.changedto.connect([this](int32_t i) { radiogroup_changed(i); });
 
 	box_.add(hbox2, UI::Box::Resizing::kFullSize);
 
-	WuiPlotAreaSlider* slider = new WuiPlotAreaSlider(&box_, plot_, 0, 0, 100, 45);
-	slider->changedto.connect([this](int32_t i) { plot_.set_time_id(i); });
-	box_.add(slider, UI::Box::Resizing::kFullSize);
+	slider_ = new WuiPlotAreaSlider(&box_, plot_, 0, 0, 100, 45);
+	slider_->changedto.connect([this](int32_t i) { plot_.set_time_id(i); });
+	box_.add(slider_, UI::Box::Resizing::kFullSize);
+
+	initialization_complete();
+}
+
+void GeneralStatisticsMenu::create_player_buttons() {
+	// Delete existing buttons, if any
+	player_buttons_box_.clear();
+	player_buttons_box_.free_children();
+
+	Widelands::PlayerNumber const nr_players = game_.map().get_nrplayers();
+
+	bool show_all_players = true;
+	const Widelands::Player* self = nullptr;
+	if (upcast(InteractivePlayer, ipl, get_parent())) {
+		show_all_players = ipl->player().see_all() || ipl->omnipotent();
+		self = &ipl->player();
+	}
+
+	for (UI::Button*& c : cbs_) {
+		c = nullptr;
+	}
+	iterate_players_existing_const(p, nr_players, game_, player) {
+		if (player != self && !show_all_players && player->is_hidden_from_general_statistics()) {
+			// Hide player from stats
+			cbs_[p - 1] = nullptr;
+			// Also hide the plot for this player if it was previously visible
+			show_or_hide_plot(p, false);
+			continue;
+		}
+
+		const Image* player_image = THREADSAFE_T(
+		   const Image*, const Image* (*)(const RGBColor&, const std::string&), playercolor_image,
+		   player->get_playercolor(), "images/players/genstats_player.png");
+		assert(player_image);
+		UI::Button& cb = *new UI::Button(&player_buttons_box_, "playerbutton", 0, 0, 25, 25,
+		                                 UI::ButtonStyle::kWuiMenu, player_image, player->get_name());
+		cb.sigclicked.connect([this, p]() { cb_changed_to(p); });
+		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
+
+		cbs_[p - 1] = &cb;
+		show_or_hide_plot(p, my_registry_->selected_players[p - 1]);
+
+		player_buttons_box_.add(&cb, UI::Box::Resizing::kFillSpace);
+	}
 }
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {
-	Widelands::Game& game = dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
-	if (game.is_loaded()) {
+	save_state_to_registry();
+}
+
+void GeneralStatisticsMenu::save_state_to_registry() {
+	if (game_.is_loaded()) {
 		// Save information for recreation, if window is reopened
 		my_registry_->selected_information = selected_information_;
 		my_registry_->time = plot_.get_time();
-		Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
-		iterate_players_existing_novar(p, nr_players, game) {
+		Widelands::PlayerNumber const nr_players = game_.map().get_nrplayers();
+		iterate_players_existing_novar(p, nr_players, game_) {
 			my_registry_->selected_players[p - 1] =
+			   (cbs_[p - 1] == nullptr) ||
 			   cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;
 		}
 	}
@@ -219,22 +279,61 @@ GeneralStatisticsMenu::~GeneralStatisticsMenu() {
 void GeneralStatisticsMenu::cb_changed_to(int32_t const id) {
 	// This represents our player number
 	cbs_[id - 1]->toggle();
-	plot_.show_plot((id - 1) * ndatasets_ + selected_information_,
-	                cbs_[id - 1]->style() == UI::Button::VisualState::kPermpressed);
+	show_or_hide_plot(id, cbs_[id - 1]->style() == UI::Button::VisualState::kPermpressed);
+}
+
+void GeneralStatisticsMenu::show_or_hide_plot(const int32_t id, const bool show) {
+	plot_.show_plot((id - 1) * ndatasets_ + selected_information_, show);
 }
 
 /*
  * The radiogroup has changed
  */
 void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
-	size_t const statistics_size =
-	   dynamic_cast<InteractiveGameBase&>(*get_parent()).game().get_general_statistics().size();
+	size_t const statistics_size = game_.get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i) {
-		if (cbs_[i]) {
+		if (cbs_[i] != nullptr) {
 			plot_.show_plot(
 			   i * ndatasets_ + id, cbs_[i]->style() == UI::Button::VisualState::kPermpressed);
 			plot_.show_plot(i * ndatasets_ + selected_information_, false);
 		}
 	}
 	selected_information_ = id;
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& GeneralStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_general;
+			r.create();
+			assert(r.window);
+			GeneralStatisticsMenu& m = dynamic_cast<GeneralStatisticsMenu&>(*r.window);
+			m.radiogroup_.set_state(fr.unsigned_8(), true);
+			for (unsigned i = 0; i < kMaxPlayers; ++i) {
+				if (fr.unsigned_8() != 0u) {
+					m.cb_changed_to(i + 1);
+				}
+			}
+			m.slider_->get_slider().set_value(fr.signed_32());
+			return m;
+		}
+		throw Widelands::UnhandledVersionError(
+		   "General Statistics Menu", packet_version, kCurrentPacketVersion);
+
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("general statistics menu: %s", e.what());
+	}
+}
+void GeneralStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(radiogroup_.get_state());
+	for (UI::Button* c : cbs_) {
+		// The saved value indicates whether we explicitly need to toggle this button
+		fw.unsigned_8(((c != nullptr) && c->style() != UI::Button::VisualState::kPermpressed) ? 1 :
+                                                                                              0);
+	}
+	fw.signed_32(slider_->get_slider().get_value());
 }

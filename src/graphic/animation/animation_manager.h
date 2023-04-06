@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -53,7 +52,7 @@ public:
 
 	/// Returns the animation with the given ID or throws an exception if it is
 	/// unknown.
-	const Animation& get_animation(uint32_t id) const;
+	[[nodiscard]] const Animation& get_animation(uint32_t id) const;
 
 	/// Returns the representative image for the animation with the given 'id', using the given
 	/// player color. If this image has already been generated, it is pulled from the cache using the
@@ -75,5 +74,7 @@ private:
 	/// Maps map object names to the ID of the animations that contain their representative images
 	std::map<std::string, uint32_t> representative_animations_by_map_object_name_;
 };
+
+extern AnimationManager* g_animation_manager;
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_ANIMATION_MANAGER_H

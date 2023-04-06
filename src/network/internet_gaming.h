@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -171,7 +170,7 @@ struct InternetGaming : public ChatProvider {
 	}
 
 	/// ChatProvider: returns the list of chatmessages.
-	const std::vector<ChatMessage>& get_messages() const override {
+	[[nodiscard]] const std::vector<ChatMessage>& get_messages() const override {
 		return messages_;
 	}
 
@@ -186,7 +185,7 @@ struct InternetGaming : public ChatProvider {
 		ingame_system_chat_.clear();
 	}
 
-	bool has_been_set() const override {
+	[[nodiscard]] bool has_been_set() const override {
 		return true;
 	}
 
@@ -221,6 +220,8 @@ private:
 	bool str2bool(const std::string&);
 	std::string bool2str(bool);
 
+	void format_time(char* time_str, uint8_t length);
+
 	/**
 	 * Does the real work of the login.
 	 * \param relogin Whether this is a relogin. Only difference is that
@@ -232,11 +233,11 @@ private:
 	std::unique_ptr<NetClient> net;
 
 	/// Current state of this class
-	enum { OFFLINE, CONNECTING, LOBBY, IN_GAME, COMMUNICATION_ERROR } state_;
+	enum { OFFLINE, CONNECTING, LOBBY, IN_GAME, COMMUNICATION_ERROR } state_{OFFLINE};
 
 	/// data saved for possible relogin
 	std::string authenticator_;
-	bool reg_;
+	bool reg_{false};
 
 	/// Password for connecting as host to a game on the relay server
 	std::string relay_password_;
@@ -255,13 +256,13 @@ private:
 	std::pair<NetAddress, NetAddress> gameips_;
 
 	/// Metaserver information
-	bool clientupdateonmetaserver_;
-	bool gameupdateonmetaserver_;
-	bool clientupdate_;
-	bool gameupdate_;
+	bool clientupdateonmetaserver_{true};
+	bool gameupdateonmetaserver_{true};
+	bool clientupdate_{false};
+	bool gameupdate_{false};
 	std::vector<InternetClient> clientlist_;
 	std::vector<InternetGame> gamelist_;
-	int32_t time_offset_;
+	int32_t time_offset_{0};
 
 	/// ChatProvider: chat messages
 	std::vector<ChatMessage> messages_;

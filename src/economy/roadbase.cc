@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -35,9 +34,10 @@ namespace Widelands {
 /**
  * Most of the actual work is done in init.
  */
-RoadBase::RoadBase(const RoadBaseDescr& d) : PlayerImmovable(d), idle_index_(0) {
+RoadBase::RoadBase(const RoadBaseDescr& d) : PlayerImmovable(d) {
 	flags_[0] = flags_[1] = nullptr;
 	flagidx_[0] = flagidx_[1] = -1;
+	cost_[0] = cost_[1] = 0;
 }
 
 int32_t RoadBase::get_size() const {
@@ -80,7 +80,7 @@ int32_t RoadBase::get_cost(FlagId fromflag) {
  * Set the new path, calculate costs.
  * You have to set start and end flags before calling this function.
  */
-void RoadBase::set_path(EditorGameBase& egbase, const Path& path) {
+void RoadBase::set_path(const EditorGameBase& egbase, const Path& path) {
 	assert(path.get_nsteps() >= 2);
 	assert(path.get_start() == flags_[FlagStart]->get_position());
 	assert(path.get_end() == flags_[FlagEnd]->get_position());
@@ -186,7 +186,7 @@ bool RoadBase::init(EditorGameBase& egbase) {
  * we needed to have this road already registered
  * as Map Object, thats why this is moved
  */
-void RoadBase::link_into_flags(EditorGameBase& egbase, bool) {
+void RoadBase::link_into_flags(EditorGameBase& egbase, bool /* loading */) {
 	assert(path_.get_nsteps() >= 2);
 
 	// Link into the flags (this will also set our economy)
@@ -229,17 +229,17 @@ void RoadBase::cleanup(EditorGameBase& egbase) {
  * the new flag initializes. We remove markings to avoid interference with the
  * flag.
  */
-void RoadBase::presplit(Game& game, Coords) {
+void RoadBase::presplit(Game& game, Coords /* c */) {
 	unmark_map(game);
 }
 
-void RoadBase::postsplit(Game&, Flag&) {
+void RoadBase::postsplit(Game& /* game */, Flag& /* flag */) {
 }
 
-void RoadBase::assign_carrier(Carrier&, uint8_t) {
+void RoadBase::assign_carrier(Carrier& /* carrier */, uint8_t /* slot */) {
 }
 
-bool RoadBase::notify_ware(Game&, FlagId) {
+bool RoadBase::notify_ware(Game& /* game */, FlagId /* flag */) {
 	return false;
 }
 

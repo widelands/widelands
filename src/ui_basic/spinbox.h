@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2020 by the Widelands Development Team
+ * Copyright (C) 2009-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -31,6 +30,8 @@ struct SpinBoxImpl;
 /// w is the overall width of the SpinBox and must be wide enough to fit 2 labels and the buttons.
 /// unit_w is the width alotted for all buttons and the text between them (the actual spinbox).
 /// label_text is a text that precedes the actual spinbox.
+/// The current implementation does not allow minval or maxval to be near the numeric limits of
+/// int32_t.
 class SpinBox : public Panel {
 public:
 	enum class Type {
@@ -39,7 +40,7 @@ public:
 		kValueList  // Uses the values that are set by set_value_list().
 	};
 
-	enum class Units { kNone, kPixels, kMinutes, kPercent, kFields };
+	enum class Units { kNone, kPixels, kMinutes, kWeeks, kPercent, kFields };
 
 	/**
 	 * Text conventions: Sentence case for the 'label_text' and for all values
@@ -62,7 +63,7 @@ public:
 	        int32_t big_step_size = 10);
 	~SpinBox() override;
 
-	boost::signals2::signal<void()> changed;
+	Notifications::Signal<> changed;
 
 	void set_value(int32_t);
 	// For spinboxes of type kValueList. The vector needs to be sorted in ascending order,
@@ -76,18 +77,24 @@ public:
 	}
 	void set_unit_width(uint32_t width);
 
+	bool handle_key(bool, SDL_Keysym) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+
 private:
 	void layout() override;
 	void update();
 	void change_value(int32_t);
 	const std::string unit_text(int32_t value) const;
+	void calculate_big_step();
 
 	const SpinBox::Type type_;
 	SpinBoxImpl* sbi_;
 	std::vector<UI::Button*> buttons_;
 	UI::Box* box_;
 	uint32_t unit_width_;
-	uint32_t button_height_;
+	uint32_t button_size_;
+	uint32_t big_step_button_width_;
+	uint32_t buttons_width_;
 	uint32_t padding_;
 	uint32_t number_of_paddings_;
 };

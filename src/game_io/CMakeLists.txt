@@ -22,10 +22,11 @@ wl_library(game_io
     game_saver.cc
     game_saver.h
   DEPENDS
+    base
     base_exceptions
-    base_log
     base_macros
     base_scoped_timer
+    base_times
     build_info
     economy
     graphic_image_io
@@ -34,6 +35,7 @@ wl_library(game_io
     io_filesystem
     io_profile
     logic
+    logic_addons
     logic_commands
     logic_exceptions
     logic_game_controller

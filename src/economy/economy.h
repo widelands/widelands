@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -36,6 +35,7 @@ namespace Widelands {
 
 class Economy;
 struct Flag;
+class ProductionSite;
 struct RSPairStruct;
 struct Route;
 struct Router;
@@ -73,7 +73,7 @@ constexpr Quantity kEconomyTargetInfinity = std::numeric_limits<Quantity>::max()
  * and in particular during game shutdown or when a large network is destroyed
  * in a military operation, cascading economy splits could take a lot of processing time.
  * For this reason, economies do not split immediately when a road is destroyed,
- * but instead keep track of where a potential split occured and evaluate the split lazily.
+ * but instead keep track of where a potential split occurred and evaluate the split lazily.
  *
  * This means that two flags which are connected by the road (and seafaring) network
  * are \b always in the same economy, but two flags in the same economy are not always
@@ -112,19 +112,19 @@ public:
 	explicit Economy(Player&, Serial serial, WareWorker);  // For saveloading
 	~Economy();
 
-	Serial serial() const {
+	[[nodiscard]] Serial serial() const {
 		return serial_;
 	}
 
-	Player& owner() const {
+	[[nodiscard]] Player& owner() const {
 		return owner_;
 	}
 
-	WareWorker type() const {
+	[[nodiscard]] WareWorker type() const {
 		return type_;
 	}
 
-	static void check_merge(Flag&, Flag&, WareWorker);
+	static void check_merge(const Flag&, const Flag&, WareWorker);
 	static void check_split(Flag&, Flag&, WareWorker);
 
 	bool find_route(Flag& start, Flag& end, Route* route, int32_t cost_cutoff = -1);
@@ -135,7 +135,7 @@ public:
 	                                  uint32_t cost_cutoff = 0,
 	                                  const WarehouseAcceptFn& acceptfn = WarehouseAcceptFn());
 
-	std::vector<Flag*>::size_type get_nrflags() const {
+	[[nodiscard]] std::vector<Flag*>::size_type get_nrflags() const {
 		return flags_.size();
 	}
 	void add_flag(Flag&);
@@ -143,7 +143,7 @@ public:
 
 	// Returns an arbitrary flag or nullptr if this is an economy without flags
 	// (i.e. an Expedition ship).
-	Flag* get_arbitrary_flag();
+	Flag* get_arbitrary_flag(const Economy* other = nullptr);
 
 	void set_target_quantity(WareWorker economy_type, DescriptionIndex, Quantity, Time);
 
@@ -153,7 +153,7 @@ public:
 
 	void add_warehouse(Warehouse&);
 	void remove_warehouse(Warehouse&);
-	const std::vector<Warehouse*>& warehouses() const {
+	[[nodiscard]] const std::vector<Warehouse*>& warehouses() const {
 		return warehouses_;
 	}
 
@@ -171,25 +171,37 @@ public:
 	/// Whether the economy needs more of this ware/worker type.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing another from it.
-	bool needs_ware_or_worker(DescriptionIndex) const;
+	[[nodiscard]] bool needs_ware_or_worker(DescriptionIndex) const;
 
-	const TargetQuantity& target_quantity(DescriptionIndex const i) const {
+	[[nodiscard]] const TargetQuantity& target_quantity(DescriptionIndex const i) const {
 		return target_quantities_[i];
 	}
 	TargetQuantity& target_quantity(DescriptionIndex const i) {
 		return target_quantities_[i];
 	}
 
-	void* get_options_window() const {
+	[[nodiscard]] void* get_options_window() const {
 		return options_window_;
 	}
 	void set_options_window(void* window) {
 		options_window_ = window;
 	}
 
-	const WareList& get_wares_or_workers() const {
+	[[nodiscard]] const WareList& get_wares_or_workers() const {
 		return wares_or_workers_;
 	}
+
+	// Checks whether this economy contains a building of the specified type
+	[[nodiscard]] bool has_building(DescriptionIndex) const;
+	/**
+	 * Of all occupied ProductionSites of the specified type in this economy,
+	 * find the one that is closest to the specified flag and return it.
+	 * Stopped buildings are also accepted. If `check_inputqueues` is `true`,
+	 * buildings with all inputqueues set to zero capacity are ignored.
+	 * If no matching site is found, nullptr is returned.
+	 */
+	ProductionSite*
+	find_closest_occupied_productionsite(const Flag&, DescriptionIndex, bool check_inputqueues);
 
 	///< called by \ref Cmd_Call_Economy_Balance
 	void balance(uint32_t timerid);
@@ -227,7 +239,7 @@ private:
 	void check_splits();
 	void split(const std::set<OPtr<Flag>>&);
 
-	void start_request_timer(int32_t delta = 200);
+	void start_request_timer(const Duration& delta = Duration(200));
 
 	Supply* find_best_supply(Game&, const Request&, int32_t& cost);
 	void process_requests(Game&, RSPairStruct* supply_pairs);
@@ -236,7 +248,7 @@ private:
 	void create_requested_workers(Game&);
 	void create_requested_worker(Game&, DescriptionIndex);
 
-	bool has_request(Request&);
+	bool has_request(Request&) const;
 
 	/*************/
 	/* Variables */
@@ -279,6 +291,9 @@ private:
 
 	// 'list' of unique providers
 	std::map<UniqueDistance, Supply*> available_supplies_;
+
+	// Helper function for `find_closest_occupied_productionsite()`
+	bool check_building_can_start_working(const ProductionSite&, bool check_inputqueues);
 
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };

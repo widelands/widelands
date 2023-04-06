@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,9 +21,9 @@
 
 #include <functional>
 
-#include <boost/asio.hpp>
-#include <boost/lexical_cast.hpp>
+#include <asio.hpp>
 
+#include "base/string.h"
 #include "base/wexception.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
@@ -73,15 +72,15 @@ struct NetAddress {
 	 * @return \c true if the stored IP is in IPv6 format, \c false otherwise.
 	 *   If it isn't an IPv6 address, it is an IPv4 address.
 	 */
-	bool is_ipv6() const;
+	[[nodiscard]] bool is_ipv6() const;
 
 	/**
 	 * Returns whether valid IP address and port are stored.
 	 * @return \c true if valid, \c false otherwise.
 	 */
-	bool is_valid() const;
+	[[nodiscard]] bool is_valid() const;
 
-	boost::asio::ip::address ip;
+	asio::ip::address ip;
 	uint16_t port;
 };
 
@@ -92,11 +91,11 @@ using SyncReportCallback = std::function<void()>;
  * to schedule taking a synchronization hash.
  */
 struct CmdNetCheckSync : public Widelands::Command {
-	CmdNetCheckSync(uint32_t dt, SyncReportCallback);
+	CmdNetCheckSync(const Time& dt, SyncReportCallback);
 
 	void execute(Widelands::Game&) override;
 
-	Widelands::QueueCommandTypes id() const override {
+	[[nodiscard]] Widelands::QueueCommandTypes id() const override {
 		return Widelands::QueueCommandTypes::kNetCheckSync;
 	}
 
@@ -117,17 +116,17 @@ class NetworkTime {
 public:
 	NetworkTime();
 
-	void reset(int32_t ntime);
+	void reset(const Time& ntime);
 	void fastforward();
 
 	void think(uint32_t speed);
-	int32_t time() const;
-	int32_t networktime() const;
-	void receive(int32_t ntime);
+	[[nodiscard]] const Time& time() const;
+	[[nodiscard]] const Time& networktime() const;
+	void receive(const Time& ntime);
 
 private:
-	int32_t networktime_;
-	int32_t time_;
+	Time networktime_;
+	Time time_;
 
 	uint32_t lastframe_;
 
@@ -140,7 +139,7 @@ private:
  * sent over the network.
  */
 struct SendPacket : public StreamWrite {
-	SendPacket();
+	SendPacket() = default;
 
 	void reset();
 
@@ -161,7 +160,7 @@ private:
 struct RecvPacket : public StreamRead {
 public:
 	size_t data(void* data, size_t bufsize) override;
-	bool end_of_file() const override;
+	[[nodiscard]] bool end_of_file() const override;
 
 private:
 	friend class BufferedConnection;
@@ -174,11 +173,10 @@ struct FilePart {
 };
 
 struct NetTransferFile {
-	NetTransferFile() : bytes(0), filename(""), md5sum("") {
-	}
+	NetTransferFile() = default;
 	~NetTransferFile() = default;
 
-	uint32_t bytes;
+	uint32_t bytes{0U};
 	std::string filename;
 	std::string md5sum;
 	std::vector<FilePart> parts;
@@ -194,7 +192,7 @@ struct NetTransferFile {
 struct DisconnectException : public std::exception {
 	explicit DisconnectException(const char* fmt, ...) PRINTF_FORMAT(2, 3);
 
-	const char* what() const noexcept override;
+	[[nodiscard]] const char* what() const noexcept override;
 
 private:
 	std::string what_;
@@ -206,12 +204,11 @@ private:
  * protocol.
  */
 struct ProtocolException : public std::exception {
-	explicit ProtocolException(uint8_t code)
-	   : what_(boost::lexical_cast<std::string>(static_cast<unsigned int>(code))) {
+	explicit ProtocolException(uint8_t code) : what_(as_string(static_cast<unsigned int>(code))) {
 	}
 
 	/// \returns the command number of the received message
-	const char* what() const noexcept override {
+	[[nodiscard]] const char* what() const noexcept override {
 		return what_.c_str();
 	}
 

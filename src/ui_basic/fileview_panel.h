@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2020 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -33,23 +32,31 @@ namespace UI {
  */
 class FileViewPanel : public TabPanel {
 public:
-	FileViewPanel(Panel* parent, UI::PanelStyle scrollbar_style, UI::TabPanelStyle background_style);
+	FileViewPanel(Panel* parent, UI::TabPanelStyle background_style);
 
-	/// Adds a tab with the contents of 'lua_script'.
-	/// 'lua_script' must return a table that contains 'title' and 'text' keys.
-	void add_tab(const std::string& lua_script);
+	/// Reads the text for the active tab from 'lua_script' if it hasn't been loaded yet.
+	void load_tab_contents();
+
+	/// Adds a tab and registers its 'lua_script' for loading its text contents.
+	/// 'lua_script' must return a table that contains 1 string.
+	void add_tab(const std::string& title, const std::string& lua_script);
+
+	void add_tab_without_script(const std::string& name,
+	                            const std::string& title,
+	                            Panel* panel,
+	                            const std::string& tooltip = std::string());
 
 private:
 	void update_tab_size(size_t index);
 	void layout() override;
-	const int padding_;
-	int contents_width_;
-	int contents_height_;
-	const UI::PanelStyle panel_style_;
+	const int padding_{5};
+	int contents_width_{0};
+	int contents_height_{0};
 
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;
 	std::vector<std::unique_ptr<MultilineTextarea>> textviews_;
+	std::vector<std::string> script_paths_;
 };
 
 }  // namespace UI

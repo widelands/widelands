@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_quarry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Quarry"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -17,16 +17,17 @@ tribes:new_productionsite_type {
       log = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 42, 57 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 40, 57 },
       },
    },
 
-   aihints = {
-      collects_ware_from_map = "granite"
-   },
+   aihints = {},
 
    working_positions = {
       empire_stonemason = 1
@@ -35,7 +36,7 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=mine_granite on failure fail",
             "call=mine_granite on failure fail",
@@ -48,7 +49,7 @@ tribes:new_productionsite_type {
       },
       mine_granite = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-         descname = _"quarrying granite",
+         descname = _("quarrying granite"),
          actions = {
             "callworker=cut_granite",
             "sleep=duration:17s500ms"
@@ -56,7 +57,7 @@ tribes:new_productionsite_type {
       },
       mine_marble = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-         descname = _"quarrying marble",
+         descname = _("quarrying marble"),
          actions = {
             "callworker=cut_marble",
             "sleep=duration:17s500ms"
@@ -65,9 +66,11 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Rocks",
-      heading = _"Out of Rocks",
+      title = _("No Rocks"),
+      heading = _("Out of Rocks"),
       message = pgettext("empire_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
       productivity_threshold = 75
    },
 }
+
+pop_textdomain()

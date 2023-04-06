@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-03-29 19:01+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"PO-Revision-Date: 2015-02-03 14:50+0000\n"
+"Last-Translator: tamanegi, 2018-2019\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,82 +18,86 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../data/txts/AUTHORS.lua:27
-msgid "Developers"
-msgstr "開発者"
+#: ../../data/txts/ABOUT.lua:7
+msgid "Readme"
+msgstr "Readme"
 
-#: ../../data/txts/AUTHORS.lua:29
-msgid "Widelands Development Team"
-msgstr "Widelands 開発チーム"
-
-#: ../../data/txts/LICENSE.lua:6
+#: ../../data/txts/ABOUT.lua:11
 msgid "License"
 msgstr "ライセンス"
 
-#: ../../data/txts/LICENSE.lua:8
+#: ../../data/txts/ABOUT.lua:15
+msgid "Developers"
+msgstr "開発者"
+
+#: ../../data/txts/ABOUT.lua:19
+msgid "Translators"
+msgstr "翻訳者"
+
+#: ../../data/txts/AUTHORS.lua:28
+msgid "Widelands Development Team"
+msgstr "Widelands 開発チーム"
+
+#: ../../data/txts/LICENSE.lua:12
 msgid "Licensing information for Widelands"
 msgstr "Widelandsのライセンス情報"
 
 #. TRANSLATORS: Placeholder is copyright end year
-#: ../../data/txts/LICENSE.lua:10
+#: ../../data/txts/LICENSE.lua:14
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr "Copyright 2002 - %1% Widelands 開発チーム"
 
-#: ../../data/txts/LICENSE.lua:12
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "このゲームはフリーかつオープンソース（FOSS）であり、GNU一般公衆利用許諾契約書（GPL）V2.0の下でライセンスされています。"
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:18
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "FOSSやGPLに関する詳しい情報は次のウェブページで確認することができます: %s"
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "そこではライセンスの全文はもちろんのこと、その理念や法的意味についての詳しい情報を見つけることもできます。"
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "わたしたちはWidelands本体にテキスト文書としてGPL文書も添付しています。"
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Linuxでは、スタンドアローンのバイナリパッケージの最上位ディレクトリ、もしくはインストール先のディレクトリ（例えば %1%）にCOPYINGというファイルを見つけることができるでしょう。"
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Windowsでは、インストールフォルダにCOPYING.txtという名前のファイルを見つけることができますし、スタートメニューのWidelandsの項目でもこのファイルへのリンクを提示しています。"
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:25
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "MacOSでは、ウェブサイトからダウンロードしたアーカイブの中にCOPYINGという名前のファイルを見つけることができます。"
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:27
 msgid "This game comes as-is and without any warranty."
 msgstr "このゲームは現状のまま提供され、一切の保証を伴いません。"
 
-#: ../../data/txts/LICENSE.lua:24
+#: ../../data/txts/LICENSE.lua:28
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
 msgstr "さらなる情報やサポートを望まれるならば、%1% (質問や一般的なサポートのためのウェブサイト、Wiki、フォーラム)、%2% (バグトラッカー)、%3% (翻訳) をごらんください。\n(この日本語訳は参考訳です。ライセンスについての正確な情報は原文をご参照ください。)"
-
-#: ../../data/txts/README.lua:6
-msgid "Readme"
-msgstr "Readme"
 
 #: ../../data/txts/README.lua:9
 msgid "an open source strategy game"
@@ -190,13 +194,13 @@ msgid ""
 "include that too. For more information, see the section on Replays below."
 msgstr "もしゲームのセーブファイルや問題を含むリプレイがあるのなら、それも含めてください (例えばクラッシュしたものの、その原因が特定できないとき等)。この項に関する詳細な情報については下のリプレイセクションをご参照ください"
 
-#: ../../data/txts/TRANSLATORS.lua:24
-msgid "Translators"
-msgstr "翻訳者"
-
 #: ../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
 msgstr "Widelands翻訳者"
+
+#: ../../data/txts/developers.lua:3
+msgid "Add-Ons"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
@@ -295,6 +299,10 @@ msgid "Packagers"
 msgstr "パッケージ"
 
 #: ../../data/txts/developers.lua:3
+msgid "Scripting"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
 msgid "Sound"
 msgstr "サウンド"
 
@@ -319,8 +327,8 @@ msgid "ZetaOS"
 msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you've done)"
-msgstr "他、とても多くの人々 (皆さんの協力に感謝します)"
+msgid "and many, many more (thank you for everything you’ve done)"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -338,11 +346,11 @@ msgid ""
 " wiki there."
 msgstr "WidelandsやWidelandsエディタに関するさらなる情報が必要ならば、我々のホームページ %s を見てください。そこにある我々のwikiにオンラインヘルプがあります。"
 
-#: ../../data/txts/help/common_helptexts.lua:17
+#: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
 msgstr "はじめに"
 
-#: ../../data/txts/help/common_helptexts.lua:18
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer "
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -350,7 +358,7 @@ msgid ""
 "started through playable tutorials."
 msgstr "Widelandsはフリーでオープンソースのリアルタイムストラテジーゲームで、一人プレイ用のキャンペーンと多人数でのマルチプレイモードで遊ぶことができます。このゲームは元々はSettlers IIに着想を得ていますが、現在ではそれよりもだいぶ深みの増したゲームに進化しました。一方で、チュートリアルシナリオを通じて、容易にゲームに入っていけるようにも設計されています。"
 
-#: ../../data/txts/help/common_helptexts.lua:19
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
 "In this game, you start out on a small piece of land with just a few "
 "resources. Using these, you’ll create an empire with many thousands of "
@@ -359,11 +367,11 @@ msgid ""
 "tribes."
 msgstr "ゲームは、狭い土地と限られた物資だけを持った状態で始まります。これらの土地や物資を使い、何千人もの住人を抱える大帝国を作り上げるのです。それを成し遂げるためには、経済インフラを整備し、周囲を探索して領土を増やし、そしてライバルとなる部族を打ち破らねばなりません。"
 
-#: ../../data/txts/help/common_helptexts.lua:25
+#: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
 msgstr "リプレイ"
 
-#: ../../data/txts/help/common_helptexts.lua:26
+#: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
 "Widelands records every game you play in two files. One of these files has a"
 " .wrpl.wgf extension and contains an initial savegame. The other file has a "
@@ -372,7 +380,7 @@ msgid ""
 "will tell you the time you started the game."
 msgstr "Widelandsはあなたのプレイする全てのゲームを二つのファイルに記録します。一つは .wrpl.wgf の拡張子を持つファイルで、こちらにはゲームの初期状態のセーブデータを含んでいます。もう一方は .wrpl という拡張子を持つファイルで、全てのプレイヤーの実行した全ての行動が記録されています。例えば、建物や道路の建設、敵への攻撃といったもの、こういったものが全て記録されます。ファイル名のその他の部分はあなたがゲームを開始した時間を示しています。"
 
-#: ../../data/txts/help/common_helptexts.lua:27
+#: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -382,7 +390,7 @@ msgid ""
 "players has a different version of the game."
 msgstr "メインニューから「リプレイ」を選択すれば、再構築された過去にプレイしたゲームを見ることができます。しかし注意すべきこととして、ゲームデータやWidelands実行ファイルに変更があった場合、途中で整合性がとれなくなってゲームを見ることができなくなる可能性があります。同様の問題はマルチプレイ時にバージョンの異なるWidelandsを使っているプレイヤーがいる場合にも発生します。"
 
-#: ../../data/txts/help/common_helptexts.lua:28
+#: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
@@ -392,7 +400,7 @@ msgid ""
 msgstr "リプレイはゲームの動作バグを発見する上で有用なツールです。バグ報告時に添付すると、状況説明がシンプルになるかもしれません。リプレイファイルは、LinuxやMac OS Xでは %s に、WindowsではWidelandsのインストールディレクトリの下にある replays ディレクトリに保存されます。"
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../data/txts/help/common_helptexts.lua:35
+#: ../../data/txts/help/common_helptexts.lua:41
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
@@ -400,90 +408,86 @@ msgstr "%s: "
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/txts/help/common_helptexts.lua:42
-msgctxt "hotkey"
-msgid "Space"
-msgstr "スペース"
-
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "建物用地の表示/非表示の切り替え"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:49
-msgctxt "hotkey"
-msgid "Ctrl + F"
-msgstr ""
-
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "フルスクリーンモード切替 (OSが対応している場合)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:56
+#: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "ミニマップ表示/非表示の切替"
 
-#: ../../data/txts/help/multiplayer_help.lua:7
+#: ../../data/txts/help/common_helptexts.lua:75
+#: ../../data/txts/help/common_helptexts.lua:84
+#: ../../data/txts/help/common_helptexts.lua:93
+msgid "%1% / %2%"
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
 msgstr "マルチプレイヤーゲームのセットアップ"
 
-#: ../../data/txts/help/multiplayer_help.lua:8
+#: ../../data/txts/help/multiplayer_help.lua:9
 msgid "You are in the multiplayer launch game menu."
 msgstr "ここはマルチプレイゲーム起動メニューです。"
 
-#: ../../data/txts/help/multiplayer_help.lua:10
+#: ../../data/txts/help/multiplayer_help.lua:11
 msgid "Client settings"
 msgstr "クライアント設定"
 
-#: ../../data/txts/help/multiplayer_help.lua:11
+#: ../../data/txts/help/multiplayer_help.lua:12
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
 msgstr "左側にあなたを含むクライアントのリストがあります。あなたのニックネームの次にあるボタンであなたの立場を設定できます。可能な立場は以下の通りです: "
 
-#: ../../data/txts/help/multiplayer_help.lua:12
+#: ../../data/txts/help/multiplayer_help.lua:13
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr "色付きの旗があるプレイヤーもし複数のクライアントが同じ色を選択している場合、彼らは陣営を共有します。(共有王国モード)"
 
-#: ../../data/txts/help/multiplayer_help.lua:13
+#: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
 msgstr "観客モード。あなたは全てを見ることができますが、プレイヤーとして操作することはできません。"
 
-#: ../../data/txts/help/multiplayer_help.lua:15
+#: ../../data/txts/help/multiplayer_help.lua:16
 msgid "Player settings"
 msgstr "プレイヤー設定"
 
-#: ../../data/txts/help/multiplayer_help.lua:16
+#: ../../data/txts/help/multiplayer_help.lua:17
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
 msgstr "真ん中がプレイヤーの設定です。ゲームを開始するには、各プレイヤーが以下のどれかの状態になっていなければなりません: "
 
-#: ../../data/txts/help/multiplayer_help.lua:17
+#: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Connected to one or more clients (see ‘Client settings’)."
 msgstr "一つ以上のクライアントと接続している (クライアント設定を参照してください)"
 
-#: ../../data/txts/help/multiplayer_help.lua:18
+#: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
 msgstr "コンピュータプレイヤー (顔の様子やマウスカーソルを合わせた際のテキストがその強さを表しています)。"
 
-#: ../../data/txts/help/multiplayer_help.lua:19
+#: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Set as shared in starting position for another player."
 msgstr "他のプレイヤーと開始位置を共有。"
 
-#: ../../data/txts/help/multiplayer_help.lua:20
+#: ../../data/txts/help/multiplayer_help.lua:21
 msgid "Closed."
 msgstr "閉鎖。"
 
-#: ../../data/txts/help/multiplayer_help.lua:21
+#: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
@@ -491,23 +495,88 @@ msgid ""
 "with) and the tribe and team for computer players."
 msgstr "後ろの三つについてはホストしているクライアントがタイプボタンを左クリックした場合にのみ設定できます。ホストプレイヤーは各プレイヤーの初期状態 (建物、物資、労働者の初期配置)、部族やチーム割りを設定することもできます。"
 
-#: ../../data/txts/help/multiplayer_help.lua:22
+#: ../../data/txts/help/multiplayer_help.lua:23
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
 msgstr "プレイヤーとして接続されたクライアント(観客以外)は部族やチームの選択ができます。"
 
-#: ../../data/txts/help/multiplayer_help.lua:24
+#: ../../data/txts/help/multiplayer_help.lua:25
 msgid "Map details"
 msgstr "マップ詳細"
 
-#: ../../data/txts/help/multiplayer_help.lua:25
+#: ../../data/txts/help/multiplayer_help.lua:26
 msgid ""
 "You can see information about the selected map or savegame on the right-hand"
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
 msgstr "選択されたマップやロード予定のゲームの情報は右側に表示されます。ホストはマップの隣にあるボタンからマップを選択することができます。さらに、ホストは勝利条件を設定することもできます。そうして、全ての準備が終わったらゲームを開始します。"
+
+#: ../../data/txts/tips/amazons.lua:4
+msgid ""
+"Amazons love trees. Build enough jungle preserver’s huts to have enough of "
+"them."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:8
+msgid ""
+"Rare woods are the backbone of an Amazon economy. Build rare tree "
+"plantations to plant the special trees for these woods."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:12
+msgid ""
+"Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
+"to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
+"locations in advance."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:16
+msgid "Food is dried with charcoal fires. Ensure a steady supply."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:20
+msgid ""
+"Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
+"this process."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:24
+msgid ""
+"Water is life for the Amazons. Water gatherers perform an important service "
+"to their tribe."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:28
+msgid ""
+"Panning for gold requires a steady stream of water, better sourced as close "
+"as possible for efficiency and freshness."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:32
+msgid ""
+"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
+"is only released near trees uninhabited by sentries."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:36
+msgid ""
+"Rare wood stock levels are monitored by rare tree plantations, and jungle "
+"masters will plant according to economic requirements."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:40
+msgid ""
+"Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
+"and lashing canoes together to form ships."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:43
+msgid ""
+"Jungle masters learn their skills by working as jungle preservers before "
+"working in gardening centres or rare tree plantations."
+msgstr ""
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -548,69 +617,69 @@ msgid ""
 msgstr "拡張された建物は、多くの場合経験豊かな労働者を必要とします。必要な労働者が得られる前に建物を拡張しないようにしましょう。"
 
 #. TRANSLATORS: %s = URL to the Widelands website
-#: ../../data/txts/tips/editor.lua:7
+#: ../../data/txts/tips/editor.lua:8
 #, lua-format
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
 msgstr "エディタに関する一般的なヘルプや簡単なチュートリアルに関して、%s にある我々のwikiに情報があります。"
 
-#: ../../data/txts/tips/editor.lua:11
+#: ../../data/txts/tips/editor.lua:12
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr "Ctrlを押しながらクリックすれば複数の動物種を選択することができます。その状態でマップをクリックすると、選択した中の一種がマップ上に配置されます。"
 
-#: ../../data/txts/tips/editor.lua:15
+#: ../../data/txts/tips/editor.lua:16
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
 msgstr "動物と同じように、Ctrlを押しながらクリックすれば、各種の物や土地のテクスチャを複数選択できます。"
 
-#: ../../data/txts/tips/editor.lua:19
+#: ../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
 msgstr "Shift を押しながら操作すると別のツールが起動します。多くの場合、それは本来のツールと反対の機能を持ちます。例えば、オブジェクトを配置するツールを選択中にShiftを押すと、オブジェクトを除去するツールになります。"
 
-#: ../../data/txts/tips/editor.lua:23
+#: ../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
 msgstr "Altを押しながら操作すると、また別のツールが起動します。(存在する場合のみ)"
 
-#: ../../data/txts/tips/editor.lua:27
+#: ../../data/txts/tips/editor.lua:28
 msgid ""
-"The number keys (0 - 9) allow you to directly set the size of the selected "
-"area around your mouse cursor."
-msgstr "数字キー(0-9)を押すとマウスカーソルの回りの選択範囲の大きさを直接設定できます。"
+"The keys %1% allow you to directly set the size of the selected area around "
+"your mouse cursor."
+msgstr ""
 
-#: ../../data/txts/tips/editor.lua:31
+#: ../../data/txts/tips/editor.lua:32
 msgid ""
-"Space key behaves like in normal game. It switches if building spaces are "
-"shown on or off."
-msgstr "スペースキーの動作は通常のゲームと同様です。建物用地の表示/非表示を切り替えることができます。"
+"%1% behaves like in normal games: It switches if building spaces are shown "
+"on or off."
+msgstr ""
 
-#: ../../data/txts/tips/editor.lua:35
+#: ../../data/txts/tips/editor.lua:36
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
 msgstr "木を配置する時は、ヘルプメニューを見て、それぞれの木がどのような地形で生育しやすいのかを調べるようにしましょう。"
 
-#: ../../data/txts/tips/editor.lua:39
+#: ../../data/txts/tips/editor.lua:40
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
 msgstr "水や魚の資源が明示的に配置されなかった場合、デフォルトの量が自動的に配置されます。"
 
-#: ../../data/txts/tips/editor.lua:43
+#: ../../data/txts/tips/editor.lua:44
 msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
 msgstr "南東方向に 1 以上の傾斜が無く、範囲 2 以内の高低差が 2 以内であるノードには中サイズの建物を建てられます。"
 
-#: ../../data/txts/tips/editor.lua:47
+#: ../../data/txts/tips/editor.lua:48
 msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
@@ -636,171 +705,146 @@ msgstr "レンガを作るには花崗岩が必要です。花崗岩を得るに
 msgid "Always build a forester’s house, so you will not run out of logs."
 msgstr "丸太が尽きてしまわないように、植樹番小屋を建設してください。"
 
-#: ../../data/txts/tips/general_game.lua:6
+#: ../../data/txts/tips/general_game.lua:7
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
 msgstr "建設のプロセスは、建設場所までの道が敷設されるまで始まりません。"
 
-#: ../../data/txts/tips/general_game.lua:10
+#: ../../data/txts/tips/general_game.lua:11
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
 msgstr "井戸や鉱山を建設する前に予定地に地質学者を派遣しましょう。"
 
-#: ../../data/txts/tips/general_game.lua:14
+#: ../../data/txts/tips/general_game.lua:15
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
 msgstr "詰所、要塞、兵屋のような軍事施設を建設することで領土を拡大できます。"
 
-#: ../../data/txts/tips/general_game.lua:18
+#: ../../data/txts/tips/general_game.lua:19
 msgid "Miners will work only if supplied with food."
 msgstr "鉱夫は食料を与えられないと働きません。"
 
-#: ../../data/txts/tips/general_game.lua:22
+#: ../../data/txts/tips/general_game.lua:23
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
 msgstr "多くの旗を設置して道を短い区間に分割しましょう。こうすることで物資の輸送をスピードアップできます。"
 
 #. TRANSLATORS: %s = URL to the Widelands website
-#: ../../data/txts/tips/general_game.lua:27
+#: ../../data/txts/tips/general_game.lua:28
 #, lua-format
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
 msgstr "他にも疑問がありますか？我々のウェブサイト %s にあるFAQ、wiki、そしてフォーラムを訪れてみてはいかがでしょうか？"
 
-#: ../../data/txts/tips/general_game.lua:31
+#: ../../data/txts/tips/general_game.lua:32
 msgid ""
-"Use the priority buttons in building windows to adjust delivery of a "
-"specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr "建設中の建物の優先度設定ボタンを使えば、特定の物資の輸送順序を調整できます。Ctrlを押しながら操作すれば、全ての物資の優先度を同時に変更できます。"
+"Use the priority sliders in building windows to adjust delivery of a "
+"specific ware. Holding down Shift while clicking will adjust all wares at "
+"once."
+msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:35
+#: ../../data/txts/tips/general_game.lua:36
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr "物資の生産量は「経済を設定」メニューで設定できます。「経済を設定」メニューは旗のメニューからアクセスできます。"
 
-#: ../../data/txts/tips/general_game.lua:39
+#: ../../data/txts/tips/general_game.lua:40
 msgid ""
-"Manage your messages more efficiently: press ‘N’ for News to access the "
-"messages window, then use ‘G’ for Go To, and the Delete key to archive "
-"messages."
-msgstr "メッセージを効率よく管理しましょう。「N」キーでメッセージウィンドウを開き、「G」キーでメッセージが発生した場所へ移動し、「Delete」キーでメッセージを保管庫に移します。"
+"Manage your messages more efficiently: press ‘%1%’ to access the messages "
+"window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
+msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:43
-msgctxt "hotkey"
-msgid "1-9"
-msgstr "1-9"
-
-#: ../../data/txts/tips/general_game.lua:43
-msgctxt "hotkey"
-msgid "Ctrl+(1-9)"
-msgstr "Ctrl+(1-9)"
-
-#: ../../data/txts/tips/general_game.lua:43
+#: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
 msgstr "%1% を押して重要な場所を記録できます。%2% を押せば対応する場所にすぐに移動できます。"
 
-#: ../../data/txts/tips/general_game.lua:47
+#: ../../data/txts/tips/general_game.lua:49
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Ctrlキーを押しながら道を削除すると最寄りの交差点までの全ての旗を消すことができます。"
 
-#: ../../data/txts/tips/general_game.lua:51
+#: ../../data/txts/tips/general_game.lua:53
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
 msgstr "新しい兵士は兵舎で雇用できます。彼らの能力は各種訓練施設で向上させることができます。"
 
-#: ../../data/txts/tips/general_game.lua:55
+#: ../../data/txts/tips/general_game.lua:57
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr "危険に生きるのがお好みなら、Ctrlキーを押しながら建物の拡張／解体／破壊ボタンを押しましょう。確認操作をスキップできます。"
 
-#: ../../data/txts/tips/general_game.lua:59
-msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr "ストックされている物資リストの表示/非表示は「I」キーで切り替えられます。"
+#: ../../data/txts/tips/general_game.lua:61
+#, lua-format
+msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
+msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:63
+#: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads. The "
-"supplies and demands of buildings are handled in its economy."
-msgstr "一つの経済圏は道でつながっている全ての建物と旗で構成されます。物資の需要と供給は、その経済圏の中で対応されなければなりません。"
+"An economy consists of all buildings and flags connected by roads, ferries, "
+"or ships. The supplies and demands of buildings are handled in their "
+"economy. A player can have more than one economy."
+msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:67
+#: ../../data/txts/tips/general_game.lua:69
+msgid ""
+"You can have more than one economy if their flags are not connected by any "
+"means of transportation. This is why the Configure Economy menu can only be "
+"accessed from flags and warehouses, not the player’s main menu."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr "農場のような一部の建物は非常に狭い作業エリアしか持ちません。もし、そのような建物が木や道に囲まれてしまうと生産活動は止まってしまうでしょう。"
 
-#: ../../data/txts/tips/general_game.lua:71
-msgctxt "hotkey"
-msgid "Ctrl+(+/-)"
-msgstr "Ctrl+(+/-)"
-
-#: ../../data/txts/tips/general_game.lua:71
-msgctxt "hotkey"
-msgid "Ctrl+0"
-msgstr "Ctrl+0"
-
-#: ../../data/txts/tips/general_game.lua:71
-msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr "マウスのホイール操作か %1% で拡大縮小ができます。%2% を押すと拡大縮小がリセットされます。"
-
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:77
 msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
-"visited locations."
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Ctrl+(Page Up/Page Down)"
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Page Up/Page Down"
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Shift+(Page Up/Page Down)"
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:84
 msgid ""
-"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
-"adjust speed smoothly."
+"Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
+"locations."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:88
+msgid ""
+"Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
+"%5%/%6% will adjust speed smoothly."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
+msgid "Ctrl + Arrow keys"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:98
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:98
 msgctxt "hotkey"
-msgid "Shift+Arrow keys"
+msgid "Shift + Arrow keys"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:87
+#: ../../data/txts/tips/general_game.lua:102
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
@@ -828,14 +872,14 @@ msgstr "チャットメッセージの始まりに「@(ユーザ名) 」と書�
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
-"If the game should crash, don't worry! The game will be saved automatically "
+"If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "ゲームがクラッシュしてもそんなに心配いりません！定期的に自動保存されているのでそこから再開できます。"
+msgstr ""
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7
 #, lua-format
 msgid ""
-"Our computer players are too boring? Visit our website at %s and meet other "
+"Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "コンピュータプレイヤーでは歯ごたえが足りませんか？それなら我々のウェブサイト %s を訪れて他のプレイヤーとの交流、そして対戦をしてみてはいかがでしょうか？"
+msgstr ""

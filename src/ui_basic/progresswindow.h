@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,37 +12,42 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_UI_BASIC_PROGRESSWINDOW_H
 #define WL_UI_BASIC_PROGRESSWINDOW_H
 
-#include "base/rect.h"
-#include "ui_basic/fullscreen_window.h"
+#include <memory>
 
-class RenderTarget;
+#include <SDL_events.h>
+
+#include "base/rect.h"
+#include "graphic/note_graphic_resolution_changed.h"
+#include "graphic/styles/progress_bar_style.h"
+#include "graphic/text/rendered_text.h"
+#include "ui_basic/panel.h"
 
 namespace UI {
 
 /// Manages a progress window on the screen.
 struct IProgressVisualization {
 	/// perform any visualizations as needed
-	/// if repaint is true, ensure previously painted areas are visible
-	virtual void update(bool repaint) = 0;
+	virtual void update(RenderTarget&, const Recti& bounds) = 0;
 
 	/// Progress Window is closing, unregister and cleanup
 	virtual void stop() = 0;
 
-	virtual ~IProgressVisualization() {
-	}
+	virtual ~IProgressVisualization() = default;
 };
 
 /// Manages a progress window on the screen.
-struct ProgressWindow : public UI::FullscreenWindow {
-	explicit ProgressWindow(const std::string& background = std::string());
+struct ProgressWindow : public UI::Panel {
+	explicit ProgressWindow(UI::Panel*,
+	                        const std::string& theme,
+	                        const std::string& background,
+	                        bool crop = true);
 	~ProgressWindow() override;
 
 	/// Register additional visualization (tips/hints, animation, etc)
@@ -58,14 +63,25 @@ struct ProgressWindow : public UI::FullscreenWindow {
 private:
 	using VisualizationArray = std::vector<IProgressVisualization*>;
 
+	bool try_set_background(const std::string& template_directory);
+
 	Vector2i label_center_;
 	Recti label_rectangle_;
 	VisualizationArray visualizations_;
+	std::string theme_;
 	std::string background_;
-	const UI::ProgressbarStyleInfo& style_;
+	bool crop_;
+	std::shared_ptr<const UI::RenderedText> progress_message_;
+
+	const UI::ProgressbarStyleInfo& progress_style() const;
+
+	static std::vector<SDL_Event> event_buffer_;
+	static bool ui_key(bool down, SDL_Keysym code);
 
 	void draw(RenderTarget&) override;
-	void update(bool repaint);
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 }  // namespace UI
 

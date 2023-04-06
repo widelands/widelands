@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,7 +28,6 @@
  */
 int32_t EditorDeleteCritterTool::handle_click_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& eia,
    EditorActionArgs* args,
    Widelands::Map* map) {
 	const int32_t radius = args->sel_radius;
@@ -39,7 +37,7 @@ int32_t EditorDeleteCritterTool::handle_click_impl(
 	do {
 		if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 			args->old_bob_type.push_back(&bob->descr());
-			bob->remove(eia.egbase());
+			bob->remove(parent_.egbase());
 		} else {
 			args->old_bob_type.push_back(nullptr);
 		}
@@ -49,15 +47,14 @@ int32_t EditorDeleteCritterTool::handle_click_impl(
 
 int32_t EditorDeleteCritterTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
    EditorActionArgs* args,
    Widelands::Map* map) {
 
-	uint32_t ret = parent.tools()->place_critter.handle_undo_impl(center, parent, args, map);
+	uint32_t ret = parent_.tools()->place_critter.handle_undo_impl(center, args, map);
 	args->old_bob_type.clear();
 	return ret;
 }
 
-EditorActionArgs EditorDeleteCritterTool::format_args_impl(EditorInteractive& parent) {
-	return EditorTool::format_args_impl(parent);
+EditorActionArgs EditorDeleteCritterTool::format_args_impl() {
+	return EditorTool::format_args_impl();
 }

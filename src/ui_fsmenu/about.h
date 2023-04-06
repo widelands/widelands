@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2020 by the Widelands Development Team
+ * Copyright (C) 2016-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,40 +12,44 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_UI_FSMENU_ABOUT_H
 #define WL_UI_FSMENU_ABOUT_H
 
-#include "ui_basic/button.h"
+#include <memory>
+
 #include "ui_basic/fileview_panel.h"
-#include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_basic/unique_window.h"
+#include "ui_fsmenu/main.h"
+
+namespace FsMenu {
 
 /**
  * "Fullscreen "About" information with tabs
  */
-class FullscreenMenuAbout : public FullscreenMenuBase {
+class About : public UI::UniqueWindow {
 public:
-	FullscreenMenuAbout();
+	explicit About(MainMenu&, UI::UniqueWindow::Registry&);
+	~About() override = default;
 
-private:
+	WindowLayoutID window_layout_id() const override {
+		return UI::Window::WindowLayoutID::kFsMenuAbout;
+	}
+
+	bool handle_key(bool, SDL_Keysym) override;
+
+protected:
 	void layout() override;
 
-	uint32_t butw_;
-	uint32_t buth_;
-	uint32_t hmargin_;
-	uint32_t tab_panel_width_;
-	uint32_t tab_panel_y_;
-
-	UI::Textarea title_;
-	UI::Button close_;
-
-	// Tab contents
+private:
+	UI::Box box_;
 	UI::FileViewPanel tabs_;
+	UI::Button close_;
 };
+
+}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_ABOUT_H

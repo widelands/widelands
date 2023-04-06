@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2020 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -40,7 +39,7 @@ struct Utf8 {
 	 */
 	static uint16_t utf8_to_unicode(const std::string& in, std::string::size_type& pos) {
 		assert(pos < in.size());
-		if (in[pos] & 0xc0) {
+		if ((in[pos] & 0x80) != 0) {
 			if (is_utf8_extended(in[pos])) {
 				pos++;
 				return 0;
@@ -48,22 +47,26 @@ struct Utf8 {
 
 			uint8_t ctrl = in[pos];
 			uint16_t value = in[pos++];
-			if (!is_utf8_extended(in[pos]))
+			if (!is_utf8_extended(in[pos])) {
 				return 0;
+			}
 			value = (value << 6) | (in[pos++] & 0x3f);
-			if ((ctrl & 0xe0) == 0xc0)
+			if ((ctrl & 0xe0) == 0xc0) {
 				return value & 0x07ff;
-			if (!is_utf8_extended(in[pos]))
+			}
+			if (!is_utf8_extended(in[pos])) {
 				return 0;
+			}
 			value = (value << 6) | (in[pos++] & 0x3f);
-			if ((ctrl & 0xf0) == 0xe0)
+			if ((ctrl & 0xf0) == 0xe0) {
 				return value & 0xffff;
-			while (is_utf8_extended(in[pos]))
+			}
+			while (is_utf8_extended(in[pos])) {
 				++pos;
+			}
 			return 0;
-		} else {
-			return in[pos++];
 		}
+		return in[pos++];
 	}
 };
 

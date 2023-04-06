@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -39,6 +38,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                                                UI::UniqueWindow::Registry& registry,
                                                GameHost* host)
    : UI::UniqueWindow(gb,
+                      UI::WindowStyle::kWui,
                       "client_disconnected",
                       &registry,
                       2 * margin + width,
@@ -47,8 +47,15 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                       _("Client got disconnected")),
      igb_(gb),
      host_(host),
-     box_(this, margin, margin, UI::Box::Vertical, width, get_h() - 2 * margin, vspacing),
-     box_h_(&box_, margin, margin, UI::Box::Horizontal, width, 35, vspacing),
+     box_(this,
+          UI::PanelStyle::kWui,
+          margin,
+          margin,
+          UI::Box::Vertical,
+          width,
+          get_h() - 2 * margin,
+          vspacing),
+     box_h_(&box_, UI::PanelStyle::kWui, margin, margin, UI::Box::Horizontal, width, 35, vspacing),
      text_(&box_,
            0,
            0,
@@ -90,7 +97,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                 width,
                 35,
                 UI::ButtonStyle::kWuiMenu,
-                g_gr->images().get("images/wui/menus/exit.png"),
+                g_image_cache->get("images/wui/menus/exit.png"),
                 /** TRANSLATORS: Button tooltip */
                 _("Exit Game")) {
 
@@ -107,19 +114,22 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 	exit_game_.sigclicked.connect([this]() { clicked_exit_game(); });
 
 	// Add all AI types
-	for (const auto* impl : ComputerPlayer::get_implementations()) {
-		type_dropdown_.add(impl->descname, impl->name, g_gr->images().get(impl->icon_filename), false,
+	for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
+		type_dropdown_.add(_(impl->descname), impl->name, g_image_cache->get(impl->icon_filename),
+		                   false,
 		                   /** TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 		                      will be used as replacement for a disconnected player */
-		                   (boost::format(_("Replace player with %s")) % impl->descname).str());
+		                   format(_("Replace player with %s"), impl->descname));
 	}
 
 	// Set default mode to normal AI
-	type_dropdown_.select(DefaultAI::normal_impl.name.c_str());
+	type_dropdown_.select(AI::DefaultAI::normal_impl.name);
 
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
+
+	initialization_complete();
 }
 
 void GameClientDisconnected::die() {
@@ -129,7 +139,7 @@ void GameClientDisconnected::die() {
 	}
 	if (is_visible()) {
 		// Dialog aborted, default to the old behavior and add a normal AI
-		set_ai(DefaultAI::normal_impl.name);
+		set_ai(AI::DefaultAI::normal_impl.name);
 	}
 	UI::UniqueWindow::die();
 }
@@ -138,7 +148,7 @@ void GameClientDisconnected::clicked_continue() {
 	assert(type_dropdown_.has_selection());
 
 	const std::string selection = type_dropdown_.get_selected();
-	assert(selection != "");
+	assert(!selection.empty());
 
 	set_ai(selection);
 	// Visibility works as a hint that the window was closed by a button click
@@ -148,7 +158,7 @@ void GameClientDisconnected::clicked_continue() {
 }
 
 void GameClientDisconnected::clicked_exit_game() {
-	if (SDL_GetModState() & KMOD_CTRL) {
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 		igb_->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
 		GameExitConfirmBox* gecb = new GameExitConfirmBox(*get_parent(), *igb_);
@@ -166,7 +176,7 @@ void GameClientDisconnected::exit_game_aborted(Panel* dialog) {
 }
 
 void GameClientDisconnected::set_ai(const std::string& ai) {
-	const std::string ai_descr = ComputerPlayer::get_implementation(ai)->descname;
+	const std::string ai_descr = AI::ComputerPlayer::get_implementation(ai)->descname;
 	for (size_t i = 0; i < host_->settings().players.size(); i++) {
 		if (host_->settings().players.at(i).state != PlayerSettings::State::kOpen ||
 		    !igb_->game().get_player(i + 1)->get_ai().empty()) {

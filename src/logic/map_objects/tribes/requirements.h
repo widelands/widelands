@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -48,19 +47,18 @@ struct RequirementsStorage;
 struct Requirements {
 private:
 	struct BaseCapsule {
-		virtual ~BaseCapsule() {
-		}
+		virtual ~BaseCapsule() = default;
 
-		virtual bool check(const MapObject&) const = 0;
+		[[nodiscard]] virtual bool check(const MapObject&) const = 0;
 		virtual void write(FileWrite&, EditorGameBase&, MapObjectSaver&) const = 0;
-		virtual const RequirementsStorage& storage() const = 0;
+		[[nodiscard]] virtual const RequirementsStorage& storage() const = 0;
 	};
 
 	template <typename T> struct Capsule : public BaseCapsule {
-		explicit Capsule(const T& init_m) : m(init_m) {
+		Capsule(const T& init_m) : m(init_m) {  // NOLINT allow implicit conversion
 		}
 
-		bool check(const MapObject& obj) const override {
+		[[nodiscard]] bool check(const MapObject& obj) const override {
 			return m.check(obj);
 		}
 
@@ -68,7 +66,7 @@ private:
 			m.write(fw, egbase, mos);
 		}
 
-		const RequirementsStorage& storage() const override {
+		[[nodiscard]] const RequirementsStorage& storage() const override {
 			return T::storage;
 		}
 
@@ -76,16 +74,17 @@ private:
 	};
 
 public:
-	Requirements() {
-	}
+	Requirements() = default;
 
-	template <typename T> Requirements(const T& req) : m(new Capsule<T>(req)) {
+	template <typename T>
+	Requirements(const T& req)  // NOLINT allow implicit conversion
+	   : m(new Capsule<T>(req)) {
 	}
 
 	/**
 	 * \return \c true if the object satisfies the requirements.
 	 */
-	bool check(const MapObject&) const;
+	[[nodiscard]] bool check(const MapObject&) const;
 
 	// For Save/Load Games
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&);
@@ -113,7 +112,7 @@ struct RequirementsStorage {
 	using Reader = Requirements (*)(FileRead&, EditorGameBase&, MapObjectLoader&);
 
 	RequirementsStorage(uint32_t id, Reader reader);
-	uint32_t id() const;
+	[[nodiscard]] uint32_t id() const;
 
 	static Requirements read(FileRead&, EditorGameBase&, MapObjectLoader&);
 
@@ -133,7 +132,7 @@ private:
 struct RequireOr {
 	void add(const Requirements&);
 
-	bool check(const MapObject&) const;
+	[[nodiscard]] bool check(const MapObject&) const;
 	void write(FileWrite&, EditorGameBase& egbase, MapObjectSaver&) const;
 
 	static const RequirementsStorage storage;
@@ -149,7 +148,7 @@ private:
 struct RequireAnd {
 	void add(const Requirements&);
 
-	bool check(const MapObject&) const;
+	[[nodiscard]] bool check(const MapObject&) const;
 	void write(FileWrite&, EditorGameBase& egbase, MapObjectSaver&) const;
 
 	static const RequirementsStorage storage;
@@ -166,24 +165,23 @@ struct RequireAttribute {
 	   : at(init_at), min(init_min), max(init_max) {
 	}
 
-	RequireAttribute() : at(TrainingAttribute::kTotal), min(SHRT_MIN), max(SHRT_MAX) {
-	}
-	bool check(const MapObject&) const;
+	RequireAttribute() = default;
+	[[nodiscard]] bool check(const MapObject&) const;
 	void write(FileWrite&, EditorGameBase& egbase, MapObjectSaver&) const;
 
 	static const RequirementsStorage storage;
 
-	int32_t get_min() const {
+	[[nodiscard]] int32_t get_min() const {
 		return min;
 	}
-	int32_t get_max() const {
+	[[nodiscard]] int32_t get_max() const {
 		return max;
 	}
 
 private:
-	TrainingAttribute at;
-	int32_t min;
-	int32_t max;
+	TrainingAttribute at = TrainingAttribute::kTotal;
+	int32_t min = SHRT_MIN;
+	int32_t max = SHRT_MAX;
 };
 }  // namespace Widelands
 

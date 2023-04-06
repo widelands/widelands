@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2017-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,6 +26,8 @@
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
+
+struct TextClickTarget;
 
 namespace UI {
 
@@ -46,43 +47,49 @@ private:
 	             bool visited,
 	             const RGBColor& color,
 	             bool is_background_color_set,
-	             DrawMode init_mode);
+	             DrawMode init_mode,
+	             const TextClickTarget* click_target);
 	// The image is managed by a pernament cache
 	RenderedRect(const Recti& init_rect,
 	             const Image* init_image,
 	             bool visited,
 	             const RGBColor& color,
 	             bool is_background_color_set,
-	             DrawMode init_mode);
+	             DrawMode init_mode,
+	             const TextClickTarget* click_target);
 
 public:
 	/// RenderedRect will contain a background image that should be tiled
-	explicit RenderedRect(const Recti& init_rect, const Image* init_image);
+	explicit RenderedRect(const Recti& init_rect,
+	                      const Image* init_image,
+	                      const TextClickTarget* click_target);
 
 	/// RenderedRect will contain a background color that should be tiled
-	explicit RenderedRect(const Recti& init_rect, const RGBColor& color);
+	explicit RenderedRect(const Recti& init_rect,
+	                      const RGBColor& color,
+	                      const TextClickTarget* click_target);
 
 	/// RenderedRect will contain a normal image that is managed by a transient cache.
 	/// Use this if the image is managed by an instance of TextureCache.
-	explicit RenderedRect(const std::shared_ptr<const Image>& init_image);
+	explicit RenderedRect(const std::shared_ptr<const Image>& init_image,
+	                      const TextClickTarget* click_target);
 
 	/// RenderedRect will contain a normal image that is managed by a permanent cache.
-	/// Use this if the image is managed by g_gr->images().
-	explicit RenderedRect(const Image* init_image);
-	~RenderedRect() {
-	}
+	/// Use this if the image is managed by g_image_cache.
+	explicit RenderedRect(const Image* init_image, const TextClickTarget* click_target);
 
 	/// An image to be blitted. Can be nullptr.
-	const Image* image() const;
+	[[nodiscard]] const Image* image() const;
 
+	[[nodiscard]] const Recti& rect() const;
 	/// The x position of the rectangle
-	int x() const;
+	[[nodiscard]] int x() const;
 	/// The y position of the rectangle
-	int y() const;
+	[[nodiscard]] int y() const;
 	/// The width of the rectangle
-	int width() const;
+	[[nodiscard]] int width() const;
 	/// The height of the rectangle
-	int height() const;
+	[[nodiscard]] int height() const;
 
 	/// Change x and y position of the rectangle.
 	void set_origin(const Vector2i& new_origin);
@@ -91,15 +98,18 @@ public:
 	/// for correct positioning.
 	void set_visited();
 	/// Whether this rectangle was already visited by the font renderer
-	bool was_visited() const;
+	[[nodiscard]] bool was_visited() const;
 
 	/// Whether this rectangle contains a background color
-	bool has_background_color() const;
+	[[nodiscard]] bool has_background_color() const;
 	/// This rectangle's background color
-	const RGBColor& background_color() const;
+	[[nodiscard]] const RGBColor& background_color() const;
 
 	/// Whether the RenderedRect's image should be blitted once or tiled
-	DrawMode mode() const;
+	[[nodiscard]] DrawMode mode() const;
+
+	[[nodiscard]] bool handle_mousepress(int32_t x, int32_t y) const;
+	[[nodiscard]] const std::string* get_tooltip(int32_t x, int32_t y) const;
 
 private:
 	Recti rect_;
@@ -111,16 +121,25 @@ private:
 	const RGBColor background_color_;
 	const bool is_background_color_set_;
 	const DrawMode mode_;
+	const TextClickTarget* click_target_;
 };
 
 struct RenderedText {
+	RenderedText() = default;
+	~RenderedText();
+
 	/// RenderedRects that can be drawn on screen
 	std::vector<std::unique_ptr<RenderedRect>> rects;
 
+	void set_memory_tree_root(TextClickTarget* t);
+
 	/// The width occupied  by all rects in pixels.
-	int width() const;
+	[[nodiscard]] int width() const;
 	/// The height occupied  by all rects in pixels.
-	int height() const;
+	[[nodiscard]] int height() const;
+
+	[[nodiscard]] bool handle_mousepress(int32_t x, int32_t y) const;
+	[[nodiscard]] const std::string* get_tooltip(int32_t x, int32_t y) const;
 
 	enum class CropMode {
 		// The RenderTarget will handle all cropping. Use this for scrollable elements or when you
@@ -166,6 +185,8 @@ private:
 	                  const RenderedRect& rect,
 	                  const Recti& region,
 	                  Align align) const;
+
+	TextClickTarget* memory_tree_root_{nullptr};
 };
 
 }  // namespace UI

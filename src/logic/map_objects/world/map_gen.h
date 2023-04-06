@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -50,11 +49,11 @@ struct MapGenAreaInfo {
 		kMountainsSnow
 	};
 
-	MapGenAreaInfo(const LuaTable& table, const World& world, Area area_type);
+	MapGenAreaInfo(const LuaTable& table, const Descriptions& descriptions, Area area_type);
 
-	size_t get_num_terrains(Terrain) const;
-	DescriptionIndex get_terrain(Terrain terrain_type, uint32_t index) const;
-	uint32_t get_weight() const {
+	[[nodiscard]] size_t get_num_terrains(Terrain) const;
+	[[nodiscard]] DescriptionIndex get_terrain(Terrain terrain_type, uint32_t index) const;
+	[[nodiscard]] uint32_t get_weight() const {
 		return weight_;
 	}
 
@@ -69,17 +68,17 @@ private:
 struct MapGenBobCategory {
 	explicit MapGenBobCategory(const LuaTable& table);
 
-	size_t num_immovables() const {
+	[[nodiscard]] size_t num_immovables() const {
 		return immovables_.size();
 	}
-	size_t num_critters() const {
+	[[nodiscard]] size_t num_critters() const {
 		return critters_.size();
 	}
 
-	const std::string& get_immovable(size_t index) const {
+	[[nodiscard]] const std::string& get_immovable(size_t index) const {
 		return immovables_[index];
 	}
-	const std::string& get_critter(size_t index) const {
+	[[nodiscard]] const std::string& get_critter(size_t index) const {
 		return critters_[index];
 	}
 
@@ -91,15 +90,16 @@ private:
 struct MapGenLandResource {
 	MapGenLandResource(const LuaTable& table, MapGenInfo& map_gen_info);
 
-	uint32_t get_weight() const {
+	[[nodiscard]] uint32_t get_weight() const {
 		return weight_;
 	}
-	const MapGenBobCategory* get_bob_category(MapGenAreaInfo::Terrain terrain_type) const;
+	[[nodiscard]] const MapGenBobCategory*
+	get_bob_category(MapGenAreaInfo::Terrain terrain_type) const;
 
-	uint8_t get_immovable_density() const {
+	[[nodiscard]] uint8_t get_immovable_density() const {
 		return immovable_density_;
 	}
-	uint8_t get_moveable_density() const {
+	[[nodiscard]] uint8_t get_moveable_density() const {
 		return critter_density_;
 	}
 
@@ -120,7 +120,7 @@ private:
  * This info is usually read from the file "mapgeninfo" of a world.
  */
 struct MapGenInfo {
-	MapGenInfo(const LuaTable& table, const World& world);
+	MapGenInfo(const LuaTable& table, const Descriptions& descriptions);
 
 	size_t get_num_areas(MapGenAreaInfo::Area area_type) const;
 	const MapGenAreaInfo& get_area(MapGenAreaInfo::Area area_type, uint32_t index) const;

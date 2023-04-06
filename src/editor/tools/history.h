@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2020 by the Widelands Development Team
+ * Copyright (C) 2012-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -32,19 +31,21 @@
  * Do all tool action you want to make "undoable" using this class.
  */
 struct EditorHistory {
-	EditorHistory(UI::Button& undo, UI::Button& redo) : undo_button_(undo), redo_button_(redo) {
+	EditorHistory(EditorInteractive& parent, UI::Button& undo, UI::Button& redo)
+	   : parent_(parent), undo_button_(undo), redo_button_(redo), draw_tool_(parent) {
 	}
 
 	uint32_t do_action(EditorTool& tool,
 	                   EditorTool::ToolIndex ind,
 	                   Widelands::Map& map,
 	                   const Widelands::NodeAndTriangle<>& center,
-	                   EditorInteractive& parent,
 	                   bool draw = false);
 	uint32_t undo_action();
 	uint32_t redo_action();
 
 private:
+	EditorInteractive& parent_;
+
 	UI::Button& undo_button_;
 	UI::Button& redo_button_;
 

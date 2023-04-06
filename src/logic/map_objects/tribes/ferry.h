@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -33,14 +32,13 @@ struct Coords;
 
 class FerryDescr : public CarrierDescr {
 public:
-	FerryDescr(const std::string& init_descname, const LuaTable& table, const Tribes& tribes);
-	~FerryDescr() override {
-	}
+	FerryDescr(const std::string& init_descname, const LuaTable& table, Descriptions& descriptions);
+	~FerryDescr() override = default;
 
-	uint32_t movecaps() const override;
+	[[nodiscard]] uint32_t movecaps() const override;
 
 protected:
-	Bob& create_object() const override;
+	[[nodiscard]] Bob& create_object() const override;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(FerryDescr);
@@ -56,15 +54,14 @@ struct Ferry : public Carrier {
 	MO_DESCR(FerryDescr)
 
 	explicit Ferry(const FerryDescr& ferry_descr);
-	~Ferry() override {
-	}
+	~Ferry() override = default;
 
 	bool init(EditorGameBase&) override;
 	void set_economy(Game&, Economy*, WareWorker);
 
 	FerryFleet* get_fleet() const;
 
-	Waterway* get_destination(Game& game) const;
+	Waterway* get_destination(const Game& game) const;
 	void set_destination(Game& game, Waterway* ww);
 
 	void init_auto_task(Game& game) override;
@@ -75,7 +72,7 @@ struct Ferry : public Carrier {
 
 private:
 	friend struct FerryFleet;
-	FerryFleet* fleet_;
+	FerryFleet* fleet_{nullptr};
 
 	std::unique_ptr<Coords> destination_;
 
@@ -87,15 +84,14 @@ private:
 	void unemployed_update(Game&, State&);
 	void row_update(Game&, State&);
 
-	uint32_t unemployed_since_;
+	Time unemployed_since_{0U};
 
 protected:
 	void cleanup(EditorGameBase&) override;
 
 	struct Loader : public Carrier::Loader {
 	public:
-		Loader() {
-		}
+		Loader() = default;
 		void load(FileRead&) override;
 
 	protected:

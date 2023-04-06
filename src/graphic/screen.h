@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifndef WL_GRAPHIC_SCREEN_H
@@ -31,17 +30,16 @@
 class Screen : public Surface {
 public:
 	Screen(int w, int h);
-	~Screen() override {
-	}
+	~Screen() override = default;
 
 	// Implements Surface.
-	int width() const override;
-	int height() const override;
+	[[nodiscard]] int width() const override;
+	[[nodiscard]] int height() const override;
 
 	// Reads out the current pixels in the framebuffer and returns
 	// them as a texture for screenshots. This is a very slow process,
 	// so use with care.
-	std::unique_ptr<Texture> to_texture() const;
+	[[nodiscard]] std::unique_ptr<Texture> to_texture() const;
 
 private:
 	void do_blit(const Rectf& dst_rect,

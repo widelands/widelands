@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 // this originally comes from Return to the Shadows (http://www.rtts.org/)
@@ -22,16 +21,13 @@
 #include "io/filesystem/filesystem.h"
 
 #include <cassert>
+#include <cstdlib>
 #include <list>
+#include <string>
 #ifdef _WIN32
 #include <cstdio>
 #endif
 
-// We have to add Boost to this block to make codecheck happy
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 #ifdef _WIN32
 #include <direct.h>
 #include <windows.h>
@@ -40,12 +36,14 @@
 #include <sys/types.h>
 #endif
 #include <sys/stat.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/string.h"
 #include "config.h"
-#include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -61,23 +59,16 @@
 #define PATH_MAX MAX_PATH
 #endif
 
+/* Quickfix for bug https://github.com/widelands/widelands/issues/5614:
+ * Most systems specify PATH_MAX to be the maximum number of characters in a file path.
+ * Systems without a limit (or which don't care about standards) may neglect to define this symbol.
+ * On such systems, simply use an arbitrary value that is high enough for some very long paths.
+ */
+#ifndef PATH_MAX
+#define PATH_MAX 0x10000
+#endif
+
 namespace {
-// Characters that are allowed in filenames, but not at the beginning
-const std::vector<std::string> illegal_filename_starting_characters{
-   ".", "-",
-   " ",  // Keep the blank last
-};
-
-// Characters that are disallowed anywhere in a filename
-// No potential file separators or other potentially illegal characters
-// https://msdn.microsoft.com/en-us/library/windows/desktop/aa365247(v=vs.85).aspx
-// http://www.linfo.org/file_name.html
-// https://support.apple.com/en-us/HT202808
-// We can't just regex for word & digit characters here because of non-Latin scripts.
-const std::vector<std::string> illegal_filename_characters{
-   "<", ">", ":", "\"", "|", "?", "*", "/", "\\",
-};
-
 /// A class that makes iteration over filename_?.* templates easy. It is much faster than using
 /// regex.
 class NumberGlob {
@@ -91,7 +82,7 @@ private:
 	std::string template_;
 	std::string format_;
 	std::string to_replace_;
-	uint32_t current_;
+	uint32_t current_{0U};
 	uint32_t max_;
 
 	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
@@ -100,9 +91,9 @@ private:
 /**
  * Implementation for NumberGlob.
  */
-NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
+NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template) {
 	int nchars = count(file_template.begin(), file_template.end(), '?');
-	format_ = "%0" + boost::lexical_cast<std::string>(nchars) + "i";
+	format_ = "%0" + as_string(nchars) + "i";
 
 	max_ = 1;
 	for (int i = 0; i < nchars; ++i) {
@@ -117,11 +108,9 @@ bool NumberGlob::next(std::string* s) {
 		return false;
 	}
 
-	if (max_) {
-		*s = boost::replace_last_copy(
-		   template_, to_replace_, (boost::format(format_) % current_).str());
-	} else {
-		*s = template_;
+	*s = template_;
+	if (max_ != 0u) {
+		replace_last(*s, to_replace_, format(format_, current_));
 	}
 	++current_;
 	return true;
@@ -142,7 +131,7 @@ bool FileSystem::is_path_absolute(const std::string& path) const {
 	if (path_size == root_size) {
 		return path == root_;
 	}
-	if (path.compare(0, root_.size(), root_)) {
+	if (path.compare(0, root_.size(), root_) != 0) {
 		return false;
 	}
 
@@ -153,11 +142,7 @@ bool FileSystem::is_path_absolute(const std::string& path) const {
 	}
 #endif
 	assert(root_size < path_size);  //  Otherwise an invalid read happens below.
-	if (path[root_size] != file_separator()) {
-		return false;
-	}
-
-	return true;
+	return path[root_size] == file_separator();
 }
 
 /**
@@ -205,8 +190,13 @@ std::string FileSystem::fix_cross_file(const std::string& path) const {
 // static
 std::string FileSystem::get_working_directory() {
 	char cwd[PATH_MAX + 1];
+#ifdef _MSC_VER
+	// getcwd is deprecated on MSVC
+	char* const result = _getcwd(cwd, PATH_MAX);
+#else
 	char* const result = getcwd(cwd, PATH_MAX);
-	if (!result) {
+#endif
+	if (result == nullptr) {
 		throw FileError("FileSystem::get_working_directory()", "widelands", "can not run getcwd");
 	}
 
@@ -220,58 +210,6 @@ char FileSystem::file_separator() {
 #else
 	return '/';
 #endif
-}
-
-bool FileSystem::is_legal_filename(const std::string& filename) {
-	if (filename.empty()) {
-		return false;
-	}
-	for (const std::string& illegal_start : illegal_filename_starting_characters) {
-		if (boost::starts_with(filename, illegal_start)) {
-			return false;
-		}
-	}
-	for (const std::string& illegal_char : illegal_filename_characters) {
-		if (boost::contains(filename, illegal_char)) {
-			return false;
-		}
-	}
-	return true;
-}
-
-std::string FileSystem::illegal_filename_tooltip() {
-	std::vector<std::string> starting_characters;
-	for (const std::string& character : illegal_filename_starting_characters) {
-		if (character == " ") {
-			/** TRANSLATORS: Part of tooltip entry for characters in illegal filenames. replaces tha
-			 * blank space in a list of illegal characters */
-			starting_characters.push_back(pgettext("illegal_filename_characters", "blank space"));
-		} else {
-			starting_characters.push_back(character);
-		}
-	}
-	const std::string illegal_start(as_listitem(
-	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
-	    *  %s is a list of illegal characters */
-	   (boost::format(pgettext("illegal_filename_characters", "%s at the start of the filename")) %
-	    richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR)))
-	      .str(),
-	   UI::FontStyle::kWuiMessageParagraph));
-
-	const std::string illegal(as_listitem(
-	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
-	    * %s is a list of illegal characters */
-	   (boost::format(pgettext("illegal_filename_characters", "%s anywhere in the filename")) %
-	    richtext_escape(i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR)))
-	      .str(),
-	   UI::FontStyle::kWuiMessageParagraph));
-
-	return (boost::format("%s%s%s") %
-	        /** TRANSLATORS: Tooltip header for characters in illegal filenames.
-	         * This is followed by a list of bullet points */
-	        pgettext("illegal_filename_characters", "The following characters are not allowed:") %
-	        illegal_start % illegal)
-	   .str();
 }
 
 // TODO(unknown): Write homedir detection for non-getenv-systems
@@ -292,7 +230,7 @@ std::string FileSystem::get_homedir() {
 	TRY_USE_AS_HOMEDIR("HOME")
 	TRY_USE_AS_HOMEDIR("APPDATA")
 
-	log("None of the directories was useable - falling back to \".\"\n");
+	log_warn("None of the directories was useable - falling back to \".\"\n");
 #else
 #ifdef HAS_GETENV
 	if (char const* const h = getenv("HOME")) {
@@ -302,12 +240,12 @@ std::string FileSystem::get_homedir() {
 #endif
 
 	if (homedir.empty()) {
-		log("\nWARNING: either we can not detect your home directory "
-		    "or you do not have one! Please contact the developers.\n\n");
+		log_warn("\neither we can not detect your home directory "
+		         "or you do not have one! Please contact the developers.\n\n");
 
 		// TODO(unknown): is it really a good idea to set homedir to "." then ??
 
-		log("Instead of your home directory, '.' will be used.\n\n");
+		log_warn("Instead of your home directory, '.' will be used.\n\n");
 		homedir = ".";
 	}
 
@@ -389,13 +327,13 @@ std::string FileSystem::get_userconfigdir() {
  */
 std::vector<std::string> FileSystem::get_xdgdatadirs() {
 	std::vector<std::string> xdgdatadirs;
-	const char* environment_char;
+	const char* environment_char = nullptr;
 #ifdef HAS_GETENV
 	environment_char = getenv("XDG_DATA_DIRS");
 #endif
 	std::string environment(environment_char == nullptr || *environment_char == 0 ?
-	                           "/usr/local/share:/usr/share" :
-	                           environment_char);
+                              "/usr/local/share:/usr/share" :
+                              environment_char);
 
 	// https://stackoverflow.com/a/14266139
 	std::string token;
@@ -457,8 +395,13 @@ static void fs_tokenize(const std::string& path, char const filesep, Inserter co
 	std::string::size_type pos;   //  start of token
 	std::string::size_type pos2;  //  next filesep character
 
+	if (path.empty()) {
+		// Nothing to do
+		return;
+	}
+
 	// Extract the first path component
-	if (path.find(filesep) == 0) {  // Is this an absolute path?
+	if (path.front() == filesep) {  // Is this an absolute path?
 		pos = 1;
 	} else {  // Relative path
 		pos = 0;
@@ -527,7 +470,7 @@ std::string FileSystem::canonicalize_name(const std::string& path) const {
 				continue;
 			}
 			// Remove double dot and the preceding component (if any)
-			else if (*str == '.' && *(str + 1) == '\0') {
+			if (*str == '.' && *(str + 1) == '\0') {
 				if (i != components.begin()) {
 #ifdef _WIN32
 					// On windows don't remove driveletter in this error condition
@@ -586,8 +529,12 @@ const char* FileSystem::fs_filename(const char* p) {
 }
 
 std::string FileSystem::fs_dirname(const std::string& full_path) {
-	const std::string filename = fs_filename(full_path.c_str());
-	return full_path.substr(0, full_path.size() - filename.size());
+	std::string filename = fs_filename(full_path.c_str());
+	filename = full_path.substr(0, full_path.size() - filename.size());
+#ifdef _WIN32
+	std::replace(filename.begin(), filename.end(), '\\', '/');
+#endif
+	return filename;
 }
 
 std::string FileSystem::filename_ext(const std::string& f) {
@@ -596,13 +543,12 @@ std::string FileSystem::filename_ext(const std::string& f) {
 
 	if (std::string::npos == ext_start) {
 		return "";
-	} else {
-		return f.substr(ext_start);
 	}
+	return f.substr(ext_start);
 }
 
 std::string FileSystem::filename_without_ext(const char* const p) {
-	std::string fname(p ? FileSystem::fs_filename(p) : "");
+	std::string fname(p != nullptr ? FileSystem::fs_filename(p) : "");
 	std::string ext(FileSystem::filename_ext(fname));
 	return fname.substr(0, fname.length() - ext.length());
 }
@@ -658,7 +604,7 @@ bool FileSystem::check_writeable_for_data(char const* const path) {
 		fs.fs_unlink(".widelands");
 		return true;
 	} catch (const FileError& e) {
-		log("Directory %s is not writeable - next try: %s\n", path, e.what());
+		log_warn("Directory %s is not writeable - next try: %s\n", path, e.what());
 	}
 
 	return false;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -26,8 +25,13 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "build_info.h"
+#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/filewrite.h"
+#include "logic/addons.h"
+#include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "scripting/report_error.h"
@@ -61,39 +65,52 @@ files name.
 /* RST
 .. function:: string.bformat
 
-   Not really a global function. But we add a method to string built in type in
-   Lua that has similar functionality to the built in string.format, but
-   instead uses boost::format. This allows for better control of the formatting
-   as well as reordering of arguments which is needed for proper localisation.
+   Not really a global function. But we add a method to ``string`` built-in type in
+   Lua that has similar functionality to the built-in ``string.format``, but
+   instead uses our own ``format`` function. This allows for better control of the
+   formatting as well as reordering of arguments which is needed for proper localisation.
 
-   :returns: :const:`nil`
+   :returns: The formatted string.
 */
+// The 'b' in bformat used to stand for "boost", which we no longer use, but
+// renaming the Lua function would break backwards compatibility.
 static int L_string_bformat(lua_State* L) {
 	try {
-		boost::format fmt(luaL_checkstring(L, 1));
+		format_impl::ArgsVector fmt_args;
+		format_impl::ArgsPair arg;
 		const int nargs = lua_gettop(L);
 
 		// Start with argument, the first is already consumed
 		for (int i = 2; i <= nargs; ++i) {
 			switch (lua_type(L, i)) {
 			case LUA_TNIL:
-				fmt % "nil";
+				arg.first = format_impl::AbstractNode::ArgType::kString;
+				arg.second.string_val = "nil";
+				fmt_args.emplace_back(arg);
 				break;
 
 			case LUA_TNUMBER:
-				if (lua_isinteger(L, i)) {
-					fmt % luaL_checkint32(L, i);
+				if (lua_isinteger(L, i) != 0) {
+					arg.first = format_impl::AbstractNode::ArgType::kSigned;
+					arg.second.signed_val = luaL_checkint32(L, i);
+					fmt_args.emplace_back(arg);
 				} else {
-					fmt % luaL_checknumber(L, i);
+					arg.first = format_impl::AbstractNode::ArgType::kFloat;
+					arg.second.float_val = luaL_checknumber(L, i);
+					fmt_args.emplace_back(arg);
 				}
 				break;
 
 			case LUA_TBOOLEAN:
-				fmt % luaL_checkboolean(L, i);
+				arg.first = format_impl::AbstractNode::ArgType::kBoolean;
+				arg.second.boolean_val = luaL_checkboolean(L, i);
+				fmt_args.emplace_back(arg);
 				break;
 
 			case LUA_TSTRING:
-				fmt % luaL_checkstring(L, i);
+				arg.first = format_impl::AbstractNode::ArgType::kString;
+				arg.second.string_val = luaL_checkstring(L, i);
+				fmt_args.emplace_back(arg);
 				break;
 
 			case LUA_TTABLE:
@@ -111,28 +128,34 @@ static int L_string_bformat(lua_State* L) {
 			}
 		}
 
-		lua_pushstring(L, fmt.str());
+		lua_pushstring(L, format(luaL_checkstring(L, 1), fmt_args));
 		return 1;
-	} catch (const boost::io::format_error& err) {
+	} catch (const std::exception& err) {
 		report_error(L, "Error in bformat: %s", err.what());
 	}
 }
 
-static std::map<const lua_State*, std::vector<std::string>> textdomains;
+using TextdomainInfo = std::pair<std::string, bool /* addon */>;
+static std::map<const lua_State*, std::vector<TextdomainInfo>> textdomains;
+
 /* RST
-   .. function:: push_textdomain(domain)
+   .. function:: push_textdomain(domain [, addon=false])
 
       Sets the textdomain for all further calls to :func:`_` until it is reset
       to the previous value using :func:`pop_textdomain`.
+
+      If your script is part of an add-on, the second parameter needs to be `true`.
 
       :arg domain: The textdomain
       :type domain: :class:`string`
       :returns: :const:`nil`
 */
 static int L_push_textdomain(lua_State* L) {
-	textdomains[L].push_back(luaL_checkstring(L, -1));
+	textdomains[L].push_back(
+	   std::make_pair(luaL_checkstring(L, 1), lua_gettop(L) > 1 && luaL_checkboolean(L, 2)));
 	return 0;
 }
+
 /* RST
    .. function:: pop_textdomain()
 
@@ -145,6 +168,7 @@ static int L_pop_textdomain(lua_State* L) {
 	textdomains.at(L).pop_back();
 	return 0;
 }
+
 /* RST
    .. function:: set_textdomain(domain)
 
@@ -152,12 +176,53 @@ static int L_pop_textdomain(lua_State* L) {
 */
 // TODO(Nordfriese): Delete after v1.0
 static int L_set_textdomain(lua_State* L) {
+	log_warn("set_textdomain is deprecated, use push_textdomain instead");
 	return L_push_textdomain(L);
 }
 
-static std::string current_textdomain(const lua_State* L) {
+static const TextdomainInfo* current_textdomain(const lua_State* L) {
 	const auto it = textdomains.find(L);
-	return it == textdomains.end() || it->second.empty() ? "" : it->second.back();
+	return it == textdomains.end() || it->second.empty() ? nullptr : &it->second.back();
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+void read_textdomain_stack(FileRead& fr, const lua_State* L) {
+	{
+		const auto it = textdomains.find(L);
+		if (it != textdomains.end()) {
+			it->second.clear();
+		}
+	}
+
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			for (size_t i = fr.unsigned_32(); i > 0u; --i) {
+				const std::string str = fr.string();
+				const bool a = fr.unsigned_8() != 0u;
+				textdomains[L].push_back(std::make_pair(str, a));
+			}
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "read_textdomain_stack", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("LuaGlobals::read_textdomain_stack: %s", e.what());
+	}
+}
+void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
+	fw.unsigned_16(kCurrentPacketVersion);
+
+	const auto it = textdomains.find(L);
+	if (it == textdomains.end()) {
+		fw.unsigned_32(0);
+	} else {
+		fw.unsigned_32(it->second.size());
+		for (const auto& pair : it->second) {
+			fw.string(pair.first);
+			fw.unsigned_8(pair.second ? 1 : 0);
+		}
+	}
 }
 
 /* RST
@@ -171,18 +236,24 @@ static std::string current_textdomain(const lua_State* L) {
 
       .. code-block:: lua
 
-         s = "<p><br>" .. _ "Only this should be translated" .. "<br></p>"
+         s = "<p><br>" .. _("Only this should be translated") .. "<br></p>"
 
       :arg str: text to translate.
       :type str: :class:`string`
       :returns: The translated string.
 */
+CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 static int L__(lua_State* L) {
-	const std::string td = current_textdomain(L);
-
-	if (!td.empty()) {
-		i18n::Textdomain dom(td);
-		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
+	if (const TextdomainInfo* td = current_textdomain(L)) {
+		if (td->second) {
+			std::unique_ptr<i18n::GenericTextdomain> dom(
+			   AddOns::create_textdomain_for_addon(td->first));
+			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+		} else {
+			i18n::Textdomain dom(td->first);
+			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+		}
 	} else {
 		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 	}
@@ -213,9 +284,15 @@ static int L_ngettext(lua_State* L) {
 		report_error(L, "Call to ngettext with negative number %d", n);
 	}
 
-	const std::string td = current_textdomain(L);
-	if (td.empty()) {
-		lua_pushstring(L, dngettext(td.c_str(), msgid, msgid_plural, n));
+	if (const TextdomainInfo* td = current_textdomain(L)) {
+		if (td->second) {
+			std::unique_ptr<i18n::GenericTextdomain> dom(
+			   AddOns::create_textdomain_for_addon(td->first));
+			lua_pushstring(L, ngettext(msgid, msgid_plural, n));
+		} else {
+			i18n::Textdomain dom(td->first);
+			lua_pushstring(L, ngettext(msgid, msgid_plural, n));
+		}
 	} else {
 		lua_pushstring(L, ngettext(msgid, msgid_plural, n));
 	}
@@ -235,17 +312,64 @@ static int L_ngettext(lua_State* L) {
 
    :returns: The translated string.
 */
-// UNTESTED
 static int L_pgettext(lua_State* L) {
 	//  S: msgctxt msgid
 	const char* msgctxt = luaL_checkstring(L, 1);
 	const char* msgid = luaL_checkstring(L, 2);
 
-	const std::string td = current_textdomain(L);
-	if (!td.empty()) {
-		lua_pushstring(L, dpgettext_expr(td.c_str(), msgctxt, msgid));
+	if (const TextdomainInfo* td = current_textdomain(L)) {
+		if (td->second) {
+			std::unique_ptr<i18n::GenericTextdomain> dom(
+			   AddOns::create_textdomain_for_addon(td->first));
+			lua_pushstring(L, pgettext(msgctxt, msgid));
+		} else {
+			i18n::Textdomain dom(td->first);
+			lua_pushstring(L, pgettext(msgctxt, msgid));
+		}
 	} else {
-		lua_pushstring(L, pgettext_expr(msgctxt, msgid));
+		lua_pushstring(L, pgettext(msgctxt, msgid));
+	}
+	return 1;
+}
+
+/* RST
+.. function:: npgettext(msgctxt, msgid, msgid_plural, n)
+
+   A wrapper for the npgettext() function, needed for allowing multiple translations of the same
+   plural string according to context.
+
+   :arg msgctxt: a named context for this string for disambiguation
+   :type msgctxt: :class:`string`
+   :arg msgid: text to translate
+   :type msgid: :class:`string`
+   :arg msgid_plural: text to translate (plural)
+   :type msgid_plural: :class:`string`
+   :arg n: The number of elements.
+   :type n: An unsigned integer.
+
+   :returns: The translated string.
+*/
+static int L_npgettext(lua_State* L) {
+	//  S: msgctxt msgid
+	const char* msgctxt = luaL_checkstring(L, 1);
+	const char* msgid = luaL_checkstring(L, 2);
+	const char* msgid_plural = luaL_checkstring(L, 3);
+	const int32_t n = luaL_checkint32(L, 4);
+	if (n < 0) {
+		report_error(L, "Call to npgettext with negative number %d", n);
+	}
+
+	if (const TextdomainInfo* td = current_textdomain(L)) {
+		if (td->second) {
+			std::unique_ptr<i18n::GenericTextdomain> dom(
+			   AddOns::create_textdomain_for_addon(td->first));
+			lua_pushstring(L, npgettext(msgctxt, msgid, msgid_plural, n));
+		} else {
+			i18n::Textdomain dom(td->first);
+			lua_pushstring(L, npgettext(msgctxt, msgid, msgid_plural, n));
+		}
+	} else {
+		lua_pushstring(L, npgettext(msgctxt, msgid, msgid_plural, n));
 	}
 	return 1;
 }
@@ -304,6 +428,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"include", &L_include},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
+                                          {"npgettext", &L_npgettext},
                                           {"set_textdomain", &L_set_textdomain},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},
@@ -315,7 +440,7 @@ void luaopen_globals(lua_State* L) {
 	luaL_setfuncs(L, globals, 0);
 	lua_pop(L, 1);
 
-	// Also add in string.bformat to use boost::format instead, so that we get
+	// Also add in string.bformat to use format instead, so that we get
 	// proper localisation.
 	lua_getglobal(L, "string");               // S: string_lib
 	lua_pushstring(L, "bformat");             // S: string_lib "bformat"

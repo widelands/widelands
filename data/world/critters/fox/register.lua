@@ -1,0 +1,3 @@
+return {
+   fox = { "eatable" }
+}

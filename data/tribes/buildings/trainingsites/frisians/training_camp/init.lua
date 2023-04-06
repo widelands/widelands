@@ -1,11 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_trainingsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_trainingsite_type {
    name = "frisians_training_camp",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Training Camp"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -26,8 +27,6 @@ tribes:new_trainingsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {50, 79},
          frames = 10,
          columns = 5,
@@ -35,8 +34,6 @@ tribes:new_trainingsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {50, 79},
          frames = 10,
          columns = 5,
@@ -46,8 +43,6 @@ tribes:new_trainingsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {50, 60}
       }
    },
@@ -74,47 +69,10 @@ tribes:new_trainingsite_type {
       { name = "fur_garment_studded", amount = 2 },
    },
 
-   ["soldier attack"] = {
-      min_level = 0,
-      max_level = 2,
-      food = {
-         {"smoked_fish", "smoked_meat"},
-         {"beer"},
-         {"bread_frisians"}
-      },
-      weapons = {
-         "sword_long",
-         "sword_broad",
-         "sword_double",
-      }
-   },
-   ["soldier health"] = {
-      min_level = 0,
-      max_level = 0,
-      food = {
-         {"bread_frisians", "beer"},
-         {"smoked_fish", "smoked_meat"},
-      },
-      weapons = {
-         "helmet",
-      }
-   },
-   ["soldier defense"] = {
-      min_level = 0,
-      max_level = 0,
-      food = {
-         {"bread_frisians", "beer"},
-         {"smoked_fish", "smoked_meat"},
-      },
-      weapons = {
-         "fur_garment_studded",
-      }
-   },
-
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-         descname = _"sleeping",
+         descname = _("sleeping"),
          actions = {
             "sleep=duration:5s",
             "return=skipped",
@@ -124,14 +82,14 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
+            "checksoldier=soldier:attack level:0", -- Fails when aren't any soldier of level 0 attack
             "return=failed unless site has sword_long",
             "return=failed unless site has bread_frisians,beer,smoked_fish,smoked_meat",
             "sleep=duration:12s400ms",
             "animate=working duration:14s",
-            "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:attack level:0", -- Because the soldier can be expelled by the player
             "consume=sword_long bread_frisians,beer,smoked_fish,smoked_meat",
-            "train=soldier attack 0 1",
+            "train=soldier:attack level:1",
             "produce=scrap_iron"
          }
       },
@@ -139,15 +97,15 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier attack 1",
+            "checksoldier=soldier:attack level:1",
             "return=failed unless site has sword_broad",
             "return=failed unless site has bread_frisians",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:10s800ms",
             "animate=working duration:12s",
-            "checksoldier=soldier attack 1",
+            "checksoldier=soldier:attack level:1",
             "consume=sword_broad bread_frisians smoked_fish,smoked_meat",
-            "train=soldier attack 1 2",
+            "train=soldier:attack level:2",
             "produce=scrap_iron:2"
          }
       },
@@ -155,15 +113,15 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
-            "checksoldier=soldier attack 2",
+            "checksoldier=soldier:attack level:2",
             "return=failed unless site has sword_double",
             "return=failed unless site has beer",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:10s800ms",
             "animate=working duration:12s",
-            "checksoldier=soldier attack 2",
+            "checksoldier=soldier:attack level:2",
             "consume=sword_double beer smoked_fish,smoked_meat",
-            "train=soldier attack 2 3",
+            "train=soldier:attack level:3",
             "produce=scrap_iron scrap_metal_mixed"
          }
       },
@@ -171,35 +129,44 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier health 0",
+            "checksoldier=soldier:health level:0",
             "return=failed unless site has helmet",
             "return=failed unless site has bread_frisians,beer",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:15s",
             "animate=working duration:15s",
-            "checksoldier=soldier health 0",
+            "checksoldier=soldier:health level:0",
             "consume=helmet bread_frisians,beer smoked_fish,smoked_meat",
-            "train=soldier health 0 1"
+            "train=soldier:health level:1"
          }
       },
       upgrade_soldier_defense_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier defense from level 0 to level 1"),
          actions = {
-            "checksoldier=soldier defense 0",
+            "checksoldier=soldier:defense level:0",
             "return=failed unless site has fur_garment_studded",
             "return=failed unless site has bread_frisians,beer",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=duration:12s400ms",
             "animate=working duration:14s",
-            "checksoldier=soldier defense 0",
+            "checksoldier=soldier:defense level:0",
             "consume=fur_garment_studded bread_frisians,beer smoked_fish,smoked_meat",
-            "train=soldier defense 0 1",
+            "train=soldier:defense level:1",
             "produce=fur_garment_old"
          }
       },
    },
 
    soldier_capacity = 10,
-   trainer_patience = 5
+   trainer_patience = 10,
+
+   messages = {
+      -- TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
+      no_soldier = pgettext("frisians_building", "No soldier to train!"),
+      -- TRANSLATORS: Frisian training site tooltip when none of the present soldiers match the current training program
+      no_soldier_for_level = pgettext("frisians_building", "No soldier found for this training level!"),
+   },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,34 +23,44 @@
 
 ///  Decreases the height of a node by a value.
 struct EditorDecreaseHeightTool : public EditorTool {
-	EditorDecreaseHeightTool() : EditorTool(*this, *this), change_by_(1) {
+	explicit EditorDecreaseHeightTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor//fsel_editor_decrease_height.png");
+	[[nodiscard]] const Image* get_sel_impl() const override {
+		return g_image_cache->get("images/wui/editor//fsel_editor_decrease_height.png");
 	}
 
-	int32_t get_change_by() const {
+	[[nodiscard]] int32_t get_change_by() const {
 		return change_by_;
 	}
 	void set_change_by(const int32_t n) {
 		change_by_ = n;
 	}
 
+	WindowID get_window_id() override {
+		return WindowID::ChangeHeight;
+	}
+
+	bool save_configuration_impl(ToolConf& conf) override {
+		conf.change_by = change_by_;
+		return true;
+	}
+	void load_configuration(const ToolConf& conf) override {
+		change_by_ = conf.change_by;
+	}
+
 private:
-	int32_t change_by_;
+	int32_t change_by_{1};
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_DECREASE_HEIGHT_TOOL_H

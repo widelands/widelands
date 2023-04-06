@@ -1,14 +1,14 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_immovable_type {
-   msgctxt = "immovable",
+wl.Descriptions():new_immovable_type {
    name = "pond_burning",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext ("immovable", "Burning Charcoal Stack"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
-   attributes = {},
    programs = {
       main = {
          "animate=idle duration:1m",
@@ -17,8 +17,6 @@ tribes:new_immovable_type {
    },
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {19, 56},
          frames = 10,
          columns = 5,
@@ -27,3 +25,5 @@ tribes:new_immovable_type {
       }
    }
 }
+
+pop_textdomain()

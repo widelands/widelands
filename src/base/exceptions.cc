@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,6 +21,8 @@
 
 #include <cstdarg>
 #include <sstream>
+
+bool g_fail_on_lua_error(false);
 
 /*
  * class WException implementation
@@ -47,12 +48,12 @@ char const* WException::what() const noexcept {
 /*
  * class warning implementation
  */
-WLWarning::WLWarning(char const* const et, char const* const em, ...) : title_(et) {
+WLWarning::WLWarning(char const* const title, char const* const message, ...) : title_(title) {
 	char buffer[512];
 	{
 		va_list va;
-		va_start(va, em);
-		vsnprintf(buffer, sizeof(buffer), em, va);
+		va_start(va, message);
+		vsnprintf(buffer, sizeof(buffer), message, va);
 		va_end(va);
 	}
 	what_ = buffer;

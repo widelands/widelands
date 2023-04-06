@@ -14,6 +14,7 @@ include "scripting/table.lua"
 include "scripting/ui.lua"
 
 game = wl.Game()
+game.allow_diplomacy = false
 p1 = game.players[1]
 p2 = game.players[2]
 p3 = game.players[3]

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2020 by the Widelands Development Team
+ * Copyright (C) 2015-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,16 +12,15 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "editor/ui_menus/help.h"
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "editor/editorinteractive.h"
-#include "scripting/lua_coroutine.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
@@ -31,13 +30,14 @@ EditorHelp::EditorHelp(EditorInteractive& parent,
                        LuaInterface* const lua)
    : EncyclopediaWindow(parent, registry, lua) {
 	try {
-		init(parent, lua_->run_script("scripting/editor/editor_help.lua"));
+		init(lua_->run_script("scripting/editor/editor_help.lua"));
 	} catch (LuaError& err) {
-		log("Error loading script for editor help:\n%s\n", err.what());
-		UI::WLMessageBox wmb(
-		   &parent, _("Error!"),
-		   (boost::format("Error loading script for editor help:\n%s") % err.what()).str(),
-		   UI::WLMessageBox::MBoxType::kOk);
+		log_err("Error loading script for editor help:\n%s\n", err.what());
+		UI::WLMessageBox wmb(&parent, UI::WindowStyle::kWui, _("Error!"),
+		                     format("Error loading script for editor help:\n%s", err.what()),
+		                     UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}
+
+	initialization_complete();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -33,7 +32,7 @@ class Panel;
  */
 struct UniqueWindow : public Window {
 	struct Registry {
-		UniqueWindow* window;
+		UniqueWindow* window{nullptr};
 
 		// Whenever Registry::toggle() is called, a window will be created using
 		// 'open_window' or if one is open already, the existing one will be
@@ -41,31 +40,45 @@ struct UniqueWindow : public Window {
 		std::function<void()> open_window;
 
 		// Triggered when the window opens
-		boost::signals2::signal<void()> opened;
+		Notifications::Signal<> opened;
 		// Triggered when the window closes
-		boost::signals2::signal<void()> closed;
+		Notifications::Signal<> closed;
 
-		void create();
-		void destroy();
+		void create() const;
+		void destroy() const;
 		void toggle();
 
-		int32_t x, y;
-		bool valid_pos;
+		int32_t x{0};
+		int32_t y{0};
+		bool valid_pos{false};
 
-		Registry() : window(nullptr), x(0), y(0), valid_pos(false) {
-		}
+		Registry() = default;
 		~Registry();
 	};
 
 	UniqueWindow(Panel* parent,
+	             WindowStyle,
+	             const std::string& name,
+	             Registry*,
+	             int32_t x,
+	             int32_t y,
+	             int32_t w,
+	             int32_t h,
+	             const std::string& title);
+	UniqueWindow(Panel* parent,
+	             WindowStyle,
 	             const std::string& name,
 	             Registry*,
 	             int32_t w,
 	             int32_t h,
 	             const std::string& title);
-	virtual ~UniqueWindow();
+	~UniqueWindow() override;
 
-	bool get_usedefaultpos() {
+	void save_position();
+	void set_pos(Vector2i new_pos) override;
+	void move_inside_parent() override;
+
+	bool get_usedefaultpos() const {
 		return usedefaultpos_;
 	}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2020 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -33,14 +32,14 @@ struct TableStyleInfo {
 	   : enabled_(init_enabled), disabled_(init_disabled), hotkey_(init_hotkey) {
 	}
 
-	const UI::FontStyleInfo& enabled() const {
-		return *enabled_.get();
+	[[nodiscard]] const UI::FontStyleInfo& enabled() const {
+		return *enabled_;
 	}
-	const UI::FontStyleInfo& disabled() const {
-		return *disabled_.get();
+	[[nodiscard]] const UI::FontStyleInfo& disabled() const {
+		return *disabled_;
 	}
-	const UI::FontStyleInfo& hotkey() const {
-		return *hotkey_.get();
+	[[nodiscard]] const UI::FontStyleInfo& hotkey() const {
+		return *hotkey_;
 	}
 
 private:

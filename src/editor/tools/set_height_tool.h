@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -26,30 +25,41 @@
 
 ///  Ensures that the height of a node is within an interval.
 struct EditorSetHeightTool : public EditorTool {
-	EditorSetHeightTool() : EditorTool(*this, *this), interval_(10, 10) {
+	explicit EditorSetHeightTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this), interval_(10, 10) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor/fsel_editor_set_height.png");
+	[[nodiscard]] const Image* get_sel_impl() const override {
+		return g_image_cache->get("images/wui/editor/fsel_editor_set_height.png");
 	}
 
-	Widelands::HeightInterval get_interval() const {
+	[[nodiscard]] Widelands::HeightInterval get_interval() const {
 		return interval_;
 	}
 	void set_interval(const Widelands::HeightInterval& i) {
 		interval_ = i;
+	}
+
+	WindowID get_window_id() override {
+		return WindowID::ChangeHeight;
+	}
+
+	bool save_configuration_impl(ToolConf& conf) override {
+		conf.interval = interval_;
+		return true;
+	}
+	void load_configuration(const ToolConf& conf) override {
+		interval_ = conf.interval;
 	}
 
 private:

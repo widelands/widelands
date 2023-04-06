@@ -1,63 +1,94 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 10, 36 },
-      fps = 5
-   },
+spritesheets = {
    atk_ok_e = {
-      pictures = path.list_files(dirname .. "atk_ok_e_??.png"),
-      hotspot = { 30, 36 },
-      fps = 10
-   },
-   atk_fail_e = {
-      pictures = path.list_files(dirname .. "atk_fail_e_??.png"),
-      hotspot = { 30, 36 },
-      fps = 10
-   },
-   eva_ok_e = {
-      pictures = path.list_files(dirname .. "eva_ok_e_??.png"),
-      hotspot = { 30, 36 },
-      fps = 20
-   },
-   eva_fail_e = {
-      pictures = path.list_files(dirname .. "eva_fail_e_??.png"),
-      hotspot = { 30, 36 },
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 3, 32 }
    },
    atk_ok_w = {
-      pictures = path.list_files(dirname .. "atk_ok_w_??.png"),
-      hotspot = { 30, 36 },
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 30, 36 }
+   },
+   atk_fail_e = {
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 3, 32 }
    },
    atk_fail_w = {
-      pictures = path.list_files(dirname .. "atk_fail_w_??.png"),
-      hotspot = { 30, 36 },
-      fps = 10
-   },
-   eva_ok_w = {
-      pictures = path.list_files(dirname .. "eva_ok_w_??.png"),
-      hotspot = { 30, 36 },
-      fps = 20
-   },
-   eva_fail_w = {
-      pictures = path.list_files(dirname .. "eva_fail_w_??.png"),
-      hotspot = { 30, 36 },
-      fps = 10
-   },
-   die_w = {
-      pictures = path.list_files(dirname .. "die_??.png"),
-      hotspot = { 10, 36 },
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 30, 36 }
    },
    die_e = {
-      pictures = path.list_files(dirname .. "die_??.png"),
-      hotspot = { 10, 36 },
-      fps = 10
-   }
+      fps = 10,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 9, 36 }
+   },
+   die_w = {
+      fps = 10,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 9, 36 }
+   },
+   eva_fail_e = {
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 6, 24 }
+   },
+   eva_fail_w = {
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 29, 22 }
+   },
+   eva_ok_e = {
+      fps = 20,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 14, 27 }
+   },
+   eva_ok_w = {
+      fps = 20,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 25, 27 }
+   },
+   idle = {
+      fps = 5,
+      frames = 40,
+      rows = 7,
+      columns = 6,
+      hotspot = { 5, 34 }
+   },
+   walk = {
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      directional = true,
+      hotspot = { 9, 35 }
+   },
 }
-add_directional_animation(animations, "walk", dirname, "walk", {10, 36}, 10)
 
 all_levels_emp = {
    min_health = 0,
@@ -70,18 +101,15 @@ all_levels_emp = {
    max_evade = 2,
 }
 
-tribes:new_soldier_type {
-   msgctxt = "empire_worker",
+wl.Descriptions():new_soldier_type {
    name = "empire_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Soldier"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   animations = animations,
-
-   default_target_quantity = 10,
+   spritesheets = spritesheets,
 
    -- Battle attributes - initial values and per level increase
    health = {
@@ -108,12 +136,6 @@ tribes:new_soldier_type {
       base = 30,
       increase_per_level = 16,
       pictures = path.list_files(dirname .. "evade_level?.png"),
-   },
-
-   aihints = {
-      preciousness = {
-         empire = 5
-      },
    },
 
    -- Random animations for battle
@@ -162,3 +184,5 @@ tribes:new_soldier_type {
       },
    },
 }
+
+pop_textdomain()

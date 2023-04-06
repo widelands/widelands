@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,35 +12,34 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_GRAPHIC_TEXT_TEXTSTREAM_H
 #define WL_GRAPHIC_TEXT_TEXTSTREAM_H
 
+#include <cstdint>
 #include <string>
 
 namespace RT {
 
 class TextStream {
 public:
-	explicit TextStream(const std::string& text)
-	   : text_(text), line_(1), col_(0), pos_(0), end_(text.size()) {
+	explicit TextStream(const std::string& text) : text_(text), end_(text.size()) {
 	}
 
-	size_t line() const {
+	[[nodiscard]] size_t line() const {
 		return line_;
 	}
-	size_t col() const {
+	[[nodiscard]] size_t col() const {
 		return col_;
 	}
-	size_t pos() const {
+	[[nodiscard]] size_t pos() const {
 		return pos_;
 	}
 
-	std::string peek(size_t, size_t = -1) const;
+	[[nodiscard]] std::string peek(size_t n, size_t at = std::string::npos) const;
 	void expect(std::string, bool = true);
 
 	std::string till_any(std::string);
@@ -58,8 +57,10 @@ public:
 private:
 	void consume(size_t);
 	std::string text_;
-	uint32_t line_, col_;
-	size_t pos_, end_;
+	uint32_t line_{1U};
+	uint32_t col_{0U};
+	size_t pos_{0U};
+	size_t end_;
 };
 }  // namespace RT
 #endif  // end of include guard: WL_GRAPHIC_TEXT_TEXTSTREAM_H

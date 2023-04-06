@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,16 +12,18 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_WUI_UNIQUE_WINDOW_HANDLER_H
 #define WL_WUI_UNIQUE_WINDOW_HANDLER_H
 
+#include <map>
+
 #include "base/macros.h"
 #include "ui_basic/unique_window.h"
+#include "wui/buildingwindow.h"
 
 // Handles unique windows that should not close when their parents close. They
 // must have a unique name and their registry is owned by this class.
@@ -34,9 +36,11 @@ public:
 
 	// Returns the registry for 'name'.
 	UI::UniqueWindow::Registry& get_registry(const std::string& name);
+	BuildingWindow::Registry& get_building_window_registry(const std::string& name);
 
 private:
 	std::map<std::string, UI::UniqueWindow::Registry> registries_;
+	std::map<std::string, BuildingWindow::Registry> building_window_registries_;
 
 	DISALLOW_COPY_AND_ASSIGN(UniqueWindowHandler);
 };

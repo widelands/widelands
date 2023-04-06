@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_militarysite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_militarysite_type {
    name = "atlanteans_tower_small",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Small Tower"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
    vision_range = 13,
@@ -20,10 +20,10 @@ tribes:new_militarysite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 42, 65 },
+         hotspot = { 46, 71 },
       }
    },
 
@@ -34,13 +34,20 @@ tribes:new_militarysite_type {
    max_soldiers = 3,
    heal_per_second = 100,
    conquers = 5,
-   prefer_heroes = true,
+   prefer_heroes = false,
 
    messages = {
-      occupied = _"Your soldiers have occupied your small tower.",
-      aggressor = _"Your small tower discovered an aggressor.",
-      attack = _"Your small tower is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the small tower.",
-      defeated_you = _"Your soldiers defeated the enemy at the small tower."
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      occupied = pgettext("atlanteans_building", "Your soldiers have occupied your small tower."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      aggressor = pgettext("atlanteans_building", "Your small tower discovered an aggressor."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      attack = pgettext("atlanteans_building", "Your small tower is under attack."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      defeated_enemy = pgettext("atlanteans_building", "The enemy defeated your soldiers at the small tower."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      defeated_you = pgettext("atlanteans_building", "Your soldiers defeated the enemy at the small tower.")
    },
 }
+
+pop_textdomain()

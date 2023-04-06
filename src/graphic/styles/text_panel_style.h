@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2020 by the Widelands Development Team
+ * Copyright (C) 2018-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -34,20 +33,20 @@ struct TextPanelStyleInfo {
 	                            const UI::PanelStyleInfo* init_background)
 	   : background_(init_background), font_(init_font) {
 	}
-	explicit TextPanelStyleInfo(const TextPanelStyleInfo& other)
+	TextPanelStyleInfo(const TextPanelStyleInfo& other)
 	   : background_(new UI::PanelStyleInfo(other.background())),
 	     font_(new UI::FontStyleInfo(other.font())) {
 	}
 
-	const UI::FontStyleInfo& font() const {
-		return *font_.get();
+	[[nodiscard]] const UI::FontStyleInfo& font() const {
+		return *font_;
 	}
 	void set_font(const UI::FontStyleInfo& new_font) {
 		font_.reset(new UI::FontStyleInfo(new_font));
 	}
 
-	const UI::PanelStyleInfo& background() const {
-		return *background_.get();
+	[[nodiscard]] const UI::PanelStyleInfo& background() const {
+		return *background_;
 	}
 
 private:

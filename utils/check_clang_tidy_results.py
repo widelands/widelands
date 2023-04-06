@@ -9,84 +9,105 @@ import sys
 
 # Checks list: https://clang.llvm.org/extra/clang-tidy/checks/list.html
 SUPPRESSED_CHECKS = {
-    '[android-cloexec-fopen]',
-    '[boost-use-to-string]',
-    '[bugprone-integer-division]',
+    # TODO(Nordfriese): Investigate which android-* and fuchsia-* checks we want to enable
+    # (currently they're all excluded in the clang-tidy invokation)
+
+    # Checks we strictly need and cannot clean up for the time being
+    '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
     '[cert-dcl50-cpp]',  # We need this for our logger
+    '[cppcoreguidelines-pro-type-vararg]',  # We need this for our logger
+    '[hicpp-vararg]',
+
+    # Checks that probably do not make sense for us
+    # (up for discussion; see https://github.com/widelands/widelands/discussions/5262)
+    '[llvmlibc-callee-namespace]',
+    '[modernize-use-trailing-return-type]',
+    '[cppcoreguidelines-avoid-c-arrays]',
+    '[hicpp-avoid-c-arrays]',
+    '[modernize-avoid-c-arrays]',
+    '[cppcoreguidelines-avoid-goto]',
+    '[hicpp-avoid-goto]',
+    '[cppcoreguidelines-no-malloc]',
+    '[hicpp-no-malloc]',
+    '[cppcoreguidelines-non-private-member-variables-in-classes]',
+    '[misc-non-private-member-variables-in-classes]',
+    '[cppcoreguidelines-owning-memory]',
+    '[cppcoreguidelines-pro-bounds-array-to-pointer-decay]',
+    '[hicpp-no-array-decay]',
+    '[cppcoreguidelines-pro-bounds-constant-array-index]',
+    '[cppcoreguidelines-pro-bounds-pointer-arithmetic]',
+    '[cppcoreguidelines-pro-type-const-cast]',
+    '[cppcoreguidelines-pro-type-reinterpret-cast]',
+    '[cppcoreguidelines-pro-type-union-access]',
+    '[google-default-arguments]',
+    '[hicpp-uppercase-literal-suffix]',
+    '[readability-uppercase-literal-suffix]',
+    '[hicpp-use-auto]',
+    '[modernize-use-auto]',
+    '[modernize-raw-string-literal]',
+    '[modernize-return-braced-init-list]',
+    '[altera-id-dependent-backward-branch]',
+    '[altera-unroll-loops]',
+    '[llvmlibc-implementation-in-namespace]',
+    '[llvmlibc-restrict-system-libc-headers]',
+    '[misc-no-recursion]',
+    '[modernize-replace-disallow-copy-and-assign-macro]',
+    '[readability-identifier-length]',
+
+    # Checks we probably want to clean up sometime (discussible; see link above)
+    '[boost-use-to-string]',
+    '[bugprone-exception-escape]',
+    '[bugprone-macro-parentheses]',
+    '[bugprone-narrowing-conversions]',
+    '[bugprone-not-null-terminated-result]',
+    '[bugprone-signed-char-misuse]',
+    '[bugprone-too-small-loop-variable]',
     '[cert-err58-cpp]',
+    '[cert-msc32-c]',
+    '[cert-msc51-cpp]',
+    '[clang-analyzer-core.CallAndMessage]',
     '[clang-analyzer-core.NonNullParamChecker]',
     '[clang-analyzer-core.UndefinedBinaryOperatorResult]',
     '[clang-analyzer-cplusplus.NewDelete]',
     '[clang-analyzer-cplusplus.NewDeleteLeaks]',
+    '[clang-analyzer-optin.cplusplus.UninitializedObject]',
     '[clang-analyzer-optin.cplusplus.VirtualCall]',
-    '[cppcoreguidelines-no-malloc]',
-    '[cppcoreguidelines-owning-memory]',
-    '[cppcoreguidelines-pro-bounds-array-to-pointer-decay]',
-    '[cppcoreguidelines-pro-bounds-constant-array-index]',
-    '[cppcoreguidelines-pro-bounds-pointer-arithmetic]',
-    '[cppcoreguidelines-pro-type-const-cast]',
+    '[clang-diagnostic-documentation-unknown-command]',
+    '[cppcoreguidelines-avoid-magic-numbers]',
+    '[cppcoreguidelines-init-variables]',
+    '[cppcoreguidelines-macro-usage]',
+    '[cppcoreguidelines-narrowing-conversions]',
     '[cppcoreguidelines-pro-type-member-init]',
-    '[cppcoreguidelines-pro-type-reinterpret-cast]',
-    '[cppcoreguidelines-pro-type-union-access]',
-    '[cppcoreguidelines-pro-type-vararg]',  # We need this for our logger
     '[cppcoreguidelines-slicing]',
     '[cppcoreguidelines-special-member-functions]',
-    '[fuchsia-default-arguments]',
-    '[fuchsia-overloaded-operator]',
-    '[google-build-using-namespace]',
-    '[google-default-arguments]',
     '[google-readability-function-size]',
     '[google-runtime-references]',
+    '[hicpp-function-size]',
     '[hicpp-member-init]',
-    '[hicpp-move-const-arg]',
-    '[hicpp-no-array-decay]',
-    '[hicpp-no-malloc]',
-    '[hicpp-noexcept-move]',
+    '[hicpp-multiway-paths-covered]',
     '[hicpp-signed-bitwise]',
     '[hicpp-special-member-functions]',
-    '[hicpp-use-auto]',
-    '[hicpp-use-emplace]',
-    '[hicpp-use-equals-default]',
-    '[hicpp-use-nullptr]',
-    '[hicpp-use-override]',
-    '[hicpp-vararg]',
-    '[llvm-namespace-comment]',
     '[misc-macro-parentheses]',
-    '[misc-misplaced-widening-cast]',
-    '[misc-redundant-expression]',
-    '[misc-string-integer-assignment]',
-    '[misc-suspicious-enum-usage]',
-    '[misc-suspicious-string-compare]',
-    '[misc-uniqueptr-reset-release]',
-    '[misc-unused-using-decls]',
-    '[modernize-loop-convert]',
-    '[modernize-make-shared]',
     '[modernize-make-unique]',
     '[modernize-pass-by-value]',
-    '[modernize-raw-string-literal]',
-    '[modernize-return-braced-init-list]',
-    '[modernize-use-auto]',
-    '[modernize-use-bool-literals]',
-    '[modernize-use-default-member-init]',
-    '[modernize-use-emplace]',
-    '[modernize-use-equals-default]',
-    '[modernize-use-nullptr]',
-    '[modernize-use-override]',
-    '[readability-container-size-empty]',
-    '[readability-delete-null-pointer]',
-    '[readability-else-after-return]',
-    '[readability-implicit-bool-conversion]',
-    '[readability-inconsistent-declaration-parameter-name]',
+    '[performance-unnecessary-value-param]',
+    '[readability-const-return-type]',
+    '[readability-convert-member-functions-to-static]',
+    '[readability-function-size]',
+    '[readability-magic-numbers]',
+    '[altera-struct-pack-align]',
+    '[bugprone-easily-swappable-parameters]',
+    '[cert-err33-c]',
+    '[concurrency-mt-unsafe]',
+    '[cppcoreguidelines-avoid-non-const-global-variables]',
+    '[cppcoreguidelines-prefer-member-initializer]',
+    '[google-readability-casting]',
+    '[hicpp-named-parameter]',
     '[readability-named-parameter]',
-    '[readability-non-const-parameter]',
-    '[readability-redundant-control-flow]',
-    '[readability-redundant-member-init]',
-    '[readability-redundant-smartptr-get]',
-    '[readability-redundant-string-cstr]',
-    '[readability-redundant-string-init]',
-    '[readability-simplify-boolean-expr]',
-    '[readability-static-accessed-through-instance]',
-    '[readability-static-definition-in-anonymous-namespace]'
+    '[modernize-use-default-member-init]',
+    '[readability-function-cognitive-complexity]',
+    '[readability-suspicious-call-argument]',
+    '[performance-no-int-to-ptr]',
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')
@@ -110,12 +131,14 @@ def main():
 
     log_file = sys.argv[1]
 
-    errors = 0
+    errors = []
 
     with open(log_file) as checkme:
         contents = checkme.readlines()
         for line in contents:
-            if 'third_party' in line:
+            if line in errors:
+                continue
+            if 'third_party' in line or '/usr/include' in line:
                 continue
             # We're not piloting alpha-level checks
             if 'clang-analyzer-alpha' in line:
@@ -127,14 +150,14 @@ def main():
                     break
             if not check_suppressed and CHECK_REGEX.match(line):
                 print(line.strip())
-                errors = errors + 1
+                errors.append(line)
 
-    if errors > 0:
+    if len(errors) > 0:
         print('########################################################')
         print('########################################################')
         print('###                                                  ###')
         print('###   Found %s error(s)                               ###'
-              % errors)
+              % len(errors))
         print('###                                                  ###')
         print('########################################################')
         print('########################################################')

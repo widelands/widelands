@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2020 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -32,7 +31,7 @@ struct Radiogroup;
 struct Radiobutton : public Statebox {
 	friend struct Radiogroup;
 
-	Radiobutton(Panel* parent, Vector2i, const Image* pic, Radiogroup&, int32_t id);
+	Radiobutton(Panel* parent, PanelStyle, Vector2i, const Image* pic, Radiogroup&, int32_t id);
 	~Radiobutton() override;
 
 	Radiobutton* next_button() {
@@ -57,14 +56,15 @@ struct Radiogroup {
 	Radiogroup();
 	~Radiogroup();
 
-	boost::signals2::signal<void()> changed;
-	boost::signals2::signal<void(int32_t)> changedto;
-	boost::signals2::signal<void()> clicked;  //  clicked without things changed
+	Notifications::Signal<> changed;
+	Notifications::Signal<int32_t> changedto;
+	Notifications::Signal<> clicked;  //  clicked without things changed
 
 	/**
 	 * Text conventions: Sentence case for the 'tooltip'
 	 */
 	int32_t add_button(Panel* parent,
+	                   PanelStyle,
 	                   Vector2i,
 	                   const Image* pic,
 	                   const std::string& tooltip = "",
@@ -73,7 +73,7 @@ struct Radiogroup {
 	int32_t get_state() const {
 		return state_;
 	}
-	void set_state(int32_t state);
+	void set_state(int32_t state, bool send_signal);
 	void set_enabled(bool);
 	Radiobutton* get_first_button() {
 		return buttons_;

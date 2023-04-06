@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,26 +26,33 @@
 #include "graphic/font_handler.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
 #include "map_io/widelands_map_loader.h"
 
 MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              Registry& registry,
                                              const std::string& name,
                                              const std::string& title,
+                                             bool addons,
+                                             bool show_empty_dirs,
                                              const std::string& basedir)
-   : UI::UniqueWindow(&parent, name, &registry, parent.get_w(), parent.get_h(), title),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, name, &registry, parent.get_w(), parent.get_h(), title),
 
-     // Values for alignment and size
-     padding_(4),
+     show_empty_dirs_(show_empty_dirs),
 
-     main_box_(this, padding_, padding_, UI::Box::Vertical, 0, 0, padding_),
+     main_box_(this, UI::PanelStyle::kWui, padding_, padding_, UI::Box::Vertical, 0, 0, padding_),
 
-     table_and_details_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
-     table_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     table_and_details_box_(
+        &main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
+     table_box_(
+        &table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
      table_(&table_box_, 0, 0, 200, 200, UI::PanelStyle::kWui),
-     map_details_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui),
+     egbase_(nullptr),
+     map_details_box_(
+        &table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, egbase_),
 
      display_mode_(&table_box_,
                    "display_mode",
@@ -61,20 +67,21 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                    UI::PanelStyle::kWui,
                    UI::ButtonStyle::kWuiSecondary),
 
-     table_footer_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
+     table_footer_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
 
-     directory_info_(&main_box_, 0, 0, 0, 0),
+     directory_info_(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0),
 
      // Bottom button row
-     button_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
+     button_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
      cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
 
      // Options
-     basedir_(basedir) {
+     basedir_(basedir),
+     include_addon_maps_(addons) {
 
 	g_fs->ensure_directory_exists(basedir_);
-	curdir_ = basedir_;
+	curdir_ = {basedir_};
 
 	main_box_.add(&table_and_details_box_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(padding_);
@@ -94,7 +101,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	table_and_details_box_.add(&map_details_box_, UI::Box::Resizing::kFullSize);
 	map_details_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 
-	const bool locale_is_en = i18n::get_locale() == "en" || i18n::get_locale().find("en_") == 0;
+	const bool locale_is_en = i18n::get_locale() == "en" || starts_with(i18n::get_locale(), "en_");
 	display_mode_.add(_("File names"), MapData::DisplayType::kFilenames);
 	display_mode_.add(locale_is_en ? _("Map names") : _("Original map names"),
 	                  MapData::DisplayType::kMapnames, nullptr, locale_is_en);
@@ -112,8 +119,9 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	button_box_.add_inf_space();
 
 	display_mode_.selected.connect([this]() { fill_table(); });
+	table_.cancel.connect([this]() { die(); });
 
-	move_to_top();
+	set_z(UI::Panel::ZOrder::kFullscreenWindow);
 }
 
 bool MainMenuLoadOrSaveMap::compare_players(uint32_t rowa, uint32_t rowb) {
@@ -140,19 +148,39 @@ void MainMenuLoadOrSaveMap::layout() {
 /**
  * fill the file list
  */
+// TODO(Nordfriese): Code duplication with FsMenu::MapSelect::fill_table
 void MainMenuLoadOrSaveMap::fill_table() {
 	table_.clear();
 	maps_data_.clear();
 
 	//  Fill it with all files we find.
-	FilenameSet files = g_fs->list_directory(curdir_);
+	assert(!curdir_.empty());
+	FilenameSet files;
+	for (const std::string& dir : curdir_) {
+		FilenameSet f = g_fs->list_directory(dir);
+		files.insert(f.begin(), f.end());
+	}
 
 	// If we are not at the top of the map directory hierarchy (we're not talking
 	// about the absolute filesystem top!) we manually add ".."
-	if (curdir_ != basedir_) {
-		maps_data_.push_back(MapData::create_parent_dir(curdir_));
-	} else if (files.empty()) {
-		maps_data_.push_back(MapData::create_empty_dir(curdir_));
+	if (curdir_.at(0) != basedir_) {
+		maps_data_.push_back(MapData::create_parent_dir(curdir_.at(0)));
+	} else {
+		if (files.empty()) {
+			maps_data_.push_back(MapData::create_empty_dir(curdir_.at(0)));
+		}
+		// In the toplevel directory we also need to include add-on maps –
+		// but only in the load screen, not in the save screen!
+		if (include_addon_maps_) {
+			for (auto& addon : AddOns::g_addons) {
+				if (addon.first->category == AddOns::AddOnCategory::kMaps && addon.second) {
+					for (const std::string& mapname : g_fs->list_directory(
+					        kAddOnDir + FileSystem::file_separator() + addon.first->internal_name)) {
+						files.insert(mapname);
+					}
+				}
+			}
+		}
 	}
 
 	const MapData::DisplayType display_type = display_mode_.get_selected();
@@ -164,33 +192,47 @@ void MainMenuLoadOrSaveMap::fill_table() {
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
 		if (ml != nullptr) {
 			try {
-				ml->preload_map(true);
+				ml->preload_map(true, nullptr);
 
-				if (!map.get_width() || !map.get_height()) {
+				if ((map.get_width() == 0) || (map.get_height() == 0)) {
 					continue;
 				}
 
 				MapData::MapType maptype;
 
-				if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-				    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+				if (((map.scenario_types() & Widelands::Map::MP_SCENARIO) != 0u) ||
+				    ((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0u)) {
 					maptype = MapData::MapType::kScenario;
-				} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())) {
+				} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get()) != nullptr) {
 					maptype = MapData::MapType::kNormal;
 				} else {
 					maptype = MapData::MapType::kSettlers2;
 				}
 
-				maps_data_.push_back(MapData(map, mapfilename, maptype, display_type));
+				maps_data_.emplace_back(map, mapfilename, maptype, display_type);
 			} catch (const WException&) {
 			}  //  we simply skip illegal entries
-		} else if (g_fs->is_directory(mapfilename)) {
+		} else if (g_fs->is_directory(mapfilename) &&
+		           (show_empty_dirs_ || !g_fs->list_directory(mapfilename).empty())) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
-			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {
+			if ((strcmp(fs_filename, ".") == 0) || (strcmp(fs_filename, "..") == 0)) {
 				continue;
 			}
-			maps_data_.push_back(MapData::create_directory(mapfilename));
+
+			MapData new_md = MapData::create_directory(mapfilename);
+			bool found = false;
+			for (MapData& md : maps_data_) {
+				if (md.maptype == MapData::MapType::kDirectory &&
+				    md.localized_name == new_md.localized_name) {
+					found = true;
+					md.add(new_md);
+					break;
+				}
+			}
+			if (!found) {
+				maps_data_.push_back(new_md);
+			}
 		}
 	}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -25,16 +24,16 @@
 namespace Widelands {
 
 struct CmdCalculateStatistics : public GameLogicCommand {
-	CmdCalculateStatistics() : GameLogicCommand(0) {
+	CmdCalculateStatistics() : GameLogicCommand(Time(0)) {
 	}  // For savegame loading
-	explicit CmdCalculateStatistics(uint32_t const init_duetime) : GameLogicCommand(init_duetime) {
+	explicit CmdCalculateStatistics(const Time& init_duetime) : GameLogicCommand(init_duetime) {
 	}
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {
+	[[nodiscard]] QueueCommandTypes id() const override {
 		return QueueCommandTypes::kCalculateStatistics;
 	}
 	void execute(Game&) override;

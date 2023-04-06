@@ -1,14 +1,26 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_tavern",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Tavern"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "barbarians_inn",
+
+   enhancement = {
+      name = "barbarians_inn",
+      enhancement_cost = {
+         log = 2,
+         grout = 2,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         log = 1,
+         grout = 1
+      }
+   },
 
    buildcost = {
       log = 3,
@@ -22,18 +34,25 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 57, 88 },
       },
+   },
+
+   spritesheets = {
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 57, 88 },
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 51, 70 }
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 57, 88 },
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 51, 70 }
       },
    },
 
@@ -55,16 +74,18 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"preparing a ration",
+         descname = _("preparing a ration"),
          actions = {
-             -- time total: 33
+            -- time total: 23.4 + 10 + 3.6 = 37 sec
             "return=skipped unless economy needs ration",
             "consume=barbarians_bread,fish,meat",
             "playsound=sound/barbarians/taverns/tavern priority:80%",
-            "animate=working duration:23s",
+            "animate=working duration:23s400ms",
             "sleep=duration:10s",
             "produce=ration"
          },
       },
    },
 }
+
+pop_textdomain()

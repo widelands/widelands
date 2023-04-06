@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,13 +28,12 @@ class CarrierDescr : public WorkerDescr {
 public:
 	CarrierDescr(const std::string& init_descname,
 	             const LuaTable& table,
-	             const Tribes& tribes,
+	             Descriptions& descriptions,
 	             MapObjectType t = MapObjectType::CARRIER);
-	~CarrierDescr() override {
-	}
+	~CarrierDescr() override = default;
 
 protected:
-	Bob& create_object() const override;
+	[[nodiscard]] Bob& create_object() const override;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(CarrierDescr);
@@ -52,8 +50,7 @@ struct Carrier : public Worker {
 	explicit Carrier(const CarrierDescr& carrier_descr)
 	   : Worker(carrier_descr), promised_pickup_to_(NOONE) {
 	}
-	~Carrier() override {
-	}
+	~Carrier() override = default;
 
 	bool notify_ware(Game&, int32_t flag);
 
@@ -68,7 +65,7 @@ struct Carrier : public Worker {
 
 private:
 	void find_pending_ware(Game&);
-	int32_t find_closest_flag(Game&);
+	int32_t find_closest_flag(const Game&);
 
 	// internal task stuff
 	void road_update(Game&, State&);
@@ -78,7 +75,7 @@ private:
 	static Task const taskTransport;
 
 	void deliver_to_building(Game&, State&);
-	void pickup_from_flag(Game&, State&);
+	void pickup_from_flag(Game&, const State&);
 	void drop_ware(Game&, State&);
 	void enter_building(Game&, State&);
 	bool swap_or_wait(Game&, State&);
@@ -94,7 +91,7 @@ private:
 protected:
 	struct Loader : public Worker::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&) override;
 

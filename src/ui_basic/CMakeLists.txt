@@ -1,3 +1,12 @@
+wl_library(ui_basic_loading_message
+  SRCS
+    note_loading_message.cc
+    note_loading_message.h
+  DEPENDS
+    notifications
+)
+
+
 wl_library(ui_basic
   SRCS
     box.cc
@@ -6,14 +15,14 @@ wl_library(ui_basic
     button.h
     checkbox.cc
     checkbox.h
+    color_chooser.cc
+    color_chooser.h
     dropdown.cc
     dropdown.h
     editbox.cc
     editbox.h
     fileview_panel.cc
     fileview_panel.h
-    fullscreen_window.cc
-    fullscreen_window.h
     icon.cc
     icon.h
     icongrid.cc
@@ -47,23 +56,29 @@ wl_library(ui_basic
     tabpanel.h
     textarea.cc
     textarea.h
+    text_prompt.cc
+    text_prompt.h
     unique_window.cc
     unique_window.h
     window.cc
     window.h
   USES_SDL2
+  USES_ATOMIC
   DEPENDS
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
     base_macros
+    base_random
+    base_scoped_timer
     base_utf8
     graphic
     graphic_align
     graphic_color
     graphic_fonthandler
+    graphic_functions
     graphic_mouse_cursor
+    graphic_playercolor
     graphic_styles
     graphic_surface
     graphic_text

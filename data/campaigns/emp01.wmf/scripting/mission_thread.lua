@@ -4,7 +4,8 @@ function mission_thread()
    -- Initial messages
    local sea = wl.Game().map:get_field(50,25)
    local ship = p1:place_ship(sea)
-   p1:hide_fields(sea:region(6),true)
+   shipname = ship.shipname
+   p1:hide_fields(sea:region(6), "permanent")
    scroll_to_field(sea,0)
 
    campaign_message_box(diary_page_1)
@@ -15,12 +16,13 @@ function mission_thread()
    sleep(1000)
    campaign_message_box(diary_page_2)
    sleep(500)
-   hide_concentric(p1, sea, 5)
+   -- hide a bit more as revealed as the ship might move and discover some fields
+   hide_concentric(p1, sea, 6)
    ship:remove()
 
    -- Back home
    include "map:scripting/starting_conditions.lua"
-   p1:hide_fields(wl.Game().map.player_slots[1].starting_field:region(13),true)
+   p1:hide_fields(wl.Game().map.player_slots[1].starting_field:region(13),"permanent")
    scroll_to_field(wl.Game().map.player_slots[1].starting_field)
    campaign_message_box(diary_page_3)
    sleep(1000)
@@ -39,6 +41,9 @@ function mission_thread()
    campaign_message_box(saledus_1)
    p1:allow_buildings{"empire_blockhouse"}
    local o = add_campaign_objective(obj_build_blockhouse)
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- p1:run_training_wheel("objectives", true)
+
    while #p1:get_buildings("empire_blockhouse") < 1 do sleep(3249) end
    set_objective_done(o)
 
@@ -55,6 +60,9 @@ function mission_thread()
    campaign_message_box(amalea_1)
    while #p1:get_buildings("empire_lumberjacks_house") < 1 do sleep(3249) end
    set_objective_done(o)
+
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- p1:mark_training_wheel_as_solved("logs")
 
    -- Lumberjack is now build
    campaign_message_box(amalea_2)
@@ -78,6 +86,8 @@ function mission_thread()
    p1:allow_buildings{"empire_quarry"}
    while not check_for_buildings(p1, { empire_quarry = 1 }) do sleep(2434) end
    set_objective_done(o)
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- p1:mark_training_wheel_as_solved("rocks")
 
    -- All buildings done. Got home
    campaign_message_box(saledus_4)

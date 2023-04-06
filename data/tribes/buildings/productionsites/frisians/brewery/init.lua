@@ -1,14 +1,28 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
+wl.Descriptions():new_productionsite_type {
    name = "frisians_brewery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Brewery"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_mead_brewery",
+
+   enhancement = {
+      name = "frisians_mead_brewery",
+      enhancement_cost = {
+         brick = 3,
+         granite = 2,
+         log = 1,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         brick = 2,
+         granite = 1
+      }
+   },
 
    buildcost = {
       brick = 3,
@@ -23,8 +37,6 @@ tribes:new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {50, 80},
          frames = 10,
          columns = 5,
@@ -32,8 +44,6 @@ tribes:new_productionsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {50, 80},
          frames = 10,
          columns = 5,
@@ -43,8 +53,6 @@ tribes:new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {50, 60}
       }
    },
@@ -66,14 +74,17 @@ tribes:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-         descname = _"brewing beer",
+         descname = _("brewing beer"),
          actions = {
+            -- time total: 30.4 + 30 + 3.6 = 64 sec
             "return=skipped unless economy needs beer or workers need experience",
             "consume=water barley",
-            "sleep=duration:30s",
+            "sleep=duration:30s400ms",
             "animate=working duration:30s",
             "produce=beer"
          },
       },
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2020 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,16 +12,19 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "network/network_player_settings_backend.h"
 
-#include "ai/computer_player.h"
+#include <cstdlib>
 
-void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSettings::State state) {
+#include "ai/computer_player.h"
+#include "base/random.h"
+
+void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id,
+                                                    PlayerSettings::State state) const {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
@@ -30,19 +33,20 @@ void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSetting
 
 void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
                                                  const std::string& name,
-                                                 bool random_ai) {
+                                                 bool random_ai) const {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
 	if (random_ai) {
-		const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
-		ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
+		const AI::ComputerPlayer::ImplementationVector& impls =
+		   AI::ComputerPlayer::get_implementations();
+		AI::ComputerPlayer::ImplementationVector::const_iterator it = impls.begin();
 		if (impls.size() > 1) {
 			do {
 				// Choose a random AI
-				const size_t random = (std::rand() % impls.size());  // NOLINT
+				const size_t random = RNG::static_rand(impls.size());
 				it = impls.begin() + random;
-			} while ((*it)->type == ComputerPlayer::Implementation::Type::kEmpty);
+			} while ((*it)->type == AI::ComputerPlayer::Implementation::Type::kEmpty);
 		}
 		s->set_player_ai(id, (*it)->name, random_ai);
 	} else {
@@ -50,7 +54,8 @@ void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
 	}
 }
 
-void NetworkPlayerSettingsBackend::set_player_tribe(PlayerSlot id, const std::string& tribename) {
+void NetworkPlayerSettingsBackend::set_player_tribe(PlayerSlot id,
+                                                    const std::string& tribename) const {
 	const GameSettings& settings = s->settings();
 	if (id >= settings.players.size() || tribename.empty()) {
 		return;
@@ -62,7 +67,7 @@ void NetworkPlayerSettingsBackend::set_player_tribe(PlayerSlot id, const std::st
 
 /// Set the shared in player for the given id
 void NetworkPlayerSettingsBackend::set_player_shared(PlayerSlot id,
-                                                     Widelands::PlayerNumber shared) {
+                                                     Widelands::PlayerNumber shared) const {
 	const GameSettings& settings = s->settings();
 	if (id >= settings.players.size() || shared > settings.players.size()) {
 		return;
@@ -73,7 +78,8 @@ void NetworkPlayerSettingsBackend::set_player_shared(PlayerSlot id,
 }
 
 /// Sets the initialization for the player slot (Headquarters, Fortified Village etc.)
-void NetworkPlayerSettingsBackend::set_player_init(PlayerSlot id, uint8_t initialization_index) {
+void NetworkPlayerSettingsBackend::set_player_init(PlayerSlot id,
+                                                   uint8_t initialization_index) const {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
@@ -81,9 +87,18 @@ void NetworkPlayerSettingsBackend::set_player_init(PlayerSlot id, uint8_t initia
 }
 
 /// Sets the team for the player slot
-void NetworkPlayerSettingsBackend::set_player_team(PlayerSlot id, Widelands::TeamNumber team) {
+void NetworkPlayerSettingsBackend::set_player_team(PlayerSlot id,
+                                                   Widelands::TeamNumber team) const {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
 	s->set_player_team(id, team);
+}
+
+/// Sets the colo for the player slot
+void NetworkPlayerSettingsBackend::set_player_color(PlayerSlot id, const RGBColor& c) const {
+	if (id >= s->settings().players.size()) {
+		return;
+	}
+	s->set_player_color(id, c);
 }

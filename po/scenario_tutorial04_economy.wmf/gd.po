@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2019
+# GunChleoc, 2015-2019,2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2015
@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-07-09 08:33+0000\n"
-"PO-Revision-Date: 2020-06-27 07:30+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"PO-Revision-Date: 2015-02-03 14:49+0000\n"
+"Last-Translator: GunChleoc, 2015-2019,2021\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,8 +109,9 @@ msgid "Afterwards, choose ‘Buildings’."
 msgstr "Tagh “Togalaichean” an uairsin."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
-msgid "You can also use the hotkey ‘b’."
-msgstr "’S urrainn dhut a’ ghrad-iuchair “b” a chleachdadh cuideachd."
+#, lua-format
+msgid "You can also use the hotkey ‘%s’."
+msgstr "’S urrainn dhut a’ ghrad-iuchair “%s” a chleachdadh cuideachd."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
@@ -254,10 +255,9 @@ msgid "Afterwards, choose ‘Stock’."
 msgstr "Tagh “An stòras” an uairsin."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
-msgid ""
-"You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
-"quickly."
-msgstr "’S urrainn dhut a’ ghrad-iuchair “i” (mar “iomlan”) a chleachdadh cuideachd gus an uinneag seo inntrigeadh gu luath."
+#, lua-format
+msgid "You can also use the hotkey ‘%s’ to access this window quickly."
+msgstr "’S urrainn dhut a’ ghrad-iuchair “%s” a chleachdadh cuideachd gus an uinneag seo inntrigeadh gu luath."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:152
@@ -419,8 +419,9 @@ msgid "Open it. You can access it via the button at the bottom of the screen."
 msgstr "Fosgail i. Gheibh thu greim oirre leis a’ phutan aig bonn na sgrìn."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:249
-msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr "Air neo inntrig gu dìreach i leis an iuchair “F1”."
+#, lua-format
+msgid "Alternatively, you can access it directly with the ‘%s’ key."
+msgstr "Air neo inntrig gu dìreach i leis an iuchair “%s”."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
@@ -570,16 +571,16 @@ msgstr "Taghta. Tha na taighean-tàirn againn air an togail a-nis agus a’ toir
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
-"tab, behind every ware, you can see ‘traffic lights’."
-msgstr "Tha thu a’ cur greimeagan dhan a h-uile mèinn an-dràsta. Ma tha thu airson prìomhachas a thoirt air aon dhiubh gu sònraichte, feumaidh tu an uinneag aice fhosgladh. Ann an taba a’ bhathair, an cois gach bathair, chì thu “solasan-trafaig.”"
+"tab, behind every ware, you can see a slider."
+msgstr "Tha thu a’ cur greimeagan dhan a h-uile mèinn an-dràsta. Ma tha thu airson prìomhachas a thoirt air aon dhiubh gu sònraichte, feumaidh tu an uinneag aice fhosgladh. Ann an taba a’ bhathair, an cois gach bathair, chì thu sleamhnachan."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
-"When you click on the red dot (low priority), the corresponding ware gets "
-"delivered less frequently. Green means that as many wares as possible should"
-" be delivered to this building, maybe because it produces something "
-"important."
-msgstr "Ma nì thu briogadh air an dotag dhearg (prìomhachas ìseal) thèid am bathar co-cheangailte rithe a lìbhrigeadh as ainneimhe. Is ciall dha dh’uaine gun dèid na ghabhas dhen bhathar a lìbhrigeadh dhan togalach ud, ’s dòcha air sgàth ’s gun dèan e rudeigin cudromach."
+"When you move the slider to the blue area on the left side (low priority), "
+"the corresponding ware gets delivered less frequently. Red (right side) "
+"means that as many wares as possible should be delivered to this building, "
+"maybe because it produces something important."
+msgstr "Ma ghluaiseas tu an sleamhnachan dhan raon ghorm taobh clì (prìomhachas ìseal) thèid am bathar co-cheangailte rithe a lìbhrigeadh as ainneimhe. Is ciall dha dhearg (air an taobh deas) gun dèid na ghabhas dhen bhathar a lìbhrigeadh dhan togalach ud, ’s dòcha air sgàth ’s gun dèan e rudeigin cudromach."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid ""
@@ -760,7 +761,9 @@ msgstr "Gheibh thu greim air an uinneag ’s tu a’ briogadh air bratach sam bi
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:480
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:504
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
 msgid "Economy options"
 msgstr "Roghainnean an eaconamaidh"
 
@@ -806,7 +809,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr "Seo eisimpleir: ’s e 1 a tha san luach tùsail airson fàil. Ma thogas tu tuathanas, gabhaidh giùlanair greim air fàl ach an dèid e ’na thuathanach. Cha bhi fàl air fhàgail dhut an uairsin ach ’s e 1 a th’ anns an uiread-amais, mar sin tòisichidh an ceàrd air fear eile a dhèanamh."
+msgstr "Seo eisimpleir: ’s e 1 a tha san luach bhunaiteach airson fàil. Ma thogas tu tuathanas, gabhaidh giùlanair greim air fàl ach an dèid e ’na thuathanach. Cha bhi fàl air fhàgail dhut an uairsin ach ’s e 1 a th’ anns an uiread-amais, mar sin tòisichidh an ceàrd air fear eile a dhèanamh."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
@@ -816,36 +819,72 @@ msgid ""
 "available and both farms would have been able to start working right away."
 msgstr "Ma thogas tu dà thuathanas, cha tòisich ach an dàrna fear ag obair sa bhad. Feumaidh am fear eile feitheamh airson neach-obrach air a bheil dìth an fhàil. Nan robh thu air an t-uiread-amais a shuidheachadh air 2 roimhe, bhiodh dà fhàl ri làimh dhut agus an dà thuathanas air tòiseachadh ag obair sa bhad."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+msgid ""
+"Stockpiling wares is a double-edged sword. On the one hand, wares in stock "
+"are useful to buffer temporary fluctuations in your economy, which tend to "
+"occur all the time. On the other hand, any ware that is sitting around in a "
+"warehouse instead of being processed into something else is wasted. Finding "
+"the balance between wasteful stockpiling and just-in-time production in your"
+" supply chains is one of most profound challenges of perfecting your "
+"economy. When in doubt, lean towards having some extra reserves."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+msgid ""
+"To ease the process of switching between different economic situations, you "
+"can save and apply economy profiles at the bottom of the economy options "
+"window. A profile for stockpiling and one for efficiency are preset there."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+msgid ""
+"Most of the time, the economy options are a useful tool to ensure that "
+"resources are not wasted to produce wares your economy does not actually "
+"need. However, sometimes it can be useful to stockpile a ware in very large "
+"quantities. To achieve this, the economy options window allows you to set "
+"the target of a ware to infinite, so that it will always be produced."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
+msgid ""
+"The same button can also be found in the building window of production "
+"sites. There, it causes only this one site to produce indefinitely, "
+"regardless of the economy settings. This can be useful to arrange, for "
+"example, that more building materials are produced near the border even if "
+"there are plenty in stock far away in your homeland."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
 msgid "Produce 20 marble columns"
 msgstr "Saothraich 20 colbh marmoir"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:516
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
 msgstr "Bu chòir dhut 20 colbh marmoir a dhèanamh ach am bi thu ullamh airson barrachd daingneachaidh."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
 msgstr "Cha dèan an clachair agad colbh marmoir ach nuair a bhios feum air. Feumaidh tu an t-uiread-amais a mheudachadh."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
 msgstr "Gus seo a dhèanamh, briog air bratach sam bith agus tagh “Rèitich an eaconamaidh”. San uinneag ud, ’s urrainn dhut cur romhad co mheud bathar de gach seòrsa a tha thu airson glèidheadh san stòras agad."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:501
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
 msgstr "Uaireannan, bidh feum agad air mòran bhathar gu luath ’s aig an aon àm – nas luaithe nas urrainn dhut a dhèanamh. Nuair a thachras seo, ’s math ma bhios gu leòr dheth sa chùl-stòras agad."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:527
 msgid ""
 "By changing the target quantity, you can therefore decide which wares/tools "
 "your resources (in this case: iron) should be turned into or whether you "
@@ -853,86 +892,86 @@ msgid ""
 "for."
 msgstr "Nuair a shuidhicheas tu an t-uiread-amais, cuiridh tu romhad dè am bathar/na h-acainnean a thèid a dhèanamh dhen stòras a th’ agad (iarainn sa bhall-eisimpleir seo) no am b’ fheàrr leat an t-iarann a ghlèidheadh gus am bi fios agad air dè nì thu leis."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:528
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
 msgstr "Chan eil diù ach aig na togalaichean a chaitheas bathar air an roghainn seo. Cumaidh na togalaichean a nì bathar an-asgaidh (can na tuathanasan no tobraichean agad) a’ dol an-còmhnaidh."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
 msgstr "Feuchaidh sinn ris a-nis: ’s e 10 a tha san uiread-amais airson cholbhan marmoir an-dràsta. Meudaich e ach am bi thu ullamh air eagal ’s gum feum thu cur ris an daingneachadh agad gu luath."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
 msgid "Bring 20 marble columns to the front line"
 msgstr "Cuir 20 colbh marmoir gu far a bheil sinn an dùil air sabaid"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:522
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:540
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
 msgstr "Cuir am 20 colbh marmoir dhan taigh-stòrais faisg air far a bheil sinn an dùil air sabaid."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
 msgstr "Gus seo a choileanadh, feumaidh tu dà rud a dhèanamh. An toiseach, suidhich gum b’ fheàrr leat colbhan marmoir san taigh-stòrais a thogras sinn. Thèid gach colbh marmoir a nithear san àm ri teachd a chur an-siud ma ghabhas seo dèanamh."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
 msgstr "An uairsin, gus na colbhan marmoir fhaighinn on phrìomh-àras agad, feumaidh tu briogadh air putan an-siud gus an toirt air falbh."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:550
 msgid "Warehouse Preferences"
 msgstr "Roghainnean an taighe-stòrais"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:534
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Bring the marble columns to the front line"
 msgstr "Cuir na colbhan marmoir agad gu far a bheil thu an dùil air sabaid"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:536
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
 msgstr "Tha sinn a’ dèanamh colbhan marmoir mar bu chòir a-nis ach bhiodh e taghta nan robh iad ’gan glèidheadh far a bheil feum againn orra."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:555
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
 msgstr "Mar as trice, thèid bathar ’ga ghiùlan dhan taigh-stòrais as fhaisge mur eil feum aige àite sam bith eile. San t-suidheachadh seo, is ciall dha seo am prìomh-àras againn. Ach b’ fheàrr leinn gum biodh iad san taigh-stòrais faisg air na dùin againn."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:538
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
 msgstr "Tha ceithir putanan aig gach taigh-stòrais gus roghainn a’ bhathair a shuidheachadh. Ma ghluaiseas tu tomhaire na luchaige os an cionn, chì thu gliocas-sgrìn a mhìnicheas dè nì gach putan."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:562
 msgid "Borders Secured"
 msgstr "Rinn sinn daingneachadh air na crìochan"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:546
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
 msgid "We’re safe now"
 msgstr "Tha sinn sàbhailte a-nis"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:548
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
 msgstr "Taghta. Tha colbhan marmoir gu leòr againn a-nis ach an urrainn dhuinn barrachd daingneachaidh a thogail ma bheir nàmhaid ionnsaigh oirnn. Ach cha chreid mi gu bheil sinn feumach air seo an-dràsta. Cha do thog nàmhaid a cheann gu ruige seo."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:549
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
 msgid ""
 "I hope I could teach you how you can control the economy in Widelands. There"
 " are many options and they can be confusing at first. Even if you’ve only "
@@ -941,7 +980,7 @@ msgid ""
 "this tutorial and learn the rest!"
 msgstr "Tha mi ’n dòchas gun deach leam ionnsachadh dhut mar a stiùiricheas tu eaconamaidh Widelands. Tha iomadh roghainn ann agus ma dh’fhaoidte gun cuir iad ’nad bhrochan thu an toiseach. Ach cùm ort fiù ’s mura tuig thu ach beachd no dhà dheth. Feuch ris ann an geama no dhà gus am faigh thu barrachd eòlais air agus faigh a-mach na ghabhas dèanamh. Till dhan oideachadh seo an uairsin gus an còrr ionnsachadh!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:551
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"
@@ -949,8 +988,3 @@ msgid ""
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
 msgstr "Seo an t-oideachadh mu dheireadh a dh’ullaich mi air do shon. Tha mi air a h-uile rud air a bheil mi eòlach a shealltainn dhut. Tha rùn-dìomhair no dhà eile falaichte san t-saoghal seo nach eil fiù ’s mi fhìn eòlach air. Lorgaidh mi àite far a chuireas mi seachad m’ aois. Ma tha ceist no dhà agad fhathast, bheir coimhearsnachd Widelands taic dhut gun teagamh. Lorgaidh tu i air:"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
