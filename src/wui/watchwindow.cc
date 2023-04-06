@@ -145,7 +145,9 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 	}
 	WatchWindow::View view;
 
-	if (views_.size() < 1) {
+	const bool has_previous = !views_.empty();
+
+	if (!has_previous) {
 		map_view_.scroll_to_field(coords, MapView::Transition::Jump);
 	}
 
@@ -154,9 +156,9 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 	last_visit_ = game().get_gametime();
 
 	views_.push_back(view);
-	set_current_view(views_.size() - 1, views_.size() > 1);
+	set_current_view(views_.size() - 1, has_previous);
 
-	if (views_.size() > 1) {
+	if (has_previous) {
 		map_view_.scroll_to_field(coords, MapView::Transition::Jump);
 	}
 
