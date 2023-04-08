@@ -199,6 +199,8 @@ enum CombatWalkingDir {
 };
 
 enum CombatFlags {
+	/// No special commands.
+	CF_NONE = 0,
 	/// Soldier will wait enemies at his building flag. Only for defenders.
 	CF_DEFEND_STAYHOME = 1,
 	/// When current health points drop below a fixed percentage, soldier will flee
@@ -317,11 +319,12 @@ public:
 
 	void set_battle(Game&, Battle*);
 
-	void start_task_attack(Game& game, Building&, bool allow_retreat);
+	void start_task_attack(Game& game, Building&, CombatFlags flags);
 	void start_task_defense(Game& game, bool stayhome);
 	void start_task_battle(Game&);
 	void start_task_move_in_battle(Game&, CombatWalkingDir);
 	void start_task_die(Game&);
+	void start_task_naval_invasion(Game& game, const Coords& coords);
 
 	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>>&
 	get_walking_animations_cache() {
@@ -338,6 +341,7 @@ private:
 	void move_in_battle_update(Game&, State&);
 	void die_update(Game&, State&);
 	void die_pop(Game&, State&);
+	void naval_invasion_update(Game&, State&);
 
 	void send_space_signals(Game&);
 	bool stay_home();
@@ -352,6 +356,7 @@ protected:
 	static Task const taskMoveInBattle;
 	// May be this can be moved this to bob when finished
 	static Task const taskDie;
+	static Task const taskNavalInvasion;
 
 	bool is_evict_allowed() override;
 

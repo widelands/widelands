@@ -840,7 +840,7 @@ bool MilitarySite::get_building_work(Game& game, Worker& worker, bool /*success*
 		bool stayhome;
 		if (MapObject* const enemy = pop_soldier_job(soldier, &stayhome)) {
 			if (upcast(Building, building, enemy)) {
-				soldier->start_task_attack(game, *building, true);
+				soldier->start_task_attack(game, *building, CF_RETREAT_WHEN_INJURED);
 				return true;
 			}
 			if (upcast(Soldier, opponent, enemy)) {
