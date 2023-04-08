@@ -68,7 +68,32 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	      [lua](UI::Panel* cb_parent, const Widelands::ImmovableDescr& immovable_descr) {
 		      return create_immovable_checkbox(cb_parent, lua, immovable_descr);
 	      },
-	      [this] { select_correct_tool(); }, &tool));
+	      [this, &tool] {
+		      auto_trees_button_->set_perm_pressed(false);
+		      tool.enable(kAutoTreesIndex, false);
+		      select_correct_tool();
+	      }, &tool));
+
+	multi_select_menu_->set_descname_override(kAutoTreesIndex, _("Automatic Trees"));
+	UI::Box* auto_immovables_box = new UI::Box(&multi_select_menu_->tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	auto_trees_button_ = new UI::Button(auto_immovables_box, "auto_trees", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Automatic Trees"));
+	auto_trees_button_->sigclicked.connect([this, &tool]() {
+		auto_trees_button_->toggle();
+		if (auto_trees_button_->style() == UI::Button::VisualState::kPermpressed) {
+			tool.disable_all();
+			tool.enable(kAutoTreesIndex, true);
+		} else {
+			tool.enable(kAutoTreesIndex, false);
+		}
+		multi_select_menu_->update_label();
+	});
+	auto_immovables_box->add(auto_trees_button_, UI::Box::Resizing::kFullSize);
+	multi_select_menu_->tabs().add("auto",
+	             g_image_cache->get("images/wui/editor/tools/immovables.png"),
+	             auto_immovables_box,
+	             _("Automatic Immovable Placement"),
+	             0);
+
 	set_center_panel(multi_select_menu_.get());
 
 	initialization_complete();

@@ -22,6 +22,8 @@
 #include "editor/tools/delete_immovable_tool.h"
 #include "editor/tools/multi_select.h"
 
+constexpr int32_t kAutoTreesIndex = std::numeric_limits<uint16_t>::max() - 4;
+
 /**
  * This places immovables on the map
  */

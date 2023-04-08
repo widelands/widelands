@@ -51,12 +51,19 @@ public:
 	// Updates selection to match the tool settings
 	void update_selection();
 
-private:
-	// Called when an item was selected.
-	void selected(int32_t, bool);
+	UI::TabPanel& tabs() {
+		return tab_panel_;
+	}
 
 	// Update the label with the currently selected object names.
 	void update_label();
+	void set_descname_override(int32_t index, std::string name) {
+		descname_overrides_.emplace(index, name);
+	}
+
+private:
+	// Called when an item was selected.
+	void selected(int32_t, bool);
 
 	const Widelands::DescriptionMaintainer<DescriptionType>& descriptions_;
 	std::function<void()> select_correct_tool_;
@@ -64,6 +71,7 @@ private:
 	UI::TabPanel tab_panel_;
 	UI::MultilineTextarea current_selection_names_;
 	std::map<int, UI::Checkbox*> checkboxes_;
+	std::map<int32_t, std::string> descname_overrides_;
 	ToolType* const tool_;  // not owned
 };
 
@@ -140,9 +148,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 		checkboxes_[n]->set_state(true);
 	} else {
 		if (!multiselect) {
-			for (uint32_t i = 0; tool_->get_nr_enabled(); ++i) {
-				tool_->enable(i, false);
-			}
+			tool_->disable_all();
 			//  disable all checkboxes
 			protect_against_recursive_select_ = true;
 			const int32_t size = checkboxes_.size();
@@ -165,15 +171,12 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 	current_selection_names_.set_size(tab_panel_.get_inner_w(), 20);
 	std::string buf;
 	constexpr int max_string_size = 100;
-	int j = tool_->get_nr_enabled();
-	for (int i = 0; (j != 0) && buf.size() < max_string_size; ++i) {
-		if (tool_->is_enabled(i)) {
-			if (j < tool_->get_nr_enabled()) {
-				buf += " • ";
-			}
-			buf += descriptions_.get(i).descname();
-			--j;
+	for (int index : tool_->get_enabled()) {
+		if (!buf.empty()) {
+			buf += " • ";
 		}
+		const auto it = descname_overrides_.find(index);
+		buf += it != descname_overrides_.end() ? it->second : descriptions_.get(index).descname();
 	}
 	if (buf.size() > max_string_size) {
 		/** TRANSLATORS: %s are the currently selected items in an editor tool */

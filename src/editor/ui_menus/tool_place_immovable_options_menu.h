@@ -39,6 +39,7 @@ private:
 	std::unique_ptr<
 	   CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>>
 	   multi_select_menu_;
+	UI::Button* auto_trees_button_{nullptr};
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
