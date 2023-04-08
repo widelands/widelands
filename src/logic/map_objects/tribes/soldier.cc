@@ -18,6 +18,7 @@
 
 #include "logic/map_objects/tribes/soldier.h"
 
+#include <algorithm>
 #include <memory>
 
 #include "base/log.h"
@@ -1669,13 +1670,10 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	for (const ImmovableFound& result : results) {
 		Building& bld = dynamic_cast<Building&>(*result.object);
 		if (!owner().is_hostile(bld.owner()) || bld.attack_target() == nullptr ||
-		    !bld.attack_target()->can_be_attacked()) {
+		    !bld.attack_target()->can_be_attacked() ||
+		    bld.descr().get_conquers() + state.ivar2 <
+		       map.calc_distance(bld.get_position(), state.coords)) {
 			continue;
-		}
-		if (bld.descr().get_conquers() + state.ivar2 <
-		    map.calc_distance(bld.get_position(), state.coords)) {
-			// This building and all buildings sorted after it do not conquer the port space.
-			break;
 		}
 
 		// Attack in next cycle
