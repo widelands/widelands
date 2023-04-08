@@ -1160,7 +1160,8 @@ void Ship::battle_update(Game& game) {
 				   game, suitable_coords.at(game.logic_rand() % suitable_coords.size()));
 
 				worker->reset_tasks(game);
-				dynamic_cast<Soldier&>(*worker).start_task_naval_invasion(game, warehouse.get_position());
+				dynamic_cast<Soldier&>(*worker).start_task_naval_invasion(
+				   game, warehouse.get_position());
 
 				items_.erase(it);
 			}

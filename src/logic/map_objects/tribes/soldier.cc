@@ -1601,7 +1601,9 @@ void Soldier::die_pop(Game& game, State& /* state */) {
 	schedule_destroy(game);
 }
 
-Bob::Task const Soldier::taskNavalInvasion = {"naval_invasion", static_cast<Bob::Ptr>(&Soldier::naval_invasion_update), nullptr, nullptr, true};
+Bob::Task const Soldier::taskNavalInvasion = {
+   "naval_invasion", static_cast<Bob::Ptr>(&Soldier::naval_invasion_update), nullptr, nullptr,
+   true};
 
 void Soldier::start_task_naval_invasion(Game& game, const Coords& coords) {
 	push_task(game, taskNavalInvasion);
@@ -1609,7 +1611,8 @@ void Soldier::start_task_naval_invasion(Game& game, const Coords& coords) {
 
 	invasion_state.coords = coords;
 	invasion_state.ivar1 = 0;
-	invasion_state.ivar2 = game.descriptions().get_building_descr(owner().tribe().port())->get_conquers();
+	invasion_state.ivar2 =
+	   game.descriptions().get_building_descr(owner().tribe().port())->get_conquers();
 	invasion_state.ivar3 = game.descriptions().get_largest_workarea();
 
 	molog(game.get_gametime(), "[naval_invasion] Starting at %3dx%3d\n", coords.x, coords.y);
@@ -1635,7 +1638,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		Building* enemy = dynamic_cast<Building*>(game.objects().get_object(state.ivar1));
 		state.ivar1 = 0;
 
-		if (enemy == nullptr || !owner().is_hostile(enemy->owner()) || enemy->attack_target() == nullptr || !enemy->attack_target()->can_be_attacked()) {
+		if (enemy == nullptr || !owner().is_hostile(enemy->owner()) ||
+		    enemy->attack_target() == nullptr || !enemy->attack_target()->can_be_attacked()) {
 			molog(game.get_gametime(), "[naval_invasion] Attack target vanished or not hostile\n");
 			return schedule_act(game, Duration(10));
 		}
@@ -1648,23 +1652,28 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	const Map& map = game.map();
 
 	std::vector<ImmovableFound> results;
-	map.find_reachable_immovables(game, Area<FCoords>(get_position(), state.ivar2 + state.ivar3), &results, CheckStepWalkOn(descr().movecaps(), false), FindImmovableAttackTarget());
+	map.find_reachable_immovables(game, Area<FCoords>(get_position(), state.ivar2 + state.ivar3),
+	                              &results, CheckStepWalkOn(descr().movecaps(), false),
+	                              FindImmovableAttackTarget());
 	// Consider closest targets first (estimate by air distance)
-	std::sort(results.begin(), results.end(), [this, &map](const ImmovableFound& a, const ImmovableFound& b) {
-		const uint32_t distance_a = map.calc_distance(get_position(), a.coords);
-		const uint32_t distance_b = map.calc_distance(get_position(), b.coords);
-		if (distance_a != distance_b) {
-			return distance_a < distance_b;
-		}
-		return a.object->serial() < b.object->serial();
-	});
+	std::sort(results.begin(), results.end(),
+	          [this, &map](const ImmovableFound& a, const ImmovableFound& b) {
+		          const uint32_t distance_a = map.calc_distance(get_position(), a.coords);
+		          const uint32_t distance_b = map.calc_distance(get_position(), b.coords);
+		          if (distance_a != distance_b) {
+			          return distance_a < distance_b;
+		          }
+		          return a.object->serial() < b.object->serial();
+	          });
 
 	for (const ImmovableFound& result : results) {
 		Building& bld = dynamic_cast<Building&>(*result.object);
-		if (!owner().is_hostile(bld.owner()) || bld.attack_target() == nullptr || !bld.attack_target()->can_be_attacked()) {
+		if (!owner().is_hostile(bld.owner()) || bld.attack_target() == nullptr ||
+		    !bld.attack_target()->can_be_attacked()) {
 			continue;
 		}
-		if (bld.descr().get_conquers() + state.ivar2 < map.calc_distance(bld.get_position(), state.coords)) {
+		if (bld.descr().get_conquers() + state.ivar2 <
+		    map.calc_distance(bld.get_position(), state.coords)) {
 			// This building and all buildings sorted after it do not conquer the port space.
 			break;
 		}
@@ -1679,7 +1688,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 
 	// Is there a building in the way? It should be unguarded now, burn it down.
 	BaseImmovable* immo = map[state.coords].get_immovable();
-	if (immo != nullptr && immo->descr().type() >= MapObjectType::BUILDING && owner().is_hostile(dynamic_cast<Building*>(immo)->owner())) {
+	if (immo != nullptr && immo->descr().type() >= MapObjectType::BUILDING &&
+	    owner().is_hostile(dynamic_cast<Building*>(immo)->owner())) {
 		molog(game.get_gametime(), "[naval_invasion] Destroying enemy civil building\n");
 		immo->schedule_destroy(game);
 		return schedule_act(game, Duration(100));
@@ -1689,7 +1699,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		return start_task_idle(game, descr().get_animation("idle", this), 1000);
 	}
 
-	if (start_task_movepath(game, state.coords, 0, descr().get_right_walk_anims(does_carry_ware(), this), false, 3)) {
+	if (start_task_movepath(
+	       game, state.coords, 0, descr().get_right_walk_anims(does_carry_ware(), this), false, 3)) {
 		molog(game.get_gametime(), "[naval_invasion] Return to camp\n");
 		return;
 	}
