@@ -54,14 +54,20 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTria
 		std::list<Widelands::DescriptionIndex>::iterator i = args->new_immovable_types.begin();
 		do {
 			if (*i == kAutoTreesIndex) {
-				const uint32_t attribute_id = Widelands::ImmovableDescr::get_attribute_id("normal_tree");
-				std::set<std::pair<unsigned /* probability_to_grow, for sorting */, Widelands::DescriptionIndex>> all_trees_sorted;
+				const uint32_t attribute_id =
+				   Widelands::ImmovableDescr::get_attribute_id("normal_tree");
+				std::set<std::pair<unsigned /* probability_to_grow, for sorting */,
+				                   Widelands::DescriptionIndex>>
+				   all_trees_sorted;
 
 				const Widelands::Descriptions& descriptions = egbase.descriptions();
 				for (Widelands::DescriptionIndex di = 0; di < descriptions.nr_immovables(); ++di) {
 					const Widelands::ImmovableDescr* descr = descriptions.get_immovable_descr(di);
 					if (descr->has_attribute(attribute_id) && descr->has_terrain_affinity()) {
-						all_trees_sorted.emplace(Widelands::probability_to_grow(descr->terrain_affinity(), mr.location(), *map, descriptions.terrains()), di);
+						all_trees_sorted.emplace(
+						   Widelands::probability_to_grow(
+						      descr->terrain_affinity(), mr.location(), *map, descriptions.terrains()),
+						   di);
 					}
 				}
 

@@ -314,7 +314,8 @@ uint32_t TabPanel::add_tab(const std::string& name,
 
 	size_t id = index < 0 ? tabs_.size() : index;
 	int32_t x = id > 0 ? tabs_[id - 1]->get_x() + tabs_[id - 1]->get_w() : 0;
-	tabs_.insert(tabs_.begin() + id,
+	tabs_.insert(
+	   tabs_.begin() + id,
 	   new Tab(this, panel_style_, id, x,
 	           tab_style_ == TabPanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel,
 	           name, title, pic, tooltip_text, panel));
