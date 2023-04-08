@@ -18,7 +18,7 @@ import argparse
 import os
 import re
 import sys
-from subprocess import check_call
+from subprocess import check_call, CalledProcessError
 from file_utils import read_text_file, write_text_file, find_files
 
 import autoflake
@@ -140,7 +140,13 @@ def main():
             sys.stdout.write(
                 '\nFormatting Python scripts in directory: ' + directory + ' ')
             python_files = find_files(directory, ['.py'])
-            check_call(['docformatter', '-i', *python_files])
+            try:
+                check_call(['docformatter', '-i', *python_files])
+            except CalledProcessError as e:
+                # Return code 3 means there are changes. That's OK for us, next
+                # step will pick them up
+                if e.returncode != 3 :
+                    raise
             for filename in find_files(directory, ['.py']):
                 sys.stdout.write('.')
                 sys.stdout.flush()

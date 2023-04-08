@@ -6,7 +6,7 @@
 # C138, 2021
 # Renaud Bouchard, 2022
 # Boese Kaiser, 2022
-# Jimmy CUISINIER, 2023
+# C Jimmy, 2023
 # 
 msgid ""
 msgstr ""
@@ -14,8 +14,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-02-19 02:46+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Jimmy CUISINIER, 2023\n"
-"Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
+"Last-Translator: C Jimmy, 2023\n"
+"Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -239,6 +239,9 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
+"Au nord, nous sommes menacés par une tribu belliqueuse, dirigée par le "
+"seigneur de guerre Törver, qui reconstitue rapidement ses armées. Elles "
+"pourraient bientôt être trop fortes pour être vaincues."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -246,6 +249,9 @@ msgid ""
 "pirates, led by their insane Arvid. Their presence blocks our ways to other "
 "tribes."
 msgstr ""
+"Une grande région au nord-est est tourmentée par une horde sauvage de "
+"pirates sans scrupules, dirigée par le dément Arvid. Leur présence bloque "
+"les voies d'accès aux autres tribus."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
 msgid ""
@@ -253,6 +259,10 @@ msgid ""
 "have been in war with him before the pirates occupied the eastern area. His "
 "strength is based on his vast industry and large armies."
 msgstr ""
+"De l'autre côté de la rivière se trouve la terre prospère du mystérieux roi "
+"Runar. Nous avons été en guerre avec lui avant que les pirates n'occupent la"
+" région orientale. Sa force repose sur sa production industrielle et ses "
+"armées nombreuses."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
 msgid ""
