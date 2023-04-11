@@ -46,7 +46,8 @@ public:
 	   const Widelands::DescriptionMaintainer<DescriptionType>& descriptions,
 	   std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
 	   std::function<void()> select_correct_tool,
-	   ToolType* tool);
+	   ToolType* tool,
+	   std::map<int32_t, std::string> descname_overrides = {});
 
 	// Updates selection to match the tool settings
 	void update_selection();
@@ -66,12 +67,12 @@ private:
 	void selected(int32_t, bool);
 
 	const Widelands::DescriptionMaintainer<DescriptionType>& descriptions_;
+	std::map<int32_t, std::string> descname_overrides_;
 	std::function<void()> select_correct_tool_;
 	bool protect_against_recursive_select_{false};
 	UI::TabPanel tab_panel_;
 	UI::MultilineTextarea current_selection_names_;
 	std::map<int, UI::Checkbox*> checkboxes_;
-	std::map<int32_t, std::string> descname_overrides_;
 	ToolType* const tool_;  // not owned
 };
 
@@ -83,9 +84,11 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
    const std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)>
       create_checkbox,
    const std::function<void()> select_correct_tool,
-   ToolType* const tool)
+   ToolType* const tool,
+   std::map<int32_t, std::string> descname_overrides)
    : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      descriptions_(descriptions),
+     descname_overrides_(descname_overrides),
      select_correct_tool_(select_correct_tool),
 
      tab_panel_(this, UI::TabPanelStyle::kWuiLight),

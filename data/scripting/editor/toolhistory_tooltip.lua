@@ -5,6 +5,7 @@
 -- This script returns a compact formatted entry for toolhistory list tooltips in the editor.
 -- Pass map object type ("terrain", "critter", or "immovable") followed by the internal names of
 -- the map objects to the coroutine.
+-- If the map object type is "image", the arguments are interpreted as image filepaths.
 
 include "scripting/richtext.lua"
 include "scripting/help.lua"
@@ -25,6 +26,9 @@ return {
 
          elseif mo_type == "immovable" then
             result = result .. img_object(name) .. space(gap)
+
+         elseif mo_type == "image" then
+            result = result .. img(name) .. space(gap)
 
          end
       end

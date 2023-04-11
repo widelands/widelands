@@ -312,7 +312,10 @@ uint32_t TabPanel::add_tab(const std::string& name,
 	assert(panel);
 	assert(panel->get_parent() == this);
 
-	size_t id = index < 0 ? tabs_.size() : index;
+	const size_t id = index < 0 ? tabs_.size() : index;
+	if (active_ >= id && !tabs_.empty()) {
+		++active_;
+	}
 	int32_t x = id > 0 ? tabs_[id - 1]->get_x() + tabs_[id - 1]->get_w() : 0;
 	tabs_.insert(
 	   tabs_.begin() + id,

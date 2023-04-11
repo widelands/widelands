@@ -94,10 +94,15 @@ std::string EditorToolhistoryOptionsMenu::make_tooltip(const ToolConf& conf,
 			cr->push_arg(descr->name());
 		}
 	} else if (conf.primary->get_window_id() == WindowID::Immovables) {
-		cr->push_arg("immovable");
-		for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
-			const Widelands::ImmovableDescr* descr = descriptions.get_immovable_descr(idx);
-			cr->push_arg(descr->name());
+		if (conf.map_obj_types.count(kAutoTreesIndex) != 0) {
+			cr->push_arg("image");
+			cr->push_arg("images/wui/editor/tools/immovables.png");
+		} else {
+			cr->push_arg("immovable");
+			for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+				const Widelands::ImmovableDescr* descr = descriptions.get_immovable_descr(idx);
+				cr->push_arg(descr->name());
+			}
 		}
 	}
 

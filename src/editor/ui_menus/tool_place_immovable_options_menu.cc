@@ -73,9 +73,9 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 		      tool.enable(kAutoTreesIndex, false);
 		      select_correct_tool();
 	      },
-	      &tool));
+	      &tool,
+	      {{kAutoTreesIndex, _("Automatic Trees")}}));
 
-	multi_select_menu_->set_descname_override(kAutoTreesIndex, _("Automatic Trees"));
 	UI::Box* auto_immovables_box =
 	   new UI::Box(&multi_select_menu_->tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	auto_trees_button_ = new UI::Button(auto_immovables_box, "auto_trees", 0, 0, 0, 0,
@@ -90,10 +90,12 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 		}
 		multi_select_menu_->update_label();
 	});
+	auto_trees_button_->set_perm_pressed(tool.is_enabled(kAutoTreesIndex));
 	auto_immovables_box->add(auto_trees_button_, UI::Box::Resizing::kFullSize);
 	multi_select_menu_->tabs().add("auto",
 	                               g_image_cache->get("images/wui/editor/tools/immovables.png"),
 	                               auto_immovables_box, _("Automatic Immovable Placement"), 0);
+	multi_select_menu_->tabs().activate(0);
 
 	set_center_panel(multi_select_menu_.get());
 
