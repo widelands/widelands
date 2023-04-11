@@ -73,8 +73,7 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 		      tool.enable(kAutoTreesIndex, false);
 		      select_correct_tool();
 	      },
-	      &tool,
-	      {{kAutoTreesIndex, _("Automatic Trees")}}));
+	      &tool, {{kAutoTreesIndex, _("Automatic Trees")}}));
 
 	UI::Box* auto_immovables_box =
 	   new UI::Box(&multi_select_menu_->tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
