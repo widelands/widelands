@@ -37,11 +37,13 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 
 	std::string tooltip = immovable_descr.descname();
 	std::string size = Widelands::BaseImmovable::size_to_string(immovable_descr.get_size());
+	std::string size_str = "";
 	if (size == "none") {
-		tooltip.append(_(" (removable by e.g. placing roads)"));
+		size_str = _(" (removable by e.g. placing roads)");
 		} else {
-		tooltip.append(_(" (needs a " + size + " building plot)"));
+		size_str = format(_(" (needs a %1$s building plot)"), size);
 	};
+	tooltip.append(size_str);
 
 	// Get information about preferred terrains
 	if (immovable_descr.has_terrain_affinity()) {
