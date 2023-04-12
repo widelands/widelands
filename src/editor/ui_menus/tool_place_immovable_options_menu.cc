@@ -45,6 +45,21 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 		cr->resume();
 		tooltip = format(_("%1$s %2$s"), immovable_descr.descname(), cr->pop_table()->get_string("text"));
 	} else {
+		switch (immovable_descr.get_size()) {
+		case Widelands::BaseImmovable::NONE:
+				tooltip = format(_("%1$s (removable by e.g. placing roads)"), immovable_descr.descname());
+				break;
+		case Widelands::BaseImmovable::SMALL:
+				tooltip = format(_("%1$s (needs a small building plot)"), immovable_descr.descname());
+				break;
+		case Widelands::BaseImmovable::MEDIUM:
+				tooltip = format(_("%1$s (needs a medium building plot)"), immovable_descr.descname());
+				break;
+		case Widelands::BaseImmovable::BIG:
+				tooltip = format(_("%1$s (needs a big building plot)"), immovable_descr.descname());
+				break;
+		}
+
 		std::string size = Widelands::BaseImmovable::size_to_string(immovable_descr.get_size());
 		if (size == "none") {
 			tooltip = format(_("%1$s (%2$s)"), immovable_descr.descname(), _("removable by e.g. placing roads"));
