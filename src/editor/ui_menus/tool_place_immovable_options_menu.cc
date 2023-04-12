@@ -107,5 +107,7 @@ void EditorToolPlaceImmovableOptionsMenu::update_window() {
 
 void EditorToolPlaceImmovableOptionsMenu::think() {
 	EditorToolOptionsMenu::think();
-	auto_trees_button_->set_perm_pressed(parent_.tools()->current_pointer == &current_tool_ && dynamic_cast<EditorPlaceImmovableTool&>(current_tool_).is_enabled(kAutoTreesIndex));
+	auto_trees_button_->set_perm_pressed(
+	   parent_.tools()->current_pointer == &current_tool_ &&
+	   dynamic_cast<EditorPlaceImmovableTool&>(current_tool_).is_enabled(kAutoTreesIndex));
 }
