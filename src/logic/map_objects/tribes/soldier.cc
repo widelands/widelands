@@ -1686,7 +1686,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	FCoords fcoords = map.get_fcoords(state.coords);
 	if (fcoords.field->get_owned_by() != owner().player_number()) {
 		// The target should be unguarded now, conquer the port space.
-		game.conquer_area(PlayerArea<Area<FCoords>>(owner().player_number(), Area<FCoords>(fcoords, 2)));
+		game.conquer_area(
+		   PlayerArea<Area<FCoords>>(owner().player_number(), Area<FCoords>(fcoords, 2)));
 		return schedule_act(game, Duration(10));
 	}
 
@@ -1700,7 +1701,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		return;
 	}
 
-	if (fcoords.field->get_immovable() != nullptr && !fcoords.field->get_immovable()->get_passable()) {
+	if (fcoords.field->get_immovable() != nullptr &&
+	    !fcoords.field->get_immovable()->get_passable()) {
 		// Wait until the fire burns out
 		return schedule_act(game, Duration(100));
 	}
