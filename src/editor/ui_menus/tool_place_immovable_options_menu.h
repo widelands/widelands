@@ -34,6 +34,7 @@ struct EditorToolPlaceImmovableOptionsMenu : public EditorToolOptionsMenu {
 	~EditorToolPlaceImmovableOptionsMenu() override = default;
 
 	void update_window() override;
+	void think() override;
 
 private:
 	std::unique_ptr<

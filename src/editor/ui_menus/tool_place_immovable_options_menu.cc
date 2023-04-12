@@ -83,13 +83,13 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 		auto_trees_button_->toggle();
 		if (auto_trees_button_->style() == UI::Button::VisualState::kPermpressed) {
 			tool.disable_all();
+			select_correct_tool();
 			tool.enable(kAutoTreesIndex, true);
 		} else {
 			tool.enable(kAutoTreesIndex, false);
 		}
 		multi_select_menu_->update_label();
 	});
-	auto_trees_button_->set_perm_pressed(tool.is_enabled(kAutoTreesIndex));
 	auto_immovables_box->add(auto_trees_button_, UI::Box::Resizing::kFullSize);
 	multi_select_menu_->tabs().add("auto",
 	                               g_image_cache->get("images/wui/editor/tools/immovables.png"),
@@ -103,4 +103,9 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 
 void EditorToolPlaceImmovableOptionsMenu::update_window() {
 	multi_select_menu_->update_selection();
+}
+
+void EditorToolPlaceImmovableOptionsMenu::think() {
+	EditorToolOptionsMenu::think();
+	auto_trees_button_->set_perm_pressed(parent_.tools()->current_pointer == &current_tool_ && dynamic_cast<EditorPlaceImmovableTool&>(current_tool_).is_enabled(kAutoTreesIndex));
 }
