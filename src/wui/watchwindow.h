@@ -68,6 +68,7 @@ private:
 		bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 		bool
 		handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+
 	private:
 		WatchWindow* parent_window_;
 		bool view_moved_{false};
