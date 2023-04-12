@@ -49,7 +49,7 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 		if (size == "none") {
 			tooltip = format(_("%1$s (%2$s)"), immovable_descr.descname(), _("removable by e.g. placing roads"));
 		} else {
-			tooltip = format(_("%1$s (%2$s %3$s %4$s)"), immovable_descr.descname(), _("needs a"), size, _("building plot"));
+			tooltip = format(_("%1$s (needs a %2$s building plot)"), immovable_descr.descname(), size);
 		}
 	}
 
