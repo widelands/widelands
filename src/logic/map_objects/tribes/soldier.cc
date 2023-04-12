@@ -1683,14 +1683,11 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	}
 
 	// No targets found, return to our temporary camp and wait there.
-
-	// Is there a building in the way? It should be unguarded now, burn it down.
-	BaseImmovable* immo = map[state.coords].get_immovable();
-	if (immo != nullptr && immo->descr().type() >= MapObjectType::BUILDING &&
-	    owner().is_hostile(dynamic_cast<Building*>(immo)->owner())) {
-		molog(game.get_gametime(), "[naval_invasion] Destroying enemy civil building\n");
-		immo->schedule_destroy(game);
-		return schedule_act(game, Duration(100));
+	FCoords fcoords = map.get_fcoords(state.coords);
+	if (fcoords.field->get_owned_by() != owner().player_number()) {
+		// The target should be unguarded now, conquer the port space.
+		game.conquer_area(PlayerArea<Area<FCoords>>(owner().player_number(), Area<FCoords>(fcoords, 2)));
+		return schedule_act(game, Duration(10));
 	}
 
 	if (get_position() == state.coords) {
@@ -1703,7 +1700,7 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		return;
 	}
 
-	if (immo != nullptr && !immo->get_passable()) {
+	if (fcoords.field->get_immovable() != nullptr && !fcoords.field->get_immovable()->get_passable()) {
 		// Wait until the fire burns out
 		return schedule_act(game, Duration(100));
 	}
