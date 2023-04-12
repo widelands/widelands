@@ -246,9 +246,9 @@ void Window::move_out_of_the_way() {
                                    main_toolbar_button_size() :
                                    0;
 	const int toolbar_top_h = (parent->get_parent() == nullptr &&  // Parent is main game window
-	                              !main_toolbar_at_bottom()) ?
-                                   main_toolbar_button_size() :
-                                   0;
+	                           !main_toolbar_at_bottom()) ?
+                                main_toolbar_button_size() :
+                                0;
 
 	const Vector2i mouse = parent->get_mouse_position();
 	const int pw = parent->get_inner_w();
