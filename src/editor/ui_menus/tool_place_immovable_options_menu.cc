@@ -33,17 +33,9 @@ namespace {
 UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
                                         LuaInterface* lua,
                                         const Widelands::ImmovableDescr& immovable_descr) {
-	const Image* pic = immovable_descr.representative_image();
+      const Image* pic = immovable_descr.representative_image();
 
-	std::string tooltip = immovable_descr.descname();
-	std::string size = Widelands::BaseImmovable::size_to_string(immovable_descr.get_size());
-	std::string size_str;
-	if (size == "none") {
-		size_str = _(" (removable by e.g. placing roads)");
-		} else {
-		size_str = format(_(" (needs a %1$s building plot)"), size);
-	}
-	tooltip.append(size_str);
+   std::string tooltip;
 
 	// Get information about preferred terrains
 	if (immovable_descr.has_terrain_affinity()) {
@@ -51,7 +43,14 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 		cr->push_arg(immovable_descr.name());
 		cr->resume();
-		tooltip.append(cr->pop_table()->get_string("text"));
+		tooltip = format(_("%1$s %2$s"), immovable_descr.descname(), cr->pop_table()->get_string("text"));
+	} else {
+		std::string size = Widelands::BaseImmovable::size_to_string(immovable_descr.get_size());
+		if (size == "none") {
+			tooltip = format(_("%1$s (%2$s)"), immovable_descr.descname(), _("removable by e.g. placing roads"));
+		} else {
+			tooltip = format(_("%1$s (%2$s %3$s %4$s)"), immovable_descr.descname(), _("needs a"), size, _("building plot"));
+		}
 	}
 
 	UI::Checkbox* cb =
