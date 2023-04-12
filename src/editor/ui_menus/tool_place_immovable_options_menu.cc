@@ -78,7 +78,9 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	UI::Box* auto_immovables_box =
 	   new UI::Box(&multi_select_menu_->tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	auto_trees_button_ = new UI::Button(auto_immovables_box, "auto_trees", 0, 0, 0, 0,
-	                                    UI::ButtonStyle::kWuiSecondary, _("Automatic Trees"));
+	                                    UI::ButtonStyle::kWuiSecondary, _("Automatic Trees"),
+	                                    _("Automatically place the trees which "
+	                                      "grow best on the terrain"));
 	auto_trees_button_->sigclicked.connect([this, &tool]() {
 		auto_trees_button_->toggle();
 		if (auto_trees_button_->style() == UI::Button::VisualState::kPermpressed) {
