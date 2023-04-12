@@ -62,7 +62,7 @@ jobs:
         sudo apt-get update
         sudo apt-get purge -y clang-11 clang-format-11 clang-10 clang-format-10
         sudo apt-get install clang-format-12
-        pip install pyformat
+        pip install autoflake autopep8 unify docformatter==1.5.1
         sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-12 100
         sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-12 100
         sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-12 100
