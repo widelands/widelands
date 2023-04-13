@@ -1634,8 +1634,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	 * all enemy influence within a radius of `state.ivar2 + state.ivar3` (where ivar2 is the
 	 * conquer radius of our planned port and ivar3 the biggest possible enemy conquer radius).
 	 * When such influence is found, the target building serial is stored in `state.ivar1`.
-	 * Otherwise, they stay at the flag and wait indefinitely until we get around
-	 * to implementing the code for the next step.
+	 * Otherwise, they stay at the flag and wait indefinitely until an own port
+	 * has been built at their location.
 	 */
 
 	if (state.ivar1 != 0) {
@@ -1693,6 +1693,26 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		game.conquer_area(
 		   PlayerArea<Area<FCoords>>(owner().player_number(), Area<FCoords>(fcoords, 2)));
 		return schedule_act(game, Duration(10));
+	}
+
+	if (fcoords.field->get_immovable() != nullptr &&
+	    fcoords.field->get_immovable()->descr().type() == MapObjectType::WAREHOUSE &&
+	    fcoords.field->get_immovable()->get_owner() == get_owner()) {
+		Warehouse& wh = dynamic_cast<Warehouse&>(*fcoords.field->get_immovable());
+		if (wh.descr().get_isport()) {
+			// A port has been built. Our work here is done.
+			pop_task(game);
+			set_location(&wh);
+
+			if (get_position().field->get_immovable() == &wh) {
+				molog(game.get_gametime(), "[naval_invasion] Entering port\n");
+				wh.incorporate_worker(game, this);
+				return;
+			}
+
+			molog(game.get_gametime(), "[naval_invasion] Heading to port\n");
+			return start_task_return(game, false);
+		}
 	}
 
 	if (get_position() == state.coords) {
