@@ -1030,7 +1030,11 @@ void Soldier::attack_update(Game& game, State& state) {
 				    ((location == nullptr) ||
 				     location->base_flag().get_position() != newsite->base_flag().get_position())) {
 					molog(game.get_gametime(), "[attack] enemy belongs to us now, move in\n");
-					pop_task(game);
+
+					// Remain at the conquered site.
+					reset_tasks(game);
+					start_task_buildingwork(game);
+
 					set_location(newsite);
 					newsite->update_soldier_request();
 					return schedule_act(game, Duration(10));
@@ -1692,6 +1696,10 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	}
 
 	if (get_position() == state.coords) {
+		if (current_health_ < get_max_health()) {  // Stationed soldiers heal very slowly.
+			constexpr unsigned kStationaryHealPerSecond = 10;
+			heal(kStationaryHealPerSecond);
+		}
 		return start_task_idle(game, descr().get_animation("idle", this), 1000);
 	}
 
