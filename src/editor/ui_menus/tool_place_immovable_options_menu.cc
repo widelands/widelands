@@ -33,9 +33,9 @@ namespace {
 UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
                                         LuaInterface* lua,
                                         const Widelands::ImmovableDescr& immovable_descr) {
-      const Image* pic = immovable_descr.representative_image();
+	const Image* pic = immovable_descr.representative_image();
 
-   std::string tooltip;
+	std::string tooltip;
 
 	// Get information about preferred terrains
 	if (immovable_descr.has_terrain_affinity()) {
@@ -43,21 +43,22 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 		cr->push_arg(immovable_descr.name());
 		cr->resume();
-		tooltip = format(_("%1$s %2$s"), immovable_descr.descname(), cr->pop_table()->get_string("text"));
+		tooltip =
+		   format(_("%1$s %2$s"), immovable_descr.descname(), cr->pop_table()->get_string("text"));
 	} else {
 		switch (immovable_descr.get_size()) {
 		case Widelands::BaseImmovable::NONE:
-				tooltip = format(_("%1$s (removable by e.g. placing roads)"), immovable_descr.descname());
-				break;
+			tooltip = format(_("%1$s (removable by e.g. placing roads)"), immovable_descr.descname());
+			break;
 		case Widelands::BaseImmovable::SMALL:
-				tooltip = format(_("%1$s (needs a small building plot)"), immovable_descr.descname());
-				break;
+			tooltip = format(_("%1$s (needs a small building plot)"), immovable_descr.descname());
+			break;
 		case Widelands::BaseImmovable::MEDIUM:
-				tooltip = format(_("%1$s (needs a medium building plot)"), immovable_descr.descname());
-				break;
+			tooltip = format(_("%1$s (needs a medium building plot)"), immovable_descr.descname());
+			break;
 		case Widelands::BaseImmovable::BIG:
-				tooltip = format(_("%1$s (needs a big building plot)"), immovable_descr.descname());
-				break;
+			tooltip = format(_("%1$s (needs a big building plot)"), immovable_descr.descname());
+			break;
 		}
 	}
 
