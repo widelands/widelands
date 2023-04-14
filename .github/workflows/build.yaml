@@ -227,6 +227,7 @@ jobs:
       VCPKG_ROOT: C:\vcpkg
       VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg/bincache
       VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
+      VCPKG_DISABLE_COMPILER_TRACKING: TRUE
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -267,7 +268,7 @@ jobs:
       VCPKG_ROOT: C:\vcpkg
       VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg/bincache
       VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
-
+      VCPKG_DISABLE_COMPILER_TRACKING: TRUE
     steps:
     - name: Checkout
       uses: actions/checkout@v3
