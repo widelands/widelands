@@ -46,19 +46,28 @@ public:
 	   const Widelands::DescriptionMaintainer<DescriptionType>& descriptions,
 	   std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
 	   std::function<void()> select_correct_tool,
-	   ToolType* tool);
+	   ToolType* tool,
+	   std::map<int32_t, std::string> descname_overrides = {});
 
 	// Updates selection to match the tool settings
 	void update_selection();
+
+	UI::TabPanel& tabs() {
+		return tab_panel_;
+	}
+
+	// Update the label with the currently selected object names.
+	void update_label();
+	void set_descname_override(int32_t index, std::string name) {
+		descname_overrides_.emplace(index, name);
+	}
 
 private:
 	// Called when an item was selected.
 	void selected(int32_t, bool);
 
-	// Update the label with the currently selected object names.
-	void update_label();
-
 	const Widelands::DescriptionMaintainer<DescriptionType>& descriptions_;
+	std::map<int32_t, std::string> descname_overrides_;
 	std::function<void()> select_correct_tool_;
 	bool protect_against_recursive_select_{false};
 	UI::TabPanel tab_panel_;
@@ -75,9 +84,11 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
    const std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)>
       create_checkbox,
    const std::function<void()> select_correct_tool,
-   ToolType* const tool)
+   ToolType* const tool,
+   std::map<int32_t, std::string> descname_overrides)
    : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      descriptions_(descriptions),
+     descname_overrides_(descname_overrides),
      select_correct_tool_(select_correct_tool),
 
      tab_panel_(this, UI::TabPanelStyle::kWuiLight),
@@ -140,9 +151,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 		checkboxes_[n]->set_state(true);
 	} else {
 		if (!multiselect) {
-			for (uint32_t i = 0; tool_->get_nr_enabled(); ++i) {
-				tool_->enable(i, false);
-			}
+			tool_->disable_all();
 			//  disable all checkboxes
 			protect_against_recursive_select_ = true;
 			const int32_t size = checkboxes_.size();
@@ -165,15 +174,12 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 	current_selection_names_.set_size(tab_panel_.get_inner_w(), 20);
 	std::string buf;
 	constexpr int max_string_size = 100;
-	int j = tool_->get_nr_enabled();
-	for (int i = 0; (j != 0) && buf.size() < max_string_size; ++i) {
-		if (tool_->is_enabled(i)) {
-			if (j < tool_->get_nr_enabled()) {
-				buf += " • ";
-			}
-			buf += descriptions_.get(i).descname();
-			--j;
+	for (int index : tool_->get_enabled()) {
+		if (!buf.empty()) {
+			buf += " • ";
 		}
+		const auto it = descname_overrides_.find(index);
+		buf += it != descname_overrides_.end() ? it->second : descriptions_.get(index).descname();
 	}
 	if (buf.size() > max_string_size) {
 		/** TRANSLATORS: %s are the currently selected items in an editor tool */
