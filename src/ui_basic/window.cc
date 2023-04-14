@@ -305,10 +305,10 @@ void Window::move_inside_parent() {
 	if (Panel* const parent = get_parent()) {
 		const bool parent_is_main = parent->get_parent() == nullptr;
 		const bool toolbar_at_bottom = main_toolbar_at_bottom();
-		const int32_t toolbar_bottom_h = (parent_is_main && toolbar_at_bottom) ?
-		                                  main_toolbar_button_size() : 0;
-		const int32_t toolbar_top_h = (parent_is_main && !toolbar_at_bottom) ?
-		                               main_toolbar_button_size() : 0;
+		const int32_t toolbar_bottom_h =
+		   (parent_is_main && toolbar_at_bottom) ? main_toolbar_button_size() : 0;
+		const int32_t toolbar_top_h =
+		   (parent_is_main && !toolbar_at_bottom) ? main_toolbar_button_size() : 0;
 		const int32_t ph = parent->get_inner_h() - toolbar_top_h - toolbar_bottom_h;
 
 		int32_t px = get_x();
