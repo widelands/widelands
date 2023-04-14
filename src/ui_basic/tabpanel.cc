@@ -286,8 +286,9 @@ void TabPanel::update_desired_size() {
 uint32_t TabPanel::add(const std::string& name,
                        const std::string& title,
                        Panel* const panel,
-                       const std::string& tooltip_text) {
-	return add_tab(name, title, nullptr, tooltip_text, panel);
+                       const std::string& tooltip_text,
+                       int index) {
+	return add_tab(name, title, nullptr, tooltip_text, panel, index);
 }
 
 /**
@@ -296,8 +297,9 @@ uint32_t TabPanel::add(const std::string& name,
 uint32_t TabPanel::add(const std::string& name,
                        const Image* pic,
                        Panel* const panel,
-                       const std::string& tooltip_text) {
-	return add_tab(name, "", pic, tooltip_text, panel);
+                       const std::string& tooltip_text,
+                       int index) {
+	return add_tab(name, "", pic, tooltip_text, panel, index);
 }
 
 /** Common adding function for textual and pictorial tabs. */
@@ -305,16 +307,26 @@ uint32_t TabPanel::add_tab(const std::string& name,
                            const std::string& title,
                            const Image* pic,
                            const std::string& tooltip_text,
-                           Panel* panel) {
+                           Panel* panel,
+                           int index) {
 	assert(panel);
 	assert(panel->get_parent() == this);
 
-	size_t id = tabs_.size();
+	const size_t id = index < 0 ? tabs_.size() : index;
+	if (active_ >= id && !tabs_.empty()) {
+		++active_;
+	}
 	int32_t x = id > 0 ? tabs_[id - 1]->get_x() + tabs_[id - 1]->get_w() : 0;
-	tabs_.push_back(
+	tabs_.insert(
+	   tabs_.begin() + id,
 	   new Tab(this, panel_style_, id, x,
 	           tab_style_ == TabPanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel,
 	           name, title, pic, tooltip_text, panel));
+	const int tabw = tabs_.at(id)->get_w();
+	for (size_t i = id + 1; i < tabs_.size(); ++i) {
+		Tab* t = tabs_.at(i);
+		t->set_pos(Vector2i(t->get_x() + tabw, t->get_y()));
+	}
 
 	// Add a margin if there is a border
 	if (tab_style_ == UI::TabPanelStyle::kFsMenu) {
