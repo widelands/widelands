@@ -40,6 +40,8 @@ enum class WindowID {
 	ToolHistory,
 };
 
+constexpr int32_t kAutoTreesIndex = std::numeric_limits<uint16_t>::max() - 4;
+
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
  * modify height, place immovable, place critter, place building. A Tool only

@@ -105,7 +105,8 @@ struct TabPanel : public Panel {
 	uint32_t add(const std::string& name,
 	             const std::string& title,
 	             Panel* panel,
-	             const std::string& tooltip = std::string());
+	             const std::string& tooltip = std::string(),
+	             int index = -1);
 
 	/** Add pictorial tab
 	 * Text conventions: Sentence case for the 'tooltip'
@@ -113,7 +114,8 @@ struct TabPanel : public Panel {
 	uint32_t add(const std::string& name,
 	             const Image* pic,
 	             Panel* panel,
-	             const std::string& tooltip = std::string());
+	             const std::string& tooltip = std::string(),
+	             int index = -1);
 
 	using TabList = std::vector<Tab*>;
 
@@ -146,7 +148,8 @@ private:
 	                 const std::string& title,
 	                 const Image* pic,
 	                 const std::string& tooltip,
-	                 Panel* panel);
+	                 Panel* panel,
+	                 int index);
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
