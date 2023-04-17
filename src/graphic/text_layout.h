@@ -21,12 +21,16 @@
 
 #include <memory>
 
+#include <SDL.h>
+
 #include "graphic/align.h"
 #include "graphic/color.h"
 #include "graphic/styles/font_style.h"
 #include "graphic/styles/panel_styles.h"
 #include "graphic/styles/paragraph_style.h"
 #include "graphic/text/rendered_text.h"
+
+#define HAS_PRIMARY_SELECTION_BUFFER SDL_VERSION_ATLEAST(2, 26, 0)
 
 /**
  * Returns the exact width of the text rendered as editorfont for the given font size.
