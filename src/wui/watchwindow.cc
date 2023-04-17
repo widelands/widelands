@@ -152,7 +152,7 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 	}
 
 	view.tracking = nullptr;
-	view.view = map_view_.view();
+	view.view = map_view_.get_centered_view();
 	last_visit_ = game().get_gametime();
 
 	views_.push_back(view);
@@ -175,7 +175,7 @@ void WatchWindow::next_view() {
 // Saves the coordinates of a view if it was already shown (and possibly moved)
 void WatchWindow::save_coords() {
 	auto& view = views_[cur_index_];
-	view.view = map_view_.view();
+	view.view = map_view_.get_centered_view();
 }
 
 // Enables/Disables buttons for views_
@@ -203,7 +203,7 @@ void WatchWindow::set_current_view(uint8_t idx, bool save_previous) {
 		view_btns_[idx]->set_perm_pressed(true);
 	}
 	cur_index_ = idx;
-	map_view_.set_view(views_[cur_index_].view, MapView::Transition::Jump);
+	map_view_.set_centered_view(views_[cur_index_].view, MapView::Transition::Jump);
 }
 
 WatchWindow::~WatchWindow() {
