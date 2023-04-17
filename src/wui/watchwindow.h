@@ -19,9 +19,11 @@
 #ifndef WL_WUI_WATCHWINDOW_H
 #define WL_WUI_WATCHWINDOW_H
 
+#include <string>
+
 #include "logic/widelands_geometry.h"
 #include "ui_basic/button.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 #include "wui/mapview.h"
 
 class InteractiveGameBase;
@@ -29,8 +31,10 @@ namespace Widelands {
 class Game;
 }  // namespace Widelands
 
-struct WatchWindow : public UI::Window {
+struct WatchWindow : public UI::UniqueWindow {
 	WatchWindow(InteractiveGameBase& parent,
+	            const std::string& name,
+	            uint16_t id,
 	            int32_t x,
 	            int32_t y,
 	            uint32_t w,
@@ -49,8 +53,27 @@ struct WatchWindow : public UI::Window {
 	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
 	static UI::Window& load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader&);
 
+	bool handle_key(bool down, SDL_Keysym code) override {
+		return map_view_.handle_key(down, code);
+	}
+
 private:
 	static constexpr size_t kViews = 5;
+
+	// Specialization of MapView
+	class WatchWindowMapView : public MapView {
+	public:
+		WatchWindowMapView(WatchWindow* parent, const Widelands::Map& map);
+		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+		bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+		bool
+		handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+
+	private:
+		WatchWindow* parent_window_;
+		bool view_moved_{false};
+		uint32_t dragging_start_time_{0};
+	};
 
 	// Holds information for a view
 	struct View {
@@ -74,12 +97,13 @@ private:
 	void set_current_view(uint8_t idx, bool save_previous = true);
 
 	InteractiveGameBase& parent_;
-	MapView map_view_;
+	WatchWindowMapView map_view_;
 	Time last_visit_;
 	bool single_window_;
 	uint8_t cur_index_{0U};
 	UI::Button* view_btns_[kViews];
 	std::vector<WatchWindow::View> views_;
+	uint16_t id_;
 };
 
 WatchWindow* show_watch_window(InteractiveGameBase&, const Widelands::Coords&);
