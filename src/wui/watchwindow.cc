@@ -352,7 +352,13 @@ bool WatchWindow::WatchWindowMapView::handle_mousepress(uint8_t btn, int32_t x, 
 		view_moved_ = false;
 		dragging_start_time_ = SDL_GetTicks();
 	}
-	return MapView::handle_mousepress(btn, x, y);
+	MapView::handle_mousepress(btn, x, y);
+
+	// MapView::handle_mousepress() would allow the click to fall through to the watch window, but
+	// we don't want that, because opening a field action in it warps the mouse to the fastclick
+	// button, and the watch window would interpret the resulting mousemove event as dragging and
+	// jump with the mouse pointer.
+	return true;
 }
 bool WatchWindow::WatchWindowMapView::handle_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_RIGHT && is_dragging()) {
