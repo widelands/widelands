@@ -94,8 +94,8 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 				quicknav.landmarks().resize(no_of_landmarks);
 
 				// TODO(tothxa): Only needed for savegame compatibility code for v1.1 below
-				const Vector2f
-				viewpoint_offset(ibase->map_view()->get_w() / 2.f, ibase->map_view()->get_h() / 2.f);
+				const Vector2f viewpoint_offset(
+				   ibase->map_view()->get_w() / 2.f, ibase->map_view()->get_h() / 2.f);
 
 				for (size_t i = 0; i < no_of_landmarks; ++i) {
 					uint8_t set = fr.unsigned_8();
@@ -107,7 +107,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 						// Reference point was top left up to v1.1, is center starting with v1.2.
 						// The landmarks are shifted if the window size is different between saving and
 						// restoring. (same as pre v1.2 behavior)
-					   view.viewpoint =
+						view.viewpoint =
 						   MapviewPixelFunctions::panel_to_map(view.viewpoint, zoom, viewpoint_offset);
 					}
 					if (set > 0) {
