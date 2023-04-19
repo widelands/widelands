@@ -215,7 +215,7 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 	PartiallyFinishedBuilding::init(egbase);
 
 	const std::map<DescriptionIndex, uint8_t>* buildcost = nullptr;
-	if (!(old_buildings_.empty() || building_->is_buildable())) {
+	if (!old_buildings_.empty()) {
 		// Enhancement and/or built over immovable
 		for (auto it = old_buildings_.end(); it != old_buildings_.begin();) {
 			--it;
