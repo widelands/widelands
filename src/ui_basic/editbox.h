@@ -102,9 +102,10 @@ private:
 	void select_until(uint32_t end) const;
 	uint32_t next_char(uint32_t cursor) const;
 	uint32_t prev_char(uint32_t cursor) const;
-	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
+	void calculate_selection_boundaries(uint32_t& start, uint32_t& end) const;
 	void delete_selected_text();
 	void copy_selected_text();
+	void update_primary_selection_buffer() const;
 	void set_caret_to_cursor_pos(int32_t cursor_pos_x);
 	int calculate_text_width(int pos) const;
 	int approximate_cursor(int32_t cursor_pos_x, int approx_caret_pos) const;

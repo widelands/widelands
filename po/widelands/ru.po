@@ -12,7 +12,7 @@
 # GunChleoc, 2016,2018
 # George Matsune <georg29387878@gmail.com>, 2017
 # Viktor Skachkov <awsswa59@gmail.com>, 2018-2020
-# Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022
+# Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2023
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # Владимир Шевцов, 2022
 # bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
@@ -24,9 +24,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-04-07 02:40+0000\n"
+"POT-Creation-Date: 2023-04-16 02:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -382,7 +382,7 @@ msgstr "Параметры карты"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:242
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Опубликовать карту онлайн..."
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:246
@@ -425,7 +425,7 @@ msgstr "Изменить ландшафт"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:318
-#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:61
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:77
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Объекты"
@@ -692,7 +692,7 @@ msgstr "Загрузка мира..."
 
 #: ../../src/editor/editorinteractive.cc:1387
 msgid "Publish Map"
-msgstr ""
+msgstr "Опубликовать карту"
 
 #: ../../src/editor/editorinteractive.cc:1388
 #, c-format
@@ -704,19 +704,19 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr ""
+msgstr "Вы уверены что хотите опубликовать эту карту?\n\nНазвание: %1$s\nВнутреннее имя: %2$s\nАвтор: %3$s\nОписание: %4$s\nСовет: %5$s\n"
 
 #: ../../src/editor/editorinteractive.cc:1412
 msgid "Login Error"
-msgstr ""
+msgstr "Ошибка авторизации"
 
 #: ../../src/editor/editorinteractive.cc:1417
 msgid "Uploading Add-On…"
-msgstr ""
+msgstr "Выгрузка дополнения..."
 
 #: ../../src/editor/editorinteractive.cc:1418
 msgid "Saving map…"
-msgstr ""
+msgstr "Сохранение карты..."
 
 #: ../../src/editor/editorinteractive.cc:1437
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:310
@@ -726,15 +726,15 @@ msgstr "Ошибка сохранения карты!"
 
 #: ../../src/editor/editorinteractive.cc:1443
 msgid "Packaging add-on…"
-msgstr ""
+msgstr "Упаковка дополнения..."
 
 #: ../../src/editor/editorinteractive.cc:1493
 msgid "Add-On Generation Error"
-msgstr ""
+msgstr "Ошибка генератора дополнений"
 
 #: ../../src/editor/editorinteractive.cc:1494
 msgid "The add-on could not be written to the disk."
-msgstr ""
+msgstr "Дополнение нельзя записать на диск."
 
 #: ../../src/editor/editorinteractive.cc:1501
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
@@ -743,15 +743,15 @@ msgstr "Загружается"
 
 #: ../../src/editor/editorinteractive.cc:1507
 msgid "Upload Error"
-msgstr ""
+msgstr "Ошибка выгрузки"
 
 #: ../../src/editor/editorinteractive.cc:1529
 msgid "Success"
-msgstr ""
+msgstr "Успешно"
 
 #: ../../src/editor/editorinteractive.cc:1530
 msgid "The add-on was uploaded successfully."
-msgstr ""
+msgstr "Дополнение успешно выгружено."
 
 #: ../../src/editor/map_generator.cc:754
 msgid "Random Player"
@@ -785,8 +785,14 @@ msgstr "Уровень шума: %1$d–%2$d"
 msgid "Critter: %1$s"
 msgstr "Существо: %1$s"
 
+#: ../../src/editor/tools/place_immovable_tool.cc:131
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:92
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:97
+msgid "Automatic Trees"
+msgstr ""
+
 #. * TRANSLATORS: An entry in the tool history list.
-#: ../../src/editor/tools/place_immovable_tool.cc:110
+#: ../../src/editor/tools/place_immovable_tool.cc:138
 #, c-format
 msgid "Immovable: %1$s"
 msgstr "Статичный объект: %1$s"
@@ -798,18 +804,18 @@ msgid "Terrain: %1$s"
 msgstr "Ландшафт: %1$s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:180
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:186
 #, c-format
 msgid "Current: %s …"
 msgstr "Выбрано: %s …"
 
 #. * TRANSLATORS: Help text in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:183
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:189
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
 msgstr "Щелкните для выбора элемента. Используйте клавишу Ctrl для выбора нескольких элементов."
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:186
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:192
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:156
 #, c-format
 msgid "Current: %s"
@@ -1616,6 +1622,43 @@ msgstr "Щелкните на карту, чтобы установить выс
 msgid "Fixed height"
 msgstr "Фиксированная высота"
 
+#. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
+#. italics)
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:47
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:176
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:359 ../../src/wui/stock_menu.cc:36
+#, c-format
+msgid "%1$s %2$s"
+msgstr "%1$s %2$s"
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
+#, c-format
+msgid "%1$s (removable by e.g. placing roads)"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:54
+#, c-format
+msgid "%1$s (needs a small building plot)"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:57
+#, c-format
+msgid "%1$s (needs a medium building plot)"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:60
+#, c-format
+msgid "%1$s (needs a big building plot)"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:98
+msgid "Automatically place the trees which grow best on the terrain"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:114
+msgid "Automatic Immovable Placement"
+msgstr ""
+
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:34
 msgid "Resize"
 msgstr "Масштабировать"
@@ -1640,7 +1683,7 @@ msgid "%1%: %2%"
 msgstr "%1%: %2%"
 
 #. * TRANSLATORS: Help tooltip in tool history window
-#: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:108
+#: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:113
 msgid ""
 "Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item."
 msgstr "Щелчок мыши чтобы восстановить, Shift + щелчок мыши чтобы удалить, and Ctrl + щелчок мышичтобы закрепить элемент."
@@ -4977,14 +5020,6 @@ msgstr "Включено"
 msgid "%1$s+%2$u"
 msgstr "%1$s+%2$u"
 
-#. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
-#. italics)
-#: ../../src/ui_fsmenu/addons/rows_ui.cc:176
-#: ../../src/ui_fsmenu/addons/rows_ui.cc:359 ../../src/wui/stock_menu.cc:36
-#, c-format
-msgid "%1$s %2$s"
-msgstr "%1$s %2$s"
-
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:180
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:363
 #: ../../src/wui/constructionsitewindow.cc:133
@@ -5348,7 +5383,7 @@ msgstr "Мирный режим"
 
 #: ../../src/ui_fsmenu/launch_game.cc:97
 msgid "No fog of war"
-msgstr ""
+msgstr "Нет тумана войны"
 
 #: ../../src/ui_fsmenu/launch_game.cc:101
 msgid "Custom starting positions"
@@ -5402,15 +5437,15 @@ msgstr "Разрешить пользователям самим выбират�
 
 #: ../../src/ui_fsmenu/launch_game.cc:270
 msgid "Player vision is set by the scenario"
-msgstr ""
+msgstr "Установленная в сценарии для игрока видимость карты"
 
 #: ../../src/ui_fsmenu/launch_game.cc:272
 msgid "Player vision is set by the saved game"
-msgstr ""
+msgstr "Установленная в сохранении для игрока видимость карты"
 
 #: ../../src/ui_fsmenu/launch_game.cc:274
 msgid "Give all players permanent vision of the entire map"
-msgstr ""
+msgstr "Сделать карту видимой для всех игроков"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_game.cc:282
@@ -6081,7 +6116,7 @@ msgstr "Наблюдатель"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:184
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:49
 msgid "Player Number"
-msgstr ""
+msgstr "Игрок номер"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:202
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:356
@@ -6413,7 +6448,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the Tribes and Script categories are disabled in "
 "random matches."
-msgstr ""
+msgstr "Генератор случайных карт все еще находится в стадии бета-тестирования. Карты, которые он генерирует, обычно – но не всегда – годятся для игры. Мореплавание и артефакты не поддерживаются. Дополнения категорий \"Племена\" и \"Скрипты\" отключаются при случайных совпадениях."
 
 #: ../../src/ui_fsmenu/random_game.cc:126
 msgid "Map Generation Error"
@@ -6655,7 +6690,7 @@ msgstr "Задан неизвестный параметр командной с
 
 #: ../../src/wlapplication.cc:1619
 msgid "Incompatible"
-msgstr ""
+msgstr "Несовместимо"
 
 #: ../../src/wlapplication.cc:1656
 msgid "Game ended unexpectedly"
@@ -8055,7 +8090,7 @@ msgstr "Отменить дорогу"
 
 #: ../../src/wui/fieldaction.cc:652
 msgid "Go to road"
-msgstr ""
+msgstr "Идти к дороге"
 
 #: ../../src/wui/fieldaction.cc:660
 msgid "Cancel road and start building waterway"
@@ -8071,7 +8106,7 @@ msgstr "Отменить переправу"
 
 #: ../../src/wui/fieldaction.cc:678
 msgid "Go to waterway"
-msgstr ""
+msgstr "Идти к переправе"
 
 #: ../../src/wui/fieldaction.cc:681
 msgid "Cancel waterway and start building road"

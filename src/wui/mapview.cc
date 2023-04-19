@@ -500,7 +500,7 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		const auto node_and_triangle = track_sel(Vector2i(x, y));
 		field_clicked(node_and_triangle);
 		// Do not return true, because we want to give our parent a chance to
-		// also handle the click.
+		// also handle the click. Painting mode in the editor needs it.
 	}
 	if (btn == SDL_BUTTON_RIGHT) {
 		jump();
@@ -584,8 +584,8 @@ bool MapView::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 		if (is_animating()) {
 			return true;
 		}
-		const uint16_t scroll_distance_y = g_gr->get_yres() / 20;
-		const uint16_t scroll_distance_x = g_gr->get_xres() / 20;
+		const uint16_t scroll_distance_y = get_h() / 20;
+		const uint16_t scroll_distance_x = get_w() / 20;
 		pan_by(Vector2i(change_2d.x * scroll_distance_x, change_2d.y * scroll_distance_y),
 		       Transition::Jump);
 		return true;
@@ -695,8 +695,8 @@ bool MapView::scroll_map() {
 #undef kNP
 
 	   // set the scrolling distance
-	   const uint16_t xres = g_gr->get_xres();
-	const uint16_t yres = g_gr->get_yres();
+	   const uint16_t xres = get_w();
+	const uint16_t yres = get_h();
 
 	uint16_t scroll_distance_x = xres / 8;
 	uint16_t scroll_distance_y = yres / 8;
