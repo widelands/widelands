@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-04-07 02:40+0000\n"
+"POT-Creation-Date: 2023-04-16 02:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2023\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -411,7 +411,7 @@ msgstr "Canvia el terreny del mapa"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:318
-#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:61
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:77
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Inamovibles"
@@ -771,8 +771,14 @@ msgstr "Alçada del soroll: %1$d–%2$d"
 msgid "Critter: %1$s"
 msgstr "Nivell: %1$s"
 
+#: ../../src/editor/tools/place_immovable_tool.cc:131
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:92
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:97
+msgid "Automatic Trees"
+msgstr "Arbres automàtics"
+
 #. * TRANSLATORS: An entry in the tool history list.
-#: ../../src/editor/tools/place_immovable_tool.cc:110
+#: ../../src/editor/tools/place_immovable_tool.cc:138
 #, c-format
 msgid "Immovable: %1$s"
 msgstr "Inamovible: %1$s"
@@ -784,18 +790,18 @@ msgid "Terrain: %1$s"
 msgstr "Terreny: %1$s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:180
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:186
 #, c-format
 msgid "Current: %s …"
 msgstr "Actual: %s…"
 
 #. * TRANSLATORS: Help text in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:183
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:189
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
 msgstr "Cliqueu per seleccionar-ne un. Empreu la tecla Ctrl per fer una selecció múltiple."
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:186
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:192
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:156
 #, c-format
 msgid "Current: %s"
@@ -1600,6 +1606,43 @@ msgstr "Cliqueu al mapa per establir l’alçada del terreny a un valor aleatori
 msgid "Fixed height"
 msgstr "Alçada fixada"
 
+#. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
+#. italics)
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:47
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:176
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:359 ../../src/wui/stock_menu.cc:36
+#, c-format
+msgid "%1$s %2$s"
+msgstr "%1$s %2$s"
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
+#, c-format
+msgid "%1$s (removable by e.g. placing roads)"
+msgstr "%1$s (es pot treure, com per exemple quan s'hi posen camins)"
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:54
+#, c-format
+msgid "%1$s (needs a small building plot)"
+msgstr "%1$s (necessita un lloc de construcció petit)"
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:57
+#, c-format
+msgid "%1$s (needs a medium building plot)"
+msgstr "%1$s (necessita un lloc de construcció mitjà)"
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:60
+#, c-format
+msgid "%1$s (needs a big building plot)"
+msgstr "%1$s (necessita un lloc de construcció gran)"
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:98
+msgid "Automatically place the trees which grow best on the terrain"
+msgstr "Situa automàticament els arbres que creixen millor al terreny."
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:114
+msgid "Automatic Immovable Placement"
+msgstr "Posicionament automàtic d'inamovibles"
+
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:34
 msgid "Resize"
 msgstr "Redimensiona"
@@ -1624,7 +1667,7 @@ msgid "%1%: %2%"
 msgstr "%1%: %2%"
 
 #. * TRANSLATORS: Help tooltip in tool history window
-#: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:108
+#: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:113
 msgid ""
 "Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item."
 msgstr "Feu clic per restaurar-ho, Maj+clic per esborrar i Ctrl+clic per fixar un element."
@@ -4912,14 +4955,6 @@ msgstr "Activa"
 #, c-format
 msgid "%1$s+%2$u"
 msgstr "%1$s+%2$u"
-
-#. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
-#. italics)
-#: ../../src/ui_fsmenu/addons/rows_ui.cc:176
-#: ../../src/ui_fsmenu/addons/rows_ui.cc:359 ../../src/wui/stock_menu.cc:36
-#, c-format
-msgid "%1$s %2$s"
-msgstr "%1$s %2$s"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:180
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:363

@@ -511,12 +511,8 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		stop_dragging();
 		const auto node_and_triangle = track_sel(Vector2i(x, y));
 		field_clicked(node_and_triangle);
-		// Old comment said to not return true to give the parent a chance to also handle the click,
-		// but its only use was to allow dragging watch windows around by the content. That however
-		// resulted in the watch windows jumping around on clicking, because the mouse warp to the
-		// fastclick button of the opened field action window creates a mousemove event, that the
-		// watch window interpreted as dragging.
-		return true;
+		// Do not return true, because we want to give our parent a chance to
+		// also handle the click. Painting mode in the editor needs it.
 	}
 	if (btn == SDL_BUTTON_RIGHT) {
 		jump();
