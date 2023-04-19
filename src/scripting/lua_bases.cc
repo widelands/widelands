@@ -906,8 +906,7 @@ int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made c
 		   descriptions.get_building_descr(building_index);
 
 		if (!player.tribe().has_building(building_index) &&
-		    building_description->type() !=
-		       Widelands::MapObjectType::MILITARYSITE) {
+		    building_description->type() != Widelands::MapObjectType::MILITARYSITE) {
 			report_error(L, "Building: '%s' is not available for Player %d's tribe '%s'", name.c_str(),
 			             player.player_number(), player.tribe().name().c_str());
 		}
