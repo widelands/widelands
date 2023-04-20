@@ -1793,18 +1793,19 @@ bool Map::is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>
 	return true;
 }
 
+static constexpr WalkingDir kPortSpaceWalkingDirs[16] = {WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW, WALK_W,
+                                         WALK_W,  WALK_W,  WALK_SW, WALK_SW, WALK_SW, WALK_SE,
+                                         WALK_SE, WALK_E,  WALK_E,  WALK_E};
+
 /**
  * Returns a list of portdock fields (if any) that a port built at \p c should have.
  */
 std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
-	static const WalkingDir cycledirs[16] = {WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW, WALK_W,
-	                                         WALK_W,  WALK_W,  WALK_SW, WALK_SW, WALK_SW, WALK_SE,
-	                                         WALK_SE, WALK_E,  WALK_E,  WALK_E};
 	const FCoords start = br_n(br_n(get_fcoords(c)));
 	const Widelands::PlayerNumber owner = start.field->get_owned_by();
 	FCoords f = start;
 	std::vector<Coords> portdock;
-	for (uint32_t i = 0; i < 16; ++i) {
+	for (WalkingDir next_direction : kPortSpaceWalkingDirs) {
 		if (force) {
 			if ((f.field->maxcaps() & MOVECAPS_SWIM) != 0) {
 				return {f};
@@ -1838,12 +1839,31 @@ std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
 			}
 		}
 
-		if (i < 15) {
-			f = get_neighbour(f, cycledirs[i]);
-		}
+		f = get_neighbour(f, next_direction);
 	}
 
 	return portdock;
+}
+
+/**
+ * Finds a port space field where a port, if built, could have the provided coords in its portdock.
+ * Returns Coords::null() if no such port space exists.
+ */
+Coords Map::find_portspace_for_dockpoint(Coords dockpoint) const {
+	if (port_spaces_.empty()) {
+		return Coords::null();
+	}
+
+	dockpoint = tl_n(tl_n(dockpoint));
+	for (WalkingDir next_direction : kPortSpaceWalkingDirs) {
+		if (is_port_space(dockpoint)) {
+			return dockpoint;
+		}
+
+		dockpoint = get_neighbour(dockpoint, get_backward_dir(next_direction));
+	}
+
+	return Coords::null();
 }
 
 bool Map::is_port_space_allowed(const EditorGameBase& egbase, const FCoords& fc) const {

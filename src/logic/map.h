@@ -461,6 +461,7 @@ public:
 
 	void get_neighbour(const Coords&, Direction dir, Coords*) const;
 	void get_neighbour(const FCoords&, Direction dir, FCoords*) const;
+	[[nodiscard]] Coords get_neighbour(const Coords&, Direction dir) const;
 	[[nodiscard]] FCoords get_neighbour(const FCoords&, Direction dir) const;
 
 	[[nodiscard]] std::set<Coords> to_set(Area<Coords> area) const;
@@ -580,6 +581,7 @@ public:
 		return port_spaces_;
 	}
 	[[nodiscard]] std::vector<Coords> find_portdock(const Widelands::Coords& c, bool force) const;
+	[[nodiscard]] Coords find_portspace_for_dockpoint(Coords dockpoint) const;
 
 	/// Return true if there are at least 2 port spaces that can be reached from each other by water
 	[[nodiscard]] bool allows_seafaring() const;
@@ -1307,6 +1309,24 @@ inline FCoords Map::br_n(const FCoords& f) const {
 }
 
 inline FCoords Map::get_neighbour(const FCoords& f, const Direction dir) const {
+	switch (dir) {
+	case WALK_NW:
+		return tl_n(f);
+	case WALK_NE:
+		return tr_n(f);
+	case WALK_E:
+		return r_n(f);
+	case WALK_SE:
+		return br_n(f);
+	case WALK_SW:
+		return bl_n(f);
+	case WALK_W:
+		return l_n(f);
+	default:
+		NEVER_HERE();
+	}
+}
+inline Coords Map::get_neighbour(const Coords& f, const Direction dir) const {
 	switch (dir) {
 	case WALK_NW:
 		return tl_n(f);

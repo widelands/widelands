@@ -131,7 +131,7 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 }  // namespace
 
 struct FindBobDefender : public FindBob {
-	explicit FindBobDefender(const PortDock& pd) : dock_(pd) {
+	explicit FindBobDefender(const Player& p) : player_(p) {
 	}
 	bool accept(Bob* b) const override {
 		if (b->descr().type() != MapObjectType::SHIP) {
@@ -139,14 +139,14 @@ struct FindBobDefender : public FindBob {
 		}
 		const Ship& s = dynamic_cast<const Ship&>(*b);
 		return s.get_ship_type() == ShipType::kWarship &&
-		       (s.owner().player_number() == dock_.owner().player_number() ||
-		        (dock_.owner().team_number() > 0 &&
-		         s.owner().team_number() == dock_.owner().team_number())) &&
+		       (s.owner().player_number() == player_.player_number() ||
+		        (player_.team_number() > 0 &&
+		         s.owner().team_number() == player_.team_number())) &&
 		       !s.has_battle();
 	}
 
 private:
-	const PortDock& dock_;
+	const Player& player_;
 };
 
 struct FindNodeAttackTarget {
@@ -157,11 +157,14 @@ struct FindNodeAttackTarget {
 			return false;
 		}
 
-		if (ship_.get_nritems() > 0 && f.field->get_immovable() != nullptr &&
-		    f.field->get_immovable()->descr().type() == MapObjectType::PORTDOCK &&
-		    ship_.owner().is_hostile(
-		       dynamic_cast<const PortDock&>(*f.field->get_immovable()).owner())) {
-			return true;
+		if (ship_.get_nritems() > 0) {
+			Coords portspace = egbase.map().find_portspace_for_dockpoint(f);
+			if (static_cast<bool>(portspace)) {
+				const PlayerNumber owner = egbase.map()[portspace].get_owned_by();
+				if (owner == 0 || ship_.owner().is_hostile(egbase.player(owner))) {
+					return true;
+				}
+			}
 		}
 
 		for (const Bob* b = f.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
@@ -577,8 +580,9 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		// Look for nearby enemy warships and ports we can attack. We prefer the closest
 		// attackable object. Attacking warships takes precedent over attacking ports.
 		// Ports can only be attacked if we have any soldiers on board.
-		const MapObject* old_target = expedition_->attack_target.get(game);
-		MapObject* new_target = nullptr;
+		const Ship* old_target = expedition_->attack_target.get(game);
+		Ship* new_target = nullptr;
+		Coords new_coords = Coords::null();
 		std::vector<Coords> candidates;
 		uint32_t distance = descr().vision_range();
 		map->find_reachable_fields(game, Area<FCoords>(get_position(), distance), &candidates,
@@ -586,38 +590,33 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		for (const Coords& c : candidates) {
 			const uint32_t d = map->calc_distance(get_position(), c);
 			if (d <= distance) {
-				bool found = false;
 				Field& f = (*map)[c];
 				for (Bob* b = f.get_first_bob(); b != nullptr; b = b->get_next_bob()) {
 					if (is_attackable_enemy_warship(*b)) {
-						new_target = b;
-						found = true;
+						new_target = dynamic_cast<Ship*>(b);
 						break;
 					}
 				}
-				if (!found && f.get_immovable() != nullptr &&
-				    f.get_immovable()->descr().type() == MapObjectType::PORTDOCK) {
-					new_target = f.get_immovable();
-					found = true;
-				}
-				assert(found);
+
+				assert(map->is_port_space(f));
+				new_coords = c;
 				distance = d;
 			}
 		}
-		if (new_target != old_target) {
+		if (new_target != old_target || new_coords != expedition_->attack_coords) {
 			expedition_->attack_target = new_target;
-			if (new_target != nullptr) {
+			expedition_->attack_coords = new_coords;
+			if (new_target != nullptr || new_coords != Coords::null()) {
 				set_ship_state_and_notify(
 				   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
-				if (new_target->descr().type() == MapObjectType::SHIP) {
+				if (new_target != nullptr) {
 					send_message(game, _("Enemy Ship"), _("Enemy Ship Spotted"),
 					             _("A warship spotted an enemy ship."),
 					             new_target->descr().icon_filename());
 				} else {
-					send_message(
-					   game, _("Enemy Port"), _("Enemy Port Found"),
-					   _("A warship spotted an enemy port."),
-					   dynamic_cast<PortDock*>(new_target)->get_warehouse()->descr().icon_filename());
+					send_message(game, _("Port Space"), _("Port Space Found"),
+							     _("A warship found a new port build space."),
+					             descr().icon_filename());
 				}
 			}
 		}
@@ -818,7 +817,7 @@ bool Ship::can_be_attacked() const {
 
 bool Ship::can_attack() const {
 	return get_ship_type() == Widelands::ShipType::kWarship && !has_battle() &&
-	       get_attack_target(owner().egbase()) != nullptr;
+	       (static_cast<bool>(get_attack_coords()) || get_attack_target(owner().egbase()) != nullptr);
 }
 
 bool Ship::can_refit(const ShipType type) const {
@@ -933,9 +932,12 @@ void Ship::warship_command(Game& game,
 	}
 
 	case WarshipCommand::kAttack:
-		if (MapObject* target = get_attack_target(game); target != nullptr) {
-			assert(target->descr().type() != MapObjectType::PORTDOCK || !parameters.empty());
-			start_battle(game, Battle(target, parameters, true));
+		if (Ship* target = get_attack_target(game); target != nullptr) {
+			assert(parameters.empty());
+			start_battle(game, Battle(target, Coords::null(), parameters, true));
+		} else if (Coords coords = get_attack_coords(); static_cast<bool>(coords)) {
+			assert(!parameters.empty());
+			start_battle(game, Battle(nullptr, coords, parameters, true));
 		}
 		return;
 	}
@@ -944,8 +946,9 @@ void Ship::warship_command(Game& game,
 }
 
 void Ship::start_battle(Game& game, const Battle new_battle) {
-	MapObject* target = new_battle.opponent.get(game);
-	if (target == nullptr) {
+	Ship* enemy_ship = new_battle.opponent.get(game);
+
+	if (enemy_ship == nullptr && !static_cast<bool>(new_battle.attack_coords)) {
 		return;
 	}
 
@@ -955,13 +958,12 @@ void Ship::start_battle(Game& game, const Battle new_battle) {
 	}
 
 	// Summon someone to the defence
-	if (target->descr().type() == MapObjectType::SHIP) {
-		Ship& enemy_ship = dynamic_cast<Ship&>(*target);
-		enemy_ship.send_message(game, _("Naval Attack"), _("Enemy Ship Attacking"),
+	if (enemy_ship != nullptr) {
+		enemy_ship->send_message(game, _("Naval Attack"), _("Enemy Ship Attacking"),
 		                        format(_("Your ship ‘%s’ is under attack from an enemy warship."),
-		                               enemy_ship.get_shipname()),
+		                               enemy_ship->get_shipname()),
 		                        "images/wui/ship/ship_attack.png");
-		enemy_ship.start_battle(game, Battle(this, {}, false));
+		enemy_ship->start_battle(game, Battle(this, Coords::null(), {}, false));
 	}
 }
 
@@ -983,17 +985,15 @@ constexpr uint32_t kAttackAnimationDuration = 2000;
 
 void Ship::battle_update(Game& game) {
 	Battle& current_battle = battles_.back();
-	MapObject* target = current_battle.opponent.get(game);
-	if (target == nullptr) {
+	Ship* target_ship = current_battle.opponent.get(game);
+	if (target_ship == nullptr && !static_cast<bool>(current_battle.attack_coords)) {
 		battles_.pop_back();
 		start_task_idle(game, descr().main_animation(), 100);
 		return;
 	}
 
-	upcast(Ship, target_ship, target);
-	upcast(PortDock, target_port, target);
-	assert((target_ship == nullptr) ^ (target_port == nullptr));
-	assert(target_port == nullptr || current_battle.is_first);
+	assert((target_ship != nullptr) ^ static_cast<bool>(current_battle.attack_coords));
+	const Map& map = game.map();
 
 	Battle* other_battle = (target_ship == nullptr) ? nullptr : &target_ship->battles_.back();
 	assert(other_battle == nullptr || (other_battle->opponent.get(game) == this &&
@@ -1086,19 +1086,19 @@ void Ship::battle_update(Game& game) {
 			dest = target_ship->get_position();
 		} else {
 			exact_match_required = true;
-			dest = target_port->get_positions(game).back();
+			dest = current_battle.attack_coords;
 		}
 		if (dest == get_position() ||
-		    (!exact_match_required && game.map().calc_distance(get_position(), dest) < 2)) {
+		    (!exact_match_required && map.calc_distance(get_position(), dest) < 2)) {
 			// Already there, start the fight in the next act.
 			set_phase(Battle::Phase::kAttackersTurn);
 			return start_task_idle(game, descr().main_animation(), 100);
 		}
 
 		Path path;
-		if (game.map().findpath(get_position(), dest, 0, path, CheckStepDefault(MOVECAPS_SWIM)) < 0) {
+		if (map.findpath(get_position(), dest, 0, path, CheckStepDefault(MOVECAPS_SWIM)) < 0) {
 			molog(game.get_gametime(), "Could not find a path to opponent %u from %dx%d to %dx%d",
-			      target->serial(), get_position().x, get_position().y, dest.x, dest.y);
+			      target_ship == nullptr ? 0 : target_ship->serial(), get_position().x, get_position().y, dest.x, dest.y);
 			battles_.pop_back();
 			return start_task_idle(game, descr().main_animation(), 100);
 		}
@@ -1118,26 +1118,29 @@ void Ship::battle_update(Game& game) {
 		} else if (current_battle.pending_damage > 0) {
 			// The naval assault was successful. Now unload the soldiers.
 			// From the ship's perspective, the attack was a success.
+
+#if 0  // NOCOM
 			Warehouse& warehouse = *target_port->get_warehouse();
 			warehouse.send_message(game, Message::Type::kWarfareUnderAttack, _("Naval Attack"),
 			                       "images/wui/ship/ship_attack.png", _("Enemy Ship Attacking"),
 			                       _("Your port is under attack from an enemy warship."), false,
 			                       Duration(60 * 1000) /* throttle timeout in milliseconds */,
 			                       5 /* throttle radius */);
+#endif
 
 			/* We can't drop off soldiers directly at the base flag as this would interfere
 			 * with battle code. Drop off at the directly adjacent fields instead.
 			 */
-			std::vector<Coords> suitable_coords;
+			/* std::vector<Coords> suitable_coords;
 			for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 				Coords coords;
-				game.map().get_neighbour(warehouse.base_flag().get_position(), dir, &coords);
-				const Field& f = game.map()[coords];
+				map.get_neighbour(warehouse.base_flag().get_position(), dir, &coords);
+				const Field& f = map[coords];
 				if ((f.nodecaps() & MOVECAPS_WALK) != 0) {
 					suitable_coords.push_back(coords);
 				}
 			}
-			assert(!suitable_coords.empty());
+			assert(!suitable_coords.empty()); */
 
 			assert(!battles_.back().attack_soldier_serials.empty());
 			for (Serial serial : battles_.back().attack_soldier_serials) {
@@ -1156,12 +1159,18 @@ void Ship::battle_update(Game& game) {
 
 				it->set_location(game, nullptr);
 				it->end_shipping(game);
-				worker->set_position(
-				   game, suitable_coords.at(game.logic_rand() % suitable_coords.size()));
+
+				for (;;) {
+					Coords coords = game.random_location(current_battle.attack_coords, 3);
+					if ((map[coords].nodecaps() & MOVECAPS_WALK) != 0U) {
+						worker->set_position(game, coords);
+						break;
+					}
+				}
 
 				worker->reset_tasks(game);
 				dynamic_cast<Soldier&>(*worker).start_task_naval_invasion(
-				   game, warehouse.get_position());
+				   game, current_battle.attack_coords);
 
 				items_.erase(it);
 			}
@@ -1170,23 +1179,30 @@ void Ship::battle_update(Game& game) {
 		} else {
 			// Summon someone to the port's defense, if possible.
 			std::vector<Bob*> defenders;
-			game.map().find_reachable_bobs(
-			   game, Area<FCoords>(get_position(), kPortUnderAttackDefendersSearchRadius), &defenders,
-			   CheckStepDefault(MOVECAPS_SWIM), FindBobDefender(*target_port));
+			const PlayerNumber enemy_pn = map[current_battle.attack_coords].get_owned_by();
+			Player* enemy = enemy_pn == 0 ? nullptr : game.get_player(enemy_pn);
+			if (enemy != nullptr && enemy->is_hostile(owner())) {
+				map.find_reachable_bobs(
+				   game, Area<FCoords>(get_position(), kPortUnderAttackDefendersSearchRadius), &defenders,
+				   CheckStepDefault(MOVECAPS_SWIM), FindBobDefender(*enemy));
+			}
+
 			Bob* nearest = nullptr;
 			uint32_t distance = 0;
 			for (Bob* candidate : defenders) {
-				const uint32_t d = game.map().calc_distance(candidate->get_position(), get_position());
+				const uint32_t d = map.calc_distance(candidate->get_position(), get_position());
 				if (nearest == nullptr || d < distance) {
 					nearest = candidate;
 					distance = d;
 				}
 			}
+
 			if (nearest != nullptr) {
 				// Let the best candidate launch an attack against us. This
 				// suspends the current battle until the new fight is over.
-				dynamic_cast<Ship&>(*nearest).start_battle(game, Battle(this, {}, true));
+				dynamic_cast<Ship&>(*nearest).start_battle(game, Battle(this, Coords::null(), {}, true));
 			}
+
 			// Since ports can't defend themselves on their own, start the next round at once.
 			set_phase(Battle::Phase::kAttackersTurn);
 		}
@@ -1685,6 +1701,7 @@ void Ship::start_task_expedition(Game& game) {
 	expedition_->exploration_start = Coords(0, 0);
 	expedition_->island_explore_direction = IslandExploreDirection::kClockwise;
 	expedition_->attack_target = nullptr;
+	expedition_->attack_coords = Coords::null();
 	expedition_->ware_economy = get_owner()->create_economy(wwWARE);
 	expedition_->worker_economy = get_owner()->create_economy(wwWORKER);
 
@@ -2132,7 +2149,7 @@ Load / Save implementation
 /* Changelog:
  * 12 - v1.1
  * 13 - Added warships and naval warfare.
- * 14 - Added healing and send_message_at_destination_.
+ * 14 - Added healing, send_message_at_destination_, and attack coords.
  */
 constexpr uint8_t kCurrentPacketVersion = 14;
 
@@ -2184,6 +2201,12 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			expedition_->island_explore_direction =
 			   static_cast<IslandExploreDirection>(fr.unsigned_8());
 			expedition_attack_target_serial_ = ((packet_version >= 13) ? fr.unsigned_32() : 0);
+			if (packet_version >= 14) {
+				expedition_->attack_coords.x = fr.signed_16();
+				expedition_->attack_coords.y = fr.signed_16();
+			} else {
+				expedition_->attack_coords = Coords::null();
+			}
 		} break;
 
 		default:
@@ -2194,8 +2217,12 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 		for (uint8_t i = (packet_version >= 13) ? fr.unsigned_8() : 0; i != 0U; --i) {
 			const bool first = fr.unsigned_8() != 0U;
 			battle_serials_.push_back(fr.unsigned_32());
-			battles_.emplace_back(nullptr, std::vector<uint32_t>(), first);
+			battles_.emplace_back(nullptr, Coords::null(), std::vector<uint32_t>(), first);
 			battles_.back().phase = static_cast<Battle::Phase>(fr.unsigned_8());
+			if (packet_version >= 14) {
+				battles_.back().attack_coords.x = fr.signed_16();
+				battles_.back().attack_coords.y = fr.signed_16();
+			}
 			battles_.back().pending_damage = fr.unsigned_32();
 			for (size_t j = fr.unsigned_32(); j > 0U; --j) {
 				battles_.back().attack_soldier_serials.push_back(fr.unsigned_32());
@@ -2242,7 +2269,7 @@ void Ship::Loader::load_pointers() {
 	}
 
 	if (expedition_attack_target_serial_ != 0U) {
-		expedition_->attack_target = &mol().get<MapObject>(expedition_attack_target_serial_);
+		expedition_->attack_target = dynamic_cast<Ship*>(&mol().get<MapObject>(expedition_attack_target_serial_));
 	}
 	for (uint32_t i = 0; i < battle_serials_.size(); ++i) {
 		if (battle_serials_[i] != 0U) {
@@ -2373,12 +2400,16 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		// Whether the exploration is done clockwise or counter clockwise
 		fw.unsigned_8(static_cast<uint8_t>(expedition_->island_explore_direction));
 		fw.unsigned_32(mos.get_object_file_index_or_zero(expedition_->attack_target.get(egbase)));
+		fw.signed_16(expedition_->attack_coords.x);
+		fw.signed_16(expedition_->attack_coords.y);
 	}
 	fw.unsigned_8(battles_.size());
 	for (const Battle& b : battles_) {
 		fw.unsigned_8(b.is_first ? 1 : 0);
 		fw.unsigned_32(mos.get_object_file_index_or_zero(b.opponent.get(egbase)));
 		fw.unsigned_8(static_cast<uint8_t>(b.phase));
+		fw.signed_16(b.attack_coords.x);
+		fw.signed_16(b.attack_coords.y);
 		fw.unsigned_32(b.pending_damage);
 		fw.unsigned_32(b.attack_soldier_serials.size());
 		for (Serial s : b.attack_soldier_serials) {
