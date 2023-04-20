@@ -941,8 +941,10 @@ int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made c
 			             c->coords().x, c->coords().y);
 		}
 		if (constructionsite) {
-			for (uint8_t i = 0; i < steps; i++) {
-				dynamic_cast<Widelands::ConstructionSite*>(b)->enhance(get_game(L));
+			Widelands::ConstructionSite* cs = dynamic_cast<Widelands::ConstructionSite*>(b);
+			Game& game = get_game(L);
+			for (uint8_t i = 0; i < steps; ++i) {
+				cs->enhance(game);
 			}
 		}
 
