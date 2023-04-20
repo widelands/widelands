@@ -1119,7 +1119,10 @@ void Ship::battle_update(Game& game) {
 			// The naval assault was successful. Now unload the soldiers.
 			// From the ship's perspective, the attack was a success.
 
-			const PlayerNumber enemy_pn = map[current_battle.attack_coords].get_owned_by();
+			Coords portspace = map.find_portspace_for_dockpoint(current_battle.attack_coords);
+			assert(portspace != Coords::null());
+
+			const PlayerNumber enemy_pn = map[portspace].get_owned_by();
 			if (enemy_pn != 0) {
 				game.get_player(enemy_pn)->add_message_with_timeout(game, std::unique_ptr<Message>(new Message(
 					                          Message::Type::kSeafaring, game.get_gametime(), _("Naval Attack"), "images/wui/ship/ship_attack.png",
@@ -1148,7 +1151,7 @@ void Ship::battle_update(Game& game) {
 				// Distribute the soldiers on walkable fields around the point of invasion.
 				// Do not drop them off directly on a flag as that would interfere with battle code.
 				for (;;) {
-					Coords coords = game.random_location(current_battle.attack_coords, 3);
+					Coords coords = game.random_location(current_battle.attack_coords, 4);
 					const Field& field = map[coords];
 					if ((field.nodecaps() & MOVECAPS_WALK) != 0U && (field.get_immovable() == nullptr || field.get_immovable()->descr().type() != MapObjectType::FLAG)) {
 						worker->set_position(game, coords);
@@ -1157,7 +1160,7 @@ void Ship::battle_update(Game& game) {
 				}
 
 				worker->reset_tasks(game);
-				dynamic_cast<Soldier&>(*worker).start_task_naval_invasion(game, current_battle.attack_coords);
+				dynamic_cast<Soldier&>(*worker).start_task_naval_invasion(game, portspace);
 
 				items_.erase(it);
 			}
