@@ -1119,28 +1119,13 @@ void Ship::battle_update(Game& game) {
 			// The naval assault was successful. Now unload the soldiers.
 			// From the ship's perspective, the attack was a success.
 
-#if 0  // NOCOM
-			Warehouse& warehouse = *target_port->get_warehouse();
-			warehouse.send_message(game, Message::Type::kWarfareUnderAttack, _("Naval Attack"),
-			                       "images/wui/ship/ship_attack.png", _("Enemy Ship Attacking"),
-			                       _("Your port is under attack from an enemy warship."), false,
-			                       Duration(60 * 1000) /* throttle timeout in milliseconds */,
-			                       5 /* throttle radius */);
-#endif
-
-			/* We can't drop off soldiers directly at the base flag as this would interfere
-			 * with battle code. Drop off at the directly adjacent fields instead.
-			 */
-			/* std::vector<Coords> suitable_coords;
-			for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-				Coords coords;
-				map.get_neighbour(warehouse.base_flag().get_position(), dir, &coords);
-				const Field& f = map[coords];
-				if ((f.nodecaps() & MOVECAPS_WALK) != 0) {
-					suitable_coords.push_back(coords);
-				}
+			const PlayerNumber enemy_pn = map[current_battle.attack_coords].get_owned_by();
+			if (enemy_pn != 0) {
+				game.get_player(enemy_pn)->add_message_with_timeout(game, std::unique_ptr<Message>(new Message(
+					                          Message::Type::kSeafaring, game.get_gametime(), _("Naval Attack"), "images/wui/ship/ship_attack.png",
+					                          _("Enemy Ship Attacking"), _("Your coast is under attack from an enemy warship."), get_position())),
+					                          Duration(60 * 1000) /* throttle timeout in milliseconds */, 6 /* throttle radius */);
 			}
-			assert(!suitable_coords.empty()); */
 
 			assert(!battles_.back().attack_soldier_serials.empty());
 			for (Serial serial : battles_.back().attack_soldier_serials) {
@@ -1160,17 +1145,19 @@ void Ship::battle_update(Game& game) {
 				it->set_location(game, nullptr);
 				it->end_shipping(game);
 
+				// Distribute the soldiers on walkable fields around the point of invasion.
+				// Do not drop them off directly on a flag as that would interfere with battle code.
 				for (;;) {
 					Coords coords = game.random_location(current_battle.attack_coords, 3);
-					if ((map[coords].nodecaps() & MOVECAPS_WALK) != 0U) {
+					const Field& field = map[coords];
+					if ((field.nodecaps() & MOVECAPS_WALK) != 0U && (field.get_immovable() == nullptr || field.get_immovable()->descr().type() != MapObjectType::FLAG)) {
 						worker->set_position(game, coords);
 						break;
 					}
 				}
 
 				worker->reset_tasks(game);
-				dynamic_cast<Soldier&>(*worker).start_task_naval_invasion(
-				   game, current_battle.attack_coords);
+				dynamic_cast<Soldier&>(*worker).start_task_naval_invasion(game, current_battle.attack_coords);
 
 				items_.erase(it);
 			}
