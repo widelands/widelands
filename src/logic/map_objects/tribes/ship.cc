@@ -597,7 +597,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 					}
 				}
 
-				assert(map->is_port_space(f));
+				assert(map->is_port_space(c));
 				new_coords = c;
 				distance = d;
 			}
