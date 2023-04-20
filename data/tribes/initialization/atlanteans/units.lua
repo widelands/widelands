@@ -1808,7 +1808,9 @@ wl.Descriptions():new_tribe {
             lore = pgettext("atlanteans_building", "Only the pure, white stones Diamond and Quartz will enlighten our people. "..
                                                    "Thus, every major building will need them so the inhabitants may worship Satul to warm them."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Crystal Mine
-            lore_author = pgettext("atlanteans_building", "First part of the Atlantean almanach on architecture")
+            lore_author = pgettext("atlanteans_building", "First part of the Atlantean almanach on architecture"),
+            -- TRANSLATORS: Performance helptext for an atlantean production site: Crystal Mine
+            performance = pgettext("atlanteans_building", "When this building is fully supplied and all wares are needed by the economy, production of granite takes %1$s, quartz takes %2$s and diamond takes %3$s on average. If only one ware is needed by the economy, production of granite takes %4$s, quartz takes %5$s and diamond takes %6$s on average."):bformat(format_seconds(43), format_minutes_seconds(1, 37), format_minutes_seconds(3, 14), format_seconds(29), format_seconds(42), format_seconds(58))
          }
       },
       {
