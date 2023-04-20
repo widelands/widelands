@@ -940,7 +940,7 @@ int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made c
 			report_error(L, "Couldn't %s '%s' at (%d, %d)!", tempname.c_str(), name.c_str(),
 			             c->coords().x, c->coords().y);
 		}
-		if (constructionsite) {
+		if (constructionsite && steps > 0) {
 			Widelands::ConstructionSite* cs = dynamic_cast<Widelands::ConstructionSite*>(b);
 			for (uint8_t i = 0; i < steps; ++i) {
 				cs->enhance();
