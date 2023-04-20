@@ -18,7 +18,7 @@ msgstr ""
 "POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023\n"
-"Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
+"Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -459,7 +459,7 @@ msgstr "Ha el szeretnél küldeni egy katonát, csak rá kell kattintanod. Ekkor
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
 " can contain an arrow and up to three numbers, e.g. ‘↑ 1 (+5) soldier (+2)’."
-msgstr "Elmagyarázom azt is, hogy mit jelentenek a számok az állapotsorban. A felirat egy nyilat és legfeljebb 3 számot tartalmaz, pl. „1 (+5) katona (+2)”."
+msgstr "Elmagyarázom azt is, hogy mit jelentenek a számok az állapotsorban. A felirat egy nyilat és legfeljebb 3 számot tartalmaz, pl. „↑1 (+5) katona (+2)”."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid ""

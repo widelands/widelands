@@ -35,7 +35,7 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
                                         const Widelands::ImmovableDescr& immovable_descr) {
 	const Image* pic = immovable_descr.representative_image();
 
-	std::string tooltip = immovable_descr.descname();
+	std::string tooltip;
 
 	// Get information about preferred terrains
 	if (immovable_descr.has_terrain_affinity()) {
@@ -43,7 +43,23 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 		cr->push_arg(immovable_descr.name());
 		cr->resume();
-		tooltip.append(cr->pop_table()->get_string("text"));
+		tooltip =
+		   format(_("%1$s %2$s"), immovable_descr.descname(), cr->pop_table()->get_string("text"));
+	} else {
+		switch (immovable_descr.get_size()) {
+		case Widelands::BaseImmovable::NONE:
+			tooltip = format(_("%1$s (removable by e.g. placing roads)"), immovable_descr.descname());
+			break;
+		case Widelands::BaseImmovable::SMALL:
+			tooltip = format(_("%1$s (needs a small building plot)"), immovable_descr.descname());
+			break;
+		case Widelands::BaseImmovable::MEDIUM:
+			tooltip = format(_("%1$s (needs a medium building plot)"), immovable_descr.descname());
+			break;
+		case Widelands::BaseImmovable::BIG:
+			tooltip = format(_("%1$s (needs a big building plot)"), immovable_descr.descname());
+			break;
+		}
 	}
 
 	UI::Checkbox* cb =
@@ -68,7 +84,36 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	      [lua](UI::Panel* cb_parent, const Widelands::ImmovableDescr& immovable_descr) {
 		      return create_immovable_checkbox(cb_parent, lua, immovable_descr);
 	      },
-	      [this] { select_correct_tool(); }, &tool));
+	      [this, &tool] {
+		      auto_trees_button_->set_perm_pressed(false);
+		      tool.enable(kAutoTreesIndex, false);
+		      select_correct_tool();
+	      },
+	      &tool, {{kAutoTreesIndex, _("Automatic Trees")}}));
+
+	UI::Box* auto_immovables_box =
+	   new UI::Box(&multi_select_menu_->tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	auto_trees_button_ = new UI::Button(auto_immovables_box, "auto_trees", 0, 0, 0, 0,
+	                                    UI::ButtonStyle::kWuiSecondary, _("Automatic Trees"),
+	                                    _("Automatically place the trees which "
+	                                      "grow best on the terrain"));
+	auto_trees_button_->sigclicked.connect([this, &tool]() {
+		auto_trees_button_->toggle();
+		if (auto_trees_button_->style() == UI::Button::VisualState::kPermpressed) {
+			tool.disable_all();
+			select_correct_tool();
+			tool.enable(kAutoTreesIndex, true);
+		} else {
+			tool.enable(kAutoTreesIndex, false);
+		}
+		multi_select_menu_->update_label();
+	});
+	auto_immovables_box->add(auto_trees_button_, UI::Box::Resizing::kFullSize);
+	multi_select_menu_->tabs().add("auto",
+	                               g_image_cache->get("images/wui/editor/tools/immovables.png"),
+	                               auto_immovables_box, _("Automatic Immovable Placement"), 0);
+	multi_select_menu_->tabs().activate(0);
+
 	set_center_panel(multi_select_menu_.get());
 
 	initialization_complete();
@@ -76,4 +121,11 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 
 void EditorToolPlaceImmovableOptionsMenu::update_window() {
 	multi_select_menu_->update_selection();
+}
+
+void EditorToolPlaceImmovableOptionsMenu::think() {
+	EditorToolOptionsMenu::think();
+	auto_trees_button_->set_perm_pressed(
+	   parent_.tools()->current_pointer == &current_tool_ &&
+	   dynamic_cast<EditorPlaceImmovableTool&>(current_tool_).is_enabled(kAutoTreesIndex));
 }

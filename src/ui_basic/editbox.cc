@@ -193,6 +193,47 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t /*y*/) {
 		clicked();
 		return true;
 	}
+#if HAS_PRIMARY_SELECTION_BUFFER
+	else if (btn == SDL_BUTTON_MIDDLE) {
+		/* Primary buffer is inserted without affecting cursor position, selection, and focus. */
+		const uint32_t old_caret_pos = m_->caret;
+		const uint32_t old_selection_start = m_->selection_start;
+		const uint32_t old_selection_end = m_->selection_end;
+		const EditBoxImpl::Mode old_mode = m_->mode;
+
+		reset_selection();
+		set_caret_to_cursor_pos(x);
+		const uint32_t new_caret_pos = m_->caret;
+
+		std::string text_to_insert = SDL_GetPrimarySelectionText();
+
+		if (old_mode == EditBoxImpl::Mode::kSelection &&
+		    ((old_selection_start <= new_caret_pos && new_caret_pos <= old_selection_end) ||
+		     (old_selection_end <= new_caret_pos && new_caret_pos <= old_selection_start))) {
+			text_to_insert.clear();  // Can't paste into the active selection.
+		} else {
+			std::string old_text = m_->text;
+			handle_textinput(text_to_insert);
+			if (old_text == m_->text) {
+				text_to_insert.clear();  // Text wasn't pasted, perhaps too long.
+			}
+		}
+
+		m_->mode = old_mode;
+		m_->caret = old_caret_pos;
+		m_->selection_start = old_selection_start;
+		m_->selection_end = old_selection_end;
+		if (new_caret_pos <= old_caret_pos) {
+			const uint32_t delta = text_to_insert.size();
+			m_->caret += delta;
+			m_->selection_start += delta;
+			m_->selection_end += delta;
+		}
+
+		changed();
+		return true;
+	}
+#endif
 
 	return false;
 }
@@ -288,6 +329,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			m_->selection_start = 0;
 			m_->selection_end = m_->text.size();
 			m_->mode = EditBoxImpl::Mode::kSelection;
+			update_primary_selection_buffer();
 			return true;
 		}
 
@@ -490,6 +532,17 @@ void EditBox::copy_selected_text() {
 	auto nr_characters = end - start;
 	std::string selected_text = m_->text.substr(start, nr_characters);
 	SDL_SetClipboardText(selected_text.c_str());
+}
+void EditBox::update_primary_selection_buffer() const {
+#if HAS_PRIMARY_SELECTION_BUFFER
+	uint32_t start;
+	uint32_t end;
+	calculate_selection_boundaries(start, end);
+
+	auto nr_characters = end - start;
+	std::string selected_text = m_->text.substr(start, nr_characters);
+	SDL_SetPrimarySelectionText(selected_text.c_str());
+#endif
 }
 
 bool EditBox::handle_textinput(const std::string& input_text) {
@@ -745,9 +798,10 @@ void EditBox::select_until(uint32_t end) const {
 		m_->mode = EditBoxImpl::Mode::kSelection;
 	}
 	m_->selection_end = end;
+	update_primary_selection_buffer();
 }
 
-void EditBox::calculate_selection_boundaries(uint32_t& start, uint32_t& end) {
+void EditBox::calculate_selection_boundaries(uint32_t& start, uint32_t& end) const {
 	start = snap_to_char(std::min(m_->selection_start, m_->selection_end));
 	end = std::max(m_->selection_start, m_->selection_end);
 	end = Utf8::is_utf8_extended(m_->text[end]) ? next_char(end) : snap_to_char(end);

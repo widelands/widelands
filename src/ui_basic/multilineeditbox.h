@@ -62,6 +62,7 @@ private:
 	void scrollpos_changed(int32_t);
 	void delete_selected_text() const;
 	void copy_selected_text() const;
+	void update_primary_selection_buffer() const;
 	struct Data;
 	std::unique_ptr<Data> d_;
 	void set_caret_to_cursor_pos(int32_t x, int32_t y);
