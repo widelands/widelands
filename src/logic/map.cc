@@ -1793,9 +1793,9 @@ bool Map::is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>
 	return true;
 }
 
-static constexpr WalkingDir kPortSpaceWalkingDirs[16] = {WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW, WALK_W,
-                                         WALK_W,  WALK_W,  WALK_SW, WALK_SW, WALK_SW, WALK_SE,
-                                         WALK_SE, WALK_E,  WALK_E,  WALK_E};
+static constexpr WalkingDir kPortSpaceWalkingDirs[16] = {
+   WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW, WALK_W, WALK_W, WALK_W,
+   WALK_SW, WALK_SW, WALK_SW, WALK_SE, WALK_SE, WALK_E, WALK_E, WALK_E};
 
 /**
  * Returns a list of portdock fields (if any) that a port built at \p c should have.

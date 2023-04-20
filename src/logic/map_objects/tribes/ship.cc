@@ -140,8 +140,7 @@ struct FindBobDefender : public FindBob {
 		const Ship& s = dynamic_cast<const Ship&>(*b);
 		return s.get_ship_type() == ShipType::kWarship &&
 		       (s.owner().player_number() == player_.player_number() ||
-		        (player_.team_number() > 0 &&
-		         s.owner().team_number() == player_.team_number())) &&
+		        (player_.team_number() > 0 && s.owner().team_number() == player_.team_number())) &&
 		       !s.has_battle();
 	}
 
@@ -615,8 +614,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 					             new_target->descr().icon_filename());
 				} else {
 					send_message(game, _("Port Space"), _("Port Space Found"),
-							     _("A warship found a new port build space."),
-					             descr().icon_filename());
+					             _("A warship found a new port build space."), descr().icon_filename());
 				}
 			}
 		}
@@ -817,7 +815,8 @@ bool Ship::can_be_attacked() const {
 
 bool Ship::can_attack() const {
 	return get_ship_type() == Widelands::ShipType::kWarship && !has_battle() &&
-	       (static_cast<bool>(get_attack_coords()) || get_attack_target(owner().egbase()) != nullptr);
+	       (static_cast<bool>(get_attack_coords()) ||
+	        get_attack_target(owner().egbase()) != nullptr);
 }
 
 bool Ship::can_refit(const ShipType type) const {
@@ -960,9 +959,9 @@ void Ship::start_battle(Game& game, const Battle new_battle) {
 	// Summon someone to the defence
 	if (enemy_ship != nullptr) {
 		enemy_ship->send_message(game, _("Naval Attack"), _("Enemy Ship Attacking"),
-		                        format(_("Your ship ‘%s’ is under attack from an enemy warship."),
-		                               enemy_ship->get_shipname()),
-		                        "images/wui/ship/ship_attack.png");
+		                         format(_("Your ship ‘%s’ is under attack from an enemy warship."),
+		                                enemy_ship->get_shipname()),
+		                         "images/wui/ship/ship_attack.png");
 		enemy_ship->start_battle(game, Battle(this, Coords::null(), {}, false));
 	}
 }
@@ -1098,7 +1097,8 @@ void Ship::battle_update(Game& game) {
 		Path path;
 		if (map.findpath(get_position(), dest, 0, path, CheckStepDefault(MOVECAPS_SWIM)) < 0) {
 			molog(game.get_gametime(), "Could not find a path to opponent %u from %dx%d to %dx%d",
-			      target_ship == nullptr ? 0 : target_ship->serial(), get_position().x, get_position().y, dest.x, dest.y);
+			      target_ship == nullptr ? 0 : target_ship->serial(), get_position().x,
+			      get_position().y, dest.x, dest.y);
 			battles_.pop_back();
 			return start_task_idle(game, descr().main_animation(), 100);
 		}
@@ -1124,10 +1124,13 @@ void Ship::battle_update(Game& game) {
 
 			const PlayerNumber enemy_pn = map[portspace].get_owned_by();
 			if (enemy_pn != 0) {
-				game.get_player(enemy_pn)->add_message_with_timeout(game, std::unique_ptr<Message>(new Message(
-					                          Message::Type::kSeafaring, game.get_gametime(), _("Naval Attack"), "images/wui/ship/ship_attack.png",
-					                          _("Enemy Ship Attacking"), _("Your coast is under attack from an enemy warship."), get_position())),
-					                          Duration(60 * 1000) /* throttle timeout in milliseconds */, 6 /* throttle radius */);
+				game.get_player(enemy_pn)->add_message_with_timeout(
+				   game,
+				   std::unique_ptr<Message>(new Message(
+				      Message::Type::kSeafaring, game.get_gametime(), _("Naval Attack"),
+				      "images/wui/ship/ship_attack.png", _("Enemy Ship Attacking"),
+				      _("Your coast is under attack from an enemy warship."), get_position())),
+				   Duration(60 * 1000) /* throttle timeout in milliseconds */, 6 /* throttle radius */);
 			}
 
 			assert(!battles_.back().attack_soldier_serials.empty());
@@ -1153,7 +1156,9 @@ void Ship::battle_update(Game& game) {
 				for (;;) {
 					Coords coords = game.random_location(current_battle.attack_coords, 4);
 					const Field& field = map[coords];
-					if ((field.nodecaps() & MOVECAPS_WALK) != 0U && (field.get_immovable() == nullptr || field.get_immovable()->descr().type() != MapObjectType::FLAG)) {
+					if ((field.nodecaps() & MOVECAPS_WALK) != 0U &&
+					    (field.get_immovable() == nullptr ||
+					     field.get_immovable()->descr().type() != MapObjectType::FLAG)) {
 						worker->set_position(game, coords);
 						break;
 					}
@@ -1173,8 +1178,8 @@ void Ship::battle_update(Game& game) {
 			Player* enemy = enemy_pn == 0 ? nullptr : game.get_player(enemy_pn);
 			if (enemy != nullptr && enemy->is_hostile(owner())) {
 				map.find_reachable_bobs(
-				   game, Area<FCoords>(get_position(), kPortUnderAttackDefendersSearchRadius), &defenders,
-				   CheckStepDefault(MOVECAPS_SWIM), FindBobDefender(*enemy));
+				   game, Area<FCoords>(get_position(), kPortUnderAttackDefendersSearchRadius),
+				   &defenders, CheckStepDefault(MOVECAPS_SWIM), FindBobDefender(*enemy));
 			}
 
 			Bob* nearest = nullptr;
@@ -1190,7 +1195,8 @@ void Ship::battle_update(Game& game) {
 			if (nearest != nullptr) {
 				// Let the best candidate launch an attack against us. This
 				// suspends the current battle until the new fight is over.
-				dynamic_cast<Ship&>(*nearest).start_battle(game, Battle(this, Coords::null(), {}, true));
+				dynamic_cast<Ship&>(*nearest).start_battle(
+				   game, Battle(this, Coords::null(), {}, true));
 			}
 
 			// Since ports can't defend themselves on their own, start the next round at once.
@@ -2259,7 +2265,8 @@ void Ship::Loader::load_pointers() {
 	}
 
 	if (expedition_attack_target_serial_ != 0U) {
-		expedition_->attack_target = dynamic_cast<Ship*>(&mol().get<MapObject>(expedition_attack_target_serial_));
+		expedition_->attack_target =
+		   dynamic_cast<Ship*>(&mol().get<MapObject>(expedition_attack_target_serial_));
 	}
 	for (uint32_t i = 0; i < battle_serials_.size(); ++i) {
 		if (battle_serials_[i] != 0U) {
