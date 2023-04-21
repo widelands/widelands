@@ -823,7 +823,7 @@ void CmdEnhanceBuilding::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial_);
 	if (upcast(ConstructionSite, cs, mo)) {
 		if (bi_ == cs->building().enhancement()) {
-			cs->enhance();
+			cs->enhance(game);
 		}
 	} else if (upcast(Building, building, mo)) {
 		game.get_player(sender())->enhance_building(building, bi_, keep_wares_);

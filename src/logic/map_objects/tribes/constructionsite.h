@@ -128,7 +128,7 @@ public:
 	}
 	void apply_settings(const BuildingSettings&);
 
-	void enhance();
+	void enhance(EditorGameBase&);
 
 	void add_dropout_wares(const std::map<DescriptionIndex, Quantity>&);
 

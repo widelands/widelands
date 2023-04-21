@@ -393,7 +393,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 Start building the next enhancement even before the base building is completed.
 ===============
 */
-void ConstructionSite::enhance() {
+void ConstructionSite::enhance(EditorGameBase& egbase) {
 	MutexLock m(MutexLock::ID::kObjects);
 	assert(building_->enhancement() != INVALID_INDEX);
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
@@ -535,7 +535,7 @@ void ConstructionSite::enhance() {
 	} break;
 	default:
 		// TODO(Nordfriese): Add support for markets when trading is implemented
-		log_warn("Enhanced constructionsite to a %s, which is not of any known building type\n",
+		log_warn_time(egbase.get_gametime(), "Enhanced constructionsite to a %s, which is not of any known building type\n",
 		         building_->name().c_str());
 	}
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
