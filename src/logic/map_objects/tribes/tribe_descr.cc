@@ -394,6 +394,16 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		load_animations(
 		   *table.get_table("spritesheets"), animation_directory, Animation::Type::kSpritesheet);
 	}
+
+	if (flag_animation_id_ == 0U) {
+		throw GameDataError("Tribe has no flag animation.");
+	}
+	if (frontier_animation_id_ == 0U) {
+		throw GameDataError("Tribe has no frontier animation.");
+	}
+	if (pinned_note_animation_id_ == 0U) {
+		throw GameDataError("Tribe has no pinned note animation.");
+	}
 }
 
 void TribeDescr::load_ships(const LuaTable& table, Descriptions& descriptions) {
