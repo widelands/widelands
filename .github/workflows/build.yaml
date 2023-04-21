@@ -221,39 +221,38 @@ jobs:
         arch: [x64, x86]
     name: Build vcpkg packages for ${{ matrix.arch }}
     runs-on: windows-2022
-    outputs:
-      vcpkg_key: ${{ steps.prepare.outputs.vcpkg_key }}
     env:
       VCPKG_ROOT: C:\vcpkg
-      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg/bincache
       VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
-      VCPKG_DISABLE_COMPILER_TRACKING: TRUE
     steps:
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 1
-    - name: Create cache directory
+    - name: Get vcpkg version
       id: prepare
       run: |
-        mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
-        REF=$(cat .github/scripts/vcpkg_ref)
-        cd ${{ env.VCPKG_ROOT }}
-        # REF can be empty, a commit hash or a pull request
-        [ -n "$REF" ] && git fetch
-        git checkout $REF || git pull origin $REF
+        pushd ${{ env.VCPKG_ROOT }}
         HEAD=$(git rev-parse --short HEAD)
-        echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${HEAD}" >> $GITHUB_OUTPUT
+        popd
+        echo $HEAD > .github/scripts/vcpkg_ref
       shell: bash
-    - name: Restore vcpkg and its artifacts.
+    - name: Check whether cache exists
+      id: lookup
       uses: actions/cache@v3
       with:
-        path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+        path: ${{ env.VCPKG_ROOT }}/installed
         key: |
-          ${{ steps.prepare.outputs.vcpkg_key }}-${{ matrix.arch }}
+          ${{ hashFiles( './install-dependencies.sh', '.github/scripts/vcpkg_ref' ) }}-${{ matrix.arch }}
     - name: Building packages
+      if: steps.prepare.lookup.cache-hit != 'true'
       run: ./install-dependencies.sh vcpkg --triplet=${{ env.VCPKG_TARGET_TRIPLET }}
       shell: bash
+    - name: Update vcpkg_ref
+      if: steps.prepare.lookup.cache-hit != 'true'
+      run: |
+        cat .github/scripts/vcpkg_ref
+        # TODO commit
 
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
@@ -266,18 +265,16 @@ jobs:
     runs-on: windows-2022
     env:
       VCPKG_ROOT: C:\vcpkg
-      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg/bincache
       VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
-      VCPKG_DISABLE_COMPILER_TRACKING: TRUE
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 1
-    - name: "Create cache directory"
+    - name: Checkout vcpkg
       id: prepare
       run: |
-        mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
         REF=$(cat .github/scripts/vcpkg_ref)
         cd ${{ env.VCPKG_ROOT }}
         # REF can be empty, a commit hash or a pull request
@@ -287,9 +284,9 @@ jobs:
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v3
       with:
-        path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+        path: ${{ env.VCPKG_ROOT }}/installed
         key: |
-          ${{needs.vcpkg-packages.outputs.vcpkg_key}}-${{ matrix.arch }}
+          ${{ hashFiles( './install-dependencies.sh', '.github/scripts/vcpkg_ref' ) }}-${{ matrix.arch }}
     - name: Installing dependencies
       run: |
         choco install innosetup
