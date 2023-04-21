@@ -453,6 +453,12 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	}
 }
 
+void MapView::set_centered_view(const View& centered_view, const Transition& transition) {
+	const Vector2f viewpoint = MapviewPixelFunctions::panel_to_map(
+	   centered_view.viewpoint, centered_view.zoom, Vector2f(-get_w() / 2.f, -get_h() / 2.f));
+	set_view(View(viewpoint, centered_view.zoom), transition);
+}
+
 void MapView::scroll_to_field(const Widelands::Coords& c, const Transition& transition) {
 	assert(0 <= c.x);
 	assert(c.x < map_.get_width());
@@ -479,6 +485,12 @@ const MapView::View& MapView::view() const {
 	return view_;
 }
 
+MapView::View MapView::get_centered_view() const {
+	const Vector2f center = MapviewPixelFunctions::panel_to_map(
+	   view_.viewpoint, view_.zoom, Vector2f(get_w() / 2.f, get_h() / 2.f));
+	return View(center, view_.zoom);
+}
+
 void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
 	if (is_animating() || map_.get_width() == 0 || map_.get_height() == 0) {
 		return;
@@ -499,12 +511,8 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		stop_dragging();
 		const auto node_and_triangle = track_sel(Vector2i(x, y));
 		field_clicked(node_and_triangle);
-		// Old comment said to not return true to give the parent a chance to also handle the click,
-		// but its only use was to allow dragging watch windows around by the content. That however
-		// resulted in the watch windows jumping around on clicking, because the mouse warp to the
-		// fastclick button of the opened field action window creates a mousemove event, that the
-		// watch window interpreted as dragging.
-		return true;
+		// Do not return true, because we want to give our parent a chance to
+		// also handle the click. Painting mode in the editor needs it.
 	}
 	if (btn == SDL_BUTTON_RIGHT) {
 		jump();
