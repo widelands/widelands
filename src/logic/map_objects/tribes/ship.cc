@@ -1029,6 +1029,7 @@ void Ship::battle_update(Game& game) {
 	};
 	auto damage = [this, &game, set_phase, &current_battle, other_battle,
 	               target_ship](Battle::Phase next) {
+		assert(target_ship != nullptr);
 		if (target_ship->hitpoints_ > current_battle.pending_damage) {
 			target_ship->hitpoints_ -= current_battle.pending_damage;
 			set_phase(next);
