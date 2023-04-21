@@ -18,7 +18,6 @@
 
 #include "wui/quicknavigation.h"
 
-#include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "ui_basic/editbox.h"
@@ -54,7 +53,7 @@ void QuickNavigation::jumped() {
 }
 
 void QuickNavigation::view_changed() {
-	current_ = map_view_->view();
+	current_ = map_view_->get_centered_view();
 	havefirst_ = true;
 }
 
@@ -136,7 +135,7 @@ bool QuickNavigation::can_goto_next() const {
 }
 
 void QuickNavigation::goto_landmark(int index) {
-	map_view_->set_view(landmarks_[index].view, MapView::Transition::Smooth);
+	map_view_->set_centered_view(landmarks_[index].view, MapView::Transition::Smooth);
 }
 
 void QuickNavigation::goto_prev() {
@@ -144,7 +143,7 @@ void QuickNavigation::goto_prev() {
 		return;
 	}
 	insert_if_applicable(next_locations_);
-	map_view_->set_view(previous_locations_.back(), MapView::Transition::Smooth);
+	map_view_->set_centered_view(previous_locations_.back(), MapView::Transition::Smooth);
 	previous_locations_.pop_back();
 }
 
@@ -153,7 +152,7 @@ void QuickNavigation::goto_next() {
 		return;
 	}
 	insert_if_applicable(previous_locations_);
-	map_view_->set_view(next_locations_.back(), MapView::Transition::Smooth);
+	map_view_->set_centered_view(next_locations_.back(), MapView::Transition::Smooth);
 	next_locations_.pop_back();
 }
 
@@ -262,11 +261,8 @@ void QuickNavigationWindow::rebuild() {
 			show_watch_window(
 			   dynamic_cast<InteractiveGameBase&>(ibase_),
 			   MapviewPixelFunctions::calc_node_and_triangle(
-			      ibase_.egbase().map(),
-			      // Technically, a landmark is the top-left corner of the screen,
-			      // but we like to pretend it's the screen center instead.
-			      static_cast<int>(q.landmarks()[i].view.viewpoint.x) + g_gr->get_xres() / 2,
-			      static_cast<int>(q.landmarks()[i].view.viewpoint.y) + g_gr->get_yres() / 2)
+			      ibase_.egbase().map(), static_cast<int>(q.landmarks()[i].view.viewpoint.x),
+			      static_cast<int>(q.landmarks()[i].view.viewpoint.y))
 			      .node);
 		});
 		box.add(b);
