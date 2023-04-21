@@ -235,7 +235,7 @@ jobs:
         pushd ${{ env.VCPKG_ROOT }}
         HEAD=$(git rev-parse --short HEAD)
         popd
-        echo $HEAD > .github/scripts/vcpkg_ref
+        echo -n $HEAD > .github/scripts/vcpkg_ref
       shell: bash
     - name: Check whether cache exists
       id: lookup
