@@ -396,13 +396,13 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 	}
 
 	if (flag_animation_id_ == 0U) {
-			throw GameDataError("Tribe has no flag animation.");
+		throw GameDataError("Tribe has no flag animation.");
 	}
 	if (frontier_animation_id_ == 0U) {
-			throw GameDataError("Tribe has no frontier animation.");
+		throw GameDataError("Tribe has no frontier animation.");
 	}
 	if (pinned_note_animation_id_ == 0U) {
-			throw GameDataError("Tribe has no pinned note animation.");
+		throw GameDataError("Tribe has no pinned note animation.");
 	}
 }
 
