@@ -186,6 +186,14 @@ function place_building_tests:test_force_building_cs()
    assert_equal("constructionsite", k.descr.type_name)
 end
 
+function place_building_tests:test_force_upgraded_building_cs()
+   local f = player1:place_flag(self.f)
+   self.pis[#self.pis + 1] = f
+   local k = player1:place_building("barbarians_warmill", self.f, true, true)
+   self.pis[#self.pis + 1] = k
+   assert_equal("constructionsite", k.descr.type_name)
+end
+
 function place_building_tests:test_force_building_illegal_name()
    assert_error("Illegal building", function()
       player1:place_building("kjhsfjkh", map:get_field(10,10))
