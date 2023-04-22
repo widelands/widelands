@@ -112,7 +112,7 @@ struct NoteGameSettings {
 /** Holds all settings about a game that can be configured before the game actually starts. */
 struct GameSettings {
 	enum Flags : uint16_t {
-		kNone = 0,                          ///< No special options (the default).
+		kDefaultSettings = 0,               ///< No special options; the default.
 		kPeaceful = 1 << 0,                 ///< No fighting between players.
 		kCustomStartingPositions = 1 << 1,  ///< Players may choose their own starting positions.
 		kFogless = 1 << 2,                  ///< The entire map is always visible.
@@ -185,7 +185,7 @@ struct GameSettings {
 	bool savegame{false};
 
 	/// Additional flags to control game behaviour.
-	uint16_t flags{Flags::kNone};
+	uint16_t flags{Flags::kDefaultSettings};
 
 	std::string map_theme;
 	std::string map_background;
