@@ -837,15 +837,15 @@ void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	}
 }
 
-void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
+void EditorInteractive::set_sel_radius_and_update_menu(uint32_t radius, uint16_t gap) {
 	if (tools_->current().has_size_one()) {
-		set_sel_radius(0);
+		set_sel_radius(0, 0);
 		return;
 	}
-	if (UI::UniqueWindow* const w = menu_windows_.toolsize.window) {
-		dynamic_cast<EditorToolsizeMenu&>(*w).update(val);
+	if (UI::UniqueWindow* const w = menu_windows_.toolsize.window; w != nullptr) {
+		dynamic_cast<EditorToolsizeMenu&>(*w).update(radius, gap);
 	} else {
-		set_sel_radius(val);
+		set_sel_radius(radius, gap);
 	}
 }
 
@@ -997,7 +997,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			if (matches_shortcut(static_cast<KeyboardShortcut>(
 			                        static_cast<uint16_t>(KeyboardShortcut::kEditorToolsize1) + i),
 			                     code)) {
-				set_sel_radius_and_update_menu(i);
+				set_sel_radius_and_update_menu(i, get_sel_gap_percent());
 				return true;
 			}
 		}
@@ -1049,14 +1049,15 @@ bool EditorInteractive::handle_mousewheel(int32_t x, int32_t y, uint16_t modstat
 		return false;
 	}
 	set_sel_radius_and_update_menu(
-	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change, MAX_TOOL_AREA)));
+	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change, MAX_TOOL_AREA)),
+	   get_sel_gap_percent());
 	return true;
 }
 
 void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex const which) {
 	if (which == EditorTool::First && &primary != tools_->current_pointer) {
 		if (primary.has_size_one()) {
-			set_sel_radius(0);
+			set_sel_radius(0, 0);
 			if (UI::UniqueWindow* const w = menu_windows_.toolsize.window) {
 				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
 				toolsize_menu.set_buttons_enabled(false);
@@ -1064,7 +1065,7 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 		} else {
 			if (UI::UniqueWindow* const w = menu_windows_.toolsize.window) {
 				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
-				toolsize_menu.update(toolsize_menu.value());
+				toolsize_menu.update(toolsize_menu.radius(), toolsize_menu.gap_percent());
 			}
 		}
 		egbase().mutable_map()->recalc_whole_map(egbase());
@@ -1252,7 +1253,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 		tools_.reset(new Tools(*this, egbase().map()));
 		select_tool(tools_->info, EditorTool::First);
-		set_sel_radius(0);
+		set_sel_radius(0, 0);
 
 		set_need_save(false);
 		show_buildhelp(true);
@@ -1359,8 +1360,9 @@ UI::UniqueWindow::Registry& EditorInteractive::get_registry_for_window(WindowID 
 	NEVER_HERE();
 }
 
-void EditorInteractive::set_sel_radius(const uint32_t n) {
-	InteractiveBase::set_sel_radius(n);
+void EditorInteractive::set_sel_radius(uint32_t radius, uint16_t gap) {
+	InteractiveBase::set_sel_radius(radius);
+	InteractiveBase::set_sel_gap_percent(gap);
 	tool_settings_changed_ = true;
 }
 

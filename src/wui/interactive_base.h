@@ -136,11 +136,17 @@ public:
 	uint32_t get_sel_radius() const {
 		return sel_.radius;
 	}
+	uint16_t get_sel_gap_percent() const {
+		return sel_.gap_percent;
+	}
 	virtual void set_sel_pos(Widelands::NodeAndTriangle<>);
 	void set_sel_freeze(const bool yes) {
 		sel_.freeze = yes;
 	}
-	virtual void set_sel_radius(uint32_t);
+	void set_sel_radius(uint32_t);
+	void set_sel_gap_percent(uint16_t gap) {
+		sel_.gap_percent = gap;
+	}
 
 	//  display flags
 	uint32_t get_display_flags() const;
@@ -377,13 +383,15 @@ private:
 		                       Widelands::TCoords<>(Widelands::Coords(0, 0),
 		                                            Widelands::TriangleIndex::D)},
 		                 const uint32_t Radius = 0,
+		                 const uint16_t Gap = 0,
 		                 const Image* Pic = nullptr)
-		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), pic(Pic) {
+		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), gap_percent(Gap), pic(Pic) {
 		}
 		bool freeze;     // don't change sel, even if mouse moves
 		bool triangles;  //  otherwise nodes
 		Widelands::NodeAndTriangle<> pos;
 		uint32_t radius;
+		uint16_t gap_percent;
 		const Image* pic;
 	} sel_;
 
