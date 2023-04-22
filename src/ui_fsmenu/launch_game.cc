@@ -51,8 +51,6 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                      0,
                      _("Configure this game"),
                      UI::Align::kCenter),
-     write_replay_(
-        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Write Replay")),
      warn_desyncing_addon_(
         &right_column_content_box_,
         0,
@@ -100,10 +98,9 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                               ok_.get_h(),
                               UI::ButtonStyle::kFsMenuSecondary,
                               "" /* set later */,
-                              _("Show or hide the advanced game configuration options")),
+                              _("Show or hide additional game configuration options")),
      advanced_options_box_(
         &right_column_content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-
      game_flag_checkboxes_({
         {GameSettings::Flags::kPeaceful,
          {new UI::Checkbox(
@@ -130,6 +127,9 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
           &LaunchGame::update_custom_starting_positions}},
 
      }),
+     write_replay_(
+        &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Write Replay")),
+
      choose_map_(mpg && settings.can_change_map() && !preconfigured ?
                     new UI::Button(&right_column_content_box_,
                                    "choose_map",
@@ -194,7 +194,6 @@ LaunchGame::~LaunchGame() {
 void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(1 * kPadding);
-	right_column_content_box_.add(&write_replay_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add(&warn_desyncing_addon_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(4 * kPadding);
 	right_column_content_box_.add(&configure_game_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -204,13 +203,14 @@ void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&win_condition_duration_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&toggle_advanced_options_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(1 * kPadding);
 	right_column_content_box_.add(&advanced_options_box_, UI::Box::Resizing::kFullSize);
 
-	advanced_options_box_.set_scrolling(true);
 	for (auto& pair : game_flag_checkboxes_) {
-		advanced_options_box_.add_space(1 * kPadding);
 		advanced_options_box_.add(pair.second.first, UI::Box::Resizing::kFullSize);
+		advanced_options_box_.add_space(1 * kPadding);
 	}
+	advanced_options_box_.add(&write_replay_, UI::Box::Resizing::kFullSize);
 
 	if (choose_map_ != nullptr) {
 		right_column_content_box_.add_space(3 * kPadding);
@@ -246,8 +246,8 @@ bool LaunchGame::should_write_replay() const {
 void LaunchGame::update_advanced_options() {
 	const bool show = toggle_advanced_options_.style() == UI::Button::VisualState::kPermpressed;
 	advanced_options_box_.set_visible(show);
-	toggle_advanced_options_.set_title(show ? _("Hide advanced options") :
-                                             _("Show advanced options"));
+	toggle_advanced_options_.set_title(show ? _("Show fewer options") :
+                                             _("Show more options"));
 	layout();
 }
 

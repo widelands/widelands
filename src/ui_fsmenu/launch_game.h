@@ -91,7 +91,6 @@ protected:
 
 	MapDetailsBox map_details_;
 	UI::Textarea configure_game_;
-	UI::Checkbox write_replay_;
 	UI::MultilineTextarea warn_desyncing_addon_;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::SpinBox win_condition_duration_;
@@ -100,6 +99,7 @@ protected:
 	std::map<GameSettings::Flags,
 	         std::pair<UI::Checkbox*, void (LaunchGame::*)() /* update function */>>
 	   game_flag_checkboxes_;
+	UI::Checkbox write_replay_;
 	UI::Button* choose_map_;
 	UI::Button* choose_savegame_;
 	std::string last_win_condition_;
