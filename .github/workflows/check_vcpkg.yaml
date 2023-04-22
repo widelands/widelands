@@ -12,6 +12,7 @@ on:
     branches:
       - vcpkg_cache_key
 
+jobs:
   vcpkg-packages:
     # Checks for new vcpkg version and tries to build the update package versions
     # On success it updates the vcpkg_ref file so the main builds use the cache
