@@ -1789,7 +1789,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Blacksmithy
             purpose = pgettext("building", "Forges tools to equip new workers."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Blacksmithy
-            performance = pgettext("frisians_building", "When this building is fully supplied and all wares are needed by the economy, production of one tool takes %1$s on average. If only one ware is needed by the economy, production of one tool takes %2$s on average. Needles are exception - for the time of one tool two needles are produced."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 20))
+            performance = pgettext("frisians_building", "When this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one ware is needed by the economy, production of one tool takes %2$s on average. Needles are exception - for the time of one tool two needles are produced."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 20))
          }
       },
       {
