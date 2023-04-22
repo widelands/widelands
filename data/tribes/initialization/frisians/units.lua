@@ -1789,7 +1789,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Blacksmithy
             purpose = pgettext("building", "Forges tools to equip new workers."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Blacksmithy
-            performance = pgettext("frisians_building", "When this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one ware is needed by the economy, production of one tool takes %2$s on average. Needles are exception - for the time of one tool two needles are produced."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 20))
+            performance = pgettext("frisians_building", "When this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average. Needles are exception - for the time of one tool two needles are produced."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 20))
          }
       },
       {
@@ -1802,7 +1802,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Small Armor Smithy
             purpose = pgettext("frisians_building", "Produces basic weapons and helmets for the soldiers."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Small Armor Smithy
-            performance = pgettext("frisians_building", "When this building is fully supplied and all wares are needed by the economy, production of one short sword takes %1$s, one long sword takes %2$s and one helmet takes %3$s on average. If only one ware is needed by the economy, production of one short sword takes %4$s, one long sword takes %5$s and one helmet takes %6$s on average."):bformat(format_minutes_seconds(4, 12), format_minutes_seconds(2, 6), format_minutes_seconds(4, 12), format_minutes_seconds(1, 8), format_minutes_seconds(1, 3), format_minutes_seconds(1, 18))
+            performance = pgettext("frisians_building", "When this building is fully supplied and all armaments are needed by the economy, production of one short sword takes %1$s, one long sword takes %2$s and one helmet takes %3$s on average. If only one kind of armament is needed by the economy, production of one short sword takes %4$s, one long sword takes %5$s and one helmet takes %6$s on average."):bformat(format_minutes_seconds(4, 12), format_minutes_seconds(2, 6), format_minutes_seconds(4, 12), format_minutes_seconds(1, 8), format_minutes_seconds(1, 3), format_minutes_seconds(1, 18))
          }
       },
       {

@@ -1810,7 +1810,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Crystal Mine
             lore_author = pgettext("atlanteans_building", "First part of the Atlantean almanach on architecture"),
             -- TRANSLATORS: Performance helptext for an atlantean production site: Crystal Mine
-            performance = pgettext("atlanteans_building", "When this building is fully supplied and all wares are needed by the economy, production of granite takes %1$s, quartz takes %2$s and diamond takes %3$s on average. If only one ware is needed by the economy, production of granite takes %4$s, quartz takes %5$s and diamond takes %6$s on average."):bformat(format_seconds(43), format_minutes_seconds(1, 37), format_minutes_seconds(3, 14), format_seconds(29), format_seconds(42), format_seconds(58))
+            performance = pgettext("atlanteans_building", "When this building is fully supplied and all minerals are needed by the economy, production of one granite takes %1$s, one quartz takes %2$s and one diamond takes %3$s on average. If only one kind of mineral is needed by the economy, production of one granite takes %4$s, one quartz takes %5$s and one diamond takes %6$s on average."):bformat(format_seconds(43), format_minutes_seconds(1, 37), format_minutes_seconds(3, 14), format_seconds(29), format_seconds(42), format_seconds(58))
          }
       },
       {
