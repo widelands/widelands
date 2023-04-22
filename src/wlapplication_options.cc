@@ -130,9 +130,9 @@ KeyboardShortcut& operator++(KeyboardShortcut& id) {
 	return id;
 }
 
-uint16_t operator-(const KeyboardShortcut& id, const KeyboardShortcut& base) {
-	assert(base <= id);
-	return static_cast<uint16_t>(id) - static_cast<uint16_t>(base);
+uint16_t operator-(const KeyboardShortcut& a, const KeyboardShortcut& b) {
+	assert(a >= b);
+	return static_cast<uint16_t>(a) - static_cast<uint16_t>(b);
 }
 
 struct KeyboardShortcutInfo {
@@ -548,12 +548,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          "editor_showhide_maximum_buildhelp",
                          gettext_noop("Toggle Maximum Build Spaces"))},
 
-// descname is not actually used, toolsize_descr() uses a translatable format string instead
+// toolsize_descr() uses this format string and adds the toolsize
 #define EDITOR_TOOLSIZE(radius, key)                                                               \
 	{                                                                                               \
 		KeyboardShortcut::kEditorToolsize##radius,                                                   \
 		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key),          \
-		                        "editor_toolsize" #radius, "Set Toolsize to " #radius)               \
+		                        "editor_toolsize" #radius, gettext_noop("Set Toolsize to %d"))       \
 	}
    EDITOR_TOOLSIZE(1, 1),
    EDITOR_TOOLSIZE(2, 2),
@@ -786,16 +786,16 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          "quicknav_gui",
                          gettext_noop("Toggle Quick Navigation"))},
 
-// descnames are not actually used, quicknav_descr() uses translatable format strings instead
+// quicknav_descr() uses these format strings and adds the landmark number
 #define QUICKNAV(i)                                                                                \
 	{KeyboardShortcut::kInGameQuicknavSet##i,                                                       \
 	 KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},                                     \
 	                      keysym(SDLK_##i, kDefaultCtrlModifier), "game_quicknav_set_" #i,          \
-	                      "Set Landmark #" #i)},                                                    \
+	                      gettext_noop("Set Landmark #%d"))},                                       \
 	{                                                                                               \
 		KeyboardShortcut::kInGameQuicknavGoto##i,                                                    \
 		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_##i),              \
-		                        "game_quicknav_goto_" #i, "Go To Landmark #" #i)                     \
+		                        "game_quicknav_goto_" #i, gettext_noop("Go To Landmark #%d"))        \
 	}
    QUICKNAV(1),
    QUICKNAV(2),
@@ -959,6 +959,10 @@ std::string get_ingame_shortcut_help() {
 	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGameMain_End);
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
+#ifndef NDEBUG
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonDebugConsole);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonCheatMode);
+#endif
 
 	/** TRANSLATORS: Section heading in "Controls" help */
 	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Message Window"));
@@ -1077,7 +1081,7 @@ namespace {
 std::string toolsize_descr(const KeyboardShortcut id) {
 	assert(id >= KeyboardShortcut::kEditorToolsize1 && id <= KeyboardShortcut::kEditorToolsize10);
 	const uint16_t i = id - KeyboardShortcut::kEditorToolsize1 + 1;
-	return format(_("Set Toolsize to %d"), i);
+	return format(_(shortcuts_.at(id).descname), i);
 }
 
 std::string quicknav_descr(const KeyboardShortcut id) {
@@ -1087,18 +1091,18 @@ std::string quicknav_descr(const KeyboardShortcut id) {
 	if (i % 2 == 0) {
 		// id is Set Quicknav
 		i = i / 2 + 1;
-		return format(_("Set Landmark #%d"), i);
+	} else {
+		// id is Goto Quicknav
+		i = (i + 1) / 2;
 	}
-	// id is Goto Quicknav
-	i = (i + 1) / 2;
-	return format(_("Go To Landmark #%d"), i);
+	return format(_(shortcuts_.at(id).descname), i);
 }
 
 std::string fastplace_descr(const KeyboardShortcut id) {
 	assert(id >= KeyboardShortcut::kFastplace_Begin + kFastplaceDefaults.size() &&
 	       id <= KeyboardShortcut::kFastplace_End);
 	const uint16_t i = id - KeyboardShortcut::kFastplace_Begin - kFastplaceDefaults.size() + 1;
-	return format(_("Fastplace #%i"), i);
+	return format(_(shortcuts_.at(id).descname), i);
 }
 
 }  // namespace
@@ -1445,9 +1449,9 @@ static void init_fastplace_shortcuts(const bool force_defaults) {
 			shortcuts_.emplace(
 			   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
 			                           format("%scustom_%i", kFastplaceGroupPrefix, counter),
-			                           // descname is not actually used, fastplace_descr() uses a
-			                           // translatable format string instead
-			                           format("Fastplace #%i", counter)));
+			                           // fastplace_descr() uses this format string and adds the
+			                           // fastplace number
+			                           gettext_noop("Fastplace #%i")));
 		}
 	}
 }

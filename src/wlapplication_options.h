@@ -129,9 +129,11 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonTooltipAccessibilityMode,
 	kCommonFullscreen,
 	kCommonScreenshot,
+	kCommonGeneral_End = kCommonScreenshot,
+
+	// These are only shown in the help in debug builds
 	kCommonDebugConsole,
 	kCommonCheatMode,
-	kCommonGeneral_End = kCommonCheatMode,
 
 	// These will be moved to related items in the in-game and in-editor help
 	kCommonBuildhelp,
@@ -294,7 +296,7 @@ enum class KeyboardShortcut : uint16_t {
 
 KeyboardShortcut operator+(const KeyboardShortcut& id, int i);
 KeyboardShortcut& operator++(KeyboardShortcut& id);
-uint16_t operator-(const KeyboardShortcut& id, const KeyboardShortcut& base);
+uint16_t operator-(const KeyboardShortcut& a, const KeyboardShortcut& b);
 
 /**
  * Check whether the given shortcut can be used for setting and retrieving the
