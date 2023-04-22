@@ -63,6 +63,8 @@ protected:
 	/// Creates a blank label/tooltip and returns 'false' otherwise.
 	bool init_win_condition_label();
 
+	void update_advanced_options();
+
 	/// Hides or shows the desync warning.
 	void update_warn_desyncing_addon();
 
@@ -93,6 +95,8 @@ protected:
 	UI::MultilineTextarea warn_desyncing_addon_;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::SpinBox win_condition_duration_;
+	UI::Button toggle_advanced_options_;
+	UI::Box advanced_options_box_;
 	std::map<GameSettings::Flags, std::pair<UI::Checkbox*, void (LaunchGame::*)() /* update function */>> game_flag_checkboxes_;
 	UI::Button* choose_map_;
 	UI::Button* choose_savegame_;
