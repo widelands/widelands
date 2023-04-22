@@ -213,50 +213,9 @@ jobs:
         fi
         ./regression_test.py -b build/src/widelands $TIMEOUT
 
-  vcpkg-packages:
-    # If the vcpkg cache is not present, build packages and populate the cache
-    # Then the windows-msvc jobs can install dependencies faster
-    strategy:
-      matrix:
-        arch: [x64, x86]
-    name: Build vcpkg packages for ${{ matrix.arch }}
-    runs-on: windows-2022
-    env:
-      VCPKG_ROOT: C:\vcpkg
-      VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
-    - name: Get vcpkg version
-      id: prepare
-      run: |
-        pushd ${{ env.VCPKG_ROOT }}
-        HEAD=$(git rev-parse --short HEAD)
-        popd
-        echo -n $HEAD > .github/scripts/vcpkg_ref
-      shell: bash
-    - name: Check whether cache exists
-      id: lookup
-      uses: actions/cache@v3
-      with:
-        path: ${{ env.VCPKG_ROOT }}/installed
-        key: |
-          ${{ hashFiles( './install-dependencies.sh', '.github/scripts/vcpkg_ref' ) }}-${{ matrix.arch }}
-    - name: Building packages
-      if: steps.prepare.lookup.cache-hit != 'true'
-      run: ./install-dependencies.sh vcpkg --triplet=${{ env.VCPKG_TARGET_TRIPLET }}
-      shell: bash
-    - name: Update vcpkg_ref
-      if: steps.prepare.lookup.cache-hit != 'true'
-      run: |
-        cat .github/scripts/vcpkg_ref
-        # TODO commit
-
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style, vcpkg-packages]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
         config: [Debug, Release]

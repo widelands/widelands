@@ -1,0 +1,85 @@
+name: vcpkg Update
+concurrency:
+  group: vcpkg-${{ github.ref }}
+  cancel-in-progress: true
+on:
+  workflow_dispatch:
+  schedule:
+    # Weekly on Friday at 2:00 a.m.
+    - cron: '0 2 * * 5'
+  # TODO remove this trigger
+  push:
+    branches:
+      - vcpkg_cache_key
+
+  vcpkg-packages:
+    # Checks for new vcpkg version and tries to build the update package versions
+    # On success it updates the vcpkg_ref file so the main builds use the cache
+    # with the latest version.
+    strategy:
+      matrix:
+        arch: [x64, x86]
+    name: Build vcpkg packages for ${{ matrix.arch }}
+    runs-on: windows-2022
+    env:
+      VCPKG_ROOT: C:\vcpkg
+      VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
+    outputs:
+      result-x64: ${{ steps.build.outputs.result-x64 }}
+      result-x86: ${{ steps.build.outputs.result-x86 }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Get vcpkg version
+      id: prepare
+      run: |
+        pushd ${{ env.VCPKG_ROOT }}
+        HEAD=$(git rev-parse --short HEAD)
+        popd
+        echo "Current HEAD is $HEAD"
+        echo -n $HEAD > .github/scripts/vcpkg_ref
+      shell: bash
+    - name: Check whether cache exists
+      id: lookup
+      uses: actions/cache@v3
+      with:
+        path: ${{ env.VCPKG_ROOT }}/installed
+        key: |
+          ${{ hashFiles( './install-dependencies.sh', '.github/scripts/vcpkg_ref' ) }}-${{ matrix.arch }}
+    - name: Building packages
+      id: build
+      if: steps.lookup.outputs.cache-hit != 'true'
+      run: |
+        ./install-dependencies.sh vcpkg --triplet=${{ env.VCPKG_TARGET_TRIPLET }}
+        echo "result-${{ matrix.arch }}=true" >> $GITHUB_OUTPUT
+      shell: bash
+  update:
+    needs: vcpkg-packages
+    if: ${{ needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
+    name: Commit new version
+    runs-on: windows-2022
+    env:
+      VCPKG_ROOT: C:\vcpkg
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+        persist-credentials: false
+    - name: Update vcpkg_ref
+      run: |
+        pushd ${{ env.VCPKG_ROOT }}
+        HEAD=$(git rev-parse --short HEAD)
+        popd
+        echo "Current HEAD is $HEAD"
+        echo -n $HEAD > .github/scripts/vcpkg_ref
+        git config --global user.name "The Widelands Build Bot"
+        git config --global user.email "bunnybot@widelands.org"
+        git add .github/scripts/vcpkg_ref
+        git commit -m "Update vcpkg version"
+        # TODO activate push
+        # git push "https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" master
+        git push "https://matthiakl:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" vcpkg_cache_key
+      shell: bash
