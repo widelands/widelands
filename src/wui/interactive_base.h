@@ -385,7 +385,12 @@ private:
 		                 const uint32_t Radius = 0,
 		                 const uint16_t Gap = 0,
 		                 const Image* Pic = nullptr)
-		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), gap_percent(Gap), pic(Pic) {
+		   : freeze(Freeze),
+		     triangles(Triangles),
+		     pos(Pos),
+		     radius(Radius),
+		     gap_percent(Gap),
+		     pic(Pic) {
 		}
 		bool freeze;     // don't change sel, even if mouse moves
 		bool triangles;  //  otherwise nodes
