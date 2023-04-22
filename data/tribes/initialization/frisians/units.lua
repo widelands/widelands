@@ -1802,7 +1802,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Small Armor Smithy
             purpose = pgettext("frisians_building", "Produces basic weapons and helmets for the soldiers."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Small Armor Smithy
-            performance = pgettext("frisians_building", "When this building is fully supplied and all wares are needed by the economy, production of short sword takes %1$s, long sword takes %2$s and helmet takes %3$s on average. If only one ware is needed by the economy, production of short sword takes %4$s, long sword takes %5$s and helmet takes %6$s on average."):bformat(format_minutes_seconds(4, 12), format_minutes_seconds(2, 6), format_minutes_seconds(4, 12), format_minutes_seconds(1, 8), format_minutes_seconds(1, 3), format_minutes_seconds(1, 18))
+            performance = pgettext("frisians_building", "When this building is fully supplied and all wares are needed by the economy, production of one short sword takes %1$s, one long sword takes %2$s and one helmet takes %3$s on average. If only one ware is needed by the economy, production of one short sword takes %4$s, one long sword takes %5$s and one helmet takes %6$s on average."):bformat(format_minutes_seconds(4, 12), format_minutes_seconds(2, 6), format_minutes_seconds(4, 12), format_minutes_seconds(1, 8), format_minutes_seconds(1, 3), format_minutes_seconds(1, 18))
          }
       },
       {
