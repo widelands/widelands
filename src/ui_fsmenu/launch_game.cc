@@ -246,8 +246,7 @@ bool LaunchGame::should_write_replay() const {
 void LaunchGame::update_advanced_options() {
 	const bool show = toggle_advanced_options_.style() == UI::Button::VisualState::kPermpressed;
 	advanced_options_box_.set_visible(show);
-	toggle_advanced_options_.set_title(show ? _("Show fewer options") :
-                                             _("Show more options"));
+	toggle_advanced_options_.set_title(show ? _("Show fewer options") : _("Show more options"));
 	layout();
 }
 
