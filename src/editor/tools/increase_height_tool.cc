@@ -28,6 +28,8 @@
 int32_t EditorIncreaseHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                     EditorActionArgs* args,
                                                     Widelands::Map* map) {
+	// NOCOM
+
 	if (args->original_heights.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<Widelands::FCoords>(

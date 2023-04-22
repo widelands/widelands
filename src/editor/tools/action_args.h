@@ -45,6 +45,7 @@ struct EditorActionArgs {
 	~EditorActionArgs();
 
 	uint32_t sel_radius;
+	std::vector<bool> selection_gaps;
 
 	int32_t change_by{0};                                  // resources, change height tools
 	std::list<Widelands::Field::Height> original_heights;  // change height tool

@@ -28,6 +28,8 @@
 int32_t EditorDecreaseHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                     EditorActionArgs* args,
                                                     Widelands::Map* map) {
+	// NOCOM
+
 	if (args->original_heights.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<Widelands::FCoords>(
@@ -52,6 +54,7 @@ int32_t EditorDecreaseHeightTool::handle_undo_impl(const Widelands::NodeAndTrian
 	            map->get_fcoords(center.node),
 	            args->sel_radius + MAX_FIELD_HEIGHT / map->max_field_height_diff() + 1));
 	std::list<Widelands::Field::Height>::iterator i = args->original_heights.begin();
+	// NOCOM
 
 	do {
 		mr.location().field->set_height(*i);
