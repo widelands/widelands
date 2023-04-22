@@ -92,41 +92,44 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                              5,
                              60),
 
-toggle_advanced_options_(&right_column_content_box_,
-                                   "toggle_advanced",
-                                   0,
-                                   0,
-                                   0,
-                                   ok_.get_h(),
-                                   UI::ButtonStyle::kFsMenuSecondary,
-                                   "" /* set later */,
-                                   _("Show or hide the advanced game configuration options")),
-advanced_options_box_(&right_column_content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     toggle_advanced_options_(&right_column_content_box_,
+                              "toggle_advanced",
+                              0,
+                              0,
+                              0,
+                              ok_.get_h(),
+                              UI::ButtonStyle::kFsMenuSecondary,
+                              "" /* set later */,
+                              _("Show or hide the advanced game configuration options")),
+     advanced_options_box_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
 
-game_flag_checkboxes_({
-{GameSettings::Flags::kPeaceful, {
-     new UI::Checkbox(
-        &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
-&LaunchGame::update_peaceful_mode}},
+     game_flag_checkboxes_({
+        {GameSettings::Flags::kPeaceful,
+         {new UI::Checkbox(
+             &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
+          &LaunchGame::update_peaceful_mode}},
 
-{GameSettings::Flags::kFogless, {
-     new UI::Checkbox(
-        &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("No fog of war")),
-&LaunchGame::update_fogless}},
+        {GameSettings::Flags::kFogless,
+         {new UI::Checkbox(
+             &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("No fog of war")),
+          &LaunchGame::update_fogless}},
 
-{GameSettings::Flags::kForbidDiplomacy, {
-     new UI::Checkbox(
-        &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Forbid diplomacy")),
-&LaunchGame::update_forbid_diplomacy}},
+        {GameSettings::Flags::kForbidDiplomacy,
+         {new UI::Checkbox(&advanced_options_box_,
+                           UI::PanelStyle::kFsMenu,
+                           Vector2i::zero(),
+                           _("Forbid diplomacy")),
+          &LaunchGame::update_forbid_diplomacy}},
 
-{GameSettings::Flags::kCustomStartingPositions, {
-     new UI::Checkbox(&advanced_options_box_,
-                                UI::PanelStyle::kFsMenu,
-                                Vector2i::zero(),
-                                _("Custom starting positions")),
-&LaunchGame::update_custom_starting_positions}},
+        {GameSettings::Flags::kCustomStartingPositions,
+         {new UI::Checkbox(&advanced_options_box_,
+                           UI::PanelStyle::kFsMenu,
+                           Vector2i::zero(),
+                           _("Custom starting positions")),
+          &LaunchGame::update_custom_starting_positions}},
 
-}),
+     }),
      choose_map_(mpg && settings.can_change_map() && !preconfigured ?
                     new UI::Button(&right_column_content_box_,
                                    "choose_map",
@@ -157,7 +160,8 @@ game_flag_checkboxes_({
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	win_condition_duration_.changed.connect([this]() { win_condition_duration_changed(); });
 	for (auto& pair : game_flag_checkboxes_) {
-		pair.second.first->changed.connect([this, pair]() { settings_.set_flag(pair.first, pair.second.first->get_state()); });
+		pair.second.first->changed.connect(
+		   [this, pair]() { settings_.set_flag(pair.first, pair.second.first->get_state()); });
 	}
 	toggle_advanced_options_.sigclicked.connect([this]() {
 		toggle_advanced_options_.toggle();
@@ -242,7 +246,8 @@ bool LaunchGame::should_write_replay() const {
 void LaunchGame::update_advanced_options() {
 	const bool show = toggle_advanced_options_.style() == UI::Button::VisualState::kPermpressed;
 	advanced_options_box_.set_visible(show);
-	toggle_advanced_options_.set_title(show ? _("Hide advanced options") : _("Show advanced options"));
+	toggle_advanced_options_.set_title(show ? _("Hide advanced options") :
+                                             _("Show advanced options"));
 	layout();
 }
 
@@ -268,7 +273,8 @@ void LaunchGame::update_peaceful_mode() {
 }
 
 void LaunchGame::update_custom_starting_positions() {
-	UI::Checkbox* checkbox = game_flag_checkboxes_.at(GameSettings::Flags::kCustomStartingPositions).first;
+	UI::Checkbox* checkbox =
+	   game_flag_checkboxes_.at(GameSettings::Flags::kCustomStartingPositions).first;
 	const GameSettings& settings = settings_.settings();
 	const bool forbidden = settings.scenario || settings.savegame;
 

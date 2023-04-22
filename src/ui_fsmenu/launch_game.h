@@ -97,7 +97,9 @@ protected:
 	UI::SpinBox win_condition_duration_;
 	UI::Button toggle_advanced_options_;
 	UI::Box advanced_options_box_;
-	std::map<GameSettings::Flags, std::pair<UI::Checkbox*, void (LaunchGame::*)() /* update function */>> game_flag_checkboxes_;
+	std::map<GameSettings::Flags,
+	         std::pair<UI::Checkbox*, void (LaunchGame::*)() /* update function */>>
+	   game_flag_checkboxes_;
 	UI::Button* choose_map_;
 	UI::Button* choose_savegame_;
 	std::string last_win_condition_;

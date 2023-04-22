@@ -682,8 +682,10 @@ void WLApplication::init_and_run_game_from_template() {
 
 	settings->set_flag(GameSettings::Flags::kPeaceful, section.get_bool("peaceful", false));
 	settings->set_flag(GameSettings::Flags::kFogless, section.get_bool("fogless", false));
-	settings->set_flag(GameSettings::Flags::kCustomStartingPositions, section.get_bool("custom_starting_positions", false));
-	settings->set_flag(GameSettings::Flags::kForbidDiplomacy, section.get_bool("forbid_diplomacy", false));
+	settings->set_flag(GameSettings::Flags::kCustomStartingPositions,
+	                   section.get_bool("custom_starting_positions", false));
+	settings->set_flag(
+	   GameSettings::Flags::kForbidDiplomacy, section.get_bool("forbid_diplomacy", false));
 
 	{
 		std::string wc_name = section.get_string("win_condition", "endless_game.lua");
