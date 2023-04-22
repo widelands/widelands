@@ -29,8 +29,6 @@
 int32_t EditorSetHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                EditorActionArgs* args,
                                                Widelands::Map* map) {
-	// NOCOM
-
 	if (args->original_heights.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<Widelands::FCoords>(
@@ -43,7 +41,7 @@ int32_t EditorSetHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<
 	return map->set_height(
 	   parent_.egbase(),
 	   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
-	   args->interval);
+	   args->interval, args->selection_gaps.cbegin());
 }
 
 int32_t
@@ -56,7 +54,6 @@ EditorSetHeightTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands
 	            args->sel_radius + MAX_FIELD_HEIGHT / map->max_field_height_diff() + 1));
 
 	std::list<Widelands::Field::Height>::iterator i = args->original_heights.begin();
-	// NOCOM
 
 	do {
 		mr.location().field->set_height(*i);

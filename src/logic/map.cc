@@ -2447,10 +2447,14 @@ uint32_t Map::set_height(const EditorGameBase& egbase, const FCoords fc, uint8_t
 }
 
 uint32_t
-Map::change_height(const EditorGameBase& egbase, Area<FCoords> area, int16_t const difference) {
+Map::change_height(const EditorGameBase& egbase, Area<FCoords> area, int16_t const difference, std::vector<bool>::const_iterator gap_iterator) {
 	{
 		MapRegion<Area<FCoords>> mr(*this, area);
 		do {
+			if (*gap_iterator++) {
+				continue;
+			}
+
 			if (difference < 0 && mr.location().field->height < static_cast<uint8_t>(-difference)) {
 				mr.location().field->height = 0;
 			} else if (static_cast<int16_t>(MAX_FIELD_HEIGHT) - difference <
@@ -2474,12 +2478,16 @@ Map::change_height(const EditorGameBase& egbase, Area<FCoords> area, int16_t con
 }
 
 uint32_t
-Map::set_height(const EditorGameBase& egbase, Area<FCoords> area, HeightInterval height_interval) {
+Map::set_height(const EditorGameBase& egbase, Area<FCoords> area, HeightInterval height_interval, std::vector<bool>::const_iterator gap_iterator) {
 	assert(height_interval.valid());
 	assert(height_interval.max <= MAX_FIELD_HEIGHT);
 	{
 		MapRegion<Area<FCoords>> mr(*this, area);
 		do {
+			if (*gap_iterator++) {
+				continue;
+			}
+
 			if (mr.location().field->height < height_interval.min) {
 				mr.location().field->height = height_interval.min;
 			} else if (height_interval.max < mr.location().field->height) {
