@@ -693,9 +693,6 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 			sp->set_map("", "", map_info.world_name, "", nr_players, false);
 			sp->set_scenario(false);
 			sp->set_player_number(plnum);
-			sp->set_peaceful_mode(false);
-			sp->set_fogless(false);
-			sp->set_custom_starting_positions(false);
 
 			for (unsigned p = 0; p < nr_players; ++p) {
 				sp->set_player_name(

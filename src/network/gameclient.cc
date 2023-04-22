@@ -548,28 +548,16 @@ void GameClient::set_player(uint8_t /*number*/, const PlayerSettings& /* setting
 	// set_player_number(uint8_t) to the host.
 }
 
-void GameClient::set_peaceful_mode(bool peace) {
-	d->settings.peaceful = peace;
+void GameClient::set_flag(GameSettings::Flags flag, bool state) {
+	if (state) {
+		d->settings.flags |= flag;
+	} else {
+		d->settings.flags &= ~flag;
+	}
 }
 
-bool GameClient::is_peaceful_mode() {
-	return d->settings.peaceful;
-}
-
-void GameClient::set_fogless(bool fogless) {
-	d->settings.fogless = fogless;
-}
-
-bool GameClient::is_fogless() {
-	return d->settings.fogless;
-}
-
-void GameClient::set_custom_starting_positions(bool c) {
-	d->settings.custom_starting_positions = c;
-}
-
-bool GameClient::get_custom_starting_positions() {
-	return d->settings.custom_starting_positions;
+bool GameClient::get_flag(GameSettings::Flags flag) {
+	return (d->settings.flags & flag) != 0;
 }
 
 std::string GameClient::get_win_condition_script() {
@@ -1191,14 +1179,8 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	case NETCMD_WIN_CONDITION_DURATION:
 		d->settings.win_condition_duration = packet.signed_32();
 		break;
-	case NETCMD_PEACEFUL_MODE:
-		d->settings.peaceful = (packet.unsigned_8() != 0u);
-		break;
-	case NETCMD_FOGLESS:
-		d->settings.fogless = (packet.unsigned_8() != 0u);
-		break;
-	case NETCMD_CUSTOM_STARTING_POSITIONS:
-		d->settings.custom_starting_positions = (packet.unsigned_8() != 0u);
+	case NETCMD_GAMEFLAGS:
+		d->settings.flags = packet.unsigned_16();
 		break;
 	case NETCMD_LAUNCH:
 		if ((d->game != nullptr) || ((d->modal != nullptr) && d->modal->is_modal())) {
