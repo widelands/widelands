@@ -23,6 +23,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/terrain_affinity.h"
 #include "logic/mapregion.h"
 
 /**
@@ -52,6 +53,29 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTria
 		   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
 		std::list<Widelands::DescriptionIndex>::iterator i = args->new_immovable_types.begin();
 		do {
+			if (*i == kAutoTreesIndex) {
+				const uint32_t attribute_id =
+				   Widelands::ImmovableDescr::get_attribute_id("normal_tree");
+				std::set<std::pair<unsigned /* probability_to_grow, for sorting */,
+				                   Widelands::DescriptionIndex>>
+				   all_trees_sorted;
+
+				const Widelands::Descriptions& descriptions = egbase.descriptions();
+				for (Widelands::DescriptionIndex di = 0; di < descriptions.nr_immovables(); ++di) {
+					const Widelands::ImmovableDescr* descr = descriptions.get_immovable_descr(di);
+					if (descr->has_attribute(attribute_id) && descr->has_terrain_affinity()) {
+						all_trees_sorted.emplace(
+						   Widelands::probability_to_grow(
+						      descr->terrain_affinity(), mr.location(), *map, descriptions.terrains()),
+						   di);
+					}
+				}
+
+				auto it = all_trees_sorted.rbegin();
+				std::advance(it, RNG::static_rand(std::min<size_t>(all_trees_sorted.size(), 3)));
+				*i = it->second;
+			}
+
 			if ((mr.location().field->get_immovable() == nullptr) &&
 			    ((mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK) != 0)) {
 				egbase.create_immovable(mr.location(), *i, nullptr /* owner */);
@@ -103,7 +127,11 @@ std::string EditorPlaceImmovableTool::format_conf_description_impl(const ToolCon
 		if (!mapobj_names.empty()) {
 			mapobj_names += " | ";
 		}
-		mapobj_names += immovable_descriptions.get(idx).descname();
+		if (idx == kAutoTreesIndex) {
+			mapobj_names += _("Automatic Trees");
+		} else {
+			mapobj_names += immovable_descriptions.get(idx).descname();
+		}
 	}
 
 	/** TRANSLATORS: An entry in the tool history list. */

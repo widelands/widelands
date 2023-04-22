@@ -11,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-03-31 02:43+0000\n"
+"POT-Creation-Date: 2023-04-19 02:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Karl Vest, 2020\n"
-"Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
+"Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -412,7 +412,7 @@ msgstr "Zmeniť terén mapy"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:318
-#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:61
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:77
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Nehybné objekty"
@@ -772,8 +772,14 @@ msgstr ""
 msgid "Critter: %1$s"
 msgstr ""
 
+#: ../../src/editor/tools/place_immovable_tool.cc:131
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:92
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:97
+msgid "Automatic Trees"
+msgstr ""
+
 #. * TRANSLATORS: An entry in the tool history list.
-#: ../../src/editor/tools/place_immovable_tool.cc:110
+#: ../../src/editor/tools/place_immovable_tool.cc:138
 #, c-format
 msgid "Immovable: %1$s"
 msgstr ""
@@ -785,18 +791,18 @@ msgid "Terrain: %1$s"
 msgstr ""
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:180
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:186
 #, c-format
 msgid "Current: %s …"
 msgstr "Aktuálny výber: %s …"
 
 #. * TRANSLATORS: Help text in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:183
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:189
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
 msgstr "Položku vyberiete kliknutím. Pomocou klávesu Ctrl môžete vybrať viacero položiek naraz."
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:186
+#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:192
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:156
 #, c-format
 msgid "Current: %s"
@@ -980,25 +986,25 @@ msgstr "Chyba!"
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:81
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:279
-#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:193
+#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:195
 msgid "My Maps"
 msgstr "Moje mapy"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:83
-#: ../../src/wui/mapdata.cc:187
+#: ../../src/wui/mapdata.cc:189
 msgid "Multiplayer Scenarios"
 msgstr "Scenáre pre viacerých hráčov"
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:85
-#: ../../src/wui/mapdata.cc:190
+#: ../../src/wui/mapdata.cc:192
 msgid "Singleplayer Scenarios"
 msgstr ""
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:87
-#: ../../src/wui/mapdata.cc:196
+#: ../../src/wui/mapdata.cc:198
 msgid "Downloaded Maps"
 msgstr ""
 
@@ -1603,6 +1609,43 @@ msgstr "Kliknutím na mapu nastavíte výšku terénu na náhodnú hodnotu zo za
 msgid "Fixed height"
 msgstr "Pevná výška"
 
+#. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
+#. italics)
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:47
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:176
+#: ../../src/ui_fsmenu/addons/rows_ui.cc:359 ../../src/wui/stock_menu.cc:36
+#, c-format
+msgid "%1$s %2$s"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
+#, c-format
+msgid "%1$s (removable by e.g. placing roads)"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:54
+#, c-format
+msgid "%1$s (needs a small building plot)"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:57
+#, c-format
+msgid "%1$s (needs a medium building plot)"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:60
+#, c-format
+msgid "%1$s (needs a big building plot)"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:98
+msgid "Automatically place the trees which grow best on the terrain"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:114
+msgid "Automatic Immovable Placement"
+msgstr ""
+
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:34
 msgid "Resize"
 msgstr "Zmeniť rozmer"
@@ -1627,7 +1670,7 @@ msgid "%1%: %2%"
 msgstr "%1%: %2%"
 
 #. * TRANSLATORS: Help tooltip in tool history window
-#: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:108
+#: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:113
 msgid ""
 "Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item."
 msgstr ""
@@ -3606,7 +3649,8 @@ msgid "%1$s<br>(%2$s)"
 msgstr ""
 
 #: ../../src/ui_basic/window.cc:100 ../../src/ui_fsmenu/about.cc:41
-#: ../../src/ui_fsmenu/mousewheel_report.cc:73 ../../src/wui/watchwindow.cc:75
+#: ../../src/ui_fsmenu/mousewheel_report.cc:73
+#: ../../src/wui/watchwindow.cc:110
 msgid "Close"
 msgstr "Zavrieť"
 
@@ -4962,14 +5006,6 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:317
 #, c-format
 msgid "%1$s+%2$u"
-msgstr ""
-
-#. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
-#. italics)
-#: ../../src/ui_fsmenu/addons/rows_ui.cc:176
-#: ../../src/ui_fsmenu/addons/rows_ui.cc:359 ../../src/wui/stock_menu.cc:36
-#, c-format
-msgid "%1$s %2$s"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:180
@@ -8024,7 +8060,7 @@ msgstr ""
 msgid "Show debug window"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:515 ../../src/wui/watchwindow.cc:51
+#: ../../src/wui/fieldaction.cc:515 ../../src/wui/watchwindow.cc:85
 msgid "Watch"
 msgstr "Sledovať"
 
@@ -9009,12 +9045,12 @@ msgid "No Author"
 msgstr "Bez autora"
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:173 ../../src/wui/savegametable.cc:126
+#: ../../src/wui/mapdata.cc:175 ../../src/wui/savegametable.cc:126
 msgid "parent"
 msgstr "nadradený priečinok"
 
 #. * TRANSLATORS: This label is shown when a folder is empty
-#: ../../src/wui/mapdata.cc:179
+#: ../../src/wui/mapdata.cc:181
 msgid "empty"
 msgstr "prázdny"
 
@@ -9871,10 +9907,10 @@ msgstr ""
 msgid "%1%G"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:58
+#: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
 msgstr "Nasledovať"
 
-#: ../../src/wui/watchwindow.cc:63
+#: ../../src/wui/watchwindow.cc:98
 msgid "Center the main view on this"
 msgstr "Vycentrovať hlavný pohľad na túto pozíciu"

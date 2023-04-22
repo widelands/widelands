@@ -18,6 +18,10 @@
 
 #include "wui/watchwindow.h"
 
+#include <set>
+
+#include <SDL_timer.h>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/rect.h"
@@ -32,27 +36,58 @@
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
+#include "wui/unique_window_handler.h"
 
 constexpr Duration kRefreshInterval(5000);
 
 // Holds information for a view
 static WatchWindow* g_watch_window = nullptr;
+static std::set<uint16_t> g_open_watch_windows;
+
+namespace {
+
+uint16_t get_next_free_watch_window_id() {
+	for (uint16_t i = 0; i <= g_open_watch_windows.size(); ++i) {
+		if (g_open_watch_windows.count(i) == 0) {
+			g_open_watch_windows.emplace(i);
+			return i;
+		}
+	}
+	NEVER_HERE();
+}
+
+}  // namespace
 
 Widelands::Game& WatchWindow::game() const {
 	return parent_.game();
 }
 
+WatchWindow::WatchWindowMapView::WatchWindowMapView(WatchWindow* parent, const Widelands::Map& map)
+   : MapView(parent, map, 0, 0, 200, 166), parent_window_(parent) {
+}
+
 WatchWindow::WatchWindow(InteractiveGameBase& parent,
+                         const std::string& name,
+                         uint16_t const id,
                          int32_t const x,
                          int32_t const y,
                          uint32_t const w,
                          uint32_t const h,
                          bool const init_single_window)
-   : UI::Window(&parent, UI::WindowStyle::kWui, "watch", x, y, w, h, _("Watch")),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      name,
+                      &parent.unique_windows().get_registry(name),
+                      x,
+                      y,
+                      w,
+                      h,
+                      _("Watch")),
      parent_(parent),
-     map_view_(this, game().map(), 0, 0, 200, 166),
+     map_view_(this, game().map()),
      last_visit_(game().get_gametime()),
-     single_window_(init_single_window) {
+     single_window_(init_single_window),
+     id_(id) {
 	UI::Button* followbtn =
 	   new UI::Button(this, "follow", 0, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
 	                  g_image_cache->get("images/wui/menus/watch_follow.png"), _("Follow"));
@@ -110,14 +145,23 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 	}
 	WatchWindow::View view;
 
-	map_view_.scroll_to_field(coords, MapView::Transition::Jump);
+	const bool has_previous = !views_.empty();
+
+	if (!has_previous) {
+		map_view_.scroll_to_field(coords, MapView::Transition::Jump);
+	}
 
 	view.tracking = nullptr;
 	view.view = map_view_.view();
 	last_visit_ = game().get_gametime();
 
 	views_.push_back(view);
-	set_current_view(views_.size() - 1, views_.size() > 1);
+	set_current_view(views_.size() - 1, has_previous);
+
+	if (has_previous) {
+		map_view_.scroll_to_field(coords, MapView::Transition::Jump);
+	}
+
 	if (single_window_) {
 		toggle_buttons();
 	}
@@ -164,6 +208,8 @@ void WatchWindow::set_current_view(uint8_t idx, bool save_previous) {
 
 WatchWindow::~WatchWindow() {
 	g_watch_window = nullptr;
+	assert(g_open_watch_windows.count(id_) == 1);
+	g_open_watch_windows.erase(id_);
 }
 
 /*
@@ -300,6 +346,45 @@ void WatchWindow::close_cur_view() {
 	toggle_buttons();
 }
 
+/* Allow closing by right click on mapview */
+bool WatchWindow::WatchWindowMapView::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
+	if (btn == SDL_BUTTON_RIGHT) {
+		view_moved_ = false;
+		dragging_start_time_ = SDL_GetTicks();
+	}
+	MapView::handle_mousepress(btn, x, y);
+
+	// MapView::handle_mousepress() would allow the click to fall through to the watch window, but
+	// we don't want that, because opening a field action in it warps the mouse to the fastclick
+	// button, and the watch window would interpret the resulting mousemove event as dragging and
+	// jump with the mouse pointer.
+	return true;
+}
+bool WatchWindow::WatchWindowMapView::handle_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
+	if (btn == SDL_BUTTON_RIGHT && is_dragging()) {
+		if (!view_moved_) {
+			constexpr uint32_t kMaxClickDuration = 500;
+			const uint32_t release_time = SDL_GetTicks();
+			if (release_time > dragging_start_time_ &&
+			    release_time - dragging_start_time_ < kMaxClickDuration &&
+			    !parent_window_->is_pinned()) {
+				parent_window_->close_cur_view();
+			}
+		} else {
+			view_moved_ = false;
+		}
+	}
+	return MapView::handle_mouserelease(btn, x, y);
+}
+bool WatchWindow::WatchWindowMapView::handle_mousemove(
+   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
+	if ((state & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0) {
+		view_moved_ = true;
+	}
+	return MapView::handle_mousemove(state, x, y, xdiff, ydiff);
+}
+
+/***** Saving and loading *****/
 constexpr uint16_t kCurrentPacketVersion = 1;
 UI::Window& WatchWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
 	try {
@@ -351,13 +436,17 @@ Open a watch window.
 WatchWindow* show_watch_window(InteractiveGameBase& parent, const Widelands::Coords& coords) {
 	if (get_config_bool("single_watchwin", false)) {
 		if (g_watch_window == nullptr) {
-			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, true);
+			assert(g_open_watch_windows.empty());
+			g_open_watch_windows.emplace(0);
+			g_watch_window = new WatchWindow(parent, "watch_0", 0, 250, 150, 200, 200, true);
 		}
 		g_watch_window->add_view(coords);
 		return g_watch_window;
 	}
 
-	auto* window = new WatchWindow(parent, 250, 150, 200, 200, false);
+	const uint16_t id = get_next_free_watch_window_id();
+	auto* window = new WatchWindow(
+	   parent, format("watch_%d", id), id, 250 + 20 * id, 150 + 20 * id, 200, 200, false);
 	window->add_view(coords);
 	return window;
 }

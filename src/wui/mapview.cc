@@ -453,6 +453,12 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	}
 }
 
+void MapView::set_centered_view(const View& centered_view, const Transition& transition) {
+	const Vector2f viewpoint = MapviewPixelFunctions::panel_to_map(
+	   centered_view.viewpoint, centered_view.zoom, Vector2f(-get_w() / 2.f, -get_h() / 2.f));
+	set_view(View(viewpoint, centered_view.zoom), transition);
+}
+
 void MapView::scroll_to_field(const Widelands::Coords& c, const Transition& transition) {
 	assert(0 <= c.x);
 	assert(c.x < map_.get_width());
@@ -479,6 +485,12 @@ const MapView::View& MapView::view() const {
 	return view_;
 }
 
+MapView::View MapView::get_centered_view() const {
+	const Vector2f center = MapviewPixelFunctions::panel_to_map(
+	   view_.viewpoint, view_.zoom, Vector2f(get_w() / 2.f, get_h() / 2.f));
+	return View(center, view_.zoom);
+}
+
 void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
 	if (is_animating() || map_.get_width() == 0 || map_.get_height() == 0) {
 		return;
@@ -500,7 +512,7 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		const auto node_and_triangle = track_sel(Vector2i(x, y));
 		field_clicked(node_and_triangle);
 		// Do not return true, because we want to give our parent a chance to
-		// also handle the click.
+		// also handle the click. Painting mode in the editor needs it.
 	}
 	if (btn == SDL_BUTTON_RIGHT) {
 		jump();
@@ -584,8 +596,8 @@ bool MapView::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 		if (is_animating()) {
 			return true;
 		}
-		const uint16_t scroll_distance_y = g_gr->get_yres() / 20;
-		const uint16_t scroll_distance_x = g_gr->get_xres() / 20;
+		const uint16_t scroll_distance_y = get_h() / 20;
+		const uint16_t scroll_distance_x = get_w() / 20;
 		pan_by(Vector2i(change_2d.x * scroll_distance_x, change_2d.y * scroll_distance_y),
 		       Transition::Jump);
 		return true;
@@ -695,8 +707,8 @@ bool MapView::scroll_map() {
 #undef kNP
 
 	   // set the scrolling distance
-	   const uint16_t xres = g_gr->get_xres();
-	const uint16_t yres = g_gr->get_yres();
+	   const uint16_t xres = get_w();
+	const uint16_t yres = get_h();
 
 	uint16_t scroll_distance_x = xres / 8;
 	uint16_t scroll_distance_y = yres / 8;
