@@ -283,9 +283,11 @@ void Window::move_out_of_the_way() {
 			bool need_check_popups = false;
 			if (parent_is_main) {
 				if (toolbar_at_bottom) {
-					need_check_popups = mouse.y + get_h() / 2 - kBottomBorderThickness > ph - max_popup_h;
+					need_check_popups =
+					   mouse.y + get_h() / 2 - kBottomBorderThickness > ph - max_popup_h;
 				} else {
-					need_check_popups = mouse.y - get_h() / 2 + kTopBorderThickness < toolbar_top_h + max_popup_h;
+					need_check_popups =
+					   mouse.y - get_h() / 2 + kTopBorderThickness < toolbar_top_h + max_popup_h;
 				}
 			}
 
@@ -303,7 +305,8 @@ void Window::move_out_of_the_way() {
 		}
 		ny -= get_h() / 2;
 	} else {
-		const int max_popup_h_bottom = toolbar_bottom_h > 0 ? (max_popup_h - kBottomBorderThickness) : 0;
+		const int max_popup_h_bottom =
+		   toolbar_bottom_h > 0 ? (max_popup_h - kBottomBorderThickness) : 0;
 		if (mouse.y + kClearance + get_h() + max_popup_h_bottom < ph || mouse.y < ph / 2) {
 			ny += kClearance;
 		} else {
