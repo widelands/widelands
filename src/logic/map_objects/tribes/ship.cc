@@ -626,7 +626,8 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 						   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 
 						send_message(game, _("Port Space"), _("Port Space Found"),
-							         _("A warship found a new port build space."), descr().icon_filename());
+						             _("A warship found a new port build space."),
+						             descr().icon_filename());
 					}
 				}
 			}
@@ -1118,11 +1119,11 @@ void Ship::battle_update(Game& game) {
 			if (target_ship != nullptr) {
 				molog(game.get_gametime(),
 				      "Could not find a path to opponent ship %u %s from %dx%d to %dx%d",
-					  target_ship->serial(), target_ship->get_shipname().c_str(), get_position().x,
-					  get_position().y, dest.x, dest.y);
+				      target_ship->serial(), target_ship->get_shipname().c_str(), get_position().x,
+				      get_position().y, dest.x, dest.y);
 			} else {
 				molog(game.get_gametime(), "Could not find a path to attack coords from %dx%d to %dx%d",
-					  get_position().x, get_position().y, dest.x, dest.y);
+				      get_position().x, get_position().y, dest.x, dest.y);
 			}
 
 			battles_.pop_back();
