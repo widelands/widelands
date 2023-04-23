@@ -6917,14 +6917,16 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	for (const Widelands::DescriptionIndex& temp_input : bo.inputs) {
 		for (const Widelands::DescriptionIndex& bidx : wares.at(temp_input).producers) {
 			BuildingObserver& temp_building = get_building_observer(bidx);
-			verb_log_dbg("Checking producer %s of ware %s for building %s.", temp_building.name, tribe_->get_ware_descr(temp_input)->name().c_str(),bo.name);
+			verb_log_dbg("Checking producer %s of ware %s for building %s.", temp_building.name,
+			             tribe_->get_ware_descr(temp_input)->name().c_str(), bo.name);
 			if (temp_building.cnt_built != 0 && temp_building.current_stats > 10) {
 				++supplied;
 				break;
 			}
 		}
 	}
-	verb_log_dbg("Found supplies for %lld of %lld input wares for Building %s", supplied, bo.inputs.size(), bo.name);
+	verb_log_dbg("Found supplies for %lld of %lld input wares for Building %s", supplied,
+	             bo.inputs.size(), bo.name);
 
 	return supplied == bo.inputs.size();
 }
