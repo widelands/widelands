@@ -33,8 +33,6 @@
 
 constexpr int8_t kSpacing = 4;
 
-constexpr uint8_t kMaxMessages = 4;
-
 constexpr int16_t kMessagePreviewMaxLifetime = 15 * 1000;  // show messages for 15 seconds
 
 MessagePreview::MessagePreview(InfoPanel* i, const std::string& text, const std::string& tooltip)
@@ -380,7 +378,7 @@ void InfoPanel::pop_message(MessagePreview* m) {
 void InfoPanel::push_message(MessagePreview* message) {
 	messages_.push_back(message);
 
-	if (messages_.size() > kMaxMessages) {
+	if (messages_.size() > UI::kMaxPopupMessages) {
 		pop_message(messages_.front());
 	}
 

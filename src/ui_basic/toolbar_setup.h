@@ -19,11 +19,15 @@
 #ifndef WL_UI_BASIC_TOOLBAR_SETUP_H
 #define WL_UI_BASIC_TOOLBAR_SETUP_H
 
+#include <cstdint>
+
 namespace UI {
 
 [[nodiscard]] int main_toolbar_button_size();
 
 [[nodiscard]] bool main_toolbar_at_bottom();
+
+constexpr uint8_t kMaxPopupMessages = 4;
 
 enum ToolbarDisplayMode {
 	kCmdSwap = 1,

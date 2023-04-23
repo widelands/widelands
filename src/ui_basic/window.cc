@@ -252,12 +252,20 @@ void Window::move_out_of_the_way() {
 	const int ph = parent->get_inner_h() - toolbar_bottom_h;
 	const int pw = parent->get_inner_w();
 
+	// Pop up messages have higher priority, so they can steal mouse clicks. We try to avoid that.
+	// Only at the bottom for the same reason.
+	const int max_popup_h = toolbar_bottom_h == 0 ? 0 : (toolbar_bottom_h * UI::kMaxPopupMessages - kBottomBorderThickness);
+
 	const Vector2i mouse = parent->get_mouse_position();
 
 	int32_t nx = mouse.x;
 	int32_t ny = mouse.y;
 
-	if (get_w() < get_h()) {
+	// TODO(tothxa): This will have to be calculated when the field action window is converted to
+	//               use styles instead of constants
+	constexpr int kFlagActionHeight = 112;
+
+	if (get_w() < get_h() && get_h() > kFlagActionHeight) {
 		if (mouse.x + kClearance + get_w() < pw || mouse.x < pw / 2) {
 			nx += kClearance;
 		} else {
@@ -265,7 +273,7 @@ void Window::move_out_of_the_way() {
 		}
 		ny -= get_h() / 2;
 	} else {
-		if (mouse.y + kClearance + get_h() < ph || mouse.y < ph / 2) {
+		if (mouse.y + kClearance + get_h() + max_popup_h < ph || mouse.y < ph / 2) {
 			ny += kClearance;
 		} else {
 			ny -= get_h() + kClearance;
