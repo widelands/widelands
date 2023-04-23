@@ -143,11 +143,12 @@ struct Ship : Bob {
 			kDefenderAttacking = 5,
 		};
 
-		Battle(MapObject* o, const std::vector<uint32_t>& a, bool f)
-		   : opponent(o), attack_soldier_serials(a), is_first(f) {
+		Battle(Ship* o, Coords ac, const std::vector<uint32_t>& a, bool f)
+		   : opponent(o), attack_coords(ac), attack_soldier_serials(a), is_first(f) {
 		}
 
-		OPtr<MapObject> opponent;
+		OPtr<Ship> opponent;
+		Coords attack_coords;
 		std::vector<uint32_t> attack_soldier_serials;
 		Time time_of_last_action;
 		uint32_t pending_damage{0U};
@@ -251,8 +252,11 @@ struct Ship : Bob {
 		capacity_ = c;
 	}
 
-	[[nodiscard]] MapObject* get_attack_target(const EditorGameBase& e) const {
+	[[nodiscard]] Ship* get_attack_target(const EditorGameBase& e) const {
 		return expedition_ != nullptr ? expedition_->attack_target.get(e) : nullptr;
+	}
+	[[nodiscard]] Coords get_attack_coords() const {
+		return expedition_ != nullptr ? expedition_->attack_coords : Coords::null();
 	}
 	[[nodiscard]] bool has_battle() const {
 		return !battles_.empty();
@@ -362,7 +366,8 @@ private:
 		WalkingDir scouting_direction;
 		Coords exploration_start;
 		IslandExploreDirection island_explore_direction;
-		OPtr<MapObject> attack_target;
+		OPtr<Ship> attack_target;
+		Coords attack_coords;
 		Economy* ware_economy;  // Owned by Player
 		Economy* worker_economy;
 	};

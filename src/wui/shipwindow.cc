@@ -448,8 +448,7 @@ void ShipWindow::think() {
                               _("Refit to transport ship") :
                               _("Refit to warship"));
 	btn_warship_attack_->set_enabled(can_act && ship->can_attack() &&
-	                                 (ship->get_attack_target(ibase_.egbase())->descr().type() !=
-	                                     Widelands::MapObjectType::PORTDOCK ||
+	                                 (ship->get_attack_target(ibase_.egbase()) != nullptr ||
 	                                  warship_soldiers_display_->count_soldiers() > 0U));
 	btn_warship_stay_->set_enabled(can_act);
 
