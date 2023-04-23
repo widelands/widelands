@@ -453,6 +453,12 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	}
 }
 
+void MapView::set_centered_view(const View& centered_view, const Transition& transition) {
+	const Vector2f viewpoint = MapviewPixelFunctions::panel_to_map(
+	   centered_view.viewpoint, centered_view.zoom, Vector2f(-get_w() / 2.f, -get_h() / 2.f));
+	set_view(View(viewpoint, centered_view.zoom), transition);
+}
+
 void MapView::scroll_to_field(const Widelands::Coords& c, const Transition& transition) {
 	assert(0 <= c.x);
 	assert(c.x < map_.get_width());
@@ -477,6 +483,12 @@ MapView::ViewArea MapView::view_area() const {
 
 const MapView::View& MapView::view() const {
 	return view_;
+}
+
+MapView::View MapView::get_centered_view() const {
+	const Vector2f center = MapviewPixelFunctions::panel_to_map(
+	   view_.viewpoint, view_.zoom, Vector2f(get_w() / 2.f, get_h() / 2.f));
+	return View(center, view_.zoom);
 }
 
 void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
