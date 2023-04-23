@@ -239,13 +239,18 @@ void Window::move_out_of_the_way() {
 	const Panel* parent = get_parent();
 	assert(parent != nullptr);
 
+	// Actually this could be asserted to be true, because only field action-, building- and
+	// ship windows call this function currently.
+	const bool parent_is_main = parent->get_parent() == nullptr;
+
+	const bool toolbar_at_bottom = main_toolbar_at_bottom();
+	const int32_t toolbar_bottom_h =
+	   (parent_is_main && toolbar_at_bottom) ? main_toolbar_button_size() : 0;
+	const int32_t toolbar_top_h =
+	   (parent_is_main && !toolbar_at_bottom) ? main_toolbar_button_size() : 0;
+
 	// We have to do this because InfoPanel::think() pushes child windows off the toolbar, which
 	// messes up the fastclick position.
-	const int toolbar_bottom_h = (parent->get_parent() == nullptr &&  // Parent is main game window
-	                              main_toolbar_at_bottom()) ?
-                                   main_toolbar_button_size() :
-                                   0;
-
 	// We only care about the toolbar at the bottom because we prefer moving the window below
 	// the mouse pointer, so it never covers the toolbar at the top, but it may cover it at the
 	// bottom.
@@ -253,8 +258,7 @@ void Window::move_out_of_the_way() {
 	const int pw = parent->get_inner_w();
 
 	// Pop up messages have higher priority, so they can steal mouse clicks. We try to avoid that.
-	// Only at the bottom for the same reason.
-	const int max_popup_h = toolbar_bottom_h == 0 ? 0 : (toolbar_bottom_h * UI::kMaxPopupMessages - kBottomBorderThickness);
+	const int max_popup_h = UI::kMaxPopupMessages * (toolbar_bottom_h + toolbar_top_h);
 
 	const Vector2i mouse = parent->get_mouse_position();
 
@@ -266,14 +270,41 @@ void Window::move_out_of_the_way() {
 	constexpr int kFlagActionHeight = 112;
 
 	if (get_w() < get_h() && get_h() > kFlagActionHeight) {
-		if (mouse.x + kClearance + get_w() < pw || mouse.x < pw / 2) {
+		const bool fits_right = mouse.x + kClearance + get_w() < pw;
+		const bool fits_left = mouse.x - kClearance - get_w() >= 0;
+
+		bool to_right = fits_right;
+
+		if (!fits_right && !fits_left) {
+			to_right = mouse.x < pw / 2;
+		}
+
+		if (fits_right && fits_left) {
+			bool need_check_popups = false;
+			if (parent_is_main) {
+				if (toolbar_at_bottom) {
+					need_check_popups = mouse.y + get_h() / 2 - kBottomBorderThickness > ph - max_popup_h;
+				} else {
+					need_check_popups = mouse.y - get_h() / 2 + kTopBorderThickness < toolbar_top_h + max_popup_h;
+				}
+			}
+
+			if (need_check_popups) {
+				// This is much simplified, because there may be no perfect solution for some tall
+				// windows anyway
+				to_right = mouse.x >= pw / 2;
+			}
+		}
+
+		if (to_right) {
 			nx += kClearance;
 		} else {
 			nx -= get_w() + kClearance;
 		}
 		ny -= get_h() / 2;
 	} else {
-		if (mouse.y + kClearance + get_h() + max_popup_h < ph || mouse.y < ph / 2) {
+		const int max_popup_h_bottom = toolbar_bottom_h > 0 ? (max_popup_h - kBottomBorderThickness) : 0;
+		if (mouse.y + kClearance + get_h() + max_popup_h_bottom < ph || mouse.y < ph / 2) {
 			ny += kClearance;
 		} else {
 			ny -= get_h() + kClearance;
