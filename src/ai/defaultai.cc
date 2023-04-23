@@ -6925,8 +6925,8 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 			}
 		}
 	}
-	verb_log_dbg("Found supplies for %lld of %lld input wares for Building %s", supplied,
-	             bo.inputs.size(), bo.name);
+	verb_log_dbg("Found supplies for %d of %d input wares for Building %s", static_cast<unsigned int>(supplied),
+	             static_cast<unsigned int>(bo.inputs.size()), bo.name);
 
 	return supplied == bo.inputs.size();
 }
