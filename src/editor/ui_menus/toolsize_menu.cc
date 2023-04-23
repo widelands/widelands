@@ -27,7 +27,7 @@ inline EditorInteractive& EditorToolsizeMenu::eia() const {
 }
 
 constexpr int kMargin = 5;
-constexpr int kSpinboxWidth = 350;
+constexpr int kSpinboxWidth = 300;
 constexpr int kSpinboxUnitW = 180;
 
 /**
@@ -47,7 +47,7 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                      1,
                      MAX_TOOL_AREA + 1,
                      UI::PanelStyle::kWui,
-                     _("Current Size:"),
+                     _("Size:"),
                      UI::SpinBox::Units::kNone,
                      UI::SpinBox::Type::kSmall),
      spinbox_gap_(&box_,
@@ -59,9 +59,12 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                   0,
                   100,
                   UI::PanelStyle::kWui,
-                  _("Tool Gap:"),
+                  _("Gaps:"),
                   UI::SpinBox::Units::kPercent,
                   UI::SpinBox::Type::kBig) {
+	spinbox_radius_.set_tooltip(_("Radius of the active tool"));
+	spinbox_gap_.set_tooltip(_("Amount of random gaps in the tool’s area"));
+
 	spinbox_radius_.changed.connect([this]() { changed(); });
 	spinbox_gap_.changed.connect([this]() { changed(); });
 
