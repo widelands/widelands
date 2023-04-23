@@ -582,6 +582,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		const Ship* old_target = expedition_->attack_target.get(game);
 		Ship* new_target = nullptr;
 		Coords new_coords = Coords::null();
+		Coords new_coords_portspace = Coords::null();
 		std::vector<Coords> candidates;
 		uint32_t distance = descr().vision_range();
 		map->find_reachable_fields(game, Area<FCoords>(get_position(), distance), &candidates,
@@ -597,26 +598,42 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 					}
 				}
 
-				assert(map->is_port_space(c));
 				new_coords = c;
+				new_coords_portspace = map->find_portspace_for_dockpoint(new_coords);
 				distance = d;
 			}
 		}
+
 		if (new_target != old_target || new_coords != expedition_->attack_coords) {
 			expedition_->attack_target = new_target;
 			expedition_->attack_coords = new_coords;
+
 			if (new_target != nullptr || new_coords != Coords::null()) {
-				set_ship_state_and_notify(
-				   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 				if (new_target != nullptr) {
+					set_ship_state_and_notify(
+					   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
+
 					send_message(game, _("Enemy Ship"), _("Enemy Ship Spotted"),
 					             _("A warship spotted an enemy ship."),
 					             new_target->descr().icon_filename());
 				} else {
-					send_message(game, _("Port Space"), _("Port Space Found"),
-					             _("A warship found a new port build space."), descr().icon_filename());
+					if (std::find(expedition_->seen_port_buildspaces.begin(),
+					              expedition_->seen_port_buildspaces.end(),
+					              new_coords_portspace) == expedition_->seen_port_buildspaces.end()) {
+						expedition_->seen_port_buildspaces.push_back(new_coords_portspace);
+
+						set_ship_state_and_notify(
+						   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
+
+						send_message(game, _("Port Space"), _("Port Space Found"),
+							         _("A warship found a new port build space."), descr().icon_filename());
+					}
 				}
 			}
+		}
+
+		if (new_coords_portspace == Coords::null()) {
+			expedition_->seen_port_buildspaces.clear();
 		}
 	}
 
@@ -992,6 +1009,7 @@ void Ship::battle_update(Game& game) {
 	}
 
 	assert((target_ship != nullptr) ^ static_cast<bool>(current_battle.attack_coords));
+	assert(target_ship != nullptr || current_battle.is_first);
 	const Map& map = game.map();
 
 	Battle* other_battle = (target_ship == nullptr) ? nullptr : &target_ship->battles_.back();
@@ -1097,17 +1115,26 @@ void Ship::battle_update(Game& game) {
 
 		Path path;
 		if (map.findpath(get_position(), dest, 0, path, CheckStepDefault(MOVECAPS_SWIM)) < 0) {
-			molog(game.get_gametime(), "Could not find a path to opponent %u from %dx%d to %dx%d",
-			      target_ship == nullptr ? 0 : target_ship->serial(), get_position().x,
-			      get_position().y, dest.x, dest.y);
+			if (target_ship != nullptr) {
+				molog(game.get_gametime(),
+				      "Could not find a path to opponent ship %u %s from %dx%d to %dx%d",
+					  target_ship->serial(), target_ship->get_shipname().c_str(), get_position().x,
+					  get_position().y, dest.x, dest.y);
+			} else {
+				molog(game.get_gametime(), "Could not find a path to attack coords from %dx%d to %dx%d",
+					  get_position().x, get_position().y, dest.x, dest.y);
+			}
+
 			battles_.pop_back();
 			return start_task_idle(game, descr().main_animation(), 100);
 		}
+
 		int steps = path.get_nsteps();
 		if (!exact_match_required) {
 			assert(steps > 1);
 			steps--;
 		}
+
 		start_task_movepath(game, path, descr().get_sail_anims(), false, steps);
 		return;
 	}
@@ -2266,9 +2293,20 @@ void Ship::Loader::load_pointers() {
 	}
 
 	if (expedition_attack_target_serial_ != 0U) {
-		expedition_->attack_target =
-		   dynamic_cast<Ship*>(&mol().get<MapObject>(expedition_attack_target_serial_));
+		MapObject& target = mol().get<MapObject>(expedition_attack_target_serial_);
+		switch (target.descr().type()) {
+		case MapObjectType::SHIP:
+			expedition_->attack_target = &dynamic_cast<Ship&>(target);
+			break;
+		case MapObjectType::PORTDOCK:
+			// TODO(Nordfriese): Savegame compatibility v1.1 - after v1.2 `target` MUST be a ship
+			break;
+		default:
+			throw GameDataError(
+			   "Unexpected warship attack target type %s", to_string(target.descr().type()).c_str());
+		}
 	}
+
 	for (uint32_t i = 0; i < battle_serials_.size(); ++i) {
 		if (battle_serials_[i] != 0U) {
 			battles_[i].opponent = &mol().get<Ship>(battle_serials_[i]);
