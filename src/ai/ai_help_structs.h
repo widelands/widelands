@@ -598,6 +598,8 @@ struct ShipObserver {
 struct WareObserver {
 	bool refined_build_material = false;
 	uint8_t preciousness;
+	// all buildings of the tribe which produce the given ware
+	std::vector<Widelands::DescriptionIndex> producers;
 };
 
 // Computer player does not get notification messages about enemy militarysites
