@@ -84,7 +84,9 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
 }
 
 void EditorToolsizeMenu::changed() {
-	eia().set_sel_radius(spinbox_radius_.get_value() - 1, spinbox_gap_.get_value());
+	radius_ = spinbox_radius_.get_value() - 1;
+	gap_percent_ = spinbox_gap_.get_value();
+	eia().set_sel_radius(radius_, gap_percent_);
 }
 
 void EditorToolsizeMenu::update(uint32_t radius, uint32_t gap) {
