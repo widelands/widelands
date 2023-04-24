@@ -745,7 +745,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		// Draw build help for maximum building spaces.
 		bool buildhelp_drawn = false;
 		if (get_display_flag(dfShowMaximumBuildhelp)) {
-			const auto* overlay = get_buildhelp_overlay(maxcaps);
+			const auto* overlay = get_buildhelp_overlay(maxcaps, scale);
 			if (overlay != nullptr) {
 				float opacity = 1.0f;
 				if (nodecaps != maxcaps) {
@@ -753,13 +753,13 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				} else {
 					buildhelp_drawn = true;
 				}
-				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale, opacity);
+				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale / overlay->scale, opacity);
 			}
 		}
 
 		// Draw build help for actual building spaces.
 		if (buildhelp() && !buildhelp_drawn) {
-			const auto* overlay = get_buildhelp_overlay(nodecaps);
+			const auto* overlay = get_buildhelp_overlay(nodecaps, scale);
 			if (overlay != nullptr) {
 				// If maximum cap buildhelp is also on and is different,
 				// and current space is medium (ie. maximum is big or port),
@@ -769,7 +769,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				         ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) ?
                   0.9f :
                   1.0f;
-				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale * scaling);
+				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale / overlay->scale * scaling);
 			}
 		}
 
