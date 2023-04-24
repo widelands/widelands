@@ -902,42 +902,50 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 */
 // clang-format on
 int LuaDescriptions::modify_unit(lua_State* L) {
-	const std::string type = luaL_checkstring(L, 2);
-	const std::string unit = luaL_checkstring(L, 3);
-	const std::string property = luaL_checkstring(L, 4);
+	if (lua_gettop(L) < 4) {
+		report_error(L, "modify_unit: too few arguments");
+	}
 
-	// Load the unit to modify if it was not loaded yet
-	Notifications::publish(Widelands::NoteMapObjectDescription(
-	   unit, Widelands::NoteMapObjectDescription::LoadType::kObject));
+	try {
+		const std::string type = luaL_checkstring(L, 2);
+		const std::string unit = luaL_checkstring(L, 3);
+		const std::string property = luaL_checkstring(L, 4);
 
-	if (type == "resource") {
-		do_modify_resource(L, unit, property);
-	} else if (type == "tribe") {
-		do_modify_tribe(L, unit, property);
-	} else if (type == "ship") {
-		do_modify_ship(L, unit, property);
-	} else if (type == "critter") {
-		do_modify_critter(L, unit, property);
-	} else if (type == "terrain") {
-		do_modify_terrain(L, unit, property);
-	} else if (type == "immovable") {
-		do_modify_immovable(L, unit, property);
-	} else if (type == "worker") {
-		do_modify_worker(L, unit, property);
-	} else if (type == "ware") {
-		do_modify_ware(L, unit, property);
-	} else if (type == "building") {
-		do_modify_building(L, unit, property);
-	} else if (type == "trainingsite") {
-		do_modify_trainingsite(L, unit, property);
-	} else if (type == "productionsite") {
-		do_modify_productionsite(L, unit, property);
-	} else if (type == "militarysite") {
-		do_modify_militarysite(L, unit, property);
-	} else if (type == "warehouse") {
-		do_modify_warehouse(L, unit, property);
-	} else {
-		report_error(L, "modify_unit: invalid type '%s'", type.c_str());
+		// Load the unit to modify if it was not loaded yet
+		Notifications::publish(Widelands::NoteMapObjectDescription(
+		   unit, Widelands::NoteMapObjectDescription::LoadType::kObject));
+
+		if (type == "resource") {
+			do_modify_resource(L, unit, property);
+		} else if (type == "tribe") {
+			do_modify_tribe(L, unit, property);
+		} else if (type == "ship") {
+			do_modify_ship(L, unit, property);
+		} else if (type == "critter") {
+			do_modify_critter(L, unit, property);
+		} else if (type == "terrain") {
+			do_modify_terrain(L, unit, property);
+		} else if (type == "immovable") {
+			do_modify_immovable(L, unit, property);
+		} else if (type == "worker") {
+			do_modify_worker(L, unit, property);
+		} else if (type == "ware") {
+			do_modify_ware(L, unit, property);
+		} else if (type == "building") {
+			do_modify_building(L, unit, property);
+		} else if (type == "trainingsite") {
+			do_modify_trainingsite(L, unit, property);
+		} else if (type == "productionsite") {
+			do_modify_productionsite(L, unit, property);
+		} else if (type == "militarysite") {
+			do_modify_militarysite(L, unit, property);
+		} else if (type == "warehouse") {
+			do_modify_warehouse(L, unit, property);
+		} else {
+			report_error(L, "modify_unit: invalid type '%s'", type.c_str());
+		}
+	} catch (const std::exception& e) {
+		report_error(L, "modify_unit: error: %s", e.what());
 	}
 
 	return 0;
