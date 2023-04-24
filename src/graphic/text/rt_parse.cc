@@ -144,7 +144,9 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 			}
 
 			// Regex taken from https://stackoverflow.com/a/3809435
-			static std::regex kLinkRegex("https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)");
+			static std::regex kLinkRegex("https?:\\/\\/"
+			                             "(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}"
+			                             "\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)");
 			static thread_local bool autolink_protection(false);
 			while (!text.empty()) {
 				std::smatch match;
@@ -162,7 +164,9 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 
 				Tag* child = new Tag();
 				std::string url = text.substr(match_start, match_len);
-				TextStream linktext(format("<link type=url target=%1$s mouseover=\"%2$s\"><font underline=1>%3$s</font></link>", url, url, url));
+				TextStream linktext(format(
+				   "<link type=url target=%1$s mouseover=\"%2$s\"><font underline=1>%3$s</font></link>",
+				   url, url, url));
 				child->parse(linktext, tcs, allowed_tags);
 				children_.push_back(new Child(child));
 
