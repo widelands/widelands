@@ -100,7 +100,9 @@ const Image* ImageCache::get(std::string hash, const bool theme_lookup, const ui
 
 		uint8_t bitset = 0;
 		for (uint8_t i = 0; i < kScalesCount; ++i) {
-			std::string filename = before_extpos + kScales[i].second + after_extpos;
+			std::string filename = before_extpos;
+			filename += kScales[i].second;
+			filename += after_extpos;
 			if (g_fs->file_exists(filename)) {
 				bitset |= 1 << i;
 			}
