@@ -109,13 +109,16 @@ struct NoteGameSettings {
 	}
 };
 
-/**
- * Holds all settings about a game that can be configured before the
- * game actually starts.
- *
- * Think of it as the Model in MVC.
- */
+/** Holds all settings about a game that can be configured before the game actually starts. */
 struct GameSettings {
+	enum Flags : uint16_t {
+		kDefaultSettings = 0,               ///< No special options; the default.
+		kPeaceful = 1 << 0,                 ///< No fighting between players.
+		kCustomStartingPositions = 1 << 1,  ///< Players may choose their own starting positions.
+		kFogless = 1 << 2,                  ///< The entire map is always visible.
+		kForbidDiplomacy = 1 << 3,          ///< Players may not change their alliances.
+	};
+
 	GameSettings() {
 		std::unique_ptr<LuaInterface> lua(new LuaInterface);
 		std::unique_ptr<LuaTable> win_conditions(
@@ -181,14 +184,8 @@ struct GameSettings {
 	/// Is a savegame selected for loading?
 	bool savegame{false};
 
-	/// Is all fighting forbidden?
-	bool peaceful{false};
-
-	/// Is fog of war disabled?
-	bool fogless{false};
-
-	// Whether players may pick their own starting positions
-	bool custom_starting_positions{false};
+	/// Additional flags to control game behaviour.
+	uint16_t flags{Flags::kDefaultSettings};
 
 	std::string map_theme;
 	std::string map_background;
@@ -251,14 +248,8 @@ struct GameSettingsProvider {
 	virtual void set_win_condition_duration(int32_t duration) = 0;
 	virtual int32_t get_win_condition_duration() = 0;
 
-	virtual void set_peaceful_mode(bool peace) = 0;
-	virtual bool is_peaceful_mode() = 0;
-
-	virtual void set_fogless(bool fogless) = 0;
-	virtual bool is_fogless() = 0;
-
-	virtual void set_custom_starting_positions(bool) = 0;
-	virtual bool get_custom_starting_positions() = 0;
+	virtual void set_flag(GameSettings::Flags flag, bool state) = 0;
+	virtual bool get_flag(GameSettings::Flags flag) = 0;
 
 	bool has_players_tribe() {
 		return UserSettings::highest_playernum() >= settings().playernum;

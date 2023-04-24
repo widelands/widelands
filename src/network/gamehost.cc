@@ -1390,33 +1390,17 @@ void GameHost::set_win_condition_duration(const int32_t duration) {
 	broadcast(packet);
 }
 
-void GameHost::set_peaceful_mode(bool peace) {
-	d->settings.peaceful = peace;
+void GameHost::set_flag(GameSettings::Flags flag, bool state) {
+	if (state) {
+		d->settings.flags |= flag;
+	} else {
+		d->settings.flags &= ~flag;
+	}
 
 	// Broadcast changes
 	SendPacket packet;
-	packet.unsigned_8(NETCMD_PEACEFUL_MODE);
-	packet.unsigned_8(peace ? 1 : 0);
-	broadcast(packet);
-}
-
-void GameHost::set_fogless(bool fogless) {
-	d->settings.fogless = fogless;
-
-	// Broadcast changes
-	SendPacket packet;
-	packet.unsigned_8(NETCMD_FOGLESS);
-	packet.unsigned_8(fogless ? 1 : 0);
-	broadcast(packet);
-}
-
-void GameHost::set_custom_starting_positions(bool c) {
-	d->settings.custom_starting_positions = c;
-
-	// Broadcast changes
-	SendPacket packet;
-	packet.unsigned_8(NETCMD_CUSTOM_STARTING_POSITIONS);
-	packet.unsigned_8(c ? 1 : 0);
+	packet.unsigned_8(NETCMD_GAMEFLAGS);
+	packet.unsigned_16(d->settings.flags);
 	broadcast(packet);
 }
 
@@ -1786,18 +1770,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	d->net->send(client.sock_id, packet);
 
 	packet.reset();
-	packet.unsigned_8(NETCMD_PEACEFUL_MODE);
-	packet.unsigned_8(d->settings.peaceful ? 1 : 0);
-	d->net->send(client.sock_id, packet);
-
-	packet.reset();
-	packet.unsigned_8(NETCMD_FOGLESS);
-	packet.unsigned_8(d->settings.fogless ? 1 : 0);
-	d->net->send(client.sock_id, packet);
-
-	packet.reset();
-	packet.unsigned_8(NETCMD_CUSTOM_STARTING_POSITIONS);
-	packet.unsigned_8(d->settings.custom_starting_positions ? 1 : 0);
+	packet.unsigned_8(NETCMD_GAMEFLAGS);
+	packet.unsigned_16(d->settings.flags);
 	d->net->send(client.sock_id, packet);
 
 	// Broadcast new information about the player to everybody
@@ -2416,9 +2390,7 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	case NETCMD_SETTING_PLAYER:
 	case NETCMD_WIN_CONDITION:
 	case NETCMD_WIN_CONDITION_DURATION:
-	case NETCMD_PEACEFUL_MODE:
-	case NETCMD_FOGLESS:
-	case NETCMD_CUSTOM_STARTING_POSITIONS:
+	case NETCMD_GAMEFLAGS:
 	case NETCMD_LAUNCH:
 		if (d->game ==
 		    nullptr) {  // not expected while game is in progress -> something is wrong here

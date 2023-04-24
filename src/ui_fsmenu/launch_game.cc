@@ -51,8 +51,6 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                      0,
                      _("Configure this game"),
                      UI::Align::kCenter),
-     write_replay_(
-        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Write Replay")),
      warn_desyncing_addon_(
         &right_column_content_box_,
         0,
@@ -91,14 +89,47 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                              UI::SpinBox::Type::kBig,
                              5,
                              60),
-     peaceful_(
-        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
-     fogless_(
-        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("No fog of war")),
-     custom_starting_positions_(&right_column_content_box_,
-                                UI::PanelStyle::kFsMenu,
-                                Vector2i::zero(),
-                                _("Custom starting positions")),
+
+     toggle_advanced_options_(&right_column_content_box_,
+                              "toggle_advanced",
+                              0,
+                              0,
+                              0,
+                              ok_.get_h(),
+                              UI::ButtonStyle::kFsMenuSecondary,
+                              "" /* set later */,
+                              _("Show or hide additional game configuration options")),
+     advanced_options_box_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     game_flag_checkboxes_({
+        {GameSettings::Flags::kPeaceful,
+         {new UI::Checkbox(
+             &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
+          &LaunchGame::update_peaceful_mode}},
+
+        {GameSettings::Flags::kFogless,
+         {new UI::Checkbox(
+             &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("No fog of war")),
+          &LaunchGame::update_fogless}},
+
+        {GameSettings::Flags::kForbidDiplomacy,
+         {new UI::Checkbox(&advanced_options_box_,
+                           UI::PanelStyle::kFsMenu,
+                           Vector2i::zero(),
+                           _("Forbid diplomacy")),
+          &LaunchGame::update_forbid_diplomacy}},
+
+        {GameSettings::Flags::kCustomStartingPositions,
+         {new UI::Checkbox(&advanced_options_box_,
+                           UI::PanelStyle::kFsMenu,
+                           Vector2i::zero(),
+                           _("Custom starting positions")),
+          &LaunchGame::update_custom_starting_positions}},
+
+     }),
+     write_replay_(
+        &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Write Replay")),
+
      choose_map_(mpg && settings.can_change_map() && !preconfigured ?
                     new UI::Button(&right_column_content_box_,
                                    "choose_map",
@@ -125,11 +156,18 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
      ctrl_(ctrl) {
 	warn_desyncing_addon_.set_visible(false);
 	write_replay_.set_state(true);
+
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	win_condition_duration_.changed.connect([this]() { win_condition_duration_changed(); });
-	peaceful_.changed.connect([this]() { toggle_peaceful(); });
-	fogless_.changed.connect([this]() { toggle_fogless(); });
-	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
+	for (auto& pair : game_flag_checkboxes_) {
+		pair.second.first->changed.connect(
+		   [this, pair]() { settings_.set_flag(pair.first, pair.second.first->get_state()); });
+	}
+	toggle_advanced_options_.sigclicked.connect([this]() {
+		toggle_advanced_options_.toggle();
+		update_advanced_options();
+	});
+
 	if (choose_map_ != nullptr) {
 		choose_map_->sigclicked.connect([this]() { clicked_select_map(); });
 	}
@@ -141,6 +179,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 	lua_.reset(new LuaInterface());
 	add_all_widgets();
 
+	update_advanced_options();
 	layout();
 
 	initialization_complete();
@@ -155,7 +194,6 @@ LaunchGame::~LaunchGame() {
 void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(1 * kPadding);
-	right_column_content_box_.add(&write_replay_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add(&warn_desyncing_addon_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(4 * kPadding);
 	right_column_content_box_.add(&configure_game_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -164,11 +202,16 @@ void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add_space(1 * kPadding);
 	right_column_content_box_.add(&win_condition_duration_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
-	right_column_content_box_.add(&peaceful_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(3 * kPadding);
-	right_column_content_box_.add(&fogless_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(3 * kPadding);
-	right_column_content_box_.add(&custom_starting_positions_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&toggle_advanced_options_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(1 * kPadding);
+	right_column_content_box_.add(&advanced_options_box_, UI::Box::Resizing::kFullSize);
+
+	for (auto& pair : game_flag_checkboxes_) {
+		advanced_options_box_.add(pair.second.first, UI::Box::Resizing::kFullSize);
+		advanced_options_box_.add_space(1 * kPadding);
+	}
+	advanced_options_box_.add(&write_replay_, UI::Box::Resizing::kFullSize);
+
 	if (choose_map_ != nullptr) {
 		right_column_content_box_.add_space(3 * kPadding);
 		right_column_content_box_.add(choose_map_, UI::Box::Resizing::kFullSize);
@@ -193,38 +236,53 @@ void LaunchGame::update_warn_desyncing_addon() {
 	   [](const AddOns::AddOnState& addon) { return addon.second && !addon.first->sync_safe; });
 
 	warn_desyncing_addon_.set_visible(has_desyncing_addon);
-	write_replay_.set_visible(!has_desyncing_addon);
+	// TODO(Nordfriese): The scenario check is a quickfix for #5745 and related #4531,
+	// remove when scenario replays are functional
+	write_replay_.set_visible(!has_desyncing_addon && !settings_.settings().scenario);
 }
 
 bool LaunchGame::should_write_replay() const {
 	return write_replay_.is_visible() && write_replay_.get_state();
 }
 
+void LaunchGame::update_advanced_options() {
+	const bool show = toggle_advanced_options_.style() == UI::Button::VisualState::kPermpressed;
+	advanced_options_box_.set_visible(show);
+	toggle_advanced_options_.set_title(show ? _("Show fewer options") : _("Show more options"));
+	layout();
+}
+
 void LaunchGame::update_peaceful_mode() {
+	UI::Checkbox* checkbox = game_flag_checkboxes_.at(GameSettings::Flags::kPeaceful).first;
 	bool forbidden =
 	   peaceful_mode_forbidden_ || settings_.settings().scenario || settings_.settings().savegame;
-	peaceful_.set_enabled(!forbidden && settings_.can_change_map());
+
+	checkbox->set_enabled(!forbidden && settings_.can_change_map());
 	if (forbidden) {
-		peaceful_.set_state(false);
+		checkbox->set_state(false);
 	}
+
 	if (settings_.settings().scenario) {
-		peaceful_.set_tooltip(_("The relations between players are set by the scenario"));
+		checkbox->set_tooltip(_("The relations between players are set by the scenario"));
 	} else if (settings_.settings().savegame) {
-		peaceful_.set_tooltip(_("The relations between players are set by the saved game"));
+		checkbox->set_tooltip(_("The relations between players are set by the saved game"));
 	} else if (peaceful_mode_forbidden_) {
-		peaceful_.set_tooltip(_("The selected win condition does not allow peaceful matches"));
+		checkbox->set_tooltip(_("The selected win condition does not allow peaceful matches"));
 	} else {
-		peaceful_.set_tooltip(_("Forbid fighting between players"));
+		checkbox->set_tooltip(_("Forbid fighting between players"));
 	}
 }
 
 void LaunchGame::update_custom_starting_positions() {
+	UI::Checkbox* checkbox =
+	   game_flag_checkboxes_.at(GameSettings::Flags::kCustomStartingPositions).first;
 	const GameSettings& settings = settings_.settings();
 	const bool forbidden = settings.scenario || settings.savegame;
+
 	if (forbidden || !settings_.can_change_map()) {
-		custom_starting_positions_.set_enabled(false);
+		checkbox->set_enabled(false);
 		if (forbidden) {
-			custom_starting_positions_.set_state(false);
+			checkbox->set_state(false);
 		}
 	} else {
 		bool allowed = false;
@@ -237,41 +295,68 @@ void LaunchGame::update_custom_starting_positions() {
 				break;
 			}
 		}
-		custom_starting_positions_.set_enabled(allowed);
+		checkbox->set_enabled(allowed);
 		if (!allowed) {
-			custom_starting_positions_.set_state(false);
-			custom_starting_positions_.set_tooltip(
+			checkbox->set_state(false);
+			checkbox->set_tooltip(
 			   _("All selected starting conditions ignore the map’s starting positions"));
 			return;
 		}
 	}
+
 	if (settings_.settings().scenario) {
-		custom_starting_positions_.set_tooltip(_("The starting positions are set by the scenario"));
+		checkbox->set_tooltip(_("The starting positions are set by the scenario"));
 	} else if (settings_.settings().savegame) {
-		custom_starting_positions_.set_tooltip(_("The starting positions are set by the saved game"));
+		checkbox->set_tooltip(_("The starting positions are set by the saved game"));
 	} else {
-		custom_starting_positions_.set_tooltip(_(
+		checkbox->set_tooltip(_(
 		   "Allow the players to choose their own starting positions at the beginning of the game"));
 	}
 }
 
 void LaunchGame::update_fogless() {
+	UI::Checkbox* checkbox = game_flag_checkboxes_.at(GameSettings::Flags::kFogless).first;
 	const GameSettings& settings = settings_.settings();
 	const bool forbidden = settings.scenario || settings.savegame;
+
 	if (forbidden || !settings_.can_change_map()) {
-		fogless_.set_enabled(false);
+		checkbox->set_enabled(false);
 		if (forbidden) {
-			fogless_.set_state(false);
+			checkbox->set_state(false);
 		}
 	} else {
-		fogless_.set_enabled(true);
+		checkbox->set_enabled(true);
 	}
+
 	if (settings_.settings().scenario) {
-		fogless_.set_tooltip(_("Player vision is set by the scenario"));
+		checkbox->set_tooltip(_("Player vision is set by the scenario"));
 	} else if (settings_.settings().savegame) {
-		fogless_.set_tooltip(_("Player vision is set by the saved game"));
+		checkbox->set_tooltip(_("Player vision is set by the saved game"));
 	} else {
-		fogless_.set_tooltip(_("Give all players permanent vision of the entire map"));
+		checkbox->set_tooltip(_("Give all players permanent vision of the entire map"));
+	}
+}
+
+void LaunchGame::update_forbid_diplomacy() {
+	UI::Checkbox* checkbox = game_flag_checkboxes_.at(GameSettings::Flags::kForbidDiplomacy).first;
+	const GameSettings& settings = settings_.settings();
+	const bool forbidden = settings.scenario || settings.savegame;
+
+	if (forbidden || !settings_.can_change_map()) {
+		checkbox->set_enabled(false);
+		if (forbidden) {
+			checkbox->set_state(false);
+		}
+	} else {
+		checkbox->set_enabled(true);
+	}
+
+	if (settings_.settings().scenario) {
+		checkbox->set_tooltip(_("Player relations are set by the scenario"));
+	} else if (settings_.settings().savegame) {
+		checkbox->set_tooltip(_("Player relations are set by the saved game"));
+	} else {
+		checkbox->set_tooltip(_("Disallow players to change their alliances during the game"));
 	}
 }
 
@@ -399,17 +484,5 @@ LaunchGame::win_condition_if_valid(const std::string& win_condition_script,
 
 void LaunchGame::win_condition_duration_changed() {
 	settings_.set_win_condition_duration(win_condition_duration_.get_value());
-}
-
-void LaunchGame::toggle_peaceful() {
-	settings_.set_peaceful_mode(peaceful_.get_state());
-}
-
-void LaunchGame::toggle_fogless() {
-	settings_.set_fogless(fogless_.get_state());
-}
-
-void LaunchGame::toggle_custom_starting_positions() {
-	settings_.set_custom_starting_positions(custom_starting_positions_.get_state());
 }
 }  // namespace FsMenu
