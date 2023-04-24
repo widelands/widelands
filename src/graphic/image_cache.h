@@ -36,7 +36,8 @@ class ImageCache {
 public:
 	using MipMapScale = std::pair<float, const char*>;
 	static constexpr unsigned kScalesCount = 4;
-	static constexpr MipMapScale kScales[kScalesCount] = {{0.5f, "_0.5"}, {1.f, "_1"}, {2.f, "_2"}, {4.f, "_4"}};
+	static constexpr MipMapScale kScales[kScalesCount] = {
+	   {0.5f, "_0.5"}, {1.f, "_1"}, {2.f, "_2"}, {4.f, "_4"}};
 	static constexpr int kNoScale = 0xff;
 	static constexpr int kDefaultScaleIndex = 1;
 

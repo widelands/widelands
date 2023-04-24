@@ -449,7 +449,8 @@ private:
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
-	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None * ImageCache::kScalesCount];
+	BuildhelpOverlay
+	   buildhelp_overlays_[Widelands::Field::Buildhelp_None * ImageCache::kScalesCount];
 
 	bool cheat_mode_enabled_{false};
 	bool screenshot_failed_{false};

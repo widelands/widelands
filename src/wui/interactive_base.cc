@@ -180,8 +180,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 				buildhelp_overlay->pic = g_image_cache->get(*filename, true, scale);
 				if (buildhelp_overlay->pic != nullptr) {
 					buildhelp_overlay->scale = ImageCache::kScales[scale].first;
-					buildhelp_overlay->hotspot =
-					   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
+					buildhelp_overlay->hotspot = Vector2i(
+					   buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
 				}
 			}
 		}
@@ -349,7 +349,8 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps, const flo
 	// buildhelp_overlays_ is ordered from smallest to biggest scale
 	const InteractiveBase::BuildhelpOverlay* result = nullptr;
 	for (int s = ImageCache::kScalesCount - 1; s >= 0; --s) {
-		const InteractiveBase::BuildhelpOverlay& overlay = buildhelp_overlays_[Widelands::Field::Buildhelp_None * s + buildhelp_overlay_index];
+		const InteractiveBase::BuildhelpOverlay& overlay =
+		   buildhelp_overlays_[Widelands::Field::Buildhelp_None * s + buildhelp_overlay_index];
 		if (overlay.pic == nullptr) {
 			continue;
 		}

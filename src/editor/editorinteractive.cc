@@ -753,7 +753,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				} else {
 					buildhelp_drawn = true;
 				}
-				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale / overlay->scale, opacity);
+				blit_field_overlay(
+				   &dst, field, overlay->pic, overlay->hotspot, scale / overlay->scale, opacity);
 			}
 		}
 
@@ -769,7 +770,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				         ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) ?
                   0.9f :
                   1.0f;
-				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale / overlay->scale * scaling);
+				blit_field_overlay(
+				   &dst, field, overlay->pic, overlay->hotspot, scale / overlay->scale * scaling);
 			}
 		}
 
