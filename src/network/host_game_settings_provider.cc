@@ -192,26 +192,10 @@ void HostGameSettingsProvider::set_win_condition_duration(const int32_t duration
 	host_->set_win_condition_duration(duration);
 }
 
-void HostGameSettingsProvider::set_peaceful_mode(bool peace) {
-	host_->set_peaceful_mode(peace);
+void HostGameSettingsProvider::set_flag(GameSettings::Flags flag, bool state) {
+	host_->set_flag(flag, state);
 }
 
-bool HostGameSettingsProvider::is_peaceful_mode() {
-	return HostGameSettingsProvider::settings().peaceful;
-}
-
-void HostGameSettingsProvider::set_fogless(bool fogless) {
-	host_->set_fogless(fogless);
-}
-
-bool HostGameSettingsProvider::is_fogless() {
-	return HostGameSettingsProvider::settings().fogless;
-}
-
-void HostGameSettingsProvider::set_custom_starting_positions(bool c) {
-	host_->set_custom_starting_positions(c);
-}
-
-bool HostGameSettingsProvider::get_custom_starting_positions() {
-	return HostGameSettingsProvider::settings().custom_starting_positions;
+bool HostGameSettingsProvider::get_flag(GameSettings::Flags flag) {
+	return (host_->settings().flags & flag) != 0;
 }

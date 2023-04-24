@@ -63,14 +63,8 @@ public:
 	int32_t get_win_condition_duration() override;
 	void set_win_condition_duration(int32_t duration) override;
 
-	void set_peaceful_mode(bool peace) override;
-	bool is_peaceful_mode() override;
-
-	void set_fogless(bool fogless) override;
-	bool is_fogless() override;
-
-	void set_custom_starting_positions(bool) override;
-	bool get_custom_starting_positions() override;
+	void set_flag(GameSettings::Flags flag, bool state) override;
+	bool get_flag(GameSettings::Flags flag) override;
 
 private:
 	GameHost* host_;

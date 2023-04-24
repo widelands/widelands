@@ -371,7 +371,7 @@ void Game::init_newgame(const GameSettings& settings) {
 	// Check for win_conditions
 	if (!settings.scenario) {
 		Notifications::publish(UI::NoteLoadingMessage(_("Initializing game…")));
-		if (settings.peaceful) {
+		if ((settings.flags & GameSettings::Flags::kPeaceful) != 0) {
 			for (uint32_t i = 1; i < settings.players.size(); ++i) {
 				if (Player* p1 = get_player(i)) {
 					for (uint32_t j = i + 1; j <= settings.players.size(); ++j) {
@@ -383,7 +383,7 @@ void Game::init_newgame(const GameSettings& settings) {
 				}
 			}
 		}
-		if (settings.custom_starting_positions) {
+		if ((settings.flags & GameSettings::Flags::kCustomStartingPositions) != 0) {
 			iterate_players_existing(p, map().get_nrplayers(), *this, pl) {
 				if (settings.get_tribeinfo(pl->tribe().name())
 				       .initializations[pl->initialization_index()]
@@ -393,7 +393,7 @@ void Game::init_newgame(const GameSettings& settings) {
 			}
 		}
 
-		if (settings.fogless) {
+		if ((settings.flags & GameSettings::Flags::kFogless) != 0) {
 			Coords c;
 			iterate_players_existing(p, map().get_nrplayers(), *this, pl) {
 				c.x = 0;
@@ -406,6 +406,7 @@ void Game::init_newgame(const GameSettings& settings) {
 			}
 		}
 
+		diplomacy_allowed_ &= ((settings.flags & GameSettings::Flags::kForbidDiplomacy) == 0);
 		win_condition_duration_ = settings.win_condition_duration;
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
