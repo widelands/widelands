@@ -70,28 +70,16 @@ std::string SinglePlayerGameSettingsProvider::get_map() {
 	return s.mapfilename;
 }
 
-bool SinglePlayerGameSettingsProvider::is_peaceful_mode() {
-	return s.peaceful;
+void SinglePlayerGameSettingsProvider::set_flag(GameSettings::Flags flag, bool state) {
+	if (state) {
+		s.flags |= flag;
+	} else {
+		s.flags &= ~flag;
+	}
 }
 
-void SinglePlayerGameSettingsProvider::set_peaceful_mode(bool peace) {
-	s.peaceful = peace;
-}
-
-bool SinglePlayerGameSettingsProvider::is_fogless() {
-	return s.fogless;
-}
-
-void SinglePlayerGameSettingsProvider::set_fogless(bool fogless) {
-	s.fogless = fogless;
-}
-
-bool SinglePlayerGameSettingsProvider::get_custom_starting_positions() {
-	return s.custom_starting_positions;
-}
-
-void SinglePlayerGameSettingsProvider::set_custom_starting_positions(bool c) {
-	s.custom_starting_positions = c;
+bool SinglePlayerGameSettingsProvider::get_flag(GameSettings::Flags flag) {
+	return (s.flags & flag) != 0;
 }
 
 void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
