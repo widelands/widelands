@@ -236,7 +236,9 @@ void LaunchGame::update_warn_desyncing_addon() {
 	   [](const AddOns::AddOnState& addon) { return addon.second && !addon.first->sync_safe; });
 
 	warn_desyncing_addon_.set_visible(has_desyncing_addon);
-	write_replay_.set_visible(!has_desyncing_addon);
+	// TODO(Nordfriese): The scenario check is a quickfix for #5745 and related #4531,
+	// remove when scenario replays are functional
+	write_replay_.set_visible(!has_desyncing_addon && !settings_.settings().scenario);
 }
 
 bool LaunchGame::should_write_replay() const {
