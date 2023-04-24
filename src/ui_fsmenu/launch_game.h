@@ -46,9 +46,11 @@ public:
 		return settings_;
 	}
 
-	/// Enables or disables the custom_starting_positions checkbox.
+	/// Enables or disables the respective game flags checkbox.
+	void update_peaceful_mode();
 	void update_custom_starting_positions();
 	void update_fogless();
+	void update_forbid_diplomacy();
 
 protected:
 	std::unique_ptr<LuaInterface> lua_;
@@ -61,8 +63,8 @@ protected:
 	/// Creates a blank label/tooltip and returns 'false' otherwise.
 	bool init_win_condition_label();
 
-	/// Enables or disables the peaceful mode checkbox.
-	void update_peaceful_mode();
+	void update_advanced_options();
+
 	/// Hides or shows the desync warning.
 	void update_warn_desyncing_addon();
 
@@ -83,20 +85,21 @@ protected:
 	std::unique_ptr<LuaTable> win_condition_if_valid(const std::string& win_condition_script,
 	                                                 const std::set<std::string>& tags) const;
 
-	void toggle_peaceful();
-	void toggle_fogless();
-	void toggle_custom_starting_positions();
 	bool should_write_replay() const;
 
 	void layout() override;
 
 	MapDetailsBox map_details_;
 	UI::Textarea configure_game_;
-	UI::Checkbox write_replay_;
 	UI::MultilineTextarea warn_desyncing_addon_;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::SpinBox win_condition_duration_;
-	UI::Checkbox peaceful_, fogless_, custom_starting_positions_;
+	UI::Button toggle_advanced_options_;
+	UI::Box advanced_options_box_;
+	std::map<GameSettings::Flags,
+	         std::pair<UI::Checkbox*, void (LaunchGame::*)() /* update function */>>
+	   game_flag_checkboxes_;
+	UI::Checkbox write_replay_;
 	UI::Button* choose_map_;
 	UI::Button* choose_savegame_;
 	std::string last_win_condition_;

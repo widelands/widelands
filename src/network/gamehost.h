@@ -99,9 +99,7 @@ public:
 	void switch_to_player(uint32_t user, uint8_t number);
 	void set_win_condition_script(const std::string& wc);
 	void set_win_condition_duration(int32_t duration);
-	void set_peaceful_mode(bool peace);
-	void set_fogless(bool fogless);
-	void set_custom_starting_positions(bool);
+	void set_flag(GameSettings::Flags flag, bool state);
 	void replace_client_with_ai(uint8_t playernumber, const std::string& ai);
 
 	void set_script_to_run(const std::string& s) {

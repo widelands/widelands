@@ -747,6 +747,8 @@ void DefaultAI::late_initialization() {
 			}
 			for (const Widelands::DescriptionIndex& temp_output : prod.output_ware_types()) {
 				bo.ware_outputs.push_back(temp_output);
+				// add the building id to the producers vector of this ware
+				wares.at(temp_output).producers.push_back(bo.id);
 				if (tribe_->is_construction_material(temp_output) && !bo.inputs.empty()) {
 					wares.at(temp_output).refined_build_material = true;
 				}
@@ -6905,22 +6907,27 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 }
 
 // Checks that supply line exists for given building.
-// Recursively verify that all inputs have a producer.
-// TODO(unknown): this function leads to periodic freezes of ~1 second on big games on my system.
-// TODO(unknown): It needs profiling and optimization.
+// Verify that all inputs have a working producer (i.e. building statistics better than 10%).
+
 bool DefaultAI::check_supply(const BuildingObserver& bo) {
+	if (bo.inputs.empty()) {
+		return true;
+	}
 	size_t supplied = 0;
-	for (const Widelands::DescriptionIndex& temp_inputs : bo.inputs) {
-		for (const BuildingObserver& temp_building : buildings_) {
-			if ((temp_building.cnt_built != 0) &&
-			    std::find(temp_building.ware_outputs.begin(), temp_building.ware_outputs.end(),
-			              temp_inputs) != temp_building.ware_outputs.end() &&
-			    check_supply(temp_building)) {
+	for (const Widelands::DescriptionIndex& temp_input : bo.inputs) {
+		for (const Widelands::DescriptionIndex& bidx : wares.at(temp_input).producers) {
+			BuildingObserver& temp_building = get_building_observer(bidx);
+			verb_log_dbg("Checking producer %s of ware %s for building %s.", temp_building.name,
+			             tribe_->get_ware_descr(temp_input)->name().c_str(), bo.name);
+			if (temp_building.cnt_built != 0 && temp_building.current_stats > 10) {
 				++supplied;
 				break;
 			}
 		}
 	}
+	verb_log_dbg("Found supplies for %d of %d input wares for Building %s",
+	             static_cast<unsigned int>(supplied), static_cast<unsigned int>(bo.inputs.size()),
+	             bo.name);
 
 	return supplied == bo.inputs.size();
 }

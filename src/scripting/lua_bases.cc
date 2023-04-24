@@ -902,24 +902,31 @@ int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made c
 		// If the building belongs to a tribe that no player is playing, we need to load it now
 		const Widelands::DescriptionIndex building_index =
 		   egbase.mutable_descriptions()->load_building(name);
+		const Widelands::BuildingDescr* building_description =
+		   descriptions.get_building_descr(building_index);
 
 		if (!player.tribe().has_building(building_index) &&
-		    descriptions.get_building_descr(building_index)->type() !=
-		       Widelands::MapObjectType::MILITARYSITE) {
+		    building_description->type() != Widelands::MapObjectType::MILITARYSITE) {
 			report_error(L, "Building: '%s' is not available for Player %d's tribe '%s'", name.c_str(),
 			             player.player_number(), player.tribe().name().c_str());
 		}
 
 		Widelands::FormerBuildings former_buildings;
 		find_former_buildings(descriptions, building_index, &former_buildings);
+		Widelands::DescriptionIndex base_building = former_buildings.front().first;
+		uint8_t steps = former_buildings.size() - 1;
 		if (constructionsite) {
-			former_buildings.pop_back();
+			former_buildings.clear();
+			if (building_description->is_buildable()) {
+				steps = 0;
+				base_building = building_index;
+			}
 		}
 
 		Widelands::Building* b = nullptr;
 		if (force) {
 			if (constructionsite) {
-				b = &player.force_csite(c->coords(), building_index, former_buildings);
+				b = &player.force_csite(c->coords(), base_building, former_buildings);
 			} else {
 				b = &player.force_building(c->coords(), former_buildings);
 			}
@@ -932,6 +939,12 @@ int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made c
                                             "place building");
 			report_error(L, "Couldn't %s '%s' at (%d, %d)!", tempname.c_str(), name.c_str(),
 			             c->coords().x, c->coords().y);
+		}
+		if (constructionsite && steps > 0) {
+			Widelands::ConstructionSite* cs = dynamic_cast<Widelands::ConstructionSite*>(b);
+			for (uint8_t i = 0; i < steps; ++i) {
+				cs->enhance(egbase);
+			}
 		}
 
 		LuaMaps::upcasted_map_object_to_lua(L, b);
