@@ -289,12 +289,10 @@ void LaunchMPG::refresh() {
 
 	ok_.set_enabled(settings_.can_launch());
 
-	update_peaceful_mode();
-	update_fogless();
-	update_custom_starting_positions();
-	custom_starting_positions_.set_state(settings_.get_custom_starting_positions());
-	peaceful_.set_state(settings_.is_peaceful_mode());
-	fogless_.set_state(settings_.is_fogless());
+	for (auto& pair : game_flag_checkboxes_) {
+		(this->*pair.second.second)();
+		pair.second.first->set_state(settings_.get_flag(pair.first));
+	}
 
 	if (!settings_.can_change_map() && !init_win_condition_label()) {
 		try {
