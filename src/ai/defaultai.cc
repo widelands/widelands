@@ -6907,7 +6907,7 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 }
 
 // Checks that supply line exists for given building.
-// Verify that all inputs have a working producer (i.e. building statistics better then 10%).
+// Verify that all inputs have a working producer (i.e. building statistics better than 10%).
 
 bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	if (bo.inputs.empty()) {
