@@ -604,6 +604,12 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			}
 		}
 
+		if (new_target != nullptr) {
+			// Enemy ships always take precedence over port spaces
+			new_coords = Coords::null();
+			new_coords_portspace = Coords::null();
+		}
+
 		if (new_target != old_target || new_coords != expedition_->attack_coords) {
 			expedition_->attack_target = new_target;
 			expedition_->attack_coords = new_coords;
