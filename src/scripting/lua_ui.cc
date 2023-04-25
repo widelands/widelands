@@ -22,12 +22,14 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/style_manager.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
 #include "ui_basic/messagebox.h"
+#include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 
@@ -346,7 +348,7 @@ int LuaPanel::create_child(lua_State* L) {
 	}
 
 	try {
-		UI::Panel* new_panel = do_create_child(L, panel_, dynamic_cast<UI::Box*>(panel_) != nullptr);
+		UI::Panel* new_panel = do_create_child(L, panel_, dynamic_cast<UI::Box*>(panel_));
 		new_panel->initialization_complete();
 	} catch (const std::exception& e) {
 		report_error(L, "Could not create child: %s", e.what());
@@ -375,6 +377,17 @@ static int32_t get_table_int(lua_State* L, const char* key, bool mandatory, int3
 		default_value = luaL_checkint32(L, -1);
 	} else if (mandatory) {
 		report_error(L, "Missing integer: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static int32_t get_table_boolean(lua_State* L, const char* key, bool mandatory, bool default_value = false) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		default_value = luaL_checkboolean(L, -1);
+	} else if (mandatory) {
+		report_error(L, "Missing boolean: %s", key);
 	}
 	lua_pop(L, 1);
 	return default_value;
@@ -463,11 +476,12 @@ static UI::Button::VisualState get_table_button_visual_state(lua_State* L, const
 }
 
 static std::function<void()> create_plugin_action_lambda(lua_State* L, const std::string& cmd) {
-	return [L, cmd]() {
-		Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	return [&egbase, cmd]() {  // do not capture L directly
 		try {
 			egbase.lua().interpret_string(cmd);
 		} catch (const LuaError& e) {
+			log_err("Lua error in plugin: %s", e.what());
 			UI::WLMessageBox m(egbase.get_ibase(), UI::WindowStyle::kWui, _("Plugin Error"),
 				               format_l(_("Error when running plugin:\n%s"), e.what()),
 				               UI::WLMessageBox::MBoxType::kOk);
@@ -477,13 +491,11 @@ static std::function<void()> create_plugin_action_lambda(lua_State* L, const std
 }
 
 // static, recursive function that does all the work for create_child()
-UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, bool is_box) {
+UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* as_box) {
 	luaL_checktype(L, -1, LUA_TTABLE);
 
 	// Read some common properties
 	std::string widget_type = get_table_string(L, "widget", true);
-	std::string name = get_table_string(L, "name", true);
-
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
@@ -492,8 +504,10 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, bool is_bo
 
 	// Actually create the panel
 	UI::Panel* created_panel = nullptr;
-	bool child_is_box = false;
+	UI::Box* child_as_box = nullptr;
+
 	if (widget_type == "button") {
+		std::string name = get_table_string(L, "name", true);
 		std::string title = get_table_string(L, "title", false);
 		std::string icon = get_table_string(L, "icon", false);
 		if (title.empty() == icon.empty()) {
@@ -503,46 +517,109 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, bool is_bo
 		UI::ButtonStyle style = get_table_button_style(L, "style", false);
 		UI::Button::VisualState visual = get_table_button_visual_state(L, "visual", false);
 
+		UI::Button* button;
 		if (title.empty()) {
-			created_panel = new UI::Button(parent, name, x, y, w, h, style, g_image_cache->get(icon), tooltip, visual);
+			button = new UI::Button(parent, name, x, y, w, h, style, g_image_cache->get(icon), tooltip, visual);
 		} else {
-			created_panel = new UI::Button(parent, name, x, y, w, h, style, title, tooltip, visual);
+			button = new UI::Button(parent, name, x, y, w, h, style, title, tooltip, visual);
 		}
+		created_panel = button;
 
 		if (std::string on_click = get_table_string(L, "on_click", false); !on_click.empty()) {
-			dynamic_cast<UI::Button*>(created_panel)->sigclicked.connect(create_plugin_action_lambda(L, on_click));
+			button->sigclicked.connect(create_plugin_action_lambda(L, on_click));
 		}
+
+	} else if (widget_type == "box") {
+		std::string orientation_str = get_table_string(L, "orientation", true);
+		unsigned orientation;
+		if (orientation_str == "v" || orientation_str == "vert" || orientation_str == "vertical") {
+			orientation = UI::Box::Vertical;
+		} else if (orientation_str == "h" || orientation_str == "horz" || orientation_str == "horizontal") {
+			orientation = UI::Box::Horizontal;
+		} else {
+			report_error(L, "Unknown box orientation '%s'", orientation_str.c_str());
+		}
+
+		int32_t max_x = get_table_int(L, "max_x", false);
+		int32_t max_y = get_table_int(L, "max_x", false);
+		int32_t spacing = get_table_int(L, "spacing", false);
+
+		child_as_box = new UI::Box(parent, UI::PanelStyle::kWui, x, y, orientation, max_x, max_y, spacing);
+		created_panel = child_as_box;
+
+		if (get_table_boolean(L, "scrolling", false)) {
+			child_as_box->set_scrolling(true);
+		}
+
+	} else if (widget_type == "inf_space") {
+		if (as_box == nullptr) {
+			report_error(L, "'inf_space' only valid in boxes");
+		}
+		as_box->add_inf_space();
+
+	} else if (widget_type == "space") {
+		if (as_box == nullptr) {
+			report_error(L, "'space' only valid in boxes");
+		}
+		as_box->add_space(get_table_int(L, "value", true));
+
+	} else if (widget_type == "window") {
+		if (parent != get_egbase(L).get_ibase()) {
+			report_error(L, "Windows must be toplevel components");
+		}
+
+		std::string name = get_table_string(L, "name", true);
+		std::string title = get_table_string(L, "title", true);
+		UI::Window* window = new UI::Window(parent, UI::WindowStyle::kWui, name, x, y, w, h, title);
+		created_panel = window;
+
+		lua_getfield(L, -1, "content");
+		if (!lua_isnil(L, -1)) {
+			window->set_center_panel(do_create_child(L, window, nullptr));
+		}
+		lua_pop(L, 1);
+
+	} else if (widget_type == "textarea") {
+		std::string text = get_table_string(L, "text", true);
+		UI::FontStyle font = g_style_manager->safe_font_style(get_table_string(L, "font", true));
+		UI::Align align = get_table_align(L, "text_align", false);
+		UI::Textarea* txt = new UI::Textarea(parent, UI::PanelStyle::kWui, font, x, y, w, h, text, align);
+		created_panel = txt;
+
+		txt->set_fixed_width(get_table_int(L, "fixed_width", false));
 	} else {
+		// TODO(Nordfriese): Add more widget types
 		report_error(L, "Unknown widget type '%s'", widget_type.c_str());
 	}
 
-	// Signal bindings
-	if (std::string cmd = get_table_string(L, "on_panel_clicked", false); !cmd.empty()) {
-		created_panel->clicked.connect(create_plugin_action_lambda(L, cmd));
-	}
-	if (std::string cmd = get_table_string(L, "on_position_changed", false); !cmd.empty()) {
-		created_panel->position_changed.connect(create_plugin_action_lambda(L, cmd));
-	}
-
-	// Box layouting if applicable
-	assert(created_panel != nullptr);
-	if (is_box) {
-		UI::Align align = get_table_align(L, "align", false);
-		UI::Box::Resizing resizing = get_table_box_resizing(L, "resizing", false);
-		dynamic_cast<UI::Box*>(parent)->add(created_panel, resizing, align);
-	}
-
-	// Widget children (recursive iteration)
-	lua_getfield(L, -1, "children");
-	if (!lua_isnil(L, -1)) {
-		luaL_checktype(L, -1, LUA_TTABLE);
-		lua_pushnil(L);
-		while (lua_next(L, 2) != 0) {
-			do_create_child(L, created_panel, child_is_box);
-			lua_pop(L, 1);
+	if (created_panel != nullptr) {
+		// Signal bindings
+		if (std::string cmd = get_table_string(L, "on_panel_clicked", false); !cmd.empty()) {
+			created_panel->clicked.connect(create_plugin_action_lambda(L, cmd));
 		}
+		if (std::string cmd = get_table_string(L, "on_position_changed", false); !cmd.empty()) {
+			created_panel->position_changed.connect(create_plugin_action_lambda(L, cmd));
+		}
+
+		// Box layouting if applicable
+		if (as_box != nullptr) {
+			UI::Align align = get_table_align(L, "align", false);
+			UI::Box::Resizing resizing = get_table_box_resizing(L, "resizing", false);
+			as_box->add(created_panel, resizing, align);
+		}
+
+		// Widget children (recursive iteration)
+		lua_getfield(L, -1, "children");
+		if (!lua_isnil(L, -1)) {
+			luaL_checktype(L, -1, LUA_TTABLE);
+			lua_pushnil(L);
+			while (lua_next(L, -2) != 0) {
+				do_create_child(L, created_panel, child_as_box);
+				lua_pop(L, 1);
+			}
+		}
+		lua_pop(L, 1);
 	}
-	lua_pop(L, 1);
 
 	return created_panel;
 }

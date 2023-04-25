@@ -92,7 +92,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	static UI::Panel* do_create_child(lua_State* L, UI::Panel* parent, bool is_box);
+	static UI::Panel* do_create_child(lua_State* L, UI::Panel* parent, UI::Box* as_box);
 };
 
 class LuaButton : public LuaPanel {

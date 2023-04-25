@@ -140,6 +140,7 @@ public:
 	// Look up by name for Lua.
 	// If there is no style defined with the given name, then log it as warning and return a style
 	// that makes the erroneously formatted text stand out.
+	[[nodiscard]] UI::FontStyle safe_font_style(std::string name) const;
 	[[nodiscard]] const UI::FontStyleInfo& font_style(std::string name) const;
 	[[nodiscard]] const UI::ParagraphStyleInfo& paragraph_style(std::string name) const;
 	[[nodiscard]] const RGBColor& color(std::string name) const;
