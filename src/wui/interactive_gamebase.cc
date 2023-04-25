@@ -33,6 +33,7 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
+#include "ui_basic/toolbar_setup.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 #include "wui/game_chat_menu.h"
@@ -72,9 +73,9 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    "dropdown_menu_showhide",
                    0,
                    0,
-                   MainToolbar::kButtonSize,
+                   UI::main_toolbar_button_size(),
                    10,
-                   MainToolbar::kButtonSize,
+                   UI::main_toolbar_button_size(),
                    /** TRANSLATORS: Title for a menu button in the game. This menu will show/hide
                       building spaces, census, status, etc. */
                    _("Show / Hide"),
@@ -87,9 +88,9 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                "dropdown_menu_main",
                0,
                0,
-               MainToolbar::kButtonSize,
+               UI::main_toolbar_button_size(),
                10,
-               MainToolbar::kButtonSize,
+               UI::main_toolbar_button_size(),
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the main menu button in the game */
                   _("Main Menu"),
@@ -103,9 +104,9 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                     "dropdown_menu_gamespeed",
                     0,
                     0,
-                    MainToolbar::kButtonSize,
+                    UI::main_toolbar_button_size(),
                     10,
-                    MainToolbar::kButtonSize,
+                    UI::main_toolbar_button_size(),
                     /** TRANSLATORS: Title for a menu button in the game. This menu will show
                        options o increase/decrease the gamespeed, and to pause the game */
                     _("Game Speed"),

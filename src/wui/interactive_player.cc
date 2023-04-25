@@ -36,6 +36,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
+#include "ui_basic/toolbar_setup.h"
 #include "ui_basic/unique_window.h"
 #include "wlapplication_options.h"
 #include "wui/attack_window.h"
@@ -177,9 +178,9 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      "dropdown_menu_statistics",
                      0,
                      0,
-                     MainToolbar::kButtonSize,
+                     UI::main_toolbar_button_size(),
                      10,
-                     MainToolbar::kButtonSize,
+                     UI::main_toolbar_button_size(),
                      /** TRANSLATORS: Title for the statistics menu button in the game */
                      _("Statistics"),
                      UI::DropdownType::kPictorialMenu,

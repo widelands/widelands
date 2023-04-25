@@ -72,6 +72,7 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+#include "ui_basic/toolbar_setup.h"
 #include "ui_fsmenu/addons/login_box.h"
 #include "ui_fsmenu/addons/progress.h"
 #include "wlapplication_mousewheel_options.h"
@@ -90,9 +91,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                "dropdown_menu_main",
                0,
                0,
-               MainToolbar::kButtonSize,
+               UI::main_toolbar_button_size(),
                10,
-               MainToolbar::kButtonSize,
+               UI::main_toolbar_button_size(),
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the main menu button in the editor */
                   _("Main Menu"),
@@ -105,9 +106,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                "dropdown_menu_tools",
                0,
                0,
-               MainToolbar::kButtonSize,
+               UI::main_toolbar_button_size(),
                12,
-               MainToolbar::kButtonSize,
+               UI::main_toolbar_button_size(),
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the tool menu button in the editor */
                   _("Tools"),
@@ -121,9 +122,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                    "dropdown_menu_showhide",
                    0,
                    0,
-                   MainToolbar::kButtonSize,
+                   UI::main_toolbar_button_size(),
                    10,
-                   MainToolbar::kButtonSize,
+                   UI::main_toolbar_button_size(),
                    /** TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
                       building spaces, animals, immovables, resources */
                    _("Show / Hide"),
