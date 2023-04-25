@@ -198,6 +198,11 @@ public:
 	using MutableAddOn::MutableAddOn;
 };
 
+class UIPluginAddon : public MutableAddOn {
+public:
+	using MutableAddOn::MutableAddOn;
+};
+
 class WinCondAddon : public MutableAddOn {
 public:
 	using MutableAddOn::MutableAddOn;

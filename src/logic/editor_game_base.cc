@@ -223,6 +223,13 @@ Descriptions* EditorGameBase::mutable_descriptions() {
 
 void EditorGameBase::set_ibase(InteractiveBase* const b) {
 	ibase_.reset(b);
+
+	// Now that the IBase and the EGBase are linked into each other, load the UI plugins.
+	for (const auto& pair : AddOns::g_addons) {
+		if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
+			lua().run_script(kAddOnDir + FileSystem::file_separator() + pair.first->internal_name + FileSystem::file_separator() + "init.lua");
+		}
+	}
 }
 
 InteractiveGameBase* EditorGameBase::get_igbase() const {

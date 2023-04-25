@@ -45,6 +45,7 @@ enum class AddOnCategory {
 	kWinCondition,
 	kStartingCondition,
 	kTheme,
+	kUIPlugin,
 };
 
 // Note: Below you will see some lines like `std::function<std::string()> descname`.

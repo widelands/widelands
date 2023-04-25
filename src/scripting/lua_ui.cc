@@ -27,6 +27,7 @@
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
+#include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 
@@ -85,6 +86,7 @@ const MethodType<LuaPanel> LuaPanel::Methods[] = {
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaPanel, indicate),
 #endif
+   METHOD(LuaPanel, create_child),
    {nullptr, nullptr},
 };
 
@@ -326,9 +328,224 @@ int LuaPanel::indicate(lua_State* L) {
 }
 #endif
 
+/* RST
+   .. method:: create_child(table)
+
+      .. versionadded:: 1.2
+
+      Create a UI widget as a child of this panel as specified by the provided table.
+
+      NOCOM Document table structure
+*/
+int LuaPanel::create_child(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes exactly one argument");
+	}
+	if (panel_ == nullptr) {
+		report_error(L, "Parent does not exist");
+	}
+
+	try {
+		UI::Panel* new_panel = do_create_child(L, panel_, dynamic_cast<UI::Box*>(panel_) != nullptr);
+		new_panel->initialization_complete();
+	} catch (const std::exception& e) {
+		report_error(L, "Could not create child: %s", e.what());
+	}
+
+	return 0;
+}
+
 /*
  * C Functions
  */
+static std::string get_table_string(lua_State* L, const char* key, bool mandatory, std::string default_value = std::string()) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		default_value = luaL_checkstring(L, -1);
+	} else if (mandatory) {
+		report_error(L, "Missing string: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static int32_t get_table_int(lua_State* L, const char* key, bool mandatory, int32_t default_value = 0) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		default_value = luaL_checkint32(L, -1);
+	} else if (mandatory) {
+		report_error(L, "Missing integer: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static UI::Align get_table_align(lua_State* L, const char* key, bool mandatory, UI::Align default_value = UI::Align::kCenter) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		std::string str = luaL_checkstring(L, -1);
+		if (str == "center") {
+			default_value = UI::Align::kCenter;
+		} else if (str == "left" || str == "top") {
+			default_value = UI::Align::kLeft;
+		} else if (str == "right" || str == "bottom") {
+			default_value = UI::Align::kRight;
+		} else {
+			report_error(L, "Unknown align '%s'", str.c_str());
+		}
+	} else if (mandatory) {
+		report_error(L, "Missing align: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static UI::Box::Resizing get_table_box_resizing(lua_State* L, const char* key, bool mandatory, UI::Box::Resizing default_value = UI::Box::Resizing::kAlign) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		std::string str = luaL_checkstring(L, -1);
+		if (str == "align") {
+			default_value = UI::Box::Resizing::kAlign;
+		} else if (str == "expandboth") {
+			default_value = UI::Box::Resizing::kExpandBoth;
+		} else if (str == "fullsize") {
+			default_value = UI::Box::Resizing::kFullSize;
+		} else if (str == "fillspace") {
+			default_value = UI::Box::Resizing::kFillSpace;
+		} else {
+			report_error(L, "Unknown box resizing '%s'", str.c_str());
+		}
+	} else if (mandatory) {
+		report_error(L, "Missing box resizing: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static UI::ButtonStyle get_table_button_style(lua_State* L, const char* key, bool mandatory, UI::ButtonStyle default_value = UI::ButtonStyle::kWuiSecondary) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		std::string str = luaL_checkstring(L, -1);
+		if (str == "primary") {
+			default_value = UI::ButtonStyle::kWuiPrimary;
+		} else if (str == "secondary") {
+			default_value = UI::ButtonStyle::kWuiSecondary;
+		} else if (str == "menu") {
+			default_value = UI::ButtonStyle::kWuiMenu;
+		} else {
+			report_error(L, "Unknown button style '%s'", str.c_str());
+		}
+	} else if (mandatory) {
+		report_error(L, "Missing button style: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static UI::Button::VisualState get_table_button_visual_state(lua_State* L, const char* key, bool mandatory, UI::Button::VisualState default_value = UI::Button::VisualState::kRaised) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		std::string str = luaL_checkstring(L, -1);
+		if (str == "") {
+			default_value = UI::Button::VisualState::kRaised;
+		} else if (str == "") {
+			default_value = UI::Button::VisualState::kPermpressed;
+		} else if (str == "") {
+			default_value = UI::Button::VisualState::kFlat;
+		} else {
+			report_error(L, "Unknown button visual state '%s'", str.c_str());
+		}
+	} else if (mandatory) {
+		report_error(L, "Missing button visual state: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static std::function<void()> create_plugin_action_lambda(lua_State* L, const std::string& cmd) {
+	return [L, cmd]() {
+		Widelands::EditorGameBase& egbase = get_egbase(L);
+		try {
+			egbase.lua().interpret_string(cmd);
+		} catch (const LuaError& e) {
+			UI::WLMessageBox m(egbase.get_ibase(), UI::WindowStyle::kWui, _("Plugin Error"),
+				               format_l(_("Error when running plugin:\n%s"), e.what()),
+				               UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+		}
+	};
+}
+
+// static, recursive function that does all the work for create_child()
+UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, bool is_box) {
+	luaL_checktype(L, -1, LUA_TTABLE);
+
+	// Read some common properties
+	std::string widget_type = get_table_string(L, "widget", true);
+	std::string name = get_table_string(L, "name", true);
+
+	std::string tooltip = get_table_string(L, "tooltip", false);
+	int32_t x = get_table_int(L, "x", false);
+	int32_t y = get_table_int(L, "y", false);
+	int32_t w = get_table_int(L, "w", false);
+	int32_t h = get_table_int(L, "h", false);
+
+	// Actually create the panel
+	UI::Panel* created_panel = nullptr;
+	bool child_is_box = false;
+	if (widget_type == "button") {
+		std::string title = get_table_string(L, "title", false);
+		std::string icon = get_table_string(L, "icon", false);
+		if (title.empty() == icon.empty()) {
+			report_error(L, "Button must have either a title or an icon, but not both and not neither");
+		}
+
+		UI::ButtonStyle style = get_table_button_style(L, "style", false);
+		UI::Button::VisualState visual = get_table_button_visual_state(L, "visual", false);
+
+		if (title.empty()) {
+			created_panel = new UI::Button(parent, name, x, y, w, h, style, g_image_cache->get(icon), tooltip, visual);
+		} else {
+			created_panel = new UI::Button(parent, name, x, y, w, h, style, title, tooltip, visual);
+		}
+
+		if (std::string on_click = get_table_string(L, "on_click", false); !on_click.empty()) {
+			dynamic_cast<UI::Button*>(created_panel)->sigclicked.connect(create_plugin_action_lambda(L, on_click));
+		}
+	} else {
+		report_error(L, "Unknown widget type '%s'", widget_type.c_str());
+	}
+
+	// Signal bindings
+	if (std::string cmd = get_table_string(L, "on_panel_clicked", false); !cmd.empty()) {
+		created_panel->clicked.connect(create_plugin_action_lambda(L, cmd));
+	}
+	if (std::string cmd = get_table_string(L, "on_position_changed", false); !cmd.empty()) {
+		created_panel->position_changed.connect(create_plugin_action_lambda(L, cmd));
+	}
+
+	// Box layouting if applicable
+	assert(created_panel != nullptr);
+	if (is_box) {
+		UI::Align align = get_table_align(L, "align", false);
+		UI::Box::Resizing resizing = get_table_box_resizing(L, "resizing", false);
+		dynamic_cast<UI::Box*>(parent)->add(created_panel, resizing, align);
+	}
+
+	// Widget children (recursive iteration)
+	lua_getfield(L, -1, "children");
+	if (!lua_isnil(L, -1)) {
+		luaL_checktype(L, -1, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			do_create_child(L, created_panel, child_is_box);
+			lua_pop(L, 1);
+		}
+	}
+	lua_pop(L, 1);
+
+	return created_panel;
+}
 
 /* RST
 Button
@@ -699,6 +916,7 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, is_visible),
    METHOD(LuaMapView, mouse_to_field),
    METHOD(LuaMapView, mouse_to_pixel),
+   METHOD(LuaMapView, update_toolbar),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
@@ -710,6 +928,7 @@ const PropertyType<LuaMapView> LuaMapView::Properties[] = {
    PROP_RO(LuaMapView, is_building_road),
    PROP_RO(LuaMapView, auto_roadbuilding_mode),
    PROP_RO(LuaMapView, is_animating),
+   PROP_RO(LuaMapView, toolbar),
    {nullptr, nullptr, nullptr},
 };
 
@@ -717,13 +936,24 @@ LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
 }
 
 void LuaMapView::__unpersist(lua_State* L) {
-	const Widelands::Game& game = get_game(L);
-	panel_ = game.get_ibase();
+	panel_ = get_egbase(L).get_ibase();
 }
 
 /*
  * Properties
  */
+/* RST
+   .. attribute:: toolbar
+
+      .. versionadded:: 1.2
+
+      (RO) The main toolbar.
+*/
+int LuaMapView::get_toolbar(lua_State* L) {
+	to_lua<LuaPanel>(L, new LuaPanel(get()->toolbar()));
+	return 1;
+}
+
 /* RST
    .. attribute:: average_fps
 
@@ -927,9 +1157,9 @@ int LuaMapView::close(lua_State* /* l */) {
       :type y: number
 */
 int LuaMapView::scroll_to_map_pixel(lua_State* L) {
-	Widelands::Game& game = get_game(L);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
 	// don't move view in replays
-	if (game.game_controller()->get_game_type() == GameController::GameType::kReplay) {
+	if (egbase.is_game() && dynamic_cast<Widelands::Game&>(egbase).game_controller()->get_game_type() == GameController::GameType::kReplay) {
 		return 0;
 	}
 
@@ -998,6 +1228,20 @@ int LuaMapView::mouse_to_pixel(lua_State* L) {
 int LuaMapView::mouse_to_field(lua_State* L) {
 	get()->map_view()->mouse_to_field(
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
+	return 0;
+}
+
+/* RST
+   .. method:: update_toolbar(field)
+
+      .. versionadded:: 1.2
+
+      Recompute the size and position of the toolbar.
+      Call this after you have modified the toolbar in any way.
+
+*/
+int LuaMapView::update_toolbar(lua_State* L) {
+	get_egbase(L).get_ibase()->finalize_toolbar();
 	return 0;
 }
 
