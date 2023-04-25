@@ -544,8 +544,9 @@ StyleManager::StyleManager() {
 	add_styled_size(UI::StyledSize::kSPScenarioPlateauMessageBoxPosY, *element_table,
 	                "map_plateau_message_pos_y");
 	add_styled_size(UI::StyledSize::kUIDefaultPadding, *element_table, "ui_default_padding");
-	check_completeness(
-	   "styled_sizes", styled_sizes_.size(), static_cast<size_t>(UI::StyledSize::kUIDefaultPadding));
+	add_styled_size(UI::StyledSize::kToolbarButtonSize, *element_table, "toolbar_button_size");
+	check_completeness("styled_sizes", styled_sizes_.size(),
+	                   static_cast<size_t>(UI::StyledSize::kToolbarButtonSize));
 }
 
 // Return functions for the styles
