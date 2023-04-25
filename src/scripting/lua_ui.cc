@@ -433,7 +433,10 @@ int LuaPanel::create_child(lua_State* L) {
 /*
  * C Functions
  */
-static std::string get_table_string(lua_State* L, const char* key, bool mandatory, std::string default_value = std::string()) {
+static std::string get_table_string(lua_State* L,
+                                    const char* key,
+                                    bool mandatory,
+                                    std::string default_value = std::string()) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		default_value = luaL_checkstring(L, -1);
@@ -444,7 +447,8 @@ static std::string get_table_string(lua_State* L, const char* key, bool mandator
 	return default_value;
 }
 
-static int32_t get_table_int(lua_State* L, const char* key, bool mandatory, int32_t default_value = 0) {
+static int32_t
+get_table_int(lua_State* L, const char* key, bool mandatory, int32_t default_value = 0) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		default_value = luaL_checkint32(L, -1);
@@ -455,7 +459,8 @@ static int32_t get_table_int(lua_State* L, const char* key, bool mandatory, int3
 	return default_value;
 }
 
-static int32_t get_table_boolean(lua_State* L, const char* key, bool mandatory, bool default_value = false) {
+static int32_t
+get_table_boolean(lua_State* L, const char* key, bool mandatory, bool default_value = false) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		default_value = luaL_checkboolean(L, -1);
@@ -466,7 +471,10 @@ static int32_t get_table_boolean(lua_State* L, const char* key, bool mandatory, 
 	return default_value;
 }
 
-static UI::Align get_table_align(lua_State* L, const char* key, bool mandatory, UI::Align default_value = UI::Align::kCenter) {
+static UI::Align get_table_align(lua_State* L,
+                                 const char* key,
+                                 bool mandatory,
+                                 UI::Align default_value = UI::Align::kCenter) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
@@ -486,7 +494,11 @@ static UI::Align get_table_align(lua_State* L, const char* key, bool mandatory, 
 	return default_value;
 }
 
-static UI::Box::Resizing get_table_box_resizing(lua_State* L, const char* key, bool mandatory, UI::Box::Resizing default_value = UI::Box::Resizing::kAlign) {
+static UI::Box::Resizing
+get_table_box_resizing(lua_State* L,
+                       const char* key,
+                       bool mandatory,
+                       UI::Box::Resizing default_value = UI::Box::Resizing::kAlign) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
@@ -508,7 +520,11 @@ static UI::Box::Resizing get_table_box_resizing(lua_State* L, const char* key, b
 	return default_value;
 }
 
-static UI::ButtonStyle get_table_button_style(lua_State* L, const char* key, bool mandatory, UI::ButtonStyle default_value = UI::ButtonStyle::kWuiSecondary) {
+static UI::ButtonStyle
+get_table_button_style(lua_State* L,
+                       const char* key,
+                       bool mandatory,
+                       UI::ButtonStyle default_value = UI::ButtonStyle::kWuiSecondary) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
@@ -528,7 +544,11 @@ static UI::ButtonStyle get_table_button_style(lua_State* L, const char* key, boo
 	return default_value;
 }
 
-static UI::Button::VisualState get_table_button_visual_state(lua_State* L, const char* key, bool mandatory, UI::Button::VisualState default_value = UI::Button::VisualState::kRaised) {
+static UI::Button::VisualState get_table_button_visual_state(
+   lua_State* L,
+   const char* key,
+   bool mandatory,
+   UI::Button::VisualState default_value = UI::Button::VisualState::kRaised) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
@@ -556,8 +576,8 @@ static std::function<void()> create_plugin_action_lambda(lua_State* L, const std
 		} catch (const LuaError& e) {
 			log_err("Lua error in plugin: %s", e.what());
 			UI::WLMessageBox m(egbase.get_ibase(), UI::WindowStyle::kWui, _("Plugin Error"),
-				               format_l(_("Error when running plugin:\n%s"), e.what()),
-				               UI::WLMessageBox::MBoxType::kOk);
+			                   format_l(_("Error when running plugin:\n%s"), e.what()),
+			                   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
 	};
@@ -584,7 +604,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		std::string title = get_table_string(L, "title", false);
 		std::string icon = get_table_string(L, "icon", false);
 		if (title.empty() == icon.empty()) {
-			report_error(L, "Button must have either a title or an icon, but not both and not neither");
+			report_error(
+			   L, "Button must have either a title or an icon, but not both and not neither");
 		}
 
 		UI::ButtonStyle style = get_table_button_style(L, "style", false);
@@ -592,7 +613,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 
 		UI::Button* button;
 		if (title.empty()) {
-			button = new UI::Button(parent, name, x, y, w, h, style, g_image_cache->get(icon), tooltip, visual);
+			button = new UI::Button(
+			   parent, name, x, y, w, h, style, g_image_cache->get(icon), tooltip, visual);
 		} else {
 			button = new UI::Button(parent, name, x, y, w, h, style, title, tooltip, visual);
 		}
@@ -607,7 +629,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		unsigned orientation;
 		if (orientation_str == "v" || orientation_str == "vert" || orientation_str == "vertical") {
 			orientation = UI::Box::Vertical;
-		} else if (orientation_str == "h" || orientation_str == "horz" || orientation_str == "horizontal") {
+		} else if (orientation_str == "h" || orientation_str == "horz" ||
+		           orientation_str == "horizontal") {
 			orientation = UI::Box::Horizontal;
 		} else {
 			report_error(L, "Unknown box orientation '%s'", orientation_str.c_str());
@@ -617,7 +640,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		int32_t max_y = get_table_int(L, "max_y", false);
 		int32_t spacing = get_table_int(L, "spacing", false);
 
-		child_as_box = new UI::Box(parent, UI::PanelStyle::kWui, x, y, orientation, max_x, max_y, spacing);
+		child_as_box =
+		   new UI::Box(parent, UI::PanelStyle::kWui, x, y, orientation, max_x, max_y, spacing);
 		created_panel = child_as_box;
 
 		if (get_table_boolean(L, "scrolling", false)) {
@@ -656,7 +680,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		std::string text = get_table_string(L, "text", true);
 		UI::FontStyle font = g_style_manager->safe_font_style(get_table_string(L, "font", true));
 		UI::Align align = get_table_align(L, "text_align", false);
-		UI::Textarea* txt = new UI::Textarea(parent, UI::PanelStyle::kWui, font, x, y, w, h, text, align);
+		UI::Textarea* txt =
+		   new UI::Textarea(parent, UI::PanelStyle::kWui, font, x, y, w, h, text, align);
 		created_panel = txt;
 
 		txt->set_fixed_width(get_table_int(L, "fixed_width", false));
@@ -1309,7 +1334,9 @@ int LuaMapView::close(lua_State* /* l */) {
 int LuaMapView::scroll_to_map_pixel(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	// don't move view in replays
-	if (egbase.is_game() && dynamic_cast<Widelands::Game&>(egbase).game_controller()->get_game_type() == GameController::GameType::kReplay) {
+	if (egbase.is_game() &&
+	    dynamic_cast<Widelands::Game&>(egbase).game_controller()->get_game_type() ==
+	       GameController::GameType::kReplay) {
 		return 0;
 	}
 

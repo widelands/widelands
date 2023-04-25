@@ -228,7 +228,8 @@ void EditorGameBase::set_ibase(InteractiveBase* const b) {
 	if (b != nullptr) {
 		for (const auto& pair : AddOns::g_addons) {
 			if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
-				lua().run_script(kAddOnDir + FileSystem::file_separator() + pair.first->internal_name + FileSystem::file_separator() + "init.lua");
+				lua().run_script(kAddOnDir + FileSystem::file_separator() + pair.first->internal_name +
+				                 FileSystem::file_separator() + "init.lua");
 			}
 		}
 	}
