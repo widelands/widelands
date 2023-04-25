@@ -911,10 +911,6 @@ int LuaDescriptions::modify_unit(lua_State* L) {
 		const std::string unit = luaL_checkstring(L, 3);
 		const std::string property = luaL_checkstring(L, 4);
 
-		// Load the unit to modify if it was not loaded yet
-		Notifications::publish(Widelands::NoteMapObjectDescription(
-		   unit, Widelands::NoteMapObjectDescription::LoadType::kObject));
-
 		if (type == "resource") {
 			do_modify_resource(L, unit, property);
 		} else if (type == "tribe") {
