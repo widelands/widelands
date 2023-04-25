@@ -347,20 +347,21 @@ int LuaPanel::indicate(lua_State* L) {
          * ``"h"``: **Optional**. The widget's height.
          * ``"tooltip"``: **Optional**. The widget's tooltip.
          * ``"resizing"``: **Optional**. If the parent component is a Box,
-                          the Resizing strategy to use for layouting.
-                          Valid values are:
-            * ``"align"``: Use the widget's desired size.
-            * ``"fullsize"``: Use the widget's desired depth and the full available breadth.
-            * ``"fillspace"``: Use the widget's desired breadth and the full available depth.
-            * ``"expandboth"``: Use the full available space.
+           the Resizing strategy to use for layouting. Valid values are:
+
+           * ``"align"``: Use the widget's desired size.
+           * ``"fullsize"``: Use the widget's desired depth and the full available breadth.
+           * ``"fillspace"``: Use the widget's desired breadth and the full available depth.
+           * ``"expandboth"``: Use the full available space.
+
          * ``"align"``: **Optional**. If the parent component is a Box,
-                        the Alignment strategy to use for layouting.
-                        Valid values are ``"left"``/``"top"``, ``"center"``,
-                        and ``"right"``/`"bottom"``.
+           the Alignment strategy to use for layouting.
+           Valid values are ``"left"``/``"top"``, ``"center"``,
+           and ``"right"``/`"bottom"``.
          * ``"on_panel_clicked"``: **Optional**. Callback code to run when the
-                                   user clicks anywhere inside the widget.
+           user clicks anywhere inside the widget.
          * ``"on_position_changed"``: **Optional**. Callback code to run when the
-                                      widget's position changes.
+           widget's position changes.
          * ``"children"``: **Optional**. An array of widget descriptor tables.
 
       Keys that are not supported by the widget type are silently ignored.
@@ -368,43 +369,56 @@ int LuaPanel::indicate(lua_State* L) {
       Component types are:
 
          * ``"window"``: A window. Windows can only be added to the top-level
-                         :class:`~wl.ui.MapView`. Properties:
-            * ``"title"``: **Mandatory**. The title bar text.
-            * ``"content"``: **Optional**. The main panel descriptor table.
-                             The window will resize itself to accommodate this widget perfectly.
+           :class:`~wl.ui.MapView`. Properties:
+
+           * ``"title"``: **Mandatory**. The title bar text.
+           * ``"content"``: **Optional**. The main panel descriptor table.
+             The window will resize itself to accommodate this widget perfectly.
+
          * ``"box"``: A wrapper around other components with intelligent layouting.
-                      It is strongly recommended to layout all your components
-                      exclusively with Boxes. Properties:
-            * ``"orientation"``: **Mandatory**. The box's layouting direction:
-                                 ``"vertical"`` or ``"horizontal"``.
-            * ``"max_x"``: **Optional**. The maximum horizontal size.
-            * ``"max_y"``: **Optional**. The maximum vertical size.
-            * ``"spacing"``: **Optional**. The inner spacing between items.
-            * ``"scrolling"``: **Optional**. Whether the box max scroll if its content is too large.
+           It is strongly recommended to layout all your components
+           exclusively with Boxes. Properties:
+
+           * ``"orientation"``: **Mandatory**. The box's layouting direction:
+             ``"vertical"`` or ``"horizontal"``.
+           * ``"max_x"``: **Optional**. The maximum horizontal size.
+           * ``"max_y"``: **Optional**. The maximum vertical size.
+           * ``"spacing"``: **Optional**. The inner spacing between items.
+           * ``"scrolling"``: **Optional**. Whether the box max scroll if its content is too large.
+
          * ``"inf_space"``: Only valid as the direct child of a Box. A flexible spacer.
          * ``"space"``: Only valid as the direct child of a Box. A fixed-size spacer. Property:
-            * ``"value"``: **Mandatory**. The size of the space.
+
+           * ``"value"``: **Mandatory**. The size of the space.
+
          * ``"textarea"``: A static text area with a single line of text. Properties:
-            * ``"text"``: **Mandatory**. The text to display.
-            * ``"font"``: **Mandatory**. The font style to use.
-            * ``"text_align"``: **Optional**. The alignment of the text.
-            * ``"fixed_width"``: **Optional**. If set, the text area's width is fixed instead
-                                 if resizing to accomodate the text or the parent.
+
+           * ``"text"``: **Mandatory**. The text to display.
+           * ``"font"``: **Mandatory**. The font style to use.
+           * ``"text_align"``: **Optional**. The alignment of the text.
+           * ``"fixed_width"``: **Optional**. If set, the text area's width is fixed instead
+             of resizing to accomodate the text or the parent.
+
          * ``"button"``: A clickable button. A button must have either a title or an icon,
-                         but not both. Properties:
-            * ``"title"``: **Optional**. The text on the button.
-            * ``"icon"``: **Optional**. The file path of the button's icon.
-            * ``"style"``: **Optional**. The button's style. One of:
-               * ``"primary"``
-               * ``"secondary"``
-               * ``"menu"``
-            * ``"visual"``: **Optional**. The button's appearance. One of:
-               * ``"raised"``
-               * ``"permpressed"``
-               * ``"flat"``
-            * ``"on_click"``: **Optional**. Callback code to run when the
-                                   button is clicked. To associate actions with a button press,
-                                   prefer this over the ``on_panel_clicked`` event.
+           but not both. Properties:
+
+           * ``"title"``: **Optional**. The text on the button.
+           * ``"icon"``: **Optional**. The file path of the button's icon.
+           * ``"style"``: **Optional**. The button's style. One of:
+
+             * ``"primary"``
+             * ``"secondary"``
+             * ``"menu"``
+
+           * ``"visual"``: **Optional**. The button's appearance. One of:
+
+             * ``"raised"``
+             * ``"permpressed"``
+             * ``"flat"``
+
+           * ``"on_click"``: **Optional**. Callback code to run when the
+             button is clicked. To associate actions with a button press,
+             prefer this over the ``on_panel_clicked`` event.
 
       Note that event callbacks functions must be provided as raw code in string form.
       During the lifetime of a *toolbar* widget, the Lua Interface used by the game may be reset.
