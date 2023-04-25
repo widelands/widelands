@@ -902,42 +902,46 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 */
 // clang-format on
 int LuaDescriptions::modify_unit(lua_State* L) {
-	const std::string type = luaL_checkstring(L, 2);
-	const std::string unit = luaL_checkstring(L, 3);
-	const std::string property = luaL_checkstring(L, 4);
+	if (lua_gettop(L) < 4) {
+		report_error(L, "modify_unit: too few arguments");
+	}
 
-	// Load the unit to modify if it was not loaded yet
-	Notifications::publish(Widelands::NoteMapObjectDescription(
-	   unit, Widelands::NoteMapObjectDescription::LoadType::kObject));
+	try {
+		const std::string type = luaL_checkstring(L, 2);
+		const std::string unit = luaL_checkstring(L, 3);
+		const std::string property = luaL_checkstring(L, 4);
 
-	if (type == "resource") {
-		do_modify_resource(L, unit, property);
-	} else if (type == "tribe") {
-		do_modify_tribe(L, unit, property);
-	} else if (type == "ship") {
-		do_modify_ship(L, unit, property);
-	} else if (type == "critter") {
-		do_modify_critter(L, unit, property);
-	} else if (type == "terrain") {
-		do_modify_terrain(L, unit, property);
-	} else if (type == "immovable") {
-		do_modify_immovable(L, unit, property);
-	} else if (type == "worker") {
-		do_modify_worker(L, unit, property);
-	} else if (type == "ware") {
-		do_modify_ware(L, unit, property);
-	} else if (type == "building") {
-		do_modify_building(L, unit, property);
-	} else if (type == "trainingsite") {
-		do_modify_trainingsite(L, unit, property);
-	} else if (type == "productionsite") {
-		do_modify_productionsite(L, unit, property);
-	} else if (type == "militarysite") {
-		do_modify_militarysite(L, unit, property);
-	} else if (type == "warehouse") {
-		do_modify_warehouse(L, unit, property);
-	} else {
-		report_error(L, "modify_unit: invalid type '%s'", type.c_str());
+		if (type == "resource") {
+			do_modify_resource(L, unit, property);
+		} else if (type == "tribe") {
+			do_modify_tribe(L, unit, property);
+		} else if (type == "ship") {
+			do_modify_ship(L, unit, property);
+		} else if (type == "critter") {
+			do_modify_critter(L, unit, property);
+		} else if (type == "terrain") {
+			do_modify_terrain(L, unit, property);
+		} else if (type == "immovable") {
+			do_modify_immovable(L, unit, property);
+		} else if (type == "worker") {
+			do_modify_worker(L, unit, property);
+		} else if (type == "ware") {
+			do_modify_ware(L, unit, property);
+		} else if (type == "building") {
+			do_modify_building(L, unit, property);
+		} else if (type == "trainingsite") {
+			do_modify_trainingsite(L, unit, property);
+		} else if (type == "productionsite") {
+			do_modify_productionsite(L, unit, property);
+		} else if (type == "militarysite") {
+			do_modify_militarysite(L, unit, property);
+		} else if (type == "warehouse") {
+			do_modify_warehouse(L, unit, property);
+		} else {
+			report_error(L, "modify_unit: invalid type '%s'", type.c_str());
+		}
+	} catch (const std::exception& e) {
+		report_error(L, "modify_unit: error: %s", e.what());
 	}
 
 	return 0;
@@ -955,7 +959,7 @@ void LuaDescriptions::do_modify_resource(lua_State* L,
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	Widelands::ResourceDescription& resource_descr =
-	   *descrs.get_mutable_resource_descr(descrs.safe_resource_index(unit_name));
+	   *descrs.get_mutable_resource_descr(descrs.load_resource(unit_name));
 
 	if (property == "max_amount") {
 		resource_descr.set_max_amount(luaL_checkuint32(L, 5));
@@ -970,7 +974,7 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	Widelands::TribeDescr& tribe_descr =
-	   *descrs.get_mutable_tribe_descr(descrs.safe_tribe_index(unit_name));
+	   *descrs.get_mutable_tribe_descr(descrs.load_tribe(unit_name));
 
 	if (property == "add_ware") {
 		const std::string warename = luaL_checkstring(L, 5);
@@ -978,7 +982,7 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 		   warename, Widelands::NoteMapObjectDescription::LoadType::kObject));
 
 		const size_t column = luaL_checkuint32(L, 6);
-		const Widelands::DescriptionIndex di = descrs.safe_ware_index(warename);
+		const Widelands::DescriptionIndex di = descrs.load_ware(warename);
 		tribe_descr.mutable_wares().insert(di);
 		tribe_descr.mutable_wares_order()[column].push_back(di);
 
@@ -1006,7 +1010,7 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 		   workername, Widelands::NoteMapObjectDescription::LoadType::kObject));
 
 		const size_t column = luaL_checkuint32(L, 6);
-		const Widelands::DescriptionIndex di = descrs.safe_worker_index(workername);
+		const Widelands::DescriptionIndex di = descrs.load_worker(workername);
 		tribe_descr.mutable_workers().insert(di);
 		tribe_descr.mutable_workers_order()[column].push_back(di);
 
@@ -1036,7 +1040,7 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 		Notifications::publish(Widelands::NoteMapObjectDescription(
 		   buildingname, Widelands::NoteMapObjectDescription::LoadType::kObject));
 
-		const Widelands::DescriptionIndex di = descrs.safe_building_index(buildingname);
+		const Widelands::DescriptionIndex di = descrs.load_building(buildingname);
 		tribe_descr.mutable_buildings().insert(di);
 
 		LuaTable t(L);
@@ -1052,11 +1056,11 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 		const std::string immo_name = luaL_checkstring(L, 5);
 		Notifications::publish(Widelands::NoteMapObjectDescription(
 		   immo_name, Widelands::NoteMapObjectDescription::LoadType::kObject));
-		tribe_descr.mutable_immovables().insert(descrs.safe_immovable_index(immo_name));
+		tribe_descr.mutable_immovables().insert(descrs.load_immovable(immo_name));
 
 		LuaTable t(L);
 		tribe_descr.load_helptexts(
-		   descrs.get_mutable_immovable_descr(descrs.safe_immovable_index(immo_name)), t);
+		   descrs.get_mutable_immovable_descr(descrs.load_immovable(immo_name)), t);
 	} else {
 		report_error(L, "modify_unit: invalid tribe property '%s'", property.c_str());
 	}
@@ -1068,7 +1072,7 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	Widelands::WorkerDescr& worker_descr =
-	   *descrs.get_mutable_worker_descr(descrs.safe_worker_index(unit_name));
+	   *descrs.get_mutable_worker_descr(descrs.load_worker(unit_name));
 
 	if (property == "experience") {
 		worker_descr.set_needed_experience(luaL_checkuint32(L, 5));
@@ -1094,7 +1098,7 @@ void LuaDescriptions::do_modify_building(lua_State* L,
                                          const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	const Widelands::DescriptionIndex bldindex = descrs.safe_building_index(unit_name);
+	const Widelands::DescriptionIndex bldindex = descrs.load_building(unit_name);
 	Widelands::BuildingDescr& bld = *descrs.get_mutable_building_descr(bldindex);
 
 	if (property == "enhancement") {
@@ -1107,7 +1111,7 @@ void LuaDescriptions::do_modify_building(lua_State* L,
 		Widelands::Buildcost& bc = bld.mutable_buildcost();
 		const std::string cmd = luaL_checkstring(L, 5);
 		const std::string warename = luaL_checkstring(L, 6);
-		const Widelands::DescriptionIndex wi = descrs.safe_ware_index(warename);
+		const Widelands::DescriptionIndex wi = descrs.load_ware(warename);
 		if (cmd == "remove") {
 			bc.erase(wi);
 		} else if (cmd == "set") {
@@ -1119,7 +1123,7 @@ void LuaDescriptions::do_modify_building(lua_State* L,
 		Widelands::Buildcost& bc = bld.mutable_returns_on_dismantle();
 		const std::string cmd = luaL_checkstring(L, 5);
 		const std::string warename = luaL_checkstring(L, 6);
-		const Widelands::DescriptionIndex wi = descrs.safe_ware_index(warename);
+		const Widelands::DescriptionIndex wi = descrs.load_ware(warename);
 		if (cmd == "remove") {
 			bc.erase(wi);
 		} else if (cmd == "set") {
@@ -1132,7 +1136,7 @@ void LuaDescriptions::do_modify_building(lua_State* L,
 		Widelands::Buildcost& bc = bld.mutable_enhancement_cost();
 		const std::string cmd = luaL_checkstring(L, 5);
 		const std::string warename = luaL_checkstring(L, 6);
-		const Widelands::DescriptionIndex wi = descrs.safe_ware_index(warename);
+		const Widelands::DescriptionIndex wi = descrs.load_ware(warename);
 		if (cmd == "remove") {
 			bc.erase(wi);
 		} else if (cmd == "set") {
@@ -1145,7 +1149,7 @@ void LuaDescriptions::do_modify_building(lua_State* L,
 		Widelands::Buildcost& bc = bld.mutable_enhancement_returns_on_dismantle();
 		const std::string cmd = luaL_checkstring(L, 5);
 		const std::string warename = luaL_checkstring(L, 6);
-		const Widelands::DescriptionIndex wi = descrs.safe_ware_index(warename);
+		const Widelands::DescriptionIndex wi = descrs.load_ware(warename);
 		if (cmd == "remove") {
 			bc.erase(wi);
 		} else if (cmd == "set") {
@@ -1165,7 +1169,7 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
                                                const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	const Widelands::DescriptionIndex psindex = descrs.safe_building_index(unit_name);
+	const Widelands::DescriptionIndex psindex = descrs.load_building(unit_name);
 	Widelands::ProductionSiteDescr& psdescr =
 	   dynamic_cast<Widelands::ProductionSiteDescr&>(*descrs.get_mutable_building_descr(psindex));
 
@@ -1176,12 +1180,12 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 		   input_name, Widelands::NoteMapObjectDescription::LoadType::kObject));
 
 		if (cmd == "add_ware") {
-			const Widelands::DescriptionIndex di = descrs.safe_ware_index(input_name);
+			const Widelands::DescriptionIndex di = descrs.load_ware(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);
 			assert(amount);
 			psdescr.mutable_input_wares().push_back(Widelands::WareAmount(di, amount));
 		} else if (cmd == "modify_ware") {
-			const Widelands::DescriptionIndex di = descrs.safe_ware_index(input_name);
+			const Widelands::DescriptionIndex di = descrs.load_ware(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);
 			assert(amount);
 			for (Widelands::WareAmount& w : psdescr.mutable_input_wares()) {
@@ -1193,7 +1197,7 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 			report_error(L, "modify_unit - productionsite - input - modify_ware: %s not found",
 			             input_name.c_str());
 		} else if (cmd == "remove_ware") {
-			const Widelands::DescriptionIndex di = descrs.safe_ware_index(input_name);
+			const Widelands::DescriptionIndex di = descrs.load_ware(input_name);
 			for (auto it = psdescr.mutable_input_wares().begin();
 			     it != psdescr.mutable_input_wares().end(); ++it) {
 				if (it->first == di) {
@@ -1204,12 +1208,12 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 			report_error(L, "modify_unit - productionsite - input - remove_ware: %s not found",
 			             input_name.c_str());
 		} else if (cmd == "add_worker") {
-			const Widelands::DescriptionIndex di = descrs.safe_worker_index(input_name);
+			const Widelands::DescriptionIndex di = descrs.load_worker(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);
 			assert(amount);
 			psdescr.mutable_input_workers().push_back(Widelands::WareAmount(di, amount));
 		} else if (cmd == "modify_worker") {
-			const Widelands::DescriptionIndex di = descrs.safe_worker_index(input_name);
+			const Widelands::DescriptionIndex di = descrs.load_worker(input_name);
 			const Widelands::Quantity amount = luaL_checkuint32(L, 7);
 			assert(amount);
 			for (Widelands::WareAmount& w : psdescr.mutable_input_workers()) {
@@ -1221,7 +1225,7 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 			report_error(L, "modify_unit - productionsite - input - modify_worker: %s not found",
 			             input_name.c_str());
 		} else if (cmd == "remove_worker") {
-			const Widelands::DescriptionIndex di = descrs.safe_worker_index(input_name);
+			const Widelands::DescriptionIndex di = descrs.load_worker(input_name);
 			for (auto it = psdescr.mutable_input_workers().begin();
 			     it != psdescr.mutable_input_workers().end(); ++it) {
 				if (it->first == di) {
@@ -1271,7 +1275,7 @@ void LuaDescriptions::do_modify_terrain(lua_State* L,
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	Widelands::TerrainDescription& terrain =
-	   *descrs.get_mutable_terrain_descr(descrs.safe_terrain_index(unit_name));
+	   *descrs.get_mutable_terrain_descr(descrs.load_terrain(unit_name));
 
 	if (property == "enhancement") {
 		terrain.set_enhancement(luaL_checkstring(L, 5), luaL_checkstring(L, 6));
@@ -1300,7 +1304,7 @@ void LuaDescriptions::do_modify_trainingsite(lua_State* L,
                                              const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	const Widelands::DescriptionIndex tsindex = descrs.safe_building_index(unit_name);
+	const Widelands::DescriptionIndex tsindex = descrs.load_building(unit_name);
 	Widelands::TrainingSiteDescr& tsdescr =
 	   dynamic_cast<Widelands::TrainingSiteDescr&>(*descrs.get_mutable_building_descr(tsindex));
 
@@ -1318,7 +1322,7 @@ void LuaDescriptions::do_modify_militarysite(lua_State* L,
                                              const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	const Widelands::DescriptionIndex msindex = descrs.safe_building_index(unit_name);
+	const Widelands::DescriptionIndex msindex = descrs.load_building(unit_name);
 	Widelands::MilitarySiteDescr& msdescr =
 	   dynamic_cast<Widelands::MilitarySiteDescr&>(*descrs.get_mutable_building_descr(msindex));
 
@@ -1338,7 +1342,7 @@ void LuaDescriptions::do_modify_warehouse(lua_State* L,
                                           const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
-	const Widelands::DescriptionIndex whindex = descrs.safe_building_index(unit_name);
+	const Widelands::DescriptionIndex whindex = descrs.load_building(unit_name);
 	Widelands::WarehouseDescr& whdescr =
 	   dynamic_cast<Widelands::WarehouseDescr&>(*descrs.get_mutable_building_descr(whindex));
 
