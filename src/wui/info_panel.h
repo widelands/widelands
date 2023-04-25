@@ -24,6 +24,7 @@
 #include "logic/message_id.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/toolbar_setup.h"
 
 class InfoPanel;
 class InteractiveBase;
@@ -95,14 +96,7 @@ private:
 
 	bool on_top_{false};
 
-	enum DisplayMode {
-		kCmdSwap = 1,
-		kPinned = 2,
-		kMinimized = 4,
-		kOnMouse_Visible = 8,
-		kOnMouse_Hidden = 16
-	};
-	DisplayMode display_mode_{DisplayMode::kPinned};
+	UI::ToolbarDisplayMode display_mode_{UI::ToolbarDisplayMode::kPinned};
 	void update_mode();
 	void rebuild_dropdown();
 
@@ -117,7 +111,7 @@ private:
 
 	MainToolbar* toolbar_{nullptr};
 
-	UI::Dropdown<DisplayMode> toggle_mode_;
+	UI::Dropdown<UI::ToolbarDisplayMode> toggle_mode_;
 	UI::Textarea text_time_speed_, text_fps_, text_coords_;
 
 	std::list<MessagePreview*> messages_;
