@@ -187,8 +187,38 @@ void EditBox::set_font_scale(float scale) {
  */
 bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t /*y*/) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
-		reset_selection();
+		const uint32_t time = SDL_GetTicks();
+		const bool is_multiclick = (time - multiclick_timer_) < DOUBLE_CLICK_INTERVAL;
+		multiclick_timer_ = time;
+
 		set_caret_to_cursor_pos(x);
+
+		if (is_multiclick) {
+			++multiclick_counter_;
+			m_->mode = EditBoxImpl::Mode::kSelection;
+
+			if ((multiclick_counter_ % 2) != 0) {  // Select current word
+				m_->selection_start = snap_to_char(m_->caret);
+				m_->selection_end = m_->selection_start;
+
+				while (m_->selection_start > 0 && !isspace(m_->text[prev_char(m_->selection_start)])) {
+					m_->selection_start = prev_char(m_->selection_start);
+				}
+
+				while (m_->selection_end < m_->text.size() && !isspace(m_->text[m_->selection_end])) {
+					m_->selection_end = next_char(m_->selection_end);
+				}
+			} else {  // Select entire line
+				m_->selection_start = 0;
+				m_->selection_end = m_->text.size();
+			}
+
+			update_primary_selection_buffer();
+		} else {
+			multiclick_counter_ = 0;
+			reset_selection();
+		}
+
 		focus();
 		clicked();
 		return true;

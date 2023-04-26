@@ -277,9 +277,45 @@ uint32_t MultilineEditbox::Data::snap_to_char(std::string& txt, uint32_t cursor)
  */
 bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
-		d_->reset_selection();
+		const uint32_t time = SDL_GetTicks();
+		const bool is_multiclick = (time - multiclick_timer_) < DOUBLE_CLICK_INTERVAL;
+		multiclick_timer_ = time;
+
 		set_caret_to_cursor_pos(x, y);
+
+		if (is_multiclick) {
+			++multiclick_counter_;
+			d_->mode = Data::Mode::kSelection;
+
+			d_->selection_start = d_->snap_to_char(d_->cursor_pos);
+			d_->selection_end = d_->selection_start;
+
+			if ((multiclick_counter_ % 2) != 0) {  // Select current word
+				while (d_->selection_start > 0 && !isspace(d_->text[d_->prev_char(d_->selection_start)])) {
+					d_->selection_start = d_->prev_char(d_->selection_start);
+				}
+
+				while (d_->selection_end < d_->text.size() && !isspace(d_->text[d_->selection_end])) {
+					d_->selection_end = d_->next_char(d_->selection_end);
+				}
+			} else {  // Select entire line
+				while (d_->selection_start > 0 && d_->text[d_->prev_char(d_->selection_start)] != '\n') {
+					d_->selection_start = d_->prev_char(d_->selection_start);
+				}
+
+				while (d_->selection_end < d_->text.size() && d_->text[d_->selection_end] != '\n') {
+					d_->selection_end = d_->next_char(d_->selection_end);
+				}
+			}
+
+			update_primary_selection_buffer();
+		} else {
+			multiclick_counter_ = 0;
+			d_->reset_selection();
+		}
+
 		focus();
+		clicked();
 		return true;
 	}
 #if HAS_PRIMARY_SELECTION_BUFFER

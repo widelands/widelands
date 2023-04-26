@@ -116,6 +116,8 @@ private:
 	ScopedTimer cursor_movement_timer_;
 	uint32_t cursor_ms_;
 	bool cursor_movement_active_ = false;
+	uint32_t multiclick_timer_{0U};
+	uint32_t multiclick_counter_{0U};
 };
 }  // namespace UI
 
