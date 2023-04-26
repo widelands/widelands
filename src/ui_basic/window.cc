@@ -29,6 +29,7 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "ui_basic/toolbar_setup.h"
 
 namespace UI {
 
@@ -237,22 +238,76 @@ void Window::move_out_of_the_way() {
 
 	const Panel* parent = get_parent();
 	assert(parent != nullptr);
-	const Vector2i mouse = parent->get_mouse_position();
+
+	// Actually this could be asserted to be true, because only field action-, building- and
+	// ship windows call this function currently.
+	const bool parent_is_main = parent->get_parent() == nullptr;
+
+	const bool toolbar_at_bottom = main_toolbar_at_bottom();
+	const int32_t toolbar_bottom_h =
+	   (parent_is_main && toolbar_at_bottom) ? main_toolbar_button_size() : 0;
+	const int32_t toolbar_top_h =
+	   (parent_is_main && !toolbar_at_bottom) ? main_toolbar_button_size() : 0;
+
+	// We have to do this because InfoPanel::think() pushes child windows off the toolbar, which
+	// messes up the fastclick position.
+	// We only care about the toolbar at the bottom because we prefer moving the window below
+	// the mouse pointer, so it never covers the toolbar at the top, but it may cover it at the
+	// bottom.
+	const int ph = parent->get_inner_h() - toolbar_bottom_h;
 	const int pw = parent->get_inner_w();
-	const int ph = parent->get_inner_h();
+
+	// Pop up messages have higher priority, so they can steal mouse clicks. We try to avoid that.
+	const int max_popup_h = UI::kMaxPopupMessages * (toolbar_bottom_h + toolbar_top_h);
+
+	const Vector2i mouse = parent->get_mouse_position();
 
 	int32_t nx = mouse.x;
 	int32_t ny = mouse.y;
 
-	if (get_w() < get_h()) {
-		if (mouse.x + kClearance + get_w() < pw || mouse.x < pw / 2) {
+	// TODO(tothxa): This will have to be calculated when the field action window is converted to
+	//               use styles instead of constants
+	constexpr int kFlagActionHeight = 112;
+
+	if (get_w() < get_h() && get_h() > kFlagActionHeight) {
+		const bool fits_right = mouse.x + kClearance + get_w() < pw;
+		const bool fits_left = mouse.x - kClearance - get_w() >= 0;
+
+		bool to_right = fits_right;
+
+		if (!fits_right && !fits_left) {
+			to_right = mouse.x < pw / 2;
+		}
+
+		if (fits_right && fits_left) {
+			bool need_check_popups = false;
+			if (parent_is_main) {
+				if (toolbar_at_bottom) {
+					need_check_popups =
+					   mouse.y + get_h() / 2 - kBottomBorderThickness > ph - max_popup_h;
+				} else {
+					need_check_popups =
+					   mouse.y - get_h() / 2 + kTopBorderThickness < toolbar_top_h + max_popup_h;
+				}
+			}
+
+			if (need_check_popups) {
+				// This is much simplified, because there may be no perfect solution for some tall
+				// windows anyway
+				to_right = mouse.x >= pw / 2;
+			}
+		}
+
+		if (to_right) {
 			nx += kClearance;
 		} else {
 			nx -= get_w() + kClearance;
 		}
 		ny -= get_h() / 2;
 	} else {
-		if (mouse.y + kClearance + get_h() < ph || mouse.y < ph / 2) {
+		const int max_popup_h_bottom =
+		   toolbar_bottom_h > 0 ? (max_popup_h - kBottomBorderThickness) : 0;
+		if (mouse.y + kClearance + get_h() + max_popup_h_bottom < ph || mouse.y < ph / 2) {
 			ny += kClearance;
 		} else {
 			ny -= get_h() + kClearance;
@@ -260,8 +315,11 @@ void Window::move_out_of_the_way() {
 		nx -= get_w() / 2;
 	}
 
-	set_pos(Vector2i(nx, ny));
-	move_inside_parent();
+	// Don't use overridden functions in UniqueWindow, position is not final yet
+	Panel::set_pos(Vector2i(nx, ny));
+	Window::move_inside_parent();
+	// move_inside_parent() always calls overridden set_pos(), so position is always finalised
+	// for UniqueWindow
 }
 
 /**
@@ -287,16 +345,22 @@ void Window::warp_mouse_to_fastclick_panel() {
  */
 void Window::move_inside_parent() {
 	if (Panel* const parent = get_parent()) {
+		const bool parent_is_main = parent->get_parent() == nullptr;
+		const bool toolbar_at_bottom = main_toolbar_at_bottom();
+		const int32_t toolbar_bottom_h =
+		   (parent_is_main && toolbar_at_bottom) ? main_toolbar_button_size() : 0;
+		const int32_t toolbar_top_h =
+		   (parent_is_main && !toolbar_at_bottom) ? main_toolbar_button_size() : 0;
+		const int32_t ph = parent->get_inner_h() - toolbar_top_h - toolbar_bottom_h;
+
 		int32_t px = get_x();
 		int32_t py = get_y();
-		if ((parent->get_inner_w() < get_w()) && (px + get_w() <= parent->get_inner_w() || px >= 0)) {
-			px = (parent->get_inner_w() - get_w()) / 2;
-		}
-		if ((parent->get_inner_h() < get_h()) && (py + get_h() < parent->get_inner_h() || py > 0)) {
-			py = 0;
-		}
 
-		if (parent->get_inner_w() >= get_w()) {
+		if (parent->get_inner_w() < get_w()) {
+			if ((px + get_w() < parent->get_inner_w() || px > 0)) {
+				px = (parent->get_inner_w() - get_w()) / 2;
+			}
+		} else {
 			if (px < 0) {
 				px = 0;
 				if (parent->get_dock_windows_to_edges()) {
@@ -309,16 +373,25 @@ void Window::move_inside_parent() {
 				}
 			}
 		}
-		if (parent->get_inner_h() >= get_h()) {
-			if (py < 0) {
+
+		if (ph < get_h()) {
+			if (parent_is_main) {
+				// The toolbar would push it off anyway
+				py = toolbar_at_bottom ? ph - get_h() : toolbar_top_h;
+			} else if (py + get_h() < ph || py > 0) {
 				py = 0;
-			} else if (py + get_h() > parent->get_inner_h()) {
-				py = parent->get_inner_h() - get_h();
-				if (!is_minimal_ && parent->get_dock_windows_to_edges()) {
+			}
+		} else {
+			if (py < toolbar_top_h) {
+				py = toolbar_top_h;
+			} else if (py + get_h() > ph) {
+				py = ph - get_h();
+				if (!is_minimal_ && toolbar_bottom_h == 0 && parent->get_dock_windows_to_edges()) {
 					py += kBottomBorderThickness;
 				}
 			}
 		}
+
 		set_pos(Vector2i(px, py));
 	}
 }
