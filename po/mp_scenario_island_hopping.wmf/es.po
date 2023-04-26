@@ -5,7 +5,7 @@
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Thadah D. Denyse <juchuf@gmail.com>, 2015
+# Gontzal Pujana Onaindia <juchuf@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 "POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:27+0000\n"
 "Last-Translator: GunChleoc, 2016\n"
-"Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
+"Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

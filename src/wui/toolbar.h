@@ -29,8 +29,6 @@ class MainToolbar : public UI::Panel {
 public:
 	explicit MainToolbar(InfoPanel&);
 
-	static constexpr uint8_t kButtonSize = 33;
-
 	/// Sets the actual size and position of the toolbar
 	void finalize();
 	void draw(RenderTarget& dst) override;

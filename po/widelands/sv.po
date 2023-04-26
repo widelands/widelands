@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-04-19 02:40+0000\n"
+"POT-Creation-Date: 2023-04-22 04:30+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -1102,7 +1102,7 @@ msgstr "Ta bort denna föreslagna laguppställning"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 #: ../../src/ui_fsmenu/addons/packager.cc:75
 #: ../../src/ui_fsmenu/addons/packager_box.cc:148
-#: ../../src/wui/quicknavigation.cc:202
+#: ../../src/wui/quicknavigation.cc:201
 msgid "+"
 msgstr "+"
 
@@ -4266,7 +4266,7 @@ msgstr "Nytt tillägg"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:84
 #: ../../src/ui_fsmenu/addons/packager_box.cc:166
-#: ../../src/wui/quicknavigation.cc:300
+#: ../../src/wui/quicknavigation.cc:296
 msgid "–"
 msgstr "–"
 
@@ -9163,39 +9163,39 @@ msgstr "vakant"
 msgid "(vacant)"
 msgstr "(vakant)"
 
-#: ../../src/wui/quicknavigation.cc:167
+#: ../../src/wui/quicknavigation.cc:166
 msgid "Quick Navigation"
 msgstr "Sbabbnavigering"
 
-#: ../../src/wui/quicknavigation.cc:180
+#: ../../src/wui/quicknavigation.cc:179
 msgid "Go to previous location"
 msgstr "Gå till föregående plats"
 
-#: ../../src/wui/quicknavigation.cc:192
+#: ../../src/wui/quicknavigation.cc:191
 msgid "Go to next location"
 msgstr "Gå till nästa plats"
 
-#: ../../src/wui/quicknavigation.cc:203
+#: ../../src/wui/quicknavigation.cc:202
 msgid "Add a new landmark"
 msgstr "Lägg till ett nytt landmärke"
 
-#: ../../src/wui/quicknavigation.cc:245 ../../src/wui/quicknavigation.cc:251
+#: ../../src/wui/quicknavigation.cc:244 ../../src/wui/quicknavigation.cc:250
 msgid "Go to this landmark"
 msgstr "Gå till detta landmärke"
 
-#: ../../src/wui/quicknavigation.cc:259
+#: ../../src/wui/quicknavigation.cc:258
 msgid "View this landmark in a watch window"
 msgstr "Visa detta landmärke i ett övervakningsfönster"
 
-#: ../../src/wui/quicknavigation.cc:276
+#: ../../src/wui/quicknavigation.cc:272
 msgid "Unset this landmark"
 msgstr "Stäng av detta landmärke"
 
-#: ../../src/wui/quicknavigation.cc:286 ../../src/wui/quicknavigation.cc:292
+#: ../../src/wui/quicknavigation.cc:282 ../../src/wui/quicknavigation.cc:288
 msgid "Set this landmark to the current map view location"
 msgstr "Ställ in detta landmärke till nuvarande kartplacering"
 
-#: ../../src/wui/quicknavigation.cc:300
+#: ../../src/wui/quicknavigation.cc:296
 msgid "Remove this landmark"
 msgstr "Tag bort detta landmärke"
 

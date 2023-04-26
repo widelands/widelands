@@ -58,6 +58,8 @@ wl_library(ui_basic
     textarea.h
     text_prompt.cc
     text_prompt.h
+    toolbar_setup.cc
+    toolbar_setup.h
     unique_window.cc
     unique_window.h
     window.cc
