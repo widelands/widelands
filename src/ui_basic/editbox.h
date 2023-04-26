@@ -102,6 +102,7 @@ private:
 	void select_until(uint32_t end) const;
 	uint32_t next_char(uint32_t cursor) const;
 	uint32_t prev_char(uint32_t cursor) const;
+	std::pair<uint32_t, uint32_t> word_boundary(uint32_t cursor, bool require_non_blank) const;
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end) const;
 	void delete_selected_text();
 	void copy_selected_text();
