@@ -1158,8 +1158,9 @@ void Ship::battle_update(Game& game) {
 
 			Coords portspace = map.find_portspace_for_dockpoint(current_battle.attack_coords);
 			assert(portspace != Coords::null());
+			Field& portspace_field = map[portspace];
 
-			const PlayerNumber enemy_pn = map[portspace].get_owned_by();
+			const PlayerNumber enemy_pn = portspace_field.get_owned_by();
 			if (enemy_pn != 0) {
 				game.get_player(enemy_pn)->add_message_with_timeout(
 				   game,
@@ -1168,6 +1169,23 @@ void Ship::battle_update(Game& game) {
 				      "images/wui/ship/ship_attack.png", _("Enemy Ship Attacking"),
 				      _("Your coast is under attack from an enemy warship."), get_position())),
 				   Duration(60 * 1000) /* throttle timeout in milliseconds */, 6 /* throttle radius */);
+			}
+
+			// If the portspace is blocked, find a walkable node as closely nearby as possible.
+			Coords representative_location;
+			if ((portspace_field.nodecaps() & MOVECAPS_WALK) != 0) {
+				representative_location = portspace;
+			} else if (Coords brn = map.br_n(portspace); (map[brn].nodecaps() & MOVECAPS_WALK) != 0) {
+				representative_location = brn;
+			} else {
+				for (;;) {
+					Coords coords = game.random_location(portspace, 2);
+					const Field& field = map[coords];
+					if ((field.nodecaps() & MOVECAPS_WALK) != 0) {
+						representative_location = coords;
+						break;
+					}
+				}
 			}
 
 			CheckStepDefault worker_checkstep(MOVECAPS_WALK);
@@ -1199,7 +1217,8 @@ void Ship::battle_update(Game& game) {
 					if ((field.nodecaps() & MOVECAPS_WALK) != 0U &&
 					    (field.get_immovable() == nullptr ||
 					     field.get_immovable()->descr().type() != MapObjectType::FLAG) &&
-					    map.findpath(coords, portspace, 3, unused_path, worker_checkstep) >= 0) {
+					    map.findpath(
+					       coords, representative_location, 3, unused_path, worker_checkstep) >= 0) {
 						worker->set_position(game, coords);
 						break;
 					}
