@@ -473,7 +473,7 @@ get_table_int(lua_State* L, const char* key, bool mandatory, int32_t default_val
 	return default_value;
 }
 
-static int32_t
+static bool
 get_table_boolean(lua_State* L, const char* key, bool mandatory, bool default_value = false) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
