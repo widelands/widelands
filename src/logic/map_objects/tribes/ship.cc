@@ -158,7 +158,7 @@ struct FindNodeAttackTarget {
 
 		if (ship_.get_nritems() > 0) {
 			Coords portspace = egbase.map().find_portspace_for_dockpoint(f);
-			if (static_cast<bool>(portspace)) {
+			if (static_cast<bool>(portspace) && egbase.map().calc_distance(portspace, ship_.get_position()) <= ship_.descr().vision_range()) {
 				const PlayerNumber owner = egbase.map()[portspace].get_owned_by();
 				if (owner == 0 || ship_.owner().is_hostile(egbase.player(owner))) {
 					return true;
@@ -1168,6 +1168,9 @@ void Ship::battle_update(Game& game) {
 				   Duration(60 * 1000) /* throttle timeout in milliseconds */, 6 /* throttle radius */);
 			}
 
+			CheckStepDefault worker_checkstep(MOVECAPS_WALK);
+			Path unused_path;
+
 			assert(!battles_.back().attack_soldier_serials.empty());
 			for (Serial serial : battles_.back().attack_soldier_serials) {
 				auto it = std::find_if(items_.begin(), items_.end(), [serial](const ShippingItem& si) {
@@ -1193,7 +1196,8 @@ void Ship::battle_update(Game& game) {
 					const Field& field = map[coords];
 					if ((field.nodecaps() & MOVECAPS_WALK) != 0U &&
 					    (field.get_immovable() == nullptr ||
-					     field.get_immovable()->descr().type() != MapObjectType::FLAG)) {
+					     field.get_immovable()->descr().type() != MapObjectType::FLAG) &&
+					     map.findpath(coords, portspace, 3, unused_path, worker_checkstep) >= 0) {
 						worker->set_position(game, coords);
 						break;
 					}
