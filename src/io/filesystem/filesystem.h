@@ -127,6 +127,8 @@ public:
 	static std::vector<std::string> get_xdgdatadirs();
 #endif
 
+	std::string create_unique_temp_file_path(std::string prefix, const std::string& suffix) const;
+
 	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test'
 	/// returned 'true' for their filenames.
 	template <class UnaryPredicate>
