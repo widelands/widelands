@@ -87,7 +87,7 @@ public:
 	}
 
 	void log_cstring(const char* buffer) {
-		stdout_ << buffer;
+		std::cout << buffer;
 		std::cout.flush();
 	}
 
