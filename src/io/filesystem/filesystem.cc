@@ -350,8 +350,8 @@ std::vector<std::string> FileSystem::get_xdgdatadirs() {
 }
 #endif
 
-std::string
-FileSystem::create_unique_temp_file_path(std::string prefix, const std::string& suffix) const {
+std::string FileSystem::create_unique_temp_file_path(std::string prefix,
+                                                     const std::string& suffix) const {
 	prefix += file_separator();
 	prefix += timestring();
 

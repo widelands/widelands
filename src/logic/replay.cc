@@ -370,8 +370,7 @@ ReplayfileSavegameExtractor::ReplayfileSavegameExtractor(const std::string& game
 	fr.data_complete(buffer.get(), bytes);
 	FileWrite fw;
 	fw.data(buffer.get(), bytes);
-	temp_file_ =
-	   g_fs->create_unique_temp_file_path(kTempFileDir, kSavegameExtension);
+	temp_file_ = g_fs->create_unique_temp_file_path(kTempFileDir, kSavegameExtension);
 	fw.write(*g_fs, temp_file_);
 }
 
